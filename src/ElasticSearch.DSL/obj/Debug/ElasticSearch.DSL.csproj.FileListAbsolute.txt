@@ -1,0 +1,8 @@
+d:\Projects\ElasticSearch.Client\ElasticSearch.DSL\obj\Debug\ResolveAssemblyReference.cache
+d:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\ElasticSearch.DSL.dll
+d:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\ElasticSearch.DSL.pdb
+d:\Projects\ElasticSearch.Client\ElasticSearch.DSL\obj\Debug\ElasticSearch.DSL.dll
+d:\Projects\ElasticSearch.Client\ElasticSearch.DSL\obj\Debug\ElasticSearch.DSL.pdb
+D:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.pdb
+D:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.xml
