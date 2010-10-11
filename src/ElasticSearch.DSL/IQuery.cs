@@ -10,8 +10,8 @@ namespace ElasticSearch.DSL
 	{
 		
 	}
-	public interface IQuery<T> : IQuery
+	public interface IQuery<T> : IQuery where T : class
 	{
-		Expression<Func<T, object>> Expression { get; set; }
+		Expression<Func<T, object>> Expression { get; }
 	}
 }

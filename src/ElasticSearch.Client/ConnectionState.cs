@@ -50,8 +50,6 @@ namespace ElasticSearch.Client
 				{
 					error.Message = "Could not connect to server: " + Connection.Address.ToString();
 				}
-
-
 			}
 			else if (e is Exception)
 				error.Type = ConnectionErrorType.Client;

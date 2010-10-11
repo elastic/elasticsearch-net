@@ -30,20 +30,20 @@ namespace ElasticSearch.DSL
 		}		
 	}
 	
-	public class Query<T> : IQuery<T>
+	public class Query<T> : IQuery<T> where T : class
 	{
-		public Expression<Func<T, object>> Expression { get; private set; }
+		public Expression<Func<T, object>> Expression { get; protected set; }
 
 	}
 
-	public class Term<T> : Query<T>
+	public class Term<T> : Query<T> where T : class
 	{
 		
 		public Term(Expression<Func<T,object>> bindTo, double boost)
 		{
-			this.Expression = 
+            this.Expression = bindTo;
 			var t = typeof(T);
-			var x = this.FindMemberExpression(bindTo.Body, typeof(T));
+			//var x = this.FindMemberExpression(bindTo.Body, typeof(T));
 			
 			
 		}

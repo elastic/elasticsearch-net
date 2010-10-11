@@ -10,3 +10,13 @@ d:\Projects\ElasticSearch.Client\ElasticSearch.Client\bin\Debug\Fasterflect.dll
 d:\Projects\ElasticSearch.Client\ElasticSearch.Client\bin\Debug\Fasterflect.xml
 D:\Projects\ElasticSearch.Client\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.dll
 D:\Projects\ElasticSearch.Client\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.pdb
+D:\Projects\git\NEST\src\ElasticSearch.Client\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\git\NEST\src\ElasticSearch.Client\obj\Debug\ElasticSearch.Client.dll
+D:\Projects\git\NEST\src\ElasticSearch.Client\obj\Debug\ElasticSearch.Client.pdb
+D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.Client.dll
+D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.Client.pdb
+D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.dll
+D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.pdb
+D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\Fasterflect.xml
+D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.pdb
+D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.xml

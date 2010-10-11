@@ -6,3 +6,10 @@ d:\Projects\ElasticSearch.Client\ElasticSearch.DSL\obj\Debug\ElasticSearch.DSL.p
 D:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.dll
 D:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.pdb
 D:\Projects\ElasticSearch.Client\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\git\NEST\src\ElasticSearch.DSL\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\git\NEST\src\ElasticSearch.DSL\obj\Debug\ElasticSearch.DSL.dll
+D:\Projects\git\NEST\src\ElasticSearch.DSL\obj\Debug\ElasticSearch.DSL.pdb
+D:\Projects\git\NEST\src\ElasticSearch.DSL\bin\Debug\ElasticSearch.DSL.dll
+D:\Projects\git\NEST\src\ElasticSearch.DSL\bin\Debug\ElasticSearch.DSL.pdb
+D:\Projects\git\NEST\src\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.pdb
+D:\Projects\git\NEST\src\ElasticSearch.DSL\bin\Debug\Newtonsoft.Json.xml

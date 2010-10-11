@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ElasticSearch.DSL;
+using System.Linq.Expressions;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ElasticSearch.Client
 {
-	internal class Search<T>
+	internal class Search<T> where T : class
 	{
-		public Search(IQuery<T> query, JsonSerializationSettings settings)
+		public Search(IQuery<T> query)
 		{
 		
 		}

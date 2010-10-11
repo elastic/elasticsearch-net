@@ -173,9 +173,9 @@ namespace ElasticSearch.Client
 			return null;
 		}
 		
-		public void Search<T>(IQuery query)
+		public void Search<T>(IQuery<T> query) where T : class
 		{
-			var search = new Search(query, this.SerializationSettings);
+			var search = new Search<T>(query);
 		}
 		
 	}

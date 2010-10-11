@@ -11,3 +11,16 @@ d:\Projects\ElasticSearch.Client\ElasticSearch.ConsolePlayground\bin\Debug\Newto
 d:\Projects\ElasticSearch.Client\ElasticSearch.ConsolePlayground\bin\Debug\Newtonsoft.Json.xml
 d:\Projects\ElasticSearch.Client\ElasticSearch.ConsolePlayground\bin\Debug\Fasterflect.dll
 d:\Projects\ElasticSearch.Client\ElasticSearch.ConsolePlayground\bin\Debug\Fasterflect.xml
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\obj\Debug\ElasticSearch.ConsolePlayground.exe
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\obj\Debug\ElasticSearch.ConsolePlayground.pdb
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.ConsolePlayground.exe
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.ConsolePlayground.pdb
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.Client.dll
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.DSL.dll
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Fasterflect.dll
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.Client.pdb
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.DSL.pdb
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Newtonsoft.Json.pdb
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Fasterflect.xml

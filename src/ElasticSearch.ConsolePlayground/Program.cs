@@ -51,7 +51,7 @@ namespace ElasticSearch.ConsolePlayground
 				var termQuery = new Term<Blog>(b => b.Author.FirstName, 1.0);
 				//var query = new Query().AddTerm(b=> b.Author.FirstName = 
 				
-				var q = new Term<Blog>(b=>b.Author.FirstName);
+				var q = new Term<Blog>(b=>b.Author.FirstName, 1.0);
 						
 				
 				
