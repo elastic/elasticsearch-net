@@ -128,10 +128,6 @@ namespace ElasticSearch.Client
 		}
 		private void IndexSync<T>(T @object, string path) where T : class
 		{
-
-			
-			
-			
 			string json = JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
 			var response = this.Connection.PostSync(path, json);
 		}
@@ -172,7 +168,23 @@ namespace ElasticSearch.Client
 			
 			return null;
 		}
-		
+
+		public QueryResponse<T> Query<T>(string query) where T : class
+		{
+			var index = this.Settings.DefaultIndex;
+			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+			var type = typeof(T);
+			var typeName = Inflector.MakePlural(type.Name).ToLower();
+			string path = this.createPath(index, typeName) + "_search";
+
+			var result = this.Connection.PostSync(path, query);
+
+			var response = JsonConvert.DeserializeObject<QueryResponse<T>>(result.Result);
+
+			return response;
+		}
+
 		public void Search<T>(IQuery<T> query) where T : class
 		{
 			var search = new Search<T>(query);

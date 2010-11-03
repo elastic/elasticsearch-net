@@ -33,7 +33,7 @@ namespace ElasticSearch.ConsolePlayground
 				var blogAmmount = 100;
 				var blogPosts = StaticData.GetBlogPosts(blogAmmount);
 				
-				blogPosts.ToList().ForEachWithIndex((b,i)=>
+				blogPosts.ForEachWithIndex((b,i)=>
 				{
 					Console.Write("\rIndexing blog post {0} out of {1}", i + 1, blogAmmount);	
 					client.IndexSync(b);
@@ -47,14 +47,21 @@ namespace ElasticSearch.ConsolePlayground
 				var post = client.Get<Blog>(66);
 				var isEqual = originalPost.Title == post.Title;
 				Console.WriteLine("Blog 66 in memory is {0} to blog post 66 as indexed in ES.", (isEqual) ? "equal" : "not equal");
-				
-				var termQuery = new Term<Blog>(b => b.Author.FirstName, 1.0);
-				//var query = new Query().AddTerm(b=> b.Author.FirstName = 
-				
-				var q = new Term<Blog>(b=>b.Author.FirstName, 1.0);
-						
-				
-				
+								
+				string lookFor = originalPost.Author.FirstName;
+				string query = "{\"query\" : { \"field\" : { \"author.firstName\" : \"" + lookFor + "\" } } }"; //TODO Fluent Query Interface!
+
+				var queryResults = client.Query<Blog>(query);
+
+				var thisPageCount = queryResults.Documents.Count();
+
+				Console.WriteLine("Found {0} document matching author.FirstName:{1}", queryResults.Total, lookFor);
+				queryResults.Documents.ForEachWithIndex((d, i) =>
+				{
+					Console.WriteLine("First page, doc no. {0} entitled {1}", i, d.Title);
+				});
+
+
 				Console.ReadLine();
 			}
 		}
