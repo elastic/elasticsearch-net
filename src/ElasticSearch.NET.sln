@@ -26,6 +26,9 @@ Global
 		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

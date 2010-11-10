@@ -1,0 +1,31 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" ctype="Workspace" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="d:\NEST\src\ElasticSearch.Client\Connection.cs" ctype="Workbench">
+    <Files>
+      <File FileName="d:\NEST\src\ElasticSearch.DSL\Term.cs" Line="8" Column="27" />
+      <File FileName="ElasticSearch.ConsolePlayground\Program.cs" Line="38" Column="23" />
+      <File FileName="d:\NEST\src\ElasticSearch.DSL\ExclusiveRange.cs" Line="23" Column="23" />
+      <File FileName="d:\NEST\src\ElasticSearch.DSL\InclusiveRange.cs" Line="23" Column="23" />
+      <File FileName="d:\NEST\src\ElasticSearch.Client\Connection.cs" Line="51" Column="46" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="ElasticSearch.ConsolePlayground" expanded="True" />
+          <Node name="ElasticSearch.DSL" expanded="True" selected="True">
+            <Node name="References" expanded="True" />
+            <Node name="Properties" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="D:\NEST\src\ElasticSearch.ConsolePlayground\Program.cs" line="27" />
+      <Breakpoint file="D:\NEST\src\ElasticSearch.ConsolePlayground\Program.cs" line="15" />
+      <Breakpoint file="D:\NEST\src\ElasticSearch.ConsolePlayground\Program.cs" line="13" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches ctype="PinnedWatchStore" />
+</Properties>

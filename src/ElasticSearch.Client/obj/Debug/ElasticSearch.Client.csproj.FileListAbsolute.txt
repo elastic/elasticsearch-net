@@ -20,3 +20,13 @@ D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.pdb
 D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\Fasterflect.xml
 D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.pdb
 D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.xml
+D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.Client.dll
+D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.Client.pdb
+D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.dll
+D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.pdb
+D:\NEST\src\ElasticSearch.Client\bin\Debug\Fasterflect.xml
+D:\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.pdb
+D:\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.xml
+D:\NEST\src\ElasticSearch.Client\obj\Debug\ResolveAssemblyReference.cache
+D:\NEST\src\ElasticSearch.Client\obj\Debug\ElasticSearch.Client.dll
+D:\NEST\src\ElasticSearch.Client\obj\Debug\ElasticSearch.Client.pdb
