@@ -35,8 +35,7 @@ namespace ElasticSearch.DSL
 		
 			this.Field = field.Name;
 			this.Value = field.Value;
-			if (field.Boost.HasValue)
-				this.Boost = field.Boost.Value;
+			this.Boost = (field.Boost.HasValue) ? field.Boost.Value : 1.0;
 			this.SimilarityScore = similarityScore;
 			this.PrefixLength = prefixLength;
 		}

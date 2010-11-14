@@ -23,6 +23,8 @@ D:\Projects\git\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.xml
 D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.Client.dll
 D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.Client.pdb
 D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.dll
+D:\NEST\src\ElasticSearch.Client\bin\Debug\Fasterflect.dll
+D:\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.dll
 D:\NEST\src\ElasticSearch.Client\bin\Debug\ElasticSearch.DSL.pdb
 D:\NEST\src\ElasticSearch.Client\bin\Debug\Fasterflect.xml
 D:\NEST\src\ElasticSearch.Client\bin\Debug\Newtonsoft.Json.pdb

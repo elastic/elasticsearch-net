@@ -20,8 +20,8 @@ namespace ElasticSearch.DSL
 			this.Field = field;
 			this.To = to;
 			this.From = from;
-			if (boost.HasValue);
-				this.Boost = boost.Value;
+			this.Boost = (boost.HasValue) ? boost.Value : 1.0;
+			
 			this.Exclusive = true;
 		}
 		

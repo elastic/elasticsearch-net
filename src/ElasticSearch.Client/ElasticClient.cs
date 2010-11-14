@@ -43,6 +43,16 @@ namespace ElasticSearch.Client
 			}
 		}
 		
+
+		public bool TryConnect(out ConnectionStatus status)
+		{
+			status = this.GetNodeInfo();
+			return this.IsValid;
+
+
+		}
+
+
 		
 		public ElasticClient(IConnectionSettings settings)
 		{
@@ -52,11 +62,16 @@ namespace ElasticSearch.Client
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> { new IsoDateTimeConverter() }
+				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter() }
 			};
 		}
 		
-		private void GetNodeInfo()
+		public string Serialize(object @object)
+		{
+			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+		}
+
+		private ConnectionStatus GetNodeInfo()
 		{
 			var response = this.Connection.GetSync("");
 			if (response.Success)
@@ -65,7 +80,7 @@ namespace ElasticSearch.Client
 				if (o["ok"] == null)
 				{
 					this._IsValid = false;
-					return;
+					return response;
 				}
 				
 				this._IsValid = (bool)o["ok"];
@@ -75,6 +90,7 @@ namespace ElasticSearch.Client
 				
 				this._gotNodeInfo = true;
 			}
+			return response;
 		}
 		
 		private string createPath(string index, string type)
@@ -129,6 +145,7 @@ namespace ElasticSearch.Client
 		private void IndexSync<T>(T @object, string path) where T : class
 		{
 			string json = JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+
 			var response = this.Connection.PostSync(path, json);
 		}
 
@@ -185,9 +202,10 @@ namespace ElasticSearch.Client
 			return response;
 		}
 
-		public void Search<T>(IQuery<T> query) where T : class
+		public QueryResponse<T> Search<T>(Search search) where T : class
 		{
-			var search = new Search<T>(query);
+			var rawQuery = this.Serialize(search);
+			return this.Query<T>(rawQuery);
 		}
 		
 	}

@@ -9,7 +9,9 @@ namespace ElasticSearch.DSL
 	{
 		public double Boost { get; private set; }
 		
-		public MatchAll() {}
+		public MatchAll() {
+			this.Boost = 1.0;
+		}
 		
 		public MatchAll(double boost)
 		{

@@ -7,7 +7,7 @@ using System.IO;
 
 namespace ElasticSearch.Client
 {
-	class ConnectionStatus
+	public class ConnectionStatus
 	{
 		public bool Success { get; private set; }
 		public ConnectionError Error { get; private set; }

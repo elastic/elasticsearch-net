@@ -13,19 +13,12 @@ namespace ElasticSearch.ConsolePlayground
 	{
 		static void Main(string[] args)
 		{
-			QueryString qs = new QueryString("Martijn laarman AND Arnhem")
-								.SetAllowLeadingWildcard(false)
-								.SetFields(new List<Field>
-								{
-									new Field("firstName", 2.0),
-									new Field("city", 0.5)
-								})
-								.SetFuzzyMinimumSimilarity(0.1);
 
 			var connectionSettings = new ConnectionSettings("127.0.0.1.", 9200)
 										.SetDefaultIndex("mpdreamz");
 			var client = new ElasticClient(connectionSettings);
-			if (client.IsValid)
+			ConnectionStatus status;
+			if (client.TryConnect(out status))
 			{
 				var version = client.VersionInfo;
 				Console.WriteLine("Connected to ElasticSearch {0} released {1}", version.Number, version.Date);
@@ -49,9 +42,13 @@ namespace ElasticSearch.ConsolePlayground
 				Console.WriteLine("Blog 66 in memory is {0} to blog post 66 as indexed in ES.", (isEqual) ? "equal" : "not equal");
 								
 				string lookFor = originalPost.Author.FirstName;
-				string query = "{\"query\" : { \"field\" : { \"author.firstName\" : \"" + lookFor + "\" } } }"; //TODO Fluent Query Interface!
 
-				var queryResults = client.Query<Blog>(query);
+				var queryResults = client.Search<Blog>(new Search()
+					{
+						Query = new Query(new Term("author.firstName", lookFor.ToLower(), 1.0))
+
+					}.Skip(0).Take(10)
+				);
 
 				var thisPageCount = queryResults.Documents.Count();
 
@@ -60,10 +57,14 @@ namespace ElasticSearch.ConsolePlayground
 				{
 					Console.WriteLine("First page, doc no. {0} entitled {1}", i, d.Title);
 				});
-
-
-				Console.ReadLine();
 			}
+			else 
+			{
+				Console.WriteLine("Error connecting to {0} because:\r\n {1}", connectionSettings.Host, status.Error.Message);
+
+			}
+
+			Console.ReadLine();
 		}
 
 		

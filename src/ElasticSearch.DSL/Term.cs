@@ -7,7 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace ElasticSearch.DSL
 {
-	public class Term : IQuery
+	public class Term : IQuery, IFieldQuery
 	{
 		public string Field { get; private set; }
 		public string Value { get; private set; }
@@ -25,8 +25,7 @@ namespace ElasticSearch.DSL
 		
 			this.Field = field.Name;
 			this.Value = field.Value;
-			if (field.Boost.HasValue)
-				this.Boost = field.Boost.Value;
+			this.Boost = (field.Boost.HasValue) ? field.Boost.Value : 1.0;
 		}		
 	}
 	

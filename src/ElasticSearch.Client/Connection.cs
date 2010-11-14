@@ -36,6 +36,11 @@ namespace ElasticSearch.Client
 			{
 				if (e.Status == WebExceptionStatus.Timeout)
 					return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Server, Message = "Timeout", OriginalException = e });
+
+				if (e.Status != WebExceptionStatus.Success
+					&& e.Status != WebExceptionStatus.ProtocolError)
+					return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Server, Message = e.Message, OriginalException = e });
+
 				return new ConnectionStatus(new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode, Message = e.Message, OriginalException = e, Type = ConnectionErrorType.Server }); 
 			}
 			catch (Exception e) { return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Uncaught }); }
