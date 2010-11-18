@@ -7,7 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace ElasticSearch.DSL
 {
-	public class Term : IQuery, IFieldQuery
+	public class Term : IQuery, IFieldQuery, IValue
 	{
 		public string Field { get; private set; }
 		public string Value { get; private set; }
@@ -40,7 +40,7 @@ namespace ElasticSearch.DSL
 		
 		public Term(Expression<Func<T,object>> bindTo, double boost)
 		{
-            this.Expression = bindTo;
+			this.Expression = bindTo;
 			var t = typeof(T);
 			//var x = this.FindMemberExpression(bindTo.Body, typeof(T));
 			

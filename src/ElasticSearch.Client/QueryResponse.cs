@@ -33,6 +33,7 @@ namespace ElasticSearch.Client
 					foreach (var hit in this.HitsMetaData.Hits)
 					{ 
 						yield return hit.Source;
+
 					}
 				}
 			}

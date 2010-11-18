@@ -17,6 +17,11 @@ namespace ElasticSearch.DSL
 		double Boost { get; }
 	}
 
+	public interface IValue
+	{
+		string Value { get; }
+	}
+
 	public interface IQuery<T> : IQuery where T : class
 	{
 		Expression<Func<T, object>> Expression { get; }

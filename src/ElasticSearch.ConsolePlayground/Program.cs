@@ -29,7 +29,7 @@ namespace ElasticSearch.ConsolePlayground
 				blogPosts.ForEachWithIndex((b,i)=>
 				{
 					Console.Write("\rIndexing blog post {0} out of {1}", i + 1, blogAmmount);	
-					client.IndexSync(b);
+					client.Index(b);
 				});
 				Console.WriteLine("\nDone indexing {0} items, \nSleeping 3 seconds to catch up with ES Near real time indexing.", blogAmmount);
 												
@@ -45,10 +45,12 @@ namespace ElasticSearch.ConsolePlayground
 
 				var queryResults = client.Search<Blog>(new Search()
 					{
-						Query = new Query(new Term("author.firstName", lookFor.ToLower(), 1.0))
+						Query = new Query(new Fuzzy("author.firstName", lookFor, 1.0))
 
 					}.Skip(0).Take(10)
 				);
+
+
 
 				var thisPageCount = queryResults.Documents.Count();
 

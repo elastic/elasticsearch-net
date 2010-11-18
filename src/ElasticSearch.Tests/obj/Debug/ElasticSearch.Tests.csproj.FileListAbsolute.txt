@@ -1,0 +1,7 @@
+D:\NEST\src\ElasticSearch.Tests\bin\Debug\ElasticSearch.Tests.dll
+D:\NEST\src\ElasticSearch.Tests\bin\Debug\ElasticSearch.Tests.pdb
+D:\NEST\src\ElasticSearch.Tests\bin\Debug\nunit.core.dll
+D:\NEST\src\ElasticSearch.Tests\bin\Debug\nunit.core.interfaces.dll
+D:\NEST\src\ElasticSearch.Tests\obj\Debug\ResolveAssemblyReference.cache
+D:\NEST\src\ElasticSearch.Tests\obj\Debug\ElasticSearch.Tests.dll
+D:\NEST\src\ElasticSearch.Tests\obj\Debug\ElasticSearch.Tests.pdb

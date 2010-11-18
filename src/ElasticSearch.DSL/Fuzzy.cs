@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ElasticSearch.DSL
 {
-	public class Fuzzy : IQuery
+	public class Fuzzy : IQuery, IFieldQuery, IValue
 	{
 		public string Field { get; private set; }
 		public string Value { get; private set; }

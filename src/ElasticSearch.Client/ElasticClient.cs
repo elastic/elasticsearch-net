@@ -101,20 +101,20 @@ namespace ElasticSearch.Client
 		{
 			return "{0}/{1}/{2}".F(index, type, id);
 		}
-		
-		public void IndexSync<T>(string index, string type, T @object) where T : class
+
+		public ConnectionStatus Index<T>(string index, string type, T @object) where T : class
 		{
-			this.IndexSync<T>(@object, this.createPath(index, type));
+			return this.Index<T>(@object, this.createPath(index, type));
 		}
-		public void IndexSync<T>(string index, string type, string id, T @object) where T : class
+		public ConnectionStatus Index<T>(string index, string type, string id, T @object) where T : class
 		{
-			this.IndexSync<T>(@object, this.createPath(index, type, id));
+			return this.Index<T>(@object, this.createPath(index, type, id));
 		}
-		public void IndexSync<T>(string index, string type, int id, T @object) where T : class
+		public ConnectionStatus Index<T>(string index, string type, int id, T @object) where T : class
 		{
-			this.IndexSync<T>(@object, this.createPath(index, type, id.ToString()));
+			return this.Index<T>(@object, this.createPath(index, type, id.ToString()));
 		}
-		public void IndexSync<T>(T @object) where T : class
+		public ConnectionStatus Index<T>(T @object) where T : class
 		{
 			@object.ThrowIfNull("object");
 		
@@ -140,13 +140,13 @@ namespace ElasticSearch.Client
 				if (!string.IsNullOrEmpty(idString))
 					path = this.createPath(index, typeName, idString);
 			}
-			this.IndexSync<T>(@object, path);
+			return this.Index<T>(@object, path);
 		}
-		private void IndexSync<T>(T @object, string path) where T : class
+		private ConnectionStatus Index<T>(T @object, string path) where T : class
 		{
 			string json = JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
 
-			var response = this.Connection.PostSync(path, json);
+			return this.Connection.PostSync(path, json);
 		}
 
 		public T Get<T>(int id) where T : class

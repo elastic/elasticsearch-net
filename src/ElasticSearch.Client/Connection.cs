@@ -61,7 +61,22 @@ namespace ElasticSearch.Client
 				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
 				return new ConnectionStatus(result);
 			}
-			catch (WebException e) { return new ConnectionStatus(new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode, Message = e.Message, OriginalException = e, Type = ConnectionErrorType.Server }); }
+			catch (WebException e) 
+			{
+				ConnectionError error;
+				if (e.Status == WebExceptionStatus.Timeout)
+				{
+					error = new ConnectionError { HttpStatusCode = HttpStatusCode.InternalServerError };
+				}
+				else 
+				{
+					error = new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode };
+				}
+				error.Type = ConnectionErrorType.Server;
+				error.OriginalException = e;
+				error.Message = e.Message;
+				return new ConnectionStatus(error);
+			}
 			catch (Exception e) { return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Uncaught }); }
 		}
 		

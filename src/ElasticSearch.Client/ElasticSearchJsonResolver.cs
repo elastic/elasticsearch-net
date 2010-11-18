@@ -39,11 +39,11 @@ namespace ElasticSearch.Client
 				writer.WriteStartObject();
 				writer.WritePropertyName(fq.Field);
 				writer.WriteStartObject();
-				if (fq is Term)
+				if (fq is IValue)
 				{
-					Term t = fq as Term;
+					IValue v = fq as IValue;
 					writer.WritePropertyName("value");
-					writer.WriteValue(t.Value);
+					writer.WriteValue(v.Value);
 				}
 				if (fq.Boost != 1.0)
 				{
