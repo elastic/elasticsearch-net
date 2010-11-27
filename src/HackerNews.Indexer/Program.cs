@@ -6,6 +6,8 @@ using System.Xml;
 using HackerNews.Indexer.Domain;
 using ElasticSearch.Client;
 using System.Diagnostics;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace HackerNews.Indexer
 {
@@ -21,6 +23,7 @@ namespace HackerNews.Indexer
 		static void Main(string[] args)
 		{
 			var filePath = args.First();
+			var max = ServicePointManager.DefaultConnectionLimit;
 
 			var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
 										.SetDefaultIndex("mpdreamz");
@@ -42,62 +45,74 @@ namespace HackerNews.Indexer
 			int processed = 0, dropped = 0;
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
-			while (reader.Read())
+			var postQueue = new List<Post>();
+			try
 			{
-				var name = reader.Name;
-
-				if (reader.NodeType == XmlNodeType.Element)
+				while (reader.Read())
 				{
-					if (name == "HackerNews")
-						continue;
+					var name = reader.Name;
 
-					if (name == "ID")
-						post.Id = reader.ReadElementContentAsInt();
-
-					else if (name == "ParentID")
-						post.ParentId = reader.ReadElementContentAsInt();
-					else if (name == "Url")
-						post.Url = reader.ReadElementContentAsString();
-					else if (name == "Title")
-						post.Title = reader.ReadElementContentAsString();
-					else if (name == "Text")
-						post.Text = reader.ReadElementContentAsString();
-					else if (name == "Username")
-						meta.Username = reader.ReadElementContentAsString();
-					else if (name == "Points")
-						meta.Points = reader.ReadElementContentAsInt();
-					else if (name == "Type")
-						meta.Type = reader.ReadElementContentAsInt();
-					else if (name == "Timestamp")
-						meta.Created = reader.ReadElementContentAsDateTime();
-					else if (name == "CommentCount")
-						meta.CommentsCount = reader.ReadElementContentAsInt();
-					else if (!string.IsNullOrEmpty(name) && name != "row")
+					if (reader.NodeType == XmlNodeType.Element)
 					{
+						if (name == "HackerNews")
+							continue;
 
+						if (name == "ID")
+							post.Id = reader.ReadElementContentAsInt();
+
+						else if (name == "ParentID")
+							post.ParentId = reader.ReadElementContentAsInt();
+						else if (name == "Url")
+							post.Url = reader.ReadElementContentAsString();
+						else if (name == "Title")
+							post.Title = reader.ReadElementContentAsString();
+						else if (name == "Text")
+							post.Text = reader.ReadElementContentAsString();
+						else if (name == "Username")
+							meta.Username = reader.ReadElementContentAsString();
+						else if (name == "Points")
+							meta.Points = reader.ReadElementContentAsInt();
+						else if (name == "Type")
+							meta.Type = reader.ReadElementContentAsInt();
+						else if (name == "Timestamp")
+							meta.Created = reader.ReadElementContentAsDateTime();
+						else if (name == "CommentCount")
+							meta.CommentsCount = reader.ReadElementContentAsInt();
+						else if (!string.IsNullOrEmpty(name) && name != "row")
+						{
+
+						}
 					}
+
+					if (reader.NodeType == XmlNodeType.EndElement
+						&& name == "row")
+					{
+						post.Meta = meta;
+
+						postQueue.Add(post);
+						if (postQueue.Count() == 1000)
+						{
+							client.IndexAsync<Post>(postQueue);
+							postQueue = new List<Post>();
+						}
+		
+						processed++;
+
+						Console.Write("\rProcessed:{0}, Dropped:{2} in {1}", processed, sw.Elapsed, dropped);
+
+						post = new Post();
+						meta = new PostMetaData();
+					}
+
+
 				}
-
-				if (reader.NodeType == XmlNodeType.EndElement
-					&& name == "row")
-				{
-					post.Meta = meta;
-
-					var status = client.Index<Post>(post);
-					if (!status.Success)
-						dropped++;
-					processed++;
-
-					Console.Write("\rProcessed:{0}, Dropped:{2} in {1}", processed, sw.Elapsed, dropped);
-
-					post = new Post();
-					meta = new PostMetaData();
-				}
-
+				sw.Stop();
+				Console.WriteLine("\nDone! {0}", sw.Elapsed);
+			}
+			catch (Exception e)
+			{
 
 			}
-			sw.Stop();
-			Console.WriteLine("\nDone! {0}", sw.Elapsed);
 
 		}
 	}

@@ -57,12 +57,13 @@ namespace ElasticSearch.Client
 			if (!this.RaisedCallback)
 			{
 				this.RaisedCallback = true;
-				this.Callback(new ConnectionStatus(error));
+				if (this.Callback != null)
+					this.Callback(new ConnectionStatus(error));
 			}
 		}
 		public void RaiseCallBack()
 		{
-			if (!this.RaisedCallback)
+			if (!this.RaisedCallback && this.Callback != null)
 				this.Callback(new ConnectionStatus(this.RequestData.ToString()));
 		}
 	}

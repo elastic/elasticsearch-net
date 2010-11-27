@@ -9,6 +9,8 @@ using Fasterflect;
 using ElasticSearch;
 using Newtonsoft.Json.Converters;
 using ElasticSearch.DSL;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ElasticSearch.Client
 {
@@ -148,6 +150,82 @@ namespace ElasticSearch.Client
 
 			return this.Connection.PostSync(path, json);
 		}
+
+		public void IndexAsync<T>(T @object, string path, Action<ConnectionStatus> continuation) where T : class
+		{
+			string json = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
+			this.Connection.Post(path, json, continuation);
+		}
+		public void IndexAsync<T>(IEnumerable<T> @objects) where T : class
+		{
+			@objects.ThrowIfNull("objects");
+			
+			var index = this.Settings.DefaultIndex;
+			if (string.IsNullOrEmpty(index))
+				throw new NullReferenceException("Cannot infer default index for current connection.");
+
+			if (@objects.Count() == 0)
+				return;
+
+			var type = typeof(T);
+			var typeName = Inflector.MakePlural(type.Name).ToLower();
+		
+			Func<T, string> idSelector = null;
+			var idProperty = type.GetProperty("Id");
+			if (idProperty != null)
+			{
+				if (idProperty.PropertyType == typeof(int))
+					idSelector = (@object) => ((int)@object.TryGetPropertyValue("Id")).ToString();
+				else if (idProperty.PropertyType == typeof(int?))
+					idSelector = (@object) => 
+					{
+						int? val = (int?)@object.TryGetPropertyValue("Id");
+						return (val.HasValue) ? val.Value.ToString() : string.Empty;
+					};
+				else if (idProperty.PropertyType == typeof(string))
+					idSelector = (@object) => (string)@object.TryGetPropertyValue("Id");
+			}
+
+
+			var sb = new StringBuilder();
+			var command = "{{ \"index\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}\n";
+
+			//if we can't reflect id let ES create one.
+			if (idSelector == null)
+				command = "{{ \"index\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\" }} }}\n".F(index, typeName);
+
+			foreach (var @object in objects)
+			{
+				string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
+				if (idSelector == null)
+					sb.Append(command);
+				else
+					sb.Append(command.F(index, typeName, idSelector(@object)));
+				sb.Append(jsonCommand + "\n");
+			}
+			var json = sb.ToString();
+			this.Connection.Post("_bulk", json, null);
+		}
+
+
+
+		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
+
+		public void IndexAsync<T>(IEnumerable<T> objects, string path, Action<ConnectionStatus> continuation)
+		{
+			var sb = new StringBuilder();
+			var command = "{ \"index\" : { \"_index\" : \"mpdreamz\", \"_type\" : \"posts\", \"_id\" : \"1\" } }\n";
+			foreach (var @object in objects)
+			{
+				string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
+				sb.Append(command);
+				sb.Append(jsonCommand + "\n");
+			}
+			var json = sb.ToString();
+			this.Connection.Post("_bulk", json, continuation);  
+		}
+
+
 
 		public T Get<T>(int id) where T : class
 		{

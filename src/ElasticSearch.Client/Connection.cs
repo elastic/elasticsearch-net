@@ -26,13 +26,15 @@ namespace ElasticSearch.Client
 			var connection = this.CreateConnection(path);
 			connection.Timeout = this._ConnectionSettings.TimeOut;
 			connection.Method = "GET";
+			WebResponse response = null;
 			try
 			{
-				var response = connection.GetResponse();
+				response = connection.GetResponse();
 				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
+				response.Close();
 				return new ConnectionStatus(result);
 			}
-			catch (WebException e) 
+			catch (WebException e)
 			{
 				if (e.Status == WebExceptionStatus.Timeout)
 					return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Server, Message = "Timeout", OriginalException = e });
@@ -41,34 +43,43 @@ namespace ElasticSearch.Client
 					&& e.Status != WebExceptionStatus.ProtocolError)
 					return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Server, Message = e.Message, OriginalException = e });
 
-				return new ConnectionStatus(new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode, Message = e.Message, OriginalException = e, Type = ConnectionErrorType.Server }); 
+				return new ConnectionStatus(new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode, Message = e.Message, OriginalException = e, Type = ConnectionErrorType.Server });
 			}
 			catch (Exception e) { return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Uncaught }); }
+			finally
+			{
+				if (response != null)
+					response.Close();
+			}
+
 		}
 		public ConnectionStatus PostSync(string path, string data)
 		{
 			var connection = this.CreateConnection(path);
 			connection.Timeout = this._ConnectionSettings.TimeOut;
 			connection.Method = "POST";
+			Stream postStream = null;
+			WebResponse response = null;
 			try
 			{
 				byte[] buffer = Encoding.UTF8.GetBytes(data);
 				connection.ContentLength = buffer.Length;
-				var postStream = connection.GetRequestStream();
+				postStream = connection.GetRequestStream();
 				postStream.Write(buffer, 0, buffer.Length);
 				postStream.Close();
-				var response = connection.GetResponse();
+				response = connection.GetResponse();
 				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
+				response.Close();
 				return new ConnectionStatus(result);
 			}
-			catch (WebException e) 
+			catch (WebException e)
 			{
 				ConnectionError error;
 				if (e.Status == WebExceptionStatus.Timeout)
 				{
 					error = new ConnectionError { HttpStatusCode = HttpStatusCode.InternalServerError };
 				}
-				else 
+				else
 				{
 					error = new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode };
 				}
@@ -78,6 +89,13 @@ namespace ElasticSearch.Client
 				return new ConnectionStatus(error);
 			}
 			catch (Exception e) { return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Uncaught }); }
+			finally
+			{
+				if (postStream != null)
+					postStream.Close();
+				if (response != null)
+					response.Close();
+			}
 		}
 		
 		public void Get(string path, Action<ConnectionStatus> callback)
@@ -136,7 +154,7 @@ namespace ElasticSearch.Client
 				);
 				ThreadPool.RegisterWaitForSingleObject(
 					result.AsyncWaitHandle,
-					new WaitOrTimerCallback(TimeoutCallback),
+					new WaitOrTimerCallback(ThreadTimeoutCallback),
 					state.Connection,
 					this._ConnectionSettings.TimeOut,
 					true
@@ -154,7 +172,7 @@ namespace ElasticSearch.Client
 		}
 
 
-		private static void TimeoutCallback(object state, bool timedOut)
+		private static void ThreadTimeoutCallback(object state, bool timedOut)
 		{
 			if (timedOut)
 			{
@@ -172,13 +190,13 @@ namespace ElasticSearch.Client
 		private void GetResponseHandle(IAsyncResult result)
 		{
 			var state = (ConnectionState)result.AsyncState;
+			Stream responseStream = null;
 			try
 			{
 				var conn = state.Connection;
 				state.Response = (HttpWebResponse)conn.EndGetResponse(result);
 
-				Stream responseStream = state.Response.GetResponseStream();
-
+				responseStream = state.Response.GetResponseStream();
 				state.StreamResponse = responseStream;
 
 				IAsyncResult readResult = responseStream.BeginRead(
@@ -188,32 +206,37 @@ namespace ElasticSearch.Client
 					new AsyncCallback(ReadCallBack),
 					state
 				);
-				return;
+				responseStream.Close();
+				
 			}
 			catch (Exception e)
 			{
 				state.RaiseCallBack(e);
 			}
+			finally
+			{
+				if (responseStream != null)
+					responseStream.Close();
+			}
 		}
 		private static void ReadCallBack(IAsyncResult result)
 		{
 			var state = (ConnectionState)result.AsyncState;
+			Stream responseStream = null;
 			try
 			{
 				var conn = state.Connection;
-
-				Stream responseStream = state.StreamResponse;
+				responseStream = state.StreamResponse;
 				int read = responseStream.EndRead(result);
 				if (read > 0)
 				{
-					state.RequestData.Append(Encoding.ASCII.GetString(state.BufferRead, 0, read));
+					state.RequestData.Append(Encoding.UTF8.GetString(state.BufferRead, 0, read));
 					IAsyncResult asynchronousResult = responseStream.BeginRead(
 						state.BufferRead, 0, BUFFER_SIZE, new AsyncCallback(ReadCallBack), state);
 					return;
 				}
 				else
 				{
-					state.Response.Close();
 					state.RaiseCallBack();
 				}
 
@@ -226,7 +249,13 @@ namespace ElasticSearch.Client
 			{
 				state.RaiseCallBack(e);
 			}
-			allDone.Set();
+			finally
+			{
+				if (responseStream != null)
+					responseStream.Close();
+				allDone.Set();
+			}
+			
 
 		}
 
@@ -237,6 +266,8 @@ namespace ElasticSearch.Client
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
+			myReq.Timeout = 1000 * 60; // 1 minute timeout.
+			myReq.ReadWriteTimeout = 1000 * 60; // 1 minute timeout.
 			
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{
