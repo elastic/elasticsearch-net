@@ -78,10 +78,6 @@ namespace HackerNews.Indexer
 							meta.Created = reader.ReadElementContentAsDateTime();
 						else if (name == "CommentCount")
 							meta.CommentsCount = reader.ReadElementContentAsInt();
-						else if (!string.IsNullOrEmpty(name) && name != "row")
-						{
-
-						}
 					}
 
 					if (reader.NodeType == XmlNodeType.EndElement
@@ -92,7 +88,7 @@ namespace HackerNews.Indexer
 						postQueue.Add(post);
 						if (postQueue.Count() == 1000)
 						{
-							client.IndexAsync<Post>(postQueue);
+							client.Index<Post>(postQueue);
 							postQueue = new List<Post>();
 						}
 		

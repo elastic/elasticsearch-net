@@ -158,18 +158,30 @@ namespace ElasticSearch.Client
 		}
 		public void IndexAsync<T>(IEnumerable<T> @objects) where T : class
 		{
+			var json = this.GenerateBulkCommand(@objects);
+			if (!json.IsNullOrEmpty())
+				this.Connection.Post("_bulk", json, null);
+		}
+		public void Index<T>(IEnumerable<T> @objects) where T : class
+		{
+			var json = this.GenerateBulkCommand(@objects);
+			if (!json.IsNullOrEmpty())
+				this.Connection.PostSync("_bulk", json);
+		}
+		private string GenerateBulkCommand<T>(IEnumerable<T> @objects)
+		{
 			@objects.ThrowIfNull("objects");
-			
+
 			var index = this.Settings.DefaultIndex;
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
 			if (@objects.Count() == 0)
-				return;
+				return null;
 
 			var type = typeof(T);
 			var typeName = Inflector.MakePlural(type.Name).ToLower();
-		
+
 			Func<T, string> idSelector = null;
 			var idProperty = type.GetProperty("Id");
 			if (idProperty != null)
@@ -177,7 +189,7 @@ namespace ElasticSearch.Client
 				if (idProperty.PropertyType == typeof(int))
 					idSelector = (@object) => ((int)@object.TryGetPropertyValue("Id")).ToString();
 				else if (idProperty.PropertyType == typeof(int?))
-					idSelector = (@object) => 
+					idSelector = (@object) =>
 					{
 						int? val = (int?)@object.TryGetPropertyValue("Id");
 						return (val.HasValue) ? val.Value.ToString() : string.Empty;
@@ -185,7 +197,6 @@ namespace ElasticSearch.Client
 				else if (idProperty.PropertyType == typeof(string))
 					idSelector = (@object) => (string)@object.TryGetPropertyValue("Id");
 			}
-
 
 			var sb = new StringBuilder();
 			var command = "{{ \"index\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}\n";
@@ -204,7 +215,7 @@ namespace ElasticSearch.Client
 				sb.Append(jsonCommand + "\n");
 			}
 			var json = sb.ToString();
-			this.Connection.Post("_bulk", json, null);
+			return json;
 		}
 
 
