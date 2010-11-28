@@ -10,7 +10,7 @@ Connecting
 Basic plumbing:
 
 	var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
-									   .SetDefaultIndex("mpdreamz");
+							  .SetDefaultIndex("mpdreamz");
 	var client = new ElasticClient(elasticSettings);
 
 
@@ -19,10 +19,9 @@ Connecting can be done several ways:
 	ConnectionStatus connectionStatus;
 	if (!client.TryConnect(out connectionStatus))
 
-Or if you dont care about error reasons
+Or if you don't care about error reasons
 
 	if (client.IsValid)
-
 
 Indexing
 ------------------
@@ -53,6 +52,18 @@ or just:
 **Bulk indexing**
 
 Instead of passing `T` just pass `IEnumerable<T>` for both Index or IndexAsync. A zero copy approach that writes directly on the post stream is planned in a later version.
+
+*Note*
+For asynchronous commands there's a special connection setting which automatically semaphores threaded communication
+to ES for you:
+
+	var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
+							  .SetDefaultIndex("mpdreamz")
+							  .SetMaximumAsyncConnections(20);
+
+this ensures that at most there are 20 asynchronous connections to ES others are enqueued until a slot is 
+available.
+
 
 Query DSL
 --------------

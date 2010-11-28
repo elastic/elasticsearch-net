@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.Tests", "Elas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Indexer", "HackerNews.Indexer\HackerNews.Indexer.csproj", "{E39CC264-A7B3-490D-84B2-D3016D86CD87}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General Files", "General Files", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.markdown = ..\README.markdown
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

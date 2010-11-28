@@ -14,6 +14,6 @@ namespace ElasticSearch.Client
 		string Username { get;  }
 		string Password { get; }
 		string DefaultIndex { get; }
-		
+		int MaximumAsyncConnections { get; }
 	}
 }

@@ -43,7 +43,7 @@ namespace ElasticSearch.ConsolePlayground
 								
 				string lookFor = originalPost.Author.FirstName;
 
-				var queryResults = client.Search<Blog>(new Search()
+				QueryResponse<Blog> queryResults = client.Search<Blog>(new Search()
 					{
 						Query = new Query(new Fuzzy("author.firstName", lookFor, 1.0))
 

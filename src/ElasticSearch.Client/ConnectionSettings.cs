@@ -37,8 +37,9 @@ namespace ElasticSearch.Client
 			get { return this._timeOut; }
 		}
 		public string DefaultIndex { get; private set; }
+		public int MaximumAsyncConnections { get; private set; }
 		
-		public ConnectionSettings(string host, int port) : this(host, port, 5000, null, null, null) { }
+		public ConnectionSettings(string host, int port) : this(host, port, 60000, null, null, null) { }
 		public ConnectionSettings(string host, int port, int timeout) : this (host, port, timeout, null, null, null) {}
 		public ConnectionSettings(string host, int port, int timeout, string proxyAddress, string username, string password)
 		{
@@ -53,6 +54,11 @@ namespace ElasticSearch.Client
 		public ConnectionSettings SetDefaultIndex(string defaultIndex)
 		{
 			this.DefaultIndex = defaultIndex;
+			return this;
+		}
+		public ConnectionSettings SetMaximumAsyncConnections(int maximum)
+		{
+			this.MaximumAsyncConnections = maximum;
 			return this;
 		}
 		

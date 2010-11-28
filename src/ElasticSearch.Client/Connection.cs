@@ -15,11 +15,14 @@ namespace ElasticSearch.Client
 		const int BUFFER_SIZE = 1024;
 
 		private IConnectionSettings _ConnectionSettings { get; set; }
+		private Semaphore _ResourceLock;
 
 		public Connection(IConnectionSettings settings)
 		{
 			this._ConnectionSettings = settings;
+			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
 		}
+
 		
 		public ConnectionStatus GetSync(string path)
 		{
@@ -109,7 +112,20 @@ namespace ElasticSearch.Client
 		}
 		public void Post(string path, string data, Action<ConnectionStatus> callback)
 		{
-			this._PutOrPost("POST", path, data, callback);
+			Thread postThread = new Thread(
+								() =>
+								{
+									this._ResourceLock.WaitOne();
+									this._PutOrPost("POST", path, data, (c)=>
+									{
+										this._ResourceLock.Release();
+										if (callback != null)
+											callback(c);
+
+									});
+								});
+			postThread.Start();
+			
 		}
 		public void Put(string path, string data, Action<ConnectionStatus> callback)
 		{
@@ -136,7 +152,6 @@ namespace ElasticSearch.Client
 
 			UTF8Encoding encoding = new UTF8Encoding();
 			byte[] bytes = encoding.GetBytes(state.PostData);
-			//state.Connection.ContentLength = bytes.Length;
 
 			postStream.Write(bytes, 0, bytes.Length);
 			postStream.Close();
@@ -206,7 +221,6 @@ namespace ElasticSearch.Client
 					new AsyncCallback(ReadCallBack),
 					state
 				);
-				responseStream.Close();
 				
 			}
 			catch (Exception e)
@@ -215,19 +229,18 @@ namespace ElasticSearch.Client
 			}
 			finally
 			{
-				if (responseStream != null)
-					responseStream.Close();
 			}
 		}
 		private static void ReadCallBack(IAsyncResult result)
 		{
 			var state = (ConnectionState)result.AsyncState;
 			Stream responseStream = null;
+			int read = 0;
 			try
 			{
 				var conn = state.Connection;
 				responseStream = state.StreamResponse;
-				int read = responseStream.EndRead(result);
+				read = responseStream.EndRead(result);
 				if (read > 0)
 				{
 					state.RequestData.Append(Encoding.UTF8.GetString(state.BufferRead, 0, read));
@@ -251,7 +264,7 @@ namespace ElasticSearch.Client
 			}
 			finally
 			{
-				if (responseStream != null)
+				if (responseStream != null && read <= 0)
 					responseStream.Close();
 				allDone.Set();
 			}

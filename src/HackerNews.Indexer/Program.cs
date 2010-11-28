@@ -8,6 +8,7 @@ using ElasticSearch.Client;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace HackerNews.Indexer
 {
@@ -20,13 +21,16 @@ namespace HackerNews.Indexer
 		/// When run from debug make sure to change the default debug arguments.
 		/// <param name="args">Full filepath to hn_full_11-07-2010.xml</param>
 
+		private static SemaphoreSlim ResourceLock;
+
 		static void Main(string[] args)
 		{
 			var filePath = args.First();
-			var max = ServicePointManager.DefaultConnectionLimit;
+			Program.ResourceLock = new SemaphoreSlim(15);
 
 			var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
-										.SetDefaultIndex("mpdreamz");
+										.SetDefaultIndex("mpdreamz")
+										.SetMaximumAsyncConnections(50);
 			var client = new ElasticClient(elasticSettings);
 			ConnectionStatus connectionStatus;
 			if (!client.TryConnect(out connectionStatus))
@@ -84,15 +88,21 @@ namespace HackerNews.Indexer
 						&& name == "row")
 					{
 						post.Meta = meta;
-
+						
 						postQueue.Add(post);
 						if (postQueue.Count() == 1000)
 						{
-							client.Index<Post>(postQueue);
+							client.IndexAsync<Post>(postQueue, (c) =>
+							{
+								if (!c.Success)
+									dropped++;
+							});
+
 							postQueue = new List<Post>();
+							processed++;
 						}
 		
-						processed++;
+						
 
 						Console.Write("\rProcessed:{0}, Dropped:{2} in {1}", processed, sw.Elapsed, dropped);
 
@@ -110,6 +120,7 @@ namespace HackerNews.Indexer
 
 			}
 
+		
 		}
 	}
 }

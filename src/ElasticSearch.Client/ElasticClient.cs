@@ -158,9 +158,17 @@ namespace ElasticSearch.Client
 		}
 		public void IndexAsync<T>(IEnumerable<T> @objects) where T : class
 		{
+			objects = @objects.ToList().ConvertAll((@object) => @object);
 			var json = this.GenerateBulkCommand(@objects);
 			if (!json.IsNullOrEmpty())
 				this.Connection.Post("_bulk", json, null);
+		}
+		public void IndexAsync<T>(IEnumerable<T> @objects, Action<ConnectionStatus> continuation) where T : class
+		{
+			objects = @objects.ToList().ConvertAll((@object) => @object);
+			var json = this.GenerateBulkCommand(@objects);
+			if (!json.IsNullOrEmpty())
+				this.Connection.Post("_bulk", json, continuation);
 		}
 		public void Index<T>(IEnumerable<T> @objects) where T : class
 		{
