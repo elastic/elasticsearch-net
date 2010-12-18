@@ -1,0 +1,128 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="Client" priority="1" />
+      <Item value="connectionSettings" priority="0" />
+      <Item value="false" priority="0" />
+      <Item value="Method`0" priority="3" />
+      <Item value="path" priority="3" />
+      <Item value="if" priority="0" />
+      <Item value="IsOpen" priority="0" />
+      <Item value="Open`0" priority="0" />
+      <Item value="return" priority="2" />
+      <Item value="_client" priority="0" />
+      <Item value="Rest`0" priority="0" />
+      <Item value="var" priority="1" />
+      <Item value="new" priority="2" />
+      <Item value="ConnectionStatus" priority="0" />
+      <Item value="result" priority="0" />
+      <Item value="DecodeStr`0" priority="0" />
+      <Item value="data" priority="3" />
+      <Item value="ElasticClient`0" priority="1" />
+      <Item value="IConnection`0" priority="0" />
+      <Item value="connection" priority="0" />
+      <Item value="public" priority="2" />
+      <Item value="bool" priority="0" />
+      <Item value="Thrift" priority="1" />
+      <Item value="void" priority="0" />
+      <Item value="ElasticSearch" priority="0" />
+      <Item value="client" priority="1" />
+      <Item value="ElasticClient" priority="0" />
+      <Item value="ConnectionSettings" priority="0" />
+      <Item value="true" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@ElasticSearch.Thrift.Method">
+      <Item value="GET" priority="0" />
+      <Item value="PUT" priority="1" />
+      <Item value="POST" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@ElasticSearch.Thrift.Rest">
+      <Item value="Client`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Thrift.RestResponse">
+      <Item value="Body" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:ElasticSearch.Client.ElasticClient">
+      <Item value="Index`1" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Exception/f:ElasticSearchException.cs" caret="151" fromTop="3" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Collections/f:THashSet.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TSocket.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TSocketSettings.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TSocketV2.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TStreamTransport.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TTransportException.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TTransportFactory.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:ConnectionState.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:ConnectionStatus.cs" caret="189" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:Class1.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:ConnectionSettings.cs" caret="1640" fromTop="11" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:IConnectionSettings.cs" caret="151" fromTop="6" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:TProcessor.cs" caret="0" fromTop="0" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:TApplicationException.cs" caret="953" fromTop="10" />
+      <File id="DDD6693D-A165-45F1-8638-B7EC037CF6F6/f:StaticData.cs" caret="518" fromTop="13" />
+      <File id="9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F/f:Class1.cs" caret="151" fromTop="11" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TTransport.cs" caret="1381" fromTop="9" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Transport/f:TBufferedTransport.cs" caret="2160" fromTop="9" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/d:Protocol/f:TBinaryProtocol.cs" caret="7569" fromTop="9" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:Rest.cs" caret="1304" fromTop="9" />
+      <File id="DDD6693D-A165-45F1-8638-B7EC037CF6F6/f:Program.cs" caret="540" fromTop="6" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="780" fromTop="9" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:ElasticClient.cs" caret="2291" fromTop="2" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:Connection.cs" caret="241" fromTop="10" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:IConnection.cs" caret="121" fromTop="6" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="2" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="9" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="20" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="23" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="11" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="23" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="17" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="13" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="18" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="19" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="21" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="15" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="10" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="6" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="5" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="5" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="6" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:ElasticClient.cs" caret="2043" fromTop="21" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="8" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:ElasticClient.cs" caret="1746" fromTop="15" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="14" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="182" />
+      <File id="9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F/f:Class1.cs" caret="145" fromTop="8" />
+      <File id="DDD6693D-A165-45F1-8638-B7EC037CF6F6/f:Program.cs" caret="434" fromTop="12" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="10" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="4" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="17" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="4216" fromTop="172" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/d:Thrift/f:ThriftConnection.cs" caret="738" fromTop="16" />
+      <File id="072BA7DA-7B60-407D-8B6E-95E3186BE70C/f:IConnection.cs" caret="121" fromTop="6" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir>D:\Program Files (x86)\NUnit 2.5.4\bin\net-2.0\</NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>

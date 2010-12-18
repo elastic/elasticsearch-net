@@ -14,9 +14,9 @@ namespace ElasticSearch.ConsolePlayground
 		static void Main(string[] args)
 		{
 
-			var connectionSettings = new ConnectionSettings("127.0.0.1.", 9200)
+			var connectionSettings = new ConnectionSettings("127.0.0.1.", 9500)
 										.SetDefaultIndex("mpdreamz");
-			var client = new ElasticClient(connectionSettings);
+			var client = new ElasticClient(connectionSettings,true);
 			ConnectionStatus status;
 			if (client.TryConnect(out status))
 			{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ElasticSearch.Client.Thrift;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -60,6 +61,17 @@ namespace ElasticSearch.Client
 		{
 			this.Settings = settings;
 			this.Connection = new Connection(settings);
+			this.SerializationSettings = new JsonSerializerSettings()
+			{
+				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				NullValueHandling = NullValueHandling.Ignore,
+				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter() }
+			};
+		}
+		public ElasticClient(IConnectionSettings settings,bool  useThrift)
+		{
+			this.Settings = settings;
+			this.Connection = new ThriftConnection(settings);
 			this.SerializationSettings = new JsonSerializerSettings()
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
