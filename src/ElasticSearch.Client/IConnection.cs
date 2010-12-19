@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ElasticSearch.Client
 {
-	interface IConnection
+	internal interface IConnection
 	{
 		void Get(string path, Action<ConnectionStatus> callback);
 		ConnectionStatus GetSync(string path);

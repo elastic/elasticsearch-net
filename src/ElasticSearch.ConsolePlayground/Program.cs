@@ -25,7 +25,11 @@ namespace ElasticSearch.ConsolePlayground
 				
 				var blogAmmount = 100;
 				var blogPosts = StaticData.GetBlogPosts(blogAmmount);
-				
+
+				Query<Blog>.Fuzzy(b => b.Body, "");
+
+
+
 				blogPosts.ForEachWithIndex((b,i)=>
 				{
 					Console.Write("\rIndexing blog post {0} out of {1}", i + 1, blogAmmount);	
@@ -50,7 +54,7 @@ namespace ElasticSearch.ConsolePlayground
 					}.Skip(0).Take(10)
 				);
 
-
+				
 
 				var thisPageCount = queryResults.Documents.Count();
 

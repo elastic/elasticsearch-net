@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HackerNews.Indexer.Domain
 {
-	class PostMetaData
+	public class PostMetaData
 	{
 		public string Username { get; set; }
 		public int Points { get; set; }

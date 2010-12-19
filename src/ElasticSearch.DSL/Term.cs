@@ -28,24 +28,31 @@ namespace ElasticSearch.DSL
 			this.Boost = (field.Boost.HasValue) ? field.Boost.Value : 1.0;
 		}		
 	}
-	
-	public class Query<T> : IQuery<T> where T : class
-	{
-		public Expression<Func<T, object>> Expression { get; protected set; }
 
-	}
 
-	public class Term<T> : Query<T> where T : class
+	public static class Query<T> where T : class
 	{
-		
-		public Term(Expression<Func<T,object>> bindTo, double boost)
+		private static string FindMemberExpression(Expression<Func<T, object>> expression)
 		{
-			this.Expression = bindTo;
-			var t = typeof(T);
-			//var x = this.FindMemberExpression(bindTo.Body, typeof(T));
-			
-			
+			if (expression.Body is MemberExpression)
+			{
+				MemberExpression memberExpression = (MemberExpression)expression.Body;
+				return memberExpression.Member.Name;
+			}
+
+
+
+			throw new Exception("Expression doesn't represent a property or field: " + expression.ToString());
 		}
-		
+
+
+		public static Fuzzy Fuzzy(Expression<Func<T, object>> expression, string value)
+		{
+			string p = Query<T>.FindMemberExpression(expression);
+			
+			return new Fuzzy("", "");
+		}
 	}
+
+
 }

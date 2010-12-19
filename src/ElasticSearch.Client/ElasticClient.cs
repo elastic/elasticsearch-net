@@ -304,6 +304,15 @@ namespace ElasticSearch.Client
 			var rawQuery = this.Serialize(search);
 			return this.Query<T>(rawQuery);
 		}
+		public QueryResponse<T> Search<T>(IQuery query) where T : class
+		{
+			return this.Search<T>(new Search()
+			{
+				Query = new Query(query)
+
+			}.Skip(0).Take(10)
+			);
+		}
 		
 	}
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HackerNews.Indexer.Domain
 {
-	class Post
+	public class Post
 	{
 		public int Id { get; set; }
 		public int ParentId { get; set; }

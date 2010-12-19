@@ -49,13 +49,27 @@ namespace ElasticSearch.Client
 			this._timeOut = timeout;
 			this._port = port;
 			this._proxyAddress = proxyAddress;
+			this.MaximumAsyncConnections = 20;
 		}
-		
+		/// <summary>
+		/// Index to default to when no index is specified.
+		/// </summary>
+		/// <param name="defaultIndex">When null/empty/not set might throw NRE later on
+		/// when not specifying index explicitly while indexing.
+		/// </param>
+		/// <returns></returns>
 		public ConnectionSettings SetDefaultIndex(string defaultIndex)
 		{
 			this.DefaultIndex = defaultIndex;
 			return this;
 		}
+		/// <summary>
+		/// Semaphore asynchronous connections automatically by giving
+		/// it a maximum concurrent connections. Great to prevent 
+		/// out of memory exceptions
+		/// </summary>
+		/// <param name="maximum">defaults to 20</param>
+		/// <returns></returns>
 		public ConnectionSettings SetMaximumAsyncConnections(int maximum)
 		{
 			this.MaximumAsyncConnections = maximum;
