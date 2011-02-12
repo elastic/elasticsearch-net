@@ -28,31 +28,60 @@ namespace ElasticSearch.DSL
 			this.Boost = (field.Boost.HasValue) ? field.Boost.Value : 1.0;
 		}		
 	}
-
-
-	public static class Query<T> where T : class
+	public class Fuzzy<T> : Query<T> where T : class
 	{
-		private static string FindMemberExpression(Expression<Func<T, object>> expression)
+		public Fuzzy(QueryDescriptor queryDescriptor) : base(queryDescriptor) { }
+	}
+	public class QueryDescriptor 
+	{
+		public MemberExpression MemberExpression { get; set; }
+		public Func<string, IQuery> QuerySelector { get; set; }
+	}
+	public class Query<T> where T : class
+	{
+		internal IList<QueryDescriptor> Queries { get; set; }
+
+		public Query(QueryDescriptor queryDescriptor)
+		{
+			this.Queries = new List<QueryDescriptor>();
+			this.Queries.Add(queryDescriptor);
+		}
+
+		public static Query<T> Fuzzy(Expression<Func<T, object>> expression, string value)
+		{
+			var queryDescriptor = new QueryDescriptor()
+			{
+				MemberExpression = Query<T>.FindMemberExpression(expression),
+				QuerySelector = (s) => new Fuzzy(s, value)
+			};
+			return new Query<T>(queryDescriptor);
+		}
+		public Query<T> AndFuzzy(Expression<Func<T, object>> expression, string value)
+		{
+			var queryDescriptor = new QueryDescriptor()
+			{
+				MemberExpression = Query<T>.FindMemberExpression(expression),
+				QuerySelector = (s) => new Fuzzy(s, value)
+			};
+			this.Queries.Add(queryDescriptor);
+			return this;
+		}
+
+		internal static MemberExpression FindMemberExpression(Expression<Func<T, object>> expression) 
 		{
 			if (expression.Body is MemberExpression)
 			{
-				MemberExpression memberExpression = (MemberExpression)expression.Body;
-				return memberExpression.Member.Name;
+				//((MemberExpression)memberExpression.Expression).Expression
+				var memberExpression = (MemberExpression)expression.Body;
+				return memberExpression;
 			}
 
 
 
 			throw new Exception("Expression doesn't represent a property or field: " + expression.ToString());
 		}
-
-
-		public static Fuzzy Fuzzy(Expression<Func<T, object>> expression, string value)
-		{
-			string p = Query<T>.FindMemberExpression(expression);
-			
-			return new Fuzzy("", "");
-		}
 	}
+
 
 
 }

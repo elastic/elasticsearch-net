@@ -40,15 +40,15 @@ namespace ElasticSearch.Client
 			catch (WebException e)
 			{
 				if (e.Status == WebExceptionStatus.Timeout)
-					return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Server, Message = "Timeout", OriginalException = e });
+					return new ConnectionStatus(new ConnectionError(e) { Type = ConnectionErrorType.Server, ExceptionMessage = "Timeout"});
 
 				if (e.Status != WebExceptionStatus.Success
 					&& e.Status != WebExceptionStatus.ProtocolError)
-					return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Server, Message = e.Message, OriginalException = e });
+					return new ConnectionStatus(new ConnectionError(e) { Type = ConnectionErrorType.Server });
 
-				return new ConnectionStatus(new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode, Message = e.Message, OriginalException = e, Type = ConnectionErrorType.Server });
+				return new ConnectionStatus(new ConnectionError(e));
 			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Uncaught }); }
+			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
 			finally
 			{
 				if (response != null)
@@ -80,18 +80,15 @@ namespace ElasticSearch.Client
 				ConnectionError error;
 				if (e.Status == WebExceptionStatus.Timeout)
 				{
-					error = new ConnectionError { HttpStatusCode = HttpStatusCode.InternalServerError };
+					error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
 				}
 				else
 				{
-					error = new ConnectionError() { HttpStatusCode = ((HttpWebResponse)e.Response).StatusCode };
+					error = new ConnectionError(e);
 				}
-				error.Type = ConnectionErrorType.Server;
-				error.OriginalException = e;
-				error.Message = e.Message;
 				return new ConnectionStatus(error);
 			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError() { Type = ConnectionErrorType.Uncaught }); }
+			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
 			finally
 			{
 				if (postStream != null)

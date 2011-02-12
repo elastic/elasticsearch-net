@@ -9,6 +9,14 @@ namespace ElasticSearch.Client
 	[JsonObject]
 	public class QueryResponse<T> where T : class
 	{
+		public bool IsValid { get; set; }
+		public ConnectionError ConnectionError { get; set; }
+		public QueryResponse ()
+		{
+			this.IsValid = true;
+		}
+
+
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 		[JsonProperty(PropertyName = "hits")]

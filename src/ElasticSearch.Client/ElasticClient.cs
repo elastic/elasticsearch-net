@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ElasticSearch.Client.Thrift;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Fasterflect;
 using ElasticSearch;
 using Newtonsoft.Json.Converters;
-using ElasticSearch.DSL;
+using ElasticSearch.Client.DSL;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace ElasticSearch.Client
 {
@@ -23,7 +25,9 @@ namespace ElasticSearch.Client
 		private bool _IsValid { get; set; }
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
 		private JsonSerializerSettings SerializationSettings { get; set; }
-		
+		private PropertyNameResolver PropertyNameResolver { get; set; }
+
+
 		public bool IsValid
 		{
 			get
@@ -33,8 +37,7 @@ namespace ElasticSearch.Client
 				return this._IsValid;
 			}
 		}
-		
-		
+	
 		public ElasticSearchVersionInfo VersionInfo
 		{
 			get
@@ -44,12 +47,20 @@ namespace ElasticSearch.Client
 				return this._VersionInfo;
 			}
 		}
-		
 
 		public bool TryConnect(out ConnectionStatus status)
 		{
-			status = this.GetNodeInfo();
-			return this.IsValid;
+			try
+			{
+				status = this.GetNodeInfo();
+				return this.IsValid;
+			}
+			catch (Exception e)
+			{
+				status = new ConnectionStatus(e);
+			}
+			return false;
+
 
 
 		}
@@ -66,6 +77,19 @@ namespace ElasticSearch.Client
 				NullValueHandling = NullValueHandling.Ignore,
 				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter() }
 			};
+			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
+		}
+		public ElasticClient(IConnectionSettings settings,bool  useThrift)
+		{
+			this.Settings = settings;
+			this.Connection = new ThriftConnection(settings);
+			this.SerializationSettings = new JsonSerializerSettings()
+			{
+				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				NullValueHandling = NullValueHandling.Ignore,
+				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter() }
+			};
+			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}
 		
 		public string Serialize(object @object)
@@ -104,6 +128,7 @@ namespace ElasticSearch.Client
 			return "{0}/{1}/{2}".F(index, type, id);
 		}
 
+		#region indexing
 		public ConnectionStatus Index<T>(string index, string type, T @object) where T : class
 		{
 			return this.Index<T>(@object, this.createPath(index, type));
@@ -243,9 +268,9 @@ namespace ElasticSearch.Client
 			var json = sb.ToString();
 			this.Connection.Post("_bulk", json, continuation);  
 		}
+		#endregion
 
-
-
+		#region get
 		public T Get<T>(int id) where T : class
 		{
 			return this.Get<T>(id.ToString());
@@ -282,7 +307,8 @@ namespace ElasticSearch.Client
 			
 			return null;
 		}
-
+		#endregion
+		
 		public QueryResponse<T> Query<T>(string query) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
@@ -292,9 +318,17 @@ namespace ElasticSearch.Client
 			var typeName = Inflector.MakePlural(type.Name).ToLower();
 			string path = this.createPath(index, typeName) + "_search";
 
-			var result = this.Connection.PostSync(path, query);
+			var status = this.Connection.PostSync(path, query);
+			if (status.Error != null)
+			{
+				return new QueryResponse<T>()
+				{
+					IsValid = false,
+					ConnectionError = status.Error
+				};
+			}
 
-			var response = JsonConvert.DeserializeObject<QueryResponse<T>>(result.Result);
+			var response = JsonConvert.DeserializeObject<QueryResponse<T>>(status.Result);
 
 			return response;
 		}
@@ -304,6 +338,35 @@ namespace ElasticSearch.Client
 			var rawQuery = this.Serialize(search);
 			return this.Query<T>(rawQuery);
 		}
+		public QueryResponse<T> Search<T>(string search) where T : class
+		{
+			return this.Query<T>(search);
+		}
+
+		public QueryResponse<T> Search<T>(Query<T> query) where T : class
+		{
+			
+			var q = query.Queries.First();
+			var expression = q.MemberExpression;
+			this.PropertyNameResolver.Resolve(expression);
+
+			var o = this.SerializationSettings.ContractResolver;
+
+
+			var contract = this.SerializationSettings.ContractResolver.ResolveContract(expression.Type);
+
+
+			var search = new Search()
+			{
+
+			};
+
+			var rawQuery = this.Serialize(search);
+			return this.Query<T>(rawQuery);
+		}
+
+
+
 		public QueryResponse<T> Search<T>(IQuery query) where T : class
 		{
 			return this.Search<T>(new Search()

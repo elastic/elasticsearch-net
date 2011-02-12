@@ -50,6 +50,7 @@
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSLTests.cs" />
+    <Compile Include="QueryResponseMapperTests.cs" />
     <Compile Include="Test.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -60,10 +61,6 @@
     <ProjectReference Include="..\ElasticSearch.Client\ElasticSearch.Client.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>ElasticSearch.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ElasticSearch.DSL\ElasticSearch.DSL.csproj">
-      <Project>{4915CF8F-BB45-43EB-8EAD-5DC692BBBFF8}</Project>
-      <Name>ElasticSearch.DSL</Name>
     </ProjectReference>
     <ProjectReference Include="..\HackerNews.Indexer\HackerNews.Indexer.csproj">
       <Project>{E39CC264-A7B3-490D-84B2-D3016D86CD87}</Project>

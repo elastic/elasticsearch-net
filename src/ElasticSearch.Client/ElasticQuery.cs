@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ElasticSearch.DSL;
+using ElasticSearch.Client.DSL;
 using System.Linq.Expressions;
 
 namespace ElasticSearch.Client

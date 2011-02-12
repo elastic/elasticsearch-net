@@ -5,7 +5,7 @@ using System.Text;
 using Xunit;
 using ElasticSearch.Client;
 using HackerNews.Indexer.Domain;
-using ElasticSearch.DSL;
+using ElasticSearch.Client.DSL;
 
 namespace ElasticSearch.Tests
 {

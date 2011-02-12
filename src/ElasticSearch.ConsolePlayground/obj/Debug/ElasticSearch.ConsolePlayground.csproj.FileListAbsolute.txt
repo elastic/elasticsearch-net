@@ -27,14 +27,13 @@ D:\Projects\git\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Fasterflect.x
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.ConsolePlayground.exe
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.ConsolePlayground.pdb
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.Client.dll
-D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.DSL.dll
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Newtonsoft.Json.dll
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Fasterflect.dll
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.Client.pdb
-D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\ElasticSearch.DSL.pdb
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Newtonsoft.Json.pdb
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Newtonsoft.Json.xml
 D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\Fasterflect.xml
 D:\NEST\src\ElasticSearch.ConsolePlayground\obj\Debug\ResolveAssemblyReference.cache
 D:\NEST\src\ElasticSearch.ConsolePlayground\obj\Debug\ElasticSearch.ConsolePlayground.exe
 D:\NEST\src\ElasticSearch.ConsolePlayground\obj\Debug\ElasticSearch.ConsolePlayground.pdb
+D:\NEST\src\ElasticSearch.ConsolePlayground\bin\Debug\NetReflector.dll

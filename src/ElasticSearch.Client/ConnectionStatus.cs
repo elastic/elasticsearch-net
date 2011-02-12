@@ -13,6 +13,13 @@ namespace ElasticSearch.Client
 		public ConnectionError Error { get; private set; }
 		public string Result { get; private set; }
 
+
+		public ConnectionStatus(Exception e)
+		{
+			this.Success = false;
+			this.Error = new ConnectionError(e);
+		} 
+
 		public ConnectionStatus(ConnectionError error)
 		{
 			this.Success = false;

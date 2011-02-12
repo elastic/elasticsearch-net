@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -83,10 +83,6 @@
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>ElasticSearch.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ElasticSearch.DSL\ElasticSearch.DSL.csproj">
-      <Project>{4915CF8F-BB45-43EB-8EAD-5DC692BBBFF8}</Project>
-      <Name>ElasticSearch.DSL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleModel.cd" />
@@ -118,7 +114,6 @@
   </Target>
   -->
   <ItemGroup>
-    <Folder Include="Calls\" />
     <Folder Include="Calls\Simple queries\" />
   </ItemGroup>
 </Project>

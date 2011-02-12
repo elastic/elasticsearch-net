@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-using ElasticSearch.DSL;
+using ElasticSearch.Client.DSL;
 
 namespace ElasticSearch.Client
 {

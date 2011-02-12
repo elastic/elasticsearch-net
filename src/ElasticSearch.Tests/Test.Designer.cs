@@ -49,7 +49,7 @@ namespace ElasticSearch.Tests {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("nest-test")]
+        [global::System.Configuration.DefaultSettingValueAttribute("mpdreamz")]
         public string DefaultIndex {
             get {
                 return ((string)(this["DefaultIndex"]));

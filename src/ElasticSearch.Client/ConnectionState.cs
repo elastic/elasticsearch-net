@@ -30,12 +30,7 @@ namespace ElasticSearch.Client
 		}
 		public void RaiseCallBack(Exception e)
 		{
-			var error = new ConnectionError()
-			{
-				Type = ConnectionErrorType.Uncaught,
-				OriginalException = e,
-				Message = e.Message
-			};
+			var error = new ConnectionError(e);
 
 			if (e is WebException)
 			{
@@ -48,7 +43,7 @@ namespace ElasticSearch.Client
 				}
 				else
 				{
-					error.Message = "Could not connect to server: " + Connection.Address.ToString();
+					error.ExceptionMessage = "Could not connect to server: " + Connection.Address.ToString();
 				}
 			}
 			else if (e is Exception)
