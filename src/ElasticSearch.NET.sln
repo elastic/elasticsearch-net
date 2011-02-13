@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General Files", "General Fi
 		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.TestData", "Nest.TestData\Nest.TestData.csproj", "{27143A05-5655-447C-ADAF-405E1CF43741}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,16 @@ Global
 		{E39CC264-A7B3-490D-84B2-D3016D86CD87}.Release|Mixed Platforms.Build.0 = Release|x86
 		{E39CC264-A7B3-490D-84B2-D3016D86CD87}.Release|x86.ActiveCfg = Release|x86
 		{E39CC264-A7B3-490D-84B2-D3016D86CD87}.Release|x86.Build.0 = Release|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|x86.ActiveCfg = Debug|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|x86.Build.0 = Debug|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|Any CPU.ActiveCfg = Release|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|Mixed Platforms.Build.0 = Release|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|x86.ActiveCfg = Release|x86
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

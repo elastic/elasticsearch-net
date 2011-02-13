@@ -28,7 +28,7 @@ namespace ElasticSearch.Tests
 		{
 			var client = this.ConnectedClient;
 			QueryResponse<Post> queryResults = client.Search<Post>(
-				@"query : {  ""fuzzy"" : {  ""meta.username"" : ""ki""  } }"
+				@" { ""query"" : {  ""fuzzy"" : {  ""meta.username"" : ""kimchy""  } } }"
 			);
 			Assert.True(queryResults.IsValid);
 			Assert.Null(queryResults.ConnectionError);

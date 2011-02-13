@@ -25,7 +25,7 @@ namespace ElasticSearch.Tests {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1.")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.10")]
         public string Host {
             get {
                 return ((string)(this["Host"]));
