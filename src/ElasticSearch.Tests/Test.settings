@@ -9,7 +9,7 @@
       <Value Profile="(Default)">9200</Value>
     </Setting>
     <Setting Name="DefaultIndex" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mpdreamz</Value>
+      <Value Profile="(Default)">nest_test_data</Value>
     </Setting>
     <Setting Name="MaximumAsyncConnections" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>

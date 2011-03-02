@@ -69,6 +69,10 @@
       <Project>{E39CC264-A7B3-490D-84B2-D3016D86CD87}</Project>
       <Name>HackerNews.Indexer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Nest.TestData\Nest.TestData.csproj">
+      <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
+      <Name>Nest.TestData</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
