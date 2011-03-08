@@ -113,7 +113,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Calls\Simple queries\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

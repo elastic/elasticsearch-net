@@ -65,3 +65,11 @@
 /src/ElasticSearch.Tests/obj
 /src/HackerNews.Indexer/obj
 /src/Nest.TestData/obj
+/src/ElasticSearch.NET.5.0.ReSharper.user
+/src/ElasticSearch.NET.userprefs
+/src/ElasticSearch.NET.suo
+/src/ElasticSearch.Client/bin
+/src/ElasticSearch.ConsolePlayground/bin
+/src/ElasticSearch.Tests/bin
+/src/HackerNews.Indexer/bin
+/src/Nest.TestData/bin

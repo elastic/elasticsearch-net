@@ -25,7 +25,7 @@ namespace Nest.TestData {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
         public string Host {
             get {
                 return ((string)(this["Host"]));
