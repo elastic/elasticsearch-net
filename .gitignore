@@ -60,3 +60,8 @@
 /src/Nest.TestData/obj/x86/Debug/Nest.TestData.exe
 /src/Nest.TestData/obj/x86/Debug/Nest.TestData.pdb
 /src/Nest.TestData/obj/x86/Debug/ResolveAssemblyReference.cache
+/src/ElasticSearch.Client/obj
+/src/ElasticSearch.ConsolePlayground/obj
+/src/ElasticSearch.Tests/obj
+/src/HackerNews.Indexer/obj
+/src/Nest.TestData/obj
