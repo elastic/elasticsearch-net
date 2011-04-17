@@ -21,6 +21,9 @@ namespace ElasticSearch.Client
 		public ShardsMetaData Shards { get; internal set; }
 		[JsonProperty(PropertyName = "hits")]
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
+		[JsonProperty(PropertyName = "took")]
+		public int ElapsedMilliseconds { get; internal set; }
+
 
 		public int Total
 		{

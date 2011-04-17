@@ -1,5 +1,0 @@
-d:\Projects\ElasticSearch.Client\ElasticSearch.Extensions\bin\Debug\ElasticSearch.Extensions.dll
-d:\Projects\ElasticSearch.Client\ElasticSearch.Extensions\bin\Debug\ElasticSearch.Extensions.pdb
-d:\Projects\ElasticSearch.Client\ElasticSearch.Extensions\obj\Debug\ResolveAssemblyReference.cache
-d:\Projects\ElasticSearch.Client\ElasticSearch.Extensions\obj\Debug\ElasticSearch.Extensions.dll
-d:\Projects\ElasticSearch.Client\ElasticSearch.Extensions\obj\Debug\ElasticSearch.Extensions.pdb
