@@ -13,6 +13,7 @@ using ElasticSearch.Client.DSL;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Globalization;
 
 namespace ElasticSearch.Client
 {

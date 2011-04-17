@@ -52,5 +52,12 @@ namespace ElasticSearch.Tests
 			var status = client.ClearCache<ElasticSearchProject>(ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
 			Assert.True(status.Success);
 		}
+		[Fact]
+		public void test_clear_cache_generic_specific_indices()
+		{
+			var client = this.ConnectedClient;
+			var status = client.ClearCache(new List<string> { Settings.DefaultIndex, Settings.DefaultIndex + "_clone" }, ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
+			Assert.True(status.Success);
+		}
 	}
 }
