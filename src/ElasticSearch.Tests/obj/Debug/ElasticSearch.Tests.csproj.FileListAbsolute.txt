@@ -18,3 +18,6 @@ D:\NEST\src\ElasticSearch.Tests\bin\Debug\xunit.extensions.xml
 D:\NEST\src\ElasticSearch.Tests\bin\Debug\Newtonsoft.Json.pdb
 D:\NEST\src\ElasticSearch.Tests\bin\Debug\Newtonsoft.Json.xml
 D:\NEST\src\ElasticSearch.Tests\bin\Debug\Fasterflect.xml
+D:\NEST\src\ElasticSearch.Tests\bin\Debug\AutoPoco.dll
+D:\NEST\src\ElasticSearch.Tests\bin\Debug\Nest.TestData.exe
+D:\NEST\src\ElasticSearch.Tests\bin\Debug\Nest.TestData.pdb

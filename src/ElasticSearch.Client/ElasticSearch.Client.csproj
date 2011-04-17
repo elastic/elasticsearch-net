@@ -84,6 +84,11 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="ElasticClient-Inferno.cs" />
+    <Compile Include="ElasticClient-Indices.cs" />
+    <Compile Include="ElasticClient-Get.cs" />
+    <Compile Include="ElasticClient-Index.cs" />
+    <Compile Include="ElasticClient.cs" />
     <Compile Include="DSL\ExclusiveRange.cs" />
     <Compile Include="DSL\Extensions.cs" />
     <Compile Include="DSL\Field.cs" />
@@ -101,7 +106,7 @@
     <Compile Include="DSL\SerializationSettings.cs" />
     <Compile Include="DSL\Term.cs" />
     <Compile Include="DSL\Wildcard.cs" />
-    <Compile Include="ElasticClient.cs" />
+    <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="ElasticQuery.cs" />
     <Compile Include="ElasticSearchJsonResolver.cs" />
     <Compile Include="ElasticSearchVersionInfo.cs" />

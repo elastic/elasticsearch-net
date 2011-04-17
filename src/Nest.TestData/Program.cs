@@ -20,6 +20,7 @@ namespace Nest.TestData
 			{
 				var projects = NestTestData.Data;
 				client.Index(projects);
+				client.Index("nest_test_data_again",projects);
 
 			}
 

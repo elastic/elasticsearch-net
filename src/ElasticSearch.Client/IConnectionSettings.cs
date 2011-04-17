@@ -15,5 +15,6 @@ namespace ElasticSearch.Client
 		string Password { get; }
 		string DefaultIndex { get; }
 		int MaximumAsyncConnections { get; }
+		Func<string, string> TypeNameInferrer { get; }
 	}
 }

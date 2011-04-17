@@ -15,8 +15,8 @@ namespace ElasticSearch.Client
 		{
 			this.IsValid = true;
 		}
-
-
+		[JsonProperty(PropertyName = "took")]
+		public int ElapsedMilliseconds { get; set; }
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 		[JsonProperty(PropertyName = "hits")]
@@ -29,6 +29,15 @@ namespace ElasticSearch.Client
 				if (this.HitsMetaData == null)
 					return 0;
 				return this.HitsMetaData.Total;
+			}
+		}
+		public float MaxScore
+		{
+			get
+			{
+				if (this.HitsMetaData == null)
+					return 0;
+				return this.HitsMetaData.MaxScore;
 			}
 		}
 
@@ -47,7 +56,15 @@ namespace ElasticSearch.Client
 			}
 		}
 	}
-
+	[JsonObject]
+	public class IndicesResponse
+	{
+		[JsonProperty(PropertyName = "ok")]
+		public bool Success { get; private set; }
+		public ConnectionStatus ConnectionStatus { get; internal set; }
+		[JsonProperty(PropertyName = "_shards")]
+		public ShardsMetaData ShardsHit { get; private set; }
+	}
 	[JsonObject]
 	public class ShardsMetaData
 	{
