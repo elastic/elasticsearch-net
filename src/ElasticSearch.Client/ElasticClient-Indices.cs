@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ElasticSearch.Client.Thrift;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Fasterflect;
-using ElasticSearch;
-using Newtonsoft.Json.Converters;
-using ElasticSearch.Client.DSL;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace ElasticSearch.Client
 {
@@ -67,7 +56,30 @@ namespace ElasticSearch.Client
 			response.ConnectionStatus = status;
 			return response;
 		}
+
+        /// <summary>
+        /// Deletes a mapping.
+        /// </summary>
+        /// <typeparam name="T">Mapped type.</typeparam>
+        /// <returns>Response status information.</returns>
+        public IndicesResponse DeleteMapping<T>() where T : class
+        {
+            var type = this.InferTypeName<T>();
+            var path = this.createPath(this.Settings.DefaultIndex, type);
+            var status = this.Connection.DeleteSync(path);
+
+            var response = new IndicesResponse();
+            try
+            {
+                response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+            }
+            catch { }
+
+            response.ConnectionStatus = status;
+            return response;
+        }
 	}
+
 	[Flags]
 	public enum ClearCacheOptions
 	{

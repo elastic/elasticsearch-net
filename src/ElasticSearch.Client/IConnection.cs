@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ElasticSearch.Client
 {
@@ -12,5 +9,8 @@ namespace ElasticSearch.Client
 
 		void Post(string path, string data, Action<ConnectionStatus> callback);
 		ConnectionStatus PostSync(string path, string data);
+
+	    void Delete(string path, Action<ConnectionStatus> callback);
+	    ConnectionStatus DeleteSync(string path);
 	}
 }
