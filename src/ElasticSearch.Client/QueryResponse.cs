@@ -15,8 +15,6 @@ namespace ElasticSearch.Client
 		{
 			this.IsValid = true;
 		}
-		[JsonProperty(PropertyName = "took")]
-		public int ElapsedMilliseconds { get; set; }
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 		[JsonProperty(PropertyName = "hits")]

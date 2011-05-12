@@ -96,7 +96,30 @@ namespace ElasticSearch.Client.Thrift
 			return new ConnectionStatus(DecodeStr(result.Body));
 		}
 
-		#endregion
+	    public void Delete(string path, Action<ConnectionStatus> callback)
+	    {
+            var restRequest = new RestRequest();
+            restRequest.Method = Method.DELETE;
+            restRequest.Uri = path;
+
+            restRequest.Headers = new Dictionary<string, string>();
+            restRequest.Headers.Add("Content-Type", "application/json");
+            GetClient().execute(restRequest);
+	    }
+
+	    public ConnectionStatus DeleteSync(string path)
+	    {
+            var restRequest = new RestRequest();
+            restRequest.Method = Method.DELETE;
+            restRequest.Uri = path;
+
+            restRequest.Headers = new Dictionary<string, string>();
+            restRequest.Headers.Add("Content-Type", "application/json");
+            RestResponse result = GetClient().execute(restRequest);
+            return new ConnectionStatus(DecodeStr(result.Body));
+	    }
+
+	    #endregion
 
 		#region IDisposable Members
 

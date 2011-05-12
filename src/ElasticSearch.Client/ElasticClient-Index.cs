@@ -2,18 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ElasticSearch.Client.Thrift;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Fasterflect;
-using ElasticSearch;
-using Newtonsoft.Json.Converters;
-using ElasticSearch.Client.DSL;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
-using System.Globalization;
 
 namespace ElasticSearch.Client
 {
@@ -23,7 +12,7 @@ namespace ElasticSearch.Client
 		public ConnectionStatus Index<T>(T @object) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
-			return this.Index<T>(@object, path);
+		    return this._indexToPath(@object, path);
 		}
 		public ConnectionStatus Index<T>(T @object, string index) where T : class
 		{
