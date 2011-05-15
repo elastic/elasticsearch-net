@@ -35,12 +35,16 @@ namespace ElasticSearch.Tests
 		}
 		
 		[Test]
-		public void MatchAllQuery()
+		public void SimpleTermFacet()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						    ""match_all"" : { }
-					} }"
+					},
+					""facets"" : {
+					  ""tags"" : { ""terms"" : {""field"" : ""followers.lastName""} }
+					}
+				}"
 			);
 			this.TestDefaultAssertions(queryResults);
 			Assert.True(queryResults.Total == NestTestData.Data.Count());

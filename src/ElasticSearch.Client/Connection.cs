@@ -315,6 +315,11 @@ namespace ElasticSearch.Client
 		private HttpWebRequest CreateConnection(string path, string method)
 		{
 			var url = this._CreateUriString(path);
+			if (this._ConnectionSettings.UsesPrettyRequests)
+			{
+				var uri = new Uri(url);
+				url += ((string.IsNullOrEmpty(uri.Query)) ? "?" : "&") + "pretty=true";
+			}
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
