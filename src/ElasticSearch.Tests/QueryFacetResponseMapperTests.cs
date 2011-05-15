@@ -7,6 +7,7 @@ using HackerNews.Indexer.Domain;
 using Nest.TestData;
 using Nest.TestData.Domain;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace ElasticSearch.Tests
 {
@@ -14,7 +15,7 @@ namespace ElasticSearch.Tests
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class IndicesTest : BaseElasticSearchTests
+	public class QueryFacetResponseMapperTests : BaseElasticSearchTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
@@ -32,33 +33,18 @@ namespace ElasticSearch.Tests
 			Assert.That(queryResponse.ElapsedMilliseconds, Is.InRange(0, 200));
 				
 		}
+		
 		[Test]
-		public void test_clear_cache()
+		public void MatchAllQuery()
 		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache();
-			Assert.True(status.Success);
-		}
-		[Test]
-		public void test_clear_cache_specific()
-		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache(ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
-			Assert.True(status.Success);
-		}
-		[Test]
-		public void test_clear_cache_generic_specific()
-		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache<ElasticSearchProject>(ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
-			Assert.True(status.Success);
-		}
-		[Test]
-		public void test_clear_cache_generic_specific_indices()
-		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache(new List<string> { Settings.DefaultIndex, Settings.DefaultIndex + "_clone" }, ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
-			Assert.True(status.Success);
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+						    ""match_all"" : { }
+					} }"
+			);
+			this.TestDefaultAssertions(queryResults);
+			Assert.True(queryResults.Total == NestTestData.Data.Count());
+			
 		}
 	}
 }

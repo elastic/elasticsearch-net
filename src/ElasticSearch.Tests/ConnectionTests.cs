@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Xunit;
+using NUnit.Framework;
 using ElasticSearch.Client;
 
 namespace ElasticSearch.Tests
 {
+	[TestFixture]
 	public class ConnectionTests : BaseElasticSearchTests
 	{
-		[Fact]
+		[Test]
 		public void TestSettings()
 		{
-			Assert.Equal(this.Settings.Host, Test.Default.Host);
-			Assert.Equal(this.Settings.Port, Test.Default.Port);
-			Assert.Equal(this.Settings.DefaultIndex, Test.Default.DefaultIndex);
-			Assert.Equal(this.Settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
+			Assert.AreEqual(this.Settings.Host, Test.Default.Host);
+			Assert.AreEqual(this.Settings.Port, Test.Default.Port);
+			Assert.AreEqual(this.Settings.DefaultIndex, Test.Default.DefaultIndex);
+			Assert.AreEqual(this.Settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
 		}
-		[Fact]
+		[Test]
 		public void TestConnectSuccess()
 		{
 			var client = this.CreateClient();

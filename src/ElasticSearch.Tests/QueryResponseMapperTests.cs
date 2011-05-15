@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Xunit;
 using ElasticSearch.Client;
 using HackerNews.Indexer.Domain;
 using Nest.TestData;
 using Nest.TestData.Domain;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace ElasticSearch.Tests
 {
 	/// <summary>
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
+	[TestFixture]
 	public class QueryResponseMapperTests : BaseElasticSearchTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
@@ -28,10 +30,10 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResponse.Shards.Total > 0);
 			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
 			Assert.True(queryResponse.Shards.Failed == 0);
-			Assert.InRange(queryResponse.ElapsedMilliseconds, 0, 200);
+			Assert.That(queryResponse.ElapsedMilliseconds, Is.InRange(0, 200));
 				
 		}
-		[Fact]
+		[Test]
 		public void BogusQuery()
 		{
 			var client = this.ConnectedClient;
@@ -41,7 +43,7 @@ namespace ElasticSearch.Tests
 			Assert.False(queryResults.IsValid);
 			Assert.True(queryResults.ConnectionError.HttpStatusCode == System.Net.HttpStatusCode.InternalServerError);
 		}
-		[Fact]
+		[Test]
 		public void BoolQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -73,7 +75,7 @@ namespace ElasticSearch.Tests
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
 
-		[Fact]
+		[Test]
 		public void BoostingQuery()
 		{
 			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName;
@@ -98,7 +100,7 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResults.Documents.First().Followers.First().FirstName != this._LookFor);
 		}
 
-		[Fact]
+		[Test]
 		public void ScoringQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -115,7 +117,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void ConstantScoreQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -132,7 +134,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void DismaxQuery()
 		{
 			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName;
@@ -160,7 +162,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void FieldQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -172,7 +174,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void ExtendedFieldQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -188,7 +190,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void FilteredQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -209,7 +211,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void FuzzyLikeThisQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -223,7 +225,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void FuzzyLikeThisFieldQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -238,7 +240,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void FuzzyQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -252,7 +254,7 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResults.Documents.First().Followers
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
-		[Fact]
+		[Test]
 		public void ExtendedFuzzyQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -274,7 +276,7 @@ namespace ElasticSearch.Tests
 
 		//TODO: has_child query support!
 
-		[Fact]
+		[Test]
 		public void MatchAllQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -287,7 +289,7 @@ namespace ElasticSearch.Tests
 			
 		}
 
-		[Fact]
+		[Test]
 		public void MoreLikeThisQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -303,7 +305,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void MoreLikeThisFieldQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -320,7 +322,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void PrefixQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -332,7 +334,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void PrefixExtendedQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -344,7 +346,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void QueryStringQuery()
 		{
 			var firstFollower = NestTestData.Data.First().Followers.First();
@@ -360,7 +362,7 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Fact]
+		[Test]
 		public void QueryStringMultiFieldQuery()
 		{
 			var firstFollower = NestTestData.Data.First().Followers.First();
@@ -376,8 +378,8 @@ namespace ElasticSearch.Tests
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		
-		[Fact]
+
+		[Test]
 		public void RangeQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -398,7 +400,7 @@ namespace ElasticSearch.Tests
 
 		//TODO: Update test data to include a blob of text so we can write decent span_* queries tests
 
-		[Fact]
+		[Test]
 		public void TermQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -412,7 +414,7 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResults.Documents.First().Followers
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
-		[Fact]
+		[Test]
 		public void ExtendedTermQuery()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
@@ -426,7 +428,7 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResults.Documents.First().Followers
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
-		[Fact]
+		[Test]
 		public void TermsQuery()
 		{
 			var firstFollower = NestTestData.Data.First().Followers.First();
@@ -446,7 +448,7 @@ namespace ElasticSearch.Tests
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
 
-		[Fact]
+		[Test]
 		public void WildcardQuery()
 		{
 			var wildcard = this._LookFor.ToLower().Substring(0,this._LookFor.Length -1).Replace("a","?") + "*";
@@ -461,7 +463,7 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResults.Documents.First().Followers
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
-		[Fact]
+		[Test]
 		public void WildcardExtendedQuery()
 		{
 			var wildcard = this._LookFor.ToLower().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";

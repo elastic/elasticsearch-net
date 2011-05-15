@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Xunit;
+using NUnit.Framework;
 using ElasticSearch.Client;
 using HackerNews.Indexer.Domain;
 using ElasticSearch.Client.DSL;
 
 namespace ElasticSearch.Tests
 {
+	[TestFixture]
 	public class QueryDSLTests : BaseElasticSearchTests
 	{
-		[Fact]
+		[Test]
 		public void FuzzySearch()
 		{
 			var client = this.ConnectedClient;
