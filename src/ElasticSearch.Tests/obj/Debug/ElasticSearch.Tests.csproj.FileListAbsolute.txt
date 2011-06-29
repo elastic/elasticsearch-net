@@ -53,7 +53,7 @@ C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\HackerNews.Indexer.exe
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Nest.TestData.exe
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\xunit.dll
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\xunit.extensions.dll
-C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Newtonsoft.Json.Net35.dll
+C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Newtonsoft.Json.dll
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Fasterflect.dll
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\NetReflector.dll
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\ElasticSearch.Client.pdb
@@ -61,8 +61,6 @@ C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\HackerNews.Indexer.pdb
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Nest.TestData.pdb
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\xunit.xml
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\xunit.extensions.xml
-C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Newtonsoft.Json.Net35.pdb
-C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Newtonsoft.Json.Net35.xml
 C:\gitprojects\NEST\src\ElasticSearch.Tests\bin\Debug\Fasterflect.xml
 C:\gitprojects\NEST\src\ElasticSearch.Tests\obj\Debug\ResolveAssemblyReference.cache
 C:\gitprojects\NEST\src\ElasticSearch.Tests\obj\Debug\ElasticSearch.Tests.dll
