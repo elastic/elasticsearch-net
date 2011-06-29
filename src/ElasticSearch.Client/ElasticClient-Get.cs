@@ -46,6 +46,7 @@ namespace ElasticSearch.Client
 		private T Get<T>(string id, string path) where T : class
 		{
 			var response = this.Connection.GetSync(path + id);
+
 			var o = JObject.Parse(response.Result);
 			var source = o["_source"];
 			if (source != null)
