@@ -75,7 +75,7 @@ namespace ElasticSearch.Client
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter() }
+				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter(), new FacetsMetaDataConverter() }
 			};
 			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}
@@ -87,7 +87,7 @@ namespace ElasticSearch.Client
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver(),
 				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter() }
+				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter(), new FacetsMetaDataConverter() }
 			};
 			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}

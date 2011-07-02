@@ -11,5 +11,6 @@ namespace Nest.TestData.Domain
         public string Name { get; set; }
         public string Country { get; set; }
         public List<Person> Followers { get; set; }
+		public GeoLocation Origin { get; set; }
     }
 }

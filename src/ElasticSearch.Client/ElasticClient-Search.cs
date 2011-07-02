@@ -37,8 +37,7 @@ namespace ElasticSearch.Client
 					ConnectionError = status.Error
 				};
 			}
-
-			var response = JsonConvert.DeserializeObject<QueryResponse<T>>(status.Result);
+			var response = JsonConvert.DeserializeObject<QueryResponse<T>>(status.Result, this.SerializationSettings);
 
 			return response;
 		}

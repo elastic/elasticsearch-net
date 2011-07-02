@@ -13,6 +13,7 @@ namespace Nest.TestData.Domain
         public int Age { get; set;  }
         public string Email { get; set;  }
         public DateTime DateOfBirth { get; set; }
+		public GeoLocation PlaceOfBirth { get; set; }
         
 
     }

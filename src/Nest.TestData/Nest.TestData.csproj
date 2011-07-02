@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\ElasticSearchProject.cs" />
+    <Compile Include="Domain\GeoLocation.cs" />
     <Compile Include="Domain\Person.cs" />
     <Compile Include="OpenSourceProjectNameDataSource.cs" />
     <Compile Include="Program.cs" />

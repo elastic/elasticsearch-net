@@ -42,7 +42,7 @@ namespace ElasticSearch.Tests
 						    ""match_all"" : { }
 					},
 					""facets"" : {
-					  ""tags"" : { ""terms"" : {""field"" : ""followers.lastName""} }
+					  ""followers.lastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
 					}
 				}"
 			);

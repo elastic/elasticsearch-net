@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using ElasticSearch.Client.DSL;
+using Newtonsoft.Json.Linq;
 
 namespace ElasticSearch.Client
 {
@@ -22,11 +23,37 @@ namespace ElasticSearch.Client
 		}
 	}
 
+	public class FacetsMetaDataConverter : JsonConverter
+	{
+		public override bool CanConvert(Type objectType)
+		{
+			return typeof(FacetsMetaData).IsAssignableFrom(objectType);
+		}
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var target = new FacetsMetaData() { };
+
+			// Load JObject from stream
+            JObject jObject = JObject.Load(reader);
+			foreach (var facet in jObject.Properties())
+			{
+				//var facet = serializer.Deserialize<Facet>(facetName.CreateReader());
+			}
+
+			serializer.Populate(jObject.CreateReader(), target);
+
+			return target;
+		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			
+		}
+
+	}
+
+
 	public class QueryJsonConverter : JsonConverter
 	{
-		private readonly Type[] parameterTypes;
-		private readonly Dictionary<string, object> parameterInstances;
-
 		public override bool CanConvert(Type objectType)
 		{
 			return typeof(IFieldQuery).IsAssignableFrom(objectType);
