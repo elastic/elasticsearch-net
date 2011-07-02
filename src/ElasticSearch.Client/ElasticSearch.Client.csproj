@@ -84,7 +84,7 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
-    <Compile Include="ElasticClient-Documents.cs" />
+    <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-Inferno.cs" />
     <Compile Include="ElasticClient-Indices.cs" />
     <Compile Include="ElasticClient-Get.cs" />

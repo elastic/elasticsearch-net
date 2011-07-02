@@ -56,7 +56,9 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
-	<Compile Include="QueryFacetResponseMapperTests.cs" />	<Compile Include="DocumentTests.cs" />    <Compile Include="IndicesTests.cs" />
+    <Compile Include="QueryFacetResponseMapperTests.cs" />
+    <Compile Include="DeleteTests.cs" />
+    <Compile Include="IndicesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSLTests.cs" />
     <Compile Include="QueryResponseMapperTests.cs" />

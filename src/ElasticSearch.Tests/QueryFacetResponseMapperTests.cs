@@ -47,7 +47,7 @@ namespace ElasticSearch.Tests
 				}"
 			);
 			this.TestDefaultAssertions(queryResults);
-			Assert.True(queryResults.Total == NestTestData.Data.Count());
+			Assert.True(queryResults.Total > 0);
 			
 		}
 	}

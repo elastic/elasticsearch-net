@@ -65,8 +65,6 @@ namespace ElasticSearch.Client
 			return this._deleteToPath(path);
         }
 
-		//Async
-
 		public void DeleteAsync<T>(int id, Action<ConnectionStatus> callback) where T : class
 		{
 			this.DeleteAsync<T>(id.ToString(), callback);
