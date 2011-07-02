@@ -34,6 +34,17 @@
     <Reference Include="AutoPoco">
       <HintPath>..\..\dep\autopoco\AutoPoco.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework">
+      <HintPath>..\..\dep\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,16 +52,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\..\dep\xunit\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.extensions">
-      <HintPath>..\..\dep\xunit\xunit.extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="QueryFacetResponseMapperTests.cs" />
+    <Compile Include="DeleteTests.cs" />
+    <Compile Include="IndicesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSLTests.cs" />
     <Compile Include="QueryResponseMapperTests.cs" />
@@ -75,7 +83,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <None Include="Test.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Test.Designer.cs</LastGenOutput>

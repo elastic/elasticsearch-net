@@ -2,7 +2,12 @@ NEST
 ========
 *Strongly typed Elasticsearch client*
 
-NEST aims to be a .net client with a very concise API.
+NEST aims to be a .net client with a very concise API. 
+
+License Information
+------------------
+
+Although a specific license is yet to be chosen you can assume it will either be a MIT or BSD based one so that anyone can do as they please with NEST, such as embedding in closed sourced software.
 
 Connecting
 ------------------

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ElasticSearch.Client</RootNamespace>
     <AssemblyName>ElasticSearch.Client</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,6 +56,9 @@
   <ItemGroup>
     <Reference Include="NetReflector">
       <HintPath>..\..\dep\NetReflector.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dep\json.net\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -73,10 +77,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dep\fasterflect\Fasterflect.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\json.net\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
@@ -84,6 +84,12 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="ElasticClient-Delete.cs" />
+    <Compile Include="ElasticClient-Inferno.cs" />
+    <Compile Include="ElasticClient-Indices.cs" />
+    <Compile Include="ElasticClient-Get.cs" />
+    <Compile Include="ElasticClient-Index.cs" />
+    <Compile Include="ElasticClient.cs" />
     <Compile Include="DSL\ExclusiveRange.cs" />
     <Compile Include="DSL\Extensions.cs" />
     <Compile Include="DSL\Field.cs" />
@@ -101,16 +107,19 @@
     <Compile Include="DSL\SerializationSettings.cs" />
     <Compile Include="DSL\Term.cs" />
     <Compile Include="DSL\Wildcard.cs" />
-    <Compile Include="ElasticClient.cs" />
+    <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="ElasticQuery.cs" />
     <Compile Include="ElasticSearchJsonResolver.cs" />
     <Compile Include="ElasticSearchVersionInfo.cs" />
+    <Compile Include="Enums\Consistency.cs" />
+    <Compile Include="Enums\Replication.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="NamingConvention.cs" />
+    <Compile Include="Parameters\DeleteParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryResponse.cs" />
     <Compile Include="Search.cs" />

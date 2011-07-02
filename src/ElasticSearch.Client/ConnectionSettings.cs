@@ -38,6 +38,8 @@ namespace ElasticSearch.Client
 		}
 		public string DefaultIndex { get; private set; }
 		public int MaximumAsyncConnections { get; private set; }
+		public bool UsesPrettyRequests { get; private set; }
+		public Func<string,string> TypeNameInferrer { get; private set; }
 		
 		public ConnectionSettings(string host, int port) : this(host, port, 60000, null, null, null) { }
 		public ConnectionSettings(string host, int port, int timeout) : this (host, port, timeout, null, null, null) {}
@@ -78,6 +80,21 @@ namespace ElasticSearch.Client
 		public ConnectionSettings SetMaximumAsyncConnections(int maximum)
 		{
 			this.MaximumAsyncConnections = maximum;
+			return this;
+		}
+		public ConnectionSettings SetTypeNameInferrer(Func<string,string> inferrer)
+		{
+			this.TypeNameInferrer = inferrer;
+			return this;
+		}
+		public ConnectionSettings UsePrettyRequests()
+		{
+			this.UsesPrettyRequests = true;
+			return this;
+		}
+		public ConnectionSettings UsePrettyRequests(bool b)
+		{
+			this.UsesPrettyRequests = b;
 			return this;
 		}
 		

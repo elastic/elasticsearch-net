@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 using System.IO;
@@ -26,9 +23,8 @@ namespace ElasticSearch.Client
 		
 		public ConnectionStatus GetSync(string path)
 		{
-			var connection = this.CreateConnection(path);
+			var connection = this.CreateConnection(path, "GET");
 			connection.Timeout = this._ConnectionSettings.TimeOut;
-			connection.Method = "GET";
 			WebResponse response = null;
 			try
 			{
@@ -58,9 +54,8 @@ namespace ElasticSearch.Client
 		}
 		public ConnectionStatus PostSync(string path, string data)
 		{
-			var connection = this.CreateConnection(path);
+			var connection = this.CreateConnection(path, "POST");
 			connection.Timeout = this._ConnectionSettings.TimeOut;
-			connection.Method = "POST";
 			Stream postStream = null;
 			WebResponse response = null;
 			try
@@ -97,13 +92,56 @@ namespace ElasticSearch.Client
 					response.Close();
 			}
 		}
+
+        public ConnectionStatus DeleteSync(string path)
+        {
+            var connection = this.CreateConnection(path, "DELETE");
+            connection.Timeout = this._ConnectionSettings.TimeOut;
+            WebResponse response = null;
+            try
+            {
+                response = connection.GetResponse();
+                var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                response.Close();
+                return new ConnectionStatus(result);
+            }
+            catch (WebException e)
+            {
+                ConnectionError error;
+                if (e.Status == WebExceptionStatus.Timeout)
+                {
+                    error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
+                }
+                else
+                {
+                    error = new ConnectionError(e);
+                }
+                return new ConnectionStatus(error);
+            }
+            catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
+            finally
+            {
+                if (response != null)
+                    response.Close();
+            }
+        }
+
+        public void Delete(string path, Action<ConnectionStatus> callback)
+        {
+            ConnectionState state = new ConnectionState
+                                        {
+                                            Callback = callback,
+                                            Connection = this.CreateConnection(path, "DELETE")
+                                        };
+            this.BeginGetResponse(state);
+        }
 		
 		public void Get(string path, Action<ConnectionStatus> callback)
 		{
 			ConnectionState state = new ConnectionState()
 			{
 				Callback = callback,
-				Connection = this.CreateConnection(path)
+				Connection = this.CreateConnection(path, "GET")
 			};
 			this.BeginGetResponse(state);
 		}
@@ -131,13 +169,17 @@ namespace ElasticSearch.Client
 
 		private void _PutOrPost(string method, string path,string data, Action<ConnectionStatus> callback)
 		{
+		    if (method != "PUT" && method != "POST")
+		    {
+		        throw new ArgumentException("Valid values contain only PUT or POST", "method");
+		    }
+
 			ConnectionState state = new ConnectionState()
 			{
 				Callback = callback,
-				Connection = this.CreateConnection(path),
+				Connection = this.CreateConnection(path, method),
 				PostData = data
 			};
-			state.Connection.Method = method;
 
 			state.Connection.BeginGetRequestStream(this.PostStreamOpened, state);
 		}
@@ -270,14 +312,20 @@ namespace ElasticSearch.Client
 		}
 
 
-		private HttpWebRequest CreateConnection(string path)
+		private HttpWebRequest CreateConnection(string path, string method)
 		{
 			var url = this._CreateUriString(path);
+			if (this._ConnectionSettings.UsesPrettyRequests)
+			{
+				var uri = new Uri(url);
+				url += ((string.IsNullOrEmpty(uri.Query)) ? "?" : "&") + "pretty=true";
+			}
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 			myReq.Timeout = 1000 * 60; // 1 minute timeout.
 			myReq.ReadWriteTimeout = 1000 * 60; // 1 minute timeout.
+		    myReq.Method = method;
 			
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{

@@ -18,7 +18,8 @@ namespace ElasticSearch.Tests
 
 				this._settings = new ConnectionSettings(Test.Default.Host, Test.Default.Port)
 								.SetDefaultIndex(Test.Default.DefaultIndex)
-								.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections);
+								.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
+								.UsePrettyRequests();
 				return this._settings;
 			}
 		}

@@ -20,13 +20,9 @@ namespace HackerNews.Indexer
 		/// 
 		/// When run from debug make sure to change the default debug arguments.
 		/// <param name="args">Full filepath to hn_full_11-07-2010.xml</param>
-
-		private static SemaphoreSlim ResourceLock;
-
 		static void Main(string[] args)
 		{
 			var filePath = args.First();
-			Program.ResourceLock = new SemaphoreSlim(15);
 
 			var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
 										.SetDefaultIndex("mpdreamz")

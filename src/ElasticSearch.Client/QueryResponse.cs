@@ -15,12 +15,14 @@ namespace ElasticSearch.Client
 		{
 			this.IsValid = true;
 		}
-
-
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 		[JsonProperty(PropertyName = "hits")]
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
+
+		[JsonProperty(PropertyName = "facets")]
+		public FacetsMetaData Facets { get; internal set; }
+
 		[JsonProperty(PropertyName = "took")]
 		public int ElapsedMilliseconds { get; internal set; }
 
@@ -32,6 +34,15 @@ namespace ElasticSearch.Client
 				if (this.HitsMetaData == null)
 					return 0;
 				return this.HitsMetaData.Total;
+			}
+		}
+		public float MaxScore
+		{
+			get
+			{
+				if (this.HitsMetaData == null)
+					return 0;
+				return this.HitsMetaData.MaxScore;
 			}
 		}
 
@@ -50,7 +61,15 @@ namespace ElasticSearch.Client
 			}
 		}
 	}
-
+	[JsonObject]
+	public class IndicesResponse
+	{
+		[JsonProperty(PropertyName = "ok")]
+		public bool Success { get; private set; }
+		public ConnectionStatus ConnectionStatus { get; internal set; }
+		[JsonProperty(PropertyName = "_shards")]
+		public ShardsMetaData ShardsHit { get; private set; }
+	}
 	[JsonObject]
 	public class ShardsMetaData
 	{
@@ -84,6 +103,18 @@ namespace ElasticSearch.Client
 		public string Type { get; internal set; }
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }
+	}
+	[JsonObject]
+	public class FacetsMetaData
+	{
+		public Dictionary<string, List<Facet>> Facets { get; internal set; }
+	}
+	
+	public class Facet
+	{
+		public bool Global { get; internal set; }
+		public int Count { get; internal set; }
+		public string Key { get; internal set; }
 	}
 }
 

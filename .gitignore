@@ -73,3 +73,5 @@
 /src/ElasticSearch.Tests/bin
 /src/HackerNews.Indexer/bin
 /src/Nest.TestData/bin
+/src/ElasticSearch.NET.crunchsolution.local.xml
+/src/ElasticSearch.Tests/obj/Debug/ElasticSearch.Tests.csproj.FileListAbsolute.txt
