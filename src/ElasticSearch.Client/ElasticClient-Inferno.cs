@@ -46,23 +46,7 @@ namespace ElasticSearch.Client
 			//var type = typeof(T);
 			var typeName = this.InferTypeName<T>();
 			return this.CreatePathFor<T>(@object, index, typeName);
-			/*var path = this.createPath(index, typeName);
-
-			var idProperty = type.GetProperty("Id");
-			int? id = null;
-			string idString = string.Empty;
-			if (idProperty != null)
-			{
-				if (idProperty.PropertyType == typeof(int))
-					id = (int?)@object.TryGetPropertyValue("Id");
-				if (idProperty.PropertyType == typeof(string))
-					idString = (string)@object.TryGetPropertyValue("Id");
-				if (id.HasValue)
-					idString = id.Value.ToString();
-				if (!string.IsNullOrEmpty(idString))
-					path = this.createPath(index, typeName, idString);
-			}
-			return path;*/
+			
 		}
 		private string CreatePathFor<T>(T @object, string index, string type) where T : class
 		{
