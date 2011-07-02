@@ -46,6 +46,10 @@ namespace ElasticSearch.Client
 		private T Get<T>(string id, string path) where T : class
 		{
 			var response = this.Connection.GetSync(path + id);
+
+            if (response.Result == null) //a 404 is hit when there is an attempt to grab a non existant document by id, this causes the 'result' to be null
+                return null;
+
 			var o = JObject.Parse(response.Result);
 			var source = o["_source"];
 			if (source != null)
