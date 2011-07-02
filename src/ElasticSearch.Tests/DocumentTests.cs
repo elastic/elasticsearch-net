@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Xunit;
 using ElasticSearch.Client;
 using HackerNews.Indexer.Domain;
 using Nest.TestData;
 using Nest.TestData.Domain;
 using System.Threading;
+using NUnit.Framework;
 
 namespace ElasticSearch.Tests
 {
@@ -16,7 +16,7 @@ namespace ElasticSearch.Tests
     /// </summary>
     public class DocumentTests : BaseElasticSearchTests
     {
-        [Fact]
+        [Test]
         public void GetDocumentById()
         {
             //arrange
@@ -37,13 +37,13 @@ namespace ElasticSearch.Tests
 
             //assert
             //make sure that these are in fact the same documents
-            Assert.Equal(documentToFind.Country, foundDocument.Country);
-            Assert.Equal(documentToFind.Followers.Count, foundDocument.Followers.Count);
-            Assert.Equal(documentToFind.Id, foundDocument.Id);
-            Assert.Equal(documentToFind.Name, foundDocument.Name);
+            Assert.Equals(documentToFind.Country, foundDocument.Country);
+			Assert.Equals(documentToFind.Followers.Count, foundDocument.Followers.Count);
+			Assert.Equals(documentToFind.Id, foundDocument.Id);
+			Assert.Equals(documentToFind.Name, foundDocument.Name);
         }
 
-        [Fact]
+		[Test]
         public void IndexThanDeleteDocument()
         {
             //arrange
@@ -67,9 +67,9 @@ namespace ElasticSearch.Tests
             var foundDocument = this.ConnectedClient.Get<ElasticSearchProject>(newDocument.Id);
 
             //Assert.Equal(newDocument.Country, foundDocument.Country);
-            Assert.Equal(newDocument.Followers.Count, foundDocument.Followers.Count);
-            Assert.Equal(newDocument.Id, foundDocument.Id);
-            Assert.Equal(newDocument.Name, foundDocument.Name);
+			Assert.Equals(newDocument.Followers.Count, foundDocument.Followers.Count);
+			Assert.Equals(newDocument.Id, foundDocument.Id);
+			Assert.Equals(newDocument.Name, foundDocument.Name);
 
             //act
             //now remove the item that was added
