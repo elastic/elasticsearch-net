@@ -7,37 +7,9 @@ using AutoPoco;
 using Nest.TestData.Domain;
 using AutoPoco.DataSources;
 using AutoPoco.Configuration;
-using ElasticSearch.Client;
 
 namespace Nest.TestData
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			var client = CreateClient();
-			if (client.IsValid)
-			{
-				var projects = NestTestData.Data;
-				client.Index(projects);
-				client.Index(projects, TestData.Default.DefaultIndex + "_clone");
-
-			}
-
-			// Get a collection of users
-		}
-
-		public static ElasticClient CreateClient()
-		{
-			var settings = new ConnectionSettings(TestData.Default.Host, TestData.Default.Port)
-										.SetDefaultIndex(TestData.Default.DefaultIndex)
-										.SetMaximumAsyncConnections(TestData.Default.MaximumAsyncConnections);
-			return new ElasticClient(settings);
-		}
-
-
-	}
-
 	public static class NestTestData
 	{
 		private static IEnumerable<ElasticSearchProject> _Data { get; set; }

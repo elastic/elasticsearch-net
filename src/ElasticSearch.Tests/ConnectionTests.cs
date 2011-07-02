@@ -28,7 +28,7 @@ namespace ElasticSearch.Tests
 			Assert.True(status.Success);
 			Assert.Null(status.Error);
 		}
-        [Fact]
+		[Test]
         public void construct_client_with_null()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -36,7 +36,7 @@ namespace ElasticSearch.Tests
                 var client = new ElasticClient(null);
             });
         }
-        [Fact]
+		[Test]
         public void construct_client_with_null_or_empy_settings()
         {
             Assert.Throws<ArgumentNullException>(() =>
@@ -48,7 +48,7 @@ namespace ElasticSearch.Tests
                 var settings = new ConnectionSettings("   ", 80);
             });
         }
-        [Fact]
+		[Test]
         public void construct_client_with_invalid_hostname()
         {
             Assert.Throws<UriFormatException>(() =>
@@ -57,7 +57,7 @@ namespace ElasticSearch.Tests
             });
             
         }
-        [Fact]
+		[Test]
         public void connect_to_unknown_hostname()
         {
             Assert.DoesNotThrow(() =>

@@ -14,9 +14,21 @@ namespace ElasticSearch.Client
 			var path = this.CreatePathFor<T>(@object);
 		    return this._indexToPath(@object, path);
 		}
+		public ConnectionStatus Index<T>(T @object, IndexParameters indexParameters) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object);
+			path = this.AppendIndexPath(path, indexParameters);
+			return this._indexToPath(@object, path);
+		}
 		public ConnectionStatus Index<T>(T @object, string index) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index);
+			return this._indexToPath<T>(@object, path);
+		}
+		public ConnectionStatus Index<T>(T @object, string index, IndexParameters indexParameters) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index);
+			path = this.AppendIndexPath(path, indexParameters);
 			return this._indexToPath<T>(@object, path);
 		}
 		public ConnectionStatus Index<T>(T @object, string index, string type) where T : class
@@ -24,14 +36,33 @@ namespace ElasticSearch.Client
 			var path = this.CreatePathFor<T>(@object, index, type);
 			return this._indexToPath<T>(@object, path);
 		}
+		public ConnectionStatus Index<T>(T @object, string index, string type, IndexParameters indexParameters) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index, type);
+			path = this.AppendIndexPath(path, indexParameters);
+			return this._indexToPath<T>(@object, path);
+		}
+
 		public ConnectionStatus Index<T>(T @object, string index, string type, string id) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id);
 			return this._indexToPath<T>(@object, path);
 		}
+		public ConnectionStatus Index<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index, type, id);
+			path = this.AppendIndexPath(path, indexParameters);
+			return this._indexToPath<T>(@object, path);
+		}
 		public ConnectionStatus Index<T>(T @object, string index, string type, int id) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id.ToString());
+			return this._indexToPath<T>(@object, path);
+		}
+		public ConnectionStatus Index<T>(T @object, string index, string type, int id, IndexParameters indexParameters) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index, type, id.ToString());
+			path = this.AppendIndexPath(path, indexParameters);
 			return this._indexToPath<T>(@object, path);
 		}
 		
@@ -49,9 +80,21 @@ namespace ElasticSearch.Client
 			var path = this.CreatePathFor<T>(@object);
 			this._indexAsyncToPath(@object, path, (s)=>{});
 		}
+		public void IndexAsync<T>(T @object, IndexParameters indexParameters) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object);
+			path = this.AppendIndexPath(path, indexParameters);
+			this._indexAsyncToPath(@object, path, (s) => { });
+		}
 		public void IndexAsync<T>(T @object, Action<ConnectionStatus> continuation) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
+			this._indexAsyncToPath(@object, path, continuation);
+		}
+		public void IndexAsync<T>(T @object, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object);
+			path = this.AppendIndexPath(path, indexParameters);
 			this._indexAsyncToPath(@object, path, continuation);
 		}
 		public void IndexAsync<T>(T @object, string index, Action<ConnectionStatus> continuation) where T : class
@@ -59,9 +102,21 @@ namespace ElasticSearch.Client
 			var path = this.CreatePathFor<T>(@object, index);
 			this._indexAsyncToPath(@object, path, continuation);
 		}
+		public void IndexAsync<T>(T @object, string index, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index);
+			path = this.AppendIndexPath(path, indexParameters);
+			this._indexAsyncToPath(@object, path, continuation);
+		}
 		public void IndexAsync<T>(T @object, string index, string type, Action<ConnectionStatus> continuation) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type);
+			this._indexAsyncToPath(@object, path, continuation);
+		}
+		public void IndexAsync<T>(T @object, string index, string type, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index, type);
+			path = this.AppendIndexPath(path, indexParameters);
 			this._indexAsyncToPath(@object, path, continuation);
 		}
 		public void IndexAsync<T>(T @object, string index, string type, string id, Action<ConnectionStatus> continuation) where T : class
@@ -69,9 +124,21 @@ namespace ElasticSearch.Client
 			var path = this.CreatePathFor<T>(@object, index, type, id);
 			this._indexAsyncToPath(@object, path, continuation);
 		}
+		public void IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index, type, id);
+			path = this.AppendIndexPath(path, indexParameters);
+			this._indexAsyncToPath(@object, path, continuation);
+		}
 		public void IndexAsync<T>(T @object, string index, string type, int id, Action<ConnectionStatus> continuation) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id.ToString());
+			this._indexAsyncToPath(@object, path, continuation);
+		}
+		public void IndexAsync<T>(T @object, string index, string type, int id, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var path = this.CreatePathFor<T>(@object, index, type, id.ToString());
+			path = this.AppendIndexPath(path, indexParameters);
 			this._indexAsyncToPath(@object, path, continuation);
 		}
 		

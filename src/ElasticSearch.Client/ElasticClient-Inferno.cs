@@ -217,6 +217,38 @@ namespace ElasticSearch.Client
 			path += "?" + string.Join("&", parameters);
 			return path;
 		}
+		private string AppendIndexPath(string path, IndexParameters indexParameters)
+		{
+			if (indexParameters == null)
+				return path;
+
+			var parameters = new List<string>();
+
+			if (!indexParameters.Version.IsNullOrEmpty())
+				parameters.Add("version=" + indexParameters.Version);
+			if (!indexParameters.Routing.IsNullOrEmpty())
+				parameters.Add("routing=" + indexParameters.Routing);
+			if (!indexParameters.Parent.IsNullOrEmpty())
+				parameters.Add("parent=" + indexParameters.Parent);
+			if (!indexParameters.Timeout.IsNullOrEmpty())
+				parameters.Add("parent=" + indexParameters.Timeout);
+
+			if (indexParameters.VersionType != VersionType.Internal) //internal == default
+				parameters.Add("version_type=" + indexParameters.VersionType.ToString().ToLower());
+
+
+			if (indexParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + indexParameters.Replication.ToString().ToLower());
+
+			if (indexParameters.Consistency != Consistency.Quorum) //sync == default
+				parameters.Add("consistency=" + indexParameters.Consistency.ToString().ToLower());
+
+			if (indexParameters.Refresh) //sync == default
+				parameters.Add("refresh=true");
+
+			path += "?" + string.Join("&", parameters);
+			return path;
+		}
 
 	}
 }

@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ElasticSearch.Client;
+using Nest.TestData;
+using Nest.TestData.Domain;
+using NUnit.Framework;
 
 namespace ElasticSearch.Tests
 {
+	[TestFixture]
 	public class BaseElasticSearchTests
 	{
+		[TestFixtureSetUp]
+		protected void Initialize()
+		{
+			this.ResetIndexes();
+		}
+
 		private IConnectionSettings _settings;
 		protected IConnectionSettings Settings
 		{
@@ -43,6 +53,20 @@ namespace ElasticSearch.Tests
 		protected ElasticClient CreateClient()
 		{
 			return new ElasticClient(this.Settings);
+		}
+		protected void ResetIndexes()
+		{
+			var client = CreateClient();
+			if (client.IsValid)
+			{
+				var projects = NestTestData.Data;
+				var cloneIndex = Test.Default.DefaultIndex + "_clone";
+				client.DeleteMapping<ElasticSearchProject>();
+				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
+				client.Index(projects);
+				client.Index(projects, cloneIndex);
+
+			}
 		}
 
 	}
