@@ -43,6 +43,11 @@ namespace ElasticSearch.Client
 		public ConnectionSettings(string host, int port, int timeout) : this (host, port, timeout, null, null, null) {}
 		public ConnectionSettings(string host, int port, int timeout, string proxyAddress, string username, string password)
 		{
+            host.ThrowIfNullOrEmpty("host");
+
+            var uri = new Uri("http://" + host + ":" + port);
+
+
 			this._host = host;
 			this._password = password;
 			this._username = username;

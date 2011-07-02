@@ -57,7 +57,7 @@ namespace ElasticSearch.Client
 			}
 			catch (Exception e)
 			{
-				status = new ConnectionStatus(e);
+                status = new ConnectionStatus(e);
 			}
 			return false;
 
@@ -69,6 +69,9 @@ namespace ElasticSearch.Client
 		
 		public ElasticClient(IConnectionSettings settings)
 		{
+            if (settings == null)
+                throw new ArgumentNullException("settings");
+
 			this.Settings = settings;
 			this.Connection = new Connection(settings);
 			this.SerializationSettings = new JsonSerializerSettings()
@@ -99,23 +102,31 @@ namespace ElasticSearch.Client
 
 		private ConnectionStatus GetNodeInfo()
 		{
-			var response = this.Connection.GetSync("");
-			if (response.Success)
-			{
-				JObject o = JObject.Parse(response.Result);
-				if (o["ok"] == null)
-				{
-					this._IsValid = false;
-					return response;
-				}
-				
-				this._IsValid = (bool)o["ok"];
-				
-				JObject version = o["version"] as JObject;
-				this._VersionInfo = JsonConvert.DeserializeObject<ElasticSearchVersionInfo>(version.ToString());
-				
-				this._gotNodeInfo = true;
-			}
+            ConnectionStatus response = null;
+            try
+            {
+                response = this.Connection.GetSync("");
+                if (response.Success)
+                {
+                    JObject o = JObject.Parse(response.Result);
+                    if (o["ok"] == null)
+                    {
+                        this._IsValid = false;
+                        return response;
+                    }
+
+                    this._IsValid = (bool)o["ok"];
+
+                    JObject version = o["version"] as JObject;
+                    this._VersionInfo = JsonConvert.DeserializeObject<ElasticSearchVersionInfo>(version.ToString());
+
+                    this._gotNodeInfo = true;
+                }
+            }
+            catch 
+            {
+                this._IsValid = false;
+            }
 			return response;
 		}
 		

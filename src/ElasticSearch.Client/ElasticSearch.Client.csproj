@@ -106,6 +106,7 @@
     <Compile Include="ElasticSearchJsonResolver.cs" />
     <Compile Include="ElasticSearchVersionInfo.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="Inflector.cs" />

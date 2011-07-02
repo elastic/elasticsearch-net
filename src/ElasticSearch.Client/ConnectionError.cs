@@ -19,8 +19,7 @@ namespace ElasticSearch.Client
 	public class ConnectionError
 	{
 		public ConnectionErrorType Type { get; set; }
-		public HttpStatusCode HttpStatusCode { get; set; }
-		public string Message { get; set; }
+        public HttpStatusCode HttpStatusCode { get; set; }
 		public string ExceptionMessage { get; set; }
 		public Exception OriginalException { get; set; }
 
@@ -34,16 +33,24 @@ namespace ElasticSearch.Client
 			if (webException != null)
 			{
 				this.Type = ConnectionErrorType.Server;
-				this.HttpStatusCode = ((HttpWebResponse)webException.Response).StatusCode;
-				using (var responseStream = ((HttpWebResponse)webException.Response).GetResponseStream())
-				using (var reader = new StreamReader(responseStream, true))
-				{
-					var response = reader.ReadToEnd();
-					var x = new { Error = ""};
-					x = JsonConvert.DeserializeAnonymousType(response, x);
-					this.Message = x.Error;
+                var response = ((HttpWebResponse)webException.Response);
+                if (response == null)
+                {
+                    this.Type = ConnectionErrorType.Client;
+                }
+                else
+                {
+                    this.HttpStatusCode = response.StatusCode;
+                    using (var responseStream = response.GetResponseStream())
+                    using (var reader = new StreamReader(responseStream, true))
+                    {
+                        var responseString = reader.ReadToEnd();
+                        var x = new { Error = "" };
+                        x = JsonConvert.DeserializeAnonymousType(responseString, x);
+                        this.ExceptionMessage = x.Error;
 
-				}
+                    }
+                }
 
 			}
 
