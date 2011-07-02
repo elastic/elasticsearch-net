@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using ElasticSearch.Client.DSL;
@@ -11,16 +9,11 @@ namespace ElasticSearch.Client
 {
 	public class DynamicContractResolver : DefaultContractResolver
 	{
-		public DynamicContractResolver()
-		{
-		}
-
-		protected override IList<JsonProperty> CreateProperties(JsonObjectContract contract)
-		{
-			IList<JsonProperty> properties = base.CreateProperties(contract);
-
-			return properties;
-		}
+	    protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+	    {
+	        var contract = new JsonObjectContract(type);
+	        return base.CreateProperties(contract.CreatedType, contract.MemberSerialization);
+	    }
 	}
 
 	public class FacetsMetaDataConverter : JsonConverter
@@ -54,6 +47,7 @@ namespace ElasticSearch.Client
 
 	public class QueryJsonConverter : JsonConverter
 	{
+
 		public override bool CanConvert(Type objectType)
 		{
 			return typeof(IFieldQuery).IsAssignableFrom(objectType);

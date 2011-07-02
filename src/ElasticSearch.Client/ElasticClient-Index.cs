@@ -22,17 +22,17 @@ namespace ElasticSearch.Client
 		public ConnectionStatus Index<T>(T @object, string index, string type) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type);
-			return this.Index<T>(@object, path);
+			return this._indexToPath<T>(@object, path);
 		}
 		public ConnectionStatus Index<T>(T @object, string index, string type, string id) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id);
-			return this.Index<T>(@object, path);
+			return this._indexToPath<T>(@object, path);
 		}
 		public ConnectionStatus Index<T>(T @object, string index, string type, int id) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id.ToString());
-			return this.Index<T>(@object, path);
+			return this._indexToPath<T>(@object, path);
 		}
 		
 		private ConnectionStatus _indexToPath<T>(T @object, string path) where T : class

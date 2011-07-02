@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ElasticSearch.Client.Thrift;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Fasterflect;
-using ElasticSearch;
-using Newtonsoft.Json.Converters;
-using ElasticSearch.Client.DSL;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
-using System.Reflection;
 using System.Globalization;
 
 namespace ElasticSearch.Client
@@ -55,10 +43,10 @@ namespace ElasticSearch.Client
 		}
 		private string CreatePathFor<T>(T @object, string index) where T : class
 		{
-			var type = typeof(T);
+			//var type = typeof(T);
 			var typeName = this.InferTypeName<T>();
 			return this.CreatePathFor<T>(@object, index, typeName);
-			var path = this.createPath(index, typeName);
+			/*var path = this.createPath(index, typeName);
 
 			var idProperty = type.GetProperty("Id");
 			int? id = null;
@@ -74,7 +62,7 @@ namespace ElasticSearch.Client
 				if (!string.IsNullOrEmpty(idString))
 					path = this.createPath(index, typeName, idString);
 			}
-			return path;
+			return path;*/
 		}
 		private string CreatePathFor<T>(T @object, string index, string type) where T : class
 		{
