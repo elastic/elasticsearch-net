@@ -42,7 +42,7 @@ namespace ElasticSearch.Tests
         }
 
 		[Test]
-        public void IndexThanDeleteDocument()
+        public void IndexThanDeleteDocumentById()
         {
             //arrange
             //create a new document to index
@@ -58,7 +58,7 @@ namespace ElasticSearch.Tests
             //index the new item
             this.ConnectedClient.Index<ElasticSearchProject>(newDocument);
 
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
 
             //assert
             //grab document back from the index and make sure it is the same document
@@ -71,9 +71,9 @@ namespace ElasticSearch.Tests
 
             //act
             //now remove the item that was added
-            this.ConnectedClient.Delete<ElasticSearchProject>(newDocument.Id);
+            this.ConnectedClient.DeleteById<ElasticSearchProject>(newDocument.Id);
 
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
 
             //assert
             //make sure getting by id returns nothing
@@ -97,7 +97,7 @@ namespace ElasticSearch.Tests
 			//index the new item
 			this.ConnectedClient.Index<ElasticSearchProject>(newDocument);
 
-			Thread.Sleep(3000);
+			Thread.Sleep(1000);
 
 			//assert
 			//grab document back from the index and make sure it is the same document
@@ -112,12 +112,51 @@ namespace ElasticSearch.Tests
 			//now remove the item that was added
 			this.ConnectedClient.Delete(newDocument);
 
-			Thread.Sleep(3000);
+			Thread.Sleep(1000);
 
 			//assert
 			//make sure getting by id returns nothing
 			foundDocument = this.ConnectedClient.Get<ElasticSearchProject>(newDocument.Id);
 			Assert.Null(foundDocument);
 		}
+
+		[Test]
+		public void IndexThenDeleteUsingRefresh()
+		{
+			//arrange
+			//create a new document to index
+			ElasticSearchProject newDocument = new ElasticSearchProject
+			{
+				Country = "Mozambique",
+				Followers = new List<Person>(),
+				Id = DateTime.Now.Millisecond + 1500, //try to get this example out of the way of existing test data
+				Name = "Test Document for 'IndexDocument' test"
+			};
+
+			//act
+			//index the new item
+			this.ConnectedClient.Index<ElasticSearchProject>(newDocument);
+
+			Thread.Sleep(1000);
+
+			//assert
+			//grab document back from the index and make sure it is the same document
+			var foundDocument = this.ConnectedClient.Get<ElasticSearchProject>(newDocument.Id);
+
+			//Assert.Equal(newDocument.Country, foundDocument.Country);
+			Assert.AreEqual(newDocument.Followers.Count, foundDocument.Followers.Count);
+			Assert.AreEqual(newDocument.Id, foundDocument.Id);
+			Assert.AreEqual(newDocument.Name, foundDocument.Name);
+
+			//act
+			//now remove the item that was added
+			this.ConnectedClient.Delete(newDocument, new DeleteParameters() { Refresh = true });
+
+			//assert
+			//make sure getting by id returns nothing
+			foundDocument = this.ConnectedClient.Get<ElasticSearchProject>(newDocument.Id);
+			Assert.Null(foundDocument);
+		}
+
     }
 }

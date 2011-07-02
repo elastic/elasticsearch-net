@@ -2,6 +2,7 @@
 using Fasterflect;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace ElasticSearch.Client
 {
@@ -54,11 +55,11 @@ namespace ElasticSearch.Client
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 
-			var path = this.createPath(index, type);
+			var path = this.CreatePath(index, type);
 
 			var id = this.GetIdFor<T>(@object);
 			if (!string.IsNullOrEmpty(id))
-				path = this.createPath(index, type, id);
+				path = this.CreatePath(index, type, id);
 
 			return path;
 
@@ -69,7 +70,7 @@ namespace ElasticSearch.Client
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 
-			return this.createPath(index, type, id);
+			return this.CreatePath(index, type, id);
 		}
 
 		private string GetIdFor<T>(T @object)
@@ -102,13 +103,43 @@ namespace ElasticSearch.Client
 			return typeName;
 		}
 
-		private string createPath(string index, string type)
+		private string CreatePath(string index, string type)
 		{
 			return "{0}/{1}/".F(index, type);
 		}
-		private string createPath(string index, string type, string id)
+		private string CreatePath(string index, string type, string id)
 		{
 			return "{0}/{1}/{2}".F(index, type, id);
+		}
+
+
+
+
+		private string AppendToDeletePath(string path, DeleteParameters deleteParameters)
+		{
+			if (deleteParameters == null)
+				return path;
+
+			var parameters = new List<string>();
+			
+			if (!deleteParameters.Version.IsNullOrEmpty())
+				parameters.Add("version="+ deleteParameters.Version);
+			if (!deleteParameters.Routing.IsNullOrEmpty())
+				parameters.Add("routing=" + deleteParameters.Routing);
+			if (!deleteParameters.Parent.IsNullOrEmpty())
+				parameters.Add("parent=" + deleteParameters.Parent);
+
+			if (deleteParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + deleteParameters.Replication.ToString().ToLower());
+
+			if (deleteParameters.Consistency != Consistency.Quorum) //sync == default
+				parameters.Add("consistency=" + deleteParameters.Consistency.ToString().ToLower());
+
+			if (deleteParameters.Refresh) //sync == default
+				parameters.Add("refresh=true");
+
+			path += "?" + string.Join("&", parameters);
+			return path;
 		}
 
 	}

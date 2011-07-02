@@ -65,7 +65,7 @@ namespace ElasticSearch.Client
         public IndicesResponse DeleteMapping<T>() where T : class
         {
             var type = this.InferTypeName<T>();
-            var path = this.createPath(this.Settings.DefaultIndex, type);
+            var path = this.CreatePath(this.Settings.DefaultIndex, type);
             var status = this.Connection.DeleteSync(path);
 
             var response = new IndicesResponse();

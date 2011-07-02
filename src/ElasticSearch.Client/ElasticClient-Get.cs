@@ -31,7 +31,7 @@ namespace ElasticSearch.Client
 
 			var typeName = this.InferTypeName<T>();
 		
-			return this.Get<T>(id, this.createPath(index, typeName));
+			return this.Get<T>(id, this.CreatePath(index, typeName));
 
 
 		}

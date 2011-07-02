@@ -111,11 +111,14 @@
     <Compile Include="ElasticQuery.cs" />
     <Compile Include="ElasticSearchJsonResolver.cs" />
     <Compile Include="ElasticSearchVersionInfo.cs" />
+    <Compile Include="Enums\Consistency.cs" />
+    <Compile Include="Enums\Replication.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="Inflector.cs" />
     <Compile Include="NamingConvention.cs" />
+    <Compile Include="Parameters\DeleteParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryResponse.cs" />
     <Compile Include="Search.cs" />

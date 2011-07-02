@@ -26,7 +26,7 @@ namespace ElasticSearch.Client
 
 			var type = typeof(T);
 			var typeName = this.InferTypeName<T>();
-			string path = this.createPath(index, typeName) + "_search";
+			string path = this.CreatePath(index, typeName) + "_search";
 
 			var status = this.Connection.PostSync(path, query);
 			if (status.Error != null)
