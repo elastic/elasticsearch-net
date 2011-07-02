@@ -95,7 +95,7 @@ namespace ElasticSearch.Tests
 
 			//act
 			//index the new item
-			this.ConnectedClient.Index<ElasticSearchProject>(newDocument);
+			this.ConnectedClient.Index(newDocument);
 
 			Thread.Sleep(1000);
 
@@ -135,7 +135,7 @@ namespace ElasticSearch.Tests
 
 			//act
 			//index the new item
-			this.ConnectedClient.Index<ElasticSearchProject>(newDocument);
+			this.ConnectedClient.Index(newDocument);
 
 			Thread.Sleep(1000);
 
@@ -157,6 +157,21 @@ namespace ElasticSearch.Tests
 			foundDocument = this.ConnectedClient.Get<ElasticSearchProject>(newDocument.Id);
 			Assert.Null(foundDocument);
 		}
+		[Test]
+		public void RemoveAllByPassingAsIEnumerable()
+		{
+			
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(
+					@" { ""query"" : {
+						    ""match_all"" : { }
+					} }"
+			);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			Assert.Greater(result.Documents.Count(), 0);
 
+			this.ConnectedClient.Delete(result.Documents);
+		
+		}
     }
 }

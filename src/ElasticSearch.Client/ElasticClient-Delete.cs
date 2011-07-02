@@ -7,8 +7,7 @@ namespace ElasticSearch.Client
 {
     public partial class ElasticClient
     {
-
-		//Passing Object
+		#region Delete by passing an object
 		public ConnectionStatus Delete<T>(T @object) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
@@ -43,7 +42,6 @@ namespace ElasticSearch.Client
 			return this._deleteToPath(path);
 		}
 
-		//Passing object async
 		public void DeleteAsync<T>(T @object, Action<ConnectionStatus> callback) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
@@ -77,8 +75,9 @@ namespace ElasticSearch.Client
 			path = this.AppendToDeletePath(path, deleteParameters);
 			this._deleteToPathAsync(path, callback);
 		}
+		#endregion
 
-		//Passing id only
+		#region Delete by passing an id
 		public ConnectionStatus DeleteById<T>(int id) where T : class
         {
 			return this.DeleteById<T>(id.ToString());
@@ -191,9 +190,17 @@ namespace ElasticSearch.Client
 			this._deleteToPathAsync(path, callback);
 		}
 
+		#endregion
+
+		#region Delete by passing an IEnumerable of objects
+		public ConnectionStatus Delete<T>(IEnumerable<T> @objects) where T : class
+		{
+			var json = this.GenerateBulkDeleteCommand(@objects);
+			return this.Connection.PostSync("_bulk", json);
+		}
 
 
-
+		#endregion
 
 		private ConnectionStatus _deleteToPath(string path)
 		{

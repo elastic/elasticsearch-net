@@ -3,6 +3,9 @@ using Fasterflect;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace ElasticSearch.Client
 {
@@ -112,7 +115,80 @@ namespace ElasticSearch.Client
 			return "{0}/{1}/{2}".F(index, type, id);
 		}
 
+		private string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, "index");
+		}
+		private string GenerateBulkIndexCommand<T>(IEnumerable<T> objects, string index) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, "index");
+		}
+		private string GenerateBulkIndexCommand<T>(IEnumerable<T> @objects, string index, string typeName) where T : class 
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, typeName, "index");
+		}
 
+		private string GenerateBulkDeleteCommand<T>(IEnumerable<T> objects) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, "delete");
+		}
+		private string GenerateBulkDeleteCommand<T>(IEnumerable<T> objects, string index) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, "delete");
+		}
+		private string GenerateBulkDeleteCommand<T>(IEnumerable<T> @objects, string index, string typeName) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, typeName, "delete");
+		}
+
+		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string command) where T : class
+		{
+			objects.ThrowIfNull("objects");
+
+			var index = this.Settings.DefaultIndex;
+			if (string.IsNullOrEmpty(index))
+				throw new NullReferenceException("Cannot infer default index for current connection.");
+
+			return this.GenerateBulkIndexCommand<T>(objects, index, command);
+		}
+		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string index, string command) where T : class
+		{
+			objects.ThrowIfNull("objects");
+			index.ThrowIfNullOrEmpty("index");
+
+			var type = typeof(T);
+			var typeName = this.InferTypeName<T>();
+
+			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
+		}
+		private string GenerateBulkCommand<T>(IEnumerable<T> @objects, string index, string typeName, string command) where T : class
+		{
+			if (!@objects.Any())
+				return null;
+
+			var idSelector = this.CreateIdSelector<T>();
+
+
+			var sb = new StringBuilder();
+			var action = "{{ \"" + command + "\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}\n";
+
+			//if we can't reflect id let ES create one.
+			if (idSelector == null)
+				action = "{{ \"" + command + "\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\" }} }}\n".F(index, typeName);
+
+			foreach (var @object in objects)
+			{
+				string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
+				if (idSelector == null)
+					sb.Append(action);
+				else
+					sb.Append(action.F(index, typeName, idSelector(@object)));
+				sb.Append(jsonCommand + "\n");
+			}
+			var json = sb.ToString();
+			return json;
+		}
+	
 
 
 		private string AppendToDeletePath(string path, DeleteParameters deleteParameters)

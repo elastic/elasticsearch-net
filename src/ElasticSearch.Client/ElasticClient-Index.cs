@@ -83,89 +83,43 @@ namespace ElasticSearch.Client
 
 		public ConnectionStatus Index<T>(IEnumerable<T> objects) where T : class
 		{
-			var json = this.GenerateBulkCommand(@objects);
+			var json = this.GenerateBulkIndexCommand(@objects);
 			return this.Connection.PostSync("_bulk", json);
 		}
 		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index) where T : class
 		{
-			var json = this.GenerateBulkCommand(@objects, index);
+			var json = this.GenerateBulkIndexCommand(@objects, index);
 			return this.Connection.PostSync("_bulk", json);
 		}
 		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
-			var json = this.GenerateBulkCommand(@objects, index, type);
+			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			return this.Connection.PostSync("_bulk", json);
 		}
 
 
 		public void IndexAsync<T>(IEnumerable<T> objects) where T : class
 		{
-			var json = this.GenerateBulkCommand(@objects);
+			var json = this.GenerateBulkIndexCommand(@objects);
 			this.Connection.Post("_bulk", json, null);
 		}
 		public void IndexAsync<T>(IEnumerable<T> objects, Action<ConnectionStatus> continuation) where T : class
 		{
-			var json = this.GenerateBulkCommand(@objects);
+			var json = this.GenerateBulkIndexCommand(@objects);
 			this.Connection.Post("_bulk", json, continuation);
 		}
 		public void IndexAsync<T>(IEnumerable<T> objects, string index, Action<ConnectionStatus> continuation) where T : class
 		{
-			var json = this.GenerateBulkCommand(@objects, index);
+			var json = this.GenerateBulkIndexCommand(@objects, index);
 			this.Connection.Post("_bulk", json, continuation);
 		}
 		public void IndexAsync<T>(IEnumerable<T> objects, string index, string type, Action<ConnectionStatus> continuation) where T : class
 		{
-			var json = this.GenerateBulkCommand(@objects, index, type);
+			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			this.Connection.Post("_bulk", json, continuation);
 		}
 		
-		private string GenerateBulkCommand<T>(IEnumerable<T> objects) where T : class
-		{
-			objects.ThrowIfNull("objects");
-
-			var index = this.Settings.DefaultIndex;
-			if (string.IsNullOrEmpty(index))
-				throw new NullReferenceException("Cannot infer default index for current connection.");
-
-			return this.GenerateBulkCommand<T>(objects, index);
-		}
-		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string index) where T : class
-		{
-			objects.ThrowIfNull("objects");
-			index.ThrowIfNullOrEmpty("index");
-
-			var type = typeof(T);
-			var typeName = this.InferTypeName<T>();
-
-			return this.GenerateBulkCommand<T>(objects, index, typeName);
-		}
-		private string GenerateBulkCommand<T>(IEnumerable<T> @objects, string index, string typeName) where T : class 
-		{
-			if (@objects.Count() == 0)
-				return null;
-			
-			var idSelector = this.CreateIdSelector<T>();
-			
-
-			var sb = new StringBuilder();
-			var command = "{{ \"index\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}\n";
-
-			//if we can't reflect id let ES create one.
-			if (idSelector == null)
-				command = "{{ \"index\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\" }} }}\n".F(index, typeName);
-
-			foreach (var @object in objects)
-			{
-				string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
-				if (idSelector == null)
-					sb.Append(command);
-				else
-					sb.Append(command.F(index, typeName, idSelector(@object)));
-				sb.Append(jsonCommand + "\n");
-			}
-			var json = sb.ToString();
-			return json;
-		}
 
 	}
+	
 }
