@@ -5,8 +5,7 @@ using System.Text;
 
 namespace ElasticSearch.Client
 {
-	public class DeleteParameters : BaseParameters
+	public class BulkParameters : BaseParameters
 	{
-		
 	}
 }

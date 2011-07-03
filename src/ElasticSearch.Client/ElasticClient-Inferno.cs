@@ -189,65 +189,48 @@ namespace ElasticSearch.Client
 			return json;
 		}
 	
-
-
-		private string AppendToDeletePath(string path, DeleteParameters deleteParameters)
+		private string AppendParametersToPath(string path, IUrlParameters urlParameters)
 		{
-			if (deleteParameters == null)
+			if (urlParameters == null)
 				return path;
 
 			var parameters = new List<string>();
-			
-			if (!deleteParameters.Version.IsNullOrEmpty())
-				parameters.Add("version="+ deleteParameters.Version);
-			if (!deleteParameters.Routing.IsNullOrEmpty())
-				parameters.Add("routing=" + deleteParameters.Routing);
-			if (!deleteParameters.Parent.IsNullOrEmpty())
-				parameters.Add("parent=" + deleteParameters.Parent);
 
-			if (deleteParameters.Replication != Replication.Sync) //sync == default
-				parameters.Add("replication=" + deleteParameters.Replication.ToString().ToLower());
+			if (!urlParameters.Version.IsNullOrEmpty())
+				parameters.Add("version=" + urlParameters.Version);
+			if (!urlParameters.Routing.IsNullOrEmpty())
+				parameters.Add("routing=" + urlParameters.Routing);
+			if (!urlParameters.Parent.IsNullOrEmpty())
+				parameters.Add("parent=" + urlParameters.Parent);
 
-			if (deleteParameters.Consistency != Consistency.Quorum) //sync == default
-				parameters.Add("consistency=" + deleteParameters.Consistency.ToString().ToLower());
+			if (urlParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
-			if (deleteParameters.Refresh) //sync == default
+			if (urlParameters.Consistency != Consistency.Quorum) //sync == default
+				parameters.Add("consistency=" + urlParameters.Consistency.ToString().ToLower());
+
+			if (urlParameters.Refresh) //sync == default
 				parameters.Add("refresh=true");
+
+			if (urlParameters is IndexParameters)
+				this.AppendIndexParameters(parameters, (IndexParameters)urlParameters);
 
 			path += "?" + string.Join("&", parameters);
 			return path;
 		}
-		private string AppendIndexPath(string path, IndexParameters indexParameters)
+
+		private List<string> AppendIndexParameters(List<string> parameters, IndexParameters indexParameters)
 		{
 			if (indexParameters == null)
-				return path;
+				return parameters;
 
-			var parameters = new List<string>();
-
-			if (!indexParameters.Version.IsNullOrEmpty())
-				parameters.Add("version=" + indexParameters.Version);
-			if (!indexParameters.Routing.IsNullOrEmpty())
-				parameters.Add("routing=" + indexParameters.Routing);
-			if (!indexParameters.Parent.IsNullOrEmpty())
-				parameters.Add("parent=" + indexParameters.Parent);
 			if (!indexParameters.Timeout.IsNullOrEmpty())
-				parameters.Add("parent=" + indexParameters.Timeout);
+				parameters.Add("timeout=" + indexParameters.Timeout);
 
 			if (indexParameters.VersionType != VersionType.Internal) //internal == default
 				parameters.Add("version_type=" + indexParameters.VersionType.ToString().ToLower());
 
-
-			if (indexParameters.Replication != Replication.Sync) //sync == default
-				parameters.Add("replication=" + indexParameters.Replication.ToString().ToLower());
-
-			if (indexParameters.Consistency != Consistency.Quorum) //sync == default
-				parameters.Add("consistency=" + indexParameters.Consistency.ToString().ToLower());
-
-			if (indexParameters.Refresh) //sync == default
-				parameters.Add("refresh=true");
-
-			path += "?" + string.Join("&", parameters);
-			return path;
+			return parameters;
 		}
 
 	}

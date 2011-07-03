@@ -26,19 +26,19 @@ namespace ElasticSearch.Client
 		public ConnectionStatus Delete<T>(T @object, DeleteParameters deleteParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 		public ConnectionStatus Delete<T>(T @object, string index, DeleteParameters deleteParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 		public ConnectionStatus Delete<T>(T @object, string index, string type, DeleteParameters deleteParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 
@@ -60,19 +60,19 @@ namespace ElasticSearch.Client
 		public void DeleteAsync<T>(T @object, DeleteParameters deleteParameters, Action<ConnectionStatus> callback) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			this._deleteToPathAsync(path, callback);
 		}
 		public void DeleteAsync<T>(T @object, string index, DeleteParameters deleteParameters, Action<ConnectionStatus> callback) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			this._deleteToPathAsync(path, callback);
 		}
 		public void DeleteAsync<T>(T @object, string index, string type, DeleteParameters deleteParameters, Action<ConnectionStatus> callback) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			this._deleteToPathAsync(path, callback);
 		}
 		#endregion
@@ -116,20 +116,20 @@ namespace ElasticSearch.Client
 
 			var typeName = this.InferTypeName<T>();
 			var path = this.CreatePath(index, typeName, id);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 		public ConnectionStatus DeleteById<T>(string index, string type, string id, DeleteParameters deleteParameters) where T : class
 		{
 			var path = this.CreatePath(index, type, id);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 
 		public ConnectionStatus DeleteById<T>(string index, string type, int id, DeleteParameters deleteParameters) where T : class
 		{
 			var path = this.CreatePath(index, type, id.ToString());
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 
@@ -173,20 +173,20 @@ namespace ElasticSearch.Client
 
 			var typeName = this.InferTypeName<T>();
 			var path = this.CreatePath(index, typeName, id);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			this._deleteToPathAsync(path, callback);
 		}
 		public void DeleteByIdAsync<T>(string index, string type, string id, DeleteParameters deleteParameters, Action<ConnectionStatus> callback) where T : class
 		{
 			var path = this.CreatePath(index, type, id);
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			this._deleteToPathAsync(path, callback);
 		}
 
 		public void DeleteByIdAsync<T>(string index, string type, int id, DeleteParameters deleteParameters, Action<ConnectionStatus> callback) where T : class
 		{
 			var path = this.CreatePath(index, type, id.ToString());
-			path = this.AppendToDeletePath(path, deleteParameters);
+			path = this.AppendParametersToPath(path, deleteParameters);
 			this._deleteToPathAsync(path, callback);
 		}
 

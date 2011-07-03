@@ -75,3 +75,8 @@
 /src/Nest.TestData/bin
 /src/ElasticSearch.NET.crunchsolution.local.xml
 /src/ElasticSearch.Tests/obj/Debug/ElasticSearch.Tests.csproj.FileListAbsolute.txt
+/src/ElasticSearch.Client/ElasticSearch.Client.crunchproject.local.xml
+/src/ElasticSearch.ConsolePlayground/ElasticSearch.ConsolePlayground.crunchproject.local.xml
+/src/ElasticSearch.Tests/ElasticSearch.Tests.crunchproject.local.xml
+/src/HackerNews.Indexer/HackerNews.Indexer.crunchproject.local.xml
+/src/Nest.TestData/Nest.TestData.crunchproject.local.xml
