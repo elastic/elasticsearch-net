@@ -105,7 +105,10 @@ namespace ElasticSearch.Client
 				typeName = Inflector.MakePlural(type.Name).ToLower();
 			return typeName;
 		}
-
+		private string CreatePath(string index)
+		{
+			return "{0}/".F(index);
+		}
 		private string CreatePath(string index, string type)
 		{
 			return "{0}/{1}/".F(index, type);
@@ -293,7 +296,25 @@ namespace ElasticSearch.Client
 			path += "?" + string.Join("&", parameters.ToArray());
 			return path;
 		}
+		private string AppendDeleteByQueryParametersToPath(string path, DeleteByQueryParameters urlParameters)
+		{
+			if (urlParameters == null)
+				return path;
 
+			var parameters = new List<string>();
+
+			if (urlParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
+
+			if (urlParameters.Consistency != Consistency.Quorum) //quorum == default
+				parameters.Add("consistency=" + urlParameters.Replication.ToString().ToLower());
+
+			if (!urlParameters.Routing.IsNullOrEmpty()) 
+				parameters.Add("routing=" + urlParameters.Routing);
+
+			path += "?" + string.Join("&", parameters.ToArray());
+			return path;
+		}
 		private string AppendParametersToPath(string path, IUrlParameters urlParameters)
 		{
 			if (urlParameters == null)

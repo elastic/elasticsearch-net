@@ -122,6 +122,7 @@
     <Compile Include="NamingConvention.cs" />
     <Compile Include="Parameters\BulkParameters.cs" />
     <Compile Include="Parameters\BaseParameters.cs" />
+    <Compile Include="Parameters\DeleteByQueryParameters.cs" />
     <Compile Include="Parameters\DeleteParameters.cs" />
     <Compile Include="Parameters\IndexParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

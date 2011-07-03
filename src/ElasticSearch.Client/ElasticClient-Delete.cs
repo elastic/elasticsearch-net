@@ -361,51 +361,196 @@ namespace ElasticSearch.Client
 		#region Delete by passing a query string 
 		public ConnectionStatus DeleteByQuery<T>(string query) where T : class
 		{
+			return this.DeleteByQuery<T>(query, default(DeleteByQueryParameters));
+		}
+		public ConnectionStatus DeleteByQuery<T>(string query, DeleteByQueryParameters parameters) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.InferTypeName<T>();
 			var path = this.CreatePath(index, typeName);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
 		}
+		public void DeleteByQueryAsync<T>(string query, Action<ConnectionStatus> callback) where T : class
+		{
+			this.DeleteByQueryAsync<T>(query, default(DeleteByQueryParameters), callback);
+		}
+		public void DeleteByQueryAsync<T>(string query, DeleteByQueryParameters parameters, Action<ConnectionStatus> callback) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			var index = this.Settings.DefaultIndex;
+			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+			var typeName = this.InferTypeName<T>();
+			var path = this.CreatePath(index, typeName);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			this._deleteToPathAsync(path, query, callback);
+		}
+
 		public ConnectionStatus DeleteByQuery<T>(string query, string index) where T : class
 		{
+			return this.DeleteByQuery<T>(query, index, default(DeleteByQueryParameters));
+		}
+		public ConnectionStatus DeleteByQuery<T>(string query, string index, DeleteByQueryParameters parameters) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
 			index.ThrowIfNullOrEmpty("index cannot be empty");
 
 			var typeName = this.InferTypeName<T>();
 			var path = this.CreatePath(index, typeName);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
 		}
+		public void DeleteByQueryAsync<T>(string query, string index, Action<ConnectionStatus> callback) where T : class
+		{
+			this.DeleteByQueryAsync<T>(query, index, default(DeleteByQueryParameters), callback);
+		}
+		public void DeleteByQueryAsync<T>(string query, string index, DeleteByQueryParameters parameters, Action<ConnectionStatus> callback) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			index.ThrowIfNullOrEmpty("index cannot be empty");
+
+			var typeName = this.InferTypeName<T>();
+			var path = this.CreatePath(index, typeName);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			this._deleteToPathAsync(path, query, callback);
+		}
+
 		public ConnectionStatus DeleteByQuery<T>(string query, string index, string type) where T : class
 		{
+			return this.DeleteByQuery<T>(query, index, type, default(DeleteByQueryParameters));
+		}
+		public ConnectionStatus DeleteByQuery<T>(string query, string index, string type, DeleteByQueryParameters parameters) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
 			index.ThrowIfNullOrEmpty("index cannot be empty");
 			type.ThrowIfNullOrEmpty("type cannot be empty");
 			var path = this.CreatePath(index, type);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
 		}
+		public void DeleteByQueryAsync<T>(string query, string index, string type, Action<ConnectionStatus> callback) where T : class
+		{
+			this.DeleteByQueryAsync<T>(query, index, type, default(DeleteByQueryParameters), callback);
+		}
+		public void DeleteByQueryAsync<T>(string query, string index, string type, DeleteByQueryParameters parameters, Action<ConnectionStatus> callback) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			index.ThrowIfNullOrEmpty("index cannot be empty");
+			type.ThrowIfNullOrEmpty("type cannot be empty");
+			var path = this.CreatePath(index, type);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			this._deleteToPathAsync(path, query, callback);
+		}
+
 
 		public ConnectionStatus DeleteByQueryOverIndices<T>(string query, IEnumerable<string> indices) where T : class
 		{
-			if (indices == null || !indices.Any())
-				throw new ArgumentNullException("indices");
-			
-			var typeName = this.InferTypeName<T>();
-			var indicesString = string.Join(",",indices.ToArray());
-			var path = this.CreatePath(indicesString, typeName);
-			return this._deleteToPath(path, query);
+			return this.DeleteByQueryOverIndices<T>(query, indices, default(DeleteByQueryParameters));
 		}
-
-		public ConnectionStatus DeleteByQueryOverIndices<T>(string query, IEnumerable<string> indices, string type) where T : class
+		public ConnectionStatus DeleteByQueryOverIndices<T>(string query, IEnumerable<string> indices, DeleteByQueryParameters parameters) where T : class
 		{
+			query.ThrowIfNullOrEmpty("query");
 			if (indices == null || !indices.Any())
 				throw new ArgumentNullException("indices");
-			type.ThrowIfNullOrEmpty("type cannot be empty");
-			
+
 			var indicesString = string.Join(",", indices.ToArray());
-			var path = this.CreatePath(indicesString, type);
+			var path = this.CreatePath(indicesString);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
 		}
+		public void DeleteByQueryOverIndicesAsync<T>(string query, IEnumerable<string> indices, Action<ConnectionStatus> callback) where T : class
+		{
+			this.DeleteByQueryOverIndicesAsync<T>(query, indices, default(DeleteByQueryParameters), callback);
+		}
+		public void DeleteByQueryOverIndicesAsync<T>(string query, IEnumerable<string> indices, DeleteByQueryParameters parameters, Action<ConnectionStatus> callback) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			if (indices == null || !indices.Any())
+				throw new ArgumentNullException("indices");
 
+			var indicesString = string.Join(",", indices.ToArray());
+			var path = this.CreatePath(indicesString);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			this._deleteToPathAsync(path, query, callback);
+		}
+
+
+		public ConnectionStatus DeleteByQueryOverIndices<T>(string query, IEnumerable<string> indices, IEnumerable<string> types) where T : class
+		{
+			return this.DeleteByQueryOverIndices<T>(query, indices, types, default(DeleteByQueryParameters));
+		}
+		public ConnectionStatus DeleteByQueryOverIndices<T>(string query, IEnumerable<string> indices, IEnumerable<string> types, DeleteByQueryParameters parameters) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			if (indices == null || !indices.Any())
+				throw new ArgumentNullException("indices");
+			if (types == null || !types.Any())
+				throw new ArgumentNullException("types");
+
+			var indicesString = string.Join(",", indices.ToArray());
+			var typesString = string.Join(",", indices.ToArray());
+			var path = this.CreatePath(indicesString, typesString);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			return this._deleteToPath(path, query);
+		}
+		public void DeleteByQueryOverIndicesAsync<T>(string query, IEnumerable<string> indices, IEnumerable<string> types, Action<ConnectionStatus> callback) where T : class
+		{
+			this.DeleteByQueryOverIndicesAsync<T>(query, indices, types, default(DeleteByQueryParameters), callback);
+		}
+		public void DeleteByQueryOverIndicesAsync<T>(string query, IEnumerable<string> indices, IEnumerable<string> types, 
+			DeleteByQueryParameters parameters, Action<ConnectionStatus> callback) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			if (indices == null || !indices.Any())
+				throw new ArgumentNullException("indices");
+			if (types == null || !types.Any())
+				throw new ArgumentNullException("types");
+
+			var indicesString = string.Join(",", indices.ToArray());
+			var typesString = string.Join(",", indices.ToArray());
+			var path = this.CreatePath(indicesString, typesString);
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			this._deleteToPathAsync(path, query, callback);
+		}
+
+		public ConnectionStatus DeleteByQueryOverAll<T>(string query) where T : class
+		{
+			return this.DeleteByQueryOverAll<T>(query, default(DeleteByQueryParameters));
+		}
+		public ConnectionStatus DeleteByQueryOverAll<T>(string query, DeleteByQueryParameters parameters) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			var path = this.CreatePath("_all");
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			return this._deleteToPath(path, query);
+		}
+		public void DeleteByQueryOverAllAsync<T>(string query, Action<ConnectionStatus> callback) where T : class
+		{
+			this.DeleteByQueryOverAllAsync<T>(query, default(DeleteByQueryParameters), callback);
+		}
+		public void DeleteByQueryOverAllAsync<T>(string query, DeleteByQueryParameters parameters, Action<ConnectionStatus> callback) where T : class
+		{
+			query.ThrowIfNullOrEmpty("query");
+			var path = this.CreatePath("_all");
+			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
+				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+			this._deleteToPathAsync(path, query, callback);
+		}
 		#endregion
 
 		private ConnectionStatus _deleteToPath(string path)
