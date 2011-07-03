@@ -19,7 +19,7 @@ namespace ElasticSearch.Client
 
 	public partial class ElasticClient
 	{
-		public QueryResponse<T> Query<T>(string query) where T : class
+		private QueryResponse<T> Query<T>(string query) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
@@ -47,6 +47,7 @@ namespace ElasticSearch.Client
 			var rawQuery = this.Serialize(search);
 			return this.Query<T>(rawQuery);
 		}
+		
 		public QueryResponse<T> Search<T>(string search) where T : class
 		{
 			return this.Query<T>(search);

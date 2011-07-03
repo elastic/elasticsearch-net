@@ -397,7 +397,7 @@ namespace ElasticSearch.Client
 		private HttpWebRequest CreateConnection(string path, string method)
 		{
 			var url = this._CreateUriString(path);
-			if (this._ConnectionSettings.UsesPrettyRequests)
+			if (this._ConnectionSettings.UsesPrettyResponses)
 			{
 				var uri = new Uri(url);
 				url += ((string.IsNullOrEmpty(uri.Query)) ? "?" : "&") + "pretty=true";

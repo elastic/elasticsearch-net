@@ -1,0 +1,25 @@
+twitter/_search --all in index
+twitter/tweet,user/_search -- specific types
+kimchy,elasticsearch/tweet/_search -- specific indices
+kimchy,elasticsearch/tweet,user/_search --specific types
+_all/tweet/_search --all tweets all indices
+_search --all
+
+?search_type - http://www.elasticsearch.org/guide/reference/api/search/search-type.html
+
+{
+	from:0,
+	size:10,
+	
+	sort: []	
+	query: {} //query DSL
+	filter: {} //selected facets
+	highlight: {}
+	fields:[]
+	preference: "",
+	facets: {}
+	indices_boost: {}
+	explain: true
+	version: true,
+	min_score: 0.5
+}

@@ -16,6 +16,6 @@ namespace ElasticSearch.Client
 		string DefaultIndex { get; }
 		int MaximumAsyncConnections { get; }
 		Func<string, string> TypeNameInferrer { get; }
-		bool UsesPrettyRequests { get; }
+		bool UsesPrettyResponses { get; }
 	}
 }
