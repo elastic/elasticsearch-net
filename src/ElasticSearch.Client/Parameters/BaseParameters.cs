@@ -5,7 +5,12 @@ using System.Text;
 
 namespace ElasticSearch.Client
 {
-	public interface IUrlParameters
+	public interface ISimpleUrlParameters
+	{
+		Replication Replication { get; set; }
+		bool Refresh { get; set; }
+	}
+	public interface IUrlParameters 
 	{
 		string Version { get; set; }
 		string Routing { get; set; }

@@ -61,7 +61,7 @@ namespace ElasticSearch.Tests
 			{
 				var projects = NestTestData.Data;
 				var cloneIndex = Test.Default.DefaultIndex + "_clone";
-				var bulkParameters = new BulkParameters() { Refresh = true };
+				var bulkParameters = new SimpleBulkParameters() { Refresh = true };
 				client.DeleteMapping<ElasticSearchProject>();
 				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
 				client.Index(projects, bulkParameters);

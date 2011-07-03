@@ -56,9 +56,7 @@ namespace ElasticSearch.Tests
 
             //act
             //index the new item
-            this.ConnectedClient.Index<ElasticSearchProject>(newDocument);
-
-            Thread.Sleep(1000);
+            this.ConnectedClient.Index<ElasticSearchProject>(newDocument, new IndexParameters { Refresh = true });
 
             //assert
             //grab document back from the index and make sure it is the same document
@@ -71,9 +69,7 @@ namespace ElasticSearch.Tests
 
             //act
             //now remove the item that was added
-            this.ConnectedClient.DeleteById<ElasticSearchProject>(newDocument.Id);
-
-            Thread.Sleep(1000);
+            this.ConnectedClient.DeleteById<ElasticSearchProject>(newDocument.Id, new DeleteParameters { Refresh = true });
 
             //assert
             //make sure getting by id returns nothing
@@ -95,9 +91,7 @@ namespace ElasticSearch.Tests
 
 			//act
 			//index the new item
-			this.ConnectedClient.Index(newDocument);
-
-			Thread.Sleep(1000);
+			this.ConnectedClient.Index(newDocument, new IndexParameters { Refresh = true });
 
 			//assert
 			//grab document back from the index and make sure it is the same document
@@ -110,9 +104,7 @@ namespace ElasticSearch.Tests
 
 			//act
 			//now remove the item that was added
-			this.ConnectedClient.Delete(newDocument);
-
-			Thread.Sleep(1000);
+			this.ConnectedClient.Delete(newDocument, new DeleteParameters { Refresh = true });
 
 			//assert
 			//make sure getting by id returns nothing
@@ -135,9 +127,7 @@ namespace ElasticSearch.Tests
 
 			//act
 			//index the new item
-			this.ConnectedClient.Index(newDocument);
-
-			Thread.Sleep(1000);
+			this.ConnectedClient.Index(newDocument, new IndexParameters { Refresh = true });
 
 			//assert
 			//grab document back from the index and make sure it is the same document
@@ -160,7 +150,7 @@ namespace ElasticSearch.Tests
 		[Test]
 		public void RemoveAllByPassingAsIEnumerable()
 		{
-			
+			this.ResetIndexes();
 			var result = this.ConnectedClient.Search<ElasticSearchProject>(
 					@" { ""query"" : {
 						    ""match_all"" : { }
@@ -168,10 +158,49 @@ namespace ElasticSearch.Tests
 			);
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
-			Assert.Greater(result.Documents.Count(), 0);
+			var totalSet = result.Documents.Count();
+			Assert.Greater(totalSet, 0);
+			var totalResults = result.Total;
+			this.ConnectedClient.Delete(result.Documents, new SimpleBulkParameters() { Refresh = true });
 
-			this.ConnectedClient.Delete(result.Documents);
+			result = this.ConnectedClient.Search<ElasticSearchProject>(
+					@" { ""query"" : {
+						    ""match_all"" : { }
+					} }"
+			);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			Assert.True(result.Total == totalResults - totalSet);
 		
+		}
+		[Test]
+		public void RemoveAllByPassingAsIEnumerableOfBulkParameters()
+		{
+			this.ResetIndexes();
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(
+					@" { ""query"" : {
+						    ""match_all"" : { }
+					} }"
+			);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			var totalSet = result.Documents.Count();
+			Assert.Greater(totalSet, 0);
+			var totalResults = result.Total;
+
+			var parameterizedDocuments = result.Documents.Select(d=> new BulkParameters<ElasticSearchProject>(d) { Routing = "id" });
+
+			this.ConnectedClient.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
+
+			result = this.ConnectedClient.Search<ElasticSearchProject>(
+					@" { ""query"" : {
+						    ""match_all"" : { }
+					} }"
+			);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			Assert.True(result.Total == totalResults - totalSet);
+
 		}
     }
 }

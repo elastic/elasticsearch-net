@@ -119,11 +119,23 @@ namespace ElasticSearch.Client
 		{
 			return this.GenerateBulkCommand<T>(@objects, "index");
 		}
+		private string GenerateBulkIndexCommand<T>(IEnumerable<BulkParameters<T>> objects) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, "index");
+		}
 		private string GenerateBulkIndexCommand<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, index, "index");
 		}
+		private string GenerateBulkIndexCommand<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, "index");
+		}
 		private string GenerateBulkIndexCommand<T>(IEnumerable<T> @objects, string index, string typeName) where T : class 
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, typeName, "index");
+		}
+		private string GenerateBulkIndexCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName) where T : class 
 		{
 			return this.GenerateBulkCommand<T>(@objects, index, typeName, "index");
 		}
@@ -132,11 +144,23 @@ namespace ElasticSearch.Client
 		{
 			return this.GenerateBulkCommand<T>(@objects, "delete");
 		}
+		private string GenerateBulkDeleteCommand<T>(IEnumerable<BulkParameters<T>> objects) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, "delete");
+		}
 		private string GenerateBulkDeleteCommand<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, index, "delete");
 		}
+		private string GenerateBulkDeleteCommand<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, "delete");
+		}
 		private string GenerateBulkDeleteCommand<T>(IEnumerable<T> @objects, string index, string typeName) where T : class
+		{
+			return this.GenerateBulkCommand<T>(@objects, index, typeName, "delete");
+		}
+		private string GenerateBulkDeleteCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, index, typeName, "delete");
 		}
@@ -149,7 +173,17 @@ namespace ElasticSearch.Client
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
-			return this.GenerateBulkIndexCommand<T>(objects, index, command);
+			return this.GenerateBulkCommand<T>(objects, index, command);
+		}
+		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> objects, string command) where T : class
+		{
+			objects.ThrowIfNull("objects");
+
+			var index = this.Settings.DefaultIndex;
+			if (string.IsNullOrEmpty(index))
+				throw new NullReferenceException("Cannot infer default index for current connection.");
+
+			return this.GenerateBulkCommand<T>(objects, index, command);
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string index, string command) where T : class
 		{
@@ -161,6 +195,18 @@ namespace ElasticSearch.Client
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}
+		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> objects, string index, string command) where T : class
+		{
+			objects.ThrowIfNull("objects");
+			index.ThrowIfNullOrEmpty("index");
+
+			var type = typeof(T);
+			var typeName = this.InferTypeName<T>();
+
+			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
+		}
+
+
 		private string GenerateBulkCommand<T>(IEnumerable<T> @objects, string index, string typeName, string command) where T : class
 		{
 			if (!@objects.Any())
@@ -168,27 +214,86 @@ namespace ElasticSearch.Client
 
 			var idSelector = this.CreateIdSelector<T>();
 
-
 			var sb = new StringBuilder();
-			var action = "{{ \"" + command + "\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\", \"_id\" : \"{2}\" }} }}\n";
-
-			//if we can't reflect id let ES create one.
-			if (idSelector == null)
-				action = "{{ \"" + command + "\" : {{ \"_index\" : \"{0}\", \"_type\" : \"{1}\" }} }}\n".F(index, typeName);
+			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
 
 			foreach (var @object in objects)
 			{
-				string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
-				if (idSelector == null)
-					sb.Append(action);
-				else
-					sb.Append(action.F(index, typeName, idSelector(@object)));
-				sb.Append(jsonCommand + "\n");
+				var objectAction = action;
+				if (idSelector != null)
+					objectAction += ", \"_id\" : \"{0}\" ".F(idSelector(@object));
+
+				objectAction += "} }\n";
+
+				sb.Append(objectAction);
+				if (command == "index")
+				{
+					string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
+					sb.Append(jsonCommand + "\n");
+				}
+			}
+			var json = sb.ToString();
+			return json;
+
+
+			
+		}
+		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName, string command) where T : class
+		{
+			if (!@objects.Any())
+				return null;
+
+			var idSelector = this.CreateIdSelector<T>();
+
+			var sb = new StringBuilder();
+			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
+
+			foreach (var @object in objects)
+			{
+				if (@object.Document == null)
+					continue;
+
+				var objectAction = action;
+				if (idSelector != null)
+					objectAction += ", \"_id\" : \"{0}\" ".F(idSelector(@object.Document));
+
+				if (!@object.Version.IsNullOrEmpty())
+					objectAction += ", \"version\" : \"{0}\" ".F(@object.Version);
+				if (!@object.Parent.IsNullOrEmpty())
+					objectAction += ", \"parent\" : \"{0}\" ".F(@object.Parent);
+				if (@object.VersionType != VersionType.Internal)
+					objectAction += ", \"version_type\" : \"{0}\" ".F(@object.VersionType.ToString().ToLower());
+				objectAction += "} }\n";
+
+				sb.Append(objectAction);
+				if (command == "index")
+				{
+					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, this.SerializationSettings);
+					sb.Append(jsonCommand + "\n");
+				}
 			}
 			var json = sb.ToString();
 			return json;
 		}
 	
+		private string AppendSimpleParametersToPath(string path, ISimpleUrlParameters urlParameters)
+		{
+			if (urlParameters == null)
+				return path;
+
+			var parameters = new List<string>();
+
+			if (urlParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
+
+			
+			if (urlParameters.Refresh) //false == default
+				parameters.Add("refresh=true");
+
+			path += "?" + string.Join("&", parameters);
+			return path;
+		}
+
 		private string AppendParametersToPath(string path, IUrlParameters urlParameters)
 		{
 			if (urlParameters == null)
@@ -206,10 +311,10 @@ namespace ElasticSearch.Client
 			if (urlParameters.Replication != Replication.Sync) //sync == default
 				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
-			if (urlParameters.Consistency != Consistency.Quorum) //sync == default
+			if (urlParameters.Consistency != Consistency.Quorum) //quorum == default
 				parameters.Add("consistency=" + urlParameters.Consistency.ToString().ToLower());
 
-			if (urlParameters.Refresh) //sync == default
+			if (urlParameters.Refresh) //false == default
 				parameters.Add("refresh=true");
 
 			if (urlParameters is IndexParameters)

@@ -80,3 +80,5 @@
 /src/ElasticSearch.Tests/ElasticSearch.Tests.crunchproject.local.xml
 /src/HackerNews.Indexer/HackerNews.Indexer.crunchproject.local.xml
 /src/Nest.TestData/Nest.TestData.crunchproject.local.xml
+/src/ElasticSearch.NET.sln.docstates
+/src/ElasticSearch.NET.suo

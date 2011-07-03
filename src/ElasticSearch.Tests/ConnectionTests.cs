@@ -69,7 +69,8 @@ namespace ElasticSearch.Tests
 
                 Assert.False(client.IsValid);
                 Assert.True(connectionStatus != null);
-                Assert.True(connectionStatus.Error.ExceptionMessage.StartsWith("The remote name could not be resolved"));
+                Assert.True(connectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.BadGateway
+					|| connectionStatus.Error.ExceptionMessage.StartsWith("The remote name could not be resolved"));
             });
 
         }

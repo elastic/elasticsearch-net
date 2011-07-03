@@ -46,8 +46,15 @@ namespace ElasticSearch.Client
                     {
                         var responseString = reader.ReadToEnd();
                         var x = new { Error = "" };
-                        x = JsonConvert.DeserializeAnonymousType(responseString, x);
-                        this.ExceptionMessage = x.Error;
+						try
+						{ 
+							x = JsonConvert.DeserializeAnonymousType(responseString, x);
+							this.ExceptionMessage = x.Error;
+						}
+						catch
+						{
+							this.ExceptionMessage = "Could not parse exception message from ES, possibly altered by proxy or this is an unhandled HTTP Status by ES\r\n" + responseString;
+						}
 
                     }
                 }

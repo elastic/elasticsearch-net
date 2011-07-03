@@ -148,39 +148,74 @@ namespace ElasticSearch.Client
 			this.Connection.Post(path, json, continuation);
 		}
 
+
 		public ConnectionStatus Index<T>(IEnumerable<T> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			return this.Connection.PostSync("_bulk", json);
 		}
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, BulkParameters bulkParameters) where T : class
+		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
-			var path = this.AppendParametersToPath("_bulk", bulkParameters);
+			return this.Connection.PostSync("_bulk", json);
+		}
+		public ConnectionStatus Index<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
+		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			return this.Connection.PostSync(path, json);
+		}
+
 		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			return this.Connection.PostSync("_bulk", json);
 		}
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, BulkParameters bulkParameters) where T : class
+		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			var path = this.AppendParametersToPath("_bulk", bulkParameters);
+			return this.Connection.PostSync("_bulk", json);
+		}
+		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
+		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			return this.Connection.PostSync(path, json);
+		}
+
 		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			return this.Connection.PostSync("_bulk", json);
 		}
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, string type, BulkParameters bulkParameters) where T : class
+		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			var path = this.AppendParametersToPath("_bulk", bulkParameters);
+			return this.Connection.PostSync("_bulk", json);
+		}
+		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index, type);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
-
+		}
+		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index, type);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			return this.Connection.PostSync(path, json);
 		}
 
 
@@ -189,22 +224,92 @@ namespace ElasticSearch.Client
 			var json = this.GenerateBulkIndexCommand(@objects);
 			this.Connection.Post("_bulk", json, null);
 		}
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			this.Connection.Post("_bulk", json, null);
+		}
+		public void IndexAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, null);
+		}
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, null);
+		}
+
 		public void IndexAsync<T>(IEnumerable<T> objects, Action<ConnectionStatus> continuation) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			this.Connection.Post("_bulk", json, continuation);
 		}
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			this.Connection.Post("_bulk", json, continuation);
+		}
+		public void IndexAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, continuation);
+		}
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, continuation);
+		}
+
 		public void IndexAsync<T>(IEnumerable<T> objects, string index, Action<ConnectionStatus> continuation) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			this.Connection.Post("_bulk", json, continuation);
 		}
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index);
+			this.Connection.Post("_bulk", json, continuation);
+		}
+		public void IndexAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, continuation);
+		}
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, continuation);
+		}
+
 		public void IndexAsync<T>(IEnumerable<T> objects, string index, string type, Action<ConnectionStatus> continuation) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			this.Connection.Post("_bulk", json, continuation);
 		}
-		
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index, type);
+			this.Connection.Post("_bulk", json, continuation);
+		}
+		public void IndexAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index, type);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, continuation);
+		}
+		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		{
+			var json = this.GenerateBulkIndexCommand(@objects, index, type);
+			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			this.Connection.Post(path, json, continuation);
+		}
 
 	}
 	
