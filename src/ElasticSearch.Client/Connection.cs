@@ -19,7 +19,6 @@ namespace ElasticSearch.Client
 			this._ConnectionSettings = settings;
 			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
 		}
-
 		
 		public ConnectionStatus GetSync(string path)
 		{
@@ -92,7 +91,6 @@ namespace ElasticSearch.Client
 					response.Close();
 			}
 		}
-
         public ConnectionStatus DeleteSync(string path)
         {
             var connection = this.CreateConnection(path, "DELETE");
@@ -125,53 +123,139 @@ namespace ElasticSearch.Client
                     response.Close();
             }
         }
-
-        public void Delete(string path, Action<ConnectionStatus> callback)
-        {
-            ConnectionState state = new ConnectionState
-                                        {
-                                            Callback = callback,
-                                            Connection = this.CreateConnection(path, "DELETE")
-                                        };
-            this.BeginGetResponse(state);
-        }
-		
+		public ConnectionStatus DeleteSync(string path, string data)
+		{
+			var connection = this.CreateConnection(path, "DELETE");
+			connection.Timeout = this._ConnectionSettings.TimeOut;
+			Stream postStream = null;
+			WebResponse response = null;
+			try
+			{
+				byte[] buffer = Encoding.UTF8.GetBytes(data);
+				connection.ContentLength = buffer.Length;
+				postStream = connection.GetRequestStream();
+				postStream.Write(buffer, 0, buffer.Length);
+				postStream.Close();
+				response = connection.GetResponse();
+				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
+				response.Close();
+				return new ConnectionStatus(result);
+			}
+			catch (WebException e)
+			{
+				ConnectionError error;
+				if (e.Status == WebExceptionStatus.Timeout)
+				{
+					error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
+				}
+				else
+				{
+					error = new ConnectionError(e);
+				}
+				return new ConnectionStatus(error);
+			}
+			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
+			finally
+			{
+				if (postStream != null)
+					postStream.Close();
+				if (response != null)
+					response.Close();
+			}
+		}
+       
 		public void Get(string path, Action<ConnectionStatus> callback)
 		{
-			ConnectionState state = new ConnectionState()
+			Thread getThread = new Thread(() =>
 			{
-				Callback = callback,
-				Connection = this.CreateConnection(path, "GET")
-			};
-			this.BeginGetResponse(state);
+				this._ResourceLock.WaitOne();
+				ConnectionState state = new ConnectionState()
+				{
+					Callback = (c) =>
+					{
+						this._ResourceLock.Release();
+						if (callback != null)
+							callback(c);
+
+					},
+					Connection = this.CreateConnection(path, "GET")
+				};
+				this.BeginGetResponse(state);
+			});
+			getThread.Start();
 		}
 		public void Post(string path, string data, Action<ConnectionStatus> callback)
 		{
-			Thread postThread = new Thread(
-								() =>
-								{
-									this._ResourceLock.WaitOne();
-									this._PutOrPost("POST", path, data, (c)=>
-									{
-										this._ResourceLock.Release();
-										if (callback != null)
-											callback(c);
+			Thread postThread = new Thread(() =>
+			{
+				this._ResourceLock.WaitOne();
+				this.PostDataUsingMethod("POST", path, data, (c) =>
+				{
+					this._ResourceLock.Release();
+					if (callback != null)
+						callback(c);
 
-									});
-								});
+				});
+			});
 			postThread.Start();
 			
 		}
 		public void Put(string path, string data, Action<ConnectionStatus> callback)
 		{
-			this._PutOrPost("PUT", path, data, callback);
+			Thread putThread = new Thread(()=>
+			{
+				this._ResourceLock.WaitOne();
+				this.PostDataUsingMethod("PUT", path, data, (c) =>
+				{
+					this._ResourceLock.Release();
+					if (callback != null)
+						callback(c);
+
+				});	
+			});
+			putThread.Start();	
+		}
+		public void Delete(string path, string data, Action<ConnectionStatus> callback)
+		{
+			Thread deleteThread = new Thread(() =>
+			{
+				this._ResourceLock.WaitOne();
+				this.PostDataUsingMethod("DELETE", path, data, (c) =>
+				{
+					this._ResourceLock.Release();
+					if (callback != null)
+						callback(c);
+
+				});
+			});
+			deleteThread.Start();
+		}
+		public void Delete(string path, Action<ConnectionStatus> callback)
+		{
+			Thread deleteThread = new Thread(() =>
+			{
+				this._ResourceLock.WaitOne();
+				ConnectionState state = new ConnectionState
+				{
+					Callback = (c) =>
+					{
+						this._ResourceLock.Release();
+						if (callback != null)
+							callback(c);
+
+					},
+					Connection = this.CreateConnection(path, "DELETE")
+				};
+				this.BeginGetResponse(state);
+			});
+			deleteThread.Start();
 		}
 
-		private void _PutOrPost(string method, string path,string data, Action<ConnectionStatus> callback)
+		private void PostDataUsingMethod(string method, string path,string data, Action<ConnectionStatus> callback)
 		{
-		    if (method != "PUT" && method != "POST")
+		    if (method != "PUT" && method != "POST" && method != "DELETE")
 		    {
-		        throw new ArgumentException("Valid values contain only PUT or POST", "method");
+		        throw new ArgumentException("Valid methods that can post a body are PUT, POST, DELETE", "method");
 		    }
 
 			ConnectionState state = new ConnectionState()
@@ -225,7 +309,6 @@ namespace ElasticSearch.Client
 			}
 		}
 
-
 		private static void ThreadTimeoutCallback(object state, bool timedOut)
 		{
 			if (timedOut)
@@ -239,7 +322,6 @@ namespace ElasticSearch.Client
 				}
 			}
 		}
-
 
 		private void GetResponseHandle(IAsyncResult result)
 		{

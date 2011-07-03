@@ -358,15 +358,75 @@ namespace ElasticSearch.Client
 
 		#endregion
 
+		#region Delete by passing a query string 
+		public ConnectionStatus DeleteByQuery<T>(string query) where T : class
+		{
+			var index = this.Settings.DefaultIndex;
+			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+			var typeName = this.InferTypeName<T>();
+			var path = this.CreatePath(index, typeName);
+			return this._deleteToPath(path, query);
+		}
+		public ConnectionStatus DeleteByQuery<T>(string query, string index) where T : class
+		{
+			index.ThrowIfNullOrEmpty("index cannot be empty");
+
+			var typeName = this.InferTypeName<T>();
+			var path = this.CreatePath(index, typeName);
+			return this._deleteToPath(path, query);
+		}
+		public ConnectionStatus DeleteByQuery<T>(string query, string index, string type) where T : class
+		{
+			index.ThrowIfNullOrEmpty("index cannot be empty");
+			type.ThrowIfNullOrEmpty("type cannot be empty");
+			var path = this.CreatePath(index, type);
+			return this._deleteToPath(path, query);
+		}
+
+		public ConnectionStatus DeleteByQueryOverIndices<T>(string query, IEnumerable<string> indices) where T : class
+		{
+			if (indices == null || !indices.Any())
+				throw new ArgumentNullException("indices");
+			
+			var typeName = this.InferTypeName<T>();
+			var indicesString = string.Join(",",indices.ToArray());
+			var path = this.CreatePath(indicesString, typeName);
+			return this._deleteToPath(path, query);
+		}
+
+		public ConnectionStatus DeleteByQueryOverIndices<T>(string query, IEnumerable<string> indices, string type) where T : class
+		{
+			if (indices == null || !indices.Any())
+				throw new ArgumentNullException("indices");
+			type.ThrowIfNullOrEmpty("type cannot be empty");
+			
+			var indicesString = string.Join(",", indices.ToArray());
+			var path = this.CreatePath(indicesString, type);
+			return this._deleteToPath(path, query);
+		}
+
+		#endregion
+
 		private ConnectionStatus _deleteToPath(string path)
 		{
 			path.ThrowIfNull("path");
 			return this.Connection.DeleteSync(path);
 		}
+		private ConnectionStatus _deleteToPath(string path, string data)
+		{
+			path.ThrowIfNull("path");
+			return this.Connection.DeleteSync(path, data);
+		}
 		private void _deleteToPathAsync(string path, Action<ConnectionStatus> callback)
 		{
 			path.ThrowIfNull("path");
 			this.Connection.Delete(path, callback);
+		}
+		private void _deleteToPathAsync(string path, string data, Action<ConnectionStatus> callback)
+		{
+			path.ThrowIfNull("path");
+			this.Connection.Delete(path, data, callback);
 		}
     }
 }

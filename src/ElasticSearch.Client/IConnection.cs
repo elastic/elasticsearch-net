@@ -12,5 +12,8 @@ namespace ElasticSearch.Client
 
 	    void Delete(string path, Action<ConnectionStatus> callback);
 	    ConnectionStatus DeleteSync(string path);
+
+		void Delete(string path, string data, Action<ConnectionStatus> callback);
+		ConnectionStatus DeleteSync(string path, string data);
 	}
 }

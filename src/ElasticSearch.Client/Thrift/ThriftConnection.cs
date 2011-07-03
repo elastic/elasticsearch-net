@@ -79,6 +79,20 @@ namespace ElasticSearch.Client.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			GetClient().execute(restRequest);
 		}
+		public void Delete(string path, string data, Action<ConnectionStatus> callback)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.DELETE;
+			restRequest.Uri = path;
+
+			if (!string.IsNullOrEmpty(data))
+			{
+				restRequest.Body = Encoding.UTF8.GetBytes(data);
+			}
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			GetClient().execute(restRequest);
+		}
 
 		public ConnectionStatus PostSync(string path, string data)
 		{
@@ -118,7 +132,21 @@ namespace ElasticSearch.Client.Thrift
             RestResponse result = GetClient().execute(restRequest);
             return new ConnectionStatus(DecodeStr(result.Body));
 	    }
+		public ConnectionStatus DeleteSync(string path, string data)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.DELETE;
+			restRequest.Uri = path;
 
+			if (!string.IsNullOrEmpty(data))
+			{
+				restRequest.Body = Encoding.UTF8.GetBytes(data);
+			}
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			RestResponse result = GetClient().execute(restRequest);
+			return new ConnectionStatus(DecodeStr(result.Body));
+		}
 	    #endregion
 
 		#region IDisposable Members

@@ -200,6 +200,48 @@ namespace ElasticSearch.Tests
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
 			Assert.True(result.Total == totalResults - totalSet);
+		}
+		[Test]
+		public void RemoveAllByQuery()
+		{
+			var query = @" { ""query"" : {
+						    ""match_all"" : { }
+					} }";
+			this.ResetIndexes();
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			var totalSet = result.Documents.Count();
+			Assert.Greater(totalSet, 0);
+			var totalResults = result.Total;
+			this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(query);
+
+			result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			Assert.True(result.Total == 0);
+		}
+		[Test]
+		public void RemoveAllByQueryOverIndices()
+		{
+			var query = @" { ""query"" : {
+						    ""match_all"" : { }
+					} }";
+			this.ResetIndexes();
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			var totalSet = result.Documents.Count();
+			Assert.Greater(totalSet, 0);
+			var totalResults = result.Total;
+			this.ConnectedClient.DeleteByQueryOverIndices<ElasticSearchProject>(query, new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
+
+			result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			Assert.IsNotNull(result);
+			Assert.IsNotNull(result.Documents);
+			Assert.True(result.Total == 0);
+
+			//TODO test _clone when we can specify index for search;
 
 		}
     }

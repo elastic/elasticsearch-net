@@ -290,7 +290,7 @@ namespace ElasticSearch.Client
 			if (urlParameters.Refresh) //false == default
 				parameters.Add("refresh=true");
 
-			path += "?" + string.Join("&", parameters);
+			path += "?" + string.Join("&", parameters.ToArray());
 			return path;
 		}
 
@@ -320,7 +320,7 @@ namespace ElasticSearch.Client
 			if (urlParameters is IndexParameters)
 				this.AppendIndexParameters(parameters, (IndexParameters)urlParameters);
 
-			path += "?" + string.Join("&", parameters);
+			path += "?" + string.Join("&", parameters.ToArray());
 			return path;
 		}
 
