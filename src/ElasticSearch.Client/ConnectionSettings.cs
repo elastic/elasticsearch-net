@@ -8,8 +8,9 @@ namespace ElasticSearch.Client
 	public class ConnectionSettings : IConnectionSettings
 	{
 		private readonly string _username;
-		public string Username {
-			get { return this._username; } 
+		public string Username
+		{
+			get { return this._username; }
 		}
 		private readonly string _password;
 		public string Password
@@ -36,18 +37,28 @@ namespace ElasticSearch.Client
 		{
 			get { return this._timeOut; }
 		}
-		public string DefaultIndex { get; private set; }
+		private string _defaultIndex;
+		public string DefaultIndex
+		{
+			get
+			{
+				if (this._defaultIndex.IsNullOrEmpty())
+					throw new NullReferenceException("No default index set on connection!");
+				return this._defaultIndex;
+			}
+			private set { this._defaultIndex = value; }
+		}
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyRequests { get; private set; }
-		public Func<string,string> TypeNameInferrer { get; private set; }
-		
+		public Func<string, string> TypeNameInferrer { get; private set; }
+
 		public ConnectionSettings(string host, int port) : this(host, port, 60000, null, null, null) { }
-		public ConnectionSettings(string host, int port, int timeout) : this (host, port, timeout, null, null, null) {}
+		public ConnectionSettings(string host, int port, int timeout) : this(host, port, timeout, null, null, null) { }
 		public ConnectionSettings(string host, int port, int timeout, string proxyAddress, string username, string password)
 		{
-            host.ThrowIfNullOrEmpty("host");
+			host.ThrowIfNullOrEmpty("host");
 
-            var uri = new Uri("http://" + host + ":" + port);
+			var uri = new Uri("http://" + host + ":" + port);
 
 
 			this._host = host;
@@ -82,7 +93,7 @@ namespace ElasticSearch.Client
 			this.MaximumAsyncConnections = maximum;
 			return this;
 		}
-		public ConnectionSettings SetTypeNameInferrer(Func<string,string> inferrer)
+		public ConnectionSettings SetTypeNameInferrer(Func<string, string> inferrer)
 		{
 			this.TypeNameInferrer = inferrer;
 			return this;
@@ -97,7 +108,7 @@ namespace ElasticSearch.Client
 			this.UsesPrettyRequests = b;
 			return this;
 		}
-		
-		
+
+
 	}
 }
