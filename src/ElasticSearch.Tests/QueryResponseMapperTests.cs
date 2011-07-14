@@ -478,6 +478,24 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResults.Documents.First().Followers
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
+        [Test]
+        public void QueryWithHighlightTest()
+        {
+            //arrange
+            var firstFollower = NestTestData.Data.First().Followers.First();
+            var firstName = firstFollower.FirstName;
+
+            //act
+            var queryResults = this.ConnectedClient.Search<ElasticSearchProject>("{\"query\":{"
+	                                                                            + "\"query_string\":{"
+		                                                                            + "\"default_field\":\"_all\","
+		                                                                            + "\"query\":\"" + firstName + "\"},"
+                                                                                + "\"highlight\":{\"pre_tags\":[\"<span class=\\\"searchTerm\\\">\"],\"post_tags\":[\"</span>\"],\"fields\":{\"content\":{\"fragment_size\":150,\"number_of_fragments\":3}}},\"size\":99999}"
+            );
+
+            //assert
+            Assert.IsTrue(queryResults.HitsMetaData.Hits[0].Highlight.Content.Count > 0);
+        }
 	}
 
 	//TODO: Implement top_children once we support mapping and mapping of parent child relations.

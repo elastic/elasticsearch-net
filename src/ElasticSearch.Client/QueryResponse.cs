@@ -103,7 +103,15 @@ namespace ElasticSearch.Client
 		public string Type { get; internal set; }
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }
+        [JsonProperty(PropertyName = "highlight")]
+        public Highlight Highlight{ get; internal set; }
 	}
+    [JsonObject]
+    public class Highlight
+    {
+        [JsonProperty(PropertyName = "content")]
+        public List<string> Content { get; internal set; }
+    }
 	[JsonObject]
 	public class FacetsMetaData
 	{
