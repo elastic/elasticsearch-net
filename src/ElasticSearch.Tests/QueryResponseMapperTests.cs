@@ -484,14 +484,10 @@ namespace ElasticSearch.Tests
             //arrange
             var firstFollower = NestTestData.Data.First().Followers.First();
             var firstName = firstFollower.FirstName;
+            string query = "{\"query\":{\"\"query_string\":{\"default_field\":\"_all\",\"query\":\"[[FIRSTNAME]]\"}},\"highlight\":{\"pre_tags\":[\"<span class=\\\"searchTerm\\\">\"],\"post_tags\":[\"</span>\"],\"fields\":{\"content\":{\"fragment_size\":150,\"number_of_fragments\":3}}}}";
 
             //act
-            var queryResults = this.ConnectedClient.Search<ElasticSearchProject>("{\"query\":{"
-	                                                                            + "\"query_string\":{"
-		                                                                            + "\"default_field\":\"_all\","
-		                                                                            + "\"query\":\"" + firstName + "\"},"
-                                                                                + "\"highlight\":{\"pre_tags\":[\"<span class=\\\"searchTerm\\\">\"],\"post_tags\":[\"</span>\"],\"fields\":{\"content\":{\"fragment_size\":150,\"number_of_fragments\":3}}},\"size\":99999}"
-            );
+            var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(query.Replace("[[FIRSTNAME]]", firstName));
 
             //assert
             Assert.IsTrue(queryResults.HitsMetaData.Hits[0].Highlight.Content.Count > 0);
