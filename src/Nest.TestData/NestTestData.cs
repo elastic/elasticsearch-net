@@ -42,7 +42,8 @@ namespace Nest.TestData
 						  .Setup(c => c.Country).Use<CountrySource>()
 						  .Setup(c => c.Origin).Use<GeoLocationSource>()
 						  .Setup(c => c.Name).Use<ElasticSearchProjectsDataSource>()
-						  .Setup(c => c.Followers).Value(new List<Person>());
+						  .Setup(c => c.Followers).Value(new List<Person>())
+                          .Setup(c => c.Content).Use<ElasticSearchProjectDescriptionSource>(); //need this specifically for us - JWD 20110822
 					});
 					var session = factory.CreateSession();
 					// Get a single user
