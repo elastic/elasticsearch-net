@@ -490,7 +490,7 @@ namespace ElasticSearch.Tests
             var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(query);
 
             //assert
-            Assert.IsTrue(queryResults.HitsMetaData.Hits[0].Highlight.Content.Count > 0);
+            Assert.IsTrue(queryResults.HitsMetaData.Hits[0].Highlight["content"].Count > 0);
         }
 	}
 
