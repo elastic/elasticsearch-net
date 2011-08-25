@@ -11,7 +11,7 @@ namespace ElasticSearch.Client
 	{
 		public bool IsValid { get; set; }
 		public ConnectionError ConnectionError { get; set; }
-		public QueryResponse ()
+		public QueryResponse()
 		{
 			this.IsValid = true;
 		}
@@ -53,7 +53,7 @@ namespace ElasticSearch.Client
 				if (this.HitsMetaData != null)
 				{
 					foreach (var hit in this.HitsMetaData.Hits)
-					{ 
+					{
 						yield return hit.Source;
 
 					}
@@ -107,15 +107,30 @@ namespace ElasticSearch.Client
 	[JsonObject]
 	public class FacetsMetaData
 	{
-		public Dictionary<string, List<Facet>> Facets { get; internal set; }
+		public Dictionary<string, List<FacetMetaData>> Facets { get; internal set; }
 	}
-	
+	[JsonObject]
+	public class FacetMetaData
+	{
+		[JsonProperty(PropertyName = "_type")]
+		public string Type { get; internal set; }
+		[JsonProperty(PropertyName = "missing")]
+		public int Missing { get; internal set; }
+
+		public List<Facet>  Facets { get; internal set; }
+	}
 	public class Facet
 	{
 		public bool Global { get; internal set; }
+		[JsonProperty(PropertyName = "count")]
 		public int Count { get; internal set; }
-		public string Key { get; internal set; }
 	}
+	public class TermFacet : Facet
+	{
+		[JsonProperty(PropertyName = "term")]
+		public string Term { get; internal set; } 
+	}
+
 }
 
 
