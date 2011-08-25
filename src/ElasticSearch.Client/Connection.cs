@@ -273,11 +273,15 @@ namespace ElasticSearch.Client
 
 			Stream postStream = state.Connection.EndGetRequestStream(result);
 
-			UTF8Encoding encoding = new UTF8Encoding();
-			byte[] bytes = encoding.GetBytes(state.PostData);
+            if (state.PostData != null) //TODO: look into why it is null at some points
+            {
+                UTF8Encoding encoding = new UTF8Encoding();
+                byte[] bytes = encoding.GetBytes(state.PostData);
 
-			postStream.Write(bytes, 0, bytes.Length);
-			postStream.Close();
+                postStream.Write(bytes, 0, bytes.Length);
+                postStream.Close();
+            }
+
 			this.BeginGetResponse(state);
 
 		}
