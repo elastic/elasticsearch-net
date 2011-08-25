@@ -12,7 +12,7 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="Host" Type="System.String" Scope="User">
-      <Value Profile="(Default)">localhost</Value>
+      <Value Profile="(Default)">127.0.0.1.</Value>
     </Setting>
   </Settings>
 </SettingsFile>

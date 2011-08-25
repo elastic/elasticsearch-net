@@ -21,7 +21,7 @@ namespace ElasticSearch.Client
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
 
 		[JsonProperty(PropertyName = "facets")]
-		public FacetsMetaData Facets { get; internal set; }
+		public Dictionary<string, List<FacetMetaData>> FacetsMetaData { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
 		public int ElapsedMilliseconds { get; internal set; }
@@ -60,6 +60,74 @@ namespace ElasticSearch.Client
 				}
 			}
 		}
+		public IEnumerable<Hit<T>> DocumentsWithMetaData
+		{
+			get
+			{
+				if (this.HitsMetaData != null)
+				{
+					foreach (var hit in this.HitsMetaData.Hits)
+					{
+						yield return hit;
+
+					}
+				}
+			}
+		}
+
+		public IEnumerable<FacetMetaData> FacetMetaDataAll(string fieldName)
+		{
+			if (this.FacetsMetaData == null
+				|| !this.FacetsMetaData.Any()
+				|| !this.FacetsMetaData.ContainsKey(fieldName))
+				return null;
+
+			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
+			return metaData;
+		}
+		/* TODO expression based lookup! 
+		public IEnumerable<F> Facets<F>(Expression<T, string> propertySelector) where F : Facet
+		{
+			
+			return this.Facets<F>("");
+		}*/
+
+		public IEnumerable<F> Facets<F>(string fieldName) where F : Facet
+		{
+			if (this.FacetsMetaData == null
+				|| !this.FacetsMetaData.Any()
+				|| !this.FacetsMetaData.ContainsKey(fieldName))
+				return null;
+
+			var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
+			if (typeName.IsNullOrEmpty())
+				return null;
+
+			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
+			var facetMetaData = metaData.FirstOrDefault(fm=>fm.Type == typeName);
+			if (facetMetaData == null)
+				return null;
+			return facetMetaData.Facets.Cast<F>();
+		}
+
+
+		public IEnumerable<Highlight> Highlights
+		{
+			get
+			{
+				if (this.HitsMetaData != null)
+				{
+					foreach (var hit in this.HitsMetaData.Hits)
+					{
+						foreach (var h in hit.Highlight) { 
+							yield return new Highlight() { Field = h.Key };
+						}
+					}
+				}
+			}
+		}
+
+
 	}
 	[JsonObject]
 	public class IndicesResponse
@@ -103,13 +171,8 @@ namespace ElasticSearch.Client
 		public string Type { get; internal set; }
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }
-        [JsonProperty(PropertyName = "highlight")]
-        public Dictionary<string, List<string>> Highlight {get; internal set;}
-	}
-	[JsonObject]
-	public class FacetsMetaData
-	{
-		public Dictionary<string, List<FacetMetaData>> Facets { get; internal set; }
+		[JsonProperty(PropertyName = "highlight")]
+		public Dictionary<string, List<string>> Highlight {get; internal set;}
 	}
 	[JsonObject]
 	public class FacetMetaData
@@ -119,20 +182,31 @@ namespace ElasticSearch.Client
 		[JsonProperty(PropertyName = "missing")]
 		public int Missing { get; internal set; }
 
+		public string Field { get; internal set; }
+
 		public List<Facet>  Facets { get; internal set; }
 	}
+	[JsonObject]
 	public class Facet
 	{
+		public string Key { get; internal set; }
+
 		public bool Global { get; internal set; }
 		[JsonProperty(PropertyName = "count")]
 		public int Count { get; internal set; }
 	}
+
+	[JsonObject]
 	public class TermFacet : Facet
 	{
 		[JsonProperty(PropertyName = "term")]
 		public string Term { get; internal set; } 
 	}
 
+	public class Highlight
+	{
+		public string Field { get; internal set; }
+	}
 }
 
 

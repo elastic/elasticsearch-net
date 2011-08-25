@@ -17,7 +17,7 @@ namespace ElasticSearch.Tests
 	[TestFixture]
 	public class QueryFacetResponseMapperTests : BaseElasticSearchTests
 	{
-		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
+		private string _LookFor = NestTestData.Data.First().Followers.First().LastName.ToLower();
 
 
 		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
@@ -31,9 +31,15 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
 			Assert.True(queryResponse.Shards.Failed == 0);
 			Assert.That(queryResponse.ElapsedMilliseconds, Is.InRange(0, 200));
-				
 		}
-		
+		protected void TestDefaultFacetCollectionAssertation(IEnumerable<Facet> facets)
+		{
+			Assert.NotNull(facets);
+			Assert.True(facets.Count() > 0);
+		}
+
+
+
 		[Test]
 		public void SimpleTermFacet()
 		{
@@ -46,9 +52,32 @@ namespace ElasticSearch.Tests
 					}
 				}"
 			);
-			this.TestDefaultAssertions(queryResults);
-			Assert.True(queryResults.Total > 0);
 			
+			var facets = queryResults.Facets<TermFacet>("followers.lastName");
+			this.TestDefaultAssertions(queryResults);
+			this.TestDefaultFacetCollectionAssertation(facets);
+			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor));	
+		}
+		[Test]
+		public void SimpleTermFacetWithExclude()
+		{
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+						    ""match_all"" : { }
+					},
+					""facets"" : {
+					  ""followers.lastName"" : { ""terms"" : {
+						""field"" : ""followers.lastName""
+						, exclude : [""" + this._LookFor + @"""]
+					  } }
+					}
+				}"
+			);
+
+			var facets = queryResults.Facets<TermFacet>("followers.lastName");
+			this.TestDefaultAssertions(queryResults);
+			this.TestDefaultFacetCollectionAssertation(facets);
+			Assert.IsFalse(facets.Any(f=>f.Term == this._LookFor));
 		}
 	}
 }

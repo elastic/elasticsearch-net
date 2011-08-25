@@ -112,6 +112,7 @@
     <Compile Include="ElasticSearchJsonResolver.cs" />
     <Compile Include="ElasticSearchVersionInfo.cs" />
     <Compile Include="Enums\Consistency.cs" />
+    <Compile Include="Enums\FacetTypes.cs" />
     <Compile Include="Enums\Replication.cs" />
     <Compile Include="Enums\VersionType.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
