@@ -89,14 +89,24 @@ namespace ElasticSearch.Client
 			facetMetaData.Field = name;
 			facetMetaData.Type = type;
 			facetMetaData.Missing = data.Value<int>("missing");
-			var facetsArray = (JArray)(data.Property(propertyName).Value);
-			foreach (var facet in facetsArray)
+			if (new[] { "statistical" }.Contains(type))
 			{
-				var f = this.ParseFacet(facet, type, reader, serializer);
+				var f = this.ParseFacet(data, type, reader, serializer);
 				if (f != null)
 					facetMetaData.Facets.Add(f);
 			}
+			else 
+			{
+				var facetsArray = (JArray)(data.Property(propertyName).Value);
+				foreach (var facet in facetsArray)
+				{
+					var f = this.ParseFacet(facet, type, reader, serializer);
+					if (f != null)
+						facetMetaData.Facets.Add(f);
+				}
+			}
 			return facetMetaData;
+			
 		}
 
 		private string GetFacetPropertyName(string type)
@@ -116,6 +126,11 @@ namespace ElasticSearch.Client
 		{
 			switch (type)
 			{
+				case "statistical":
+					var statisticalFacet = serializer.Deserialize<StatisticalFacet>(facet.CreateReader());
+					statisticalFacet.Key = "__SingleFacet__";
+					return statisticalFacet;
+
 				case "terms":
 					var term = serializer.Deserialize<TermFacet>(facet.CreateReader());
 					term.Key = term.Term;
@@ -161,7 +176,6 @@ namespace ElasticSearch.Client
 			var count = jObject.Property("count").Value.Value<int>();
 			var ticks = jObject.Property("time").Value.Value<double>();
 			var d1 = ticks.JavaTimeStampToDateTime();
-
 			return new DateHistogramFacet(){ Count = count, Time = d1, Key = d1.ToString()};
 		}
 

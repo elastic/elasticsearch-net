@@ -14,6 +14,8 @@ namespace ElasticSearch.Client
 		{
 			switch (typeof(T).Name)
 			{
+				case "StatisticalFacet":
+					return "statistical";
 				case "TermFacet":
 					return "terms";
 				case "HistogramFacet":

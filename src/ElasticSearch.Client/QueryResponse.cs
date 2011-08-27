@@ -110,6 +110,24 @@ namespace ElasticSearch.Client
 			return facetMetaData.Facets.Cast<F>();
 		}
 
+		public F Facet<F>(string fieldName) where F : SingleFacet
+		{
+			if (this.FacetsMetaData == null
+				|| !this.FacetsMetaData.Any()
+				|| !this.FacetsMetaData.ContainsKey(fieldName))
+				return null;
+
+			var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
+			if (typeName.IsNullOrEmpty())
+				return null;
+
+			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
+			var facetMetaData = metaData.FirstOrDefault(fm => fm.Type == typeName);
+			if (facetMetaData == null)
+				return null;
+			return facetMetaData.Facets.Cast<F>().FirstOrDefault();
+		}
+
 
 		public IEnumerable<Highlight> Highlights
 		{
@@ -195,6 +213,14 @@ namespace ElasticSearch.Client
 		[JsonProperty(PropertyName = "count")]
 		public int Count { get; internal set; }
 	}
+	/// <summary>
+	/// Single facet is an abstract for facets that only return a single result (such as statistical)
+	/// </summary>
+	[JsonObject]
+	public abstract class SingleFacet : Facet
+	{
+		
+	}
 
 	[JsonObject]
 	public class TermFacet : Facet
@@ -252,6 +278,26 @@ namespace ElasticSearch.Client
 		[JsonProperty(PropertyName = "mean")]
 		public float? Mean { get; internal set; }
 	}
+	[JsonObject]
+	public class StatisticalFacet : SingleFacet
+	{
+		[JsonProperty(PropertyName = "min")]
+		public float? Min { get; internal set; }
+		[JsonProperty(PropertyName = "max")]
+		public float? Max { get; internal set; }
+		[JsonProperty(PropertyName = "total")]
+		public float Total { get; internal set; }
+		[JsonProperty(PropertyName = "sum_of_squares")]
+		public float? SumOfSquares { get; internal set; }
+		[JsonProperty(PropertyName = "variance")]
+		public float? Variance { get; internal set; }
+		[JsonProperty(PropertyName = "std_deviation")]
+		public float? StandardDeviation { get; internal set; }
+
+		[JsonProperty(PropertyName = "mean")]
+		public float? Mean { get; internal set; }
+	}
+
 
 	public class Highlight
 	{
