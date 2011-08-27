@@ -16,6 +16,15 @@ namespace ElasticSearch.Client
 			{
 				case "TermFacet":
 					return "terms";
+				case "HistogramFacet":
+					return "histogram";
+				case "DateHistogramFacet":
+					return "date_histogram";
+				case "DateRangeFacet":
+				case "RangeFacet":
+					return "range";
+				
+
 			}
 			return null;
 		}

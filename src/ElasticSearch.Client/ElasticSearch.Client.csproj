@@ -116,10 +116,13 @@
     <Compile Include="Enums\Replication.cs" />
     <Compile Include="Enums\VersionType.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
+    <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="Inflector.cs" />
+    <Compile Include="Mapping\ElasticPropertyAttribute.cs" />
+    <Compile Include="Mapping\ElasticTypeAttribute.cs" />
     <Compile Include="NamingConvention.cs" />
     <Compile Include="Parameters\BulkParameters.cs" />
     <Compile Include="Parameters\BaseParameters.cs" />

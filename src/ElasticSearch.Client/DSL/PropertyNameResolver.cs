@@ -13,17 +13,16 @@ namespace ElasticSearch.Client.DSL
 	class PropertyNameResolver
 	{
 		private JsonSerializerSettings SerializationSettings { get; set; }
-		private IContractResolver ContractResolver { get; set; }
-		private MethodInvoker PropertyResolver { get; set; }
+		private ElasticResolver ContractResolver { get; set; }
 
 		public PropertyNameResolver(JsonSerializerSettings settings)
 		{
 			this.SerializationSettings = settings;
-			this.ContractResolver = settings.ContractResolver;
+			this.ContractResolver = settings.ContractResolver as ElasticResolver;
 
-			var bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly;
-			this.PropertyResolver = this.ContractResolver.GetType()
-				.DelegateForCallMethod("ResolvePropertyName", bindingFlags , new[] { typeof(string) });
+			var t = this.ContractResolver.GetType();
+
+			var bindingFlags = BindingFlags.FlattenHierarchy;
 
 		}
 		public string Resolve(MemberExpression memberExpression)
@@ -32,7 +31,7 @@ namespace ElasticSearch.Client.DSL
 			while (memberExpression != null)
 			{
 				var name = memberExpression.Member.Name;
-				var resolvedName = this.PropertyResolver(this.ContractResolver, name) as string;
+				var resolvedName = this.ContractResolver.ResolvePropertyName(name);
 				segments.Insert(0, resolvedName);
 				memberExpression = memberExpression.Expression as MemberExpression;
 			}

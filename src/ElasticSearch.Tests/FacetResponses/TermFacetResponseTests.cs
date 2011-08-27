@@ -9,37 +9,14 @@ using Nest.TestData.Domain;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace ElasticSearch.Tests
+namespace ElasticSearch.Tests.FacetResponses
 {
 	/// <summary>
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class QueryFacetResponseMapperTests : BaseElasticSearchTests
+	public class TermFacetResponseTests : BaseFacetTestFixture
 	{
-		private string _LookFor = NestTestData.Data.First().Followers.First().LastName.ToLower();
-
-
-		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
-		{
-			Assert.True(queryResponse.IsValid);
-			Assert.Null(queryResponse.ConnectionError);
-			Assert.True(queryResponse.Total > 0, "No hits");
-			Assert.True(queryResponse.Documents.Any());
-			Assert.True(queryResponse.Documents.Count() > 0);
-			Assert.True(queryResponse.Shards.Total > 0);
-			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
-			Assert.True(queryResponse.Shards.Failed == 0);
-			Assert.That(queryResponse.ElapsedMilliseconds, Is.InRange(0, 200));
-		}
-		protected void TestDefaultFacetCollectionAssertation(IEnumerable<Facet> facets)
-		{
-			Assert.NotNull(facets);
-			Assert.True(facets.Count() > 0);
-		}
-
-
-
 		[Test]
 		public void SimpleTermFacet()
 		{
@@ -78,6 +55,27 @@ namespace ElasticSearch.Tests
 			this.TestDefaultAssertions(queryResults);
 			this.TestDefaultFacetCollectionAssertation(facets);
 			Assert.IsFalse(facets.Any(f=>f.Term == this._LookFor));
+		}
+		[Test]
+		public void SimpleTermFacetWithGlobal()
+		{
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+						    ""match_all"" : { }
+					},
+					""facets"" : {
+					  ""followers.lastName"" : { 
+						""terms"" : {""field"" : ""followers.lastName""} },
+						""global"" : true
+					}
+				}"
+			);
+
+			var facets = queryResults.Facets<TermFacet>("followers.lastName");
+			this.TestDefaultAssertions(queryResults);
+			this.TestDefaultFacetCollectionAssertation(facets);
+			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor));
+			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor && f.Count > 0));
 		}
 	}
 }

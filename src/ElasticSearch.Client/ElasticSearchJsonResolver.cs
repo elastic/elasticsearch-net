@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using ElasticSearch.Client.DSL;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Reflection;
+using ElasticSearch.Client.Mapping;
 
 namespace ElasticSearch.Client
 {
@@ -16,6 +18,26 @@ namespace ElasticSearch.Client
 			return base.CreateProperties(contract.CreatedType, contract.MemberSerialization);
 		}
 	}
+
+	public class ElasticResolver : CamelCasePropertyNamesContractResolver
+	{
+		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+		{
+			var property = base.CreateProperty(member, memberSerialization);
+			var attributes = member.GetCustomAttributes(typeof(ElasticPropertyAttribute), false);
+			if (attributes == null || !attributes.Any())
+				return property;
+
+			var att = attributes.First() as ElasticPropertyAttribute;
+			property.PropertyName = att.Name;
+			return property;
+		}
+		new public string ResolvePropertyName(string propertyName)
+		{
+			return base.ResolvePropertyName(propertyName);
+		}
+	}
+
 
 	public class FacetsMetaDataConverter : JsonConverter
 	{
@@ -61,11 +83,13 @@ namespace ElasticSearch.Client
 			var name = facetMetaDataObject.Name;
 			var data = (JObject)facetMetaDataObject.Value;
 			var type = data.Value<string>("_type");
+			var propertyName = this.GetFacetPropertyName(type);
+
 
 			facetMetaData.Field = name;
 			facetMetaData.Type = type;
 			facetMetaData.Missing = data.Value<int>("missing");
-			var facetsArray = (JArray)(data.Property(type).Value);
+			var facetsArray = (JArray)(data.Property(propertyName).Value);
 			foreach (var facet in facetsArray)
 			{
 				var f = this.ParseFacet(facet, type, reader, serializer);
@@ -73,6 +97,19 @@ namespace ElasticSearch.Client
 					facetMetaData.Facets.Add(f);
 			}
 			return facetMetaData;
+		}
+
+		private string GetFacetPropertyName(string type)
+		{
+			switch (type)
+			{
+				case "range":
+					return "ranges";
+				case "date_histogram":
+				case "histogram":
+					return "entries";
+			}
+			return type;
 		}
 
 		private Facet ParseFacet(JToken facet, string type, JsonReader reader, JsonSerializer serializer)
@@ -83,12 +120,53 @@ namespace ElasticSearch.Client
 					var term = serializer.Deserialize<TermFacet>(facet.CreateReader());
 					term.Key = term.Term;
 					return term;
+				case "date_histogram":
+					var dateHistogram = serializer.Deserialize<DateHistogramFacet>(facet.CreateReader());
+					return dateHistogram;
+				case "histogram":
+					var histogram = serializer.Deserialize<HistogramFacet>(facet.CreateReader());
+					return histogram;
+				case "range":
+					if (((JObject)facet).Property("from_str") != null ||
+						((JObject)facet).Property("to_str") != null
+						)
+					{
+						var dateRange = serializer.Deserialize<DateRangeFacet>(facet.CreateReader());
+						dateRange.Key = string.Format("From {0} to {1}", dateRange.From, dateRange.To);
+						return dateRange;
+					}
+					var range = serializer.Deserialize<RangeFacet>(facet.CreateReader());
+					range.Key = string.Format("From {0} to {1}", range.From, range.To);
+					return range;
 			}
 			return null;
 		}
+	}
 
+	public class DateHistogramConverter : JsonConverter
+	{
+
+		public override bool CanConvert(Type objectType)
+		{
+			return typeof(DateHistogramFacet).IsAssignableFrom(objectType);
+		}
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			JObject jObject = JObject.Load(reader);
+
+			var count = jObject.Property("count").Value.Value<int>();
+			var ticks = jObject.Property("time").Value.Value<double>();
+			var d1 = ticks.JavaTimeStampToDateTime();
+
+			return new DateHistogramFacet(){ Count = count, Time = d1, Key = d1.ToString()};
+		}
 
 	}
+
 
 
 	public class QueryJsonConverter : JsonConverter

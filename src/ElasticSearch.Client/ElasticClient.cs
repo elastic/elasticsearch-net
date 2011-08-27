@@ -67,30 +67,33 @@ namespace ElasticSearch.Client
 
 
 		
-		public ElasticClient(IConnectionSettings settings)
+		public ElasticClient(IConnectionSettings settings) : this(settings, false)
 		{
-            if (settings == null)
-                throw new ArgumentNullException("settings");
 
-			this.Settings = settings;
-			this.Connection = new Connection(settings);
-			this.SerializationSettings = new JsonSerializerSettings()
-			{
-				ContractResolver = new CamelCasePropertyNamesContractResolver(),
-				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter(), new FacetsMetaDataConverter() }
-			};
-			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}
 		public ElasticClient(IConnectionSettings settings,bool  useThrift)
 		{
+			if (settings == null)
+				throw new ArgumentNullException("settings");
+
 			this.Settings = settings;
-			this.Connection = new ThriftConnection(settings);
+			if (useThrift)
+				this.Connection = new ThriftConnection(settings);
+			else 
+				this.Connection = new Connection(settings);
+
 			this.SerializationSettings = new JsonSerializerSettings()
 			{
-				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				ContractResolver = new ElasticResolver(),
 				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> { new IsoDateTimeConverter(), new QueryJsonConverter(), new FacetsMetaDataConverter() }
+				Converters = new List<JsonConverter> 
+				{ 
+					new DateHistogramConverter(),
+					new IsoDateTimeConverter(), 
+					new QueryJsonConverter(), 
+					new FacetsMetaDataConverter() 
+
+				}
 			};
 			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}

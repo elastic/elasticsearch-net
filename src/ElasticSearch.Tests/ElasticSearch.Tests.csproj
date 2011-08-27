@@ -56,9 +56,13 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
-    <Compile Include="QueryFacetResponseMapperTests.cs" />
+    <Compile Include="FacetResponses\BaseFacetTestFixture.cs" />
+    <Compile Include="FacetResponses\HistogramFacetResponseTests.cs" />
+    <Compile Include="FacetResponses\RangeFacetResponseTests.cs" />
+    <Compile Include="FacetResponses\TermFacetResponseTests.cs" />
     <Compile Include="DeleteTests.cs" />
     <Compile Include="IndicesTests.cs" />
+    <Compile Include="Mapping\MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSLTests.cs" />
     <Compile Include="QueryResponseMapperTests.cs" />

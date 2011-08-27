@@ -32,18 +32,19 @@ namespace Nest.TestData
 							.Setup(c => c.lon).Use<FloatSource>();
 						x.Include<Person>()
 							.Setup(c => c.Id).Use<IntegerIdSource>()
-						   .Setup(c => c.Email).Use<EmailAddressSource>()
-						   .Setup(c => c.FirstName).Use<FirstNameSource>()
-						   .Setup(c => c.LastName).Use<LastNameSource>()
-						   .Setup(c => c.DateOfBirth).Use<DateOfBirthSource>()
-						   .Setup(c => c.PlaceOfBirth).Use <GeoLocationSource>();
+							.Setup(c => c.Email).Use<EmailAddressSource>()
+							.Setup(c => c.FirstName).Use<FirstNameSource>()
+							.Setup(c => c.LastName).Use<LastNameSource>()
+							.Setup(c => c.DateOfBirth).Use<DateOfBirthSource>()
+							.Setup(c => c.PlaceOfBirth).Use <GeoLocationSource>();
 						x.Include<ElasticSearchProject>()
 							.Setup(c => c.Id).Use<IntegerIdSource>()
-						  .Setup(c => c.Country).Use<CountrySource>()
-						  .Setup(c => c.Origin).Use<GeoLocationSource>()
-						  .Setup(c => c.Name).Use<ElasticSearchProjectsDataSource>()
-						  .Setup(c => c.Followers).Value(new List<Person>())
-                          .Setup(c => c.Content).Use<ElasticSearchProjectDescriptionSource>(); //need this specifically for us - JWD 20110822
+							.Setup(c => c.LOC).Use<LOCSource>()
+							.Setup(c => c.Country).Use<CountrySource>()
+							.Setup(c => c.Origin).Use<GeoLocationSource>()
+							.Setup(c => c.Name).Use<ElasticSearchProjectsDataSource>()
+							.Setup(c => c.Followers).Value(new List<Person>())
+							.Setup(c => c.Content).Use<ElasticSearchProjectDescriptionSource>();
 					});
 					var session = factory.CreateSession();
 					// Get a single user

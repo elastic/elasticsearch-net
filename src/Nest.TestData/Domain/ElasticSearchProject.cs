@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ElasticSearch.Client.Mapping;
 
 namespace Nest.TestData.Domain
 {
@@ -10,7 +11,9 @@ namespace Nest.TestData.Domain
         public int Id { get; set;  }
         public string Name { get; set; }
         public string Country { get; set; }
-        public string Content { get; set; } //need this specifically for us - JWD 20110822
+        public string Content { get; set; }
+		[ElasticProperty(Name="loc")]
+		public int LOC { get; set; }
         public List<Person> Followers { get; set; }
 		public GeoLocation Origin { get; set; }
     }

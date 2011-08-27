@@ -202,6 +202,56 @@ namespace ElasticSearch.Client
 		[JsonProperty(PropertyName = "term")]
 		public string Term { get; internal set; } 
 	}
+	[JsonObject]
+	public class HistogramFacet : Facet
+	{
+		[JsonProperty(PropertyName = "key")]
+		public new string Key { get; internal set; }
+	}
+	[JsonObject]
+	public class DateHistogramFacet : Facet
+	{
+		[JsonProperty(PropertyName = "time")]
+		public DateTime Time { get; internal set; }
+	}
+	[JsonObject]
+	public class RangeFacet : Facet
+	{
+		[JsonProperty(PropertyName = "to")]
+		public float? To { get; internal set; }
+		[JsonProperty(PropertyName = "from")]
+		public float? From { get; internal set; }
+
+		[JsonProperty(PropertyName = "min")]
+		public float? Min { get; internal set; }
+		[JsonProperty(PropertyName = "max")]
+		public float? Max { get; internal set; }
+		[JsonProperty(PropertyName = "total_count")]
+		public int TotalCount { get; internal set; }
+		[JsonProperty(PropertyName = "total")]
+		public float Total { get; internal set; }
+		[JsonProperty(PropertyName = "mean")]
+		public float? Mean { get; internal set; }
+	}
+	[JsonObject]
+	public class DateRangeFacet : Facet
+	{
+		[JsonProperty(PropertyName = "to_str")]
+		public DateTime? To { get; internal set; }
+		[JsonProperty(PropertyName = "from_str")]
+		public DateTime? From { get; internal set; }
+
+		[JsonProperty(PropertyName = "min")]
+		public float? Min { get; internal set; }
+		[JsonProperty(PropertyName = "max")]
+		public float? Max { get; internal set; }
+		[JsonProperty(PropertyName = "total_count")]
+		public int TotalCount { get; internal set; }
+		[JsonProperty(PropertyName = "total")]
+		public float Total { get; internal set; }
+		[JsonProperty(PropertyName = "mean")]
+		public float? Mean { get; internal set; }
+	}
 
 	public class Highlight
 	{
