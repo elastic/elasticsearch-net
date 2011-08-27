@@ -113,6 +113,8 @@ namespace ElasticSearch.Client
 		{
 			switch (type)
 			{
+				case "terms_stats":
+					return "terms";
 				case "range":
 					return "ranges";
 				case "date_histogram":
@@ -126,6 +128,12 @@ namespace ElasticSearch.Client
 		{
 			switch (type)
 			{
+				case "terms_stats":
+					var termStatistics = serializer.Deserialize<TermStatsFacet>(facet.CreateReader());
+					termStatistics.Key = termStatistics.Term;
+					return termStatistics;
+
+
 				case "statistical":
 					var statisticalFacet = serializer.Deserialize<StatisticalFacet>(facet.CreateReader());
 					statisticalFacet.Key = "__SingleFacet__";
