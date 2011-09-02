@@ -18,7 +18,26 @@ namespace AutoPoco.DataSources
 		}
 
 	}
+	public class LongSource : DatasourceBase<long>
+	{
+		private Random mRandom = new Random(1337);
+		public override long Next(IGenerationSession session)
+		{
+			long f = (long)((mRandom.NextDouble() * 2.0 - 1.0) * long.MaxValue); ;
+			return f;
+		}
+	}
+	public class DoubleSource : DatasourceBase<double>
+	{
+		private Random mRandom = new Random(1337);
+		public override double Next(IGenerationSession session)
+		{
+			double f = mRandom.Next(0, 100);
+			f = f + mRandom.NextDouble();
+			return f;
+		}
 
+	}
 	public class LOCSource : DatasourceBase<int>
 	{
 		private Random mRandom = new Random(1337);

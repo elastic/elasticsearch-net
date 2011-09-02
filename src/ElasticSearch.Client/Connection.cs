@@ -51,9 +51,21 @@ namespace ElasticSearch.Client
 			}
 
 		}
+
+
 		public ConnectionStatus PostSync(string path, string data)
 		{
-			var connection = this.CreateConnection(path, "POST");
+			return this.PostOrPutSync(path, data, "POST");
+		}
+		public ConnectionStatus PutSync(string path, string data)
+		{
+			return this.PostOrPutSync(path, data, "PUT");
+		}
+
+
+		private ConnectionStatus PostOrPutSync(string path, string data, string method)
+		{
+			var connection = this.CreateConnection(path, method);
 			connection.Timeout = this._ConnectionSettings.TimeOut;
 			Stream postStream = null;
 			WebResponse response = null;

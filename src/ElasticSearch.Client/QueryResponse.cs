@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
+using ElasticSearch.Client.DSL;
 
 namespace ElasticSearch.Client
 {
 	[JsonObject]
 	public class QueryResponse<T> where T : class
 	{
+		internal PropertyNameResolver PropertyNameResolver { get; set; }
+
 		public bool IsValid { get; set; }
 		public ConnectionError ConnectionError { get; set; }
 		public QueryResponse()
@@ -92,6 +96,12 @@ namespace ElasticSearch.Client
 			return this.Facets<F>("");
 		}*/
 
+		public IEnumerable<F> Facets<F>(Expression<Func<T, object>> expression) where F : Facet
+		{
+			var fieldName = this.PropertyNameResolver.Resolve(expression);
+			return this.Facets<F>(fieldName);
+		}
+
 		public IEnumerable<F> Facets<F>(string fieldName) where F : Facet
 		{
 			if (this.FacetsMetaData == null
@@ -109,7 +119,11 @@ namespace ElasticSearch.Client
 				return null;
 			return facetMetaData.Facets.Cast<F>();
 		}
-
+		public F Facet<F>(Expression<Func<T, object>> expression) where F : SingleFacet
+		{
+			var fieldName = this.PropertyNameResolver.Resolve(expression);
+			return this.Facet<F>(fieldName);
+		}
 		public F Facet<F>(string fieldName) where F : SingleFacet
 		{
 			if (this.FacetsMetaData == null

@@ -10,6 +10,9 @@ namespace ElasticSearch.Client
 		void Post(string path, string data, Action<ConnectionStatus> callback);
 		ConnectionStatus PostSync(string path, string data);
 
+		void Put(string path, string data, Action<ConnectionStatus> callback);
+		ConnectionStatus PutSync(string path, string data);
+
 	    void Delete(string path, Action<ConnectionStatus> callback);
 	    ConnectionStatus DeleteSync(string path);
 

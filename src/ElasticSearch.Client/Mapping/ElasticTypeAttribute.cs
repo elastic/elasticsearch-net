@@ -5,9 +5,16 @@ using System.Text;
 
 namespace ElasticSearch.Client.Mapping
 {
+	//TODO dynamic template support
 	[AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false)]
 	public class ElasticTypeAttribute : Attribute
 	{
 		public string Name { get; set; }
+		public string IndexAnalyzer { get; set; }
+		public string SearchAnalyzer { get; set; }
+		public string[] DynamicDateFormats { get; set; }
+		public bool DateDetection { get; set; }
+		public bool NumericDetection { get; set; }
 	}
+
 }

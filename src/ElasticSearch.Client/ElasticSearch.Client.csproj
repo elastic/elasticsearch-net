@@ -100,7 +100,9 @@
     <Compile Include="DSL\IRange.cs" />
     <Compile Include="DSL\MatchAll.cs" />
     <Compile Include="DSL\Prefix.cs" />
-    <Compile Include="DSL\PropertyNameResolver.cs" />
+    <Compile Include="Mapping\Enum\DateFormatOption.cs" />
+    <Compile Include="Resolvers\ExpressionVisitor.cs" />
+    <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="DSL\Query.cs" />
     <Compile Include="DSL\QueryString.cs" />
     <Compile Include="DSL\Search.cs" />
@@ -121,9 +123,10 @@
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="Inflector.cs" />
+    <Compile Include="Mapping\Enum\FieldType.cs" />
     <Compile Include="Mapping\ElasticPropertyAttribute.cs" />
     <Compile Include="Mapping\ElasticTypeAttribute.cs" />
-    <Compile Include="NamingConvention.cs" />
+    <Compile Include="Enums\NamingConvention.cs" />
     <Compile Include="Parameters\BulkParameters.cs" />
     <Compile Include="Parameters\BaseParameters.cs" />
     <Compile Include="Parameters\DeleteByQueryParameters.cs" />
@@ -191,6 +194,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

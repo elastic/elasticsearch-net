@@ -33,12 +33,13 @@ namespace ElasticSearch.Client
 			{
 				return new QueryResponse<T>()
 				{
+					PropertyNameResolver = this.PropertyNameResolver,
 					IsValid = false,
 					ConnectionError = status.Error
 				};
 			}
 			var response = JsonConvert.DeserializeObject<QueryResponse<T>>(status.Result, this.SerializationSettings);
-
+			response.PropertyNameResolver = this.PropertyNameResolver;
 			return response;
 		}
 
@@ -58,7 +59,6 @@ namespace ElasticSearch.Client
 			
 			var q = query.Queries.First();
 			var expression = q.MemberExpression;
-			this.PropertyNameResolver.Resolve(expression);
 
 			var o = this.SerializationSettings.ContractResolver;
 

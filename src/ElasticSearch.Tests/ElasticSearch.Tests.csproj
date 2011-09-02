@@ -57,6 +57,7 @@
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="FacetResponses\BaseFacetTestFixture.cs" />
+    <Compile Include="FacetResponses\GeoDistanceFacetResponseTests.cs" />
     <Compile Include="FacetResponses\TermStatsFacetResponseTests.cs" />
     <Compile Include="FacetResponses\StatisticalFacetResponseTests.cs" />
     <Compile Include="FacetResponses\HistogramFacetResponseTests.cs" />

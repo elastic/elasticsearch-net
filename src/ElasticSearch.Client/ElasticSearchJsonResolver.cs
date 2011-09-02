@@ -29,7 +29,8 @@ namespace ElasticSearch.Client
 				return property;
 
 			var att = attributes.First() as ElasticPropertyAttribute;
-			property.PropertyName = att.Name;
+			if (!att.Name.IsNullOrEmpty())
+				property.PropertyName = att.Name;
 			return property;
 		}
 		new public string ResolvePropertyName(string propertyName)

@@ -36,6 +36,24 @@ namespace ElasticSearch.Tests.FacetResponses
 			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor));	
 		}
 		[Test]
+		public void SimpleTermFacetWithExpression()
+		{
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+						    ""match_all"" : { }
+					},
+					""facets"" : {
+					  ""followers.lastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
+					}
+				}"
+			);
+
+			var facets = queryResults.Facets<TermFacet>(p=>p.Followers.Select(f=>f.LastName));
+			this.TestDefaultAssertions(queryResults);
+			this.TestDefaultFacetCollectionAssertation(facets);
+			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor));
+		}
+		[Test]
 		public void SimpleTermFacetWithExclude()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(

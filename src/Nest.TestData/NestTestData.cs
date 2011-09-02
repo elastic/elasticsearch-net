@@ -39,11 +39,15 @@ namespace Nest.TestData
 							.Setup(c => c.PlaceOfBirth).Use <GeoLocationSource>();
 						x.Include<ElasticSearchProject>()
 							.Setup(c => c.Id).Use<IntegerIdSource>()
+							.Setup(c => c.LongValue).Use<LongSource>()
+							.Setup(c => c.FloatValue).Use<FloatSource>()
+							.Setup(c => c.DoubleValue).Use<DoubleSource>()
 							.Setup(c => c.LOC).Use<LOCSource>()
 							.Setup(c => c.Country).Use<CountrySource>()
 							.Setup(c => c.Origin).Use<GeoLocationSource>()
 							.Setup(c => c.Name).Use<ElasticSearchProjectsDataSource>()
 							.Setup(c => c.Followers).Value(new List<Person>())
+							.Setup(c => c.StartedOn).Use<DateOfBirthSource>()
 							.Setup(c => c.Content).Use<ElasticSearchProjectDescriptionSource>();
 					});
 					var session = factory.CreateSession();

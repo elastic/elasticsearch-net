@@ -49,5 +49,37 @@ namespace ElasticSearch.Tests.FacetResponses
 			Assert.Greater(facet.StandardDeviation, 0);
 		
 		}
+		[Test]
+		public void StatisticalHistogramFacetPropertyAccess()
+		{
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@"
+				{ 
+					""query"" : { ""match_all"" : { } },
+					""facets"" : 
+					{
+						""loc"" : 
+						{ 
+							""statistical"" : 
+							{
+								""field"" : ""loc""
+							}
+						}
+					}
+				}"
+			);
+
+			var facet = queryResults.Facet<StatisticalFacet>(p=>p.LOC);
+			this.TestDefaultAssertions(queryResults);
+			Assert.Greater(facet.Count, 0);
+			Assert.Greater(facet.Total, 0);
+			Assert.Greater(facet.Min, 0);
+			Assert.Greater(facet.Max, 0);
+			Assert.Greater(facet.Mean, 0);
+			Assert.Greater(facet.SumOfSquares, 0);
+			Assert.Greater(facet.Variance, 0);
+			Assert.Greater(facet.StandardDeviation, 0);
+
+		}
 	}
 }
