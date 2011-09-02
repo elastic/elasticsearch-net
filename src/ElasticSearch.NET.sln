@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.Client", "ElasticSearch.Client\ElasticSearch.Client.csproj", "{072BA7DA-7B60-407D-8B6E-95E3186BE70C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.ConsolePlayground", "ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj", "{DDD6693D-A165-45F1-8638-B7EC037CF6F6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch.Tests", "ElasticSearch.Tests\ElasticSearch.Tests.csproj", "{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Indexer", "HackerNews.Indexer\HackerNews.Indexer.csproj", "{E39CC264-A7B3-490D-84B2-D3016D86CD87}"
@@ -39,16 +37,6 @@ Global
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Release|x86.ActiveCfg = Release|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DDD6693D-A165-45F1-8638-B7EC037CF6F6}.Release|x86.ActiveCfg = Release|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
