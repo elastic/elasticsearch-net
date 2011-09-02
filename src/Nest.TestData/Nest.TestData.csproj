@@ -49,10 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\ElasticSearchProjectDescriptionSource.cs" />
+    <Compile Include="DataSources\ElasticSearchProjectsDataSource.cs" />
+    <Compile Include="DataSources\GeoLocationSource.cs" />
+    <Compile Include="DataSources\LOCSource.cs" />
+    <Compile Include="DataSources\DoubleSource.cs" />
+    <Compile Include="DataSources\LongSource.cs" />
+    <Compile Include="DataSources\FloatSource.cs" />
     <Compile Include="Domain\ElasticSearchProject.cs" />
     <Compile Include="Domain\GeoLocation.cs" />
     <Compile Include="Domain\Person.cs" />
-    <Compile Include="OpenSourceProjectNameDataSource.cs" />
     <Compile Include="NestTestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

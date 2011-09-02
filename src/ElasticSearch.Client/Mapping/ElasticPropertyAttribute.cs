@@ -55,42 +55,11 @@ namespace ElasticSearch.Client.Mapping
 		}
 	}
 
-	public enum DateFormatOption
-	{
-
-	}
-
-	public enum NumericType
-	{
-		Float,
-		Double, 
-		Integer,
-		Long,
-		Short,
-		Byte
-	}
 
 
-	public enum StoreOption
-	{
-		No, 
-		Yes
-	}
-	public enum FieldIndexOption
-	{
-		Analyzed,
-		NotAnalyzed ,
-		None = 2
-	}
-	public enum TermVectorOption
-	{
-		No, 
-		Yes, 
-		WithOffsets,
-		WithPositions,
-		WithPositionsOffsets
-
-	}
+	
+	
+	
 
 	
 }

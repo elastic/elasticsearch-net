@@ -100,13 +100,15 @@
     <Compile Include="DSL\IRange.cs" />
     <Compile Include="DSL\MatchAll.cs" />
     <Compile Include="DSL\Prefix.cs" />
-    <Compile Include="Mapping\Enum\DateFormatOption.cs" />
+    <Compile Include="Enums\TermVectorOption.cs" />
+    <Compile Include="Enums\FieldIndexOption.cs" />
+    <Compile Include="Enums\StoreOption.cs" />
+    <Compile Include="Enums\NumericType.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="DSL\Query.cs" />
     <Compile Include="DSL\QueryString.cs" />
     <Compile Include="DSL\Search.cs" />
-    <Compile Include="DSL\SerializationSettings.cs" />
     <Compile Include="DSL\Term.cs" />
     <Compile Include="DSL\Wildcard.cs" />
     <Compile Include="ElasticClient-Search.cs" />
@@ -123,7 +125,7 @@
     <Compile Include="IConnection.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="Inflector.cs" />
-    <Compile Include="Mapping\Enum\FieldType.cs" />
+    <Compile Include="Enums\FieldType.cs" />
     <Compile Include="Mapping\ElasticPropertyAttribute.cs" />
     <Compile Include="Mapping\ElasticTypeAttribute.cs" />
     <Compile Include="Enums\NamingConvention.cs" />

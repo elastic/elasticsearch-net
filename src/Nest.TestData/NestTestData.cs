@@ -7,6 +7,7 @@ using AutoPoco;
 using Nest.TestData.Domain;
 using AutoPoco.DataSources;
 using AutoPoco.Configuration;
+using Nest.TestData.DataSources;
 
 namespace Nest.TestData
 {

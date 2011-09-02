@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ElasticSearch.Client.DSL
+namespace ElasticSearch.Client
 {
-	class SerializationSettings
+	public enum StoreOption
 	{
+		No,
+		Yes
 	}
+
+	
 }
