@@ -84,6 +84,21 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="Domain\Facets\FacetMetaData.cs" />
+    <Compile Include="Domain\Facets\Facet.cs" />
+    <Compile Include="Domain\Facets\SingleFacet.cs" />
+    <Compile Include="Domain\Facets\TermStatsFacet.cs" />
+    <Compile Include="Domain\Facets\StatisticalFacet.cs" />
+    <Compile Include="Domain\Facets\DateRangeFacet.cs" />
+    <Compile Include="Domain\Facets\RangeFacet.cs" />
+    <Compile Include="Domain\Facets\DateHistogramFacet.cs" />
+    <Compile Include="Domain\Facets\HistogramFacet.cs" />
+    <Compile Include="Domain\Facets\TermFacet.cs" />
+    <Compile Include="Domain\Highlight.cs" />
+    <Compile Include="Domain\IndicesResponse.cs" />
+    <Compile Include="Domain\Hit\Hit.cs" />
+    <Compile Include="Domain\Hit\HitsMetaData.cs" />
+    <Compile Include="Domain\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-Inferno.cs" />
     <Compile Include="ElasticClient-Indices.cs" />
@@ -104,6 +119,8 @@
     <Compile Include="Enums\FieldIndexOption.cs" />
     <Compile Include="Enums\StoreOption.cs" />
     <Compile Include="Enums\NumericType.cs" />
+    <Compile Include="Resolvers\Converters\FacetsMetaConverter.cs" />
+    <Compile Include="Resolvers\Converters\DateHistogramConverter.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="DSL\Query.cs" />
@@ -113,7 +130,7 @@
     <Compile Include="DSL\Wildcard.cs" />
     <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="ElasticQuery.cs" />
-    <Compile Include="ElasticSearchJsonResolver.cs" />
+    <Compile Include="Resolvers\ElasticSearchJsonResolver.cs" />
     <Compile Include="ElasticSearchVersionInfo.cs" />
     <Compile Include="Enums\Consistency.cs" />
     <Compile Include="Enums\FacetTypes.cs" />
@@ -136,6 +153,7 @@
     <Compile Include="Parameters\IndexParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryResponse.cs" />
+    <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="Thrift\Method.cs" />
     <Compile Include="Thrift\Rest.cs" />

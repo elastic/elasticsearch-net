@@ -5,15 +5,8 @@ using System.Text;
 
 namespace ElasticSearch.Client
 {
-	public enum NumericType
+	public class Highlight
 	{
-		Default,
-		Float,
-		Double,
-		Integer,
-		Long,
-		Short,
-		Byte
+		public string Field { get; internal set; }
 	}
-
 }

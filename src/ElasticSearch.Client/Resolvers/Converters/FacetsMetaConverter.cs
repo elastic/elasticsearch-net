@@ -1,45 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-using ElasticSearch.Client.DSL;
-using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Linq.Expressions;
 using System.Reflection;
+using Fasterflect;
 using ElasticSearch.Client.Mapping;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Linq;
 
-namespace ElasticSearch.Client
+namespace ElasticSearch.Client.DSL
 {
-	public class DynamicContractResolver : DefaultContractResolver
-	{
-		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-		{
-			var contract = new JsonObjectContract(type);
-			return base.CreateProperties(contract.CreatedType, contract.MemberSerialization);
-		}
-	}
-
-	public class ElasticResolver : CamelCasePropertyNamesContractResolver
-	{
-		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
-		{
-			var property = base.CreateProperty(member, memberSerialization);
-			var attributes = member.GetCustomAttributes(typeof(ElasticPropertyAttribute), false);
-			if (attributes == null || !attributes.Any())
-				return property;
-
-			var att = attributes.First() as ElasticPropertyAttribute;
-			if (!att.Name.IsNullOrEmpty())
-				property.PropertyName = att.Name;
-			return property;
-		}
-		new public string ResolvePropertyName(string propertyName)
-		{
-			return base.ResolvePropertyName(propertyName);
-		}
-	}
-
-
 	public class FacetsMetaDataConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
@@ -49,28 +22,28 @@ namespace ElasticSearch.Client
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			JObject jObject = JObject.Load(reader);
-			var target = new Dictionary<string,List<FacetMetaData>>();
+			var target = new Dictionary<string, List<FacetMetaData>>();
 			var allMetaData = this.ParseAllMetaData(jObject, reader, serializer);
-			
+
 			var groupedMetaData =
 				from a in allMetaData
 				group a by a.Field into b
-				select new { Key = b.Key, Value = b.ToList()};
+				select new { Key = b.Key, Value = b.ToList() };
 			foreach (var g in groupedMetaData)
 				target.Add(g.Key, g.Value);
-				
+
 			return target;
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			
+
 		}
 
 		private IEnumerable<FacetMetaData> ParseAllMetaData(JObject jObject, JsonReader reader, JsonSerializer serializer)
 		{
 			var list = new List<FacetMetaData>();
 			// Load JObject from stream
-			
+
 			foreach (var facetMetaDataObject in jObject.Properties())
 			{
 				var facetMetaData = this.ParseMetaData(facetMetaDataObject, reader, serializer);
@@ -96,7 +69,7 @@ namespace ElasticSearch.Client
 				if (f != null)
 					facetMetaData.Facets.Add(f);
 			}
-			else 
+			else
 			{
 				var facetsArray = (JArray)(data.Property(propertyName).Value);
 				foreach (var facet in facetsArray)
@@ -107,7 +80,7 @@ namespace ElasticSearch.Client
 				}
 			}
 			return facetMetaData;
-			
+
 		}
 
 		private string GetFacetPropertyName(string type)
@@ -166,69 +139,4 @@ namespace ElasticSearch.Client
 			return null;
 		}
 	}
-
-	public class DateHistogramConverter : JsonConverter
-	{
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(DateHistogramFacet).IsAssignableFrom(objectType);
-		}
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotImplementedException();
-		}
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			JObject jObject = JObject.Load(reader);
-
-			var count = jObject.Property("count").Value.Value<int>();
-			var ticks = jObject.Property("time").Value.Value<double>();
-			var d1 = ticks.JavaTimeStampToDateTime();
-			return new DateHistogramFacet(){ Count = count, Time = d1, Key = d1.ToString()};
-		}
-
-	}
-
-
-
-	public class QueryJsonConverter : JsonConverter
-	{
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(IFieldQuery).IsAssignableFrom(objectType);
-		}
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			IFieldQuery fq = value as IFieldQuery;
-			if (fq != null)
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(fq.Field);
-				writer.WriteStartObject();
-				if (fq is IValue)
-				{
-					IValue v = fq as IValue;
-					writer.WritePropertyName("value");
-					writer.WriteValue(v.Value);
-				}
-				if (fq.Boost != 1.0)
-				{
-					writer.WritePropertyName("boost");
-					writer.WriteValue(fq.Boost);
-				}
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-			}
-			else
-				writer.WriteNull();
-		}
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			return null;
-		}
-
-	}
-
 }

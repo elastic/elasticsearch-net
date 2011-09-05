@@ -22,12 +22,12 @@ namespace ElasticSearch.Client.Mapping
 		public string Analyzer { get; set; }
 		public string IndexAnalyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
-		public object NullValue { get; set; }
+		public string NullValue { get; set; }
 
 		public bool OmitNorms { get; set; }
 		public bool OmitTermFrequencyAndPositions { get; set; }
 		public bool IncludeInAll { get; set;}
-		public StoreOption Store { get; set; }
+		public bool Store { get; set; }
 
 		/// <summary>
 		/// Defaults to float so be sure to set this correctly!
@@ -44,10 +44,9 @@ namespace ElasticSearch.Client.Mapping
 		{
 			//make sure we match ES's defaults
 			this.Boost = 1;
-			this.TermVector = TermVectorOption.No; 
-			this.Index = FieldIndexOption.Analyzed;
-			this.Store = StoreOption.No;
-			
+			this.TermVector = TermVectorOption.no; 
+			this.Index = FieldIndexOption.analyzed;
+		
 			this.IncludeInAll = true;
 
 			this.NumericType = NumericType.Float;

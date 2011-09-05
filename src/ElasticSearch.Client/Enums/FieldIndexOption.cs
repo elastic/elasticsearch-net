@@ -7,9 +7,9 @@ namespace ElasticSearch.Client
 {
 	public enum FieldIndexOption
 	{
-		Analyzed,
-		NotAnalyzed,
-		None = 2
+		analyzed,
+		not_analyzed,
+		none
 	}
 
 	

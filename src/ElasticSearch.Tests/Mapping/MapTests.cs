@@ -10,10 +10,10 @@ using NUnit.Framework;
 namespace ElasticSearch.Tests.Mapping
 {
 	[TestFixture]
-	public class MapTestss : BaseElasticSearchTests
+	public class MapTests : BaseElasticSearchTests
     {
         [Test]
-        public void GetDocumentById()
+        public void SimpleMapByAttributes()
 		{
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");

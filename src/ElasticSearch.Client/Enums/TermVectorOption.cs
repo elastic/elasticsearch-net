@@ -7,11 +7,11 @@ namespace ElasticSearch.Client
 {
 	public enum TermVectorOption
 	{
-		No,
-		Yes,
-		WithOffsets,
-		WithPositions,
-		WithPositionsOffsets
+		no,
+		yes,
+		with_offsets,
+		with_positions,
+		with_positions_offsets
 
 	}
 }

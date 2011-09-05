@@ -19,6 +19,7 @@ namespace Nest.TestData.Domain
 	{
 		public int Id { get; set;  }
 		public string Name { get; set; }
+		[ElasticProperty(OmitNorms = true, Index = FieldIndexOption.not_analyzed)]
 		public string Country { get; set; }
 		public string Content { get; set; }
 		[ElasticProperty(Name="loc")]
@@ -34,6 +35,9 @@ namespace Nest.TestData.Domain
 		public long LongValue { get; set; }
 		public float FloatValue { get; set; }
 		public double DoubleValue { get; set; }
+
+		[ElasticProperty(NumericType=NumericType.Long)]
+		public int StupidIntIWantAsLong { get; set; }
 
 	}
 }
