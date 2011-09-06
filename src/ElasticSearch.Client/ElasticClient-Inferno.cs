@@ -99,10 +99,16 @@ namespace ElasticSearch.Client
 		{
 			var type = typeof(T);
 			var typeName = type.Name;
-			if (this.Settings.TypeNameInferrer != null)
-				typeName = this.Settings.TypeNameInferrer(typeName);
-			if (this.Settings.TypeNameInferrer == null || string.IsNullOrEmpty(typeName))
-				typeName = Inflector.MakePlural(type.Name).ToLower();
+			var att = this.PropertyNameResolver.GetElasticPropertyFor<T>();
+			if (att != null && !att.Name.IsNullOrEmpty())
+				typeName = att.Name;
+			else
+			{ 
+				if (this.Settings.TypeNameInferrer != null)
+					typeName = this.Settings.TypeNameInferrer(typeName);
+				if (this.Settings.TypeNameInferrer == null || string.IsNullOrEmpty(typeName))
+					typeName = Inflector.MakePlural(type.Name).ToLower();
+			}
 			return typeName;
 		}
 		private string CreatePath(string index)

@@ -79,6 +79,26 @@ namespace ElasticSearch.Client
 			}
 		}
 
+
+
+		public FacetMetaData FacetMetaData(Expression<Func<T, object>> expression)
+		{
+			var fieldName = this.PropertyNameResolver.Resolve(expression);
+			return this.FacetMetaData(fieldName);
+		}
+		public FacetMetaData FacetMetaData(string fieldName)
+		{
+			var allMetaData = this.FacetMetaDataAll(fieldName);
+			if (allMetaData != null && allMetaData.Any())
+				return allMetaData.First();
+			return null;
+		}
+		public IEnumerable<FacetMetaData> FacetMetaDataAll(Expression<Func<T, object>> expression)
+		{
+			var fieldName = this.PropertyNameResolver.Resolve(expression);
+			return this.FacetMetaDataAll(fieldName);
+		}
+
 		public IEnumerable<FacetMetaData> FacetMetaDataAll(string fieldName)
 		{
 			if (this.FacetsMetaData == null
@@ -89,12 +109,6 @@ namespace ElasticSearch.Client
 			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
 			return metaData;
 		}
-		/* TODO expression based lookup! 
-		public IEnumerable<F> Facets<F>(Expression<T, string> propertySelector) where F : Facet
-		{
-			
-			return this.Facets<F>("");
-		}*/
 
 		public IEnumerable<F> Facets<F>(Expression<Func<T, object>> expression) where F : Facet
 		{

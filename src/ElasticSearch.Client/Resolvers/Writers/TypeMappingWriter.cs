@@ -14,6 +14,7 @@ namespace ElasticSearch.Client
 		private PropertyNameResolver PropertyNameResolver { get; set; }
 		public TypeMappingWriter(string typeName, PropertyNameResolver propertyNameResolver)
 		{
+			this.TypeName = typeName;
 			this.PropertyNameResolver = propertyNameResolver;
 		}
 
@@ -31,6 +32,8 @@ namespace ElasticSearch.Client
 					jsonWriter.WritePropertyName(typeName);
 					jsonWriter.WriteStartObject();
 					{
+						this.WriteRootObjectProperties(jsonWriter);
+							
 						jsonWriter.WritePropertyName("properties");
 						jsonWriter.WriteStartObject();
 						{
@@ -45,6 +48,50 @@ namespace ElasticSearch.Client
 				return sw.ToString();
 			}
 		}
+		private void WriteRootObjectProperties(JsonWriter jsonWriter)
+		{
+			var att = this.PropertyNameResolver.GetElasticPropertyFor<T>();
+			if (att == null)
+				return;
+
+			if (!att.DateDetection)
+			{
+				jsonWriter.WritePropertyName("date_detection");
+				jsonWriter.WriteRawValue("false");
+			}
+			if (att.NumericDetection)
+			{
+				jsonWriter.WritePropertyName("date_detection");
+				jsonWriter.WriteRawValue("true");
+			}
+			if (!att.IndexAnalyzer.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("index_analyzer");
+				jsonWriter.WriteValue(att.IndexAnalyzer);
+			}
+			if (!att.SearchAnalyzer.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("search_analyzer");
+				jsonWriter.WriteValue(att.SearchAnalyzer);
+			}
+			if (!att.SearchAnalyzer.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("search_analyzer");
+				jsonWriter.WriteValue(att.SearchAnalyzer);
+			}
+			if (att.DynamicDateFormats != null && att.DynamicDateFormats.Any())
+			{
+				jsonWriter.WritePropertyName("dynamic_date_formats");
+				jsonWriter.WriteStartArray();
+				foreach(var d in att.DynamicDateFormats)
+				{
+					jsonWriter.WriteValue(d);	
+				}
+				jsonWriter.WriteEndArray();
+				
+			}
+		}
+
 		private void WriteProperties(JsonWriter jsonWriter)
 		{
 			var properties = typeof(T).GetProperties();

@@ -15,6 +15,10 @@ namespace ElasticSearch.Client.Mapping
 		public string[] DynamicDateFormats { get; set; }
 		public bool DateDetection { get; set; }
 		public bool NumericDetection { get; set; }
+		public ElasticTypeAttribute()
+		{
+			this.DateDetection = true;
+		}
 	}
 
 }

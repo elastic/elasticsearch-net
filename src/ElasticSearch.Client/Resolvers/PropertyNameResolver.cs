@@ -35,6 +35,13 @@ namespace ElasticSearch.Client.DSL
 				return ((ElasticPropertyAttribute)attributes.First());
 			return null;
 		}
+		public ElasticTypeAttribute GetElasticPropertyFor<T>() where T : class
+		{
+			var attributes = typeof(T).GetCustomAttributes(typeof(ElasticTypeAttribute), true);
+			if (attributes != null && attributes.Any())
+				return ((ElasticTypeAttribute)attributes.First());
+			return null;
+		}
 
 		public string Resolve(MemberInfo info)
 		{
