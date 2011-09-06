@@ -89,6 +89,8 @@ namespace ElasticSearch.Client.DSL
 			{
 				case "terms_stats":
 					return "terms";
+				case "geo_distance":
+					return "ranges";
 				case "range":
 					return "ranges";
 				case "date_histogram":
@@ -106,7 +108,11 @@ namespace ElasticSearch.Client.DSL
 					var termStatistics = serializer.Deserialize<TermStatsFacet>(facet.CreateReader());
 					termStatistics.Key = termStatistics.Term;
 					return termStatistics;
-
+				case "geo_distance":
+					var geoDistance = serializer.Deserialize<GeoDistanceFacet>(facet.CreateReader());
+					geoDistance.Count = geoDistance.TotalCount;
+					geoDistance.Key = string.Format("From {0} to {1}", geoDistance.From, geoDistance.To);
+					return geoDistance;
 
 				case "statistical":
 					var statisticalFacet = serializer.Deserialize<StatisticalFacet>(facet.CreateReader());

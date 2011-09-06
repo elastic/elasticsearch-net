@@ -69,7 +69,7 @@ namespace ElasticSearch.Client.DSL
 				var resolvedName = this.ContractResolver.ResolvePropertyName(name);
 
 				var att = this.GetElasticProperty(expression.Member);
-				if (att != null)
+				if (att != null && !att.Name.IsNullOrEmpty())
 					resolvedName = att.Name;
 
 

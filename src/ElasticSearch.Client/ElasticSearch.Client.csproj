@@ -84,6 +84,7 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="Domain\Facets\GeoDistanceFacet.cs" />
     <Compile Include="Domain\Facets\FacetMetaData.cs" />
     <Compile Include="Domain\Facets\Facet.cs" />
     <Compile Include="Domain\Facets\SingleFacet.cs" />

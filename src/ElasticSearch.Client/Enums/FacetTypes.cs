@@ -27,6 +27,8 @@ namespace ElasticSearch.Client
 				case "DateRangeFacet":
 				case "RangeFacet":
 					return "range";
+				case "GeoDistanceFacet":
+					return "geo_distance";
 				
 
 			}

@@ -48,8 +48,6 @@ namespace ElasticSearch.Client.Mapping
 			this.Index = FieldIndexOption.analyzed;
 		
 			this.IncludeInAll = true;
-
-			this.NumericType = NumericType.Float;
 			this.PrecisionStep = 4;
 		}
 	}

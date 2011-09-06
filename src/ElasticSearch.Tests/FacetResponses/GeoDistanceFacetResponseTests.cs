@@ -20,24 +20,27 @@ namespace ElasticSearch.Tests.FacetResponses
 		[Test]
 		public void SimpleGeoFacet()
 		{
+			this.DeleteIndices();
+			this.ConnectedClient.Map<ElasticSearchProject>();
+			this.BulkIndexData();
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },
 					""facets"" : 
 					{
-						""loc"" : 
+						""origin"" : 
 						{ 
 							""geo_distance"" : {
-								""pin.location"" : {
+								""origin"" : {
 									""lat"" : 52,
 									""lon"" : 52
 								},
 								""ranges"" : [
-									{ ""to"" : 10 },
-									{ ""from"" : 10, ""to"" : 20 },
-									{ ""from"" : 20, ""to"" : 100 },
-									{ ""from"" : 100 }
+									{ ""to"" : 500 },
+									{ ""from"" : 500, ""to"" : 5000 },
+									{ ""from"" : 5000, ""to"" : 10000 },
+									{ ""from"" : 10000 }
 								]
 							}
 						}
@@ -45,7 +48,7 @@ namespace ElasticSearch.Tests.FacetResponses
 				}"
 			);
 
-			var facets = queryResults.Facets<TermStatsFacet>("loc");		
+			var facets = queryResults.Facets<GeoDistanceFacet>(p => p.Origin);
 			this.TestDefaultAssertions(queryResults);
 			this.TestDefaultFacetCollectionAssertation(facets);
 			var facet = facets.First();

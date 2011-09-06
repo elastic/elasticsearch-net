@@ -70,6 +70,29 @@ namespace ElasticSearch.Tests
 
 			}
 		}
+		protected void DeleteIndices()
+		{
+			var client = CreateClient();
+			if (client.IsValid)
+			{
+				var cloneIndex = Test.Default.DefaultIndex + "_clone";
+				client.DeleteMapping<ElasticSearchProject>();
+				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
 
+			}
+		}
+		protected void BulkIndexData()
+		{
+			var client = CreateClient();
+			if (client.IsValid)
+			{
+				var projects = NestTestData.Data;
+				var cloneIndex = Test.Default.DefaultIndex + "_clone";
+				var bulkParameters = new SimpleBulkParameters() { Refresh = true };
+				client.Index(projects, bulkParameters);
+				client.Index(projects, cloneIndex, bulkParameters);
+
+			}
+		}
 	}
 }
