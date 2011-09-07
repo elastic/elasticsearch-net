@@ -22,6 +22,9 @@ For more examples please refer to the [Wiki](https://github.com/Mpdreamz/NEST/wi
 * [Deleting](https://github.com/Mpdreamz/NEST/wiki/Deleting)
 * [Mapping](https://github.com/Mpdreamz/NEST/wiki/Mapping)
 
+
+To get a good overview of the status of NEST please keep an eye out on the public [Roadmap](https://github.com/Mpdreamz/NEST/wiki/RoadMap)
+
 ## Copyright
 
 Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](https://github.com/Mpdreamz/NEST)
