@@ -33,7 +33,7 @@
       <MSBuild Projects="$(SolutionFile)" Properties="Configuration=$(Configuration)"  />
   </Target>
 
-  <Target Name="BuildTests" DependsOnTargets="_Initialize">
+  <Target Name="BuildTests">
     <!-- Builds the package -->
     <MSBuild Projects="$(SlnDir)\ElasticSearch.Net.Tests.sln" />
   </Target>
