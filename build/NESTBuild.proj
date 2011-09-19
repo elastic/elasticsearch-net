@@ -13,7 +13,7 @@
   <PropertyGroup>
       <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
       <BuildDir>$(MSBuildProjectDirectory)\tmp</BuildDir>
-      <SolutionFile>..\ElasticSearch.NET.sln</SolutionFile>
+      <SolutionFile>$(SrcDir)\ElasticSearch.NET.sln</SolutionFile>
   </PropertyGroup>
   
   <Target Name="Compile">
@@ -31,11 +31,6 @@
       AssemblyFileVersion="$(Version)"/>
 
       <MSBuild Projects="$(SolutionFile)" Properties="Configuration=$(Configuration)"  />
-  </Target>
-
-  <Target Name="BuildTests">
-    <!-- Builds the package -->
-    <MSBuild Projects="$(SlnDir)\ElasticSearch.Net.Tests.sln" />
   </Target>
   
   <Target Name="NuGetPackage" DependsOnTargets="Compile">
