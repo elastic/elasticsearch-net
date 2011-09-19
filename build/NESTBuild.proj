@@ -15,13 +15,6 @@
       <BuildDir>$(MSBuildProjectDirectory)\tmp</BuildDir>
       <SolutionFile>..\ElasticSearch.NET.sln</SolutionFile>
   </PropertyGroup>
-
-  <Target Name="_Initialize">
-    <!-- Initializes the environment and remote repositories -->
-    <InitializeOpenWrap CurrentDirectory="$(MSBuildProjectDirectory)\..">
-      <Output TaskParameter="Name" PropertyName="OpenWrap-PackageName" />
-    </InitializeOpenWrap>
-  </Target>
   
   <Target Name="Compile">
     <AssemblyInfo CodeLanguage="CS"
