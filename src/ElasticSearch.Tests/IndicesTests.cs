@@ -29,7 +29,6 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResponse.Shards.Total > 0);
 			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
 			Assert.True(queryResponse.Shards.Failed == 0);
-			Assert.That(queryResponse.ElapsedMilliseconds, Is.InRange(0, 200));
 				
 		}
 		[Test]
