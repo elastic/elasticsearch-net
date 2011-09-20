@@ -80,18 +80,18 @@ namespace ElasticSearch.Client
 		{
 			var type = typeof(T);
 			var idProperty = type.GetProperty("Id");
-			int? id = null;
-			string idString = string.Empty;
+			string idString = null;
+
 			if (idProperty != null)
 			{
-				if (idProperty.PropertyType == typeof(int)
-					|| idProperty.PropertyType == typeof(int?))
-					id = (int?)@object.TryGetPropertyValue("Id");
-				if (idProperty.PropertyType == typeof(string))
-					idString = (string)@object.TryGetPropertyValue("Id");
-				if (id.HasValue)
-					idString = id.Value.ToString();
+			    object value = idProperty.GetValue(@object, null);
+
+                if (value != null)
+                {
+                    idString = value.ToString();
+                }
 			}
+
 			return idString;
 		}
 
