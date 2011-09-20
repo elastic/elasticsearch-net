@@ -42,10 +42,10 @@
     <Copy SourceFiles="..\NEST.nuspec" DestinationFolder="$(BuildDir)" />
  
     <!-- Copy the source files to the package dir -->
-    <Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDir)\lib\NET40\" />
+    <Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDir)\lib\NET35\" />
  
     <!-- Get the version number of the main FV assembly to insert into the nuspec files -->
-    <GetAssemblyIdentity AssemblyFiles="$(BuildDir)\lib\NET40\ElasticSearch.Client.dll">
+    <GetAssemblyIdentity AssemblyFiles="$(BuildDir)\lib\NET35\ElasticSearch.Client.dll">
       <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
     </GetAssemblyIdentity>
  
