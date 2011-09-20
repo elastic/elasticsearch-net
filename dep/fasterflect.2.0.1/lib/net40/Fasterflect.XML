@@ -635,102 +635,53 @@
             Extension methods for locating and accessing fields.
             </summary>
         </member>
-        <member name="M:Fasterflect.FieldExtensions.SetFieldValue(System.Type,System.String,System.Object)">
-            <summary>
-            Sets the static field specified by <paramref name="name"/> of the given <paramref name="type"/>
-            with the specified <paramref name="value" />.
-            </summary>
-            <returns><paramref name="type"/>.</returns>
-        </member>
         <member name="M:Fasterflect.FieldExtensions.SetFieldValue(System.Object,System.String,System.Object)">
             <summary>
-            Sets the instance field specified by <paramref name="name"/> of the given <paramref name="obj"/>
-            with the specified <paramref name="value" />.
+            Sets the field specified by <paramref name="name"/> on the given <paramref name="obj"/>
+            to the specified <paramref name="value" />.
             </summary>
             <returns><paramref name="obj"/>.</returns>
-        </member>
-        <member name="M:Fasterflect.FieldExtensions.GetFieldValue(System.Type,System.String)">
-            <summary>
-            Gets the value of the static field specified by <paramref name="name"/> of the given <paramref name="type"/>.
-            </summary>
         </member>
         <member name="M:Fasterflect.FieldExtensions.GetFieldValue(System.Object,System.String)">
             <summary>
-            Gets the value of the instance field specified by <paramref name="name"/> of the given <paramref name="obj"/>.
+            Gets the value of the field specified by <paramref name="name"/> on the given <paramref name="obj"/>.
             </summary>
-        </member>
-        <member name="M:Fasterflect.FieldExtensions.SetFieldValue(System.Type,System.String,System.Object,Fasterflect.Flags)">
-            <summary>
-            Sets the static field specified by <paramref name="name"/> and matching <paramref name="bindingFlags"/>
-            of the given <paramref name="type"/> with the specified <paramref name="value" />.
-            </summary>
-            <returns><paramref name="type"/>.</returns>
         </member>
         <member name="M:Fasterflect.FieldExtensions.SetFieldValue(System.Object,System.String,System.Object,Fasterflect.Flags)">
             <summary>
-            Sets the instance field specified by <paramref name="name"/> and matching <paramref name="bindingFlags"/>
-            of the given <paramref name="obj"/> with the specified <paramref name="value" />.
+            Sets the field specified by <paramref name="name"/> and matching <paramref name="bindingFlags"/>
+            on the given <paramref name="obj"/> to the specified <paramref name="value" />.
             </summary>
             <returns><paramref name="obj"/>.</returns>
         </member>
-        <member name="M:Fasterflect.FieldExtensions.GetFieldValue(System.Type,System.String,Fasterflect.Flags)">
-            <summary>
-            Gets the value of the static field specified by <paramref name="name"/> and matching <paramref name="bindingFlags"/> 
-            of the given <paramref name="type"/>.
-            </summary>
-        </member>
         <member name="M:Fasterflect.FieldExtensions.GetFieldValue(System.Object,System.String,Fasterflect.Flags)">
             <summary>
-            Gets the value of the instance field specified by <paramref name="name"/> and matching <paramref name="bindingFlags"/>
-            of the given <paramref name="obj"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.FieldExtensions.DelegateForSetStaticFieldValue(System.Type,System.String)">
-            <summary>
-            Creates a delegate which can set the value of the static field specified by <paramref name="name"/> of 
-            the given <paramref name="type"/>.
+            Gets the value of the field specified by <paramref name="name"/> and matching <paramref name="bindingFlags"/>
+            on the given <paramref name="obj"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldExtensions.DelegateForSetFieldValue(System.Type,System.String)">
             <summary>
-            Creates a delegate which can set the value of the instance field specified by <paramref name="name"/> of 
-            the given <paramref name="type"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.FieldExtensions.DelegateForGetStaticFieldValue(System.Type,System.String)">
-            <summary>
-            Creates a delegate which can get the value of the static field specified by <paramref name="name"/> of 
+            Creates a delegate which can set the value of the field specified by <paramref name="name"/> on 
             the given <paramref name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldExtensions.DelegateForGetFieldValue(System.Type,System.String)">
             <summary>
-            Creates a delegate which can get the value of the instance field specified by <paramref name="name"/> of 
+            Creates a delegate which can get the value of the field specified by <paramref name="name"/> on 
             the given <paramref name="type"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.FieldExtensions.DelegateForSetStaticFieldValue(System.Type,System.String,Fasterflect.Flags)">
-            <summary>
-            Creates a delegate which can set the value of the static field specified by <paramref name="name"/> and 
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldExtensions.DelegateForSetFieldValue(System.Type,System.String,Fasterflect.Flags)">
             <summary>
-            Creates a delegate which can set the value of the instance field specified by <paramref name="name"/> and
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.FieldExtensions.DelegateForGetStaticFieldValue(System.Type,System.String,Fasterflect.Flags)">
-            <summary>
-            Creates a delegate which can get the value of the static field specified by <paramref name="name"/> and 
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
+            Creates a delegate which can set the value of the field specified by <paramref name="name"/> and
+            matching <paramref name="bindingFlags"/> on the given <paramref name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldExtensions.DelegateForGetFieldValue(System.Type,System.String,Fasterflect.Flags)">
             <summary>
-            Creates a delegate which can get the value of the instance field specified by <paramref name="name"/> and
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
+            Creates a delegate which can get the value of the field specified by <paramref name="name"/> and
+            matching <paramref name="bindingFlags"/> on the given <paramref name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldExtensions.Field(System.Type,System.String)">
@@ -1167,13 +1118,13 @@
         </member>
         <member name="M:Fasterflect.FieldInfoExtensions.Set(System.Reflection.FieldInfo,System.Object)">
             <summary>
-            Sets the static field identified by <paramref name="fieldInfo"/> with <paramref name="value" />.
+            Sets the static field identified by <paramref name="fieldInfo"/> to the specified <paramref name="value" />.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldInfoExtensions.Set(System.Reflection.FieldInfo,System.Object,System.Object)">
             <summary>
-            Sets the instance field identified by <paramref name="fieldInfo"/> of the given <paramref name="obj"/>
-            with <paramref name="value" />.
+            Sets the instance field identified by <paramref name="fieldInfo"/> on the given <paramref name="obj"/>
+            to the specified <paramref name="value" />.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldInfoExtensions.Get(System.Reflection.FieldInfo)">
@@ -1183,27 +1134,37 @@
         </member>
         <member name="M:Fasterflect.FieldInfoExtensions.Get(System.Reflection.FieldInfo,System.Object)">
             <summary>
-            Gets the value of the instance field identified by <paramref name="fieldInfo"/> of the given <paramref name="obj"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.FieldInfoExtensions.DelegateForSetStaticFieldValue(System.Reflection.FieldInfo)">
-            <summary>
-            Creates a delegate which can set the value of the static field identified by <paramref name="fieldInfo"/>.
+            Gets the value of the instance field identified by <paramref name="fieldInfo"/> on the given <paramref name="obj"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldInfoExtensions.DelegateForSetFieldValue(System.Reflection.FieldInfo)">
             <summary>
-            Creates a delegate which can set the value of the instance field identified by <paramref name="fieldInfo"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.FieldInfoExtensions.DelegateForGetStaticFieldValue(System.Reflection.FieldInfo)">
-            <summary>
-            Creates a delegate which can get the value of the static field identified by <paramref name="fieldInfo"/>.
+            Creates a delegate which can set the value of the field identified by <paramref name="fieldInfo"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.FieldInfoExtensions.DelegateForGetFieldValue(System.Reflection.FieldInfo)">
             <summary>
-            Creates a delegate which can set the value of the static field identified by <paramref name="fieldInfo"/>.
+            Creates a delegate which can get the value of the field identified by <paramref name="fieldInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Fasterflect.DynamicBuilder.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)">
+            <summary>
+            Assigns the given value to the specified member, overwriting any previous definition if one existed.
+            </summary>     
+        </member>
+        <member name="M:Fasterflect.DynamicBuilder.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            Gets the value of the specified member.
+            </summary>      
+        </member>
+        <member name="M:Fasterflect.DynamicBuilder.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)">
+            <summary>
+            Invokes the specified member (if it is a delegate).
+            </summary>     
+        </member>
+        <member name="M:Fasterflect.DynamicBuilder.GetDynamicMemberNames">
+            <summary>
+            Gets a list of all dynamically defined members.
             </summary>
         </member>
         <member name="T:Fasterflect.PropertyInfoExtensions">
@@ -1213,13 +1174,13 @@
         </member>
         <member name="M:Fasterflect.PropertyInfoExtensions.Set(System.Reflection.PropertyInfo,System.Object)">
             <summary>
-            Sets the static property identified by <paramref name="propInfo"/> with <paramref name="value" />.
+            Sets the static property identified by <paramref name="propInfo"/> to the specified <paramref name="value" />.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyInfoExtensions.Set(System.Reflection.PropertyInfo,System.Object,System.Object)">
             <summary>
-            Sets the instance property identified by <paramref name="propInfo"/> of the given <paramref name="obj"/>
-            with <paramref name="value" />.
+            Sets the instance property identified by <paramref name="propInfo"/> on the given <paramref name="obj"/>
+            to the specified <paramref name="value" />.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyInfoExtensions.Get(System.Reflection.PropertyInfo)">
@@ -1229,27 +1190,29 @@
         </member>
         <member name="M:Fasterflect.PropertyInfoExtensions.Get(System.Reflection.PropertyInfo,System.Object)">
             <summary>
-            Gets the value of the instance property identified by <paramref name="propInfo"/> of the given <paramref name="obj"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.PropertyInfoExtensions.DelegateForSetStaticPropertyValue(System.Reflection.PropertyInfo)">
-            <summary>
-            Creates a delegate which can set the value of the static property identified by <paramref name="propInfo"/>.
+            Gets the value of the instance property identified by <paramref name="propInfo"/> on the given <paramref name="obj"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyInfoExtensions.DelegateForSetPropertyValue(System.Reflection.PropertyInfo)">
             <summary>
-            Creates a delegate which can set the value of the instance property <paramref name="propInfo"/>.
+            Creates a delegate which can set the value of the property <paramref name="propInfo"/>.
             </summary>
         </member>
-        <member name="M:Fasterflect.PropertyInfoExtensions.DelegateForGetStaticPropertyValue(System.Reflection.PropertyInfo)">
+        <member name="M:Fasterflect.PropertyInfoExtensions.DelegateForSetPropertyValue(System.Reflection.PropertyInfo,Fasterflect.Flags)">
             <summary>
-            Creates a delegate which can get the value of the static property <paramref name="propInfo"/>.
+            Creates a delegate which can set the value of the property <param name="propInfo"/> matching the
+            specified <param name="bindingFlags" />.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyInfoExtensions.DelegateForGetPropertyValue(System.Reflection.PropertyInfo)">
             <summary>
-            Creates a delegate which can set the value of the static property <paramref name="propInfo"/>.
+            Creates a delegate which can get the value of the property <param name="propInfo"/>.
+            </summary>
+        </member>
+        <member name="M:Fasterflect.PropertyInfoExtensions.DelegateForGetPropertyValue(System.Reflection.PropertyInfo,Fasterflect.Flags)">
+            <summary>
+            Creates a delegate which can get the value of the property <param name="propInfo"/> matching the
+            specified <param name="bindingFlags" />.
             </summary>
         </member>
         <member name="T:Fasterflect.AttributeExtensions">
@@ -1452,6 +1415,19 @@
             will never be null. The attribute list associated with each member in the dictionary will likewise
             never be null.</returns>
         </member>
+        <member name="T:Fasterflect.TypeExtensions">
+            <summary>
+            Extension methods for inspecting types.
+            </summary>
+        </member>
+        <member name="M:Fasterflect.TypeExtensions.Implements``1(System.Type)">
+            <summary>
+            Returns true of the supplied <paramref name="type"/> implements the given <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The type (interface) to check for.</typeparam>
+            <param name="type">The type to check.</param>
+            <returns>True if the given type implements the interface.</returns>
+        </member>
         <member name="T:Fasterflect.MemberInfoExtensions">
             <summary>
             Extension methods for inspecting and working with members.
@@ -1587,6 +1563,16 @@
             Leave <paramref name="parameterTypes"/> empty if the constructor has no argument. 
             </summary>
         </member>
+        <member name="M:Fasterflect.ConstructorExtensions.CreateInstances``1(System.Reflection.Assembly)">
+            <summary>
+            Finds all types implementing a specific interface or base class <typeparamref name="T"/> in the
+            given <paramref name="assembly"/> and invokes the default constructor on each to return a list of
+            instances. Any type that is not a class or does not have a default constructor is ignored.
+            </summary>
+            <typeparam name="T">The interface or base class type to look for in the given assembly.</typeparam>
+            <param name="assembly">The assembly in which to look for types derived from the type parameter.</param>
+            <returns>A list containing one instance for every unique type implementing T. This will never be null.</returns>
+        </member>
         <member name="M:Fasterflect.ConstructorExtensions.Constructor(System.Type,System.Type[])">
             <summary>
             Gets the constructor corresponding to the supplied <paramref name="parameterTypes"/> on the
@@ -1697,102 +1683,65 @@
             Extension methods for locating and accessing properties.
             </summary>
         </member>
-        <member name="M:Fasterflect.PropertyExtensions.SetPropertyValue(System.Type,System.String,System.Object)">
-            <summary>
-            Sets the static property specified by <paramref name="name"/> of the given <paramref name="type"/>
-            with the specified <paramref name="value" />.
-            </summary>
-            <returns><paramref name="type"/>.</returns>
-        </member>
         <member name="M:Fasterflect.PropertyExtensions.SetPropertyValue(System.Object,System.String,System.Object)">
             <summary>
-            Sets the instance property specified by <paramref name="name"/> of the given <paramref name="obj"/>
-            with the specified <paramref name="value" />.
+            Sets the property specified by <param name="name"/> on the given <param name="obj"/> to the 
+            specified <param name="value" />.
             </summary>
             <returns><paramref name="obj"/>.</returns>
-        </member>
-        <member name="M:Fasterflect.PropertyExtensions.GetPropertyValue(System.Type,System.String)">
-            <summary>
-            Gets the value of the static property specified by <paramref name="name"/> of the given <paramref name="type"/>.
-            </summary>
         </member>
         <member name="M:Fasterflect.PropertyExtensions.GetPropertyValue(System.Object,System.String)">
             <summary>
-            Gets the value of the property specified by <paramref name="name"/> of the given <paramref name="obj"/>.
+            Gets the value of the property specified by <param name="name"/> on the given <param name="obj"/>.
             </summary>
-        </member>
-        <member name="M:Fasterflect.PropertyExtensions.SetPropertyValue(System.Type,System.String,System.Object,Fasterflect.Flags)">
-            <summary>
-            Sets the static property specified by <paramref name="name"/> matching <paramref name="bindingFlags"/>
-            of the given <paramref name="type"/> with the specified <paramref name="value" />.
-            </summary>
-            <returns><paramref name="type"/>.</returns>
         </member>
         <member name="M:Fasterflect.PropertyExtensions.SetPropertyValue(System.Object,System.String,System.Object,Fasterflect.Flags)">
             <summary>
-            Sets the instance property specified by <paramref name="name"/> matching <paramref name="bindingFlags"/>
-            of the given <paramref name="obj"/> with the specified <paramref name="value" />.
+            Sets the property specified by <param name="name"/> matching <param name="bindingFlags"/>
+            on the given <param name="obj"/> to the specified <param name="value" />.
             </summary>
             <returns><paramref name="obj"/>.</returns>
         </member>
-        <member name="M:Fasterflect.PropertyExtensions.GetPropertyValue(System.Type,System.String,Fasterflect.Flags)">
-            <summary>
-            Gets the value of the static property specified by <paramref name="name"/> matching <paramref name="bindingFlags"/>
-            of the given <paramref name="type"/>.
-            </summary>
-        </member>
         <member name="M:Fasterflect.PropertyExtensions.GetPropertyValue(System.Object,System.String,Fasterflect.Flags)">
             <summary>
-            Gets the value of the instance property specified by <paramref name="name"/> matching <paramref name="bindingFlags"/>
-            of the given <paramref name="obj"/>.
+            Gets the value of the property specified by <param name="name"/> matching <param name="bindingFlags"/>
+            on the given <param name="obj"/>.
             </summary>
         </member>
-        <member name="M:Fasterflect.PropertyExtensions.DelegateForSetStaticPropertyValue(System.Type,System.String)">
+        <member name="M:Fasterflect.PropertyExtensions.SetPropertyValue(System.Object,System.Linq.Expressions.Expression{System.Func{System.Object}},System.Object)">
             <summary>
-            Creates a delegate which can set the value of the static property specified by <paramref name="name"/>
-            of the given <paramref name="type"/>.
+            Sets the property specified by <param name="memberExpression"/> on the given <param name="obj"/> to the 
+            specified <param name="value" />.
+            </summary>
+            <returns><paramref name="obj"/>.</returns>
+        </member>
+        <member name="M:Fasterflect.PropertyExtensions.GetPropertyValue(System.Object,System.Linq.Expressions.Expression{System.Func{System.Object}})">
+            <summary>
+            Gets the value of the property specified by <param name="memberExpression"/> on the given <param name="obj"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyExtensions.DelegateForSetPropertyValue(System.Type,System.String)">
             <summary>
-            Creates a delegate which can set the value of the instance property specified by <paramref name="name"/>
-            of the given <paramref name="type"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.PropertyExtensions.DelegateForGetStaticPropertyValue(System.Type,System.String)">
-            <summary>
-            Creates a delegate which can get the value of the static property specified by <paramref name="name"/>
-            of the given <paramref name="type"/>.
+            Creates a delegate which can set the value of the property specified by <param name="name"/>
+            on the given <param name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyExtensions.DelegateForGetPropertyValue(System.Type,System.String)">
             <summary>
-            Creates a delegate which can get the value of the instance property specified by <paramref name="name"/>
-            of the given <paramref name="type"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.PropertyExtensions.DelegateForSetStaticPropertyValue(System.Type,System.String,Fasterflect.Flags)">
-            <summary>
-            Creates a delegate which can set the value of the static property specified by <paramref name="name"/>
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
+            Creates a delegate which can get the value of the property specified by <param name="name"/>
+            on the given <param name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyExtensions.DelegateForSetPropertyValue(System.Type,System.String,Fasterflect.Flags)">
             <summary>
-            Creates a delegate which can set the value of the instance property specified by <paramref name="name"/>
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.PropertyExtensions.DelegateForGetStaticPropertyValue(System.Type,System.String,Fasterflect.Flags)">
-            <summary>
-            Creates a delegate which can get the value of the static property specified by <paramref name="name"/>
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
+            Creates a delegate which can set the value of the property specified by <param name="name"/>
+            matching <param name="bindingFlags"/> on the given <param name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyExtensions.DelegateForGetPropertyValue(System.Type,System.String,Fasterflect.Flags)">
             <summary>
-            Creates a delegate which can get the value of the instance property specified by <paramref name="name"/>
-            matching <paramref name="bindingFlags"/> of the given <paramref name="type"/>.
+            Creates a delegate which can get the value of the property specified by <param name="name"/>
+            matching <param name="bindingFlags"/> on the given <param name="type"/>.
             </summary>
         </member>
         <member name="M:Fasterflect.PropertyExtensions.SetIndexer(System.Object,System.Object[])">
@@ -2088,6 +2037,14 @@
             <c>null</c> or left empty, all types are returned.</param>
             <returns>A list of all matching types. This method never returns null.</returns>
         </member>
+        <member name="M:Fasterflect.AssemblyExtensions.TypesImplementing``1(System.Reflection.Assembly)">
+            <summary>
+            Gets all types in the given <paramref name="assembly"/> that implement the given <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The interface types should implement.</typeparam>
+            <param name="assembly">The assembly in which to look for types.</param>
+            <returns>A list of all matching types. This method never returns null.</returns>
+        </member>
         <member name="M:Fasterflect.AssemblyExtensions.TypesWith(System.Reflection.Assembly,System.Type)">
             <summary>
             Gets all types in the given <paramref name="assembly"/> that are decorated with an
@@ -2107,74 +2064,11 @@
             Extension methods for locating, inspecting and invoking methods.
             </summary>
         </member>
-        <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Type,System.String,System.Object[])">
-            <summary>
-            Invokes the static method specified by <paramref name="name"/> of the given
-            <paramref name="type"/> using <paramref name="parameters"/> as arguments.
-            Leave <paramref name="parameters"/> empty if the method has no argument.
-            </summary>
-            <returns>The return value of the method.</returns>
-            <remarks>If the method has no return type, <c>null</c> is returned.</remarks>
-            <remarks>
-            All elements of <paramref name="parameters"/> must not be <c>null</c>.  Otherwise, 
-            <see cref="T:System.NullReferenceException"/> is thrown.  If you are not sure as to whether
-            any element is <c>null</c> or not, use the overload that accepts <c>paramTypes</c> array.
-            </remarks>
-            <seealso cref="M:Fasterflect.MethodExtensions.CallMethod(System.Type,System.String,System.Type[],System.Object[])"/>
-        </member>
-        <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Type,System.String,System.Type[],System.Object[])">
-            <summary>
-            Invokes the static method specified by <paramref name="name"/> of the given
-            <paramref name="type"/> using <paramref name="parameters"/> as arguments.
-            Method parameter types are specified by <paramref name="parameterTypes"/>.
-            </summary>
-            <returns>The return value of the method.</returns>
-            <remarks>If the method has no return type, <c>null</c> is returned.</remarks>
-        </member>
-        <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Type,System.String,Fasterflect.Flags,System.Object[])">
-            <summary>
-            Invokes the static method specified by <paramref name="name"/> matching <paramref name="bindingFlags"/>
-            of the given <paramref name="type"/> using <paramref name="parameters"/> as arguments.
-            Leave <paramref name="parameters"/> empty if the method has no argument.
-            </summary>
-            <returns>The return value of the method.</returns>
-            <remarks>If the method has no return type, <c>null</c> is returned.</remarks>
-            <remarks>
-            All elements of <paramref name="parameters"/> must not be <c>null</c>.  Otherwise, 
-            <see cref="T:System.NullReferenceException"/> is thrown.  If you are not sure as to whether
-            any element is <c>null</c> or not, use the overload that accepts <c>paramTypes</c> array.
-            </remarks>
-            <seealso cref="M:Fasterflect.MethodExtensions.CallMethod(System.Type,System.String,System.Type[],Fasterflect.Flags,System.Object[])"/>
-        </member>
-        <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Type,System.String,System.Type[],Fasterflect.Flags,System.Object[])">
-            <summary>
-            Invokes the static method specified by <paramref name="name"/> matching <paramref name="bindingFlags"/>
-            of the given <paramref name="type"/> using <paramref name="parameters"/> as arguments.
-            Method parameter types are specified by <paramref name="parameterTypes"/>.
-            </summary>
-            <returns>The return value of the method.</returns>
-            <remarks>If the method has no return type, <c>null</c> is returned.</remarks>
-        </member>
-        <member name="M:Fasterflect.MethodExtensions.DelegateForCallStaticMethod(System.Type,System.String,System.Type[])">
-            <summary>
-            Creates a delegate which can invoke the static method <paramref name="name"/> 
-            whose parameter types are specified by <paramref name="parameterTypes"/> on the given <paramref name="type"/>.
-            Leave <paramref name="parameterTypes"/> empty if the method has no argument.
-            </summary>
-        </member>
-        <member name="M:Fasterflect.MethodExtensions.DelegateForCallStaticMethod(System.Type,System.String,Fasterflect.Flags,System.Type[])">
-            <summary>
-            Creates a delegate which can invoke the static method <paramref name="name"/> 
-            matching <paramref name="bindingFlags"/> whose parameter types are specified by <paramref name="parameterTypes"/> 
-            on the given <paramref name="type"/>. Leave <paramref name="parameterTypes"/> empty if the 
-            method has no argument.
-            </summary>
-        </member>
         <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Object,System.String,System.Object[])">
             <summary>
-            Invokes the instance method specified by <paramref name="name"/> of the given
-            <paramref name="obj"/> using <paramref name="parameters"/> as arguments.
-            Leave <paramref name="parameters"/> empty if the method has no argument.
+            Invokes the method specified by <paramref name="name"/> on the given <paramref name="obj"/> 
+            using <paramref name="parameters"/> as arguments. 
+            Leave <paramref name="parameters"/> empty if the method has no arguments.
             </summary>
             <returns>The return value of the method.</returns>
             <remarks>If the method has no return type, <c>null</c> is returned.</remarks>
@@ -2187,8 +2081,8 @@
         </member>
         <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Object,System.String,System.Type[],System.Object[])">
             <summary>
-            Invokes the instance method specified by <paramref name="name"/> of the given
-            <paramref name="obj"/> using <paramref name="parameters"/> as arguments.
+            Invokes the method specified by <paramref name="name"/> on the given <paramref name="obj"/> 
+            using <paramref name="parameters"/> as arguments.
             Method parameter types are specified by <paramref name="parameterTypes"/>.
             </summary>
             <returns>The return value of the method.</returns>
@@ -2196,8 +2090,8 @@
         </member>
         <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Object,System.String,Fasterflect.Flags,System.Object[])">
             <summary>
-            Invokes the instance method specified by <paramref name="name"/> matching <paramref name="bindingFlags"/> 
-            of the given <paramref name="obj"/> using <paramref name="parameters"/> as arguments.
+            Invokes the method specified by <paramref name="name"/> on the given <paramref name="obj"/>
+            matching <paramref name="bindingFlags"/> using <paramref name="parameters"/> as arguments.
             Leave <paramref name="parameters"/> empty if the method has no argument.
             </summary>
             <returns>The return value of the method.</returns>
@@ -2211,8 +2105,8 @@
         </member>
         <member name="M:Fasterflect.MethodExtensions.CallMethod(System.Object,System.String,System.Type[],Fasterflect.Flags,System.Object[])">
             <summary>
-            Invokes the instance method specified by <paramref name="name"/> matching <paramref name="bindingFlags"/>
-            of the given <paramref name="obj"/> using <paramref name="parameters"/> as arguments.
+            Invokes the method specified by <paramref name="name"/> on the given <paramref name="obj"/> 
+            matching <paramref name="bindingFlags"/> using <paramref name="parameters"/> as arguments.
             Method parameter types are specified by <paramref name="parameterTypes"/>.
             </summary>
             <returns>The return value of the method.</returns>
@@ -2220,17 +2114,16 @@
         </member>
         <member name="M:Fasterflect.MethodExtensions.DelegateForCallMethod(System.Type,System.String,System.Type[])">
             <summary>
-            Creates a delegate which can invoke the instance method <paramref name="name"/> 
-            whose parameter types are specified by <paramref name="parameterTypes"/> on the given <paramref name="type"/>.
-            Leave <paramref name="parameterTypes"/> empty if the method has no argument.
+            Creates a delegate which can invoke the method <paramref name="name"/> with arguments matching
+            <paramref name="parameterTypes"/> on the given <paramref name="type"/>.
+            Leave <paramref name="parameterTypes"/> empty if the method has no arguments.
             </summary>
         </member>
         <member name="M:Fasterflect.MethodExtensions.DelegateForCallMethod(System.Type,System.String,Fasterflect.Flags,System.Type[])">
             <summary>
-            Creates a delegate which can invoke the instance method <paramref name="name"/> 
-            matching <paramref name="bindingFlags"/> whose parameter types are specified by 
-            <paramref name="parameterTypes"/> on the given <paramref name="type"/>.
-            Leave <paramref name="parameterTypes"/> empty if the method has no argument.
+            Creates a delegate which can invoke the method <paramref name="name"/> with arguments matching
+            <paramref name="parameterTypes"/> and matching <paramref name="bindingFlags"/> on the given <paramref name="type"/>.
+            Leave <paramref name="parameterTypes"/> empty if the method has no arguments.
             </summary>
         </member>
         <member name="M:Fasterflect.MethodExtensions.Method(System.Type,System.String)">
@@ -2374,11 +2267,6 @@
             <returns>The return value of the method.</returns>
             <remarks>If the method has no return type, <c>null</c> is returned.</remarks>
         </member>
-        <member name="M:Fasterflect.MethodInfoExtensions.DelegateForCallStaticMethod(System.Reflection.MethodInfo)">
-            <summary>
-            Creates a delegate which can invoke the static method identified by <paramref name="methodInfo"/>.
-            </summary>
-        </member>
         <member name="M:Fasterflect.MethodInfoExtensions.DelegateForCallMethod(System.Reflection.MethodInfo)">
             <summary>
             Creates a delegate which can invoke the instance method identified by <paramref name="methodInfo"/>.
@@ -2424,9 +2312,27 @@
             <param name="source">The object to clone.</param>
             <returns>A deep clone of the source object.</returns>
         </member>
-        <member name="T:Fasterflect.StaticMemberGetter">
+        <member name="M:Fasterflect.DynamicWrapper.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)">
             <summary>
-            A delegate to retrieve the value of a static field or property of a type.
+            Sets the member on the target to the given value. Returns true if the value was
+            actually written to the underlying member.
+            </summary>     
+        </member>
+        <member name="M:Fasterflect.DynamicWrapper.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            Gets the member on the target and assigns it to the result parameter. Returns
+            true if a value other than null was found and false otherwise.
+            </summary>      
+        </member>
+        <member name="M:Fasterflect.DynamicWrapper.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)">
+            <summary>
+            Invokes the method specified and assigns the result to the result parameter. Returns
+            true if a method to invoke was found and false otherwise.
+            </summary>     
+        </member>
+        <member name="M:Fasterflect.DynamicWrapper.GetDynamicMemberNames">
+            <summary>
+            Gets all member names from the underlying instance.
             </summary>
         </member>
         <member name="T:Fasterflect.MemberGetter">
@@ -2435,12 +2341,6 @@
             </summary>
             <param name="obj">The object whose field's or property's value is to be retrieved.</param>
             <returns>The value of the instance field or property.</returns>
-        </member>
-        <member name="T:Fasterflect.StaticMemberSetter">
-            <summary>
-            A delegate to set the value of a static field or property of a type.
-            </summary>
-            <param name="value">The value to be set to the field or property.</param>
         </member>
         <member name="T:Fasterflect.MemberSetter">
             <summary>
@@ -2464,14 +2364,6 @@
             <param name="array">The array whose element is to be retrieved</param>
             <param name="index">The index of the element to be retrieved</param>
             <returns>The element at <paramref name="index"/></returns>
-        </member>
-        <member name="T:Fasterflect.StaticMethodInvoker">
-            <summary>
-            A delegate to invoke a static method of a type.
-            </summary>
-            <param name="parameters">The properly-ordered parameter list of the method.</param>
-            <returns>The return value of the method.  Null is returned if the method has no
-            return type.</returns>
         </member>
         <member name="T:Fasterflect.MethodInvoker">
             <summary>

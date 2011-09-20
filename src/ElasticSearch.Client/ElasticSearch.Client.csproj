@@ -54,6 +54,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fasterflect, Version=2.0.1.0, Culture=neutral, PublicKeyToken=a64e1179c81b1e25, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\fasterflect.2.0.1\lib\net40\Fasterflect.dll</HintPath>
+    </Reference>
     <Reference Include="NetReflector">
       <HintPath>..\..\dep\NetReflector.dll</HintPath>
     </Reference>
@@ -73,10 +77,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Fasterflect, Version=2.0.3732.24338, Culture=neutral, PublicKeyToken=d3b50d974897f4b5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\fasterflect\Fasterflect.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
