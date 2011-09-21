@@ -1,119 +1,97 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using ElasticSearch.Client;
-using HackerNews.Indexer.Domain;
-using Nest.TestData;
-using Nest.TestData.Domain;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
+using Nest.TestData.Domain;
 
 namespace ElasticSearch.Tests.FacetResponses
 {
-	/// <summary>
-	///  Tests that test whether the query response can be successfully mapped or not
-	/// </summary>
-	[TestFixture]
-	public class TermFacetResponseTests : BaseFacetTestFixture
-	{
-		[Test]
-		public void SimpleTermFacet()
-		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-				@" { ""query"" : {
+    /// <summary>
+    ///  Tests that test whether the query response can be successfully mapped or not
+    /// </summary>
+    [TestFixture]
+    public class TermFacetResponseTests : BaseFacetTestFixture
+    {
+        [Test]
+        public void SimpleTermFacet()
+        {
+            QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+                @" { ""query"" : {
 						    ""match_all"" : { }
 					},
 					""facets"" : {
-					  ""followers.lastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
+					  ""followersLastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
 					}
 				}"
-			);
-			
-			var facets = queryResults.Facets<TermFacet>("followers.lastName");
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
-			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor));	
-		}
+                );
 
-		[Test]
-		public void SimpleTermFacetMetaData()
-		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-				@" { ""query"" : {
+            var facet = queryResults.Facets["followersLastName"];
+            this.TestDefaultAssertions(queryResults);
+
+            Assert.IsInstanceOf<TermFacet>(facet);
+
+            var tf = (TermFacet) facet;
+            Assert.AreEqual(0, tf.Missing);
+            Assert.Greater(tf.Other, 0);
+            Assert.Greater(tf.Total, 0);
+            Assert.Greater(tf.Terms.Count, 0);
+
+            foreach (TermFacet.TermItem term in tf.Terms)
+            {
+                Assert.Greater(term.Count, 0);
+                Assert.IsNotNullOrEmpty(term.Term);
+            }
+        }
+
+        [Test]
+        public void SimpleTermFacetWithExclude()
+        {
+            QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+                @" { ""query"" : {
 						    ""match_all"" : { }
 					},
 					""facets"" : {
-					  ""followers.lastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
-					}
-				}"
-			);
-
-			var facets = queryResults.FacetMetaData(p=>p.Followers.Select(f=>f.LastName));
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets.Facets);
-			Assert.IsTrue(facets.Facets.Cast<TermFacet>().Any(f => f.Term == this._LookFor));
-		}
-
-		[Test]
-		public void SimpleTermFacetWithExpression()
-		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-				@" { ""query"" : {
-						    ""match_all"" : { }
-					},
-					""facets"" : {
-					  ""followers.lastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
-					}
-				}"
-			);
-
-			var facets = queryResults.Facets<TermFacet>(p=>p.Followers.Select(f=>f.LastName));
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
-			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor));
-		}
-		[Test]
-		public void SimpleTermFacetWithExclude()
-		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-				@" { ""query"" : {
-						    ""match_all"" : { }
-					},
-					""facets"" : {
-					  ""followers.lastName"" : { ""terms"" : {
+					  ""followerLastName"" : { ""terms"" : {
 						""field"" : ""followers.lastName""
-						, exclude : [""" + this._LookFor + @"""]
+						, exclude : [""" +
+                this._LookFor + @"""]
 					  } }
 					}
 				}"
-			);
+                );
 
-			var facets = queryResults.Facets<TermFacet>("followers.lastName");
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
-			Assert.IsFalse(facets.Any(f=>f.Term == this._LookFor));
-		}
-		[Test]
-		public void SimpleTermFacetWithGlobal()
-		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-				@" { ""query"" : {
-						    ""match_all"" : { }
+            var facet = queryResults.Facets["followerLastName"];
+            this.TestDefaultAssertions(queryResults);
+
+            Assert.IsInstanceOf<TermFacet>(facet);
+
+            var tf = (TermFacet) facet;
+
+            Assert.IsFalse(tf.Terms.Any(f => f.Term == this._LookFor));
+        }
+
+        [Test]
+        public void SimpleTermFacetWithGlobal()
+        {
+            QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+                @" { ""query"" : {
+						    ""term"" : { ""followers.lastName"" : """ + this._LookFor +
+                @""" }
 					},
 					""facets"" : {
-					  ""followers.lastName"" : { 
+					  ""followerLastName"" : { 
 						""terms"" : {""field"" : ""followers.lastName""} },
 						""global"" : true
 					}
-				}"
-			);
+				}");
 
-			var facets = queryResults.Facets<TermFacet>("followers.lastName");
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
-			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor));
-			Assert.IsTrue(facets.Any(f => f.Term == this._LookFor && f.Count > 0));
-		}
-	}
+            var facet = queryResults.Facets["followerLastName"];
+            this.TestDefaultAssertions(queryResults);
+
+            Assert.IsInstanceOf<TermFacet>(facet);
+
+            var tf = (TermFacet) facet;
+            Assert.IsTrue(tf.Terms.Any(f => f.Term == this._LookFor));
+        }
+    }
 }

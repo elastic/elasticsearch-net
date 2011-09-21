@@ -7,10 +7,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace ElasticSearch.Client
 {
-    public class QueryResponse
-    {
-    }
-
     public partial class ElasticClient
     {
         private QueryResponse<T> Query<T>(string query, string index, string typeName) where T : class
@@ -34,13 +30,6 @@ namespace ElasticSearch.Client
             var response = JsonConvert.DeserializeObject<QueryResponse<T>>(status.Result, this.SerializationSettings);
             response.PropertyNameResolver = this.PropertyNameResolver;
             return response;
-        }
-
-        private QueryResponse Query(string query)
-        {
-            return new QueryResponse
-                   {
-                   };
         }
 
         public QueryResponse<T> Search<T>(Search search) where T : class

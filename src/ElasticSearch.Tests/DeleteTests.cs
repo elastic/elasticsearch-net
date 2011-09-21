@@ -27,7 +27,7 @@ namespace ElasticSearch.Tests
 					} }"
             );
 
-            var hits = queryResults.HitsMetaData;
+            var hits = queryResults.Hits;
             
             Assert.AreEqual(1, hits.MaxScore);
             Assert.AreEqual(hits.Hits.Max(h => h.Score), hits.MaxScore);
@@ -45,7 +45,7 @@ namespace ElasticSearch.Tests
 						}
 					} }"
             );
-            var hit = queryResults.HitsMetaData.Hits[0];
+            var hit = queryResults.Hits.Hits[0];
             var documentToFind = hit.Source;
 
             //act

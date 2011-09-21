@@ -1,180 +1,175 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using ElasticSearch.Client.DSL;
+using Newtonsoft.Json;
 
 namespace ElasticSearch.Client
 {
-	[JsonObject]
-	public class QueryResponse<T> where T : class
-	{
-		internal PropertyNameResolver PropertyNameResolver { get; set; }
+    [JsonObject]
+    public class QueryResponse<T> where T : class
+    {
+        public QueryResponse()
+        {
+            this.IsValid = true;
+        }
 
-		public bool IsValid { get; set; }
-		public ConnectionError ConnectionError { get; set; }
-		public QueryResponse()
-		{
-			this.IsValid = true;
-		}
-		[JsonProperty(PropertyName = "_shards")]
-		public ShardsMetaData Shards { get; internal set; }
-		[JsonProperty(PropertyName = "hits")]
-		public HitsMetaData<T> HitsMetaData { get; internal set; }
+        internal PropertyNameResolver PropertyNameResolver { get; set; }
 
-		[JsonProperty(PropertyName = "facets")]
-		public Dictionary<string, List<FacetMetaData>> FacetsMetaData { get; internal set; }
+        public bool IsValid { get; set; }
+        public ConnectionError ConnectionError { get; set; }
 
-		[JsonProperty(PropertyName = "took")]
-		public int ElapsedMilliseconds { get; internal set; }
+        [JsonProperty(PropertyName = "_shards")]
+        public ShardsMetaData Shards { get; internal set; }
 
+        [JsonProperty(PropertyName = "hits")]
+        public HitsMetaData<T> Hits { get; internal set; }
 
-		public int Total
-		{
-			get
-			{
-				if (this.HitsMetaData == null)
-					return 0;
-				return this.HitsMetaData.Total;
-			}
-		}
-		public float MaxScore
-		{
-			get
-			{
-				if (this.HitsMetaData == null)
-					return 0;
-				return this.HitsMetaData.MaxScore;
-			}
-		}
+        [JsonProperty(PropertyName = "facets")]
+        public IDictionary<string, Facet> Facets { get; internal set; }
 
-		public IEnumerable<T> Documents
-		{
-			get
-			{
-				if (this.HitsMetaData != null)
-				{
-					foreach (var hit in this.HitsMetaData.Hits)
-					{
-						yield return hit.Source;
+        [JsonProperty(PropertyName = "took")]
+        public int ElapsedMilliseconds { get; internal set; }
 
-					}
-				}
-			}
-		}
-		public IEnumerable<Hit<T>> DocumentsWithMetaData
-		{
-			get
-			{
-				if (this.HitsMetaData != null)
-				{
-					foreach (var hit in this.HitsMetaData.Hits)
-					{
-						yield return hit;
+        public int Total
+        {
+            get
+            {
+                if (this.Hits == null)
+                {
+                    return 0;
+                }
+                return this.Hits.Total;
+            }
+        }
 
-					}
-				}
-			}
-		}
+        public float MaxScore
+        {
+            get
+            {
+                if (this.Hits == null)
+                {
+                    return 0;
+                }
+                return this.Hits.MaxScore;
+            }
+        }
 
+        public IEnumerable<T> Documents
+        {
+            get
+            {
+                if (this.Hits != null)
+                {
+                    foreach (var hit in this.Hits.Hits)
+                    {
+                        yield return hit.Source;
+                    }
+                }
+            }
+        }
 
+        public IEnumerable<Hit<T>> DocumentsWithMetaData
+        {
+            get
+            {
+                if (this.Hits != null)
+                {
+                    return this.Hits.Hits;
+                }
 
-		public FacetMetaData FacetMetaData(Expression<Func<T, object>> expression)
-		{
-			var fieldName = this.PropertyNameResolver.Resolve(expression);
-			return this.FacetMetaData(fieldName);
-		}
-		public FacetMetaData FacetMetaData(string fieldName)
-		{
-			var allMetaData = this.FacetMetaDataAll(fieldName);
-			if (allMetaData != null && allMetaData.Any())
-				return allMetaData.First();
-			return null;
-		}
-		public IEnumerable<FacetMetaData> FacetMetaDataAll(Expression<Func<T, object>> expression)
-		{
-			var fieldName = this.PropertyNameResolver.Resolve(expression);
-			return this.FacetMetaDataAll(fieldName);
-		}
+                return new List<Hit<T>>();
+            }
+        }
 
-		public IEnumerable<FacetMetaData> FacetMetaDataAll(string fieldName)
-		{
-			if (this.FacetsMetaData == null
-				|| !this.FacetsMetaData.Any()
-				|| !this.FacetsMetaData.ContainsKey(fieldName))
-				return null;
+        //public FacetMetaData FacetMetaData(Expression<Func<T, object>> expression)
+        //{
+        //    var fieldName = this.PropertyNameResolver.Resolve(expression);
+        //    return this.FacetMetaData(fieldName);
+        //}
+        //public FacetMetaData FacetMetaData(string fieldName)
+        //{
+        //    var allMetaData = this.FacetMetaDataAll(fieldName);
+        //    if (allMetaData != null && allMetaData.Any())
+        //        return allMetaData.First();
+        //    return null;
+        //}
+        //public IEnumerable<FacetMetaData> FacetMetaDataAll(Expression<Func<T, object>> expression)
+        //{
+        //    var fieldName = this.PropertyNameResolver.Resolve(expression);
+        //    return this.FacetMetaDataAll(fieldName);
+        //}
 
-			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
-			return metaData;
-		}
+        //public IEnumerable<FacetMetaData> FacetMetaDataAll(string fieldName)
+        //{
+        //    if (this.FacetsMetaData == null
+        //        || !this.FacetsMetaData.Any()
+        //        || !this.FacetsMetaData.ContainsKey(fieldName))
+        //        return null;
 
-		public IEnumerable<F> Facets<F>(Expression<Func<T, object>> expression) where F : Facet
-		{
-			var fieldName = this.PropertyNameResolver.Resolve(expression);
-			return this.Facets<F>(fieldName);
-		}
+        //    var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
+        //    return metaData;
+        //}
 
-		public IEnumerable<F> Facets<F>(string fieldName) where F : Facet
-		{
-			if (this.FacetsMetaData == null
-				|| !this.FacetsMetaData.Any()
-				|| !this.FacetsMetaData.ContainsKey(fieldName))
-				return null;
+        //public IEnumerable<F> Facets<F>(Expression<Func<T, object>> expression) where F : Facet
+        //{
+        //    var fieldName = this.PropertyNameResolver.Resolve(expression);
+        //    return this.Facets<F>(fieldName);
+        //}
 
-			var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
-			if (typeName.IsNullOrEmpty())
-				return null;
+        //public IEnumerable<F> Facets<F>(string fieldName) where F : Facet
+        //{
+        //    if (this.FacetsMetaData == null
+        //        || !this.FacetsMetaData.Any()
+        //        || !this.FacetsMetaData.ContainsKey(fieldName))
+        //        return null;
 
-			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
-			var facetMetaData = metaData.FirstOrDefault(fm=>fm.Type == typeName);
-			if (facetMetaData == null)
-				return null;
-			return facetMetaData.Facets.Cast<F>();
-		}
-		public F Facet<F>(Expression<Func<T, object>> expression) where F : SingleFacet
-		{
-			var fieldName = this.PropertyNameResolver.Resolve(expression);
-			return this.Facet<F>(fieldName);
-		}
-		public F Facet<F>(string fieldName) where F : SingleFacet
-		{
-			if (this.FacetsMetaData == null
-				|| !this.FacetsMetaData.Any()
-				|| !this.FacetsMetaData.ContainsKey(fieldName))
-				return null;
+        //    var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
+        //    if (typeName.IsNullOrEmpty())
+        //        return null;
 
-			var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
-			if (typeName.IsNullOrEmpty())
-				return null;
+        //    var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
+        //    var facetMetaData = metaData.FirstOrDefault(fm=>fm.Type == typeName);
+        //    if (facetMetaData == null)
+        //        return null;
+        //    return facetMetaData.Facets.Cast<F>();
+        //}
+        //public F Facet<F>(Expression<Func<T, object>> expression) where F : SingleFacet
+        //{
+        //    var fieldName = this.PropertyNameResolver.Resolve(expression);
+        //    return this.Facet<F>(fieldName);
+        //}
+        //public F Facet<F>(string fieldName) where F : SingleFacet
+        //{
+        //    if (this.FacetsMetaData == null
+        //        || !this.FacetsMetaData.Any()
+        //        || !this.FacetsMetaData.ContainsKey(fieldName))
+        //        return null;
 
-			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
-			var facetMetaData = metaData.FirstOrDefault(fm => fm.Type == typeName);
-			if (facetMetaData == null)
-				return null;
-			return facetMetaData.Facets.Cast<F>().FirstOrDefault();
-		}
+        //    var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
+        //    if (typeName.IsNullOrEmpty())
+        //        return null;
 
+        //    var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
+        //    var facetMetaData = metaData.FirstOrDefault(fm => fm.Type == typeName);
+        //    if (facetMetaData == null)
+        //        return null;
+        //    return facetMetaData.Facets.Cast<F>().FirstOrDefault();
+        //}
 
-		public IEnumerable<Highlight> Highlights
-		{
-			get
-			{
-				if (this.HitsMetaData != null)
-				{
-					foreach (var hit in this.HitsMetaData.Hits)
-					{
-						foreach (var h in hit.Highlight) { 
-							yield return new Highlight() { Field = h.Key };
-						}
-					}
-				}
-			}
-		}
-
-
-	}
+        public IEnumerable<Highlight> Highlights
+        {
+            get
+            {
+                if (this.Hits != null)
+                {
+                    foreach (var hit in this.Hits.Hits)
+                    {
+                        foreach (var h in hit.Highlight)
+                        {
+                            yield return new Highlight {Field = h.Key};
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
-
-

@@ -84,17 +84,30 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
-    <Compile Include="Domain\Facets\GeoDistanceFacet.cs" />
-    <Compile Include="Domain\Facets\FacetMetaData.cs" />
+    <Compile Include="Domain\Facets\DateHistogramFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Facets\DateRangeFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Facets\Facet.cs" />
-    <Compile Include="Domain\Facets\SingleFacet.cs" />
-    <Compile Include="Domain\Facets\TermStatsFacet.cs" />
-    <Compile Include="Domain\Facets\StatisticalFacet.cs" />
-    <Compile Include="Domain\Facets\DateRangeFacet.cs" />
-    <Compile Include="Domain\Facets\RangeFacet.cs" />
-    <Compile Include="Domain\Facets\DateHistogramFacet.cs" />
-    <Compile Include="Domain\Facets\HistogramFacet.cs" />
+    <Compile Include="Domain\Facets\FacetItem.cs" />
+    <Compile Include="Domain\Facets\GeoDistanceFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Facets\HistogramFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Facets\RangeFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Facets\StatisticalFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Facets\TermFacet.cs" />
+    <Compile Include="Domain\Facets\TermStatsFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Highlight.cs" />
     <Compile Include="Domain\IndicesResponse.cs" />
     <Compile Include="Domain\Hit\Hit.cs" />
@@ -120,8 +133,8 @@
     <Compile Include="Enums\FieldIndexOption.cs" />
     <Compile Include="Enums\StoreOption.cs" />
     <Compile Include="Enums\NumericType.cs" />
-    <Compile Include="Resolvers\Converters\FacetsMetaConverter.cs" />
-    <Compile Include="Resolvers\Converters\DateHistogramConverter.cs" />
+    <Compile Include="Resolvers\Converters\FacetConverter.cs" />
+    <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="DSL\Query.cs" />
@@ -215,6 +228,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

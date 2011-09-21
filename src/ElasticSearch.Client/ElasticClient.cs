@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ElasticSearch.Client.Resolvers.Converters;
 using ElasticSearch.Client.Thrift;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -88,11 +89,9 @@ namespace ElasticSearch.Client
 				NullValueHandling = NullValueHandling.Ignore,
 				Converters = new List<JsonConverter> 
 				{ 
-					new DateHistogramConverter(),
 					new IsoDateTimeConverter(), 
 					new QueryJsonConverter(), 
-					new FacetsMetaDataConverter() 
-
+					new FacetConverter() 
 				}
 			};
 			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);

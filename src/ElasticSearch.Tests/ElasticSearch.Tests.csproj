@@ -56,14 +56,26 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
-    <Compile Include="FacetResponses\BaseFacetTestFixture.cs" />
-    <Compile Include="FacetResponses\GeoDistanceFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\TermStatsFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\StatisticalFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\HistogramFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\RangeFacetResponseTests.cs" />
+    <Compile Include="FacetResponses\BaseFacetTestFixture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FacetResponses\GeoDistanceFacetResponseTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FacetResponses\HistogramFacetResponseTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FacetResponses\RangeFacetResponseTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FacetResponses\StatisticalFacetResponseTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FacetResponses\TermFacetResponseTests.cs" />
     <Compile Include="DeleteTests.cs" />
+    <Compile Include="FacetResponses\TermStatsFacetResponseTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IndicesTests.cs" />
     <Compile Include="Mapping\MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
