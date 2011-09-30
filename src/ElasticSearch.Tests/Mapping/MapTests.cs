@@ -19,5 +19,55 @@ namespace ElasticSearch.Tests.Mapping
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");
 			var x = this.ConnectedClient.Map<ElasticSearchProject>();
 		}
-	}
+
+        [Test]
+        public void GetMapping()
+        {
+            var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone",
+                                                              "elasticsearchprojects2");
+
+            Assert.NotNull(typeMapping);
+            Assert.AreEqual("string", typeMapping.Properties["content"].Type);
+            Assert.AreEqual("string", typeMapping.Properties["country"].Type);
+            Assert.AreEqual("double", typeMapping.Properties["doubleValue"].Type);
+            Assert.AreEqual("double", typeMapping.Properties["floatValue"].Type);
+            Assert.AreEqual("long", typeMapping.Properties["id"].Type);
+            Assert.AreEqual("long", typeMapping.Properties["loc"].Type);
+            Assert.AreEqual("long", typeMapping.Properties["longValue"].Type);
+            Assert.AreEqual("string", typeMapping.Properties["name"].Type);
+            Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type);
+            Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type);
+
+            Assert.IsTrue(typeMapping.Properties["origin"].Dynamic);
+            Assert.AreEqual("double", typeMapping.Properties["origin"].Properties["lat"].Type);
+            Assert.AreEqual("double", typeMapping.Properties["origin"].Properties["lon"].Type);
+
+            Assert.IsTrue(typeMapping.Properties["followers"].Dynamic);
+            Assert.AreEqual("long", typeMapping.Properties["followers"].Properties["age"].Type);
+            Assert.AreEqual("date", typeMapping.Properties["followers"].Properties["dateOfBirth"].Type);
+            Assert.AreEqual("string", typeMapping.Properties["followers"].Properties["email"].Type);
+            Assert.AreEqual("string", typeMapping.Properties["followers"].Properties["firstName"].Type);
+            Assert.AreEqual("long", typeMapping.Properties["followers"].Properties["id"].Type);
+            Assert.AreEqual("string", typeMapping.Properties["followers"].Properties["lastName"].Type);
+            Assert.IsTrue(typeMapping.Properties["followers"].Properties["placeOfBirth"].Dynamic);
+            Assert.AreEqual("double", typeMapping.Properties["followers"].Properties["placeOfBirth"].Properties["lat"].Type);
+            Assert.AreEqual("double", typeMapping.Properties["followers"].Properties["placeOfBirth"].Properties["lon"].Type);
+        }
+
+        [Test]
+        public void DynamicMap()
+        {
+            var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone",
+                                                  "elasticsearchprojects2");
+
+            typeMapping.Properties["country"].Boost = 3;
+            this.ConnectedClient.Map(typeMapping, Test.Default.DefaultIndex + "_clone",
+                                     "elasticsearchprojects2");
+
+            typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone",
+                                                  "elasticsearchprojects2");
+
+            Assert.AreEqual(3, typeMapping.Properties["country"].Boost);
+        }
+    }
 }
