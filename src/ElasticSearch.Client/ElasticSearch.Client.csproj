@@ -112,6 +112,11 @@
     <Compile Include="Domain\IndicesResponse.cs" />
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
+    <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
+    <Compile Include="Settings\AnalysisSettings.cs" />
+    <Compile Include="Settings\AnalyzerSettings.cs" />
+    <Compile Include="Settings\CustomAnalyzerSettings.cs" />
+    <Compile Include="Settings\IndexSettings.cs" />
     <Compile Include="Domain\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-Inferno.cs" />
@@ -172,6 +177,7 @@
     <Compile Include="QueryResponse.cs" />
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
     <Compile Include="Search.cs" />
+    <Compile Include="Settings\SnowballAnalyzerSettings.cs" />
     <Compile Include="Thrift\Method.cs" />
     <Compile Include="Thrift\Rest.cs" />
     <Compile Include="Thrift\RestRequest.cs" />
@@ -231,9 +237,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

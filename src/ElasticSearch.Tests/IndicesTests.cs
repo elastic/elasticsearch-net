@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ElasticSearch.Client;
+using ElasticSearch.Client.Settings;
 using HackerNews.Indexer.Domain;
 using Nest.TestData;
 using Nest.TestData.Domain;
@@ -68,8 +69,14 @@ namespace ElasticSearch.Tests
                                                   "elasticsearchprojects2");
 
             typeMapping.Name = "mytype";
+            var settings = new IndexSettings();
+            settings.Mappings.Add(typeMapping);
+            settings.NumberOfReplicas = 1;
+            settings.NumberOfShards = 5;
+            settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+
             var indexName = Guid.NewGuid().ToString();
-            var response = client.CreateIndex(indexName, typeMapping);
+            var response = client.CreateIndex(indexName, settings);
 
             Assert.IsTrue(response.Success);
 

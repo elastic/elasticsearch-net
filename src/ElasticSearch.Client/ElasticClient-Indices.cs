@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ElasticSearch.Client.Mapping;
+using ElasticSearch.Client.Settings;
 using Newtonsoft.Json;
 
 namespace ElasticSearch.Client
@@ -71,14 +72,10 @@ namespace ElasticSearch.Client
             return response;
         }
 
-        public IndicesResponse CreateIndex(string index, params TypeMapping[] typeMappings)
+        public IndicesResponse CreateIndex(string index, IndexSettings settings)
         {
             string path = this.CreatePath(index);
-
-            Dictionary<string, TypeMapping> mappings = typeMappings.ToDictionary(typeMapping => typeMapping.Name);
-            Dictionary<string, object> data = new Dictionary<string, object> { {"mappings", mappings} };
-
-            var status = this.Connection.PostSync(path, JsonConvert.SerializeObject(data, Formatting.None, this.SerializationSettings));
+            var status = this.Connection.PostSync(path, JsonConvert.SerializeObject(settings, Formatting.None, this.SerializationSettings));
 
             try
             {
