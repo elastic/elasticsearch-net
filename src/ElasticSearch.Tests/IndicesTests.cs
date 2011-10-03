@@ -59,5 +59,25 @@ namespace ElasticSearch.Tests
 			var status = client.ClearCache(new List<string> { Settings.DefaultIndex, Settings.DefaultIndex + "_clone" }, ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
 			Assert.True(status.Success);
 		}
+
+        [Test]
+        public void CreateIndex()
+        {
+            var client = this.ConnectedClient;
+            var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone",
+                                                  "elasticsearchprojects2");
+
+            typeMapping.Name = "mytype";
+            var indexName = Guid.NewGuid().ToString();
+            var response = client.CreateIndex(indexName, typeMapping);
+
+            Assert.IsTrue(response.Success);
+
+            Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, "mytype"));
+
+            response = client.DeleteIndex(indexName);
+
+            Assert.IsTrue(response.Success);
+        }
 	}
 }

@@ -71,6 +71,39 @@ namespace ElasticSearch.Client
             return response;
         }
 
+        public IndicesResponse CreateIndex(string index, params TypeMapping[] typeMappings)
+        {
+            string path = this.CreatePath(index);
+
+            Dictionary<string, TypeMapping> mappings = typeMappings.ToDictionary(typeMapping => typeMapping.Name);
+            Dictionary<string, object> data = new Dictionary<string, object> { {"mappings", mappings} };
+
+            var status = this.Connection.PostSync(path, JsonConvert.SerializeObject(data, Formatting.None, this.SerializationSettings));
+
+            try
+            {
+                var response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+                response.ConnectionStatus = status;
+                
+                return response;
+            } 
+            catch
+            {
+                return new IndicesResponse();
+            }
+        }
+
+        public IndicesResponse DeleteIndex(string index)
+        {
+            string path = this.CreatePath(index);
+
+            var status = this.Connection.DeleteSync(path);
+            var response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+            response.ConnectionStatus = status;
+
+            return response;
+        }
+
         public IndicesResponse DeleteMapping<T>() where T : class
         {
             string type = this.InferTypeName<T>();
@@ -133,11 +166,11 @@ namespace ElasticSearch.Client
             return response;
         }
 
-        public IndicesResponse Map(TypeMapping typeMapping, string index, string type)
+        public IndicesResponse Map(TypeMapping typeMapping, string index)
         {
-            string path = this.CreatePath(index, type) + "_mapping";
+            string path = this.CreatePath(index, typeMapping.Name) + "_mapping";
             var mapping = new Dictionary<string, TypeMapping>();
-            mapping.Add(type, typeMapping);
+            mapping.Add(typeMapping.Name, typeMapping);
 
             string map = JsonConvert.SerializeObject(mapping, Formatting.None, this.SerializationSettings);
 
@@ -156,9 +189,17 @@ namespace ElasticSearch.Client
 
             ConnectionStatus status = this.Connection.GetSync(path);
 
-            var mapping = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, this.SerializationSettings);
+            var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, this.SerializationSettings);
 
-            return mapping != null && mapping.Count > 0 ? mapping.First().Value : null;
+            if (status.Success)
+            {
+                var mapping = mappings.First();
+                mapping.Value.Name = mapping.Key;
+
+                return mapping.Value;
+            }
+
+            return null;
         }
 
         private string CreateMapFor<T>(string type) where T : class

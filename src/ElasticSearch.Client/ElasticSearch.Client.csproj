@@ -135,6 +135,7 @@
     <Compile Include="Enums\NumericType.cs" />
     <Compile Include="Mapping\TypeMapping.cs" />
     <Compile Include="Mapping\TypeMappingProperty.cs" />
+    <Compile Include="Mapping\TypeMappingSource.cs" />
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />

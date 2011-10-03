@@ -61,8 +61,8 @@ namespace ElasticSearch.Tests.Mapping
                                                   "elasticsearchprojects2");
 
             typeMapping.Properties["country"].Boost = 3;
-            this.ConnectedClient.Map(typeMapping, Test.Default.DefaultIndex + "_clone",
-                                     "elasticsearchprojects2");
+            typeMapping.Name = "elasticsearchprojects2";
+            this.ConnectedClient.Map(typeMapping, Test.Default.DefaultIndex + "_clone");
 
             typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone",
                                                   "elasticsearchprojects2");
