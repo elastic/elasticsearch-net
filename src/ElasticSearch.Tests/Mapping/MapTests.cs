@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ElasticSearch.Client;
+using ElasticSearch.Client.Mapping;
 using Nest.TestData;
 using Nest.TestData.Domain;
 using NUnit.Framework;

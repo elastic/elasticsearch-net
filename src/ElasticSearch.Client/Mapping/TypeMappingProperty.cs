@@ -55,5 +55,8 @@ namespace ElasticSearch.Client.Mapping
 
         [JsonProperty("properties")]
         public IDictionary<string, TypeMappingProperty> Properties { get; set; }
+
+        [JsonProperty("fields")]
+        public IDictionary<string, TypeMappingProperty> Fields { get; set; }
     }
 }

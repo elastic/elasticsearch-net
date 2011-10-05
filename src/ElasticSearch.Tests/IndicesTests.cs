@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ElasticSearch.Client;
+using ElasticSearch.Client.Mapping;
 using ElasticSearch.Client.Settings;
 using HackerNews.Indexer.Domain;
 using Nest.TestData;
@@ -81,6 +83,53 @@ namespace ElasticSearch.Tests
             Assert.IsTrue(response.Success);
 
             Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, "mytype"));
+
+            response = client.DeleteIndex(indexName);
+
+            Assert.IsTrue(response.Success);
+        }
+
+        [Test]
+        public void CreateIndexMultiFieldMap()
+        {
+            var client = this.ConnectedClient;
+
+            var typeMapping = new TypeMapping(Guid.NewGuid().ToString("n"));
+            var property = new TypeMappingProperty
+                           {
+                               Type = "multi_field"
+                           };
+
+            var primaryField = new TypeMappingProperty
+                               {
+                                   Type = "string", 
+                                   Index = "not_analyzed"
+                               };
+
+            var analyzedField = new TypeMappingProperty
+                                {
+                                    Type = "string", 
+                                    Index = "analyzed"
+                                };
+
+            property.Fields = new Dictionary<string, TypeMappingProperty>();
+            property.Fields.Add("name", primaryField);
+            property.Fields.Add("name_analyzed", analyzedField);
+
+            typeMapping.Properties.Add("name", property);
+
+            var settings = new IndexSettings();
+            settings.Mappings.Add(typeMapping);
+            settings.NumberOfReplicas = 1;
+            settings.NumberOfShards = 5;
+            settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+
+            var indexName = Guid.NewGuid().ToString();
+            var response = client.CreateIndex(indexName, settings);
+
+            Assert.IsTrue(response.Success);
+
+            Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, typeMapping.Name));
 
             response = client.DeleteIndex(indexName);
 
