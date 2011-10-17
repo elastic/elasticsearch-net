@@ -9,24 +9,24 @@ namespace ElasticSearch.Client
         public int Count { get; internal set; }
 
         [JsonProperty(PropertyName = "min")]
-        public float Min { get; internal set; }
+        public double Min { get; internal set; }
 
         [JsonProperty(PropertyName = "max")]
-        public float Max { get; internal set; }
+        public double Max { get; internal set; }
 
         [JsonProperty(PropertyName = "total")]
-        public float Total { get; internal set; }
+        public double Total { get; internal set; }
 
         [JsonProperty(PropertyName = "sum_of_squares")]
-        public float SumOfSquares { get; internal set; }
+        public double SumOfSquares { get; internal set; }
 
         [JsonProperty(PropertyName = "variance")]
-        public float Variance { get; internal set; }
+        public double Variance { get; internal set; }
 
         [JsonProperty(PropertyName = "std_deviation")]
-        public float StandardDeviation { get; internal set; }
+        public double StandardDeviation { get; internal set; }
 
         [JsonProperty(PropertyName = "mean")]
-        public float Mean { get; internal set; }
+        public double Mean { get; internal set; }
     }
 }

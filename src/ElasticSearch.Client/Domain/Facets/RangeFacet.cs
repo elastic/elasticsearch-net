@@ -14,25 +14,25 @@ namespace ElasticSearch.Client
         public class Range : FacetItem
         {
             [JsonProperty(PropertyName = "to")]
-            public float? To { get; internal set; }
+            public double? To { get; internal set; }
 
             [JsonProperty(PropertyName = "from")]
-            public float? From { get; internal set; }
+            public double? From { get; internal set; }
 
             [JsonProperty(PropertyName = "min")]
-            public float Min { get; internal set; }
+            public double Min { get; internal set; }
 
             [JsonProperty(PropertyName = "max")]
-            public float Max { get; internal set; }
+            public double Max { get; internal set; }
 
             [JsonProperty(PropertyName = "total_count")]
             public int TotalCount { get; internal set; }
 
             [JsonProperty(PropertyName = "total")]
-            public float Total { get; internal set; }
+            public double Total { get; internal set; }
 
             [JsonProperty(PropertyName = "mean")]
-            public float Mean { get; internal set; }
+            public double Mean { get; internal set; }
         }
 
         #endregion

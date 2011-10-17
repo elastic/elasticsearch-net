@@ -14,7 +14,7 @@ namespace ElasticSearch.Client
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }
 		[JsonProperty(PropertyName = "_score")]
-		public float Score { get; internal set; }
+        public double Score { get; internal set; }
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }
 		[JsonProperty(PropertyName = "_id")]

@@ -17,16 +17,16 @@ namespace ElasticSearch.Client
         public class TermStats : TermFacet.TermItem
         {
             [JsonProperty(PropertyName = "min")]
-            public float Min { get; internal set; }
+            public double Min { get; internal set; }
 
             [JsonProperty(PropertyName = "max")]
-            public float Max { get; internal set; }
+            public double Max { get; internal set; }
 
             [JsonProperty(PropertyName = "total")]
-            public float Total { get; internal set; }
+            public double Total { get; internal set; }
 
             [JsonProperty(PropertyName = "mean")]
-            public float Mean { get; internal set; }
+            public double Mean { get; internal set; }
 
             [JsonProperty("total_count")]
             public int TotalCount { get; set; }

@@ -41,7 +41,7 @@ namespace ElasticSearch.Client
             }
         }
 
-        public float MaxScore
+        public double MaxScore
         {
             get
             {

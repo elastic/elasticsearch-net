@@ -27,7 +27,7 @@ namespace ElasticSearch.Client.Mapping
         public int? PrecisionStep { get; set; }
 
         [JsonProperty("boost")]
-        public float? Boost { get; set; }
+        public double? Boost { get; set; }
 
         [JsonProperty("include_in_all")]
         public bool? IncludeInAll { get; set; }

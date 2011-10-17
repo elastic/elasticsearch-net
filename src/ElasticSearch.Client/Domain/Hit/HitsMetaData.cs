@@ -10,7 +10,7 @@ namespace ElasticSearch.Client
         public int Total { get; internal set; }
 
         [JsonProperty("max_score")]
-        public float MaxScore { get; internal set; }
+        public double MaxScore { get; internal set; }
 
         [JsonProperty("hits")]
         public List<Hit<T>> Hits { get; internal set; }

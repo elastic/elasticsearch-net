@@ -14,7 +14,7 @@ namespace ElasticSearch.Client
         public class Entry : FacetItem
         {
             [JsonProperty("key")]
-            public float Key { get; set; }
+            public double Key { get; set; }
         }
 
         #endregion
