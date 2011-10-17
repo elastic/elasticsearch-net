@@ -17,6 +17,8 @@ namespace ElasticSearch.Client
 		public float Score { get; internal set; }
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }
+		[JsonProperty(PropertyName = "_version")]
+		public string Version { get; internal set; }
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }
 		[JsonProperty(PropertyName = "highlight")]
