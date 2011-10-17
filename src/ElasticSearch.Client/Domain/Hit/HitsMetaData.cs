@@ -15,5 +15,6 @@ namespace ElasticSearch.Client
 		public float MaxScore { get; internal set; }
 		[JsonProperty]
 		public List<Hit<T>> Hits { get; internal set; }
+
 	}
 }

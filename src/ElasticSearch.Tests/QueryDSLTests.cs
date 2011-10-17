@@ -15,6 +15,7 @@ namespace ElasticSearch.Tests
 		[Test]
 		public void FuzzySearch()
 		{
+		/*
 			var client = this.ConnectedClient;
 			QueryResponse<Post> queryResults = client.Search<Post>(new Search()
 			{
@@ -22,6 +23,7 @@ namespace ElasticSearch.Tests
 
 			}.Skip(0).Take(10)
 			);
+		 * */
 		}
 
 	}

@@ -21,5 +21,7 @@ namespace ElasticSearch.Client
 		public string Id { get; internal set; }
 		[JsonProperty(PropertyName = "highlight")]
 		public Dictionary<string, List<string>> Highlight { get; internal set; }
+		[JsonProperty(PropertyName = "_explanation")]
+		public Explanation Explanation { get; internal set; }
 	}
 }

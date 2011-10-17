@@ -96,6 +96,8 @@
     <Compile Include="Domain\Facets\HistogramFacet.cs" />
     <Compile Include="Domain\Facets\TermFacet.cs" />
     <Compile Include="Domain\Highlight.cs" />
+    <Compile Include="Domain\Hit\Explanation.cs" />
+    <Compile Include="Domain\Hit\ExplanationDetail.cs" />
     <Compile Include="Domain\IndicesResponse.cs" />
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
@@ -120,6 +122,10 @@
     <Compile Include="Enums\FieldIndexOption.cs" />
     <Compile Include="Enums\StoreOption.cs" />
     <Compile Include="Enums\NumericType.cs" />
+    <Compile Include="Mapping\IElasticProperty.cs" />
+    <Compile Include="Mapping\ElasticProperty.cs" />
+    <Compile Include="Mapping\ElasticType.cs" />
+    <Compile Include="Mapping\Map.cs" />
     <Compile Include="Resolvers\Converters\FacetsMetaConverter.cs" />
     <Compile Include="Resolvers\Converters\DateHistogramConverter.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
