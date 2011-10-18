@@ -18,8 +18,12 @@ For more examples please refer to the [Wiki](https://github.com/Mpdreamz/NEST/wi
 * [Connecting](https://github.com/Mpdreamz/NEST/wiki/Connecting)
 * [Indexing](https://github.com/Mpdreamz/NEST/wiki/Indexing)
 * [Searching](https://github.com/Mpdreamz/NEST/wiki/Searching)
-* * [Faceting] (https://github.com/Mpdreamz/NEST/wiki/Faceting)
+    * [Faceting] (https://github.com/Mpdreamz/NEST/wiki/Faceting)
 * [Deleting](https://github.com/Mpdreamz/NEST/wiki/Deleting)
+* [Mapping](https://github.com/Mpdreamz/NEST/wiki/Mapping)
+
+
+To get a good overview of the status of NEST please keep an eye out on the public [Roadmap](https://github.com/Mpdreamz/NEST/wiki/RoadMap)
 
 ## Copyright
 
