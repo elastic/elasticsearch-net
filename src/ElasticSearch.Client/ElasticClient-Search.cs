@@ -12,10 +12,10 @@ namespace ElasticSearch.Client
         private QueryResponse<T> Query<T>(string query, string index, string typeName) where T : class
         {
             index.ThrowIfNullOrEmpty("index");
-            typeName.ThrowIfNullOrEmpty("typeName");
 
-            Type type = typeof (T);
-            string path = this.CreatePath(index, typeName) + "_search";
+            string path = string.Concat(!string.IsNullOrEmpty(typeName) ? 
+                            this.CreatePath(index, typeName) : 
+                            this.CreatePath(index), "_search");
 
             ConnectionStatus status = this.Connection.PostSync(path, query);
             if (status.Error != null)
