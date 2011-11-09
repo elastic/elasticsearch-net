@@ -11,5 +11,8 @@ namespace ElasticSearch.Client.Settings
 
         [JsonProperty("language")]
         public string Language { get; set; }
+
+        [JsonProperty("stopwords")]
+        public string StopWords { get; set; }
     }
 }
