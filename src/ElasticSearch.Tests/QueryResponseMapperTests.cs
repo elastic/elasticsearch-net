@@ -30,9 +30,8 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResponse.Shards.Total > 0);
 			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
 			Assert.True(queryResponse.Shards.Failed == 0);
-			Assert.That(queryResponse.ElapsedMilliseconds, Is.InRange(0, 200));
-				
 		}
+
 		[Test]
 		public void BogusQuery()
 		{
@@ -491,9 +490,7 @@ namespace ElasticSearch.Tests
 
 			//assert
 			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlight["content"].Count > 0);
-			Assert.IsTrue(queryResults.HitsMetaData.Hits[0].Highlight["content"].Count > 0);
-		}
 	}
-
 	//TODO: Implement top_children once we support mapping and mapping of parent child relations.
+	}
 }

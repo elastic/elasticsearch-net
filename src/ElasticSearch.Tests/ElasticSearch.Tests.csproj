@@ -57,13 +57,14 @@
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="Count\CountTests.cs" />
-    <Compile Include="FacetResponses\BaseFacetTestFixture.cs" />
     <Compile Include="FacetResponses\GeoDistanceFacetResponseTests.cs" />
     <Compile Include="FacetResponses\TermStatsFacetResponseTests.cs" />
     <Compile Include="FacetResponses\StatisticalFacetResponseTests.cs" />
     <Compile Include="FacetResponses\HistogramFacetResponseTests.cs" />
     <Compile Include="FacetResponses\RangeFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\TermFacetResponseTests.cs" />
+    <Compile Include="FacetResponses\BaseFacetTestFixture.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DeleteTests.cs" />
     <Compile Include="IndicesTests.cs" />
     <Compile Include="Mapping\MapTests.cs" />

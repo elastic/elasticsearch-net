@@ -43,15 +43,22 @@ namespace ElasticSearch.Tests.FacetResponses
 				}"
 			);
 			
-			var facets = queryResults.Facets<RangeFacet>("loc");
+			var facet = queryResults.Facets["loc"];
 			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
+			
+            Assert.IsInstanceOf<RangeFacet>(facet);
 
-			Assert.AreEqual(facets.Count(), 4);
-			Assert.AreEqual(facets.Sum(f=>f.Count), queryResults.Total);
+            var rf = (RangeFacet)facet;
+
+			Assert.AreEqual(rf.Ranges.Count, 4);
+            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == null && r.To == 10000));
+            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == 10000 && r.To == 15000));
+            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == 15000 && r.To == 20000));
+            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == 20000 && r.To == null));
 		}
+
 		[Test]
-		public void SplitKeyValueRangeFacet()
+		public void DateRangeFacet()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@"
@@ -59,42 +66,7 @@ namespace ElasticSearch.Tests.FacetResponses
 					""query"" : { ""match_all"" : { } },
 					""facets"" : 
 					{
-						""loc"" : 
-						{ 
-							""range"" : 
-							{
-								""key_field"" : ""loc"",
-								""value_field"" : ""loc"",
-								""ranges"" : [
-									{ ""to"" : 10000 },
-									{ ""from"" : 10000, ""to"" : 15000 },
-									{ ""from"" : 15000, ""to"" : 20000 },
-									{ ""from"" : 20000 }
-								]
-							}
-						}
-					}
-				}"
-			);
-
-			var facets = queryResults.Facets<RangeFacet>("loc");
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
-
-			Assert.AreEqual(facets.Count(), 4);
-			Assert.AreEqual(facets.Sum(f => f.Count), queryResults.Total);
-		}
-
-		[Test]
-		public void DateRangeFacets()
-		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-				@"
-				{ 
-					""query"" : { ""match_all"" : { } },
-					""facets"" : 
-					{
-						""followers.dateOfBirth"" : 
+						""dob"" : 
 						{ 
 							""range"" : 
 							{
@@ -112,11 +84,19 @@ namespace ElasticSearch.Tests.FacetResponses
 				}"
 			);
 
-			var facets = queryResults.Facets<DateRangeFacet>("followers.dateOfBirth");
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
+            var facet = queryResults.Facets["dob"];
+            this.TestDefaultAssertions(queryResults);
 
-			Assert.AreEqual(facets.Count(), 5);
+            Assert.IsInstanceOf<DateRangeFacet>(facet);
+
+            var drf = (DateRangeFacet)facet;
+
+            Assert.AreEqual(1, drf.Ranges.Count(r => r.From == null && r.To.GetValueOrDefault() == new DateTime(1900, 1, 1)));
+            Assert.AreEqual(1, drf.Ranges.Count(r => r.From.GetValueOrDefault() == new DateTime(1950, 1, 1) && r.To.GetValueOrDefault() == new DateTime(1980, 1, 1)));
+            Assert.AreEqual(1, drf.Ranges.Count(r => r.From.GetValueOrDefault() == new DateTime(1980, 1, 1) && r.To.GetValueOrDefault() == new DateTime(1990, 1, 1)));
+            Assert.AreEqual(1, drf.Ranges.Count(r => r.From.GetValueOrDefault() == new DateTime(1990, 1, 1) && r.To == null));
+
+            Assert.AreEqual(drf.Ranges.Count, 5);
 		}
 	}
 }

@@ -37,12 +37,21 @@ namespace ElasticSearch.Tests.FacetResponses
 					}
 				}"
 			);
-			
-			var facets = queryResults.Facets<HistogramFacet>("loc");
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
 
-			Assert.AreEqual(facets.Sum(f=>f.Count), queryResults.Total);
+		    var facet = queryResults.Facets["loc"];
+			this.TestDefaultAssertions(queryResults);
+			
+            Assert.IsInstanceOf<HistogramFacet>(facet);
+
+		    var hf = (HistogramFacet) facet;
+
+            Assert.Greater(hf.Entries.Count, 0);
+
+		    foreach (var entry in hf.Entries)
+		    {
+		        Assert.Greater(entry.Count, 0);
+                Assert.Greater(entry.Key, 0);
+		    }
 		}
 		[Test]
 		public void DateHistogramFacet()
@@ -53,7 +62,7 @@ namespace ElasticSearch.Tests.FacetResponses
 					""query"" : { ""match_all"" : { } },
 					""facets"" : 
 					{
-						""followers.dateOfBirth"" : 
+						""dob"" : 
 						{ 
 							""date_histogram"" : 
 							{
@@ -65,10 +74,20 @@ namespace ElasticSearch.Tests.FacetResponses
 				}"
 			);
 
-			var facets = queryResults.Facets<DateHistogramFacet>("followers.dateOfBirth");
-			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
+            var facet = queryResults.Facets["dob"];
+            this.TestDefaultAssertions(queryResults);
 
+            Assert.IsInstanceOf<DateHistogramFacet>(facet);
+
+            var dhf = (DateHistogramFacet)facet;
+
+            Assert.Greater(dhf.Entries.Count, 0);
+
+            foreach (var entry in dhf.Entries)
+            {
+                Assert.Greater(entry.Count, 0);
+                Assert.Greater(entry.Time, DateTime.MinValue);
+            }
 		}
 	}
 }

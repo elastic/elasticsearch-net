@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ElasticSearch.Client</RootNamespace>
     <AssemblyName>ElasticSearch.Client</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -54,11 +54,15 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fasterflect, Version=2.0.1.0, Culture=neutral, PublicKeyToken=a64e1179c81b1e25, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\fasterflect.2.0.1\lib\net40\Fasterflect.dll</HintPath>
+    </Reference>
     <Reference Include="NetReflector">
       <HintPath>..\..\dep\NetReflector.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Net35">
-      <HintPath>..\..\dep\Newtonsoft.Json.4.0.2\lib\net35\Newtonsoft.Json.Net35.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dep\Newtonsoft.Json.4.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -73,10 +77,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Fasterflect, Version=2.0.3732.24338, Culture=neutral, PublicKeyToken=d3b50d974897f4b5">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\fasterflect\Fasterflect.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
@@ -86,22 +86,36 @@
     <Compile Include="ConnectionStatus.cs" />
     <Compile Include="CountResponse.cs" />
     <Compile Include="Domain\Facets\GeoDistanceFacet.cs" />
-    <Compile Include="Domain\Facets\FacetMetaData.cs" />
+    <Compile Include="Domain\Facets\DateHistogramFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Facets\DateRangeFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Facets\Facet.cs" />
-    <Compile Include="Domain\Facets\SingleFacet.cs" />
-    <Compile Include="Domain\Facets\TermStatsFacet.cs" />
-    <Compile Include="Domain\Facets\StatisticalFacet.cs" />
-    <Compile Include="Domain\Facets\DateRangeFacet.cs" />
-    <Compile Include="Domain\Facets\RangeFacet.cs" />
-    <Compile Include="Domain\Facets\DateHistogramFacet.cs" />
+    <Compile Include="Domain\Facets\FacetItem.cs" />
     <Compile Include="Domain\Facets\HistogramFacet.cs" />
+    <Compile Include="Domain\Facets\RangeFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Facets\StatisticalFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Facets\TermFacet.cs" />
+    <Compile Include="Domain\Facets\TermStatsFacet.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Highlight.cs" />
     <Compile Include="Domain\Hit\Explanation.cs" />
     <Compile Include="Domain\Hit\ExplanationDetail.cs" />
     <Compile Include="Domain\IndicesResponse.cs" />
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
+    <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
+    <Compile Include="Settings\AnalysisSettings.cs" />
+    <Compile Include="Settings\AnalyzerSettings.cs" />
+    <Compile Include="Settings\CustomAnalyzerSettings.cs" />
+    <Compile Include="Settings\IndexSettings.cs" />
     <Compile Include="Domain\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
@@ -128,8 +142,11 @@
     <Compile Include="Mapping\ElasticProperty.cs" />
     <Compile Include="Mapping\ElasticType.cs" />
     <Compile Include="Mapping\Map.cs" />
-    <Compile Include="Resolvers\Converters\FacetsMetaConverter.cs" />
-    <Compile Include="Resolvers\Converters\DateHistogramConverter.cs" />
+    <Compile Include="Mapping\TypeMapping.cs" />
+    <Compile Include="Mapping\TypeMappingProperty.cs" />
+    <Compile Include="Mapping\TypeMappingSource.cs" />
+    <Compile Include="Resolvers\Converters\FacetConverter.cs" />
+    <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="DSL\Query.cs" />
@@ -164,6 +181,7 @@
     <Compile Include="QueryResponse.cs" />
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
     <Compile Include="Search.cs" />
+    <Compile Include="Settings\SnowballAnalyzerSettings.cs" />
     <Compile Include="Thrift\Method.cs" />
     <Compile Include="Thrift\Rest.cs" />
     <Compile Include="Thrift\RestRequest.cs" />

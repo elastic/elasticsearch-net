@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ElasticSearch.Client;
+using ElasticSearch.Client.Mapping;
+using ElasticSearch.Client.Settings;
 using HackerNews.Indexer.Domain;
 using Nest.TestData;
 using Nest.TestData.Domain;
@@ -29,7 +32,6 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResponse.Shards.Total > 0);
 			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
 			Assert.True(queryResponse.Shards.Failed == 0);
-			Assert.That(queryResponse.ElapsedMilliseconds, Is.InRange(0, 200));
 				
 		}
 		[Test]
@@ -60,5 +62,78 @@ namespace ElasticSearch.Tests
 			var status = client.ClearCache(new List<string> { Settings.DefaultIndex, Settings.DefaultIndex + "_clone" }, ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
 			Assert.True(status.Success);
 		}
+
+        [Test]
+        public void CreateIndex()
+        {
+            var client = this.ConnectedClient;
+            var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone",
+                                                  "elasticsearchprojects2");
+
+            typeMapping.Name = "mytype";
+            var settings = new IndexSettings();
+            settings.Mappings.Add(typeMapping);
+            settings.NumberOfReplicas = 1;
+            settings.NumberOfShards = 5;
+            settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+
+            var indexName = Guid.NewGuid().ToString();
+            var response = client.CreateIndex(indexName, settings);
+
+            Assert.IsTrue(response.Success);
+
+            Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, "mytype"));
+
+            response = client.DeleteIndex(indexName);
+
+            Assert.IsTrue(response.Success);
+        }
+
+        [Test]
+        public void CreateIndexMultiFieldMap()
+        {
+            var client = this.ConnectedClient;
+
+            var typeMapping = new TypeMapping(Guid.NewGuid().ToString("n"));
+            var property = new TypeMappingProperty
+                           {
+                               Type = "multi_field"
+                           };
+
+            var primaryField = new TypeMappingProperty
+                               {
+                                   Type = "string", 
+                                   Index = "not_analyzed"
+                               };
+
+            var analyzedField = new TypeMappingProperty
+                                {
+                                    Type = "string", 
+                                    Index = "analyzed"
+                                };
+
+            property.Fields = new Dictionary<string, TypeMappingProperty>();
+            property.Fields.Add("name", primaryField);
+            property.Fields.Add("name_analyzed", analyzedField);
+
+            typeMapping.Properties.Add("name", property);
+
+            var settings = new IndexSettings();
+            settings.Mappings.Add(typeMapping);
+            settings.NumberOfReplicas = 1;
+            settings.NumberOfShards = 5;
+            settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+
+            var indexName = Guid.NewGuid().ToString();
+            var response = client.CreateIndex(indexName, settings);
+
+            Assert.IsTrue(response.Success);
+
+            Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, typeMapping.Name));
+
+            response = client.DeleteIndex(indexName);
+
+            Assert.IsTrue(response.Success);
+        }
 	}
 }

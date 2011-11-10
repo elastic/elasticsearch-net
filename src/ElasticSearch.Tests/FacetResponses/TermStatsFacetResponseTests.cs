@@ -26,7 +26,7 @@ namespace ElasticSearch.Tests.FacetResponses
 					""query"" : { ""match_all"" : { } },
 					""facets"" : 
 					{
-						""loc"" : 
+						""nameStats"" : 
 						{ 
 							""terms_stats"" : {
 								""key_field"" : ""name"",
@@ -37,16 +37,25 @@ namespace ElasticSearch.Tests.FacetResponses
 				}"
 			);
 
-			var facets = queryResults.Facets<TermStatsFacet>("loc");		
+		    var facet = queryResults.Facets["nameStats"];
 			this.TestDefaultAssertions(queryResults);
-			this.TestDefaultFacetCollectionAssertation(facets);
-			var facet = facets.First();
-			Assert.Greater(facet.Count,0);
-			Assert.Greater(facet.Total, 0);
-			Assert.Greater(facet.Min, 0);
-			Assert.Greater(facet.Max, 0);
-			Assert.Greater(facet.Mean, 0);
-		
+
+            Assert.IsInstanceOf<TermStatsFacet>(facet);
+
+		    var tsf = (TermStatsFacet) facet;
+            
+            Assert.GreaterOrEqual(tsf.Missing, 0);
+
+		    foreach (var term in tsf.Terms)
+		    {
+                Assert.Greater(term.Count, 0);
+                Assert.Greater(term.Total, 0);
+                Assert.Greater(term.Min, 0);
+                Assert.Greater(term.Max, 0);
+                Assert.Greater(term.Mean, 0);
+                Assert.Greater(term.TotalCount, 0);
+                Assert.IsNotNullOrEmpty(term.Term);
+		    }
 		}
 	}
 }

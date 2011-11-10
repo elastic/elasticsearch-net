@@ -15,6 +15,25 @@ namespace ElasticSearch.Tests
     public class DeleteTests : BaseElasticSearchTests
     {
         [Test]
+        public void HitsMaxScoreIsSet()
+        {
+            //arrange
+            //pull existing example through method we know is functional based on other passing unit tests
+            var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+                @" { ""query"" : {
+						 ""query_string"" : {
+							""query"" : ""*""
+						}
+					} }"
+            );
+
+            var hits = queryResults.Hits;
+            
+            Assert.AreEqual(1, hits.MaxScore);
+            Assert.AreEqual(hits.Hits.Max(h => h.Score), hits.MaxScore);
+        }
+
+        [Test]
         public void GetDocumentById()
         {
             //arrange
@@ -26,7 +45,7 @@ namespace ElasticSearch.Tests
 						}
 					} }"
             );
-            var hit = queryResults.HitsMetaData.Hits[0];
+            var hit = queryResults.Hits.Hits[0];
             var documentToFind = hit.Source;
 
             //act
