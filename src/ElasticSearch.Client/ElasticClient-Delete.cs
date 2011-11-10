@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ElasticSearch.Client
 {
-    public partial class ElasticClient
-    {
+	public partial class ElasticClient
+	{
 		#region Delete by passing an object
 		public ConnectionStatus Delete<T>(T @object) where T : class
 		{
@@ -79,30 +79,30 @@ namespace ElasticSearch.Client
 
 		#region Delete by passing an id
 		public ConnectionStatus DeleteById<T>(int id) where T : class
-        {
+		{
 			return this.DeleteById<T>(id.ToString());
-        }
+		}
 
 		public ConnectionStatus DeleteById<T>(string id) where T : class
-        {
-            var index = this.Settings.DefaultIndex;
-            index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+		{
+			var index = this.Settings.DefaultIndex;
+			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-            var typeName = this.InferTypeName<T>();
+			var typeName = this.InferTypeName<T>();
 			var path = this.CreatePath(index, typeName, id);
 			return this._deleteToPath(path);
-        }
+		}
 		public ConnectionStatus DeleteById<T>(string index, string type, string id) where T : class
-        {
+		{
 			var path = this.CreatePath(index, type, id);
 			return this._deleteToPath(path);
-        }
+		}
 
 		public ConnectionStatus DeleteById<T>(string index, string type, int id) where T : class
-        {
+		{
 			var path = this.CreatePath(index, type, id.ToString());
 			return this._deleteToPath(path);
-        }
+		}
 
 		public ConnectionStatus DeleteById<T>(int id, DeleteParameters deleteParameters) where T : class
 		{
@@ -573,5 +573,5 @@ namespace ElasticSearch.Client
 			path.ThrowIfNull("path");
 			this.Connection.Delete(path, data, callback);
 		}
-    }
+	}
 }

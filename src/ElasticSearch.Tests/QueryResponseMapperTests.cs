@@ -281,7 +281,7 @@ namespace ElasticSearch.Tests
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
-						    ""match_all"" : { }
+							""match_all"" : { }
 					} }"
 			);
 			this.TestDefaultAssertions(queryResults);
@@ -478,21 +478,21 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResults.Documents.First().Followers
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
-        [Test]
-        public void QueryWithHighlightTest()
-        {
-            //arrange
-            var firstFollower = NestTestData.Data.First().Followers.First();
-            var firstName = firstFollower.FirstName;
-            string query = "{\"query\":{\"query_string\":{\"default_field\":\"_all\",\"query\":\"pork\"}},\"highlight\":{\"pre_tags\":[\"<span class=\\\"searchTerm\\\">\"],\"post_tags\":[\"</span>\"],\"fields\":{\"content\":{\"fragment_size\":150,\"number_of_fragments\":3}}}}";
+		[Test]
+		public void QueryWithHighlightTest()
+		{
+			//arrange
+			var firstFollower = NestTestData.Data.First().Followers.First();
+			var firstName = firstFollower.FirstName;
+			string query = "{\"query\":{\"query_string\":{\"default_field\":\"_all\",\"query\":\"pork\"}},\"highlight\":{\"pre_tags\":[\"<span class=\\\"searchTerm\\\">\"],\"post_tags\":[\"</span>\"],\"fields\":{\"content\":{\"fragment_size\":150,\"number_of_fragments\":3}}}}";
 
-            //act
-            var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			//act
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(query);
 
-            //assert
+			//assert
 			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlight["content"].Count > 0);
-            Assert.IsTrue(queryResults.HitsMetaData.Hits[0].Highlight["content"].Count > 0);
-        }
+			Assert.IsTrue(queryResults.HitsMetaData.Hits[0].Highlight["content"].Count > 0);
+		}
 	}
 
 	//TODO: Implement top_children once we support mapping and mapping of parent child relations.

@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="Count\CountTests.cs" />
     <Compile Include="FacetResponses\BaseFacetTestFixture.cs" />
     <Compile Include="FacetResponses\GeoDistanceFacetResponseTests.cs" />
     <Compile Include="FacetResponses\TermStatsFacetResponseTests.cs" />

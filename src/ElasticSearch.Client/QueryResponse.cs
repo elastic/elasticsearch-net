@@ -8,6 +8,9 @@ using ElasticSearch.Client.DSL;
 
 namespace ElasticSearch.Client
 {
+
+
+
 	[JsonObject]
 	public class QueryResponse<T> where T : class
 	{

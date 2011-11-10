@@ -8,7 +8,7 @@ using ElasticSearch.Client.Mapping;
 namespace Nest.TestData.Domain
 {
 	[ElasticType(
-		Name = "elasticsearchprojects2",
+		Name = "elasticsearchprojects",
 		DateDetection = true,
 		NumericDetection = true,
 		SearchAnalyzer = "standard",

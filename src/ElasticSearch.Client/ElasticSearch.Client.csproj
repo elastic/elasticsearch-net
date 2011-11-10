@@ -84,6 +84,7 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="CountResponse.cs" />
     <Compile Include="Domain\Facets\GeoDistanceFacet.cs" />
     <Compile Include="Domain\Facets\FacetMetaData.cs" />
     <Compile Include="Domain\Facets\Facet.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
     <Compile Include="Domain\ShardsMetaData.cs" />
+    <Compile Include="ElasticClient-Count.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-Inferno.cs" />
     <Compile Include="ElasticClient-Indices.cs" />
