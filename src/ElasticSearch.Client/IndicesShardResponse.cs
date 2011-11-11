@@ -9,11 +9,11 @@ using ElasticSearch.Client.DSL;
 namespace ElasticSearch.Client
 {
 	[JsonObject]
-	public class RefreshResponse
+	public class IndicesShardResponse
 	{
 		public bool IsValid { get; internal set; }
 		public ConnectionError ConnectionError { get; internal set; }
-		public RefreshResponse()
+		public IndicesShardResponse()
 		{
 			this.IsValid = true;
 		}

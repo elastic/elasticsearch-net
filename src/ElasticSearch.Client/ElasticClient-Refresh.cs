@@ -22,7 +22,7 @@ namespace ElasticSearch.Client
 		///  refreshes all
 		/// </summary>
 		/// <returns></returns>
-		public RefreshResponse Refresh()
+		public IndicesShardResponse Refresh()
 		{
 			return this.Refresh("_all");
 		}
@@ -31,7 +31,7 @@ namespace ElasticSearch.Client
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
-		public RefreshResponse Refresh(string index)
+		public IndicesShardResponse Refresh(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Refresh(new []{ index });
@@ -41,7 +41,7 @@ namespace ElasticSearch.Client
 		/// </summary>
 		/// <param name="indices"></param>
 		/// <returns></returns>
-		public RefreshResponse Refresh(IEnumerable<string> indices)
+		public IndicesShardResponse Refresh(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("indices");
 			string path = this.CreatePath(string.Join(",", indices)) + "_refresh";
@@ -52,26 +52,26 @@ namespace ElasticSearch.Client
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public RefreshResponse Refresh<T>() where T : class
+		public IndicesShardResponse Refresh<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Refresh(index);
 		}
-		private RefreshResponse _Refresh(string path)
+		private IndicesShardResponse _Refresh(string path)
 		{
 			var status = this.Connection.GetSync(path);
 			if (status.Error != null)
 			{
-				return new RefreshResponse()
+				return new IndicesShardResponse()
 				{
 					IsValid = false,
 					ConnectionError = status.Error
 				};
 			}
 
-			var response = JsonConvert.DeserializeObject<RefreshResponse>(status.Result, this.SerializationSettings);
+			var response = JsonConvert.DeserializeObject<IndicesShardResponse>(status.Result, this.SerializationSettings);
 			return response;
 		}
 

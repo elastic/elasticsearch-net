@@ -84,9 +84,13 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="Domain\OptimizeParams.cs" />
+    <Compile Include="ElasticClient-Optimize.cs" />
+    <Compile Include="ElasticClient-Snapshot.cs" />
+    <Compile Include="ElasticClient-Flush.cs" />
     <Compile Include="IndicesOperationResponse.cs" />
     <Compile Include="ElasticClient-OpenClose.cs" />
-    <Compile Include="RefreshResponse.cs" />
+    <Compile Include="IndicesShardResponse.cs" />
     <Compile Include="ElasticClient-Refresh.cs" />
     <Compile Include="CountResponse.cs" />
     <Compile Include="Domain\Facets\GeoDistanceFacet.cs" />
