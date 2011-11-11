@@ -84,6 +84,8 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="RefreshResponse.cs" />
+    <Compile Include="ElasticClient-Refresh.cs" />
     <Compile Include="CountResponse.cs" />
     <Compile Include="Domain\Facets\GeoDistanceFacet.cs" />
     <Compile Include="Domain\Facets\DateHistogramFacet.cs">

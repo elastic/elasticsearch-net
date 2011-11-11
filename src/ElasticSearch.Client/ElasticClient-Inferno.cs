@@ -84,12 +84,12 @@ namespace ElasticSearch.Client
 
 			if (idProperty != null)
 			{
-			    object value = idProperty.GetValue(@object, null);
+				object value = idProperty.GetValue(@object, null);
 
-                if (value != null)
-                {
-                    idString = value.ToString();
-                }
+				if (value != null)
+				{
+					idString = value.ToString();
+				}
 			}
 
 			return idString;

@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="DeleteTests.cs" />
     <Compile Include="IndicesTests.cs" />
+    <Compile Include="Indices\RefreshTests.cs" />
     <Compile Include="Mapping\MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryDSLTests.cs" />
