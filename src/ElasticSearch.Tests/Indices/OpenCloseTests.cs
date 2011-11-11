@@ -37,5 +37,27 @@ namespace ElasticSearch.Tests.Search
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 		}
+		[Test]
+		public void CloseAndSearchAndOpenIndex()
+		{
+			var r = this.ConnectedClient.CloseIndex(Test.Default.DefaultIndex);
+			Assert.True(r.OK);
+			Assert.True(r.Acknowledged);
+			Assert.True(r.IsValid);
+			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+						    ""match_all"" : { }
+				} }"
+			);
+			Assert.False(results.IsValid);
+			Assert.IsNotNull(results.ConnectionError);
+			Assert.True(results.ConnectionError.HttpStatusCode == System.Net.HttpStatusCode.InternalServerError);
+			Assert.True(results.ConnectionError.ExceptionMessage.Contains("ClusterBlockException"));
+			Assert.True(results.ConnectionError.ExceptionMessage.Contains("index closed"));
+			r = this.ConnectedClient.OpenIndex(Test.Default.DefaultIndex);
+			Assert.True(r.OK);
+			Assert.True(r.Acknowledged);
+			Assert.True(r.IsValid);
+		}
 	}
 }
