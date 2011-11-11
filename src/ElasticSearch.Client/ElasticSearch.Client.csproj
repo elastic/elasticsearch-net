@@ -84,6 +84,8 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="IndicesOperationResponse.cs" />
+    <Compile Include="ElasticClient-OpenClose.cs" />
     <Compile Include="RefreshResponse.cs" />
     <Compile Include="ElasticClient-Refresh.cs" />
     <Compile Include="CountResponse.cs" />

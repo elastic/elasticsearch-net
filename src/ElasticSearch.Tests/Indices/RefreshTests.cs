@@ -16,27 +16,27 @@ namespace ElasticSearch.Tests.Search
 		[Test]
 		public void RefreshAll()
 		{
-			var countResults = this.ConnectedClient.Refresh();
-			Assert.True(countResults.OK);
+			var r = this.ConnectedClient.Refresh();
+			Assert.True(r.OK);
 		}
 		[Test]
 		public void RefreshIndex()
 		{
-			var countResults = this.ConnectedClient.Refresh(Test.Default.DefaultIndex);
-			Assert.True(countResults.OK);
+			var r = this.ConnectedClient.Refresh(Test.Default.DefaultIndex);
+			Assert.True(r.OK);
 		}
 		[Test]
 		public void RefreshIndeces()
 		{
-			var countResults = this.ConnectedClient.Refresh(
+			var r = this.ConnectedClient.Refresh(
 				new []{Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
-			Assert.True(countResults.OK);
+			Assert.True(r.OK);
 		}
 		[Test]
 		public void RefreshTyped()
 		{
-			var countResults = this.ConnectedClient.Refresh<ElasticSearchProject>();
-			Assert.True(countResults.OK);
+			var r = this.ConnectedClient.Refresh<ElasticSearchProject>();
+			Assert.True(r.OK);
 		}
 	}
 }
