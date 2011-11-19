@@ -42,7 +42,12 @@ namespace ElasticSearch.Client
 
 			return cmd;
 		}
-
+		public IndecesOperationResponse Alias(string alias)
+		{
+			var index = this.Settings.DefaultIndex;
+			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
+			return this._Alias(q);
+		}
 		public IndecesOperationResponse Alias(string index, string alias)
 		{
 			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
@@ -54,9 +59,29 @@ namespace ElasticSearch.Client
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
+		public IndecesOperationResponse Alias(IEnumerable<string> aliases)
+		{
+			var index = this.Settings.DefaultIndex;
+			aliases.Select(a=> _createCommand("add", new AliasParams { Index = index, Alias = a }));
+			var q = string.Join(",", aliases);
+			return this._Alias(q);
+		}
+		public IndecesOperationResponse RemoveAlias(string alias)
+		{
+			var index = this.Settings.DefaultIndex;
+			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
+			return this._Alias(q);
+		}
 		public IndecesOperationResponse RemoveAlias(string index, string alias)
 		{
 			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
+			return this._Alias(q);
+		}
+		public IndecesOperationResponse RemoveAlias(IEnumerable<string> aliases)
+		{
+			var index = this.Settings.DefaultIndex;
+			aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
+			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
 		public IndecesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases)
