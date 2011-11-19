@@ -6,77 +6,88 @@ using Nest.TestData.Domain;
 
 namespace ElasticSearch.Tests.FacetResponses
 {
-    /// <summary>
-    ///  Tests that test whether the query response can be successfully mapped or not
-    /// </summary>
-    [TestFixture]
-    public class TermFacetResponseTests : BaseFacetTestFixture
-    {
-        [Test]
-        public void SimpleTermFacet()
-        {
-            QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-                @" { ""query"" : {
-						    ""match_all"" : { }
+	/// <summary>
+	///  Tests that test whether the query response can be successfully mapped or not
+	/// </summary>
+	[TestFixture]
+	public class TermFacetResponseTests : BaseFacetTestFixture
+	{
+		[Test]
+		public void SimpleTermFacet()
+		{
+			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+							""match_all"" : { }
 					},
 					""facets"" : {
-					  ""followersLastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
+					  ""followers.lastName"" : { ""terms"" : {""field"" : ""followers.lastName""} }
 					}
 				}"
-                );
+				);
 
-            var facet = queryResults.Facets["followersLastName"];
-            this.TestDefaultAssertions(queryResults);
+			var facet = queryResults.Facets["followers.lastName"];
+			this.TestDefaultAssertions(queryResults);
+			Assert.IsInstanceOf<TermFacet>(facet);
+			var tf = (TermFacet) facet;
+			Assert.AreEqual(0, tf.Missing);
+			Assert.Greater(tf.Other, 0);
+			Assert.Greater(tf.Total, 0);
+			Assert.Greater(tf.Items.Count(), 0);
 
-            Assert.IsInstanceOf<TermFacet>(facet);
+			foreach (TermItem term in tf.Items)
+			{
+				Assert.Greater(term.Count, 0);
+				Assert.IsNotNullOrEmpty(term.Term);
+			}
 
-            var tf = (TermFacet) facet;
-            Assert.AreEqual(0, tf.Missing);
-            Assert.Greater(tf.Other, 0);
-            Assert.Greater(tf.Total, 0);
-            Assert.Greater(tf.Terms.Count, 0);
+			tf = queryResults.Facet<TermFacet>(p=>p.Followers.Select(f=>f.LastName));
+			Assert.AreEqual(0, tf.Missing);
+			Assert.Greater(tf.Other, 0);
+			Assert.Greater(tf.Total, 0);
+			Assert.Greater(tf.Items.Count(), 0);
 
-            foreach (TermFacet.TermItem term in tf.Terms)
-            {
-                Assert.Greater(term.Count, 0);
-                Assert.IsNotNullOrEmpty(term.Term);
-            }
-        }
+			var items = queryResults.FacetItems<TermItem>(p=>p.Followers.Select(f=>f.LastName));
+			foreach (var i in items)
+			{
+				Assert.Greater(i.Count, 0);
+				Assert.IsNotNullOrEmpty(i.Term);
+			}
+		}
 
-        [Test]
-        public void SimpleTermFacetWithExclude()
-        {
-            QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-                @" { ""query"" : {
-						    ""match_all"" : { }
+		[Test]
+		public void SimpleTermFacetWithExclude()
+		{
+			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+							""match_all"" : { }
 					},
 					""facets"" : {
 					  ""followerLastName"" : { ""terms"" : {
 						""field"" : ""followers.lastName""
 						, exclude : [""" +
-                this._LookFor + @"""]
+				this._LookFor + @"""]
 					  } }
 					}
 				}"
-                );
+				);
 
-            var facet = queryResults.Facets["followerLastName"];
-            this.TestDefaultAssertions(queryResults);
+			var facet = queryResults.Facets["followerLastName"];
+			this.TestDefaultAssertions(queryResults);
 
-            Assert.IsInstanceOf<TermFacet>(facet);
+			Assert.IsInstanceOf<TermFacet>(facet);
 
-            var tf = (TermFacet) facet;
+			var tf = (TermFacet) facet;
 
-            Assert.IsFalse(tf.Terms.Any(f => f.Term == this._LookFor));
-        }
+			Assert.IsFalse(tf.Items.Any(f => f.Term == this._LookFor));
+		}
 
-        [Test]
-        public void SimpleTermFacetWithGlobal()
-        {
-            QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-                @" { ""query"" : {
-						    ""term"" : { ""followers.lastName"" : """ + this._LookFor +
-                @""" }
+		[Test]
+		public void SimpleTermFacetWithGlobal()
+		{
+			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+				@" { ""query"" : {
+							""term"" : { ""followers.lastName"" : """ + this._LookFor +
+				@""" }
 					},
 					""facets"" : {
 					  ""followerLastName"" : { 
@@ -85,13 +96,13 @@ namespace ElasticSearch.Tests.FacetResponses
 					}
 				}");
 
-            var facet = queryResults.Facets["followerLastName"];
-            this.TestDefaultAssertions(queryResults);
+			var facet = queryResults.Facets["followerLastName"];
+			this.TestDefaultAssertions(queryResults);
 
-            Assert.IsInstanceOf<TermFacet>(facet);
+			Assert.IsInstanceOf<TermFacet>(facet);
 
-            var tf = (TermFacet) facet;
-            Assert.IsTrue(tf.Terms.Any(f => f.Term == this._LookFor));
-        }
-    }
+			var tf = (TermFacet) facet;
+			Assert.IsTrue(tf.Items.Any(f => f.Term == this._LookFor));
+		}
+	}
 }

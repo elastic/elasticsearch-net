@@ -56,6 +56,8 @@ namespace ElasticSearch.Client.Resolvers.Converters
 
                     case "terms_stats":
                         return serializer.Deserialize(o.CreateReader(), typeof(TermStatsFacet));
+                    case "geo_distance":
+                        return serializer.Deserialize(o.CreateReader(), typeof(GeoDistanceFacet));
                 }
             }
 

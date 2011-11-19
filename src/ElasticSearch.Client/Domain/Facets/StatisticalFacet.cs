@@ -1,10 +1,16 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace ElasticSearch.Client
 {
     [JsonObject]
-    public class StatisticalFacet : Facet
+    public class StatisticalFacet : Facet, ISimpleFacet
     {
+        //Hiding is intentional here
+        private new IEnumerable<FacetItem> Items { get; set; }
+        
+
+
         [JsonProperty("count")]
         public int Count { get; internal set; }
 

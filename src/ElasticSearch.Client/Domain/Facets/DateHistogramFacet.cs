@@ -6,20 +6,16 @@ using Newtonsoft.Json;
 namespace ElasticSearch.Client
 {
     [JsonObject]
-    public class DateHistogramFacet : Facet
+    public class DateHistogramFacet : Facet, IFacet<DateEntry>
     {
         [JsonProperty("entries")]
-        public IList<DateEntry> Entries { get; internal set; }
+        public IEnumerable<DateEntry> Items { get; internal set; }
 
-        #region Nested type: DateEntry
-
-        public class DateEntry : FacetItem
-        {
-            [JsonConverter(typeof (UnixDateTimeConverter))]
-            [JsonProperty("time")]
-            public DateTime Time { get; internal set; }
-        }
-
-        #endregion
+    }
+    public class DateEntry : FacetItem
+    {
+        [JsonConverter(typeof (UnixDateTimeConverter))]
+        [JsonProperty("time")]
+        public DateTime Time { get; internal set; }
     }
 }

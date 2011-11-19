@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace ElasticSearch.Client
 {
     [JsonObject]
-    public class TermFacet : Facet
+    public class TermFacet : Facet, IFacet<TermItem>
     {
         [JsonProperty("missing")]
         public int Missing { get; internal set; }
@@ -16,16 +16,11 @@ namespace ElasticSearch.Client
         public int Total { get; internal set; }
 
         [JsonProperty("terms")]
-        public IList<TermItem> Terms { get; internal set; }
-
-        #region Nested type: TermItem
-
-        public class TermItem : FacetItem
-        {
-            [JsonProperty(PropertyName = "term")]
-            public string Term { get; internal set; }
-        }
-
-        #endregion
+        public IEnumerable<TermItem> Items { get; internal set; }
+    }
+    public class TermItem : FacetItem
+    {
+        [JsonProperty(PropertyName = "term")]
+        public string Term { get; internal set; }
     }
 }

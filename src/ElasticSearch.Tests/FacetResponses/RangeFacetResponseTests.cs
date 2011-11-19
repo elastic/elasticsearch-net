@@ -50,11 +50,11 @@ namespace ElasticSearch.Tests.FacetResponses
 
             var rf = (RangeFacet)facet;
 
-			Assert.AreEqual(rf.Ranges.Count, 4);
-            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == null && r.To == 10000));
-            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == 10000 && r.To == 15000));
-            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == 15000 && r.To == 20000));
-            Assert.AreEqual(1, rf.Ranges.Count(r => r.From == 20000 && r.To == null));
+			Assert.AreEqual(rf.Items.Count(), 4);
+			Assert.AreEqual(1, rf.Items.Count(r => r.From == null && r.To == 10000));
+			Assert.AreEqual(1, rf.Items.Count(r => r.From == 10000 && r.To == 15000));
+			Assert.AreEqual(1, rf.Items.Count(r => r.From == 15000 && r.To == 20000));
+			Assert.AreEqual(1, rf.Items.Count(r => r.From == 20000 && r.To == null));
 		}
 
 		[Test]
@@ -91,12 +91,12 @@ namespace ElasticSearch.Tests.FacetResponses
 
             var drf = (DateRangeFacet)facet;
 
-            Assert.AreEqual(1, drf.Ranges.Count(r => r.From == null && r.To.GetValueOrDefault() == new DateTime(1900, 1, 1)));
-            Assert.AreEqual(1, drf.Ranges.Count(r => r.From.GetValueOrDefault() == new DateTime(1950, 1, 1) && r.To.GetValueOrDefault() == new DateTime(1980, 1, 1)));
-            Assert.AreEqual(1, drf.Ranges.Count(r => r.From.GetValueOrDefault() == new DateTime(1980, 1, 1) && r.To.GetValueOrDefault() == new DateTime(1990, 1, 1)));
-            Assert.AreEqual(1, drf.Ranges.Count(r => r.From.GetValueOrDefault() == new DateTime(1990, 1, 1) && r.To == null));
+            Assert.AreEqual(1, drf.Items.Count(r => r.From == null && r.To.GetValueOrDefault() == new DateTime(1900, 1, 1)));
+			Assert.AreEqual(1, drf.Items.Count(r => r.From.GetValueOrDefault() == new DateTime(1950, 1, 1) && r.To.GetValueOrDefault() == new DateTime(1980, 1, 1)));
+			Assert.AreEqual(1, drf.Items.Count(r => r.From.GetValueOrDefault() == new DateTime(1980, 1, 1) && r.To.GetValueOrDefault() == new DateTime(1990, 1, 1)));
+			Assert.AreEqual(1, drf.Items.Count(r => r.From.GetValueOrDefault() == new DateTime(1990, 1, 1) && r.To == null));
 
-            Assert.AreEqual(drf.Ranges.Count, 5);
+			Assert.AreEqual(drf.Items.Count(), 5);
 		}
 	}
 }

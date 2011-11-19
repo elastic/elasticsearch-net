@@ -46,7 +46,7 @@ namespace ElasticSearch.Tests.FacetResponses
             
             Assert.GreaterOrEqual(tsf.Missing, 0);
 
-		    foreach (var term in tsf.Terms)
+		    foreach (var term in tsf.Items)
 		    {
                 Assert.Greater(term.Count, 0);
                 Assert.Greater(term.Total, 0);

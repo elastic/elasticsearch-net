@@ -4,19 +4,15 @@ using Newtonsoft.Json;
 namespace ElasticSearch.Client
 {
     [JsonObject]
-    public class HistogramFacet : Facet
+    public class HistogramFacet : Facet, IFacet<HistogramItem>
     {
         [JsonProperty("entries")]
-        public IList<Entry> Entries { get; internal set; }
-
-        #region Nested type: Entry
-
-        public class Entry : FacetItem
-        {
-            [JsonProperty("key")]
-            public double Key { get; set; }
-        }
-
-        #endregion
+        public IEnumerable<HistogramItem> Items { get; internal set; }
     }
+    public class HistogramItem : FacetItem
+    {
+        [JsonProperty("key")]
+        public double Key { get; set; }
+    }
+
 }

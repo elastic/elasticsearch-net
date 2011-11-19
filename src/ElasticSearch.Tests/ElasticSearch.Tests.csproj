@@ -58,6 +58,7 @@
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="Count\CountTests.cs" />
     <Compile Include="FacetResponses\GeoDistanceFacetResponseTests.cs" />
+    <Compile Include="FacetResponses\TermFacetResponseTests.cs" />
     <Compile Include="FacetResponses\TermStatsFacetResponseTests.cs" />
     <Compile Include="FacetResponses\StatisticalFacetResponseTests.cs" />
     <Compile Include="FacetResponses\HistogramFacetResponseTests.cs" />

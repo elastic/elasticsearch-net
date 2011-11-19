@@ -45,9 +45,9 @@ namespace ElasticSearch.Tests.FacetResponses
 
 		    var hf = (HistogramFacet) facet;
 
-            Assert.Greater(hf.Entries.Count, 0);
+            Assert.Greater(hf.Items.Count(), 0);
 
-		    foreach (var entry in hf.Entries)
+		    foreach (var entry in hf.Items)
 		    {
 		        Assert.Greater(entry.Count, 0);
                 Assert.Greater(entry.Key, 0);
@@ -81,9 +81,9 @@ namespace ElasticSearch.Tests.FacetResponses
 
             var dhf = (DateHistogramFacet)facet;
 
-            Assert.Greater(dhf.Entries.Count, 0);
+            Assert.Greater(dhf.Items.Count(), 0);
 
-            foreach (var entry in dhf.Entries)
+            foreach (var entry in dhf.Items)
             {
                 Assert.Greater(entry.Count, 0);
                 Assert.Greater(entry.Time, DateTime.MinValue);

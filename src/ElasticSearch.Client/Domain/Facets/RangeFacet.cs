@@ -4,37 +4,34 @@ using Newtonsoft.Json;
 namespace ElasticSearch.Client
 {
     [JsonObject]
-    public class RangeFacet : Facet
+    public class RangeFacet : Facet, IFacet<Range>
     {
         [JsonProperty("ranges")]
-        public IList<Range> Ranges { get; internal set; }
+        public IEnumerable<Range> Items { get; internal set; }
 
-        #region Nested type: Range
+    }
+    [JsonObject]
+    public class Range : FacetItem
+    {
+        [JsonProperty(PropertyName = "to")]
+        public double? To { get; internal set; }
 
-        public class Range : FacetItem
-        {
-            [JsonProperty(PropertyName = "to")]
-            public double? To { get; internal set; }
+        [JsonProperty(PropertyName = "from")]
+        public double? From { get; internal set; }
 
-            [JsonProperty(PropertyName = "from")]
-            public double? From { get; internal set; }
+        [JsonProperty(PropertyName = "min")]
+        public double Min { get; internal set; }
 
-            [JsonProperty(PropertyName = "min")]
-            public double Min { get; internal set; }
+        [JsonProperty(PropertyName = "max")]
+        public double Max { get; internal set; }
 
-            [JsonProperty(PropertyName = "max")]
-            public double Max { get; internal set; }
+        [JsonProperty(PropertyName = "total_count")]
+        public int TotalCount { get; internal set; }
 
-            [JsonProperty(PropertyName = "total_count")]
-            public int TotalCount { get; internal set; }
+        [JsonProperty(PropertyName = "total")]
+        public double Total { get; internal set; }
 
-            [JsonProperty(PropertyName = "total")]
-            public double Total { get; internal set; }
-
-            [JsonProperty(PropertyName = "mean")]
-            public double Mean { get; internal set; }
-        }
-
-        #endregion
+        [JsonProperty(PropertyName = "mean")]
+        public double Mean { get; internal set; }
     }
 }
