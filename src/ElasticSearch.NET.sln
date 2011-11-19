@@ -9,7 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerNews.Indexer", "Hacke
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General Files", "General Files", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
 	ProjectSection(SolutionItems) = preProject
-		facets.js = facets.js
 		license.txt = license.txt
 		query_dsl_development_notes.txt = query_dsl_development_notes.txt
 		..\README.markdown = ..\README.markdown
