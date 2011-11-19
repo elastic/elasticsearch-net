@@ -84,6 +84,8 @@
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="ConnectionState.cs" />
     <Compile Include="ConnectionStatus.cs" />
+    <Compile Include="Domain\AliasParams.cs" />
+    <Compile Include="ElasticClient-Aliases.cs" />
     <Compile Include="Domain\OptimizeParams.cs" />
     <Compile Include="ElasticClient-Optimize.cs" />
     <Compile Include="ElasticClient-Snapshot.cs" />

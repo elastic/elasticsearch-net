@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="DeleteTests.cs" />
     <Compile Include="IndicesTests.cs" />
+    <Compile Include="Indices\AliasTests.cs" />
     <Compile Include="Indices\OptimizeTests.cs" />
     <Compile Include="Indices\FlushTests.cs" />
     <Compile Include="Indices\SnapshotTests.cs" />
