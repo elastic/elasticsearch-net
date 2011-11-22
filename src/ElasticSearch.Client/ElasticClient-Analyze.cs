@@ -14,46 +14,57 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using ElasticSearch.Client.Domain;
+using System.Linq.Expressions;
 
 namespace ElasticSearch.Client
 {
 	public partial class ElasticClient
 	{
-	/*
-		public IndecesOperationResponse Analyze(string text)
+		public AnalyzeResponse Analyze(string text)
 		{
 			var index = this.Settings.DefaultIndex;
-			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
-			return this._Alias(q);
+			return this._Analyze(new AnalyzeParams() { Index = index }, text);
 		}
-		public IndecesOperationResponse Analyze(string analyzer, string text)
+		public AnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text)
+		{
+			analyzeParams.ThrowIfNull("analyzeParams");
+			analyzeParams.Index.ThrowIfNull("analyzeParams.Index");
+			return this._Analyze(analyzeParams, text);
+		}
+		public AnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string text) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
-			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
-			return this._Alias(q);
+			return this.Analyze<T>(selector, index, text);
 		}
-		public IndecesOperationResponse Analyze(string index, string analyzer, string text)
+		public AnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string index, string text) where T : class
 		{
-			var index = this.Settings.DefaultIndex;
-			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
-			return this._Alias(q);
+			selector.ThrowIfNull("selector");
+			var fieldName = this.PropertyNameResolver.Resolve(selector);
+			var analyzeParams = new AnalyzeParams() { Index = index, Field = fieldName };
+			return this._Analyze(analyzeParams, text);
 		}
-		private IndecesOperationResponse _Analyze(string query)
+		private AnalyzeResponse _Analyze(AnalyzeParams analyzeParams, string text)
 		{
-			var path = "/_aliases";
-			query = _aliasBody.F(query);
-			var status = this.Connection.PostSync(path, query);
+			var path = this.CreatePath(analyzeParams.Index) + "_analyze?text=";
+			path += Uri.EscapeDataString(text);
+
+			if (!analyzeParams.Field.IsNullOrEmpty())
+				path += "&field=" + analyzeParams.Field;
+			else if (!analyzeParams.Analyzer.IsNullOrEmpty())
+				path += "&analyzer=" + analyzeParams.Analyzer;
+
+			var status = this.Connection.GetSync(path);
 			if (status.Error != null)
 			{
-				return new IndecesOperationResponse()
+				return new AnalyzeResponse()
 				{
 					IsValid = false,
 					ConnectionError = status.Error
 				};
 			}
 
-			var response = JsonConvert.DeserializeObject<IndecesOperationResponse>(status.Result, this.SerializationSettings);
+			var response = JsonConvert.DeserializeObject<AnalyzeResponse>(status.Result, this.SerializationSettings);
 			return response;
-		}*/
+		}
 	}
 }

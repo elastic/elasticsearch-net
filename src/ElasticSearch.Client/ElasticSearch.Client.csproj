@@ -122,6 +122,7 @@
     <Compile Include="Domain\Connection\Thrift\Transport\TTransport.cs" />
     <Compile Include="Domain\Connection\Thrift\Transport\TTransportException.cs" />
     <Compile Include="Domain\Connection\Thrift\Transport\TTransportFactory.cs" />
+    <Compile Include="Domain\Hit\AnalyzeToken.cs" />
     <Compile Include="Domain\Mapping\ElasticProperty.cs" />
     <Compile Include="Domain\Mapping\ElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\ElasticType.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Domain\Parameters\DeleteParameters.cs" />
     <Compile Include="Domain\Parameters\IndexParameters.cs" />
     <Compile Include="Domain\Parameters\OptimizeParams.cs" />
+    <Compile Include="Domain\Responses\AnalyzeResponse.cs" />
     <Compile Include="Domain\Responses\CountResponse.cs" />
     <Compile Include="Domain\Responses\ElasticSearchVersionInfo.cs" />
     <Compile Include="Domain\Responses\IndicesOperationResponse.cs" />
