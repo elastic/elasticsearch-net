@@ -56,18 +56,19 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
-    <Compile Include="Count\CountTests.cs" />
-    <Compile Include="FacetResponses\GeoDistanceFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\TermFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\TermStatsFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\StatisticalFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\HistogramFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\RangeFacetResponseTests.cs" />
-    <Compile Include="FacetResponses\BaseFacetTestFixture.cs">
+    <Compile Include="Indices\ClearCacheTests.cs" />
+    <Compile Include="Search\CountTests.cs" />
+    <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
+    <Compile Include="Facet\TermFacetResponseTests.cs" />
+    <Compile Include="Facet\TermStatsFacetResponseTests.cs" />
+    <Compile Include="Facet\StatisticalFacetResponseTests.cs" />
+    <Compile Include="Facet\HistogramFacetResponseTests.cs" />
+    <Compile Include="Facet\RangeFacetResponseTests.cs" />
+    <Compile Include="Facet\BaseFacetTestFixture.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DeleteTests.cs" />
-    <Compile Include="IndicesTests.cs" />
+    <Compile Include="Indices\IndicesTests.cs" />
     <Compile Include="Indices\AliasTests.cs" />
     <Compile Include="Indices\AnalyzeTests.cs" />
     <Compile Include="Indices\OptimizeTests.cs" />
@@ -77,8 +78,8 @@
     <Compile Include="Indices\RefreshTests.cs" />
     <Compile Include="Mapping\MapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryDSLTests.cs" />
-    <Compile Include="QueryResponseMapperTests.cs" />
+    <Compile Include="Search\QueryDSLTests.cs" />
+    <Compile Include="Search\QueryResponseMapperTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Test.Designer.cs">
@@ -111,6 +112,7 @@
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

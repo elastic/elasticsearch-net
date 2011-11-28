@@ -89,7 +89,10 @@ namespace ElasticSearch.Client
                 return new IndicesResponse();
             }
         }
-
+        public IndicesResponse DeleteIndex<T>() where T : class
+        {
+            return this.DeleteIndex(this.Settings.DefaultIndex);
+        }
         public IndicesResponse DeleteIndex(string index)
         {
             string path = this.CreatePath(index);
@@ -162,7 +165,10 @@ namespace ElasticSearch.Client
             response.ConnectionStatus = status;
             return response;
         }
-
+        public IndicesResponse Map(TypeMapping typeMapping)
+        {
+            return this.Map(typeMapping, this.Settings.DefaultIndex);
+        }
         public IndicesResponse Map(TypeMapping typeMapping, string index)
         {
             string path = this.CreatePath(index, typeMapping.Name) + "_mapping";
@@ -178,6 +184,16 @@ namespace ElasticSearch.Client
             response.ConnectionStatus = status;
 
             return response;
+        }
+
+        public TypeMapping GetMapping<T>() where T : class
+        {
+            return this.GetMapping<T>(this.Settings.DefaultIndex);
+        }
+        public TypeMapping GetMapping<T>(string index) where T : class
+        {
+            string type = this.InferTypeName<T>();
+            return this.GetMapping(index, type);
         }
 
         public TypeMapping GetMapping(string index, string type)

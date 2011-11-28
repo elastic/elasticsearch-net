@@ -46,6 +46,7 @@ namespace ElasticSearch.Tests.Search
 					}
 				}", "nest_test_data", "elasticsearchprojects");
 
+
 			Assert.True(countResults.Count > 0);
 		}
 

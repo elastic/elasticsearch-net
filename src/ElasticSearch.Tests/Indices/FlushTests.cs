@@ -35,7 +35,7 @@ namespace ElasticSearch.Tests.Search
 		[Test]
 		public void FlushTyped()
 		{
-			var r = this.ConnectedClient.Snapshot<ElasticSearchProject>();
+			var r = this.ConnectedClient.Flush<ElasticSearchProject>();
 			Assert.True(r.OK);
 		}
 		[Test]

@@ -34,42 +34,13 @@ namespace ElasticSearch.Tests
 			Assert.True(queryResponse.Shards.Failed == 0);
 				
 		}
-		[Test]
-		public void test_clear_cache()
-		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache();
-			Assert.True(status.Success);
-		}
-		[Test]
-		public void test_clear_cache_specific()
-		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache(ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
-			Assert.True(status.Success);
-		}
-		[Test]
-		public void test_clear_cache_generic_specific()
-		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache<ElasticSearchProject>(ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
-			Assert.True(status.Success);
-		}
-		[Test]
-		public void test_clear_cache_generic_specific_indices()
-		{
-			var client = this.ConnectedClient;
-			var status = client.ClearCache(new List<string> { Settings.DefaultIndex, Settings.DefaultIndex + "_clone" }, ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
-			Assert.True(status.Success);
-		}
+		
 
 		[Test]
 		public void CreateIndex()
 		{
 			var client = this.ConnectedClient;
-			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex,
-												  "elasticsearchprojects");
-
+			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
 			settings.Mappings.Add(typeMapping);
@@ -88,6 +59,26 @@ namespace ElasticSearch.Tests
 
 			Assert.IsTrue(response.Success);
 		}
+
+		[Test]
+		public void PutMapping()
+		{
+			var fieldName = Guid.NewGuid().ToString();
+			var mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
+			var property = new TypeMappingProperty
+			{
+				Type = "string",
+				Index = "not_analyzed"
+			};
+			mapping.Properties.Add(fieldName, property);
+
+			var response = this.ConnectedClient.Map(mapping);
+
+			Assert.IsTrue(response.Success);
+			mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
+			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
+		}
+
 
 		[Test]
 		public void CreateIndexMultiFieldMap()
