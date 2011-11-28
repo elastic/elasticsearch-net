@@ -32,8 +32,6 @@ namespace ElasticSearch.Client
 			var typeName = this.InferTypeName<T>();
 		
 			return this.Get<T>(id, this.CreatePath(index, typeName));
-
-
 		}
 		public T Get<T>(string index, string type, string id) where T : class
 		{
