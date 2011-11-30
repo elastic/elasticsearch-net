@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
+    <Compile Include="ElasticClient-MappingIndex.cs" />
+    <Compile Include="ElasticClient-ClearCache.cs" />
     <Compile Include="Domain\Connection\Connection.cs" />
     <Compile Include="Domain\Connection\ConnectionError.cs" />
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
@@ -184,12 +187,13 @@
     <Compile Include="Domain\Hit\ExplanationDetail.cs" />
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
+    <Compile Include="Enums\ClearCacheOptions.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Responses\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-Inferno.cs" />
-    <Compile Include="ElasticClient-Indices.cs" />
+    <Compile Include="ElasticClient-MappingType.cs" />
     <Compile Include="ElasticClient-Get.cs" />
     <Compile Include="ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />

@@ -35,6 +35,43 @@ namespace ElasticSearch.Tests
 				
 		}
 		
+		[Test]
+		public void GetIndexSettingsSimple()
+		{
+			var r = this.ConnectedClient.GetIndexSettings();
+			Assert.True(r.Success);
+			Assert.NotNull(r.Settings);
+			Assert.Greater(r.Settings.NumberOfReplicas, 0);
+			Assert.Greater(r.Settings.NumberOfShards, 1);
+		}
+
+
+		[Test]
+		public void GetIndexSettingsComplex()
+		{
+			var index = Guid.NewGuid().ToString();
+			var settings = new IndexSettings();
+			settings.NumberOfReplicas = 4;
+			settings.NumberOfShards = 8;
+			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			typeMapping.Name = index;
+			settings.Mappings.Add(typeMapping);
+
+			settings.Add("merge.policy.merge_factor","10");
+
+			var createResponse = this.ConnectedClient.CreateIndex(index, settings);
+
+			var r = this.ConnectedClient.GetIndexSettings(index);
+			Assert.True(r.Success);
+			Assert.NotNull(r.Settings);
+			Assert.AreEqual(r.Settings.NumberOfReplicas, 4);
+			Assert.AreEqual(r.Settings.NumberOfShards, 8);
+			Assert.Greater(r.Settings.Count(), 0);
+			Assert.True(r.Settings.ContainsKey("merge.policy.merge_factor"));
+
+			this.ConnectedClient.DeleteIndex(index);
+		}
 
 		[Test]
 		public void CreateIndex()

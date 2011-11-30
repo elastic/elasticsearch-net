@@ -24,6 +24,12 @@ namespace ElasticSearch.Client.Resolvers.Converters
             writer.WritePropertyName("number_of_replicas");
             writer.WriteValue(indexSettings.NumberOfReplicas);
 
+            foreach (var kv in indexSettings.Settings)
+            {
+                writer.WritePropertyName(kv.Key);
+                writer.WriteValue(kv.Value);
+            }
+
             writer.WriteEndObject();
 
             writer.WritePropertyName("analysis");
