@@ -45,7 +45,6 @@ namespace ElasticSearch.Tests
 			Assert.Greater(r.Settings.NumberOfShards, 1);
 		}
 
-
 		[Test]
 		public void GetIndexSettingsComplex()
 		{
@@ -72,6 +71,34 @@ namespace ElasticSearch.Tests
 
 			this.ConnectedClient.DeleteIndex(index);
 		}
+		[Test]
+		public void UpdateSettingsSimple()
+		{
+			var index = Guid.NewGuid().ToString();
+			var client = this.ConnectedClient;
+			var settings = new IndexSettings();
+			settings.NumberOfReplicas = 1;
+			settings.NumberOfShards = 5;
+			settings.Add("refresh_interval", "1s");
+			settings.Add("search.slowlog.threshold.fetch.warn", "1s");
+			client.CreateIndex(index, settings);
+
+			settings["refresh_interval"] = "-1";
+			settings["search.slowlog.threshold.fetch.warn"] = "5s";
+
+			var r = this.ConnectedClient.UpdateSettings(index, settings);
+			
+			Assert.True(r.Success);
+			Assert.True(r.OK);
+			var getResponse = this.ConnectedClient.GetIndexSettings(index);
+			Assert.AreEqual(getResponse.Settings["refresh_interval"], "-1");
+			Assert.AreEqual(getResponse.Settings["search.slowlog.threshold.fetch.warn"], "1s");
+
+			this.ConnectedClient.DeleteIndex(index);
+		}
+
+
+
 
 		[Test]
 		public void CreateIndex()

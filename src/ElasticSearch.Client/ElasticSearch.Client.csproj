@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\SettingsOperationResponse.cs" />
     <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
     <Compile Include="ElasticClient-MappingIndex.cs" />
     <Compile Include="ElasticClient-ClearCache.cs" />

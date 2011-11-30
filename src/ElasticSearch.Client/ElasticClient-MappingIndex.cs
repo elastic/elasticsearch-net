@@ -6,6 +6,8 @@ using ElasticSearch.Client.Settings;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Text;
 
 namespace ElasticSearch.Client
 {
@@ -45,9 +47,54 @@ namespace ElasticSearch.Client
             return response;
         }
 
+        public SettingsOperationResponse UpdateSettings(IndexSettings settings)
+        {
+            var index = this.Settings.DefaultIndex;
+            return this.UpdateSettings(index, settings);
+        }
+        public SettingsOperationResponse UpdateSettings(string index, IndexSettings settings)
+        {
 
+            string path = this.CreatePath(index) + "_settings";
+            settings.Settings = settings.Settings
+                .Where(kv=>IndexSettings.UpdateWhiteList.Any(p=>
+                {
+                    return kv.Key.StartsWith(p);
+                }
+                )).ToDictionary(kv=>kv.Key, kv=>kv.Value);
+            
+            var sb = new StringBuilder();
+            var sw = new StringWriter(sb);
+            using (JsonWriter jsonWriter = new JsonTextWriter(sw))
+            {
+                jsonWriter.WriteStartObject();
+                jsonWriter.WritePropertyName("index");
+                jsonWriter.WriteStartObject();
+                foreach (var kv in settings.Settings)
+                {
+                    jsonWriter.WritePropertyName(kv.Key);
+                    jsonWriter.WriteValue(kv.Value);
+                }
 
+                jsonWriter.WriteEndObject();
+            }
+           string data = sb.ToString();
+            
+           var status = this.Connection.PutSync(path, data);
 
+            var r = new SettingsOperationResponse();
+            try
+            {
+                r = JsonConvert.DeserializeObject<SettingsOperationResponse>(status.Result);
+            }
+            catch
+            {
+                
+            }
+            r.Success = status.Success;
+            r.ConnectionStatus = status;
+            return r;
+        }
 
         public IndicesResponse CreateIndex(string index, IndexSettings settings)
         {
