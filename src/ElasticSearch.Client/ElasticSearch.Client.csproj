@@ -178,6 +178,7 @@
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="Settings\SnowballAnalyzerSettings.cs" />
+    <Compile Include="Settings\StandardAnalyzerSettings.cs" />
     <Compile Include="Thrift\Method.cs" />
     <Compile Include="Thrift\Rest.cs" />
     <Compile Include="Thrift\RestRequest.cs" />
