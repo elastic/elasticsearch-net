@@ -16,10 +16,10 @@ Indexing asynchronously is as easy as:
 For more examples please refer to the [Wiki](https://github.com/Mpdreamz/NEST/wiki "Read more about NEST's interface")
 
 * [Connecting](https://github.com/Mpdreamz/NEST/wiki/Connecting)
-* [Indexing](https://github.com/Mpdreamz/NEST/wiki/Indexing)
-* [Searching](https://github.com/Mpdreamz/NEST/wiki/Searching)
+* [Indexing](https://github.com/Mpdreamz/NEST/wiki/Index)
+* [Searching](https://github.com/Mpdreamz/NEST/wiki/Search)
     * [Faceting] (https://github.com/Mpdreamz/NEST/wiki/Faceting)
-* [Deleting](https://github.com/Mpdreamz/NEST/wiki/Deleting)
+* [Deleting](https://github.com/Mpdreamz/NEST/wiki/Delete)
 * [Mapping](https://github.com/Mpdreamz/NEST/wiki/Mapping)
 
 
