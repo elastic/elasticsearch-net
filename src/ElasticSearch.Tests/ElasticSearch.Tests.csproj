@@ -57,6 +57,7 @@
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
+    <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Search\CountTests.cs" />
     <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
     <Compile Include="Facet\TermFacetResponseTests.cs" />

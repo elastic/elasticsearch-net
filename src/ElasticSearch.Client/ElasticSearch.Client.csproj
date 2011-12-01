@@ -79,6 +79,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\GlobalStatsResponse.cs" />
+    <Compile Include="Domain\Stats\SearchStats.cs" />
+    <Compile Include="Domain\Stats\GetStats.cs" />
+    <Compile Include="Domain\Stats\IndexingStats.cs" />
+    <Compile Include="Domain\Stats\StoreStats.cs" />
+    <Compile Include="Domain\Stats\DocStats.cs" />
+    <Compile Include="Domain\Stats\StatsContainer.cs" />
+    <Compile Include="Domain\Stats\GlobalStats.cs" />
+    <Compile Include="Domain\Stats\Stats.cs" />
+    <Compile Include="Domain\Responses\StatsResponse.cs" />
+    <Compile Include="ElasticClient-Stats.cs" />
     <Compile Include="Domain\Responses\SettingsOperationResponse.cs" />
     <Compile Include="Domain\Responses\IndexSettingsResponse.cs" />
     <Compile Include="ElasticClient-MappingIndex.cs" />
