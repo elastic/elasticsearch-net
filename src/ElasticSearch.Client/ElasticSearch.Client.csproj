@@ -79,7 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Parameters\StatsParams.cs" />
     <Compile Include="Domain\Responses\GlobalStatsResponse.cs" />
+    <Compile Include="Domain\Stats\TypeStats.cs" />
+    <Compile Include="Domain\Stats\RefreshStats.cs" />
+    <Compile Include="Domain\Stats\FlushStats.cs" />
+    <Compile Include="Domain\Stats\MergesStats.cs" />
     <Compile Include="Domain\Stats\SearchStats.cs" />
     <Compile Include="Domain\Stats\GetStats.cs" />
     <Compile Include="Domain\Stats\IndexingStats.cs" />
@@ -200,6 +205,7 @@
     <Compile Include="Domain\Hit\Hit.cs" />
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
     <Compile Include="Enums\ClearCacheOptions.cs" />
+    <Compile Include="Enums\StatsInfo.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Responses\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />

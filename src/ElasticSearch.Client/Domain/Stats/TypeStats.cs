@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace ElasticSearch.Client.Domain
 {
 	[JsonObject]
-	public class IndexingStats
+	public class TypeStats
 	{
 		[JsonProperty(PropertyName = "index_total")]
 		public int Total { get; set; }
@@ -25,7 +25,5 @@ namespace ElasticSearch.Client.Domain
 		public double DeleteTimeInMilliseconds { get; set; }
 		[JsonProperty(PropertyName = "delete_current")]
 		public int DeleteCurrent { get; set; }
-		[JsonProperty(PropertyName = "types")]
-		public Dictionary<string, TypeStats> Types { get; set; }
 	}
 }

@@ -19,5 +19,13 @@ namespace ElasticSearch.Client.Domain
 		public GetStats Get { get; set; }
 		[JsonProperty(PropertyName = "search")]
 		public SearchStats Search { get; set; }
+		[JsonProperty(PropertyName = "merges")]
+		public MergesStats Merges { get; set; }
+		[JsonProperty(PropertyName = "refresh")]
+		public RefreshStats Refresh { get; set; }
+		[JsonProperty(PropertyName = "flush")]
+		public FlushStats Flush { get; set; }
+
+
 	}
 }
