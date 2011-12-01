@@ -135,5 +135,33 @@ namespace ElasticSearch.Tests
 
             Assert.IsTrue(response.Success);
         }
+
+        [Test]
+        public void CreateIndexWithTokenFilter()
+        {
+            var client = this.ConnectedClient;
+
+            var settings = new IndexSettings();
+            settings.Analysis.Analyzer.Add("test", new CustomAnalyzerSettings
+                                                       {
+                                                           Tokenizer = "standard",
+                                                           Filter = new List<string>
+                                                                        {
+                                                                            "standard",
+                                                                            "lowercase",
+                                                                            "stop",
+                                                                            "shingle"
+                                                                        }
+                                                       });
+
+            var indexName = Guid.NewGuid().ToString();
+            var response = client.CreateIndex(indexName, settings);
+
+            Assert.IsTrue(response.Success);
+
+            response = client.DeleteIndex(indexName);
+
+            Assert.IsTrue(response.Success);
+        }
 	}
 }
