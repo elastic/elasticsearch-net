@@ -69,7 +69,7 @@ namespace ElasticSearch.Client
 				{
 					foreach (var hit in this.Hits.Hits)
 					{
-						yield return hit.Source;
+						yield return hit.Source ?? hit.Fields;
 					}
 				}
 			}

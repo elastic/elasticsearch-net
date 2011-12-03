@@ -9,6 +9,8 @@ namespace ElasticSearch.Client
 	[JsonObject]
 	public class Hit<T> where T : class
 	{
+		[JsonProperty(PropertyName = "fields")]
+		public T Fields { get; internal set; }
 		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; internal set; }
 		[JsonProperty(PropertyName = "_index")]
