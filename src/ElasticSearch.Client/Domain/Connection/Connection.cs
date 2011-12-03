@@ -22,7 +22,26 @@ namespace ElasticSearch.Client
 		
 		public ConnectionStatus GetSync(string path)
 		{
-			var connection = this.CreateConnection(path, "GET");
+			return this.GetOrHeadSync(path, "GET");
+		}
+		public ConnectionStatus HeadSync(string path)
+		{
+			return this.GetOrHeadSync(path, "HEAD");
+		}
+
+		public ConnectionStatus PostSync(string path, string data)
+		{
+			return this.PostOrPutSync(path, data, "POST");
+		}
+		public ConnectionStatus PutSync(string path, string data)
+		{
+			return this.PostOrPutSync(path, data, "PUT");
+		}
+
+
+		private ConnectionStatus GetOrHeadSync(string path, string method)
+		{
+			var connection = this.CreateConnection(path, method);
 			connection.Timeout = this._ConnectionSettings.TimeOut;
 			WebResponse response = null;
 			try
@@ -35,7 +54,7 @@ namespace ElasticSearch.Client
 			catch (WebException e)
 			{
 				if (e.Status == WebExceptionStatus.Timeout)
-					return new ConnectionStatus(new ConnectionError(e) { Type = ConnectionErrorType.Server, ExceptionMessage = "Timeout"});
+					return new ConnectionStatus(new ConnectionError(e) { Type = ConnectionErrorType.Server, ExceptionMessage = "Timeout" });
 
 				if (e.Status != WebExceptionStatus.Success
 					&& e.Status != WebExceptionStatus.ProtocolError)
@@ -49,19 +68,7 @@ namespace ElasticSearch.Client
 				if (response != null)
 					response.Close();
 			}
-
 		}
-
-
-		public ConnectionStatus PostSync(string path, string data)
-		{
-			return this.PostOrPutSync(path, data, "POST");
-		}
-		public ConnectionStatus PutSync(string path, string data)
-		{
-			return this.PostOrPutSync(path, data, "PUT");
-		}
-
 
 		private ConnectionStatus PostOrPutSync(string path, string data, string method)
 		{
@@ -103,38 +110,40 @@ namespace ElasticSearch.Client
 					response.Close();
 			}
 		}
-        public ConnectionStatus DeleteSync(string path)
-        {
-            var connection = this.CreateConnection(path, "DELETE");
-            connection.Timeout = this._ConnectionSettings.TimeOut;
-            WebResponse response = null;
-            try
-            {
-                response = connection.GetResponse();
-                var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                response.Close();
-                return new ConnectionStatus(result);
-            }
-            catch (WebException e)
-            {
-                ConnectionError error;
-                if (e.Status == WebExceptionStatus.Timeout)
-                {
-                    error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
-                }
-                else
-                {
-                    error = new ConnectionError(e);
-                }
-                return new ConnectionStatus(error);
-            }
-            catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
-            finally
-            {
-                if (response != null)
-                    response.Close();
-            }
-        }
+		
+		public ConnectionStatus DeleteSync(string path)
+		{
+			var connection = this.CreateConnection(path, "DELETE");
+			connection.Timeout = this._ConnectionSettings.TimeOut;
+			WebResponse response = null;
+			try
+			{
+				response = connection.GetResponse();
+				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
+				response.Close();
+				return new ConnectionStatus(result);
+			}
+			catch (WebException e)
+			{
+				ConnectionError error;
+				if (e.Status == WebExceptionStatus.Timeout)
+				{
+					error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
+				}
+				else
+				{
+					error = new ConnectionError(e);
+				}
+				return new ConnectionStatus(error);
+			}
+			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
+			finally
+			{
+				if (response != null)
+					response.Close();
+			}
+		}
+		
 		public ConnectionStatus DeleteSync(string path, string data)
 		{
 			var connection = this.CreateConnection(path, "DELETE");
@@ -175,7 +184,7 @@ namespace ElasticSearch.Client
 					response.Close();
 			}
 		}
-       
+	   
 		public void Get(string path, Action<ConnectionStatus> callback)
 		{
 			Thread getThread = new Thread(() =>
@@ -191,6 +200,26 @@ namespace ElasticSearch.Client
 
 					},
 					Connection = this.CreateConnection(path, "GET")
+				};
+				this.BeginGetResponse(state);
+			});
+			getThread.Start();
+		}
+		public void Head(string path, Action<ConnectionStatus> callback)
+		{
+			Thread getThread = new Thread(() =>
+			{
+				this._ResourceLock.WaitOne();
+				ConnectionState state = new ConnectionState()
+				{
+					Callback = (c) =>
+					{
+						this._ResourceLock.Release();
+						if (callback != null)
+							callback(c);
+
+					},
+					Connection = this.CreateConnection(path, "HEAD")
 				};
 				this.BeginGetResponse(state);
 			});
@@ -265,10 +294,10 @@ namespace ElasticSearch.Client
 
 		private void PostDataUsingMethod(string method, string path,string data, Action<ConnectionStatus> callback)
 		{
-		    if (method != "PUT" && method != "POST" && method != "DELETE")
-		    {
-		        throw new ArgumentException("Valid methods that can post a body are PUT, POST, DELETE", "method");
-		    }
+			if (method != "PUT" && method != "POST" && method != "DELETE")
+			{
+				throw new ArgumentException("Valid methods that can post a body are PUT, POST, DELETE", "method");
+			}
 
 			ConnectionState state = new ConnectionState()
 			{
@@ -285,14 +314,14 @@ namespace ElasticSearch.Client
 
 			Stream postStream = state.Connection.EndGetRequestStream(result);
 
-            if (state.PostData != null) //TODO: look into why it is null at some points
-            {
-                UTF8Encoding encoding = new UTF8Encoding();
-                byte[] bytes = encoding.GetBytes(state.PostData);
+			if (state.PostData != null) //TODO: look into why it is null at some points
+			{
+				UTF8Encoding encoding = new UTF8Encoding();
+				byte[] bytes = encoding.GetBytes(state.PostData);
 
-                postStream.Write(bytes, 0, bytes.Length);
-                postStream.Close();
-            }
+				postStream.Write(bytes, 0, bytes.Length);
+				postStream.Close();
+			}
 
 			this.BeginGetResponse(state);
 
@@ -423,7 +452,7 @@ namespace ElasticSearch.Client
 			myReq.ContentType = "application/json";
 			myReq.Timeout = 1000 * 60; // 1 minute timeout.
 			myReq.ReadWriteTimeout = 1000 * 60; // 1 minute timeout.
-		    myReq.Method = method;
+			myReq.Method = method;
 			
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{

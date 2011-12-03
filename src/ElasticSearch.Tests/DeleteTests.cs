@@ -22,7 +22,7 @@ namespace ElasticSearch.Tests
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""query_string"" : {
-							""query"" : ""*""
+							""query"" : ""*""z
 						}
 					} }"
 			);

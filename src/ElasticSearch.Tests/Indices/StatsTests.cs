@@ -77,6 +77,7 @@ namespace ElasticSearch.Tests.Search
 			Assert.NotNull(r.Stats.Primaries.Indexing.Types);
 			Assert.True(r.Stats.Primaries.Indexing.Types.Count > 0);
 			var deletedOnPrimaries = r.Stats.Primaries.Documents.Deleted;
+			var x = r.Stats.Primaries.Indexing.Types["elasticsearchprojects"].Current;
 
 		}
 	}

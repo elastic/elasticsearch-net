@@ -38,9 +38,7 @@ namespace ElasticSearch.Client
 				var oe = (WebException)e;
 				if (oe.Response != null)
 				{
-					error.HttpStatusCode = ((System.Net.HttpWebResponse)(oe.Response)).StatusCode;
-
-				}
+					error.HttpStatusCode = ((System.Net.HttpWebResponse)(oe.Response)).StatusCode;				}
 				else
 				{
 					error.ExceptionMessage = "Could not connect to server: " + Connection.Address.ToString();

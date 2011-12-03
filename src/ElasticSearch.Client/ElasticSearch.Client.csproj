@@ -79,6 +79,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\IndexExistsResponse.cs" />
+    <Compile Include="ElasticClient-IndexExists.cs" />
     <Compile Include="Domain\Parameters\StatsParams.cs" />
     <Compile Include="Domain\Responses\GlobalStatsResponse.cs" />
     <Compile Include="Domain\Stats\TypeStats.cs" />

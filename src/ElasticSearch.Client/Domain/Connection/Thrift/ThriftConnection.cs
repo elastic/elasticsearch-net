@@ -52,11 +52,33 @@ namespace ElasticSearch.Client.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			GetClient().execute(restRequest);
 		}
+		public void Head(string path, Action<ConnectionStatus> callback)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.HEAD;
+			restRequest.Uri = path;
+
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			GetClient().execute(restRequest);
+		}
 
 		public ConnectionStatus GetSync(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
+			restRequest.Uri = path;
+
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			RestResponse result = GetClient().execute(restRequest);
+			return new ConnectionStatus(DecodeStr(result.Body));
+		}
+
+		public ConnectionStatus HeadSync(string path)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.HEAD;
 			restRequest.Uri = path;
 
 			restRequest.Headers = new Dictionary<string, string>();
@@ -138,28 +160,28 @@ namespace ElasticSearch.Client.Thrift
 			RestResponse result = GetClient().execute(restRequest);
 			return new ConnectionStatus(DecodeStr(result.Body));
 		}
-	    public void Delete(string path, Action<ConnectionStatus> callback)
-	    {
-            var restRequest = new RestRequest();
-            restRequest.Method = Method.DELETE;
-            restRequest.Uri = path;
+		public void Delete(string path, Action<ConnectionStatus> callback)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.DELETE;
+			restRequest.Uri = path;
 
-            restRequest.Headers = new Dictionary<string, string>();
-            restRequest.Headers.Add("Content-Type", "application/json");
-            GetClient().execute(restRequest);
-	    }
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			GetClient().execute(restRequest);
+		}
 
-	    public ConnectionStatus DeleteSync(string path)
-	    {
-            var restRequest = new RestRequest();
-            restRequest.Method = Method.DELETE;
-            restRequest.Uri = path;
+		public ConnectionStatus DeleteSync(string path)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.DELETE;
+			restRequest.Uri = path;
 
-            restRequest.Headers = new Dictionary<string, string>();
-            restRequest.Headers.Add("Content-Type", "application/json");
-            RestResponse result = GetClient().execute(restRequest);
-            return new ConnectionStatus(DecodeStr(result.Body));
-	    }
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			RestResponse result = GetClient().execute(restRequest);
+			return new ConnectionStatus(DecodeStr(result.Body));
+		}
 		public ConnectionStatus DeleteSync(string path, string data)
 		{
 			var restRequest = new RestRequest();
@@ -175,7 +197,7 @@ namespace ElasticSearch.Client.Thrift
 			RestResponse result = GetClient().execute(restRequest);
 			return new ConnectionStatus(DecodeStr(result.Body));
 		}
-	    #endregion
+		#endregion
 
 		#region IDisposable Members
 
