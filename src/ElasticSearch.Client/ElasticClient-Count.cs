@@ -71,17 +71,8 @@ namespace ElasticSearch.Client
 		private CountResponse _Count(string path, string query)
 		{
 			var status = this.Connection.PostSync(path, query);
-			if (status.Error != null)
-			{
-				return new CountResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<CountResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var r = this.ToParsedResponse<CountResponse>(status);
+			return r;
 		}
 
 	}

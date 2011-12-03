@@ -50,10 +50,10 @@ namespace ElasticSearch.Tests.Search
 				} }"
 			);
 			Assert.False(results.IsValid);
-			Assert.IsNotNull(results.ConnectionError);
-			Assert.True(results.ConnectionError.HttpStatusCode == System.Net.HttpStatusCode.InternalServerError);
-			Assert.True(results.ConnectionError.ExceptionMessage.Contains("ClusterBlockException"));
-			Assert.True(results.ConnectionError.ExceptionMessage.Contains("index closed"));
+			Assert.IsNotNull(results.ConnectionStatus.Error);
+			Assert.True(results.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.InternalServerError);
+			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("ClusterBlockException"));
+			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("index closed"));
 			r = this.ConnectedClient.OpenIndex(Test.Default.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);

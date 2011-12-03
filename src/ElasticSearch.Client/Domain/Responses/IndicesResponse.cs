@@ -7,11 +7,11 @@ using Newtonsoft.Json;
 namespace ElasticSearch.Client
 {
 	[JsonObject]
-	public class IndicesResponse
+	public class IndicesResponse : BaseResponse
 	{
 		[JsonProperty(PropertyName = "ok")]
-		public bool Success { get; private set; }
-		public ConnectionStatus ConnectionStatus { get; internal set; }
+		public bool OK { get; private set; }
+
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData ShardsHit { get; private set; }
 	}

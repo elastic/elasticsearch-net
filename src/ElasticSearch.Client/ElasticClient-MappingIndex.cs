@@ -25,7 +25,7 @@ namespace ElasticSearch.Client
             var status = this.Connection.GetSync(path);
 
             var response = new IndexSettingsResponse();
-            response.Success = false;
+            response.IsValid = false;
             try
             {
                 var o = JObject.Parse(status.Result);
@@ -40,7 +40,7 @@ namespace ElasticSearch.Client
                 
 
                 response.Settings = settings;
-                response.Success = true;
+                response.IsValid = true;
             }
             catch { }
             response.ConnectionStatus = status;
@@ -91,7 +91,7 @@ namespace ElasticSearch.Client
             {
                 
             }
-            r.Success = status.Success;
+            r.IsValid = status.Success;
             r.ConnectionStatus = status;
             return r;
         }
@@ -101,18 +101,16 @@ namespace ElasticSearch.Client
             string path = this.CreatePath(index);
             string data =  JsonConvert.SerializeObject(settings, Formatting.None, this.SerializationSettings);
             var status = this.Connection.PostSync(path,data);
-
+            var response = new IndicesResponse();
+            response.ConnectionStatus = status;
             try
             {
-                var response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
-                response.ConnectionStatus = status;
-                
-                return response;
+                response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+                response.IsValid = true;
             } 
-            catch
-            {
-                return new IndicesResponse();
+            catch (Exception e) {
             }
+            return response;
         }
         public IndicesResponse DeleteIndex<T>() where T : class
         {
@@ -123,10 +121,8 @@ namespace ElasticSearch.Client
             string path = this.CreatePath(index);
 
             var status = this.Connection.DeleteSync(path);
-            var response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
-            response.ConnectionStatus = status;
-
-            return response;
+            var r = this.ToParsedResponse<IndicesResponse>(status);
+            return r;
         }
 
     }    

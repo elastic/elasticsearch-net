@@ -74,6 +74,7 @@ namespace ElasticSearch.Client
 			try
 			{
 				response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+				response.IsValid = true;
 			}
 			catch
 			{

@@ -54,17 +54,8 @@ namespace ElasticSearch.Client
 				path += "&analyzer=" + analyzeParams.Analyzer;
 
 			var status = this.Connection.GetSync(path);
-			if (status.Error != null)
-			{
-				return new AnalyzeResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<AnalyzeResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var r = this.ToParsedResponse<AnalyzeResponse>(status);
+			return r;
 		}
 	}
 }

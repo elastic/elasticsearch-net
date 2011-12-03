@@ -18,18 +18,8 @@ namespace ElasticSearch.Client
                             this.CreatePath(index), "_search");
 
             ConnectionStatus status = this.Connection.PostSync(path, query);
-            if (status.Error != null)
-            {
-                return new QueryResponse<T>
-                       {
-                           PropertyNameResolver = this.PropertyNameResolver,
-                           IsValid = false,
-                           ConnectionError = status.Error
-                       };
-            }
-            var response = JsonConvert.DeserializeObject<QueryResponse<T>>(status.Result, this.SerializationSettings);
-            response.PropertyNameResolver = this.PropertyNameResolver;
-            return response;
+            var r = this.ToParsedResponse<QueryResponse<T>>(status);
+            return r;
         }
 
         public QueryResponse<T> Search<T>(Search search) where T : class

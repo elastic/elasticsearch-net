@@ -102,6 +102,35 @@ namespace ElasticSearch.Client
 		{
 			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
 		}
+		/// <summary>
+		/// Returns an response of type R based on the connection status without parsing status.Result into R
+		/// </summary>
+		/// <returns></returns>
+		private R ToResponse<R>(ConnectionStatus status) where R : BaseResponse
+		{
+			var r = (R)Activator.CreateInstance(typeof(R));
+			r.IsValid = (status.Error == null);
+			r.ConnectionStatus = status;
+			r.PropertyNameResolver = this.PropertyNameResolver;
+			return r;
+		}
+		/// <summary>
+		/// Returns an response of type R based on the connection status by trying parsing status.Result into R
+		/// </summary>
+		/// <returns></returns>
+		private R ToParsedResponse<R>(ConnectionStatus status) where R : BaseResponse
+		{
+			var isValid = (status.Error == null);
+			if (!isValid)
+				return this.ToResponse<R>(status);
+
+			var r = JsonConvert.DeserializeObject<R>(status.Result, this.SerializationSettings);
+			r.IsValid = isValid;
+			r.ConnectionStatus = status;
+			r.PropertyNameResolver = this.PropertyNameResolver;
+			return r;
+		}
+
 
 		private ConnectionStatus GetNodeInfo()
 		{

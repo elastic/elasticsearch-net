@@ -8,22 +8,13 @@ using System.Linq;
 
 namespace ElasticSearch.Client
 {
-
-
-
 	[JsonObject]
-	public class QueryResponse<T> where T : class
+	public class QueryResponse<T> : BaseResponse where T : class 
 	{
-
 		public QueryResponse()
 		{
 			this.IsValid = true;
 		}
-
-		internal PropertyNameResolver PropertyNameResolver { get; set; }
-
-		public bool IsValid { get; set; }
-		public ConnectionError ConnectionError { get; set; }
 
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }

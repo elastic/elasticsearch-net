@@ -62,6 +62,7 @@ namespace ElasticSearch.Client
             try
             {
                 response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+                response.IsValid = true;
             }
             catch
             {
@@ -84,11 +85,8 @@ namespace ElasticSearch.Client
 
             ConnectionStatus status = this.Connection.PutSync(path, map);
 
-            var response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result, this.SerializationSettings);
-
-            response.ConnectionStatus = status;
-
-            return response;
+            var r = this.ToParsedResponse<IndicesResponse>(status);
+            return r;
         }
 
         public TypeMapping GetMapping<T>() where T : class

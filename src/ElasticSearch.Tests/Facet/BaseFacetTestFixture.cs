@@ -13,7 +13,8 @@ namespace ElasticSearch.Tests.FacetResponses
         protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
         {
             Assert.True(queryResponse.IsValid);
-            Assert.Null(queryResponse.ConnectionError);
+            Assert.NotNull(queryResponse.ConnectionStatus);
+            Assert.Null(queryResponse.ConnectionStatus.Error);
             Assert.True(queryResponse.Total > 0, "No hits");
             Assert.True(queryResponse.Documents.Any());
             Assert.True(queryResponse.Documents.Count() > 0);

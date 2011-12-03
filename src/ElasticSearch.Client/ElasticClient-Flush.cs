@@ -18,65 +18,56 @@ namespace ElasticSearch.Client
 {
 	public partial class ElasticClient
 	{
-		public IndecesOperationResponse Flush<T>() where T : class
+		public IndicesOperationResponse Flush<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Flush(index);
 		}
-		public IndecesOperationResponse Flush<T>(bool refresh) where T : class
+		public IndicesOperationResponse Flush<T>(bool refresh) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Flush(index, refresh);
 		}
-		public IndecesOperationResponse Flush(string index)
+		public IndicesOperationResponse Flush(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Flush(new[] { index });
 		}
-		public IndecesOperationResponse Flush()
+		public IndicesOperationResponse Flush()
 		{
 			return this.Flush("_all");
 		}
-		public IndecesOperationResponse Flush(bool refresh)
+		public IndicesOperationResponse Flush(bool refresh)
 		{
 			return this.Flush("_all", refresh);
 		}
-		public IndecesOperationResponse Flush(string index, bool refresh)
+		public IndicesOperationResponse Flush(string index, bool refresh)
 		{
 			index.ThrowIfNull("index");
 			return this.Flush(new[] { index }, refresh);
 		}
-		public IndecesOperationResponse Flush(IEnumerable<string> indices)
+		public IndicesOperationResponse Flush(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_flush";
 			return this._Flush(path);
 		}
-		public IndecesOperationResponse Flush(IEnumerable<string> indices, bool refresh)
+		public IndicesOperationResponse Flush(IEnumerable<string> indices, bool refresh)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_flush?refresh=" + refresh.ToString().ToLower();
 			return this._Flush(path);
 		}
 		
-		private IndecesOperationResponse _Flush(string path)
+		private IndicesOperationResponse _Flush(string path)
 		{
 			var status = this.Connection.PostSync(path, "");
-			if (status.Error != null)
-			{
-				return new IndecesOperationResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<IndecesOperationResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			return r;
 		}
 
 	}

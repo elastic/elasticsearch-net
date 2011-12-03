@@ -8,11 +8,8 @@ using ElasticSearch.Client.Settings;
 namespace ElasticSearch.Client
 {
 	[JsonObject]
-	public class IndexSettingsResponse
+	public class IndexSettingsResponse : BaseResponse
 	{
-		public bool Success { get; internal set; }
-		public ConnectionStatus ConnectionStatus { get; internal set; }
-
 		public IndexSettings Settings { get; internal set; }
 	}
 }

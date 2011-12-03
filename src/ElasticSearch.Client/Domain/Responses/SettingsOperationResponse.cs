@@ -9,13 +9,11 @@ using ElasticSearch.Client.DSL;
 namespace ElasticSearch.Client
 {
 	[JsonObject]
-	public class SettingsOperationResponse
+	public class SettingsOperationResponse : BaseResponse
 	{
-		public bool Success { get; internal set; }
-		public ConnectionStatus ConnectionStatus { get; internal set; }
 		public SettingsOperationResponse()
 		{
-			this.Success = true;
+			this.IsValid = true;
 		}
 
 		[JsonProperty(PropertyName = "ok")]

@@ -19,50 +19,50 @@ namespace ElasticSearch.Client
 {
 	public partial class ElasticClient
 	{
-		public IndecesOperationResponse Optimize<T>() where T : class
+		public IndicesOperationResponse Optimize<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 			return Optimize(index);
 		}
-		public IndecesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class
+		public IndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 			return Optimize(index, optimizeParameters);
 		}
-		public IndecesOperationResponse Optimize(string index)
+		public IndicesOperationResponse Optimize(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Optimize(new[] { index });
 		}
-		public IndecesOperationResponse Optimize(string index, OptimizeParams optimizeParameters)
+		public IndicesOperationResponse Optimize(string index, OptimizeParams optimizeParameters)
 		{
 			index.ThrowIfNull("index");
 			return this.Optimize(new[] { index }, optimizeParameters);
 		}
-		public IndecesOperationResponse Optimize()
+		public IndicesOperationResponse Optimize()
 		{
 			return this.Optimize("_all");
 		}
-		public IndecesOperationResponse Optimize(OptimizeParams optimizeParameters)
+		public IndicesOperationResponse Optimize(OptimizeParams optimizeParameters)
 		{
 			return this.Optimize("_all", optimizeParameters);
 		}
-		public IndecesOperationResponse Optimize(IEnumerable<string> indices)
+		public IndicesOperationResponse Optimize(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_optimize";
 			return this._Optimize(path, null);
 		}
-		public IndecesOperationResponse Optimize(IEnumerable<string> indices, OptimizeParams optimizeParameters)
+		public IndicesOperationResponse Optimize(IEnumerable<string> indices, OptimizeParams optimizeParameters)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_optimize";
 			return this._Optimize(path, optimizeParameters);
 		}
 
-		private IndecesOperationResponse _Optimize(string path, OptimizeParams optimizeParameters)
+		private IndicesOperationResponse _Optimize(string path, OptimizeParams optimizeParameters)
 		{
 			if (optimizeParameters != null)
 			{
@@ -73,17 +73,8 @@ namespace ElasticSearch.Client
 				path += "&wait_for_merge=" + optimizeParameters.WaitForMerge.ToString().ToLower();
 			}
 			var status = this.Connection.PostSync(path, "");
-			if (status.Error != null)
-			{
-				return new IndecesOperationResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<IndecesOperationResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			return r;
 		}
 
 	}

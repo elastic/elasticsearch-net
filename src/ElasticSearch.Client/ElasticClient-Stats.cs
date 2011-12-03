@@ -79,17 +79,8 @@ namespace ElasticSearch.Client
 		public GlobalStatsResponse Stats(StatsParams parameters)
 		{
 			var status = this.Connection.GetSync(this._BuildStatsUrl(parameters));
-			if (status.Error != null)
-			{
-				return new GlobalStatsResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<GlobalStatsResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var r = this.ToParsedResponse<GlobalStatsResponse>(status);
+			return r;
 		}
 		
 		public StatsResponse Stats(string index)
@@ -103,17 +94,8 @@ namespace ElasticSearch.Client
 			index.ThrowIfNull("index");
 			var path = this.CreatePath(index) + this._BuildStatsUrl(parameters);
 			var status = this.Connection.GetSync(path);
-			if (status.Error != null)
-			{
-				return new StatsResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<StatsResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var r = this.ToParsedResponse<StatsResponse>(status);
+			return r;
 		}
 		
 	}

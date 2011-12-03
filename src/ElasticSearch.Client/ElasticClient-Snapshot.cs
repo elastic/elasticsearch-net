@@ -45,17 +45,8 @@ namespace ElasticSearch.Client
 		private IndicesShardResponse _Snapshot(string path)
 		{
 			var status = this.Connection.PostSync(path, "");
-			if (status.Error != null)
-			{
-				return new IndicesShardResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<IndicesShardResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var r = this.ToParsedResponse<IndicesShardResponse>(status);
+			return r;
 		}
 
 	}

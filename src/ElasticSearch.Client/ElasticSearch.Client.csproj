@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\BaseResponse.cs" />
     <Compile Include="Domain\Responses\IndexExistsResponse.cs" />
     <Compile Include="ElasticClient-IndexExists.cs" />
     <Compile Include="Domain\Parameters\StatsParams.cs" />
@@ -209,7 +210,7 @@
     <Compile Include="Enums\ClearCacheOptions.cs" />
     <Compile Include="Enums\StatsInfo.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
-    <Compile Include="Domain\Responses\ShardsMetaData.cs" />
+    <Compile Include="Domain\Hit\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-Inferno.cs" />

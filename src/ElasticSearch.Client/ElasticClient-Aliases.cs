@@ -42,102 +42,94 @@ namespace ElasticSearch.Client
 
 			return cmd;
 		}
-		public IndecesOperationResponse Alias(string alias)
+		public IndicesOperationResponse Alias(string alias)
 		{
 			var index = this.Settings.DefaultIndex;
 			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse Alias(string index, string alias)
+		public IndicesOperationResponse Alias(string index, string alias)
 		{
 			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse Alias(string index, IEnumerable<string> aliases)
+		public IndicesOperationResponse Alias(string index, IEnumerable<string> aliases)
 		{
 			aliases.Select(a=> _createCommand("add", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse Alias(IEnumerable<string> aliases)
+		public IndicesOperationResponse Alias(IEnumerable<string> aliases)
 		{
 			var index = this.Settings.DefaultIndex;
 			aliases.Select(a=> _createCommand("add", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse RemoveAlias(string alias)
+		public IndicesOperationResponse RemoveAlias(string alias)
 		{
 			var index = this.Settings.DefaultIndex;
 			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse RemoveAlias(string index, string alias)
+		public IndicesOperationResponse RemoveAlias(string index, string alias)
 		{
 			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse RemoveAlias(IEnumerable<string> aliases)
+		public IndicesOperationResponse RemoveAlias(IEnumerable<string> aliases)
 		{
 			var index = this.Settings.DefaultIndex;
 			aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases)
+		public IndicesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases)
 		{
 			aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse Alias(IEnumerable<string> indices, string alias)
+		public IndicesOperationResponse Alias(IEnumerable<string> indices, string alias)
 		{
 			indices.Select(i => _createCommand("add", new AliasParams { Index = i, Alias = alias }));
 			var q = string.Join(",", indices);
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse Rename(string index, string oldAlias, string newAlias)
+		public IndicesOperationResponse Rename(string index, string oldAlias, string newAlias)
 		{
 			var r = _createCommand("remove", new AliasParams { Index = index, Alias = oldAlias });
 			var a = _createCommand("add", new AliasParams { Index = index, Alias = newAlias });
 			return this._Alias(r + ", " + a);
 		}
-		public IndecesOperationResponse Alias(AliasParams aliasParams)
+		public IndicesOperationResponse Alias(AliasParams aliasParams)
 		{
 			return this._Alias(_createCommand("add", aliasParams));
 		}
-		public IndecesOperationResponse Alias(IEnumerable<AliasParams> aliases)
+		public IndicesOperationResponse Alias(IEnumerable<AliasParams> aliases)
 		{
 			var cmds = aliases.Select(a=>_aliasBody.F(_createCommand("add", a)));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
-		public IndecesOperationResponse RemoveAlias(AliasParams aliasParams)
+		public IndicesOperationResponse RemoveAlias(AliasParams aliasParams)
 		{
 			return this._Alias(_createCommand("remove", aliasParams));
 		}
-		public IndecesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases)
+		public IndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases)
 		{
 			var cmds = aliases.Select(a => _aliasBody.F(_createCommand("remove", a)));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
-		private IndecesOperationResponse _Alias(string query)
+		private IndicesOperationResponse _Alias(string query)
 		{
 			var path = "/_aliases";
 			query = _aliasBody.F(query);
-			var status = this.Connection.PostSync(path, query);
-			if (status.Error != null)
-			{
-				return new IndecesOperationResponse()
-				{
-					IsValid = false,
-					ConnectionError = status.Error
-				};
-			}
-
-			var response = JsonConvert.DeserializeObject<IndecesOperationResponse>(status.Result, this.SerializationSettings);
-			return response;
+			var status = this.Connection.PostSync(path, query);			
+			
+			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			return r;
 		}
 	}
 }

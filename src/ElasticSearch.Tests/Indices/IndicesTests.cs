@@ -25,7 +25,8 @@ namespace ElasticSearch.Tests
 		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
-			Assert.Null(queryResponse.ConnectionError);
+			Assert.NotNull(queryResponse.ConnectionStatus);
+			Assert.Null(queryResponse.ConnectionStatus.Error);
 			Assert.True(queryResponse.Total > 0, "No hits");
 			Assert.True(queryResponse.Documents.Any());
 			Assert.True(queryResponse.Documents.Count() > 0);
@@ -39,7 +40,7 @@ namespace ElasticSearch.Tests
 		public void GetIndexSettingsSimple()
 		{
 			var r = this.ConnectedClient.GetIndexSettings();
-			Assert.True(r.Success);
+			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
 			Assert.Greater(r.Settings.NumberOfReplicas, 0);
 			Assert.Greater(r.Settings.NumberOfShards, 1);
@@ -62,7 +63,7 @@ namespace ElasticSearch.Tests
 			var createResponse = this.ConnectedClient.CreateIndex(index, settings);
 
 			var r = this.ConnectedClient.GetIndexSettings(index);
-			Assert.True(r.Success);
+			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
 			Assert.AreEqual(r.Settings.NumberOfReplicas, 4);
 			Assert.AreEqual(r.Settings.NumberOfShards, 8);
@@ -88,7 +89,7 @@ namespace ElasticSearch.Tests
 
 			var r = this.ConnectedClient.UpdateSettings(index, settings);
 			
-			Assert.True(r.Success);
+			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			var getResponse = this.ConnectedClient.GetIndexSettings(index);
 			Assert.AreEqual(getResponse.Settings["refresh_interval"], "-1");
@@ -115,13 +116,16 @@ namespace ElasticSearch.Tests
 			var indexName = Guid.NewGuid().ToString();
 			var response = client.CreateIndex(indexName, settings);
 
-			Assert.IsTrue(response.Success);
+			Assert.IsTrue(response.IsValid);
+			Assert.IsTrue(response.OK);
 
 			Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, "mytype"));
 
 			response = client.DeleteIndex(indexName);
 
-			Assert.IsTrue(response.Success);
+			Assert.IsTrue(response.IsValid);
+			Assert.IsTrue(response.OK);
+
 		}
 
 		[Test]
@@ -138,7 +142,9 @@ namespace ElasticSearch.Tests
 
 			var response = this.ConnectedClient.Map(mapping);
 
-			Assert.IsTrue(response.Success);
+			Assert.IsTrue(response.IsValid);
+			Assert.IsTrue(response.OK);
+
 			mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
 		}
@@ -182,13 +188,17 @@ namespace ElasticSearch.Tests
 			var indexName = Guid.NewGuid().ToString();
 			var response = client.CreateIndex(indexName, settings);
 
-			Assert.IsTrue(response.Success);
+			Assert.IsTrue(response.IsValid);
+			Assert.IsTrue(response.OK);
+
 
 			Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, typeMapping.Name));
 
 			response = client.DeleteIndex(indexName);
 
-			Assert.IsTrue(response.Success);
+			Assert.IsTrue(response.IsValid);
+			Assert.IsTrue(response.OK);
+
 		}
 	}
 }

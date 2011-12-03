@@ -9,10 +9,8 @@ using ElasticSearch.Client.DSL;
 namespace ElasticSearch.Client
 {
 	[JsonObject]
-	public class AnalyzeResponse
+	public class AnalyzeResponse : BaseResponse
 	{
-		public bool IsValid { get; internal set; }
-		public ConnectionError ConnectionError { get; internal set; }
 		public AnalyzeResponse()
 		{
 			this.IsValid = true;

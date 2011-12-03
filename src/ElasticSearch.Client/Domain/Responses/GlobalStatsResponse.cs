@@ -10,10 +10,8 @@ using ElasticSearch.Client.Domain;
 namespace ElasticSearch.Client
 {
 	[JsonObject]
-	public class GlobalStatsResponse
+	public class GlobalStatsResponse : BaseResponse
 	{
-		public bool IsValid { get; internal set; }
-		public ConnectionError ConnectionError { get; internal set; }
 		public GlobalStatsResponse()
 		{
 			this.IsValid = true;

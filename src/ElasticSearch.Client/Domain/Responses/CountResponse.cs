@@ -9,10 +9,8 @@ using ElasticSearch.Client.DSL;
 namespace ElasticSearch.Client
 {
 	[JsonObject]
-	public class CountResponse
+	public class CountResponse : BaseResponse
 	{
-		public bool IsValid { get; set; }
-		public ConnectionError ConnectionError { get; set; }
 		public CountResponse()
 		{
 			this.IsValid = true;
