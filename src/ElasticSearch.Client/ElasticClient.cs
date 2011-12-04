@@ -92,7 +92,8 @@ namespace ElasticSearch.Client
 					new IsoDateTimeConverter(), 
 					new QueryJsonConverter(), 
 					new FacetConverter(),
-                    new IndexSettingsConverter()
+                    new IndexSettingsConverter(),
+					new ShardsSegmentConverter()
 				}
 			};
 			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
