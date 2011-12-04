@@ -63,6 +63,42 @@ namespace ElasticSearch.Client
 
 
 		}
+		public ConnectionError(Exception e, string result)
+		{
+			this.OriginalException = e;
+			this.ExceptionMessage = e.Message;
+			this.Type = ConnectionErrorType.Uncaught;
+
+			var webException = e as WebException;
+			if (webException != null)
+			{
+				this.Type = ConnectionErrorType.Server;
+				var response = ((HttpWebResponse)webException.Response);
+				if (response == null)
+				{
+					this.Type = ConnectionErrorType.Client;
+				}
+				else
+				{
+					this.HttpStatusCode = response.StatusCode;
+;
+					var x = new { Error = "" };
+					try
+					{
+						x = JsonConvert.DeserializeAnonymousType(result, x);
+						this.ExceptionMessage = x.Error;
+					}
+					catch
+					{
+						this.ExceptionMessage = "Could not parse exception message from ES, possibly altered by proxy or this is an unhandled HTTP Status by ES\r\n" + result;
+					}
+
+				}
+
+			}
+
+
+		}
 	}
 
 }

@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
+    <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
+    <Compile Include="ElasticClient-Percolate.cs" />
     <Compile Include="Domain\Hit\IndexSegment.cs" />
     <Compile Include="ElasticClient-Segments.cs" />
     <Compile Include="Domain\Hit\ShardSegmentRouting.cs" />

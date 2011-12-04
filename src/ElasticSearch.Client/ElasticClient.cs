@@ -107,10 +107,15 @@ namespace ElasticSearch.Client
 		/// Returns an response of type R based on the connection status without parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		private R ToResponse<R>(ConnectionStatus status) where R : BaseResponse
+		private R ToResponse<R>(ConnectionStatus status, bool allow404 = false) where R : BaseResponse
 		{
+			var isValid =
+				(allow404)
+				? (status.Error == null
+					|| status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
+				: (status.Error == null);
 			var r = (R)Activator.CreateInstance(typeof(R));
-			r.IsValid = (status.Error == null);
+			r.IsValid = isValid;
 			r.ConnectionStatus = status;
 			r.PropertyNameResolver = this.PropertyNameResolver;
 			return r;
@@ -119,11 +124,15 @@ namespace ElasticSearch.Client
 		/// Returns an response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		private R ToParsedResponse<R>(ConnectionStatus status) where R : BaseResponse
+		private R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false) where R : BaseResponse
 		{
-			var isValid = (status.Error == null);
+			var isValid = 
+				(allow404) 
+				? (status.Error == null
+					|| status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
+				: (status.Error == null);
 			if (!isValid)
-				return this.ToResponse<R>(status);
+				return this.ToResponse<R>(status, allow404);
 
 			var r = JsonConvert.DeserializeObject<R>(status.Result, this.SerializationSettings);
 			r.IsValid = isValid;

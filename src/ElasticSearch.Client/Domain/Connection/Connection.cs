@@ -36,153 +36,16 @@ namespace ElasticSearch.Client
 		public ConnectionStatus PutSync(string path, string data)
 		{
 			return this.PostOrPutSync(path, data, "PUT");
-		}
-
-
-		private ConnectionStatus GetOrHeadSync(string path, string method)
-		{
-			var connection = this.CreateConnection(path, method);
-			connection.Timeout = this._ConnectionSettings.TimeOut;
-			WebResponse response = null;
-			try
-			{
-				response = connection.GetResponse();
-				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-				response.Close();
-				return new ConnectionStatus(result);
-			}
-			catch (WebException e)
-			{
-				if (e.Status == WebExceptionStatus.Timeout)
-					return new ConnectionStatus(new ConnectionError(e) { Type = ConnectionErrorType.Server, ExceptionMessage = "Timeout" });
-
-				if (e.Status != WebExceptionStatus.Success
-					&& e.Status != WebExceptionStatus.ProtocolError)
-					return new ConnectionStatus(new ConnectionError(e) { Type = ConnectionErrorType.Server });
-
-				return new ConnectionStatus(new ConnectionError(e));
-			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
-			finally
-			{
-				if (response != null)
-					response.Close();
-			}
-		}
-
-		private ConnectionStatus PostOrPutSync(string path, string data, string method)
-		{
-			var connection = this.CreateConnection(path, method);
-			connection.Timeout = this._ConnectionSettings.TimeOut;
-			Stream postStream = null;
-			WebResponse response = null;
-			try
-			{
-				byte[] buffer = Encoding.UTF8.GetBytes(data);
-				connection.ContentLength = buffer.Length;
-				postStream = connection.GetRequestStream();
-				postStream.Write(buffer, 0, buffer.Length);
-				postStream.Close();
-				response = connection.GetResponse();
-				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-				response.Close();
-				return new ConnectionStatus(result);
-			}
-			catch (WebException e)
-			{
-				ConnectionError error;
-				if (e.Status == WebExceptionStatus.Timeout)
-				{
-					error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
-				}
-				else
-				{
-					error = new ConnectionError(e);
-				}
-				return new ConnectionStatus(error);
-			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
-			finally
-			{
-				if (postStream != null)
-					postStream.Close();
-				if (response != null)
-					response.Close();
-			}
-		}
-		
+		}	
 		public ConnectionStatus DeleteSync(string path)
 		{
 			var connection = this.CreateConnection(path, "DELETE");
-			connection.Timeout = this._ConnectionSettings.TimeOut;
-			WebResponse response = null;
-			try
-			{
-				response = connection.GetResponse();
-				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-				response.Close();
-				return new ConnectionStatus(result);
-			}
-			catch (WebException e)
-			{
-				ConnectionError error;
-				if (e.Status == WebExceptionStatus.Timeout)
-				{
-					error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
-				}
-				else
-				{
-					error = new ConnectionError(e);
-				}
-				return new ConnectionStatus(error);
-			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
-			finally
-			{
-				if (response != null)
-					response.Close();
-			}
+			return this.DoSynchronousRequest(connection);
 		}
-		
 		public ConnectionStatus DeleteSync(string path, string data)
 		{
 			var connection = this.CreateConnection(path, "DELETE");
-			connection.Timeout = this._ConnectionSettings.TimeOut;
-			Stream postStream = null;
-			WebResponse response = null;
-			try
-			{
-				byte[] buffer = Encoding.UTF8.GetBytes(data);
-				connection.ContentLength = buffer.Length;
-				postStream = connection.GetRequestStream();
-				postStream.Write(buffer, 0, buffer.Length);
-				postStream.Close();
-				response = connection.GetResponse();
-				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-				response.Close();
-				return new ConnectionStatus(result);
-			}
-			catch (WebException e)
-			{
-				ConnectionError error;
-				if (e.Status == WebExceptionStatus.Timeout)
-				{
-					error = new ConnectionError(e) { HttpStatusCode = HttpStatusCode.InternalServerError };
-				}
-				else
-				{
-					error = new ConnectionError(e);
-				}
-				return new ConnectionStatus(error);
-			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
-			finally
-			{
-				if (postStream != null)
-					postStream.Close();
-				if (response != null)
-					response.Close();
-			}
+			return this.DoSynchronousRequest(connection, data);
 		}
 	   
 		public void Get(string path, Action<ConnectionStatus> callback)
@@ -439,6 +302,19 @@ namespace ElasticSearch.Client
 		}
 
 
+		private ConnectionStatus GetOrHeadSync(string path, string method)
+		{
+			var connection = this.CreateConnection(path, method);
+			return this.DoSynchronousRequest(connection);
+		}
+
+		private ConnectionStatus PostOrPutSync(string path, string data, string method)
+		{
+			var connection = this.CreateConnection(path, method);
+			return this.DoSynchronousRequest(connection, data);
+		}
+	
+
 		private HttpWebRequest CreateConnection(string path, string method)
 		{
 			var url = this._CreateUriString(path);
@@ -464,6 +340,74 @@ namespace ElasticSearch.Client
 				myReq.Proxy = proxy;
 			}
 			return myReq;
+		}
+
+		private ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
+		{
+			request.Timeout = this._ConnectionSettings.TimeOut;
+			Stream postStream = null;
+			WebResponse response = null;
+			try
+			{
+				if (!data.IsNullOrEmpty())
+				{ 
+					byte[] buffer = Encoding.UTF8.GetBytes(data);
+					request.ContentLength = buffer.Length;
+					postStream = request.GetRequestStream();
+					postStream.Write(buffer, 0, buffer.Length);
+					postStream.Close();
+				}
+				response = request.GetResponse();
+				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
+				response.Close();
+				return new ConnectionStatus(result);
+			}
+			catch (WebException e)
+			{
+				string result;
+				var error = this.GetConnectionErrorFromWebException(e, out result);
+				var status = new ConnectionStatus(error);
+				status.Result = result;
+				return status;
+			}
+			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
+			finally
+			{
+				if (postStream != null)
+					postStream.Close();
+				if (response != null)
+					response.Close();
+			}
+		}
+		
+		private ConnectionError GetConnectionErrorFromWebException(WebException e, out string result)
+		{
+			result = "";
+			using (var r = e.Response)
+			{
+
+				if (e.Response != null)
+				{
+					using (var d = e.Response.GetResponseStream())
+					{ 
+						result = new StreamReader(d).ReadToEnd();
+					}
+				}
+
+				ConnectionError error;
+				if (e.Status == WebExceptionStatus.Timeout)
+				{
+					error = new ConnectionError(e, result) 
+					{ 
+						HttpStatusCode = HttpStatusCode.InternalServerError 
+					};
+				}
+				else
+				{
+					error = new ConnectionError(e, result);
+				}
+				return error;
+			}
 		}
 
 		private string _CreateUriString(string path)

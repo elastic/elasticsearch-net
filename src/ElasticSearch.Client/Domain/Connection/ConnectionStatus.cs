@@ -11,7 +11,7 @@ namespace ElasticSearch.Client
 	{
 		public bool Success { get; private set; }
 		public ConnectionError Error { get; private set; }
-		public string Result { get; private set; }
+		public string Result { get; internal set; }
 
 
 		public ConnectionStatus(Exception e)
