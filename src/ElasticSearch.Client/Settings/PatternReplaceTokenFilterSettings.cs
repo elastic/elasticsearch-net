@@ -10,5 +10,8 @@ namespace ElasticSearch.Client.Settings
 
         [JsonProperty("pattern")]
         public string Pattern { get; set; }
+
+        [JsonProperty("replacement")]
+        public string Replacement { get; set; }
     }
 }
