@@ -163,5 +163,40 @@ namespace ElasticSearch.Tests
 
             Assert.IsTrue(response.Success);
         }
+
+        [Test]
+        public void CreateIndexWithCustomTokenFilter()
+        {
+            var client = this.ConnectedClient;
+
+            var settings = new IndexSettings();
+            settings.Analysis.Analyzer.Add("test", new CustomAnalyzerSettings
+            {
+                Tokenizer = "standard",
+                Filter = new List<string>
+                                                                        {
+                                                                            "standard",
+                                                                            "lowercase",
+                                                                            "stop_custom",
+                                                                            "shingle"
+                                                                        }
+            });
+
+            settings.Analysis.TokenFilters.Add("stop_custom", new StopTokenFilter
+                                                                  {
+                                                                      EnablePositionIncrements = false,
+                                                                      IgnoreCase = true,
+                                                                      Stopwords = "this,that"
+                                                                  });
+
+            var indexName = Guid.NewGuid().ToString();
+            var response = client.CreateIndex(indexName, settings);
+
+            Assert.IsTrue(response.Success);
+
+            response = client.DeleteIndex(indexName);
+
+            Assert.IsTrue(response.Success);
+        }
 	}
 }

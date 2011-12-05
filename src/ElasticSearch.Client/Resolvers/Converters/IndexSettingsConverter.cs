@@ -32,6 +32,12 @@ namespace ElasticSearch.Client.Resolvers.Converters
             writer.WritePropertyName("analyzer");
             serializer.Serialize(writer, indexSettings.Analysis.Analyzer);
 
+            if (indexSettings.Analysis.TokenFilters.Count > 0)
+            {
+                writer.WritePropertyName("filter");
+                serializer.Serialize(writer, indexSettings.Analysis.TokenFilters);
+            }
+
             writer.WriteEndObject();
 
             writer.WriteEndObject();
