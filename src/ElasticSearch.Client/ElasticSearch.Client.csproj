@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
     <Compile Include="ElasticClient-Percolate.cs" />

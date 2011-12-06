@@ -22,20 +22,20 @@ namespace ElasticSearch.Client
 		
 		public ConnectionStatus GetSync(string path)
 		{
-			return this.GetOrHeadSync(path, "GET");
+			return this.HeaderOnlyRequest(path, "GET");
 		}
 		public ConnectionStatus HeadSync(string path)
 		{
-			return this.GetOrHeadSync(path, "HEAD");
+			return this.HeaderOnlyRequest(path, "HEAD");
 		}
 
 		public ConnectionStatus PostSync(string path, string data)
 		{
-			return this.PostOrPutSync(path, data, "POST");
+			return this.BodyRequest(path, data, "POST");
 		}
 		public ConnectionStatus PutSync(string path, string data)
 		{
-			return this.PostOrPutSync(path, data, "PUT");
+			return this.BodyRequest(path, data, "PUT");
 		}	
 		public ConnectionStatus DeleteSync(string path)
 		{
@@ -302,13 +302,13 @@ namespace ElasticSearch.Client
 		}
 
 
-		private ConnectionStatus GetOrHeadSync(string path, string method)
+		private ConnectionStatus HeaderOnlyRequest(string path, string method)
 		{
 			var connection = this.CreateConnection(path, method);
 			return this.DoSynchronousRequest(connection);
 		}
 
-		private ConnectionStatus PostOrPutSync(string path, string data, string method)
+		private ConnectionStatus BodyRequest(string path, string data, string method)
 		{
 			var connection = this.CreateConnection(path, method);
 			return this.DoSynchronousRequest(connection, data);
