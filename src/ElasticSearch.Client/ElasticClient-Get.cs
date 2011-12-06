@@ -57,6 +57,50 @@ namespace ElasticSearch.Client
 
 			return null;
 		}
+
+		public IEnumerable<T> Get<T>(IEnumerable<int> ids)
+			where T : class
+		{
+			return this.Get<T>(ids.Select(i => Convert.ToString(i)));
+		}
+
+		public IEnumerable<T> Get<T>(IEnumerable<string> ids)
+			where T : class
+		{
+			var index = this.Settings.DefaultIndex;
+			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+			var typeName = this.InferTypeName<T>();
+		
+			return this.Get<T>(ids, this.CreatePath(index, typeName));
+		}
+
+		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<int> ids)
+			where T : class
+		{
+			return this.Get<T>(index, type, ids.Select(i => Convert.ToString(i)));
+		}
+
+		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<string> ids)
+			where T : class
+		{
+			return this.Get<T>(ids, this.CreatePath(index, type));
+		}
+
+		private IEnumerable<T> Get<T>(IEnumerable<string> ids, string path)
+			where T : class
+		{
+			var data = @"{{ ""ids"": {0} }}".F(JsonConvert.SerializeObject(ids));
+			var response = this.Connection.PostSync(path + "_mget", data);
+
+			if (response.Result == null)
+				return null;
+
+			return JsonConvert.DeserializeObject<MultiHit<T>>(response.Result)
+				.Hits
+				.Where(h => h.Source != null) // non-existent ids come back as a hit without a "_source"
+				.Select(h => h.Source);
+		}
 		
 	}
 }
