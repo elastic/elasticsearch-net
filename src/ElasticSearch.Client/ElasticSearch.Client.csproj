@@ -116,6 +116,7 @@
     <Compile Include="Settings\AnalysisSettings.cs" />
     <Compile Include="Settings\AnalyzerSettings.cs" />
     <Compile Include="Settings\CustomAnalyzerSettings.cs" />
+    <Compile Include="Settings\ShingleTokenFilter.cs" />
     <Compile Include="Settings\TokenFilterSettings.cs" />
     <Compile Include="Settings\IndexSettings.cs" />
     <Compile Include="Domain\ShardsMetaData.cs" />
