@@ -89,5 +89,37 @@ namespace ElasticSearch.Tests.Search
 			Assert.True(r.Matches.Contains("mypercolator"));
 			var re = c.UnregisterPercolator<ElasticSearchProject>("mypercolator");
 		}
+		[Test]
+		public void PercolateTypedDoc()
+		{
+			this.RegisterPercolateTest(); // I feel a little dirty.
+			var c = this.ConnectedClient;
+			var r = c.RegisterPercolator<ElasticSearchProject>
+				(
+					"eclecticsearch"
+				, @"{
+					""query"" : {
+						""term"" : {
+							""country"" : ""netherlands""
+						}
+					}
+				}");
+			Assert.True(r.IsValid);
+			Assert.True(r.OK);
+			var percolateResponse = this.ConnectedClient.Percolate(
+				new ElasticSearchProject()
+				{
+					Name = "NEST",
+					Country = "netherlands",
+					LOC = 100000,
+				}
+			);
+			Assert.True(percolateResponse.IsValid);
+			Assert.True(percolateResponse.OK);
+			Assert.NotNull(percolateResponse.Matches);
+			Assert.True(percolateResponse.Matches.Contains("eclecticsearch"));
+
+			var re = c.UnregisterPercolator<ElasticSearchProject>("eclecticsearch");
+		}
 	}
 }
