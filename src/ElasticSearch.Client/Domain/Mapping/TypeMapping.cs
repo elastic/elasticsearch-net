@@ -10,6 +10,7 @@ namespace ElasticSearch.Client.Mapping
             this.Name = name;
             this.Properties = new Dictionary<string, TypeMappingProperty>();
             this.Source = new TypeMappingSource();
+            this.Parent = null;
         }
 
         [JsonIgnore]
@@ -20,5 +21,8 @@ namespace ElasticSearch.Client.Mapping
 
         [JsonProperty("properties")]
         public IDictionary<string, TypeMappingProperty> Properties { get; set; }
+
+        [JsonProperty("_parent")]
+        public TypeMappingParent Parent { get; set; }
     }
 }
