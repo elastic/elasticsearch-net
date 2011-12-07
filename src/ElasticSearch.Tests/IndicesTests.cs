@@ -178,6 +178,7 @@ namespace ElasticSearch.Tests
                                                                             "standard",
                                                                             "lowercase",
                                                                             "stop_custom",
+                                                                            "word_del_custom",
                                                                             "shingle"
                                                                         }
             });
@@ -187,6 +188,11 @@ namespace ElasticSearch.Tests
                                                                       EnablePositionIncrements = false,
                                                                       IgnoreCase = true,
                                                                       Stopwords = "this,that"
+                                                                  });
+
+            settings.Analysis.TokenFilters.Add("word_del_custom", new WordDelimiterTokenFilter
+                                                                  {
+                                                                     PreserveOriginal = true
                                                                   });
 
             var indexName = Guid.NewGuid().ToString();
