@@ -224,6 +224,8 @@
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Hit\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />
+    <Compile Include="Domain\Settings\ShingleTokenFilter.cs" />
+    <Compile Include="Domain\Settings\TokenFilterSettings.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-Inferno.cs" />
     <Compile Include="ElasticClient-MappingType.cs" />
@@ -269,6 +271,10 @@
     <Compile Include="Enums\NamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
+    <Compile Include="Domain\Settings\PatternReplaceTokenFilterSettings.cs" />
+    <Compile Include="Domain\Settings\StandardAnalyzerSettings.cs" />
+    <Compile Include="Domain\Settings\StopTokenFilter.cs" />
+    <Compile Include="Domain\Settings\WordDelimiterTokenFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

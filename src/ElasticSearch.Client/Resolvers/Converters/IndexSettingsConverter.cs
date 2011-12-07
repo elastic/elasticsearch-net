@@ -32,23 +32,28 @@ namespace ElasticSearch.Client.Resolvers.Converters
 
             writer.WriteEndObject();
 
-            if (indexSettings.Analysis.Analyzer.Count > 0)
-            { 
-                writer.WritePropertyName("analysis");
-                writer.WriteStartObject();
+            writer.WritePropertyName("analysis");
+            writer.WriteStartObject();
 
-                writer.WritePropertyName("analyzer");
-                serializer.Serialize(writer, indexSettings.Analysis.Analyzer);
+            writer.WritePropertyName("analyzer");
+            serializer.Serialize(writer, indexSettings.Analysis.Analyzer);
 
-                writer.WriteEndObject();
+            if (indexSettings.Analysis.TokenFilters.Count > 0)
+            {
+                writer.WritePropertyName("filter");
+                serializer.Serialize(writer, indexSettings.Analysis.TokenFilters);
             }
 
             writer.WriteEndObject();
+
+            writer.WriteEndObject();
+
             if (indexSettings.Mappings.Count > 0)
             { 
                 writer.WritePropertyName("mappings");
                 serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.Name));
             }
+
             writer.WriteEndObject();
         }
 

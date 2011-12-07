@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace ElasticSearch.Client.Settings
 {
@@ -13,9 +14,9 @@ namespace ElasticSearch.Client.Settings
         public string Tokenizer { get; set; }
 
         [JsonProperty("filter")]
-        public string Filter { get; set; }
+        public IList<string> Filter { get; set; }
 
         [JsonProperty("char_filter")]
-        public string CharFilter { get; set; }
+        public IList<string> CharFilter { get; set; }
     }
 }
