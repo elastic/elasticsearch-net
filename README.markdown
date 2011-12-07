@@ -29,6 +29,13 @@ To get a good overview of the status of NEST please keep an eye out on the publi
 
 Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](https://github.com/Mpdreamz/NEST)
 
+Some of the wonderful features in NEST were pushed by these wonderful folks:
+
+[nordbergm](https://github.com/nordbergm/NEST)
+[kevingessner](https://github.com/kevingessner/NEST)
+[EFJoseph](https://github.com/EFJoseph/NEST)
+[pkrakowiak](https://github.com/pkrakowiak/NEST) 
+
 ## License
 
 NEST is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Refer to [license.txt](https://github.com/Mpdreamz/NEST/blob/master/src/license.txt) for more information.
