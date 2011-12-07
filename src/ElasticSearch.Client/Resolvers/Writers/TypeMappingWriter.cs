@@ -79,6 +79,16 @@ namespace ElasticSearch.Client
 				jsonWriter.WritePropertyName("search_analyzer");
 				jsonWriter.WriteValue(att.SearchAnalyzer);
 			}
+			if (!att.ParentType.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("_parent");
+				jsonWriter.WriteStartObject();
+				{
+					jsonWriter.WritePropertyName("type");
+					jsonWriter.WriteValue(att.ParentType);
+				}
+				jsonWriter.WriteEndObject();
+			}
 			if (att.DynamicDateFormats != null && att.DynamicDateFormats.Any())
 			{
 				jsonWriter.WritePropertyName("dynamic_date_formats");

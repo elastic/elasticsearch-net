@@ -14,12 +14,32 @@ namespace ElasticSearch.Tests.Mapping
 	[TestFixture]
 	public class MapTests : BaseElasticSearchTests
 	{
+		private void TestMapping(TypeMapping typeMapping)
+		{
+			Assert.NotNull(typeMapping);
+			Assert.AreEqual("string", typeMapping.Properties["content"].Type);
+			Assert.AreEqual("string", typeMapping.Properties["country"].Type);
+			Assert.AreEqual("double", typeMapping.Properties["doubleValue"].Type);
+			Assert.AreEqual("long", typeMapping.Properties["longValue"].Type);
+			Assert.AreEqual("string", typeMapping.Properties["name"].Type);
+			Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type);
+			Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type);
+		}
+
 		[Test]
 		public void SimpleMapByAttributes()
 		{
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");
 			var x = this.ConnectedClient.Map<ElasticSearchProject>();
+			Assert.IsTrue(x.OK);
+
+			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			TestMapping(typeMapping);
+			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
+			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
+			Assert.AreEqual("integer", typeMapping.Properties["loc"].Type);
+			Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 
 		public void FluentMapping()
@@ -36,18 +56,10 @@ namespace ElasticSearch.Tests.Mapping
 		public void GetMapping()
 		{
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone", "elasticsearchprojects");
-
-			Assert.NotNull(typeMapping);
-			Assert.AreEqual("string", typeMapping.Properties["content"].Type);
-			Assert.AreEqual("string", typeMapping.Properties["country"].Type);
-			Assert.AreEqual("double", typeMapping.Properties["doubleValue"].Type);
+			TestMapping(typeMapping);
 			Assert.AreEqual("double", typeMapping.Properties["floatValue"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["id"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["loc"].Type);
-			Assert.AreEqual("long", typeMapping.Properties["longValue"].Type);
-			Assert.AreEqual("string", typeMapping.Properties["name"].Type);
-			Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type);
-			Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type);
 
 			Assert.IsTrue(typeMapping.Properties["origin"].Dynamic);
 			Assert.AreEqual("double", typeMapping.Properties["origin"].Properties["lat"].Type);
