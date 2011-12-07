@@ -156,6 +156,7 @@
     <Compile Include="Domain\Connection\Thrift\Transport\TTransportException.cs" />
     <Compile Include="Domain\Connection\Thrift\Transport\TTransportFactory.cs" />
     <Compile Include="Domain\Hit\AnalyzeToken.cs" />
+    <Compile Include="Domain\Hit\MultiHit.cs" />
     <Compile Include="Domain\Mapping\ElasticProperty.cs" />
     <Compile Include="Domain\Mapping\ElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\ElasticType.cs" />
