@@ -13,7 +13,8 @@ namespace Nest.TestData.Domain
 		NumericDetection = true,
 		SearchAnalyzer = "standard",
 		IndexAnalyzer = "standard",
-		DynamicDateFormats = new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" }
+		DynamicDateFormats = new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" },
+		ParentType = "elasticsearchprojects"
 	)]
 	public class ElasticSearchProject
 	{
