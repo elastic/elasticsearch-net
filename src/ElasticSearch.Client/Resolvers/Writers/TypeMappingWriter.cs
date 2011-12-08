@@ -122,7 +122,6 @@ namespace ElasticSearch.Client
 				jsonWriter.WritePropertyName(propertyName);
 				jsonWriter.WriteStartObject();
 				{
-
 					if (att == null) //properties that follow can not be inferred from the CLR.
 					{
 						jsonWriter.WritePropertyName("type");
@@ -130,6 +129,18 @@ namespace ElasticSearch.Client
 						jsonWriter.WriteEnd();
 						continue;
 					}
+
+					if (att.AddSortField)
+					{
+						jsonWriter.WritePropertyName("type");
+						jsonWriter.WriteValue("multi_field");
+						jsonWriter.WritePropertyName("fields");
+						jsonWriter.WriteStartObject();
+						jsonWriter.WritePropertyName(propertyName);
+						jsonWriter.WriteStartObject();
+					}
+
+					
 
 					if (att.NumericType != NumericType.Default)
 					{
@@ -206,6 +217,32 @@ namespace ElasticSearch.Client
 					{
 						jsonWriter.WritePropertyName("precision_step");
 						jsonWriter.WriteRawValue(att.PrecisionStep.ToString());
+					}
+
+					if (att.AddSortField)
+					{
+						jsonWriter.WriteEnd();
+						jsonWriter.WritePropertyName("sort");
+						jsonWriter.WriteStartObject();
+
+						if (att.NumericType != NumericType.Default)
+						{
+							jsonWriter.WritePropertyName("type");
+							var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
+							jsonWriter.WriteValue(numericType.ToLower());
+						}
+						else
+						{
+							jsonWriter.WritePropertyName("type");
+							jsonWriter.WriteValue(type);
+						}
+						if (att.Index != FieldIndexOption.analyzed)
+						{
+							jsonWriter.WritePropertyName("index");
+							jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
+						}
+						jsonWriter.WriteEnd();
+						jsonWriter.WriteEnd();
 					}
 				}
 				jsonWriter.WriteEnd();

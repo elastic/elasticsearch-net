@@ -8,6 +8,9 @@ namespace ElasticSearch.Client.Mapping
 	[AttributeUsage(System.AttributeTargets.Property, AllowMultiple = false)]
 	public class ElasticPropertyAttribute : Attribute
 	{
+		public bool AddSortField { get; set; }
+
+
 		public bool OptOut { get; set; }
 		public string Name { get; set; }
 
@@ -17,7 +20,6 @@ namespace ElasticSearch.Client.Mapping
 		public FieldIndexOption Index { get; set; }
 
 		public decimal Boost { get; set; }
-
 
 		public string Analyzer { get; set; }
 		public string IndexAnalyzer { get; set; }

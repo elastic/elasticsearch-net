@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="BaseMappedElasticSearchTests.cs" />
     <Compile Include="DSL\JsonifyTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
     <Compile Include="Indices\SegmentsTests.cs" />

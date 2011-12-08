@@ -48,6 +48,10 @@ namespace ElasticSearch.Client.DSL
 
 		[JsonProperty(PropertyName = "indices_boost")]
 		internal IDictionary<string, double> _IndicesBoost { get; set; }
+		
+		[JsonProperty(PropertyName = "sort")]
+		internal IDictionary<string, string> _Sort { get; set; }
+
 
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<string> _Fields { get; set; }
@@ -122,6 +126,20 @@ namespace ElasticSearch.Client.DSL
 				this._Fields = new List<string>();
 			foreach (var e in expressions)
 				this._Fields.Add(this.PropertyNameResolver.Resolve(e));
+			return this;
+		}
+		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
+		{
+			if (this._Sort == null)
+				this._Sort = new Dictionary<string, string>();
+			this._Sort.Add(this.PropertyNameResolver.ResolveToSort(objectPath), "asc");
+			return this;
+		}
+		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
+		{
+			if (this._Sort == null)
+				this._Sort = new Dictionary<string, string>();
+			this._Sort.Add(this.PropertyNameResolver.ResolveToSort(objectPath), "desc");
 			return this;
 		}
 	}

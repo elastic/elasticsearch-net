@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace ElasticSearch.Tests
 {
 	[TestFixture]
-	public class BaseMappedElasticSearchTests
+	public class BaseElasticSearchTests
 	{
 		[TestFixtureSetUp]
 		protected void Initialize()
@@ -64,9 +64,7 @@ namespace ElasticSearch.Tests
 				var cloneIndex = Test.Default.DefaultIndex + "_clone";
 				var bulkParameters = new SimpleBulkParameters() { Refresh = true };
 				client.DeleteMapping<ElasticSearchProject>();
-				client.DeleteMapping<ElasticSearchProject>(cloneIndex);				
-				client.Map<ElasticSearchProject>();
-				client.Map<ElasticSearchProject>(cloneIndex);
+				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
 				client.Index(projects, bulkParameters);
 				client.Index(projects, cloneIndex, bulkParameters);
 

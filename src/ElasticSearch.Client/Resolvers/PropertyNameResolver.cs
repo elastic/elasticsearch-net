@@ -18,6 +18,7 @@ namespace ElasticSearch.Client.DSL
 	public class PropertyNameResolver : ExpressionVisitor
 	{
 		private Stack<string> _stack;
+		private Stack<ElasticPropertyAttribute> _properties;
 		private JsonSerializerSettings SerializationSettings { get; set; }
 		private ElasticResolver ContractResolver { get; set; }
 
@@ -25,7 +26,6 @@ namespace ElasticSearch.Client.DSL
 		{
 			this.SerializationSettings = settings;
 			this.ContractResolver = settings.ContractResolver as ElasticResolver;
-
 		}
 
 		public ElasticPropertyAttribute GetElasticProperty(MemberInfo info)
@@ -59,6 +59,7 @@ namespace ElasticSearch.Client.DSL
 		public string Resolve(Expression expression)
 		{
 			_stack = new Stack<string>();
+			_properties = new Stack<ElasticPropertyAttribute>();
 			Visit(expression);
 			return _stack
 				.Aggregate(
@@ -67,7 +68,19 @@ namespace ElasticSearch.Client.DSL
 						(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
 				.ToString();
 		}
-
+		public string ResolveToSort(Expression expression)
+		{
+			_stack = new Stack<string>();
+			_properties = new Stack<ElasticPropertyAttribute>();
+			Visit(expression);
+			return _stack
+				.Aggregate(
+					new StringBuilder(),
+					(sb, name) =>
+						(sb.Length > 0 ? sb.Append(".") : sb)
+							.Append((_properties.Count > 0 && _properties.Pop().AddSortField) ? name + ".sort" : name))
+				.ToString();
+		}
 		protected override Expression VisitMemberAccess(MemberExpression expression)
 		{
 			if (_stack != null)
@@ -76,10 +89,15 @@ namespace ElasticSearch.Client.DSL
 				var resolvedName = this.ContractResolver.ResolvePropertyName(name);
 
 				var att = this.GetElasticProperty(expression.Member);
+				if (att != null)
+				{
+					_properties.Push(att);
+				}
 				if (att != null && !att.Name.IsNullOrEmpty())
+				{
+					
 					resolvedName = att.Name;
-
-
+				}
 				_stack.Push(resolvedName);
 			}
 			return base.VisitMemberAccess(expression);

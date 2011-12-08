@@ -14,7 +14,7 @@ using Nest.TestData.Domain;
 namespace ElasticSearch.Tests.DSL
 {
 	[TestFixture]
-	public class JsonifyTests
+	public class JsonifyTests : BaseMappedElasticSearchTests
 	{
 		private	readonly DslTranslator _dsl = new DslTranslator();
 		public JsonifyTests()
@@ -157,10 +157,33 @@ namespace ElasticSearch.Tests.DSL
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Fields(e => e.Id, e => e.Name);
+				.Fields(e => e.Id, e => e.Name)
+				.SortAscending(e=>e.LOC);
 			var json = _dsl.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				fields: [""id"", ""name""]
+					sort: {
+						""loc.sort"": ""asc""
+					},
+					fields: [""id"", ""name""]
+				}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		[Test]
+		public void TestSortDescending()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Fields(e => e.Id, e => e.Name)
+				.SortAscending(e => e.LOC)
+				.SortDescending(e => e.Name);
+			var json = _dsl.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+					sort: {
+						""loc.sort"": ""asc"",
+						""name.sort"": ""desc""
+					},
+					fields: [""id"", ""name""]
 				}";
 			Assert.True(this.JsonEquals(json, expected));
 		}

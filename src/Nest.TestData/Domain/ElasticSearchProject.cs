@@ -13,17 +13,19 @@ namespace Nest.TestData.Domain
 		NumericDetection = true,
 		SearchAnalyzer = "standard",
 		IndexAnalyzer = "standard",
-		DynamicDateFormats = new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" },
-		ParentType = "elasticsearchprojects"
+		DynamicDateFormats = new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" }
+		//TODO Parenttype forces the bulks to specify routing, handle this automagically.
+		//,ParentType = "elasticsearchprojects"
 	)]
 	public class ElasticSearchProject
 	{
 		public int Id { get; set;  }
+		[ElasticProperty(AddSortField=true)]
 		public string Name { get; set; }
 		[ElasticProperty(OmitNorms = true, Index = FieldIndexOption.not_analyzed)]
 		public string Country { get; set; }
 		public string Content { get; set; }
-		[ElasticProperty(Name="loc")]
+		[ElasticProperty(Name="loc",AddSortField=true)]
 		public int LOC { get; set; }
 		public List<Person> Followers { get; set; }
 
