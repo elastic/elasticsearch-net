@@ -51,6 +51,15 @@ namespace ElasticSearch.Client
 			return r;
 		}
 
+		public PercolateResponse Percolate<T>(T @object) where T : class
+		{
+			var index = this.Settings.DefaultIndex;
+			var type = this.InferTypeName<T>();
+			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+
+			return this.Percolate(index, type,"{{doc:{0}}}".F(doc));
+		}
+
 		public PercolateResponse Percolate(string index, string type, string doc)
 		{
 			var path = this.CreatePath(index, type) + "_percolate";

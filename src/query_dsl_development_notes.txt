@@ -15,11 +15,18 @@ _search --all
 	query: {} //query DSL
 	filter: {} //selected facets
 	highlight: {}
-	fields:[]
-	preference: "",
+	fields:[] - done
+	preference: "", -done
 	facets: {}
-	indices_boost: {}
-	explain: true
-	version: true,
-	min_score: 0.5
+	indices_boost: {} - done
+	explain: true - done
+	version: true, - done
+	min_score: 0.5 - done
 }
+
+//SearchDescriptor
+
+s
+.From(10)
+.Size(10)
+.Sort(

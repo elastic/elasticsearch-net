@@ -49,25 +49,6 @@ namespace ElasticSearch.Client
 			}
 		}
 
-		public bool TryConnect(out ConnectionStatus status)
-		{
-			try
-			{
-				status = this.GetNodeInfo();
-				return this.IsValid;
-			}
-			catch (Exception e)
-			{
-                status = new ConnectionStatus(e);
-			}
-			return false;
-
-
-
-		}
-
-
-		
 		public ElasticClient(IConnectionSettings settings) : this(settings, false)
 		{
 
@@ -92,13 +73,27 @@ namespace ElasticSearch.Client
 					new IsoDateTimeConverter(), 
 					new QueryJsonConverter(), 
 					new FacetConverter(),
-                    new IndexSettingsConverter(),
+					new IndexSettingsConverter(),
 					new ShardsSegmentConverter()
 				}
 			};
 			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}
-		
+
+		public bool TryConnect(out ConnectionStatus status)
+		{
+			try
+			{
+				status = this.GetNodeInfo();
+				return this.IsValid;
+			}
+			catch (Exception e)
+			{
+				status = new ConnectionStatus(e);
+			}
+			return false;
+		}
+
 		public string Serialize(object @object)
 		{
 			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
@@ -144,31 +139,31 @@ namespace ElasticSearch.Client
 
 		private ConnectionStatus GetNodeInfo()
 		{
-            ConnectionStatus response = null;
-            try
-            {
-                response = this.Connection.GetSync("");
-                if (response.Success)
-                {
-                    JObject o = JObject.Parse(response.Result);
-                    if (o["ok"] == null)
-                    {
-                        this._IsValid = false;
-                        return response;
-                    }
+			ConnectionStatus response = null;
+			try
+			{
+				response = this.Connection.GetSync("");
+				if (response.Success)
+				{
+					JObject o = JObject.Parse(response.Result);
+					if (o["ok"] == null)
+					{
+						this._IsValid = false;
+						return response;
+					}
 
-                    this._IsValid = (bool)o["ok"];
+					this._IsValid = (bool)o["ok"];
 
-                    JObject version = o["version"] as JObject;
-                    this._VersionInfo = JsonConvert.DeserializeObject<ElasticSearchVersionInfo>(version.ToString());
+					JObject version = o["version"] as JObject;
+					this._VersionInfo = JsonConvert.DeserializeObject<ElasticSearchVersionInfo>(version.ToString());
 
-                    this._gotNodeInfo = true;
-                }
-            }
-            catch 
-            {
-                this._IsValid = false;
-            }
+					this._gotNodeInfo = true;
+				}
+			}
+			catch 
+			{
+				this._IsValid = false;
+			}
 			return response;
 		}
 		
