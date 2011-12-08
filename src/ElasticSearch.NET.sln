@@ -11,7 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General Files", "General Fi
 	ProjectSection(SolutionItems) = preProject
 		license.txt = license.txt
 		query_dsl_development_notes.txt = query_dsl_development_notes.txt
-		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.TestData", "Nest.TestData\Nest.TestData.csproj", "{27143A05-5655-447C-ADAF-405E1CF43741}"

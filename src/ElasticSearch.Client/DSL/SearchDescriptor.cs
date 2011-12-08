@@ -124,17 +124,6 @@ namespace ElasticSearch.Client.DSL
 				this._Fields.Add(this.PropertyNameResolver.Resolve(e));
 			return this;
 		}
-		public SearchDescriptor<T> Select(Expression<Func<T, object[]>> expressions)
-		{
-			if (this._Fields == null)
-				this._Fields = new List<string>();
-			foreach (var e in expressions)
-				this._Fields.Add(this.PropertyNameResolver.Resolve(e));
-			return this;
-		}
-
-
-
 	}
 
 
