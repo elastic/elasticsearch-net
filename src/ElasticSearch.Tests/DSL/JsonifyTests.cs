@@ -187,5 +187,44 @@ namespace ElasticSearch.Tests.DSL
 				}";
 			Assert.True(this.JsonEquals(json, expected));
 		}
+
+		[Test]
+		public void TestSuperSimpleQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q=> q);
+			var json = _dsl.Serialize(s);
+			var expected = "{ from: 0, size: 10, query : {}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		/*
+		[Test]
+		public void TestSuperSimpleQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Term(e=>e.Name, "nest", boost: 1.0)
+					.Bool(b=>b
+						.Must(m=> m
+							.Term(e => e.Name, "nest", boost: 1.0)
+						)
+						.MustNot(m=>m
+							.Term(e => e.Name, "nest12", boost: 1.0)
+						)
+						.Should(s=>s
+							.Term(e => e.Name, "nestle", boost: 1.0)
+						)
+						.MinimumNumberShouldMatch(1)
+						.Boost(1.0)
+					)
+				);
+			var json = _dsl.Serialize(s);
+			var expected = "{ from: 0, size: 10, query : {}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}*/
 	}
 }

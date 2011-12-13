@@ -84,7 +84,9 @@
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
-    <Compile Include="DSL\SearchDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\TermDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\QueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\SearchDescriptor.cs" />
     <Compile Include="ElasticClient-Percolate.cs" />
     <Compile Include="Domain\Hit\IndexSegment.cs" />
     <Compile Include="ElasticClient-Segments.cs" />

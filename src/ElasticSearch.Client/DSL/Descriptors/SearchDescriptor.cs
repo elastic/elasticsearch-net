@@ -52,6 +52,8 @@ namespace ElasticSearch.Client.DSL
 		[JsonProperty(PropertyName = "sort")]
 		internal IDictionary<string, string> _Sort { get; set; }
 
+		[JsonProperty(PropertyName = "query")]
+		internal QueryDescriptor<T> _Query { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<string> _Fields { get; set; }
@@ -142,8 +144,15 @@ namespace ElasticSearch.Client.DSL
 			this._Sort.Add(this.PropertyNameResolver.ResolveToSort(objectPath), "desc");
 			return this;
 		}
+		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryDescriptor<T>> query)
+		{
+			query.ThrowIfNull("query");
+			this._Query = query(new QueryDescriptor<T>());
+			return this;
+		}
 	}
 
+	
 
 	public class DslTranslator
 	{
