@@ -99,7 +99,7 @@ namespace ElasticSearch.Client
         public IndicesResponse CreateIndex(string index, IndexSettings settings)
         {
             string path = this.CreatePath(index);
-            string data =  JsonConvert.SerializeObject(settings, Formatting.None, this.SerializationSettings);
+            string data =  JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
             var status = this.Connection.PostSync(path,data);
             var response = new IndicesResponse();
             response.ConnectionStatus = status;

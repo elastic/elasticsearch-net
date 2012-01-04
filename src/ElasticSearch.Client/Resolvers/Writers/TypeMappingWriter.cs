@@ -236,11 +236,8 @@ namespace ElasticSearch.Client
 							jsonWriter.WritePropertyName("type");
 							jsonWriter.WriteValue(type);
 						}
-						if (att.Index != FieldIndexOption.analyzed)
-						{
-							jsonWriter.WritePropertyName("index");
-							jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
-						}
+						jsonWriter.WritePropertyName("index");
+						jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
 						jsonWriter.WriteEnd();
 						jsonWriter.WriteEnd();
 					}

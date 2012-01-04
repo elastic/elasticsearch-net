@@ -6,6 +6,7 @@ using NUnit.Framework;
 using ElasticSearch.Client;
 using HackerNews.Indexer.Domain;
 using ElasticSearch.Client.DSL;
+using Nest.TestData.Domain;
 
 namespace ElasticSearch.Tests
 {
@@ -13,18 +14,96 @@ namespace ElasticSearch.Tests
 	public class QueryDSLTests : BaseElasticSearchTests
 	{
 		[Test]
-		public void FuzzySearch()
+		public void MatchAll()
 		{
-		/*
-			var client = this.ConnectedClient;
-			QueryResponse<Post> queryResults = client.Search<Post>(new Search()
-			{
-				Query = new Query(new Fuzzy("author.firstName", "kimchy", 1.0))
-
-			}.Skip(0).Take(10)
+			var results = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+				.From(0)
+				.Size(10)
+				.Fields(f => f.Id, f => f.Name)
+				.SortAscending(f => f.LOC)
+				.SortDescending(f => f.Name)
+				.Query(q=>q
+					.MatchAll()
+				)
 			);
-		 * */
+			Assert.NotNull(results);
+			Assert.True(results.IsValid);
+			Assert.NotNull(results.Documents);
+			Assert.GreaterOrEqual(results.Documents.Count(), 10);
 		}
-
+		[Test]
+		public void MatchAllShortcut()
+		{
+			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.From(0)
+				.Size(10)
+				.Fields(f => f.Id, f => f.Name)
+				.SortAscending(f => f.LOC)
+				.SortDescending(f => f.Name)
+				.MatchAll()
+			);
+			Assert.NotNull(results);
+			Assert.True(results.IsValid);
+			Assert.NotNull(results.Documents);
+			Assert.GreaterOrEqual(results.Documents.Count(), 10);
+			Assert.True(results.Documents.All(d => !string.IsNullOrEmpty(d.Name)));
+		}
+		[Test]
+		public void TestTermQuery()
+		{
+			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.From(0)
+				.Size(10)
+				.Fields(f => f.Id, f => f.Name)
+				.SortAscending(f => f.LOC)
+				.SortDescending(f => f.Name)
+				.Query(q => q
+					.Term(f=>f.Name, "elasticsearch.pm")
+				)
+			);
+			Assert.NotNull(results);
+			Assert.True(results.IsValid);
+			Assert.NotNull(results.Documents);
+			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+		}
+		[Test]
+		public void TestWildcardQuery()
+		{
+			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.From(0)
+				.Size(10)
+				.Fields(f => f.Id, f => f.Name)
+				.SortAscending(f => f.LOC)
+				.SortDescending(f => f.Name)
+				.Query(q => q
+					.Wildcard(f => f.Name, "elasticsearch.*")
+				)
+			);
+			Assert.NotNull(results);
+			Assert.True(results.IsValid);
+			Assert.NotNull(results.Documents);
+			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+		}
+		[Test]
+		public void TestMixedQuery()
+		{
+			var e = Assert.Throws<DslException>(() =>
+			{
+				var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+					.From(0)
+					.Size(10)
+					.Fields(f => f.Id, f => f.Name)
+					.SortAscending(f => f.LOC)
+					.SortDescending(f => f.Name)
+					.Query(q => q
+						.Term(f => f.Name, "elasticsearch.pm")
+						.Wildcard(f => f.Name, "elasticsearch.*")
+					)
+				);
+			});
+			
+			Assert.NotNull(e);
+			Assert.AreEqual(e.Message, "Tried to set a wildcard query while the descriptor already contains a term query");
+		}
 	}
 }

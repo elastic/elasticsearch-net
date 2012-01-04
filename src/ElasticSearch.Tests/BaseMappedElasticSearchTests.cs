@@ -65,6 +65,7 @@ namespace ElasticSearch.Tests
 				var bulkParameters = new SimpleBulkParameters() { Refresh = true };
 				client.DeleteMapping<ElasticSearchProject>();
 				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
+				client.Map<ElasticSearchProject>();
 				client.Index(projects, bulkParameters);
 				client.Index(projects, cloneIndex, bulkParameters);
 

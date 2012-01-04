@@ -14,9 +14,8 @@ using Nest.TestData.Domain;
 namespace ElasticSearch.Tests.DSL
 {
 	[TestFixture]
-	public class JsonifyTests : BaseMappedElasticSearchTests
+	public class JsonifyTests
 	{
-		private	readonly DslTranslator _dsl = new DslTranslator();
 		public JsonifyTests()
 		{
 			
@@ -36,7 +35,7 @@ namespace ElasticSearch.Tests.DSL
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10 }";
 			Assert.True(this.JsonEquals(json, expected));
 		}
@@ -46,7 +45,7 @@ namespace ElasticSearch.Tests.DSL
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.Skip(0)
 				.Take(10);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10 }";
 			Assert.True(this.JsonEquals(json, expected));
 		}
@@ -59,7 +58,7 @@ namespace ElasticSearch.Tests.DSL
 				.Explain()
 				.Version()
 				.MinScore(0.4);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ 
 				from: 0, size: 10,
 				explain: true, 
@@ -79,7 +78,7 @@ namespace ElasticSearch.Tests.DSL
 				.MinScore(0.4)
 				.IndicesBoost(b=>b.Add("index1",1.4).Add("index2", 1.3));
 				;
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ 
 				from: 0, size: 10,
 				explain: true, 
@@ -100,7 +99,7 @@ namespace ElasticSearch.Tests.DSL
 				.From(0)
 				.Size(10)
 				.Preference("_primary");
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
 			Assert.True(this.JsonEquals(json, expected));
 		}
@@ -111,7 +110,7 @@ namespace ElasticSearch.Tests.DSL
 				.From(0)
 				.Size(10)
 				.ExecuteOnPrimary();
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
 			Assert.True(this.JsonEquals(json, expected));
 		}
@@ -122,7 +121,7 @@ namespace ElasticSearch.Tests.DSL
 				.From(0)
 				.Size(10)
 				.ExecuteOnLocalShard();
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, preference: ""_local"" }";
 			Assert.True(this.JsonEquals(json, expected));
 		}
@@ -133,7 +132,7 @@ namespace ElasticSearch.Tests.DSL
 				.From(0)
 				.Size(10)
 				.ExecuteOnNode("somenode");
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				preference: ""_only_node:somenode"" }";
 			Assert.True(this.JsonEquals(json, expected));
@@ -145,7 +144,7 @@ namespace ElasticSearch.Tests.DSL
 				.From(0)
 				.Size(10)
 				.Fields(e=>e.Id, e=>e.Name);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				fields: [""id"", ""name""]
 				}";
@@ -159,7 +158,7 @@ namespace ElasticSearch.Tests.DSL
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name)
 				.SortAscending(e=>e.LOC);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
 						""loc.sort"": ""asc""
@@ -177,7 +176,7 @@ namespace ElasticSearch.Tests.DSL
 				.Fields(e => e.Id, e => e.Name)
 				.SortAscending(e => e.LOC)
 				.SortDescending(e => e.Name);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
 						""loc.sort"": ""asc"",
@@ -195,8 +194,115 @@ namespace ElasticSearch.Tests.DSL
 				.From(0)
 				.Size(10)
 				.Query(q=> q);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : {}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		[Test]
+		public void TestMatchAllQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q.MatchAll());
+			var json = ElasticClient.Serialize(s);
+			var expected = "{ from: 0, size: 10, query : { match_all: {}}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		[Test]
+		public void TestMatchAllShortcut()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.MatchAll();
+			var json = ElasticClient.Serialize(s);
+			var expected = "{ from: 0, size: 10, query : { match_all: {}}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+
+		[Test]
+		public void TestMatchAllWithBoostQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.MatchAll(Boost:1.2)
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = "{ from: 0, size: 10, query : { match_all: { boost: 1.2 }}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+
+		[Test]
+		public void TestMatchAllWithNormFieldQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.MatchAll(NormField: "name")
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : { match_all: { norm_field: ""name"" }}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+
+		[Test]
+		public void TestTermQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Term(f => f.Name, "elasticsearch.pm")
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ term: { name : { value : ""elasticsearch.pm"" } }}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		[Test]
+		public void TestTermWithBoostQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Term(f => f.Name, "elasticsearch.pm", Boost: 1.2)
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ term: { name : { value : ""elasticsearch.pm"", boost: 1.2 } }}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		[Test]
+		public void TestWildcardQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Wildcard(f => f.Name, "elasticsearch.*")
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ wildcard: { name : { value : ""elasticsearch.*"" } }}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		[Test]
+		public void TestWildcardWithBoostQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.2)
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ wildcard: { name : { value : ""elasticsearch.*"", boost: 1.2 } }}}";
 			Assert.True(this.JsonEquals(json, expected));
 		}
 		/*
@@ -222,7 +328,7 @@ namespace ElasticSearch.Tests.DSL
 						.Boost(1.0)
 					)
 				);
-			var json = _dsl.Serialize(s);
+			var json = ElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : {}}";
 			Assert.True(this.JsonEquals(json, expected));
 		}*/

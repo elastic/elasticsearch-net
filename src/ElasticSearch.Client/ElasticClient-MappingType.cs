@@ -81,7 +81,7 @@ namespace ElasticSearch.Client
             var mapping = new Dictionary<string, TypeMapping>();
             mapping.Add(typeMapping.Name, typeMapping);
 
-            string map = JsonConvert.SerializeObject(mapping, Formatting.None, this.SerializationSettings);
+            string map = JsonConvert.SerializeObject(mapping, Formatting.None, SerializationSettings);
 
             ConnectionStatus status = this.Connection.PutSync(path, map);
 
@@ -105,7 +105,7 @@ namespace ElasticSearch.Client
 
             ConnectionStatus status = this.Connection.GetSync(path);
 
-            var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, this.SerializationSettings);
+            var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, SerializationSettings);
 
             if (status.Success)
             {
@@ -120,7 +120,7 @@ namespace ElasticSearch.Client
 
         private string CreateMapFor<T>(string type) where T : class
         {
-            var writer = new TypeMappingWriter<T>(type, this.PropertyNameResolver);
+            var writer = new TypeMappingWriter<T>(type, PropertyNameResolver);
 
             return writer.MapFromAttributes();
         }

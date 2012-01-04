@@ -79,12 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElasticClient-Statics.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
     <Compile Include="Domain\Mapping\TypeMappingParent.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
-    <Compile Include="DSL\Descriptors\TermDescriptor.cs" />
     <Compile Include="DSL\Descriptors\QueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\SearchDescriptor.cs" />
     <Compile Include="ElasticClient-Percolate.cs" />
@@ -225,6 +225,7 @@
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
     <Compile Include="Enums\ClearCacheOptions.cs" />
     <Compile Include="Enums\StatsInfo.cs" />
+    <Compile Include="Exception\DslException.cs" />
     <Compile Include="Resolvers\Converters\ShardSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Hit\ShardsMetaData.cs" />
@@ -252,6 +253,7 @@
     <Compile Include="Enums\StoreOption.cs" />
     <Compile Include="Enums\NumericType.cs" />
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
+    <Compile Include="Resolvers\Converters\TermConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\Inflector.cs" />

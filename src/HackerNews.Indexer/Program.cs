@@ -24,6 +24,7 @@ namespace HackerNews.Indexer
 		{
 			var filePath = args.First();
 
+
 			var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
 										.SetDefaultIndex("mpdreamz")
 										.SetMaximumAsyncConnections(50);

@@ -55,7 +55,7 @@ namespace ElasticSearch.Client
 		{
 			var index = this.Settings.DefaultIndex;
 			var type = this.InferTypeName<T>();
-			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 
 			return this.Percolate(index, type,"{{doc:{0}}}".F(doc));
 		}

@@ -10,20 +10,4 @@ namespace ElasticSearch.Client.DSL
 	{
 		
 	}
-
-	public interface IFieldQuery
-	{
-		string Field { get; }
-		double Boost { get; }
-	}
-
-	public interface IValue
-	{
-		string Value { get; }
-	}
-
-	public interface IQuery<T> : IQuery where T : class
-	{
-		Expression<Func<T, object>> Expression { get; }
-	}
 }

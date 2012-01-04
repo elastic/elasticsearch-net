@@ -12,24 +12,9 @@ namespace ElasticSearch.Client.DSL
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SearchDescriptor<T> where T : class
 	{
-		private JsonSerializerSettings SerializationSettings { get; set; }
-		private PropertyNameResolver PropertyNameResolver { get; set; }
+
 		public SearchDescriptor()
 		{
-			this.SerializationSettings = new JsonSerializerSettings()
-			{
-				ContractResolver = new ElasticResolver(),
-				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> 
-				{ 
-					new IsoDateTimeConverter(), 
-					new QueryJsonConverter(), 
-					new FacetConverter(),
-					new IndexSettingsConverter(),
-					new ShardsSegmentConverter()
-				}
-			};
-			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}
 
 		[JsonProperty(PropertyName="from")]
@@ -127,21 +112,21 @@ namespace ElasticSearch.Client.DSL
 			if (this._Fields == null)
 				this._Fields = new List<string>();
 			foreach (var e in expressions)
-				this._Fields.Add(this.PropertyNameResolver.Resolve(e));
+				this._Fields.Add(ElasticClient.PropertyNameResolver.Resolve(e));
 			return this;
 		}
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
 				this._Sort = new Dictionary<string, string>();
-			this._Sort.Add(this.PropertyNameResolver.ResolveToSort(objectPath), "asc");
+			this._Sort.Add(ElasticClient.PropertyNameResolver.ResolveToSort(objectPath), "asc");
 			return this;
 		}
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
 				this._Sort = new Dictionary<string, string>();
-			this._Sort.Add(this.PropertyNameResolver.ResolveToSort(objectPath), "desc");
+			this._Sort.Add(ElasticClient.PropertyNameResolver.ResolveToSort(objectPath), "desc");
 			return this;
 		}
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryDescriptor<T>> query)
@@ -150,45 +135,17 @@ namespace ElasticSearch.Client.DSL
 			this._Query = query(new QueryDescriptor<T>());
 			return this;
 		}
-	}
-
-	
-
-	public class DslTranslator
-	{
-		private JsonSerializerSettings SerializationSettings { get; set; }
-		private PropertyNameResolver PropertyNameResolver { get; set; }
-		public DslTranslator()
+		public SearchDescriptor<T> MatchAll()
 		{
-			this.SerializationSettings = new JsonSerializerSettings()
-			{
-				ContractResolver = new ElasticResolver(),
-				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> 
-				{ 
-					new IsoDateTimeConverter(), 
-					new QueryJsonConverter(), 
-					new FacetConverter(),
-					new IndexSettingsConverter(),
-					new ShardsSegmentConverter()
-				}
-			};
-	
-			this.SerializationSettings.DefaultValueHandling
-				= DefaultValueHandling.Ignore;
-			this.SerializationSettings.NullValueHandling = NullValueHandling.Ignore;
-			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
-		}
-
-		public string Serialize<T>(T @object)
-		{
-			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+			this._Query = new QueryDescriptor<T>()
+				.MatchAll();
+			return this;
 		}
 	}
 
 	public class FluentDictionary<K,V> : Dictionary<K,V>
 	{
-		public FluentDictionary<K,V> Add(K k, V v)
+		public new FluentDictionary<K,V> Add(K k, V v)
 		{
 			base.Add(k, v);
 			return this;

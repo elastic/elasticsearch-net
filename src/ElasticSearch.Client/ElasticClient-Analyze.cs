@@ -39,7 +39,7 @@ namespace ElasticSearch.Client
 		public AnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string index, string text) where T : class
 		{
 			selector.ThrowIfNull("selector");
-			var fieldName = this.PropertyNameResolver.Resolve(selector);
+			var fieldName = PropertyNameResolver.Resolve(selector);
 			var analyzeParams = new AnalyzeParams() { Index = index, Field = fieldName };
 			return this._Analyze(analyzeParams, text);
 		}

@@ -25,9 +25,6 @@ namespace ElasticSearch.Client
 		private bool _gotNodeInfo = false;
 		private bool _IsValid { get; set; }
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
-		private JsonSerializerSettings SerializationSettings { get; set; }
-		private PropertyNameResolver PropertyNameResolver { get; set; }
-
 
 		public bool IsValid
 		{
@@ -64,20 +61,6 @@ namespace ElasticSearch.Client
 			else 
 				this.Connection = new Connection(settings);
 
-			this.SerializationSettings = new JsonSerializerSettings()
-			{
-				ContractResolver = new ElasticResolver(),
-				NullValueHandling = NullValueHandling.Ignore,
-				Converters = new List<JsonConverter> 
-				{ 
-					new IsoDateTimeConverter(), 
-					new QueryJsonConverter(), 
-					new FacetConverter(),
-					new IndexSettingsConverter(),
-					new ShardsSegmentConverter()
-				}
-			};
-			this.PropertyNameResolver = new PropertyNameResolver(this.SerializationSettings);
 		}
 
 		public bool TryConnect(out ConnectionStatus status)
@@ -96,7 +79,7 @@ namespace ElasticSearch.Client
 
 		public string Serialize(object @object)
 		{
-			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+			return JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 		}
 		/// <summary>
 		/// Returns an response of type R based on the connection status without parsing status.Result into R
@@ -112,7 +95,7 @@ namespace ElasticSearch.Client
 			var r = (R)Activator.CreateInstance(typeof(R));
 			r.IsValid = isValid;
 			r.ConnectionStatus = status;
-			r.PropertyNameResolver = this.PropertyNameResolver;
+			r.PropertyNameResolver = PropertyNameResolver;
 			return r;
 		}
 		/// <summary>
@@ -129,10 +112,10 @@ namespace ElasticSearch.Client
 			if (!isValid)
 				return this.ToResponse<R>(status, allow404);
 
-			var r = JsonConvert.DeserializeObject<R>(status.Result, this.SerializationSettings);
+			var r = JsonConvert.DeserializeObject<R>(status.Result, SerializationSettings);
 			r.IsValid = isValid;
 			r.ConnectionStatus = status;
-			r.PropertyNameResolver = this.PropertyNameResolver;
+			r.PropertyNameResolver = PropertyNameResolver;
 			return r;
 		}
 

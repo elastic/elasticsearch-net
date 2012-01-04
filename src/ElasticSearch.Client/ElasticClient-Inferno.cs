@@ -99,7 +99,7 @@ namespace ElasticSearch.Client
 		{
 			var type = typeof(T);
 			var typeName = type.Name;
-			var att = this.PropertyNameResolver.GetElasticPropertyFor<T>();
+			var att = PropertyNameResolver.GetElasticPropertyFor<T>();
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else
@@ -237,7 +237,7 @@ namespace ElasticSearch.Client
 				sb.Append(objectAction);
 				if (command == "index")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
+					string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, SerializationSettings);
 					sb.Append(jsonCommand + "\n");
 				}
 			}
@@ -277,7 +277,7 @@ namespace ElasticSearch.Client
 				sb.Append(objectAction);
 				if (command == "index")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, this.SerializationSettings);
+					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, SerializationSettings);
 					sb.Append(jsonCommand + "\n");
 				}
 			}

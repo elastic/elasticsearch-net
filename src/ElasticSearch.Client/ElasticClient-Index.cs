@@ -70,7 +70,7 @@ namespace ElasticSearch.Client
 		{
 			path.ThrowIfNull("path");
 			
-			string json = JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+			string json = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 
 			return this.Connection.PostSync(path, json);
 		}
@@ -144,7 +144,7 @@ namespace ElasticSearch.Client
 		
 		private void _indexAsyncToPath<T>(T @object, string path, Action<ConnectionStatus> continuation) where T : class
 		{
-			string json = JsonConvert.SerializeObject(@object, Formatting.None, this.SerializationSettings);
+			string json = JsonConvert.SerializeObject(@object, Formatting.None, SerializationSettings);
 			this.Connection.Post(path, json, continuation);
 		}
 

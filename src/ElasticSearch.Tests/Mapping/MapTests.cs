@@ -21,7 +21,7 @@ namespace ElasticSearch.Tests.Mapping
 			Assert.AreEqual("string", typeMapping.Properties["country"].Type);
 			Assert.AreEqual("double", typeMapping.Properties["doubleValue"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["longValue"].Type);
-			Assert.AreEqual("string", typeMapping.Properties["name"].Type);
+			Assert.AreEqual("multi_field", typeMapping.Properties["name"].Type);
 			Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type);
 		}
@@ -38,8 +38,8 @@ namespace ElasticSearch.Tests.Mapping
 			TestMapping(typeMapping);
 			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
 			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
-			Assert.AreEqual("integer", typeMapping.Properties["loc"].Type);
-			Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
+			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
+			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 
 		public void FluentMapping()
