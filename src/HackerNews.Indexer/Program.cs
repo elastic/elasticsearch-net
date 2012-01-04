@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using HackerNews.Indexer.Domain;
-using ElasticSearch.Client;
+using Nest;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ElasticSearch.Client;
-using ElasticSearch.Client.Mapping;
+using Nest;
+using Nest.Mapping;
 
 namespace Nest.TestData.Domain
 {

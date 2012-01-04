@@ -7,7 +7,7 @@
     <authors>Martijn Laarman</authors>
     <owners />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Strongly typed ElasticSearch client.</description>
+    <description>Strongly typed Elasticsearch client.</description>
     <dependencies>
       <dependency id="Newtonsoft.Json" />
       <dependency id="Fasterflect" />
@@ -15,8 +15,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="**\ElasticSearch.Client.dll" /> 
-    <file src="**\ElasticSearch.Client.dll" />
+    <file src="**\Nest.dll" /> 
+    <file src="**\Nest.dll" />
     <file src="**\NetReflector.dll" /> 
     <file src="**\NetReflector.pdb" />
   </files>

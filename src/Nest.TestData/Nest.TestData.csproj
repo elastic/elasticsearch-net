@@ -66,9 +66,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ElasticSearch.Client\ElasticSearch.Client.csproj">
+    <ProjectReference Include="..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
-      <Name>ElasticSearch.Client</Name>
+      <Name>Nest</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
