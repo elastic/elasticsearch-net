@@ -35,7 +35,8 @@ namespace Nest
 					new TermConverter(), 
 					new FacetConverter(),
 					new IndexSettingsConverter(),
-					new ShardsSegmentConverter()
+					new ShardsSegmentConverter(),
+					new RawOrQueryDescriptorConverter()
 				}
 				};
 			PropertyNameResolver = new PropertyNameResolver(SerializationSettings);

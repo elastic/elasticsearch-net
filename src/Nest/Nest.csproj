@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\RawOrQueryDescriptor.cs" />
     <Compile Include="ElasticClient-Statics.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
     <Compile Include="Domain\Mapping\TypeMappingParent.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Enums\ClearCacheOptions.cs" />
     <Compile Include="Enums\StatsInfo.cs" />
     <Compile Include="Exception\DslException.cs" />
+    <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Hit\ShardsMetaData.cs" />

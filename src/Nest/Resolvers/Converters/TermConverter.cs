@@ -9,7 +9,7 @@ namespace Nest.Resolvers.Converters
 {
 	public class TermConverter : JsonConverter
 	{
-		public static readonly Type[] _types = new Type[] { typeof(Term), typeof(Wildcard) };
+		public static readonly Type[] _types = new Type[] { typeof(Term), typeof(Wildcard), typeof(Prefix) };
 		public override bool CanConvert(Type objectType)
 		{
 			return _types.Contains(objectType);

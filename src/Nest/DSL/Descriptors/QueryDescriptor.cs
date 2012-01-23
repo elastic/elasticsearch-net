@@ -18,6 +18,9 @@ namespace Nest
 		internal Term TermQuery { get; set; }
 		[JsonProperty(PropertyName = "wildcard")]
 		internal Wildcard WildcardQuery { get; set; }
+		[JsonProperty(PropertyName = "prefix")]
+		internal Prefix PrefixQuery { get; set; }
+
 
 		private void ThrowIfNoSlotEmpty(string tried)
 		{
@@ -82,6 +85,22 @@ namespace Nest
 			if (Boost.HasValue)
 				wildcard.Boost = Boost;
 			this.WildcardQuery = wildcard;
+			return this;
+		}
+		public QueryDescriptor<T> Prefix(Expression<Func<T, object>> fieldDescriptor
+			, string value
+			, double? Boost = null)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			return this.Prefix(field, value, Boost: Boost);
+		}
+		public QueryDescriptor<T> Prefix(string field, string value, double? Boost = null)
+		{
+			this.ThrowIfNoSlotEmpty("wildcard");
+			var prefix = new Prefix() { Field = field, Value = value };
+			if (Boost.HasValue)
+				prefix.Boost = Boost;
+			this.PrefixQuery = prefix;
 			return this;
 		}
 	}

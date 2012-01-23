@@ -38,6 +38,21 @@ namespace Nest.DSL
 		internal IDictionary<string, string> _Sort { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
+		internal RawOrQueryDescriptor<T> _QueryOrRaw
+		{
+			get
+			{
+				if (this._RawQuery == null && this._Query == null)
+					return null;
+				return new RawOrQueryDescriptor<T> 
+				{
+					RawQuery = this._RawQuery,
+					Descriptor = this._Query
+				};
+			}
+		}
+
+		internal string _RawQuery { get; set; }
 		internal QueryDescriptor<T> _Query { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
@@ -133,6 +148,12 @@ namespace Nest.DSL
 		{
 			query.ThrowIfNull("query");
 			this._Query = query(new QueryDescriptor<T>());
+			return this;
+		}
+		public SearchDescriptor<T> Query(string rawQuery)
+		{
+			rawQuery.ThrowIfNull("rawQuery");
+			this._RawQuery = rawQuery;
 			return this;
 		}
 		public SearchDescriptor<T> MatchAll()

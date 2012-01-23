@@ -305,6 +305,49 @@ namespace Nest.Tests.DSL
 			{ wildcard: { name : { value : ""elasticsearch.*"", boost: 1.2 } }}}";
 			Assert.True(this.JsonEquals(json, expected));
 		}
+		[Test]
+		public void TestPrefixQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Prefix(f => f.Name, "elasticsearch.*")
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ prefix: { name : { value : ""elasticsearch.*"" } }}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+		[Test]
+		public void TestPrefixWithBoostQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Prefix(f => f.Name, "el", Boost: 1.2)
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ prefix: { name : { value : ""el"", boost: 1.2 } }}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+
+		[Test]
+		public void TestRawQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(@"{ raw : ""query""}");
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}}";
+			Assert.True(this.JsonEquals(json, expected));
+		}
+
+
+
 		/*
 		[Test]
 		public void TestSuperSimpleQuery()

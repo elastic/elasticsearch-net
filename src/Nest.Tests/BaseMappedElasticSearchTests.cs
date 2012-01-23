@@ -48,6 +48,7 @@ namespace Nest.Tests
 					this._connectedClient = client;
 					return this._connectedClient;
 				}
+				Assert.Fail("Elasticsearch does not seem to be running dufus");
 				return null;
 			}
 		}
