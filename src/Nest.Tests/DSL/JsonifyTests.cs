@@ -389,7 +389,36 @@ namespace Nest.Tests.DSL
       }";
       Assert.True(this.JsonEquals(json, expected));
     }
-
+    [Test]
+    public void TestTermFacetAll()
+    {
+      var s = new SearchDescriptor<ElasticSearchProject>()
+        .From(0)
+        .Size(10)
+        .Query(@"{ raw : ""query""}")
+        .FacetTerm(
+          f => f.Country, 
+          f => f.Size(20)
+             .Order(FacetOrder.reverse_count)
+             .Exclude("term1", "term2")
+             .AllTerms()
+        );
+      var json = ElasticClient.Serialize(s);
+      var expected = @"{ from: 0, size: 10, 
+          facets :  {
+            country :  {
+                terms : {
+                    field : ""country"",
+                    size : 20,
+                    order: ""reverse_count"",
+                    all_terms: true,
+                    exclude: [ ""term1"", ""term2"" ]          
+                } 
+            }
+          }, query : { raw : ""query""}
+      }";
+      Assert.True(this.JsonEquals(json, expected));
+    }
 
 		/*
 		[Test]
