@@ -345,7 +345,50 @@ namespace Nest.Tests.DSL
 			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}}";
 			Assert.True(this.JsonEquals(json, expected));
 		}
-
+    [Test]
+    public void TestRawFilter()
+    {
+      var s = new SearchDescriptor<ElasticSearchProject>()
+        .From(0)
+        .Size(10)
+        .Filter(@"{ raw : ""query""}");
+      var json = ElasticClient.Serialize(s);
+      var expected = @"{ from: 0, size: 10, filter : { raw : ""query""}}";
+      Assert.True(this.JsonEquals(json, expected));
+    }
+    [Test]
+    public void TestRawFilterAndQuery()
+    {
+      var s = new SearchDescriptor<ElasticSearchProject>()
+        .From(0)
+        .Size(10)
+        .Filter(@"{ raw : ""query""}")
+        .Query(@"{ raw : ""query""}");
+      var json = ElasticClient.Serialize(s);
+      var expected = @"{ from: 0, size: 10, query : { raw : ""query""}, filter : { raw : ""query""}}";
+      Assert.True(this.JsonEquals(json, expected));
+    }
+    [Test]
+    public void TestTermFacet()
+    {
+      var s = new SearchDescriptor<ElasticSearchProject>()
+        .From(0)
+        .Size(10)
+        .Query(@"{ raw : ""query""}")
+        .FacetTerm(f=>f.Country, f=> f.Size(20));
+      var json = ElasticClient.Serialize(s);
+      var expected = @"{ from: 0, size: 10, 
+          facets :  {
+            country :  {
+                terms : {
+                    field : ""country"",
+                    size : 20
+                } 
+            }
+          }, query : { raw : ""query""}
+      }";
+      Assert.True(this.JsonEquals(json, expected));
+    }
 
 
 		/*

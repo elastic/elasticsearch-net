@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nest.DSL
 {
-	public class RawOrQueryDescriptor<T> where T : class
+	public class RawOrFilterDescriptor<T> where T : class
 	{
 		public string Raw { get; set; }
 		public QueryDescriptor<T> Descriptor { get; set; }

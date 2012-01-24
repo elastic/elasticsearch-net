@@ -79,7 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\RawOrFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\RawOrQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\TermFacetDescriptor.cs" />
     <Compile Include="ElasticClient-Statics.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
     <Compile Include="Domain\Mapping\TypeMappingParent.cs" />

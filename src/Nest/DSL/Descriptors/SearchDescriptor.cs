@@ -37,6 +37,9 @@ namespace Nest.DSL
 		[JsonProperty(PropertyName = "sort")]
 		internal IDictionary<string, string> _Sort { get; set; }
 
+    [JsonProperty(PropertyName = "facets")]
+    internal IDictionary<string, FacetDescriptorsBucket> _Facets { get; set; }
+
 		[JsonProperty(PropertyName = "query")]
 		internal RawOrQueryDescriptor<T> _QueryOrRaw
 		{
@@ -46,12 +49,28 @@ namespace Nest.DSL
 					return null;
 				return new RawOrQueryDescriptor<T> 
 				{
-					RawQuery = this._RawQuery,
+					Raw = this._RawQuery,
 					Descriptor = this._Query
 				};
 			}
 		}
 
+    [JsonProperty(PropertyName = "filter")]
+    internal RawOrFilterDescriptor<T> _FilterOrRaw
+    {
+      get
+      {
+        if (this._RawFilter == null)
+          return null;
+        return new RawOrFilterDescriptor<T>
+        {
+          Raw = this._RawFilter,
+        };
+      }
+    }
+
+    internal string _RawFilter { get; set; }
+		
 		internal string _RawQuery { get; set; }
 		internal QueryDescriptor<T> _Query { get; set; }
 
@@ -141,9 +160,30 @@ namespace Nest.DSL
 		{
 			if (this._Sort == null)
 				this._Sort = new Dictionary<string, string>();
-			this._Sort.Add(ElasticClient.PropertyNameResolver.ResolveToSort(objectPath), "desc");
+
+      var key = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+			this._Sort.Add(key, "desc");
 			return this;
 		}
+    public SearchDescriptor<T> FacetTerm(Expression<Func<T, object>> objectPath, Func<TermFacetDescriptor, TermFacetDescriptor> facet, string Name = null)
+    {
+      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      return this.FacetTerm(fieldName, facet, Name);
+    }
+    public SearchDescriptor<T> FacetTerm(string fieldName, Func<TermFacetDescriptor, TermFacetDescriptor> facet, string Name = null)
+    {
+      if (this._Facets == null)
+        this._Facets = new Dictionary<string, FacetDescriptorsBucket>();
+
+      
+      var descriptor = new TermFacetDescriptor { _Field = fieldName };
+      var f = facet(descriptor);
+      var key = string.IsNullOrWhiteSpace(Name) ? fieldName : Name;
+      this._Facets.Add(key, new FacetDescriptorsBucket { Terms = f });
+
+      return this;
+    }
+
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryDescriptor<T>> query)
 		{
 			query.ThrowIfNull("query");
@@ -156,6 +196,15 @@ namespace Nest.DSL
 			this._RawQuery = rawQuery;
 			return this;
 		}
+
+    public SearchDescriptor<T> Filter(string rawFilter)
+    {
+      rawFilter.ThrowIfNull("rawFilter");
+			this._RawFilter = rawFilter;
+      return this;
+    }
+
+
 		public SearchDescriptor<T> MatchAll()
 		{
 			this._Query = new QueryDescriptor<T>()

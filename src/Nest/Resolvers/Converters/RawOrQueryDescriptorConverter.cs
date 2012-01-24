@@ -11,7 +11,7 @@ namespace Nest.Resolvers.Converters
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var type = value.GetType();
-            var rawProperty = type.GetProperty("RawQuery");
+            var rawProperty = type.GetProperty("Raw");
             var descriptorProperty = type.GetProperty("Descriptor");
             
             var raw = rawProperty.GetValue(value, null) as string;
@@ -19,7 +19,7 @@ namespace Nest.Resolvers.Converters
 
             if (!string.IsNullOrEmpty(raw))
             {
-                writer.WriteRaw(raw);
+              writer.WriteRawValue(raw);
             }
             else
             {
@@ -35,8 +35,10 @@ namespace Nest.Resolvers.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            return objectType.IsGenericType 
-                && objectType.GetGenericTypeDefinition() == typeof (RawOrQueryDescriptor<>);
+          return objectType.IsGenericType
+              &&
+              (objectType.GetGenericTypeDefinition() == typeof(RawOrQueryDescriptor<>)
+              || objectType.GetGenericTypeDefinition() == typeof(RawOrFilterDescriptor<>));
         }
     }
 }
