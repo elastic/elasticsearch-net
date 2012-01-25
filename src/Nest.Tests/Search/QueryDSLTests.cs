@@ -133,7 +133,7 @@ namespace Nest.Tests
         .SortAscending(f => f.LOC)
         .SortDescending(f => f.Name)
         .MatchAll()
-        .FacetTerm(f => f.Country, f => f.Size(20))
+        .FacetTerm(t => t.OnField(f=>f.Country).Size(20))
       );
       Assert.Greater(results.Facet<TermFacet>(f => f.Country).Items.Count(), 0);
       Assert.Greater(results.FacetItems<TermItem>(f=>f.Country).Count(), 0);

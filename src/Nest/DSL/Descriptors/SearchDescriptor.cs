@@ -38,7 +38,7 @@ namespace Nest.DSL
 		internal IDictionary<string, string> _Sort { get; set; }
 
     [JsonProperty(PropertyName = "facets")]
-    internal IDictionary<string, FacetDescriptorsBucket> _Facets { get; set; }
+    internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		internal RawOrQueryDescriptor<T> _QueryOrRaw
@@ -165,21 +165,23 @@ namespace Nest.DSL
 			this._Sort.Add(key, "desc");
 			return this;
 		}
-    public SearchDescriptor<T> FacetTerm(Expression<Func<T, object>> objectPath, Func<TermFacetDescriptor, TermFacetDescriptor> facet, string Name = null)
+    public SearchDescriptor<T> FacetTerm(string name, Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet)
     {
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
-      return this.FacetTerm(fieldName, facet, Name);
+      return this.FacetTerm(facet, Name: name);
     }
-    public SearchDescriptor<T> FacetTerm(string fieldName, Func<TermFacetDescriptor, TermFacetDescriptor> facet, string Name = null)
+
+    public SearchDescriptor<T> FacetTerm(Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet, string Name = null)
     {
       if (this._Facets == null)
-        this._Facets = new Dictionary<string, FacetDescriptorsBucket>();
+        this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
 
       
-      var descriptor = new TermFacetDescriptor { _Field = fieldName };
+      var descriptor = new TermFacetDescriptor<T>();
       var f = facet(descriptor);
-      var key = string.IsNullOrWhiteSpace(Name) ? fieldName : Name;
-      this._Facets.Add(key, new FacetDescriptorsBucket { Terms = f });
+      var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
+      if (string.IsNullOrWhiteSpace(key))
+        throw new DslException("Could not figure out term facet name, when using multifield you have to specify a name!");
+      this._Facets.Add(key, new FacetDescriptorsBucket<T> { Terms = f });
 
       return this;
     }
