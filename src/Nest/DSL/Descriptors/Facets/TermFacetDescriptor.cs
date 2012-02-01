@@ -8,36 +8,6 @@ using System.Linq.Expressions;
 
 namespace Nest.DSL
 {
-  public interface IFacetDescriptor
-  {
-
-  }
-  public enum FacetOrder
-  {
-    count = 0,
-    term,
-    reverse_count,
-    reverse_term
-  }
-  public enum RegexFlags
-  {
-    CANNON_EQ,
-    CASE_INSENSITIVE,
-    COMMENTS,
-    DOTALL,
-    LITERAL,
-    MULTILINE,
-    UNICODE_CASE,
-    UNIX_LINES
-  }
-
-  [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class FacetDescriptorsBucket<T> where T : class
-  {
-    [JsonProperty(PropertyName = "terms")]
-    public TermFacetDescriptor<T> Terms { get; set; }
-  }
-
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
   public class TermFacetDescriptor<T> : IFacetDescriptor where T : class
   {

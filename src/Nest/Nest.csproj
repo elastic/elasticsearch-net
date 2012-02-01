@@ -79,6 +79,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Facets\FacetDescriptorBucket.cs" />
+    <Compile Include="DSL\Descriptors\Facets\FacetOrder.cs" />
+    <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\RegexFlags.cs" />
     <Compile Include="DSL\Descriptors\RawOrFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermFacetDescriptor.cs" />

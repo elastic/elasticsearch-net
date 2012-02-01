@@ -429,6 +429,8 @@ namespace Nest.Tests.DSL
     [Test]
     public void TestTermFacetAllMultiFields()
     {
+      //when using multifields we cant determine a facet name 
+      //automatically
       Assert.Throws<DslException>(() =>
       {
         new SearchDescriptor<ElasticSearchProject>()
