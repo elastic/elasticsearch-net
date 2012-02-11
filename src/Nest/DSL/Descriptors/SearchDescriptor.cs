@@ -248,7 +248,18 @@ namespace Nest.DSL
 
 			return this;
 		}
+		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>,QueryDescriptor<T>> querySelector)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			querySelector.ThrowIfNull("query");
+			if (this._Facets == null)
+				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
 
+			var query = querySelector(new QueryDescriptor<T>());
+			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Query = query });
+
+			return this;
+		}
 
 
 
