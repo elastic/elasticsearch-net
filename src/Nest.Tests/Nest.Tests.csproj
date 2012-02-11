@@ -59,6 +59,7 @@
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="BaseMappedElasticSearchTests.cs" />
     <Compile Include="Dsl\JsonifyTests.cs" />
+    <Compile Include="Dsl\Json\Facets\HistogramFacetJson.cs" />
     <Compile Include="Dsl\Json\Facets\RangeFacetJson.cs" />
     <Compile Include="Dsl\Json\Facets\TermsFacetJson.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />

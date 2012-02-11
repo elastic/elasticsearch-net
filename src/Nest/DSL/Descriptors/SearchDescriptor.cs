@@ -165,7 +165,8 @@ namespace Nest.DSL
 			this._Sort.Add(key, "desc");
 			return this;
 		}
-    public SearchDescriptor<T> FacetTerm(string name, Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet)
+	
+		public SearchDescriptor<T> FacetTerm(string name, Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet)
     {
       return this.FacetTerm(facet, Name: name);
     }
@@ -205,6 +206,30 @@ namespace Nest.DSL
 
 			return this;
 		}
+
+		public SearchDescriptor<T> FacetHistogram(string name, Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet)
+		{
+			return this.FacetHistogram(facet, Name: name);
+		}
+
+		public SearchDescriptor<T> FacetHistogram(Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet, string Name = null)
+		{
+			if (this._Facets == null)
+				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+
+
+			var descriptor = new HistogramFacetDescriptor<T>();
+			var f = facet(descriptor);
+			var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
+			if (string.IsNullOrWhiteSpace(key))
+				throw new DslException("Could not figure out what name to give to the range histogram facet");
+			this._Facets.Add(key, new FacetDescriptorsBucket<T> { Histogram = f });
+
+			return this;
+		}
+
+
+
 
 
 

@@ -32,6 +32,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       }";
       Assert.True(json.JsonEquals(expected));
     }
+
     [Test]
     public void TestTermFacetAll()
     {

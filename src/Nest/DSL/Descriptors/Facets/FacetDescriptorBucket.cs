@@ -16,5 +16,8 @@ namespace Nest.DSL
 
     [JsonProperty(PropertyName = "range")]
     public IFacetDescriptor Range { get; set; }
+
+    [JsonProperty(PropertyName = "histogram")]
+    public HistogramFacetDescriptor<T> Histogram { get; set; }
   }
 }

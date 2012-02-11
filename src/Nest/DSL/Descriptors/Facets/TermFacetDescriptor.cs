@@ -16,7 +16,7 @@ namespace Nest.DSL
     [JsonProperty(PropertyName = "fields")]
     internal IEnumerable<string> _Fields { get; set; }
     [JsonProperty(PropertyName = "size")]
-    internal int _Size { get; set; }
+    internal int? _Size { get; set; }
     [JsonConverter(typeof(StringEnumConverter))]
     [JsonProperty(PropertyName = "order")]
     internal FacetOrder? _FacetOrder { get; set; }
