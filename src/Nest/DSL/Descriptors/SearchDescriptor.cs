@@ -186,6 +186,28 @@ namespace Nest.DSL
       return this;
     }
 
+		public SearchDescriptor<T> FacetRange<K>(string name, Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet) where K : struct
+		{
+			return this.FacetRange<K>(facet, Name: name);
+		}
+
+		public SearchDescriptor<T> FacetRange<K>(Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet, string Name = null) where K : struct
+		{
+			if (this._Facets == null)
+				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+
+			var descriptor = new RangeFacetDescriptor<T, K>();
+			var f = facet(descriptor);
+			var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
+			if (string.IsNullOrWhiteSpace(key))
+				throw new DslException("Could not figure out what name to give to the range facet");
+			this._Facets.Add(key, new FacetDescriptorsBucket<T> { Range = f });
+
+			return this;
+		}
+
+
+
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryDescriptor<T>> query)
 		{
 			query.ThrowIfNull("query");

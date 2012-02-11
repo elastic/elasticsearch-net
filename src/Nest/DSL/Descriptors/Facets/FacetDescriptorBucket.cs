@@ -13,5 +13,8 @@ namespace Nest.DSL
   {
     [JsonProperty(PropertyName = "terms")]
     public TermFacetDescriptor<T> Terms { get; set; }
+
+    [JsonProperty(PropertyName = "range")]
+    public IFacetDescriptor Range { get; set; }
   }
 }

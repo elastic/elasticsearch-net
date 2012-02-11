@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Facets\RangeDoubleFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\Range.cs" />
+    <Compile Include="DSL\Descriptors\Facets\RangeFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\FacetDescriptorBucket.cs" />
     <Compile Include="DSL\Descriptors\Facets\FacetOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
