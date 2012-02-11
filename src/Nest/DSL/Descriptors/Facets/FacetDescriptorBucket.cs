@@ -19,5 +19,8 @@ namespace Nest.DSL
 
     [JsonProperty(PropertyName = "histogram")]
     public HistogramFacetDescriptor<T> Histogram { get; set; }
+
+    [JsonProperty(PropertyName = "date_histogram")]
+    public DateHistogramFacetDescriptor<T> DateHistogram { get; set; }
   }
 }

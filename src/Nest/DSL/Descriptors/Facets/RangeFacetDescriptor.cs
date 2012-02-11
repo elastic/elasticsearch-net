@@ -9,7 +9,9 @@ using System.Linq.Expressions;
 namespace Nest.DSL
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class RangeFacetDescriptor<T,K> : IFacetDescriptor where T : class where K : struct
+  public class RangeFacetDescriptor<T, K> : IFacetDescriptor
+    where T : class
+    where K : struct
   {
     [JsonProperty(PropertyName = "field")]
     internal string _Field { get; set; }
@@ -76,6 +78,6 @@ namespace Nest.DSL
       return this;
     }
 
-    
+
   }
 }

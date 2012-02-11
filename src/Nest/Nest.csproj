@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Facets\DateRounding.cs" />
+    <Compile Include="DSL\Descriptors\Facets\DateHistogramFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\DateInterval.cs" />
     <Compile Include="DSL\Descriptors\Facets\HistogramFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\Range.cs" />
     <Compile Include="DSL\Descriptors\Facets\RangeFacetDescriptor.cs" />
