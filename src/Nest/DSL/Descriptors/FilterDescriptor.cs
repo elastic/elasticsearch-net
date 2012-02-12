@@ -33,6 +33,12 @@ namespace Nest
 		[JsonProperty(PropertyName = "numeric_range")]
 		internal Dictionary<string, object> NumericRangeFilter { get; set; }
 
+		[JsonProperty(PropertyName = "prefix")]
+		internal Dictionary<string, object> PrefixFilter { get; set; }
+
+		[JsonProperty(PropertyName = "fquery")]
+		internal Dictionary<string, object> QueryFilter { get; set; }
+
 		public FilterDescriptor()
 		{
 			
@@ -100,7 +106,31 @@ namespace Nest
 			this.NumericRangeFilter = new Dictionary<string, object>();
 			this.NumericRangeFilter.Add(filter._Field, filter);
 			if (filter._Cache.HasValue)
-				this.NumericRangeFilter.Add("_cache", true);
+				this.NumericRangeFilter.Add("_cache", filter._Cache);
+			return this;
+		}
+		public FilterDescriptor<T> Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix, bool? Cache = null)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			return this.Prefix(field, prefix, Cache);
+		}
+		public FilterDescriptor<T> Prefix(string field, string prefix, bool? Cache = null)
+		{
+			this.PrefixFilter = new Dictionary<string, object>();
+			this.PrefixFilter.Add(field, prefix);
+			if (Cache.HasValue)
+				this.PrefixFilter.Add("_cache", Cache);
+			return this;
+		}
+		public FilterDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector, bool? Cache = null)
+		{
+			var descriptor = new QueryDescriptor<T>();
+			querySelector(descriptor);
+
+			this.QueryFilter = new Dictionary<string, object>();
+			this.QueryFilter.Add("query", descriptor);
+			if (Cache.HasValue)
+				this.QueryFilter.Add("_cache", Cache);
 			return this;
 		}
 
