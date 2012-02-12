@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Nest.DSL
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class TermFacetDescriptor<T> : IFacetDescriptor where T : class
+  public class TermFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
   {
     [JsonProperty(PropertyName = "field")]
     internal string _Field { get; set; }
@@ -99,5 +99,22 @@ namespace Nest.DSL
       this._ScriptField = scriptField;
       return this;
     }
+
+
+    public new TermFacetDescriptor<T> Global()
+    {
+      this._IsGlobal = true;
+      return this;
+    }
+    public TermFacetDescriptor<T> FacetFilter(
+      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+    )
+    {
+      var filter = facetFilter(new FilterDescriptor<T>());
+      this._FacetFilter = filter;
+      return this;
+    }
+
+
   }
 }

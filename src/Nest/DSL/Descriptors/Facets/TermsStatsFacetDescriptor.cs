@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Nest.DSL
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class TermsStatsFacetDescriptor<T> : IFacetDescriptor where T : class
+  public class TermsStatsFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
   {
     [JsonProperty(PropertyName = "fields")]
     internal IEnumerable<string> _Fields { get; set; }
@@ -88,6 +88,22 @@ namespace Nest.DSL
     {
       paramDictionary.ThrowIfNull("paramDictionary");
       this._Params = paramDictionary(new FluentDictionary<string,object>());
+      return this;
+    }
+
+
+
+    public new TermsStatsFacetDescriptor<T> Global()
+    {
+      this._IsGlobal = true;
+      return this;
+    }
+    public TermsStatsFacetDescriptor<T> FacetFilter(
+      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+    )
+    {
+      var filter = facetFilter(new FilterDescriptor<T>());
+      this._FacetFilter = filter;
       return this;
     }
   }

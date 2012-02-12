@@ -11,6 +11,9 @@ namespace Nest.DSL
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
   public class FacetDescriptorsBucket<T> where T : class
   {
+    [JsonProperty(PropertyName = "global")]
+    public bool? Global { get; set; }
+
     [JsonProperty(PropertyName = "terms")]
     public TermFacetDescriptor<T> Terms { get; set; }
 
@@ -37,5 +40,8 @@ namespace Nest.DSL
 
     [JsonProperty(PropertyName = "geo_distance")]
     public GeoDistanceFacetDescriptor<T> GeoDistance { get; set; }
+
+    [JsonProperty(PropertyName = "facet_filter")]
+    public FilterDescriptor<T> FacetFilter { get; set; }
   }
 }

@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\GeoDistance.cs" />
     <Compile Include="DSL\Descriptors\Facets\GeoUnit.cs" />

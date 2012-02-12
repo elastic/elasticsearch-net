@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Nest.DSL
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class GeoDistanceFacetDescriptor<T> : IFacetDescriptor where T : class
+  public class GeoDistanceFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
   {
     [JsonProperty(PropertyName = "pin.location")]
     internal string _PinLocation { get; set; }
@@ -94,5 +94,20 @@ namespace Nest.DSL
       this._Params = paramDictionary(new FluentDictionary<string, object>());
       return this;
     }
+
+    public new GeoDistanceFacetDescriptor<T> Global()
+    {
+      this._IsGlobal = true;
+      return this;
+    }
+    public GeoDistanceFacetDescriptor<T> FacetFilter(
+      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+    )
+    {
+      var filter = facetFilter(new FilterDescriptor<T>());
+      this._FacetFilter = filter;
+      return this;
+    }
+
   }
 }

@@ -17,7 +17,7 @@ namespace Nest.DSL
 		{
 		}
 
-		[JsonProperty(PropertyName="from")]
+		[JsonProperty(PropertyName = "from")]
 		internal int? _From { get; set; }
 		[JsonProperty(PropertyName = "size")]
 		internal int? _Size { get; set; }
@@ -33,7 +33,7 @@ namespace Nest.DSL
 
 		[JsonProperty(PropertyName = "indices_boost")]
 		internal IDictionary<string, double> _IndicesBoost { get; set; }
-		
+
 		[JsonProperty(PropertyName = "sort")]
 		internal IDictionary<string, string> _Sort { get; set; }
 
@@ -47,7 +47,7 @@ namespace Nest.DSL
 			{
 				if (this._RawQuery == null && this._Query == null)
 					return null;
-				return new RawOrQueryDescriptor<T> 
+				return new RawOrQueryDescriptor<T>
 				{
 					Raw = this._RawQuery,
 					Descriptor = this._Query
@@ -70,7 +70,7 @@ namespace Nest.DSL
 		}
 
 		internal string _RawFilter { get; set; }
-		
+
 		internal string _RawQuery { get; set; }
 		internal QueryDescriptor<T> _Query { get; set; }
 
@@ -135,7 +135,7 @@ namespace Nest.DSL
 		}
 
 		public SearchDescriptor<T> IndicesBoost(
-			Func<FluentDictionary<string, double>,FluentDictionary<string, double>> boost)
+			Func<FluentDictionary<string, double>, FluentDictionary<string, double>> boost)
 		{
 			boost.ThrowIfNull("boost");
 			this._IndicesBoost = boost(new FluentDictionary<string, double>());
@@ -165,7 +165,39 @@ namespace Nest.DSL
 			this._Sort.Add(key, "desc");
 			return this;
 		}
-	
+
+
+		private SearchDescriptor<T> _Facet<F>(
+			string name,
+			Func<F, F> facet,
+			Func<F, string> inferedFieldNameSelector,
+			Action<FacetDescriptorsBucket<T>, F> fillBucket
+			)
+			where F : BaseFacetDescriptor<T>, new()
+		{
+			if (this._Facets == null)
+				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+
+			var descriptor = new F();
+			var f = facet(descriptor);
+			var key = string.IsNullOrWhiteSpace(name) ? inferedFieldNameSelector(descriptor) : name;
+			if (string.IsNullOrWhiteSpace(key))
+				throw new DslException("Could not figure out term facet name, when using multifield you have to specify a name!");
+
+			var bucket = new FacetDescriptorsBucket<T>
+			{
+				Global = f._IsGlobal,
+				FacetFilter = f._FacetFilter
+				//Terms = f 
+			};
+			fillBucket(bucket, descriptor);
+			this._Facets.Add(key, bucket);
+
+			return this;
+		}
+
+
+
 		public SearchDescriptor<T> FacetTerm(string name, Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet)
 		{
 			return this.FacetTerm(facet, Name: name);
@@ -173,18 +205,12 @@ namespace Nest.DSL
 
 		public SearchDescriptor<T> FacetTerm(Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet, string Name = null)
 		{
-			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
-
-			
-			var descriptor = new TermFacetDescriptor<T>();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
-			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not figure out term facet name, when using multifield you have to specify a name!");
-			this._Facets.Add(key, new FacetDescriptorsBucket<T> { Terms = f });
-
-			return this;
+			return this._Facet<TermFacetDescriptor<T>>(
+				Name,
+				facet,
+				(d) => d._Field,
+				(b, d) => b.Terms = d
+			);
 		}
 
 		public SearchDescriptor<T> FacetRange<K>(string name, Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet) where K : struct
@@ -194,17 +220,12 @@ namespace Nest.DSL
 
 		public SearchDescriptor<T> FacetRange<K>(Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet, string Name = null) where K : struct
 		{
-			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
-
-			var descriptor = new RangeFacetDescriptor<T, K>();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
-			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not infer name for range facet");
-			this._Facets.Add(key, new FacetDescriptorsBucket<T> { Range = f });
-
-			return this;
+			return this._Facet<RangeFacetDescriptor<T, K>>(
+				Name,
+				facet,
+				(d) => d._Field,
+				(b, d) => b.Range = d
+			);
 		}
 
 		public SearchDescriptor<T> FacetHistogram(string name, Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet)
@@ -214,18 +235,12 @@ namespace Nest.DSL
 
 		public SearchDescriptor<T> FacetHistogram(Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet, string Name = null)
 		{
-			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
-
-
-			var descriptor = new HistogramFacetDescriptor<T>();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
-			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not infer name for histogram facet");
-			this._Facets.Add(key, new FacetDescriptorsBucket<T> { Histogram = f });
-
-			return this;
+			return this._Facet<HistogramFacetDescriptor<T>>(
+				Name,
+				facet,
+				(d) => d._Field,
+				(b, d) => b.Histogram = d
+			);
 		}
 
 		public SearchDescriptor<T> FacetDateHistogram(string name, Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet)
@@ -235,18 +250,12 @@ namespace Nest.DSL
 
 		public SearchDescriptor<T> FacetDateHistogram(Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet, string Name = null)
 		{
-			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
-
-
-			var descriptor = new DateHistogramFacetDescriptor<T>();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
-			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not infer name for date histogram facet");
-			this._Facets.Add(key, new FacetDescriptorsBucket<T> { DateHistogram = f });
-
-			return this;
+			return this._Facet<DateHistogramFacetDescriptor<T>>(
+				Name,
+				facet,
+				(d) => d._Field,
+				(b, d) => b.DateHistogram = d
+			);
 		}
 
 		public SearchDescriptor<T> FacetStatistical(string name, Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet)
@@ -256,17 +265,12 @@ namespace Nest.DSL
 
 		public SearchDescriptor<T> FacetStatistical(Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet, string Name = null)
 		{
-			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
-
-			var descriptor = new StatisticalFacetDescriptor<T>();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(Name) ? f._Field : Name;
-			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not infer name for statistical facet");
-			this._Facets.Add(key, new FacetDescriptorsBucket<T> { Statistical = f });
-
-			return this;
+			return this._Facet<StatisticalFacetDescriptor<T>>(
+				Name,
+				facet,
+				(d) => d._Field,
+				(b, d) => b.Statistical = d
+			);
 		}
 
 		public SearchDescriptor<T> FacetTermsStats(string name, Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet)
@@ -276,17 +280,12 @@ namespace Nest.DSL
 
 		public SearchDescriptor<T> FacetTermsStats(Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet, string Name = null)
 		{
-			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
-
-			var descriptor = new TermsStatsFacetDescriptor<T>();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(Name) ? f._KeyField : Name;
-			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not infer name for terms_stats facet");
-			this._Facets.Add(key, new FacetDescriptorsBucket<T> { TermsStats = f });
-
-			return this;
+			return this._Facet<TermsStatsFacetDescriptor<T>>(
+				Name,
+				facet,
+				(d) => d._KeyField,
+				(b, d) => b.TermsStats = d
+			);
 		}
 		public SearchDescriptor<T> FacetGeoDistance(string name, Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet)
 		{
@@ -294,23 +293,17 @@ namespace Nest.DSL
 		}
 
 		public SearchDescriptor<T> FacetGeoDistance(Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet, string Name = null)
-		{	
-			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
-
-			var descriptor = new GeoDistanceFacetDescriptor<T>();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(Name) ? f._ValueField : Name;
-			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not infer name for terms_stats facet");
-
-			this._Facets.Add(key, new FacetDescriptorsBucket<T> { GeoDistance = f });
-
-			return this;
+		{
+			return this._Facet<GeoDistanceFacetDescriptor<T>>(
+					Name,
+					facet,
+					(d) => d._ValueField,
+					(b, d) => b.GeoDistance = d
+				);
 		}
 
 
-		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>,QueryDescriptor<T>> querySelector)
+		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, QueryDescriptor<T>> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
@@ -365,9 +358,9 @@ namespace Nest.DSL
 		}
 	}
 
-	public class FluentDictionary<K,V> : Dictionary<K,V>
+	public class FluentDictionary<K, V> : Dictionary<K, V>
 	{
-		public new FluentDictionary<K,V> Add(K k, V v)
+		public new FluentDictionary<K, V> Add(K k, V v)
 		{
 			base.Add(k, v);
 			return this;

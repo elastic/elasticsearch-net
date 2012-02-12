@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Nest.DSL
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class RangeFacetDescriptor<T, K> : IFacetDescriptor
+  public class RangeFacetDescriptor<T, K> : BaseFacetDescriptor<T> 
     where T : class
     where K : struct
   {
@@ -87,6 +87,20 @@ namespace Nest.DSL
         newRanges.Add(range(r));
       }
       this._Ranges = newRanges;
+      return this;
+    }
+
+    public new RangeFacetDescriptor<T, K> Global()
+    {
+      this._IsGlobal = true;
+      return this;
+    }
+    public RangeFacetDescriptor<T, K> FacetFilter(
+      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+    )
+    {
+      var filter = facetFilter(new FilterDescriptor<T>());
+      this._FacetFilter = filter;
       return this;
     }
 
