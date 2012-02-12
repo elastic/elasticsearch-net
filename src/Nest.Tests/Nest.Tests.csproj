@@ -69,6 +69,8 @@
     <Compile Include="Dsl\Json\Facets\HistogramFacetJson.cs" />
     <Compile Include="Dsl\Json\Facets\RangeFacetJson.cs" />
     <Compile Include="Dsl\Json\Facets\TermsFacetJson.cs" />
+    <Compile Include="Dsl\Json\Filter\ScriptFilterJson.cs" />
+    <Compile Include="Dsl\Json\Filter\RangeFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\QueryFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\PrefixFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\NumericRangeFilterJson.cs" />

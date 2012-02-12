@@ -97,6 +97,7 @@
     <Compile Include="DSL\Descriptors\Facets\TermsOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\RegexFlags.cs" />
+    <Compile Include="DSL\Descriptors\Filter\ScriptFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\NumericRangeFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\MissingFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\MatchAllFilter.cs" />

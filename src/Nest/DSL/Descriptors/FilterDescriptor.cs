@@ -39,8 +39,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "prefix")]
 		internal Dictionary<string, object> PrefixFilter { get; set; }
 
+		[JsonProperty(PropertyName = "term")]
+		internal Dictionary<string, object> TermFilter { get; set; }
+
 		[JsonProperty(PropertyName = "fquery")]
 		internal Dictionary<string, object> QueryFilter { get; set; }
+
+		[JsonProperty(PropertyName = "script")]
+		internal ScriptFilterDescriptor ScriptFilter { get; set; }
 
 		public FilterDescriptor()
 		{
@@ -122,6 +128,13 @@ namespace Nest
 				this.RangeFilter.Add("_cache", filter._Cache);
 			return this;
 		}
+		public FilterDescriptor<T> Script(Func<ScriptFilterDescriptor, ScriptFilterDescriptor> scriptSelector)
+		{
+			var descriptor = new ScriptFilterDescriptor();
+			var script = scriptSelector(descriptor);
+			this.ScriptFilter = script;
+			return this;
+		}
 		public FilterDescriptor<T> Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix, bool? Cache = null)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
@@ -135,6 +148,20 @@ namespace Nest
 				this.PrefixFilter.Add("_cache", Cache);
 			return this;
 		}
+		public FilterDescriptor<T> Term(Expression<Func<T, object>> fieldDescriptor, string prefix, bool? Cache = null)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			return this.Term(field, prefix, Cache);
+		}
+		public FilterDescriptor<T> Term(string field, string prefix, bool? Cache = null)
+		{
+			this.TermFilter = new Dictionary<string, object>();
+			this.TermFilter.Add(field, prefix);
+			if (Cache.HasValue)
+				this.TermFilter.Add("_cache", Cache);
+			return this;
+		}
+
 		public FilterDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector, bool? Cache = null)
 		{
 			var descriptor = new QueryDescriptor<T>();
