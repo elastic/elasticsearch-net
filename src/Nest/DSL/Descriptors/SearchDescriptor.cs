@@ -60,19 +60,22 @@ namespace Nest.DSL
 		{
 			get
 			{
-				if (this._RawFilter == null)
+				if (this._RawFilter == null && this._Filter == null)
 					return null;
 				return new RawOrFilterDescriptor<T>
 				{
 					Raw = this._RawFilter,
+					Descriptor = this._Filter
 				};
 			}
 		}
 
-		internal string _RawFilter { get; set; }
-
+	
 		internal string _RawQuery { get; set; }
 		internal QueryDescriptor<T> _Query { get; set; }
+
+		internal string _RawFilter { get; set; }
+		internal FilterDescriptor<T> _Filter { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<string> _Fields { get; set; }
@@ -350,7 +353,12 @@ namespace Nest.DSL
 			this._RawQuery = rawQuery;
 			return this;
 		}
-
+		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterDescriptor<T>> filter)
+		{
+			filter.ThrowIfNull("filter");
+			this._Filter = filter(new FilterDescriptor<T>());
+			return this;
+		}
 		public SearchDescriptor<T> Filter(string rawFilter)
 		{
 			rawFilter.ThrowIfNull("rawFilter");
