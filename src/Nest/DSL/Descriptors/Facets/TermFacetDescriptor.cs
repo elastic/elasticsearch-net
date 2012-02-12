@@ -114,7 +114,16 @@ namespace Nest.DSL
       this._FacetFilter = filter;
       return this;
     }
-
+    public new TermFacetDescriptor<T> Nested(string nested)
+    {
+      this._Nested = nested;
+      return this;
+    }
+    public new TermFacetDescriptor<T> Scope(string scope)
+    {
+      this._Scope = scope;
+      return this;
+    }
 
   }
 }

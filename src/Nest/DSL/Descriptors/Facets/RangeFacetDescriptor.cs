@@ -103,7 +103,16 @@ namespace Nest.DSL
       this._FacetFilter = filter;
       return this;
     }
-
+    public new RangeFacetDescriptor<T, K> Nested(string nested)
+    {
+      this._Nested = nested;
+      return this;
+    }
+    public new RangeFacetDescriptor<T, K> Scope(string scope)
+    {
+      this._Scope = scope;
+      return this;
+    }
 
   }
 }

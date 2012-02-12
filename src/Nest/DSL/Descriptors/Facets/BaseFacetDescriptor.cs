@@ -23,5 +23,16 @@ namespace Nest.DSL
     {
       throw new NotImplementedException("Cannot call Base directly");
     }
+
+    internal string _Scope { get; set;}
+    public BaseFacetDescriptor<T> Scope(string scope)
+    {
+      throw new NotImplementedException("Cannot call Base directly");
+    }
+    internal string _Nested { get; set; }
+    public BaseFacetDescriptor<T> Nested(string nested)
+    {
+      throw new NotImplementedException("Cannot call Base directly");
+    }
   }
 }

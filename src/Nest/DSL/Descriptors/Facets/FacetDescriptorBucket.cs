@@ -14,6 +14,12 @@ namespace Nest.DSL
     [JsonProperty(PropertyName = "global")]
     public bool? Global { get; set; }
 
+    [JsonProperty(PropertyName = "scope")]
+    public string Scope { get; set; }
+
+    [JsonProperty(PropertyName = "nested")]
+    public string Nested { get; set; }
+
     [JsonProperty(PropertyName = "terms")]
     public TermFacetDescriptor<T> Terms { get; set; }
 

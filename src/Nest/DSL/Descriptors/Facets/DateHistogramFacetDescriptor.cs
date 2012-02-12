@@ -155,5 +155,15 @@ namespace Nest.DSL
       return this;
     }
 
+    public new DateHistogramFacetDescriptor<T> Nested(string nested)
+    {
+      this._Nested = nested;
+      return this;
+    }
+    public new DateHistogramFacetDescriptor<T> Scope(string scope)
+    {
+      this._Scope = scope;
+      return this;
+    }
   }
 }

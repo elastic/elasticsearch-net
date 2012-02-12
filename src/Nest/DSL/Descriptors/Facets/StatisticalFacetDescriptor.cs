@@ -78,5 +78,15 @@ namespace Nest.DSL
       this._FacetFilter = filter;
       return this;
     }
+    public new StatisticalFacetDescriptor<T> Nested(string nested)
+    {
+      this._Nested = nested;
+      return this;
+    }
+    public new StatisticalFacetDescriptor<T> Scope(string scope)
+    {
+      this._Scope = scope;
+      return this;
+    }
   }
 }

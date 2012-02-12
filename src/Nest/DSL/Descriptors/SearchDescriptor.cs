@@ -175,6 +175,10 @@ namespace Nest.DSL
 			)
 			where F : BaseFacetDescriptor<T>, new()
 		{
+			facet.ThrowIfNull("facet");
+			inferedFieldNameSelector.ThrowIfNull("inferedFieldNameSelector");
+			fillBucket.ThrowIfNull("fillBucket");
+
 			if (this._Facets == null)
 				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
 
@@ -182,13 +186,18 @@ namespace Nest.DSL
 			var f = facet(descriptor);
 			var key = string.IsNullOrWhiteSpace(name) ? inferedFieldNameSelector(descriptor) : name;
 			if (string.IsNullOrWhiteSpace(key))
-				throw new DslException("Could not figure out term facet name, when using multifield you have to specify a name!");
+			{ 
+				throw new DslException(
+					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
+				);
+			}
 
 			var bucket = new FacetDescriptorsBucket<T>
 			{
 				Global = f._IsGlobal,
-				FacetFilter = f._FacetFilter
-				//Terms = f 
+				FacetFilter = f._FacetFilter,
+				Nested = f._Nested,
+				Scope = f._Scope
 			};
 			fillBucket(bucket, descriptor);
 			this._Facets.Add(key, bucket);

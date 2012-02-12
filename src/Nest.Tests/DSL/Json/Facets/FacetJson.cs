@@ -41,6 +41,65 @@ namespace Nest.Tests.Dsl.Json.Facets
       }";
       Assert.True(json.JsonEquals(expected), json);
     }
-   
+    [Test]
+    public void QueryFacetScoped()
+    {
+      var s = new SearchDescriptor<ElasticSearchProject>()
+        .From(0)
+        .Size(10)
+        .Query(@"{ raw : ""query""}")
+        .FacetTerm(q=>q
+          .Scope("some_nested_query")
+          .OnField(f=>f.Name)
+          .FacetFilter(ff=>ff.Exists(f=>f.Name))
+        );
+
+      var json = ElasticClient.Serialize(s);
+      var expected = @"{ from: 0, size: 10, 
+          facets :  {
+            ""name.sort"" :  
+            {
+              scope: ""some_nested_query"",
+              terms: {
+                field: ""name.sort""
+              },
+              facet_filter: {
+                exists: { field: ""name"" }
+              }
+            }
+          }, query : { raw : ""query""}
+      }";
+      Assert.True(json.JsonEquals(expected), json);
+    }
+    [Test]
+    public void QueryFacetNested()
+    {
+      var s = new SearchDescriptor<ElasticSearchProject>()
+        .From(0)
+        .Size(10)
+        .Query(@"{ raw : ""query""}")
+        .FacetTerm(q => q
+          .Nested("some_nested_query")
+          .OnField(f => f.Name)
+          .FacetFilter(ff => ff.Exists(f => f.Name))
+        );
+
+      var json = ElasticClient.Serialize(s);
+      var expected = @"{ from: 0, size: 10, 
+          facets :  {
+            ""name.sort"" :  
+            {
+              nested: ""some_nested_query"",
+              terms: {
+                field: ""name.sort""
+              },
+              facet_filter: {
+                exists: { field: ""name"" }
+              }
+            }
+          }, query : { raw : ""query""}
+      }";
+      Assert.True(json.JsonEquals(expected), json);
+    }
   }
 }

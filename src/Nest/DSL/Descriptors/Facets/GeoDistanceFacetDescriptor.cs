@@ -108,6 +108,16 @@ namespace Nest.DSL
       this._FacetFilter = filter;
       return this;
     }
+    public new GeoDistanceFacetDescriptor<T> Nested(string nested)
+    {
+      this._Nested = nested;
+      return this;
+    }
+    public new GeoDistanceFacetDescriptor<T> Scope(string scope)
+    {
+      this._Scope = scope;
+      return this;
+    }
 
   }
 }
