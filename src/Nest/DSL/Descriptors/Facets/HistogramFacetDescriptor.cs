@@ -127,5 +127,15 @@ namespace Nest.DSL
       this._FacetFilter = filter;
       return this;
     }
+    public new HistogramFacetDescriptor<T> Nested(string nested)
+    {
+      this._Nested = nested;
+      return this;
+    }
+    public new HistogramFacetDescriptor<T> Scope(string scope)
+    {
+      this._Scope = scope;
+      return this;
+    }
   }
 }

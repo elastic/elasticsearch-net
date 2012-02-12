@@ -15,6 +15,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "exists")]
 		internal ExistsFilter ExistsFilter { get; set; }
 
+		[JsonProperty(PropertyName = "missing")]
+		internal MissingFilter MissingFilter { get; set; }
+
 		[JsonProperty(PropertyName = "ids")]
 		internal IdsFilter IdsFilter { get; set; }
 
@@ -27,6 +30,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "match_all")]
 		internal MatchAllFilter MatchAllFilter { get; set; }
 
+		[JsonProperty(PropertyName = "numeric_range")]
+		internal Dictionary<string, object> NumericRangeFilter { get; set; }
+
 		public FilterDescriptor()
 		{
 			
@@ -35,9 +41,24 @@ namespace Nest
 		public FilterDescriptor<T> Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			return this.Exists(field);
+		}
+		public FilterDescriptor<T> Exists(string field)
+		{
 			this.ExistsFilter = new ExistsFilter { Field = field };
 			return this;
 		}
+		public FilterDescriptor<T> Missing(Expression<Func<T, object>> fieldDescriptor)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			return this.Missing(field);
+		}
+		public FilterDescriptor<T> Missing(string field)
+		{
+			this.MissingFilter = new MissingFilter { Field = field };
+			return this;
+		}
+
 
 		public FilterDescriptor<T> Ids(IEnumerable<string> values)
 		{
@@ -72,5 +93,17 @@ namespace Nest
 			this.MatchAllFilter = new MatchAllFilter { };
 			return this;
 		}
+		public FilterDescriptor<T> NumericRange(Func<NumericRangeFilterDescriptor<T>, NumericRangeFilterDescriptor<T>> numericRangeSelector)
+		{
+			var descriptor = new NumericRangeFilterDescriptor<T>();
+			var filter = numericRangeSelector(descriptor);
+			this.NumericRangeFilter = new Dictionary<string, object>();
+			this.NumericRangeFilter.Add(filter._Field, filter);
+			if (filter._Cache.HasValue)
+				this.NumericRangeFilter.Add("_cache", true);
+			return this;
+		}
+
+
 	}
 }

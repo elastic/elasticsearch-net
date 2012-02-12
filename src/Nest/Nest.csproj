@@ -97,6 +97,12 @@
     <Compile Include="DSL\Descriptors\Facets\TermsOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\RegexFlags.cs" />
+    <Compile Include="DSL\Descriptors\Filter\NumericRangeFilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Filter\MissingFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\MatchAllFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\TypeFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\LimitFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\IdsFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\ExistsFilter.cs" />
     <Compile Include="DSL\Descriptors\RawOrFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\RawOrQueryDescriptor.cs" />
