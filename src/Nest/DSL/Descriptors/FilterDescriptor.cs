@@ -12,6 +12,22 @@ namespace Nest
 {
 	public class FilterDescriptor<T> where T : class
 	{
+		internal string _Name { get; set; }
+		internal bool? _Cache { get; set; }
+
+		public FilterDescriptor<T> Name(string name)
+		{
+			name.ThrowIfNull("name");
+			this._Name = name;
+			return this;
+		}
+		public FilterDescriptor<T> Cache(bool cache)
+		{
+			cache.ThrowIfNull("cache");
+			this._Cache = cache;
+			return this;
+		}
+
 		[JsonProperty(PropertyName = "exists")]
 		internal ExistsFilter ExistsFilter { get; set; }
 
@@ -48,6 +64,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "fquery")]
 		internal Dictionary<string, object> QueryFilter { get; set; }
 
+		[JsonProperty(PropertyName = "and")]
+		internal Dictionary<string, object> AndFilter { get; set; }
+
 		[JsonProperty(PropertyName = "script")]
 		internal ScriptFilterDescriptor ScriptFilter { get; set; }
 
@@ -56,142 +75,192 @@ namespace Nest
 			
 		}
 
-		public FilterDescriptor<T> Exists(Expression<Func<T, object>> fieldDescriptor)
+		public void Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Exists(field);
+			this.Exists(field);
 		}
-		public FilterDescriptor<T> Exists(string field)
+		public void Exists(string field)
 		{
 			this.ExistsFilter = new ExistsFilter { Field = field };
-			return this;
+			if (this._Cache.HasValue)
+				this.ExistsFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.ExistsFilter._Name = this._Name;
 		}
-		public FilterDescriptor<T> Missing(Expression<Func<T, object>> fieldDescriptor)
+		public void Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Missing(field);
+			this.Missing(field);
 		}
-		public FilterDescriptor<T> Missing(string field)
+		public void Missing(string field)
 		{
 			this.MissingFilter = new MissingFilter { Field = field };
-			return this;
+			if (this._Cache.HasValue)
+				this.MissingFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.MissingFilter._Name = this._Name;
 		}
-
-
-		public FilterDescriptor<T> Ids(IEnumerable<string> values)
+		public void Ids(IEnumerable<string> values)
 		{
 			this.IdsFilter = new IdsFilter { Values = values };
-			return this;
+			if (this._Cache.HasValue)
+				this.IdsFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.IdsFilter._Name = this._Name;
 		}
-		public FilterDescriptor<T> Ids(string type, IEnumerable<string> values)
+		public void Ids(string type, IEnumerable<string> values)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this.IdsFilter = new IdsFilter { Values = values, Type = new []{ type } };
-			return this;
+			if (this._Cache.HasValue)
+				this.IdsFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.IdsFilter._Name = this._Name;
 		}
-		public FilterDescriptor<T> Ids(IEnumerable<string> types, IEnumerable<string> values)
+		public void Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
 			this.IdsFilter = new IdsFilter { Values = values, Type = types };
-			return this;
+			if (this._Cache.HasValue)
+				this.IdsFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.IdsFilter._Name = this._Name;
 		}
 
-		public FilterDescriptor<T> Limit(int limit)
+		public void Limit(int limit)
 		{
 			this.LimitFilter = new LimitFilter { Value = limit };
-			return this;
+			if (this._Cache.HasValue)
+				this.LimitFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.LimitFilter._Name = this._Name;
 		}
-		public FilterDescriptor<T> Type(string type)
+		public void Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this.TypeFilter = new TypeFilter { Value = type };
-			return this;
+			if (this._Cache.HasValue)
+				this.TypeFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.TypeFilter._Name = this._Name;
 		}
-		public FilterDescriptor<T> MatchAll()
+		public void MatchAll()
 		{
 			this.MatchAllFilter = new MatchAllFilter { };
-			return this;
+			if (this._Cache.HasValue)
+				this.MatchAllFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.MatchAllFilter._Name = this._Name;
+
 		}
-		public FilterDescriptor<T> NumericRange(Func<NumericRangeFilterDescriptor<T>, NumericRangeFilterDescriptor<T>> numericRangeSelector)
+		public void NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector)
 		{
-			var descriptor = new NumericRangeFilterDescriptor<T>();
-			var filter = numericRangeSelector(descriptor);
+			var filter = new NumericRangeFilterDescriptor<T>();
+			numericRangeSelector(filter);
 			this.NumericRangeFilter = new Dictionary<string, object>();
 			this.NumericRangeFilter.Add(filter._Field, filter);
-			if (filter._Cache.HasValue)
-				this.NumericRangeFilter.Add("_cache", filter._Cache);
-			return this;
+			if (this._Cache.HasValue)
+				this.NumericRangeFilter.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.NumericRangeFilter.Add("_name", this._Name);
 		}
-		public FilterDescriptor<T> Range(Func<NumericRangeFilterDescriptor<T>, NumericRangeFilterDescriptor<T>> rangeSelector)
+		public void Range(Action<NumericRangeFilterDescriptor<T>> rangeSelector)
 		{
-			var descriptor = new NumericRangeFilterDescriptor<T>();
-			var filter = rangeSelector(descriptor);
+			var filter = new NumericRangeFilterDescriptor<T>();
+			rangeSelector(filter);
 			this.RangeFilter = new Dictionary<string, object>();
 			this.RangeFilter.Add(filter._Field, filter);
-			if (filter._Cache.HasValue)
-				this.RangeFilter.Add("_cache", filter._Cache);
-			return this;
+			if (this._Cache.HasValue)
+				this.RangeFilter.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.RangeFilter.Add("_name", this._Name);
 		}
-		public FilterDescriptor<T> Script(Func<ScriptFilterDescriptor, ScriptFilterDescriptor> scriptSelector)
+		public void Script(Action<ScriptFilterDescriptor> scriptSelector)
 		{
 			var descriptor = new ScriptFilterDescriptor();
-			var script = scriptSelector(descriptor);
-			this.ScriptFilter = script;
-			return this;
+			scriptSelector(descriptor);
+			this.ScriptFilter = descriptor;
+			if (this._Cache.HasValue)
+				this.ScriptFilter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.ScriptFilter._Name = this._Name;
 		}
-		public FilterDescriptor<T> Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix, bool? Cache = null)
+		public void Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Prefix(field, prefix, Cache);
+			this.Prefix(field, prefix);
 		}
-		public FilterDescriptor<T> Prefix(string field, string prefix, bool? Cache = null)
+		public void Prefix(string field, string prefix)
 		{
 			this.PrefixFilter = new Dictionary<string, object>();
 			this.PrefixFilter.Add(field, prefix);
-			if (Cache.HasValue)
-				this.PrefixFilter.Add("_cache", Cache);
-			return this;
+			if (this._Cache.HasValue)
+				this.PrefixFilter.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.PrefixFilter.Add("_name", this._Name);
 		}
-		public FilterDescriptor<T> Term(Expression<Func<T, object>> fieldDescriptor, string term, bool? Cache = null)
+		public void Term(Expression<Func<T, object>> fieldDescriptor, string term)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Term(field, term, Cache);
+			this.Term(field, term);
 		}
-		public FilterDescriptor<T> Term(string field, string term, bool? Cache = null)
+		public void Term(string field, string term)
 		{
 			this.TermFilter = new Dictionary<string, object>();
 			this.TermFilter.Add(field, term);
-			if (Cache.HasValue)
-				this.TermFilter.Add("_cache", Cache);
-			return this;
+			if (this._Cache.HasValue)
+				this.TermFilter.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.TermFilter.Add("_name", this._Name);
 		}
-		public FilterDescriptor<T> Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null, bool? Cache = null)
+		public void Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Terms(field, terms, Execution, Cache);
+			this.Terms(field, terms, Execution);
 		}
-		public FilterDescriptor<T> Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null, bool? Cache = null)
+		public void Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
 			this.TermsFilter = new Dictionary<string, object>();
 			this.TermsFilter.Add(field, terms);
 			if (Execution.HasValue)
 				this.TermsFilter.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
-			if (Cache.HasValue)
-				this.TermsFilter.Add("_cache", Cache);
-			return this;
+			if (this._Cache.HasValue)
+				this.TermsFilter.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.TermsFilter.Add("_name", this._Name);
+		}
+
+		public void And(params Action<FilterDescriptor<T>>[] filters)
+		{
+			var descriptors = new List<FilterDescriptor<T>>();
+			foreach (var selector in filters)
+			{
+				var filter = new FilterDescriptor<T>();
+				selector(filter);
+				descriptors.Add(filter);
+			}
+			this.AndFilter = new Dictionary<string,object>();
+			this.AndFilter.Add("filters", descriptors);
+
+			if (this._Cache.HasValue)
+				this.AndFilter.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.AndFilter.Add("_name", this._Name);
 		}
 
 
-
-		public FilterDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector, bool? Cache = null)
+		public void Query(Action<QueryDescriptor<T>> querySelector)
 		{
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);
 
 			this.QueryFilter = new Dictionary<string, object>();
 			this.QueryFilter.Add("query", descriptor);
-			if (Cache.HasValue)
-				this.QueryFilter.Add("_cache", Cache);
-			return this;
+			if (this._Cache.HasValue)
+				this.QueryFilter.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				this.QueryFilter.Add("_name", this._Name);
+
 		}
 
 

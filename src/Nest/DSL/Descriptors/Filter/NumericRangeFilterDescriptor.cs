@@ -103,15 +103,5 @@ namespace Nest
 			this._ToInclusive = true;
 			return this;
 		}
-		/// <summary>
-		/// The result of the filter is not cached by default. The _cache can be set to true to cache the result of the filter. 
-		/// This is handy when the same points parameters are used on several (many) other queries. Note, the process of caching the first execution is higher when caching (since it needs to satisfy different queries).
-		/// If caching the result of the filter is desired (for example, using the same “teen” filter with ages between 10 and 20), then it is advisable to simply use the range filter.
-		/// </summary>
-		public NumericRangeFilterDescriptor<T> Cache()
-		{
-			this._Cache = true;
-			return this;
-		}
 	}
 }

@@ -45,7 +45,9 @@ namespace Nest.Tests.Dsl.Json.Filter
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff
-					.Query(q => q.Term(f => f.Name, "elasticsearch.pm"), Cache:true)
+					.Cache(true)
+					.Name("query_filter")
+					.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
 				);
 
 			var json = ElasticClient.Serialize(s);
@@ -59,7 +61,8 @@ namespace Nest.Tests.Dsl.Json.Filter
 									}
 								}
 							},
-							_cache:true
+							_cache:true, 
+							_name: ""query_filter""
 						}
 
 					}

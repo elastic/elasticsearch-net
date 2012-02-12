@@ -47,12 +47,11 @@ namespace Nest.Tests.Dsl.Json.Filter
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.Filter(ff => ff.Cache(true)
 					.NumericRange(n => n
 						.OnField(f => f.LOC)
 						.GreaterOrEquals(10)
 						.LowerOrEquals(20)
-						.Cache()
 					)
 				);
 

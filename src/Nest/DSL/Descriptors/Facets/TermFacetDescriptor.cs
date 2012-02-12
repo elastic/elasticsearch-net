@@ -107,10 +107,11 @@ namespace Nest.DSL
       return this;
     }
     public TermFacetDescriptor<T> FacetFilter(
-      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+      Action<FilterDescriptor<T>> facetFilter
     )
     {
-      var filter = facetFilter(new FilterDescriptor<T>());
+      var filter = new FilterDescriptor<T>();
+      facetFilter(filter);
       this._FacetFilter = filter;
       return this;
     }

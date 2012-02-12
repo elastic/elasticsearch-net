@@ -38,7 +38,8 @@ namespace Nest.Tests.Dsl.Json.Filter
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff
-					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.@bool, Cache: false)
+					.Cache(false).Name("terms_filter")
+					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.@bool)
 				);
 
 			var json = ElasticClient.Serialize(s);
@@ -47,7 +48,8 @@ namespace Nest.Tests.Dsl.Json.Filter
 						terms: {
 							""name"": [""elasticsearch.pm""],
 							execution: ""bool"",
-							_cache:false
+							_cache:false,
+							_name: ""terms_filter""
 						}
 
 					}

@@ -35,11 +35,10 @@ namespace Nest.Tests.Dsl.Json.Filter
 		public void ScriptFilterParamsAndCache()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
-				.Filter(filter => filter
+				.Filter(filter => filter.Cache(true)
 					.Script(sc => sc
 						.Script("doc['num1'].value > param1")
 						.Params(p=>p.Add("param1", 1))
-						.Cache()
 					)
 			);
 

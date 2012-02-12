@@ -101,6 +101,7 @@
     <Compile Include="DSL\Descriptors\Filter\NumericRangeFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\MissingFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\MatchAllFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\TermsExecution.cs" />
     <Compile Include="DSL\Descriptors\Filter\TypeFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\LimitFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\IdsFilter.cs" />

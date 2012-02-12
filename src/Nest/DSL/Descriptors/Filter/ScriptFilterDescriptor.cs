@@ -18,6 +18,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "_cache")]
 		internal bool? _Cache { get; set; }
 
+		[JsonProperty(PropertyName = "_name")]
+		internal string _Name { get; set; }
+
 		public ScriptFilterDescriptor Script(string script)
 		{
 			script.ThrowIfNull("script");
@@ -29,12 +32,6 @@ namespace Nest
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
 			this._Params = paramDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
-
-		public ScriptFilterDescriptor Cache()
-		{
-			this._Cache = true;
 			return this;
 		}
 	}

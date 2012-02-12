@@ -9,50 +9,72 @@ using Nest.TestData.Domain;
 namespace Nest.Tests.Dsl.Json.Filter
 {
 	[TestFixture]
-	public class PrefixFilterJson
+	public class AndFilterJson
 	{
 		[Test]
-		public void PrefixFilter()
+		public void AndFilter()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
-					.Prefix(f=>f.Name, "elast")
+				.Filter(filter=>filter
+					.And(
+						f=>f.MatchAll(),
+						f=>f.Missing(p=>p.LOC)
+					)
+					
 				);
 				
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
-						prefix: {
-							""name"": ""elast""
+						""and"": {
+							""filters"": [
+								{
+									""match_all"": {}
+								},
+								{
+									""missing"": {
+										""field"": ""loc""
+									}
+								}
+							]
 						}
-
 					}
 			}";
 			Assert.True(json.JsonEquals(expected), json);		
 		}
 		[Test]
-		public void PrefixFilterWithCache()
+		public void AndFilterCacheNamed()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
-					.Cache(false)
-					.Name("prefix_filter")
-					.Prefix(f => f.Name, "elast")
+				.Filter(filter => filter.Cache(true).Name("and_filter")
+					.And(
+						f => f.MatchAll(),
+						f => f.Missing(p => p.LOC)
+					)
+
 				);
 
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
-						prefix: {
-							""name"": ""elast"",
-							_cache:false,
-							_name : ""prefix_filter""
+						""and"": {
+							""filters"": [
+								{
+									""match_all"": {}
+								},
+								{
+									""missing"": {
+										""field"": ""loc""
+									}
+								}
+							],
+							_cache:true,
+							_name:""and_filter""
 						}
-
 					}
 			}";
 			Assert.True(json.JsonEquals(expected), json);
