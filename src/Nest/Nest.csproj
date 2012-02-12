@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\GeoDistance.cs" />
+    <Compile Include="DSL\Descriptors\Facets\GeoUnit.cs" />
     <Compile Include="DSL\Descriptors\Facets\GeoDistanceFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermsStatsFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermsStatsOrder.cs" />
@@ -93,6 +96,7 @@
     <Compile Include="DSL\Descriptors\Facets\TermsOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\RegexFlags.cs" />
+    <Compile Include="DSL\Descriptors\Filter\ExistsFilter.cs" />
     <Compile Include="DSL\Descriptors\RawOrFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermFacetDescriptor.cs" />

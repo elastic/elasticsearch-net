@@ -26,6 +26,9 @@ namespace Nest.DSL
     [JsonProperty(PropertyName = "query")]
     public QueryDescriptor<T> Query { get; set; }
 
+    [JsonProperty(PropertyName = "filter")]
+    public FilterDescriptor<T> Filter { get; set; }
+
     [JsonProperty(PropertyName = "statistical")]
     public StatisticalFacetDescriptor<T> Statistical { get; set; }
 
