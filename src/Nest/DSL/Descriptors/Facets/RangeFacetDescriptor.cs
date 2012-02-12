@@ -37,6 +37,12 @@ namespace Nest.DSL
       this._Field = field;
       return this;
     }
+    public RangeFacetDescriptor<T, K> KeyField(Expression<Func<T, object>> objectPath)
+    {
+      objectPath.ThrowIfNull("objectPath");
+      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      return this.KeyField(fieldName);
+    }
     public RangeFacetDescriptor<T, K> KeyField(string keyField)
     {
       keyField.ThrowIfNull("keyField");
@@ -48,6 +54,12 @@ namespace Nest.DSL
       keyScript.ThrowIfNull("keyScript");
       this._KeyScript = keyScript;
       return this;
+    }
+    public RangeFacetDescriptor<T, K> ValueField(Expression<Func<T, object>> objectPath)
+    {
+      objectPath.ThrowIfNull("objectPath");
+      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      return this.ValueField(fieldName);
     }
     public RangeFacetDescriptor<T, K> ValueField(string valueField)
     {

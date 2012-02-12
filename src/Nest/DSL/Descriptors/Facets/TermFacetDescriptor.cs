@@ -19,7 +19,7 @@ namespace Nest.DSL
     internal int? _Size { get; set; }
     [JsonConverter(typeof(StringEnumConverter))]
     [JsonProperty(PropertyName = "order")]
-    internal FacetOrder? _FacetOrder { get; set; }
+    internal TermsOrder? _FacetOrder { get; set; }
     [JsonProperty(PropertyName = "all_terms")]
     internal bool? _AllTerms { get; set; }
     [JsonProperty(PropertyName = "exclude")]
@@ -68,7 +68,7 @@ namespace Nest.DSL
       this._Size = size;
       return this;
     }
-    public TermFacetDescriptor<T> Order(FacetOrder order)
+    public TermFacetDescriptor<T> Order(TermsOrder order)
     {
       this._FacetOrder = order;
       return this;

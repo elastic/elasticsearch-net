@@ -28,5 +28,8 @@ namespace Nest.DSL
 
     [JsonProperty(PropertyName = "statistical")]
     public StatisticalFacetDescriptor<T> Statistical { get; set; }
+
+    [JsonProperty(PropertyName = "terms_stats")]
+    public TermsStatsFacetDescriptor<T> TermsStats { get; set; }
   }
 }

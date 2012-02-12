@@ -43,7 +43,7 @@ namespace Nest.Tests.Dsl.Json.Facets
         .FacetTerm(t => t
           .OnField(f => f.Country)
           .Size(20)
-          .Order(FacetOrder.reverse_count)
+          .Order(TermsOrder.reverse_count)
           .Exclude("term1", "term2")
           .AllTerms()
           .Regex(@"\s+", RegexFlags.DOTALL)
@@ -84,7 +84,7 @@ namespace Nest.Tests.Dsl.Json.Facets
           .FacetTerm(t => t
             .OnFields(f => f.Country, f => f.LOC)
             .Size(20)
-            .Order(FacetOrder.reverse_count)
+            .Order(TermsOrder.reverse_count)
             .Exclude("term1", "term2")
             .AllTerms()
             .Regex(@"\s+", RegexFlags.DOTALL)
@@ -100,7 +100,7 @@ namespace Nest.Tests.Dsl.Json.Facets
         .FacetTerm("i_bet_this_crazy_facet_actually_works", t => t
           .OnFields(f => f.Country, f => f.LOC)
           .Size(20)
-          .Order(FacetOrder.reverse_count)
+          .Order(TermsOrder.reverse_count)
           .Exclude("term1", "term2")
           .AllTerms()
           .Regex(@"\s+", RegexFlags.DOTALL)

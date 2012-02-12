@@ -8,11 +8,17 @@ using System.Linq.Expressions;
 
 namespace Nest.DSL
 {
-  public enum FacetOrder
+  public enum TermsStatsOrder
   {
-    count = 0,
-    term,
+    term = 0,
+    reverse_term,
+    count,
     reverse_count,
-    reverse_term
+    total,
+    reverse_total,
+    min,
+    reverse_min,
+    max,
+    reverse_max
   }
 }

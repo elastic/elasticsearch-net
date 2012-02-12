@@ -269,6 +269,26 @@ namespace Nest.DSL
 			return this;
 		}
 
+		public SearchDescriptor<T> FacetTermsStats(string name, Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet)
+		{
+			return this.FacetTermsStats(facet, Name: name);
+		}
+
+		public SearchDescriptor<T> FacetTermsStats(Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet, string Name = null)
+		{
+			if (this._Facets == null)
+				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+
+			var descriptor = new TermsStatsFacetDescriptor<T>();
+			var f = facet(descriptor);
+			var key = string.IsNullOrWhiteSpace(Name) ? f._KeyField : Name;
+			if (string.IsNullOrWhiteSpace(key))
+				throw new DslException("Could not infer name for terms_stats facet");
+			this._Facets.Add(key, new FacetDescriptorsBucket<T> { TermsStats = f });
+
+			return this;
+		}
+
 		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>,QueryDescriptor<T>> querySelector)
 		{
 			name.ThrowIfNullOrEmpty("name");

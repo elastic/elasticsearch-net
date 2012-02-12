@@ -98,6 +98,12 @@ namespace Nest.DSL
       this._PostZone = Post;
       return this;
     }
+    public DateHistogramFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
+    {
+      objectPath.ThrowIfNull("objectPath");
+      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      return this.KeyField(fieldName);
+    }
     public DateHistogramFacetDescriptor<T> KeyField(string keyField)
     {
       keyField.ThrowIfNull("keyField");
@@ -109,6 +115,12 @@ namespace Nest.DSL
       keyScript.ThrowIfNull("keyScript");
       this._KeyScript = keyScript;
       return this;
+    }
+    public DateHistogramFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
+    {
+      objectPath.ThrowIfNull("objectPath");
+      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      return this.ValueField(fieldName);
     }
     public DateHistogramFacetDescriptor<T> ValueField(string valueField)
     {

@@ -69,6 +69,12 @@ namespace Nest.DSL
       this._TimeInterval = timespanInterval.ToString();
       return this;
     }
+    public HistogramFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
+    {
+      objectPath.ThrowIfNull("objectPath");
+      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      return this.KeyField(fieldName);
+    }
     public HistogramFacetDescriptor<T> KeyField(string keyField)
     {
       keyField.ThrowIfNull("keyField");
@@ -80,6 +86,12 @@ namespace Nest.DSL
       keyScript.ThrowIfNull("keyScript");
       this._KeyScript = keyScript;
       return this;
+    }
+    public HistogramFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
+    {
+      objectPath.ThrowIfNull("objectPath");
+      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      return this.ValueField(fieldName);
     }
     public HistogramFacetDescriptor<T> ValueField(string valueField)
     {

@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Facets\TermsStatsFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\TermsStatsOrder.cs" />
+    <Compile Include="DSL\Descriptors\Facets\StatisticalFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\DateRounding.cs" />
     <Compile Include="DSL\Descriptors\Facets\DateHistogramFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\DateInterval.cs" />
@@ -86,7 +89,7 @@
     <Compile Include="DSL\Descriptors\Facets\Range.cs" />
     <Compile Include="DSL\Descriptors\Facets\RangeFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\FacetDescriptorBucket.cs" />
-    <Compile Include="DSL\Descriptors\Facets\FacetOrder.cs" />
+    <Compile Include="DSL\Descriptors\Facets\TermsOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\RegexFlags.cs" />
     <Compile Include="DSL\Descriptors\RawOrFilterDescriptor.cs" />
