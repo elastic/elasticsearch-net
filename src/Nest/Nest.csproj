@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Facets\GeoDistanceFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermsStatsFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermsStatsOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\StatisticalFacetDescriptor.cs" />

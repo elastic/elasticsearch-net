@@ -17,7 +17,7 @@ namespace Nest
 		}
 
 
-		public static void ThrowIfNull<T>(this T value, string name) where T : class
+		public static void ThrowIfNull<T>(this T value, string name)
 		{
 			if (value == null)
 			{

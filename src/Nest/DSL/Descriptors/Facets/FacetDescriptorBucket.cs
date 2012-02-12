@@ -31,5 +31,8 @@ namespace Nest.DSL
 
     [JsonProperty(PropertyName = "terms_stats")]
     public TermsStatsFacetDescriptor<T> TermsStats { get; set; }
+
+    [JsonProperty(PropertyName = "geo_distance")]
+    public GeoDistanceFacetDescriptor<T> GeoDistance { get; set; }
   }
 }
