@@ -33,6 +33,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "numeric_range")]
 		internal Dictionary<string, object> NumericRangeFilter { get; set; }
 
+		[JsonProperty(PropertyName = "range")]
+		internal Dictionary<string, object> RangeFilter { get; set; }
+
 		[JsonProperty(PropertyName = "prefix")]
 		internal Dictionary<string, object> PrefixFilter { get; set; }
 
@@ -107,6 +110,16 @@ namespace Nest
 			this.NumericRangeFilter.Add(filter._Field, filter);
 			if (filter._Cache.HasValue)
 				this.NumericRangeFilter.Add("_cache", filter._Cache);
+			return this;
+		}
+		public FilterDescriptor<T> Range(Func<NumericRangeFilterDescriptor<T>, NumericRangeFilterDescriptor<T>> rangeSelector)
+		{
+			var descriptor = new NumericRangeFilterDescriptor<T>();
+			var filter = rangeSelector(descriptor);
+			this.RangeFilter = new Dictionary<string, object>();
+			this.RangeFilter.Add(filter._Field, filter);
+			if (filter._Cache.HasValue)
+				this.RangeFilter.Add("_cache", filter._Cache);
 			return this;
 		}
 		public FilterDescriptor<T> Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix, bool? Cache = null)
