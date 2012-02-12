@@ -42,6 +42,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "term")]
 		internal Dictionary<string, object> TermFilter { get; set; }
 
+		[JsonProperty(PropertyName = "terms")]
+		internal Dictionary<string, object> TermsFilter { get; set; }
+
 		[JsonProperty(PropertyName = "fquery")]
 		internal Dictionary<string, object> QueryFilter { get; set; }
 
@@ -148,19 +151,36 @@ namespace Nest
 				this.PrefixFilter.Add("_cache", Cache);
 			return this;
 		}
-		public FilterDescriptor<T> Term(Expression<Func<T, object>> fieldDescriptor, string prefix, bool? Cache = null)
+		public FilterDescriptor<T> Term(Expression<Func<T, object>> fieldDescriptor, string term, bool? Cache = null)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Term(field, prefix, Cache);
+			return this.Term(field, term, Cache);
 		}
-		public FilterDescriptor<T> Term(string field, string prefix, bool? Cache = null)
+		public FilterDescriptor<T> Term(string field, string term, bool? Cache = null)
 		{
 			this.TermFilter = new Dictionary<string, object>();
-			this.TermFilter.Add(field, prefix);
+			this.TermFilter.Add(field, term);
 			if (Cache.HasValue)
 				this.TermFilter.Add("_cache", Cache);
 			return this;
 		}
+		public FilterDescriptor<T> Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null, bool? Cache = null)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			return this.Terms(field, terms, Execution, Cache);
+		}
+		public FilterDescriptor<T> Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null, bool? Cache = null)
+		{
+			this.TermsFilter = new Dictionary<string, object>();
+			this.TermsFilter.Add(field, terms);
+			if (Execution.HasValue)
+				this.TermsFilter.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
+			if (Cache.HasValue)
+				this.TermsFilter.Add("_cache", Cache);
+			return this;
+		}
+
+
 
 		public FilterDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector, bool? Cache = null)
 		{
