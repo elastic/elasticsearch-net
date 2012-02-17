@@ -370,7 +370,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.InferTypeName<T>();
-			var path = this.CreatePath(index, typeName);
+			var path = this.CreatePath(index, typeName, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
@@ -386,7 +386,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.InferTypeName<T>();
-			var path = this.CreatePath(index, typeName);
+      var path = this.CreatePath(index, typeName, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			this._deleteToPathAsync(path, query, callback);
@@ -402,7 +402,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index cannot be empty");
 
 			var typeName = this.InferTypeName<T>();
-			var path = this.CreatePath(index, typeName);
+      var path = this.CreatePath(index, typeName, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
@@ -417,7 +417,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index cannot be empty");
 
 			var typeName = this.InferTypeName<T>();
-			var path = this.CreatePath(index, typeName);
+      var path = this.CreatePath(index, typeName, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			this._deleteToPathAsync(path, query, callback);
@@ -432,7 +432,7 @@ namespace Nest
 			query.ThrowIfNullOrEmpty("query");
 			index.ThrowIfNullOrEmpty("index cannot be empty");
 			type.ThrowIfNullOrEmpty("type cannot be empty");
-			var path = this.CreatePath(index, type);
+      var path = this.CreatePath(index, type, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
@@ -446,7 +446,7 @@ namespace Nest
 			query.ThrowIfNullOrEmpty("query");
 			index.ThrowIfNullOrEmpty("index cannot be empty");
 			type.ThrowIfNullOrEmpty("type cannot be empty");
-			var path = this.CreatePath(index, type);
+      var path = this.CreatePath(index, type, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			this._deleteToPathAsync(path, query, callback);
@@ -464,7 +464,7 @@ namespace Nest
 				throw new ArgumentNullException("indices");
 
 			var indicesString = string.Join(",", indices.ToArray());
-			var path = this.CreatePath(indicesString);
+      var path = this.CreatePath(indicesString, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
@@ -480,7 +480,7 @@ namespace Nest
 				throw new ArgumentNullException("indices");
 
 			var indicesString = string.Join(",", indices.ToArray());
-			var path = this.CreatePath(indicesString);
+      var path = this.CreatePath(indicesString, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			this._deleteToPathAsync(path, query, callback);
@@ -501,7 +501,7 @@ namespace Nest
 
 			var indicesString = string.Join(",", indices.ToArray());
 			var typesString = string.Join(",", indices.ToArray());
-			var path = this.CreatePath(indicesString, typesString);
+      var path = this.CreatePath(indicesString, typesString, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
@@ -521,7 +521,7 @@ namespace Nest
 
 			var indicesString = string.Join(",", indices.ToArray());
 			var typesString = string.Join(",", indices.ToArray());
-			var path = this.CreatePath(indicesString, typesString);
+      var path = this.CreatePath(indicesString, typesString, "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			this._deleteToPathAsync(path, query, callback);
@@ -534,7 +534,7 @@ namespace Nest
 		public ConnectionStatus DeleteByQueryOverAll<T>(string query, DeleteByQueryParameters parameters) where T : class
 		{
 			query.ThrowIfNullOrEmpty("query");
-			var path = this.CreatePath("_all");
+      var path = this.CreatePath("_all", "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
@@ -546,7 +546,7 @@ namespace Nest
 		public void DeleteByQueryOverAllAsync<T>(string query, DeleteByQueryParameters parameters, Action<ConnectionStatus> callback) where T : class
 		{
 			query.ThrowIfNullOrEmpty("query");
-			var path = this.CreatePath("_all");
+      var path = this.CreatePath("_all", "_query");
 			if (parameters != null && !parameters.Equals(default(DeleteByQueryParameters)))
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
 			this._deleteToPathAsync(path, query, callback);
