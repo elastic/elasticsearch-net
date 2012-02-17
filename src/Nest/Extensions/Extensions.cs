@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
 	public static class Extensions
 	{
-		public static void ThrowIfNull<T>(this T value, string name) where T : class
+		public static bool JsonEquals(this string json, string otherjson)
+		{
+			var nJson = JObject.Parse(json).ToString();
+			var nOtherJson = JObject.Parse(otherjson).ToString();
+			return nJson == nOtherJson;
+		}
+
+
+		public static void ThrowIfNull<T>(this T value, string name)
 		{
 			if (value == null)
 			{

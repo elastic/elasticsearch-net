@@ -8,7 +8,9 @@ using System.Linq.Expressions;
 
 namespace Nest.DSL
 {
-  public interface IFacetDescriptor
+  public enum GeoUnit
   {
+    km,
+    mi
   }
 }

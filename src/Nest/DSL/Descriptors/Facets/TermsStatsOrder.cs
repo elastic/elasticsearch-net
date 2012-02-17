@@ -8,7 +8,17 @@ using System.Linq.Expressions;
 
 namespace Nest.DSL
 {
-  public interface IFacetDescriptor
+  public enum TermsStatsOrder
   {
+    term = 0,
+    reverse_term,
+    count,
+    reverse_count,
+    total,
+    reverse_total,
+    min,
+    reverse_min,
+    max,
+    reverse_max
   }
 }

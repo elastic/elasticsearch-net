@@ -8,7 +8,11 @@ using System.Linq.Expressions;
 
 namespace Nest.DSL
 {
-  public interface IFacetDescriptor
+  public enum TermsOrder
   {
+    count = 0,
+    term,
+    reverse_count,
+    reverse_term
   }
 }

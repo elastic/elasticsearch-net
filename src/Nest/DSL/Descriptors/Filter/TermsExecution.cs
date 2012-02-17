@@ -6,13 +6,12 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 
-namespace Nest.DSL
+namespace Nest
 {
-  public enum FacetOrder
+  public enum TermsExecution
   {
-    count = 0,
-    term,
-    reverse_count,
-    reverse_term
+   plain,
+   @bool,
+   and
   }
 }

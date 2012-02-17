@@ -9,17 +9,17 @@ using System.Linq.Expressions;
 namespace Nest.DSL
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class TermFacetDescriptor<T> : IFacetDescriptor where T : class
+  public class TermFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
   {
     [JsonProperty(PropertyName = "field")]
     internal string _Field { get; set; }
     [JsonProperty(PropertyName = "fields")]
     internal IEnumerable<string> _Fields { get; set; }
     [JsonProperty(PropertyName = "size")]
-    internal int _Size { get; set; }
+    internal int? _Size { get; set; }
     [JsonConverter(typeof(StringEnumConverter))]
     [JsonProperty(PropertyName = "order")]
-    internal FacetOrder? _FacetOrder { get; set; }
+    internal TermsOrder? _FacetOrder { get; set; }
     [JsonProperty(PropertyName = "all_terms")]
     internal bool? _AllTerms { get; set; }
     [JsonProperty(PropertyName = "exclude")]
@@ -68,7 +68,7 @@ namespace Nest.DSL
       this._Size = size;
       return this;
     }
-    public TermFacetDescriptor<T> Order(FacetOrder order)
+    public TermFacetDescriptor<T> Order(TermsOrder order)
     {
       this._FacetOrder = order;
       return this;
@@ -99,5 +99,32 @@ namespace Nest.DSL
       this._ScriptField = scriptField;
       return this;
     }
+
+
+    public new TermFacetDescriptor<T> Global()
+    {
+      this._IsGlobal = true;
+      return this;
+    }
+    public TermFacetDescriptor<T> FacetFilter(
+      Action<FilterDescriptor<T>> facetFilter
+    )
+    {
+      var filter = new FilterDescriptor<T>();
+      facetFilter(filter);
+      this._FacetFilter = filter;
+      return this;
+    }
+    public new TermFacetDescriptor<T> Nested(string nested)
+    {
+      this._Nested = nested;
+      return this;
+    }
+    public new TermFacetDescriptor<T> Scope(string scope)
+    {
+      this._Scope = scope;
+      return this;
+    }
+
   }
 }

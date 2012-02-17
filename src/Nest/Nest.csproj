@@ -79,10 +79,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\GeoDistance.cs" />
+    <Compile Include="DSL\Descriptors\Facets\GeoUnit.cs" />
+    <Compile Include="DSL\Descriptors\Facets\GeoDistanceFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\TermsStatsFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\TermsStatsOrder.cs" />
+    <Compile Include="DSL\Descriptors\Facets\StatisticalFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\DateRounding.cs" />
+    <Compile Include="DSL\Descriptors\Facets\DateHistogramFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\DateInterval.cs" />
+    <Compile Include="DSL\Descriptors\Facets\HistogramFacetDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Facets\Range.cs" />
+    <Compile Include="DSL\Descriptors\Facets\RangeFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\FacetDescriptorBucket.cs" />
-    <Compile Include="DSL\Descriptors\Facets\FacetOrder.cs" />
+    <Compile Include="DSL\Descriptors\Facets\TermsOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\RegexFlags.cs" />
+    <Compile Include="DSL\Descriptors\Filter\ScriptFilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Filter\NumericRangeFilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Filter\MissingFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\MatchAllFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\TermsExecution.cs" />
+    <Compile Include="DSL\Descriptors\Filter\TypeFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\LimitFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\IdsFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\ExistsFilter.cs" />
     <Compile Include="DSL\Descriptors\RawOrFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermFacetDescriptor.cs" />

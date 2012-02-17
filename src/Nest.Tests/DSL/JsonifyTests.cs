@@ -21,14 +21,6 @@ namespace Nest.Tests.DSL
 
     }
 
-
-    private bool JsonEquals(string json, string otherjson)
-    {
-      var nJson = JObject.Parse(json).ToString();
-      var nOtherJson = JObject.Parse(otherjson).ToString();
-      return nJson == nOtherJson;
-    }
-
     [Test]
     public void TestFromSize()
     {
@@ -37,7 +29,7 @@ namespace Nest.Tests.DSL
         .Size(10);
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10 }";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestSkipTake()
@@ -47,7 +39,7 @@ namespace Nest.Tests.DSL
         .Take(10);
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10 }";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestBasics()
@@ -65,7 +57,7 @@ namespace Nest.Tests.DSL
 				version: true,
 				min_score: 0.4
 			}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestBasicsIndicesBoost()
@@ -90,7 +82,7 @@ namespace Nest.Tests.DSL
 				}
 
 			}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestPreference()
@@ -101,7 +93,7 @@ namespace Nest.Tests.DSL
         .Preference("_primary");
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestExecuteOnPrimary()
@@ -112,7 +104,7 @@ namespace Nest.Tests.DSL
         .ExecuteOnPrimary();
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestExecuteOnLocalShard()
@@ -123,7 +115,7 @@ namespace Nest.Tests.DSL
         .ExecuteOnLocalShard();
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, preference: ""_local"" }";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestExecuteOnNode()
@@ -135,7 +127,7 @@ namespace Nest.Tests.DSL
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
 				preference: ""_only_node:somenode"" }";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestFields()
@@ -148,7 +140,7 @@ namespace Nest.Tests.DSL
       var expected = @"{ from: 0, size: 10, 
 				fields: [""id"", ""name""]
 				}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestSort()
@@ -165,7 +157,7 @@ namespace Nest.Tests.DSL
 					},
 					fields: [""id"", ""name""]
 				}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestSortDescending()
@@ -184,7 +176,7 @@ namespace Nest.Tests.DSL
 					},
 					fields: [""id"", ""name""]
 				}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
 
     [Test]
@@ -196,7 +188,7 @@ namespace Nest.Tests.DSL
         .Query(q => q);
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10, query : {}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestMatchAllQuery()
@@ -207,7 +199,7 @@ namespace Nest.Tests.DSL
         .Query(q => q.MatchAll());
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10, query : { match_all: {}}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestMatchAllShortcut()
@@ -218,7 +210,7 @@ namespace Nest.Tests.DSL
         .MatchAll();
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10, query : { match_all: {}}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
 
     [Test]
@@ -232,7 +224,7 @@ namespace Nest.Tests.DSL
         );
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10, query : { match_all: { boost: 1.2 }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
 
     [Test]
@@ -246,7 +238,7 @@ namespace Nest.Tests.DSL
         );
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : { match_all: { norm_field: ""name"" }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
 
     [Test]
@@ -261,7 +253,7 @@ namespace Nest.Tests.DSL
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : 
 			{ term: { name : { value : ""elasticsearch.pm"" } }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestTermWithBoostQuery()
@@ -275,7 +267,7 @@ namespace Nest.Tests.DSL
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : 
 			{ term: { name : { value : ""elasticsearch.pm"", boost: 1.2 } }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestWildcardQuery()
@@ -289,7 +281,7 @@ namespace Nest.Tests.DSL
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : 
 			{ wildcard: { name : { value : ""elasticsearch.*"" } }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestWildcardWithBoostQuery()
@@ -303,7 +295,7 @@ namespace Nest.Tests.DSL
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : 
 			{ wildcard: { name : { value : ""elasticsearch.*"", boost: 1.2 } }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestPrefixQuery()
@@ -317,7 +309,7 @@ namespace Nest.Tests.DSL
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : 
 			{ prefix: { name : { value : ""elasticsearch.*"" } }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestPrefixWithBoostQuery()
@@ -331,7 +323,7 @@ namespace Nest.Tests.DSL
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : 
 			{ prefix: { name : { value : ""el"", boost: 1.2 } }}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
 
     [Test]
@@ -343,7 +335,7 @@ namespace Nest.Tests.DSL
         .Query(@"{ raw : ""query""}");
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : { raw : ""query""}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestRawFilter()
@@ -354,7 +346,7 @@ namespace Nest.Tests.DSL
         .Filter(@"{ raw : ""query""}");
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, filter : { raw : ""query""}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
     [Test]
     public void TestRawFilterAndQuery()
@@ -366,124 +358,9 @@ namespace Nest.Tests.DSL
         .Query(@"{ raw : ""query""}");
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, query : { raw : ""query""}, filter : { raw : ""query""}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }
-    [Test]
-    public void TestTermFacet()
-    {
-      var s = new SearchDescriptor<ElasticSearchProject>()
-        .From(0)
-        .Size(10)
-        .Query(@"{ raw : ""query""}")
-        .FacetTerm(t => t.OnField(f => f.Country).Size(20));
-      var json = ElasticClient.Serialize(s);
-      var expected = @"{ from: 0, size: 10, 
-          facets :  {
-            country :  {
-                terms : {
-                    field : ""country"",
-                    size : 20
-                } 
-            }
-          }, query : { raw : ""query""}
-      }";
-      Assert.True(this.JsonEquals(json, expected));
-    }
-    [Test]
-    public void TestTermFacetAll()
-    {
-      var s = new SearchDescriptor<ElasticSearchProject>()
-        .From(0)
-        .Size(10)
-        .Query(@"{ raw : ""query""}")
-        .FacetTerm(t => t
-          .OnField(f => f.Country)
-          .Size(20)
-          .Order(FacetOrder.reverse_count)
-          .Exclude("term1", "term2")
-          .AllTerms()
-          .Regex(@"\s+", RegexFlags.DOTALL)
-          .Script("term + 'aaa'")
-          .ScriptField("_source.my_field")
-        );
-      var json = ElasticClient.Serialize(s);
-      var expected = @"{ from: 0, size: 10, 
-          facets :  {
-            country :  {
-                terms : {
-                    field : ""country"",
-                    size : 20,
-                    order: ""reverse_count"",
-                    all_terms: true,
-                    exclude: [ ""term1"", ""term2"" ],        
-                    regex: ""\\s+"",
-                    regex_flags: ""DOTALL"",
-                    script: ""term + 'aaa'"",
-                    script_field: ""_source.my_field""
-                } 
-            }
-          }, query : { raw : ""query""}
-      }";
-      Assert.True(this.JsonEquals(json, expected));
-    }
-    [Test]
-    public void TestTermFacetAllMultiFields()
-    {
-      //when using multifields we cant determine a facet name 
-      //automatically
-      Assert.Throws<DslException>(() =>
-      {
-        new SearchDescriptor<ElasticSearchProject>()
-          .From(0)
-          .Size(10)
-          .Query(@"{ raw : ""query""}")
-          .FacetTerm(t => t
-            .OnFields(f => f.Country, f => f.LOC)
-            .Size(20)
-            .Order(FacetOrder.reverse_count)
-            .Exclude("term1", "term2")
-            .AllTerms()
-            .Regex(@"\s+", RegexFlags.DOTALL)
-            .Script("term + 'aaa'")
-            .ScriptField("_source.my_field")
-          );
-      });
-
-      var s = new SearchDescriptor<ElasticSearchProject>()
-        .From(0)
-        .Size(10)
-        .Query(@"{ raw : ""query""}")
-        .FacetTerm("weird_ass_facet", t => t
-          .OnFields(f => f.Country, f => f.LOC)
-          .Size(20)
-          .Order(FacetOrder.reverse_count)
-          .Exclude("term1", "term2")
-          .AllTerms()
-          .Regex(@"\s+", RegexFlags.DOTALL)
-          .Script("term + 'aaa'")
-          .ScriptField("_source.my_field")
-        );
-
-      var json = ElasticClient.Serialize(s);
-      var expected = @"{ from: 0, size: 10, 
-          facets :  {
-            weird_ass_facet :  {
-                terms : {
-                    fields : [""country"", ""loc.sort""],
-                    size : 20,
-                    order: ""reverse_count"",
-                    all_terms: true,
-                    exclude: [ ""term1"", ""term2"" ],        
-                    regex: ""\\s+"",
-                    regex_flags: ""DOTALL"",
-                    script: ""term + 'aaa'"",
-                    script_field: ""_source.my_field""
-                } 
-            }
-          }, query : { raw : ""query""}
-      }";
-      Assert.True(this.JsonEquals(json, expected));
-    }
+    
 
     /*
     [Test]
@@ -510,7 +387,7 @@ namespace Nest.Tests.DSL
         );
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10, query : {}}";
-      Assert.True(this.JsonEquals(json, expected));
+      Assert.True(json.JsonEquals(expected));
     }*/
   }
 }
