@@ -37,6 +37,15 @@ namespace Nest
 		[JsonProperty(PropertyName = "ids")]
 		internal IdsFilter IdsFilter { get; set; }
 
+		[JsonProperty(PropertyName = "geo_bounding_box")]
+		internal Dictionary<string, object> GeoBoundingBoxFilter { get; set; }
+
+		[JsonProperty(PropertyName = "geo_distance")]
+		internal Dictionary<string, object> GeoDistanceFilter { get; set; }
+
+		[JsonProperty(PropertyName = "geo_distance_range")]
+		internal Dictionary<string, object> GeoDistanceRangeFilter { get; set; }
+
 		[JsonProperty(PropertyName = "limit")]
 		internal LimitFilter LimitFilter { get; set; }
 
@@ -67,6 +76,15 @@ namespace Nest
 		[JsonProperty(PropertyName = "and")]
 		internal Dictionary<string, object> AndFilter { get; set; }
 
+		[JsonProperty(PropertyName = "or")]
+		internal Dictionary<string, object> OrFilter { get; set; }
+
+		[JsonProperty(PropertyName = "not")]
+		internal Dictionary<string, object> NotFilter { get; set; }
+
+		[JsonProperty(PropertyName = "bool")]
+		internal BoolFilterDescriptor<T> BoolFilter { get; set; }
+
 		[JsonProperty(PropertyName = "script")]
 		internal ScriptFilterDescriptor ScriptFilter { get; set; }
 
@@ -74,6 +92,37 @@ namespace Nest
 		{
 			
 		}
+		private void SetCacheAndName(FilterBase filter)
+		{
+			if (this._Cache.HasValue)
+				filter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				filter._Name = this._Name;
+		}
+
+		private void SetDictionary(string fieldName, FilterBase filter, Action<Dictionary<string, object>> setter)
+		{
+			setter.ThrowIfNull("setter");
+			var dictionary = new Dictionary<string, object>();
+			dictionary.Add(fieldName, filter);
+			if (this._Cache.HasValue)
+				dictionary.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				dictionary.Add("_name", this._Name);
+			setter(dictionary);
+		}
+		private void SetDictionary(string key, object value, Action<Dictionary<string, object>> setter)
+		{
+			setter.ThrowIfNull("setter");
+			var dictionary = new Dictionary<string, object>();
+			dictionary.Add(key, value);
+			if (this._Cache.HasValue)
+				dictionary.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				dictionary.Add("_name", this._Name);
+			setter(dictionary);
+		}
+
 
 		public void Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
@@ -83,10 +132,7 @@ namespace Nest
 		public void Exists(string field)
 		{
 			this.ExistsFilter = new ExistsFilter { Field = field };
-			if (this._Cache.HasValue)
-				this.ExistsFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.ExistsFilter._Name = this._Name;
+			this.SetCacheAndName(this.ExistsFilter);
 		}
 		public void Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
@@ -96,94 +142,153 @@ namespace Nest
 		public void Missing(string field)
 		{
 			this.MissingFilter = new MissingFilter { Field = field };
-			if (this._Cache.HasValue)
-				this.MissingFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.MissingFilter._Name = this._Name;
+			this.SetCacheAndName(this.MissingFilter);
 		}
 		public void Ids(IEnumerable<string> values)
 		{
 			this.IdsFilter = new IdsFilter { Values = values };
-			if (this._Cache.HasValue)
-				this.IdsFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.IdsFilter._Name = this._Name;
+			this.SetCacheAndName(this.IdsFilter);
 		}
 		public void Ids(string type, IEnumerable<string> values)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this.IdsFilter = new IdsFilter { Values = values, Type = new []{ type } };
-			if (this._Cache.HasValue)
-				this.IdsFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.IdsFilter._Name = this._Name;
+			this.SetCacheAndName(this.IdsFilter);
 		}
 		public void Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
 			this.IdsFilter = new IdsFilter { Values = values, Type = types };
-			if (this._Cache.HasValue)
-				this.IdsFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.IdsFilter._Name = this._Name;
+			this.SetCacheAndName(this.IdsFilter);
 		}
+
+
+		public void GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			this.GeoBoundingBox(field, geoHashTopLeft, geoHashBottomRight, Type);
+		}
+		public void GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			this.GeoBoundingBox(field, topLeftX, topLeftY, bottomRightX, bottomRightY, Type);
+		}
+		public void GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
+		{
+			topLeftX.ThrowIfNull("topLeftX");
+			topLeftY.ThrowIfNull("topLeftY");
+			bottomRightX.ThrowIfNull("bottomRightX");
+			bottomRightY.ThrowIfNull("bottomRightY");
+			this.GeoBoundingBox(fieldName, "{0}, {1}".F(topLeftX, topLeftY), "{0}, {1}".F(bottomRightX, bottomRightY), Type);
+		}
+
+		public void GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
+		{
+			geoHashTopLeft.ThrowIfNullOrEmpty("geoHashTopLeft");
+			geoHashBottomRight.ThrowIfNullOrEmpty("geoHashBottomRight");
+			var filter = new GeoBoundingBoxFilter { TopLeft =  geoHashTopLeft, BottomRight = geoHashBottomRight };
+			this.SetDictionary(fieldName, filter, (d) => { 
+				if (Type.HasValue)
+					d.Add("type", Enum.GetName(typeof(GeoExecution), Type.Value));
+				this.GeoBoundingBoxFilter = d;
+			});
+		}
+		public void GeoDistance(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			this.GeoDistance(field, filterDescriptor);
+		}
+		public void GeoDistance(string field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoDistanceFilterDescriptor();
+			filterDescriptor(filter);
+			this.SetDictionary(field, filter._Location, d => {
+
+				var dd = new Dictionary<string, object>();
+				dd.Add("distance", filter._Distance);
+
+				if (!string.IsNullOrWhiteSpace(filter._GeoUnit))
+					dd.Add("distance_type", filter._GeoUnit);
+
+				if (!string.IsNullOrWhiteSpace(filter._GeoOptimizeBBox))
+					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
+
+				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
+
+				this.GeoDistanceFilter = dd;			
+			});
+		}
+		public void GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			this.GeoDistanceRange(field, filterDescriptor);
+		}
+		public void GeoDistanceRange(string field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoDistanceRangeFilterDescriptor();
+			filterDescriptor(filter);
+			if (filter._FromDistance == null)
+				throw new ArgumentNullException("FromDistance", 
+					"Distance should be set when using the geo distance range DSL");
+
+			if (filter._ToDistance == null)
+				throw new ArgumentNullException("ToDistance",
+					"Distance should be set when using the geo distance range DSL");
+
+			this.SetDictionary(field, filter._Location, d =>
+			{
+
+				var dd = new Dictionary<string, object>();
+				dd.Add("from", filter._FromDistance);
+				dd.Add("to", filter._ToDistance);
+				if (!string.IsNullOrWhiteSpace(filter._GeoUnit))
+					dd.Add("distance_type", filter._GeoUnit);
+
+				if (!string.IsNullOrWhiteSpace(filter._GeoOptimizeBBox))
+					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
+
+				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
+
+				this.GeoDistanceRangeFilter = dd;
+			});
+		}
+
+		
 
 		public void Limit(int limit)
 		{
 			this.LimitFilter = new LimitFilter { Value = limit };
-			if (this._Cache.HasValue)
-				this.LimitFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.LimitFilter._Name = this._Name;
+			this.SetCacheAndName(this.LimitFilter);
 		}
 		public void Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this.TypeFilter = new TypeFilter { Value = type };
-			if (this._Cache.HasValue)
-				this.TypeFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.TypeFilter._Name = this._Name;
+			this.SetCacheAndName(this.TypeFilter);
 		}
 		public void MatchAll()
 		{
 			this.MatchAllFilter = new MatchAllFilter { };
-			if (this._Cache.HasValue)
-				this.MatchAllFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.MatchAllFilter._Name = this._Name;
+			this.SetCacheAndName(this.MatchAllFilter);
 
 		}
 		public void NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector)
 		{
 			var filter = new NumericRangeFilterDescriptor<T>();
 			numericRangeSelector(filter);
-			this.NumericRangeFilter = new Dictionary<string, object>();
-			this.NumericRangeFilter.Add(filter._Field, filter);
-			if (this._Cache.HasValue)
-				this.NumericRangeFilter.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.NumericRangeFilter.Add("_name", this._Name);
+			this.SetDictionary(filter._Field, filter, (d) => this.NumericRangeFilter = d);
 		}
 		public void Range(Action<NumericRangeFilterDescriptor<T>> rangeSelector)
 		{
 			var filter = new NumericRangeFilterDescriptor<T>();
 			rangeSelector(filter);
-			this.RangeFilter = new Dictionary<string, object>();
-			this.RangeFilter.Add(filter._Field, filter);
-			if (this._Cache.HasValue)
-				this.RangeFilter.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.RangeFilter.Add("_name", this._Name);
+			this.SetDictionary(filter._Field, filter, (d) => this.RangeFilter = d);			
 		}
 		public void Script(Action<ScriptFilterDescriptor> scriptSelector)
 		{
 			var descriptor = new ScriptFilterDescriptor();
 			scriptSelector(descriptor);
+			this.SetCacheAndName(descriptor);
 			this.ScriptFilter = descriptor;
-			if (this._Cache.HasValue)
-				this.ScriptFilter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.ScriptFilter._Name = this._Name;
 		}
 		public void Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
 		{
@@ -192,12 +297,7 @@ namespace Nest
 		}
 		public void Prefix(string field, string prefix)
 		{
-			this.PrefixFilter = new Dictionary<string, object>();
-			this.PrefixFilter.Add(field, prefix);
-			if (this._Cache.HasValue)
-				this.PrefixFilter.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.PrefixFilter.Add("_name", this._Name);
+			this.SetDictionary(field, prefix, (d) => this.PrefixFilter = d);
 		}
 		public void Term(Expression<Func<T, object>> fieldDescriptor, string term)
 		{
@@ -206,12 +306,7 @@ namespace Nest
 		}
 		public void Term(string field, string term)
 		{
-			this.TermFilter = new Dictionary<string, object>();
-			this.TermFilter.Add(field, term);
-			if (this._Cache.HasValue)
-				this.TermFilter.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.TermFilter.Add("_name", this._Name);
+			this.SetDictionary(field, term, (d) => this.TermFilter = d);
 		}
 		public void Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
@@ -220,14 +315,11 @@ namespace Nest
 		}
 		public void Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
-			this.TermsFilter = new Dictionary<string, object>();
-			this.TermsFilter.Add(field, terms);
-			if (Execution.HasValue)
-				this.TermsFilter.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
-			if (this._Cache.HasValue)
-				this.TermsFilter.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.TermsFilter.Add("_name", this._Name);
+			this.SetDictionary(field, terms, (d) => {
+				if (Execution.HasValue)
+					d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
+				this.TermsFilter = d;
+			});
 		}
 
 		public void And(params Action<FilterDescriptor<T>>[] filters)
@@ -239,28 +331,40 @@ namespace Nest
 				selector(filter);
 				descriptors.Add(filter);
 			}
-			this.AndFilter = new Dictionary<string,object>();
-			this.AndFilter.Add("filters", descriptors);
-
-			if (this._Cache.HasValue)
-				this.AndFilter.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.AndFilter.Add("_name", this._Name);
+			this.SetDictionary("filters", descriptors, (d) => this.AndFilter = d);
+		}
+		public void Or(params Action<FilterDescriptor<T>>[] filters)
+		{
+			var descriptors = new List<FilterDescriptor<T>>();
+			foreach (var selector in filters)
+			{
+				var filter = new FilterDescriptor<T>();
+				selector(filter);
+				descriptors.Add(filter);
+			}
+			this.SetDictionary("filters", descriptors, (d) => this.OrFilter = d);
+		}
+		public void Not(Action<FilterDescriptor<T>> selector)
+		{
+			var filter = new FilterDescriptor<T>();
+			selector(filter);
+			this.SetDictionary("filter", filter, (d) => this.NotFilter = d);
 		}
 
+		public void Bool(Action<BoolFilterDescriptor<T>> booleanFilter)
+		{
+			var filter = new BoolFilterDescriptor<T>();
+			booleanFilter(filter);
+			this.SetCacheAndName(filter);
+			this.BoolFilter = filter;
+
+		}
 
 		public void Query(Action<QueryDescriptor<T>> querySelector)
 		{
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);
-
-			this.QueryFilter = new Dictionary<string, object>();
-			this.QueryFilter.Add("query", descriptor);
-			if (this._Cache.HasValue)
-				this.QueryFilter.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				this.QueryFilter.Add("_name", this._Name);
-
+			this.SetDictionary("query", descriptor, (d) => this.QueryFilter = d);
 		}
 
 

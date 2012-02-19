@@ -6,14 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class IdsFilter
+	public class IdsFilter : FilterBase
 	{
 		public IEnumerable<string> Type { get; set; }
 		public IEnumerable<string> Values { get; set; }
-		[JsonProperty(PropertyName = "_cache")]
-		internal bool? _Cache { get; set; }
-
-		[JsonProperty(PropertyName = "_name")]
-		internal string _Name { get; set; }
 	}
 }

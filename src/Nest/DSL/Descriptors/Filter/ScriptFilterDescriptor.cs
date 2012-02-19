@@ -7,19 +7,13 @@ using Nest.DSL;
 
 namespace Nest
 {
-	public class ScriptFilterDescriptor
+	public class ScriptFilterDescriptor : FilterBase
 	{
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		internal Dictionary<string, object> _Params { get; set; }
-
-		[JsonProperty(PropertyName = "_cache")]
-		internal bool? _Cache { get; set; }
-
-		[JsonProperty(PropertyName = "_name")]
-		internal string _Name { get; set; }
 
 		public ScriptFilterDescriptor Script(string script)
 		{

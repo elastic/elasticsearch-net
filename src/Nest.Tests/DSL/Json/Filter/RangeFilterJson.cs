@@ -47,7 +47,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff.Cache(true)
+				.Filter(ff => ff.Cache(true).Name("my_name")
 					.Range(n => n
 						.OnField(f => f.LOC)
 						.GreaterOrEquals(10)
@@ -65,7 +65,8 @@ namespace Nest.Tests.Dsl.Json.Filter
 								from_inclusive: true,
 								to_inclusive: true
 							},
-							_cache: true
+							_cache: true,
+							_name : ""my_name""
 						}
 
 					}

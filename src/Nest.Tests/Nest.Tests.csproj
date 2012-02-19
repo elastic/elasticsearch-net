@@ -58,6 +58,7 @@
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="BaseMappedElasticSearchTests.cs" />
+    <Compile Include="Dsl\Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Dsl\JsonifyTests.cs" />
     <Compile Include="Dsl\Json\Facets\FacetJson.cs" />
     <Compile Include="Dsl\Json\Facets\FilterFacetJson.cs" />
@@ -70,6 +71,10 @@
     <Compile Include="Dsl\Json\Facets\RangeFacetJson.cs" />
     <Compile Include="Dsl\Json\Facets\TermsFacetJson.cs" />
     <Compile Include="Dsl\Json\Filter\AndFilterJson.cs" />
+    <Compile Include="Dsl\Json\Filter\BoolFilterJson.cs" />
+    <Compile Include="Dsl\Json\Filter\GeoBoundingBoxFilterJson.cs" />
+    <Compile Include="Dsl\Json\Filter\NotFilterJson.cs" />
+    <Compile Include="Dsl\Json\Filter\OrFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\TermsFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\TermFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\ScriptFilterJson.cs" />

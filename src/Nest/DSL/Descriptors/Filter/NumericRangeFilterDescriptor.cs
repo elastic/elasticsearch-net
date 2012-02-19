@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class NumericRangeFilterDescriptor<T> where T : class
+	public class NumericRangeFilterDescriptor<T> : FilterBase where T : class
 	{
 		[JsonProperty("from")]
 		internal int? _From { get; set;}
@@ -19,7 +19,6 @@ namespace Nest
 		[JsonProperty("to_inclusive")]
 		internal bool? _ToInclusive { get; set; }
 
-		internal bool? _Cache { get; set; }
 		internal string _Field { get; set; }
 
 

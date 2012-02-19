@@ -9,49 +9,72 @@ using Nest.TestData.Domain;
 namespace Nest.Tests.Dsl.Json.Filter
 {
 	[TestFixture]
-	public class TermsFilterJson
+	public class OrFilterJson
 	{
 		[Test]
-		public void TermsFilter()
+		public void OrFilter()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
-					.Terms(f=>f.Name, new [] {"elasticsearch.pm"})
+				.Filter(filter=>filter
+					.Or(
+						f=>f.MatchAll(),
+						f=>f.Missing(p=>p.LOC)
+					)
+					
 				);
 				
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
-						terms: {
-							""name"": [""elasticsearch.pm""]
+						""or"": {
+							""filters"": [
+								{
+									""match_all"": {}
+								},
+								{
+									""missing"": {
+										""field"": ""loc""
+									}
+								}
+							]
 						}
 					}
 			}";
 			Assert.True(json.JsonEquals(expected), json);		
 		}
 		[Test]
-		public void TermsFilterWithCache()
+		public void OrFilterCacheNamed()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
-					.Cache(false).Name("terms_filter")
-					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.@bool)
+				.Filter(filter => filter.Cache(true).Name("and_filter")
+					.Or(
+						f => f.MatchAll(),
+						f => f.Missing(p => p.LOC)
+					)
+
 				);
 
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
-						terms: {
-							""name"": [""elasticsearch.pm""],
-							_cache:false,
-							_name: ""terms_filter"",
-							execution: ""bool""
+						""or"": {
+							""filters"": [
+								{
+									""match_all"": {}
+								},
+								{
+									""missing"": {
+										""field"": ""loc""
+									}
+								}
+							],
+							_cache:true,
+							_name:""and_filter""
 						}
-
 					}
 			}";
 			Assert.True(json.JsonEquals(expected), json);
