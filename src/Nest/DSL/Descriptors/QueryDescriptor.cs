@@ -22,6 +22,10 @@ namespace Nest
 		internal Prefix PrefixQuery { get; set; }
 		[JsonProperty(PropertyName = "bool")]
 		internal BoolQueryDescriptor<T> BoolQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "boosting")]
+		internal BoostingQueryDescriptor<T> BoostingQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "ids")]
+		internal IdsQuery IdsQuery { get; set; }
 
 
 		public QueryDescriptor()
@@ -33,6 +37,12 @@ namespace Nest
 			var query = new BoolQueryDescriptor<T>();
 			booleanQuery(query);
 			this.BoolQueryDescriptor = query;
+		}
+		public void Boosting(Action<BoostingQueryDescriptor<T>> boostingQuery)
+		{
+			var query = new BoostingQueryDescriptor<T>();
+			boostingQuery(query);
+			this.BoostingQueryDescriptor = query;
 		}
 		public void MatchAll(double? Boost = null, string NormField = null)
 		{
@@ -81,6 +91,19 @@ namespace Nest
 			if (Boost.HasValue)
 				prefix.Boost = Boost;
 			this.PrefixQuery = prefix;
+		}
+		public void Ids(IEnumerable<string> values)
+		{
+			this.IdsQuery = new IdsQuery { Values = values };
+		}
+		public void Ids(string type, IEnumerable<string> values)
+		{
+			type.ThrowIfNullOrEmpty("type");
+			this.IdsQuery = new IdsQuery { Values = values, Type = new[] { type } };
+		}
+		public void Ids(IEnumerable<string> types, IEnumerable<string> values)
+		{
+			this.IdsQuery = new IdsQuery { Values = values, Type = types };
 		}
 	}
 }
