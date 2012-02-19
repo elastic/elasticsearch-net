@@ -20,88 +20,67 @@ namespace Nest
 		internal Wildcard WildcardQuery { get; set; }
 		[JsonProperty(PropertyName = "prefix")]
 		internal Prefix PrefixQuery { get; set; }
+		[JsonProperty(PropertyName = "bool")]
+		internal BoolQueryDescriptor<T> BoolQueryDescriptor { get; set; }
 
-
-		private void ThrowIfNoSlotEmpty(string tried)
-		{
-			var filled = string.Empty;
-			Action<object, string> slot = (o, s) =>
-			{
-				if (o != null && tried != s)
-					filled = s;
-			};
-			slot(this.MatchAllQuery, "match_all");
-			slot(this.TermQuery, "term");
-			slot(this.WildcardQuery, "wildcard");
-			if (!string.IsNullOrEmpty(filled))
-			{
-				var message = "Tried to set a {0} query while the descriptor already contains a {1} query".F(tried, filled);
-				throw new DslException(message);
-			}
-		}
 
 		public QueryDescriptor()
 		{
 			
 		}
-
-		public QueryDescriptor<T> MatchAll(double? Boost = null, string NormField = null)
+		public void Bool(Action<BoolQueryDescriptor<T>> booleanQuery)
 		{
-			this.ThrowIfNoSlotEmpty("match_all");
-
+			var query = new BoolQueryDescriptor<T>();
+			booleanQuery(query);
+			this.BoolQueryDescriptor = query;
+		}
+		public void MatchAll(double? Boost = null, string NormField = null)
+		{
 			this.MatchAllQuery = new MatchAll() { NormField = NormField };
 			if (Boost.HasValue)
 				this.MatchAllQuery.Boost = Boost.Value;
-
-			return this;
 		}
-		public QueryDescriptor<T> Term(Expression<Func<T, object>> fieldDescriptor
+		public void Term(Expression<Func<T, object>> fieldDescriptor
 			, string value
 			, double? Boost = null)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Term(field, value, Boost: Boost);
+			this.Term(field, value, Boost: Boost);
 		}
-		public QueryDescriptor<T> Term(string field, string value, double? Boost = null)
+		public void Term(string field, string value, double? Boost = null)
 		{
-			this.ThrowIfNoSlotEmpty("term");
 			var term = new Term() { Field = field, Value = value };
 			if (Boost.HasValue)
 				term.Boost = Boost;
 			this.TermQuery = term;
-			return this;
 		}
-		public QueryDescriptor<T> Wildcard(Expression<Func<T, object>> fieldDescriptor
+		public void Wildcard(Expression<Func<T, object>> fieldDescriptor
 			, string value
 			, double? Boost = null)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Wildcard(field, value, Boost: Boost);
+			this.Wildcard(field, value, Boost: Boost);
 		}
-		public QueryDescriptor<T> Wildcard(string field, string value, double? Boost = null)
+		public void Wildcard(string field, string value, double? Boost = null)
 		{
-			this.ThrowIfNoSlotEmpty("wildcard");
 			var wildcard = new Wildcard() { Field = field, Value = value };
 			if (Boost.HasValue)
 				wildcard.Boost = Boost;
 			this.WildcardQuery = wildcard;
-			return this;
 		}
-		public QueryDescriptor<T> Prefix(Expression<Func<T, object>> fieldDescriptor
+		public void Prefix(Expression<Func<T, object>> fieldDescriptor
 			, string value
 			, double? Boost = null)
 		{
 			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
-			return this.Prefix(field, value, Boost: Boost);
+			this.Prefix(field, value, Boost: Boost);
 		}
-		public QueryDescriptor<T> Prefix(string field, string value, double? Boost = null)
+		public void Prefix(string field, string value, double? Boost = null)
 		{
-			this.ThrowIfNoSlotEmpty("wildcard");
 			var prefix = new Prefix() { Field = field, Value = value };
 			if (Boost.HasValue)
 				prefix.Boost = Boost;
 			this.PrefixQuery = prefix;
-			return this;
 		}
 	}
 }

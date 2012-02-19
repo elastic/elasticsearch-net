@@ -315,14 +315,15 @@ namespace Nest.DSL
 		}
 
 
-		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, QueryDescriptor<T>> querySelector, bool? Global = null)
+		public SearchDescriptor<T> FacetQuery(string name, Action<QueryDescriptor<T>> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
 			if (this._Facets == null)
 				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
 
-			var query = querySelector(new QueryDescriptor<T>());
+			var query = new QueryDescriptor<T>();
+			querySelector(query);
 			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Query = query });
 
 			return this;
@@ -342,10 +343,11 @@ namespace Nest.DSL
 		}
 
 
-		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryDescriptor<T>> query)
+		public SearchDescriptor<T> Query(Action<QueryDescriptor<T>> query)
 		{
 			query.ThrowIfNull("query");
-			this._Query = query(new QueryDescriptor<T>());
+			this._Query = new QueryDescriptor<T>();
+			query(this._Query);
 			return this;
 		}
 		public SearchDescriptor<T> Query(string rawQuery)
@@ -371,8 +373,8 @@ namespace Nest.DSL
 
 		public SearchDescriptor<T> MatchAll()
 		{
-			this._Query = new QueryDescriptor<T>()
-				.MatchAll();
+			this._Query = new QueryDescriptor<T>();
+			this._Query.MatchAll();
 			return this;
 		}
 	}

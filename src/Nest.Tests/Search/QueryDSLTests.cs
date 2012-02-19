@@ -103,27 +103,6 @@ namespace Nest.Tests
       Assert.GreaterOrEqual(results.Documents.Count(), 1);
     }
     [Test]
-    public void TestMixedQuery()
-    {
-      var e = Assert.Throws<DslException>(() =>
-      {
-        var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
-          .From(0)
-          .Size(10)
-          .Fields(f => f.Id, f => f.Name)
-          .SortAscending(f => f.LOC)
-          .SortDescending(f => f.Name)
-          .Query(q => q
-            .Term(f => f.Name, "elasticsearch.pm")
-            .Wildcard(f => f.Name, "elasticsearch.*")
-          )
-        );
-      });
-
-      Assert.NotNull(e);
-      Assert.AreEqual(e.Message, "Tried to set a wildcard query while the descriptor already contains a term query");
-    }
-    [Test]
     public void TestTermFacet()
     {
       var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s

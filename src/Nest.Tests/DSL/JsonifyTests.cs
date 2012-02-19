@@ -185,7 +185,7 @@ namespace Nest.Tests.DSL
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .Query(q => q);
+        .Query(q => {});
       var json = ElasticClient.Serialize(s);
       var expected = "{ from: 0, size: 10, query : {}}";
       Assert.True(json.JsonEquals(expected));
