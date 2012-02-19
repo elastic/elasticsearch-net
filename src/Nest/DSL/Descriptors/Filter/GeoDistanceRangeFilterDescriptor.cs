@@ -39,7 +39,7 @@ namespace Nest
 			To.ThrowIfNull("To");
 			this._FromDistance = From;
 			this._ToDistance = To;
-			this._GeoUnit = Enum.GetName(typeof(GeoUnit), unit);
+			this._GeoUnit = Enum.GetName(typeof(GeoUnit), Unit);
 			return this;
 		}
 		public GeoDistanceRangeFilterDescriptor Optimize(GeoOptimizeBBox optimize)

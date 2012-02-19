@@ -46,6 +46,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "geo_distance_range")]
 		internal Dictionary<string, object> GeoDistanceRangeFilter { get; set; }
 
+		[JsonProperty(PropertyName = "geo_polygon")]
+		internal Dictionary<string, object> GeoPolygonFilter { get; set; }
+
 		[JsonProperty(PropertyName = "limit")]
 		internal LimitFilter LimitFilter { get; set; }
 
@@ -252,7 +255,26 @@ namespace Nest
 			});
 		}
 
-		
+		public void GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			this.GeoPolygon(field, points);
+		}
+		public void GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
+		{
+			this.GeoPolygon(field, points.Select(p=> "{0}, {1}".F(p.Item1, p.Item2)).ToArray());
+		}
+
+		public void GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			this.GeoPolygon(field, points);
+		}
+		public void GeoPolygon(string fieldName, params string[] points)
+		{
+			var filter = new GeoPolygonFilter { Points = points };
+			this.SetDictionary(fieldName, filter, d => this.GeoPolygonFilter = d);
+		}
 
 		public void Limit(int limit)
 		{

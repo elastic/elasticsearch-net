@@ -81,6 +81,8 @@
   <ItemGroup>
     <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Filter\GeoPolygonFilter.cs" />
+    <Compile Include="DSL\Descriptors\Filter\GeoDistanceRangeFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoDistanceFilterDescriptor.cs" />
     <Compile Include="Enums\GeoOptimizeBBox.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
