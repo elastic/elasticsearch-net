@@ -95,6 +95,19 @@ namespace Nest
 			return idString;
 		}
 
+		public static string GetTypeNameFor<T>() where T : class
+		{
+			var type = typeof(T);
+			var typeName = type.Name;
+			var att = PropertyNameResolver.GetElasticPropertyFor<T>();
+			if (att != null && !att.Name.IsNullOrEmpty())
+				typeName = att.Name;
+			else
+				typeName = Inflector.MakePlural(type.Name).ToLower();
+
+			return typeName;
+		}
+
 		private string InferTypeName<T>() where T : class
 		{
 			var type = typeof(T);

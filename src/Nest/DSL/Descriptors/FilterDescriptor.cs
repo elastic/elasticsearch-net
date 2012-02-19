@@ -58,6 +58,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "match_all")]
 		internal MatchAllFilter MatchAllFilter { get; set; }
 
+		[JsonProperty(PropertyName = "has_child")]
+		internal object HasChildFilter { get; set; }
+
 		[JsonProperty(PropertyName = "numeric_range")]
 		internal Dictionary<string, object> NumericRangeFilter { get; set; }
 
@@ -274,6 +277,13 @@ namespace Nest
 		{
 			var filter = new GeoPolygonFilter { Points = points };
 			this.SetDictionary(fieldName, filter, d => this.GeoPolygonFilter = d);
+		}
+
+		public void HasChild<K>(Action<HasChildFilterDescriptor<K>> querySelector) where K : class
+		{
+			var descriptor = new HasChildFilterDescriptor<K>();
+			querySelector(descriptor);
+			this.HasChildFilter = descriptor;
 		}
 
 		public void Limit(int limit)

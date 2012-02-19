@@ -72,6 +72,7 @@
     <Compile Include="Dsl\Json\Facets\TermsFacetJson.cs" />
     <Compile Include="Dsl\Json\Filter\AndFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\BoolFilterJson.cs" />
+    <Compile Include="Dsl\Json\Filter\HasChildFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\GeoPolygonFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\GeoDistanceRangeFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\GeoDistanceFilterJson.cs" />
