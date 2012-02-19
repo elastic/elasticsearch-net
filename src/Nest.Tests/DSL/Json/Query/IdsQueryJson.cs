@@ -30,7 +30,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 			Assert.True(json.JsonEquals(expected), json);		
 		}
 		[Test]
-		public void IdsFilterWithType()
+		public void IdsQueryWithType()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
 				.Query(filter => filter
@@ -49,7 +49,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
-		public void IdsFilterWithTypes()
+		public void IdsQueryWithTypes()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
 				.Query(filter => filter

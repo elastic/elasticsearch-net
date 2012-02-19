@@ -26,11 +26,50 @@ namespace Nest
 		internal BoostingQueryDescriptor<T> BoostingQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "ids")]
 		internal IdsQuery IdsQuery { get; set; }
-
+		[JsonProperty(PropertyName = "custom_score")]
+		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "custom_boost_factor")]
+		internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "constant_score")]
+		internal ConstantScoreQueryDescriptor<T> ConstantScoreQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "dis_max")]
+		internal DismaxQueryDescriptor<T> DismaxQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "filtered")]
+		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
 
 		public QueryDescriptor()
 		{
 			
+		}
+		public void Filtered(Action<FilteredQueryDescriptor<T>> selector)
+		{
+			var query = new FilteredQueryDescriptor<T>();
+			selector(query);
+			this.FilteredQueryDescriptor = query;
+		}
+		public void Dismax(Action<DismaxQueryDescriptor<T>> selector)
+		{
+			var query = new DismaxQueryDescriptor<T>();
+			selector(query);
+			this.DismaxQueryDescriptor = query;
+		}
+		public void ConstantScore(Action<ConstantScoreQueryDescriptor<T>> selector)
+		{
+			var query = new ConstantScoreQueryDescriptor<T>();
+			selector(query);
+			this.ConstantScoreQueryDescriptor = query;
+		}
+		public void CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
+		{
+			var query = new CustomBoostFactorQueryDescriptor<T>();
+			selector(query);
+			this.CustomBoostFactorQueryDescriptor = query;
+		}
+		public void CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
+		{
+			var query = new CustomScoreQueryDescriptor<T>();
+			customScoreQuery(query);
+			this.CustomScoreQueryDescriptor = query;
 		}
 		public void Bool(Action<BoolQueryDescriptor<T>> booleanQuery)
 		{
