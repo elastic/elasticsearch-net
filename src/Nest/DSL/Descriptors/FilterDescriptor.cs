@@ -7,6 +7,7 @@ using Nest.DSL;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
+using System.Globalization;
 
 namespace Nest
 {
@@ -180,11 +181,14 @@ namespace Nest
 		}
 		public void GeoBoundingBox(string fieldName, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
 		{
+      var c = CultureInfo.InvariantCulture;
 			topLeftX.ThrowIfNull("topLeftX");
 			topLeftY.ThrowIfNull("topLeftY");
 			bottomRightX.ThrowIfNull("bottomRightX");
 			bottomRightY.ThrowIfNull("bottomRightY");
-			this.GeoBoundingBox(fieldName, "{0}, {1}".F(topLeftX, topLeftY), "{0}, {1}".F(bottomRightX, bottomRightY), Type);
+      this.GeoBoundingBox(fieldName, 
+        "{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c)),
+        "{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c)), Type);
 		}
 
 		public void GeoBoundingBox(string fieldName, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
@@ -265,7 +269,8 @@ namespace Nest
 		}
 		public void GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
 		{
-			this.GeoPolygon(field, points.Select(p=> "{0}, {1}".F(p.Item1, p.Item2)).ToArray());
+      var c = CultureInfo.InvariantCulture;
+			this.GeoPolygon(field, points.Select(p=> "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
 		}
 
 		public void GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)

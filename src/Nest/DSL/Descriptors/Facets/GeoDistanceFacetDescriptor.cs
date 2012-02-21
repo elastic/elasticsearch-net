@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using System.Globalization;
 
 namespace Nest.DSL
 {
@@ -58,11 +59,12 @@ namespace Nest.DSL
       this._PinLocation = geoLocationHash;
       return this;
     }
-    public GeoDistanceFacetDescriptor<T> PinTo(int? Lat = null, int? Lon = null)
+    public GeoDistanceFacetDescriptor<T> PinTo(double Lat, double Lon)
     {
+      var c = CultureInfo.InvariantCulture;
       Lat.ThrowIfNull("Lat");
       Lon.ThrowIfNull("Lon");
-      this._PinLocation = "{0}, {1}".F(Lat, Lon);
+      this._PinLocation = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
       return this;
     }
     public GeoDistanceFacetDescriptor<T> Unit(GeoUnit unit)

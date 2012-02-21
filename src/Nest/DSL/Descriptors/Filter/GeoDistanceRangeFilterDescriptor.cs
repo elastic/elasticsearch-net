@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Nest.DSL;
+using System.Globalization;
 
 namespace Nest
 {
@@ -17,7 +18,8 @@ namespace Nest
 
 		public GeoDistanceRangeFilterDescriptor Location(double X, double Y)
 		{
-			this._Location = "{0}, {1}".F(X, Y);
+      var c = CultureInfo.InvariantCulture;
+			this._Location = "{0}, {1}".F(X.ToString(c), Y.ToString(c));
 			return this;
 		}
 		public GeoDistanceRangeFilterDescriptor Location(string geoHash)
