@@ -85,6 +85,14 @@
     <Compile Include="DSL\Descriptors\Filter\GeoPolygonFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoDistanceRangeFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoDistanceFilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\BoolQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\BoostingQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\ConstantScoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\CustomBoostFactorQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\CustomScoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\DismaxQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\FilteredQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\IdsQuery.cs" />
     <Compile Include="Enums\GeoOptimizeBBox.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Enums\GeoUnit.cs" />
@@ -336,9 +344,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DSL\Descriptors\Query\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
