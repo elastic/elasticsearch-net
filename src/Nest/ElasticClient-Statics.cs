@@ -22,14 +22,14 @@ namespace Nest
 		internal static readonly JsonSerializerSettings SerializationSettings;
 		internal static readonly PropertyNameResolver PropertyNameResolver;
 
-		static ElasticClient()
-		{
-			SerializationSettings = new JsonSerializerSettings()
-				{
-					ContractResolver = new ElasticResolver(),
-					NullValueHandling = NullValueHandling.Ignore,
-					DefaultValueHandling = DefaultValueHandling.Ignore,
-					Converters = new List<JsonConverter> 
+    private static JsonSerializerSettings CreateSettings()
+    {
+      return new JsonSerializerSettings()
+      {
+        ContractResolver = new ElasticResolver(),
+        NullValueHandling = NullValueHandling.Ignore,
+        DefaultValueHandling = DefaultValueHandling.Ignore,
+        Converters = new List<JsonConverter> 
 				{ 
 					new IsoDateTimeConverter(), 
 					new TermConverter(), 
@@ -38,8 +38,21 @@ namespace Nest
 					new ShardsSegmentConverter(),
 					new RawOrQueryDescriptorConverter()
 				}
-				};
+      };
+    }
+
+    public static void AddConverter(JsonConverter converter)
+    {
+      ElasticClient.SerializationSettings.Converters.Add(converter);
+    }
+
+
+
+		static ElasticClient()
+		{
+      SerializationSettings = ElasticClient.CreateSettings();
 			PropertyNameResolver = new PropertyNameResolver(SerializationSettings);
+
 		}
 		public static string Serialize<T>(T @object)
 		{
