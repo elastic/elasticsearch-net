@@ -36,16 +36,21 @@ namespace Nest
 		internal DismaxQueryDescriptor<T> DismaxQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "filtered")]
 		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
-
 		[JsonProperty(PropertyName = "text")]
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
-
+		[JsonProperty(PropertyName = "query_string")]
+		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
 
 		public QueryDescriptor()
 		{
 			
 		}
-
+		public void QueryString(Action<QueryStringDescriptor<T>> selector)
+		{
+			var query = new QueryStringDescriptor<T>();
+			selector(query);
+			this.QueryStringDescriptor = query;
+		}
 		public void Text(Action<TextQueryDescriptor<T>> selector)
 		{
 			var query = new TextQueryDescriptor<T>();

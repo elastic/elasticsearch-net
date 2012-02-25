@@ -95,6 +95,7 @@
     <Compile Include="Dsl\Json\Query\BoolQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\BoostingQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\ConstantScoreQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\TextPhrasePrefixQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\TextPhraseQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\TextQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\FilteredQueryJson.cs" />

@@ -305,7 +305,7 @@
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\Inflector.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
-    <Compile Include="DSL\QueryString.cs" />
+    <Compile Include="DSL\Descriptors\Query\QueryStringDescriptor.cs" />
     <Compile Include="DSL\Term.cs" />
     <Compile Include="DSL\Wildcard.cs" />
     <Compile Include="ElasticClient-Search.cs" />
