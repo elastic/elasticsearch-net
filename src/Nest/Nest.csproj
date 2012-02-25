@@ -88,11 +88,15 @@
     <Compile Include="DSL\Descriptors\Query\BoolQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\BoostingQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\ConstantScoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\TextPhrasePrefixQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\TextPhraseQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\TextQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\CustomBoostFactorQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\CustomScoreQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\DismaxQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FilteredQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\IdsQuery.cs" />
+    <Compile Include="Enums\Operator.cs" />
     <Compile Include="Enums\GeoOptimizeBBox.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Enums\GeoUnit.cs" />

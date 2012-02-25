@@ -92,6 +92,16 @@
     <Compile Include="Dsl\Json\Filter\LimitFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\IdsFilterJson.cs" />
     <Compile Include="Dsl\Json\Filter\ExistFilterJson.cs" />
+    <Compile Include="Dsl\Json\Query\BoolQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\BoostingQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\ConstantScoreQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\TextPhraseQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\TextQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\FilteredQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\DismaxQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\CustomBoostFactorQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\IdsQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\CustomScoreQueryJson.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
     <Compile Include="Indices\SegmentsTests.cs" />
     <Compile Include="Indices\ExistsTests.cs" />

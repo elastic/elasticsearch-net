@@ -37,10 +37,49 @@ namespace Nest
 		[JsonProperty(PropertyName = "filtered")]
 		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
 
+		[JsonProperty(PropertyName = "text")]
+		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
+
+
 		public QueryDescriptor()
 		{
 			
 		}
+
+		public void Text(Action<TextQueryDescriptor<T>> selector)
+		{
+			var query = new TextQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for text query");
+			this.TextQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+		}
+		public void TextPhrase(Action<TextPhraseQueryDescriptor<T>> selector)
+		{
+			var query = new TextPhraseQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for text_phrase query");
+			this.TextQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+		}
+		public void TextPhrasePrefix(Action<TextPhrasePrefixQueryDescriptor<T>> selector)
+		{
+			var query = new TextPhrasePrefixQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for text_phrase query");
+			this.TextQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+		}
+
 		public void Filtered(Action<FilteredQueryDescriptor<T>> selector)
 		{
 			var query = new FilteredQueryDescriptor<T>();
