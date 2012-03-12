@@ -285,6 +285,8 @@ namespace Nest
 					objectAction += ", \"parent\" : \"{0}\" ".F(@object.Parent);
 				if (@object.VersionType != VersionType.Internal)
 					objectAction += ", \"version_type\" : \"{0}\" ".F(@object.VersionType.ToString().ToLower());
+				if (!@object.Routing.IsNullOrEmpty())
+					objectAction += ", \"routing\" : \"{0}\" ".F(@object.Routing);
 				objectAction += "} }\n";
 
 				sb.Append(objectAction);
