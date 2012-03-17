@@ -6,7 +6,7 @@ using NUnit.Framework;
 using Nest.DSL;
 using Nest.TestData.Domain;
 
-namespace Nest.Tests.Dsl.Integration.Filter
+namespace Nest.Tests.Integration.Filter
 {
 	[TestFixture]
 	public class BoolFilterTests : BaseElasticSearchTests

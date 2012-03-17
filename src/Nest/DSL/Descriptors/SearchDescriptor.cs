@@ -9,11 +9,6 @@ using System.Linq.Expressions;
 
 namespace Nest.DSL
 {
-	public class SearchDescriptor : SearchDescriptor<dynamic>
-	{
-
-	}
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SearchDescriptor<T> where T : class
 	{

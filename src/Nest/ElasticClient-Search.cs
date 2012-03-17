@@ -9,6 +9,17 @@ namespace Nest
 {
     public partial class ElasticClient
     {
+				public QueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher)
+				{
+					var search = new SearchDescriptor<dynamic>();
+					var descriptor = searcher(search);
+					var path = this.GetPathForDynamic(descriptor);
+					var query = ElasticClient.Serialize(descriptor);
+
+					ConnectionStatus status = this.Connection.PostSync(path, query);
+					var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
+					return r;
+				}
         public QueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class
         {
 					var search = new SearchDescriptor<T>();
@@ -20,17 +31,7 @@ namespace Nest
 					var r = this.ToParsedResponse<QueryResponse<T>>(status);
 					return r;
         }
-				public QueryResponse<dynamic> Search(Func<SearchDescriptor, SearchDescriptor> searcher)
-				{
-					var search = new SearchDescriptor();
-					var descriptor = searcher(search);
-					var path = this.GetPathForDynamic(descriptor);
-					var query = ElasticClient.Serialize(descriptor);
-
-					ConnectionStatus status = this.Connection.PostSync(path, query);
-					var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
-					return r;
-				}
+				
 				[Obsolete("string queries are super nasty!", false)]
 				public QueryResponse<T> Search<T>(string query) where T : class
 				{
@@ -41,7 +42,7 @@ namespace Nest
 					return r;
 				}
 
-				private string GetPathForDynamic(SearchDescriptor descriptor)
+				private string GetPathForDynamic(SearchDescriptor<dynamic> descriptor)
 				{
 					var indices = this.Settings.DefaultIndex;
 					if (descriptor._Indices.HasAny())

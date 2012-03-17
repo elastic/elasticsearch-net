@@ -37,8 +37,8 @@ namespace Nest.Tests
 		public void BogusQuery()
 		{
 			var client = this.ConnectedClient;
-			QueryResponse<Post> queryResults = client.Search<Post>(
-				@"here be dragons"
+			QueryResponse<Post> queryResults = client.Search<Post>(s=>s
+				.Query("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
 			var error = queryResults.ConnectionStatus.Error;

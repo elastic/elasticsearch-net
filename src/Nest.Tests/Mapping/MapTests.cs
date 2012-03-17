@@ -7,7 +7,6 @@ using Nest.Mapping;
 using Nest.TestData;
 using Nest.TestData.Domain;
 using NUnit.Framework;
-using Nest.Mapping;
 
 namespace Nest.Tests.Mapping
 {

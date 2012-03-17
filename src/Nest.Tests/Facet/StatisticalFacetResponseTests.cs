@@ -13,25 +13,14 @@ namespace Nest.Tests.FacetResponses
         [Test]
         public void StatisticalHistogramFacet()
         {
-            QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
-                @"
-				{ 
-					""query"" : { ""match_all"" : { } },
-					""facets"" : 
-					{
-						""loc"" : 
-						{ 
-							""statistical"" : 
-							{
-								""field"" : ""loc""
-							}
-						}
-					}
-				}"
-                );
+            var results = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+							.MatchAll()
+							.FacetStatistical(fs=>fs
+								.OnField(f=>f.LOC)
+							));
 
-            Facet facet = queryResults.Facets["loc"];
-            this.TestDefaultAssertions(queryResults);
+						var facet = results.Facet<StatisticalFacet>(f => f.LOC);
+						this.TestDefaultAssertions(results);
 
             Assert.IsInstanceOf<StatisticalFacet>(facet);
 

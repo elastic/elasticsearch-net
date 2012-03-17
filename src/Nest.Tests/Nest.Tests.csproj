@@ -58,7 +58,6 @@
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="BaseMappedElasticSearchTests.cs" />
-    <Compile Include="Dsl\Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Dsl\JsonifyTests.cs" />
     <Compile Include="Dsl\Json\Facets\FacetJson.cs" />
     <Compile Include="Dsl\Json\Facets\FilterFacetJson.cs" />
@@ -127,6 +126,8 @@
     <Compile Include="Indices\SegmentsTests.cs" />
     <Compile Include="Indices\ExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
+    <Compile Include="Integration\Filter\BoolFilterTests.cs" />
+    <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />
     <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
