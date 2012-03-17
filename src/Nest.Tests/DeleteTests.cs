@@ -215,20 +215,20 @@ namespace Nest.Tests
 		[Test]
 		public void RemoveAllByQuery()
 		{
-      var deleteQuery = @" {
-							""term"" : { ""name"" : ""elasticsearch.pm"" }
-					}";
-      var query = @" { ""query"" : " + deleteQuery + "}";
 			this.ResetIndexes();
-			var result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
+			);
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-      this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(deleteQuery);
+			this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(q => q.Term(f => f.Name, "elasticsearch.pm"));
 
-			result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
+			);
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
 			Assert.True(result.Total == 0);
@@ -247,15 +247,19 @@ namespace Nest.Tests
 					}";
       var query = @" { ""query"" : "+ deleteQuery +"}";
       this.ResetIndexes();
-      var result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
+			);
       Assert.IsNotNull(result);
       Assert.IsNotNull(result.Documents);
       var totalSet = result.Documents.Count();
       Assert.Greater(totalSet, 0);
       var totalResults = result.Total;
-      this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(deleteQuery);
+			this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(q => q.Term(f => f.Name, "elasticsearch.pm"));
 
-      result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
+			);
       Assert.IsNotNull(result);
       Assert.IsNotNull(result.Documents);
       Assert.True(result.Total == 0);
@@ -268,20 +272,23 @@ namespace Nest.Tests
 		[Test]
 		public void RemoveAllByQueryOverIndices()
 		{
-      var deleteQuery = @" {
-							""term"" : { ""name"" : ""elasticsearch.pm"" }
-					}";
-      var query = @" { ""query"" : " + deleteQuery + "}";
 			this.ResetIndexes();
-			var result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
+			);
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-      this.ConnectedClient.DeleteByQueryOverIndices<ElasticSearchProject>(deleteQuery, new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
+      this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(q => q
+				.Indices(new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" })
+				.Term(f => f.Name, "elasticsearch.pm")
+			);
 
-			result = this.ConnectedClient.Search<ElasticSearchProject>(query);
+			result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
+			);
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
 			Assert.True(result.Total == 0);

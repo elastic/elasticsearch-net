@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using Nest.DSL;
 
 namespace Nest
 {
@@ -378,6 +379,74 @@ namespace Nest
 				parameters.Add("version_type=" + indexParameters.VersionType.ToString().ToLower());
 
 			return parameters;
+		}
+
+		private string GetPathForDynamic(SearchDescriptor<dynamic> descriptor)
+		{
+			var indices = this.Settings.DefaultIndex;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+
+			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
+
+			return this.PathJoin(indices, types, descriptor._Routing);
+		}
+		private string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
+		{
+			var indices = this.Settings.DefaultIndex;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+
+			var types = this.InferTypeName<T>();
+			if (descriptor._Types.HasAny())
+				types = string.Join(",", descriptor._Types);
+			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
+				types = null;
+
+			return this.PathJoin(indices, types, descriptor._Routing);
+		}
+		private string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor)
+		{
+			var indices = this.Settings.DefaultIndex;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+
+			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
+
+			return this.PathJoin(indices, types, descriptor._Routing, "_query");
+		}
+		private string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor) where T : class
+		{
+			var indices = this.Settings.DefaultIndex;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+
+			var types = this.InferTypeName<T>();
+			if (descriptor._Types.HasAny())
+				types = string.Join(",", descriptor._Types);
+			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
+				types = null;
+
+			return this.PathJoin(indices, types, descriptor._Routing, "_query");
+		}
+		private string PathJoin(string indices, string types, string routing, string extension = "_search")
+		{
+			string path = string.Concat(!string.IsNullOrEmpty(types) ?
+											 this.CreatePath(indices, types) :
+											 this.CreatePath(indices), extension);
+			if (!String.IsNullOrEmpty(routing))
+			{
+				path = "{0}?routing={1}".F(path, routing);
+			}
+			return path;
 		}
 
 	}

@@ -85,32 +85,38 @@ namespace HackerNews.Indexer
 						&& name == "row")
 					{
 						post.Meta = meta;
-						
 						postQueue.Add(post);
 						if (postQueue.Count() == 1000)
 						{
-							client.IndexAsync<Post>(postQueue, (c) =>
+							/*client.IndexAsync<Post>(postQueue, (c) =>
 							{
 								if (!c.Success)
 									dropped++;
-							});
-
+							});*/
+							processed += postQueue.Count();
 							postQueue = new List<Post>();
-							processed++;
+							
 						}
-		
-						
-
 						Console.Write("\rProcessed:{0}, Dropped:{2} in {1}", processed, sw.Elapsed, dropped);
 
 						post = new Post();
 						meta = new PostMetaData();
 					}
-
-
+				}
+				if (postQueue.Count() > 0)
+				{
+					/*client.IndexAsync<Post>(postQueue, (c) =>
+					{
+						if (!c.Success)
+							dropped++;
+					});*/
+					processed += postQueue.Count();
+					postQueue = new List<Post>();
+					
 				}
 				sw.Stop();
-				Console.WriteLine("\nDone! {0}", sw.Elapsed);
+				Console.WriteLine("\nDone!", sw.Elapsed);
+				Console.WriteLine("{0} docs in {1} => {2} docs/s", processed, sw.Elapsed, processed / sw.Elapsed.TotalSeconds);
 			}
 			catch (Exception e)
 			{

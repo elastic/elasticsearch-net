@@ -41,45 +41,5 @@ namespace Nest
 					var r = this.ToParsedResponse<QueryResponse<T>>(status);
 					return r;
 				}
-
-				private string GetPathForDynamic(SearchDescriptor<dynamic> descriptor)
-				{
-					var indices = this.Settings.DefaultIndex;
-					if (descriptor._Indices.HasAny())
-						indices = string.Join(",", descriptor._Indices);
-					else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
-						indices = "_all";
-
-					string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
-
-					return this.PathJoin(indices, types, descriptor._Routing);
-				}
-				private string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
-				{
-						var indices = this.Settings.DefaultIndex;
-					if (descriptor._Indices.HasAny())
-						indices = string.Join(",", descriptor._Indices);
-					else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
-						indices = "_all";
-
-					var types = this.InferTypeName<T>();
-					if (descriptor._Types.HasAny())
-						types = string.Join(",", descriptor._Types);
-					else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
-						types = null;
-
-					return this.PathJoin(indices, types, descriptor._Routing);
-				}
-				private string PathJoin(string indices, string types, string routing)
-				{
-					string path = string.Concat(!string.IsNullOrEmpty(types) ?
-													 this.CreatePath(indices, types) :
-													 this.CreatePath(indices), "_search");
-					if (!String.IsNullOrEmpty(routing))
-					{
-						path = "{0}?routing={1}".F(path, routing);
-					}
-					return path;
-				}
     }
 }

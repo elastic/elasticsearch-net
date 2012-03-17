@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+
 	public class QueryDescriptor : QueryDescriptor<dynamic>
 	{
 
