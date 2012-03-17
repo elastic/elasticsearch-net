@@ -60,6 +60,8 @@ namespace Nest.Resolvers.Converters
                         return serializer.Deserialize(o.CreateReader(), typeof(GeoDistanceFacet));
                     case "filter":
                         return serializer.Deserialize(o.CreateReader(), typeof(FilterFacet));
+										case "query":
+												return serializer.Deserialize(o.CreateReader(), typeof(QueryFacet));
                 }
             }
 
