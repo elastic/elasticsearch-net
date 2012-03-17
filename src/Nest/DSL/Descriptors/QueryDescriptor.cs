@@ -38,6 +38,9 @@ namespace Nest
 		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "text")]
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "fuzzy")]
+		internal IDictionary<string, object> FuzzyQueryDescriptor { get; set; }
+
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
 
@@ -50,6 +53,39 @@ namespace Nest
 			var query = new QueryStringDescriptor<T>();
 			selector(query);
 			this.QueryStringDescriptor = query;
+		}
+		public void Fuzzy(Action<FuzzyQueryDescriptor<T>> selector)
+		{
+			var query = new FuzzyQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for fuzzy query");
+			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+		}
+		public void FuzzyNumeric(Action<FuzzyNumericQueryDescriptor<T>> selector)
+		{
+			var query = new FuzzyNumericQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for fuzzy query");
+			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+		}
+		public void FuzzyDate(Action<FuzzyDateQueryDescriptor<T>> selector)
+		{
+			var query = new FuzzyDateQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for fuzzy query");
+			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
 		}
 		public void Text(Action<TextQueryDescriptor<T>> selector)
 		{
