@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Filter\NestedFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\RangeFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\HasChildFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoPolygonFilter.cs" />
@@ -89,6 +90,9 @@
     <Compile Include="DSL\Descriptors\Query\BoolQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\BoostingQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\ConstantScoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\IndicesQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\NestedQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\TopChildrenQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\SpanNotQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\SpanOrQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\SpanNearQueryDescriptor.cs" />
@@ -111,6 +115,8 @@
     <Compile Include="DSL\Descriptors\Query\DismaxQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FilteredQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\IdsQuery.cs" />
+    <Compile Include="Enums\NestedScore.cs" />
+    <Compile Include="Enums\TopChildrenScore.cs" />
     <Compile Include="Enums\Operator.cs" />
     <Compile Include="Enums\GeoOptimizeBBox.cs" />
     <Compile Include="Enums\GeoDistance.cs" />

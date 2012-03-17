@@ -63,6 +63,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "span_not")]
 		internal SpanNotQueryDescriptor<T> SpanNotQueryDescriptor { get; set; }
 
+		[JsonProperty(PropertyName = "top_children")]
+		internal object TopChildrenQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "nested")]
+		internal NestedQueryDescriptor<T> NestedQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "indices")]
+		internal IndicesQueryDescriptor<T> IndicesQueryDescriptor { get; set; }
+
+
 		public QueryDescriptor()
 		{
 			
@@ -139,6 +147,19 @@ namespace Nest
 				{ query._Field, query}
 			};
 		}
+
+		public void Nested(Action<NestedQueryDescriptor<T>> selector)
+		{
+			var query = new NestedQueryDescriptor<T>();
+			selector(query);
+			this.NestedQueryDescriptor = query;
+		}
+		public void Indices(Action<IndicesQueryDescriptor<T>> selector)
+		{
+			var query = new IndicesQueryDescriptor<T>();
+			selector(query);
+			this.IndicesQueryDescriptor = query;
+		}
 		public void Range(Action<RangeQueryDescriptor<T>> selector)
 		{
 			var query = new RangeQueryDescriptor<T>();
@@ -167,6 +188,12 @@ namespace Nest
 			var query = new HasChildQueryDescriptor<K>();
 			selector(query);
 			this.HasChildQueryDescriptor = query;
+		}
+		public void TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
+		{
+			var query = new TopChildrenQueryDescriptor<K>();
+			selector(query);
+			this.TopChildrenQueryDescriptor = query;
 		}
 		public void Filtered(Action<FilteredQueryDescriptor<T>> selector)
 		{

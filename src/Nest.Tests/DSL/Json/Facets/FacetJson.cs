@@ -59,7 +59,7 @@ namespace Nest.Tests.Dsl.Json.Facets
           facets :  {
             ""name.sort"" :  
             {
-              scope: ""some_nested_query"",
+              _scope: ""some_nested_query"",
               terms: {
                 field: ""name.sort""
               },

@@ -17,7 +17,7 @@ namespace Nest
 		[JsonProperty("type")]
 		internal string _Type { get; set; }
 
-		[JsonProperty("scope")]
+		[JsonProperty("_scope")]
 		internal string _Scope { get; set;}
 		
 		[JsonProperty("query")]

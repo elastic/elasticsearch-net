@@ -95,6 +95,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "script")]
 		internal ScriptFilterDescriptor ScriptFilter { get; set; }
 
+		[JsonProperty(PropertyName = "nested")]
+		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
+
 		public FilterDescriptor()
 		{
 			
@@ -403,7 +406,13 @@ namespace Nest
 			querySelector(descriptor);
 			this.SetDictionary("query", descriptor, (d) => this.QueryFilter = d);
 		}
-
+		public void Nested(Action<NestedFilterDescriptor<T>> selector)
+		{
+			var descriptor = new NestedFilterDescriptor<T>();
+			selector(descriptor);
+			this.NestedFilter = descriptor;
+			this.SetCacheAndName(this.NestedFilter);
+		}
 
 	}
 }

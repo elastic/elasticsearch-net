@@ -14,7 +14,7 @@ namespace Nest.DSL
     [JsonProperty(PropertyName = "global")]
     public bool? Global { get; set; }
 
-    [JsonProperty(PropertyName = "scope")]
+    [JsonProperty(PropertyName = "_scope")]
     public string Scope { get; set; }
 
     [JsonProperty(PropertyName = "nested")]

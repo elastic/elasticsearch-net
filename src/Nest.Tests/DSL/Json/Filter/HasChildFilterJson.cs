@@ -27,7 +27,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 				filter : {
 					""has_child"": {
 					  ""type"": ""people"",
-					  ""scope"": ""my_scope"",
+					  ""_scope"": ""my_scope"",
 					  ""query"": {
 						""term"": {
 						  ""firstName"": {

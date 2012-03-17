@@ -9,23 +9,23 @@ using Nest.TestData.Domain;
 namespace Nest.Tests.Dsl.Json.Filter
 {
 	[TestFixture]
-	public class HasChildQueryJson
+	public class TopChildrenQueryJson
 	{
 		[Test]
-		public void HasChildThisQuery()
+		public void TopChildrenQuery()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.HasChild<Person>(fz => fz
+					.TopChildren<Person>(fz => fz
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
 						.Scope("my_scope")
 					)
 				);
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ has_child: { 
+			{ top_children: { 
 				type: ""people"",
 				_scope: ""my_scope"",
 				query: {
@@ -46,17 +46,19 @@ namespace Nest.Tests.Dsl.Json.Filter
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.HasChild<Person>(fz => fz
+					.TopChildren<Person>(fz => fz
 						.Query(qq => qq.Term(f => f.FirstName, "john"))
+						.Score(TopChildrenScore.avg)
 						.Scope("my_scope")
 						.Type("sillypeople")
 					)
 				);
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ has_child: { 
+			{ top_children: { 
 				type: ""sillypeople"",
 				_scope: ""my_scope"",
+				score: ""avg"",
 				query: {
 					term: {
 						firstName: {
