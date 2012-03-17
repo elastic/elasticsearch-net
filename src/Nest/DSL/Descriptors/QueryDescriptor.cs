@@ -40,9 +40,28 @@ namespace Nest
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "fuzzy")]
 		internal IDictionary<string, object> FuzzyQueryDescriptor { get; set; }
-
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
+
+		[JsonProperty(PropertyName = "flt")]
+		internal FuzzyLikeThisDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
+		[JsonProperty(PropertyName = "has_child")]
+		internal object HasChildQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "mlt")]
+		internal MoreLikeThisDescriptor<T> MoreLikeThisDescriptor { get; set; }
+		[JsonProperty(PropertyName = "range")]
+		internal IDictionary<string, object> RangeQueryDescriptor { get; set; }
+		
+		[JsonProperty(PropertyName = "span_term")]
+		internal SpanTerm SpanTermQuery { get; set; }
+		[JsonProperty(PropertyName = "span_first")]
+		internal SpanFirstQueryDescriptor<T> SpanFirstQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "span_or")]
+		internal SpanOrQueryDescriptor<T> SpanOrQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "span_near")]
+		internal SpanNearQueryDescriptor<T> SpanNearQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "span_not")]
+		internal SpanNotQueryDescriptor<T> SpanNotQueryDescriptor { get; set; }
 
 		public QueryDescriptor()
 		{
@@ -120,7 +139,35 @@ namespace Nest
 				{ query._Field, query}
 			};
 		}
-
+		public void Range(Action<RangeQueryDescriptor<T>> selector)
+		{
+			var query = new RangeQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for range query");
+			this.RangeQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+		}
+		public void FuzzyLikeThis(Action<FuzzyLikeThisDescriptor<T>> selector)
+		{
+			var query = new FuzzyLikeThisDescriptor<T>();
+			selector(query);
+			this.FuzzyLikeThisDescriptor = query;
+		}
+		public void MoreLikeThis(Action<MoreLikeThisDescriptor<T>> selector)
+		{
+			var query = new MoreLikeThisDescriptor<T>();
+			selector(query);
+			this.MoreLikeThisDescriptor = query;
+		}
+		public void HasChild<K>(Action<HasChildQueryDescriptor<K>> selector) where K : class
+		{
+			var query = new HasChildQueryDescriptor<K>();
+			selector(query);
+			this.HasChildQueryDescriptor = query;
+		}
 		public void Filtered(Action<FilteredQueryDescriptor<T>> selector)
 		{
 			var query = new FilteredQueryDescriptor<T>();
@@ -197,7 +244,7 @@ namespace Nest
 				wildcard.Boost = Boost;
 			this.WildcardQuery = wildcard;
 		}
-		public void Prefix(Expression<Func<T, object>> fieldDescriptor
+			public void Prefix(Expression<Func<T, object>> fieldDescriptor
 			, string value
 			, double? Boost = null)
 		{
@@ -224,5 +271,41 @@ namespace Nest
 		{
 			this.IdsQuery = new IdsQuery { Values = values, Type = types };
 		}
+
+		public void SpanTerm(Expression<Func<T, object>> fieldDescriptor
+				, string value
+				, double? Boost = null)
+		{
+			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			this.SpanTerm(field, value, Boost: Boost);
+		}
+		public void SpanTerm(string field, string value, double? Boost = null)
+		{
+			var spanTerm = new SpanTerm() { Field = field, Value = value };
+			if (Boost.HasValue)
+				spanTerm.Boost = Boost;
+			this.SpanTermQuery = spanTerm;
+		}
+		public void SpanFirst(Func<SpanFirstQueryDescriptor<T>, SpanFirstQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			this.SpanFirstQueryDescriptor = selector(new SpanFirstQueryDescriptor<T>());
+		}
+		public void SpanNear(Func<SpanNearQueryDescriptor<T>, SpanNearQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			this.SpanNearQueryDescriptor = selector(new SpanNearQueryDescriptor<T>());
+		}
+		public void SpanOr(Func<SpanOrQueryDescriptor<T>, SpanOrQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			this.SpanOrQueryDescriptor = selector(new SpanOrQueryDescriptor<T>());
+		}
+		public void SpanNot(Func<SpanNotQueryDescriptor<T>, SpanNotQueryDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			this.SpanNotQueryDescriptor = selector(new SpanNotQueryDescriptor<T>());
+		}
+	
 	}
 }

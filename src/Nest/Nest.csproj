@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Filter\RangeFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\HasChildFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoPolygonFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoDistanceRangeFilterDescriptor.cs" />
@@ -88,6 +89,20 @@
     <Compile Include="DSL\Descriptors\Query\BoolQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\BoostingQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\ConstantScoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\SpanNotQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\SpanOrQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\SpanNearQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\SpanFirstQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\SpanQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\ISpanQuery.cs" />
+    <Compile Include="DSL\Descriptors\Query\SpanTerm.cs" />
+    <Compile Include="DSL\Descriptors\Query\MoreLikeThisDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\FuzzyLikeThisDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\FuzzyDateQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\FuzzyNumericQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\FuzzyQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\HasChildQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\RangeQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\TextPhrasePrefixQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\TextPhraseQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\TextQueryDescriptor.cs" />
@@ -291,10 +306,9 @@
     <Compile Include="ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
     <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="DSL\Fuzzy.cs" />
-    <Compile Include="DSL\IQuery.cs" />
-    <Compile Include="DSL\MatchAll.cs" />
-    <Compile Include="DSL\Prefix.cs" />
+    <Compile Include="DSL\Descriptors\Query\IQuery.cs" />
+    <Compile Include="DSL\Descriptors\Query\MatchAll.cs" />
+    <Compile Include="DSL\Descriptors\Query\Prefix.cs" />
     <Compile Include="Enums\TermVectorOption.cs" />
     <Compile Include="Enums\FieldIndexOption.cs" />
     <Compile Include="Enums\StoreOption.cs" />
@@ -306,8 +320,8 @@
     <Compile Include="Resolvers\Inflector.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
     <Compile Include="DSL\Descriptors\Query\QueryStringDescriptor.cs" />
-    <Compile Include="DSL\Term.cs" />
-    <Compile Include="DSL\Wildcard.cs" />
+    <Compile Include="DSL\Descriptors\Query\Term.cs" />
+    <Compile Include="DSL\Descriptors\Query\Wildcard.cs" />
     <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="Resolvers\ElasticSearchJsonResolver.cs" />
     <Compile Include="Enums\Consistency.cs" />

@@ -314,9 +314,9 @@ namespace Nest
 			numericRangeSelector(filter);
 			this.SetDictionary(filter._Field, filter, (d) => this.NumericRangeFilter = d);
 		}
-		public void Range(Action<NumericRangeFilterDescriptor<T>> rangeSelector)
+		public void Range(Action<RangeFilterDescriptor<T>> rangeSelector)
 		{
-			var filter = new NumericRangeFilterDescriptor<T>();
+			var filter = new RangeFilterDescriptor<T>();
 			rangeSelector(filter);
 			this.SetDictionary(filter._Field, filter, (d) => this.RangeFilter = d);			
 		}

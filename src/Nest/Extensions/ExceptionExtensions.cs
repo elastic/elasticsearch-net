@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace Nest
 {
@@ -17,12 +18,13 @@ namespace Nest
         public static void ThrowIfNullOrEmpty(this object @object, string parameterName)
         {
             @object.ThrowIfNull(parameterName);
+						if (@object is string)
+						{ 
+							var @string = @object as string;
 
-            string @string = @object as string;
-
-            if (@string == null || @string.Trim() == "")
-                throw new ArgumentException("Argument can't be null or empty", parameterName);
-
+							if (@string == null || @string.Trim() == "")
+									throw new ArgumentException("Argument can't be null or empty", parameterName);
+						}
         }
     }
 }
