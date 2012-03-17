@@ -45,11 +45,10 @@ namespace Nest.Tests.Dsl.Json.Filter
 				);
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ fuzzy: { name : { 
+			{ fuzzy: { loc : { 
 				boost: 2.0,
 				min_similarity: 0.6,
-				prefix_length: 2,
-				value : 200, 
+				value : 200.0, 
 			}}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

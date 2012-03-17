@@ -20,8 +20,8 @@ namespace Nest.Tests.Dsl.Json.Filter
 				.Filter(ff=>ff
 					.Range(n => n
 						.OnField(f=>f.LOC)
-						.From(10)
-						.To(20)
+						.From("10")
+						.To("20")
 						.FromExclusive()
 					)
 				);
@@ -31,9 +31,9 @@ namespace Nest.Tests.Dsl.Json.Filter
 				filter : {
 						range: {
 							""loc.sort"": {
-								from: 10,
-								to: 20,
-								from_inclusive: false
+								from: ""10"",
+								to: ""20"",
+								include_lower: false
 							}
 						}
 
@@ -50,8 +50,8 @@ namespace Nest.Tests.Dsl.Json.Filter
 				.Filter(ff => ff.Cache(true).Name("my_name")
 					.Range(n => n
 						.OnField(f => f.LOC)
-						.GreaterOrEquals(10)
-						.LowerOrEquals(20)
+						.GreaterOrEquals("10")
+						.LowerOrEquals("20")
 					)
 				);
 
@@ -60,10 +60,10 @@ namespace Nest.Tests.Dsl.Json.Filter
 				filter : {
 						range: {
 							""loc.sort"": {
-								from: 10,
-								to: 20,
-								from_inclusive: true,
-								to_inclusive: true
+								from: ""10"",
+								to: ""20"",
+								include_lower: true,
+								include_upper: true
 							},
 							_cache: true,
 							_name : ""my_name""
