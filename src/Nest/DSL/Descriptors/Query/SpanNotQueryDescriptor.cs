@@ -16,7 +16,7 @@ namespace Nest.DSL
 
 		public SpanNotQueryDescriptor<T> Include(Action<SpanQueryDescriptor<T>> selector)
 		{
-			selector.ThrowIfNullOrEmpty("selector");
+			selector.ThrowIfNull("selector");
 			var descriptors = new List<SpanQueryDescriptor<T>>();
 			var span = new SpanQueryDescriptor<T>();
 			selector(span);
@@ -25,7 +25,7 @@ namespace Nest.DSL
 		}
 		public SpanNotQueryDescriptor<T> Exclude(Action<SpanQueryDescriptor<T>> selector)
 		{
-			selector.ThrowIfNullOrEmpty("selector");
+			selector.ThrowIfNull("selector");
 			var descriptors = new List<SpanQueryDescriptor<T>>();
 			var span = new SpanQueryDescriptor<T>();
 			selector(span);

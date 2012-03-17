@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace Nest
 {
@@ -16,20 +17,26 @@ namespace Nest
 			return nJson == nOtherJson;
 		}
 
-
+		public static void ThrowIfNullOrEmpty(this string @object, string parameterName)
+		{
+			@object.ThrowIfNull(parameterName);
+			if (string.IsNullOrWhiteSpace(@object))
+					throw new ArgumentException("Argument can't be null or empty", parameterName);
+		}
+		public static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
+		{
+			@object.ThrowIfNull(parameterName);
+			if (!@object.Any())
+				throw new ArgumentException("Argument can not be an empty collection", parameterName);
+		}
+		public static bool HasAny<T>(this IEnumerable<T> list)
+		{
+			return list != null && list.Any();
+		}
 		public static void ThrowIfNull<T>(this T value, string name)
 		{
 			if (value == null)
-			{
 				throw new ArgumentNullException(name);
-			}
-		}
-		public static void ThrowIfNullOrEmpty(this string value, string name)
-		{
-			if (value.IsNullOrEmpty())
-			{
-				throw new ArgumentNullException(name);
-			}
 		}
 		public static string F(this string format, params object[] args)
 		{

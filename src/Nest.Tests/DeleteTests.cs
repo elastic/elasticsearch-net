@@ -196,29 +196,21 @@ namespace Nest.Tests
 		public void RemoveAllByPassingAsIEnumerableOfBulkParameters()
 		{
 			this.ResetIndexes();
-			var result = this.ConnectedClient.Search<ElasticSearchProject>(
-					@" { ""query"" : {
-							""match_all"" : { }
-					} }"
-			);
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(q => q.MatchAll());
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 
-			var parameterizedDocuments = result.Documents.Select(d=> new BulkParameters<ElasticSearchProject>(d) { Routing = "id" });
+			var parameterizedDocuments = result.Documents.Select(d=> new BulkParameters<ElasticSearchProject>(d) { });
 
 			this.ConnectedClient.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
 
-			result = this.ConnectedClient.Search<ElasticSearchProject>(
-					@" { ""query"" : {
-							""match_all"" : { }
-					} }"
-			);
+			result = this.ConnectedClient.Search<ElasticSearchProject>(q=>q.MatchAll());
 			Assert.IsNotNull(result);
 			Assert.IsNotNull(result.Documents);
-			Assert.True(result.Total == totalResults - totalSet);
+			Assert.AreEqual(result.Total, totalResults - totalSet);
 		}
 		[Test]
 		public void RemoveAllByQuery()
@@ -242,7 +234,7 @@ namespace Nest.Tests
 			Assert.True(result.Total == 0);
 
       //make sure we did not delete all.
-      var countResult = this.ConnectedClient.Count<ElasticSearchProject>();
+			var countResult = this.ConnectedClient.CountAll(q => q.MatchAll());
       Assert.True(countResult.IsValid);
       Assert.Greater(countResult.Count, 0);
 
@@ -269,7 +261,7 @@ namespace Nest.Tests
       Assert.True(result.Total == 0);
 
       //make sure we did not delete all.
-      var countResult = this.ConnectedClient.Count<ElasticSearchProject>();
+			var countResult = this.ConnectedClient.Count<ElasticSearchProject>(q => q.MatchAll());
       Assert.True(countResult.IsValid);
       Assert.Greater(countResult.Count,0);
     }
@@ -295,7 +287,7 @@ namespace Nest.Tests
 			Assert.True(result.Total == 0);
 
       //make sure we did not delete all.
-      var countResult = this.ConnectedClient.Count<ElasticSearchProject>();
+			var countResult = this.ConnectedClient.Count<ElasticSearchProject>(q => q.MatchAll());
       Assert.True(countResult.IsValid);
       Assert.Greater(countResult.Count, 0);
 

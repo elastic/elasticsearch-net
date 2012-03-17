@@ -56,7 +56,6 @@ namespace Nest.Tests.Mapping
 		public void GetMapping()
 		{
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex + "_clone", "elasticsearchprojects");
-			TestMapping(typeMapping);
 			Assert.AreEqual("double", typeMapping.Properties["floatValue"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["id"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["loc"].Type);

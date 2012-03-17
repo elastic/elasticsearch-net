@@ -14,7 +14,7 @@ namespace Nest.DSL
 
 		public SpanOrQueryDescriptor<T> Clauses(params Action<SpanQueryDescriptor<T>>[] selectors)
 		{
-			selectors.ThrowIfNullOrEmpty("selector");
+			selectors.ThrowIfNull("selector");
 			var descriptors = new List<SpanQueryDescriptor<T>>();
 			foreach (var selector in selectors)
 			{

@@ -20,7 +20,7 @@ namespace Nest.Tests.Search
 		public void SimpleCount()
 		{
 			//does a match_all on the default specified index
-			var countResults = this.ConnectedClient.Count();
+			var countResults = this.ConnectedClient.CountAll(q=>q.MatchAll());
 
 			Assert.True(countResults.Count > 0);
 		}
@@ -29,7 +29,7 @@ namespace Nest.Tests.Search
 		public void SimpleQueryCount()
 		{
 			//does a match_all on the default specified index
-			var countResults = this.ConnectedClient.Count(@"{ ""fuzzy"" : {
+			var countResults = this.ConnectedClient.CountAll(@"{ ""fuzzy"" : {
 							""followers.firstName"" : """ + this._LookFor.ToLower() + @"x""
 					}
 				}");
@@ -41,12 +41,12 @@ namespace Nest.Tests.Search
 		public void SimpleQueryWithIndexAndTypeCount()
 		{
 			//does a match_all on the default specified index
-			var countResults = this.ConnectedClient.Count(@"{ ""fuzzy"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower() + @"x""
-					}
-				}", "nest_test_data", "elasticsearchprojects");
-
-
+			var countResults = this.ConnectedClient.Count<ElasticSearchProject>(q=>q
+				.Fuzzy(fq=>fq
+					.OnField(f=>f.Followers.First().FirstName)
+					.Value(this._LookFor.ToLower())
+				)
+			);
 			Assert.True(countResults.Count > 0);
 		}
 
@@ -55,19 +55,7 @@ namespace Nest.Tests.Search
 		public void SimpleTypedCount()
 		{
 			//does a count over the default index/whatever T resolves to as type name
-			var countResults = this.ConnectedClient.Count<ElasticSearchProject>();
-
-			Assert.True(countResults.Count > 0);
-		}
-		[Test]
-		public void QueryTypedCount()
-		{
-			var countResults = this.ConnectedClient.Count<ElasticSearchProject>(
-				@"{ ""fuzzy"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower() + @"x""
-					}
-				}"
-			);
+			var countResults = this.ConnectedClient.Count<ElasticSearchProject>(q=>q.MatchAll());
 
 			Assert.True(countResults.Count > 0);
 		}

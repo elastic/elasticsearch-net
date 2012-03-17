@@ -10,6 +10,10 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	public class QueryDescriptor : QueryDescriptor<dynamic>
+	{
+
+	}
 	public class QueryDescriptor<T> where T : class
 	{
 		[JsonProperty(PropertyName = "match_all")]

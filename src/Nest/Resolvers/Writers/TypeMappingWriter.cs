@@ -139,9 +139,6 @@ namespace Nest
 						jsonWriter.WritePropertyName(propertyName);
 						jsonWriter.WriteStartObject();
 					}
-
-					
-
 					if (att.NumericType != NumericType.Default)
 					{
 						jsonWriter.WritePropertyName("type");

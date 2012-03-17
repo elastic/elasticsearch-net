@@ -45,7 +45,7 @@ namespace Nest.Tests
 			});
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings("   ", 80);
+				var settings = new ConnectionSettings(":asda:asdasd", 80);
 			});
 		}
 		[Test]

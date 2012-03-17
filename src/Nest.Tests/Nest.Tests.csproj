@@ -96,6 +96,9 @@
     <Compile Include="Dsl\Json\Query\BoolQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\BoostingQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\ConstantScoreQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\IndicesQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\TopChildrenQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\NestedQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\SpanOrQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\SpanNotQueryJson.cs" />
     <Compile Include="Dsl\Json\Query\SpanNearQueryJson.cs" />

@@ -36,7 +36,7 @@ namespace Nest.Tests.Dsl.Integration.Filter
 			Assert.Greater(results.Total, 10);
 			
 			// assert we actually filtered on something
-			var totalInIndex = this.ConnectedClient.Count<ElasticSearchProject>().Count;
+			var totalInIndex = this.ConnectedClient.Count<ElasticSearchProject>(q=>q.MatchAll()).Count;
 			Assert.Less(results.Total, totalInIndex);
 		}
 	}

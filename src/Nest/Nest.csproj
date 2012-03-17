@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Facets\QueryFacet.cs" />
     <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\NestedFilterDescriptor.cs" />
@@ -336,7 +337,6 @@
     <Compile Include="Enums\VersionType.cs" />
     <Compile Include="Exception\ElasticSearchException.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
-    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Domain\Connection\IConnection.cs" />
     <Compile Include="Domain\Connection\IConnectionSettings.cs" />
     <Compile Include="Enums\FieldType.cs" />

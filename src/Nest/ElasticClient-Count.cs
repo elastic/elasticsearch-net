@@ -17,45 +17,60 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public CountResponse Count()
-		{
-			return this.Count(@"match_all : { }");
+		public CountResponse CountAll(string query) {
+			return this._Count("_count", query);
 		}
-		public CountResponse Count<T>() where T : class
+		public CountResponse CountAll(Action<QueryDescriptor> querySelector)
 		{
-			return this.Count<T>(@"match_all : { }");
+			querySelector.ThrowIfNull("querySelector");
+			var descriptor = new QueryDescriptor();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
+			return this._Count("_count", query);
+		}
+		public CountResponse CountAll<T>(Action<QueryDescriptor<T>> querySelector) where T : class
+		{
+			querySelector.ThrowIfNull("querySelector");
+			var descriptor = new QueryDescriptor<T>();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
+			return this._Count("_count", query);
 		}
 
-		public CountResponse Count(string query)
+
+		public CountResponse Count(Action<QueryDescriptor> querySelector)
 		{
-			query.ThrowIfNull("query");
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			return this.Count(query, index);
-		}
-
-		public CountResponse Count(string query, string index)
-		{
-			query.ThrowIfNull("query");
-			index.ThrowIfNull("index");
-			return this.Count(query, index, null);
-		}
-
-		public CountResponse Count(string query, string index, string typeName)
-		{
-			query.ThrowIfNull("query");
-			index.ThrowIfNull("index");
-			string path = null;
-			if (typeName.IsNullOrEmpty())
-				path = this.CreatePath(index) + "_count";
-			else
-				path = this.CreatePath(index, typeName) + "_count";
-			if (!query.StartsWith("{"))
-				query = " { " + query + " }";
+			string path = this.CreatePath(index) + "_count";
+			var descriptor = new QueryDescriptor();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
 			return _Count(path, query);
 		}
-		public CountResponse Count<T>(string query) where T : class
+		public CountResponse Count(IEnumerable<string> indices, Action<QueryDescriptor> querySelector)
+		{
+			indices.ThrowIfEmpty("indices");
+			string path = string.Join(",", indices) + "/_count";
+			var descriptor = new QueryDescriptor();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
+			return _Count(path, query);
+		}
+		public CountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor> querySelector)
+		{
+			indices.ThrowIfEmpty("indices");
+			indices.ThrowIfEmpty("types");
+			string path = string.Join(",", indices) + "/" + string.Join(",", types) + "/_count";
+			var descriptor = new QueryDescriptor();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
+			return _Count(path, query);
+		}
+
+
+		public CountResponse Count<T>(Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
@@ -63,10 +78,31 @@ namespace Nest
 			var type = typeof(T);
 			var typeName = this.InferTypeName<T>();
 			string path = this.CreatePath(index, typeName) + "_count";
-			if (!query.StartsWith("{"))
-				query = " { " + query+  " }";
+			var descriptor = new QueryDescriptor<T>();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
 			return _Count(path, query);
 		}
+		public CountResponse Count<T>(IEnumerable<string> indices, Action<QueryDescriptor<T>> querySelector) where T : class
+		{
+			indices.ThrowIfEmpty("indices");
+			string path = string.Join(",", indices) + "/_count";
+			var descriptor = new QueryDescriptor<T>();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
+			return _Count(path, query);
+		}
+		public CountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor<T>> querySelector) where T : class
+		{
+			indices.ThrowIfEmpty("indices");
+			indices.ThrowIfEmpty("types");
+			string path = string.Join(",", indices) + "/" + string.Join(",", types) + "/_count";
+			var descriptor = new QueryDescriptor<T>();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
+			return _Count(path, query);
+		}
+
 		private CountResponse _Count(string path, string query)
 		{
 			var status = this.Connection.PostSync(path, query);
