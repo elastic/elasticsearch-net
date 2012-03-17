@@ -102,7 +102,7 @@ namespace Nest.DSL
       this._IsGlobal = true;
       return this;
     }
-    public GeoDistanceFacetDescriptor<T> FacetFilter(
+    public new GeoDistanceFacetDescriptor<T> FacetFilter(
       Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
     )
     {

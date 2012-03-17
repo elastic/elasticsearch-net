@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace Nest
 {
     [JsonObject]
-    public class StatisticalFacet : Facet, ISimpleFacet
+    public class StatisticalFacet : Facet, IFacet
     {
         //Hiding is intentional here
-        private new IEnumerable<FacetItem> Items { get; set; }
+        private IEnumerable<FacetItem> Items { get; set; }
         
 
 

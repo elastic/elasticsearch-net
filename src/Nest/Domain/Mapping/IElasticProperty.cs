@@ -25,7 +25,7 @@ namespace Nest.Mapping
 
 		bool OmitNorms { get; set; }
 		bool OmitTermFrequencyAndPositions { get; set; }
-		public bool IncludeInAll { get; set;}
+		bool IncludeInAll { get; set;}
 		bool Store { get; set; }
 
 		/// <summary>

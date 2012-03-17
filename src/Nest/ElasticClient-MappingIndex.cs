@@ -108,8 +108,7 @@ namespace Nest
                 response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
                 response.IsValid = true;
             } 
-            catch (Exception e) {
-            }
+            catch { }
             return response;
         }
         public IndicesResponse DeleteIndex<T>() where T : class

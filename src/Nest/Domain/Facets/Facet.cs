@@ -6,9 +6,6 @@ namespace Nest
     public interface IFacet
     {
     }
-    public interface ISimpleFacet 
-    {
-    }
 
     [JsonObject]
     public interface IFacet<T> : IFacet where T : FacetItem

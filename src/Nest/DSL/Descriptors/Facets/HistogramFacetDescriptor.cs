@@ -119,7 +119,7 @@ namespace Nest.DSL
       this._IsGlobal = true;
       return this;
     }
-    public HistogramFacetDescriptor<T> FacetFilter(
+		public new HistogramFacetDescriptor<T> FacetFilter(
       Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
     )
     {

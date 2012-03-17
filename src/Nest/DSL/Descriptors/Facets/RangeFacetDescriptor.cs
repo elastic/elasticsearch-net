@@ -95,7 +95,7 @@ namespace Nest.DSL
       this._IsGlobal = true;
       return this;
     }
-    public RangeFacetDescriptor<T, K> FacetFilter(
+		public new RangeFacetDescriptor<T, K> FacetFilter(
       Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
     )
     {

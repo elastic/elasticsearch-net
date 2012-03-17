@@ -9,10 +9,60 @@ using System.Linq.Expressions;
 
 namespace Nest.DSL
 {
+	public class SearchDescriptor : SearchDescriptor<dynamic>
+	{
+
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SearchDescriptor<T> where T : class
 	{
+		internal IEnumerable<string> _Indices { get; set; }
+		internal IEnumerable<string> _Types { get; set; }
+		internal string _Routing { get; set; }
+		internal bool _AllIndices { get; set; }
+		internal bool _AllTypes { get; set; }
 
+		public SearchDescriptor<T> Indices(IEnumerable<string> indices)
+		{
+			indices.ThrowIfEmpty("indices");
+			this._Indices = indices;
+			return this;
+		}
+		public SearchDescriptor<T> Index(string index)
+		{
+			index.ThrowIfNullOrEmpty("indices");
+			this._Indices = new[] { index };
+			return this;
+		}
+		public SearchDescriptor<T> Types(IEnumerable<string> types)
+		{
+			types.ThrowIfEmpty("types");
+			this._Types = types;
+			return this;
+		}
+		public SearchDescriptor<T> Type(string type)
+		{
+			type.ThrowIfNullOrEmpty("type");
+			this._Types = new[] { type };
+			return this;
+		}
+		public SearchDescriptor<T> AllIndices()
+		{
+			this._AllIndices = true;
+			return this;
+		}
+		public SearchDescriptor<T> AllTypes()
+		{
+			this._AllTypes = true;
+			return this;
+		}
+		public SearchDescriptor<T> Routing(string routing)
+		{
+			routing.ThrowIfNullOrEmpty("routing");
+			this._Routing = routing;
+			return this;
+		}
 		public SearchDescriptor()
 		{
 		}
@@ -70,7 +120,7 @@ namespace Nest.DSL
 			}
 		}
 
-	
+
 		internal string _RawQuery { get; set; }
 		internal QueryDescriptor<T> _Query { get; set; }
 
@@ -189,7 +239,7 @@ namespace Nest.DSL
 			var f = facet(descriptor);
 			var key = string.IsNullOrWhiteSpace(name) ? inferedFieldNameSelector(descriptor) : name;
 			if (string.IsNullOrWhiteSpace(key))
-			{ 
+			{
 				throw new DslException(
 					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
 				);

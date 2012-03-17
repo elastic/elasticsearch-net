@@ -17,7 +17,7 @@ namespace Nest.DSL
     }
 
     internal FilterDescriptor<T> _FacetFilter { get; set; }
-    public BaseFacetDescriptor<T> FacetFilter(
+    public virtual BaseFacetDescriptor<T> FacetFilter(
       Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
     )
     {
@@ -25,12 +25,12 @@ namespace Nest.DSL
     }
 
     internal string _Scope { get; set;}
-    public BaseFacetDescriptor<T> Scope(string scope)
+		public virtual BaseFacetDescriptor<T> Scope(string scope)
     {
       throw new NotImplementedException("Cannot call Base directly");
     }
     internal string _Nested { get; set; }
-    public BaseFacetDescriptor<T> Nested(string nested)
+		public virtual BaseFacetDescriptor<T> Nested(string nested)
     {
       throw new NotImplementedException("Cannot call Base directly");
     }
