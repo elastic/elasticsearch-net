@@ -17,11 +17,22 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public RegisterPercolateResponse RegisterPercolator<T>(string name, string query) where T : class
+		public RegisterPercolateResponse RegisterPercolator(string name, Action<QueryPathDescriptor<dynamic>> querySelector)
 		{
+			return this.RegisterPercolator<dynamic>(name, querySelector);
+		}
+		public RegisterPercolateResponse RegisterPercolator<T>(string name, Action<QueryPathDescriptor<T>> querySelector) where T : class
+		{
+		  querySelector.ThrowIfNull("queryDescriptor");
+			var descriptor = new QueryPathDescriptor<T>();
+			querySelector(descriptor);
+			var query = ElasticClient.Serialize(descriptor);
 			var index = this.Settings.DefaultIndex;
+			if (descriptor._Indices.HasAny())
+				index = descriptor._Indices.First();
 			return this.RegisterPercolator(index, name, query);
 		}
+		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public RegisterPercolateResponse RegisterPercolator(string index, string name, string query)
 		{
 			var path = "_percolator/{0}/{1}".F(index, name);
@@ -33,6 +44,7 @@ namespace Nest
 			var r = this.ToParsedResponse<RegisterPercolateResponse>(status);
 			return r;
 		}
+
 		public UnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
@@ -58,15 +70,19 @@ namespace Nest
 
 			return this.Percolate(index, type,"{{doc:{0}}}".F(doc));
 		}
-
-		public PercolateResponse Percolate(string index, string type, string doc)
+		public PercolateResponse Percolate<T>(string index, T @object) where T : class
 		{
-			var path = this.CreatePath(index, type) + "_percolate";
-			var status = this.Connection.PostSync(path, doc);
-			var r = this.ToParsedResponse<PercolateResponse>(status);
-			return r;
+			var type = this.InferTypeName<T>();
+			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
+
+			return this.Percolate(index, type, "{{doc:{0}}}".F(doc));
 		}
-		public PercolateResponse Percolate(string index, string type, string doc, string query)
+		public PercolateResponse Percolate<T>(string index, string type, T @object) where T : class
+		{
+			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
+			return this.Percolate(index, type, "{{doc:{0}}}".F(doc));
+		}
+		public PercolateResponse Percolate(string index, string type, string doc)
 		{
 			var path = this.CreatePath(index, type) + "_percolate";
 			var status = this.Connection.PostSync(path, doc);

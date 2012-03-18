@@ -20,16 +20,7 @@ namespace Nest.Tests.Search
 		{
 			var name = "mypercolator";
 			var c = this.ConnectedClient;
-			var r = c.RegisterPercolator<ElasticSearchProject>(
-				name, 
-				@"{
-					""query"" : {
-						""term"" : {
-							""field1"" : ""value1""
-						}
-					}
-				}"
-			);
+			var r = c.RegisterPercolator<ElasticSearchProject>(name, q=> q.Term(f=>f.Name, "elasticsearch.pm"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			Assert.AreEqual(r.Type, this.Settings.DefaultIndex);
@@ -41,16 +32,7 @@ namespace Nest.Tests.Search
 		{
 			var name = "mypercolator";
 			var c = this.ConnectedClient;
-			var r = c.RegisterPercolator<ElasticSearchProject>(
-				name,
-				@"{
-					""query"" : {
-						""term"" : {
-							""field1"" : ""value1""
-						}
-					}
-				}"
-			);
+			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Name, "elasticsearch.pm"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			Assert.AreEqual(r.Type, this.Settings.DefaultIndex);
@@ -75,35 +57,26 @@ namespace Nest.Tests.Search
 		{
 			this.RegisterPercolateTest(); // I feel a little dirty.
 			var c = this.ConnectedClient;
-			var r = c.Percolate(this.Settings.DefaultIndex
-			, "elasticsearchprojects"
-			, @"{
-					""doc"" : {
-						""field1"" : ""value1""
-					}
-				}
-			");
+			var name = "mypercolator";
+			var r = c.Percolate(new ElasticSearchProject()
+			{
+				Name = "NEST",
+				Country = "netherlands",
+				LOC = 100000, //Too many :(
+			});
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			Assert.NotNull(r.Matches);
-			Assert.True(r.Matches.Contains("mypercolator"));
-			var re = c.UnregisterPercolator<ElasticSearchProject>("mypercolator");
+			Assert.True(r.Matches.Contains(name));
+			var re = c.UnregisterPercolator<ElasticSearchProject>(name);
 		}
 		[Test]
 		public void PercolateTypedDoc()
 		{
 			this.RegisterPercolateTest(); // I feel a little dirty.
 			var c = this.ConnectedClient;
-			var r = c.RegisterPercolator<ElasticSearchProject>
-				(
-					"eclecticsearch"
-				, @"{
-					""query"" : {
-						""term"" : {
-							""country"" : ""netherlands""
-						}
-					}
-				}");
+			var name = "eclecticsearch";
+			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Country, "netherlands"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			var percolateResponse = this.ConnectedClient.Percolate(
@@ -111,15 +84,15 @@ namespace Nest.Tests.Search
 				{
 					Name = "NEST",
 					Country = "netherlands",
-					LOC = 100000,
+					LOC = 100000, //Too many :(
 				}
 			);
 			Assert.True(percolateResponse.IsValid);
 			Assert.True(percolateResponse.OK);
 			Assert.NotNull(percolateResponse.Matches);
-			Assert.True(percolateResponse.Matches.Contains("eclecticsearch"));
+			Assert.True(percolateResponse.Matches.Contains(name));
 
-			var re = c.UnregisterPercolator<ElasticSearchProject>("eclecticsearch");
+			var re = c.UnregisterPercolator<ElasticSearchProject>(name);
 		}
 	}
 }

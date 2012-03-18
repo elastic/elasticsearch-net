@@ -31,8 +31,8 @@ namespace Nest
 					var r = this.ToParsedResponse<QueryResponse<T>>(status);
 					return r;
         }
-				
-				[Obsolete("string queries are super nasty!", false)]
+
+				[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 				public QueryResponse<T> Search<T>(string query) where T : class
 				{
 					var descriptor = new SearchDescriptor<T>();
