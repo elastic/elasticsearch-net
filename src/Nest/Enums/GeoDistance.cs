@@ -11,6 +11,7 @@ namespace Nest
   public enum GeoDistance
   {
     arc,
-    plane
+    plane,
+		factor
   }
 }
