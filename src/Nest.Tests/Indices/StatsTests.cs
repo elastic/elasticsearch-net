@@ -6,8 +6,8 @@ using Nest;
 using Nest.TestData;
 using Nest.TestData.Domain;
 using NUnit.Framework;
-using Nest.Mapping;
-using Nest.Domain;
+
+
 
 namespace Nest.Tests.Search
 {

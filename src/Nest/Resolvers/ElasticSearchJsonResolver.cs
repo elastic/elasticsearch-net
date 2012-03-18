@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-using Nest.DSL;
+
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Reflection;
-using Nest.Mapping;
 
-namespace Nest
+namespace Nest.Resolvers
 {
 
 	public class DynamicContractResolver : DefaultContractResolver

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Nest.Mapping
+namespace Nest
 {
     public class TypeMappingSource
     {

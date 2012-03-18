@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Nest;
-using Nest.Mapping;
-using Nest.Settings;
+
+
 using HackerNews.Indexer.Domain;
 using Nest.TestData;
 using Nest.TestData.Domain;

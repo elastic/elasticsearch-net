@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Nest.Settings
+namespace Nest
 {
     public class StandardAnalyzerSettings : AnalyzerSettings
     {

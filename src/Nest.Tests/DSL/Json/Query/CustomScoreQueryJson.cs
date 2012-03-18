@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Nest.DSL;
+
 using Nest.TestData.Domain;
 
 namespace Nest.Tests.Dsl.Json.Filter

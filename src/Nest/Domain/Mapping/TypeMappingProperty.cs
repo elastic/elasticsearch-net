@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest.Mapping
+namespace Nest
 {
     public class TypeMappingProperty
     {

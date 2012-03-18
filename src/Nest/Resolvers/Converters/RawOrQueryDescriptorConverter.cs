@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Nest.Settings;
 using Newtonsoft.Json;
-using Nest.DSL;
+
 
 namespace Nest.Resolvers.Converters
 {

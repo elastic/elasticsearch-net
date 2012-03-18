@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Nest.Domain
+namespace Nest
 {
 	[JsonObject]
 	public class FlushStats

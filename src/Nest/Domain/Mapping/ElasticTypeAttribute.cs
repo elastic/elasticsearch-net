@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Mapping
+namespace Nest
 {
 	//TODO dynamic template support
 	[AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false)]

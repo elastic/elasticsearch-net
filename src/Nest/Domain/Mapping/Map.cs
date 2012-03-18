@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace Nest.Mapping
+namespace Nest
 {
 	internal class PropertyDescriptor<T>
 	{

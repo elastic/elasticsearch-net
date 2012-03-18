@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 
-namespace Nest.DSL
+namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SearchDescriptor<T> where T : class

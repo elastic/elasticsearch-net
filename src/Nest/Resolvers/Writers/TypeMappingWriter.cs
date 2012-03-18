@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Nest.DSL;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace Nest
+namespace Nest.Resolvers.Writers
 {
 	internal class TypeMappingWriter<T> where T : class
 	{

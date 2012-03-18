@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Nest.DSL;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System;

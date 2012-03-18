@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
 
-namespace Nest.DSL
+namespace Nest
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
   public class GeoDistanceFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class

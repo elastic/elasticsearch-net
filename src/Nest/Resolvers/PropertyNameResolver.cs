@@ -7,10 +7,9 @@ using Newtonsoft.Json.Serialization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Fasterflect;
-using Nest.Mapping;
 using System.Runtime.CompilerServices;
 
-namespace Nest
+namespace Nest.Resolvers
 {
 	//Shout out to http://tomlev2.wordpress.com/2010/10/03/entity-framework-using-include-with-lambda-expressions/
 	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.

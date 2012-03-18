@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
-using Nest.DSL;
-using Nest.Domain;
 
 namespace Nest
 {

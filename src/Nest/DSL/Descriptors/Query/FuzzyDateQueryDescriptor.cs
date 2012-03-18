@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
 using Newtonsoft.Json.Converters;
-namespace Nest.DSL
+namespace Nest
 {
 	public class FuzzyDateQueryDescriptor<T> where T : class
 	{

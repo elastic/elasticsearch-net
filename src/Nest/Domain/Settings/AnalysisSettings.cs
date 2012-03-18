@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Nest.Settings
+namespace Nest
 {
     public class AnalysisSettings
     {

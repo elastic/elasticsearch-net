@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 
-namespace Nest.DSL
+namespace Nest
 {
   public partial class BaseFacetDescriptor<T> : IFacetDescriptor where T : class 
   {

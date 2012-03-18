@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Nest.DSL;
+
 using Nest;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;

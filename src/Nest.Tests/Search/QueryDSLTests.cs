@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Nest;
 using HackerNews.Indexer.Domain;
-using Nest.DSL;
+
 using Nest.TestData.Domain;
 
 namespace Nest.Tests

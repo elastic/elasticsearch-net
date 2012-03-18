@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Nest.DSL
+namespace Nest
 {
 	public class MatchAll : IQuery
 	{

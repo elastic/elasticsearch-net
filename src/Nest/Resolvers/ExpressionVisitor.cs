@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace Nest
+namespace Nest.Resolvers
 {
 	/// <summary>
 	/// This comes from Matt Warren's sample:

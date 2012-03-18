@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
-using Nest.DSL;
+
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Nest
+namespace Nest.Resolvers
 {
 	/// <summary>
 	/// Pluralizes or singularizes words.

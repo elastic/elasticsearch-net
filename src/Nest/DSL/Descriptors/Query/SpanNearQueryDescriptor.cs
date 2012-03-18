@@ -5,7 +5,7 @@ using System.Text;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
-namespace Nest.DSL
+namespace Nest
 {
 	public class SpanNearQueryDescriptor<T> : ISpanQuery where T : class
 	{

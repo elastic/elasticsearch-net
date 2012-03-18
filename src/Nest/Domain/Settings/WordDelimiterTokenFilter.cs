@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Nest.Settings
+namespace Nest
 {
     public class WordDelimiterTokenFilter : TokenFilterSettings
     {

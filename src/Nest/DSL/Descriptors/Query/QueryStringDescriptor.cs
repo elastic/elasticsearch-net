@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
 using Newtonsoft.Json.Converters;
-namespace Nest.DSL
+
+namespace Nest
 {
 	public class QueryStringDescriptor<T> where T : class
 	{

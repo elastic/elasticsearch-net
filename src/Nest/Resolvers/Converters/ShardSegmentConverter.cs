@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Nest.Settings;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 

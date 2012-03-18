@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Nest.DSL
+namespace Nest
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
   public class Range<T> where T : struct

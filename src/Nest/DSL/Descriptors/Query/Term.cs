@@ -5,7 +5,7 @@ using System.Text;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Serialization;
 
-namespace Nest.DSL
+namespace Nest
 {
 	public class Term : IQuery
 	{

@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Fasterflect;
 using Newtonsoft.Json.Converters;
-using Nest.DSL;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Reflection;
@@ -30,7 +29,8 @@ namespace Nest
 			var index = this.Settings.DefaultIndex;
 			if (descriptor._Indices.HasAny())
 				index = descriptor._Indices.First();
-			return this.RegisterPercolator(index, name, query);
+			var path = "_percolator/{0}/{1}".F(index, name);
+			return this._RegisterPercolator(path, query);
 		}
 		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public RegisterPercolateResponse RegisterPercolator(string index, string name, string query)

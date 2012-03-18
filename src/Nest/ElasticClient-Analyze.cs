@@ -8,11 +8,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Fasterflect;
 using Newtonsoft.Json.Converters;
-using Nest.DSL;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Reflection;
-using Nest.Domain;
 using System.Linq.Expressions;
 
 namespace Nest

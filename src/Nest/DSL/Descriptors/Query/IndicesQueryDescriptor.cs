@@ -5,7 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
-using Nest.DSL;
+
 
 namespace Nest
 {

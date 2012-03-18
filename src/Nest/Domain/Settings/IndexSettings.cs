@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Nest.Mapping;
 using Newtonsoft.Json;
 using System;
 
-namespace Nest.Settings
+namespace Nest
 {
     /// <summary>
     /// Writing these uses a custom converter that ignores the json props

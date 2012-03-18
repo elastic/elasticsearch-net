@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 
-namespace Nest.DSL
+namespace Nest
 {
   [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
   public class TermFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
