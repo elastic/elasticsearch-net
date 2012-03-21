@@ -96,11 +96,22 @@ namespace Nest
 			return idString;
 		}
 
+		public static string GetTypeNameFor(Type type)
+		{
+			if (!type.IsClass && !type.IsInterface)
+				throw new ArgumentException("Type is not a class or interface", "type");
+			return GetTypeNameForType(type);
+		}
+
 		public static string GetTypeNameFor<T>() where T : class
 		{
-			var type = typeof(T);
+			return GetTypeNameForType(typeof(T));
+		}
+
+		private static string GetTypeNameForType(Type type)
+		{
 			var typeName = type.Name;
-			var att = PropertyNameResolver.GetElasticPropertyFor<T>();
+			var att = PropertyNameResolver.GetElasticPropertyFor(type);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else

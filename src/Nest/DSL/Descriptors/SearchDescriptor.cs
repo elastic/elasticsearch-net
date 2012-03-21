@@ -36,11 +36,29 @@ namespace Nest
 			this._Types = types;
 			return this;
 		}
+		public SearchDescriptor<T> Types(params string[] types)
+		{
+			return this.Types(types);
+		}
+		public SearchDescriptor<T> Types(IEnumerable<Type> types)
+		{
+			types.ThrowIfEmpty("types");
+			return this.Types(types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
+		}
+		public SearchDescriptor<T> Types(params Type[] types)
+		{
+			return this.Types(types);
+		}
 		public SearchDescriptor<T> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this._Types = new[] { type };
 			return this;
+		}
+		public SearchDescriptor<T> Type(Type type)
+		{
+			type.ThrowIfNull("type");
+			return this.Type(ElasticClient.GetTypeNameFor(type));
 		}
 		public SearchDescriptor<T> AllIndices()
 		{

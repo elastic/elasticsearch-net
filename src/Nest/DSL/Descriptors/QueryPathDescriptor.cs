@@ -38,11 +38,29 @@ namespace Nest
 			this._Types = types;
 			return this;
 		}
+		public QueryPathDescriptor<T> Types(params string[] types)
+		{
+			return this.Types(types);
+		}
+		public QueryPathDescriptor<T> Types(IEnumerable<Type> types)
+		{
+			types.ThrowIfEmpty("types");
+			return this.Types(types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
+		}
+		public QueryPathDescriptor<T> Types(params Type[] types)
+		{
+			return this.Types(types);
+		}
 		public QueryPathDescriptor<T> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this._Types = new[] { type };
 			return this;
+		}
+		public QueryPathDescriptor<T> Type(Type type)
+		{
+			type.ThrowIfNull("type");
+			return this.Type(ElasticClient.GetTypeNameFor(type));
 		}
 		public QueryPathDescriptor<T> AllIndices()
 		{
