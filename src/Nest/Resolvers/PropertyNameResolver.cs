@@ -36,7 +36,20 @@ namespace Nest.Resolvers
 		}
 		public ElasticTypeAttribute GetElasticPropertyFor<T>() where T : class
 		{
-			var attributes = typeof(T).GetCustomAttributes(typeof(ElasticTypeAttribute), true);
+			return GetElasticPropertyForType(typeof(T));
+		}
+		public ElasticTypeAttribute GetElasticPropertyFor(Type type)
+		{
+			if (!type.IsClass && !type.IsInterface)
+				throw new ArgumentException("Type is not a class or interface", "type");
+			return GetElasticPropertyForType(type);
+		}
+		private ElasticTypeAttribute GetElasticPropertyForType(Type type)
+		{
+			if (!type.IsClass && !type.IsInterface)
+				throw new ArgumentException("Type is not a class or interface", "type");
+
+			var attributes = type.GetCustomAttributes(typeof(ElasticTypeAttribute), true);
 			if (attributes != null && attributes.Any())
 				return ((ElasticTypeAttribute)attributes.First());
 			return null;
