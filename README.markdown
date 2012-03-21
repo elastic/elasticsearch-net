@@ -44,10 +44,11 @@ Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute t
 
 Some of the wonderful features in NEST were pushed by these wonderful folks:
 
-* [nordbergm](https://github.com/nordbergm/NEST)
-* [kevingessner](https://github.com/kevingessner/NEST)
-* [EFJoseph](https://github.com/EFJoseph/NEST)
-* [pkrakowiak](https://github.com/pkrakowiak/NEST) 
+* [@nordbergm](https://github.com/nordbergm/NEST)
+* [@kevingessner](https://github.com/kevingessner/NEST)
+* [@EFJoseph](https://github.com/EFJoseph/NEST)
+* [@pkrakowiak](https://github.com/pkrakowiak/NEST) 
+* [@q42jaap] (https://github.com/q42jaap/NEST)
 
 ## License
 
