@@ -40,16 +40,16 @@ namespace Nest
 		}
 		public QueryPathDescriptor<T> Types(params string[] types)
 		{
-			return this.Types(types);
+			return this.Types((IEnumerable<string>) types);
 		}
 		public QueryPathDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-			return this.Types(types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
+			return this.Types((IEnumerable<string>)types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
 		}
 		public QueryPathDescriptor<T> Types(params Type[] types)
 		{
-			return this.Types(types);
+			return this.Types((IEnumerable<Type>)types);
 		}
 		public QueryPathDescriptor<T> Type(string type)
 		{
