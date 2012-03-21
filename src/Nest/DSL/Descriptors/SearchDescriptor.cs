@@ -38,16 +38,16 @@ namespace Nest
 		}
 		public SearchDescriptor<T> Types(params string[] types)
 		{
-			return this.Types(types);
+			return this.Types((IEnumerable<string>)types);
 		}
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-			return this.Types(types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
+			return this.Types((IEnumerable<string>)types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
 		}
 		public SearchDescriptor<T> Types(params Type[] types)
 		{
-			return this.Types(types);
+			return this.Types((IEnumerable<Type>)types);
 		}
 		public SearchDescriptor<T> Type(string type)
 		{
