@@ -231,7 +231,21 @@ namespace Nest
 			this._Sort.Add(key, "desc");
 			return this;
 		}
+		public SearchDescriptor<T> SortAscending(string field)
+		{
+			if (this._Sort == null)
+				this._Sort = new Dictionary<string, string>();
+			this._Sort.Add(field, "asc");
+			return this;
+		}
+		public SearchDescriptor<T> SortDescending(string field)
+		{
+			if (this._Sort == null)
+				this._Sort = new Dictionary<string, string>();
 
+			this._Sort.Add(field, "desc");
+			return this;
+		}
 
 		private SearchDescriptor<T> _Facet<F>(
 			string name,
