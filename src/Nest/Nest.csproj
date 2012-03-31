@@ -80,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Facets\QueryFacet.cs" />
+    <Compile Include="DSL\Descriptors\PathDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\PathAllDescriptor.cs" />
     <Compile Include="DSL\Descriptors\QueryPathDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />

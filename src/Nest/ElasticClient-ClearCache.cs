@@ -16,26 +16,38 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <summary>
+		/// Clears all caches of all indices
+		/// </summary>
 		public IndicesResponse ClearCache()
 		{
 			return this.ClearCache(null, ClearCacheOptions.All);
 		}
-
+		/// <summary>
+		/// Clears the entire cache for the default index set in the client settings
+		/// </summary>
 		public IndicesResponse ClearCache<T>() where T : class
 		{
 			return this.ClearCache(new List<string> { this.Settings.DefaultIndex }, ClearCacheOptions.All);
 		}
 
+		/// <summary>
+		/// Clears the specified caches for the default index set in the client settings
+		/// </summary>
 		public IndicesResponse ClearCache<T>(ClearCacheOptions options) where T : class
 		{
 			return this.ClearCache(new List<string> { this.Settings.DefaultIndex }, options);
 		}
-
+		/// <summary>
+		/// Clears the specified caches for all indices
+		/// </summary>
 		public IndicesResponse ClearCache(ClearCacheOptions options)
 		{
 			return this.ClearCache(null, options);
 		}
-
+		/// <summary>
+		/// Clears the specified caches for only the indices passed under indices
+		/// </summary>
 		public IndicesResponse ClearCache(List<string> indices, ClearCacheOptions options)
 		{
 			string path = "/_cache/clear";

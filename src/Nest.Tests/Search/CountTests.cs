@@ -28,12 +28,12 @@ namespace Nest.Tests.Search
 		[Test]
 		public void SimpleQueryCount()
 		{
-			//does a match_all on the default specified index
-			var countResults = this.ConnectedClient.CountAll(@"{ ""fuzzy"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower() + @"x""
-					}
-				}");
-
+			var countResults = this.ConnectedClient.CountAll<ElasticSearchProject>(q=>q
+				.Fuzzy(fq=>fq
+					.Value(this._LookFor.ToLower())
+					.OnField(f=>f.Followers.First().FirstName)			
+				)
+			);
 			Assert.True(countResults.Count > 0);
 		}
 

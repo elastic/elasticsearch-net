@@ -16,9 +16,16 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <summary>
+		/// Performs a count query over all indices
+		/// </summary>
+		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public CountResponse CountAll(string query) {
 			return this._Count("_count", query);
 		}
+		/// <summary>
+		/// Performs a count query over all indices
+		/// </summary>
 		public CountResponse CountAll(Action<QueryDescriptor> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
@@ -27,6 +34,9 @@ namespace Nest
 			var query = ElasticClient.Serialize(descriptor);
 			return this._Count("_count", query);
 		}
+		/// <summary>
+		/// Performs a count query over all indices
+		/// </summary>
 		public CountResponse CountAll<T>(Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			querySelector.ThrowIfNull("querySelector");
@@ -36,7 +46,9 @@ namespace Nest
 			return this._Count("_count", query);
 		}
 
-
+		/// <summary>
+		/// Performs a count query over the default index set in the client settings
+		/// </summary>
 		public CountResponse Count(Action<QueryDescriptor> querySelector)
 		{
 			var index = this.Settings.DefaultIndex;
@@ -48,6 +60,9 @@ namespace Nest
 			var query = ElasticClient.Serialize(descriptor);
 			return _Count(path, query);
 		}
+		/// <summary>
+		/// Performs a count query over the passed indices
+		/// </summary>
 		public CountResponse Count(IEnumerable<string> indices, Action<QueryDescriptor> querySelector)
 		{
 			indices.ThrowIfEmpty("indices");
@@ -57,6 +72,9 @@ namespace Nest
 			var query = ElasticClient.Serialize(descriptor);
 			return _Count(path, query);
 		}
+		/// <summary>
+		/// Performs a count query over the multiple types in multiple indices.
+		/// </summary>
 		public CountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor> querySelector)
 		{
 			indices.ThrowIfEmpty("indices");
@@ -68,7 +86,9 @@ namespace Nest
 			return _Count(path, query);
 		}
 
-
+		/// <summary>
+		/// Perform a count query over the default index and the inferred type name for T
+		/// </summary>
 		public CountResponse Count<T>(Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
@@ -82,6 +102,9 @@ namespace Nest
 			var query = ElasticClient.Serialize(descriptor);
 			return _Count(path, query);
 		}
+		/// <summary>
+		/// Performs a count query over the specified indices
+		/// </summary>
 		public CountResponse Count<T>(IEnumerable<string> indices, Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");
@@ -91,6 +114,9 @@ namespace Nest
 			var query = ElasticClient.Serialize(descriptor);
 			return _Count(path, query);
 		}
+		/// <summary>
+		///  Performs a count query over the multiple types in multiple indices.
+		/// </summary>
 		public CountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");

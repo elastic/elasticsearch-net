@@ -17,22 +17,38 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <summary>
+		/// Performs the standard analysis process on a text and return the tokens breakdown of the text.
+		/// </summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public AnalyzeResponse Analyze(string text)
 		{
 			var index = this.Settings.DefaultIndex;
 			return this._Analyze(new AnalyzeParams() { Index = index }, text);
 		}
+		/// <summary>
+		/// Analyzes specified text according to the analyzeparams passed.
+		/// </summary>
+		/// <returns>AnalyzeResponse contains a breakdown of the token under .Tokens</returns>
 		public AnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text)
 		{
 			analyzeParams.ThrowIfNull("analyzeParams");
 			analyzeParams.Index.ThrowIfNull("analyzeParams.Index");
 			return this._Analyze(analyzeParams, text);
 		}
+		/// <summary>
+		/// Analyzes text according to the current analyzer of the field in the default index set in the clientsettings.
+		/// </summary>
+		/// <returns>AnalyzeResponse contains a breakdown of the token under .Tokens</returns>
 		public AnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string text) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			return this.Analyze<T>(selector, index, text);
 		}
+		/// <summary>
+		///  Analyzes text according to the current analyzer of the field in the passed index.
+		/// </summary>
 		public AnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string index, string text) where T : class
 		{
 			selector.ThrowIfNull("selector");
