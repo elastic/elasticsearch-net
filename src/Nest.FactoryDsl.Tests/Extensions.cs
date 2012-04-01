@@ -1,4 +1,4 @@
-﻿namespace Nest.FactoryDsl.Tests
+﻿namespace Nest.Tests.FactoryDsl
 {
     public static class Extensions
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{78917074-61E5-4D3D-BB7E-B28CF260B919}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nest.FactoryDsl.Tests</RootNamespace>
-    <AssemblyName>Nest.FactoryDsl.Tests</AssemblyName>
+    <RootNamespace>Nest.Tests.FactoryDsl</RootNamespace>
+    <AssemblyName>Nest.Tests.FactoryDsl</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

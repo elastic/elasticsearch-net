@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using NUnit.Framework;
-using Nest.FactoryDsl.Tests;
+using Nest.Tests.FactoryDsl;
 using Nest.FactoryDsl;
 using Nest.FactoryDsl.Query;
 
-namespace Nest.FactoryDsl.Tests.Filter
+namespace Nest.Tests.FactoryDsl.Filter
 {
     [TestFixture]
     public class FilterTests

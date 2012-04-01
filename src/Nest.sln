@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.TestData", "Nest.TestD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.FactoryDsl.Tests", "Nest.FactoryDsl.Tests\Nest.FactoryDsl.Tests.csproj", "{78917074-61E5-4D3D-BB7E-B28CF260B919}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.FactoryDsl", "Nest.FactoryDsl.Tests\Nest.Tests.FactoryDsl.csproj", "{78917074-61E5-4D3D-BB7E-B28CF260B919}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Thrift", "Nest.Thrift\Nest.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
 EndProject
