@@ -7,7 +7,7 @@ menu_item: introduction
 
 # Introduction
 
-NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. It also has string/dynamic overloads for more dynamic usecases.
+NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. It also has string/dynamic overloads for more dynamic usecases. 
  
 
 Indexing is as simple as:
@@ -30,21 +30,15 @@ Searching is fluid:
 			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
 	);
 
-For more examples please refer to the [Wiki](https://github.com/Mpdreamz/NEST/wiki "Read more about NEST's interface")
-
-* [Connecting](https://github.com/Mpdreamz/NEST/wiki/Connecting)
-* [Indexing](https://github.com/Mpdreamz/NEST/wiki/Index)
-* [Searching](https://github.com/Mpdreamz/NEST/wiki/Search)
-    * [Faceting] (https://github.com/Mpdreamz/NEST/wiki/Faceting)
-* [Deleting](https://github.com/Mpdreamz/NEST/wiki/Delete)
-* [Mapping](https://github.com/Mpdreamz/NEST/wiki/Mapping)
-
-
-To get a good overview of the status of NEST please keep an eye out on the public [Roadmap](https://github.com/Mpdreamz/NEST/wiki/RoadMap)
-
 ## Copyright
 
 Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](https://github.com/Mpdreamz/NEST)
+
+## License
+
+NEST is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Refer to [license.txt](https://github.com/Mpdreamz/NEST/blob/master/src/license.txt) for more information.
+
+## Contributors
 
 A special shoutout to [@stephenpope](http://github.com/stephenpope) for allowing his port 
 of the java factory based dsl [Rubber](http://github.com/stephenpope/Rubber) to be merged into NEST. 
@@ -58,9 +52,7 @@ Some of the other wonderful features in NEST were pushed by these wonderful folk
 * [@pkrakowiak](https://github.com/pkrakowiak/NEST) 
 * [@q42jaap] (https://github.com/q42jaap/NEST)
 
-## License
 
-NEST is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Refer to [license.txt](https://github.com/Mpdreamz/NEST/blob/master/src/license.txt) for more information.
 
 <script id="contributorTemplate" type="text/x-jQuery-tmpl">
 {{each contributors}}

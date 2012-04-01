@@ -49,11 +49,16 @@ aside ul a {
 	width:100%;
 	border-radius:5px;
 }
-aside ul a:hover {
+aside ul a:hover,
+aside ul a.selected {
 	background:#C8D3E6;
 	color:black;
-
 }
+aside ul a.selected {
+	background:black;
+	color:white !important;
+}
+
 section#content {
 	clear:both;
 	padding-top:20px;
@@ -87,4 +92,20 @@ h2 {
 }
 h3 {
 	font-weight:bold;
+}
+article  a {
+	text-decoration:none;
+	display:inline-block;
+	background:#C8D3E6;
+	color:black;
+	padding:2px;
+	border-radius:5px;
+}
+article  a:hover {
+	text-decoration:none;
+	display:inline-block;
+	background:black;
+	color:white;
+	padding:2px;
+	border-radius:5px;
 }
