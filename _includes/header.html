@@ -1,0 +1,11 @@
+<h1 id="header">
+    <a id="elasticsearch" href="/" title="elasticsearch home page">
+        <span>elasticsearch.</span>
+    </a>
+    {% if page.cat %}
+        <a id="section" href="/{{ page.cat }}" title="elasticsearch {{ page.cat }}">
+            {{ page.cat }}
+        </a>
+    {% endif %}
+</h1>
+{% include top_left_menu.html %}
