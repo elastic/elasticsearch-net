@@ -18,58 +18,98 @@ namespace Nest
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
 
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
 		public SearchDescriptor<T> Indices(IEnumerable<string> indices)
 		{
 			indices.ThrowIfEmpty("indices");
 			this._Indices = indices;
 			return this;
 		}
+		/// <summary>
+		/// The index to execute the search on. Defaults to the default index
+		/// </summary>
 		public SearchDescriptor<T> Index(string index)
 		{
 			index.ThrowIfNullOrEmpty("indices");
 			this._Indices = new[] { index };
 			return this;
 		}
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public SearchDescriptor<T> Types(IEnumerable<string> types)
 		{
 			types.ThrowIfEmpty("types");
 			this._Types = types;
 			return this;
 		}
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public SearchDescriptor<T> Types(params string[] types)
 		{
 			return this.Types((IEnumerable<string>)types);
 		}
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
 			return this.Types((IEnumerable<string>)types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
 		}
+		/// <summary>
+		/// The types to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public SearchDescriptor<T> Types(params Type[] types)
 		{
 			return this.Types((IEnumerable<Type>)types);
 		}
+		/// <summary>
+		/// The type to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public SearchDescriptor<T> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this._Types = new[] { type };
 			return this;
 		}
+		/// <summary>
+		/// The type to execute the search on. Defaults to the inferred typename of T 
+		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
+		/// </summary>
 		public SearchDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
 			return this.Type(ElasticClient.GetTypeNameFor(type));
 		}
+		/// <summary>
+		/// Execute search over all indices
+		/// </summary>
 		public SearchDescriptor<T> AllIndices()
 		{
 			this._AllIndices = true;
 			return this;
 		}
+		/// <summary>
+		/// Execute search over all types
+		/// </summary>
 		public SearchDescriptor<T> AllTypes()
 		{
 			this._AllTypes = true;
 			return this;
 		}
+		/// <summary>
+		/// When executing a search, it will be broadcasted to all the index/indices shards (round robin between replicas).
+		/// Which shards will be searched on can be controlled by providing the routing parameter.
+		/// </summary>
 		public SearchDescriptor<T> Routing(string routing)
 		{
 			routing.ThrowIfNullOrEmpty("routing");
@@ -80,6 +120,9 @@ namespace Nest
 		{
 		}
 
+
+		[JsonProperty(PropertyName = "timeout")]
+		internal string _Timeout { get; set; }
 		[JsonProperty(PropertyName = "from")]
 		internal int? _From { get; set; }
 		[JsonProperty(PropertyName = "size")]
@@ -143,63 +186,136 @@ namespace Nest
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<string> _Fields { get; set; }
 
+		/// <summary>
+		/// The number of hits to return. Defaults to 10.
+		/// </summary>
 		public SearchDescriptor<T> Size(int size)
 		{
 			this._Size = size;
 			return this;
 		}
+		/// <summary>
+		/// The number of hits to return. Defaults to 10.
+		/// </summary>
 		public SearchDescriptor<T> Take(int take)
 		{
 			return this.Size(take);
 		}
+		/// <summary>
+		/// The starting from index of the hits to return. Defaults to 0.
+		/// </summary>
 		public SearchDescriptor<T> From(int from)
 		{
 			this._From = from;
 			return this;
 		}
+		/// <summary>
+		/// The starting from index of the hits to return. Defaults to 0.
+		/// </summary>
 		public SearchDescriptor<T> Skip(int skip)
 		{
 			return this.From(skip);
 		}
-
-
+		/// <summary>
+		/// A search timeout, bounding the search request to be executed within the 
+		/// specified time value and bail with the hits accumulated up
+		/// to that point when expired. Defaults to no timeout.
+		/// </summary>
+		public SearchDescriptor<T> Timeout(string timeout)
+		{
+			this._Timeout = timeout;
+			return this;
+		}
+		/// <summary>
+		/// Enables explanation for each hit on how its score was computed. 
+		/// (Use .DocumentsWithMetaData on the return results)
+		/// </summary>
 		public SearchDescriptor<T> Explain(bool explain = true)
 		{
 			this._Explain = explain;
 			return this;
 		}
+		/// <summary>
+		/// Returns a version for each search hit. (Use .DocumentsWithMetaData on the return results)
+		/// </summary>
 		public SearchDescriptor<T> Version(bool version = true)
 		{
 			this._Version = version;
 			return this;
 		}
+		/// <summary>
+		/// Allows to filter out documents based on a minimum score:
+		/// </summary>
 		public SearchDescriptor<T> MinScore(double minScore)
 		{
 			this._MinScore = minScore;
 			return this;
 		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
+		/// Custom (string) value: A custom value will be used to guarantee that the same shards
+		/// will be used for the same custom value. This can help with “jumping values” 
+		/// when hitting different shards in different refresh states. 
+		/// A sample value can be something like the web session id, or the user name.
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> Preference(string preference)
 		{
 			this._Preference = preference;
 			return this;
 		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
+		/// The operation will go and be executed only on the primary shards.
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> ExecuteOnPrimary()
 		{
 			this._Preference = "_primary";
 			return this;
 		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
+		/// The operation will prefer to be executed on a local allocated shard is possible.
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> ExecuteOnLocalShard()
 		{
 			this._Preference = "_local";
 			return this;
 		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
+		/// Restricts the search to execute only on a node with the provided node id
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> ExecuteOnNode(string node)
 		{
 			node.ThrowIfNull("node");
 			this._Preference = "_only_node:" + node;
 			return this;
 		}
-
+		/// <summary>
+		/// Allows to configure different boost level per index when searching across 
+		/// more than one indices. This is very handy when hits coming from one index
+		/// matter more than hits coming from another index (think social graph where each user has an index).
+		/// </summary>
 		public SearchDescriptor<T> IndicesBoost(
 			Func<FluentDictionary<string, double>, FluentDictionary<string, double>> boost)
 		{
@@ -207,6 +323,10 @@ namespace Nest
 			this._IndicesBoost = boost(new FluentDictionary<string, double>());
 			return this;
 		}
+		/// <summary>
+		/// Allows to selectively load specific fields for each document 
+		/// represented by a search hit. Defaults to load the internal _source field.
+		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
 			if (this._Fields == null)
@@ -215,6 +335,14 @@ namespace Nest
 				this._Fields.Add(ElasticClient.PropertyNameResolver.Resolve(e));
 			return this;
 		}
+		/// <summary>
+		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
+		/// The sort is defined on a per field level, with special field name for _score to sort by score.
+		/// </para>
+		/// <para>
+		/// Sort ascending.
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
@@ -222,6 +350,14 @@ namespace Nest
 			this._Sort.Add(ElasticClient.PropertyNameResolver.ResolveToSort(objectPath), "asc");
 			return this;
 		}
+		/// <summary>
+		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
+		/// The sort is defined on a per field level, with special field name for _score to sort by score.
+		/// </para>
+		/// <para>
+		/// Sort descending.
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
@@ -231,6 +367,14 @@ namespace Nest
 			this._Sort.Add(key, "desc");
 			return this;
 		}
+		/// <summary>
+		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
+		/// The sort is defined on a per field level, with special field name for _score to sort by score.
+		/// </para>
+		/// <para>
+		/// Sort ascending.
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> SortAscending(string field)
 		{
 			if (this._Sort == null)
@@ -238,6 +382,14 @@ namespace Nest
 			this._Sort.Add(field, "asc");
 			return this;
 		}
+		/// <summary>
+		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
+		/// The sort is defined on a per field level, with special field name for _score to sort by score.
+		/// </para>
+		/// <para>
+		/// Sort descending.
+		/// </para>
+		/// </summary>
 		public SearchDescriptor<T> SortDescending(string field)
 		{
 			if (this._Sort == null)
@@ -286,12 +438,17 @@ namespace Nest
 		}
 
 
-
+		/// <summary>
+		/// Allow to specify field facets that return the N most frequent terms.
+		/// </summary>
 		public SearchDescriptor<T> FacetTerm(string name, Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet)
 		{
 			return this.FacetTerm(facet, Name: name);
 		}
 
+		/// <summary>
+		/// Allow to specify field facets that return the N most frequent terms.
+		/// </summary>
 		public SearchDescriptor<T> FacetTerm(Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<TermFacetDescriptor<T>>(
@@ -302,11 +459,20 @@ namespace Nest
 			);
 		}
 
+		/// <summary>
+		/// range facet allow to specify a set of ranges and get both the number of docs (count) 
+		/// that fall within each range, and aggregated data either based on the field, or using another field
+		/// </summary>
+		/// <typeparam name="K">struct, (int, double, string, DateTime)</typeparam>
 		public SearchDescriptor<T> FacetRange<K>(string name, Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet) where K : struct
 		{
 			return this.FacetRange<K>(facet, Name: name);
 		}
-
+		/// <summary>
+		/// range facet allow to specify a set of ranges and get both the number of docs (count) 
+		/// that fall within each range, and aggregated data either based on the field, or using another field
+		/// </summary>
+		/// <typeparam name="K">struct, (int, double, string, DateTime)</typeparam>
 		public SearchDescriptor<T> FacetRange<K>(Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet, string Name = null) where K : struct
 		{
 			return this._Facet<RangeFacetDescriptor<T, K>>(
@@ -316,12 +482,20 @@ namespace Nest
 				(b, d) => b.Range = d
 			);
 		}
-
+		/// <summary>
+		/// The histogram facet works with numeric data by building a histogram across intervals 
+		/// of the field values. Each value is “rounded” into an interval (or placed in a bucket), 
+		/// and statistics are provided per interval/bucket (count and total). 
+		/// </summary>
 		public SearchDescriptor<T> FacetHistogram(string name, Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet)
 		{
 			return this.FacetHistogram(facet, Name: name);
 		}
-
+		/// <summary>
+		/// The histogram facet works with numeric data by building a histogram across intervals 
+		/// of the field values. Each value is “rounded” into an interval (or placed in a bucket), 
+		/// and statistics are provided per interval/bucket (count and total). 
+		/// </summary>
 		public SearchDescriptor<T> FacetHistogram(Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<HistogramFacetDescriptor<T>>(
@@ -331,12 +505,16 @@ namespace Nest
 				(b, d) => b.Histogram = d
 			);
 		}
-
+		/// <summary>
+		/// A specific histogram facet that can work with date field types enhancing it over the regular histogram facet.
+		/// </summary>
 		public SearchDescriptor<T> FacetDateHistogram(string name, Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet)
 		{
 			return this.FacetDateHistogram(facet, Name: name);
 		}
-
+		/// <summary>
+		/// A specific histogram facet that can work with date field types enhancing it over the regular histogram facet.
+		/// </summary>
 		public SearchDescriptor<T> FacetDateHistogram(Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<DateHistogramFacetDescriptor<T>>(
@@ -347,11 +525,21 @@ namespace Nest
 			);
 		}
 
+		/// <summary>
+		/// Statistical facet allows to compute statistical data on a numeric fields. 
+		/// The statistical data include count, total, sum of squares, 
+		/// mean (average), minimum, maximum, variance, and standard deviation. 
+		/// </summary>
 		public SearchDescriptor<T> FacetStatistical(string name, Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet)
 		{
 			return this.FacetStatistical(facet, Name: name);
 		}
 
+		/// <summary>
+		/// Statistical facet allows to compute statistical data on a numeric fields. 
+		/// The statistical data include count, total, sum of squares, 
+		/// mean (average), minimum, maximum, variance, and standard deviation. 
+		/// </summary>
 		public SearchDescriptor<T> FacetStatistical(Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<StatisticalFacetDescriptor<T>>(
@@ -362,11 +550,19 @@ namespace Nest
 			);
 		}
 
+		/// <summary>
+		/// The terms_stats facet combines both the terms and statistical allowing 
+		/// to compute stats computed on a field, per term value driven by another field.
+		/// </summary>
 		public SearchDescriptor<T> FacetTermsStats(string name, Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet)
 		{
 			return this.FacetTermsStats(facet, Name: name);
 		}
 
+		/// <summary>
+		/// The terms_stats facet combines both the terms and statistical allowing 
+		/// to compute stats computed on a field, per term value driven by another field.
+		/// </summary>
 		public SearchDescriptor<T> FacetTermsStats(Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<TermsStatsFacetDescriptor<T>>(
@@ -376,11 +572,21 @@ namespace Nest
 				(b, d) => b.TermsStats = d
 			);
 		}
+		/// <summary>
+		/// The geo_distance facet is a facet providing information for ranges of distances
+		/// from a provided geo_point including count of the number of hits that fall 
+		/// within each range, and aggregation information (like total).
+		/// </summary>
 		public SearchDescriptor<T> FacetGeoDistance(string name, Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet)
 		{
 			return this.FacetGeoDistance(facet, Name: name);
 		}
 
+		/// <summary>
+		/// The geo_distance facet is a facet providing information for ranges of distances
+		/// from a provided geo_point including count of the number of hits that fall 
+		/// within each range, and aggregation information (like total).
+		/// </summary>
 		public SearchDescriptor<T> FacetGeoDistance(Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet, string Name = null)
 		{
 			return this._Facet<GeoDistanceFacetDescriptor<T>>(
@@ -391,7 +597,10 @@ namespace Nest
 				);
 		}
 
-
+		/// <summary>
+		/// A facet query allows to return a count of the hits matching 
+		/// the facet query. The query itself can be expressed using the Query DSL.
+		/// </summary>
 		public SearchDescriptor<T> FacetQuery(string name, Action<QueryDescriptor<T>> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
@@ -405,6 +614,11 @@ namespace Nest
 
 			return this;
 		}
+		/// <summary>
+		/// A filter facet (not to be confused with a facet filter) allows you to return a count of the h
+		/// its matching the filter. The filter itself can be expressed using the Query DSL.
+		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
+		/// </summary>
 		public SearchDescriptor<T> FacetFilter(string name, Action<FilterDescriptor<T>> querySelector)
 		{
 			name.ThrowIfNullOrEmpty("name");
@@ -419,7 +633,9 @@ namespace Nest
 			return this;
 		}
 
-
+		/// <summary>
+		/// Describe the query to perform using a query descriptor lambda
+		/// </summary>
 		public SearchDescriptor<T> Query(Action<QueryDescriptor<T>> query)
 		{
 			query.ThrowIfNull("query");
@@ -427,12 +643,20 @@ namespace Nest
 			query(this._Query);
 			return this;
 		}
+		/// <summary>
+		/// Describe the query to perform
+		/// </summary>
+		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public SearchDescriptor<T> Query(string rawQuery)
 		{
 			rawQuery.ThrowIfNull("rawQuery");
 			this._RawQuery = rawQuery;
 			return this;
 		}
+
+		/// <summary>
+		/// Filter search using a filter descriptor lambda
+		/// </summary>
 		public SearchDescriptor<T> Filter(Action<FilterDescriptor<T>> filter)
 		{
 			filter.ThrowIfNull("filter");
@@ -440,6 +664,10 @@ namespace Nest
 			filter(this._Filter);
 			return this;
 		}
+		/// <summary>
+		/// Filter search using a filter descriptor lambda
+		/// </summary>
+		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public SearchDescriptor<T> Filter(string rawFilter)
 		{
 			rawFilter.ThrowIfNull("rawFilter");
@@ -447,7 +675,9 @@ namespace Nest
 			return this;
 		}
 
-
+		/// <summary>
+		/// Shorthand for a match_all query without having to specify .Query(q=>q.MatchAll())
+		/// </summary>
 		public SearchDescriptor<T> MatchAll()
 		{
 			this._Query = new QueryDescriptor<T>();

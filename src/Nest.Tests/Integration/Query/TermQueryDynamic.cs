@@ -23,6 +23,13 @@ namespace Nest.Tests.Integration.Query
 					.Term("name", "elasticsearch.pm")
 				)
 			);
+
+			this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+				.Query(q=>q
+					.MatchAll()
+				)
+			)
+
 			Assert.True(results.IsValid);
 			Assert.Greater(results.Documents.Count(), 0);
 			var first = results.Documents.First();

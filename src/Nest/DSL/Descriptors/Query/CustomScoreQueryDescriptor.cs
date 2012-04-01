@@ -26,14 +26,17 @@ namespace Nest
 			this._Query = query;
 			return this;
 		}
-
+		/// <summary>
+		/// Scripts are cached for faster execution. If the script has parameters that it needs to take into account, it is preferable to use the same script, and provide parameters to it:
+		/// </summary>
+		/// <param name="script"></param>
+		/// <returns></returns>
 		public CustomScoreQueryDescriptor<T> Script(string script)
 		{
 			script.ThrowIfNull("script");
 			this._Script = script;
 			return this;
 		}
-
 		public CustomScoreQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");

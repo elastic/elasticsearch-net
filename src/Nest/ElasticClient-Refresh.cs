@@ -28,8 +28,6 @@ namespace Nest
 		/// <summary>
 		/// Refresh an index
 		/// </summary>
-		/// <param name="index"></param>
-		/// <returns></returns>
 		public IndicesShardResponse Refresh(string index)
 		{
 			index.ThrowIfNull("index");
@@ -38,8 +36,6 @@ namespace Nest
 		/// <summary>
 		/// Refresh multiple indices at once.
 		/// </summary>
-		/// <param name="indices"></param>
-		/// <returns></returns>
 		public IndicesShardResponse Refresh(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("indices");
@@ -49,8 +45,6 @@ namespace Nest
 		/// <summary>
 		/// refresh the connection settings default index for type T
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
 		public IndicesShardResponse Refresh<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;

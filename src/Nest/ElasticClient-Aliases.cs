@@ -39,23 +39,35 @@ namespace Nest
 
 			return cmd;
 		}
+		/// <summary>
+		/// Add an alias to the default index
+		/// </summary>
 		public IndicesOperationResponse Alias(string alias)
 		{
 			var index = this.Settings.DefaultIndex;
 			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Add an alias to the specified index
+		/// </summary>
 		public IndicesOperationResponse Alias(string index, string alias)
 		{
 			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Add multiple aliases to the specified index
+		/// </summary>
 		public IndicesOperationResponse Alias(string index, IEnumerable<string> aliases)
 		{
 			aliases.Select(a=> _createCommand("add", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Add multiple aliases to the default index
+		/// </summary>
 		public IndicesOperationResponse Alias(IEnumerable<string> aliases)
 		{
 			var index = this.Settings.DefaultIndex;
@@ -63,17 +75,26 @@ namespace Nest
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Remove an alias for the default index
+		/// </summary>
 		public IndicesOperationResponse RemoveAlias(string alias)
 		{
 			var index = this.Settings.DefaultIndex;
 			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Remove an alias for the specified index
+		/// </summary>
 		public IndicesOperationResponse RemoveAlias(string index, string alias)
 		{
 			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Remove multiple alias for the default index
+		/// </summary>
 		public IndicesOperationResponse RemoveAlias(IEnumerable<string> aliases)
 		{
 			var index = this.Settings.DefaultIndex;
@@ -81,38 +102,59 @@ namespace Nest
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Remove multiple alias for the specified index
+		/// </summary>
 		public IndicesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases)
 		{
 			aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Associate multiple indices with one alias
+		/// </summary>
 		public IndicesOperationResponse Alias(IEnumerable<string> indices, string alias)
 		{
 			indices.Select(i => _createCommand("add", new AliasParams { Index = i, Alias = alias }));
 			var q = string.Join(",", indices);
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Rename an old alias for index to a new alias in one operation
+		/// </summary>
 		public IndicesOperationResponse Rename(string index, string oldAlias, string newAlias)
 		{
 			var r = _createCommand("remove", new AliasParams { Index = index, Alias = oldAlias });
 			var a = _createCommand("add", new AliasParams { Index = index, Alias = newAlias });
 			return this._Alias(r + ", " + a);
 		}
+		/// <summary>
+		/// Freeform alias overload for complete control of all the aspects (does an add operation)
+		/// </summary>
 		public IndicesOperationResponse Alias(AliasParams aliasParams)
 		{
 			return this._Alias(_createCommand("add", aliasParams));
 		}
+		/// <summary>
+		/// Freeform multi alias overload for complete control of all the aspects (does multiple add operations)
+		/// </summary>
 		public IndicesOperationResponse Alias(IEnumerable<AliasParams> aliases)
 		{
 			var cmds = aliases.Select(a=>_aliasBody.F(_createCommand("add", a)));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
+		/// <summary>
+		/// Freeform remove alias overload for complete control of all the aspects
+		/// </summary>
 		public IndicesOperationResponse RemoveAlias(AliasParams aliasParams)
 		{
 			return this._Alias(_createCommand("remove", aliasParams));
 		}
+		/// <summary>
+		/// Freeform remove multi alias overload for complete control of all the aspects
+		/// </summary>
 		public IndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases)
 		{
 			var cmds = aliases.Select(a => _aliasBody.F(_createCommand("remove", a)));

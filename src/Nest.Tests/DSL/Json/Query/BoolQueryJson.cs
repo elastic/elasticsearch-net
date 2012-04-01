@@ -24,7 +24,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 						.Should(q => q.Term(p => p.Name, "elasticflume"))
 					)
 				);
-				
+			
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {

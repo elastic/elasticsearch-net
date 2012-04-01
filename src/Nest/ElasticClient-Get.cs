@@ -17,11 +17,18 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
+		/// <summary>
+		/// Gets a document of T by id in the default index and the inferred typename for T
+		/// </summary>
+		/// <returns>an instance of T</returns>
 		public T Get<T>(int id) where T : class
 		{
 			return this.Get<T>(id.ToString());
 		}
-
+		/// <summary>
+		/// Gets a document of T by id in the default index and the inferred typename for T
+		/// </summary>
+		/// <returns>an instance of T</returns>
 		public T Get<T>(string id) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
@@ -31,10 +38,18 @@ namespace Nest
 		
 			return this.Get<T>(id, this.CreatePath(index, typeName));
 		}
+		/// <summary>
+		/// Gets a document of T by id in the specified index and the specified typename
+		/// </summary>
+		/// <returns>an instance of T</returns>
 		public T Get<T>(string index, string type, string id) where T : class
 		{
 			return this.Get<T>(id, index + "/" + type + "/");
 		}
+		/// <summary>
+		/// Gets a document of T by id in the specified index and the specified typename
+		/// </summary>
+		/// <returns>an instance of T</returns>
 		public T Get<T>(string index, string type, int id) where T : class
 		{
 			return this.Get<T>(id.ToString(), index + "/" + type + "/");
@@ -62,6 +77,10 @@ namespace Nest
 			return this.Get<T>(ids.Select(i => Convert.ToString(i)));
 		}
 
+
+		/// <summary>
+		/// Gets multiple documents of T by id in the default index and the inferred typename for T
+		/// </summary>
 		public IEnumerable<T> Get<T>(IEnumerable<string> ids)
 			where T : class
 		{
@@ -72,13 +91,17 @@ namespace Nest
 		
 			return this.Get<T>(ids, this.CreatePath(index, typeName));
 		}
-
+		/// <summary>
+		/// Gets multiple documents of T by id in the specified index and the specified typename for T
+		/// </summary>
 		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<int> ids)
 			where T : class
 		{
 			return this.Get<T>(index, type, ids.Select(i => Convert.ToString(i)));
 		}
-
+		/// <summary>
+		/// Gets multiple documents of T by id in the specified index and the specified typename for T
+		/// </summary>
 		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<string> ids)
 			where T : class
 		{

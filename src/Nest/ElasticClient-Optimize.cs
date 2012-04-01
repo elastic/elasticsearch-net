@@ -16,42 +16,66 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <summary>
+		/// Optimize the default index
+		/// </summary>
 		public IndicesOperationResponse Optimize<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 			return Optimize(index);
 		}
+		/// <summary>
+		/// Optimize the default index using the specified optimize params
+		/// </summary>
 		public IndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 			return Optimize(index, optimizeParameters);
 		}
+		/// <summary>
+		/// Optimize the specified index
+		/// </summary>
 		public IndicesOperationResponse Optimize(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Optimize(new[] { index });
 		}
+		/// <summary>
+		/// Optimize the specified index using the specified optimize params
+		/// </summary>
 		public IndicesOperationResponse Optimize(string index, OptimizeParams optimizeParameters)
 		{
 			index.ThrowIfNull("index");
 			return this.Optimize(new[] { index }, optimizeParameters);
 		}
+		/// <summary>
+		/// Optimize all indices
+		/// </summary>
 		public IndicesOperationResponse Optimize()
 		{
 			return this.Optimize("_all");
 		}
+		/// <summary>
+		/// Optimize all indices using the specified optimize params
+		/// </summary>
 		public IndicesOperationResponse Optimize(OptimizeParams optimizeParameters)
 		{
 			return this.Optimize("_all", optimizeParameters);
 		}
+		/// <summary>
+		/// Optimize the specified indices
+		/// </summary>
 		public IndicesOperationResponse Optimize(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_optimize";
 			return this._Optimize(path, null);
 		}
+		/// <summary>
+		/// Optimize the specified indices using the specified optimize params
+		/// </summary>
 		public IndicesOperationResponse Optimize(IEnumerable<string> indices, OptimizeParams optimizeParameters)
 		{
 			indices.ThrowIfNull("index");

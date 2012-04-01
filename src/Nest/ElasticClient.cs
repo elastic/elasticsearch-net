@@ -24,6 +24,9 @@ namespace Nest
 		private bool _IsValid { get; set; }
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
 
+		/// <summary>
+		/// Validates the connection once and returns a bool whether NEST could connect to elasticsearch.
+		/// </summary>
 		public bool IsValid
 		{
 			get
@@ -33,7 +36,9 @@ namespace Nest
 				return this._IsValid;
 			}
 		}
-	
+		/// <summary>
+		/// Return the version info that was set when NEST did its one off sanity checks
+		/// </summary>
 		public ElasticSearchVersionInfo VersionInfo
 		{
 			get
@@ -80,7 +85,7 @@ namespace Nest
 			return JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 		}
 		/// <summary>
-		/// Returns an response of type R based on the connection status without parsing status.Result into R
+		/// Returns a response of type R based on the connection status without parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
 		private R ToResponse<R>(ConnectionStatus status, bool allow404 = false) where R : BaseResponse
@@ -97,7 +102,7 @@ namespace Nest
 			return r;
 		}
 		/// <summary>
-		/// Returns an response of type R based on the connection status by trying parsing status.Result into R
+		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
 		private R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false) where R : BaseResponse

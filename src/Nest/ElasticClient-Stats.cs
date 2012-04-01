@@ -67,29 +67,46 @@ namespace Nest
 				path += "&groups=" + string.Join(",", parameters.Groups);
 			return path;
 		}
-
+		/// <summary>
+		/// Gets all the stats for all the indices
+		/// </summary>
 		public GlobalStatsResponse Stats()
 		{
 			return this.Stats(new StatsParams());
 		}
-
+		/// <summary>
+		/// Gets only the specified stats for all the indices
+		/// </summary>
 		public GlobalStatsResponse Stats(StatsParams parameters)
 		{
 			var status = this.Connection.GetSync(this._BuildStatsUrl(parameters));
 			var r = this.ToParsedResponse<GlobalStatsResponse>(status);
 			return r;
 		}
-		
+
+		/// <summary>
+		/// Gets all the stats for the specified indices
+		/// </summary>
+		public StatsResponse Stats(IEnumerable<string> indices)
+		{
+			indices.ThrowIfEmpty("indices");
+			return this.Stats(indices, new StatsParams());
+		}
+		/// <summary>
+		/// Gets all the stats for the specified index
+		/// </summary>
 		public StatsResponse Stats(string index)
 		{
-			@index.ThrowIfNull("index");
-			return this.Stats(index,new StatsParams());
+			index.ThrowIfNullOrEmpty("index");
+			return this.Stats(new []{index}, new StatsParams());
 		}
-
-		public StatsResponse Stats(string index, StatsParams parameters)
+		/// <summary>
+		/// Gets the specified stats for the specified indices
+		/// </summary>
+		public StatsResponse Stats(IEnumerable<string> indices, StatsParams parameters)
 		{
-			index.ThrowIfNull("index");
-			var path = this.CreatePath(index) + this._BuildStatsUrl(parameters);
+			indices.ThrowIfEmpty("indices");
+			var path = this.CreatePath(string.Join(",",indices)) + this._BuildStatsUrl(parameters);
 			var status = this.Connection.GetSync(path);
 			var r = this.ToParsedResponse<StatsResponse>(status);
 			return r;

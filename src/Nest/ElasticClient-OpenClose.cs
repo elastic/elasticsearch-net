@@ -16,16 +16,25 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <summary>
+		/// Open index
+		/// </summary>
 		public IndicesOperationResponse OpenIndex(string index)
 		{
 			string path = this.CreatePath(index) + "_open";
 			return this._OpenClose(path);
 		}
+		/// <summary>
+		/// Close index
+		/// </summary>
 		public IndicesOperationResponse CloseIndex(string index)
 		{
 			string path = this.CreatePath(index) + "_close";
 			return this._OpenClose(path);
 		}
+		/// <summary>
+		/// Open the default index
+		/// </summary>
 		public IndicesOperationResponse OpenIndex<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;
@@ -33,6 +42,9 @@ namespace Nest
 
 			return OpenIndex(index);
 		}
+		/// <summary>
+		/// Close the default index
+		/// </summary>
 		public IndicesOperationResponse CloseIndex<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;

@@ -16,11 +16,16 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-
+		/// <summary>
+		/// Snapshot all indices
+		/// </summary>
 		public IndicesShardResponse Snapshot()
 		{
 			return this.Snapshot("_all");
 		}
+		/// <summary>
+		/// Snapshot the default index
+		/// </summary>
 		public IndicesShardResponse Snapshot<T>() where T : class
 		{
 			var index = this.Settings.DefaultIndex;
@@ -28,12 +33,17 @@ namespace Nest
 
 			return Snapshot(index);
 		}
+		/// <summary>
+		/// Snapshot the specified index
+		/// </summary>
 		public IndicesShardResponse Snapshot(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Snapshot(new[] { index });
 		}
-
+		/// <summary>
+		/// Snapshot the specified indices
+		/// </summary>
 		public IndicesShardResponse Snapshot(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("indices");

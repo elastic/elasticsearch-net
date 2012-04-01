@@ -17,6 +17,9 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <summary>
+		/// Check if the index already exists
+		/// </summary>
 		public IndexExistsResponse IndexExists(string index)
 		{
 			return this._IndexExists(index);
