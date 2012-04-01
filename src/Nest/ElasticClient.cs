@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Nest.Resolvers.Converters;
-using Nest.Thrift;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Fasterflect;
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace Nest
 {
-
 	public partial class ElasticClient
 	{
 		private IConnection Connection { get; set; }
@@ -49,21 +37,18 @@ namespace Nest
 			}
 		}
 
-		public ElasticClient(IConnectionSettings settings) : this(settings, false)
+		public ElasticClient(IConnectionSettings settings)
+			: this(settings, new Connection(settings))
 		{
 
 		}
-		public ElasticClient(IConnectionSettings settings,bool  useThrift)
+		public ElasticClient(IConnectionSettings settings, IConnection connection)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
 			this.Settings = settings;
-			if (useThrift)
-				this.Connection = new ThriftConnection(settings);
-			else 
-				this.Connection = new Connection(settings);
-
+			this.Connection = connection;
 		}
 
 		public bool TryConnect(out ConnectionStatus status)

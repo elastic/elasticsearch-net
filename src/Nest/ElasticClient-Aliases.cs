@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Nest.Thrift;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Fasterflect;
+
 using Newtonsoft.Json.Converters;
 using System.Diagnostics;
 using System.Text.RegularExpressions;

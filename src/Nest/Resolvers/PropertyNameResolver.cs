@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Linq.Expressions;
 using System.Reflection;
-using Fasterflect;
+
 using System.Runtime.CompilerServices;
 
 namespace Nest.Resolvers

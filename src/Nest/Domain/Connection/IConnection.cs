@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	internal interface IConnection
+	public interface IConnection
 	{
 		void Get(string path, Action<ConnectionStatus> callback);
 		ConnectionStatus GetSync(string path);

@@ -4,6 +4,7 @@ using System.Text;
 using Nest.Thrift;
 using Thrift.Protocol;
 using Thrift.Transport;
+using Nest;
 
 namespace Nest.Thrift
 {

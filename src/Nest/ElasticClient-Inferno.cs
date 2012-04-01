@@ -1,5 +1,4 @@
 ﻿using System;
-using Fasterflect;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Nest.Resolvers;
+using Fasterflect;
 
 namespace Nest
 {

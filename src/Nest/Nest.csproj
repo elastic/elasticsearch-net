@@ -54,12 +54,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Fasterflect, Version=2.0.1.0, Culture=neutral, PublicKeyToken=a64e1179c81b1e25, processorArchitecture=MSIL">
+    <Reference Include="Fasterflect, Version=2.0.4429.39723, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\fasterflect.2.0.1\lib\net40\Fasterflect.dll</HintPath>
-    </Reference>
-    <Reference Include="NetReflector">
-      <HintPath>..\..\dep\NetReflector.dll</HintPath>
+      <HintPath>..\..\dep\fasterflect.2.0.2\lib\net40\Fasterflect.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\dep\Newtonsoft.Json.4.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -91,8 +88,8 @@
     <Compile Include="DSL\Descriptors\Filter\GeoPolygonFilter.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoDistanceRangeFilterDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoDistanceFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\BoolQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\BoostingQueryDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\BoolQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\ConstantScoreQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\IndicesQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\NestedQueryDescriptor.cs" />
@@ -297,44 +294,6 @@
     <Compile Include="Domain\Connection\ConnectionSettings.cs" />
     <Compile Include="Domain\Connection\ConnectionState.cs" />
     <Compile Include="Domain\Connection\ConnectionStatus.cs" />
-    <Compile Include="Domain\Connection\Thrift\Collections\THashSet.cs" />
-    <Compile Include="Domain\Connection\Thrift\Method.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TBase.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TBase64Utils.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TBinaryProtocol.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TField.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TJSONProtocol.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TList.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TMap.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TMessage.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TMessageType.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TProtocol.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TProtocolException.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TProtocolFactory.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TProtocolUtil.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TSet.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TStruct.cs" />
-    <Compile Include="Domain\Connection\Thrift\Protocol\TType.cs" />
-    <Compile Include="Domain\Connection\Thrift\Rest.cs" />
-    <Compile Include="Domain\Connection\Thrift\RestRequest.cs" />
-    <Compile Include="Domain\Connection\Thrift\RestResponse.cs" />
-    <Compile Include="Domain\Connection\Thrift\Status.cs" />
-    <Compile Include="Domain\Connection\Thrift\TApplicationException.cs" />
-    <Compile Include="Domain\Connection\Thrift\ThriftConnection.cs" />
-    <Compile Include="Domain\Connection\Thrift\TProcessor.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\SocketConnectState.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TBufferedTransport.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TFramedTransport.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\THttpClient.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TServerSocket.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TServerTransport.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TSocket.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TSocketSettings.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TSocketV2.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TStreamTransport.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TTransport.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TTransportException.cs" />
-    <Compile Include="Domain\Connection\Thrift\Transport\TTransportFactory.cs" />
     <Compile Include="Domain\Hit\AnalyzeToken.cs" />
     <Compile Include="Domain\Hit\MultiHit.cs" />
     <Compile Include="Domain\Mapping\ElasticProperty.cs" />
