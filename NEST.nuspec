@@ -5,7 +5,10 @@
     <version>0.1.1.0</version>
     <title />
     <authors>Martijn Laarman</authors>
-    <owners />
+    <owners>Martijn Laarman</owners>
+    <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
+    <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
+
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Strongly typed Elasticsearch client.</description>
     <dependencies>
@@ -15,8 +18,5 @@
   </metadata>
   <files>
     <file src="**\Nest.dll" /> 
-    <file src="**\Nest.dll" />
-    <file src="**\NetReflector.dll" /> 
-    <file src="**\NetReflector.pdb" />
   </files>
 </package>
