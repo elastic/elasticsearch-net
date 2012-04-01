@@ -1,5 +1,5 @@
 body {
-	background:url(/images/bg-body.png) top left repeat-x #7692BF;
+	background:url(../images/bg-body.png) top left repeat-x #7692BF;
 	font-family: 'Georgia', 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	font-style: normal;
@@ -18,7 +18,7 @@ section#site
 	width:80%;
 	max-width:1200px;
 	min-height:500px;
-	background:url(/images/bg-header.png) top left no-repeat;
+	background:url(../images/bg-header.png) top left no-repeat;
 }
 aside {
 	font-family: 'Georgia', serif;
@@ -49,11 +49,16 @@ aside ul a {
 	width:100%;
 	border-radius:5px;
 }
-aside ul a:hover {
+aside ul a:hover,
+aside ul a.selected {
 	background:#C8D3E6;
 	color:black;
-
 }
+aside ul a.selected {
+	background:black;
+	color:white !important;
+}
+
 section#content {
 	clear:both;
 	padding-top:20px;
@@ -63,7 +68,7 @@ article {
 }
 article div#content-margin-fix
 {
-	margin-left:78px;
+	margin-left:74px;
 }
 aside#menu
 {
@@ -79,10 +84,28 @@ pre.prettyprint code
 }
 h1 {
 	font-size: 24px;
+	margin:0;
+	padding:0;
 }
 h2 {
 	font-size: 20px;
 }
 h3 {
 	font-weight:bold;
+}
+article  a {
+	text-decoration:none;
+	display:inline-block;
+	background:#C8D3E6;
+	color:black;
+	padding:2px;
+	border-radius:5px;
+}
+article  a:hover {
+	text-decoration:none;
+	display:inline-block;
+	background:black;
+	color:white;
+	padding:2px;
+	border-radius:5px;
 }

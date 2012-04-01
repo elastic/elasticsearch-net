@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
-    <title>NEST - Introduction</title>
+    <title>NEST - Connecting</title>
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -40,7 +40,7 @@
 	
 		<h4>- Concepts</h4>
 		<ul>
-		    <li><a class="selected" href="http://mpdreamz.github.com/NEST">Introduction</a></li>
+		    <li><a class="" href="http://mpdreamz.github.com/NEST">Introduction</a></li>
 		    <li><a class="" href="http://mpdreamz.github.com/NEST/concepts/connecting.html">Connecting</a></li>
 		    <li><a class="" href="http://mpdreamz.github.com/NEST/concepts/handling-responces.html">Response handling</a></li>
 	    </ul>
@@ -73,73 +73,9 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Introduction</h1>
+                    <h1>Documentation still in progress</h1>
 
-<p>NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. It also has string/dynamic overloads for more dynamic usecases. </p>
-
-<p>Indexing is as simple as:</p>
-
-<pre class="prettyprint"><code class="language-cs"><code>var post = new Post() { Id = 12, ... }
-client.Index(post);
-</code></code></pre>
-
-<p>Indexing asynchronously is as easy as:</p>
-
-<pre class="prettyprint"><code class="language-cs"><code>client.IndexAsync(post, (c) =&gt; /* called later */);
-</code></code></pre>
-
-<p>Searching is fluid:</p>
-
-<pre class="prettyprint"><code class="language-cs"><code>var results = this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s =&gt; s
-        .From(0)
-        .Size(10)
-        .Fields(f =&gt; f.Id, f =&gt; f.Name)
-        .SortAscending(f =&gt; f.LOC)
-        .SortDescending(f =&gt; f.Name)
-        .Query(q=&gt;q.Term(f=&gt;f.Name, &quot;NEST&quot;, Boost: 2.0))
-);
-</code></code></pre>
-
-<h2>Copyright</h2>
-
-<p>Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to <a href="https://github.com/Mpdreamz/NEST">NEST</a></p>
-
-<h2>License</h2>
-
-<p>NEST is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" title="Read more about the MIT license form">MIT</a>. Refer to <a href="https://github.com/Mpdreamz/NEST/blob/master/src/license.txt">license.txt</a> for more information.</p>
-
-<h2>Contributors</h2>
-
-<p>A special shoutout to <a href="http://github.com/stephenpope">@stephenpope</a> for allowing his port 
-of the java factory based dsl <a href="http://github.com/stephenpope/Rubber">Rubber</a> to be merged into NEST. 
-NEST now has <strong>two types of query dsl&#39;s</strong> (lambda and factory based)!</p>
-
-<p>Some of the other wonderful features in NEST were pushed by these wonderful folks:</p>
-
-<ul>
-<li><a href="https://github.com/nordbergm/NEST">@nordbergm</a></li>
-<li><a href="https://github.com/kevingessner/NEST">@kevingessner</a></li>
-<li><a href="https://github.com/EFJoseph/NEST">@EFJoseph</a></li>
-<li><a href="https://github.com/pkrakowiak/NEST">@pkrakowiak</a> </li>
-<li><a href="https://github.com/q42jaap/NEST">@q42jaap</a></li>
-</ul>
-
-<script id="contributorTemplate" type="text/x-jQuery-tmpl">
-
-    
-   <div style="clear:both; margin: 8px; height: 80px; width: 600px;" id="contributor">
-        <img src="http://gravatar.com/avatar/${gravatar_id}" alt="${name || login}" style="float:left;" />
-        <div style="float:left; margin-left: 12px;">
-          <h3>#${$index + 1} (${contributions} commits)</h3>
-          <h2>${name ? name.replace(" ", " '" + login + "' ") + "!" : login}</h2>
-          <a href="https://github.com/${login}">https://github.com/${login}</a>
-        </div>
-    </div>
-  
-
-</script>
-
-<div id="contributors">&nbsp;</div>
+<p>This is sadly still a marker file.</p>
 
                 </div>
             <section>

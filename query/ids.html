@@ -1,0 +1,117 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+    <title>NEST - Connecting</title>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="elasticsearch" />
+    <meta name="keywords" content="elastic, search, cloud, elasticsearch, indexing, lucene, distributed lucene, shay banon, .net, nest" />
+    <meta name="author" content="martijn laarman" />
+  
+    <link rel="stylesheet" type="text/css" href="http://mpdreamz.github.com/NEST/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="http://mpdreamz.github.com/NEST/styles/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu' rel='stylesheet' type='text/css'>
+    <link href="http://mpdreamz.github.com/NEST/prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link href="http://mpdreamz.github.com/NEST/prettify/sunburst.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="http://mpdreamz.github.com/NEST/prettify/prettify.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+   
+</head>
+
+<body onload="prettyPrint()"> 
+    <section id="site">
+        <aside> 
+            <ul id="top_left_menu">
+	<h4>External</h4>
+    <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
+    <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
+</ul>
+
+        </aside>
+            
+        <section id="content" class="">
+            <aside id="menu">
+            <ul id="top_left_menu">
+	
+    	<li><a href="http://mpdreamz.github.com/NEST">+ Concepts</a></li>
+    
+   	
+    	<li><a class="" href="http://mpdreamz.github.com/NEST/core/index.html">+ Core</a></li>
+    
+    
+    	<li><a class="" href="http://mpdreamz.github.com/NEST/indices/aliases.html">+ Indices</a></li>
+    
+    
+    	<li><a class="" href="http://mpdreamz.github.com/NEST/cluster/health.html">+ Cluster</a></li>
+    
+    
+    	<li><a class="" href="http://mpdreamz.github.com/NEST/search/basics.html">+ Search</a></li>
+    
+    
+    	<li><a class="" href="http://mpdreamz.github.com/NEST/facets/handling.html">+ Facets</a></li>
+    
+    
+    	<h4>- Query DSL</h4>
+	   <ul>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/text.html">text</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/boost.html">bool</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/boosting.html">boosting</a></li>
+			<li><a class="selected" href="http://mpdreamz.github.com/NEST/query/ids.html">ids</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/custom-score.html">custom_score</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/custom-boost-factor.html">custom_boost_factor</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/constant-score.html">constant_score</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/dis-max.html">dis_max</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/field.html">field</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/filtered.html">filtered</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/flt.html">flt</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/flt-field.html">flt_field</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/fuzzy.html">fuzzy</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/has-child.html">has_child</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/match-all.html">match_all</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/mlt.html">mlt</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/mlt-field.html">mlt_field</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/prefix.html">prefix</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/query-string.html">query_string</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/range.html">range</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/span-first.html">span_first</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/span-near.html">span_near</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/span-not.html">span_not</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/span-or.html">span_or</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/span-term.html">span_term</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/term.html">term</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/terms.html">terms</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/top-children.html">top_children</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/wildcard.html">wildcard</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/nested.html">nested</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/custom-filters-score.html">custom_filters_score</a></li>
+			<li><a class="" href="http://mpdreamz.github.com/NEST/query/indices.html">indices</a></li>
+	   </ul>
+ 	
+	
+		<li><a class="" href="http://mpdreamz.github.com/NEST/filter/and.html">+ Filter DSL</a></li>
+	
+	
+    
+</ul>
+
+            </aside>
+            <article>
+                <div id="content-margin-fix">
+                    <h1>Documentation still in progress</h1>
+
+<p>This is sadly still a marker file.</p>
+
+                </div>
+            <section>
+        </article>
+    </section>
+    <a href="http://github.com/mpdreamz/nest"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+
+
+</body>
+</html>
