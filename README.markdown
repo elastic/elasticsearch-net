@@ -21,10 +21,8 @@ Searching is fluid:
 			.Fields(f => f.Id, f => f.Name)
 			.SortAscending(f => f.LOC)
 			.SortDescending(f => f.Name)
-			.MatchAll()
+			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
 	);
-
-Note strongly typed searching is still a work in progress, you're best off using the string based search overload for the time being.
 
 For more examples please refer to the [Wiki](https://github.com/Mpdreamz/NEST/wiki "Read more about NEST's interface")
 
