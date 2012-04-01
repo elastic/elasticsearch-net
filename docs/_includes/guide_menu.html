@@ -1,0 +1,179 @@
+<ul id="top_left_menu">
+	{% if page.menu_section == 'concepts' %}
+		<h4>- Concepts</h4>
+		<ul>
+		    <li><a href="{{root}}">Introduction</a></li>
+		    <li><a href="{{root}}/concepts/connecting.html">Connecting</a></li>
+		    <li><a href="{{root}}/concepts/handling-responces.html">Response handling</a></li>
+	    	<li><a href="{{root}}/concepts/searching.html">Searching</a></li>
+	    </ul>
+    {% else %}
+    	<li><a href="{{root}}">+ Concepts</a></li>
+    {% endif %}
+   	{% if page.menu_section == 'core' %}
+	   <h4>- Core</h4>
+	   <ul>
+			<li><a href="{{root}}/core/index.html">Index</a></li>
+			<li><a href="{{root}}/core/delete.html">Delete</a></li>
+			<li><a href="{{root}}/core/get.html">Get</a></li>
+			<li><a href="{{root}}/core/multi-get.html">Multi Get</a></li>
+			<li><a href="{{root}}/core/update.html">Update</a></li>
+			<li><a href="{{root}}/core/search.html">Search</a></li>
+			<li><a href="{{root}}/core/multi-search.html">Multi Search</a></li>
+			<li><a href="{{root}}/core/percolate.html">Percolate</a></li>
+			<li><a href="{{root}}/core/bulk.html">Bulk</a></li>
+			<li><a href="{{root}}/core/count.html">Count</a></li>
+			<li><a href="{{root}}/core/delete-by-query.html">Delete By Query</a></li>
+			<li><a href="{{root}}/core/more-like-this.html">More Like This</a></li>
+		</ul>
+	 {% else %}
+    	<li><a href="{{root}}/core/index.html">+ Core</a></li>
+    {% endif %}
+    {% if page.menu_section == 'indices' %}
+		<h4>- Indices</h4>
+	   <ul>
+			<li><a href="{{root}}/indices/aliases.html">Aliases</a></li>
+			<li><a href="{{root}}/indices/analyze.html">Analyze</a></li>
+			<li><a href="{{root}}/indices/create-index.html">Create Index</a></li>
+			<li><a href="{{root}}/indices/delete-index.html">Delete Index</a></li>
+			<li><a href="{{root}}/indices/open-close.html">Open/Close Index</a></li>
+			<li><a href="{{root}}/indices/get-settings.html">Get Settings</a></li>
+			<li><a href="{{root}}/indices/get-mapping.html">Get Mapping</a></li>
+			<li><a href="{{root}}/indices/put-mapping.html">Put Mapping</a></li>
+			<li><a href="{{root}}/indices/delete-mapping.html">Delete Mapping</a></li>
+			<li><a href="{{root}}/indices/refresh.html">Refresh</a></li>
+			<li><a href="{{root}}/indices/optimize.html">Optimize</a></li>
+			<li><a href="{{root}}/indices/flush.html">Flush</a></li>
+			<li><a href="{{root}}/indices/snapshot.html">Snapshot</a></li>
+			<li><a href="{{root}}/indices/update-settings.html">Update Settings</a></li>
+			<li><a href="{{root}}/indices/templates.html">Templates</a></li>
+			<li><a href="{{root}}/indices/stats.html">Stats</a></li>
+			<li><a href="{{root}}/indices/status.html">Status</a></li>
+			<li><a href="{{root}}/indices/segments.html">Segments</a></li>
+			<li><a href="{{root}}/indices/clear-cache.html">Clear Cache</a></li>
+			<li><a href="{{root}}/indices/indices-exists.html">Indices Exists</a></li>
+		</ul>
+	{% else %}
+    	<li><a href="{{root}}/indices/aliases.html">+ Indices</a></li>
+    {% endif %}
+    {% if page.menu_section == 'cluster' %}
+	<h4>- Cluster</h4>
+	<ul>
+		<li><a href="{{root}}/cluster/health.html">Health</a></li>
+		<li><a href="{{root}}/cluster/state.html">State</a></li>
+		<li><a href="{{root}}/cluster/update-settings.html">Update Settings</a></li>
+		<li><a href="{{root}}/cluster/nodes-info.html">Nodes Info</a></li>
+		<li><a href="{{root}}/cluster/nodes-stats.html">Nodes Stats</a></li>
+		<li><a href="{{root}}/cluster/nodes-shutdown.html">Nodes Shutdown</a></li>
+	</ul>
+	{% else %}
+    	<li><a href="{{root}}/cluster/health.html">+ Cluster</a></li>
+    {% endif %}
+    {% if page.menu_section == 'search' %}
+    <h4>- Search</h4>
+		<ul>
+		<li><a href="{{root}}/search/basics.html">Basic parameters</a></li>
+		<li><a href="{{root}}/search/sort.html">Sort</a></li>
+		<li><a href="{{root}}/search/highlighting.html">Highlighting</a></li>
+		<li><a href="{{root}}/search/fields.html">Fields</a></li>
+		<li><a href="{{root}}/search/script-fields.html">Script Fields</a></li>
+		<li><a href="{{root}}/search/preference.html">Preference</a></li>
+		<li><a href="{{root}}/search/named-filters.html">Named Filters</a></li>
+		<li><a href="{{root}}/search/search-type.html">Search Type</a></li>
+		<li><a href="{{root}}/search/index-boost.html">Index Boost</a></li>
+		<li><a href="{{root}}/search/scroll.html">Scroll</a></li>
+		<li><a href="{{root}}/search/explain.html">Explain</a></li>
+		<li><a href="{{root}}/search/version.html">Version</a></li>
+	</ul>
+  	{% else %}
+    	<li><a href="{{root}}/search/basics.html">+ Search</a></li>
+    {% endif %}
+    {% if page.menu_section == 'facets' %}
+    <h4>- Facets</h4>
+		<ul>
+		<li><a href="{{root}}/facets/handling.html">Facet handling</a></li>
+		<li><a href="{{root}}/facets/terms.html">Terms</a></li>
+		<li><a href="{{root}}/facets/range.html">Range</a></li>
+		<li><a href="{{root}}/facets/histogram.html">Histogram</a></li>
+		<li><a href="{{root}}/facets/date-histogram.html">Date Histogram</a></li>
+		<li><a href="{{root}}/facets/filter.html">Filter</a></li>
+		<li><a href="{{root}}/facets/query.html">Query</a></li>
+		<li><a href="{{root}}/facets/statistical.html">Statistical</a></li>
+		<li><a href="{{root}}/facets/term-stats.html">Terms Stats</a></li>
+		<li><a href="{{root}}/facets/geo-distance.html">Geo Distance</a></li>
+	</ul>
+  	{% else %}
+    	<li><a href="{{root}}/facets/handling.html">+ Facets</a></li>
+    {% endif %}
+    {% if page.menu_section == 'query' %}
+    	<h4>- Query DSL</h4>
+	   <ul>
+			<li><a href="{{root}}/query/text.html">text</a></li>
+			<li><a href="{{root}}/query/boost.html">bool</a></li>
+			<li><a href="{{root}}/query/boosting.html">boosting</a></li>
+			<li><a href="{{root}}/query/ids.html">ids</a></li>
+			<li><a href="{{root}}/query/custom-score.html">custom_score</a></li>
+			<li><a href="{{root}}/query/custom-boost-factor.html">custom_boost_factor</a></li>
+			<li><a href="{{root}}/query/constant-score.html">constant_score</a></li>
+			<li><a href="{{root}}/query/dis-max.html">dis_max</a></li>
+			<li><a href="{{root}}/query/field.html">field</a></li>
+			<li><a href="{{root}}/query/filtered.html">filtered</a></li>
+			<li><a href="{{root}}/query/flt.html">flt</a></li>
+			<li><a href="{{root}}/query/flt-field.html">flt_field</a></li>
+			<li><a href="{{root}}/query/fuzzy.html">fuzzy</a></li>
+			<li><a href="{{root}}/query/has-child.html">has_child</a></li>
+			<li><a href="{{root}}/query/match-all.html">match_all</a></li>
+			<li><a href="{{root}}/query/mlt.html">mlt</a></li>
+			<li><a href="{{root}}/query/mlt-field.html">mlt_field</a></li>
+			<li><a href="{{root}}/query/prefix.html">prefix</a></li>
+			<li><a href="{{root}}/query/query-string.html">query_string</a></li>
+			<li><a href="{{root}}/query/range.html">range</a></li>
+			<li><a href="{{root}}/query/span-first.html">span_first</a></li>
+			<li><a href="{{root}}/query/span-near.html">span_near</a></li>
+			<li><a href="{{root}}/query/span-not.html">span_not</a></li>
+			<li><a href="{{root}}/query/span-or.html">span_or</a></li>
+			<li><a href="{{root}}/query/span-term.html">span_term</a></li>
+			<li><a href="{{root}}/query/term.html">term</a></li>
+			<li><a href="{{root}}/query/terms.html">terms</a></li>
+			<li><a href="{{root}}/query/top-children.html">top_children</a></li>
+			<li><a href="{{root}}/query/wildcard.html">wildcard</a></li>
+			<li><a href="{{root}}/query/nested.html">nested</a></li>
+			<li><a href="{{root}}/query/custom-filters-score.html">custom_filters_score</a></li>
+			<li><a href="{{root}}/query/indices.html">indices</a></li>
+	   </ul>
+ 	{% else %}
+		<li><a href="{{root}}/query/text.html">+ Query DSL</a></li>
+	{% endif %}
+	{% if page.menu_section == 'filter' %}
+		<h4>- Filter DSL</h4>
+	   <ul>
+		<li><a href="{{root}}/filter/and.html">and</li></a>
+		<li><a href="{{root}}/filter/bool.html">bool</li></a>
+		<li><a href="{{root}}/filter/exists.html">exists</li></a>
+		<li><a href="{{root}}/filter/ids.html">ids</li></a>
+		<li><a href="{{root}}/filter/limit.html">limit</li></a>
+		<li><a href="{{root}}/filter/type.html">type</li></a>
+		<li><a href="{{root}}/filter/geo-bbox.html">geo_bbox</li></a>
+		<li><a href="{{root}}/filter/geo-distance.html">geo_distance</li></a>
+		<li><a href="{{root}}/filter/geo-distance-range.html">geo_distance_range</li></a>
+		<li><a href="{{root}}/filter/geo-polygon.html">geo_polygon</li></a>
+		<li><a href="{{root}}/filter/has-child.html">has_child</li></a>
+		<li><a href="{{root}}/filter/match-all.html">match_all</li></a>
+		<li><a href="{{root}}/filter/missing.html">missing</li></a>
+		<li><a href="{{root}}/filter/not.html">not</li></a>
+		<li><a href="{{root}}/filter/numeric-range.html">numeric_range</li></a>
+		<li><a href="{{root}}/filter/or.html">or</li></a>
+		<li><a href="{{root}}/filter/prefix.html">prefix</li></a>
+		<li><a href="{{root}}/filter/query.html">query</li></a>
+		<li><a href="{{root}}/filter/range.html">range</li></a>
+		<li><a href="{{root}}/filter/script.html">script</li></a>
+		<li><a href="{{root}}/filter/term.html">term</li></a>
+		<li><a href="{{root}}/filter/terms.html">terms</li></a>
+		<li><a href="{{root}}/filter/nested.html">nested</li></a>
+	   </ul>
+ 	{% else %}
+		<li><a href="{{root}}/filter/and.html">+ Filter DSL</a></li>
+	{% endif %}
+	
+    
+</ul>
