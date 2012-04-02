@@ -15,7 +15,7 @@ namespace Nest.Resolvers
 	/// </summary>
 	public abstract class ExpressionVisitor
 	{
-		public virtual Expression Visit(Expression exp)
+		public virtual Expression Visit(Expression exp, Stack<string>  stack)
 		{
 			if (exp == null)
 				return exp;
@@ -30,7 +30,7 @@ namespace Nest.Resolvers
 				case ExpressionType.ArrayLength:
 				case ExpressionType.Quote:
 				case ExpressionType.TypeAs:
-					return this.VisitUnary((UnaryExpression)exp);
+					return this.VisitUnary((UnaryExpression)exp, stack);
 				case ExpressionType.Add:
 				case ExpressionType.AddChecked:
 				case ExpressionType.Subtract:
@@ -54,55 +54,55 @@ namespace Nest.Resolvers
 				case ExpressionType.RightShift:
 				case ExpressionType.LeftShift:
 				case ExpressionType.ExclusiveOr:
-					return this.VisitBinary((BinaryExpression)exp);
+					return this.VisitBinary((BinaryExpression)exp, stack);
 				case ExpressionType.TypeIs:
-					return this.VisitTypeIs((TypeBinaryExpression)exp);
+					return this.VisitTypeIs((TypeBinaryExpression)exp, stack);
 				case ExpressionType.Conditional:
-					return this.VisitConditional((ConditionalExpression)exp);
+					return this.VisitConditional((ConditionalExpression)exp, stack);
 				case ExpressionType.Constant:
-					return this.VisitConstant((ConstantExpression)exp);
+					return this.VisitConstant((ConstantExpression)exp, stack);
 				case ExpressionType.Parameter:
-					return this.VisitParameter((ParameterExpression)exp);
+					return this.VisitParameter((ParameterExpression)exp, stack);
 				case ExpressionType.MemberAccess:
-					return this.VisitMemberAccess((MemberExpression)exp);
+					return this.VisitMemberAccess((MemberExpression)exp, stack);
 				case ExpressionType.Call:
-					return this.VisitMethodCall((MethodCallExpression)exp);
+					return this.VisitMethodCall((MethodCallExpression)exp, stack);
 				case ExpressionType.Lambda:
-					return this.VisitLambda((LambdaExpression)exp);
+					return this.VisitLambda((LambdaExpression)exp, stack);
 				case ExpressionType.New:
-					return this.VisitNew((NewExpression)exp);
+					return this.VisitNew((NewExpression)exp, stack);
 				case ExpressionType.NewArrayInit:
 				case ExpressionType.NewArrayBounds:
-					return this.VisitNewArray((NewArrayExpression)exp);
+					return this.VisitNewArray((NewArrayExpression)exp, stack);
 				case ExpressionType.Invoke:
-					return this.VisitInvocation((InvocationExpression)exp);
+					return this.VisitInvocation((InvocationExpression)exp, stack);
 				case ExpressionType.MemberInit:
-					return this.VisitMemberInit((MemberInitExpression)exp);
+					return this.VisitMemberInit((MemberInitExpression)exp, stack);
 				case ExpressionType.ListInit:
-					return this.VisitListInit((ListInitExpression)exp);
+					return this.VisitListInit((ListInitExpression)exp, stack);
 				default:
 					throw new Exception(string.Format("Unhandled expression type: '{0}'", exp.NodeType));
 			}
 		}
 
-		protected virtual MemberBinding VisitBinding(MemberBinding binding)
+    protected virtual MemberBinding VisitBinding(MemberBinding binding, Stack<string> stack)
 		{
 			switch (binding.BindingType)
 			{
 				case MemberBindingType.Assignment:
-					return this.VisitMemberAssignment((MemberAssignment)binding);
+					return this.VisitMemberAssignment((MemberAssignment)binding, stack);
 				case MemberBindingType.MemberBinding:
-					return this.VisitMemberMemberBinding((MemberMemberBinding)binding);
+          return this.VisitMemberMemberBinding((MemberMemberBinding)binding, stack);
 				case MemberBindingType.ListBinding:
-					return this.VisitMemberListBinding((MemberListBinding)binding);
+          return this.VisitMemberListBinding((MemberListBinding)binding, stack);
 				default:
 					throw new Exception(string.Format("Unhandled binding type '{0}'", binding.BindingType));
 			}
 		}
 
-		protected virtual ElementInit VisitElementInitializer(ElementInit initializer)
+    protected virtual ElementInit VisitElementInitializer(ElementInit initializer, Stack<string> stack)
 		{
-			ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(initializer.Arguments);
+      ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(initializer.Arguments, stack);
 			if (arguments != initializer.Arguments)
 			{
 				return Expression.ElementInit(initializer.AddMethod, arguments);
@@ -110,9 +110,9 @@ namespace Nest.Resolvers
 			return initializer;
 		}
 
-		protected virtual Expression VisitUnary(UnaryExpression u)
+    protected virtual Expression VisitUnary(UnaryExpression u, Stack<string> stack)
 		{
-			Expression operand = this.Visit(u.Operand);
+      Expression operand = this.Visit(u.Operand, stack);
 			if (operand != u.Operand)
 			{
 				return Expression.MakeUnary(u.NodeType, operand, u.Type, u.Method);
@@ -120,11 +120,11 @@ namespace Nest.Resolvers
 			return u;
 		}
 
-		protected virtual Expression VisitBinary(BinaryExpression b)
+    protected virtual Expression VisitBinary(BinaryExpression b, Stack<string> stack)
 		{
-			Expression left = this.Visit(b.Left);
-			Expression right = this.Visit(b.Right);
-			Expression conversion = this.Visit(b.Conversion);
+      Expression left = this.Visit(b.Left, stack);
+      Expression right = this.Visit(b.Right, stack);
+      Expression conversion = this.Visit(b.Conversion, stack);
 			if (left != b.Left || right != b.Right || conversion != b.Conversion)
 			{
 				if (b.NodeType == ExpressionType.Coalesce && b.Conversion != null)
@@ -135,9 +135,9 @@ namespace Nest.Resolvers
 			return b;
 		}
 
-		protected virtual Expression VisitTypeIs(TypeBinaryExpression b)
+    protected virtual Expression VisitTypeIs(TypeBinaryExpression b, Stack<string> stack)
 		{
-			Expression expr = this.Visit(b.Expression);
+      Expression expr = this.Visit(b.Expression, stack);
 			if (expr != b.Expression)
 			{
 				return Expression.TypeIs(expr, b.TypeOperand);
@@ -145,16 +145,16 @@ namespace Nest.Resolvers
 			return b;
 		}
 
-		protected virtual Expression VisitConstant(ConstantExpression c)
+    protected virtual Expression VisitConstant(ConstantExpression c, Stack<string> stack)
 		{
 			return c;
 		}
 
-		protected virtual Expression VisitConditional(ConditionalExpression c)
+    protected virtual Expression VisitConditional(ConditionalExpression c, Stack<string> stack)
 		{
-			Expression test = this.Visit(c.Test);
-			Expression ifTrue = this.Visit(c.IfTrue);
-			Expression ifFalse = this.Visit(c.IfFalse);
+      Expression test = this.Visit(c.Test, stack);
+      Expression ifTrue = this.Visit(c.IfTrue, stack);
+      Expression ifFalse = this.Visit(c.IfFalse, stack);
 			if (test != c.Test || ifTrue != c.IfTrue || ifFalse != c.IfFalse)
 			{
 				return Expression.Condition(test, ifTrue, ifFalse);
@@ -162,14 +162,14 @@ namespace Nest.Resolvers
 			return c;
 		}
 
-		protected virtual Expression VisitParameter(ParameterExpression p)
+    protected virtual Expression VisitParameter(ParameterExpression p, Stack<string> stack)
 		{
 			return p;
 		}
 
-		protected virtual Expression VisitMemberAccess(MemberExpression m)
+    protected virtual Expression VisitMemberAccess(MemberExpression m, Stack<string> stack)
 		{
-			Expression exp = this.Visit(m.Expression);
+      Expression exp = this.Visit(m.Expression, stack);
 			if (exp != m.Expression)
 			{
 				return Expression.MakeMemberAccess(exp, m.Member);
@@ -177,10 +177,10 @@ namespace Nest.Resolvers
 			return m;
 		}
 
-		protected virtual Expression VisitMethodCall(MethodCallExpression m)
+    protected virtual Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack)
 		{
-			Expression obj = this.Visit(m.Object);
-			IEnumerable<Expression> args = this.VisitExpressionList(m.Arguments);
+      Expression obj = this.Visit(m.Object, stack);
+      IEnumerable<Expression> args = this.VisitExpressionList(m.Arguments, stack);
 			if (obj != m.Object || args != m.Arguments)
 			{
 				return Expression.Call(obj, m.Method, args);
@@ -188,12 +188,12 @@ namespace Nest.Resolvers
 			return m;
 		}
 
-		protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original)
+		protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original, Stack<string>  stack)
 		{
 			List<Expression> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
 			{
-				Expression p = this.Visit(original[i]);
+				Expression p = this.Visit(original[i], stack);
 				if (list != null)
 				{
 					list.Add(p);
@@ -215,9 +215,9 @@ namespace Nest.Resolvers
 			return original;
 		}
 
-		protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment)
+		protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment, Stack<string>  stack)
 		{
-			Expression e = this.Visit(assignment.Expression);
+      Expression e = this.Visit(assignment.Expression, stack);
 			if (e != assignment.Expression)
 			{
 				return Expression.Bind(assignment.Member, e);
@@ -225,9 +225,9 @@ namespace Nest.Resolvers
 			return assignment;
 		}
 
-		protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding)
+		protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding, Stack<string>  stack)
 		{
-			IEnumerable<MemberBinding> bindings = this.VisitBindingList(binding.Bindings);
+      IEnumerable<MemberBinding> bindings = this.VisitBindingList(binding.Bindings, stack);
 			if (bindings != binding.Bindings)
 			{
 				return Expression.MemberBind(binding.Member, bindings);
@@ -235,9 +235,9 @@ namespace Nest.Resolvers
 			return binding;
 		}
 
-		protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
+		protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding, Stack<string>  stack)
 		{
-			IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(binding.Initializers);
+      IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(binding.Initializers, stack);
 			if (initializers != binding.Initializers)
 			{
 				return Expression.ListBind(binding.Member, initializers);
@@ -245,12 +245,12 @@ namespace Nest.Resolvers
 			return binding;
 		}
 
-		protected virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original)
+		protected virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original, Stack<string>  stack)
 		{
 			List<MemberBinding> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
 			{
-				MemberBinding b = this.VisitBinding(original[i]);
+        MemberBinding b = this.VisitBinding(original[i], stack);
 				if (list != null)
 				{
 					list.Add(b);
@@ -270,12 +270,12 @@ namespace Nest.Resolvers
 			return original;
 		}
 
-		protected virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original)
+		protected virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original, Stack<string>  stack)
 		{
 			List<ElementInit> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
 			{
-				ElementInit init = this.VisitElementInitializer(original[i]);
+        ElementInit init = this.VisitElementInitializer(original[i], stack);
 				if (list != null)
 				{
 					list.Add(init);
@@ -295,9 +295,9 @@ namespace Nest.Resolvers
 			return original;
 		}
 
-		protected virtual Expression VisitLambda(LambdaExpression lambda)
+		protected virtual Expression VisitLambda(LambdaExpression lambda, Stack<string>  stack)
 		{
-			Expression body = this.Visit(lambda.Body);
+      Expression body = this.Visit(lambda.Body, stack);
 			if (body != lambda.Body)
 			{
 				return Expression.Lambda(lambda.Type, body, lambda.Parameters);
@@ -305,9 +305,9 @@ namespace Nest.Resolvers
 			return lambda;
 		}
 
-		protected virtual NewExpression VisitNew(NewExpression nex)
+		protected virtual NewExpression VisitNew(NewExpression nex, Stack<string>  stack)
 		{
-			IEnumerable<Expression> args = this.VisitExpressionList(nex.Arguments);
+      IEnumerable<Expression> args = this.VisitExpressionList(nex.Arguments, stack);
 			if (args != nex.Arguments)
 			{
 				if (nex.Members != null)
@@ -318,10 +318,10 @@ namespace Nest.Resolvers
 			return nex;
 		}
 
-		protected virtual Expression VisitMemberInit(MemberInitExpression init)
+		protected virtual Expression VisitMemberInit(MemberInitExpression init, Stack<string>  stack)
 		{
-			NewExpression n = this.VisitNew(init.NewExpression);
-			IEnumerable<MemberBinding> bindings = this.VisitBindingList(init.Bindings);
+      NewExpression n = this.VisitNew(init.NewExpression, stack);
+      IEnumerable<MemberBinding> bindings = this.VisitBindingList(init.Bindings, stack);
 			if (n != init.NewExpression || bindings != init.Bindings)
 			{
 				return Expression.MemberInit(n, bindings);
@@ -329,10 +329,10 @@ namespace Nest.Resolvers
 			return init;
 		}
 
-		protected virtual Expression VisitListInit(ListInitExpression init)
+		protected virtual Expression VisitListInit(ListInitExpression init, Stack<string>  stack)
 		{
-			NewExpression n = this.VisitNew(init.NewExpression);
-			IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(init.Initializers);
+      NewExpression n = this.VisitNew(init.NewExpression, stack);
+      IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(init.Initializers, stack);
 			if (n != init.NewExpression || initializers != init.Initializers)
 			{
 				return Expression.ListInit(n, initializers);
@@ -340,9 +340,9 @@ namespace Nest.Resolvers
 			return init;
 		}
 
-		protected virtual Expression VisitNewArray(NewArrayExpression na)
+		protected virtual Expression VisitNewArray(NewArrayExpression na, Stack<string>  stack)
 		{
-			IEnumerable<Expression> exprs = this.VisitExpressionList(na.Expressions);
+      IEnumerable<Expression> exprs = this.VisitExpressionList(na.Expressions, stack);
 			if (exprs != na.Expressions)
 			{
 				if (na.NodeType == ExpressionType.NewArrayInit)
@@ -357,10 +357,10 @@ namespace Nest.Resolvers
 			return na;
 		}
 
-		protected virtual Expression VisitInvocation(InvocationExpression iv)
+		protected virtual Expression VisitInvocation(InvocationExpression iv, Stack<string>  stack)
 		{
-			IEnumerable<Expression> args = this.VisitExpressionList(iv.Arguments);
-			Expression expr = this.Visit(iv.Expression);
+      IEnumerable<Expression> args = this.VisitExpressionList(iv.Arguments, stack);
+			Expression expr = this.Visit(iv.Expression, stack);
 			if (args != iv.Arguments || expr != iv.Expression)
 			{
 				return Expression.Invoke(expr, args);

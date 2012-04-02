@@ -16,7 +16,6 @@ namespace Nest.Resolvers
 
 	public class PropertyNameResolver : ExpressionVisitor
 	{
-		private Stack<string> _stack;
 		private Stack<ElasticPropertyAttribute> _properties;
 		private JsonSerializerSettings SerializationSettings { get; set; }
 		private ElasticResolver ContractResolver { get; set; }
@@ -70,10 +69,10 @@ namespace Nest.Resolvers
 
 		public string Resolve(Expression expression)
 		{
-			_stack = new Stack<string>();
+      var stack = new Stack<string>();
 			_properties = new Stack<ElasticPropertyAttribute>();
-			Visit(expression);
-			return _stack
+			Visit(expression, stack);
+			return stack
 				.Aggregate(
 					new StringBuilder(),
 					(sb, name) =>
@@ -82,10 +81,10 @@ namespace Nest.Resolvers
 		}
 		public string ResolveToSort(Expression expression)
 		{
-			_stack = new Stack<string>();
+			var stack = new Stack<string>();
 			_properties = new Stack<ElasticPropertyAttribute>();
-			Visit(expression);
-			return _stack
+      Visit(expression, stack);
+      return stack
 				.Aggregate(
 					new StringBuilder(),
 					(sb, name) =>
@@ -93,9 +92,9 @@ namespace Nest.Resolvers
 							.Append((_properties.Count > 0 && _properties.Pop().AddSortField) ? name + ".sort" : name))
 				.ToString();
 		}
-		protected override Expression VisitMemberAccess(MemberExpression expression)
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack)
 		{
-			if (_stack != null)
+      if (stack != null)
 			{ 
 				var name = expression.Member.Name;
 				var resolvedName = this.ContractResolver.ResolvePropertyName(name);
@@ -110,23 +109,23 @@ namespace Nest.Resolvers
 					
 					resolvedName = att.Name;
 				}
-				_stack.Push(resolvedName);
+        stack.Push(resolvedName);
 			}
-			return base.VisitMemberAccess(expression);
+      return base.VisitMemberAccess(expression, stack);
 		}
 
-		protected override Expression VisitMethodCall(MethodCallExpression expression)
+    protected override Expression VisitMethodCall(MethodCallExpression expression, Stack<string>  stack)
 		{
 			if (IsLinqOperator(expression.Method))
 			{
 				for (int i = 1; i < expression.Arguments.Count; i++)
 				{
-					Visit(expression.Arguments[i]);
+          Visit(expression.Arguments[i], stack);
 				}
-				Visit(expression.Arguments[0]);
+        Visit(expression.Arguments[0], stack);
 				return expression;
 			}
-			return base.VisitMethodCall(expression);
+			return base.VisitMethodCall(expression, stack);
 		}
 
 		private static bool IsLinqOperator(MethodInfo method)
