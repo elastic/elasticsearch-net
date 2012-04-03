@@ -128,6 +128,7 @@
     <Compile Include="Indices\ExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Integration\Filter\BoolFilterTests.cs" />
+    <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />

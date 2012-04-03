@@ -47,7 +47,7 @@ namespace Nest
     }
     public HighlightFieldDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
     {
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
       return this.OnField(fieldName);
     }
     public HighlightFieldDescriptor<T> OnAll()

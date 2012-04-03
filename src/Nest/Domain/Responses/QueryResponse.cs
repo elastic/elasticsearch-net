@@ -164,6 +164,9 @@ namespace Nest
 				{
 					foreach (var hit in this.Hits.Hits)
 					{
+            if (hit == null || hit.Highlight == null)
+              continue;
+
 						foreach (var h in hit.Highlight)
 						{
 							yield return new Highlight {Field = h.Key};
