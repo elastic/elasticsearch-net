@@ -43,6 +43,7 @@ namespace Nest.Tests.Integration
       Assert.DoesNotThrow(() => result.Highlights.Count());
       Assert.IsNotNull(result.Highlights);
       Assert.Greater(result.Highlights.Count(), 0);
+      Assert.True(result.Highlights.Any(h => h.Highlights != null && h.Highlights.Any() && !string.IsNullOrEmpty(h.Highlights.First())));
 		}
 
     [Test]

@@ -169,7 +169,7 @@ namespace Nest
 
 						foreach (var h in hit.Highlight)
 						{
-							yield return new Highlight {Field = h.Key};
+							yield return new Highlight {Field = h.Key, Highlights = h.Value };
 						}
 					}
 				}

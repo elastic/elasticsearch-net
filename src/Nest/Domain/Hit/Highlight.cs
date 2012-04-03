@@ -8,5 +8,6 @@ namespace Nest
 	public class Highlight
 	{
 		public string Field { get; internal set; }
+    public IEnumerable<string> Highlights { get; set; }
 	}
 }
