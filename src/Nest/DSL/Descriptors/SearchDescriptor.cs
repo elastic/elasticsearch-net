@@ -175,7 +175,9 @@ namespace Nest
 				};
 			}
 		}
-
+    
+    [JsonProperty(PropertyName = "highlight")]
+    internal HighlightDescriptor<T> _Highlight { get; set; }
 
 		internal string _RawQuery { get; set; }
 		internal QueryDescriptor<T> _Query { get; set; }
@@ -664,6 +666,16 @@ namespace Nest
 			filter(this._Filter);
 			return this;
 		}
+    /// <summary>
+    /// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
+    /// </summary>
+    public SearchDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
+    {
+      highlightDescriptor.ThrowIfNull("highlightDescriptor");
+      this._Highlight = new HighlightDescriptor<T>();
+      highlightDescriptor(this._Highlight);
+      return this;
+    }
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
