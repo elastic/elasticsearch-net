@@ -11,10 +11,10 @@ namespace Nest
   {
     internal string _Field { get; set; }
     [JsonProperty("pre_tags")]
-    internal string _PreTags { get; set; }
+    internal IEnumerable<string> _PreTags { get; set; }
 
     [JsonProperty("post_tags")]
-    internal string _PostTags { get; set; }
+    internal IEnumerable<string> _PostTags { get; set; }
 
     [JsonProperty("fragment_size")]
     internal int? _FragmentSize { get; set; }
@@ -56,10 +56,20 @@ namespace Nest
     }
     public HighlightFieldDescriptor<T> PreTags(string preTags)
     {
-      this._PreTags = preTags;
+      this._PreTags = new [] { preTags };
       return this;
     }
     public HighlightFieldDescriptor<T> PostTags(string postTags)
+    {
+      this._PostTags = new [] { postTags };
+      return this;
+    }
+    public HighlightFieldDescriptor<T> PreTags(IEnumerable<string> preTags)
+    {
+      this._PreTags = preTags;
+      return this;
+    }
+    public HighlightFieldDescriptor<T> PostTags(IEnumerable<string> postTags)
     {
       this._PostTags = postTags;
       return this;

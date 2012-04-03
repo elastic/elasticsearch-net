@@ -45,8 +45,8 @@ namespace Nest.Tests.DSL
           from: 0,
           size: 10,
           highlight: {
-            pre_tags: ""<b>"",
-            post_tags: ""</b>"",
+            pre_tags: [""<b>""],
+            post_tags: [""</b>""],
             fragment_size: 3,
             number_of_fragments: 5,
             fragment_offset: 0,
@@ -55,8 +55,8 @@ namespace Nest.Tests.DSL
             order: ""sort"",
             fields: {
               _all: {
-                pre_tags: ""<em>"",
-                post_tags: ""</em>""
+                pre_tags: [""<em>""],
+                post_tags: [""</em>""]
               }
             },
             require_field_match: true,
