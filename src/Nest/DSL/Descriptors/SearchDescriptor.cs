@@ -131,6 +131,9 @@ namespace Nest
 		internal bool? _Explain { get; set; }
 		[JsonProperty(PropertyName = "version")]
 		internal bool? _Version { get; set; }
+    [JsonProperty(PropertyName = "track_scores ")]
+		internal bool? _TrackScores { get; set; }
+    
 		[JsonProperty(PropertyName = "min_score")]
 		internal double? _MinScore { get; set; }
 
@@ -245,6 +248,14 @@ namespace Nest
 			this._Version = version;
 			return this;
 		}
+    /// <summary>
+    /// Make sure we keep calculating score even if we are sorting on a field.
+    /// </summary>
+    public SearchDescriptor<T> TrackScores(bool trackscores = true)
+    {
+      this._TrackScores = trackscores;
+      return this;
+    }
 		/// <summary>
 		/// Allows to filter out documents based on a minimum score:
 		/// </summary>
