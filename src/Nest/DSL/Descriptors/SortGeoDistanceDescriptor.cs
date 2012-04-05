@@ -83,7 +83,11 @@ namespace Nest.DSL.Descriptors
       this._Order = "desc";
       return this;
     }
-
+    public SortGeoDistanceDescriptor<T> ToggleSort(bool ascending)
+    {
+      this._Order = ascending ? "asc" : "desc";
+      return this;
+    }
 
   }
 }
