@@ -53,6 +53,9 @@ namespace Nest.DSL.Descriptors
       this._Order = "desc";
       return this;
     }
+    /// <summary>
+    /// Pass true to sort ascending false to sort descending
+    /// </summary>
     public virtual SortDescriptor<T> ToggleSort(bool ascending)
     {
       this._Order = ascending ? "asc" : "desc";

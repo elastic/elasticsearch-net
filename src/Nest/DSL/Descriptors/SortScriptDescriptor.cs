@@ -66,6 +66,9 @@ namespace Nest.DSL.Descriptors
       this._Type = type;
       return this;
     }
+    /// <summary>
+    /// Value to sort on when the orginal value for the field is missing
+    /// </summary>
     public virtual SortScriptDescriptor<T> MissingValue(string value)
     {
       this._Missing = value;
@@ -81,6 +84,9 @@ namespace Nest.DSL.Descriptors
       this._Order = "desc";
       return this;
     }
+    /// <summary>
+    /// Pass true to sort ascending false to sort descending
+    /// </summary>
     public SortScriptDescriptor<T> ToggleSort(bool ascending)
     {
       this._Order = ascending ? "asc" : "desc";
