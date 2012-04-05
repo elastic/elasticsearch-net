@@ -33,7 +33,7 @@ namespace Nest.Tests.DSL
           size: 10,
           sort: {
             name: {
-              _missing: ""_last"",
+              missing: ""_last"",
               order: ""desc""
             }
           }
@@ -59,7 +59,7 @@ namespace Nest.Tests.DSL
           size: 10,
           sort: {
             name: {
-              _missing: ""_last"",
+              missing: ""_last"",
               order: ""desc"",
               ""pin.location"": ""40, -70"",
               unit: ""km""
@@ -90,7 +90,7 @@ namespace Nest.Tests.DSL
           size: 10,
           sort: {
             name: {
-              _missing: ""_last"",
+              missing: ""_last"",
               order: ""desc"",
               type: ""number"",
               script: ""doc['field_name'].value * factor"",

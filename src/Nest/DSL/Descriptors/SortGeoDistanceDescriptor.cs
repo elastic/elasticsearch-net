@@ -13,7 +13,7 @@ namespace Nest.DSL.Descriptors
   {
     internal string _Field { get; set; }
 
-    [JsonProperty("_missing")]
+    [JsonProperty("missing")]
     internal string _Missing { get; set; }
 
     [JsonProperty("order")]
