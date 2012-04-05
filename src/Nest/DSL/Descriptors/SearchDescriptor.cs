@@ -454,7 +454,7 @@ namespace Nest
       sortSelector.ThrowIfNull("sortSelector");
       var descriptor = new SortScriptDescriptor<T>();
       sortSelector(descriptor);
-      this._Sort.Add(descriptor._Field, descriptor);
+      this._Sort.Add("_script", descriptor);
       return this;
     }
 		private SearchDescriptor<T> _Facet<F>(

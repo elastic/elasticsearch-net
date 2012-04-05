@@ -75,7 +75,6 @@ namespace Nest.Tests.DSL
         .From(0)
         .Size(10)
         .SortScript(sort => sort
-          .OnField(e => e.Name)
           .MissingLast()
           .Descending()
           .Script("doc['field_name'].value * factor")
@@ -89,7 +88,7 @@ namespace Nest.Tests.DSL
           from: 0,
           size: 10,
           sort: {
-            name: {
+            _script: {
               missing: ""_last"",
               order: ""desc"",
               type: ""number"",

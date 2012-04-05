@@ -9,8 +9,6 @@ namespace Nest.DSL.Descriptors
 {
   public class SortScriptDescriptor<T>
   {
-    internal string _Field { get; set; }
-
     [JsonProperty("missing")]
     internal string _Missing { get; set; }
 
@@ -38,17 +36,6 @@ namespace Nest.DSL.Descriptors
       paramDictionary.ThrowIfNull("paramDictionary");
       this._Params = paramDictionary(new FluentDictionary<string, object>());
       return this;
-    }
-
-    public virtual SortScriptDescriptor<T> OnField(string field)
-    {
-      this._Field = field;
-      return this;
-    }
-    public virtual SortScriptDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
-    {
-      var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
-      return this.OnField(fieldName);
     }
 
     public virtual SortScriptDescriptor<T> MissingLast()
