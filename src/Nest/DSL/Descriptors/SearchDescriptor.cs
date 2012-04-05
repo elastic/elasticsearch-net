@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
+using Nest.DSL.Descriptors;
 
 namespace Nest
 {
@@ -144,7 +145,7 @@ namespace Nest
 		internal IDictionary<string, double> _IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
-		internal IDictionary<string, string> _Sort { get; set; }
+		internal IDictionary<string, object> _Sort { get; set; }
 
 		[JsonProperty(PropertyName = "facets")]
 		internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
@@ -359,7 +360,7 @@ namespace Nest
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, string>();
+				this._Sort = new Dictionary<string, object>();
 			this._Sort.Add(ElasticClient.PropertyNameResolver.ResolveToSort(objectPath), "asc");
 			return this;
 		}
@@ -374,7 +375,7 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, string>();
+        this._Sort = new Dictionary<string, object>();
 
 			var key = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
 			this._Sort.Add(key, "desc");
@@ -391,7 +392,7 @@ namespace Nest
 		public SearchDescriptor<T> SortAscending(string field)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, string>();
+        this._Sort = new Dictionary<string, object>();
 			this._Sort.Add(field, "asc");
 			return this;
 		}
@@ -406,12 +407,56 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(string field)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, string>();
+        this._Sort = new Dictionary<string, object>();
 
 			this._Sort.Add(field, "desc");
 			return this;
 		}
+    /// <summary>
+    /// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
+    /// </para>
+    /// </summary>
+    public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
+    {
+      if (this._Sort == null)
+        this._Sort = new Dictionary<string, object>();
 
+      sortSelector.ThrowIfNull("sortSelector");
+      var descriptor = new SortDescriptor<T>();
+      sortSelector(descriptor);
+      this._Sort.Add(descriptor._Field, descriptor);
+      return this;
+    }
+    /// <summary>
+    /// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
+    /// </para>
+    /// </summary>
+    public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
+    {
+      if (this._Sort == null)
+        this._Sort = new Dictionary<string, object>();
+
+      sortSelector.ThrowIfNull("sortSelector");
+      var descriptor = new SortGeoDistanceDescriptor<T>();
+      sortSelector(descriptor);
+      this._Sort.Add(descriptor._Field, descriptor);
+      return this;
+    }
+    /// <summary>
+    /// <para>SortScript() allows you to sort by a distance from a geo point.
+    /// </para>
+    /// </summary>
+    public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
+    {
+      if (this._Sort == null)
+        this._Sort = new Dictionary<string, object>();
+
+      sortSelector.ThrowIfNull("sortSelector");
+      var descriptor = new SortScriptDescriptor<T>();
+      sortSelector(descriptor);
+      this._Sort.Add(descriptor._Field, descriptor);
+      return this;
+    }
 		private SearchDescriptor<T> _Facet<F>(
 			string name,
 			Func<F, F> facet,
