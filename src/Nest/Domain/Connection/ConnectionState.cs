@@ -38,7 +38,7 @@ namespace Nest
 				var oe = (WebException)e;
 				if (oe.Response != null)
 				{
-					error.HttpStatusCode = ((System.Net.HttpWebResponse)(oe.Response)).StatusCode;				}
+					error.HttpStatusCode = ((System.Net.HttpWebResponse)(oe.Response)).StatusCode; }
 				else
 				{
 					error.ExceptionMessage = "Could not connect to server: " + Connection.Address.ToString();
@@ -51,13 +51,13 @@ namespace Nest
 			{
 				this.RaisedCallback = true;
 				if (this.Callback != null)
-					this.Callback(new ConnectionStatus(error));
+					this.Callback(new ConnectionStatus(error) { Request = PostData });
 			}
 		}
 		public void RaiseCallBack()
 		{
 			if (!this.RaisedCallback && this.Callback != null)
-				this.Callback(new ConnectionStatus(this.RequestData.ToString()));
+        this.Callback(new ConnectionStatus(this.RequestData.ToString()) { Request = PostData });
 		}
 	}
 }
