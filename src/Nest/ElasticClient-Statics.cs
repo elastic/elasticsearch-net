@@ -19,7 +19,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		internal static readonly JsonSerializerSettings SerializationSettings;
-		internal static readonly PropertyNameResolver PropertyNameResolver;
+		public static readonly PropertyNameResolver PropertyNameResolver;
 
 		private static JsonSerializerSettings CreateSettings()
 		{
