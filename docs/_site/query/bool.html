@@ -61,7 +61,7 @@
     	<h4>- Query DSL</h4>
 	   <ul>
 			<li><a class="" href="http://localhost:4000/query/text.html">text</a></li>
-			<li><a class="" href="http://localhost:4000/query/boost.html">bool</a></li>
+			<li><a class="selected" href="http://localhost:4000/query/bool.html">bool</a></li>
 			<li><a class="" href="http://localhost:4000/query/boosting.html">boosting</a></li>
 			<li><a class="" href="http://localhost:4000/query/ids.html">ids</a></li>
 			<li><a class="" href="http://localhost:4000/query/custom-score.html">custom_score</a></li>
@@ -104,9 +104,29 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>BoolQuery</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A query that matches documents matching boolean combinations of other queries. The bool query maps to Lucene BooleanQuery. It is built using one or more boolean clauses, each clause with a typed occurrence. </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(qd=&gt;qd
+    .Bool(b=&gt;b
+        .Must(q =&gt; q.MatchAll())
+        .MustNot(q =&gt; q.Term(p =&gt; p.Name, &quot;elasticsearch.pm&quot;))
+        .Should(q =&gt; q.Term(p =&gt; p.Name, &quot;elasticflume&quot;))
+    )
+)
+</code></code></pre>
+
+<p>note each clause can take multiple queries e.g:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Should(
+    q =&gt; q.Term(p =&gt; p.Name, &quot;elasticflume&quot;),
+    q =&gt; q.Term(p =&gt; p.Name, &quot;Nest&quot;)
+
+)
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/query-dsl/bool-query.html">original docs</a> for more information</p>
 
                 </div>
             <section>

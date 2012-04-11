@@ -82,9 +82,19 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Terms Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Allow to specify field facets that return the N most frequent terms. For example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetTerm(t =&gt; t.OnField(f =&gt; f.Country).Size(20))
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/terms-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

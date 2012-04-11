@@ -84,9 +84,36 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Delete by Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.DeleteByQuery&lt;ElasticSearchProject&gt;(q =&gt; q.Term(f =&gt; f.Name, &quot;elasticsearch.pm&quot;));
+</code></code></pre>
+
+<p>Elasticsearch allows you to delete over multiple types and indexes, so does NEST.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.DeleteByQuery&lt;ElasticSearchProject&gt;(q =&gt; q
+    .Indices(new[] { &quot;index1&quot;, &quot;index2&quot; })
+    .Term(f =&gt; f.Name, &quot;elasticsearch.pm&quot;)
+);
+</code></code></pre>
+
+<p>As always <code>*Async</code> variants are available too.</p>
+
+<p>You can also delete by query over all the indexes and types:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.DeleteByQuery&lt;ElasticSearchProject&gt;(q =&gt; q
+    .AllIndices()
+    .Term(f =&gt; f.Name, &quot;elasticsearch.pm&quot;)
+);
+</code></code></pre>
+
+<p>The DeleteByQuery can be further controlled by passing a <code>DeleteByQueryParameters</code> object</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.DeleteByQuery&lt;ElasticSearchProject&gt;(
+    q =&gt; q.Term(f =&gt; f.Name, &quot;elasticsearch.pm&quot;)
+    , new DeleteByQueryParameters { Consistency = Consistency.Quorum, Replication = Replication.Sync, Routing = &quot;NEST&quot; }    
+);
+</code></code></pre>
 
                 </div>
             <section>

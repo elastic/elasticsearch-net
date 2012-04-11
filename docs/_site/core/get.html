@@ -84,9 +84,19 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Get a document</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>gets a single document from Elasticsearch</p>
+
+<h2>By Id</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var foundDocument = this.ConnectedClient.Get&lt;ElasticSearchProject&gt;(hit.Id);
+</code></code></pre>
+
+<p>index and type are infered but overloads exists for full control</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var foundDocument = this.ConnectedClient.Get&lt;ElasticSearchProject&gt;(&quot;myalternateindex&quot;, &quot;elasticprojs&quot;, hit.Id);
+</code></code></pre>
 
                 </div>
             <section>

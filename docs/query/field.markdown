@@ -6,7 +6,6 @@ menu_item: field
 ---
 
 
-# Documentation still in progress
+# Field Query
 
-This is sadly still a marker file.
-
+Nest opted out of mapping this one because this query type is merely an alias into the [query string]({{root}}/query/query-string.html) query.

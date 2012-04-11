@@ -109,3 +109,12 @@ article  a:hover {
 	padding:2px;
 	border-radius:5px;
 }
+code {
+	text-decoration:none;
+	display:inline-block;
+	background:black;
+	color:white;
+	padding:2px;
+	border-radius:5px;
+	font-family: 'Ubuntu Mono', sans-serif;
+}

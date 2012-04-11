@@ -6,7 +6,16 @@ menu_item: constant-score
 ---
 
 
-# Documentation still in progress
+# Constant Score Query
 
-This is sadly still a marker file.
+A query that wraps a filter or another query and simply returns a constant score equal to the query boost for every document in the filter. Maps to Lucene ConstantScoreQuery
+
+	.Query(qd=>qd
+		.ConstantScore(cs=>cs
+			.Query(qq=>qq.MatchAll())
+			.Boost(1.2)
+		)
+	)
+
+See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/constant-score-query.html) for more information
 

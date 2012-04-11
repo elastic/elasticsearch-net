@@ -75,9 +75,17 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Handling responces</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>All responses have the following properties</p>
+
+<p><code>IsValid</code> and <code>ConnectionStatus</code></p>
+
+<p>These properties pertain to NEST and whether NEST thinks the response is valid or not. In some cases though elasticsearch responds back with with an <code>ok</code> or <code>acknowledged</code> properties. NEST will <strong>always</strong> map these fields but they will not influence the <code>IsValid</code> property. If NEST was successful in connecting and getting back a 200 status <code>IsValid</code> will always be <strong>true</strong> by design. If you need to check for elasticsearch validity check the <code>OK</code> or <code>Acknowledged</code> properties.</p>
+
+<p><code>ConnectionStatus</code> holds the HttpStatusCode and various other interesting information in case a transport error occurred.</p>
+
+<p><strong>NOTE</strong> in most cases elasticsearch will throw a 500 and in that case <code>IsValid</code> will be false too. <code>ConnectionStatus.Result</code> will hold the error message as recieved from elasticsearch.</p>
 
                 </div>
             <section>

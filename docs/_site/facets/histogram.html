@@ -82,9 +82,19 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Histogram Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The histogram facet works with numeric data by building a histogram across intervals of the field values. Each value is “rounded” into an interval (or placed in a bucket), and statistics are provided per interval/bucket (count and total). Here is a simple example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetHistogram(h =&gt; h.OnField(f=&gt;f.LOC).Interval(100))
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/histogram-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

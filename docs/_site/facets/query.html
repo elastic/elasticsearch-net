@@ -82,9 +82,21 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Query Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A facet query allows to return a count of the hits matching the facet query. The query itself can be expressed using the Query DSL. For example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetQuery(&quot;wow_facet&quot;, q=&gt;q
+        .Term(f=&gt;f.Name, &quot;elasticsearch.pm&quot;)
+    );
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/query-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

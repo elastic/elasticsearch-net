@@ -92,9 +92,23 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Indices exists</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Used to check if the index (indices) exists or not.</p>
+
+<h2>Unknown index</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.IndexExists(&quot;yadadadadadaadada&quot;);
+Assert.False(r.Exists);
+//404 is a valid response in this case
+Assert.True(r.IsValid);
+</code></code></pre>
+
+<h2>Known index</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.IndexExists(&quot;nest_test_data&quot;);
+Assert.True(r.Exists);
+</code></code></pre>
 
                 </div>
             <section>

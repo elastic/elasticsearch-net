@@ -84,9 +84,78 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Indexing</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Indexing is as simple as:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var post = new Post() { Id = 12, ... }
+client.Index&lt;Post&gt;(post);
+</code></code></pre>
+
+<p>of course C# is smart enough to infer Post so</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>client.Index(post);
+</code></code></pre>
+
+<p>is sufficient. this will index post too <code>/[default index]/posts/12</code>. The typename<code>posts</code> is automatically inferred from the type.</p>
+
+<p>if you need more control there are plenty of overloads, i.e:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>client.Index(post, &quot;index&quot;, &quot;type&quot;, &quot;id&quot;);
+</code></code></pre>
+
+<h2>Asynchronous</h2>
+
+<p>Indexing asynchronously is as easy as:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>client.IndexAsync(post, (c) =&gt; /* called later */);
+</code></code></pre>
+
+<h2>Aditional parameters</h2>
+
+<p>You can pass aditional data using <code>IndexParameters</code></p>
+
+<pre class="prettyprint"><code class="language-cs"><code>client.Index(post, new IndexParameters() { VersionType = VersionType.External, Version = &quot;212&quot; });
+</code></code></pre>
+
+<p>Similarly to force a wait for a refresh </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>client.Index(post, new IndexParameters() { Refresh = true });
+</code></code></pre>
+
+<h2>Bulk Indexing</h2>
+
+<p>Instead of passing <code>T</code> just pass <code>IEnumerable&lt;T&gt;</code> for both <code>Index()</code> or <code>IndexAsync()</code>. A zero copy approach that writes directly on the post stream is planned in a later version.</p>
+
+<p><strong>Note</strong>
+For asynchronous commands there&#39;s a special connection setting which automatically semaphores threaded communication
+to ES for you:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var elasticSettings = new ConnectionSettings(&quot;127.0.0.1.&quot;, 9200)
+                          .SetDefaultIndex(&quot;mpdreamz&quot;)
+                          .SetMaximumAsyncConnections(20);
+</code></code></pre>
+
+<p>this ensures that at most there are 20 asynchronous connections to ES others are enqueued until a slot is 
+available.</p>
+
+<h2>Aditional parameters</h2>
+
+<p>Like the overloads just taking a <code>T</code> the <code>IEnumerable&lt;T&gt;</code> has alot of overloads taking in extra parameters. </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>client.Index(posts, new SimpleBulkParameters() { Refresh = true });
+</code></code></pre>
+
+<p>The reason the <code>IEnumerable&lt;T&gt;</code> overloads take a <code>SimpleBulkParameters</code> is because to pass item specific parameters you&#39;ll have to wrap <code>posts</code> in a <code>BulkParameters&lt;T&gt;</code> i.e:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>client.Index(posts.Select(p=&gt;new BulkParameters&lt;T&gt;(p) { Version = p.Version }));
+</code></code></pre>
+
+<p>This will do a bulk index on posts but use each individual posts version. Again there&#39;s plenty of overloads to mix and match:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var bulkParams = posts.Select(p=&gt;new BulkParameters&lt;T&gt;(p) { Version = p.Version });
+client.Index(bulkParams , new SimpleBulkParameters() { Refresh = true });
+</code></code></pre>
 
                 </div>
             <section>

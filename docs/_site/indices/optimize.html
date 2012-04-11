@@ -92,9 +92,21 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Optimize</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes the index for faster search operations (and relates to the number of segments a lucene index within each shard). The optimize operation allows to optimize the number of segments to optimize to.</p>
+
+<h2>Optimize all</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Optimize();
+</code></code></pre>
+
+<h2>Optimize several indices with parameters</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Optimize(new[] { &quot;index&quot;, &quot;index2&quot; }, new OptimizeParams {MaximumSegments=2});
+</code></code></pre>
+
+<p>More overloads exists and all OptimizeParams are mapped. See <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize.html">the original docs</a> for parameters</p>
 
                 </div>
             <section>

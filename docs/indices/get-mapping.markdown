@@ -6,7 +6,11 @@ menu_item: get-mapping
 ---
 
 
-# Documentation still in progress
+# Get mapping
 
-This is sadly still a marker file.
+The get mapping API allows to retrieve mapping definition of index or index/type.
+
+	var mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
+
+ 
 

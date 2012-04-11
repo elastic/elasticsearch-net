@@ -92,9 +92,84 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Create index</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The create index API allows to instantiate an index. ElasticSearch provides support for multiple indices, including executing operations across several indices. Each index created can have specific settings associated with it.</p>
+
+<h2>Note</h2>
+
+<p>When adding settings strip the <code>index.</code> prefix when passing settings found for example here:http://www.elasticsearch.org/guide/reference/index-modules/</p>
+
+<h2>Simple example</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var client = this.ConnectedClient;
+var settings = new IndexSettings();
+settings.NumberOfReplicas = 1;
+settings.NumberOfShards = 5;
+settings.Add(&quot;merge.policy.merge_factor&quot;,&quot;10&quot;);
+settings.Add(&quot;search.slowlog.threshold.fetch.warn&quot;, &quot;1s&quot;);
+client.CreateIndex(&quot;myindexname&quot;, settings);
+</code></code></pre>
+
+<h2>Create index with type and name</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var typeMapping = new TypeMapping(&quot;mytype&quot;);
+var type = new TypeMappingProperty
+{
+    Type = &quot;string&quot;,
+    Index = &quot;not_analyzed&quot;,
+    Boost = 2.0
+    // Many more options available
+};
+typeMapping.Properties = new Dictionary&lt;string, TypeMappingProperty&gt;();
+typeMapping.Properties.Add(&quot;name&quot;, type);
+
+var settings = new IndexSettings();
+settings.Mappings.Add(typeMapping);
+settings.NumberOfReplicas = 1;
+settings.NumberOfShards = 5;
+settings.Analysis.Analyzer.Add(&quot;snowball&quot;, new SnowballAnalyzerSettings { Language = &quot;English&quot; });
+
+var indexName = Guid.NewGuid().ToString();
+var response = client.CreateIndex(indexName, settings);
+</code></code></pre>
+
+<h2>Create Index with type and field settings</h2>
+
+<p>Creates a multimap field &quot;name&quot; </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var client = this.ConnectedClient;
+var typeMapping = new TypeMapping(Guid.NewGuid().ToString(&quot;n&quot;));
+var property = new TypeMappingProperty
+{
+    Type = &quot;multi_field&quot;
+};
+
+var primaryField = new TypeMappingProperty
+{
+    Type = &quot;string&quot;, 
+    Index = &quot;not_analyzed&quot;
+};
+var analyzedField = new TypeMappingProperty
+{
+    Type = &quot;string&quot;, 
+    Index = &quot;analyzed&quot;
+};
+
+property.Fields = new Dictionary&lt;string, TypeMappingProperty&gt;();
+property.Fields.Add(&quot;name&quot;, primaryField);
+property.Fields.Add(&quot;name_analyzed&quot;, analyzedField);
+
+typeMapping.Properties.Add(&quot;name&quot;, property);
+var settings = new IndexSettings();
+settings.Mappings.Add(typeMapping);
+settings.NumberOfReplicas = 1;
+settings.NumberOfShards = 5;
+settings.Analysis.Analyzer.Add(&quot;snowball&quot;, new SnowballAnalyzerSettings { Language = &quot;English&quot; });
+
+var indexName = Guid.NewGuid().ToString();
+var response = client.CreateIndex(indexName, settings);
+</code></code></pre>
 
                 </div>
             <section>

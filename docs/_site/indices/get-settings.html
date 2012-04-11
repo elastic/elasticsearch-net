@@ -92,9 +92,18 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Get settings</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The get settings API allows to retrieve settings of index/indices</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.GetIndexSettings(index);
+Assert.True(r.Success);
+Assert.NotNull(r.Settings);
+Assert.AreEqual(r.Settings.NumberOfReplicas, 4);
+Assert.AreEqual(r.Settings.NumberOfShards, 8);
+Assert.Greater(r.Settings.Count(), 0);
+Assert.True(r.Settings.ContainsKey(&quot;merge.policy.merge_factor&quot;));
+</code></code></pre>
 
                 </div>
             <section>

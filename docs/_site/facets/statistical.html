@@ -82,9 +82,21 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Statistical Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Statistical facet allows to compute statistical data on a numeric fields. The statistical data include count, total, sum of squares, mean (average), minimum, maximum, variance, and standard deviation. Here is an example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetStatistical(sf=&gt;sf
+        .OnField(f=&gt;f.LOC)
+    )
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/statistical-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

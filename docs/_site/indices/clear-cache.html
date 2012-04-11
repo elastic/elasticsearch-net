@@ -92,9 +92,19 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Clear cache</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The clear cache API allows to clear either all caches or specific cached associated with one ore more indices.</p>
+
+<h2>ClearAll</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.ClearCache();
+</code></code></pre>
+
+<h2>Typed with advanced options</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.ClearCache&lt;ElasticSearchProject&gt;(ClearCacheOptions.Filter | ClearCacheOptions.Bloom); 
+</code></code></pre>
 
                 </div>
             <section>

@@ -6,7 +6,19 @@ menu_item: delete-mapping
 ---
 
 
-# Documentation still in progress
+# Delete Mapping
+Allow to delete a mapping (type) along with its data. The REST endpoint is `/{index}/{type}` with `DELETE` method.
 
-This is sadly still a marker file.
+Note, most times, it make more sense to reindex the data into a fresh index compared to delete large chunks of it.
+
+## Examples
+Using the default index and the inferred type name
+
+	this.ConnectedClient.DeleteMapping<ElasticSearchProject>()
+
+
+or more explictly:
+
+	this.ConnectedClient.DeleteMapping<ElasticSearchProject>("alternateindex","alternatetypename")
+
 

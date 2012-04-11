@@ -82,9 +82,28 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Geo Distance Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The geo<em>distance facet is a facet providing information for ranges of distances from a provided geo</em>point including count of the number of hits that fall within each range, and aggregation information (like total).</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetGeoDistance(&quot;geo1&quot;, gd =&gt; gd
+        .OnValueField(f=&gt;f.Origin)
+        .PinTo(Lat: 40, Lon: -70)
+        .Ranges(
+            r=&gt;r.To(10),
+            r=&gt;r.From(10).To(20),
+            r=&gt;r.From(20).To(100),
+            r=&gt;r.From(100)
+        )
+    )
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/geo-distance-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

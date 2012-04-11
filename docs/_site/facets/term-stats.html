@@ -82,9 +82,19 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Term Stats Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The terms_stats facet combines both the terms and statistical allowing to compute stats computed on a field, per term value driven by another field. For example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetTerm(t =&gt; t.OnField(f =&gt; f.Country).Size(20))
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/terms-stats-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

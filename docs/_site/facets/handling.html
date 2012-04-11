@@ -82,9 +82,116 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Faceting</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>For a good overview of what facets are see the <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/">original docs</a> on the subject.</p>
+
+<h2>Specify facets during search.</h2>
+
+<p>In its simplest form you can add a facet to your query like this:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var queryResults = this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Country)
+      .Size(20)
+    );
+);
+</code></code></pre>
+
+<p>Adding more then one facet is also really easy:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var queryResults = this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Country)
+      .Size(20)
+    );
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Author)
+      .Size(20)
+    );
+);
+</code></code></pre>
+
+<p>Nest supports all the additional properties you can set on facets </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var queryResults = this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Country)
+      .Size(20)
+      .Order(TermsOrder.reverse_count)
+      .Exclude(&quot;term1&quot;, &quot;term2&quot;)
+      .AllTerms()
+      .Regex(@&quot;\s+&quot;, RegexFlags.DOTALL)
+      .Script(&quot;term + &#39;aaa&#39;&quot;)
+      .ScriptField(&quot;_source.my_field&quot;)
+    );
+    .FacetDateHistogram(h =&gt; h
+      .OnField(f =&gt; f.StartedOn)
+      .Interval(DateInterval.Day, DateRounding.Half_Floor)
+      .TimeZones(Pre: &quot;-3&quot;, Post: &quot;-4&quot;)
+  )
+);
+</code></code></pre>
+
+<p>Allowing you to take advantage of all the cool facets stuff built in to elasticsearch.</p>
+
+<h3>Getting to your facet</h3>
+
+<p>If you are interested in the facet meta data (such as missing, total) you can use the following methods:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var facet = queryResults.Facet&lt;TermFacet&gt;(p=&gt;p.Followers.Select(f=&gt;f.LastName));
+</code></code></pre>
+
+<p>this will return a <code>TermFacet</code> object which has an <code>.Items</code> property holding all the facets.</p>
+
+<p><code>queryResult</code> also holds a <code>.Facets</code> dictionary one can use to itterate over the facets returned from the query.</p>
+
+<h2>Shortcut to facet items</h2>
+
+<p>To get the facet items for <code>followers.lastName</code> the prettiest way to get them is.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var facets = queryResults.FacetItems&lt;FacetItem&gt;(p=&gt;p.Followers.Select(f=&gt;f.LastName));
+</code></code></pre>
+
+<p>NEST will infer the right key from the specified lambda. You can also opt for specifying the name directly.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var facets = queryResults.FacetItems&lt;FacetItem&gt;(&quot;followers.lastName&quot;);
+</code></code></pre>
+
+<p><strong><em>NOTE</em></strong>  more types then just term facets are supported see the &#39;Corresponding Types&#39; section</p>
+
+<h2>Corresponding Types</h2>
+
+<p>The following lists the elasticsearch facet type and their corresponding NEST strongly typed class </p>
+
+<p><strong><em>terms_stats</em></strong> =&gt; <a href="/facets/term-stats.html">TermStatsFacet</a></p>
+
+<p><strong><em>statistical</em></strong> =&gt; <a href="/facets/statistical.html">StatisticalFacet</a></p>
+
+<p><strong><em>terms</em></strong> =&gt; <a href="/facets/terms.html">TermFacet</a></p>
+
+<p><strong><em>histogram</em></strong>  =&gt; <a href="/facets/histogram.html">HistogramFacet</a></p>
+
+<p><strong><em>date_histogram</em></strong> =&gt; <a href="/facets/date-histogram.html">DateHistogramFacet</a></p>
+
+<p><strong><em>range</em></strong> =&gt; <a href="/facets/range.html">DateRangeFacet</a>, <a href="/facets/range.html">RangeFacet</a></p>
+
+<p><strong><em>geo_distance</em></strong> =&gt; <a href="/facets/geo-distance.html">GeoDistanceFacet</a></p>
+
+<p><strong><em>query</em></strong> =&gt; <a href="/facets/query.html">QueryFacet</a></p>
+
+<p><strong><em>filter</em></strong> =&gt; <a href="/facets/filter.html">FilterFacet</a></p>
+
+<p>See also each individual facet&#39;s documentation</p>
 
                 </div>
             <section>

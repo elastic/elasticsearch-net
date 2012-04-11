@@ -61,7 +61,7 @@
     	<h4>- Query DSL</h4>
 	   <ul>
 			<li><a class="" href="http://localhost:4000/query/text.html">text</a></li>
-			<li><a class="" href="http://localhost:4000/query/boost.html">bool</a></li>
+			<li><a class="" href="http://localhost:4000/query/bool.html">bool</a></li>
 			<li><a class="" href="http://localhost:4000/query/boosting.html">boosting</a></li>
 			<li><a class="" href="http://localhost:4000/query/ids.html">ids</a></li>
 			<li><a class="" href="http://localhost:4000/query/custom-score.html">custom_score</a></li>
@@ -104,9 +104,41 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Fuzzy Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A fuzzy based query that uses similarity based on Levenshtein (edit distance) algorithm.</p>
+
+<p>Warning: this query is not very scalable with its default prefix length of 0 – in this case, every term will be enumerated and cause an edit score calculation or max_expansions is not set.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(qd=&gt;qd
+    .Fuzzy(fz =&gt; fz
+        .OnField(f=&gt;f.Name)
+        .Value(&quot;elasticsearcc&quot;)
+    )
+)
+</code></code></pre>
+
+<p>Numeric / Date Fuzzy</p>
+
+<p>fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value. For example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.FuzzyNumeric(fz =&gt; fz
+    .OnField(f=&gt;f.LOC)
+    .Value(200)
+    .MinSimilarity(12)
+)
+</code></code></pre>
+
+<p>Same applies to dates, with support for time format for the min_similarity field:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.FuzzyDate(fz =&gt; fz
+    .OnField(f=&gt;f.StartedOn)
+    .Value(new DateTime(1999,12,31))
+    .MinSimilarity(&quot;1d&quot;)
+)
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/query-dsl/fuzzy-query.html">original docs</a> for more information</p>
 
                 </div>
             <section>

@@ -6,7 +6,20 @@ menu_item: get
 ---
 
 
-# Documentation still in progress
+# Get a document
 
-This is sadly still a marker file.
+gets a single document from Elasticsearch
+
+## By Id
+
+	var foundDocument = this.ConnectedClient.Get<ElasticSearchProject>(hit.Id);
+
+index and type are infered but overloads exists for full control
+
+	var foundDocument = this.ConnectedClient.Get<ElasticSearchProject>("myalternateindex", "elasticprojs", hit.Id);
+
+
+
+
+ 
 

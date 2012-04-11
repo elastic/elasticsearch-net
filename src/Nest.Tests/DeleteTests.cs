@@ -203,7 +203,7 @@ namespace Nest.Tests
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 
-			var parameterizedDocuments = result.Documents.Select(d=> new BulkParameters<ElasticSearchProject>(d) { });
+			var parameterizedDocuments = result.Documents.Select(d=> new BulkParameters<ElasticSearchProject>(d) { Version = d.Version, VersionType = VersionType.External });
 
 			this.ConnectedClient.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
 
@@ -224,7 +224,9 @@ namespace Nest.Tests
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(q => q.Term(f => f.Name, "elasticsearch.pm"));
+			this.ConnectedClient.DeleteByQuery<ElasticSearchProject>(
+				q => q.Term(f => f.Name, "elasticsearch.pm")
+			);
 
 			result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
 				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))

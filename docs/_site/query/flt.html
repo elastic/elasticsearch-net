@@ -61,7 +61,7 @@
     	<h4>- Query DSL</h4>
 	   <ul>
 			<li><a class="" href="http://localhost:4000/query/text.html">text</a></li>
-			<li><a class="" href="http://localhost:4000/query/boost.html">bool</a></li>
+			<li><a class="" href="http://localhost:4000/query/bool.html">bool</a></li>
 			<li><a class="" href="http://localhost:4000/query/boosting.html">boosting</a></li>
 			<li><a class="" href="http://localhost:4000/query/ids.html">ids</a></li>
 			<li><a class="" href="http://localhost:4000/query/custom-score.html">custom_score</a></li>
@@ -104,9 +104,24 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Fuzzy Like This Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Fuzzy like this query find documents that are “like” provided text by running it against one or more fields.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(qd=&gt;qd
+    .FuzzyLikeThis(fz =&gt; fz
+        .OnFields(f =&gt; f.Name)
+        .LikeText(&quot;elasticsearcc&quot;)
+        .PrefixLength(3)
+        .MaxQueryTerms(25)
+        .IgnoreTermFrequency(true)
+        .Boost(1.1)
+        .Analyzer(&quot;my_analyzer&quot;)
+    )
+)
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/query-dsl/flt-query.html">original docs</a> for more information</p>
 
                 </div>
             <section>

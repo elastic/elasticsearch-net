@@ -92,9 +92,25 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Refresh</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh available for search. The (near) real-time capabilities depends on the index engine used. For example, the robin one requires refresh to be called, but by default a refresh is scheduled periodically.</p>
+
+<h2>Refresh all</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Refresh();
+</code></code></pre>
+
+<h2>Index / Indeces</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Refresh(&quot;index&quot;);
+r = this.ConnectedClient.Refresh(new [] {&quot;index4&quot;, &quot;index2&quot; });
+</code></code></pre>
+
+<h2>Typed (default index)</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Refresh&lt;ElasticSearchProject&gt;();
+</code></code></pre>
 
                 </div>
             <section>

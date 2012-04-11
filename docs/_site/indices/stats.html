@@ -92,9 +92,34 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Indices stats api</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Indices level stats provide statistics on different operations happening on an index. The API provides statistics on the index level scope (though most stats can also be retrieved using node level scope).</p>
+
+<h2>Global Stats</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Stats();
+var deletedOnPrimaries = r.Stats.Primaries.Documents.Deleted;
+var deletedOnIndexPrimaries = r.Stats.Indices[&quot;nest_test_data&quot;].Primaries.Documents.Count;
+</code></code></pre>
+
+<h2>Index Stats</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Stats(&quot;nest_test_data&quot;);
+var deletedOnIndexPrimaries = r.Stats.Primaries.Documents.Deleted;
+</code></code></pre>
+
+<h2>Stats params</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Stats(new StatsParams()
+{
+    InfoOn = StatsInfo.All,
+    Refresh = true,
+    Types = new List&lt;string&gt;{ &quot;elasticsearchprojects&quot; }
+
+});
+var x = r.Stats.Primaries.Indexing.Types[&quot;elasticsearchprojects&quot;].Current;
+</code></code></pre>
 
                 </div>
             <section>

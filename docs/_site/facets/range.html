@@ -82,9 +82,81 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Range Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>range facet allow to specify a set of ranges and get both the number of docs (count) that fall within each range, and aggregated data either based on the field, or using another field. Here is a simple example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetRange&lt;int&gt;(t =&gt; t
+        .OnField(f =&gt; f.LOC)
+        .Ranges(
+            r=&gt;r.To(50),
+            r=&gt;r.From(50).To(100),
+            r=&gt;r.From(100).To(150),
+            r=&gt;r.From(150).To(200),
+            r=&gt;r.From(200).To(250),
+            r=&gt;r.From(250)
+        )
+    );
+);
+</code></code></pre>
+
+<p>Ranges can also be passed as <code>double</code>:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>//SNIP
+.FacetRange&lt;double&gt;(t =&gt; t
+.OnField(f =&gt; f.LOC)
+    .Ranges(
+        r =&gt; r.To(50.0),
+        r =&gt; r.From(50.0).To(100.0),
+        r =&gt; r.From(100.0)
+    )
+)
+//SNIP
+</code></code></pre>
+
+<p>or <code>DateTime</code>:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>//SNIP
+.FacetRange&lt;DateTime&gt;(t =&gt; t
+    .OnField(f =&gt; f.StartedOn)
+    .Ranges(
+        r =&gt; r.To(new DateTime(1990,1,1).Date)
+    )
+);
+//SNIP
+</code></code></pre>
+
+<p>You can also pass scripts to create complex range facets:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>//SNIP
+.FacetRange&lt;DateTime&gt;(&quot;needs_a_name&quot;, t =&gt; t
+    .KeyScript(&quot;doc[&#39;date&#39;].date.minuteOfHour&quot;)
+    .ValueScript(&quot;doc[&#39;num1&#39;].value&quot;)
+    .Ranges(
+        r =&gt; r.To(new DateTime(1990, 1, 1).Date)
+    )
+)
+//SNIP
+</code></code></pre>
+
+<p>or alternative key/value fields</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>//SNIP
+.FacetRange&lt;DateTime&gt;(&quot;needs_a_name&quot;, t =&gt; t
+    .KeyField(&quot;field_name&quot;)
+    .ValueField(&quot;another_field_name&quot;)
+    .Ranges(
+        r =&gt; r.To(new DateTime(1990, 1, 1).Date)
+    )
+);
+//SNIP
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

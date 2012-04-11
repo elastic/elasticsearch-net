@@ -92,9 +92,35 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Update Settings</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>This call allows you to update the index settings. 
+NEST whitelists which settings can be updated based on the allowed values mentioned <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html">here in the elasticsearch documentation</a> this allows you to reuse an <code>IndexSettings</code> object.</p>
+
+<h2>Example</h2>
+
+<p>this example first creates an index and then uses the same IndexSettings to update the index.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var index = Guid.NewGuid().ToString();
+var client = this.ConnectedClient;
+var settings = new IndexSettings();
+settings.NumberOfReplicas = 1;
+settings.NumberOfShards = 5;
+settings.Add(&quot;refresh_interval&quot;, &quot;1s&quot;);
+settings.Add(&quot;search.slowlog.threshold.fetch.warn&quot;, &quot;1s&quot;);
+client.CreateIndex(index, settings);
+
+settings[&quot;refresh_interval&quot;] = &quot;-1&quot;;
+settings[&quot;search.slowlog.threshold.fetch.warn&quot;] = &quot;5s&quot;;
+
+var r = this.ConnectedClient.UpdateSettings(index, settings);
+
+Assert.True(r.Success);
+Assert.True(r.OK);
+var getResponse = this.ConnectedClient.GetIndexSettings(index);
+Assert.AreEqual(getResponse.Settings[&quot;refresh_interval&quot;], &quot;-1&quot;);
+Assert.AreEqual(getResponse.Settings[&quot;search.slowlog.threshold.fetch.warn&quot;], &quot;1s&quot;);
+</code></code></pre>
 
                 </div>
             <section>

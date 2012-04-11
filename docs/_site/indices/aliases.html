@@ -92,9 +92,22 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Aliasing</h1>
 
-<p>This is sadly still a marker file.</p>
+<h2>Adding</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var response = this.ConnectedClient.Alias(&quot;nest_test_data&quot;, &quot;nest_test_data2&quot;);
+</code></code></pre>
+
+<h2>Renaming</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var response = this.ConnectedClient.Rename(&quot;nest_test_data&quot;, &quot;nest_test_data2&quot;, &quot;nest_test_data3&quot;);
+</code></code></pre>
+
+<h2>Removing</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var response = this.ConnectedClient.RemoveAlias(&quot;nest_test_data&quot;, &quot;nest_test_data3&quot;);
+</code></code></pre>
 
                 </div>
             <section>

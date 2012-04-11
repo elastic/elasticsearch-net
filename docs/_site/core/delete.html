@@ -84,9 +84,53 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Deleting</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The delete API allows to delete a typed JSON document from a specific index based on its id. See also <a href="/core/delete-by-query.html">deleting by query</a> for other ways to delete data.</p>
+
+<h2>By Id</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>        this.ConnectedClient.DeleteById&lt;ElasticSearchProject&gt;(searchProject.Id);
+        this.ConnectedClient.DeleteByIdAsync&lt;ElasticSearchProject&gt;(searchProject.Id, c =&gt; /* called later */);
+</code></code></pre>
+
+<h2>By object (T)</h2>
+
+<p>Id property is inferred (can be any value type (int, string, float ...))</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>        this.ConnectedClient.Delete(searchProject);
+        this.ConnectedClient.DeleteAsync(searchProject, c =&gt; /* called later */);
+</code></code></pre>
+
+<h2>By IEnumerable<T></h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>        this.ConnectedClient.Delete(searchProjects);
+        this.ConnectedClient.DeleteAsync(searchProjects, c =&gt; /* called later */);
+</code></code></pre>
+
+<h2>By IEnumerable<T> using bulkparameters</h2>
+
+<p>Using bulk parameters you can control the deletion of each individual document further</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>        var bulkedProjects = searchProjects
+            .Select(d=&gt; new BulkParameters&lt;ElasticSearchProject&gt;(d) 
+            { 
+                Version = d.Version, 
+                VersionType = VersionType.External 
+            }
+        );
+        this.ConnectedClient.Delete(bulkedProjects, new SimpleBulkParameters() { Refresh = true });
+</code></code></pre>
+
+<h2>By Query</h2>
+
+<p>Please see <a href="/core/delete-by-query.html">deleting by query</a></p>
+
+<h2>Indices and Mappings</h2>
+
+<p>Please see <a href="/indices/delete-mapping.html">delete mapping</a></p>
+
+<p>and <a href="/indices/delete-index.html">delete index</a></p>
 
                 </div>
             <section>

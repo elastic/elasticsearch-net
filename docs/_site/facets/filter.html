@@ -82,9 +82,21 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Filter Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A filter facet (not to be confused with a facet filter) allows you to return a count of the hits matching the filter. The filter itself can be expressed using the Query DSL. For example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
+    .MatchAll()
+    .FacetFilter(&quot;wow_facet&quot;, filter=&gt;filter
+        .Exists(f=&gt;f.Name)
+    )
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/filter-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

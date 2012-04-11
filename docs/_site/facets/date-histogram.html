@@ -82,9 +82,23 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Date Histogram Facet</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A specific histogram facet that can work with date field types enhancing it over the regular histogram facet. Here is a quick example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+.Size(10)
+.MatchAll()
+.FacetDateHistogram(h =&gt; h
+  .OnField(f =&gt; f.StartedOn)
+  .Interval(DateInterval.Day)
+  .Factor(1000)
+)
+);
+</code></code></pre>
+
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/date-histogram-facet.html">original docs</a> for more information</p>
 
                 </div>
             <section>

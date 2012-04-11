@@ -92,9 +92,15 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Segments</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Provide low level segments information that a Lucene index (shard level) is built with. Allows to be used to provide more information on the state of a shard and an index, possibly optimization information, data “wasted” on deletes, and so on.</p>
+
+<h2>All indices segments information</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Segments();
+r.Indices[this.Settings.DefaultIndex].Shards[&quot;0&quot;].Segments[&quot;_l&quot;].SizeInBytes;
+</code></code></pre>
 
                 </div>
             <section>

@@ -6,7 +6,6 @@ menu_item: templates
 ---
 
 
-# Documentation still in progress
+# Index Templates API
 
-This is sadly still a marker file.
-
+The index templates api is not currently mapped in NEST.

@@ -84,9 +84,20 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Multi Get</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Get multiple documents in a single request.</p>
+
+<h2>Examles</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var ids = new [] { hit1.Id, hit2.Id };
+var foundDocuments = this.ConnectedClient.Get&lt;ElasticSearchProject&gt;(ids);
+</code></code></pre>
+
+<p>index and type are infered but overloads exists for full control</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>var foundDocuments = this.ConnectedClient.Get&lt;ElasticSearchProject&gt;(&quot;myalternateindex&quot;, &quot;elasticprojs&quot;, ids);
+</code></code></pre>
 
                 </div>
             <section>

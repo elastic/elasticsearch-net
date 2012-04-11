@@ -92,9 +92,27 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Analyze</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Performs the analysis process on a text and return the tokens breakdown of the text.</p>
+
+<h2>Analyze using default index&#39;s default analyzer</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var text = &quot;this is a string with some spaces and stuff&quot;;
+var r = this.ConnectedClient.Analyze(text);
+</code></code></pre>
+
+<h2>Analyze using a fields analyzer</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var text = &quot;this is a string with some spaces and stuff&quot;;
+var r = this.ConnectedClient.Analyze&lt;ElasticSearchProject&gt;(p =&gt; p.Content, text);
+</code></code></pre>
+
+<h2>Analyze using parameters</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var analyzer = new AnalyzeParams { Analyzer = &quot;whitespace&quot;, Index = Test.Default.DefaultIndex + &quot;_clone&quot; };
+var r = this.ConnectedClient.Analyze(analyzer, text);
+</code></code></pre>
 
                 </div>
             <section>

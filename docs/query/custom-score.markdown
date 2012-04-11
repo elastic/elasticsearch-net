@@ -6,7 +6,16 @@ menu_item: custom-score
 ---
 
 
-# Documentation still in progress
+# Custom Score
+custom_score query allows to wrap another query and customize the scoring of it optionally with a computation derived from other field values in the doc (numeric ones) using script expression. Here is a simple sample:
 
-This is sadly still a marker file.
+	.Query(qd=>qd
+		.CustomScore(cs => cs
+			.Script("doc['num1'].value > myvar")
+			.Params(p=>p.Add("myvar", 1.0))
+			.Query(qq => qq.MatchAll())
+		)
+	)
+
+See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html) for more information
 

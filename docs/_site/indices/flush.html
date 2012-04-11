@@ -92,9 +92,27 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Flush</h1>
 
-<p>This is sadly still a marker file.</p>
+<h2>Flush all</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Flush();
+</code></code></pre>
+
+<h2>Flush index</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Flush(&quot;index&quot;);
+</code></code></pre>
+
+<h2>Flush several indices</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Flush(new[] { &quot;index&quot;, &quot;index2&quot; });
+</code></code></pre>
+
+<h2>Flush by type and wait for the refresh</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>var r = this.ConnectedClient.Flush&lt;ElasticSearchProject&gt;(true);
+</code></code></pre>
 
                 </div>
             <section>
