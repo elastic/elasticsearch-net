@@ -1,4 +1,2 @@
-bin
-src
-dep
-doc 
+_site
+_cache
