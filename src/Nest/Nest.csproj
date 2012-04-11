@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Facets\QueryFacet.cs" />
+    <Compile Include="DSL\Descriptors\HighlightDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\HighlightFieldDescriptor.cs" />
     <Compile Include="DSL\Descriptors\PathDescriptor.cs" />
     <Compile Include="DSL\Descriptors\PathAllDescriptor.cs" />
     <Compile Include="DSL\Descriptors\QueryPathDescriptor.cs" />
@@ -108,6 +110,9 @@
     <Compile Include="DSL\Descriptors\Query\DismaxQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FilteredQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\IdsQuery.cs" />
+    <Compile Include="DSL\Descriptors\SortDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\SortGeoDistanceDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\SortScriptDescriptor.cs" />
     <Compile Include="DSL\Factory\Common\GeoHashUtils.cs" />
     <Compile Include="DSL\Factory\Common\Point.cs" />
     <Compile Include="DSL\Factory\Common\Regex.cs" />

@@ -360,7 +360,7 @@ namespace Nest
 				response = request.GetResponse();
 				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
 				response.Close();
-				return new ConnectionStatus(result);
+        return new ConnectionStatus(result) { Request = data };
 			}
 			catch (WebException e)
 			{
@@ -368,9 +368,10 @@ namespace Nest
 				var error = this.GetConnectionErrorFromWebException(e, out result);
 				var status = new ConnectionStatus(error);
 				status.Result = result;
+        status.Request = data;
 				return status;
 			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)); }
+      catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)) { Request = data }; }
 			finally
 			{
 				if (postStream != null)
