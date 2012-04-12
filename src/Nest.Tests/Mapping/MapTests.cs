@@ -75,6 +75,17 @@ namespace Nest.Tests.Mapping
 			Assert.AreEqual("double", typeMapping.Properties["followers"].Properties["placeOfBirth"].Properties["lon"].Type);
 		}
 
+    [Test]
+    public void GetMappingOnNonExistingIndexType()
+    {
+      Assert.DoesNotThrow(() =>
+      {
+        var typeMapping = this.ConnectedClient.GetMapping("asfasfasfasfasf", "asdasdasdasdasdasdasdasd");
+        Assert.Null(typeMapping);
+      });
+      
+    }
+
 		[Test]
 		public void DynamicMap()
 		{

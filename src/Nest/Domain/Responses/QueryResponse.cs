@@ -80,7 +80,7 @@ namespace Nest
 		
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{
-		    var fieldName = this.PropertyNameResolver.ResolveToSort(expression);
+		  var fieldName = this.PropertyNameResolver.ResolveToSort(expression);
 			return this.Facet<F>(fieldName);
 		}
 		public F Facet<F>(string fieldName) where F : class, IFacet

@@ -141,17 +141,22 @@ namespace Nest
 			string path = this.CreatePath(index, type) + "_mapping";
 
 			ConnectionStatus status = this.Connection.GetSync(path);
+      try
+      {
+        var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, SerializationSettings);
 
-			var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, SerializationSettings);
+        if (status.Success)
+        {
+          var mapping = mappings.First();
+          mapping.Value.Name = mapping.Key;
 
-			if (status.Success)
-			{
-				var mapping = mappings.First();
-				mapping.Value.Name = mapping.Key;
-
-				return mapping.Value;
-			}
-
+          return mapping.Value;
+        }
+      }
+      catch (Exception e)
+      {
+        //TODO LOG
+      }
 			return null;
 		}
 
