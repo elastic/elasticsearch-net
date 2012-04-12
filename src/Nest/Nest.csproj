@@ -357,6 +357,7 @@
     <Compile Include="Enums\ClearCacheOptions.cs" />
     <Compile Include="Enums\StatsInfo.cs" />
     <Compile Include="Exception\DslException.cs" />
+    <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />

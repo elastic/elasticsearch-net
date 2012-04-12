@@ -181,6 +181,7 @@ namespace Nest.Resolvers
 		{
       Expression obj = this.Visit(m.Object, stack);
       IEnumerable<Expression> args = this.VisitExpressionList(m.Arguments, stack);
+
 			if (obj != m.Object || args != m.Arguments)
 			{
 				return Expression.Call(obj, m.Method, args);

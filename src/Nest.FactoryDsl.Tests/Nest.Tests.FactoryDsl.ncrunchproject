@@ -10,8 +10,8 @@
   <AnalyseExecutionTimes>true</AnalyseExecutionTimes>
   <IncludeStaticReferencesInWorkspace>true</IncludeStaticReferencesInWorkspace>
   <DefaultTestTimeout>60000</DefaultTestTimeout>
-  <UseBuildConfiguration></UseBuildConfiguration>
-  <ProxyProcessPath></ProxyProcessPath>
+  <UseBuildConfiguration />
+  <ProxyProcessPath />
   <UseCPUArchitecture>AutoDetect</UseCPUArchitecture>
   <IgnoredTests>
     <RegexTestSelector>

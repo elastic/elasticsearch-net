@@ -114,20 +114,25 @@ namespace Nest.Resolvers
       return base.VisitMemberAccess(expression, stack);
 		}
 
-    protected override Expression VisitMethodCall(MethodCallExpression expression, Stack<string>  stack)
+    protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string>  stack)
 		{
-			if (IsLinqOperator(expression.Method))
+      if (m.Method.Name == "Suffix" && m.Arguments.Any())
+      {
+        var constantExpression = m.Arguments.Last() as ConstantExpression;
+        if (constantExpression != null)
+          stack.Push(constantExpression.Value as string);
+      }
+			if (IsLinqOperator(m.Method))
 			{
-				for (int i = 1; i < expression.Arguments.Count; i++)
+				for (int i = 1; i < m.Arguments.Count; i++)
 				{
-          Visit(expression.Arguments[i], stack);
+          Visit(m.Arguments[i], stack);
 				}
-        Visit(expression.Arguments[0], stack);
-				return expression;
+        Visit(m.Arguments[0], stack);
+				return m;
 			}
-			return base.VisitMethodCall(expression, stack);
+			return base.VisitMethodCall(m, stack);
 		}
-
 		private static bool IsLinqOperator(MethodInfo method)
 		{
 			if (method.DeclaringType != typeof(Queryable) && method.DeclaringType != typeof(Enumerable))

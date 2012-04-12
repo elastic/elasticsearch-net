@@ -58,6 +58,7 @@
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="BaseMappedElasticSearchTests.cs" />
+    <Compile Include="Dsl\PropertyVisitorTests.cs" />
     <Compile Include="Dsl\SortTests.cs" />
     <Compile Include="Dsl\HighlightTests.cs" />
     <Compile Include="Dsl\JsonifyTests.cs" />
