@@ -8,7 +8,7 @@ namespace Nest.Tests.FacetResponses
 {
     public class BaseFacetTestFixture : BaseElasticSearchTests
     {
-        protected string _LookFor = NestTestData.Data.First().Followers.First().LastName.ToLower();
+        protected string _LookFor = NestTestData.Data.First().Followers.First().LastName;
 
         protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
         {

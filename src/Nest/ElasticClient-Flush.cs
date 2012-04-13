@@ -22,7 +22,7 @@ namespace Nest
 		/// <param name="refresh">optional, wait for the flush operation to complete</param>
 		public IndicesOperationResponse Flush<T>(bool refresh = false) where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Flush(index, refresh);

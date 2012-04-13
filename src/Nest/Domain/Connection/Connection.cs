@@ -16,6 +16,9 @@ namespace Nest
 
 		public Connection(IConnectionSettings settings)
 		{
+      if (settings == null)
+        throw new ArgumentNullException("settings");
+
 			this._ConnectionSettings = settings;
 			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
 		}

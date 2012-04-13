@@ -40,7 +40,7 @@ namespace Nest
 
 		private string CreatePathFor<T>(T @object) where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 			return this.CreatePathFor<T>(@object, index);
@@ -203,7 +203,7 @@ namespace Nest
 		{
 			objects.ThrowIfNull("objects");
 
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -213,7 +213,7 @@ namespace Nest
 		{
 			objects.ThrowIfNull("objects");
 
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -406,7 +406,7 @@ namespace Nest
 		}
 		private string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
-			var indices = this.Settings.DefaultIndex;
+      var indices = this.Settings.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
@@ -434,7 +434,7 @@ namespace Nest
 		}
 		private string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor) where T : class
 		{
-			var indices = this.Settings.DefaultIndex;
+      var indices = this.Settings.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all

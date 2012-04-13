@@ -14,7 +14,7 @@ namespace Nest
 		public IndicesResponse DeleteMapping<T>() where T : class
 		{
 			string type = this.InferTypeName<T>();
-			return this.DeleteMapping<T>(this.Settings.DefaultIndex, type);
+      return this.DeleteMapping<T>(this.Settings.GetIndexForType<T>(), type);
 		}
 		/// <summary>
 		/// Deletes the mapping for the inferred type name of T under the specified index
@@ -54,7 +54,7 @@ namespace Nest
 		public IndicesResponse Map<T>() where T : class
 		{
 			string type = this.InferTypeName<T>();
-			return this.Map<T>(this.Settings.DefaultIndex, type);
+      return this.Map<T>(this.Settings.GetIndexForType<T>(), type);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -100,7 +100,7 @@ namespace Nest
 		/// </summary>
 		public IndicesResponse Map(TypeMapping typeMapping)
 		{
-			return this.Map(typeMapping, this.Settings.DefaultIndex);
+      return this.Map(typeMapping, this.Settings.DefaultIndex);
 		}
 		/// <summary>
 		/// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping.
@@ -123,7 +123,7 @@ namespace Nest
 		/// </summary>
 		public TypeMapping GetMapping<T>() where T : class
 		{
-			return this.GetMapping<T>(this.Settings.DefaultIndex);
+      return this.GetMapping<T>(this.Settings.GetIndexForType<T>());
 		}
 		/// <summary>
 		/// Get the current mapping for T at the specified index

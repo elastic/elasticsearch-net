@@ -51,7 +51,7 @@ namespace Nest.Tests.Search
 			);
 			Assert.False(results.IsValid);
 			Assert.IsNotNull(results.ConnectionStatus.Error);
-			Assert.True(results.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.InternalServerError);
+			Assert.True(results.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.Forbidden);
 			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("ClusterBlockException"));
 			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("index closed"));
 			r = this.ConnectedClient.OpenIndex(Test.Default.DefaultIndex);

@@ -84,6 +84,7 @@ namespace Nest.Tests.FacetResponses
 		[Test]
 		public void SimpleTermFacetWithGlobal()
 		{
+      this.ResetIndexes();
 			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 							""term"" : { ""followers.lastName"" : """ + this._LookFor +

@@ -45,6 +45,8 @@ namespace Nest.Tests
 						}
 					} }"
 			);
+      Assert.Greater(queryResults.Total, 0);
+
 			var hit = queryResults.Hits.Hits[0];
 			var documentToFind = hit.Source;
 
@@ -203,7 +205,7 @@ namespace Nest.Tests
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 
-			var parameterizedDocuments = result.Documents.Select(d=> new BulkParameters<ElasticSearchProject>(d) { Version = d.Version, VersionType = VersionType.External });
+			var parameterizedDocuments = result.Documents.Select(d=> new BulkParameters<ElasticSearchProject>(d) { VersionType = VersionType.Internal });
 
 			this.ConnectedClient.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
 

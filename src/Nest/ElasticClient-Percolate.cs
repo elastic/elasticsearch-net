@@ -34,8 +34,8 @@ namespace Nest
 		  querySelector.ThrowIfNull("queryDescriptor");
 			var descriptor = new QueryPathDescriptor<T>();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
-			var index = this.Settings.DefaultIndex;
+      var query = ElasticClient.Serialize(new { query = descriptor });
+      var index = this.Settings.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				index = descriptor._Indices.First();
 			var path = "_percolator/{0}/{1}".F(index, name);
@@ -59,7 +59,7 @@ namespace Nest
 		/// <param name="name">Name of the percolator</param>
 		public UnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			return this.UnregisterPercolator(index, name);
 		}
 		/// <summary>
@@ -83,7 +83,7 @@ namespace Nest
 		/// </summary>
 		public PercolateResponse Percolate<T>(T @object) where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			var type = this.InferTypeName<T>();
 			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 

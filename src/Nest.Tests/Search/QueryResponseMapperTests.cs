@@ -52,7 +52,7 @@ namespace Nest.Tests
 				@" { ""query"" : {
 						""bool"" : {
 							""must"" : {
-								""term"" : { ""followers.firstName"" : """ + this._LookFor.ToLower() + @""" }
+								""term"" : { ""followers.firstName"" : """ + this._LookFor + @""" }
 							},
 							""must_not"" : {
 								""range"" : {
@@ -61,10 +61,10 @@ namespace Nest.Tests
 							},
 							""should"" : [
 								{
-									""term"" : { ""followers.firstName"" : """ + this._LookFor.ToLower() + @""" }
+									""term"" : { ""followers.firstName"" : """ + this._LookFor + @""" }
 								},
 								{
-									""term"" : { ""followers.firstName"" : """ + this._LookFor.ToLower() + @""" }
+									""term"" : { ""followers.firstName"" : """ + this._LookFor + @""" }
 								}
 							],
 							""minimum_number_should_match"" : 1,
@@ -86,12 +86,12 @@ namespace Nest.Tests
 						""boosting"" : {
 							""positive"" : {
 								""term"" : {
-									""followers.firstName"" : """ + boost2nd.ToLower() + @"""
+									""followers.firstName"" : """ + boost2nd + @"""
 								}
 							},
 							""negative"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+									""followers.firstName"" : """ + this._LookFor + @"""
 								}
 							},
 							""negative_boost"" : 0.2
@@ -110,7 +110,7 @@ namespace Nest.Tests
 						""custom_score"" : {
 							""query"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+									""followers.firstName"" : """ + this._LookFor + @"""
 								}
 							},
 							""script"" : ""_score * 2""
@@ -127,7 +127,7 @@ namespace Nest.Tests
 						""constant_score"" : {
 							""filter"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+									""followers.firstName"" : """ + this._LookFor + @"""
 								}
 							},
 							""boost"" : 1.2
@@ -150,12 +150,12 @@ namespace Nest.Tests
 							""queries"" : [
 								{
 									""term"" : {
-										""followers.firstName"" : """ + boost2nd.ToLower() + @"""
+										""followers.firstName"" : """ + boost2nd + @"""
 									}
 								},
 								{
 									""term"" : {
-										""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+										""followers.firstName"" : """ + this._LookFor + @"""
 									}
 								}
 							]
@@ -170,7 +170,7 @@ namespace Nest.Tests
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""field"" : { 
-							""followers.firstName"" : ""+" + this._LookFor.ToLower() + @" -something else""
+							""followers.firstName"" : ""+" + this._LookFor + @" -something else""
 						}
 					} }"
 			);
@@ -183,7 +183,7 @@ namespace Nest.Tests
 				@" { ""query"" : {
 						""field"" : { 
 							""followers.firstName"" : {
-								""query"" : ""+" + this._LookFor.ToLower() + @" -something else"",
+								""query"" : ""+" + this._LookFor + @" -something else"",
 								""boost"" : 2.0,
 								""enable_position_increments"": false
 							}
@@ -200,7 +200,7 @@ namespace Nest.Tests
 						""filtered"" : {
 							""query"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+									""followers.firstName"" : """ + this._LookFor + @"""
 								}
 							},
 							""filter"" : {
@@ -248,7 +248,7 @@ namespace Nest.Tests
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""fuzzy"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower() + @"x""
+							""followers.firstName"" : """ + this._LookFor + @"x""
 						}
 					} }"
 			);
@@ -263,7 +263,7 @@ namespace Nest.Tests
 				@" { ""query"" : {
 						  ""fuzzy"" : { 
 							""followers.firstName"" : {
-								""value"" : """ + this._LookFor.ToLower() + @"x"",
+								""value"" : """ + this._LookFor + @"x"",
 								""boost"" : 1.0,
 								""min_similarity"" : 0.5,
 								""prefix_length"" : 0
@@ -298,7 +298,7 @@ namespace Nest.Tests
 				@" { ""query"" : {
 						""more_like_this"" : {
 							""fields"" : [""_all""],
-							""like_text"" : """ + this._LookFor.ToLower() + @""",
+							""like_text"" : """ + this._LookFor + @""",
 							""max_query_terms"" : 12,
 							""min_doc_freq"" : 1,
 							""min_term_freq"" : 1
@@ -330,7 +330,7 @@ namespace Nest.Tests
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""prefix"" : {
-							""followers.firstName"" : """ + this._LookFor.Substring(0,4).ToLower() + @"""
+							""followers.firstName"" : """ + this._LookFor.Substring(0,4) + @"""
 						}
 					} }"
 			);
@@ -342,7 +342,7 @@ namespace Nest.Tests
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""prefix"" : {
-							""followers.firstName"" : { ""value"" : """ + this._LookFor.Substring(0, 4).ToLower() + @""", ""boost"" : 1.2 }
+							""followers.firstName"" : { ""value"" : """ + this._LookFor.Substring(0, 4) + @""", ""boost"" : 1.2 }
 						}
 					} }"
 			);
@@ -408,7 +408,7 @@ namespace Nest.Tests
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""term"" : {
-							""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
+							""followers.firstName"" : """ + this._LookFor + @"""
 						}
 					} }"
 			);
@@ -422,7 +422,7 @@ namespace Nest.Tests
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""term"" : {
-							""followers.firstName"" : { ""value"" : """ + this._LookFor.ToLower() + @""", ""boost"" : 2.0 }
+							""followers.firstName"" : { ""value"" : """ + this._LookFor + @""", ""boost"" : 2.0 }
 						}
 					} }"
 			);
@@ -434,8 +434,8 @@ namespace Nest.Tests
 		public void TermsQuery()
 		{
 			var firstFollower = NestTestData.Data.First().Followers.First();
-			var firstName = firstFollower.FirstName.ToLower();
-			var lastName = firstFollower.LastName.ToLower();
+			var firstName = firstFollower.FirstName;
+			var lastName = firstFollower.LastName;
 
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
@@ -453,7 +453,7 @@ namespace Nest.Tests
 		[Test]
 		public void WildcardQuery()
 		{
-			var wildcard = this._LookFor.ToLower().Substring(0,this._LookFor.Length -1).Replace("a","?") + "*";
+			var wildcard = this._LookFor.Substring(0,this._LookFor.Length -1).Replace("a","?") + "*";
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""wildcard"" : {
@@ -468,7 +468,7 @@ namespace Nest.Tests
 		[Test]
 		public void WildcardExtendedQuery()
 		{
-			var wildcard = this._LookFor.ToLower().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
+			var wildcard = this._LookFor.Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""wildcard"" : {

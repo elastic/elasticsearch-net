@@ -18,7 +18,7 @@ namespace Nest
 		/// </summary>
 		public IndexSettingsResponse GetIndexSettings()
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.DefaultIndex;
 			return this.GetIndexSettings(index);
 		}
 		/// <summary>
@@ -128,7 +128,7 @@ namespace Nest
 		/// </summary>
 		public IndicesResponse DeleteIndex<T>() where T : class
 		{
-			return this.DeleteIndex(this.Settings.DefaultIndex);
+      return this.DeleteIndex(this.Settings.GetIndexForType<T>());
 		}
 		/// <summary>
 		/// Delete the specified index

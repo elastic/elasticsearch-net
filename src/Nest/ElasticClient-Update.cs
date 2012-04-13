@@ -33,7 +33,7 @@ namespace Nest
     }
 		private string CreateUpdatePath<T>(UpdateDescriptor<T> s) where T : class
 		{
-      var index = s._Index ?? this.Settings.DefaultIndex;
+      var index = s._Index ?? this.Settings.GetIndexForType<T>();
       var type = s._Type ?? ElasticClient.GetTypeNameFor<T>();
       var id = s._Id ?? this.GetIdFor(s._Object);
 

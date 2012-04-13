@@ -13,7 +13,7 @@ namespace Nest.Tests
 	public class BaseElasticSearchTests
 	{
 		[TestFixtureSetUp]
-		protected void Initialize()
+    public void Initialize()
 		{
 			this.ResetIndexes();
 		}

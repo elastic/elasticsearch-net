@@ -17,5 +17,8 @@ namespace Nest
 		int MaximumAsyncConnections { get; }
 		Func<string, string> TypeNameInferrer { get; }
 		bool UsesPrettyResponses { get; }
+
+    string GetIndexForType<T>();
+    string GetIndexForType(Type type);
 	}
 }

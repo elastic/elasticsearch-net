@@ -90,7 +90,7 @@ namespace Nest
 		/// </summary>
 		public CountResponse Count<T>(Action<QueryDescriptor<T>> querySelector) where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var type = typeof(T);

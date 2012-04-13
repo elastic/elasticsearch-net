@@ -27,7 +27,7 @@ namespace Nest
 		/// </summary>
 		public IndicesShardResponse Snapshot<T>() where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Snapshot(index);

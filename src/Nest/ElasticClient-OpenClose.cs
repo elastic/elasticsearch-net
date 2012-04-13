@@ -36,7 +36,7 @@ namespace Nest
 		/// </summary>
 		public IndicesOperationResponse OpenIndex<T>() where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return OpenIndex(index);
@@ -46,7 +46,7 @@ namespace Nest
 		/// </summary>
 		public IndicesOperationResponse CloseIndex<T>() where T : class
 		{
-			var index = this.Settings.DefaultIndex;
+      var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return CloseIndex(index);

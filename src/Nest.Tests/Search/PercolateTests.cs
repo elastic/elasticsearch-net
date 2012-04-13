@@ -60,7 +60,7 @@ namespace Nest.Tests.Search
 			var name = "mypercolator";
 			var r = c.Percolate(new ElasticSearchProject()
 			{
-				Name = "NEST",
+        Name = "elasticsearch.pm",
 				Country = "netherlands",
 				LOC = 100000, //Too many :(
 			});
