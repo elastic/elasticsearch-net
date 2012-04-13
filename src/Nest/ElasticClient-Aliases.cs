@@ -38,6 +38,31 @@ namespace Nest
 
 			return cmd;
 		}
+
+    /// <summary>
+    /// Get all the indices pointing to an alias
+    /// </summary>
+    public IEnumerable<string> GetIndicesPointingToAlias(string alias)
+    {
+      var path = this.CreatePath(alias) + "/_aliases";
+      var status = this.Connection.GetSync(path);
+      var r = JsonConvert.DeserializeObject<Dictionary<string, object>>(status.Result, SerializationSettings);
+      return r == null ? Enumerable.Empty<string>() : r.Keys;
+    }
+
+    /// <summary>
+    /// Rename an old alias for index to a new alias in one operation
+    /// </summary>
+    public IndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
+    {
+      var commands = new List<string>();
+      foreach (var i in oldIndices)
+        commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = alias }));
+      foreach (var i in newIndices)
+        commands.Add(_createCommand("add", new AliasParams { Index = i, Alias = alias }));
+      return this._Alias(string.Join(", ", commands));
+    }
+
 		/// <summary>
 		/// Add an alias to the default index
 		/// </summary>
