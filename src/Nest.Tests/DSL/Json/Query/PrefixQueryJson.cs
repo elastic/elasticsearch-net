@@ -37,7 +37,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ prefix: { name : { value : ""el"", boost: 1.2 } }}}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 
 	}

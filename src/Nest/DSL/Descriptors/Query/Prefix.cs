@@ -7,6 +7,9 @@ namespace Nest
 {
 	public class Prefix : Term
 	{
+    public Prefix()
+		{
 		
+		}
 	}
 }
