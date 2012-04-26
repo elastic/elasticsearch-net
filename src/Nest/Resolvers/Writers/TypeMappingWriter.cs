@@ -245,8 +245,12 @@ namespace Nest.Resolvers.Writers
 
 		private string GetElasticSearchTypeFromType(Type t)
 		{
+			if (t.IsArray)
+				t = t.GetElementType();
+
 			if (t == typeof(string))
 				return "string";
+
 			if (t.IsValueType)
 			{
 				switch (t.Name)
@@ -257,6 +261,7 @@ namespace Nest.Resolvers.Writers
 						return "long";
 					case "Single":
 						return "float";
+					case "Decimal":
 					case "Double":
 						return "double";
 					case "DateTime":
