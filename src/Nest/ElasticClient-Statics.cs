@@ -58,13 +58,12 @@ namespace Nest
 		public static void AddConverter(JsonConverter converter)
 		{
 			ElasticClient.SerializationSettings.Converters.Add(converter);
+      ElasticClient.DeserializeSettings.Converters.Add(converter);
 		}
-
-
 
 		static ElasticClient()
 		{
-      DeserializeSettings = SerializationSettings = ElasticClient.CreateDeserializeSettings();
+      DeserializeSettings = ElasticClient.CreateDeserializeSettings();
 			SerializationSettings = ElasticClient.CreateSettings();
 			PropertyNameResolver = new PropertyNameResolver(SerializationSettings);
 
@@ -73,5 +72,9 @@ namespace Nest
 		{
 			return JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 		}
+    public static T Deserialize<T>(string value)
+    {
+      return JsonConvert.DeserializeObject<T>(value, DeserializeSettings);
+    }
 	}
 }
