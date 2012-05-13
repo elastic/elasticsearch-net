@@ -165,5 +165,61 @@ namespace Nest
 			return this;
 		}
 		#endregion
+
+		#region double
+		/// <summary>
+		/// The lower bound. Defaults to start from the first.
+		/// </summary>
+		/// <returns></returns>
+		public RangeQueryDescriptor<T> From(double from)
+		{
+			this._From = from;
+			return this;
+		}
+		/// <summary>
+		/// The upper bound. Defaults to unbounded.
+		/// </summary>
+		public RangeQueryDescriptor<T> To(double to)
+		{
+			this._To = to;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting from and from_inclusive to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Greater(double from)
+		{
+			this._From = from;
+			this._FromInclusive = false;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting from and from_inclusive to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> GreaterOrEquals(double from)
+		{
+			this._From = from;
+			this._FromInclusive = true;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and to_inclusive to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Lower(double to)
+		{
+			this._To = to;
+			this._ToInclusive = false;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and to_inclusive to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> LowerOrEquals(double to)
+		{
+			this._To = to;
+			this._ToInclusive = true;
+			return this;
+		}
+		#endregion
 	}
 }

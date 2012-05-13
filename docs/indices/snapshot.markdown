@@ -12,16 +12,15 @@ The gateway snapshot API allows to explicitly perform a snapshot through the gat
 Note, this API only applies when using shared storage gateway implementation, and does not apply when using the (default) local gateway.
 
 ## All
-```C#
-var r = this.ConnectedClient.Snapshot();
-```
+
+	var r = this.ConnectedClient.Snapshot();
 
 ## Snapshot Index 
-```C#
-var r = this.ConnectedClient.Snapshot("index");
-```
+
+	var r = this.ConnectedClient.Snapshot("index");
+
 
 ## Typed
-```C#
-var r = this.ConnectedClient.Snapshot<ElasticSearchProject>();
-```
+
+	var r = this.ConnectedClient.Snapshot<ElasticSearchProject>();
+

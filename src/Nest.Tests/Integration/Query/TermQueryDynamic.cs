@@ -14,6 +14,10 @@ namespace Nest.Tests.Integration.Query
 		[Test]
 		public void TestTermQuery()
 		{
+			this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+			                            .AllIndices()
+			                            .Query(q=>q.Term(f=>f.Name, ""))
+			                            );
 			var results = this.ConnectedClient.Search(s=>s
 				.Index("nest_test_data")
 				.Type("elasticsearchprojects")

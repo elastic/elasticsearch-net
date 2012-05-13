@@ -6,7 +6,9 @@ menu_item: ids
 ---
 
 
-# Documentation still in progress
+# Ids Query
 
-This is sadly still a marker file.
+Filters documents that only have the provided ids. Note, this filter does not require the _id field to be indexed since it works using the _uid field.
+
+	.Query(q=>q.Ids(new[] { "1", "4", "100" })
 

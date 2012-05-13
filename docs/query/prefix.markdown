@@ -6,7 +6,9 @@ menu_item: prefix
 ---
 
 
-# Documentation still in progress
+# Prefix Query
+Matches documents that have fields containing terms with a specified prefix (not analyzed). The prefix query maps to Lucene `PrefixQuery`.
 
-This is sadly still a marker file.
-
+	.Query(q => q
+		.Prefix(f => f.Name, "el", Boost: 1.2)
+	);

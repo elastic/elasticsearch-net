@@ -87,14 +87,14 @@
 <p>A specific histogram facet that can work with date field types enhancing it over the regular histogram facet. Here is a quick example:</p>
 
 <pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
-    .From(0)
-.Size(10)
-.MatchAll()
-.FacetDateHistogram(h =&gt; h
-  .OnField(f =&gt; f.StartedOn)
-  .Interval(DateInterval.Day)
-  .Factor(1000)
-)
+  .From(0)
+  .Size(10)
+  .MatchAll()
+  .FacetDateHistogram(h =&gt; h
+    .OnField(f =&gt; f.StartedOn)
+    .Interval(DateInterval.Day)
+    .Factor(1000)
+  )
 );
 </code></code></pre>
 

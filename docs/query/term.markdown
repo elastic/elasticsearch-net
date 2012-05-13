@@ -6,7 +6,8 @@ menu_item: term
 ---
 
 
-# Documentation still in progress
+# Term Query
 
-This is sadly still a marker file.
+Matches documents that have fields that contain a term (not analyzed). The term query maps to Lucene `TermQuery`
 
+	.Term(f => f.Name, "elasticsearch.pm")

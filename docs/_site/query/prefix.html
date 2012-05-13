@@ -104,9 +104,14 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Prefix Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Matches documents that have fields containing terms with a specified prefix (not analyzed). The prefix query maps to Lucene <code>PrefixQuery</code>.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(q =&gt; q
+    .Prefix(f =&gt; f.Name, &quot;el&quot;, Boost: 1.2)
+);
+</code></code></pre>
 
                 </div>
             <section>

@@ -104,9 +104,15 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Nested Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Nested query allows to query nested objects / docs (see <a href="http://www.elasticsearch.org/guide/reference/mapping/nested-type.html">nested mapping</a>. The query is executed against the nested objects / docs as if they were indexed as separate docs (they are, internally) and resulting in the root parent doc (or parent nested mapping). </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Nested(n=&gt;n
+    .Path(f=&gt;f.Followers[0])
+    .Query(q=&gt;q.Term(f=&gt;f.Followers[0].FirstName,&quot;elasticsearch.pm&quot;))
+)
+</code></code></pre>
 
                 </div>
             <section>

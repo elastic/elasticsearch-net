@@ -6,7 +6,7 @@ menu_item: status
 ---
 
 
-# Documentation still in progress
+# Status
 
-This is sadly still a marker file.
+The status api hasn't been mapped yet.
 

@@ -104,9 +104,15 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Span First Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Matches spans near the beginning of a field. The span first query maps to Lucene <code>SpanFirstQuery</code>. </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.SpanFirst(sf=&gt;sf
+    .MatchTerm(f =&gt; f.Name, &quot;elasticsearch.pm&quot;, 1.1)
+    .End(3)
+)
+</code></code></pre>
 
                 </div>
             <section>

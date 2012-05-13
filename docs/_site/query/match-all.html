@@ -104,9 +104,21 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Match All query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A query that matches all documents. Maps to Lucene <code>MatchAllDocsQuery</code>.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.From(0)
+.Size(10)
+.Query(q =&gt; q.MatchAll());
+</code></code></pre>
+
+<p>A special shortcut exists for matchall queries</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.From(0)
+.Size(10)
+.MatchAll()
+</code></code></pre>
 
                 </div>
             <section>

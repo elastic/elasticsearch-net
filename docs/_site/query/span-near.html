@@ -104,9 +104,25 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Span Near Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Matches spans which are near one another. One can specify slop, the maximum number of intervening unmatched positions, as well as whether matches are required to be in-order. The span near query maps to Lucene <code>SpanNearQuery</code>.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.SpanNear(sn =&gt; sn
+    .Clauses(
+        c =&gt; c.SpanTerm(f =&gt; f.Name, &quot;elasticsearch.pm&quot;, 1.1),
+        c =&gt; c.SpanFirst(sf =&gt; sf
+            .MatchTerm(f =&gt; f.Name, &quot;elasticsearch.pm&quot;, 1.1)
+            .End(3)
+        )
+    )
+    .Slop(3)
+    .CollectPayloads(false)
+    .InOrder(false)
+)
+</code></code></pre>
+
+<p>The clauses element is a list of one or more other span type queries and the slop controls the maximum number of intervening unmatched positions permitted.</p>
 
                 </div>
             <section>

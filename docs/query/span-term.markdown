@@ -6,7 +6,10 @@ menu_item: span-term
 ---
 
 
-# Documentation still in progress
+# Span Term Query
 
-This is sadly still a marker file.
+Matches spans containing a term. The span term query maps to Lucene `SpanTermQuery`.
 
+	.Query(q => q
+		.SpanTerm(f=>f.Name, "elasticsearch.pm", 1.1)
+	);

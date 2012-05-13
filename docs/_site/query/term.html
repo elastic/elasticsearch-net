@@ -104,9 +104,12 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Term Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Matches documents that have fields that contain a term (not analyzed). The term query maps to Lucene <code>TermQuery</code></p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Term(f =&gt; f.Name, &quot;elasticsearch.pm&quot;)
+</code></code></pre>
 
                 </div>
             <section>

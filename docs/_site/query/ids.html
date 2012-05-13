@@ -104,9 +104,12 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Ids Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Filters documents that only have the provided ids. Note, this filter does not require the _id field to be indexed since it works using the _uid field.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(q=&gt;q.Ids(new[] { &quot;1&quot;, &quot;4&quot;, &quot;100&quot; })
+</code></code></pre>
 
                 </div>
             <section>

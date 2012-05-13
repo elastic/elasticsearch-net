@@ -6,7 +6,7 @@ menu_item: mlt-field
 ---
 
 
-# Documentation still in progress
+# More Like This Field Query
 
-This is sadly still a marker file.
+Since this is merely an alias in elasticsearch for a regular [More Like This query]({{root}}/query/mlt.html)  NEST has no special method for this.
 

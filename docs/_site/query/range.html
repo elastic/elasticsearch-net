@@ -104,9 +104,21 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Range Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Matches documents with fields that have terms within a certain range. The type of the Lucene query depends on the field type, for string fields, the <code>TermRangeQuery</code>, while for number/date fields, the query is a <code>NumericRangeQuery</code>. </p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(ff =&gt; ff
+    .Range(n =&gt; n
+        .OnField(f=&gt;f.LOC)
+        .From(&quot;10&quot;)
+        .To(&quot;20&quot;)
+        .FromExclusive()
+    )
+);
+</code></code></pre>
+
+<p>alternatively <code>.From(10)</code> and <code>.From(10.0)</code> work as expected.</p>
 
                 </div>
             <section>

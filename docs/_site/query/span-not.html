@@ -104,9 +104,17 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Span Not Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Removes matches which overlap with another span query. The span not query maps to Lucene <code>SpanNotQuery</code></p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.SpanNot(sf=&gt;sf
+    .Include(e =&gt;e.SpanTerm(f =&gt; f.Name, &quot;elasticsearch.pm&quot;, 1.1))
+    .Exclude(e=&gt;e.SpanTerm(f =&gt; f.Name, &quot;elasticsearch.pm&quot;, 1.1))
+)
+</code></code></pre>
+
+<p>The include and exclude clauses can be any span type query. The include clause is the span query whose matches are filtered, and the exclude clause is the span query whose matches must not overlap those returned.</p>
 
                 </div>
             <section>

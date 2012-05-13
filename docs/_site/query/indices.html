@@ -106,7 +106,16 @@
                 <div id="content-margin-fix">
                     <h1>Documentation still in progress</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The indices query can be used when executed across multiple indices, allowing to have a query that executes only when executed on an index that matches a specific list of indices, and another query that executes when it is executed on an index that does not match the listed indices.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(q =&gt; q
+    .Indices(fz =&gt; fz
+        .Indices(new[] { &quot;elasticsearchprojects&quot;, &quot;people&quot;, 
+        .Query&lt;Person&gt;(qq =&gt; qq.Term(f =&gt; f.FirstName, &quot;joe&quot;))
+        .NoMatchQuery(qq =&gt; qq.MatchAll())
+    )
+);
+</code></code></pre>
 
                 </div>
             <section>

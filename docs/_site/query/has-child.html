@@ -104,9 +104,15 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Has Child Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The has_child filter accepts a query and the child type to run against, and results in parent documents that have child docs matching the query. Here is an example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.HasChild&lt;Person&gt;(fz =&gt; fz
+    .Query(qq=&gt;qq.Term(f=&gt;f.FirstName, &quot;john&quot;))
+    .Scope(&quot;my_scope&quot;)
+)
+</code></code></pre>
 
                 </div>
             <section>

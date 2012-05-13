@@ -104,9 +104,47 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Query String Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A query that uses a query parser in order to parse its content</p>
+
+<p>Bare example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.QueryString(qs=&gt;qs.Query(&quot;this AND that OR thus&quot;))
+</code></code></pre>
+
+<p>Simple with field boosts:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.QueryString(qs=&gt;qs
+    .OnFieldsWithBoost(d=&gt;d
+        .Add(f=&gt;f.Name, 2.0)
+        .Add(f=&gt;f.Country, 5.0)
+    )
+    .Query(&quot;this AND that OR thus&quot;)
+)
+</code></code></pre>
+
+<p>All options are mapped:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.QueryString(qs =&gt; qs
+    .OnField(f=&gt;f.Name)
+    .Query(&quot;this that thus&quot;)
+    .Operator(Operator.and)
+    .Analyzer(&quot;my_analyzer&quot;)
+    .AllowLeadingWildcard(true)
+    .LowercaseExpendedTerms(true)
+    .EnablePositionIncrements(true)
+    .FuzzyPrefixLength(2)
+    .FuzzyMinimumSimilarity(0.5)
+    .PhraseSlop(1.0)
+    .Boost(1.0)
+    .AnalyzeWildcard(true)
+    .AutoGeneratePhraseQueries(true)
+    .MinimumShouldMatchPercentage(20)
+    .UseDisMax(true)
+    .TieBreaker(0.7)
+)
+</code></code></pre>
 
                 </div>
             <section>

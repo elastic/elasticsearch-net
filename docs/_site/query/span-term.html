@@ -104,9 +104,14 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Span Term Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Matches spans containing a term. The span term query maps to Lucene <code>SpanTermQuery</code>.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(q =&gt; q
+    .SpanTerm(f=&gt;f.Name, &quot;elasticsearch.pm&quot;, 1.1)
+);
+</code></code></pre>
 
                 </div>
             <section>

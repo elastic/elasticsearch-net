@@ -104,9 +104,17 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>More Like This Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>More like this query find documents that are “like” provided text by running it against one or more fields.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Query(q =&gt; q
+    .MoreLikeThis(fz =&gt; fz
+        .OnFields(f =&gt; f.Name)
+        .LikeText(&quot;elasticsearcc&quot;)
+    )
+);
+</code></code></pre>
 
                 </div>
             <section>

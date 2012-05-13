@@ -6,7 +6,10 @@ menu_item: span-first
 ---
 
 
-# Documentation still in progress
+# Span First Query
+Matches spans near the beginning of a field. The span first query maps to Lucene `SpanFirstQuery`. 
 
-This is sadly still a marker file.
-
+	.SpanFirst(sf=>sf
+		.MatchTerm(f => f.Name, "elasticsearch.pm", 1.1)
+		.End(3)
+	)

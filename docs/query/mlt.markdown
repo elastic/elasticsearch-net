@@ -6,7 +6,13 @@ menu_item: mlt
 ---
 
 
-# Documentation still in progress
+# More Like This Query
+More like this query find documents that are “like” provided text by running it against one or more fields.
 
-This is sadly still a marker file.
+	.Query(q => q
+		.MoreLikeThis(fz => fz
+			.OnFields(f => f.Name)
+			.LikeText("elasticsearcc")
+		)
+	);
 
