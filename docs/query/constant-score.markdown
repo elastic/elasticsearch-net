@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Constant Score Query
 menu_section: query
 menu_item: constant-score
 ---
@@ -17,5 +17,4 @@ A query that wraps a filter or another query and simply returns a constant score
 		)
 	)
 
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/constant-score-query.html) for more information
 

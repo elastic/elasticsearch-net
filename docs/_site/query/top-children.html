@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
-    <title>NEST - Connecting</title>
+    <title>NEST - Top Children Query</title>
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -104,9 +104,40 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Top Children Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The top_children query runs the child query with an estimated hits size, and out of the hit docs, aggregates it into parent docs. If there aren’t enough parent docs matching the requested from/size search request, then it is run again with a wider (more hits) search.</p>
+
+<p>The top_children also provide scoring capabilities, with the ability to specify max, sum or avg as the score type.</p>
+
+<p>Simple example:</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.TopChildren&lt;Person&gt;(fz =&gt; fz
+    .Query(qq=&gt;qq.Term(f=&gt;f.FirstName, &quot;john&quot;))
+    .Scope(&quot;my_scope&quot;)
+)
+</code></code></pre>
+
+<p>Custom scoring</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.TopChildren&lt;Person&gt;(fz =&gt; fz
+    .Query(qq =&gt; qq.Term(f =&gt; f.FirstName, &quot;john&quot;))
+    .Score(TopChildrenScore.avg)
+    .Scope(&quot;my_scope&quot;)
+    .Type(&quot;sillypeople&quot;)
+)
+</code></code></pre>
+
+                    
+                        Be sure to read the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/top-children-query.html">original documentation</a> 
+                        on this subject.
+                    
+                    <p>
+                        Spotted a mistake? Something to add?
+                        <a href="https://github.com/Mpdreamz/NEST/blob/master/docs/query/top-children.markdown">
+                            Fork and edit this file on github
+                        </a>
+                        without leaving the browser
 
                 </div>
             <section>

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Custom Boost Factor Query
 menu_section: query
 menu_item: custom-boost-factor
 ---
@@ -16,6 +16,4 @@ custom_boost_factor query allows to wrap another query and multiply its score by
 			.Query(qq=>qq.MatchAll())
 		)
 	)
-
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/custom-boost-factor-query.html) for more information
 

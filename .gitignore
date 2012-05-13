@@ -28,3 +28,4 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 build/tmp/*
 !build/NuGet.exe
+/dep/Newtonsoft.Json.4.0.2

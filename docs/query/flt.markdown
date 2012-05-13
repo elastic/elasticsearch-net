@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Fuzzy Like This Query
 menu_section: query
 menu_item: flt
 ---
@@ -21,5 +21,4 @@ Fuzzy like this query find documents that are “like” provided text by runnin
 		)
 	)
 
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/flt-query.html) for more information
 

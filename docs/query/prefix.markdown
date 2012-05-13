@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Prefix Query
 menu_section: query
 menu_item: prefix
 ---

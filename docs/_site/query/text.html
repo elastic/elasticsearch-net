@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
-    <title>NEST - Connecting</title>
+    <title>NEST - Text Query</title>
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -104,9 +104,54 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Text Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A family of text queries that accept text, analyzes it, and constructs a query out of it. </p>
+
+<h2>Boolean</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Text(t =&gt; t
+    .OnField(f =&gt; f.Name)
+    .QueryString(&quot;this is a test&quot;)
+    .Fuzziness(1.0)
+    .Analyzer(&quot;my_analyzer&quot;)
+    .PrefixLength(2)
+)
+</code></code></pre>
+
+<h2>Phrase</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>.TextPhrase(t =&gt; t
+    .OnField(f =&gt; f.Name)
+    .QueryString(&quot;this is a test&quot;)
+    .Fuzziness(1.0)
+    .Analyzer(&quot;my_analyzer&quot;)
+    .PrefixLength(2)
+)
+</code></code></pre>
+
+<h2>Phrase Prefix</h2>
+
+<pre class="prettyprint"><code class="language-cs"><code>.TextPhrasePrefix(t =&gt; t
+    .OnField(f =&gt; f.Name)
+    .QueryString(&quot;this is a test&quot;)
+    .Fuzziness(1.0)
+    .Analyzer(&quot;my_analyzer&quot;)
+    .PrefixLength(2)
+    .Operator(Operator.and)
+)
+</code></code></pre>
+
+                    
+                        Be sure to read the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/text-query.html">original documentation</a> 
+                        on this subject.
+                    
+                    <p>
+                        Spotted a mistake? Something to add?
+                        <a href="https://github.com/Mpdreamz/NEST/blob/master/docs/query/text.markdown">
+                            Fork and edit this file on github
+                        </a>
+                        without leaving the browser
 
                 </div>
             <section>

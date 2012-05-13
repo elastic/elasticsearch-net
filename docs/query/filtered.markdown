@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Filtered Query
 menu_section: query
 menu_item: filtered
 ---
@@ -16,5 +16,4 @@ A query that applies a filter to the results of another query. This query maps t
 		)
 	)
 
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/filtered-query.html) for more information
 

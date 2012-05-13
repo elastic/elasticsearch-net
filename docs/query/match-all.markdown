@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Connecting
+title: Match All Query
 menu_section: query
 menu_item: match-all
 ---
 
 
-# Match All query
+# Match All Query
 
 A query that matches all documents. Maps to Lucene `MatchAllDocsQuery`.
 

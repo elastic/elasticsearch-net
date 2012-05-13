@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
-    <title>NEST - Connecting</title>
+    <title>NEST - Terms Query</title>
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -104,9 +104,39 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Terms Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses. </p>
+
+<p>Several overloads exists including</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Terms(f =&gt; f.Name, new[] { &quot;elasticsearch.pm&quot; })
+</code></code></pre>
+
+<p>or</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.Terms(f =&gt; f.Name, &quot;elasticsearch.pm&quot;, &quot;nest&quot;)
+</code></code></pre>
+
+<p>or</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.TermsDescriptor(tq =&gt; tq
+    .OnField(f=&gt;f.Name)
+    .Terms(&quot;elasticsearch.pm&quot;, &quot;nest&quot;)
+    .MinimumMatch(2)
+)
+</code></code></pre>
+
+                    
+                        Be sure to read the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/terms-query.html">original documentation</a> 
+                        on this subject.
+                    
+                    <p>
+                        Spotted a mistake? Something to add?
+                        <a href="https://github.com/Mpdreamz/NEST/blob/master/docs/query/terms.markdown">
+                            Fork and edit this file on github
+                        </a>
+                        without leaving the browser
 
                 </div>
             <section>

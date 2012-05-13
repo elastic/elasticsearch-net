@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Span Term Query
 menu_section: query
 menu_item: span-term
 ---

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Custom Filters Score Query
 menu_section: query
 menu_item: custom-filters-score
 ---

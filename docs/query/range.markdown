@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Range Query
 menu_section: query
 menu_item: range
 ---

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Fuzzy Query
 menu_section: query
 menu_item: fuzzy
 ---
@@ -35,6 +35,4 @@ Same applies to dates, with support for time format for the min_similarity field
 		.Value(new DateTime(1999,12,31))
 		.MinSimilarity("1d")
 	)
-
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/fuzzy-query.html) for more information
 

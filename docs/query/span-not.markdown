@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Span Not Query
 menu_section: query
 menu_item: span-not
 ---

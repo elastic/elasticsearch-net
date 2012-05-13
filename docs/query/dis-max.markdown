@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Dis Max Query
 menu_section: query
 menu_item: dis-max
 ---
@@ -25,5 +25,3 @@ This query maps to Lucene DisjunctionMaxQuery.
 			)
 		)
 	)
-
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/dis-max-query.html) for more information

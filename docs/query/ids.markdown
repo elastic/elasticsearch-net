@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Ids Query
 menu_section: query
 menu_item: ids
 ---

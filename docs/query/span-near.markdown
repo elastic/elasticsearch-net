@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Span Near Query
 menu_section: query
 menu_item: span-near
 ---

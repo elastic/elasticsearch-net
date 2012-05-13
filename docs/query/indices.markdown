@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Connecting
+title: Indices Query
 menu_section: query
 menu_item: indices
 ---
 
 
-# Documentation still in progress
+# Indices Query
 
 The indices query can be used when executed across multiple indices, allowing to have a query that executes only when executed on an index that matches a specific list of indices, and another query that executes when it is executed on an index that does not match the listed indices.
 

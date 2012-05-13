@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Connecting
+title: Bool Query
 menu_section: query
 menu_item: bool
 ---
 
 
-# BoolQuery
+# Bool Query
 
 A query that matches documents matching boolean combinations of other queries. The bool query maps to Lucene BooleanQuery. It is built using one or more boolean clauses, each clause with a typed occurrence. 
 
@@ -25,5 +25,3 @@ note each clause can take multiple queries e.g:
 		q => q.Term(p => p.Name, "Nest")
 
 	)
-
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/bool-query.html) for more information

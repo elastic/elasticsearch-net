@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
-    <title>NEST - Connecting</title>
+    <title>NEST - Wildcard Query</title>
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -104,9 +104,27 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Wildcard Query</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>Matches documents that have fields matching a wildcard expression (<strong>not analyzed</strong>). Supported wildcards are <code>*</code>, which matches any character sequence (including the empty one), and <code>?</code>, which matches any single character. Note this query can be slow, as it needs to iterate over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should not start with one of the wildcards <code>*</code> or <code>?</code>. The wildcard query maps to Lucene <code>WildcardQuery</code>.</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>.From(0)
+.Size(10)
+.Query(q =&gt; q
+    .Wildcard(f =&gt; f.Name, &quot;elasticsearch.*&quot;)
+);
+</code></code></pre>
+
+                    
+                        Be sure to read the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/wildcard-query.html">original documentation</a> 
+                        on this subject.
+                    
+                    <p>
+                        Spotted a mistake? Something to add?
+                        <a href="https://github.com/Mpdreamz/NEST/blob/master/docs/query/wildcard.markdown">
+                            Fork and edit this file on github
+                        </a>
+                        without leaving the browser
 
                 </div>
             <section>

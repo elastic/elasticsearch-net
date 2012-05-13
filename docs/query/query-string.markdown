@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Query String Query
 menu_section: query
 menu_item: query-string
 ---

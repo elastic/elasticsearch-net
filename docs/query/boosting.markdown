@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Boosting Query
 menu_section: query
 menu_item: boosting
 ---
@@ -17,5 +17,3 @@ The boosting query can be used to effectively demote results that match a given 
 			.NegativeBoost(0.4)
 		)
 	)
-
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/boosting-query.html) for more information

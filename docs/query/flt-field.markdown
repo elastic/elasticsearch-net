@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Fuzzy Like This Field Query
 menu_section: query
 menu_item: flt-field
 ---

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Has Child Query
 menu_section: query
 menu_item: has-child
 ---

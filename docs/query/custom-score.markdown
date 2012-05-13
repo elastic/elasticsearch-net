@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Connecting
+title: Custom Score
 menu_section: query
 menu_item: custom-score
 ---
@@ -16,6 +16,4 @@ custom_score query allows to wrap another query and customize the scoring of it 
 			.Query(qq => qq.MatchAll())
 		)
 	)
-
-See [original docs](http://www.elasticsearch.org/guide/reference/query-dsl/custom-score-query.html) for more information
 

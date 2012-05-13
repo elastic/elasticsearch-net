@@ -38,6 +38,17 @@
             <article>
                 <div id="content-margin-fix">
                     {{content}}
+                    {% if page.menu_section == 'query' %}
+                        Be sure to read the <a href="http://www.elasticsearch.org/guide/reference/query-dsl/{{page.menu_item}}-query.html">original documentation</a> 
+                        on this subject.
+                    {% endif %}
+                    <p>
+                        Spotted a mistake? Something to add?
+                        <a href="https://github.com/Mpdreamz/NEST/blob/master/docs{{page.url | replace: '.html','.markdown'}}">
+                            Fork and edit this file on github
+                        </a>
+                        without leaving the browser
+
                 </div>
             <section>
         </article>
