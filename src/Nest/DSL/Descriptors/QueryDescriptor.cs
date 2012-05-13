@@ -44,6 +44,8 @@ namespace Nest
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "fuzzy")]
 		internal IDictionary<string, object> FuzzyQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "terms")]
+		internal IDictionary<string, object> TermsQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
 
@@ -89,6 +91,44 @@ namespace Nest
 			selector(query);
 			this.QueryStringDescriptor = query;
 		}
+		/// <summary>
+		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+		/// </summary>
+		public void Terms(string field, params string[] terms)
+		{
+			this.TermsDescriptor(t => t
+				.OnField(field)
+				.Terms(terms)
+			);
+		}
+		/// <summary>
+		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+		/// </summary>
+		public void Terms(Expression<Func<T, object>> objectPath, params string[] terms)
+		{
+			var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+			this.Terms(fieldName, terms);
+		}
+		/// <summary>
+		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+		/// </summary>
+		public void TermsDescriptor(Action<TermsQueryDescriptor<T>> selector)
+		{
+			var query = new TermsQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for terms query");
+			this.TermsQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query._Terms}
+			};
+			if (query._MinMatch.HasValue)
+			{
+				this.TermsQueryDescriptor.Add("minimum_match", query._MinMatch);
+			}
+		}
+
+
 		/// <summary>
 		/// A fuzzy based query that uses similarity based on Levenshtein (edit distance) algorithm.
 		/// Warning: this query is not very scalable with its default prefix length of 0 – in this case,

@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
+    <Compile Include="DSL\Descriptors\Query\TermsQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\UpdateDescriptor.cs" />
     <Compile Include="ElasticClient-Update.cs" />
     <Compile Include="Domain\Facets\QueryFacet.cs" />

@@ -54,6 +54,7 @@
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="BaseMappedElasticSearchTests.cs" />
     <Compile Include="Dsl\Json\Query\RangeQueryJson.cs" />
+    <Compile Include="Dsl\Json\Query\TermsQueryJson.cs" />
     <Compile Include="Dsl\UpdateTests.cs" />
     <Compile Include="Dsl\PropertyVisitorTests.cs" />
     <Compile Include="Dsl\SortTests.cs" />
