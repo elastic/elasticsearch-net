@@ -46,7 +46,7 @@ namespace Nest
     {
       var path = this.CreatePath(alias) + "/_aliases";
       var status = this.Connection.GetSync(path);
-      var r = JsonConvert.DeserializeObject<Dictionary<string, object>>(status.Result, SerializationSettings);
+      var r = JsonConvert.DeserializeObject<Dictionary<string, object>>(status.Result, DeserializeSettings);
       return r == null ? Enumerable.Empty<string>() : r.Keys;
     }
 

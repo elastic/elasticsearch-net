@@ -38,7 +38,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 						""randomindex""
 					]
 				}
-			}}}";
+			}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
@@ -69,7 +69,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 						""randomindex""
 					]
 				}
-			}}}";
+			}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
@@ -99,7 +99,7 @@ namespace Nest.Tests.Dsl.Json.Filter
 						""randomindex""
 					]
 				}
-			}}}";
+			}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 	}
