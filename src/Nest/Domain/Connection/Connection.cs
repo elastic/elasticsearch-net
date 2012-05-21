@@ -419,7 +419,7 @@ namespace Nest
 			var s = this._ConnectionSettings;
 			if (!path.StartsWith("/"))
 				path = "/" + path;
-			return string.Format("http://{0}:{1}{2}", s.Host, s.Port, path);
+            return !string.IsNullOrEmpty(s.Host) ? string.Format("http://{0}:{1}{2}", s.Host, s.Port, path) : s.Uri + path;
 		}
 
 	}

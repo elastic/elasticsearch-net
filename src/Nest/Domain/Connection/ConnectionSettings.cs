@@ -48,12 +48,31 @@ namespace Nest
 			}
 			private set { this._defaultIndex = value; }
 		}
+        private readonly Uri _uri;
+        public Uri Uri
+        {
+            get { return this._uri; }
+        }
+
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
 		public Func<string, string> TypeNameInferrer { get; private set; }
 
-    private FluentDictionary<Type, string> _defaultTypeIndices;
+        private FluentDictionary<Type, string> _defaultTypeIndices;
 
+        public ConnectionSettings(Uri uri) : this(uri, 60000, null, null, null) { }
+        public ConnectionSettings(Uri uri, int timeout) : this(uri, timeout, null, null, null) { }
+        public ConnectionSettings(Uri uri, int timeout, string proxyAddress, string username, string password)
+        {
+            uri.ThrowIfNull("uri");
+
+            this._uri = uri;
+            this._password = password;
+            this._username = username;
+            this._timeOut = timeout;
+            this._proxyAddress = proxyAddress;
+            this.MaximumAsyncConnections = 20;
+        }
 
 		public ConnectionSettings(string host, int port) : this(host, port, 60000, null, null, null) { }
 		public ConnectionSettings(string host, int port, int timeout) : this(host, port, timeout, null, null, null) { }
