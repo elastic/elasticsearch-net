@@ -17,7 +17,8 @@ Indexing is as simple as:
 
 Indexing asynchronously is as easy as:
 
-	client.IndexAsync(post, (c) => /* called later */);
+	//IndexAsync returns a Task<ConnectionStatus>
+	var task = client.IndexAsync(post);
 
 Searching is fluid:
 

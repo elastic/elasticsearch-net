@@ -11,11 +11,11 @@ menu_item: index
 Indexing is as simple as:
 
 	var post = new Post() { Id = 12, ... }
-	client.Index<Post>(post);
+	var status = client.Index<Post>(post);
 
 of course C# is smart enough to infer Post so
 
-	client.Index(post);
+	var status = client.Index(post);
 
 is sufficient. this will index post too `/[default index]/posts/12`. The typename`posts` is automatically inferred from the type.
 
@@ -27,7 +27,8 @@ if you need more control there are plenty of overloads, i.e:
 
 Indexing asynchronously is as easy as:
 
-	client.IndexAsync(post, (c) => /* called later */);
+	//IndexAsync returns a Task<ConnectionStatus>
+	var task = client.IndexAsync(post);
 
 
 ## Aditional parameters

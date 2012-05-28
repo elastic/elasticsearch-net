@@ -55,7 +55,7 @@ namespace Nest
 		/// <summary>
 		/// Index object to the specified index and the specified type name, using index parameters to further control the operation
 		/// </summary>
-		public ConnectionStatus Index<T>(T @object, string index, string type, IndexParameters indexParameters) where T : class
+		public ConnectionStatus Index<T>(T @object, string index = null, string type = null, IndexParameters indexParameters = null) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type);
 			path = this.AppendParametersToPath(path, indexParameters);

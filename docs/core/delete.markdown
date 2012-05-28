@@ -21,12 +21,12 @@ The delete API allows to delete a typed JSON document from a specific index base
 Id property is inferred (can be any value type (int, string, float ...))
 
             this.ConnectedClient.Delete(searchProject);
-            this.ConnectedClient.DeleteAsync(searchProject, c => /* called later */);
+            this.ConnectedClient.DeleteAsync(searchProject);
 
 ## By IEnumerable<T>
 
             this.ConnectedClient.Delete(searchProjects);
-            this.ConnectedClient.DeleteAsync(searchProjects, c => /* called later */);
+            this.ConnectedClient.DeleteAsync(searchProjects);
 
 ## By IEnumerable<T> using bulkparameters
 
