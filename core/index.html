@@ -87,12 +87,12 @@
 <p>Indexing is as simple as:</p>
 
 <pre class="prettyprint"><code class="language-cs"><code>var post = new Post() { Id = 12, ... }
-client.Index&lt;Post&gt;(post);
+var status = client.Index&lt;Post&gt;(post);
 </code></code></pre>
 
 <p>of course C# is smart enough to infer Post so</p>
 
-<pre class="prettyprint"><code class="language-cs"><code>client.Index(post);
+<pre class="prettyprint"><code class="language-cs"><code>var status = client.Index(post);
 </code></code></pre>
 
 <p>is sufficient. this will index post too <code>/[default index]/posts/12</code>. The typename<code>posts</code> is automatically inferred from the type.</p>
@@ -106,7 +106,8 @@ client.Index&lt;Post&gt;(post);
 
 <p>Indexing asynchronously is as easy as:</p>
 
-<pre class="prettyprint"><code class="language-cs"><code>client.IndexAsync(post, (c) =&gt; /* called later */);
+<pre class="prettyprint"><code class="language-cs"><code>//IndexAsync returns a Task&lt;ConnectionStatus&gt;
+var task = client.IndexAsync(post);
 </code></code></pre>
 
 <h2>Aditional parameters</h2>

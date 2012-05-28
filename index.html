@@ -85,7 +85,8 @@ client.Index(post);
 
 <p>Indexing asynchronously is as easy as:</p>
 
-<pre class="prettyprint"><code class="language-cs"><code>client.IndexAsync(post, (c) =&gt; /* called later */);
+<pre class="prettyprint"><code class="language-cs"><code>//IndexAsync returns a Task&lt;ConnectionStatus&gt;
+var task = client.IndexAsync(post);
 </code></code></pre>
 
 <p>Searching is fluid:</p>

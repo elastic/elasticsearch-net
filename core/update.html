@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 <head>
-    <title>NEST - Connecting</title>
+    <title>NEST - Script Update</title>
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -82,9 +82,19 @@
             </aside>
             <article>
                 <div id="content-margin-fix">
-                    <h1>Documentation still in progress</h1>
+                    <h1>Update by script API</h1>
 
-<p>This is sadly still a marker file.</p>
+<p>The update API allows to update a document based on a script provided. The operation gets the document (collocated with the shard) from the index, runs the script (with optional script language and parameters), and index back the result (also allows to delete, or ignore the operation). It uses versioning to make sure no updates have happened during the “get” and “reindex”. (available from <code>0.19</code> onwards).</p>
+
+<pre class="prettyprint"><code class="language-cs"><code>this.ConnectedClient.Update&lt;ElasticSearchProject&gt;(u =&gt; u
+    .Object(project)
+    .Script(&quot;ctx._source.loc += 10&quot;)
+    .RetriesOnConflict(5)
+    .Refresh()
+);
+</code></code></pre>
+
+<p>This is just a simple example all the options that are available (such as passing params) are available. </p>
 
                     
                     <p>

@@ -97,13 +97,13 @@
 <p>Id property is inferred (can be any value type (int, string, float ...))</p>
 
 <pre class="prettyprint"><code class="language-cs"><code>        this.ConnectedClient.Delete(searchProject);
-        this.ConnectedClient.DeleteAsync(searchProject, c =&gt; /* called later */);
+        this.ConnectedClient.DeleteAsync(searchProject);
 </code></code></pre>
 
 <h2>By IEnumerable<T></h2>
 
 <pre class="prettyprint"><code class="language-cs"><code>        this.ConnectedClient.Delete(searchProjects);
-        this.ConnectedClient.DeleteAsync(searchProjects, c =&gt; /* called later */);
+        this.ConnectedClient.DeleteAsync(searchProjects);
 </code></code></pre>
 
 <h2>By IEnumerable<T> using bulkparameters</h2>
