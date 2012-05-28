@@ -48,11 +48,12 @@ namespace Nest.Tests
 		[Test]
 		public void BoolQuery()
 		{
+			var lookFor = this._LookFor.ToLower();
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						""bool"" : {
 							""must"" : {
-								""term"" : { ""followers.firstName"" : """ + this._LookFor + @""" }
+								""term"" : { ""followers.firstName"" : """ + lookFor + @""" }
 							},
 							""must_not"" : {
 								""range"" : {
@@ -61,10 +62,10 @@ namespace Nest.Tests
 							},
 							""should"" : [
 								{
-									""term"" : { ""followers.firstName"" : """ + this._LookFor + @""" }
+									""term"" : { ""followers.firstName"" : """ + lookFor + @""" }
 								},
 								{
-									""term"" : { ""followers.firstName"" : """ + this._LookFor + @""" }
+									""term"" : { ""followers.firstName"" : """ + lookFor + @""" }
 								}
 							],
 							""minimum_number_should_match"" : 1,
@@ -80,7 +81,7 @@ namespace Nest.Tests
 		[Test]
 		public void BoostingQuery()
 		{
-			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName;
+			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName.ToLower();
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 						""boosting"" : {
@@ -91,7 +92,7 @@ namespace Nest.Tests
 							},
 							""negative"" : {
 								""term"" : {
-									""followers.firstName"" : """ + this._LookFor + @"""
+									""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
 								}
 							},
 							""negative_boost"" : 0.2

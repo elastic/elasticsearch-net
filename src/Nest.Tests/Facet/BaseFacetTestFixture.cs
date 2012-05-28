@@ -12,15 +12,15 @@ namespace Nest.Tests.FacetResponses
 
         protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
         {
-            Assert.True(queryResponse.IsValid);
-            Assert.NotNull(queryResponse.ConnectionStatus);
-            Assert.Null(queryResponse.ConnectionStatus.Error);
-            Assert.True(queryResponse.Total > 0, "No hits");
-            Assert.True(queryResponse.Documents.Any());
-            Assert.True(queryResponse.Documents.Count() > 0);
-            Assert.True(queryResponse.Shards.Total > 0);
-            Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
-            Assert.True(queryResponse.Shards.Failed == 0);
+            Assert.True(queryResponse.IsValid, "response is not valid");
+            Assert.NotNull(queryResponse.ConnectionStatus, "connection status is null");
+            Assert.Null(queryResponse.ConnectionStatus.Error, "connection status error is null");
+            Assert.True(queryResponse.Total > 0, "Query yielded no results as indicated by total returned from ES");
+            Assert.True(queryResponse.Documents.Any(), "documents.any() is false");
+            Assert.True(queryResponse.Documents.Count() > 0, "documents.count is 0");
+            Assert.True(queryResponse.Shards.Total > 0, "did not hit any shard");
+            Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total, "Not all the shards were hit succesfully");
+            Assert.True(queryResponse.Shards.Failed == 0, "shards failed is not null");
         }
     }
 }

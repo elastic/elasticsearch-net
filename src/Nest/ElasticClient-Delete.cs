@@ -145,7 +145,7 @@ namespace Nest
 		/// <summary>
 		/// Synchronously deletes a document by id in the specified index and type
 		/// </summary>
-		public ConnectionStatus DeleteById<T>(string index, string type, string id) where T : class
+		public ConnectionStatus DeleteById(string index, string type, string id)
 		{
 			var path = this.CreatePath(index, type, id);
 			return this._deleteToPath(path);
@@ -154,7 +154,7 @@ namespace Nest
 		/// <summary>
 		/// Synchronously deletes a document by id in the specified index and type
 		/// </summary>
-		public ConnectionStatus DeleteById<T>(string index, string type, int id) where T : class
+		public ConnectionStatus DeleteById(string index, string type, int id)
 		{
 			var path = this.CreatePath(index, type, id.ToString());
 			return this._deleteToPath(path);
@@ -188,7 +188,7 @@ namespace Nest
 		/// Synchronously deletes a document by id in the specified index and type
 		/// </summary>
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
-		public ConnectionStatus DeleteById<T>(string index, string type, string id, DeleteParameters deleteParameters) where T : class
+		public ConnectionStatus DeleteById(string index, string type, string id, DeleteParameters deleteParameters)
 		{
 			var path = this.CreatePath(index, type, id);
 			path = this.AppendParametersToPath(path, deleteParameters);
@@ -199,7 +199,7 @@ namespace Nest
 		/// Synchronously deletes a document by id in the specified index and type
 		/// </summary>
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
-		public ConnectionStatus DeleteById<T>(string index, string type, int id, DeleteParameters deleteParameters) where T : class
+		public ConnectionStatus DeleteById(string index, string type, int id, DeleteParameters deleteParameters)
 		{
 			var path = this.CreatePath(index, type, id.ToString());
 			path = this.AppendParametersToPath(path, deleteParameters);
@@ -230,7 +230,7 @@ namespace Nest
 		/// <summary>
 		/// Asynchronously deletes a document by id in the specified index and type
 		/// </summary>
-		public void DeleteByIdAsync<T>(string index, string type, string id, Action<ConnectionStatus> callback) where T : class
+		public void DeleteByIdAsync(string index, string type, string id, Action<ConnectionStatus> callback)
 		{
 			var path = this.CreatePath(index, type, id);
 			this._deleteToPathAsync(path, callback);
@@ -239,7 +239,7 @@ namespace Nest
 		/// <summary>
 		/// Asynchronously deletes a document by id in the specified index and type
 		/// </summary>
-		public void DeleteByIdAsync<T>(string index, string type, int id, Action<ConnectionStatus> callback) where T : class
+		public void DeleteByIdAsync(string index, string type, int id, Action<ConnectionStatus> callback)
 		{
 			var path = this.CreatePath(index, type, id.ToString());
 			this._deleteToPathAsync(path, callback);
@@ -273,7 +273,7 @@ namespace Nest
 		/// Asynchronously deletes a document by id in the specified index and type
 		/// </summary>
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
-		public void DeleteByIdAsync<T>(string index, string type, string id, DeleteParameters deleteParameters, Action<ConnectionStatus> callback) where T : class
+		public void DeleteByIdAsync(string index, string type, string id, DeleteParameters deleteParameters, Action<ConnectionStatus> callback)
 		{
 			var path = this.CreatePath(index, type, id);
 			path = this.AppendParametersToPath(path, deleteParameters);
@@ -284,7 +284,7 @@ namespace Nest
 		/// Asynchronously deletes a document by id in the specified index and type
 		/// </summary>
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
-		public void DeleteByIdAsync<T>(string index, string type, int id, DeleteParameters deleteParameters, Action<ConnectionStatus> callback) where T : class
+		public void DeleteByIdAsync(string index, string type, int id, DeleteParameters deleteParameters, Action<ConnectionStatus> callback)
 		{
 			var path = this.CreatePath(index, type, id.ToString());
 			path = this.AppendParametersToPath(path, deleteParameters);

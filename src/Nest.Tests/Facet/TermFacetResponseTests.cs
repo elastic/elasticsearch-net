@@ -84,10 +84,10 @@ namespace Nest.Tests.FacetResponses
 		[Test]
 		public void SimpleTermFacetWithGlobal()
 		{
-      this.ResetIndexes();
+	  this.ResetIndexes();
 			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
-							""term"" : { ""followers.lastName"" : """ + this._LookFor +
+							""term"" : { ""followers.lastName"" : """ + this._LookFor.ToLower() +
 				@""" }
 					},
 					""facets"" : {
@@ -103,7 +103,7 @@ namespace Nest.Tests.FacetResponses
 			Assert.IsInstanceOf<TermFacet>(facet);
 
 			var tf = (TermFacet) facet;
-			Assert.IsTrue(tf.Items.Any(f => f.Term == this._LookFor));
+			Assert.IsTrue(tf.Items.Any(f => f.Term == this._LookFor.ToLower()));
 		}
 	}
 }

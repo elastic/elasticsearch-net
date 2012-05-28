@@ -142,7 +142,7 @@
     <Compile Include="Facet\BaseFacetTestFixture.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DeleteTests.cs" />
+    <Compile Include="Integration\DeleteTests.cs" />
     <Compile Include="Indices\IndicesTests.cs" />
     <Compile Include="Indices\AliasTests.cs" />
     <Compile Include="Indices\AnalyzeTests.cs" />

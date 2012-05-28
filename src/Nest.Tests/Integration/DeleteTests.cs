@@ -9,7 +9,7 @@ using Nest.TestData.Domain;
 using System.Threading;
 using NUnit.Framework;
 
-namespace Nest.Tests
+namespace Nest.Tests.Integration
 {
 	[TestFixture]
 	public class DeleteTests : BaseElasticSearchTests
@@ -32,7 +32,22 @@ namespace Nest.Tests
 			Assert.AreEqual(1, hits.MaxScore);
 			Assert.AreEqual(hits.Hits.Max(h => h.Score), hits.MaxScore);
 		}
-
+		[Test]
+		public void ShouldThowOnNullId()
+		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				this.ConnectedClient.DeleteById("someindex", "sometype", null);
+			});
+		}
+		[Test]
+		public void ShouldThowOnEmptyId()
+		{
+			Assert.Throws<ArgumentException>(() =>
+			{
+				this.ConnectedClient.DeleteById("someindex", "sometype", "				");
+			});
+		}
 		[Test]
 		public void GetDocumentById()
 		{

@@ -67,6 +67,8 @@ namespace Nest.Tests
 				client.DeleteMapping<ElasticSearchProject>();
 				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
 				client.Map<ElasticSearchProject>();
+				this.ConnectedClient.OpenIndex<ElasticSearchProject>();
+				this.ConnectedClient.OpenIndex(cloneIndex);
 				client.Index(projects, bulkParameters);
 				client.Index(projects, cloneIndex, bulkParameters);
 

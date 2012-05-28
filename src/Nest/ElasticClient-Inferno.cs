@@ -138,14 +138,20 @@ namespace Nest
 		}
 		private string CreatePath(string index)
 		{
+			index.ThrowIfNullOrEmpty("index");
 			return "{0}/".F(index);
 		}
 		private string CreatePath(string index, string type)
 		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			return "{0}/{1}/".F(index, type);
 		}
 		private string CreatePath(string index, string type, string id)
 		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			return "{0}/{1}/{2}".F(index, type, id);
 		}
 
