@@ -25,17 +25,7 @@ Searching is fluid:
 			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
 	);
 
-For more examples please refer to the [Wiki](https://github.com/Mpdreamz/NEST/wiki "Read more about NEST's interface")
-
-* [Connecting](https://github.com/Mpdreamz/NEST/wiki/Connecting)
-* [Indexing](https://github.com/Mpdreamz/NEST/wiki/Index)
-* [Searching](https://github.com/Mpdreamz/NEST/wiki/Search)
-    * [Faceting] (https://github.com/Mpdreamz/NEST/wiki/Faceting)
-* [Deleting](https://github.com/Mpdreamz/NEST/wiki/Delete)
-* [Mapping](https://github.com/Mpdreamz/NEST/wiki/Mapping)
-
-
-To get a good overview of the status of NEST please keep an eye out on the public [Roadmap](https://github.com/Mpdreamz/NEST/wiki/RoadMap)
+#[Read the documentation here](http://mpdreamz.github.com/NEST)
 
 ## Copyright
 
