@@ -88,9 +88,11 @@ namespace HackerNews.Indexer
 						postQueue.Add(post);
 						if (postQueue.Count() == 1000)
 						{
-							client.IndexAsync<Post>(postQueue, (c) =>
+							var t = client.IndexAsync<Post>(postQueue);
+							t.ContinueWith(c =>
 							{
-								if (!c.Success)
+								var result = c.Result;
+								if (!result.Success)
 									dropped++;
 							});
 							processed += postQueue.Count();

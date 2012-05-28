@@ -12,7 +12,7 @@ namespace Nest
 		public bool Success { get; private set; }
 		public ConnectionError Error { get; private set; }
 		public string Result { get; internal set; }
-    public string Request { get; internal set; }
+	public string Request { get; internal set; }
 
 		public ConnectionStatus(Exception e)
 		{

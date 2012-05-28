@@ -3,12 +3,13 @@ using System.Text;
 using System.Net;
 using System.Threading;
 using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Nest
 {
 	internal class Connection : IConnection
 	{
-		public static ManualResetEvent allDone = new ManualResetEvent(false);
 		const int BUFFER_SIZE = 1024;
 
 		private IConnectionSettings _ConnectionSettings { get; set; }
@@ -16,8 +17,8 @@ namespace Nest
 
 		public Connection(IConnectionSettings settings)
 		{
-      if (settings == null)
-        throw new ArgumentNullException("settings");
+			if (settings == null)
+				throw new ArgumentNullException("settings");
 
 			this._ConnectionSettings = settings;
 			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
@@ -51,173 +52,39 @@ namespace Nest
 			return this.DoSynchronousRequest(connection, data);
 		}
 	   
-		public void Get(string path, Action<ConnectionStatus> callback)
-		{
-			Thread getThread = new Thread(() =>
-			{
-				this._ResourceLock.WaitOne();
-				ConnectionState state = new ConnectionState()
-				{
-					Callback = (c) =>
-					{
-						this._ResourceLock.Release();
-						if (callback != null)
-							callback(c);
+		
 
-					},
-					Connection = this.CreateConnection(path, "GET")
-				};
-				this.BeginGetResponse(state);
-			});
-			getThread.Start();
+
+		public Task<ConnectionStatus> Get(string path)
+		{
+			var r = this.CreateConnection(path, "GET");
+			return this.DoAsyncRequest(r);
 		}
-		public void Head(string path, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Head(string path)
 		{
-			Thread getThread = new Thread(() =>
-			{
-				this._ResourceLock.WaitOne();
-				ConnectionState state = new ConnectionState()
-				{
-					Callback = (c) =>
-					{
-						this._ResourceLock.Release();
-						if (callback != null)
-							callback(c);
-
-					},
-					Connection = this.CreateConnection(path, "HEAD")
-				};
-				this.BeginGetResponse(state);
-			});
-			getThread.Start();
+			var r = this.CreateConnection(path, "HEAD");
+			return this.DoAsyncRequest(r);
 		}
-		public void Post(string path, string data, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Post(string path, string data)
 		{
-			Thread postThread = new Thread(() =>
-			{
-				this._ResourceLock.WaitOne();
-				this.PostDataUsingMethod("POST", path, data, (c) =>
-				{
-					this._ResourceLock.Release();
-					if (callback != null)
-						callback(c);
-
-				});
-			});
-			postThread.Start();
+			var r = this.CreateConnection(path, "POST");
+			return this.DoAsyncRequest(r, data);
 			
 		}
-		public void Put(string path, string data, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Put(string path, string data)
 		{
-			Thread putThread = new Thread(()=>
-			{
-				this._ResourceLock.WaitOne();
-				this.PostDataUsingMethod("PUT", path, data, (c) =>
-				{
-					this._ResourceLock.Release();
-					if (callback != null)
-						callback(c);
-
-				});	
-			});
-			putThread.Start();	
+			var r = this.CreateConnection(path, "PUT");
+			return this.DoAsyncRequest(r, data);
 		}
-		public void Delete(string path, string data, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Delete(string path, string data)
 		{
-			Thread deleteThread = new Thread(() =>
-			{
-				this._ResourceLock.WaitOne();
-				this.PostDataUsingMethod("DELETE", path, data, (c) =>
-				{
-					this._ResourceLock.Release();
-					if (callback != null)
-						callback(c);
-
-				});
-			});
-			deleteThread.Start();
+			var r = this.CreateConnection(path, "DELETE");
+			return this.DoAsyncRequest(r, data);
 		}
-		public void Delete(string path, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Delete(string path)
 		{
-			Thread deleteThread = new Thread(() =>
-			{
-				this._ResourceLock.WaitOne();
-				ConnectionState state = new ConnectionState
-				{
-					Callback = (c) =>
-					{
-						this._ResourceLock.Release();
-						if (callback != null)
-							callback(c);
-
-					},
-					Connection = this.CreateConnection(path, "DELETE")
-				};
-				this.BeginGetResponse(state);
-			});
-			deleteThread.Start();
-		}
-
-		private void PostDataUsingMethod(string method, string path,string data, Action<ConnectionStatus> callback)
-		{
-			if (method != "PUT" && method != "POST" && method != "DELETE")
-			{
-				throw new ArgumentException("Valid methods that can post a body are PUT, POST, DELETE", "method");
-			}
-
-			ConnectionState state = new ConnectionState()
-			{
-				Callback = callback,
-				Connection = this.CreateConnection(path, method),
-				PostData = data
-			};
-
-			state.Connection.BeginGetRequestStream(this.PostStreamOpened, state);
-		}
-		private void PostStreamOpened(IAsyncResult result)
-		{
-			var state = (ConnectionState)result.AsyncState;
-
-			Stream postStream = state.Connection.EndGetRequestStream(result);
-
-			if (state.PostData != null) //TODO: look into why it is null at some points
-			{
-				UTF8Encoding encoding = new UTF8Encoding();
-				byte[] bytes = encoding.GetBytes(state.PostData);
-
-				postStream.Write(bytes, 0, bytes.Length);
-				postStream.Close();
-			}
-
-			this.BeginGetResponse(state);
-
-		}
-
-		private void BeginGetResponse(ConnectionState state)
-		{
-			try
-			{
-				IAsyncResult result = (IAsyncResult)state.Connection.BeginGetResponse(
-					new AsyncCallback(GetResponseHandle),
-					state
-				);
-				ThreadPool.RegisterWaitForSingleObject(
-					result.AsyncWaitHandle,
-					new WaitOrTimerCallback(ThreadTimeoutCallback),
-					state.Connection,
-					this._ConnectionSettings.TimeOut,
-					true
-				);
-
-			}
-			catch (WebException e)
-			{
-				state.RaiseCallBack(e);
-			}
-			catch (Exception e)
-			{
-				state.RaiseCallBack(e);
-			}
+			var r = this.CreateConnection(path, "DELETE");
+			return this.DoAsyncRequest(r);
 		}
 
 		private static void ThreadTimeoutCallback(object state, bool timedOut)
@@ -228,82 +95,9 @@ namespace Nest
 				if (request != null)
 				{
 					request.Abort();
-					allDone.Set();
-
 				}
 			}
 		}
-
-		private void GetResponseHandle(IAsyncResult result)
-		{
-			var state = (ConnectionState)result.AsyncState;
-			Stream responseStream = null;
-			try
-			{
-				var conn = state.Connection;
-				state.Response = (HttpWebResponse)conn.EndGetResponse(result);
-
-				responseStream = state.Response.GetResponseStream();
-				state.StreamResponse = responseStream;
-
-				IAsyncResult readResult = responseStream.BeginRead(
-					state.BufferRead,
-					0,
-					BUFFER_SIZE,
-					new AsyncCallback(ReadCallBack),
-					state
-				);
-				
-			}
-			catch (Exception e)
-			{
-				state.RaiseCallBack(e);
-			}
-			finally
-			{
-			}
-		}
-		private static void ReadCallBack(IAsyncResult result)
-		{
-			var state = (ConnectionState)result.AsyncState;
-			Stream responseStream = null;
-			int read = 0;
-			try
-			{
-				var conn = state.Connection;
-				responseStream = state.StreamResponse;
-				read = responseStream.EndRead(result);
-				if (read > 0)
-				{
-					state.RequestData.Append(Encoding.UTF8.GetString(state.BufferRead, 0, read));
-					IAsyncResult asynchronousResult = responseStream.BeginRead(
-						state.BufferRead, 0, BUFFER_SIZE, new AsyncCallback(ReadCallBack), state);
-					return;
-				}
-				else
-				{
-					state.RaiseCallBack();
-				}
-
-			}
-			catch (WebException e)
-			{
-				state.RaiseCallBack(e);
-			}
-			catch (Exception e)
-			{
-				state.RaiseCallBack(e);
-			}
-			finally
-			{
-				if (responseStream != null && read <= 0)
-					responseStream.Close();
-				allDone.Set();
-			}
-			
-
-		}
-
 
 		private ConnectionStatus HeaderOnlyRequest(string path, string method)
 		{
@@ -316,7 +110,6 @@ namespace Nest
 			var connection = this.CreateConnection(path, method);
 			return this.DoSynchronousRequest(connection, data);
 		}
-	
 
 		private HttpWebRequest CreateConnection(string path, string method)
 		{
@@ -363,7 +156,7 @@ namespace Nest
 				response = request.GetResponse();
 				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
 				response.Close();
-        return new ConnectionStatus(result) { Request = data };
+				return new ConnectionStatus(result) { Request = data };
 			}
 			catch (WebException e)
 			{
@@ -371,10 +164,10 @@ namespace Nest
 				var error = this.GetConnectionErrorFromWebException(e, out result);
 				var status = new ConnectionStatus(error);
 				status.Result = result;
-        status.Request = data;
+				status.Request = data;
 				return status;
 			}
-      catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)) { Request = data }; }
+			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)) { Request = data }; }
 			finally
 			{
 				if (postStream != null)
@@ -414,12 +207,109 @@ namespace Nest
 			}
 		}
 
+
+		private Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
+		{
+			var tcs = new TaskCompletionSource<ConnectionStatus>();
+			Iterate(_AsyncSteps(request, tcs, data), tcs);
+			return tcs.Task;
+			
+		}
+		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
+		{
+			var timeout = this._ConnectionSettings.TimeOut;
+
+			if (!this._ResourceLock.WaitOne(timeout))
+			{
+				var m = "Could not start operation because semaphore could not be obtained before the timeout completed";
+				tcs.SetResult(new ConnectionStatus(new TimeoutException(m)));
+				yield break;
+			}
+			try
+			{
+				var state = new ConnectionState { Connection = request };
+				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, state);
+				ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+				yield return getRequestStream;
+				// Write the message to it
+				if (data != null)
+				{
+					var requestStream = getRequestStream.Result;
+					try
+					{
+						byte[] buffer = Encoding.UTF8.GetBytes(data);
+						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, buffer, 0, buffer.Length, state);
+						yield return writeToRequestStream;
+					}
+					finally
+					{
+						requestStream.Close();
+					}
+				}
+
+				// Get the response
+				var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
+				ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+				yield return getResponse;
+
+				// Get the response stream
+				using (var response = (HttpWebResponse)getResponse.Result)
+				using (var responseStream = response.GetResponseStream())
+				{
+					// Copy all data from the response stream
+					var output = new MemoryStream();
+					var buffer = new byte[BUFFER_SIZE];
+					while (true)
+					{
+						var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
+						yield return read;
+						if (read.Result == 0) break;
+						output.Write(buffer, 0, read.Result);
+					}
+
+					// Decode the data and store the result
+					var result = Encoding.UTF8.GetString(output.ToArray());
+					var cs = new ConnectionStatus(result) { Request = data };
+					tcs.TrySetResult(cs);
+				}
+			}
+			finally
+			{
+				this._ResourceLock.Release();
+			}
+		}
+		
+		public static void Iterate(IEnumerable<Task> asyncIterator, TaskCompletionSource<ConnectionStatus> tcs)
+		{
+			var enumerator = asyncIterator.GetEnumerator();
+			Action<Task> recursiveBody = null;
+			recursiveBody = completedTask =>
+			{
+				if (completedTask != null && completedTask.IsFaulted)
+				{
+					var exception = completedTask.Exception.InnerException;
+					//cleanly exit from exceptions in stages
+					//none of the individual steps in _AsyncSteps run in parallel for 1 request
+					//as this would be impossible we can assume Aggregate Exception.InnerException
+					tcs.SetResult(new ConnectionStatus(exception));
+					//tcs.TrySetException();
+					enumerator.Dispose();
+				}
+				else if (enumerator.MoveNext())
+				{
+					enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
+				}
+				else enumerator.Dispose();
+			};
+			recursiveBody(null);
+		}
+
 		private string _CreateUriString(string path)
 		{
 			var s = this._ConnectionSettings;
 			if (!path.StartsWith("/"))
 				path = "/" + path;
-            return !string.IsNullOrEmpty(s.Host) ? string.Format("http://{0}:{1}{2}", s.Host, s.Port, path) : s.Uri + path;
+			return !string.IsNullOrEmpty(s.Host) ? string.Format("http://{0}:{1}{2}", s.Host, s.Port, path) : s.Uri + path;
 		}
 
 	}

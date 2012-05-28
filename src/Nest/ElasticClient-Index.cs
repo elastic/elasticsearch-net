@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -108,94 +109,94 @@ namespace Nest
 		/// <summary>
 		/// Index object to the default index and the inferred type name for T
 		/// </summary>
-		public void IndexAsync<T>(T @object, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the default index and the inferred type name for T, using index parameters to further control the operation
 		/// </summary>
-		public void IndexAsync<T>(T @object, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, IndexParameters indexParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object);
 			path = this.AppendParametersToPath(path, indexParameters);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the specified index and the inferred type name for T
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the specified index and the inferred type name for T, using index parameters to further control the operation
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index, IndexParameters indexParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index);
 			path = this.AppendParametersToPath(path, indexParameters);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the specified index and the specified type name
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, string type, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index, string type) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the specified index and the specified type name, using index parameters to further control the operation
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, string type, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index, string type, IndexParameters indexParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type);
 			path = this.AppendParametersToPath(path, indexParameters);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 
 		/// <summary>
 		/// Index object to the specified index and the specified type name and force the id of the object to update
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, string type, string id, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index, string type, string id) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the specified index and the specified type name and force the id of the object to update, using index parameters to further control the operation
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id);
 			path = this.AppendParametersToPath(path, indexParameters);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the specified index and the specified type name and force the id of the object to update
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, string type, int id, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index, string type, int id) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id.ToString());
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		/// <summary>
 		/// Index object to the specified index and the specified type name and force the id of the object to update, using index parameters to further control the operation
 		/// </summary>
-		public void IndexAsync<T>(T @object, string index, string type, int id, IndexParameters indexParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(T @object, string index, string type, int id, IndexParameters indexParameters) where T : class
 		{
 			var path = this.CreatePathFor<T>(@object, index, type, id.ToString());
 			path = this.AppendParametersToPath(path, indexParameters);
-			this._indexAsyncToPath(@object, path, continuation);
+			return this._indexAsyncToPath(@object, path);
 		}
 		
-		private void _indexAsyncToPath<T>(T @object, string path, Action<ConnectionStatus> continuation) where T : class
+		private Task<ConnectionStatus> _indexAsyncToPath<T>(T @object, string path) where T : class
 		{
 			string json = JsonConvert.SerializeObject(@object, Formatting.None, SerializationSettings);
-			this.Connection.Post(path, json, continuation);
+			return this.Connection.Post(path, json);
 		}
 
 		/// <summary>
@@ -312,112 +313,112 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<T> objects, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
-			this.Connection.Post("_bulk", json, continuation);
+			return this.Connection.Post("_bulk", json);
 		}
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
-			this.Connection.Post("_bulk", json, continuation);
+			return this.Connection.Post("_bulk", json);
 		}
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			this.Connection.Post(path, json, continuation);
+			return this.Connection.Post(path, json);
 		}
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			this.Connection.Post(path, json, continuation);
+			return this.Connection.Post(path, json);
 		}
 
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<T> objects, string index, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			this.Connection.Post("_bulk", json, continuation);
+			return this.Connection.Post("_bulk", json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			this.Connection.Post("_bulk", json, continuation);
+			return this.Connection.Post("_bulk", json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			this.Connection.Post(path, json, continuation);
-		}
+			return this.Connection.Post(path, json);
+		} 
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			this.Connection.Post(path, json, continuation);
+			return this.Connection.Post(path, json);
 		}
 
 		/// <summary>
 		/// Index objects to the specified index and the specified type name
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<T> objects, string index, string type, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			this.Connection.Post("_bulk", json, continuation);
+			return this.Connection.Post("_bulk", json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			this.Connection.Post("_bulk", json, continuation);
+			return this.Connection.Post("_bulk", json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the specified type name
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			this.Connection.Post(path, json, continuation);
+			return this.Connection.Post(path, json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public void IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters, Action<ConnectionStatus> continuation) where T : class
+		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			this.Connection.Post(path, json, continuation);
+			return this.Connection.Post(path, json);
 		}
 
 	}

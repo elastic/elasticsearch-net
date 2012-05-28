@@ -19,7 +19,7 @@ namespace Nest
 	public class ConnectionError
 	{
 		public ConnectionErrorType Type { get; set; }
-        public HttpStatusCode HttpStatusCode { get; set; }
+		public HttpStatusCode HttpStatusCode { get; set; }
 		public string ExceptionMessage { get; set; }
 		public Exception OriginalException { get; set; }
 
@@ -33,19 +33,19 @@ namespace Nest
 			if (webException != null)
 			{
 				this.Type = ConnectionErrorType.Server;
-                var response = ((HttpWebResponse)webException.Response);
-                if (response == null)
-                {
-                    this.Type = ConnectionErrorType.Client;
-                }
-                else
-                {
-                    this.HttpStatusCode = response.StatusCode;
-                    using (var responseStream = response.GetResponseStream())
-                    using (var reader = new StreamReader(responseStream, true))
-                    {
-                        var responseString = reader.ReadToEnd();
-                        var x = new { Error = "" };
+				var response = ((HttpWebResponse)webException.Response);
+				if (response == null)
+				{
+					this.Type = ConnectionErrorType.Client;
+				}
+				else
+				{
+					this.HttpStatusCode = response.StatusCode;
+					using (var responseStream = response.GetResponseStream())
+					using (var reader = new StreamReader(responseStream, true))
+					{
+						var responseString = reader.ReadToEnd();
+						var x = new { Error = "" };
 						try
 						{ 
 							x = JsonConvert.DeserializeAnonymousType(responseString, x);
@@ -56,8 +56,8 @@ namespace Nest
 							this.ExceptionMessage = "Could not parse exception message from ES, possibly altered by proxy or this is an unhandled HTTP Status by ES\r\n" + responseString;
 						}
 
-                    }
-                }
+					}
+				}
 
 			}
 

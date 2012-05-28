@@ -48,31 +48,31 @@ namespace Nest
 			}
 			private set { this._defaultIndex = value; }
 		}
-        private readonly Uri _uri;
-        public Uri Uri
-        {
-            get { return this._uri; }
-        }
+		private readonly Uri _uri;
+		public Uri Uri
+		{
+			get { return this._uri; }
+		}
 
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
 		public Func<string, string> TypeNameInferrer { get; private set; }
 
-        private FluentDictionary<Type, string> _defaultTypeIndices;
+		private FluentDictionary<Type, string> _defaultTypeIndices;
 
-        public ConnectionSettings(Uri uri) : this(uri, 60000, null, null, null) { }
-        public ConnectionSettings(Uri uri, int timeout) : this(uri, timeout, null, null, null) { }
-        public ConnectionSettings(Uri uri, int timeout, string proxyAddress, string username, string password)
-        {
-            uri.ThrowIfNull("uri");
+		public ConnectionSettings(Uri uri) : this(uri, 60000, null, null, null) { }
+		public ConnectionSettings(Uri uri, int timeout) : this(uri, timeout, null, null, null) { }
+		public ConnectionSettings(Uri uri, int timeout, string proxyAddress, string username, string password)
+		{
+			uri.ThrowIfNull("uri");
 
-            this._uri = uri;
-            this._password = password;
-            this._username = username;
-            this._timeOut = timeout;
-            this._proxyAddress = proxyAddress;
-            this.MaximumAsyncConnections = 20;
-        }
+			this._uri = uri;
+			this._password = password;
+			this._username = username;
+			this._timeOut = timeout;
+			this._proxyAddress = proxyAddress;
+			this.MaximumAsyncConnections = 20;
+		}
 
 		public ConnectionSettings(string host, int port) : this(host, port, 60000, null, null, null) { }
 		public ConnectionSettings(string host, int port, int timeout) : this(host, port, timeout, null, null, null) { }
@@ -131,27 +131,27 @@ namespace Nest
 			return this;
 		}
 
-    public ConnectionSettings MapTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
-    {
-      mappingSelector.ThrowIfNull("mappingSelector");
+	public ConnectionSettings MapTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
+	{
+	  mappingSelector.ThrowIfNull("mappingSelector");
 
-      var dict = new FluentDictionary<Type, string>();
-      mappingSelector(dict);
-      this._defaultTypeIndices = dict;
-      return this;
-    }
+	  var dict = new FluentDictionary<Type, string>();
+	  mappingSelector(dict);
+	  this._defaultTypeIndices = dict;
+	  return this;
+	}
 
-    public string GetIndexForType<T>()
-    {
-      return this.GetIndexForType(typeof(T));
-    }
-    public string GetIndexForType(Type type)
-    {
-      if (this._defaultTypeIndices == null)
-        return this.DefaultIndex;
-      if (this._defaultTypeIndices.ContainsKey(type) && !string.IsNullOrWhiteSpace(this._defaultTypeIndices[type]))
-        return this._defaultTypeIndices[type];
-      return this.DefaultIndex;
-    }
+	public string GetIndexForType<T>()
+	{
+	  return this.GetIndexForType(typeof(T));
+	}
+	public string GetIndexForType(Type type)
+	{
+	  if (this._defaultTypeIndices == null)
+		return this.DefaultIndex;
+	  if (this._defaultTypeIndices.ContainsKey(type) && !string.IsNullOrWhiteSpace(this._defaultTypeIndices[type]))
+		return this._defaultTypeIndices[type];
+	  return this.DefaultIndex;
+	}
 	}
 }

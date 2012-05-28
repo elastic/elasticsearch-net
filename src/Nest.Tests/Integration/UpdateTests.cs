@@ -27,6 +27,7 @@ namespace Nest.Tests.Integration
       this.ConnectedClient.Update<ElasticSearchProject>(u => u
         .Object(project)
         .Script("ctx._source.loc += 10")
+		.RetriesOnConflict(5)
         .Refresh()
       );
       project = this.ConnectedClient.Get<ElasticSearchProject>(1);

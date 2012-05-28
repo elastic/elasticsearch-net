@@ -1,25 +1,26 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	public interface IConnection
 	{
-		void Get(string path, Action<ConnectionStatus> callback);
+		Task<ConnectionStatus> Get(string path);
 		ConnectionStatus GetSync(string path);
 
-		void Head(string path, Action<ConnectionStatus> callback);
+		Task<ConnectionStatus> Head(string path);
 		ConnectionStatus HeadSync(string path);
 
-		void Post(string path, string data, Action<ConnectionStatus> callback);
+		Task<ConnectionStatus> Post(string path, string data);
 		ConnectionStatus PostSync(string path, string data);
 
-		void Put(string path, string data, Action<ConnectionStatus> callback);
+		Task<ConnectionStatus> Put(string path, string data);
 		ConnectionStatus PutSync(string path, string data);
 
-	    void Delete(string path, Action<ConnectionStatus> callback);
+	    Task<ConnectionStatus> Delete(string path);
 	    ConnectionStatus DeleteSync(string path);
 
-		void Delete(string path, string data, Action<ConnectionStatus> callback);
+		Task<ConnectionStatus> Delete(string path, string data);
 		ConnectionStatus DeleteSync(string path, string data);
 	}
 }

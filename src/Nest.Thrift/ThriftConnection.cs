@@ -5,6 +5,7 @@ using Nest.Thrift;
 using Thrift.Protocol;
 using Thrift.Transport;
 using Nest;
+using System.Threading.Tasks;
 
 namespace Nest.Thrift
 {
@@ -43,7 +44,7 @@ namespace Nest.Thrift
 
 		#region IConnection Members
 
-		public void Get(string path, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Get(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
@@ -51,9 +52,13 @@ namespace Nest.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			GetClient().execute(restRequest);
+			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			{
+				var result = GetClient().execute(restRequest);
+				return new ConnectionStatus(DecodeStr(result.Body));
+			});
 		}
-		public void Head(string path, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Head(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -61,7 +66,11 @@ namespace Nest.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			GetClient().execute(restRequest);
+			return Task.Factory.StartNew<ConnectionStatus>(()=> 
+			{
+				var result = GetClient().execute(restRequest);
+				return new ConnectionStatus(DecodeStr(result.Body));
+			});
 		}
 
 		public ConnectionStatus GetSync(string path)
@@ -88,7 +97,7 @@ namespace Nest.Thrift
 			return new ConnectionStatus(DecodeStr(result.Body));
 		}
 
-		public void Post(string path, string data, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Post(string path, string data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
@@ -100,9 +109,13 @@ namespace Nest.Thrift
 			}
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			GetClient().execute(restRequest);
+			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			{
+				var result = GetClient().execute(restRequest);
+				return new ConnectionStatus(DecodeStr(result.Body));
+			});
 		}
-		public void Put(string path, string data, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Put(string path, string data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
@@ -114,9 +127,13 @@ namespace Nest.Thrift
 			}
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			GetClient().execute(restRequest);
+			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			{
+				var result = GetClient().execute(restRequest);
+				return new ConnectionStatus(DecodeStr(result.Body));
+			});
 		}
-		public void Delete(string path, string data, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Delete(string path, string data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -128,7 +145,11 @@ namespace Nest.Thrift
 			}
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			GetClient().execute(restRequest);
+			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			{
+				var result = GetClient().execute(restRequest);
+				return new ConnectionStatus(DecodeStr(result.Body));
+			});
 		}
 
 		public ConnectionStatus PostSync(string path, string data)
@@ -161,7 +182,7 @@ namespace Nest.Thrift
 			RestResponse result = GetClient().execute(restRequest);
 			return new ConnectionStatus(DecodeStr(result.Body));
 		}
-		public void Delete(string path, Action<ConnectionStatus> callback)
+		public Task<ConnectionStatus> Delete(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -169,7 +190,11 @@ namespace Nest.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			GetClient().execute(restRequest);
+			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			{
+				var result = GetClient().execute(restRequest);
+				return new ConnectionStatus(DecodeStr(result.Body));
+			});
 		}
 
 		public ConnectionStatus DeleteSync(string path)
