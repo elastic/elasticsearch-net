@@ -7,11 +7,12 @@ NEST aims to be a .net client with a very concise API.
 Indexing is as simple as:
 
 	var post = new Post() { Id = 12, ... }
-	client.Index(post);
+	var result = client.Index(post);
 
 Indexing asynchronously is as easy as:
 
-	client.IndexAsync(post, (c) => /* called later */);
+	//t is a Task<ConnectionStatus>
+	var t = client.IndexAsync(post);
 
 Searching is fluid:
 
