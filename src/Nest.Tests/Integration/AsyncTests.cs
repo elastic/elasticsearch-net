@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration
 	[TestFixture]
 	public class AsyncTests : BaseElasticSearchTests
 	{
+
 		[Test]
 		public void TestIndex()
 		{

@@ -83,7 +83,7 @@ namespace Nest
 		/// </summary>
 		public PercolateResponse Percolate<T>(T @object) where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+			var index = this.Settings.GetIndexForType<T>();
 			var type = this.InferTypeName<T>();
 			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 

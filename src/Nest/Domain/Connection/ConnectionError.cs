@@ -10,10 +10,14 @@ namespace Nest
 {
 	public enum ConnectionErrorType
 	{
+		/// <summary>
+		/// The error was due to an uncaught exception in the client code
+		/// </summary>
 		Uncaught,
-		Client,
+		/// <summary>
+		/// The error was due to an error thrown by Elasticsearch
+		/// </summary>
 		Server,
-		UnAuthorizedAccess
 	}
 
 	public class ConnectionError
@@ -22,82 +26,53 @@ namespace Nest
 		public HttpStatusCode HttpStatusCode { get; set; }
 		public string ExceptionMessage { get; set; }
 		public Exception OriginalException { get; set; }
+		internal string Response { get; set; }
 
 		public ConnectionError(Exception e)
 		{
 			this.OriginalException = e;
 			this.ExceptionMessage = e.Message;
 			this.Type = ConnectionErrorType.Uncaught;
-			
+
 			var webException = e as WebException;
-			if (webException != null)
-			{
-				this.Type = ConnectionErrorType.Server;
-				var response = ((HttpWebResponse)webException.Response);
-				if (response == null)
-				{
-					this.Type = ConnectionErrorType.Client;
-				}
-				else
-				{
-					this.HttpStatusCode = response.StatusCode;
-					using (var responseStream = response.GetResponseStream())
-					using (var reader = new StreamReader(responseStream, true))
-					{
-						var responseString = reader.ReadToEnd();
-						var x = new { Error = "" };
-						try
-						{ 
-							x = JsonConvert.DeserializeAnonymousType(responseString, x);
-							this.ExceptionMessage = x.Error;
-						}
-						catch
-						{
-							this.ExceptionMessage = "Could not parse exception message from ES, possibly altered by proxy or this is an unhandled HTTP Status by ES\r\n" + responseString;
-						}
+			if (webException == null)
+				return;
 
-					}
-				}
-
-			}
-
-
+			this.Type = ConnectionErrorType.Server;
+			var response = ((HttpWebResponse)webException.Response);
+			this.SetWebResponseData(response);
 		}
-		public ConnectionError(Exception e, string result)
+
+		private void SetWebResponseData(HttpWebResponse response)
 		{
-			this.OriginalException = e;
-			this.ExceptionMessage = e.Message;
-			this.Type = ConnectionErrorType.Uncaught;
+			if (response == null)
+				return;
 
-			var webException = e as WebException;
-			if (webException != null)
+			this.HttpStatusCode = response.StatusCode;
+			try
 			{
-				this.Type = ConnectionErrorType.Server;
-				var response = ((HttpWebResponse)webException.Response);
-				if (response == null)
+				using (var responseStream = response.GetResponseStream())
+				using (var reader = new StreamReader(responseStream, true))
 				{
-					this.Type = ConnectionErrorType.Client;
+					this.Response = reader.ReadToEnd();
+					this.TryReadElasticsearchException();
 				}
-				else
-				{
-					this.HttpStatusCode = response.StatusCode;
-;
-					var x = new { Error = "" };
-					try
-					{
-						x = JsonConvert.DeserializeAnonymousType(result, x);
-						this.ExceptionMessage = x.Error;
-					}
-					catch
-					{
-						this.ExceptionMessage = "Could not parse exception message from ES, possibly altered by proxy or this is an unhandled HTTP Status by ES\r\n" + result;
-					}
-
-				}
-
 			}
+			finally { }
+		}
 
-
+		private void TryReadElasticsearchException()
+		{
+			var x = new { Error = "" };
+			try
+			{
+				x = JsonConvert.DeserializeAnonymousType(this.Response, x);
+				this.ExceptionMessage = x.Error;
+			}
+			catch
+			{
+				this.ExceptionMessage = "Could not parse exception message from ES got this back instead:\r\n" + this.Response;
+			}
 		}
 	}
 

@@ -20,7 +20,7 @@ namespace Nest.Tests.Search
 		{
 			var name = "mypercolator";
 			var c = this.ConnectedClient;
-			var r = c.RegisterPercolator<ElasticSearchProject>(name, q=> q.Term(f=>f.Name, "elasticsearch.pm"));
+			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Name, "elasticsearch.pm"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			Assert.AreEqual(r.Type, this.Settings.DefaultIndex);
@@ -60,7 +60,7 @@ namespace Nest.Tests.Search
 			var name = "mypercolator";
 			var r = c.Percolate(new ElasticSearchProject()
 			{
-        Name = "elasticsearch.pm",
+				Name = "elasticsearch.pm",
 				Country = "netherlands",
 				LOC = 100000, //Too many :(
 			});

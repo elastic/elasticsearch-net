@@ -23,7 +23,7 @@ namespace Nest
 			this._ConnectionSettings = settings;
 			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
 		}
-		
+
 		public ConnectionStatus GetSync(string path)
 		{
 			return this.HeaderOnlyRequest(path, "GET");
@@ -40,7 +40,7 @@ namespace Nest
 		public ConnectionStatus PutSync(string path, string data)
 		{
 			return this.BodyRequest(path, data, "PUT");
-		}	
+		}
 		public ConnectionStatus DeleteSync(string path)
 		{
 			var connection = this.CreateConnection(path, "DELETE");
@@ -51,8 +51,8 @@ namespace Nest
 			var connection = this.CreateConnection(path, "DELETE");
 			return this.DoSynchronousRequest(connection, data);
 		}
-	   
-		
+
+
 
 
 		public Task<ConnectionStatus> Get(string path)
@@ -69,7 +69,7 @@ namespace Nest
 		{
 			var r = this.CreateConnection(path, "POST");
 			return this.DoAsyncRequest(r, data);
-			
+
 		}
 		public Task<ConnectionStatus> Put(string path, string data)
 		{
@@ -125,7 +125,7 @@ namespace Nest
 			myReq.Timeout = 1000 * 60; // 1 minute timeout.
 			myReq.ReadWriteTimeout = 1000 * 60; // 1 minute timeout.
 			myReq.Method = method;
-			
+
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{
 				var proxy = new WebProxy();
@@ -140,80 +140,24 @@ namespace Nest
 
 		private ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
-			request.Timeout = this._ConnectionSettings.TimeOut;
-			Stream postStream = null;
-			WebResponse response = null;
-			try
+			var timeout = this._ConnectionSettings.TimeOut;
+			var task = this.DoAsyncRequest(request, data);
+			task.Wait(timeout);
+			if (task.Result == null && task.IsCanceled)
 			{
-				if (!data.IsNullOrEmpty())
-				{ 
-					byte[] buffer = Encoding.UTF8.GetBytes(data);
-					request.ContentLength = buffer.Length;
-					postStream = request.GetRequestStream();
-					postStream.Write(buffer, 0, buffer.Length);
-					postStream.Close();
-				}
-				response = request.GetResponse();
-				var result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-				response.Close();
-				return new ConnectionStatus(result) { Request = data };
+				var m = "Operation did not complete before the set timeout of " + timeout + "ms";
+				return new ConnectionStatus(new TimeoutException(m));
 			}
-			catch (WebException e)
-			{
-				string result;
-				var error = this.GetConnectionErrorFromWebException(e, out result);
-				var status = new ConnectionStatus(error);
-				status.Result = result;
-				status.Request = data;
-				return status;
-			}
-			catch (Exception e) { return new ConnectionStatus(new ConnectionError(e)) { Request = data }; }
-			finally
-			{
-				if (postStream != null)
-					postStream.Close();
-				if (response != null)
-					response.Close();
-			}
+			return task.Result;
 		}
 		
-		private ConnectionError GetConnectionErrorFromWebException(WebException e, out string result)
-		{
-			result = "";
-			using (var r = e.Response)
-			{
-
-				if (e.Response != null)
-				{
-					using (var d = e.Response.GetResponseStream())
-					{ 
-						result = new StreamReader(d).ReadToEnd();
-					}
-				}
-
-				ConnectionError error;
-				if (e.Status == WebExceptionStatus.Timeout)
-				{
-					error = new ConnectionError(e, result) 
-					{ 
-						HttpStatusCode = HttpStatusCode.InternalServerError 
-					};
-				}
-				else
-				{
-					error = new ConnectionError(e, result);
-				}
-				return error;
-			}
-		}
-
-
 		private Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
 			Iterate(_AsyncSteps(request, tcs, data), tcs);
+			if (tcs.Task != null && tcs.Task.Result != null)
+				tcs.Task.Result.Request = data;
 			return tcs.Task;
-			
 		}
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
 		{
@@ -221,19 +165,20 @@ namespace Nest
 
 			if (!this._ResourceLock.WaitOne(timeout))
 			{
-				var m = "Could not start operation because semaphore could not be obtained before the timeout completed";
+				var m = "Could not start the operation before the timeout of " + timeout + "ms completed while waiting for the semaphore";
 				tcs.SetResult(new ConnectionStatus(new TimeoutException(m)));
 				yield break;
 			}
 			try
 			{
 				var state = new ConnectionState { Connection = request };
-				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, state);
-				ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-				yield return getRequestStream;
-				// Write the message to it
+				
 				if (data != null)
 				{
+					var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+					ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+					yield return getRequestStream;
+
 					var requestStream = getRequestStream.Result;
 					try
 					{
@@ -278,8 +223,8 @@ namespace Nest
 				this._ResourceLock.Release();
 			}
 		}
-		
-		public static void Iterate(IEnumerable<Task> asyncIterator, TaskCompletionSource<ConnectionStatus> tcs)
+
+		public void Iterate(IEnumerable<Task> asyncIterator, TaskCompletionSource<ConnectionStatus> tcs)
 		{
 			var enumerator = asyncIterator.GetEnumerator();
 			Action<Task> recursiveBody = null;
@@ -291,6 +236,7 @@ namespace Nest
 					//cleanly exit from exceptions in stages
 					//none of the individual steps in _AsyncSteps run in parallel for 1 request
 					//as this would be impossible we can assume Aggregate Exception.InnerException
+
 					tcs.SetResult(new ConnectionStatus(exception));
 					//tcs.TrySetException();
 					enumerator.Dispose();
@@ -303,7 +249,6 @@ namespace Nest
 			};
 			recursiveBody(null);
 		}
-
 		private string _CreateUriString(string path)
 		{
 			var s = this._ConnectionSettings;
@@ -311,6 +256,5 @@ namespace Nest
 				path = "/" + path;
 			return !string.IsNullOrEmpty(s.Host) ? string.Format("http://{0}:{1}{2}", s.Host, s.Port, path) : s.Uri + path;
 		}
-
 	}
 }

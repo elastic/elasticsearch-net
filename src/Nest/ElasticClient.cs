@@ -100,7 +100,7 @@ namespace Nest
 			if (!isValid)
 				return this.ToResponse<R>(status, allow404);
 
-      var r = JsonConvert.DeserializeObject<R>(status.Result, DeserializeSettings);
+			var r = JsonConvert.DeserializeObject<R>(status.Result, DeserializeSettings);
 			r.IsValid = isValid;
 			r.ConnectionStatus = status;
 			r.PropertyNameResolver = PropertyNameResolver;
@@ -130,12 +130,14 @@ namespace Nest
 
 					this._gotNodeInfo = true;
 				}
+				return response;
 			}
-			catch 
+			catch (Exception e)
 			{
 				this._IsValid = false;
+				return new ConnectionStatus(e);
 			}
-			return response;
+
 		}
 		
 		

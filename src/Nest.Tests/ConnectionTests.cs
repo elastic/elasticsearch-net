@@ -41,8 +41,8 @@ namespace Nest.Tests
 		{
 			Assert.Throws<ArgumentNullException>(() =>
 			{
-                string host = null;
-                var settings = new ConnectionSettings(host, 80);
+				string host = null;
+				var settings = new ConnectionSettings(host, 80);
 			});
 			Assert.Throws<UriFormatException>(() =>
 			{
@@ -74,25 +74,25 @@ namespace Nest.Tests
 					|| connectionStatus.Error.ExceptionMessage.StartsWith("The remote name could not be resolved"));
 			});
 		}
-        [Test]
-        public void TestConnectSuccessWithUri()
-        {
-            var settings = new ConnectionSettings(Test.Default.Uri);
-            var client = new ElasticClient(settings);
-            ConnectionStatus status;
-            client.TryConnect(out status);
-            Assert.True(client.IsValid);
-            Assert.True(status.Success);
-            Assert.Null(status.Error);
-        }
-        [Test]
-        public void construct_client_with_null_uri()
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                Uri uri = null;
-                var settings = new ConnectionSettings(uri);
-            });
-        }
+		[Test]
+		public void TestConnectSuccessWithUri()
+		{
+			var settings = new ConnectionSettings(Test.Default.Uri);
+			var client = new ElasticClient(settings);
+			ConnectionStatus status;
+			client.TryConnect(out status);
+			Assert.True(client.IsValid);
+			Assert.True(status.Success);
+			Assert.Null(status.Error);
+		}
+		[Test]
+		public void construct_client_with_null_uri()
+		{
+			Assert.Throws<ArgumentNullException>(() =>
+			{
+				Uri uri = null;
+				var settings = new ConnectionSettings(uri);
+			});
+		}
 	}
 }
