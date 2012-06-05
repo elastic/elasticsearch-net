@@ -27,6 +27,9 @@ Searching is fluid:
 
 #[Read the documentation here](http://mpdreamz.github.com/NEST)
 
+additionally @joelabrahamson wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
+using NEST. 
+
 ## Copyright
 
 Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](https://github.com/Mpdreamz/NEST)
