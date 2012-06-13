@@ -10,7 +10,7 @@ menu_item: multi-get
 
 Get multiple documents in a single request.
 
-##Examles
+##Examples
 
 	var ids = new [] { hit1.Id, hit2.Id };
 	var foundDocuments = this.ConnectedClient.Get<ElasticSearchProject>(ids);
