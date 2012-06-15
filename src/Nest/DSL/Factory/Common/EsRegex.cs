@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Nest.FactoryDsl.Common
 {
-    public class Regex
+    public class EsRegex
     {
         public static int FlagsFromString(string flags)
         {

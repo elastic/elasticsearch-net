@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-  public enum RegexFlags
+  public enum EsRegexFlags
   {
     CANNON_EQ,
     CASE_INSENSITIVE,
