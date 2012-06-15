@@ -120,7 +120,7 @@
     <Compile Include="DSL\Descriptors\SortScriptDescriptor.cs" />
     <Compile Include="DSL\Factory\Common\GeoHashUtils.cs" />
     <Compile Include="DSL\Factory\Common\Point.cs" />
-    <Compile Include="DSL\Factory\Common\Regex.cs" />
+    <Compile Include="DSL\Factory\Common\EsRegex.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
     <Compile Include="Enums\DateHistogramComparatorType.cs" />
     <Compile Include="Enums\DistanceUnit.cs" />
@@ -236,7 +236,7 @@
     <Compile Include="DSL\Descriptors\Facets\FacetDescriptorBucket.cs" />
     <Compile Include="DSL\Descriptors\Facets\TermsOrder.cs" />
     <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\RegexFlags.cs" />
+    <Compile Include="DSL\Descriptors\Facets\EsRegexFlags.cs" />
     <Compile Include="DSL\Descriptors\Filter\BoolFilterDescriptor.cs" />
     <Compile Include="Enums\GeoExecution.cs" />
     <Compile Include="DSL\Descriptors\Filter\GeoBoundingBoxFilter.cs" />

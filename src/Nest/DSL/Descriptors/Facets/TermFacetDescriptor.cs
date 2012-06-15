@@ -30,7 +30,7 @@ namespace Nest
 
     [JsonConverter(typeof(StringEnumConverter))]
     [JsonProperty(PropertyName = "regex_flags")]
-    internal RegexFlags? _RegexFlags { get; set; }
+    internal EsRegexFlags? _RegexFlags { get; set; }
 
     [JsonProperty(PropertyName = "script")]
     internal string _Script { get; set; }
@@ -83,7 +83,7 @@ namespace Nest
       this._AllTerms = true;
       return this;
     }
-    public TermFacetDescriptor<T> Regex(string regex, RegexFlags? Flags = null)
+    public TermFacetDescriptor<T> Regex(string regex, EsRegexFlags? Flags = null)
     {
       this._Regex = regex;
       this._RegexFlags = Flags;

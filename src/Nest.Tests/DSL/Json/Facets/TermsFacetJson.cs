@@ -46,7 +46,7 @@ namespace Nest.Tests.Dsl.Json.Facets
           .Order(TermsOrder.reverse_count)
           .Exclude("term1", "term2")
           .AllTerms()
-          .Regex(@"\s+", RegexFlags.DOTALL)
+          .Regex(@"\s+", EsRegexFlags.DOTALL)
           .Script("term + 'aaa'")
           .ScriptField("_source.my_field")
         );
@@ -87,7 +87,7 @@ namespace Nest.Tests.Dsl.Json.Facets
             .Order(TermsOrder.reverse_count)
             .Exclude("term1", "term2")
             .AllTerms()
-            .Regex(@"\s+", RegexFlags.DOTALL)
+            .Regex(@"\s+", EsRegexFlags.DOTALL)
             .Script("term + 'aaa'")
             .ScriptField("_source.my_field")
           );
@@ -103,7 +103,7 @@ namespace Nest.Tests.Dsl.Json.Facets
           .Order(TermsOrder.reverse_count)
           .Exclude("term1", "term2")
           .AllTerms()
-          .Regex(@"\s+", RegexFlags.DOTALL)
+          .Regex(@"\s+", EsRegexFlags.DOTALL)
           .Script("term + 'aaa'")
           .ScriptField("_source.my_field")
         );

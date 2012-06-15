@@ -180,7 +180,7 @@ namespace Nest.FactoryDsl.Facet
 
                 if (_regexFlags != 0)
                 {
-                    content[NAME]["regex_flags"] = Common.Regex.FlagsToString(_regexFlags);
+                    content[NAME]["regex_flags"] = Common.EsRegex.FlagsToString(_regexFlags);
                 }
             }
 
