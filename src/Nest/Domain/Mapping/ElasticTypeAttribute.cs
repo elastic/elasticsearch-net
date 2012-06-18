@@ -16,6 +16,7 @@ namespace Nest
 		public bool DateDetection { get; set; }
 		public bool NumericDetection { get; set; }
 		public string ParentType { get; set; }
+		public string IdProperty { get; set; }
 		public ElasticTypeAttribute()
 		{
 			this.DateDetection = true;

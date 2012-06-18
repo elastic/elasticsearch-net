@@ -13,13 +13,13 @@ namespace Nest
 		string[] DynamicDateFormats { get; set; }
 		bool DateDetection { get; set; }
 		bool NumericDetection { get; set; }
-		
 	}
 
 	public class ElasticType : IElasticType
 	{
 		public string Name { get; set; }
 		public string IndexAnalyzer { get; set; }
+		
 		public string SearchAnalyzer { get; set; }
 		public string[] DynamicDateFormats { get; set; }
 		public bool DateDetection { get; set; }

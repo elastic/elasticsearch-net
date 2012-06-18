@@ -6,54 +6,32 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Nest.Resolvers;
-using Fasterflect;
+using System.Reflection;
 
 namespace Nest
 {
-
 	public partial class ElasticClient
 	{
+		private static Dictionary<Type, Func<object, string>> IdDelegates = new Dictionary<Type,Func<object,string>>();
+
 		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
 
-		private Func<T, string> CreateIdSelector<T>() where T : class
+		internal string CreatePathFor<T>(T @object) where T : class
 		{
-			Func<T, string> idSelector = null;
-			var type = typeof(T);
-			var idProperty = type.GetProperty("Id");
-			if (idProperty != null)
-			{
-				if (idProperty.PropertyType == typeof(int))
-					idSelector = (@object) => ((int)@object.TryGetPropertyValue("Id")).ToString();
-				else if (idProperty.PropertyType == typeof(int?))
-					idSelector = (@object) =>
-					{
-						int? val = (int?)@object.TryGetPropertyValue("Id");
-						return (val.HasValue) ? val.Value.ToString() : string.Empty;
-					};
-				else if (idProperty.PropertyType == typeof(string))
-					idSelector = (@object) => (string)@object.TryGetPropertyValue("Id");
-				else
-					idSelector = (@object) => (string)Convert.ChangeType(@object.TryGetPropertyValue("Id"), typeof(string), CultureInfo.InvariantCulture);
-			}
-			return idSelector;
-		}
-
-		private string CreatePathFor<T>(T @object) where T : class
-		{
-      var index = this.Settings.GetIndexForType<T>();
+			var index = this.Settings.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 			return this.CreatePathFor<T>(@object, index);
 
 		}
-		private string CreatePathFor<T>(T @object, string index) where T : class
+		internal string CreatePathFor<T>(T @object, string index) where T : class
 		{
 			//var type = typeof(T);
 			var typeName = this.InferTypeName<T>();
 			return this.CreatePathFor<T>(@object, index, typeName);
 			
 		}
-		private string CreatePathFor<T>(T @object, string index, string type) where T : class
+		internal string CreatePathFor<T>(T @object, string index, string type) where T : class
 		{
 			@object.ThrowIfNull("object");
 			index.ThrowIfNull("index");
@@ -68,7 +46,7 @@ namespace Nest
 			return path;
 
 		}
-		private string CreatePathFor<T>(T @object, string index, string type, string id) where T : class
+		internal string CreatePathFor<T>(T @object, string index, string type, string id) where T : class
 		{
 			@object.ThrowIfNull("object");
 			index.ThrowIfNull("index");
@@ -77,38 +55,72 @@ namespace Nest
 			return this.CreatePath(index, type, id);
 		}
 
-		private string GetIdFor<T>(T @object)
+		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
-			var type = typeof(T);
-			var idProperty = type.GetProperty("Id");
-			string idString = null;
-
-			if (idProperty != null)
-			{
-				object value = idProperty.GetValue(@object, null);
-
-				if (value != null)
-				{
-					idString = value.ToString();
-				}
-			}
-
-			return idString;
+			//TODO this idselection stuff for the bulk seems obsolete.
+			Func<T, string> idSelector = (@object) => this.GetIdFor(@object);
+			return idSelector;
 		}
 
-		public static string GetTypeNameFor(Type type)
+		internal static Func<T, object> MakeDelegate<T, U>(MethodInfo @get)
+		{
+			var f = (Func<T, U>)Delegate.CreateDelegate(typeof(Func<T, U>), @get);
+			return t => f(t);
+		}
+
+
+		internal string GetIdFor<T>(T @object)
+		{
+			var type = typeof(T);
+			Func<object, string> cachedLookup;
+			if (IdDelegates.TryGetValue(type, out cachedLookup))
+				return cachedLookup(@object);
+
+			var esTypeAtt = PropertyNameResolver.GetElasticPropertyFor(type);
+			var propertyName = (esTypeAtt != null) ? esTypeAtt.IdProperty : string.Empty;
+			if (string.IsNullOrWhiteSpace(propertyName))
+				propertyName = "Id";
+			
+			var idProperty = type.GetProperty(propertyName);
+			if (idProperty == null)
+			{ 
+				throw new Exception("Could not infer id for object of type" + type.FullName);
+			}
+			try
+			{
+				var getMethod = idProperty.GetGetMethod();
+				var method = typeof(ElasticClient).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+				var generic = method.MakeGenericMethod(type, getMethod.ReturnType);
+				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });
+				cachedLookup = o=> {
+					T obj = (T)o;
+					var v = func(obj);
+					return v.ToString();
+				};
+				IdDelegates.Add(type, cachedLookup);
+				return cachedLookup(@object);
+
+			}
+			catch (Exception e)
+			{
+				var value = idProperty.GetValue(@object, null);
+				return value.ToString();
+			}
+		}
+
+		internal static string GetTypeNameFor(Type type)
 		{
 			if (!type.IsClass && !type.IsInterface)
 				throw new ArgumentException("Type is not a class or interface", "type");
 			return GetTypeNameForType(type);
 		}
 
-		public static string GetTypeNameFor<T>() where T : class
+		internal static string GetTypeNameFor<T>() where T : class
 		{
 			return GetTypeNameForType(typeof(T));
 		}
 
-		private static string GetTypeNameForType(Type type)
+		internal static string GetTypeNameForType(Type type)
 		{
 			var typeName = type.Name;
 			var att = PropertyNameResolver.GetElasticPropertyFor(type);
@@ -120,7 +132,7 @@ namespace Nest
 			return typeName;
 		}
 
-		private string InferTypeName<T>() where T : class
+		internal string InferTypeName<T>() where T : class
 		{
 			var type = typeof(T);
 			var typeName = type.Name;
@@ -136,18 +148,21 @@ namespace Nest
 			}
 			return typeName;
 		}
-		private string CreatePath(string index)
+
+		internal string CreatePath(string index)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			return "{0}/".F(index);
 		}
-		private string CreatePath(string index, string type)
+
+		internal string CreatePath(string index, string type)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			return "{0}/{1}/".F(index, type);
 		}
-		private string CreatePath(string index, string type, string id)
+
+		internal string CreatePath(string index, string type, string id)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -155,7 +170,7 @@ namespace Nest
 			return "{0}/{1}/{2}".F(index, type, id);
 		}
 
-		private string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
+		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, "index");
 		}
@@ -209,7 +224,7 @@ namespace Nest
 		{
 			objects.ThrowIfNull("objects");
 
-      var index = this.Settings.GetIndexForType<T>();
+			var index = this.Settings.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -219,7 +234,7 @@ namespace Nest
 		{
 			objects.ThrowIfNull("objects");
 
-      var index = this.Settings.GetIndexForType<T>();
+			var index = this.Settings.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -412,7 +427,7 @@ namespace Nest
 		}
 		private string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
-      var indices = this.Settings.GetIndexForType<T>();
+			var indices = this.Settings.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
@@ -440,7 +455,7 @@ namespace Nest
 		}
 		private string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor) where T : class
 		{
-      var indices = this.Settings.GetIndexForType<T>();
+			var indices = this.Settings.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all

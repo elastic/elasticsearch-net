@@ -23,8 +23,6 @@ namespace HackerNews.Indexer
 		static void Main(string[] args)
 		{
 			var filePath = args.First();
-
-
 			var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
 										.SetDefaultIndex("mpdreamz")
 										.SetMaximumAsyncConnections(50);
@@ -107,12 +105,14 @@ namespace HackerNews.Indexer
 				}
 				if (postQueue.Count() > 0)
 				{
-					/*client.IndexAsync<Post>(postQueue, (c) =>
+					var task = client.IndexAsync<Post>(postQueue).ContinueWith(t =>
 					{
+						var c = t.Result;
 						if (!c.Success)
-							dropped++;
-					});*/
-					processed += postQueue.Count();
+							Interlocked.Increment(ref dropped);
+						return t;
+					});
+					Interlocked.Add(ref processed, postQueue.Count());
 					postQueue = new List<Post>();
 					
 				}
