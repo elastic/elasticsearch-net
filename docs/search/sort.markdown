@@ -2,7 +2,7 @@
 layout: default
 title: Connecting
 menu_section: search
-menu_item: basics
+menu_item: sort
 ---
 
 
