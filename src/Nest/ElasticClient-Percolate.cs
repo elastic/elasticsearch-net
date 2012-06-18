@@ -49,7 +49,7 @@ namespace Nest
 		}
 		private RegisterPercolateResponse _RegisterPercolator(string path, string query)
 		{
-			var status = this.Connection.PutSync(Uri.EscapeDataString(path), Uri.EscapeDataString(query));
+			var status = this.Connection.PutSync(path, query);
 			var r = this.ToParsedResponse<RegisterPercolateResponse>(status);
 			return r;
 		}
