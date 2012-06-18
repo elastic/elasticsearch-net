@@ -152,14 +152,14 @@ namespace Nest
 		internal string CreatePath(string index)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			return "{0}/".F(index);
+			return "{0}/".F(Uri.EscapeDataString(index));
 		}
 
 		internal string CreatePath(string index, string type)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			return "{0}/{1}/".F(index, type);
+			return "{0}/{1}/".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type));
 		}
 
 		internal string CreatePath(string index, string type, string id)
@@ -167,7 +167,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			return "{0}/{1}/{2}".F(index, type, id);
+			return "{0}/{1}/{2}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type), Uri.EscapeDataString(id));
 		}
 
 		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class

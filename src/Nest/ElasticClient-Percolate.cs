@@ -38,18 +38,18 @@ namespace Nest
       var index = this.Settings.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				index = descriptor._Indices.First();
-			var path = "_percolator/{0}/{1}".F(index, name);
+			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._RegisterPercolator(path, query);
 		}
 		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public RegisterPercolateResponse RegisterPercolator(string index, string name, string query)
 		{
-			var path = "_percolator/{0}/{1}".F(index, name);
+			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._RegisterPercolator(path, query);
 		}
 		private RegisterPercolateResponse _RegisterPercolator(string path, string query)
 		{
-			var status = this.Connection.PutSync(path, query);
+			var status = this.Connection.PutSync(Uri.EscapeDataString(path), Uri.EscapeDataString(query));
 			var r = this.ToParsedResponse<RegisterPercolateResponse>(status);
 			return r;
 		}
@@ -68,7 +68,7 @@ namespace Nest
 		/// <param name="name">Name of the percolator</param>
 		public UnregisterPercolateResponse UnregisterPercolator(string index, string name)
 		{
-			var path = "_percolator/{0}/{1}".F(index, name);
+			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._UnregisterPercolator(path);
 		}
 		private UnregisterPercolateResponse _UnregisterPercolator(string path)
