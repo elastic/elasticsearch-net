@@ -95,7 +95,7 @@
     .FacetTerm(t =&gt; t
       .OnField(f =&gt; f.Country)
       .Size(20)
-    );
+    )
 );
 </code></code></pre>
 
@@ -108,11 +108,11 @@
     .FacetTerm(t =&gt; t
       .OnField(f =&gt; f.Country)
       .Size(20)
-    );
+    )
     .FacetTerm(t =&gt; t
       .OnField(f =&gt; f.Author)
       .Size(20)
-    );
+    )
 );
 </code></code></pre>
 
@@ -131,7 +131,7 @@
       .Regex(@&quot;\s+&quot;, RegexFlags.DOTALL)
       .Script(&quot;term + &#39;aaa&#39;&quot;)
       .ScriptField(&quot;_source.my_field&quot;)
-    );
+    )
     .FacetDateHistogram(h =&gt; h
       .OnField(f =&gt; f.StartedOn)
       .Interval(DateInterval.Day, DateRounding.Half_Floor)

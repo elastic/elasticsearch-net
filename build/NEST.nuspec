@@ -2,19 +2,20 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NEST</id>
-    <version>0.1.1.0</version>
-    <title />
-    <authors>Martijn Laarman</authors>
+    <version>0.9.0.0</version>
+    <title>NEST - Elasticsearch Client</title>
+    <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
+    <iconUrl>http://mpdreamz.github.com/NEST/images/nuget-icon.png</iconUrl>
     <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
     <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
-
+    <summary>Elasticsearch client, focuses on a strongly typed interface to elasticsearch but works well with dynamic use cases too.</summary>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Strongly typed Elasticsearch client.</description>
+    <description>Elasticsearch client, focuses on a strongly typed interface to elasticsearch but works well with dynamic use cases too.</description>
     <dependencies>
       <dependency id="Newtonsoft.Json" />
-      <dependency id="Fasterflect" />
     </dependencies>
+    <tags>elasticsearch elastic search lucene nest</tags>
   </metadata>
   <files>
     <file src="**\Nest.dll" /> 
