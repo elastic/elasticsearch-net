@@ -19,7 +19,7 @@ In its simplest form you can add a facet to your query like this:
         .FacetTerm(t => t
           .OnField(f => f.Country)
           .Size(20)
-        );
+        )
 	);
 
 Adding more then one facet is also really easy:
@@ -31,11 +31,11 @@ Adding more then one facet is also really easy:
         .FacetTerm(t => t
           .OnField(f => f.Country)
           .Size(20)
-        );
+        )
         .FacetTerm(t => t
           .OnField(f => f.Author)
           .Size(20)
-        );
+        )
 	);
 
 Nest supports all the additional properties you can set on facets 
@@ -53,7 +53,7 @@ Nest supports all the additional properties you can set on facets
           .Regex(@"\s+", RegexFlags.DOTALL)
           .Script("term + 'aaa'")
           .ScriptField("_source.my_field")
-        );
+        )
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
           .Interval(DateInterval.Day, DateRounding.Half_Floor)
