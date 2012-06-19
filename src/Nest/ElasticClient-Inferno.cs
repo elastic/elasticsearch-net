@@ -98,7 +98,7 @@ namespace Nest
 					var v = func(obj);
 					return v.ToString();
 				};
-				IdDelegates.Add(type, cachedLookup);
+				IdDelegates.TryAdd(type, cachedLookup);
 				return cachedLookup(@object);
 
 			}

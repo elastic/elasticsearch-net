@@ -18,6 +18,7 @@
 *.cache
 *.ilk
 *.log
+*.nupkg
 [Bb]in
 [Dd]ebug*/
 *.lib

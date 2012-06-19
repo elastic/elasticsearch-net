@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial class ElasticClient
+	public partial class ElasticClient : Nest.IElasticClient
 	{
 		private IConnection Connection { get; set; }
 		private IConnectionSettings Settings { get; set; }
