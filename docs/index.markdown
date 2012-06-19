@@ -8,7 +8,6 @@ menu_item: introduction
 # Introduction
 
 NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. It also has string/dynamic overloads for more dynamic usecases. 
- 
 
 Indexing is as simple as:
 
@@ -30,6 +29,14 @@ Searching is fluid:
 			.SortDescending(f => f.Name)
 			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
 	);
+
+## Installing 
+
+Nest can be installed through NuGet:
+
+	PM> Install-Package NEST
+
+Or searching for "elasticsearch" will get you to nest as well. 
 
 ## Copyright
 

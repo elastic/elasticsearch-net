@@ -2,7 +2,7 @@
 
 *Strongly typed Elasticsearch client*
 
-NEST aims to be a .net client with a very concise API. 
+NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. It also has string/dynamic overloads for more dynamic usecases. 
 
 Indexing is as simple as:
 
@@ -30,7 +30,7 @@ Searching is fluid:
 additionally @joelabrahamson wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
 using NEST. 
 
-##Installing 
+## Installing 
 
 Nest can be installed through NuGet:
 
