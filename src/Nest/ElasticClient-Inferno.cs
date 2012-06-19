@@ -7,12 +7,13 @@ using System.Text;
 using Newtonsoft.Json;
 using Nest.Resolvers;
 using System.Reflection;
+using System.Collections.Concurrent;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		private static Dictionary<Type, Func<object, string>> IdDelegates = new Dictionary<Type,Func<object,string>>();
+		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 
 		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
 
