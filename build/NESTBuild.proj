@@ -13,12 +13,12 @@
   <PropertyGroup>
       <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
       <BuildDir>$(MSBuildProjectDirectory)\tmp</BuildDir>
-      <SolutionFile>$(SrcDir)\ElasticSearch.NET.sln</SolutionFile>
+      <SolutionFile>$(SrcDir)\Nest.sln</SolutionFile>
   </PropertyGroup>
   
   <Target Name="Compile">
     <AssemblyInfo CodeLanguage="CS"
-      OutputFile="$(SrcDir)\ElasticSearch.Client\Properties\AssemblyInfo.cs"
+      OutputFile="$(SrcDir)\NEST\Properties\AssemblyInfo.cs"
       AssemblyTitle="NEST"
       AssemblyDescription="Strongly typed ElasticSearch client."
       AssemblyCompany=""
@@ -27,6 +27,7 @@
       ComVisible="false"
       CLSCompliant="true"
       Guid="07E5CFA3-CF5F-4D17-874C-8D5CC6FA3E73"
+      InternalsVisibleTo="Nest.Tests"
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)"/>
 
@@ -35,17 +36,17 @@
   
   <Target Name="NuGetPackage" DependsOnTargets="Compile">
     <ItemGroup>
-      <MainBinaries Include="$(SrcDir)\**\bin\$(Configuration)\**\*.*" />
+      <MainBinaries Include="$(SrcDir)\**\Nest\bin\$(Configuration)\**\*.*" />
     </ItemGroup>
  
     <!-- First copy the nuspec template files to the build dir -->
-    <Copy SourceFiles="..\NEST.nuspec" DestinationFolder="$(BuildDir)" />
+    <Copy SourceFiles="..\build\NEST.nuspec" DestinationFolder="$(BuildDir)" />
  
     <!-- Copy the source files to the package dir -->
-    <Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDir)\lib\NET35\" />
+    <Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
  
     <!-- Get the version number of the main FV assembly to insert into the nuspec files -->
-    <GetAssemblyIdentity AssemblyFiles="$(BuildDir)\lib\NET35\ElasticSearch.Client.dll">
+    <GetAssemblyIdentity AssemblyFiles="$(BuildDir)\lib\NET4\Nest.dll">
       <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
     </GetAssemblyIdentity>
  
@@ -59,5 +60,11 @@
  
     <Exec WorkingDirectory="$(BuildDir)" 
           Command="$(MSBuildProjectDirectory)\nuget.exe pack $(BuildDir)\NEST.nuspec" />
+    <ItemGroup>
+      <Packages Include="$(BuildDir)\*.nupkg" />
+    </ItemGroup>
+    <Copy SourceFiles="@(Packages)" DestinationFolder="$(BuildDir)\..\" />
+
+    <RemoveDir Directories="$(BuildDir)" />
   </Target>
 </Project>

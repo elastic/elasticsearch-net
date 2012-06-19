@@ -30,6 +30,18 @@ Searching is fluid:
 additionally @joelabrahamson wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
 using NEST. 
 
+##Installing 
+
+Nest can be installed through NuGet:
+
+	PM> Install-Package NEST
+
+Or searching for "elasticsearch"  will get you to nest as well. 
+
+## Questions, bugs, comments, requests
+
+All of these are more then welcome on the github issues pages! I try to to at least reply within the same day.
+
 ## Copyright
 
 Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](https://github.com/Mpdreamz/NEST)

@@ -18,6 +18,6 @@
     <tags>elasticsearch elastic search lucene nest</tags>
   </metadata>
   <files>
-    <file src="**\Nest.dll" /> 
+    <file src="lib\**\Nest.dll" target="lib"/> 
   </files>
 </package>
