@@ -127,6 +127,7 @@
     <Compile Include="Indices\SegmentsTests.cs" />
     <Compile Include="Indices\ExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
+    <Compile Include="Inferno\PropertyNameResolverTests.cs" />
     <Compile Include="Inferno\IdLookupTests.cs" />
     <Compile Include="Integration\AsyncTests.cs" />
     <Compile Include="Integration\UpdateTests.cs" />
