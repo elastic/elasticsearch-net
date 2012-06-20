@@ -86,7 +86,7 @@ namespace HackerNews.Indexer
 						postQueue.Add(post);
 						if (postQueue.Count() == 1000)
 						{
-							var t = client.IndexAsync<Post>(postQueue);
+							var t = client.IndexManyAsync(postQueue);
 							t.ContinueWith(c =>
 							{
 								var result = c.Result;
@@ -105,7 +105,7 @@ namespace HackerNews.Indexer
 				}
 				if (postQueue.Count() > 0)
 				{
-					var task = client.IndexAsync<Post>(postQueue).ContinueWith(t =>
+					var task = client.IndexManyAsync(postQueue).ContinueWith(t =>
 					{
 						var c = t.Result;
 						if (!c.Success)

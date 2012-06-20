@@ -202,7 +202,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<T> objects) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<T> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			return this.Connection.PostSync("_bulk", json);
@@ -210,7 +210,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			return this.Connection.PostSync("_bulk", json);
@@ -219,7 +219,7 @@ namespace Nest
 		/// Index objects to the default index and the inferred type name for T
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -229,7 +229,7 @@ namespace Nest
 		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -239,7 +239,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			return this.Connection.PostSync("_bulk", json);
@@ -247,7 +247,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			return this.Connection.PostSync("_bulk", json);
@@ -256,7 +256,7 @@ namespace Nest
 		/// Index objects to the specified index and the inferred type name for T
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -266,7 +266,7 @@ namespace Nest
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -276,7 +276,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the specified type name
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, string type) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			return this.Connection.PostSync("_bulk", json);
@@ -284,7 +284,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			return this.Connection.PostSync("_bulk", json);
@@ -293,7 +293,7 @@ namespace Nest
 		/// Index objects to the specified index and the specified type name
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -303,7 +303,7 @@ namespace Nest
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public ConnectionStatus Index<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
+		public ConnectionStatus IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -313,7 +313,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<T> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			return this.Connection.Post("_bulk", json);
@@ -321,7 +321,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			return this.Connection.Post("_bulk", json);
@@ -330,7 +330,7 @@ namespace Nest
 		/// Index objects to the default index and the inferred type name for T
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -340,7 +340,7 @@ namespace Nest
 		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -350,7 +350,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			return this.Connection.Post("_bulk", json);
@@ -358,7 +358,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			return this.Connection.Post("_bulk", json);
@@ -367,7 +367,7 @@ namespace Nest
 		/// Index objects to the specified index and the inferred type name for T
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -377,7 +377,7 @@ namespace Nest
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -387,7 +387,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the specified type name
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index, string type) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			return this.Connection.Post("_bulk", json);
@@ -395,7 +395,7 @@ namespace Nest
 		/// <summary>
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			return this.Connection.Post("_bulk", json);
@@ -404,7 +404,7 @@ namespace Nest
 		/// Index objects to the specified index and the specified type name
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
@@ -414,7 +414,7 @@ namespace Nest
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
 		/// and SimpleBulkParameters to control the entire operation
 		/// </summary>
-		public Task<ConnectionStatus> IndexAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
+		public Task<ConnectionStatus> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
 			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);

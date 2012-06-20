@@ -69,8 +69,8 @@ namespace Nest.Tests
 				client.Map<ElasticSearchProject>();
 				this.ConnectedClient.OpenIndex<ElasticSearchProject>();
 				this.ConnectedClient.OpenIndex(cloneIndex);
-				client.Index(projects, bulkParameters);
-				client.Index(projects, cloneIndex, bulkParameters);
+				client.IndexMany(projects, bulkParameters);
+				client.IndexMany(projects, cloneIndex, bulkParameters);
 
 			}
 		}
@@ -93,8 +93,8 @@ namespace Nest.Tests
 				var projects = NestTestData.Data;
 				var cloneIndex = Test.Default.DefaultIndex + "_clone";
 				var bulkParameters = new SimpleBulkParameters() { Refresh = true };
-				client.Index(projects, bulkParameters);
-				client.Index(projects, cloneIndex, bulkParameters);
+				client.IndexMany(projects, bulkParameters);
+				client.IndexMany(projects, cloneIndex, bulkParameters);
 
 			}
 		}
