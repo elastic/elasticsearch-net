@@ -30,6 +30,9 @@ Searching is fluid:
 additionally @joelabrahamson wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
 using NEST. 
 
+Also checkout the [searchbox.io guys](https://searchbox.io/) rocking NEST [on AppHarbor](http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on) 
+with their [demo project](https://github.com/searchbox-io/.net-sample)
+
 ## Installing 
 
 Nest can be installed through NuGet:
