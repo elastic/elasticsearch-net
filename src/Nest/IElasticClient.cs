@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Nest
 {
-	interface IElasticClient
+	public interface IElasticClient
 	{
 		IndicesOperationResponse Alias(AliasParams aliasParams);
 		IndicesOperationResponse Alias(System.Collections.Generic.IEnumerable<AliasParams> aliases);
