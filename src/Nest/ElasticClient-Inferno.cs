@@ -136,12 +136,18 @@ namespace Nest
 		internal string InferTypeName<T>() where T : class
 		{
 			var type = typeof(T);
+			return this.InferTypeName(typeof(T));
+		}
+
+
+		internal string InferTypeName(Type type)
+		{
 			var typeName = type.Name;
-			var att = PropertyNameResolver.GetElasticPropertyFor<T>();
+			var att = PropertyNameResolver.GetElasticPropertyFor(type);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else
-			{ 
+			{
 				if (this.Settings.TypeNameInferrer != null)
 					typeName = this.Settings.TypeNameInferrer(typeName);
 				if (this.Settings.TypeNameInferrer == null || string.IsNullOrEmpty(typeName))
@@ -149,6 +155,7 @@ namespace Nest
 			}
 			return typeName;
 		}
+
 
 		internal string CreatePath(string index)
 		{

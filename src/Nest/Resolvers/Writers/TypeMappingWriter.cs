@@ -7,12 +7,22 @@ using Newtonsoft.Json;
 
 namespace Nest.Resolvers.Writers
 {
-	internal class TypeMappingWriter<T> where T : class
+	internal class TypeMappingWriter<T> : TypeMappingWriter where T : class
+	{
+		public TypeMappingWriter(string typeName, PropertyNameResolver propertyNameResolver)
+			: base(typeof(T), typeName, propertyNameResolver)
+		{
+		}
+	}
+
+	internal class TypeMappingWriter
 	{
 		private string TypeName { get; set; }
 		private PropertyNameResolver PropertyNameResolver { get; set; }
-		public TypeMappingWriter(string typeName, PropertyNameResolver propertyNameResolver)
+		private readonly Type _type;
+		public TypeMappingWriter(Type t, string typeName, PropertyNameResolver propertyNameResolver)
 		{
+			this._type = t;
 			this.TypeName = typeName;
 			this.PropertyNameResolver = propertyNameResolver;
 		}
@@ -49,7 +59,7 @@ namespace Nest.Resolvers.Writers
 		}
 		private void WriteRootObjectProperties(JsonWriter jsonWriter)
 		{
-			var att = this.PropertyNameResolver.GetElasticPropertyFor<T>();
+			var att = this.PropertyNameResolver.GetElasticPropertyFor(this._type);
 			if (att == null)
 				return;
 
@@ -103,7 +113,7 @@ namespace Nest.Resolvers.Writers
 
 		private void WriteProperties(JsonWriter jsonWriter)
 		{
-			var properties = typeof(T).GetProperties();
+			var properties = this._type.GetProperties();
 			foreach (var p in properties)
 			{
 				var att = this.PropertyNameResolver.GetElasticProperty(p);

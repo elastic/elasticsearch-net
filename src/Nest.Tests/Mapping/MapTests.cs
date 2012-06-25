@@ -41,6 +41,24 @@ namespace Nest.Tests.Mapping
 			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 
+		[Test]
+		public void SimpleMapByAttributesUsingType()
+		{
+			var t = typeof(ElasticSearchProject);
+			this.ConnectedClient.DeleteMapping(t);
+			this.ConnectedClient.DeleteMapping(t, Test.Default.DefaultIndex + "_clone");
+			var x = this.ConnectedClient.Map(t);
+			Assert.IsTrue(x.OK);
+
+			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			TestMapping(typeMapping);
+			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
+			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
+			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
+			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
+		}
+
+
 		public void FluentMapping()
 		{
 			//TODO: Waiting to pull in nordbergm's excellent work on mapping 

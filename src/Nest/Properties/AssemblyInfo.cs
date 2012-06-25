@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 [assembly: CLSCompliant(true)]
 [assembly: Guid("07E5CFA3-CF5F-4D17-874C-8D5CC6FA3E73")]
 [assembly: InternalsVisibleTo("Nest.Tests")]
-[assembly: AssemblyVersion("0.9.0.2")]
-[assembly: AssemblyFileVersion("0.9.0.2")]
+[assembly: AssemblyVersion("0.9.1.0")]
+[assembly: AssemblyFileVersion("0.9.1.0")]
 
 

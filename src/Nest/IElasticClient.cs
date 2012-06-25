@@ -94,6 +94,11 @@ namespace Nest
 		IndicesResponse DeleteMapping<T>() where T : class;
 		IndicesResponse DeleteMapping<T>(string index) where T : class;
 		IndicesResponse DeleteMapping<T>(string index, string type) where T : class;
+
+		IndicesResponse DeleteMapping(Type t);
+		IndicesResponse DeleteMapping(Type t,string index);
+		IndicesResponse DeleteMapping(Type t, string index, string type);
+
 		IndicesOperationResponse Flush(bool refresh = false);
 		IndicesOperationResponse Flush(System.Collections.Generic.IEnumerable<string> indices, bool refresh = false);
 		IndicesOperationResponse Flush(string index, bool refresh = false);
@@ -112,6 +117,9 @@ namespace Nest
 		TypeMapping GetMapping(string index, string type);
 		TypeMapping GetMapping<T>() where T : class;
 		TypeMapping GetMapping<T>(string index) where T : class;
+		TypeMapping GetMapping(Type t);
+		TypeMapping GetMapping(Type t, string index);
+
 		ConnectionStatus IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		ConnectionStatus IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
 		ConnectionStatus IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, string index) where T : class;
@@ -163,6 +171,11 @@ namespace Nest
 		IndicesResponse Map<T>() where T : class;
 		IndicesResponse Map<T>(string index) where T : class;
 		IndicesResponse Map<T>(string index, string type) where T : class;
+		IndicesResponse Map(Type t);
+		IndicesResponse Map(Type t, string index);
+		IndicesResponse Map(Type t, string index, string type);
+
+
 		IndicesOperationResponse OpenIndex(string index);
 		IndicesOperationResponse OpenIndex<T>() where T : class;
 		IndicesOperationResponse Optimize();
