@@ -38,6 +38,7 @@ namespace Nest.Tests.Mapping
 			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
 			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
 			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
+			Assert.AreEqual("not_analyzed", typeMapping.Properties["country"].Index);
 			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 

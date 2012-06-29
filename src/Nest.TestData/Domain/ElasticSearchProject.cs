@@ -22,7 +22,9 @@ namespace Nest.TestData.Domain
 		[ElasticProperty(AddSortField=true)]
 		public string Name { get; set; }
 		public string Version { get; set; }
-		[ElasticProperty(OmitNorms = true, Index = FieldIndexOption.not_analyzed)]
+		[ElasticProperty(
+			OmitNorms = true, 
+			Index = FieldIndexOption.not_analyzed )]
 		public string Country { get; set; }
 		public string Content { get; set; }
 		[ElasticProperty(Name="loc",AddSortField=true)]
