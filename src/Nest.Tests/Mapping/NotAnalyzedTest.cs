@@ -63,8 +63,8 @@ namespace Nest.Tests.Mapping
 				.MatchAll()
 			);
 			var facets = result.FacetItems<TermItem>(f => f.Country);
-			Assert.AreEqual(1, facets.Count());
-			Assert.AreEqual("The Netherlands", facets.FirstOrDefault().Term);
+			Assert.AreEqual(3, facets.Count());
+			Assert.AreEqual("royal", facets.FirstOrDefault().Term);
 		}
 
 
