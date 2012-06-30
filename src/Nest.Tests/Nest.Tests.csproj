@@ -134,6 +134,7 @@
     <Compile Include="Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
+    <Compile Include="Mapping\NotAnalyzedTest.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />
     <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />

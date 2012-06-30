@@ -42,6 +42,9 @@ namespace Nest.Tests.Mapping
 			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 
+
+
+
 		[Test]
 		public void SimpleMapByAttributesUsingType()
 		{
