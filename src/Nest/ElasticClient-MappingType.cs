@@ -220,7 +220,7 @@ namespace Nest
 		public TypeMapping GetMapping<T>() where T : class
 		{
 			var index = this.Settings.GetIndexForType<T>();
-      return this.GetMapping<T>();
+            return this.GetMapping<T>(index);
 		}
 		/// <summary>
 		/// Get the current mapping for T at the specified index
