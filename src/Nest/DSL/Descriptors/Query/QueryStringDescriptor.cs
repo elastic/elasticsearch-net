@@ -9,7 +9,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public class QueryStringDescriptor<T> where T : class
+  public class QueryStringDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal string _QueryString { get; set; }

@@ -184,7 +184,7 @@ namespace Nest
     internal HighlightDescriptor<T> _Highlight { get; set; }
 
 		internal string _RawQuery { get; set; }
-		internal QueryDescriptor<T> _Query { get; set; }
+		internal BaseQuery _Query { get; set; }
 
 		internal string _RawFilter { get; set; }
 		internal FilterDescriptor<T> _Filter { get; set; }
@@ -694,18 +694,28 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Query(Action<QueryDescriptor<T>> query)
-		{
+		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
+		{     
 			query.ThrowIfNull("query");
-			this._Query = new QueryDescriptor<T>();
-			query(this._Query);
+			var q= new QueryDescriptor<T>();
+			var bq = query(q);
+      this._Query = bq;
 			return this;
 		}
+    /// <summary>
+    /// Describe the query to perform using the static Query class
+    /// </summary>
+    public SearchDescriptor<T> Query(BaseQuery query)
+    {
+      query.ThrowIfNull("query");
+      this._Query = query;
+      return this;
+    }
 		/// <summary>
 		/// Describe the query to perform
 		/// </summary>
 		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> Query(string rawQuery)
+		public SearchDescriptor<T> RawQuery(string rawQuery)
 		{
 			rawQuery.ThrowIfNull("rawQuery");
 			this._RawQuery = rawQuery;
@@ -748,8 +758,9 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> MatchAll()
 		{
-			this._Query = new QueryDescriptor<T>();
-			this._Query.MatchAll();
+			var q = new QueryDescriptor<T>();
+			q.MatchAll();
+      this._Query = q;
 			return this;
 		}
 	}

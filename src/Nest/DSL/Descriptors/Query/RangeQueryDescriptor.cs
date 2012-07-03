@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class RangeQueryDescriptor<T> : FilterBase where T : class
+	public class RangeQueryDescriptor<T>    where T : class
 	{
 		[JsonProperty("from")]
 		internal object _From { get; set;}
@@ -20,6 +20,10 @@ namespace Nest
 		internal bool? _ToInclusive { get; set; }
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
+   	[JsonProperty(PropertyName = "_cache")]
+		internal bool? _Cache { get; set; }
+		[JsonProperty(PropertyName = "_name")]
+		internal string _Name { get; set; }
 
 		internal string _Field { get; set; }
 
@@ -221,5 +225,7 @@ namespace Nest
 			return this;
 		}
 		#endregion
-	}
+	
+  
+  }
 }

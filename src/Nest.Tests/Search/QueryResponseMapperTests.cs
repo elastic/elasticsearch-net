@@ -38,7 +38,7 @@ namespace Nest.Tests
 		{
 			var client = this.ConnectedClient;
 			QueryResponse<Post> queryResults = client.Search<Post>(s=>s
-				.Query("here be dragons")
+				.RawQuery("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
 			var error = queryResults.ConnectionStatus.Error;

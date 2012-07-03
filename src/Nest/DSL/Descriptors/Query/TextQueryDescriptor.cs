@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class TextQueryDescriptor<T> where T : class
+  public class TextQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "type")]
 		internal virtual string _Type { get { return null; } }

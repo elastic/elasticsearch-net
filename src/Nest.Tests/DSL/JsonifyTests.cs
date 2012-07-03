@@ -185,7 +185,7 @@ namespace Nest.Tests.DSL
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Query(q => {});
+				.Query(q => q);
 			var json = ElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : {}}";
 			Assert.True(json.JsonEquals(expected));
@@ -199,7 +199,7 @@ namespace Nest.Tests.DSL
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Query(@"{ raw : ""query""}");
+				.RawQuery(@"{ raw : ""query""}");
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected));
@@ -222,7 +222,7 @@ namespace Nest.Tests.DSL
 				.From(0)
 				.Size(10)
 				.Filter(@"{ raw : ""query""}")
-				.Query(@"{ raw : ""query""}");
+				.RawQuery(@"{ raw : ""query""}");
 			var json = ElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}, filter : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected));

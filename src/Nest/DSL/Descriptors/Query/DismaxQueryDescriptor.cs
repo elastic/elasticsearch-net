@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class DismaxQueryDescriptor<T> where T : class
+  public class DismaxQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
 		internal double? _TieBreaker { get; set; }

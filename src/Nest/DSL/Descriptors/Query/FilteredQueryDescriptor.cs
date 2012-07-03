@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class FilteredQueryDescriptor<T> where T : class
+  public class FilteredQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal QueryDescriptor<T> _Query { get; set; }

@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class SpanOrQueryDescriptor<T> : ISpanQuery where T : class
+	public class SpanOrQueryDescriptor<T>  : ISpanQuery where T : class
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		internal IEnumerable<SpanQueryDescriptor<T>> _SpanQueryDescriptors { get; set; }

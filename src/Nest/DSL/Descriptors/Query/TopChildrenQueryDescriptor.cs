@@ -9,7 +9,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class TopChildrenQueryDescriptor<T> : FilterBase where T : class
+	public class TopChildrenQueryDescriptor<T>  where T : class
 	{
 		public TopChildrenQueryDescriptor()
 		{
@@ -32,6 +32,12 @@ namespace Nest
 
 		[JsonProperty("query")]
 		internal QueryDescriptor<T> _QueryDescriptor { get; set;}
+
+    [JsonProperty(PropertyName = "_cache")]
+		internal bool? _Cache { get; set; }
+
+		[JsonProperty(PropertyName = "_name")]
+		internal string _Name { get; set; }
 
 		public TopChildrenQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
 		{

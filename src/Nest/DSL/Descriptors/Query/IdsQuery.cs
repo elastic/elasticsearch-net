@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class IdsQuery
+  public class IdsQuery  
 	{
 		public IEnumerable<string> Type { get; set; }
 		public IEnumerable<string> Values { get; set; }

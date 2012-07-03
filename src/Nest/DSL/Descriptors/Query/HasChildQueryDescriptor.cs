@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class HasChildQueryDescriptor<T> : FilterBase where T : class
+	public class HasChildQueryDescriptor<T>  where T : class
 	{
 		public HasChildQueryDescriptor()
 		{
@@ -39,5 +39,10 @@ namespace Nest
 			this._Type = type;
 			return this;
 		}
+    [JsonProperty(PropertyName = "_cache")]
+		internal bool? _Cache { get; set; }
+
+		[JsonProperty(PropertyName = "_name")]
+		internal string _Name { get; set; }
 	}
 }

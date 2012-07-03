@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class SpanQueryDescriptor<T> where T : class
+  public class SpanQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "span_term")]
 		internal SpanTerm SpanTermQuery { get; set; }

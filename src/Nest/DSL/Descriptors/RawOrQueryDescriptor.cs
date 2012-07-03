@@ -8,6 +8,6 @@ namespace Nest
 	public class RawOrQueryDescriptor<T> where T : class
 	{
 		public string Raw { get; set; }
-		public QueryDescriptor<T> Descriptor { get; set; }
+		public BaseQuery Descriptor { get; set; }
 	}
 }

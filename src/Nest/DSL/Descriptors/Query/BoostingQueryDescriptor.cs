@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class BoostingQueryDescriptor<T> where T : class
+  public class BoostingQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty("positive")]
 		internal QueryDescriptor<T> _PositiveQuery { get; set; }

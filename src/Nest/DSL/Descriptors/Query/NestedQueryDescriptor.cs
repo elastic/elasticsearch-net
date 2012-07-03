@@ -9,7 +9,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class NestedQueryDescriptor<T>  where T : class
+  public class NestedQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
 		internal NestedScore? _Score { get; set; }

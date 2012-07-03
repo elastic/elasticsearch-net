@@ -10,7 +10,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class IndicesQueryDescriptor<T>  where T : class
+  public class IndicesQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
 		internal NestedScore? _Score { get; set; }
@@ -26,16 +26,18 @@ namespace Nest
 
 		public IndicesQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
 		{
-			var d = new RawOrQueryDescriptor<T> { Descriptor = new QueryDescriptor<T>() };
-			querySelector(d.Descriptor);
+      var qd = new QueryDescriptor<T>();
+			var d = new RawOrQueryDescriptor<T> { Descriptor = qd };
+      querySelector(qd);
 			this._QueryDescriptor = d.Descriptor;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Query<K>(Action<QueryDescriptor<K>> querySelector) where K : class
 		{
-			var d = new RawOrQueryDescriptor<K> { Descriptor = new QueryDescriptor<K>() };
-			querySelector(d.Descriptor);
-			this._QueryDescriptor = d.Descriptor;
+      var qd = new QueryDescriptor<K>();
+      var d = new RawOrQueryDescriptor<K> { Descriptor = qd };
+      querySelector(qd);
+      this._QueryDescriptor = qd;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Query(string rawQuery)
@@ -46,15 +48,17 @@ namespace Nest
 		}
 		public IndicesQueryDescriptor<T> NoMatchQuery(Action<QueryDescriptor<T>> querySelector)
 		{
-			var d = new RawOrQueryDescriptor<T> { Descriptor = new QueryDescriptor<T>() };
-			querySelector(d.Descriptor);
+      var qd = new QueryDescriptor<T>();
+			var d = new RawOrQueryDescriptor<T> { Descriptor = qd };
+			querySelector(qd);
 			this._NoMatchQueryDescriptor = d.Descriptor;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Action<QueryDescriptor<K>> querySelector) where K : class
 		{
-			var d = new RawOrQueryDescriptor<K> { Descriptor = new QueryDescriptor<K>() };
-			querySelector(d.Descriptor);
+      var qd = new QueryDescriptor<K>();
+			var d = new RawOrQueryDescriptor<K> { Descriptor = qd  };
+			querySelector(qd);
 			this._NoMatchQueryDescriptor = d.Descriptor;
 			return this;
 		}

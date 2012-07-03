@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class MoreLikeThisDescriptor<T> where T : class
+  public class MoreLikeThisDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "fields")]
 		internal IEnumerable<string> _Fields { get; set; }

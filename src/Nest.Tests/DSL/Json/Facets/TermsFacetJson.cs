@@ -17,7 +17,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .Query(@"{ raw : ""query""}")
+        .RawQuery(@"{ raw : ""query""}")
         .FacetTerm(t => t.OnField(f => f.Country).Size(20));
       var json = ElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
@@ -39,7 +39,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .Query(@"{ raw : ""query""}")
+        .RawQuery(@"{ raw : ""query""}")
         .FacetTerm(t => t
           .OnField(f => f.Country)
           .Size(20)
@@ -80,7 +80,7 @@ namespace Nest.Tests.Dsl.Json.Facets
         new SearchDescriptor<ElasticSearchProject>()
           .From(0)
           .Size(10)
-          .Query(@"{ raw : ""query""}")
+          .RawQuery(@"{ raw : ""query""}")
           .FacetTerm(t => t
             .OnFields(f => f.Country, f => f.LOC)
             .Size(20)
@@ -96,7 +96,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .Query(@"{ raw : ""query""}")
+        .RawQuery(@"{ raw : ""query""}")
         .FacetTerm("i_bet_this_crazy_facet_actually_works", t => t
           .OnFields(f => f.Country, f => f.LOC)
           .Size(20)

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class CustomScoreQueryDescriptor<T> where T : class
+  public class CustomScoreQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }

@@ -7,8 +7,20 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+  [JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+  public class BoolBaseQueryDescriptor
+  {
+    [JsonProperty("must")]
+    internal IEnumerable<BaseQuery> _MustQueries { get; set; }
+
+    [JsonProperty("should")]
+    internal IEnumerable<BaseQuery> _ShouldQueries { get; set; }
+  }
+	
+
+
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class BoolQueryDescriptor<T> where T : class
+  public class BoolQueryDescriptor<T> where T : class
 	{
 		[JsonProperty("must")]
 		internal IEnumerable<QueryDescriptor<T>> _MustQueries { get; set; }

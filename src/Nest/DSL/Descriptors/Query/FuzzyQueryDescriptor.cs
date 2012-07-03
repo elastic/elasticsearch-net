@@ -8,7 +8,7 @@ using System.Globalization;
 using Newtonsoft.Json.Converters;
 namespace Nest
 {
-	public class FuzzyQueryDescriptor<T> where T : class
+  public class FuzzyQueryDescriptor<T>  where T : class
 	{
 		internal string _Field { get; set; }
 		[JsonProperty(PropertyName = "boost")]

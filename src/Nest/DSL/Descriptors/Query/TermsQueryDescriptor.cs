@@ -8,7 +8,7 @@ using System.Globalization;
 using Newtonsoft.Json.Converters;
 namespace Nest
 {
-	public class TermsQueryDescriptor<T> where T : class
+  public class TermsQueryDescriptor<T>  where T : class
 	{
 		internal string _Field { get; set; }
 		internal int? _MinMatch { get; set; }
