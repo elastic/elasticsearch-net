@@ -15,7 +15,7 @@ namespace Nest
 	}
 	public class QueryDescriptor<T>  : BaseQuery, IQueryDescriptor<T> where T : class
 	{
-    [JsonProperty(PropertyName = "match_all")]
+		[JsonProperty(PropertyName = "match_all")]
 		internal MatchAll MatchAllQuery { get; set; }
 		[JsonProperty(PropertyName = "term")]
 		internal Term TermQuery { get; set; }
@@ -88,7 +88,7 @@ namespace Nest
 			var query = new QueryStringDescriptor<T>();
 			selector(query);
 			this.QueryStringDescriptor = query;
-      return this;
+			return this;
 		}
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
@@ -125,7 +125,7 @@ namespace Nest
 			{
 				this.TermsQueryDescriptor.Add("minimum_match", query._MinMatch);
 			}
-      return new QueryDescriptor<T> { TermsQueryDescriptor = this.TermsQueryDescriptor };
+			return new QueryDescriptor<T> { TermsQueryDescriptor = this.TermsQueryDescriptor };
 		}
 
 
@@ -144,7 +144,7 @@ namespace Nest
 			{
 				{ query._Field, query}
 			};
-      return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
+			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
 		}
 		/// <summary>
 		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
@@ -159,7 +159,7 @@ namespace Nest
 			{
 				{ query._Field, query}
 			};
-      return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
+			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
 		}
 		/// <summary>
 		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
@@ -175,7 +175,7 @@ namespace Nest
 			{
 				{ query._Field, query}
 			};
-      return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
+			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
 		}
 		
 		/// <summary>
@@ -192,7 +192,7 @@ namespace Nest
 			{
 				{ query._Field, query}
 			};
-      return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
 		}
 		/// <summary>
 		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text. 
@@ -207,7 +207,7 @@ namespace Nest
 			{
 				{ query._Field, query}
 			};
-      return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
 		}
 		/// <summary>
 		/// The text_phrase_prefix is the same as text_phrase, expect it allows for prefix matches on the last term 
@@ -223,7 +223,7 @@ namespace Nest
 			{
 				{ query._Field, query}
 			};
-      return this;
+			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
 		}
 
 		/// <summary>
@@ -236,7 +236,7 @@ namespace Nest
 			var query = new NestedQueryDescriptor<T>();
 			selector(query);
 			this.NestedQueryDescriptor = query;
-      return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
 		}
 		/// <summary>
 		/// The indices query can be used when executed across multiple indices, allowing to have a query that executes
@@ -248,7 +248,7 @@ namespace Nest
 			var query = new IndicesQueryDescriptor<T>();
 			selector(query);
 			this.IndicesQueryDescriptor = query;
-      return new QueryDescriptor<T> { IndicesQueryDescriptor = this.IndicesQueryDescriptor };
+			return new QueryDescriptor<T> { IndicesQueryDescriptor = this.IndicesQueryDescriptor };
 		}
 		/// <summary>
 		/// Matches documents with fields that have terms within a certain range. The type of the Lucene query depends
@@ -265,7 +265,7 @@ namespace Nest
 			{
 				{ query._Field, query}
 			};
-      return new QueryDescriptor<T> { RangeQueryDescriptor = this.RangeQueryDescriptor };
+			return new QueryDescriptor<T> { RangeQueryDescriptor = this.RangeQueryDescriptor };
 		}
 		/// <summary>
 		/// Fuzzy like this query find documents that are “like” provided text by running it against one or more fields.
@@ -275,7 +275,7 @@ namespace Nest
 			var query = new FuzzyLikeThisDescriptor<T>();
 			selector(query);
 			this.FuzzyLikeThisDescriptor = query;
-      return new QueryDescriptor<T> { FuzzyLikeThisDescriptor = this.FuzzyLikeThisDescriptor };
+			return new QueryDescriptor<T> { FuzzyLikeThisDescriptor = this.FuzzyLikeThisDescriptor };
 		}
 		/// <summary>
 		/// More like this query find documents that are “like” provided text by running it against one or more fields.
@@ -285,7 +285,7 @@ namespace Nest
 			var query = new MoreLikeThisDescriptor<T>();
 			selector(query);
 			this.MoreLikeThisDescriptor = query;
-      return new QueryDescriptor<T> { MoreLikeThisDescriptor = this.MoreLikeThisDescriptor };
+			return new QueryDescriptor<T> { MoreLikeThisDescriptor = this.MoreLikeThisDescriptor };
 		}
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
@@ -297,7 +297,7 @@ namespace Nest
 			var query = new HasChildQueryDescriptor<K>();
 			selector(query);
 			this.HasChildQueryDescriptor = query;
-      return new QueryDescriptor<T> { HasChildQueryDescriptor = this.HasChildQueryDescriptor };
+			return new QueryDescriptor<T> { HasChildQueryDescriptor = this.HasChildQueryDescriptor };
 		}
 		/// <summary>
 		/// The top_children query runs the child query with an estimated hits size, and out of the hit docs, aggregates 
@@ -310,7 +310,7 @@ namespace Nest
 			var query = new TopChildrenQueryDescriptor<K>();
 			selector(query);
 			this.TopChildrenQueryDescriptor = query;
-      return new QueryDescriptor<T> { TopChildrenQueryDescriptor = this.TopChildrenQueryDescriptor };
+			return new QueryDescriptor<T> { TopChildrenQueryDescriptor = this.TopChildrenQueryDescriptor };
 		}
 		/// <summary>
 		/// A query that applies a filter to the results of another query. This query maps to Lucene FilteredQuery.
@@ -320,7 +320,7 @@ namespace Nest
 			var query = new FilteredQueryDescriptor<T>();
 			selector(query);
 			this.FilteredQueryDescriptor = query;
-      return new QueryDescriptor<T> { FilteredQueryDescriptor = this.FilteredQueryDescriptor };
+			return new QueryDescriptor<T> { FilteredQueryDescriptor = this.FilteredQueryDescriptor };
 		}
 
 		/// <summary>
@@ -333,7 +333,7 @@ namespace Nest
 			var query = new DismaxQueryDescriptor<T>();
 			selector(query);
 			this.DismaxQueryDescriptor = query;
-      return new QueryDescriptor<T> { DismaxQueryDescriptor = this.DismaxQueryDescriptor };
+			return new QueryDescriptor<T> { DismaxQueryDescriptor = this.DismaxQueryDescriptor };
 		}
 		/// <summary>
 		/// A query that wraps a filter or another query and simply returns a constant score equal to the query boost 
@@ -344,7 +344,7 @@ namespace Nest
 			var query = new ConstantScoreQueryDescriptor<T>();
 			selector(query);
 			this.ConstantScoreQueryDescriptor = query;
-      return new QueryDescriptor<T> { ConstantScoreQueryDescriptor = this.ConstantScoreQueryDescriptor };
+			return new QueryDescriptor<T> { ConstantScoreQueryDescriptor = this.ConstantScoreQueryDescriptor };
 		}
 		/// <summary>
 		/// custom_boost_factor query allows to wrap another query and multiply its score by the provided boost_factor.
@@ -356,7 +356,7 @@ namespace Nest
 			var query = new CustomBoostFactorQueryDescriptor<T>();
 			selector(query);
 			this.CustomBoostFactorQueryDescriptor = query;
-      return new QueryDescriptor<T> { CustomBoostFactorQueryDescriptor = this.CustomBoostFactorQueryDescriptor };
+			return new QueryDescriptor<T> { CustomBoostFactorQueryDescriptor = this.CustomBoostFactorQueryDescriptor };
 		}
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
@@ -367,7 +367,7 @@ namespace Nest
 			var query = new CustomScoreQueryDescriptor<T>();
 			customScoreQuery(query);
 			this.CustomScoreQueryDescriptor = query;
-      return new QueryDescriptor<T> { CustomScoreQueryDescriptor = this.CustomScoreQueryDescriptor };
+			return new QueryDescriptor<T> { CustomScoreQueryDescriptor = this.CustomScoreQueryDescriptor };
 		}
 		/// <summary>
 		/// A query that matches documents matching boolean combinations of other queries. The bool query maps to 
@@ -379,7 +379,7 @@ namespace Nest
 			var query = new BoolQueryDescriptor<T>();
 			booleanQuery(query);
 			this.BoolQueryDescriptor = query;
-      return new QueryDescriptor<T> { BoolQueryDescriptor = this.BoolQueryDescriptor };
+			return new QueryDescriptor<T> { BoolQueryDescriptor = this.BoolQueryDescriptor };
 		}
 		/// <summary>
 		/// he boosting query can be used to effectively demote results that match a given query. 
@@ -392,7 +392,7 @@ namespace Nest
 			var query = new BoostingQueryDescriptor<T>();
 			boostingQuery(query);
 			this.BoostingQueryDescriptor = query;
-      return new QueryDescriptor<T> { BoostingQueryDescriptor = this.BoostingQueryDescriptor };
+			return new QueryDescriptor<T> { BoostingQueryDescriptor = this.BoostingQueryDescriptor };
 		}
 		/// <summary>
 		/// A query that matches all documents. Maps to Lucene MatchAllDocsQuery.
@@ -409,7 +409,7 @@ namespace Nest
 			if (Boost.HasValue)
 				this.MatchAllQuery.Boost = Boost.Value;
 
-      return new QueryDescriptor<T> { MatchAllQuery = this.MatchAllQuery };
+			return new QueryDescriptor<T> { MatchAllQuery = this.MatchAllQuery };
 		}
 
 		/// <summary>
@@ -433,7 +433,7 @@ namespace Nest
 			if (Boost.HasValue)
 				term.Boost = Boost;
 			this.TermQuery = term;
-      return new QueryDescriptor<T> { TermQuery = this.TermQuery };
+			return new QueryDescriptor<T> { TermQuery = this.TermQuery };
 		}
 
 		/// <summary>
@@ -463,7 +463,7 @@ namespace Nest
 			if (Boost.HasValue)
 				wildcard.Boost = Boost;
 			this.WildcardQuery = wildcard;
-      return new QueryDescriptor<T> { WildcardQuery = this.WildcardQuery };
+			return new QueryDescriptor<T> { WildcardQuery = this.WildcardQuery };
 		}
 		
 		/// <summary>
@@ -488,7 +488,7 @@ namespace Nest
 			if (Boost.HasValue)
 				prefix.Boost = Boost;
 			this.PrefixQuery = prefix;
-      return new QueryDescriptor<T> { PrefixQuery = this.PrefixQuery };
+			return new QueryDescriptor<T> { PrefixQuery = this.PrefixQuery };
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. Note, this filter does not require 
@@ -497,7 +497,7 @@ namespace Nest
 		public BaseQuery Ids(IEnumerable<string> values)
 		{
 			this.IdsQuery = new IdsQuery { Values = values };
-      return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
+			return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -508,7 +508,7 @@ namespace Nest
 		{
 			type.ThrowIfNullOrEmpty("type");
 			this.IdsQuery = new IdsQuery { Values = values, Type = new[] { type } };
-      return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
+			return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -518,7 +518,7 @@ namespace Nest
 		public BaseQuery Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
 			this.IdsQuery = new IdsQuery { Values = values, Type = types };
-      return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
+			return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
 		}
 
 		/// <summary>
@@ -540,7 +540,7 @@ namespace Nest
 			if (Boost.HasValue)
 				spanTerm.Boost = Boost;
 			this.SpanTermQuery = spanTerm;
-      return new QueryDescriptor<T> { SpanTermQuery = this.SpanTermQuery };
+			return new QueryDescriptor<T> { SpanTermQuery = this.SpanTermQuery };
 		}
 		/// <summary>
 		/// Matches spans near the beginning of a field. The span first query maps to Lucene SpanFirstQuery. 
@@ -548,43 +548,43 @@ namespace Nest
 		public BaseQuery SpanFirst(Action<SpanFirstQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-      this.SpanFirstQueryDescriptor = new SpanFirstQueryDescriptor<T>();
-      selector(this.SpanFirstQueryDescriptor);
-      return new QueryDescriptor<T> { SpanFirstQueryDescriptor = this.SpanFirstQueryDescriptor };
+			this.SpanFirstQueryDescriptor = new SpanFirstQueryDescriptor<T>();
+			selector(this.SpanFirstQueryDescriptor);
+			return new QueryDescriptor<T> { SpanFirstQueryDescriptor = this.SpanFirstQueryDescriptor };
 		}
 		/// <summary>
 		/// Matches spans which are near one another. One can specify slop, the maximum number of 
 		/// intervening unmatched positions, as well as whether matches are required to be in-order.
 		/// The span near query maps to Lucene SpanNearQuery.
 		/// </summary>
-    public BaseQuery SpanNear(Action<SpanNearQueryDescriptor<T>> selector)
+		public BaseQuery SpanNear(Action<SpanNearQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-      this.SpanNearQueryDescriptor = new SpanNearQueryDescriptor<T>();
-      selector(this.SpanNearQueryDescriptor);
-      return new QueryDescriptor<T> { SpanNearQueryDescriptor = this.SpanNearQueryDescriptor };
+			this.SpanNearQueryDescriptor = new SpanNearQueryDescriptor<T>();
+			selector(this.SpanNearQueryDescriptor);
+			return new QueryDescriptor<T> { SpanNearQueryDescriptor = this.SpanNearQueryDescriptor };
 		}
 		/// <summary>
 		/// Matches the union of its span clauses. 
 		/// The span or query maps to Lucene SpanOrQuery. 
 		/// </summary>
-    public BaseQuery SpanOr(Action<SpanOrQueryDescriptor<T>> selector)
+		public BaseQuery SpanOr(Action<SpanOrQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-      this.SpanOrQueryDescriptor = new SpanOrQueryDescriptor<T>();
-      selector(this.SpanOrQueryDescriptor);
-      return new QueryDescriptor<T> { SpanOrQueryDescriptor = this.SpanOrQueryDescriptor };
+			this.SpanOrQueryDescriptor = new SpanOrQueryDescriptor<T>();
+			selector(this.SpanOrQueryDescriptor);
+			return new QueryDescriptor<T> { SpanOrQueryDescriptor = this.SpanOrQueryDescriptor };
 		}
 		/// <summary>
 		/// Removes matches which overlap with another span query. 
 		/// The span not query maps to Lucene SpanNotQuery.
 		/// </summary>
-    public BaseQuery SpanNot(Action<SpanNotQueryDescriptor<T>> selector)
+		public BaseQuery SpanNot(Action<SpanNotQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-      this.SpanNotQueryDescriptor = new SpanNotQueryDescriptor<T>();
-      selector(this.SpanNotQueryDescriptor);
-      return new QueryDescriptor<T> { SpanNotQueryDescriptor = this.SpanNotQueryDescriptor };
+			this.SpanNotQueryDescriptor = new SpanNotQueryDescriptor<T>();
+			selector(this.SpanNotQueryDescriptor);
+			return new QueryDescriptor<T> { SpanNotQueryDescriptor = this.SpanNotQueryDescriptor };
 		}
 	
 	}

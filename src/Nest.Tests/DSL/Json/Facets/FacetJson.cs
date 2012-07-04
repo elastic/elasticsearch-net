@@ -17,7 +17,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .RawQuery(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetTerm(q=>q
           .OnField(f=>f.Name)
           .Global()
@@ -47,7 +47,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .RawQuery(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetTerm(q=>q
           .Scope("some_nested_query")
           .OnField(f=>f.Name)
@@ -77,7 +77,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .RawQuery(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetTerm(q => q
           .Nested("some_nested_query")
           .OnField(f => f.Name)

@@ -187,7 +187,7 @@ namespace Nest
 		internal BaseQuery _Query { get; set; }
 
 		internal string _RawFilter { get; set; }
-		internal FilterDescriptor<T> _Filter { get; set; }
+		internal BaseFilter _Filter { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
 		internal IList<string> _Fields { get; set; }
@@ -715,7 +715,7 @@ namespace Nest
 		/// Describe the query to perform
 		/// </summary>
 		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> RawQuery(string rawQuery)
+		public SearchDescriptor<T> QueryRaw(string rawQuery)
 		{
 			rawQuery.ThrowIfNull("rawQuery");
 			this._RawQuery = rawQuery;
@@ -725,13 +725,24 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Filter(Action<FilterDescriptor<T>> filter)
+		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filter)
 		{
 			filter.ThrowIfNull("filter");
-			this._Filter = new FilterDescriptor<T>();
-			filter(this._Filter);
+			var f = new FilterDescriptor<T>();
+			var bf = filter(f);
+			this._Filter = bf;
 			return this;
 		}
+		/// <summary>
+		/// Filter search using a filter descriptor lambda
+		/// </summary>
+		public SearchDescriptor<T> Filter(BaseFilter filter)
+		{
+			filter.ThrowIfNull("filter");
+			this._Filter = filter;
+			return this;
+		}
+
     /// <summary>
     /// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
     /// </summary>
@@ -746,7 +757,7 @@ namespace Nest
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
 		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> Filter(string rawFilter)
+		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
 			rawFilter.ThrowIfNull("rawFilter");
 			this._RawFilter = rawFilter;

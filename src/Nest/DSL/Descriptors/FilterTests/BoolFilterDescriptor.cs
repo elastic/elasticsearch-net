@@ -8,6 +8,16 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+	internal class BoolBaseFilterDescriptor : FilterBase
+	{
+		[JsonProperty("must")]
+		internal IEnumerable<BaseFilter> _MustFilters { get; set; }
+
+		[JsonProperty("should")]
+		internal IEnumerable<BaseFilter> _ShouldFilters { get; set; }
+	}
+
+	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class BoolFilterDescriptor<T> : FilterBase where T : class
 	{
 		[JsonProperty("must")]

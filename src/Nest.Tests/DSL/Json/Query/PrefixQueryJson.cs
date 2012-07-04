@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 using Nest.TestData.Domain;
 
-namespace Nest.Tests.Dsl.Json.Filter
+namespace Nest.Tests.Dsl.Json.FilterTests
 {
 	[TestFixture]
 	public class PrefixQueryJson

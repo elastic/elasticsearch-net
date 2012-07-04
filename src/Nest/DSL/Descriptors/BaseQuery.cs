@@ -9,7 +9,6 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-
   public class BaseQuery
   {
     [JsonProperty(PropertyName = "bool")]

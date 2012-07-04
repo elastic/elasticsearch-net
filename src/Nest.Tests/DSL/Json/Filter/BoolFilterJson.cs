@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 using Nest.TestData.Domain;
 
-namespace Nest.Tests.Dsl.Json.Filter
+namespace Nest.Tests.Dsl.Json.FilterTests
 {
 	[TestFixture]
 	public class BoolFilterJson
@@ -59,6 +59,64 @@ namespace Nest.Tests.Dsl.Json.Filter
 			}";
 			Assert.True(json.JsonEquals(expected), json);		
 		}
+		[Test]
+		public void BoolFilterOverload()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(f => f.MatchAll() & f.Missing(p => p.LOC))
+			;
+
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						""bool"": {
+							""must"": [
+								{
+									""match_all"": {}
+								},
+								{
+									""missing"": {
+										""field"": ""loc""
+									}
+								}
+							]
+						}
+					}
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+		[Test]
+		public void BoolFilterOverloadStatic()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(Filter.MatchAll() & Filter<ElasticSearchProject>.Missing(p => p.LOC))
+			;
+
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						""bool"": {
+							""must"": [
+								{
+									""match_all"": {}
+								},
+								{
+									""missing"": {
+										""field"": ""loc""
+									}
+								}
+							]
+						}
+					}
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+
 		[Test]
 		public void BoolFilterWithNameAndCache()
 		{
