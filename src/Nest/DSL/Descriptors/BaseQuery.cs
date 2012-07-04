@@ -31,5 +31,15 @@ namespace Nest
       q.BoolQueryDescriptor = bq;
       return q;
     }
+    public static bool operator false(BaseQuery a)
+    {
+      return false;
+    }
+
+    public static bool operator true(BaseQuery a)
+    {
+      return false;
+    }
+
   }
 }

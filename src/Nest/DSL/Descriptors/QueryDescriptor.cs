@@ -236,7 +236,7 @@ namespace Nest
 			var query = new NestedQueryDescriptor<T>();
 			selector(query);
 			this.NestedQueryDescriptor = query;
-			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+			return new QueryDescriptor<T> { NestedQueryDescriptor = this.NestedQueryDescriptor };
 		}
 		/// <summary>
 		/// The indices query can be used when executed across multiple indices, allowing to have a query that executes
