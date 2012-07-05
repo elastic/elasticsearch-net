@@ -714,7 +714,7 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform
 		/// </summary>
-		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
+		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public SearchDescriptor<T> QueryRaw(string rawQuery)
 		{
 			rawQuery.ThrowIfNull("rawQuery");
@@ -756,7 +756,7 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
+		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
 			rawFilter.ThrowIfNull("rawFilter");

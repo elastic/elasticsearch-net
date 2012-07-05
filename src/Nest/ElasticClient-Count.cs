@@ -18,7 +18,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
+		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public CountResponse CountAll(string query) {
 			return this._Count("_count", query);
 		}

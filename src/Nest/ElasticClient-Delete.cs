@@ -574,7 +574,7 @@ namespace Nest
 		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
-		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
+		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public ConnectionStatus DeleteByQuery(string query, DeleteByQueryParameters parameters = null)
 		{
 			var descriptor = new QueryPathDescriptor();
@@ -622,7 +622,7 @@ namespace Nest
 		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
-		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
+		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public Task<ConnectionStatus> DeleteByQueryAsync(string query, DeleteByQueryParameters parameters = null)
 		{
 			var descriptor = new QueryPathDescriptor();

@@ -40,7 +40,7 @@ namespace Nest
 		/// <summary>
 		/// Search using T as the return type, string based.
 		/// </summary>
-		[Obsolete("Passing a query by string? Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
+		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public QueryResponse<T> Search<T>(string query) where T : class
 		{
 			var descriptor = new SearchDescriptor<T>();
