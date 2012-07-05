@@ -702,17 +702,33 @@ namespace Nest
       this._Query = bq;
 			return this;
 		}
-    /// <summary>
-    /// Describe the query to perform using the static Query class
-    /// </summary>
-    public SearchDescriptor<T> Query(BaseQuery query)
-    {
-      query.ThrowIfNull("query");
-      this._Query = query;
-      return this;
-    }
 		/// <summary>
-		/// Describe the query to perform
+		/// Describe the query to perform using the static Query class
+		/// </summary>
+		public SearchDescriptor<T> Query(BaseQuery query)
+		{
+			query.ThrowIfNull("query");
+			this._Query = query;
+			return this;
+		}
+
+		/// <summary>
+		/// Shortcut to .Query(q=>q.QueryString(qs=>qs.Query("string"))
+		/// Does a match_all if the userInput string is null or empty;
+		/// </summary>
+		public SearchDescriptor<T> QueryString(string userInput)
+		{
+			var q = new QueryDescriptor<T>();
+			if (userInput.IsNullOrEmpty())
+				q.MatchAll();
+			else
+				q.QueryString(qs=>qs.Query(userInput));
+			this._Query = q;
+			return this;
+		}
+
+		/// <summary>
+		/// Describe the query to perform as a raw json string
 		/// </summary>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public SearchDescriptor<T> QueryRawJson(string rawQuery)
@@ -734,7 +750,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Filter search using a filter descriptor lambda
+		/// Filter search
 		/// </summary>
 		public SearchDescriptor<T> Filter(BaseFilter filter)
 		{
@@ -742,6 +758,18 @@ namespace Nest
 			this._Filter = filter;
 			return this;
 		}
+
+		/// <summary>
+		/// Filter search using a raw json string
+		/// </summary>
+		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
+		public SearchDescriptor<T> FilterRawJson(string rawFilter)
+		{
+			rawFilter.ThrowIfNull("rawFilter");
+			this._RawFilter = rawFilter;
+			return this;
+		}
+
 
     /// <summary>
     /// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
@@ -753,17 +781,7 @@ namespace Nest
       highlightDescriptor(this._Highlight);
       return this;
     }
-		/// <summary>
-		/// Filter search using a filter descriptor lambda
-		/// </summary>
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> FilterRawJson(string rawFilter)
-		{
-			rawFilter.ThrowIfNull("rawFilter");
-			this._RawFilter = rawFilter;
-			return this;
-		}
-
+		
 		/// <summary>
 		/// Shorthand for a match_all query without having to specify .Query(q=>q.MatchAll())
 		/// </summary>
