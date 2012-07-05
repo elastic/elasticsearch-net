@@ -715,7 +715,7 @@ namespace Nest
 		/// Describe the query to perform
 		/// </summary>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> QueryRaw(string rawQuery)
+		public SearchDescriptor<T> QueryRawJson(string rawQuery)
 		{
 			rawQuery.ThrowIfNull("rawQuery");
 			this._RawQuery = rawQuery;
@@ -757,7 +757,7 @@ namespace Nest
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> FilterRaw(string rawFilter)
+		public SearchDescriptor<T> FilterRawJson(string rawFilter)
 		{
 			rawFilter.ThrowIfNull("rawFilter");
 			this._RawFilter = rawFilter;

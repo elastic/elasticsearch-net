@@ -17,7 +17,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRaw(@"{ raw : ""query""}")
+        .QueryRawJson(@"{ raw : ""query""}")
         .FacetTermsStats(ts => ts
           .KeyField(f=>f.Name)
           .ValueField(f=>f.LOC)
@@ -41,7 +41,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRaw(@"{ raw : ""query""}")
+        .QueryRawJson(@"{ raw : ""query""}")
         .FacetTermsStats("date_minute", ts => ts
           .KeyScript("doc['date'].date.minuteOfHour * factor1")
           .ValueScript("doc['num1'].value * factor2")

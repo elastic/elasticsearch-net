@@ -17,7 +17,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRaw(@"{ raw : ""query""}")
+        .QueryRawJson(@"{ raw : ""query""}")
         .FacetStatistical(sf=>sf
           .OnField(f=>f.LOC)
         );
@@ -40,7 +40,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRaw(@"{ raw : ""query""}")
+        .QueryRawJson(@"{ raw : ""query""}")
         .FacetStatistical("needs_a_name", sf => sf
           .OnFields(f => f.LOC, f=>f.LongValue)
         );
@@ -63,7 +63,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRaw(@"{ raw : ""query""}")
+        .QueryRawJson(@"{ raw : ""query""}")
         .FacetStatistical("needs_a_name", sf => sf
           .Script("doc['num1'].value + doc['num2'].value")
         );
@@ -86,7 +86,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRaw(@"{ raw : ""query""}")
+        .QueryRawJson(@"{ raw : ""query""}")
         .FacetStatistical("needs_a_name", sf => sf
           .Script("(doc['num1'].value + doc['num2'].value) * factor")
           .Params(p=>p.Add("factor", 5))

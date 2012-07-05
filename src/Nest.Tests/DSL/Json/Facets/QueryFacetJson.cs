@@ -17,7 +17,7 @@ namespace Nest.Tests.Dsl.Json.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRaw(@"{ raw : ""query""}")
+        .QueryRawJson(@"{ raw : ""query""}")
         .FacetQuery("wow_facet", q=>q
           .Term(f=>f.Name, "elasticsearch.pm")
         );
