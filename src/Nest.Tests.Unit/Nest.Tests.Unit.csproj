@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97408393-78AC-45DF-BE6E-4C219A2E456D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nest.Tests.Unit</RootNamespace>
+    <AssemblyName>Nest.Tests.Unit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dep\Newtonsoft.Json.4.5.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Facets\DateHistogramFacetJson.cs" />
+    <Compile Include="Facets\FacetJson.cs" />
+    <Compile Include="Facets\FilterFacetJson.cs" />
+    <Compile Include="Facets\GeoDistanceFacetJson.cs" />
+    <Compile Include="Facets\HistogramFacetJson.cs" />
+    <Compile Include="Facets\QueryFacetJson.cs" />
+    <Compile Include="Facets\RangeFacetJson.cs" />
+    <Compile Include="Facets\StatisticalFacetJson.cs" />
+    <Compile Include="Facets\TermsFacetJson.cs" />
+    <Compile Include="Facets\TermsStatsFacetJson.cs" />
+    <Compile Include="FilterTests\AndFilterJson.cs" />
+    <Compile Include="FilterTests\BoolFilterJson.cs" />
+    <Compile Include="FilterTests\ExistFilterJson.cs" />
+    <Compile Include="FilterTests\GeoBoundingBoxFilterJson.cs" />
+    <Compile Include="FilterTests\GeoDistanceFilterJson.cs" />
+    <Compile Include="FilterTests\GeoDistanceRangeFilterJson.cs" />
+    <Compile Include="FilterTests\GeoPolygonFilterJson.cs" />
+    <Compile Include="FilterTests\HasChildFilterJson.cs" />
+    <Compile Include="FilterTests\IdsFilterJson.cs" />
+    <Compile Include="FilterTests\LimitFilterJson.cs" />
+    <Compile Include="FilterTests\MatchAllFilterJson.cs" />
+    <Compile Include="FilterTests\MissingFilterJson.cs" />
+    <Compile Include="FilterTests\NestedFilterJson.cs" />
+    <Compile Include="FilterTests\NotFilterJson.cs" />
+    <Compile Include="FilterTests\NumericRangeFilterJson.cs" />
+    <Compile Include="FilterTests\OrFilterJson.cs" />
+    <Compile Include="FilterTests\PrefixFilterJson.cs" />
+    <Compile Include="FilterTests\QueryFilterJson.cs" />
+    <Compile Include="FilterTests\RangeFilterJson.cs" />
+    <Compile Include="FilterTests\ScriptFilterJson.cs" />
+    <Compile Include="FilterTests\TermFilterJson.cs" />
+    <Compile Include="FilterTests\TermsFilterJson.cs" />
+    <Compile Include="FilterTests\TypeFilterJson.cs" />
+    <Compile Include="HighlightTests.cs" />
+    <Compile Include="Inferno\IdLookupTests.cs" />
+    <Compile Include="Inferno\PropertyNameResolverTests.cs" />
+    <Compile Include="JsonifyTests.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyVisitorTests.cs" />
+    <Compile Include="QueryTests\BoolQueryJson.cs" />
+    <Compile Include="QueryTests\BoostingQueryJson.cs" />
+    <Compile Include="QueryTests\ConstantScoreQueryJson.cs" />
+    <Compile Include="QueryTests\CustomBoostFactorQueryJson.cs" />
+    <Compile Include="QueryTests\CustomScoreQueryJson.cs" />
+    <Compile Include="QueryTests\DismaxQueryJson.cs" />
+    <Compile Include="QueryTests\FilteredQueryJson.cs" />
+    <Compile Include="QueryTests\FuzzyDateQueryJson.cs" />
+    <Compile Include="QueryTests\FuzzyLikeThisQueryJson.cs" />
+    <Compile Include="QueryTests\FuzzyNumericQueryJson.cs" />
+    <Compile Include="QueryTests\FuzzyQueryJson.cs" />
+    <Compile Include="QueryTests\HasChildQueryJson.cs" />
+    <Compile Include="QueryTests\IdsQueryJson.cs" />
+    <Compile Include="QueryTests\IndicesQueryJson.cs" />
+    <Compile Include="QueryTests\MatchAllQueryJson.cs" />
+    <Compile Include="QueryTests\MoreLikeThisQueryJson.cs" />
+    <Compile Include="QueryTests\NestedQueryJson.cs" />
+    <Compile Include="QueryTests\PrefixQueryJson.cs" />
+    <Compile Include="QueryTests\QueryStringQueryJson.cs" />
+    <Compile Include="QueryTests\RangeQueryJson.cs" />
+    <Compile Include="QueryTests\SpanFirstQueryJson.cs" />
+    <Compile Include="QueryTests\SpanNearQueryJson.cs" />
+    <Compile Include="QueryTests\SpanNotQueryJson.cs" />
+    <Compile Include="QueryTests\SpanOrQueryJson.cs" />
+    <Compile Include="QueryTests\SpanTermQueryJson.cs" />
+    <Compile Include="QueryTests\TermQueryJson.cs" />
+    <Compile Include="QueryTests\TermsQueryJson.cs" />
+    <Compile Include="QueryTests\TextPhrasePrefixQueryJson.cs" />
+    <Compile Include="QueryTests\TextPhraseQueryJson.cs" />
+    <Compile Include="QueryTests\TextQueryJson.cs" />
+    <Compile Include="QueryTests\TopChildrenQueryJson.cs" />
+    <Compile Include="QueryTests\WildcardQueryJson.cs" />
+    <Compile Include="SortTests.cs" />
+    <Compile Include="Test.Designer.cs">
+      <DependentUpon>Test.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UpdateTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Test.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Test.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
+      <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
+      <Name>Nest.Tests.MockData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nest\Nest.csproj">
+      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Name>Nest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

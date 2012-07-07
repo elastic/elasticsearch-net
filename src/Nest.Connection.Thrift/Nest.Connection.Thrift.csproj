@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{704EF910-C4E7-413E-B21F-296EFE732FCF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nest.Connection.Thrift</RootNamespace>
+    <AssemblyName>Nest.Connection.Thrift</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NetReflector">
+      <HintPath>..\..\dep\NetReflector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Collections\THashSet.cs" />
+    <Compile Include="Method.cs" />
+    <Compile Include="Protocol\TBase.cs" />
+    <Compile Include="Protocol\TBase64Utils.cs" />
+    <Compile Include="Protocol\TBinaryProtocol.cs" />
+    <Compile Include="Protocol\TField.cs" />
+    <Compile Include="Protocol\TJSONProtocol.cs" />
+    <Compile Include="Protocol\TList.cs" />
+    <Compile Include="Protocol\TMap.cs" />
+    <Compile Include="Protocol\TMessage.cs" />
+    <Compile Include="Protocol\TMessageType.cs" />
+    <Compile Include="Protocol\TProtocol.cs" />
+    <Compile Include="Protocol\TProtocolException.cs" />
+    <Compile Include="Protocol\TProtocolFactory.cs" />
+    <Compile Include="Protocol\TProtocolUtil.cs" />
+    <Compile Include="Protocol\TSet.cs" />
+    <Compile Include="Protocol\TStruct.cs" />
+    <Compile Include="Protocol\TType.cs" />
+    <Compile Include="Rest.cs" />
+    <Compile Include="RestRequest.cs" />
+    <Compile Include="RestResponse.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="TApplicationException.cs" />
+    <Compile Include="ThriftConnection.cs" />
+    <Compile Include="TProcessor.cs" />
+    <Compile Include="Transport\SocketConnectState.cs" />
+    <Compile Include="Transport\TBufferedTransport.cs" />
+    <Compile Include="Transport\TFramedTransport.cs" />
+    <Compile Include="Transport\THttpClient.cs" />
+    <Compile Include="Transport\TServerSocket.cs" />
+    <Compile Include="Transport\TServerTransport.cs" />
+    <Compile Include="Transport\TSocket.cs" />
+    <Compile Include="Transport\TSocketSettings.cs" />
+    <Compile Include="Transport\TSocketV2.cs" />
+    <Compile Include="Transport\TStreamTransport.cs" />
+    <Compile Include="Transport\TTransport.cs" />
+    <Compile Include="Transport\TTransportException.cs" />
+    <Compile Include="Transport\TTransportFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nest\Nest.csproj">
+      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Name>Nest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

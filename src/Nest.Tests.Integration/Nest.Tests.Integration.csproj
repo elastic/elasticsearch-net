@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nest.Tests.Integration</RootNamespace>
+    <AssemblyName>Nest.Tests.Integration</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoPoco">
+      <HintPath>..\..\dep\autopoco\AutoPoco.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\Newtonsoft.Json.4.5.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\dep\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseElasticSearchTests.cs" />
+    <Compile Include="ConnectionTests.cs" />
+    <Compile Include="BaseMappedElasticSearchTests.cs" />
+    <Compile Include="Indices\ClearCacheTests.cs" />
+    <Compile Include="Indices\SegmentsTests.cs" />
+    <Compile Include="Indices\ExistsTests.cs" />
+    <Compile Include="Indices\StatsTests.cs" />
+    <Compile Include="Integration\AsyncTests.cs" />
+    <Compile Include="Integration\UpdateTests.cs" />
+    <Compile Include="Integration\Filter\BoolFilterTests.cs" />
+    <Compile Include="Integration\HighlightTests.cs" />
+    <Compile Include="Integration\Query\TermQueryDynamic.cs" />
+    <Compile Include="Mapping\NotAnalyzedTest.cs" />
+    <Compile Include="Search\PercolateTests.cs" />
+    <Compile Include="Search\CountTests.cs" />
+    <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
+    <Compile Include="Facet\TermFacetResponseTests.cs" />
+    <Compile Include="Facet\TermStatsFacetResponseTests.cs" />
+    <Compile Include="Facet\StatisticalFacetResponseTests.cs" />
+    <Compile Include="Facet\HistogramFacetResponseTests.cs" />
+    <Compile Include="Facet\RangeFacetResponseTests.cs" />
+    <Compile Include="Facet\BaseFacetTestFixture.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Integration\DeleteTests.cs" />
+    <Compile Include="Indices\IndicesTests.cs" />
+    <Compile Include="Indices\AliasTests.cs" />
+    <Compile Include="Indices\AnalyzeTests.cs" />
+    <Compile Include="Indices\OptimizeTests.cs" />
+    <Compile Include="Indices\FlushTests.cs" />
+    <Compile Include="Indices\SnapshotTests.cs" />
+    <Compile Include="Indices\OpenCloseTests.cs" />
+    <Compile Include="Indices\RefreshTests.cs" />
+    <Compile Include="Mapping\MapTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\QueryDSLTests.cs" />
+    <Compile Include="Search\QueryResponseMapperTests.cs" />
+    <Compile Include="Search\VersionTests.cs" />
+    <Compile Include="Search\ExplainTests.cs" />
+    <Compile Include="Test.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Test.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HackerNews.Indexer\HackerNews.Indexer.csproj">
+      <Project>{E39CC264-A7B3-490D-84B2-D3016D86CD87}</Project>
+      <Name>HackerNews.Indexer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
+      <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
+      <Name>Nest.TestData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nest\Nest.csproj">
+      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Name>Nest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Test.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Test.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

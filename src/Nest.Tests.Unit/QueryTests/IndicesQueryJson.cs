@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using NUnit.Framework;
+
+using Nest.Tests.MockData.Domain;
+
+namespace Nest.Tests.Unit.QueryTests
+{
+	[TestFixture]
+	public class IndicesQueryJson
+	{
+		[Test]
+		public void IndicesRawQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Indices(fz => fz
+						.Indices(new[] { "elasticsearchprojects", "people", "randomindex" })
+						.Query("{ match_all : {} }")
+						.NoMatchQuery(qq => qq.MatchAll())
+					)
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{  
+				indices: {
+					query: { match_all : {} },
+					no_match_query: {
+						match_all: {}
+					},
+					indices: [
+						""elasticsearchprojects"",
+						""people"",
+						""randomindex""
+					]
+				}
+			}}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+		[Test]
+		public void IndicesOtherTypeQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Indices(fz => fz
+						.Indices(new[] { "elasticsearchprojects", "people", "randomindex" })
+						.Query(qq => qq.Term(f => f.Name, "elasticsearch.pm"))
+						.Query<Person>(qq => qq.Term(f => f.FirstName, "joe"))
+						.NoMatchQuery(qq => qq.MatchAll())
+					)
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{  
+				indices: {
+					query: { term : { firstName : {  value : ""joe"" }  } },
+					no_match_query: {
+						match_all: {}
+					},
+					indices: [
+						""elasticsearchprojects"",
+						""people"",
+						""randomindex""
+					]
+				}
+			}}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+		[Test]
+		public void IndicesQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Indices(fz => fz
+						.Indices(new[] { "elasticsearchprojects", "people", "randomindex" })
+						.Query(qq => qq.Term(f => f.Name, "elasticsearch.pm"))
+						.NoMatchQuery(qq => qq.MatchAll())
+					)
+				);
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{  
+				indices: {
+					query: { term : { name : {  value : ""elasticsearch.pm"" }  } },
+					no_match_query: {
+						match_all: {}
+					},
+					indices: [
+						""elasticsearchprojects"",
+						""people"",
+						""randomindex""
+					]
+				}
+			}}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+	}
+}

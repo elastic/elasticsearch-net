@@ -132,9 +132,9 @@ namespace Nest
 		internal bool? _Explain { get; set; }
 		[JsonProperty(PropertyName = "version")]
 		internal bool? _Version { get; set; }
-    [JsonProperty(PropertyName = "track_scores ")]
+	[JsonProperty(PropertyName = "track_scores ")]
 		internal bool? _TrackScores { get; set; }
-    
+	
 		[JsonProperty(PropertyName = "min_score")]
 		internal double? _MinScore { get; set; }
 
@@ -179,9 +179,9 @@ namespace Nest
 				};
 			}
 		}
-    
-    [JsonProperty(PropertyName = "highlight")]
-    internal HighlightDescriptor<T> _Highlight { get; set; }
+	
+	[JsonProperty(PropertyName = "highlight")]
+	internal HighlightDescriptor<T> _Highlight { get; set; }
 
 		internal string _RawQuery { get; set; }
 		internal BaseQuery _Query { get; set; }
@@ -249,14 +249,14 @@ namespace Nest
 			this._Version = version;
 			return this;
 		}
-    /// <summary>
-    /// Make sure we keep calculating score even if we are sorting on a field.
-    /// </summary>
-    public SearchDescriptor<T> TrackScores(bool trackscores = true)
-    {
-      this._TrackScores = trackscores;
-      return this;
-    }
+	/// <summary>
+	/// Make sure we keep calculating score even if we are sorting on a field.
+	/// </summary>
+	public SearchDescriptor<T> TrackScores(bool trackscores = true)
+	{
+	  this._TrackScores = trackscores;
+	  return this;
+	}
 		/// <summary>
 		/// Allows to filter out documents based on a minimum score:
 		/// </summary>
@@ -375,7 +375,7 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
-        this._Sort = new Dictionary<string, object>();
+		this._Sort = new Dictionary<string, object>();
 
 			var key = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
 			this._Sort.Add(key, "desc");
@@ -392,7 +392,7 @@ namespace Nest
 		public SearchDescriptor<T> SortAscending(string field)
 		{
 			if (this._Sort == null)
-        this._Sort = new Dictionary<string, object>();
+		this._Sort = new Dictionary<string, object>();
 			this._Sort.Add(field, "asc");
 			return this;
 		}
@@ -407,56 +407,56 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(string field)
 		{
 			if (this._Sort == null)
-        this._Sort = new Dictionary<string, object>();
+		this._Sort = new Dictionary<string, object>();
 
 			this._Sort.Add(field, "desc");
 			return this;
 		}
-    /// <summary>
-    /// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
-    /// </para>
-    /// </summary>
-    public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
-    {
-      if (this._Sort == null)
-        this._Sort = new Dictionary<string, object>();
+	/// <summary>
+	/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
+	/// </para>
+	/// </summary>
+	public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
+	{
+	  if (this._Sort == null)
+		this._Sort = new Dictionary<string, object>();
 
-      sortSelector.ThrowIfNull("sortSelector");
-      var descriptor = new SortDescriptor<T>();
-      sortSelector(descriptor);
-      this._Sort.Add(descriptor._Field, descriptor);
-      return this;
-    }
-    /// <summary>
-    /// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
-    /// </para>
-    /// </summary>
-    public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
-    {
-      if (this._Sort == null)
-        this._Sort = new Dictionary<string, object>();
+	  sortSelector.ThrowIfNull("sortSelector");
+	  var descriptor = new SortDescriptor<T>();
+	  sortSelector(descriptor);
+	  this._Sort.Add(descriptor._Field, descriptor);
+	  return this;
+	}
+	/// <summary>
+	/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
+	/// </para>
+	/// </summary>
+	public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
+	{
+	  if (this._Sort == null)
+		this._Sort = new Dictionary<string, object>();
 
-      sortSelector.ThrowIfNull("sortSelector");
-      var descriptor = new SortGeoDistanceDescriptor<T>();
-      sortSelector(descriptor);
-      this._Sort.Add(descriptor._Field, descriptor);
-      return this;
-    }
-    /// <summary>
-    /// <para>SortScript() allows you to sort by a distance from a geo point.
-    /// </para>
-    /// </summary>
-    public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
-    {
-      if (this._Sort == null)
-        this._Sort = new Dictionary<string, object>();
+	  sortSelector.ThrowIfNull("sortSelector");
+	  var descriptor = new SortGeoDistanceDescriptor<T>();
+	  sortSelector(descriptor);
+	  this._Sort.Add(descriptor._Field, descriptor);
+	  return this;
+	}
+	/// <summary>
+	/// <para>SortScript() allows you to sort by a distance from a geo point.
+	/// </para>
+	/// </summary>
+	public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
+	{
+	  if (this._Sort == null)
+		this._Sort = new Dictionary<string, object>();
 
-      sortSelector.ThrowIfNull("sortSelector");
-      var descriptor = new SortScriptDescriptor<T>();
-      sortSelector(descriptor);
-      this._Sort.Add("_script", descriptor);
-      return this;
-    }
+	  sortSelector.ThrowIfNull("sortSelector");
+	  var descriptor = new SortScriptDescriptor<T>();
+	  sortSelector(descriptor);
+	  this._Sort.Add("_script", descriptor);
+	  return this;
+	}
 		private SearchDescriptor<T> _Facet<F>(
 			string name,
 			Func<F, F> facet,
@@ -699,7 +699,7 @@ namespace Nest
 			query.ThrowIfNull("query");
 			var q= new QueryDescriptor<T>();
 			var bq = query(q);
-      this._Query = bq;
+	  this._Query = bq;
 			return this;
 		}
 		/// <summary>
@@ -771,16 +771,16 @@ namespace Nest
 		}
 
 
-    /// <summary>
-    /// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
-    /// </summary>
-    public SearchDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
-    {
-      highlightDescriptor.ThrowIfNull("highlightDescriptor");
-      this._Highlight = new HighlightDescriptor<T>();
-      highlightDescriptor(this._Highlight);
-      return this;
-    }
+	/// <summary>
+	/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
+	/// </summary>
+	public SearchDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
+	{
+	  highlightDescriptor.ThrowIfNull("highlightDescriptor");
+	  this._Highlight = new HighlightDescriptor<T>();
+	  highlightDescriptor(this._Highlight);
+	  return this;
+	}
 		
 		/// <summary>
 		/// Shorthand for a match_all query without having to specify .Query(q=>q.MatchAll())
@@ -789,7 +789,7 @@ namespace Nest
 		{
 			var q = new QueryDescriptor<T>();
 			q.MatchAll();
-      this._Query = q;
+	  this._Query = q;
 			return this;
 		}
 	}
