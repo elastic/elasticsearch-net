@@ -7,30 +7,73 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	internal static class BoolBaseQueryDescriptorExtensions
+	{
+		internal static bool CanJoinMust(this BoolBaseQueryDescriptor bq)
+		{
+			return bq == null || (bq != null && bq._CanJoinMust());
+		}
+		internal static bool CanJoinMustNot(this BoolBaseQueryDescriptor bq)
+		{
+			return bq == null || (bq != null && bq._CanJoinMustNot());
+		}
+		internal static bool CanJoinShould(this BoolBaseQueryDescriptor bq)
+		{
+			return bq == null || (bq != null && bq._CanJoinShould());
+		}
+		internal static IEnumerable<BaseQuery> MergeMustQueries(this BaseQuery lbq, BaseQuery rbq)
+		{
+			var lBoolDescriptor = lbq.BoolQueryDescriptor;
+			var lHasMustQueries = lBoolDescriptor != null &&
+ 				lBoolDescriptor._MustQueries.HasAny();
+
+			var rBoolDescriptor = rbq.BoolQueryDescriptor;
+			var rHasMustQueries = rBoolDescriptor != null &&
+				rBoolDescriptor._MustQueries.HasAny();
+
+
+			var lq = lHasMustQueries ? lBoolDescriptor._MustQueries : new[] { lbq };
+			var rq = rHasMustQueries ? rBoolDescriptor._MustQueries : new[] { rbq };
+
+			return lq.Concat(rq);
+		}
+	}
+
+
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	internal class BoolBaseQueryDescriptor
+	public class BoolBaseQueryDescriptor
 	{
 		[JsonProperty("must")]
 		internal IEnumerable<BaseQuery> _MustQueries { get; set; }
 
+		[JsonProperty("must_not")]
+		internal IEnumerable<BaseQuery> _MustNotQueries { get; set; }
+
 		[JsonProperty("should")]
 		internal IEnumerable<BaseQuery> _ShouldQueries { get; set; }
+
+		internal bool _CanJoinMust()
+		{
+			return !_ShouldQueries.HasAny()
+				&& !_MustNotQueries.HasAny();
+		}
+		internal bool _CanJoinShould()
+		{
+			return !_MustQueries.HasAny()
+				&& !_MustNotQueries.HasAny();
+		}
+		internal bool _CanJoinMustNot()
+		{
+			return !_MustQueries.HasAny()
+				&& !_ShouldQueries.HasAny();
+		}
 	}
 	
 
 
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class BoolQueryDescriptor<T> where T : class
+	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor where T : class
 	{
-		[JsonProperty("must")]
-		internal IEnumerable<QueryDescriptor<T>> _MustQueries { get; set; }
-
-		[JsonProperty("must_not")]
-		internal IEnumerable<QueryDescriptor<T>> _MustNotQueries { get; set; }
-
-		[JsonProperty("should")]
-		internal IEnumerable<QueryDescriptor<T>> _ShouldQueries { get; set; }
-
 		[JsonProperty("minimum_number_should_match")]
 		internal int? _MinimumNumberShouldMatches { get; set; }
 

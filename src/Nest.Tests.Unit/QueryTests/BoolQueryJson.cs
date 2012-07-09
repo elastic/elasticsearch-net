@@ -69,6 +69,22 @@ namespace Nest.Tests.Unit.QueryTests
 			
 			//Assert.True(json.JsonEquals(expected), json);
 		}
+		[Test]
+		public void BoolQueryOverloadAvoidUnneededNesting()
+		{
+			var q1 = Query<ElasticSearchProject>.Term(p => p.Name, "elasticsearch.pm");
+			var q2 = Query<ElasticSearchProject>.Term(p => p.Name, "elasticflume");
+			var q3 = Query<ElasticSearchProject>.Term(p => p.Name, "elastica");
+
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q1 && q2 && (q3 || q1));
+
+			var json = ElasticClient.Serialize(s);
+
+			Assert.True(json.JsonEquals("{}"), json);
+		}
 
 		[Test]
 		public void BoolQueryOverloadInLambda()
@@ -106,6 +122,9 @@ namespace Nest.Tests.Unit.QueryTests
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""bool"": {
+							minimum_number_should_match: 1,
+							boost: 2.0,
+						
 							""must"": [
 								{
 									""match_all"": {}
@@ -124,9 +143,7 @@ namespace Nest.Tests.Unit.QueryTests
 										""name"": { value: ""elasticflume"" }
 									}
 								}
-							],
-							minimum_number_should_match: 1,
-							boost: 2.0
+							]
 						}
 					}
 			}";

@@ -1,6 +1,9 @@
 <ProjectConfiguration>
   <CopyReferencedAssembliesToWorkspace>false</CopyReferencedAssembliesToWorkspace>
   <ConsiderInconclusiveTestsAsPassing>false</ConsiderInconclusiveTestsAsPassing>
+  <PreloadReferencedAssemblies>false</PreloadReferencedAssemblies>
+  <AllowDynamicCodeContractChecking>true</AllowDynamicCodeContractChecking>
+  <AllowStaticCodeContractChecking>false</AllowStaticCodeContractChecking>
   <IgnoreThisComponentCompletely>false</IgnoreThisComponentCompletely>
   <RunPreBuildEvents>false</RunPreBuildEvents>
   <RunPostBuildEvents>false</RunPostBuildEvents>
