@@ -1,0 +1,11 @@
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\Nest.Tests.MockData.dll.config
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\Nest.Tests.MockData.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\Nest.Tests.MockData.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\AutoPoco.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\Nest.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\Nest.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\obj\x86\Debug\Nest.Tests.MockData.csprojResolveAssemblyReference.cache
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\obj\x86\Debug\Nest.Tests.MockData.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.MockData\obj\x86\Debug\Nest.Tests.MockData.pdb

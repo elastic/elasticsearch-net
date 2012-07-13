@@ -1,0 +1,7 @@
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest\bin\Debug\Nest.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest\bin\Debug\Nest.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest\obj\Debug\Nest.csprojResolveAssemblyReference.cache
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest\obj\Debug\Nest.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest\obj\Debug\Nest.pdb

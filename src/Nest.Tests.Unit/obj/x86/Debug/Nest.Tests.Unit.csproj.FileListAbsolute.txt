@@ -1,0 +1,15 @@
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Nest.Tests.Unit.exe.config
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Nest.Tests.Unit.exe
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Nest.Tests.Unit.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Nest.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Nest.Tests.MockData.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\nunit.framework.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\AutoPoco.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Nest.Tests.MockData.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Nest.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\bin\Debug\nunit.framework.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\obj\x86\Debug\Nest.Tests.Unit.csprojResolveAssemblyReference.cache
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\obj\x86\Debug\Nest.Tests.Unit.exe
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Unit\obj\x86\Debug\Nest.Tests.Unit.pdb
