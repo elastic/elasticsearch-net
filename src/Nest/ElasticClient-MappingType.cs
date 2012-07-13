@@ -11,15 +11,15 @@ namespace Nest
 		/// <summary>
 		/// Deletes the mapping for the inferred type name of T under the default index
 		/// </summary>
-		public IndicesResponse DeleteMapping<T>() where T : class
+		public IIndicesResponse DeleteMapping<T>() where T : class
 		{
 			string type = this.InferTypeName<T>();
-      return this.DeleteMapping<T>(this.Settings.GetIndexForType<T>(), type);
+            return this.DeleteMapping<T>(this.Settings.GetIndexForType<T>(), type);
 		}
 		/// <summary>
 		/// Deletes the mapping for the inferred type name of T under the specified index
 		/// </summary>
-		public IndicesResponse DeleteMapping<T>(string index) where T : class
+		public IIndicesResponse DeleteMapping<T>(string index) where T : class
 		{
 			string type = this.InferTypeName<T>();
 			return this.DeleteMapping<T>(index, type);
@@ -27,7 +27,7 @@ namespace Nest
 		/// <summary>
 		/// Deletes the mapping for the specified type name under the specified index
 		/// </summary>
-		public IndicesResponse DeleteMapping<T>(string index, string type) where T : class
+		public IIndicesResponse DeleteMapping<T>(string index, string type) where T : class
 		{
 			string path = this.CreatePath(index, type);
 			ConnectionStatus status = this.Connection.DeleteSync(path);
@@ -48,7 +48,7 @@ namespace Nest
 		/// <summary>
 		/// Deletes the mapping for the inferred type name of T under the default index
 		/// </summary>
-		public IndicesResponse DeleteMapping(Type t)
+		public IIndicesResponse DeleteMapping(Type t)
 		{
 			string index = this.Settings.GetIndexForType(t);
 			string type = this.InferTypeName(t);
@@ -57,7 +57,7 @@ namespace Nest
 		/// <summary>
 		/// Deletes the mapping for the inferred type name of T under the specified index
 		/// </summary>
-		public IndicesResponse DeleteMapping(Type t, string index)
+		public IIndicesResponse DeleteMapping(Type t, string index)
 		{
 			string type = this.InferTypeName(t);
 			return this.DeleteMapping(t, index, type);
@@ -65,7 +65,7 @@ namespace Nest
 		/// <summary>
 		/// Deletes the mapping for the specified type name under the specified index
 		/// </summary>
-		public IndicesResponse DeleteMapping(Type t, string index, string type)
+		public IIndicesResponse DeleteMapping(Type t, string index, string type)
 		{
 			string path = this.CreatePath(index, type);
 			ConnectionStatus status = this.Connection.DeleteSync(path);
@@ -91,7 +91,7 @@ namespace Nest
 		/// Type name is the inferred type name for T under the default index
 		/// </para>
 		/// </summary>
-		public IndicesResponse Map<T>() where T : class
+		public IIndicesResponse Map<T>() where T : class
 		{
 			string type = this.InferTypeName<T>();
       return this.Map<T>(this.Settings.GetIndexForType<T>(), type);
@@ -103,7 +103,7 @@ namespace Nest
 		/// Type name is the inferred type name for T under the specified index
 		/// </para>
 		/// </summary>
-		public IndicesResponse Map<T>(string index) where T : class
+		public IIndicesResponse Map<T>(string index) where T : class
 		{
 			string type = this.InferTypeName<T>();
 			return this.Map<T>(index, type);
@@ -115,7 +115,7 @@ namespace Nest
 		/// Type name is the specified type name under the specified index
 		/// </para>
 		/// </summary>
-		public IndicesResponse Map<T>(string index, string type) where T : class
+		public IIndicesResponse Map<T>(string index, string type) where T : class
 		{
 			string path = this.CreatePath(index, type) + "_mapping";
 			string map = this.CreateMapFor<T>(type);
@@ -143,7 +143,7 @@ namespace Nest
 		/// Type name is the inferred type name for T under the default index
 		/// </para>
 		/// </summary>
-		public IndicesResponse Map(Type t)
+		public IIndicesResponse Map(Type t)
 		{
 			string type = this.InferTypeName(t);
 			return this.Map(t, this.Settings.GetIndexForType(t), type);
@@ -155,7 +155,7 @@ namespace Nest
 		/// Type name is the inferred type name for T under the specified index
 		/// </para>
 		/// </summary>
-		public IndicesResponse Map(Type t,string index)
+		public IIndicesResponse Map(Type t,string index)
 		{
 			string type = this.InferTypeName(t);
 			return this.Map(t, index, type);
@@ -167,7 +167,7 @@ namespace Nest
 		/// Type name is the specified type name under the specified index
 		/// </para>
 		/// </summary>
-		public IndicesResponse Map(Type t, string index, string type)
+		public IIndicesResponse Map(Type t, string index, string type)
 		{
 			string path = this.CreatePath(index, type) + "_mapping";
 			string map = this.CreateMapFor(t, type);
@@ -194,14 +194,14 @@ namespace Nest
 		/// <summary>
 		/// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping. Index is the inferred default index
 		/// </summary>
-		public IndicesResponse Map(TypeMapping typeMapping)
+		public IIndicesResponse Map(TypeMapping typeMapping)
 		{
-      return this.Map(typeMapping, this.Settings.DefaultIndex);
+            return this.Map(typeMapping, this.Settings.DefaultIndex);
 		}
 		/// <summary>
 		/// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping.
 		/// </summary>
-		public IndicesResponse Map(TypeMapping typeMapping, string index)
+		public IIndicesResponse Map(TypeMapping typeMapping, string index)
 		{
 			string path = this.CreatePath(index, typeMapping.Name) + "_mapping";
 			var mapping = new Dictionary<string, TypeMapping>();

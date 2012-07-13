@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-
 
 namespace Nest
 {
-	[JsonObject]
-	public class AnalyzeResponse : BaseResponse
-	{
+    public interface IAnalyzeResponse : IResponse
+    {
+        IEnumerable<AnalyzeToken> Tokens { get; }
+    }
+
+    [JsonObject]
+	public class AnalyzeResponse : BaseResponse, IAnalyzeResponse
+    {
 		public AnalyzeResponse()
 		{
 			this.IsValid = true;

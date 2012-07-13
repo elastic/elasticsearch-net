@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	public class IndicesResponse : BaseResponse
-	{
+    public interface IIndicesResponse : IResponse
+    {
+        bool OK { get; }
+        ShardsMetaData ShardsHit { get; }
+    }
+
+    [JsonObject]
+	public class IndicesResponse : BaseResponse, IIndicesResponse
+    {
 		[JsonProperty(PropertyName = "ok")]
 		public bool OK { get; private set; }
 

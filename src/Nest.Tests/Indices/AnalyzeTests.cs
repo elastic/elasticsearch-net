@@ -13,7 +13,7 @@ namespace Nest.Tests.Search
 	[TestFixture]
 	public class AnalyzeTest : BaseElasticSearchTests
 	{
-		private void _defaultAnalyzeAssertations(AnalyzeResponse r)
+		private void _defaultAnalyzeAssertations(IAnalyzeResponse r)
 		{
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Tokens);

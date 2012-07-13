@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace Nest
 {
@@ -20,7 +11,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">Name of the percolator</param>
 		/// <param name="querySelector">Path and query descriptor using dynamics to describe the query</param>
-		public RegisterPercolateResponse RegisterPercolator(string name, Action<QueryPathDescriptor<dynamic>> querySelector)
+		public IRegisterPercolateResponse RegisterPercolator(string name, Action<QueryPathDescriptor<dynamic>> querySelector)
 		{
 			return this.RegisterPercolator<dynamic>(name, querySelector);
 		}
@@ -29,20 +20,20 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">Name of the percolator</param>
 		/// <param name="querySelector">Path and query descriptor using T to describe the query</param>
-		public RegisterPercolateResponse RegisterPercolator<T>(string name, Action<QueryPathDescriptor<T>> querySelector) where T : class
+		public IRegisterPercolateResponse RegisterPercolator<T>(string name, Action<QueryPathDescriptor<T>> querySelector) where T : class
 		{
 		  querySelector.ThrowIfNull("queryDescriptor");
 			var descriptor = new QueryPathDescriptor<T>();
 			querySelector(descriptor);
-      var query = ElasticClient.Serialize(new { query = descriptor });
-      var index = this.Settings.GetIndexForType<T>();
+            var query = ElasticClient.Serialize(new { query = descriptor });
+            var index = this.Settings.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				index = descriptor._Indices.First();
 			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._RegisterPercolator(path, query);
 		}
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public RegisterPercolateResponse RegisterPercolator(string index, string name, string query)
+		public IRegisterPercolateResponse RegisterPercolator(string index, string name, string query)
 		{
 			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._RegisterPercolator(path, query);
@@ -57,16 +48,16 @@ namespace Nest
 		/// Unregister a percolator, on the default index.
 		/// </summary>
 		/// <param name="name">Name of the percolator</param>
-		public UnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class
+		public IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+            var index = this.Settings.GetIndexForType<T>();
 			return this.UnregisterPercolator(index, name);
 		}
 		/// <summary>
 		/// Unregister a percolator
 		/// </summary>
 		/// <param name="name">Name of the percolator</param>
-		public UnregisterPercolateResponse UnregisterPercolator(string index, string name)
+		public IUnregisterPercolateResponse UnregisterPercolator(string index, string name)
 		{
 			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._UnregisterPercolator(path);
@@ -81,7 +72,7 @@ namespace Nest
 		/// <summary>
 		/// Manually percolate an object using its inferred typename and the default index
 		/// </summary>
-		public PercolateResponse Percolate<T>(T @object) where T : class
+		public IPercolateResponse Percolate<T>(T @object) where T : class
 		{
 			var index = this.Settings.GetIndexForType<T>();
 			var type = this.InferTypeName<T>();
@@ -92,7 +83,7 @@ namespace Nest
 		/// <summary>
 		/// Manually percolate an object using its inferred typename and the specified index
 		/// </summary>
-		public PercolateResponse Percolate<T>(string index, T @object) where T : class
+		public IPercolateResponse Percolate<T>(string index, T @object) where T : class
 		{
 			var type = this.InferTypeName<T>();
 			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
@@ -102,7 +93,7 @@ namespace Nest
 		/// <summary>
 		/// Manually percolate an object using the specified typename and the default index
 		/// </summary>
-		public PercolateResponse Percolate<T>(string index, string type, T @object) where T : class
+		public IPercolateResponse Percolate<T>(string index, string type, T @object) where T : class
 		{
 			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
 			return this.Percolate(index, type, "{{doc:{0}}}".F(doc));

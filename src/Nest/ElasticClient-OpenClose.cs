@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
-
-namespace Nest
+﻿namespace Nest
 {
 	public partial class ElasticClient
 	{
 		/// <summary>
 		/// Open index
 		/// </summary>
-		public IndicesOperationResponse OpenIndex(string index)
+		public IIndicesOperationResponse OpenIndex(string index)
 		{
 			string path = this.CreatePath(index) + "_open";
 			return this._OpenClose(path);
@@ -26,7 +13,7 @@ namespace Nest
 		/// <summary>
 		/// Close index
 		/// </summary>
-		public IndicesOperationResponse CloseIndex(string index)
+		public IIndicesOperationResponse CloseIndex(string index)
 		{
 			string path = this.CreatePath(index) + "_close";
 			return this._OpenClose(path);
@@ -34,9 +21,9 @@ namespace Nest
 		/// <summary>
 		/// Open the default index
 		/// </summary>
-		public IndicesOperationResponse OpenIndex<T>() where T : class
+		public IIndicesOperationResponse OpenIndex<T>() where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+            var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return OpenIndex(index);
@@ -44,7 +31,7 @@ namespace Nest
 		/// <summary>
 		/// Close the default index
 		/// </summary>
-		public IndicesOperationResponse CloseIndex<T>() where T : class
+		public IIndicesOperationResponse CloseIndex<T>() where T : class
 		{
       var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
