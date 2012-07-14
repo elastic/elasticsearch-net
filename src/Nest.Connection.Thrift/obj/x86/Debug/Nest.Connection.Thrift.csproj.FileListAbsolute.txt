@@ -1,0 +1,10 @@
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\bin\Debug\Nest.Connection.Thrift.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\bin\Debug\Nest.Connection.Thrift.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\bin\Debug\Nest.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\bin\Debug\NetReflector.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\bin\Debug\Nest.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\obj\x86\Debug\Nest.Connection.Thrift.csprojResolveAssemblyReference.cache
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\obj\x86\Debug\Nest.Connection.Thrift.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Connection.Thrift\obj\x86\Debug\Nest.Connection.Thrift.pdb

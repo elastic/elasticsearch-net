@@ -1,0 +1,17 @@
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Nest.Tests.Integration.dll.config
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Nest.Tests.Integration.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Nest.Tests.Integration.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\AutoPoco.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\HackerNews.Indexer.exe
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Nest.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Nest.Tests.MockData.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\nunit.framework.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\HackerNews.Indexer.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Nest.Tests.MockData.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Nest.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\bin\Debug\nunit.framework.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\obj\Debug\Nest.Tests.Integration.csprojResolveAssemblyReference.cache
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\obj\Debug\Nest.Tests.Integration.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\Nest.Tests.Integration\obj\Debug\Nest.Tests.Integration.pdb

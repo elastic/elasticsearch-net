@@ -1,0 +1,9 @@
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\bin\Debug\HackerNews.Indexer.exe
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\bin\Debug\HackerNews.Indexer.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\bin\Debug\Nest.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\bin\Debug\Nest.pdb
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\obj\x86\Debug\HackerNews.Indexer.csprojResolveAssemblyReference.cache
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\obj\x86\Debug\HackerNews.Indexer.exe
+C:\Users\rclark\Documents\GitHub\NEST\src\HackerNews.Indexer\obj\x86\Debug\HackerNews.Indexer.pdb
