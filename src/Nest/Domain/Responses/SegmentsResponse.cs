@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
 
 namespace Nest
 {
-	[JsonObject]
-	public class SegmentsResponse : BaseResponse
-	{
+    public interface ISegmentsResponse : IResponse
+    {
+        bool OK { get; }
+        ShardsMetaData Shards { get; }
+        Dictionary<string, IndexSegment> Indices { get; set; }
+    }
+
+    [JsonObject]
+	public class SegmentsResponse : BaseResponse, ISegmentsResponse
+    {
 		public SegmentsResponse()
 		{
 			this.IsValid = true;

@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	public class RegisterPercolateResponse : BaseResponse
-	{
+    public interface IRegisterPercolateResponse : IResponse
+    {
+        bool OK { get; }
+        string Index { get; }
+        string Type { get; }
+        string Id { get; }
+        int Version { get; }
+    }
+
+    [JsonObject]
+	public class RegisterPercolateResponse : BaseResponse, IRegisterPercolateResponse
+    {
 		public RegisterPercolateResponse()
 		{
 			this.IsValid = true;

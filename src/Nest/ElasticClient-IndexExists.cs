@@ -1,25 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
-
-namespace Nest
+﻿namespace Nest
 {
 	public partial class ElasticClient
 	{
 		/// <summary>
 		/// Check if the index already exists
 		/// </summary>
-		public IndexExistsResponse IndexExists(string index)
+		public IIndexExistsResponse IndexExists(string index)
 		{
 			return this._IndexExists(index);
 		}

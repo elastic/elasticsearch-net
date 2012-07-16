@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	public class GlobalStatsResponse : BaseResponse
-	{
+    public interface IGlobalStatsResponse : IResponse
+    {
+        bool OK { get; }
+        ShardsMetaData Shards { get; }
+        GlobalStats Stats { get; set; }
+    }
+
+    [JsonObject]
+	public class GlobalStatsResponse : BaseResponse, IGlobalStatsResponse
+    {
 		public GlobalStatsResponse()
 		{
 			this.IsValid = true;

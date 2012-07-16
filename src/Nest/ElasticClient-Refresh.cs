@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
+﻿using System.Collections.Generic;
 
 namespace Nest
 {
@@ -20,14 +8,14 @@ namespace Nest
 		///  refreshes all
 		/// </summary>
 		/// <returns></returns>
-		public IndicesShardResponse Refresh()
+		public IIndicesShardResponse Refresh()
 		{
 			return this.Refresh("_all");
 		}
 		/// <summary>
 		/// Refresh an index
 		/// </summary>
-		public IndicesShardResponse Refresh(string index)
+		public IIndicesShardResponse Refresh(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Refresh(new []{ index });
@@ -35,7 +23,7 @@ namespace Nest
 		/// <summary>
 		/// Refresh multiple indices at once.
 		/// </summary>
-		public IndicesShardResponse Refresh(IEnumerable<string> indices)
+		public IIndicesShardResponse Refresh(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("indices");
 			string path = this.CreatePath(string.Join(",", indices)) + "_refresh";
@@ -44,9 +32,9 @@ namespace Nest
 		/// <summary>
 		/// refresh the connection settings default index for type T
 		/// </summary>
-		public IndicesShardResponse Refresh<T>() where T : class
+		public IIndicesShardResponse Refresh<T>() where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+            var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Refresh(index);

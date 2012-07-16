@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
+﻿using System.Collections.Generic;
 
 namespace Nest
 {
@@ -20,9 +9,9 @@ namespace Nest
 		/// <para>The flush process of an index basically frees memory from the index by flushing data to the index storage and clearing the internal transaction log. By default, ElasticSearch uses memory heuristics in order to automatically trigger flush operations as required in order to clear memory.</para>
 		/// </summary>
 		/// <param name="refresh">optional, wait for the flush operation to complete</param>
-		public IndicesOperationResponse Flush<T>(bool refresh = false) where T : class
+		public IIndicesOperationResponse Flush<T>(bool refresh = false) where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+            var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Flush(index, refresh);
@@ -33,7 +22,7 @@ namespace Nest
 		/// <para>The flush process of an index basically frees memory from the index by flushing data to the index storage and clearing the internal transaction log. By default, ElasticSearch uses memory heuristics in order to automatically trigger flush operations as required in order to clear memory.</para>
 		/// </summary>
 		/// <param name="refresh">optional, wait for the flush operation to complete</param>
-		public IndicesOperationResponse Flush(bool refresh = false)
+		public IIndicesOperationResponse Flush(bool refresh = false)
 		{
 			return this.Flush("_all", refresh);
 		}
@@ -42,7 +31,7 @@ namespace Nest
 		/// <para>The flush process of an index basically frees memory from the index by flushing data to the index storage and clearing the internal transaction log. By default, ElasticSearch uses memory heuristics in order to automatically trigger flush operations as required in order to clear memory.</para>
 		/// </summary>
 		/// <param name="refresh">optional, wait for the flush operation to complete</param>
-		public IndicesOperationResponse Flush(string index, bool refresh = false)
+		public IIndicesOperationResponse Flush(string index, bool refresh = false)
 		{
 			index.ThrowIfNull("index");
 			return this.Flush(new[] { index }, refresh);
@@ -52,20 +41,18 @@ namespace Nest
 		/// <para>The flush process of an index basically frees memory from the index by flushing data to the index storage and clearing the internal transaction log. By default, ElasticSearch uses memory heuristics in order to automatically trigger flush operations as required in order to clear memory.</para>
 		/// </summary>
 		/// <param name="refresh">optional, wait for the flush operation to complete</param>
-		public IndicesOperationResponse Flush(IEnumerable<string> indices, bool refresh = false)
+		public IIndicesOperationResponse Flush(IEnumerable<string> indices, bool refresh = false)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_flush?refresh=" + refresh.ToString().ToLower();
 			return this._Flush(path);
 		}
-
-		
+        
 		private IndicesOperationResponse _Flush(string path)
 		{
 			var status = this.Connection.PostSync(path, "");
 			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
 			return r;
 		}
-
 	}
 }

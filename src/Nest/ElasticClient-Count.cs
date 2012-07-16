@@ -1,15 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace Nest
 {
@@ -19,13 +9,13 @@ namespace Nest
 		/// Performs a count query over all indices
 		/// </summary>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public CountResponse CountAll(string query) {
+		public ICountResponse CountAll(string query) {
 			return this._Count("_count", query);
 		}
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		public CountResponse CountAll(Action<QueryDescriptor> querySelector)
+		public ICountResponse CountAll(Action<QueryDescriptor> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor();
@@ -36,7 +26,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		public CountResponse CountAll<T>(Action<QueryDescriptor<T>> querySelector) where T : class
+		public ICountResponse CountAll<T>(Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor<T>();
@@ -48,7 +38,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over the default index set in the client settings
 		/// </summary>
-		public CountResponse Count(Action<QueryDescriptor> querySelector)
+		public ICountResponse Count(Action<QueryDescriptor> querySelector)
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
@@ -62,7 +52,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over the passed indices
 		/// </summary>
-		public CountResponse Count(IEnumerable<string> indices, Action<QueryDescriptor> querySelector)
+		public ICountResponse Count(IEnumerable<string> indices, Action<QueryDescriptor> querySelector)
 		{
 			indices.ThrowIfEmpty("indices");
 			string path = string.Join(",", indices) + "/_count";
@@ -74,7 +64,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over the multiple types in multiple indices.
 		/// </summary>
-		public CountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor> querySelector)
+		public ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor> querySelector)
 		{
 			indices.ThrowIfEmpty("indices");
 			indices.ThrowIfEmpty("types");
@@ -88,7 +78,7 @@ namespace Nest
 		/// <summary>
 		/// Perform a count query over the default index and the inferred type name for T
 		/// </summary>
-		public CountResponse Count<T>(Action<QueryDescriptor<T>> querySelector) where T : class
+		public ICountResponse Count<T>(Action<QueryDescriptor<T>> querySelector) where T : class
 		{
       var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
@@ -104,7 +94,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over the specified indices
 		/// </summary>
-		public CountResponse Count<T>(IEnumerable<string> indices, Action<QueryDescriptor<T>> querySelector) where T : class
+		public ICountResponse Count<T>(IEnumerable<string> indices, Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");
 			string path = string.Join(",", indices) + "/_count";
@@ -116,7 +106,7 @@ namespace Nest
 		/// <summary>
 		///  Performs a count query over the multiple types in multiple indices.
 		/// </summary>
-		public CountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor<T>> querySelector) where T : class
+		public ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor<T>> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");
 			indices.ThrowIfEmpty("types");

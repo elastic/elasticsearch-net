@@ -6,8 +6,25 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonObject]
-	public class QueryResponse<T> : BaseResponse where T : class 
+    public interface IQueryResponse<T> : IResponse where T : class
+    {
+        ShardsMetaData Shards { get; }
+        HitsMetaData<T> Hits { get; }
+        IDictionary<string, Facet> Facets { get; }
+        int ElapsedMilliseconds { get; }
+        int Total { get; }
+        double MaxScore { get; }
+        IEnumerable<T> Documents { get; }
+        IEnumerable<Hit<T>> DocumentsWithMetaData { get; }
+        IEnumerable<Highlight> Highlights { get; }
+        F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
+        F Facet<F>(string fieldName) where F : class, IFacet;
+        IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem;
+        IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem;
+    }
+
+    [JsonObject]
+	public class QueryResponse<T> : BaseResponse, IQueryResponse<T> where T : class 
 	{
 		public QueryResponse()
 		{

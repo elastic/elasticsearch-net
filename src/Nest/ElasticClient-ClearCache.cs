@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace Nest
 {
@@ -18,36 +9,36 @@ namespace Nest
 		/// <summary>
 		/// Clears all caches of all indices
 		/// </summary>
-		public IndicesResponse ClearCache()
+		public IIndicesResponse ClearCache()
 		{
 			return this.ClearCache(null, ClearCacheOptions.All);
 		}
 		/// <summary>
 		/// Clears the entire cache for the default index set in the client settings
 		/// </summary>
-		public IndicesResponse ClearCache<T>() where T : class
+		public IIndicesResponse ClearCache<T>() where T : class
 		{
-      return this.ClearCache(new List<string> { this.Settings.GetIndexForType<T>() }, ClearCacheOptions.All);
+            return this.ClearCache(new List<string> { this.Settings.GetIndexForType<T>() }, ClearCacheOptions.All);
 		}
 
 		/// <summary>
 		/// Clears the specified caches for the default index set in the client settings
 		/// </summary>
-		public IndicesResponse ClearCache<T>(ClearCacheOptions options) where T : class
+		public IIndicesResponse ClearCache<T>(ClearCacheOptions options) where T : class
 		{
-      return this.ClearCache(new List<string> { this.Settings.GetIndexForType<T>() }, options);
+            return this.ClearCache(new List<string> { this.Settings.GetIndexForType<T>() }, options);
 		}
 		/// <summary>
 		/// Clears the specified caches for all indices
 		/// </summary>
-		public IndicesResponse ClearCache(ClearCacheOptions options)
+		public IIndicesResponse ClearCache(ClearCacheOptions options)
 		{
 			return this.ClearCache(null, options);
 		}
 		/// <summary>
 		/// Clears the specified caches for only the indices passed under indices
 		/// </summary>
-		public IndicesResponse ClearCache(List<string> indices, ClearCacheOptions options)
+		public IIndicesResponse ClearCache(List<string> indices, ClearCacheOptions options)
 		{
 			string path = "/_cache/clear";
 			if (indices != null && indices.Any(s => !string.IsNullOrEmpty(s)))

@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Integration.FacetResponses
 		[Test]
 		public void SimpleTermFacet()
 		{
-			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			IQueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 							""match_all"" : { }
 					},
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Integration.FacetResponses
 		[Test]
 		public void SimpleTermFacetWithExclude()
 		{
-			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			IQueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 							""match_all"" : { }
 					},
@@ -84,8 +84,8 @@ namespace Nest.Tests.Integration.Integration.FacetResponses
 		[Test]
 		public void SimpleTermFacetWithGlobal()
 		{
-	  this.ResetIndexes();
-			QueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+            this.ResetIndexes();
+			IQueryResponse<ElasticSearchProject> queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
 				@" { ""query"" : {
 							""term"" : { ""followers.lastName"" : """ + this._LookFor.ToLower() +
 				@""" }

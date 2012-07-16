@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
+﻿using System.Collections.Generic;
 
 namespace Nest
 {
@@ -18,16 +7,16 @@ namespace Nest
 		/// <summary>
 		/// Snapshot all indices
 		/// </summary>
-		public IndicesShardResponse Snapshot()
+		public IIndicesShardResponse Snapshot()
 		{
 			return this.Snapshot("_all");
 		}
 		/// <summary>
 		/// Snapshot the default index
 		/// </summary>
-		public IndicesShardResponse Snapshot<T>() where T : class
+		public IIndicesShardResponse Snapshot<T>() where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+            var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Snapshot(index);
@@ -35,7 +24,7 @@ namespace Nest
 		/// <summary>
 		/// Snapshot the specified index
 		/// </summary>
-		public IndicesShardResponse Snapshot(string index)
+		public IIndicesShardResponse Snapshot(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Snapshot(new[] { index });
@@ -43,7 +32,7 @@ namespace Nest
 		/// <summary>
 		/// Snapshot the specified indices
 		/// </summary>
-		public IndicesShardResponse Snapshot(IEnumerable<string> indices)
+		public IIndicesShardResponse Snapshot(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("indices");
 			string path = this.CreatePath(string.Join(",", indices)) + "_gateway/snapshot";
