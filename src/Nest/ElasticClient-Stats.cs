@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace Nest
 {
@@ -69,14 +59,14 @@ namespace Nest
 		/// <summary>
 		/// Gets all the stats for all the indices
 		/// </summary>
-		public GlobalStatsResponse Stats()
+		public IGlobalStatsResponse Stats()
 		{
 			return this.Stats(new StatsParams());
 		}
 		/// <summary>
 		/// Gets only the specified stats for all the indices
 		/// </summary>
-		public GlobalStatsResponse Stats(StatsParams parameters)
+		public IGlobalStatsResponse Stats(StatsParams parameters)
 		{
 			var status = this.Connection.GetSync(this._BuildStatsUrl(parameters));
 			var r = this.ToParsedResponse<GlobalStatsResponse>(status);
@@ -86,7 +76,7 @@ namespace Nest
 		/// <summary>
 		/// Gets all the stats for the specified indices
 		/// </summary>
-		public StatsResponse Stats(IEnumerable<string> indices)
+		public IStatsResponse Stats(IEnumerable<string> indices)
 		{
 			indices.ThrowIfEmpty("indices");
 			return this.Stats(indices, new StatsParams());
@@ -94,7 +84,7 @@ namespace Nest
 		/// <summary>
 		/// Gets all the stats for the specified index
 		/// </summary>
-		public StatsResponse Stats(string index)
+		public IStatsResponse Stats(string index)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			return this.Stats(new []{index}, new StatsParams());
@@ -102,7 +92,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the specified stats for the specified indices
 		/// </summary>
-		public StatsResponse Stats(IEnumerable<string> indices, StatsParams parameters)
+		public IStatsResponse Stats(IEnumerable<string> indices, StatsParams parameters)
 		{
 			indices.ThrowIfEmpty("indices");
 			var path = this.CreatePath(string.Join(",",indices)) + this._BuildStatsUrl(parameters);

@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	public class IndicesOperationResponse : BaseResponse
-	{
+    public interface IIndicesOperationResponse : IResponse
+    {
+        bool OK { get; }
+        bool Acknowledged { get; }
+    }
+
+    [JsonObject]
+	public class IndicesOperationResponse : BaseResponse, IIndicesOperationResponse
+    {
 		public IndicesOperationResponse()
 		{
 			this.IsValid = true;

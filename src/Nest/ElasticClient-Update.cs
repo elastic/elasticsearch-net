@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public UpdateResponse Update<T>(Action<UpdateDescriptor<T>> updateSelector) where T : class
+		public IUpdateResponse Update<T>(Action<UpdateDescriptor<T>> updateSelector) where T : class
 		{
 			var updateDescriptor = new UpdateDescriptor<T>();
 			updateSelector(updateDescriptor);
@@ -23,7 +12,7 @@ namespace Nest
 			var path = this.CreateUpdatePath<T>(updateDescriptor);
 			return this._Update(path, data);
 		}
-		public UpdateResponse Update(Action<UpdateDescriptor<dynamic>> updateSelector)
+		public IUpdateResponse Update(Action<UpdateDescriptor<dynamic>> updateSelector)
 		{
 			var updateDescriptor = new UpdateDescriptor<dynamic>();
 			updateSelector(updateDescriptor);

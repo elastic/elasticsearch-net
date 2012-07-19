@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
+﻿using System.Collections.Generic;
 
 namespace Nest
 {
@@ -18,21 +7,21 @@ namespace Nest
 		/// <summary>
 		/// Get segment information for all the indices
 		/// </summary>
-		public SegmentsResponse Segments()
+		public ISegmentsResponse Segments()
 		{
 			return _Segments("_segments");
 		}
 		/// <summary>
 		/// Get the segment information for the specified index
 		/// </summary>
-		public SegmentsResponse Segments(string index)
+		public ISegmentsResponse Segments(string index)
 		{
 			return this.Segments(new [] { index });
 		}
 		/// <summary>
 		/// Get the segment information for the specified indices
 		/// </summary>
-		public SegmentsResponse Segments(IEnumerable<string> indices)
+		public ISegmentsResponse Segments(IEnumerable<string> indices)
 		{
 			var path = this.CreatePath(string.Join(",", indices)) + "_segments";
 			return this._Segments(path);

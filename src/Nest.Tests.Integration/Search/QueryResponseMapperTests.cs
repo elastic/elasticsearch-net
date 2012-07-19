@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 
-		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
+		protected void TestDefaultAssertions(IQueryResponse<ElasticSearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration
 		public void BogusQuery()
 		{
 			var client = this.ConnectedClient;
-			QueryResponse<Post> queryResults = client.Search<Post>(s=>s
+			IQueryResponse<Post> queryResults = client.Search<Post>(s=>s
 				.QueryRawJson("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);

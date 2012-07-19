@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 
 namespace Nest
 {
@@ -30,7 +23,7 @@ namespace Nest
 		/// <returns>an instance of T</returns>
 		public T Get<T>(string id) where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+            var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.InferTypeName<T>();

@@ -27,7 +27,7 @@ namespace Nest
 		/// <summary>
 		/// Return the version info that was set when NEST did its one off sanity checks
 		/// </summary>
-		public ElasticSearchVersionInfo VersionInfo
+		public IElasticSearchVersionInfo VersionInfo
 		{
 			get
 			{

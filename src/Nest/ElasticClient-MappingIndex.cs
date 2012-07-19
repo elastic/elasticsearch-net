@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
@@ -16,15 +14,15 @@ namespace Nest
 		/// <summary>
 		/// Gets the index settings for the default index
 		/// </summary>
-		public IndexSettingsResponse GetIndexSettings()
+		public IIndexSettingsResponse GetIndexSettings()
 		{
-      var index = this.Settings.DefaultIndex;
+            var index = this.Settings.DefaultIndex;
 			return this.GetIndexSettings(index);
 		}
 		/// <summary>
 		/// Gets the index settings for the specified index
 		/// </summary>
-		public IndexSettingsResponse GetIndexSettings(string index)
+		public IIndexSettingsResponse GetIndexSettings(string index)
 		{
 			string path = this.CreatePath(index) + "_settings";
 			var status = this.Connection.GetSync(path);
@@ -54,7 +52,7 @@ namespace Nest
 		/// <summary>
 		/// Update the index settings for the default index
 		/// </summary>
-		public SettingsOperationResponse UpdateSettings(IndexSettings settings)
+		public ISettingsOperationResponse UpdateSettings(IndexSettings settings)
 		{
 			var index = this.Settings.DefaultIndex;
 			return this.UpdateSettings(index, settings);
@@ -62,7 +60,7 @@ namespace Nest
 		/// <summary>
 		/// Update the index settings for the specified index
 		/// </summary>
-		public SettingsOperationResponse UpdateSettings(string index, IndexSettings settings)
+		public ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings)
 		{
 
 			string path = this.CreatePath(index) + "_settings";
@@ -108,7 +106,7 @@ namespace Nest
 		/// <summary>
 		/// Create an index with the specified index settings
 		/// </summary>
-		public IndicesResponse CreateIndex(string index, IndexSettings settings)
+		public IIndicesResponse CreateIndex(string index, IndexSettings settings)
 		{
 			string path = this.CreatePath(index);
 			string data = JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
@@ -126,14 +124,14 @@ namespace Nest
 		/// <summary>
 		/// Delete the default index
 		/// </summary>
-		public IndicesResponse DeleteIndex<T>() where T : class
+		public IIndicesResponse DeleteIndex<T>() where T : class
 		{
-      return this.DeleteIndex(this.Settings.GetIndexForType<T>());
+            return this.DeleteIndex(this.Settings.GetIndexForType<T>());
 		}
 		/// <summary>
 		/// Delete the specified index
 		/// </summary>
-		public IndicesResponse DeleteIndex(string index)
+		public IIndicesResponse DeleteIndex(string index)
 		{
 			string path = this.CreatePath(index);
 

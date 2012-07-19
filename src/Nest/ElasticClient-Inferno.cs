@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -69,8 +68,7 @@ namespace Nest
 			return t => f(t);
 		}
 
-
-		internal string GetIdFor<T>(T @object)
+		public string GetIdFor<T>(T @object)
 		{
 			var type = typeof(T);
 			Func<object, string> cachedLookup;
@@ -109,19 +107,19 @@ namespace Nest
 			}
 		}
 
-		internal static string GetTypeNameFor(Type type)
+    public static string GetTypeNameFor(Type type)
 		{
 			if (!type.IsClass && !type.IsInterface)
 				throw new ArgumentException("Type is not a class or interface", "type");
 			return GetTypeNameForType(type);
 		}
 
-		internal static string GetTypeNameFor<T>() where T : class
+    public static string GetTypeNameFor<T>() where T : class
 		{
 			return GetTypeNameForType(typeof(T));
 		}
 
-		internal static string GetTypeNameForType(Type type)
+    internal static string GetTypeNameForType(Type type)
 		{
 			var typeName = type.Name;
 			var att = PropertyNameResolver.GetElasticPropertyFor(type);
@@ -139,7 +137,6 @@ namespace Nest
 			return this.InferTypeName(typeof(T));
 		}
 
-
 		internal string InferTypeName(Type type)
 		{
 			var typeName = type.Name;
@@ -155,6 +152,7 @@ namespace Nest
 			}
 			return typeName;
 		}
+
 
 
 		internal string CreatePath(string index)

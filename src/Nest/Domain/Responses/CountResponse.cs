@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
-
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	public class CountResponse : BaseResponse
-	{
+    public interface ICountResponse : IResponse
+    {
+        int Count { get; }
+        ShardsMetaData Shards { get; }
+    }
+
+    [JsonObject]
+	public class CountResponse : BaseResponse, ICountResponse
+    {
 		public CountResponse()
 		{
 			this.IsValid = true;

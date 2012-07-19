@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject]
-	public class IndicesShardResponse : BaseResponse
-	{
+    public interface IIndicesShardResponse : IResponse
+    {
+        bool OK { get; }
+        ShardsMetaData Shards { get; }
+    }
+
+    [JsonObject]
+	public class IndicesShardResponse : BaseResponse, IIndicesShardResponse
+    {
 		public IndicesShardResponse()
 		{
 			this.IsValid = true;

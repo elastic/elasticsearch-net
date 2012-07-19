@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Newtonsoft.Json.Converters;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
+﻿using System.Collections.Generic;
 
 namespace Nest
 {
@@ -18,7 +7,7 @@ namespace Nest
 		/// <summary>
 		/// Optimize the default index
 		/// </summary>
-		public IndicesOperationResponse Optimize<T>() where T : class
+		public IIndicesOperationResponse Optimize<T>() where T : class
 		{
       var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
@@ -27,7 +16,7 @@ namespace Nest
 		/// <summary>
 		/// Optimize the default index using the specified optimize params
 		/// </summary>
-		public IndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class
+		public IIndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class
 		{
       var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
@@ -36,7 +25,7 @@ namespace Nest
 		/// <summary>
 		/// Optimize the specified index
 		/// </summary>
-		public IndicesOperationResponse Optimize(string index)
+		public IIndicesOperationResponse Optimize(string index)
 		{
 			index.ThrowIfNull("index");
 			return this.Optimize(new[] { index });
@@ -44,7 +33,7 @@ namespace Nest
 		/// <summary>
 		/// Optimize the specified index using the specified optimize params
 		/// </summary>
-		public IndicesOperationResponse Optimize(string index, OptimizeParams optimizeParameters)
+		public IIndicesOperationResponse Optimize(string index, OptimizeParams optimizeParameters)
 		{
 			index.ThrowIfNull("index");
 			return this.Optimize(new[] { index }, optimizeParameters);
@@ -52,21 +41,21 @@ namespace Nest
 		/// <summary>
 		/// Optimize all indices
 		/// </summary>
-		public IndicesOperationResponse Optimize()
+		public IIndicesOperationResponse Optimize()
 		{
 			return this.Optimize("_all");
 		}
 		/// <summary>
 		/// Optimize all indices using the specified optimize params
 		/// </summary>
-		public IndicesOperationResponse Optimize(OptimizeParams optimizeParameters)
+		public IIndicesOperationResponse Optimize(OptimizeParams optimizeParameters)
 		{
 			return this.Optimize("_all", optimizeParameters);
 		}
 		/// <summary>
 		/// Optimize the specified indices
 		/// </summary>
-		public IndicesOperationResponse Optimize(IEnumerable<string> indices)
+		public IIndicesOperationResponse Optimize(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_optimize";
@@ -75,7 +64,7 @@ namespace Nest
 		/// <summary>
 		/// Optimize the specified indices using the specified optimize params
 		/// </summary>
-		public IndicesOperationResponse Optimize(IEnumerable<string> indices, OptimizeParams optimizeParameters)
+		public IIndicesOperationResponse Optimize(IEnumerable<string> indices, OptimizeParams optimizeParameters)
 		{
 			indices.ThrowIfNull("index");
 			string path = this.CreatePath(string.Join(",", indices)) + "_optimize";

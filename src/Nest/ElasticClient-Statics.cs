@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
 using Newtonsoft.Json.Converters;
-
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Reflection;
 using Nest.Resolvers.Converters;
 using Nest.Resolvers;
 
