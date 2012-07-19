@@ -99,10 +99,12 @@ namespace Nest.Tests.Unit.Inferno
 					mp => mp.ConstantScore(cs => cs.Filter(filter => filter.Term(x => x.MyCustomOtherClass.MyProperty, "serverid")))
 				  )
 				)
+				&& query.Term(f=>f.CreateDate, "x")
 			  )
 			);
 			StringAssert.Contains("custom.MID", result.ConnectionStatus.Request);
 			StringAssert.Contains("myCustomOtherClass.MID", result.ConnectionStatus.Request);
+			StringAssert.Contains("CreateDate", result.ConnectionStatus.Request);
 
 		}
 	}
