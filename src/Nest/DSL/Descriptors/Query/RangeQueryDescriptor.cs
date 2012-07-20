@@ -110,9 +110,67 @@ namespace Nest
 			this._To = to;
 			this._ToInclusive = true;
 			return this;
-		}		
+		}
 		#endregion
+		#region DateTime
+		/// <summary>
+		/// The lower bound. Defaults to start from the first.
+		/// </summary>
+		/// <returns></returns>
+		public RangeQueryDescriptor<T> From(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+		{
+			
+			this._From = from.ToString(format);
+			return this;
+		}
 
+		/// <summary>
+		/// The upper bound. Defaults to unbounded.
+		/// </summary>
+		public RangeQueryDescriptor<T> To(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+		{
+			this._To = to.ToString(format);
+			return this;
+		}
+
+
+		/// <summary>
+		/// Same as setting from and from_inclusive to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Greater(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+		{
+			this._From = from.ToString(format);
+			this._FromInclusive = false;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting from and from_inclusive to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+		{
+			this._From = from.ToString(format);
+			this._FromInclusive = true;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and to_inclusive to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Lower(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+		{
+			this._To = to.ToString(format);
+			this._ToInclusive = false;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and to_inclusive to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+		{
+			this._To = to.ToString(format);
+			this._ToInclusive = true;
+			return this;
+		}
+		#endregion
 
 		#region int
 		/// <summary>

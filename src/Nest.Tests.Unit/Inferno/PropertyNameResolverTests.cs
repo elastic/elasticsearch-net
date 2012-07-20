@@ -88,7 +88,7 @@ namespace Nest.Tests.Unit.Inferno
 		[Test]
 		public void SearchUsesTheProperResolver()
 		{
-			var settings = new ConnectionSettings(new Uri("http://localhost:9200")).SetDefaultIndex(Test.Default.DefaultIndex);
+			var settings = new ConnectionSettings(Test.Default.Uri).SetDefaultIndex(Test.Default.DefaultIndex);
 			var client = new ElasticClient(settings);
 			var result = client.Search<SomeOtherClass>(s => s
 			  .SortDescending(f => f.MyCustomOtherClass.MyProperty)
@@ -105,7 +105,25 @@ namespace Nest.Tests.Unit.Inferno
 			StringAssert.Contains("custom.MID", result.ConnectionStatus.Request);
 			StringAssert.Contains("myCustomOtherClass.MID", result.ConnectionStatus.Request);
 			StringAssert.Contains("CreateDate", result.ConnectionStatus.Request);
-
 		}
+		//[Test]
+		//public void SearchUsesTheProperResolver()
+		//{
+		//	var settings = new ConnectionSettings(Test.Default.Uri).SetDefaultIndex(Test.Default.DefaultIndex);
+		//	var client = new ElasticClient(settings);
+		//	var result = client.Search<SomeOtherClass>(s => s
+		//	  .SortDescending(f => f.MyCustomOtherClass.MyProperty)
+		//	  .FacetDateHistogram("CreateDate", fd => fd.OnField(fi => fi.CreateDate).Interval(DateInterval.Hour))
+		//	  .Query(query => query.Range(r=>r
+		//		  .OnField("CreateDate")
+		//		  .From(
+
+		//		)
+		//	  )
+		//	);
+		//	StringAssert.Contains("custom.MID", result.ConnectionStatus.Request);
+		//	StringAssert.Contains("myCustomOtherClass.MID", result.ConnectionStatus.Request);
+		//	StringAssert.Contains("CreateDate", result.ConnectionStatus.Request);
+		//}
 	}
 }

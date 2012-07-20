@@ -54,6 +54,7 @@ namespace Nest
 			get { return this._uri; }
 		}
 
+
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
 		public Func<string, string> TypeNameInferrer { get; private set; }

@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
     internal sealed partial class Test : global::System.Configuration.ApplicationSettingsBase {
         
         private static Test defaultInstance = ((Test)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Test())));
@@ -73,7 +73,7 @@ namespace Nest.Tests.Unit {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://127.0.0.1:9200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://127.0.0.1.:9200")]
         public global::System.Uri Uri {
             get {
                 return ((global::System.Uri)(this["Uri"]));
