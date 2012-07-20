@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Integration.Search
 		[Test]
 		public void SimpleExplain()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 					@" {
 						""explain"": true,
 						""query"" : {
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Integration.Search
 		[Test]
 		public void ComplexExplain()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 					@" { ""explain"": true, 
 						""query"" : {
 						  ""fuzzy"" : { 

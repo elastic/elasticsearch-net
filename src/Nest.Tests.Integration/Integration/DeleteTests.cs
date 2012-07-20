@@ -19,7 +19,7 @@ namespace Nest.Tests.Integration.Integration.Integration
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""query_string"" : {
 							""query"" : ""*""
@@ -53,7 +53,7 @@ namespace Nest.Tests.Integration.Integration.Integration
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""fuzzy"" : {
 							""followers.firstName"" : """ + NestTestData.Data.First().Followers.First().FirstName.ToLower() + @"x""
@@ -187,7 +187,7 @@ namespace Nest.Tests.Integration.Integration.Integration
 		public void RemoveAllByPassingAsIEnumerable()
 		{
 			this.ResetIndexes();
-			var result = this.ConnectedClient.Search<ElasticSearchProject>(
+			var result = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 					@" { ""query"" : {
 							""match_all"" : { }
 					} }"
@@ -199,7 +199,7 @@ namespace Nest.Tests.Integration.Integration.Integration
 			var totalResults = result.Total;
 			this.ConnectedClient.Delete(result.Documents, new SimpleBulkParameters() { Refresh = true });
 
-			result = this.ConnectedClient.Search<ElasticSearchProject>(
+			result = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 					@" { ""query"" : {
 							""match_all"" : { }
 					} }"

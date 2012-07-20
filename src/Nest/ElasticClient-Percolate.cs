@@ -76,7 +76,7 @@ namespace Nest
 		{
 			var index = this.Settings.GetIndexForType<T>();
 			var type = this.InferTypeName<T>();
-			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
+			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, IndexSerializationSettings);
 
 			return this.Percolate(index, type,"{{doc:{0}}}".F(doc));
 		}

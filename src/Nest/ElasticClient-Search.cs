@@ -36,7 +36,7 @@ namespace Nest
 		/// Search using T as the return type, string based.
 		/// </summary>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public IQueryResponse<T> Search<T>(string query) where T : class
+		public IQueryResponse<T> SearchRaw<T>(string query) where T : class
 		{
 			var descriptor = new SearchDescriptor<T>();
 			var path = this.GetPathForTyped(descriptor);

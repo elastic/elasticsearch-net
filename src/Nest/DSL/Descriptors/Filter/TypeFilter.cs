@@ -8,6 +8,7 @@ namespace Nest
 {
 	public class TypeFilter : FilterBase
 	{
+		[JsonProperty(PropertyName = "value")]
 		public string Value { get; set;}
 	}
 }

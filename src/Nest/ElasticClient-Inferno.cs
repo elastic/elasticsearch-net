@@ -29,7 +29,7 @@ namespace Nest
 			//var type = typeof(T);
 			var typeName = this.InferTypeName<T>();
 			return this.CreatePathFor<T>(@object, index, typeName);
-			
+
 		}
 		internal string CreatePathFor<T>(T @object, string index, string type) where T : class
 		{
@@ -79,10 +79,10 @@ namespace Nest
 			var propertyName = (esTypeAtt != null) ? esTypeAtt.IdProperty : string.Empty;
 			if (string.IsNullOrWhiteSpace(propertyName))
 				propertyName = "Id";
-			
+
 			var idProperty = type.GetProperty(propertyName);
 			if (idProperty == null)
-			{ 
+			{
 				throw new Exception("Could not infer id for object of type" + type.FullName);
 			}
 			try
@@ -91,7 +91,8 @@ namespace Nest
 				var method = typeof(ElasticClient).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 				var generic = method.MakeGenericMethod(type, getMethod.ReturnType);
 				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });
-				cachedLookup = o=> {
+				cachedLookup = o =>
+				{
 					T obj = (T)o;
 					var v = func(obj);
 					return v.ToString();
@@ -107,19 +108,19 @@ namespace Nest
 			}
 		}
 
-    public static string GetTypeNameFor(Type type)
+		public static string GetTypeNameFor(Type type)
 		{
 			if (!type.IsClass && !type.IsInterface)
 				throw new ArgumentException("Type is not a class or interface", "type");
 			return GetTypeNameForType(type);
 		}
 
-    public static string GetTypeNameFor<T>() where T : class
+		public static string GetTypeNameFor<T>() where T : class
 		{
 			return GetTypeNameForType(typeof(T));
 		}
 
-    internal static string GetTypeNameForType(Type type)
+		internal static string GetTypeNameForType(Type type)
 		{
 			var typeName = type.Name;
 			var att = PropertyNameResolver.GetElasticPropertyFor(type);
@@ -192,11 +193,11 @@ namespace Nest
 		{
 			return this.GenerateBulkCommand<T>(@objects, index, "index");
 		}
-		private string GenerateBulkIndexCommand<T>(IEnumerable<T> @objects, string index, string typeName) where T : class 
+		private string GenerateBulkIndexCommand<T>(IEnumerable<T> @objects, string index, string typeName) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, index, typeName, "index");
 		}
-		private string GenerateBulkIndexCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName) where T : class 
+		private string GenerateBulkIndexCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, index, typeName, "index");
 		}
@@ -289,7 +290,7 @@ namespace Nest
 				sb.Append(objectAction);
 				if (command == "index")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, SerializationSettings);
+					string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, IndexSerializationSettings);
 					sb.Append(jsonCommand + "\n");
 				}
 			}
@@ -297,7 +298,7 @@ namespace Nest
 			return json;
 
 
-			
+
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName, string command) where T : class
 		{
@@ -338,7 +339,7 @@ namespace Nest
 			var json = sb.ToString();
 			return json;
 		}
-	
+
 		private string AppendSimpleParametersToPath(string path, ISimpleUrlParameters urlParameters)
 		{
 			if (urlParameters == null)
@@ -349,7 +350,7 @@ namespace Nest
 			if (urlParameters.Replication != Replication.Sync) //sync == default
 				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
-			
+
 			if (urlParameters.Refresh) //false == default
 				parameters.Add("refresh=true");
 
@@ -369,7 +370,7 @@ namespace Nest
 			if (urlParameters.Consistency != Consistency.Quorum) //quorum == default
 				parameters.Add("consistency=" + urlParameters.Replication.ToString().ToLower());
 
-			if (!urlParameters.Routing.IsNullOrEmpty()) 
+			if (!urlParameters.Routing.IsNullOrEmpty())
 				parameters.Add("routing=" + urlParameters.Routing);
 
 			path += "?" + string.Join("&", parameters.ToArray());

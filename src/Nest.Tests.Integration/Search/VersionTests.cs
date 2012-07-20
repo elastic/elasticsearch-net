@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Integration.Search
 		[Test]
 		public void SimpleVersion()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 					@" {
 						""version"": true,
 						""query"" : {

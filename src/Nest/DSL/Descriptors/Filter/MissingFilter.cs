@@ -8,6 +8,7 @@ namespace Nest
 {
 	public class MissingFilter : FilterBase
 	{
+		[JsonProperty(PropertyName = "field")]
 		public string Field { get; set;}
 	}
 }

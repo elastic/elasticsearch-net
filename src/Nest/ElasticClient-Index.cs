@@ -97,8 +97,8 @@ namespace Nest
 		private ConnectionStatus _indexToPath<T>(T @object, string path) where T : class
 		{
 			path.ThrowIfNull("path");
-			
-			string json = JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
+
+			string json = JsonConvert.SerializeObject(@object, Formatting.Indented, IndexSerializationSettings);
 
 			return this.Connection.PostSync(path, json);
 		}
@@ -192,7 +192,7 @@ namespace Nest
 		
 		private Task<ConnectionStatus> _indexAsyncToPath<T>(T @object, string path) where T : class
 		{
-			string json = JsonConvert.SerializeObject(@object, Formatting.None, SerializationSettings);
+			string json = JsonConvert.SerializeObject(@object, Formatting.None, IndexSerializationSettings);
 			return this.Connection.Post(path, json);
 		}
 

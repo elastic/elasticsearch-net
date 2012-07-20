@@ -106,24 +106,22 @@ namespace Nest.Tests.Unit.Inferno
 			StringAssert.Contains("myCustomOtherClass.MID", result.ConnectionStatus.Request);
 			StringAssert.Contains("CreateDate", result.ConnectionStatus.Request);
 		}
-		//[Test]
-		//public void SearchUsesTheProperResolver()
-		//{
-		//	var settings = new ConnectionSettings(Test.Default.Uri).SetDefaultIndex(Test.Default.DefaultIndex);
-		//	var client = new ElasticClient(settings);
-		//	var result = client.Search<SomeOtherClass>(s => s
-		//	  .SortDescending(f => f.MyCustomOtherClass.MyProperty)
-		//	  .FacetDateHistogram("CreateDate", fd => fd.OnField(fi => fi.CreateDate).Interval(DateInterval.Hour))
-		//	  .Query(query => query.Range(r=>r
-		//		  .OnField("CreateDate")
-		//		  .From(
+		[Test]
+		public void SearchDoesntLowercaseStringFieldOverload()
+		{
+			var settings = new ConnectionSettings(Test.Default.Uri).SetDefaultIndex(Test.Default.DefaultIndex);
+			var client = new ElasticClient(settings);
+			var result = client.Search<SomeOtherClass>(s => s
+			  .SortDescending("CreateDate2")
+			  .FacetDateHistogram("CreateDate2", fd => fd.OnField("CreateDate2").Interval(DateInterval.Hour))
+			  .Query(query => query.Range(r=>r
+				  .OnField("CreateDate2")
+				  .From(DateTime.UtcNow.AddYears(-1))
 
-		//		)
-		//	  )
-		//	);
-		//	StringAssert.Contains("custom.MID", result.ConnectionStatus.Request);
-		//	StringAssert.Contains("myCustomOtherClass.MID", result.ConnectionStatus.Request);
-		//	StringAssert.Contains("CreateDate", result.ConnectionStatus.Request);
-		//}
+				)
+			  )
+			);
+			StringAssert.DoesNotContain("createDate2", result.ConnectionStatus.Request);
+		}
 	}
 }

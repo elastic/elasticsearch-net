@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Integration.Search
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 				@" { ""query"" : {
 						    ""match_all"" : { }
 				} }"

@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Integration.FacetResponses
 			this.DeleteIndices();
 			this.ConnectedClient.Map<ElasticSearchProject>();
 			this.BulkIndexData();
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(
+			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },

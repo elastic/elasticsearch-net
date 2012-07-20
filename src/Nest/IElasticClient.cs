@@ -204,7 +204,7 @@ namespace Nest
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-		IQueryResponse<T> Search<T>(string query) where T : class;
+		IQueryResponse<T> SearchRaw<T>(string query) where T : class;
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(System.Collections.Generic.IEnumerable<string> indices);
 		ISegmentsResponse Segments(string index);
