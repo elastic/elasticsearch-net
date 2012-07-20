@@ -104,6 +104,37 @@ namespace Nest.Tests.Unit.Query
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
+		public void RangeFloats()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(ff => ff
+					.Range(n => n
+						.OnField(f => f.LOC)
+						.From(10.0F)
+						.To(20.0F)
+						.FromExclusive()
+					)
+				);
+
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				query : {
+						range: {
+							""loc.sort"": {
+								from: 10.0,
+								to: 20.0,
+								include_lower: false
+							}
+						}
+
+					}
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+		
+		[Test]
 		public void RangeDates()
 		{
 			var lowerBound = DateTime.UtcNow.AddYears(-1);

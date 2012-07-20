@@ -72,5 +72,68 @@ namespace Nest.Tests.Unit.FilterTests
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+		[Test]
+		public void NumericRangeDoubles()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(ff => ff
+					.NumericRange(n => n
+						.OnField(f => f.LOC)
+						.From(10.0)
+						.To(20.0)
+						.FromExclusive()
+					)
+				);
+
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						numeric_range: {
+							""loc.sort"": {
+								from: 10.0,
+								to: 20.0,
+								from_inclusive: false
+							}
+						}
+
+					}
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+		[Test]
+		public void NumericRangeDates()
+		{
+			var format = "yyyy/MM/dd";
+			var lowerBound = DateTime.UtcNow.AddYears(-1);
+			var upperBound = DateTime.UtcNow.AddYears(1);
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Filter(ff => ff
+					.NumericRange(n => n
+						.OnField(f => f.StartedOn)
+						.From(lowerBound, format)
+						.To(upperBound, format)
+						.FromExclusive()
+					)
+				);
+
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				filter : {
+						numeric_range: {
+							""startedOn"": {
+								from: """ + lowerBound.ToString(format) + @""",
+								to: """ + upperBound.ToString(format) + @""",
+								from_inclusive: false
+							}
+						}
+
+					}
+			}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
 	}
 }

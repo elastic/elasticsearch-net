@@ -112,6 +112,7 @@ namespace Nest
 			return this;
 		}
 		#endregion
+
 		#region DateTime
 		/// <summary>
 		/// The lower bound. Defaults to start from the first.
@@ -284,6 +285,7 @@ namespace Nest
 		}
 		#endregion
 	
+
   
   }
 }
