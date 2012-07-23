@@ -422,11 +422,13 @@ namespace Nest
 
 		private string GetPathForDynamic(SearchDescriptor<dynamic> descriptor)
 		{
-			var indices = this.Settings.DefaultIndex;
+			string indices;
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
+			else
+				indices = this.Settings.DefaultIndex;
 
 			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
 
@@ -434,11 +436,13 @@ namespace Nest
 		}
 		private string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
-			var indices = this.Settings.GetIndexForType<T>();
+			string indices;
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
+			else
+				indices = this.Settings.DefaultIndex;
 
 			var types = this.InferTypeName<T>();
 			if (descriptor._Types.HasAny())
@@ -450,11 +454,13 @@ namespace Nest
 		}
 		private string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor)
 		{
-			var indices = this.Settings.DefaultIndex;
+			string indices;
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
+			else
+				indices = this.Settings.DefaultIndex;
 
 			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
 
@@ -462,11 +468,13 @@ namespace Nest
 		}
 		private string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor) where T : class
 		{
-			var indices = this.Settings.GetIndexForType<T>();
+			string indices;
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
+			else
+				indices = this.Settings.GetIndexForType<T>();
 
 			var types = this.InferTypeName<T>();
 			if (descriptor._Types.HasAny())
