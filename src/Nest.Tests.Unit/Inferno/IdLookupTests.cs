@@ -33,6 +33,11 @@ namespace Nest.Tests.Unit.Inferno
 				return "static id ftw";
 			}
 		}
+
+        internal class BaseIdClass { public int Id { get; set; } }
+
+        internal class InheritedIdClass : BaseIdClass { public string Name { get; set; } }
+
 		[Test]
 		public void TestAlternateIdLookup()
 		{
@@ -82,6 +87,16 @@ namespace Nest.Tests.Unit.Inferno
 			var id = client.GetIdFor(new CustomObjectIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
+
+        [Test]
+        public void TestInheritedLookup()
+        {
+            var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
+            var expected = new InheritedIdClass() { Id = 123 };
+            var id = client.GetIdFor(expected);
+            Assert.AreEqual(expected.Id.ToString(), id);
+        }
+
 		[Test]
 		[Ignore]
 		public void TestHitsCache()
