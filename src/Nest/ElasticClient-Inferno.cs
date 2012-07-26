@@ -434,7 +434,7 @@ namespace Nest
 
 			return this.PathJoin(indices, types, descriptor._Routing);
 		}
-		private string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
+		internal string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
 			string indices;
 			if (descriptor._Indices.HasAny())
@@ -442,7 +442,7 @@ namespace Nest
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
 			else
-				indices = this.Settings.DefaultIndex;
+				indices = this.Settings.GetIndexForType<T>();
 
 			var types = this.InferTypeName<T>();
 			if (descriptor._Types.HasAny())
