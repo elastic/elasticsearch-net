@@ -18,7 +18,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "queries")]
 		internal IEnumerable<QueryDescriptor<T>> _Queries { get; set; }
 
-		public DismaxQueryDescriptor<T> Queries(params Action<QueryDescriptor<T>>[] querySelectors)
+    public DismaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, BaseQuery>[] querySelectors)
 		{
 			var queries = new List<QueryDescriptor<T>>();
 			foreach (var selector in querySelectors)

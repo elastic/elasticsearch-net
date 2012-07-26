@@ -12,7 +12,7 @@ namespace Nest
 
   public static class Filter<T> where T : class
   {
-    public static BaseFilter And(params Action<FilterDescriptor<T>>[] filters)
+    public static BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
     {
       return new FilterDescriptor<T>().And(filters);
     }
@@ -111,7 +111,7 @@ namespace Nest
     {
       return new FilterDescriptor<T>().Nested(selector);
     }
-    public static BaseFilter Not(Action<FilterDescriptor<T>> selector)
+    public static BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector)
     {
       return new FilterDescriptor<T>().Not(selector);
     }
@@ -119,7 +119,7 @@ namespace Nest
     {
       return new FilterDescriptor<T>().NumericRange(numericRangeSelector);
     }
-    public static BaseFilter Or(params Action<FilterDescriptor<T>>[] filters)
+    public static BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
     {
       return new FilterDescriptor<T>().Or(filters);
     }
@@ -131,7 +131,7 @@ namespace Nest
     {
       return new FilterDescriptor<T>().Prefix(field, prefix);
     }
-    public static BaseFilter Query(Action<QueryDescriptor<T>> querySelector)
+    public static BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
     {
       return new FilterDescriptor<T>().Query(querySelector);
     }
@@ -169,7 +169,7 @@ namespace Nest
   public static class Filter
   {
 
-    public static BaseFilter And(params Action<FilterDescriptor<dynamic>>[] filters)
+    public static BaseFilter And(params Func<FilterDescriptor<dynamic>, BaseFilter>[] filters)
     {
       return new FilterDescriptor<dynamic>().And(filters);
     }
@@ -269,7 +269,7 @@ namespace Nest
     {
       return new FilterDescriptor<dynamic>().Nested(selector);
     }
-    public static BaseFilter Not(Action<FilterDescriptor<dynamic>> selector)
+    public static BaseFilter Not(Func<FilterDescriptor<dynamic>, BaseFilter> selector)
     {
       return new FilterDescriptor<dynamic>().Not(selector);
     }
@@ -277,7 +277,7 @@ namespace Nest
     {
       return new FilterDescriptor<dynamic>().NumericRange(numericRangeSelector);
     }
-    public static BaseFilter Or(params Action<FilterDescriptor<dynamic>>[] filters)
+    public static BaseFilter Or(params Func<FilterDescriptor<dynamic>, BaseFilter>[] filters)
     {
       return new FilterDescriptor<dynamic>().Or(filters);
     }
@@ -289,7 +289,7 @@ namespace Nest
     {
       return new FilterDescriptor<dynamic>().Prefix(field, prefix);
     }
-    public static BaseFilter Query(Action<QueryDescriptor<dynamic>> querySelector)
+    public static BaseFilter Query(Func<QueryDescriptor<dynamic>, BaseQuery> querySelector)
     {
       return new FilterDescriptor<dynamic>().Query(querySelector);
     }

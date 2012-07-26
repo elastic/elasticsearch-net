@@ -24,7 +24,7 @@ namespace Nest
 		[JsonProperty("indices")]
 		internal IEnumerable<string> _Indices { get; set; }
 
-		public IndicesQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+    public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
       var qd = new QueryDescriptor<T>();
 			var d = new RawOrQueryDescriptor<T> { Descriptor = qd };
@@ -46,7 +46,7 @@ namespace Nest
 			this._QueryDescriptor = d;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> NoMatchQuery(Action<QueryDescriptor<T>> querySelector)
+    public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
       var qd = new QueryDescriptor<T>();
 			var d = new RawOrQueryDescriptor<T> { Descriptor = qd };

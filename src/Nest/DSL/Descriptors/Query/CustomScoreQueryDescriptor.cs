@@ -17,7 +17,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "query")]
 		internal QueryDescriptor<T> _Query { get; set; }
 
-		public CustomScoreQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+    public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

@@ -26,7 +26,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		public ICountResponse CountAll<T>(Action<QueryDescriptor<T>> querySelector) where T : class
+    public ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor<T>();
@@ -78,7 +78,7 @@ namespace Nest
 		/// <summary>
 		/// Perform a count query over the default index and the inferred type name for T
 		/// </summary>
-		public ICountResponse Count<T>(Action<QueryDescriptor<T>> querySelector) where T : class
+    public ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
       var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
@@ -94,7 +94,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over the specified indices
 		/// </summary>
-		public ICountResponse Count<T>(IEnumerable<string> indices, Action<QueryDescriptor<T>> querySelector) where T : class
+    public ICountResponse Count<T>(IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");
 			string path = string.Join(",", indices) + "/_count";
@@ -106,7 +106,7 @@ namespace Nest
 		/// <summary>
 		///  Performs a count query over the multiple types in multiple indices.
 		/// </summary>
-		public ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor<T>> querySelector) where T : class
+    public ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");
 			indices.ThrowIfEmpty("types");

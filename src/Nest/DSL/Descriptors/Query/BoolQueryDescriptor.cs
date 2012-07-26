@@ -99,7 +99,7 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params Action<QueryDescriptor<T>>[] filters)
+    public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<QueryDescriptor<T>>();
 			foreach (var selector in filters)
@@ -116,7 +116,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="filters"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params Action<QueryDescriptor<T>>[] filters)
+    public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<QueryDescriptor<T>>();
 			foreach (var selector in filters)
@@ -133,7 +133,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="filters"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params Action<QueryDescriptor<T>>[] filters)
+    public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<QueryDescriptor<T>>();
 			foreach (var selector in filters)

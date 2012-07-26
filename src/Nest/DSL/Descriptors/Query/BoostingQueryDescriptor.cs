@@ -25,14 +25,14 @@ namespace Nest
 			return this;
 		}
 
-		public BoostingQueryDescriptor<T> Positive(Action<QueryDescriptor<T>> selector)
+    public BoostingQueryDescriptor<T> Positive(Func<QueryDescriptor<T>, BaseQuery> selector)
 		{
 			var query = new QueryDescriptor<T>();
 			selector(query);
 			this._PositiveQuery = query;
 			return this;
 		}
-		public BoostingQueryDescriptor<T> Negative(Action<QueryDescriptor<T>> selector)
+    public BoostingQueryDescriptor<T> Negative(Func<QueryDescriptor<T>, BaseQuery> selector)
 		{
 			var query = new QueryDescriptor<T>();
 			selector(query);

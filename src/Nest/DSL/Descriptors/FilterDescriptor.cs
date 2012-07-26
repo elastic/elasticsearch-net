@@ -540,7 +540,7 @@ namespace Nest
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilter And(params Action<FilterDescriptor<T>>[] filters)
+    public BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<FilterDescriptor<T>>();
 			foreach (var selector in filters)
@@ -560,7 +560,7 @@ namespace Nest
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
-		public BaseFilter Or(params Action<FilterDescriptor<T>>[] filters)
+    public BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<FilterDescriptor<T>>();
 			foreach (var selector in filters)
@@ -580,7 +580,7 @@ namespace Nest
 		/// A filter that filters out matched documents using a query. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilter Not(Action<FilterDescriptor<T>> selector)
+    public BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector)
 		{
 			var filter = new FilterDescriptor<T>();
 			selector(filter);
@@ -608,7 +608,7 @@ namespace Nest
 		/// <summary>
 		/// Wraps any query to be used as a filter. 
 		/// </summary>
-		public BaseFilter Query(Action<QueryDescriptor<T>> querySelector)
+    public BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);

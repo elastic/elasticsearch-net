@@ -29,7 +29,7 @@ namespace Nest
 		[JsonProperty("should")]
 		internal IEnumerable<FilterDescriptor<T>> _ShouldFilters { get; set; }
 
-		public BoolFilterDescriptor<T> Must(params Action<FilterDescriptor<T>>[] filters)
+    public BoolFilterDescriptor<T> Must(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<FilterDescriptor<T>>();
 			foreach (var selector in filters)
@@ -41,7 +41,7 @@ namespace Nest
 			this._MustFilters = descriptors;
 			return this;
 		}
-		public BoolFilterDescriptor<T> MustNot(params Action<FilterDescriptor<T>>[] filters)
+    public BoolFilterDescriptor<T> MustNot(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<FilterDescriptor<T>>();
 			foreach (var selector in filters)
@@ -53,7 +53,7 @@ namespace Nest
 			this._MustNotFilters = descriptors;
 			return this;
 		}
-		public BoolFilterDescriptor<T> Should(params Action<FilterDescriptor<T>>[] filters)
+    public BoolFilterDescriptor<T> Should(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<FilterDescriptor<T>>();
 			foreach (var selector in filters)

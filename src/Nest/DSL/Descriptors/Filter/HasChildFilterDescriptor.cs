@@ -24,7 +24,7 @@ namespace Nest
 		[JsonProperty("query")]
 		internal QueryDescriptor<T> _QueryDescriptor { get; set;}
 
-		public HasChildFilterDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+    public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			this._QueryDescriptor = new QueryDescriptor<T>();
 			querySelector(this._QueryDescriptor);

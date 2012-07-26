@@ -23,7 +23,7 @@ namespace Nest
 		[JsonProperty("_scope")]
 		internal string _Scope { get; set; }
 
-		public NestedFilterDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+    public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			this._QueryDescriptor = new QueryDescriptor<T>();
 			querySelector(this._QueryDescriptor);

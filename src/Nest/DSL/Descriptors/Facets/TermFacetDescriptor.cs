@@ -107,7 +107,7 @@ namespace Nest
       return this;
     }
     public TermFacetDescriptor<T> FacetFilter(
-      Action<FilterDescriptor<T>> facetFilter
+      Func<FilterDescriptor<T>, BaseFilter> facetFilter
     )
     {
       var filter = new FilterDescriptor<T>();

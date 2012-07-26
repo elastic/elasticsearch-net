@@ -39,7 +39,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "_name")]
 		internal string _Name { get; set; }
 
-		public TopChildrenQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			this._QueryDescriptor = new QueryDescriptor<T>();
 			querySelector(this._QueryDescriptor);

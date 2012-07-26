@@ -14,7 +14,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "filter")]
 		internal FilterDescriptor<T> _Filter { get; set; }
 
-		public FilteredQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+    public FilteredQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
@@ -24,7 +24,7 @@ namespace Nest
 			return this;
 		}
 
-		public FilteredQueryDescriptor<T> Filter(Action<FilterDescriptor<T>> filterSelector)
+    public FilteredQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			var filter = new FilterDescriptor<T>();

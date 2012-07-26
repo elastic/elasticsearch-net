@@ -14,7 +14,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost_factor")]
 		internal double? _BoostFactor { get; set; }
 
-		public CustomBoostFactorQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+    public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

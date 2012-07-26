@@ -659,7 +659,7 @@ namespace Nest
 		/// A facet query allows to return a count of the hits matching 
 		/// the facet query. The query itself can be expressed using the Query DSL.
 		/// </summary>
-		public SearchDescriptor<T> FacetQuery(string name, Action<QueryDescriptor<T>> querySelector, bool? Global = null)
+    public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, BaseQuery> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
@@ -677,7 +677,7 @@ namespace Nest
 		/// its matching the filter. The filter itself can be expressed using the Query DSL.
 		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
 		/// </summary>
-		public SearchDescriptor<T> FacetFilter(string name, Action<FilterDescriptor<T>> querySelector)
+    public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, BaseFilter> querySelector)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");

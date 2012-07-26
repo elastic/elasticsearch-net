@@ -17,7 +17,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
 
-		public ConstantScoreQueryDescriptor<T> Query(Action<QueryDescriptor<T>> querySelector)
+    public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			this._Filter = null;
@@ -28,7 +28,7 @@ namespace Nest
 			return this;
 		}
 
-		public ConstantScoreQueryDescriptor<T> Filter(Action<FilterDescriptor<T>> filterSelector)
+    public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			this._Query = null;
