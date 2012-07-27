@@ -20,9 +20,17 @@ namespace Nest.Tests.Integration.Integration.Mapping
 			Assert.AreEqual("string", typeMapping.Properties["country"].Type);
 			Assert.AreEqual("double", typeMapping.Properties["doubleValue"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["longValue"].Type);
+			Assert.AreEqual("boolean", typeMapping.Properties["boolValue"].Type);
+			Assert.AreEqual("integer", typeMapping.Properties["intValues"].Type);
+			Assert.AreEqual("float", typeMapping.Properties["floatValues"].Type);
 			Assert.AreEqual("multi_field", typeMapping.Properties["name"].Type);
 			Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type);
 			Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type);
+			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
+			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
+			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
+			Assert.AreEqual("not_analyzed", typeMapping.Properties["country"].Index);
+			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 
 		[Test]
@@ -35,11 +43,6 @@ namespace Nest.Tests.Integration.Integration.Mapping
 
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
 			TestMapping(typeMapping);
-			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
-			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
-			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
-			Assert.AreEqual("not_analyzed", typeMapping.Properties["country"].Index);
-			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 
 
@@ -56,10 +59,6 @@ namespace Nest.Tests.Integration.Integration.Mapping
 
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
 			TestMapping(typeMapping);
-			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
-			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
-			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
-			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 		}
 
 
