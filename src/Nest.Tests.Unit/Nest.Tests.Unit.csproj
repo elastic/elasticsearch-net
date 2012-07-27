@@ -85,6 +85,7 @@
     <Compile Include="FilterTests\TermsFilterJson.cs" />
     <Compile Include="FilterTests\TypeFilterJson.cs" />
     <Compile Include="HighlightTests.cs" />
+    <Compile Include="Inferno\MapTypeIndicesTests.cs" />
     <Compile Include="Inferno\IdLookupTests.cs" />
     <Compile Include="Inferno\PropertyNameResolverTests.cs" />
     <Compile Include="JsonifyTests.cs" />

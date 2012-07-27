@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -8,7 +9,8 @@ namespace Nest
 		{
 			var updateDescriptor = new UpdateDescriptor<T>();
 			updateSelector(updateDescriptor);
-			var data = ElasticClient.Serialize(updateDescriptor);
+      var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
+      //var data = ElasticClient.Serialize(updateDescriptor);
 			var path = this.CreateUpdatePath<T>(updateDescriptor);
 			return this._Update(path, data);
 		}
@@ -16,7 +18,8 @@ namespace Nest
 		{
 			var updateDescriptor = new UpdateDescriptor<dynamic>();
 			updateSelector(updateDescriptor);
-			var data = ElasticClient.Serialize(updateDescriptor);
+      var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
+			//var data = ElasticClient.Serialize(updateDescriptor);
 			var path = this.CreateUpdatePath<dynamic>(updateDescriptor);
 			return this._Update(path, data);
 		}
