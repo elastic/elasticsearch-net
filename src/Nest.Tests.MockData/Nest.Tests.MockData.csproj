@@ -49,9 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\BoolSource.cs" />
+    <Compile Include="DataSources\FloatArraySource.cs" />
+    <Compile Include="DataSources\IntSource.cs" />
     <Compile Include="DataSources\ElasticSearchProjectDescriptionSource.cs" />
     <Compile Include="DataSources\ElasticSearchProjectsDataSource.cs" />
     <Compile Include="DataSources\GeoLocationSource.cs" />
+    <Compile Include="DataSources\IntListSource.cs" />
     <Compile Include="DataSources\LOCSource.cs" />
     <Compile Include="DataSources\DoubleSource.cs" />
     <Compile Include="DataSources\LongSource.cs" />

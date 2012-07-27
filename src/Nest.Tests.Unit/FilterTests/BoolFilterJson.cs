@@ -97,21 +97,22 @@ namespace Nest.Tests.Unit.FilterTests
 			;
 
 			var json = ElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, 
-				filter : {
-						""bool"": {
-							""must"": [
-								{
-									""match_all"": {}
-								},
-								{
-									""missing"": {
-										""field"": ""loc""
-									}
+            var expected = @"{ from: 0, size: 10, 
+				""filter"": {
+					""bool"": {
+						""should"": [
+							{
+							""bool"": {
+								""must"": [
+									{""match_all"": {}},
+									{""missing"": {""field"": ""loc""}}
+								]
 								}
-							]
-						}
+							},
+							{""term"": {""x"": ""y""}}
+						]
 					}
+				}
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
