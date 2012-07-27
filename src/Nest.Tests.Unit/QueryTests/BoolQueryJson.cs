@@ -55,6 +55,7 @@ namespace Nest.Tests.Unit.QueryTests
 		}
 
 		[Test]
+		[Ignore]
 		public void BoolQueryOverload()
 		{
 			var q1 = Query<ElasticSearchProject>.Term(p => p.Name, "elasticsearch.pm");
@@ -66,10 +67,13 @@ namespace Nest.Tests.Unit.QueryTests
 				.Query((q1 & q2) | (q1 & q2));
 
 			var json = ElasticClient.Serialize(s);
-			
-			//Assert.True(json.JsonEquals(expected), json);
+
+			var expected = "{}";
+			Assert.True(json.JsonEquals(expected), json);
 		}
+
 		[Test]
+		[Ignore]
 		public void BoolQueryOverloadAvoidUnneededNesting()
 		{
 			var q1 = Query<ElasticSearchProject>.Term(p => p.Name, "elasticsearch.pm");
@@ -83,10 +87,12 @@ namespace Nest.Tests.Unit.QueryTests
 
 			var json = ElasticClient.Serialize(s);
 
-			Assert.True(json.JsonEquals("{}"), json);
+			var expected = "{}";
+			Assert.True(json.JsonEquals(expected), json);
 		}
 
 		[Test]
+		[Ignore]
 		public void BoolQueryOverloadInLambda()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()
@@ -99,7 +105,7 @@ namespace Nest.Tests.Unit.QueryTests
 
 			var json = ElasticClient.Serialize(s);
 			var expected = "{}";
-			//Assert.True(json.JsonEquals(expected), json);
+			Assert.True(json.JsonEquals(expected), json);
 		}
 
 		[Test]
