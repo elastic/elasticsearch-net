@@ -40,6 +40,9 @@ namespace Nest.Tests.MockData.Domain
 		public long LongValue { get; set; }
 		public float FloatValue { get; set; }
 		public double DoubleValue { get; set; }
+		public bool BoolValue { get; set; }
+		public List<int> IntValues { get; set; }
+		public float[] FloatValues { get; set; }
 
 		[ElasticProperty(NumericType=NumericType.Long)]
 		public int StupidIntIWantAsLong { get; set; }

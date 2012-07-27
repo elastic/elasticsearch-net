@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
@@ -121,9 +122,8 @@ namespace Nest.Resolvers.Writers
 					continue;
 
 				var propertyName = this.PropertyNameResolver.Resolve(p);
-				var type = this.GetElasticSearchTypeFromType(p.PropertyType);
-				if (att != null && att.Type != FieldType.none)
-					type = Enum.GetName(typeof(FieldType), att.Type);
+
+				var type = GetElasticSearchType(att, p);
 
 				if (type == null) //could not get type from attribute or infer from CLR type.
 					continue;
@@ -252,30 +252,97 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
-
-		private string GetElasticSearchTypeFromType(Type t)
+		/// <summary>
+		/// Get the Elastic Search Field Type Related.
+		/// </summary>
+		/// <param name="att">ElasticPropertyAttribute</param>
+		/// <param name="p">Property Field</param>
+		/// <returns>String with the type name or null if can not be inferres</returns>
+		private string GetElasticSearchType(ElasticPropertyAttribute att, PropertyInfo p)
 		{
-			if (t.IsArray)
-				t = t.GetElementType();
-
-			if (t == typeof(string))
-				return "string";
-
-			if (t.IsValueType)
+			FieldType? fieldType = null;
+			if (att != null)
 			{
-				switch (t.Name)
+				fieldType = att.Type;
+			}
+
+			if (fieldType == null || fieldType == FieldType.none)
+			{
+				fieldType = this.GetFieldTypeFromType(p.PropertyType);
+			}
+
+			return this.GetElasticSearchTypeFromFieldType(fieldType);
+		}
+
+		/// <summary>
+		/// Get the Elastic Search Field from a FieldType.
+		/// </summary>
+		/// <param name="fieldType">FieldType</param>
+		/// <returns>String with the type name or null if can not be inferres</returns>
+		private string GetElasticSearchTypeFromFieldType(FieldType? fieldType)
+		{
+			switch (fieldType)
+			{
+				case FieldType.geo_point:
+					return "geo_point";
+				case FieldType.attachment:
+					return "attachment";
+				case FieldType.ip:
+					return "ip";
+				case FieldType.binary:
+					return "binary";
+				case FieldType.string_type:
+					return "string";
+				case FieldType.integer_type:
+					return "integer";
+				case FieldType.long_type:
+					return "long";
+				case FieldType.float_type:
+					return "float";
+				case FieldType.double_type:
+					return "double";
+				case FieldType.date_type:
+					return "date";
+				case FieldType.boolean_type:
+					return "boolean";
+				default:
+					return null;
+			}
+		}
+
+		/// <summary>
+		/// Inferes the FieldType from the type of the property.
+		/// </summary>
+		/// <param name="propertyType">Type of the property</param>
+		/// <returns>FieldType or null if can not be inferred</returns>
+		private FieldType? GetFieldTypeFromType(Type propertyType)
+		{
+			if (propertyType.IsArray)
+				propertyType = propertyType.GetElementType();
+
+			if (propertyType.IsGenericType && propertyType.GetGenericArguments().Length >= 1)
+				propertyType = propertyType.GetGenericArguments()[0];
+
+			if (propertyType == typeof(string))
+				return FieldType.string_type;
+
+			if (propertyType.IsValueType)
+			{
+				switch (propertyType.Name)
 				{
 					case "Int32":
-						return "integer";
+						return FieldType.integer_type;
 					case "Int64":
-						return "long";
+						return FieldType.long_type;
 					case "Single":
-						return "float";
+						return FieldType.float_type;
 					case "Decimal":
 					case "Double":
-						return "double";
+						return FieldType.double_type;
 					case "DateTime":
-						return "date";
+						return FieldType.date_type;
+					case "Boolean":
+						return FieldType.boolean_type;
 				}
 			}
 			return null;
