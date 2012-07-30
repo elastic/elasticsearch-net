@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Nest;
-using HackerNews.Indexer.Domain;
-using Nest.Tests.MockData;
+﻿using System.Linq;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace Nest.Tests.Integration.Integration.FacetResponses
+namespace Nest.Tests.Integration.Facet
 {
 	[TestFixture]
 	public class GeoDistanceFacetResponseTests : BaseFacetTestFixture

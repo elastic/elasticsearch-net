@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using NUnit.Framework;
-using Nest;
-using HackerNews.Indexer.Domain;
-
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration
+namespace Nest.Tests.Integration.Search
 {
   [TestFixture]
   public class QueryDSLTests : BaseElasticSearchTests

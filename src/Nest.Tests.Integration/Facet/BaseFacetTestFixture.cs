@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using Nest;
 using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration.FacetResponses
+namespace Nest.Tests.Integration.Facet
 {
     public class BaseFacetTestFixture : BaseElasticSearchTests
     {

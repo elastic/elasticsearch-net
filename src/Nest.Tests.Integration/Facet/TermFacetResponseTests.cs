@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Nest;
+﻿using System.Linq;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration.FacetResponses
+namespace Nest.Tests.Integration.Facet
 {
 	/// <summary>
 	///  Tests that test whether the query response can be successfully mapped or not
