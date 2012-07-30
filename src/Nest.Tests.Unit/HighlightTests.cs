@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit
               .PostTags("</em>")
           )
         );
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"  {
           from: 0,
           size: 10,

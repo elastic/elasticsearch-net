@@ -8,12 +8,12 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		internal static readonly JsonSerializerSettings DeserializeSettings;
-		internal static readonly JsonSerializerSettings SerializationSettings;
-		internal static readonly JsonSerializerSettings IndexSerializationSettings;
-		public static readonly PropertyNameResolver PropertyNameResolver;
+		internal readonly JsonSerializerSettings DeserializeSettings;
+		internal readonly JsonSerializerSettings SerializationSettings;
+		internal readonly JsonSerializerSettings IndexSerializationSettings;
+		internal readonly PropertyNameResolver PropertyNameResolver;
 
-		private static JsonSerializerSettings CreateSettings()
+		private JsonSerializerSettings CreateSettings()
 		{
 			return new JsonSerializerSettings()
 			{
@@ -31,7 +31,7 @@ namespace Nest
 				}
 			};
 		}
-		private static JsonSerializerSettings CreateDeserializeSettings()
+		private JsonSerializerSettings CreateDeserializeSettings()
 		{
 			return new JsonSerializerSettings()
 			{
@@ -46,31 +46,20 @@ namespace Nest
 				}
 			};
 		}
-		public static void AddConverter(JsonConverter converter)
+		public void AddConverter(JsonConverter converter)
 		{
-			ElasticClient.IndexSerializationSettings.Converters.Add(converter);
-			ElasticClient.SerializationSettings.Converters.Add(converter);
-			ElasticClient.DeserializeSettings.Converters.Add(converter);
+			this.IndexSerializationSettings.Converters.Add(converter);
+			this.SerializationSettings.Converters.Add(converter);
+			this.DeserializeSettings.Converters.Add(converter);
+		}
+		public string Serialize<T>(T @object)
+		{
+			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+		}
+		public T Deserialize<T>(string value)
+		{
+			return JsonConvert.DeserializeObject<T>(value, this.DeserializeSettings);
 		}
 
-		static ElasticClient()
-		{
-			DeserializeSettings = ElasticClient.CreateDeserializeSettings();
-			SerializationSettings = ElasticClient.CreateSettings();
-			var indexSettings = ElasticClient.CreateSettings();
-			indexSettings.ContractResolver = new ElasticCamelCaseResolver();
-			IndexSerializationSettings = indexSettings;
-
-			PropertyNameResolver = new PropertyNameResolver(SerializationSettings);
-
-		}
-		public static string Serialize<T>(T @object)
-		{
-			return JsonConvert.SerializeObject(@object, Formatting.Indented, SerializationSettings);
-		}
-		public static T Deserialize<T>(string value)
-		{
-			return JsonConvert.DeserializeObject<T>(value, DeserializeSettings);
-		}
 	}
 }

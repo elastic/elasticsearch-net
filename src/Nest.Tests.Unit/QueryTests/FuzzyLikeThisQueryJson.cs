@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.LikeText("elasticsearcc")
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ flt: { 
 				fields : [""name"" ],
@@ -48,7 +48,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.Analyzer("my_analyzer")
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ flt: { 
 				fields : [""name"" ],

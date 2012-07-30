@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -47,7 +48,7 @@ namespace Nest
     }
     public HighlightFieldDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
     {
-      var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.OnField(fieldName);
     }
     public HighlightFieldDescriptor<T> OnAll()

@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Facets
             r=>r.From(100)
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""geo1"" :  {
@@ -58,7 +58,7 @@ namespace Nest.Tests.Unit.Facets
           .OnValueField(f => f.Origin)
           .PinTo("drm3btev3e86")
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""geo1"" :  {
@@ -84,7 +84,7 @@ namespace Nest.Tests.Unit.Facets
           .Unit(GeoUnit.mi)
           .DistanceType(GeoDistance.arc)
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""geo1"" :  {
@@ -113,7 +113,7 @@ namespace Nest.Tests.Unit.Facets
           .Unit(GeoUnit.mi)
           .DistanceType(GeoDistance.arc)
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""geo1"" :  {

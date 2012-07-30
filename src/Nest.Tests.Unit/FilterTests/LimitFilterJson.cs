@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.Limit(100)
 			);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						limit : { 

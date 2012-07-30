@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Facets
           .OnField(f=>f.LOC)
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""loc.sort"" :  {
@@ -45,7 +45,7 @@ namespace Nest.Tests.Unit.Facets
           .OnFields(f => f.LOC, f=>f.LongValue)
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {
@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.Facets
           .Script("doc['num1'].value + doc['num2'].value")
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {
@@ -92,7 +92,7 @@ namespace Nest.Tests.Unit.Facets
           .Params(p=>p.Add("factor", 5))
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -15,6 +16,12 @@ namespace Nest
 	}
 	public class QueryDescriptor<T>  : BaseQuery, IQueryDescriptor<T> where T : class
 	{
+		private readonly TypeNameResolver typeNameResolver;
+		public QueryDescriptor(TypeNameResolver typeNameResolver)
+		{
+			this.typeNameResolver = typeNameResolver;
+		}
+
 		[JsonProperty(PropertyName = "match_all")]
 		internal MatchAll MatchAllQuery { get; set; }
 		[JsonProperty(PropertyName = "term")]
@@ -105,7 +112,7 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Terms(Expression<Func<T, object>> objectPath, params string[] terms)
 		{
-			var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.Terms(fieldName, terms);
 		}
 		/// <summary>
@@ -294,7 +301,7 @@ namespace Nest
 		/// <typeparam name="K">Type of the child</typeparam>
 		public BaseQuery HasChild<K>(Action<HasChildQueryDescriptor<K>> selector) where K : class
 		{
-			var query = new HasChildQueryDescriptor<K>();
+			var query = new HasChildQueryDescriptor<K>(this.typeNameResolver);
 			selector(query);
 			this.HasChildQueryDescriptor = query;
 			return new QueryDescriptor<T> { HasChildQueryDescriptor = this.HasChildQueryDescriptor };
@@ -307,7 +314,7 @@ namespace Nest
 		/// <typeparam name="K">Type of the child</typeparam>
 		public BaseQuery TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
 		{
-			var query = new TopChildrenQueryDescriptor<K>();
+			var query = new TopChildrenQueryDescriptor<K>(this.typeNameResolver);
 			selector(query);
 			this.TopChildrenQueryDescriptor = query;
 			return new QueryDescriptor<T> { TopChildrenQueryDescriptor = this.TopChildrenQueryDescriptor };
@@ -420,7 +427,7 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Term(field, value, Boost);
 		}
 		/// <summary>
@@ -447,7 +454,7 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Wildcard(field, value, Boost);
 		}
 		/// <summary>
@@ -474,7 +481,7 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 
 			return this.Prefix(field, value, Boost);
 		}
@@ -528,7 +535,7 @@ namespace Nest
 				, string value
 				, double? Boost = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.SpanTerm(field, value, Boost);
 		}
 		/// <summary>

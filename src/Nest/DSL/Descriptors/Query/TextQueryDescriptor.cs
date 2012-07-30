@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -43,7 +44,7 @@ namespace Nest
 		}
 		public TextQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 

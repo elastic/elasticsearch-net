@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
+using Nest.Resolvers;
 
 namespace Nest.DSL.Descriptors
 {
@@ -54,7 +55,7 @@ namespace Nest.DSL.Descriptors
     }
     public SortGeoDistanceDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
     {
-      var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.OnField(fieldName);
     }
 

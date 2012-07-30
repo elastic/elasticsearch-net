@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -55,7 +56,7 @@ namespace Nest
 		}
 		public QueryStringDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 		public QueryStringDescriptor<T> OnFields(IEnumerable<string> fields)
@@ -67,7 +68,7 @@ namespace Nest
 			params Expression<Func<T, object>>[] objectPaths)
 		{
 			var fieldNames = objectPaths
-				.Select(o => ElasticClient.PropertyNameResolver.Resolve(o));
+				.Select(o => new PropertyNameResolver().Resolve(o));
 			return this.OnFields(fieldNames);
 		}
 		public QueryStringDescriptor<T> OnFieldsWithBoost(
@@ -78,7 +79,7 @@ namespace Nest
 			var fieldNames = d
 				.Select(o => 
 				{
-					var field = ElasticClient.PropertyNameResolver.Resolve(o.Key);
+					var field = new PropertyNameResolver().Resolve(o.Key);
 					var boost = o.Value.GetValueOrDefault(1.0);
 					return "{0}^{1}".F(field, boost.ToString(CultureInfo.InvariantCulture));
 				});

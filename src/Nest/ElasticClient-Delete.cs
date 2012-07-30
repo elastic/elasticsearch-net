@@ -136,7 +136,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			return this._deleteToPath(path);
 		}
@@ -177,7 +177,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
@@ -221,7 +221,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			return this._deleteToPathAsync(path);
 		}
@@ -262,7 +262,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
@@ -542,9 +542,9 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public ConnectionStatus DeleteByQuery<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 		{
-			var descriptor = new QueryPathDescriptor<T>();
+			var descriptor = new QueryPathDescriptor<T>(this.TypeNameResolver);
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForTyped(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -558,9 +558,9 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public ConnectionStatus DeleteByQuery(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
+			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -575,7 +575,7 @@ namespace Nest
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public ConnectionStatus DeleteByQuery(string query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
+			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -590,9 +590,9 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public Task<ConnectionStatus> DeleteByQueryAsync<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 		{
-			var descriptor = new QueryPathDescriptor<T>();
+			var descriptor = new QueryPathDescriptor<T>(this.TypeNameResolver);
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForTyped(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -606,9 +606,9 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public Task<ConnectionStatus> DeleteByQueryAsync(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
+			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -623,7 +623,7 @@ namespace Nest
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public Task<ConnectionStatus> DeleteByQueryAsync(string query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
+			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -34,7 +35,7 @@ namespace Nest
 		}
 		public RangeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 		/// <summary>

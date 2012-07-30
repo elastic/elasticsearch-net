@@ -23,15 +23,15 @@ namespace Nest
 
 		}
 		
-    internal string CreatePathFor<T>(T @object, string index) where T : class
+		internal string CreatePathFor<T>(T @object, string index) where T : class
 		{
 			//var type = typeof(T);
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			return this.CreatePathFor<T>(@object, index, typeName);
 
 		}
 		
-    internal string CreatePathFor<T>(T @object, string index, string type) where T : class
+		internal string CreatePathFor<T>(T @object, string index, string type) where T : class
 		{
 			@object.ThrowIfNull("object");
 			index.ThrowIfNull("index");
@@ -47,7 +47,7 @@ namespace Nest
 
 		}
 
-    internal string CreatePathFor<T>(T @object, string index, string type, string id) where T : class
+		internal string CreatePathFor<T>(T @object, string index, string type, string id) where T : class
 		{
 			@object.ThrowIfNull("object");
 			index.ThrowIfNull("index");
@@ -56,109 +56,108 @@ namespace Nest
 			return this.CreatePath(index, type, id);
 		}
 
-    internal string CreatePath(string index)
-    {
-      index.ThrowIfNullOrEmpty("index");
-      return "{0}/".F(Uri.EscapeDataString(index));
-    }
+		internal string CreatePath(string index)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			return "{0}/".F(Uri.EscapeDataString(index));
+		}
 
-    internal string CreatePath(string index, string type)
-    {
-      index.ThrowIfNullOrEmpty("index");
-      type.ThrowIfNullOrEmpty("type");
-      return "{0}/{1}/".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type));
-    }
+		internal string CreatePath(string index, string type)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			return "{0}/{1}/".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type));
+		}
 
-    internal string CreatePath(string index, string type, string id)
-    {
-      index.ThrowIfNullOrEmpty("index");
-      type.ThrowIfNullOrEmpty("type");
-      id.ThrowIfNullOrEmpty("id");
-      return "{0}/{1}/{2}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type), Uri.EscapeDataString(id));
-    }
+		internal string CreatePath(string index, string type, string id)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
+			return "{0}/{1}/{2}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type), Uri.EscapeDataString(id));
+		}
 
-    private string AppendSimpleParametersToPath(string path, ISimpleUrlParameters urlParameters)
-    {
-      if (urlParameters == null)
-        return path;
+		private string AppendSimpleParametersToPath(string path, ISimpleUrlParameters urlParameters)
+		{
+			if (urlParameters == null)
+				return path;
 
-      var parameters = new List<string>();
+			var parameters = new List<string>();
 
-      if (urlParameters.Replication != Replication.Sync) //sync == default
-        parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
+			if (urlParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
 
-      if (urlParameters.Refresh) //false == default
-        parameters.Add("refresh=true");
+			if (urlParameters.Refresh) //false == default
+				parameters.Add("refresh=true");
 
-      path += "?" + string.Join("&", parameters.ToArray());
-      return path;
-    }
-   
-    private string AppendDeleteByQueryParametersToPath(string path, DeleteByQueryParameters urlParameters)
-    {
-      if (urlParameters == null)
-        return path;
+			path += "?" + string.Join("&", parameters.ToArray());
+			return path;
+		}
+	 
+		private string AppendDeleteByQueryParametersToPath(string path, DeleteByQueryParameters urlParameters)
+		{
+			if (urlParameters == null)
+				return path;
 
-      var parameters = new List<string>();
+			var parameters = new List<string>();
 
-      if (urlParameters.Replication != Replication.Sync) //sync == default
-        parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
+			if (urlParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
-      if (urlParameters.Consistency != Consistency.Quorum) //quorum == default
-        parameters.Add("consistency=" + urlParameters.Replication.ToString().ToLower());
+			if (urlParameters.Consistency != Consistency.Quorum) //quorum == default
+				parameters.Add("consistency=" + urlParameters.Replication.ToString().ToLower());
 
-      if (!urlParameters.Routing.IsNullOrEmpty())
-        parameters.Add("routing=" + urlParameters.Routing);
+			if (!urlParameters.Routing.IsNullOrEmpty())
+				parameters.Add("routing=" + urlParameters.Routing);
 
-      path += "?" + string.Join("&", parameters.ToArray());
-      return path;
-    }
-   
-    private string AppendParametersToPath(string path, IUrlParameters urlParameters)
-    {
-      if (urlParameters == null)
-        return path;
+			path += "?" + string.Join("&", parameters.ToArray());
+			return path;
+		}
+	 
+		private string AppendParametersToPath(string path, IUrlParameters urlParameters)
+		{
+			if (urlParameters == null)
+				return path;
 
-      var parameters = new List<string>();
+			var parameters = new List<string>();
 
-      if (!urlParameters.Version.IsNullOrEmpty())
-        parameters.Add("version=" + urlParameters.Version);
-      if (!urlParameters.Routing.IsNullOrEmpty())
-        parameters.Add("routing=" + urlParameters.Routing);
-      if (!urlParameters.Parent.IsNullOrEmpty())
-        parameters.Add("parent=" + urlParameters.Parent);
+			if (!urlParameters.Version.IsNullOrEmpty())
+				parameters.Add("version=" + urlParameters.Version);
+			if (!urlParameters.Routing.IsNullOrEmpty())
+				parameters.Add("routing=" + urlParameters.Routing);
+			if (!urlParameters.Parent.IsNullOrEmpty())
+				parameters.Add("parent=" + urlParameters.Parent);
 
-      if (urlParameters.Replication != Replication.Sync) //sync == default
-        parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
+			if (urlParameters.Replication != Replication.Sync) //sync == default
+				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
-      if (urlParameters.Consistency != Consistency.Quorum) //quorum == default
-        parameters.Add("consistency=" + urlParameters.Consistency.ToString().ToLower());
+			if (urlParameters.Consistency != Consistency.Quorum) //quorum == default
+				parameters.Add("consistency=" + urlParameters.Consistency.ToString().ToLower());
 
-      if (urlParameters.Refresh) //false == default
-        parameters.Add("refresh=true");
+			if (urlParameters.Refresh) //false == default
+				parameters.Add("refresh=true");
 
-      if (urlParameters is IndexParameters)
-        this.AppendIndexParameters(parameters, (IndexParameters)urlParameters);
+			if (urlParameters is IndexParameters)
+				this.AppendIndexParameters(parameters, (IndexParameters)urlParameters);
 
-      path += "?" + string.Join("&", parameters.ToArray());
-      return path;
-    }
+			path += "?" + string.Join("&", parameters.ToArray());
+			return path;
+		}
 
-    private List<string> AppendIndexParameters(List<string> parameters, IndexParameters indexParameters)
-    {
-      if (indexParameters == null)
-        return parameters;
+		private List<string> AppendIndexParameters(List<string> parameters, IndexParameters indexParameters)
+		{
+			if (indexParameters == null)
+				return parameters;
 
-      if (!indexParameters.Timeout.IsNullOrEmpty())
-        parameters.Add("timeout=" + indexParameters.Timeout);
+			if (!indexParameters.Timeout.IsNullOrEmpty())
+				parameters.Add("timeout=" + indexParameters.Timeout);
 
-      if (indexParameters.VersionType != VersionType.Internal) //internal == default
-        parameters.Add("version_type=" + indexParameters.VersionType.ToString().ToLower());
+			if (indexParameters.VersionType != VersionType.Internal) //internal == default
+				parameters.Add("version_type=" + indexParameters.VersionType.ToString().ToLower());
 
-      return parameters;
-    }
-
+			return parameters;
+		}
 
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
@@ -213,52 +212,6 @@ namespace Nest
 			}
 		}
 
-		public static string GetTypeNameFor(Type type)
-		{
-			if (!type.IsClass && !type.IsInterface)
-				throw new ArgumentException("Type is not a class or interface", "type");
-			return GetTypeNameForType(type);
-		}
-
-		public static string GetTypeNameFor<T>() where T : class
-		{
-			return GetTypeNameForType(typeof(T));
-		}
-
-		internal static string GetTypeNameForType(Type type)
-		{
-			var typeName = type.Name;
-			var att = PropertyNameResolver.GetElasticPropertyFor(type);
-			if (att != null && !att.Name.IsNullOrEmpty())
-				typeName = att.Name;
-			else
-				typeName = Inflector.MakePlural(type.Name).ToLower();
-
-			return typeName;
-		}
-
-		internal string InferTypeName<T>() where T : class
-		{
-			var type = typeof(T);
-			return this.InferTypeName(typeof(T));
-		}
-
-		internal string InferTypeName(Type type)
-		{
-			var typeName = type.Name;
-			var att = PropertyNameResolver.GetElasticPropertyFor(type);
-			if (att != null && !att.Name.IsNullOrEmpty())
-				typeName = att.Name;
-			else
-			{
-				if (this.Settings.TypeNameInferrer != null)
-					typeName = this.Settings.TypeNameInferrer(typeName);
-				if (this.Settings.TypeNameInferrer == null || string.IsNullOrEmpty(typeName))
-					typeName = Inflector.MakePlural(type.Name).ToLower();
-			}
-			return typeName;
-		}
-
 		private string GetPathForDynamic(SearchDescriptor<dynamic> descriptor)
 		{
 			string indices;
@@ -283,7 +236,7 @@ namespace Nest
 			else
 				indices = this.Settings.GetIndexForType<T>();
 
-			var types = this.InferTypeName<T>();
+			var types = this.TypeNameResolver.GetTypeNameFor<T>();
 			if (descriptor._Types.HasAny())
 				types = string.Join(",", descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
@@ -315,7 +268,7 @@ namespace Nest
 			else
 				indices = this.Settings.GetIndexForType<T>();
 
-			var types = this.InferTypeName<T>();
+			var types = this.TypeNameResolver.GetTypeNameFor<T>();
 			if (descriptor._Types.HasAny())
 				types = string.Join(",", descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all

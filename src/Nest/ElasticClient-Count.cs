@@ -20,7 +20,7 @@ namespace Nest
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return this._Count("_count", query);
 		}
 		/// <summary>
@@ -31,7 +31,7 @@ namespace Nest
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return this._Count("_count", query);
 		}
 
@@ -46,7 +46,7 @@ namespace Nest
 			string path = this.CreatePath(index) + "_count";
 			var descriptor = new QueryDescriptor();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Nest
 			string path = string.Join(",", indices) + "/_count";
 			var descriptor = new QueryDescriptor();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Nest
 			string path = string.Join(",", indices) + "/" + string.Join(",", types) + "/_count";
 			var descriptor = new QueryDescriptor();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
 
@@ -84,11 +84,11 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var type = typeof(T);
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			string path = this.CreatePath(index, typeName) + "_count";
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
 		/// <summary>
@@ -100,7 +100,7 @@ namespace Nest
 			string path = string.Join(",", indices) + "/_count";
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
 		/// <summary>
@@ -113,7 +113,7 @@ namespace Nest
 			string path = string.Join(",", indices) + "/" + string.Join(",", types) + "/_count";
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
 

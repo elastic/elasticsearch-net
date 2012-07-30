@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.QueryTests
 					)
 			);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 					text: {
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.QueryTests
 					)
 			);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 					text: {

@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class HasChildFilterDescriptor<T> : FilterBase where T : class
 	{
-		public HasChildFilterDescriptor()
+		public HasChildFilterDescriptor(TypeNameResolver typeNameResolver)
 		{
-			this._Type = ElasticClient.GetTypeNameFor<T>();
+			this._Type = typeNameResolver.GetTypeNameFor<T>();
 		}
 
 		[JsonProperty("type")]

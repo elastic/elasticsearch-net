@@ -6,24 +6,24 @@ using System.Linq;
 
 namespace Nest
 {
-    public interface IQueryResponse<T> : IResponse where T : class
-    {
-        ShardsMetaData Shards { get; }
-        HitsMetaData<T> Hits { get; }
-        IDictionary<string, Facet> Facets { get; }
-        int ElapsedMilliseconds { get; }
-        int Total { get; }
-        double MaxScore { get; }
-        IEnumerable<T> Documents { get; }
-        IEnumerable<Hit<T>> DocumentsWithMetaData { get; }
-        IEnumerable<Highlight> Highlights { get; }
-        F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
-        F Facet<F>(string fieldName) where F : class, IFacet;
-        IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem;
-        IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem;
-    }
+	public interface IQueryResponse<T> : IResponse where T : class
+	{
+		ShardsMetaData Shards { get; }
+		HitsMetaData<T> Hits { get; }
+		IDictionary<string, Facet> Facets { get; }
+		int ElapsedMilliseconds { get; }
+		int Total { get; }
+		double MaxScore { get; }
+		IEnumerable<T> Documents { get; }
+		IEnumerable<Hit<T>> DocumentsWithMetaData { get; }
+		IEnumerable<Highlight> Highlights { get; }
+		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
+		F Facet<F>(string fieldName) where F : class, IFacet;
+		IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem;
+		IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem;
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class QueryResponse<T> : BaseResponse, IQueryResponse<T> where T : class 
 	{
 		public QueryResponse()
@@ -97,7 +97,7 @@ namespace Nest
 		
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{
-		  var fieldName = this.PropertyNameResolver.ResolveToSort(expression);
+		  var fieldName = this.PropertyNameResolver.Resolve(expression);
 			return this.Facet<F>(fieldName);
 		}
 		public F Facet<F>(string fieldName) where F : class, IFacet
@@ -114,18 +114,18 @@ namespace Nest
 		
 		public IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem
 		{
-		    var fieldName = this.PropertyNameResolver.Resolve(expression);
-		    return this.FacetItems<F>(fieldName);
+			var fieldName = this.PropertyNameResolver.Resolve(expression);
+			return this.FacetItems<F>(fieldName);
 		}
 
 		public IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem
 		{
-		    if (this.Facets == null
-		        || !this.Facets.Any()
-		        || !this.Facets.ContainsKey(fieldName))
-		        return Enumerable.Empty<F>();
+			if (this.Facets == null
+				|| !this.Facets.Any()
+				|| !this.Facets.ContainsKey(fieldName))
+				return Enumerable.Empty<F>();
 			
-		    var facet = this.Facets[fieldName];
+			var facet = this.Facets[fieldName];
 			if (facet is DateHistogramFacet)
 				return ((DateHistogramFacet)facet).Items.Cast<F>();
 
@@ -152,25 +152,25 @@ namespace Nest
 		/*
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : SingleFacet
 		{
-		    var fieldName = this.PropertyNameResolver.Resolve(expression);
-		    return this.Facet<F>(fieldName);
+			var fieldName = this.new PropertyNameResolver().Resolve(expression);
+			return this.Facet<F>(fieldName);
 		}
 		public F Facet<F>(string fieldName) where F : SingleFacet
 		{
-		    if (this.FacetsMetaData == null
-		        || !this.FacetsMetaData.Any()
-		        || !this.FacetsMetaData.ContainsKey(fieldName))
-		        return null;
+			if (this.FacetsMetaData == null
+				|| !this.FacetsMetaData.Any()
+				|| !this.FacetsMetaData.ContainsKey(fieldName))
+				return null;
 
-		    var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
-		    if (typeName.IsNullOrEmpty())
-		        return null;
+			var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
+			if (typeName.IsNullOrEmpty())
+				return null;
 
-		    var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
-		    var facetMetaData = metaData.FirstOrDefault(fm => fm.Type == typeName);
-		    if (facetMetaData == null)
-		        return null;
-		    return facetMetaData.Facets.Cast<F>().FirstOrDefault();
+			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
+			var facetMetaData = metaData.FirstOrDefault(fm => fm.Type == typeName);
+			if (facetMetaData == null)
+				return null;
+			return facetMetaData.Facets.Cast<F>().FirstOrDefault();
 		}
 		*/
 		public IEnumerable<Highlight> Highlights
@@ -181,8 +181,8 @@ namespace Nest
 				{
 					foreach (var hit in this.Hits.Hits)
 					{
-            if (hit == null || hit.Highlight == null)
-              continue;
+			if (hit == null || hit.Highlight == null)
+			  continue;
 
 						foreach (var h in hit.Highlight)
 						{

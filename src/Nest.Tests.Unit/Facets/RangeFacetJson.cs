@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.Facets
             r=>r.From(250)
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""loc.sort"" :  {
@@ -80,7 +80,7 @@ namespace Nest.Tests.Unit.Facets
             r => r.From(100.0)
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""loc.sort"" :  {
@@ -117,7 +117,7 @@ namespace Nest.Tests.Unit.Facets
             r => r.To(new DateTime(1990,1,1).Date)
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
@@ -148,7 +148,7 @@ namespace Nest.Tests.Unit.Facets
             r => r.To(new DateTime(1990, 1, 1).Date)
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" : {
@@ -180,7 +180,7 @@ namespace Nest.Tests.Unit.Facets
             r => r.To(new DateTime(1990, 1, 1).Date)
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" : {

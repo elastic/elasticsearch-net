@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Facets
           .FacetFilter(ff=>ff.Exists(f=>f.Name))
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""name.sort"" :  
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Facets
           .FacetFilter(ff=>ff.Exists(f=>f.Name))
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""name.sort"" :  
@@ -84,7 +84,7 @@ namespace Nest.Tests.Unit.Facets
           .FacetFilter(ff => ff.Exists(f => f.Name))
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""name.sort"" :  

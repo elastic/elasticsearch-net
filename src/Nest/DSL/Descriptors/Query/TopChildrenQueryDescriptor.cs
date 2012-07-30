@@ -5,15 +5,16 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class TopChildrenQueryDescriptor<T>  where T : class
 	{
-		public TopChildrenQueryDescriptor()
+		public TopChildrenQueryDescriptor(TypeNameResolver typeNameResolver)
 		{
-			this._Type = ElasticClient.GetTypeNameFor<T>();
+			this._Type = typeNameResolver.GetTypeNameFor<T>();
 		}
 		[JsonProperty("type")]
 		internal string _Type { get; set; }

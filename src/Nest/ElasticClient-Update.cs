@@ -7,18 +7,18 @@ namespace Nest
 	{
 		public IUpdateResponse Update<T>(Action<UpdateDescriptor<T>> updateSelector) where T : class
 		{
-			var updateDescriptor = new UpdateDescriptor<T>();
+			var updateDescriptor = new UpdateDescriptor<T>(this.TypeNameResolver);
 			updateSelector(updateDescriptor);
-      var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
-      //var data = ElasticClient.Serialize(updateDescriptor);
+			var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
+			//var data = ElasticClient.Serialize(updateDescriptor);
 			var path = this.CreateUpdatePath<T>(updateDescriptor);
 			return this._Update(path, data);
 		}
 		public IUpdateResponse Update(Action<UpdateDescriptor<dynamic>> updateSelector)
 		{
-			var updateDescriptor = new UpdateDescriptor<dynamic>();
+			var updateDescriptor = new UpdateDescriptor<dynamic>(this.TypeNameResolver);
 			updateSelector(updateDescriptor);
-      var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
+			var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
 			//var data = ElasticClient.Serialize(updateDescriptor);
 			var path = this.CreateUpdatePath<dynamic>(updateDescriptor);
 			return this._Update(path, data);
@@ -26,7 +26,7 @@ namespace Nest
 		private string CreateUpdatePath<T>(UpdateDescriptor<T> s) where T : class
 		{
 			var index = s._Index ?? this.Settings.GetIndexForType<T>();
-			var type = s._Type ?? ElasticClient.GetTypeNameFor<T>();
+			var type = s._Type ?? this.TypeNameResolver.GetTypeNameFor<T>();
 			var id = s._Id ?? this.GetIdFor(s._Object);
 
 			index.ThrowIfNullOrEmpty("index");

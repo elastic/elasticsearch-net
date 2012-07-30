@@ -121,7 +121,7 @@ namespace Nest.Resolvers.Writers
 				if (att != null && att.OptOut)
 					continue;
 
-				var propertyName = this.PropertyNameResolver.Resolve(p);
+				var propertyName = new PropertyNameResolver().Resolve(p);
 
 				var type = GetElasticSearchType(att, p);
 

@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.FilterTests
 					
 				);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""and"": {
@@ -58,7 +58,7 @@ namespace Nest.Tests.Unit.FilterTests
 
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""and"": {

@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.FilterTests
 			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
 				.Filter(ff=>ff.Missing(f=>f.Name));
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						missing : { field : ""name"" }

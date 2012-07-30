@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Query
 					)
 				);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						range: {
@@ -57,7 +57,7 @@ namespace Nest.Tests.Unit.Query
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						range: {
@@ -88,7 +88,7 @@ namespace Nest.Tests.Unit.Query
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						range: {
@@ -118,7 +118,7 @@ namespace Nest.Tests.Unit.Query
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						range: {
@@ -151,7 +151,7 @@ namespace Nest.Tests.Unit.Query
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						range: {
@@ -184,7 +184,7 @@ namespace Nest.Tests.Unit.Query
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						range: {

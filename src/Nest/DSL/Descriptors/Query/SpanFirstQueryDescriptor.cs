@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -19,7 +20,7 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			this.MatchTerm(field, value, Boost: Boost);
 			return this;
 		}

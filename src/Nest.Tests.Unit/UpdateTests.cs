@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit
         .Params(p => p
             .Add("count", 4)
         );
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"  {
 	      script: ""ctx._source.counter += count"",
 	      params: {

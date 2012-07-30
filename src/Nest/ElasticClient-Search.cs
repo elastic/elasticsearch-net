@@ -12,7 +12,7 @@ namespace Nest
 			var search = new SearchDescriptor<dynamic>();
 			var descriptor = searcher(search);
 			var path = this.GetPathForDynamic(descriptor);
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 
 			ConnectionStatus status = this.Connection.PostSync(path, query);
 			var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
@@ -26,7 +26,7 @@ namespace Nest
 			var search = new SearchDescriptor<T>();
 			var descriptor = searcher(search);
 
-			var query = ElasticClient.Serialize(descriptor);
+			var query = this.Serialize(descriptor);
 			var path = this.GetPathForTyped(descriptor);
 			ConnectionStatus status = this.Connection.PostSync(path, query);
 			var r = this.ToParsedResponse<QueryResponse<T>>(status);

@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit
           .MissingLast()
           .Descending()
       );
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"  {
           from: 0,
           size: 10,
@@ -53,7 +53,7 @@ namespace Nest.Tests.Unit
           .PinTo(40, -70)
           .Unit(GeoUnit.km)
       );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"  {
           from: 0,
           size: 10,
@@ -83,7 +83,7 @@ namespace Nest.Tests.Unit
           )
           .Type("number")
       );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"  {
           from: 0,
           size: 10,
