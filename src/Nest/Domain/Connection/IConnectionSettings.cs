@@ -11,15 +11,14 @@ namespace Nest
 		int Port { get; }
 		int TimeOut { get; }
 		string ProxyAddress { get; }
-		string Username { get;  }
+		string Username { get; }
 		string Password { get; }
 		string DefaultIndex { get; }
 		int MaximumAsyncConnections { get; }
-		Func<string, string> TypeNameInferrer { get; }
 		bool UsesPrettyResponses { get; }
-        Uri Uri { get; }
+		Uri Uri { get; }
 
-    string GetIndexForType<T>();
-    string GetIndexForType(Type type);
+		string GetIndexForType<T>();
+		string GetIndexForType(Type type);
 	}
 }

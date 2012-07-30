@@ -17,9 +17,9 @@ namespace Nest
 	public class QueryDescriptor<T>  : BaseQuery, IQueryDescriptor<T> where T : class
 	{
 		private readonly TypeNameResolver typeNameResolver;
-		public QueryDescriptor(TypeNameResolver typeNameResolver)
+		public QueryDescriptor()
 		{
-			this.typeNameResolver = typeNameResolver;
+			this.typeNameResolver = new TypeNameResolver();
 		}
 
 		[JsonProperty(PropertyName = "match_all")]
@@ -80,12 +80,6 @@ namespace Nest
 		internal NestedQueryDescriptor<T> NestedQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "indices")]
 		internal IndicesQueryDescriptor<T> IndicesQueryDescriptor { get; set; }
-
-
-		public QueryDescriptor()
-		{
-			
-		}
 		
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.
@@ -301,7 +295,7 @@ namespace Nest
 		/// <typeparam name="K">Type of the child</typeparam>
 		public BaseQuery HasChild<K>(Action<HasChildQueryDescriptor<K>> selector) where K : class
 		{
-			var query = new HasChildQueryDescriptor<K>(this.typeNameResolver);
+			var query = new HasChildQueryDescriptor<K>();
 			selector(query);
 			this.HasChildQueryDescriptor = query;
 			return new QueryDescriptor<T> { HasChildQueryDescriptor = this.HasChildQueryDescriptor };
@@ -314,7 +308,7 @@ namespace Nest
 		/// <typeparam name="K">Type of the child</typeparam>
 		public BaseQuery TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
 		{
-			var query = new TopChildrenQueryDescriptor<K>(this.typeNameResolver);
+			var query = new TopChildrenQueryDescriptor<K>();
 			selector(query);
 			this.TopChildrenQueryDescriptor = query;
 			return new QueryDescriptor<T> { TopChildrenQueryDescriptor = this.TopChildrenQueryDescriptor };

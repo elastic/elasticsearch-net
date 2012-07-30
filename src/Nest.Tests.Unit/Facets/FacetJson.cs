@@ -27,11 +27,11 @@ namespace Nest.Tests.Unit.Facets
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""name.sort"" :  
+            ""name"" :  
             {
               global: true,
               terms: {
-                field: ""name.sort""
+                field: ""name""
               },
               facet_filter: {
                 exists: { field: ""name"" }
@@ -57,11 +57,11 @@ namespace Nest.Tests.Unit.Facets
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""name.sort"" :  
+            ""name"" :  
             {
               _scope: ""some_nested_query"",
               terms: {
-                field: ""name.sort""
+                field: ""name""
               },
               facet_filter: {
                 exists: { field: ""name"" }
@@ -87,11 +87,11 @@ namespace Nest.Tests.Unit.Facets
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""name.sort"" :  
+            ""name"" :  
             {
               nested: ""some_nested_query"",
               terms: {
-                field: ""name.sort""
+                field: ""name""
               },
               facet_filter: {
                 exists: { field: ""name"" }

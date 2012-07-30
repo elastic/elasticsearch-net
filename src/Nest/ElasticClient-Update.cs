@@ -7,7 +7,7 @@ namespace Nest
 	{
 		public IUpdateResponse Update<T>(Action<UpdateDescriptor<T>> updateSelector) where T : class
 		{
-			var updateDescriptor = new UpdateDescriptor<T>(this.TypeNameResolver);
+			var updateDescriptor = new UpdateDescriptor<T>();
 			updateSelector(updateDescriptor);
 			var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
 			//var data = ElasticClient.Serialize(updateDescriptor);
@@ -16,7 +16,7 @@ namespace Nest
 		}
 		public IUpdateResponse Update(Action<UpdateDescriptor<dynamic>> updateSelector)
 		{
-			var updateDescriptor = new UpdateDescriptor<dynamic>(this.TypeNameResolver);
+			var updateDescriptor = new UpdateDescriptor<dynamic>();
 			updateSelector(updateDescriptor);
 			var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
 			//var data = ElasticClient.Serialize(updateDescriptor);

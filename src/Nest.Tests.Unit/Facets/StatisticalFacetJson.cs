@@ -25,9 +25,9 @@ namespace Nest.Tests.Unit.Facets
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""loc.sort"" :  {
+            ""loc"" :  {
                 statistical : {
-                  field : ""loc.sort""
+                  field : ""loc""
                } 
             }
           }, query : { raw : ""query""}
@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit.Facets
           facets :  {
             ""needs_a_name"" :  {
                 statistical : {
-                  fields : [""loc.sort"", ""longValue""]
+                  fields : [""loc"", ""longValue""]
                } 
             }
           }, query : { raw : ""query""}

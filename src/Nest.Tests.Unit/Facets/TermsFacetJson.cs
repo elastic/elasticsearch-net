@@ -113,7 +113,7 @@ namespace Nest.Tests.Unit.Facets
           facets :  {
             i_bet_this_crazy_facet_actually_works :  {
                 terms : {
-                    fields : [""country"", ""loc.sort""],
+                    fields : [""country"", ""loc""],
                     size : 20,
                     order: ""reverse_count"",
                     all_terms: true,

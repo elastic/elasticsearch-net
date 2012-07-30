@@ -7,11 +7,6 @@ namespace Nest.Resolvers
 {
 	public class TypeNameResolver
 	{
-		private readonly IConnectionSettings connectionSettings;
-		public TypeNameResolver(IConnectionSettings connectionSettings)
-		{
-			this.connectionSettings = connectionSettings;
-		}
 		public string GetTypeNameFor(Type type)
 		{
 			if (!type.IsClass && !type.IsInterface)
@@ -30,18 +25,8 @@ namespace Nest.Resolvers
 			var att = new PropertyNameResolver().GetElasticPropertyFor(type);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
-			else if (this.connectionSettings == null)
-			{
-				typeName = Inflector.MakePlural(type.Name).ToLower();
-			}
 			else
-			{
-
-				if (this.connectionSettings.TypeNameInferrer != null)
-					typeName = this.connectionSettings.TypeNameInferrer(typeName);
-				if (this.connectionSettings.TypeNameInferrer == null || string.IsNullOrEmpty(typeName))
-					typeName = Inflector.MakePlural(type.Name).ToLower();
-			}
+				typeName = Inflector.MakePlural(type.Name).ToLower();
 			return typeName;
 		}
 	}

@@ -20,9 +20,9 @@ namespace Nest
 	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T> where T : class
 	{
 		private readonly TypeNameResolver typeNameResolver;
-		public FilterDescriptor(TypeNameResolver typeNameResolver)
+		public FilterDescriptor()
 		{
-			this.typeNameResolver = typeNameResolver;
+			this.typeNameResolver = new TypeNameResolver();
 		}
 
 
@@ -112,10 +112,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "nested")]
 		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
 
-		public FilterDescriptor()
-		{
-
-		}
 		private void SetCacheAndName(FilterBase filter)
 		{
 			if (this._Cache.HasValue)
@@ -397,7 +393,7 @@ namespace Nest
 		/// <typeparam name="K">Type of the child</typeparam>
 		public BaseFilter HasChild<K>(Action<HasChildFilterDescriptor<K>> querySelector) where K : class
 		{
-			var descriptor = new HasChildFilterDescriptor<K>(this.typeNameResolver);
+			var descriptor = new HasChildFilterDescriptor<K>();
 			querySelector(descriptor);
 			this.HasChildFilter = descriptor;
 			return new FilterDescriptor<T>() { HasChildFilter = descriptor };

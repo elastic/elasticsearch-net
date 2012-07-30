@@ -11,9 +11,9 @@ namespace Nest
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class HasChildFilterDescriptor<T> : FilterBase where T : class
 	{
-		public HasChildFilterDescriptor(TypeNameResolver typeNameResolver)
+		public HasChildFilterDescriptor()
 		{
-			this._Type = typeNameResolver.GetTypeNameFor<T>();
+			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
 		}
 
 		[JsonProperty("type")]
@@ -25,7 +25,7 @@ namespace Nest
 		[JsonProperty("query")]
 		internal QueryDescriptor<T> _QueryDescriptor { get; set;}
 
-    public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			this._QueryDescriptor = new QueryDescriptor<T>();
 			querySelector(this._QueryDescriptor);

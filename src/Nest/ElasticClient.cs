@@ -52,7 +52,7 @@ namespace Nest
 
 			this.Settings = settings;
 			this.Connection = connection;
-			this.TypeNameResolver = new TypeNameResolver(settings);
+			this.TypeNameResolver = new TypeNameResolver();
 
 			this.DeserializeSettings = this.CreateDeserializeSettings();
 			this.SerializationSettings = this.CreateSettings();

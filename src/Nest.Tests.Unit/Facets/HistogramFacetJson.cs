@@ -22,9 +22,9 @@ namespace Nest.Tests.Unit.Facets
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""loc.sort"" :  {
+            ""loc"" :  {
                 histogram : {
-                    field : ""loc.sort"",
+                    field : ""loc"",
                     interval : 100
                 } 
             }

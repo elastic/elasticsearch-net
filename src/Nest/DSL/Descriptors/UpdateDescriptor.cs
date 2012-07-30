@@ -12,10 +12,9 @@ namespace Nest
 	{
 		private readonly TypeNameResolver typeNameResolver;
 
-		public UpdateDescriptor() : this(new TypeNameResolver(null)) {}
-		public UpdateDescriptor(TypeNameResolver typeNameResolver)
+		public UpdateDescriptor()
 		{
-			this.typeNameResolver = typeNameResolver;
+			this.typeNameResolver = new TypeNameResolver();
 		}
 
 		[JsonProperty(PropertyName = "script")]

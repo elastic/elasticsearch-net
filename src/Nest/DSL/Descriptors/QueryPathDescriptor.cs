@@ -13,19 +13,14 @@ namespace Nest
 	public class QueryPathDescriptor : QueryPathDescriptor<dynamic>
 	{
 
-		public QueryPathDescriptor(TypeNameResolver typeNameResolver)
-			: base(typeNameResolver)
-		{
-			
-		}
 	}
 	public class QueryPathDescriptor<T> : QueryDescriptor<T> where T : class
 	{
 		private readonly TypeNameResolver typeNameResolver;
 
-		public QueryPathDescriptor(TypeNameResolver typeNameResolver)
+		public QueryPathDescriptor()
 		{
-			this.typeNameResolver = typeNameResolver;
+			this.typeNameResolver = new TypeNameResolver();
 		}
 
 		internal IEnumerable<string> _Indices { get; set; }

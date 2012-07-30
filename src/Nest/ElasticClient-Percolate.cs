@@ -23,7 +23,7 @@ namespace Nest
 		public IRegisterPercolateResponse RegisterPercolator<T>(string name, Action<QueryPathDescriptor<T>> querySelector) where T : class
 		{
 		  querySelector.ThrowIfNull("queryDescriptor");
-			var descriptor = new QueryPathDescriptor<T>(this.TypeNameResolver);
+			var descriptor = new QueryPathDescriptor<T>();
 			querySelector(descriptor);
 			var query = this.Serialize(new { query = descriptor });
 			var index = this.Settings.GetIndexForType<T>();

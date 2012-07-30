@@ -16,11 +16,10 @@ namespace Nest
 	{
 		private readonly TypeNameResolver typeNameResolver;
 
-		public SearchDescriptor(TypeNameResolver typeNameResolver)
+		public SearchDescriptor()
 		{
-			this.typeNameResolver = typeNameResolver;
+			this.typeNameResolver = new TypeNameResolver();
 		}
-
 		internal IEnumerable<string> _Indices { get; set; }
 		internal IEnumerable<string> _Types { get; set; }
 		internal string _Routing { get; set; }
@@ -125,9 +124,7 @@ namespace Nest
 			this._Routing = routing;
 			return this;
 		}
-		public SearchDescriptor()
-		{
-		}
+
 
 
 		[JsonProperty(PropertyName = "timeout")]

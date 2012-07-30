@@ -65,13 +65,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Filter.cs" />
+    <Compile Include="DSL\Descriptors\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
     <Compile Include="DSL\Descriptors\BaseQuery.cs" />
     <Compile Include="DSL\Descriptors\BaseFilter.cs" />
-    <Compile Include="DSL\Descriptors\Filter.cs" />
     <Compile Include="DSL\Descriptors\IFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query.cs" />
     <Compile Include="DSL\Descriptors\IQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\TermsQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\UpdateDescriptor.cs" />

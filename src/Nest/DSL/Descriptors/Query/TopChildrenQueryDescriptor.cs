@@ -12,9 +12,9 @@ namespace Nest
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class TopChildrenQueryDescriptor<T>  where T : class
 	{
-		public TopChildrenQueryDescriptor(TypeNameResolver typeNameResolver)
+		public TopChildrenQueryDescriptor()
 		{
-			this._Type = typeNameResolver.GetTypeNameFor<T>();
+			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
 		}
 		[JsonProperty("type")]
 		internal string _Type { get; set; }

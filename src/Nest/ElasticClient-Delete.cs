@@ -542,7 +542,7 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public ConnectionStatus DeleteByQuery<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 		{
-			var descriptor = new QueryPathDescriptor<T>(this.TypeNameResolver);
+			var descriptor = new QueryPathDescriptor<T>();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForTyped(descriptor);
@@ -558,7 +558,7 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public ConnectionStatus DeleteByQuery(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
+			var descriptor = new QueryPathDescriptor();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForDynamic(descriptor);
@@ -575,7 +575,7 @@ namespace Nest
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public ConnectionStatus DeleteByQuery(string query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
+			var descriptor = new QueryPathDescriptor();
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -590,7 +590,7 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public Task<ConnectionStatus> DeleteByQueryAsync<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 		{
-			var descriptor = new QueryPathDescriptor<T>(this.TypeNameResolver);
+			var descriptor = new QueryPathDescriptor<T>();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForTyped(descriptor);
@@ -606,7 +606,7 @@ namespace Nest
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		public Task<ConnectionStatus> DeleteByQueryAsync(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
+			var descriptor = new QueryPathDescriptor();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForDynamic(descriptor);
@@ -623,7 +623,7 @@ namespace Nest
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public Task<ConnectionStatus> DeleteByQueryAsync(string query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor(this.TypeNameResolver);
+			var descriptor = new QueryPathDescriptor();
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);

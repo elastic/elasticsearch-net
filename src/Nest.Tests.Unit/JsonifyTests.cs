@@ -166,7 +166,7 @@ namespace Nest.Tests.Unit
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc.sort"": ""asc""
+						""loc"": ""asc""
 					},
 					fields: [""id"", ""name""]
 				}";
@@ -184,8 +184,8 @@ namespace Nest.Tests.Unit
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc.sort"": ""asc"",
-						""name.sort"": ""desc""
+						""loc"": ""asc"",
+						""name"": ""desc""
 					},
 					fields: [""id"", ""name""]
 				}";

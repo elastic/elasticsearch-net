@@ -32,9 +32,9 @@ namespace Nest.Tests.Unit.Facets
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""loc.sort"" :  {
+            ""loc"" :  {
                 range : {
-                    field : ""loc.sort"",
+                    field : ""loc"",
                     ranges: [
                       {
                         to: 50
@@ -83,9 +83,9 @@ namespace Nest.Tests.Unit.Facets
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""loc.sort"" :  {
+            ""loc"" :  {
                 range : {
-                    field : ""loc.sort"",
+                    field : ""loc"",
                     ranges: [
                       {
                         to: 50.0
