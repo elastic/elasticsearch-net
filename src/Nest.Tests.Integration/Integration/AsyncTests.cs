@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Nest;
-using HackerNews.Indexer.Domain;
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
-using System.Threading;
+﻿using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 using System.Diagnostics;
 using System.Net;
 
-namespace Nest.Tests.Integration.Integration.Integration
+namespace Nest.Tests.Integration.Integration
 {
 	[TestFixture]
 	public class AsyncTests : BaseElasticSearchTests

@@ -70,7 +70,7 @@ namespace Nest
 		}
 		
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Greater(string from)
 		{
@@ -79,7 +79,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public RangeFilterDescriptor<T> GreaterOrEquals(string from)
 		{
@@ -88,7 +88,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Lower(string to)
 		{
@@ -128,7 +128,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Greater(int from)
 		{
@@ -137,7 +137,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public RangeFilterDescriptor<T> GreaterOrEquals(int from)
 		{
@@ -146,7 +146,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Lower(int to)
 		{
@@ -155,7 +155,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(int to)
 		{
@@ -186,7 +186,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Greater(double from)
 		{
@@ -195,7 +195,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public RangeFilterDescriptor<T> GreaterOrEquals(double from)
 		{
@@ -204,7 +204,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Lower(double to)
 		{
@@ -213,7 +213,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(double to)
 		{
@@ -244,7 +244,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Greater(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
 		{
@@ -253,7 +253,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public RangeFilterDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
 		{
@@ -262,7 +262,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public RangeFilterDescriptor<T> Lower(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
 		{
@@ -271,7 +271,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public RangeFilterDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
 		{

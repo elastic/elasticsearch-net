@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Nest;
-using HackerNews.Indexer.Domain;
-using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace Nest.Tests.Integration.Integration.FacetResponses
+namespace Nest.Tests.Integration.Facet
 {
 	/// <summary>
 	///  Tests that test whether the query response can be successfully mapped or not
