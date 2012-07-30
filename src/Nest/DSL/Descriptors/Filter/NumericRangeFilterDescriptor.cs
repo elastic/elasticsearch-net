@@ -7,6 +7,10 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	/// <summary>
+	/// Filters documents with fields that have values within a certain numeric range. Similar to range filter, except that it works only with numeric values
+	/// </summary>
+	/// <typeparam name="T">Type of document</typeparam>
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class NumericRangeFilterDescriptor<T> : FilterBase where T : class
 	{
@@ -14,9 +18,9 @@ namespace Nest
 		internal object _From { get; set;}
 		[JsonProperty("to")]
 		internal object _To { get; set; }
-		[JsonProperty("from_inclusive")]
+		[JsonProperty("include_lower")]
 		internal bool? _FromInclusive { get; set; }
-		[JsonProperty("to_inclusive")]
+		[JsonProperty("include_upper")]
 		internal bool? _ToInclusive { get; set; }
 
 		internal string _Field { get; set; }
@@ -72,7 +76,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Greater(int from)
 		{
@@ -81,7 +85,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> GreaterOrEquals(int from)
 		{
@@ -90,7 +94,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Lower(int to)
 		{
@@ -99,7 +103,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> LowerOrEquals(int to)
 		{
@@ -129,7 +133,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Greater(double from)
 		{
@@ -138,7 +142,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> GreaterOrEquals(double from)
 		{
@@ -147,7 +151,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Lower(double to)
 		{
@@ -156,7 +160,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> LowerOrEquals(double to)
 		{
@@ -186,7 +190,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Greater(string from)
 		{
@@ -195,7 +199,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> GreaterOrEquals(string from)
 		{
@@ -204,7 +208,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Lower(string to)
 		{
@@ -213,7 +217,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> LowerOrEquals(string to)
 		{
@@ -243,7 +247,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Greater(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
 		{
@@ -252,7 +256,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
 		{
@@ -261,7 +265,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> Lower(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
 		{
@@ -270,7 +274,7 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public NumericRangeFilterDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
 		{

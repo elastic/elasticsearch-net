@@ -58,6 +58,7 @@
     <Compile Include="Indices\ExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Integration\AsyncTests.cs" />
+    <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
     <Compile Include="Integration\UpdateTests.cs" />
     <Compile Include="Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Integration\HighlightTests.cs" />

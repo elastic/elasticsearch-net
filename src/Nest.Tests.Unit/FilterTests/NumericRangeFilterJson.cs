@@ -33,7 +33,7 @@ namespace Nest.Tests.Unit.FilterTests
 							""loc.sort"": {
 								from: 10,
 								to: 20,
-								from_inclusive: false
+								include_lower: false
 							}
 						}
 
@@ -62,8 +62,8 @@ namespace Nest.Tests.Unit.FilterTests
 							""loc.sort"": {
 								from: 10,
 								to: 20,
-								from_inclusive: true,
-								to_inclusive: true
+								include_lower: true,
+								include_upper: true
 							},
 							_cache: true
 						}
@@ -94,7 +94,7 @@ namespace Nest.Tests.Unit.FilterTests
 							""loc.sort"": {
 								from: 10.0,
 								to: 20.0,
-								from_inclusive: false
+								include_lower: false
 							}
 						}
 
@@ -127,7 +127,7 @@ namespace Nest.Tests.Unit.FilterTests
 							""startedOn"": {
 								from: """ + lowerBound.ToString(format) + @""",
 								to: """ + upperBound.ToString(format) + @""",
-								from_inclusive: false
+								include_lower: false
 							}
 						}
 

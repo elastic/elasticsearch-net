@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using NUnit.Framework;
-
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration.Integration.Query
+namespace Nest.Tests.Integration.Integration.Query
 {
 	[TestFixture]
 	public class TermQueryDynamic : BaseElasticSearchTests

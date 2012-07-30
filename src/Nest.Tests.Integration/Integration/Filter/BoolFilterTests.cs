@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-
+﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration.Integration.Filter
+namespace Nest.Tests.Integration.Integration.Filter
 {
 	[TestFixture]
 	public class BoolFilterTests : BaseElasticSearchTests

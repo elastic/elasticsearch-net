@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Nest;
-
-using Nest.Tests.MockData;
-using Nest.Tests.MockData.Domain;
+﻿using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Integration.Mapping
+namespace Nest.Tests.Integration.Mapping
 {
 	[TestFixture]
 	public class MapTests : BaseElasticSearchTests

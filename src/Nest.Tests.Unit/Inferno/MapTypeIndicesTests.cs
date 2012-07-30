@@ -17,33 +17,19 @@ namespace Nest.Tests.Unit.Inferno
 	[TestFixture]
 	public class MapTypeIndicesTests
 	{
-    [Test]
+		[Test]
 		public void ResolvesToTypeIndex()
-    {
-      var clientSettings = new ConnectionSettings(Test.Default.Uri)
-        .SetDefaultIndex("mydefaultindex")
-        .MapTypeIndices(p =>
-          p.Add(typeof(ElasticSearchProject), "mysuperindex")
-        );
-      var c = new ElasticClient(clientSettings);
-      var searchPath = c.GetPathForTyped(new SearchDescriptor<ElasticSearchProject>());
-      StringAssert.StartsWith("mysuperindex", searchPath);
-      searchPath = c.GetPathForTyped(new SearchDescriptor<GeoLocation>());
-      StringAssert.StartsWith("mydefaultindex", searchPath);
-    }
-    [Test]
-    public void ResolvesToTypeIndex()
-    {
-      var clientSettings = new ConnectionSettings(Test.Default.Uri)
-        .SetDefaultIndex("mydefaultindex")
-        .MapTypeIndices(p =>
-          p.Add(typeof(ElasticSearchProject), "mysuperindex")
-        );
-      var c = new ElasticClient(clientSettings);
-      var searchPath = c.GetPathForTyped(new SearchDescriptor<ElasticSearchProject>());
-      StringAssert.StartsWith("mysuperindex", searchPath);
-      searchPath = c.GetPathForTyped(new SearchDescriptor<GeoLocation>());
-      StringAssert.StartsWith("mydefaultindex", searchPath);
-    }
+		{
+			var clientSettings = new ConnectionSettings(Test.Default.Uri)
+				.SetDefaultIndex("mydefaultindex")
+				.MapTypeIndices(p =>
+					p.Add(typeof(ElasticSearchProject), "mysuperindex")
+			);
+			var c = new ElasticClient(clientSettings);
+			var searchPath = c.GetPathForTyped(new SearchDescriptor<ElasticSearchProject>());
+			StringAssert.StartsWith("mysuperindex", searchPath);
+			searchPath = c.GetPathForTyped(new SearchDescriptor<GeoLocation>());
+			StringAssert.StartsWith("mydefaultindex", searchPath);
+		}
 	}
 }
