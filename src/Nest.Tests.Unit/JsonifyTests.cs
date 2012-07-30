@@ -143,6 +143,19 @@ namespace Nest.Tests.Unit
 			Assert.True(json.JsonEquals(expected));
 		}
 		[Test]
+		public void TestFieldsByName()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Fields("id", "name");
+			var json = ElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				fields: [""id"", ""name""]
+				}";
+			Assert.True(json.JsonEquals(expected));
+		}
+		[Test]
 		public void TestSort()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()

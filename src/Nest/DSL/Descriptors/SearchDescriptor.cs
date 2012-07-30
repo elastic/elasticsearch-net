@@ -132,7 +132,7 @@ namespace Nest
 		internal bool? _Explain { get; set; }
 		[JsonProperty(PropertyName = "version")]
 		internal bool? _Version { get; set; }
-	[JsonProperty(PropertyName = "track_scores ")]
+		[JsonProperty(PropertyName = "track_scores ")]
 		internal bool? _TrackScores { get; set; }
 	
 		[JsonProperty(PropertyName = "min_score")]
@@ -347,6 +347,15 @@ namespace Nest
 				this._Fields = new List<string>();
 			foreach (var e in expressions)
 				this._Fields.Add(ElasticClient.PropertyNameResolver.Resolve(e));
+			return this;
+		}
+		/// <summary>
+		/// Allows to selectively load specific fields for each document 
+		/// represented by a search hit. Defaults to load the internal _source field.
+		/// </summary>
+		public SearchDescriptor<T> Fields(params string[] fields)
+		{
+			this._Fields = fields;
 			return this;
 		}
 		/// <summary>
