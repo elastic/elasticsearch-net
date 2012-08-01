@@ -123,9 +123,9 @@ namespace Nest
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
-      
-			myReq.Timeout = 1000 * 60; // 1 minute timeout.
-			myReq.ReadWriteTimeout = 1000 * 60; // 1 minute timeout.
+
+      myReq.Timeout = timeout; // 1 minute timeout.
+      myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
 			myReq.Method = method;
 
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
