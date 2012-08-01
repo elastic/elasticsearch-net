@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Facets
         .Size(10)
         .QueryRawJson(@"{ raw : ""query""}")
         .FacetTerm(t => t.OnField(f => f.Country).Size(20));
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             country :  {
@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit.Facets
           .Script("term + 'aaa'")
           .ScriptField("_source.my_field")
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             country :  {
@@ -108,12 +108,12 @@ namespace Nest.Tests.Unit.Facets
           .ScriptField("_source.my_field")
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             i_bet_this_crazy_facet_actually_works :  {
                 terms : {
-                    fields : [""country"", ""loc.sort""],
+                    fields : [""country"", ""loc""],
                     size : 20,
                     order: ""reverse_count"",
                     all_terms: true,

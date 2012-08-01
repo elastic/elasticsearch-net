@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.QueryTests
 					.Ids(new[] { "1", "4", "100" })
 			);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						ids : { 
@@ -37,7 +37,7 @@ namespace Nest.Tests.Unit.QueryTests
 					.Ids("my_type", new[] { "1", "4", "100" })
 			);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						ids : { 
@@ -56,7 +56,7 @@ namespace Nest.Tests.Unit.QueryTests
 					.Ids(new []{"my_type", "my_other_type"}, new[] { "1", "4", "100" })
 			);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						ids : { 

@@ -91,7 +91,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}
@@ -101,7 +101,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}

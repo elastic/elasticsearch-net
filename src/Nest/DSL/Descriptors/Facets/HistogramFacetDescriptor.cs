@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -44,7 +45,7 @@ namespace Nest
     public HistogramFacetDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.OnField(fieldName);
     }
     public HistogramFacetDescriptor<T> Interval(int interval)
@@ -72,7 +73,7 @@ namespace Nest
     public HistogramFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.KeyField(fieldName);
     }
     public HistogramFacetDescriptor<T> KeyField(string keyField)
@@ -90,7 +91,7 @@ namespace Nest
     public HistogramFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.ValueField(fieldName);
     }
     public HistogramFacetDescriptor<T> ValueField(string valueField)

@@ -6,9 +6,10 @@ using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 namespace Nest
 {
-  public class FuzzyQueryDescriptor<T>  where T : class
+	public class FuzzyQueryDescriptor<T>  where T : class
 	{
 		internal string _Field { get; set; }
 		[JsonProperty(PropertyName = "boost")]
@@ -27,7 +28,7 @@ namespace Nest
 		}
 		public FuzzyQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 		public FuzzyQueryDescriptor<T> Boost(double boost)

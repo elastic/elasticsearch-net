@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.GeoBoundingBox(f => f.Origin, 40.73, -74.1, 40.717, -73.99)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 					 geo_bounding_box: {
@@ -52,7 +52,7 @@ namespace Nest.Tests.Unit.FilterTests
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 					 geo_bounding_box: {

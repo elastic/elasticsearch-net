@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -36,7 +37,7 @@ namespace Nest
 			params Expression<Func<T, object>>[] objectPaths)
 		{
 			var fieldNames = objectPaths
-				.Select(o => ElasticClient.PropertyNameResolver.Resolve(o));
+        .Select(o => new PropertyNameResolver().Resolve(o));
 			return this.OnFields(fieldNames);
 		}
 		public FuzzyLikeThisDescriptor<T> LikeText(string likeText)

@@ -11,6 +11,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest.Tests.Unit.Inferno
 {
@@ -57,7 +58,7 @@ namespace Nest.Tests.Unit.Inferno
 		public void TestUsesElasticProperty()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.MyCustomClass.MyProperty;
-			var propertyName = ElasticClient.PropertyNameResolver.Resolve(exp);
+			var propertyName = new PropertyNameResolver().Resolve(exp);
 			var expected = "myCustomClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -65,7 +66,7 @@ namespace Nest.Tests.Unit.Inferno
 		public void TestUsesOtherElasticProperty()
 		{
 			Expression<Func<SomeOtherClass, object>> exp = (m) => m.MyCustomClass.MyProperty;
-			var propertyName = ElasticClient.PropertyNameResolver.Resolve(exp);
+			var propertyName = new PropertyNameResolver().Resolve(exp);
 			var expected = "custom.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -73,7 +74,7 @@ namespace Nest.Tests.Unit.Inferno
 		public void TestUsesOtherElasticTypePropertyIsIgnored()
 		{
 			Expression<Func<SomeOtherClass, object>> exp = (m) => m.MyCustomOtherClass.MyProperty;
-			var propertyName = ElasticClient.PropertyNameResolver.Resolve(exp);
+			var propertyName = new PropertyNameResolver().Resolve(exp);
 			var expected = "myCustomOtherClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -81,7 +82,7 @@ namespace Nest.Tests.Unit.Inferno
 		public void TestCreatedDate()
 		{
 			Expression<Func<SomeOtherClass, object>> exp = (m) => m.CreateDate;
-			var propertyName = ElasticClient.PropertyNameResolver.Resolve(exp);
+			var propertyName = new PropertyNameResolver().Resolve(exp);
 			var expected = "CreateDate";
 			Assert.AreEqual(expected, propertyName);
 		}

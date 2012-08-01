@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -42,7 +43,7 @@ namespace Nest
 		}
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.Path(fieldName);
 		}
 		public NestedQueryDescriptor<T> Scope(string scope)

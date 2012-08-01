@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.MinSimilarity("1d")
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ fuzzy: { startedOn : { 
 				min_similarity: ""1d"",
@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.MinSimilarity("1d")
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ fuzzy: { startedOn : { 
 				boost: 2.0,

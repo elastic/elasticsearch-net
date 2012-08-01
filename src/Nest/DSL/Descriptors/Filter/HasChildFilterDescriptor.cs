@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -12,7 +13,7 @@ namespace Nest
 	{
 		public HasChildFilterDescriptor()
 		{
-			this._Type = ElasticClient.GetTypeNameFor<T>();
+			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
 		}
 
 		[JsonProperty("type")]
@@ -24,7 +25,7 @@ namespace Nest
 		[JsonProperty("query")]
 		internal QueryDescriptor<T> _QueryDescriptor { get; set;}
 
-    public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			this._QueryDescriptor = new QueryDescriptor<T>();
 			querySelector(this._QueryDescriptor);

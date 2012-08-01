@@ -19,12 +19,12 @@ namespace Nest.Tests.Unit.Facets
         .Size(10)
         .QueryRawJson(@"{ raw : ""query""}")
         .FacetHistogram(h => h.OnField(f=>f.LOC).Interval(100));
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""loc.sort"" :  {
+            ""loc"" :  {
                 histogram : {
-                    field : ""loc.sort"",
+                    field : ""loc"",
                     interval : 100
                 } 
             }
@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Facets
         .Size(10)
         .QueryRawJson(@"{ raw : ""query""}")
         .FacetHistogram(h => h.OnField(f => f.StartedOn).TimeInterval("1.5h"));
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
@@ -64,7 +64,7 @@ namespace Nest.Tests.Unit.Facets
           .OnField(f => f.StartedOn)
           .TimeInterval(TimeSpan.FromHours(1.5))
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
@@ -89,7 +89,7 @@ namespace Nest.Tests.Unit.Facets
           .ValueField("value_field_name")
           .Interval(100)
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {
@@ -115,7 +115,7 @@ namespace Nest.Tests.Unit.Facets
           .ValueScript("doc['num1'].value")
           .Interval(100)
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {
@@ -146,7 +146,7 @@ namespace Nest.Tests.Unit.Facets
             .Add("randomString", "stringy")
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {

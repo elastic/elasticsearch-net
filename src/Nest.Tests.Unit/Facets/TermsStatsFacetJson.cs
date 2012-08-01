@@ -22,13 +22,13 @@ namespace Nest.Tests.Unit.Facets
           .KeyField(f=>f.Name)
           .ValueField(f=>f.LOC)
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
-            ""name.sort"" :  {
+            ""name"" :  {
                 terms_stats : {
-                    key_field : ""name.sort"",
-                    value_field : ""loc.sort""
+                    key_field : ""name"",
+                    value_field : ""loc""
                 } 
             }
           }, query : { raw : ""query""}
@@ -52,7 +52,7 @@ namespace Nest.Tests.Unit.Facets
             .Add("randomString", "stringy")
           )
         );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""date_minute"" :  {

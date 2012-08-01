@@ -6,9 +6,10 @@ using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 namespace Nest
 {
-  public class TermsQueryDescriptor<T>  where T : class
+	public class TermsQueryDescriptor<T>  where T : class
 	{
 		internal string _Field { get; set; }
 		internal int? _MinMatch { get; set; }
@@ -21,7 +22,7 @@ namespace Nest
 		}
 		public TermsQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = ElasticClient.PropertyNameResolver.Resolve(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 		public TermsQueryDescriptor<T> MinimumMatch(int minMatch)

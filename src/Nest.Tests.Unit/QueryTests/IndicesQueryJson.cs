@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.NoMatchQuery(qq => qq.MatchAll())
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{  
 				indices: {
@@ -55,7 +55,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.NoMatchQuery(qq => qq.MatchAll())
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{  
 				indices: {
@@ -85,7 +85,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.NoMatchQuery(qq => qq.MatchAll())
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{  
 				indices: {

@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Facets
           .Interval(DateInterval.Day)
           .Factor(1000)
       );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
@@ -49,7 +49,7 @@ namespace Nest.Tests.Unit.Facets
           .OnField(f => f.StartedOn)
           .Interval(DateInterval.Day, DateRounding.Half_Floor)
       );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
@@ -74,7 +74,7 @@ namespace Nest.Tests.Unit.Facets
           .Interval(DateInterval.Day, DateRounding.Half_Floor)
           .TimeZone("-2")
       );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
@@ -101,7 +101,7 @@ namespace Nest.Tests.Unit.Facets
           .TimeZone("-2") //should be unset because we later specify pre_zone
           .TimeZones(Pre: "-3", Post: "-4")
       );
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {

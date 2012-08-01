@@ -26,11 +26,11 @@ namespace Nest.Tests.Unit.FilterTests
 					)
 				);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						numeric_range: {
-							""loc.sort"": {
+							""loc"": {
 								from: 10,
 								to: 20,
 								include_lower: false
@@ -55,11 +55,11 @@ namespace Nest.Tests.Unit.FilterTests
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						numeric_range: {
-							""loc.sort"": {
+							""loc"": {
 								from: 10,
 								to: 20,
 								include_lower: true,
@@ -87,11 +87,11 @@ namespace Nest.Tests.Unit.FilterTests
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						numeric_range: {
-							""loc.sort"": {
+							""loc"": {
 								from: 10.0,
 								to: 20.0,
 								include_lower: false
@@ -120,7 +120,7 @@ namespace Nest.Tests.Unit.FilterTests
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						numeric_range: {

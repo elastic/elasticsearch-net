@@ -13,9 +13,9 @@ namespace Nest.Tests.Integration.Search
       var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
         .From(0)
         .Size(10)
-        .Fields(f => f.Id, f => f.Name)
+		.Fields(f => f.Id, f => f.Country)
         .SortAscending(f => f.LOC)
-        .SortDescending(f => f.Name)
+        .SortDescending(f => f.Country)
         .Query(q => q
           .MatchAll()
         )
@@ -31,16 +31,16 @@ namespace Nest.Tests.Integration.Search
       var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
         .From(0)
         .Size(10)
-        .Fields(f => f.Id, f => f.Name)
+		.Fields(f => f.Id, f => f.Country)
         .SortAscending(f => f.LOC)
-        .SortDescending(f => f.Name)
+		.SortDescending(f => f.Country)
         .MatchAll()
       );
       Assert.NotNull(results);
       Assert.True(results.IsValid);
       Assert.NotNull(results.Documents);
       Assert.GreaterOrEqual(results.Documents.Count(), 10);
-      Assert.True(results.Documents.All(d => !string.IsNullOrEmpty(d.Name)));
+      Assert.True(results.Documents.All(d => !string.IsNullOrEmpty(d.Country)));
     }
     [Test]
     public void TestTermQuery()

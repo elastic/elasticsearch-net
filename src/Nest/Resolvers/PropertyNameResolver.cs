@@ -17,13 +17,11 @@ namespace Nest.Resolvers
 	public class PropertyNameResolver : ExpressionVisitor
 	{
 		private Stack<ElasticPropertyAttribute> _properties;
-		private JsonSerializerSettings SerializationSettings { get; set; }
 		private ElasticResolver ContractResolver { get; set; }
 
-		public PropertyNameResolver(JsonSerializerSettings settings)
+		public PropertyNameResolver()
 		{
-			this.SerializationSettings = settings;
-			this.ContractResolver = settings.ContractResolver as ElasticResolver;
+			this.ContractResolver = new ElasticResolver();
 		}
 
 		public ElasticPropertyAttribute GetElasticProperty(MemberInfo info)

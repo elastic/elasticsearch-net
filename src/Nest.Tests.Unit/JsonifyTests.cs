@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10 }";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -37,7 +37,7 @@ namespace Nest.Tests.Unit
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.Skip(0)
 				.Take(10);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10 }";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit
 				.Explain()
 				.Version()
 				.MinScore(0.4);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ 
 				from: 0, size: 10,
 				explain: true, 
@@ -70,7 +70,7 @@ namespace Nest.Tests.Unit
 				.MinScore(0.4)
 				.IndicesBoost(b => b.Add("index1", 1.4).Add("index2", 1.3));
 			;
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ 
 				from: 0, size: 10,
 				explain: true, 
@@ -91,7 +91,7 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.Preference("_primary");
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -102,7 +102,7 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.ExecuteOnPrimary();
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -113,7 +113,7 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.ExecuteOnLocalShard();
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, preference: ""_local"" }";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -124,7 +124,7 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.ExecuteOnNode("somenode");
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				preference: ""_only_node:somenode"" }";
 			Assert.True(json.JsonEquals(expected));
@@ -136,7 +136,20 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
+				fields: [""id"", ""name""]
+				}";
+			Assert.True(json.JsonEquals(expected));
+		}
+		[Test]
+		public void TestFieldsByName()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Fields("id", "name");
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				fields: [""id"", ""name""]
 				}";
@@ -150,10 +163,10 @@ namespace Nest.Tests.Unit
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name)
 				.SortAscending(e => e.LOC);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc.sort"": ""asc""
+						""loc"": ""asc""
 					},
 					fields: [""id"", ""name""]
 				}";
@@ -168,11 +181,11 @@ namespace Nest.Tests.Unit
 				.Fields(e => e.Id, e => e.Name)
 				.SortAscending(e => e.LOC)
 				.SortDescending(e => e.Name);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc.sort"": ""asc"",
-						""name.sort"": ""desc""
+						""loc"": ""asc"",
+						""name"": ""desc""
 					},
 					fields: [""id"", ""name""]
 				}";
@@ -186,7 +199,7 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.Query(q => q);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : {}}";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -200,7 +213,7 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.QueryRawJson(@"{ raw : ""query""}");
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -211,7 +224,7 @@ namespace Nest.Tests.Unit
 				.From(0)
 				.Size(10)
 				.FilterRawJson(@"{ raw : ""query""}");
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, filter : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -223,7 +236,7 @@ namespace Nest.Tests.Unit
 				.Size(10)
 				.FilterRawJson(@"{ raw : ""query""}")
 				.QueryRawJson(@"{ raw : ""query""}");
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}, filter : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected));
 		}
@@ -252,7 +265,7 @@ namespace Nest.Tests.Unit
 						.Boost(1.0)
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : {}}";
 			Assert.True(json.JsonEquals(expected));
 		}*/

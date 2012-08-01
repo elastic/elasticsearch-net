@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.Scope("my_scope")
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ top_children: { 
 				type: ""people"",
@@ -53,7 +53,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.Type("sillypeople")
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ top_children: { 
 				type: ""sillypeople"",

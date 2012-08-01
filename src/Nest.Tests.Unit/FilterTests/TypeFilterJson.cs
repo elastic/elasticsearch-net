@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.FilterTests
 				.Size(10)
 				.Filter(f=>f.Type("my_type"));
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						type : { 

@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Facets
           .Term(f=>f.Name, "elasticsearch.pm")
         );
 
-      var json = ElasticClient.Serialize(s);
+      var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""wow_facet"" :  {

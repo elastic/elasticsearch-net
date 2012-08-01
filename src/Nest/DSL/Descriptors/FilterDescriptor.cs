@@ -8,6 +8,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -18,6 +19,14 @@ namespace Nest
 
 	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T> where T : class
 	{
+		private readonly TypeNameResolver typeNameResolver;
+		public FilterDescriptor()
+		{
+			this.typeNameResolver = new TypeNameResolver();
+		}
+
+
+
 		internal string _Name { get; set; }
 		internal bool? _Cache { get; set; }
 
@@ -103,10 +112,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "nested")]
 		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
 
-		public FilterDescriptor()
-		{
-
-		}
 		private void SetCacheAndName(FilterBase filter)
 		{
 			if (this._Cache.HasValue)
@@ -155,7 +160,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Exists(field);
 		}
 		/// <summary>
@@ -173,7 +178,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Missing(field);
 		}
 		/// <summary>
@@ -226,7 +231,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.GeoBoundingBox(field, geoHashTopLeft, geoHashBottomRight, Type);
 		}
 		/// <summary>
@@ -234,7 +239,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.GeoBoundingBox(field, topLeftX, topLeftY, bottomRightX, bottomRightY, Type);
 		}
 		/// <summary>
@@ -273,7 +278,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoDistance(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.GeoDistance(field, filterDescriptor);
 		}
 		/// <summary>
@@ -307,7 +312,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.GeoDistanceRange(field, filterDescriptor);
 		}
 		/// <summary>
@@ -348,7 +353,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.GeoPolygon(field, points);
 		}
 		/// <summary>
@@ -364,7 +369,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.GeoPolygon(field, points);
 		}
 		/// <summary>
@@ -475,7 +480,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Prefix(field, prefix);
 		}
 		/// <summary>
@@ -498,7 +503,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Term(Expression<Func<T, object>> fieldDescriptor, string term)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Term(field, term);
 		}
 		/// <summary>
@@ -519,7 +524,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
-			var field = ElasticClient.PropertyNameResolver.Resolve(fieldDescriptor);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Terms(field, terms, Execution);
 		}
 		/// <summary>
@@ -540,7 +545,7 @@ namespace Nest
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-    public BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
+		public BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<FilterDescriptor<T>>();
 			foreach (var selector in filters)
@@ -560,7 +565,7 @@ namespace Nest
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
-    public BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
+		public BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<FilterDescriptor<T>>();
 			foreach (var selector in filters)
@@ -580,7 +585,7 @@ namespace Nest
 		/// A filter that filters out matched documents using a query. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-    public BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector)
+		public BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector)
 		{
 			var filter = new FilterDescriptor<T>();
 			selector(filter);
@@ -608,7 +613,7 @@ namespace Nest
 		/// <summary>
 		/// Wraps any query to be used as a filter. 
 		/// </summary>
-    public BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);

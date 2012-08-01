@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.QueryTests
 					)
 			);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						custom_boost_factor : { 

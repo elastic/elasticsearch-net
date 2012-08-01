@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -57,7 +58,7 @@ namespace Nest
     public DateHistogramFacetDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.OnField(fieldName);
     }
     public DateHistogramFacetDescriptor<T> Interval(DateInterval interval)
@@ -101,7 +102,7 @@ namespace Nest
     public DateHistogramFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.KeyField(fieldName);
     }
     public DateHistogramFacetDescriptor<T> KeyField(string keyField)
@@ -119,7 +120,7 @@ namespace Nest
     public DateHistogramFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.ValueField(fieldName);
     }
     public DateHistogramFacetDescriptor<T> ValueField(string valueField)

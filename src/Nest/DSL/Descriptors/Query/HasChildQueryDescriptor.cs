@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -12,7 +13,7 @@ namespace Nest
 	{
 		public HasChildQueryDescriptor()
 		{
-			this._Type = ElasticClient.GetTypeNameFor<T>();
+			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
 		}
 		[JsonProperty("type")]
 		internal string _Type { get; set; }

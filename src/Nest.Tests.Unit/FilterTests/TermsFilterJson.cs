@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.Terms(f=>f.Name, new [] {"elasticsearch.pm"})
 				);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						terms: {
@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.@bool)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						terms: {

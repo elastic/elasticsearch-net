@@ -31,7 +31,7 @@ namespace Nest
 		/// <returns>AnalyzeResponse contains a breakdown of the token under .Tokens</returns>
 		public IAnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string text) where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+			var index = this.Settings.GetIndexForType<T>();
 			return this.Analyze<T>(selector, index, text);
 		}
 		/// <summary>
@@ -40,12 +40,12 @@ namespace Nest
 		public IAnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string index, string text) where T : class
 		{
 			selector.ThrowIfNull("selector");
-			var fieldName = PropertyNameResolver.Resolve(selector);
+			var fieldName = this.PropertyNameResolver.Resolve(selector);
 			var analyzeParams = new AnalyzeParams() { Index = index, Field = fieldName };
 			return this._Analyze(analyzeParams, text);
 		}
 		
-        private AnalyzeResponse _Analyze(AnalyzeParams analyzeParams, string text)
+				private AnalyzeResponse _Analyze(AnalyzeParams analyzeParams, string text)
 		{
 			var path = this.CreatePath(analyzeParams.Index) + "_analyze?text=";
 			path += Uri.EscapeDataString(text);

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Tests.Unit
+namespace Nest.Inferno
 {
-	class Program
+	public class PathInferrer
 	{
-		static void Main(string[] args)
+		
+		public PathInferrer(IConnectionSettings settings)
 		{
+
 		}
+
 	}
 }

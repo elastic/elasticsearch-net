@@ -31,7 +31,7 @@ namespace Nest.Tests.Unit.FilterTests
 					)
 				);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""bool"": {
@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.FilterTests
 				.Filter(f => f.MatchAll() & f.Missing(p => p.LOC))
 			;
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""bool"": {
@@ -96,7 +96,7 @@ namespace Nest.Tests.Unit.FilterTests
 				.Filter(f => (f.MatchAll() && f.Missing(p => p.LOC)) || f.Term("x","y"))
 			;
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
             var expected = @"{ from: 0, size: 10, 
 				""filter"": {
 					""bool"": {
@@ -125,7 +125,7 @@ namespace Nest.Tests.Unit.FilterTests
 				.Filter(Filter.MatchAll() & Filter<ElasticSearchProject>.Missing(p => p.LOC))
 			;
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""bool"": {
@@ -168,7 +168,7 @@ namespace Nest.Tests.Unit.FilterTests
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""bool"": {

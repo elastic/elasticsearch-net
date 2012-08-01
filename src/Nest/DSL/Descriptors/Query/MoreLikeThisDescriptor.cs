@@ -5,10 +5,11 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
-  public class MoreLikeThisDescriptor<T>  where T : class
+	public class MoreLikeThisDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "fields")]
 		internal IEnumerable<string> _Fields { get; set; }
@@ -47,7 +48,7 @@ namespace Nest
 			params Expression<Func<T, object>>[] objectPaths)
 		{
 			var fieldNames = objectPaths
-				.Select(o => ElasticClient.PropertyNameResolver.Resolve(o));
+				.Select(o => new PropertyNameResolver().Resolve(o));
 			return this.OnFields(fieldNames);
 		}
 		public MoreLikeThisDescriptor<T> LikeText(string likeText)

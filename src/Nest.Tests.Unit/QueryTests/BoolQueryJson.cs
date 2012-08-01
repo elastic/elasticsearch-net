@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.QueryTests
 					)
 				);
 			
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""bool"": {
@@ -66,7 +66,7 @@ namespace Nest.Tests.Unit.QueryTests
 				.Size(10)
 				.Query((q1 & q2) | (q1 & q2));
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 
 			var expected = "{}";
 			Assert.True(json.JsonEquals(expected), json);
@@ -85,7 +85,7 @@ namespace Nest.Tests.Unit.QueryTests
 				.Size(10)
 				.Query(q1 && q2 && (q3 || q1));
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 
 			var expected = "{}";
 			Assert.True(json.JsonEquals(expected), json);
@@ -103,7 +103,7 @@ namespace Nest.Tests.Unit.QueryTests
 					| (q.Term(p => p.Name, "elasticsearch.pm") & q.Term(p => p.Name, "elasticflume"))
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = "{}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
@@ -124,7 +124,7 @@ namespace Nest.Tests.Unit.QueryTests
 					)
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""bool"": {

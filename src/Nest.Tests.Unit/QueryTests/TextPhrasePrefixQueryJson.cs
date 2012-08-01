@@ -24,12 +24,12 @@ namespace Nest.Tests.Unit.QueryTests
 					)
 			);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 					text: {
 						name : { 
-							type: ""text_phrase_prefix"", 
+							type: ""phrase_prefix"",
 							query : ""this is a test""
 						}
 					}
@@ -54,12 +54,12 @@ namespace Nest.Tests.Unit.QueryTests
 					)
 			);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 					text: {
 						name : { 
-							type: ""text_phrase_prefix"", 
+							type: ""phrase_prefix"",
 							query : ""this is a test"",
 							analyzer : ""my_analyzer"",
 							fuzziness: 1.0,

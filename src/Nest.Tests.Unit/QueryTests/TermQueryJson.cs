@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.QueryTests
 				.Query(q => q
 					.Term(f => f.Name, "elasticsearch.pm")
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ term: { name : { value : ""elasticsearch.pm"" } }}}";
 			Assert.True(json.JsonEquals(expected));
@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.QueryTests
 				.Query(q => q
 					.Term(f => f.Name, "elasticsearch.pm", Boost: 1.2)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ term: { name : { value : ""elasticsearch.pm"", boost: 1.2 } }}}";
 			Assert.True(json.JsonEquals(expected));

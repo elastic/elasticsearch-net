@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -34,7 +35,7 @@ namespace Nest
     public StatisticalFacetDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.OnField(fieldName);
     }
     public StatisticalFacetDescriptor<T> OnFields(params string[] fields)
@@ -46,7 +47,7 @@ namespace Nest
     }
     public StatisticalFacetDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths)
     {
-      var fieldNames = objectPaths.Select(o => ElasticClient.PropertyNameResolver.ResolveToSort(o))
+      var fieldNames = objectPaths.Select(o => new PropertyNameResolver().Resolve(o))
         .ToArray();
 
       return this.OnFields(fieldNames);

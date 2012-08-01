@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -40,7 +41,7 @@ namespace Nest
     public RangeFacetDescriptor<T, K> KeyField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.KeyField(fieldName);
     }
     public RangeFacetDescriptor<T, K> KeyField(string keyField)
@@ -58,7 +59,7 @@ namespace Nest
     public RangeFacetDescriptor<T, K> ValueField(Expression<Func<T, object>> objectPath)
     {
       objectPath.ThrowIfNull("objectPath");
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.ValueField(fieldName);
     }
     public RangeFacetDescriptor<T, K> ValueField(string valueField)
@@ -75,7 +76,7 @@ namespace Nest
     }
     public RangeFacetDescriptor<T, K> OnField(Expression<Func<T, object>> objectPath)
     {
-      var fieldName = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
       return this.OnField(fieldName);
     }
     public RangeFacetDescriptor<T, K> Ranges(params Func<Range<K>, Range<K>>[] ranges)

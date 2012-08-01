@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.MinSimilarity(12)
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ fuzzy: { loc : { min_similarity: 12.0, value : 200.0 } }}}";
 			Assert.True(json.JsonEquals(expected), json);
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.MinSimilarity(0.6)
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ fuzzy: { loc : { 
 				boost: 2.0,

@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.Value("elasticsearcc")
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ fuzzy: { name : { value : ""elasticsearcc"" } }}}";
 			Assert.True(json.JsonEquals(expected), json);
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.QueryTests
 						.PrefixLength(2)
 					)
 				);
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ fuzzy: { name : { 
 				boost: 2.0,

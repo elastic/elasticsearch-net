@@ -57,8 +57,7 @@ namespace Nest
 
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
-		public Func<string, string> TypeNameInferrer { get; private set; }
-
+		
 		private FluentDictionary<Type, string> _defaultTypeIndices;
     /// <summary>
     /// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
@@ -151,11 +150,6 @@ namespace Nest
 			this.MaximumAsyncConnections = maximum;
 			return this;
 		}
-		public ConnectionSettings SetTypeNameInferrer(Func<string, string> inferrer)
-		{
-			this.TypeNameInferrer = inferrer;
-			return this;
-		}
     /// <summary>
     /// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
     /// and specify the timeout in various calls on Elasticsearch's side.
@@ -177,27 +171,27 @@ namespace Nest
 			return this;
 		}
 
-	public ConnectionSettings MapTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
-	{
-	  mappingSelector.ThrowIfNull("mappingSelector");
+		public ConnectionSettings MapTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
+		{
+			mappingSelector.ThrowIfNull("mappingSelector");
 
-	  var dict = new FluentDictionary<Type, string>();
-	  mappingSelector(dict);
-	  this._defaultTypeIndices = dict;
-	  return this;
-	}
+			var dict = new FluentDictionary<Type, string>();
+			mappingSelector(dict);
+			this._defaultTypeIndices = dict;
+			return this;
+		}
 
-	public string GetIndexForType<T>()
-	{
-	  return this.GetIndexForType(typeof(T));
-	}
-	public string GetIndexForType(Type type)
-	{
-	  if (this._defaultTypeIndices == null)
-		return this.DefaultIndex;
-	  if (this._defaultTypeIndices.ContainsKey(type) && !string.IsNullOrWhiteSpace(this._defaultTypeIndices[type]))
-		return this._defaultTypeIndices[type];
-	  return this.DefaultIndex;
-	}
+		public string GetIndexForType<T>()
+		{
+			return this.GetIndexForType(typeof(T));
+		}
+		public string GetIndexForType(Type type)
+		{
+			if (this._defaultTypeIndices == null)
+				return this.DefaultIndex;
+			if (this._defaultTypeIndices.ContainsKey(type) && !string.IsNullOrWhiteSpace(this._defaultTypeIndices[type]))
+				return this._defaultTypeIndices[type];
+			return this.DefaultIndex;
+		}
 	}
 }

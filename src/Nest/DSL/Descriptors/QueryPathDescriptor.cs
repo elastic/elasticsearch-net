@@ -6,15 +6,23 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class QueryPathDescriptor : QueryPathDescriptor<dynamic>
 	{
-		
+
 	}
 	public class QueryPathDescriptor<T> : QueryDescriptor<T> where T : class
 	{
+		private readonly TypeNameResolver typeNameResolver;
+
+		public QueryPathDescriptor()
+		{
+			this.typeNameResolver = new TypeNameResolver();
+		}
+
 		internal IEnumerable<string> _Indices { get; set; }
 		internal IEnumerable<string> _Types { get; set; }
 		internal string _Routing { get; set; }
@@ -45,7 +53,7 @@ namespace Nest
 		public QueryPathDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-			return this.Types((IEnumerable<string>)types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
+			return this.Types((IEnumerable<string>)types.Select(t => this.typeNameResolver.GetTypeNameFor(t)).ToArray());
 		}
 		public QueryPathDescriptor<T> Types(params Type[] types)
 		{
@@ -60,7 +68,7 @@ namespace Nest
 		public QueryPathDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(ElasticClient.GetTypeNameFor(type));
+			return this.Type(this.typeNameResolver.GetTypeNameFor(type));
 		}
 		public QueryPathDescriptor<T> AllIndices()
 		{

@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -11,6 +12,8 @@ namespace Nest
 		private bool _gotNodeInfo = false;
 		private bool _IsValid { get; set; }
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
+
+		private TypeNameResolver TypeNameResolver { get; set; }
 
 		/// <summary>
 		/// Validates the connection once and returns a bool whether NEST could connect to elasticsearch.
@@ -49,6 +52,15 @@ namespace Nest
 
 			this.Settings = settings;
 			this.Connection = connection;
+			this.TypeNameResolver = new TypeNameResolver();
+
+			this.DeserializeSettings = this.CreateDeserializeSettings();
+			this.SerializationSettings = this.CreateSettings();
+			var indexSettings = this.CreateSettings();
+			indexSettings.ContractResolver = new ElasticCamelCaseResolver();
+			this.IndexSerializationSettings = indexSettings;
+			this.PropertyNameResolver = new PropertyNameResolver();
+
 		}
 
 		public bool TryConnect(out ConnectionStatus status)

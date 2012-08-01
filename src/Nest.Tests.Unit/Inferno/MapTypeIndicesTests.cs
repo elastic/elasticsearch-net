@@ -11,6 +11,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest.Tests.Unit.Inferno
 {

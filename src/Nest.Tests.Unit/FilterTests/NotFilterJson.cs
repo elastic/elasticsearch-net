@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.Not(f => f.Missing(p => p.LOC))
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""not"": {
@@ -47,7 +47,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.Not(f => f.Missing(p => p.LOC))
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						""not"": {

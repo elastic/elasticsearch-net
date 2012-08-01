@@ -13,15 +13,15 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse DeleteMapping<T>() where T : class
 		{
-			string type = this.InferTypeName<T>();
-            return this.DeleteMapping<T>(this.Settings.GetIndexForType<T>(), type);
+			string type = this.TypeNameResolver.GetTypeNameFor<T>();
+			return this.DeleteMapping<T>(this.Settings.GetIndexForType<T>(), type);
 		}
 		/// <summary>
 		/// Deletes the mapping for the inferred type name of T under the specified index
 		/// </summary>
 		public IIndicesResponse DeleteMapping<T>(string index) where T : class
 		{
-			string type = this.InferTypeName<T>();
+			string type = this.TypeNameResolver.GetTypeNameFor<T>();
 			return this.DeleteMapping<T>(index, type);
 		}
 		/// <summary>
@@ -51,7 +51,7 @@ namespace Nest
 		public IIndicesResponse DeleteMapping(Type t)
 		{
 			string index = this.Settings.GetIndexForType(t);
-			string type = this.InferTypeName(t);
+			string type = this.TypeNameResolver.GetTypeNameForType(t);
 			return this.DeleteMapping(t, index, type);
 		}
 		/// <summary>
@@ -59,7 +59,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse DeleteMapping(Type t, string index)
 		{
-			string type = this.InferTypeName(t);
+			string type = this.TypeNameResolver.GetTypeNameForType(t);
 			return this.DeleteMapping(t, index, type);
 		}
 		/// <summary>
@@ -93,8 +93,8 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map<T>() where T : class
 		{
-			string type = this.InferTypeName<T>();
-      return this.Map<T>(this.Settings.GetIndexForType<T>(), type);
+			string type = this.TypeNameResolver.GetTypeNameFor<T>();
+			return this.Map<T>(this.Settings.GetIndexForType<T>(), type);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -105,7 +105,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map<T>(string index) where T : class
 		{
-			string type = this.InferTypeName<T>();
+			string type = this.TypeNameResolver.GetTypeNameFor<T>();
 			return this.Map<T>(index, type);
 		}
 		/// <summary>
@@ -145,7 +145,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map(Type t)
 		{
-			string type = this.InferTypeName(t);
+			string type = this.TypeNameResolver.GetTypeNameForType(t);
 			return this.Map(t, this.Settings.GetIndexForType(t), type);
 		}
 		/// <summary>
@@ -157,7 +157,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map(Type t,string index)
 		{
-			string type = this.InferTypeName(t);
+			string type = this.TypeNameResolver.GetTypeNameForType(t);
 			return this.Map(t, index, type);
 		}
 		/// <summary>
@@ -196,7 +196,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map(TypeMapping typeMapping)
 		{
-            return this.Map(typeMapping, this.Settings.DefaultIndex);
+						return this.Map(typeMapping, this.Settings.DefaultIndex);
 		}
 		/// <summary>
 		/// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping.
@@ -220,14 +220,14 @@ namespace Nest
 		public TypeMapping GetMapping<T>() where T : class
 		{
 			var index = this.Settings.GetIndexForType<T>();
-            return this.GetMapping<T>(index);
+						return this.GetMapping<T>(index);
 		}
 		/// <summary>
 		/// Get the current mapping for T at the specified index
 		/// </summary>
 		public TypeMapping GetMapping<T>(string index) where T : class
 		{
-			string type = this.InferTypeName<T>();
+			string type = this.TypeNameResolver.GetTypeNameFor<T>();
 			return this.GetMapping(index, type);
 		}
 		/// <summary>
@@ -243,7 +243,7 @@ namespace Nest
 		/// </summary>
 		public TypeMapping GetMapping(Type t, string index)
 		{
-			string type = this.InferTypeName(t);
+			string type = this.TypeNameResolver.GetTypeNameForType(t);
 			return this.GetMapping(index, type);
 		}
 
@@ -256,22 +256,22 @@ namespace Nest
 			string path = this.CreatePath(index, type) + "_mapping";
 
 			ConnectionStatus status = this.Connection.GetSync(path);
-      try
-      {
-        var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, SerializationSettings);
+			try
+			{
+				var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, SerializationSettings);
 
-        if (status.Success)
-        {
-          var mapping = mappings.First();
-          mapping.Value.Name = mapping.Key;
+				if (status.Success)
+				{
+					var mapping = mappings.First();
+					mapping.Value.Name = mapping.Key;
 
-          return mapping.Value;
-        }
-      }
-      catch (Exception e)
-      {
-        //TODO LOG
-      }
+					return mapping.Value;
+				}
+			}
+			catch (Exception e)
+			{
+				//TODO LOG
+			}
 			return null;
 		}
 

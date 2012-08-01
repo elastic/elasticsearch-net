@@ -6,4 +6,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <StartArguments>"d:\hn_full_11-07-2010.xml"</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>"d:\hn_full_11-07-2010.xml"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <StartArguments>"d:\hn_full_11-07-2010.xml"</StartArguments>
+  </PropertyGroup>
 </Project>

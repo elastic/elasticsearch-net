@@ -26,7 +26,7 @@ namespace Nest
             var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 		
 			return this.Get<T>(id, this.CreatePath(index, typeName));
 		}
@@ -79,7 +79,7 @@ namespace Nest
       var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 		
 			return this.Get<T>(ids, this.CreatePath(index, typeName));
 		}

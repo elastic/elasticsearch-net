@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.Prefix(f=>f.Name, "elast")
 				);
 				
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						prefix: {
@@ -44,7 +44,7 @@ namespace Nest.Tests.Unit.FilterTests
 					.Prefix(f => f.Name, "elast")
 				);
 
-			var json = ElasticClient.Serialize(s);
+			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 						prefix: {

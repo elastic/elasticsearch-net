@@ -7,12 +7,19 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using Nest.DSL.Descriptors;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SearchDescriptor<T> where T : class
 	{
+		private readonly TypeNameResolver typeNameResolver;
+
+		public SearchDescriptor()
+		{
+			this.typeNameResolver = new TypeNameResolver();
+		}
 		internal IEnumerable<string> _Indices { get; set; }
 		internal IEnumerable<string> _Types { get; set; }
 		internal string _Routing { get; set; }
@@ -62,7 +69,7 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-			return this.Types((IEnumerable<string>)types.Select(t => ElasticClient.GetTypeNameFor(t)).ToArray());
+			return this.Types((IEnumerable<string>)types.Select(t => this.typeNameResolver.GetTypeNameFor(t)).ToArray());
 		}
 		/// <summary>
 		/// The types to execute the search on. Defaults to the inferred typename of T 
@@ -89,7 +96,7 @@ namespace Nest
 		public SearchDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(ElasticClient.GetTypeNameFor(type));
+			return this.Type(this.typeNameResolver.GetTypeNameFor(type));
 		}
 		/// <summary>
 		/// Execute search over all indices
@@ -117,9 +124,7 @@ namespace Nest
 			this._Routing = routing;
 			return this;
 		}
-		public SearchDescriptor()
-		{
-		}
+
 
 
 		[JsonProperty(PropertyName = "timeout")]
@@ -132,7 +137,7 @@ namespace Nest
 		internal bool? _Explain { get; set; }
 		[JsonProperty(PropertyName = "version")]
 		internal bool? _Version { get; set; }
-	[JsonProperty(PropertyName = "track_scores ")]
+		[JsonProperty(PropertyName = "track_scores ")]
 		internal bool? _TrackScores { get; set; }
 	
 		[JsonProperty(PropertyName = "min_score")]
@@ -254,8 +259,8 @@ namespace Nest
 	/// </summary>
 	public SearchDescriptor<T> TrackScores(bool trackscores = true)
 	{
-	  this._TrackScores = trackscores;
-	  return this;
+		this._TrackScores = trackscores;
+		return this;
 	}
 		/// <summary>
 		/// Allows to filter out documents based on a minimum score:
@@ -346,7 +351,16 @@ namespace Nest
 			if (this._Fields == null)
 				this._Fields = new List<string>();
 			foreach (var e in expressions)
-				this._Fields.Add(ElasticClient.PropertyNameResolver.Resolve(e));
+				this._Fields.Add(new PropertyNameResolver().Resolve(e));
+			return this;
+		}
+		/// <summary>
+		/// Allows to selectively load specific fields for each document 
+		/// represented by a search hit. Defaults to load the internal _source field.
+		/// </summary>
+		public SearchDescriptor<T> Fields(params string[] fields)
+		{
+			this._Fields = fields;
 			return this;
 		}
 		/// <summary>
@@ -361,7 +375,7 @@ namespace Nest
 		{
 			if (this._Sort == null)
 				this._Sort = new Dictionary<string, object>();
-			this._Sort.Add(ElasticClient.PropertyNameResolver.ResolveToSort(objectPath), "asc");
+			this._Sort.Add(new PropertyNameResolver().Resolve(objectPath), "asc");
 			return this;
 		}
 		/// <summary>
@@ -377,7 +391,7 @@ namespace Nest
 			if (this._Sort == null)
 		this._Sort = new Dictionary<string, object>();
 
-			var key = ElasticClient.PropertyNameResolver.ResolveToSort(objectPath);
+			var key = new PropertyNameResolver().Resolve(objectPath);
 			this._Sort.Add(key, "desc");
 			return this;
 		}
@@ -418,14 +432,14 @@ namespace Nest
 	/// </summary>
 	public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
 	{
-	  if (this._Sort == null)
+		if (this._Sort == null)
 		this._Sort = new Dictionary<string, object>();
 
-	  sortSelector.ThrowIfNull("sortSelector");
-	  var descriptor = new SortDescriptor<T>();
-	  sortSelector(descriptor);
-	  this._Sort.Add(descriptor._Field, descriptor);
-	  return this;
+		sortSelector.ThrowIfNull("sortSelector");
+		var descriptor = new SortDescriptor<T>();
+		sortSelector(descriptor);
+		this._Sort.Add(descriptor._Field, descriptor);
+		return this;
 	}
 	/// <summary>
 	/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
@@ -433,14 +447,14 @@ namespace Nest
 	/// </summary>
 	public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
 	{
-	  if (this._Sort == null)
+		if (this._Sort == null)
 		this._Sort = new Dictionary<string, object>();
 
-	  sortSelector.ThrowIfNull("sortSelector");
-	  var descriptor = new SortGeoDistanceDescriptor<T>();
-	  sortSelector(descriptor);
-	  this._Sort.Add(descriptor._Field, descriptor);
-	  return this;
+		sortSelector.ThrowIfNull("sortSelector");
+		var descriptor = new SortGeoDistanceDescriptor<T>();
+		sortSelector(descriptor);
+		this._Sort.Add(descriptor._Field, descriptor);
+		return this;
 	}
 	/// <summary>
 	/// <para>SortScript() allows you to sort by a distance from a geo point.
@@ -448,14 +462,14 @@ namespace Nest
 	/// </summary>
 	public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
 	{
-	  if (this._Sort == null)
+		if (this._Sort == null)
 		this._Sort = new Dictionary<string, object>();
 
-	  sortSelector.ThrowIfNull("sortSelector");
-	  var descriptor = new SortScriptDescriptor<T>();
-	  sortSelector(descriptor);
-	  this._Sort.Add("_script", descriptor);
-	  return this;
+		sortSelector.ThrowIfNull("sortSelector");
+		var descriptor = new SortScriptDescriptor<T>();
+		sortSelector(descriptor);
+		this._Sort.Add("_script", descriptor);
+		return this;
 	}
 		private SearchDescriptor<T> _Facet<F>(
 			string name,
@@ -659,7 +673,7 @@ namespace Nest
 		/// A facet query allows to return a count of the hits matching 
 		/// the facet query. The query itself can be expressed using the Query DSL.
 		/// </summary>
-    public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, BaseQuery> querySelector, bool? Global = null)
+		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, BaseQuery> querySelector, bool? Global = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
@@ -677,7 +691,7 @@ namespace Nest
 		/// its matching the filter. The filter itself can be expressed using the Query DSL.
 		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
 		/// </summary>
-    public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, BaseFilter> querySelector)
+		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, BaseFilter> querySelector)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
@@ -699,7 +713,7 @@ namespace Nest
 			query.ThrowIfNull("query");
 			var q= new QueryDescriptor<T>();
 			var bq = query(q);
-	  this._Query = bq;
+		this._Query = bq;
 			return this;
 		}
 		/// <summary>
@@ -776,10 +790,10 @@ namespace Nest
 	/// </summary>
 	public SearchDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
 	{
-	  highlightDescriptor.ThrowIfNull("highlightDescriptor");
-	  this._Highlight = new HighlightDescriptor<T>();
-	  highlightDescriptor(this._Highlight);
-	  return this;
+		highlightDescriptor.ThrowIfNull("highlightDescriptor");
+		this._Highlight = new HighlightDescriptor<T>();
+		highlightDescriptor(this._Highlight);
+		return this;
 	}
 		
 		/// <summary>
@@ -789,7 +803,7 @@ namespace Nest
 		{
 			var q = new QueryDescriptor<T>();
 			q.MatchAll();
-	  this._Query = q;
+		this._Query = q;
 			return this;
 		}
 	}

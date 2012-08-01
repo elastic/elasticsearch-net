@@ -136,7 +136,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			return this._deleteToPath(path);
 		}
@@ -177,7 +177,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
@@ -221,7 +221,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			return this._deleteToPathAsync(path);
 		}
@@ -262,7 +262,7 @@ namespace Nest
 			var index = this.Settings.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.InferTypeName<T>();
+			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 			var path = this.CreatePath(index, typeName, id);
 			path = this.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
@@ -544,7 +544,7 @@ namespace Nest
 		{
 			var descriptor = new QueryPathDescriptor<T>();
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForTyped(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -560,7 +560,7 @@ namespace Nest
 		{
 			var descriptor = new QueryPathDescriptor();
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -592,7 +592,7 @@ namespace Nest
 		{
 			var descriptor = new QueryPathDescriptor<T>();
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForTyped(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -608,7 +608,7 @@ namespace Nest
 		{
 			var descriptor = new QueryPathDescriptor();
 			query(descriptor);
-			var stringQuery = ElasticClient.Serialize(descriptor);
+			var stringQuery = this.Serialize(descriptor);
 			var path = this.GetPathForDynamic(descriptor);
 			if (parameters != null)
 				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
