@@ -113,6 +113,7 @@ namespace Nest
 
 		private HttpWebRequest CreateConnection(string path, string method)
 		{
+      var timeout = this._ConnectionSettings.Timeout;
 			var url = this._CreateUriString(path);
 			if (this._ConnectionSettings.UsesPrettyResponses)
 			{
@@ -122,6 +123,7 @@ namespace Nest
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
+      
 			myReq.Timeout = 1000 * 60; // 1 minute timeout.
 			myReq.ReadWriteTimeout = 1000 * 60; // 1 minute timeout.
 			myReq.Method = method;
@@ -140,7 +142,7 @@ namespace Nest
 
 		private ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
-			var timeout = this._ConnectionSettings.TimeOut;
+			var timeout = this._ConnectionSettings.Timeout;
 			var task = this.DoAsyncRequest(request, data);
 			task.Wait(timeout);
 			if (task.Result == null && task.IsCanceled)
@@ -161,7 +163,7 @@ namespace Nest
 		}
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
 		{
-			var timeout = this._ConnectionSettings.TimeOut;
+			var timeout = this._ConnectionSettings.Timeout;
 
 			if (!this._ResourceLock.WaitOne(timeout))
 			{

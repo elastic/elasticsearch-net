@@ -9,7 +9,7 @@ namespace Nest
 	{
 		string Host { get; }
 		int Port { get; }
-		int TimeOut { get; }
+		int Timeout { get; }
 		string ProxyAddress { get; }
 		string Username { get;  }
 		string Password { get; }
@@ -17,7 +17,7 @@ namespace Nest
 		int MaximumAsyncConnections { get; }
 		Func<string, string> TypeNameInferrer { get; }
 		bool UsesPrettyResponses { get; }
-        Uri Uri { get; }
+    Uri Uri { get; }
 
     string GetIndexForType<T>();
     string GetIndexForType(Type type);
