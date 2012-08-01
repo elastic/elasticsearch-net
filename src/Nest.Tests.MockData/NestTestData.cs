@@ -14,6 +14,8 @@ namespace Nest.Tests.MockData
 	public static class NestTestData
 	{
 		private static IEnumerable<ElasticSearchProject> _Data { get; set; }
+		public static IGenerationSession Session { get; set; }
+
 		public static IEnumerable<ElasticSearchProject> Data
 		{
 			get
@@ -54,11 +56,11 @@ namespace Nest.Tests.MockData
 							.Setup(c => c.StartedOn).Use<DateOfBirthSource>()
 							.Setup(c => c.Content).Use<ElasticSearchProjectDescriptionSource>();
 					});
-					var session = factory.CreateSession();
+					Session = factory.CreateSession();
 					// Get a single user
 					var count = ElasticSearchProjectsDataSource.Count();
-					var users = session.List<Person>(100).Get();
-					_Data = session.List<ElasticSearchProject>(count).Get();
+					var users = Session.List<Person>(100).Get();
+					_Data = Session.List<ElasticSearchProject>(count).Get();
 					var i = 0;
 					foreach (var p in _Data)
 					{

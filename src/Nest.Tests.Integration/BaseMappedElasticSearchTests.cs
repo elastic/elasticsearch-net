@@ -56,7 +56,7 @@ namespace Nest.Tests.Integration
 		{
 			return new ElasticClient(this.Settings);
 		}
-		protected void ResetIndexes()
+		protected virtual void ResetIndexes()
 		{
 			var client = CreateClient();
 			if (client.IsValid)
