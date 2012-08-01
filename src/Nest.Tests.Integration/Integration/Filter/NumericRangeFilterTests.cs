@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 
 			Assert.True(results.IsValid, results.ConnectionStatus.Result);
 			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.Result);
-			Assert.AreEqual(results.Total, 1);
+			Assert.AreEqual(1, results.Total);
 		}
 
 		/// <summary>
