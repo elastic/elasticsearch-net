@@ -12,8 +12,6 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-
 		internal string CreatePathFor<T>(T @object) where T : class
 		{
 			var index = this.Settings.GetIndexForType<T>();
@@ -39,7 +37,7 @@ namespace Nest
 
 			var path = this.CreatePath(index, type);
 
-			var id = this.GetIdFor<T>(@object);
+      var id = this.IdResolver.GetIdFor<T>(@object);
 			if (!string.IsNullOrEmpty(id))
 				path = this.CreatePath(index, type, id);
 
@@ -159,58 +157,7 @@ namespace Nest
 			return parameters;
 		}
 
-		internal Func<T, string> CreateIdSelector<T>() where T : class
-		{
-			//TODO this idselection stuff for the bulk seems obsolete.
-			Func<T, string> idSelector = (@object) => this.GetIdFor(@object);
-			return idSelector;
-		}
-
-		internal static Func<T, object> MakeDelegate<T, U>(MethodInfo @get)
-		{
-			var f = (Func<T, U>)Delegate.CreateDelegate(typeof(Func<T, U>), @get);
-			return t => f(t);
-		}
-
-		public string GetIdFor<T>(T @object)
-		{
-			var type = typeof(T);
-			Func<object, string> cachedLookup;
-			if (IdDelegates.TryGetValue(type, out cachedLookup))
-				return cachedLookup(@object);
-
-			var esTypeAtt = PropertyNameResolver.GetElasticPropertyFor(type);
-			var propertyName = (esTypeAtt != null) ? esTypeAtt.IdProperty : string.Empty;
-			if (string.IsNullOrWhiteSpace(propertyName))
-				propertyName = "Id";
-
-			var idProperty = type.GetProperty(propertyName);
-			if (idProperty == null)
-			{
-				throw new Exception("Could not infer id for object of type" + type.FullName);
-			}
-			try
-			{
-				var getMethod = idProperty.GetGetMethod();
-				var method = typeof(ElasticClient).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
-				var generic = method.MakeGenericMethod(type, getMethod.ReturnType);
-				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });
-				cachedLookup = o =>
-				{
-					T obj = (T)o;
-					var v = func(obj);
-					return v.ToString();
-				};
-				IdDelegates.TryAdd(type, cachedLookup);
-				return cachedLookup(@object);
-
-			}
-			catch (Exception e)
-			{
-				var value = idProperty.GetValue(@object, null);
-				return value.ToString();
-			}
-		}
+		
 
 		private string GetPathForDynamic(SearchDescriptor<dynamic> descriptor)
 		{

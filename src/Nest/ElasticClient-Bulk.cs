@@ -112,7 +112,7 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-			var idSelector = this.CreateIdSelector<T>();
+      var idSelector = this.IdResolver.CreateIdSelector<T>();
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
@@ -143,7 +143,7 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-			var idSelector = this.CreateIdSelector<T>();
+      var idSelector = this.IdResolver.CreateIdSelector<T>();
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);

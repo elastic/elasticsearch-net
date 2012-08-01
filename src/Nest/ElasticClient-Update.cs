@@ -27,7 +27,7 @@ namespace Nest
 		{
 			var index = s._Index ?? this.Settings.GetIndexForType<T>();
 			var type = s._Type ?? this.TypeNameResolver.GetTypeNameFor<T>();
-			var id = s._Id ?? this.GetIdFor(s._Object);
+      var id = s._Id ?? this.IdResolver.GetIdFor(s._Object);
 
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");

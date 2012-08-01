@@ -16,13 +16,7 @@ namespace Nest.Resolvers
 
 	public class PropertyNameResolver : ExpressionVisitor
 	{
-		private Stack<ElasticPropertyAttribute> _properties;
-		private ElasticResolver ContractResolver { get; set; }
-
-		public PropertyNameResolver()
-		{
-			this.ContractResolver = new ElasticResolver();
-		}
+    private static readonly ElasticResolver ContractResolver = new ElasticResolver();
 
 		public ElasticPropertyAttribute GetElasticProperty(MemberInfo info)
 		{
@@ -58,7 +52,7 @@ namespace Nest.Resolvers
 		public string Resolve(MemberInfo info)
 		{
 			var name = info.Name;
-			var resolvedName = this.ContractResolver.ResolvePropertyName(name);
+			var resolvedName = ContractResolver.ResolvePropertyName(name);
 			resolvedName = resolvedName.ToCamelCase();
 			var att = this.GetElasticProperty(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
@@ -71,8 +65,8 @@ namespace Nest.Resolvers
 		public string Resolve(Expression expression)
 		{
 			var stack = new Stack<string>();
-			_properties = new Stack<ElasticPropertyAttribute>();
-			Visit(expression, stack);
+			var properties = new Stack<ElasticPropertyAttribute>();
+      Visit(expression, stack, properties);
 			return stack
 				.Aggregate(
 					new StringBuilder(),
@@ -80,30 +74,18 @@ namespace Nest.Resolvers
 						(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
 				.ToString();
 		}
-		public string ResolveToSort(Expression expression)
-		{
-			var stack = new Stack<string>();
-			_properties = new Stack<ElasticPropertyAttribute>();
-			Visit(expression, stack);
-			return stack
-					  .Aggregate(
-						  new StringBuilder(),
-						  (sb, name) =>
-							  (sb.Length > 0 ? sb.Append(".") : sb)
-								  .Append((_properties.Count > 0 && _properties.Pop().AddSortField) ? name + ".sort" : name))
-					  .ToString();
-		}
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack)
+
+    protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
 		{
 			if (stack != null)
 			{
 				var name = expression.Member.Name;
-				var resolvedName = this.ContractResolver.ResolvePropertyName(name).ToCamelCase();
+				var resolvedName = ContractResolver.ResolvePropertyName(name).ToCamelCase();
 
 				var att = this.GetElasticProperty(expression.Member);
 				if (att != null)
 				{
-					_properties.Push(att);
+					properties.Push(att);
 				}
 				if (att != null && !att.Name.IsNullOrEmpty())
 				{
@@ -112,10 +94,10 @@ namespace Nest.Resolvers
 				}
 				stack.Push(resolvedName);
 			}
-			return base.VisitMemberAccess(expression, stack);
+      return base.VisitMemberAccess(expression, stack, properties);
 		}
 
-		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack)
+		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
 		{
 			if (m.Method.Name == "Suffix" && m.Arguments.Any())
 			{
@@ -127,12 +109,12 @@ namespace Nest.Resolvers
 			{
 				for (int i = 1; i < m.Arguments.Count; i++)
 				{
-					Visit(m.Arguments[i], stack);
+					Visit(m.Arguments[i], stack, properties);
 				}
-				Visit(m.Arguments[0], stack);
+				Visit(m.Arguments[0], stack, properties);
 				return m;
 			}
-			return base.VisitMethodCall(m, stack);
+			return base.VisitMethodCall(m, stack, properties);
 		}
 		private static bool IsLinqOperator(MethodInfo method)
 		{

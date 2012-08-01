@@ -14,6 +14,7 @@ namespace Nest
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
 
 		private TypeNameResolver TypeNameResolver { get; set; }
+    private IdResolver IdResolver { get; set; }
 
 		/// <summary>
 		/// Validates the connection once and returns a bool whether NEST could connect to elasticsearch.
@@ -53,6 +54,7 @@ namespace Nest
 			this.Settings = settings;
 			this.Connection = connection;
 			this.TypeNameResolver = new TypeNameResolver();
+      this.IdResolver = new IdResolver();
 
 			this.DeserializeSettings = this.CreateDeserializeSettings();
 			this.SerializationSettings = this.CreateSettings();

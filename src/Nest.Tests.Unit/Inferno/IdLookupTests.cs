@@ -10,6 +10,7 @@ using Nest;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
+using Nest.Resolvers;
 
 namespace Nest.Tests.Unit.Inferno
 {
@@ -43,7 +44,7 @@ namespace Nest.Tests.Unit.Inferno
 		{
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expectedGuid = Guid.NewGuid();
-			var id = client.GetIdFor(new AlternateIdClass { Guid = expectedGuid });
+			var id = new IdResolver().GetIdFor(new AlternateIdClass { Guid = expectedGuid });
 			StringAssert.AreEqualIgnoringCase(expectedGuid.ToString(), id);
 		}
 
@@ -52,7 +53,7 @@ namespace Nest.Tests.Unit.Inferno
 		{
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expected = 12;
-			var id = client.GetIdFor(new IntIdClass { Id = expected });
+      var id = new IdResolver().GetIdFor(new IntIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 		[Test]
@@ -60,7 +61,7 @@ namespace Nest.Tests.Unit.Inferno
 		{
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expected = 12m;
-			var id = client.GetIdFor(new DecimalIdClass { Id = expected });
+      var id = new IdResolver().GetIdFor(new DecimalIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 		[Test]
@@ -68,7 +69,7 @@ namespace Nest.Tests.Unit.Inferno
 		{
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expected = 12f;
-			var id = client.GetIdFor(new FloatIdClass { Id = expected });
+      var id = new IdResolver().GetIdFor(new FloatIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 		[Test]
@@ -76,7 +77,7 @@ namespace Nest.Tests.Unit.Inferno
 		{
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expected = 12d;
-			var id = client.GetIdFor(new DoubleIdClass { Id = expected });
+      var id = new IdResolver().GetIdFor(new DoubleIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 		[Test]
@@ -84,7 +85,7 @@ namespace Nest.Tests.Unit.Inferno
 		{
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expected = new MyCustomClass();
-			var id = client.GetIdFor(new CustomObjectIdClass { Id = expected });
+      var id = new IdResolver().GetIdFor(new CustomObjectIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 
@@ -93,7 +94,7 @@ namespace Nest.Tests.Unit.Inferno
         {
             var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
             var expected = new InheritedIdClass() { Id = 123 };
-            var id = client.GetIdFor(expected);
+            var id = new IdResolver().GetIdFor(expected);
             Assert.AreEqual(expected.Id.ToString(), id);
         }
 
@@ -103,8 +104,8 @@ namespace Nest.Tests.Unit.Inferno
 		{
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expected = 12m;
-			var id = client.GetIdFor(new DecimalIdClass { Id = expected });
-			id = client.GetIdFor(new DecimalIdClass { Id = expected });
+      var id = new IdResolver().GetIdFor(new DecimalIdClass { Id = expected });
+      id = new IdResolver().GetIdFor(new DecimalIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 	}
