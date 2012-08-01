@@ -35,7 +35,7 @@ namespace Nest
 			var response = new IndicesResponse();
 			try
 			{
-				response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+				response = this.Deserialize<IndicesResponse>(status.Result);
 			}
 			catch
 			{
@@ -73,7 +73,7 @@ namespace Nest
 			var response = new IndicesResponse();
 			try
 			{
-				response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+				response = this.Deserialize<IndicesResponse>(status.Result);
 			}
 			catch
 			{
@@ -125,7 +125,7 @@ namespace Nest
 			var response = new IndicesResponse();
 			try
 			{
-				response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+				response = this.Deserialize<IndicesResponse>(status.Result);
 				response.IsValid = true;
 			}
 			catch
@@ -177,7 +177,7 @@ namespace Nest
 			var response = new IndicesResponse();
 			try
 			{
-				response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+				response = this.Deserialize<IndicesResponse>(status.Result);
 				response.IsValid = true;
 			}
 			catch
@@ -258,7 +258,7 @@ namespace Nest
 			ConnectionStatus status = this.Connection.GetSync(path);
 			try
 			{
-				var mappings = JsonConvert.DeserializeObject<IDictionary<string, TypeMapping>>(status.Result, SerializationSettings);
+				var mappings = this.Deserialize<IDictionary<string, TypeMapping>>(status.Result);
 
 				if (status.Success)
 				{

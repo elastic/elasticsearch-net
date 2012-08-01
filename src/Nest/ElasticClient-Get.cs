@@ -57,7 +57,7 @@ namespace Nest
 			var source = o["_source"];
 			if (source != null)
 			{
-				return JsonConvert.DeserializeObject<T>(source.ToString());
+				return this.Deserialize<T>(source.ToString());
 			}
 
 			return null;
@@ -109,7 +109,7 @@ namespace Nest
 			if (response.Result == null)
 				return null;
 
-			return JsonConvert.DeserializeObject<MultiHit<T>>(response.Result)
+			return this.Deserialize<MultiHit<T>>(response.Result)
 				.Hits
 				.Where(h => h.Source != null) // non-existent ids come back as a hit without a "_source"
 				.Select(h => h.Source);

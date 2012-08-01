@@ -33,8 +33,7 @@ namespace Nest
 			{
 				var o = JObject.Parse(status.Result);
 				var settingsObject = o.First.First.First.First;
-				var settings = JsonConvert
-						.DeserializeObject<IndexSettings>(settingsObject.ToString());
+				var settings = this.Deserialize<IndexSettings>(settingsObject.ToString());
 
 				foreach (JProperty s in settingsObject.Children<JProperty>())
 				{
@@ -93,7 +92,7 @@ namespace Nest
 			var r = new SettingsOperationResponse();
 			try
 			{
-				r = JsonConvert.DeserializeObject<SettingsOperationResponse>(status.Result);
+				r = this.Deserialize<SettingsOperationResponse>(status.Result);
 			}
 			catch
 			{
@@ -115,7 +114,7 @@ namespace Nest
 			response.ConnectionStatus = status;
 			try
 			{
-				response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+				response = this.Deserialize<IndicesResponse>(status.Result);
 				response.IsValid = true;
 			}
 			catch { }

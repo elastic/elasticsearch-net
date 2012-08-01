@@ -112,7 +112,7 @@ namespace Nest
 			if (!isValid)
 				return this.ToResponse<R>(status, allow404);
 
-			var r = JsonConvert.DeserializeObject<R>(status.Result, DeserializeSettings);
+			var r = this.Deserialize<R>(status.Result);
 			r.IsValid = isValid;
 			r.ConnectionStatus = status;
 			r.PropertyNameResolver = PropertyNameResolver;
@@ -138,7 +138,7 @@ namespace Nest
 					this._IsValid = (bool)o["ok"];
 
 					JObject version = o["version"] as JObject;
-					this._VersionInfo = JsonConvert.DeserializeObject<ElasticSearchVersionInfo>(version.ToString(), DeserializeSettings);
+					this._VersionInfo = this.Deserialize<ElasticSearchVersionInfo>(version.ToString());
 
 					this._gotNodeInfo = true;
 				}

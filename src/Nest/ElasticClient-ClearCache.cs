@@ -72,7 +72,7 @@ namespace Nest
 			var response = new IndicesResponse();
 			try
 			{
-				response = JsonConvert.DeserializeObject<IndicesResponse>(status.Result);
+				response = this.Deserialize<IndicesResponse>(status.Result);
 				response.IsValid = true;
 			}
 			catch
