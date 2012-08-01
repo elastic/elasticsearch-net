@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.QueryTests
 				query : {
 					text: {
 						name : { 
-							type: ""text_phrase_prefix"", 
+							type: ""phrase_prefix"",
 							query : ""this is a test""
 						}
 					}
@@ -59,7 +59,7 @@ namespace Nest.Tests.Unit.QueryTests
 				query : {
 					text: {
 						name : { 
-							type: ""text_phrase_prefix"", 
+							type: ""phrase_prefix"",
 							query : ""this is a test"",
 							analyzer : ""my_analyzer"",
 							fuzziness: 1.0,
