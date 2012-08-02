@@ -39,7 +39,7 @@ namespace Nest
 				return;
 
 			this.Type = ConnectionErrorType.Server;
-			var response = ((HttpWebResponse)webException.Response);
+			var response = (HttpWebResponse)webException.Response;
 			this.SetWebResponseData(response);
 		}
 
@@ -58,12 +58,14 @@ namespace Nest
 					this.TryReadElasticsearchException();
 				}
 			}
-			finally { }
+			finally 
+			{ 
+			}
 		}
 
 		private void TryReadElasticsearchException()
 		{
-			var x = new { Error = "" };
+			var x = new { Error = string.Empty };
 			try
 			{
 				x = JsonConvert.DeserializeAnonymousType(this.Response, x);

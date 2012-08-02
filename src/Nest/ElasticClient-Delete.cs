@@ -133,7 +133,7 @@ namespace Nest
 		/// </summary>
 		public ConnectionStatus DeleteById<T>(string id) where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
@@ -174,7 +174,7 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public ConnectionStatus DeleteById<T>(string id, DeleteParameters deleteParameters) where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
@@ -218,7 +218,7 @@ namespace Nest
 		/// </summary>
 		public Task<ConnectionStatus> DeleteByIdAsync<T>(string id) where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
@@ -259,7 +259,7 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public Task<ConnectionStatus> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();

@@ -6,7 +6,7 @@ namespace Nest
     [JsonObject]
     public class ShardsSegment
     {
-        [JsonProperty(PropertyName="num_committed_segments")]
+        [JsonProperty(PropertyName = "num_committed_segments")]
         public int CommittedSegments { get; internal set; }
 
         [JsonProperty(PropertyName = "num_search_segments")]

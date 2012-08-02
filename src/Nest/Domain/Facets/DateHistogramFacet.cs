@@ -14,7 +14,7 @@ namespace Nest
     }
     public class DateEntry : FacetItem
     {
-        [JsonConverter(typeof (UnixDateTimeConverter))]
+        [JsonConverter(typeof(UnixDateTimeConverter))]
         [JsonProperty("time")]
         public DateTime Time { get; internal set; }
     }

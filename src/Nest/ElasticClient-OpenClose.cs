@@ -23,7 +23,7 @@
 		/// </summary>
 		public IIndicesOperationResponse OpenIndex<T>() where T : class
 		{
-            var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return OpenIndex(index);
@@ -33,7 +33,7 @@
 		/// </summary>
 		public IIndicesOperationResponse CloseIndex<T>() where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return CloseIndex(index);
