@@ -52,12 +52,16 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
-    <Compile Include="BaseMappedElasticSearchTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
     <Compile Include="Indices\SegmentsTests.cs" />
     <Compile Include="Indices\ExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Integration\AsyncTests.cs" />
+    <Compile Include="Integration\Filter\AndOrNotFilterTests.cs" />
+    <Compile Include="Integration\Filter\ScriptFilterTests.cs" />
+    <Compile Include="Integration\Filter\MissingExistsFilterTests.cs" />
+    <Compile Include="Integration\Filter\PrefixFilterTests.cs" />
+    <Compile Include="Integration\Filter\RangeFilterTests.cs" />
     <Compile Include="Integration\Query\TextPhraseQueryTests.cs" />
     <Compile Include="Integration\Query\TextPhrasePrefixQueryTests.cs" />
     <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
