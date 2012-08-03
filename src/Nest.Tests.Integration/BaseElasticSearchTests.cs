@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration
 {
 	[TestFixture]
-	public class BaseMappedElasticSearchTests
+	public class BaseElasticSearchTests
 	{
 		[TestFixtureSetUp]
 		public void Initialize()
@@ -55,7 +55,7 @@ namespace Nest.Tests.Integration
 		{
 			return new ElasticClient(this.Settings);
 		}
-		protected void ResetIndexes()
+		protected virtual void ResetIndexes()
 		{
 			var client = CreateClient();
 			if (client.IsValid)
@@ -67,6 +67,8 @@ namespace Nest.Tests.Integration
 				client.DeleteMapping<ElasticSearchProject>(cloneIndex);				
 				client.Map<ElasticSearchProject>();
 				client.Map<ElasticSearchProject>(cloneIndex);
+				this.ConnectedClient.OpenIndex<ElasticSearchProject>();
+				this.ConnectedClient.OpenIndex(cloneIndex);
 				client.IndexMany(projects, bulkParameters);
 				client.IndexMany(projects, cloneIndex, bulkParameters);
 
@@ -95,6 +97,28 @@ namespace Nest.Tests.Integration
 				client.IndexMany(projects, cloneIndex, bulkParameters);
 
 			}
+		}
+
+		/// <summary>
+		/// Execute a filter test and assert the results.
+		/// </summary>
+		/// <param name="project">Document to be search</param>
+		/// <param name="filter">Filter to be test</param>
+		/// <param name="queryMustHaveResults">If the execution of search must return results</param>
+		public void DoFilterTest(Func<FilterDescriptor<ElasticSearchProject>, Nest.BaseFilter>  filter, ElasticSearchProject project, bool queryMustHaveResults)
+		{
+			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, project.Id.ToString());
+
+			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+				s => s.Filter(ff => ff.And(
+						f => f.Term(e => e.Id, project.Id.ToString()),
+						filter
+					))
+				);
+
+			Assert.True(results.IsValid, results.ConnectionStatus.Result);
+			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.Result);
+			Assert.AreEqual(queryMustHaveResults ? 1 : 0, results.Total);
 		}
 	}
 }

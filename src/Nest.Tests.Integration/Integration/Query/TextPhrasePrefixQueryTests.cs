@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
-		private ElasticSearchProject _LookFor = NestTestData.Data.First();
+		private ElasticSearchProject _LookFor;
 
 		/// <summary>
 		/// Create document for test.

@@ -123,6 +123,7 @@
     <Compile Include="DSL\Factory\Common\Point.cs" />
     <Compile Include="DSL\Factory\Common\EsRegex.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
+    <Compile Include="Enums\Lang.cs" />
     <Compile Include="Enums\DateHistogramComparatorType.cs" />
     <Compile Include="Enums\DistanceUnit.cs" />
     <Compile Include="Enums\HistogramComparatorType.cs" />
