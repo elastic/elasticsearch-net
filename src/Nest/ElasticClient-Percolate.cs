@@ -26,7 +26,7 @@ namespace Nest
 			var descriptor = new QueryPathDescriptor<T>();
 			querySelector(descriptor);
 			var query = this.Serialize(new { query = descriptor });
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (descriptor._Indices.HasAny())
 				index = descriptor._Indices.First();
 			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
@@ -50,7 +50,7 @@ namespace Nest
 		/// <param name="name">Name of the percolator</param>
 		public IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			return this.UnregisterPercolator(index, name);
 		}
 		/// <summary>
@@ -74,7 +74,7 @@ namespace Nest
 		/// </summary>
 		public IPercolateResponse Percolate<T>(T @object) where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			var type = this.TypeNameResolver.GetTypeNameFor<T>();
 			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, IndexSerializationSettings);
 

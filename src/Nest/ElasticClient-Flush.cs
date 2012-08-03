@@ -11,7 +11,7 @@ namespace Nest
 		/// <param name="refresh">optional, wait for the flush operation to complete</param>
 		public IIndicesOperationResponse Flush<T>(bool refresh = false) where T : class
 		{
-            var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Flush(index, refresh);
@@ -47,7 +47,7 @@ namespace Nest
 			string path = this.CreatePath(string.Join(",", indices)) + "_flush?refresh=" + refresh.ToString().ToLower();
 			return this._Flush(path);
 		}
-        
+		
 		private IndicesOperationResponse _Flush(string path)
 		{
 			var status = this.Connection.PostSync(path, "");

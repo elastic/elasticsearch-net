@@ -14,7 +14,7 @@ namespace Nest
 		public IIndicesResponse DeleteMapping<T>() where T : class
 		{
 			string type = this.TypeNameResolver.GetTypeNameFor<T>();
-			return this.DeleteMapping<T>(this.Settings.GetIndexForType<T>(), type);
+			return this.DeleteMapping<T>(this.IndexNameResolver.GetIndexForType<T>(), type);
 		}
 		/// <summary>
 		/// Deletes the mapping for the inferred type name of T under the specified index
@@ -50,7 +50,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse DeleteMapping(Type t)
 		{
-			string index = this.Settings.GetIndexForType(t);
+			string index = this.IndexNameResolver.GetIndexForType(t);
 			string type = this.TypeNameResolver.GetTypeNameForType(t);
 			return this.DeleteMapping(t, index, type);
 		}
@@ -94,7 +94,7 @@ namespace Nest
 		public IIndicesResponse Map<T>() where T : class
 		{
 			string type = this.TypeNameResolver.GetTypeNameFor<T>();
-			return this.Map<T>(this.Settings.GetIndexForType<T>(), type);
+			return this.Map<T>(this.IndexNameResolver.GetIndexForType<T>(), type);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -146,7 +146,7 @@ namespace Nest
 		public IIndicesResponse Map(Type t)
 		{
 			string type = this.TypeNameResolver.GetTypeNameForType(t);
-			return this.Map(t, this.Settings.GetIndexForType(t), type);
+			return this.Map(t, this.IndexNameResolver.GetIndexForType(t), type);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -219,7 +219,7 @@ namespace Nest
 		/// </summary>
 		public TypeMapping GetMapping<T>() where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 						return this.GetMapping<T>(index);
 		}
 		/// <summary>
@@ -235,7 +235,7 @@ namespace Nest
 		/// </summary>
 		public TypeMapping GetMapping(Type t)
 		{
-			var index = this.Settings.GetIndexForType(t);
+			var index = this.IndexNameResolver.GetIndexForType(t);
 			return this.GetMapping(t, index);
 		}
 		/// <summary>

@@ -23,7 +23,7 @@ namespace Nest
 		/// <returns>an instance of T</returns>
 		public T Get<T>(string id) where T : class
 		{
-            var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
@@ -76,7 +76,7 @@ namespace Nest
 		public IEnumerable<T> Get<T>(IEnumerable<string> ids)
 			where T : class
 		{
-      var index = this.Settings.GetIndexForType<T>();
+      var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();

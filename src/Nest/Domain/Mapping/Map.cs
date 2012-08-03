@@ -12,7 +12,7 @@ namespace Nest
 		internal IElasticProperty Property { get; set; }
 	}
 
-	public class Map<T> where T :  class
+	public class Map<T> where T : class
 	{
 		private IElasticType ElasticType { get; set; }
 		private List<PropertyDescriptor<T>> PropertyDescriptors { get; set; }

@@ -6,7 +6,7 @@ namespace Nest
     [JsonObject]
     public class ShardSegmentRouting
     {
-        [JsonProperty(PropertyName="state")]
+        [JsonProperty(PropertyName = "state")]
         public string State { get; internal set; }
 
         [JsonProperty(PropertyName = "primary")]

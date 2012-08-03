@@ -149,30 +149,7 @@ namespace Nest
 
 			return Enumerable.Empty<F>();
 		}
-		/*
-		public F Facet<F>(Expression<Func<T, object>> expression) where F : SingleFacet
-		{
-			var fieldName = this.new PropertyNameResolver().Resolve(expression);
-			return this.Facet<F>(fieldName);
-		}
-		public F Facet<F>(string fieldName) where F : SingleFacet
-		{
-			if (this.FacetsMetaData == null
-				|| !this.FacetsMetaData.Any()
-				|| !this.FacetsMetaData.ContainsKey(fieldName))
-				return null;
-
-			var typeName = new FacetTypeTranslator().GetFacetTypeNameFor<F>();
-			if (typeName.IsNullOrEmpty())
-				return null;
-
-			var metaData = this.FacetsMetaData.FirstOrDefault(m => m.Key == fieldName).Value;
-			var facetMetaData = metaData.FirstOrDefault(fm => fm.Type == typeName);
-			if (facetMetaData == null)
-				return null;
-			return facetMetaData.Facets.Cast<F>().FirstOrDefault();
-		}
-		*/
+		
 		public IEnumerable<Highlight> Highlights
 		{
 			get

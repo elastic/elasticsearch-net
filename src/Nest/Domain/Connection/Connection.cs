@@ -113,19 +113,19 @@ namespace Nest
 
 		private HttpWebRequest CreateConnection(string path, string method)
 		{
-      var timeout = this._ConnectionSettings.Timeout;
+	  var timeout = this._ConnectionSettings.Timeout;
 			var url = this._CreateUriString(path);
 			if (this._ConnectionSettings.UsesPrettyResponses)
 			{
 				var uri = new Uri(url);
-				url += ((string.IsNullOrEmpty(uri.Query)) ? "?" : "&") + "pretty=true";
+				url += (string.IsNullOrEmpty(uri.Query) ? "?" : "&") + "pretty=true";
 			}
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 
-      myReq.Timeout = timeout; // 1 minute timeout.
-      myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
+	  myReq.Timeout = timeout; // 1 minute timeout.
+	  myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
 			myReq.Method = method;
 
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
@@ -156,7 +156,7 @@ namespace Nest
 		private Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
-			Iterate(_AsyncSteps(request, tcs, data), tcs);
+			this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
 			if (tcs.Task != null && tcs.Task.Result != null)
 				tcs.Task.Result.Request = data;
 			return tcs.Task;

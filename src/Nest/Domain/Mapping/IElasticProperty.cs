@@ -25,7 +25,7 @@ namespace Nest
 
 		bool OmitNorms { get; set; }
 		bool OmitTermFrequencyAndPositions { get; set; }
-		bool IncludeInAll { get; set;}
+		bool IncludeInAll { get; set; }
 		bool Store { get; set; }
 
 		/// <summary>

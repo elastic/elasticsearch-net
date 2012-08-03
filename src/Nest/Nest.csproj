@@ -391,6 +391,7 @@
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
     <Compile Include="Resolvers\Converters\TermConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
+    <Compile Include="Resolvers\IndexNameResolver.cs" />
     <Compile Include="Resolvers\IdResolver.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\Inflector.cs" />

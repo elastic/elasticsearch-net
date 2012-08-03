@@ -69,7 +69,7 @@ namespace Nest
 		{
 			objects.ThrowIfNull("objects");
 
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -79,7 +79,7 @@ namespace Nest
 		{
 			objects.ThrowIfNull("objects");
 
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -112,7 +112,7 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-      var idSelector = this.IdResolver.CreateIdSelector<T>();
+	  var idSelector = this.IdResolver.CreateIdSelector<T>();
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
@@ -143,7 +143,7 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-      var idSelector = this.IdResolver.CreateIdSelector<T>();
+	  var idSelector = this.IdResolver.CreateIdSelector<T>();
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);

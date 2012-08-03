@@ -57,28 +57,37 @@ namespace Nest
 
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
-		
-		private FluentDictionary<Type, string> _defaultTypeIndices;
-    /// <summary>
-    /// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-    /// </summary>
-    /// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
+
+		private readonly FluentDictionary<Type, string> _defaultTypeIndices;
+
+		public FluentDictionary<Type, string> DefaultIndices
+		{
+			get
+			{
+				return this._defaultTypeIndices;
+			}
+		}
+
+		/// <summary>
+		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
+		/// </summary>
+		/// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
 		public ConnectionSettings(Uri uri) : this(uri, 60000, null, null, null) { }
-    /// <summary>
-    /// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-    /// </summary>
-    /// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
-    /// <param name="timeout">time out in milliseconds</param>
+		/// <summary>
+		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
+		/// </summary>
+		/// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
+		/// <param name="timeout">time out in milliseconds</param>
 		public ConnectionSettings(Uri uri, int timeout) : this(uri, timeout, null, null, null) { }
-    /// <summary>
-    /// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-    /// using a proxy
-    /// </summary>
-    /// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
-    /// <param name="timeout">time out in milliseconds</param>
-    /// <param name="proxyAddress">proxy address</param>
-    /// <param name="username">proxy username</param>
-    /// <param name="password">proxy password</param>
+		/// <summary>
+		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
+		/// using a proxy
+		/// </summary>
+		/// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
+		/// <param name="timeout">time out in milliseconds</param>
+		/// <param name="proxyAddress">proxy address</param>
+		/// <param name="username">proxy username</param>
+		/// <param name="password">proxy password</param>
 		public ConnectionSettings(Uri uri, int timeout, string proxyAddress, string username, string password)
 		{
 			uri.ThrowIfNull("uri");
@@ -89,34 +98,34 @@ namespace Nest
 			this._timeout = timeout;
 			this._proxyAddress = proxyAddress;
 			this.MaximumAsyncConnections = 20;
+			this._defaultTypeIndices = new FluentDictionary<Type, string>();
 		}
-    /// <summary>
-    /// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-    /// </summary>
-    /// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
-    /// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
+		/// <summary>
+		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
+		/// </summary>
+		/// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
+		/// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
 		public ConnectionSettings(string host, int port) : this(host, port, 60000, null, null, null) { }
-    /// <summary>
-    /// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-    /// </summary>
-    /// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
-    /// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
-    /// <param name="timeout">time out in milliseconds</param>
+		/// <summary>
+		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
+		/// </summary>
+		/// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
+		/// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
+		/// <param name="timeout">time out in milliseconds</param>
 		public ConnectionSettings(string host, int port, int timeout) : this(host, port, timeout, null, null, null) { }
-    /// <summary>
-    /// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-    /// </summary>
-    /// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
-    /// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
-    /// <param name="timeout">time out in milliseconds</param>
-    /// <param name="proxyAddress">proxy address</param>
-    /// <param name="username">proxy username</param>
-    /// <param name="password">proxy password</param>
+		/// <summary>
+		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
+		/// </summary>
+		/// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
+		/// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
+		/// <param name="timeout">time out in milliseconds</param>
+		/// <param name="proxyAddress">proxy address</param>
+		/// <param name="username">proxy username</param>
+		/// <param name="password">proxy password</param>
 		public ConnectionSettings(string host, int port, int timeout, string proxyAddress, string username, string password)
 		{
 			host.ThrowIfNullOrEmpty("host");
 			var uri = new Uri("http://" + host + ":" + port);
-
 
 			this._host = host;
 			this._password = password;
@@ -125,6 +134,7 @@ namespace Nest
 			this._port = port;
 			this._proxyAddress = proxyAddress;
 			this.MaximumAsyncConnections = 20;
+			this._defaultTypeIndices = new FluentDictionary<Type, string>();
 		}
 		/// <summary>
 		/// Index to default to when no index is specified.
@@ -150,16 +160,16 @@ namespace Nest
 			this.MaximumAsyncConnections = maximum;
 			return this;
 		}
-    /// <summary>
-    /// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
-    /// and specify the timeout in various calls on Elasticsearch's side.
-    /// </summary>
-    /// <param name="timeout">time out in milliseconds</param>
-    public ConnectionSettings SetTimeout(int timeout)
-    {
-      this._timeout = timeout;
-      return this;
-    }
+		/// <summary>
+		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
+		/// and specify the timeout in various calls on Elasticsearch's side.
+		/// </summary>
+		/// <param name="timeout">time out in milliseconds</param>
+		public ConnectionSettings SetTimeout(int timeout)
+		{
+			this._timeout = timeout;
+			return this;
+		}
 		public ConnectionSettings UsePrettyResponses()
 		{
 			this.UsesPrettyResponses = true;
@@ -173,25 +183,11 @@ namespace Nest
 
 		public ConnectionSettings MapTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
-			mappingSelector.ThrowIfNull("mappingSelector");
-
-			var dict = new FluentDictionary<Type, string>();
-			mappingSelector(dict);
-			this._defaultTypeIndices = dict;
+			mappingSelector.ThrowIfNull("mappingSelector");			
+			mappingSelector(this._defaultTypeIndices);
 			return this;
 		}
 
-		public string GetIndexForType<T>()
-		{
-			return this.GetIndexForType(typeof(T));
-		}
-		public string GetIndexForType(Type type)
-		{
-			if (this._defaultTypeIndices == null)
-				return this.DefaultIndex;
-			if (this._defaultTypeIndices.ContainsKey(type) && !string.IsNullOrWhiteSpace(this._defaultTypeIndices[type]))
-				return this._defaultTypeIndices[type];
-			return this.DefaultIndex;
-		}
+		
 	}
 }

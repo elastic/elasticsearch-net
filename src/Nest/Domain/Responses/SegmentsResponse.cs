@@ -3,16 +3,16 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public interface ISegmentsResponse : IResponse
-    {
-        bool OK { get; }
-        ShardsMetaData Shards { get; }
-        Dictionary<string, IndexSegment> Indices { get; set; }
-    }
+	public interface ISegmentsResponse : IResponse
+	{
+		bool OK { get; }
+		ShardsMetaData Shards { get; }
+		Dictionary<string, IndexSegment> Indices { get; set; }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class SegmentsResponse : BaseResponse, ISegmentsResponse
-    {
+	{
 		public SegmentsResponse()
 		{
 			this.IsValid = true;
@@ -24,7 +24,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 
-		[JsonProperty(PropertyName="indices")]
+		[JsonProperty(PropertyName = "indices")]
 		public Dictionary<string, IndexSegment> Indices { get; set; } 
 
 		

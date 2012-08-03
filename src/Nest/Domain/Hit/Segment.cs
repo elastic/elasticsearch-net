@@ -6,7 +6,7 @@ namespace Nest
     [JsonObject]
     public class Segment
     {
-        [JsonProperty(PropertyName="generation")]
+        [JsonProperty(PropertyName = "generation")]
         public int Generation { get; internal set; }
 
         [JsonProperty(PropertyName = "num_docs")]

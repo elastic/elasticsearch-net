@@ -14,7 +14,7 @@ namespace Nest
 	{
 		internal string CreatePathFor<T>(T @object) where T : class
 		{
-			var index = this.Settings.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 			return this.CreatePathFor<T>(@object, index);
@@ -37,7 +37,7 @@ namespace Nest
 
 			var path = this.CreatePath(index, type);
 
-      var id = this.IdResolver.GetIdFor<T>(@object);
+			var id = this.IdResolver.GetIdFor<T>(@object);
 			if (!string.IsNullOrEmpty(id))
 				path = this.CreatePath(index, type, id);
 
@@ -181,7 +181,7 @@ namespace Nest
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
 			else
-				indices = this.Settings.GetIndexForType<T>();
+				indices = this.IndexNameResolver.GetIndexForType<T>();
 
 			var types = this.TypeNameResolver.GetTypeNameFor<T>();
 			if (descriptor._Types.HasAny())
@@ -213,7 +213,7 @@ namespace Nest
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
 			else
-				indices = this.Settings.GetIndexForType<T>();
+				indices = this.IndexNameResolver.GetIndexForType<T>();
 
 			var types = this.TypeNameResolver.GetTypeNameFor<T>();
 			if (descriptor._Types.HasAny())

@@ -14,7 +14,8 @@ namespace Nest
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
 
 		private TypeNameResolver TypeNameResolver { get; set; }
-    private IdResolver IdResolver { get; set; }
+		private IdResolver IdResolver { get; set; }
+		private IndexNameResolver IndexNameResolver { get; set; }
 
 		/// <summary>
 		/// Validates the connection once and returns a bool whether NEST could connect to elasticsearch.
@@ -54,7 +55,9 @@ namespace Nest
 			this.Settings = settings;
 			this.Connection = connection;
 			this.TypeNameResolver = new TypeNameResolver();
-      this.IdResolver = new IdResolver();
+			this.IdResolver = new IdResolver();
+			this.IndexNameResolver = new IndexNameResolver(settings);
+
 
 			this.DeserializeSettings = this.CreateDeserializeSettings();
 			this.SerializationSettings = this.CreateSettings();
@@ -106,8 +109,8 @@ namespace Nest
 		/// <returns></returns>
 		private R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false) where R : BaseResponse
 		{
-			var isValid = 
-				(allow404) 
+			var isValid =
+				(allow404)
 				? (status.Error == null
 					|| status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
 				: (status.Error == null);
@@ -153,10 +156,10 @@ namespace Nest
 			}
 
 		}
-		
-		
-	
 
-	
+
+
+
+
 	}
 }
