@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Integration.Integration
+namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
 	public class UpdateIntegrationTests : BaseElasticSearchTests

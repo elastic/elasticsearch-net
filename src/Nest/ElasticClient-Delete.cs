@@ -537,15 +537,15 @@ namespace Nest
 		/// <summary>
 		/// Deletes all documents that match the query
 		/// </summary>
-		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
+		/// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
-		public ConnectionStatus DeleteByQuery<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
+		public ConnectionStatus DeleteByQuery<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 		{
-			var descriptor = new QueryPathDescriptor<T>();
+			var descriptor = new RoutingQueryPathDescriptor<T>();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.PathResolver.GetPathForTyped(descriptor);
+			var path = this.PathResolver.GetPathForTyped(descriptor, "_query");
 			if (parameters != null)
 				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, stringQuery);
@@ -553,15 +553,15 @@ namespace Nest
 		/// <summary>
 		/// Deletes all documents that match the query, without specifying T the return documents is an IEnumerable<dynamic>
 		/// </summary>
-		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
+		/// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
-		public ConnectionStatus DeleteByQuery(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
+		public ConnectionStatus DeleteByQuery(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
+			var descriptor = new RoutingQueryPathDescriptor();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.PathResolver.GetPathForDynamic(descriptor);
+			var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
 			if (parameters != null)
 				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, stringQuery);
@@ -569,14 +569,14 @@ namespace Nest
 		/// <summary>
 		/// Deletes all documents that match the string query. OBSOLETE
 		/// </summary>
-		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
+		/// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public ConnectionStatus DeleteByQuery(string query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
-			var path = this.PathResolver.GetPathForDynamic(descriptor);
+			var descriptor = new RoutingQueryPathDescriptor();
+			var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
 			if (parameters != null)
 				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
@@ -585,15 +585,15 @@ namespace Nest
 		/// <summary>
 		/// Deletes all documents that match the query
 		/// </summary>
-		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
+		/// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
-		public Task<ConnectionStatus> DeleteByQueryAsync<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
+		public Task<ConnectionStatus> DeleteByQueryAsync<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 		{
-			var descriptor = new QueryPathDescriptor<T>();
+			var descriptor = new RoutingQueryPathDescriptor<T>();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.PathResolver.GetPathForTyped(descriptor);
+			var path = this.PathResolver.GetPathForTyped(descriptor, "_query");
 			if (parameters != null)
 				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPathAsync(path, stringQuery);
@@ -601,15 +601,15 @@ namespace Nest
 		/// <summary>
 		/// Deletes all documents that match the query, without specifying T the return documents is an IEnumerable<dynamic>
 		/// </summary>
-		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
+		/// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
-		public Task<ConnectionStatus> DeleteByQueryAsync(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
+		public Task<ConnectionStatus> DeleteByQueryAsync(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
+			var descriptor = new RoutingQueryPathDescriptor();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.PathResolver.GetPathForDynamic(descriptor);
+			var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
 			if (parameters != null)
 				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPathAsync(path, stringQuery);
@@ -617,14 +617,14 @@ namespace Nest
 		/// <summary>
 		/// Deletes all documents that match the string query. OBSOLETE
 		/// </summary>
-		/// <param name="query">QueryPathDescriptor also allows you to control which indices and types are affected</param>
+		/// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 		/// <param name="parameters">Control routing/consistency and replication</param>
 		/// <returns>ConnectionStatus, check .IsValid to validate success</returns>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public Task<ConnectionStatus> DeleteByQueryAsync(string query, DeleteByQueryParameters parameters = null)
 		{
-			var descriptor = new QueryPathDescriptor();
-			var path = this.PathResolver.GetPathForDynamic(descriptor);
+			var descriptor = new RoutingQueryPathDescriptor();
+			var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
 			if (parameters != null)
 				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPathAsync(path, query);

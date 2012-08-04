@@ -2,14 +2,14 @@
 
 namespace Nest
 {
-    public interface ISettingsOperationResponse : IResponse
-    {
-        bool OK { get; }
-    }
+	public interface ISettingsOperationResponse : IResponse
+	{
+		bool OK { get; }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class SettingsOperationResponse : BaseResponse, ISettingsOperationResponse
-    {
+	{
 		public SettingsOperationResponse()
 		{
 			this.IsValid = true;

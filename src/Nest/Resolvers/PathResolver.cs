@@ -200,7 +200,11 @@ namespace Nest.Resolvers
 
 			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
 
-			return this.PathJoin(indices, types, descriptor._Routing);
+			var dict = new Dictionary<string, string>();
+			if (!descriptor._Routing.IsNullOrEmpty())
+				dict.Add("routing", descriptor._Routing);
+
+			return this.PathJoin(indices, types, dict, "_search");
 		}
 		public string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
@@ -218,9 +222,14 @@ namespace Nest.Resolvers
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
 				types = null;
 
-			return this.PathJoin(indices, types, descriptor._Routing);
+			var dict = new Dictionary<string, string>();
+			if (!descriptor._Routing.IsNullOrEmpty())
+				dict.Add("routing", descriptor._Routing);
+
+			return this.PathJoin(indices, types, dict, "_search");
 		}
-		public string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor)
+		
+		public string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor, string suffix)
 		{
 			string indices;
 			if (descriptor._Indices.HasAny())
@@ -232,9 +241,9 @@ namespace Nest.Resolvers
 
 			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
 
-			return this.PathJoin(indices, types, descriptor._Routing, "_query");
+			return this.PathJoin(indices, types, descriptor.GetUrlParams(), suffix);
 		}
-		public string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor) where T : class
+		public string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor, string suffix) where T : class
 		{
 			string indices;
 			if (descriptor._Indices.HasAny())
@@ -250,7 +259,7 @@ namespace Nest.Resolvers
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
 				types = null;
 
-			return this.PathJoin(indices, types, descriptor._Routing, "_query");
+			return this.PathJoin(indices, types, descriptor.GetUrlParams(), suffix);
 		}
 		
 		
@@ -263,14 +272,16 @@ namespace Nest.Resolvers
 			
 		}
 
-		private string PathJoin(string indices, string types, string routing, string extension = "_search")
+		private string PathJoin(string indices, string types, IDictionary<string, string> urlparams, string extension = "_search")
 		{
 			string path = string.Concat(!string.IsNullOrEmpty(types) ?
 											 this.CreateIndexTypePath(indices, types) :
 											 this.CreateIndexPath(indices), extension);
-			if (!String.IsNullOrEmpty(routing))
+
+			if (urlparams != null && urlparams.Any())
 			{
-				path = "{0}?routing={1}".F(path, routing);
+				var queryString = string.Join("&", urlparams.Select(kv=> "{0}={1}".F(kv.Key, Uri.EscapeDataString(kv.Value))));
+				path += "?{0}".F(queryString);
 			}
 			return path;
 		}

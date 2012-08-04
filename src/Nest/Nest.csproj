@@ -65,6 +65,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Hit\ValidationExplanation.cs" />
+    <Compile Include="Domain\Responses\ValidateResponse.cs" />
+    <Compile Include="DSL\Descriptors\RoutingQueryPathDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\ValidateQueryPathDescriptor.cs" />
+    <Compile Include="ElasticClient-Validate.cs" />
     <Compile Include="DSL\Descriptors\Filter.cs" />
     <Compile Include="DSL\Descriptors\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
@@ -374,7 +379,6 @@
     <Compile Include="Domain\Settings\ShingleTokenFilter.cs" />
     <Compile Include="Domain\Settings\TokenFilterSettings.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
-    <Compile Include="ElasticClient-Inferno.cs" />
     <Compile Include="ElasticClient-MappingType.cs" />
     <Compile Include="ElasticClient-Get.cs" />
     <Compile Include="ElasticClient-Index.cs" />

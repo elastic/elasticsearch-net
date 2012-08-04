@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System.Diagnostics;
 using System.Net;
 
-namespace Nest.Tests.Integration.Integration
+namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
 	public class AsyncTests : BaseElasticSearchTests

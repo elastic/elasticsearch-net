@@ -9,7 +9,8 @@ namespace Nest
 		/// Performs a count query over all indices
 		/// </summary>
 		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public ICountResponse CountAll(string query) {
+		public ICountResponse CountAll(string query)
+		{
 			return this._Count("_count", query);
 		}
 		/// <summary>
@@ -26,7 +27,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-	public ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
+		public ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor<T>();
@@ -78,9 +79,9 @@ namespace Nest
 		/// <summary>
 		/// Perform a count query over the default index and the inferred type name for T
 		/// </summary>
-	public ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
+		public ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
-	  var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var type = typeof(T);
@@ -94,7 +95,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over the specified indices
 		/// </summary>
-	public ICountResponse Count<T>(IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
+		public ICountResponse Count<T>(IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");
 			string path = this.PathResolver.CreateIndexPath(indices, "_count");
@@ -106,7 +107,7 @@ namespace Nest
 		/// <summary>
 		///  Performs a count query over the multiple types in multiple indices.
 		/// </summary>
-	public ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
+		public ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
 			indices.ThrowIfEmpty("indices");
 			indices.ThrowIfEmpty("types");

@@ -52,11 +52,12 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="Core\ValidateTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
     <Compile Include="Indices\SegmentsTests.cs" />
     <Compile Include="Indices\ExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
-    <Compile Include="Integration\AsyncTests.cs" />
+    <Compile Include="Core\AsyncTests.cs" />
     <Compile Include="Integration\Filter\AndOrNotFilterTests.cs" />
     <Compile Include="Integration\Filter\ScriptFilterTests.cs" />
     <Compile Include="Integration\Filter\MissingExistsFilterTests.cs" />
@@ -65,7 +66,7 @@
     <Compile Include="Integration\Query\TextPhraseQueryTests.cs" />
     <Compile Include="Integration\Query\TextPhrasePrefixQueryTests.cs" />
     <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
-    <Compile Include="Integration\UpdateTests.cs" />
+    <Compile Include="Core\UpdateTests.cs" />
     <Compile Include="Integration\Filter\BoolFilterTests.cs" />
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="Facet\BaseFacetTestFixture.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Integration\DeleteTests.cs" />
+    <Compile Include="Core\DeleteTests.cs" />
     <Compile Include="Indices\IndicesTests.cs" />
     <Compile Include="Indices\AliasTests.cs" />
     <Compile Include="Indices\AnalyzeTests.cs" />

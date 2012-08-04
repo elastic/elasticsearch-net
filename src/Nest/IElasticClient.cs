@@ -83,12 +83,12 @@ namespace Nest
 		System.Threading.Tasks.Task<ConnectionStatus> DeleteByIdAsync<T>(int id, DeleteParameters deleteParameters) where T : class;
 		System.Threading.Tasks.Task<ConnectionStatus> DeleteByIdAsync<T>(string id) where T : class;
 		System.Threading.Tasks.Task<ConnectionStatus> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class;
-		ConnectionStatus DeleteByQuery(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
+		ConnectionStatus DeleteByQuery(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
 		ConnectionStatus DeleteByQuery(string query, DeleteByQueryParameters parameters = null);
-		ConnectionStatus DeleteByQuery<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
-		System.Threading.Tasks.Task<ConnectionStatus> DeleteByQueryAsync(Action<QueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
+		ConnectionStatus DeleteByQuery<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
+		System.Threading.Tasks.Task<ConnectionStatus> DeleteByQueryAsync(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
 		System.Threading.Tasks.Task<ConnectionStatus> DeleteByQueryAsync(string query, DeleteByQueryParameters parameters = null);
-		System.Threading.Tasks.Task<ConnectionStatus> DeleteByQueryAsync<T>(Action<QueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
+		System.Threading.Tasks.Task<ConnectionStatus> DeleteByQueryAsync<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
 		IIndicesResponse DeleteIndex(string index);
 		IIndicesResponse DeleteIndex<T>() where T : class;
 		IIndicesResponse DeleteMapping<T>() where T : class;
