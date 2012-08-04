@@ -13,7 +13,7 @@ namespace Nest
 		/// </summary>
 		public ConnectionStatus Delete<T>(T @object) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object);
+			var path = this.PathResolver.CreatePathFor<T>(@object);
 			return this._deleteToPath(path);
 		}
 		/// <summary>
@@ -21,7 +21,7 @@ namespace Nest
 		/// </summary>
 		public ConnectionStatus Delete<T>(T @object, string index) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index);
 			return this._deleteToPath(path);
 		}
 		/// <summary>
@@ -29,7 +29,7 @@ namespace Nest
 		/// </summary>
 		public ConnectionStatus Delete<T>(T @object, string index, string type) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index, type);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index, type);
 			return this._deleteToPath(path);
 		}
 		/// <summary>
@@ -38,8 +38,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>	
 		public ConnectionStatus Delete<T>(T @object, DeleteParameters deleteParameters) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreatePathFor<T>(@object);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public ConnectionStatus Delete<T>(T @object, string index, DeleteParameters deleteParameters) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 		/// <summary>
@@ -58,8 +58,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public ConnectionStatus Delete<T>(T @object, string index, string type, DeleteParameters deleteParameters) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index, type);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index, type);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 
@@ -68,7 +68,7 @@ namespace Nest
 		/// </summary>
 		public Task<ConnectionStatus> DeleteAsync<T>(T @object) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object);
+			var path = this.PathResolver.CreatePathFor<T>(@object);
 			return this._deleteToPathAsync(path);
 		}
 		/// <summary>
@@ -76,7 +76,7 @@ namespace Nest
 		/// </summary>
 		public Task<ConnectionStatus> DeleteAsync<T>(T @object, string index) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index);
 			return this._deleteToPathAsync(path);
 		}
 		/// <summary>
@@ -84,7 +84,7 @@ namespace Nest
 		/// </summary>
 		public Task<ConnectionStatus> DeleteAsync<T>(T @object, string index, string type) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index, type);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index, type);
 			return this._deleteToPathAsync(path);
 		}
 		/// Asynchronously delete the object in the inferred type for T in the default index specified in the client settings
@@ -92,8 +92,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>	
 		public Task<ConnectionStatus> DeleteAsync<T>(T @object, DeleteParameters deleteParameters) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreatePathFor<T>(@object);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
 		}
 		/// <summary>
@@ -102,8 +102,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public Task<ConnectionStatus> DeleteAsync<T>(T @object, string index, DeleteParameters deleteParameters) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
 		}
 		/// <summary>
@@ -112,8 +112,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public Task<ConnectionStatus> DeleteAsync<T>(T @object, string index, string type, DeleteParameters deleteParameters) where T : class
 		{
-			var path = this.CreatePathFor<T>(@object, index, type);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreatePathFor<T>(@object, index, type);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
 		}
 		#endregion
@@ -137,7 +137,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
-			var path = this.CreatePath(index, typeName, id);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 			return this._deleteToPath(path);
 		}
 
@@ -146,7 +146,7 @@ namespace Nest
 		/// </summary>
 		public ConnectionStatus DeleteById(string index, string type, string id)
 		{
-			var path = this.CreatePath(index, type, id);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id);
 			return this._deleteToPath(path);
 		}
 
@@ -155,7 +155,7 @@ namespace Nest
 		/// </summary>
 		public ConnectionStatus DeleteById(string index, string type, int id)
 		{
-			var path = this.CreatePath(index, type, id.ToString());
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id.ToString());
 			return this._deleteToPath(path);
 		}
 
@@ -178,8 +178,8 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
-			var path = this.CreatePath(index, typeName, id);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 
@@ -189,8 +189,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public ConnectionStatus DeleteById(string index, string type, string id, DeleteParameters deleteParameters)
 		{
-			var path = this.CreatePath(index, type, id);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 
@@ -200,8 +200,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public ConnectionStatus DeleteById(string index, string type, int id, DeleteParameters deleteParameters)
 		{
-			var path = this.CreatePath(index, type, id.ToString());
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id.ToString());
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPath(path);
 		}
 
@@ -222,7 +222,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
-			var path = this.CreatePath(index, typeName, id);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 			return this._deleteToPathAsync(path);
 		}
 
@@ -231,7 +231,7 @@ namespace Nest
 		/// </summary>
 		public Task<ConnectionStatus> DeleteByIdAsync(string index, string type, string id)
 		{
-			var path = this.CreatePath(index, type, id);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id);
 			return this._deleteToPathAsync(path);
 		}
 
@@ -240,7 +240,7 @@ namespace Nest
 		/// </summary>
 		public Task<ConnectionStatus> DeleteByIdAsync(string index, string type, int id)
 		{
-			var path = this.CreatePath(index, type, id.ToString());
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id.ToString());
 			return this._deleteToPathAsync(path);
 		}
 
@@ -263,8 +263,8 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
-			var path = this.CreatePath(index, typeName, id);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
 		}
 
@@ -274,8 +274,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public Task<ConnectionStatus> DeleteByIdAsync(string index, string type, string id, DeleteParameters deleteParameters)
 		{
-			var path = this.CreatePath(index, type, id);
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id);
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
 		}
 
@@ -285,8 +285,8 @@ namespace Nest
 		/// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 		public Task<ConnectionStatus> DeleteByIdAsync(string index, string type, int id, DeleteParameters deleteParameters)
 		{
-			var path = this.CreatePath(index, type, id.ToString());
-			path = this.AppendParametersToPath(path, deleteParameters);
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id.ToString());
+			path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 			return this._deleteToPathAsync(path);
 		}
 
@@ -320,7 +320,7 @@ namespace Nest
 		public ConnectionStatus Delete<T>(IEnumerable<T> @objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
 		/// <summary>
@@ -331,7 +331,7 @@ namespace Nest
 		public ConnectionStatus Delete<T>(IEnumerable<BulkParameters<T>> @objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
 
@@ -359,7 +359,7 @@ namespace Nest
 		public ConnectionStatus Delete<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
 		/// <summary>
@@ -370,7 +370,7 @@ namespace Nest
 		public ConnectionStatus Delete<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
 
@@ -398,7 +398,7 @@ namespace Nest
 		public ConnectionStatus Delete<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index, type);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
 		/// <summary>
@@ -409,7 +409,7 @@ namespace Nest
 		public ConnectionStatus Delete<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index, type);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.PostSync(path, json);
 		}
 
@@ -438,7 +438,7 @@ namespace Nest
 		public Task<ConnectionStatus> DeleteAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.Post(path, json);
 		}
 		/// <summary>
@@ -449,7 +449,7 @@ namespace Nest
 		public Task<ConnectionStatus> DeleteAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.Post(path, json);
 		}
 
@@ -477,7 +477,7 @@ namespace Nest
 		public Task<ConnectionStatus> DeleteAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.Post(path, json);
 		}
 		/// <summary>
@@ -488,7 +488,7 @@ namespace Nest
 		public Task<ConnectionStatus> DeleteAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.Post(path, json);
 		}
 
@@ -516,7 +516,7 @@ namespace Nest
 		public Task<ConnectionStatus> DeleteAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters, string type) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index, type);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.Post(path, json);
 		}
 		/// <summary>
@@ -527,7 +527,7 @@ namespace Nest
 		public Task<ConnectionStatus> DeleteAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters, string type) where T : class
 		{
 			var json = this.GenerateBulkDeleteCommand(@objects, index, type);
-			var path = this.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
 			return this.Connection.Post(path, json);
 		}
 
@@ -545,9 +545,9 @@ namespace Nest
 			var descriptor = new QueryPathDescriptor<T>();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.GetPathForTyped(descriptor);
+			var path = this.PathResolver.GetPathForTyped(descriptor);
 			if (parameters != null)
-				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, stringQuery);
 		}
 		/// <summary>
@@ -561,9 +561,9 @@ namespace Nest
 			var descriptor = new QueryPathDescriptor();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.GetPathForDynamic(descriptor);
+			var path = this.PathResolver.GetPathForDynamic(descriptor);
 			if (parameters != null)
-				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, stringQuery);
 		}
 		/// <summary>
@@ -576,9 +576,9 @@ namespace Nest
 		public ConnectionStatus DeleteByQuery(string query, DeleteByQueryParameters parameters = null)
 		{
 			var descriptor = new QueryPathDescriptor();
-			var path = this.GetPathForDynamic(descriptor);
+			var path = this.PathResolver.GetPathForDynamic(descriptor);
 			if (parameters != null)
-				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPath(path, query);
 		}
 
@@ -593,9 +593,9 @@ namespace Nest
 			var descriptor = new QueryPathDescriptor<T>();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.GetPathForTyped(descriptor);
+			var path = this.PathResolver.GetPathForTyped(descriptor);
 			if (parameters != null)
-				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPathAsync(path, stringQuery);
 		}
 		/// <summary>
@@ -609,9 +609,9 @@ namespace Nest
 			var descriptor = new QueryPathDescriptor();
 			query(descriptor);
 			var stringQuery = this.Serialize(descriptor);
-			var path = this.GetPathForDynamic(descriptor);
+			var path = this.PathResolver.GetPathForDynamic(descriptor);
 			if (parameters != null)
-				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPathAsync(path, stringQuery);
 		}
 		/// <summary>
@@ -624,9 +624,9 @@ namespace Nest
 		public Task<ConnectionStatus> DeleteByQueryAsync(string query, DeleteByQueryParameters parameters = null)
 		{
 			var descriptor = new QueryPathDescriptor();
-			var path = this.GetPathForDynamic(descriptor);
+			var path = this.PathResolver.GetPathForDynamic(descriptor);
 			if (parameters != null)
-				path = this.AppendDeleteByQueryParametersToPath(path, parameters);
+				path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 			return this._deleteToPathAsync(path, query);
 		}
 		#endregion

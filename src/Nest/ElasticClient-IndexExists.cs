@@ -11,7 +11,7 @@
 		}
 		private IndexExistsResponse _IndexExists(string index)
 		{
-			var path = this.CreatePath(index);
+			var path = this.PathResolver.CreateIndexPath(index);
 			var status = this.Connection.HeadSync(path);
 			var response = new IndexExistsResponse()
 			{

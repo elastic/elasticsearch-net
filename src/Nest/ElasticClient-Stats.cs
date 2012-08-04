@@ -95,7 +95,7 @@ namespace Nest
 		public IStatsResponse Stats(IEnumerable<string> indices, StatsParams parameters)
 		{
 			indices.ThrowIfEmpty("indices");
-			var path = this.CreatePath(string.Join(",",indices)) + this._BuildStatsUrl(parameters);
+			var path = this.PathResolver.CreateIndexPath(indices, this._BuildStatsUrl(parameters));
 			var status = this.Connection.GetSync(path);
 			var r = this.ToParsedResponse<StatsResponse>(status);
 			return r;

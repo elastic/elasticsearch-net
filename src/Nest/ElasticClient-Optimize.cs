@@ -58,7 +58,7 @@ namespace Nest
 		public IIndicesOperationResponse Optimize(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("index");
-			string path = this.CreatePath(string.Join(",", indices)) + "_optimize";
+			string path = this.PathResolver.CreateIndexPath(indices, "_optimize");
 			return this._Optimize(path, null);
 		}
 		/// <summary>
@@ -67,7 +67,7 @@ namespace Nest
 		public IIndicesOperationResponse Optimize(IEnumerable<string> indices, OptimizeParams optimizeParameters)
 		{
 			indices.ThrowIfNull("index");
-			string path = this.CreatePath(string.Join(",", indices)) + "_optimize";
+			string path = this.PathResolver.CreateIndexPath(indices, "_optimize");
 			return this._Optimize(path, optimizeParameters);
 		}
 

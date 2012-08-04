@@ -26,7 +26,7 @@ namespace Nest
 		public IIndicesShardResponse Refresh(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("indices");
-			string path = this.CreatePath(string.Join(",", indices)) + "_refresh";
+			string path = this.PathResolver.CreateIndexPath(indices, "_refresh");
 			return this._Refresh(path);
 		}
 		/// <summary>

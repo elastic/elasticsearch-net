@@ -100,7 +100,7 @@ namespace Nest
 		}
 		private PercolateResponse Percolate(string index, string type, string doc)
 		{
-			var path = this.CreatePath(index, type) + "_percolate";
+			var path = this.PathResolver.CreateIndexTypePath(index, type, "_percolate");
 			var status = this.Connection.PostSync(path, doc);
 			var r = this.ToParsedResponse<PercolateResponse>(status);
 			return r;

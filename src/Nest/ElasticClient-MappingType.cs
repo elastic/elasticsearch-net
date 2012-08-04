@@ -29,7 +29,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse DeleteMapping<T>(string index, string type) where T : class
 		{
-			string path = this.CreatePath(index, type);
+			string path = this.PathResolver.CreateIndexTypePath(index, type);
 			ConnectionStatus status = this.Connection.DeleteSync(path);
 
 			var response = new IndicesResponse();
@@ -67,7 +67,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse DeleteMapping(Type t, string index, string type)
 		{
-			string path = this.CreatePath(index, type);
+			string path = this.PathResolver.CreateIndexTypePath(index, type);
 			ConnectionStatus status = this.Connection.DeleteSync(path);
 
 			var response = new IndicesResponse();
@@ -117,7 +117,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map<T>(string index, string type) where T : class
 		{
-			string path = this.CreatePath(index, type) + "_mapping";
+			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
 			string map = this.CreateMapFor<T>(type);
 
 			ConnectionStatus status = this.Connection.PutSync(path, map);
@@ -169,7 +169,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map(Type t, string index, string type)
 		{
-			string path = this.CreatePath(index, type) + "_mapping";
+			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
 			string map = this.CreateMapFor(t, type);
 
 			ConnectionStatus status = this.Connection.PutSync(path, map);
@@ -203,7 +203,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map(TypeMapping typeMapping, string index)
 		{
-			string path = this.CreatePath(index, typeMapping.Name) + "_mapping";
+			string path = this.PathResolver.CreateIndexTypePath(index, typeMapping.Name, "_mapping");
 			var mapping = new Dictionary<string, TypeMapping>();
 			mapping.Add(typeMapping.Name, typeMapping);
 
@@ -253,7 +253,7 @@ namespace Nest
 		/// </summary>
 		public TypeMapping GetMapping(string index, string type)
 		{
-			string path = this.CreatePath(index, type) + "_mapping";
+			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
 
 			ConnectionStatus status = this.Connection.GetSync(path);
 			try

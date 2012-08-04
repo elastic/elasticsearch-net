@@ -38,12 +38,13 @@ namespace Nest
 		/// <summary>
 		/// Clears the specified caches for only the indices passed under indices
 		/// </summary>
-		public IIndicesResponse ClearCache(List<string> indices, ClearCacheOptions options)
+		public IIndicesResponse ClearCache(IEnumerable<string> indices, ClearCacheOptions options)
 		{
 			string path = "/_cache/clear";
 			if (indices != null && indices.Any(s => !string.IsNullOrEmpty(s)))
 			{
-				path = "/" + string.Join(",", indices.Where(s => !string.IsNullOrEmpty(s)).ToArray()) + path;
+				indices = indices.Where(s => !string.IsNullOrEmpty(s));
+				path = this.PathResolver.CreateIndexPath(indices, path);
 			}
 			if (options != ClearCacheOptions.All)
 			{

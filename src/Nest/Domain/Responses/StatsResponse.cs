@@ -2,16 +2,16 @@
 
 namespace Nest
 {
-    public interface IStatsResponse : IResponse
-    {
-        bool OK { get; }
-        ShardsMetaData Shards { get; }
-        Stats Stats { get; set; }
-    }
+	public interface IStatsResponse : IResponse
+	{
+		bool OK { get; }
+		ShardsMetaData Shards { get; }
+		Stats Stats { get; set; }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class StatsResponse : BaseResponse, IStatsResponse
-    {
+	{
 		public StatsResponse()
 		{
 			this.IsValid = true;

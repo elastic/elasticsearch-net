@@ -29,5 +29,7 @@ namespace Nest.Resolvers
 				typeName = Inflector.MakePlural(type.Name).ToLower();
 			return typeName;
 		}
+
+		
 	}
 }

@@ -16,7 +16,7 @@ namespace Nest
 		IAnalyzeResponse Analyze<T>(System.Linq.Expressions.Expression<Func<T, object>> selector, string text) where T : class;
 		IIndicesResponse ClearCache();
 		IIndicesResponse ClearCache(ClearCacheOptions options);
-		IIndicesResponse ClearCache(System.Collections.Generic.List<string> indices, ClearCacheOptions options);
+		IIndicesResponse ClearCache(System.Collections.Generic.IEnumerable<string> indices, ClearCacheOptions options);
 		IIndicesResponse ClearCache<T>() where T : class;
 		IIndicesResponse ClearCache<T>(ClearCacheOptions options) where T : class;
 		IIndicesOperationResponse CloseIndex(string index);
@@ -24,12 +24,12 @@ namespace Nest
 		ICountResponse Count(Action<QueryDescriptor> querySelector);
 		ICountResponse Count(System.Collections.Generic.IEnumerable<string> indices, Action<QueryDescriptor> querySelector);
 		ICountResponse Count(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Action<QueryDescriptor> querySelector);
-    ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-    ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-    ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
+	ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
+	ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
+	ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		ICountResponse CountAll(Action<QueryDescriptor> querySelector);
 		ICountResponse CountAll(string query);
-    ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
+	ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		IIndicesResponse CreateIndex(string index, IndexSettings settings);
 		ConnectionStatus Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		ConnectionStatus Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;

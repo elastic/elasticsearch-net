@@ -16,6 +16,7 @@ namespace Nest
 		private TypeNameResolver TypeNameResolver { get; set; }
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
+		private PathResolver PathResolver { get; set; }
 
 		/// <summary>
 		/// Validates the connection once and returns a bool whether NEST could connect to elasticsearch.
@@ -57,7 +58,7 @@ namespace Nest
 			this.TypeNameResolver = new TypeNameResolver();
 			this.IdResolver = new IdResolver();
 			this.IndexNameResolver = new IndexNameResolver(settings);
-
+			this.PathResolver = new PathResolver(settings);
 
 			this.DeserializeSettings = this.CreateDeserializeSettings();
 			this.SerializationSettings = this.CreateSettings();

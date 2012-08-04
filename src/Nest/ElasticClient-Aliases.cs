@@ -9,7 +9,7 @@ namespace Nest
 		private readonly string _aliasBody = @"{{""actions"" : [{0}] }}";
 		private string _createCommand(string command, AliasParams aliasParam)
 		{
-			var cmd  = @"{{ ""{0}"" : {{
+			var cmd = @"{{ ""{0}"" : {{
 				index: ""{1}"",
 				alias: ""{2}""".F(command, aliasParam.Index, aliasParam.Alias);
 
@@ -30,29 +30,29 @@ namespace Nest
 			return cmd;
 		}
 
-	/// <summary>
-	/// Get all the indices pointing to an alias
-	/// </summary>
-	public IEnumerable<string> GetIndicesPointingToAlias(string alias)
-	{
-	  var path = this.CreatePath(alias) + "/_aliases";
-	  var status = this.Connection.GetSync(path);
-	  var r = this.Deserialize<Dictionary<string, object>>(status.Result);
-	  return r == null ? Enumerable.Empty<string>() : r.Keys;
-	}
+		/// <summary>
+		/// Get all the indices pointing to an alias
+		/// </summary>
+		public IEnumerable<string> GetIndicesPointingToAlias(string alias)
+		{
+			var path = this.PathResolver.CreateIndexPath(alias, "/_aliases");
+			var status = this.Connection.GetSync(path);
+			var r = this.Deserialize<Dictionary<string, object>>(status.Result);
+			return r == null ? Enumerable.Empty<string>() : r.Keys;
+		}
 
-	/// <summary>
-	/// Rename an old alias for index to a new alias in one operation
-	/// </summary>
-	public IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
-	{
-	  var commands = new List<string>();
-	  foreach (var i in oldIndices)
-		commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = alias }));
-	  foreach (var i in newIndices)
-		commands.Add(_createCommand("add", new AliasParams { Index = i, Alias = alias }));
-	  return this._Alias(string.Join(", ", commands));
-	}
+		/// <summary>
+		/// Rename an old alias for index to a new alias in one operation
+		/// </summary>
+		public IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
+		{
+			var commands = new List<string>();
+			foreach (var i in oldIndices)
+				commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = alias }));
+			foreach (var i in newIndices)
+				commands.Add(_createCommand("add", new AliasParams { Index = i, Alias = alias }));
+			return this._Alias(string.Join(", ", commands));
+		}
 
 		/// <summary>
 		/// Add an alias to the default index
@@ -76,7 +76,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Alias(string index, IEnumerable<string> aliases)
 		{
-			aliases.Select(a=> _createCommand("add", new AliasParams { Index = index, Alias = a }));
+			aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
@@ -86,7 +86,7 @@ namespace Nest
 		public IIndicesOperationResponse Alias(IEnumerable<string> aliases)
 		{
 			var index = this.Settings.DefaultIndex;
-			aliases.Select(a=> _createCommand("add", new AliasParams { Index = index, Alias = a }));
+			aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
@@ -156,7 +156,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases)
 		{
-			var cmds = aliases.Select(a=>_aliasBody.F(_createCommand("add", a)));
+			var cmds = aliases.Select(a => _aliasBody.F(_createCommand("add", a)));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
 		}
@@ -180,8 +180,8 @@ namespace Nest
 		{
 			var path = "/_aliases";
 			query = _aliasBody.F(query);
-			var status = this.Connection.PostSync(path, query);			
-			
+			var status = this.Connection.PostSync(path, query);
+
 			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
 			return r;
 		}

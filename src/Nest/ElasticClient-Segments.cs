@@ -23,7 +23,7 @@ namespace Nest
 		/// </summary>
 		public ISegmentsResponse Segments(IEnumerable<string> indices)
 		{
-			var path = this.CreatePath(string.Join(",", indices)) + "_segments";
+			var path = this.PathResolver.CreateIndexPath(indices, "_segments");
 			return this._Segments(path);
 		}
 		private SegmentsResponse _Segments(string path)

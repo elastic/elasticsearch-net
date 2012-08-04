@@ -24,7 +24,7 @@ namespace Nest
 		/// </summary>
 		public IIndexSettingsResponse GetIndexSettings(string index)
 		{
-			string path = this.CreatePath(index) + "_settings";
+			string path = this.PathResolver.CreateIndexPath(index, "_settings");
 			var status = this.Connection.GetSync(path);
 
 			var response = new IndexSettingsResponse();
@@ -62,7 +62,7 @@ namespace Nest
 		public ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings)
 		{
 
-			string path = this.CreatePath(index) + "_settings";
+			string path = this.PathResolver.CreateIndexPath(index, "_settings");
 			settings.Settings = settings.Settings
 					.Where(kv => IndexSettings.UpdateWhiteList.Any(p =>
 					{
@@ -107,7 +107,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse CreateIndex(string index, IndexSettings settings)
 		{
-			string path = this.CreatePath(index);
+			string path = this.PathResolver.CreateIndexPath(index);
 			string data = JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
 			var status = this.Connection.PostSync(path, data);
 			var response = new IndicesResponse();
@@ -132,7 +132,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse DeleteIndex(string index)
 		{
-			string path = this.CreatePath(index);
+			string path = this.PathResolver.CreateIndexPath(index);
 
 			var status = this.Connection.DeleteSync(path);
 			var r = this.ToParsedResponse<IndicesResponse>(status);

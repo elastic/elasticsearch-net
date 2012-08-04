@@ -7,7 +7,7 @@
 		/// </summary>
 		public IIndicesOperationResponse OpenIndex(string index)
 		{
-			string path = this.CreatePath(index) + "_open";
+			string path = this.PathResolver.CreateIndexPath(index, "_open");
 			return this._OpenClose(path);
 		}
 		/// <summary>
@@ -15,7 +15,7 @@
 		/// </summary>
 		public IIndicesOperationResponse CloseIndex(string index)
 		{
-			string path = this.CreatePath(index) + "_close";
+			string path = this.PathResolver.CreateIndexPath(index, "_close");
 			return this._OpenClose(path);
 		}
 		/// <summary>

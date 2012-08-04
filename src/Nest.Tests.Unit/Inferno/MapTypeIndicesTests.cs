@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Inferno
 				.MapTypeIndices(p =>
 					p.Add(typeof(ElasticSearchProject), "mysuperindex")
 			);
-			var c = new ElasticClient(clientSettings);
+			var c = new PathResolver(clientSettings);
 			var searchPath = c.GetPathForTyped(new SearchDescriptor<ElasticSearchProject>());
 			StringAssert.StartsWith("mysuperindex", searchPath);
 			searchPath = c.GetPathForTyped(new SearchDescriptor<GeoLocation>());

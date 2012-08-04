@@ -27,8 +27,8 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
-		
-			return this.Get<T>(id, this.CreatePath(index, typeName));
+
+			return this.Get<T>(id, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
 		/// <summary>
 		/// Gets a document of T by id in the specified index and the specified typename
@@ -76,12 +76,12 @@ namespace Nest
 		public IEnumerable<T> Get<T>(IEnumerable<string> ids)
 			where T : class
 		{
-      var index = this.IndexNameResolver.GetIndexForType<T>();
+	  var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
-		
-			return this.Get<T>(ids, this.CreatePath(index, typeName));
+
+			return this.Get<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
 		/// <summary>
 		/// Gets multiple documents of T by id in the specified index and the specified typename for T
@@ -97,7 +97,7 @@ namespace Nest
 		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<string> ids)
 			where T : class
 		{
-			return this.Get<T>(ids, this.CreatePath(index, type));
+			return this.Get<T>(ids, this.PathResolver.CreateIndexTypePath(index, type));
 		}
 
 		private IEnumerable<T> Get<T>(IEnumerable<string> ids, string path)
