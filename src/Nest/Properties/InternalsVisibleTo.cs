@@ -13,15 +13,7 @@ using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
-[assembly: AssemblyTitle("NEST")]
-[assembly: AssemblyDescription("Strongly typed ElasticSearch client.")]
-[assembly: AssemblyProduct("NEST")]
-[assembly: AssemblyCopyright("Martijn Laarman MIT LICENSED")]
-[assembly: ComVisible(false)]
-[assembly: CLSCompliant(true)]
-[assembly: Guid("07E5CFA3-CF5F-4D17-874C-8D5CC6FA3E73")]
-[assembly: AssemblyVersion("0.9.3.0")]
-[assembly: AssemblyFileVersion("0.9.3.0")]
+[assembly: InternalsVisibleTo("Nest.Tests.Unit")]
+[assembly: InternalsVisibleTo("Nest.Tests.Integration")]
 
 

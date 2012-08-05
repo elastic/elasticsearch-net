@@ -373,6 +373,7 @@
     <Compile Include="Exception\DslException.cs" />
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="IElasticClient.cs" />
+    <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
