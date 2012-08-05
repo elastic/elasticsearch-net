@@ -12,6 +12,7 @@ namespace Nest
 		HitsMetaData<T> Hits { get; }
 		IDictionary<string, Facet> Facets { get; }
 		int ElapsedMilliseconds { get; }
+		string ScrollId { get; }
 		int Total { get; }
 		double MaxScore { get; }
 		IEnumerable<T> Documents { get; }
@@ -42,6 +43,13 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "took")]
 		public int ElapsedMilliseconds { get; internal set; }
+
+		/// <summary>
+		/// Only set when search type = scan and scroll specified
+		/// </summary>
+		[JsonProperty(PropertyName = "_scroll_id")]
+		public string ScrollId { get; internal set; }
+
 
 		public int Total
 		{

@@ -17,6 +17,16 @@ namespace Nest.Tests.Unit
 {
 	public class BaseJsonTests
 	{
+		protected readonly IConnectionSettings _settings;
+		protected readonly IElasticClient _client;
+
+		public BaseJsonTests()
+		{
+			this._settings = new ConnectionSettings(Test.Default.Uri)
+				.SetDefaultIndex(Test.Default.DefaultIndex);
+			this._client = new ElasticClient(this._settings);
+		}
+
 		protected void JsonEquals(object o, MethodBase method)
 		{
 			var type = method.DeclaringType;

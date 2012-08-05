@@ -23,6 +23,8 @@ namespace Nest
 		internal IEnumerable<string> _Indices { get; set; }
 		internal IEnumerable<string> _Types { get; set; }
 		internal string _Routing { get; set; }
+		internal SearchType?  _SearchType { get; set; }
+		internal string _Scroll { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
 
@@ -124,7 +126,26 @@ namespace Nest
 			this._Routing = routing;
 			return this;
 		}
-
+		/// <summary>
+		/// controls how the distributed search behaves. http://www.elasticsearch.org/guide/reference/api/search/search-type.html
+		/// </summary>
+		public SearchDescriptor<T> SearchType(SearchType searchType)
+		{
+			searchType.ThrowIfNull("searchType");
+			this._SearchType = searchType;
+			return this;
+		}
+		/// <summary>
+		/// A search request can be scrolled by specifying the scroll parameter. The scroll parameter is a time value parameter (for example: scroll=5m), indicating for how long the nodes that participate in the search will maintain relevant resources in order to continue and support it. This is very similar in its idea to opening a cursor against a database.
+		/// </summary>
+		/// <param name="scrollTime">The scroll parameter is a time value parameter (for example: scroll=5m)</param>
+		/// <returns></returns>
+		public SearchDescriptor<T> Scroll(string scrollTime)
+		{
+			scrollTime.ThrowIfNullOrEmpty("scrollTime");
+			this._Scroll = scrollTime;
+			return this;
+		}
 
 
 		[JsonProperty(PropertyName = "timeout")]
@@ -202,7 +223,8 @@ namespace Nest
 
 
 		/// <summary>
-		/// The number of hits to return. Defaults to 10.
+		/// The number of hits to return. Defaults to 10. When using scroll search type 
+		/// size is actually multiplied by the number of shards!
 		/// </summary>
 		public SearchDescriptor<T> Size(int size)
 		{

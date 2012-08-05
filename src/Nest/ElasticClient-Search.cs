@@ -11,7 +11,7 @@ namespace Nest
 		{
 			var search = new SearchDescriptor<dynamic>();
 			var descriptor = searcher(search);
-			var path = this.PathResolver.GetPathForDynamic(descriptor);
+			var path = this.PathResolver.GetSearchPathForDynamic(descriptor);
 			var query = this.Serialize(descriptor);
 
 			ConnectionStatus status = this.Connection.PostSync(path, query);
@@ -27,7 +27,7 @@ namespace Nest
 			var descriptor = searcher(search);
 
 			var query = this.Serialize(descriptor);
-			var path = this.PathResolver.GetPathForTyped(descriptor);
+			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
 			ConnectionStatus status = this.Connection.PostSync(path, query);
 			var r = this.ToParsedResponse<QueryResponse<T>>(status);
 			return r;
@@ -39,7 +39,7 @@ namespace Nest
 		public IQueryResponse<T> SearchRaw<T>(string query) where T : class
 		{
 			var descriptor = new SearchDescriptor<T>();
-			var path = this.PathResolver.GetPathForTyped(descriptor);
+			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
 			ConnectionStatus status = this.Connection.PostSync(path, query);
 			var r = this.ToParsedResponse<QueryResponse<T>>(status);
 			return r;

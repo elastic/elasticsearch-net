@@ -27,9 +27,9 @@ namespace Nest.Tests.Unit.Inferno
 					p.Add(typeof(ElasticSearchProject), "mysuperindex")
 			);
 			var c = new PathResolver(clientSettings);
-			var searchPath = c.GetPathForTyped(new SearchDescriptor<ElasticSearchProject>());
+			var searchPath = c.GetSearchPathForTyped(new SearchDescriptor<ElasticSearchProject>());
 			StringAssert.StartsWith("mysuperindex", searchPath);
-			searchPath = c.GetPathForTyped(new SearchDescriptor<GeoLocation>());
+			searchPath = c.GetSearchPathForTyped(new SearchDescriptor<GeoLocation>());
 			StringAssert.StartsWith("mydefaultindex", searchPath);
 		}
 	}

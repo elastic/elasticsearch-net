@@ -188,7 +188,7 @@ namespace Nest.Resolvers
 			return parameters;
 		}
 
-		public string GetPathForDynamic(SearchDescriptor<dynamic> descriptor)
+		public string GetSearchPathForDynamic(SearchDescriptor<dynamic> descriptor)
 		{
 			string indices;
 			if (descriptor._Indices.HasAny())
@@ -200,13 +200,11 @@ namespace Nest.Resolvers
 
 			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
 
-			var dict = new Dictionary<string, string>();
-			if (!descriptor._Routing.IsNullOrEmpty())
-				dict.Add("routing", descriptor._Routing);
+			var dict = this.GetSearchParameters(descriptor);
 
 			return this.PathJoin(indices, types, dict, "_search");
 		}
-		public string GetPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
+		public string GetSearchPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
 			string indices;
 			if (descriptor._Indices.HasAny())
@@ -222,9 +220,8 @@ namespace Nest.Resolvers
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
 				types = null;
 
-			var dict = new Dictionary<string, string>();
-			if (!descriptor._Routing.IsNullOrEmpty())
-				dict.Add("routing", descriptor._Routing);
+			var dict = this.GetSearchParameters(descriptor);
+				
 
 			return this.PathJoin(indices, types, dict, "_search");
 		}
@@ -285,5 +282,45 @@ namespace Nest.Resolvers
 			}
 			return path;
 		}
+
+		private Dictionary<string, string> GetSearchParameters<T>(SearchDescriptor<T> descriptor) where T : class
+		{
+			var dict = new Dictionary<string, string>();
+			if (!descriptor._Routing.IsNullOrEmpty())
+				dict.Add("routing", descriptor._Routing);
+			if (!descriptor._Scroll.IsNullOrEmpty())
+				dict.Add("scroll", descriptor._Scroll);
+			this.AddSearchType<T>(descriptor, dict);
+			return dict;
+		}
+
+		private void AddSearchType<T>(SearchDescriptor<T> descriptor, Dictionary<string, string> dict) where T : class
+		{
+			if (descriptor._SearchType.HasValue)
+			{
+				switch (descriptor._SearchType.Value)
+				{
+					case SearchType.Count:
+						dict.Add("search_type", "count");
+						break;
+					case SearchType.DfsQueryThenFetch:
+						dict.Add("search_type", "dfs_query_then_fetch");
+						break;
+					case SearchType.DfsQueryAndFetch:
+						dict.Add("search_type", "dfs_query_and_fetch");
+						break;
+					case SearchType.QueryThenFetch:
+						dict.Add("search_type", "query_then_fetch");
+						break;
+					case SearchType.QueryAndFetch:
+						dict.Add("search_type", "query_and_fetch");
+						break;
+					case SearchType.Scan:
+						dict.Add("search_type", "scan");
+						break;
+				}
+			}
+		}
+	
 	}
 }

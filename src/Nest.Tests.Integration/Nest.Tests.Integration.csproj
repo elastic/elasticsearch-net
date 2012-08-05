@@ -96,6 +96,10 @@
     <Compile Include="Search\QueryDSLTests.cs" />
     <Compile Include="Search\QueryResponseMapperTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldsTest.cs" />
+    <Compile Include="Search\Scroll\ScrollTests.cs" />
+    <Compile Include="Search\SearchType\SearchTypeScanTests.cs" />
+    <Compile Include="Search\SearchType\SearchTypeCountTests.cs" />
+    <Compile Include="Search\SearchType\SearchTypeTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Test.Designer.cs">

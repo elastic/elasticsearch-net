@@ -33,4 +33,3 @@ namespace Nest.Tests.Integration.Search.ScriptFields
 		}
 	}
 }
-;

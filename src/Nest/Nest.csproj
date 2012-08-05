@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElasticClient-Scroll.cs" />
     <Compile Include="Domain\Hit\ValidationExplanation.cs" />
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
     <Compile Include="DSL\Descriptors\RoutingQueryPathDescriptor.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="DSL\Factory\Common\Point.cs" />
     <Compile Include="DSL\Factory\Common\EsRegex.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
+    <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Enums\Lang.cs" />
     <Compile Include="Enums\DateHistogramComparatorType.cs" />
     <Compile Include="Enums\DistanceUnit.cs" />

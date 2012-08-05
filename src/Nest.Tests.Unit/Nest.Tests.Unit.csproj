@@ -160,6 +160,7 @@
     <Compile Include="QueryTests\TopChildrenQueryJson.cs" />
     <Compile Include="QueryTests\WildcardQueryJson.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldTests.cs" />
+    <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="SortTests.cs" />
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.settings</DependentUpon>
@@ -172,6 +173,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Search\SearchType\SearchTypeDoesNotPolluteQueryObject.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Test.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
