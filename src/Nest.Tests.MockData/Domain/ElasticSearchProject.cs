@@ -44,6 +44,8 @@ namespace Nest.Tests.MockData.Domain
 		public List<int> IntValues { get; set; }
 		public float[] FloatValues { get; set; }
 
+		public int LocScriptField { get; set; }
+
 		[ElasticProperty(NumericType=NumericType.Long)]
 		public int StupidIntIWantAsLong { get; set; }
 

@@ -1,9 +1,7 @@
 <ProjectConfiguration>
   <CopyReferencedAssembliesToWorkspace>false</CopyReferencedAssembliesToWorkspace>
   <ConsiderInconclusiveTestsAsPassing>false</ConsiderInconclusiveTestsAsPassing>
-  <PreloadReferencedAssemblies>false</PreloadReferencedAssemblies>
-  <AllowDynamicCodeContractChecking>true</AllowDynamicCodeContractChecking>
-  <AllowStaticCodeContractChecking>false</AllowStaticCodeContractChecking>
+  <AllowCodeContractChecking>false</AllowCodeContractChecking>
   <IgnoreThisComponentCompletely>false</IgnoreThisComponentCompletely>
   <RunPreBuildEvents>false</RunPreBuildEvents>
   <RunPostBuildEvents>false</RunPostBuildEvents>
@@ -16,4 +14,5 @@
   <UseBuildConfiguration></UseBuildConfiguration>
   <ProxyProcessPath></ProxyProcessPath>
   <UseCPUArchitecture>AutoDetect</UseCPUArchitecture>
+  <AdditionalFilesToInclude>**.json</AdditionalFilesToInclude>
 </ProjectConfiguration>

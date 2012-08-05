@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseJsonTests.cs" />
     <Compile Include="Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Facets\FacetJson.cs" />
     <Compile Include="Facets\FilterFacetJson.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="QueryTests\TextQueryJson.cs" />
     <Compile Include="QueryTests\TopChildrenQueryJson.cs" />
     <Compile Include="QueryTests\WildcardQueryJson.cs" />
+    <Compile Include="Search\ScriptFields\ScriptFieldTests.cs" />
     <Compile Include="SortTests.cs" />
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.settings</DependentUpon>
@@ -184,6 +186,11 @@
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Search\ScriptFields\TestScriptFields.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
