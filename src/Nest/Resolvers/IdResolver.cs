@@ -31,12 +31,7 @@ namespace Nest.Resolvers
 			if (IdDelegates.TryGetValue(type, out cachedLookup))
 				return cachedLookup(@object);
 
-			var esTypeAtt = new PropertyNameResolver().GetElasticPropertyFor(type);
-			var propertyName = (esTypeAtt != null) ? esTypeAtt.IdProperty : string.Empty;
-			if (string.IsNullOrWhiteSpace(propertyName))
-				propertyName = "Id";
-
-			var idProperty = type.GetProperty(propertyName);
+			var idProperty = GetInferredId(type);
 			if (idProperty == null)
 			{
 				throw new Exception("Could not infer id for object of type" + type.FullName);
@@ -63,5 +58,40 @@ namespace Nest.Resolvers
 				return value.ToString();
 			}
 		}
+
+
+		private PropertyInfo GetInferredId(Type type)
+		{
+			// if the type specifies through ElasticAttribute what the id prop is 
+			// use that no matter what
+			var esTypeAtt = new PropertyNameResolver().GetElasticPropertyFor(type);
+			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
+				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
+
+			var propertyName = "Id";
+
+			//Try Id on its own case insensitive
+			var idProperty = GetPropertyCaseInsensitive(type, propertyName);
+			if (idProperty != null)
+				return idProperty;
+
+			//Try TypeNameId case insensitive
+			idProperty = GetPropertyCaseInsensitive(type, type.Name + propertyName);
+			if (idProperty != null)
+				return idProperty;
+
+			//Try TypeName_Id case insensitive
+			idProperty = GetPropertyCaseInsensitive(type, type.Name + "_" + propertyName);
+			if (idProperty != null)
+				return idProperty;
+
+			return idProperty;
+		}
+
+		PropertyInfo GetPropertyCaseInsensitive(Type type, string propertyName)
+		{
+			return type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+		}
+
 	}
 }
