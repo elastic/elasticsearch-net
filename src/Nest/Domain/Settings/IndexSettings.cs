@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using System;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
     /// <summary>
     /// Writing these uses a custom converter that ignores the json props
     /// </summary>
+    [JsonConverter(typeof(IndexSettingsConverter))]
     [JsonObject(MemberSerialization.OptIn)]
     public class IndexSettings : IDictionary<string, string>
     {

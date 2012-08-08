@@ -374,6 +374,8 @@
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
+    <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
+    <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />

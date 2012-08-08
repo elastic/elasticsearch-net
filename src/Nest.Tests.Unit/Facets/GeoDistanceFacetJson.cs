@@ -19,6 +19,7 @@ namespace Nest.Tests.Unit.Facets
         .Size(10)
         .QueryRawJson(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
+          .OnField(f=>f.Origin)
           .OnValueField(f=>f.Origin)
           .PinTo(Lat: 40, Lon: -70)
           .Ranges(
@@ -33,7 +34,7 @@ namespace Nest.Tests.Unit.Facets
           facets :  {
             ""geo1"" :  {
                 geo_distance : {
-                  ""pin.location"" : ""40, -70"",
+                  ""origin"" : ""40, -70"",
                   value_field: ""origin"",
                   ""ranges"" : [
                     { ""to"" : 10 },
@@ -55,6 +56,7 @@ namespace Nest.Tests.Unit.Facets
         .Size(10)
         .QueryRawJson(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
+          .OnField(f => f.Origin)
           .OnValueField(f => f.Origin)
           .PinTo("drm3btev3e86")
         );
@@ -63,7 +65,7 @@ namespace Nest.Tests.Unit.Facets
           facets :  {
             ""geo1"" :  {
                 geo_distance : {
-                    ""pin.location"" : ""drm3btev3e86"",
+                    ""origin"" : ""drm3btev3e86"",
                     value_field: ""origin""
                 } 
             }
@@ -79,6 +81,7 @@ namespace Nest.Tests.Unit.Facets
         .Size(10)
         .QueryRawJson(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
+          .OnField(f => f.Origin)
           .OnValueField(f => f.Origin)
           .PinTo("drm3btev3e86")
           .Unit(GeoUnit.mi)
@@ -89,7 +92,7 @@ namespace Nest.Tests.Unit.Facets
           facets :  {
             ""geo1"" :  {
                 geo_distance : {
-                    ""pin.location"" : ""drm3btev3e86"",
+                    ""origin"" : ""drm3btev3e86"",
                     value_field: ""origin"",
                     unit: ""mi"",
                     distance_type: ""arc""
@@ -107,6 +110,7 @@ namespace Nest.Tests.Unit.Facets
         .Size(10)
         .QueryRawJson(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
+          .OnField(f => f.Origin)
           .OnValueScript("doc['num1'].value * factor")
           .Params(p=>p.Add("factor", 5))
           .PinTo(40, -70)
@@ -118,11 +122,11 @@ namespace Nest.Tests.Unit.Facets
           facets :  {
             ""geo1"" :  {
                 geo_distance : {
-                    ""pin.location"" : ""40, -70"",
+                    ""origin"" : ""40, -70"",
                     value_script: ""doc['num1'].value * factor"",
+                    params: { factor: 5 },
                     unit: ""mi"",
-                    distance_type: ""arc"",
-                    params: { factor: 5 }
+                    distance_type: ""arc""
                 } 
             }
           }, query : { raw : ""query""}

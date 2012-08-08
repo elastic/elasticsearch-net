@@ -7,25 +7,27 @@ using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 
 namespace Nest.DSL.Descriptors
 {
-  public class SortGeoDistanceDescriptor<T> where T : class
+  public class SortGeoDistanceDescriptor
   {
     internal string _Field { get; set; }
 
-    [JsonProperty("missing")]
     internal string _Missing { get; set; }
 
-    [JsonProperty("order")]
     internal string _Order { get; set; }
 
-    [JsonProperty(PropertyName = "pin.location")]
     internal string _PinLocation { get; set; }
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    [JsonProperty(PropertyName = "unit")]
     internal GeoUnit? _GeoUnit { get; set; }
+  }
+
+  [JsonConverter(typeof(SortGeoDistanceDescriptorConverter))]
+  public class SortGeoDistanceDescriptor<T> : SortGeoDistanceDescriptor where T : class
+  {
+    
 
     public SortGeoDistanceDescriptor<T> PinTo(string geoLocationHash)
     {

@@ -7,34 +7,52 @@ using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
 using Nest.Resolvers;
+using System.Runtime.Serialization;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-  [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class GeoDistanceFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
+  public class GeoDistanceFacetDescriptor
   {
-    [JsonProperty(PropertyName = "pin.location")]
     internal string _PinLocation { get; set; }
 
-    [JsonProperty(PropertyName = "value_field")]
+    internal string _Field { get; set; }
+
     internal string _ValueField { get; set; }
 
-    [JsonProperty(PropertyName = "value_script")]
     internal string _ValueScript { get; set; }
 
-    [JsonProperty(PropertyName = "ranges")]
     internal IEnumerable<Range<int>> _Ranges { get; set; }
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    [JsonProperty(PropertyName = "unit")]
     internal GeoUnit? _GeoUnit { get; set; }
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    [JsonProperty(PropertyName = "distance_type")]
     internal GeoDistance? _GeoDistance { get; set; }
 
-    [JsonProperty(PropertyName = "params")]
     internal Dictionary<string, object> _Params { get; set; }
+  }
+
+
+  [JsonConverter(typeof(GeoDistanceFacetDescriptorConverter))]
+  [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+  public class GeoDistanceFacetDescriptor<T> : GeoDistanceFacetDescriptor where T : class
+  {
+    internal string _Nested { get; set; }
+    internal string _Scope { get; set; }
+    internal bool? _IsGlobal { get; set; }
+    internal FilterDescriptor<T> _FacetFilter { get; set; }
+
+    public GeoDistanceFacetDescriptor<T> OnField(string field)
+    {
+      field.ThrowIfNullOrEmpty("field");
+      this._Field = field;
+      return this;
+    }
+    public GeoDistanceFacetDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+    {
+      objectPath.ThrowIfNull("objectPath");
+      var fieldName = new PropertyNameResolver().Resolve(objectPath);
+      return this.OnField(fieldName);
+    }
 
     public GeoDistanceFacetDescriptor<T> OnValueField(string field)
     {

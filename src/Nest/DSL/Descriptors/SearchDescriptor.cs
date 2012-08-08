@@ -501,7 +501,7 @@ namespace Nest
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = new SortGeoDistanceDescriptor<T>();
 			sortSelector(descriptor);
-			this._Sort.Add(descriptor._Field, descriptor);
+			this._Sort.Add("_geo_distance", descriptor);
 			return this;
 		}
 		/// <summary>
@@ -526,7 +526,7 @@ namespace Nest
 			Func<F, string> inferedFieldNameSelector,
 			Action<FacetDescriptorsBucket<T>, F> fillBucket
 			)
-			where F : BaseFacetDescriptor<T>, new()
+			where F : new()
 		{
 			facet.ThrowIfNull("facet");
 			inferedFieldNameSelector.ThrowIfNull("inferedFieldNameSelector");
@@ -544,14 +544,23 @@ namespace Nest
 					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
 				);
 			}
-
-			var bucket = new FacetDescriptorsBucket<T>
+			var bff = f as BaseFacetDescriptor<T>;
+			var gff = f as GeoDistanceFacetDescriptor<T>;
+			var bucket = new FacetDescriptorsBucket<T>();
+			if (bff != null)
 			{
-				Global = f._IsGlobal,
-				FacetFilter = f._FacetFilter,
-				Nested = f._Nested,
-				Scope = f._Scope
-			};
+				bucket.Global = bff._IsGlobal;
+				bucket.FacetFilter = bff._FacetFilter;
+				bucket.Nested = bff._Nested;
+				bucket.Scope = bff._Scope;
+			}
+			else if (gff != null)
+			{
+				bucket.Global = gff._IsGlobal;
+				bucket.FacetFilter = gff._FacetFilter;
+				bucket.Nested = gff._Nested;
+				bucket.Scope = gff._Scope;
+			}
 			fillBucket(bucket, descriptor);
 			this._Facets.Add(key, bucket);
 

@@ -8,6 +8,10 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+  public interface IFacetDescriptor<out T> : IFacetDescriptor
+  {
+
+  }
   public interface IFacetDescriptor
   {
   }

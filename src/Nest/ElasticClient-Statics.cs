@@ -23,9 +23,7 @@ namespace Nest
 				Converters = new List<JsonConverter> 
 				{ 
 					new IsoDateTimeConverter(), 
-					new TermConverter(), 
 					new FacetConverter(),
-					new IndexSettingsConverter(),
 					new ShardsSegmentConverter(),
 					new RawOrQueryDescriptorConverter()
 				}

@@ -8,31 +8,31 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-  public partial class BaseFacetDescriptor<T> : IFacetDescriptor where T : class 
-  {
-    internal bool? _IsGlobal { get; set; }
-    public BaseFacetDescriptor<T> Global() 
-    {
-      throw new NotImplementedException("Cannot call Base directly");
-    }
+	public partial class BaseFacetDescriptor<T> : IFacetDescriptor<T> where T : class 
+	{
+		internal bool? _IsGlobal { get; set; }
+		public BaseFacetDescriptor<T> Global() 
+		{
+			throw new NotImplementedException("Cannot call Base directly");
+		}
 
-    internal FilterDescriptor<T> _FacetFilter { get; set; }
-    public virtual BaseFacetDescriptor<T> FacetFilter(
-      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
-    )
-    {
-      throw new NotImplementedException("Cannot call Base directly");
-    }
+		internal FilterDescriptor<T> _FacetFilter { get; set; }
+		public virtual BaseFacetDescriptor<T> FacetFilter(
+			Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+		)
+		{
+			throw new NotImplementedException("Cannot call Base directly");
+		}
 
-    internal string _Scope { get; set;}
+		internal string _Scope { get; set;}
 		public virtual BaseFacetDescriptor<T> Scope(string scope)
-    {
-      throw new NotImplementedException("Cannot call Base directly");
-    }
-    internal string _Nested { get; set; }
+		{
+			throw new NotImplementedException("Cannot call Base directly");
+		}
+		internal string _Nested { get; set; }
 		public virtual BaseFacetDescriptor<T> Nested(string nested)
-    {
-      throw new NotImplementedException("Cannot call Base directly");
-    }
-  }
+		{
+			throw new NotImplementedException("Cannot call Base directly");
+		}
+	}
 }

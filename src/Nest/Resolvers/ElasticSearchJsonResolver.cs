@@ -24,7 +24,7 @@ namespace Nest.Resolvers
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
 			var property = base.CreateProperty(member, memberSerialization);
-
+			
 			var attributes = member.GetCustomAttributes(typeof(ElasticPropertyAttribute), false);
 			if (attributes == null || !attributes.Any())
 				return property;
