@@ -1,9 +1,65 @@
 ﻿using System;
+using Nest.FactoryDsl;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
+
+		/// <summary>
+		/// Search using dynamic as its return type.
+		/// </summary>
+		public IQueryResponse<dynamic> Search(
+			SearchBuilder searchBuilder, 
+			string index = null,
+			string type = null,
+			string routing = null,
+			SearchType? searchType = null)
+		{
+			var search = new SearchDescriptor<dynamic>();
+			if (!index.IsNullOrEmpty())
+				search.Index(index);
+			if (!type.IsNullOrEmpty())
+				search.Type(type);
+			if (!routing.IsNullOrEmpty())
+				search.Routing(routing);
+			if (searchType.HasValue)
+				search.SearchType(searchType.Value);
+
+			var path = this.PathResolver.GetSearchPathForDynamic(search);
+			var query = searchBuilder.ToString();
+
+			ConnectionStatus status = this.Connection.PostSync(path, query);
+			var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
+			return r;
+		}
+		/// <summary>
+		/// Search using T as the return type
+		/// </summary>
+		public IQueryResponse<T> Search<T>(SearchBuilder searchBuilder,
+			string index = null,
+			string type = null,
+			string routing = null,
+			SearchType? searchType = null) where T : class
+		{
+			var search = new SearchDescriptor<T>();
+			if (!index.IsNullOrEmpty())
+				search.Index(index);
+			if (!type.IsNullOrEmpty())
+				search.Type(type);
+			if (!routing.IsNullOrEmpty())
+				search.Routing(routing);
+			if (searchType.HasValue)
+				search.SearchType(searchType.Value);
+
+			var query = searchBuilder.ToString();
+			var path = this.PathResolver.GetSearchPathForTyped(search);
+			ConnectionStatus status = this.Connection.PostSync(path, query);
+			var r = this.ToParsedResponse<QueryResponse<T>>(status);
+			return r;
+		}
+
+
 		/// <summary>
 		/// Search using dynamic as its return type.
 		/// </summary>

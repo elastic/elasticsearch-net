@@ -2,6 +2,7 @@
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Nest.FactoryDsl;
 
 namespace Nest.Tests.Integration.Search.SearchType
 {
@@ -64,6 +65,18 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.SearchType(Nest.SearchType.DfsQueryThenFetch)
 
 			);
+			Assert.True(queryResults.IsValid);
+			Assert.True(queryResults.Documents.Any());
+		}
+		[Test]
+		public void SearchDfsQueryThenFetchUsingFactory()
+		{
+			var sb = SearchBuilder.Builder()
+				.From(0)
+				.Size(10)
+				.Field("name")
+				.Query(QueryFactory.MatchAllQuery());
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(sb, searchType: Nest.SearchType.DfsQueryAndFetch);
 			Assert.True(queryResults.IsValid);
 			Assert.True(queryResults.Documents.Any());
 		}
