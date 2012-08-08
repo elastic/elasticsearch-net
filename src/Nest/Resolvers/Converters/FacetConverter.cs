@@ -70,7 +70,7 @@ namespace Nest.Resolvers.Converters
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof (Facet);
+			return true;
 		}
 
 		#endregion

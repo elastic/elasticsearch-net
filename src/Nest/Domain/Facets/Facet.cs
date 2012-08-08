@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
@@ -13,6 +14,7 @@ namespace Nest
         IEnumerable<T> Items { get; }
     }
     [JsonObject]
+    [JsonConverter(typeof(FacetConverter))]
     public abstract class Facet
     {
     }

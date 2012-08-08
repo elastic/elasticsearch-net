@@ -60,7 +60,6 @@ namespace Nest
 			this.IndexNameResolver = new IndexNameResolver(settings);
 			this.PathResolver = new PathResolver(settings);
 
-			this.DeserializeSettings = this.CreateDeserializeSettings();
 			this.SerializationSettings = this.CreateSettings();
 			var indexSettings = this.CreateSettings();
 			indexSettings.ContractResolver = new ElasticCamelCaseResolver();

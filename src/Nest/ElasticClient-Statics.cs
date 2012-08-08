@@ -8,7 +8,6 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		internal readonly JsonSerializerSettings DeserializeSettings;
 		internal readonly JsonSerializerSettings SerializationSettings;
 		internal readonly JsonSerializerSettings IndexSerializationSettings;
 		internal readonly PropertyNameResolver PropertyNameResolver;
@@ -22,25 +21,7 @@ namespace Nest
 				DefaultValueHandling = DefaultValueHandling.Ignore,
 				Converters = new List<JsonConverter> 
 				{ 
-					new IsoDateTimeConverter(), 
-					new FacetConverter(),
-					new ShardsSegmentConverter(),
-					new RawOrQueryDescriptorConverter()
-				}
-			};
-		}
-		private JsonSerializerSettings CreateDeserializeSettings()
-		{
-			return new JsonSerializerSettings()
-			{
-				ContractResolver = new ElasticResolver(),
-				NullValueHandling = NullValueHandling.Ignore,
-				DefaultValueHandling = DefaultValueHandling.Ignore,
-				Converters = new List<JsonConverter> 
-				{ 
-					new IsoDateTimeConverter(), 
-					new FacetConverter(),
-					new ShardsSegmentConverter()
+					new IsoDateTimeConverter()
 				}
 			};
 		}
@@ -48,7 +29,6 @@ namespace Nest
 		{
 			this.IndexSerializationSettings.Converters.Add(converter);
 			this.SerializationSettings.Converters.Add(converter);
-			this.DeserializeSettings.Converters.Add(converter);
 		}
 		public string Serialize<T>(T @object)
 		{
@@ -56,7 +36,7 @@ namespace Nest
 		}
 		public T Deserialize<T>(string value)
 		{
-			return JsonConvert.DeserializeObject<T>(value, this.DeserializeSettings);
+			return JsonConvert.DeserializeObject<T>(value, this.SerializationSettings);
 		}
 
 	}
