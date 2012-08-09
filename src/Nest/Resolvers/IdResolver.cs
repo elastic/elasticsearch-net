@@ -39,7 +39,7 @@ namespace Nest.Resolvers
 			try
 			{
 				var getMethod = idProperty.GetGetMethod();
-				var method = typeof(ElasticClient).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+				var method = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 				var generic = method.MakeGenericMethod(type, getMethod.ReturnType);
 				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });
 				cachedLookup = o =>

@@ -103,5 +103,23 @@ namespace Nest.Tests.Integration.Facet
 			var tf = (TermFacet) facet;
 			Assert.IsTrue(tf.Items.Any(f => f.Term == this._LookFor.ToLower()));
 		}
+    [Test]
+    public void TestWithDSL()
+    {
+      this.ResetIndexes();
+      var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+        .FacetTerm(t=>t
+          .Order(TermsOrder.count)
+          .OnField(p => p.Name)
+          .Size(10)
+        )
+      );
+
+      var tf = results.Facet<TermFacet>(p => p.Name);
+      Assert.AreEqual(0, tf.Missing);
+      Assert.Greater(tf.Other, 0);
+      Assert.Greater(tf.Total, 0);
+      Assert.Greater(tf.Items.Count(), 0);
+    }
 	}
 }

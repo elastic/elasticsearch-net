@@ -21,7 +21,7 @@ namespace Nest
 				DefaultValueHandling = DefaultValueHandling.Ignore,
 				Converters = new List<JsonConverter> 
 				{ 
-					new IsoDateTimeConverter()
+					new IsoDateTimeConverter(), new FacetConverter()
 				}
 			};
 		}

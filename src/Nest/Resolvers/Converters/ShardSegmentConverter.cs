@@ -31,7 +31,7 @@ namespace Nest.Resolvers.Converters
 
         public override bool CanConvert(Type objectType)
         {
-            return true;
+          return objectType == typeof(ShardsSegment);
         }
     }
 }

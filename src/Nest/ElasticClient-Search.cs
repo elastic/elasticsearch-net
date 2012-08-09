@@ -1,5 +1,6 @@
 ﻿using System;
 using Nest.FactoryDsl;
+using System.Diagnostics;
 
 namespace Nest
 {
@@ -79,13 +80,27 @@ namespace Nest
 		/// </summary>
 		public IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class
 		{
+      var sw2 = new Stopwatch(); sw2.Start();
+      var sw = new Stopwatch();
+      sw.Start();
 			var search = new SearchDescriptor<T>();
 			var descriptor = searcher(search);
-
+      var xx = sw.Elapsed;
+      sw.Restart();
 			var query = this.Serialize(descriptor);
+      var xY = sw.Elapsed;
+      sw.Restart();
 			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
+      var xxx = sw.Elapsed;
+      sw.Restart();
 			ConnectionStatus status = this.Connection.PostSync(path, query);
+      var xxxx = sw.Elapsed;
+      sw.Restart();
 			var r = this.ToParsedResponse<QueryResponse<T>>(status);
+      var xxxxx = sw.Elapsed;
+      sw.Restart();
+      sw2.Stop();
+      var total = sw2.Elapsed;
 			return r;
 		}
 		/// <summary>

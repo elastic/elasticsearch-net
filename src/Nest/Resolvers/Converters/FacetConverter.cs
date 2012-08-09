@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
+
 	public class FacetConverter : JsonConverter
 	{
 		#region Overrides of CustomCreationConverter<Facet>
@@ -28,7 +29,6 @@ namespace Nest.Resolvers.Converters
 			if (o.TryGetValue("_type", out typeToken))
 			{
 				var type = typeToken.Value<string>();
-
 				switch (type)
 				{
 					case "terms":
@@ -60,17 +60,17 @@ namespace Nest.Resolvers.Converters
 						return serializer.Deserialize(o.CreateReader(), typeof(GeoDistanceFacet));
 					case "filter":
 						return serializer.Deserialize(o.CreateReader(), typeof(FilterFacet));
-										case "query":
-												return serializer.Deserialize(o.CreateReader(), typeof(QueryFacet));
+					case "query":
+					  return serializer.Deserialize(o.CreateReader(), typeof(QueryFacet));
 				}
 			}
 
-			throw new NotSupportedException("The JObject could not be interpreted into a supported facet type.");
+      return serializer.Deserialize(o.CreateReader(), objectType);
 		}
 
 		public override bool CanConvert(Type objectType)
 		{
-			return true;
+      return objectType == typeof(Facet);
 		}
 
 		#endregion
