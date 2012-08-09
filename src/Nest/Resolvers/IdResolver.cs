@@ -10,6 +10,8 @@ namespace Nest.Resolvers
 	public class IdResolver
 	{
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static MethodInfo MakeDelegateMethodInfo = typeof(ElasticClient).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+
 
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
@@ -39,8 +41,7 @@ namespace Nest.Resolvers
 			try
 			{
 				var getMethod = idProperty.GetGetMethod();
-				var method = typeof(ElasticClient).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
-				var generic = method.MakeGenericMethod(type, getMethod.ReturnType);
+				var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
 				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });
 				cachedLookup = o =>
 				{
