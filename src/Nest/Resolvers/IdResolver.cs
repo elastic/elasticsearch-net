@@ -42,8 +42,7 @@ namespace Nest.Resolvers
 			{
 				var getMethod = idProperty.GetGetMethod();
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
-				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });
-				cachedLookup = o =>
+				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });				cachedLookup = o =>
 				{
 					T obj = (T)o;
 					var v = func(obj);

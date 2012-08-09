@@ -14,7 +14,6 @@ namespace Nest
         IEnumerable<T> Items { get; }
     }
     [JsonObject]
-    [JsonConverter(typeof(FacetConverter))]
     public abstract class Facet
     {
     }
