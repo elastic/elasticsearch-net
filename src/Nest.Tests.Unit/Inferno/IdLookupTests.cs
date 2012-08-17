@@ -95,6 +95,7 @@ namespace Nest.Tests.Unit.Inferno
 			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200")));
 			var expected = new InheritedIdClass() { Id = 123 };
 			var id = new IdResolver().GetIdFor(expected);
+			id = new IdResolver().GetIdFor(expected);
 			Assert.AreEqual(expected.Id.ToString(), id);
 		}
 
