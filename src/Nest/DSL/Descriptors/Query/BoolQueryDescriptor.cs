@@ -25,7 +25,7 @@ namespace Nest
 		{
 			var lBoolDescriptor = lbq.BoolQueryDescriptor;
 			var lHasMustQueries = lBoolDescriptor != null &&
- 				lBoolDescriptor._MustQueries.HasAny();
+				lBoolDescriptor._MustQueries.HasAny();
 
 			var rBoolDescriptor = rbq.BoolQueryDescriptor;
 			var rHasMustQueries = rBoolDescriptor != null &&
@@ -34,6 +34,22 @@ namespace Nest
 
 			var lq = lHasMustQueries ? lBoolDescriptor._MustQueries : new[] { lbq };
 			var rq = rHasMustQueries ? rBoolDescriptor._MustQueries : new[] { rbq };
+
+			return lq.Concat(rq);
+		}
+		internal static IEnumerable<BaseQuery> MergeShouldQueries(this BaseQuery lbq, BaseQuery rbq)
+		{
+			var lBoolDescriptor = lbq.BoolQueryDescriptor;
+			var lHasShouldQueries = lBoolDescriptor != null &&
+				lBoolDescriptor._ShouldQueries.HasAny();
+
+			var rBoolDescriptor = rbq.BoolQueryDescriptor;
+			var rHasShouldQueries = rBoolDescriptor != null &&
+				rBoolDescriptor._ShouldQueries.HasAny();
+
+
+			var lq = lHasShouldQueries ? lBoolDescriptor._ShouldQueries : new[] { lbq };
+			var rq = rHasShouldQueries ? rBoolDescriptor._ShouldQueries : new[] { rbq };
 
 			return lq.Concat(rq);
 		}
@@ -99,7 +115,7 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-    public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+	public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<QueryDescriptor<T>>();
 			foreach (var selector in filters)
@@ -116,7 +132,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="filters"></param>
 		/// <returns></returns>
-    public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+	public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<QueryDescriptor<T>>();
 			foreach (var selector in filters)
@@ -133,7 +149,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="filters"></param>
 		/// <returns></returns>
-    public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+	public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<QueryDescriptor<T>>();
 			foreach (var selector in filters)

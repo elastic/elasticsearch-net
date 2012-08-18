@@ -60,7 +60,6 @@ namespace Nest.Resolvers
 			}
 		}
 
-
 		private PropertyInfo GetInferredId(Type type)
 		{
 			// if the type specifies through ElasticAttribute what the id prop is 

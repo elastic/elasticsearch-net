@@ -36,6 +36,13 @@ namespace Nest
 			var q = new BaseQuery();
 			var bq = new BoolBaseQueryDescriptor();
 			bq._ShouldQueries = new[] { lbq, rbq };
+
+			if (lbq.BoolQueryDescriptor.CanJoinShould()
+				&& rbq.BoolQueryDescriptor.CanJoinShould())
+			{
+				bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
+			}
+
 			q.BoolQueryDescriptor = bq;
 			return q;
 		}

@@ -1,0 +1,34 @@
+{
+  "bool": {
+    "should": [
+      {
+        "term": {
+          "name": {
+            "value": "foo"
+          }
+        }
+      },
+      {
+        "term": {
+          "name": {
+            "value": "bar"
+          }
+        }
+      },
+      {
+        "term": {
+          "name": {
+            "value": "blah"
+          }
+        }
+      },
+      {
+        "term": {
+          "name": {
+            "value": "derp"
+          }
+        }
+      }
+    ]
+  }
+}
