@@ -10,7 +10,7 @@ namespace Nest.Resolvers
 	public class IdResolver
 	{
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static MethodInfo MakeDelegateMethodInfo = typeof(ElasticClient).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
 
 		internal Func<T, string> CreateIdSelector<T>() where T : class
@@ -42,7 +42,8 @@ namespace Nest.Resolvers
 			{
 				var getMethod = idProperty.GetGetMethod();
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
-				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });				cachedLookup = o =>
+				Func<T, object> func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });				
+				cachedLookup = o =>
 				{
 					T obj = (T)o;
 					var v = func(obj);
@@ -58,7 +59,6 @@ namespace Nest.Resolvers
 				return value.ToString();
 			}
 		}
-
 
 		private PropertyInfo GetInferredId(Type type)
 		{
