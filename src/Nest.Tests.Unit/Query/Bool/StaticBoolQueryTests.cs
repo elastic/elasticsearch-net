@@ -32,6 +32,14 @@ namespace Nest.Tests.Unit.Query.Bool
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
 		}
+		[Test]
+		public void StaticBoolAssignNotTest()
+		{
+			var s = !Query<ElasticSearchProject>.Term(f => f.Name, "foo") 
+			 && !Query<ElasticSearchProject>.Term(f => f.Name, "bar");
+
+			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+		}
 		[Test] 
 		public void StaticBoolAssignMultipleTest()
 		{ 

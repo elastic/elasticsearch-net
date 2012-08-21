@@ -31,8 +31,9 @@ namespace Nest
 			var rHasMustQueries = rBoolDescriptor != null &&
 				rBoolDescriptor._MustQueries.HasAny();
 
-
-			var lq = lHasMustQueries ? lBoolDescriptor._MustQueries : new[] { lbq };
+			var lq = lHasMustQueries 
+			? lBoolDescriptor._MustQueries 
+			: new[] { lbq };
 			var rq = rHasMustQueries ? rBoolDescriptor._MustQueries : new[] { rbq };
 
 			return lq.Concat(rq);
@@ -53,6 +54,24 @@ namespace Nest
 
 			return lq.Concat(rq);
 		}
+		internal static IEnumerable<BaseQuery> MergeMustNotQueries(this BaseQuery lbq, BaseQuery rbq)
+		{ 
+			var lBoolDescriptor = lbq.BoolQueryDescriptor;
+			var lHasMustNotQueries = lBoolDescriptor != null &&
+				lBoolDescriptor._MustNotQueries.HasAny();
+
+			var rBoolDescriptor = rbq.BoolQueryDescriptor;
+			var rHasMustNotQueries = rBoolDescriptor != null &&
+				rBoolDescriptor._MustNotQueries.HasAny();
+
+
+			var lq = lHasMustNotQueries ? lBoolDescriptor._MustNotQueries : Enumerable.Empty<BaseQuery>();
+			var rq = rHasMustNotQueries ? rBoolDescriptor._MustNotQueries : Enumerable.Empty<BaseQuery>();
+			if (!lq.HasAny() && !rq.HasAny())
+				return null;
+
+			return lq.Concat(rq);
+		}
 	}
 
 
@@ -68,20 +87,23 @@ namespace Nest
 		[JsonProperty("should")]
 		internal IEnumerable<BaseQuery> _ShouldQueries { get; set; }
 
+		internal bool _HasOnlyMustNot()
+		{
+			return _MustNotQueries.HasAny() && !_ShouldQueries.HasAny() && !_MustQueries.HasAny();
+		}
+
 		internal bool _CanJoinMust()
 		{
-			return !_ShouldQueries.HasAny()
-				&& !_MustNotQueries.HasAny();
+			return !_ShouldQueries.HasAny();
 		}
 		internal bool _CanJoinShould()
 		{
-			return !_MustQueries.HasAny()
-				&& !_MustNotQueries.HasAny();
+			return (_ShouldQueries.HasAny() && !_MustQueries.HasAny()	&& !_MustNotQueries.HasAny()) 
+				|| !_ShouldQueries.HasAny();
 		}
 		internal bool _CanJoinMustNot()
 		{
-			return !_MustQueries.HasAny()
-				&& !_ShouldQueries.HasAny();
+			return !_ShouldQueries.HasAny();
 		}
 	}
 	
