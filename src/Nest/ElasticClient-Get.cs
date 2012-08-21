@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -48,7 +49,25 @@ namespace Nest
 		}
 		private T Get<T>(string id, string path) where T : class
 		{
-			var response = this.Connection.GetSync(path + id);
+			return this._Get<T>(path + id);
+		}
+
+		public T Get<T>(Action<GetDescriptor<T>> getSelector) where T : class
+		{
+			getSelector.ThrowIfNull("getSelector");
+			var d = new GetDescriptor<T>();
+			getSelector(d);
+
+			d._Id.ThrowIfNullOrEmpty("Id on getselector");
+
+			var p = new PathResolver(this.Settings);
+			var path = p.CreateGetPath<T>(d);
+			return this._Get<T>(path);
+		}
+
+		private T _Get<T>(string path) where T : class
+		{
+			var response = this.Connection.GetSync(path);
 
 			if (response.Result == null) //a 404 is hit when there is an attempt to grab a non existant document by id, this causes the 'result' to be null
 				return null;
@@ -61,58 +80,6 @@ namespace Nest
 			}
 
 			return null;
-		}
-
-		public IEnumerable<T> Get<T>(IEnumerable<int> ids)
-			where T : class
-		{
-			return this.Get<T>(ids.Select(i => Convert.ToString(i)));
-		}
-
-
-		/// <summary>
-		/// Gets multiple documents of T by id in the default index and the inferred typename for T
-		/// </summary>
-		public IEnumerable<T> Get<T>(IEnumerable<string> ids)
-			where T : class
-		{
-	  var index = this.IndexNameResolver.GetIndexForType<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
-
-			return this.Get<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
-		}
-		/// <summary>
-		/// Gets multiple documents of T by id in the specified index and the specified typename for T
-		/// </summary>
-		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<int> ids)
-			where T : class
-		{
-			return this.Get<T>(index, type, ids.Select(i => Convert.ToString(i)));
-		}
-		/// <summary>
-		/// Gets multiple documents of T by id in the specified index and the specified typename for T
-		/// </summary>
-		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<string> ids)
-			where T : class
-		{
-			return this.Get<T>(ids, this.PathResolver.CreateIndexTypePath(index, type));
-		}
-
-		private IEnumerable<T> Get<T>(IEnumerable<string> ids, string path)
-			where T : class
-		{
-			var data = @"{{ ""ids"": {0} }}".F(JsonConvert.SerializeObject(ids));
-			var response = this.Connection.PostSync(path + "_mget", data);
-
-			if (response.Result == null)
-				return null;
-
-			return this.Deserialize<MultiHit<T>>(response.Result)
-				.Hits
-				.Where(h => h.Source != null) // non-existent ids come back as a hit without a "_source"
-				.Select(h => h.Source);
 		}
 		
 	}

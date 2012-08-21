@@ -321,6 +321,37 @@ namespace Nest.Resolvers
 				}
 			}
 		}
+
+
+		public string CreateGetPath<T>(GetDescriptor<T> d) where T : class
+		{
+			var index = d._Index ?? this._indexNameResolver.GetIndexForType<T>();
+			var type = d._Type ?? this._typeNameResolver.GetTypeNameFor<T>();
+			var id = d._Id;
+			id.ThrowIfNullOrEmpty("id");
+
+			var path = string.Format("/{0}/{1}/{2}", index, type, id);
+			var urlParams = new Dictionary<string, string>();
+			if (d._Refresh.HasValue)
+				urlParams.Add("refresh", d._Refresh.Value.ToString().ToLower());
+			if (d._Realtime.HasValue)
+				urlParams.Add("realtime", d._Realtime.Value.ToString().ToLower());
+			if (!d._Preference.IsNullOrEmpty())
+				urlParams.Add("preference", d._Preference);
+			if (!d._Routing.IsNullOrEmpty())
+				urlParams.Add("routing", d._Routing);
+			if (d._Fields.HasAny())
+				urlParams.Add("fields", string.Join(",", d._Fields));
+
+			return path + this.ToQueryString(urlParams);
+		}
+		private string ToQueryString(IDictionary<string, string> urlParams)
+		{
+			if (urlParams == null || !urlParams.Any())
+				return null;
+			var queryString = string.Join("&", urlParams.Select(kv => "{0}={1}".F(kv.Key, Uri.EscapeDataString(kv.Value))));
+			return "?{0}".F(queryString);
 	
+		}
 	}
 }
