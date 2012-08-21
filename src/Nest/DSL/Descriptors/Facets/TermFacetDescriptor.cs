@@ -37,7 +37,7 @@ namespace Nest
     internal string _Script { get; set; }
     [JsonProperty(PropertyName = "script_field")]
     internal string _ScriptField { get; set; }
-    //      v
+
     public TermFacetDescriptor<T> OnField(string field)
     {
       if (this._Fields != null)
