@@ -119,7 +119,7 @@ namespace Nest
 		/// The lower bound. Defaults to start from the first.
 		/// </summary>
 		/// <returns></returns>
-		public RangeQueryDescriptor<T> From(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+		public RangeQueryDescriptor<T> From(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			
 			this._From = from.ToString(format);
@@ -129,7 +129,7 @@ namespace Nest
 		/// <summary>
 		/// The upper bound. Defaults to unbounded.
 		/// </summary>
-		public RangeQueryDescriptor<T> To(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+		public RangeQueryDescriptor<T> To(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._To = to.ToString(format);
 			return this;
@@ -139,7 +139,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and from_inclusive to false.
 		/// </summary>
-		public RangeQueryDescriptor<T> Greater(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+		public RangeQueryDescriptor<T> Greater(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._From = from.ToString(format);
 			this._FromInclusive = false;
@@ -148,7 +148,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and from_inclusive to true.
 		/// </summary>
-		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._From = from.ToString(format);
 			this._FromInclusive = true;
@@ -157,7 +157,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and to_inclusive to false.
 		/// </summary>
-		public RangeQueryDescriptor<T> Lower(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+		public RangeQueryDescriptor<T> Lower(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._To = to.ToString(format);
 			this._ToInclusive = false;
@@ -166,7 +166,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and to_inclusive to true.
 		/// </summary>
-		public RangeQueryDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+		public RangeQueryDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._To = to.ToString(format);
 			this._ToInclusive = true;
