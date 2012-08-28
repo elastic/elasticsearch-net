@@ -156,8 +156,8 @@ namespace Nest.Tests.Unit.Query
 				query : {
 						range: {
 							""startedOn"": {
-								from: """ + lowerBound.ToString("yyyy-MM-dd HH:mm:ss") + @""",
-								to: """ + upperBound.ToString("yyyy-MM-dd HH:mm:ss") + @""",
+								from: """ + lowerBound.ToString("yyyy-MM-dd'T'HH:mm:ss") + @""",
+								to: """ + upperBound.ToString("yyyy-MM-dd'T'HH:mm:ss") + @""",
 								include_lower: false
 							}
 						}
