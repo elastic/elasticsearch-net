@@ -232,7 +232,7 @@ namespace Nest
 		/// <summary>
 		/// The upper bound. Defaults to unbounded.
 		/// </summary>
-		public NumericRangeFilterDescriptor<T> To(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+		public NumericRangeFilterDescriptor<T> To(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._To = to.ToString(format);
 			return this;
@@ -241,7 +241,7 @@ namespace Nest
 		/// The lower bound. Defaults to start from the first.
 		/// </summary>
 		/// <returns></returns>
-		public NumericRangeFilterDescriptor<T> From(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+        public NumericRangeFilterDescriptor<T> From(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._From = from.ToString(format);
 			return this;
@@ -250,7 +250,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to false.
 		/// </summary>
-		public NumericRangeFilterDescriptor<T> Greater(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+        public NumericRangeFilterDescriptor<T> Greater(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._From = from.ToString(format);
 			this._FromInclusive = false;
@@ -259,7 +259,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting from and include_lower to true.
 		/// </summary>
-		public NumericRangeFilterDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy/MM/dd HH:mm:ss")
+        public NumericRangeFilterDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._From = from.ToString(format);
 			this._FromInclusive = true;
@@ -268,7 +268,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to false.
 		/// </summary>
-		public NumericRangeFilterDescriptor<T> Lower(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+        public NumericRangeFilterDescriptor<T> Lower(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._To = to.ToString(format);
 			this._ToInclusive = false;
@@ -277,7 +277,7 @@ namespace Nest
 		/// <summary>
 		/// Same as setting to and include_upper to true.
 		/// </summary>
-		public NumericRangeFilterDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy/MM/dd HH:mm:ss")
+        public NumericRangeFilterDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
 			this._To = to.ToString(format);
 			this._ToInclusive = true;
