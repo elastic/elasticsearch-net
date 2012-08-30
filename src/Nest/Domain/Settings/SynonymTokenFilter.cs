@@ -7,7 +7,6 @@ namespace Nest
     {
         public SynonymTokenFilter() : base("synonym")
         {
-
         }
 
         [JsonProperty("synonyms_path", NullValueHandling = NullValueHandling.Ignore)]
@@ -18,5 +17,11 @@ namespace Nest
 
         [JsonProperty("synonyms", NullValueHandling = NullValueHandling.Ignore)]
         public IEnumerable<string> Synonyms { get; set; }
+
+        [JsonProperty("ignore_case", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IgnoreCase { get; set; }
+
+        [JsonProperty("expand", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Expand { get; set; }
     }
 }
