@@ -5,34 +5,73 @@ using System.Reflection;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Concurrent;
 
 namespace Nest.Resolvers.Writers
 {
 	internal class TypeMappingWriter<T> : TypeMappingWriter where T : class
 	{
 		public TypeMappingWriter(string typeName, PropertyNameResolver propertyNameResolver)
-			: base(typeof(T), typeName, propertyNameResolver)
+			: base(typeof(T), typeName)
 		{
 		}
 	}
 
 	internal class TypeMappingWriter
 	{
-		private string TypeName { get; set; }
-		private PropertyNameResolver PropertyNameResolver { get; set; }
 		private readonly Type _type;
-		public TypeMappingWriter(Type t, string typeName, PropertyNameResolver propertyNameResolver)
+		private readonly PropertyNameResolver _propertyNameResolver = new PropertyNameResolver();
+
+		private int MaxRecursion { get; set; }
+		private string TypeName { get; set; }
+		private ConcurrentDictionary<Type, int> SeenTypes { get; set; }
+		
+		public TypeMappingWriter(Type t, string typeName) : this(t, typeName, 0) {}
+		public TypeMappingWriter(Type t, string typeName, int maxRecursion)
 		{
 			this._type = t;
 			this.TypeName = typeName;
-			this.PropertyNameResolver = propertyNameResolver;
+			this.MaxRecursion = maxRecursion;
+
+			this.SeenTypes = new ConcurrentDictionary<Type, int>();
+			this.SeenTypes.TryAdd(t, 0);
+		}
+		public TypeMappingWriter(Type t, string typeName, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
+		{
+			this._type = t;
+			this.TypeName = typeName;
+			this.MaxRecursion = maxRecursion;
+
+			this.SeenTypes = seenTypes;
+
+		}
+
+		internal JObject MapPropertiesFromAttributes()
+		{
+			int seen;
+			if (this.SeenTypes.TryGetValue(this._type, out seen) && seen > MaxRecursion)
+				return JObject.Parse("{}");
+
+
+			var sb = new StringBuilder();
+			using (StringWriter sw = new StringWriter(sb))
+			using (JsonWriter jsonWriter = new JsonTextWriter(sw))
+			{
+				
+				jsonWriter.WriteStartObject();
+				{
+					this.WriteProperties(jsonWriter);
+				}
+				jsonWriter.WriteEnd();
+				return JObject.Parse(sw.ToString());
+			}
 		}
 
 		internal string MapFromAttributes()
 		{
-			StringBuilder sb = new StringBuilder();
-			StringWriter sw = new StringWriter(sb);
-
+			var sb = new StringBuilder();
+			using (StringWriter sw = new StringWriter(sb))
 			using (JsonWriter jsonWriter = new JsonTextWriter(sw))
 			{
 				jsonWriter.Formatting = Formatting.Indented;
@@ -58,9 +97,10 @@ namespace Nest.Resolvers.Writers
 				return sw.ToString();
 			}
 		}
+		
 		private void WriteRootObjectProperties(JsonWriter jsonWriter)
 		{
-			var att = this.PropertyNameResolver.GetElasticPropertyFor(this._type);
+			var att = this._propertyNameResolver.GetElasticPropertyFor(this._type);
 			if (att == null)
 				return;
 
@@ -112,12 +152,12 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
-		private void WriteProperties(JsonWriter jsonWriter)
+		internal void WriteProperties(JsonWriter jsonWriter)
 		{
 			var properties = this._type.GetProperties();
 			foreach (var p in properties)
 			{
-				var att = this.PropertyNameResolver.GetElasticProperty(p);
+				var att = this._propertyNameResolver.GetElasticProperty(p);
 				if (att != null && att.OptOut)
 					continue;
 
@@ -135,119 +175,136 @@ namespace Nest.Resolvers.Writers
 					{
 						jsonWriter.WritePropertyName("type");
 						jsonWriter.WriteValue(type);
-						jsonWriter.WriteEnd();
-						continue;
+						//jsonWriter.WriteEnd();
 					}
+					if (att != null)
+						this.WritePropertiesFromAttribute(jsonWriter, att, propertyName, type);
+					if (type == "object" || type == "nested")
+					{
+						
+						var deepType = p.PropertyType;
+						var deepTypeName = new TypeNameResolver().GetTypeNameFor(deepType);
+						var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
+						seenTypes.AddOrUpdate(deepType, 0, (t, i) => ++i);
 
-					if (att.AddSortField)
-					{
-						jsonWriter.WritePropertyName("type");
-						jsonWriter.WriteValue("multi_field");
-						jsonWriter.WritePropertyName("fields");
-						jsonWriter.WriteStartObject();
-						jsonWriter.WritePropertyName(propertyName);
-						jsonWriter.WriteStartObject();
-					}
-					if (att.NumericType != NumericType.Default)
-					{
-						jsonWriter.WritePropertyName("type");
-						var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
-						jsonWriter.WriteValue(numericType.ToLower());
-					}
-					else
-					{
-						jsonWriter.WritePropertyName("type");
-						jsonWriter.WriteValue(type);
-					}
-					if (!att.Analyzer.IsNullOrEmpty())
-					{
-						jsonWriter.WritePropertyName("analyzer");
-						jsonWriter.WriteValue(att.Analyzer);
-					}
-					if (!att.IndexAnalyzer.IsNullOrEmpty())
-					{
-						jsonWriter.WritePropertyName("index_analyzer");
-						jsonWriter.WriteValue(att.IndexAnalyzer);
-					}
-					if (!att.IndexAnalyzer.IsNullOrEmpty())
-					{
-						jsonWriter.WritePropertyName("index_analyzer");
-						jsonWriter.WriteValue(att.IndexAnalyzer);
-					}
-					if (!att.NullValue.IsNullOrEmpty())
-					{
-						jsonWriter.WritePropertyName("null_value");
-						jsonWriter.WriteValue(att.NullValue);
-					}
-					if (!att.SearchAnalyzer.IsNullOrEmpty())
-					{
-						jsonWriter.WritePropertyName("search_analyzer");
-						jsonWriter.WriteValue(att.SearchAnalyzer);
-					}
-					if (att.Index != FieldIndexOption.analyzed)
-					{
-						jsonWriter.WritePropertyName("index");
-						jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), att.Index));
-					}
-					if (att.TermVector != TermVectorOption.no)
-					{
-						jsonWriter.WritePropertyName("term_vector");
-						jsonWriter.WriteValue(Enum.GetName(typeof(TermVectorOption), att.TermVector));
-					}
-					if (att.OmitNorms)
-					{
-						jsonWriter.WritePropertyName("omit_norms");
-						jsonWriter.WriteValue("true");
-					}
-					if (att.OmitTermFrequencyAndPositions)
-					{
-						jsonWriter.WritePropertyName("omit_term_freq_and_positions");
-						jsonWriter.WriteValue("true");
-					}
-					if (!att.IncludeInAll)
-					{
-						jsonWriter.WritePropertyName("include_in_all");
-						jsonWriter.WriteValue("false");
-					}
-					if (att.Store)
-					{
-						jsonWriter.WritePropertyName("store");
-						jsonWriter.WriteValue("yes");
-					}
-					if (att.Boost != 1)
-					{
-						jsonWriter.WritePropertyName("boost");
-						jsonWriter.WriteRawValue(att.Boost.ToString());
-					}
-					if (att.PrecisionStep != 4)
-					{
-						jsonWriter.WritePropertyName("precision_step");
-						jsonWriter.WriteRawValue(att.PrecisionStep.ToString());
-					}
-
-					if (att.AddSortField)
-					{
-						jsonWriter.WriteEnd();
-						jsonWriter.WritePropertyName("sort");
-						jsonWriter.WriteStartObject();
-
-						if (att.NumericType != NumericType.Default)
-						{
-							jsonWriter.WritePropertyName("type");
-							var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
-							jsonWriter.WriteValue(numericType.ToLower());
-						}
-						else
-						{
-							jsonWriter.WritePropertyName("type");
-							jsonWriter.WriteValue(type);
-						}
-						jsonWriter.WritePropertyName("index");
-						jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
-						jsonWriter.WriteEnd();
-						jsonWriter.WriteEnd();
+						var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, MaxRecursion, seenTypes);
+						var nestedProperties = newTypeMappingWriter.MapPropertiesFromAttributes();
+						
+						jsonWriter.WritePropertyName("properties");
+						nestedProperties.WriteTo(jsonWriter);
 					}
 				}
+				jsonWriter.WriteEnd();
+			}
+		}
+
+		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, ElasticPropertyAttribute att, string propertyName, string type)
+		{
+			if (att.AddSortField)
+			{
+				jsonWriter.WritePropertyName("type");
+				jsonWriter.WriteValue("multi_field");
+				jsonWriter.WritePropertyName("fields");
+				jsonWriter.WriteStartObject();
+				jsonWriter.WritePropertyName(propertyName);
+				jsonWriter.WriteStartObject();
+			}
+			if (att.NumericType != NumericType.Default)
+			{
+				jsonWriter.WritePropertyName("type");
+				var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
+				jsonWriter.WriteValue(numericType.ToLower());
+			}
+			else
+			{
+				jsonWriter.WritePropertyName("type");
+				jsonWriter.WriteValue(type);
+			}
+			if (!att.Analyzer.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("analyzer");
+				jsonWriter.WriteValue(att.Analyzer);
+			}
+			if (!att.IndexAnalyzer.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("index_analyzer");
+				jsonWriter.WriteValue(att.IndexAnalyzer);
+			}
+			if (!att.IndexAnalyzer.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("index_analyzer");
+				jsonWriter.WriteValue(att.IndexAnalyzer);
+			}
+			if (!att.NullValue.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("null_value");
+				jsonWriter.WriteValue(att.NullValue);
+			}
+			if (!att.SearchAnalyzer.IsNullOrEmpty())
+			{
+				jsonWriter.WritePropertyName("search_analyzer");
+				jsonWriter.WriteValue(att.SearchAnalyzer);
+			}
+			if (att.Index != FieldIndexOption.analyzed)
+			{
+				jsonWriter.WritePropertyName("index");
+				jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), att.Index));
+			}
+			if (att.TermVector != TermVectorOption.no)
+			{
+				jsonWriter.WritePropertyName("term_vector");
+				jsonWriter.WriteValue(Enum.GetName(typeof(TermVectorOption), att.TermVector));
+			}
+			if (att.OmitNorms)
+			{
+				jsonWriter.WritePropertyName("omit_norms");
+				jsonWriter.WriteValue("true");
+			}
+			if (att.OmitTermFrequencyAndPositions)
+			{
+				jsonWriter.WritePropertyName("omit_term_freq_and_positions");
+				jsonWriter.WriteValue("true");
+			}
+			if (!att.IncludeInAll)
+			{
+				jsonWriter.WritePropertyName("include_in_all");
+				jsonWriter.WriteValue("false");
+			}
+			if (att.Store)
+			{
+				jsonWriter.WritePropertyName("store");
+				jsonWriter.WriteValue("yes");
+			}
+			if (att.Boost != 1)
+			{
+				jsonWriter.WritePropertyName("boost");
+				jsonWriter.WriteRawValue(att.Boost.ToString());
+			}
+			if (att.PrecisionStep != 4)
+			{
+				jsonWriter.WritePropertyName("precision_step");
+				jsonWriter.WriteRawValue(att.PrecisionStep.ToString());
+			}
+			if (att.AddSortField)
+			{
+				jsonWriter.WriteEnd();
+				jsonWriter.WritePropertyName("sort");
+				jsonWriter.WriteStartObject();
+
+				if (att.NumericType != NumericType.Default)
+				{
+					jsonWriter.WritePropertyName("type");
+					var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
+					jsonWriter.WriteValue(numericType.ToLower());
+				}
+				else
+				{
+					jsonWriter.WritePropertyName("type");
+					jsonWriter.WriteValue(type);
+				}
+				jsonWriter.WritePropertyName("index");
+				jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
+				jsonWriter.WriteEnd();
 				jsonWriter.WriteEnd();
 			}
 		}
@@ -307,6 +364,8 @@ namespace Nest.Resolvers.Writers
 					return "boolean";
 				case FieldType.nested:
 					return "nested";
+				case FieldType.@object:
+					return "object";
 				default:
 					return null;
 			}
@@ -347,6 +406,8 @@ namespace Nest.Resolvers.Writers
 						return FieldType.boolean_type;
 				}
 			}
+			else
+				return FieldType.@object;
 			return null;
 		}
 	}

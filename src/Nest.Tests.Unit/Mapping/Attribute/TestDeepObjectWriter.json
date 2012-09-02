@@ -5,10 +5,18 @@
         "type": "string"
       },
       "child": {
-        "type": "nested",
+        "type": "object",
         "properties": {
           "name": {
             "type": "string"
+          },
+          "child": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
           }
         }
       }

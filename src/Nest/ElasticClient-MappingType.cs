@@ -91,10 +91,10 @@ namespace Nest
 		/// Type name is the inferred type name for T under the default index
 		/// </para>
 		/// </summary>
-		public IIndicesResponse Map<T>() where T : class
+		public IIndicesResponse Map<T>(int maxRecursion = 0) where T : class
 		{
 			string type = this.TypeNameResolver.GetTypeNameFor<T>();
-			return this.Map<T>(this.IndexNameResolver.GetIndexForType<T>(), type);
+			return this.Map<T>(this.IndexNameResolver.GetIndexForType<T>(), type, maxRecursion);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -103,10 +103,10 @@ namespace Nest
 		/// Type name is the inferred type name for T under the specified index
 		/// </para>
 		/// </summary>
-		public IIndicesResponse Map<T>(string index) where T : class
+		public IIndicesResponse Map<T>(string index, int maxRecursion = 0) where T : class
 		{
 			string type = this.TypeNameResolver.GetTypeNameFor<T>();
-			return this.Map<T>(index, type);
+			return this.Map<T>(index, type, maxRecursion);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -115,10 +115,10 @@ namespace Nest
 		/// Type name is the specified type name under the specified index
 		/// </para>
 		/// </summary>
-		public IIndicesResponse Map<T>(string index, string type) where T : class
+		public IIndicesResponse Map<T>(string index, string type, int maxRecursion = 0) where T : class
 		{
 			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
-			string map = this.CreateMapFor<T>(type);
+			string map = this.CreateMapFor<T>(type, maxRecursion);
 
 			ConnectionStatus status = this.Connection.PutSync(path, map);
 
@@ -143,10 +143,10 @@ namespace Nest
 		/// Type name is the inferred type name for T under the default index
 		/// </para>
 		/// </summary>
-		public IIndicesResponse Map(Type t)
+		public IIndicesResponse Map(Type t, int maxRecursion = 0)
 		{
 			string type = this.TypeNameResolver.GetTypeNameForType(t);
-			return this.Map(t, this.IndexNameResolver.GetIndexForType(t), type);
+			return this.Map(t, this.IndexNameResolver.GetIndexForType(t), type, maxRecursion);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -155,10 +155,10 @@ namespace Nest
 		/// Type name is the inferred type name for T under the specified index
 		/// </para>
 		/// </summary>
-		public IIndicesResponse Map(Type t,string index)
+		public IIndicesResponse Map(Type t, string index, int maxRecursion = 0)
 		{
 			string type = this.TypeNameResolver.GetTypeNameForType(t);
-			return this.Map(t, index, type);
+			return this.Map(t, index, type, maxRecursion);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -167,10 +167,10 @@ namespace Nest
 		/// Type name is the specified type name under the specified index
 		/// </para>
 		/// </summary>
-		public IIndicesResponse Map(Type t, string index, string type)
+		public IIndicesResponse Map(Type t, string index, string type, int maxRecursion = 0)
 		{
 			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
-			string map = this.CreateMapFor(t, type);
+			string map = this.CreateMapFor(t, type, maxRecursion);
 
 			ConnectionStatus status = this.Connection.PutSync(path, map);
 
@@ -275,13 +275,13 @@ namespace Nest
 			return null;
 		}
 
-		private string CreateMapFor<T>(string type) where T : class
+		private string CreateMapFor<T>(string type, int maxRecursion = 0) where T : class
 		{
-			return this.CreateMapFor(typeof(T), type);
+			return this.CreateMapFor(typeof(T), type, maxRecursion);
 		}
-		private string CreateMapFor(Type t, string type)
+		private string CreateMapFor(Type t, string type, int maxRecursion = 0)
 		{
-			var writer = new TypeMappingWriter(t, type, PropertyNameResolver);
+			var writer = new TypeMappingWriter(t, type, maxRecursion);
 
 			return writer.MapFromAttributes();
 		}

@@ -26,7 +26,6 @@ namespace Nest.Tests.Unit.Mapping.Attribute
 		{
 			public string Name { get; set; }
 		}
-
 		[Test]
 		public void TestNestedWriter()
 		{ 

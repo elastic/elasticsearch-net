@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit
 		protected string CreateMapFor(Type t)
 		{
 			var type = new TypeNameResolver().GetTypeNameFor(t);
-			var writer = new TypeMappingWriter(t, type, new PropertyNameResolver());
+			var writer = new TypeMappingWriter(t, type);
 
 			return writer.MapFromAttributes();
 		}
