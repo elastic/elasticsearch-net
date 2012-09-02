@@ -305,6 +305,8 @@ namespace Nest.Resolvers.Writers
 					return "date";
 				case FieldType.boolean_type:
 					return "boolean";
+				case FieldType.nested:
+					return "nested";
 				default:
 					return null;
 			}

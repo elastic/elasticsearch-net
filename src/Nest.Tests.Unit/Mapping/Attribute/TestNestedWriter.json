@@ -1,0 +1,12 @@
+  {
+  "nestedmapparents": {
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "child": {
+        "type": "nested"
+      }
+    }
+  }
+}

@@ -37,5 +37,14 @@ namespace Nest.Tests.Unit
 			var expected = File.ReadAllText(file);
 			Assert.True(json.JsonEquals(expected), json);
 		}
+		protected void JsonEquals(string json, MethodBase method)
+		{
+			var type = method.DeclaringType;
+			var @namespace = method.DeclaringType.Namespace;
+			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
+			var file = Path.Combine(folder, method.Name + ".json");
+			var expected = File.ReadAllText(file);
+			Assert.True(json.JsonEquals(expected), json);
+		}
 	}
 }

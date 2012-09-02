@@ -126,6 +126,8 @@
     <Compile Include="Inferno\IdLookupTests.cs" />
     <Compile Include="Inferno\PropertyNameResolverTests.cs" />
     <Compile Include="JsonifyTests.cs" />
+    <Compile Include="Mapping\Attribute\BaseAttributeMappingTests.cs" />
+    <Compile Include="Mapping\Attribute\NestedMappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVisitorTests.cs" />
     <Compile Include="QueryTests\BoolQueryJson.cs" />
@@ -175,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Mapping\Attribute\TestNestedWriter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Query\BoolCombinations\CombineNotAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

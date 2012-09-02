@@ -57,6 +57,10 @@ namespace Nest
 		/// <summary>
 		/// Boolean type.
 		/// </summary>
-		boolean_type
+		boolean_type,
+		/// <summary>
+		/// Nested type.
+		/// </summary>
+		nested
 	}
 }
