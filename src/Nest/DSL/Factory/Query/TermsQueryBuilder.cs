@@ -73,15 +73,15 @@ namespace Nest.FactoryDsl.Query
 
             if (_minimumMatch != -1)
             {
-                content[NAME][_name]["minimum_match"] = _minimumMatch;
+                content[NAME]["minimum_match"] = _minimumMatch;
             }
             if (_disableCoord)
             {
-                content[NAME][_name]["disable_coord"] = _disableCoord;
+                content[NAME]["disable_coord"] = _disableCoord;
             }
             if (_boost != null)
             {
-                content[NAME][_name]["boost"] = _boost;
+                content[NAME]["boost"] = _boost;
             }
             
             return content;
