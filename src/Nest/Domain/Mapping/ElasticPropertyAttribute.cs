@@ -19,7 +19,7 @@ namespace Nest
 		public TermVectorOption TermVector { get; set; }
 		public FieldIndexOption Index { get; set; }
 
-		public decimal Boost { get; set; }
+		public double Boost { get; set; }
 
 		public string Analyzer { get; set; }
 		public string IndexAnalyzer { get; set; }
