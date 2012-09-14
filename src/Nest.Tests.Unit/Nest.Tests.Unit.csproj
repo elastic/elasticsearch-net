@@ -194,6 +194,15 @@
     <None Include="Query\BoolCombinations\CombineNotAndShould.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Query\BoolCombinations\OrSimpleLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Query\BoolCombinations\OrWithQueryStringLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Query\BoolCombinations\OrWithQueryString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Query\BoolCombinations\RandomOrderOr.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
