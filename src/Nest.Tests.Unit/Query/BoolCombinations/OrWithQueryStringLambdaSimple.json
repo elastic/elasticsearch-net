@@ -5,13 +5,6 @@
         {
           "term": {
             "name": {
-              "value": "bar2"
-            }
-          }
-        },
-        {
-          "term": {
-            "name": {
               "value": "blah2"
             }
           }

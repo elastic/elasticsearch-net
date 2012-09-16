@@ -96,6 +96,17 @@ namespace Nest.Tests.Unit.Query.BoolCombinations
         );
       this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
     }
+	[Test]
+	//TODO FIXME!
+	public void OrWithQueryStringLambdaSimple()
+	{
+		var s = new SearchDescriptor<ElasticSearchProject>()
+		  .Query(q =>
+			q.Term(f => f.Name, "blah2")
+			|| q.QueryString(qs => qs.Query("blah"))
+		  );
+		this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+	}
     [Test]
     public void OrSimpleLambda()
     {

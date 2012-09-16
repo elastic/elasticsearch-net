@@ -89,7 +89,7 @@ namespace Nest
 			var query = new QueryStringDescriptor<T>();
 			selector(query);
 			this.QueryStringDescriptor = query;
-			return this;
+			return new QueryDescriptor<T> { QueryStringDescriptor = query };
 		}
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.

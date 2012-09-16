@@ -194,6 +194,9 @@
     <None Include="Query\BoolCombinations\CombineNotAndShould.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Query\BoolCombinations\OrWithQueryStringLambdaSimple.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Query\BoolCombinations\OrSimpleLambda.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
