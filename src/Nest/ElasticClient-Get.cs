@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Nest.Resolvers;
+using Nest.Domain;
 
 namespace Nest
 {
@@ -51,6 +52,18 @@ namespace Nest
 		{
 			return this._Get<T>(path + id);
 		}
+		public FieldSelection<T> GetFieldSelection<T>(Action<GetDescriptor<T>> getSelector) where T : class
+		{
+			getSelector.ThrowIfNull("getSelector");
+			var d = new GetDescriptor<T>();
+			getSelector(d);
+
+			d._Id.ThrowIfNullOrEmpty("Id on getselector");
+
+			var p = new PathResolver(this.Settings);
+			var path = p.CreateGetPath<T>(d);
+			return this._GetFieldSelection<T>(path);
+		}
 
 		public T Get<T>(Action<GetDescriptor<T>> getSelector) where T : class
 		{
@@ -78,8 +91,37 @@ namespace Nest
 			{
 				return this.Deserialize<T>(source.ToString());
 			}
-
+			source = o["fields"];
+			if (source != null)
+			{
+				return this.Deserialize<T>(source.ToString());
+			}
 			return null;
+		}
+
+		private FieldSelection<T> _GetFieldSelection<T>(string path) where T : class
+		{
+			var f = new FieldSelection<T>();
+			var response = this.Connection.GetSync(path);
+
+			if (response.Result == null) //a 404 is hit when there is an attempt to grab a non existant document by id, this causes the 'result' to be null
+				return null;
+
+			var o = JObject.Parse(response.Result);
+			var source = o["_source"];
+			if (source != null)
+			{
+				f.Document =  this.Deserialize<T>(source.ToString());
+			}
+			source = o["fields"];
+			if (source != null)
+			{
+				var json = source.ToString();
+				f.Document = this.Deserialize<T>(json);
+				f.FieldValues =  this.Deserialize<Dictionary<string, object>>(json);
+
+			}
+			return f;
 		}
 		
 	}
