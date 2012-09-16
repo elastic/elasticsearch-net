@@ -83,5 +83,31 @@ namespace Nest.Tests.Integration.Facet
                 Assert.Greater(entry.Time, DateTime.MinValue);
             }
 		}
+		[Test]
+		public void DateHistogramFacetCleanSyntax()
+		{
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+				.MatchAll()
+				.FacetDateHistogram(f=>f
+					.OnField(ff=>ff.Followers.First().DateOfBirth)
+					.Interval(DateInterval.Day)
+				)
+			);
+				
+			var facet = queryResults.Facet<DateHistogramFacet>(f=>f.Followers.First().DateOfBirth);
+			this.TestDefaultAssertions(queryResults);
+
+			Assert.IsInstanceOf<DateHistogramFacet>(facet);
+
+			var dhf = (DateHistogramFacet)facet;
+
+			Assert.Greater(dhf.Items.Count(), 0);
+
+			foreach (var entry in dhf.Items)
+			{
+				Assert.Greater(entry.Count, 0);
+				Assert.Greater(entry.Time, DateTime.MinValue);
+			}
+		}
 	}
 }
