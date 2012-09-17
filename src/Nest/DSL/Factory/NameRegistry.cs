@@ -3,6 +3,7 @@
     public static class NameRegistry
     {
         #region IQueryBuilders
+        public const string MatchQueryBuilder = "match";
         public const string BoolQueryBuilder = "bool";
         public const string BoostingQueryBuilder = "boosting";
         public const string ConstantScoreQueryBuilder = "constant_score";
