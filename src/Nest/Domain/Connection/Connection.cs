@@ -157,8 +157,12 @@ namespace Nest
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
 			this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
-			if (tcs.Task != null && tcs.Task.Result != null)
-				tcs.Task.Result.Request = data;
+      if (tcs.Task != null && tcs.Task.Result != null)
+      {
+        tcs.Task.Result.Request = data;
+        tcs.Task.Result.RequestUrl = request.RequestUri.ToString();
+        tcs.Task.Result.RequestMethod = request.Method;
+      }
 			return tcs.Task;
 		}
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
@@ -216,7 +220,7 @@ namespace Nest
 
 					// Decode the data and store the result
 					var result = Encoding.UTF8.GetString(output.ToArray());
-					var cs = new ConnectionStatus(result) { Request = data };
+					var cs = new ConnectionStatus(result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
 					tcs.TrySetResult(cs);
 				}
 			}
