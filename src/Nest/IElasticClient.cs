@@ -1,4 +1,5 @@
 ﻿using System;
+using Nest.FactoryDsl;
 namespace Nest
 {
 	public interface IElasticClient
@@ -202,9 +203,23 @@ namespace Nest
 		IIndicesOperationResponse RemoveAlias(string index, string alias);
 		IIndicesOperationResponse RemoveAliases(System.Collections.Generic.IEnumerable<AliasParams> aliases);
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
-		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
+    
+    IQueryResponse<dynamic> Search(
+      SearchBuilder searchBuilder,
+      string index = null,
+      string type = null,
+      string routing = null,
+      SearchType? searchType = null);
+    IQueryResponse<T> Search<T>(SearchBuilder searchBuilder,
+      string index = null,
+      string type = null,
+      string routing = null,
+      SearchType? searchType = null) where T : class;
+    
+    IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
 		IQueryResponse<T> SearchRaw<T>(string query) where T : class;
+
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(System.Collections.Generic.IEnumerable<string> indices);
 		ISegmentsResponse Segments(string index);
