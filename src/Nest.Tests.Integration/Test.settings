@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nest.Tests" GeneratedClassName="Test">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nest.Tests.Integration" GeneratedClassName="Test">
   <Profiles />
   <Settings>
     <Setting Name="Port" Type="System.Int32" Scope="User">
@@ -12,10 +12,10 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="Host" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1.</Value>
+      <Value Profile="(Default)">localhost</Value>
     </Setting>
     <Setting Name="Uri" Type="System.Uri" Scope="User">
-      <Value Profile="(Default)">http://127.0.0.1:9200</Value>
+      <Value Profile="(Default)">http://localhost:9200</Value>
     </Setting>
   </Settings>
 </SettingsFile>

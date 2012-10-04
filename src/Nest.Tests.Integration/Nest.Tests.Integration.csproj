@@ -54,6 +54,7 @@
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="Core\ValidateTests.cs" />
     <Compile Include="Get\GetTests.cs" />
+    <Compile Include="Index\IndexTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
     <Compile Include="Indices\SegmentsTests.cs" />
     <Compile Include="Indices\ExistsTests.cs" />
