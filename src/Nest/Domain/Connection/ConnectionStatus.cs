@@ -38,6 +38,26 @@ namespace Nest
 			this.Success = true;
 			this.Result = result;
 		}
+    public override string ToString()
+    {
+      var r = this;
+      var e = r.Error;
+      var printFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
+      var print = printFormat.F( 
+        Environment.NewLine,
+        e.HttpStatusCode, 
+        r.RequestMethod, 
+        r.RequestUrl,
+        r.Request,
+        r.Result
+      );
+      if (!this.Success)
+      {
+        var errorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
+        print += errorFormat.F(Environment.NewLine, e.ExceptionMessage, e.OriginalException.StackTrace);
+      }
+      return print;
+    }
 
 	}
 }
