@@ -18,7 +18,7 @@ namespace Nest
 			{
 				ContractResolver = new ElasticResolver(),
 				NullValueHandling = NullValueHandling.Ignore,
-				DefaultValueHandling = DefaultValueHandling.Ignore,
+				DefaultValueHandling = DefaultValueHandling.Include,
 				Converters = new List<JsonConverter> 
 				{ 
 					new IsoDateTimeConverter(), new FacetConverter()
