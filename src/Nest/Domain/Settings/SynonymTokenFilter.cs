@@ -23,5 +23,8 @@ namespace Nest
 
         [JsonProperty("expand", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Expand { get; set; }
+
+        [JsonProperty("tokenizer", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tokenizer { get; set; }
     }
 }
