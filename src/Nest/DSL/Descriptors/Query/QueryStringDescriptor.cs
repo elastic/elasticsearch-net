@@ -37,6 +37,8 @@ namespace Nest
 		internal double? _PhraseSlop { get; set; }
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
+        [JsonProperty(PropertyName = "lenient")]
+        internal bool? _Lenient { get; set; }
 		[JsonProperty(PropertyName = "analyze_wildcard")]
 		internal bool? _AnalyzeWildcard { get; set; }
 		[JsonProperty(PropertyName = "auto_generate_phrase_queries")]
@@ -137,6 +139,11 @@ namespace Nest
 			this._Boost = boost;
 			return this;
 		}
+        public QueryStringDescriptor<T> Lenient(bool lenient)
+        {
+            this._Lenient = lenient;
+            return this;
+        }
 		public QueryStringDescriptor<T> AnalyzeWildcard(bool analyzeWildcard)
 		{
 			this._AnalyzeWildcard = analyzeWildcard;
