@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E5457A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Unit", "Nest.Tests.Unit\Nest.Tests.Unit.csproj", "{97408393-78AC-45DF-BE6E-4C219A2E456D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtocolLoadTest", "ProtocolLoadTest\ProtocolLoadTest.csproj", "{B9FE4875-0171-40F7-A357-064A93BE09C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -122,6 +124,16 @@ Global
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Release|x86.ActiveCfg = Release|x86
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Release|x86.Build.0 = Release|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|x86.ActiveCfg = Debug|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|x86.Build.0 = Debug|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|Any CPU.ActiveCfg = Release|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|x86.ActiveCfg = Release|x86
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
