@@ -7,17 +7,17 @@ using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Index
 {
-	[TestFixture]
-	public class GetIdFromElasticSearchTests : BaseElasticSearchTests
-	{
+  [TestFixture]
+  public class GetIdFromElasticSearchTests : BaseElasticSearchTests
+  {
 
     public class LogClass
     {
       public string Message { get; set; }
     }
-		[Test]
-		public void IndexWithoutIdShouldSetIdFromElasticseach()
-		{
+    [Test]
+    public void IndexWithoutIdShouldSetIdFromElasticseach()
+    {
       var newProject = new LogClass
       {
         Message = "Some Message",
@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Index
       Assert.IsNotNullOrEmpty(response.Type);
       Assert.IsNotNullOrEmpty(response.Index);
       Assert.IsNotNullOrEmpty(response.Version);
-		}
+    }
     [Test]
     public void IndexmanyWithoutIdShouldSetIdFromElasticseach()
     {
@@ -44,5 +44,5 @@ namespace Nest.Tests.Integration.Index
       Assert.True(response.Items.All(i => i.OK), response.ConnectionStatus.Result);
       Assert.True(response.Items.All(i => !i.Id.IsNullOrEmpty()));
     }
-	}
+  }
 }
