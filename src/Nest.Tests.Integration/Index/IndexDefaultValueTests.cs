@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Index
 {
 	[TestFixture]
-	public class IndexTests : BaseElasticSearchTests
+	public class IndexDefaultValueTests : BaseElasticSearchTests
 	{
 		[Test]
 		public void IndexDefaultValue()
@@ -25,14 +25,13 @@ namespace Nest.Tests.Integration.Index
         BoolValue = false
       };
       var response = this.ConnectedClient.Index(newProject);
-
-      StringAssert.Contains(@"""id"": 2000", response.Request);
-      StringAssert.Contains(@"""loc"": 0", response.Request);
-      StringAssert.Contains(@"""longValue"": 0", response.Request);
-      StringAssert.Contains(@"""floatValue"": 0.0", response.Request);
-      StringAssert.Contains(@"""doubleValue"": 0.0", response.Request);
-      StringAssert.Contains(@"""boolValue"": false", response.Request);
-      
+      var connectionStatus = response.ConnectionStatus;
+      StringAssert.Contains(@"""id"": 2000", connectionStatus.Request);
+      StringAssert.Contains(@"""loc"": 0", connectionStatus.Request);
+      StringAssert.Contains(@"""longValue"": 0", connectionStatus.Request);
+      StringAssert.Contains(@"""floatValue"": 0.0", connectionStatus.Request);
+      StringAssert.Contains(@"""doubleValue"": 0.0", connectionStatus.Request);
+      StringAssert.Contains(@"""boolValue"": false", connectionStatus.Request);
 		}
 		
 	}

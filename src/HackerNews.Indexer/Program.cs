@@ -90,7 +90,7 @@ namespace HackerNews.Indexer
 							t.ContinueWith(c =>
 							{
 								var result = c.Result;
-								if (!result.Success)
+								if (!result.IsValid)
 									dropped++;
 							});
 							processed += postQueue.Count();
@@ -108,7 +108,7 @@ namespace HackerNews.Indexer
 					var task = client.IndexManyAsync(postQueue).ContinueWith(t =>
 					{
 						var c = t.Result;
-						if (!c.Success)
+						if (!c.IsValid)
 							Interlocked.Increment(ref dropped);
 						return t;
 					});

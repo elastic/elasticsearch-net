@@ -101,7 +101,7 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//now remove the item that was added
-			this.ConnectedClient.DeleteById<ElasticSearchProject>(newDocument.Id, new DeleteParameters { Refresh = true });
+			var response = this.ConnectedClient.DeleteById<ElasticSearchProject>(newDocument.Id, new DeleteParameters { Refresh = true });
 
 			//assert
 			//make sure getting by id returns nothing
@@ -183,26 +183,22 @@ namespace Nest.Tests.Integration.Core
 		public void RemoveAllByPassingAsIEnumerable()
 		{
 			this.ResetIndexes();
-			var result = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
-					@" { ""query"" : {
-							""match_all"" : { }
-					} }"
-			);
-			Assert.IsNotNull(result);
-			Assert.IsNotNull(result.Documents);
-			var totalSet = result.Documents.Count();
+			var result = this.ConnectedClient.Search<ElasticSearchProject>(q=>q.From(0).Take(5).MatchAll());
+      Assert.IsNotEmpty(result.Documents);
+			
+      var totalSet = result.Documents.Count();
+      var totalResults = result.Total;
 			Assert.Greater(totalSet, 0);
-			var totalResults = result.Total;
-			this.ConnectedClient.Delete(result.Documents, new SimpleBulkParameters() { Refresh = true });
 
-			result = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
-					@" { ""query"" : {
-							""match_all"" : { }
-					} }"
-			);
-			Assert.IsNotNull(result);
-			Assert.IsNotNull(result.Documents);
-			Assert.True(result.Total == totalResults - totalSet);
+			var deleteResult = this.ConnectedClient.Delete(result.Documents, new SimpleBulkParameters() { Refresh = true });
+      Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
+
+      Assert.IsNotEmpty(deleteResult.Items);
+      Assert.True(deleteResult.Items.All(i=>i.OK));
+
+      result = this.ConnectedClient.Search<ElasticSearchProject>(q => q.MatchAll());
+			Assert.IsNotEmpty(result.Documents);
+			Assert.AreEqual(result.Total, totalResults - totalSet);
 
 		}
 		[Test]
@@ -218,7 +214,11 @@ namespace Nest.Tests.Integration.Core
 
 			var parameterizedDocuments = result.Documents.Select(d => new BulkParameters<ElasticSearchProject>(d) { VersionType = VersionType.Internal });
 
-			this.ConnectedClient.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
+      var deleteResult = this.ConnectedClient.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
+      Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
+
+      Assert.IsNotEmpty(deleteResult.Items);
+      Assert.True(deleteResult.Items.All(i => i.OK));
 
 			result = this.ConnectedClient.Search<ElasticSearchProject>(q => q.MatchAll());
 			Assert.IsNotNull(result);

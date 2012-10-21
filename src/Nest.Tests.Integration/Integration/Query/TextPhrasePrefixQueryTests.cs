@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Integration.Query
 			{
 				_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
 				_LookFor.Name = "one two three four";
-				var status = this.ConnectedClient.Index(_LookFor);
+				var status = this.ConnectedClient.Index(_LookFor).ConnectionStatus;
 				Assert.True(status.Success, status.Result);
 
 				Assert.True(this.ConnectedClient.Flush<ElasticSearchProject>().OK, "Flush");

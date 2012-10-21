@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 				// missing
 				_LookFor.Name = null;
 
-				var status = this.ConnectedClient.Index(_LookFor);
+				var status = this.ConnectedClient.Index(_LookFor).ConnectionStatus;
 				Assert.True(status.Success, status.Result);
 
 				Assert.True(this.ConnectedClient.Flush<ElasticSearchProject>().OK, "Flush");

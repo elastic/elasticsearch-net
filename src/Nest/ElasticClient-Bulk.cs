@@ -120,8 +120,12 @@ namespace Nest
 			foreach (var @object in objects)
 			{
 				var objectAction = action;
-				if (idSelector != null)
-					objectAction += ", \"_id\" : \"{0}\" ".F(idSelector(@object));
+        if (idSelector != null)
+        {
+          var id = idSelector(@object);
+          if (!id.IsNullOrEmpty())
+            objectAction += ", \"_id\" : \"{0}\" ".F(id);
+        }
 
 				objectAction += "} }\n";
 

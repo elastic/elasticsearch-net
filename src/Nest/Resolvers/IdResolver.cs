@@ -38,7 +38,7 @@ namespace Nest.Resolvers
             var idProperty = GetInferredId(type);
             if (idProperty == null)
             {
-                throw new Exception("Could not infer id for object of type" + type.FullName);
+              return null;
             }
             try
             {

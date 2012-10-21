@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Mapping
 			{
 				Country = "The Royal Kingdom Of The Netherlands"
 			}, new IndexParameters { Refresh = true });
-			Assert.IsTrue(indexResult.Success);
+			Assert.IsTrue(indexResult.IsValid);
 
 			var result = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
 				.FacetTerm(ft=>ft.OnField(f=>f.Country))
@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Mapping
 			{
 				Country = "The Royal Kingdom Of The Netherlands"
 			}, new IndexParameters { Refresh = true });
-			Assert.IsTrue(indexResult.Success);
+			Assert.IsTrue(indexResult.IsValid);
 
 			var result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
 				.FacetTerm(ft => ft.OnField(f => f.Country))

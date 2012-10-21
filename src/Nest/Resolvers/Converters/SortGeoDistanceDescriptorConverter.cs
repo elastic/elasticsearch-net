@@ -12,7 +12,7 @@ namespace Nest.Resolvers.Converters
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(SortGeoDistanceDescriptor).IsAssignableFrom(objectType);
+			return typeof(BulkOperationResponseItem).IsAssignableFrom(objectType);
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{

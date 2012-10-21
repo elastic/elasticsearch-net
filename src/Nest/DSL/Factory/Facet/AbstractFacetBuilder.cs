@@ -17,6 +17,7 @@ namespace Nest.FactoryDsl.Facet
 
         public string Name
         {
+			
             get { return _name; }
         }
 

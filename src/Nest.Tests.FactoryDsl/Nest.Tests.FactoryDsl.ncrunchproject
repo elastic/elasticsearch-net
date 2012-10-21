@@ -18,6 +18,21 @@
   <UseCPUArchitecture>AutoDetect</UseCPUArchitecture>
   <IgnoredTests>
     <RegexTestSelector>
+      <RegularExpression>Nest\.Tests\.FactoryDsl\.Filter\.FilterTests\..*</RegularExpression>
+    </RegexTestSelector>
+    <NamedTestSelector>
+      <TestName>Nest.Tests.FactoryDsl.Filter.FilterTests.AndFilterNamedTestOutput</TestName>
+    </NamedTestSelector>
+    <NamedTestSelector>
+      <TestName>Nest.Tests.FactoryDsl.Filter.FilterTests.AndFilterTestOutput</TestName>
+    </NamedTestSelector>
+    <NamedTestSelector>
+      <TestName>Nest.Tests.FactoryDsl.Filter.FilterTests.BoolFilterTestOutput</TestName>
+    </NamedTestSelector>
+    <NamedTestSelector>
+      <TestName>Nest.Tests.FactoryDsl.Filter.FilterTests.TermFilterTestOutput</TestName>
+    </NamedTestSelector>
+    <RegexTestSelector>
       <RegularExpression>.*</RegularExpression>
     </RegexTestSelector>
   </IgnoredTests>
