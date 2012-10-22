@@ -30,11 +30,11 @@ namespace Nest.Resolvers
 		}
 		protected override string ResolvePropertyName(string propertyName)
 		{
-			return base.ResolvePropertyName(propertyName);
+      return base.ResolvePropertyName(propertyName).ToCamelCase();
 		}
     public string Resolve(string name)
     {
-      return this.ResolvePropertyName(name);
+      return this.ResolvePropertyName(name).ToCamelCase();
     }
 	}
   public class ElasticCamelCaseResolver : ElasticResolver
