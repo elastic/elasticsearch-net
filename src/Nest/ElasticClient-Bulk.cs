@@ -174,7 +174,7 @@ namespace Nest
 				sb.Append(objectAction);
 				if (command == "index")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, SerializationSettings);
+					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, IndexSerializationSettings);
 					sb.Append(jsonCommand + "\n");
 				}
 			}
