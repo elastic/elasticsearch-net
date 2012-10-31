@@ -121,7 +121,7 @@ namespace Nest
       return this;
     }
 		public new HistogramFacetDescriptor<T> FacetFilter(
-      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+      Func<FilterDescriptor<T>, BaseFilter> facetFilter
     )
     {
       var filter = facetFilter(new FilterDescriptor<T>());

@@ -22,7 +22,7 @@ namespace Nest
     internal string _Script { get; set; }
 
     [JsonProperty(PropertyName = "params")]
-    internal Dictionary<string,object> _Params { get; set; }
+    internal Dictionary<string, object> _Params { get; set; }
 
     public StatisticalFacetDescriptor<T> OnField(string field)
     {
@@ -62,7 +62,7 @@ namespace Nest
     public StatisticalFacetDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
     {
       paramDictionary.ThrowIfNull("paramDictionary");
-      this._Params = paramDictionary(new FluentDictionary<string,object>());
+      this._Params = paramDictionary(new FluentDictionary<string, object>());
       return this;
     }
 
@@ -71,8 +71,8 @@ namespace Nest
       this._IsGlobal = true;
       return this;
     }
-		public new StatisticalFacetDescriptor<T> FacetFilter(
-      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+    public new StatisticalFacetDescriptor<T> FacetFilter(
+      Func<FilterDescriptor<T>, BaseFilter> facetFilter
     )
     {
       var filter = facetFilter(new FilterDescriptor<T>());

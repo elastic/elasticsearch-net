@@ -722,7 +722,7 @@ namespace Nest
 			return this._Facet<GeoDistanceFacetDescriptor<T>>(
 					Name,
 					facet,
-					(d) => d._ValueField,
+					(d) => d._ValueField ?? d._Field,
 					(b, d) => b.GeoDistance = d
 				);
 		}
@@ -739,8 +739,8 @@ namespace Nest
 				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
 
 			var query = new QueryDescriptor<T>();
-			querySelector(query);
-			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Query = query });
+			var q = querySelector(query);
+			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Query = q });
 
 			return this;
 		}
@@ -749,16 +749,17 @@ namespace Nest
 		/// its matching the filter. The filter itself can be expressed using the Query DSL.
 		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
 		/// </summary>
-		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, BaseFilter> querySelector)
+		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			querySelector.ThrowIfNull("query");
+			filterSelector.ThrowIfNull("filterSelector");
+
 			if (this._Facets == null)
 				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
 
 			var filter = new FilterDescriptor<T>();
-			querySelector(filter);
-			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Filter = filter });
+			var f = filterSelector(filter);
+			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Filter = f });
 
 			return this;
 		}

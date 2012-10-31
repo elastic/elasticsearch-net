@@ -97,6 +97,7 @@
     <Compile Include="Facets\TermsFacetJson.cs" />
     <Compile Include="Facets\TermsStatsFacetJson.cs" />
     <Compile Include="FilterJson\BoolCombinations\BoolCombinationTests.cs" />
+    <Compile Include="FilterJson\BoolFiltersInFacets\BoolFiltersInFacetsTests.cs" />
     <Compile Include="FilterTests\AndFilterJson.cs" />
     <Compile Include="FilterTests\BoolFilterJson.cs" />
     <Compile Include="FilterTests\ExistFilterJson.cs" />
@@ -195,19 +196,46 @@
     <None Include="FilterJson\BoolCombinations\OrSimpleLambda.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FilterJson\BoolCombinations\OrWithQueryString.json">
+    <None Include="FilterJson\BoolCombinations\OrWithExists.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FilterJson\BoolCombinations\OrWithQueryStringLambda.json">
+    <None Include="FilterJson\BoolCombinations\OrWithExistsLambda.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="FilterJson\BoolCombinations\OrWithQueryStringLambdaSimple.json">
+    <None Include="FilterJson\BoolCombinations\OrWithExistsLambdaSimple.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FilterJson\BoolCombinations\RandomOrderAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FilterJson\BoolCombinations\RandomOrderOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetQueryFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetTermsStatsFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetTermFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetStatisticalFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetRangeFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetHistogramFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetDateHistogramFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetGeoDistanceFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolFiltersInFacets\FacetFilterOr.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FilterJson\Bool\BranchLambdaTest.json">

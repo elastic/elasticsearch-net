@@ -39,7 +39,7 @@ namespace Nest
     internal string _Nested { get; set; }
     internal string _Scope { get; set; }
     internal bool? _IsGlobal { get; set; }
-    internal FilterDescriptor<T> _FacetFilter { get; set; }
+    internal BaseFilter _FacetFilter { get; set; }
 
     public GeoDistanceFacetDescriptor<T> OnField(string field)
     {
@@ -122,7 +122,7 @@ namespace Nest
       return this;
     }
     public new GeoDistanceFacetDescriptor<T> FacetFilter(
-      Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
+      Func<FilterDescriptor<T>, BaseFilter> facetFilter
     )
     {
       var filter = facetFilter(new FilterDescriptor<T>());

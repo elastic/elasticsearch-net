@@ -1,0 +1,27 @@
+  {
+  "from": 0,
+  "size": 10,
+  "facets": {
+    "name": {
+      "date_histogram": {
+        "field": "name"
+      },
+      "facet_filter": {
+        "bool": {
+          "should": [
+            {
+              "term": {
+                "name": "foo"
+              }
+            },
+            {
+              "term": {
+                "name": "bar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

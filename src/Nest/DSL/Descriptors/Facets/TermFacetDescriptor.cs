@@ -112,8 +112,8 @@ namespace Nest
     )
     {
       var filter = new FilterDescriptor<T>();
-      facetFilter(filter);
-      this._FacetFilter = filter;
+      var f = facetFilter(filter);
+      this._FacetFilter = f;
       return this;
     }
     public new TermFacetDescriptor<T> Nested(string nested)

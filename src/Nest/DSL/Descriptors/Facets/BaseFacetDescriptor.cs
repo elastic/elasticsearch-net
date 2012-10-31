@@ -16,7 +16,7 @@ namespace Nest
 			throw new NotImplementedException("Cannot call Base directly");
 		}
 
-		internal FilterDescriptor<T> _FacetFilter { get; set; }
+		internal BaseFilter _FacetFilter { get; set; }
 		public virtual BaseFacetDescriptor<T> FacetFilter(
 			Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
 		)
