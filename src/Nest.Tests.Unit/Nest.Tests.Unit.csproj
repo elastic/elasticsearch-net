@@ -168,8 +168,9 @@
     <Compile Include="QueryTests\TextQueryJson.cs" />
     <Compile Include="QueryTests\TopChildrenQueryJson.cs" />
     <Compile Include="QueryTests\WildcardQueryJson.cs" />
-    <Compile Include="Query\BoolCombinations\BoolCombinationTests.cs" />
-    <Compile Include="Query\Bool\StaticBoolQueryTests.cs" />
+    <Compile Include="QueryJson\BoolCombinations\BoolCombinationTests.cs" />
+    <Compile Include="QueryJson\Bool\StaticBoolQueryTests.cs" />
+    <Compile Include="QueryJson\InsideBoolCalls\InsideBoolCallsTests.cs" />
     <Compile Include="Search\ScriptFields\ScriptFieldTests.cs" />
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Serialization\Serialize\SerializeTests.cs" />
@@ -311,64 +312,73 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="Query\BoolCombinations\CombineNotAnd.json">
+    <None Include="QueryJson\BoolCombinations\CombineNotAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\CombineNotAndShould.json">
+    <None Include="QueryJson\BoolCombinations\CombineNotAndShould.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\OrWithQueryStringLambdaSimple.json">
+    <None Include="QueryJson\BoolCombinations\OrWithQueryStringLambdaSimple.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\OrSimpleLambda.json">
+    <None Include="QueryJson\BoolCombinations\OrSimpleLambda.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\OrWithQueryStringLambda.json">
+    <None Include="QueryJson\BoolCombinations\OrWithQueryStringLambda.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\OrWithQueryString.json">
+    <None Include="QueryJson\BoolCombinations\OrWithQueryString.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\RandomOrderOr.json">
+    <None Include="QueryJson\BoolCombinations\RandomOrderOr.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\RandomOrderAnd.json">
+    <None Include="QueryJson\BoolCombinations\RandomOrderAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\ForceBranchAnd.json">
+    <None Include="QueryJson\BoolCombinations\ForceBranchAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\BoolCombinations\ForceBranchOr.json">
+    <None Include="QueryJson\BoolCombinations\ForceBranchOr.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\BranchLambdaTest.json">
+    <None Include="QueryJson\Bool\BranchLambdaTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\StaticBoolAssignNotTest.json">
+    <None Include="QueryJson\Bool\StaticBoolAssignNotTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\SearchDescriptorPicksUpBaseQueryWithinComplexLambdaTest.json">
+    <None Include="QueryJson\Bool\SearchDescriptorPicksUpBaseQueryWithinComplexLambdaTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\SearchDescriptorPicksUpBaseQueryWithinLambdaTest.json">
+    <None Include="QueryJson\Bool\SearchDescriptorPicksUpBaseQueryWithinLambdaTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\SearchDescriptorPicksUpBaseQueryTest.json">
+    <None Include="QueryJson\Bool\SearchDescriptorPicksUpBaseQueryTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\StaticBoolAssignMultipleOrCombineWithAndTest.json">
+    <None Include="QueryJson\Bool\StaticBoolAssignMultipleOrCombineWithAndTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\StaticBoolAssignMultipleOrTest.json">
+    <None Include="QueryJson\Bool\StaticBoolAssignMultipleOrTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\StaticBoolAssignMultipleTest.json">
+    <None Include="QueryJson\Bool\StaticBoolAssignMultipleTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\StaticBoolAssignTest.json">
+    <None Include="QueryJson\Bool\StaticBoolAssignTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Query\Bool\StaticBoolTest.json">
+    <None Include="QueryJson\Bool\StaticBoolTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\InsideBoolCalls\InsideMust.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\InsideBoolCalls\InsideMustNot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\InsideBoolCalls\InsideShould.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\SearchType\SearchTypeDoesNotPolluteQueryObject.json">
