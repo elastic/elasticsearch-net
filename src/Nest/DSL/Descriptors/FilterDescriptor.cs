@@ -547,12 +547,12 @@ namespace Nest
 		/// </summary>
 		public BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
-			var descriptors = new List<FilterDescriptor<T>>();
+			var descriptors = new List<BaseFilter>();
 			foreach (var selector in filters)
 			{
 				var filter = new FilterDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var f = selector(filter);
+				descriptors.Add(f);
 			}
 			return this.SetDictionary("filters", descriptors, (d, b) => 
 			{
@@ -567,12 +567,12 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
-			var descriptors = new List<FilterDescriptor<T>>();
+			var descriptors = new List<BaseFilter>();
 			foreach (var selector in filters)
 			{
 				var filter = new FilterDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var f = selector(filter);
+				descriptors.Add(f);
 			}
 			return this.SetDictionary("filters", descriptors, (d, b) => 
 			{
@@ -588,8 +588,8 @@ namespace Nest
 		public BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector)
 		{
 			var filter = new FilterDescriptor<T>();
-			selector(filter);
-			return this.SetDictionary("filter", filter, (d, b) => 
+			var f = selector(filter);
+			return this.SetDictionary("filter", f, (d, b) => 
 			{
 				this.NotFilter = d;
 				b.NotFilter = d;
