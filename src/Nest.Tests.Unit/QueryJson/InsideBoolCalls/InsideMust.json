@@ -1,7 +1,7 @@
   {
   "from": 0,
   "size": 10,
-  "filter": {
+  "query": {
     "bool": {
       "must": [
         {
@@ -9,12 +9,16 @@
             "should": [
               {
                 "term": {
-                  "name": "foo"
+                  "name": {
+                    "value": "foo"
+                  }
                 }
               },
               {
                 "term": {
-                  "name": "bar"
+                  "name": {
+                    "value": "bar"
+                  }
                 }
               }
             ]
@@ -25,12 +29,16 @@
             "should": [
               {
                 "term": {
-                  "name": "foo2"
+                  "name": {
+                    "value": "foo2"
+                  }
                 }
               },
               {
                 "term": {
-                  "name": "bar2"
+                  "name": {
+                    "value": "bar2"
+                  }
                 }
               }
             ]

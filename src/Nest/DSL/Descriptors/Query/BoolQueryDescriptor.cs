@@ -139,12 +139,12 @@ namespace Nest
 		/// </summary>
 	public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
-			var descriptors = new List<QueryDescriptor<T>>();
+			var descriptors = new List<BaseQuery>();
 			foreach (var selector in filters)
 			{
 				var filter = new QueryDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var q = selector(filter);
+				descriptors.Add(q);
 			}
 			this._MustQueries = descriptors;
 			return this;
@@ -156,12 +156,12 @@ namespace Nest
 		/// <returns></returns>
 	public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
-			var descriptors = new List<QueryDescriptor<T>>();
+			var descriptors = new List<BaseQuery>();
 			foreach (var selector in filters)
 			{
 				var filter = new QueryDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var q = selector(filter);
+				descriptors.Add(q);
 			}
 			this._MustNotQueries = descriptors;
 			return this;
@@ -173,12 +173,12 @@ namespace Nest
 		/// <returns></returns>
 	public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
-			var descriptors = new List<QueryDescriptor<T>>();
+			var descriptors = new List<BaseQuery>();
 			foreach (var selector in filters)
 			{
 				var filter = new QueryDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var q = selector(filter);
+				descriptors.Add(q);
 			}
 			this._ShouldQueries = descriptors;
 			return this;
