@@ -136,6 +136,7 @@
     <Compile Include="Mapping\Attribute\NestedMappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVisitorTests.cs" />
+    <Compile Include="QueryJson\QueriesInQueries\QueriesInQueriesTests.cs" />
     <Compile Include="QueryTests\BoolQueryJson.cs" />
     <Compile Include="QueryTests\BoostingQueryJson.cs" />
     <Compile Include="QueryTests\ConstantScoreQueryJson.cs" />
@@ -370,6 +371,45 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="QueryJson\Bool\StaticBoolTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\CustomBoostFactorQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\IndicesNoMatchAlternateQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\IndicesAlternateChildQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\TopChildrenQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\NestedQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\IndicesQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\IndicesNoMatchQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\HasChildQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\FilteredQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\DismaxQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\CustomScoreQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\BoostingQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\QueriesInQueries\ConstantScore.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="QueryJson\InsideBoolCalls\InsideMust.json">

@@ -27,17 +27,19 @@ namespace Nest
     public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
       var qd = new QueryDescriptor<T>();
-			var d = new RawOrQueryDescriptor<T> { Descriptor = qd };
-      querySelector(qd);
+      var q = querySelector(qd);
+			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
+      
 			this._QueryDescriptor = d.Descriptor;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> Query<K>(Action<QueryDescriptor<K>> querySelector) where K : class
+    public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
 		{
       var qd = new QueryDescriptor<K>();
-      var d = new RawOrQueryDescriptor<K> { Descriptor = qd };
-      querySelector(qd);
-      this._QueryDescriptor = qd;
+      var q = querySelector(qd);
+      var d = new RawOrQueryDescriptor<K> { Descriptor = q };
+
+      this._QueryDescriptor = d.Descriptor;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Query(string rawQuery)
@@ -49,17 +51,19 @@ namespace Nest
     public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
       var qd = new QueryDescriptor<T>();
-			var d = new RawOrQueryDescriptor<T> { Descriptor = qd };
-			querySelector(qd);
-			this._NoMatchQueryDescriptor = d.Descriptor;
+      var q = querySelector(qd);
+      var d = new RawOrQueryDescriptor<T> { Descriptor = q };
+
+      this._NoMatchQueryDescriptor = d.Descriptor;
 			return this;
 		}
-		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Action<QueryDescriptor<K>> querySelector) where K : class
+		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, BaseQuery> querySelector) where K : class
 		{
       var qd = new QueryDescriptor<K>();
-			var d = new RawOrQueryDescriptor<K> { Descriptor = qd  };
-			querySelector(qd);
-			this._NoMatchQueryDescriptor = d.Descriptor;
+      var q = querySelector(qd);
+      var d = new RawOrQueryDescriptor<K> { Descriptor = q };
+
+      this._NoMatchQueryDescriptor = d.Descriptor;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> NoMatchQuery(string rawQuery)

@@ -383,7 +383,7 @@ namespace Nest
 			return new QueryDescriptor<T> { BoolQueryDescriptor = this.BoolQueryDescriptor };
 		}
 		/// <summary>
-		/// he boosting query can be used to effectively demote results that match a given query. 
+		/// the boosting query can be used to effectively demote results that match a given query. 
 		/// Unlike the “NOT” clause in bool query, this still selects documents that contain
 		/// undesirable terms, but reduces their overall score.
 		/// </summary>

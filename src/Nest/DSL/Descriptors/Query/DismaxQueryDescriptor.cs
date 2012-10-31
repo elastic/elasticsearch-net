@@ -16,16 +16,16 @@ namespace Nest
 		internal double? _Boost { get; set; }
 
 		[JsonProperty(PropertyName = "queries")]
-		internal IEnumerable<QueryDescriptor<T>> _Queries { get; set; }
+    internal IEnumerable<BaseQuery> _Queries { get; set; }
 
     public DismaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, BaseQuery>[] querySelectors)
 		{
-			var queries = new List<QueryDescriptor<T>>();
+			var queries = new List<BaseQuery>();
 			foreach (var selector in querySelectors)
 			{
 				var query = new QueryDescriptor<T>();
-				selector(query);
-				queries.Add(query);
+				var q = selector(query);
+				queries.Add(q);
 			}
 			this._Queries = queries;
 			return this;

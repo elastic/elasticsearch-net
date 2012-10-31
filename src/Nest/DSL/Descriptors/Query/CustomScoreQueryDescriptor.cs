@@ -15,15 +15,15 @@ namespace Nest
 		internal Dictionary<string, object> _Params { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		internal QueryDescriptor<T> _Query { get; set; }
+		internal BaseQuery _Query { get; set; }
 
     public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
-			querySelector(query);
+			var q = querySelector(query);
 
-			this._Query = query;
+			this._Query = q;
 			return this;
 		}
 		/// <summary>

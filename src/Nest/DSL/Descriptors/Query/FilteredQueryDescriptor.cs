@@ -9,7 +9,7 @@ namespace Nest
   public class FilteredQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
-		internal QueryDescriptor<T> _Query { get; set; }
+		internal BaseQuery _Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
 		internal BaseFilter _Filter { get; set; }
@@ -18,9 +18,9 @@ namespace Nest
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
-			querySelector(query);
+			var q = querySelector(query);
 
-			this._Query = query;
+			this._Query = q;
 			return this;
 		}
 

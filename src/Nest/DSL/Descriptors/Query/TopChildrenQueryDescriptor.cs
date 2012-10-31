@@ -32,7 +32,7 @@ namespace Nest
 		internal int? _IncrementalFactor { get; set; }
 
 		[JsonProperty("query")]
-		internal QueryDescriptor<T> _QueryDescriptor { get; set;}
+		internal BaseQuery _QueryDescriptor { get; set;}
 
     [JsonProperty(PropertyName = "_cache")]
 		internal bool? _Cache { get; set; }
@@ -42,8 +42,8 @@ namespace Nest
 
 		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
-			this._QueryDescriptor = new QueryDescriptor<T>();
-			querySelector(this._QueryDescriptor);
+			var q = new QueryDescriptor<T>();
+      this._QueryDescriptor = querySelector(q);
 			return this;
 		}
 		public TopChildrenQueryDescriptor<T> Scope(string scope)

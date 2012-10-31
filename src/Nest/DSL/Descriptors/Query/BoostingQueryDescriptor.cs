@@ -11,10 +11,10 @@ namespace Nest
   public class BoostingQueryDescriptor<T>  where T : class
 	{
 		[JsonProperty("positive")]
-		internal QueryDescriptor<T> _PositiveQuery { get; set; }
+		internal BaseQuery _PositiveQuery { get; set; }
 
 		[JsonProperty("negative")]
-		internal QueryDescriptor<T> _NegativeQuery { get; set; }
+    internal BaseQuery _NegativeQuery { get; set; }
 
 		[JsonProperty("negative_boost")]
 		internal double? _NegativeBoost { get; set; }
@@ -28,15 +28,15 @@ namespace Nest
     public BoostingQueryDescriptor<T> Positive(Func<QueryDescriptor<T>, BaseQuery> selector)
 		{
 			var query = new QueryDescriptor<T>();
-			selector(query);
-			this._PositiveQuery = query;
+			var q = selector(query);
+			this._PositiveQuery = q;
 			return this;
 		}
     public BoostingQueryDescriptor<T> Negative(Func<QueryDescriptor<T>, BaseQuery> selector)
 		{
 			var query = new QueryDescriptor<T>();
-			selector(query);
-			this._NegativeQuery = query;
+      var q = selector(query);
+			this._NegativeQuery = q;
 			return this;
 		}
 	}

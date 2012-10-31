@@ -1,0 +1,29 @@
+  {
+  "from": 0,
+  "size": 10,
+  "query": {
+    "top_children": {
+      "type": "people",
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "term": {
+                "firstName": {
+                  "value": "foo"
+                }
+              }
+            },
+            {
+              "term": {
+                "firstName": {
+                  "value": "bar"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
