@@ -96,6 +96,7 @@
     <Compile Include="Facets\StatisticalFacetJson.cs" />
     <Compile Include="Facets\TermsFacetJson.cs" />
     <Compile Include="Facets\TermsStatsFacetJson.cs" />
+    <Compile Include="FilterJson\BoolCombinations\BoolCombinationTests.cs" />
     <Compile Include="FilterTests\AndFilterJson.cs" />
     <Compile Include="FilterTests\BoolFilterJson.cs" />
     <Compile Include="FilterTests\ExistFilterJson.cs" />
@@ -179,6 +180,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="FilterJson\BoolCombinations\CombineNotAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\CombineNotAndShould.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\ForceBranchAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\ForceBranchOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\OrSimpleLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\OrWithQueryString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\OrWithQueryStringLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\OrWithQueryStringLambdaSimple.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\RandomOrderAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\BoolCombinations\RandomOrderOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="FilterJson\Bool\BranchLambdaTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

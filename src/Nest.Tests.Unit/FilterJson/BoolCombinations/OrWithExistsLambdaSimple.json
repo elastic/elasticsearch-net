@@ -1,0 +1,18 @@
+  {
+  "filter": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "name": "blah2"
+          }
+        },
+        {
+          "exists": {
+            "field": "name"
+          }
+        }
+      ]
+    }
+  }
+}

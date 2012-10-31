@@ -1,0 +1,23 @@
+  {
+  "bool": {
+    "must": [
+      {
+        "term": {
+          "name": "foo"
+        }
+      },
+      {
+        "term": {
+          "name": "blah"
+        }
+      }
+    ],
+    "must_not": [
+      {
+        "term": {
+          "name": "bar"
+        }
+      }
+    ]
+  }
+}
