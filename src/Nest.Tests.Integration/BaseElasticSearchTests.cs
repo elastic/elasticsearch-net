@@ -82,7 +82,6 @@ namespace Nest.Tests.Integration
 				var cloneIndex = Test.Default.DefaultIndex + "_clone";
 				client.DeleteMapping<ElasticSearchProject>();
 				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
-
 			}
 		}
 		protected void BulkIndexData()

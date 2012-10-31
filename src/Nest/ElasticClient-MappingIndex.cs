@@ -33,7 +33,7 @@ namespace Nest
 			{
 				var o = JObject.Parse(status.Result);
 				var settingsObject = o.First.First.First.First;
-				var settings = this.Deserialize<IndexSettings>(settingsObject.ToString());
+        var settings = new IndexSettings(); //this.Deserialize<IndexSettings>(settingsObject.ToString());
 
 				foreach (JProperty s in settingsObject.Children<JProperty>())
 				{

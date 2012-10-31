@@ -39,10 +39,44 @@ namespace Nest
             this.Mappings = new List<TypeMapping>();
             this.Settings = new Dictionary<string, string>();
         }
-        [JsonProperty(PropertyName = "index.number_of_shards")]
-        public int? NumberOfShards { get; set; }
-        [JsonProperty(PropertyName = "index.number_of_replicas")]
-        public int? NumberOfReplicas { get; set; }
+        public int? NumberOfShards
+        {
+          get
+          {
+            return this.GetIntegerValue("number_of_shards");
+          }
+          set
+          {
+            this.TryAdd("number_of_shards", value);
+          }
+        }
+        public int? NumberOfReplicas { 
+          get 
+          {
+            return this.GetIntegerValue("number_of_replicas");
+          }
+          set
+          {
+            this.TryAdd("number_of_replicas", value);
+          }
+        }
+        
+        internal int? GetIntegerValue(string key)
+        {
+          string value;
+          int i = 0;
+          if (!this.TryGetValue(key, out value) || !int.TryParse(value, out i))
+            return null;
+          return i;
+        }
+
+        public void TryAdd(string key, object value)
+        {
+          if (this.ContainsKey(key))
+            this[key] = value.ToString();
+          else
+            this.Add(key, value.ToString());
+        }
 
         internal Dictionary<string, string> Settings { get; set; }
 
