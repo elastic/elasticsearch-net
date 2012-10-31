@@ -12,7 +12,7 @@ namespace Nest
 		internal QueryDescriptor<T> _Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		internal FilterDescriptor<T> _Filter { get; set; }
+		internal BaseFilter _Filter { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
@@ -33,9 +33,9 @@ namespace Nest
 			filterSelector.ThrowIfNull("filterSelector");
 			this._Query = null;
 			var filter = new FilterDescriptor<T>();
-			filterSelector(filter);
+			var f = filterSelector(filter);
 
-			this._Filter = filter;
+			this._Filter = f;
 			return this;
 		}
 

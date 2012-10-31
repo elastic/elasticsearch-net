@@ -112,46 +112,46 @@ namespace Nest
 	public class BoolFilterDescriptor<T> : FilterBase where T : class
 	{
 		[JsonProperty("must")]
-		internal IEnumerable<FilterDescriptor<T>> _MustFilters { get; set; }
+		internal IEnumerable<BaseFilter> _MustFilters { get; set; }
 
 		[JsonProperty("must_not")]
-		internal IEnumerable<FilterDescriptor<T>> _MustNotFilters { get; set; }
+    internal IEnumerable<BaseFilter> _MustNotFilters { get; set; }
 
 		[JsonProperty("should")]
-		internal IEnumerable<FilterDescriptor<T>> _ShouldFilters { get; set; }
+    internal IEnumerable<BaseFilter> _ShouldFilters { get; set; }
 
     public BoolFilterDescriptor<T> Must(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
-			var descriptors = new List<FilterDescriptor<T>>();
+			var descriptors = new List<BaseFilter>();
 			foreach (var selector in filters)
 			{
 				var filter = new FilterDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var f = selector(filter);
+				descriptors.Add(f);
 			}
 			this._MustFilters = descriptors;
 			return this;
 		}
     public BoolFilterDescriptor<T> MustNot(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
-			var descriptors = new List<FilterDescriptor<T>>();
+			var descriptors = new List<BaseFilter>();
 			foreach (var selector in filters)
 			{
 				var filter = new FilterDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var f = selector(filter);
+				descriptors.Add(f);
 			}
 			this._MustNotFilters = descriptors;
 			return this;
 		}
     public BoolFilterDescriptor<T> Should(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
-			var descriptors = new List<FilterDescriptor<T>>();
+			var descriptors = new List<BaseFilter>();
 			foreach (var selector in filters)
 			{
 				var filter = new FilterDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
+				var f = selector(filter);
+				descriptors.Add(f);
 			}
 			this._ShouldFilters = descriptors;
 			return this;
