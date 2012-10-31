@@ -110,12 +110,8 @@ namespace Nest
 		
 			return q;
 		}
-
-		private static void JoinShouldOnSide(BaseQuery lbq, BaseQuery rbq, BoolBaseQueryDescriptor bq)
-		{
-			bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
-		}
-		public static BaseQuery operator !(BaseQuery lbq)
+		
+    public static BaseQuery operator !(BaseQuery lbq)
 		{
 			var q = new BaseQuery();
 			var bq = new BoolBaseQueryDescriptor();
@@ -124,7 +120,8 @@ namespace Nest
 			q.BoolQueryDescriptor = bq;
 			return q;
 		}
-		public static bool operator false(BaseQuery a)
+		
+    public static bool operator false(BaseQuery a)
 		{
 			return false;
 		}
@@ -134,5 +131,9 @@ namespace Nest
 			return false;
 		}
 
+    private static void JoinShouldOnSide(BaseQuery lbq, BaseQuery rbq, BoolBaseQueryDescriptor bq)
+    {
+      bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
+    }
 	}
 }

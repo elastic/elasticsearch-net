@@ -119,6 +119,7 @@
     <Compile Include="FilterTests\TermFilterJson.cs" />
     <Compile Include="FilterTests\TermsFilterJson.cs" />
     <Compile Include="FilterTests\TypeFilterJson.cs" />
+    <Compile Include="FilterJson\Bool\StaticBoolFilterTests.cs" />
     <Compile Include="HighlightTests.cs" />
     <Compile Include="Inferno\PathResolverTest.cs" />
     <Compile Include="Inferno\MapTypeIndicesTests.cs" />
@@ -178,6 +179,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="FilterJson\Bool\BranchLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\SearchDescriptorPicksUpBaseFilterTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\SearchDescriptorPicksUpBaseFilterWithinComplexLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\SearchDescriptorPicksUpBaseFilterWithinLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\StaticBoolAssignMultipleOrCombineWithAndTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\StaticBoolAssignMultipleOrTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\StaticBoolAssignMultipleTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\StaticBoolAssignNotTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\StaticBoolAssignTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FilterJson\Bool\StaticBoolTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Mapping\Attribute\TestDeepObjectResursiveWriter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
