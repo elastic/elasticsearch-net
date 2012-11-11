@@ -118,7 +118,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
       <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
-      <Name>Nest.TestData</Name>
+      <Name>Nest.Tests.MockData</Name>
     </ProjectReference>
     <ProjectReference Include="..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
