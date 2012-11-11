@@ -63,7 +63,7 @@ namespace ProtocolLoadTest
             Console.WriteLine("{0} test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, rate);
 
             // Close the index so we don't interfere with the next test
-            CloseIndex(type);
+            //CloseIndex(type);
 
             return rate;
         }
