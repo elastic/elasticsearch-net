@@ -80,6 +80,7 @@
     <Compile Include="HttpTester.cs" />
     <Compile Include="ITester.cs" />
     <Compile Include="MessageGenerator.cs" />
+    <Compile Include="PartitionExtension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Message.cs" />

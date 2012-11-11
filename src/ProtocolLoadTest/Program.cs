@@ -15,9 +15,6 @@ namespace ProtocolLoadTest
         // Total number of messages to send to ElasticSearch
         const int NUM_MESSAGES = 250000;
 
-        // Number of ElasticSearch clients to use in parallel
-        const int NUM_CLIENTS = 4;
-
         // Number of messages to buffer before sending via bulk API
         const int BUFFER_SIZE = 100;
 
@@ -44,18 +41,9 @@ namespace ProtocolLoadTest
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            Task[] clients = new Task[NUM_CLIENTS];
+			var tester = Activator.CreateInstance<T>();
 
-            for (int i = 0; i < NUM_CLIENTS; i++)
-            {
-                clients[i] = Task.Factory.StartNew(() =>
-                {
-                    var tester = Activator.CreateInstance<T>();
-                    tester.Run(INDEX_PREFIX + type, port, NUM_MESSAGES / NUM_CLIENTS, BUFFER_SIZE);
-                });
-            }
-
-            Task.WaitAll(clients);
+            tester.Run(INDEX_PREFIX + type, port, NUM_MESSAGES, BUFFER_SIZE);
 
             sw.Stop();
             double rate = NUM_MESSAGES / ((double)sw.ElapsedMilliseconds / 1000);
