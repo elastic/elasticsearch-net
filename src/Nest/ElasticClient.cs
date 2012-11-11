@@ -133,6 +133,13 @@ namespace Nest
 				response = this.Connection.GetSync("");
 				if (response.Success)
 				{
+                    // TODO: Cocowalla
+                    //       Next 3 lines are just there to workaround Thrift connection issue,
+                    //       whereby only the first call to GetNodeInfo works
+                    this._IsValid = true;
+                    this._gotNodeInfo = true;
+                    return response;
+
 					JObject o = JObject.Parse(response.Result);
 					if (o["ok"] == null)
 					{

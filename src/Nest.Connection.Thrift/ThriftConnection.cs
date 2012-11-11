@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace Nest.Thrift
 {
-	internal class ThriftConnection : IConnection, IDisposable
+    // TODO: Cocowalla
+    //       Changed from internal to public for performance testing
+	public class ThriftConnection : IConnection, IDisposable
 	{
 		private readonly Rest.Client _client;
 		private readonly TProtocol _protocol;
