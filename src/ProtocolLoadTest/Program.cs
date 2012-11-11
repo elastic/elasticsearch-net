@@ -20,11 +20,11 @@ namespace ProtocolLoadTest
 
         static void Main(string[] args)
         {
-            //double httpRate = RunTest<HttpTester>(HTTP_PORT);
+            double httpRate = RunTest<HttpTester>(HTTP_PORT);
             double thriftRate = RunTest<ThriftTester>(THRIFT_PORT);
 
             Console.WriteLine();
-            //Console.WriteLine("HTTP: {0:0,0}/s", httpRate);
+            Console.WriteLine("HTTP: {0:0,0}/s", httpRate);
             Console.WriteLine("Thrift: {0:0,0}/s", thriftRate);
 
             Console.ReadLine();
@@ -51,7 +51,7 @@ namespace ProtocolLoadTest
             Console.WriteLine("{0} test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, rate);
 
             // Close the index so we don't interfere with the next test
-            //CloseIndex(type);
+            CloseIndex(type);
 
             return rate;
         }
