@@ -43,7 +43,7 @@ namespace ProtocolLoadTest
 			var partitionedMessages = msgGenerator.Generate(numMessages).Partition(bufferSize);
 			
 			Interlocked.Exchange(ref NumSent, 0);
-			
+
 			foreach (var messages in partitionedMessages)
 			{
 				var t = client.IndexManyAsync(messages, indexName, bulkParms);

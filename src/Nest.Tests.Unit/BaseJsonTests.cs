@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit
 			var file = Path.Combine(folder, method.Name + ".json");
 			var json = TestElasticClient.Serialize(o);
 			var expected = File.ReadAllText(file);
-      Assert.True(json.JsonEquals(expected), json);
+			Assert.True(json.JsonEquals(expected), json);
 		}
 		protected void JsonEquals(string json, MethodBase method)
 		{

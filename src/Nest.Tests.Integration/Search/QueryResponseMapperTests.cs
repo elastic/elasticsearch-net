@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using HackerNews.Indexer.Domain;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -33,7 +32,7 @@ namespace Nest.Tests.Integration.Search
 		public void BogusQuery()
 		{
 			var client = this.ConnectedClient;
-			IQueryResponse<Post> queryResults = client.Search<Post>(s=>s
+			IQueryResponse<ElasticSearchProject> queryResults = client.Search<ElasticSearchProject>(s=>s
 				.QueryRawJson("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
