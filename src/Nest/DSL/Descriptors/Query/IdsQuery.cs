@@ -12,5 +12,13 @@ namespace Nest
 		public IEnumerable<string> Type { get; set; }
 		[JsonProperty(PropertyName = "values")]
 		public IEnumerable<string> Values { get; set; }
+
+		internal bool IsConditionless
+		{
+			get
+			{
+				return !this.Values.HasAny() || this.Values.All(s=>s.IsNullOrEmpty());
+			}
+		}
 	}
 }

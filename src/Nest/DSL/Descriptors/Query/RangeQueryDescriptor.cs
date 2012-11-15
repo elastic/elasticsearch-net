@@ -8,11 +8,11 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class RangeQueryDescriptor<T>    where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class RangeQueryDescriptor<T> where T : class
 	{
 		[JsonProperty("from")]
-		internal object _From { get; set;}
+		internal object _From { get; set; }
 		[JsonProperty("to")]
 		internal object _To { get; set; }
 		[JsonProperty("include_lower")]
@@ -21,19 +21,19 @@ namespace Nest
 		internal bool? _ToInclusive { get; set; }
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
-   	[JsonProperty(PropertyName = "_cache")]
+		[JsonProperty(PropertyName = "_cache")]
 		internal bool? _Cache { get; set; }
 		[JsonProperty(PropertyName = "_name")]
 		internal string _Name { get; set; }
 
 		internal string _Field { get; set; }
-    internal bool IsConditionless
-    {
-      get
-      {
-        return this._Field.IsNullOrEmpty();
-      }
-    }
+		internal bool IsConditionless
+		{
+			get
+			{
+				return this._Field.IsNullOrEmpty();
+			}
+		}
 
 
 		public RangeQueryDescriptor<T> OnField(string field)
@@ -73,7 +73,7 @@ namespace Nest
 			this._From = from;
 			return this;
 		}
-		
+
 		/// <summary>
 		/// The upper bound. Defaults to unbounded.
 		/// </summary>
@@ -82,8 +82,8 @@ namespace Nest
 			this._To = to;
 			return this;
 		}
-		
-		
+
+
 		/// <summary>
 		/// Same as setting from and from_inclusive to false.
 		/// </summary>
@@ -129,7 +129,7 @@ namespace Nest
 		/// <returns></returns>
 		public RangeQueryDescriptor<T> From(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
-			
+
 			this._From = from.ToString(format);
 			return this;
 		}
@@ -293,8 +293,8 @@ namespace Nest
 			return this;
 		}
 		#endregion
-	
 
-  
-  }
+
+
+	}
 }

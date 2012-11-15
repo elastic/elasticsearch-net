@@ -28,6 +28,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "analyzer")]
 		internal string _Analyzer { get; set; }
 
+		internal bool IsConditionless
+		{
+			get
+			{
+				return this._LikeText.IsNullOrEmpty();
+			}
+		}
+
 		public FuzzyLikeThisDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
 			this._Fields = fields;
@@ -42,7 +50,6 @@ namespace Nest
 		}
 		public FuzzyLikeThisDescriptor<T> LikeText(string likeText)
 		{
-			likeText.ThrowIfNullOrEmpty("likeText");
 			this._LikeText = likeText;
 			return this;
 		}

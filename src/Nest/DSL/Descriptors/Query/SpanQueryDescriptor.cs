@@ -8,7 +8,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-  public class SpanQueryDescriptor<T>  where T : class
+	public class SpanQueryDescriptor<T> where T : class
 	{
 		[JsonProperty(PropertyName = "span_term")]
 		internal SpanTerm SpanTermQuery { get; set; }
@@ -21,44 +21,61 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "span_or")]
 		internal SpanOrQueryDescriptor<T> SpanOrQueryDescriptor { get; set; }
-		
+
 		[JsonProperty(PropertyName = "span_not")]
 		internal SpanNotQueryDescriptor<T> SpanNotQueryDescriptor { get; set; }
 
+		internal bool IsConditionless { get; set; }
 
-		public void SpanTerm(Expression<Func<T, object>> fieldDescriptor
+		internal static SpanQueryDescriptor<T> CreateConditionlessSpanQueryDescriptor()
+		{
+			return new SpanQueryDescriptor<T> { IsConditionless = true };
+		}
+
+		public SpanQueryDescriptor<T> SpanTerm(Expression<Func<T, object>> fieldDescriptor
 			, string value
 			, double? Boost = null)
 		{
-      var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			this.SpanTerm(field, value, Boost: Boost);
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
+			return this.SpanTerm(field, value, Boost: Boost);
 		}
-		public void SpanTerm(string field, string value, double? Boost = null)
+		public SpanQueryDescriptor<T> SpanTerm(string field, string value, double? Boost = null)
 		{
+			if (field.IsNullOrEmpty() || value.IsNullOrEmpty())
+				return CreateConditionlessSpanQueryDescriptor();
+
 			var spanTerm = new SpanTerm() { Field = field, Value = value };
 			if (Boost.HasValue)
 				spanTerm.Boost = Boost;
 			this.SpanTermQuery = spanTerm;
+			return new SpanQueryDescriptor<T> { SpanTermQuery = this.SpanTermQuery };
 		}
-		public void SpanFirst(Func<SpanFirstQueryDescriptor<T>, SpanFirstQueryDescriptor<T>> selector)
+		public SpanQueryDescriptor<T> SpanFirst(Func<SpanFirstQueryDescriptor<T>, SpanFirstQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			this.SpanFirstQueryDescriptor = selector(new SpanFirstQueryDescriptor<T>());
+			if (this.SpanFirstQueryDescriptor.IsConditionless)
+				return CreateConditionlessSpanQueryDescriptor();
+
+			return new SpanQueryDescriptor<T> { SpanFirstQueryDescriptor = this.SpanFirstQueryDescriptor };
 		}
-		public void SpanNear(Func<SpanNearQueryDescriptor<T>, SpanNearQueryDescriptor<T>> selector)
+		public SpanQueryDescriptor<T> SpanNear(Func<SpanNearQueryDescriptor<T>, SpanNearQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			this.SpanNearQueryDescriptor = selector(new SpanNearQueryDescriptor<T>());
+			return new SpanQueryDescriptor<T> { SpanNearQueryDescriptor = this.SpanNearQueryDescriptor };
 		}
-		public void SpanOr(Func<SpanOrQueryDescriptor<T>, SpanOrQueryDescriptor<T>> selector)
+		public SpanQueryDescriptor<T> SpanOr(Func<SpanOrQueryDescriptor<T>, SpanOrQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			this.SpanOrQueryDescriptor = selector(new SpanOrQueryDescriptor<T>());
+			return new SpanQueryDescriptor<T> { SpanOrQueryDescriptor = this.SpanOrQueryDescriptor };
 		}
-		public void SpanNot(Func<SpanNotQueryDescriptor<T>, SpanNotQueryDescriptor<T>> selector)
+		public SpanQueryDescriptor<T> SpanNot(Func<SpanNotQueryDescriptor<T>, SpanNotQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			this.SpanNotQueryDescriptor = selector(new SpanNotQueryDescriptor<T>());
+			return new SpanQueryDescriptor<T> { SpanNotQueryDescriptor = this.SpanNotQueryDescriptor };
 		}
 	}
 }

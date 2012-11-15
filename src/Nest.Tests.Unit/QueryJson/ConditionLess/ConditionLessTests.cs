@@ -188,11 +188,29 @@ namespace Nest.Tests.Unit.QueryJson.ConditionLess
       this.DoConditionlessQuery(q => q.CustomScore(csq=>csq.Query(qff=>qff.Terms(p=> p.Name, _c.Name1))));
     }
 
-    //[Test]
-    //public void Bool()
-    //{
-    //  this.DoConditionlessQuery(q => q.Bool());
-    //}
+	[Test]
+	public void BoolEmpty()
+	{
+		this.DoConditionlessQuery(q => q.Bool(b => { }));
+	}
+	[Test]
+	public void BoolEmptyClauses()
+	{
+		this.DoConditionlessQuery(q => q.Bool(b => b
+			.Must()
+			.MustNot()
+			.Should()
+		));
+	}
+	[Test]
+	public void BoolConditionlessQueries()
+	{
+		this.DoConditionlessQuery(q => q.Bool(b => b
+			.Must(mq => mq.Term(p => p.Name, _c.Name1), mq => mq.Term(p => p.Name, _c.Name2))
+			.MustNot(mq => mq.Terms(p => p.Name, _c.Name1), mq => mq.Terms(p => p.Name, _c.Name2))
+			.Should(mq => mq.Terms(p => p.Name, _c.Name1), mq => mq.Terms(p => p.Name, _c.Name2))
+		));
+	}
 
     [Test]
     public void Boosting()
@@ -238,61 +256,58 @@ namespace Nest.Tests.Unit.QueryJson.ConditionLess
       this.DoConditionlessQuery(q => q.Prefix(string.Empty, _c.Name1));
     }
 
-    //[Test]
-    //public void Ids()
-    //{
-    //  this.DoConditionlessQuery(q => q.Ids());
-    //}
+	[Test]
+	public void Ids()
+	{
+		this.DoConditionlessQuery(q => q.Ids(null));
+	}
 
-    //[Test]
-    //public void Ids()
-    //{
-    //  this.DoConditionlessQuery(q => q.Ids());
-    //}
+	[Test]
+	public void IdsArray()
+	{
+		this.DoConditionlessQuery(q => q.Ids(new string[] { string.Empty }));
+	}
 
-    //[Test]
-    //public void Ids()
-    //{
-    //  this.DoConditionlessQuery(q => q.Ids());
-    //}
+	[Test]
+	public void SpanTerm()
+	{
+		this.DoConditionlessQuery(q => q.SpanTerm(p=>p.Name, _c.Name1));
+	}
 
-    //[Test]
-    //public void SpanTerm()
-    //{
-    //  this.DoConditionlessQuery(q => q.SpanTerm());
-    //}
+	[Test]
+	public void SpanTermNoField()
+	{
+		this.DoConditionlessQuery(q => q.SpanTerm(string.Empty, _c.Name1));
+	}
 
-    //[Test]
-    //public void SpanTerm()
-    //{
-    //  this.DoConditionlessQuery(q => q.SpanTerm());
-    //}
+	[Test]
+	public void SpanFirst()
+	{
+		this.DoConditionlessQuery(q => q.SpanFirst(s=>s.Match(sq=>sq.SpanTerm(p=>p.Name, _c.Name1))));
+	}
 
-    //[Test]
-    //public void SpanFirst()
-    //{
-    //  this.DoConditionlessQuery(q => q.SpanFirst());
-    //}
+	[Test]
+	public void SpanNear()
+	{
+		this.DoConditionlessQuery(q => q.SpanNear(s=>s.Clauses()));
+		this.DoConditionlessQuery(q => q.SpanNear(s => s.Clauses(sq => sq.SpanTerm(p => p.Name, _c.Name1))));
+	}
 
-    //[Test]
-    //public void SpanNear()
-    //{
-    //  this.DoConditionlessQuery(q => q.SpanNear());
-    //}
+	[Test]
+	public void SpanOr()
+	{
+		this.DoConditionlessQuery(q => q.SpanOr(s=>s.Clauses()));
+		this.DoConditionlessQuery(q => q.SpanOr(s => s.Clauses(sq => sq.SpanTerm(p => p.Name, _c.Name1))));
+	}
 
-    //[Test]
-    //public void SpanOr()
-    //{
-    //  this.DoConditionlessQuery(q => q.SpanOr());
-    //}
-
-    //[Test]
-    //public void SpanNot()
-    //{
-    //  this.DoConditionlessQuery(q => q.SpanNot());
-    //}
-
-
-
+	[Test]
+	public void SpanNot()
+	{
+		this.DoConditionlessQuery(q => q.SpanNot(s=>s.Include(null)));
+		this.DoConditionlessQuery(q => q.SpanNot(s => s.Include(sq => sq.SpanTerm(p => p.Name, _c.Name1))));
+		this.DoConditionlessQuery(q => q.SpanNot(s => s.Exclude(null)));
+		this.DoConditionlessQuery(q => q.SpanNot(s => s.Exclude(sq => sq.SpanTerm(p => p.Name, _c.Name1))));
+		
+	}
   }
 }

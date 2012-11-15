@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-  public class ConstantScoreQueryDescriptor<T>  where T : class
+	public class ConstantScoreQueryDescriptor<T> where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
@@ -17,7 +17,20 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
 
-    public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		internal bool IsConditionless
+		{
+			get
+			{
+				if (this._Query == null && this._Filter == null)
+					return true;
+				else if (this._Filter == null && this._Query != null)
+					return this._Query.IsConditionlessQueryDescriptor;
+				//TODO FILTER
+				return false;
+			}
+		}
+
+		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			this._Filter = null;
@@ -28,7 +41,7 @@ namespace Nest
 			return this;
 		}
 
-    public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 			this._Query = null;

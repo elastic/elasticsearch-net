@@ -6,15 +6,24 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-  public class CustomBoostFactorQueryDescriptor<T>  where T : class
+	public class CustomBoostFactorQueryDescriptor<T> where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]
 		internal double? _BoostFactor { get; set; }
+		
+		internal bool IsConditionless
+		{
+			get
+			{
+				return this._Query == null || this._Query.IsConditionlessQueryDescriptor;
+			}
+		}
 
-    public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+
+		public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();

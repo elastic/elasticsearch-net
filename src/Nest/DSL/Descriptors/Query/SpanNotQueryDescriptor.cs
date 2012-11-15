@@ -14,22 +14,34 @@ namespace Nest
 		[JsonProperty(PropertyName = "exclude")]
 		internal SpanQueryDescriptor<T> _Exclude { get; set; }
 
-		public SpanNotQueryDescriptor<T> Include(Action<SpanQueryDescriptor<T>> selector)
+		internal bool IsConditionless
 		{
-			selector.ThrowIfNull("selector");
+			get
+			{
+				return this._Include == null && this._Exclude == null
+					|| (this._Include != null && this._Include.IsConditionless)
+					|| (this._Exclude != null && this._Exclude.IsConditionless);
+			}
+		}
+
+		public SpanNotQueryDescriptor<T> Include(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
+		{
+			if (selector == null)
+				return this;
 			var descriptors = new List<SpanQueryDescriptor<T>>();
 			var span = new SpanQueryDescriptor<T>();
-			selector(span);
-			this._Include = span;
+			var q = selector(span);
+			this._Include = q;
 			return this;
 		}
-		public SpanNotQueryDescriptor<T> Exclude(Action<SpanQueryDescriptor<T>> selector)
+		public SpanNotQueryDescriptor<T> Exclude(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
 		{
-			selector.ThrowIfNull("selector");
+			if (selector == null)
+				return this;
 			var descriptors = new List<SpanQueryDescriptor<T>>();
 			var span = new SpanQueryDescriptor<T>();
-			selector(span);
-			this._Exclude = span;
+			var q = selector(span);
+			this._Exclude = q;
 			return this;
 		}
 	}

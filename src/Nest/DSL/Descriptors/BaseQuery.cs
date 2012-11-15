@@ -14,7 +14,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "bool")]
 		internal BoolBaseQueryDescriptor BoolQueryDescriptor { get; set; }
 
-    internal bool IsConditionlessQueryDescriptor { get; set; }
+		internal bool IsConditionlessQueryDescriptor { get; set; }
 
 		public static BaseQuery operator &(BaseQuery lbq, BaseQuery rbq)
 		{
@@ -48,7 +48,7 @@ namespace Nest
 				if (lbq.BoolQueryDescriptor._HasOnlyMustNot())
 				{
 					bq._MustNotQueries = lbq.BoolQueryDescriptor._MustNotQueries;
-					bq._MustQueries = new [] { rbq };
+					bq._MustQueries = new[] { rbq };
 					return q;
 				}
 
@@ -77,7 +77,7 @@ namespace Nest
 			if (rbq.BoolQueryDescriptor.CanJoinMustNot())
 				bq._MustNotQueries = rbq.MergeMustNotQueries(lbq);
 			return q;
-			
+
 		}
 
 		public static BaseQuery operator |(BaseQuery lbq, BaseQuery rbq)
@@ -105,15 +105,15 @@ namespace Nest
 				if (lbq.BoolQueryDescriptor.CanJoinShould() && rbq.BoolQueryDescriptor.CanJoinShould())
 					bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
 				else
-					bq._ShouldQueries = new [] {lbq, rbq};
+					bq._ShouldQueries = new[] { lbq, rbq };
 			}
 
-				
-		
+
+
 			return q;
 		}
-		
-    public static BaseQuery operator !(BaseQuery lbq)
+
+		public static BaseQuery operator !(BaseQuery lbq)
 		{
 			var q = new BaseQuery();
 			var bq = new BoolBaseQueryDescriptor();
@@ -122,8 +122,8 @@ namespace Nest
 			q.BoolQueryDescriptor = bq;
 			return q;
 		}
-		
-    public static bool operator false(BaseQuery a)
+
+		public static bool operator false(BaseQuery a)
 		{
 			return false;
 		}
@@ -133,9 +133,9 @@ namespace Nest
 			return false;
 		}
 
-    private static void JoinShouldOnSide(BaseQuery lbq, BaseQuery rbq, BoolBaseQueryDescriptor bq)
-    {
-      bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
-    }
+		private static void JoinShouldOnSide(BaseQuery lbq, BaseQuery rbq, BoolBaseQueryDescriptor bq)
+		{
+			bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
+		}
 	}
 }

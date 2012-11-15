@@ -12,15 +12,26 @@ namespace Nest
 		[JsonProperty(PropertyName = "clauses")]
 		internal IEnumerable<SpanQueryDescriptor<T>> _SpanQueryDescriptors { get; set; }
 
-		public SpanOrQueryDescriptor<T> Clauses(params Action<SpanQueryDescriptor<T>>[] selectors)
+		internal bool IsConditionless
+		{
+			get
+			{
+				return !_SpanQueryDescriptors.HasAny() || _SpanQueryDescriptors.All(q => q.IsConditionless);
+			}
+		}
+
+		public SpanOrQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors)
 		{
 			selectors.ThrowIfNull("selector");
 			var descriptors = new List<SpanQueryDescriptor<T>>();
 			foreach (var selector in selectors)
 			{
 				var span = new SpanQueryDescriptor<T>();
-				selector(span);
-				descriptors.Add(span);
+				var q = selector(span);
+				if (q.IsConditionless)
+					continue;
+
+				descriptors.Add(q);
 			}
 			this._SpanQueryDescriptors = descriptors;
 			return this;

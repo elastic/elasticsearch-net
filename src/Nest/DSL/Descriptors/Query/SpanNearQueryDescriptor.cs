@@ -21,15 +21,27 @@ namespace Nest
 		[JsonProperty(PropertyName = "collect_payloads")]
 		internal bool? _CollectPayloads { get; set; }
 
-		public SpanNearQueryDescriptor<T> Clauses(params Action<SpanQueryDescriptor<T>>[] selectors)
+		internal bool IsConditionless
+		{
+			get
+			{
+				return !_SpanQueryDescriptors.HasAny() || _SpanQueryDescriptors.All(q => q.IsConditionless);
+			}
+		}
+
+		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors)
 		{
 			selectors.ThrowIfNull("selector");
 			var descriptors = new List<SpanQueryDescriptor<T>>();
 			foreach (var selector in selectors)
 			{
 				var x = new SpanQueryDescriptor<T>();
-				selector(x);
-				descriptors.Add(x);
+				var q = selector(x);
+				if (q.IsConditionless)
+					continue;
+
+				descriptors.Add(q);
+
 			}
 			this._SpanQueryDescriptors = descriptors;
 			return this;

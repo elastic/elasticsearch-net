@@ -16,6 +16,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "end")]
 		internal int? _End { get; set; }
 
+		internal bool IsConditionless
+		{
+			get
+			{
+				return this._SpanQueryDescriptor == null || _SpanQueryDescriptor.IsConditionless;
+			}
+		}
+
 		public SpanFirstQueryDescriptor<T> MatchTerm(Expression<Func<T, object>> fieldDescriptor
 			, string value
 			, double? Boost = null)

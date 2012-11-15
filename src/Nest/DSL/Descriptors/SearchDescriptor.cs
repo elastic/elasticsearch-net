@@ -772,6 +772,8 @@ namespace Nest
 			query.ThrowIfNull("query");
 			var q = new QueryDescriptor<T>();
 			var bq = query(q);
+			if (bq.IsConditionlessQueryDescriptor)
+				return this;
 			this._Query = bq;
 			return this;
 		}
@@ -781,6 +783,8 @@ namespace Nest
 		public SearchDescriptor<T> Query(BaseQuery query)
 		{
 			query.ThrowIfNull("query");
+			if (query.IsConditionlessQueryDescriptor)
+				return this;
 			this._Query = query;
 			return this;
 		}

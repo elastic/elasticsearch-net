@@ -31,10 +31,10 @@ namespace Nest.Tests.Unit
 		{
 			var type = method.DeclaringType;
 			var @namespace = method.DeclaringType.Namespace;
-      var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
+			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
 
 			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
-      file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
+			file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
 
 			var json = TestElasticClient.Serialize(o);
 			var expected = File.ReadAllText(file);
