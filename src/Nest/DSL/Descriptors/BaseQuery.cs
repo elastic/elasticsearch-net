@@ -14,6 +14,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "bool")]
 		internal BoolBaseQueryDescriptor BoolQueryDescriptor { get; set; }
 
+    internal bool IsConditionlessQueryDescriptor { get; set; }
+
 		public static BaseQuery operator &(BaseQuery lbq, BaseQuery rbq)
 		{
 			var q = new BaseQuery();

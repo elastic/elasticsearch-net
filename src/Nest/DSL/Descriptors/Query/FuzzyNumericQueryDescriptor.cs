@@ -17,7 +17,15 @@ namespace Nest
 		[JsonProperty(PropertyName = "min_similarity")]
 		internal double? _MinSimilarity { get; set; }
 		[JsonProperty(PropertyName = "value")]
-		internal double _Value { get; set; }
+		internal double? _Value { get; set; }
+
+    internal bool IsConditionless
+    {
+      get
+      {
+        return this._Field.IsNullOrEmpty() || this._Value == null;
+      }
+    }
 
 		public FuzzyNumericQueryDescriptor<T> OnField(string field)
 		{
@@ -44,5 +52,10 @@ namespace Nest
 			this._Value = value;
 			return this;
 		}
+    public FuzzyNumericQueryDescriptor<T> Value(int? value)
+    {
+      this._Value = value;
+      return this;
+    }
 	}
 }

@@ -114,7 +114,7 @@
     <Compile Include="Mapping\Attribute\NestedMappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVisitorTests.cs" />
-    <Compile Include="QueryJson\ConditionLess\InsideBoolCallsTests.cs" />
+    <Compile Include="QueryJson\ConditionLess\ConditionLessTests.cs" />
     <Compile Include="QueryJson\QueriesInQueries\QueriesInQueriesTests.cs" />
     <Compile Include="QueryTests\BoolQueryJson.cs" />
     <Compile Include="QueryTests\BoostingQueryJson.cs" />
@@ -352,7 +352,7 @@
     <None Include="QueryJson\Bool\StaticBoolTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="QueryJson\ConditionLess\NullTermShouldBeMatchAll.json" />
+    <None Include="QueryJson\ConditionLess\MatchAll.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideMust.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideMustNot.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideShould.json" />

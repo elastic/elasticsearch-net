@@ -21,6 +21,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "value")]
 		internal string _Value { get; set; }
 
+    internal bool IsConditionless
+    {
+      get
+      {
+        return this._Field.IsNullOrEmpty() || this._Value.IsNullOrEmpty();
+      }
+    }
+
 		public FuzzyQueryDescriptor<T> OnField(string field)
 		{
 			this._Field = field;

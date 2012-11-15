@@ -27,6 +27,14 @@ namespace Nest
 		internal string _Name { get; set; }
 
 		internal string _Field { get; set; }
+    internal bool IsConditionless
+    {
+      get
+      {
+        return this._Field.IsNullOrEmpty();
+      }
+    }
+
 
 		public RangeQueryDescriptor<T> OnField(string field)
 		{

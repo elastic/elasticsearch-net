@@ -19,6 +19,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "value")]
 		internal DateTime? _Value { get; set; }
 
+    internal bool IsConditionless
+    {
+      get
+      {
+        return this._Field.IsNullOrEmpty() || this._Value == null;
+      }
+    }
+    
 		public FuzzyDateQueryDescriptor<T> OnField(string field)
 		{
 			this._Field = field;
@@ -44,5 +52,10 @@ namespace Nest
 			this._Value = value;
 			return this;
 		}
+    public FuzzyDateQueryDescriptor<T> Value(DateTime? value)
+    {
+      this._Value = value;
+      return this;
+    }
 	}
 }

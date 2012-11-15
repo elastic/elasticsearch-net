@@ -50,6 +50,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "tie_breaker")]
 		internal double? _TieBreaker { get; set; }
 
+    internal bool IsConditionless
+    {
+      get
+      {
+        return this._QueryString.IsNullOrEmpty();
+      }
+    }
+
 
 		public QueryStringDescriptor<T> OnField(string field)
 		{

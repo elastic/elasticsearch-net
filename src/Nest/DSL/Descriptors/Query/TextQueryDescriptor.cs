@@ -36,6 +36,15 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Operator? _Operator { get; set; }
 
+    internal bool IsConditionless
+    {
+      get
+      {
+        return this._Field.IsNullOrEmpty() || this._Query.IsNullOrEmpty();
+      }
+    }
+
+
 		internal string _Field { get; set; }
 		public TextQueryDescriptor<T> OnField(string field)
 		{
@@ -50,7 +59,6 @@ namespace Nest
 
 		public TextQueryDescriptor<T> QueryString(string queryString)
 		{
-			queryString.ThrowIfNullOrEmpty("queryString");
 			this._Query = queryString;
 			return this;
 		}

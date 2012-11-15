@@ -16,18 +16,30 @@ namespace Nest
 		internal NestedScore? _Score { get; set; }
 
 		[JsonProperty("query")]
-		internal object _QueryDescriptor { get; set; }
+    internal object _QueryDescriptor { get; set; }
 
 		[JsonProperty("no_match_query")]
-		internal object _NoMatchQueryDescriptor { get; set; }
+    internal object _NoMatchQueryDescriptor { get; set; }
 
 		[JsonProperty("indices")]
 		internal IEnumerable<string> _Indices { get; set; }
+
+    internal bool IsConditionless
+    {
+      get
+      {
+        return (this._NoMatchQueryDescriptor == null && this._QueryDescriptor == null);
+      }
+    }
+
 
     public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
       var qd = new QueryDescriptor<T>();
       var q = querySelector(qd);
+      if (q.IsConditionlessQueryDescriptor)
+        return this;
+
 			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
       
 			this._QueryDescriptor = d.Descriptor;
@@ -37,6 +49,9 @@ namespace Nest
 		{
       var qd = new QueryDescriptor<K>();
       var q = querySelector(qd);
+      if (q.IsConditionlessQueryDescriptor)
+        return this;
+      
       var d = new RawOrQueryDescriptor<K> { Descriptor = q };
 
       this._QueryDescriptor = d.Descriptor;
@@ -52,6 +67,9 @@ namespace Nest
 		{
       var qd = new QueryDescriptor<T>();
       var q = querySelector(qd);
+      if (q.IsConditionlessQueryDescriptor)
+        return this;
+
       var d = new RawOrQueryDescriptor<T> { Descriptor = q };
 
       this._NoMatchQueryDescriptor = d.Descriptor;
@@ -61,6 +79,9 @@ namespace Nest
 		{
       var qd = new QueryDescriptor<K>();
       var q = querySelector(qd);
+      if (q.IsConditionlessQueryDescriptor)
+        return this;
+
       var d = new RawOrQueryDescriptor<K> { Descriptor = q };
 
       this._NoMatchQueryDescriptor = d.Descriptor;

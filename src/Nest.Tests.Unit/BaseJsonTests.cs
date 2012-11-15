@@ -27,12 +27,15 @@ namespace Nest.Tests.Unit
 			this._client = new ElasticClient(this._settings);
 		}
 
-		protected void JsonEquals(object o, MethodBase method)
+		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
 			var type = method.DeclaringType;
 			var @namespace = method.DeclaringType.Namespace;
-			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
-			var file = Path.Combine(folder, method.Name + ".json");
+      var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
+
+			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
+      file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
+
 			var json = TestElasticClient.Serialize(o);
 			var expected = File.ReadAllText(file);
 			Assert.True(json.JsonEquals(expected), json);

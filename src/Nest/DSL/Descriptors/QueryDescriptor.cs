@@ -80,7 +80,14 @@ namespace Nest
 		internal NestedQueryDescriptor<T> NestedQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "indices")]
 		internal IndicesQueryDescriptor<T> IndicesQueryDescriptor { get; set; }
-		
+
+    
+
+    internal static QueryDescriptor<T> CreateConditionlessQueryDescriptor()
+    {
+      return new QueryDescriptor<T> { IsConditionlessQueryDescriptor = true };
+    }
+
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.
 		/// </summary>
@@ -88,6 +95,9 @@ namespace Nest
 		{
 			var query = new QueryStringDescriptor<T>();
 			selector(query);
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.QueryStringDescriptor = query;
 			return new QueryDescriptor<T> { QueryStringDescriptor = query };
 		}
@@ -116,8 +126,10 @@ namespace Nest
 		{
 			var query = new TermsQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for terms query");
+      
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.TermsQueryDescriptor = new Dictionary<string, object>() 
 			{
 				{ query._Field, query._Terms}
@@ -141,6 +153,10 @@ namespace Nest
 			selector(query);
 			if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for fuzzy query");
+
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
@@ -156,6 +172,10 @@ namespace Nest
 			selector(query);
 			if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for fuzzy query");
+      
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
@@ -172,6 +192,10 @@ namespace Nest
 			selector(query);
 			if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for fuzzy query");
+
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
@@ -189,13 +213,18 @@ namespace Nest
 			selector(query);
 			if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for text query");
+
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.TextQueryDescriptor = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
 			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
 		}
-		/// <summary>
+	
+    /// <summary>
 		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text. 
 		/// </summary>
 		public BaseQuery TextPhrase(Action<TextPhraseQueryDescriptor<T>> selector)
@@ -204,13 +233,18 @@ namespace Nest
 			selector(query);
 			if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for text_phrase query");
+
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.TextQueryDescriptor = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
 			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
 		}
-		/// <summary>
+		
+    /// <summary>
 		/// The text_phrase_prefix is the same as text_phrase, expect it allows for prefix matches on the last term 
 		/// in the text
 		/// </summary>
@@ -218,9 +252,14 @@ namespace Nest
 		{
 			var query = new TextPhrasePrefixQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
+			
+      if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for text_phrase query");
-			this.TextQueryDescriptor = new Dictionary<string, object>() 
+
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
+      this.TextQueryDescriptor = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -236,9 +275,14 @@ namespace Nest
 		{
 			var query = new NestedQueryDescriptor<T>();
 			selector(query);
+
+      if (query._QueryDescriptor.IsConditionlessQueryDescriptor)
+        return CreateConditionlessQueryDescriptor();
+
 			this.NestedQueryDescriptor = query;
 			return new QueryDescriptor<T> { NestedQueryDescriptor = this.NestedQueryDescriptor };
 		}
+
 		/// <summary>
 		/// The indices query can be used when executed across multiple indices, allowing to have a query that executes
 		/// only when executed on an index that matches a specific list of indices, and another query that executes 
@@ -248,6 +292,10 @@ namespace Nest
 		{
 			var query = new IndicesQueryDescriptor<T>();
 			selector(query);
+
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			this.IndicesQueryDescriptor = query;
 			return new QueryDescriptor<T> { IndicesQueryDescriptor = this.IndicesQueryDescriptor };
 		}
@@ -260,6 +308,10 @@ namespace Nest
 		{
 			var query = new RangeQueryDescriptor<T>();
 			selector(query);
+
+      if (query.IsConditionless)
+        return CreateConditionlessQueryDescriptor();
+
 			if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for range query");
 			this.RangeQueryDescriptor = new Dictionary<string, object>() 
@@ -421,6 +473,8 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
+      if (value.IsNullOrEmpty())
+        return this;
 			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Term(field, value, Boost);
 		}
@@ -430,6 +484,9 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Term(string field, string value, double? Boost = null)
 		{
+      if (value.IsNullOrEmpty())
+        return this;
+
 			var term = new Term() { Field = field, Value = value };
 			if (Boost.HasValue)
 				term.Boost = Boost;
