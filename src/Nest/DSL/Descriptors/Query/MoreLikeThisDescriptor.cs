@@ -9,7 +9,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class MoreLikeThisDescriptor<T>  where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class MoreLikeThisDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "fields")]
 		internal IEnumerable<string> _Fields { get; set; }
@@ -39,7 +40,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "analyzer")]
 		internal string _Analyzer { get; set; }
 
-		internal bool IsConditionless
+		public bool IsConditionless
 		{
 			get
 			{

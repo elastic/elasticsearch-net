@@ -107,10 +107,8 @@ namespace Nest
 		}
 	}
 	
-
-
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor where T : class
+	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
 	{
 		[JsonProperty("minimum_number_should_match")]
 		internal int? _MinimumNumberShouldMatches { get; set; }
@@ -118,7 +116,7 @@ namespace Nest
 		[JsonProperty("boost")]
 		internal double? _Boost { get; set; }
 
-		internal bool IsConditionless
+		public bool IsConditionless
 		{
 			get
 			{
@@ -161,7 +159,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustQueries = descriptors;
+			this._MustQueries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		/// <summary>
@@ -180,7 +178,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustNotQueries = descriptors;
+			this._MustNotQueries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		/// <summary>
@@ -199,7 +197,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			this._ShouldQueries = descriptors;
+			this._ShouldQueries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 	}

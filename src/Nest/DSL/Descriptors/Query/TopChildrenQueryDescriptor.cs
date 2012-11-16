@@ -9,9 +9,17 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class TopChildrenQueryDescriptor<T>  where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class TopChildrenQueryDescriptor<T> : IQuery where T : class
 	{
+		public bool IsConditionless
+		{
+			get
+			{
+				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionlessQueryDescriptor;
+			}
+		}
+
 		public TopChildrenQueryDescriptor()
 		{
 			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
@@ -20,7 +28,7 @@ namespace Nest
 		internal string _Type { get; set; }
 
 		[JsonProperty("_scope")]
-		internal string _Scope { get; set;}
+		internal string _Scope { get; set; }
 
 		[JsonProperty("score"), JsonConverter(typeof(StringEnumConverter))]
 		internal TopChildrenScore? _Score { get; set; }
@@ -32,9 +40,9 @@ namespace Nest
 		internal int? _IncrementalFactor { get; set; }
 
 		[JsonProperty("query")]
-		internal BaseQuery _QueryDescriptor { get; set;}
+		internal BaseQuery _QueryDescriptor { get; set; }
 
-    [JsonProperty(PropertyName = "_cache")]
+		[JsonProperty(PropertyName = "_cache")]
 		internal bool? _Cache { get; set; }
 
 		[JsonProperty(PropertyName = "_name")]
@@ -43,7 +51,7 @@ namespace Nest
 		public TopChildrenQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-      this._QueryDescriptor = querySelector(q);
+			this._QueryDescriptor = querySelector(q);
 			return this;
 		}
 		public TopChildrenQueryDescriptor<T> Scope(string scope)
@@ -53,7 +61,7 @@ namespace Nest
 		}
 		public TopChildrenQueryDescriptor<T> Factor(int factor)
 		{
-			this._Factor= factor;
+			this._Factor = factor;
 			return this;
 		}
 		public TopChildrenQueryDescriptor<T> Score(TopChildrenScore score)

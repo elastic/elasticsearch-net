@@ -18,10 +18,18 @@ namespace Nest
 
 		public static BaseQuery operator &(BaseQuery lbq, BaseQuery rbq)
 		{
+			if (lbq.IsConditionlessQueryDescriptor && rbq.IsConditionlessQueryDescriptor)
+				return new BaseQuery() { IsConditionlessQueryDescriptor = true };
+			else if (lbq.IsConditionlessQueryDescriptor)
+				return rbq;
+			else if (rbq.IsConditionlessQueryDescriptor)
+				return lbq;
+
 			var q = new BaseQuery();
 			var bq = new BoolBaseQueryDescriptor();
 			q.BoolQueryDescriptor = bq;
 
+			
 			if (lbq.BoolQueryDescriptor == null && rbq.BoolQueryDescriptor == null)
 			{
 				bq._MustQueries = new[] { lbq, rbq };
@@ -82,6 +90,13 @@ namespace Nest
 
 		public static BaseQuery operator |(BaseQuery lbq, BaseQuery rbq)
 		{
+			if (lbq.IsConditionlessQueryDescriptor && rbq.IsConditionlessQueryDescriptor)
+				return new BaseQuery() { IsConditionlessQueryDescriptor = true };
+			else if (lbq.IsConditionlessQueryDescriptor)
+				return rbq;
+			else if (rbq.IsConditionlessQueryDescriptor)
+				return lbq;
+
 			var q = new BaseQuery();
 			var bq = new BoolBaseQueryDescriptor();
 			bq._ShouldQueries = new[] { lbq, rbq };
@@ -115,6 +130,9 @@ namespace Nest
 
 		public static BaseQuery operator !(BaseQuery lbq)
 		{
+			if (lbq.IsConditionlessQueryDescriptor)
+				return new BaseQuery { IsConditionlessQueryDescriptor = true };
+
 			var q = new BaseQuery();
 			var bq = new BoolBaseQueryDescriptor();
 			bq._MustNotQueries = new[] { lbq };

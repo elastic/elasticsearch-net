@@ -7,12 +7,13 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class SpanOrQueryDescriptor<T>  : ISpanQuery where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanOrQueryDescriptor<T> : ISpanQuery, IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		internal IEnumerable<SpanQueryDescriptor<T>> _SpanQueryDescriptors { get; set; }
 
-		internal bool IsConditionless
+		public bool IsConditionless
 		{
 			get
 			{
@@ -33,7 +34,7 @@ namespace Nest
 
 				descriptors.Add(q);
 			}
-			this._SpanQueryDescriptors = descriptors;
+			this._SpanQueryDescriptors = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 	}

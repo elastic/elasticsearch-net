@@ -6,15 +6,16 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class CustomBoostFactorQueryDescriptor<T> where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class CustomBoostFactorQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost_factor")]
 		internal double? _BoostFactor { get; set; }
-		
-		internal bool IsConditionless
+
+		public bool IsConditionless
 		{
 			get
 			{

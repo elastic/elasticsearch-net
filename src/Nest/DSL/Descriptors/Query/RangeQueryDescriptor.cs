@@ -9,7 +9,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RangeQueryDescriptor<T> where T : class
+	public class RangeQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty("from")]
 		internal object _From { get; set; }
@@ -27,7 +27,7 @@ namespace Nest
 		internal string _Name { get; set; }
 
 		internal string _Field { get; set; }
-		internal bool IsConditionless
+		public bool IsConditionless
 		{
 			get
 			{

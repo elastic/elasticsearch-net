@@ -115,6 +115,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVisitorTests.cs" />
     <Compile Include="QueryJson\ConditionLess\ConditionLessTests.cs" />
+    <Compile Include="QueryJson\ConditionlessBool\ConditionLessBooleanTests.cs" />
+    <Compile Include="QueryJson\ConditionLess\SemiConditionLessTests.cs" />
     <Compile Include="QueryJson\QueriesInQueries\QueriesInQueriesTests.cs" />
     <Compile Include="QueryTests\BoolQueryJson.cs" />
     <Compile Include="QueryTests\BoostingQueryJson.cs" />
@@ -352,6 +354,15 @@
     <None Include="QueryJson\Bool\StaticBoolTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="QueryJson\ConditionlessBool\Combination1.json" />
+    <None Include="QueryJson\ConditionlessBool\Combination2.json" />
+    <None Include="QueryJson\ConditionlessBool\Combination3.json" />
+    <None Include="QueryJson\ConditionlessBool\MyTermsNot.json" />
+    <None Include="QueryJson\ConditionlessBool\MyTermsOr.json" />
+    <None Include="QueryJson\ConditionlessBool\MyTermsAnd.json" />
+    <None Include="QueryJson\ConditionlessBool\MyTermNot.json" />
+    <None Include="QueryJson\ConditionlessBool\MyTerm.json" />
+    <None Include="QueryJson\ConditionlessBool\MatchAll.json" />
     <None Include="QueryJson\ConditionLess\MatchAll.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideMust.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideMustNot.json" />

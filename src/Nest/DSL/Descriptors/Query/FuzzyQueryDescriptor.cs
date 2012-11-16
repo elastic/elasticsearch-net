@@ -9,11 +9,12 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
-	public class FuzzyQueryDescriptor<T>  where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FuzzyQueryDescriptor<T> : IQuery where T : class
 	{
 		internal string _Field { get; set; }
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set;}
+		internal double? _Boost { get; set; }
 		[JsonProperty(PropertyName = "min_similarity")]
 		internal double? _MinSimilarity { get; set; }
 		[JsonProperty(PropertyName = "prefix_length")]
@@ -21,13 +22,13 @@ namespace Nest
 		[JsonProperty(PropertyName = "value")]
 		internal string _Value { get; set; }
 
-    internal bool IsConditionless
-    {
-      get
-      {
-        return this._Field.IsNullOrEmpty() || this._Value.IsNullOrEmpty();
-      }
-    }
+		public bool IsConditionless
+		{
+			get
+			{
+				return this._Field.IsNullOrEmpty() || this._Value.IsNullOrEmpty();
+			}
+		}
 
 		public FuzzyQueryDescriptor<T> OnField(string field)
 		{

@@ -8,7 +8,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class SpanFirstQueryDescriptor<T> : ISpanQuery where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanFirstQueryDescriptor<T> : ISpanQuery, IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "match")]
 		internal SpanQueryDescriptor<T> _SpanQueryDescriptor { get; set; }
@@ -16,7 +17,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "end")]
 		internal int? _End { get; set; }
 
-		internal bool IsConditionless
+		public bool IsConditionless
 		{
 			get
 			{

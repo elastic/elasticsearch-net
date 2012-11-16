@@ -13,12 +13,12 @@ namespace Nest
 		public string Raw { get; set; }
 		public BaseQuery Descriptor { get; set; }
 
-    internal bool IsConditionless
-    {
-      get
-      {
-        return this.Raw.IsNullOrEmpty() && Descriptor.IsConditionlessQueryDescriptor;
-      }
-    }
+		public bool IsConditionless
+		{
+			get
+			{
+				return this.Raw.IsNullOrEmpty() && Descriptor.IsConditionlessQueryDescriptor;
+			}
+		}
 	}
 }

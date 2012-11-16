@@ -81,11 +81,18 @@ namespace Nest
 		[JsonProperty(PropertyName = "indices")]
 		internal IndicesQueryDescriptor<T> IndicesQueryDescriptor { get; set; }
 
+		internal bool _Strict { get; set; }
 
 
-		internal static QueryDescriptor<T> CreateConditionlessQueryDescriptor()
+		internal QueryDescriptor<T> CreateConditionlessQueryDescriptor()
 		{
-			return new QueryDescriptor<T> { IsConditionlessQueryDescriptor = true };
+			return new QueryDescriptor<T> { IsConditionlessQueryDescriptor = !this._Strict };
+		}
+
+		public QueryDescriptor<T> Strict(bool strict = true)
+		{
+			this._Strict = strict;
+			return this;
 		}
 
 		/// <summary>
@@ -356,6 +363,9 @@ namespace Nest
 		{
 			var query = new HasChildQueryDescriptor<K>();
 			selector(query);
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor();
+
 			this.HasChildQueryDescriptor = query;
 			return new QueryDescriptor<T> { HasChildQueryDescriptor = this.HasChildQueryDescriptor };
 		}
@@ -369,6 +379,9 @@ namespace Nest
 		{
 			var query = new TopChildrenQueryDescriptor<K>();
 			selector(query);
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor();
+
 			this.TopChildrenQueryDescriptor = query;
 			return new QueryDescriptor<T> { TopChildrenQueryDescriptor = this.TopChildrenQueryDescriptor };
 		}
@@ -507,8 +520,6 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
-			if (value.IsNullOrEmpty())
-				return CreateConditionlessQueryDescriptor();
 			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Term(field, value, Boost);
 		}
@@ -518,10 +529,9 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Term(string field, string value, double? Boost = null)
 		{
-			if (field.IsNullOrEmpty() || value.IsNullOrEmpty())
-				return CreateConditionlessQueryDescriptor();
-
 			var term = new Term() { Field = field, Value = value };
+			if (term.IsConditionless)
+				return CreateConditionlessQueryDescriptor();
 			if (Boost.HasValue)
 				term.Boost = Boost;
 			this.TermQuery = term;
@@ -551,10 +561,10 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Wildcard(string field, string value, double? Boost = null)
 		{
-			if (field.IsNullOrEmpty() || value.IsNullOrEmpty())
+			var wildcard = new Wildcard() { Field = field, Value = value };
+			if (wildcard.IsConditionless)
 				return CreateConditionlessQueryDescriptor();
 
-			var wildcard = new Wildcard() { Field = field, Value = value };
 			if (Boost.HasValue)
 				wildcard.Boost = Boost;
 			this.WildcardQuery = wildcard;
@@ -579,10 +589,10 @@ namespace Nest
 		/// </summary>	
 		public BaseQuery Prefix(string field, string value, double? Boost = null)
 		{
-			if (field.IsNullOrEmpty() || value.IsNullOrEmpty())
+			var prefix = new Prefix() { Field = field, Value = value };
+			if (prefix.IsConditionless)
 				return CreateConditionlessQueryDescriptor();
 
-			var prefix = new Prefix() { Field = field, Value = value };
 			if (Boost.HasValue)
 				prefix.Boost = Boost;
 			this.PrefixQuery = prefix;
@@ -640,10 +650,10 @@ namespace Nest
 		/// </summary>
 		public BaseQuery SpanTerm(string field, string value, double? Boost = null)
 		{
-			if (field.IsNullOrEmpty() || value.IsNullOrEmpty())
+			var spanTerm = new SpanTerm() { Field = field, Value = value };
+			if (spanTerm.IsConditionless)
 				return CreateConditionlessQueryDescriptor();
 
-			var spanTerm = new SpanTerm() { Field = field, Value = value };
 			if (Boost.HasValue)
 				spanTerm.Boost = Boost;
 			this.SpanTermQuery = spanTerm;

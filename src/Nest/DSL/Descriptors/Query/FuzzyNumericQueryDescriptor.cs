@@ -9,23 +9,25 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
 namespace Nest
 {
-  public class FuzzyNumericQueryDescriptor<T>  where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FuzzyNumericQueryDescriptor<T> : IQuery where T : class
 	{
 		internal string _Field { get; set; }
 		[JsonProperty(PropertyName = "boost")]
-		internal double? _Boost { get; set;}
+		internal double? _Boost { get; set; }
 		[JsonProperty(PropertyName = "min_similarity")]
 		internal double? _MinSimilarity { get; set; }
 		[JsonProperty(PropertyName = "value")]
 		internal double? _Value { get; set; }
 
-    internal bool IsConditionless
-    {
-      get
-      {
-        return this._Field.IsNullOrEmpty() || this._Value == null;
-      }
-    }
+
+		public bool IsConditionless
+		{
+			get
+			{
+				return this._Field.IsNullOrEmpty() || this._Value == null;
+			}
+		}
 
 		public FuzzyNumericQueryDescriptor<T> OnField(string field)
 		{
@@ -34,7 +36,7 @@ namespace Nest
 		}
 		public FuzzyNumericQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-      var fieldName = new PropertyNameResolver().Resolve(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 		public FuzzyNumericQueryDescriptor<T> Boost(double boost)
@@ -52,10 +54,10 @@ namespace Nest
 			this._Value = value;
 			return this;
 		}
-    public FuzzyNumericQueryDescriptor<T> Value(int? value)
-    {
-      this._Value = value;
-      return this;
-    }
+		public FuzzyNumericQueryDescriptor<T> Value(int? value)
+		{
+			this._Value = value;
+			return this;
+		}
 	}
 }

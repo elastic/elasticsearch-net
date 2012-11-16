@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class FilteredQueryDescriptor<T> where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class FilteredQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
@@ -14,7 +15,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "filter")]
 		internal BaseFilter _Filter { get; set; }
 
-		internal bool IsConditionless
+		public bool IsConditionless
 		{
 			get
 			{

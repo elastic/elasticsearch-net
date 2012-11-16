@@ -8,8 +8,8 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(TermConverter))]
-	public class Wildcard : Term
-	{
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class Wildcard : Term, IQuery {
 		public Wildcard()
 		{
 		

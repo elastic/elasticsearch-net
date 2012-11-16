@@ -29,6 +29,11 @@ namespace Nest.Tests.Unit
 
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
+			var json = TestElasticClient.Serialize(o);
+			this.JsonEquals(json, method, fileName);
+		}
+		protected void JsonEquals(string json, MethodBase method, string fileName = null)
+		{
 			var type = method.DeclaringType;
 			var @namespace = method.DeclaringType.Namespace;
 			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
@@ -36,18 +41,27 @@ namespace Nest.Tests.Unit
 			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
 			file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
 
-			var json = TestElasticClient.Serialize(o);
+
 			var expected = File.ReadAllText(file);
 			Assert.True(json.JsonEquals(expected), json);
 		}
-		protected void JsonEquals(string json, MethodBase method)
+		protected void JsonNotEquals(object o, MethodBase method, string fileName = null)
+		{
+			var json = TestElasticClient.Serialize(o);
+			this.JsonNotEquals(json, method, fileName);
+		}
+		protected void JsonNotEquals(string json, MethodBase method, string fileName = null)
 		{
 			var type = method.DeclaringType;
 			var @namespace = method.DeclaringType.Namespace;
 			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
-			var file = Path.Combine(folder, method.Name + ".json");
+
+			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
+			file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
+
+
 			var expected = File.ReadAllText(file);
-			Assert.True(json.JsonEquals(expected), json);
+			Assert.False(json.JsonEquals(expected), json);
 		}
 	}
 }

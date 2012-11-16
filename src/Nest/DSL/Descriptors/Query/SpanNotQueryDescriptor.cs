@@ -7,14 +7,15 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class SpanNotQueryDescriptor<T>  : ISpanQuery where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanNotQueryDescriptor<T> : ISpanQuery, IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "include")]
 		internal SpanQueryDescriptor<T> _Include { get; set; }
 		[JsonProperty(PropertyName = "exclude")]
 		internal SpanQueryDescriptor<T> _Exclude { get; set; }
 
-		internal bool IsConditionless
+		public bool IsConditionless
 		{
 			get
 			{
