@@ -29,7 +29,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "analyzer")]
 		internal string _Analyzer { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

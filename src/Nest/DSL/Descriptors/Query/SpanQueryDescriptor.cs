@@ -27,7 +27,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "span_not")]
 		internal SpanNotQueryDescriptor<T> SpanNotQueryDescriptor { get; set; }
 
-		public bool IsConditionless { get; set; }
+		internal bool IsConditionless { get; set; }
 
 		internal static SpanQueryDescriptor<T> CreateConditionlessSpanQueryDescriptor()
 		{

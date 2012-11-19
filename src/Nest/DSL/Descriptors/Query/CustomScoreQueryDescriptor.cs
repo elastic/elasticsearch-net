@@ -18,7 +18,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

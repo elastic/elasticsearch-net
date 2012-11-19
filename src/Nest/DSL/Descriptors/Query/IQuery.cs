@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public interface IQuery
+	internal interface IQuery
 	{
-		bool IsConditionless { get; }
+		//bool IsConditionless { get; }
 	}
 }

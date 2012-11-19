@@ -117,6 +117,8 @@
     <Compile Include="QueryJson\ConditionLess\ConditionLessTests.cs" />
     <Compile Include="QueryJson\ConditionlessBool\ConditionLessBooleanTests.cs" />
     <Compile Include="QueryJson\ConditionLess\SemiConditionLessTests.cs" />
+    <Compile Include="QueryJson\ConditionLessStrict\ConditionLessStrictTests.cs" />
+    <Compile Include="QueryJson\ConditionLessStrict\SemiStrictBoolTests.cs" />
     <Compile Include="QueryJson\QueriesInQueries\QueriesInQueriesTests.cs" />
     <Compile Include="QueryTests\BoolQueryJson.cs" />
     <Compile Include="QueryTests\BoostingQueryJson.cs" />
@@ -364,6 +366,7 @@
     <None Include="QueryJson\ConditionlessBool\MyTerm.json" />
     <None Include="QueryJson\ConditionlessBool\MatchAll.json" />
     <None Include="QueryJson\ConditionLess\MatchAll.json" />
+    <None Include="QueryJson\ConditionLessStrict\MatchAll.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideMust.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideMustNot.json" />
     <None Include="QueryJson\InsideBoolCalls\InsideShould.json" />

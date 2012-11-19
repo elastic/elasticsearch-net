@@ -17,7 +17,7 @@ namespace Nest
 		internal string Value { get; set; }
 		internal double? Boost { get; set; }
 
-		public bool IsConditionless { get { return this.Value.IsNullOrEmpty() || this.Field.IsNullOrEmpty(); } }
+		internal bool IsConditionless { get { return this.Value.IsNullOrEmpty() || this.Field.IsNullOrEmpty(); } }
 
 		public Term()
 		{

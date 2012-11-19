@@ -15,7 +15,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "exclude")]
 		internal SpanQueryDescriptor<T> _Exclude { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

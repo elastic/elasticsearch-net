@@ -16,7 +16,7 @@ namespace Nest
 		internal int? _MinMatch { get; set; }
 		internal IEnumerable<string> _Terms { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

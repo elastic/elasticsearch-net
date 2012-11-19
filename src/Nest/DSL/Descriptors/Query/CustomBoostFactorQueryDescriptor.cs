@@ -15,7 +15,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost_factor")]
 		internal double? _BoostFactor { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

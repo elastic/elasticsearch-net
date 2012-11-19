@@ -13,7 +13,7 @@ namespace Nest
 		public string Raw { get; set; }
 		public BaseQuery Descriptor { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

@@ -13,7 +13,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "clauses")]
 		internal IEnumerable<SpanQueryDescriptor<T>> _SpanQueryDescriptors { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

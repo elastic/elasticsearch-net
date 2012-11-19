@@ -17,7 +17,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "end")]
 		internal int? _End { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

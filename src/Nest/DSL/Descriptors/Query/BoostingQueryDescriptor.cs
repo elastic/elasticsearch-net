@@ -19,7 +19,7 @@ namespace Nest
 		[JsonProperty("negative_boost")]
 		internal double? _NegativeBoost { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

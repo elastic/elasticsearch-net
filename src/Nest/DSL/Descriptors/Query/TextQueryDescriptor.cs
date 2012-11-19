@@ -37,7 +37,7 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Operator? _Operator { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

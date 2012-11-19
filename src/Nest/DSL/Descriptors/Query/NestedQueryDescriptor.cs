@@ -24,7 +24,7 @@ namespace Nest
 		[JsonProperty("_scope")]
 		internal string _Scope { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

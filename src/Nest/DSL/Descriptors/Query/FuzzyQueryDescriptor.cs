@@ -22,7 +22,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "value")]
 		internal string _Value { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

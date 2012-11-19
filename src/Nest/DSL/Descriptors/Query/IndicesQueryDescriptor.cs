@@ -24,7 +24,7 @@ namespace Nest
 		[JsonProperty("indices")]
 		internal IEnumerable<string> _Indices { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

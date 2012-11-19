@@ -21,7 +21,7 @@ namespace Nest
 		internal double? _Value { get; set; }
 
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

@@ -22,7 +22,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "collect_payloads")]
 		internal bool? _CollectPayloads { get; set; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

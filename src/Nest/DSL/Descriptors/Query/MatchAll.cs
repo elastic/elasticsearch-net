@@ -14,7 +14,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "norm_field")]
 		public string NormField { get; internal set; }
 
-		public bool IsConditionless { get { return false; } }
+		internal bool IsConditionless { get { return false; } }
 
 		public MatchAll() {
 			

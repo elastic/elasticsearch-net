@@ -27,7 +27,7 @@ namespace Nest
 		internal string _Name { get; set; }
 
 		internal string _Field { get; set; }
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{

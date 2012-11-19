@@ -22,7 +22,7 @@ namespace Nest
 		public bool IsStrict { get; private set; }
 		public DismaxQueryDescriptor<T> Strict(bool strict = true) { this.IsStrict = strict; return this; }
 
-		public bool IsConditionless
+		internal bool IsConditionless
 		{
 			get
 			{
