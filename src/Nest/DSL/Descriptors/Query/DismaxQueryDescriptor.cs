@@ -26,7 +26,7 @@ namespace Nest
 		{
 			get
 			{
-				return !this._Queries.HasAny() || this._Queries.All(q => q.IsConditionlessQueryDescriptor);
+				return !this._Queries.HasAny() || this._Queries.All(q => q.IsConditionless);
 			}
 		}
 

@@ -83,6 +83,14 @@ namespace Nest
 
 		internal bool _Strict { get; set; }
 
+		public QueryDescriptor<T> Strict(bool strict = true)
+		{
+			var q = this.Clone();
+			q._Strict = strict;
+			return q;
+		}
+
+
 
 		internal QueryDescriptor<T> CreateConditionlessQueryDescriptor(IQuery query)
 		{
@@ -93,8 +101,9 @@ namespace Nest
 						, query.GetType().Name.Replace("Descriptor", "").Replace("`1","")
 					)
 				);
-			return new QueryDescriptor<T> { IsConditionlessQueryDescriptor = !this._Strict };
+			return new QueryDescriptor<T> { IsConditionless = !this._Strict };
 		}
+
 
 		internal QueryDescriptor<T> Clone()
 		{
@@ -136,16 +145,6 @@ namespace Nest
 
 			};
 		}
-
-		public QueryDescriptor<T> Strict(bool strict = true)
-		{
-			var q = this.Clone();
-			q._Strict = true;
-			return q;
-		}
-
-
-
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.
@@ -335,7 +334,7 @@ namespace Nest
 			var query = new NestedQueryDescriptor<T>();
 			selector(query);
 
-			if (query._QueryDescriptor.IsConditionlessQueryDescriptor)
+			if (query._QueryDescriptor.IsConditionless)
 				return CreateConditionlessQueryDescriptor(query);
 
 			this.NestedQueryDescriptor = query;

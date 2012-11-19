@@ -22,7 +22,7 @@ namespace Nest
 		{
 			get
 			{
-				return this._Query == null || this._Query.IsConditionlessQueryDescriptor;
+				return this._Query == null || this._Query.IsConditionless;
 			}
 		}
 

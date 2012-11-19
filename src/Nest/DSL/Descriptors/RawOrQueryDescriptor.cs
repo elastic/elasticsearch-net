@@ -17,7 +17,7 @@ namespace Nest
 		{
 			get
 			{
-				return this.Raw.IsNullOrEmpty() && Descriptor.IsConditionlessQueryDescriptor;
+				return this.Raw.IsNullOrEmpty() && Descriptor.IsConditionless;
 			}
 		}
 	}

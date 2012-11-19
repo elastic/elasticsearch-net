@@ -25,7 +25,7 @@ namespace Nest
 				if (this._Query == null && this._Filter == null)
 					return true;
 				else if (this._Filter == null && this._Query != null)
-					return this._Query.IsConditionlessQueryDescriptor;
+					return this._Query.IsConditionless;
 				//TODO FILTER
 				return false;
 			}

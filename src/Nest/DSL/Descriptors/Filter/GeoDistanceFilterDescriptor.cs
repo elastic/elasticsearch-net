@@ -1,23 +1,24 @@
-﻿using System;
+﻿//using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
 using System.Globalization;
+using System;
 
 namespace Nest
 {
 	public class GeoDistanceFilterDescriptor : FilterBase
 	{
-		internal string _Location { get; set;}
+		internal string _Location { get; set; }
 		internal object _Distance { get; set; }
 		internal string _GeoUnit { get; set; }
 		internal string _GeoOptimizeBBox { get; set; }
 
 		public GeoDistanceFilterDescriptor Location(double X, double Y)
 		{
-      var c = CultureInfo.InvariantCulture;
+			var c = CultureInfo.InvariantCulture;
 			this._Location = "{0}, {1}".F(X.ToString(c), Y.ToString(c));
 			return this;
 		}

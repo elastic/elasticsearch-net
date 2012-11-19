@@ -37,7 +37,7 @@ namespace Nest
 		{
 			var qd = new QueryDescriptor<T>();
 			var q = querySelector(qd);
-			if (q.IsConditionlessQueryDescriptor)
+			if (q.IsConditionless)
 				return this;
 
 			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
@@ -49,7 +49,7 @@ namespace Nest
 		{
 			var qd = new QueryDescriptor<K>();
 			var q = querySelector(qd);
-			if (q.IsConditionlessQueryDescriptor)
+			if (q.IsConditionless)
 				return this;
 
 			var d = new RawOrQueryDescriptor<K> { Descriptor = q };
@@ -67,7 +67,7 @@ namespace Nest
 		{
 			var qd = new QueryDescriptor<T>();
 			var q = querySelector(qd);
-			if (q.IsConditionlessQueryDescriptor)
+			if (q.IsConditionless)
 				return this;
 
 			var d = new RawOrQueryDescriptor<T> { Descriptor = q };
@@ -79,7 +79,7 @@ namespace Nest
 		{
 			var qd = new QueryDescriptor<K>();
 			var q = querySelector(qd);
-			if (q.IsConditionlessQueryDescriptor)
+			if (q.IsConditionless)
 				return this;
 
 			var d = new RawOrQueryDescriptor<K> { Descriptor = q };

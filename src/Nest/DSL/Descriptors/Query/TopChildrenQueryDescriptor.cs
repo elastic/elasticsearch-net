@@ -16,7 +16,7 @@ namespace Nest
 		{
 			get
 			{
-				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionlessQueryDescriptor;
+				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless;
 			}
 		}
 

@@ -76,6 +76,7 @@
     <Compile Include="Facets\TermsStatsFacetJson.cs" />
     <Compile Include="FilterJson\BoolCombinations\BoolCombinationTests.cs" />
     <Compile Include="FilterJson\BoolFiltersInFacets\BoolFiltersInFacetsTests.cs" />
+    <Compile Include="FilterJson\ConditionLess\ConditionLessTests.cs" />
     <Compile Include="FilterJson\InsideBoolCalls\InsideBoolCallsTests.cs" />
     <Compile Include="FilterJson\FiltersInQueries\FiltersInQueriesTests.cs" />
     <Compile Include="FilterJson\FilterCalls\FilterCallsTests.cs" />
@@ -256,6 +257,7 @@
     <None Include="FilterJson\Bool\StaticBoolTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="FilterJson\ConditionLess\MatchAll.json" />
     <None Include="FilterJson\InsideBoolCalls\InsideMustNot.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

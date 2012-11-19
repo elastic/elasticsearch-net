@@ -25,8 +25,8 @@ namespace Nest
 			{
 				if (this._NegativeQuery == null && this._PositiveQuery == null)
 					return true;
-				return this._PositiveQuery == null && this._NegativeQuery.IsConditionlessQueryDescriptor
-					|| this._NegativeQuery == null && this._PositiveQuery.IsConditionlessQueryDescriptor;
+				return this._PositiveQuery == null && this._NegativeQuery.IsConditionless
+					|| this._NegativeQuery == null && this._PositiveQuery.IsConditionless;
 			}
 		}
 
