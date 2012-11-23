@@ -110,6 +110,15 @@ namespace Nest
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
 	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
 	{
+		[JsonProperty("disable_coord")]
+		internal bool _DisableCoord { get; set; }
+
+		public BoolQueryDescriptor<T> DisableCoord()
+		{
+			this._DisableCoord = true;
+			return this;
+		}
+
 		[JsonProperty("minimum_number_should_match")]
 		internal int? _MinimumNumberShouldMatches { get; set; }
 
@@ -148,7 +157,7 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-	public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<BaseQuery>();
 			foreach (var selector in filters)
