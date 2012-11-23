@@ -242,5 +242,6 @@ namespace Nest
     ISettingsOperationResponse UpdateSettings(IndexSettings settings);
     ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
     IElasticSearchVersionInfo VersionInfo { get; }
+	  IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
   }
 }
