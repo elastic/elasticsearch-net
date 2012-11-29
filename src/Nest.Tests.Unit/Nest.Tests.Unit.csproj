@@ -325,6 +325,9 @@
     <None Include="QueryJson\Bool\BranchLambdaTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="QueryJson\Bool\BranchLambdaTestConditional.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="QueryJson\Bool\StaticBoolAssignNotTest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

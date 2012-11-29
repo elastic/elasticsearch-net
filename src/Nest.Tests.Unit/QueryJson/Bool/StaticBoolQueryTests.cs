@@ -157,5 +157,27 @@ namespace Nest.Tests.Unit.QueryJson.Bool
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
 		}
+		[Test]
+		public void BranchLambdaTestConditional()
+		{
+			BaseQuery query = null;
+			if (1 == 1)
+				query |= Query<ElasticSearchProject>.Term(f => f.Name, "foo2");
+			if (1 == 1)
+				query |= Query<ElasticSearchProject>.Term(f => f.Name, "bar2");
+			if (1 == 1)
+				query |= Query<ElasticSearchProject>.Term(f => f.Name, "blah2");
+			if (query == null)
+				query = Query<ElasticSearchProject>.MatchAll();
+
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(20)
+				.Query(query);
+				
+
+
+			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+		}
 	} 
 }
