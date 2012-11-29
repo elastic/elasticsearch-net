@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class IdsQuery
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class IdsQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "type")]
 		public IEnumerable<string> Type { get; set; }

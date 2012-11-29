@@ -9,7 +9,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-  public class TextQueryDescriptor<T>  where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class TextQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "type")]
 		internal virtual string _Type { get { return null; } }
@@ -36,13 +37,13 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Operator? _Operator { get; set; }
 
-    internal bool IsConditionless
-    {
-      get
-      {
-        return this._Field.IsNullOrEmpty() || this._Query.IsNullOrEmpty();
-      }
-    }
+		internal bool IsConditionless
+		{
+			get
+			{
+				return this._Field.IsNullOrEmpty() || this._Query.IsNullOrEmpty();
+			}
+		}
 
 
 		internal string _Field { get; set; }
@@ -53,7 +54,7 @@ namespace Nest
 		}
 		public TextQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-      var fieldName = new PropertyNameResolver().Resolve(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 

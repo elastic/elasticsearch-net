@@ -8,7 +8,8 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(TermConverter))]
-	public class Prefix : Term
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class Prefix : Term, IQuery
 	{
 		public Prefix()
 		{

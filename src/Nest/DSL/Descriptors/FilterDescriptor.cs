@@ -25,8 +25,6 @@ namespace Nest
 			this.typeNameResolver = new TypeNameResolver();
 		}
 
-
-
 		internal string _Name { get; set; }
 		internal bool? _Cache { get; set; }
 
@@ -111,6 +109,48 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "nested")]
 		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
+
+
+		internal bool _Strict { get; set; }
+
+		public FilterDescriptor<T> Strict(bool strict = true)
+		{
+			var f = this.Clone();
+			f._Strict = strict;
+			return f;
+		}
+
+		internal FilterDescriptor<T> Clone()
+		{
+			return new FilterDescriptor<T>
+			{
+				_Name = _Name,
+				_Cache = _Cache,
+				ExistsFilter = ExistsFilter,
+				MissingFilter = MissingFilter,
+				IdsFilter = IdsFilter,
+				GeoBoundingBoxFilter = GeoBoundingBoxFilter,
+				GeoDistanceFilter = GeoDistanceFilter,
+				GeoDistanceRangeFilter = GeoDistanceRangeFilter,
+				GeoPolygonFilter = GeoPolygonFilter,
+				LimitFilter = LimitFilter,
+				TypeFilter = TypeFilter,
+				MatchAllFilter = MatchAllFilter,
+				HasChildFilter = HasChildFilter,
+				NumericRangeFilter = NumericRangeFilter,
+				RangeFilter = RangeFilter,
+				PrefixFilter = PrefixFilter,
+				TermFilter = TermFilter,
+				TermsFilter = TermsFilter,
+				QueryFilter = QueryFilter,
+				AndFilter = AndFilter,
+				OrFilter = OrFilter,
+				NotFilter = NotFilter,
+				BoolFilter = BoolFilter,
+				ScriptFilter = ScriptFilter,
+				NestedFilter = NestedFilter,
+			};
+	}
 
 		private void SetCacheAndName(FilterBase filter)
 		{
@@ -441,7 +481,7 @@ namespace Nest
 			var filter = new NumericRangeFilterDescriptor<T>();
 			numericRangeSelector(filter);
 
-			return this.SetDictionary(filter._Field, filter, (d, b) => 
+			return this.SetDictionary(filter._Field, filter, (d, b) =>
 			{
 				this.NumericRangeFilter = d;
 				b.NumericRangeFilter = d;
@@ -490,7 +530,7 @@ namespace Nest
 		public BaseFilter Prefix(string field, string prefix)
 		{
 			var descriptor = new FilterDescriptor<T>();
-			return this.SetDictionary(field, prefix, (d, b) => 
+			return this.SetDictionary(field, prefix, (d, b) =>
 			{
 				this.PrefixFilter = d;
 				b.PrefixFilter = d;
@@ -512,7 +552,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Term(string field, string term)
 		{
-			return this.SetDictionary(field, term, (d, b) => 
+			return this.SetDictionary(field, term, (d, b) =>
 			{
 				this.TermFilter = d;
 				b.TermFilter = d;
@@ -554,7 +594,7 @@ namespace Nest
 				var f = selector(filter);
 				descriptors.Add(f);
 			}
-			return this.SetDictionary("filters", descriptors, (d, b) => 
+			return this.SetDictionary("filters", descriptors, (d, b) =>
 			{
 				this.AndFilter = d;
 				b.AndFilter = d;
@@ -574,7 +614,7 @@ namespace Nest
 				var f = selector(filter);
 				descriptors.Add(f);
 			}
-			return this.SetDictionary("filters", descriptors, (d, b) => 
+			return this.SetDictionary("filters", descriptors, (d, b) =>
 			{
 				this.OrFilter = d;
 				b.OrFilter = d;
@@ -589,7 +629,7 @@ namespace Nest
 		{
 			var filter = new FilterDescriptor<T>();
 			var f = selector(filter);
-			return this.SetDictionary("filter", f, (d, b) => 
+			return this.SetDictionary("filter", f, (d, b) =>
 			{
 				this.NotFilter = d;
 				b.NotFilter = d;
@@ -617,7 +657,7 @@ namespace Nest
 		{
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);
-			return this.SetDictionary("query", descriptor, (d, b) => 
+			return this.SetDictionary("query", descriptor, (d, b) =>
 			{
 				this.QueryFilter = d;
 				b.QueryFilter = d;

@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class DismaxQueryDescriptor<T> where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class DismaxQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
 		internal double? _TieBreaker { get; set; }
@@ -18,11 +19,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "queries")]
 		internal IEnumerable<BaseQuery> _Queries { get; set; }
 
+		public bool IsStrict { get; private set; }
+		public DismaxQueryDescriptor<T> Strict(bool strict = true) { this.IsStrict = strict; return this; }
+
 		internal bool IsConditionless
 		{
 			get
 			{
-				return !this._Queries.HasAny() || this._Queries.All(q => q.IsConditionlessQueryDescriptor);
+				return !this._Queries.HasAny() || this._Queries.All(q => q.IsConditionless);
 			}
 		}
 

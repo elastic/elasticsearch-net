@@ -11,10 +11,10 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Unit.QueryJson.ConditionLess
+namespace Nest.Tests.Unit.QueryJson.ConditionLessStrict
 {
 	[TestFixture]
-	public class ConditionLessTests : BaseJsonTests
+	public class ConditionLessStrictTests : BaseJsonTests
 	{
 		public class Criteria
 		{
@@ -27,14 +27,16 @@ namespace Nest.Tests.Unit.QueryJson.ConditionLess
 
 		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticSearchProject>, BaseQuery> query)
 		{
-			var criteria = new Criteria { };
-			var s = new SearchDescriptor<ElasticSearchProject>()
-				//.Strict()
-				.From(0)
-				.Take(10)
-				.Query(query);
+			Assert.Throws<DslException>(() =>
+			{
+				var s = new SearchDescriptor<ElasticSearchProject>()
+					.Strict()
+					.From(0)
+					.Take(10)
+					.Query(query);
 
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
+				this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
+			});
 		}
 
 		[Test]

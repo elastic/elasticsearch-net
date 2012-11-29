@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class CustomScoreQueryDescriptor<T> where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class CustomScoreQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
@@ -21,7 +22,7 @@ namespace Nest
 		{
 			get
 			{
-				return this._Query == null || this._Query.IsConditionlessQueryDescriptor;
+				return this._Query == null || this._Query.IsConditionless;
 			}
 		}
 

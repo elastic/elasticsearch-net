@@ -107,10 +107,8 @@ namespace Nest
 		}
 	}
 	
-
-
 	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
-	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor where T : class
+	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
 	{
 		[JsonProperty("minimum_number_should_match")]
 		internal int? _MinimumNumberShouldMatches { get; set; }
@@ -124,9 +122,9 @@ namespace Nest
 			{
 				if (!this._MustQueries.HasAny() && !this._ShouldQueries.HasAny() && !this._MustNotQueries.HasAny())
 					return true;
-				return (this._MustNotQueries.HasAny() && this._MustNotQueries.All(q => q.IsConditionlessQueryDescriptor))
-					|| (this._ShouldQueries.HasAny() && this._ShouldQueries.All(q => q.IsConditionlessQueryDescriptor))
-					|| (this._MustQueries.HasAny() && this._MustQueries.All(q => q.IsConditionlessQueryDescriptor));
+				return (this._MustNotQueries.HasAny() && this._MustNotQueries.All(q => q.IsConditionless))
+					|| (this._ShouldQueries.HasAny() && this._ShouldQueries.All(q => q.IsConditionless))
+					|| (this._MustQueries.HasAny() && this._MustQueries.All(q => q.IsConditionless));
 			}
 
 		}
@@ -157,11 +155,11 @@ namespace Nest
 			{
 				var filter = new QueryDescriptor<T>();
 				var q = selector(filter);
-				if (q.IsConditionlessQueryDescriptor)
+				if (q.IsConditionless)
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustQueries = descriptors;
+			this._MustQueries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		/// <summary>
@@ -176,11 +174,11 @@ namespace Nest
 			{
 				var filter = new QueryDescriptor<T>();
 				var q = selector(filter);
-				if (q.IsConditionlessQueryDescriptor)
+				if (q.IsConditionless)
 					continue;
 				descriptors.Add(q);
 			}
-			this._MustNotQueries = descriptors;
+			this._MustNotQueries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		/// <summary>
@@ -195,11 +193,11 @@ namespace Nest
 			{
 				var filter = new QueryDescriptor<T>();
 				var q = selector(filter);
-				if (q.IsConditionlessQueryDescriptor)
+				if (q.IsConditionless)
 					continue;
 				descriptors.Add(q);
 			}
-			this._ShouldQueries = descriptors;
+			this._ShouldQueries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 	}

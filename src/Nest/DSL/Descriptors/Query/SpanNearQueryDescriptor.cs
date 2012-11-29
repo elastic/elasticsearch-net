@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class SpanNearQueryDescriptor<T> : ISpanQuery where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanNearQueryDescriptor<T> : ISpanQuery, IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		internal IEnumerable<SpanQueryDescriptor<T>> _SpanQueryDescriptors { get; set; }
@@ -43,7 +44,7 @@ namespace Nest
 				descriptors.Add(q);
 
 			}
-			this._SpanQueryDescriptors = descriptors;
+			this._SpanQueryDescriptors = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		public SpanNearQueryDescriptor<T> Slop(int slop)

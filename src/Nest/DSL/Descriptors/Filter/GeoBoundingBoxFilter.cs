@@ -8,6 +8,15 @@ namespace Nest
 {
 	public class GeoBoundingBoxFilter : FilterBase
 	{
+		internal bool IsConditionless
+		{
+			get
+			{
+				return this.TopLeft.IsNullOrEmpty() || this.BottomRight.IsNullOrEmpty();
+			}
+
+		}
+
 		[JsonProperty("top_left")]
 		public string TopLeft { get; set; }
 		[JsonProperty("bottom_right")]

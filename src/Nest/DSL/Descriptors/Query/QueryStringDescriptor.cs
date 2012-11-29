@@ -10,7 +10,8 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-  public class QueryStringDescriptor<T>  where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class QueryStringDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal string _QueryString { get; set; }
@@ -37,8 +38,8 @@ namespace Nest
 		internal double? _PhraseSlop { get; set; }
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
-        [JsonProperty(PropertyName = "lenient")]
-        internal bool? _Lenient { get; set; }
+		[JsonProperty(PropertyName = "lenient")]
+		internal bool? _Lenient { get; set; }
 		[JsonProperty(PropertyName = "analyze_wildcard")]
 		internal bool? _AnalyzeWildcard { get; set; }
 		[JsonProperty(PropertyName = "auto_generate_phrase_queries")]
@@ -50,13 +51,13 @@ namespace Nest
 		[JsonProperty(PropertyName = "tie_breaker")]
 		internal double? _TieBreaker { get; set; }
 
-    internal bool IsConditionless
-    {
-      get
-      {
-        return this._QueryString.IsNullOrEmpty();
-      }
-    }
+		internal bool IsConditionless
+		{
+			get
+			{
+				return this._QueryString.IsNullOrEmpty();
+			}
+		}
 
 
 		public QueryStringDescriptor<T> OnField(string field)
@@ -66,7 +67,7 @@ namespace Nest
 		}
 		public QueryStringDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-      var fieldName = new PropertyNameResolver().Resolve(objectPath);
+			var fieldName = new PropertyNameResolver().Resolve(objectPath);
 			return this.OnField(fieldName);
 		}
 		public QueryStringDescriptor<T> OnFields(IEnumerable<string> fields)
@@ -87,7 +88,7 @@ namespace Nest
 			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
 			boostableSelector(d);
 			var fieldNames = d
-				.Select(o => 
+				.Select(o =>
 				{
 					var field = new PropertyNameResolver().Resolve(o.Key);
 					var boost = o.Value.GetValueOrDefault(1.0);
@@ -147,11 +148,11 @@ namespace Nest
 			this._Boost = boost;
 			return this;
 		}
-        public QueryStringDescriptor<T> Lenient(bool lenient)
-        {
-            this._Lenient = lenient;
-            return this;
-        }
+		public QueryStringDescriptor<T> Lenient(bool lenient)
+		{
+			this._Lenient = lenient;
+			return this;
+		}
 		public QueryStringDescriptor<T> AnalyzeWildcard(bool analyzeWildcard)
 		{
 			this._AnalyzeWildcard = analyzeWildcard;
@@ -177,6 +178,6 @@ namespace Nest
 			this._TieBreaker = tieBreaker;
 			return this;
 		}
-		
+
 	}
 }

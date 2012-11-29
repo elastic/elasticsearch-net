@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BoostingQueryDescriptor<T> where T : class
+	public class BoostingQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty("positive")]
 		internal BaseQuery _PositiveQuery { get; set; }
@@ -19,15 +19,14 @@ namespace Nest
 		[JsonProperty("negative_boost")]
 		internal double? _NegativeBoost { get; set; }
 
-
 		internal bool IsConditionless
 		{
 			get
 			{
 				if (this._NegativeQuery == null && this._PositiveQuery == null)
 					return true;
-				return this._PositiveQuery == null && this._NegativeQuery.IsConditionlessQueryDescriptor
-					|| this._NegativeQuery == null && this._PositiveQuery.IsConditionlessQueryDescriptor;
+				return this._PositiveQuery == null && this._NegativeQuery.IsConditionless
+					|| this._NegativeQuery == null && this._PositiveQuery.IsConditionless;
 			}
 		}
 

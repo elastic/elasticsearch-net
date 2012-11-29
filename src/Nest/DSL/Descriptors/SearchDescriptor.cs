@@ -29,6 +29,11 @@ namespace Nest
 		internal bool _AllTypes { get; set; }
 
 		/// <summary>
+		/// Whiter conditionless queries are allowed or not
+		/// </summary>
+		internal bool _Strict { get; set; }
+
+		/// <summary>
 		/// The indices to execute the search on. Defaults to the default index
 		/// </summary>
 		public SearchDescriptor<T> Indices(IEnumerable<string> indices)
@@ -146,7 +151,13 @@ namespace Nest
 			this._Scroll = scrollTime;
 			return this;
 		}
-
+		/// <summary>
+		/// When strict is set, conditionless queries are treated as an exception. 
+		public SearchDescriptor<T> Strict(bool strict = true)
+		{
+			this._Strict = strict;
+			return this;
+		}
 
 		[JsonProperty(PropertyName = "timeout")]
 		internal string _Timeout { get; set; }
@@ -771,8 +782,13 @@ namespace Nest
 		{
 			query.ThrowIfNull("query");
 			var q = new QueryDescriptor<T>();
+			if (this._Strict)
+				q.Strict(true);
 			var bq = query(q);
-			if (bq.IsConditionlessQueryDescriptor)
+			if (this._Strict && bq.IsConditionless)
+				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(bq, Formatting.Indented)));
+
+			else if (bq.IsConditionless)
 				return this;
 			this._Query = bq;
 			return this;
@@ -783,7 +799,7 @@ namespace Nest
 		public SearchDescriptor<T> Query(BaseQuery query)
 		{
 			query.ThrowIfNull("query");
-			if (query.IsConditionlessQueryDescriptor)
+			if (query.IsConditionless)
 				return this;
 			this._Query = query;
 			return this;
@@ -822,7 +838,17 @@ namespace Nest
 		{
 			filter.ThrowIfNull("filter");
 			var f = new FilterDescriptor<T>();
+			if (this._Strict)
+				f.Strict(true);
+
 			var bf = filter(f);
+			if (this._Strict && bf.IsConditionless)
+				throw new DslException("Filter resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(bf, Formatting.Indented)));
+
+			else if (bf.IsConditionless)
+				return this;
+
+
 			this._Filter = bf;
 			return this;
 		}

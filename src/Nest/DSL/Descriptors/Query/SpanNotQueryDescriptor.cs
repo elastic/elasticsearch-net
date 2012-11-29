@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class SpanNotQueryDescriptor<T>  : ISpanQuery where T : class
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SpanNotQueryDescriptor<T> : ISpanQuery, IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "include")]
 		internal SpanQueryDescriptor<T> _Include { get; set; }
