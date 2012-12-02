@@ -122,6 +122,7 @@
     <Compile Include="QueryJson\ConditionLessStrict\ConditionLessStrictTests.cs" />
     <Compile Include="QueryJson\ConditionLessStrict\SemiStrictBoolTests.cs" />
     <Compile Include="QueryJson\QueriesInQueries\QueriesInQueriesTests.cs" />
+    <Compile Include="QueryJson\UpdateQuery\UpdateQueriesTests.cs" />
     <Compile Include="QueryTests\BoolQueryJson.cs" />
     <Compile Include="QueryTests\BoostingQueryJson.cs" />
     <Compile Include="QueryTests\ConstantScoreQueryJson.cs" />
@@ -268,6 +269,7 @@
     <None Include="FilterJson\ConditionlessBool\MyTermsNot.json" />
     <None Include="FilterJson\ConditionlessBool\MyTermsOr.json" />
     <None Include="FilterJson\ConditionLess\MatchAll.json" />
+    <None Include="FilterJson\FiltersInQueries\ConstantScoreQueryCombines.json" />
     <None Include="FilterJson\InsideBoolCalls\InsideMustNot.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -278,9 +280,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FilterJson\FiltersInQueries\FilteredQueryCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="FilterJson\FiltersInQueries\ConstantScoreQueryCombines.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FilterJson\FilterCalls\AndFilterCombines.json">
@@ -422,6 +421,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="QueryJson\QueriesInQueries\ConstantScore.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\UpdateQuery\FilteredQueryCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="QueryJson\UpdateQuery\FilteredQueryCombinesUsingStatic.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\SearchType\SearchTypeDoesNotPolluteQueryObject.json">

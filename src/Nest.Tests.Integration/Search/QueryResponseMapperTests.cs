@@ -40,6 +40,39 @@ namespace Nest.Tests.Integration.Search
 			Assert.NotNull(error);
 			Assert.True(error.HttpStatusCode == System.Net.HttpStatusCode.InternalServerError);
 		}
+
+		[Test]
+		public void HitsMaxScoreIsSet()
+		{
+			//arrange
+			//pull existing example through method we know is functional based on other passing unit tests
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.QueryString("*")
+				//.SortAscending(p => p.Id)
+			);
+
+			var hits = queryResults.Hits;
+
+			Assert.AreEqual(1, hits.MaxScore);
+			Assert.AreEqual(hits.Hits.Max(h => h.Score), hits.MaxScore);
+		}
+
+		[Test]
+		public void HitsScoreIsSet()
+		{
+			//arrange
+			//pull existing example through method we know is functional based on other passing unit tests
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.QueryString("*")
+				.SortAscending("_score")
+				.SortDescending(p=>p.Id)
+			);
+
+			var hits = queryResults.Hits;
+
+			Assert.True(hits.Hits.All(h=>h.Sorts.Count() == 2));
+		}
+
 		[Test]
 		public void BoolQuery()
 		{
