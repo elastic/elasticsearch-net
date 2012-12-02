@@ -18,6 +18,11 @@ namespace Nest
 
 		public static BaseQuery operator &(BaseQuery lbq, BaseQuery rbq)
 		{
+			if (lbq == null)
+				return rbq;
+			if (rbq == null)
+				return lbq;
+
 			if (lbq.IsConditionless && rbq.IsConditionless)
 				return new BaseQuery() { IsConditionless = true };
 			else if (lbq.IsConditionless)
@@ -90,6 +95,11 @@ namespace Nest
 
 		public static BaseQuery operator |(BaseQuery lbq, BaseQuery rbq)
 		{
+			if (lbq == null)
+				return rbq;
+			if (rbq == null)
+				return lbq;
+
 			if (lbq.IsConditionless && rbq.IsConditionless)
 				return new BaseQuery() { IsConditionless = true };
 			else if (lbq.IsConditionless)
@@ -130,7 +140,7 @@ namespace Nest
 
 		public static BaseQuery operator !(BaseQuery lbq)
 		{
-			if (lbq.IsConditionless)
+			if (lbq == null || lbq.IsConditionless)
 				return new BaseQuery { IsConditionless = true };
 
 			var q = new BaseQuery();
