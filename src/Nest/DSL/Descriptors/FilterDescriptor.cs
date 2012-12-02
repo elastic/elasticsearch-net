@@ -679,6 +679,22 @@ namespace Nest
 			return this.SetDictionary("and", "filters", descriptors, (d, b) => b.AndFilter = d);
 		}
 		/// <summary>
+		/// A filter that matches documents using AND boolean operator on other queries. 
+		/// This filter is more performant then bool filter. 
+		/// </summary>
+		public BaseFilter And(params BaseFilter[] filters)
+		{
+			var descriptors = new List<BaseFilter>();
+			foreach (var f in filters)
+			{
+				var filter = new FilterDescriptor<T>();
+				if (f.IsConditionless)
+					continue;
+				descriptors.Add(f);
+			}
+			return this.SetDictionary("and", "filters", descriptors, (d, b) => b.AndFilter = d);
+		}
+		/// <summary>
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
@@ -698,7 +714,26 @@ namespace Nest
 				this.OrFilter = d;
 				b.OrFilter = d;
 			});
-
+		}
+		/// <summary>
+		/// A filter that matches documents using OR boolean operator on other queries. 
+		/// This filter is more performant then bool filter
+		/// </summary>
+		public BaseFilter Or(params BaseFilter[] filters)
+		{
+			var descriptors = new List<BaseFilter>();
+			foreach (var f in filters)
+			{
+				var filter = new FilterDescriptor<T>();
+				if (f.IsConditionless)
+					continue;
+				descriptors.Add(f);
+			}
+			return this.SetDictionary("or", "filters", descriptors, (d, b) =>
+			{
+				this.OrFilter = d;
+				b.OrFilter = d;
+			});
 		}
 		/// <summary>
 		/// A filter that filters out matched documents using a query. 

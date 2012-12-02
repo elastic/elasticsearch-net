@@ -158,7 +158,20 @@ namespace Nest
 			this._MustFilters = descriptors;
 			return this;
 		}
-		
+
+		public BoolFilterDescriptor<T> Must(params BaseFilter[] filters)
+		{
+			var descriptors = new List<BaseFilter>();
+			foreach (var f in filters)
+			{
+				if (f.IsConditionless)
+					continue;
+				descriptors.Add(f);
+			}
+			this._MustFilters = descriptors;
+			return this;
+		}
+
 		public BoolFilterDescriptor<T> MustNot(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<BaseFilter>();
@@ -166,6 +179,19 @@ namespace Nest
 			{
 				var filter = new FilterDescriptor<T>();
 				var f = selector(filter);
+				if (f.IsConditionless)
+					continue;
+				descriptors.Add(f);
+			}
+			this._MustNotFilters = descriptors;
+			return this;
+		}
+
+		public BoolFilterDescriptor<T> MustNot(params BaseFilter[] filters)
+		{
+			var descriptors = new List<BaseFilter>();
+			foreach (var f in filters)
+			{
 				if (f.IsConditionless)
 					continue;
 				descriptors.Add(f);
@@ -181,6 +207,19 @@ namespace Nest
 			{
 				var filter = new FilterDescriptor<T>();
 				var f = selector(filter);
+				if (f.IsConditionless)
+					continue;
+				descriptors.Add(f);
+			}
+			this._ShouldFilters = descriptors;
+			return this;
+		}
+
+		public BoolFilterDescriptor<T> Should(params BaseFilter[] filters)
+		{
+			var descriptors = new List<BaseFilter>();
+			foreach (var selector in filters)
+			{
 				if (f.IsConditionless)
 					continue;
 				descriptors.Add(f);
