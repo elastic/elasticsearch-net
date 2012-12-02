@@ -218,7 +218,7 @@ namespace Nest
 		public BoolFilterDescriptor<T> Should(params BaseFilter[] filters)
 		{
 			var descriptors = new List<BaseFilter>();
-			foreach (var selector in filters)
+			foreach (var f in filters)
 			{
 				if (f.IsConditionless)
 					continue;
