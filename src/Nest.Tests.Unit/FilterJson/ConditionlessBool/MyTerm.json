@@ -1,0 +1,9 @@
+  {
+  "from": 0,
+  "size": 10,
+  "filter": {
+    "term": {
+      "name": "myterm"
+    }
+  }
+}

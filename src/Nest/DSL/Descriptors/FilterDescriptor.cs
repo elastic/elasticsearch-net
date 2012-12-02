@@ -192,13 +192,30 @@ namespace Nest
 			var bucket = new FilterDescriptor<T>();
 			setter(dictionary, bucket);
 
-			if (value is IEnumerable<object>)
+			var conditionlessReturn = CreateConditionlessFilterDescriptor(type, dictionary);
+
+
+			if (value is IEnumerable<BaseFilter>)
 			{
 				var l = (IEnumerable<object>)value;
-				if (!l.HasAny() 
-					|| l.OfType<BaseFilter>().Count() > 0 && l.OfType<BaseFilter>().All(b=>b.IsConditionless)
-					|| l.OfType<string>().Count() > 0 && l.OfType<string>().All(s=>s.IsNullOrEmpty()))
-					return CreateConditionlessFilterDescriptor(type, dictionary);
+				var baseFilters = l.OfType<BaseFilter>();
+				var allBaseFiltersConditionless = baseFilters.All(b => b.IsConditionless);
+				if (!baseFilters.HasAny() || allBaseFiltersConditionless)
+					return conditionlessReturn;
+			}
+			else if (value is IEnumerable<string>)
+			{
+				var l = (IEnumerable<string>)value;
+				var strings = l.OfType<string>();
+				var allStringsNullOrEmpty = strings.All(s=>s.IsNullOrEmpty());
+				if (!strings.HasAny() || allStringsNullOrEmpty)
+					return conditionlessReturn;
+			}
+			else if (value is IEnumerable<object>)
+			{
+				var l = (IEnumerable<object>)value;
+				if (!l.HasAny())
+					return conditionlessReturn;
 			}
 			else if (value is FilterBase)
 			{
@@ -615,9 +632,10 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Term(string field, string term)
 		{
+			if (term.IsNullOrEmpty() || field.IsNullOrEmpty())
+				return CreateConditionlessFilterDescriptor("term", new { term = term, field = field });
 			return this.SetDictionary("term", field, term, (d, b) =>
 			{
-				this.TermFilter = d;
 				b.TermFilter = d;
 			});
 
