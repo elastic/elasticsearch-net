@@ -8,7 +8,7 @@ namespace Nest
 {
 	public class GeoBoundingBoxFilter : FilterBase
 	{
-		internal bool IsConditionless
+		internal override bool IsConditionless
 		{
 			get
 			{

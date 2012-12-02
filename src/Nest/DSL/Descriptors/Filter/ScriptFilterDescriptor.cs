@@ -23,6 +23,14 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Lang? _Lang { get; set; }
 
+		internal override bool IsConditionless
+		{
+			get
+			{
+				return this._Script.IsNullOrEmpty();
+			}
+		}
+
 		/// <summary>
 		/// Filter script.
 		/// </summary>

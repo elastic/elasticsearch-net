@@ -781,9 +781,8 @@ namespace Nest
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>();
-			if (this._Strict)
-				q.Strict(true);
+			var q = new QueryDescriptor<T>().Strict(this._Strict);
+
 			var bq = query(q);
 			if (this._Strict && bq.IsConditionless)
 				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(bq, Formatting.Indented)));
@@ -837,13 +836,11 @@ namespace Nest
 		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filter)
 		{
 			filter.ThrowIfNull("filter");
-			var f = new FilterDescriptor<T>();
-			if (this._Strict)
-				f.Strict(true);
+			var f = new FilterDescriptor<T>().Strict(this._Strict);
 
 			var bf = filter(f);
 			if (this._Strict && bf.IsConditionless)
-				throw new DslException("Filter resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(bf, Formatting.Indented)));
+				throw new DslException("Filter resulted in a conditionless filter:\n{0}".F(JsonConvert.SerializeObject(bf, Formatting.Indented)));
 
 			else if (bf.IsConditionless)
 				return this;

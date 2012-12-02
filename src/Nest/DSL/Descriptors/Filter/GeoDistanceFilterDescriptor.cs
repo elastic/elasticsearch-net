@@ -16,6 +16,15 @@ namespace Nest
 		internal string _GeoUnit { get; set; }
 		internal string _GeoOptimizeBBox { get; set; }
 
+		internal override bool IsConditionless
+		{
+			get
+			{
+				return this._Location.IsNullOrEmpty() || this._Distance == null;
+			}
+
+		}
+
 		public GeoDistanceFilterDescriptor Location(double X, double Y)
 		{
 			var c = CultureInfo.InvariantCulture;

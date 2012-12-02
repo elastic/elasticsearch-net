@@ -31,8 +31,8 @@ namespace Nest
 			var rHasMustQueries = rBoolDescriptor != null &&
 				rBoolDescriptor._MustQueries.HasAny();
 
-			var lq = lHasMustQueries 
-			? lBoolDescriptor._MustQueries 
+			var lq = lHasMustQueries
+			? lBoolDescriptor._MustQueries
 			: new[] { lbq };
 			var rq = rHasMustQueries ? rBoolDescriptor._MustQueries : new[] { rbq };
 
@@ -55,7 +55,7 @@ namespace Nest
 			return lq.Concat(rq);
 		}
 		internal static IEnumerable<BaseQuery> MergeMustNotQueries(this BaseQuery lbq, BaseQuery rbq)
-		{ 
+		{
 			var lBoolDescriptor = lbq.BoolQueryDescriptor;
 			var lHasMustNotQueries = lBoolDescriptor != null &&
 				lBoolDescriptor._MustNotQueries.HasAny();
@@ -75,7 +75,7 @@ namespace Nest
 	}
 
 
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolBaseQueryDescriptor
 	{
 		[JsonProperty("must")]
@@ -98,7 +98,7 @@ namespace Nest
 		}
 		internal bool _CanJoinShould()
 		{
-			return (_ShouldQueries.HasAny() && !_MustQueries.HasAny()	&& !_MustNotQueries.HasAny()) 
+			return (_ShouldQueries.HasAny() && !_MustQueries.HasAny() && !_MustNotQueries.HasAny())
 				|| !_ShouldQueries.HasAny();
 		}
 		internal bool _CanJoinMustNot()
@@ -106,8 +106,8 @@ namespace Nest
 			return !_ShouldQueries.HasAny();
 		}
 	}
-	
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
 	{
 		[JsonProperty("minimum_number_should_match")]
@@ -148,7 +148,7 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-	public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<BaseQuery>();
 			foreach (var selector in filters)
@@ -167,7 +167,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="filters"></param>
 		/// <returns></returns>
-	public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+		public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<BaseQuery>();
 			foreach (var selector in filters)
@@ -186,7 +186,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="filters"></param>
 		/// <returns></returns>
-	public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+		public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
 		{
 			var descriptors = new List<BaseQuery>();
 			foreach (var selector in filters)

@@ -90,8 +90,6 @@ namespace Nest
 			return q;
 		}
 
-
-
 		internal QueryDescriptor<T> CreateConditionlessQueryDescriptor(IQuery query)
 		{
 			if (this._Strict)
