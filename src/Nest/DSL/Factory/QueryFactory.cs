@@ -33,7 +33,7 @@ namespace Nest.FactoryDsl
         /// <returns></returns>
         public static TextQueryBuilder TextPhraseQuery(string name, object text)
         {
-            return new TextQueryBuilder(name, text).Type(TextQueryType.PHASE);
+            return new TextQueryBuilder(name, text).Type(TextQueryType.PHRASE);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Nest.FactoryDsl
         /// <returns></returns>
         public static TextQueryBuilder TextPhrasePrefixQuery(string name, object text)
         {
-            return new TextQueryBuilder(name, text).Type(TextQueryType.PHASE_PREFIX);
+            return new TextQueryBuilder(name, text).Type(TextQueryType.PHRASE_PREFIX);
         }
 
         /// <summary>
