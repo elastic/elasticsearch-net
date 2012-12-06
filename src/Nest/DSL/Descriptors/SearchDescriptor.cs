@@ -169,7 +169,7 @@ namespace Nest
 		internal bool? _Explain { get; set; }
 		[JsonProperty(PropertyName = "version")]
 		internal bool? _Version { get; set; }
-		[JsonProperty(PropertyName = "track_scores ")]
+		[JsonProperty(PropertyName = "track_scores")]
 		internal bool? _TrackScores { get; set; }
 
 		[JsonProperty(PropertyName = "min_score")]
