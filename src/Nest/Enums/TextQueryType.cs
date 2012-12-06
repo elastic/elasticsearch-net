@@ -5,8 +5,8 @@ namespace Nest
     public enum TextQueryType
     {
         BOOLEAN,
-        PHASE,
-        PHASE_PREFIX
+        PHRASE,
+        PHRASE_PREFIX
     }
 }
 // ReSharper restore CheckNamespace
