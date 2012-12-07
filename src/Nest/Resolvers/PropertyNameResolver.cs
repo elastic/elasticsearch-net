@@ -16,7 +16,7 @@ namespace Nest.Resolvers
 
 	public class PropertyNameResolver : ExpressionVisitor
 	{
-    private static readonly ElasticResolver ContractResolver = new ElasticResolver();
+		private static readonly ElasticResolver ContractResolver = new ElasticResolver();
 
 		public ElasticPropertyAttribute GetElasticProperty(MemberInfo info)
 		{
@@ -25,19 +25,19 @@ namespace Nest.Resolvers
 				return ((ElasticPropertyAttribute)attributes.First());
 			return null;
 		}
-		
+
 		public ElasticTypeAttribute GetElasticPropertyFor<T>() where T : class
 		{
 			return GetElasticPropertyForType(typeof(T));
 		}
-		
+
 		public ElasticTypeAttribute GetElasticPropertyFor(Type type)
 		{
 			if (!type.IsClass && !type.IsInterface)
 				throw new ArgumentException("Type is not a class or interface", "type");
 			return GetElasticPropertyForType(type);
 		}
-		
+
 		private ElasticTypeAttribute GetElasticPropertyForType(Type type)
 		{
 			if (!type.IsClass && !type.IsInterface)
@@ -66,7 +66,7 @@ namespace Nest.Resolvers
 		{
 			var stack = new Stack<string>();
 			var properties = new Stack<ElasticPropertyAttribute>();
-      Visit(expression, stack, properties);
+			Visit(expression, stack, properties);
 			return stack
 				.Aggregate(
 					new StringBuilder(),
@@ -75,7 +75,7 @@ namespace Nest.Resolvers
 				.ToString();
 		}
 
-    protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
 		{
 			if (stack != null)
 			{
@@ -94,7 +94,7 @@ namespace Nest.Resolvers
 				}
 				stack.Push(resolvedName);
 			}
-      return base.VisitMemberAccess(expression, stack, properties);
+			return base.VisitMemberAccess(expression, stack, properties);
 		}
 
 		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
