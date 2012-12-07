@@ -11,7 +11,7 @@ namespace Nest
 		/// Search using dynamic as its return type.
 		/// </summary>
 		public IQueryResponse<dynamic> Search(
-			SearchBuilder searchBuilder, 
+			SearchBuilder searchBuilder,
 			string index = null,
 			string type = null,
 			string routing = null,
@@ -75,34 +75,25 @@ namespace Nest
 			var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
 			return r;
 		}
+
 		/// <summary>
 		/// Search using T as the return type
 		/// </summary>
 		public IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class
 		{
-      var sw2 = new Stopwatch(); sw2.Start();
-      var sw = new Stopwatch();
-      sw.Start();
 			var search = new SearchDescriptor<T>();
 			var descriptor = searcher(search);
-      var xx = sw.Elapsed;
-      sw.Restart();
-			var query = this.Serialize(descriptor);
-      var xY = sw.Elapsed;
-      sw.Restart();
-			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
-      var xxx = sw.Elapsed;
-      sw.Restart();
-			ConnectionStatus status = this.Connection.PostSync(path, query);
-      var xxxx = sw.Elapsed;
-      sw.Restart();
-			var r = this.ToParsedResponse<QueryResponse<T>>(status);
-      var xxxxx = sw.Elapsed;
-      sw.Restart();
-      sw2.Stop();
-      var total = sw2.Elapsed;
-			return r;
+			return Search(descriptor);
 		}
+
+		public IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class
+		{
+			var query = this.Serialize(descriptor);
+			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
+			var status = this.Connection.PostSync(path, query);
+			return this.ToParsedResponse<QueryResponse<T>>(status);
+		}
+
 		/// <summary>
 		/// Search using T as the return type, string based.
 		/// </summary>

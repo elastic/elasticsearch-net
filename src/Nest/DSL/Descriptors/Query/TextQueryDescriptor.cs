@@ -33,6 +33,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "slop")]
 		internal int? _Slop { get; set; }
 
+		[JsonProperty(PropertyName = "boost")]
+		internal double? _Boost { get; set; }
+
 		[JsonProperty(PropertyName = "operator")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Operator? _Operator { get; set; }
@@ -73,6 +76,12 @@ namespace Nest
 		{
 			fuzziness.ThrowIfNull("fuzziness");
 			this._Fuzziness = fuzziness;
+			return this;
+		}
+		public TextQueryDescriptor<T> Boost(double boost)
+		{
+			boost.ThrowIfNull("boost");
+			this._Boost = boost;
 			return this;
 		}
 		public TextQueryDescriptor<T> PrefixLength(int prefixLength)
