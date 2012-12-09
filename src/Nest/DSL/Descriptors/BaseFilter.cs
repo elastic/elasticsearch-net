@@ -18,6 +18,11 @@ namespace Nest
 
 		public static BaseFilter operator &(BaseFilter lbq, BaseFilter rbq)
 		{
+			if (lbq == null)
+				return rbq;
+			if (rbq == null)
+				return lbq;
+
 			if (lbq.IsConditionless && rbq.IsConditionless)
 				return new BaseFilter() { IsConditionless = true };
 			else if (lbq.IsConditionless)
@@ -89,6 +94,11 @@ namespace Nest
 
 		public static BaseFilter operator |(BaseFilter lbq, BaseFilter rbq)
 		{
+			if (lbq == null)
+				return rbq;
+			if (rbq == null)
+				return lbq;
+
 			if (lbq.IsConditionless && rbq.IsConditionless)
 				return new BaseFilter() { IsConditionless = true };
 			else if (lbq.IsConditionless)
@@ -129,7 +139,7 @@ namespace Nest
 
 		public static BaseFilter operator !(BaseFilter lbq)
 		{
-			if (lbq.IsConditionless)
+			if (lbq == null || lbq.IsConditionless)
 				return new BaseFilter { IsConditionless = true };
 
 			var f = new BaseFilter();

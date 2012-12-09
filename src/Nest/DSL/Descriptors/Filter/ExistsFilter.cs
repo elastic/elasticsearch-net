@@ -8,7 +8,7 @@ namespace Nest
 {
 	public class ExistsFilter : FilterBase
 	{
-		internal bool IsConditionless
+		internal override bool IsConditionless
 		{
 			get
 			{

@@ -9,15 +9,29 @@ namespace Nest
 {
 	public class GeoDistanceRangeFilterDescriptor : FilterBase
 	{
-		internal string _Location { get; set;}
+		internal string _Location { get; set; }
 		internal object _FromDistance { get; set; }
 		internal object _ToDistance { get; set; }
 		internal string _GeoUnit { get; set; }
 		internal string _GeoOptimizeBBox { get; set; }
 
+		internal override bool IsConditionless
+		{
+			get
+			{
+				return this._Location.IsNullOrEmpty() || 
+					(this._FromDistance == null && this._ToDistance == null)
+					|| (((string)this._FromDistance).IsNullOrEmpty() 
+						&& ((string)this._ToDistance).IsNullOrEmpty() 
+					    );
+			}
+
+		}
+
+
 		public GeoDistanceRangeFilterDescriptor Location(double X, double Y)
 		{
-      var c = CultureInfo.InvariantCulture;
+			var c = CultureInfo.InvariantCulture;
 			this._Location = "{0}, {1}".F(X.ToString(c), Y.ToString(c));
 			return this;
 		}
@@ -28,16 +42,12 @@ namespace Nest
 		}
 		public GeoDistanceRangeFilterDescriptor Distance(string From, string To)
 		{
-			From.ThrowIfNullOrEmpty("From");
-			To.ThrowIfNullOrEmpty("To");
 			this._FromDistance = From;
 			this._ToDistance = To;
 			return this;
 		}
 		public GeoDistanceRangeFilterDescriptor Distance(double From, double To, GeoUnit Unit)
 		{
-			From.ThrowIfNull("From");
-			To.ThrowIfNull("To");
 			this._FromDistance = From;
 			this._ToDistance = To;
 			this._GeoUnit = Enum.GetName(typeof(GeoUnit), Unit);

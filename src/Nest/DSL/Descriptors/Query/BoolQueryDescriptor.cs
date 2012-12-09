@@ -31,8 +31,8 @@ namespace Nest
 			var rHasMustQueries = rBoolDescriptor != null &&
 				rBoolDescriptor._MustQueries.HasAny();
 
-			var lq = lHasMustQueries 
-			? lBoolDescriptor._MustQueries 
+			var lq = lHasMustQueries
+			? lBoolDescriptor._MustQueries
 			: new[] { lbq };
 			var rq = rHasMustQueries ? rBoolDescriptor._MustQueries : new[] { rbq };
 
@@ -55,7 +55,7 @@ namespace Nest
 			return lq.Concat(rq);
 		}
 		internal static IEnumerable<BaseQuery> MergeMustNotQueries(this BaseQuery lbq, BaseQuery rbq)
-		{ 
+		{
 			var lBoolDescriptor = lbq.BoolQueryDescriptor;
 			var lHasMustNotQueries = lBoolDescriptor != null &&
 				lBoolDescriptor._MustNotQueries.HasAny();
@@ -75,7 +75,7 @@ namespace Nest
 	}
 
 
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolBaseQueryDescriptor
 	{
 		[JsonProperty("must")]
@@ -98,7 +98,7 @@ namespace Nest
 		}
 		internal bool _CanJoinShould()
 		{
-			return (_ShouldQueries.HasAny() && !_MustQueries.HasAny()	&& !_MustNotQueries.HasAny()) 
+			return (_ShouldQueries.HasAny() && !_MustQueries.HasAny() && !_MustNotQueries.HasAny())
 				|| !_ShouldQueries.HasAny();
 		}
 		internal bool _CanJoinMustNot()
@@ -106,8 +106,8 @@ namespace Nest
 			return !_ShouldQueries.HasAny();
 		}
 	}
-	
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
 	{
 		[JsonProperty("disable_coord")]
@@ -157,10 +157,10 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
 		{
 			var descriptors = new List<BaseQuery>();
-			foreach (var selector in filters)
+			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
 				var q = selector(filter);
@@ -171,15 +171,32 @@ namespace Nest
 			this._MustQueries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
+
+		/// <summary>
+		/// The clause(s) that must appear in matching documents
+		/// </summary>
+		public BoolQueryDescriptor<T> Must(params BaseQuery[] queries)
+		{
+			var descriptors = new List<BaseQuery>();
+			foreach (var q in queries)
+			{
+				if (q.IsConditionless)
+					continue;
+				descriptors.Add(q);
+			}
+			this._MustQueries = descriptors.HasAny() ? descriptors : null;
+			return this;
+		}
+
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. The minimum number of should clauses to match can be set using minimum_number_should_match parameter.
 		/// </summary>
-		/// <param name="filters"></param>
+		/// <param name="queries"></param>
 		/// <returns></returns>
-	public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+		public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
 		{
 			var descriptors = new List<BaseQuery>();
-			foreach (var selector in filters)
+			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
 				var q = selector(filter);
@@ -191,17 +208,53 @@ namespace Nest
 			return this;
 		}
 		/// <summary>
-		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. The minimum number of should clauses to match can be set using minimum_number_should_match parameter.
 		/// </summary>
-		/// <param name="filters"></param>
+		/// <param name="queries"></param>
 		/// <returns></returns>
-	public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] filters)
+		
+		public BoolQueryDescriptor<T> MustNot(params BaseQuery[] queries)
 		{
 			var descriptors = new List<BaseQuery>();
-			foreach (var selector in filters)
+			foreach (var q in queries)
+			{
+				if (q.IsConditionless)
+					continue;
+				descriptors.Add(q);
+			}
+			this._MustNotQueries = descriptors.HasAny() ? descriptors : null;
+			return this;
+		}
+		/// <summary>
+		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
+		/// </summary>
+		/// <param name="queries"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, BaseQuery>[] queries)
+		{
+			var descriptors = new List<BaseQuery>();
+			foreach (var selector in queries)
 			{
 				var filter = new QueryDescriptor<T>();
 				var q = selector(filter);
+				if (q.IsConditionless)
+					continue;
+				descriptors.Add(q);
+			}
+			this._ShouldQueries = descriptors.HasAny() ? descriptors : null;
+			return this;
+		}
+
+		/// <summary>
+		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
+		/// </summary>
+		/// <param name="queries"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> Should(params BaseQuery[] queries)
+		{
+			var descriptors = new List<BaseQuery>();
+			foreach (var q in queries)
+			{
 				if (q.IsConditionless)
 					continue;
 				descriptors.Add(q);

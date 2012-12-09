@@ -8,6 +8,15 @@ namespace Nest
 {
 	public class IdsFilter : FilterBase
 	{
+		internal override bool IsConditionless
+		{
+			get
+			{
+				return !this.Values.HasAny() || this.Values.All(v=>v.IsNullOrEmpty());
+			}
+
+		}
+
 		[JsonProperty(PropertyName = "type")]
 		public IEnumerable<string> Type { get; set; }
 		[JsonProperty(PropertyName = "values")]

@@ -6,7 +6,7 @@ namespace Nest
 	interface IFilterDescriptor<T>
 	 where T : class
 	{
-    BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters);
+		BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters);
 		BaseFilter Bool(Action<BoolFilterDescriptor<T>> booleanFilter);
 		BaseFilter Exists(Expression<Func<T, object>> fieldDescriptor);
 		BaseFilter Exists(string field);
@@ -26,18 +26,18 @@ namespace Nest
 		BaseFilter Ids(IEnumerable<string> types, IEnumerable<string> values);
 		BaseFilter Ids(IEnumerable<string> values);
 		BaseFilter Ids(string type, IEnumerable<string> values);
-		BaseFilter Limit(int limit);
+		BaseFilter Limit(int? limit);
 		BaseFilter MatchAll();
 		BaseFilter Missing(Expression<Func<T, object>> fieldDescriptor);
 		BaseFilter Missing(string field);
 		FilterDescriptor<T> Name(string name);
 		BaseFilter Nested(Action<NestedFilterDescriptor<T>> selector);
-    BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector);
+		BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector);
 		BaseFilter NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector);
-    BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters);
+		BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters);
 		BaseFilter Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix);
 		BaseFilter Prefix(string field, string prefix);
-    BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector);
+		BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector);
 		BaseFilter Range(Action<RangeFilterDescriptor<T>> rangeSelector);
 		BaseFilter Script(Action<ScriptFilterDescriptor> scriptSelector);
 		BaseFilter Term(Expression<Func<T, object>> fieldDescriptor, string term);

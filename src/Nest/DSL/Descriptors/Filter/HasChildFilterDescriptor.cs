@@ -15,6 +15,13 @@ namespace Nest
 		{
 			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
 		}
+		internal override bool IsConditionless
+		{
+			get
+			{
+				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless || this._Type.IsNullOrEmpty();
+			}
+		}
 
 		[JsonProperty("type")]
 		internal string _Type { get; set; }
@@ -23,12 +30,12 @@ namespace Nest
 		internal string _Scope { get; set;}
 		
 		[JsonProperty("query")]
-		internal QueryDescriptor<T> _QueryDescriptor { get; set;}
+		internal BaseQuery _QueryDescriptor { get; set; }
 
 		public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
-			this._QueryDescriptor = new QueryDescriptor<T>();
-			querySelector(this._QueryDescriptor);
+			var q = new QueryDescriptor<T>();
+			this._QueryDescriptor = querySelector(q);
 			return this;
 		}
 		public HasChildFilterDescriptor<T> Scope(string scope)

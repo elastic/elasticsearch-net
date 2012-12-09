@@ -8,5 +8,13 @@ namespace Nest
 {
 	public class MatchAllFilter : FilterBase
 	{
+		internal override bool IsConditionless
+		{
+			get
+			{
+				return false;
+			}
+
+		}
 	}
 }

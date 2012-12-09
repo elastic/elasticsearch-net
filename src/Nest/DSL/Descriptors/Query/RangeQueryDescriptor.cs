@@ -31,7 +31,7 @@ namespace Nest
 		{
 			get
 			{
-				return this._Field.IsNullOrEmpty();
+				return this._Field.IsNullOrEmpty() || (this._From == null && this._To == null);
 			}
 		}
 
@@ -63,7 +63,130 @@ namespace Nest
 			return this;
 		}
 
+
+		#region int
+		/// <summary>
+		/// The upper bound. Defaults to unbounded.
+		/// </summary>
+		public RangeQueryDescriptor<T> To(int? to)
+		{
+			this._To = to;
+			return this;
+		}
+		/// <summary>
+		/// The lower bound. Defaults to start from the first.
+		/// </summary>
+		/// <returns></returns>
+		public RangeQueryDescriptor<T> From(int? from)
+		{
+			this._From = from;
+			return this;
+		}
+
+		/// <summary>
+		/// Same as setting from and include_lower to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Greater(int? from)
+		{
+			this._From = from;
+			this._FromInclusive = false;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting from and include_lower to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> GreaterOrEquals(int? from)
+		{
+			this._From = from;
+			this._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and include_upper to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Lower(int? to)
+		{
+			this._To = to;
+			this._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and include_upper to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> LowerOrEquals(int? to)
+		{
+			this._To = to;
+			this._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			return this;
+		}
+		#endregion
+
+		#region double
+		/// <summary>
+		/// The upper bound. Defaults to unbounded.
+		/// </summary>
+		public RangeQueryDescriptor<T> To(double? to)
+		{
+			this._To = to;
+			return this;
+		}
+		/// <summary>
+		/// The lower bound. Defaults to start from the first.
+		/// </summary>
+		/// <returns></returns>
+		public RangeQueryDescriptor<T> From(double? from)
+		{
+			this._From = from;
+			return this;
+		}
+
+		/// <summary>
+		/// Same as setting from and include_lower to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Greater(double? from)
+		{
+			this._From = from;
+			this._FromInclusive = from.HasValue ? new Nullable<bool>(false) : null;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting from and include_lower to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> GreaterOrEquals(double? from)
+		{
+			this._From = from;
+			this._FromInclusive = from.HasValue ? new Nullable<bool>(true) : null;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and include_upper to false.
+		/// </summary>
+		public RangeQueryDescriptor<T> Lower(double? to)
+		{
+			this._To = to;
+			this._ToInclusive = to.HasValue ? new Nullable<bool>(false) : null;
+			return this;
+		}
+		/// <summary>
+		/// Same as setting to and include_upper to true.
+		/// </summary>
+		public RangeQueryDescriptor<T> LowerOrEquals(double? to)
+		{
+			this._To = to;
+			this._ToInclusive = to.HasValue ? new Nullable<bool>(true) : null;
+			return this;
+		}
+		#endregion
+
 		#region string
+		/// <summary>
+		/// The upper bound. Defaults to unbounded.
+		/// </summary>
+		public RangeQueryDescriptor<T> To(string to)
+		{
+			this._To = to;
+			return this;
+		}
 		/// <summary>
 		/// The lower bound. Defaults to start from the first.
 		/// </summary>
@@ -75,220 +198,112 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The upper bound. Defaults to unbounded.
-		/// </summary>
-		public RangeQueryDescriptor<T> To(string to)
-		{
-			this._To = to;
-			return this;
-		}
-
-
-		/// <summary>
-		/// Same as setting from and from_inclusive to false.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
 		public RangeQueryDescriptor<T> Greater(string from)
 		{
 			this._From = from;
-			this._FromInclusive = false;
+			this._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
 		public RangeQueryDescriptor<T> GreaterOrEquals(string from)
 		{
 			this._From = from;
-			this._FromInclusive = true;
+			this._FromInclusive = !from.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
 		public RangeQueryDescriptor<T> Lower(string to)
 		{
 			this._To = to;
-			this._ToInclusive = false;
+			this._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(false) : null;
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
 		public RangeQueryDescriptor<T> LowerOrEquals(string to)
 		{
 			this._To = to;
-			this._ToInclusive = true;
+			this._ToInclusive = !to.IsNullOrEmpty() ? new Nullable<bool>(true) : null;
 			return this;
 		}
 		#endregion
 
 		#region DateTime
 		/// <summary>
-		/// The lower bound. Defaults to start from the first.
-		/// </summary>
-		/// <returns></returns>
-		public RangeQueryDescriptor<T> From(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
-		{
-
-			this._From = from.ToString(format);
-			return this;
-		}
-
-		/// <summary>
 		/// The upper bound. Defaults to unbounded.
 		/// </summary>
-		public RangeQueryDescriptor<T> To(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
+		public RangeQueryDescriptor<T> To(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
-			this._To = to.ToString(format);
+			if (!to.HasValue)
+				return this;
+			this._To = to.Value.ToString(format);
 			return this;
 		}
-
-
-		/// <summary>
-		/// Same as setting from and from_inclusive to false.
-		/// </summary>
-		public RangeQueryDescriptor<T> Greater(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
-		{
-			this._From = from.ToString(format);
-			this._FromInclusive = false;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting from and from_inclusive to true.
-		/// </summary>
-		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime from, string format = "yyyy-MM-dd'T'HH:mm:ss")
-		{
-			this._From = from.ToString(format);
-			this._FromInclusive = true;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting to and to_inclusive to false.
-		/// </summary>
-		public RangeQueryDescriptor<T> Lower(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
-		{
-			this._To = to.ToString(format);
-			this._ToInclusive = false;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting to and to_inclusive to true.
-		/// </summary>
-		public RangeQueryDescriptor<T> LowerOrEquals(DateTime to, string format = "yyyy-MM-dd'T'HH:mm:ss")
-		{
-			this._To = to.ToString(format);
-			this._ToInclusive = true;
-			return this;
-		}
-		#endregion
-
-		#region int
 		/// <summary>
 		/// The lower bound. Defaults to start from the first.
 		/// </summary>
 		/// <returns></returns>
-		public RangeQueryDescriptor<T> From(int from)
+		public RangeQueryDescriptor<T> From(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
-			this._From = from;
-			return this;
-		}
-		/// <summary>
-		/// The upper bound. Defaults to unbounded.
-		/// </summary>
-		public RangeQueryDescriptor<T> To(int to)
-		{
-			this._To = to;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting from and from_inclusive to false.
-		/// </summary>
-		public RangeQueryDescriptor<T> Greater(int from)
-		{
-			this._From = from;
-			this._FromInclusive = false;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting from and from_inclusive to true.
-		/// </summary>
-		public RangeQueryDescriptor<T> GreaterOrEquals(int from)
-		{
-			this._From = from;
-			this._FromInclusive = true;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting to and to_inclusive to false.
-		/// </summary>
-		public RangeQueryDescriptor<T> Lower(int to)
-		{
-			this._To = to;
-			this._ToInclusive = false;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting to and to_inclusive to true.
-		/// </summary>
-		public RangeQueryDescriptor<T> LowerOrEquals(int to)
-		{
-			this._To = to;
-			this._ToInclusive = true;
-			return this;
-		}
-		#endregion
+			if (!from.HasValue)
+				return this;
 
-		#region double
-		/// <summary>
-		/// The lower bound. Defaults to start from the first.
-		/// </summary>
-		/// <returns></returns>
-		public RangeQueryDescriptor<T> From(double from)
-		{
-			this._From = from;
+			this._From = from.Value.ToString(format);
 			return this;
 		}
+
 		/// <summary>
-		/// The upper bound. Defaults to unbounded.
+		/// Same as setting from and include_lower to false.
 		/// </summary>
-		public RangeQueryDescriptor<T> To(double to)
+		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
-			this._To = to;
-			return this;
-		}
-		/// <summary>
-		/// Same as setting from and from_inclusive to false.
-		/// </summary>
-		public RangeQueryDescriptor<T> Greater(double from)
-		{
-			this._From = from;
+			if (!from.HasValue)
+				return this;
+
+			this._From = from.Value.ToString(format);
 			this._FromInclusive = false;
 			return this;
 		}
 		/// <summary>
-		/// Same as setting from and from_inclusive to true.
+		/// Same as setting from and include_lower to true.
 		/// </summary>
-		public RangeQueryDescriptor<T> GreaterOrEquals(double from)
+		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
-			this._From = from;
+			if (!from.HasValue)
+				return this;
+
+			this._From = from.Value.ToString(format);
 			this._FromInclusive = true;
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to false.
+		/// Same as setting to and include_upper to false.
 		/// </summary>
-		public RangeQueryDescriptor<T> Lower(double to)
+		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
-			this._To = to;
+			if (!to.HasValue)
+				return this;
+
+			this._To = to.Value.ToString(format);
 			this._ToInclusive = false;
 			return this;
 		}
 		/// <summary>
-		/// Same as setting to and to_inclusive to true.
+		/// Same as setting to and include_upper to true.
 		/// </summary>
-		public RangeQueryDescriptor<T> LowerOrEquals(double to)
+		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss")
 		{
-			this._To = to;
+			if (!to.HasValue)
+				return this;
+
+			this._To = to.Value.ToString(format);
 			this._ToInclusive = true;
 			return this;
 		}

@@ -9,25 +9,33 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization=MemberSerialization.OptIn)]
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedFilterDescriptor<T> : FilterBase where T : class
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof(StringEnumConverter))]
 		internal NestedScore? _Score { get; set; }
 
 		[JsonProperty("query")]
-		internal QueryDescriptor<T> _QueryDescriptor { get; set;}
-		
+		internal BaseQuery _QueryDescriptor { get; set; }
+
 		[JsonProperty("path")]
 		internal string _Path { get; set; }
 
 		[JsonProperty("_scope")]
 		internal string _Scope { get; set; }
 
-    public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		internal override bool IsConditionless
 		{
-			this._QueryDescriptor = new QueryDescriptor<T>();
-			querySelector(this._QueryDescriptor);
+			get
+			{
+				return this._QueryDescriptor == null || this._QueryDescriptor.IsConditionless;
+			}
+		}
+
+		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		{
+			var q = new QueryDescriptor<T>();
+			this._QueryDescriptor = querySelector(q);
 			return this;
 		}
 
