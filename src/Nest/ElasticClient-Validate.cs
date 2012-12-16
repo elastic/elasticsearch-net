@@ -8,7 +8,6 @@ namespace Nest
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
 		public IValidateResponse ValidateRaw(string query)
 		{
 			return this._Validate("_validate/query", query);

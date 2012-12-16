@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
           .Interval(DateInterval.Day)
@@ -44,7 +44,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
           .Interval(DateInterval.Day, DateRounding.Half_Floor)
@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
           .Interval(DateInterval.Day, DateRounding.Half_Floor)
@@ -94,7 +94,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetDateHistogram(h => h
           .OnField(f => f.StartedOn)
           .Interval(DateInterval.Day, DateRounding.Half_Floor)

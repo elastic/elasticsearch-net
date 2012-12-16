@@ -8,8 +8,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public ICountResponse CountAll(string query)
+		public ICountResponse CountAllRaw(string query)
 		{
 			return this._Count("_count", query);
 		}
