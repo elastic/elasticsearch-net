@@ -29,7 +29,7 @@ namespace Nest
     ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
     ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
     ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
-    ICountResponse CountAll(string query);
+    ICountResponse CountAllRaw(string query);
     ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
     IIndicesResponse CreateIndex(string index, IndexSettings settings);
     IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
@@ -85,10 +85,10 @@ namespace Nest
     System.Threading.Tasks.Task<IDeleteResponse> DeleteByIdAsync<T>(string id) where T : class;
     System.Threading.Tasks.Task<IDeleteResponse> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class;
     IDeleteResponse DeleteByQuery(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
-    IDeleteResponse DeleteByQuery(string query, DeleteByQueryParameters parameters = null);
+    IDeleteResponse DeleteByQueryRaw(string query, DeleteByQueryParameters parameters = null);
     IDeleteResponse DeleteByQuery<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
     System.Threading.Tasks.Task<IDeleteResponse> DeleteByQueryAsync(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
-    System.Threading.Tasks.Task<IDeleteResponse> DeleteByQueryAsync(string query, DeleteByQueryParameters parameters = null);
+    System.Threading.Tasks.Task<IDeleteResponse> DeleteByQueryRawAsync(string query, DeleteByQueryParameters parameters = null);
     System.Threading.Tasks.Task<IDeleteResponse> DeleteByQueryAsync<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
     IIndicesResponse DeleteIndex(string index);
     IIndicesResponse DeleteIndex<T>() where T : class;
@@ -193,7 +193,7 @@ namespace Nest
     IIndicesShardResponse Refresh(System.Collections.Generic.IEnumerable<string> indices);
     IIndicesShardResponse Refresh(string index);
     IIndicesShardResponse Refresh<T>() where T : class;
-    IRegisterPercolateResponse RegisterPercolator(string index, string name, string query);
+    IRegisterPercolateResponse RegisterPercolatorRaw(string index, string name, string query);
     IRegisterPercolateResponse RegisterPercolator(string name, Action<QueryPathDescriptor<dynamic>> querySelector);
     IRegisterPercolateResponse RegisterPercolator<T>(string name, Action<QueryPathDescriptor<T>> querySelector) where T : class;
     IIndicesOperationResponse RemoveAlias(AliasParams aliasParams);
@@ -242,5 +242,6 @@ namespace Nest
     ISettingsOperationResponse UpdateSettings(IndexSettings settings);
     ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
     IElasticSearchVersionInfo VersionInfo { get; }
+	  IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
   }
 }

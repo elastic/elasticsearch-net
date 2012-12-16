@@ -110,6 +110,15 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
 	{
+		[JsonProperty("disable_coord")]
+		internal bool _DisableCoord { get; set; }
+
+		public BoolQueryDescriptor<T> DisableCoord()
+		{
+			this._DisableCoord = true;
+			return this;
+		}
+
 		[JsonProperty("minimum_number_should_match")]
 		internal int? _MinimumNumberShouldMatches { get; set; }
 

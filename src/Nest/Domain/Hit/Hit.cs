@@ -25,7 +25,7 @@ namespace Nest
 		public string Id { get; internal set; }
 
 		[JsonProperty(PropertyName = "sort")]
-		public IEnumerable<float> Sorts { get; internal set; }
+		public IEnumerable<object> Sorts { get; internal set; }
 
 		[JsonProperty(PropertyName = "highlight")]
 		public Dictionary<string, List<string>> Highlight { get; internal set; }

@@ -26,6 +26,7 @@ namespace Nest
 				return this._Validate(path, stringQuery);
 			return this._ValidateQueryString(path);
 		}
+
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>

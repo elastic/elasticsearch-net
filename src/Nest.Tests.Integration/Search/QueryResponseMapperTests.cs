@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Search
 		}
 
 		[Test]
-		public void HitsScoreIsSet()
+		public void HitsSortsIsSet()
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
@@ -71,6 +71,19 @@ namespace Nest.Tests.Integration.Search
 			var hits = queryResults.Hits;
 
 			Assert.True(hits.Hits.All(h=>h.Sorts.Count() == 2));
+		}
+		[Test]
+		public void HitsSortsIsSetWithStringSort()
+		{
+			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+				.QueryString("*")
+				.SortAscending(p=>p.Name.Suffix("sort"))
+				.SortDescending(p => p.Id)
+			);
+
+			var hits = queryResults.Hits;
+
+			Assert.True(hits.Hits.All(h => h.Sorts.Count() == 2));
 		}
 
 		[Test]
