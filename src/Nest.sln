@@ -9,7 +9,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Notes", "_Notes", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
 	ProjectSection(SolutionItems) = preProject
 		license.txt = license.txt
-		query_dsl_development_notes.txt = query_dsl_development_notes.txt
 		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject

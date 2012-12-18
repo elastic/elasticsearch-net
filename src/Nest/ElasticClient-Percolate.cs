@@ -32,8 +32,7 @@ namespace Nest
 			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._RegisterPercolator(path, query);
 		}
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public IRegisterPercolateResponse RegisterPercolator(string index, string name, string query)
+		public IRegisterPercolateResponse RegisterPercolatorRaw(string index, string name, string query)
 		{
 			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
 			return this._RegisterPercolator(path, query);

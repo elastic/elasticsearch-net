@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
           .OnField(f=>f.Origin)
           .OnValueField(f=>f.Origin)
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
           .OnField(f => f.Origin)
           .OnValueField(f => f.Origin)
@@ -79,7 +79,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
           .OnField(f => f.Origin)
           .OnValueField(f => f.Origin)
@@ -108,7 +108,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetGeoDistance("geo1", gd => gd
           .OnField(f => f.Origin)
           .OnValueScript("doc['num1'].value * factor")

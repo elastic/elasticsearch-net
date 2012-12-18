@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Search
 		{
 			var client = this.ConnectedClient;
 			IQueryResponse<ElasticSearchProject> queryResults = client.Search<ElasticSearchProject>(s=>s
-				.QueryRawJson("here be dragons")
+				.QueryRaw("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
 			var error = queryResults.ConnectionStatus.Error;

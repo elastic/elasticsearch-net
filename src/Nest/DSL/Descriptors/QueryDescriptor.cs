@@ -194,6 +194,10 @@ namespace Nest
 			{
 				this.TermsQueryDescriptor.Add("minimum_match", query._MinMatch);
 			}
+			if (query._DisableCord)
+			{
+				this.TermsQueryDescriptor.Add("disable_coord", query._DisableCord);	
+			}
 			return new QueryDescriptor<T> { TermsQueryDescriptor = this.TermsQueryDescriptor };
 		}
 

@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetHistogram(h => h.OnField(f=>f.LOC).Interval(100));
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetHistogram(h => h.OnField(f => f.StartedOn).TimeInterval("1.5h"));
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
@@ -59,7 +59,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetHistogram(h => h
           .OnField(f => f.StartedOn)
           .TimeInterval(TimeSpan.FromHours(1.5))
@@ -83,7 +83,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetHistogram("needs_a_name", h => h
           .KeyField("key_field_name")
           .ValueField("value_field_name")
@@ -109,7 +109,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetHistogram("needs_a_name", h => h
           .KeyScript("doc['date'].date.minuteOfHour")
           .ValueScript("doc['num1'].value")
@@ -135,7 +135,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetHistogram("needs_a_name", h => h
           .KeyScript("doc['date'].date.minuteOfHour * factor1")
           .ValueScript("doc['num1'].value * factor2")

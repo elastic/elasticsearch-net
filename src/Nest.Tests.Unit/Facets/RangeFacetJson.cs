@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetRange<int>(t => t
           .OnField(f => f.LOC)
           .Ranges(
@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetRange<double>(t => t
           .OnField(f => f.LOC)
           .Ranges(
@@ -110,7 +110,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetRange<DateTime>(t => t
           .OnField(f => f.StartedOn)
           .Ranges(
@@ -140,7 +140,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetRange<DateTime>("needs_a_name", t => t
           .KeyScript("doc['date'].date.minuteOfHour")
           .ValueScript("doc['num1'].value")
@@ -172,7 +172,7 @@ namespace Nest.Tests.Unit.Facets
       var s = new SearchDescriptor<ElasticSearchProject>()
         .From(0)
         .Size(10)
-        .QueryRawJson(@"{ raw : ""query""}")
+        .QueryRaw(@"{ raw : ""query""}")
         .FacetRange<DateTime>("needs_a_name", t => t
           .KeyField("field_name")
           .ValueField("another_field_name")

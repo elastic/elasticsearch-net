@@ -60,6 +60,7 @@ namespace Nest.Tests.Unit.Query
 					TermsDescriptor(tq => tq
 						.OnField(f=>f.Name).Terms("elasticsearch.pm", "nest")
 						.MinimumMatch(2)
+						.DisableCoord()
 					)
 				);
 
@@ -68,7 +69,8 @@ namespace Nest.Tests.Unit.Query
 				query : {
 						terms: {
 							""name"": [""elasticsearch.pm"", ""nest""],
-							minimum_match: 2
+							minimum_match: 2,
+							disable_coord : true
 						}
 					}
 			}";
