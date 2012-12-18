@@ -34,6 +34,7 @@ namespace Nest
 			var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
 			return r;
 		}
+		
 		/// <summary>
 		/// Search using T as the return type
 		/// </summary>

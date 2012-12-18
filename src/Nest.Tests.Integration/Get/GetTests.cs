@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Get
 		[Test]
 		public void SimpleMultiGet()
 		{
-			var elasticSearchProjects = this.ConnectedClient.Get<ElasticSearchProject>(new [] { 4, 5 });
+			var elasticSearchProjects = this.ConnectedClient.MultiGet<ElasticSearchProject>(new [] { 4, 5 });
 
 			Assert.NotNull(elasticSearchProjects);
 			Assert.IsNotEmpty(elasticSearchProjects);

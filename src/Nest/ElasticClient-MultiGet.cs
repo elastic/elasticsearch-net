@@ -9,44 +9,44 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		public IEnumerable<T> Get<T>(IEnumerable<int> ids)
+		public IEnumerable<T> MultiGet<T>(IEnumerable<int> ids)
 			where T : class
 		{
-			return this.Get<T>(ids.Select(i => Convert.ToString(i)));
+			return this.MultiGet<T>(ids.Select(i => Convert.ToString(i)));
 		}
 
 
 		/// <summary>
 		/// Gets multiple documents of T by id in the default index and the inferred typename for T
 		/// </summary>
-		public IEnumerable<T> Get<T>(IEnumerable<string> ids)
+		public IEnumerable<T> MultiGet<T>(IEnumerable<string> ids)
 			where T : class
 		{
-	  var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
 
-			return this.Get<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
+			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
 		/// <summary>
 		/// Gets multiple documents of T by id in the specified index and the specified typename for T
 		/// </summary>
-		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<int> ids)
+		public IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<int> ids)
 			where T : class
 		{
-			return this.Get<T>(index, type, ids.Select(i => Convert.ToString(i)));
+			return this.MultiGet<T>(index, type, ids.Select(i => Convert.ToString(i)));
 		}
 		/// <summary>
 		/// Gets multiple documents of T by id in the specified index and the specified typename for T
 		/// </summary>
-		public IEnumerable<T> Get<T>(string index, string type, IEnumerable<string> ids)
+		public IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<string> ids)
 			where T : class
 		{
-			return this.Get<T>(ids, this.PathResolver.CreateIndexTypePath(index, type));
+			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, type));
 		}
 
-		private IEnumerable<T> Get<T>(IEnumerable<string> ids, string path)
+		private IEnumerable<T> MultiGet<T>(IEnumerable<string> ids, string path)
 			where T : class
 		{
 			var data = @"{{ ""ids"": {0} }}".F(JsonConvert.SerializeObject(ids));
@@ -60,6 +60,6 @@ namespace Nest
 				.Where(h => h.Source != null) // non-existent ids come back as a hit without a "_source"
 				.Select(h => h.Source);
 		}
-		
+
 	}
 }
