@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\dep\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\dep\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -64,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseJsonTests.cs" />
+    <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Facets\FacetJson.cs" />
     <Compile Include="Facets\FilterFacetJson.cs" />

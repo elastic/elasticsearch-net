@@ -1,4 +1,5 @@
 ﻿using System;
+using Nest.Domain;
 using Nest.FactoryDsl;
 namespace Nest
 {
@@ -112,6 +113,9 @@ namespace Nest
     System.Collections.Generic.IEnumerable<T> Get<T>(string index, string type, System.Collections.Generic.IEnumerable<string> ids) where T : class;
     T Get<T>(string index, string type, int id) where T : class;
     T Get<T>(string index, string type, string id) where T : class;
+	FieldSelection<T> GetFieldSelection<T>(Action<GetDescriptor<T>> getSelector) where T : class;
+	T Get<T>(Action<GetDescriptor<T>> getSelector) where T : class;
+
     IIndexSettingsResponse GetIndexSettings();
     IIndexSettingsResponse GetIndexSettings(string index);
     System.Collections.Generic.IEnumerable<string> GetIndicesPointingToAlias(string alias);

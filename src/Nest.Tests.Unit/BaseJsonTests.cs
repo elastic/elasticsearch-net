@@ -12,6 +12,7 @@ using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using System.Reflection;
 using System.IO;
+using Moq;
 
 namespace Nest.Tests.Unit
 {
@@ -19,12 +20,14 @@ namespace Nest.Tests.Unit
 	{
 		protected readonly IConnectionSettings _settings;
 		protected readonly IElasticClient _client;
+		protected readonly IConnection _connection;
 
 		public BaseJsonTests()
 		{
 			this._settings = new ConnectionSettings(Test.Default.Uri)
 				.SetDefaultIndex(Test.Default.DefaultIndex);
-			this._client = new ElasticClient(this._settings);
+			this._connection = new InMemoryConnection(this._settings);
+			this._client = new ElasticClient(this._settings, this._connection);
 		}
 
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
