@@ -24,23 +24,5 @@ namespace Nest.Tests.Unit.Core.Versioning
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("version=1", status.RequestUrl);
 		}
-		[Test]
-		public void GetSupportsVersioning()
-		{
-			//TODO: investigate version on get
-			//The elasticsearch docs make no mention of being able to specify version
-			//http://www.elasticsearch.org/guide/reference/api/get.html
-
-			//this._client.Get<ElasticSearchProject>(g=>g.);
-		}
-		[Test]
-		public void UpdateSupportsVersioning()
-		{
-			//TODO: investigate version on update
-			//The elasticsearch docs make no mention of being able to specify version
-			//http://www.elasticsearch.org/guide/reference/api/get.html
-
-			//this._client.Get<ElasticSearchProject>(g=>g.);
-		}
 	}
 }

@@ -114,6 +114,14 @@ namespace Nest
 		FieldSelection<T> GetFieldSelection<T>(Action<GetDescriptor<T>> getSelector) where T : class;
 		T Get<T>(Action<GetDescriptor<T>> getSelector) where T : class;
 
+		IGetResponse<T> GetFull<T>(int id) where T : class;
+		IGetResponse<T> GetFull<T>(string id) where T : class;
+
+		IGetResponse<T> GetFull<T>(string index, string type, int id) where T : class;
+		IGetResponse<T> GetFull<T>(string index, string type, string id) where T : class;
+		IGetResponse<T> GetFull<T>(Action<GetDescriptor<T>> getSelector) where T : class;
+
+
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(System.Collections.Generic.IEnumerable<int> ids) where T : class;
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(System.Collections.Generic.IEnumerable<string> ids) where T : class;
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(string index, string type, System.Collections.Generic.IEnumerable<int> ids) where T : class;

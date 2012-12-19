@@ -28,11 +28,10 @@ namespace Nest.Domain
 				var t = typeof(K);
 				if (o is JArray && t.GetInterfaces().Contains(typeof(IEnumerable)))
 				{
-
 					var array = (JArray)o;
 					return array.ToObject<K>();
 				}
-				return (K)o;
+				return (K)Convert.ChangeType(o, typeof(K));
 			}
 			return default(K);
 		}

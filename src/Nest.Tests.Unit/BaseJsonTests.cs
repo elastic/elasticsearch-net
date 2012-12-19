@@ -30,6 +30,14 @@ namespace Nest.Tests.Unit
 			this._client = new ElasticClient(this._settings, this._connection);
 		}
 
+		protected void deb(string s)
+		{
+			//I use NCrunch for continuous testing
+			//with this i can print variables as i type...
+			//Lazy programmers for the win!
+			throw new Exception(s);
+		}
+
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
 			var json = TestElasticClient.Serialize(o);

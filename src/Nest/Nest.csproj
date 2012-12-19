@@ -65,6 +65,7 @@
     <Compile Include="Domain\Connection\InMemoryConnection.cs" />
     <Compile Include="Domain\FieldSelection.cs" />
     <Compile Include="Domain\Responses\BulkResponse.cs" />
+    <Compile Include="Domain\Responses\GetResponse.cs" />
     <Compile Include="Domain\Responses\DeleteResponse.cs" />
     <Compile Include="Domain\Responses\IndexResponse.cs" />
     <Compile Include="DSL\Descriptors\GetDescriptor.cs" />
