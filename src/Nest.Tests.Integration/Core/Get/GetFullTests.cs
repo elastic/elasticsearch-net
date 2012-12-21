@@ -11,7 +11,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using FluentAssertions;
-namespace Nest.Tests.Integration.Get
+namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
 	public class GetFullTests : BaseElasticSearchTests

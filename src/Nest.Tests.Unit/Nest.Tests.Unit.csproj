@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseJsonTests.cs" />
-    <Compile Include="Core\Get\GetTests.cs" />
+    <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Facets\FacetJson.cs" />
