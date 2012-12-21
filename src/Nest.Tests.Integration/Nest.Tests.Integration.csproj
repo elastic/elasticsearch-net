@@ -33,6 +33,9 @@
     <Reference Include="AutoPoco">
       <HintPath>..\..\dep\autopoco\AutoPoco.dll</HintPath>
     </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,8 +53,9 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="Core\Get\GetFullTests.cs" />
+    <Compile Include="Core\Get\GetTests.cs" />
     <Compile Include="Core\ValidateTests.cs" />
-    <Compile Include="Get\GetTests.cs" />
     <Compile Include="Index\GetIdFromElasticsearchTests.cs" />
     <Compile Include="Index\IndexDefaultValueTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
@@ -131,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Get\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

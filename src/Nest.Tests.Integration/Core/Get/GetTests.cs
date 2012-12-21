@@ -5,7 +5,7 @@ using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Get
+namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
 	public class GetTests : BaseElasticSearchTests
