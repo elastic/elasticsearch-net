@@ -61,19 +61,27 @@ namespace Nest.Tests.Integration
 			if (client.IsValid)
 			{
 				var projects = NestTestData.Data;
-				var cloneIndex = Test.Default.DefaultIndex + "_clone";
-				var bulkParameters = new SimpleBulkParameters() { Refresh = true };
-				client.DeleteMapping<ElasticSearchProject>();
-				client.DeleteMapping<ElasticSearchProject>(cloneIndex);				
-				client.Map<ElasticSearchProject>();
-				client.Map<ElasticSearchProject>(cloneIndex);
-				this.ConnectedClient.OpenIndex<ElasticSearchProject>();
-				this.ConnectedClient.OpenIndex(cloneIndex);
-				client.IndexMany(projects, bulkParameters);
-				client.IndexMany(projects, cloneIndex, bulkParameters);
+				var people = NestTestData.People;
 
+				this.ResetType<ElasticSearchProject>(client, projects);
+				this.ResetType<Person>(client, people);
+
+				
 			}
 		}
+		private void ResetType<T>(IElasticClient client, IEnumerable<T> objects) where T : class {
+			var cloneIndex = Test.Default.DefaultIndex + "_clone";
+			var bulkParameters = new SimpleBulkParameters() { Refresh = true };
+			client.DeleteMapping<T>();
+			client.DeleteMapping<T>(cloneIndex);
+			client.Map<T>();
+			client.Map<T>(cloneIndex);
+			this.ConnectedClient.OpenIndex<T>();
+			this.ConnectedClient.OpenIndex(cloneIndex);
+			client.IndexMany(objects, bulkParameters);
+			client.IndexMany(objects, cloneIndex, bulkParameters);
+		}
+
 		protected void DeleteIndices()
 		{
 			var client = CreateClient();

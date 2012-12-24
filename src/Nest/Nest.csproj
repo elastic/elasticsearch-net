@@ -62,6 +62,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
+    <Compile Include="ElasticClient-GetFull.cs" />
     <Compile Include="Domain\Connection\InMemoryConnection.cs" />
     <Compile Include="Domain\FieldSelection.cs" />
     <Compile Include="Domain\Responses\BulkResponse.cs" />

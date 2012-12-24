@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\..\dep\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
@@ -67,7 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseJsonTests.cs" />
-    <Compile Include="Core\Get\GetTests.cs" />
+    <Compile Include="Core\Get\GetMultiTests.cs" />
+    <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Facets\FacetJson.cs" />

@@ -15,7 +15,6 @@ namespace Nest
 			return this.MultiGet<T>(ids.Select(i => Convert.ToString(i)));
 		}
 
-
 		/// <summary>
 		/// Gets multiple documents of T by id in the default index and the inferred typename for T
 		/// </summary>
@@ -45,7 +44,66 @@ namespace Nest
 		{
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, type));
 		}
+		public IEnumerable<object> MultiGet(Action<MultiGetDescriptor> multiGetSelector)
+		{
+			multiGetSelector.ThrowIfNull("multiGetSelector");
+			var descriptor = new MultiGetDescriptor();
+			multiGetSelector(descriptor);
+			var data = @"{ ""docs"" : [";
+			var objects = new List<string>();
+			foreach (var g in descriptor._GetOperations)
+			{
+				string objectJson = "{";
+				var properties = new List<string>();
+				if (descriptor._FixedIndex.IsNullOrEmpty())
+				{
+					var index = string.IsNullOrEmpty(g._Index) ? this.IndexNameResolver.GetIndexForType(g._ClrType) : g._Index;
+					properties.Add(@"""_index"" : " + this.Serialize(index));
+				}
 
+				if (descriptor._FixedType.IsNullOrEmpty())
+				{
+					var type = string.IsNullOrEmpty(g._Type) ? this.TypeNameResolver.GetTypeNameFor(g._ClrType) : g._Type;
+					properties.Add(@"""_type"" : " + this.Serialize(type));
+				}
+				properties.Add(@"""_id"" : " + this.Serialize(g._Id));
+
+				if (g._Fields.HasAny())
+					properties.Add(@"""fields"" : " + this.Serialize(g._Fields));
+
+				objectJson += string.Join(", ", properties);
+				objectJson += "}";
+				objects.Add(objectJson);
+			}
+			data += string.Join(", ", objects);
+			data += "] }";
+
+			var path = "";
+			if (!descriptor._FixedIndex.IsNullOrEmpty())
+			{
+				path += descriptor._FixedIndex;
+				if (!descriptor._FixedIndex.IsNullOrEmpty())
+				{
+					path += "/" + descriptor._FixedType;
+				}
+			}
+			path += "/_mget";
+			var response = this.Connection.PostSync(path, data);
+			if (!response.Success)
+				yield break;
+
+			var jsonObject = JObject.Parse(response.Result);
+			var docsJarray = (JArray)jsonObject["docs"];
+			var withMeta = docsJarray.Zip(descriptor._GetOperations, (doc, desc) => new { Hit = doc, Descriptor = desc });
+			foreach (var m in withMeta)
+			{
+				// non-existent ids come back as a hit without a "_source"
+
+				if (m.Hit["_source"] != null)
+					yield return JsonConvert.DeserializeObject(m.Hit["_source"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
+				
+			}			
+		}
 		private IEnumerable<T> MultiGet<T>(IEnumerable<string> ids, string path)
 			where T : class
 		{

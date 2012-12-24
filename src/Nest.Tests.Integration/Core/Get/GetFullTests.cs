@@ -58,7 +58,6 @@ namespace Nest.Tests.Integration.Get
 			result.Fields.FieldValue<int>(p => p.Id).Should().Be(1);
 			result.Fields.FieldValue<double>(p => p.DoubleValue).Should().BeApproximately(31.931359384177D, 0.00000001D);
 
-
 		}
 	}
 }

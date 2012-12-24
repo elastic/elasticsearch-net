@@ -1,6 +1,7 @@
 ﻿using System;
 using Nest.Domain;
 using Nest.FactoryDsl;
+using System.Collections.Generic;
 namespace Nest
 {
 	public interface IElasticClient
@@ -126,6 +127,7 @@ namespace Nest
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(System.Collections.Generic.IEnumerable<string> ids) where T : class;
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(string index, string type, System.Collections.Generic.IEnumerable<int> ids) where T : class;
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(string index, string type, System.Collections.Generic.IEnumerable<string> ids) where T : class;
+		IEnumerable<object> MultiGet(Action<MultiGetDescriptor> multiGetSelector);
 
 		IIndexSettingsResponse GetIndexSettings();
 		IIndexSettingsResponse GetIndexSettings(string index);
