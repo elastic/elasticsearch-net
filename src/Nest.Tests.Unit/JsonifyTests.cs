@@ -166,11 +166,11 @@ namespace Nest.Tests.Unit
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc"": ""asc""
+						""loc.sort"": ""asc""
 					},
 					fields: [""id"", ""name""]
 				}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
 		public void TestSortDescending()
@@ -184,12 +184,12 @@ namespace Nest.Tests.Unit
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
-						""loc"": ""asc"",
-						""name"": ""desc""
+						""loc.sort"": ""asc"",
+						""name.sort"": ""desc""
 					},
 					fields: [""id"", ""name""]
 				}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 
 		[Test]
