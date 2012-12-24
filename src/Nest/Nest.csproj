@@ -72,6 +72,7 @@
     <Compile Include="Domain\Responses\IndexResponse.cs" />
     <Compile Include="DSL\Descriptors\GetDescriptor.cs" />
     <Compile Include="DSL\Factory\Query\MatchQueryBuilder.cs" />
+    <Compile Include="ElasticClient-GetFull.cs" />
     <Compile Include="ElasticClient-MultiGet.cs" />
     <Compile Include="Domain\Settings\NgramTokenFiler.cs" />
     <Compile Include="Domain\Settings\SynonymTokenFilter.cs" />
