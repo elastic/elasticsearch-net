@@ -101,7 +101,8 @@ namespace Nest
 
 				if (m.Hit["_source"] != null)
 					yield return JsonConvert.DeserializeObject(m.Hit["_source"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
-				
+				else if (m.Hit["fields"] != null)
+					yield return JsonConvert.DeserializeObject(m.Hit["fields"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
 			}			
 		}
 		private IEnumerable<T> MultiGet<T>(IEnumerable<string> ids, string path)
