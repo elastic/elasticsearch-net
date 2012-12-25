@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nest.Domain;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
@@ -45,44 +47,15 @@ namespace Nest
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, type));
 		}
 		
-		public IEnumerable<object> MultiGet(Action<MultiGetDescriptor> multiGetSelector)
+		public MultiGetResponse MultiGetFull(Action<MultiGetDescriptor> multiGetSelector)
 		{
 			MultiGetDescriptor descriptor;
 			var response = _multiGetUsingDescriptor(multiGetSelector, out descriptor);
-			if (!response.Success)
-				yield break;
 
-			var jsonObject = JObject.Parse(response.Result);
-			var docsJarray = (JArray)jsonObject["docs"];
-			var withMeta = docsJarray.Zip(descriptor._GetOperations, (doc, desc) => new { Hit = doc, Descriptor = desc });
-			foreach (var m in withMeta)
-			{
-				// non-existent ids come back as a hit without a "_source"
-				if (m.Hit["_source"] != null)
-					yield return JsonConvert.DeserializeObject(m.Hit["_source"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
-				else if (m.Hit["fields"] != null)
-					yield return JsonConvert.DeserializeObject(m.Hit["fields"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
-			}			
-		}
-		public IEnumerable<MultiGetHit<object>> MultiGetWithMetaData(Action<MultiGetDescriptor> multiGetSelector)
-		{
-			MultiGetDescriptor descriptor;
-			var response = _multiGetUsingDescriptor(multiGetSelector, out descriptor);
-			if (!response.Success)
-				yield break;
+			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
+			var multiGetResponse = this.ToParsedResponse<MultiGetResponse>(response, extraConverters: new List<JsonConverter> { multiGetHitConverter });
 
-			var jsonObject = JObject.Parse(response.Result);
-			var docsJarray = (JArray)jsonObject["docs"];
-			var withMeta = docsJarray.Zip(descriptor._GetOperations, (doc, desc) => new { Hit = doc, Descriptor = desc });
-			foreach (var m in withMeta)
-			{
-				var genericType = typeof(List<>).MakeGenericType(m.Descriptor._ClrType);
-				// non-existent ids come back as a hit without a "_source"
-				if (m.Hit["_source"] != null)
-					yield return (MultiGetHit<object>)JsonConvert.DeserializeObject(m.Hit["_source"].ToString(), genericType, this.IndexSerializationSettings);
-				else if (m.Hit["fields"] != null)
-					yield return (MultiGetHit<object>)JsonConvert.DeserializeObject(m.Hit["fields"].ToString(), genericType, this.IndexSerializationSettings);
-			}
+			return multiGetResponse;
 		}
 
 		private ConnectionStatus _multiGetUsingDescriptor(Action<MultiGetDescriptor> multiGetSelector, out MultiGetDescriptor descriptor)

@@ -3,14 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using Nest.Domain;
 
 namespace Nest
 {
+	public interface IMultiGetHit<out T> where T : class
+	{
+		 string Index { get; }
+
+		 bool Exists { get; }
+
+		 string Type { get; }
+
+		 string Version { get; }
+
+		 string Id { get; }
+	}
+
     [JsonObject]
-    public class MultiGetHit<T> where T : class
+    public class MultiGetHit<T> : IMultiGetHit<T>
+		where T : class
     {
-		[JsonProperty(PropertyName = "fields")]
-		public T Fields { get; internal set; }
+		//[JsonProperty(PropertyName = "fields")]
+		public FieldSelection<T> FieldSelection { get; internal set; }
 		
 		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; internal set; }

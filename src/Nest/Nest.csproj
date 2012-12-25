@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Hit\MultiGetHit.cs" />
+    <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-GetFull.cs" />
     <Compile Include="Domain\Connection\InMemoryConnection.cs" />
@@ -386,6 +387,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -34,9 +35,15 @@ namespace Nest
 		{
 			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
 		}
-		public T Deserialize<T>(string value)
+		public T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
 		{
-			return JsonConvert.DeserializeObject<T>(value, this.SerializationSettings);
+			var settings = this.SerializationSettings;
+			if (extraConverters.HasAny())
+			{
+				settings = this.CreateSettings();
+				settings.Converters = settings.Converters.Concat(extraConverters).ToList();
+			}
+			return JsonConvert.DeserializeObject<T>(value, settings);
 		}
 
 	}

@@ -127,7 +127,7 @@ namespace Nest
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(System.Collections.Generic.IEnumerable<string> ids) where T : class;
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(string index, string type, System.Collections.Generic.IEnumerable<int> ids) where T : class;
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(string index, string type, System.Collections.Generic.IEnumerable<string> ids) where T : class;
-		IEnumerable<object> MultiGet(Action<MultiGetDescriptor> multiGetSelector);
+		MultiGetResponse MultiGetFull(Action<MultiGetDescriptor> multiGetSelector);
 
 		IIndexSettingsResponse GetIndexSettings();
 		IIndexSettingsResponse GetIndexSettings(string index);
@@ -260,6 +260,6 @@ namespace Nest
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 		IElasticSearchVersionInfo VersionInfo { get; }
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
-		IEnumerable<MultiGetHit<object>> MultiGetWithMetaData(Action<MultiGetDescriptor> multiGetSelector);
+
 	}
 }

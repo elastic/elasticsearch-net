@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Nest.Resolvers;
@@ -107,7 +108,7 @@ namespace Nest
 		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		private R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false) where R : BaseResponse
+		private R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
 		{
 			var isValid =
 				(allow404)
@@ -117,7 +118,7 @@ namespace Nest
 			if (!isValid)
 				return this.ToResponse<R>(status, allow404);
 
-			var r = this.Deserialize<R>(status.Result);
+			var r = this.Deserialize<R>(status.Result, extraConverters: extraConverters);
 			r.IsValid = isValid;
 			r.ConnectionStatus = status;
 			r.PropertyNameResolver = PropertyNameResolver;
