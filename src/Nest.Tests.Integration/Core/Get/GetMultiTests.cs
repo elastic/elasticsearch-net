@@ -12,15 +12,15 @@ using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using FluentAssertions;
 
-namespace Nest.Tests.Unit.Core.Get
+namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
-	public class GetMultiTests : BaseJsonTests
+	public class GetMultiTests : BaseElasticSearchTests
 	{
 		[Test]
 		public void GetMultiSimple()
 		{
-			var objects = this._client.MultiGet(a => a
+			var objects = this.ConnectedClient.MultiGet(a => a
 				.Get<ElasticSearchProject>(g=>g.Id(1))
 				.Get<Person>(g => g.Id(100))
 			);
@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetMultiSimpleWithMissingItem()
 		{
-			var objects = this._client.MultiGet(a => a
+			var objects = this.ConnectedClient.MultiGet(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1))
 				.Get<Person>(g => g.Id(100000))
 				.Get<Person>(g => g.Id(105))
@@ -60,11 +60,10 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetMultiWithFields()
 		{
-			var objects = this._client.MultiGet(a => a
+			var objects = this.ConnectedClient.MultiGet(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1))
 				.Get<Person>(g => g.Id(100).Type("people").Index("nest_test_data").Fields(p=>p.Id, p=>p.FirstName))
 			);
-
 
 			objects.Should().NotBeNull()
 				.And.HaveCount(2);

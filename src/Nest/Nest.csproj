@@ -15,7 +15,7 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <PublishUrl>publish\</PublishUrl>	
+    <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -62,6 +62,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Hit\MultiGetHit.cs" />
     <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-GetFull.cs" />
     <Compile Include="Domain\Connection\InMemoryConnection.cs" />

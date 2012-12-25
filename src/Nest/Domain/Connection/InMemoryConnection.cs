@@ -18,13 +18,13 @@ namespace Nest
 
 		}
 
-		protected virtual ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
+		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
 			var task = this.DoAsyncRequest(request, data);
 			return task.Result;
 		}
 
-		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
+		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
 			{

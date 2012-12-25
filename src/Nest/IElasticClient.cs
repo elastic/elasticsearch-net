@@ -260,5 +260,6 @@ namespace Nest
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 		IElasticSearchVersionInfo VersionInfo { get; }
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
+		IEnumerable<MultiGetHit<object>> MultiGetWithMetaData(Action<MultiGetDescriptor> multiGetSelector);
 	}
 }

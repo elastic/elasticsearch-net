@@ -54,6 +54,7 @@
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
+    <Compile Include="Core\Get\GetMultiTests.cs" />
     <Compile Include="Core\ValidateTests.cs" />
     <Compile Include="Core\Get\GetTests.cs" />
     <Compile Include="Index\GetIdFromElasticsearchTests.cs" />

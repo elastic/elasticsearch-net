@@ -21,6 +21,7 @@ namespace Nest.Tests.Unit.Core.Get
 		{
 			var result = this._client.GetFull<ElasticSearchProject>(1);
 			var status = result.ConnectionStatus;
+			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1", status.RequestUrl);
 		}
 		[Test]

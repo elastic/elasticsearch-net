@@ -44,10 +44,51 @@ namespace Nest
 		{
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, type));
 		}
+		
 		public IEnumerable<object> MultiGet(Action<MultiGetDescriptor> multiGetSelector)
 		{
+			MultiGetDescriptor descriptor;
+			var response = _multiGetUsingDescriptor(multiGetSelector, out descriptor);
+			if (!response.Success)
+				yield break;
+
+			var jsonObject = JObject.Parse(response.Result);
+			var docsJarray = (JArray)jsonObject["docs"];
+			var withMeta = docsJarray.Zip(descriptor._GetOperations, (doc, desc) => new { Hit = doc, Descriptor = desc });
+			foreach (var m in withMeta)
+			{
+				// non-existent ids come back as a hit without a "_source"
+				if (m.Hit["_source"] != null)
+					yield return JsonConvert.DeserializeObject(m.Hit["_source"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
+				else if (m.Hit["fields"] != null)
+					yield return JsonConvert.DeserializeObject(m.Hit["fields"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
+			}			
+		}
+		public IEnumerable<MultiGetHit<object>> MultiGetWithMetaData(Action<MultiGetDescriptor> multiGetSelector)
+		{
+			MultiGetDescriptor descriptor;
+			var response = _multiGetUsingDescriptor(multiGetSelector, out descriptor);
+			if (!response.Success)
+				yield break;
+
+			var jsonObject = JObject.Parse(response.Result);
+			var docsJarray = (JArray)jsonObject["docs"];
+			var withMeta = docsJarray.Zip(descriptor._GetOperations, (doc, desc) => new { Hit = doc, Descriptor = desc });
+			foreach (var m in withMeta)
+			{
+				var genericType = typeof(List<>).MakeGenericType(m.Descriptor._ClrType);
+				// non-existent ids come back as a hit without a "_source"
+				if (m.Hit["_source"] != null)
+					yield return (MultiGetHit<object>)JsonConvert.DeserializeObject(m.Hit["_source"].ToString(), genericType, this.IndexSerializationSettings);
+				else if (m.Hit["fields"] != null)
+					yield return (MultiGetHit<object>)JsonConvert.DeserializeObject(m.Hit["fields"].ToString(), genericType, this.IndexSerializationSettings);
+			}
+		}
+
+		private ConnectionStatus _multiGetUsingDescriptor(Action<MultiGetDescriptor> multiGetSelector, out MultiGetDescriptor descriptor)
+		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
-			var descriptor = new MultiGetDescriptor();
+			descriptor = new MultiGetDescriptor();
 			multiGetSelector(descriptor);
 			var data = @"{ ""docs"" : [";
 			var objects = new List<string>();
@@ -89,22 +130,9 @@ namespace Nest
 			}
 			path += "/_mget";
 			var response = this.Connection.PostSync(path, data);
-			if (!response.Success)
-				yield break;
-
-			var jsonObject = JObject.Parse(response.Result);
-			var docsJarray = (JArray)jsonObject["docs"];
-			var withMeta = docsJarray.Zip(descriptor._GetOperations, (doc, desc) => new { Hit = doc, Descriptor = desc });
-			foreach (var m in withMeta)
-			{
-				// non-existent ids come back as a hit without a "_source"
-
-				if (m.Hit["_source"] != null)
-					yield return JsonConvert.DeserializeObject(m.Hit["_source"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
-				else if (m.Hit["fields"] != null)
-					yield return JsonConvert.DeserializeObject(m.Hit["fields"].ToString(), m.Descriptor._ClrType, this.IndexSerializationSettings);
-			}			
+			return response;
 		}
+
 		private IEnumerable<T> MultiGet<T>(IEnumerable<string> ids, string path)
 			where T : class
 		{
