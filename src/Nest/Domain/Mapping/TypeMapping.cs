@@ -43,5 +43,15 @@ namespace Nest
 
 		[JsonProperty("_index")]
 		public IndexFieldMapping IndexFieldMapping { get; set; }
+
+		[JsonProperty("_size")]
+		public SizeFieldMapping SizeFieldMapping { get; set; }
+
+		[JsonProperty("_timestamp")]
+		public TimestampFieldMapping TimestampFieldMapping { get; set; }
+
+		[JsonProperty("_ttl")]
+		public TtlFieldMapping TtlFieldMapping { get; set; }
+		
     }
 }

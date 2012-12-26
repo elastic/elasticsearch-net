@@ -63,8 +63,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Hit\MultiGetHit.cs" />
-    <Compile Include="Domain\Mapping\AllFieldMapping.cs" />
     <Compile Include="Domain\Mapping\AnalyzerFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\AllFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\BoostFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\TtlFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\TimestampFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SizeFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\IndexFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\RoutingFieldMapping.cs" />
     <Compile Include="Domain\Mapping\TypeFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SourceFieldMapping.cs" />
     <Compile Include="Domain\Mapping\TypeMappingDescriptor.cs" />

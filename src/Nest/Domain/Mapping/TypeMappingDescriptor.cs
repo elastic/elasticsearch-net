@@ -60,48 +60,66 @@ namespace Nest
 			return this;
 		}
 
+		public TypeMappingDescriptor<T> DisableSizeField(bool disabled = true)
+		{
+			this._TypeMapping.SizeFieldMapping = new SizeFieldMapping().SetDisabled(disabled);
+			return this;
+		}
+
 		public TypeMappingDescriptor<T> DisableIndexField(bool disabled = true)
 		{
 			this._TypeMapping.IndexFieldMapping = new IndexFieldMapping().SetDisabled(disabled);
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> IdFieldMapping(Func<IdFieldMapping, IdFieldMapping> idMapper)
+		public TypeMappingDescriptor<T> IdField(Func<IdFieldMapping, IdFieldMapping> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");
 			this._TypeMapping.IdFieldMapping = idMapper(new IdFieldMapping());
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> TypeFieldMapping(Func<TypeFieldMapping, TypeFieldMapping> typeMapper)
+		public TypeMappingDescriptor<T> TypeField(Func<TypeFieldMapping, TypeFieldMapping> typeMapper)
 		{
 			typeMapper.ThrowIfNull("typeMapper");
 			this._TypeMapping.TypeFieldMapping = typeMapper(new TypeFieldMapping());
 			return this;
 		}
-		public TypeMappingDescriptor<T> SourceFieldMapping(Func<SourceFieldMapping, SourceFieldMapping> sourceMapper)
+		public TypeMappingDescriptor<T> SourceField(Func<SourceFieldMapping, SourceFieldMapping> sourceMapper)
 		{
 			sourceMapper.ThrowIfNull("sourceMapper");
 			this._TypeMapping.SourceFieldMapping = sourceMapper(new SourceFieldMapping());
 			return this;
 		}
 		
-		public TypeMappingDescriptor<T> AnalyzerFieldMapping(Func<AnalyzerFieldMapping<T>, AnalyzerFieldMapping> analyzeMapper)
+		public TypeMappingDescriptor<T> AnalyzerField(Func<AnalyzerFieldMapping<T>, AnalyzerFieldMapping> analyzeMapper)
 		{
 			analyzeMapper.ThrowIfNull("analyzeMapper");
 			this._TypeMapping.AnalyzerFieldMapping = analyzeMapper(new AnalyzerFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> BoostFieldMapping(Func<BoostFieldMapping<T>, BoostFieldMapping> boostMapper)
+		public TypeMappingDescriptor<T> BoostField(Func<BoostFieldMapping<T>, BoostFieldMapping> boostMapper)
 		{
 			boostMapper.ThrowIfNull("boostMapper");
 			this._TypeMapping.BoostFieldMapping = boostMapper(new BoostFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> RoutingFieldMapping(Func<RoutingFieldMapping<T>, RoutingFieldMapping> routingMapper)
+		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldMapping<T>, RoutingFieldMapping> routingMapper)
 		{
 			routingMapper.ThrowIfNull("routingMapper");
 			this._TypeMapping.RoutingFieldMapping = routingMapper(new RoutingFieldMapping<T>());
+			return this;
+		}
+		public TypeMappingDescriptor<T> TimestampField(Func<TimestampFieldMapping<T>, TimestampFieldMapping> timestampMapper)
+		{
+			timestampMapper.ThrowIfNull("timestampMapper");
+			this._TypeMapping.TimestampFieldMapping = timestampMapper(new TimestampFieldMapping<T>());
+			return this;
+		}
+		public TypeMappingDescriptor<T> TtlField(Func<TtlFieldMapping, TtlFieldMapping> ttlFieldMapper)
+		{
+			ttlFieldMapper.ThrowIfNull("ttlFieldMapper");
+			this._TypeMapping.TtlFieldMapping = ttlFieldMapper(new TtlFieldMapping());
 			return this;
 		}
 		

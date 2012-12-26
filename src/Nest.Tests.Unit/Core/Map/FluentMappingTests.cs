@@ -27,33 +27,42 @@ namespace Nest.Tests.Unit.Core.Map
 				.SetParent<Person>() //makes no sense but i needed a type :)
 				.DisableAllField(false)
 				.DisableIndexField(false)
-				.IdFieldMapping(i=>i
+				.DisableSizeField(false)
+				.IdField(i=>i
 					.SetIndex("not_analyzed")
 					.SetPath("myOtherId")
 					.SetStored(false)
 				)
-				.SourceFieldMapping(s=>s
+				.SourceField(s=>s
 					.SetDisabled()
 					.SetCompression()
 					.SetCompressionTreshold("200b")
 					.SetExcludes(new []{ "path1.*"})
 					.SetIncludes(new [] { "path2.*"})
 				)
-				.TypeFieldMapping(t=>t
+				.TypeField(t=>t
 					.SetIndexed()
 					.SetStored()
 				)
-				.AnalyzerFieldMapping(a=>a
+				.AnalyzerField(a=>a
 					.SetPath(p=>p.Name)
 					.SetIndexed()
 				)
-				.BoostFieldMapping(b=>b
+				.BoostField(b=>b
 					.SetName(p=>p.LOC)
 					.SetNullValue(1.0)
 				)
-				.RoutingFieldMapping(r=>r
+				.RoutingField(r=>r
 					.SetPath(p=>p.Country)
 					.SetRequired()
+				)
+				.TimestampField(t=>t
+					.SetDisabled(false)
+					.SetPath(p=>p.StartedOn)
+				)
+				.TtlField(t=>t
+					.SetDisabled(false)
+					.SetDefault("1d")
 				)
 				;
 

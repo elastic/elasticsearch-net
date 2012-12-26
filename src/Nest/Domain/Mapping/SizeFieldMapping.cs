@@ -2,9 +2,9 @@
 
 namespace Nest
 {
-    public class IndexFieldMapping
+    public class SizeFieldMapping
     {
-		public IndexFieldMapping()
+		public SizeFieldMapping()
 		{
 			
 		}
@@ -12,7 +12,7 @@ namespace Nest
 		[JsonProperty("enabled")]
 		public bool Enabled { get; internal set; }
 
-		public IndexFieldMapping SetDisabled(bool disabled = true)
+		public SizeFieldMapping SetDisabled(bool disabled = true)
 		{
 			this.Enabled = !disabled;
 			return this;
