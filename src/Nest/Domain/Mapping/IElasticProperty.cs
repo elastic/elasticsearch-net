@@ -15,7 +15,7 @@ namespace Nest
 		TermVectorOption TermVector { get; set; }
 		FieldIndexOption Index { get; set; }
 
-		decimal Boost { get; set; }
+		double Boost { get; set; }
 
 
 		string Analyzer { get; set; }

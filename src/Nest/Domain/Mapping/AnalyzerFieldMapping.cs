@@ -1,21 +1,42 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
+using System.Linq.Expressions;
+using Nest.Resolvers;
 
 namespace Nest
 {
-    public class AllFieldMapping
-    {
-		public AllFieldMapping()
+	public class AnalyzerFieldMapping
+	{
+		public AnalyzerFieldMapping()
 		{
-			this.Enabled = true;
+			this.Index = true;
 		}
 
-		[JsonProperty("enabled")]
-		public bool Enabled { get; internal set; }
+		[JsonProperty("index")]
+		public bool Index { get; internal set; }
 
-		public AllFieldMapping SetDisabled(bool disabled = true)
+		[JsonProperty("path")]
+		public string Path { get; internal set; }
+	}
+
+
+    public class AnalyzerFieldMapping<T> : AnalyzerFieldMapping
+    {
+		public AnalyzerFieldMapping<T> SetIndexed(bool indexed = true)
 		{
-			this.Enabled = !disabled;
+			this.Index = indexed;
 			return this;
+		}
+		public AnalyzerFieldMapping<T> SetPath(string path)
+		{
+			this.Path = path;
+			return this;
+		}
+		public AnalyzerFieldMapping<T> SetPath(Expression<Func<T, object>> objectPath)
+		{
+			objectPath.ThrowIfNull("objectPath");
+			this.Path = new PropertyNameResolver().Resolve(objectPath);
+			return this;	
 		}
     }
 }

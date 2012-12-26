@@ -20,8 +20,11 @@ namespace Nest.Tests.Unit.Core.Map
 		public void GetSimple()
 		{
 			var mapping = new TypeMappingDescriptor<ElasticSearchProject>()
-				.MapFromAttributes()
+				//MapFromAttributes() is shortcut to fill property mapping using the types' attributes and properties
+				//Allows us to map the exceptions to the rule and be less verbose.
+				.MapFromAttributes() 
 				.TypeName("elasticsearchprojects2")
+				.SetParent<Person>() //makes no sense but i needed a type :)
 				.IdFieldMapping(i=>i
 					.SetIndex("not_analyzed")
 					.SetPath("myOtherId")
@@ -39,6 +42,15 @@ namespace Nest.Tests.Unit.Core.Map
 					.SetStored()
 				)
 				.AllFieldMapping(a=>a.SetDisabled())
+				.AnalyzerFieldMapping(a=>a
+					.SetPath(p=>p.Name)
+					.SetIndexed()
+				)
+				.BoostFieldMapping(b=>b
+					.SetName(p=>p.LOC)
+					.SetNullValue(1.0)
+				)
+
 				;
 
 		}

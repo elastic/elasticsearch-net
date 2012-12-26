@@ -9,11 +9,6 @@ namespace Nest
         {
             this.Name = name;
             this.Properties = new Dictionary<string, TypeMappingProperty>();
-            this.SourceFieldMapping = new SourceFieldMapping();
-			this.IdFieldMapping = new IdFieldMapping();
-			this.TypeFieldMapping = new TypeFieldMapping();
-	        this.AllFieldMapping = new AllFieldMapping();
-            this.Parent = null;
         }
 
         [JsonIgnore]
@@ -33,6 +28,9 @@ namespace Nest
 
 		[JsonProperty("_analyzer")]
 		public AnalyzerFieldMapping AnalyzerFieldMapping { get; set; }
+
+		[JsonProperty("_boost")]
+		public BoostFieldMapping BoostFieldMapping { get; set; }
 
         [JsonProperty("properties")]
         public IDictionary<string, TypeMappingProperty> Properties { get; set; }

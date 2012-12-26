@@ -20,7 +20,7 @@ namespace Nest
 		/// <summary>
 		/// Convenience method to map from most of the object from the attributes/properties.
 		/// Later calls on the fluent interface can override whatever is set is by this call. 
-		/// This helps mapping all the ints as ints, floats as floats etcetera withouth having to be overly terse in your fluent mapping
+		/// This helps mapping all the ints as ints, floats as floats etcetera withouth having to be overly verbose in your fluent mapping
 		/// </summary>
 		/// <returns></returns>
 		public TypeMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
@@ -71,6 +71,23 @@ namespace Nest
 		{
 			analyzeMapper.ThrowIfNull("analyzeMapper");
 			this._TypeMapping.AnalyzerFieldMapping = analyzeMapper(new AnalyzerFieldMapping<T>());
+			return this;
+		}
+		public TypeMappingDescriptor<T> BoostFieldMapping(Func<BoostFieldMapping<T>, BoostFieldMapping> boostMapper)
+		{
+			boostMapper.ThrowIfNull("boostMapper");
+			this._TypeMapping.BoostFieldMapping = boostMapper(new BoostFieldMapping<T>());
+			return this;
+		}
+		public TypeMappingDescriptor<T> SetParent(string parentType)
+		{
+			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
+			return this;
+		}
+		public TypeMappingDescriptor<T> SetParent<K>() where K : class
+		{
+			var parentType = new TypeNameResolver().GetTypeNameFor<K>();
+			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
 			return this;
 		}
     }
