@@ -22,7 +22,22 @@ namespace Nest.Tests.Unit.Core.Map
 			var mapping = new TypeMappingDescriptor<ElasticSearchProject>()
 				.MapFromAttributes()
 				.TypeName("elasticsearchprojects2")
-				.SourceEnabled(false);
+				.IdFieldMapping(i=>i
+					.SetIndex("not_analyzed")
+					.SetPath("myOtherId")
+					.SetStored(false)
+				)
+				.SourceFieldMapping(s=>s
+					.SetDisabled()
+					.SetCompression()
+					.SetCompressionTreshold("200b")
+					.SetExcludes(new []{ "path1.*"})
+					.SetIncludes(new [] { "path2.*"})
+				)
+				.TypeFieldMapping(t=>t
+					.SetIndexed()
+					.SetStored()
+				);
 
 		}
 	}

@@ -9,18 +9,23 @@ namespace Nest
         {
             this.Name = name;
             this.Properties = new Dictionary<string, TypeMappingProperty>();
-            this.SourceMapping = new SourceMapping();
+            this.SourceFieldMapping = new SourceFieldMapping();
+			this.IdFieldMapping = new IdFieldMapping();
+			this.TypeFieldMapping = new TypeFieldMapping();
             this.Parent = null;
         }
 
         [JsonIgnore]
         public string Name { get; set; }
 
-        [JsonProperty("_source")]
-        public SourceMapping SourceMapping { get; set; }
-
 		[JsonProperty("_id")]
-		public IdMapping IdMapping { get; set; }
+		public IdFieldMapping IdFieldMapping { get; set; }
+
+        [JsonProperty("_source")]
+        public SourceFieldMapping SourceFieldMapping { get; set; }
+
+		[JsonProperty("_type")]
+		public TypeFieldMapping TypeFieldMapping { get; set; }
 
         [JsonProperty("properties")]
         public IDictionary<string, TypeMappingProperty> Properties { get; set; }

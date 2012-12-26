@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class SourceMapping
+    public class SourceFieldMapping
     {
-        public SourceMapping()
+        public SourceFieldMapping()
         {
             this.Enabled = true;
         }
@@ -25,26 +25,32 @@ namespace Nest
 		[JsonProperty("excludes")]
 		public IEnumerable<string> Excludes { get; internal set; }
 
-		public SourceMapping SetDisabled(bool disabled = true)
+		public SourceFieldMapping SetDisabled(bool disabled = true)
 		{
 			this.Enabled = !disabled;
 			return this;
 		}
+		public SourceFieldMapping SetCompression(bool enabled = true)
+		{
+			this.Compress = enabled;
+			return this;
+		}
 
-		public SourceMapping SetCompressionTreshold(string compressionTreshold)
+
+		public SourceFieldMapping SetCompressionTreshold(string compressionTreshold)
 		{
 			this.Compress = true;
 			this.CompressTreshold = compressionTreshold;
 			return this;
 		}
 
-		public SourceMapping SetIncludes(IEnumerable<string> includes)
+		public SourceFieldMapping SetIncludes(IEnumerable<string> includes)
 		{
 			this.Includes = includes;
 			return this;
 		}
 
-		public SourceMapping SetExcludes(IEnumerable<string> excludes)
+		public SourceFieldMapping SetExcludes(IEnumerable<string> excludes)
 		{
 			this.Excludes = excludes;
 			return this;

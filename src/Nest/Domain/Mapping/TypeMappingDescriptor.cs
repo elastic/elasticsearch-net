@@ -42,17 +42,23 @@ namespace Nest
 			this._TypeMapping.Name = name;
 			return this;
 		}
-		public TypeMappingDescriptor<T> IdMapping(Func<IdMapping, IdMapping> idMapper)
+		public TypeMappingDescriptor<T> IdFieldMapping(Func<IdFieldMapping, IdFieldMapping> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");
-			this._TypeMapping.IdMapping = idMapper(new IdMapping());
+			this._TypeMapping.IdFieldMapping = idMapper(new IdFieldMapping());
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> SourceMapping(Func<SourceMapping, SourceMapping> sourceMapper)
+		public TypeMappingDescriptor<T> TypeFieldMapping(Func<TypeFieldMapping, TypeFieldMapping> typeMapper)
+		{
+			typeMapper.ThrowIfNull("typeMapper");
+			this._TypeMapping.TypeFieldMapping = typeMapper(new TypeFieldMapping());
+			return this;
+		}
+		public TypeMappingDescriptor<T> SourceFieldMapping(Func<SourceFieldMapping, SourceFieldMapping> sourceMapper)
 		{
 			sourceMapper.ThrowIfNull("sourceMapper");
-			this._TypeMapping.SourceMapping = sourceMapper(new SourceMapping());
+			this._TypeMapping.SourceFieldMapping = sourceMapper(new SourceFieldMapping());
 			return this;
 		}
 

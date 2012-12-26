@@ -2,9 +2,9 @@
 
 namespace Nest
 {
-    public class IdMapping
+    public class IdFieldMapping
     {
-		public IdMapping()
+		public IdFieldMapping()
         {
         }
 
@@ -17,17 +17,17 @@ namespace Nest
 		[JsonProperty("store")]
 		public bool Store { get; internal set; }
 
-		public IdMapping SetPath(string path)
+		public IdFieldMapping SetPath(string path)
 		{
 			this.Path = path;
 			return this;
 		}
-		public IdMapping SetIndex(string index)
+		public IdFieldMapping SetIndex(string index)
 		{
 			this.Index = index;
 			return this;
 		}
-		public IdMapping SetStored(bool stored = true)
+		public IdFieldMapping SetStored(bool stored = true)
 		{
 			this.Store = stored;
 			return this;
