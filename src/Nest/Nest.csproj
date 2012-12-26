@@ -63,6 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Hit\MultiGetHit.cs" />
+    <Compile Include="Domain\Mapping\AllFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\AnalyzerFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\TypeFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SourceFieldMapping.cs" />
     <Compile Include="Domain\Mapping\TypeMappingDescriptor.cs" />
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
@@ -328,7 +332,7 @@
     <Compile Include="Domain\Mapping\Map.cs" />
     <Compile Include="Domain\Mapping\TypeMapping.cs" />
     <Compile Include="Domain\Mapping\TypeMappingProperty.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingSource.cs" />
+    <Compile Include="Domain\Mapping\IdFieldMapping.cs" />
     <Compile Include="Domain\Parameters\AliasParams.cs" />
     <Compile Include="Domain\Parameters\AnalyzeParams.cs" />
     <Compile Include="Domain\Parameters\BaseParameters.cs" />

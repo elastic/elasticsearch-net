@@ -37,7 +37,9 @@ namespace Nest.Tests.Unit.Core.Map
 				.TypeFieldMapping(t=>t
 					.SetIndexed()
 					.SetStored()
-				);
+				)
+				.AllFieldMapping(a=>a.SetDisabled())
+				;
 
 		}
 	}

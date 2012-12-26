@@ -61,6 +61,17 @@ namespace Nest
 			this._TypeMapping.SourceFieldMapping = sourceMapper(new SourceFieldMapping());
 			return this;
 		}
-
+		public TypeMappingDescriptor<T> AllFieldMapping(Func<AllFieldMapping, AllFieldMapping> allMapper)
+		{
+			allMapper.ThrowIfNull("allMapper");
+			this._TypeMapping.AllFieldMapping = allMapper(new AllFieldMapping());
+			return this;
+		}
+		public TypeMappingDescriptor<T> AnalyzerFieldMapping(Func<AnalyzerFieldMapping<T>, AnalyzerFieldMapping> analyzeMapper)
+		{
+			analyzeMapper.ThrowIfNull("analyzeMapper");
+			this._TypeMapping.AnalyzerFieldMapping = analyzeMapper(new AnalyzerFieldMapping<T>());
+			return this;
+		}
     }
 }

@@ -12,6 +12,7 @@ namespace Nest
             this.SourceFieldMapping = new SourceFieldMapping();
 			this.IdFieldMapping = new IdFieldMapping();
 			this.TypeFieldMapping = new TypeFieldMapping();
+	        this.AllFieldMapping = new AllFieldMapping();
             this.Parent = null;
         }
 
@@ -26,6 +27,12 @@ namespace Nest
 
 		[JsonProperty("_type")]
 		public TypeFieldMapping TypeFieldMapping { get; set; }
+
+		[JsonProperty("_all")]
+		public AllFieldMapping AllFieldMapping { get; set; }
+
+		[JsonProperty("_analyzer")]
+		public AnalyzerFieldMapping AnalyzerFieldMapping { get; set; }
 
         [JsonProperty("properties")]
         public IDictionary<string, TypeMappingProperty> Properties { get; set; }
