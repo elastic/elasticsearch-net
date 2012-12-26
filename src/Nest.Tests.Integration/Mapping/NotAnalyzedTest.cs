@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Mapping
 		{
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");
-			var x = this.ConnectedClient.Map<ElasticSearchProject>();
+			var x = this.ConnectedClient.MapFromAttributes<ElasticSearchProject>();
 			Assert.IsTrue(x.OK);
 
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Mapping
 		public void AnalyzedReturnsTwoItems()
 		{
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
-			var x = this.ConnectedClient.Map<ElasticSearchProject>();
+			var x = this.ConnectedClient.MapFromAttributes<ElasticSearchProject>();
 			Assert.IsTrue(x.OK);
 
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");

@@ -83,7 +83,7 @@ namespace ProtocolLoadTest
             indexSettings.Add("index.refresh_interval", "10s");
 
             var createResponse = client.CreateIndex(indexName, indexSettings);
-            client.Map<Message>();
+            client.MapFromAttributes<Message>();
         }
 
         private static void CloseIndex(string suffix)

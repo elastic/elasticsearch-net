@@ -74,8 +74,8 @@ namespace Nest.Tests.Integration
 			var bulkParameters = new SimpleBulkParameters() { Refresh = true };
 			client.DeleteMapping<T>();
 			client.DeleteMapping<T>(cloneIndex);
-			client.Map<T>();
-			client.Map<T>(cloneIndex);
+			client.MapFromAttributes<T>();
+			client.MapFromAttributes<T>(cloneIndex);
 			this.ConnectedClient.OpenIndex<T>();
 			this.ConnectedClient.OpenIndex(cloneIndex);
 			client.IndexMany(objects, bulkParameters);

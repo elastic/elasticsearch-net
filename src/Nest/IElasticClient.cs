@@ -186,12 +186,12 @@ namespace Nest
 		bool IsValid { get; }
 		IIndicesResponse Map(TypeMapping typeMapping);
 		IIndicesResponse Map(TypeMapping typeMapping, string index);
-		IIndicesResponse Map<T>(int maxRecursion = 0) where T : class;
-		IIndicesResponse Map<T>(string index, int maxRecursion = 0) where T : class;
-		IIndicesResponse Map<T>(string index, string type, int maxRecursion = 0) where T : class;
-		IIndicesResponse Map(Type t, int maxRecursion = 0);
-		IIndicesResponse Map(Type t, string index, int maxRecursion = 0);
-		IIndicesResponse Map(Type t, string index, string type, int maxRecursion = 0);
+		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
+		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
+		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;
+		IIndicesResponse MapFromAttributes(Type t, int maxRecursion = 0);
+		IIndicesResponse MapFromAttributes(Type t, string index, int maxRecursion = 0);
+		IIndicesResponse MapFromAttributes(Type t, string index, string type, int maxRecursion = 0);
 
 		IIndicesOperationResponse OpenIndex(string index);
 		IIndicesOperationResponse OpenIndex<T>() where T : class;

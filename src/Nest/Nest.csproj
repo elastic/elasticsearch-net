@@ -62,6 +62,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElasticClient-MappingGet.cs" />
+    <Compile Include="ElasticClient-MappingDelete.cs" />
     <Compile Include="Domain\Hit\MultiGetHit.cs" />
     <Compile Include="Domain\Mapping\AnalyzerFieldMapping.cs" />
     <Compile Include="Domain\Mapping\AllFieldMapping.cs" />
