@@ -37,5 +37,8 @@ namespace Nest
 
         [JsonProperty("_parent")]
         public TypeMappingParent Parent { get; set; }
+
+		[JsonProperty("_routing")]
+		public RoutingFieldMapping RoutingFieldMapping { get; set; }
     }
 }

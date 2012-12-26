@@ -42,6 +42,17 @@ namespace Nest
 			this._TypeMapping.Name = name;
 			return this;
 		}
+		public TypeMappingDescriptor<T> SetParent(string parentType)
+		{
+			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
+			return this;
+		}
+		public TypeMappingDescriptor<T> SetParent<K>() where K : class
+		{
+			var parentType = new TypeNameResolver().GetTypeNameFor<K>();
+			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
+			return this;
+		}
 		public TypeMappingDescriptor<T> IdFieldMapping(Func<IdFieldMapping, IdFieldMapping> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");
@@ -79,16 +90,12 @@ namespace Nest
 			this._TypeMapping.BoostFieldMapping = boostMapper(new BoostFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> SetParent(string parentType)
+		public TypeMappingDescriptor<T> RoutingFieldMapping(Func<RoutingFieldMapping<T>, RoutingFieldMapping> routingMapper)
 		{
-			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
+			routingMapper.ThrowIfNull("routingMapper");
+			this._TypeMapping.RoutingFieldMapping = routingMapper(new RoutingFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> SetParent<K>() where K : class
-		{
-			var parentType = new TypeNameResolver().GetTypeNameFor<K>();
-			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
-			return this;
-		}
+		
     }
 }

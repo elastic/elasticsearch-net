@@ -50,7 +50,10 @@ namespace Nest.Tests.Unit.Core.Map
 					.SetName(p=>p.LOC)
 					.SetNullValue(1.0)
 				)
-
+				.RoutingFieldMapping(r=>r
+					.SetPath(p=>p.Country)
+					.SetRequired()
+				)
 				;
 
 		}
