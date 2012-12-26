@@ -9,7 +9,7 @@ namespace Nest
         {
             this.Name = name;
             this.Properties = new Dictionary<string, TypeMappingProperty>();
-            this.Source = new TypeMappingSource();
+            this.SourceMapping = new SourceMapping();
             this.Parent = null;
         }
 
@@ -17,7 +17,10 @@ namespace Nest
         public string Name { get; set; }
 
         [JsonProperty("_source")]
-        public TypeMappingSource Source { get; set; }
+        public SourceMapping SourceMapping { get; set; }
+
+		[JsonProperty("_id")]
+		public IdMapping IdMapping { get; set; }
 
         [JsonProperty("properties")]
         public IDictionary<string, TypeMappingProperty> Properties { get; set; }

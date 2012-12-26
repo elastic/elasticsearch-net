@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Hit\MultiGetHit.cs" />
+    <Compile Include="Domain\Mapping\TypeMappingDescriptor.cs" />
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-GetFull.cs" />
@@ -459,9 +460,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Inferno\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
