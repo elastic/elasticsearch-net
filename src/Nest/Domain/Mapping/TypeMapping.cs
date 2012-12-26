@@ -40,5 +40,8 @@ namespace Nest
 
 		[JsonProperty("_routing")]
 		public RoutingFieldMapping RoutingFieldMapping { get; set; }
+
+		[JsonProperty("_index")]
+		public IndexFieldMapping IndexFieldMapping { get; set; }
     }
 }

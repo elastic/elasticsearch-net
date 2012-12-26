@@ -53,6 +53,19 @@ namespace Nest
 			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
 			return this;
 		}
+
+		public TypeMappingDescriptor<T> DisableAllField(bool disabled = true)
+		{
+			this._TypeMapping.AllFieldMapping = new AllFieldMapping().SetDisabled(disabled);
+			return this;
+		}
+
+		public TypeMappingDescriptor<T> DisableIndexField(bool disabled = true)
+		{
+			this._TypeMapping.IndexFieldMapping = new IndexFieldMapping().SetDisabled(disabled);
+			return this;
+		}
+
 		public TypeMappingDescriptor<T> IdFieldMapping(Func<IdFieldMapping, IdFieldMapping> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");
@@ -72,12 +85,7 @@ namespace Nest
 			this._TypeMapping.SourceFieldMapping = sourceMapper(new SourceFieldMapping());
 			return this;
 		}
-		public TypeMappingDescriptor<T> AllFieldMapping(Func<AllFieldMapping, AllFieldMapping> allMapper)
-		{
-			allMapper.ThrowIfNull("allMapper");
-			this._TypeMapping.AllFieldMapping = allMapper(new AllFieldMapping());
-			return this;
-		}
+		
 		public TypeMappingDescriptor<T> AnalyzerFieldMapping(Func<AnalyzerFieldMapping<T>, AnalyzerFieldMapping> analyzeMapper)
 		{
 			analyzeMapper.ThrowIfNull("analyzeMapper");

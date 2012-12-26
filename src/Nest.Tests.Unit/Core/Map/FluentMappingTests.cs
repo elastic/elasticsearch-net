@@ -25,6 +25,8 @@ namespace Nest.Tests.Unit.Core.Map
 				.MapFromAttributes() 
 				.TypeName("elasticsearchprojects2")
 				.SetParent<Person>() //makes no sense but i needed a type :)
+				.DisableAllField(false)
+				.DisableIndexField(false)
 				.IdFieldMapping(i=>i
 					.SetIndex("not_analyzed")
 					.SetPath("myOtherId")
@@ -41,7 +43,6 @@ namespace Nest.Tests.Unit.Core.Map
 					.SetIndexed()
 					.SetStored()
 				)
-				.AllFieldMapping(a=>a.SetDisabled())
 				.AnalyzerFieldMapping(a=>a
 					.SetPath(p=>p.Name)
 					.SetIndexed()
