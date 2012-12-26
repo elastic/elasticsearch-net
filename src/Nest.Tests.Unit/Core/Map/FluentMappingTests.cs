@@ -17,9 +17,9 @@ namespace Nest.Tests.Unit.Core.Map
 	public class FluentMappingTests : BaseJsonTests
 	{
 		[Test]
-		public void GetSimple()
+		public void MapFluent()
 		{
-			var mapping = new TypeMappingDescriptor<ElasticSearchProject>()
+			var result = this._client.MapFluent<ElasticSearchProject>(m=>m
 				//MapFromAttributes() is shortcut to fill property mapping using the types' attributes and properties
 				//Allows us to map the exceptions to the rule and be less verbose.
 				.MapFromAttributes() 
@@ -64,8 +64,8 @@ namespace Nest.Tests.Unit.Core.Map
 					.SetDisabled(false)
 					.SetDefault("1d")
 				)
-				;
-
+			);
+			throw new Exception(result.ConnectionStatus.Request);
 		}
 	}
 }

@@ -67,6 +67,17 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
+		internal TypeMapping TypeMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
+
+			var nestedJson = json.Properties().First().Value.ToString();
+			throw new Exception(nestedJson);
+
+			return JsonConvert.DeserializeObject<TypeMapping>(nestedJson);
+		}
+
+
 		internal string MapFromAttributes()
 		{
 			var sb = new StringBuilder();

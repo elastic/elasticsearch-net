@@ -14,6 +14,40 @@ namespace Nest
         [JsonIgnore]
         public string Name { get; set; }
 
+		//TODO START: Still expose this on TypeMappingDescriptor
+
+		[JsonProperty("dynamic")]
+		public bool? Dynamic { get; set; }
+
+		[JsonProperty("dynamic")]
+		public bool? Enabled { get; set; }
+
+		[JsonProperty("date_detection")]
+		public bool? DateDetection { get; set; }
+
+		[JsonProperty("numeric_detection")]
+		public bool? NumericDetection { get; set; }
+
+		[JsonProperty("include_in_all")]
+		public bool? IncludeInAll { get; set; }
+
+		[JsonProperty("index_analyzer")]
+		public string IndexAnalyzer { get; set; }
+
+		[JsonProperty("search_analyzer")]
+		public string SearchAnalyzer { get; set; }
+
+		[JsonProperty("path")]
+		public string Path { get; set; }
+
+		[JsonProperty("dynamic_date_formats")]
+		public IEnumerable<string> DynamicDateFormats { get; set; }
+
+		//NESTED TODO also map dynamic_templates
+
+		//TODO END
+
+
 		[JsonProperty("_id")]
 		public IdFieldMapping IdFieldMapping { get; set; }
 
@@ -32,9 +66,6 @@ namespace Nest
 		[JsonProperty("_boost")]
 		public BoostFieldMapping BoostFieldMapping { get; set; }
 
-        [JsonProperty("properties")]
-        public IDictionary<string, TypeMappingProperty> Properties { get; set; }
-
         [JsonProperty("_parent")]
         public TypeMappingParent Parent { get; set; }
 
@@ -52,6 +83,9 @@ namespace Nest
 
 		[JsonProperty("_ttl")]
 		public TtlFieldMapping TtlFieldMapping { get; set; }
+
+		[JsonProperty("properties")]
+		public IDictionary<string, TypeMappingProperty> Properties { get; set; }
 		
     }
 }

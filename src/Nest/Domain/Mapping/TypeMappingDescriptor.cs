@@ -27,8 +27,8 @@ namespace Nest
 		public TypeMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
 			var writer = new TypeMappingWriter(typeof(T), this._TypeName, maxRecursion);
-			var json = writer.MapFromAttributes();
-			this._TypeMapping = JsonConvert.DeserializeObject<TypeMapping>(json);
+			this._TypeMapping = writer.TypeMappingFromAttributes();
+
 			return this;
 		}
 
