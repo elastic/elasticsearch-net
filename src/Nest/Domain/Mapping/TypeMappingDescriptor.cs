@@ -9,12 +9,13 @@ namespace Nest
     public class TypeMappingDescriptor<T> where T : class
     {
 		internal TypeMapping _TypeMapping { get; set; }
-		internal string _Name { get; set; }
+		internal string _TypeName { get; set; }
+		internal string _IndexName { get; set; }
 
 		public TypeMappingDescriptor()
 		{
-			this._Name = new TypeNameResolver().GetTypeNameFor<T>();
-			this._TypeMapping = new TypeMapping(this._Name);
+			this._TypeName = new TypeNameResolver().GetTypeNameFor<T>();
+			this._TypeMapping = new TypeMapping(this._TypeName);
         }
 
 		/// <summary>
@@ -25,7 +26,7 @@ namespace Nest
 		/// <returns></returns>
 		public TypeMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
-			var writer = new TypeMappingWriter(typeof(T), this._Name, maxRecursion);
+			var writer = new TypeMappingWriter(typeof(T), this._TypeName, maxRecursion);
 			var json = writer.MapFromAttributes();
 			this._TypeMapping = JsonConvert.DeserializeObject<TypeMapping>(json);
 			return this;
@@ -38,8 +39,18 @@ namespace Nest
 		/// <returns></returns>
 		public TypeMappingDescriptor<T> TypeName(string name)
 		{
-			this._Name = name;
+			this._TypeName = name;
 			this._TypeMapping.Name = name;
+			return this;
+		}
+		/// <summary>
+		/// Explicitly set the index name otherwise it will infer the indexname based on the type
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		public TypeMappingDescriptor<T> IndexName(string name)
+		{
+			this._IndexName = name;
 			return this;
 		}
 		public TypeMappingDescriptor<T> SetParent(string parentType)

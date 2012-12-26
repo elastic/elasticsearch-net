@@ -192,6 +192,11 @@ namespace Nest
 		IIndicesResponse MapFromAttributes(Type t, int maxRecursion = 0);
 		IIndicesResponse MapFromAttributes(Type t, string index, int maxRecursion = 0);
 		IIndicesResponse MapFromAttributes(Type t, string index, string type, int maxRecursion = 0);
+		
+		IIndicesResponse MapFluent(Func<TypeMappingDescriptor<dynamic>, TypeMappingDescriptor<dynamic>> typeMappingDescriptor);
+		IIndicesResponse MapFluent<T>(Func<TypeMappingDescriptor<T>, TypeMappingDescriptor<T>> typeMappingDescriptor)
+			where T : class;
+
 
 		IIndicesOperationResponse OpenIndex(string index);
 		IIndicesOperationResponse OpenIndex<T>() where T : class;

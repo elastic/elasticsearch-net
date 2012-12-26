@@ -94,24 +94,28 @@ namespace Nest
 		public IIndicesResponse MapFromAttributes(Type t, string index, string type, int maxRecursion = 0)
         {
             string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
-            string map = this.CreateMapFor(t, type, maxRecursion);
-
-            ConnectionStatus status = this.Connection.PutSync(path, map);
-
-            var response = new IndicesResponse();
-            try
-            {
-                response = this.Deserialize<IndicesResponse>(status.Result);
-                response.IsValid = true;
-            }
-            catch
-            {
-            }
-
-            response.ConnectionStatus = status;
-            return response;
+            string typeMappingJson = this.CreateMapFor(t, type, maxRecursion);
+	        var typeMapping = this.Deserialize<TypeMapping>(typeMappingJson);
+			return this.Map(typeMapping, index);
         }
 
+		public IIndicesResponse MapFluent(Func<TypeMappingDescriptor<dynamic>, TypeMappingDescriptor<dynamic>> typeMappingDescriptor)
+		{
+			return this.MapFluent<dynamic>(typeMappingDescriptor);
+		}
+
+		public IIndicesResponse MapFluent<T>(Func<TypeMappingDescriptor<T>, TypeMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		{
+			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
+			var d = typeMappingDescriptor(new TypeMappingDescriptor<T>());
+			var typeMapping = d._TypeMapping;
+			var indexName = d._IndexName;
+			if (indexName.IsNullOrEmpty())
+			 indexName = this.IndexNameResolver.GetIndexForType<T>();
+
+			return this.Map(typeMapping, indexName);
+
+		}
 
         /// <summary>
         /// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping. Index is the inferred default index
