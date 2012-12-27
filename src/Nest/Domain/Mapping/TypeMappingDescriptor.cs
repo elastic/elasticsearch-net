@@ -53,6 +53,26 @@ namespace Nest
 			this._IndexName = name;
 			return this;
 		}
+		/// <summary>
+		/// Explicitly set the index names otherwise it will infer the indexname based on the type
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		public TypeMappingDescriptor<T> IndexNames(params string[] names)
+		{
+			this._IndexName = string.Join(",", names);
+			return this;
+		}
+		/// <summary>
+		/// Explicitly set the index names otherwise it will infer the indexname based on the type
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		public TypeMappingDescriptor<T> IndexNames(IEnumerable<string> names)
+		{
+			this._IndexName = string.Join(",", names);
+			return this;
+		}
 		public TypeMappingDescriptor<T> SetParent(string parentType)
 		{
 			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
