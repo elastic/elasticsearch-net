@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Search
 		public void BogusQuery()
 		{
 			var client = this.ConnectedClient;
-			IQueryResponse<ElasticSearchProject> queryResults = client.Search<ElasticSearchProject>(s=>s
+			IQueryResponse<ElasticSearchProject> queryResults = client.Search<ElasticSearchProject>(s => s
 				.QueryRaw("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
@@ -65,19 +65,19 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s => s
 				.QueryString("*")
 				.SortAscending("_score")
-				.SortDescending(p=>p.Id)
+				.SortDescending(p => p.Id)
 			);
 
 			var hits = queryResults.Hits;
 
-			Assert.True(hits.Hits.All(h=>h.Sorts.Count() == 2));
+			Assert.True(hits.Hits.All(h => h.Sorts.Count() == 2));
 		}
 		[Test]
 		public void HitsSortsIsSetWithStringSort()
 		{
 			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s => s
 				.QueryString("*")
-				.SortAscending(p=>p.Name.Suffix("sort"))
+				.SortAscending(p => p.Name.Suffix("sort"))
 				.SortDescending(p => p.Id)
 			);
 
@@ -318,8 +318,6 @@ namespace Nest.Tests.Integration.Search
 				.Any(f => f.FirstName.Equals(this._LookFor, StringComparison.InvariantCultureIgnoreCase)));
 		}
 
-		//TODO: has_child query support!
-
 		[Test]
 		public void MatchAllQuery()
 		{
@@ -330,7 +328,7 @@ namespace Nest.Tests.Integration.Search
 			);
 			this.TestDefaultAssertions(queryResults);
 			Assert.True(queryResults.Total > 0);
-			
+
 		}
 
 		[Test]
@@ -400,7 +398,7 @@ namespace Nest.Tests.Integration.Search
 				@" { ""query"" : {
 						""query_string"" : { 
 							""default_field"" : ""_all"", 
-							""query"" : """+firstName+@" AND "+lastName+@"""
+							""query"" : """ + firstName + @" AND " + lastName + @"""
 						}
 					} }"
 			);
@@ -441,8 +439,6 @@ namespace Nest.Tests.Integration.Search
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-
-		//TODO: Update test data to include a blob of text so we can write decent span_* queries tests
 
 		[Test]
 		public void TermQuery()
@@ -535,7 +531,6 @@ namespace Nest.Tests.Integration.Search
 
 			//assert
 			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlight["content"].Count > 0);
-	}
-	//TODO: Implement top_children once we support mapping and mapping of parent child relations.
+		}
 	}
 }

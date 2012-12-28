@@ -21,8 +21,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "ok")]
 		public bool OK { get; internal set; }
 
-		//todo: change mapping slightly see #ES-1518
-
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }
 

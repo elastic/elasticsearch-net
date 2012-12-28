@@ -83,10 +83,7 @@ namespace Nest
 			return false;
 		}
 
-		public string Serialize(object @object)
-		{
-			return JsonConvert.SerializeObject(@object, Formatting.Indented, IndexSerializationSettings);
-		}
+		
 		/// <summary>
 		/// Returns a response of type R based on the connection status without parsing status.Result into R
 		/// </summary>

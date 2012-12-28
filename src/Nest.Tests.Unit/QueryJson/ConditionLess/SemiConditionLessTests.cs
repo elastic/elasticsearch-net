@@ -72,7 +72,6 @@ namespace Nest.Tests.Unit.QueryJson.ConditionLess
 		[Test]
 		public void Filtered()
 		{
-			//TODO test .Filter
 			this.DoSemiConditionlessQuery(q => q.Filtered(fq => fq.Query(qff => qff.Terms(p => p.Name, _c.Name1, "myterm"))));
 		}
 
