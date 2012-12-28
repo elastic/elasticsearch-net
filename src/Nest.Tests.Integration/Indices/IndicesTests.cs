@@ -127,10 +127,9 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var fieldName = Guid.NewGuid().ToString();
 			var mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
-			var property = new TypeMappingProperty
+			var property = new StringMapping
 			{
-				Type = "string",
-				Index = "not_analyzed"
+				Index = FieldIndexOption.not_analyzed
 			};
 			mapping.Properties.Add(fieldName, property);
 
@@ -149,7 +148,8 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var client = this.ConnectedClient;
 
-			var typeMapping = new RootObjectMapping(Guid.NewGuid().ToString("n"));
+			var typeMapping = new MapRootObject();
+			typeMapping.Name = Guid.NewGuid().ToString("n");
 			var property = new TypeMappingProperty
 						   {
 							   Type = "multi_field"

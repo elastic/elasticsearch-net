@@ -5,9 +5,14 @@ using System.Text;
 
 namespace Nest
 {
-	public class ElasticProperty : IElasticProperty
+	[AttributeUsage(System.AttributeTargets.Property, AllowMultiple = false)]
+	public class ElasticPropertyAttribute : Attribute
 	{
+		public bool AddSortField { get; set; }
+
+
 		public bool OptOut { get; set; }
+		
 		public string Name { get; set; }
 
 		public FieldType Type { get; set; }
@@ -16,7 +21,6 @@ namespace Nest
 		public FieldIndexOption Index { get; set; }
 
 		public double Boost { get; set; }
-
 
 		public string Analyzer { get; set; }
 		public string IndexAnalyzer { get; set; }
@@ -39,7 +43,7 @@ namespace Nest
 		/// </summary>
 		public string DateFormat { get; set; }
 
-		public ElasticProperty()
+		public ElasticPropertyAttribute()
 		{
 			//make sure we match ES's defaults
 			this.Boost = 1;

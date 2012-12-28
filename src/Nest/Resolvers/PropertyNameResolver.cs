@@ -74,6 +74,13 @@ namespace Nest.Resolvers
                         (sb.Length > 0 ? sb.Append(".") : sb).Append(name))
                 .ToString();
         }
+		public string ResolveToLastToken(Expression expression)
+		{
+			var stack = new Stack<string>();
+			var properties = new Stack<ElasticPropertyAttribute>();
+			Visit(expression, stack, properties);
+			return stack.Last();
+		}
 
         public Stack<ElasticPropertyAttribute> ResolvePropertyAttributes(Expression expression)
         {

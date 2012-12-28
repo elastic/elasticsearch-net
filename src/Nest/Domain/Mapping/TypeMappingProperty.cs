@@ -3,13 +3,16 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class TypeMappingProperty
+    public class TypeMappingProperty : IElasticType
     {
         [JsonProperty("dynamic")]
         public bool Dynamic { get; set; }
 
         [JsonProperty("type")]
         public string Type { get; set; }
+
+		[JsonProperty("name")]
+		public string Name { get; set; }
 
         [JsonProperty("null_value")]
         public object NullValue { get; set; }

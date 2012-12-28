@@ -19,14 +19,20 @@ namespace Nest.Tests.Unit.Core.Map
 		[Test]
 		public void MapFluent()
 		{
+			//most of these merely specify the defaults and are superfluous
 			var result = this._client.MapFluent<ElasticSearchProject>(m=>m
-				//MapFromAttributes() is shortcut to fill property mapping using the types' attributes and properties
-				//Allows us to map the exceptions to the rule and be less verbose.
+				
 				.TypeName("elasticsearchprojects2")
 				.IndexNames("nest_test_data", "nest_test_data_clone")
 				.IgnoreConflicts()
+				.IndexAnalyzer("standard")
+				.SearchAnalyzer("standard")
+				.DynamicDateFormats(new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" })
+				.DateDetection(true) 
+				.NumericDetection(true) 
+				//MapFromAttributes() is shortcut to fill property mapping using the types' attributes and properties
+				//Allows us to map the exceptions to the rule and be less verbose.
 				.MapFromAttributes() 
-				
 				.SetParent<Person>() //makes no sense but i needed a type :)
 				.DisableAllField(false)
 				.DisableIndexField(false)
@@ -66,6 +72,9 @@ namespace Nest.Tests.Unit.Core.Map
 				.TtlField(t=>t
 					.SetDisabled(false)
 					.SetDefault("1d")
+				)
+				.Properties(props=>props
+					.String(s=>s.ForField(p=>p.Name).IndexName("my_crazy_name_i_want_in_lucene"))
 				)
 			);
 			throw new Exception(result.ConnectionStatus.Request);

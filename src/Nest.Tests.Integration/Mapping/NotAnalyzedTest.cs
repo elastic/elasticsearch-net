@@ -16,7 +16,9 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.IsTrue(x.OK);
 
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
-			Assert.AreEqual("not_analyzed", typeMapping.Properties["country"].Index);
+			var mapping = typeMapping.Properties["country"] as StringMapping;
+			Assert.NotNull(mapping);
+			Assert.AreEqual("not_analyzed", mapping.Index);
 			
 			var indexResult = this.ConnectedClient.Index(new ElasticSearchProject
 			{
@@ -42,7 +44,9 @@ namespace Nest.Tests.Integration.Mapping
 
 			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
 			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
-			typeMapping.Properties["country"].Index = "analyzed";
+			var mapping = typeMapping.Properties["country"] as StringMapping;
+			Assert.NotNull(mapping);
+			mapping.Index = FieldIndexOption.analyzed;
 			var updateMapResult = this.ConnectedClient.Map(typeMapping);
 			Assert.True(updateMapResult.IsValid);
 

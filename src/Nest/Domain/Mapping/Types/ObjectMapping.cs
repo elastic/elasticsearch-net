@@ -1,49 +1,31 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 
 namespace Nest
 {
-    public class RootObjectMapping
-    {
-        public RootObjectMapping(string name)
-        {
-            this.Name = name;
-            this.Properties = new Dictionary<string, TypeMappingProperty>();
-        }
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
+	public class ObjectMapping : Attribute, IElasticType
+	{
+		[JsonIgnore]
+		public string Name { get; set; }
 
-        [JsonIgnore]
-        public string Name { get; set; }
+		[JsonProperty("type")]
+		public virtual string Type { get { return "object"; } }
 
-		//TODO START: Still expose this on TypeMappingDescriptor
+		//TODO START: Still expose this on (Root)ObjectMappingDescriptor
 
 		[JsonProperty("dynamic")]
 		public bool? Dynamic { get; set; }
 
-		[JsonProperty("dynamic")]
+		[JsonProperty("enabled")]
 		public bool? Enabled { get; set; }
-
-		[JsonProperty("date_detection")]
-		public bool? DateDetection { get; set; }
-
-		[JsonProperty("numeric_detection")]
-		public bool? NumericDetection { get; set; }
 
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
-		[JsonProperty("index_analyzer")]
-		public string IndexAnalyzer { get; set; }
-
-		[JsonProperty("search_analyzer")]
-		public string SearchAnalyzer { get; set; }
-
 		[JsonProperty("path")]
 		public string Path { get; set; }
-
-		[JsonProperty("dynamic_date_formats")]
-		public IEnumerable<string> DynamicDateFormats { get; set; }
-
-		//NESTED TODO also map dynamic_templates
 
 		//TODO END
 
@@ -51,8 +33,8 @@ namespace Nest
 		[JsonProperty("_id")]
 		public IdFieldMapping IdFieldMapping { get; set; }
 
-        [JsonProperty("_source")]
-        public SourceFieldMapping SourceFieldMapping { get; set; }
+		[JsonProperty("_source")]
+		public SourceFieldMapping SourceFieldMapping { get; set; }
 
 		[JsonProperty("_type")]
 		public TypeFieldMapping TypeFieldMapping { get; set; }
@@ -66,8 +48,8 @@ namespace Nest
 		[JsonProperty("_boost")]
 		public BoostFieldMapping BoostFieldMapping { get; set; }
 
-        [JsonProperty("_parent")]
-        public ParentTypeMapping Parent { get; set; }
+		[JsonProperty("_parent")]
+		public ParentTypeMapping Parent { get; set; }
 
 		[JsonProperty("_routing")]
 		public RoutingFieldMapping RoutingFieldMapping { get; set; }
@@ -85,7 +67,12 @@ namespace Nest
 		public TtlFieldMapping TtlFieldMapping { get; set; }
 
 		[JsonProperty("properties")]
-		public IDictionary<string, TypeMappingProperty> Properties { get; set; }
-		
-    }
+		public IDictionary<string, IElasticType> Properties { get; set; }
+
+
+		public ObjectMapping()
+		{
+			this.Properties = new Dictionary<string, IElasticType>();
+		}
+	}
 }

@@ -132,11 +132,11 @@ namespace Nest
 		IIndexSettingsResponse GetIndexSettings();
 		IIndexSettingsResponse GetIndexSettings(string index);
 		System.Collections.Generic.IEnumerable<string> GetIndicesPointingToAlias(string alias);
-		RootObjectMapping GetMapping(string index, string type);
-		RootObjectMapping GetMapping<T>() where T : class;
-		RootObjectMapping GetMapping<T>(string index) where T : class;
-		RootObjectMapping GetMapping(Type t);
-		RootObjectMapping GetMapping(Type t, string index);
+		MapRootObject GetMapping(string index, string type);
+		MapRootObject GetMapping<T>() where T : class;
+		MapRootObject GetMapping<T>(string index) where T : class;
+		MapRootObject GetMapping(Type t);
+		MapRootObject GetMapping(Type t, string index);
 
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
@@ -184,8 +184,8 @@ namespace Nest
 		System.Threading.Tasks.Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class;
 		IIndexExistsResponse IndexExists(string index);
 		bool IsValid { get; }
-		IIndicesResponse Map(RootObjectMapping typeMapping);
-		IIndicesResponse Map(RootObjectMapping typeMapping, string index);
+		IIndicesResponse Map(MapRootObject typeMapping);
+		IIndicesResponse Map(MapRootObject typeMapping, string index);
 		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;
