@@ -6,16 +6,17 @@ using Nest.Resolvers.Writers;
 
 namespace Nest
 {
-    public class TypeMappingDescriptor<T> where T : class
+    public class RootObjectMappingDescriptor<T> where T : class
     {
-		internal TypeMapping _TypeMapping { get; set; }
+		internal RootObjectMapping _TypeMapping { get; set; }
 		internal string _TypeName { get; set; }
 		internal string _IndexName { get; set; }
+		internal bool _IgnoreConflicts { get; set; }
 
-		public TypeMappingDescriptor()
+		public RootObjectMappingDescriptor()
 		{
 			this._TypeName = new TypeNameResolver().GetTypeNameFor<T>();
-			this._TypeMapping = new TypeMapping(this._TypeName);
+			this._TypeMapping = new RootObjectMapping(this._TypeName);
         }
 
 		/// <summary>
@@ -24,7 +25,7 @@ namespace Nest
 		/// This helps mapping all the ints as ints, floats as floats etcetera withouth having to be overly verbose in your fluent mapping
 		/// </summary>
 		/// <returns></returns>
-		public TypeMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
+		public RootObjectMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
 			var writer = new TypeMappingWriter(typeof(T), this._TypeName, maxRecursion);
 			this._TypeMapping = writer.TypeMappingFromAttributes();
@@ -37,7 +38,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public TypeMappingDescriptor<T> TypeName(string name)
+		public RootObjectMappingDescriptor<T> TypeName(string name)
 		{
 			this._TypeName = name;
 			this._TypeMapping.Name = name;
@@ -48,7 +49,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public TypeMappingDescriptor<T> IndexName(string name)
+		public RootObjectMappingDescriptor<T> IndexName(string name)
 		{
 			this._IndexName = name;
 			return this;
@@ -58,7 +59,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public TypeMappingDescriptor<T> IndexNames(params string[] names)
+		public RootObjectMappingDescriptor<T> IndexNames(params string[] names)
 		{
 			this._IndexName = string.Join(",", names);
 			return this;
@@ -68,91 +69,105 @@ namespace Nest
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public TypeMappingDescriptor<T> IndexNames(IEnumerable<string> names)
+		public RootObjectMappingDescriptor<T> IndexNames(IEnumerable<string> names)
 		{
 			this._IndexName = string.Join(",", names);
 			return this;
 		}
-		public TypeMappingDescriptor<T> SetParent(string parentType)
+		/// <summary>
+		/// When an existing mapping already exists under the given type, the two mapping definitions, the one already defined, and the new ones are merged. 
+		/// The ignore_conflicts parameters can be used to control if conflicts should be ignored or not, by default, it is set to false which means conflicts are not ignored.
+		/// The definition of conflict is really dependent on the type merged, but in general, if a different core type is defined, it is considered as a conflict. 
+		/// New mapping definitions can be added to object types, and core type mapping can be upgraded to multi_field type.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		public RootObjectMappingDescriptor<T> IgnoreConflicts(bool ignore = true)
 		{
-			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
+			this._IgnoreConflicts = ignore;
 			return this;
 		}
-		public TypeMappingDescriptor<T> SetParent<K>() where K : class
+		public RootObjectMappingDescriptor<T> SetParent(string parentType)
+		{
+			this._TypeMapping.Parent = new ParentTypeMapping() { Type = parentType };
+			return this;
+		}
+		public RootObjectMappingDescriptor<T> SetParent<K>() where K : class
 		{
 			var parentType = new TypeNameResolver().GetTypeNameFor<K>();
-			this._TypeMapping.Parent = new TypeMappingParent() { Type = parentType };
+			this._TypeMapping.Parent = new ParentTypeMapping() { Type = parentType };
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> DisableAllField(bool disabled = true)
+		public RootObjectMappingDescriptor<T> DisableAllField(bool disabled = true)
 		{
 			this._TypeMapping.AllFieldMapping = new AllFieldMapping().SetDisabled(disabled);
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> DisableSizeField(bool disabled = true)
+		public RootObjectMappingDescriptor<T> DisableSizeField(bool disabled = true)
 		{
 			this._TypeMapping.SizeFieldMapping = new SizeFieldMapping().SetDisabled(disabled);
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> DisableIndexField(bool disabled = true)
+		public RootObjectMappingDescriptor<T> DisableIndexField(bool disabled = true)
 		{
 			this._TypeMapping.IndexFieldMapping = new IndexFieldMapping().SetDisabled(disabled);
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> IdField(Func<IdFieldMapping, IdFieldMapping> idMapper)
+		public RootObjectMappingDescriptor<T> IdField(Func<IdFieldMapping, IdFieldMapping> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");
 			this._TypeMapping.IdFieldMapping = idMapper(new IdFieldMapping());
 			return this;
 		}
 
-		public TypeMappingDescriptor<T> TypeField(Func<TypeFieldMapping, TypeFieldMapping> typeMapper)
+		public RootObjectMappingDescriptor<T> TypeField(Func<TypeFieldMapping, TypeFieldMapping> typeMapper)
 		{
 			typeMapper.ThrowIfNull("typeMapper");
 			this._TypeMapping.TypeFieldMapping = typeMapper(new TypeFieldMapping());
 			return this;
 		}
-		public TypeMappingDescriptor<T> SourceField(Func<SourceFieldMapping, SourceFieldMapping> sourceMapper)
+		public RootObjectMappingDescriptor<T> SourceField(Func<SourceFieldMapping, SourceFieldMapping> sourceMapper)
 		{
 			sourceMapper.ThrowIfNull("sourceMapper");
 			this._TypeMapping.SourceFieldMapping = sourceMapper(new SourceFieldMapping());
 			return this;
 		}
 		
-		public TypeMappingDescriptor<T> AnalyzerField(Func<AnalyzerFieldMapping<T>, AnalyzerFieldMapping> analyzeMapper)
+		public RootObjectMappingDescriptor<T> AnalyzerField(Func<AnalyzerFieldMapping<T>, AnalyzerFieldMapping> analyzeMapper)
 		{
 			analyzeMapper.ThrowIfNull("analyzeMapper");
 			this._TypeMapping.AnalyzerFieldMapping = analyzeMapper(new AnalyzerFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> BoostField(Func<BoostFieldMapping<T>, BoostFieldMapping> boostMapper)
+		public RootObjectMappingDescriptor<T> BoostField(Func<BoostFieldMapping<T>, BoostFieldMapping> boostMapper)
 		{
 			boostMapper.ThrowIfNull("boostMapper");
 			this._TypeMapping.BoostFieldMapping = boostMapper(new BoostFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldMapping<T>, RoutingFieldMapping> routingMapper)
+		public RootObjectMappingDescriptor<T> RoutingField(Func<RoutingFieldMapping<T>, RoutingFieldMapping> routingMapper)
 		{
 			routingMapper.ThrowIfNull("routingMapper");
 			this._TypeMapping.RoutingFieldMapping = routingMapper(new RoutingFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> TimestampField(Func<TimestampFieldMapping<T>, TimestampFieldMapping> timestampMapper)
+		public RootObjectMappingDescriptor<T> TimestampField(Func<TimestampFieldMapping<T>, TimestampFieldMapping> timestampMapper)
 		{
 			timestampMapper.ThrowIfNull("timestampMapper");
 			this._TypeMapping.TimestampFieldMapping = timestampMapper(new TimestampFieldMapping<T>());
 			return this;
 		}
-		public TypeMappingDescriptor<T> TtlField(Func<TtlFieldMapping, TtlFieldMapping> ttlFieldMapper)
+		public RootObjectMappingDescriptor<T> TtlField(Func<TtlFieldMapping, TtlFieldMapping> ttlFieldMapper)
 		{
 			ttlFieldMapper.ThrowIfNull("ttlFieldMapper");
 			this._TypeMapping.TtlFieldMapping = ttlFieldMapper(new TtlFieldMapping());
 			return this;
 		}
+		
 		
     }
 }

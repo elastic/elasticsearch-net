@@ -149,7 +149,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var client = this.ConnectedClient;
 
-			var typeMapping = new TypeMapping(Guid.NewGuid().ToString("n"));
+			var typeMapping = new RootObjectMapping(Guid.NewGuid().ToString("n"));
 			var property = new TypeMappingProperty
 						   {
 							   Type = "multi_field"

@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-    public class TypeMappingParent
+    public class ParentTypeMapping
     {
         [JsonProperty("type")]
         public string Type { get; set; }

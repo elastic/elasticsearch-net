@@ -22,8 +22,11 @@ namespace Nest.Tests.Unit.Core.Map
 			var result = this._client.MapFluent<ElasticSearchProject>(m=>m
 				//MapFromAttributes() is shortcut to fill property mapping using the types' attributes and properties
 				//Allows us to map the exceptions to the rule and be less verbose.
-				.MapFromAttributes() 
 				.TypeName("elasticsearchprojects2")
+				.IndexNames("nest_test_data", "nest_test_data_clone")
+				.IgnoreConflicts()
+				.MapFromAttributes() 
+				
 				.SetParent<Person>() //makes no sense but i needed a type :)
 				.DisableAllField(false)
 				.DisableIndexField(false)

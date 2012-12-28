@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class TypeMapping
+    public class RootObjectMapping
     {
-        public TypeMapping(string name)
+        public RootObjectMapping(string name)
         {
             this.Name = name;
             this.Properties = new Dictionary<string, TypeMappingProperty>();
@@ -67,7 +67,7 @@ namespace Nest
 		public BoostFieldMapping BoostFieldMapping { get; set; }
 
         [JsonProperty("_parent")]
-        public TypeMappingParent Parent { get; set; }
+        public ParentTypeMapping Parent { get; set; }
 
 		[JsonProperty("_routing")]
 		public RoutingFieldMapping RoutingFieldMapping { get; set; }

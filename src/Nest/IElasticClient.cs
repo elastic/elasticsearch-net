@@ -132,11 +132,11 @@ namespace Nest
 		IIndexSettingsResponse GetIndexSettings();
 		IIndexSettingsResponse GetIndexSettings(string index);
 		System.Collections.Generic.IEnumerable<string> GetIndicesPointingToAlias(string alias);
-		TypeMapping GetMapping(string index, string type);
-		TypeMapping GetMapping<T>() where T : class;
-		TypeMapping GetMapping<T>(string index) where T : class;
-		TypeMapping GetMapping(Type t);
-		TypeMapping GetMapping(Type t, string index);
+		RootObjectMapping GetMapping(string index, string type);
+		RootObjectMapping GetMapping<T>() where T : class;
+		RootObjectMapping GetMapping<T>(string index) where T : class;
+		RootObjectMapping GetMapping(Type t);
+		RootObjectMapping GetMapping(Type t, string index);
 
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
@@ -184,8 +184,8 @@ namespace Nest
 		System.Threading.Tasks.Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class;
 		IIndexExistsResponse IndexExists(string index);
 		bool IsValid { get; }
-		IIndicesResponse Map(TypeMapping typeMapping);
-		IIndicesResponse Map(TypeMapping typeMapping, string index);
+		IIndicesResponse Map(RootObjectMapping typeMapping);
+		IIndicesResponse Map(RootObjectMapping typeMapping, string index);
 		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;
@@ -193,8 +193,8 @@ namespace Nest
 		IIndicesResponse MapFromAttributes(Type t, string index, int maxRecursion = 0);
 		IIndicesResponse MapFromAttributes(Type t, string index, string type, int maxRecursion = 0);
 		
-		IIndicesResponse MapFluent(Func<TypeMappingDescriptor<dynamic>, TypeMappingDescriptor<dynamic>> typeMappingDescriptor);
-		IIndicesResponse MapFluent<T>(Func<TypeMappingDescriptor<T>, TypeMappingDescriptor<T>> typeMappingDescriptor)
+		IIndicesResponse MapFluent(Func<RootObjectMappingDescriptor<dynamic>, RootObjectMappingDescriptor<dynamic>> typeMappingDescriptor);
+		IIndicesResponse MapFluent<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor)
 			where T : class;
 
 

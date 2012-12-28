@@ -75,7 +75,7 @@
     <Compile Include="Domain\Mapping\RoutingFieldMapping.cs" />
     <Compile Include="Domain\Mapping\TypeFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SourceFieldMapping.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\RootObjectMappingDescriptor.cs" />
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-GetFull.cs" />
@@ -289,7 +289,7 @@
     <Compile Include="DSL\Descriptors\Facets\TermFacetDescriptor.cs" />
     <Compile Include="ElasticClient-Statics.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingParent.cs" />
+    <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
@@ -338,7 +338,7 @@
     <Compile Include="Domain\Mapping\ElasticTypeAttribute.cs" />
     <Compile Include="Domain\Mapping\IElasticProperty.cs" />
     <Compile Include="Domain\Mapping\Map.cs" />
-    <Compile Include="Domain\Mapping\TypeMapping.cs" />
+    <Compile Include="Domain\Mapping\RootObjectMapping.cs" />
     <Compile Include="Domain\Mapping\TypeMappingProperty.cs" />
     <Compile Include="Domain\Mapping\IdFieldMapping.cs" />
     <Compile Include="Domain\Parameters\AliasParams.cs" />

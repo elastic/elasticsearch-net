@@ -95,19 +95,19 @@ namespace Nest
         {
             string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
             string typeMappingJson = this.CreateMapFor(t, type, maxRecursion);
-	        var typeMapping = this.Deserialize<TypeMapping>(typeMappingJson);
+	        var typeMapping = this.Deserialize<RootObjectMapping>(typeMappingJson);
 			return this.Map(typeMapping, index);
         }
 
-		public IIndicesResponse MapFluent(Func<TypeMappingDescriptor<dynamic>, TypeMappingDescriptor<dynamic>> typeMappingDescriptor)
+		public IIndicesResponse MapFluent(Func<RootObjectMappingDescriptor<dynamic>, RootObjectMappingDescriptor<dynamic>> typeMappingDescriptor)
 		{
 			return this.MapFluent<dynamic>(typeMappingDescriptor);
 		}
 
-		public IIndicesResponse MapFluent<T>(Func<TypeMappingDescriptor<T>, TypeMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		public IIndicesResponse MapFluent<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new TypeMappingDescriptor<T>());
+			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>());
 			var typeMapping = d._TypeMapping;
 			var indexName = d._IndexName;
 			if (indexName.IsNullOrEmpty())
@@ -120,17 +120,17 @@ namespace Nest
         /// <summary>
         /// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping. Index is the inferred default index
         /// </summary>
-        public IIndicesResponse Map(TypeMapping typeMapping)
+        public IIndicesResponse Map(RootObjectMapping typeMapping)
         {
             return this.Map(typeMapping, this.Settings.DefaultIndex);
         }
         /// <summary>
         /// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping.
         /// </summary>
-        public IIndicesResponse Map(TypeMapping typeMapping, string index)
+        public IIndicesResponse Map(RootObjectMapping typeMapping, string index)
         {
             string path = this.PathResolver.CreateIndexTypePath(index, typeMapping.Name, "_mapping");
-            var mapping = new Dictionary<string, TypeMapping>();
+            var mapping = new Dictionary<string, RootObjectMapping>();
             mapping.Add(typeMapping.Name, typeMapping);
 
             string map = JsonConvert.SerializeObject(mapping, Formatting.None, SerializationSettings);
