@@ -181,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Core\Map\MapFluentFull.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="FilterJson\BoolCombinations\CombineNotAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

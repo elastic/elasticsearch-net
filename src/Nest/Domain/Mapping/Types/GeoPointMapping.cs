@@ -5,8 +5,7 @@ using System;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class GeoPointMapping : Attribute, IElasticType
+	public class GeoPointMapping : IElasticType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }

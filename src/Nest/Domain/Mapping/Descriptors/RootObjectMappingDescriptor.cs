@@ -28,8 +28,14 @@ namespace Nest
 		public RootObjectMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
 			var writer = new TypeMappingWriter(typeof(T), this._TypeName, maxRecursion);
-			this._Mapping = writer.RootObjectMappingFromAttributes();
-
+			var mapping = writer.RootObjectMappingFromAttributes();
+			if (mapping == null)
+				return this;
+			var properties = mapping.Properties;
+			foreach (var p in properties)
+			{
+				this._Mapping.Properties[p.Key] = p.Value;
+			}
 			return this;
 		}
 
@@ -219,7 +225,11 @@ namespace Nest
 		public RootObjectMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			//todo merge with _RootObjectMapping 
+			var properties = propertiesSelector(new PropertiesDescriptor<T>());
+			foreach (var p in properties.Properties)
+			{
+				_Mapping.Properties[p.Key] = p.Value;
+			}
 			return this;
 		}
 		

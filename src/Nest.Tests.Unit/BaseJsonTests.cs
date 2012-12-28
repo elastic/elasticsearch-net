@@ -54,8 +54,10 @@ namespace Nest.Tests.Unit
 
 
 			var expected = File.ReadAllText(file);
-			Assert.True(json.JsonEquals(expected), json);
+			Assert.True(json.JsonEquals(expected), this.PrettyPrint(json));
 		}
+
+
 		protected void JsonNotEquals(object o, MethodBase method, string fileName = null)
 		{
 			var json = TestElasticClient.Serialize(o);
@@ -72,7 +74,13 @@ namespace Nest.Tests.Unit
 
 
 			var expected = File.ReadAllText(file);
-			Assert.False(json.JsonEquals(expected), json);
+			Assert.False(json.JsonEquals(expected), this.PrettyPrint(json));
+		}
+
+		private string PrettyPrint(string json)
+		{
+			dynamic parsedJson = JsonConvert.DeserializeObject(json);
+			return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
 		}
 	}
 }

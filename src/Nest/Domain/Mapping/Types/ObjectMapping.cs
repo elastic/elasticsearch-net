@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class ObjectMapping : Attribute, IElasticType
+	public class ObjectMapping :  IElasticType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }
@@ -25,7 +25,8 @@ namespace Nest
 		[JsonProperty("path")]
 		public string Path { get; set; }
 
-		[JsonProperty("properties")]
+		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
+		[JsonConverter(typeof(ElasticTypeConverter))]
 		public IDictionary<string, IElasticType> Properties { get; set; }
 
 

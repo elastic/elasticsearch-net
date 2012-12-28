@@ -6,8 +6,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class StringMapping : Attribute, IElasticType, IElasticCoreType
+	public class StringMapping : IElasticType, IElasticCoreType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }

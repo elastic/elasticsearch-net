@@ -429,6 +429,8 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\ElasticCoreTypeConverter.cs" />
+    <Compile Include="Resolvers\Converters\ElasticTypeConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />

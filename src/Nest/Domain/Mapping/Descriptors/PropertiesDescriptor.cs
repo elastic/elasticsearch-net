@@ -20,7 +20,7 @@ namespace Nest
 			var d = selector(new StringMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for string mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -30,7 +30,7 @@ namespace Nest
 			var d = selector(new NumberMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for number mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -40,7 +40,7 @@ namespace Nest
 			var d = selector(new DateMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for date mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -50,7 +50,7 @@ namespace Nest
 			var d = selector(new BooleanMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for boolean mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -60,7 +60,7 @@ namespace Nest
 			var d = selector(new BinaryMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for binary mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		public PropertiesDescriptor<T> Attachment(Func<AttachmentMappingDescriptor<T>, AttachmentMappingDescriptor<T>> selector)
@@ -69,7 +69,7 @@ namespace Nest
 			var d = selector(new AttachmentMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for attachment mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -80,7 +80,7 @@ namespace Nest
 			var d = selector(new ObjectMappingDescriptor<T, TChild>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for object mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		
@@ -91,7 +91,7 @@ namespace Nest
 			var d = selector(new NestedObjectMappingDescriptor<T, TChild>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for nested sobject mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		
@@ -101,7 +101,7 @@ namespace Nest
 			var d = selector(new MultiFieldMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for multifield mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		public PropertiesDescriptor<T> IP(Func<IPMappingDescriptor<T>, IPMappingDescriptor<T>> selector)
@@ -110,7 +110,7 @@ namespace Nest
 			var d = selector(new IPMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for IP mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -120,7 +120,7 @@ namespace Nest
 			var d = selector(new GeoPointMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for geo point mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -130,7 +130,7 @@ namespace Nest
 			var d = selector(new GeoShapeMappingDescriptor<T>());
 			if (d == null || d._Mapping.Name.IsNullOrEmpty())
 				throw new Exception("Could not get field name for geo shape mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 	}

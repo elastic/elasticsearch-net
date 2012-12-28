@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using NUnit.Framework;
 using Newtonsoft.Json;
@@ -17,9 +18,13 @@ namespace Nest.Tests.Unit.Core.Map
 	public class FluentMappingTests : BaseJsonTests
 	{
 		[Test]
-		public void MapFluent()
+		public void MapFluentFull()
 		{
 			//most of these merely specify the defaults and are superfluous
+			//No asserts just a global overview of what the fluent mapping is capable off.
+			
+			//TODO unit and integration tests for individual pieces!
+
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m
 
 				.TypeName("elasticsearchprojects2")
@@ -187,14 +192,13 @@ namespace Nest.Tests.Unit.Core.Map
 						.GeoHashPrecision(12)
 					)
 					.GeoShape(s => s
-						.Name(p => p.Origin)
+						.Name(p => p.MyGeoShape)
 						.Tree(GeoTree.geohash)
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)
 				)
 			);
-			throw new Exception(result.ConnectionStatus.Request);
 		}
 	}
 }

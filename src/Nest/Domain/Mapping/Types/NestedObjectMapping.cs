@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
 	public class NestedObjectMapping : ObjectMapping
 	{
 		[JsonProperty("type")]

@@ -23,7 +23,15 @@ namespace Nest
 		public MultiFieldMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			//todo merge with _ObjectMapping 
+			var properties = propertiesSelector(new PropertiesDescriptor<T>());
+			foreach (var p in properties.Properties)
+			{
+				var value = p.Value as IElasticCoreType;
+				if (value == null)
+					continue;
+				
+				_Mapping.Fields[p.Key] = value;
+			}
 			return this;
 		}
 		

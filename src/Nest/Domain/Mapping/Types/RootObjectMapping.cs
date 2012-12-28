@@ -4,7 +4,6 @@ using System;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 	public class RootObjectMapping : ObjectMapping
     {
 

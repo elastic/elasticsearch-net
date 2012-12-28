@@ -6,8 +6,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class GeoShapeMapping : Attribute, IElasticType
+	public class GeoShapeMapping : IElasticType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }

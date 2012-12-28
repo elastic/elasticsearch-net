@@ -6,8 +6,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class AttachmentMapping : Attribute, IElasticType
+	public class AttachmentMapping : IElasticType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }
@@ -15,7 +14,7 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual string Type { get { return "attachment"; } }
 
-		[JsonProperty("fields")]
+		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
 		public IDictionary<string, IElasticCoreType> Fields { get; set; }
 
 		public AttachmentMapping()

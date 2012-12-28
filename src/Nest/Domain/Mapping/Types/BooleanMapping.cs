@@ -6,8 +6,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class BooleanMapping : Attribute, IElasticType, IElasticCoreType
+	public class BooleanMapping : IElasticType, IElasticCoreType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }

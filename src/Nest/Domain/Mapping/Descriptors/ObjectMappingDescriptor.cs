@@ -18,7 +18,7 @@ namespace Nest
 		public ObjectMappingDescriptor()
 		{
 			this._TypeName = new TypeNameResolver().GetTypeNameFor<TChild>();
-			this._Mapping = new ObjectMapping() { Name = this._TypeName };
+			this._Mapping = new ObjectMapping() {  };
         }
 		public ObjectMappingDescriptor<TParent, TChild> Name(string name)
 		{
@@ -41,8 +41,14 @@ namespace Nest
 		public ObjectMappingDescriptor<TParent, TChild> MapFromAttributes(int maxRecursion = 0)
 		{
 			var writer = new TypeMappingWriter(typeof(TChild), this._TypeName, maxRecursion);
-			this._Mapping = writer.RootObjectMappingFromAttributes();
-
+			var mapping = writer.ObjectMappingFromAttributes();
+			if (mapping == null)
+				return this;
+			var properties = mapping.Properties;
+			foreach (var p in properties)
+			{
+				this._Mapping.Properties[p.Key] = p.Value;
+			}
 			return this;
 		}
 
@@ -70,9 +76,12 @@ namespace Nest
 		public ObjectMappingDescriptor<TParent, TChild> Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			//todo merge with _ObjectMapping 
+			var properties = propertiesSelector(new PropertiesDescriptor<TChild>());
+			foreach (var p in properties.Properties)
+			{
+				_Mapping.Properties[p.Key] = p.Value;
+			}
 			return this;
 		}
-		
     }
 }

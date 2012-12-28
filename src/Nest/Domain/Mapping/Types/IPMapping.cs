@@ -5,8 +5,7 @@ using System;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class IPMapping : Attribute, IElasticType
+	public class IPMapping : IElasticType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }

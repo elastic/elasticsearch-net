@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false)]
-	public class MultiFieldMapping : Attribute, IElasticType
+	public class MultiFieldMapping : IElasticType
 	{
 		[JsonIgnore]
 		public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
-		[JsonProperty("fields")]
+		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
 		public IDictionary<string, IElasticCoreType> Fields { get; set; }
 
 

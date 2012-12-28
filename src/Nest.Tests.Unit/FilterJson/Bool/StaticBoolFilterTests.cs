@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using NUnit.Framework;
 using Newtonsoft.Json;
@@ -22,7 +23,7 @@ namespace Nest.Tests.Unit.FilterJson.Bool
 			var s = Filter<ElasticSearchProject>.Term(f=>f.Name, "foo")
 				&& Filter<ElasticSearchProject>.Term(f=>f.Name, "bar");
 
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
 		[Test]
 		public void StaticBoolAssignTest()
