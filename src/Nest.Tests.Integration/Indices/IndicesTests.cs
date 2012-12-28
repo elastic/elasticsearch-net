@@ -148,7 +148,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var client = this.ConnectedClient;
 
-			var typeMapping = new MapRootObject();
+			var typeMapping = new RootObjectMapping();
 			typeMapping.Name = Guid.NewGuid().ToString("n");
 			var property = new TypeMappingProperty
 						   {

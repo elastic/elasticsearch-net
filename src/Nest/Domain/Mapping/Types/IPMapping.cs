@@ -11,6 +11,10 @@ namespace Nest
 		[JsonIgnore]
 		public string Name { get; set; }
 
+
+		[JsonProperty("index_name")]
+		public string IndexName { get; set; }
+
 		[JsonProperty("type")]
 		public virtual string Type { get { return "multi_field"; } }
 
@@ -27,7 +31,7 @@ namespace Nest
 		public double? Boost { get; set; }
 
 		[JsonProperty("null_value")]
-		public double? NullValue { get; set; }
+		public string NullValue { get; set; }
 
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }

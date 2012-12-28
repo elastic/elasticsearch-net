@@ -41,7 +41,7 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 
 		[JsonProperty("ignore_malformed")]
-		public bool? IgnoreMalFormed { get; set; }
+		public bool? IgnoreMalformed { get; set; }
 
 	}
 }

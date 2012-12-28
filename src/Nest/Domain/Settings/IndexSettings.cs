@@ -36,7 +36,7 @@ namespace Nest
         public IndexSettings()
         {
             this.Analysis = new AnalysisSettings();
-            this.Mappings = new List<MapRootObject>();
+            this.Mappings = new List<RootObjectMapping>();
             this.Settings = new Dictionary<string, string>();
         }
         public int? NumberOfShards
@@ -82,7 +82,7 @@ namespace Nest
 
         public AnalysisSettings Analysis { get; private set; }
 
-        public IList<MapRootObject> Mappings { get; private set; }
+        public IList<RootObjectMapping> Mappings { get; private set; }
 
         public void Add(string key, string value)
         {

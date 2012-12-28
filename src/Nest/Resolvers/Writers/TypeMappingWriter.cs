@@ -67,17 +67,27 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
-		internal MapRootObject TypeMappingFromAttributes()
+		internal RootObjectMapping RootObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
-			throw new Exception(nestedJson);
-
-			return JsonConvert.DeserializeObject<MapRootObject>(nestedJson);
+			return JsonConvert.DeserializeObject<RootObjectMapping>(nestedJson);
 		}
+		internal ObjectMapping ObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
 
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<ObjectMapping>(nestedJson);
+		}
+		internal NestedObjectMapping NestedObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
 
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<NestedObjectMapping>(nestedJson);
+		}
 		internal string MapFromAttributes()
 		{
 			var sb = new StringBuilder();

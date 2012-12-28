@@ -62,6 +62,20 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\BinaryMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GeoShapeMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GeoPointMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\IPMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\MultiFieldMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\NestedObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\ObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\CorePropertiesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\NumberMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\DateMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\PropertiesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\StringMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\BinaryMapping.cs" />
     <Compile Include="Domain\Mapping\Types\BooleanMapping.cs" />
     <Compile Include="Domain\Mapping\Types\AttachmentMapping.cs" />
@@ -88,7 +102,7 @@
     <Compile Include="Domain\Mapping\SpecialFields\RoutingFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\TypeFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\SourceFieldMapping.cs" />
-    <Compile Include="Domain\Mapping\RootObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\RootObjectMappingDescriptor.cs" />
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-GetFull.cs" />
@@ -167,6 +181,7 @@
     <Compile Include="DSL\Factory\Common\Point.cs" />
     <Compile Include="DSL\Factory\Common\EsRegex.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
+    <Compile Include="Enums\NumberType.cs" />
     <Compile Include="Enums\GeoTree.cs" />
     <Compile Include="Enums\NumericIndexOption.cs" />
     <Compile Include="Enums\IndexOptions.cs" />

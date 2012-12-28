@@ -6,7 +6,7 @@ namespace Nest.Tests.Integration.Mapping
 	[TestFixture]
 	public class MapTests : BaseElasticSearchTests
 	{
-		private void TestMapping(MapRootObject typeMapping)
+		private void TestMapping(RootObjectMapping typeMapping)
 		{
 			Assert.NotNull(typeMapping);
 			Assert.AreEqual("string", typeMapping.Properties["content"].Type);

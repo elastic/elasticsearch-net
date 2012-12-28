@@ -31,10 +31,15 @@ namespace Nest.Tests.MockData.Domain
 		public int LOC { get; set; }
 		public List<Person> Followers { get; set; }
 
+		public List<Person> NestedFollowers { get; set; }
+
 		[ElasticProperty(Type=FieldType.geo_point)]
 		public GeoLocation Origin { get; set; }
 		public DateTime StartedOn { get; set; }
 
+		public string PingIP { get; set; }
+
+		public GeoShape MyGeoShape { get; set; }
 
 		//excuse the lame properties i needed some numerics !
 		public long LongValue { get; set; }
@@ -48,6 +53,10 @@ namespace Nest.Tests.MockData.Domain
 
 		[ElasticProperty(NumericType=NumericType.Long)]
 		public int StupidIntIWantAsLong { get; set; }
+
+		public string MyAttachment { get; set; }
+
+		public string MyBinaryField { get; set; }
 
 	}
 }

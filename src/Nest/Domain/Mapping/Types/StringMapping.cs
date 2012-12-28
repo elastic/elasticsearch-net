@@ -37,13 +37,13 @@ namespace Nest
 		public string NullValue { get; set; }
 
 		[JsonProperty("omit_norms")]
-		public string OmitNorms { get; set; }
+		public bool? OmitNorms { get; set; }
 
 		[JsonProperty("omit_term_freq_and_positions")]
 		public bool? OmitTermFrequencyAndPositions { get; set; }
 
 		[JsonProperty("index_options"), JsonConverter(typeof(StringEnumConverter))]
-		public IndexOptions? IndexOptons { get; set; }
+		public IndexOptions? IndexOptions { get; set; }
 
 		[JsonProperty("index_analyzer")]
 		public string IndexAnalyzer { get; set; }

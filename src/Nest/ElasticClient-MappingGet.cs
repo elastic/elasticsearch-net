@@ -12,7 +12,7 @@ namespace Nest
         /// <summary>
         /// Get the current mapping for T at the default index
         /// </summary>
-        public MapRootObject GetMapping<T>() where T : class
+        public RootObjectMapping GetMapping<T>() where T : class
         {
             var index = this.IndexNameResolver.GetIndexForType<T>();
             return this.GetMapping<T>(index);
@@ -20,7 +20,7 @@ namespace Nest
         /// <summary>
         /// Get the current mapping for T at the specified index
         /// </summary>
-        public MapRootObject GetMapping<T>(string index) where T : class
+        public RootObjectMapping GetMapping<T>(string index) where T : class
         {
             string type = this.TypeNameResolver.GetTypeNameFor<T>();
             return this.GetMapping(index, type);
@@ -28,7 +28,7 @@ namespace Nest
         /// <summary>
         /// Get the current mapping for T at the default index
         /// </summary>
-        public MapRootObject GetMapping(Type t)
+        public RootObjectMapping GetMapping(Type t)
         {
             var index = this.IndexNameResolver.GetIndexForType(t);
             return this.GetMapping(t, index);
@@ -36,7 +36,7 @@ namespace Nest
         /// <summary>
         /// Get the current mapping for T at the specified index
         /// </summary>
-        public MapRootObject GetMapping(Type t, string index)
+        public RootObjectMapping GetMapping(Type t, string index)
         {
             string type = this.TypeNameResolver.GetTypeNameForType(t);
             return this.GetMapping(index, type);
@@ -46,14 +46,14 @@ namespace Nest
         /// <summary>
         /// Get the current mapping for type at the specified index
         /// </summary>
-        public MapRootObject GetMapping(string index, string type)
+        public RootObjectMapping GetMapping(string index, string type)
         {
             string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
 
             ConnectionStatus status = this.Connection.GetSync(path);
             try
             {
-                var mappings = this.Deserialize<IDictionary<string, MapRootObject>>(status.Result);
+                var mappings = this.Deserialize<IDictionary<string, RootObjectMapping>>(status.Result);
 
                 if (status.Success)
                 {

@@ -95,7 +95,7 @@ namespace Nest
         {
             string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
             string typeMappingJson = this.CreateMapFor(t, type, maxRecursion);
-	        var typeMapping = this.Deserialize<MapRootObject>(typeMappingJson);
+	        var typeMapping = this.Deserialize<RootObjectMapping>(typeMappingJson);
 			return this.Map(typeMapping, index);
         }
 
@@ -108,7 +108,7 @@ namespace Nest
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>());
-			var typeMapping = d._RootObjectMapping;
+			var typeMapping = d._Mapping;
 			var indexName = d._IndexName;
 			if (indexName.IsNullOrEmpty())
 			 indexName = this.IndexNameResolver.GetIndexForType<T>();
@@ -120,17 +120,17 @@ namespace Nest
         /// <summary>
         /// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping. Index is the inferred default index
         /// </summary>
-        public IIndicesResponse Map(MapRootObject typeMapping)
+        public IIndicesResponse Map(RootObjectMapping typeMapping)
         {
             return this.Map(typeMapping, this.Settings.DefaultIndex);
         }
         /// <summary>
         /// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping.
         /// </summary>
-        public IIndicesResponse Map(MapRootObject typeMapping, string index)
+        public IIndicesResponse Map(RootObjectMapping typeMapping, string index)
         {
             string path = this.PathResolver.CreateIndexTypePath(index, typeMapping.Name, "_mapping");
-            var mapping = new Dictionary<string, MapRootObject>();
+            var mapping = new Dictionary<string, RootObjectMapping>();
             mapping.Add(typeMapping.Name, typeMapping);
 
             string map = JsonConvert.SerializeObject(mapping, Formatting.None, SerializationSettings);

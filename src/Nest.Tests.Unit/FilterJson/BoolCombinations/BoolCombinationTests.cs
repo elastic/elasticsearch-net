@@ -85,7 +85,6 @@ namespace Nest.Tests.Unit.FilterJson.BoolCombinations
       this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
     }
     [Test]
-    //TODO FIXME!
     public void OrWithExistsLambda()
     {
       var s = new SearchDescriptor<ElasticSearchProject>()
@@ -97,7 +96,6 @@ namespace Nest.Tests.Unit.FilterJson.BoolCombinations
       this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
     }
 	[Test]
-	//TODO FIXME!
     public void OrWithExistsLambdaSimple()
 	{
 		var s = new SearchDescriptor<ElasticSearchProject>()
