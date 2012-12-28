@@ -22,7 +22,7 @@ namespace Nest
 		/// <param name="querySelector">Path and query descriptor using T to describe the query</param>
 		public IRegisterPercolateResponse RegisterPercolator<T>(string name, Action<QueryPathDescriptor<T>> querySelector) where T : class
 		{
-		  querySelector.ThrowIfNull("queryDescriptor");
+			querySelector.ThrowIfNull("queryDescriptor");
 			var descriptor = new RoutingQueryPathDescriptor<T>();
 			querySelector(descriptor);
 			var query = this.Serialize(new { query = descriptor });
@@ -67,7 +67,7 @@ namespace Nest
 			var r = this.ToParsedResponse<UnregisterPercolateResponse>(status, allow404: true);
 			return r;
 		}
-		
+
 		/// <summary>
 		/// Manually percolate an object using its inferred typename and the default index
 		/// </summary>
@@ -77,7 +77,7 @@ namespace Nest
 			var type = this.TypeNameResolver.GetTypeNameFor<T>();
 			var doc = JsonConvert.SerializeObject(@object, Formatting.Indented, IndexSerializationSettings);
 
-			return this.Percolate(index, type,"{{doc:{0}}}".F(doc));
+			return this.Percolate(index, type, "{{doc:{0}}}".F(doc));
 		}
 		/// <summary>
 		/// Manually percolate an object using its inferred typename and the specified index

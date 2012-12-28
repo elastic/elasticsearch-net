@@ -74,17 +74,6 @@ namespace Nest.Tests.Integration.Mapping
 			TestMapping(typeMapping);
 		}
 
-
-		public void FluentMapping()
-		{
-			//TODO: Waiting to pull in nordbergm's excellent work on mapping 
-			/*var map = Map<ElasticSearchProject>
-				.Type(new ElasticType() 
-				{
-					
-				}).AddField(p=>p.Content, Field.Analyzer("").)*/
-		}
-
 		[Test]
 		public void GetMapping()
 		{

@@ -13,8 +13,6 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual string Type { get { return "object"; } }
 
-		//TODO START: Still expose this on (Root)ObjectMappingDescriptor
-
 		[JsonProperty("dynamic")]
 		public bool? Dynamic { get; set; }
 
@@ -26,11 +24,6 @@ namespace Nest
 
 		[JsonProperty("path")]
 		public string Path { get; set; }
-
-		//TODO END
-
-
-		
 
 		[JsonProperty("properties")]
 		public IDictionary<string, IElasticType> Properties { get; set; }

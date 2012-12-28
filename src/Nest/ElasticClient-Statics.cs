@@ -31,10 +31,27 @@ namespace Nest
 			this.IndexSerializationSettings.Converters.Add(converter);
 			this.SerializationSettings.Converters.Add(converter);
 		}
-		public string Serialize<T>(T @object)
+
+		/// <summary>
+		/// serialize an object using the internal registered converters without camelcasing properties as is done 
+		/// while indexing objects
+		/// </summary>
+		public string Serialize(object @object)
 		{
 			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
 		}
+
+		/// <summary>
+		/// Serialize an object using the default camelCasing used while indexing objects
+		/// </summary>
+		public string SerializeCamelCase(object @object)
+		{
+			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.IndexSerializationSettings);
+		}
+		
+		/// <summary>
+		/// Deserialize an object 
+		/// </summary>
 		public T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
 		{
 			var settings = this.SerializationSettings;

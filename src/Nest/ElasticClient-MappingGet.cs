@@ -8,7 +8,8 @@ namespace Nest
 {
     public partial class ElasticClient
     {
-      
+		//TODO wrap in a BaseResponse
+
         /// <summary>
         /// Get the current mapping for T at the default index
         /// </summary>

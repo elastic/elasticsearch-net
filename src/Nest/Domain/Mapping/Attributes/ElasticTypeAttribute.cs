@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Nest
 {
-	//TODO dynamic template support
 	[AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false)]
 	public class ElasticTypeAttribute : Attribute, IElasticType
 	{

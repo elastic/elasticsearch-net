@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit
 
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
-			var json = TestElasticClient.Serialize(o);
+			var json = _client.Serialize(o);
 			this.JsonEquals(json, method, fileName);
 		}
 		protected void JsonEquals(string json, MethodBase method, string fileName = null)

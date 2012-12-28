@@ -246,6 +246,7 @@ namespace Nest
 		ISegmentsResponse Segments(System.Collections.Generic.IEnumerable<string> indices);
 		ISegmentsResponse Segments(string index);
 		string Serialize(object @object);
+		string SerializeCamelCase(object @object);
 		IIndicesShardResponse Snapshot();
 		IIndicesShardResponse Snapshot(System.Collections.Generic.IEnumerable<string> indices);
 		IIndicesShardResponse Snapshot(string index);

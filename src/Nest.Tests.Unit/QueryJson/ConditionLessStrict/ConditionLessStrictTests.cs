@@ -163,7 +163,6 @@ namespace Nest.Tests.Unit.QueryJson.ConditionLessStrict
 		[Test]
 		public void Filtered()
 		{
-			//TODO test .Filter
 			this.DoConditionlessQuery(q => q.Filtered(fq => fq.Query(qff => qff.Terms(p => p.Name, _c.Name1))));
 		}
 

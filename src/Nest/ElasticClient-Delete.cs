@@ -293,9 +293,6 @@ namespace Nest
     #endregion
 
     #region Delete by passing an IEnumerable of objects
-
-    //TODO soooooo many overloads, need to come up with a better way to pass index, type combinations.
-
     /// <summary>
     /// Deletes all the objects by inferring its id in the default index and the inferred type for T
     /// </summary>
@@ -544,7 +541,7 @@ namespace Nest
     {
       var descriptor = new RoutingQueryPathDescriptor<T>();
       query(descriptor);
-      var stringQuery = this.Serialize(descriptor);
+	  var stringQuery = this.Serialize(descriptor);
       var path = this.PathResolver.GetPathForTyped(descriptor, "_query");
       if (parameters != null)
         path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -560,7 +557,7 @@ namespace Nest
     {
       var descriptor = new RoutingQueryPathDescriptor();
       query(descriptor);
-      var stringQuery = this.Serialize(descriptor);
+	  var stringQuery = this.Serialize(descriptor);
       var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
       if (parameters != null)
         path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -591,7 +588,7 @@ namespace Nest
     {
       var descriptor = new RoutingQueryPathDescriptor<T>();
       query(descriptor);
-      var stringQuery = this.Serialize(descriptor);
+	  var stringQuery = this.Serialize(descriptor);
       var path = this.PathResolver.GetPathForTyped(descriptor, "_query");
       if (parameters != null)
         path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
@@ -607,7 +604,7 @@ namespace Nest
     {
       var descriptor = new RoutingQueryPathDescriptor();
       query(descriptor);
-      var stringQuery = this.Serialize(descriptor);
+	  var stringQuery = this.Serialize(descriptor);
       var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
       if (parameters != null)
         path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);

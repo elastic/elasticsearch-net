@@ -13,8 +13,6 @@ namespace Nest.Tests.MockData.Domain
 		SearchAnalyzer = "standard",
 		IndexAnalyzer = "standard",
 		DynamicDateFormats = new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" }
-		//TODO Parenttype forces the bulks to specify routing, handle this automagically.
-		//,ParentType = "elasticsearchprojects"
 	)]
 	public class ElasticSearchProject
 	{

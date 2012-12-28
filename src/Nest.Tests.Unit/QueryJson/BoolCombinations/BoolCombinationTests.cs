@@ -85,7 +85,6 @@ namespace Nest.Tests.Unit.QueryJson.BoolCombinations
       this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
     }
     [Test]
-    //TODO FIXME!
     public void OrWithQueryStringLambda()
     {
       var s = new SearchDescriptor<ElasticSearchProject>()
@@ -97,7 +96,6 @@ namespace Nest.Tests.Unit.QueryJson.BoolCombinations
       this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
     }
 	[Test]
-	//TODO FIXME!
 	public void OrWithQueryStringLambdaSimple()
 	{
 		var s = new SearchDescriptor<ElasticSearchProject>()

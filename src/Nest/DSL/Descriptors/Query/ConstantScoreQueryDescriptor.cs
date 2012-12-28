@@ -24,9 +24,10 @@ namespace Nest
 			{
 				if (this._Query == null && this._Filter == null)
 					return true;
-				else if (this._Filter == null && this._Query != null)
+				if (this._Filter == null && this._Query != null)
 					return this._Query.IsConditionless;
-				//TODO FILTER
+				if (this._Filter != null && this._Query == null)
+					return this._Filter.IsConditionless;
 				return false;
 			}
 		}
