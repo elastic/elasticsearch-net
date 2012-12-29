@@ -29,10 +29,5 @@ namespace Nest
 		[JsonConverter(typeof(ElasticTypeConverter))]
 		public IDictionary<string, IElasticType> Properties { get; set; }
 
-
-		public ObjectMapping()
-		{
-			this.Properties = new Dictionary<string, IElasticType>();
-		}
 	}
 }

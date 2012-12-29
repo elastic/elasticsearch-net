@@ -65,6 +65,9 @@
     <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BinaryMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GenericMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\DynamicTemplatesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\SingleMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\GeoShapeMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\GeoPointMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\IPMappingDescriptor.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Domain\Mapping\Descriptors\DateMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\PropertiesDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\StringMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\DynamicTemplate.cs" />
     <Compile Include="Domain\Mapping\Types\BinaryMapping.cs" />
     <Compile Include="Domain\Mapping\Types\BooleanMapping.cs" />
     <Compile Include="Domain\Mapping\Types\AttachmentMapping.cs" />
@@ -368,7 +372,7 @@
     <Compile Include="Domain\Mapping\Attributes\ElasticTypeAttribute.cs" />
     <Compile Include="Domain\Mapping\Map.cs" />
     <Compile Include="Domain\Mapping\Types\RootObjectMapping.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingProperty.cs" />
+    <Compile Include="Domain\Mapping\Types\GenericMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\IdFieldMapping.cs" />
     <Compile Include="Domain\Parameters\AliasParams.cs" />
     <Compile Include="Domain\Parameters\AnalyzeParams.cs" />

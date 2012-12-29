@@ -150,24 +150,18 @@ namespace Nest.Tests.Integration.Indices
 
 			var typeMapping = new RootObjectMapping();
 			typeMapping.Name = Guid.NewGuid().ToString("n");
-			var property = new TypeMappingProperty
-						   {
-							   Type = "multi_field"
-						   };
+			var property = new MultiFieldMapping();
 
-			var primaryField = new TypeMappingProperty
-							   {
-								   Type = "string", 
-								   Index = "not_analyzed"
-							   };
+			var primaryField = new StringMapping()
+			{
+				Index = FieldIndexOption.not_analyzed
+			};
 
-			var analyzedField = new TypeMappingProperty
-								{
-									Type = "string", 
-									Index = "analyzed"
-								};
+			var analyzedField = new StringMapping()
+			{
+				Index = FieldIndexOption.analyzed
+			};
 
-			property.Fields = new Dictionary<string, TypeMappingProperty>();
 			property.Fields.Add("name", primaryField);
 			property.Fields.Add("name_analyzed", analyzedField);
 

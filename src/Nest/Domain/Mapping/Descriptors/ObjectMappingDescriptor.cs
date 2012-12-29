@@ -45,6 +45,10 @@ namespace Nest
 			if (mapping == null)
 				return this;
 			var properties = mapping.Properties;
+			if (this._Mapping.Properties == null)
+				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+
+
 			foreach (var p in properties)
 			{
 				this._Mapping.Properties[p.Key] = p.Value;
@@ -77,6 +81,13 @@ namespace Nest
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<TChild>());
+			if (this._Mapping.Properties == null)
+				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+
+			foreach (var t in properties._Deletes)
+			{
+				_Mapping.Properties.Remove(t);
+			}
 			foreach (var p in properties.Properties)
 			{
 				_Mapping.Properties[p.Key] = p.Value;

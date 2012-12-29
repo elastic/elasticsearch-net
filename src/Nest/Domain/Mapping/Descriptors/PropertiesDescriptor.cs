@@ -7,11 +7,18 @@ namespace Nest
 {
 	public class PropertiesDescriptor<T> where T : class
 	{
-		public IDictionary<string, IElasticType> Properties { get; set; }
+		public IDictionary<string, IElasticType> Properties { get; private set; }
+		internal IList<string> _Deletes = new List<string>();
 
 		public PropertiesDescriptor()
 		{
 			this.Properties = new Dictionary<string, IElasticType>();
+		}
+
+		public PropertiesDescriptor<T> Remove(string name)
+		{
+			this._Deletes.Add(name);
+			return this;
 		}
 
 		public PropertiesDescriptor<T> String(Func<StringMappingDescriptor<T>, StringMappingDescriptor<T>> selector)
@@ -133,5 +140,17 @@ namespace Nest
 			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
+		public PropertiesDescriptor<T> Generic(Func<GenericMappingDescriptor<T>, GenericMappingDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var d = selector(new GenericMappingDescriptor<T>());
+			if (d == null || d._Mapping.Name.IsNullOrEmpty())
+				throw new Exception("Could not get field name for generic mapping");
+			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			return this;
+		}
+
+		//Reminder if you are adding a new mapping type, may one appear in the future
+		//Add them to PropertiesDescriptor, CorePropertiesDescriptor (if its a new core type), SingleMappingDescriptor
 	}
 }

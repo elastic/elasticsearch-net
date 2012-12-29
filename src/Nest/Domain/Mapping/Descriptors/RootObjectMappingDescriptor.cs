@@ -32,6 +32,9 @@ namespace Nest
 			if (mapping == null)
 				return this;
 			var properties = mapping.Properties;
+			if (this._Mapping.Properties == null)
+				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+
 			foreach (var p in properties)
 			{
 				this._Mapping.Properties[p.Key] = p.Value;
@@ -226,6 +229,13 @@ namespace Nest
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<T>());
+			if (this._Mapping.Properties == null)
+				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+
+			foreach (var t in properties._Deletes)
+			{
+				_Mapping.Properties.Remove(t);
+			}
 			foreach (var p in properties.Properties)
 			{
 				_Mapping.Properties[p.Key] = p.Value;
@@ -236,6 +246,23 @@ namespace Nest
 		{
 			metaSelector.ThrowIfNull("metaSelector");
 			this._Mapping.Meta = metaSelector(new FluentDictionary<string, object>());
+			return this;
+		}
+		public RootObjectMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)
+		{
+			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
+			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
+			if (this._Mapping.DynamicTemplates == null)
+				this._Mapping.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
+
+			foreach (var t in templates._Deletes)
+			{
+				_Mapping.DynamicTemplates.Remove(t);
+			}
+			foreach (var t in templates.Templates)
+			{
+				_Mapping.DynamicTemplates[t.Key] = t.Value;
+			}
 			return this;
 		}
     }

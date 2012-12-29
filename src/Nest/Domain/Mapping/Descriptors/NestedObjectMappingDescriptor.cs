@@ -44,6 +44,9 @@ namespace Nest
 			var mapping = writer.NestedObjectMappingFromAttributes();
 			if (mapping == null)
 				return this;
+			if (this._Mapping.Properties == null)
+				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+
 			var properties = mapping.Properties;
 			foreach (var p in properties)
 			{
@@ -87,6 +90,13 @@ namespace Nest
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<TChild>());
+			if (this._Mapping.Properties == null)
+				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+
+			foreach (var t in properties._Deletes)
+			{
+				_Mapping.Properties.Remove(t);
+			}
 			foreach (var p in properties.Properties)
 			{
 				_Mapping.Properties[p.Key] = p.Value;

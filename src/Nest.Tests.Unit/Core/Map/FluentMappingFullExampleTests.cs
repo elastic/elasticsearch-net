@@ -15,7 +15,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Unit.Core.Map
 {
 	[TestFixture]
-	public class FluentMappingTests : BaseJsonTests
+	public class FluentMappingFullExampleTests : BaseJsonTests
 	{
 		[Test]
 		public void MapFluentFull()
@@ -85,6 +85,30 @@ namespace Nest.Tests.Unit.Core.Map
 				.Meta(d=>d
 					.Add("attr1", "value1")
 					.Add("attr2", new { attr3 = "value3" })
+				)
+				.DynamicTemplates(d=>d
+					.Add(t=>t
+						.Name("template_1")
+						.Match("multi*")
+						.Mapping(tm=>tm
+							.MultiField(mf=>mf
+								.Fields(mff=>mff
+									.Generic(g => g
+										.Name("{name}")
+										.Type("{dynamic_type}")
+										.Index("analyzed")
+										.Store(false)
+									)
+									.Generic(g => g
+										.Name("org")
+										.Type("{dynamic_type}")
+										.Index("not_analyzed")
+										.Store()
+									)
+								)							
+							)
+						)
+					)
 				)
 				.Properties(props => props
 					.String(s => s
@@ -174,7 +198,7 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 					.MultiField(s => s
 						.Name(p => p.Name)
-						.Properties(pprops => pprops
+						.Fields(pprops => pprops
 							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
 							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.analyzed))
 						)

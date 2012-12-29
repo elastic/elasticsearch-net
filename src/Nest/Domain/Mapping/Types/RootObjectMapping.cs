@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 
@@ -64,6 +65,8 @@ namespace Nest
 		[JsonProperty("_meta")]
 		public FluentDictionary<string, object> Meta { get; set; }
 
-		//NESTED TODO also map dynamic_templates
+		[JsonProperty("dynamic_templates", TypeNameHandling = TypeNameHandling.None)]
+		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
+
     }
 }

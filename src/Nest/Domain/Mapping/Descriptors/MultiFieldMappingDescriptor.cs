@@ -20,10 +20,10 @@ namespace Nest
 			return this;
 		}
 
-		public MultiFieldMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)
+		public MultiFieldMappingDescriptor<T> Fields(Func<CorePropertiesDescriptor<T>, CorePropertiesDescriptor<T>> fieldSelector)
 		{
-			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = propertiesSelector(new PropertiesDescriptor<T>());
+			fieldSelector.ThrowIfNull("fieldSelector");
+			var properties = fieldSelector(new CorePropertiesDescriptor<T>());
 			foreach (var p in properties.Properties)
 			{
 				var value = p.Value as IElasticCoreType;
