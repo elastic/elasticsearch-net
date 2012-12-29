@@ -54,5 +54,26 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
+		[Test]
+		public void MultipleTemplates()
+		{
+			var result = this._client.MapFluent<ElasticSearchProject>(m => m
+				.DynamicTemplates(d => d
+					.Add(t => t
+						.Name("string")
+						.Match("str_*")
+						.MatchMappingType("string")
+						.Mapping(tm => tm.String(sm=>sm.Index(FieldIndexOption.not_analyzed)))
+					)
+					.Add(t => t
+						.Name("numbers")
+						.Match("nu_*")
+						.MatchMappingType("integer")
+						.Mapping(tm => tm.Number(sm => sm.Type(NumberType.integer).NullValue(4)))
+					)
+				)
+			);
+			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+		}
 	}
 }

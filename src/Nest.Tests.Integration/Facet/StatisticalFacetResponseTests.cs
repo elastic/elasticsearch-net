@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Facet
         [Test]
         public void StatisticalHistogramFacet()
         {
-            var results = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+            var results = this._client.Search<ElasticSearchProject>(s=>s
 							.MatchAll()
 							.FacetStatistical(fs=>fs
 								.OnField(f=>f.LOC)

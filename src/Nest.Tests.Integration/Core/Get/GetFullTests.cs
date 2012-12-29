@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetSimple()
 		{
-			var result = this.ConnectedClient.GetFull<ElasticSearchProject>(1);
+			var result = this._client.GetFull<ElasticSearchProject>(1);
 			this.DefaultAssertations(result);
 			
 			
@@ -36,14 +36,14 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetWithPathInfo()
 		{
-			var result = this.ConnectedClient.GetFull<ElasticSearchProject>("nest_test_data", "elasticsearchprojects", 1);
+			var result = this._client.GetFull<ElasticSearchProject>("nest_test_data", "elasticsearchprojects", 1);
 			this.DefaultAssertations(result);
 		}
 		
 		[Test]
 		public void GetUsingDescriptorWithTypeAndFields()
 		{
-			var result = this.ConnectedClient.GetFull<ElasticSearchProject>(g => g
+			var result = this._client.GetFull<ElasticSearchProject>(g => g
 				.Index("nest_test_data")
 				.Type("elasticsearchprojects")
 				.Id(1)

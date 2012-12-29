@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void AllSegments()
 		{
-			var r = this.ConnectedClient.Segments();
+			var r = this._client.Segments();
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 
@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SingleSegment()
 		{
-			var r = this.ConnectedClient.Segments(this.Settings.DefaultIndex);
+			var r = this._client.Segments(this.Settings.DefaultIndex);
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Indices
 		public void MultipleSegment()
 		{
 			var indices = new [] {this.Settings.DefaultIndex , this.Settings.DefaultIndex + "_clone"};
-			var r = this.ConnectedClient.Segments(indices);
+			var r = this._client.Segments(indices);
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 

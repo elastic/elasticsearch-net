@@ -68,6 +68,7 @@ namespace Nest
 		public FluentDictionary<string, object> Meta { get; set; }
 
 		[JsonProperty("dynamic_templates", TypeNameHandling = TypeNameHandling.None)]
+		[JsonConverter(typeof(DynamicTemplatesConverter))]
 		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
 
     }

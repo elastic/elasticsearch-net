@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleHistogramFacet()
 		{
-			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
+			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },
@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void DateHistogramFacet()
 		{
-			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
+			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },
@@ -86,7 +86,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void DateHistogramFacetCleanSyntax()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
 				.MatchAll()
 				.FacetDateHistogram(f=>f
 					.OnField(ff=>ff.Followers.First().DateOfBirth)

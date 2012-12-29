@@ -9,26 +9,26 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SnapshotAll()
 		{
-			var r = this.ConnectedClient.Snapshot();
+			var r = this._client.Snapshot();
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void SnapshotIndex()
 		{
-			var r = this.ConnectedClient.Snapshot(Test.Default.DefaultIndex);
+			var r = this._client.Snapshot(Test.Default.DefaultIndex);
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void SnapshotIndeces()
 		{
-			var r = this.ConnectedClient.Snapshot(
+			var r = this._client.Snapshot(
 				new []{Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void SnapshotTyped()
 		{
-			var r = this.ConnectedClient.Snapshot<ElasticSearchProject>();
+			var r = this._client.Snapshot<ElasticSearchProject>();
 			Assert.True(r.OK);
 		}
 	}

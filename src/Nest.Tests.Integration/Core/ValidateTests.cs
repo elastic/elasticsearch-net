@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Core
 		public void TestValidation()
 		{
 			this.ResetIndexes();
-			var response = this.ConnectedClient.Validate<ElasticSearchProject>(q=>q
+			var response = this._client.Validate<ElasticSearchProject>(q=>q
 				.Term(f=>f.Country, "netherlands")
 			);
 			Assert.NotNull(response);
@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Core
 		public void TestValidationWithExplain()
 		{
 			this.ResetIndexes();
-			var response = this.ConnectedClient.Validate<ElasticSearchProject>(q => q
+			var response = this._client.Validate<ElasticSearchProject>(q => q
 				.Explain()
 				.UseSimpleQueryString("loc:asdasd")
 			);

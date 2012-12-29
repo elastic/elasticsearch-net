@@ -1,6 +1,6 @@
   {
   "elasticsearchprojects": {
-    "dynamic_templates": {
+    "dynamic_templates": [{
       "template_1": {
         "match": "multi*",
         "mapping": {
@@ -21,6 +21,6 @@
           }
         }
       }
-    }
+    }]
   }
 }

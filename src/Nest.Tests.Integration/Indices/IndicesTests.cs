@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void GetIndexSettingsSimple()
 		{
-			var r = this.ConnectedClient.GetIndexSettings();
+			var r = this._client.GetIndexSettings();
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
 			Assert.Greater(r.Settings.NumberOfReplicas, 0);
@@ -48,15 +48,15 @@ namespace Nest.Tests.Integration.Indices
 			settings.NumberOfReplicas = 4;
 			settings.NumberOfShards = 8;
 			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
-			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
 
 			settings.Add("merge.policy.merge_factor","10");
 
-			var createResponse = this.ConnectedClient.CreateIndex(index, settings);
+			var createResponse = this._client.CreateIndex(index, settings);
 
-			var r = this.ConnectedClient.GetIndexSettings(index);
+			var r = this._client.GetIndexSettings(index);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
 			Assert.AreEqual(r.Settings.NumberOfReplicas, 4);
@@ -64,13 +64,13 @@ namespace Nest.Tests.Integration.Indices
 			Assert.Greater(r.Settings.Count(), 0);
 			Assert.True(r.Settings.ContainsKey("merge.policy.merge_factor"));
 
-			this.ConnectedClient.DeleteIndex(index);
+			this._client.DeleteIndex(index);
 		}
 		[Test]
 		public void UpdateSettingsSimple()
 		{
 			var index = Guid.NewGuid().ToString();
-			var client = this.ConnectedClient;
+			var client = this._client;
 			var settings = new IndexSettings();
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
@@ -81,15 +81,15 @@ namespace Nest.Tests.Integration.Indices
 			settings["refresh_interval"] = "-1";
 			settings["search.slowlog.threshold.fetch.warn"] = "5s";
 
-			var r = this.ConnectedClient.UpdateSettings(index, settings);
+			var r = this._client.UpdateSettings(index, settings);
 			
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
-			var getResponse = this.ConnectedClient.GetIndexSettings(index);
+			var getResponse = this._client.GetIndexSettings(index);
 			Assert.AreEqual(getResponse.Settings["refresh_interval"], "-1");
 			Assert.AreEqual(getResponse.Settings["search.slowlog.threshold.fetch.warn"], "1s");
 
-			this.ConnectedClient.DeleteIndex(index);
+			this._client.DeleteIndex(index);
 		}
 
 
@@ -98,8 +98,8 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CreateIndex()
 		{
-			var client = this.ConnectedClient;
-			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var client = this._client;
+			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
 			settings.Mappings.Add(typeMapping);
@@ -113,7 +113,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.OK);
 
-			Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, "mytype"));
+			Assert.IsNotNull(this._client.GetMapping(indexName, "mytype"));
 
 			response = client.DeleteIndex(indexName);
 
@@ -126,19 +126,19 @@ namespace Nest.Tests.Integration.Indices
 		public void PutMapping()
 		{
 			var fieldName = Guid.NewGuid().ToString();
-			var mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
+			var mapping = this._client.GetMapping<ElasticSearchProject>();
 			var property = new StringMapping
 			{
 				Index = FieldIndexOption.not_analyzed
 			};
 			mapping.Properties.Add(fieldName, property);
 
-			var response = this.ConnectedClient.Map(mapping);
+			var response = this._client.Map(mapping);
 
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.OK);
 
-			mapping = this.ConnectedClient.GetMapping<ElasticSearchProject>();
+			mapping = this._client.GetMapping<ElasticSearchProject>();
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
 		}
 
@@ -146,7 +146,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CreateIndexMultiFieldMap()
 		{
-			var client = this.ConnectedClient;
+			var client = this._client;
 
 			var typeMapping = new RootObjectMapping();
 			typeMapping.Name = Guid.NewGuid().ToString("n");
@@ -180,7 +180,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.OK);
 
 
-			Assert.IsNotNull(this.ConnectedClient.GetMapping(indexName, typeMapping.Name));
+			Assert.IsNotNull(this._client.GetMapping(indexName, typeMapping.Name));
 
 			response = client.DeleteIndex(indexName);
 

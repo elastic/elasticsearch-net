@@ -23,15 +23,15 @@ namespace Nest.Tests.Integration.Integration.Query
 		protected override void ResetIndexes()
 		{
 			base.ResetIndexes();
-			var client = this.ConnectedClient;
+			var client = this._client;
 			if (client.IsValid)
 			{
 				_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
 				_LookFor.Name = "one two three four";
-				var status = this.ConnectedClient.Index(_LookFor).ConnectionStatus;
+				var status = this._client.Index(_LookFor).ConnectionStatus;
 				Assert.True(status.Success, status.Result);
 
-				Assert.True(this.ConnectedClient.Flush<ElasticSearchProject>().OK, "Flush");
+				Assert.True(this._client.Flush<ElasticSearchProject>().OK, "Flush");
 			}
 		}
 
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Integration.Query
 			var id = _LookFor.Id;
 			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id.ToString());
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId && filterId)
 				);
 
@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Integration.Query
 					.Slop(0)
 					.PrefixLength(2));
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId)
 					.Query(querySlop0 && querySlop1 && queryPrefix1 && queryPrefix2)
 				);
@@ -123,7 +123,7 @@ namespace Nest.Tests.Integration.Integration.Query
 					.OnField(p => p.Name)
 					.QueryString("one fail"));
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId)
 					.Query(querySlop0 || querySlop1 || queryPrefix2 || queryFail)
 				);

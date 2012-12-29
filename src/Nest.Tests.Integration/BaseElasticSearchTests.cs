@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration
 			}
 		}
 		private ElasticClient _connectedClient;
-		protected ElasticClient ConnectedClient
+		protected ElasticClient _client
 		{
 			get 
 			{
@@ -76,8 +76,8 @@ namespace Nest.Tests.Integration
 			client.DeleteMapping<T>(cloneIndex);
 			client.MapFromAttributes<T>();
 			client.MapFromAttributes<T>(cloneIndex);
-			this.ConnectedClient.OpenIndex<T>();
-			this.ConnectedClient.OpenIndex(cloneIndex);
+			this._client.OpenIndex<T>();
+			this._client.OpenIndex(cloneIndex);
 			client.IndexMany(objects, bulkParameters);
 			client.IndexMany(objects, cloneIndex, bulkParameters);
 		}
@@ -116,7 +116,7 @@ namespace Nest.Tests.Integration
 		{
 			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, project.Id.ToString());
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(ff => ff.And(
 						f => f.Term(e => e.Id, project.Id.ToString()),
 						filter

@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiSimple()
 		{
-			var result = this.ConnectedClient.MultiGetFull(a => a
+			var result = this._client.MultiGetFull(a => a
 				.Get<ElasticSearchProject>(g=>g.Id(1))
 				.Get<Person>(g => g.Id(100))
 			);
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiSimpleWithMissingItem()
 		{
-			var result = this.ConnectedClient.MultiGetFull(a => a
+			var result = this._client.MultiGetFull(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1))
 				.Get<Person>(g => g.Id(100000))
 				.Get<Person>(g => g.Id(105))
@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiWithMetaData()
 		{
-			var result = this.ConnectedClient.MultiGetFull(a => a
+			var result = this._client.MultiGetFull(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
 				.Get<Person>(g => g.Id(100).Type("people").Index("nest_test_data").Fields(p => p.Id, p => p.FirstName))
 			);
@@ -93,7 +93,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiWithMetaDataUsingCleanApi()
 		{
-			var result = this.ConnectedClient.MultiGetFull(a => a
+			var result = this._client.MultiGetFull(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p => p.Id, p => p.Followers.First().FirstName))
 				.Get<Person>(g => g.Id(100).Type("people").Index("nest_test_data").Fields(p => p.Id, p => p.FirstName))
 			);

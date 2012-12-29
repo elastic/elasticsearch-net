@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Index
       {
         Message = "Some Message",
       };
-      var response = this.ConnectedClient.Index(newProject);
+      var response = this._client.Index(newProject);
       Assert.IsTrue(response.IsValid);
       Assert.IsNotNullOrEmpty(response.Id);
       Assert.IsNotNullOrEmpty(response.Type);
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Index
         new LogClass { Message = "Some Message2" },
         new LogClass { Message = "Some Message3" }
       };
-      var response = this.ConnectedClient.IndexMany(newProjects);
+      var response = this._client.IndexMany(newProjects);
       Assert.IsTrue(response.IsValid, response.ConnectionStatus.Result);
       Assert.IsNotEmpty(response.Items);
       Assert.True(response.Items.All(i => i.OK), response.ConnectionStatus.Result);
