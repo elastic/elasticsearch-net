@@ -132,7 +132,6 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.Dynamic()
 						.Enabled()
 						.IncludeInAll()
-						.MapFromAttributes()
 						.Path("full")
 						.Properties(pprops => pprops
 							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))
@@ -155,7 +154,6 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.IncludeInAll()
 						.IncludeInParent()
 						.IncludeInRoot()
-						.MapFromAttributes()
 						.Path("full")
 						.Properties(pprops => pprops
 							.String(ps => ps.Name(p => p.FirstName).Index(FieldIndexOption.not_analyzed))

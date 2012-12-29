@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using System.Reflection;
@@ -13,6 +14,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void StringProperty()
 		{
+			this._client.DeleteMapping<ElasticSearchProject>();
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m
 				.Properties(props => props
 					.String(s => s
@@ -34,6 +36,13 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 				)
 			);
 			this.DefaultResponseAssertations(result);
+			var mapping = this._client.GetMapping<ElasticSearchProject>();
+			mapping.Should().NotBeNull();
+			mapping.Properties.Should().NotBeEmpty();
+			var nameMapping = mapping.Properties["name"] as StringMapping;
+			nameMapping.Should().NotBeNull();
+			nameMapping.Name.Should().NotBeNullOrEmpty().And.Equals("name");
+			nameMapping.IndexName.Should().NotBeNullOrEmpty().And.Equals("my_crazy_name_i_want_in_lucene");
 		}
 		[Test]
 		public void NumberProperty()
