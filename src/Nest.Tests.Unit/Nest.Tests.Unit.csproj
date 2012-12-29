@@ -71,7 +71,19 @@
   <ItemGroup>
     <Compile Include="BaseJsonTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
-    <Compile Include="Core\Map\FluentMappingTests.cs" />
+    <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
+    <Compile Include="Core\Map\BoostField\BoostFieldTests.cs" />
+    <Compile Include="Core\Map\Properties\PropertiesTests.cs" />
+    <Compile Include="Core\Map\DynamicTemplates\DynamicTemplatesTests.cs" />
+    <Compile Include="Core\Map\MetaField\MetaFieldTests.cs" />
+    <Compile Include="Core\Map\TtlField\TtlFieldTests.cs" />
+    <Compile Include="Core\Map\TimestampField\TimestampFieldTests.cs" />
+    <Compile Include="Core\Map\RoutingField\RoutingFieldTests.cs" />
+    <Compile Include="Core\Map\TypeField\TypeFieldTests.cs" />
+    <Compile Include="Core\Map\SourceField\SourceFieldTests.cs" />
+    <Compile Include="Core\Map\FluentMappingFullExampleTests.cs" />
+    <Compile Include="Core\Map\IdField\IdFieldTests.cs" />
+    <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Facets\FacetJson.cs" />
@@ -181,7 +193,91 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Core\Map\MapFluentFull.json">
+    <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\BoostField\BoostFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\BoostField\BoostFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\BooleanProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\BinaryProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\AttachmentProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\GeoShape.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\GeoPoint.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\IPProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\MultiFieldProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\NestedObjectProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\ObjectProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\DateProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\NumberProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\StringProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\DynamicTemplates\CompletelyGenericTemplate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\DynamicTemplates\MultiFieldWithGenericTypes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\MetaField\MetaFieldSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TtlField\TtlFieldSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TimestampField\TimestampFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TimestampField\TimestampFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\RoutingField\RoutingFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\RoutingField\RoutingFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TypeField\TypeFieldSerializesNo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TypeField\TypeFieldSerializesYes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\SourceField\SourceFieldSerializesFully.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\IdField\IdFieldSerializesFully.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\RootProperties\RootPropertiesShouldSerialize.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="FilterJson\BoolCombinations\CombineNotAnd.json">

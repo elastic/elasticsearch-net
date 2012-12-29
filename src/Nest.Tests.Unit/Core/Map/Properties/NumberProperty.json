@@ -1,0 +1,17 @@
+  {
+  "elasticsearchprojects": {
+    "properties": {
+      "loc": {
+        "type": "integer",
+        "index_name": "lines_of_code",
+        "store": "yes",
+        "index": "yes",
+        "precision_step": 1,
+        "boost": 2.0,
+        "null_value": 0.0,
+        "include_in_all": true,
+        "ignore_malformed": true
+      }
+    }
+  }
+}

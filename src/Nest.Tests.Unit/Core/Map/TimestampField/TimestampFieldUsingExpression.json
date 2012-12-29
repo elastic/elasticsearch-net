@@ -1,0 +1,8 @@
+  {
+  "elasticsearchprojects": {
+    "_timestamp": {
+      "enabled": false,
+      "path": "name"
+    }
+  }
+}

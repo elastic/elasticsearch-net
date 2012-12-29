@@ -1,0 +1,8 @@
+  {
+  "elasticsearchprojects": {
+    "_type": {
+      "index": "yes",
+      "store": "yes"
+    }
+  }
+}

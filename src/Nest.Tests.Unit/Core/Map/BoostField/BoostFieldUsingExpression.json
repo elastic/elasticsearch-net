@@ -1,0 +1,8 @@
+  {
+  "elasticsearchprojects": {
+    "_boost": {
+      "name": "name",
+      "null_value": 1.0
+    }
+  }
+}

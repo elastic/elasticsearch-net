@@ -53,7 +53,7 @@ namespace Nest
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
-		[JsonProperty("position_offset_gap	")]
+		[JsonProperty("position_offset_gap")]
 		public int? PositionOffsetGap { get; set; }
 
 	}

@@ -1,4 +1,5 @@
 ﻿using System;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -12,8 +13,8 @@ namespace Nest
 			this.Index = true;
 		}
 
-		[JsonProperty("index")]
-		public bool Index { get; internal set; }
+		[JsonProperty("index"), JsonConverter(typeof(YesNoBoolConverter))]
+		public bool? Index { get; internal set; }
 
 		[JsonProperty("path")]
 		public string Path { get; internal set; }

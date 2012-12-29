@@ -1,0 +1,8 @@
+  {
+  "elasticsearchprojects": {
+    "_analyzer": {
+      "index": "yes",
+      "path": "name"
+    }
+  }
+}

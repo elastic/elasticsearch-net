@@ -20,7 +20,6 @@
     "_size": {
       "enabled": false
     },
-    "type": "object",
     "dynamic": true,
     "enabled": true,
     "include_in_all": true,

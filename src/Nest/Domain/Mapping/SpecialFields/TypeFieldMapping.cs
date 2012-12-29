@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -10,11 +11,11 @@ namespace Nest
 			this.Store = true;
 		}
 
-		[JsonProperty("index")]
-		public bool Index { get; internal set; }
+		[JsonProperty("index"), JsonConverter(typeof(YesNoBoolConverter))]
+		public bool? Index { get; internal set; }
 
-		[JsonProperty("store")]
-		public bool Store { get; internal set; }
+		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		public bool? Store { get; internal set; }
 
 		public TypeFieldMapping SetIndexed(bool indexed = true)
 		{

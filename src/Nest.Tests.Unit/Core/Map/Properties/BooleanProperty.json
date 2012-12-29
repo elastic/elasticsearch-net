@@ -1,0 +1,15 @@
+  {
+  "elasticsearchprojects": {
+    "properties": {
+      "boolValue": {
+        "type": "date",
+        "index_name": "bool_name_in_lucene_index",
+        "store": "yes",
+        "index": "yes",
+        "boost": 1.4,
+        "null_value": false,
+        "include_in_all": true
+      }
+    }
+  }
+}

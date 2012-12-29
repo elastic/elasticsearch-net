@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,8 +15,8 @@ namespace Nest
 		[JsonProperty("index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty("store")]
-		public bool Store { get; internal set; }
+		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
+		public bool? Store { get; internal set; }
 
 		public IdFieldMapping SetPath(string path)
 		{

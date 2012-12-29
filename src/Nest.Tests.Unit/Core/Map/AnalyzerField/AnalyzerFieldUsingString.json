@@ -1,0 +1,8 @@
+  {
+  "elasticsearchprojects": {
+    "_analyzer": {
+      "index": "no",
+      "path": "my_difficult_field_name"
+    }
+  }
+}

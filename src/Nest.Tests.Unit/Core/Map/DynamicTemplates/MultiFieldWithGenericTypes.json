@@ -1,0 +1,26 @@
+  {
+  "elasticsearchprojects": {
+    "dynamic_templates": {
+      "template_1": {
+        "match": "multi*",
+        "mapping": {
+          "type": "multi_field",
+          "fields": {
+            "{name}": {
+              "name": "{name}",
+              "type": "{dynamic_type}",
+              "store": "no",
+              "index": "analyzed"
+            },
+            "org": {
+              "name": "org",
+              "type": "{dynamic_type}",
+              "store": "yes",
+              "index": "not_analyzed"
+            }
+          }
+        }
+      }
+    }
+  }
+}

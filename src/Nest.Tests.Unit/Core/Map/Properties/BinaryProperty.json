@@ -1,0 +1,10 @@
+  {
+  "elasticsearchprojects": {
+    "properties": {
+      "myBinaryField": {
+        "type": "binary",
+        "index_name": "binz"
+      }
+    }
+  }
+}
