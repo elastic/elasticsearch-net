@@ -82,6 +82,10 @@ namespace Nest.Tests.Unit.Core.Map
 					.SetDisabled(false)
 					.SetDefault("1d")
 				)
+				.Meta(d=>d
+					.Add("attr1", "value1")
+					.Add("attr2", new { attr3 = "value3" })
+				)
 				.Properties(props => props
 					.String(s => s
 						.Name(p => p.Name)

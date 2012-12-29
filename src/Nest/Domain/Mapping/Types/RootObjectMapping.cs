@@ -61,6 +61,9 @@ namespace Nest
 		[JsonProperty("_ttl")]
 		public TtlFieldMapping TtlFieldMapping { get; set; }
 
+		[JsonProperty("_meta")]
+		public FluentDictionary<string, object> Meta { get; set; }
+
 		//NESTED TODO also map dynamic_templates
     }
 }

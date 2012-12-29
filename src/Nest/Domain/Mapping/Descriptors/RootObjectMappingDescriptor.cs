@@ -232,6 +232,11 @@ namespace Nest
 			}
 			return this;
 		}
-		
+		public RootObjectMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector)
+		{
+			metaSelector.ThrowIfNull("metaSelector");
+			this._Mapping.Meta = metaSelector(new FluentDictionary<string, object>());
+			return this;
+		}
     }
 }
