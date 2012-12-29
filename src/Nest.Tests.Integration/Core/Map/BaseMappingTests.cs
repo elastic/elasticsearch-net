@@ -1,12 +1,19 @@
 ﻿using System;
 using FluentAssertions;
 using NUnit.Framework;
+using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Core.Map
 {
 	[TestFixture]
 	public class BaseMappingTests : BaseElasticSearchTests
 	{
+		[TestFixtureSetUp]
+		public override void Initialize()
+		{
+			this._client.DeleteMapping<ElasticSearchProject>();
+		}
+
 		protected void DefaultResponseAssertations(IIndicesResponse result)
 		{
 			result.Should().NotBeNull();

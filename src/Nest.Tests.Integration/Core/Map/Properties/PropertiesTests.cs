@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Nest.Tests.Integration.Core.Map.Properties
 {
@@ -97,6 +98,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void BinaryProperty()
 		{
+			this._client.DeleteMapping<ElasticSearchProject>();
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m
 				.Properties(props => props
 					.Binary(s => s
@@ -107,7 +109,8 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 			);
 			this.DefaultResponseAssertations(result);
 		}
-		[Test]
+		[Test, Ignore]
+		//needs the attachment plugin
 		public void AttachmentProperty()
 		{
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m
@@ -217,6 +220,8 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 			this.DefaultResponseAssertations(result);
 		}
 		[Test]
+		[Ignore]
+		//Need special libs in your elasticsearch folder to enable geoshape
 		public void GeoShapeProperty()
 		{
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m

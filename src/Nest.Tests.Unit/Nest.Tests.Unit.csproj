@@ -206,6 +206,9 @@
     <None Include="Core\Map\BoostField\BoostFieldUsingString.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\DynamicTemplates\MultipleTemplates.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\BooleanProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

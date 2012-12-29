@@ -1,25 +1,20 @@
 ﻿using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
     public class TypeFieldMapping
     {
-		public TypeFieldMapping()
-		{
-			this.Index = true;
-			this.Store = true;
-		}
-
-		[JsonProperty("index"), JsonConverter(typeof(YesNoBoolConverter))]
-		public bool? Index { get; internal set; }
+		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
+		public NonStringIndexOption? Index { get; internal set; }
 
 		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; internal set; }
 
-		public TypeFieldMapping SetIndexed(bool indexed = true)
+		public TypeFieldMapping SetIndexed(NonStringIndexOption index = NonStringIndexOption.analyzed)
 		{
-			this.Index = indexed;
+			this.Index = index;
 			return this;
 		}
 		public TypeFieldMapping SetStored(bool stored = true)

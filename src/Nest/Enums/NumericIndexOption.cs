@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Nest
 {
-	public enum YesNoIndexOption
+	public enum NonStringIndexOption
 	{
 		no,
-		yes
+		analyzed,
+		not_analyzed 
 	}
 
 	

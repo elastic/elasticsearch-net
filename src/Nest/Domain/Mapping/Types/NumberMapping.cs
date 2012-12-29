@@ -24,8 +24,8 @@ namespace Nest
 		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; set; }
 
-		[JsonProperty("index"), JsonConverter(typeof(YesNoBoolConverter))]
-		public bool? Index { get; set; }
+		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
+		public NonStringIndexOption? Index { get; set; }
 
 		[JsonProperty("precision_step")]
 		public int? PrecisionStep { get; set; }

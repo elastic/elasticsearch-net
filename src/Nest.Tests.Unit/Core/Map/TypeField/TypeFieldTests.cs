@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.Core.Map.TypeField
 		{
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m
 				.TypeField(t => t
-					.SetIndexed(false)
+					.SetIndexed(NonStringIndexOption.no)
 					.SetStored(false)
 				)
 			);

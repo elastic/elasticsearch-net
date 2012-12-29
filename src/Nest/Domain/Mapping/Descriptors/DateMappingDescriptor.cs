@@ -25,7 +25,7 @@ namespace Nest
 			this._Mapping.IndexName = indexName;
 			return this;
 		}
-		public DateMappingDescriptor<T> Index(bool index = true)
+		public DateMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.analyzed)
 		{
 			this._Mapping.Index = index;
 			return this;
