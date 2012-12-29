@@ -26,7 +26,6 @@ namespace Nest.Tests.Unit.Core.Map
 			//TODO unit and integration tests for individual pieces!
 
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-
 				.TypeName("elasticsearchprojects2")
 				.IndexNames("nest_test_data", "nest_test_data_clone")
 				.IgnoreConflicts()

@@ -73,6 +73,7 @@
     <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
     <Compile Include="Core\Map\BoostField\BoostFieldTests.cs" />
+    <Compile Include="Core\Map\PutMappingRequestTests.cs" />
     <Compile Include="Core\Map\Properties\PropertiesTests.cs" />
     <Compile Include="Core\Map\DynamicTemplates\DynamicTemplatesTests.cs" />
     <Compile Include="Core\Map\MetaField\MetaFieldTests.cs" />
@@ -214,10 +215,10 @@
     <None Include="Core\Map\Properties\AttachmentProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Map\Properties\GeoShape.json">
+    <None Include="Core\Map\Properties\GeoShapeProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\Map\Properties\GeoPoint.json">
+    <None Include="Core\Map\Properties\GeoPointProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\Properties\IPProperty.json">

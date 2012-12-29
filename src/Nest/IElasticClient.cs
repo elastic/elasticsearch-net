@@ -185,7 +185,7 @@ namespace Nest
 		IIndexExistsResponse IndexExists(string index);
 		bool IsValid { get; }
 		IIndicesResponse Map(RootObjectMapping typeMapping);
-		IIndicesResponse Map(RootObjectMapping typeMapping, string index);
+		IIndicesResponse Map(RootObjectMapping typeMapping, string index, string typeName, bool ignoreConflicts);
 		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;
