@@ -202,7 +202,7 @@ namespace Nest.Resolvers
 
 			var dict = this.GetSearchParameters(descriptor);
 
-			return this.PathJoin(indices, types, dict, "_search");
+			return this.SearchPathJoin(indices, types, dict, "_search");
 		}
 		public string GetSearchPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
@@ -223,7 +223,7 @@ namespace Nest.Resolvers
 			var dict = this.GetSearchParameters(descriptor);
 				
 
-			return this.PathJoin(indices, types, dict, "_search");
+			return this.SearchPathJoin(indices, types, dict, "_search");
 		}
 		
 		public string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor, string suffix)
@@ -238,7 +238,7 @@ namespace Nest.Resolvers
 
 			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
 
-			return this.PathJoin(indices, types, descriptor.GetUrlParams(), suffix);
+			return this.SearchPathJoin(indices, types, descriptor.GetUrlParams(), suffix);
 		}
 		public string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor, string suffix) where T : class
 		{
@@ -256,10 +256,71 @@ namespace Nest.Resolvers
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
 				types = null;
 
-			return this.PathJoin(indices, types, descriptor.GetUrlParams(), suffix);
+			return this.SearchPathJoin(indices, types, descriptor.GetUrlParams(), suffix);
 		}
-		
-		
+
+		public string GetMoreLikeThisPathFor<T>(MoreLikeThisDescriptor<T> descriptor) where T : class
+		{
+			var index = descriptor._Index;
+			if (index.IsNullOrEmpty())
+				index = this._indexNameResolver.GetIndexForType<T>();
+
+			var type = descriptor._Type;
+			if (type.IsNullOrEmpty())
+				type = this._typeNameResolver.GetTypeNameFor<T>();
+
+			var id = descriptor._Id;
+			
+			var dict = new Dictionary<string, string>();
+			if (descriptor._Options != null)
+			{
+				var options = descriptor._Options;
+				if (options._Fields.Any())
+				{
+					var fields = string.Join(",", options._Fields);
+					dict.Add("mlt_fields", fields);
+				}
+				if (options._StopWords.Any())
+				{
+					var stopwords = string.Join(",", options._StopWords);
+					dict.Add("stop_words", stopwords);
+				}
+				if (!options._LikeText.IsNullOrEmpty())
+					dict.Add("like_text", options._LikeText);
+				if (options._TermMatchPercentage != null)
+					dict.Add("percent_terms_to_match", options._TermMatchPercentage.ToString());
+				if (options._MinTermFrequency != null)
+					dict.Add("min_term_freq", options._MinTermFrequency.ToString());
+				if (options._MaxQueryTerms != null)
+					dict.Add("max_query_terms", options._MaxQueryTerms.ToString());
+				if (options._MinDocumentFrequency != null)
+					dict.Add("min_doc_freq", options._MinDocumentFrequency.ToString());
+				if (options._MaxDocumentFrequency != null)
+					dict.Add("max_doc_freq", options._MaxDocumentFrequency.ToString());
+				if (options._MinWordLength != null)
+					dict.Add("min_word_len", options._MinWordLength.ToString());
+				if (options._MaxWordLength != null)
+					dict.Add("max_word_len", options._MaxWordLength.ToString());
+				if (options._BoostTerms != null)
+					dict.Add("boost_terms", options._BoostTerms.ToString());
+				if (options._Boost != null)
+					dict.Add("boost", options._Boost.ToString());
+				if (!options._Analyzer.IsNullOrEmpty())
+					dict.Add("analyzer", options._Analyzer);
+			}
+			if (descriptor._Search != null)
+			{
+				var searchDict = this.GetSearchParameters(descriptor._Search);
+				foreach(var kv in searchDict)
+					dict.Add(kv.Key, kv.Value);
+				this.AddSearchType(descriptor._Search, dict);
+			}
+
+			var path = this.JoinParamsAndSegments(dict, index, type, id);
+			return path;
+		}
+
+
 		private string NormalizeSuffix(string suffix)
 		{
 			suffix.ThrowIfNull("suffix");
@@ -269,7 +330,18 @@ namespace Nest.Resolvers
 			
 		}
 
-		private string PathJoin(string indices, string types, IDictionary<string, string> urlparams, string extension = "_search")
+		private string JoinParamsAndSegments(IDictionary<string, string> urlparams, params string[] hostSegments)
+		{
+			var path = string.Join("/", hostSegments);
+			if (urlparams != null && urlparams.Any())
+			{
+				var queryString = string.Join("&", urlparams.Select(kv => "{0}={1}".F(kv.Key, Uri.EscapeDataString(kv.Value))));
+				path += "?{0}".F(queryString);
+			}
+			return "/" + path;
+		}
+
+		private string SearchPathJoin(string indices, string types, IDictionary<string, string> urlparams, string extension = "_search")
 		{
 			string path = string.Concat(!string.IsNullOrEmpty(types) ?
 											 this.CreateIndexTypePath(indices, types) :

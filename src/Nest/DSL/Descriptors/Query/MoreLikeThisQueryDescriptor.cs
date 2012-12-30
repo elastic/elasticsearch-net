@@ -10,7 +10,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MoreLikeThisDescriptor<T> : IQuery where T : class
+	public class MoreLikeThisQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "fields")]
 		internal IEnumerable<string> _Fields { get; set; }
@@ -48,75 +48,75 @@ namespace Nest
 			}
 		}
 
-		public MoreLikeThisDescriptor<T> OnFields(IEnumerable<string> fields)
+		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
 			this._Fields = fields;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> OnFields(
+		public MoreLikeThisQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
 			var fieldNames = objectPaths
 				.Select(o => new PropertyNameResolver().Resolve(o));
 			return this.OnFields(fieldNames);
 		}
-		public MoreLikeThisDescriptor<T> LikeText(string likeText)
+		public MoreLikeThisQueryDescriptor<T> LikeText(string likeText)
 		{
 			this._LikeText = likeText;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> StopWords(IEnumerable<string> stopWords)
+		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords)
 		{
 			this._StopWords = stopWords;
 			return this;
 		}
 		
-		public MoreLikeThisDescriptor<T> MaxQueryTerms(int maxQueryTerms)
+		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int maxQueryTerms)
 		{
 			this._MaxQueryTerms = maxQueryTerms;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> MinTermFrequency(int minTermFrequency)
+		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int minTermFrequency)
 		{
 			this._MinTermFrequency = minTermFrequency;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> MinDocumentFrequency(int minDocumentFrequency)
+		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int minDocumentFrequency)
 		{
 			this._MinDocumentFrequency = minDocumentFrequency;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> MaxDocumentFrequency(int maxDocumentFrequency)
+		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int maxDocumentFrequency)
 		{
 			this._MaxDocumentFrequency = maxDocumentFrequency;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> MinWordLength(int minWordLength)
+		public MoreLikeThisQueryDescriptor<T> MinWordLength(int minWordLength)
 		{
 			this._MinWordLength = minWordLength;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> MaxWordLength(int maxWordLength)
+		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int maxWordLength)
 		{
 			this._MaxWordLength = maxWordLength;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> BoostTerms(double boostTerms)
+		public MoreLikeThisQueryDescriptor<T> BoostTerms(double boostTerms)
 		{
 			this._BoostTerms = boostTerms;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> TermMatchPercentage(double termMatchPercentage)
+		public MoreLikeThisQueryDescriptor<T> TermMatchPercentage(double termMatchPercentage)
 		{
 			this._TermMatchPercentage = termMatchPercentage;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> Boost(double boost)
+		public MoreLikeThisQueryDescriptor<T> Boost(double boost)
 		{
 			this._Boost = boost;
 			return this;
 		}
-		public MoreLikeThisDescriptor<T> Analyzer(string analyzer)
+		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer)
 		{
 			this._Analyzer = analyzer;
 			return this;

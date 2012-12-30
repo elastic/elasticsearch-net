@@ -59,7 +59,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "has_child")]
 		internal object HasChildQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "mlt")]
-		internal MoreLikeThisDescriptor<T> MoreLikeThisDescriptor { get; set; }
+		internal MoreLikeThisQueryDescriptor<T> MoreLikeThisDescriptor { get; set; }
 		[JsonProperty(PropertyName = "range")]
 		internal IDictionary<string, object> RangeQueryDescriptor { get; set; }
 
@@ -397,9 +397,9 @@ namespace Nest
 		/// <summary>
 		/// More like this query find documents that are “like” provided text by running it against one or more fields.
 		/// </summary>
-		public BaseQuery MoreLikeThis(Action<MoreLikeThisDescriptor<T>> selector)
+		public BaseQuery MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> selector)
 		{
-			var query = new MoreLikeThisDescriptor<T>();
+			var query = new MoreLikeThisQueryDescriptor<T>();
 			selector(query);
 			if (query.IsConditionless)
 				return CreateConditionlessQueryDescriptor(query);
