@@ -85,6 +85,8 @@
     <Compile Include="Core\Map\FluentMappingFullExampleTests.cs" />
     <Compile Include="Core\Map\IdField\IdFieldTests.cs" />
     <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
+    <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
+    <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Facets\FacetJson.cs" />

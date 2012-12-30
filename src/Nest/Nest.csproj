@@ -62,6 +62,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\MoreLikeThisDescriptor.cs" />
+    <Compile Include="ElasticClient-MoreLikeThis.cs" />
     <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BinaryMappingDescriptor.cs" />
@@ -163,7 +165,7 @@
     <Compile Include="DSL\Descriptors\Query\SpanQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\ISpanQuery.cs" />
     <Compile Include="DSL\Descriptors\Query\SpanTerm.cs" />
-    <Compile Include="DSL\Descriptors\Query\MoreLikeThisDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\MoreLikeThisQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FuzzyLikeThisDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FuzzyDateQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FuzzyNumericQueryDescriptor.cs" />

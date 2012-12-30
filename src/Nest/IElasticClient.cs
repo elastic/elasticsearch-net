@@ -129,6 +129,9 @@ namespace Nest
 		System.Collections.Generic.IEnumerable<T> MultiGet<T>(string index, string type, System.Collections.Generic.IEnumerable<string> ids) where T : class;
 		MultiGetResponse MultiGetFull(Action<MultiGetDescriptor> multiGetSelector);
 
+		IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
+			where T : class;
+
 		IIndexSettingsResponse GetIndexSettings();
 		IIndexSettingsResponse GetIndexSettings(string index);
 		System.Collections.Generic.IEnumerable<string> GetIndicesPointingToAlias(string alias);

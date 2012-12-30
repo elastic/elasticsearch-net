@@ -275,12 +275,12 @@ namespace Nest.Resolvers
 			if (descriptor._Options != null)
 			{
 				var options = descriptor._Options;
-				if (options._Fields.Any())
+				if (options._Fields.HasAny())
 				{
 					var fields = string.Join(",", options._Fields);
 					dict.Add("mlt_fields", fields);
 				}
-				if (options._StopWords.Any())
+				if (options._StopWords.HasAny())
 				{
 					var stopwords = string.Join(",", options._StopWords);
 					dict.Add("stop_words", stopwords);
@@ -316,7 +316,7 @@ namespace Nest.Resolvers
 				this.AddSearchType(descriptor._Search, dict);
 			}
 
-			var path = this.JoinParamsAndSegments(dict, index, type, id);
+			var path = this.JoinParamsAndSegments(dict, index, type, id, "_mlt");
 			return path;
 		}
 
@@ -373,22 +373,22 @@ namespace Nest.Resolvers
 				switch (descriptor._SearchType.Value)
 				{
 					case SearchType.Count:
-						dict.Add("search_type", "count");
+						dict["search_type"] = "count";
 						break;
 					case SearchType.DfsQueryThenFetch:
-						dict.Add("search_type", "dfs_query_then_fetch");
+						dict["search_type"] =  "dfs_query_then_fetch";
 						break;
 					case SearchType.DfsQueryAndFetch:
-						dict.Add("search_type", "dfs_query_and_fetch");
+						dict["search_type"] = "dfs_query_and_fetch";
 						break;
 					case SearchType.QueryThenFetch:
-						dict.Add("search_type", "query_then_fetch");
+						dict["search_type"] = "query_then_fetch";
 						break;
 					case SearchType.QueryAndFetch:
-						dict.Add("search_type", "query_and_fetch");
+						dict["search_type"] =  "query_and_fetch";
 						break;
 					case SearchType.Scan:
-						dict.Add("search_type", "scan");
+						dict["search_type"] =  "scan";
 						break;
 				}
 			}
