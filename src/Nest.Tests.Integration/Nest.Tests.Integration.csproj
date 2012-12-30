@@ -68,6 +68,7 @@
     <Compile Include="Core\Map\TimestampField\TimestampFieldTests.cs" />
     <Compile Include="Core\Map\TtlField\TtlFieldTests.cs" />
     <Compile Include="Core\Map\TypeField\TypeFieldTests.cs" />
+    <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\ValidateTests.cs" />
     <Compile Include="Core\Get\GetTests.cs" />
     <Compile Include="Index\GetIdFromElasticsearchTests.cs" />

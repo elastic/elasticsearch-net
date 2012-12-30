@@ -286,6 +286,9 @@
     <None Include="Core\Map\RootProperties\RootPropertiesShouldSerialize.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\MoreLikeThis\SearchBodyEndsUpInPost.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="FilterJson\BoolCombinations\CombineNotAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
