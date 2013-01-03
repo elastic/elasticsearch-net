@@ -55,7 +55,8 @@ namespace Nest.Tests.FactoryDsl.Filter
         {
             var filter = new FilteredQueryBuilder(QueryFactory.TermQuery("name.first", "shay"), FilterFactory.TermFilter("name.last","banon"));
 
-            Assert.AreEqual(File.ReadAllText("DSL/Filter/filtered-query.json").Strip(), filter.ToJsonObject().Strip());    
+            Assert.AreEqual(File.ReadAllText("DSL/Filter/filtered-query.json").Strip(), filter.ToJsonObject().Strip());
         }
+		
     }
 }
