@@ -1,20 +1,20 @@
 ﻿using System.IO;
+using System.Reflection;
 using NUnit.Framework;
-using Nest.Tests.FactoryDsl;
 using Nest.FactoryDsl;
 using Nest.FactoryDsl.Query;
 
-namespace Nest.Tests.FactoryDsl.Filter
+namespace Nest.Tests.Unit.Search.Filter.Factory
 {
     [TestFixture]
-    public class FilterTests
+	public class FilterTests : BaseJsonTests
     {
         private SearchBuilder _sb;
 
         [SetUp]
         public void Setup()
         {
-            _sb = new SearchBuilder();
+            this._sb = new SearchBuilder();
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace Nest.Tests.FactoryDsl.Filter
             var andFilter = FilterFactory.AndFilter(FilterFactory.TermFilter("name.first", "shay1"), FilterFactory.TermFilter("name.first", "shay4"));
             var filter = new FilteredQueryBuilder(QueryFactory.TermQuery("name.first", "shay"), andFilter);
 
-            Assert.AreEqual(File.ReadAllText("DSL/Filter/and-filter.json").Strip(), filter.ToJsonObject().Strip());
+			this.JsonEquals(filter.ToJsonObject(), MethodInfo.GetCurrentMethod(), "and-filter");
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace Nest.Tests.FactoryDsl.Filter
             andFilter.FilterName("test");
             var filter = new FilteredQueryBuilder(QueryFactory.TermQuery("name.first", "shay"), andFilter);
 
-            Assert.AreEqual(File.ReadAllText("DSL/Filter/and-filter-named.json").Strip(), filter.ToJsonObject().Strip());
+			this.JsonEquals(filter.ToJsonObject(), MethodInfo.GetCurrentMethod(), "and-filter-named");
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Nest.Tests.FactoryDsl.Filter
 
             var filter = new FilteredQueryBuilder(QueryFactory.TermQuery("name.first", "shay"), boolFilter);
 
-            Assert.AreEqual(File.ReadAllText("DSL/Filter/bool-filter.json").Strip(), filter.ToJsonObject().Strip());
+			this.JsonEquals(filter.ToJsonObject(), MethodInfo.GetCurrentMethod(), "bool-filter");
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace Nest.Tests.FactoryDsl.Filter
         {
             var filter = new FilteredQueryBuilder(QueryFactory.TermQuery("name.first", "shay"), FilterFactory.TermFilter("name.last","banon"));
 
-            Assert.AreEqual(File.ReadAllText("DSL/Filter/filtered-query.json").Strip(), filter.ToJsonObject().Strip());
+			this.JsonEquals(filter.ToJsonObject(), MethodInfo.GetCurrentMethod(), "filtered-query");
         }
 		
     }
