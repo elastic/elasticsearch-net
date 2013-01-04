@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Query String Query
-menu_section: query
-menu_item: query-string
+menusection: query
+menuitem: query-string
 ---
 
 

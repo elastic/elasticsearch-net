@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Wildcard Query
-menu_section: query
-menu_item: wildcard
+menusection: query
+menuitem: wildcard
 ---
 
 # Wildcard Query

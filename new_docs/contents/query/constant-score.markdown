@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Constant Score Query
-menu_section: query
-menu_item: constant-score
+menusection: query
+menuitem: constant-score
 ---
 
 

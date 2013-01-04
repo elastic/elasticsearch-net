@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Dis Max Query
-menu_section: query
-menu_item: dis-max
+menusection: query
+menuitem: dis-max
 ---
 
 

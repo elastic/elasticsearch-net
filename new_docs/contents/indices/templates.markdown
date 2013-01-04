@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: indices
-menu_item: templates
+menusection: indices
+menuitem: templates
 ---
 
 

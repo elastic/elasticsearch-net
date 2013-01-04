@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: search
-menu_item: script-fields
+menusection: search
+menuitem: script-fields
 ---
 
 

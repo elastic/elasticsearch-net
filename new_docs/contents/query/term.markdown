@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Term Query
-menu_section: query
-menu_item: term
+menusection: query
+menuitem: term
 ---
 
 

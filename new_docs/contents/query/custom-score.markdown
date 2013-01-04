@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Custom Score
-menu_section: query
-menu_item: custom-score
+menusection: query
+menuitem: custom-score
 ---
 
 

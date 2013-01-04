@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: facets
-menu_item: query
+menusection: facets
+menuitem: query
 ---
 
 

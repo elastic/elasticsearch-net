@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Fuzzy Like This Field Query
-menu_section: query
-menu_item: flt-field
+menusection: query
+menuitem: flt-field
 ---
 
 

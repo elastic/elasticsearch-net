@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Fuzzy Query
-menu_section: query
-menu_item: fuzzy
+menusection: query
+menuitem: fuzzy
 ---
 
 

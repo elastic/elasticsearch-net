@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Nested Query
-menu_section: query
-menu_item: nested
+menusection: query
+menuitem: nested
 ---
 
 

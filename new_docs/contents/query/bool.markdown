@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Bool Query
-menu_section: query
-menu_item: bool
+menusection: query
+menuitem: bool
 ---
 
 

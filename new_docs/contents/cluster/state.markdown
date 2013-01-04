@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: cluster
-menu_item: state
+menusection: cluster
+menuitem: state
 ---
 
 

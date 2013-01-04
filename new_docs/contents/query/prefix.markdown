@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Prefix Query
-menu_section: query
-menu_item: prefix
+menusection: query
+menuitem: prefix
 ---
 
 

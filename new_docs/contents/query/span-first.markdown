@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Span First Query
-menu_section: query
-menu_item: span-first
+menusection: query
+menuitem: span-first
 ---
 
 

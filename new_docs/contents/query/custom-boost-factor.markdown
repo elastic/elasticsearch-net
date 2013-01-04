@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Custom Boost Factor Query
-menu_section: query
-menu_item: custom-boost-factor
+menusection: query
+menuitem: custom-boost-factor
 ---
 
 

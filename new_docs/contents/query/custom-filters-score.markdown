@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Custom Filters Score Query
-menu_section: query
-menu_item: custom-filters-score
+menusection: query
+menuitem: custom-filters-score
 ---
 
 # Custom Filters Score Query

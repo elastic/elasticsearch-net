@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Span Near Query
-menu_section: query
-menu_item: span-near
+menusection: query
+menuitem: span-near
 ---
 
 

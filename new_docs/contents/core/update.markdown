@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Script Update
-menu_section: core
-menu_item: update
+menusection: core
+menuitem: update
 ---
 
 

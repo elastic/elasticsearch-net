@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Has Child Query
-menu_section: query
-menu_item: has-child
+menusection: query
+menuitem: has-child
 ---
 
 

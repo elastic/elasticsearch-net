@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Field Query
-menu_section: query
-menu_item: field
+menusection: query
+menuitem: field
 ---
 
 

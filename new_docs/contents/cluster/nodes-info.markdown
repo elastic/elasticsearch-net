@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: cluster
-menu_item: nodes-info
+menusection: cluster
+menuitem: nodes-info
 ---
 
 

@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Range Query
-menu_section: query
-menu_item: range
+menusection: query
+menuitem: range
 ---
 
 

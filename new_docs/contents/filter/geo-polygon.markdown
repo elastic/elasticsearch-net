@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: filter
-menu_item: geo-polygon
+menusection: filter
+menuitem: geo-polygon
 ---
 
 

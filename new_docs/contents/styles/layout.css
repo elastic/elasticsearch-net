@@ -20,6 +20,7 @@ section#site
 	min-height:500px;
 	background:url(../images/bg-header.png) top left no-repeat;
 }
+
 aside {
 	font-family: 'Georgia', serif;
 	float:right;
@@ -68,7 +69,7 @@ article {
 }
 article div#content-margin-fix
 {
-	margin-left:74px;
+	margin-left:74px
 }
 aside#menu
 {
@@ -117,4 +118,20 @@ code {
 	padding:2px;
 	border-radius:5px;
 	font-family: 'Ubuntu Mono', sans-serif;
+}
+@media all and (max-width: 1024px){
+	section#site {
+		width:100%;
+		background: url(../images/bg-header.png) -45px 0px no-repeat;
+		overflow-x:hidden;
+	}
+	article div#content-margin-fix
+	{
+		margin-left:25px
+	}
+	body {
+		background:url(../images/bg-body.png) 0px -70px repeat-x #7692BF;
+		margin-top:-70px;
+	}
+	
 }

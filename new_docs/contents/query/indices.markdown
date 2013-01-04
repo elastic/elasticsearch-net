@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Indices Query
-menu_section: query
-menu_item: indices
+menusection: query
+menuitem: indices
 ---
 
 

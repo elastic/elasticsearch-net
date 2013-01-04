@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: More Like This Query
-menu_section: query
-menu_item: mlt
+menusection: query
+menuitem: mlt
 ---
 
 

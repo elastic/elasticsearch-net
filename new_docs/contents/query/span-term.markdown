@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Span Term Query
-menu_section: query
-menu_item: span-term
+menusection: query
+menuitem: span-term
 ---
 
 

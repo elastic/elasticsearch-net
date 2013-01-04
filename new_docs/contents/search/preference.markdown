@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: search
-menu_item: preference
+menusection: search
+menuitem: preference
 ---
 
 

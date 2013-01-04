@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nest - Connecting</title>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="elasticsearch">
+    <meta name="keywords" content="nest, elasticsearch, .net, client">
+    <meta name="author" content="martijn laarman">
+    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
+    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
+    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <section id="site">
+      <aside>
+        <ul id="top_left_menu">
+          <h4>External</h4>
+          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
+          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
+        </ul>
+      </aside>
+      <section id="content">
+        <aside id="menu">
+          <ul id="top_left_menu">
+            <li><a href="">+ Concepts</a></li>
+            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
+            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
+            <li><a href="/search/basics.html" class="">+ Search</a></li>
+            <li><a href="/facets/handling.html" class="">+ Facets</a></li>
+            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
+            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
+          </ul>
+        </aside>
+        <article>
+          <div id="content-margin-fix"><h1>Segments</h1>
+<p>Provide low level segments information that a Lucene index (shard level) is built with. Allows to be used to provide more information on the state of a shard and an index, possibly optimization information, data “wasted” on deletes, and so on.
+
+</p>
+<h2>All indices segments information</h2>
+<pre><code><span class="keyword">var</span> r = <span class="keyword">this</span>.ConnectedClient.Segments();
+r.Indices[<span class="keyword">this</span>.Settings.DefaultIndex].Shards[<span class="string">"0"</span>].Segments[<span class="string">"_l"</span>].SizeInBytes;</code></pre>
+
+          </div>
+        </article>
+      </section>
+    </section>
+  </body>
+</html>

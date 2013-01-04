@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Span Or Query
-menu_section: query
-menu_item: span-or
+menusection: query
+menuitem: span-or
 ---
 
 

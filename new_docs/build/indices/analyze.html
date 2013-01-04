@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nest - Connecting</title>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="elasticsearch">
+    <meta name="keywords" content="nest, elasticsearch, .net, client">
+    <meta name="author" content="martijn laarman">
+    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
+    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
+    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <section id="site">
+      <aside>
+        <ul id="top_left_menu">
+          <h4>External</h4>
+          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
+          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
+        </ul>
+      </aside>
+      <section id="content">
+        <aside id="menu">
+          <ul id="top_left_menu">
+            <li><a href="">+ Concepts</a></li>
+            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
+            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
+            <li><a href="/search/basics.html" class="">+ Search</a></li>
+            <li><a href="/facets/handling.html" class="">+ Facets</a></li>
+            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
+            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
+          </ul>
+        </aside>
+        <article>
+          <div id="content-margin-fix"><h1>Analyze</h1>
+<p>Performs the analysis process on a text and return the tokens breakdown of the text.
+
+</p>
+<h2>Analyze using default index&apos;s default analyzer</h2>
+<pre><code><span class="keyword">var</span> text = <span class="string">"this is a string with some spaces and stuff"</span>;
+<span class="keyword">var</span> r = <span class="keyword">this</span>.ConnectedClient.Analyze(text);</code></pre>
+<h2>Analyze using a fields analyzer</h2>
+<pre><code><span class="keyword">var</span> text = <span class="string">"this is a string with some spaces and stuff"</span>;
+<span class="keyword">var</span> r = <span class="keyword">this</span>.ConnectedClient.Analyze&lt;ElasticSearchProject>(p => p.Content, text);</code></pre>
+<h2>Analyze using parameters</h2>
+<pre><code><span class="keyword">var</span> analyzer = <span class="keyword">new</span> AnalyzeParams { Analyzer = <span class="string">"whitespace"</span>, Index = Test.<span class="keyword">Default</span>.DefaultIndex + <span class="string">"_clone"</span> };
+<span class="keyword">var</span> r = <span class="keyword">this</span>.ConnectedClient.Analyze(analyzer, text);</code></pre>
+
+          </div>
+        </article>
+      </section>
+    </section>
+  </body>
+</html>

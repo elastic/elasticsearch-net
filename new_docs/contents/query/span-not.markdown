@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Span Not Query
-menu_section: query
-menu_item: span-not
+menusection: query
+menuitem: span-not
 ---
 
 

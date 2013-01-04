@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nest - Connecting</title>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="elasticsearch">
+    <meta name="keywords" content="nest, elasticsearch, .net, client">
+    <meta name="author" content="martijn laarman">
+    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
+    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
+    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <section id="site">
+      <aside>
+        <ul id="top_left_menu">
+          <h4>External</h4>
+          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
+          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
+        </ul>
+      </aside>
+      <section id="content">
+        <aside id="menu">
+          <ul id="top_left_menu">
+            <li><a href="">+ Concepts</a></li>
+            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
+            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
+            <li><a href="/search/basics.html" class="">+ Search</a></li>
+            <li><a href="/facets/handling.html" class="">+ Facets</a></li>
+            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
+            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
+          </ul>
+        </aside>
+        <article>
+          <div id="content-margin-fix"><h1>Update Settings</h1>
+<p>This call allows you to update the index settings. 
+NEST whitelists which settings can be updated based on the allowed values mentioned <a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html">here in the elasticsearch documentation</a> this allows you to reuse an <code>IndexSettings</code> object.
+
+</p>
+<h2>Example</h2>
+<p>this example first creates an index and then uses the same IndexSettings to update the index.
+
+</p>
+<pre><code><span class="keyword">var</span> index = Guid.NewGuid().ToString();
+<span class="keyword">var</span> client = <span class="keyword">this</span>.ConnectedClient;
+<span class="keyword">var</span> settings = <span class="keyword">new</span> IndexSettings();
+settings.NumberOfReplicas = <span class="number">1</span>;
+settings.NumberOfShards = <span class="number">5</span>;
+settings.Add(<span class="string">"refresh_interval"</span>, <span class="string">"1s"</span>);
+settings.Add(<span class="string">"search.slowlog.threshold.fetch.warn"</span>, <span class="string">"1s"</span>);
+client.CreateIndex(index, settings);
+
+settings[<span class="string">"refresh_interval"</span>] = <span class="string">"-1"</span>;
+settings[<span class="string">"search.slowlog.threshold.fetch.warn"</span>] = <span class="string">"5s"</span>;
+
+<span class="keyword">var</span> r = <span class="keyword">this</span>.ConnectedClient.UpdateSettings(index, settings);
+
+Assert.<span class="keyword">True</span>(r.Success);
+Assert.<span class="keyword">True</span>(r.OK);
+<span class="keyword">var</span> getResponse = <span class="keyword">this</span>.ConnectedClient.GetIndexSettings(index);
+Assert.AreEqual(getResponse.Settings[<span class="string">"refresh_interval"</span>], <span class="string">"-1"</span>);
+Assert.AreEqual(getResponse.Settings[<span class="string">"search.slowlog.threshold.fetch.warn"</span>], <span class="string">"1s"</span>);</code></pre>
+
+          </div>
+        </article>
+      </section>
+    </section>
+  </body>
+</html>

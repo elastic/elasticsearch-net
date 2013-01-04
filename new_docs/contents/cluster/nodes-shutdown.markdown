@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: cluster
-menu_item: nodes-shutdown
+menusection: cluster
+menuitem: nodes-shutdown
 ---
 
 # Nodes shutdown

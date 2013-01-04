@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Top Children Query
-menu_section: query
-menu_item: top-children
+menusection: query
+menuitem: top-children
 ---
 
 

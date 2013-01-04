@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Filtered Query
-menu_section: query
-menu_item: filtered
+menusection: query
+menuitem: filtered
 ---
 
 

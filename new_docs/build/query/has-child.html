@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nest - Has Child Query</title>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="elasticsearch">
+    <meta name="keywords" content="nest, elasticsearch, .net, client">
+    <meta name="author" content="martijn laarman">
+    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
+    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
+    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <section id="site">
+      <aside>
+        <ul id="top_left_menu">
+          <h4>External</h4>
+          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
+          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
+        </ul>
+      </aside>
+      <section id="content">
+        <aside id="menu">
+          <ul id="top_left_menu">
+            <li><a href="">+ Concepts</a></li>
+            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
+            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
+            <li><a href="/search/basics.html" class="">+ Search</a></li>
+            <li><a href="/facets/handling.html" class="">+ Facets</a></li>
+            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
+            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
+          </ul>
+        </aside>
+        <article>
+          <div id="content-margin-fix"><h1>Has Child Query</h1>
+<p>The has_child filter accepts a query and the child type to run against, and results in parent documents that have child docs matching the query. Here is an example:
+
+</p>
+<pre><code>.HasChild&lt;Person>(fz => fz
+    .Query(qq=>qq.Term(f=>f.FirstName, "john"))
+    .Scope("my_scope")
+)</code></pre>
+
+          </div>
+        </article>
+      </section>
+    </section>
+  </body>
+</html>

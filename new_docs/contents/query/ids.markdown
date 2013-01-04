@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Ids Query
-menu_section: query
-menu_item: ids
+menusection: query
+menuitem: ids
 ---
 
 

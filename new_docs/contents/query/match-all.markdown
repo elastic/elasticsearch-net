@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Match All Query
-menu_section: query
-menu_item: match-all
+menusection: query
+menuitem: match-all
 ---
 
 

@@ -1,6 +1,8 @@
 ---
 template: layout.jade
 title: Testing
+menusection: concepts
+menuitem: introduction
 ---
 
 # Introduction

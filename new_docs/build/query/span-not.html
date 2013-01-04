@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nest - Span Not Query</title>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="elasticsearch">
+    <meta name="keywords" content="nest, elasticsearch, .net, client">
+    <meta name="author" content="martijn laarman">
+    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
+    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
+    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <section id="site">
+      <aside>
+        <ul id="top_left_menu">
+          <h4>External</h4>
+          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
+          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
+        </ul>
+      </aside>
+      <section id="content">
+        <aside id="menu">
+          <ul id="top_left_menu">
+            <li><a href="">+ Concepts</a></li>
+            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
+            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
+            <li><a href="/search/basics.html" class="">+ Search</a></li>
+            <li><a href="/facets/handling.html" class="">+ Facets</a></li>
+            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
+            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
+          </ul>
+        </aside>
+        <article>
+          <div id="content-margin-fix"><h1>Span Not Query</h1>
+<p>Removes matches which overlap with another span query. The span not query maps to Lucene <code>SpanNotQuery</code>
+
+</p>
+<pre><code>.SpanNot(sf=>sf
+    .<span class="keyword">Include</span>(e =>e.SpanTerm(f => f.Name, <span class="string">"elasticsearch.pm"</span>, <span class="number">1.1</span>))
+    .Exclude(e=>e.SpanTerm(f => f.Name, <span class="string">"elasticsearch.pm"</span>, <span class="number">1.1</span>))
+)</code></pre>
+<p>The include and exclude clauses can be any span type query. The include clause is the span query whose matches are filtered, and the exclude clause is the span query whose matches must not overlap those returned.</p>
+
+          </div>
+        </article>
+      </section>
+    </section>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Connecting
-menu_section: concepts
-menu_item: connecting
+menusection: concepts
+menuitem: connecting
 ---
 
 

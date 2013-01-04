@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nest - Connecting</title>
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="expires" content="0">
+    <meta name="description" content="elasticsearch">
+    <meta name="keywords" content="nest, elasticsearch, .net, client">
+    <meta name="author" content="martijn laarman">
+    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
+    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
+    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+  </head>
+  <body>
+    <section id="site">
+      <aside>
+        <ul id="top_left_menu">
+          <h4>External</h4>
+          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
+          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
+        </ul>
+      </aside>
+      <section id="content">
+        <aside id="menu">
+          <ul id="top_left_menu">
+            <li><a href="">+ Concepts</a></li>
+            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
+            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
+            <li><a href="/search/basics.html" class="">+ Search</a></li>
+            <li><a href="/facets/handling.html" class="">+ Facets</a></li>
+            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
+            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
+          </ul>
+        </aside>
+        <article>
+          <div id="content-margin-fix"><h1>Put Mapping</h1>
+<p>The put mapping API allows to register specific mapping definition for a specific type.
+
+</p>
+<h2>Attribute based mapping</h2>
+<p>You can decorate your classes with <code>ElasticProperty</code> and <code>ElasticType</code> attributes to describe how they should be mapped in ES.
+
+</p>
+<pre><code>[ElasticType(
+    Name = <span class="string">"elasticsearchprojects2"</span>,
+    DateDetection = <span class="keyword">true</span>,
+    NumericDetection = <span class="keyword">true</span>,
+    SearchAnalyzer = <span class="string">"standard"</span>,
+    IndexAnalyzer = <span class="string">"standard"</span>,
+    DynamicDateFormats = <span class="keyword">new</span>[] { <span class="string">"dateOptionalTime"</span>, <span class="string">"yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"</span> }
+)]
+<span class="keyword">public</span> <span class="keyword">class</span> ElasticSearchProject
+{
+    <span class="keyword">public</span> int Id { get; set;  }
+    <span class="keyword">public</span> string Name { get; set; }
+    [ElasticProperty(OmitNorms = <span class="keyword">true</span>, Index = FieldIndexOption.not_analyzed)]
+    <span class="keyword">public</span> string Country { get; set; }
+    <span class="keyword">public</span> string Content { get; set; }
+    [ElasticProperty(Name=<span class="string">"loc"</span>)]
+    <span class="keyword">public</span> int LOC { get; set; }
+    <span class="keyword">public</span> <span class="keyword">List</span>&lt;Person> Followers { get; set; }
+
+    [ElasticProperty(Type=FieldType.geo_point)]
+    <span class="keyword">public</span> GeoLocation Origin { get; set; }
+    <span class="keyword">public</span> DateTime StartedOn { get; set; }
+
+
+    <span class="comment">//excuse the lame properties i needed some numerics !</span>
+    <span class="keyword">public</span> long LongValue { get; set; }
+    <span class="keyword">public</span> float FloatValue { get; set; }
+    <span class="keyword">public</span> double DoubleValue { get; set; }
+
+    [ElasticProperty(NumericType=NumericType.Long)]
+    <span class="keyword">public</span> int StupidIntIWantAsLong { get; set; }
+}</code></pre>
+<p>You can persist this mapping by simpling calling 
+
+</p>
+<pre><code><span class="keyword">var</span> response = <span class="keyword">this</span>.ConnectedClient.Map&lt;ElasticSearchProject>();</code></pre>
+<p><strong>NOTE</strong>: Whenever the client needs to infer the typename for <code>ElasticSearchProject</code> it will resolve nicely to <code>&quot;elasticsearchprojects2&quot;</code> now too. This gives you great control over naming without having to specify the typename on each call.
+
+</p>
+<p><strong>ALSO NOTE</strong>: <code>Map&lt;T&gt;()</code> will also explicitly map string properties as strings with elasticsearch even if they do not have an attribute on them. It does this for all the value types (string, int, float, double, DateTime).
+
+</p>
+<h2>Code based mapping</h2>
+<p>You can also create mappings on the fly:
+
+</p>
+<pre><code><span class="keyword">var</span> typeMapping = <span class="keyword">new</span> TypeMapping(Guid.NewGuid().ToString(<span class="string">"n"</span>));
+<span class="keyword">var</span> property = <span class="keyword">new</span> TypeMappingProperty
+{
+    Type = <span class="string">"multi_field"</span>
+};
+
+<span class="keyword">var</span> primaryField = <span class="keyword">new</span> TypeMappingProperty
+{
+    Type = <span class="string">"string"</span>, 
+    Index = <span class="string">"not_analyzed"</span>
+};
+
+<span class="keyword">var</span> analyzedField = <span class="keyword">new</span> TypeMappingProperty
+{
+    Type = <span class="string">"string"</span>, 
+    Index = <span class="string">"analyzed"</span>
+};
+
+property.Fields = <span class="keyword">new</span> Dictionary&lt;string, TypeMappingProperty>();
+property.Fields.Add(<span class="string">"name"</span>, primaryField);
+property.Fields.Add(<span class="string">"name_analyzed"</span>, analyzedField);
+
+typeMapping.Properties.Add(<span class="string">"name"</span>, property);
+<span class="keyword">this</span>.ConnectedClient.Map(typeMapping);</code></pre>
+
+          </div>
+        </article>
+      </section>
+    </section>
+  </body>
+</html>

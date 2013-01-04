@@ -1,8 +1,8 @@
 ---
-layout: default
+template: layout.jade
 title: Boosting Query
-menu_section: query
-menu_item: boosting
+menusection: query
+menuitem: boosting
 ---
 
 

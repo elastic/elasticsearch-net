@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/mpdz/NEST/src/Nest.Mono.sln" added="2012-11-21T10:22:34Z" modified="2012-11-21T10:22:34Z" visited="2012-11-21T10:22:34.977242Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-sln"/>
+        <bookmark:applications>
+          <bookmark:application name="MonoDevelop" exec="&apos;MonoDevelop %u&apos;" modified="2012-11-21T10:22:34Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>
