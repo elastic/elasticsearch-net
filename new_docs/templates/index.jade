@@ -1,4 +1,19 @@
 extends layout
 
 block content
-	!= page.html
+	#nest-contributors
+
+	script(type='text/javascript', src='http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js')
+	script(type='text/javascript', src='/scripts/contributors.js')
+	script#contributorTemplate(type='text/x-jQuery-tmpl')
+		{{each data}}
+		{{if login != "invalid-email-address"}}
+		<div style="float:left;width:200px;">
+		<img width="48" height="48" src="http://gravatar.com/avatar/${gravatar_id}" alt="${name || login}" style="float:left;" />
+		<div style="float:left; margin-left: 12px;">
+		#${$index + 1} (${contributions} commits)<br />
+		<a href="https://github.com/${login}">${name ? name.replace(" ", " '" + login + "' ") + "!" : login}</a>
+		</div>
+		</div>
+		{{/if}}
+		{{/each}}

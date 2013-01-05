@@ -124,7 +124,7 @@ code {
 	top:20px;
 	right:20px;
 }
-@media all and (max-width: 1024px){
+@media all and (max-width: 1194px){
 	section#site {
 		width:100%;
 		background: url(../images/bg-header.png) -45px 0px no-repeat;

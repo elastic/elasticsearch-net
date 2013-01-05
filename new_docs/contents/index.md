@@ -1,5 +1,5 @@
 ---
-template: layout.jade
+template: index.jade
 title: Testing
 menusection: concepts
 menuitem: introduction
@@ -54,27 +54,3 @@ NEST now has **two types of query dsl's** (lambda and factory based)!
 
 Some of the other wonderful features in NEST were pushed by these wonderful folks:
 
-* [@nordbergm](https://github.com/nordbergm/NEST)
-* [@kevingessner](https://github.com/kevingessner/NEST)
-* [@EFJoseph](https://github.com/EFJoseph/NEST)
-* [@pkrakowiak](https://github.com/pkrakowiak/NEST) 
-* [@q42jaap] (https://github.com/q42jaap/NEST)
-
-
-
-<script id="contributorTemplate" type="text/x-jQuery-tmpl">
-{{each contributors}}
-  {{if login != "invalid-email-address"}}  
-   <div style="clear:both; margin: 8px; height: 80px; width: 600px;" id="contributor">
-	    <img src="http://gravatar.com/avatar/${gravatar_id}" alt="${name || login}" style="float:left;" />
-	    <div style="float:left; margin-left: 12px;">
-	      <h3>#${$index + 1} (${contributions} commits)</h3>
-	      <h2>${name ? name.replace(" ", " '" + login + "' ") + "!" : login}</h2>
-	      <a href="https://github.com/${login}">https://github.com/${login}</a>
-	    </div>
-	</div>
-  {{/if}}
-{{/each}}
-</script>
-
-<div id="contributors">&nbsp;</div>
