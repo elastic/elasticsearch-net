@@ -1,6 +1,6 @@
 ---
 template: index.jade
-title: Testing
+title: Introduction
 menusection: concepts
 menuitem: introduction
 ---
@@ -19,7 +19,7 @@ Indexing asynchronously is as easy as:
 	//IndexAsync returns a Task<ConnectionStatus>
 	var task = client.IndexAsync(post);
 
-Searching is fluid:
+Searching is fluent:
 
 	var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
 			.From(0)
@@ -37,6 +37,24 @@ Nest can be installed through NuGet:
 	PM> Install-Package NEST
 
 Or searching for "elasticsearch" will get you to nest as well. 
+
+## Who's using Nest
+
+Some notable examples are the stackexchange sites ([stackoverflow.com](http://stackoverflow.com/search?q=elasticsearch), [serverfault.com](http://serverfault.com/search?q=elasticsearch), ..) and [rijksmuseum.nl](https://www.rijksmuseum.nl/en/search?q=elastiek). If you are using Nest let me know! I love to boast about it right here :)
+
+## Read more elsewhere
+
+[@joelabrahamsson](http://twitter.com/joelabrahamsson) wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
+using NEST. 
+
+Also checkout the [searchbox.io guys](https://searchbox.io/) rocking NEST [on AppHarbor](http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on) 
+with their [demo project](https://github.com/searchbox-io/.net-sample)
+
+## Questions, bugs, comments, requests
+
+All of these are more then welcome on the github issues pages! I try to to at least reply within the same day.
+
+I also monitor question tagged with ['nest' on stackoverflow](http://stackoverflow.com/questions/tagged/nest)
 
 ## Copyright
 

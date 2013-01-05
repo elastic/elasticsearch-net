@@ -28,7 +28,15 @@ Or if you don't care about error reasons
 
 	if (client.IsValid)
 
-both will perform a one time lookup to see if ElasticSearch is available and ready. 
+both will perform a one time lookup to see if ElasticSearch is available and ready by doing a request to `/` on the elasticsearch server. 
+
+## Changing the underlying connection 
+
+By default NEST will use HTTP to chat with elasticsearch, alternative implementation of the transport layer can be injected in the constructors optional second parameter
+
+	var client = new ElasticClient(settings, new ThriftConnection(settings));
+
+Nest comes with a Htpp connection `Connection`, Thrift Connection `ThriftConnection` and an in memory connection that nevers hits elasticsearch `InMemoryConnection`.
 
 ## Settings:
 Settings can be set in a fluent fashion: `new ConnectionSettings().SetDefaultIndex().SetMaximumConnections()`
@@ -40,7 +48,7 @@ Calling `SetDefaultIndex()` on `ConnectionSettings` will set the default index f
 Calling `SetMaximumAsyncConnections()` on `ConnectionSettings` will set the maximum async connections the client will send to ElasticSearch at the same time. If the maximum is hit the calls will be queued untill a slot becomes available.
 
 ### TypeNameInferrer
-You can pass a `Func<string,string>` to SetTypeNameInferrer()` on `ConnectionSettings` to overide NEST's default behavior of lowercasing and pluralizing typenames.
+You can pass a `Func<string,string>` to `SetTypeNameInferrer()` on `ConnectionSettings` to overide NEST's default behavior of lowercasing and pluralizing typenames.
 
 ### UsePrettyResponses
 Setting `UsePrettyResponses()` on `ConnectionSettings` will append `pretty=true` to all the requests to inform ElasticSearch we want nicely formatted responses, setting this does **not** prettify requests themselves because bulk requests in ElasticSearch follow a very exact line delimited format. 
