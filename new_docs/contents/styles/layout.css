@@ -119,6 +119,11 @@ code {
 	border-radius:5px;
 	font-family: 'Ubuntu Mono', sans-serif;
 }
+.actions {
+	position:absolute;
+	top:20px;
+	right:20px;
+}
 @media all and (max-width: 1024px){
 	section#site {
 		width:100%;
