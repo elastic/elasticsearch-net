@@ -23,6 +23,7 @@
 [Dd]ebug*/
 *.lib
 *.sbr
+*.DotSettings
 obj/
 [Rr]elease*/
 _ReSharper*/

@@ -27,13 +27,16 @@ namespace Nest
 		ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(System.Collections.Generic.IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector);
+	    ICountResponse CountRaw(string query);
 		ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
+	    ICountResponse CountRaw<T>(string query) where T : class;
 		ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse CountAllRaw(string query);
 		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		IIndicesResponse CreateIndex(string index, IndexSettings settings);
+		IIndicesResponse CreateIndexRaw(string index, string settings);
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, string index) where T : class;
@@ -141,6 +144,11 @@ namespace Nest
 		RootObjectMapping GetMapping(Type t);
 		RootObjectMapping GetMapping(Type t, string index);
 
+		IHealthResponse Health(HealthLevel level);
+		IHealthResponse Health(IEnumerable<string> indices, HealthLevel level);
+		IHealthResponse Health(HealthParams healthParams);
+		IHealthResponse Health(IEnumerable<string> indices, HealthParams healthParams);
+
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, string index) where T : class;
@@ -189,6 +197,7 @@ namespace Nest
 		bool IsValid { get; }
 		IIndicesResponse Map(RootObjectMapping typeMapping);
 		IIndicesResponse Map(RootObjectMapping typeMapping, string index, string typeName, bool ignoreConflicts);
+		IIndicesResponse MapRaw(string typeName, string map, string index, bool ignoreConflicts = false);
 		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;

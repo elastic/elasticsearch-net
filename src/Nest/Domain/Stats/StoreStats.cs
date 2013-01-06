@@ -11,7 +11,7 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "size")]
 		public string Size { get; set; }
-		[JsonProperty(PropertyName = "size_in_byes")]
+		[JsonProperty(PropertyName = "size_in_bytes")]
 		public double SizeInBytes { get; set; }
 	}
 
