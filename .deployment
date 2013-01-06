@@ -1,2 +1,2 @@
 [config]
-project = docs/_site
+project = new_docs/build
