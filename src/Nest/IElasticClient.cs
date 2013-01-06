@@ -27,9 +27,11 @@ namespace Nest
 		ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(System.Collections.Generic.IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector);
+	    ICountResponse CountRaw(string query);
 		ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		ICountResponse Count<T>(System.Collections.Generic.IEnumerable<string> indices, System.Collections.Generic.IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
+	    ICountResponse CountRaw<T>(string query) where T : class;
 		ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse CountAllRaw(string query);
 		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
