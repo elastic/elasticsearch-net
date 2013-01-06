@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration
 	public class BaseElasticSearchTests
 	{
 		[TestFixtureSetUp]
-		public void Initialize()
+		public virtual void Initialize()
 		{
 			this.ResetIndexes();
 		}
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration
 			}
 		}
 		private ElasticClient _connectedClient;
-		protected ElasticClient ConnectedClient
+		protected ElasticClient _client
 		{
 			get 
 			{
@@ -57,23 +57,34 @@ namespace Nest.Tests.Integration
 		}
 		protected virtual void ResetIndexes()
 		{
-			var client = CreateClient();
-			if (client.IsValid)
+			var cloneIndex = Test.Default.DefaultIndex + "_clone";
+			if (_client.IsValid)
 			{
 				var projects = NestTestData.Data;
-				var cloneIndex = Test.Default.DefaultIndex + "_clone";
-				var bulkParameters = new SimpleBulkParameters() { Refresh = true };
-				client.DeleteMapping<ElasticSearchProject>();
-				client.DeleteMapping<ElasticSearchProject>(cloneIndex);				
-				client.Map<ElasticSearchProject>();
-				client.Map<ElasticSearchProject>(cloneIndex);
-				this.ConnectedClient.OpenIndex<ElasticSearchProject>();
-				this.ConnectedClient.OpenIndex(cloneIndex);
-				client.IndexMany(projects, bulkParameters);
-				client.IndexMany(projects, cloneIndex, bulkParameters);
+				var people = NestTestData.People;
 
+				_client.DeleteMapping<ElasticSearchProject>();
+				_client.DeleteMapping<ElasticSearchProject>(cloneIndex);
+				_client.OpenIndex<ElasticSearchProject>();
+				this._client.OpenIndex(cloneIndex);
+
+				this.ResetType<ElasticSearchProject>(_client, projects);
+				this.ResetType<Person>(_client, people);
+
+				
 			}
 		}
+		private void ResetType<T>(IElasticClient client, IEnumerable<T> objects) where T : class {
+			var cloneIndex = Test.Default.DefaultIndex + "_clone";
+			var bulkParameters = new SimpleBulkParameters() { Refresh = true };
+
+			_client.MapFromAttributes<T>();
+			_client.MapFromAttributes<T>(cloneIndex);
+
+			_client.IndexMany(objects, bulkParameters);
+			_client.IndexMany(objects, cloneIndex, bulkParameters);
+		}
+
 		protected void DeleteIndices()
 		{
 			var client = CreateClient();
@@ -108,7 +119,7 @@ namespace Nest.Tests.Integration
 		{
 			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, project.Id.ToString());
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(ff => ff.And(
 						f => f.Term(e => e.Id, project.Id.ToString()),
 						filter

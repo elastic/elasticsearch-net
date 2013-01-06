@@ -23,10 +23,20 @@ namespace Nest.DSL.Descriptors
       this._Field = field;
       return this;
     }
+
     public virtual SortDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
     {
-      var fieldName = new PropertyNameResolver().Resolve(objectPath);
-      return this.OnField(fieldName);
+        var resolver = new PropertyNameResolver();
+
+        var fieldName = resolver.Resolve(objectPath);
+
+        var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
+        if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
+        {
+            fieldName += ".sort";
+        }
+
+        return this.OnField(fieldName);
     }
 
     public virtual SortDescriptor<T> MissingLast()

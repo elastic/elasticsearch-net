@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration.Index
         FloatValues = new[] { 0f },
         BoolValue = false
       };
-      var response = this.ConnectedClient.Index(newProject);
+      var response = this._client.Index(newProject);
       var connectionStatus = response.ConnectionStatus;
       StringAssert.Contains(@"""id"": 2000", connectionStatus.Request);
       StringAssert.Contains(@"""loc"": 0", connectionStatus.Request);

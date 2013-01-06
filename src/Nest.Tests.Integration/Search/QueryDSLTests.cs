@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void MatchAll()
 		{
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var results = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Country)
@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void MatchAllShortcut()
 		{
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var results = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 		.Fields(f => f.Id, f => f.Country)
@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestTermQuery()
 		{
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var results = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestWildcardQuery()
 		{
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var results = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -81,7 +81,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestPrefixQuery()
 		{
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var results = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)
@@ -99,7 +99,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TestTermFacet()
 		{
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var results = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.Fields(f => f.Id, f => f.Name)

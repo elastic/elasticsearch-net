@@ -1,0 +1,26 @@
+  {
+  "elasticsearchprojects": {
+    "properties": {
+      "myAttachment": {
+        "type": "attachment",
+        "fields": {
+          "file": {
+            "type": "string",
+            "store": "yes",
+            "index": "not_analyzed"
+          },
+          "author": {
+            "type": "string",
+            "store": "no",
+            "index": "analyzed"
+          },
+          "date": {
+            "type": "date",
+            "store": "no",
+            "include_in_all": true
+          }
+        }
+      }
+    }
+  }
+}

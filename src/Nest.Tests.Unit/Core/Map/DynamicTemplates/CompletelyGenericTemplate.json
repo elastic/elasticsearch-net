@@ -1,0 +1,14 @@
+  {
+  "elasticsearchprojects": {
+    "dynamic_templates": [
+      {
+        "store_generic": {
+          "match": "*",
+          "mapping": {
+            "store": "yes"
+          }
+        }
+      }
+    ]
+  }
+}

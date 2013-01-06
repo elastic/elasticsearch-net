@@ -11,9 +11,9 @@ namespace Nest.Tests.Integration.Facet
 		public void SimpleGeoFacet()
 		{
 			this.DeleteIndices();
-			this.ConnectedClient.Map<ElasticSearchProject>();
+			this._client.MapFromAttributes<ElasticSearchProject>();
 			this.BulkIndexData();
-			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
+			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },

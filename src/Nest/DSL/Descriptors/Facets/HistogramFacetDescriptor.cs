@@ -61,12 +61,8 @@ namespace Nest
     }
     public HistogramFacetDescriptor<T> TimeInterval(TimeSpan timespanInterval)
     {
- #if !DEBUG
-    throw new NotImplementedException("serializes TimeSpan.FromHours(1.5) to '01:30:00'");
- #endif
-      //TODO: now serializes TimeSpan.FromHours(1.5) to '01:30:00' 
-      //Probably needs to be 1.5h but integration tests will show if this is correct 
-      //or not
+	  //now serializes TimeSpan.FromHours(1.5) to '01:30:00' 
+      //TODO check with integration test if this produces the correct result
       this._TimeInterval = timespanInterval.ToString();
       return this;
     }

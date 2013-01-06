@@ -9,7 +9,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Notes", "_Notes", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
 	ProjectSection(SolutionItems) = preProject
 		license.txt = license.txt
-		query_dsl_development_notes.txt = query_dsl_development_notes.txt
 		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject
@@ -23,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Connection.Thrift", "N
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D5575-2347-4D3C-BF8C-3E38410C46CA}"
 	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\.gitignore = ..\.gitignore
 		..\build\Nest.Connection.Thrift.nuspec = ..\build\Nest.Connection.Thrift.nuspec
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
 		..\build\NESTBuild.proj = ..\build\NESTBuild.proj

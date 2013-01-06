@@ -15,15 +15,13 @@ namespace Nest
 		internal string _GeoUnit { get; set; }
 		internal string _GeoOptimizeBBox { get; set; }
 
+		private bool IsValidDistance { get; set; }
+
 		internal override bool IsConditionless
 		{
 			get
 			{
-				return this._Location.IsNullOrEmpty() || 
-					(this._FromDistance == null && this._ToDistance == null)
-					|| (((string)this._FromDistance).IsNullOrEmpty() 
-						&& ((string)this._ToDistance).IsNullOrEmpty() 
-					    );
+				return this._Location.IsNullOrEmpty() || !this.IsValidDistance;
 			}
 
 		}
@@ -44,6 +42,7 @@ namespace Nest
 		{
 			this._FromDistance = From;
 			this._ToDistance = To;
+			this.IsValidDistance = !From.IsNullOrEmpty() && !To.IsNullOrEmpty();
 			return this;
 		}
 		public GeoDistanceRangeFilterDescriptor Distance(double From, double To, GeoUnit Unit)
@@ -51,6 +50,7 @@ namespace Nest
 			this._FromDistance = From;
 			this._ToDistance = To;
 			this._GeoUnit = Enum.GetName(typeof(GeoUnit), Unit);
+			this.IsValidDistance = From != null && To != null;
 			return this;
 		}
 		public GeoDistanceRangeFilterDescriptor Optimize(GeoOptimizeBBox optimize)
