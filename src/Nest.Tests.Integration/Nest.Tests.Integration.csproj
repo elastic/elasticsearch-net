@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="BaseElasticSearchTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
+    <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Get\GetMultiTests.cs" />

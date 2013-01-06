@@ -64,7 +64,11 @@
   <ItemGroup>
     <Compile Include="Domain\Parameters\HealthParams.cs" />
     <Compile Include="Domain\Responses\HealthResponse.cs" />
+    <Compile Include="Domain\Responses\NodeInfoResponse.cs" />
+    <Compile Include="Domain\Responses\NodeStatsResponse.cs" />
     <Compile Include="Domain\Stats\IndexHealthStats.cs" />
+    <Compile Include="Domain\Stats\NodeInfo.cs" />
+    <Compile Include="Domain\Stats\NodeStats.cs" />
     <Compile Include="Domain\Stats\ShardHealthStats.cs" />
     <Compile Include="DSL\Descriptors\MoreLikeThisDescriptor.cs" />
     <Compile Include="ElasticClient-Health.cs" />
@@ -128,6 +132,7 @@
     <Compile Include="ElasticClient-MultiGet.cs" />
     <Compile Include="Domain\Settings\NgramTokenFiler.cs" />
     <Compile Include="Domain\Settings\SynonymTokenFilter.cs" />
+    <Compile Include="ElasticClient-Nodes.cs" />
     <Compile Include="ElasticClient-Scroll.cs" />
     <Compile Include="Domain\Hit\ValidationExplanation.cs" />
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
@@ -194,6 +199,8 @@
     <Compile Include="Enums\ComparatorType.cs" />
     <Compile Include="Enums\HealthLevel.cs" />
     <Compile Include="Enums\HealthStatus.cs" />
+    <Compile Include="Enums\NodesInfo.cs" />
+    <Compile Include="Enums\NodeInfoStats.cs" />
     <Compile Include="Enums\NumberType.cs" />
     <Compile Include="Enums\GeoTree.cs" />
     <Compile Include="Enums\NumericIndexOption.cs" />
