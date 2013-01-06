@@ -191,6 +191,7 @@ namespace Nest
 		bool IsValid { get; }
 		IIndicesResponse Map(RootObjectMapping typeMapping);
 		IIndicesResponse Map(RootObjectMapping typeMapping, string index, string typeName, bool ignoreConflicts);
+		IIndicesResponse MapRaw(string typeName, string map, string index, bool ignoreConflicts = false);
 		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;
