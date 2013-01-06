@@ -14,7 +14,7 @@ using FluentAssertions;
 namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
-	public class GetFullTests : BaseElasticSearchTests
+	public class GetFullTests : CleanStateIntegrationTests
 	{
 		private void DefaultAssertations(IGetResponse<ElasticSearchProject> result)
 		{

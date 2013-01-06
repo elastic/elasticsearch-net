@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class StatsTest : BaseElasticSearchTests
+	public class StatsTest : IntegrationTests
 	{
 		[Test]
 		public void SimpleStats()

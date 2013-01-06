@@ -6,7 +6,7 @@ using System.Net;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class AsyncTests : BaseElasticSearchTests
+	public class AsyncTests : IntegrationTests
 	{
 
 		[Test]

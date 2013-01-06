@@ -5,7 +5,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Search
 {
 	[TestFixture]
-	public class QueryDSLTests : BaseElasticSearchTests
+	public class QueryDSLTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void MatchAll()

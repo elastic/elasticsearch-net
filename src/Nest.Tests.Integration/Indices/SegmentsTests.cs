@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class SegmentsTests : BaseElasticSearchTests
+	public class SegmentsTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void AllSegments()
@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(index.Shards["0"].Segments.Count > 0);
 			var segment = index.Shards["0"].Segments.First().Value;
 			Assert.NotNull(segment);
-			Assert.Greater(segment.Generation, 0);
+			Assert.GreaterOrEqual(segment.Generation, 0);
 		}
 
 		[Test]
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(index.Shards["0"].Segments.Count > 0);
 			var segment = index.Shards["0"].Segments.First().Value;
 			Assert.NotNull(segment);
-			Assert.Greater(segment.Generation, 0);
+			Assert.GreaterOrEqual(segment.Generation, 0);
 		}
 		[Test]
 		public void MultipleSegment()
@@ -71,7 +71,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(index.Shards["0"].Segments.Count > 0);
 			var segment = index.Shards["0"].Segments.First().Value;
 			Assert.NotNull(segment);
-			Assert.Greater(segment.Generation, 0);
+			Assert.GreaterOrEqual(segment.Generation, 0);
 		}
 	}
 }

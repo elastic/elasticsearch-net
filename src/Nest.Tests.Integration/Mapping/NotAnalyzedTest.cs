@@ -5,20 +5,21 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Mapping
 {
 	[TestFixture]
-	public class NotAnalyzedTests : BaseElasticSearchTests
+	public class NotAnalyzedTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void NotAnalyzedReturnsOneItem()
 		{
 			this._client.DeleteMapping<ElasticSearchProject>();
 			this._client.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");
+			this._client.CreateIndex(Test.Default.DefaultIndex, new IndexSettings());
 			var x = this._client.MapFromAttributes<ElasticSearchProject>();
-			Assert.IsTrue(x.OK);
+			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
 			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
-			Assert.AreEqual("not_analyzed", mapping.Index);
+			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
 			
 			var indexResult = this._client.Index(new ElasticSearchProject
 			{

@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class AnalyzeTest : BaseElasticSearchTests
+	public class AnalyzeTest : IntegrationTests
 	{
 		private void _defaultAnalyzeAssertations(IAnalyzeResponse r)
 		{

@@ -15,7 +15,7 @@ using FluentAssertions;
 namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
-	public class GetMultiTests : BaseElasticSearchTests
+	public class GetMultiTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void GetMultiSimple()

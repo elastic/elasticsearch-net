@@ -4,7 +4,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Integration.Filter
 {
 	[TestFixture]
-	public class BoolFilterTests : BaseElasticSearchTests
+	public class BoolFilterTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void BoolFilter()

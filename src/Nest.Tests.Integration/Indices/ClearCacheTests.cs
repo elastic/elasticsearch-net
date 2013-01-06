@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class ClearCacheTest : BaseElasticSearchTests
+	public class ClearCacheTest : IntegrationTests
 	{
 		[Test]
 		public void test_clear_cache()

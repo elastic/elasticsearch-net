@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Mapping
 {
 	[TestFixture]
-	public class MapTests : BaseElasticSearchTests
+	public class MapTests : CleanStateIntegrationTests
 	{
 		private void TestMapping(RootObjectMapping typeMapping)
 		{
@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
-			Assert.AreEqual("not_analyzed", mapping.Index);
+			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
 			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 
 			Assert.AreEqual("geo_point", typeMapping.Properties["origin"].Type);
@@ -81,16 +81,16 @@ namespace Nest.Tests.Integration.Mapping
 			this.TestMapping(typeMapping);
 		}
 
-	[Test]
-	public void GetMappingOnNonExistingIndexType()
-	{
-	  Assert.DoesNotThrow(() =>
-	  {
-		var typeMapping = this._client.GetMapping("asfasfasfasfasf", "asdasdasdasdasdasdasdasd");
-		Assert.Null(typeMapping);
-	  });
-	  
-	}
+		[Test]
+		public void GetMappingOnNonExistingIndexType()
+		{
+			Assert.DoesNotThrow(() =>
+			{
+				var typeMapping = this._client.GetMapping("asfasfasfasfasf", "asdasdasdasdasdasdasdasd");
+				Assert.Null(typeMapping);
+			});
+
+		}
 
 		[Test]
 		public void DynamicMap()

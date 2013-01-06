@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Index
 {
 	[TestFixture]
-	public class IndexDefaultValueTests : BaseElasticSearchTests
+	public class IndexDefaultValueTests : IntegrationTests
 	{
 		[Test]
 		public void IndexDefaultValue()

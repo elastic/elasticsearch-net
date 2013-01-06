@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Nest.Tests.Integration.Core.MoreLikeThis
 {
 	[TestFixture]
-	public class MltSearchBodyTests : BaseElasticSearchTests
+	public class MltSearchBodyTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void SearchBodyEndsUpInPost()
@@ -26,11 +26,7 @@ namespace Nest.Tests.Integration.Core.MoreLikeThis
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 			result.Total.Should().BeGreaterOrEqualTo(10);
-			result.Documents.Should().NotBeEmpty();
-
-			var status = result.ConnectionStatus;
-
-			
+			result.Documents.Should().NotBeEmpty();			
 
 		}
 	}

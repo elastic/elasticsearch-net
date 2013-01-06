@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class OpenCloseTests : BaseElasticSearchTests
+	public class OpenCloseTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void CloseAndOpenIndex()

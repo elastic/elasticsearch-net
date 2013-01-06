@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class RefreshTests : BaseElasticSearchTests
+	public class RefreshTests : IntegrationTests
 	{
 		[Test]
 		public void RefreshAll()

@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search.Scroll
 {
 	[TestFixture]
-	public class ScrollTests : BaseElasticSearchTests
+	public class ScrollTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void SearchTypeScan()

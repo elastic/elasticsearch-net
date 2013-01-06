@@ -4,13 +4,13 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class FlushTests : BaseElasticSearchTests
+	public class FlushTests : IntegrationTests
 	{
 		[Test]
 		public void FlushAll()
 		{
 			var r = this._client.Flush();
-			Assert.True(r.OK);
+			Assert.True(r.OK, r.ConnectionStatus.ToString());
 		}
 		[Test]
 		public void FlushIndex()

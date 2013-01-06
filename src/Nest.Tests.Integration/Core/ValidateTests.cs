@@ -5,7 +5,7 @@ using System.Linq;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class ValidateIntegrationTests : BaseElasticSearchTests
+	public class ValidateIntegrationTests : IntegrationTests
 	{
 		[Test]
 		public void TestValidation()

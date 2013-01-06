@@ -5,7 +5,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Integration.Query
 {
 	[TestFixture]
-	public class TermQueryDynamic : BaseElasticSearchTests
+	public class TermQueryDynamic : CleanStateIntegrationTests
 	{
 		[Test]
 		public void TestTermQuery()

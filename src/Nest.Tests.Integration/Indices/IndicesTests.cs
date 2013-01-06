@@ -11,11 +11,8 @@ namespace Nest.Tests.Integration.Indices
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class IndicesTest : BaseElasticSearchTests
+	public class IndicesTest : CleanStateIntegrationTests
 	{
-		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
-
-
 		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
@@ -135,8 +132,8 @@ namespace Nest.Tests.Integration.Indices
 
 			var response = this._client.Map(mapping);
 
-			Assert.IsTrue(response.IsValid);
-			Assert.IsTrue(response.OK);
+			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
+			Assert.IsTrue(response.OK, response.ConnectionStatus.ToString());
 
 			mapping = this._client.GetMapping<ElasticSearchProject>();
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
@@ -164,7 +161,7 @@ namespace Nest.Tests.Integration.Indices
 
 			property.Fields.Add("name", primaryField);
 			property.Fields.Add("name_analyzed", analyzedField);
-
+			typeMapping.Properties = typeMapping.Properties ?? new Dictionary<string, IElasticType>();
 			typeMapping.Properties.Add("name", property);
 
 			var settings = new IndexSettings();

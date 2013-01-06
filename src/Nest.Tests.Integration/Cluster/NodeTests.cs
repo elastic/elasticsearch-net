@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Cluster
 {
 	[TestFixture]
-	public class NodeTests : BaseElasticSearchTests
+	public class NodeTests : IntegrationTests
 	{
 		[Test]
 		public void NodeInfo()

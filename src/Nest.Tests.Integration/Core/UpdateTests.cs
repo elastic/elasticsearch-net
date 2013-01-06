@@ -4,12 +4,11 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class UpdateIntegrationTests : BaseElasticSearchTests
+	public class UpdateIntegrationTests : CleanStateIntegrationTests
 	{
 		[Test]
 		public void TestUpdate()
 		{
-			this.ResetIndexes();
 			var project = this._client.Get<ElasticSearchProject>(1);
 			Assert.NotNull(project);
 			Assert.Greater(project.LOC, 0);

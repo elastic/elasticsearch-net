@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class SnapshotTests : BaseElasticSearchTests
+	public class SnapshotTests : IntegrationTests
 	{
 		[Test]
 		public void SnapshotAll()

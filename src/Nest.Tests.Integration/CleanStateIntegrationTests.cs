@@ -10,52 +10,9 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration
 {
 	[TestFixture]
-	public class BaseElasticSearchTests
+	public class CleanStateIntegrationTests : IntegrationTests
 	{
-		[TestFixtureSetUp]
-		public virtual void Initialize()
-		{
-			this.ResetIndexes();
-		}
-
-		private IConnectionSettings _settings;
-		protected IConnectionSettings Settings
-		{
-			get
-			{
-				if (this._settings != null)
-					return this._settings;
-
-				this._settings = new ConnectionSettings(Test.Default.Host, Test.Default.Port)
-								.SetDefaultIndex(Test.Default.DefaultIndex)
-								.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
-								.UsePrettyResponses();
-
-				return this._settings;
-			}
-		}
-		private ElasticClient _connectedClient;
-		protected ElasticClient _client
-		{
-			get 
-			{
-				if (this._connectedClient != null)
-					return this._connectedClient;
-
-				var client = new ElasticClient(this.Settings);
-				if (client.IsValid)
-				{ 
-					this._connectedClient = client;
-					return this._connectedClient;
-				}
-				return null;
-			}
-		}
-		protected ElasticClient CreateClient()
-		{
-			return new ElasticClient(this.Settings);
-		}
-		protected virtual void ResetIndexes()
+		protected override void ResetIndexes()
 		{
 			var cloneIndex = Test.Default.DefaultIndex + "_clone";
 			if (_client.IsValid)
@@ -63,17 +20,17 @@ namespace Nest.Tests.Integration
 				var projects = NestTestData.Data;
 				var people = NestTestData.People;
 
-				_client.DeleteMapping<ElasticSearchProject>();
-				_client.DeleteMapping<ElasticSearchProject>(cloneIndex);
-				_client.OpenIndex<ElasticSearchProject>();
-				this._client.OpenIndex(cloneIndex);
+				_client.DeleteIndex(Test.Default.DefaultIndex);
+				_client.DeleteIndex(Test.Default.DefaultIndex + "_clone");
+
+				_client.CreateIndex(Test.Default.DefaultIndex, new IndexSettings());
+				_client.CreateIndex(Test.Default.DefaultIndex + "_clone", new IndexSettings());
 
 				this.ResetType<ElasticSearchProject>(_client, projects);
-				this.ResetType<Person>(_client, people);
-
-				
+				this.ResetType<Person>(_client, people);			
 			}
 		}
+	
 		private void ResetType<T>(IElasticClient client, IEnumerable<T> objects) where T : class {
 			var cloneIndex = Test.Default.DefaultIndex + "_clone";
 			var bulkParameters = new SimpleBulkParameters() { Refresh = true };

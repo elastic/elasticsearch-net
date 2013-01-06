@@ -4,13 +4,13 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class OptimizeTests : BaseElasticSearchTests
+	public class OptimizeTests : IntegrationTests
 	{
 		[Test]
 		public void OptimizeAll()
 		{
 			var r = this._client.Optimize();
-			Assert.True(r.OK);
+			Assert.True(r.OK, r.ConnectionStatus.ToString());
 		}
 		[Test]
 		public void OptimizeIndex()

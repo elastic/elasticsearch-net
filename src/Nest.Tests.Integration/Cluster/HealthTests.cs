@@ -3,7 +3,7 @@
 namespace Nest.Tests.Integration.Cluster
 {
 	[TestFixture]
-	public class HealthTests : BaseElasticSearchTests
+	public class HealthTests : IntegrationTests
 	{
 		[Test]
 		public void ClusterHealth()

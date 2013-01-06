@@ -8,7 +8,7 @@ using Nest;
 namespace Nest.Tests.Integration
 {
 	[TestFixture]
-	public class ConnectionTests : BaseElasticSearchTests
+	public class ConnectionTests : IntegrationTests
 	{
 		[Test]
 		public void TestSettings()

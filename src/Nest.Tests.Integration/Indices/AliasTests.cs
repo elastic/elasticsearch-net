@@ -3,7 +3,7 @@
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class AliasTest : BaseElasticSearchTests
+	public class AliasTest : IntegrationTests
 	{
 		[Test]
 		public void SimpleAddRemoveAlias()

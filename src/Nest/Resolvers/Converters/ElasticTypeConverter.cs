@@ -72,7 +72,7 @@ namespace Nest.Resolvers.Converters
 			foreach (var p in o.Properties())
 			{
 				var name = p.Name;
-				var po = o.First.First as JObject;
+				var po = p.First as JObject;
 				if (po == null)
 					continue;
 

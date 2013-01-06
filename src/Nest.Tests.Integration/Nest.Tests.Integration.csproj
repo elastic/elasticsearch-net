@@ -51,10 +51,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseElasticSearchTests.cs" />
+    <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="CleanStateIntegrationTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Get\GetMultiTests.cs" />
     <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />

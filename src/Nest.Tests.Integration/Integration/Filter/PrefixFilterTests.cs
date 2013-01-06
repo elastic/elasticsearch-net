@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 	/// Integrated tests of PrefixFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class PrefixFilterTests : BaseElasticSearchTests
+	public class PrefixFilterTests : CleanStateIntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.

@@ -2,7 +2,7 @@
   "elasticsearchprojects": {
     "properties": {
       "boolValue": {
-        "type": "date",
+        "type": "boolean",
         "index_name": "bool_name_in_lucene_index",
         "store": "yes",
         "index": "analyzed",
