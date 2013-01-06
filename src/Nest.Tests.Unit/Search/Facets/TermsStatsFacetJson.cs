@@ -46,6 +46,7 @@ namespace Nest.Tests.Unit.Search.Facets
             .Add("factor2", 3)
             .Add("randomString", "stringy")
           )
+		  .Size(10)
         );
       var json = TestElasticClient.Serialize(s);
       var expected = @"{ from: 0, size: 10, 
@@ -55,6 +56,7 @@ namespace Nest.Tests.Unit.Search.Facets
                     key_script : ""doc['date'].date.minuteOfHour * factor1"",
                     value_script : ""doc['num1'].value * factor2"",
                     order : ""reverse_max"",
+					size : 10,
                     params : {
                       factor1 : 2,
                       factor2 : 3,
