@@ -43,13 +43,13 @@ namespace Nest.Tests.Unit.Cluster
 		public void DetailedHealth()
 		{
 			var r = this._client.Health(new HealthParams
-				{
-					CheckLevel = HealthLevel.Shards,
-					Timeout = "30s",
-					WaitForMinNodes = 1,
-					WaitForRelocatingShards = 0,
-					WaitForStatus = HealthStatus.Green
-				});
+			{
+				CheckLevel = HealthLevel.Shards,
+				Timeout = "30s",
+				WaitForMinNodes = 1,
+				WaitForRelocatingShards = 0,
+				WaitForStatus = HealthStatus.Green
+			});
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=shards");

@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.MockData", "Nest
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.FactoryDsl", "Nest.Tests.FactoryDsl\Nest.Tests.FactoryDsl.csproj", "{78917074-61E5-4D3D-BB7E-B28CF260B919}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Connection.Thrift", "Nest.Connection.Thrift\Nest.Connection.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D5575-2347-4D3C-BF8C-3E38410C46CA}"
@@ -90,16 +88,6 @@ Global
 		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|x86.ActiveCfg = Release|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Release|x86.ActiveCfg = Release|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

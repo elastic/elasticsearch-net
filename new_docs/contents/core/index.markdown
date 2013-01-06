@@ -43,7 +43,7 @@ Similarly to force a wait for a refresh
 
 ## Bulk Indexing
 
-Instead of passing `T` just pass `IEnumerable<T>` to `IndexMany()` or `IndexManyAsync()`.
+Instead of passing `T` just pass an `IEnumerable<T>` to `IndexMany()` or `IndexManyAsync()`.
 
 **Note**
 For asynchronous commands there's a special connection setting which automatically semaphores threaded communication

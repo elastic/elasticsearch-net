@@ -5,8 +5,12 @@ menusection: cluster
 menuitem: nodes-info
 ---
 
-
 # Nodes info
 
-Nodes info has not yet been mapped
+    var r = this._client.NodeInfo(NodesInfo.All);
+    var node = r.Nodes.Values.First();
+    
 
+You can then traverse all the stats i.e:
+
+    node.OS.CPU.Idle
