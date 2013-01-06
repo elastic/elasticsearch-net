@@ -35,7 +35,7 @@ namespace Nest
     internal string _Lang { get; set; }
 
 	[JsonProperty(PropertyName = "size")]
-	internal int _Size { get; set; }
+	internal int? _Size { get; set; }
 
     [JsonProperty(PropertyName = "params")]
     internal Dictionary<string,object> _Params { get; set; }

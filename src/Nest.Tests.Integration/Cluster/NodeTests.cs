@@ -19,7 +19,7 @@ namespace Nest.Tests.Integration.Cluster
 			Assert.IsNotNull(node.JVM);
 			Assert.IsNotNull(node.ThreadPool);
 			Assert.IsNotNull(node.Network);
-			Assert.IsNotNull(node.Transport);
+			Assert.IsNotNull(node.Transport); 
 			Assert.IsNotNull(node.HTTP);
 		}
 
