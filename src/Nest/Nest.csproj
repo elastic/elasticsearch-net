@@ -62,7 +62,12 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Parameters\HealthParams.cs" />
+    <Compile Include="Domain\Responses\HealthResponse.cs" />
+    <Compile Include="Domain\Stats\IndexHealthStats.cs" />
+    <Compile Include="Domain\Stats\ShardHealthStats.cs" />
     <Compile Include="DSL\Descriptors\MoreLikeThisDescriptor.cs" />
+    <Compile Include="ElasticClient-Health.cs" />
     <Compile Include="ElasticClient-MoreLikeThis.cs" />
     <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />
@@ -187,6 +192,8 @@
     <Compile Include="DSL\Factory\Common\Point.cs" />
     <Compile Include="DSL\Factory\Common\EsRegex.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
+    <Compile Include="Enums\HealthLevel.cs" />
+    <Compile Include="Enums\HealthStatus.cs" />
     <Compile Include="Enums\NumberType.cs" />
     <Compile Include="Enums\GeoTree.cs" />
     <Compile Include="Enums\NumericIndexOption.cs" />

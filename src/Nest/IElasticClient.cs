@@ -144,6 +144,11 @@ namespace Nest
 		RootObjectMapping GetMapping(Type t);
 		RootObjectMapping GetMapping(Type t, string index);
 
+		IHealthResponse Health(HealthLevel level);
+		IHealthResponse Health(IEnumerable<string> indices, HealthLevel level);
+		IHealthResponse Health(HealthParams healthParams);
+		IHealthResponse Health(IEnumerable<string> indices, HealthParams healthParams);
+
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
 		IBulkResponse IndexMany<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, string index) where T : class;
