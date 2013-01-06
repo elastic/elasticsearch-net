@@ -107,11 +107,20 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse CreateIndex(string index, IndexSettings settings)
 		{
-			string path = this.PathResolver.CreateIndexPath(index);
 			string data = JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
-			var status = this.Connection.PostSync(path, data);
-			var response = new IndicesResponse();
-			response.ConnectionStatus = status;
+			return CreateIndexRaw(index, data);
+		}
+		/// <summary>
+		/// Create an index with the specified index settings
+		/// </summary>
+		public IIndicesResponse CreateIndexRaw(string index, string settings)
+		{
+			string path = this.PathResolver.CreateIndexPath(index);
+			var status = this.Connection.PostSync(path, settings);
+			var response = new IndicesResponse
+				{
+					ConnectionStatus = status
+				};
 			try
 			{
 				response = this.Deserialize<IndicesResponse>(status.Result);
