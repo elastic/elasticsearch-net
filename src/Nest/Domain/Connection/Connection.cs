@@ -260,9 +260,16 @@ namespace Nest
 		private string _CreateUriString(string path)
 		{
 			var s = this._ConnectionSettings;
-			if (!path.StartsWith("/"))
+			if (!string.IsNullOrEmpty(s.Host))
+			{
+				if (!path.StartsWith("/"))
+					path = "/" + path;
+				return string.Format("http://{0}:{1}{2}", s.Host, s.Port, path);
+			}
+			if (!s.Uri.ToString().EndsWith("/") && !path.StartsWith("/"))
 				path = "/" + path;
-			return !string.IsNullOrEmpty(s.Host) ? string.Format("http://{0}:{1}{2}", s.Host, s.Port, path) : s.Uri + path;
+
+			return  s.Uri + path;
 		}
 	}
 }

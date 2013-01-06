@@ -25,7 +25,7 @@ namespace Nest
             return _NodeInfo(path, nodesInfo);
         }
 
-        public NodeInfoResponse _NodeInfo(string path, NodesInfo nodesInfo)
+        private NodeInfoResponse _NodeInfo(string path, NodesInfo nodesInfo)
         {
             if (nodesInfo.HasFlag(NodesInfo.All))
             {
@@ -71,11 +71,11 @@ namespace Nest
         /// </summary>
         public INodeStatsResponse NodeStats(IEnumerable<string> nodes, NodeInfoStats nodeInfoStats)
         {
-            var path = this.PathResolver.CreateNodePath("stats");
+            var path = this.PathResolver.CreateNodePath(nodes, "stats");
             return this._NodeStats(path, nodeInfoStats);
         }
-        
-        public NodeStatsResponse _NodeStats(string path, NodeInfoStats nodeInfoStats)
+
+		private NodeStatsResponse _NodeStats(string path, NodeInfoStats nodeInfoStats)
         {
             if (nodeInfoStats.HasFlag(NodeInfoStats.All))
             {

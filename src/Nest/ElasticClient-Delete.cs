@@ -564,7 +564,7 @@ namespace Nest
       return this._deleteToPath(path, stringQuery);
     }
     /// <summary>
-    /// Deletes all documents that match the string query. OBSOLETE
+    /// Deletes all documents that match the string query.
     /// </summary>
     /// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
     /// <param name="parameters">Control routing/consistency and replication</param>

@@ -209,6 +209,11 @@ namespace Nest
 		IIndicesResponse MapFluent<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor)
 			where T : class;
 
+		INodeInfoResponse NodeInfo(NodesInfo nodesInfo);
+		INodeInfoResponse NodeInfo(IEnumerable<string> nodes, NodesInfo nodesInfo);
+
+		INodeStatsResponse NodeStats(NodeInfoStats nodeInfoStats);
+		INodeStatsResponse NodeStats(IEnumerable<string> nodes, NodeInfoStats nodeInfoStats);
 
 		IIndicesOperationResponse OpenIndex(string index);
 		IIndicesOperationResponse OpenIndex<T>() where T : class;
