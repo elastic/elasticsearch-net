@@ -14,9 +14,16 @@
     <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
     <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
     <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/prettify/prettify.js"></script>
+    <script type="text/javascript" src="/prettify/fix_code_tags.js"></script>
   </head>
   <body>
     <section id="site">
+      <div class="actions">
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      </div>
       <aside>
         <ul id="top_left_menu">
           <h4>External</h4>
@@ -27,8 +34,22 @@
       <section id="content">
         <aside id="menu">
           <ul id="top_left_menu">
-            <li><a href="">+ Concepts</a></li>
-            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/">+ Concepts</a></li>
+            <h4>- Core</h4>
+            <ul>
+              <li><a href="/core/" class="">Index</a></li>
+              <li><a href="/core/delete.html" class="">Delete</a></li>
+              <li><a href="/core/get.html" class="selected">Get</a></li>
+              <li><a href="/core/multi-get.html" class="">Multi Get</a></li>
+              <li><a href="/core/update.html" class="">Update</a></li>
+              <li><a href="/core/search.html" class="">Search</a></li>
+              <li><a href="/core/multi-search.html" class="">Multi Search</a></li>
+              <li><a href="/core/percolate.html" class="">Percolate</a></li>
+              <li><a href="/core/bulk.html" class="">Bulk</a></li>
+              <li><a href="/core/count.html" class="">Count</a></li>
+              <li><a href="/core/delete-by-query.html" class="">Delete By Query</a></li>
+              <li><a href="/core/more-like-this.html" class="">More Like This</a></li>
+            </ul>
             <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
             <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
             <li><a href="/search/basics.html" class="">+ Search</a></li>
@@ -48,6 +69,63 @@
 
 </p>
 <pre><code><span class="keyword">var</span> foundDocument = <span class="keyword">this</span>.ConnectedClient.Get&lt;ElasticSearchProject>(<span class="string">"myalternateindex"</span>, <span class="string">"elasticprojs"</span>, hit.Id);</code></pre>
+<h2>Full response</h2>
+<p>The <code>Get&lt;T&gt;()</code> call immediatly returns <code>T</code> which is handy in alot of cases but sometimes you&apos;ll want to get the complete metadata object back from Elasticsearch
+using <code>GetFull()</code> you get a proper <code>IGetResponse&lt;T&gt;</code> back that holds the usual <code>IsValid</code> and <code>ConnectionStatus</code> properties amongst the <code>Index</code>, <code>Type</code>, <code>Id</code> and <code>Version</code> properties.
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.GetFull&lt;ElasticSearchProject>(g => g
+    .Index(<span class="string">"nest_test_data"</span>)
+    .Type(<span class="string">"elasticsearchprojects"</span>)
+    .Id(<span class="number">1</span>)
+);</code></pre>
+<p><code>result.Document</code> now holds the ElasticSearchProject with id 1.
+
+</p>
+<p><code>Index()</code> and <code>Type()</code> are optional
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.GetFull&lt;ElasticSearchProject>(g => g
+    .Id(<span class="number">1</span>)
+);</code></pre>
+<p>Follows the same inferring rules as <code>.Get(id)</code> would.
+
+</p>
+<p>Infact you could even just pass an object:
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.GetFull&lt;SomeDto>(g => g
+    .Object(<span class="keyword">new</span> SomeDto { AlternateId = Guid.NewGuid() })
+);</code></pre>
+<p>provided SomeDto is mapped properly to use <code>AlternateId</code> as the alternate id field
+
+</p>
+<pre><code>[ElasticType(IdProperty = <span class="string">"AlternateId"</span>)]
+internal <span class="keyword">class</span> SomeDto
+{
+    <span class="keyword">public</span> Guid AlternateId { get; set; }
+}</code></pre>
+<p>You can also use GetFull to query just some fields of a single document
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.GetFull&lt;ElasticSearchProject>(g => g
+    .Index(<span class="string">"nest_test_data"</span>)
+    .Type(<span class="string">"elasticsearchprojects"</span>)
+    .Id(<span class="number">1</span>)
+    .Fields(p=>p.Content, p=>p.Name, p=>p.Id, p=>p.DoubleValue)
+);</code></pre>
+<p>These fields are exposed as followed:
+
+</p>
+<pre><code><span class="keyword">var</span> name = result.Fields.FieldValue&lt;string>(p => p.Name);
+<span class="keyword">var</span> id = result.Fields.FieldValue&lt;int>(p => p.Id);
+<span class="keyword">var</span> doubleValue = result.Fields.FieldValue&lt;double>(p => p.DoubleValue);</code></pre>
+<p>Remember <code>p =&gt; p.Name</code> can also be written as <code>&quot;name&quot;</code> and Nest does not force you to write expressions everywhere (although it is much encouraged!).
+
+
+
+
+</p>
 
           </div>
         </article>

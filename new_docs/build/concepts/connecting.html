@@ -14,9 +14,16 @@
     <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
     <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
     <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/prettify/prettify.js"></script>
+    <script type="text/javascript" src="/prettify/fix_code_tags.js"></script>
   </head>
   <body>
     <section id="site">
+      <div class="actions">
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      </div>
       <aside>
         <ul id="top_left_menu">
           <h4>External</h4>
@@ -27,8 +34,14 @@
       <section id="content">
         <aside id="menu">
           <ul id="top_left_menu">
-            <li><a href="">+ Concepts</a></li>
-            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <h4>- Concepts</h4>
+            <ul>
+              <li><a href="/" class="">Introduction</a></li>
+              <li><a href="/concepts/connecting.html" class="selected">Connecting</a></li>
+              <li><a href="/concepts/handling-responces.html" class="">Response handling</a></li>
+              <li><a href="/concepts/writing-queries.html" class="">Writing queries</a></li>
+            </ul>
+            <li><a href="/core/" class="">+ Core</a></li>
             <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
             <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
             <li><a href="/search/basics.html" class="">+ Search</a></li>
@@ -59,7 +72,15 @@
 
 </p>
 <pre><code><span class="keyword">if</span> (client.IsValid)</code></pre>
-<p>both will perform a one time lookup to see if ElasticSearch is available and ready. 
+<p>both will perform a one time lookup to see if ElasticSearch is available and ready by doing a request to <code>/</code> on the elasticsearch server. 
+
+</p>
+<h2>Changing the underlying connection</h2>
+<p>By default NEST will use HTTP to chat with elasticsearch, alternative implementation of the transport layer can be injected in the constructors optional second parameter
+
+</p>
+<pre><code><span class="keyword">var</span> client = <span class="keyword">new</span> ElasticClient(settings, <span class="keyword">new</span> ThriftConnection(settings));</code></pre>
+<p>Nest comes with a Htpp connection <code>Connection</code>, Thrift Connection <code>ThriftConnection</code> and an in memory connection that nevers hits elasticsearch <code>InMemoryConnection</code>.
 
 </p>
 <h2>Settings:</h2>
@@ -75,7 +96,7 @@
 
 </p>
 <h3>TypeNameInferrer</h3>
-<p>You can pass a <code>Func&lt;string,string&gt;</code> to SetTypeNameInferrer()<code> on </code>ConnectionSettings` to overide NEST&apos;s default behavior of lowercasing and pluralizing typenames.
+<p>You can pass a <code>Func&lt;string,string&gt;</code> to <code>SetTypeNameInferrer()</code> on <code>ConnectionSettings</code> to overide NEST&apos;s default behavior of lowercasing and pluralizing typenames.
 
 </p>
 <h3>UsePrettyResponses</h3>

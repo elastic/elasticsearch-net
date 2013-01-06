@@ -14,9 +14,16 @@
     <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
     <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
     <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/prettify/prettify.js"></script>
+    <script type="text/javascript" src="/prettify/fix_code_tags.js"></script>
   </head>
   <body>
     <section id="site">
+      <div class="actions">
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      </div>
       <aside>
         <ul id="top_left_menu">
           <h4>External</h4>
@@ -27,13 +34,47 @@
       <section id="content">
         <aside id="menu">
           <ul id="top_left_menu">
-            <li><a href="">+ Concepts</a></li>
-            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <li><a href="/">+ Concepts</a></li>
+            <li><a href="/core/" class="">+ Core</a></li>
             <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
             <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
             <li><a href="/search/basics.html" class="">+ Search</a></li>
             <li><a href="/facets/handling.html" class="">+ Facets</a></li>
-            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
+            <h4>- Query DSL</h4>
+            <ul>
+              <li><a href="/query/text.html" class="">text</a></li>
+              <li><a href="/query/bool.html" class="">bool</a></li>
+              <li><a href="/query/boosting.html" class="">boosting</a></li>
+              <li><a href="/query/ids.html" class="">ids</a></li>
+              <li><a href="/query/custom-score.html" class="">custom_score</a></li>
+              <li><a href="/query/custom-boost-factor.html" class="">custom_boost_factor</a></li>
+              <li><a href="/query/constant-score.html" class="">constant_score</a></li>
+              <li><a href="/query/dis-max.html" class="selected">dis_max</a></li>
+              <li><a href="/query/field.html" class="">field</a></li>
+              <li><a href="/query/filtered.html" class="">filtered</a></li>
+              <li><a href="/query/flt.html" class="">flt</a></li>
+              <li><a href="/query/flt-field.html" class="">flt_field</a></li>
+              <li><a href="/query/fuzzy.html" class="">fuzzy</a></li>
+              <li><a href="/query/has-child.html" class="">has_child</a></li>
+              <li><a href="/query/match-all.html" class="">match_all</a></li>
+              <li><a href="/query/mlt.html" class="">mlt</a></li>
+              <li><a href="/query/mlt-field.html" class="">mlt_field</a></li>
+              <li><a href="/query/prefix.html" class="">prefix</a></li>
+              <li><a href="/query/query-string.html" class="">query_string</a></li>
+              <li><a href="/query/range.html" class="">range</a></li>
+              <li><a href="/query/span-first.html" class="">span_first</a></li>
+              <li><a href="/query/span-near.html" class="">span_near</a></li>
+              <li><a href="/query/span-not.html" class="">span_not</a></li>
+              <li><a href="/query/span-or.html" class="">span_or</a></li>
+              <li><a href="/query/span-term.html" class="">span_term</a></li>
+              <li><a href="/query/term.html" class="">term</a></li>
+              <li><a href="/query/terms.html" class="">terms</a></li>
+              <li><a href="/query/top-children.html" class="">top_children</a></li>
+              <li><a href="/query/wildcard.html" class="">wildcard</a></li>
+              <li><a href="/query/nested.html" class="">nested</a></li>
+              <li><a href="/query/custom-filters-score.html" class="">custom_filters_score</a></li>
+              <li><a href="/query/indices.html" class="">indices</a></li>
+            </ul>
             <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
           </ul>
         </aside>

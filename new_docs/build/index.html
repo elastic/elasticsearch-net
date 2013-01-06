@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Nest - Testing</title>
+    <title>Nest - Introduction</title>
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -14,9 +14,16 @@
     <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
     <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
     <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/prettify/prettify.js"></script>
+    <script type="text/javascript" src="/prettify/fix_code_tags.js"></script>
   </head>
   <body>
     <section id="site">
+      <div class="actions">
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      </div>
       <aside>
         <ul id="top_left_menu">
           <h4>External</h4>
@@ -27,8 +34,14 @@
       <section id="content">
         <aside id="menu">
           <ul id="top_left_menu">
-            <li><a href="">+ Concepts</a></li>
-            <li><a href="/core/index.html" class="">+ Core</a></li>
+            <h4>- Concepts</h4>
+            <ul>
+              <li><a href="/" class="selected">Introduction</a></li>
+              <li><a href="/concepts/connecting.html" class="">Connecting</a></li>
+              <li><a href="/concepts/handling-responces.html" class="">Response handling</a></li>
+              <li><a href="/concepts/writing-queries.html" class="">Writing queries</a></li>
+            </ul>
+            <li><a href="/core/" class="">+ Core</a></li>
             <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
             <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
             <li><a href="/search/basics.html" class="">+ Search</a></li>
@@ -52,7 +65,7 @@ client.Index(post);</code></pre>
 </p>
 <pre><code><span class="comment">//IndexAsync returns a Task&lt;ConnectionStatus></span>
 <span class="keyword">var</span> task = client.IndexAsync(post);</code></pre>
-<p>Searching is fluid:
+<p>Searching is fluent:
 
 </p>
 <pre><code><span class="keyword">var</span> results = <span class="keyword">this</span>.ConnectedClient.Search&lt;ElasticSearchProject>(s => s
@@ -69,6 +82,26 @@ client.Index(post);</code></pre>
 </p>
 <pre><code>PM> Install-Package NEST</code></pre>
 <p>Or searching for &quot;elasticsearch&quot; will get you to nest as well. 
+
+</p>
+<h2>Who&apos;s using Nest</h2>
+<p>Some notable examples are the stackexchange sites (<a href="http://stackoverflow.com/search?q=elasticsearch">stackoverflow.com</a>, <a href="http://serverfault.com/search?q=elasticsearch">serverfault.com</a>, ..) and <a href="https://www.rijksmuseum.nl/en/search?q=elastiek">rijksmuseum.nl</a>. If you are using Nest let me know! I love to boast about it right here :)
+
+</p>
+<h2>Read more elsewhere</h2>
+<p><a href="http://twitter.com/joelabrahamsson">@joelabrahamsson</a> wrote a great <a href="http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch">intro into elasticsearch on .NET</a>
+using NEST. 
+
+</p>
+<p>Also checkout the <a href="https://searchbox.io/">searchbox.io guys</a> rocking NEST <a href="http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on">on AppHarbor</a> 
+with their <a href="https://github.com/searchbox-io/.net-sample">demo project</a>
+
+</p>
+<h2>Questions, bugs, comments, requests</h2>
+<p>All of these are more then welcome on the github issues pages! I try to to at least reply within the same day.
+
+</p>
+<p>I also monitor question tagged with <a href="http://stackoverflow.com/questions/tagged/nest">&apos;nest&apos; on stackoverflow</a>
 
 </p>
 <h2>Copyright</h2>
@@ -88,29 +121,23 @@ NEST now has <strong>two types of query dsl&apos;s</strong> (lambda and factory 
 <p>Some of the other wonderful features in NEST were pushed by these wonderful folks:
 
 </p>
-<ul>
-<li><a href="https://github.com/nordbergm/NEST">@nordbergm</a></li>
-<li><a href="https://github.com/kevingessner/NEST">@kevingessner</a></li>
-<li><a href="https://github.com/EFJoseph/NEST">@EFJoseph</a></li>
-<li><a href="https://github.com/pkrakowiak/NEST">@pkrakowiak</a> </li>
-<li>[@q42jaap] (<a href="https://github.com/q42jaap/NEST">https://github.com/q42jaap/NEST</a>)</li>
-</ul>
-<script id="contributorTemplate" type="text/x-jQuery-tmpl">
-{{each contributors}}
-  {{if login != &quot;invalid-email-address&quot;}}<br>   <div style="clear:both; margin: 8px; height: 80px; width: 600px;" id="contributor">
-        <img src="http://gravatar.com/avatar/${gravatar_id}" alt="${name || login}" style="float:left;" />
-        <div style="float:left; margin-left: 12px;">
-          <h3>#${$index + 1} (${contributions} commits)</h3>
-          <h2>${name ? name.replace(&quot; &quot;, &quot; &apos;&quot; + login + &quot;&apos; &quot;) + &quot;!&quot; : login}</h2>
-          <a href="https://github.com/${login}"><a href="https://github.com/${login}&lt;/a&gt;">https://github.com/${login}&lt;/a&gt;</a>
-        </div>
-    </div>
-  {{/if}}
-{{/each}}
-</script>
 
-<div id="contributors">&nbsp;</div>
-
+            <div id="nest-contributors"></div>
+            <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+            <script type="text/javascript" src="/scripts/contributors.js"></script>
+            <script id="contributorTemplate" type="text/x-jQuery-tmpl">
+              {{each data}}
+              {{if login != "invalid-email-address"}}
+              <div style="float:left;width:200px;">
+              <img width="48" height="48" src="http://gravatar.com/avatar/${gravatar_id}" alt="${name || login}" style="float:left;" />
+              <div style="float:left; margin-left: 12px;">
+              #${$index + 1} (${contributions} commits)<br />
+              <a href="https://github.com/${login}">${name ? name.replace(" ", " '" + login + "' ") + "!" : login}</a>
+              </div>
+              </div>
+              {{/if}}
+              {{/each}}
+            </script>
           </div>
         </article>
       </section>

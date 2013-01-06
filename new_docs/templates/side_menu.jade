@@ -6,6 +6,7 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'introduction')? "selected" : "", href="/") Introduction
 				li: a(class=(page.metadata.menuitem == 'connecting')? "selected" : "", href="/concepts/connecting.html") Connecting
 				li: a(class=(page.metadata.menuitem == 'handling-responces')? "selected" : "", href="/concepts/handling-responces.html") Response handling
+				li: a(class=(page.metadata.menuitem == 'writing-queries')? "selected" : "", href="/concepts/writing-queries.html") Writing queries
 		- else 
 			li: a(href="/") + Concepts
 		- if (page.metadata.menusection == 'core' )
