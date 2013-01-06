@@ -34,6 +34,9 @@ namespace Nest
     [JsonProperty(PropertyName = "lang")]
     internal string _Lang { get; set; }
 
+	[JsonProperty(PropertyName = "size")]
+	internal int _Size { get; set; }
+
     [JsonProperty(PropertyName = "params")]
     internal Dictionary<string,object> _Params { get; set; }
 
@@ -79,6 +82,12 @@ namespace Nest
       this._Lang = language;
       return this;
     }
+	public TermsStatsFacetDescriptor<T> Size(int size)
+	{
+		size.ThrowIfNull("size");
+		this._Size = size;
+		return this;
+	}
     public TermsStatsFacetDescriptor<T> Order(TermsStatsOrder order)
     {
       this._Order = order;
