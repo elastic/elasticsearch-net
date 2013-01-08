@@ -24,5 +24,32 @@ namespace Nest.Tests.Unit.Core.Versioning
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("version=1", status.RequestUrl);
 		}
+
+        [Test]
+        public void IndexOpTypeDefault()
+        {
+            var o = new ElasticSearchProject { Id = 1, Name = "Test" };
+            var result = this._client.Index(o, new IndexParameters());
+            var status = result.ConnectionStatus;
+            StringAssert.DoesNotContain("op_type=create", status.RequestUrl);
+        }
+
+        [Test]
+        public void IndexOpTypeNone()
+        {
+            var o = new ElasticSearchProject { Id = 1, Name = "Test" };
+            var result = this._client.Index(o, new IndexParameters { OpType = OpType.None });
+            var status = result.ConnectionStatus;
+            StringAssert.DoesNotContain("op_type=create", status.RequestUrl);
+        }
+
+        [Test]
+        public void IndexOpTypeCreate()
+        {
+            var o = new ElasticSearchProject { Id = 1, Name = "Test" };
+            var result = this._client.Index(o, new IndexParameters { OpType = OpType.Create });
+            var status = result.ConnectionStatus;
+            StringAssert.Contains("op_type=create", status.RequestUrl);
+        }
 	}
 }
