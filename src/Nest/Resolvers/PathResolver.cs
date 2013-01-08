@@ -185,6 +185,9 @@ namespace Nest.Resolvers
 			if (!urlParameters.Parent.IsNullOrEmpty())
 				parameters.Add("parent=" + urlParameters.Parent);
 
+			if (urlParameters.OpType != OpType.None) // default not set
+				parameters.Add("op_type=" + urlParameters.OpType.ToString().ToLower());
+
 			if (urlParameters.Replication != Replication.Sync) //sync == default
 				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
