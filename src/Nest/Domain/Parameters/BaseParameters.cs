@@ -13,6 +13,7 @@ namespace Nest
 	public interface IUrlParameters 
 	{
 		string Version { get; set; }
+		OpType OpType { get; set; }
 		string Routing { get; set; }
 		string Parent { get; set; }
 		Replication Replication { get; set; }
@@ -22,6 +23,7 @@ namespace Nest
 	public class BaseParameters : IUrlParameters
 	{
 		public string Version { get; set; }
+		public OpType OpType { get; set; }
 		public string Routing { get; set; }
 		public string Parent { get; set; }
 		public Replication Replication { get; set; }
