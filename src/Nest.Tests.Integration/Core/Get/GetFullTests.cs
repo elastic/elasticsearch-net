@@ -23,6 +23,7 @@ namespace Nest.Tests.Integration.Core.Get
 			result.Index.Should().Be("nest_test_data");
 			result.Type.Should().Be("elasticsearchprojects");
 			result.Version.Should().Be("1");
+			result.Exists.Should().BeTrue();
 		}
 
 		[Test]
@@ -58,6 +59,14 @@ namespace Nest.Tests.Integration.Core.Get
 			result.Fields.FieldValue<int>(p => p.Id).Should().Be(1);
 			result.Fields.FieldValue<double>(p => p.DoubleValue).Should().BeApproximately(31.931359384177D, 0.00000001D);
 
+		}
+
+		[Test]
+		public void GetMissing()
+		{
+			int doesNotExistId = 1234567;
+			var result = this._client.GetFull<ElasticSearchProject>(doesNotExistId);
+			result.Exists.Should().BeFalse();
 		}
 	}
 }
