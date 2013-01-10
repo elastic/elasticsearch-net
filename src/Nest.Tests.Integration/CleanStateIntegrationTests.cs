@@ -21,10 +21,10 @@ namespace Nest.Tests.Integration
 				var people = NestTestData.People;
 
 				_client.DeleteIndex(Test.Default.DefaultIndex);
-				_client.DeleteIndex(Test.Default.DefaultIndex + "_clone");
+				//_client.DeleteIndex(Test.Default.DefaultIndex + "_clone");
 
 				_client.CreateIndex(Test.Default.DefaultIndex, new IndexSettings());
-				_client.CreateIndex(Test.Default.DefaultIndex + "_clone", new IndexSettings());
+				//_client.CreateIndex(Test.Default.DefaultIndex + "_clone", new IndexSettings());
 
 				this.ResetType<ElasticSearchProject>(_client, projects);
 				this.ResetType<Person>(_client, people);			

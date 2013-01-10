@@ -102,33 +102,9 @@ namespace Nest
 			r.ConnectionStatus = status;
 			return r;
 		}
-		/// <summary>
-		/// Create an index with the specified index settings
-		/// </summary>
-		public IIndicesResponse CreateIndex(string index, IndexSettings settings)
-		{
-			string data = JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
-			return CreateIndexRaw(index, data);
-		}
-		/// <summary>
-		/// Create an index with the specified index settings
-		/// </summary>
-		public IIndicesResponse CreateIndexRaw(string index, string settings)
-		{
-			string path = this.PathResolver.CreateIndexPath(index);
-			var status = this.Connection.PostSync(path, settings);
-			var response = new IndicesResponse
-				{
-					ConnectionStatus = status
-				};
-			try
-			{
-				response = this.Deserialize<IndicesResponse>(status.Result);
-				response.IsValid = true;
-			}
-			catch { }
-			return response;
-		}
+		
+		
+		
 		/// <summary>
 		/// Delete the default index
 		/// </summary>
