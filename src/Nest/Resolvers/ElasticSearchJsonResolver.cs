@@ -13,12 +13,12 @@ namespace Nest.Resolvers
 
 	public class ElasticResolver : DefaultContractResolver
 	{
-    public ElasticResolver() : base(true) { }
+		public ElasticResolver() : base(true) { }
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
 			var property = base.CreateProperty(member, memberSerialization);
-			
+
 			var attributes = member.GetCustomAttributes(typeof(ElasticPropertyAttribute), false);
 			if (attributes == null || !attributes.Any())
 				return property;
@@ -30,20 +30,20 @@ namespace Nest.Resolvers
 		}
 		protected override string ResolvePropertyName(string propertyName)
 		{
-      return base.ResolvePropertyName(propertyName).ToCamelCase();
+			return base.ResolvePropertyName(propertyName);
 		}
-    public string Resolve(string name)
-    {
-      return this.ResolvePropertyName(name).ToCamelCase();
-    }
+		public string Resolve(string name)
+		{
+			return this.ResolvePropertyName(name);
+		}
 	}
-  public class ElasticCamelCaseResolver : ElasticResolver
-  {
-    public ElasticCamelCaseResolver() : base() { }
+	public class ElasticCamelCaseResolver : ElasticResolver
+	{
+		public ElasticCamelCaseResolver() : base() { }
 
-    protected override string ResolvePropertyName(string propertyName)
-    {
-      return propertyName.ToCamelCase();
-    }
-  }
+		protected override string ResolvePropertyName(string propertyName)
+		{
+			return propertyName.ToCamelCase();
+		}
+	}
 }

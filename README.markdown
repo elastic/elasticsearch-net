@@ -14,7 +14,7 @@ Indexing asynchronously is as easy as:
 	//t is a Task<ConnectionStatus>
 	var t = client.IndexAsync(post);
 
-Searching is fluid:
+Searching is fluent:
 
 	var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
 			.From(0)

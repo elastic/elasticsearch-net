@@ -1,0 +1,803 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"margi",
+				"margin-right"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 320,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "config.json",
+			"settings":
+			{
+				"buffer_size": 162,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/layout.jade",
+			"settings":
+			{
+				"buffer_size": 1547,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/index.jade",
+			"settings":
+			{
+				"buffer_size": 743,
+				"line_ending": "Windows",
+				"name": "extends layout"
+			}
+		},
+		{
+			"file": "contents/index.md",
+			"settings":
+			{
+				"buffer_size": 2772,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Programming/NEST/README.markdown",
+			"settings":
+			{
+				"buffer_size": 2527,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/styles/layout.css",
+			"settings":
+			{
+				"buffer_size": 2190,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/prettify/fix_code_tags.js",
+			"settings":
+			{
+				"buffer_size": 174,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/scripts/contributors.js",
+			"settings":
+			{
+				"buffer_size": 497,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/concepts/connecting.markdown",
+			"settings":
+			{
+				"buffer_size": 2378,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/concepts/handling-responces.markdown",
+			"settings":
+			{
+				"buffer_size": 1105,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "---\ntemplate: layout.jade\ntitle: Connecting\nmenusection: core\nmenuitem: index\n---\n\n\n# Indexing\n\nIndexing is as simple as:\n\n	var post = new Post() { Id = 12, ... }\n	var status = client.Index<Post>(post);\n\nof course C# is smart enough to infer Post so\n\n	var status = client.Index(post);\n\nis sufficient. this will index post too `/[default index]/posts/12`. The typename`posts` is automatically inferred from the type.\n\nif you need more control there are plenty of overloads, i.e:\n\n	client.Index(post, \"index\", \"type\", \"id\");\n\n## Asynchronous\n\nIndexing asynchronously is as easy as:\n\n	//IndexAsync returns a Task<ConnectionStatus>\n	var task = client.IndexAsync(post);\n\n\n## Aditional parameters\n\nYou can pass aditional data using `IndexParameters`\n\n	client.Index(post, new IndexParameters() { VersionType = VersionType.External, Version = \"212\" });\n\nSimilarly to force a wait for a refresh \n\n	client.Index(post, new IndexParameters() { Refresh = true });\n\n## Bulk Indexing\n\nInstead of passing `T` just pass an `IEnumerable<T>` to `IndexMany()` or `IndexManyAsync()`.\n\n**Note**\nFor asynchronous commands there's a special connection setting which automatically semaphores threaded communication\nto ES for you:\n\n	var elasticSettings = new ConnectionSettings(\"127.0.0.1.\", 9200)\n							  .SetDefaultIndex(\"mpdreamz\")\n							  .SetMaximumAsyncConnections(20);\n\nthis ensures that at most there are 20 asynchronous connections to ES others are enqueued until a slot is \navailable.\n\n## Aditional parameters\nLike the overloads just taking a `T` the `IEnumerable<T>` has alot of overloads taking in extra parameters. \n\n	client.Index(posts, new SimpleBulkParameters() { Refresh = true });\n\nThe reason the `IEnumerable<T>` overloads take a `SimpleBulkParameters` is because to pass item specific parameters you'll have to wrap `posts` in a `BulkParameters<T>` i.e:\n\n	client.Index(posts.Select(p=>new BulkParameters<T>(p) { Version = p.Version }));\n\nThis will do a bulk index on posts but use each individual posts version. Again there's plenty of overloads to mix and match:\n\n	var bulkParams = posts.Select(p=>new BulkParameters<T>(p) { Version = p.Version });\n	client.Index(bulkParams , new SimpleBulkParameters() { Refresh = true });\n\n\n \n\n",
+			"file": "contents/core/index.markdown",
+			"file_size": 2298,
+			"file_write_time": 130018814322973938,
+			"settings":
+			{
+				"buffer_size": 2226,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/core/get.markdown",
+			"settings":
+			{
+				"buffer_size": 2157,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/core/multi-get.markdown",
+			"settings":
+			{
+				"buffer_size": 2223,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contents/core/bulk.markdown",
+			"settings":
+			{
+				"buffer_size": 154,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "",
+			"file": "contents/concepts/writing-queries.markdown",
+			"file_size": 0,
+			"file_write_time": 130019447199263807,
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Mpdreamz/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 3812,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"markd",
+				"Set Syntax: Markdown"
+			],
+			[
+				"markdown",
+				"Set Syntax: MultiMarkdown"
+			],
+			[
+				"tabs",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"comment",
+				"Toggle Comment"
+			],
+			[
+				"htl",
+				"Set Syntax: HTML"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/Programming/NEST/new_docs/contents/scripts/contributors.js",
+		"/D/Programming/NEST/new_docs/templates/default.jade",
+		"/D/Programming/NEST/new_docs/contents/core/index.markdown",
+		"/D/Programming/NEST/new_docs/contents/index.json",
+		"/D/Programming/questionmark/views/index.jade",
+		"/D/Programming/questionmark/views/layout.jade",
+		"/D/Programming/questionmark/server.js",
+		"/D/Programming/questionmark/public/javascripts/studio-data.js",
+		"/D/Programming/questionmark/public/javascripts/questionmark.js",
+		"/D/Programming/questionmark/public/stylesheets/style.css",
+		"/D/Programming/skyroads/src/test.html",
+		"/D/Programming/skyroads/test.html",
+		"/D/Programming/skyroads/src/libs/skyroads.js",
+		"/D/Programming/skyroads/src/test2.html"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"/images",
+			"/>\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 16,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "package.json",
+					"settings":
+					{
+						"buffer_size": 320,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								320,
+								320
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "config.json",
+					"settings":
+					{
+						"buffer_size": 162,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								162,
+								162
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "templates/layout.jade",
+					"settings":
+					{
+						"buffer_size": 1547,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1546,
+								1546
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "templates/index.jade",
+					"settings":
+					{
+						"buffer_size": 743,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								368,
+								368
+							]
+						],
+						"settings":
+						{
+							"auto_name": "extends layout",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "contents/index.md",
+					"settings":
+					{
+						"buffer_size": 2772,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								518,
+								518
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/Programming/NEST/README.markdown",
+					"settings":
+					{
+						"buffer_size": 2527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1544,
+								1394
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "contents/styles/layout.css",
+					"settings":
+					{
+						"buffer_size": 2190,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1818,
+								1818
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1305.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "contents/prettify/fix_code_tags.js",
+					"settings":
+					{
+						"buffer_size": 174,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "contents/scripts/contributors.js",
+					"settings":
+					{
+						"buffer_size": 497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								407,
+								407
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "contents/concepts/connecting.markdown",
+					"settings":
+					{
+						"buffer_size": 2378,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1930,
+								1930
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "contents/concepts/handling-responces.markdown",
+					"settings":
+					{
+						"buffer_size": 1105,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								178,
+								178
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "contents/core/index.markdown",
+					"settings":
+					{
+						"buffer_size": 2226,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1062,
+								1062
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "contents/core/get.markdown",
+					"settings":
+					{
+						"buffer_size": 2157,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1362,
+								1362
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "contents/core/multi-get.markdown",
+					"settings":
+					{
+						"buffer_size": 2223,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1533,
+								1533
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "contents/core/bulk.markdown",
+					"settings":
+					{
+						"buffer_size": 154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "contents/concepts/writing-queries.markdown",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "/C/Users/Mpdreamz/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+					"settings":
+					{
+						"buffer_size": 3812,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								936,
+								936
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 208.0,
+	"status_bar_visible": true
+}

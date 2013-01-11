@@ -19,8 +19,13 @@ namespace Nest
 		{
 			get
 			{
-				//TODO FILTER
-				return this._Query != null && this._Query.IsConditionless;
+				if (this._Query == null && this._Filter == null)
+					return true;
+				if (this._Filter == null && this._Query != null)
+					return this._Query.IsConditionless;
+				if (this._Filter != null && this._Query == null)
+					return this._Filter.IsConditionless;
+				return false;
 			}
 		}
 

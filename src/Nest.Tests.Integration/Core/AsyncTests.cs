@@ -6,7 +6,7 @@ using System.Net;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class AsyncTests : BaseElasticSearchTests
+	public class AsyncTests : IntegrationTests
 	{
 
 		[Test]
@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Core
 			{
 				Name = "COBOLES", //COBOL ES client ?
 			};
-			var t = this.ConnectedClient.IndexAsync<ElasticSearchProject>(newProject);
+			var t = this._client.IndexAsync<ElasticSearchProject>(newProject);
 			t.Wait();
 			Assert.True(t.Result.IsValid);
 			Assert.True(t.IsCompleted, "task did not complete");

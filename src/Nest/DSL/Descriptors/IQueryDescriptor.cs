@@ -22,7 +22,7 @@ namespace Nest
     BaseQuery Ids(string type, IEnumerable<string> values);
     BaseQuery Indices(Action<IndicesQueryDescriptor<T>> selector);
     BaseQuery MatchAll(double? Boost = null, string NormField = null);
-    BaseQuery MoreLikeThis(Action<MoreLikeThisDescriptor<T>> selector);
+    BaseQuery MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> selector);
     BaseQuery Nested(Action<NestedQueryDescriptor<T>> selector);
     BaseQuery Prefix(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null);
     BaseQuery Prefix(string field, string value, double? Boost = null);

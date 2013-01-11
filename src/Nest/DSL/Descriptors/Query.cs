@@ -102,7 +102,7 @@ namespace Nest
 			return new QueryDescriptor<T>().MatchAll(Boost, NormField);
 		}
 
-		public static BaseQuery MoreLikeThis(Action<MoreLikeThisDescriptor<T>> selector)
+		public static BaseQuery MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().MoreLikeThis(selector);
 		}
@@ -306,7 +306,7 @@ namespace Nest
 			return new QueryDescriptor<dynamic>().MatchAll(Boost, NormField);
 		}
 
-		public static BaseQuery MoreLikeThis(Action<MoreLikeThisDescriptor<dynamic>> selector)
+		public static BaseQuery MoreLikeThis(Action<MoreLikeThisQueryDescriptor<dynamic>> selector)
 		{
 			return new QueryDescriptor<dynamic>().MoreLikeThis(selector);
 		}

@@ -14,6 +14,7 @@ namespace Nest
 	{
 		internal string _Field { get; set; }
 		internal int? _MinMatch { get; set; }
+		internal bool _DisableCord { get; set; }
 		internal IEnumerable<string> _Terms { get; set; }
 
 		internal bool IsConditionless
@@ -47,6 +48,12 @@ namespace Nest
 			this._Terms = terms;
 			return this;
 		}
+		public TermsQueryDescriptor<T> DisableCoord()
+		{
+			this._DisableCord = true;
+			return this;
+		}
+
 		public TermsQueryDescriptor<T> Terms(params string[] terms)
 		{
 			if (terms.HasAny())

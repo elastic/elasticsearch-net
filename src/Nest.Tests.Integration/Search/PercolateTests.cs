@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search
 {
 	[TestFixture]
-	public class PercolateTests : BaseElasticSearchTests
+	public class PercolateTests : CleanStateIntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Search
 		public void RegisterPercolateTest()
 		{
 			var name = "mypercolator";
-			var c = this.ConnectedClient;
+			var c = this._client;
 			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Name, "elasticsearch.pm"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Search
 		public void UnregisterPercolateTest()
 		{
 			var name = "mypercolator";
-			var c = this.ConnectedClient;
+			var c = this._client;
 			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Name, "elasticsearch.pm"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
@@ -51,7 +51,7 @@ namespace Nest.Tests.Integration.Search
 		public void PercolateDoc()
 		{
 			this.RegisterPercolateTest(); // I feel a little dirty.
-			var c = this.ConnectedClient;
+			var c = this._client;
 			var name = "mypercolator";
 			var r = c.Percolate(new ElasticSearchProject()
 			{
@@ -69,12 +69,12 @@ namespace Nest.Tests.Integration.Search
 		public void PercolateTypedDoc()
 		{
 			this.RegisterPercolateTest(); // I feel a little dirty.
-			var c = this.ConnectedClient;
+			var c = this._client;
 			var name = "eclecticsearch";
 			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Country, "netherlands"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
-			var percolateResponse = this.ConnectedClient.Percolate(
+			var percolateResponse = this._client.Percolate(
 				new ElasticSearchProject()
 				{
 					Name = "NEST",

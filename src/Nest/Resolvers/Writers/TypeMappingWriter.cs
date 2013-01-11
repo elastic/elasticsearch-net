@@ -67,6 +67,27 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
+		internal RootObjectMapping RootObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
+
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<RootObjectMapping>(nestedJson);
+		}
+		internal ObjectMapping ObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
+
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<ObjectMapping>(nestedJson);
+		}
+		internal NestedObjectMapping NestedObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
+
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<NestedObjectMapping>(nestedJson);
+		}
 		internal string MapFromAttributes()
 		{
 			var sb = new StringBuilder();
@@ -110,7 +131,7 @@ namespace Nest.Resolvers.Writers
 			}
 			if (att.NumericDetection)
 			{
-				jsonWriter.WritePropertyName("date_detection");
+				jsonWriter.WritePropertyName("numeric_detection");
 				jsonWriter.WriteRawValue("true");
 			}
 			if (!att.IndexAnalyzer.IsNullOrEmpty())

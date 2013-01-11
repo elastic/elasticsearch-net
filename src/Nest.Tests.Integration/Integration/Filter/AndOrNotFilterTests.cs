@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 	/// Integrated tests of AndFilter, OrFilter and NotFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class AndOrNotFilterTests : BaseElasticSearchTests
+	public class AndOrNotFilterTests : CleanStateIntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.

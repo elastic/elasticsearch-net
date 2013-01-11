@@ -14,7 +14,7 @@ namespace Nest
 	{
 		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
 
-		
+
 		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, "index");
@@ -112,20 +112,16 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-	  var idSelector = this.IdResolver.CreateIdSelector<T>();
-
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
 
 			foreach (var @object in objects)
 			{
 				var objectAction = action;
-        if (idSelector != null)
-        {
-          var id = idSelector(@object);
-          if (!id.IsNullOrEmpty())
-            objectAction += ", \"_id\" : \"{0}\" ".F(id);
-        }
+				
+					var id = this.IdResolver.GetIdFor(@object);
+					if (!id.IsNullOrEmpty())
+						objectAction += ", \"_id\" : \"{0}\" ".F(id);
 
 				objectAction += "} }\n";
 
@@ -147,8 +143,6 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-	  var idSelector = this.IdResolver.CreateIdSelector<T>();
-
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
 
@@ -158,8 +152,8 @@ namespace Nest
 					continue;
 
 				var objectAction = action;
-				if (idSelector != null)
-					objectAction += ", \"_id\" : \"{0}\" ".F(idSelector(@object.Document));
+
+				objectAction += ", \"_id\" : \"{0}\" ".F(this.IdResolver.GetIdFor(@object.Document));
 
 				if (!@object.Version.IsNullOrEmpty())
 					objectAction += ", \"version\" : \"{0}\" ".F(@object.Version);

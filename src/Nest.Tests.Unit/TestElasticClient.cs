@@ -12,10 +12,13 @@ namespace Nest.Tests.Unit
 		{
 			client = new ElasticClient(new ConnectionSettings(Test.Default.Uri));
 		}
-
 		public static string Serialize<T>(T obj)
 		{
 			return client.Serialize(obj);
+		}
+		public static string SerializeCamelCase<T>(T obj)
+		{
+			return client.SerializeCamelCase(obj);
 		}
 	}
 }

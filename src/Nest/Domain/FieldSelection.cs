@@ -9,7 +9,12 @@ using System.Text;
 
 namespace Nest.Domain
 {
-	public class FieldSelection<T>
+	public interface IFieldSelection<out T>
+	{
+		
+	}
+
+	public class FieldSelection<T> : IFieldSelection<T>
 	{
 		public T Document { get; set; }
 		internal IDictionary<string, object> FieldValues { get; set; }
@@ -28,11 +33,10 @@ namespace Nest.Domain
 				var t = typeof(K);
 				if (o is JArray && t.GetInterfaces().Contains(typeof(IEnumerable)))
 				{
-
 					var array = (JArray)o;
 					return array.ToObject<K>();
 				}
-				return (K)o;
+				return (K)Convert.ChangeType(o, typeof(K));
 			}
 			return default(K);
 		}

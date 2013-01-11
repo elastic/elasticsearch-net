@@ -111,7 +111,7 @@ namespace Nest
 	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor, IQuery where T : class
 	{
 		[JsonProperty("disable_coord")]
-		internal bool _DisableCoord { get; set; }
+		internal bool? _DisableCoord { get; set; }
 
 		public BoolQueryDescriptor<T> DisableCoord()
 		{

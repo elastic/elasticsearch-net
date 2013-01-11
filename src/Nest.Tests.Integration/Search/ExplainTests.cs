@@ -6,14 +6,14 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search
 {
 	[TestFixture]
-	public class ExplainTests : BaseElasticSearchTests
+	public class ExplainTests : CleanStateIntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 		[Test]
 		public void SimpleExplain()
 		{
-			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
+			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 					@" {
 						""explain"": true,
 						""query"" : {
@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void ComplexExplain()
 		{
-			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
+			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 					@" { ""explain"": true, 
 						""query"" : {
 						  ""fuzzy"" : { 

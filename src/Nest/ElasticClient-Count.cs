@@ -8,8 +8,7 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public ICountResponse CountAll(string query)
+		public ICountResponse CountAllRaw(string query)
 		{
 			return this._Count("_count", query);
 		}
@@ -36,6 +35,17 @@ namespace Nest
 			return this._Count("_count", query);
 		}
 
+        /// <summary>
+        /// Performs a count query over the default index set in the client settings
+        /// </summary>
+        public ICountResponse CountRaw(string query)
+        {
+            var index = this.Settings.DefaultIndex;
+            index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+            string path = this.PathResolver.CreateIndexPath(index, "_count");
+            return _Count(path, query);
+        }
 		/// <summary>
 		/// Performs a count query over the default index set in the client settings
 		/// </summary>
@@ -76,6 +86,18 @@ namespace Nest
 			return _Count(path, query);
 		}
 
+        /// <summary>
+        /// Perform a count query over the default index and the inferred type name for T
+        /// </summary>
+        public ICountResponse CountRaw<T>(string query) where T : class
+        {
+            var index = this.Settings.DefaultIndex;
+            index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+            var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+            string path = this.PathResolver.CreateIndexTypePath(index, typeName) + "_count";
+            return _Count(path, query);
+        }
 		/// <summary>
 		/// Perform a count query over the default index and the inferred type name for T
 		/// </summary>

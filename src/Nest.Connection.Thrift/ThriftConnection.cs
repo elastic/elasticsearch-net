@@ -11,14 +11,12 @@ using System.Threading;
 
 namespace Nest.Thrift
 {
-    // TODO: Cocowalla
-    //       Changed from internal to public for performance testing
 	public class ThriftConnection : IConnection, IDisposable
 	{
-		private ConcurrentQueue<Rest.Client> _clients = new ConcurrentQueue<Rest.Client>();
-		private Semaphore _resourceLock;
-		private int _timeout;
-		private int _poolSize;
+		private readonly ConcurrentQueue<Rest.Client> _clients = new ConcurrentQueue<Rest.Client>();
+		private readonly Semaphore _resourceLock;
+		private readonly int _timeout;
+		private readonly int _poolSize;
 		private bool _disposed;
 
 		public ThriftConnection(IConnectionSettings connectionSettings)

@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 	/// Integrated tests of RangeFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class RangeFilterTests : BaseElasticSearchTests
+	public class RangeFilterTests : CleanStateIntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.
@@ -22,15 +22,15 @@ namespace Nest.Tests.Integration.Integration.Filter
 		protected override void ResetIndexes()
 		{
 			base.ResetIndexes();
-			var client = this.ConnectedClient;
+			var client = this._client;
 			if (client.IsValid)
 			{
 				_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
 				_LookFor.Name = "mmm";
-				var status = this.ConnectedClient.Index(_LookFor).ConnectionStatus;
+				var status = this._client.Index(_LookFor).ConnectionStatus;
 				Assert.True(status.Success, status.Result);
 
-				Assert.True(this.ConnectedClient.Flush<ElasticSearchProject>().OK, "Flush");
+				Assert.True(this._client.Flush<ElasticSearchProject>().OK, "Flush");
 			}
 		}
 

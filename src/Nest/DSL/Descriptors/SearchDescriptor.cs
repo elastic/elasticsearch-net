@@ -430,13 +430,23 @@ namespace Nest
 		/// Sort ascending.
 		/// </para>
 		/// </summary>
-		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
-		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
-			this._Sort.Add(new PropertyNameResolver().Resolve(objectPath), "asc");
-			return this;
-		}
+        public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
+        {
+            if (this._Sort == null)
+                this._Sort = new Dictionary<string, object>();
+
+            var resolver = new PropertyNameResolver();
+            var fieldName = resolver.Resolve(objectPath);
+
+            var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
+            if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
+            {
+                fieldName += ".sort";
+            }
+
+            this._Sort.Add(fieldName, "asc");
+            return this;
+        }
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -445,15 +455,23 @@ namespace Nest
 		/// Sort descending.
 		/// </para>
 		/// </summary>
-		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
-		{
-			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+        public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
+        {
+            if (this._Sort == null)
+                this._Sort = new Dictionary<string, object>();
 
-			var key = new PropertyNameResolver().Resolve(objectPath);
-			this._Sort.Add(key, "desc");
-			return this;
-		}
+            var resolver = new PropertyNameResolver();
+            var fieldName = resolver.Resolve(objectPath);
+
+            var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
+            if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
+            {
+                fieldName += ".sort";
+            }
+
+            this._Sort.Add(fieldName, "desc");
+            return this;
+        }
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -822,8 +840,7 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform as a raw json string
 		/// </summary>
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> QueryRawJson(string rawQuery)
+		public SearchDescriptor<T> QueryRaw(string rawQuery)
 		{
 			rawQuery.ThrowIfNull("rawQuery");
 			this._RawQuery = rawQuery;
@@ -862,8 +879,7 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a raw json string
 		/// </summary>
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public SearchDescriptor<T> FilterRawJson(string rawFilter)
+		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
 			rawFilter.ThrowIfNull("rawFilter");
 			this._RawFilter = rawFilter;

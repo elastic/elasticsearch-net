@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Debug\Nest.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,6 +51,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\Nest.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -62,8 +64,69 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Parameters\HealthParams.cs" />
+    <Compile Include="Domain\Responses\HealthResponse.cs" />
+    <Compile Include="Domain\Responses\NodeInfoResponse.cs" />
+    <Compile Include="Domain\Responses\NodeStatsResponse.cs" />
+    <Compile Include="Domain\Stats\IndexHealthStats.cs" />
+    <Compile Include="Domain\Stats\NodeInfo.cs" />
+    <Compile Include="Domain\Stats\NodeStats.cs" />
+    <Compile Include="Domain\Stats\ShardHealthStats.cs" />
+    <Compile Include="DSL\Descriptors\MoreLikeThisDescriptor.cs" />
+    <Compile Include="ElasticClient-Health.cs" />
+    <Compile Include="ElasticClient-MoreLikeThis.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\BinaryMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GenericMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\DynamicTemplatesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\SingleMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GeoShapeMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GeoPointMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\IPMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\MultiFieldMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\NestedObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\ObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\CorePropertiesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\NumberMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\DateMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\PropertiesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\StringMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\DynamicTemplate.cs" />
+    <Compile Include="Domain\Mapping\Types\BinaryMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\BooleanMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\AttachmentMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\GeoShapeMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\GeoPointMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\IPMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\MultiFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\IElasticCoreType.cs" />
+    <Compile Include="Domain\Mapping\Types\DateMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\NumberMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\StringMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\NestedObjectMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\ObjectMapping.cs" />
+    <Compile Include="ElasticClient-MappingGet.cs" />
+    <Compile Include="ElasticClient-MappingDelete.cs" />
+    <Compile Include="Domain\Hit\MultiGetHit.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\AnalyzerFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\AllFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\BoostFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\TtlFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\TimestampFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\SizeFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\IndexFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\RoutingFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\TypeFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\SourceFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\RootObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Responses\MultiGetResponse.cs" />
+    <Compile Include="DSL\Descriptors\MultiGetDescriptor.cs" />
+    <Compile Include="ElasticClient-GetFull.cs" />
+    <Compile Include="Domain\Connection\InMemoryConnection.cs" />
     <Compile Include="Domain\FieldSelection.cs" />
     <Compile Include="Domain\Responses\BulkResponse.cs" />
+    <Compile Include="Domain\Responses\GetResponse.cs" />
     <Compile Include="Domain\Responses\DeleteResponse.cs" />
     <Compile Include="Domain\Responses\IndexResponse.cs" />
     <Compile Include="DSL\Descriptors\GetDescriptor.cs" />
@@ -71,6 +134,7 @@
     <Compile Include="ElasticClient-MultiGet.cs" />
     <Compile Include="Domain\Settings\NgramTokenFiler.cs" />
     <Compile Include="Domain\Settings\SynonymTokenFilter.cs" />
+    <Compile Include="ElasticClient-Nodes.cs" />
     <Compile Include="ElasticClient-Scroll.cs" />
     <Compile Include="Domain\Hit\ValidationExplanation.cs" />
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
@@ -113,7 +177,7 @@
     <Compile Include="DSL\Descriptors\Query\SpanQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\ISpanQuery.cs" />
     <Compile Include="DSL\Descriptors\Query\SpanTerm.cs" />
-    <Compile Include="DSL\Descriptors\Query\MoreLikeThisDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\Query\MoreLikeThisQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FuzzyLikeThisDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FuzzyDateQueryDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\FuzzyNumericQueryDescriptor.cs" />
@@ -135,6 +199,15 @@
     <Compile Include="DSL\Factory\Common\Point.cs" />
     <Compile Include="DSL\Factory\Common\EsRegex.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
+    <Compile Include="Enums\HealthLevel.cs" />
+    <Compile Include="Enums\HealthStatus.cs" />
+    <Compile Include="Enums\NodesInfo.cs" />
+    <Compile Include="Enums\NodeInfoStats.cs" />
+    <Compile Include="Enums\NumberType.cs" />
+    <Compile Include="Enums\GeoTree.cs" />
+    <Compile Include="Enums\NumericIndexOption.cs" />
+    <Compile Include="Enums\IndexOptions.cs" />
+    <Compile Include="Enums\OpType.cs" />
     <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Enums\Lang.cs" />
     <Compile Include="Enums\DateHistogramComparatorType.cs" />
@@ -270,7 +343,7 @@
     <Compile Include="DSL\Descriptors\Facets\TermFacetDescriptor.cs" />
     <Compile Include="ElasticClient-Statics.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingParent.cs" />
+    <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
@@ -313,15 +386,13 @@
     <Compile Include="Domain\Connection\ConnectionStatus.cs" />
     <Compile Include="Domain\Hit\AnalyzeToken.cs" />
     <Compile Include="Domain\Hit\MultiHit.cs" />
-    <Compile Include="Domain\Mapping\ElasticProperty.cs" />
-    <Compile Include="Domain\Mapping\ElasticPropertyAttribute.cs" />
-    <Compile Include="Domain\Mapping\ElasticType.cs" />
-    <Compile Include="Domain\Mapping\ElasticTypeAttribute.cs" />
-    <Compile Include="Domain\Mapping\IElasticProperty.cs" />
+    <Compile Include="Domain\Mapping\Attributes\ElasticPropertyAttribute.cs" />
+    <Compile Include="Domain\Mapping\Types\IElasticType.cs" />
+    <Compile Include="Domain\Mapping\Attributes\ElasticTypeAttribute.cs" />
     <Compile Include="Domain\Mapping\Map.cs" />
-    <Compile Include="Domain\Mapping\TypeMapping.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingProperty.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingSource.cs" />
+    <Compile Include="Domain\Mapping\Types\RootObjectMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\GenericMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\IdFieldMapping.cs" />
     <Compile Include="Domain\Parameters\AliasParams.cs" />
     <Compile Include="Domain\Parameters\AnalyzeParams.cs" />
     <Compile Include="Domain\Parameters\BaseParameters.cs" />
@@ -381,6 +452,10 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\DynamicTemplatesConverter.cs" />
+    <Compile Include="Resolvers\Converters\ElasticCoreTypeConverter.cs" />
+    <Compile Include="Resolvers\Converters\ElasticTypeConverter.cs" />
+    <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
@@ -406,6 +481,7 @@
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
     <Compile Include="Resolvers\Converters\TermConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
+    <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Resolvers\PathResolver.cs" />
     <Compile Include="Resolvers\IndexNameResolver.cs" />
     <Compile Include="Resolvers\IdResolver.cs" />
@@ -452,9 +528,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Inferno\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
