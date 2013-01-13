@@ -284,5 +284,11 @@ namespace Nest
 		IElasticSearchVersionInfo VersionInfo { get; }
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
 
+		IValidateResponse ValidateRaw(string query);
+
+		IValidateResponse Validate(Action<ValidateQueryPathDescriptor> querySelector);
+		
+		IValidateResponse Validate<T>(Action<ValidateQueryPathDescriptor<T>> querySelector) where T : class;
+
 	}
 }
