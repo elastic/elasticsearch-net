@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search.ScriptFields
 {
 	[TestFixture]
-	public class ScriptFieldsTest : CleanStateIntegrationTests
+	public class ScriptFieldsTest : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 

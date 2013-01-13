@@ -5,7 +5,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Integration
 {
 	[TestFixture]
-	public class HighlightIntegrationTests : CleanStateIntegrationTests
+	public class HighlightIntegrationTests : IntegrationTests
 	{
 		[Test]
 		public void TestHighlight()

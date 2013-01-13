@@ -10,7 +10,6 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestValidation()
 		{
-			this.ResetIndexes();
 			var response = this._client.Validate<ElasticSearchProject>(q=>q
 				.Term(f=>f.Country, "netherlands")
 			);
@@ -21,7 +20,6 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestValidationWithExplain()
 		{
-			this.ResetIndexes();
 			var response = this._client.Validate<ElasticSearchProject>(q => q
 				.Explain()
 				.UseSimpleQueryString("loc:asdasd")
@@ -32,7 +30,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.NotNull(response.Explanations);
 			Assert.True(response.Explanations.HasAny());
 			var explanation = response.Explanations.First();
-			Assert.AreEqual(explanation.Index, Settings.DefaultIndex);
+			Assert.AreEqual(explanation.Index, _settings.DefaultIndex);
 			Assert.False(explanation.Valid);
 			Assert.False(explanation.Error.IsNullOrEmpty());
 		}

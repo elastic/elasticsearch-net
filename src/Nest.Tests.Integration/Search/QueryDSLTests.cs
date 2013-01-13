@@ -5,7 +5,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Search
 {
 	[TestFixture]
-	public class QueryDSLTests : CleanStateIntegrationTests
+	public class QueryDSLTests : IntegrationTests
 	{
 		[Test]
 		public void MatchAll()
@@ -88,7 +88,7 @@ namespace Nest.Tests.Integration.Search
 				.SortAscending(f => f.LOC)
 				.SortDescending(f => f.Name)
 				.Query(q => q
-					.Prefix(f => f.Name, "el")
+					.Prefix(f => f.Name.Suffix("sort"), "el")
 				)
 			);
 			Assert.NotNull(results);

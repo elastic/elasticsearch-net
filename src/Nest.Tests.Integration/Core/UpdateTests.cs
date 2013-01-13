@@ -4,7 +4,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class UpdateIntegrationTests : CleanStateIntegrationTests
+	public class UpdateIntegrationTests : IntegrationTests
 	{
 		[Test]
 		public void TestUpdate()

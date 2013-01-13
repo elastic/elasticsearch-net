@@ -13,18 +13,17 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void TestSettings()
 		{
-			Assert.AreEqual(this.Settings.Host, Test.Default.Host);
-			Assert.AreEqual(this.Settings.Port, Test.Default.Port);
-			Assert.AreEqual(this.Settings.DefaultIndex, Test.Default.DefaultIndex);
-			Assert.AreEqual(this.Settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
+			Assert.AreEqual(this._settings.Host, Test.Default.Host);
+			Assert.AreEqual(this._settings.Port, Test.Default.Port);
+			Assert.AreEqual(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex);
+			Assert.AreEqual(this._settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
 		}
 		[Test]
 		public void TestConnectSuccess()
 		{
-			var client = this.CreateClient();
 			ConnectionStatus status;
-			client.TryConnect(out status);
-			Assert.True(client.IsValid);
+			_client.TryConnect(out status);
+			Assert.True(_client.IsValid);
 			Assert.True(status.Success);
 			Assert.Null(status.Error);
 		}

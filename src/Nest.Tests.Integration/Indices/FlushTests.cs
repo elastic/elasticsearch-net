@@ -15,14 +15,14 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void FlushIndex()
 		{
-			var r = this._client.Flush(Test.Default.DefaultIndex);
+			var r = this._client.Flush(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void FlushIndeces()
 		{
 			var r = this._client.Flush(
-				new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
+				new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" });
 			Assert.True(r.OK);
 		}
 		[Test]
@@ -40,14 +40,14 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void FlushIndexRefresh()
 		{
-			var r = this._client.Flush(Test.Default.DefaultIndex, true);
+			var r = this._client.Flush(ElasticsearchConfiguration.DefaultIndex, true);
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void FlushIndecesRefresh()
 		{
 			var r = this._client.Flush(
-				new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" }, true);
+				new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" }, true);
 			Assert.True(r.OK);
 		}
 		[Test]

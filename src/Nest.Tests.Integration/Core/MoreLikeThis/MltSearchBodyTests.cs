@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Nest.Tests.Integration.Core.MoreLikeThis
 {
 	[TestFixture]
-	public class MltSearchBodyTests : CleanStateIntegrationTests
+	public class MltSearchBodyTests : IntegrationTests
 	{
 		[Test]
 		public void SearchBodyEndsUpInPost()

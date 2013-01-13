@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search
 {
 	[TestFixture]
-	public class PercolateTests : CleanStateIntegrationTests
+	public class PercolateTests : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Search
 			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Name, "elasticsearch.pm"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
-			Assert.AreEqual(r.Type, this.Settings.DefaultIndex);
+			Assert.AreEqual(r.Type, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
 		}
@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Search
 			var r = c.RegisterPercolator<ElasticSearchProject>(name, q => q.Term(f => f.Name, "elasticsearch.pm"));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
-			Assert.AreEqual(r.Type, this.Settings.DefaultIndex);
+			Assert.AreEqual(r.Type, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
 
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.True(re.IsValid);
 			Assert.True(re.OK);
 			Assert.True(re.Found);
-			Assert.AreEqual(re.Type, this.Settings.DefaultIndex);
+			Assert.AreEqual(re.Type, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(re.Id, name);
 			Assert.Greater(re.Version, 0);
 			re = c.UnregisterPercolator<ElasticSearchProject>(name);

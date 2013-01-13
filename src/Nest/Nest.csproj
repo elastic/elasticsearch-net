@@ -64,6 +64,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\CreateIndexDescriptor.cs" />
+    <Compile Include="ElasticClient-CreateIndex.cs" />
     <Compile Include="Domain\Parameters\HealthParams.cs" />
     <Compile Include="Domain\Responses\HealthResponse.cs" />
     <Compile Include="Domain\Responses\NodeInfoResponse.cs" />

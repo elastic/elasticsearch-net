@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
-	public class GetTests : CleanStateIntegrationTests
+	public class GetTests : IntegrationTests
 	{
 		[Test]
 		public void SimpleGet()

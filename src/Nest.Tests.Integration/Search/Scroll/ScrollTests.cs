@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search.Scroll
 {
 	[TestFixture]
-	public class ScrollTests : CleanStateIntegrationTests
+	public class ScrollTests : IntegrationTests
 	{
 		[Test]
 		public void SearchTypeScan()
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 				results = this._client.Scroll("4s", results.ScrollId);
 				scrolls++;
 			}
-			Assert.AreEqual(5, scrolls);
+			Assert.AreEqual(19, scrolls);
 
 		}
 	}

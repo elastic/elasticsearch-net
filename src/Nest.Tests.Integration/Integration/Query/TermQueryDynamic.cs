@@ -5,7 +5,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Integration.Query
 {
 	[TestFixture]
-	public class TermQueryDynamic : CleanStateIntegrationTests
+	public class TermQueryDynamic : IntegrationTests
 	{
 		[Test]
 		public void TestTermQuery()
@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Integration.Query
 			                            .Query(q=>q.Term(f=>f.Name, ""))
 			                            );
 			var results = this._client.Search(s=>s
-				.Index("nest_test_data")
+				.Index(ElasticsearchConfiguration.DefaultIndex)
 				.Type("elasticsearchprojects")
 				.From(0)
 				.Size(10)

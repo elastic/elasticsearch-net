@@ -8,8 +8,15 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class DeleteTests : CleanStateIntegrationTests
+	public class DeleteTests : IntegrationTests
 	{
+		private void ResetIndexes()
+		{
+			IntegrationSetup.TearDown();
+			IntegrationSetup.Setup();
+		}
+
+
 		[Test]
 		public void ShouldThowOnNullId()
 		{
@@ -279,7 +286,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 			this._client.DeleteByQuery<ElasticSearchProject>(q => q
-					  .Indices(new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" })
+					  .Indices(new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" })
 					  .Term(f => f.Name, "elasticsearch.pm")
 				  );
 

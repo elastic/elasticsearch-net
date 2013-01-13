@@ -15,14 +15,14 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void RefreshIndex()
 		{
-			var r = this._client.Refresh(Test.Default.DefaultIndex);
+			var r = this._client.Refresh(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void RefreshIndeces()
 		{
 			var r = this._client.Refresh(
-				new []{Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
+				new []{ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" });
 			Assert.True(r.OK);
 		}
 		[Test]

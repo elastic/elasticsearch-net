@@ -917,5 +917,10 @@ namespace Nest
 			base.Add(k, v);
 			return this;
 		}
+		public new FluentDictionary<K, V> Remove(K k)
+		{
+			base.Remove(k);
+			return this;
+		}
 	}
 }
