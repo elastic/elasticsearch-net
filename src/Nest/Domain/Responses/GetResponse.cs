@@ -29,7 +29,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "_version")]
 		public string Version { get; private set; }
 
-		[JsonProperty(PropertyName = "_exists")]
+		[JsonProperty(PropertyName = "exists")]
 		public bool Exists { get; private set; }
 
 		[JsonProperty(PropertyName = "_source")]

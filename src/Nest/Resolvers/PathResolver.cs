@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -184,6 +185,9 @@ namespace Nest.Resolvers
 			if (!urlParameters.Parent.IsNullOrEmpty())
 				parameters.Add("parent=" + urlParameters.Parent);
 
+			if (urlParameters.OpType != OpType.None) // default not set
+				parameters.Add("op_type=" + urlParameters.OpType.ToString().ToLower());
+
 			if (urlParameters.Replication != Replication.Sync) //sync == default
 				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
 
@@ -314,7 +318,7 @@ namespace Nest.Resolvers
 				if (!options._LikeText.IsNullOrEmpty())
 					dict.Add("like_text", options._LikeText);
 				if (options._TermMatchPercentage != null)
-					dict.Add("percent_terms_to_match", options._TermMatchPercentage.ToString());
+					dict.Add("percent_terms_to_match", options._TermMatchPercentage.Value.ToString(CultureInfo.InvariantCulture));
 				if (options._MinTermFrequency != null)
 					dict.Add("min_term_freq", options._MinTermFrequency.ToString());
 				if (options._MaxQueryTerms != null)
@@ -328,9 +332,9 @@ namespace Nest.Resolvers
 				if (options._MaxWordLength != null)
 					dict.Add("max_word_len", options._MaxWordLength.ToString());
 				if (options._BoostTerms != null)
-					dict.Add("boost_terms", options._BoostTerms.ToString());
+					dict.Add("boost_terms", options._BoostTerms.Value.ToString(CultureInfo.InvariantCulture));
 				if (options._Boost != null)
-					dict.Add("boost", options._Boost.ToString());
+					dict.Add("boost", options._Boost.Value.ToString(CultureInfo.InvariantCulture));
 				if (!options._Analyzer.IsNullOrEmpty())
 					dict.Add("analyzer", options._Analyzer);
 			}

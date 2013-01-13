@@ -209,6 +209,7 @@
     <Compile Include="Enums\GeoTree.cs" />
     <Compile Include="Enums\NumericIndexOption.cs" />
     <Compile Include="Enums\IndexOptions.cs" />
+    <Compile Include="Enums\OpType.cs" />
     <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Enums\Lang.cs" />
     <Compile Include="Enums\DateHistogramComparatorType.cs" />
