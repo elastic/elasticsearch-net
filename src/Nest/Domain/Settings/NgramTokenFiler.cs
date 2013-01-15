@@ -2,9 +2,9 @@
 
 namespace Nest
 {
-    public class NgramTokenFiler : TokenFilterSettings
+    public class NgramTokenFilter : TokenFilterSettings
     {
-        public NgramTokenFiler()
+        public NgramTokenFilter()
             : base("nGram")
         {
             MinGram = 1;
