@@ -3,23 +3,21 @@
 namespace Nest
 {
     /// <summary>
-    /// EdgeNGram Filter settings
+	/// A token filter of type edgeNGram.
     /// </summary>
-    public class EdgeNGramTokenFilter : TokenFilterSettings
+    public class EdgeNGramTokenFilter : TokenFilterBase
     {
         public EdgeNGramTokenFilter()
             : base("edgeNGram")
         {
-            MinGram = 1;
-            MaxGram = 2;
-	        Side = "front";
+
         }
 
         [JsonProperty("min_gram")]
-        public int MinGram { get; set; }
+        public int? MinGram { get; set; }
 
         [JsonProperty("max_gram")]
-        public int MaxGram { get; set; }
+        public int? MaxGram { get; set; }
 
         [JsonProperty("side")]
         public string Side { get; set; }

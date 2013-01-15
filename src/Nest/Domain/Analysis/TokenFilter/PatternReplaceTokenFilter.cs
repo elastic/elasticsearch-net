@@ -2,9 +2,9 @@
 
 namespace Nest
 {
-    public class PatternReplaceTokenFilterSettings : TokenFilterSettings
+    public class PatternReplaceTokenFilter : TokenFilterBase
     {
-        public PatternReplaceTokenFilterSettings() : base("pattern_replace")
+        public PatternReplaceTokenFilter() : base("pattern_replace")
         {
         }
 

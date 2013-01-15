@@ -83,7 +83,7 @@ namespace Nest
 
 		internal Dictionary<string, object> Settings { get; set; }
 
-		public AnalysisSettings Analysis { get; private set; }
+		public AnalysisSettings Analysis { get; internal set; }
 
 		public IList<RootObjectMapping> Mappings { get; internal set; }
 

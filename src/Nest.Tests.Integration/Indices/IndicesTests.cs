@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Indices
 			var settings = new IndexSettings();
 			settings.NumberOfReplicas = 4;
 			settings.NumberOfShards = 8;
-			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
@@ -103,7 +103,7 @@ namespace Nest.Tests.Integration.Indices
 			settings.Mappings.Add(typeMapping);
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
-			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
 			var response = client.CreateIndex(indexName, settings);
@@ -142,6 +142,23 @@ namespace Nest.Tests.Integration.Indices
 				)
 				.AddMapping<Person>(m => m
 					.MapFromAttributes()
+				)
+				.Analysis(a=>a
+					.Analyzers(an=>an
+						.Add("standard", new StandardAnalyzer()
+						{
+							StopWords = new [] { "stop1", "stop2" }
+						})
+					)
+					.Tokenizers(t=>t
+						.Add("myTokenizer", new StandardTokenizer { MaximumTokenLength = 900 })
+					)
+					.TokenFilters(t => t
+						.Add("myTokenFilter1", new StopTokenFilter { Stopwords = new [] { "stop1", "stop2" } })
+					)
+					.CharFilters(t => t
+						.Add("htmlFilter", new HtmlStripCharFilter())
+					)
 				)
 			);
 
@@ -201,7 +218,7 @@ namespace Nest.Tests.Integration.Indices
 			settings.Mappings.Add(typeMapping);
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
-			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
 			var response = client.CreateIndex(indexName, settings);

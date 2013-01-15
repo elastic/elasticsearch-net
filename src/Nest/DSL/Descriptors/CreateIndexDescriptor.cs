@@ -59,18 +59,29 @@ namespace Nest
 			}
 			return this;
 		}
+
+		/// <summary>
+		/// Remove an existing mapping by name
+		/// </summary>
 		public CreateIndexDescriptor RemoveMapping(string typeName)
 		{
 			this._IndexSettings.Mappings = this._IndexSettings.Mappings.Where(m => m.Type != typeName).ToList();
 
 			return this;
 		}
+
+		/// <summary>
+		/// Remove an exisiting mapping by inferred type name
+		/// </summary>
 		public CreateIndexDescriptor RemoveMapping<T>() where T : class
 		{
 			var typeName = new TypeNameResolver().GetTypeNameFor<T>();
 			return this.RemoveMapping(typeName);
 		}
 
+		/// <summary>
+		/// Add a new mapping for T
+		/// </summary>
 		public CreateIndexDescriptor AddMapping<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
@@ -80,6 +91,11 @@ namespace Nest
 
 			return this;
 		}
+
+		/// <summary>
+		/// Add a new mapping using the first rootObjectMapping parameter as the base to construct the new mapping.
+		/// Handy if you wish to reuse a mapping.
+		/// </summary>
 		public CreateIndexDescriptor AddMapping<T>(RootObjectMapping rootObjectMapping, Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
@@ -89,6 +105,18 @@ namespace Nest
 
 			return this;
 		}
+		
+		/// <summary>
+		/// Set up analysis tokenizers, filters, analyzers
+		/// </summary>
+		public CreateIndexDescriptor Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
+		{
+			analysisSelector.ThrowIfNull("analysisSelector");
+			var analysis = analysisSelector(new AnalysisDescriptor(this._IndexSettings.Analysis));
+			this._IndexSettings.Analysis = analysis == null ? null : analysis._AnalysisSettings;
+			return this;
+		}
+
 
 	}
 }

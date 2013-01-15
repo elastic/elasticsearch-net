@@ -35,13 +35,23 @@ namespace Nest.Resolvers.Converters
             writer.WriteStartObject();
 
             writer.WritePropertyName("analyzer");
-            serializer.Serialize(writer, indexSettings.Analysis.Analyzer);
+            serializer.Serialize(writer, indexSettings.Analysis.Analyzers);
 
             if (indexSettings.Analysis.TokenFilters.Count > 0)
             {
                 writer.WritePropertyName("filter");
                 serializer.Serialize(writer, indexSettings.Analysis.TokenFilters);
             }
+			if (indexSettings.Analysis.Tokenizers.Count > 0)
+			{
+				writer.WritePropertyName("tokenizer");
+				serializer.Serialize(writer, indexSettings.Analysis.Tokenizers);
+			}
+			if (indexSettings.Analysis.CharFilters.Count > 0)
+			{
+				writer.WritePropertyName("char_filter");
+				serializer.Serialize(writer, indexSettings.Analysis.CharFilters);
+			}
 
             writer.WriteEndObject();
 
