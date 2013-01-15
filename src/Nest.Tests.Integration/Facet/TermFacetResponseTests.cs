@@ -82,7 +82,6 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleTermFacetWithGlobal()
 		{
-            this.ResetIndexes();
 			IQueryResponse<ElasticSearchProject> queryResults = this._client.SearchRaw<ElasticSearchProject>(
 				@" { ""query"" : {
 							""term"" : { ""followers.lastName"" : """ + this._LookFor.ToLower() +
@@ -106,7 +105,6 @@ namespace Nest.Tests.Integration.Facet
     [Test]
     public void TestWithDSL()
     {
-      this.ResetIndexes();
       var results = this._client.Search<ElasticSearchProject>(s => s
         .FacetTerm(t=>t
           .Order(TermsOrder.count)

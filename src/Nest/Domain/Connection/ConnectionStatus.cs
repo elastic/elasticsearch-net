@@ -45,7 +45,7 @@ namespace Nest
       var printFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
       var print = printFormat.F( 
         Environment.NewLine,
-        e.HttpStatusCode, 
+        e != null ? e.HttpStatusCode : HttpStatusCode.OK, 
         r.RequestMethod, 
         r.RequestUrl,
         r.Request,

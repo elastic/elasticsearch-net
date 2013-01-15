@@ -23,7 +23,7 @@ namespace Nest.Resolvers.Converters
 		{
 			JToken typeToken;
 			serializer.TypeNameHandling = TypeNameHandling.None;
-			if (po.TryGetValue("_type", out typeToken))
+			if (po.TryGetValue("type", out typeToken))
 			{
 				var type = typeToken.Value<string>().ToLowerInvariant();
 				switch (type)
@@ -58,7 +58,7 @@ namespace Nest.Resolvers.Converters
 			foreach (var p in o.Properties())
 			{
 				var name = p.Name;
-				var po = o.First as JObject;
+				var po = p.First as JObject;
 				if (po == null)
 					continue;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -11,11 +12,8 @@ namespace Nest.Tests.Integration.Indices
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class IndicesTest : BaseElasticSearchTests
+	public class IndicesTest : IntegrationTests 
 	{
-		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
-
-
 		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
@@ -27,17 +25,17 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(queryResponse.Shards.Total > 0);
 			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
 			Assert.True(queryResponse.Shards.Failed == 0);
-				
+
 		}
-		
+
 		[Test]
 		public void GetIndexSettingsSimple()
 		{
 			var r = this._client.GetIndexSettings();
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
-			Assert.Greater(r.Settings.NumberOfReplicas, 0);
-			Assert.Greater(r.Settings.NumberOfShards, 1);
+			Assert.GreaterOrEqual(r.Settings.NumberOfReplicas, 0);
+			Assert.GreaterOrEqual(r.Settings.NumberOfShards, 1);
 		}
 
 		[Test]
@@ -48,11 +46,11 @@ namespace Nest.Tests.Integration.Indices
 			settings.NumberOfReplicas = 4;
 			settings.NumberOfShards = 8;
 			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
 
-			settings.Add("merge.policy.merge_factor","10");
+			settings.Add("merge.policy.merge_factor", "10");
 
 			var createResponse = this._client.CreateIndex(index, settings);
 
@@ -82,7 +80,7 @@ namespace Nest.Tests.Integration.Indices
 			settings["search.slowlog.threshold.fetch.warn"] = "5s";
 
 			var r = this._client.UpdateSettings(index, settings);
-			
+
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			var getResponse = this._client.GetIndexSettings(index);
@@ -99,7 +97,7 @@ namespace Nest.Tests.Integration.Indices
 		public void CreateIndex()
 		{
 			var client = this._client;
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
 			settings.Mappings.Add(typeMapping);
@@ -123,6 +121,38 @@ namespace Nest.Tests.Integration.Indices
 		}
 
 		[Test]
+		public void CreateIndexUsingDescriptor()
+		{
+			var index = ElasticsearchConfiguration.DefaultIndex + "_clone";
+			if (this._client.IndexExists(index).Exists)
+				_client.DeleteIndex(index);
+
+			var result = this._client.CreateIndex(index, c => c
+				.NumberOfReplicas(1)
+				.NumberOfShards(1)
+				.Settings(s => s
+					.Add("compound_format", true)
+					.Add("term_index_interval", 128)
+					.Add("search.slowlog.threshold.query.warn", "2s")
+				)
+				.AddMapping<ElasticSearchProject>(m => m
+					.MapFromAttributes()
+					.NumericDetection()
+					.DateDetection()
+				)
+				.AddMapping<Person>(m => m
+					.MapFromAttributes()
+				)
+			);
+
+			result.Should().NotBeNull();
+			result.IsValid.Should().BeTrue();
+			result.ConnectionStatus.Should().NotBeNull();
+			throw new Exception(result.ConnectionStatus.ToString());
+		}
+
+
+		[Test]
 		public void PutMapping()
 		{
 			var fieldName = Guid.NewGuid().ToString();
@@ -135,8 +165,8 @@ namespace Nest.Tests.Integration.Indices
 
 			var response = this._client.Map(mapping);
 
-			Assert.IsTrue(response.IsValid);
-			Assert.IsTrue(response.OK);
+			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
+			Assert.IsTrue(response.OK, response.ConnectionStatus.ToString());
 
 			mapping = this._client.GetMapping<ElasticSearchProject>();
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
@@ -164,7 +194,7 @@ namespace Nest.Tests.Integration.Indices
 
 			property.Fields.Add("name", primaryField);
 			property.Fields.Add("name_analyzed", analyzedField);
-
+			typeMapping.Properties = typeMapping.Properties ?? new Dictionary<string, IElasticType>();
 			typeMapping.Properties.Add("name", property);
 
 			var settings = new IndexSettings();

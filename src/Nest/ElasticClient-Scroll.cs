@@ -11,6 +11,11 @@ namespace Nest
 		/// </summary>
 		public IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId)
 		{
+			return Scroll<dynamic>(scrollTime, scrollId);
+		}
+
+		public IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class
+		{
 			scrollId.ThrowIfNullOrEmpty("scrollId");
 			scrollTime.ThrowIfNullOrEmpty("scrollTime");
 
@@ -20,7 +25,7 @@ namespace Nest
 			var path = "_search/scroll?scroll={0}&scroll_id={1}".F(scrollTime, scrollId);
 
 			ConnectionStatus status = this.Connection.GetSync(path);
-			var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
+			var r = this.ToParsedResponse<QueryResponse<T>>(status);
 			return r;
 		}
 	}

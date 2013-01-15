@@ -15,7 +15,7 @@ using FluentAssertions;
 namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
-	public class GetMultiTests : BaseElasticSearchTests
+	public class GetMultiTests : IntegrationTests
 	{
 		[Test]
 		public void GetMultiSimple()
@@ -67,7 +67,7 @@ namespace Nest.Tests.Integration.Core.Get
 		{
 			var result = this._client.MultiGetFull(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
-				.Get<Person>(g => g.Id(100).Type("people").Index("nest_test_data").Fields(p => p.Id, p => p.FirstName))
+				.Get<Person>(g => g.Id(100).Type("people").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
 			);
 
 			var objects = result.Documents;
@@ -95,7 +95,12 @@ namespace Nest.Tests.Integration.Core.Get
 		{
 			var result = this._client.MultiGetFull(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p => p.Id, p => p.Followers.First().FirstName))
-				.Get<Person>(g => g.Id(100).Type("people").Index("nest_test_data").Fields(p => p.Id, p => p.FirstName))
+				.Get<Person>(g => g
+					.Id(100)
+					.Type("people")
+					.Index(ElasticsearchConfiguration.DefaultIndex)
+					.Fields(p => p.Id, p => p.FirstName)
+				)
 			);
 
 			var personHit = result.GetWithMetaData<Person>(100);

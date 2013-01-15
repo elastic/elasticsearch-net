@@ -5,20 +5,21 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Mapping
 {
 	[TestFixture]
-	public class NotAnalyzedTests : BaseElasticSearchTests
+	public class NotAnalyzedTests : IntegrationTests
 	{
 		[Test]
 		public void NotAnalyzedReturnsOneItem()
 		{
 			this._client.DeleteMapping<ElasticSearchProject>();
-			this._client.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");
+			this._client.DeleteMapping<ElasticSearchProject>(ElasticsearchConfiguration.DefaultIndex + "_clone");
+			this._client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, new IndexSettings());
 			var x = this._client.MapFromAttributes<ElasticSearchProject>();
-			Assert.IsTrue(x.OK);
+			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
-			Assert.AreEqual("not_analyzed", mapping.Index);
+			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
 			
 			var indexResult = this._client.Index(new ElasticSearchProject
 			{
@@ -42,7 +43,7 @@ namespace Nest.Tests.Integration.Mapping
 			var x = this._client.MapFromAttributes<ElasticSearchProject>();
 			Assert.IsTrue(x.OK);
 
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			this._client.DeleteMapping<ElasticSearchProject>();
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);

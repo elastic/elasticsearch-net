@@ -42,22 +42,9 @@ namespace Nest
 		public IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class
 		{
 			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
-			string map = this.CreateMapFor<T>(type, maxRecursion);
-
-			ConnectionStatus status = this.Connection.PutSync(path, map);
-
-			var response = new IndicesResponse();
-			try
-			{
-				response = this.Deserialize<IndicesResponse>(status.Result);
-				response.IsValid = true;
-			}
-			catch
-			{
-			}
-
-			response.ConnectionStatus = status;
-			return response;
+			var typeMapping = this.CreateMapFor<T>(type, maxRecursion);
+			typeMapping.Name = type;
+			return this.Map(typeMapping, index, type, ignoreConflicts: false);
 		}
 
 		/// <summary>
@@ -94,9 +81,9 @@ namespace Nest
 		public IIndicesResponse MapFromAttributes(Type t, string index, string type, int maxRecursion = 0)
 		{
 			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
-			string typeMappingJson = this.CreateMapFor(t, type, maxRecursion);
-			var typeMapping = this.Deserialize<RootObjectMapping>(typeMappingJson);
-			return this.Map(typeMapping, index);
+			var typeMapping = this.CreateMapFor(t, type, maxRecursion);
+			typeMapping.Name = type;
+			return this.Map(typeMapping, index, type, ignoreConflicts: false);
 		}
 
 		public IIndicesResponse MapFluent(Func<RootObjectMappingDescriptor<dynamic>, RootObjectMappingDescriptor<dynamic>> typeMappingDescriptor)
@@ -132,30 +119,36 @@ namespace Nest
 			if (typeName.IsNullOrEmpty())
 				typeName = typeMapping.Name;
 
-			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_mapping");
-			if (ignoreConflicts)
-				path += "?ignore_conflicts=true";
-
 			var mapping = new Dictionary<string, RootObjectMapping>();
 			mapping.Add(typeMapping.Name, typeMapping);
 
 			string map = JsonConvert.SerializeObject(mapping, Formatting.None, SerializationSettings);
 
+            return MapRaw(typeName, map, index, ignoreConflicts);
+        }
+        /// <summary>
+        /// Explicitly map an object using direct json input, the json should be of the form { "type" = {mapping} }.
+        /// </summary>
+        public IIndicesResponse MapRaw(string typeName, string map, string index, bool ignoreConflicts = false)
+        {
+            string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_mapping");
+			if (ignoreConflicts)
+				path += "?ignore_conflicts=true";
 			ConnectionStatus status = this.Connection.PutSync(path, map);
 
 			var r = this.ToParsedResponse<IndicesResponse>(status);
 			return r;
 		}
 
-		private string CreateMapFor<T>(string type, int maxRecursion = 0) where T : class
+		private RootObjectMapping CreateMapFor<T>(string type, int maxRecursion = 0) where T : class
 		{
 			return this.CreateMapFor(typeof(T), type, maxRecursion);
 		}
-		private string CreateMapFor(Type t, string type, int maxRecursion = 0)
+		private RootObjectMapping CreateMapFor(Type t, string type, int maxRecursion = 0)
 		{
 			var writer = new TypeMappingWriter(t, type, maxRecursion);
-
-			return writer.MapFromAttributes();
+			var typeMapping = writer.RootObjectMappingFromAttributes();
+			return typeMapping;
 		}
 	}
 }

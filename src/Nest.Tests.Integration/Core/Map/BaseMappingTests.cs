@@ -6,10 +6,10 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Integration.Core.Map
 {
 	[TestFixture]
-	public class BaseMappingTests : BaseElasticSearchTests
+	public class BaseMappingTests : IntegrationTests
 	{
 		[TestFixtureSetUp]
-		public override void Initialize()
+		public void Initialize()
 		{
 			this._client.DeleteMapping<ElasticSearchProject>();
 		}

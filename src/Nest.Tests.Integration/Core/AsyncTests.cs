@@ -6,7 +6,7 @@ using System.Net;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class AsyncTests : BaseElasticSearchTests
+	public class AsyncTests : IntegrationTests
 	{
 
 		[Test]
@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Core
 		{
 			var timeout = 1;
 			var s = new ConnectionSettings(Test.Default.Host, Test.Default.Port, timeout)
-						.SetDefaultIndex(Test.Default.DefaultIndex)
+						.SetDefaultIndex(ElasticsearchConfiguration.DefaultIndex)
 						.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 						.UsePrettyResponses();
 

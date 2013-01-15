@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Index
 {
   [TestFixture]
-  public class GetIdFromElasticSearchTests : BaseElasticSearchTests
+  public class GetIdFromElasticSearchTests : IntegrationTests
   {
 
     public class LogClass

@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class SnapshotTests : BaseElasticSearchTests
+	public class SnapshotTests : IntegrationTests
 	{
 		[Test]
 		public void SnapshotAll()
@@ -15,14 +15,14 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SnapshotIndex()
 		{
-			var r = this._client.Snapshot(Test.Default.DefaultIndex);
+			var r = this._client.Snapshot(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void SnapshotIndeces()
 		{
 			var r = this._client.Snapshot(
-				new []{Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
+				new []{ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" });
 			Assert.True(r.OK);
 		}
 		[Test]

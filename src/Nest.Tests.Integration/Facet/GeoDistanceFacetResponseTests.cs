@@ -10,9 +10,6 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleGeoFacet()
 		{
-			this.DeleteIndices();
-			this._client.MapFromAttributes<ElasticSearchProject>();
-			this.BulkIndexData();
 			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 

@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Search
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class QueryResponseMapperTests : BaseElasticSearchTests
+	public class QueryResponseMapperTests : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
@@ -77,12 +77,12 @@ namespace Nest.Tests.Integration.Search
 		{
 			var queryResults = this._client.Search<ElasticSearchProject>(s => s
 				.QueryString("*")
-				.SortAscending(p => p.Name.Suffix("sort"))
+				.SortAscending(p => p.Name)
 				.SortDescending(p => p.Id)
 			);
 
 			var hits = queryResults.Hits;
-
+			Assert.NotNull(hits, queryResults.ConnectionStatus.ToString());
 			Assert.True(hits.Hits.All(h => h.Sorts.Count() == 2));
 		}
 

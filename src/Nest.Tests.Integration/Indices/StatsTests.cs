@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class StatsTest : BaseElasticSearchTests
+	public class StatsTest : IntegrationTests
 	{
 		[Test]
 		public void SimpleStats()
@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SimpleIndexStats()
 		{
-			var r = this._client.Stats(this.Settings.DefaultIndex);
+			var r = this._client.Stats(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);

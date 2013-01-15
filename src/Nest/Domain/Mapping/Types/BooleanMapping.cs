@@ -12,7 +12,7 @@ namespace Nest
 		public string Name { get; set; }
 
 		[JsonProperty("type")]
-		public virtual string Type { get { return "date"; } }
+		public virtual string Type { get { return "boolean"; } }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.

@@ -8,10 +8,15 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class DeleteTests : BaseElasticSearchTests
+	public class DeleteTests : IntegrationTests
 	{
-		
-		
+		private void ResetIndexes()
+		{
+			IntegrationSetup.TearDown();
+			IntegrationSetup.Setup();
+		}
+
+
 		[Test]
 		public void ShouldThowOnNullId()
 		{
@@ -167,20 +172,20 @@ namespace Nest.Tests.Integration.Core
 		public void RemoveAllByPassingAsIEnumerable()
 		{
 			this.ResetIndexes();
-			var result = this._client.Search<ElasticSearchProject>(q=>q.From(0).Take(5).MatchAll());
-      Assert.IsNotEmpty(result.Documents);
-			
-      var totalSet = result.Documents.Count();
-      var totalResults = result.Total;
+			var result = this._client.Search<ElasticSearchProject>(q => q.From(0).Take(5).MatchAll());
+			Assert.IsNotEmpty(result.Documents);
+
+			var totalSet = result.Documents.Count();
+			var totalResults = result.Total;
 			Assert.Greater(totalSet, 0);
 
 			var deleteResult = this._client.Delete(result.Documents, new SimpleBulkParameters() { Refresh = true });
-      Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
+			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
-      Assert.IsNotEmpty(deleteResult.Items);
-      Assert.True(deleteResult.Items.All(i=>i.OK));
+			Assert.IsNotEmpty(deleteResult.Items);
+			Assert.True(deleteResult.Items.All(i => i.OK));
 
-      result = this._client.Search<ElasticSearchProject>(q => q.MatchAll());
+			result = this._client.Search<ElasticSearchProject>(q => q.MatchAll());
 			Assert.IsNotEmpty(result.Documents);
 			Assert.AreEqual(result.Total, totalResults - totalSet);
 
@@ -198,11 +203,11 @@ namespace Nest.Tests.Integration.Core
 
 			var parameterizedDocuments = result.Documents.Select(d => new BulkParameters<ElasticSearchProject>(d) { VersionType = VersionType.Internal });
 
-      var deleteResult = this._client.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
-      Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
+			var deleteResult = this._client.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
+			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
-      Assert.IsNotEmpty(deleteResult.Items);
-      Assert.True(deleteResult.Items.All(i => i.OK));
+			Assert.IsNotEmpty(deleteResult.Items);
+			Assert.True(deleteResult.Items.All(i => i.OK));
 
 			result = this._client.Search<ElasticSearchProject>(q => q.MatchAll());
 			Assert.IsNotNull(result);
@@ -281,7 +286,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 			this._client.DeleteByQuery<ElasticSearchProject>(q => q
-					  .Indices(new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" })
+					  .Indices(new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" })
 					  .Term(f => f.Name, "elasticsearch.pm")
 				  );
 

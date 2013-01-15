@@ -54,9 +54,12 @@
         </aside>
         <article>
           <div id="content-margin-fix"><h1>Nodes info</h1>
-<p>Nodes info has not yet been mapped
+<pre><code><span class="keyword">var</span> r = <span class="keyword">this</span>._client.NodeInfo(NodesInfo.All);
+<span class="keyword">var</span> node = r.Nodes.Values.First();</code></pre>
+<p>You can then traverse all the stats i.e:
 
 </p>
+<pre><code>node.OS.CPU.Idle</code></pre>
 
           </div>
         </article>

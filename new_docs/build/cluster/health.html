@@ -54,9 +54,25 @@
         </aside>
         <article>
           <div id="content-margin-fix"><h1>Health</h1>
-<p>cluster health has not yet been mapped
+<p>Get cluster health simple
 
 </p>
+<pre><code><span class="keyword">var</span> r = <span class="keyword">this</span>._client.Health(HealthLevel.Cluster);</code></pre>
+<p>Cluster health just for one (or more) index
+
+</p>
+<pre><code><span class="keyword">var</span> r = <span class="keyword">this</span>._client.Health(<span class="keyword">new</span>[] { Test.<span class="keyword">Default</span>.DefaultIndex }, HealthLevel.Cluster);</code></pre>
+<p>Advanced options are mapped as well
+
+</p>
+<pre><code><span class="keyword">var</span> r = <span class="keyword">this</span>._client.Health(<span class="keyword">new</span> HealthParams
+{
+    CheckLevel = HealthLevel.Shards,
+    Timeout = <span class="string">"30s"</span>,
+    WaitForMinNodes = <span class="number">1</span>,
+    WaitForRelocatingShards = <span class="number">0</span>,
+    WaitForStatus = HealthStatus.Green
+});</code></pre>
 
           </div>
         </article>

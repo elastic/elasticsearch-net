@@ -54,9 +54,14 @@
         </aside>
         <article>
           <div id="content-margin-fix"><h1>Nodes stats</h1>
-<p>Nodes stats has not yet been mapped
+<p>var r = this._client.NodeInfo(NodesInfo.All);
 
 </p>
+<pre><code>        <span class="keyword">var</span> node = r.Nodes.First();</code></pre>
+<p>you can than traverse the node info objects i.e:
+
+</p>
+<pre><code>        node.Value.OS.Cpu.CacheSizeInBytes;</code></pre>
 
           </div>
         </article>

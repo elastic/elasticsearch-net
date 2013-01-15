@@ -4,16 +4,16 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class OpenCloseTests : BaseElasticSearchTests
+	public class OpenCloseTests : IntegrationTests
 	{
 		[Test]
 		public void CloseAndOpenIndex()
 		{
-			var r = this._client.CloseIndex(Test.Default.DefaultIndex);
+			var r = this._client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			r = this._client.OpenIndex(Test.Default.DefaultIndex);
+			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CloseAndSearchAndOpenIndex()
 		{
-			var r = this._client.CloseIndex(Test.Default.DefaultIndex);
+			var r = this._client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(results.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.Forbidden, results.ConnectionStatus.Error.HttpStatusCode.ToString());
 			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("ClusterBlockException"));
 			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("index closed"));
-			r = this._client.OpenIndex(Test.Default.DefaultIndex);
+			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);

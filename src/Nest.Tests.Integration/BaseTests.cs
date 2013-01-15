@@ -10,30 +10,52 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration
 {
 	[TestFixture]
-	public class BaseElasticSearchTests
+	public class BaseTests
 	{
+		//static initializer to really run initialization once
+		static BaseTests()
+		{
+			var client = CreateClient();
+			var cloneIndex = Test.Default.DefaultIndex + "_clone";
+			if (client.IsValid)
+			{
+				var projects = NestTestData.Data;
+				var people = NestTestData.People;
+
+				client.DeleteMapping<ElasticSearchProject>();
+				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
+				client.OpenIndex<ElasticSearchProject>();
+				client.OpenIndex(cloneIndex);
+
+				ResetType<ElasticSearchProject>(client, projects);
+				ResetType<Person>(client, people);
+			}
+		}
+
+
 		[TestFixtureSetUp]
 		public virtual void Initialize()
 		{
-			this.ResetIndexes();
+			
 		}
 
-		private IConnectionSettings _settings;
-		protected IConnectionSettings Settings
+		private static IConnectionSettings _settings;
+		protected static IConnectionSettings Settings
 		{
 			get
 			{
-				if (this._settings != null)
-					return this._settings;
+				if (_settings != null)
+					return _settings;
 
-				this._settings = new ConnectionSettings(Test.Default.Host, Test.Default.Port)
+				_settings = new ConnectionSettings(Test.Default.Host, Test.Default.Port)
 								.SetDefaultIndex(Test.Default.DefaultIndex)
 								.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 								.UsePrettyResponses();
 
-				return this._settings;
+				return _settings;
 			}
 		}
+		
 		private ElasticClient _connectedClient;
 		protected ElasticClient _client
 		{
@@ -42,7 +64,7 @@ namespace Nest.Tests.Integration
 				if (this._connectedClient != null)
 					return this._connectedClient;
 
-				var client = new ElasticClient(this.Settings);
+				var client = new ElasticClient(Settings);
 				if (client.IsValid)
 				{ 
 					this._connectedClient = client;
@@ -51,38 +73,27 @@ namespace Nest.Tests.Integration
 				return null;
 			}
 		}
-		protected ElasticClient CreateClient()
+		
+		protected static ElasticClient CreateClient()
 		{
-			return new ElasticClient(this.Settings);
+			return new ElasticClient(Settings);
 		}
+
 		protected virtual void ResetIndexes()
 		{
-			var cloneIndex = Test.Default.DefaultIndex + "_clone";
-			if (_client.IsValid)
-			{
-				var projects = NestTestData.Data;
-				var people = NestTestData.People;
-
-				_client.DeleteMapping<ElasticSearchProject>();
-				_client.DeleteMapping<ElasticSearchProject>(cloneIndex);
-				_client.OpenIndex<ElasticSearchProject>();
-				this._client.OpenIndex(cloneIndex);
-
-				this.ResetType<ElasticSearchProject>(_client, projects);
-				this.ResetType<Person>(_client, people);
-
-				
-			}
+			
 		}
-		private void ResetType<T>(IElasticClient client, IEnumerable<T> objects) where T : class {
+
+		private static void ResetType<T>(IElasticClient client, IEnumerable<T> objects) where T : class
+		{
 			var cloneIndex = Test.Default.DefaultIndex + "_clone";
 			var bulkParameters = new SimpleBulkParameters() { Refresh = true };
 
-			_client.MapFromAttributes<T>();
-			_client.MapFromAttributes<T>(cloneIndex);
+			client.MapFromAttributes<T>();
+			client.MapFromAttributes<T>(cloneIndex);
 
-			_client.IndexMany(objects, bulkParameters);
-			_client.IndexMany(objects, cloneIndex, bulkParameters);
+			client.IndexMany(objects, bulkParameters);
+			client.IndexMany(objects, cloneIndex, bulkParameters);
 		}
 
 		protected void DeleteIndices()
@@ -95,6 +106,7 @@ namespace Nest.Tests.Integration
 				client.DeleteMapping<ElasticSearchProject>(cloneIndex);
 			}
 		}
+	
 		protected void BulkIndexData()
 		{
 			var client = CreateClient();

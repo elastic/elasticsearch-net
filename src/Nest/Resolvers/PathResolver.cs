@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -45,6 +46,32 @@ namespace Nest.Resolvers
 				return this.CreateIndexTypePath(index, type);
 
 			return this.CreateIndexTypeIdPath(index, type, id);
+		}
+		
+		public string CreateClusterPath(string suffix = null)
+		{
+			suffix.ThrowIfNullOrEmpty("suffix");
+			return "_cluster/{0}/".F(suffix);
+		}
+
+		public string CreateClusterPath(IEnumerable<string> indices, string suffix = null)
+		{
+			indices.ThrowIfEmpty("indices");
+			suffix.ThrowIfNullOrEmpty("suffix");
+			var index = string.Join(",", indices);
+			return "_cluster/{0}/{1}".F(suffix, index);
+		}
+
+		public string CreateNodePath(string suffix = null)
+		{
+			return suffix.IsNullOrEmpty() ? "_nodes" : "_nodes/{0}/".F(suffix);
+		}
+
+		public string CreateNodePath(IEnumerable<string> nodes, string suffix = null)
+		{
+			nodes.ThrowIfEmpty("indices");
+			var nodeStr = string.Join(",", nodes);
+			return suffix.IsNullOrEmpty() ? "_nodes/{0}".F(nodeStr) : "_nodes/{0}/{1}".F(nodeStr, suffix);
 		}
 
 		//19
@@ -157,6 +184,9 @@ namespace Nest.Resolvers
 				parameters.Add("routing=" + urlParameters.Routing);
 			if (!urlParameters.Parent.IsNullOrEmpty())
 				parameters.Add("parent=" + urlParameters.Parent);
+
+			if (urlParameters.OpType != OpType.None) // default not set
+				parameters.Add("op_type=" + urlParameters.OpType.ToString().ToLower());
 
 			if (urlParameters.Replication != Replication.Sync) //sync == default
 				parameters.Add("replication=" + urlParameters.Replication.ToString().ToLower());
@@ -288,7 +318,7 @@ namespace Nest.Resolvers
 				if (!options._LikeText.IsNullOrEmpty())
 					dict.Add("like_text", options._LikeText);
 				if (options._TermMatchPercentage != null)
-					dict.Add("percent_terms_to_match", options._TermMatchPercentage.ToString());
+					dict.Add("percent_terms_to_match", options._TermMatchPercentage.Value.ToString(CultureInfo.InvariantCulture));
 				if (options._MinTermFrequency != null)
 					dict.Add("min_term_freq", options._MinTermFrequency.ToString());
 				if (options._MaxQueryTerms != null)
@@ -302,9 +332,9 @@ namespace Nest.Resolvers
 				if (options._MaxWordLength != null)
 					dict.Add("max_word_len", options._MaxWordLength.ToString());
 				if (options._BoostTerms != null)
-					dict.Add("boost_terms", options._BoostTerms.ToString());
+					dict.Add("boost_terms", options._BoostTerms.Value.ToString(CultureInfo.InvariantCulture));
 				if (options._Boost != null)
-					dict.Add("boost", options._Boost.ToString());
+					dict.Add("boost", options._Boost.Value.ToString(CultureInfo.InvariantCulture));
 				if (!options._Analyzer.IsNullOrEmpty())
 					dict.Add("analyzer", options._Analyzer);
 			}
