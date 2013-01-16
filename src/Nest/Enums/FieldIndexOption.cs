@@ -1,4 +1,4 @@
-﻿namespace Nest.Enums
+﻿namespace Nest
 {
 	public enum FieldIndexOption
 	{
