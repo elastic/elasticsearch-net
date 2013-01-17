@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -19,7 +20,7 @@ namespace Nest
 		[JsonProperty("path_unmatch")]
 		public string PathUnmatch { get; internal set; }
 
-		[JsonProperty("mapping")]
+		[JsonProperty("mapping"), JsonConverter(typeof(ElasticTypeConverter))]
 		public IElasticType Mapping { get; internal set; }
 
     }

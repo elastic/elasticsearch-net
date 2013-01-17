@@ -53,6 +53,10 @@
   <ItemGroup>
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Help\AliasTests.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTest.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />

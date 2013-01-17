@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace Nest.Tests.Integration
 {
@@ -14,6 +15,11 @@ namespace Nest.Tests.Integration
 
 
 		public static readonly ElasticClient Client = new ElasticClient(Settings);
+
+		public static string NewUniqueIndexName()
+		{
+			return DefaultIndex + "_" + Guid.NewGuid().ToString();
+		}
 
 	}
 }

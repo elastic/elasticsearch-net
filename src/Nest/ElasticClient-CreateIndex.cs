@@ -13,7 +13,7 @@ namespace Nest
 		/// <summary>
 		/// Create an index with the specified index settings
 		/// </summary>
-		public IIndicesResponse CreateIndex(string index, IndexSettings settings)
+		public IIndicesOperationResponse CreateIndex(string index, IndexSettings settings)
 		{
 			string data = JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
 			return CreateIndexRaw(index, data);
@@ -21,7 +21,7 @@ namespace Nest
 		/// <summary>
 		/// Create an index with the specified index settings
 		/// </summary>
-		public IIndicesResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
+		public IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
 		{
 			index.ThrowIfEmpty("index");
 			createIndexSelector.ThrowIfNull("createIndexSelector");
@@ -32,11 +32,11 @@ namespace Nest
 		}
 
 
-		public IIndicesResponse CreateIndexRaw(string index, string settings)
+		public IIndicesOperationResponse CreateIndexRaw(string index, string settings)
 		{
 			string path = this.PathResolver.CreateIndexPath(index);
 			var status = this.Connection.PostSync(path, settings);
-			return this.ToParsedResponse<IndicesResponse>(status);
+			return this.ToParsedResponse<IndicesOperationResponse>(status);
 		}
 	}
 }

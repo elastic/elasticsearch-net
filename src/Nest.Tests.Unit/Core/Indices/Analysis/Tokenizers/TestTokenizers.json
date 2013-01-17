@@ -1,9 +1,15 @@
   {
-  "elasticsearchprojects": {
-    "_id": {
-      "path": "myOtherId",
-      "index": "not_analyzed",
-      "store": "no"
+  "settings": {
+    "index": {
+      "analysis": {
+        "tokenizer": {
+          "standard": {
+            "max_token_length": 90,
+            "version": "3.0",
+            "type": "standard"
+          }
+        }
+      }
     }
   }
 }

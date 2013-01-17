@@ -20,6 +20,9 @@ namespace Nest
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
+		[JsonProperty("analyzer")]
+		public string Analyzer { get; set; }
+
 		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; set; }
 

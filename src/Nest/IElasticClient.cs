@@ -35,10 +35,11 @@ namespace Nest
 		ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse CountAllRaw(string query);
 		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-		IIndicesResponse CreateIndex(string index, IndexSettings settings);
-		IIndicesResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		
+		IIndicesOperationResponse CreateIndex(string index, IndexSettings settings);
+		IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		IIndicesOperationResponse CreateIndexRaw(string index, string settings);
 
-		IIndicesResponse CreateIndexRaw(string index, string settings);
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, string index) where T : class;

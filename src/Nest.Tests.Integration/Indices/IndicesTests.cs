@@ -113,10 +113,10 @@ namespace Nest.Tests.Integration.Indices
 
 			Assert.IsNotNull(this._client.GetMapping(indexName, "mytype"));
 
-			response = client.DeleteIndex(indexName);
+			var deleteResponse = client.DeleteIndex(indexName);
 
-			Assert.IsTrue(response.IsValid);
-			Assert.IsTrue(response.OK);
+			Assert.IsTrue(deleteResponse.IsValid);
+			Assert.IsTrue(deleteResponse.OK);
 
 		}
 
@@ -229,10 +229,10 @@ namespace Nest.Tests.Integration.Indices
 
 			Assert.IsNotNull(this._client.GetMapping(indexName, typeMapping.Name));
 
-			response = client.DeleteIndex(indexName);
+			var deleteResponse = client.DeleteIndex(indexName);
 
-			Assert.IsTrue(response.IsValid);
-			Assert.IsTrue(response.OK);
+			Assert.IsTrue(deleteResponse.IsValid);
+			Assert.IsTrue(deleteResponse.OK);
 
 		}
 	}

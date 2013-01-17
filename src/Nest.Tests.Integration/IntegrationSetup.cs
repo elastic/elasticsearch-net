@@ -23,8 +23,6 @@ namespace Nest.Tests.Integration
 			var projects = NestTestData.Data;
 			var people = NestTestData.People;
 
-			client.DeleteIndex(ElasticsearchConfiguration.DefaultIndex);
-
 			client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
@@ -47,8 +45,7 @@ namespace Nest.Tests.Integration
 		public static void TearDown()
 		{
 			var client = ElasticsearchConfiguration.Client;
-			client.DeleteIndex(ElasticsearchConfiguration.DefaultIndex);
-			client.DeleteIndex(ElasticsearchConfiguration.DefaultIndex + "_clone");
+			client.DeleteIndex(ElasticsearchConfiguration.DefaultIndex + "," + ElasticsearchConfiguration.DefaultIndex + "_*");
 		}
 	}
 }

@@ -26,7 +26,7 @@ namespace Nest
 		public string Path { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(ElasticTypeConverter))]
+		[JsonConverter(typeof(ElasticTypesConverter))]
 		public IDictionary<string, IElasticType> Properties { get; set; }
 
 	}

@@ -9,10 +9,11 @@ namespace Nest
 {
 	[JsonConverter(typeof(TermConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class Wildcard : Term, IQuery {
+	public class Wildcard : Term, IQuery
+	{
 		public Wildcard()
 		{
-		
+
 		}
 	}
 }

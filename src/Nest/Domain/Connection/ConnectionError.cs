@@ -66,6 +66,8 @@ namespace Nest
 		private void TryReadElasticsearchException()
 		{
 			var x = new { Error = string.Empty };
+			if (string.IsNullOrWhiteSpace(this.Response))
+				return;
 			try
 			{
 				x = JsonConvert.DeserializeAnonymousType(this.Response, x);

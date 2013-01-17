@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Core.Indices.Analysis.Tokenizers
 	[TestFixture]
 	public class BaseAnalysisTests : BaseJsonTests
 	{
-		public IIndicesResponse Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
+		public IIndicesOperationResponse Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
 		{
 			var result = this._client.CreateIndex(Test.Default.DefaultIndex, c => c
 				.Analysis(analysisSelector)

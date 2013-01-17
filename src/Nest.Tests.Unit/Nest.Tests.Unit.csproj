@@ -73,6 +73,9 @@
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
+    <Compile Include="Core\Index\IndexTests.cs" />
+    <Compile Include="Core\Indices\Analysis\BaseAnalysisTests.cs" />
+    <Compile Include="Core\Indices\Analysis\Tokenizers\TokenizerTests.cs" />
     <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
     <Compile Include="Core\Map\BoostField\BoostFieldTests.cs" />
     <Compile Include="Core\Map\PutMappingRequestTests.cs" />
@@ -198,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Core\Indices\Analysis\Tokenizers\TestTokenizers.json" />
     <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
