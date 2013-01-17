@@ -121,6 +121,11 @@ namespace Nest
       this._Nested = nested;
       return this;
     }
+	public new TermFacetDescriptor<T> Nested(Expression<Func<T, object>> objectPath)
+	{
+		var fieldName = new PropertyNameResolver().Resolve(objectPath);
+		return this.Nested(fieldName);
+	}
     public new TermFacetDescriptor<T> Scope(string scope)
     {
       this._Scope = scope;
