@@ -23,7 +23,7 @@ namespace Nest
 		internal IEnumerable<string> _Indices { get; set; }
 		internal IEnumerable<string> _Types { get; set; }
 		internal string _Routing { get; set; }
-		internal SearchType?  _SearchType { get; set; }
+		internal SearchType? _SearchType { get; set; }
 		internal string _Scroll { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
@@ -402,17 +402,17 @@ namespace Nest
 		}
 
 		public SearchDescriptor<T> ScriptFields(
-				Func<FluentDictionary<string, Func<ScriptFilterDescriptor,ScriptFilterDescriptor>>,
+				Func<FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>,
 				 FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>> scriptFields)
 		{
 			scriptFields.ThrowIfNull("scriptFields");
 			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
-			if (scriptFieldDescriptors == null || !scriptFieldDescriptors.Any(d=>d.Value != null))
+			if (scriptFieldDescriptors == null || !scriptFieldDescriptors.Any(d => d.Value != null))
 			{
 				this._ScriptFields = null;
 				return this;
 			}
-			this._ScriptFields = new FluentDictionary<string,ScriptFilterDescriptor>();
+			this._ScriptFields = new FluentDictionary<string, ScriptFilterDescriptor>();
 			foreach (var d in scriptFieldDescriptors)
 			{
 				if (d.Value == null)
@@ -421,7 +421,7 @@ namespace Nest
 			}
 			return this;
 		}
-	
+
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -430,23 +430,23 @@ namespace Nest
 		/// Sort ascending.
 		/// </para>
 		/// </summary>
-        public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
-        {
-            if (this._Sort == null)
-                this._Sort = new Dictionary<string, object>();
+		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
+		{
+			if (this._Sort == null)
+				this._Sort = new Dictionary<string, object>();
 
-            var resolver = new PropertyNameResolver();
-            var fieldName = resolver.Resolve(objectPath);
+			var resolver = new PropertyNameResolver();
+			var fieldName = resolver.Resolve(objectPath);
 
-            var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
-            if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
-            {
-                fieldName += ".sort";
-            }
+			var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
+			if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
+			{
+				fieldName += ".sort";
+			}
 
-            this._Sort.Add(fieldName, "asc");
-            return this;
-        }
+			this._Sort.Add(fieldName, "asc");
+			return this;
+		}
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -455,23 +455,23 @@ namespace Nest
 		/// Sort descending.
 		/// </para>
 		/// </summary>
-        public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
-        {
-            if (this._Sort == null)
-                this._Sort = new Dictionary<string, object>();
+		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
+		{
+			if (this._Sort == null)
+				this._Sort = new Dictionary<string, object>();
 
-            var resolver = new PropertyNameResolver();
-            var fieldName = resolver.Resolve(objectPath);
+			var resolver = new PropertyNameResolver();
+			var fieldName = resolver.Resolve(objectPath);
 
-            var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
-            if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
-            {
-                fieldName += ".sort";
-            }
+			var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
+			if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
+			{
+				fieldName += ".sort";
+			}
 
-            this._Sort.Add(fieldName, "desc");
-            return this;
-        }
+			this._Sort.Add(fieldName, "desc");
+			return this;
+		}
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 		/// The sort is defined on a per field level, with special field name for _score to sort by score.
@@ -548,7 +548,7 @@ namespace Nest
 			this._Sort.Add("_script", descriptor);
 			return this;
 		}
-		
+
 		private SearchDescriptor<T> _Facet<F>(
 			string name,
 			Func<F, F> facet,
@@ -912,9 +912,27 @@ namespace Nest
 
 	public class FluentDictionary<K, V> : Dictionary<K, V>
 	{
+		public FluentDictionary()
+		{
+		}
+
+		public FluentDictionary(IDictionary<K, V> copy)
+		{
+			if (copy == null)
+				return;
+
+			foreach (var kv in copy)
+				this[kv.Key] = kv.Value;
+		}
+
 		public new FluentDictionary<K, V> Add(K k, V v)
 		{
 			base.Add(k, v);
+			return this;
+		}
+		public new FluentDictionary<K, V> Remove(K k)
+		{
+			base.Remove(k);
 			return this;
 		}
 	}

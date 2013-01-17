@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
+using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -10,29 +11,23 @@ namespace Nest.Tests.Integration.Integration.Query
 	/// Integrated tests of NumericRangeFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class TextPhraseQueryTests : CleanStateIntegrationTests
+	public class TextPhraseQueryTests : IntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
 		private ElasticSearchProject _LookFor;
 
-		/// <summary>
-		/// Create document for test.
-		/// </summary>
-		protected override void ResetIndexes()
-		{
-			base.ResetIndexes();
-			var client = this._client;
-			if (client.IsValid)
-			{
-				_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
-				_LookFor.Name = "one two three four";
-				var status = this._client.Index(_LookFor).ConnectionStatus;
-				Assert.True(status.Success, status.Result);
 
-				Assert.True(this._client.Flush<ElasticSearchProject>().OK, "Flush");
-			}
+		[TestFixtureSetUp]
+		public void Initialize()
+		{
+			_client.IsValid.Should().BeTrue();
+
+			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
+			_LookFor.Name = "one two three four";
+			var status = this._client.Index(_LookFor, new IndexParameters { Refresh = true }).ConnectionStatus;
+			Assert.True(status.Success, status.Result);
 		}
 
 		/// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
@@ -9,9 +10,6 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-
-		public IIndicesResponse CreateIndex<T>(Func<CreateIndexDescriptor<T>>)
-
 		/// <summary>
 		/// Create an index with the specified index settings
 		/// </summary>
@@ -20,26 +18,25 @@ namespace Nest
 			string data = JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
 			return CreateIndexRaw(index, data);
 		}
-
 		/// <summary>
 		/// Create an index with the specified index settings
 		/// </summary>
+		public IIndicesResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
+		{
+			index.ThrowIfEmpty("index");
+			createIndexSelector.ThrowIfNull("createIndexSelector");
+			var d = createIndexSelector(new CreateIndexDescriptor());
+			var settings = d._IndexSettings;
+			return this.CreateIndex(index, settings);
+
+		}
+
+
 		public IIndicesResponse CreateIndexRaw(string index, string settings)
 		{
 			string path = this.PathResolver.CreateIndexPath(index);
 			var status = this.Connection.PostSync(path, settings);
-			var response = new IndicesResponse
-			{
-				ConnectionStatus = status
-			};
-			try
-			{
-				response = this.Deserialize<IndicesResponse>(status.Result);
-				response.IsValid = true;
-			}
-			catch { }
-			return response;
+			return this.ToParsedResponse<IndicesResponse>(status);
 		}
-
 	}
 }

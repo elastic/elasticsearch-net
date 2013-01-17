@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void ClusterHealthPerIndex()
 		{
-			var r = this._client.Health(new[] { Test.Default.DefaultIndex }, HealthLevel.Cluster);
+			var r = this._client.Health(new[] { ElasticsearchConfiguration.DefaultIndex }, HealthLevel.Cluster);
 			Assert.True(r.IsValid);
 		}
 		[Test]
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void DetailedHealthPerIndex()
 		{
-			var r = this._client.Health(new[] { Test.Default.DefaultIndex },
+			var r = this._client.Health(new[] { ElasticsearchConfiguration.DefaultIndex },
 												new HealthParams
 													{
 														CheckLevel = HealthLevel.Shards,

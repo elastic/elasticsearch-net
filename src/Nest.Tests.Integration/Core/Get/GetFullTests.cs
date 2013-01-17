@@ -14,13 +14,13 @@ using FluentAssertions;
 namespace Nest.Tests.Integration.Core.Get
 {
 	[TestFixture]
-	public class GetFullTests : CleanStateIntegrationTests
+	public class GetFullTests : IntegrationTests
 	{
 		private void DefaultAssertations(IGetResponse<ElasticSearchProject> result)
 		{
 			result.IsValid.Should().BeTrue();
 			result.Id.Should().Be("1");
-			result.Index.Should().Be("nest_test_data");
+			result.Index.Should().Be(ElasticsearchConfiguration.DefaultIndex);
 			result.Type.Should().Be("elasticsearchprojects");
 			result.Version.Should().Be("1");
 			result.Exists.Should().BeTrue();
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetWithPathInfo()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>("nest_test_data", "elasticsearchprojects", 1);
+			var result = this._client.GetFull<ElasticSearchProject>(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects", 1);
 			this.DefaultAssertations(result);
 		}
 		
@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetUsingDescriptorWithTypeAndFields()
 		{
 			var result = this._client.GetFull<ElasticSearchProject>(g => g
-				.Index("nest_test_data")
+				.Index(ElasticsearchConfiguration.DefaultIndex)
 				.Type("elasticsearchprojects")
 				.Id(1)
 				.Fields(p=>p.Content, p=>p.Name, p=>p.Id, p=>p.DoubleValue)

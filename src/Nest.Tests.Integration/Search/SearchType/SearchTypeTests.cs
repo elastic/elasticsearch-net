@@ -7,7 +7,7 @@ using Nest.FactoryDsl;
 namespace Nest.Tests.Integration.Search.SearchType
 {
 	[TestFixture]
-	public class SearchTypeTests : CleanStateIntegrationTests
+	public class SearchTypeTests : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 

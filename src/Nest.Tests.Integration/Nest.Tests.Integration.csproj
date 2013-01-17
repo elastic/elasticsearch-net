@@ -51,12 +51,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="ConnectionTests.cs" />
-    <Compile Include="CleanStateIntegrationTests.cs" />
+    <Compile Include="IntegrationSetup.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Get\GetMultiTests.cs" />
     <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
@@ -151,9 +152,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

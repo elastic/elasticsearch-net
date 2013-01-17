@@ -36,6 +36,8 @@ namespace Nest
 		ICountResponse CountAllRaw(string query);
 		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		IIndicesResponse CreateIndex(string index, IndexSettings settings);
+		IIndicesResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+
 		IIndicesResponse CreateIndexRaw(string index, string settings);
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse Delete<T>(System.Collections.Generic.IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
@@ -283,6 +285,12 @@ namespace Nest
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 		IElasticSearchVersionInfo VersionInfo { get; }
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
+
+		IValidateResponse ValidateRaw(string query);
+
+		IValidateResponse Validate(Action<ValidateQueryPathDescriptor> querySelector);
+		
+		IValidateResponse Validate<T>(Action<ValidateQueryPathDescriptor<T>> querySelector) where T : class;
 
 	}
 }

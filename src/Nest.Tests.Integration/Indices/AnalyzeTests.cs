@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using a different index and custom analyzer
 			var text = "this is a string with some spaces and stuff";
-			var analyzer = new AnalyzeParams { Analyzer = "whitespace", Index = Test.Default.DefaultIndex + "_clone" };
+			var analyzer = new AnalyzeParams { Analyzer = "whitespace", Index = ElasticsearchConfiguration.DefaultIndex };
 			var r = this._client.Analyze(analyzer, text);
 			this._defaultAnalyzeAssertations(r);
 			Assert.True(r.Tokens.Count() == text.Split(new[] { ' ' }).Count());
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using elasticssearchprojects content field but on a different index
 			var text = "this is a string with some spaces and stuff";
-			var index = Test.Default.DefaultIndex + "_clone";
+			var index = ElasticsearchConfiguration.DefaultIndex;
 			var r = this._client.Analyze<ElasticSearchProject>(p => p.Content, index, text);
 			this._defaultAnalyzeAssertations(r);
 			Assert.False(r.Tokens.Count() == text.Split(new []{' '}).Count());
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using a different index and custom analyzer
 			var text = "this is a string with some spaces and stuff";
-			var analyzer = new AnalyzeParams { Field = "content", Index = Test.Default.DefaultIndex + "_clone" };
+			var analyzer = new AnalyzeParams { Field = "content", Index = ElasticsearchConfiguration.DefaultIndex };
 			var r = this._client.Analyze(analyzer, text);
 			this._defaultAnalyzeAssertations(r);
 			Assert.False(r.Tokens.Count() == text.Split(new[] { ' ' }).Count());

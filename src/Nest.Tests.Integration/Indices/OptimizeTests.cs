@@ -15,13 +15,13 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void OptimizeIndex()
 		{
-			var r = this._client.Optimize(Test.Default.DefaultIndex);
+			var r = this._client.Optimize(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void OptimizeIndeces()
 		{
-			var r = this._client.Optimize(new []{Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" });
+			var r = this._client.Optimize(new []{ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" });
 			Assert.True(r.OK);
 		}
 		[Test]
@@ -39,13 +39,13 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void OptimizeIndexWithParameters()
 		{
-			var r = this._client.Optimize(Test.Default.DefaultIndex, new OptimizeParams());
+			var r = this._client.Optimize(ElasticsearchConfiguration.DefaultIndex, new OptimizeParams());
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void OptimizeIndecesWithParameters()
 		{
-			var r = this._client.Optimize(new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" }, new OptimizeParams());
+			var r = this._client.Optimize(new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" }, new OptimizeParams());
 			Assert.True(r.OK);
 		}
 		[Test]

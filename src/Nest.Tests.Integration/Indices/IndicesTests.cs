@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -11,7 +12,7 @@ namespace Nest.Tests.Integration.Indices
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class IndicesTest : CleanStateIntegrationTests
+	public class IndicesTest : IntegrationTests 
 	{
 		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
 		{
@@ -24,17 +25,17 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(queryResponse.Shards.Total > 0);
 			Assert.True(queryResponse.Shards.Successful == queryResponse.Shards.Total);
 			Assert.True(queryResponse.Shards.Failed == 0);
-				
+
 		}
-		
+
 		[Test]
 		public void GetIndexSettingsSimple()
 		{
 			var r = this._client.GetIndexSettings();
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
-			Assert.Greater(r.Settings.NumberOfReplicas, 0);
-			Assert.Greater(r.Settings.NumberOfShards, 1);
+			Assert.GreaterOrEqual(r.Settings.NumberOfReplicas, 0);
+			Assert.GreaterOrEqual(r.Settings.NumberOfShards, 1);
 		}
 
 		[Test]
@@ -44,12 +45,12 @@ namespace Nest.Tests.Integration.Indices
 			var settings = new IndexSettings();
 			settings.NumberOfReplicas = 4;
 			settings.NumberOfShards = 8;
-			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
 
-			settings.Add("merge.policy.merge_factor","10");
+			settings.Add("merge.policy.merge_factor", "10");
 
 			var createResponse = this._client.CreateIndex(index, settings);
 
@@ -79,7 +80,7 @@ namespace Nest.Tests.Integration.Indices
 			settings["search.slowlog.threshold.fetch.warn"] = "5s";
 
 			var r = this._client.UpdateSettings(index, settings);
-			
+
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			var getResponse = this._client.GetIndexSettings(index);
@@ -96,13 +97,13 @@ namespace Nest.Tests.Integration.Indices
 		public void CreateIndex()
 		{
 			var client = this._client;
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
 			settings.Mappings.Add(typeMapping);
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
-			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
 			var response = client.CreateIndex(indexName, settings);
@@ -118,6 +119,55 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.OK);
 
 		}
+
+		[Test]
+		public void CreateIndexUsingDescriptor()
+		{
+			var index = ElasticsearchConfiguration.DefaultIndex + "_clone";
+			if (this._client.IndexExists(index).Exists)
+				_client.DeleteIndex(index);
+
+			var result = this._client.CreateIndex(index, c => c
+				.NumberOfReplicas(1)
+				.NumberOfShards(1)
+				.Settings(s => s
+					.Add("compound_format", true)
+					.Add("term_index_interval", 128)
+					.Add("search.slowlog.threshold.query.warn", "2s")
+				)
+				.AddMapping<ElasticSearchProject>(m => m
+					.MapFromAttributes()
+					.NumericDetection()
+					.DateDetection()
+				)
+				.AddMapping<Person>(m => m
+					.MapFromAttributes()
+				)
+				.Analysis(a=>a
+					.Analyzers(an=>an
+						.Add("standard", new StandardAnalyzer()
+						{
+							StopWords = new [] { "stop1", "stop2" }
+						})
+					)
+					.Tokenizers(t=>t
+						.Add("myTokenizer", new StandardTokenizer { MaximumTokenLength = 900 })
+					)
+					.TokenFilters(t => t
+						.Add("myTokenFilter1", new StopTokenFilter { Stopwords = new [] { "stop1", "stop2" } })
+					)
+					.CharFilters(t => t
+						.Add("htmlFilter", new HtmlStripCharFilter())
+					)
+				)
+			);
+
+			result.Should().NotBeNull();
+			result.IsValid.Should().BeTrue();
+			result.ConnectionStatus.Should().NotBeNull();
+			throw new Exception(result.ConnectionStatus.ToString());
+		}
+
 
 		[Test]
 		public void PutMapping()
@@ -168,7 +218,7 @@ namespace Nest.Tests.Integration.Indices
 			settings.Mappings.Add(typeMapping);
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
-			settings.Analysis.Analyzer.Add("snowball", new SnowballAnalyzerSettings { Language = "English" });
+			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
 			var response = client.CreateIndex(indexName, settings);

@@ -102,9 +102,7 @@ namespace Nest
 			r.ConnectionStatus = status;
 			return r;
 		}
-		
-		
-		
+
 		/// <summary>
 		/// Delete the default index
 		/// </summary>
