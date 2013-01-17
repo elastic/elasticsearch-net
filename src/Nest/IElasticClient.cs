@@ -281,8 +281,26 @@ namespace Nest
 		  SearchType? searchType = null) where T : class;
 
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
+    IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
 		IQueryResponse<T> SearchRaw<T>(string query) where T : class;
+
+    Task<IQueryResponse<dynamic>> SearchAsync(
+      SearchBuilder searchBuilder,
+      string index = null,
+      string type = null,
+      string routing = null,
+      SearchType? searchType = null);
+    Task<IQueryResponse<T>> SearchAsync<T>(SearchBuilder searchBuilder,
+      string index = null,
+      string type = null,
+      string routing = null,
+      SearchType? searchType = null) where T : class;
+
+    Task<IQueryResponse<dynamic>> SearchAsync(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
+    Task<IQueryResponse<T>> SearchAsync<T>(SearchDescriptor<T> descriptor) where T : class;
+    Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
+    Task<IQueryResponse<T>> SearchRawAsync<T>(string query) where T : class;
 
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(IEnumerable<string> indices);
@@ -307,7 +325,6 @@ namespace Nest
 		ISettingsOperationResponse UpdateSettings(IndexSettings settings);
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 		IElasticSearchVersionInfo VersionInfo { get; }
-		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
 
 		IValidateResponse ValidateRaw(string query);
 
