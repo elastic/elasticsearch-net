@@ -50,6 +50,10 @@ namespace Nest
 		internal bool? _UseDismax { get; set; }
 		[JsonProperty(PropertyName = "tie_breaker")]
 		internal double? _TieBreaker { get; set; }
+		[JsonProperty(PropertyName = "rewrite")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		internal RewriteMultiTerm? _Rewrite { get; set; }
+
 
 		internal bool IsConditionless
 		{
@@ -146,6 +150,11 @@ namespace Nest
 		public QueryStringDescriptor<T> Boost(double boost)
 		{
 			this._Boost = boost;
+			return this;
+		}
+		public QueryStringDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm)
+		{
+			this._Rewrite = rewriteMultiTerm;
 			return this;
 		}
 		public QueryStringDescriptor<T> Lenient(bool lenient)

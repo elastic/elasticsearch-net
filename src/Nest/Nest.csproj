@@ -64,6 +64,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Descriptors\Query\IMultiTermQuery.cs" />
     <Compile Include="ElasticClient-DeleteById.cs" />
     <Compile Include="ElasticClient-DeleteByQuery.cs" />
     <Compile Include="ElasticClient-DeleteMany.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="DSL\Factory\Common\Point.cs" />
     <Compile Include="DSL\Factory\Common\EsRegex.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
+    <Compile Include="Enums\RewriteMultiTerm.cs" />
     <Compile Include="Enums\HealthLevel.cs" />
     <Compile Include="Enums\HealthStatus.cs" />
     <Compile Include="Enums\NodesInfo.cs" />

@@ -57,6 +57,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.MinimumShouldMatchPercentage(20)
 						.UseDisMax(true)
 						.TieBreaker(0.7)
+						.Rewrite(RewriteMultiTerm.top_terms_N)
 					)
 			);
 
@@ -79,7 +80,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						auto_generate_phrase_queries : true,
 						minimum_should_match: ""20%"",
 						use_dis_max: true,
-						tie_breaker: 0.7
+						tie_breaker: 0.7,
+						rewrite: ""top_terms_N""
+
 					}
 				}
 			}";

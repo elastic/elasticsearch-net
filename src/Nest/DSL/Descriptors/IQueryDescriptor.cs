@@ -24,8 +24,8 @@ namespace Nest
     BaseQuery MatchAll(double? Boost = null, string NormField = null);
     BaseQuery MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> selector);
     BaseQuery Nested(Action<NestedQueryDescriptor<T>> selector);
-    BaseQuery Prefix(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null);
-    BaseQuery Prefix(string field, string value, double? Boost = null);
+	BaseQuery Prefix(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);
+	BaseQuery Prefix(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);
     BaseQuery QueryString(Action<QueryStringDescriptor<T>> selector);
     BaseQuery Range(Action<RangeQueryDescriptor<T>> selector);
     BaseQuery SpanFirst(Action<SpanFirstQueryDescriptor<T>> selector);
@@ -43,7 +43,7 @@ namespace Nest
     BaseQuery TextPhrase(Action<TextPhraseQueryDescriptor<T>> selector);
     BaseQuery TextPhrasePrefix(Action<TextPhrasePrefixQueryDescriptor<T>> selector);
     BaseQuery TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class;
-    BaseQuery Wildcard(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null);
-    BaseQuery Wildcard(string field, string value, double? Boost = null);
+	BaseQuery Wildcard(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);
+    BaseQuery Wildcard(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);
   }
 }

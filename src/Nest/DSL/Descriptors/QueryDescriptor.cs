@@ -600,10 +600,11 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Wildcard(Expression<Func<T, object>> fieldDescriptor
 			, string value
-			, double? Boost = null)
+			, double? Boost = null
+			, RewriteMultiTerm? Rewrite = null)
 		{
 			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Wildcard(field, value, Boost);
+			return this.Wildcard(field, value, Boost, Rewrite);
 		}
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
@@ -612,7 +613,11 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with 
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public BaseQuery Wildcard(string field, string value, double? Boost = null)
+		public BaseQuery Wildcard(
+			string field, 
+			string value, 
+			double? Boost = null,
+			RewriteMultiTerm? Rewrite = null)
 		{
 			var wildcard = new Wildcard() { Field = field, Value = value };
 			if (wildcard.IsConditionless)
@@ -620,6 +625,10 @@ namespace Nest
 
 			if (Boost.HasValue)
 				wildcard.Boost = Boost;
+
+			if (Rewrite.HasValue)
+				wildcard.Rewrite = Rewrite;
+
 			this.WildcardQuery = wildcard;
 			return new QueryDescriptor<T> { WildcardQuery = this.WildcardQuery };
 		}
@@ -630,17 +639,22 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Prefix(Expression<Func<T, object>> fieldDescriptor
 			, string value
-			, double? Boost = null)
+			, double? Boost = null,
+			RewriteMultiTerm? Rewrite = null)
 		{
 			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 
-			return this.Prefix(field, value, Boost);
+			return this.Prefix(field, value, Boost, Rewrite);
 		}
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
-		public BaseQuery Prefix(string field, string value, double? Boost = null)
+		public BaseQuery Prefix(
+			string field, 
+			string value, 
+			double? Boost = null,
+			RewriteMultiTerm? Rewrite = null)
 		{
 			var prefix = new Prefix() { Field = field, Value = value };
 			if (prefix.IsConditionless)
@@ -648,6 +662,10 @@ namespace Nest
 
 			if (Boost.HasValue)
 				prefix.Boost = Boost;
+
+			if (Rewrite.HasValue)
+				prefix.Rewrite = Rewrite;
+
 			this.PrefixQuery = prefix;
 			return new QueryDescriptor<T> { PrefixQuery = this.PrefixQuery };
 		}

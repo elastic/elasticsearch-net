@@ -4,13 +4,18 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonConverter(typeof(TermConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class Prefix : Term, IQuery
+	public class Prefix : Term, IQuery, IMultiTermQuery
 	{
+		[JsonProperty(PropertyName = "rewrite")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		public RewriteMultiTerm? Rewrite { get; set; }
+
 		public Prefix()
 		{
 		

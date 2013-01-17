@@ -79,6 +79,24 @@ namespace Nest.Tests.Integration.Search
 			Assert.GreaterOrEqual(results.Documents.Count(), 1);
 		}
 		[Test]
+		public void TestWildcardQueryBoostAndRewrite()
+		{
+			var results = this._client.Search<ElasticSearchProject>(s => s
+				.From(0)
+				.Size(10)
+				.Fields(f => f.Id, f => f.Name)
+				.SortAscending(f => f.LOC)
+				.SortDescending(f => f.Name)
+				.Query(q => q
+					.Wildcard(f => f.Name, "elasticsearch.*", Boost: 1.0, Rewrite: RewriteMultiTerm.scoring_boolean)
+				)
+			);
+			Assert.NotNull(results);
+			Assert.True(results.IsValid);
+			Assert.NotNull(results.Documents);
+			Assert.GreaterOrEqual(results.Documents.Count(), 1);
+		}
+		[Test]
 		public void TestPrefixQuery()
 		{
 			var results = this._client.Search<ElasticSearchProject>(s => s

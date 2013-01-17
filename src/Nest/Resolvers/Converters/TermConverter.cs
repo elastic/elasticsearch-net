@@ -31,6 +31,17 @@ namespace Nest.Resolvers.Converters
 					writer.WritePropertyName("boost");
 					writer.WriteValue(term.Boost.Value);
 				}
+				var multiTerm = value as IMultiTermQuery;
+				if (multiTerm != null)
+				{
+					if (multiTerm.Rewrite.HasValue)
+					{
+						writer.WritePropertyName("rewrite");
+						writer.WriteValue(Enum.GetName(typeof(RewriteMultiTerm), multiTerm.Rewrite.Value));
+					}
+				}
+
+
 				writer.WriteEndObject();
 				writer.WriteEndObject();
 			}
