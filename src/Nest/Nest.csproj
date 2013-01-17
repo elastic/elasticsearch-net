@@ -64,6 +64,9 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElasticClient-DeleteById.cs" />
+    <Compile Include="ElasticClient-DeleteByQuery.cs" />
+    <Compile Include="ElasticClient-DeleteMany.cs" />
     <Compile Include="Domain\Analysis\Analyzers\Language.cs" />
     <Compile Include="Domain\Analysis\Analyzers\LanguageAnalyzer.cs" />
     <Compile Include="Domain\Analysis\Analyzers\KeywordAnalyzer.cs" />

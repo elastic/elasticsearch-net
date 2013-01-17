@@ -179,7 +179,7 @@ namespace Nest.Tests.Integration.Core
 			var totalResults = result.Total;
 			Assert.Greater(totalSet, 0);
 
-			var deleteResult = this._client.Delete(result.Documents, new SimpleBulkParameters() { Refresh = true });
+			var deleteResult = this._client.DeleteMany(result.Documents, new SimpleBulkParameters() { Refresh = true });
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
@@ -203,7 +203,7 @@ namespace Nest.Tests.Integration.Core
 
 			var parameterizedDocuments = result.Documents.Select(d => new BulkParameters<ElasticSearchProject>(d) { VersionType = VersionType.Internal });
 
-			var deleteResult = this._client.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
+			var deleteResult = this._client.DeleteMany(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
