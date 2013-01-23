@@ -131,6 +131,7 @@
     <Compile Include="Search\SearchType\SearchTypeTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
+    <Compile Include="Template\TemplateTests.cs" />
     <Compile Include="Test.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
