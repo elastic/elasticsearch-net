@@ -64,6 +64,9 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
+    <Compile Include="Domain\Settings\TemplateIndexSettings.cs" />
+    <Compile Include="ElasticClient-Template.cs" />
     <Compile Include="DSL\Descriptors\Query\IMultiTermQuery.cs" />
     <Compile Include="ElasticClient-DeleteById.cs" />
     <Compile Include="ElasticClient-DeleteByQuery.cs" />
