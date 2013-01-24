@@ -14,6 +14,7 @@ namespace Nest
 	public class TemplateResponse : BaseResponse, ITemplateResponse
 	{
 		public string Name { get; internal set; }
+		
 		public TemplateMapping TemplateMapping { get; internal set; }
 	}
 }

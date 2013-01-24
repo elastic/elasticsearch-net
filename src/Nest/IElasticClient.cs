@@ -235,7 +235,7 @@ namespace Nest
 			where T : class;
 
 		IIndicesOperationResponse DeleteTemplate(string templateName);
-		IIndicesOperationResponse PutTemplate(string templateName, TemplateMapping templateMapping);
+		IIndicesOperationResponse PutTemplate(Func<TemplateMappingDescriptor, TemplateMappingDescriptor> templateMappingSelector);
 		IIndicesOperationResponse PutTemplateRaw(string templateName, string template);
 		ITemplateResponse GetTemplate(string templateName);
 

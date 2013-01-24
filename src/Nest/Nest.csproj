@@ -66,7 +66,7 @@
   <ItemGroup>
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
-    <Compile Include="Domain\Settings\TemplateIndexSettings.cs" />
+    <Compile Include="DSL\Descriptors\TemplateMappingDescriptor.cs" />
     <Compile Include="ElasticClient-Template.cs" />
     <Compile Include="DSL\Descriptors\Query\IMultiTermQuery.cs" />
     <Compile Include="ElasticClient-DeleteById.cs" />

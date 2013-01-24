@@ -20,8 +20,18 @@ namespace Nest
 			return this.ToParsedResponse<TemplateResponse>(status);
 		}
 
-		public IIndicesOperationResponse PutTemplate(string templateName, TemplateMapping templateMapping) // TODO: use descriptor
+		public IIndicesOperationResponse PutTemplate(Func<TemplateMappingDescriptor, TemplateMappingDescriptor> templateMappingSelector) // TODO: use descriptor
 		{
+			templateMappingSelector.ThrowIfNull("templateMappingSelector");
+
+			var templateMappingDescriptor = templateMappingSelector(new TemplateMappingDescriptor());
+			templateMappingDescriptor.ThrowIfNull("templateMappingDescriptor");
+
+			var templateMapping = templateMappingDescriptor._TemplateMapping;
+			templateMapping.ThrowIfNull("templateMapping");
+
+			var templateName = templateMappingDescriptor._Name;
+
 			templateName.ThrowIfNull("templateName");
 			templateMapping.ThrowIfNull("templateMapping");
 

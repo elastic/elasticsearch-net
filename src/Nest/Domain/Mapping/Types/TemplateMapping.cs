@@ -8,6 +8,12 @@ namespace Nest
 	//	[JsonObject(MemberSerialization.OptIn)]
 	public class TemplateMapping
 	{
+		public TemplateMapping()
+		{
+			this.Mappings = new Dictionary<string, RootObjectMapping>();
+			this.Settings = new FluentDictionary<string, object>();
+		}
+
 		[JsonProperty("template")]
 		public string Template { get; set; }
 
@@ -15,7 +21,7 @@ namespace Nest
 		public int Order { get; set; }
 
 		[JsonProperty("settings")]
-		public TemplateIndexSettings Settings { get; set; }
+		public FluentDictionary<string, object> Settings { get; set; }
 
 		[JsonProperty("mappings")]
 		public Dictionary<string, RootObjectMapping> Mappings { get; set; }

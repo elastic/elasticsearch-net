@@ -11,25 +11,39 @@ namespace Nest.Tests.Integration.Mapping
 		[Test]
 		public void SimplePutAndGet()
 		{
-			var templateMapping = new TemplateMapping { Template = "donotinfluencothertests-*" };
-			var deleteResponse = this._client.DeleteTemplate("simple-put-and-get");
-
-			var putResponse = this._client.PutTemplate("simple-put-and-get", templateMapping);
+			this._client.DeleteTemplate("put-template-with-settings");
+			var putResponse = this._client.PutTemplate(t => t
+				.Name("put-template-with-settings")
+				.Template("donotinfluencothertests-*")
+				.Order(42)
+			);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateResponse = this._client.GetTemplate("simple-put-and-get");
+			var templateResponse = this._client.GetTemplate("put-template-with-settings");
+			templateResponse.Should().NotBeNull();
+			templateResponse.IsValid.Should().BeTrue();
+			templateResponse.TemplateMapping.Should().NotBeNull();
+			templateResponse.TemplateMapping.Mappings.Should().NotBeNull();
+			
+			var settings = templateResponse.TemplateMapping.Settings;
+			templateResponse.TemplateMapping.Order.Should().Be(42);
 
-			Assert.AreEqual("donotinfluencothertests-*", templateResponse.TemplateMapping.Template);
+			settings.Should().NotBeNull();
 		}
 
 
 		[Test]
 		public void PutTemplateWithSettings()
 		{
-			var templateMapping = new TemplateMapping { Template = "donotinfluencothertests-*", Settings = new TemplateIndexSettings { NumberOfShards = 3, NumberOfReplicas = 2 } };
-
 			this._client.DeleteTemplate("put-template-with-settings");
-			var putResponse = this._client.PutTemplate("put-template-with-settings", templateMapping);
+			var putResponse = this._client.PutTemplate(t=>t
+				.Name("put-template-with-settings")
+				.Template("donotinfluencothertests-*")
+				.Settings(s=>s
+					.Add("index.number_of_shards", 3)
+					.Add("index.number_of_replicas", 2)
+				)
+			);
 			Assert.IsTrue(putResponse.OK);
 
 			var templateResponse = this._client.GetTemplate("put-template-with-settings");
@@ -41,19 +55,22 @@ namespace Nest.Tests.Integration.Mapping
 			var settings = templateResponse.TemplateMapping.Settings;
 			settings.Should().NotBeNull();
 
-			Assert.AreEqual(3, settings.NumberOfShards);
-			Assert.AreEqual(2, settings.NumberOfReplicas);
+			Assert.AreEqual("3", settings["index.number_of_shards"]);
+			Assert.AreEqual("2", settings["index.number_of_replicas"]);
 		}
 
 		[Test]
 		public void PutTemplateWithMappings()
 		{
-			var dict = new FluentDictionary<string, RootObjectMapping>()
-				.Add("mytype", new RootObjectMapping { AllFieldMapping = new AllFieldMapping { Enabled = false } });
-			var templateMapping = new TemplateMapping { Template = "donotinfluencothertests-*", Mappings = dict };
-
 			this._client.DeleteTemplate("put-template-with-mappings");
-			var putResponse = this._client.PutTemplate("put-template-with-mappings", templateMapping);
+			var putResponse = this._client.PutTemplate(t => t
+				.Name("put-template-with-mappings")
+				.Template("donotinfluencothertests")
+				.AddMapping<dynamic>(s=>s
+					.TypeName("mytype")
+					.DisableAllField()
+				)
+			);
 			Assert.IsTrue(putResponse.OK);
 
 			var templateResponse = this._client.GetTemplate("put-template-with-mappings");
