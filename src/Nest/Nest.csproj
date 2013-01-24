@@ -64,6 +64,11 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Bulk\BaseBulkOperation.cs" />
+    <Compile Include="DSL\Descriptors\BulkCreateDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\BulkDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\BulkIndexDescriptor.cs" />
+    <Compile Include="DSL\Descriptors\BulkDeleteDescriptor.cs" />
     <Compile Include="DSL\Descriptors\Query\IMultiTermQuery.cs" />
     <Compile Include="ElasticClient-DeleteById.cs" />
     <Compile Include="ElasticClient-DeleteByQuery.cs" />
