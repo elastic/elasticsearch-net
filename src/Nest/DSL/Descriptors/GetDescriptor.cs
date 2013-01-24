@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -68,7 +69,7 @@ namespace Nest
 
 		public SimpleGetDescriptor<T> Id(int id)
 		{
-			return this.Id(id.ToString());
+			return this.Id(id.ToString(CultureInfo.InvariantCulture));
 		}
 
 		public SimpleGetDescriptor<T> Id(string id)

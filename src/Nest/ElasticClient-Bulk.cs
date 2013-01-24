@@ -14,6 +14,14 @@ namespace Nest
 	{
 		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
 
+		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
+		{
+			//bulkSelector.ThrowIfNull("bulkSelector");
+			return null;
+
+		}
+
+
 
 		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
 		{
