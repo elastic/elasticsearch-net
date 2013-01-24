@@ -9,29 +9,15 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		public TemplateMapping GetTemplate(string templateName)
+		public ITemplateResponse GetTemplate(string templateName)
 		{
 			templateName.ThrowIfNull("templateName");
 			//TODO validate templateName for invalid url chars?
 
 			string path = this.PathResolver.CreateTemplatePath(templateName);
-
 			ConnectionStatus status = this.Connection.GetSync(path);
-			try
-			{
-				var templateMappings = this.Deserialize<Dictionary<string,TemplateMapping>>(status.Result);
 
-				if (status.Success)
-				{
-					var templateMapping = templateMappings.First().Value;
-					return templateMapping;
-				}
-			}
-			catch (Exception e)
-			{
-				//TODO LOG
-			}
-			return null;
+			return this.ToParsedResponse<TemplateResponse>(status);
 		}
 
 		public IIndicesOperationResponse PutTemplate(string templateName, TemplateMapping templateMapping) // TODO: use descriptor

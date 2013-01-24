@@ -1,4 +1,5 @@
-﻿using Nest.Tests.MockData.Domain;
+﻿using FluentAssertions;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Mapping
@@ -16,9 +17,9 @@ namespace Nest.Tests.Integration.Mapping
 			var putResponse = this._client.PutTemplate("simple-put-and-get", templateMapping);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateMappingResult = this._client.GetTemplate("simple-put-and-get");
+			var templateResponse = this._client.GetTemplate("simple-put-and-get");
 
-			Assert.AreEqual("donotinfluencothertests-*", templateMappingResult.Template);
+			Assert.AreEqual("donotinfluencothertests-*", templateResponse.TemplateMapping.Template);
 		}
 
 
@@ -31,28 +32,41 @@ namespace Nest.Tests.Integration.Mapping
 			var putResponse = this._client.PutTemplate("put-template-with-settings", templateMapping);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateMappingResult = this._client.GetTemplate("put-template-with-settings");
+			var templateResponse = this._client.GetTemplate("put-template-with-settings");
+			templateResponse.Should().NotBeNull();
+			templateResponse.IsValid.Should().BeTrue();
+			templateResponse.TemplateMapping.Should().NotBeNull();
+			templateResponse.TemplateMapping.Mappings.Should().NotBeNull();
 
-			Assert.AreEqual(3, templateMappingResult.Settings.NumberOfShards);
-			Assert.AreEqual(2, templateMappingResult.Settings.NumberOfReplicas);
+			var settings = templateResponse.TemplateMapping.Settings;
+			settings.Should().NotBeNull();
+
+			Assert.AreEqual(3, settings.NumberOfShards);
+			Assert.AreEqual(2, settings.NumberOfReplicas);
 		}
 
 		[Test]
 		public void PutTemplateWithMappings()
 		{
-			var mappings = new FluentDictionary<string, RootObjectMapping>()
+			var dict = new FluentDictionary<string, RootObjectMapping>()
 				.Add("mytype", new RootObjectMapping { AllFieldMapping = new AllFieldMapping { Enabled = false } });
-			var templateMapping = new TemplateMapping { Template = "donotinfluencothertests-*", Mappings = mappings };
+			var templateMapping = new TemplateMapping { Template = "donotinfluencothertests-*", Mappings = dict };
 
 			this._client.DeleteTemplate("put-template-with-mappings");
 			var putResponse = this._client.PutTemplate("put-template-with-mappings", templateMapping);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateMappingResult = this._client.GetTemplate("put-template-with-mappings");
+			var templateResponse = this._client.GetTemplate("put-template-with-mappings");
+			templateResponse.Should().NotBeNull();
+			templateResponse.IsValid.Should().BeTrue();
+			templateResponse.TemplateMapping.Should().NotBeNull();
+			templateResponse.TemplateMapping.Mappings.Should().NotBeNull().And.NotBeEmpty();
 
-			Assert.IsTrue(templateMappingResult.Mappings.ContainsKey("mytype"), "put-template-with-mappings template should have a `mytype` mapping");
-			Assert.NotNull(templateMappingResult.Mappings["mytype"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
-			Assert.AreEqual(false, templateMappingResult.Mappings["mytype"].AllFieldMapping.Enabled, "_all { enabled } should be set to false");
+			var mappings = templateResponse.TemplateMapping.Mappings;
+
+			Assert.IsTrue(mappings.ContainsKey("mytype"), "put-template-with-mappings template should have a `mytype` mapping");
+			Assert.NotNull(mappings["mytype"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
+			Assert.AreEqual(false, mappings["mytype"].AllFieldMapping.Enabled, "_all { enabled } should be set to false");
 		}
 	}
 }

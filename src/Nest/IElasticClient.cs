@@ -237,7 +237,7 @@ namespace Nest
 		IIndicesOperationResponse DeleteTemplate(string templateName);
 		IIndicesOperationResponse PutTemplate(string templateName, TemplateMapping templateMapping);
 		IIndicesOperationResponse PutTemplateRaw(string templateName, string template);
-		TemplateMapping GetTemplate(string templateName);
+		ITemplateResponse GetTemplate(string templateName);
 
 		INodeInfoResponse NodeInfo(NodesInfo nodesInfo);
 		INodeInfoResponse NodeInfo(IEnumerable<string> nodes, NodesInfo nodesInfo);
