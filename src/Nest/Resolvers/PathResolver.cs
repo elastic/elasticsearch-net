@@ -131,7 +131,10 @@ namespace Nest.Resolvers
 			return "{0}/{1}/{2}".F(index, type, id);
 		}
 
-
+		public string CreateTemplatePath(string templateName)
+		{
+			return "/_template/{0}".F(templateName);
+		}
 
 		public string AppendSimpleParametersToPath(string path, ISimpleUrlParameters urlParameters)
 		{
