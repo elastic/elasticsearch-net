@@ -17,6 +17,9 @@ namespace Nest
 		IIndicesOperationResponse Alias(string index, IEnumerable<string> aliases);
 		IIndicesOperationResponse Alias(string index, string alias);
 
+		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
+		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
+
 		IAnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text);
 		IAnalyzeResponse Analyze(string text);
 		IAnalyzeResponse Analyze<T>(System.Linq.Expressions.Expression<Func<T, object>> selector, string index, string text) where T : class;

@@ -9,7 +9,7 @@ namespace Nest
 
 		internal override Type _ClrType { get { return typeof(T); } }
 		internal override string _Operation { get { return "index"; } }
-		internal T _Object { get; set; }
+		internal override object _Object { get; set; }
 
 
 		private readonly TypeNameResolver _typeNameResolver;
@@ -17,6 +17,15 @@ namespace Nest
 		public BulkIndexDescriptor()
 		{
 			this._typeNameResolver = new TypeNameResolver();
+		}
+
+		internal override string GetIdForObject(IdResolver resolver)
+		{
+			if (!this._Id.IsNullOrEmpty())
+				return this._Id;
+			
+			return resolver.GetIdFor<T>((T)_Object);
+
 		}
 
 		/// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -46,5 +47,12 @@ namespace Nest
 
 		[JsonProperty("refresh ")]
 		internal bool? _Refresh { get; set; }
+
+		internal virtual object _Object { get; set; }
+
+		internal virtual string GetIdForObject(IdResolver resolver)
+		{
+			return this._Id;
+		}
 	}
 }

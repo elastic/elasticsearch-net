@@ -9,7 +9,7 @@ namespace Nest
 
 		internal override Type _ClrType { get { return typeof(T); } }
 		internal override string _Operation { get { return "delete"; } }
-		internal T _Object { get; set; }
+		internal new T _Object { get; set; }
 
 
 		private readonly TypeNameResolver _typeNameResolver;

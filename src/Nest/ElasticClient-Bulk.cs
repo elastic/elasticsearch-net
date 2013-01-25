@@ -16,13 +16,46 @@ namespace Nest
 
 		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
-			//bulkSelector.ThrowIfNull("bulkSelector");
-			return null;
-
+			bulkSelector.ThrowIfNull("bulkSelector");
+			var bulkDescriptor = bulkSelector(new BulkDescriptor());
+			return this.Bulk(bulkDescriptor);
 		}
+		public IBulkResponse Bulk(BulkDescriptor bulkDescriptor)
+		{
+			bulkDescriptor.ThrowIfNull("bulkDescriptor");
+			var sb = new StringBuilder();
+			
+			foreach (var operation in bulkDescriptor._Operations)
+			{
+				var command = operation._Operation;
+				var index = operation._Index ??
+				            bulkDescriptor._FixedIndex ?? 
+							new IndexNameResolver(this.Settings).GetIndexForType(operation._ClrType);
+				var typeName = operation._Type
+				               ?? bulkDescriptor._FixedType
+				               ?? new TypeNameResolver().GetTypeNameForType(operation._ClrType);
 
+				var id = operation.GetIdForObject(this.IdResolver);
+				operation._Index = index;
+				operation._Type = typeName;
+				operation._Id = id;
 
+				var opJson = JsonConvert.SerializeObject(operation, Formatting.None, IndexSerializationSettings);
 
+				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
+				sb.Append(action);
+
+				if (command == "index" || command == "create")
+				{
+					string jsonCommand = JsonConvert.SerializeObject(operation._Object, Formatting.None, IndexSerializationSettings);
+					sb.Append(jsonCommand + "\n");
+				}
+			}
+			var json = sb.ToString();
+			var status = this.Connection.PostSync("_bulk", json);
+			return this.ToParsedResponse<BulkResponse>(status);
+		}
+		
 		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, "index");
