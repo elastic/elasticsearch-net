@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Nest.Resolvers.Converters
 {
-    public class ShardsSegmentConverter : JsonConverter
+	public class TemplateResponseConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -15,18 +15,16 @@ namespace Nest.Resolvers.Converters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
                                         JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.StartArray)
-            {
-                var list = new List<ShardsSegment>();
-                serializer.Populate(reader, list);
-                return list.First();
-            }
+	        var dict = new Dictionary<string, TemplateMapping>();
+			serializer.Populate(reader, dict);
+	        if (dict.Count == 0)
+				throw new DslException("Could not deserialize TemplateMapping1");
 
-            var o = new ShardsSegment();
-            serializer.Populate(reader, o);
-            return o;
-
-            //throw new NotImplementedException();
+	        return new TemplateResponse
+	        {
+		        Name = dict.First().Key,
+				TemplateMapping = dict.First().Value
+	        };
         }
 
         public override bool CanConvert(Type objectType)
