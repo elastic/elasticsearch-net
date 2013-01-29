@@ -9,7 +9,7 @@ namespace Nest.Resolvers.Converters
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            
+          
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
@@ -29,7 +29,7 @@ namespace Nest.Resolvers.Converters
 
         public override bool CanConvert(Type objectType)
         {
-          return objectType == typeof(ShardsSegment);
+			return objectType == typeof(TemplateResponse);
         }
     }
 }
