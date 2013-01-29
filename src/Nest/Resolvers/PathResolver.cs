@@ -223,6 +223,17 @@ namespace Nest.Resolvers
 
 		public string GetSearchPathForDynamic(SearchDescriptor<dynamic> descriptor)
 		{
+			return this.GetSearchDescriptorPathForDynamic(descriptor);
+		}
+
+		public string GetWarmerPathForDynamic(SearchDescriptor<dynamic> descriptor, string warmerName = null)
+		{
+			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
+			return this.GetSearchDescriptorPathForDynamic(descriptor, extension);
+		}
+
+		private string GetSearchDescriptorPathForDynamic(SearchDescriptor<dynamic> descriptor, string extension = "_search")
+		{
 			string indices;
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
@@ -235,9 +246,21 @@ namespace Nest.Resolvers
 
 			var dict = this.GetSearchParameters(descriptor);
 
-			return this.SearchPathJoin(indices, types, dict, "_search");
+			return this.SearchPathJoin(indices, types, dict, extension);
 		}
+
 		public string GetSearchPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
+		{
+			return this.GetSearchDescriptorPathForTyped(descriptor);
+		}
+
+		public string GetWarmerPathForTyped<T>(SearchDescriptor<T> descriptor, string warmerName = null) where T : class
+		{
+			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
+			return this.GetSearchDescriptorPathForTyped(descriptor, extension);
+		}
+
+		private string GetSearchDescriptorPathForTyped<T>(SearchDescriptor<T> descriptor, string extension = "_search") where T : class
 		{
 			string indices;
 			if (descriptor._Indices.HasAny())
@@ -254,11 +277,11 @@ namespace Nest.Resolvers
 				types = null;
 
 			var dict = this.GetSearchParameters(descriptor);
-				
 
-			return this.SearchPathJoin(indices, types, dict, "_search");
+
+			return this.SearchPathJoin(indices, types, dict, extension);
 		}
-		
+
 		public string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor, string suffix)
 		{
 			string indices;

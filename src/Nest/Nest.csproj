@@ -64,6 +64,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Mapping\Types\WarmerMapping.cs" />
+    <Compile Include="ElasticClient-Warmers.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
     <Compile Include="DSL\Descriptors\TemplateMappingDescriptor.cs" />
