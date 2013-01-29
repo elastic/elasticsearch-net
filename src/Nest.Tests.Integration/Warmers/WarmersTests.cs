@@ -18,16 +18,11 @@ namespace Nest.Tests.Integration.Warmers
 			);
 			Assert.IsTrue(putResponse.OK);
 
-			//var templateResponse = this._client.GetTemplate("put-template-with-settings");
-			//templateResponse.Should().NotBeNull();
-			//templateResponse.IsValid.Should().BeTrue();
-			//templateResponse.TemplateMapping.Should().NotBeNull();
-			//templateResponse.TemplateMapping.Mappings.Should().NotBeNull();
-			
-			//var settings = templateResponse.TemplateMapping.Settings;
-			//templateResponse.TemplateMapping.Order.Should().Be(42);
+			var warmerResponse = this._client.GetWarmer<ElasticSearchProject>("warmer_simpleputandget");
+			warmerResponse.Should().NotBeNull();
+			warmerResponse.IsValid.Should().BeTrue();
+			warmerResponse.Search.Should().NotBeNull();
 
-			//settings.Should().NotBeNull();
 		}
 
 	}

@@ -65,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Mapping\Types\WarmerMapping.cs" />
+    <Compile Include="Domain\Responses\WarmerResponse.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ElasticClient-Warmers.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
@@ -512,6 +515,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\WarmerResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicTemplatesConverter.cs" />
     <Compile Include="Resolvers\Converters\ElasticCoreTypeConverter.cs" />

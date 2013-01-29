@@ -71,5 +71,16 @@ namespace Nest
 			//return PutWarmerRaw(templateName, warmer);
 			//return null;
 		}
+
+
+		public WarmerResponse GetWarmer<T>(string warmerName)
+			where T : class
+		{
+			var path = this.PathResolver.GetWarmerPathForTyped<T>(warmerName);
+
+			ConnectionStatus status = this.Connection.GetSync(path);
+			var r = this.ToParsedResponse<WarmerResponse>(status);
+			return r;
+		}
 	}
 }

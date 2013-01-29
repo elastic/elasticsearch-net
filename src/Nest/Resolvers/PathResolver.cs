@@ -226,9 +226,9 @@ namespace Nest.Resolvers
 			return this.GetSearchDescriptorPathForDynamic(descriptor);
 		}
 
-		public string GetWarmerPathForDynamic(SearchDescriptor<dynamic> descriptor, string warmerName = null)
+		public string GetWarmerPathForDynamic(SearchDescriptor<dynamic> descriptor, string warmerName)
 		{
-			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
+			var extension = string.Format("_warmer/{0}", warmerName);
 			return this.GetSearchDescriptorPathForDynamic(descriptor, extension);
 		}
 
@@ -254,12 +254,34 @@ namespace Nest.Resolvers
 			return this.GetSearchDescriptorPathForTyped(descriptor);
 		}
 
-		public string GetWarmerPathForTyped<T>(SearchDescriptor<T> descriptor, string warmerName = null) where T : class
+		public string GetWarmerPathForTyped<T>(SearchDescriptor<T> descriptor, string warmerName) where T : class
 		{
-			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
+			var extension = string.Format("_warmer/{0}", warmerName);
 			return this.GetSearchDescriptorPathForTyped(descriptor, extension);
 		}
 
+		/// <summary>
+		/// Only for GET operations
+		/// </summary>
+		public string GetWarmerPathForTyped<T>(string warmerName = null) where T : class
+		{
+			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
+			var indices = this._indexNameResolver.GetIndexForType<T>();
+			var types = this._typeNameResolver.GetTypeNameFor<T>();
+			return this.SearchPathJoin(indices, types, null, extension);
+		}
+
+		/// <summary>
+		/// Only for GET operations
+		/// </summary>
+		public string GetWarmerPath(string indices = null, string types = null, string warmerName = null)
+		{
+			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
+			if (indices == null)
+				indices = "_all";
+
+			return this.SearchPathJoin(indices, types, null, extension);
+		}
 		private string GetSearchDescriptorPathForTyped<T>(SearchDescriptor<T> descriptor, string extension = "_search") where T : class
 		{
 			string indices;
