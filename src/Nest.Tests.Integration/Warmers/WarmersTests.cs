@@ -21,8 +21,9 @@ namespace Nest.Tests.Integration.Warmers
 			var warmerResponse = this._client.GetWarmer<ElasticSearchProject>("warmer_simpleputandget");
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeTrue();
-			warmerResponse.Search.Should().NotBeNull();
-
+			warmerResponse.Indices.Should().NotBeNull();
+			warmerResponse.Indices.Should().ContainKey(_settings.DefaultIndex);
+			warmerResponse.Indices[_settings.DefaultIndex].Should().ContainKey("warmer_simpleputandget");
 		}
 
 	}

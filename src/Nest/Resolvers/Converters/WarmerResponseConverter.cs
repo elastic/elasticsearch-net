@@ -16,22 +16,23 @@ namespace Nest.Resolvers.Converters
 										JsonSerializer serializer)
 		{
 			// {"indexname":{"warmers":{"warmername": {...}}}}
-			var dict = new Dictionary<string, Dictionary<string, Dictionary<string, SearchDescriptor<dynamic>>>>();
+			var dict = new Dictionary<string, Dictionary<string, Dictionary<string, WarmerMappingWrapper>>>();
 			serializer.Populate(reader, dict);
-			if (dict.Count == 0)
-				throw new DslException("Could not deserialize WarmerMapping");
-			var indexDict = dict.First().Value;
-			if (indexDict.Count == 0)
-				throw new DslException("Could not deserialize WarmerMapping");
-			var warmersDict = indexDict.First().Value;
-			if (warmersDict.Count == 0)
-				throw new DslException("Could not deserialize WarmerMapping");
 
+			Dictionary<string, Dictionary<string, WarmerMapping>> indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
+			foreach (var kv in dict)
+			{
+				var indexDict = kv.Value;
+				Dictionary<string, WarmerMappingWrapper> warmerWrappers;
+				if (!indexDict.TryGetValue("warmers", out warmerWrappers))
+					continue;
+				var warmers = warmerWrappers.ToDictionary(kvw => kvw.Key, kvw => kvw.Value.Unwrap(kvw.Key));
+				indices.Add(kv.Key, warmers);
+			}
 
 			return new WarmerResponse
 			{
-				Name = warmersDict.First().Key,
-				Search = warmersDict.First().Value
+				Indices = indices
 			};
 		}
 

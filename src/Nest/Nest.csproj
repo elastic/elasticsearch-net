@@ -64,6 +64,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Mapping\Types\WarmerMappingWrapper.cs" />
     <Compile Include="Domain\Mapping\Types\WarmerMapping.cs" />
     <Compile Include="Domain\Responses\WarmerResponse.cs">
       <SubType>Code</SubType>

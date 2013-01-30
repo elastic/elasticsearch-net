@@ -1,20 +1,19 @@
 ﻿using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Nest
 {
 	public interface IWarmerResponse : IResponse
 	{
-		string Name { get; }
-		SearchDescriptor<dynamic> Search { get; }
+		Dictionary<string, Dictionary<string, WarmerMapping>> Indices { get; }
 	}
 
 	[JsonObject]
 	[JsonConverter(typeof(WarmerResponseConverter))]
 	public class WarmerResponse : BaseResponse, IWarmerResponse
 	{
-		public string Name { get; internal set; }
+		public Dictionary<string, Dictionary<string, WarmerMapping>> Indices { get; internal set; }
 
-		public SearchDescriptor<dynamic> Search { get; internal set; }
 	}
 }
