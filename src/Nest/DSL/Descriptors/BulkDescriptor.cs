@@ -50,11 +50,12 @@ namespace Nest
 		/// Allows you to perform the multiget on a fixed path. 
 		/// The index and optionally type specified here take precedence over the chained get operations.
 		/// </summary>
-		public void FixedPath(string index, string type = null)
+		public BulkDescriptor FixedPath(string index, string type = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			this._FixedIndex = index;
 			this._FixedType = type;
+			return this;
 		}
 	}
 }

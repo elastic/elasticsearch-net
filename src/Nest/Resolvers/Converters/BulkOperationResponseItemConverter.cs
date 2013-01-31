@@ -29,11 +29,15 @@ namespace Nest.Resolvers.Converters
 						deleteItem.Operation = key;
 					return deleteItem;
 				case "index":
-				case "create":
 					var indexItem = (BulkIndexResponseItem)serializer.Deserialize(prop.Value.CreateReader(), typeof(BulkIndexResponseItem));
 					if (indexItem != null)
 						indexItem.Operation = key;
 					return indexItem;
+				case "create":
+					var createItem = (BulkCreateResponseItem)serializer.Deserialize(prop.Value.CreateReader(), typeof(BulkCreateResponseItem));
+					if (createItem != null)
+						createItem.Operation = key;
+					return createItem;
 			}
 			return null;
 		}

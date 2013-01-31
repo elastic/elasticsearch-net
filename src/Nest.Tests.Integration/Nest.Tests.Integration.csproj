@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
     <Compile Include="Help\AliasTests.cs" />

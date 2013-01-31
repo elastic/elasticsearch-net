@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
@@ -8,7 +9,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 	public class BulkTests : BaseJsonTests
 	{
 		[Test]
-		public void Bulk()
+		public void BulkNonFixed()
 		{
 			var result = this._client.Bulk(b => b
 				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
@@ -16,9 +17,34 @@ namespace Nest.Tests.Unit.Core.Bulk
 				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
 			);
 			var status = result.ConnectionStatus;
-			throw new Exception(status.Request);
-			//StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
-			//StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1", status.RequestUrl);
+			var uri = new Uri(result.ConnectionStatus.RequestUrl);
+			uri.AbsolutePath.Should().Be("/_bulk");
+		}
+		[Test]
+		public void BulkFixedIndex()
+		{
+			var result = this._client.Bulk(b => b
+				.FixedPath("myindex")
+				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 2 }))
+				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
+				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+			);
+			var status = result.ConnectionStatus;
+			var uri = new Uri(result.ConnectionStatus.RequestUrl);
+			uri.AbsolutePath.Should().Be("/myindex/_bulk");
+		}
+		[Test]
+		public void BulkFixedIndexAndType()
+		{
+			var result = this._client.Bulk(b => b
+				.FixedPath("myindex", "mytype")
+				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 2 }))
+				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
+				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+			);
+			var status = result.ConnectionStatus;
+			var uri = new Uri(result.ConnectionStatus.RequestUrl);
+			uri.AbsolutePath.Should().Be("/myindex/mytype/_bulk");
 		}
 	}
 }

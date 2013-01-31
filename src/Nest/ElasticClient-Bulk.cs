@@ -52,7 +52,14 @@ namespace Nest
 				}
 			}
 			var json = sb.ToString();
-			var status = this.Connection.PostSync("_bulk", json);
+			var path = "_bulk";
+			if (!bulkDescriptor._FixedIndex.IsNullOrEmpty())
+			{
+				if (!bulkDescriptor._FixedType.IsNullOrEmpty())
+					path = bulkDescriptor._FixedType + "/" + path;
+				path = bulkDescriptor._FixedIndex + "/" + path;
+			}
+			var status = this.Connection.PostSync(path, json);
 			return this.ToParsedResponse<BulkResponse>(status);
 		}
 		

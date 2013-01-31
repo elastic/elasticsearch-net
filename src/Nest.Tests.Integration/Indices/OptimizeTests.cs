@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Indices
 		public void OptimizeAllWithParameters()
 		{
 			var r = this._client.Optimize(new OptimizeParams());
-			Assert.True(r.OK);
+			Assert.True(r.OK, r.ConnectionStatus.ToString());
 		}
 		[Test]
 		public void OptimizeIndexWithParameters()
