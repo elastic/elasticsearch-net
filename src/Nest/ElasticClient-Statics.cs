@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -31,6 +32,12 @@ namespace Nest
 			this.IndexSerializationSettings.Converters.Add(converter);
 			this.SerializationSettings.Converters.Add(converter);
 		}
+
+        public void ModifyJsonSerializationSettings(Action<JsonSerializerSettings> modifier)
+        {
+            modifier(this.IndexSerializationSettings);
+            modifier(this.SerializationSettings);
+        }
 
 		/// <summary>
 		/// serialize an object using the internal registered converters without camelcasing properties as is done 
