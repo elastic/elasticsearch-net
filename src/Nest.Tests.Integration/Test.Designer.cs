@@ -73,7 +73,7 @@ namespace Nest.Tests.Integration {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://127.0.0.1.:9200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:9200")]
         public global::System.Uri Uri {
             get {
                 return ((global::System.Uri)(this["Uri"]));

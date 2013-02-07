@@ -278,7 +278,16 @@ namespace Nest.Thrift
 						client.InputProtocol.Transport.Open();
 
 					var result = client.execute(restRequest);
-					return new ConnectionStatus(DecodeStr(result.Body));
+					if (result.Status == Status.OK)
+						return new ConnectionStatus(DecodeStr(result.Body));
+					else
+					{
+						var connectionError = new ConnectionError(DecodeStr(result.Body), (int)result.Status)
+						{
+							ExceptionMessage = Enum.GetName(typeof (Status), result.Status)						
+						};
+						return new ConnectionStatus(connectionError);
+					}
 				}
 				catch
 				{
