@@ -7,6 +7,6 @@ namespace Nest
 {
   public enum DateInterval
   {
-    Minute, Hour, Day, Week, Month, Year
+    Minute, Hour, Day, Week, Month, Quarter, Year
   }
 }
