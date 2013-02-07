@@ -25,7 +25,7 @@ Searching is fluent:
 			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
 	);
 
-#[Read the documentation here](http://mpdreamz.github.com/NEST)
+#[Read the documentation here](http://nest.azurewebsites.net/)
 
 additionally [@joelabrahamsson](http://twitter.com/joelabrahamsson) wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
 using NEST. 
@@ -47,7 +47,7 @@ All of these are more then welcome on the github issues pages! I try to to at le
 
 ## Copyright
 
-Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](https://github.com/Mpdreamz/NEST)
+Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](http://nest.azurewebsites.net/)
 
 A special shoutout to [@stephenpope](http://github.com/stephenpope) for allowing his port 
 of the java factory based dsl [Rubber](http://github.com/stephenpope/Rubber) to be merged into NEST. 
