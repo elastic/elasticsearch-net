@@ -159,6 +159,16 @@ namespace Nest.Resolvers.Writers
 				}
 				jsonWriter.WriteEndObject();
 			}
+			if (att.DisableAllField)
+			{
+				jsonWriter.WritePropertyName("_all");
+				jsonWriter.WriteStartObject();
+				{
+					jsonWriter.WritePropertyName("enabled");
+					jsonWriter.WriteValue("false");
+				}
+				jsonWriter.WriteEndObject();
+			}
 			if (att.DynamicDateFormats != null && att.DynamicDateFormats.Any())
 			{
 				jsonWriter.WritePropertyName("dynamic_date_formats");
