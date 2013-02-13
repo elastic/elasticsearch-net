@@ -41,6 +41,13 @@ Nest can be installed through NuGet:
 
 Or searching for "elasticsearch"  will get you to nest as well. 
 
+#Who's using NEST?
+* [stackoverflow.com](http://www.stackoverflow.com) (and the rest of the stackexchange family).
+* [7digital.com](http://www.7digital.com) (run NEST on mono).
+* [rijksmuseum.nl](https://www.rijksmuseum.nl/en) (elasticsearch is the only datastorage hit for each page).
+
+Always keen to hear and list more uses ! hit me on [@Mpdreamz](https://twitter.com/Mpdreamz)
+
 ## Questions, bugs, comments, requests
 
 All of these are more then welcome on the github issues pages! I try to to at least reply within the same day.
