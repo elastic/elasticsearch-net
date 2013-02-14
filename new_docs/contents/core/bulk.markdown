@@ -8,7 +8,7 @@ menuitem: bulk
 
 # Bulk
 
-Nest long supported bulk index and deletes (through `IndexMany()` and DeleteMany()`) but this shielded you from all that the elasticsearch `_bulk` api enpoint has to offer. Now you can use `Bulk()` to create any bulk request you'd like. E.g if you want to do index/create/delete's in a certain order.
+Nest long supported bulk index and deletes (through `IndexMany()` and `DeleteMany()`) but this shielded you from all that the elasticsearch `_bulk` api enpoint has to offer. Now you can use `Bulk()` to create any bulk request you'd like. E.g if you want to do index/create/delete's in a certain order.
 
 # Examples
 
