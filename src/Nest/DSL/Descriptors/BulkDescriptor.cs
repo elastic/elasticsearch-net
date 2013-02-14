@@ -9,14 +9,12 @@ namespace Nest
 {
 	public class BulkDescriptor
 	{
-		internal readonly IList<BaseSimpleGetDescriptor> _GetOperations = new List<BaseSimpleGetDescriptor>();
-
 		internal string _FixedIndex { get; set; }
 		internal string _FixedType { get; set; }
 
 		internal IList<BaseBulkOperation> _Operations = new List<BaseBulkOperation>();
 
-		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector)
+		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
 		{
 			bulkCreateSelector.ThrowIfNull("bulkCreateSelector");
 			var descriptor = bulkCreateSelector(new BulkCreateDescriptor<T>());
@@ -25,8 +23,8 @@ namespace Nest
 			this._Operations.Add(descriptor);
 			return this;
 		}
-		
-		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector)
+
+		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector) where T : class
 		{
 			bulkIndexSelector.ThrowIfNull("bulkIndexSelector");
 			var descriptor = bulkIndexSelector(new BulkIndexDescriptor<T>());
@@ -36,7 +34,7 @@ namespace Nest
 			return this;
 		}
 
-		public BulkDescriptor Delete<T>(Func<BulkDeleteDescriptor<T>, BulkDeleteDescriptor<T>> bulkDeleteSelector)
+		public BulkDescriptor Delete<T>(Func<BulkDeleteDescriptor<T>, BulkDeleteDescriptor<T>> bulkDeleteSelector) where T : class
 		{
 			bulkDeleteSelector.ThrowIfNull("bulkDeleteSelector");
 			var descriptor = bulkDeleteSelector(new BulkDeleteDescriptor<T>());
@@ -48,7 +46,8 @@ namespace Nest
 
 		/// <summary>
 		/// Allows you to perform the multiget on a fixed path. 
-		/// The index and optionally type specified here take precedence over the chained get operations.
+		/// Each operation that doesn't specify an index or type will use this fixed index/type
+		/// over the default infered index and type.
 		/// </summary>
 		public BulkDescriptor FixedPath(string index, string type = null)
 		{

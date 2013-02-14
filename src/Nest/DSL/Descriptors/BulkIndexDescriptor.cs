@@ -5,6 +5,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public class BulkIndexDescriptor<T> : BaseBulkOperation
+		 where T : class
 	{
 
 		internal override Type _ClrType { get { return typeof(T); } }

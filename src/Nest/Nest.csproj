@@ -64,8 +64,16 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
+    <Compile Include="Domain\Responses\BulkDeleteResponseItem.cs" />
+    <Compile Include="Domain\Responses\BulkIndexResponseItem.cs" />
+    <Compile Include="Domain\Responses\BulkOperationResponseItem.cs" />
+    <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
+    <Compile Include="Domain\Responses\IBulkResponse.cs" />
+    <Compile Include="ElasticClient-MultiSearch.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
+    <Compile Include="DSL\Descriptors\MultiSearchDescriptor.cs" />
     <Compile Include="DSL\Descriptors\TemplateMappingDescriptor.cs" />
     <Compile Include="ElasticClient-Template.cs" />
     <Compile Include="Domain\Bulk\BaseBulkOperation.cs" />
@@ -510,11 +518,12 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
     <Compile Include="Resolvers\Converters\TemplateResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicTemplatesConverter.cs" />
     <Compile Include="Resolvers\Converters\ElasticCoreTypeConverter.cs" />
     <Compile Include="Resolvers\Converters\ElasticTypeConverter.cs" />
-    <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
+    <Compile Include="Resolvers\Converters\MultiSearchConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
