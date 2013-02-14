@@ -211,7 +211,7 @@ namespace Nest
 					// Copy all data from the response stream
 					var output = new MemoryStream();
 					var buffer = new byte[BUFFER_SIZE];
-					while (true)
+					while (responseStream != null)
 					{
 						var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
 						yield return read;

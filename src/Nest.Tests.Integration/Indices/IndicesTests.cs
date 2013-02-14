@@ -165,7 +165,6 @@ namespace Nest.Tests.Integration.Indices
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 			result.ConnectionStatus.Should().NotBeNull();
-			throw new Exception(result.ConnectionStatus.ToString());
 		}
 
 

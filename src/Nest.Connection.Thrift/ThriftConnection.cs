@@ -278,7 +278,7 @@ namespace Nest.Thrift
 						client.InputProtocol.Transport.Open();
 
 					var result = client.execute(restRequest);
-					if (result.Status == Status.OK)
+					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
 						return new ConnectionStatus(DecodeStr(result.Body));
 					else
 					{
