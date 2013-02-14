@@ -8,9 +8,15 @@ namespace Nest.Tests.Integration
 	{
 		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
 
+
+
 		public static IConnectionSettings Settings(int? port = null)
 		{
-			return new ConnectionSettings(Test.Default.Host, port ?? Test.Default.Port)
+			var host = Test.Default.Host;
+			if (port == null && Process.GetProcessesByName("fiddler").HasAny())
+				host = "localhost.fiddler";
+
+			return new ConnectionSettings(host, port ?? Test.Default.Port)
 				.SetDefaultIndex(ElasticsearchConfiguration.DefaultIndex)
 				.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 				.UsePrettyResponses();
