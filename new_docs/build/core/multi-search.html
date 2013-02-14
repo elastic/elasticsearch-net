@@ -86,10 +86,10 @@
 <span class="keyword">var</span> elasticProjectResult = result.GetResponse&lt;ElasticSearchProject>(<span class="string">"esproj"</span>);
 
 <span class="comment">//personResult is a QueryResponse&lt;Person>></span>
-<span class="keyword">var</span> personResults = result.GetResponses&lt;Person>(<span class="string">"people"</span>);
+<span class="keyword">var</span> personResults = result.GetResponse&lt;Person>(<span class="string">"people"</span>);
 
 <span class="comment">//will be null </span>
-<span class="keyword">var</span> invalidResult = result.GetResponses&lt;ElasticSearchProject>(<span class="string">"people"</span>);</code></pre>
+<span class="keyword">var</span> invalidResult = result.GetResponse&lt;ElasticSearchProject>(<span class="string">"people"</span>);</code></pre>
 
           </div>
         </article>

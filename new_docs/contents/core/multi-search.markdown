@@ -36,7 +36,7 @@ The multi search API allows to execute several search requests within the same A
 	var elasticProjectResult = result.GetResponse<ElasticSearchProject>("esproj");
 
 	//personResult is a QueryResponse<Person>>
-	var personResults = result.GetResponses<Person>("people");
+	var personResults = result.GetResponse<Person>("people");
 
 	//will be null 
-	var invalidResult = result.GetResponses<ElasticSearchProject>("people");
+	var invalidResult = result.GetResponse<ElasticSearchProject>("people");
