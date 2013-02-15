@@ -15,6 +15,7 @@
     <dependencies>
 			<dependency id="NEST" />
       <dependency id="Newtonsoft.Json" />
+      <dependency id="NetReflector" />
     </dependencies>
     <tags>elasticsearch elastic search lucene nest</tags>
   </metadata>
