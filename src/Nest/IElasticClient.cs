@@ -20,6 +20,8 @@ namespace Nest
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
 
+
+
 		IAnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text);
 		IAnalyzeResponse Analyze(string text);
 		IAnalyzeResponse Analyze<T>(System.Linq.Expressions.Expression<Func<T, object>> selector, string index, string text) where T : class;
@@ -158,6 +160,9 @@ namespace Nest
 
 		IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
+
+		MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
+		MultiSearchResponse MultiSearch(MultiSearchDescriptor multiSearchSelector);
 
 		IIndexSettingsResponse GetIndexSettings();
 		IIndexSettingsResponse GetIndexSettings(string index);

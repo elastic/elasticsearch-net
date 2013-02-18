@@ -11,15 +11,10 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SearchDescriptor<T> where T : class
-	{
-		private readonly TypeNameResolver typeNameResolver;
 
-		public SearchDescriptor()
-		{
-			this.typeNameResolver = new TypeNameResolver();
-		}
+	public abstract class SearchDescriptorBase
+	{
+		internal abstract Type _ClrType { get; }
 		internal IEnumerable<string> _Indices { get; set; }
 		internal IEnumerable<string> _Types { get; set; }
 		internal string _Routing { get; set; }
@@ -27,6 +22,22 @@ namespace Nest
 		internal string _Scroll { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
+
+		[JsonProperty(PropertyName = "preference")]
+		internal string _Preference { get; set; }
+	}
+
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class SearchDescriptor<T> : SearchDescriptorBase where T : class
+	{
+		private readonly TypeNameResolver typeNameResolver;
+
+		public SearchDescriptor()
+		{
+			this.typeNameResolver = new TypeNameResolver();
+		}
+
+		internal override Type _ClrType { get { return typeof(T); } }
 
 		/// <summary>
 		/// Whiter conditionless queries are allowed or not
@@ -174,9 +185,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "min_score")]
 		internal double? _MinScore { get; set; }
-
-		[JsonProperty(PropertyName = "preference")]
-		internal string _Preference { get; set; }
 
 		[JsonProperty(PropertyName = "indices_boost")]
 		internal IDictionary<string, double> _IndicesBoost { get; set; }
