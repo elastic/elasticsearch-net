@@ -25,8 +25,8 @@ Id property is inferred (can be any value type (int, string, float ...))
 
 ## By IEnumerable<T>
 
-            this.ConnectedClient.Delete(searchProjects);
-            this.ConnectedClient.DeleteAsync(searchProjects);
+            this.ConnectedClient.DeleteMany(searchProjects);
+            this.ConnectedClient.DeleteManyAsync(searchProjects);
 
 ## By IEnumerable<T> using bulkparameters
 
@@ -39,7 +39,7 @@ Using bulk parameters you can control the deletion of each individual document f
 					VersionType = VersionType.External 
 				}
 			);
-            this.ConnectedClient.Delete(bulkedProjects, new SimpleBulkParameters() { Refresh = true });
+            this.ConnectedClient.DeleteMany(bulkedProjects, new SimpleBulkParameters() { Refresh = true });
 
 
 ## By Query
