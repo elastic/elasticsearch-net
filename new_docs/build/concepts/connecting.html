@@ -38,6 +38,7 @@
             <ul>
               <li><a href="/" class="">Introduction</a></li>
               <li><a href="/concepts/connecting.html" class="selected">Connecting</a></li>
+              <li><a href="/concepts/index-type-inference.html" class="">Type/Index Inference</a></li>
               <li><a href="/concepts/handling-responces.html" class="">Response handling</a></li>
               <li><a href="/concepts/writing-queries.html" class="">Writing queries</a></li>
             </ul>
@@ -103,6 +104,14 @@
 <p>Setting <code>UsePrettyResponses()</code> on <code>ConnectionSettings</code> will append <code>pretty=true</code> to all the requests to inform ElasticSearch we want nicely formatted responses, setting this does <strong>not</strong> prettify requests themselves because bulk requests in ElasticSearch follow a very exact line delimited format. 
 
 </p>
+<h3>MapTypeIndices</h3>
+<p>Allows you to globally set the default type name for a type.
+
+</p>
+<pre><code>.MapTypeIndices(s=>s
+    .Add(typeof(MyType), "mytupo")
+    .Add(typeof(YoutubeMovie), "mov")
+);</code></pre>
 
           </div>
         </article>

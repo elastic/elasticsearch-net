@@ -38,8 +38,8 @@
             <ul>
               <li><a href="/" class="">Introduction</a></li>
               <li><a href="/concepts/connecting.html" class="">Connecting</a></li>
-              <li><a href="/concepts/index-type-inference.html" class="">Type/Index Inference</a></li>
-              <li><a href="/concepts/handling-responces.html" class="selected">Response handling</a></li>
+              <li><a href="/concepts/index-type-inference.html" class="selected">Type/Index Inference</a></li>
+              <li><a href="/concepts/handling-responces.html" class="">Response handling</a></li>
               <li><a href="/concepts/writing-queries.html" class="">Writing queries</a></li>
             </ul>
             <li><a href="/core/" class="">+ Core</a></li>
@@ -52,20 +52,34 @@
           </ul>
         </aside>
         <article>
-          <div id="content-margin-fix"><h1>Handling responces</h1>
-<p>All responses have the following properties
+          <div id="content-margin-fix"><h2>Index and Type inference.</h2>
+<p>When setting up a connection to elasticsearch you can define a default index to be used see <a href="/concepts/connecting.html">the connecting</a> section of the help. NEST will use this whenever an index is not explictly stated. This will helps tremendously to cut back on the verbose nature of having to supply the same string over and over.
 
 </p>
-<p>a boolean <code>IsValid</code> and a <code>ConnectionStatus</code> object that holds any information needed to recreate the request to elasticsearch.
+<p>Similarly for types NEST will lowercase and pluralize the typenames in the absence of an explicit type parameter. The behavior of lowercasing and pluralizing is overridable using the <code>TypeNameInferrer</code> setting on <code>ConnectionSettings</code> if you have a different generic scheme that works better for you. 
 
 </p>
-<p>These properties pertain to NEST and whether NEST thinks the response is valid or not. In some cases though elasticsearch responds back with with an <code>ok</code> or <code>acknowledged</code> properties. NEST will <strong>always</strong> map these fields but they will not influence the <code>IsValid</code> property. If NEST was successful in connecting and getting back a 200 status <code>IsValid</code> will always be <strong>true</strong> by design. If you need to check for elasticsearch validity check the <code>OK</code> or <code>Acknowledged</code> properties where these apply.
+<p>On the connection settings you can even set up the elasticsearch typename for the CLR typename explicitly globally. See MapTypeIndices section on <a href="/concepts/connecting.html">the connecting help page</a> 
 
 </p>
-<p><code>ConnectionStatus</code> holds the HttpStatusCode and various other interesting information in case a transport error occurred.
+<p>To summarize: NEST is set up in a way that you don&apos;t have to sprinkle index and typename strings through your entire codebase.
 
 </p>
-<p><strong>NOTE</strong> in most cases elasticsearch will throw a 500 and in that case <code>IsValid</code> will be false too. <code>ConnectionStatus.Result</code> will hold the error message as recieved from elasticsearch.
+<p>So whenever you find yourself writing:
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.Search&lt;ElasticSearchProject>(s => s
+    .Index(<span class="string">"my-index"</span>)
+    .Type(<span class="string">"my-type"</span>)
+    .MatchAll()
+);</code></pre>
+<p>alot, taking of adventage of <code>ConnectionSettings</code>
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.Search&lt;ElasticSearchProject>(s => s
+    .MatchAll()
+);</code></pre>
+<p>could suffice.
 
 </p>
 
