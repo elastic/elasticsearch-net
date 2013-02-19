@@ -95,7 +95,7 @@ namespace Nest.Dsl.Factory
 
         public object ToJsonObject()
         {
-            var content = new JObject(new JProperty(NAME), new JObject());
+            var content = new JObject(new JProperty(NAME, new JObject()));
             content[NAME]["query"] = _queryBuilder.ToJsonObject() as JObject;
             content[NAME]["script"] = _script;
 

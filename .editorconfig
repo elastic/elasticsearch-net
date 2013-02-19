@@ -1,16 +1,13 @@
 root=true
 
 [*]
-end_of_line = LF
-
-[*.cs]
 indent_style = tab
 indent_size = 4
 
-[*.cpp]
-indent_style = space
+[*.js]
+indent_style = spaces
 indent_size = 2
 
-[*.h]
-indent_style = space
+[*.markdown]
+indent_style = spaces
 indent_size = 2

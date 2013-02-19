@@ -59,16 +59,16 @@ available.
 ## Aditional parameters
 Like the overloads just taking a `T` the `IEnumerable<T>` has alot of overloads taking in extra parameters. 
 
-	client.Index(posts, new SimpleBulkParameters() { Refresh = true });
+	client.IndexMany(posts, new SimpleBulkParameters() { Refresh = true });
 
 The reason the `IEnumerable<T>` overloads take a `SimpleBulkParameters` is because to pass item specific parameters you'll have to wrap `posts` in a `BulkParameters<T>` i.e:
 
-	client.Index(posts.Select(p=>new BulkParameters<T>(p) { Version = p.Version }));
+	client.IndexMany(posts.Select(p=>new BulkParameters<T>(p) { Version = p.Version }));
 
 This will do a bulk index on posts but use each individual posts version. Again there's plenty of overloads to mix and match:
 
 	var bulkParams = posts.Select(p=>new BulkParameters<T>(p) { Version = p.Version });
-	client.Index(bulkParams , new SimpleBulkParameters() { Refresh = true });
+	client.IndexMany(bulkParams , new SimpleBulkParameters() { Refresh = true });
 
 
  
