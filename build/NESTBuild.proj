@@ -113,7 +113,6 @@
     <Exec WorkingDirectory="$(BuildDir)"
           Command="$(MSBuildProjectDirectory)\nuget.exe pack $(BuildDir)\Nest.Dsl.Factory.nuspec" />
 
-
     <ItemGroup>
       <Packages Include="$(BuildDir)\*.nupkg" />
     </ItemGroup>
