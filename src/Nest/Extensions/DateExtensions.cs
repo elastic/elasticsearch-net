@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nest
 {
-    public static class DateExtensions
+    internal static class DateExtensions
     {
 		//Google & StackOverflow, thank you 
 		//http://stackoverflow.com/questions/249760/how-to-convert-unix-timestamp-to-datetime-and-vice-versa

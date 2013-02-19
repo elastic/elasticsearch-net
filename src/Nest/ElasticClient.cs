@@ -9,7 +9,7 @@ namespace Nest
 	public partial class ElasticClient : Nest.IElasticClient
 	{
 		protected IConnection Connection { get; set; }
-		protected IConnectionSettings Settings { get; set; }
+		public IConnectionSettings Settings { get; protected set; }
 		private bool _gotNodeInfo = false;
 		private bool _IsValid { get; set; }
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
