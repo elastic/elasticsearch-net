@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -9,30 +10,25 @@ namespace Nest.Tests.Integration.Integration.Filter
 	/// Integrated tests of RangeFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class RangeFilterTests : BaseElasticSearchTests
+	public class RangeFilterTests : IntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
 		private ElasticSearchProject _LookFor;
 
-		/// <summary>
-		/// Create document for test.
-		/// </summary>
-		protected override void ResetIndexes()
+		[TestFixtureSetUp]
+		public void Initialize()
 		{
-			base.ResetIndexes();
-			var client = this.ConnectedClient;
-			if (client.IsValid)
-			{
-				_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
-				_LookFor.Name = "mmm";
-				var status = this.ConnectedClient.Index(_LookFor);
-				Assert.True(status.Success, status.Result);
+			_client.IsValid.Should().BeTrue();
 
-				Assert.True(this.ConnectedClient.Flush<ElasticSearchProject>().OK, "Flush");
-			}
+			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
+			_LookFor.Name = "mmm";
+			var status = this._client.Index(_LookFor, new IndexParameters { Refresh = true }).ConnectionStatus;
+			Assert.True(status.Success, status.Result);
 		}
+
+
 
 		/// <summary>
 		/// Set of filters that should not filter de documento _LookFor.

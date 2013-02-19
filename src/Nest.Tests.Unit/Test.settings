@@ -12,10 +12,10 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="Host" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1.</Value>
+      <Value Profile="(Default)">localhost</Value>
     </Setting>
     <Setting Name="Uri" Type="System.Uri" Scope="User">
-      <Value Profile="(Default)">http://127.0.0.1.:9200</Value>
+      <Value Profile="(Default)">http://localhost:9200</Value>
     </Setting>
   </Settings>
 </SettingsFile>

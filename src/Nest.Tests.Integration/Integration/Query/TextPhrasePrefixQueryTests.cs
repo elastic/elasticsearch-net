@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
+using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -10,30 +11,24 @@ namespace Nest.Tests.Integration.Integration.Query
 	/// Integrated tests of NumericRangeFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class TextPhrasePrefixQueryTests : BaseElasticSearchTests
+	public class TextPhrasePrefixQueryTests : IntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
 		private ElasticSearchProject _LookFor;
 
-		/// <summary>
-		/// Create document for test.
-		/// </summary>
-		protected override void ResetIndexes()
+		[TestFixtureSetUp]
+		public void Initialize()
 		{
-			base.ResetIndexes();
-			var client = this.ConnectedClient;
-			if (client.IsValid)
-			{
-				_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
-				_LookFor.Name = "one two three four";
-				var status = this.ConnectedClient.Index(_LookFor);
-				Assert.True(status.Success, status.Result);
+			_client.IsValid.Should().BeTrue();
 
-				Assert.True(this.ConnectedClient.Flush<ElasticSearchProject>().OK, "Flush");
-			}
+			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
+			_LookFor.Name = "one two three four";
+			var status = this._client.Index(_LookFor, new IndexParameters { Refresh = true }).ConnectionStatus;
+			Assert.True(status.Success, status.Result);
 		}
+
 
 		/// <summary>
 		/// Test control. If this test fail, the problem not in TextPhrasePrefixQuery.
@@ -44,7 +39,7 @@ namespace Nest.Tests.Integration.Integration.Query
 			var id = _LookFor.Id;
 			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id.ToString());
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId && filterId)
 				);
 
@@ -84,7 +79,7 @@ namespace Nest.Tests.Integration.Integration.Query
 					.Slop(0)
 					.PrefixLength(2));
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId)
 					.Query(querySlop0 && querySlop1 && queryPrefix1 && queryPrefix2)
 				);
@@ -123,7 +118,7 @@ namespace Nest.Tests.Integration.Integration.Query
 					.OnField(p => p.Name)
 					.QueryString("one fail"));
 
-			var results = this.ConnectedClient.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId)
 					.Query(querySlop0 || querySlop1 || queryPrefix2 || queryFail)
 				);

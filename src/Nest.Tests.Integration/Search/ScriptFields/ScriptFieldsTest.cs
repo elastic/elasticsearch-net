@@ -6,14 +6,14 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search.ScriptFields
 {
 	[TestFixture]
-	public class ScriptFieldsTest : BaseElasticSearchTests
+	public class ScriptFieldsTest : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 		[Test]
 		public void SimpleExplain()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
 				.From(0)
 				.Size(10)
 				.MatchAll()

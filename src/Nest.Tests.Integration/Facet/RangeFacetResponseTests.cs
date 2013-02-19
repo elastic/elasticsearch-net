@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleRangeFacet()
 		{
-			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
+			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void DateRangeFacet()
 		{
-			var queryResults = this.ConnectedClient.SearchRaw<ElasticSearchProject>(
+			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },

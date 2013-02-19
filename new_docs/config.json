@@ -1,0 +1,9 @@
+{
+  "locals": {
+    "url": "/",
+    "name": "Nest .net elasticsearch client",
+    "owner": "Martijn Laarman",
+    "description": "",
+    "index_articles": 3
+  }
+}

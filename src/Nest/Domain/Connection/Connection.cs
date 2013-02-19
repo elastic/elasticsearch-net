@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	internal class Connection : IConnection
+	public class Connection : IConnection
 	{
 		const int BUFFER_SIZE = 1024;
 
@@ -113,7 +113,7 @@ namespace Nest
 
 		private HttpWebRequest CreateConnection(string path, string method)
 		{
-	  var timeout = this._ConnectionSettings.Timeout;
+			var timeout = this._ConnectionSettings.Timeout;
 			var url = this._CreateUriString(path);
 			if (this._ConnectionSettings.UsesPrettyResponses)
 			{
@@ -124,8 +124,8 @@ namespace Nest
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 
-	  myReq.Timeout = timeout; // 1 minute timeout.
-	  myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
+			myReq.Timeout = timeout; // 1 minute timeout.
+			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
 			myReq.Method = method;
 
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
@@ -140,7 +140,7 @@ namespace Nest
 			return myReq;
 		}
 
-		private ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
+		protected virtual ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
 			var timeout = this._ConnectionSettings.Timeout;
 			var task = this.DoAsyncRequest(request, data);
@@ -152,19 +152,20 @@ namespace Nest
 			}
 			return task.Result;
 		}
-		
-		private Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
+
+		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
 			this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
-      if (tcs.Task != null && tcs.Task.Result != null)
-      {
-        tcs.Task.Result.Request = data;
-        tcs.Task.Result.RequestUrl = request.RequestUri.ToString();
-        tcs.Task.Result.RequestMethod = request.Method;
-      }
+			if (tcs.Task != null && tcs.Task.Result != null)
+			{
+				tcs.Task.Result.Request = data;
+				tcs.Task.Result.RequestUrl = request.RequestUri.ToString();
+				tcs.Task.Result.RequestMethod = request.Method;
+			}
 			return tcs.Task;
 		}
+	
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
 		{
 			var timeout = this._ConnectionSettings.Timeout;
@@ -178,7 +179,7 @@ namespace Nest
 			try
 			{
 				var state = new ConnectionState { Connection = request };
-				
+
 				if (data != null)
 				{
 					var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
@@ -210,7 +211,7 @@ namespace Nest
 					// Copy all data from the response stream
 					var output = new MemoryStream();
 					var buffer = new byte[BUFFER_SIZE];
-					while (true)
+					while (responseStream != null)
 					{
 						var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
 						yield return read;
@@ -255,12 +256,20 @@ namespace Nest
 			};
 			recursiveBody(null);
 		}
+	
 		private string _CreateUriString(string path)
 		{
 			var s = this._ConnectionSettings;
-			if (!path.StartsWith("/"))
+			if (!string.IsNullOrEmpty(s.Host))
+			{
+				if (!path.StartsWith("/"))
+					path = "/" + path;
+				return string.Format("http://{0}:{1}{2}", s.Host, s.Port, path);
+			}
+			if (!s.Uri.ToString().EndsWith("/") && !path.StartsWith("/"))
 				path = "/" + path;
-			return !string.IsNullOrEmpty(s.Host) ? string.Format("http://{0}:{1}{2}", s.Host, s.Port, path) : s.Uri + path;
+
+			return  s.Uri + path;
 		}
 	}
 }

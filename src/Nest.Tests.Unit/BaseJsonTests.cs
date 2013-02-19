@@ -12,39 +12,78 @@ using Nest.Resolvers.Converters;
 using Nest.Tests.MockData.Domain;
 using System.Reflection;
 using System.IO;
+using Moq;
 
 namespace Nest.Tests.Unit
 {
 	public class BaseJsonTests
 	{
 		protected readonly IConnectionSettings _settings;
+		/// <summary>
+		/// In memory client that never hits elasticsearch
+		/// </summary>
 		protected readonly IElasticClient _client;
+		protected readonly IConnection _connection;
 
 		public BaseJsonTests()
 		{
 			this._settings = new ConnectionSettings(Test.Default.Uri)
 				.SetDefaultIndex(Test.Default.DefaultIndex);
-			this._client = new ElasticClient(this._settings);
+			this._connection = new InMemoryConnection(this._settings);
+			this._client = new ElasticClient(this._settings, this._connection);
 		}
 
-		protected void JsonEquals(object o, MethodBase method)
+		protected void deb(string s)
 		{
-			var type = method.DeclaringType;
-			var @namespace = method.DeclaringType.Namespace;
-			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
-			var file = Path.Combine(folder, method.Name + ".json");
-			var json = TestElasticClient.Serialize(o);
-			var expected = File.ReadAllText(file);
-			Assert.True(json.JsonEquals(expected), json);
+			//I use NCrunch for continuous testing
+			//with this i can print variables as i type...
+			//Lazy programmers for the win!
+			throw new Exception(s);
 		}
-		protected void JsonEquals(string json, MethodBase method)
+
+		protected void JsonEquals(object o, MethodBase method, string fileName = null)
+		{
+			var json = _client.Serialize(o);
+			this.JsonEquals(json, method, fileName);
+		}
+		protected void JsonEquals(string json, MethodBase method, string fileName = null)
 		{
 			var type = method.DeclaringType;
 			var @namespace = method.DeclaringType.Namespace;
 			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
-			var file = Path.Combine(folder, method.Name + ".json");
+
+			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
+			file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
+
+
 			var expected = File.ReadAllText(file);
-			Assert.True(json.JsonEquals(expected), json);
+			Assert.True(json.JsonEquals(expected), this.PrettyPrint(json));
+		}
+
+
+		protected void JsonNotEquals(object o, MethodBase method, string fileName = null)
+		{
+			var json = TestElasticClient.Serialize(o);
+			this.JsonNotEquals(json, method, fileName);
+		}
+		protected void JsonNotEquals(string json, MethodBase method, string fileName = null)
+		{
+			var type = method.DeclaringType;
+			var @namespace = method.DeclaringType.Namespace;
+			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
+
+			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
+			file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
+
+
+			var expected = File.ReadAllText(file);
+			Assert.False(json.JsonEquals(expected), this.PrettyPrint(json));
+		}
+
+		private string PrettyPrint(string json)
+		{
+			dynamic parsedJson = JsonConvert.DeserializeObject(json);
+			return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
 		}
 	}
 }

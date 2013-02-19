@@ -6,7 +6,7 @@ using System.Net;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class AsyncTests : BaseElasticSearchTests
+	public class AsyncTests : IntegrationTests
 	{
 
 		[Test]
@@ -16,9 +16,9 @@ namespace Nest.Tests.Integration.Core
 			{
 				Name = "COBOLES", //COBOL ES client ?
 			};
-			var t = this.ConnectedClient.IndexAsync<ElasticSearchProject>(newProject);
+			var t = this._client.IndexAsync<ElasticSearchProject>(newProject);
 			t.Wait();
-			Assert.True(t.Result.Success);
+			Assert.True(t.Result.IsValid);
 			Assert.True(t.IsCompleted, "task did not complete");
 			Assert.True(t.IsCompleted, "task did not complete");
 		}
@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Core
 		{
 			var timeout = 1;
 			var s = new ConnectionSettings(Test.Default.Host, Test.Default.Port, timeout)
-						.SetDefaultIndex(Test.Default.DefaultIndex)
+						.SetDefaultIndex(ElasticsearchConfiguration.DefaultIndex)
 						.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 						.UsePrettyResponses();
 
@@ -39,7 +39,11 @@ namespace Nest.Tests.Integration.Core
 			};
 			var t = client.IndexAsync<ElasticSearchProject>(newProject);
 			t.Wait(1000);
-			var cs = t.Result;
+      var r = t.Result;
+      Assert.True(r.IsValid);
+      Assert.IsNotNullOrEmpty(r.Id);
+
+			var cs = r.ConnectionStatus;
 			Assert.False(cs.Success);
 			Assert.NotNull(cs.Error);
 			Assert.NotNull(cs.Error.OriginalException);

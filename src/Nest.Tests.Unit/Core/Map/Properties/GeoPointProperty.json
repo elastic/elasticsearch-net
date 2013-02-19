@@ -1,0 +1,12 @@
+  {
+  "elasticsearchprojects": {
+    "properties": {
+      "origin": {
+        "type": "geo_point",
+        "lat_lon": true,
+        "geohash": true,
+        "geohash_precision": 12
+      }
+    }
+  }
+}

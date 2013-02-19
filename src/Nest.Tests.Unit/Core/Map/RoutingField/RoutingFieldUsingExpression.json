@@ -1,0 +1,8 @@
+  {
+  "elasticsearchprojects": {
+    "_routing": {
+      "required": true,
+      "path": "name"
+    }
+  }
+}

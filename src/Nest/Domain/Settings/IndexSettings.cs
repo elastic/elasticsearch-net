@@ -5,14 +5,14 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-    /// <summary>
-    /// Writing these uses a custom converter that ignores the json props
-    /// </summary>
-    [JsonConverter(typeof(IndexSettingsConverter))]
-    [JsonObject(MemberSerialization.OptIn)]
-    public class IndexSettings : IDictionary<string, string>
-    {
-        internal static readonly IEnumerable<string> UpdateWhiteList = new List<string>
+	/// <summary>
+	/// Writing these uses a custom converter that ignores the json props
+	/// </summary>
+	[JsonConverter(typeof(IndexSettingsConverter))]
+	[JsonObject(MemberSerialization.OptIn)]
+	public class IndexSettings : IDictionary<string, object>
+	{
+		internal static readonly IEnumerable<string> UpdateWhiteList = new List<string>
         {
             "number_of_replicas",
             "auto_expand_replicas",
@@ -33,109 +33,146 @@ namespace Nest
             "merge."
         };
 
-        public IndexSettings()
-        {
-            this.Analysis = new AnalysisSettings();
-            this.Mappings = new List<TypeMapping>();
-            this.Settings = new Dictionary<string, string>();
-        }
-        [JsonProperty(PropertyName = "index.number_of_shards")]
-        public int? NumberOfShards { get; set; }
-        [JsonProperty(PropertyName = "index.number_of_replicas")]
-        public int? NumberOfReplicas { get; set; }
+		public IndexSettings()
+		{
+			this.Analysis = new AnalysisSettings();
+			this.Mappings = new List<RootObjectMapping>();
+			this.Settings = new Dictionary<string, object>();
+		}
+		public int? NumberOfShards
+		{
+			get
+			{
+				return this.GetIntegerValue("number_of_shards");
+			}
+			set
+			{
+				this.TryAdd("number_of_shards", value);
+			}
+		}
+		public int? NumberOfReplicas
+		{
+			get
+			{
+				return this.GetIntegerValue("number_of_replicas");
+			}
+			set
+			{
+				this.TryAdd("number_of_replicas", value);
+			}
+		}
 
-        internal Dictionary<string, string> Settings { get; set; }
+		internal int? GetIntegerValue(string key)
+		{
+			object value;
+			int i = 0;
+			if (!this.TryGetValue(key, out value) 
+				|| value == null
+				|| !int.TryParse(value.ToString(), out i))
+				return null;
+			return i;
+		}
 
-        public AnalysisSettings Analysis { get; private set; }
+		public void TryAdd(string key, object value)
+		{
+			if (this.ContainsKey(key))
+				this[key] = value;
+			else
+				this.Add(key, value);
+		}
 
-        public IList<TypeMapping> Mappings { get; private set; }
+		internal Dictionary<string, object> Settings { get; set; }
 
-        public void Add(string key, string value)
-        {
-            this.Settings.Add(key, value);
-        }
+		public AnalysisSettings Analysis { get; internal set; }
 
-        public bool ContainsKey(string key)
-        {
-            return this.Settings.ContainsKey(key);
-        }
+		public IList<RootObjectMapping> Mappings { get; internal set; }
 
-        public ICollection<string> Keys
-        {
-            get { return this.Settings.Keys; }
-        }
+		public void Add(string key, object value)
+		{
+			this.Settings.Add(key, value);
+		}
 
-        public bool Remove(string key)
-        {
-            return this.Settings.Remove(key);
-        }
+		public bool ContainsKey(string key)
+		{
+			return this.Settings.ContainsKey(key);
+		}
 
-        public bool TryGetValue(string key, out string value)
-        {
-            return this.Settings.TryGetValue(key, out value);
-        }
+		public ICollection<string> Keys
+		{
+			get { return this.Settings.Keys; }
+		}
 
-        public ICollection<string> Values
-        {
-            get { return this.Settings.Values; }
-        }
-        [JsonIgnore]
-        public string this[string key]
-        {
-            get
-            {
-                return this.Settings[key];
-            }
-            set
-            {
-                this.Settings[key] = value;
-            }
-        }
+		public bool Remove(string key)
+		{
+			return this.Settings.Remove(key);
+		}
 
-        public void Add(KeyValuePair<string, string> item)
-        {
-            this.Settings.Add(item.Key, item.Value);
-        }
+		public bool TryGetValue(string key, out object value)
+		{
+			return this.Settings.TryGetValue(key, out value);
+		}
 
-        public void Clear()
-        {
-            this.Settings.Clear();
-        }
+		public ICollection<object> Values
+		{
+			get { return this.Settings.Values; }
+		}
+		[JsonIgnore]
+		public object this[string key]
+		{
+			get
+			{
+				return this.Settings[key];
+			}
+			set
+			{
+				this.Settings[key] = value;
+			}
+		}
 
-        public bool Contains(KeyValuePair<string, string> item)
-        {
-            return this.Settings.ContainsKey(item.Key) && this.Settings[item.Key] == item.Value;
-        }
+		public void Add(KeyValuePair<string, object> item)
+		{
+			this.Settings.Add(item.Key, item.Value);
+		}
 
-        public void CopyTo(KeyValuePair<string, string>[] array, int arrayIndex)
-        {
-           throw new NotImplementedException();
-        }
-        [JsonIgnore]
-        public int Count
-        {
-            get { return this.Settings.Count; }
-        }
-        [JsonIgnore]
-        public bool IsReadOnly
-        {
-            get { return false; }
-        }
+		public void Clear()
+		{
+			this.Settings.Clear();
+		}
 
-        public bool Remove(KeyValuePair<string, string> item)
-        {
-            return this.Settings.Remove(item.Key);
-        }
+		public bool Contains(KeyValuePair<string, object> item)
+		{
+			return this.Settings.ContainsKey(item.Key) && this.Settings[item.Key] == item.Value;
+		}
+
+		public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
+		{
+			throw new NotImplementedException();
+		}
+		[JsonIgnore]
+		public int Count
+		{
+			get { return this.Settings.Count; }
+		}
+		[JsonIgnore]
+		public bool IsReadOnly
+		{
+			get { return false; }
+		}
+
+		public bool Remove(KeyValuePair<string, object> item)
+		{
+			return this.Settings.Remove(item.Key);
+		}
 
 
-        public IEnumerator<KeyValuePair<string, string>> GetEnumerator()
-        {
-            return this.Settings.GetEnumerator();
-        }
+		public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
+		{
+			return this.Settings.GetEnumerator();
+		}
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return this.Settings.GetEnumerator();
-        }
-    }
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return this.Settings.GetEnumerator();
+		}
+	}
 }

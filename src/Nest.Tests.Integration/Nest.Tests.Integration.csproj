@@ -10,13 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nest.Tests.Integration</RootNamespace>
     <AssemblyName>Nest.Tests.Integration</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -24,7 +23,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -34,11 +33,8 @@
     <Reference Include="AutoPoco">
       <HintPath>..\..\dep\autopoco\AutoPoco.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\dep\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\..\dep\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,13 +43,48 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\dep\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseElasticSearchTests.cs" />
+    <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
+    <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
+    <Compile Include="ElasticsearchConfiguration.cs" />
+    <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Help\AliasTests.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTest.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="IntegrationTests.cs" />
+    <Compile Include="Cluster\HealthTests.cs" />
+    <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="IntegrationSetup.cs" />
+    <Compile Include="Core\Get\GetFullTests.cs" />
+    <Compile Include="Core\Get\GetMultiTests.cs" />
+    <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
+    <Compile Include="Core\Map\BoostField\BoostFieldTests.cs" />
+    <Compile Include="Core\Map\DynamicTemplates\DynamicTemplatesTests.cs" />
+    <Compile Include="Core\Map\BaseMappingTests.cs" />
+    <Compile Include="Core\Map\IdField\IdFieldTests.cs" />
+    <Compile Include="Core\Map\MetaField\MetaFieldTests.cs" />
+    <Compile Include="Core\Map\Properties\PropertiesTests.cs" />
+    <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
+    <Compile Include="Core\Map\RoutingField\RoutingFieldTests.cs" />
+    <Compile Include="Core\Map\SourceField\SourceFieldTests.cs" />
+    <Compile Include="Core\Map\TimestampField\TimestampFieldTests.cs" />
+    <Compile Include="Core\Map\TtlField\TtlFieldTests.cs" />
+    <Compile Include="Core\Map\TypeField\TypeFieldTests.cs" />
+    <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\ValidateTests.cs" />
-    <Compile Include="Get\GetTests.cs" />
-    <Compile Include="Index\IndexTests.cs" />
+    <Compile Include="Core\Get\GetTests.cs" />
+    <Compile Include="Index\GetIdFromElasticsearchTests.cs" />
+    <Compile Include="Index\IndexDefaultValueTests.cs" />
     <Compile Include="Indices\ClearCacheTests.cs" />
     <Compile Include="Indices\SegmentsTests.cs" />
     <Compile Include="Indices\ExistsTests.cs" />
@@ -103,6 +134,7 @@
     <Compile Include="Search\SearchType\SearchTypeTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
+    <Compile Include="Template\TemplateTests.cs" />
     <Compile Include="Test.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -110,17 +142,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HackerNews.Indexer\HackerNews.Indexer.csproj">
-      <Project>{E39CC264-A7B3-490D-84B2-D3016D86CD87}</Project>
-      <Name>HackerNews.Indexer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
-      <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
-      <Name>Nest.TestData</Name>
+    <ProjectReference Include="..\Nest.Connection.Thrift\Nest.Connection.Thrift.csproj">
+      <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
+      <Name>Nest.Connection.Thrift</Name>
     </ProjectReference>
     <ProjectReference Include="..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
+      <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
+      <Name>Nest.Tests.MockData</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -133,9 +165,7 @@
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

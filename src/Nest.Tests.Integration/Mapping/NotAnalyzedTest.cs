@@ -5,26 +5,29 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Mapping
 {
 	[TestFixture]
-	public class NotAnalyzedTests : BaseElasticSearchTests
+	public class NotAnalyzedTests : IntegrationTests
 	{
 		[Test]
 		public void NotAnalyzedReturnsOneItem()
 		{
-			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
-			this.ConnectedClient.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");
-			var x = this.ConnectedClient.Map<ElasticSearchProject>();
-			Assert.IsTrue(x.OK);
+			this._client.DeleteMapping<ElasticSearchProject>();
+			this._client.DeleteMapping<ElasticSearchProject>(ElasticsearchConfiguration.DefaultIndex + "_clone");
+			this._client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, new IndexSettings());
+			var x = this._client.MapFromAttributes<ElasticSearchProject>();
+			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
-			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
-			Assert.AreEqual("not_analyzed", typeMapping.Properties["country"].Index);
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
+			var mapping = typeMapping.Properties["country"] as StringMapping;
+			Assert.NotNull(mapping);
+			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
 			
-			var indexResult = this.ConnectedClient.Index(new ElasticSearchProject
+			var indexResult = this._client.Index(new ElasticSearchProject
 			{
 				Country = "The Royal Kingdom Of The Netherlands"
 			}, new IndexParameters { Refresh = true });
-			Assert.IsTrue(indexResult.Success);
+			Assert.IsTrue(indexResult.IsValid);
 
-			var result = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+			var result = this._client.Search<ElasticSearchProject>(s=>s
 				.FacetTerm(ft=>ft.OnField(f=>f.Country))
 				.MatchAll()
 			);
@@ -36,23 +39,25 @@ namespace Nest.Tests.Integration.Mapping
 		[Test]
 		public void AnalyzedReturnsTwoItems()
 		{
-			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
-			var x = this.ConnectedClient.Map<ElasticSearchProject>();
+			this._client.DeleteMapping<ElasticSearchProject>();
+			var x = this._client.MapFromAttributes<ElasticSearchProject>();
 			Assert.IsTrue(x.OK);
 
-			var typeMapping = this.ConnectedClient.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
-			this.ConnectedClient.DeleteMapping<ElasticSearchProject>();
-			typeMapping.Properties["country"].Index = "analyzed";
-			var updateMapResult = this.ConnectedClient.Map(typeMapping);
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
+			this._client.DeleteMapping<ElasticSearchProject>();
+			var mapping = typeMapping.Properties["country"] as StringMapping;
+			Assert.NotNull(mapping);
+			mapping.Index = FieldIndexOption.analyzed;
+			var updateMapResult = this._client.Map(typeMapping);
 			Assert.True(updateMapResult.IsValid);
 
-			var indexResult = this.ConnectedClient.Index(new ElasticSearchProject
+			var indexResult = this._client.Index(new ElasticSearchProject
 			{
 				Country = "The Royal Kingdom Of The Netherlands"
 			}, new IndexParameters { Refresh = true });
-			Assert.IsTrue(indexResult.Success);
+			Assert.IsTrue(indexResult.IsValid);
 
-			var result = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var result = this._client.Search<ElasticSearchProject>(s => s
 				.FacetTerm(ft => ft.OnField(f => f.Country))
 				.MatchAll()
 			);

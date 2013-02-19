@@ -14,6 +14,54 @@ namespace Nest
 	{
 		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
 
+		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
+		{
+			bulkSelector.ThrowIfNull("bulkSelector");
+			var bulkDescriptor = bulkSelector(new BulkDescriptor());
+			return this.Bulk(bulkDescriptor);
+		}
+		public IBulkResponse Bulk(BulkDescriptor bulkDescriptor)
+		{
+			bulkDescriptor.ThrowIfNull("bulkDescriptor");
+			var sb = new StringBuilder();
+			
+			foreach (var operation in bulkDescriptor._Operations)
+			{
+				var command = operation._Operation;
+				var index = operation._Index ??
+				            bulkDescriptor._FixedIndex ?? 
+							new IndexNameResolver(this.Settings).GetIndexForType(operation._ClrType);
+				var typeName = operation._Type
+				               ?? bulkDescriptor._FixedType
+				               ?? new TypeNameResolver().GetTypeNameForType(operation._ClrType);
+
+				var id = operation.GetIdForObject(this.IdResolver);
+				operation._Index = index;
+				operation._Type = typeName;
+				operation._Id = id;
+
+				var opJson = JsonConvert.SerializeObject(operation, Formatting.None, IndexSerializationSettings);
+
+				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
+				sb.Append(action);
+
+				if (command == "index" || command == "create")
+				{
+					string jsonCommand = JsonConvert.SerializeObject(operation._Object, Formatting.None, IndexSerializationSettings);
+					sb.Append(jsonCommand + "\n");
+				}
+			}
+			var json = sb.ToString();
+			var path = "_bulk";
+			if (!bulkDescriptor._FixedIndex.IsNullOrEmpty())
+			{
+				if (!bulkDescriptor._FixedType.IsNullOrEmpty())
+					path = bulkDescriptor._FixedType + "/" + path;
+				path = bulkDescriptor._FixedIndex + "/" + path;
+			}
+			var status = this.Connection.PostSync(path, json);
+			return this.ToParsedResponse<BulkResponse>(status);
+		}
 		
 		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
 		{
@@ -112,16 +160,16 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-	  var idSelector = this.IdResolver.CreateIdSelector<T>();
-
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
 
 			foreach (var @object in objects)
 			{
 				var objectAction = action;
-				if (idSelector != null)
-					objectAction += ", \"_id\" : \"{0}\" ".F(idSelector(@object));
+				
+					var id = this.IdResolver.GetIdFor(@object);
+					if (!id.IsNullOrEmpty())
+						objectAction += ", \"_id\" : \"{0}\" ".F(id);
 
 				objectAction += "} }\n";
 
@@ -143,8 +191,6 @@ namespace Nest
 			if (!@objects.Any())
 				return null;
 
-	  var idSelector = this.IdResolver.CreateIdSelector<T>();
-
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
 
@@ -154,8 +200,8 @@ namespace Nest
 					continue;
 
 				var objectAction = action;
-				if (idSelector != null)
-					objectAction += ", \"_id\" : \"{0}\" ".F(idSelector(@object.Document));
+
+				objectAction += ", \"_id\" : \"{0}\" ".F(this.IdResolver.GetIdFor(@object.Document));
 
 				if (!@object.Version.IsNullOrEmpty())
 					objectAction += ", \"version\" : \"{0}\" ".F(@object.Version);
@@ -170,7 +216,7 @@ namespace Nest
 				sb.Append(objectAction);
 				if (command == "index")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, SerializationSettings);
+					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, IndexSerializationSettings);
 					sb.Append(jsonCommand + "\n");
 				}
 			}

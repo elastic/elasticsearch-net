@@ -1,0 +1,17 @@
+  {
+  "from": 0,
+  "size": 10,
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "term": {
+            "name": {
+              "value": "myterm"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

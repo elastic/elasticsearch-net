@@ -6,14 +6,14 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search.SearchType
 {
 	[TestFixture]
-	public class SearchTypeScanTests : BaseElasticSearchTests
+	public class SearchTypeScanTests : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 		[Test]
 		public void SearchTypeScanWithoutScrollIsInvalid()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
 				.From(0)
 				.Size(10)
 				.MatchAll()
@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		[Test]
 		public void SearchTypeScan()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.MatchAll()
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		[Test]
 		public void SearchScrollOnly()
 		{
-			var queryResults = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticSearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.MatchAll()

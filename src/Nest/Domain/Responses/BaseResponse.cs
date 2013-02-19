@@ -10,6 +10,10 @@ namespace Nest
 
 	public class BaseResponse : IResponse
 	{
+		public BaseResponse()
+		{
+			this.IsValid = true;
+		}
 		public bool IsValid { get; internal set; }
 		public ConnectionStatus ConnectionStatus { get; internal set; }
 

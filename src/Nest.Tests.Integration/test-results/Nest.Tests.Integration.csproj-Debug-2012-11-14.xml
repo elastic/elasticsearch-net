@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tests>
+    <TestRecord Name="Nest">
+      <Tests>
+        <TestRecord Name="Tests">
+          <Tests>
+            <TestRecord Name="Integration">
+              <Tests>
+                <TestRecord Name="Mapping">
+                  <Tests>
+                    <TestRecord Name="MapTests">
+                      <Tests>
+                        <TestRecord Name="DynamicMap">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2012-11-14T19:31:48</TestDate>
+                              <Passed>0</Passed>
+                              <Errors>1</Errors>
+                              <Failures>0</Failures>
+                              <Inconclusive>0</Inconclusive>
+                              <NotRunnable>0</NotRunnable>
+                              <Skipped>0</Skipped>
+                              <Ignored>0</Ignored>
+                              <Time />
+                              <Message>System.NullReferenceException : Object reference not set to an instance of an object</Message>
+                              <StackTrace>  at Nest.Tests.Integration.Mapping.MapTests.DynamicMap () [0x00020] in D:\Programming\NEST\src\Nest.Tests.Integration\Mapping\MapTests.cs:107 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (System.Reflection.MonoMethod,object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in C:\cygwin\sources\mono\mcs\class\corlib\System.Reflection\MonoMethod.cs:221 </StackTrace>
+                              <ConsoleOutput />
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                        <TestRecord Name="GetMapping">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2012-11-14T19:32:04</TestDate>
+                              <Passed>1</Passed>
+                              <Errors>0</Errors>
+                              <Failures>0</Failures>
+                              <Inconclusive>0</Inconclusive>
+                              <NotRunnable>0</NotRunnable>
+                              <Skipped>0</Skipped>
+                              <Ignored>0</Ignored>
+                              <Time />
+                              <Message>Test successful
+
+Execution time: 0.03ms</Message>
+                              <ConsoleOutput />
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                        <TestRecord Name="SimpleMapByAttributes">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2012-11-14T19:32:19</TestDate>
+                              <Passed>1</Passed>
+                              <Errors>0</Errors>
+                              <Failures>0</Failures>
+                              <Inconclusive>0</Inconclusive>
+                              <NotRunnable>0</NotRunnable>
+                              <Skipped>0</Skipped>
+                              <Ignored>0</Ignored>
+                              <Time />
+                              <Message>Test successful
+
+Execution time: 1.50ms</Message>
+                              <ConsoleOutput />
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                      </Tests>
+                    </TestRecord>
+                  </Tests>
+                </TestRecord>
+              </Tests>
+            </TestRecord>
+          </Tests>
+        </TestRecord>
+      </Tests>
+    </TestRecord>
+  </Tests>
+</TestRecord>

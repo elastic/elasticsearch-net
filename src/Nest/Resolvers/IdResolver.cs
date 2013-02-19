@@ -15,9 +15,7 @@ namespace Nest.Resolvers
 
         internal Func<T, string> CreateIdSelector<T>() where T : class
         {
-            //TODO this idselection stuff for the bulk seems obsolete.
             Func<T, string> idSelector = (@object) => this.GetIdFor(@object);
-            var x = 1;
             return idSelector;
         }
 
@@ -38,7 +36,7 @@ namespace Nest.Resolvers
             var idProperty = GetInferredId(type);
             if (idProperty == null)
             {
-                throw new Exception("Could not infer id for object of type" + type.FullName);
+              return null;
             }
             try
             {

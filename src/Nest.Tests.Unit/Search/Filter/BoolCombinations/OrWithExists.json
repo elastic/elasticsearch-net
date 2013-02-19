@@ -1,0 +1,21 @@
+  {
+  "bool": {
+    "should": [
+      {
+        "exists": {
+          "field": "name"
+        }
+      },
+      {
+        "term": {
+          "name": "bar2"
+        }
+      },
+      {
+        "term": {
+          "name": "blah2"
+        }
+      }
+    ]
+  }
+}

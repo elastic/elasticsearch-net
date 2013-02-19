@@ -4,12 +4,12 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class StatsTest : BaseElasticSearchTests
+	public class StatsTest : IntegrationTests
 	{
 		[Test]
 		public void SimpleStats()
 		{
-			var r = this.ConnectedClient.Stats();
+			var r = this._client.Stats();
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SimpleIndexStats()
 		{
-			var r = this.ConnectedClient.Stats(this.Settings.DefaultIndex);
+			var r = this._client.Stats(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void ComplexStats()
 		{
-			var r = this.ConnectedClient.Stats(new StatsParams()
+			var r = this._client.Stats(new StatsParams()
 			{
 				InfoOn = StatsInfo.All,
 				Refresh = true,

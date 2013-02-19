@@ -8,20 +8,19 @@ namespace Nest
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		[Obsolete("Deprecated but will never be removed. Found a bug in the DSL? https://github.com/Mpdreamz/NEST/issues")]
-		public ICountResponse CountAll(string query)
+		public ICountResponse CountAllRaw(string query)
 		{
 			return this._Count("_count", query);
 		}
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
-		public ICountResponse CountAll(Action<QueryDescriptor> querySelector)
+		public ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return this._Count("_count", query);
 		}
 		/// <summary>
@@ -36,46 +35,69 @@ namespace Nest
 			return this._Count("_count", query);
 		}
 
+        /// <summary>
+        /// Performs a count query over the default index set in the client settings
+        /// </summary>
+        public ICountResponse CountRaw(string query)
+        {
+            var index = this.Settings.DefaultIndex;
+            index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+            string path = this.PathResolver.CreateIndexPath(index, "_count");
+            return _Count(path, query);
+        }
 		/// <summary>
 		/// Performs a count query over the default index set in the client settings
 		/// </summary>
-		public ICountResponse Count(Action<QueryDescriptor> querySelector)
+		public ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector)
 		{
 			var index = this.Settings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			string path = this.PathResolver.CreateIndexPath(index, "_count");
 			var descriptor = new QueryDescriptor();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return _Count(path, query);
 		}
 		/// <summary>
 		/// Performs a count query over the passed indices
 		/// </summary>
-		public ICountResponse Count(IEnumerable<string> indices, Action<QueryDescriptor> querySelector)
+		public ICountResponse Count(IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector)
 		{
 			indices.ThrowIfEmpty("indices");
 			string path = this.PathResolver.CreateIndexPath(indices, "_count");
 			var descriptor = new QueryDescriptor();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return _Count(path, query);
 		}
 		/// <summary>
 		/// Performs a count query over the multiple types in multiple indices.
 		/// </summary>
-		public ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Action<QueryDescriptor> querySelector)
+		public ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector)
 		{
 			indices.ThrowIfEmpty("indices");
 			indices.ThrowIfEmpty("types");
 			string path = this.PathResolver.CreateIndexTypePath(indices, types, "_count");
 			var descriptor = new QueryDescriptor();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return _Count(path, query);
 		}
 
+        /// <summary>
+        /// Perform a count query over the default index and the inferred type name for T
+        /// </summary>
+        public ICountResponse CountRaw<T>(string query) where T : class
+        {
+            var index = this.Settings.DefaultIndex;
+            index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+
+            var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+            string path = this.PathResolver.CreateIndexTypePath(index, typeName) + "_count";
+            return _Count(path, query);
+        }
 		/// <summary>
 		/// Perform a count query over the default index and the inferred type name for T
 		/// </summary>

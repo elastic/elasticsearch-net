@@ -31,6 +31,7 @@ namespace Nest.Resolvers.Writers
 		public TypeMappingWriter(Type t, string typeName, int maxRecursion)
 		{
 			this._type = t;
+
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
 
@@ -39,12 +40,10 @@ namespace Nest.Resolvers.Writers
 		}
 		public TypeMappingWriter(Type t, string typeName, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
-			this._type = t;
+		    this._type = GetUnderlyingType(t);
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
-
 			this.SeenTypes = seenTypes;
-
 		}
 
 		internal JObject MapPropertiesFromAttributes()
@@ -68,6 +67,27 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
+		internal RootObjectMapping RootObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
+
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<RootObjectMapping>(nestedJson);
+		}
+		internal ObjectMapping ObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
+
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<ObjectMapping>(nestedJson);
+		}
+		internal NestedObjectMapping NestedObjectMappingFromAttributes()
+		{
+			var json = JObject.Parse(this.MapFromAttributes());
+
+			var nestedJson = json.Properties().First().Value.ToString();
+			return JsonConvert.DeserializeObject<NestedObjectMapping>(nestedJson);
+		}
 		internal string MapFromAttributes()
 		{
 			var sb = new StringBuilder();
@@ -111,7 +131,7 @@ namespace Nest.Resolvers.Writers
 			}
 			if (att.NumericDetection)
 			{
-				jsonWriter.WritePropertyName("date_detection");
+				jsonWriter.WritePropertyName("numeric_detection");
 				jsonWriter.WriteRawValue("true");
 			}
 			if (!att.IndexAnalyzer.IsNullOrEmpty())
@@ -136,6 +156,16 @@ namespace Nest.Resolvers.Writers
 				{
 					jsonWriter.WritePropertyName("type");
 					jsonWriter.WriteValue(att.ParentType);
+				}
+				jsonWriter.WriteEndObject();
+			}
+			if (att.DisableAllField)
+			{
+				jsonWriter.WritePropertyName("_all");
+				jsonWriter.WriteStartObject();
+				{
+					jsonWriter.WritePropertyName("enabled");
+					jsonWriter.WriteValue("false");
 				}
 				jsonWriter.WriteEndObject();
 			}
@@ -378,13 +408,9 @@ namespace Nest.Resolvers.Writers
 		/// <returns>FieldType or null if can not be inferred</returns>
 		private FieldType? GetFieldTypeFromType(Type propertyType)
 		{
-			if (propertyType.IsArray)
-				propertyType = propertyType.GetElementType();
+			propertyType = GetUnderlyingType(propertyType);
 
-			if (propertyType.IsGenericType && propertyType.GetGenericArguments().Length >= 1)
-				propertyType = propertyType.GetGenericArguments()[0];
-
-			if (propertyType == typeof(string))
+		    if (propertyType == typeof(string))
 				return FieldType.string_type;
 
 			if (propertyType.IsValueType)
@@ -410,5 +436,16 @@ namespace Nest.Resolvers.Writers
 				return FieldType.@object;
 			return null;
 		}
+
+	    private static Type GetUnderlyingType(Type type)
+	    {
+	        if (type.IsArray)
+	            return type.GetElementType();
+
+	        if (type.IsGenericType && type.GetGenericArguments().Length >= 1)
+                return type.GetGenericArguments()[0];
+
+	        return type;
+	    }
 	}
 }

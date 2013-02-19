@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest", "Nest\Nest.csproj", "{072BA7DA-7B60-407D-8B6E-95E3186BE70C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Connection.Thrift", "Nest.Connection.Thrift\Nest.Connection.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.FactoryDsl", "Nest.Tests.FactoryDsl\Nest.Tests.FactoryDsl.csproj", "{78917074-61E5-4D3D-BB7E-B28CF260B919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration", "Nest.Tests.Integration\Nest.Tests.Integration.csproj", "{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.MockData", "Nest.Tests.MockData\Nest.Tests.MockData.csproj", "{27143A05-5655-447C-ADAF-405E1CF43741}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Unit", "Nest.Tests.Unit\Nest.Tests.Unit.csproj", "{97408393-78AC-45DF-BE6E-4C219A2E456D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtocolLoadTest", "ProtocolLoadTest\ProtocolLoadTest.csproj", "{B9FE4875-0171-40F7-A357-064A93BE09C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78917074-61E5-4D3D-BB7E-B28CF260B919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = ProtocolLoadTest\ProtocolLoadTest.csproj
+	EndGlobalSection
+EndGlobal

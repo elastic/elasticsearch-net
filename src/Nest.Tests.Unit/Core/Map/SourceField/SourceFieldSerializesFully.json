@@ -1,0 +1,15 @@
+  {
+  "elasticsearchprojects": {
+    "_source": {
+      "enabled": false,
+      "compress": true,
+      "compress_treshold": "200b",
+      "includes": [
+        "path2.*"
+      ],
+      "excludes": [
+        "path1.*"
+      ]
+    }
+  }
+}

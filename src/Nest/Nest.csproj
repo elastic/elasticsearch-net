@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nest</RootNamespace>
     <AssemblyName>Nest</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,109 +30,247 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Debug\Nest.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Release\Nest.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\dep\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\dep\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
+    <Compile Include="Domain\Responses\BulkDeleteResponseItem.cs" />
+    <Compile Include="Domain\Responses\BulkIndexResponseItem.cs" />
+    <Compile Include="Domain\Responses\BulkOperationResponseItem.cs" />
+    <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
+    <Compile Include="Domain\Responses\IBulkResponse.cs" />
+    <Compile Include="ElasticClient-MultiSearch.cs" />
+    <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
+    <Compile Include="Domain\Responses\TemplateResponse.cs" />
+    <Compile Include="DSL\MultiSearchDescriptor.cs" />
+    <Compile Include="DSL\TemplateMappingDescriptor.cs" />
+    <Compile Include="ElasticClient-Template.cs" />
+    <Compile Include="Domain\Bulk\BaseBulkOperation.cs" />
+    <Compile Include="DSL\BulkCreateDescriptor.cs" />
+    <Compile Include="DSL\BulkDescriptor.cs" />
+    <Compile Include="DSL\BulkIndexDescriptor.cs" />
+    <Compile Include="DSL\BulkDeleteDescriptor.cs" />
+    <Compile Include="DSL\Query\IMultiTermQuery.cs" />
+    <Compile Include="ElasticClient-DeleteById.cs" />
+    <Compile Include="ElasticClient-DeleteByQuery.cs" />
+    <Compile Include="ElasticClient-DeleteMany.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\Language.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\LanguageAnalyzer.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\KeywordAnalyzer.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\PatternAnalyzer.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\StopAnalyzer.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\WhitespaceAnalyzer.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\SimpleAnalyzer.cs" />
+    <Compile Include="Domain\Analysis\CharFilter\CharFilterBase.cs" />
+    <Compile Include="Domain\Analysis\CharFilter\HtmlStripCharFilter.cs" />
+    <Compile Include="Domain\Analysis\CharFilter\MappingCharFilter.cs" />
+    <Compile Include="Domain\Analysis\IAnalysisSetting.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\AsciiFoldingTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\CompoundWordTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\TrimTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\UniqueTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\TruncateTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\ElisionTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\ReverseTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\DictionaryDecompounderTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\HyphenationDecompounderTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\PhoneticTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\SnowballTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\KStemTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\KeywordMarkerTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\StemmerTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\PorterStemTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\LowercaseTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\LengthTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\StandardTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\PathHierarchyTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\UaxEmailUrlTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\PatternTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\WhitespaceTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\StandardTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\NGramTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\LowercaseTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\LetterTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\EdgeNGramTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\KeywordTokenizer.cs" />
+    <Compile Include="Domain\Analysis\Tokenizer\TokenizerBase.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\EdgeNgramTokenFilter.cs" />
+    <Compile Include="DSL\AnalysisDescriptor.cs" />
+    <Compile Include="DSL\CreateIndexDescriptor.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\AnalyzerBase.cs" />
+    <Compile Include="ElasticClient-CreateIndex.cs" />
+    <Compile Include="Domain\Parameters\HealthParams.cs" />
+    <Compile Include="Domain\Responses\HealthResponse.cs" />
+    <Compile Include="Domain\Responses\NodeInfoResponse.cs" />
+    <Compile Include="Domain\Responses\NodeStatsResponse.cs" />
+    <Compile Include="Domain\Stats\IndexHealthStats.cs" />
+    <Compile Include="Domain\Stats\NodeInfo.cs" />
+    <Compile Include="Domain\Stats\NodeStats.cs" />
+    <Compile Include="Domain\Stats\ShardHealthStats.cs" />
+    <Compile Include="DSL\MoreLikeThisDescriptor.cs" />
+    <Compile Include="ElasticClient-Health.cs" />
+    <Compile Include="ElasticClient-MoreLikeThis.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\BinaryMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GenericMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\DynamicTemplatesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\SingleMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GeoShapeMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\GeoPointMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\IPMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\MultiFieldMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\NestedObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\ObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\CorePropertiesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\NumberMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\DateMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\PropertiesDescriptor.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\StringMappingDescriptor.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\DynamicTemplate.cs" />
+    <Compile Include="Domain\Mapping\Types\BinaryMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\BooleanMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\AttachmentMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\GeoShapeMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\GeoPointMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\IPMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\MultiFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\IElasticCoreType.cs" />
+    <Compile Include="Domain\Mapping\Types\DateMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\NumberMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\StringMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\NestedObjectMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\ObjectMapping.cs" />
+    <Compile Include="ElasticClient-MappingGet.cs" />
+    <Compile Include="ElasticClient-MappingDelete.cs" />
+    <Compile Include="Domain\Hit\MultiGetHit.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\AnalyzerFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\AllFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\BoostFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\TtlFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\TimestampFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\SizeFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\IndexFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\RoutingFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\TypeFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\SourceFieldMapping.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\RootObjectMappingDescriptor.cs" />
+    <Compile Include="Domain\Responses\MultiGetResponse.cs" />
+    <Compile Include="DSL\MultiGetDescriptor.cs" />
+    <Compile Include="ElasticClient-GetFull.cs" />
+    <Compile Include="Domain\Connection\InMemoryConnection.cs" />
     <Compile Include="Domain\FieldSelection.cs" />
-    <Compile Include="DSL\Descriptors\GetDescriptor.cs" />
-    <Compile Include="DSL\Factory\Query\MatchQueryBuilder.cs" />
+    <Compile Include="Domain\Responses\BulkResponse.cs" />
+    <Compile Include="Domain\Responses\GetResponse.cs" />
+    <Compile Include="Domain\Responses\DeleteResponse.cs" />
+    <Compile Include="Domain\Responses\IndexResponse.cs" />
+    <Compile Include="DSL\GetDescriptor.cs" />
     <Compile Include="ElasticClient-MultiGet.cs" />
-    <Compile Include="Domain\Settings\NgramTokenFiler.cs" />
-    <Compile Include="Domain\Settings\SynonymTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\NgramTokenFiler.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\SynonymTokenFilter.cs" />
+    <Compile Include="ElasticClient-Nodes.cs" />
     <Compile Include="ElasticClient-Scroll.cs" />
     <Compile Include="Domain\Hit\ValidationExplanation.cs" />
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
-    <Compile Include="DSL\Descriptors\RoutingQueryPathDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\ValidateQueryPathDescriptor.cs" />
+    <Compile Include="DSL\RoutingQueryPathDescriptor.cs" />
+    <Compile Include="DSL\ValidateQueryPathDescriptor.cs" />
     <Compile Include="ElasticClient-Validate.cs" />
-    <Compile Include="DSL\Descriptors\Filter.cs" />
-    <Compile Include="DSL\Descriptors\Query.cs" />
+    <Compile Include="DSL\Filter.cs" />
+    <Compile Include="DSL\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
-    <Compile Include="DSL\Descriptors\BaseQuery.cs" />
-    <Compile Include="DSL\Descriptors\BaseFilter.cs" />
-    <Compile Include="DSL\Descriptors\IFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\IQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\TermsQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\UpdateDescriptor.cs" />
+    <Compile Include="DSL\BaseQuery.cs" />
+    <Compile Include="DSL\BaseFilter.cs" />
+    <Compile Include="DSL\IFilterDescriptor.cs" />
+    <Compile Include="DSL\IQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
+    <Compile Include="DSL\UpdateDescriptor.cs" />
     <Compile Include="ElasticClient-Update.cs" />
     <Compile Include="Domain\Facets\QueryFacet.cs" />
-    <Compile Include="DSL\Descriptors\HighlightDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\HighlightFieldDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\QueryPathDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\BaseFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\FilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Filter\NestedFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Filter\RangeFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Filter\HasChildFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Filter\GeoPolygonFilter.cs" />
-    <Compile Include="DSL\Descriptors\Filter\GeoDistanceRangeFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Filter\GeoDistanceFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\BoostingQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\BoolQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\ConstantScoreQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\IndicesQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\NestedQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\TopChildrenQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\SpanNotQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\SpanOrQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\SpanNearQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\SpanFirstQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\SpanQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\ISpanQuery.cs" />
-    <Compile Include="DSL\Descriptors\Query\SpanTerm.cs" />
-    <Compile Include="DSL\Descriptors\Query\MoreLikeThisDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\FuzzyLikeThisDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\FuzzyDateQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\FuzzyNumericQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\FuzzyQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\HasChildQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\RangeQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\TextPhrasePrefixQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\TextPhraseQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\TextQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\CustomBoostFactorQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\CustomScoreQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\DismaxQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\FilteredQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\IdsQuery.cs" />
-    <Compile Include="DSL\Descriptors\SortDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\SortGeoDistanceDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\SortScriptDescriptor.cs" />
-    <Compile Include="DSL\Factory\Common\GeoHashUtils.cs" />
-    <Compile Include="DSL\Factory\Common\Point.cs" />
-    <Compile Include="DSL\Factory\Common\EsRegex.cs" />
+    <Compile Include="DSL\HighlightDescriptor.cs" />
+    <Compile Include="DSL\HighlightFieldDescriptor.cs" />
+    <Compile Include="DSL\QueryPathDescriptor.cs" />
+    <Compile Include="DSL\Facets\BaseFacetDescriptor.cs" />
+    <Compile Include="DSL\FilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\NestedFilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\RangeFilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\HasChildFilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\GeoPolygonFilter.cs" />
+    <Compile Include="DSL\Filter\GeoDistanceRangeFilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\GeoDistanceFilterDescriptor.cs" />
+    <Compile Include="DSL\Query\BoostingQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\BoolQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\ConstantScoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\IndicesQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\NestedQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\TopChildrenQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\SpanNotQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\SpanOrQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\SpanNearQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\SpanFirstQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\SpanQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\ISpanQuery.cs" />
+    <Compile Include="DSL\Query\SpanTerm.cs" />
+    <Compile Include="DSL\Query\MoreLikeThisQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\FuzzyLikeThisDescriptor.cs" />
+    <Compile Include="DSL\Query\FuzzyDateQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\FuzzyNumericQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\FuzzyQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\HasChildQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\RangeQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\TextPhrasePrefixQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\TextPhraseQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\TextQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\CustomBoostFactorQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\CustomScoreQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\DismaxQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\FilteredQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\IdsQuery.cs" />
+    <Compile Include="DSL\SortDescriptor.cs" />
+    <Compile Include="DSL\SortGeoDistanceDescriptor.cs" />
+    <Compile Include="DSL\SortScriptDescriptor.cs" />
     <Compile Include="Enums\ComparatorType.cs" />
+    <Compile Include="Enums\RewriteMultiTerm.cs" />
+    <Compile Include="Enums\HealthLevel.cs" />
+    <Compile Include="Enums\HealthStatus.cs" />
+    <Compile Include="Enums\NodesInfo.cs" />
+    <Compile Include="Enums\NodeInfoStats.cs" />
+    <Compile Include="Enums\NumberType.cs" />
+    <Compile Include="Enums\GeoTree.cs" />
+    <Compile Include="Enums\NumericIndexOption.cs" />
+    <Compile Include="Enums\IndexOptions.cs" />
+    <Compile Include="Enums\OpType.cs" />
     <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Enums\Lang.cs" />
     <Compile Include="Enums\DateHistogramComparatorType.cs" />
@@ -143,138 +280,50 @@
     <Compile Include="Enums\SortOrder.cs" />
     <Compile Include="Enums\TermsStatsComparatorType.cs" />
     <Compile Include="Enums\TextQueryType.cs" />
-    <Compile Include="DSL\Factory\FacetFactory.cs" />
-    <Compile Include="DSL\Factory\Facet\AbstractFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\DateHistogramFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\FilterFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\GeoDistanceFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\HistogramFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\HistogramScriptFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\QueryFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\RangeFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\RangeScriptFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\StatisticalFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\StatisticalScriptFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\TermsFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\Facet\TermsStatsFacetBuilder.cs" />
-    <Compile Include="DSL\Factory\FilterFactory.cs" />
-    <Compile Include="DSL\Factory\Filter\AndFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\BoolFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\ExistsFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\GeoBoundingBoxFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\GeoDistanceFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\GeoDistanceRangeFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\GeoPolygonFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\HasChildFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\IdsFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\IFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\LimitFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\MatchAllFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\MissingFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\NestedFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\NotFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\NumericRangeFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\OrFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\PrefixFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\QueryFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\RangeFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\ScriptFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\TermFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\TermsFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\Filter\TypeFilterBuilder.cs" />
-    <Compile Include="DSL\Factory\HighlightBuilder.cs" />
-    <Compile Include="DSL\Factory\IJsonSerializable.cs" />
-    <Compile Include="DSL\Factory\NameRegistry.cs" />
-    <Compile Include="DSL\Factory\QueryBuilderException.cs" />
-    <Compile Include="DSL\Factory\QueryFactory.cs" />
-    <Compile Include="DSL\Factory\Query\BoolQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\BoostingQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\ConstantScoreQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\CustomBoostFactorQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\CustomFiltersScoreQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\CustomScoreQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\DisMaxQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\FieldMaskingSpanQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\FieldQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\FilteredQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\FuzzyLikeThisFieldQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\FuzzyLikeThisQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\FuzzyQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\HasChildQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\IdsQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\IndicesQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\IQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\ISpanQueryBuilder .cs" />
-    <Compile Include="DSL\Factory\Query\MatchAllQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\MoreLikeThisFieldQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\MoreLikeThisQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\NestedQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\PrefixQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\QueryStringQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\RangeQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\SpanFirstQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\SpanNearQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\SpanNotQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\SpanOrQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\SpanTermQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\TermQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\TermsQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\TextQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\TopChildrenQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\WildcardQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\Query\WrapperQueryBuilder.cs" />
-    <Compile Include="DSL\Factory\SearchBuilder.cs" />
-    <Compile Include="DSL\Factory\SearchBuilderException.cs" />
-    <Compile Include="DSL\Factory\SortFactory.cs" />
-    <Compile Include="DSL\Factory\Sort\FieldSortBuilder.cs" />
-    <Compile Include="DSL\Factory\Sort\GeoDistanceSortBuilder.cs" />
-    <Compile Include="DSL\Factory\Sort\ISortBuilder.cs" />
-    <Compile Include="DSL\Factory\Sort\ScoreSortBuilder.cs" />
-    <Compile Include="DSL\Factory\Sort\ScriptSortBuilder.cs" />
     <Compile Include="Enums\NestedScore.cs" />
     <Compile Include="Enums\TopChildrenScore.cs" />
     <Compile Include="Enums\Operator.cs" />
     <Compile Include="Enums\GeoOptimizeBBox.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="Enums\GeoUnit.cs" />
-    <Compile Include="DSL\Descriptors\Facets\GeoDistanceFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\TermsStatsFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\TermsStatsOrder.cs" />
-    <Compile Include="DSL\Descriptors\Facets\StatisticalFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\DateRounding.cs" />
-    <Compile Include="DSL\Descriptors\Facets\DateHistogramFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\DateInterval.cs" />
-    <Compile Include="DSL\Descriptors\Facets\HistogramFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\Range.cs" />
-    <Compile Include="DSL\Descriptors\Facets\RangeFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\FacetDescriptorBucket.cs" />
-    <Compile Include="DSL\Descriptors\Facets\TermsOrder.cs" />
-    <Compile Include="DSL\Descriptors\Facets\IFacetDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\EsRegexFlags.cs" />
-    <Compile Include="DSL\Descriptors\Filter\BoolFilterDescriptor.cs" />
+    <Compile Include="DSL\Facets\GeoDistanceFacetDescriptor.cs" />
+    <Compile Include="DSL\Facets\TermsStatsFacetDescriptor.cs" />
+    <Compile Include="DSL\Facets\TermsStatsOrder.cs" />
+    <Compile Include="DSL\Facets\StatisticalFacetDescriptor.cs" />
+    <Compile Include="DSL\Facets\DateRounding.cs" />
+    <Compile Include="DSL\Facets\DateHistogramFacetDescriptor.cs" />
+    <Compile Include="DSL\Facets\DateInterval.cs" />
+    <Compile Include="DSL\Facets\HistogramFacetDescriptor.cs" />
+    <Compile Include="DSL\Facets\Range.cs" />
+    <Compile Include="DSL\Facets\RangeFacetDescriptor.cs" />
+    <Compile Include="DSL\Facets\FacetDescriptorBucket.cs" />
+    <Compile Include="DSL\Facets\TermsOrder.cs" />
+    <Compile Include="DSL\Facets\IFacetDescriptor.cs" />
+    <Compile Include="DSL\Facets\EsRegexFlags.cs" />
+    <Compile Include="DSL\Filter\BoolFilterDescriptor.cs" />
     <Compile Include="Enums\GeoExecution.cs" />
-    <Compile Include="DSL\Descriptors\Filter\GeoBoundingBoxFilter.cs" />
-    <Compile Include="DSL\Descriptors\Filter\FilterBase.cs" />
-    <Compile Include="DSL\Descriptors\Filter\ScriptFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Filter\NumericRangeFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Filter\MissingFilter.cs" />
-    <Compile Include="DSL\Descriptors\Filter\MatchAllFilter.cs" />
+    <Compile Include="DSL\Filter\GeoBoundingBoxFilter.cs" />
+    <Compile Include="DSL\Filter\FilterBase.cs" />
+    <Compile Include="DSL\Filter\ScriptFilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\NumericRangeFilterDescriptor.cs" />
+    <Compile Include="DSL\Filter\MissingFilter.cs" />
+    <Compile Include="DSL\Filter\MatchAllFilter.cs" />
     <Compile Include="Enums\TermsExecution.cs" />
-    <Compile Include="DSL\Descriptors\Filter\TypeFilter.cs" />
-    <Compile Include="DSL\Descriptors\Filter\LimitFilter.cs" />
-    <Compile Include="DSL\Descriptors\Filter\IdsFilter.cs" />
-    <Compile Include="DSL\Descriptors\Filter\ExistsFilter.cs" />
-    <Compile Include="DSL\Descriptors\RawOrFilterDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\RawOrQueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Facets\TermFacetDescriptor.cs" />
+    <Compile Include="DSL\Filter\TypeFilter.cs" />
+    <Compile Include="DSL\Filter\LimitFilter.cs" />
+    <Compile Include="DSL\Filter\IdsFilter.cs" />
+    <Compile Include="DSL\Filter\ExistsFilter.cs" />
+    <Compile Include="DSL\RawOrFilterDescriptor.cs" />
+    <Compile Include="DSL\RawOrQueryDescriptor.cs" />
+    <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />
     <Compile Include="ElasticClient-Statics.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingParent.cs" />
+    <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
-    <Compile Include="DSL\Descriptors\QueryDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\SearchDescriptor.cs" />
+    <Compile Include="DSL\QueryDescriptor.cs" />
+    <Compile Include="DSL\SearchDescriptor.cs" />
     <Compile Include="ElasticClient-Percolate.cs" />
     <Compile Include="Domain\Hit\IndexSegment.cs" />
     <Compile Include="ElasticClient-Segments.cs" />
@@ -312,15 +361,13 @@
     <Compile Include="Domain\Connection\ConnectionStatus.cs" />
     <Compile Include="Domain\Hit\AnalyzeToken.cs" />
     <Compile Include="Domain\Hit\MultiHit.cs" />
-    <Compile Include="Domain\Mapping\ElasticProperty.cs" />
-    <Compile Include="Domain\Mapping\ElasticPropertyAttribute.cs" />
-    <Compile Include="Domain\Mapping\ElasticType.cs" />
-    <Compile Include="Domain\Mapping\ElasticTypeAttribute.cs" />
-    <Compile Include="Domain\Mapping\IElasticProperty.cs" />
+    <Compile Include="Domain\Mapping\Attributes\ElasticPropertyAttribute.cs" />
+    <Compile Include="Domain\Mapping\Types\IElasticType.cs" />
+    <Compile Include="Domain\Mapping\Attributes\ElasticTypeAttribute.cs" />
     <Compile Include="Domain\Mapping\Map.cs" />
-    <Compile Include="Domain\Mapping\TypeMapping.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingProperty.cs" />
-    <Compile Include="Domain\Mapping\TypeMappingSource.cs" />
+    <Compile Include="Domain\Mapping\Types\RootObjectMapping.cs" />
+    <Compile Include="Domain\Mapping\Types\GenericMapping.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\IdFieldMapping.cs" />
     <Compile Include="Domain\Parameters\AliasParams.cs" />
     <Compile Include="Domain\Parameters\AnalyzeParams.cs" />
     <Compile Include="Domain\Parameters\BaseParameters.cs" />
@@ -336,11 +383,10 @@
     <Compile Include="Domain\Responses\IndicesResponse.cs" />
     <Compile Include="Domain\Responses\IndicesShardResponse.cs" />
     <Compile Include="Domain\Responses\QueryResponse.cs" />
-    <Compile Include="Domain\Settings\AnalysisSettings.cs" />
-    <Compile Include="Domain\Settings\AnalyzerSettings.cs" />
-    <Compile Include="Domain\Settings\CustomAnalyzerSettings.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\AnalysisSettings.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\CustomAnalyzer.cs" />
     <Compile Include="Domain\Settings\IndexSettings.cs" />
-    <Compile Include="Domain\Settings\SnowballAnalyzerSettings.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\SnowballAnalyzer.cs" />
     <Compile Include="ElasticClient-Analyze.cs" />
     <Compile Include="ElasticClient-Aliases.cs" />
     <Compile Include="ElasticClient-Optimize.cs" />
@@ -379,6 +425,13 @@
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
+    <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
+    <Compile Include="Resolvers\Converters\TemplateResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\DynamicTemplatesConverter.cs" />
+    <Compile Include="Resolvers\Converters\ElasticCoreTypeConverter.cs" />
+    <Compile Include="Resolvers\Converters\ElasticTypeConverter.cs" />
+    <Compile Include="Resolvers\Converters\MultiSearchConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
@@ -386,17 +439,17 @@
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Hit\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />
-    <Compile Include="Domain\Settings\ShingleTokenFilter.cs" />
-    <Compile Include="Domain\Settings\TokenFilterSettings.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\ShingleTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\TokenFilterBase.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-MappingType.cs" />
     <Compile Include="ElasticClient-Get.cs" />
     <Compile Include="ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
     <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="DSL\Descriptors\Query\IQuery.cs" />
-    <Compile Include="DSL\Descriptors\Query\MatchAll.cs" />
-    <Compile Include="DSL\Descriptors\Query\Prefix.cs" />
+    <Compile Include="DSL\Query\IQuery.cs" />
+    <Compile Include="DSL\Query\MatchAll.cs" />
+    <Compile Include="DSL\Query\Prefix.cs" />
     <Compile Include="Enums\TermVectorOption.cs" />
     <Compile Include="Enums\FieldIndexOption.cs" />
     <Compile Include="Enums\StoreOption.cs" />
@@ -404,15 +457,16 @@
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
     <Compile Include="Resolvers\Converters\TermConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
+    <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Resolvers\PathResolver.cs" />
     <Compile Include="Resolvers\IndexNameResolver.cs" />
     <Compile Include="Resolvers\IdResolver.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />
     <Compile Include="Resolvers\Inflector.cs" />
     <Compile Include="Resolvers\PropertyNameResolver.cs" />
-    <Compile Include="DSL\Descriptors\Query\QueryStringDescriptor.cs" />
-    <Compile Include="DSL\Descriptors\Query\Term.cs" />
-    <Compile Include="DSL\Descriptors\Query\Wildcard.cs" />
+    <Compile Include="DSL\Query\QueryStringDescriptor.cs" />
+    <Compile Include="DSL\Query\Term.cs" />
+    <Compile Include="DSL\Query\Wildcard.cs" />
     <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="Resolvers\ElasticSearchJsonResolver.cs" />
     <Compile Include="Enums\Consistency.cs" />
@@ -428,10 +482,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resolvers\TypeNameResolver.cs" />
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
-    <Compile Include="Domain\Settings\PatternReplaceTokenFilterSettings.cs" />
-    <Compile Include="Domain\Settings\StandardAnalyzerSettings.cs" />
-    <Compile Include="Domain\Settings\StopTokenFilter.cs" />
-    <Compile Include="Domain\Settings\WordDelimiterTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\PatternReplaceTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\Analyzers\StandardAnalyzer.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\StopTokenFilter.cs" />
+    <Compile Include="Domain\Analysis\TokenFilter\WordDelimiterTokenFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -450,9 +504,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Inferno\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
