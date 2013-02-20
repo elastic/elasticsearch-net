@@ -45,6 +45,8 @@ Or searching for "elasticsearch"  will get you to nest as well.
 * [stackoverflow.com](http://www.stackoverflow.com) (and the rest of the stackexchange family).
 * [7digital.com](http://www.7digital.com) (run NEST on mono).
 * [rijksmuseum.nl](https://www.rijksmuseum.nl/en) (elasticsearch is the only datastorage hit for each page).
+* [Kiln](http://www.fogcreek.com/kiln/) FogCreek's version control & code review tooling. 
+  They are so pleased with elasticsearch that [they made a video about how pleased they are!](http://blog.fogcreek.com/kiln-powered-by-elasticsearch/)
 
 Always keen to hear and list more uses ! hit me on [@Mpdreamz](https://twitter.com/Mpdreamz)
 
