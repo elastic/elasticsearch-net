@@ -1,6 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.CSharp.RuntimeBinder;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -17,7 +23,7 @@ namespace Nest
 			var query = this.Serialize(descriptor);
 
 			ConnectionStatus status = this.Connection.PostSync(path, query);
-			var r = this.ToParsedResponse<QueryResponse<dynamic>>(status);
+			var r = this.GetParsedResponse<dynamic>(status, descriptor); ;
 			return r;
 		}
 
@@ -39,7 +45,7 @@ namespace Nest
 			var query = this.Serialize(descriptor);
 			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
 			var status = this.Connection.PostSync(path, query);
-			return this.ToParsedResponse<QueryResponse<T>>(status);
+			return this.GetParsedResponse<T>(status, descriptor);
 		}
 
 		/// <summary>
@@ -54,7 +60,7 @@ namespace Nest
 				path = this.PathResolver.GetSearchPathForTyped(descriptor);
 
 			ConnectionStatus status = this.Connection.PostSync(path, query);
-			var r = this.ToParsedResponse<QueryResponse<T>>(status);
+			var r = this.GetParsedResponse<T>(status, descriptor);
 			return r;
 		}
 		/// <summary>
@@ -64,12 +70,12 @@ namespace Nest
 		public Task<IQueryResponse<T>> SearchRawAsync<T>(string query, string path = null) where T : class
 		{
 			var descriptor = new SearchDescriptor<T>();
-			
+
 			if (string.IsNullOrEmpty(path))
 				path = this.PathResolver.GetSearchPathForTyped(descriptor);
 
 			var task = this.Connection.Post(path, query);
-			return task.ContinueWith<IQueryResponse<T>>(t => this.ToParsedResponse<QueryResponse<T>>(task.Result));
+			return task.ContinueWith<IQueryResponse<T>>(t => this.GetParsedResponse<T>(task.Result, descriptor));
 		}
 
 
@@ -84,7 +90,7 @@ namespace Nest
 			var query = this.Serialize(descriptor);
 
 			var task = this.Connection.Post(path, query);
-			return task.ContinueWith<IQueryResponse<dynamic>>(t => this.ToParsedResponse<QueryResponse<dynamic>>(t.Result));
+			return task.ContinueWith<IQueryResponse<dynamic>>(t => this.GetParsedResponse<dynamic>(task.Result, descriptor));
 		}
 
 		/// <summary>
@@ -106,9 +112,73 @@ namespace Nest
 			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
 
 			var task = this.Connection.Post(path, query);
-			return task.ContinueWith<IQueryResponse<T>>(t => this.ToParsedResponse<QueryResponse<T>>(task.Result));
+			return task.ContinueWith<IQueryResponse<T>>(t => this.GetParsedResponse<T>(task.Result, descriptor));
 		}
 
-		
+		private IQueryResponse<T> GetParsedResponse<T>(ConnectionStatus status, SearchDescriptor<T> descriptor) where T : class
+		{
+			if (descriptor._ConcreteTypeSelector == null)
+				return this.ToParsedResponse<QueryResponse<T>>(status);
+			return this.ToParsedResponse<QueryResponse<T>>(
+				status,
+				extraConverters: new[] { new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector) }
+			);
+		}
+
+	}
+
+	internal class ConcreteTypeConverter : JsonConverter
+	{
+		private readonly Type _baseType;
+		private readonly Func<dynamic, Hit<dynamic>, Type> _concreteTypeSelector;
+
+		public override bool CanWrite { get { return false; } }
+		public override bool CanRead { get { return true; } }
+
+		public ConcreteTypeConverter(Type baseType, Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
+		{
+			concreteTypeSelector.ThrowIfNull("concreteTypeSelector");
+
+			_baseType = baseType;
+			_concreteTypeSelector = concreteTypeSelector;
+		}
+
+		public override bool CanConvert(Type objectType)
+		{
+			return typeof(IHit<object>).IsAssignableFrom(objectType);
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			Hit<dynamic> hitDynamic = new Hit<dynamic>();
+			// Load JObject from stream
+			JObject jObject = JObject.Load(reader);
+			dynamic d = jObject;
+
+			//favor manual mapping over doing Populate twice.
+			hitDynamic.Fields = d.fields;
+			hitDynamic.Source = d._source;
+			hitDynamic.Index = d._index;
+			hitDynamic.Score = d._score;
+			hitDynamic.Type = d._type;
+			hitDynamic.Version = d._version;
+			hitDynamic.Id = d._id;
+			hitDynamic.Sorts = d.sort;
+			hitDynamic.Highlight = d.highlight;
+			hitDynamic.Explanation = d._explanation;
+
+			var concreteType = this._concreteTypeSelector(hitDynamic.Source, hitDynamic);
+			var hitType = typeof(Hit<>).MakeGenericType(concreteType);
+			var hit = Activator.CreateInstance(hitType);
+
+			serializer.Populate(jObject.CreateReader(), hit);
+
+			return hit;
+		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

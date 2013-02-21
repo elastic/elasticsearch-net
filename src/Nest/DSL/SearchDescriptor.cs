@@ -31,13 +31,15 @@ namespace Nest
 	public class SearchDescriptor<T> : SearchDescriptorBase where T : class
 	{
 		private readonly TypeNameResolver typeNameResolver;
-
+		
 		public SearchDescriptor()
 		{
 			this.typeNameResolver = new TypeNameResolver();
 		}
 
+		
 		internal override Type _ClrType { get { return typeof(T); } }
+		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
 
 		/// <summary>
 		/// Whiter conditionless queries are allowed or not
@@ -87,7 +89,18 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-			return this.Types((IEnumerable<string>)types.Select(t => this.typeNameResolver.GetTypeNameFor(t)).ToArray());
+
+			var typeDictionary = types.ToDictionary(t => this.typeNameResolver.GetTypeNameFor(t));
+
+			this._ConcreteTypeSelector = (o, h) =>
+			{
+				Type t;
+				if (!typeDictionary.TryGetValue(h.Type, out t))
+					return typeof (T);
+				return t;
+			};
+
+			return this.Types(typeDictionary.Keys.ToArray());
 		}
 		/// <summary>
 		/// The types to execute the search on. Defaults to the inferred typename of T 
@@ -914,6 +927,12 @@ namespace Nest
 			var q = new QueryDescriptor<T>();
 			q.MatchAll();
 			this._Query = q;
+			return this;
+		}
+
+		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
+		{
+			this._ConcreteTypeSelector = typeSelector;
 			return this;
 		}
 	}

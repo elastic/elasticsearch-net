@@ -1,35 +1,35 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
-  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
-  <PropertyGroup>
-    <SrcDir>$(MSBuildProjectDirectory)\..\src</SrcDir>
-    <SlnDir>$(MSBuildProjectDirectory)\..</SlnDir>
-  </PropertyGroup>
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+	<PropertyGroup>
+		<SrcDir>$(MSBuildProjectDirectory)\..\src</SrcDir>
+		<SlnDir>$(MSBuildProjectDirectory)\..</SlnDir>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <Version Condition="$(BUILD_NUMBER) != ''">$(BUILD_NUMBER)</Version>
-    <Version Condition="$(BUILD_NUMBER) == ''">1.0.0.0</Version>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-      <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
-      <BuildDir>$(MSBuildProjectDirectory)\tmp</BuildDir>
-      <SolutionFile>$(SrcDir)\Nest.sln</SolutionFile>
-  </PropertyGroup>
-  
-  <Target Name="Compile">
-    <AssemblyInfo CodeLanguage="CS"
-      OutputFile="$(SrcDir)\NEST\Properties\AssemblyInfo.cs"
-      AssemblyTitle="NEST"
-      AssemblyDescription="Strongly typed ElasticSearch client."
-      AssemblyCompany=""
-      AssemblyProduct="NEST"
-      AssemblyCopyright="Martijn Laarman MIT LICENSED"
-      ComVisible="false"
-      CLSCompliant="true"
-      Guid="07E5CFA3-CF5F-4D17-874C-8D5CC6FA3E73"
+	<PropertyGroup>
+		<Version Condition="$(BUILD_NUMBER) != ''">$(BUILD_NUMBER)</Version>
+		<Version Condition="$(BUILD_NUMBER) == ''">1.0.0.0</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+		<BuildDir>$(MSBuildProjectDirectory)\tmp</BuildDir>
+		<SolutionFile>$(SrcDir)\Nest.sln</SolutionFile>
+	</PropertyGroup>
+
+	<Target Name="Compile">
+		<AssemblyInfo CodeLanguage="CS"
+		  OutputFile="$(SrcDir)\NEST\Properties\AssemblyInfo.cs"
+		  AssemblyTitle="NEST"
+		  AssemblyDescription="Strongly typed ElasticSearch client."
+		  AssemblyCompany=""
+		  AssemblyProduct="NEST"
+		  AssemblyCopyright="Martijn Laarman MIT LICENSED"
+		  ComVisible="false"
+		  CLSCompliant="true"
+		  Guid="07E5CFA3-CF5F-4D17-874C-8D5CC6FA3E73"
                 
-      AssemblyVersion="$(Version)"
-      AssemblyFileVersion="$(Version)"/>
+		  AssemblyVersion="$(Version)"
+		  AssemblyFileVersion="$(Version)"/>
 		<AssemblyInfo CodeLanguage="CS"
       OutputFile="$(SrcDir)\Nest.Connection.Thrift\Properties\AssemblyInfo.cs"
       AssemblyTitle="Nest.Connection.Thrift"
@@ -43,55 +43,55 @@
                 
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)"/>
-    <AssemblyInfo CodeLanguage="CS"
-      OutputFile="$(SrcDir)\Nest.Dsl.Factory\Properties\AssemblyInfo.cs"
-      AssemblyTitle="Nest.Dsl.Factory"
-      AssemblyDescription="Nest already has a complete lambda DSL, this package introduces a second DSL that's a port of the Java DSL"
-      AssemblyCompany=""
-      AssemblyProduct="Nest.Dsl.Factory"
-      AssemblyCopyright="Martijn Laarman MIT LICENSED"
-      ComVisible="false"
-      CLSCompliant="true"
-      Guid="665cc582-c91f-4f6c-924a-614289fa9449"
+		<AssemblyInfo CodeLanguage="CS"
+		  OutputFile="$(SrcDir)\Nest.Dsl.Factory\Properties\AssemblyInfo.cs"
+		  AssemblyTitle="Nest.Dsl.Factory"
+		  AssemblyDescription="Nest already has a complete lambda DSL, this package introduces a second DSL that's a port of the Java DSL"
+		  AssemblyCompany=""
+		  AssemblyProduct="Nest.Dsl.Factory"
+		  AssemblyCopyright="Martijn Laarman MIT LICENSED"
+		  ComVisible="false"
+		  CLSCompliant="true"
+		  Guid="665cc582-c91f-4f6c-924a-614289fa9449"
                 
-      AssemblyVersion="$(Version)"
-      AssemblyFileVersion="$(Version)"/>
+		  AssemblyVersion="$(Version)"
+		  AssemblyFileVersion="$(Version)"/>
 
-      <MSBuild Projects="$(SolutionFile)" Properties="Configuration=$(Configuration)"  />
-  </Target>
-  
-  <Target Name="NuGetPackage" DependsOnTargets="Compile">
-    <ItemGroup>
-      <MainBinaries Include="$(SrcDir)\**\Nest\bin\$(Configuration)\**\*.*" />
+		<MSBuild Projects="$(SolutionFile)" Properties="Configuration=$(Configuration)"  />
+	</Target>
+
+	<Target Name="NuGetPackage" DependsOnTargets="Compile">
+		<ItemGroup>
+			<MainBinaries Include="$(SrcDir)\**\Nest\bin\$(Configuration)\**\*.*" />
 			<ThriftBinaries Include="$(SrcDir)\**\Nest.Connection.Thrift\bin\$(Configuration)\**\*.*" />
-      <FactoryDslBinaries Include="$(SrcDir)\**\Nest.Dsl.Factory\bin\$(Configuration)\**\*.*" />
-    </ItemGroup>
- 
-    <!-- First copy the nuspec template files to the build dir -->
-    <Copy SourceFiles="..\build\NEST.nuspec" DestinationFolder="$(BuildDir)" />
+			<FactoryDslBinaries Include="$(SrcDir)\**\Nest.Dsl.Factory\bin\$(Configuration)\**\*.*" />
+		</ItemGroup>
+
+		<!-- First copy the nuspec template files to the build dir -->
+		<Copy SourceFiles="..\build\NEST.nuspec" DestinationFolder="$(BuildDir)" />
 		<Copy SourceFiles="..\build\Nest.Connection.Thrift.nuspec" DestinationFolder="$(BuildDir)" />
-    <Copy SourceFiles="..\build\Nest.Dsl.Factory.nuspec" DestinationFolder="$(BuildDir)" />
- 
-    <!-- Copy the source files to the package dir -->
-    <Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
+		<Copy SourceFiles="..\build\Nest.Dsl.Factory.nuspec" DestinationFolder="$(BuildDir)" />
+
+		<!-- Copy the source files to the package dir -->
+		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
 		<Copy SourceFiles="@(ThriftBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
-    <Copy SourceFiles="@(FactoryDslBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
- 
-    <!-- Get the version number of the main FV assembly to insert into the nuspec files -->
-    <GetAssemblyIdentity AssemblyFiles="$(BuildDir)\lib\NET4\Nest.dll">
-      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
-    </GetAssemblyIdentity>
- 
-    <!-- insert the version number into the nuspec files -->
-    <XmlUpdate
-      Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      Prefix="n"
-      XmlFileName="$(BuildDir)\NEST.nuspec"
-      XPath="/n:package/n:metadata/n:version"
-      Value="%(AsmInfo.Version)" />
- 
-    <Exec WorkingDirectory="$(BuildDir)" 
-          Command="$(MSBuildProjectDirectory)\nuget.exe pack $(BuildDir)\NEST.nuspec" />
+		<Copy SourceFiles="@(FactoryDslBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
+
+		<!-- Get the version number of the main FV assembly to insert into the nuspec files -->
+		<GetAssemblyIdentity AssemblyFiles="$(BuildDir)\lib\NET4\Nest.dll">
+			<Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+		</GetAssemblyIdentity>
+
+		<!-- insert the version number into the nuspec files -->
+		<XmlUpdate
+		  Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+		  Prefix="n"
+		  XmlFileName="$(BuildDir)\NEST.nuspec"
+		  XPath="/n:package/n:metadata/n:version"
+		  Value="%(AsmInfo.Version)" />
+
+		<Exec WorkingDirectory="$(BuildDir)"
+			  Command="$(MSBuildProjectDirectory)\nuget.exe pack $(BuildDir)\NEST.nuspec" />
 
 		<XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
@@ -103,21 +103,21 @@
 		<Exec WorkingDirectory="$(BuildDir)"
           Command="$(MSBuildProjectDirectory)\nuget.exe pack $(BuildDir)\Nest.Connection.Thrift.nuspec" />
 
-    <XmlUpdate
-      Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      Prefix="n"
-      XmlFileName="$(BuildDir)\Nest.Dsl.Factory.nuspec"
-      XPath="/n:package/n:metadata/n:version"
-      Value="%(AsmInfo.Version)" />
+		<XmlUpdate
+		  Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+		  Prefix="n"
+		  XmlFileName="$(BuildDir)\Nest.Dsl.Factory.nuspec"
+		  XPath="/n:package/n:metadata/n:version"
+		  Value="%(AsmInfo.Version)" />
 
-    <Exec WorkingDirectory="$(BuildDir)"
-          Command="$(MSBuildProjectDirectory)\nuget.exe pack $(BuildDir)\Nest.Dsl.Factory.nuspec" />
+		<Exec WorkingDirectory="$(BuildDir)"
+			  Command="$(MSBuildProjectDirectory)\nuget.exe pack $(BuildDir)\Nest.Dsl.Factory.nuspec" />
 
-    <ItemGroup>
-      <Packages Include="$(BuildDir)\*.nupkg" />
-    </ItemGroup>
-    <Copy SourceFiles="@(Packages)" DestinationFolder="$(BuildDir)\..\" />
+		<ItemGroup>
+			<Packages Include="$(BuildDir)\*.nupkg" />
+		</ItemGroup>
+		<Copy SourceFiles="@(Packages)" DestinationFolder="$(BuildDir)\..\" />
 
-    <RemoveDir Directories="$(BuildDir)" />
-  </Target>
+		<RemoveDir Directories="$(BuildDir)" />
+	</Target>
 </Project>
