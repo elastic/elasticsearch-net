@@ -62,6 +62,8 @@ A special shoutout to [@stephenpope](http://github.com/stephenpope) for allowing
 of the java factory based dsl [Rubber](http://github.com/stephenpope/Rubber) to be merged into NEST. 
 NEST now has **two types of query dsl's** (lambda and factory based)!
 
+Many thanks to my employer [Q42](http://www.q42.nl) for supporting the development of NEST by donating 20% of my contract hours for NEST's development. That means I get a full paid day to work on NEST a week, whoohoo! If you are in the netherlands (The Hague/Amsterdam area) and looking for a great place to work: [we're hiring!](http://q42.nl/blog/tagged/vacature)
+
 Some of the other wonderful features in NEST were pushed by these wonderful folks:
 
 * [@nordbergm](https://github.com/nordbergm/NEST)

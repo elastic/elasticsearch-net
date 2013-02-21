@@ -57,6 +57,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 			queryResults.Documents.OfType<ClassA>().Any().Should().BeTrue();
 			queryResults.Documents.OfType<ClassB>().Any().Should().BeTrue();
 		}
+
 		[Test]
 		public void MultipleTypesUsingBaseClass()
 		{
@@ -75,7 +76,6 @@ namespace Nest.Tests.Integration.Search.SearchType
 			var resulta = this._client.IndexMany(data.OfType<ClassA>(), new SimpleBulkParameters { Refresh = true });
 			var resultb = this._client.IndexMany(data.OfType<ClassB>(), new SimpleBulkParameters { Refresh = true });
 
-
 			var queryResults = this._client.Search<MyBaseClass>(s => s
 				.Types(typeof(ClassA), typeof(ClassB))
 				.From(0)
@@ -87,9 +87,6 @@ namespace Nest.Tests.Integration.Search.SearchType
 
 			queryResults.Documents.OfType<ClassA>().Any().Should().BeTrue();
 			queryResults.Documents.OfType<ClassB>().Any().Should().BeTrue();
-
 		}
-		
-		
 	}
 }
