@@ -4,7 +4,9 @@ using Newtonsoft.Json;
 
 namespace Nest.Resolvers.Converters
 {
-    public class IndexSettingsConverter : JsonConverter
+  using System.Text;
+
+  public class IndexSettingsConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -18,7 +20,8 @@ namespace Nest.Resolvers.Converters
 			writer.WritePropertyName("index");
 			writer.WriteStartObject();
 
-	 
+        // allready in indexSetting.Setting
+	      /*
 		    if (indexSettings.NumberOfReplicas.HasValue) 
 			{
 		        writer.WritePropertyName("number_of_shards");
@@ -29,6 +32,7 @@ namespace Nest.Resolvers.Converters
 		        writer.WritePropertyName("number_of_replicas");
 		        writer.WriteValue(indexSettings.NumberOfReplicas);
 	        }
+         */
 	        if (indexSettings.Settings.HasAny())
 	        {
 		        foreach (var kv in indexSettings.Settings)
@@ -72,9 +76,32 @@ namespace Nest.Resolvers.Converters
 		        writer.WriteEndObject();
 	        }
 
-	        writer.WriteEndObject();
-
 			writer.WriteEndObject();
+
+      if (!string.IsNullOrEmpty(indexSettings.Similarity.IndexSimilarityProvider)
+          || !string.IsNullOrEmpty(indexSettings.Similarity.SearchSimilarityProvider))
+      {
+        writer.WritePropertyName("similarity");
+        writer.WriteStartObject();
+        if (!string.IsNullOrEmpty(indexSettings.Similarity.IndexSimilarityProvider))
+        {
+          writer.WritePropertyName("index");
+          writer.WriteStartObject();
+          writer.WritePropertyName("type");
+          serializer.Serialize(writer, indexSettings.Similarity.IndexSimilarityProvider);
+          writer.WriteEndObject();
+        }
+
+        if (!string.IsNullOrEmpty(indexSettings.Similarity.SearchSimilarityProvider))
+        {
+          writer.WritePropertyName("search");
+          writer.WriteStartObject();
+          writer.WritePropertyName("type");
+          serializer.Serialize(writer, indexSettings.Similarity.SearchSimilarityProvider);
+          writer.WriteEndObject();
+        }
+        writer.WriteEndObject();
+      }
 
             if (indexSettings.Mappings.Count > 0)
             { 
