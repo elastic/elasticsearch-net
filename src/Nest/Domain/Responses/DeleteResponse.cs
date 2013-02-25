@@ -23,9 +23,9 @@ namespace Nest
     public string Id { get; internal set; }
     [JsonProperty("_version")]
     public string Version { get; internal set; }
-    [JsonProperty("_ok")]
+    [JsonProperty("ok")]
     public bool OK { get; internal set; }
-    [JsonProperty("_found")]
+    [JsonProperty("found")]
     public bool Found { get; internal set; }
     
 	}
