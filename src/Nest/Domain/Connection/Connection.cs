@@ -128,15 +128,17 @@ namespace Nest
 			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
 			myReq.Method = method;
 
-			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
+			if (this._ConnectionSettings.Proxy != null)
 			{
-				var proxy = new WebProxy();
-				var uri = new Uri(this._ConnectionSettings.ProxyAddress);
-				var credentials = new NetworkCredential(this._ConnectionSettings.Username, this._ConnectionSettings.Password);
-				proxy.Address = uri;
-				proxy.Credentials = credentials;
-				myReq.Proxy = proxy;
+				myReq.Proxy = this._ConnectionSettings.Proxy;
 			}
+
+            if (!string.IsNullOrEmpty(this._ConnectionSettings.Username) ||
+                !string.IsNullOrEmpty(this._ConnectionSettings.Password))
+            {
+                myReq.Credentials = new NetworkCredential(this._ConnectionSettings.Username, this._ConnectionSettings.Password);
+            }
+
 			return myReq;
 		}
 
