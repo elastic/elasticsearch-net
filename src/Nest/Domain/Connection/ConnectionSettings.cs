@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 namespace Nest
@@ -22,10 +23,10 @@ namespace Nest
 		{
 			get { return this._host; }
 		}
-		private readonly string _proxyAddress;
-		public string ProxyAddress
+		private readonly IWebProxy _proxy;
+		public IWebProxy Proxy
 		{
-			get { return this._proxyAddress; }
+			get { return this._proxy; }
 		}
 		private readonly int _port;
 		public int Port
@@ -85,10 +86,10 @@ namespace Nest
 		/// </summary>
 		/// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
 		/// <param name="timeout">time out in milliseconds</param>
-		/// <param name="proxyAddress">proxy address</param>
-		/// <param name="username">proxy username</param>
-		/// <param name="password">proxy password</param>
-		public ConnectionSettings(Uri uri, int timeout, string proxyAddress, string username, string password)
+        /// <param name="proxy">A proxy to use for connecting to elasticsearch</param>
+		/// <param name="username">username for HTTP authentication</param>
+		/// <param name="password">password for HTTP authentication</param>
+		public ConnectionSettings(Uri uri, int timeout, IWebProxy proxy, string username, string password)
 		{
 			uri.ThrowIfNull("uri");
 
@@ -96,7 +97,7 @@ namespace Nest
 			this._password = password;
 			this._username = username;
 			this._timeout = timeout;
-			this._proxyAddress = proxyAddress;
+            this._proxy = proxy;
 			this.MaximumAsyncConnections = 20;
 			this._defaultTypeIndices = new FluentDictionary<Type, string>();
 		}
@@ -119,10 +120,10 @@ namespace Nest
 		/// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
 		/// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
 		/// <param name="timeout">time out in milliseconds</param>
-		/// <param name="proxyAddress">proxy address</param>
-		/// <param name="username">proxy username</param>
-		/// <param name="password">proxy password</param>
-		public ConnectionSettings(string host, int port, int timeout, string proxyAddress, string username, string password)
+        /// <param name="proxy">A proxy to use for connecting to elasticsearch</param>
+        /// <param name="username">username for HTTP authentication</param>
+        /// <param name="password">password for HTTP authentication</param>
+		public ConnectionSettings(string host, int port, int timeout, IWebProxy proxy, string username, string password)
 		{
 			host.ThrowIfNullOrEmpty("host");
 			var uri = new Uri("http://" + host + ":" + port);
@@ -132,7 +133,7 @@ namespace Nest
 			this._username = username;
 			this._timeout = timeout;
 			this._port = port;
-			this._proxyAddress = proxyAddress;
+			this._proxy = proxy;
 			this.MaximumAsyncConnections = 20;
 			this._defaultTypeIndices = new FluentDictionary<Type, string>();
 		}
