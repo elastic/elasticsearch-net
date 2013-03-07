@@ -14,9 +14,9 @@ namespace ProtocolLoadTest
 
 		protected ConnectionSettings CreateSettings(string indexName, int port)
 		{
-			return new ConnectionSettings("localhost", port)
+			return new ConnectionSettings("localhost.fiddler", port)
 			   .SetDefaultIndex(indexName)
-			   .SetMaximumAsyncConnections(1);
+			   .SetMaximumAsyncConnections(2);
 		}
 
 		protected void Connect(ElasticClient client, ConnectionSettings settings)
@@ -41,9 +41,7 @@ namespace ProtocolLoadTest
 			var tasks = new List<Task>();
 
 			var partitionedMessages = msgGenerator.Generate(numMessages).Partition(bufferSize);
-			
 			Interlocked.Exchange(ref NumSent, 0);
-
 			foreach (var messages in partitionedMessages)
 			{
 				var t = client.IndexManyAsync(messages, indexName, bulkParms);
