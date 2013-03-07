@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace Nest
 {
-	public static class Extensions
+	internal static class Extensions
 	{
 		internal static string ToCamelCase(this string s)
 		{

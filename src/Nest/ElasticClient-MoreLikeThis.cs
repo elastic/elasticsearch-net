@@ -1,5 +1,4 @@
 ﻿using System;
-using Nest.FactoryDsl;
 using System.Diagnostics;
 
 namespace Nest

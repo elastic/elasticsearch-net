@@ -45,6 +45,8 @@ Or searching for "elasticsearch"  will get you to nest as well.
 * [stackoverflow.com](http://www.stackoverflow.com) (and the rest of the stackexchange family).
 * [7digital.com](http://www.7digital.com) (run NEST on mono).
 * [rijksmuseum.nl](https://www.rijksmuseum.nl/en) (elasticsearch is the only datastorage hit for each page).
+* [Kiln](http://www.fogcreek.com/kiln/) FogCreek's version control & code review tooling. 
+  They are so pleased with elasticsearch that [they made a video about how pleased they are!](http://blog.fogcreek.com/kiln-powered-by-elasticsearch/)
 
 Always keen to hear and list more uses ! hit me on [@Mpdreamz](https://twitter.com/Mpdreamz)
 
@@ -59,6 +61,8 @@ Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute t
 A special shoutout to [@stephenpope](http://github.com/stephenpope) for allowing his port 
 of the java factory based dsl [Rubber](http://github.com/stephenpope/Rubber) to be merged into NEST. 
 NEST now has **two types of query dsl's** (lambda and factory based)!
+
+Many thanks to my employer [Q42](http://www.q42.nl) for supporting the development of NEST by donating 20% of my contract hours for NEST's development. That means I get a full paid day to work on NEST a week, whoohoo! If you are in the netherlands (The Hague/Amsterdam area) and looking for a great place to work: [we're hiring!](http://q42.nl/blog/tagged/vacature)
 
 Some of the other wonderful features in NEST were pushed by these wonderful folks:
 

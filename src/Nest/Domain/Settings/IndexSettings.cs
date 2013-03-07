@@ -38,6 +38,7 @@ namespace Nest
 			this.Analysis = new AnalysisSettings();
 			this.Mappings = new List<RootObjectMapping>();
 			this.Settings = new Dictionary<string, object>();
+      this.Similarity = new SimilaritySettings();
 		}
 		public int? NumberOfShards
 		{
@@ -87,7 +88,9 @@ namespace Nest
 
 		public IList<RootObjectMapping> Mappings { get; internal set; }
 
-		public void Add(string key, object value)
+    public SimilaritySettings Similarity { get; internal set; }
+
+	  public void Add(string key, object value)
 		{
 			this.Settings.Add(key, value);
 		}
