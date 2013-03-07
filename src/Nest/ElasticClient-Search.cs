@@ -118,7 +118,10 @@ namespace Nest
 		private IQueryResponse<T> GetParsedResponse<T>(ConnectionStatus status, SearchDescriptor<T> descriptor) where T : class
 		{
 			if (descriptor._ConcreteTypeSelector == null)
-				return this.ToParsedResponse<QueryResponse<T>>(status);
+			{
+				descriptor._ConcreteTypeSelector = (d, h) => typeof(T);
+			}
+				
 			return this.ToParsedResponse<QueryResponse<T>>(
 				status,
 				extraConverters: new[] { new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector) }
@@ -159,13 +162,13 @@ namespace Nest
 			hitDynamic.Fields = d.fields;
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
-			hitDynamic.Score = d._score;
+			hitDynamic.Score = (d._score is double) ? d._score : default(double);
 			hitDynamic.Type = d._type;
 			hitDynamic.Version = d._version;
 			hitDynamic.Id = d._id;
 			hitDynamic.Sorts = d.sort;
-			hitDynamic.Highlight = d.highlight;
-			hitDynamic.Explanation = d._explanation;
+			hitDynamic.Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
+			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
 
 			var concreteType = this._concreteTypeSelector(hitDynamic.Source, hitDynamic);
 			var hitType = typeof(Hit<>).MakeGenericType(concreteType);
