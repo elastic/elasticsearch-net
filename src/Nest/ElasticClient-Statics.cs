@@ -13,6 +13,14 @@ namespace Nest
 		internal readonly JsonSerializerSettings SerializationSettings;
 		internal readonly JsonSerializerSettings IndexSerializationSettings;
 		internal readonly PropertyNameResolver PropertyNameResolver;
+		private readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
+
+		private readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
+		{
+			new IsoDateTimeConverter(),
+			new FacetConverter(),
+			new BulkOperationResponseItemConverter()
+		};
 
 		private JsonSerializerSettings CreateSettings()
 		{
@@ -21,23 +29,21 @@ namespace Nest
 				ContractResolver = new ElasticResolver(),
 				NullValueHandling = NullValueHandling.Ignore,
 				DefaultValueHandling = DefaultValueHandling.Include,
-				Converters = new List<JsonConverter> 
-				{ 
-					new IsoDateTimeConverter(), new FacetConverter(), new BulkOperationResponseItemConverter()
-				}
+				Converters = _defaultConverters.Concat(_extraConverters).ToList()
 			};
 		}
 		public void AddConverter(JsonConverter converter)
 		{
 			this.IndexSerializationSettings.Converters.Add(converter);
 			this.SerializationSettings.Converters.Add(converter);
+			_extraConverters.Add(converter);
 		}
 
-        public void ModifyJsonSerializationSettings(Action<JsonSerializerSettings> modifier)
-        {
-            modifier(this.IndexSerializationSettings);
-            modifier(this.SerializationSettings);
-        }
+		public void ModifyJsonSerializationSettings(Action<JsonSerializerSettings> modifier)
+		{
+			modifier(this.IndexSerializationSettings);
+			modifier(this.SerializationSettings);
+		}
 
 		/// <summary>
 		/// serialize an object using the internal registered converters without camelcasing properties as is done 
