@@ -6,7 +6,7 @@
     <title>Nest.Connection.Thrift - Thrift support for NEST</title>
     <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
-    <iconUrl>http://mpdreamz.github.com/NEST/images/nuget-icon.png</iconUrl>
+    <iconUrl>http://nest.azurewebsites.net/images/nuget-icon.png</iconUrl>
     <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
     <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
     <summary>Thrift connection support for NEST Elasticsearch client</summary>

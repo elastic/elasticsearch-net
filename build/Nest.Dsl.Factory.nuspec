@@ -6,7 +6,7 @@
     <title>Nest.Dsl.Factory - A port of the java DSL</title>
     <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
-    <iconUrl>http://mpdreamz.github.com/NEST/images/nuget-icon.png</iconUrl>
+    <iconUrl>http://nest.azurewebsites.net/images/nuget-icon.png</iconUrl>
     <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
     <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
     <summary>Nest already has a complete lambda DSL, this package introduces a second DSL that's a port of the Java DSL</summary>
