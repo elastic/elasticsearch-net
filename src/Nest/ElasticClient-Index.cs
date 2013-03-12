@@ -441,6 +441,5 @@ namespace Nest
       var postTask = this.Connection.Post(path, json);
       return postTask.ContinueWith<IBulkResponse>(t => this.ToParsedResponse<BulkResponse>(t.Result));
     }
-	}
-	
+  }
 }
