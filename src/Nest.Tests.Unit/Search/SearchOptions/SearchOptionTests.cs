@@ -140,6 +140,24 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				}";
 			Assert.True(json.JsonEquals(expected));
 		}
+
+        [Test]
+        public void TestPartialFields()
+        {
+            var s = new SearchDescriptor<ElasticSearchProject>()
+                .PartialFields(x => x.PartialField("partial1").Include("id", "name").Exclude("number"));
+            var json = TestElasticClient.Serialize(s);
+            var expected = @"{
+                partial_fields: { 
+                    ""partial1"" : { 
+                        ""include"" : [ ""id"", ""name"" ],
+                        ""exclude"" : [ ""number"" ] 
+                    } 
+                } 
+            }";
+            Assert.True(json.JsonEquals(expected));
+        }
+
 		[Test]
 		public void TestSort()
 		{
