@@ -186,9 +186,9 @@ namespace Nest
 
             if (_partialFields.Any())
             {
-                var itemType = typeof(MyDictionaryItem<>).MakeGenericType(concreteType);
+                var itemType = typeof(CovariantItem<>).MakeGenericType(concreteType);
                 var listType = typeof(List<>).MakeGenericType(itemType);
-                var myDictType = typeof(MyDictionary<>).MakeGenericType(concreteType);
+                var dictType = typeof(CovariantDictionary<>).MakeGenericType(concreteType);
 
                 var items = Activator.CreateInstance(listType);
                 foreach (var pf in this._partialFields)
@@ -203,7 +203,7 @@ namespace Nest
                     items.Add(dictItem);
                 }
 
-                var dict = Activator.CreateInstance(myDictType);
+                var dict = Activator.CreateInstance(dictType);
                 dict.Items = items;
                 hit.PartialFields = dict;
             }

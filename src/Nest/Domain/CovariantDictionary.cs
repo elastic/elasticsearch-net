@@ -5,20 +5,20 @@ using System.Text;
 
 namespace Nest
 {
-    public interface IMyDictionary<out T> where T : class
+    public interface ICovariantDictionary<out T> where T : class
     {
         T this[string key] { get; }
 
-        IEnumerable<IMyDictionaryItem<T>> Items { get; }
+        IEnumerable<ICovariantItem<T>> Items { get; }
     }
 
-    public interface IMyDictionaryItem<out T> where T : class
+    public interface ICovariantItem<out T> where T : class
     {
         string Key { get; }
         T Value { get; }
     }
 
-    public class MyDictionary<T> : IMyDictionary<T> where T : class
+    public class CovariantDictionary<T> : ICovariantDictionary<T> where T : class
     {
         public T this[string key]
         {
@@ -29,10 +29,10 @@ namespace Nest
             }
         }
 
-        public IEnumerable<IMyDictionaryItem<T>> Items { get; internal set; }
+        public IEnumerable<ICovariantItem<T>> Items { get; internal set; }
     }
 
-    public class MyDictionaryItem<T> : IMyDictionaryItem<T>
+    public class CovariantItem<T> : ICovariantItem<T>
         where T : class
     {
         public string Key { get; internal set; }

@@ -20,7 +20,7 @@ namespace Nest
 
         Dictionary<string, List<string>> Highlight { get; }
         Explanation Explanation { get; }
-        IMyDictionary<T> PartialFields { get; }
+        ICovariantDictionary<T> PartialFields { get; }
     }
 
     [JsonObject]
@@ -50,7 +50,7 @@ namespace Nest
         [JsonProperty(PropertyName = "_explanation")]
         public Explanation Explanation { get; internal set; }
 
-        public IMyDictionary<T> PartialFields { get; internal set; }
+        public ICovariantDictionary<T> PartialFields { get; internal set; }
 
         public Hit()
         {
