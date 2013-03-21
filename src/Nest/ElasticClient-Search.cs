@@ -184,6 +184,7 @@ namespace Nest
 
             serializer.Populate(jObject.CreateReader(), hit);
 
+            // deserialize partial fields
             if (_partialFields.Any())
             {
                 var itemType = typeof(CovariantItem<>).MakeGenericType(concreteType);
@@ -214,6 +215,5 @@ namespace Nest
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
-        }
-    }
+        }    }
 }
