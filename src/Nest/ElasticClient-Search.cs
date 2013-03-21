@@ -8,6 +8,7 @@ using Microsoft.CSharp.RuntimeBinder;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Linq;
 
 namespace Nest
 {
@@ -123,37 +124,28 @@ namespace Nest
                 descriptor._ConcreteTypeSelector = (d, h) => typeof(T);
             }
 
-            var keys = new List<string>();
-            foreach (var key in descriptor._PartialFields.Keys)
-            {
-                keys.Add(key);
-            }
+            var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
+
             return this.ToParsedResponse<QueryResponse<T>>(
                 status,
-                extraConverters: new[] { new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, keys) }
+                extraConverters: new[] { new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, partialFields) }
             );
         }
-
     }
 
     internal class ConcreteTypeConverter : JsonConverter
     {
         private readonly Type _baseType;
         private readonly Func<dynamic, Hit<dynamic>, Type> _concreteTypeSelector;
-        private readonly List<string> _partialFields;
+        private readonly IEnumerable<string> _partialFields;
 
         public override bool CanWrite { get { return false; } }
         public override bool CanRead { get { return true; } }
 
         public ConcreteTypeConverter(Type baseType, Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
-        {
-            concreteTypeSelector.ThrowIfNull("concreteTypeSelector");
+            : this(baseType, concreteTypeSelector, new string[0]) { }
 
-            _baseType = baseType;
-            _concreteTypeSelector = concreteTypeSelector;
-        }
-
-        public ConcreteTypeConverter(Type baseType, Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector, List<string> partialFields)
+        public ConcreteTypeConverter(Type baseType, Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector, IEnumerable<string> partialFields)
         {
             concreteTypeSelector.ThrowIfNull("concreteTypeSelector");
 
@@ -192,35 +184,31 @@ namespace Nest
 
             serializer.Populate(jObject.CreateReader(), hit);
 
-            var dictType = typeof(MyDictionaryItem<>).MakeGenericType(concreteType);
-            var listType = typeof(List<>).MakeGenericType(dictType);
-            var myDictType = typeof(MyDictionary<>).MakeGenericType(concreteType);
-
-
-            var items = Activator.CreateInstance(listType);
-            foreach (var pf in this._partialFields)
+            if (_partialFields.Any())
             {
-                var partial = Activator.CreateInstance(concreteType);
-                var cast = this.GetType().GetMethod("CastTo").MakeGenericMethod(concreteType);
+                var itemType = typeof(MyDictionaryItem<>).MakeGenericType(concreteType);
+                var listType = typeof(List<>).MakeGenericType(itemType);
+                var myDictType = typeof(MyDictionary<>).MakeGenericType(concreteType);
 
-                serializer.Populate(d.fields[pf].CreateReader(), partial);
+                var items = Activator.CreateInstance(listType);
+                foreach (var pf in this._partialFields)
+                {
+                    var partial = Activator.CreateInstance(concreteType);
 
-                var dictItem = Activator.CreateInstance(dictType);
-                dictItem.Key = pf;
-                dictItem.Value = partial;
-                items.Add(dictItem);
+                    serializer.Populate(d.fields[pf].CreateReader(), partial);
+
+                    var dictItem = Activator.CreateInstance(itemType);
+                    dictItem.Key = pf;
+                    dictItem.Value = partial;
+                    items.Add(dictItem);
+                }
+
+                var dict = Activator.CreateInstance(myDictType);
+                dict.Items = items;
+                hit.PartialFields = dict;
             }
 
-            var dict = Activator.CreateInstance(myDictType);
-            dict.Items = items;
-            hit.PartialFields = dict;
-
             return hit;
-        }
-
-        public static S CastTo<S>(object obj)
-        {
-            return (S)obj;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

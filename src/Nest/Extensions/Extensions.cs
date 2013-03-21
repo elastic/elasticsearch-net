@@ -69,6 +69,15 @@ namespace Nest
 			foreach (T item in enumerable)
 				handler(item, idx++);
 		}
+        internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs)
+        {
+            if (xs == null)
+            {
+                return new T[0];
+            }
+
+            return xs;
+        }
 	}
 
 	
