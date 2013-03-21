@@ -6,42 +6,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public interface IMyDictionary<out T> where T : class
-    {
-        T this[string property] { get; }
-
-        IEnumerable<IMyDictionaryItem<T>> Items { get; }
-    }
-
-    public interface IMyDictionaryItem<out T> where T : class
-    {
-        string Key { get; }
-        T Value { get; }
-    }
-
-    public class MyDictionary<T> : IMyDictionary<T> where T : class
-    {
-        public T this[string property]
-        {
-            get
-            {
-                if (this.Items != null && this.Items.Count() > 0)
-                    this.Items.FirstOrDefault(x => x.Key == property);
-
-                return null;
-            }
-            internal set { throw new NotImplementedException(); }
-        }
-
-        public IEnumerable<IMyDictionaryItem<T>> Items { get; internal set; }
-    }
-
-    public class MyDictionaryItem<T> : IMyDictionaryItem<T>
-        where T : class
-    {
-        public string Key { get; internal set; }
-        public T Value { get; internal set; }
-    }
     public interface IHit<out T> where T : class
     {
         T Fields { get; }
