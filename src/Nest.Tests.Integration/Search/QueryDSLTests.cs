@@ -129,7 +129,18 @@ namespace Nest.Tests.Integration.Search
 			Assert.Greater(results.Facet<TermFacet>(f => f.Country).Items.Count(), 0);
 			Assert.Greater(results.FacetItems<TermItem>(f=>f.Country).Count(), 0);
 		}
-
+        [Test]
+        public void TestPartialFields()
+        {
+            var results = this._client.Search<ElasticSearchProject>(s =>
+                s.From(0)
+                .Size(10)
+                .PartialFields(pf => pf.PartialField("partial1").Include("country", "origin.lon"), pf => pf.PartialField("partial2").Exclude("country"))
+                .MatchAll());
+            Assert.True(results.Hits.Hits.All(h => h.PartialFields["partial2"].Country == null && h.PartialFields["partial2"].Origin != null));
+            // this test depends on fact, that no origin has longitude part equal to 0, lat is ommited by elasticsearch in results, so presumably deserialized to 0.
+            Assert.True(results.Hits.Hits.All(h => h.PartialFields["partial1"].Origin.lon != 0 && h.PartialFields["partial1"].Origin.lat == 0));
+        }
 
 	}
 }
