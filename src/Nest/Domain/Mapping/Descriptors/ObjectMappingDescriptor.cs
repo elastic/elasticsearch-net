@@ -12,23 +12,26 @@ namespace Nest
 		where TChild : class
 
     {
-		internal ObjectMapping _Mapping { get; set; }
-		internal string _TypeName { get; set; }
+		private readonly IConnectionSettings _connectionSettings;
 
-		public ObjectMappingDescriptor()
+		internal ObjectMapping _Mapping { get; set; }
+		internal TypeNameMarker _TypeName { get; set; }
+
+		public ObjectMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._TypeName = new TypeNameResolver().GetTypeNameFor<TChild>();
-			this._Mapping = new ObjectMapping() {  };
-        }
+			this._Mapping = new ObjectMapping() { };
+			this._connectionSettings = connectionSettings;
+		}
 		public ObjectMappingDescriptor<TParent, TChild> Name(string name)
 		{
-			this._Mapping.Name = name;
+			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
 		public ObjectMappingDescriptor<TParent, TChild> Name(Expression<Func<TParent, TChild>> objectPath)
 		{
 			var name = new PropertyNameResolver().ResolveToLastToken(objectPath);
-			this._Mapping.Name = name;
+			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
 
@@ -40,7 +43,7 @@ namespace Nest
 		/// <returns></returns>
 		public ObjectMappingDescriptor<TParent, TChild> MapFromAttributes(int maxRecursion = 0)
 		{
-			var writer = new TypeMappingWriter(typeof(TChild), this._TypeName, maxRecursion);
+			var writer = new TypeMappingWriter(typeof(TChild), this._TypeName, this._connectionSettings, maxRecursion);
 			var mapping = writer.ObjectMappingFromAttributes();
 			if (mapping == null)
 				return this;
@@ -80,7 +83,7 @@ namespace Nest
 		public ObjectMappingDescriptor<TParent, TChild> Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = propertiesSelector(new PropertiesDescriptor<TChild>());
+			var properties = propertiesSelector(new PropertiesDescriptor<TChild>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
 				this._Mapping.Properties = new Dictionary<string, IElasticType>();
 

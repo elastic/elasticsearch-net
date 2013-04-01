@@ -7,6 +7,12 @@ namespace Nest
 {
 	public class SingleMappingDescriptor<T> where T : class
 	{
+		private readonly IConnectionSettings _connectionSettings;
+
+		public SingleMappingDescriptor(IConnectionSettings connectionSettings)
+		{
+			this._connectionSettings = connectionSettings;
+		}
 		public IElasticType String(Func<StringMappingDescriptor<T>, StringMappingDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
@@ -64,7 +70,7 @@ namespace Nest
 			where TChild : class
 		{
 			selector.ThrowIfNull("selector");
-			var d = selector(new ObjectMappingDescriptor<T, TChild>());
+			var d = selector(new ObjectMappingDescriptor<T, TChild>(this._connectionSettings));
 			if (d == null)
 				throw new Exception("Could not get object mapping");
 			return d._Mapping;
@@ -74,7 +80,7 @@ namespace Nest
 			where TChild : class
 		{
 			selector.ThrowIfNull("selector");
-			var d = selector(new NestedObjectMappingDescriptor<T, TChild>());
+			var d = selector(new NestedObjectMappingDescriptor<T, TChild>(this._connectionSettings));
 			if (d == null)
 				throw new Exception("Could not get nested object mapping");
 			return d._Mapping;

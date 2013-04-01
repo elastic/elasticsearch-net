@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -10,7 +11,7 @@ namespace Nest
 	{
 		public TemplateMapping()
 		{
-			this.Mappings = new Dictionary<string, RootObjectMapping>();
+			this.Mappings = new Dictionary<TypeNameMarker, RootObjectMapping>();
 			this.Settings = new FluentDictionary<string, object>();
 		}
 
@@ -24,6 +25,6 @@ namespace Nest
 		public FluentDictionary<string, object> Settings { get; set; }
 
 		[JsonProperty("mappings")]
-		public Dictionary<string, RootObjectMapping> Mappings { get; set; }
+		public Dictionary<TypeNameMarker, RootObjectMapping> Mappings { get; set; }
 	}
 }

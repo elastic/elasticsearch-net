@@ -23,7 +23,7 @@ namespace Nest
         /// </summary>
         public RootObjectMapping GetMapping<T>(string index) where T : class
         {
-            string type = this.TypeNameResolver.GetTypeNameFor<T>();
+            string type = this.GetTypeNameFor<T>();
             return this.GetMapping(index, type);
         }
         /// <summary>
@@ -39,7 +39,7 @@ namespace Nest
         /// </summary>
         public RootObjectMapping GetMapping(Type t, string index)
         {
-            string type = this.TypeNameResolver.GetTypeNameForType(t);
+            string type = this.GetTypeNameFor(t);
             return this.GetMapping(index, type);
         }
 
@@ -59,7 +59,7 @@ namespace Nest
                 if (status.Success)
                 {
                     var mapping = mappings.First();
-                    mapping.Value.Name = mapping.Key;
+                    mapping.Value.TypeNameMarker = mapping.Key;
 
                     return mapping.Value;
                 }

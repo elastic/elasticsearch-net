@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 	public class GenericMapping : IElasticType, IElasticCoreType
 	{
 		[JsonProperty("name")]
-		public string Name { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
 
 		[JsonProperty("type")]
-		public string Type { get; set; }
+		public TypeNameMarker Type { get; set; }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.

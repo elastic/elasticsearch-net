@@ -94,7 +94,7 @@ namespace Nest
             var index = this.Settings.DefaultIndex;
             index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-            var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+            var typeName = this.GetTypeNameFor<T>();
             string path = this.PathResolver.CreateIndexTypePath(index, typeName) + "_count";
             return _Count(path, query);
         }
@@ -107,7 +107,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var type = typeof(T);
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 			string path = this.PathResolver.CreateIndexTypePath(index, typeName) + "_count";
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);

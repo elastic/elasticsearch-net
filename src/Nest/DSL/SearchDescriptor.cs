@@ -16,7 +16,7 @@ namespace Nest
 	{
 		internal abstract Type _ClrType { get; }
 		internal IEnumerable<string> _Indices { get; set; }
-		internal IEnumerable<string> _Types { get; set; }
+		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal string _Routing { get; set; }
 		internal SearchType? _SearchType { get; set; }
 		internal string _Scroll { get; set; }
@@ -71,7 +71,7 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<string> types)
 		{
 			types.ThrowIfEmpty("types");
-			this._Types = types;
+			this._Types = types.Select(s=>(TypeNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -89,18 +89,18 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-
+			
 			var typeDictionary = types.ToDictionary(t => this.typeNameResolver.GetTypeNameFor(t));
 
-			this._ConcreteTypeSelector = (o, h) =>
-			{
-				Type t;
-				if (!typeDictionary.TryGetValue(h.Type, out t))
-					return typeof (T);
-				return t;
-			};
-
-			return this.Types(typeDictionary.Keys.ToArray());
+			//this._ConcreteTypeSelector = (o, h) =>
+			//{
+			//	Type t;
+			//	if (!typeDictionary.TryGetValue(h.Type, out t))
+			//		return typeof (T);
+			//	return t;
+			//};
+			this._Types = typeDictionary.Keys;
+			return this;
 		}
 		/// <summary>
 		/// The types to execute the search on. Defaults to the inferred typename of T 
@@ -117,7 +117,7 @@ namespace Nest
 		public SearchDescriptor<T> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			this._Types = new[] { type };
+			this._Types = new[] { (TypeNameMarker)type };
 			return this;
 		}
 		/// <summary>
@@ -127,7 +127,8 @@ namespace Nest
 		public SearchDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(this.typeNameResolver.GetTypeNameFor(type));
+			this._Types = new[] { (TypeNameMarker)type };
+			return this;
 		}
 		/// <summary>
 		/// Execute search over all indices

@@ -14,7 +14,7 @@ namespace Nest
 	{
 
 		internal virtual string _Index { get; set; }
-		internal virtual string _Type { get; set; }
+		internal virtual TypeNameMarker _Type { get; set; }
 		internal virtual string _Id { get; set; }
 		internal virtual IList<string> _Fields { get; set; }
 
@@ -25,7 +25,7 @@ namespace Nest
 	where T : class
 	{
 		internal override string _Index { get; set; }
-		internal override string _Type { get; set; }
+		internal override TypeNameMarker _Type { get; set; }
 		internal override string _Id { get; set; }
 		internal override IList<string> _Fields { get; set; }
 
@@ -64,7 +64,8 @@ namespace Nest
 		public SimpleGetDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(this.typeNameResolver.GetTypeNameFor(type));
+			this._Type = type;
+			return this;
 		}
 
 		public SimpleGetDescriptor<T> Id(int id)
@@ -138,7 +139,8 @@ namespace Nest
 		public new GetDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(this.typeNameResolver.GetTypeNameFor(type));
+			this._Type = type;
+			return this;
 		}
 
 		public new GetDescriptor<T> Id(int id)

@@ -55,7 +55,8 @@ namespace Nest
 		public BulkDeleteDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(this._typeNameResolver.GetTypeNameFor(type));
+			this._Type = type;
+			return this;
 		}
 
 		/// <summary>

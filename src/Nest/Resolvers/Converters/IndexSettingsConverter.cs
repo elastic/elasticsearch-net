@@ -106,7 +106,7 @@ namespace Nest.Resolvers.Converters
 			if (indexSettings.Mappings.Count > 0)
 			{
 				writer.WritePropertyName("mappings");
-				serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.Name));
+				serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.TypeNameMarker));
 			}
 
 			writer.WriteEndObject();

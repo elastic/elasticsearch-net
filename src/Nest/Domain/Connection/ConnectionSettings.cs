@@ -59,12 +59,20 @@ namespace Nest
 		public bool UsesPrettyResponses { get; private set; }
 
 		private readonly FluentDictionary<Type, string> _defaultTypeIndices;
-
 		public FluentDictionary<Type, string> DefaultIndices
 		{
 			get
 			{
 				return this._defaultTypeIndices;
+			}
+		}
+
+		private readonly FluentDictionary<Type, string> _defaultTypeNames;
+		public FluentDictionary<Type, string> DefaultTypeNames
+		{
+			get
+			{
+				return this._defaultTypeNames;
 			}
 		}
 
@@ -187,7 +195,12 @@ namespace Nest
 			mappingSelector(this._defaultTypeIndices);
 			return this;
 		}
-
+		public ConnectionSettings MapTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
+		{
+			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector(this._defaultTypeNames);
+			return this;
+		}
 		
 	}
 }

@@ -8,6 +8,7 @@ namespace Nest
 	public interface IConnectionSettings
 	{
 		FluentDictionary<Type, string> DefaultIndices { get; }
+		FluentDictionary<Type, string> DefaultTypeNames { get; }
 		string DefaultIndex { get; }
 
 		string Host { get; }

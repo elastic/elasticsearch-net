@@ -3,16 +3,17 @@ using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class BooleanMapping : IElasticType, IElasticCoreType
 	{
 		[JsonIgnore]
-		public string Name { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
 
 		[JsonProperty("type")]
-		public virtual string Type { get { return "boolean"; } }
+		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "boolean" }; } }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.

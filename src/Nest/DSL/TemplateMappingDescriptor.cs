@@ -11,15 +11,15 @@ namespace Nest
 {
 	public class TemplateMappingDescriptor
 	{
+		private readonly IConnectionSettings _connectionSettings;
+
 		internal string _Name { get; set; }
 		internal TemplateMapping _TemplateMapping { get; set; }
-
 		
-
-		public TemplateMappingDescriptor()
+		public TemplateMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._TemplateMapping = new TemplateMapping();
-
+			this._connectionSettings = connectionSettings;
 		}
 
 		public TemplateMappingDescriptor Name(string name)
@@ -63,7 +63,7 @@ namespace Nest
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var rootObjectMappingDescriptor = mappingSelector(new RootObjectMappingDescriptor<T>());
+			var rootObjectMappingDescriptor = mappingSelector(new RootObjectMappingDescriptor<T>(this._connectionSettings));
 			rootObjectMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
 			this._TemplateMapping.Mappings[rootObjectMappingDescriptor._TypeName] = rootObjectMappingDescriptor._Mapping;
@@ -73,17 +73,14 @@ namespace Nest
 		public TemplateMappingDescriptor RemoveMapping<T>()
 			where T : class
 		{
-			var typeName = new TypeNameResolver().GetTypeNameFor<T>();
-			return this.RemoveMapping(typeName);
-
+			this._TemplateMapping.Mappings.Remove(typeof(T));
+			return this;
 		}
 		public TemplateMappingDescriptor RemoveMapping(string typeName)
 		{
 			typeName.ThrowIfNull("typeName");
 			this._TemplateMapping.Mappings.Remove(typeName);
-
 			return this;
-
 		}
 	}
 }

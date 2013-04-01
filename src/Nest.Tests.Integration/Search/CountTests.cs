@@ -53,7 +53,7 @@ namespace Nest.Tests.Integration.Search
 			//does a match_all on the default specified index
 			var index = ElasticsearchConfiguration.DefaultIndex;
 			var indices = new[] { index, index + "_clone" };
-			var types = new[] { new TypeNameResolver().GetTypeNameFor<ElasticSearchProject>() };
+			var types = new[] { this.GetTypeNameFor<ElasticSearchProject>() };
 			var countResults = this._client.Count<ElasticSearchProject>(indices, types, q => q
 				.Fuzzy(fq => fq
 					.OnField(f => f.Followers.First().FirstName)

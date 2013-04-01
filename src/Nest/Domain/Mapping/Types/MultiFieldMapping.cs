@@ -2,16 +2,17 @@ using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class MultiFieldMapping : IElasticType
 	{
 		[JsonIgnore]
-		public string Name { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
 
 		[JsonProperty("type")]
-		public virtual string Type { get { return "multi_field"; } }
+		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "multi_field" }; } }
 
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }

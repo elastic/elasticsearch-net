@@ -76,5 +76,19 @@ namespace Nest
 			return JsonConvert.DeserializeObject<T>(value, settings);
 		}
 
+		public string GetTypeNameFor<T>()
+		{
+			return GetTypeNameFor(typeof (T));
+		}
+		public string GetTypeNameFor(Type type)
+		{
+			return this.TypeNameResolver.GetTypeNameFor(type).Resolve(this.Settings);
+		}
+
+		private string ResolveTypeName(TypeNameMarker typeNameMarker, string defaultIndexName = null)
+		{
+			return typeNameMarker != null ? typeNameMarker.Resolve(this.Settings) : defaultIndexName;
+		}
+
 	}
 }

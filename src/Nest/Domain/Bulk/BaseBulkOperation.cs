@@ -15,7 +15,7 @@ namespace Nest
 		internal string _Index { get; set; }
 
 		[JsonProperty(PropertyName = "_type")]
-		internal string _Type { get; set; }
+		internal TypeNameMarker _Type { get; set; }
 
 		[JsonProperty(PropertyName = "_id")]
 		internal string _Id { get; set; }

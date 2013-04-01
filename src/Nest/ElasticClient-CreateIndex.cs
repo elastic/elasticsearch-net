@@ -25,7 +25,7 @@ namespace Nest
 		{
 			index.ThrowIfEmpty("index");
 			createIndexSelector.ThrowIfNull("createIndexSelector");
-			var d = createIndexSelector(new CreateIndexDescriptor());
+			var d = createIndexSelector(new CreateIndexDescriptor(this.Settings));
 			var settings = d._IndexSettings;
 			return this.CreateIndex(index, settings);
 

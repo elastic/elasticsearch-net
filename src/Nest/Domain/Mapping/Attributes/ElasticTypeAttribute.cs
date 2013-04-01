@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nest.Resolvers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ namespace Nest
 	public class ElasticTypeAttribute : Attribute, IElasticType
 	{
 		public string Name { get; set; }
-		public string Type { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
+		public TypeNameMarker Type { get; set; }
 		public string IndexAnalyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
 		public string[] DynamicDateFormats { get; set; }
@@ -21,6 +23,10 @@ namespace Nest
 		public ElasticTypeAttribute()
 		{
 			this.DateDetection = true;
+			if (!this.Name.IsNullOrEmpty() && this.TypeNameMarker == null)
+			{
+				this.TypeNameMarker = this.Name;
+			}
 		}
 	}
 

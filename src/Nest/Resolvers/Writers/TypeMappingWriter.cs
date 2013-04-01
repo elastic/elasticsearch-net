@@ -10,27 +10,20 @@ using System.Collections.Concurrent;
 
 namespace Nest.Resolvers.Writers
 {
-	internal class TypeMappingWriter<T> : TypeMappingWriter where T : class
-	{
-		public TypeMappingWriter(string typeName, PropertyNameResolver propertyNameResolver)
-			: base(typeof(T), typeName)
-		{
-		}
-	}
-
 	internal class TypeMappingWriter
 	{
 		private readonly Type _type;
 		private readonly PropertyNameResolver _propertyNameResolver = new PropertyNameResolver();
+		private readonly IConnectionSettings _connectionSettings;
 
 		private int MaxRecursion { get; set; }
-		private string TypeName { get; set; }
+		private TypeNameMarker TypeName { get; set; }
 		private ConcurrentDictionary<Type, int> SeenTypes { get; set; }
-		
-		public TypeMappingWriter(Type t, string typeName) : this(t, typeName, 0) {}
-		public TypeMappingWriter(Type t, string typeName, int maxRecursion)
+
+		public TypeMappingWriter(Type t, TypeNameMarker typeName, IConnectionSettings connectionSettings, int maxRecursion)
 		{
 			this._type = t;
+			this._connectionSettings = connectionSettings;
 
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
@@ -38,9 +31,11 @@ namespace Nest.Resolvers.Writers
 			this.SeenTypes = new ConcurrentDictionary<Type, int>();
 			this.SeenTypes.TryAdd(t, 0);
 		}
-		public TypeMappingWriter(Type t, string typeName, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
+		internal TypeMappingWriter(Type t, string typeName, IConnectionSettings connectionSettings, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
 		    this._type = GetUnderlyingType(t);
+			this._connectionSettings = connectionSettings;
+
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
 			this.SeenTypes = seenTypes;
@@ -98,7 +93,7 @@ namespace Nest.Resolvers.Writers
 				jsonWriter.WriteStartObject();
 				{
 					var typeName = this.TypeName;
-					jsonWriter.WritePropertyName(typeName);
+					jsonWriter.WritePropertyName(typeName.Resolve(this._connectionSettings));
 					jsonWriter.WriteStartObject();
 					{
 						this.WriteRootObjectProperties(jsonWriter);
@@ -213,11 +208,11 @@ namespace Nest.Resolvers.Writers
 					{
 						
 						var deepType = p.PropertyType;
-						var deepTypeName = new TypeNameResolver().GetTypeNameFor(deepType);
+						var deepTypeName = new TypeNameResolver().GetTypeNameFor(deepType).Resolve(this._connectionSettings);
 						var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
 						seenTypes.AddOrUpdate(deepType, 0, (t, i) => ++i);
 
-						var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, MaxRecursion, seenTypes);
+						var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, this._connectionSettings, MaxRecursion, seenTypes);
 						var nestedProperties = newTypeMappingWriter.MapPropertiesFromAttributes();
 						
 						jsonWriter.WritePropertyName("properties");

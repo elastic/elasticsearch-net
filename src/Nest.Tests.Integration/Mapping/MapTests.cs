@@ -99,7 +99,7 @@ namespace Nest.Tests.Integration.Mapping
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			mapping.Boost = 3;
-			typeMapping.Name = "elasticsearchprojects2";
+			typeMapping.TypeNameMarker = "elasticsearchprojects2";
 			this._client.Map(typeMapping, ElasticsearchConfiguration.DefaultIndex + "_clone");
 
 			typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex + "_clone",

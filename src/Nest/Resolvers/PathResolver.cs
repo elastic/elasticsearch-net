@@ -22,12 +22,21 @@ namespace Nest.Resolvers
 			this._idResolver = new IdResolver();
 		}
 
+		private string GetTypeNameFor<T>()
+		{
+			return GetTypeNameFor(typeof(T));
+		}
+		private string GetTypeNameFor(Type type)
+		{
+			return this._typeNameResolver.GetTypeNameFor(type).Resolve(this._connectionSettings);
+		}
+
 		public string CreatePathFor<T>(T @object, string index = null, string type = null, string id = null) where T : class
 		{
 			if (index == null)
 				index = this._indexNameResolver.GetIndexForType<T>();
 			if (type == null)
-				type = this._typeNameResolver.GetTypeNameFor<T>();
+				type = this.GetTypeNameFor<T>();
 			if (id == null)
 				id = this._idResolver.GetIdFor<T>(@object);
 
@@ -38,7 +47,7 @@ namespace Nest.Resolvers
 			if (index == null)
 				index = this._indexNameResolver.GetIndexForType<T>();
 			if (type == null)
-				type = this._typeNameResolver.GetTypeNameFor<T>();
+				type = this.GetTypeNameFor<T>();
 			if (id == null)
 				id = this._idResolver.GetIdFor<T>(@object);
 
@@ -249,7 +258,7 @@ namespace Nest.Resolvers
 			else
 				indices = this._indexNameResolver.GetIndexForType<T>();
 
-			var types = this._typeNameResolver.GetTypeNameFor<T>();
+			var types = this.GetTypeNameFor<T>();
 			if (descriptor._Types.HasAny())
 				types = string.Join(",", descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
@@ -285,7 +294,7 @@ namespace Nest.Resolvers
 			else
 				indices = this._indexNameResolver.GetIndexForType<T>();
 
-			var types = this._typeNameResolver.GetTypeNameFor<T>();
+			var types = this.GetTypeNameFor<T>();
 			if (descriptor._Types.HasAny())
 				types = string.Join(",", descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
@@ -302,7 +311,7 @@ namespace Nest.Resolvers
 
 			var type = descriptor._Type;
 			if (type.IsNullOrEmpty())
-				type = this._typeNameResolver.GetTypeNameFor<T>();
+				type = this.GetTypeNameFor<T>();
 
 			var id = descriptor._Id;
 			

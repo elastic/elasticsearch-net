@@ -8,16 +8,19 @@ namespace Nest
 {
     public class RootObjectMappingDescriptor<T> where T : class
     {
+		private readonly IConnectionSettings _connectionSettings;
+
 		internal RootObjectMapping _Mapping { get; set; }
-		internal string _TypeName { get; set; }
+		internal TypeNameMarker _TypeName { get; set; }
 		internal string _IndexName { get; set; }
 		internal bool _IgnoreConflicts { get; set; }
 
-		public RootObjectMappingDescriptor()
+		public RootObjectMappingDescriptor(IConnectionSettings connectionSettings)
 		{
+			this._connectionSettings = connectionSettings;
 			this._TypeName = new TypeNameResolver().GetTypeNameFor<T>();
-			this._Mapping = new RootObjectMapping() { Name = this._TypeName };
-        }
+			this._Mapping = new RootObjectMapping() { TypeNameMarker = this._TypeName };
+		}
 
 		/// <summary>
 		/// Convenience method to map from most of the object from the attributes/properties.
@@ -27,7 +30,7 @@ namespace Nest
 		/// <returns></returns>
 		public RootObjectMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
-			var writer = new TypeMappingWriter(typeof(T), this._TypeName, maxRecursion);
+			var writer = new TypeMappingWriter(typeof(T), this._TypeName, this._connectionSettings, maxRecursion);
 			var mapping = writer.RootObjectMappingFromAttributes();
 			if (mapping == null)
 				return this;
@@ -50,7 +53,7 @@ namespace Nest
 		public RootObjectMappingDescriptor<T> TypeName(string name)
 		{
 			this._TypeName = name;
-			this._Mapping.Name = name;
+			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
 		/// <summary>
@@ -228,7 +231,7 @@ namespace Nest
 		public RootObjectMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = propertiesSelector(new PropertiesDescriptor<T>());
+			var properties = propertiesSelector(new PropertiesDescriptor<T>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
 				this._Mapping.Properties = new Dictionary<string, IElasticType>();
 
@@ -251,7 +254,7 @@ namespace Nest
 		public RootObjectMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)
 		{
 			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
-			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
+			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>(this._connectionSettings));
 			if (this._Mapping.DynamicTemplates == null)
 				this._Mapping.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
 

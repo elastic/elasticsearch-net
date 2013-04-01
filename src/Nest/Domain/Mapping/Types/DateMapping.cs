@@ -3,16 +3,17 @@ using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class DateMapping : IElasticType, IElasticCoreType
 	{
 		[JsonIgnore]
-		public string Name { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
 
 		[JsonProperty("type")]
-		public virtual string Type { get { return "date"; } }
+		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "date" }; } }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
