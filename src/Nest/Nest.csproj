@@ -65,6 +65,7 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\CovariantDictionary.cs" />
     <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkDeleteResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkIndexResponseItem.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
     <Compile Include="Domain\Responses\IBulkResponse.cs" />
     <Compile Include="Domain\Settings\SimilaritySettings.cs" />
+    <Compile Include="DSL\PartialFieldDescriptor.cs" />
     <Compile Include="ElasticClient-MultiSearch.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
