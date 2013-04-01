@@ -8,6 +8,13 @@ namespace Nest.Resolvers.Converters
 
 	public class IndexSettingsConverter : JsonConverter
 	{
+		private readonly IConnectionSettings _connectionSettings;
+
+		public IndexSettingsConverter(IConnectionSettings connectionSettings)
+		{
+			this._connectionSettings = connectionSettings;
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var indexSettings = (IndexSettings)value;
@@ -20,19 +27,6 @@ namespace Nest.Resolvers.Converters
 			writer.WritePropertyName("index");
 			writer.WriteStartObject();
 
-			// allready in indexSetting.Setting
-			/*
-			  if (indexSettings.NumberOfReplicas.HasValue) 
-			  {
-				  writer.WritePropertyName("number_of_shards");
-				  writer.WriteValue(indexSettings.NumberOfShards);
-			  }
-			  if (indexSettings.NumberOfShards.HasValue)
-			  {
-				  writer.WritePropertyName("number_of_replicas");
-				  writer.WriteValue(indexSettings.NumberOfReplicas);
-			  }
-		   */
 			if (indexSettings.Settings.HasAny())
 			{
 				foreach (var kv in indexSettings.Settings)
@@ -106,7 +100,7 @@ namespace Nest.Resolvers.Converters
 			if (indexSettings.Mappings.Count > 0)
 			{
 				writer.WritePropertyName("mappings");
-				serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.TypeNameMarker));
+				serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.TypeNameMarker.Resolve(this._connectionSettings)));
 			}
 
 			writer.WriteEndObject();

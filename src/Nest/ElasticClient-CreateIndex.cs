@@ -15,7 +15,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse CreateIndex(string index, IndexSettings settings)
 		{
-			string data = JsonConvert.SerializeObject(settings, Formatting.None, SerializationSettings);
+			string data = this.Serialize(settings);
 			return CreateIndexRaw(index, data);
 		}
 		/// <summary>

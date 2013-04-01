@@ -15,10 +15,10 @@ namespace Nest.Resolvers
 			connectionSettings.ThrowIfNull("connectionSettings");
 			string typeName = this.Name;
 			if (this.Type == null)
-				return Name;
+				return this.Name;
 			if (connectionSettings.DefaultTypeNames.TryGetValue(this.Type, out typeName))
 				return typeName;
-			return typeName;
+			return this.Name;
 		}
 
 		public static implicit operator TypeNameMarker(string typeName)

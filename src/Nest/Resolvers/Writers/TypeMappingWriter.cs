@@ -92,8 +92,8 @@ namespace Nest.Resolvers.Writers
 				jsonWriter.Formatting = Formatting.Indented;
 				jsonWriter.WriteStartObject();
 				{
-					var typeName = this.TypeName;
-					jsonWriter.WritePropertyName(typeName.Resolve(this._connectionSettings));
+					var typeName = this.TypeName.Resolve(this._connectionSettings);
+					jsonWriter.WritePropertyName(typeName);
 					jsonWriter.WriteStartObject();
 					{
 						this.WriteRootObjectProperties(jsonWriter);

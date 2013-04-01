@@ -107,6 +107,7 @@ namespace Nest
 			this._proxyAddress = proxyAddress;
 			this.MaximumAsyncConnections = 20;
 			this._defaultTypeIndices = new FluentDictionary<Type, string>();
+			this._defaultTypeNames = new FluentDictionary<Type, string>();
 		}
 		/// <summary>
 		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
@@ -143,6 +144,7 @@ namespace Nest
 			this._proxyAddress = proxyAddress;
 			this.MaximumAsyncConnections = 20;
 			this._defaultTypeIndices = new FluentDictionary<Type, string>();
+			this._defaultTypeNames = new FluentDictionary<Type, string>();
 		}
 		/// <summary>
 		/// Index to default to when no index is specified.

@@ -242,7 +242,7 @@ namespace Nest.Resolvers
 			else
 				indices = this._connectionSettings.DefaultIndex;
 
-			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
+			string types = (descriptor._Types.HasAny()) ? this.JoinTypes(descriptor._Types) : null;
 
 			var dict = this.GetSearchParameters(descriptor);
 
@@ -260,7 +260,7 @@ namespace Nest.Resolvers
 
 			var types = this.GetTypeNameFor<T>();
 			if (descriptor._Types.HasAny())
-				types = string.Join(",", descriptor._Types);
+				types = this.JoinTypes(descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
 				types = null;
 
@@ -269,7 +269,14 @@ namespace Nest.Resolvers
 
 			return this.SearchPathJoin(indices, types, dict, "_search");
 		}
-		
+
+		private string JoinTypes(IEnumerable<TypeNameMarker> markers)
+		{
+			if (!markers.HasAny())
+				return null;
+			return string.Join(",", markers.Select(t => t.Resolve(this._connectionSettings)));
+		}
+
 		public string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor, string suffix)
 		{
 			string indices;
@@ -446,7 +453,7 @@ namespace Nest.Resolvers
 			var id = d._Id;
 			id.ThrowIfNullOrEmpty("id");
 
-			var path = string.Format("/{0}/{1}/{2}", index, type, id);
+			var path = string.Format("/{0}/{1}/{2}", index, type.Resolve(this._connectionSettings), id);
 			var urlParams = new Dictionary<string, string>();
 			if (d._Refresh.HasValue)
 				urlParams.Add("refresh", d._Refresh.Value.ToString().ToLower());

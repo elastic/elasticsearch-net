@@ -128,7 +128,10 @@ namespace Nest
 
             return this.ToParsedResponse<QueryResponse<T>>(
                 status,
-                extraConverters: new[] { new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, partialFields) }
+                extraConverters: new[]
+                {
+	                new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, partialFields)
+                }
             );
         }
     }
