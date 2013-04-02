@@ -42,7 +42,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Rename an old alias for index to a new alias in one operation
+		/// Repoint an alias from a set of old indices to a set of new indices in one operation
 		/// </summary>
 		public IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
 		{
@@ -51,6 +51,22 @@ namespace Nest
 				commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = alias }));
 			foreach (var i in newIndices)
 				commands.Add(_createCommand("add", new AliasParams { Index = i, Alias = alias }));
+			return this._Alias(string.Join(", ", commands));
+		}
+
+		/// <summary>
+		/// Repoint an alias from a set of old indices to a set of new indices in one operation
+		/// </summary>
+		public IIndicesOperationResponse Swap(AliasParams aliasParam, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
+		{
+			var commands = new List<string>();
+			foreach (var i in oldIndices)
+				commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = aliasParam.Alias }));
+			foreach (var i in newIndices)
+			{
+				aliasParam.Index = i;
+				commands.Add(_createCommand("add", aliasParam));
+			}
 			return this._Alias(string.Join(", ", commands));
 		}
 
