@@ -66,9 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\CovariantDictionary.cs" />
-    <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
-    <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />
-    <Compile Include="Domain\Mapping\Attributes\NestedPropertyAttribute.cs" />
     <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkDeleteResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkIndexResponseItem.cs" />
@@ -493,7 +490,6 @@
     <Compile Include="Domain\Analysis\Analyzers\StandardAnalyzer.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\StopTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\WordDelimiterTokenFilter.cs" />
-    <Compile Include="Resolvers\Writers\WritePropertiesFromAttributeVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
