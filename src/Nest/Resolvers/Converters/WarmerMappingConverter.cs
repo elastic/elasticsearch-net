@@ -2,10 +2,11 @@
 using System.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-	public class TemplateResponseConverter : JsonConverter
+	public class WarmerMappingConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -15,21 +16,16 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var dict = new Dictionary<string, TemplateMapping>();
-			serializer.Populate(reader, dict);
-			if (dict.Count == 0)
-				throw new DslException("Could not deserialize TemplateMapping1");
+			var jObject = JObject.Load(reader);
+			var types = ((JArray)jObject.Property("types").Value).Values<string>().ToArray();
+			var source = jObject.Property("source").Value.ToString();
 
-			return new TemplateResponse
-			{
-				Name = dict.First().Key,
-				TemplateMapping = dict.First().Value
-			};
+			return new WarmerMapping { Types = types, Source = source };
 		}
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(ShardsSegment);
+			return objectType == typeof(WarmerMapping);
 		}
 	}
 }
