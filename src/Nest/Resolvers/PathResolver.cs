@@ -98,9 +98,9 @@ namespace Nest.Resolvers
 			type.ThrowIfNullOrEmpty("type");
 			index = Uri.EscapeDataString(index);
 			type = Uri.EscapeDataString(type);
-
 			if (suffix != null)
 				return "{0}/{1}/{2}".F(index, type, this.NormalizeSuffix(suffix));
+
 			return "{0}/{1}/".F(index, type);
 		}
 		
@@ -110,6 +110,8 @@ namespace Nest.Resolvers
 			types.ThrowIfEmpty("types");
 			var index = string.Join(",", indices);
 			var type = string.Join(",", types);
+			if (suffix != null)
+				return "{0}/{1}/{2}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type), this.NormalizeSuffix(suffix));
 
 			return "{0}/{1}/".F(Uri.EscapeDataString(index), Uri.EscapeDataString(type));
 		}

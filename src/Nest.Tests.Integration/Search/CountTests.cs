@@ -2,6 +2,8 @@
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using FluentAssertions;
+using Nest.Resolvers;
 
 namespace Nest.Tests.Integration.Search
 {
@@ -42,9 +44,25 @@ namespace Nest.Tests.Integration.Search
 					.Value(this._LookFor.ToLower())
 				)
 			);
-			Assert.True(countResults.Count > 0);
+			countResults.Count.Should().Be(3);
 		}
 
+		[Test]
+		public void SimpleQueryWithIndicesCount()
+		{
+			//does a match_all on the default specified index
+			var index = ElasticsearchConfiguration.DefaultIndex;
+			var indices = new[] { index, index + "_clone" };
+			var types = new[] { new TypeNameResolver().GetTypeNameFor<ElasticSearchProject>() };
+			var countResults = this._client.Count<ElasticSearchProject>(indices, types, q => q
+				.Fuzzy(fq => fq
+					.OnField(f => f.Followers.First().FirstName)
+					.Value(this._LookFor.ToLower())
+				)
+			);
+			countResults.IsValid.Should().Be(true);
+			countResults.Count.Should().Be(3);
+		}
 
 		[Test]
 		public void SimpleTypedCount()

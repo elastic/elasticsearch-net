@@ -121,6 +121,14 @@ namespace Nest
 				url += (string.IsNullOrEmpty(uri.Query) ? "?" : "&") + "pretty=true";
 			}
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
+
+            var myUri = this._ConnectionSettings.Uri;
+            if (myUri != null && !string.IsNullOrEmpty(myUri.UserInfo))
+            {
+                myReq.Headers["Authorization"] =
+                    "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
+            }
+
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 
