@@ -96,6 +96,7 @@
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
+    <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Search\Facets\FacetJson.cs" />
     <Compile Include="Search\Facets\FilterFacetJson.cs" />

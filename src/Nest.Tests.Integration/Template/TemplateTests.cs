@@ -2,7 +2,7 @@
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Mapping
+namespace Nest.Tests.Integration.Template
 {
 	[TestFixture]
 	public class TemplateTests : IntegrationTests

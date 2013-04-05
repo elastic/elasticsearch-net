@@ -19,6 +19,11 @@ namespace Nest.Resolvers
 			return this.GetTypeNameForType(typeof(T));
 		}
 
+		public IEnumerable<string> GetTypeNamesFor(IEnumerable<Type> types)
+		{
+			return types.Select(GetTypeNameFor).ToArray();
+		}
+
 		public string GetTypeNameForType(Type type)
 		{
 			var typeName = type.Name;

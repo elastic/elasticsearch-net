@@ -247,6 +247,10 @@ namespace Nest
 		IIndicesOperationResponse PutTemplateRaw(string templateName, string template);
 		ITemplateResponse GetTemplate(string templateName);
 
+		IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
+		IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
+		IIndicesOperationResponse DeleteWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
+
 		INodeInfoResponse NodeInfo(NodesInfo nodesInfo);
 		INodeInfoResponse NodeInfo(IEnumerable<string> nodes, NodesInfo nodesInfo);
 
