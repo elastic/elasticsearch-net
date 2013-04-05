@@ -411,6 +411,11 @@ namespace Nest
 		}
 
 
+		private string BulkIndexPath(string index)
+		{
+			return this.PathResolver.CreateIndexPath(index, "_bulk");
+		}
+
 		private IIndexResponse _indexToPath<T>(T @object, string path) where T : class
 		{
 			path.ThrowIfNull("path");
