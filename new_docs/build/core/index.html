@@ -111,16 +111,16 @@ available.
 <p>Like the overloads just taking a <code>T</code> the <code>IEnumerable&lt;T&gt;</code> has alot of overloads taking in extra parameters. 
 
 </p>
-<pre><code>client.Index(posts, <span class="keyword">new</span> SimpleBulkParameters() { Refresh = <span class="keyword">true</span> });</code></pre>
+<pre><code>client.IndexMany(posts, <span class="keyword">new</span> SimpleBulkParameters() { Refresh = <span class="keyword">true</span> });</code></pre>
 <p>The reason the <code>IEnumerable&lt;T&gt;</code> overloads take a <code>SimpleBulkParameters</code> is because to pass item specific parameters you&apos;ll have to wrap <code>posts</code> in a <code>BulkParameters&lt;T&gt;</code> i.e:
 
 </p>
-<pre><code>client.Index(posts.Select(p=><span class="keyword">new</span> BulkParameters&lt;T>(p) { Version = p.Version }));</code></pre>
+<pre><code>client.IndexMany(posts.Select(p=><span class="keyword">new</span> BulkParameters&lt;T>(p) { Version = p.Version }));</code></pre>
 <p>This will do a bulk index on posts but use each individual posts version. Again there&apos;s plenty of overloads to mix and match:
 
 </p>
 <pre><code><span class="keyword">var</span> bulkParams = posts.Select(p=><span class="keyword">new</span> BulkParameters&lt;T>(p) { Version = p.Version });
-client.Index(bulkParams , <span class="keyword">new</span> SimpleBulkParameters() { Refresh = <span class="keyword">true</span> });</code></pre>
+client.IndexMany(bulkParams , <span class="keyword">new</span> SimpleBulkParameters() { Refresh = <span class="keyword">true</span> });</code></pre>
 
           </div>
         </article>

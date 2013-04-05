@@ -21,6 +21,7 @@ namespace Nest.Resolvers
 		{
 			return this.GetIndexForType(typeof(T));
 		}
+
 		public string GetIndexForType(Type type)
 		{
 			var defaultIndices = this._connectionSettings.DefaultIndices;

@@ -35,9 +35,11 @@ namespace Nest.Tests.Integration
 				.AddMapping<ElasticSearchProject>(m => m.MapFromAttributes())
 				.AddMapping<Person>(m => m.MapFromAttributes())
 			);
+
 			var bulkParameters = new SimpleBulkParameters() { Refresh = true };
 			client.IndexMany(projects, bulkParameters);
 			client.IndexMany(people, bulkParameters);
+			client.Refresh(new[] {ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone"});
 
 		}
 

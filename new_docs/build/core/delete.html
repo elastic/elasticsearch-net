@@ -74,8 +74,8 @@
 <pre><code>        <span class="keyword">this</span>.ConnectedClient.Delete(searchProject);
         <span class="keyword">this</span>.ConnectedClient.DeleteAsync(searchProject);</code></pre>
 <h2>By IEnumerable<T></h2>
-<pre><code>        <span class="keyword">this</span>.ConnectedClient.Delete(searchProjects);
-        <span class="keyword">this</span>.ConnectedClient.DeleteAsync(searchProjects);</code></pre>
+<pre><code>        <span class="keyword">this</span>.ConnectedClient.DeleteMany(searchProjects);
+        <span class="keyword">this</span>.ConnectedClient.DeleteManyAsync(searchProjects);</code></pre>
 <h2>By IEnumerable<T> using bulkparameters</h2>
 <p>Using bulk parameters you can control the deletion of each individual document further
 
@@ -87,7 +87,7 @@
                 VersionType = VersionType.External 
             }
         );
-        <span class="keyword">this</span>.ConnectedClient.Delete(bulkedProjects, <span class="keyword">new</span> SimpleBulkParameters() { Refresh = <span class="keyword">true</span> });</code></pre>
+        <span class="keyword">this</span>.ConnectedClient.DeleteMany(bulkedProjects, <span class="keyword">new</span> SimpleBulkParameters() { Refresh = <span class="keyword">true</span> });</code></pre>
 <h2>By Query</h2>
 <p>Please see <a href="/core/{{root}}/core/delete-by-query.html">deleting by query</a>
 

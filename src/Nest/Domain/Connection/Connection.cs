@@ -121,6 +121,14 @@ namespace Nest
 				url += (string.IsNullOrEmpty(uri.Query) ? "?" : "&") + "pretty=true";
 			}
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
+
+            var myUri = this._ConnectionSettings.Uri;
+            if (myUri != null && !string.IsNullOrEmpty(myUri.UserInfo))
+            {
+                myReq.Headers["Authorization"] =
+                    "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
+            }
+
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 
@@ -155,80 +163,82 @@ namespace Nest
 
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
-			var tcs = new TaskCompletionSource<ConnectionStatus>();
-			this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
-			if (tcs.Task != null && tcs.Task.Result != null)
-			{
-				tcs.Task.Result.Request = data;
-				tcs.Task.Result.RequestUrl = request.RequestUri.ToString();
-				tcs.Task.Result.RequestMethod = request.Method;
-			}
-			return tcs.Task;
-		}
-	
-		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
-		{
 			var timeout = this._ConnectionSettings.Timeout;
 
+			var tcs = new TaskCompletionSource<ConnectionStatus>();
 			if (!this._ResourceLock.WaitOne(timeout))
 			{
 				var m = "Could not start the operation before the timeout of " + timeout + "ms completed while waiting for the semaphore";
 				tcs.SetResult(new ConnectionStatus(new TimeoutException(m)));
-				yield break;
+				return tcs.Task;
 			}
 			try
 			{
-				var state = new ConnectionState { Connection = request };
-
-				if (data != null)
+				return Task.Factory.StartNew(() =>
 				{
-					var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-					ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-					yield return getRequestStream;
-
-					var requestStream = getRequestStream.Result;
-					try
-					{
-						byte[] buffer = Encoding.UTF8.GetBytes(data);
-						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, buffer, 0, buffer.Length, state);
-						yield return writeToRequestStream;
-					}
-					finally
-					{
-						requestStream.Close();
-					}
-				}
-
-				// Get the response
-				var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
-				ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-				yield return getResponse;
-
-				// Get the response stream
-				using (var response = (HttpWebResponse)getResponse.Result)
-				using (var responseStream = response.GetResponseStream())
-				{
-					// Copy all data from the response stream
-					var output = new MemoryStream();
-					var buffer = new byte[BUFFER_SIZE];
-					while (true)
-					{
-						var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
-						yield return read;
-						if (read.Result == 0) break;
-						output.Write(buffer, 0, read.Result);
-					}
-
-					// Decode the data and store the result
-					var result = Encoding.UTF8.GetString(output.ToArray());
-					var cs = new ConnectionStatus(result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
-					tcs.TrySetResult(cs);
-				}
+					this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
+					return tcs.Task.Result;
+				}, TaskCreationOptions.LongRunning);
 			}
 			finally
 			{
 				this._ResourceLock.Release();
 			}
+
+		}
+
+		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
+		{
+			var timeout = this._ConnectionSettings.Timeout;
+
+			var state = new ConnectionState { Connection = request };
+
+			if (data != null)
+			{
+				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+				ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+				yield return getRequestStream;
+
+				var requestStream = getRequestStream.Result;
+				try
+				{
+					byte[] buffer = Encoding.UTF8.GetBytes(data);
+					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, buffer, 0, buffer.Length, state);
+					yield return writeToRequestStream;
+				}
+				finally
+				{
+					requestStream.Close();
+				}
+			}
+
+			// Get the response
+			var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
+			ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+			yield return getResponse;
+
+			// Get the response stream
+			using (var response = (HttpWebResponse)getResponse.Result)
+			using (var responseStream = response.GetResponseStream())
+			{
+				// Copy all data from the response stream
+				var output = new MemoryStream();
+				var buffer = new byte[BUFFER_SIZE];
+				while (responseStream != null)
+				{
+					var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
+					yield return read;
+					if (read.Result == 0) break;
+					output.Write(buffer, 0, read.Result);
+				}
+
+				// Decode the data and store the result
+				var result = Encoding.UTF8.GetString(output.ToArray());
+				var cs = new ConnectionStatus(result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+				tcs.TrySetResult(cs);
+			}
+			yield break;
+
 		}
 
 		public void Iterate(IEnumerable<Task> asyncIterator, TaskCompletionSource<ConnectionStatus> tcs)
@@ -256,7 +266,7 @@ namespace Nest
 			};
 			recursiveBody(null);
 		}
-	
+
 		private string _CreateUriString(string path)
 		{
 			var s = this._ConnectionSettings;
@@ -269,7 +279,7 @@ namespace Nest
 			if (!s.Uri.ToString().EndsWith("/") && !path.StartsWith("/"))
 				path = "/" + path;
 
-			return  s.Uri + path;
+			return s.Uri + path;
 		}
 	}
 }

@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Core
 			);
 			Assert.Greater(queryResults.Total, 0);
 
-			var hit = queryResults.Hits.Hits[0];
+			var hit = queryResults.Hits.Hits.First();
 			var documentToFind = hit.Source;
 
 			//act

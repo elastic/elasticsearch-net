@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Warmers\WarmersTests.cs" />
+    <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
+    <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
     <Compile Include="Help\AliasTests.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="Search\SearchType\SearchTypeScanTests.cs" />
     <Compile Include="Search\SearchType\SearchTypeCountTests.cs" />
     <Compile Include="Search\SearchType\SearchTypeTests.cs" />
+    <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
     <Compile Include="Template\TemplateTests.cs" />
@@ -140,6 +144,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Nest.Connection.Thrift\Nest.Connection.Thrift.csproj">
+      <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
+      <Name>Nest.Connection.Thrift</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>

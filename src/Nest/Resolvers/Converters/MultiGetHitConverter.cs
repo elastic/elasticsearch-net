@@ -62,7 +62,6 @@ namespace Nest.Resolvers.Converters
 			var withMeta = docsJarray.Zip(this._descriptor._GetOperations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
 			foreach (var m in withMeta)
 			{
-				var genericType = typeof(MultiGetHit<>).MakeGenericType(m.Descriptor._ClrType);
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(m.Descriptor._ClrType);
 				generic.Invoke(null, new object[] { m, serializer, response._Documents });
 			}

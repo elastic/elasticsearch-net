@@ -120,6 +120,25 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 			type.Analyzer.Should().NotBeNullOrEmpty().And.BeEquivalentTo(analyzerName);
 
 		}
+		[Test]
+		public void SnowballAnalyzer()
+		{
+			var analyzerName = "snowball";
+			var result = this.MapAndAnalyze(
+				a => a
+					.Analyzers(an => an.Add(analyzerName, new SnowballAnalyzer { Language = "Dutch" }))
+				, m => m
+					.Properties(p => p.String(sm => sm.Name(f => f.Txt).IndexAnalyzer(analyzerName).SearchAnalyzer(analyzerName)))
+				, text: "De wereld draait door"
+			);
+
+			//'de' and 'door' are 2 dutch stopwords
+			result.AnalyzeResponse.Tokens.Should().HaveCount(2);
+			var type = result.ElasticType as StringMapping;
+			type.Should().NotBeNull();
+			type.Analyzer.Should().NotBeNullOrEmpty().And.BeEquivalentTo(analyzerName);
+
+		}
 
 	}
 }

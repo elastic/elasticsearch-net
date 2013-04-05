@@ -13,6 +13,6 @@ namespace Nest
         public double MaxScore { get; internal set; }
 
         [JsonProperty("hits")]
-        public List<Hit<T>> Hits { get; internal set; }
+        public List<IHit<T>> Hits { get; internal set; }
     }
 }

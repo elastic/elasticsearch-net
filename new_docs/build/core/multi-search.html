@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Nest - Connecting</title>
+    <title>Nest - MultiSearch</title>
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -59,10 +59,37 @@
           </ul>
         </aside>
         <article>
-          <div id="content-margin-fix"><h1>Documentation still in progress</h1>
-<p>This is sadly still a marker file.
+          <div id="content-margin-fix"><h1>MultiSearch</h1>
+<p>The multi search API allows to execute several search requests within the same API. The endpoint for it is _msearch (available from 0.19 onwards).
 
 </p>
+<h1>Simple example</h1>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.MultiSearch(b => b
+    .Search&lt;ElasticSearchProject>(s => s.MatchAll())
+    .Search&lt;ElasticSearchProject>(s => s.MatchAll())
+    .Search&lt;Person>(s => s.MatchAll())
+);
+
+<span class="comment">//elasticProjectResults = IEnumerable&lt;QueryResponse&lt;ElasticSearchProject>> with a Count() of 2</span>
+<span class="keyword">var</span> elasticProjectResults = result.GetResponses&lt;ElasticSearchProject>();
+
+<span class="comment">//personResults = IEnumerable&lt;QueryResponse&lt;Person>> with a Count() of 1</span>
+<span class="keyword">var</span> personResults = result.GetResponses&lt;Person>();</code></pre>
+<h1>Named example</h1>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.MultiSearch(b => b
+    .Search&lt;ElasticSearchProject>(<span class="string">"esproj"</span>, s => s.MatchAll())
+    .Search&lt;ElasticSearchProject>(s => s.MatchAll())
+    .Search&lt;Person>(<span class="string">"people"</span>, s => s.MatchAll())
+);
+
+<span class="comment">//elasticProjectResult is a QueryResponse&lt;ElasticSearchProject>></span>
+<span class="keyword">var</span> elasticProjectResult = result.GetResponse&lt;ElasticSearchProject>(<span class="string">"esproj"</span>);
+
+<span class="comment">//personResult is a QueryResponse&lt;Person>></span>
+<span class="keyword">var</span> personResults = result.GetResponse&lt;Person>(<span class="string">"people"</span>);
+
+<span class="comment">//will be null </span>
+<span class="keyword">var</span> invalidResult = result.GetResponse&lt;ElasticSearchProject>(<span class="string">"people"</span>);</code></pre>
 
           </div>
         </article>

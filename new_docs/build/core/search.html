@@ -59,8 +59,42 @@
           </ul>
         </aside>
         <article>
-          <div id="content-margin-fix"><h1>Documentation still in progress</h1>
-<p>This is sadly still a marker file.
+          <div id="content-margin-fix"><h1>Search</h1>
+<p>Search is <strong>THE</strong> call you&apos;ll probably use the most as it exposes elasticsearch&apos;s key functionality: search!
+
+</p>
+<p>You can start a search like so, 
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.Search(s => s
+    .Index(<span class="string">"my-index"</span>)
+    .Type(<span class="string">"my-type"</span>)
+    .MatchAll()
+);</code></pre>
+<p>This will get all the documents on the <code>my-index</code> index and <code>my-type</code> type. 
+
+</p>
+<p><code>result</code> is an <code>IQueryResponse&lt;dynamic&gt;</code> which has a <code>Documents</code> <code>IEnumerable&lt;dynamic&gt;</code> property that holds all the results. NOTE: remember in the absent of paging it will default to the first 10). 
+
+</p>
+<h2>Typed results</h2>
+<p>Dynamic may or may not be what you want but in general it pays to type your search responses. In alot of cases you already need to have the POCO classes for indexing anyway. 
+
+</p>
+<pre><code><span class="keyword">var</span> result = <span class="keyword">this</span>._client.Search&lt;ElasticSearchProject>(s => s
+    .MatchAll()
+);</code></pre>
+<p>Now <code>result</code> is a <code>IQueryResponse&lt;ElasticSearchProject&gt;</code> and its Documents property will hold an <code>IEnumerable&lt;ElasticSearchProject&gt;</code>. 
+
+</p>
+<p>If you are wondering why I am not specifying <code>Index()</code> and <code>Type()</code> here read the primer on <a href="/concepts/index-type-inference.html">index and type name inference</a>
+
+
+
+
+
+
+
 
 </p>
 

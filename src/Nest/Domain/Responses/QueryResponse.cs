@@ -16,7 +16,7 @@ namespace Nest
 		int Total { get; }
 		double MaxScore { get; }
 		IEnumerable<T> Documents { get; }
-		IEnumerable<Hit<T>> DocumentsWithMetaData { get; }
+		IEnumerable<IHit<T>> DocumentsWithMetaData { get; }
 		IEnumerable<Highlight> Highlights { get; }
 		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
 		F Facet<F>(string fieldName) where F : class, IFacet;
@@ -49,7 +49,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty(PropertyName = "_scroll_id")]
 		public string ScrollId { get; internal set; }
-
 
 		public int Total
 		{
@@ -89,7 +88,7 @@ namespace Nest
 			}
 		}
 
-		public IEnumerable<Hit<T>> DocumentsWithMetaData
+		public IEnumerable<IHit<T>> DocumentsWithMetaData
 		{
 			get
 			{

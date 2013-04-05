@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Nest.Domain;
-using Nest.FactoryDsl;
 using System.Collections.Generic;
 namespace Nest
 {
 	public interface IElasticClient
 	{
 		bool IsValid { get; }
+		IConnectionSettings Settings { get; }
 
 		IIndicesOperationResponse Alias(AliasParams aliasParams);
 		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
@@ -19,6 +19,8 @@ namespace Nest
 
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
+
+
 
 		IAnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text);
 		IAnalyzeResponse Analyze(string text);
@@ -159,6 +161,9 @@ namespace Nest
 		IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
+		MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
+		MultiSearchResponse MultiSearch(MultiSearchDescriptor multiSearchSelector);
+
 		IIndexSettingsResponse GetIndexSettings();
 		IIndexSettingsResponse GetIndexSettings(string index);
 
@@ -280,39 +285,15 @@ namespace Nest
 		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
 
-		IQueryResponse<dynamic> Search(
-		  SearchBuilder searchBuilder,
-		  string index = null,
-		  string type = null,
-		  string routing = null,
-		  SearchType? searchType = null);
-		IQueryResponse<T> Search<T>(SearchBuilder searchBuilder,
-		  string index = null,
-		  string type = null,
-		  string routing = null,
-		  SearchType? searchType = null) where T : class;
-
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-		IQueryResponse<T> SearchRaw<T>(string query) where T : class;
-
-		Task<IQueryResponse<dynamic>> SearchAsync(
-		  SearchBuilder searchBuilder,
-		  string index = null,
-		  string type = null,
-		  string routing = null,
-		  SearchType? searchType = null);
-		Task<IQueryResponse<T>> SearchAsync<T>(SearchBuilder searchBuilder,
-		  string index = null,
-		  string type = null,
-		  string routing = null,
-		  SearchType? searchType = null) where T : class;
+		IQueryResponse<T> SearchRaw<T>(string query, string path = null) where T : class;
 
 		Task<IQueryResponse<dynamic>> SearchAsync(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		Task<IQueryResponse<T>> SearchAsync<T>(SearchDescriptor<T> descriptor) where T : class;
 		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-		Task<IQueryResponse<T>> SearchRawAsync<T>(string query) where T : class;
+		Task<IQueryResponse<T>> SearchRawAsync<T>(string query, string path = null) where T : class;
 
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(IEnumerable<string> indices);

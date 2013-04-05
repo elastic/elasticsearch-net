@@ -43,6 +43,20 @@ namespace Nest
 			this.SetWebResponseData(response);
 		}
 
+		public ConnectionError(string response, int httpStatusCode)
+		{
+			this.Type = ConnectionErrorType.Server;
+			this.Response = response;
+			try
+			{
+				this.HttpStatusCode = (HttpStatusCode) httpStatusCode;
+			}
+			catch (Exception)
+			{
+				this.HttpStatusCode = HttpStatusCode.InternalServerError;
+			}
+		}
+
 		private void SetWebResponseData(HttpWebResponse response)
 		{
 			if (response == null)

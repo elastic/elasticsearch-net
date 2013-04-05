@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void TestSettings()
 		{
-			Assert.AreEqual(this._settings.Host, Test.Default.Host);
+			Assert.AreEqual(this._settings.Host, ElasticsearchConfiguration.Settings().Host);
 			Assert.AreEqual(this._settings.Port, Test.Default.Port);
 			Assert.AreEqual(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(this._settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);

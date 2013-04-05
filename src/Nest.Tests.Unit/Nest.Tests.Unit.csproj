@@ -73,6 +73,7 @@
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Index\IndexTests.cs" />
     <Compile Include="Core\Indices\Analysis\BaseAnalysisTests.cs" />
@@ -305,6 +306,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\AttributeBasedMap\TestNestedWriter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

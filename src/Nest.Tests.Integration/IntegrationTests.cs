@@ -12,7 +12,8 @@ namespace Nest.Tests.Integration
 	public class IntegrationTests
 	{
 		protected readonly ElasticClient _client = ElasticsearchConfiguration.Client;
-		protected readonly IConnectionSettings _settings = ElasticsearchConfiguration.Settings;
+		protected readonly ElasticClient _thriftClient = ElasticsearchConfiguration.ThriftClient;
+		protected readonly IConnectionSettings _settings = ElasticsearchConfiguration.Settings();
 	
 		protected virtual void ResetIndexes()
 		{

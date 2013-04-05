@@ -6,7 +6,7 @@
     <title>NEST - Elasticsearch Client</title>
     <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
-    <iconUrl>http://mpdreamz.github.com/NEST/images/nuget-icon.png</iconUrl>
+    <iconUrl>http://nest.azurewebsites.net/images/nuget-icon.png</iconUrl>
     <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
     <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
     <summary>Elasticsearch client, focuses on a strongly typed interface to elasticsearch but works well with dynamic use cases too.</summary>
@@ -18,6 +18,8 @@
     <tags>elasticsearch elastic search lucene nest</tags>
   </metadata>
   <files>
-    <file src="lib\**\Nest.*" target="lib"/> 
+  <file src="lib\**\Nest.dll" target="lib"/> 
+  <file src="lib\**\Nest.pdb" target="lib"/> 
+  <file src="lib\**\Nest.XML" target="lib"/> 
   </files>
 </package>

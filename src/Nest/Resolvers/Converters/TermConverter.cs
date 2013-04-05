@@ -12,7 +12,7 @@ namespace Nest.Resolvers.Converters
 		public static readonly Type[] _types = new Type[] { typeof(Term), typeof(Wildcard), typeof(Prefix), typeof(SpanTerm) };
 		public override bool CanConvert(Type objectType)
 		{
-      return typeof(Term).IsAssignableFrom(objectType);
+			return typeof(Term).IsAssignableFrom(objectType);
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -22,9 +22,9 @@ namespace Nest.Resolvers.Converters
 				writer.WriteStartObject();
 				writer.WritePropertyName(term.Field);
 				writer.WriteStartObject();
-	
-					writer.WritePropertyName("value");
-					writer.WriteValue(term.Value);
+
+				writer.WritePropertyName("value");
+				writer.WriteValue(term.Value);
 
 				if (term.Boost.HasValue)
 				{

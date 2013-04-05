@@ -228,7 +228,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			return this._indexManyToPath("_bulk", json);
+            return this._indexManyToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
@@ -236,7 +236,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			return this._indexManyToPath("_bulk", json);
+            return this._indexManyToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T
@@ -245,7 +245,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyToPath(path, json);
 		}
 		/// <summary>
@@ -255,7 +255,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyToPath(path, json);
 		}
 
@@ -265,7 +265,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			return this._indexManyToPath("_bulk", json);
+            return this._indexManyToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
@@ -273,7 +273,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			return this._indexManyToPath("_bulk", json);
+            return this._indexManyToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the specified type name
@@ -282,7 +282,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyToPath(path, json);
 		}
 		/// <summary>
@@ -292,7 +292,7 @@ namespace Nest
     public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyToPath(path, json);
 		}
 
@@ -342,7 +342,7 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			return this._indexManyAsyncToPath("_bulk", json);
+            return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
@@ -350,7 +350,7 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			return this._indexManyAsyncToPath("_bulk", json);
+            return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the inferred type name for T
@@ -359,7 +359,7 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyAsyncToPath(path, json);
 		} 
 		/// <summary>
@@ -369,7 +369,7 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyAsyncToPath(path, json);
 		}
 
@@ -379,7 +379,7 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			return this._indexManyAsyncToPath("_bulk", json);
+            return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
@@ -387,7 +387,7 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			return this._indexManyAsyncToPath("_bulk", json);
+			return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
 		}
 		/// <summary>
 		/// Index objects to the specified index and the specified type name
@@ -396,7 +396,7 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyAsyncToPath(path, json);
 		}
 		/// <summary>
@@ -406,10 +406,15 @@ namespace Nest
     public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
 		{
 			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
+			var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
 			return this._indexManyAsyncToPath(path, json);
 		}
 
+
+        private string BulkIndexPath(string index)
+        {
+            return this.PathResolver.CreateIndexPath(index, "_bulk");
+        }
 
     private IIndexResponse _indexToPath<T>(T @object, string path) where T : class
     {
@@ -441,6 +446,5 @@ namespace Nest
       var postTask = this.Connection.Post(path, json);
       return postTask.ContinueWith<IBulkResponse>(t => this.ToParsedResponse<BulkResponse>(t.Result));
     }
-	}
-	
+  }
 }
