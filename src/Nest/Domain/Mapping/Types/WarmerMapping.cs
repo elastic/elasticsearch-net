@@ -4,8 +4,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//	[JsonConverter(typeof(TemplateMappingConverter))]
-	[JsonObject(MemberSerialization.OptIn)]
+
+	[JsonObject]
+	[JsonConverter(typeof(WarmerMappingConverter))]
 	public class WarmerMapping
 	{
 
@@ -13,7 +14,11 @@ namespace Nest
 		{
 		}
 
-		public IEnumerable<string> Types { get; internal set; }
 		public string Name { get; internal set; }
+
+		public IEnumerable<string> Types { get; internal set; }
+
+		public string Source { get; internal set; }
+
 	}
 }

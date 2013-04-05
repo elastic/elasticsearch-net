@@ -10,77 +10,50 @@ namespace Nest
 	{
 
 
-		public IIndicesOperationResponse PutWarmer<T>(string warmerName, Func<SearchDescriptor<T>, SearchDescriptor<T>> selector)
-			where T : class
+		public IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
 		{
 			selector.ThrowIfNull("selector");
-
-			var descriptor = selector(new SearchDescriptor<T>());
+			var descriptor = selector(new PutWarmerDescriptor(Settings));
 			descriptor.ThrowIfNull("descriptor");
 
-			var path = this.PathResolver.GetWarmerPathForTyped(descriptor, warmerName);
-			var query = this.Serialize(descriptor);
+			var query = this.Serialize(descriptor._SearchDescriptor);
 
+			var path = this.PathResolver.GetWarmerPath(descriptor);
 			ConnectionStatus status = this.Connection.PutSync(path, query);
 			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+
 			return r;
-
-
-			//var warmerMapping = new WarmerMapping();
-			////var templateMapping = templateMappingDescriptor._TemplateMapping;
-			////templateMapping.ThrowIfNull("templateMapping");
-
-			////var templateName = templateMappingDescriptor._Name;
-
-			////templateName.ThrowIfNull("templateName");
-			////templateMapping.ThrowIfNull("templateMapping");
-
-			//string warmer = JsonConvert.SerializeObject(warmerMapping, Formatting.None, SerializationSettings);
-
-			//return PutWarmerRaw(templateName, warmer);
-			//return null;
 		}
 
-
-		public IIndicesOperationResponse PutWarmer(string warmerName, Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> selector)
+		/// <summary>
+		/// Gets warmers, query will be returned as json string
+		/// </summary>
+		public IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
 		{
 			selector.ThrowIfNull("selector");
-
-			var descriptor = selector(new SearchDescriptor<dynamic>());
+			var descriptor = selector(new GetWarmerDescriptor(Settings));
 			descriptor.ThrowIfNull("descriptor");
-
-			var path = this.PathResolver.GetWarmerPathForDynamic(descriptor, warmerName);
-			var query = this.Serialize(descriptor);
-
-			ConnectionStatus status = this.Connection.PutSync(path, query);
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
-			return r;
-
-
-			//var warmerMapping = new WarmerMapping();
-			////var templateMapping = templateMappingDescriptor._TemplateMapping;
-			////templateMapping.ThrowIfNull("templateMapping");
-
-			////var templateName = templateMappingDescriptor._Name;
-
-			////templateName.ThrowIfNull("templateName");
-			////templateMapping.ThrowIfNull("templateMapping");
-
-			//string warmer = JsonConvert.SerializeObject(warmerMapping, Formatting.None, SerializationSettings);
-
-			//return PutWarmerRaw(templateName, warmer);
-			//return null;
-		}
-
-
-		public WarmerResponse GetWarmer<T>(string warmerName)
-			where T : class
-		{
-			var path = this.PathResolver.GetWarmerPathForTyped<T>(warmerName);
+			var path = this.PathResolver.GetWarmerPath(descriptor);
 
 			ConnectionStatus status = this.Connection.GetSync(path);
 			var r = this.ToParsedResponse<WarmerResponse>(status);
 			return r;
 		}
+
+		/// <summary>
+		/// Delete warmers
+		/// </summary>
+		public IIndicesOperationResponse DeleteWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var descriptor = selector(new GetWarmerDescriptor(Settings));
+			descriptor.ThrowIfNull("descriptor");
+			var path = this.PathResolver.GetWarmerPath(descriptor);
+
+			ConnectionStatus status = this.Connection.DeleteSync(path);
+			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			return r;
+		}
+
 	}
 }

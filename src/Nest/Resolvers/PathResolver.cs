@@ -225,17 +225,6 @@ namespace Nest.Resolvers
 
 		public string GetSearchPathForDynamic(SearchDescriptor<dynamic> descriptor)
 		{
-			return this.GetSearchDescriptorPathForDynamic(descriptor);
-		}
-
-		public string GetWarmerPathForDynamic(SearchDescriptor<dynamic> descriptor, string warmerName)
-		{
-			var extension = string.Format("_warmer/{0}", warmerName);
-			return this.GetSearchDescriptorPathForDynamic(descriptor, extension);
-		}
-
-		private string GetSearchDescriptorPathForDynamic(SearchDescriptor<dynamic> descriptor, string extension = "_search")
-		{
 			string indices;
 			if (descriptor._Indices.HasAny())
 				indices = string.Join(",", descriptor._Indices);
@@ -248,43 +237,10 @@ namespace Nest.Resolvers
 
 			var dict = this.GetSearchParameters(descriptor);
 
-			return this.SearchPathJoin(indices, types, dict, extension);
+			return this.SearchPathJoin(indices, types, dict);
 		}
 
 		public string GetSearchPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
-		{
-			return this.GetSearchDescriptorPathForTyped(descriptor);
-		}
-
-		public string GetWarmerPathForTyped<T>(SearchDescriptor<T> descriptor, string warmerName) where T : class
-		{
-			var extension = string.Format("_warmer/{0}", warmerName);
-			return this.GetSearchDescriptorPathForTyped(descriptor, extension);
-		}
-
-		/// <summary>
-		/// Only for GET operations
-		/// </summary>
-		public string GetWarmerPathForTyped<T>(string warmerName = null) where T : class
-		{
-			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
-			var indices = this._indexNameResolver.GetIndexForType<T>();
-			var types = this._typeNameResolver.GetTypeNameFor<T>();
-			return this.SearchPathJoin(indices, types, null, extension);
-		}
-
-		/// <summary>
-		/// Only for GET operations
-		/// </summary>
-		public string GetWarmerPath(string indices = null, string types = null, string warmerName = null)
-		{
-			var extension = warmerName == null ? "_warmer" : string.Format("_warmer/{0}", warmerName);
-			if (indices == null)
-				indices = "_all";
-
-			return this.SearchPathJoin(indices, types, null, extension);
-		}
-		private string GetSearchDescriptorPathForTyped<T>(SearchDescriptor<T> descriptor, string extension = "_search") where T : class
 		{
 			string indices;
 			if (descriptor._Indices.HasAny())
@@ -303,7 +259,49 @@ namespace Nest.Resolvers
 			var dict = this.GetSearchParameters(descriptor);
 
 
-			return this.SearchPathJoin(indices, types, dict, extension);
+			return this.SearchPathJoin(indices, types, dict);
+		}
+
+		public string GetWarmerPath(PutWarmerDescriptor descriptor)
+		{
+			var extension = string.Format("_warmer/{0}", descriptor._WarmerName);
+
+			string indices;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+			else
+				indices = this._connectionSettings.DefaultIndex;
+
+			string types;
+			if (descriptor._Types.HasAny())
+				types = string.Join(",", descriptor._Types);
+			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
+				types = null;
+			else
+				types = null;
+
+			return this.SearchPathJoin(indices, types, null, extension);
+		}
+
+		/// <summary>
+		/// For GetWarmer and DeleteWarmer operations
+		/// </summary>
+		public string GetWarmerPath(GetWarmerDescriptor descriptor)
+		{
+			var extension = string.Format("_warmer/{0}", descriptor._WarmerName);
+
+			string indices;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+			else
+				indices = this._connectionSettings.DefaultIndex;
+
+
+			return this.SearchPathJoin(indices, null, null, extension);
 		}
 
 		public string GetPathForDynamic(QueryPathDescriptor<dynamic> descriptor, string suffix)
@@ -320,6 +318,7 @@ namespace Nest.Resolvers
 
 			return this.SearchPathJoin(indices, types, descriptor.GetUrlParams(), suffix);
 		}
+
 		public string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor, string suffix) where T : class
 		{
 			string indices;

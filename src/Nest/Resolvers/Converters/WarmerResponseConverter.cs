@@ -16,17 +16,20 @@ namespace Nest.Resolvers.Converters
 										JsonSerializer serializer)
 		{
 			// {"indexname":{"warmers":{"warmername": {...}}}}
-			var dict = new Dictionary<string, Dictionary<string, Dictionary<string, WarmerMappingWrapper>>>();
+			var dict = new Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>();
 			serializer.Populate(reader, dict);
 
 			Dictionary<string, Dictionary<string, WarmerMapping>> indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
 			foreach (var kv in dict)
 			{
 				var indexDict = kv.Value;
-				Dictionary<string, WarmerMappingWrapper> warmerWrappers;
-				if (!indexDict.TryGetValue("warmers", out warmerWrappers))
+				Dictionary<string, WarmerMapping> warmers;
+				if (!indexDict.TryGetValue("warmers", out warmers) || warmers == null)
 					continue;
-				var warmers = warmerWrappers.ToDictionary(kvw => kvw.Key, kvw => kvw.Value.Unwrap(kvw.Key));
+				foreach (var kvW in warmers)
+				{
+					kvW.Value.Name = kvW.Key;
+				}
 				indices.Add(kv.Key, warmers);
 			}
 
