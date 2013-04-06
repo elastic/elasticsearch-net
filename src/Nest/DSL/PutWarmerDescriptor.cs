@@ -17,7 +17,6 @@ namespace Nest
 		internal string _WarmerName { get; set; }
 
 		internal bool _AllIndices { get; set; }
-		internal bool _AllTypes { get; set; }
 
 		internal SearchDescriptorBase _SearchDescriptor { get; set; }
 
@@ -46,6 +45,13 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			this._Indices = new[] { index };
+			return this;
+		}
+
+		public PutWarmerDescriptor AllIndices()
+		{
+			this._Indices = null;
+			this._AllIndices = true;
 			return this;
 		}
 
@@ -85,9 +91,15 @@ namespace Nest
 			return this.Index(indexNameResolver.GetIndexForType(type));
 		}
 
-		public PutWarmerDescriptor Type(string type)
+		public PutWarmerDescriptor AllTypes()
 		{
-			return this.Types(new[] {type});
+			this._Types = null;
+			return this;
+		}
+
+		public PutWarmerDescriptor Types(params string[] types)
+		{
+			return this.Types((IEnumerable<string>)types);
 		}
 
 		public PutWarmerDescriptor Types(IEnumerable<string> types)
@@ -96,10 +108,9 @@ namespace Nest
 			return this;
 		}
 
-		public PutWarmerDescriptor Type(Type type)
+		public PutWarmerDescriptor Types(params Type[] types)
 		{
-			return this.Type(typeNameResolver.GetTypeNameFor(type))
-							.IndexFromType(type);
+			return this.Types((IEnumerable<Type>)types);
 		}
 
 		public PutWarmerDescriptor Types(IEnumerable<Type> types)
@@ -107,9 +118,19 @@ namespace Nest
 			return this.Types(typeNameResolver.GetTypeNamesFor(types));
 		}
 
+		public PutWarmerDescriptor Type(string type)
+		{
+			return this.Types(new[] { type });
+		}
+
+		public PutWarmerDescriptor Type(Type type)
+		{
+			return this.Type(typeNameResolver.GetTypeNameFor(type));
+		}
+
 		public PutWarmerDescriptor Type<T>()
 		{
-			return this.Type(typeof (T));
+			return this.Type(typeof(T));
 		}
 
 		public PutWarmerDescriptor Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> selector)
