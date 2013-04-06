@@ -42,7 +42,7 @@ namespace Nest
 		/// <summary>
 		/// The name of the warmer
 		/// </summary>
-		public GetWarmerDescriptor WamerName(string warmerName)
+		public GetWarmerDescriptor WarmerName(string warmerName)
 		{
 			_WarmerName = warmerName;
 			return this;

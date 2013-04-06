@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Warmers
 
 			var warmerResponse = this._client.GetWarmer(wd => wd
 				.IndexFromType<ElasticSearchProject>()
-				.WamerName("warmer_simpleputandget"));
+				.WarmerName("warmer_simpleputandget"));
 
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeTrue();
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Warmers
 
 			var warmerResponse = this._client.GetWarmer(wd => wd
 				.IndexFromType<ElasticSearchProject>()
-				.WamerName("warmer_putwithemptytypes"));
+				.WarmerName("warmer_putwithemptytypes"));
 
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeTrue();
@@ -88,7 +88,7 @@ namespace Nest.Tests.Integration.Warmers
 
 			var warmerResponse = this._client.GetWarmer(wd => wd
 				.IndexFromType<ElasticSearchProject>()
-				.WamerName("warmer_puttodefaultindex"));
+				.WarmerName("warmer_puttodefaultindex"));
 
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeTrue();
@@ -120,13 +120,13 @@ namespace Nest.Tests.Integration.Warmers
 
 			var deleteResponse = this._client.DeleteWarmer(wd => wd
 				.IndexFromType<ElasticSearchProject>()
-				.WamerName("warmer_delete"));
+				.WarmerName("warmer_delete"));
 
 			Assert.IsTrue(deleteResponse.OK);
 
 			var warmerResponse = this._client.GetWarmer(wd => wd
 				.IndexFromType<ElasticSearchProject>()
-				.WamerName("warmer_delete"));
+				.WarmerName("warmer_delete"));
 
 			warmerResponse.Should().NotBeNull();
 			warmerResponse.IsValid.Should().BeFalse();
