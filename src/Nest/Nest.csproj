@@ -66,10 +66,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Mapping\Types\WarmerMapping.cs" />
-    <Compile Include="Domain\Mapping\Types\WarmerMappingWrapper.cs" />
     <Compile Include="Domain\Responses\WarmerResponse.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DSL\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />
     <Compile Include="ElasticClient-Warmers.cs" />

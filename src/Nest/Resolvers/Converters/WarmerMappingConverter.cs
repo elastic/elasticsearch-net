@@ -10,7 +10,16 @@ namespace Nest.Resolvers.Converters
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+			var mapping = (WarmerMapping) value;
+			writer.WriteStartObject();
 
+			writer.WritePropertyName("types");
+			serializer.Serialize(writer, mapping.Types);
+
+			writer.WritePropertyName("source");
+			writer.WriteRawValue(mapping.Source);
+
+			writer.WriteEndObject();
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
