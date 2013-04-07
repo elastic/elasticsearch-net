@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Reproduce
 			//indexing is NRT so issueing a search 
 			//right after indexing might not return the documents just yet.
 			this._client.Refresh(); 
-
+			    
 			var results = this._client.Search<Post>(s => s
 				.Index(index)
 				//by default nest will infer the typename for Post
