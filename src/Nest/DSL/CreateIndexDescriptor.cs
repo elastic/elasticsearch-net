@@ -9,10 +9,17 @@ using Nest.Domain;
 
 namespace Nest
 {
-	
+
 	public class CreateIndexDescriptor
 	{
 		internal IndexSettings _IndexSettings = new IndexSettings();
+
+		private readonly JsonSerializerSettings serializationSettings;
+
+		public CreateIndexDescriptor(JsonSerializerSettings SerializationSettings)
+		{
+			this.serializationSettings = SerializationSettings;
+		}
 
 		/// <summary>
 		/// Initialize the descriptor using the values from for instance a previous Get Index Settings call.
@@ -22,7 +29,7 @@ namespace Nest
 			this._IndexSettings = indexSettings;
 			return this;
 		}
-		
+
 		/// <summary>
 		/// Set the number of shards (if possible) for the new index.
 		/// </summary>
@@ -105,7 +112,26 @@ namespace Nest
 
 			return this;
 		}
-		
+
+		public CreateIndexDescriptor AddWarmer(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
+		{
+			warmerSelector.ThrowIfNull("warmerSelector");
+			var descriptor = warmerSelector(new CreateWarmerDescriptor());
+
+			var query = JsonConvert.SerializeObject(descriptor._SearchDescriptor, serializationSettings);
+
+			var mapping = new WarmerMapping { Name = descriptor._WarmerName, Types = descriptor._Types, Source = query };
+			this._IndexSettings.Warmers.Add(descriptor._WarmerName, mapping);
+
+			return this;
+		}
+
+		public CreateIndexDescriptor DeleteWarmer(string warmerName)
+		{
+			this._IndexSettings.Warmers.Remove(warmerName);
+			return this;
+		}
+
 		/// <summary>
 		/// Set up analysis tokenizers, filters, analyzers
 		/// </summary>

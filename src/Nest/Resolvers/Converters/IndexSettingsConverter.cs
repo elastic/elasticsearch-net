@@ -108,6 +108,11 @@ namespace Nest.Resolvers.Converters
 				writer.WritePropertyName("mappings");
 				serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.Name));
 			}
+			if (indexSettings.Warmers.Count > 0)
+			{
+				writer.WritePropertyName("warmers");
+				serializer.Serialize(writer, indexSettings.Warmers);
+			}
 
 			writer.WriteEndObject();
 		}

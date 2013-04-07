@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Warmers\IndicesWarmersTests.cs" />
+    <Compile Include="Warmers\WarmersTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
