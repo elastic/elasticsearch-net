@@ -85,5 +85,29 @@ namespace Nest.Tests.Integration.Template
 			Assert.NotNull(mappings["mytype"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
 			Assert.AreEqual(false, mappings["mytype"].AllFieldMapping.Enabled, "_all { enabled } should be set to false");
 		}
+
+		[Test]
+		public void PutTemplateWitWarmers()
+		{
+			this._client.DeleteTemplate("put-template-with-warmers");
+			var putResponse = this._client.PutTemplate(t => t
+				.Name("put-template-with-warmers")
+				.Template("donotinfluencothertests2")
+				.AddWarmer<ElasticSearchProject>(w => w
+					.WarmerName("matchall")
+					.Type("elasticsearchprojects")
+					.Search(s=>s
+						.MatchAll()
+					)
+				)
+			);
+			Assert.IsTrue(putResponse.OK); 
+
+			var templateResponse = this._client.GetTemplate("put-template-with-warmers"); 
+			templateResponse.Should().NotBeNull();
+			templateResponse.IsValid.Should().BeTrue();
+			templateResponse.TemplateMapping.Should().NotBeNull();
+			templateResponse.TemplateMapping.Warmers.Should().NotBeNull().And.NotBeEmpty();
+		}
 	}
 }

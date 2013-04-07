@@ -51,8 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Warmers\IndicesWarmersTests.cs" />
-    <Compile Include="Warmers\WarmersTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -105,7 +103,7 @@
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
-    <Compile Include="Reproduce\IndexDefaultValueTests.cs" />
+    <Compile Include="Reproduce\ReproduceTests.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />
     <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
