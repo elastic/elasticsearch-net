@@ -101,12 +101,13 @@ namespace Nest.Tests.Integration.Template
 					)
 				)
 			);
-			Assert.IsTrue(putResponse.OK); 
+			Assert.IsTrue(putResponse.OK);
 
 			var templateResponse = this._client.GetTemplate("put-template-with-warmers"); 
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();
+			//possible elasticsearch bug https://github.com/elasticsearch/elasticsearch/issues/2868
 			templateResponse.TemplateMapping.Warmers.Should().NotBeNull().And.NotBeEmpty();
 		}
 	}
