@@ -63,7 +63,7 @@ namespace Nest.Dsl.Factory
                     content[NAME][_name]["boost"] = _boost;
                 }
 
-                if(string.IsNullOrEmpty(_rewrite))
+                if(!string.IsNullOrEmpty(_rewrite))
                 {
                     content[NAME][_name]["rewrite"] = _rewrite;
                 }
