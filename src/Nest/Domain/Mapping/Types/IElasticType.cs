@@ -11,5 +11,6 @@ namespace Nest
 	{
 		string Name { get; set; }
 		string Type { get; }
+    string Similarity { get; set; }
 	}
 }

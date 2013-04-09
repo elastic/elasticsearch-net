@@ -69,6 +69,7 @@
     <Compile Include="Domain\Responses\WarmerResponse.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Domain\Settings\CustomSimilaritySettings.cs" />
     <Compile Include="DSL\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />

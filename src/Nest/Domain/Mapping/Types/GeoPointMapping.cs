@@ -13,6 +13,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual string Type { get { return "geo_point"; } }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		[JsonProperty("lat_lon")]
 		public bool? IndexLatLon { get; set; }
 

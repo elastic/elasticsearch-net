@@ -337,6 +337,11 @@ namespace Nest.Resolvers.Writers
 				jsonWriter.WriteEnd();
 				jsonWriter.WriteEnd();
 			}
+      if (!att.Similarity.IsNullOrEmpty())
+      {
+        jsonWriter.WritePropertyName("similarity");
+        jsonWriter.WriteValue(att.Similarity);
+      }
 		}
 
 		/// <summary>

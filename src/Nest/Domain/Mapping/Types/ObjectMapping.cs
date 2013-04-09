@@ -13,6 +13,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual string Type { get { return "object"; } }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		[JsonProperty("dynamic")]
 		public bool? Dynamic { get; set; }
 
