@@ -65,6 +65,9 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
+    <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />
+    <Compile Include="Domain\Mapping\Attributes\NestedPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Types\WarmerMapping.cs" />
     <Compile Include="Domain\Responses\WarmerResponse.cs">
       <SubType>Code</SubType>
@@ -500,6 +503,7 @@
     <Compile Include="Domain\Analysis\Analyzers\StandardAnalyzer.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\StopTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\WordDelimiterTokenFilter.cs" />
+    <Compile Include="Resolvers\Writers\WritePropertiesFromAttributeVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

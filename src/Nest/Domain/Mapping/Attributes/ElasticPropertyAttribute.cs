@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Nest
 {
 	[AttributeUsage(System.AttributeTargets.Property, AllowMultiple = false)]
-	public class ElasticPropertyAttribute : Attribute
+	public class ElasticPropertyAttribute : Attribute, IElasticPropertyAttribute
 	{
 		public bool AddSortField { get; set; }
-
 
 		public bool OptOut { get; set; }
 		
@@ -53,13 +49,10 @@ namespace Nest
 			this.IncludeInAll = true;
 			this.PrecisionStep = 4;
 		}
+
+        public void Accept(IElasticPropertyVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
 	}
-
-
-
-	
-	
-	
-
-	
 }
