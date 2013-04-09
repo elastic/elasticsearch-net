@@ -111,7 +111,13 @@ namespace Nest
 
 		public BulkIndexDescriptor<T> Parent(string parent)
 		{
-			this._Parent = parent; 
+			this._Parent = parent;
+			return this;
+		}
+
+		public BulkIndexDescriptor<T> Parent(int parent)
+		{
+			this.Parent(parent.ToString(CultureInfo.InvariantCulture));
 			return this;
 		}
 

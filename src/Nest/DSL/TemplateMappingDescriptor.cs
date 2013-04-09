@@ -14,12 +14,12 @@ namespace Nest
 		internal string _Name { get; set; }
 		internal TemplateMapping _TemplateMapping { get; set; }
 
-		
+		private readonly JsonSerializerSettings _serializationSettings;
 
-		public TemplateMappingDescriptor()
+		public TemplateMappingDescriptor(JsonSerializerSettings SerializationSettings)
 		{
 			this._TemplateMapping = new TemplateMapping();
-
+			this._serializationSettings = SerializationSettings;
 		}
 
 		public TemplateMappingDescriptor Name(string name)
@@ -85,5 +85,40 @@ namespace Nest
 			return this;
 
 		}
+
+
+		public TemplateMappingDescriptor AddWarmer<T>(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
+			where T : class
+		{
+			warmerSelector.ThrowIfNull("warmerSelector");
+			var warmerDescriptor = warmerSelector(new CreateWarmerDescriptor());
+			warmerDescriptor.ThrowIfNull("warmerDescriptor");
+			warmerDescriptor._WarmerName.ThrowIfNull("warmer has no name");
+
+			var query = JsonConvert.SerializeObject(warmerDescriptor._SearchDescriptor, this._serializationSettings);
+
+			var warmer = new WarmerMapping { Name = warmerDescriptor._WarmerName, Types = warmerDescriptor._Types, Source = query };
+
+			this._TemplateMapping.Warmers[warmerDescriptor._WarmerName] = warmer;
+			return this;
+
+		}
+		public TemplateMappingDescriptor RemoveWarmer<T>()
+			where T : class
+		{
+			var typeName = new TypeNameResolver().GetTypeNameFor<T>();
+			return this.RemoveMapping(typeName);
+
+		}
+		public TemplateMappingDescriptor RemoveWarmer(string typeName)
+		{
+			typeName.ThrowIfNull("typeName");
+			this._TemplateMapping.Warmers.Remove(typeName);
+
+			return this;
+
+		}
+
+
 	}
 }

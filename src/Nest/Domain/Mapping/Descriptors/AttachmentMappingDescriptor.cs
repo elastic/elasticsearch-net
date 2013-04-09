@@ -26,7 +26,7 @@ namespace Nest
 			var d = stringMapper(new StringMappingDescriptor<T>());
 			d.ThrowIfNull("stringMapper return value");
 			
-			this._Mapping.Fields["file"] = d._Mapping;
+			this._Mapping.Fields[this._Mapping.Name] = d._Mapping;
 			return this;
 		}
 

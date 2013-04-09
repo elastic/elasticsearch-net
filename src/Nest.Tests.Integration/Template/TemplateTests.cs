@@ -2,7 +2,7 @@
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Integration.Mapping
+namespace Nest.Tests.Integration.Template
 {
 	[TestFixture]
 	public class TemplateTests : IntegrationTests
@@ -84,6 +84,31 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.IsTrue(mappings.ContainsKey("mytype"), "put-template-with-mappings template should have a `mytype` mapping");
 			Assert.NotNull(mappings["mytype"].AllFieldMapping, "`mytype` mapping should contain the _all field mapping");
 			Assert.AreEqual(false, mappings["mytype"].AllFieldMapping.Enabled, "_all { enabled } should be set to false");
+		}
+
+		[Test]
+		public void PutTemplateWitWarmers()
+		{
+			this._client.DeleteTemplate("put-template-with-warmers");
+			var putResponse = this._client.PutTemplate(t => t
+				.Name("put-template-with-warmers")
+				.Template("donotinfluencothertests2")
+				.AddWarmer<ElasticSearchProject>(w => w
+					.WarmerName("matchall")
+					.Type("elasticsearchprojects")
+					.Search(s=>s
+						.MatchAll()
+					)
+				)
+			);
+			Assert.IsTrue(putResponse.OK);
+
+			var templateResponse = this._client.GetTemplate("put-template-with-warmers"); 
+			templateResponse.Should().NotBeNull();
+			templateResponse.IsValid.Should().BeTrue();
+			templateResponse.TemplateMapping.Should().NotBeNull();
+			//possible elasticsearch bug https://github.com/elasticsearch/elasticsearch/issues/2868
+			templateResponse.TemplateMapping.Warmers.Should().NotBeNull().And.NotBeEmpty();
 		}
 	}
 }

@@ -37,6 +37,7 @@ namespace Nest
 		{
 			this.Analysis = new AnalysisSettings();
 			this.Mappings = new List<RootObjectMapping>();
+			this.Warmers = new Dictionary<string, WarmerMapping>();
 			this.Settings = new Dictionary<string, object>();
 			this.Similarity = new SimilaritySettings();
 		}
@@ -87,6 +88,8 @@ namespace Nest
 		public AnalysisSettings Analysis { get; internal set; }
 
 		public IList<RootObjectMapping> Mappings { get; internal set; }
+
+		public Dictionary<string, WarmerMapping> Warmers { get; internal set; }
 
 		public SimilaritySettings Similarity { get; internal set; }
 

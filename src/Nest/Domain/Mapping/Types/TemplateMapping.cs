@@ -11,6 +11,7 @@ namespace Nest
 		public TemplateMapping()
 		{
 			this.Mappings = new Dictionary<string, RootObjectMapping>();
+			this.Warmers = new Dictionary<string, WarmerMapping>();
 			this.Settings = new FluentDictionary<string, object>();
 		}
 
@@ -25,5 +26,8 @@ namespace Nest
 
 		[JsonProperty("mappings")]
 		public Dictionary<string, RootObjectMapping> Mappings { get; set; }
+
+		[JsonProperty("warmers")]
+		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 	}
 }
