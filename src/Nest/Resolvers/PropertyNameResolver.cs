@@ -18,11 +18,11 @@ namespace Nest.Resolvers
 	{
 		private static readonly ElasticResolver ContractResolver = new ElasticResolver();
 
-		public ElasticPropertyAttribute GetElasticProperty(MemberInfo info)
+		public IElasticPropertyAttribute GetElasticProperty(MemberInfo info)
 		{
-			var attributes = info.GetCustomAttributes(typeof(ElasticPropertyAttribute), true);
+			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
 			if (attributes != null && attributes.Any())
-				return ((ElasticPropertyAttribute)attributes.First());
+				return ((IElasticPropertyAttribute)attributes.First());
 			return null;
 		}
 
@@ -65,7 +65,7 @@ namespace Nest.Resolvers
 		public string Resolve(Expression expression)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<ElasticPropertyAttribute>();
+			var properties = new Stack<IElasticPropertyAttribute>();
 			Visit(expression, stack, properties);
 			return stack
 				.Aggregate(
@@ -77,22 +77,22 @@ namespace Nest.Resolvers
 		public string ResolveToLastToken(Expression expression)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<ElasticPropertyAttribute>();
+			var properties = new Stack<IElasticPropertyAttribute>();
 			Visit(expression, stack, properties);
 			return stack.Last();
 		}
 
-		public Stack<ElasticPropertyAttribute> ResolvePropertyAttributes(Expression expression)
+		public Stack<IElasticPropertyAttribute> ResolvePropertyAttributes(Expression expression)
 		{
 			var stack = new Stack<string>();
-			var attributes = new Stack<ElasticPropertyAttribute>();
+			var attributes = new Stack<IElasticPropertyAttribute>();
 
 			Visit(expression, stack, attributes);
 
 			return attributes;
 		}
 
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			if (stack != null)
 			{
@@ -114,7 +114,7 @@ namespace Nest.Resolvers
 			return base.VisitMemberAccess(expression, stack, properties);
 		}
 
-		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
+		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			if (m.Method.Name == "Suffix" && m.Arguments.Any())
 			{

@@ -19,11 +19,11 @@ namespace Nest.Resolvers
 		{
 			var property = base.CreateProperty(member, memberSerialization);
 
-			var attributes = member.GetCustomAttributes(typeof(ElasticPropertyAttribute), false);
+			var attributes = member.GetCustomAttributes(typeof(IElasticPropertyAttribute), false);
 			if (attributes == null || !attributes.Any())
 				return property;
 
-			var att = attributes.First() as ElasticPropertyAttribute;
+			var att = attributes.First() as IElasticPropertyAttribute;
 			if (!att.Name.IsNullOrEmpty())
 				property.PropertyName = att.Name;
 			return property;
