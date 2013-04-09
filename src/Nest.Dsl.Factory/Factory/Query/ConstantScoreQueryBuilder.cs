@@ -11,6 +11,7 @@ namespace Nest.Dsl.Factory
     {
         private const string NAME = NameRegistry.ConstantScoreQueryBuilder;
         private readonly IFilterBuilder _filterBuilder;
+        private readonly IQueryBuilder _queryBuilder;
         private float? _boost;
 
         /// <summary>
@@ -21,6 +22,16 @@ namespace Nest.Dsl.Factory
         public ConstantScoreQueryBuilder(IFilterBuilder filterBuilder)
         {
             _filterBuilder = filterBuilder;
+        }
+
+        /// <summary>
+        /// A query that wraps a query and simply returns a constant score equal to the
+        /// query boost for every document in the query.
+        /// </summary>
+        /// <param name="filterBuilder">The filter to wrap in a constant score query</param>
+        public ConstantScoreQueryBuilder(IQueryBuilder queryBuilder)
+        {
+          _queryBuilder = queryBuilder;
         }
 
         /// <summary>
@@ -40,7 +51,12 @@ namespace Nest.Dsl.Factory
         public object ToJsonObject()
         {
             var content = new JObject(new JProperty(NAME, new JObject()));
-            content[NAME]["filter"] = _filterBuilder.ToJsonObject() as JObject;
+
+            if (_filterBuilder != null)
+              content[NAME]["filter"] = _filterBuilder.ToJsonObject() as JObject;
+
+            if (_queryBuilder != null)
+              content[NAME]["query"] = _queryBuilder.ToJsonObject() as JObject;
 
             if(_boost != null)
             {
