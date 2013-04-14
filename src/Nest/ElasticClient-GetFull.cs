@@ -71,17 +71,21 @@ namespace Nest
 			var response = this.Connection.GetSync(path);
 			var getResponse = this.ToParsedResponse<GetResponse<T>>(response);
 
-			var f = new FieldSelection<T>();
-			var o = JObject.Parse(response.Result);
-			var source = o["fields"];
-			if (source != null)
+			if (response.Result != null)
 			{
-				var json = source.ToString();
-				f.Document = getResponse.Source;
-				f.FieldValues = this.Deserialize<Dictionary<string, object>>(json);
+				var f = new FieldSelection<T>();
+				var o = JObject.Parse(response.Result);
+				var source = o["fields"];
+				if (source != null)
+				{
+					var json = source.ToString();
+					f.Document = getResponse.Source;
+					f.FieldValues = this.Deserialize<Dictionary<string, object>>(json);
 
+				}
+				getResponse.Fields = f;
 			}
-			getResponse.Fields = f;
+
 			return getResponse;
 		}
 
