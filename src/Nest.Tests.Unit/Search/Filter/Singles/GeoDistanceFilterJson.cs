@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 					geo_distance: {
 						distance: 12.0,
-						distance_type: ""km"",
+						distance_unit: ""km"",
 						optimize_bbox: ""memory"",
 						origin: ""40, -70"",
 						_cache: true,
