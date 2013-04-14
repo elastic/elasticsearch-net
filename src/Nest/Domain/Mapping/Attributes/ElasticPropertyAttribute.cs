@@ -22,6 +22,7 @@ namespace Nest
 		public string IndexAnalyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
 		public string NullValue { get; set; }
+    public string Similarity { get; set; }
 
 		public bool OmitNorms { get; set; }
 		public bool OmitTermFrequencyAndPositions { get; set; }

@@ -22,6 +22,8 @@
         bool IncludeInAll { get; set; }
         bool Store { get; set; }
 
+        string Similarity { get; set; }
+
         /// <summary>
         /// Defaults to float so be sure to set this correctly!
         /// </summary>

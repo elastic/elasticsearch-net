@@ -23,6 +23,7 @@ namespace Nest
         public NumericType NumericType { get; set; }
         public int PrecisionStep { get; set; }
         public string DateFormat { get; set; }
+        public string Similarity { get; set; }
 
         public bool IncludeInParent { get; set; }
         public bool IncludeInRoot { get; set; }

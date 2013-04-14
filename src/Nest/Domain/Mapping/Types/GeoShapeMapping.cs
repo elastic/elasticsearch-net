@@ -15,6 +15,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual string Type { get { return __type ?? "point"; } set { __type = value; } }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		[JsonProperty("tree"), JsonConverter(typeof(StringEnumConverter))]
 		public GeoTree? Tree { get; set; }
 

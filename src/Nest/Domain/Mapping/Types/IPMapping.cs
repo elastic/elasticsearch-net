@@ -17,6 +17,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual string Type { get { return "multi_field"; } }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; set; }
 

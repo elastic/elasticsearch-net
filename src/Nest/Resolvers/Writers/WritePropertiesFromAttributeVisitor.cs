@@ -123,6 +123,12 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("precision_step");
                 this._jsonWriter.WriteRawValue(att.PrecisionStep.ToString());
             }
+
+            if (!att.Similarity.IsNullOrEmpty())
+            {
+              this._jsonWriter.WritePropertyName("similarity");
+              this._jsonWriter.WriteValue(att.Similarity);
+            }
             if (att.AddSortField)
             {
                 this._jsonWriter.WriteEnd();
