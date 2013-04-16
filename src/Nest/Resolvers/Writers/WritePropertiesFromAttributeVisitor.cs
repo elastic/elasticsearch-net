@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Newtonsoft.Json;
 
 namespace Nest.Resolvers.Writers {
@@ -116,12 +117,12 @@ namespace Nest.Resolvers.Writers {
             if (att.Boost != 1)
             {
                 this._jsonWriter.WritePropertyName("boost");
-                this._jsonWriter.WriteRawValue(att.Boost.ToString());
+                this._jsonWriter.WriteRawValue(att.Boost.ToString(CultureInfo.InvariantCulture));
             }
             if (att.PrecisionStep != 4)
             {
                 this._jsonWriter.WritePropertyName("precision_step");
-                this._jsonWriter.WriteRawValue(att.PrecisionStep.ToString());
+                this._jsonWriter.WriteRawValue(att.PrecisionStep.ToString(CultureInfo.InvariantCulture));
             }
 
             if (!att.Similarity.IsNullOrEmpty())
