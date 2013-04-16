@@ -21,6 +21,7 @@
 *.nupkg
 [Bb]in
 [Dd]ebug*/
+test-results
 test-results/*
 *.lib
 *.sbr

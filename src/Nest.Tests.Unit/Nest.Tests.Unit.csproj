@@ -512,7 +512,9 @@
     <None Include="Search\Query\ConditionlessBool\MyTermNot.json" />
     <None Include="Search\Query\ConditionlessBool\MyTerm.json" />
     <None Include="Search\Query\ConditionlessBool\MatchAll.json" />
-    <None Include="Search\Query\ConditionLess\MatchAll.json" />
+    <None Include="Search\Query\ConditionLess\MatchAll.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\ConditionLessStrict\MatchAll.json" />
     <None Include="Search\Query\InsideBoolCalls\InsideMust.json" />
     <None Include="Search\Query\InsideBoolCalls\InsideMustNot.json" />
