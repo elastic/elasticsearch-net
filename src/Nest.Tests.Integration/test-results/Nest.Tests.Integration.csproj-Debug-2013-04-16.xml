@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestRecord xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tests>
+    <TestRecord Name="Nest">
+      <Tests>
+        <TestRecord Name="Tests">
+          <Tests>
+            <TestRecord Name="Integration">
+              <Tests>
+                <TestRecord Name="Cluster">
+                  <Tests>
+                    <TestRecord Name="HealthTests">
+                      <Tests>
+                        <TestRecord Name="DetailedHealth">
+                          <Results>
+                            <UnitTestResult>
+                              <TestDate>2013-04-16T20:42:53</TestDate>
+                              <Passed>0</Passed>
+                              <Errors>0</Errors>
+                              <Failures>1</Failures>
+                              <Inconclusive>0</Inconclusive>
+                              <NotRunnable>0</NotRunnable>
+                              <Skipped>0</Skipped>
+                              <Ignored>0</Ignored>
+                              <Time />
+                              <Message>  Expected: True
+  But was:  False
+</Message>
+                              <StackTrace>  at NUnit.Framework.Assert.That (System.Object actual, IResolveConstraint expression, System.String message, System.Object[] args) [0x00000] in &lt;filename unknown&gt;:0 
+  at NUnit.Framework.Assert.True (Boolean condition) [0x00000] in &lt;filename unknown&gt;:0 
+  at Nest.Tests.Integration.Cluster.HealthTests.DetailedHealth () [0x00042] in /Users/martijnlaarman/Projects/NEST/src/Nest.Tests.Integration/Cluster/HealthTests.cs:42 
+  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (System.Reflection.MonoMethod,object,object[],System.Exception&amp;)
+  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00000] in &lt;filename unknown&gt;:0 </StackTrace>
+                              <ConsoleOutput />
+                              <ConsoleError />
+                            </UnitTestResult>
+                          </Results>
+                        </TestRecord>
+                      </Tests>
+                    </TestRecord>
+                  </Tests>
+                </TestRecord>
+              </Tests>
+            </TestRecord>
+          </Tests>
+        </TestRecord>
+      </Tests>
+    </TestRecord>
+  </Tests>
+</TestRecord>

@@ -5,9 +5,12 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 {
+
 	[TestFixture]
 	public class ConditionLessTests : BaseJsonTests
 	{
+		private readonly BaseFilter[] _emptyQuery = Enumerable.Empty<BaseFilter>().ToArray();
+		
 		public class Criteria
 		{
 			public string Name1 { get; set; }
@@ -41,17 +44,19 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		[Test]
 		public void AndTest()
 		{
-			this.DoConditionlessFilter(f => f.And());
+			this.DoConditionlessFilter(f => f.And(this._emptyQuery));
 		}
 
 
 		[Test]
 		public void BoolTest()
 		{
-			this.DoConditionlessFilter(f => f.Bool(bf=>bf.Must()));
-			this.DoConditionlessFilter(f => f.Bool(bf => bf.Should()));
-			this.DoConditionlessFilter(f => f.Bool(bf => bf.MustNot()));
-			this.DoConditionlessFilter(f => f.Bool(bf => bf.MustNot().Should().Must()));
+			this.DoConditionlessFilter(f => f.Bool(bf=>bf.Must(this._emptyQuery)));
+			this.DoConditionlessFilter(f => f.Bool(bf => bf.Should(this._emptyQuery)));
+			this.DoConditionlessFilter(f => f.Bool(bf => bf.MustNot(this._emptyQuery)));
+			this.DoConditionlessFilter(f => f.Bool(bf => bf.MustNot(this._emptyQuery)
+			                                       .Should(this._emptyQuery)
+			                                       .Must(this._emptyQuery)));
 		}
 
 
@@ -173,9 +178,11 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		[Test]
 		public void OrTest()
 		{
-			this.DoConditionlessFilter(f => f.Or());
-			this.DoConditionlessFilter(f => f.Or(of=>of.And()));
-			this.DoNonConditionlessFilter(f => f.Or(of => of.And(), of=>of.Term("field", "value")));
+			this.DoConditionlessFilter(f => f.Or(this._emptyQuery));
+			this.DoConditionlessFilter(f => f.Or(of=>of.And(this._emptyQuery)));
+			this.DoNonConditionlessFilter(f => f.Or(of => of
+			                                        .And(this._emptyQuery), 
+			                                        of=>of.Term("field", "value")));
 		}
 
 

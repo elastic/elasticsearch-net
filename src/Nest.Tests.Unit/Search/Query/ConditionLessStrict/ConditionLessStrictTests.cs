@@ -1,12 +1,15 @@
 ﻿using System;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Linq;
 
 namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 {
 	[TestFixture]
 	public class ConditionLessStrictTests : BaseJsonTests
 	{
+        private readonly BaseQuery[] _emptyQuery = Enumerable.Empty<BaseQuery>().ToArray();
+        
 		public class Criteria
 		{
 			public string Name1 { get; set; }
@@ -190,9 +193,9 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		public void BoolEmptyClauses()
 		{
 			this.DoConditionlessQuery(q => q.Bool(b => b
-				.Must()
-				.MustNot()
-				.Should()
+				.Must(this._emptyQuery)
+				.MustNot(this._emptyQuery)
+				.Should(this._emptyQuery)
 			));
 		}
 		[Test]
