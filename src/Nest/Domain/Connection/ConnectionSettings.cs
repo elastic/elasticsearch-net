@@ -93,6 +93,8 @@ namespace Nest
 			uri.ThrowIfNull("uri");
 
 			this._uri = uri;
+		    this._host = uri.Host;
+		    this._port = uri.Port;
 			this._password = password;
 			this._username = username;
 			this._timeout = timeout;
@@ -129,6 +131,7 @@ namespace Nest
 
 			this._host = host;
 			this._password = password;
+		    this._uri = uri;
 			this._username = username;
 			this._timeout = timeout;
 			this._port = port;
