@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoDistance(f=>f.Origin, d=>d
-						.Location(X: 40, Y: -70)
+						.Location(Lat: 40, Lon: -70)
 						.Distance(12, GeoUnit.km)
 						.Optimize(GeoOptimizeBBox.memory)
 					)
