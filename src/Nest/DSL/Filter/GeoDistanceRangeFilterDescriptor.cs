@@ -27,10 +27,10 @@ namespace Nest
 		}
 
 
-		public GeoDistanceRangeFilterDescriptor Location(double X, double Y)
+		public GeoDistanceRangeFilterDescriptor Location(double Lat, double Lon)
 		{
 			var c = CultureInfo.InvariantCulture;
-			this._Location = "{0}, {1}".F(X.ToString(c), Y.ToString(c));
+			this._Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
 		public GeoDistanceRangeFilterDescriptor Location(string geoHash)
