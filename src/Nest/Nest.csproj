@@ -77,6 +77,7 @@
     <Compile Include="DSL\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />
+    <Compile Include="DSL\Query\CustomFiltersScoreDescriptor.cs" />
     <Compile Include="ElasticClient-Warmers.cs" />
     <Compile Include="Domain\CovariantDictionary.cs" />
     <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
