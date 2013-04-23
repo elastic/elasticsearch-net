@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using Nest.DSL.Query;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    class CustomFiltersScoreDescriptor<T> : IQuery where T : class
+    public class CustomFiltersScoreDescriptor<T> : IQuery where T : class
     {
         [JsonProperty(PropertyName = "query")]
         internal BaseQuery _Query { get; set; }
 
         [JsonProperty(PropertyName = "filters")]
-        internal List<BaseFilter> _Filters { get; set; }
+        internal List<FilterScoreDescriptor<T>> _Filters { get; set; }
 
         [JsonProperty(PropertyName = "score_mode")]
-        internal string _ScoreMode { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        internal ScoreMode _ScoreMode { get; set; }
+
+        [JsonProperty(PropertyName = "params")]
+        internal Dictionary<string, object> _Params { get; set; }
+
+        [JsonProperty(PropertyName = "lang")]
+        internal string _Lang { get; set; }
 
         internal bool IsConditionless
         {
@@ -27,34 +36,33 @@ namespace Nest
         }
 
         public CustomFiltersScoreDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
-		{
-			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryDescriptor<T>();
-			var q = querySelector(query);
-
-			this._Query = q;
-			return this;
-		}
-
-        public CustomFiltersScoreDescriptor<T> ScoreMode(string scoreMode)
         {
-            scoreMode.ThrowIfNull("script");
+            querySelector.ThrowIfNull("querySelector");
+            var query = new QueryDescriptor<T>();
+            var q = querySelector(query);
+
+            this._Query = q;
+            return this;
+        }
+
+        public CustomFiltersScoreDescriptor<T> ScoreMode(ScoreMode scoreMode)
+        {
+            scoreMode.ThrowIfNull("scoreMode");
             this._ScoreMode = scoreMode;
             return this;
         }
 
-        public CustomFiltersScoreDescriptor<T> Filters(params Func<FilterDescriptor<T>, BaseFilter>[] filterSelectors)
+        public CustomFiltersScoreDescriptor<T> Filters(params Func<FilterScoreDescriptor<T>, FilterScoreDescriptor<T>>[] filterSelectors)
         {
             filterSelectors.ThrowIfNull("filterSelectors");
 
-            FilterDescriptor<T> filter = null;
-            BaseFilter f = null;
+            this._Filters = new List<FilterScoreDescriptor<T>>();
+            var filter = new FilterScoreDescriptor<T>();
 
             foreach (var filterSelector in filterSelectors)
             {
-                filter = new FilterDescriptor<T>();
-                f = filterSelector(filter);
-                this._Filters.Add(f);
+                filterSelector.ThrowIfNull("filterSelector");
+                this._Filters.Add(filterSelector(filter));
             }
 
             return this;

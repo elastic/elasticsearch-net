@@ -78,6 +78,7 @@
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />
     <Compile Include="DSL\Query\CustomFiltersScoreDescriptor.cs" />
+    <Compile Include="DSL\Query\FilterScoreDescriptor.cs" />
     <Compile Include="ElasticClient-Warmers.cs" />
     <Compile Include="Domain\CovariantDictionary.cs" />
     <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Enums\NumericIndexOption.cs" />
     <Compile Include="Enums\IndexOptions.cs" />
     <Compile Include="Enums\OpType.cs" />
+    <Compile Include="Enums\ScoreMode.cs" />
     <Compile Include="Enums\SearchType.cs" />
     <Compile Include="Enums\Lang.cs" />
     <Compile Include="Enums\DateHistogramComparatorType.cs" />

@@ -519,9 +519,9 @@ namespace Nest
         }
         /// <summary>
         /// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
-        /// computation derived from other field values in the doc (numeric ones) using script expression
+        /// computation derived from other field values in the doc (numeric ones) using script or boost expression
         /// </summary>
-        public BaseQuery CustomScore(Action<CustomFiltersScoreDescriptor<T>> customFiltersScoreQuery)
+        public BaseQuery CustomFiltersScore(Action<CustomFiltersScoreDescriptor<T>> customFiltersScoreQuery)
         {
             var query = new CustomFiltersScoreDescriptor<T>();
             customFiltersScoreQuery(query);
