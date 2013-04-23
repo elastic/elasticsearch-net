@@ -27,6 +27,9 @@ namespace Nest
         [JsonProperty(PropertyName = "lang")]
         internal string _Lang { get; set; }
 
+        [JsonProperty(PropertyName = "max_boost")]
+        internal string _MaxBoost { get; set; }
+
         internal bool IsConditionless
         {
             get
@@ -79,6 +82,13 @@ namespace Nest
         {
             language.ThrowIfNull("language");
             this._Lang = language;
+            return this;
+        }
+
+        public CustomFiltersScoreDescriptor<T> MaxBoost(string maxBoost)
+        {
+            maxBoost.ThrowIfNull("maxBoost");
+            this._MaxBoost = maxBoost;
             return this;
         }
     }
