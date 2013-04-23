@@ -60,10 +60,10 @@ namespace Nest
             filterSelectors.ThrowIfNull("filterSelectors");
 
             this._Filters = new List<FilterScoreDescriptor<T>>();
-            var filter = new FilterScoreDescriptor<T>();
 
             foreach (var filterSelector in filterSelectors)
             {
+                var filter = new FilterScoreDescriptor<T>();
                 filterSelector.ThrowIfNull("filterSelector");
                 this._Filters.Add(filterSelector(filter));
             }
