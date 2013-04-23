@@ -67,5 +67,19 @@ namespace Nest
 
             return this;
         }
+
+        public CustomFiltersScoreDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
+        {
+            paramDictionary.ThrowIfNull("paramDictionary");
+            this._Params = paramDictionary(new FluentDictionary<string, object>());
+            return this;
+        }
+
+        public CustomFiltersScoreDescriptor<T> Language(string language)
+        {
+            language.ThrowIfNull("language");
+            this._Lang = language;
+            return this;
+        }
     }
 }
