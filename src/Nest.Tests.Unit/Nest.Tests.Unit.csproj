@@ -104,6 +104,10 @@
     <Compile Include="Search\Facets\HistogramFacetJson.cs" />
     <Compile Include="Search\Facets\QueryFacetJson.cs" />
     <Compile Include="Search\Facets\RangeFacetJson.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\DateEntriesConstraint.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\DateEntrySequenceEqualityComparer.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\when_date_histogram_query_has_no_value_field.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\when_date_histogram_query_has_value_field.cs" />
     <Compile Include="Search\Facets\StatisticalFacetJson.cs" />
     <Compile Include="Search\Facets\TermsFacetJson.cs" />
     <Compile Include="Search\Facets\TermsStatsFacetJson.cs" />
