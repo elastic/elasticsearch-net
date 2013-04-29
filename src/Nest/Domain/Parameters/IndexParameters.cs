@@ -12,5 +12,7 @@ namespace Nest
 		/// string because you can pass 5m, or 1h to ES
 		/// </summary>
 		public string Timeout { get; set; }
+
+		public string TTL { get; set; }
 	}
 }

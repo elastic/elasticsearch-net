@@ -322,7 +322,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="Search\Rescore\SearchTypeDoesNotPolluteQueryObject.json">
+    <None Include="Search\Rescore\RescoreSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Filter\BoolCombinations\CombineNotAnd.json">

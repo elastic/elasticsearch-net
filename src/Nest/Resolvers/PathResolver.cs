@@ -226,6 +226,9 @@ namespace Nest.Resolvers
 			if (!indexParameters.Timeout.IsNullOrEmpty())
 				parameters.Add("timeout=" + indexParameters.Timeout);
 
+			if (!indexParameters.TTL.IsNullOrEmpty())
+				parameters.Add("ttl=" + indexParameters.TTL);
+
 			if (indexParameters.VersionType != VersionType.Internal) //internal == default
 				parameters.Add("version_type=" + indexParameters.VersionType.ToString().ToLower());
 
