@@ -15,8 +15,8 @@ namespace Nest
 		int Port { get; }
 		int Timeout { get; }
 		string ProxyAddress { get; }
-		string Username { get; }
-		string Password { get; }
+		string ProxyUsername { get; }
+		string ProxyPassword { get; }
 
 		int MaximumAsyncConnections { get; }
 		bool UsesPrettyResponses { get; }

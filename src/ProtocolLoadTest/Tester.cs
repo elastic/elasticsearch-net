@@ -14,7 +14,8 @@ namespace ProtocolLoadTest
 
 		protected ConnectionSettings CreateSettings(string indexName, int port)
 		{
-			return new ConnectionSettings("localhost.fiddler", port)
+			var uri = new UriBuilder("http", "localhost.fiddler", port).Uri;
+			return new ConnectionSettings(uri)
 			   .SetDefaultIndex(indexName)
 			   .SetMaximumAsyncConnections(2);
 		}

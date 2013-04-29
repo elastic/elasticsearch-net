@@ -60,7 +60,7 @@ namespace ProtocolLoadTest
 		{
 			string indexName = INDEX_PREFIX + suffix;
 
-			var connSettings = new ConnectionSettings("localhost", 9200)
+			var connSettings = new ConnectionSettings(new Uri("http://localhost.fiddler:9200"))
 				.SetDefaultIndex(indexName);
 
 			var client = new ElasticClient(connSettings);
@@ -90,7 +90,7 @@ namespace ProtocolLoadTest
 		{
 			string indexName = INDEX_PREFIX + suffix;
 
-			var connSettings = new ConnectionSettings("localhost", 9200)
+			var connSettings = new ConnectionSettings(new Uri("http://localhost.fiddler:9200"))
 				.SetDefaultIndex(indexName);
 
 			var client = new ElasticClient(connSettings);
