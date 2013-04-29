@@ -19,6 +19,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return (TypeNameMarker)(__type ?? "double"); } set { __type = value; } }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
 		/// </summary>

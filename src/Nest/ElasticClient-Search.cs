@@ -32,22 +32,36 @@ namespace Nest
         /// <summary>
         /// Synchronously search using T as the return type
         /// </summary>
-        public IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class
+        public IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class {
+            return Search<T, T>(searcher);
+        }
+
+        /// <summary>
+        /// Synchronously search using TResult as the return type
+        /// </summary>
+        public IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class {
+            return Search<T, T>(descriptor);
+        }
+
+        /// <summary>
+        /// Synchronously search using TResult as the return type
+        /// </summary>
+        public IQueryResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class where TResult : class
         {
             var search = new SearchDescriptor<T>();
             var descriptor = searcher(search);
-            return Search(descriptor);
+            return Search<T, TResult>(descriptor);
         }
 
         /// <summary>
         /// Synchronously search using T as the return type
         /// </summary>
-        public IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class
+        public IQueryResponse<TResult> Search<T, TResult>(SearchDescriptor<T> descriptor) where T : class where TResult : class
         {
             var query = this.Serialize(descriptor);
             var path = this.PathResolver.GetSearchPathForTyped(descriptor);
             var status = this.Connection.PostSync(path, query);
-            return this.GetParsedResponse<T>(status, descriptor);
+            return this.GetParsedResponse<T, TResult>(status, descriptor);
         }
 
         /// <summary>
@@ -56,20 +70,39 @@ namespace Nest
         /// <param name="path">EXPERT OPTION: Pass the path and querystring used to perform the search on, when null it will be infered from the type</param>
         public IQueryResponse<T> SearchRaw<T>(string query, string path = null) where T : class
         {
+            return SearchRaw<T, T>(query, path);
+        }
+
+        /// <summary>
+        /// Asynchronously search using T as the return type, string based.
+        /// </summary>
+        /// <param name="path">EXPERT OPTION: Pass the path and querystring used to perform the search on, when null it will be infered from the type</param>
+        public Task<IQueryResponse<T>> SearchRawAsync<T>(string query, string path = null) where T : class
+        {
+            return SearchRawAsync<T, T>(query, path);
+        }
+
+        /// <summary>
+        /// Synchronously search using TResult as the return type, string based.
+        /// </summary>
+        /// <param name="path">EXPERT OPTION: Pass the path and querystring used to perform the search on, when null it will be infered from the type</param>
+        public IQueryResponse<TResult> SearchRaw<T, TResult>(string query, string path = null) where T : class where TResult : class
+        {
             var descriptor = new SearchDescriptor<T>();
 
             if (string.IsNullOrEmpty(path))
                 path = this.PathResolver.GetSearchPathForTyped(descriptor);
 
             ConnectionStatus status = this.Connection.PostSync(path, query);
-            var r = this.GetParsedResponse<T>(status, descriptor);
+            var r = this.GetParsedResponse<T, TResult>(status, descriptor);
             return r;
         }
+
         /// <summary>
-        /// Asynchronously search using T as the return type, string based.
+        /// Asynchronously search using TResult as the return type, string based.
         /// </summary>
         /// <param name="path">EXPERT OPTION: Pass the path and querystring used to perform the search on, when null it will be infered from the type</param>
-        public Task<IQueryResponse<T>> SearchRawAsync<T>(string query, string path = null) where T : class
+        public Task<IQueryResponse<TResult>> SearchRawAsync<T, TResult>(string query, string path = null) where T : class where TResult : class
         {
             var descriptor = new SearchDescriptor<T>();
 
@@ -77,9 +110,8 @@ namespace Nest
                 path = this.PathResolver.GetSearchPathForTyped(descriptor);
 
             var task = this.Connection.Post(path, query);
-            return task.ContinueWith<IQueryResponse<T>>(t => this.GetParsedResponse<T>(task.Result, descriptor));
+            return task.ContinueWith<IQueryResponse<TResult>>(t => this.GetParsedResponse<T, TResult>(task.Result, descriptor));
         }
-
 
         /// <summary>
         /// Asynchronously search using dynamic as its return type.
@@ -100,9 +132,7 @@ namespace Nest
         /// </summary>
         public Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class
         {
-            var search = new SearchDescriptor<T>();
-            var descriptor = searcher(search);
-            return SearchAsync(descriptor);
+            return SearchAsync<T, T>(searcher);
         }
 
         /// <summary>
@@ -110,24 +140,48 @@ namespace Nest
         /// </summary>
         public Task<IQueryResponse<T>> SearchAsync<T>(SearchDescriptor<T> descriptor) where T : class
         {
+            return SearchAsync<T, T>(descriptor);
+        }
+
+        /// <summary>
+        /// Asynchronously search using TResult as the return type
+        /// </summary>
+        public Task<IQueryResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class where TResult : class
+        {
+            var search = new SearchDescriptor<T>();
+            var descriptor = searcher(search);
+            return SearchAsync<T, TResult>(descriptor);
+        }
+
+        /// <summary>
+        /// Asynchronously search using TResult as the return type
+        /// </summary>
+        public Task<IQueryResponse<TResult>> SearchAsync<T, TResult>(SearchDescriptor<T> descriptor) where T : class where TResult : class
+        {
             var query = this.Serialize(descriptor);
             var path = this.PathResolver.GetSearchPathForTyped(descriptor);
 
             var task = this.Connection.Post(path, query);
-            return task.ContinueWith<IQueryResponse<T>>(t => this.GetParsedResponse<T>(task.Result, descriptor));
+            return task.ContinueWith<IQueryResponse<TResult>>(t => this.GetParsedResponse<T, TResult>(task.Result, descriptor));
         }
 
         private IQueryResponse<T> GetParsedResponse<T>(ConnectionStatus status, SearchDescriptor<T> descriptor) where T : class
         {
+            return GetParsedResponse<T, T>(status, descriptor);
+        }
+
+        private IQueryResponse<TResult> GetParsedResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> descriptor) where T : class where TResult : class
+        {
             if (descriptor._ConcreteTypeSelector == null)
             {
-                descriptor._ConcreteTypeSelector = (d, h) => typeof(T);
+                descriptor._ConcreteTypeSelector = (d, h) => typeof(TResult);
             }
 
             var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
 
-            return this.ToParsedResponse<QueryResponse<T>>(
+            return this.ToParsedResponse<QueryResponse<TResult>>(
                 status,
+
                 extraConverters: new[]
                 {
 	                new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, partialFields)

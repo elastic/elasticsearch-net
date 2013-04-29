@@ -60,7 +60,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("indices");
+			index.ThrowIfNullOrEmpty("index");
 			this._Indices = new[] { index };
 			return this;
 		}

@@ -20,6 +20,9 @@ namespace Nest
 			get { return new TypeNameMarker { Name = "object" }; }
 		}
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		[JsonProperty("dynamic")]
 		public bool? Dynamic { get; set; }
 

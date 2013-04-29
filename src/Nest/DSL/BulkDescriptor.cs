@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Nest.Domain;
+using System.Collections.Concurrent;
+
 
 namespace Nest
 {
@@ -12,7 +14,7 @@ namespace Nest
 		internal string _FixedIndex { get; set; }
 		internal string _FixedType { get; set; }
 
-		internal IList<BaseBulkOperation> _Operations = new List<BaseBulkOperation>();
+    internal IList<BaseBulkOperation> _Operations = new SynchronizedCollection<BaseBulkOperation>();
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
 		{

@@ -18,6 +18,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "attachment" }; } }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
 		public IDictionary<string, IElasticCoreType> Fields { get; set; }
 

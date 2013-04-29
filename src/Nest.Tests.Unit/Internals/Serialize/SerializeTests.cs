@@ -1,5 +1,7 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using NUnit.Framework;
+using Newtonsoft.Json;
 
 namespace Nest.Tests.Unit.Internals.Serialize
 {
@@ -12,12 +14,35 @@ namespace Nest.Tests.Unit.Internals.Serialize
 			public string Name { get; set; }
 		}
 
-
-		[Test]
-		public void SimpleClassUsesCamelCase()
+		public class ClassWithCollections
 		{
-			var simpleClass = new SimpleClass { Id = 2, Name = "X" };
-			var json = this._client.SerializeCamelCase(simpleClass);
+			public int Id { get; set; }
+			private ICollection<SimpleClass> _productVariants;
+			public virtual ICollection<SimpleClass> ProductVariants
+			{
+				get { return _productVariants ?? (_productVariants = new List<SimpleClass>()); }
+				set { _productVariants = value; }
+			}
+		}
+
+		// <summary>
+		/// https://github.com/Mpdreamz/NEST/issues/204
+		/// 
+		/// Reported problems with ICollections
+		/// </summary>
+		[Test]
+		public void ClassWithCollectionSerializes()
+		{
+			var col = new ClassWithCollections
+			{
+				Id = 2,
+				ProductVariants = new List<SimpleClass>
+				{
+					new SimpleClass {Id = 1, Name = "class 1"},
+					new SimpleClass {Id = 1, Name = "class 1"},
+				}
+			};
+			var json = this._client.SerializeCamelCase(col);
 			this.JsonEquals(json, MethodInfo.GetCurrentMethod());
 		}
 	}

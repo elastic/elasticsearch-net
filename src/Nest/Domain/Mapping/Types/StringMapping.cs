@@ -18,6 +18,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
 		/// </summary>

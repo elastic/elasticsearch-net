@@ -223,115 +223,11 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
-		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, ElasticPropertyAttribute att, string propertyName, string type)
+		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, IElasticPropertyAttribute att, string propertyName, string type)
 		{
-			if (att.AddSortField)
-			{
-				jsonWriter.WritePropertyName("type");
-				jsonWriter.WriteValue("multi_field");
-				jsonWriter.WritePropertyName("fields");
-				jsonWriter.WriteStartObject();
-				jsonWriter.WritePropertyName(propertyName);
-				jsonWriter.WriteStartObject();
-			}
-			if (att.NumericType != NumericType.Default)
-			{
-				jsonWriter.WritePropertyName("type");
-				var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
-				jsonWriter.WriteValue(numericType.ToLower());
-			}
-			else
-			{
-				jsonWriter.WritePropertyName("type");
-				jsonWriter.WriteValue(type);
-			}
-			if (!att.Analyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("analyzer");
-				jsonWriter.WriteValue(att.Analyzer);
-			}
-			if (!att.IndexAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("index_analyzer");
-				jsonWriter.WriteValue(att.IndexAnalyzer);
-			}
-			if (!att.IndexAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("index_analyzer");
-				jsonWriter.WriteValue(att.IndexAnalyzer);
-			}
-			if (!att.NullValue.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("null_value");
-				jsonWriter.WriteValue(att.NullValue);
-			}
-			if (!att.SearchAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("search_analyzer");
-				jsonWriter.WriteValue(att.SearchAnalyzer);
-			}
-			if (att.Index != FieldIndexOption.analyzed)
-			{
-				jsonWriter.WritePropertyName("index");
-				jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), att.Index));
-			}
-			if (att.TermVector != TermVectorOption.no)
-			{
-				jsonWriter.WritePropertyName("term_vector");
-				jsonWriter.WriteValue(Enum.GetName(typeof(TermVectorOption), att.TermVector));
-			}
-			if (att.OmitNorms)
-			{
-				jsonWriter.WritePropertyName("omit_norms");
-				jsonWriter.WriteValue("true");
-			}
-			if (att.OmitTermFrequencyAndPositions)
-			{
-				jsonWriter.WritePropertyName("omit_term_freq_and_positions");
-				jsonWriter.WriteValue("true");
-			}
-			if (!att.IncludeInAll)
-			{
-				jsonWriter.WritePropertyName("include_in_all");
-				jsonWriter.WriteValue("false");
-			}
-			if (att.Store)
-			{
-				jsonWriter.WritePropertyName("store");
-				jsonWriter.WriteValue("yes");
-			}
-			if (att.Boost != 1)
-			{
-				jsonWriter.WritePropertyName("boost");
-				jsonWriter.WriteRawValue(att.Boost.ToString());
-			}
-			if (att.PrecisionStep != 4)
-			{
-				jsonWriter.WritePropertyName("precision_step");
-				jsonWriter.WriteRawValue(att.PrecisionStep.ToString());
-			}
-			if (att.AddSortField)
-			{
-				jsonWriter.WriteEnd();
-				jsonWriter.WritePropertyName("sort");
-				jsonWriter.WriteStartObject();
+		    var visitor = new WritePropertiesFromAttributeVisitor(jsonWriter, propertyName, type);
+            att.Accept(visitor);
 
-				if (att.NumericType != NumericType.Default)
-				{
-					jsonWriter.WritePropertyName("type");
-					var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
-					jsonWriter.WriteValue(numericType.ToLower());
-				}
-				else
-				{
-					jsonWriter.WritePropertyName("type");
-					jsonWriter.WriteValue(type);
-				}
-				jsonWriter.WritePropertyName("index");
-				jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
-				jsonWriter.WriteEnd();
-				jsonWriter.WriteEnd();
-			}
 		}
 
 		/// <summary>
@@ -340,7 +236,7 @@ namespace Nest.Resolvers.Writers
 		/// <param name="att">ElasticPropertyAttribute</param>
 		/// <param name="p">Property Field</param>
 		/// <returns>String with the type name or null if can not be inferres</returns>
-		private string GetElasticSearchType(ElasticPropertyAttribute att, PropertyInfo p)
+		private string GetElasticSearchType(IElasticPropertyAttribute att, PropertyInfo p)
 		{
 			FieldType? fieldType = null;
 			if (att != null)

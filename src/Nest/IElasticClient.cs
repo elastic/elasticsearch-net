@@ -247,6 +247,10 @@ namespace Nest
 		IIndicesOperationResponse PutTemplateRaw(string templateName, string template);
 		ITemplateResponse GetTemplate(string templateName);
 
+		IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
+		IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
+		IIndicesOperationResponse DeleteWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
+
 		INodeInfoResponse NodeInfo(NodesInfo nodesInfo);
 		INodeInfoResponse NodeInfo(IEnumerable<string> nodes, NodesInfo nodesInfo);
 
@@ -294,7 +298,16 @@ namespace Nest
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(IEnumerable<string> indices);
 		ISegmentsResponse Segments(string index);
+
+		/// <summary>
+		/// serialize an object using the internal registered converters without camelcasing properties as is done 
+		/// while indexing objects
+		/// </summary>
 		string Serialize(object @object);
+
+		/// <summary>
+		/// Serialize an object using the default camelCasing used while indexing objects
+		/// </summary>
 		string SerializeCamelCase(object @object);
 		IIndicesShardResponse Snapshot();
 		IIndicesShardResponse Snapshot(IEnumerable<string> indices);

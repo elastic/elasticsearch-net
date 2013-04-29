@@ -20,7 +20,7 @@ namespace Nest
 			return this.ToParsedResponse<TemplateResponse>(status);
 		}
 
-		public IIndicesOperationResponse PutTemplate(Func<TemplateMappingDescriptor, TemplateMappingDescriptor> templateMappingSelector) // TODO: use descriptor
+		public IIndicesOperationResponse PutTemplate(Func<TemplateMappingDescriptor, TemplateMappingDescriptor> templateMappingSelector)
 		{
 			templateMappingSelector.ThrowIfNull("templateMappingSelector");
 

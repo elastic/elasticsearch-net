@@ -20,7 +20,9 @@ namespace Nest
 		public string ParentType { get; set; }
 		public string IdProperty { get; set; }
 		public bool DisableAllField { get; set; }
-		public ElasticTypeAttribute()
+    public string Similarity { get; set; }
+
+	  public ElasticTypeAttribute()
 		{
 			this.DateDetection = true;
 			if (!this.Name.IsNullOrEmpty() && this.TypeNameMarker == null)

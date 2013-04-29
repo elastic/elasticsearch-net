@@ -48,12 +48,8 @@ namespace Nest.Tests.Unit
 		}
 		protected void JsonEquals(string json, MethodBase method, string fileName = null)
 		{
-			var type = method.DeclaringType;
-			var @namespace = method.DeclaringType.Namespace;
-			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
+			var file = this.GetFileFromMethod(method, fileName);
 
-			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
-			file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
 
 
 			var expected = File.ReadAllText(file);
@@ -68,13 +64,7 @@ namespace Nest.Tests.Unit
 		}
 		protected void JsonNotEquals(string json, MethodBase method, string fileName = null)
 		{
-			var type = method.DeclaringType;
-			var @namespace = method.DeclaringType.Namespace;
-			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", "\\");
-
-			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
-			file = Path.Combine(Environment.CurrentDirectory.Replace("bin\\Debug", "").Replace("bin\\Release", ""), file);
-
+            var file = this.GetFileFromMethod(method, fileName);
 
 			var expected = File.ReadAllText(file);
 			Assert.False(json.JsonEquals(expected), this.PrettyPrint(json));
@@ -85,5 +75,16 @@ namespace Nest.Tests.Unit
 			dynamic parsedJson = JsonConvert.DeserializeObject(json);
 			return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
 		}
+
+        private string GetFileFromMethod(MethodBase method, string fileName)
+        {
+            var type = method.DeclaringType;
+            var @namespace = method.DeclaringType.Namespace;
+            var folderSep = Path.DirectorySeparatorChar.ToString();
+            var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", folderSep);
+            var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
+            file = Path.Combine(Environment.CurrentDirectory.Replace("bin" + folderSep + "Debug", "").Replace("bin" + folderSep + "Release", ""), file);
+            return file;
+        }
 	}
 }

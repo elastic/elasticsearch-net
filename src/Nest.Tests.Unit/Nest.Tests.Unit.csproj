@@ -96,6 +96,7 @@
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
+    <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Search\Facets\FacetJson.cs" />
     <Compile Include="Search\Facets\FilterFacetJson.cs" />
@@ -310,6 +311,9 @@
     <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Internals\Serialize\ClassWithCollectionSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Search\Filter\BoolCombinations\CombineNotAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -508,7 +512,9 @@
     <None Include="Search\Query\ConditionlessBool\MyTermNot.json" />
     <None Include="Search\Query\ConditionlessBool\MyTerm.json" />
     <None Include="Search\Query\ConditionlessBool\MatchAll.json" />
-    <None Include="Search\Query\ConditionLess\MatchAll.json" />
+    <None Include="Search\Query\ConditionLess\MatchAll.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\ConditionLessStrict\MatchAll.json" />
     <None Include="Search\Query\InsideBoolCalls\InsideMust.json" />
     <None Include="Search\Query\InsideBoolCalls\InsideMustNot.json" />

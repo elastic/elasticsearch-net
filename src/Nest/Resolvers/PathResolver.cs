@@ -246,8 +246,9 @@ namespace Nest.Resolvers
 
 			var dict = this.GetSearchParameters(descriptor);
 
-			return this.SearchPathJoin(indices, types, dict, "_search");
+			return this.SearchPathJoin(indices, types, dict);
 		}
+
 		public string GetSearchPathForTyped<T>(SearchDescriptor<T> descriptor) where T : class
 		{
 			string indices;
@@ -265,10 +266,51 @@ namespace Nest.Resolvers
 				types = null;
 
 			var dict = this.GetSearchParameters(descriptor);
-				
 
-			return this.SearchPathJoin(indices, types, dict, "_search");
+
+			return this.SearchPathJoin(indices, types, dict);
 		}
+
+		public string GetWarmerPath(PutWarmerDescriptor descriptor)
+		{
+			var extension = string.Format("_warmer/{0}", descriptor._WarmerName);
+
+			string indices;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+			else
+				indices = this._connectionSettings.DefaultIndex;
+
+			string types;
+			if (descriptor._Types.HasAny())
+				types = string.Join(",", descriptor._Types);
+			else
+				types = null;
+
+			return this.SearchPathJoin(indices, types, null, extension);
+		}
+
+		/// <summary>
+		/// For GetWarmer and DeleteWarmer operations
+		/// </summary>
+		public string GetWarmerPath(GetWarmerDescriptor descriptor)
+		{
+			var extension = string.Format("_warmer/{0}", descriptor._WarmerName);
+
+			string indices;
+			if (descriptor._Indices.HasAny())
+				indices = string.Join(",", descriptor._Indices);
+			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
+				indices = "_all";
+			else
+				indices = this._connectionSettings.DefaultIndex;
+
+
+			return this.SearchPathJoin(indices, null, null, extension);
+		}
+
 
 		private string JoinTypes(IEnumerable<TypeNameMarker> markers)
 		{
@@ -291,6 +333,7 @@ namespace Nest.Resolvers
 
 			return this.SearchPathJoin(indices, types, descriptor.GetUrlParams(), suffix);
 		}
+
 		public string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor, string suffix) where T : class
 		{
 			string indices;

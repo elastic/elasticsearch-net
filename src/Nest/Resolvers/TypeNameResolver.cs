@@ -59,7 +59,12 @@ namespace Nest.Resolvers
 			return this.GetTypeNameForType(typeof(T));
 		}
 
-		public TypeNameMarker GetTypeNameForType(Type type)
+		public IEnumerable<string> GetTypeNamesFor(IEnumerable<Type> types)
+		{
+			return types.Select(GetTypeNameFor).ToArray();
+		}
+
+		public string GetTypeNameForType(Type type)
 		{
 			var typeName = type.Name;
 			var att = new PropertyNameResolver().GetElasticPropertyFor(type);

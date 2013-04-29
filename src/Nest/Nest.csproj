@@ -63,8 +63,21 @@
       <HintPath>..\..\dep\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
+    <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />
+    <Compile Include="Domain\Mapping\Attributes\NestedPropertyAttribute.cs" />
+    <Compile Include="Domain\Mapping\Types\WarmerMapping.cs" />
+    <Compile Include="Domain\Responses\WarmerResponse.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Settings\CustomSimilaritySettings.cs" />
+    <Compile Include="DSL\CreateWarmerDescriptor.cs" />
+    <Compile Include="DSL\PutWarmerDescriptor.cs" />
+    <Compile Include="DSL\GetWarmerDescriptor.cs" />
+    <Compile Include="ElasticClient-Warmers.cs" />
     <Compile Include="Domain\CovariantDictionary.cs" />
     <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkDeleteResponseItem.cs" />
@@ -431,8 +444,10 @@
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
+    <Compile Include="Resolvers\Converters\WarmerResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
+    <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
-    <Compile Include="Resolvers\Converters\TemplateResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicTemplatesConverter.cs" />
     <Compile Include="Resolvers\Converters\ElasticCoreTypeConverter.cs" />
     <Compile Include="Resolvers\Converters\ElasticTypeConverter.cs" />
@@ -440,7 +455,7 @@
     <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
-    <Compile Include="Resolvers\Converters\ShardSegmentConverter.cs" />
+    <Compile Include="Resolvers\Converters\TemplateResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Hit\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />
@@ -491,6 +506,7 @@
     <Compile Include="Domain\Analysis\Analyzers\StandardAnalyzer.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\StopTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\WordDelimiterTokenFilter.cs" />
+    <Compile Include="Resolvers\Writers\WritePropertiesFromAttributeVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

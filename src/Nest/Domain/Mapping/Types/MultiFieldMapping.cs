@@ -17,6 +17,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "multi_field" }; } }
 
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
+
 		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
 
