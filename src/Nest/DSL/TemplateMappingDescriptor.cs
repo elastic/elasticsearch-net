@@ -66,14 +66,16 @@ namespace Nest
 			var rootObjectMappingDescriptor = mappingSelector(new RootObjectMappingDescriptor<T>(this._connectionSettings));
 			rootObjectMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
-			this._TemplateMapping.Mappings[rootObjectMappingDescriptor._TypeName] = rootObjectMappingDescriptor._Mapping;
+			var typeName = rootObjectMappingDescriptor._TypeName.Resolve(this._connectionSettings);
+			this._TemplateMapping.Mappings[typeName] = rootObjectMappingDescriptor._Mapping;
 			return this;
 
 		}
 		public TemplateMappingDescriptor RemoveMapping<T>()
 			where T : class
 		{
-			this._TemplateMapping.Mappings.Remove(typeof(T));
+			var typeName = new TypeNameMarker { Type = typeof(T) }.Resolve(this._connectionSettings);
+			this._TemplateMapping.Mappings.Remove(typeName);
 			return this;
 		}
 		public TemplateMappingDescriptor RemoveMapping(string typeName)
@@ -103,14 +105,13 @@ namespace Nest
 		public TemplateMappingDescriptor RemoveWarmer<T>()
 			where T : class
 		{
-			TypeNameMarker marker = typeof (T);
-			this._TemplateMapping.Warmers.Remove(marker);
+			var typeName = new TypeNameMarker { Type = typeof(T) }.Resolve(this._connectionSettings);
+			this._TemplateMapping.Warmers.Remove(typeName);
 			return this;
 		}
 		public TemplateMappingDescriptor RemoveWarmer(string typeName)
 		{
-			TypeNameMarker marker = typeName;
-			this._TemplateMapping.Warmers.Remove(marker);
+			this._TemplateMapping.Warmers.Remove(typeName);
 			return this;
 
 		}

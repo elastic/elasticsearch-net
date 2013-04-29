@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Core
 {
-	[TestFixture, Ignore]
+	[TestFixture]
 	public class DeleteTests : IntegrationTests
 	{
 		private void ResetIndexes()
