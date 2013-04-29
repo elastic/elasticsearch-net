@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,11 +36,13 @@ namespace Nest
 		[JsonProperty(PropertyName = "ids")]
 		internal IdsQuery IdsQuery { get; set; }
 		[JsonProperty(PropertyName = "custom_score")]
-		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
+        internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
+        [JsonProperty(PropertyName = "custom_filters_score")]
+        internal CustomFiltersScoreDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "custom_boost_factor")]
-		internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
-		[JsonProperty(PropertyName = "constant_score")]
-		internal ConstantScoreQueryDescriptor<T> ConstantScoreQueryDescriptor { get; set; }
+        internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
+        [JsonProperty(PropertyName = "constant_score")]
+        internal ConstantScoreQueryDescriptor<T> ConstantScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "dis_max")]
 		internal DismaxQueryDescriptor<T> DismaxQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "filtered")]
@@ -204,7 +206,7 @@ namespace Nest
 
 		/// <summary>
 		/// A fuzzy based query that uses similarity based on Levenshtein (edit distance) algorithm.
-		/// Warning: this query is not very scalable with its default prefix length of 0 ‚Äì in this case,
+		/// Warning: this query is not very scalable with its default prefix length of 0 ñ in this case,
 		/// every term will be enumerated and cause an edit score calculation or max_expansions is not set.
 		/// </summary>
 		public BaseQuery Fuzzy(Action<FuzzyQueryDescriptor<T>> selector)
@@ -224,7 +226,7 @@ namespace Nest
 			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
 		}
 		/// <summary>
-		/// fuzzy query on a numeric field will result in a range query ‚Äúaround‚Äù the value using the min_similarity value
+		/// fuzzy query on a numeric field will result in a range query ìaroundî the value using the min_similarity value
 		/// </summary>
 		public BaseQuery FuzzyNumeric(Action<FuzzyNumericQueryDescriptor<T>> selector)
 		{
@@ -243,7 +245,7 @@ namespace Nest
 			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
 		}
 		/// <summary>
-		/// fuzzy query on a numeric field will result in a range query ‚Äúaround‚Äù the value using the min_similarity value
+		/// fuzzy query on a numeric field will result in a range query ìaroundî the value using the min_similarity value
 		/// </summary>
 		/// <param name="selector"></param>
 		public BaseQuery FuzzyDate(Action<FuzzyDateQueryDescriptor<T>> selector)
@@ -381,7 +383,7 @@ namespace Nest
 			return new QueryDescriptor<T> { RangeQueryDescriptor = this.RangeQueryDescriptor };
 		}
 		/// <summary>
-		/// Fuzzy like this query find documents that are ‚Äúlike‚Äù provided text by running it against one or more fields.
+		/// Fuzzy like this query find documents that are ìlikeî provided text by running it against one or more fields.
 		/// </summary>
 		public BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisDescriptor<T>> selector)
 		{
@@ -395,7 +397,7 @@ namespace Nest
 			return new QueryDescriptor<T> { FuzzyLikeThisDescriptor = this.FuzzyLikeThisDescriptor };
 		}
 		/// <summary>
-		/// More like this query find documents that are ‚Äúlike‚Äù provided text by running it against one or more fields.
+		/// More like this query find documents that are ìlikeî provided text by running it against one or more fields.
 		/// </summary>
 		public BaseQuery MoreLikeThis(Action<MoreLikeThisQueryDescriptor<T>> selector)
 		{
@@ -424,7 +426,7 @@ namespace Nest
 		}
 		/// <summary>
 		/// The top_children query runs the child query with an estimated hits size, and out of the hit docs, aggregates 
-		/// it into parent docs. If there aren‚Äôt enough parent docs matching the requested from/size search request, 
+		/// it into parent docs. If there arenít enough parent docs matching the requested from/size search request, 
 		/// then it is run again with a wider (more hits) search.
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
@@ -500,21 +502,36 @@ namespace Nest
 			this.CustomBoostFactorQueryDescriptor = query;
 			return new QueryDescriptor<T> { CustomBoostFactorQueryDescriptor = this.CustomBoostFactorQueryDescriptor };
 		}
-		/// <summary>
-		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
-		/// computation derived from other field values in the doc (numeric ones) using script expression
-		/// </summary>
-		public BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
-		{
-			var query = new CustomScoreQueryDescriptor<T>();
-			customScoreQuery(query);
+        /// <summary>
+        /// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
+        /// computation derived from other field values in the doc (numeric ones) using script expression
+        /// </summary>
+        public BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
+        {
+            var query = new CustomScoreQueryDescriptor<T>();
+            customScoreQuery(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
+            if (query.IsConditionless)
+                return CreateConditionlessQueryDescriptor(query);
 
-			this.CustomScoreQueryDescriptor = query;
-			return new QueryDescriptor<T> { CustomScoreQueryDescriptor = this.CustomScoreQueryDescriptor };
-		}
+            this.CustomScoreQueryDescriptor = query;
+            return new QueryDescriptor<T> { CustomScoreQueryDescriptor = this.CustomScoreQueryDescriptor };
+        }
+        /// <summary>
+        /// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
+        /// computation derived from other field values in the doc (numeric ones) using script or boost expression
+        /// </summary>
+        public BaseQuery CustomFiltersScore(Action<CustomFiltersScoreDescriptor<T>> customFiltersScoreQuery)
+        {
+            var query = new CustomFiltersScoreDescriptor<T>();
+            customFiltersScoreQuery(query);
+
+            if (query.IsConditionless)
+                return CreateConditionlessQueryDescriptor(query);
+
+            this.CustomFiltersScoreQueryDescriptor = query;
+            return new QueryDescriptor<T> { CustomFiltersScoreQueryDescriptor = this.CustomFiltersScoreQueryDescriptor };
+        }
 		/// <summary>
 		/// A query that matches documents matching boolean combinations of other queries. The bool query maps to 
 		/// Lucene BooleanQuery. 
@@ -532,7 +549,7 @@ namespace Nest
 		}
 		/// <summary>
 		/// the boosting query can be used to effectively demote results that match a given query. 
-		/// Unlike the ‚ÄúNOT‚Äù clause in bool query, this still selects documents that contain
+		/// Unlike the ìNOTî clause in bool query, this still selects documents that contain
 		/// undesirable terms, but reduces their overall score.
 		/// </summary>
 		/// <param name="boostingQuery"></param>
