@@ -105,15 +105,14 @@ namespace Nest
 			this.UsesPrettyResponses = b;
 			return this;
 		}
-	
-
-		public ConnectionSettings MapTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
+		
+		public ConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");			
 			mappingSelector(this.DefaultIndices);
 			return this;
 		}
-		public ConnectionSettings MapTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
+		public ConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			mappingSelector(this.DefaultTypeNames);

@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		{
 			var clientSettings = new ConnectionSettings(Test.Default.Uri)
 				.SetDefaultIndex("mydefaultindex")
-				.MapTypeIndices(p =>
+				.MapDefaultTypeIndices(p =>
 					p.Add(typeof(ElasticSearchProject), "mysuperindex")
 			);
 			var c = new PathResolver(clientSettings);
