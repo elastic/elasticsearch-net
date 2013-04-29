@@ -12,24 +12,24 @@ namespace Nest.Tests.Unit.Search.Highlight
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-		.Highlight(h=>h
-		  .BoundaryCharacters(".,!? \t\n")
-		  .BoundaryMaxSize(20)
-		  .Encoder("html")
-		  .FragmentOffset(0)
-		  .FragmentSize(3)
-		  .NumberOfFragments(5)
-		  .Order("sort")
-		  .PreTags("<b>")
-		  .PostTags("</b>")
-		  .RequireFieldMatch(true)
-		  .OnFields(
-			f=>f
-			  .OnAll()
-			  .PreTags("<em>")
-			  .PostTags("</em>")
-		  )
-		);
+				.Highlight(h => h
+					.BoundaryCharacters(".,!? \t\n")
+					.BoundaryMaxSize(20)
+					.Encoder("html")
+					.FragmentOffset(0)
+					.FragmentSize(3)
+					.NumberOfFragments(5)
+					.Order("sort")
+					.PreTags("<b>")
+					.PostTags("</b>")
+					.RequireFieldMatch(true)
+					.OnFields(
+					f => f
+						.OnAll()
+						.PreTags("<em>")
+						.PostTags("</em>")
+					)
+				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"  {
 		  from: 0,

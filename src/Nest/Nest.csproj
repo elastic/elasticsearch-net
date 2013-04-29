@@ -74,6 +74,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Domain\Settings\CustomSimilaritySettings.cs" />
+    <Compile Include="DSL\RescoreDescriptor.cs" />
     <Compile Include="DSL\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />

@@ -42,7 +42,7 @@ namespace Nest
 		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
 
 		/// <summary>
-		/// Whiter conditionless queries are allowed or not
+		/// Whether conditionless queries are allowed or not
 		/// </summary>
 		internal bool _Strict { get; set; }
 
@@ -232,6 +232,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "highlight")]
 		internal HighlightDescriptor<T> _Highlight { get; set; }
+
+		[JsonProperty(PropertyName = "rescore")]
+		internal RescoreDescriptor<T> _Rescore { get; set; }
 
 		internal string _RawQuery { get; set; }
 		internal BaseQuery _Query { get; set; }
@@ -935,6 +938,17 @@ namespace Nest
 			highlightDescriptor.ThrowIfNull("highlightDescriptor");
 			this._Highlight = new HighlightDescriptor<T>();
 			highlightDescriptor(this._Highlight);
+			return this;
+		}
+
+		/// <summary>
+		/// Allows you to specify a rescore query
+		/// </summary>
+		public SearchDescriptor<T> Rescore(Action<RescoreDescriptor<T>> rescoreSelector)
+		{
+			rescoreSelector.ThrowIfNull("rescoreSelector");
+			this._Rescore = new RescoreDescriptor<T>();
+			rescoreSelector(this._Rescore);
 			return this;
 		}
 
