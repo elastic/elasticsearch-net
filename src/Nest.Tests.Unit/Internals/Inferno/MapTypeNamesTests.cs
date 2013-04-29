@@ -14,6 +14,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public class Developer {}
 		public class NoopObject {}
 
+		public class MyGeneric<T> where T : class {}
+
 		[Test]
 		public void ResolveToSepcifiedTypeNames()
 		{
@@ -24,6 +26,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 					.Add(typeof(Person), "human")
 					.Add(typeof(Organization), "organisation")
 					.Add(typeof(Developer), "codemonkey")
+					.Add(typeof(MyGeneric<Developer>), "codemonkey-wrapped-in-bacon")
+					.Add(typeof(MyGeneric<Organization>), "org-wrapped-in-bacon")
 				);
 
 			TypeNameMarker marker = typeof (Car);
@@ -37,6 +41,12 @@ namespace Nest.Tests.Unit.Internals.Inferno
 
 			marker = typeof(Developer);
 			marker.Resolve(clientSettings).Should().Be("codemonkey");
+
+			marker = typeof(MyGeneric<Developer>);
+			marker.Resolve(clientSettings).Should().Be("codemonkey-wrapped-in-bacon");
+
+			marker = typeof(MyGeneric<Organization>);
+			marker.Resolve(clientSettings).Should().Be("org-wrapped-in-bacon");
 
 			//Should fall back to the default lowercase pluralize since
 			//it doesn't have an explicit default
