@@ -20,8 +20,13 @@ namespace Nest
 
 		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
-			var task = this.DoAsyncRequest(request, data);
-			return task.Result;
+			var status = new ConnectionStatus("{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
+			{
+				Request = data,
+				RequestUrl = request.RequestUri.ToString(),
+				RequestMethod = request.Method
+			};
+			return status;
 		}
 
 		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)

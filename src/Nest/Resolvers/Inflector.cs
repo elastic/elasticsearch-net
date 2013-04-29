@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -9,6 +10,7 @@ namespace Nest.Resolvers
 	/// </summary>
 	public static class Inflector
 	{
+		private static readonly ConcurrentDictionary<string, string> _memoization = new ConcurrentDictionary<string, string>(); 
 		private static readonly List<InflectorRule> _plurals = new List<InflectorRule>();
 		private static readonly List<InflectorRule> _singulars = new List<InflectorRule>();
 		private static readonly List<string> _uncountables = new List<string>();
@@ -129,7 +131,13 @@ namespace Nest.Resolvers
 		/// <returns></returns>
 		public static string MakePlural(this string word)
 		{
-			return ApplyRules(_plurals, word);
+			string plural;
+			if (!_memoization.TryGetValue(word, out plural))
+			{
+				plural = ApplyRules(_plurals, word);
+				_memoization.TryAdd(word, plural);
+			}
+			return plural;
 		}
 
 		/// <summary>

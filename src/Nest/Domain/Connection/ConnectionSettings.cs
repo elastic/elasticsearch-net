@@ -108,11 +108,13 @@ namespace Nest
 			this.UsesPrettyResponses = b;
 			return this;
 		}
+
 		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
 		{
 			type.ThrowIfNull("type");
 			return Inflector.MakePlural(type.Name).ToLower();
 		}
+
 		public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
 		{
 			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
