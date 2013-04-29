@@ -2,13 +2,14 @@
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class RootObjectMapping : ObjectMapping
     {
 		[JsonProperty("type")]
-		public override string Type { get { return null; } }
+		public override TypeNameMarker Type { get { return null; } }
 
 		[JsonProperty("index_analyzer")]
 		public string IndexAnalyzer { get; set; }

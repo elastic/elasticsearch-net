@@ -26,7 +26,7 @@ namespace Nest
 			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
@@ -77,7 +77,7 @@ namespace Nest
 
 				if (descriptor._FixedType.IsNullOrEmpty())
 				{
-					var type = string.IsNullOrEmpty(g._Type) ? this.TypeNameResolver.GetTypeNameFor(g._ClrType) : g._Type;
+					var type = this.ResolveTypeName(g._Type, this.GetTypeNameFor(g._ClrType));
 					properties.Add(@"""_type"" : " + this.Serialize(type));
 				}
 				properties.Add(@"""_id"" : " + this.Serialize(g._Id));

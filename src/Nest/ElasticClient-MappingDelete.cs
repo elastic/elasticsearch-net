@@ -13,7 +13,7 @@ namespace Nest
         /// </summary>
         public IIndicesResponse DeleteMapping<T>() where T : class
         {
-            string type = this.TypeNameResolver.GetTypeNameFor<T>();
+            string type = this.GetTypeNameFor<T>();
             return this.DeleteMapping<T>(this.IndexNameResolver.GetIndexForType<T>(), type);
         }
         /// <summary>
@@ -21,7 +21,7 @@ namespace Nest
         /// </summary>
         public IIndicesResponse DeleteMapping<T>(string index) where T : class
         {
-            string type = this.TypeNameResolver.GetTypeNameFor<T>();
+            string type = this.GetTypeNameFor<T>();
             return this.DeleteMapping<T>(index, type);
         }
         /// <summary>
@@ -41,7 +41,7 @@ namespace Nest
         public IIndicesResponse DeleteMapping(Type t)
         {
             string index = this.IndexNameResolver.GetIndexForType(t);
-            string type = this.TypeNameResolver.GetTypeNameForType(t);
+            string type = this.GetTypeNameFor(t);
             return this.DeleteMapping(t, index, type);
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace Nest
         /// </summary>
         public IIndicesResponse DeleteMapping(Type t, string index)
         {
-            string type = this.TypeNameResolver.GetTypeNameForType(t);
+            string type = this.GetTypeNameFor(t);
             return this.DeleteMapping(t, index, type);
         }
         /// <summary>

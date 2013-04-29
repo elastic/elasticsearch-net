@@ -17,7 +17,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class
 		{
-			string type = this.TypeNameResolver.GetTypeNameFor<T>();
+			string type = this.GetTypeNameFor<T>();
 			return this.MapFromAttributes<T>(this.IndexNameResolver.GetIndexForType<T>(), type, maxRecursion);
 		}
 		/// <summary>
@@ -29,7 +29,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class
 		{
-			string type = this.TypeNameResolver.GetTypeNameFor<T>();
+			string type = this.GetTypeNameFor<T>();
 			return this.MapFromAttributes<T>(index, type, maxRecursion);
 		}
 		/// <summary>
@@ -43,7 +43,7 @@ namespace Nest
 		{
 			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
 			var typeMapping = this.CreateMapFor<T>(type, maxRecursion);
-			typeMapping.Name = type;
+			typeMapping.TypeNameMarker = type;
 			return this.Map(typeMapping, index, type, ignoreConflicts: false);
 		}
 
@@ -56,7 +56,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes(Type t, int maxRecursion = 0)
 		{
-			string type = this.TypeNameResolver.GetTypeNameForType(t);
+			string type = this.GetTypeNameFor(t);
 			return this.MapFromAttributes(t, this.IndexNameResolver.GetIndexForType(t), type, maxRecursion);
 		}
 		/// <summary>
@@ -68,7 +68,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes(Type t, string index, int maxRecursion = 0)
 		{
-			string type = this.TypeNameResolver.GetTypeNameForType(t);
+			string type = this.GetTypeNameFor(t);
 			return this.MapFromAttributes(t, index, type, maxRecursion);
 		}
 		/// <summary>
@@ -82,7 +82,7 @@ namespace Nest
 		{
 			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
 			var typeMapping = this.CreateMapFor(t, type, maxRecursion);
-			typeMapping.Name = type;
+			typeMapping.TypeNameMarker = type;
 			return this.Map(typeMapping, index, type, ignoreConflicts: false);
 		}
 
@@ -94,13 +94,13 @@ namespace Nest
 		public IIndicesResponse MapFluent<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>());
+			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this.Settings));
 			var typeMapping = d._Mapping;
 			var indexName = d._IndexName;
 			if (indexName.IsNullOrEmpty())
 				indexName = this.IndexNameResolver.GetIndexForType<T>();
 
-			return this.Map(typeMapping, indexName, d._TypeName, d._IgnoreConflicts);
+			return this.Map(typeMapping, indexName, this.ResolveTypeName(d._TypeName), d._IgnoreConflicts);
 
 		}
 
@@ -117,10 +117,10 @@ namespace Nest
 		public IIndicesResponse Map(RootObjectMapping typeMapping, string index, string typeName = null, bool ignoreConflicts = false)
 		{
 			if (typeName.IsNullOrEmpty())
-				typeName = typeMapping.Name;
+				typeName = this.ResolveTypeName(typeMapping.TypeNameMarker);
 
 			var mapping = new Dictionary<string, RootObjectMapping>();
-			mapping.Add(typeMapping.Name, typeMapping);
+			mapping.Add(this.ResolveTypeName(typeMapping.TypeNameMarker), typeMapping);
 
 			string map = JsonConvert.SerializeObject(mapping, Formatting.None, SerializationSettings);
 
@@ -146,7 +146,7 @@ namespace Nest
 		}
 		private RootObjectMapping CreateMapFor(Type t, string type, int maxRecursion = 0)
 		{
-			var writer = new TypeMappingWriter(t, type, maxRecursion);
+			var writer = new TypeMappingWriter(t, type, this.Settings, maxRecursion);
 			var typeMapping = writer.RootObjectMappingFromAttributes();
 			return typeMapping;
 		}

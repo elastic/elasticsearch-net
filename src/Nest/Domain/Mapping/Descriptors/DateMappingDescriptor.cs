@@ -10,13 +10,13 @@ namespace Nest
 
 		public DateMappingDescriptor<T> Name(string name)
 		{
-			this._Mapping.Name = name;
+			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
 		public DateMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
 		{
 			var name = new PropertyNameResolver().ResolveToLastToken(objectPath);
-			this._Mapping.Name = name;
+			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
 

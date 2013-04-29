@@ -22,7 +22,7 @@ namespace Nest
 		  var index = this.IndexNameResolver.GetIndexForType<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+		  var typeName = this.GetTypeNameFor<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  return this._deleteToPath(path);
 	  }
@@ -63,7 +63,7 @@ namespace Nest
 		  var index = this.IndexNameResolver.GetIndexForType<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+		  var typeName = this.GetTypeNameFor<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 		  return this._deleteToPath(path);
@@ -107,7 +107,7 @@ namespace Nest
 		  var index = this.IndexNameResolver.GetIndexForType<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+		  var typeName = this.GetTypeNameFor<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  return this._deleteToPathAsync(path);
 	  }
@@ -148,7 +148,7 @@ namespace Nest
 		  var index = this.IndexNameResolver.GetIndexForType<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+		  var typeName = this.GetTypeNameFor<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 		  return this._deleteToPathAsync(path);

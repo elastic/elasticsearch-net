@@ -24,7 +24,7 @@ namespace Nest
 		{
 			templateMappingSelector.ThrowIfNull("templateMappingSelector");
 
-			var templateMappingDescriptor = templateMappingSelector(new TemplateMappingDescriptor(this.SerializationSettings));
+			var templateMappingDescriptor = templateMappingSelector(new TemplateMappingDescriptor(this.Settings));
 			templateMappingDescriptor.ThrowIfNull("templateMappingDescriptor");
 
 			var templateMapping = templateMappingDescriptor._TemplateMapping;

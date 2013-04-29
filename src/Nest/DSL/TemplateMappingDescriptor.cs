@@ -11,15 +11,15 @@ namespace Nest
 {
 	public class TemplateMappingDescriptor
 	{
+		private readonly IConnectionSettings _connectionSettings;
+
 		internal string _Name { get; set; }
 		internal TemplateMapping _TemplateMapping { get; set; }
-
 		private readonly JsonSerializerSettings _serializationSettings;
-
-		public TemplateMappingDescriptor(JsonSerializerSettings SerializationSettings)
+		public TemplateMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._TemplateMapping = new TemplateMapping();
-			this._serializationSettings = SerializationSettings;
+			this._connectionSettings = connectionSettings;
 		}
 
 		public TemplateMappingDescriptor Name(string name)
@@ -63,27 +63,26 @@ namespace Nest
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var rootObjectMappingDescriptor = mappingSelector(new RootObjectMappingDescriptor<T>());
+			var rootObjectMappingDescriptor = mappingSelector(new RootObjectMappingDescriptor<T>(this._connectionSettings));
 			rootObjectMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
-			this._TemplateMapping.Mappings[rootObjectMappingDescriptor._TypeName] = rootObjectMappingDescriptor._Mapping;
+			var typeName = rootObjectMappingDescriptor._TypeName.Resolve(this._connectionSettings);
+			this._TemplateMapping.Mappings[typeName] = rootObjectMappingDescriptor._Mapping;
 			return this;
 
 		}
 		public TemplateMappingDescriptor RemoveMapping<T>()
 			where T : class
 		{
-			var typeName = new TypeNameResolver().GetTypeNameFor<T>();
-			return this.RemoveMapping(typeName);
-
+			var typeName = new TypeNameMarker { Type = typeof(T) }.Resolve(this._connectionSettings);
+			this._TemplateMapping.Mappings.Remove(typeName);
+			return this;
 		}
 		public TemplateMappingDescriptor RemoveMapping(string typeName)
 		{
 			typeName.ThrowIfNull("typeName");
 			this._TemplateMapping.Mappings.Remove(typeName);
-
 			return this;
-
 		}
 
 
@@ -106,15 +105,13 @@ namespace Nest
 		public TemplateMappingDescriptor RemoveWarmer<T>()
 			where T : class
 		{
-			var typeName = new TypeNameResolver().GetTypeNameFor<T>();
-			return this.RemoveMapping(typeName);
-
+			var typeName = new TypeNameMarker { Type = typeof(T) }.Resolve(this._connectionSettings);
+			this._TemplateMapping.Warmers.Remove(typeName);
+			return this;
 		}
 		public TemplateMappingDescriptor RemoveWarmer(string typeName)
 		{
-			typeName.ThrowIfNull("typeName");
 			this._TemplateMapping.Warmers.Remove(typeName);
-
 			return this;
 
 		}

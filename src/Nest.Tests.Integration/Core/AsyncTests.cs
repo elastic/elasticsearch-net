@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Core
 		public void TestIndexTimeout()
 		{
 			var timeout = 1;
-			var s = new ConnectionSettings(Test.Default.Host, Test.Default.Port, timeout)
+			var s = new ConnectionSettings(Test.Default.Uri)
 						.SetDefaultIndex(ElasticsearchConfiguration.DefaultIndex)
 						.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 						.UsePrettyResponses();

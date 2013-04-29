@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nest.Resolvers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,36 +8,6 @@ namespace Nest
 {
 	public class ConnectionSettings : IConnectionSettings
 	{
-		private readonly string _username;
-		public string Username
-		{
-			get { return this._username; }
-		}
-		private readonly string _password;
-		public string Password
-		{
-			get { return this._password; }
-		}
-		private readonly string _host;
-		public string Host
-		{
-			get { return this._host; }
-		}
-		private readonly string _proxyAddress;
-		public string ProxyAddress
-		{
-			get { return this._proxyAddress; }
-		}
-		private readonly int _port;
-		public int Port
-		{
-			get { return this._port; }
-		}
-		private int _timeout;
-		public int Timeout
-		{
-			get { return this._timeout; }
-		}
 		private string _defaultIndex;
 		public string DefaultIndex
 		{
@@ -48,97 +19,37 @@ namespace Nest
 			}
 			private set { this._defaultIndex = value; }
 		}
-		private readonly Uri _uri;
-		public Uri Uri
-		{
-			get { return this._uri; }
-		}
-
+		public Uri Uri { get; private set; }
+		public string Host { get; private set; }
+		public int Port { get; private set; }
+		public int Timeout { get; private set; }
+		public string ProxyUsername { get; private set; }
+		public string ProxyPassword { get; private set; }
+		public string ProxyAddress { get; private set; }
 
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
 
-		private readonly FluentDictionary<Type, string> _defaultTypeIndices;
+		public Func<Type, string> DefaultTypeNameInferrer { get; private set; }
+		public FluentDictionary<Type, string> DefaultIndices { get; private set; }
+		public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
 
-		public FluentDictionary<Type, string> DefaultIndices
-		{
-			get
-			{
-				return this._defaultTypeIndices;
-			}
-		}
-
-		/// <summary>
-		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-		/// </summary>
-		/// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
-		public ConnectionSettings(Uri uri) : this(uri, 60000, null, null, null) { }
-		/// <summary>
-		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-		/// </summary>
-		/// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
-		/// <param name="timeout">time out in milliseconds</param>
-		public ConnectionSettings(Uri uri, int timeout) : this(uri, timeout, null, null, null) { }
-		/// <summary>
-		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-		/// using a proxy
-		/// </summary>
-		/// <param name="uri">A Uri to describe the elasticsearch endpoint</param>
-		/// <param name="timeout">time out in milliseconds</param>
-		/// <param name="proxyAddress">proxy address</param>
-		/// <param name="username">proxy username</param>
-		/// <param name="password">proxy password</param>
-		public ConnectionSettings(Uri uri, int timeout, string proxyAddress, string username, string password)
+		public ConnectionSettings(Uri uri)
 		{
 			uri.ThrowIfNull("uri");
 
-			this._uri = uri;
-		    this._host = uri.Host;
-		    this._port = uri.Port;
-			this._password = password;
-			this._username = username;
-			this._timeout = timeout;
-			this._proxyAddress = proxyAddress;
-			this.MaximumAsyncConnections = 20;
-			this._defaultTypeIndices = new FluentDictionary<Type, string>();
-		}
-		/// <summary>
-		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-		/// </summary>
-		/// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
-		/// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
-		public ConnectionSettings(string host, int port) : this(host, port, 60000, null, null, null) { }
-		/// <summary>
-		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-		/// </summary>
-		/// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
-		/// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
-		/// <param name="timeout">time out in milliseconds</param>
-		public ConnectionSettings(string host, int port, int timeout) : this(host, port, timeout, null, null, null) { }
-		/// <summary>
-		/// Instantiate a connectionsettings object to tell the client where and how to connect to elasticsearch
-		/// </summary>
-		/// <param name="host">host (sans http(s)://), use the Uri constructor overload for more control</param>
-		/// <param name="port">port of the host (elasticsearch defaults on 9200)</param>
-		/// <param name="timeout">time out in milliseconds</param>
-		/// <param name="proxyAddress">proxy address</param>
-		/// <param name="username">proxy username</param>
-		/// <param name="password">proxy password</param>
-		public ConnectionSettings(string host, int port, int timeout, string proxyAddress, string username, string password)
-		{
-			host.ThrowIfNullOrEmpty("host");
-			var uri = new Uri("http://" + host + ":" + port);
+			this.Timeout = 60*1000;
 
-			this._host = host;
-			this._password = password;
-		    this._uri = uri;
-			this._username = username;
-			this._timeout = timeout;
-			this._port = port;
-			this._proxyAddress = proxyAddress;
+			this.Uri = uri;
+			this.Host = uri.Host;
+			this.Port = uri.Port;
+
 			this.MaximumAsyncConnections = 20;
-			this._defaultTypeIndices = new FluentDictionary<Type, string>();
+			this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
+			this.DefaultIndices = new FluentDictionary<Type, string>();
+			this.DefaultTypeNames = new FluentDictionary<Type, string>();
 		}
+		
 		/// <summary>
 		/// Index to default to when no index is specified.
 		/// </summary>
@@ -163,6 +74,20 @@ namespace Nest
 			this.MaximumAsyncConnections = maximum;
 			return this;
 		}
+
+		/// <summary>
+		/// If your connection has to go through proxy use this method to specify the proxy url
+		/// </summary>
+		/// <returns></returns>
+		public ConnectionSettings SetProxy(Uri proxyAdress, string username, string password)
+		{
+			proxyAdress.ThrowIfNull("proxyAdress");
+			this.ProxyAddress = proxyAdress.ToString();
+			this.ProxyUsername = username;
+			this.ProxyPassword = password;
+			return this;
+		}
+
 		/// <summary>
 		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
 		/// and specify the timeout in various calls on Elasticsearch's side.
@@ -170,27 +95,43 @@ namespace Nest
 		/// <param name="timeout">time out in milliseconds</param>
 		public ConnectionSettings SetTimeout(int timeout)
 		{
-			this._timeout = timeout;
+			this.Timeout = timeout;
 			return this;
 		}
-		public ConnectionSettings UsePrettyResponses()
-		{
-			this.UsesPrettyResponses = true;
-			return this;
-		}
-		public ConnectionSettings UsePrettyResponses(bool b)
+
+		/// <summary>
+		/// Append ?pretty=true to requests, this helps to debug send and received json.
+		/// </summary>
+		/// <returns></returns>
+		public ConnectionSettings UsePrettyResponses(bool b = true)
 		{
 			this.UsesPrettyResponses = b;
 			return this;
 		}
-
-		public ConnectionSettings MapTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
+		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
 		{
-			mappingSelector.ThrowIfNull("mappingSelector");			
-			mappingSelector(this._defaultTypeIndices);
+			type.ThrowIfNull("type");
+			return Inflector.MakePlural(type.Name).ToLower();
+		}
+		public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
+		{
+			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
+			this.DefaultTypeNameInferrer = defaultTypeNameInferrer;
 			return this;
 		}
 
+		public ConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
+		{
+			mappingSelector.ThrowIfNull("mappingSelector");			
+			mappingSelector(this.DefaultIndices);
+			return this;
+		}
+		public ConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
+		{
+			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector(this.DefaultTypeNames);
+			return this;
+		}
 		
 	}
 }

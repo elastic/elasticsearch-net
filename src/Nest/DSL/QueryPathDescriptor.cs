@@ -24,7 +24,7 @@ namespace Nest
 		}
 
 		internal IEnumerable<string> _Indices { get; set; }
-		internal IEnumerable<string> _Types { get; set; }
+		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
 		public IQueryPathDescriptor Indices(IEnumerable<string> indices)
@@ -42,7 +42,7 @@ namespace Nest
 		public IQueryPathDescriptor Types(IEnumerable<string> types)
 		{
 			types.ThrowIfEmpty("types");
-			this._Types = types;
+			this._Types = types.Select(s => (TypeNameMarker)s); ;
 			return this;
 		}
 		public IQueryPathDescriptor Types(params string[] types)
@@ -52,7 +52,8 @@ namespace Nest
 		public IQueryPathDescriptor Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-			return this.Types((IEnumerable<string>)types.Select(t => this.typeNameResolver.GetTypeNameFor(t)).ToArray());
+			this._Types = types.Cast<TypeNameMarker>();
+			return this;
 		}
 		public IQueryPathDescriptor Types(params Type[] types)
 		{
@@ -61,13 +62,14 @@ namespace Nest
 		public IQueryPathDescriptor Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			this._Types = new[] { type };
+			this._Types = new[] { (TypeNameMarker)type };
 			return this;
 		}
 		public IQueryPathDescriptor Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(this.typeNameResolver.GetTypeNameFor(type));
+			this._Types = new[] { (TypeNameMarker)type };
+			return this;
 		}
 		public IQueryPathDescriptor AllIndices()
 		{

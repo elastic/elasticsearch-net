@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Globalization;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -62,6 +63,10 @@ namespace Nest
 		internal static bool IsNullOrEmpty(this string value)
 		{
 			return string.IsNullOrEmpty(value);
+		}
+		internal static bool IsNullOrEmpty(this TypeNameMarker value)
+		{
+			return value == null || value.GetHashCode() == 0;
 		}
 		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
 		{

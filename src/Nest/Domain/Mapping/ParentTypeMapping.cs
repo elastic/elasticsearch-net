@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest
 {
     public class ParentTypeMapping
     {
         [JsonProperty("type")]
-        public string Type { get; set; }
+		public TypeNameMarker Type { get; set; }
     }
 }

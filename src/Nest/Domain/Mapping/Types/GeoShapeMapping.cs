@@ -3,17 +3,21 @@ using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class GeoShapeMapping : IElasticType
 	{
 		[JsonIgnore]
-		public string Name { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
 
-		private string __type;
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; }
+
+		private TypeNameMarker __type;
 		[JsonProperty("type")]
-		public virtual string Type { get { return __type ?? "point"; } set { __type = value; } }
+		public virtual TypeNameMarker Type { get { return (TypeNameMarker)(__type ?? "point"); } set { __type = value; } }
 
     [JsonProperty("similarity")]
     public string Similarity { get; set; }

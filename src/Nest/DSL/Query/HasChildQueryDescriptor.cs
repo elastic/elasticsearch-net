@@ -24,7 +24,7 @@ namespace Nest
 			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
 		}
 		[JsonProperty("type")]
-		internal string _Type { get; set; }
+		internal TypeNameMarker _Type { get; set; }
 
 		[JsonProperty("_scope")]
 		internal string _Scope { get; set; }

@@ -1,4 +1,4 @@
-  {
+{
   "elasticsearchprojects": {
     "dynamic_templates": [{
       "template_1": {

@@ -140,7 +140,7 @@ namespace Nest
 			{
 				var proxy = new WebProxy();
 				var uri = new Uri(this._ConnectionSettings.ProxyAddress);
-				var credentials = new NetworkCredential(this._ConnectionSettings.Username, this._ConnectionSettings.Password);
+				var credentials = new NetworkCredential(this._ConnectionSettings.ProxyUsername, this._ConnectionSettings.ProxyPassword);
 				proxy.Address = uri;
 				proxy.Credentials = credentials;
 				myReq.Proxy = proxy;

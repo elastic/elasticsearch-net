@@ -13,7 +13,7 @@ namespace Nest.Tests.Unit.Core.AttributeBasedMap
 		protected string CreateMapFor(Type t)
 		{
 			var type = new TypeNameResolver().GetTypeNameFor(t);
-			var writer = new TypeMappingWriter(t, type);
+			var writer = new TypeMappingWriter(t, type, TestElasticClient.Settings, 10);
 
 			return writer.MapFromAttributes();
 		}

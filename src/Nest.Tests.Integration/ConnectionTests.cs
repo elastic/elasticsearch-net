@@ -48,14 +48,14 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void construct_client_with_null_or_empy_settings()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
+			Assert.Throws<UriFormatException>(() =>
 			{
 				string host = null;
-				var settings = new ConnectionSettings(host, 80);
+				var settings = new ConnectionSettings(new Uri("http://:80"));
 			});
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings(":asda:asdasd", 80);
+				var settings = new ConnectionSettings(new Uri(":asda:asdasd:80"));
 			});
 		}
 		[Test]
@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration
 		{
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings("some mangled hostname", 80);
+				var settings = new ConnectionSettings(new Uri("some mangled hostname:80"));
 			});
 			
 		}
@@ -72,7 +72,7 @@ namespace Nest.Tests.Integration
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var settings = new ConnectionSettings("youdontownthis.domain.do.you", 80);
+				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"));
 				var client = new ElasticClient(settings);
 				ConnectionStatus connectionStatus;
 				client.TryConnect(out connectionStatus);

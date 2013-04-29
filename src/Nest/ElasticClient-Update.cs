@@ -26,7 +26,7 @@ namespace Nest
 		private string CreateUpdatePath<T>(UpdateDescriptor<T> s) where T : class
 		{
 			var index = s._Index ?? this.IndexNameResolver.GetIndexForType<T>();
-			var type = s._Type ?? this.TypeNameResolver.GetTypeNameFor<T>();
+			var type = s._Type != null ? s._Type.Resolve(this.Settings) : this.GetTypeNameFor<T>();
 			var id = s._Id ?? this.IdResolver.GetIdFor(s._Object);
 
 			index.ThrowIfNullOrEmpty("index");

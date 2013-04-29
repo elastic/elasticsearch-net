@@ -24,7 +24,7 @@ namespace Nest
 		}
 
 		[JsonProperty("type")]
-		internal string _Type { get; set; }
+		internal TypeNameMarker _Type { get; set; }
 
 		[JsonProperty("_scope")]
 		internal string _Scope { get; set;}

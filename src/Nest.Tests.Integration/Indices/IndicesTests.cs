@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Indices
 			settings.NumberOfShards = 8;
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
-			typeMapping.Name = index;
+			typeMapping.TypeNameMarker = index;
 			settings.Mappings.Add(typeMapping);
 
 			settings.Add("merge.policy.merge_factor", "10");
@@ -98,7 +98,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var client = this._client;
 			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
-			typeMapping.Name = "mytype";
+			typeMapping.TypeNameMarker = "mytype";
 			var settings = new IndexSettings();
 			settings.Mappings.Add(typeMapping);
 			settings.NumberOfReplicas = 1;
@@ -195,7 +195,7 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 
 			var typeMapping = new RootObjectMapping();
-			typeMapping.Name = Guid.NewGuid().ToString("n");
+			typeMapping.TypeNameMarker = Guid.NewGuid().ToString("n");
 			var property = new MultiFieldMapping();
 
 			var primaryField = new StringMapping()
@@ -225,8 +225,8 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.OK);
 
-
-			Assert.IsNotNull(this._client.GetMapping(indexName, typeMapping.Name));
+			var typeName = typeMapping.TypeNameMarker.Resolve(this._settings);
+			Assert.IsNotNull(this._client.GetMapping(indexName, typeName));
 
 			var deleteResponse = client.DeleteIndex(indexName);
 

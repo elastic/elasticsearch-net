@@ -39,8 +39,7 @@ namespace Nest.Tests.Unit.Core.AttributeBasedMap
 		public void TestDeepObjectResursiveWriter()
 		{
 			//make sure we dont stackoverflow because of a never ending recursion
-			var json = this.CreateMapFor<NestedRecursiveMapParent>();
-			this.JsonEquals(json, System.Reflection.MethodInfo.GetCurrentMethod());
+		  Assert.DoesNotThrow(() => this.CreateMapFor<NestedRecursiveMapParent>() );
 		}
 	}
 }

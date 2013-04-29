@@ -16,7 +16,9 @@ namespace Nest.Tests.Integration
 			if (port == null && Process.GetProcessesByName("fiddler").HasAny())
 				host = "localhost.fiddler";
 
-			return new ConnectionSettings(host, port ?? Test.Default.Port)
+			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
+
+			return new ConnectionSettings(uri)
 				.SetDefaultIndex(ElasticsearchConfiguration.DefaultIndex)
 				.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 				.UsePrettyResponses();

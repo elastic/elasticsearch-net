@@ -32,7 +32,7 @@ namespace Nest
 		internal string _Parent { get; set; }
 		internal string _Routing { get; set; }
 		internal string _Index { get; set; }
-		internal string _Type { get; set; }
+		internal TypeNameMarker _Type { get; set; }
 		internal string _Id { get; set; }
 		internal T _Object { get; set; }
 
@@ -64,7 +64,8 @@ namespace Nest
 		public UpdateDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			return this.Type(this.typeNameResolver.GetTypeNameFor(type));
+			this._Type = type;
+			return this;
 		}
 		public UpdateDescriptor<T> Routing(string routing)
 		{

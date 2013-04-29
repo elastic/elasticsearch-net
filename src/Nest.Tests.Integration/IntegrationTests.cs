@@ -6,6 +6,7 @@ using Nest;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Nest.Resolvers;
 
 namespace Nest.Tests.Integration
 {
@@ -20,6 +21,14 @@ namespace Nest.Tests.Integration
 			
 		}
 
+		protected string GetTypeNameFor<T>() where T : class
+		{
+			return this.GetTypeNameFor(typeof (T));
+		}
+		protected string GetTypeNameFor(Type t)
+		{
+			return new TypeNameResolver().GetTypeNameFor(t).Resolve(this._settings);
+		}
 
 		public void DoFilterTest(Func<FilterDescriptor<ElasticSearchProject>, Nest.BaseFilter> filter, ElasticSearchProject project, bool queryMustHaveResults)
 		{

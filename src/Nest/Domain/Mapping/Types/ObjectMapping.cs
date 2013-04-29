@@ -2,16 +2,23 @@ using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
+using Nest.Resolvers;
 
 namespace Nest
 {
-	public class ObjectMapping :  IElasticType
+	public class ObjectMapping : IElasticType
 	{
 		[JsonIgnore]
+		public TypeNameMarker TypeNameMarker { get; set; }
+
+		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
 
 		[JsonProperty("type")]
-		public virtual string Type { get { return "object"; } }
+		public virtual TypeNameMarker Type
+		{
+			get { return new TypeNameMarker { Name = "object" }; }
+		}
 
     [JsonProperty("similarity")]
     public string Similarity { get; set; }

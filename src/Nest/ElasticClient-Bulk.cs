@@ -33,7 +33,7 @@ namespace Nest
 							new IndexNameResolver(this.Settings).GetIndexForType(operation._ClrType);
 				var typeName = operation._Type
 				               ?? bulkDescriptor._FixedType
-				               ?? new TypeNameResolver().GetTypeNameForType(operation._ClrType);
+				               ?? this.GetTypeNameFor(operation._ClrType);
 
 				var id = operation.GetIdForObject(this.IdResolver);
 				operation._Index = index;
@@ -139,7 +139,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}
@@ -149,7 +149,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}

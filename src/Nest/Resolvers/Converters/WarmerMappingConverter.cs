@@ -26,7 +26,8 @@ namespace Nest.Resolvers.Converters
 										JsonSerializer serializer)
 		{
 			var jObject = JObject.Load(reader);
-			var types = ((JArray)jObject.Property("types").Value).Values<string>().ToArray();
+			var types = ((JArray)jObject.Property("types").Value).Values<string>().ToArray()
+				.Cast<TypeNameMarker>();
 			var source = jObject.Property("source").Value.ToString();
 
 			return new WarmerMapping { Types = types, Source = source };

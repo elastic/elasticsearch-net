@@ -13,6 +13,12 @@ namespace Nest
 	public class CreateIndexDescriptor
 	{
 		internal IndexSettings _IndexSettings = new IndexSettings();
+		private readonly IConnectionSettings _connectionSettings;
+
+		public CreateIndexDescriptor(IConnectionSettings connectionSettings)
+		{
+			this._connectionSettings = connectionSettings;
+		}
 
 		private readonly JsonSerializerSettings serializationSettings;
 
@@ -72,9 +78,8 @@ namespace Nest
 		/// </summary>
 		public CreateIndexDescriptor RemoveMapping(string typeName)
 		{
-			this._IndexSettings.Mappings = this._IndexSettings.Mappings.Where(m => m.Type != typeName).ToList();
-
-			return this;
+			TypeNameMarker marker = typeName;
+			return this.RemoveMapping(marker);
 		}
 
 		/// <summary>
@@ -82,8 +87,14 @@ namespace Nest
 		/// </summary>
 		public CreateIndexDescriptor RemoveMapping<T>() where T : class
 		{
-			var typeName = new TypeNameResolver().GetTypeNameFor<T>();
-			return this.RemoveMapping(typeName);
+			TypeNameMarker marker = typeof(T);
+			return this.RemoveMapping(marker);
+		}
+
+		private CreateIndexDescriptor RemoveMapping(TypeNameMarker marker)
+		{
+			this._IndexSettings.Mappings = this._IndexSettings.Mappings.Where(m => m.Type != marker).ToList();
+			return this;
 		}
 
 		/// <summary>
@@ -92,7 +103,7 @@ namespace Nest
 		public CreateIndexDescriptor AddMapping<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>());
+			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this._connectionSettings));
 			var typeMapping = d._Mapping;
 			this._IndexSettings.Mappings.Add(typeMapping);
 
@@ -106,7 +117,7 @@ namespace Nest
 		public CreateIndexDescriptor AddMapping<T>(RootObjectMapping rootObjectMapping, Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>() { _Mapping = rootObjectMapping });
+			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping });
 			var typeMapping = d._Mapping;
 			this._IndexSettings.Mappings.Add(typeMapping);
 

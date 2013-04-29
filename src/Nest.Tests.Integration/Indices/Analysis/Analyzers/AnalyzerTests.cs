@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 			settingsResult.Should().NotBeNull();
 			settingsResult.Properties.Should().NotBeNull();
 			settingsResult.Properties["txt"].Should().NotBeNull();
-			settingsResult.Properties["txt"].Type.Should().NotBeNullOrEmpty().And.BeEquivalentTo("string");
+			settingsResult.Properties["txt"].Type.Name.Should().NotBeNullOrEmpty().And.BeEquivalentTo("string");
 
 			var validateResult = this._client.Analyze<AnalyzerTest>(p => p.Txt, index, text);
 			validateResult.Should().NotBeNull();

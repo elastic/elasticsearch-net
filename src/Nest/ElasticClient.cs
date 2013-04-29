@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Nest.Resolvers;
@@ -61,8 +62,12 @@ namespace Nest
 			this.IndexNameResolver = new IndexNameResolver(settings);
 			this.PathResolver = new PathResolver(settings);
 
+			this._defaultConverters.Add(new TypeNameMarkerConverter(this.Settings));
+			this._defaultConverters.Add(new IndexSettingsConverter(this.Settings));
+
 			this.SerializationSettings = this.CreateSettings();
 			var indexSettings = this.CreateSettings();
+
 			indexSettings.ContractResolver = new ElasticCamelCaseResolver();
 			this.IndexSerializationSettings = indexSettings;
 			this.PropertyNameResolver = new PropertyNameResolver();
