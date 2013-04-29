@@ -17,6 +17,7 @@ namespace Nest
 		internal virtual TypeNameMarker _Type { get; set; }
 		internal virtual string _Id { get; set; }
 		internal virtual IList<string> _Fields { get; set; }
+		internal virtual string _Routing { get; set; }
 
 		internal virtual Type _ClrType { get; set; }
 	}
@@ -27,6 +28,7 @@ namespace Nest
 		internal override string _Index { get; set; }
 		internal override TypeNameMarker _Type { get; set; }
 		internal override string _Id { get; set; }
+		internal override string _Routing { get; set; }
 		internal override IList<string> _Fields { get; set; }
 
 		internal override Type _ClrType { get { return typeof(T); } }
@@ -76,6 +78,16 @@ namespace Nest
 		public SimpleGetDescriptor<T> Id(string id)
 		{
 			this._Id = id;
+			return this;
+		}
+
+		/// <summary>
+		/// Set the routing for the get operation
+		/// </summary>
+		public SimpleGetDescriptor<T> Routing(string routing)
+		{
+			routing.ThrowIfNullOrEmpty("routing");
+			this._Routing = routing;
 			return this;
 		}
 

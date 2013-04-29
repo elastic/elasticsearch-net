@@ -74,14 +74,14 @@ namespace Nest
 					var index = string.IsNullOrEmpty(g._Index) ? this.IndexNameResolver.GetIndexForType(g._ClrType) : g._Index;
 					properties.Add(@"""_index"" : " + this.Serialize(index));
 				}
-
 				if (descriptor._FixedType.IsNullOrEmpty())
 				{
 					var type = this.ResolveTypeName(g._Type, this.GetTypeNameFor(g._ClrType));
 					properties.Add(@"""_type"" : " + this.Serialize(type));
 				}
 				properties.Add(@"""_id"" : " + this.Serialize(g._Id));
-
+				if (!g._Routing.IsNullOrEmpty())
+					properties.Add(@"""_routing"" : " + this.Serialize(g._Routing));
 				if (g._Fields.HasAny())
 					properties.Add(@"""fields"" : " + this.Serialize(g._Fields));
 
