@@ -142,5 +142,60 @@ namespace Nest.Tests.Integration.Search
             Assert.True(results.Hits.Hits.All(h => h.PartialFields["partial1"].Origin.lon != 0 && h.PartialFields["partial1"].Origin.lat == 0));
         }
 
+        [Test]
+        public void TestCustomFiltersScore()
+        {
+            //Counting score with script and boost
+            var result = this._client.Search<ElasticSearchProject>(s => s
+                .From(0)
+                .Size(10)
+                .Query(q => q
+                    .CustomFiltersScore(cfs => cfs
+                        .Filters(f => f
+                            .Filter(fd => fd
+                                .Bool(bqd => bqd
+                                    .Should(x => x.Range(r => r.From(83).To(85).OnField(qfd => qfd.FloatValue)))))
+                            .Script("myVal*2"), f => f
+                            .Filter(fd => fd
+                                .Query(fq => fq
+                                    .QueryString(qs => qs
+                                        .Query("true")
+                                        .OnField(fs => fs.BoolValue)
+                                        .Operator(Operator.and))))
+                             .Boost(1.5F))
+                        .Query(qd => qd
+                            .QueryString(qs => qs
+                            .Query("Brazil")
+                                .OnField(fs => fs.Country)
+                                .Operator(Operator.and)))
+                        .ScoreMode(ScoreMode.total)
+                        .Params(x => x.Add("myVal", 0.6F)))));
+
+            //Counting score with boost only (1.2F equals myVal from script before)
+            var result2 = this._client.Search<ElasticSearchProject>(s => s
+                .From(0)
+                .Size(10)
+                .Query(q => q
+                    .CustomFiltersScore(cfs => cfs
+                        .Filters(f => f
+                            .Filter(fd => fd
+                                .Bool(bqd => bqd
+                                    .Should(x => x.Range(r => r.From(83).To(85).OnField(qfd => qfd.FloatValue)))))
+                            .Boost(1.2F), f => f
+                            .Filter(fd => fd
+                                .Query(fq => fq
+                                    .QueryString(qs => qs
+                                        .Query("true")
+                                        .OnField(fs => fs.BoolValue)
+                                        .Operator(Operator.and))))
+                             .Boost(1.5F))
+                        .Query(qd => qd
+                            .QueryString(qs => qs
+                            .Query("Brazil")
+                                .OnField(fs => fs.Country)
+                                .Operator(Operator.and)))
+                        .ScoreMode(ScoreMode.total))));
+            Assert.AreEqual(result.Hits.Hits.First().Score, result2.Hits.Hits.First().Score);
+        }
 	}
 }
