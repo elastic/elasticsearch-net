@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using Nest.Tests.MockData;
 
 namespace Nest.Tests.Integration.Search
 {
@@ -146,6 +147,7 @@ namespace Nest.Tests.Integration.Search
         public void TestCustomFiltersScore()
         {
             //Counting score with script and boost
+	        var defaultProject = NestTestData.Data.First();
             var result = this._client.Search<ElasticSearchProject>(s => s
                 .From(0)
                 .Size(10)
@@ -165,7 +167,7 @@ namespace Nest.Tests.Integration.Search
                              .Boost(1.5F))
                         .Query(qd => qd
                             .QueryString(qs => qs
-                            .Query("Brazil")
+                            .Query(defaultProject.Country)
                                 .OnField(fs => fs.Country)
                                 .Operator(Operator.and)))
                         .ScoreMode(ScoreMode.total)
@@ -191,7 +193,7 @@ namespace Nest.Tests.Integration.Search
                              .Boost(1.5F))
                         .Query(qd => qd
                             .QueryString(qs => qs
-                            .Query("Brazil")
+								.Query(defaultProject.Country)
                                 .OnField(fs => fs.Country)
                                 .Operator(Operator.and)))
                         .ScoreMode(ScoreMode.total))));
