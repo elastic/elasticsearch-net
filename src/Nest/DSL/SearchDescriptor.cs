@@ -89,18 +89,9 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
 			types.ThrowIfEmpty("types");
-			
-			var typeDictionary = types.ToDictionary(t => this.typeNameResolver.GetTypeNameFor(t));
-
-			//this._ConcreteTypeSelector = (o, h) =>
-			//{
-			//	Type t;
-			//	if (!typeDictionary.TryGetValue(h.Type, out t))
-			//		return typeof (T);
-			//	return t;
-			//};
-			this._Types = typeDictionary.Keys;
+			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
+			
 		}
 		/// <summary>
 		/// The types to execute the search on. Defaults to the inferred typename of T 

@@ -13,11 +13,18 @@ namespace Nest.Resolvers
 		public string Resolve(IConnectionSettings connectionSettings)
 		{
 			connectionSettings.ThrowIfNull("connectionSettings");
+
 			string typeName = this.Name;
 			if (this.Type == null)
 				return this.Name;
 			if (connectionSettings.DefaultTypeNames.TryGetValue(this.Type, out typeName))
 				return typeName;
+
+			if (this.Type != null)
+			{
+				typeName = Inflector.MakePlural(this.Type.Name).ToLower();
+				return typeName;
+			}
 			return this.Name;
 		}
 
@@ -29,6 +36,7 @@ namespace Nest.Resolvers
 		{
 			return new TypeNameMarker { Type = type };
 		}
+
 
 		public override int GetHashCode()
 		{
@@ -59,19 +67,18 @@ namespace Nest.Resolvers
 			return this.GetTypeNameForType(typeof(T));
 		}
 
-		public IEnumerable<string> GetTypeNamesFor(IEnumerable<Type> types)
+		public IEnumerable<TypeNameMarker> GetTypeNamesFor(IEnumerable<Type> types)
 		{
 			return types.Select(GetTypeNameFor).ToArray();
 		}
 
-		public string GetTypeNameForType(Type type)
+		public TypeNameMarker GetTypeNameForType(Type type)
 		{
 			var typeName = type.Name;
 			var att = new PropertyNameResolver().GetElasticPropertyFor(type);
 			if (att != null && !att.TypeNameMarker.IsNullOrEmpty())
 				typeName = att.TypeNameMarker.Name;
-			else
-				typeName = Inflector.MakePlural(type.Name).ToLower();
+
 			return new TypeNameMarker {Name = typeName, Type = type};
 		}
 

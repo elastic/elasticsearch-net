@@ -42,7 +42,7 @@ namespace Nest
 		public IQueryPathDescriptor Types(IEnumerable<string> types)
 		{
 			types.ThrowIfEmpty("types");
-			this._Types = types.Cast<TypeNameMarker>();
+			this._Types = types.Select(s => (TypeNameMarker)s); ;
 			return this;
 		}
 		public IQueryPathDescriptor Types(params string[] types)

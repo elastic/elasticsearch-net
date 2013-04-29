@@ -285,7 +285,7 @@ namespace Nest.Resolvers
 
 			string types;
 			if (descriptor._Types.HasAny())
-				types = string.Join(",", descriptor._Types);
+				types = this.JoinTypes(descriptor._Types);
 			else
 				types = null;
 

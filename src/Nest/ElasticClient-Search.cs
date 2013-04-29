@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Linq;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -172,9 +173,20 @@ namespace Nest
 
         private IQueryResponse<TResult> GetParsedResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> descriptor) where T : class where TResult : class
         {
+			
             if (descriptor._ConcreteTypeSelector == null)
             {
-                descriptor._ConcreteTypeSelector = (d, h) => typeof(TResult);
+				var typeDictionary = (descriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
+					.Where(t => t.Type != null)
+					.ToDictionary(t => t.Resolve(this.Settings), t => t.Type);
+
+				descriptor._ConcreteTypeSelector = (o, h) =>
+				{
+					Type t;
+					if (!typeDictionary.TryGetValue(h.Type, out t))
+						return typeof(TResult);
+					return t;
+				};
             }
 
             var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);

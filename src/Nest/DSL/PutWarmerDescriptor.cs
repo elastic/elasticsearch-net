@@ -13,7 +13,7 @@ namespace Nest
 	public class PutWarmerDescriptor
 	{
 		internal IEnumerable<string> _Indices { get; set; }
-		internal IEnumerable<string> _Types { get; set; }
+		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal string _WarmerName { get; set; }
 
 		internal bool _AllIndices { get; set; }
@@ -104,7 +104,7 @@ namespace Nest
 
 		public PutWarmerDescriptor Types(IEnumerable<string> types)
 		{
-			this._Types = types;
+			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 		}
 
@@ -115,7 +115,8 @@ namespace Nest
 
 		public PutWarmerDescriptor Types(IEnumerable<Type> types)
 		{
-			return this.Types(typeNameResolver.GetTypeNamesFor(types));
+			this._Types = types.Select(s => (TypeNameMarker)s);
+			return this;
 		}
 
 		public PutWarmerDescriptor Type(string type)
@@ -125,7 +126,7 @@ namespace Nest
 
 		public PutWarmerDescriptor Type(Type type)
 		{
-			return this.Type(typeNameResolver.GetTypeNameFor(type));
+			return this.Types(new[] { type });
 		}
 
 		public PutWarmerDescriptor Type<T>()

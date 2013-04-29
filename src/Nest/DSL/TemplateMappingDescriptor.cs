@@ -103,15 +103,14 @@ namespace Nest
 		public TemplateMappingDescriptor RemoveWarmer<T>()
 			where T : class
 		{
-			var typeName = new TypeNameResolver().GetTypeNameFor<T>();
-			return this.RemoveMapping(typeName);
-
+			TypeNameMarker marker = typeof (T);
+			this._TemplateMapping.Warmers.Remove(marker);
+			return this;
 		}
 		public TemplateMappingDescriptor RemoveWarmer(string typeName)
 		{
-			typeName.ThrowIfNull("typeName");
-			this._TemplateMapping.Warmers.Remove(typeName);
-
+			TypeNameMarker marker = typeName;
+			this._TemplateMapping.Warmers.Remove(marker);
 			return this;
 
 		}

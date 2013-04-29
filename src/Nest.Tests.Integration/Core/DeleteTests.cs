@@ -5,18 +5,9 @@ using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-
-namespace NCrunch.Framework
-{
-	public class SerialAttribute : Attribute
-	{
-	}
-}
-
 namespace Nest.Tests.Integration.Core
 {
-	[NCrunch.Framework.Serial]
-	[TestFixture]
+	[TestFixture, Ignore]
 	public class DeleteTests : IntegrationTests
 	{
 		private void ResetIndexes()

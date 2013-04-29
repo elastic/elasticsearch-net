@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -16,7 +17,7 @@ namespace Nest
 
 		public string Name { get; internal set; }
 
-		public IEnumerable<string> Types { get; internal set; }
+		public IEnumerable<TypeNameMarker> Types { get; internal set; }
 
 		public string Source { get; internal set; }
 
