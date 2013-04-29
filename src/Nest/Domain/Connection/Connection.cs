@@ -52,9 +52,6 @@ namespace Nest
 			return this.DoSynchronousRequest(connection, data);
 		}
 
-
-
-
 		public Task<ConnectionStatus> Get(string path)
 		{
 			var r = this.CreateConnection(path, "GET");
@@ -111,31 +108,18 @@ namespace Nest
 			return this.DoSynchronousRequest(connection, data);
 		}
 
-		private HttpWebRequest CreateConnection(string path, string method)
+		protected virtual HttpWebRequest CreateConnection(string path, string method)
 		{
-			var timeout = this._ConnectionSettings.Timeout;
-			var url = this._CreateUriString(path);
-			if (this._ConnectionSettings.UsesPrettyResponses)
-			{
-				var uri = new Uri(url);
-				url += (string.IsNullOrEmpty(uri.Query) ? "?" : "&") + "pretty=true";
-			}
-			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 
-            var myUri = this._ConnectionSettings.Uri;
-            if (myUri != null && !string.IsNullOrEmpty(myUri.UserInfo))
-            {
-                myReq.Headers["Authorization"] =
-                    "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
-            }
+			var myReq = this.CreateWebRequest(path, method);
+			this.SetBasicAuthorizationIfNeeded(myReq);
+			this.SetProxyIfNeeded(myReq);
+			return myReq;
+		}
 
-			myReq.Accept = "application/json";
-			myReq.ContentType = "application/json";
-
-			myReq.Timeout = timeout; // 1 minute timeout.
-			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
-			myReq.Method = method;
-
+		private void SetProxyIfNeeded(HttpWebRequest myReq)
+		{
+			myReq.Proxy = null;
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{
 				var proxy = new WebProxy();
@@ -145,6 +129,34 @@ namespace Nest
 				proxy.Credentials = credentials;
 				myReq.Proxy = proxy;
 			}
+		}
+
+		private void SetBasicAuthorizationIfNeeded(HttpWebRequest myReq)
+		{
+			var myUri = this._ConnectionSettings.Uri;
+			if (myUri != null && !string.IsNullOrEmpty(myUri.UserInfo))
+			{
+				myReq.Headers["Authorization"] =
+					"Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
+			}
+		}
+
+		private HttpWebRequest CreateWebRequest(string path, string method)
+		{
+			var url = this._CreateUriString(path);
+			if (this._ConnectionSettings.UsesPrettyResponses)
+			{
+				var uri = new Uri(url);
+				url += (string.IsNullOrEmpty(uri.Query) ? "?" : "&") + "pretty=true";
+			}
+			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
+			myReq.Accept = "application/json";
+			myReq.ContentType = "application/json";
+
+			var timeout = this._ConnectionSettings.Timeout;
+			myReq.Timeout = timeout; // 1 minute timeout.
+			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
+			myReq.Method = method;
 			return myReq;
 		}
 

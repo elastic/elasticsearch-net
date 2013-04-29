@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Nest;
 using System.Runtime.CompilerServices;
+using System.Collections.Concurrent;
 
 namespace Nest.Resolvers
 {
@@ -17,6 +18,8 @@ namespace Nest.Resolvers
 	public class PropertyNameResolver : ExpressionVisitor
 	{
 		private static readonly ElasticResolver ContractResolver = new ElasticResolver();
+
+		private static readonly ConcurrentDictionary<string, string> _memoizedExpressions = new ConcurrentDictionary<string, string>(); 
 
 		public IElasticPropertyAttribute GetElasticProperty(MemberInfo info)
 		{
@@ -64,15 +67,26 @@ namespace Nest.Resolvers
 
 		public string Resolve(Expression expression)
 		{
-			var stack = new Stack<string>();
-			var properties = new Stack<IElasticPropertyAttribute>();
-			Visit(expression, stack, properties);
-			return stack
-				.Aggregate(
-					new StringBuilder(),
-					(sb, name) =>
+			//We can rely on ToString() because we only work with 
+			//Property.Lookups.Only with Some.First().And[0].Mixin'd
+			//To get field names
+			var key = expression.ToString() + expression.Type.GetHashCode();
+			string resolved;
+			if (!_memoizedExpressions.TryGetValue(key, out resolved))
+			{
+
+				var stack = new Stack<string>();
+				var properties = new Stack<IElasticPropertyAttribute>();
+				Visit(expression, stack, properties);
+				resolved = stack
+					.Aggregate(
+						new StringBuilder(),
+						(sb, name) =>
 						(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
-				.ToString();
+					.ToString();
+				_memoizedExpressions.TryAdd(key, resolved);
+			}
+			return resolved;
 		}
 		public string ResolveToLastToken(Expression expression)
 		{

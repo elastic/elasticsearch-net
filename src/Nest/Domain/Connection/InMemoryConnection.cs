@@ -18,6 +18,7 @@ namespace Nest
 
 		}
 
+
 		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
 			var status = new ConnectionStatus("{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
