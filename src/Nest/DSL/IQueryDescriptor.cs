@@ -42,6 +42,9 @@ namespace Nest
     BaseQuery Text(Action<TextQueryDescriptor<T>> selector);
     BaseQuery TextPhrase(Action<TextPhraseQueryDescriptor<T>> selector);
     BaseQuery TextPhrasePrefix(Action<TextPhrasePrefixQueryDescriptor<T>> selector);
+	BaseQuery Match(Action<MatchQueryDescriptor<T>> selector);
+	BaseQuery MatchPhrase(Action<MatchPhraseQueryDescriptor<T>> selector);
+	BaseQuery MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<T>> selector);
     BaseQuery TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class;
 	BaseQuery Wildcard(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);
     BaseQuery Wildcard(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null);

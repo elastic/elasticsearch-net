@@ -49,6 +49,8 @@ namespace Nest
 		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "text")]
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "match")]
+		internal IDictionary<string, object> MatchQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "fuzzy")]
 		internal IDictionary<string, object> FuzzyQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "terms")]
@@ -87,6 +89,7 @@ namespace Nest
 
 		public QueryDescriptor<T> Strict(bool strict = true)
 		{
+			//TODO: is this clone really neccessary ?
 			var q = this.Clone();
 			q._Strict = strict;
 			return q;
@@ -122,6 +125,7 @@ namespace Nest
 				DismaxQueryDescriptor = DismaxQueryDescriptor,
 				FilteredQueryDescriptor = FilteredQueryDescriptor,
 				TextQueryDescriptor = TextQueryDescriptor,
+				MatchQueryDescriptor = MatchQueryDescriptor,
 				FuzzyQueryDescriptor = FuzzyQueryDescriptor,
 				TermsQueryDescriptor = TermsQueryDescriptor,
 				QueryStringDescriptor = QueryStringDescriptor,
@@ -326,6 +330,69 @@ namespace Nest
 				{ query._Field, query}
 			};
 			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+		}
+
+		/// <summary>
+		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis 
+		/// process constructs a boolean query from the provided text.
+		/// </summary>
+		public BaseQuery Match(Action<MatchQueryDescriptor<T>> selector)
+		{
+			var query = new MatchQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for text query");
+
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			this.MatchQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+			return new QueryDescriptor<T> { MatchQueryDescriptor = this.MatchQueryDescriptor };
+		}
+
+		/// <summary>
+		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text. 
+		/// </summary>
+		public BaseQuery MatchPhrase(Action<MatchPhraseQueryDescriptor<T>> selector)
+		{
+			var query = new MatchPhraseQueryDescriptor<T>();
+			selector(query);
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for text_phrase query");
+
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			this.MatchQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+			return new QueryDescriptor<T> { MatchQueryDescriptor = this.MatchQueryDescriptor };
+		}
+
+		/// <summary>
+		/// The text_phrase_prefix is the same as text_phrase, expect it allows for prefix matches on the last term 
+		/// in the text
+		/// </summary>
+		public BaseQuery MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<T>> selector)
+		{
+			var query = new MatchPhrasePrefixQueryDescriptor<T>();
+			selector(query);
+
+			if (string.IsNullOrWhiteSpace(query._Field))
+				throw new DslException("Field name not set for text_phrase query");
+
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			this.MatchQueryDescriptor = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+			return new QueryDescriptor<T> { MatchQueryDescriptor = this.MatchQueryDescriptor };
 		}
 
 		/// <summary>

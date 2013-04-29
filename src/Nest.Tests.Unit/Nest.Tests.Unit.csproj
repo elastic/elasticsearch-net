@@ -159,6 +159,7 @@
     <Compile Include="Search\Query\ConditionLessStrict\ConditionLessStrictTests.cs" />
     <Compile Include="Search\Query\ConditionLessStrict\SemiStrictBoolTests.cs" />
     <Compile Include="Search\Query\QueriesInQueries\QueriesInQueriesTests.cs" />
+    <Compile Include="Search\Query\Singles\MatchQueryJson.cs" />
     <Compile Include="Search\Query\UpdateQuery\UpdateQueriesTests.cs" />
     <Compile Include="Search\Query\Singles\BoolQueryJson.cs" />
     <Compile Include="Search\Query\Singles\BoostingQueryJson.cs" />

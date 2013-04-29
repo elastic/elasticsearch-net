@@ -77,6 +77,9 @@
     <Compile Include="DSL\CreateWarmerDescriptor.cs" />
     <Compile Include="DSL\PutWarmerDescriptor.cs" />
     <Compile Include="DSL\GetWarmerDescriptor.cs" />
+    <Compile Include="DSL\Query\MatchPhrasePrefixQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\MatchPhraseQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\MatchQueryDescriptor.cs" />
     <Compile Include="DSL\Query\CustomFiltersScoreDescriptor.cs" />
     <Compile Include="DSL\Query\FilterScoreDescriptor.cs" />
     <Compile Include="ElasticClient-Warmers.cs" />

@@ -202,6 +202,21 @@ namespace Nest
 			return new QueryDescriptor<T>().TextPhrasePrefix(selector);
 		}
 
+		public static BaseQuery Match(Action<MatchQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().Match(selector);
+		}
+
+		public static BaseQuery MatchPhrase(Action<MatchPhraseQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().MatchPhrase(selector);
+		}
+
+		public static BaseQuery MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().MatchPhrasePrefix(selector);
+		}
+
 		public static BaseQuery TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
 		{
 			return new QueryDescriptor<T>().TopChildren<K>(selector);
