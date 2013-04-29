@@ -25,9 +25,9 @@ namespace Nest
 			this._Mapping.IndexName = indexName;
 			return this;
 		}
-		public IPMappingDescriptor<T> Index(bool index = true)
+		public IPMappingDescriptor<T> NoIndex()
 		{
-			this._Mapping.Index = index;
+			this._Mapping.Index = false;
 			return this;
 		}
 		public IPMappingDescriptor<T> Store(bool store = true)

@@ -15,6 +15,9 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "string" }; } }
 
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; set; }
+
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
 		/// </summary>

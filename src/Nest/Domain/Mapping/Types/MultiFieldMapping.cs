@@ -11,6 +11,9 @@ namespace Nest
 		[JsonIgnore]
 		public TypeNameMarker TypeNameMarker { get; set; }
 
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; }
+
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "multi_field" }; } }
 

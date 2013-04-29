@@ -109,6 +109,8 @@ namespace Nest.Resolvers.Converters
 				if (mapping == null)
 					continue;
 
+				mapping.Name = name;
+
 				r.Add(name, mapping);
 
 			}

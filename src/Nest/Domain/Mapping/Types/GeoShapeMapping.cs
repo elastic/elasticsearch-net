@@ -12,6 +12,9 @@ namespace Nest
 		[JsonIgnore]
 		public TypeNameMarker TypeNameMarker { get; set; }
 
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; }
+
 		private TypeNameMarker __type;
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return (TypeNameMarker)(__type ?? "point"); } set { __type = value; } }

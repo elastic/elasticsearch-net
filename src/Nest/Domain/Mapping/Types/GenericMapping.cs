@@ -13,8 +13,11 @@ namespace Nest
 	/// </summary>
 	public class GenericMapping : IElasticType, IElasticCoreType
 	{
-		[JsonProperty("name")]
+		[JsonIgnore]
 		public TypeNameMarker TypeNameMarker { get; set; }
+
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; set; }
 
 		[JsonProperty("type")]
 		public TypeNameMarker Type { get; set; }
@@ -59,7 +62,7 @@ namespace Nest
 
 	[Obsolete("Please switch to GenericMapping or a strict *Mapping class such as StringMapping/NumberMapping/MultiFieldMapping, will be removed in the 1.0 release")]
 	public class TypeMappingProperty : GenericMapping
-    {
-       
-    }
+	{
+
+	}
 }

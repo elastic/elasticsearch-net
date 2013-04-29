@@ -6,14 +6,18 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class ObjectMapping :  IElasticType
+	public class ObjectMapping : IElasticType
 	{
 		[JsonIgnore]
 		public TypeNameMarker TypeNameMarker { get; set; }
 
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; set; }
+
 		[JsonProperty("type")]
-		public virtual TypeNameMarker Type {
-			get { return new TypeNameMarker {Name = "object"}; }
+		public virtual TypeNameMarker Type
+		{
+			get { return new TypeNameMarker { Name = "object" }; }
 		}
 
 		[JsonProperty("dynamic")]

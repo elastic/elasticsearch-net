@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 			mapping.Properties.Should().NotBeEmpty();
 			var nameMapping = mapping.Properties["name"] as StringMapping;
 			nameMapping.Should().NotBeNull();
-			nameMapping.TypeNameMarker.Name.Should().NotBeNullOrEmpty().And.Equals("name");
+			nameMapping.Name.Should().NotBeNullOrEmpty().And.Equals("name");
 			nameMapping.IndexName.Should().NotBeNullOrEmpty().And.Equals("my_crazy_name_i_want_in_lucene");
 		}
 		[Test]
@@ -203,7 +203,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 						.Name(p => p.PingIP)
 						.Boost(0.7)
 						.IncludeInAll()
-						.Index()
+						.NoIndex()
 						.IndexName("ip")
 						.NullValue("0.0.0.0")
 						.PrecisionStep(4)

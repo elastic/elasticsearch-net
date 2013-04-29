@@ -3,9 +3,9 @@
     "properties": {
       "pingIP": {
         "index_name": "ip",
-        "type": "multi_field",
+        "type": "ip",
         "store": "yes",
-        "index": "yes",
+        "index": "no",
         "precision_step": 4,
         "boost": 0.7,
         "null_value": "0.0.0.0",

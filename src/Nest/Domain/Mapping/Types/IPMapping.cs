@@ -11,6 +11,8 @@ namespace Nest
 		[JsonIgnore]
 		public TypeNameMarker TypeNameMarker { get; set; }
 
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; }
 
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
