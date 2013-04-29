@@ -22,7 +22,7 @@ namespace Nest.Resolvers
 
 			if (this.Type != null)
 			{
-				typeName = Inflector.MakePlural(this.Type.Name).ToLower();
+				typeName = connectionSettings.DefaultTypeNameInferrer(this.Type);
 				return typeName;
 			}
 			return this.Name;

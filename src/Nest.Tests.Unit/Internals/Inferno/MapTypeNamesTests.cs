@@ -62,5 +62,25 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			searchPath = c.GetSearchPathForTyped(new SearchDescriptor<Developer>());
 			StringAssert.Contains("/codemonkey/", searchPath);
 		}
+
+		[Test]
+		public void DefaultTypeNamesTakePrecedenceOverCustomTypeNameInferrer()
+		{
+			var clientSettings = new ConnectionSettings(Test.Default.Uri)
+				.SetDefaultIndex("mydefaultindex")
+				.MapDefaultTypeNames(p => p
+					.Add(typeof(Developer), "codemonkey")
+				)
+				.SetDefaultTypeNameInferrer(t=>t.Name.ToUpperInvariant())
+				;
+
+			TypeNameMarker marker = typeof(Developer);
+			marker.Resolve(clientSettings).Should().Be("codemonkey");
+
+			//Should use the custom type name inferrer that upper cases
+			marker = typeof(NoopObject);
+			marker.Resolve(clientSettings).Should().Be("NOOPOBJECT");
+
+		}
 	}
 }

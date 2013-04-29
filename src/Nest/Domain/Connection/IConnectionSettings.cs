@@ -21,5 +21,7 @@ namespace Nest
 		int MaximumAsyncConnections { get; }
 		bool UsesPrettyResponses { get; }
 		Uri Uri { get; }
+
+		Func<Type, string> DefaultTypeNameInferrer { get; }
 	}
 }

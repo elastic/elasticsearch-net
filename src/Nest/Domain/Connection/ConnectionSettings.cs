@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nest.Resolvers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,7 @@ namespace Nest
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
 
+		public Func<Type, string> DefaultTypeNameInferrer { get; private set; }
 		public FluentDictionary<Type, string> DefaultIndices { get; private set; }
 		public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
 
@@ -43,6 +45,7 @@ namespace Nest
 			this.Port = uri.Port;
 
 			this.MaximumAsyncConnections = 20;
+			this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
 			this.DefaultIndices = new FluentDictionary<Type, string>();
 			this.DefaultTypeNames = new FluentDictionary<Type, string>();
 		}
@@ -105,7 +108,18 @@ namespace Nest
 			this.UsesPrettyResponses = b;
 			return this;
 		}
-		
+		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
+		{
+			type.ThrowIfNull("type");
+			return Inflector.MakePlural(type.Name).ToLower();
+		}
+		public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
+		{
+			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
+			this.DefaultTypeNameInferrer = defaultTypeNameInferrer;
+			return this;
+		}
+
 		public ConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");			
