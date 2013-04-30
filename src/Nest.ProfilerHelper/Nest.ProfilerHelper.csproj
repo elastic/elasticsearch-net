@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\BaseAction.cs" />
+    <Compile Include="Actions\SearchResultAction.cs" />
     <Compile Include="Actions\IndexAction.cs" />
     <Compile Include="Actions\SearchAction.cs" />
-    <Compile Include="IndexArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Nest.Resolvers
 {
+	[JsonConverter(typeof(TypeNameMarkerConverter))]
 	public class TypeNameMarker : IEquatable<TypeNameMarker>
 	{
 		public string Name { get; set; }

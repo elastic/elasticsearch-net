@@ -21,9 +21,16 @@ namespace Nest.ProfilerHelper
 
 			public IndexActionArgs IndexArgs { get; set; }
 
+			public SearchResultActionArgs SearchResultArgs { get; set; }
+
 			public static void Search(SearchActionArgs args)
 			{
 				SearchAction.Search(args);
+			}
+
+			public static void SearchResult(SearchResultActionArgs args)
+			{
+				SearchResultAction.SearchResult(args);
 			}
 
 			public static void Index(IndexActionArgs args)

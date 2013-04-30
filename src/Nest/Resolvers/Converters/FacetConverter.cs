@@ -32,13 +32,13 @@ namespace Nest.Resolvers.Converters
 				switch (type)
 				{
 					case "terms":
-						return serializer.Deserialize(o.CreateReader(), typeof (TermFacet));
+						return serializer.Deserialize(o.CreateReader(), typeof(TermFacet));
 
 					case "range":
 						var firstRange = o.Value<JArray>("ranges")[0];
 						if (firstRange.Value<string>("from_str") != null || firstRange.Value<string>("to_str") != null)
 						{
-							return serializer.Deserialize(o.CreateReader(), typeof (DateRangeFacet));
+							return serializer.Deserialize(o.CreateReader(), typeof(DateRangeFacet));
 						}
 						else
 						{
@@ -46,8 +46,8 @@ namespace Nest.Resolvers.Converters
 						}
 
 					case "histogram":
-						return serializer.Deserialize(o.CreateReader(), typeof (HistogramFacet));
-							
+						return serializer.Deserialize(o.CreateReader(), typeof(HistogramFacet));
+
 					case "date_histogram":
 						return serializer.Deserialize(o.CreateReader(), typeof(DateHistogramFacet));
 
@@ -61,16 +61,16 @@ namespace Nest.Resolvers.Converters
 					case "filter":
 						return serializer.Deserialize(o.CreateReader(), typeof(FilterFacet));
 					case "query":
-					  return serializer.Deserialize(o.CreateReader(), typeof(QueryFacet));
+						return serializer.Deserialize(o.CreateReader(), typeof(QueryFacet));
 				}
 			}
 
-      return serializer.Deserialize(o.CreateReader(), objectType);
+			return serializer.Deserialize(o.CreateReader(), objectType);
 		}
 
 		public override bool CanConvert(Type objectType)
 		{
-      return objectType == typeof(Facet);
+			return objectType == typeof(Facet);
 		}
 
 		#endregion

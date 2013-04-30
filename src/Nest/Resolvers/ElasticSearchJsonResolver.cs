@@ -10,10 +10,13 @@ using System.Globalization;
 
 namespace Nest.Resolvers
 {
-
 	public class ElasticResolver : DefaultContractResolver
 	{
-		public ElasticResolver() : base(true) { }
+		public IConnectionSettings ConnectionSettings { get; private set; }
+		public ElasticResolver(IConnectionSettings connectionSettings) : base(true)
+		{
+			this.ConnectionSettings = connectionSettings;
+		}
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
 		{
@@ -39,7 +42,7 @@ namespace Nest.Resolvers
 	}
 	public class ElasticCamelCaseResolver : ElasticResolver
 	{
-		public ElasticCamelCaseResolver() : base() { }
+		public ElasticCamelCaseResolver(IConnectionSettings connectionSettings) : base(connectionSettings) { }
 
 		protected override string ResolvePropertyName(string propertyName)
 		{

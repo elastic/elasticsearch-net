@@ -8,12 +8,6 @@ namespace Nest.Resolvers.Converters
 
 	public class IndexSettingsConverter : JsonConverter
 	{
-		private readonly IConnectionSettings _connectionSettings;
-
-		public IndexSettingsConverter(IConnectionSettings connectionSettings)
-		{
-			this._connectionSettings = connectionSettings;
-		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -111,8 +105,13 @@ namespace Nest.Resolvers.Converters
 			writer.WriteEndObject();
 			if (indexSettings.Mappings.Count > 0)
 			{
-				writer.WritePropertyName("mappings");
-				serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.TypeNameMarker.Resolve(this._connectionSettings)));
+				var settings = serializer.ContractResolver as ElasticResolver;
+				if (settings != null && settings.ConnectionSettings != null)
+				{
+					writer.WritePropertyName("mappings");
+					serializer.Serialize(writer,
+					                     indexSettings.Mappings.ToDictionary(m => m.TypeNameMarker.Resolve(settings.ConnectionSettings)));
+				}
 			}
 			if (indexSettings.Warmers.Count > 0)
 			{

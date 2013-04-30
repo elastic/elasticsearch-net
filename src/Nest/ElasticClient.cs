@@ -62,13 +62,13 @@ namespace Nest
 			this.IndexNameResolver = new IndexNameResolver(settings);
 			this.PathResolver = new PathResolver(settings);
 
-			this._defaultConverters.Add(new TypeNameMarkerConverter(this.Settings));
-			this._defaultConverters.Add(new IndexSettingsConverter(this.Settings));
+			//this._defaultConverters.Add(new TypeNameMarkerConverter(this.Settings));
+			//this._defaultConverters.Add(new IndexSettingsConverter(this.Settings));
 
 			this.SerializationSettings = this.CreateSettings();
 			var indexSettings = this.CreateSettings();
 
-			indexSettings.ContractResolver = new ElasticCamelCaseResolver();
+			indexSettings.ContractResolver = new ElasticCamelCaseResolver(this.Settings);
 			this.IndexSerializationSettings = indexSettings;
 			this.PropertyNameResolver = new PropertyNameResolver();
 

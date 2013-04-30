@@ -17,8 +17,6 @@ namespace Nest.Resolvers
 
 	public class PropertyNameResolver : ExpressionVisitor
 	{
-		private static readonly ElasticResolver ContractResolver = new ElasticResolver();
-
 		private static readonly ConcurrentDictionary<string, string> _memoizedExpressions = new ConcurrentDictionary<string, string>(); 
 
 		public IElasticPropertyAttribute GetElasticProperty(MemberInfo info)
@@ -55,8 +53,7 @@ namespace Nest.Resolvers
 		public string Resolve(MemberInfo info)
 		{
 			var name = info.Name;
-			var resolvedName = ContractResolver.Resolve(name);
-			resolvedName = resolvedName.ToCamelCase();
+			var resolvedName = name.ToCamelCase();
 			var att = this.GetElasticProperty(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				resolvedName = att.Name;
@@ -111,7 +108,7 @@ namespace Nest.Resolvers
 			if (stack != null)
 			{
 				var name = expression.Member.Name;
-				var resolvedName = ContractResolver.Resolve(name).ToCamelCase();
+				var resolvedName = name.ToCamelCase();
 
 				var att = this.GetElasticProperty(expression.Member);
 				if (att != null)

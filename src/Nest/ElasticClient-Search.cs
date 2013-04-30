@@ -194,10 +194,10 @@ namespace Nest
             return this.ToParsedResponse<QueryResponse<TResult>>(
                 status,
 
-                extraConverters: new[]
-                {
-	                new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, partialFields)
-                }
+				extraConverters: new[]
+				{
+					new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, partialFields)
+				}
             );
         }
     }
@@ -230,6 +230,7 @@ namespace Nest
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+			
             Hit<dynamic> hitDynamic = new Hit<dynamic>();
             // Load JObject from stream
             JObject jObject = JObject.Load(reader);

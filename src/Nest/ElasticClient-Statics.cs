@@ -18,15 +18,14 @@ namespace Nest
 		private readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
 		{
 			new IsoDateTimeConverter(),
-			new FacetConverter(),
-			new BulkOperationResponseItemConverter()
+			new FacetConverter()
 		};
 
 		private JsonSerializerSettings CreateSettings()
 		{
 			return new JsonSerializerSettings()
 			{
-				ContractResolver = new ElasticResolver(),
+				ContractResolver = new ElasticResolver(this.Settings),
 				NullValueHandling = NullValueHandling.Ignore,
 				DefaultValueHandling = DefaultValueHandling.Include,
 				Converters = _defaultConverters.Concat(_extraConverters).ToList()

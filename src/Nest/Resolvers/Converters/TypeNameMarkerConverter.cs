@@ -9,13 +9,6 @@ namespace Nest.Resolvers.Converters
 {
 	public class TypeNameMarkerConverter : JsonConverter
 	{
-		private readonly IConnectionSettings _connectionSettings;
-
-		public TypeNameMarkerConverter(IConnectionSettings connectionSettings)
-		{
-			this._connectionSettings = connectionSettings;
-		}
-
 		public override bool CanConvert(Type objectType)
 		{
 			return typeof(TypeNameMarker) == objectType;
@@ -29,9 +22,13 @@ namespace Nest.Resolvers.Converters
 				writer.WriteNull();
 				return;
 			}
-
-			var typeName = marker.Resolve(this._connectionSettings);
-			writer.WriteValue(typeName);
+			var settings = serializer.ContractResolver as ElasticResolver;
+			if (settings != null && settings.ConnectionSettings != null)
+			{
+				var typeName = marker.Resolve(settings.ConnectionSettings);
+				writer.WriteValue(typeName);
+			}
+			else throw new Exception("Could not find connection settings on the json contract resolver");
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

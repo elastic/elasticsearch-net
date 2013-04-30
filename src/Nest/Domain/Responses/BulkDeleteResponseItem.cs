@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
+	[JsonConverter(typeof(BulkOperationResponseItemConverter))]
 	public class BulkDeleteResponseItem : BulkOperationResponseItem
 	{
 		public override string Operation { get; internal set; }

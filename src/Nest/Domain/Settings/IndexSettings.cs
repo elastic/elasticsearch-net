@@ -8,6 +8,7 @@ namespace Nest
 	/// <summary>
 	/// Writing these uses a custom converter that ignores the json props
 	/// </summary>
+	[JsonConverter(typeof(IndexSettingsConverter))]
 	public class IndexSettings : IDictionary<string, object>
 	{
 		internal static readonly IEnumerable<string> UpdateWhiteList = new List<string>
