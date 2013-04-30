@@ -19,24 +19,21 @@ namespace Nest.ProfilerHelper
 
 			public SearchActionArgs SearchArgs { get; set; }
 
-			public IndexArgs IndexArgs { get; set; }
+			public IndexActionArgs IndexArgs { get; set; }
 
 			public static void Search(SearchActionArgs args)
 			{
 				SearchAction.Search(args);
 			}
 
-			public static void Index(IndexArgs args)
+			public static void Index(IndexActionArgs args)
 			{
+				IndexAction.Index(args);
 			}
 		}
 
 		
 
-		public class IndexArgs
-		{
-			
-		}
 
 		/// <summary>
 		/// Nest.ProfilerHelper is a simple console app I can use to profile different sections of NEST

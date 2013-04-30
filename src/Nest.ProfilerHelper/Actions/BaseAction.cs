@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nest.Tests.MockData;
+using Nest.Tests.MockData.Domain;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -29,6 +31,42 @@ namespace Nest.ProfilerHelper.Actions
 		public static string NewUniqueIndexName()
 		{
 			return "nest-profiling-" + Guid.NewGuid().ToString();
+		}
+
+		public static void Setup()
+		{
+			var client = BaseAction.Client;
+
+			if (client.IndexExists(BaseAction.DefaultIndex).Exists)
+				return;
+
+			var projects = NestTestData.Data;
+			var people = NestTestData.People;
+
+			client.CreateIndex(BaseAction.DefaultIndex, c => c
+				.NumberOfReplicas(0)
+				.NumberOfShards(1)
+				.AddMapping<ElasticSearchProject>(m => m.MapFromAttributes())
+				.AddMapping<Person>(m => m.MapFromAttributes())
+			);
+			client.CreateIndex(BaseAction.DefaultIndex + "_clone", c => c
+				.NumberOfReplicas(0)
+				.NumberOfShards(1)
+				.AddMapping<ElasticSearchProject>(m => m.MapFromAttributes())
+				.AddMapping<Person>(m => m.MapFromAttributes())
+			);
+
+			var bulkParameters = new SimpleBulkParameters() { Refresh = true };
+			client.IndexMany(projects, bulkParameters);
+			client.IndexMany(people, bulkParameters);
+			client.Refresh(new[] { BaseAction.DefaultIndex, BaseAction.DefaultIndex + "_clone" });
+
+		}
+
+		public static void TearDown()
+		{
+			var client = BaseAction.Client;
+			client.DeleteIndex(BaseAction.DefaultIndex + "," + BaseAction.DefaultIndex + "_*");
 		}
 	}
 }

@@ -13,36 +13,43 @@ namespace Nest
 	/// </summary>
 	public class InMemoryConnection : Connection
 	{
-		public InMemoryConnection(IConnectionSettings settings) : base(settings)
+		private ConnectionStatus _fixedResult;
+
+		public InMemoryConnection(IConnectionSettings settings)
+			: base(settings)
 		{
 
+		}
+		public InMemoryConnection(IConnectionSettings settings, ConnectionStatus fixedResult)
+			: base(settings)
+		{
+			this._fixedResult = fixedResult;
+			
 		}
 
 
 		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
-			var status = new ConnectionStatus("{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
+			return this.ReturnConnectionStatus(request, data);
+		}
+
+		private ConnectionStatus ReturnConnectionStatus(HttpWebRequest request, string data)
+		{
+			return this._fixedResult ?? new ConnectionStatus("{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
 			{
 				Request = data,
 				RequestUrl = request.RequestUri.ToString(),
 				RequestMethod = request.Method
 			};
-			return status;
 		}
 
 		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
 			{
-				var status = new ConnectionStatus("{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
-				{
-					Request = data,
-					RequestUrl = request.RequestUri.ToString(),
-					RequestMethod = request.Method
-				};
-				return status;
+				return this.ReturnConnectionStatus(request, data);
 			});
 		}
-	
+
 	}
 }

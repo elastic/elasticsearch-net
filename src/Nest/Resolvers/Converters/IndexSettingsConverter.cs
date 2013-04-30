@@ -72,43 +72,43 @@ namespace Nest.Resolvers.Converters
 
 			writer.WriteEndObject();
 
-      if (indexSettings.Similarity != null)
-      {
-        writer.WritePropertyName("similarity");
-        writer.WriteStartObject();
+			if (indexSettings.Similarity != null)
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStartObject();
 
-        if (!string.IsNullOrEmpty(indexSettings.Similarity.BaseSimilarity))
-        {
-          writer.WritePropertyName("base");
-          writer.WriteStartObject();
-          writer.WritePropertyName("type");
-          writer.WriteValue(indexSettings.Similarity.BaseSimilarity);
-          writer.WriteEndObject();
-        }
+				if (!string.IsNullOrEmpty(indexSettings.Similarity.BaseSimilarity))
+				{
+					writer.WritePropertyName("base");
+					writer.WriteStartObject();
+					writer.WritePropertyName("type");
+					writer.WriteValue(indexSettings.Similarity.BaseSimilarity);
+					writer.WriteEndObject();
+				}
 
-        if (indexSettings.Similarity.CustomSimilarities != null)
-        {
-          foreach (var customSimilarity in indexSettings.Similarity.CustomSimilarities)
-          {
-            writer.WritePropertyName(customSimilarity.Name);
-            writer.WriteStartObject();
-            writer.WritePropertyName("type");
-            writer.WriteValue(customSimilarity.Type);
-            if (customSimilarity.SimilarityParameters.HasAny())
-            {
-              foreach (var kv in customSimilarity.SimilarityParameters)
-              {
-                writer.WritePropertyName(kv.Key);
-                writer.WriteValue(kv.Value);
-              }
-            }
-            writer.WriteEndObject();
-          }
-        }
-        writer.WriteEndObject();
-      }
-      
-      writer.WriteEndObject();
+				if (indexSettings.Similarity.CustomSimilarities != null)
+				{
+					foreach (var customSimilarity in indexSettings.Similarity.CustomSimilarities)
+					{
+						writer.WritePropertyName(customSimilarity.Name);
+						writer.WriteStartObject();
+						writer.WritePropertyName("type");
+						writer.WriteValue(customSimilarity.Type);
+						if (customSimilarity.SimilarityParameters.HasAny())
+						{
+							foreach (var kv in customSimilarity.SimilarityParameters)
+							{
+								writer.WritePropertyName(kv.Key);
+								writer.WriteValue(kv.Value);
+							}
+						}
+						writer.WriteEndObject();
+					}
+				}
+				writer.WriteEndObject();
+			}
+
+			writer.WriteEndObject();
 			if (indexSettings.Mappings.Count > 0)
 			{
 				writer.WritePropertyName("mappings");
@@ -129,9 +129,10 @@ namespace Nest.Resolvers.Converters
 			return null;
 		}
 
+		private static Type _type = typeof (IndexSettings);
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(IndexSettings);
+			return objectType == _type;
 		}
 	}
 }
