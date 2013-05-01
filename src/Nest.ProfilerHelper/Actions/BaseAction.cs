@@ -16,7 +16,7 @@ namespace Nest.ProfilerHelper.Actions
 		{
 			var host = "localhost";
 			if (port == null && Process.GetProcessesByName("fiddler").Count() > 0)
-				host = "localhost.fiddler";
+				host = "ipv4.fiddler";
 
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 

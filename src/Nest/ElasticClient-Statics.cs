@@ -18,7 +18,8 @@ namespace Nest
 		private readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
 		{
 			new IsoDateTimeConverter(),
-			new FacetConverter()
+			new FacetConverter(),
+			new BulkOperationResponseItemConverter()
 		};
 
 		private JsonSerializerSettings CreateSettings()
@@ -66,11 +67,19 @@ namespace Nest
 		/// </summary>
 		public T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
 		{
+
 			var settings = this.SerializationSettings;
 			if (extraConverters.HasAny())
 			{
 				settings = this.CreateSettings();
-				settings.Converters = settings.Converters.Concat(extraConverters).ToList();
+				var concrete = extraConverters.OfType<ConcreteTypeConverter>().FirstOrDefault();
+				if (concrete != null)
+				{
+					((ElasticResolver) settings.ContractResolver).ConcreteTypeConverter = concrete;
+				}
+				else
+					settings.Converters = settings.Converters.Concat(extraConverters).ToList();
+				
 			}
 			return JsonConvert.DeserializeObject<T>(value, settings);
 		}

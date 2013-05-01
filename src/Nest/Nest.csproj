@@ -66,6 +66,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resolvers\Converters\ConcreteTypeConverter.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />
     <Compile Include="Domain\Mapping\Attributes\NestedPropertyAttribute.cs" />

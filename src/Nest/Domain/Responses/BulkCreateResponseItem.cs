@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(BulkOperationResponseItemConverter))]
 	public class BulkCreateResponseItem : BulkOperationResponseItem
 	{
 		public override string Operation { get; internal set; }

@@ -34,10 +34,7 @@ namespace Nest.Resolvers.Converters
 		{
 			var hit = new QueryResponse<T>();
 			var reader = tuple.Hit.CreateReader();
-			var concreteHitConverter = new ConcreteTypeConverter(typeof (T), (d, h) => typeof (T));
-			serializer.Converters.Add(concreteHitConverter);
 			serializer.Populate(reader, hit);
-			serializer.Converters.Remove(concreteHitConverter);
 
 			collection.Add(tuple.Descriptor.Key, hit);
 

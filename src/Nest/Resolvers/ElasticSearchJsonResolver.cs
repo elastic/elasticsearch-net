@@ -12,7 +12,17 @@ namespace Nest.Resolvers
 {
 	public class ElasticResolver : DefaultContractResolver
 	{
+		/// <summary>
+		/// ConnectionSettings can be requested by JsonConverter's.
+		/// </summary>
 		public IConnectionSettings ConnectionSettings { get; private set; }
+
+		/// <summary>
+		/// The ConcreteTypeConverter piggy backs on the resolver to inject meta data.
+		/// This is a bit of a hack but a massive performance gain.
+		/// </summary>
+		internal ConcreteTypeConverter ConcreteTypeConverter { get; set; }
+
 		public ElasticResolver(IConnectionSettings connectionSettings) : base(true)
 		{
 			this.ConnectionSettings = connectionSettings;

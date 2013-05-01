@@ -98,10 +98,9 @@ namespace Nest
 		internal QueryDescriptor<T> CreateConditionlessQueryDescriptor(IQuery query)
 		{
 			if (this._Strict)
-				throw new DslException("Query resulted in a conditionless {1} query (json by approx):\n{0}"
+				throw new DslException("Query resulted in a conditionless {0} query (json by approx):\n"
 					.F(
-						JsonConvert.SerializeObject(query, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
-						, query.GetType().Name.Replace("Descriptor", "").Replace("`1","")
+						query.GetType().Name.Replace("Descriptor", "").Replace("`1","")
 					)
 				);
 			return new QueryDescriptor<T> { IsConditionless = !this._Strict };
