@@ -24,10 +24,10 @@ namespace Nest.ProfilerHelper.Actions
 
 				for (var i = 0; i < 100; i++)
 				{
-					var result = client.Search<object>(s => s
+					var result = client.Search<Person>(s => s
 						.Size(2000)
-						.AllIndices()
-						.Types(typeof (Person), typeof (ElasticSearchProject))
+						.Index(BaseAction.DefaultIndex)
+						//.Types(typeof (Person), typeof (ElasticSearchProject))
 						.MatchAll()
 					);
 					result.Documents.Count();
@@ -41,10 +41,10 @@ namespace Nest.ProfilerHelper.Actions
 
 		private static ConnectionStatus GetValidConnectionStatus()
 		{
-			var result = BaseAction.Client.Search<object>(s => s
+			var result = BaseAction.Client.Search<Person>(s => s
 				  .Size(2000)
-				  .AllIndices()
-				  .Types(typeof(Person), typeof(ElasticSearchProject))
+				  .Index(BaseAction.DefaultIndex)
+				  //.Types(typeof(Person), typeof(ElasticSearchProject))
 				  .MatchAll()
 			);
 			return result.ConnectionStatus;

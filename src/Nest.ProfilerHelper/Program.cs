@@ -38,10 +38,7 @@ namespace Nest.ProfilerHelper
 				IndexAction.Index(args);
 			}
 		}
-
 		
-
-
 		/// <summary>
 		/// Nest.ProfilerHelper is a simple console app I can use to profile different sections of NEST
 		/// </summary>

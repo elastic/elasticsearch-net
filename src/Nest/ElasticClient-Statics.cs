@@ -18,8 +18,7 @@ namespace Nest
 		private readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
 		{
 			new IsoDateTimeConverter(),
-			new FacetConverter(),
-			new BulkOperationResponseItemConverter()
+			new FacetConverter()
 		};
 
 		private JsonSerializerSettings CreateSettings()

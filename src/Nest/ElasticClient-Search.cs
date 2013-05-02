@@ -170,11 +170,14 @@ namespace Nest
 
         private IQueryResponse<TResult> GetParsedResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> descriptor) where T : class where TResult : class
         {
-			
-            if (descriptor._ConcreteTypeSelector == null)
+	        var types = (descriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
+		        .Where(t => t.Type != null);
+			var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
+            if (descriptor._ConcreteTypeSelector == null && (
+				types.Any(t=>t.Type != typeof(TResult))) || partialFields.Any()
+				)
             {
-				var typeDictionary = (descriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
-					.Where(t => t.Type != null)
+				var typeDictionary = types
 					.ToDictionary(t => t.Resolve(this.Settings), t => t.Type);
 
 				descriptor._ConcreteTypeSelector = (o, h) =>
@@ -186,8 +189,9 @@ namespace Nest
 				};
             }
 
-            var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
-
+            
+	        if (descriptor._ConcreteTypeSelector == null)
+		        return this.ToParsedResponse<QueryResponse<TResult>>(status);
             return this.ToParsedResponse<QueryResponse<TResult>>(
                 status,
 

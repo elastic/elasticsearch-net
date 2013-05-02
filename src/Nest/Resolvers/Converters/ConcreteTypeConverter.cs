@@ -34,21 +34,54 @@ namespace Nest
 		{
 			var realConcreteConverter = ((ElasticResolver) serializer.ContractResolver).ConcreteTypeConverter;
 
-			// Load JObject from stream
-			JObject jObject = JObject.Load(reader);
-			Type concreteType;
 			if (realConcreteConverter != null)
-				concreteType = GetConcreteTypeUsingSelector(reader, realConcreteConverter, jObject);
-			else
-				concreteType = objectType.GetGenericArguments()[0];
-			var hitType = typeof(Hit<>).MakeGenericType(concreteType);
-			var hit = Activator.CreateInstance(hitType);
+			{
+				return GetUsingConcreteTypeConverter(reader, serializer, realConcreteConverter);
+			}
+			return ReadUsingGenericType(reader, objectType, serializer);
+		}
 
-			serializer.Populate(jObject.CreateReader(), hit);
+		private static object ReadUsingGenericType(JsonReader reader, Type objectType, JsonSerializer serializer)
+		{
+			var concreteType = GetConcreteTypeFromGenericArgument(objectType);
+			var hit = GetHitTypeInstance(concreteType);
+			PopulateHit(serializer, reader, hit);
+			return hit;
+		}
+
+		private static Type GetConcreteTypeFromGenericArgument(Type objectType)
+		{
+			var concreteType = objectType.GetGenericArguments()[0];
+			return concreteType;
+		}
+
+		private static object GetUsingConcreteTypeConverter(JsonReader reader, JsonSerializer serializer,
+		                                                    ConcreteTypeConverter realConcreteConverter)
+		{
+			var jObject = CreateIntermediateJObject(reader);
+			var concreteType = GetConcreteTypeUsingSelector(realConcreteConverter, jObject);
+			var hit = GetHitTypeInstance(concreteType);
+			PopulateHit(serializer, jObject.CreateReader(), hit);
 
 			AppendPartialFields(serializer, realConcreteConverter, concreteType, hit, jObject);
 
 			return hit;
+		}
+
+		private static void PopulateHit(JsonSerializer serializer, JsonReader reader, object hit) {
+			serializer.Populate(reader, hit);
+		}
+
+		private static JObject CreateIntermediateJObject(JsonReader reader)
+		{
+			JObject jObject = JObject.Load(reader);
+			return jObject;
+		}
+
+		private static object GetHitTypeInstance(Type concreteType)
+		{
+			var hitType = typeof (Hit<>).MakeGenericType(concreteType);
+			return hitType.CreateInstance();
 		}
 
 		private static void AppendPartialFields(JsonSerializer serializer, 
@@ -85,7 +118,6 @@ namespace Nest
 		}
 
 		private static dynamic GetConcreteTypeUsingSelector(
-			JsonReader reader, 
 			ConcreteTypeConverter realConcreteConverter,
 			JObject jObject)
 		{

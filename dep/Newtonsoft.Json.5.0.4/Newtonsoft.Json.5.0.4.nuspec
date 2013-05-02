@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Newtonsoft.Json</id>
-    <version>4.5.10</version>
+    <version>5.0.4</version>
     <title>Json.NET</title>
     <authors>James Newton-King</authors>
     <owners>James Newton-King</owners>
@@ -10,7 +10,12 @@
     <projectUrl>http://james.newtonking.com/projects/json-net.aspx</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Json.NET is a popular high-performance JSON framework for .NET</description>
+    <releaseNotes />
+    <copyright />
     <language>en-US</language>
     <tags>json</tags>
+    <references>
+      <reference file="Newtonsoft.Json.dll" />
+    </references>
   </metadata>
 </package>

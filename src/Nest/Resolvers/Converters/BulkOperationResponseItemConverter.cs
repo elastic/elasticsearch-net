@@ -8,7 +8,7 @@ namespace Nest.Resolvers.Converters
 
 	public class BulkOperationResponseItemConverter : JsonConverter
 	{
-
+		
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			throw new NotSupportedException();
@@ -24,17 +24,20 @@ namespace Nest.Resolvers.Converters
 			switch (key)
 			{
 				case "delete":
-					var deleteItem = (BulkDeleteResponseItem)serializer.Deserialize(prop.Value.CreateReader(), typeof(BulkDeleteResponseItem));
+					var deleteItem = new BulkDeleteResponseItem();
+					serializer.Populate(prop.Value.CreateReader(), deleteItem);
 					if (deleteItem != null)
 						deleteItem.Operation = key;
 					return deleteItem;
 				case "index":
-					var indexItem = (BulkIndexResponseItem)serializer.Deserialize(prop.Value.CreateReader(), typeof(BulkIndexResponseItem));
+					var indexItem = new BulkIndexResponseItem();
+					serializer.Populate(prop.Value.CreateReader(), indexItem);
 					if (indexItem != null)
 						indexItem.Operation = key;
 					return indexItem;
 				case "create":
-					var createItem = (BulkCreateResponseItem)serializer.Deserialize(prop.Value.CreateReader(), typeof(BulkCreateResponseItem));
+					var createItem = new BulkCreateResponseItem();
+					serializer.Populate(prop.Value.CreateReader(), createItem);
 					if (createItem != null)
 						createItem.Operation = key;
 					return createItem;
