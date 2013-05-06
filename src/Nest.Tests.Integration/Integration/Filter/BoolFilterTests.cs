@@ -6,6 +6,8 @@ namespace Nest.Tests.Integration.Integration.Filter
 	[TestFixture]
 	public class BoolFilterTests : IntegrationTests
 	{
+		//this test started to fail on 0.90.0
+		//see https://github.com/elasticsearch/elasticsearch/issues/2996
 		[Test]
 		public void BoolFilter()
 		{
