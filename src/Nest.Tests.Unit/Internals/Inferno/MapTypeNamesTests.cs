@@ -108,5 +108,21 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			marker.Resolve(clientSettings).Should().Be("custotypo");
 
 		}
+
+		[Test]
+		public void MapTypeIndicesTakesPrecedenceOverAttributeName()
+		{
+			var clientSettings = new ConnectionSettings(Test.Default.Uri)
+				.SetDefaultIndex("mydefaultindex")
+				.MapDefaultTypeNames(dt=>dt
+					.Add(typeof(MyCustomAtrributeName), "micutype")
+				)
+				.SetDefaultTypeNameInferrer(t => t.Name.ToUpperInvariant())
+				;
+
+			TypeNameMarker marker = typeof(MyCustomAtrributeName);
+			marker.Resolve(clientSettings).Should().Be("micutype");
+
+		}
 	}
 }

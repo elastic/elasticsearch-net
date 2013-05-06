@@ -41,6 +41,8 @@ namespace Nest
 			this.Timeout = 60*1000;
 
 			this.Uri = uri;
+			if (!uri.ToString().EndsWith("/"))
+				this.Uri = new Uri(uri.ToString() + "/");
 			this.Host = uri.Host;
 			this.Port = uri.Port;
 
