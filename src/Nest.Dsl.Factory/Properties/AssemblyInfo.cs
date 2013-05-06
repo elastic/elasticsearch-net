@@ -16,7 +16,7 @@
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
 [assembly: System.CLSCompliant(true)]
 [assembly: System.Runtime.InteropServices.Guid("665cc582-c91f-4f6c-924a-614289fa9449")]
-[assembly: System.Reflection.AssemblyVersion("0.10.0.0")]
-[assembly: System.Reflection.AssemblyFileVersion("0.10.0.0")]
+[assembly: System.Reflection.AssemblyVersion("0.10.1.0")]
+[assembly: System.Reflection.AssemblyFileVersion("0.10.1.0")]
 
 

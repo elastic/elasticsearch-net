@@ -267,16 +267,20 @@ namespace Nest
 		IIndicesOperationResponse Optimize(string index, OptimizeParams optimizeParameters);
 		IIndicesOperationResponse Optimize<T>() where T : class;
 		IIndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class;
-		IPercolateResponse Percolate<T>(string index, string type, T @object) where T : class;
-		IPercolateResponse Percolate<T>(string index, T @object) where T : class;
-		IPercolateResponse Percolate<T>(T @object) where T : class;
+
+		IPercolateResponse Percolate<T>(
+			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class;
 		IIndicesShardResponse Refresh();
 		IIndicesShardResponse Refresh(IEnumerable<string> indices);
 		IIndicesShardResponse Refresh(string index);
 		IIndicesShardResponse Refresh<T>() where T : class;
-		IRegisterPercolateResponse RegisterPercolatorRaw(string index, string name, string query);
-		IRegisterPercolateResponse RegisterPercolator(string name, Action<QueryPathDescriptor<dynamic>> querySelector);
-		IRegisterPercolateResponse RegisterPercolator<T>(string name, Action<QueryPathDescriptor<T>> querySelector) where T : class;
+
+		IRegisterPercolateResponse RegisterPercolator<T>(
+			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class;
+
+		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(
+			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class;
+
 		IIndicesOperationResponse RemoveAlias(AliasParams aliasParams);
 		IIndicesOperationResponse RemoveAlias(IEnumerable<string> aliases);
 		IIndicesOperationResponse RemoveAlias(string alias);

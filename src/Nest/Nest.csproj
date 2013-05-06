@@ -67,6 +67,9 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\PathAndData.cs" />
+    <Compile Include="DSL\PercolatorDescriptor.cs" />
+    <Compile Include="DSL\PercolateDescriptor.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Resolvers\Converters\ConcreteTypeConverter.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
