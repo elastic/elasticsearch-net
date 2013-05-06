@@ -40,6 +40,7 @@ namespace Nest.Tests.Integration.Search
 			//does a match_all on the default specified index
 			var countResults = this._client.Count<ElasticSearchProject>(q=>q
 				.Fuzzy(fq=>fq
+					.PrefixLength(4)
 					.OnField(f=>f.Followers.First().FirstName)
 					.Value(this._LookFor.ToLower())
 				)
@@ -56,6 +57,7 @@ namespace Nest.Tests.Integration.Search
 			var types = new[] { this.GetTypeNameFor<ElasticSearchProject>() };
 			var countResults = this._client.Count<ElasticSearchProject>(indices, types, q => q
 				.Fuzzy(fq => fq
+					.PrefixLength(4)
 					.OnField(f => f.Followers.First().FirstName)
 					.Value(this._LookFor.ToLower())
 				)

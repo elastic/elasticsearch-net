@@ -11,7 +11,8 @@ namespace Nest.Tests.Integration.Integration.Filter
 		{
 			var results = this._client.Search<ElasticSearchProject>(s=>s
 				.From(0)
-				.Size(10)
+				.Size(20)
+				.Fields(p=>p.Id, p=>p.Name, p=>p.LOC)
 				.Filter(filter=>filter
 					.Bool(b=>b
 						.Must(

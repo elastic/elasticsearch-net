@@ -119,7 +119,7 @@ namespace Nest
 
 		private void SetProxyIfNeeded(HttpWebRequest myReq)
 		{
-			myReq.Proxy = null;
+			//myReq.Proxy = null;
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{
 				var proxy = new WebProxy();

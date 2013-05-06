@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Nest
 {
@@ -7,6 +8,7 @@ namespace Nest
         bool OK { get; }
         ShardsMetaData Shards { get; }
         GlobalStats Stats { get; set; }
+		Dictionary<string, Stats> Indices { get; set; }
     }
 
     [JsonObject]
@@ -25,6 +27,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_all")]
 		public GlobalStats Stats { get; set; }
+
+		[JsonProperty(PropertyName = "indices")]
+		public Dictionary<string, Stats> Indices { get; set; }
 
 	}
 }
