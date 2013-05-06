@@ -39,6 +39,8 @@ namespace Nest.Resolvers
 			var att = attributes.First() as IElasticPropertyAttribute;
 			if (!att.Name.IsNullOrEmpty())
 				property.PropertyName = att.Name;
+
+			property.Ignored = att.OptOut;
 			return property;
 		}
 		protected override string ResolvePropertyName(string propertyName)
