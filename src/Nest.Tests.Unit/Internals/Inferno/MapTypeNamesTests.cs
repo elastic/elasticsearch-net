@@ -16,6 +16,9 @@ namespace Nest.Tests.Unit.Internals.Inferno
 
 		public class MyGeneric<T> where T : class {}
 
+		[ElasticType(Name = "custotypo")]
+		public class MyCustomAtrributeName { }
+
 		[Test]
 		public void ResolveToSepcifiedTypeNames()
 		{
@@ -90,6 +93,19 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			//Should use the custom type name inferrer that upper cases
 			marker = typeof(NoopObject);
 			marker.Resolve(clientSettings).Should().Be("NOOPOBJECT");
+
+		}
+
+		[Test]
+		public void AttributeTypeNamesTakePrecedenceOverDefaultTypeNameInferrer()
+		{
+			var clientSettings = new ConnectionSettings(Test.Default.Uri)
+				.SetDefaultIndex("mydefaultindex")
+				.SetDefaultTypeNameInferrer(t => t.Name.ToUpperInvariant())
+				;
+
+			TypeNameMarker marker = typeof(MyCustomAtrributeName);
+			marker.Resolve(clientSettings).Should().Be("custotypo");
 
 		}
 	}

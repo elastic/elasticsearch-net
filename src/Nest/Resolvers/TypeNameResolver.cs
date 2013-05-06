@@ -25,7 +25,13 @@ namespace Nest.Resolvers
 
 			if (this.Type != null)
 			{
-				typeName = connectionSettings.DefaultTypeNameInferrer(this.Type);
+				var att = new PropertyNameResolver().GetElasticPropertyFor(this.Type);
+				if (att != null && !att.TypeNameMarker.IsNullOrEmpty())
+					typeName = att.TypeNameMarker.Name;
+				else if (att != null && !string.IsNullOrEmpty(att.Name))
+					typeName = att.Name;
+				else
+					typeName = connectionSettings.DefaultTypeNameInferrer(this.Type);
 				return typeName;
 			}
 			return this.Name;
@@ -81,7 +87,8 @@ namespace Nest.Resolvers
 			var att = new PropertyNameResolver().GetElasticPropertyFor(type);
 			if (att != null && !att.TypeNameMarker.IsNullOrEmpty())
 				typeName = att.TypeNameMarker.Name;
-
+			else if (att != null && !string.IsNullOrEmpty(att.Name))
+				typeName = att.Name;
 			return new TypeNameMarker {Name = typeName, Type = type};
 		}
 
