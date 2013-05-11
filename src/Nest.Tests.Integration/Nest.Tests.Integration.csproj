@@ -143,6 +143,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Test.settings</DependentUpon>
     </Compile>
+    <Compile Include="Warmers\IndicesWarmersTests.cs" />
+    <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nest.Connection.Thrift\Nest.Connection.Thrift.csproj">

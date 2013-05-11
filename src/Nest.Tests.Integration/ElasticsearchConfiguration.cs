@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration
 		{
 			var host = Test.Default.Host;
 			if (port == null && Process.GetProcessesByName("fiddler").HasAny())
-				host = "local.localghost.io";
+				host = "ipv4.fiddler";
 
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 

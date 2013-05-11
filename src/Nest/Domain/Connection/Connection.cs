@@ -163,14 +163,39 @@ namespace Nest
 		protected virtual ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
 			var timeout = this._ConnectionSettings.Timeout;
-			var task = this.DoAsyncRequest(request, data);
-			task.Wait(timeout);
-			if (task.Result == null && task.IsCanceled)
+			if (data != null)
 			{
-				var m = "Operation did not complete before the set timeout of " + timeout + "ms";
-				return new ConnectionStatus(new TimeoutException(m));
+				using (var r = request.GetRequestStream())
+				{
+					byte[] buffer = Encoding.UTF8.GetBytes(data);
+					r.Write(buffer, 0, buffer.Length);
+				}
 			}
-			return task.Result;
+			try
+			{
+				using (var response = (HttpWebResponse)request.GetResponse())
+				using (var responseStream = response.GetResponseStream())
+				using (var streamReader = new StreamReader(responseStream))
+				{
+					string result = streamReader.ReadToEnd();
+					var cs = new ConnectionStatus(result)
+					{
+						Request = data,
+						RequestUrl = request.RequestUri.ToString(),
+						RequestMethod = request.Method
+					};
+					return cs;
+				}
+			}
+			catch (WebException webException)
+			{
+				return new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+			}
+			catch 
+			{
+				throw;
+			}
+			
 		}
 
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)

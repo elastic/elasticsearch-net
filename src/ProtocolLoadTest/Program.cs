@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 using Nest;
 
 namespace ProtocolLoadTest
@@ -21,10 +22,12 @@ namespace ProtocolLoadTest
 		static void Main(string[] args)
 		{
 			double httpRate = RunTest<HttpTester>(HTTP_PORT);
+			double manualAsyncHttpRate = RunTest<HttpManualAsyncTester>(HTTP_PORT);
 			//double thriftRate = RunTest<ThriftTester>(THRIFT_PORT);
 
 			Console.WriteLine();
-			Console.WriteLine("HTTP: {0:0,0}/s", httpRate);
+			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s", httpRate);
+			Console.WriteLine("HTTP (IndexMany + TaskFactory.StartNew): {0:0,0}/s", manualAsyncHttpRate);
 			//Console.WriteLine("Thrift: {0:0,0}/s", thriftRate);
 
 			Console.ReadLine();
@@ -58,9 +61,12 @@ namespace ProtocolLoadTest
 
 		private static void RecreateIndex(string suffix)
 		{
+			var host = "localhost";
+			if (Process.GetProcessesByName("fiddler").Any())
+				host = "ipv4.fiddler";
 			string indexName = INDEX_PREFIX + suffix;
 
-			var connSettings = new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"))
+			var connSettings = new ConnectionSettings(new Uri("http://"+host+":9200"))
 				.SetDefaultIndex(indexName);
 
 			var client = new ElasticClient(connSettings);
@@ -80,7 +86,7 @@ namespace ProtocolLoadTest
 			var indexSettings = new IndexSettings();
 			indexSettings.NumberOfReplicas = 1;
 			indexSettings.NumberOfShards = 5;
-			indexSettings.Add("index.refresh_interval", "10s");
+			indexSettings.Add("index.refresh_interval", "-1");
 
 			var createResponse = client.CreateIndex(indexName, indexSettings);
 			client.MapFromAttributes<Message>();
@@ -90,7 +96,11 @@ namespace ProtocolLoadTest
 		{
 			string indexName = INDEX_PREFIX + suffix;
 
-			var connSettings = new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"))
+			var host = "localhost";
+			if (Process.GetProcessesByName("fiddler").Any())
+				host = "ipv4.fiddler";
+
+			var connSettings = new ConnectionSettings(new Uri("http://" + host + ":9200"))
 				.SetDefaultIndex(indexName);
 
 			var client = new ElasticClient(connSettings);
