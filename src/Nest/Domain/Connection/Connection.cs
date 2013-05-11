@@ -190,12 +190,7 @@ namespace Nest
 			catch (WebException webException)
 			{
 				return new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
-			}
-			catch 
-			{
-				throw;
-			}
-			
+			}		
 		}
 
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
@@ -286,13 +281,15 @@ namespace Nest
 			{
 				if (completedTask != null && completedTask.IsFaulted)
 				{
-					var exception = completedTask.Exception.InnerException;
-					//cleanly exit from exceptions in stages
 					//none of the individual steps in _AsyncSteps run in parallel for 1 request
 					//as this would be impossible we can assume Aggregate Exception.InnerException
-
-					tcs.SetResult(new ConnectionStatus(exception));
-					//tcs.TrySetException();
+					var exception = completedTask.Exception.InnerException;
+					
+					//cleanly exit from exceptions in stages if the exception is a webexception
+					if (exception is WebException)
+						tcs.SetResult(new ConnectionStatus(exception));
+					else
+						tcs.TrySetException(exception);
 					enumerator.Dispose();
 				}
 				else if (enumerator.MoveNext())
