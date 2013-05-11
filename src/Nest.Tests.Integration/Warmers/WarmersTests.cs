@@ -3,6 +3,7 @@ using Nest.Resolvers;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 using System.Net;
+using System.Linq;
 
 namespace Nest.Tests.Integration.Warmers
 {
@@ -36,7 +37,8 @@ namespace Nest.Tests.Integration.Warmers
 			warmerResponse.Indices[_settings.DefaultIndex].Should().ContainKey("warmer_simpleputandget");
 			var warmerMapping = warmerResponse.Indices[_settings.DefaultIndex]["warmer_simpleputandget"];
 			warmerMapping.Name.Should().Be("warmer_simpleputandget");
-			warmerMapping.Types.Should().Contain(typeNameResolver.GetTypeNameFor<ElasticSearchProject>());
+			var typeName = typeNameResolver.GetTypeNameFor<ElasticSearchProject>().Resolve(_client.Settings);
+			warmerMapping.Types.Select(s => s.Resolve(_client.Settings)).Contains(typeName).Should().Be(true);
 			warmerMapping.Source.Should().Contain("\"strange-value\"");
 		}
 

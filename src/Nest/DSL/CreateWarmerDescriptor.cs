@@ -57,7 +57,7 @@ namespace Nest
 
 		public CreateWarmerDescriptor Types(IEnumerable<Type> types)
 		{
-			this._Types = types.Cast<TypeNameMarker>();
+			this._Types = types.Select(t => (TypeNameMarker)t);
 			return this;
 		}
 

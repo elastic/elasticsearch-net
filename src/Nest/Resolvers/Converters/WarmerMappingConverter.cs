@@ -27,7 +27,7 @@ namespace Nest.Resolvers.Converters
 		{
 			var jObject = JObject.Load(reader);
 			var types = ((JArray)jObject.Property("types").Value).Values<string>().ToArray()
-				.Cast<TypeNameMarker>();
+				.Select(s=>(TypeNameMarker)s);
 			var source = jObject.Property("source").Value.ToString();
 
 			return new WarmerMapping { Types = types, Source = source };
