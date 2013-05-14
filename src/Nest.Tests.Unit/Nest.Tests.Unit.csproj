@@ -74,6 +74,7 @@
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Index\IndexTests.cs" />
@@ -98,6 +99,9 @@
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
+    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
+    <Compile Include="Extensions\UriExtensionsTests.cs" />
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />

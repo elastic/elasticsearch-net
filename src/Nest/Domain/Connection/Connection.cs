@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Text;
 using System.Net;
 using System.Threading;
@@ -303,11 +304,26 @@ namespace Nest
 
 		private string _CreateUriString(string path)
 		{
-			var s = this._ConnectionSettings;
-			if (!path.StartsWith("/"))
-				path = "./" + path;
+            var s = this._ConnectionSettings;
+            if (!path.StartsWith("/"))
+                path = "./" + path;
 
-			return new Uri(s.Uri, path).ToString();
+            var uri = new Uri(s.Uri, path);
+            var url = uri.ToString();
+
+            if (s.QueryStringParameters != null)
+            {
+                var existingParams = uri.Query.ToNameValueCollection();
+                var appendedParams = new NameValueCollection();
+                appendedParams.CopyKeyValues(existingParams);
+                appendedParams.CopyKeyValues(s.QueryStringParameters);
+
+                var queryString = appendedParams.ToQueryString();
+
+                url = uri.ToUrlAndOverridePath(uri.PathAndQuery + queryString);
+            }
+
+            return url;            
 		}
 	}
 }
