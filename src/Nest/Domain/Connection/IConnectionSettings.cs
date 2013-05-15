@@ -22,7 +22,6 @@ namespace Nest
 
         NameValueCollection QueryStringParameters { get; }
 
-        Action<UnauthorizedAccessException> HandleUnauthorizedRequest { get; }
         Func<Type, string> DefaultTypeNameInferrer { get; }
     }
 }

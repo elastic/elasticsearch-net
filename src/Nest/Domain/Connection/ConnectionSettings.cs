@@ -32,7 +32,6 @@ namespace Nest
         public FluentDictionary<Type, string> DefaultIndices { get; private set; }
         public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
         public NameValueCollection QueryStringParameters { get; private set; }
-        public Action<UnauthorizedAccessException> HandleUnauthorizedRequest { get; private set; }
 
         public ConnectionSettings(Uri uri, NameValueCollection queryStringParamaters)
         {
@@ -50,7 +49,6 @@ namespace Nest
             this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
             this.DefaultIndices = new FluentDictionary<Type, string>();
             this.DefaultTypeNames = new FluentDictionary<Type, string>();
-            this.HandleUnauthorizedRequest = this.HandleDefaultUnauthorizedRequest;
             this.QueryStringParameters = queryStringParamaters;
         }
 
@@ -119,11 +117,6 @@ namespace Nest
         {
             type.ThrowIfNull("type");
             return Inflector.MakePlural(type.Name).ToLower();
-        }
-
-        private void HandleDefaultUnauthorizedRequest(UnauthorizedAccessException exception)
-        {
-            return;
         }
 
         public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
