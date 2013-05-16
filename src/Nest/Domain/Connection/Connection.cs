@@ -193,7 +193,9 @@ namespace Nest
 			}
 			catch (WebException webException)
 			{
-				return new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+				var cs = new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+                _ConnectionSettings.ConnectionStatusHandler(cs);
+			    return cs;
 			}		
 		}
 
