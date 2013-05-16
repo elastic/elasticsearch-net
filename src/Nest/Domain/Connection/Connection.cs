@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Text;
-using System.Net;
-using System.Threading;
-using System.IO;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -184,12 +185,17 @@ namespace Nest
 						RequestUrl = request.RequestUri.ToString(),
 						RequestMethod = request.Method
 					};
+
+                    _ConnectionSettings.ConnectionStatusHandler(cs);
+
 					return cs;
 				}
 			}
 			catch (WebException webException)
 			{
-				return new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+				var cs = new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+                _ConnectionSettings.ConnectionStatusHandler(cs);
+			    return cs;
 			}		
 		}
 
@@ -209,6 +215,7 @@ namespace Nest
 				return Task.Factory.StartNew(() =>
 				{
 					this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
+                    _ConnectionSettings.ConnectionStatusHandler(tcs.Task.Result);
 					return tcs.Task.Result;
 				}, TaskCreationOptions.LongRunning);
 			}
@@ -303,11 +310,26 @@ namespace Nest
 
 		private string _CreateUriString(string path)
 		{
-			var s = this._ConnectionSettings;
-			if (!path.StartsWith("/"))
-				path = "./" + path;
+            var s = this._ConnectionSettings;
+            if (!path.StartsWith("/"))
+                path = "./" + path;
 
-			return new Uri(s.Uri, path).ToString();
+            var uri = new Uri(s.Uri, path);
+            var url = uri.ToString();
+
+            if (s.QueryStringParameters != null)
+            {
+                var existingParams = uri.Query.ToNameValueCollection();
+                var appendedParams = new NameValueCollection();
+                appendedParams.CopyKeyValues(existingParams);
+                appendedParams.CopyKeyValues(s.QueryStringParameters);
+
+                var queryString = appendedParams.ToQueryString();
+
+                url = uri.ToUrlAndOverridePath(uri.PathAndQuery + queryString);
+            }
+
+            return url;            
 		}
 	}
 }
