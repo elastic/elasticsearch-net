@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Text;
-using System.Net;
-using System.Threading;
-using System.IO;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -185,6 +185,9 @@ namespace Nest
 						RequestUrl = request.RequestUri.ToString(),
 						RequestMethod = request.Method
 					};
+
+                    _ConnectionSettings.ConnectionStatusHandler(cs);
+
 					return cs;
 				}
 			}
@@ -210,6 +213,7 @@ namespace Nest
 				return Task.Factory.StartNew(() =>
 				{
 					this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
+                    _ConnectionSettings.ConnectionStatusHandler(tcs.Task.Result);
 					return tcs.Task.Result;
 				}, TaskCreationOptions.LongRunning);
 			}

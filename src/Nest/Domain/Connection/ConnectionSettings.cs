@@ -29,6 +29,7 @@ namespace Nest
         public bool UsesPrettyResponses { get; private set; }
 
         public Func<Type, string> DefaultTypeNameInferrer { get; private set; }
+        public Action<ConnectionStatus> ConnectionStatusHandler { get; private set; }
         public FluentDictionary<Type, string> DefaultIndices { get; private set; }
         public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
         public NameValueCollection QueryStringParameters { get; private set; }
@@ -49,6 +50,7 @@ namespace Nest
             this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
             this.DefaultIndices = new FluentDictionary<Type, string>();
             this.DefaultTypeNames = new FluentDictionary<Type, string>();
+            this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
             this.QueryStringParameters = queryStringParamaters;
         }
 
@@ -119,10 +121,22 @@ namespace Nest
             return Inflector.MakePlural(type.Name).ToLower();
         }
 
+        private void ConnectionStatusDefaultHandler(ConnectionStatus status)
+        {
+            return;
+        }
+
         public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
         {
             defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
             this.DefaultTypeNameInferrer = defaultTypeNameInferrer;
+            return this;
+        }
+
+        public ConnectionSettings SetConnectionStatusHandler(Action<ConnectionStatus> handler)
+        {
+            handler.ThrowIfNull("handler");
+            this.ConnectionStatusHandler = handler;
             return this;
         }
 

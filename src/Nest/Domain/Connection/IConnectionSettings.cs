@@ -21,6 +21,7 @@ namespace Nest
         Uri Uri { get; }
 
         NameValueCollection QueryStringParameters { get; }
+        Action<ConnectionStatus> ConnectionStatusHandler { get; }
 
         Func<Type, string> DefaultTypeNameInferrer { get; }
     }
