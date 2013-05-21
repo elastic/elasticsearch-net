@@ -19,6 +19,9 @@ namespace Nest
 		string ProxyPassword { get; }
 
 		int MaximumAsyncConnections { get; }
+
+		bool TraceEnabled { get; }
+
 		bool UsesPrettyResponses { get; }
 		Uri Uri { get; }
 

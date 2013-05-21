@@ -29,7 +29,7 @@ namespace Nest
 
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
-
+		public bool TraceEnabled { get; private set; }
 		public Func<Type, string> DefaultTypeNameInferrer { get; private set; }
 		public FluentDictionary<Type, string> DefaultIndices { get; private set; }
 		public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
@@ -87,6 +87,15 @@ namespace Nest
 			this.ProxyAddress = proxyAdress.ToString();
 			this.ProxyUsername = username;
 			this.ProxyPassword = password;
+			return this;
+		}
+
+		/// <summary>
+		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
+		/// </summary>
+		public ConnectionSettings EnableTrace(bool enabled = true)
+		{
+			this.TraceEnabled = enabled;
 			return this;
 		}
 

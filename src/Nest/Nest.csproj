@@ -67,6 +67,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Connection\ConnectionStatusTracer.cs" />
     <Compile Include="Domain\PathAndData.cs" />
     <Compile Include="DSL\PercolatorDescriptor.cs" />
     <Compile Include="DSL\PercolateDescriptor.cs" />

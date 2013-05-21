@@ -5,6 +5,7 @@ using System.Threading;
 using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Nest.Domain.Connection;
 
 namespace Nest
 {
@@ -14,6 +15,7 @@ namespace Nest
 
 		private IConnectionSettings _ConnectionSettings { get; set; }
 		private Semaphore _ResourceLock;
+		private readonly bool _enableTrace;
 
 		public Connection(IConnectionSettings settings)
 		{
@@ -22,6 +24,7 @@ namespace Nest
 
 			this._ConnectionSettings = settings;
 			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
+			this._enableTrace = settings.TraceEnabled;
 		}
 
 		public ConnectionStatus GetSync(string path)
@@ -162,61 +165,81 @@ namespace Nest
 
 		protected virtual ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
-			var timeout = this._ConnectionSettings.Timeout;
-			if (data != null)
+			using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
 			{
-				using (var r = request.GetRequestStream())
+				ConnectionStatus cs = null;
+				if (data != null)
 				{
-					byte[] buffer = Encoding.UTF8.GetBytes(data);
-					r.Write(buffer, 0, buffer.Length);
+					using (var r = request.GetRequestStream())
+					{
+						byte[] buffer = Encoding.UTF8.GetBytes(data);
+						r.Write(buffer, 0, buffer.Length);
+					}
 				}
-			}
-			try
-			{
-				using (var response = (HttpWebResponse)request.GetResponse())
-				using (var responseStream = response.GetResponseStream())
-				using (var streamReader = new StreamReader(responseStream))
+				try
 				{
-					string result = streamReader.ReadToEnd();
-					var cs = new ConnectionStatus(result)
+					using (var response = (HttpWebResponse)request.GetResponse())
+					using (var responseStream = response.GetResponseStream())
+					using (var streamReader = new StreamReader(responseStream))
+					{
+						string result = streamReader.ReadToEnd();
+						cs = new ConnectionStatus(result)
+						{
+							Request = data,
+							RequestUrl = request.RequestUri.ToString(),
+							RequestMethod = request.Method
+						};
+						tracer.SetResult(cs);
+						return cs;
+					}
+				}
+				catch (WebException webException)
+				{
+					cs = new ConnectionStatus(webException)
 					{
 						Request = data,
 						RequestUrl = request.RequestUri.ToString(),
 						RequestMethod = request.Method
 					};
+					tracer.SetResult(cs);
 					return cs;
 				}
 			}
-			catch (WebException webException)
-			{
-				return new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
-			}		
 		}
 
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
-			var timeout = this._ConnectionSettings.Timeout;
-
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
+			var timeout = this._ConnectionSettings.Timeout;
 			if (!this._ResourceLock.WaitOne(timeout))
 			{
-				var m = "Could not start the operation before the timeout of " + timeout + "ms completed while waiting for the semaphore";
-				tcs.SetResult(new ConnectionStatus(new TimeoutException(m)));
-				return tcs.Task;
+				using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
+				{
+					var m = "Could not start the operation before the timeout of " + timeout +
+						"ms completed while waiting for the semaphore";
+					var cs = new ConnectionStatus(new TimeoutException(m));
+					tcs.SetResult(cs);
+					tracer.SetResult(cs);
+					return tcs.Task;
+				}
 			}
 			try
 			{
 				return Task.Factory.StartNew(() =>
 				{
-					this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
-					return tcs.Task.Result;
+					using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
+					{
+						this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
+						var cs = tcs.Task.Result;
+						tracer.SetResult(cs);
+						return cs;
+					}
 				}, TaskCreationOptions.LongRunning);
 			}
 			finally
 			{
 				this._ResourceLock.Release();
 			}
-
 		}
 
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
@@ -284,7 +307,7 @@ namespace Nest
 					//none of the individual steps in _AsyncSteps run in parallel for 1 request
 					//as this would be impossible we can assume Aggregate Exception.InnerException
 					var exception = completedTask.Exception.InnerException;
-					
+
 					//cleanly exit from exceptions in stages if the exception is a webexception
 					if (exception is WebException)
 						tcs.SetResult(new ConnectionStatus(exception));
