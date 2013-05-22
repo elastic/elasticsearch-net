@@ -15,8 +15,6 @@ This section describes how to instantiate a client and have it connect to the se
 							  .SetDefaultIndex("mpdreamz");
 	var client = new ElasticClient(elasticSettings);
 
-`ConnectionSettings`'s constructor has many overloads, including support for connecting through proxies.
-
 ## Connecting
 
 Connecting can be done several ways:
