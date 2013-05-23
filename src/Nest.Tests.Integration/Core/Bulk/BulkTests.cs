@@ -133,9 +133,6 @@ namespace Nest.Tests.Integration.Core.Bulk
         [Test]
         public void BulkIndexWithPercolate()
         {
-            //Delete so we know the create does not throw an error.
-            this._client.DeleteIndex(ElasticsearchConfiguration.DefaultIndex);
-
             // register up some percolator queries to test matching
             var query1 = "bulkindex-test-doc-1";
 
