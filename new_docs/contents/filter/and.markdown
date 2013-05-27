@@ -6,7 +6,12 @@ menuitem: and
 ---
 
 
-# Documentation still in progress
+# And Filter
 
-This is sadly still a marker file.
+	.Filter(f=>f
+		.And(
+			af=>af.Term(...), 
+			af=>af.Term(...)
+		)
+	)
 

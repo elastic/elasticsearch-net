@@ -1,183 +1,73 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Nest - Connecting</title>
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta http-equiv="expires" content="0">
-    <meta name="description" content="elasticsearch">
-    <meta name="keywords" content="nest, elasticsearch, .net, client">
-    <meta name="author" content="martijn laarman">
-    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
-    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
-    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
-    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
-    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/prettify/prettify.js"></script>
-    <script type="text/javascript" src="/prettify/fix_code_tags.js"></script>
-  </head>
-  <body>
-    <section id="site">
-      <div class="actions">
-        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
-        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
-      </div>
-      <aside>
-        <ul id="top_left_menu">
-          <h4>External</h4>
-          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
-          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
-        </ul>
-      </aside>
-      <section id="content">
-        <aside id="menu">
-          <ul id="top_left_menu">
-            <li><a href="/">+ Concepts</a></li>
-            <li><a href="/core/" class="">+ Core</a></li>
-            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
-            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
-            <li><a href="/search/basics.html" class="">+ Search</a></li>
-            <h4>- Facets</h4>
-            <ul>
-              <li><a href="/facets/handling.html" class="selected">Facet handling</a></li>
-              <li><a href="/facets/terms.html" class="">Terms</a></li>
-              <li><a href="/facets/range.html" class="">Range</a></li>
-              <li><a href="/facets/histogram.html" class="">Histogram</a></li>
-              <li><a href="/facets/date-histogram.html" class="">Date Histogram</a></li>
-              <li><a href="/facets/filter.html" class="">Filter</a></li>
-              <li><a href="/facets/query.html" class="">Query</a></li>
-              <li><a href="/facets/statistical.html" class="">Statistical</a></li>
-              <li><a href="/facets/term-stats.html" class="">Terms Stats</a></li>
-              <li><a href="/facets/geo-distance.html" class="">Geo Distance</a></li>
-            </ul>
-            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
-            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
-          </ul>
-        </aside>
-        <article>
-          <div id="content-margin-fix"><h1>Faceting</h1>
-<p>For a good overview of what facets are see the <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/">original docs</a> on the subject.
-
-</p>
+<!DOCTYPE html><html><head><title>Nest - Connecting</title><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="pragma" content="no-cache"><meta http-equiv="content-type" content="text/html;charset=utf-8"><meta http-equiv="expires" content="0"><meta name="description" content="elasticsearch"><meta name="keywords" content="nest, elasticsearch, .net, client"><meta name="author" content="martijn laarman"><link rel="stylesheet" type="text/css" href="/styles/layout.css"><link rel="stylesheet" type="text/css" href="/styles/pygments.css"><link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css"><link href="/prettify/prettify.css" type="text/css" rel="stylesheet"><link href="/prettify/sunburst.css" type="text/css" rel="stylesheet"><script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script><script type="text/javascript" src="/prettify/prettify.js"></script><script type="text/javascript" src="/prettify/fix_code_tags.js"></script></head><body><section id="site"><div class="actions"><iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe><iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></div><aside><ul id="top_left_menu"><h4>External</h4><li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li><li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li></ul></aside><section id="content"><aside id="menu"><ul id="top_left_menu"><li><a href="/">+ Concepts</a></li><li><a href="/core/" class="">+ Core</a></li><li><a href="/indices/aliases.html" class="">+ Indices</a></li><li><a href="/cluster/health.html" class="">+ Cluster</a></li><li><a href="/search/basics.html" class="">+ Search</a></li><h4>- Facets</h4><ul><li><a href="/facets/handling.html" class="selected">Facet handling</a></li><li><a href="/facets/terms.html" class="">Terms</a></li><li><a href="/facets/range.html" class="">Range</a></li><li><a href="/facets/histogram.html" class="">Histogram</a></li><li><a href="/facets/date-histogram.html" class="">Date Histogram</a></li><li><a href="/facets/filter.html" class="">Filter</a></li><li><a href="/facets/query.html" class="">Query</a></li><li><a href="/facets/statistical.html" class="">Statistical</a></li><li><a href="/facets/term-stats.html" class="">Terms Stats</a></li><li><a href="/facets/geo-distance.html" class="">Geo Distance</a></li></ul><li><a href="/query/text.html" class="">+ Query DSL</a></li><li><a href="/filter/and.html" class="">+ Filter DSL</a></li></ul></aside><article><div id="content-margin-fix"><h1>Faceting</h1>
+<p>For a good overview of what facets are see the <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/">original docs</a> on the subject.</p>
 <h2>Specify facets during search.</h2>
-<p>In its simplest form you can add a facet to your query like this:
-
-</p>
-<pre><code><span class="keyword">var</span> queryResults = <span class="keyword">this</span>.ConnectedClient.Search&lt;ElasticSearchProject>(s=>s
-    .From(<span class="number">0</span>)
-    .Size(<span class="number">10</span>)
+<p>In its simplest form you can add a facet to your query like this:</p>
+<pre><code>var queryResults = this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
     .MatchAll()
-    .FacetTerm(t => t
-      .OnField(f => f.Country)
-      .Size(<span class="number">20</span>)
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Country)
+      .Size(20)
     )
 );</code></pre>
-<p>Adding more then one facet is also really easy:
-
-</p>
-<pre><code><span class="keyword">var</span> queryResults = <span class="keyword">this</span>.ConnectedClient.Search&lt;ElasticSearchProject>(s=>s
-    .From(<span class="number">0</span>)
-    .Size(<span class="number">10</span>)
+<p>Adding more then one facet is also really easy:</p>
+<pre><code>var queryResults = this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
     .MatchAll()
-    .FacetTerm(t => t
-      .OnField(f => f.Country)
-      .Size(<span class="number">20</span>)
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Country)
+      .Size(20)
     )
-    .FacetTerm(t => t
-      .OnField(f => f.Author)
-      .Size(<span class="number">20</span>)
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Author)
+      .Size(20)
     )
 );</code></pre>
-<p>Nest supports all the additional properties you can set on facets 
-
-</p>
-<pre><code><span class="keyword">var</span> queryResults = <span class="keyword">this</span>.ConnectedClient.Search&lt;ElasticSearchProject>(s=>s
-    .From(<span class="number">0</span>)
-    .Size(<span class="number">10</span>)
+<p>Nest supports all the additional properties you can set on facets </p>
+<pre><code>var queryResults = this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
     .MatchAll()
-    .FacetTerm(t => t
-      .OnField(f => f.Country)
-      .Size(<span class="number">20</span>)
+    .FacetTerm(t =&gt; t
+      .OnField(f =&gt; f.Country)
+      .Size(20)
       .Order(TermsOrder.reverse_count)
-      .Exclude(<span class="string">"term1"</span>, <span class="string">"term2"</span>)
+      .Exclude(&quot;term1&quot;, &quot;term2&quot;)
       .AllTerms()
-      .Regex(@<span class="string">"\s+"</span>, RegexFlags.DOTALL)
-      .Script(<span class="string">"term + 'aaa'"</span>)
-      .ScriptField(<span class="string">"_source.my_field"</span>)
+      .Regex(@&quot;\s+&quot;, RegexFlags.DOTALL)
+      .Script(&quot;term + &#39;aaa&#39;&quot;)
+      .ScriptField(&quot;_source.my_field&quot;)
     )
-    .FacetDateHistogram(h => h
-      .OnField(f => f.StartedOn)
+    .FacetDateHistogram(h =&gt; h
+      .OnField(f =&gt; f.StartedOn)
       .Interval(DateInterval.Day, DateRounding.Half_Floor)
-      .TimeZones(Pre: <span class="string">"-3"</span>, Post: <span class="string">"-4"</span>)
+      .TimeZones(Pre: &quot;-3&quot;, Post: &quot;-4&quot;)
   )
 );</code></pre>
-<p>Allowing you to take advantage of all the cool facets stuff built in to elasticsearch.
-
-</p>
+<p>Allowing you to take advantage of all the cool facets stuff built in to elasticsearch.</p>
 <h3>Getting to your facet</h3>
-<p>If you are interested in the facet meta data (such as missing, total) you can use the following methods:
-
-</p>
-<pre><code><span class="keyword">var</span> facet = queryResults.Facet&lt;TermFacet>(p=>p.Followers.Select(f=>f.LastName));</code></pre>
-<p>this will return a <code>TermFacet</code> object which has an <code>.Items</code> property holding all the facets.
-
-</p>
-<p><code>queryResult</code> also holds a <code>.Facets</code> dictionary one can use to itterate over the facets returned from the query.
-
-</p>
+<p>If you are interested in the facet meta data (such as missing, total) you can use the following methods:</p>
+<pre><code>var facet = queryResults.Facet&lt;TermFacet&gt;(p=&gt;p.Followers.Select(f=&gt;f.LastName));</code></pre>
+<p>this will return a <code>TermFacet</code> object which has an <code>.Items</code> property holding all the facets.</p>
+<p><code>queryResult</code> also holds a <code>.Facets</code> dictionary one can use to itterate over the facets returned from the query.</p>
 <h2>Shortcut to facet items</h2>
-<p>To get the facet items for <code>followers.lastName</code> the prettiest way to get them is.
-
-</p>
-<pre><code><span class="keyword">var</span> facets = queryResults.FacetItems&lt;FacetItem>(p=>p.Followers.Select(f=>f.LastName));</code></pre>
-<p>NEST will infer the right key from the specified lambda. You can also opt for specifying the name directly.
-
-</p>
-<pre><code><span class="keyword">var</span> facets = queryResults.FacetItems&lt;FacetItem>(<span class="string">"followers.lastName"</span>);</code></pre>
-<p><strong><em>NOTE</em></strong>  more types then just term facets are supported see the &apos;Corresponding Types&apos; section
-
-</p>
+<p>To get the facet items for <code>followers.lastName</code> the prettiest way to get them is.</p>
+<pre><code>var facets = queryResults.FacetItems&lt;FacetItem&gt;(p=&gt;p.Followers.Select(f=&gt;f.LastName));</code></pre>
+<p>NEST will infer the right key from the specified lambda. You can also opt for specifying the name directly.</p>
+<pre><code>var facets = queryResults.FacetItems&lt;FacetItem&gt;(&quot;followers.lastName&quot;);</code></pre>
+<p><strong><em>NOTE</em></strong>  more types then just term facets are supported see the &#39;Corresponding Types&#39; section</p>
 <h2>Corresponding Types</h2>
-<p>The following lists the elasticsearch facet type and their corresponding NEST strongly typed class 
-
-</p>
-<p><strong><em>terms_stats</em></strong> =&gt; <a href="/facets/{{root}}/facets/term-stats.html">TermStatsFacet</a>
-
-</p>
-<p><strong><em>statistical</em></strong> =&gt; <a href="/facets/{{root}}/facets/statistical.html">StatisticalFacet</a>
-
-</p>
-<p><strong><em>terms</em></strong> =&gt; <a href="/facets/{{root}}/facets/terms.html">TermFacet</a>
-
-</p>
-<p><strong><em>histogram</em></strong>  =&gt; <a href="/facets/{{root}}/facets/histogram.html">HistogramFacet</a>
-
-</p>
-<p><strong><em>date_histogram</em></strong> =&gt; <a href="/facets/{{root}}/facets/date-histogram.html">DateHistogramFacet</a>
-
-</p>
-<p><strong><em>range</em></strong> =&gt; <a href="/facets/{{root}}/facets/range.html">DateRangeFacet</a>, <a href="/facets/{{root}}/facets/range.html">RangeFacet</a>
-
-</p>
-<p><strong><em>geo_distance</em></strong> =&gt; <a href="/facets/{{root}}/facets/geo-distance.html">GeoDistanceFacet</a>
-
-</p>
-<p><strong><em>query</em></strong> =&gt; <a href="/facets/{{root}}/facets/query.html">QueryFacet</a>
-
-</p>
-<p><strong><em>filter</em></strong> =&gt; <a href="/facets/{{root}}/facets/filter.html">FilterFacet</a>
-
-</p>
-<p>See also each individual facet&apos;s documentation
-
-
-</p>
-
-          </div>
-        </article>
-      </section>
-    </section>
-  </body>
-</html>
+<p>The following lists the elasticsearch facet type and their corresponding NEST strongly typed class </p>
+<p><strong><em>terms_stats</em></strong> =&gt; <a href="/facets/{{root}}/facets/term-stats.html">TermStatsFacet</a></p>
+<p><strong><em>statistical</em></strong> =&gt; <a href="/facets/{{root}}/facets/statistical.html">StatisticalFacet</a></p>
+<p><strong><em>terms</em></strong> =&gt; <a href="/facets/{{root}}/facets/terms.html">TermFacet</a></p>
+<p><strong><em>histogram</em></strong>  =&gt; <a href="/facets/{{root}}/facets/histogram.html">HistogramFacet</a></p>
+<p><strong><em>date_histogram</em></strong> =&gt; <a href="/facets/{{root}}/facets/date-histogram.html">DateHistogramFacet</a></p>
+<p><strong><em>range</em></strong> =&gt; <a href="/facets/{{root}}/facets/range.html">DateRangeFacet</a>, <a href="/facets/{{root}}/facets/range.html">RangeFacet</a></p>
+<p><strong><em>geo_distance</em></strong> =&gt; <a href="/facets/{{root}}/facets/geo-distance.html">GeoDistanceFacet</a></p>
+<p><strong><em>query</em></strong> =&gt; <a href="/facets/{{root}}/facets/query.html">QueryFacet</a></p>
+<p><strong><em>filter</em></strong> =&gt; <a href="/facets/{{root}}/facets/filter.html">FilterFacet</a></p>
+<p>See also each individual facet&#39;s documentation</p>
+</div></article></section></section></body></html>

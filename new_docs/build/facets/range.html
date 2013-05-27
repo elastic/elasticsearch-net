@@ -1,138 +1,60 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Nest - Connecting</title>
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta http-equiv="expires" content="0">
-    <meta name="description" content="elasticsearch">
-    <meta name="keywords" content="nest, elasticsearch, .net, client">
-    <meta name="author" content="martijn laarman">
-    <link rel="stylesheet" type="text/css" href="/styles/layout.css">
-    <link rel="stylesheet" type="text/css" href="/styles/pygments.css">
-    <link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css">
-    <link href="/prettify/prettify.css" type="text/css" rel="stylesheet">
-    <link href="/prettify/sunburst.css" type="text/css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/prettify/prettify.js"></script>
-    <script type="text/javascript" src="/prettify/fix_code_tags.js"></script>
-  </head>
-  <body>
-    <section id="site">
-      <div class="actions">
-        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
-        <iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
-      </div>
-      <aside>
-        <ul id="top_left_menu">
-          <h4>External</h4>
-          <li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li>
-          <li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li>
-        </ul>
-      </aside>
-      <section id="content">
-        <aside id="menu">
-          <ul id="top_left_menu">
-            <li><a href="/">+ Concepts</a></li>
-            <li><a href="/core/" class="">+ Core</a></li>
-            <li><a href="/indices/aliases.html" class="">+ Indices</a></li>
-            <li><a href="/cluster/health.html" class="">+ Cluster</a></li>
-            <li><a href="/search/basics.html" class="">+ Search</a></li>
-            <h4>- Facets</h4>
-            <ul>
-              <li><a href="/facets/handling.html" class="">Facet handling</a></li>
-              <li><a href="/facets/terms.html" class="">Terms</a></li>
-              <li><a href="/facets/range.html" class="selected">Range</a></li>
-              <li><a href="/facets/histogram.html" class="">Histogram</a></li>
-              <li><a href="/facets/date-histogram.html" class="">Date Histogram</a></li>
-              <li><a href="/facets/filter.html" class="">Filter</a></li>
-              <li><a href="/facets/query.html" class="">Query</a></li>
-              <li><a href="/facets/statistical.html" class="">Statistical</a></li>
-              <li><a href="/facets/term-stats.html" class="">Terms Stats</a></li>
-              <li><a href="/facets/geo-distance.html" class="">Geo Distance</a></li>
-            </ul>
-            <li><a href="/query/text.html" class="">+ Query DSL</a></li>
-            <li><a href="/filter/and.html" class="">+ Filter DSL</a></li>
-          </ul>
-        </aside>
-        <article>
-          <div id="content-margin-fix"><h1>Range Facet</h1>
-<p>range facet allow to specify a set of ranges and get both the number of docs (count) that fall within each range, and aggregated data either based on the field, or using another field. Here is a simple example:
-
-
-</p>
-<pre><code><span class="keyword">this</span>.ConnectedClient.Search&lt;ElasticSearchProject>(s=>s
-    .From(<span class="number">0</span>)
-    .Size(<span class="number">10</span>)
+<!DOCTYPE html><html><head><title>Nest - Connecting</title><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="pragma" content="no-cache"><meta http-equiv="content-type" content="text/html;charset=utf-8"><meta http-equiv="expires" content="0"><meta name="description" content="elasticsearch"><meta name="keywords" content="nest, elasticsearch, .net, client"><meta name="author" content="martijn laarman"><link rel="stylesheet" type="text/css" href="/styles/layout.css"><link rel="stylesheet" type="text/css" href="/styles/pygments.css"><link href="http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu" rel="stylesheet" type="text/css"><link href="/prettify/prettify.css" type="text/css" rel="stylesheet"><link href="/prettify/sunburst.css" type="text/css" rel="stylesheet"><script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script><script type="text/javascript" src="/prettify/prettify.js"></script><script type="text/javascript" src="/prettify/fix_code_tags.js"></script></head><body><section id="site"><div class="actions"><iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe><iframe src="http://ghbtns.com/github-btn.html?user=Mpdreamz&amp;repo=NEST&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe></div><aside><ul id="top_left_menu"><h4>External</h4><li><a href="http://www.elasticsearch.org" target="_blank">Elasticsearch Docs</a></li><li><a href="http://mpdreamz.mit-license.org/" target="_blank">MIT license</a></li></ul></aside><section id="content"><aside id="menu"><ul id="top_left_menu"><li><a href="/">+ Concepts</a></li><li><a href="/core/" class="">+ Core</a></li><li><a href="/indices/aliases.html" class="">+ Indices</a></li><li><a href="/cluster/health.html" class="">+ Cluster</a></li><li><a href="/search/basics.html" class="">+ Search</a></li><h4>- Facets</h4><ul><li><a href="/facets/handling.html" class="">Facet handling</a></li><li><a href="/facets/terms.html" class="">Terms</a></li><li><a href="/facets/range.html" class="selected">Range</a></li><li><a href="/facets/histogram.html" class="">Histogram</a></li><li><a href="/facets/date-histogram.html" class="">Date Histogram</a></li><li><a href="/facets/filter.html" class="">Filter</a></li><li><a href="/facets/query.html" class="">Query</a></li><li><a href="/facets/statistical.html" class="">Statistical</a></li><li><a href="/facets/term-stats.html" class="">Terms Stats</a></li><li><a href="/facets/geo-distance.html" class="">Geo Distance</a></li></ul><li><a href="/query/text.html" class="">+ Query DSL</a></li><li><a href="/filter/and.html" class="">+ Filter DSL</a></li></ul></aside><article><div id="content-margin-fix"><h1>Range Facet</h1>
+<p>range facet allow to specify a set of ranges and get both the number of docs (count) that fall within each range, and aggregated data either based on the field, or using another field. Here is a simple example:</p>
+<pre><code>this.ConnectedClient.Search&lt;ElasticSearchProject&gt;(s=&gt;s
+    .From(0)
+    .Size(10)
     .MatchAll()
-    .FacetRange&lt;int>(t => t
-        .OnField(f => f.LOC)
+    .FacetRange&lt;int&gt;(t =&gt; t
+        .OnField(f =&gt; f.LOC)
         .Ranges(
-            r=>r.To(<span class="number">50</span>),
-            r=>r.From(<span class="number">50</span>).To(<span class="number">100</span>),
-            r=>r.From(<span class="number">100</span>).To(<span class="number">150</span>),
-            r=>r.From(<span class="number">150</span>).To(<span class="number">200</span>),
-            r=>r.From(<span class="number">200</span>).To(<span class="number">250</span>),
-            r=>r.From(<span class="number">250</span>)
+            r=&gt;r.To(50),
+            r=&gt;r.From(50).To(100),
+            r=&gt;r.From(100).To(150),
+            r=&gt;r.From(150).To(200),
+            r=&gt;r.From(200).To(250),
+            r=&gt;r.From(250)
         )
     );
 );</code></pre>
-<p>Ranges can also be passed as <code>double</code>:
-
-</p>
-<pre><code><span class="comment">//SNIP</span>
-.FacetRange&lt;double>(t => t
-.OnField(f => f.LOC)
+<p>Ranges can also be passed as <code>double</code>:</p>
+<pre><code>//SNIP
+.FacetRange&lt;double&gt;(t =&gt; t
+.OnField(f =&gt; f.LOC)
     .Ranges(
-        r => r.To(<span class="number">50.0</span>),
-        r => r.From(<span class="number">50.0</span>).To(<span class="number">100.0</span>),
-        r => r.From(<span class="number">100.0</span>)
+        r =&gt; r.To(50.0),
+        r =&gt; r.From(50.0).To(100.0),
+        r =&gt; r.From(100.0)
     )
 )
-<span class="comment">//SNIP</span></code></pre>
-<p>or <code>DateTime</code>:
-
-</p>
-<pre><code><span class="comment">//SNIP</span>
-.FacetRange&lt;DateTime>(t => t
-    .OnField(f => f.StartedOn)
+//SNIP</code></pre>
+<p>or <code>DateTime</code>:</p>
+<pre><code>//SNIP
+.FacetRange&lt;DateTime&gt;(t =&gt; t
+    .OnField(f =&gt; f.StartedOn)
     .Ranges(
-        r => r.To(<span class="keyword">new</span> DateTime(<span class="number">1990</span>,<span class="number">1</span>,<span class="number">1</span>).Date)
+        r =&gt; r.To(new DateTime(1990,1,1).Date)
     )
 );
-<span class="comment">//SNIP</span></code></pre>
-<p>You can also pass scripts to create complex range facets:
-
-</p>
-<pre><code><span class="comment">//SNIP</span>
-.FacetRange&lt;DateTime>(<span class="string">"needs_a_name"</span>, t => t
-    .KeyScript(<span class="string">"doc['date'].date.minuteOfHour"</span>)
-    .ValueScript(<span class="string">"doc['num1'].value"</span>)
+//SNIP</code></pre>
+<p>You can also pass scripts to create complex range facets:</p>
+<pre><code>//SNIP
+.FacetRange&lt;DateTime&gt;(&quot;needs_a_name&quot;, t =&gt; t
+    .KeyScript(&quot;doc[&#39;date&#39;].date.minuteOfHour&quot;)
+    .ValueScript(&quot;doc[&#39;num1&#39;].value&quot;)
     .Ranges(
-        r => r.To(<span class="keyword">new</span> DateTime(<span class="number">1990</span>, <span class="number">1</span>, <span class="number">1</span>).Date)
+        r =&gt; r.To(new DateTime(1990, 1, 1).Date)
     )
 )
-<span class="comment">//SNIP</span></code></pre>
-<p>or alternative key/value fields
-
-</p>
-<pre><code><span class="comment">//SNIP</span>
-.FacetRange&lt;DateTime>(<span class="string">"needs_a_name"</span>, t => t
-    .KeyField(<span class="string">"field_name"</span>)
-    .ValueField(<span class="string">"another_field_name"</span>)
+//SNIP</code></pre>
+<p>or alternative key/value fields</p>
+<pre><code>//SNIP
+.FacetRange&lt;DateTime&gt;(&quot;needs_a_name&quot;, t =&gt; t
+    .KeyField(&quot;field_name&quot;)
+    .ValueField(&quot;another_field_name&quot;)
     .Ranges(
-        r => r.To(<span class="keyword">new</span> DateTime(<span class="number">1990</span>, <span class="number">1</span>, <span class="number">1</span>).Date)
+        r =&gt; r.To(new DateTime(1990, 1, 1).Date)
     )
 );
-<span class="comment">//SNIP</span></code></pre>
-<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html">original docs</a> for more information
-
-</p>
-
-          </div>
-        </article>
-      </section>
-    </section>
-  </body>
-</html>
+//SNIP</code></pre>
+<p>See <a href="http://www.elasticsearch.org/guide/reference/api/search/facets/range-facet.html">original docs</a> for more information</p>
+</div></article></section></section></body></html>
