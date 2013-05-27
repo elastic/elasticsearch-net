@@ -54,10 +54,18 @@ You can pass a `Func<string,string>` to `SetTypeNameInferrer()` on `ConnectionSe
 ### UsePrettyResponses
 Setting `UsePrettyResponses()` on `ConnectionSettings` will append `pretty=true` to all the requests to inform ElasticSearch we want nicely formatted responses, setting this does **not** prettify requests themselves because bulk requests in ElasticSearch follow a very exact line delimited format. 
 
-### MapTypeIndices
-Allows you to globally set the default type name for a type.
+### MapDefaultTypeIndices
+Allows you to globally set the default index a type will be index to/searched in. This will take precedence over `SetDefaultIndex()`.
 
-    .MapTypeIndices(s=>s
+    .MapDefaultTypeIndices(s=>s
+        .Add(typeof(MyType), "mytype_does_not_live_under_the_default_index")
+        .Add(typeof(YoutubeMovie), "webcontent")
+    );
+
+### MapDefaultTypeNames
+Allows you to globally set the default type name for a type. This will take precedence over `TypeNameInferrer`.
+
+    .MapDefaultTypeNames(s=>s
         .Add(typeof(MyType), "mytupo")
         .Add(typeof(YoutubeMovie), "mov")
     );

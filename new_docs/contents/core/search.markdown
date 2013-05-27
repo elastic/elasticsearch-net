@@ -10,12 +10,16 @@ menuitem: search
 
 Search is **THE** call you'll probably use the most as it exposes elasticsearch's key functionality: search!
 
+**NOTE:** be sure to also read [how to use NEST's Query DSL](/concepts/writing-queries.html)
+
+
 You can start a search like so, 
 
     var result = this._client.Search(s => s
         .Index("my-index")
         .Type("my-type")
-        .MatchAll()
+ 		.Query(q=> ....)
+ 		.Filter(f=> ....)	     
     );
 
 This will get all the documents on the `my-index` index and `my-type` type. 

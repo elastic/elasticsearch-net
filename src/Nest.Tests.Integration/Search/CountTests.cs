@@ -17,7 +17,7 @@ namespace Nest.Tests.Integration.Search
 		public void SimpleCount()
 		{
 			//does a match_all on the default specified index
-			var countResults = this._client.CountAll(q=>q.MatchAll());
+            var countResults = this._client.CountAll(q=>q.MatchAll());
 
 			Assert.True(countResults.Count > 0);
 		}
