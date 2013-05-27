@@ -34,7 +34,7 @@ namespace Nest
         public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
         public NameValueCollection QueryStringParameters { get; private set; }
 
-        public ConnectionSettings(Uri uri, NameValueCollection queryStringParamaters)
+        public ConnectionSettings(Uri uri)
         {
             uri.ThrowIfNull("uri");
 
@@ -51,10 +51,7 @@ namespace Nest
             this.DefaultIndices = new FluentDictionary<Type, string>();
             this.DefaultTypeNames = new FluentDictionary<Type, string>();
             this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
-            this.QueryStringParameters = queryStringParamaters;
         }
-
-        public ConnectionSettings(Uri uri) : this(uri, null) { }
 
 		/// <summary>
 		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
@@ -64,6 +61,19 @@ namespace Nest
 			this.TraceEnabled = enabled;
 			return this;
 		}
+
+
+		/// <summary>
+		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
+		/// </summary>
+		/// <param name="queryStringParameters"></param>
+		/// <returns></returns>
+		public ConnectionSettings SetGlobalQueryStringParameters(NameValueCollection queryStringParameters)
+		{
+			this.QueryStringParameters = queryStringParameters;
+			return this;
+		}
+
 
 		/// <summary>
 		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
@@ -110,17 +120,6 @@ namespace Nest
             this.ProxyAddress = proxyAdress.ToString();
             this.ProxyUsername = username;
             this.ProxyPassword = password;
-            return this;
-        }
-
-        /// <summary>
-        /// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
-        /// and specify the timeout in various calls on Elasticsearch's side.
-        /// </summary>
-        /// <param name="timeout">time out in milliseconds</param>
-        public ConnectionSettings SetTimeout(int timeout)
-        {
-            this.Timeout = timeout;
             return this;
         }
 

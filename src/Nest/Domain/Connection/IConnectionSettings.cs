@@ -9,6 +9,8 @@ namespace Nest
         FluentDictionary<Type, string> DefaultTypeNames { get; }
         string DefaultIndex { get; }
 
+		Uri Uri { get; }
+		int MaximumAsyncConnections { get; }
         string Host { get; }
         int Port { get; }
         int Timeout { get; }
@@ -20,6 +22,6 @@ namespace Nest
         NameValueCollection QueryStringParameters { get; }
         Action<ConnectionStatus> ConnectionStatusHandler { get; }
 
-        Func<Type, string> DefaultTypeNameInferrer { get; }
+        Func<Type, string> DefaultTypeNameInferrer { get; }	
     }
 }

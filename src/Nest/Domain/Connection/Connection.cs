@@ -148,11 +148,7 @@ namespace Nest
 		private HttpWebRequest CreateWebRequest(string path, string method)
 		{
 			var url = this._CreateUriString(path);
-			if (this._ConnectionSettings.UsesPrettyResponses)
-			{
-				var uri = new Uri(url);
-				url += (string.IsNullOrEmpty(uri.Query) ? "?" : "&") + "pretty=true";
-			}
+			
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
@@ -209,12 +205,7 @@ namespace Nest
 					return cs;
 				}
 			}
-			catch (WebException webException)
-			{
-				var cs = new ConnectionStatus(webException) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
-                _ConnectionSettings.ConnectionStatusHandler(cs);
-			    return cs;
-			}		
+				
 		}
 
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
@@ -344,19 +335,20 @@ namespace Nest
             var uri = new Uri(s.Uri, path);
             var url = uri.ToString();
 
-            if (s.QueryStringParameters != null)
-            {
-                var existingParams = uri.Query.ToNameValueCollection();
-                var appendedParams = new NameValueCollection();
-                appendedParams.CopyKeyValues(existingParams);
-                appendedParams.CopyKeyValues(s.QueryStringParameters);
+			if (s.QueryStringParameters == null) 
+				return url;
 
-                var queryString = appendedParams.ToQueryString();
+			var appendedParams = new NameValueCollection();
+			var existingParams = uri.Query.ToNameValueCollection();
 
-                url = uri.ToUrlAndOverridePath(uri.PathAndQuery + queryString);
-            }
+			existingParams.CopyKeyValues(appendedParams);
+			s.QueryStringParameters.CopyKeyValues(appendedParams);
 
-            return url;            
+			var queryString = appendedParams.ToQueryString();
+
+			url = uri.ToUrlAndOverridePath(uri.PathAndQuery + queryString);
+
+			return url;            
 		}
 	}
 }

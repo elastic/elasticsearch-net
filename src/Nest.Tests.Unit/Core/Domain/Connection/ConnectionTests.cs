@@ -26,14 +26,14 @@ namespace Nest.Tests.Unit.Domain.Connection
             // Arrange
             var uri = new Uri("http://localhost");
             var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
-            var connectionSettings = new ConnectionSettings(uri, query);
+            var connectionSettings = new ConnectionSettings(uri).SetGlobalQueryStringParameters(query);
             var connection = new TestConnection(connectionSettings);
 
             // Act
             var req = connection.GetConnection("/", "GET");
 
             // Assert
-            Assert.IsTrue(string.Compare(req.Address.ToString(), "http://localhost/?authToken=ABCDEFGHIJK", StringComparison.OrdinalIgnoreCase) == 0);
+	        Assert.AreEqual(req.Address.ToString(), "http://localhost/?authToken=ABCDEFGHIJK");
         }
 
         [Test]
@@ -42,14 +42,14 @@ namespace Nest.Tests.Unit.Domain.Connection
             // Arrange
             var uri = new Uri("http://localhost:9000");
             var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
-            var connectionSettings = new ConnectionSettings(uri, query);            
+			var connectionSettings = new ConnectionSettings(uri).SetGlobalQueryStringParameters(query);            
             var connection = new TestConnection(connectionSettings);
 
             // Act
             var req = connection.GetConnection("/index/", "GET");
 
             // Assert
-            Assert.IsTrue(string.Compare(req.Address.ToString(), "http://localhost:9000/index/?authToken=ABCDEFGHIJK", StringComparison.OrdinalIgnoreCase) == 0);
+	        Assert.AreEqual(req.Address.ToString(), "http://localhost:9000/index/?authToken=ABCDEFGHIJK");
         }
     }
 }

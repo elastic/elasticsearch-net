@@ -5,13 +5,13 @@ namespace Nest
 {
     public static class NameValueCollectionExtensions
     {
-        public static void CopyKeyValues(this NameValueCollection self, NameValueCollection source)
+        public static void CopyKeyValues(this NameValueCollection source, NameValueCollection dest)
         {
             foreach (var key in source.AllKeys)
             {
-                if (self[key] != null) throw new ApplicationException(string.Format("Attempted to add duplicate key '{0}'", key));
+				if (dest[key] != null) throw new ApplicationException(string.Format("Attempted to add duplicate key '{0}'", key));
 
-                self.Add(key, source[key]);
+				dest.Add(key, source[key]);
             }
         }
 
