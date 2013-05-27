@@ -128,7 +128,7 @@ Writing complex boolean queries is one thing but more often then not you'll want
 and then
 
     .Query(q=> {
-            QueryDescriptor<ElasticSearch> query = null;
+            BaseQuery query = null;
             if (!string.IsNullOrEmpty(userInput.Name))
                 query &= q.Term(p=>p.Name, userInput.Name);
             if (!string.IsNullOrEmpty(userInput.FirstName))
