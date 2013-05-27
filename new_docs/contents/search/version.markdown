@@ -6,7 +6,11 @@ menuitem: version
 ---
 
 
-# Documentation still in progress
+# Version
 
-This is sadly still a marker file.
+Using version each hit will return the version number
+
+	.Version()
+
+	
 

@@ -6,7 +6,14 @@ menuitem: sort
 ---
 
 
-# Documentation still in progress
+# Sort
 
-This is sadly still a marker file.
+Apply a sort over the search results, do note that sorting and boosting are mutually exclusive.
+
+	.SortAscending(p=> p.Name.Suffix("sort"))
+
+or
+
+	.SortDescending("name.sort")
+
 

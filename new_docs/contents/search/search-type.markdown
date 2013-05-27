@@ -6,7 +6,9 @@ menuitem: search-type
 ---
 
 
-# Documentation still in progress
+# Search Types
 
-This is sadly still a marker file.
+There are different execution paths that can be done when executing a distributed search.
+
+	.SearchType(SearchType.Scan)
 

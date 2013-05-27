@@ -6,7 +6,13 @@ menuitem: explain
 ---
 
 
-# Documentation still in progress
+# Explain
 
-This is sadly still a marker file.
+Using explain you'll get more an explanation of each hits score
+
+You can enable it by calling
+
+	.Explain()
+
+On your search request.
 
