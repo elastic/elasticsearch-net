@@ -8,7 +8,7 @@ namespace Nest.Tests.Integration
 	{
 		public static readonly string DefaultIndex = Test.Default.DefaultIndex + "-" + Process.GetCurrentProcess().Id.ToString();
 
-		public static IConnectionSettings Settings(int? port = null)
+		public static ConnectionSettings Settings(int? port = null)
 		{
 			var host = Test.Default.Host;
 			if (port == null && Process.GetProcessesByName("fiddler").HasAny())

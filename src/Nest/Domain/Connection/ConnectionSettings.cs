@@ -28,6 +28,8 @@ namespace Nest
         public int MaximumAsyncConnections { get; private set; }
         public bool UsesPrettyResponses { get; private set; }
 		public bool TraceEnabled { get; private set; }
+		public bool DontDoubleEscapePathDotsAndSlashes { get; private set; }
+
         public Func<Type, string> DefaultTypeNameInferrer { get; private set; }
         public Action<ConnectionStatus> ConnectionStatusHandler { get; private set; }
         public FluentDictionary<Type, string> DefaultIndices { get; private set; }
@@ -132,6 +134,16 @@ namespace Nest
             this.UsesPrettyResponses = b;
             return this;
         }
+
+		/// <summary>
+		/// Append ?pretty=true to requests, this helps to debug send and received json.
+		/// </summary>
+		/// <returns></returns>
+		public ConnectionSettings SetDontDoubleEscapePathDotsAndSlashes(bool b = true)
+		{
+			this.DontDoubleEscapePathDotsAndSlashes = b;
+			return this;
+		}
 
         private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
         {

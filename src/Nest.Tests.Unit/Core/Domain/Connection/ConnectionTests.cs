@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Domain.Connection
             var connection = new TestConnection(connectionSettings);
 
             // Act
-            var req = connection.GetConnection("/", "GET");
+            var req = connection.GetConnection("", "GET");
 
             // Assert
 	        Assert.AreEqual(req.Address.ToString(), "http://localhost/?authToken=ABCDEFGHIJK");
@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Domain.Connection
             var connection = new TestConnection(connectionSettings);
 
             // Act
-            var req = connection.GetConnection("/index/", "GET");
+            var req = connection.GetConnection("index/", "GET");
 
             // Assert
 	        Assert.AreEqual(req.Address.ToString(), "http://localhost:9000/index/?authToken=ABCDEFGHIJK");

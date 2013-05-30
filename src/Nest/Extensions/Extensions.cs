@@ -60,6 +60,17 @@ namespace Nest
 			format.ThrowIfNull("format");
 			return string.Format(format, args);
 		}
+		internal static string EscapedFormat(this string format, params object[] args)
+		{
+			format.ThrowIfNull("format");
+			var arguments = new List<object>();
+			foreach (var a in args)
+			{
+				var s = a as string;
+				arguments.Add(s != null ? Uri.EscapeDataString(s) : a);
+			}
+			return string.Format(format, arguments.ToArray());
+		}
 		internal static bool IsNullOrEmpty(this string value)
 		{
 			return string.IsNullOrEmpty(value);

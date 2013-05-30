@@ -329,26 +329,24 @@ namespace Nest
 		private string _CreateUriString(string path)
 		{
             var s = this._ConnectionSettings;
-            if (!path.StartsWith("/"))
-                path = "./" + path;
 
-            var uri = new Uri(s.Uri, path);
-            var url = uri.ToString();
+			if (s.QueryStringParameters != null)
+			{
+				var uri = new Uri(s.Uri, path);
+				var qs = s.QueryStringParameters.ToQueryString(uri.Query.IsNullOrEmpty() ? "?" : "&");
+				path += qs;
+			}
 
-			if (s.QueryStringParameters == null) 
-				return url;
-
-			var appendedParams = new NameValueCollection();
-			var existingParams = uri.Query.ToNameValueCollection();
-
-			existingParams.CopyKeyValues(appendedParams);
-			s.QueryStringParameters.CopyKeyValues(appendedParams);
-
-			var queryString = appendedParams.ToQueryString();
-
-			url = uri.ToUrlAndOverridePath(uri.PathAndQuery + queryString);
-
-			return url;            
+			var url = s.Uri.AbsoluteUri + path;
+			//WebRequest.Create will replace %2F with / 
+			//this is a 'security feature'
+			//see http://mikehadlow.blogspot.nl/2011/08/how-to-stop-systemuri-un-escaping.html
+			//and http://msdn.microsoft.com/en-us/library/ee656542%28v=vs.100%29.aspx
+			//NEST will by default double escape these so that if nest is the only way you talk to elasticsearch
+			//it won't barf.
+			//If you manually set the config settings to NOT forefully unescape dots and slashes be sure to call 
+			//.SetDontDoubleEscapePathDotsAndSlashes() on the connection settings.
+			return this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? url : url.Replace("%2F", "%252F");
 		}
 	}
 }

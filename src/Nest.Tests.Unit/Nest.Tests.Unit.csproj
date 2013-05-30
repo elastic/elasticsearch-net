@@ -102,6 +102,7 @@
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\UriExtensionsTests.cs" />
+    <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />

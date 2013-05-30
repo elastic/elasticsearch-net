@@ -15,11 +15,11 @@ namespace Nest
             }
         }
 
-        public static string ToQueryString(this NameValueCollection self)
+        public static string ToQueryString(this NameValueCollection self, string prefix = "?")
         {
             if (self.AllKeys.Length == 0) return string.Empty;
 
-            return "?" + string.Join("&", Array.ConvertAll(self.AllKeys, key => string.Format("{0}={1}", Uri.EscapeUriString(key), Uri.EscapeUriString(self[key]))));
+			return prefix + string.Join("&", Array.ConvertAll(self.AllKeys, key => string.Format("{0}={1}", Uri.EscapeUriString(key), Uri.EscapeUriString(self[key]))));
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Nest
         string ProxyPassword { get; }
 
 		bool TraceEnabled { get; }
+		bool DontDoubleEscapePathDotsAndSlashes { get; }
         NameValueCollection QueryStringParameters { get; }
         Action<ConnectionStatus> ConnectionStatusHandler { get; }
 

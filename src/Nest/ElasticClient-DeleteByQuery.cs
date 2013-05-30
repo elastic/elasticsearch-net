@@ -34,7 +34,7 @@ namespace Nest
 		  var descriptor = new RoutingQueryPathDescriptor();
 		  query(descriptor);
 		  var stringQuery = this.Serialize(descriptor);
-		  var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
+		  var path = this.PathResolver.GetDeleteByQueryPathForDynamic(descriptor, "_query");
 		  if (parameters != null)
 			  path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 		  return this._deleteToPath(path, stringQuery);
@@ -49,7 +49,7 @@ namespace Nest
 	  public IDeleteResponse DeleteByQueryRaw(string query, DeleteByQueryParameters parameters = null)
 	  {
 		  var descriptor = new RoutingQueryPathDescriptor();
-		  var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
+		  var path = this.PathResolver.GetDeleteByQueryPathForDynamic(descriptor, "_query");
 		  if (parameters != null)
 			  path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 		  return this._deleteToPath(path, query);
@@ -83,7 +83,7 @@ namespace Nest
 		  var descriptor = new RoutingQueryPathDescriptor();
 		  query(descriptor);
 		  var stringQuery = this.Serialize(descriptor);
-		  var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
+		  var path = this.PathResolver.GetDeleteByQueryPathForDynamic(descriptor, "_query");
 		  if (parameters != null)
 			  path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 		  return this._deleteToPathAsync(path, stringQuery);
@@ -98,7 +98,7 @@ namespace Nest
 	  public Task<IDeleteResponse> DeleteByQueryRawAsync(string query, DeleteByQueryParameters parameters = null)
 	  {
 		  var descriptor = new RoutingQueryPathDescriptor();
-		  var path = this.PathResolver.GetPathForDynamic(descriptor, "_query");
+		  var path = this.PathResolver.GetDeleteByQueryPathForDynamic(descriptor, "_query");
 		  if (parameters != null)
 			  path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
 		  return this._deleteToPathAsync(path, query);

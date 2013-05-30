@@ -58,6 +58,7 @@
     <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
     <Compile Include="Help\AliasTests.cs" />
+    <Compile Include="Index\IndexUsingUrlIdTests.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTest.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />

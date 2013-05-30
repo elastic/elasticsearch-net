@@ -81,6 +81,7 @@
     <Compile Include="Domain\ElasticSearchProject.cs" />
     <Compile Include="Domain\GeoLocation.cs" />
     <Compile Include="Domain\Person.cs" />
+    <Compile Include="Domain\Product.cs" />
     <Compile Include="NestTestData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

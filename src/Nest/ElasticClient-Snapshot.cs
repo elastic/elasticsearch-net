@@ -35,7 +35,7 @@ namespace Nest
 		public IIndicesShardResponse Snapshot(IEnumerable<string> indices)
 		{
 			indices.ThrowIfNull("indices");
-			string path = this.PathResolver.CreateIndexPath(indices, "_gateway/snapshot");
+			string path = this.PathResolver.CreateIndexPath(indices, "/_gateway/snapshot");
 			return this._Snapshot(path);
 		}
 		private IndicesShardResponse _Snapshot(string path)
