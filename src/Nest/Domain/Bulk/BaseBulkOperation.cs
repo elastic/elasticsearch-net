@@ -48,11 +48,22 @@ namespace Nest
 		[JsonProperty("refresh ")]
 		internal bool? _Refresh { get; set; }
 
+		[JsonProperty("_retry_on_conflict")]
+		internal int? _RetriesOnConflict { get; set; }
+
 		internal virtual object _Object { get; set; }
 
 		internal virtual string GetIdForObject(IdResolver resolver)
 		{
 			return this._Id;
+		}
+		/// <summary>
+		/// Only used for bulk update operations but in the future might come in handy for other complex bulk ops.
+		/// </summary>
+		/// <returns></returns>
+		internal virtual object GetBody()
+		{
+			return null;
 		}
 	}
 }

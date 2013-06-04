@@ -1,0 +1,2 @@
+{ "update" :  {"_index":"nest_test_data","_type":"elasticsearchprojects","_id":"3", "_retry_on_conflict" : 4} }
+{"doc":{"name":"NEST"}}

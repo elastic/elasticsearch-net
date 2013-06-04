@@ -5,25 +5,24 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IUpdateResponse Update<T>(Action<UpdateDescriptor<T>> updateSelector) where T : class
+		public IUpdateResponse Update<T>(Action<UpdateDescriptor<T, T>> updateSelector) where T : class
 		{
-			var updateDescriptor = new UpdateDescriptor<T>();
+			return this.Update<T, T>(updateSelector);
+		}
+		public IUpdateResponse Update<T, K>(Action<UpdateDescriptor<T, K>> updateSelector) 
+			where T : class
+			where K : class
+		{
+			var updateDescriptor = new UpdateDescriptor<T, K>();
 			updateSelector(updateDescriptor);
-			var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
-			//var data = ElasticClient.Serialize(updateDescriptor);
-			var path = this.CreateUpdatePath<T>(updateDescriptor);
+			//var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
+			var data = this.SerializeCamelCase(updateDescriptor);
+			var path = this.CreateUpdatePath<T, K>(updateDescriptor);
 			return this._Update(path, data);
 		}
-		public IUpdateResponse Update(Action<UpdateDescriptor<dynamic>> updateSelector)
-		{
-			var updateDescriptor = new UpdateDescriptor<dynamic>();
-			updateSelector(updateDescriptor);
-			var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
-			//var data = ElasticClient.Serialize(updateDescriptor);
-			var path = this.CreateUpdatePath<dynamic>(updateDescriptor);
-			return this._Update(path, data);
-		}
-		private string CreateUpdatePath<T>(UpdateDescriptor<T> s) where T : class
+		private string CreateUpdatePath<T, K>(UpdateDescriptor<T, K> s) 
+			where T : class
+			where K : class
 		{
 			var index = s._Index ?? this.IndexNameResolver.GetIndexForType<T>();
 			var type = s._Type != null ? s._Type.Resolve(this.Settings) : this.GetTypeNameFor<T>();

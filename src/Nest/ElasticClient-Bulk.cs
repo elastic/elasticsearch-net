@@ -50,6 +50,11 @@ namespace Nest
 					string jsonCommand = JsonConvert.SerializeObject(operation._Object, Formatting.None, IndexSerializationSettings);
 					sb.Append(jsonCommand + "\n");
 				}
+				else if (command == "update")
+				{
+					string jsonCommand = JsonConvert.SerializeObject(operation.GetBody(), Formatting.None, IndexSerializationSettings);
+					sb.Append(jsonCommand + "\n");
+				}
 			}
 			var json = sb.ToString();
 			var path = "_bulk";

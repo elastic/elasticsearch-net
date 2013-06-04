@@ -326,8 +326,10 @@ namespace Nest
 		bool TryConnect(out ConnectionStatus status);
 		IUnregisterPercolateResponse UnregisterPercolator(string index, string name);
 		IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class;
-		IUpdateResponse Update(Action<UpdateDescriptor<dynamic>> updateSelector);
-		IUpdateResponse Update<T>(Action<UpdateDescriptor<T>> updateSelector) where T : class;
+		IUpdateResponse Update<T>(Action<UpdateDescriptor<T, T>> updateSelector) where T : class;
+		IUpdateResponse Update<T, K>(Action<UpdateDescriptor<T, K>> updateSelector) 
+			where T : class
+			where K : class;
 		ISettingsOperationResponse UpdateSettings(IndexSettings settings);
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 		IElasticSearchVersionInfo VersionInfo { get; }

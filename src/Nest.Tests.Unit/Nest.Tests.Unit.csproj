@@ -74,6 +74,7 @@
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
@@ -220,6 +221,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Core\Bulk\BulkOperations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Bulk\BulkUpdateDetails.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Indices\Analysis\Tokenizers\TestTokenizers.json" />
     <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -324,6 +331,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpsertUsingScriptAndPartialObject.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpdateUsingPartial.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpsertUsingScript.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\ClassWithCollectionSerializes.json">

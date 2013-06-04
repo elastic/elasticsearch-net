@@ -45,6 +45,21 @@ namespace Nest
 			this._Operations.Add(descriptor);
 			return this;
 		}
+		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, BulkUpdateDescriptor<T, T>> bulkUpdateSelector) where T : class
+		{
+			return this.Update<T, T>(bulkUpdateSelector);
+		}
+		public BulkDescriptor Update<T, K>(Func<BulkUpdateDescriptor<T, K>, BulkUpdateDescriptor<T, K>> bulkUpdateSelector) 
+			where T : class
+			where K : class
+		{
+			bulkUpdateSelector.ThrowIfNull("bulkUpdateSelector");
+			var descriptor = bulkUpdateSelector(new BulkUpdateDescriptor<T, K>());
+			if (descriptor == null)
+				return this;
+			this._Operations.Add(descriptor);
+			return this;
+		}
 
 		/// <summary>
 		/// Allows you to perform the multiget on a fixed path. 

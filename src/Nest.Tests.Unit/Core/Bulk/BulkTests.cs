@@ -2,6 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Reflection;
 
 namespace Nest.Tests.Unit.Core.Bulk
 {
@@ -9,42 +10,32 @@ namespace Nest.Tests.Unit.Core.Bulk
 	public class BulkTests : BaseJsonTests
 	{
 		[Test]
-		public void BulkNonFixed()
+		public void BulkOperations()
 		{
 			var result = this._client.Bulk(b => b
 				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
 				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
 				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+				.Update<ElasticSearchProject, object>(i => i
+					.Object(new ElasticSearchProject { Id = 3 })
+					.Document(new { name = "NEST"})
+				)
 			);
 			var status = result.ConnectionStatus;
-			var uri = new Uri(result.ConnectionStatus.RequestUrl);
-			uri.AbsolutePath.Should().Be("/_bulk");
+			this.BulkJsonEquals(status.Request, MethodInfo.GetCurrentMethod());
 		}
 		[Test]
-		public void BulkFixedIndex()
+		public void BulkUpdateDetails()
 		{
 			var result = this._client.Bulk(b => b
-				.FixedPath("myindex")
-				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 2 }))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
-				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+				.Update<ElasticSearchProject, object>(i => i
+					.Object(new ElasticSearchProject { Id = 3 })
+					.Document(new { name = "NEST" })
+					.RetriesOnConflict(4)
+				)
 			);
 			var status = result.ConnectionStatus;
-			var uri = new Uri(result.ConnectionStatus.RequestUrl);
-			uri.AbsolutePath.Should().Be("/myindex/_bulk");
-		}
-		[Test]
-		public void BulkFixedIndexAndType()
-		{
-			var result = this._client.Bulk(b => b
-				.FixedPath("myindex", "mytype")
-				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 2 }))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
-				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
-			);
-			var status = result.ConnectionStatus;
-			var uri = new Uri(result.ConnectionStatus.RequestUrl);
-			uri.AbsolutePath.Should().Be("/myindex/mytype/_bulk");
+			this.BulkJsonEquals(status.Request, MethodInfo.GetCurrentMethod());
 		}
 	}
 }
