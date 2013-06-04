@@ -18,8 +18,8 @@ namespace Nest.Tests.Integration.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 123123 }))
 				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 123123 }))
 				
 			);
 			result.Should().NotBeNull();

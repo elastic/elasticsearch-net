@@ -23,6 +23,7 @@ namespace Nest
 		public IBulkResponse Bulk(BulkDescriptor bulkDescriptor)
 		{
 			bulkDescriptor.ThrowIfNull("bulkDescriptor");
+			bulkDescriptor._Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
 			var sb = new StringBuilder();
 			
 			foreach (var operation in bulkDescriptor._Operations)
@@ -120,7 +121,7 @@ namespace Nest
 
 		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 
 			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
@@ -130,7 +131,7 @@ namespace Nest
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> objects, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 
 			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
