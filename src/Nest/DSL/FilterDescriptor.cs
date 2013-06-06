@@ -75,6 +75,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "has_child")]
 		internal object HasChildFilter { get; set; }
 
+		[JsonProperty(PropertyName = "has_parent")]
+		internal object HasParentFilter { get; set; }
+
 		[JsonProperty(PropertyName = "numeric_range")]
 		internal Dictionary<string, object> NumericRangeFilter { get; set; }
 
@@ -150,6 +153,7 @@ namespace Nest
 				TypeFilter = TypeFilter,
 				MatchAllFilter = MatchAllFilter,
 				HasChildFilter = HasChildFilter,
+				HasParentFilter = HasParentFilter,
 				NumericRangeFilter = NumericRangeFilter,
 				RangeFilter = RangeFilter,
 				PrefixFilter = PrefixFilter,
@@ -498,6 +502,26 @@ namespace Nest
 
 			return new FilterDescriptor<T>() { HasChildFilter = filter };
 		}
+
+		/// <summary>
+		/// The has_child filter accepts a query and the child type to run against, 
+		/// and results in parent documents that have child docs matching the query.
+		/// </summary>
+		/// <typeparam name="K">Type of the child</typeparam>
+		public BaseFilter HasParent<K>(Action<HasParentFilterDescriptor<K>> filterSelector) where K : class
+		{
+			var filter = new HasParentFilterDescriptor<K>();
+			if (filterSelector == null)
+				return CreateConditionlessFilterDescriptor("has_parent", filter);
+
+			filterSelector(filter);
+
+			if (filter.IsConditionless)
+				return CreateConditionlessFilterDescriptor("has_parent", filter);
+
+			return new FilterDescriptor<T>() { HasParentFilter = filter };
+		}
+
 		/// <summary>
 		/// A limit filter limits the number of documents (per shard) to execute on.
 		/// </summary>
