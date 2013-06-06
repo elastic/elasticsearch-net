@@ -4,28 +4,28 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Unit.Search.Filter.Singles
 {
 	[TestFixture]
-	public class HasChildFilterJson
+	public class HasParentFilterJson
 	{
 		[Test]
-		public void HasChildFilter()
+		public void HasParentFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<Person>().From(0).Size(10)
 				.Filter(ff=>ff
-					.HasChild<Person>(d=>d
+					.HasParent<ElasticSearchProject>(d=>d
 						.Scope("my_scope")
-						.Query(q=>q.Term(p=>p.FirstName, "value"))
+						.Query(q=>q.Term(p=>p.Country, "value"))
 					)
 				);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
-					""has_child"": {
-					  ""type"": ""people"",
+					""has_parent"": {
+					  ""type"": ""elasticsearchprojects"",
 					  ""_scope"": ""my_scope"",
 					  ""query"": {
 						""term"": {
-						  ""firstName"": {
+						  ""country"": {
 							""value"": ""value""
 						  }
 						}
@@ -33,7 +33,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					}
 				}
 			}";
-			Assert.True(json.JsonEquals(expected), json);
+			Assert.True(json.JsonEquals(expected), json);		
 		}
 	}
 }

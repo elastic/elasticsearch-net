@@ -23,6 +23,7 @@ namespace Nest
 		BaseFilter GeoPolygon(string field, IEnumerable<Tuple<double, double>> points);
 		BaseFilter GeoPolygon(string fieldName, params string[] points);
 		BaseFilter HasChild<K>(Action<HasChildFilterDescriptor<K>> querySelector) where K : class;
+		BaseFilter HasParent<K>(Action<HasParentFilterDescriptor<K>> querySelector) where K : class;
 		BaseFilter Ids(IEnumerable<string> types, IEnumerable<string> values);
 		BaseFilter Ids(IEnumerable<string> values);
 		BaseFilter Ids(string type, IEnumerable<string> values);
