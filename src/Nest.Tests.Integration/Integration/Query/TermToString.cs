@@ -82,13 +82,25 @@ namespace Nest.Tests.Integration.Integration.Query
 			);
 			this.AssertTermResults(results);
 		}
+
+		[Test]
+		public void BoolToStringTests()
+		{
+			//this should serialize to ISO NOT simply datetime.tostring()!
+			var results = _client.Search<ElasticSearchProject>(s => s
+				.Query(q => q
+					.Term(p => p.BoolValue, _LookFor.BoolValue)
+					)
+			);
+			this.AssertTermResults(results, 7);
+		}
 		
 
-		private void AssertTermResults(IQueryResponse<ElasticSearchProject> results)
+		private void AssertTermResults(IQueryResponse<ElasticSearchProject> results, int expected = 1)
 		{
 			Assert.True(results.IsValid, results.ConnectionStatus.Result);
 			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.Result);
-			Assert.AreEqual(1, results.Total);
+			Assert.AreEqual(expected, results.Total);
 		}
 	}
 }

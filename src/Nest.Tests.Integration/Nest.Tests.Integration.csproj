@@ -99,6 +99,7 @@
     <Compile Include="Integration\Filter\MissingExistsFilterTests.cs" />
     <Compile Include="Integration\Filter\PrefixFilterTests.cs" />
     <Compile Include="Integration\Filter\RangeFilterTests.cs" />
+    <Compile Include="Integration\Query\TermToString.cs" />
     <Compile Include="Integration\Query\TextPhraseQueryTests.cs" />
     <Compile Include="Integration\Query\TextPhrasePrefixQueryTests.cs" />
     <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
