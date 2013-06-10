@@ -14,10 +14,10 @@ namespace Nest
 	public class Term : IQuery
 	{
 		internal string Field { get; set; }
-		internal string Value { get; set; }
+		internal object Value { get; set; }
 		internal double? Boost { get; set; }
 
-		internal bool IsConditionless { get { return this.Value.IsNullOrEmpty() || this.Field.IsNullOrEmpty(); } }
+		internal bool IsConditionless { get { return this.Value == null || this.Value.ToString().IsNullOrEmpty() || this.Field.IsNullOrEmpty(); } }
 
 		public Term()
 		{

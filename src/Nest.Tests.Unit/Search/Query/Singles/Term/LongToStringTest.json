@@ -1,0 +1,9 @@
+  {
+  "query": {
+    "term": {
+      "longValue": {
+        "value": 20000
+      }
+    }
+  }
+}

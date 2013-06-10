@@ -34,8 +34,8 @@ namespace Nest
 		BaseQuery SpanOr(Action<SpanOrQueryDescriptor<T>> selector);
 		BaseQuery SpanTerm(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null);
 		BaseQuery SpanTerm(string field, string value, double? Boost = null);
-		BaseQuery Term(System.Linq.Expressions.Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null);
-		BaseQuery Term(string field, string value, double? Boost = null);
+		BaseQuery Term<K>(System.Linq.Expressions.Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null);
+		BaseQuery Term(string field, object value, double? Boost = null);
 		BaseQuery Terms(System.Linq.Expressions.Expression<Func<T, object>> objectPath, params string[] terms);
 		BaseQuery Terms(string field, params string[] terms);
 		BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T>> selector);

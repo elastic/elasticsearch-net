@@ -671,8 +671,8 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term(Expression<Func<T, object>> fieldDescriptor
-			, string value
+		public BaseQuery Term<K>(Expression<Func<T, K>> fieldDescriptor
+			, K value
 			, double? Boost = null)
 		{
 			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
@@ -682,9 +682,20 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term(string field, string value, double? Boost = null)
+		public BaseQuery Term(Expression<Func<T, object>> fieldDescriptor
+			, object value
+			, double? Boost = null)
 		{
-			var term = new Term() { Field = field, Value = value };
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
+			return this.Term(field, value, Boost);
+		}
+		/// <summary>
+		/// Matches documents that have fields that contain a term (not analyzed). 
+		/// The term query maps to Lucene TermQuery. 
+		/// </summary>
+		public BaseQuery Term(string field, object value, double? Boost = null)
+		{
+			var term = new Term() { Field = field, Value = (value != null) ? value : null };
 			if (term.IsConditionless)
 				return CreateConditionlessQueryDescriptor(term);
 			if (Boost.HasValue)

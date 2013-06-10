@@ -108,7 +108,8 @@
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
-    <Compile Include="Search\Query\Singles\MultiMatch\TermQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
+    <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
     <Compile Include="Search\Rescore\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Search\Facets\FacetJson.cs" />
@@ -198,7 +199,7 @@
     <Compile Include="Search\Query\Singles\SpanNotQueryJson.cs" />
     <Compile Include="Search\Query\Singles\SpanOrQueryJson.cs" />
     <Compile Include="Search\Query\Singles\SpanTermQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\TermQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\Term\TermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TermsQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TextPhrasePrefixQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TextPhraseQueryJson.cs" />
@@ -354,6 +355,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
+    <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />
+    <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\LongToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\FloatToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\DoubleToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\IntToStringTest.json" />
     <None Include="Search\Rescore\RescoreSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
