@@ -49,6 +49,8 @@ namespace Nest
 		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "text")]
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "multi_match")]
+		internal MultiMatchQueryDescriptor<T> MultiMatchQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "match")]
 		internal IDictionary<string, object> MatchQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "fuzzy")]
@@ -392,6 +394,23 @@ namespace Nest
 				{ query._Field, query}
 			};
 			return new QueryDescriptor<T> { MatchQueryDescriptor = this.MatchQueryDescriptor };
+		}
+
+		/// <summary>
+		//The multi_match query builds further on top of the match query by allowing multiple fields to be specified. 
+		//The idea here is to allow to more easily build a concise match type query over multiple fields instead of using a 
+		//relatively more expressive query by using multiple match queries within a bool query.
+		/// </summary>
+		public BaseQuery MultiMatch(Action<MultiMatchQueryDescriptor<T>> selector)
+		{
+			var query = new MultiMatchQueryDescriptor<T>();
+			selector(query);
+
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			this.MultiMatchQueryDescriptor = query;
+			return new QueryDescriptor<T> { MultiMatchQueryDescriptor = this.MultiMatchQueryDescriptor };
 		}
 
 		/// <summary>

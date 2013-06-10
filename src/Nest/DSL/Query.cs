@@ -217,6 +217,12 @@ namespace Nest
 			return new QueryDescriptor<T>().MatchPhrasePrefix(selector);
 		}
 
+		public static BaseQuery MultiMatch(Action<MultiMatchQueryDescriptor<T>> selector)
+		{
+			return new QueryDescriptor<T>().MultiMatch(selector);
+		}
+
+
 		public static BaseQuery TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
 		{
 			return new QueryDescriptor<T>().TopChildren<K>(selector);
