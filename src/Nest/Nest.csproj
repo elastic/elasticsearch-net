@@ -73,6 +73,8 @@
     <Compile Include="DSL\Filter\HasParentFilterDescriptor.cs" />
     <Compile Include="DSL\PercolatorDescriptor.cs" />
     <Compile Include="DSL\PercolateDescriptor.cs" />
+    <Compile Include="DSL\Query\ExternalFieldDeclarationDescriptor.cs" />
+    <Compile Include="DSL\Query\IExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
