@@ -463,6 +463,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
@@ -498,6 +499,7 @@
     <Compile Include="Resolvers\Converters\TermConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
+    <Compile Include="Resolvers\IndexNameMarker.cs" />
     <Compile Include="Resolvers\PathResolver.cs" />
     <Compile Include="Resolvers\IndexNameResolver.cs" />
     <Compile Include="Resolvers\IdResolver.cs" />
@@ -520,6 +522,7 @@
     <Compile Include="Enums\FieldType.cs" />
     <Compile Include="Enums\NamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolvers\TypeNameMarker.cs" />
     <Compile Include="Resolvers\TypeNameResolver.cs" />
     <Compile Include="Resolvers\Writers\TypeMappingWriter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\PatternReplaceTokenFilter.cs" />

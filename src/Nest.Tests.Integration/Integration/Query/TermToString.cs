@@ -92,15 +92,15 @@ namespace Nest.Tests.Integration.Integration.Query
 					.Term(p => p.BoolValue, _LookFor.BoolValue)
 					)
 			);
-			this.AssertTermResults(results, 7);
+			this.AssertTermResults(results);
 		}
 		
 
-		private void AssertTermResults(IQueryResponse<ElasticSearchProject> results, int expected = 1)
+		private void AssertTermResults(IQueryResponse<ElasticSearchProject> results)
 		{
 			Assert.True(results.IsValid, results.ConnectionStatus.Result);
 			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.Result);
-			Assert.AreEqual(expected, results.Total);
+			Assert.GreaterOrEqual(results.Total, 1);
 		}
 	}
 }

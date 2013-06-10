@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿using System.Reflection;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Unit.Search.Query.Singles
+namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 {
 	[TestFixture]
-	public class TermsQueryJson
+	public class TermsQueryJson : BaseJsonTests
 	{
 		[Test]
 		public void TermsQuery()
@@ -70,6 +71,29 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					}
 			}";
 			Assert.True(json.JsonEquals(expected), json);
+		}
+		
+		[Test]
+		public void TermsQueryDescriptorUsingExternalField()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(ff => ff.
+					TermsDescriptor(tq => tq
+						.OnField(p=>p.IntValues)
+						.MinimumMatch(2)
+						.DisableCoord()
+						.OnExternalField<Person>(ef=>ef
+							.Path(p=>p.Id)
+							.Id(4)
+						)
+						.CacheKey("user_4_key")
+
+					)
+				);
+
+			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
 	}
 }

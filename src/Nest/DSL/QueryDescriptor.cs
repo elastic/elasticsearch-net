@@ -36,13 +36,13 @@ namespace Nest
 		[JsonProperty(PropertyName = "ids")]
 		internal IdsQuery IdsQuery { get; set; }
 		[JsonProperty(PropertyName = "custom_score")]
-        internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
-        [JsonProperty(PropertyName = "custom_filters_score")]
-        internal CustomFiltersScoreDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
+		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "custom_filters_score")]
+		internal CustomFiltersScoreDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "custom_boost_factor")]
-        internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
-        [JsonProperty(PropertyName = "constant_score")]
-        internal ConstantScoreQueryDescriptor<T> ConstantScoreQueryDescriptor { get; set; }
+		internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "constant_score")]
+		internal ConstantScoreQueryDescriptor<T> ConstantScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "dis_max")]
 		internal DismaxQueryDescriptor<T> DismaxQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "filtered")]
@@ -102,7 +102,7 @@ namespace Nest
 			if (this._Strict)
 				throw new DslException("Query resulted in a conditionless {0} query (json by approx):\n"
 					.F(
-						query.GetType().Name.Replace("Descriptor", "").Replace("`1","")
+						query.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
 					)
 				);
 			return new QueryDescriptor<T> { IsConditionless = !this._Strict };
@@ -193,17 +193,35 @@ namespace Nest
 			if (query.IsConditionless)
 				return CreateConditionlessQueryDescriptor(query);
 
-			this.TermsQueryDescriptor = new Dictionary<string, object>() 
+			if (query._ExternalField == null)
 			{
-				{ query._Field, query._Terms}
-			};
+				this.TermsQueryDescriptor = new Dictionary<string, object>() 
+				{
+					{ query._Field, query._Terms}
+				};
+			}
+			else
+			{
+				if (query._ExternalField._Id.IsNullOrEmpty())
+					throw new DslException("terms query external field has no id set");
+
+				this.TermsQueryDescriptor = new Dictionary<string, object>() 
+				{
+					{ query._Field, query._ExternalField}
+				};
+			}
+
 			if (query._MinMatch.HasValue)
 			{
 				this.TermsQueryDescriptor.Add("minimum_match", query._MinMatch);
 			}
 			if (query._DisableCord)
 			{
-				this.TermsQueryDescriptor.Add("disable_coord", query._DisableCord);	
+				this.TermsQueryDescriptor.Add("disable_coord", query._DisableCord);
+			}
+			if (!query._CacheKey.IsNullOrEmpty())
+			{
+				this.TermsQueryDescriptor.Add("_cache_key", query._CacheKey);
 			}
 			return new QueryDescriptor<T> { TermsQueryDescriptor = this.TermsQueryDescriptor };
 		}
@@ -587,36 +605,36 @@ namespace Nest
 			this.CustomBoostFactorQueryDescriptor = query;
 			return new QueryDescriptor<T> { CustomBoostFactorQueryDescriptor = this.CustomBoostFactorQueryDescriptor };
 		}
-        /// <summary>
-        /// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
-        /// computation derived from other field values in the doc (numeric ones) using script expression
-        /// </summary>
-        public BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
-        {
-            var query = new CustomScoreQueryDescriptor<T>();
-            customScoreQuery(query);
+		/// <summary>
+		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
+		/// computation derived from other field values in the doc (numeric ones) using script expression
+		/// </summary>
+		public BaseQuery CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
+		{
+			var query = new CustomScoreQueryDescriptor<T>();
+			customScoreQuery(query);
 
-            if (query.IsConditionless)
-                return CreateConditionlessQueryDescriptor(query);
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
 
-            this.CustomScoreQueryDescriptor = query;
-            return new QueryDescriptor<T> { CustomScoreQueryDescriptor = this.CustomScoreQueryDescriptor };
-        }
-        /// <summary>
-        /// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
-        /// computation derived from other field values in the doc (numeric ones) using script or boost expression
-        /// </summary>
-        public BaseQuery CustomFiltersScore(Action<CustomFiltersScoreDescriptor<T>> customFiltersScoreQuery)
-        {
-            var query = new CustomFiltersScoreDescriptor<T>();
-            customFiltersScoreQuery(query);
+			this.CustomScoreQueryDescriptor = query;
+			return new QueryDescriptor<T> { CustomScoreQueryDescriptor = this.CustomScoreQueryDescriptor };
+		}
+		/// <summary>
+		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
+		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
+		/// </summary>
+		public BaseQuery CustomFiltersScore(Action<CustomFiltersScoreDescriptor<T>> customFiltersScoreQuery)
+		{
+			var query = new CustomFiltersScoreDescriptor<T>();
+			customFiltersScoreQuery(query);
 
-            if (query.IsConditionless)
-                return CreateConditionlessQueryDescriptor(query);
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
 
-            this.CustomFiltersScoreQueryDescriptor = query;
-            return new QueryDescriptor<T> { CustomFiltersScoreQueryDescriptor = this.CustomFiltersScoreQueryDescriptor };
-        }
+			this.CustomFiltersScoreQueryDescriptor = query;
+			return new QueryDescriptor<T> { CustomFiltersScoreQueryDescriptor = this.CustomFiltersScoreQueryDescriptor };
+		}
 		/// <summary>
 		/// A query that matches documents matching boolean combinations of other queries. The bool query maps to 
 		/// Lucene BooleanQuery. 
@@ -727,8 +745,8 @@ namespace Nest
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
 		public BaseQuery Wildcard(
-			string field, 
-			string value, 
+			string field,
+			string value,
 			double? Boost = null,
 			RewriteMultiTerm? Rewrite = null)
 		{
@@ -764,8 +782,8 @@ namespace Nest
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
 		public BaseQuery Prefix(
-			string field, 
-			string value, 
+			string field,
+			string value,
 			double? Boost = null,
 			RewriteMultiTerm? Rewrite = null)
 		{
