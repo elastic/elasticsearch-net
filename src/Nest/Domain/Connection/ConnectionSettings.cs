@@ -76,7 +76,6 @@ namespace Nest
 			return this;
 		}
 
-
 		/// <summary>
 		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
 		/// and specify the timeout in various calls on Elasticsearch's side.

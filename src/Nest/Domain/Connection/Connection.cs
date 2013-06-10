@@ -145,7 +145,7 @@ namespace Nest
 			}
 		}
 
-		private HttpWebRequest CreateWebRequest(string path, string method)
+		protected virtual HttpWebRequest CreateWebRequest(string path, string method)
 		{
 			var url = this._CreateUriString(path);
 			
