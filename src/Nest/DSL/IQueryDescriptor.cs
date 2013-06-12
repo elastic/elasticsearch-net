@@ -17,6 +17,7 @@ namespace Nest
 		BaseQuery FuzzyLikeThis(Action<FuzzyLikeThisDescriptor<T>> selector);
 		BaseQuery FuzzyNumeric(Action<FuzzyNumericQueryDescriptor<T>> selector);
 		BaseQuery HasChild<K>(Action<HasChildQueryDescriptor<K>> selector) where K : class;
+		BaseQuery HasParent<K>(Action<HasParentQueryDescriptor<K>> selector) where K : class;
 		BaseQuery Ids(IEnumerable<string> types, IEnumerable<string> values);
 		BaseQuery Ids(IEnumerable<string> values);
 		BaseQuery Ids(string type, IEnumerable<string> values);

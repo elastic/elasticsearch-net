@@ -64,6 +64,8 @@ namespace Nest
 		internal FuzzyLikeThisDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
 		[JsonProperty(PropertyName = "has_child")]
 		internal object HasChildQueryDescriptor { get; set; }
+		[JsonProperty(PropertyName = "has_parent")]
+		internal object HasParentQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "mlt")]
 		internal MoreLikeThisQueryDescriptor<T> MoreLikeThisDescriptor { get; set; }
 		[JsonProperty(PropertyName = "range")]
@@ -133,6 +135,7 @@ namespace Nest
 
 				FuzzyLikeThisDescriptor = FuzzyLikeThisDescriptor,
 				HasChildQueryDescriptor = HasChildQueryDescriptor,
+				HasParentQueryDescriptor = HasParentQueryDescriptor,
 				MoreLikeThisDescriptor = MoreLikeThisDescriptor,
 				RangeQueryDescriptor = RangeQueryDescriptor,
 
@@ -526,6 +529,21 @@ namespace Nest
 
 			this.HasChildQueryDescriptor = query;
 			return new QueryDescriptor<T> { HasChildQueryDescriptor = this.HasChildQueryDescriptor };
+		}
+		/// <summary>
+		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
+		/// constant_score.
+		/// </summary>
+		/// <typeparam name="K">Type of the child</typeparam>
+		public BaseQuery HasParent<K>(Action<HasParentQueryDescriptor<K>> selector) where K : class
+		{
+			var query = new HasParentQueryDescriptor<K>();
+			selector(query);
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			this.HasParentQueryDescriptor = query;
+			return new QueryDescriptor<T> { HasParentQueryDescriptor = this.HasParentQueryDescriptor };
 		}
 		/// <summary>
 		/// The top_children query runs the child query with an estimated hits size, and out of the hit docs, aggregates 

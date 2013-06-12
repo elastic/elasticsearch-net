@@ -10,7 +10,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class HasChildQueryDescriptor<T> : IQuery where T : class
+	public class HasParentQueryDescriptor<T> : IQuery where T : class
 	{
 		internal bool IsConditionless
 		{
@@ -20,7 +20,7 @@ namespace Nest
 			}
 		}
 
-		public HasChildQueryDescriptor()
+		public HasParentQueryDescriptor()
 		{
 			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
 		}
@@ -32,37 +32,33 @@ namespace Nest
 
 		[JsonProperty("score_type")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		internal ChildScoreType? _ScoreType { get; set; }
+		internal ParentScoreType? _ScoreType { get; set; }
 
 		[JsonProperty("query")]
 		internal BaseQuery _QueryDescriptor { get; set; }
 
-		public HasChildQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public HasParentQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
 			this._QueryDescriptor = querySelector(q);
 			return this;
 		}
-		public HasChildQueryDescriptor<T> Scope(string scope)
+		public HasParentQueryDescriptor<T> Scope(string scope)
 		{
 			this._Scope = scope;
 			return this;
 		}
-		public HasChildQueryDescriptor<T> Type(string type)
+		public HasParentQueryDescriptor<T> Type(string type)
 		{
 			this._Type = type;
 			return this;
 		}
 
-		public HasChildQueryDescriptor<T> Score(ChildScoreType? scoreType)
+		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.score)
 		{
-			this._ScoreType = scoreType;
+			_ScoreType = scoreType;
 			return this;
 		}
-
-
-		[JsonProperty(PropertyName = "_cache")]
-		internal bool? _Cache { get; set; }
 
 		[JsonProperty(PropertyName = "_name")]
 		internal string _Name { get; set; }

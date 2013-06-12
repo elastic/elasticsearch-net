@@ -71,6 +71,9 @@
     <Compile Include="Domain\PathAndData.cs" />
     <Compile Include="DSL\BulkUpdateDescriptor.cs" />
     <Compile Include="DSL\Filter\HasParentFilterDescriptor.cs" />
+    <Compile Include="DSL\Query\ChildScoreType.cs" />
+    <Compile Include="DSL\Query\HasParentQueryDescriptor.cs" />
+    <Compile Include="DSL\Query\ParentScoreType.cs" />
     <Compile Include="DSL\PercolatorDescriptor.cs" />
     <Compile Include="DSL\PercolateDescriptor.cs" />
     <Compile Include="DSL\Query\ExternalFieldDeclarationDescriptor.cs" />
