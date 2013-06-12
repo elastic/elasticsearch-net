@@ -9,6 +9,8 @@ namespace Nest
 	{
 		public string Index { get; set; }
 		public string Field { get; set; }
-		public string Analyzer { get; set; }
+        public string Analyzer { get; set; }
+        public string Filters { get; set; }
+        public string Tokenizer { get; set; }
 	}
 }
