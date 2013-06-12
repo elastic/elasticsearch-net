@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -18,6 +19,6 @@ namespace Nest
 		}
 
 		[JsonProperty(PropertyName = "value")]
-		public string Value { get; set;}
+		public TypeNameMarker Value { get; set; }
 	}
 }
