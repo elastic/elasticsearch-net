@@ -549,6 +549,23 @@ namespace Nest
 			this.TypeFilter = filter;
 			return new FilterDescriptor<T>() { TypeFilter = filter };
 		}
+
+		/// <summary>
+		/// Filters documents matching the provided document / mapping type. 
+		/// Note, this filter can work even when the _type field is not indexed 
+		/// (using the _uid field).
+		/// </summary>
+		public BaseFilter Type(Type type)
+		{
+			var filter = new TypeFilter { Value = type };
+			if (filter.IsConditionless)
+				return CreateConditionlessFilterDescriptor("filter", filter);
+
+			this.SetCacheAndName(filter);
+			this.TypeFilter = filter;
+			return new FilterDescriptor<T>() { TypeFilter = filter };
+		}
+
 		/// <summary>
 		/// A filter that matches on all documents.
 		/// </summary>

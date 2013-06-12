@@ -247,10 +247,8 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		public void TypeTest()
 		{
 			this.DoConditionlessFilter(f => f.Type(string.Empty));
-			this.DoConditionlessFilter(f => f.Type(null));
+			this.DoConditionlessFilter(f => f.Type((string)null));
 		}
-
-
 
 	}
 }
