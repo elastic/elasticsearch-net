@@ -317,6 +317,7 @@ namespace Nest
 		IIndicesShardResponse Snapshot(IEnumerable<string> indices);
 		IIndicesShardResponse Snapshot(string index);
 		IIndicesShardResponse Snapshot<T>() where T : class;
+	    IClusterStateResponse ClusterState(ClusterStateInfo stateInfo, IEnumerable<string> indices = null);
 		IGlobalStatsResponse Stats();
 		IGlobalStatsResponse Stats(StatsParams parameters);
 		IStatsResponse Stats(IEnumerable<string> indices);

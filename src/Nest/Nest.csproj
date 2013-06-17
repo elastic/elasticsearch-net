@@ -69,6 +69,8 @@
   <ItemGroup>
     <Compile Include="Domain\Connection\ConnectionStatusTracer.cs" />
     <Compile Include="Domain\PathAndData.cs" />
+    <Compile Include="Domain\Responses\ClusterStateResponse.cs" />
+    <Compile Include="Domain\State\ClusterState.cs" />
     <Compile Include="DSL\BulkUpdateDescriptor.cs" />
     <Compile Include="DSL\Filter\HasParentFilterDescriptor.cs" />
     <Compile Include="DSL\Query\ChildScoreType.cs" />
@@ -79,6 +81,8 @@
     <Compile Include="DSL\Query\ExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\IExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\MultiMatchQueryDescriptor.cs" />
+    <Compile Include="ElasticClient-State.cs" />
+    <Compile Include="Enums\ClusterStateInfo.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
