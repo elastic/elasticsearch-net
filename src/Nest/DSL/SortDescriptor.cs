@@ -18,6 +18,12 @@ namespace Nest.DSL.Descriptors
     [JsonProperty("order")]
     internal string _Order { get; set; }
 
+    [JsonProperty("nested_filter")]
+    internal BaseFilter _NestedFilter { get; set; }
+
+    [JsonProperty("nested_path")]
+    internal string _NestedPath { get; set; }
+
     public virtual SortDescriptor<T> OnField(string field)
     {
       this._Field = field;
@@ -64,6 +70,23 @@ namespace Nest.DSL.Descriptors
       this._Order = "desc";
       return this;
     }
+    public virtual SortDescriptor<T> NestedFilter(Func<FilterDescriptor<T>, BaseFilter> filterSelector) {
+        filterSelector.ThrowIfNull("filterSelector");
+
+        var filter = new FilterDescriptor<T>();
+        _NestedFilter = filterSelector(filter);
+        return this;
+    }
+    public virtual SortDescriptor<T> NestedPath(string path) {
+        _NestedPath = path;
+        return this;
+    }
+    public SortDescriptor<T> NestedPath(Expression<Func<T, object>> objectPath) {
+        var resolver = new PropertyNameResolver();
+        _NestedPath = resolver.Resolve(objectPath);
+        return this;
+    }
+
     /// <summary>
     /// Pass true to sort ascending false to sort descending
     /// </summary>
