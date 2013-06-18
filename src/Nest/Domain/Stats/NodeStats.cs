@@ -74,34 +74,34 @@ namespace Nest
             [JsonProperty("throttle_time")]
             public string ThrottleTime { get; internal set; }
             [JsonProperty("throttle_time_in_millis")]
-            public int ThrottleTimeInMilliseconds { get; internal set; }
+            public long ThrottleTimeInMilliseconds { get; internal set; }
         }
 
         [JsonObject]
         public class IndexCacheStats
         {
             [JsonProperty(PropertyName = "field_evictions")]
-            public int FieldEvictions { get; internal set; }
+            public long FieldEvictions { get; internal set; }
             [JsonProperty(PropertyName = "field_size")]
             public string FieldSize { get; internal set; }
             [JsonProperty(PropertyName = "field_size_in_bytes")]
-            public int FieldSizeInBytes { get; internal set; }
+            public long FieldSizeInBytes { get; internal set; }
             [JsonProperty(PropertyName = "filter_count")]
-            public int FilterCount { get; internal set; }
+            public long FilterCount { get; internal set; }
             [JsonProperty(PropertyName = "filter_evictions")]
-            public int FilterEvictions { get; internal set; }
+            public long FilterEvictions { get; internal set; }
             [JsonProperty(PropertyName = "filter_size")]
             public string FilterSize { get; internal set; }
             [JsonProperty(PropertyName = "filter_size_in_bytes")]
-            public int FilterSizeInBytes { get; internal set; }
+            public long FilterSizeInBytes { get; internal set; }
             [JsonProperty(PropertyName = "bloom_size")]
             public string BloomSize { get; internal set; }
             [JsonProperty(PropertyName = "bloom_size_in_bytes")]
-            public int BloomSizeInBytes { get; internal set; }
+            public long BloomSizeInBytes { get; internal set; }
             [JsonProperty(PropertyName = "id_cache_size")]
             public string IDCacheSize { get; internal set; }
             [JsonProperty(PropertyName = "id_cache_size_in_bytes")]
-            public int IDCacheSizeInBytes { get; internal set; }
+            public long IDCacheSizeInBytes { get; internal set; }
         }
     }
 
@@ -114,6 +114,8 @@ namespace Nest
         public string Uptime { get; internal set; }
         [JsonProperty("uptime_in_millis")]
         public long UptimeInMilliseconds { get; internal set; }
+        [JsonProperty("load_average")]
+        public float[] LoadAverage { get; internal set; }
     }
 
     [JsonObject]
@@ -190,15 +192,15 @@ namespace Nest
             [JsonProperty("sys")]
             public string System { get; internal set; }
             [JsonProperty("sys_in_millis")]
-            public int SystemInMilliseconds { get; internal set; }
+            public long SystemInMilliseconds { get; internal set; }
             [JsonProperty("user")]
             public string User { get; internal set; }
             [JsonProperty("user_in_millis")]
-            public int UserInMilliseconds { get; internal set; }
+            public long UserInMilliseconds { get; internal set; }
             [JsonProperty("total")]
             public string Total { get; internal set; }
             [JsonProperty("total_in_millis")]
-            public int TotalInMilliseconds { get; internal set; }
+            public long TotalInMilliseconds { get; internal set; }
         }
 
         [JsonObject]
@@ -207,11 +209,11 @@ namespace Nest
             [JsonProperty("resident")]
             public string Resident { get; internal set; }
             [JsonProperty("resident_in_bytes")]
-            public int ResidentInBytes { get; internal set; }
+            public long ResidentInBytes { get; internal set; }
             [JsonProperty("share")]
             public string Share { get; internal set; }
             [JsonProperty("share_in_bytes")]
-            public int ShareInBytes { get; internal set; }
+            public long ShareInBytes { get; internal set; }
             [JsonProperty("total_virtual")]
             public string TotalVirtual { get; internal set; }
             [JsonProperty("total_virtual_in_bytes")]
@@ -259,19 +261,19 @@ namespace Nest
                 [JsonProperty("used")]
                 public string Used { get; internal set; }
                 [JsonProperty("")]
-                public int UsedInBytes { get; internal set; }
+                public long UsedInBytes { get; internal set; }
                 [JsonProperty("max")]
                 public string Max { get; internal set; }
                 [JsonProperty("max_in_bytes")]
-                public int MaxInBytes { get; internal set; }
+                public long MaxInBytes { get; internal set; }
                 [JsonProperty("peak_used")]
                 public string PeakUsed { get; internal set; }
                 [JsonProperty("peak_used_in_bytes")]
-                public int PeakUsedInBytes { get; internal set; }
+                public long PeakUsedInBytes { get; internal set; }
                 [JsonProperty("peak_max")]
                 public string PeakMax { get; internal set; }
                 [JsonProperty("peak_max_in_bytes")]
-                public int PeakMaxInBytes { get; internal set; }
+                public long PeakMaxInBytes { get; internal set; }
             }
         }
 
@@ -299,7 +301,7 @@ namespace Nest
             [JsonProperty("collection_time")]
             public string CollectionTime { get; internal set; }
             [JsonProperty("collection_time_in_millis")]
-            public int CollectionTimeInMilliseconds { get; internal set; }
+            public long CollectionTimeInMilliseconds { get; internal set; }
         }
 
         [JsonObject]
@@ -322,17 +324,17 @@ namespace Nest
     public class ThreadCountStats
     {
         [JsonProperty("threads")]
-        public int Threads { get; internal set; }
+        public long Threads { get; internal set; }
         [JsonProperty("queue")]
-        public int Queue { get; internal set; }
+        public long Queue { get; internal set; }
         [JsonProperty("active")]
-        public int Active { get; internal set; }
+        public long Active { get; internal set; }
         [JsonProperty("rejected")]
-        public int Rejected { get; internal set; }
+        public long Rejected { get; internal set; }
         [JsonProperty("largest")]
-        public int Largest { get; internal set; }
+        public long Largest { get; internal set; }
         [JsonProperty("completed")]
-        public int Completed { get; internal set; }
+        public long Completed { get; internal set; }
     }
 
     [JsonObject]
@@ -345,25 +347,25 @@ namespace Nest
         public class TCPStats
         {
             [JsonProperty("active_opens")]
-            public int ActiveOpens { get; internal set; }
+            public long ActiveOpens { get; internal set; }
             [JsonProperty("passive_opens")]
-            public int PassiceOpens { get; internal set; }
+            public long PassiceOpens { get; internal set; }
             [JsonProperty("curr_estab")]
-            public int CurrentEstablished { get; internal set; }
+            public long CurrentEstablished { get; internal set; }
             [JsonProperty("in_segs")]
-            public int InSegments { get; internal set; }
+            public long InSegments { get; internal set; }
             [JsonProperty("out_segs")]
-            public int OutSegments { get; internal set; }
+            public long OutSegments { get; internal set; }
             [JsonProperty("retrans_segs")]
-            public int RetransmittedSegments { get; internal set; }
+            public long RetransmittedSegments { get; internal set; }
             [JsonProperty("estab_resets")]
-            public int EstablishedResets { get; internal set; }
+            public long EstablishedResets { get; internal set; }
             [JsonProperty("attempt_fails")]
-            public int AttemptFails { get; internal set; }
+            public long AttemptFails { get; internal set; }
             [JsonProperty("in_errs")]
-            public int InErrors { get; internal set; }
+            public long InErrors { get; internal set; }
             [JsonProperty("out_rsts")]
-            public int OutResets { get; internal set; }
+            public long OutResets { get; internal set; }
         }
     }
 
@@ -397,9 +399,9 @@ namespace Nest
             [JsonProperty("available_in_bytes")]
             public long AvailableInBytes { get; internal set; }
             [JsonProperty("disk_reads")]
-            public int DiskReads { get; internal set; }
+            public long DiskReads { get; internal set; }
             [JsonProperty("disk_writes")]
-            public int DiskWrites { get; internal set; }
+            public long DiskWrites { get; internal set; }
             [JsonProperty("disk_read_size")]
             public string DiskReadSize { get; internal set; }
             [JsonProperty("disk_read_size_in_bytes")]

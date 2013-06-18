@@ -64,6 +64,7 @@
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTest.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Cluster\StateTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
