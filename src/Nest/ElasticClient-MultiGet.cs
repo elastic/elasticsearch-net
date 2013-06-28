@@ -31,6 +31,24 @@ namespace Nest
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
 		/// <summary>
+		/// Gets multiple documents of T by id in the specified index
+		/// </summary>
+		public IEnumerable<T> MultiGet<T>(string index, IEnumerable<int> ids)
+			where T : class
+		{
+			return this.MultiGet<T>(index, ids.Select(i => Convert.ToString(i)));
+		}
+		/// <summary>
+		/// Gets multiple documents of T by id in the specified index
+		/// </summary>
+		public IEnumerable<T> MultiGet<T>(string index, IEnumerable<string> ids)
+			where T : class
+		{
+			var typeName = this.GetTypeNameFor<T>();
+			
+			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
+		}
+		/// <summary>
 		/// Gets multiple documents of T by id in the specified index and the specified typename for T
 		/// </summary>
 		public IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<int> ids)
