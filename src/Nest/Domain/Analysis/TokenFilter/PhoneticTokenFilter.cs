@@ -11,8 +11,17 @@ namespace Nest
 			: base("phonetic")
 		{
 
-		}
+        }
+
+        [JsonProperty("encoder")]
+        public string Encoder { get; set; }
+
+        [JsonProperty("replace")]
+        public bool Replace { get; set; }
 
 	}
 
 }
+
+
+
