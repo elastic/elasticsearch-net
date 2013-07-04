@@ -76,7 +76,6 @@ namespace Nest.Resolvers
 			string resolved;
 			if (!_memoizedExpressions.TryGetValue(key, out resolved))
 			{
-
 				var stack = new Stack<string>();
 				var properties = new Stack<IElasticPropertyAttribute>();
 				Visit(expression, stack, properties);

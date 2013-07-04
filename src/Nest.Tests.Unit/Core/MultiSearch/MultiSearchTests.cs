@@ -59,5 +59,6 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			
 
 		}
+		
 	}
 }

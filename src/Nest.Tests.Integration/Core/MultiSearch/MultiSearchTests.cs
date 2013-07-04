@@ -75,6 +75,20 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 			result.GetResponses<ElasticSearchProject>().Should().NotBeEmpty();
 			result.GetResponses<Person>().Should().NotBeEmpty();
 		}
+		[Test]
+		public void MultiSearchShouldReturnErrorProperty()
+		{
+			var result = this._client.MultiSearch(b => b
+				.FixedPath("myindex", "mytype")
+				.Search<ElasticSearchProject>(s => s.MatchAll().Preference("_primary").Routing("customvalue1").SearchType(SearchType.DfsQueryAndFetch))
+				.Search<Person>(s => s.Query(q=>q.Term("THIS FIELD DOES NOT EXIST", "BOOM")))
+			);
+			var status = result.ConnectionStatus;
+			result.IsValid.Should().BeTrue();
+			var personResponse = result.GetResponses<Person>().First();
+			personResponse.IsValid.Should().BeFalse();
+
+		}
 		
 	}
 }

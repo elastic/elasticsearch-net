@@ -85,7 +85,7 @@ namespace Nest.Resolvers
 			}
 		}
 
-    protected virtual MemberBinding VisitBinding(MemberBinding binding, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual MemberBinding VisitBinding(MemberBinding binding, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			switch (binding.BindingType)
 			{
@@ -100,7 +100,7 @@ namespace Nest.Resolvers
 			}
 		}
 
-    protected virtual ElementInit VisitElementInitializer(ElementInit initializer, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual ElementInit VisitElementInitializer(ElementInit initializer, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(initializer.Arguments, stack, properties);
 			if (arguments != initializer.Arguments)
@@ -110,7 +110,7 @@ namespace Nest.Resolvers
 			return initializer;
 		}
 
-    protected virtual Expression VisitUnary(UnaryExpression u, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitUnary(UnaryExpression u, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression operand = this.Visit(u.Operand, stack, properties);
 			if (operand != u.Operand)
@@ -120,7 +120,7 @@ namespace Nest.Resolvers
 			return u;
 		}
 
-    protected virtual Expression VisitBinary(BinaryExpression b, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitBinary(BinaryExpression b, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression left = this.Visit(b.Left, stack, properties);
 			Expression right = this.Visit(b.Right, stack, properties);
@@ -135,7 +135,7 @@ namespace Nest.Resolvers
 			return b;
 		}
 
-    protected virtual Expression VisitTypeIs(TypeBinaryExpression b, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitTypeIs(TypeBinaryExpression b, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression expr = this.Visit(b.Expression, stack, properties);
 			if (expr != b.Expression)
@@ -145,12 +145,12 @@ namespace Nest.Resolvers
 			return b;
 		}
 
-    protected virtual Expression VisitConstant(ConstantExpression c, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitConstant(ConstantExpression c, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			return c;
 		}
 
-    protected virtual Expression VisitConditional(ConditionalExpression c, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitConditional(ConditionalExpression c, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression test = this.Visit(c.Test, stack, properties);
 			Expression ifTrue = this.Visit(c.IfTrue, stack, properties);
@@ -162,12 +162,12 @@ namespace Nest.Resolvers
 			return c;
 		}
 
-    protected virtual Expression VisitParameter(ParameterExpression p, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitParameter(ParameterExpression p, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			return p;
 		}
 
-    protected virtual Expression VisitMemberAccess(MemberExpression m, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitMemberAccess(MemberExpression m, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression exp = this.Visit(m.Expression, stack, properties);
 			if (exp != m.Expression)
@@ -177,7 +177,7 @@ namespace Nest.Resolvers
 			return m;
 		}
 
-    protected virtual Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression obj = this.Visit(m.Object, stack, properties);
 			IEnumerable<Expression> args = this.VisitExpressionList(m.Arguments, stack, properties);
@@ -189,7 +189,7 @@ namespace Nest.Resolvers
 			return m;
 		}
 
-    protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			List<Expression> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
@@ -216,7 +216,7 @@ namespace Nest.Resolvers
 			return original;
 		}
 
-    protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression e = this.Visit(assignment.Expression, stack, properties);
 			if (e != assignment.Expression)
@@ -226,7 +226,7 @@ namespace Nest.Resolvers
 			return assignment;
 		}
 
-    protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			IEnumerable<MemberBinding> bindings = this.VisitBindingList(binding.Bindings, stack, properties);
 			if (bindings != binding.Bindings)
@@ -236,7 +236,7 @@ namespace Nest.Resolvers
 			return binding;
 		}
 
-    protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(binding.Initializers, stack, properties);
 			if (initializers != binding.Initializers)
@@ -246,7 +246,7 @@ namespace Nest.Resolvers
 			return binding;
 		}
 
-    protected virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			List<MemberBinding> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
@@ -271,7 +271,7 @@ namespace Nest.Resolvers
 			return original;
 		}
 
-    protected virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			List<ElementInit> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
@@ -296,7 +296,7 @@ namespace Nest.Resolvers
 			return original;
 		}
 
-    protected virtual Expression VisitLambda(LambdaExpression lambda, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitLambda(LambdaExpression lambda, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			Expression body = this.Visit(lambda.Body, stack, properties);
 			if (body != lambda.Body)
@@ -306,7 +306,7 @@ namespace Nest.Resolvers
 			return lambda;
 		}
 
-    protected virtual NewExpression VisitNew(NewExpression nex, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual NewExpression VisitNew(NewExpression nex, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			IEnumerable<Expression> args = this.VisitExpressionList(nex.Arguments, stack, properties);
 			if (args != nex.Arguments)
@@ -319,7 +319,7 @@ namespace Nest.Resolvers
 			return nex;
 		}
 
-    protected virtual Expression VisitMemberInit(MemberInitExpression init, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitMemberInit(MemberInitExpression init, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			NewExpression n = this.VisitNew(init.NewExpression, stack, properties);
 			IEnumerable<MemberBinding> bindings = this.VisitBindingList(init.Bindings, stack, properties);
@@ -330,7 +330,7 @@ namespace Nest.Resolvers
 			return init;
 		}
 
-    protected virtual Expression VisitListInit(ListInitExpression init, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitListInit(ListInitExpression init, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			NewExpression n = this.VisitNew(init.NewExpression, stack, properties);
 			IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(init.Initializers, stack, properties);
@@ -341,7 +341,7 @@ namespace Nest.Resolvers
 			return init;
 		}
 
-    protected virtual Expression VisitNewArray(NewArrayExpression na, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitNewArray(NewArrayExpression na, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			IEnumerable<Expression> exprs = this.VisitExpressionList(na.Expressions, stack, properties);
 			if (exprs != na.Expressions)
@@ -358,7 +358,7 @@ namespace Nest.Resolvers
 			return na;
 		}
 
-    protected virtual Expression VisitInvocation(InvocationExpression iv, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected virtual Expression VisitInvocation(InvocationExpression iv, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
 		{
 			IEnumerable<Expression> args = this.VisitExpressionList(iv.Arguments, stack, properties);
 			Expression expr = this.Visit(iv.Expression, stack, properties);
