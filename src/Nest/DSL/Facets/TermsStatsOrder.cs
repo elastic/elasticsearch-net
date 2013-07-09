@@ -19,6 +19,8 @@ namespace Nest
     min,
     reverse_min,
     max,
-    reverse_max
+    reverse_max,
+	mean, 
+	reverse_mean
   }
 }
