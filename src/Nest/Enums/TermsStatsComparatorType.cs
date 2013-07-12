@@ -13,7 +13,9 @@ namespace Nest
         MIN,
         REVERSE_MIN,
         MAX,
-        REVERSE_MAX
+        REVERSE_MAX,
+		MEAN,
+		REVERSE_MEAN
     }
 }
 // ReSharper restore CheckNamespace
