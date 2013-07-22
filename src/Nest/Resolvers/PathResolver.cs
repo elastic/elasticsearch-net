@@ -39,7 +39,7 @@ namespace Nest.Resolvers
 			var id = d._Id;
 			id.ThrowIfNullOrEmpty("id");
 
-			var path = string.Format("/{0}/{1}/{2}", index, type.Resolve(this._connectionSettings), id);
+			var path = "/{0}/{1}/{2}".EscapedFormat(index, type.Resolve(this._connectionSettings), id);
 			var urlParams = new Dictionary<string, string>();
 			if (d._Refresh.HasValue)
 				urlParams.Add("refresh", d._Refresh.Value.ToString().ToLower());

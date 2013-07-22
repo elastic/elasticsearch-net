@@ -29,8 +29,8 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var typeName = this.GetTypeNameFor<T>();
-
-			return this.GetFull<T>(id, this.PathResolver.CreateIndexTypePath(index, typeName));
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
+			return this._GetFull<T>(path);
 		}
 		/// <summary>
 		/// Gets a document of T by id in the specified index and the specified typename
@@ -38,7 +38,8 @@ namespace Nest
 		/// <returns>an instance of T</returns>
 		public IGetResponse<T> GetFull<T>(string index, string type, string id) where T : class
 		{
-			return this.GetFull<T>(id, index + "/" + type + "/");
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id);
+			return this._GetFull<T>(path);
 		}
 		/// <summary>
 		/// Gets a document of T by id in the specified index and the specified typename
@@ -46,12 +47,10 @@ namespace Nest
 		/// <returns>an instance of T</returns>
 		public IGetResponse<T> GetFull<T>(string index, string type, int id) where T : class
 		{
-			return this.GetFull<T>(id.ToString(), index + "/" + type + "/");
+			var path = this.PathResolver.CreateIndexTypeIdPath(index, type, id.ToString());
+			return this._GetFull<T>(path);
 		}
-		private IGetResponse<T> GetFull<T>(string id, string path) where T : class
-		{
-			return this._GetFull<T>(path + id);
-		}
+		
 
 		public IGetResponse<T> GetFull<T>(Action<GetDescriptor<T>> getSelector) where T : class
 		{
