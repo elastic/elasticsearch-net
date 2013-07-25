@@ -10,6 +10,12 @@ namespace Nest.Resolvers
 		public string Name { get; set; }
 		public Type Type { get; set; }
 
+		public bool IsConditionless ()
+		{
+			return this.Name.IsNullOrEmpty() && this.Type == null;
+		}
+
+
 		public string Resolve(IConnectionSettings connectionSettings)
 		{
 			connectionSettings.ThrowIfNull("connectionSettings");
@@ -38,11 +44,11 @@ namespace Nest.Resolvers
 		{
 			return new TypeNameMarker {Name = typeName};
 		}
+	
 		public static implicit operator TypeNameMarker(Type type)
 		{
 			return new TypeNameMarker { Type = type };
 		}
-
 
 		public override int GetHashCode()
 		{

@@ -28,6 +28,7 @@ namespace Nest.Tests.Unit.Core.Index
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("version=1", status.RequestUrl);
 		}
+	
 		[Test]
 		public void GetSupportsVersioning()
 		{

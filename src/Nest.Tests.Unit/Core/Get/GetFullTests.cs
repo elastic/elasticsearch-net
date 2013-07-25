@@ -41,16 +41,7 @@ namespace Nest.Tests.Unit.Core.Get
 			var status = result.ConnectionStatus;
 			StringAssert.EndsWith("/myindex/elasticsearchprojects/404", status.RequestUrl);
 		}
-		[Test]
-		public void GetUsingDescriptorEscapes()
-		{
-			var result = this._client.GetFull<ElasticSearchProject>(g => g
-				.Index("myindex")
-				.Id("myid/with/slashes")
-			);
-			var status = result.ConnectionStatus;
-			StringAssert.EndsWith("/myindex/elasticsearchprojects/myid%252Fwith%252Fslashes", status.RequestUrl);
-		}
+	
 		[Test]
 		public void GetUsingDescriptorWithType()
 		{

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -326,17 +327,21 @@ namespace Nest
 			recursiveBody(null);
 		}
 
-		private string _CreateUriString(string path)
+		private Uri _CreateUriString(string path)
 		{
             var s = this._ConnectionSettings;
-
+			
+				
 			if (s.QueryStringParameters != null)
 			{
-				var uri = new Uri(s.Uri, path);
-				var qs = s.QueryStringParameters.ToQueryString(uri.Query.IsNullOrEmpty() ? "?" : "&");
+				var tempUri = new Uri(s.Uri, path);
+				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
 				path += qs;
 			}
-
+			LeaveDotsAndSlashesEscaped(s.Uri);
+			var uri = new Uri(s.Uri, path);
+			LeaveDotsAndSlashesEscaped(uri);
+			return uri;
 			var url = s.Uri.AbsoluteUri + path;
 			//WebRequest.Create will replace %2F with / 
 			//this is a 'security feature'
@@ -346,7 +351,39 @@ namespace Nest
 			//it won't barf.
 			//If you manually set the config settings to NOT forefully unescape dots and slashes be sure to call 
 			//.SetDontDoubleEscapePathDotsAndSlashes() on the connection settings.
-			return this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? url : url.Replace("%2F", "%252F");
+			//return );
+
+			//return this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? url : url.Replace("%2F", "%252F");
+		}
+
+		// System.UriSyntaxFlags is internal, so let's duplicate the flag privately
+		private const int UnEscapeDotsAndSlashes = 0x2000000;
+
+		public static void LeaveDotsAndSlashesEscaped(Uri uri)
+		{
+			if (uri == null)
+			{
+				throw new ArgumentNullException("uri");
+			}
+
+			FieldInfo fieldInfo = uri.GetType().GetField("m_Syntax", BindingFlags.Instance | BindingFlags.NonPublic);
+			if (fieldInfo == null)
+			{
+				throw new MissingFieldException("'m_Syntax' field not found");
+			}
+			object uriParser = fieldInfo.GetValue(uri);
+
+			fieldInfo = typeof(UriParser).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic);
+			if (fieldInfo == null)
+			{
+				throw new MissingFieldException("'m_Flags' field not found");
+			}
+			object uriSyntaxFlags = fieldInfo.GetValue(uriParser);
+
+			// Clear the flag that we don't want
+			uriSyntaxFlags = (int)uriSyntaxFlags & ~UnEscapeDotsAndSlashes;
+
+			fieldInfo.SetValue(uriParser, uriSyntaxFlags);
 		}
 	}
 }
