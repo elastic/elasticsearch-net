@@ -23,6 +23,9 @@ namespace Nest.DSL.Descriptors
 
     [JsonProperty("nested_path")]
     internal string _NestedPath { get; set; }
+	
+	[JsonProperty("ignore_unmapped")]
+	internal bool? _IgnoreUnmappedFields { get; set; }
 
     public virtual SortDescriptor<T> OnField(string field)
     {
@@ -60,6 +63,11 @@ namespace Nest.DSL.Descriptors
       this._Missing = value;
       return this;
     }
+	public virtual SortDescriptor<T> IgnoreUnmappedFields(bool ignore = true)
+	{
+		this._IgnoreUnmappedFields = ignore;
+		return this;
+	}
     public virtual SortDescriptor<T> Ascending()
     {
       this._Order = "asc";
