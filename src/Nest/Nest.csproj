@@ -65,9 +65,11 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Connection\ConnectionStatusTracer.cs" />
+    <Compile Include="Domain\Hit\HighlightCollection.cs" />
     <Compile Include="Domain\PathAndData.cs" />
     <Compile Include="Domain\Responses\ClusterStateResponse.cs" />
     <Compile Include="Domain\State\ClusterState.cs" />

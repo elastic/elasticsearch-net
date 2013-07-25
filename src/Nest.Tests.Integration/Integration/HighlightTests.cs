@@ -34,7 +34,15 @@ namespace Nest.Tests.Integration.Integration
 			Assert.DoesNotThrow(() => result.Highlights.Count());
 			Assert.IsNotNull(result.Highlights);
 			Assert.Greater(result.Highlights.Count(), 0);
-			Assert.True(result.Highlights.Any(h => h.Highlights != null && h.Highlights.Any() && !string.IsNullOrEmpty(h.Highlights.First())));
+			Assert.True(result.Highlights.All(h => h.Value != null));
+
+			Assert.True(result.Highlights.All(h => h.Value.All(hh => !hh.Value.DocumentId.IsNullOrEmpty())));
+
+			var id = result.Documents.First().Id.ToString();
+			var highlights = result.Highlights[id];	
+			Assert.NotNull(highlights);
+			Assert.NotNull(highlights["content"]);
+			Assert.Greater(highlights["content"].Highlights.Count(), 0);
 		}
 
 		[Test]

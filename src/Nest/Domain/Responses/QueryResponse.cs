@@ -17,7 +17,7 @@ namespace Nest
 		double MaxScore { get; }
 		IEnumerable<T> Documents { get; }
 		IEnumerable<IHit<T>> DocumentsWithMetaData { get; }
-		IEnumerable<Highlight> Highlights { get; }
+		HighlightDocumentDictionary Highlights { get; }
 		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
 		F Facet<F>(string fieldName) where F : class, IFacet;
 		IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem;
@@ -25,7 +25,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class QueryResponse<T> : BaseResponse, IQueryResponse<T> where T : class 
+	public class QueryResponse<T> : BaseResponse, IQueryResponse<T> where T : class
 	{
 		public QueryResponse()
 		{
@@ -101,10 +101,10 @@ namespace Nest
 			}
 		}
 
-		
+
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{
-		  var fieldName = this.PropertyNameResolver.Resolve(expression);
+			var fieldName = this.PropertyNameResolver.Resolve(expression);
 			return this.Facet<F>(fieldName);
 		}
 		public F Facet<F>(string fieldName) where F : class, IFacet
@@ -113,12 +113,12 @@ namespace Nest
 				|| !this.Facets.Any()
 				|| !this.Facets.ContainsKey(fieldName))
 				return default(F);
-			
+
 			var facet = this.Facets[fieldName];
 
 			return Convert.ChangeType(facet, typeof(F)) as F;
 		}
-		
+
 		public IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem
 		{
 			var fieldName = this.PropertyNameResolver.Resolve(expression);
@@ -131,7 +131,7 @@ namespace Nest
 				|| !this.Facets.Any()
 				|| !this.Facets.ContainsKey(fieldName))
 				return Enumerable.Empty<F>();
-			
+
 			var facet = this.Facets[fieldName];
 			if (facet is DateHistogramFacet)
 				return ((DateHistogramFacet)facet).Items.Cast<F>();
@@ -156,24 +156,28 @@ namespace Nest
 
 			return Enumerable.Empty<F>();
 		}
-		
-		public IEnumerable<Highlight> Highlights
+
+		/// <summary>
+		/// IDictionary of id <=> Highlight Collection for the document
+		/// </summary>
+		public HighlightDocumentDictionary Highlights
 		{
 			get
 			{
-				if (this.Hits != null)
-				{
-					foreach (var hit in this.Hits.Hits)
-					{
-			if (hit == null || hit.Highlight == null)
-			  continue;
+				var dict = new HighlightDocumentDictionary();
+				if (this.Hits == null || !this.Hits.Hits.HasAny())
+					return dict;
+				
 
-						foreach (var h in hit.Highlight)
-						{
-							yield return new Highlight {Field = h.Key, Highlights = h.Value };
-						}
-					}
+				foreach (var hit in this.Hits.Hits)
+				{
+					if (!hit.Highlight.Any())
+						continue;
+
+					dict.Add(hit.Id, hit.Highlight);
+
 				}
+				return dict;
 			}
 		}
 	}

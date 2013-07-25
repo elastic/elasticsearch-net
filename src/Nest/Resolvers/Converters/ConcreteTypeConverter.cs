@@ -136,7 +136,7 @@ namespace Nest
 			hitDynamic.Version = d._version;
 			hitDynamic.Id = d._id;
 			hitDynamic.Sorts = d.sort;
-			hitDynamic.Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
+			hitDynamic._Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
 			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
 
 			var concreteType = selector(hitDynamic.Source, hitDynamic);
