@@ -153,6 +153,9 @@ namespace Nest
 
 		IEnumerable<T> MultiGet<T>(IEnumerable<int> ids) where T : class;
 		IEnumerable<T> MultiGet<T>(IEnumerable<string> ids) where T : class;
+		IEnumerable<T> MultiGet<T>(string index, IEnumerable<int> ids) where T : class;
+		IEnumerable<T> MultiGet<T>(string index, IEnumerable<string> ids) where T : class;
+		
 		IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<int> ids) where T : class;
 		IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<string> ids) where T : class;
 
