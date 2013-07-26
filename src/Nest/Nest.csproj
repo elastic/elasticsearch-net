@@ -72,6 +72,7 @@
     <Compile Include="Domain\Hit\HighlightCollection.cs" />
     <Compile Include="Domain\PathAndData.cs" />
     <Compile Include="Domain\Responses\ClusterStateResponse.cs" />
+    <Compile Include="Domain\Responses\BulkUpdateResponseItem.cs" />
     <Compile Include="Domain\State\ClusterState.cs" />
     <Compile Include="DSL\BulkUpdateDescriptor.cs" />
     <Compile Include="DSL\Filter\HasParentFilterDescriptor.cs" />

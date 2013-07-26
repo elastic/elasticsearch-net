@@ -289,6 +289,11 @@ namespace Nest
 		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
 
+
+		IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId);
+		IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class;
+
+
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
