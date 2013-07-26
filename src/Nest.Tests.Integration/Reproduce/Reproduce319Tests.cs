@@ -31,6 +31,14 @@ namespace Nest.Tests.Integration.Reproduce
 			settings.Add("search.slowlog.threshold.fetch.warn", "1s");
 			settings.Analysis.Analyzers.Add(new KeyValuePair<string, AnalyzerBase>("keyword", new KeywordAnalyzer()));
 			settings.Analysis.Analyzers.Add(new KeyValuePair<string, AnalyzerBase>("simple", new SimpleAnalyzer()));
+			settings.Mappings.Add(new RootObjectMapping
+			{
+				Name = "my_root_object",
+				Properties = new Dictionary<string, IElasticType>
+				{
+					{"my_field", new StringMapping() { Name = "my_string_field "}}
+				}
+			});
 
 			Assert.DoesNotThrow(() =>
 			{
