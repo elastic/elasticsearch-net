@@ -28,7 +28,7 @@ namespace Nest.Resolvers.Converters
 				var typeName = marker.Resolve(settings.ConnectionSettings);
 				writer.WriteValue(typeName);
 			}
-			else throw new Exception("Could not find connection settings on the json contract resolver");
+			else throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
