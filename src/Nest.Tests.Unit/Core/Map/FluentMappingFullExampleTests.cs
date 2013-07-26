@@ -43,6 +43,10 @@ namespace Nest.Tests.Unit.Core.Map
 				.DisableSizeField(false)
 				.Dynamic()
 				.Enabled()
+				.SourceField(s=>s
+					.SetDisabled(false)
+					.SetExcludes(new [] {"anyfromthis.prop.*"})
+				)
 				.IncludeInAll()
 				.Path("full")
 				.IdField(i => i
