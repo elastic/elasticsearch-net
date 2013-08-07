@@ -52,8 +52,16 @@ namespace Nest
 
 			if (!analyzeParams.Field.IsNullOrEmpty())
 				path += "&field=" + analyzeParams.Field;
-			else if (!analyzeParams.Analyzer.IsNullOrEmpty())
-				path += "&analyzer=" + analyzeParams.Analyzer;
+            else if (!analyzeParams.Analyzer.IsNullOrEmpty())
+                path += "&analyzer=" + analyzeParams.Analyzer;
+            else
+            {
+                //Build custom analyzer out of tokenizers and filters
+                if (!analyzeParams.Filters.IsNullOrEmpty())
+                    path += "&filters=" + analyzeParams.Filters;
+                if (!analyzeParams.Tokenizer.IsNullOrEmpty())
+                    path += "&tokenizer=" + analyzeParams.Tokenizer;
+            }
 
 			var status = this.Connection.GetSync(path);
 			var r = this.ToParsedResponse<AnalyzeResponse>(status);

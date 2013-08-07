@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Search
 	///  Tests that test whether the query response can be successfully mapped or not
 	/// </summary>
 	[TestFixture]
-	public class QueryResponseMapperTests : CleanStateIntegrationTests
+	public class QueryResponseMapperTests : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
@@ -530,7 +530,8 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this._client.SearchRaw<ElasticSearchProject>(query);
 
 			//assert
-			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlight["content"].Count > 0);
+			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlight["content"].Highlights.Count() > 0);
+
 		}
 	}
 }

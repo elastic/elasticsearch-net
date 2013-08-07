@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -12,11 +13,17 @@ namespace Nest
 	/// </summary>
 	public class GenericMapping : IElasticType, IElasticCoreType
 	{
-		[JsonProperty("name")]
+		[JsonIgnore]
+		public TypeNameMarker TypeNameMarker { get; set; }
+
+		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
 
 		[JsonProperty("type")]
-		public string Type { get; set; }
+		public TypeNameMarker Type { get; set; }
+
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
@@ -58,7 +65,7 @@ namespace Nest
 
 	[Obsolete("Please switch to GenericMapping or a strict *Mapping class such as StringMapping/NumberMapping/MultiFieldMapping, will be removed in the 1.0 release")]
 	public class TypeMappingProperty : GenericMapping
-    {
-       
-    }
+	{
+
+	}
 }

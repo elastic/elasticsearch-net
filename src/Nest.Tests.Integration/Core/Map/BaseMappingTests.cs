@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Core.Map
 	public class BaseMappingTests : IntegrationTests
 	{
 		[TestFixtureSetUp]
-		public override void Initialize()
+		public void Initialize()
 		{
 			this._client.DeleteMapping<ElasticSearchProject>();
 		}

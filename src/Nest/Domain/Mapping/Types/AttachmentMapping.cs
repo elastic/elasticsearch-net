@@ -3,16 +3,23 @@ using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class AttachmentMapping : IElasticType
 	{
 		[JsonIgnore]
-		public string Name { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
+
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; }
 
 		[JsonProperty("type")]
-		public virtual string Type { get { return "attachment"; } }
+		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "attachment" }; } }
+
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
 
 		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
 		public IDictionary<string, IElasticCoreType> Fields { get; set; }

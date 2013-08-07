@@ -41,6 +41,7 @@ namespace Nest.Tests.Unit.Core.Get
 			var status = result.ConnectionStatus;
 			StringAssert.EndsWith("/myindex/elasticsearchprojects/404", status.RequestUrl);
 		}
+	
 		[Test]
 		public void GetUsingDescriptorWithType()
 		{

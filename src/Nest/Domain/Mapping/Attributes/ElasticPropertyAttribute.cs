@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Nest
 {
 	[AttributeUsage(System.AttributeTargets.Property, AllowMultiple = false)]
-	public class ElasticPropertyAttribute : Attribute
+	public class ElasticPropertyAttribute : Attribute, IElasticPropertyAttribute
 	{
 		public bool AddSortField { get; set; }
 
-
 		public bool OptOut { get; set; }
-		
+
 		public string Name { get; set; }
 
 		public FieldType Type { get; set; }
@@ -26,6 +22,7 @@ namespace Nest
 		public string IndexAnalyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
 		public string NullValue { get; set; }
+		public string Similarity { get; set; }
 
 		public bool OmitNorms { get; set; }
 		public bool OmitTermFrequencyAndPositions { get; set; }
@@ -47,19 +44,16 @@ namespace Nest
 		{
 			//make sure we match ES's defaults
 			this.Boost = 1;
-			this.TermVector = TermVectorOption.no; 
+			this.TermVector = TermVectorOption.no;
 			this.Index = FieldIndexOption.analyzed;
-		
+
 			this.IncludeInAll = true;
 			this.PrecisionStep = 4;
 		}
+
+		public void Accept(IElasticPropertyVisitor visitor)
+		{
+			visitor.Visit(this);
+		}
 	}
-
-
-
-	
-	
-	
-
-	
 }

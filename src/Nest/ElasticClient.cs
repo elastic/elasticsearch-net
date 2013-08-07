@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Nest.Resolvers;
@@ -9,7 +10,7 @@ namespace Nest
 	public partial class ElasticClient : Nest.IElasticClient
 	{
 		protected IConnection Connection { get; set; }
-		protected IConnectionSettings Settings { get; set; }
+		public IConnectionSettings Settings { get; protected set; }
 		private bool _gotNodeInfo = false;
 		private bool _IsValid { get; set; }
 		private ElasticSearchVersionInfo _VersionInfo { get; set; }
@@ -61,9 +62,13 @@ namespace Nest
 			this.IndexNameResolver = new IndexNameResolver(settings);
 			this.PathResolver = new PathResolver(settings);
 
+			//this._defaultConverters.Add(new TypeNameMarkerConverter(this.Settings));
+			//this._defaultConverters.Add(new IndexSettingsConverter(this.Settings));
+
 			this.SerializationSettings = this.CreateSettings();
 			var indexSettings = this.CreateSettings();
-			indexSettings.ContractResolver = new ElasticCamelCaseResolver();
+
+			indexSettings.ContractResolver = new ElasticCamelCaseResolver(this.Settings);
 			this.IndexSerializationSettings = indexSettings;
 			this.PropertyNameResolver = new PropertyNameResolver();
 

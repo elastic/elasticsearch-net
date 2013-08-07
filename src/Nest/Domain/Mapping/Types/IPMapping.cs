@@ -2,20 +2,26 @@ using System.Collections.Generic;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class IPMapping : IElasticType
 	{
 		[JsonIgnore]
-		public string Name { get; set; }
+		public TypeNameMarker TypeNameMarker { get; set; }
 
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; }
 
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
 		[JsonProperty("type")]
-		public virtual string Type { get { return "multi_field"; } }
+		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "ip" }; } }
+
+    [JsonProperty("similarity")]
+    public string Similarity { get; set; }
 
 		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; set; }

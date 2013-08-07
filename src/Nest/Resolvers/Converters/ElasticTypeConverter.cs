@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-
 	public class ElasticTypeConverter : JsonConverter
 	{
 		public override bool CanWrite
@@ -61,7 +60,36 @@ namespace Nest.Resolvers.Converters
 			}
 			return null;
 		}
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+										JsonSerializer serializer)
+		{
+			JObject o = JObject.Load(reader);
 
+			var esType = this.GetTypeFromJObject(o, serializer);
+			return esType;
+		}
+
+		public override bool CanConvert(Type objectType)
+		{
+			return objectType == typeof(IElasticType);
+		}
+
+	}
+
+
+	public class ElasticTypesConverter : JsonConverter
+	{
+		public override bool CanWrite
+		{
+			get { return false; }
+		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotSupportedException();
+		}
+
+	
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
@@ -76,12 +104,14 @@ namespace Nest.Resolvers.Converters
 				if (po == null)
 					continue;
 
-				var esType = this.GetTypeFromJObject(po, serializer);
-				if (esType == null)
+				var mapping = new ElasticTypeConverter().ReadJson(po.CreateReader(), objectType, existingValue, serializer)
+					 as IElasticType;
+				if (mapping == null)
 					continue;
-				
-				esType.Name = p.Name;
-				r.Add(name, esType);
+
+				mapping.Name = name;
+
+				r.Add(name, mapping);
 
 			}
 			return r;

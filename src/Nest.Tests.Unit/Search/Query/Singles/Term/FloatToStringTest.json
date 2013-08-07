@@ -1,0 +1,9 @@
+  {
+  "query": {
+    "term": {
+      "floatValue": {
+        "value": 20.9
+      }
+    }
+  }
+}

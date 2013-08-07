@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 	/// Integrated tests of ScriptFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class ScriptFilterTests : CleanStateIntegrationTests
+	public class ScriptFilterTests : IntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.

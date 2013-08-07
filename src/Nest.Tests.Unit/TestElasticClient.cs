@@ -7,18 +7,20 @@ namespace Nest.Tests.Unit
 {
 	public static class TestElasticClient
 	{
-		private static ElasticClient client;
+		public static ElasticClient Client;
+		public static ConnectionSettings Settings;
 		static TestElasticClient()
 		{
-			client = new ElasticClient(new ConnectionSettings(Test.Default.Uri));
+			Settings = new ConnectionSettings(Test.Default.Uri);
+			Client = new ElasticClient(Settings);
 		}
 		public static string Serialize<T>(T obj)
 		{
-			return client.Serialize(obj);
+			return Client.Serialize(obj);
 		}
 		public static string SerializeCamelCase<T>(T obj)
 		{
-			return client.SerializeCamelCase(obj);
+			return Client.SerializeCamelCase(obj);
 		}
 	}
 }

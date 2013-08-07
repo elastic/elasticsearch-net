@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestIndex()
 		{
-			var newProject = new ElasticSearchProject 
+			var newProject = new ElasticSearchProject
 			{
 				Name = "COBOLES", //COBOL ES client ?
 			};
@@ -26,8 +26,8 @@ namespace Nest.Tests.Integration.Core
 		public void TestIndexTimeout()
 		{
 			var timeout = 1;
-			var s = new ConnectionSettings(Test.Default.Host, Test.Default.Port, timeout)
-						.SetDefaultIndex(Test.Default.DefaultIndex)
+			var s = new ConnectionSettings(Test.Default.Uri)
+						.SetDefaultIndex(ElasticsearchConfiguration.DefaultIndex)
 						.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 						.UsePrettyResponses();
 
@@ -39,9 +39,9 @@ namespace Nest.Tests.Integration.Core
 			};
 			var t = client.IndexAsync<ElasticSearchProject>(newProject);
 			t.Wait(1000);
-      var r = t.Result;
-      Assert.True(r.IsValid);
-      Assert.IsNotNullOrEmpty(r.Id);
+			var r = t.Result;
+			Assert.True(r.IsValid);
+			Assert.IsNotNullOrEmpty(r.Id);
 
 			var cs = r.ConnectionStatus;
 			Assert.False(cs.Success);

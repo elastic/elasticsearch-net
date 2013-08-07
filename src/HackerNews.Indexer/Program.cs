@@ -23,7 +23,7 @@ namespace HackerNews.Indexer
 		static void Main(string[] args)
 		{
 			var filePath = args.First();
-			var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
+			var elasticSettings = new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"))
 										.SetDefaultIndex("mpdreamz")
 										.SetMaximumAsyncConnections(50);
 			var client = new ElasticClient(elasticSettings);

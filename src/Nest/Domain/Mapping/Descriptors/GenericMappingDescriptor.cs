@@ -11,12 +11,14 @@ namespace Nest
 		public GenericMappingDescriptor<T> Name(string name)
 		{
 			this._Mapping.Name = name;
+			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
 		public GenericMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
 		{
 			var name = new PropertyNameResolver().ResolveToLastToken(objectPath);
 			this._Mapping.Name = name;
+			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
 		public GenericMappingDescriptor<T> Type(string type)

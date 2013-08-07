@@ -4,67 +4,142 @@ using Newtonsoft.Json;
 
 namespace Nest.Resolvers.Converters
 {
-    public class IndexSettingsConverter : JsonConverter
-    {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            var indexSettings = (IndexSettings) value;
+	using System.Text;
 
-            writer.WriteStartObject();
+	public class IndexSettingsConverter : JsonConverter
+	{
 
-            writer.WritePropertyName("settings");
-            writer.WriteStartObject();
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			var indexSettings = (IndexSettings)value;
 
-            writer.WritePropertyName("index");
-            writer.WriteStartObject();
+			writer.WriteStartObject();
 
-            writer.WritePropertyName("number_of_shards");
-            writer.WriteValue(indexSettings.NumberOfShards);
-            writer.WritePropertyName("number_of_replicas");
-            writer.WriteValue(indexSettings.NumberOfReplicas);
+			writer.WritePropertyName("settings");
+			writer.WriteStartObject();
 
-            foreach (var kv in indexSettings.Settings)
-            {
-                writer.WritePropertyName(kv.Key);
-                writer.WriteValue(kv.Value);
-            }
+			writer.WritePropertyName("index");
+			writer.WriteStartObject();
 
-            writer.WriteEndObject();
+			if (indexSettings.Settings.HasAny())
+			{
+				foreach (var kv in indexSettings.Settings)
+				{
+					writer.WritePropertyName(kv.Key);
+					writer.WriteValue(kv.Value);
+				}
+			}
 
-            writer.WritePropertyName("analysis");
-            writer.WriteStartObject();
+			if (
+				indexSettings.Analysis.Analyzers.Count > 0
+				|| indexSettings.Analysis.TokenFilters.Count > 0
+				|| indexSettings.Analysis.Tokenizers.Count > 0
+				|| indexSettings.Analysis.CharFilters.Count > 0
+				)
+			{
+				writer.WritePropertyName("analysis");
+				writer.WriteStartObject();
+				if (indexSettings.Analysis.Analyzers.Count > 0)
+				{
+					writer.WritePropertyName("analyzer");
+					serializer.Serialize(writer, indexSettings.Analysis.Analyzers);
+				}
 
-            writer.WritePropertyName("analyzer");
-            serializer.Serialize(writer, indexSettings.Analysis.Analyzer);
+				if (indexSettings.Analysis.TokenFilters.Count > 0)
+				{
+					writer.WritePropertyName("filter");
+					serializer.Serialize(writer, indexSettings.Analysis.TokenFilters);
+				}
+				if (indexSettings.Analysis.Tokenizers.Count > 0)
+				{
+					writer.WritePropertyName("tokenizer");
+					serializer.Serialize(writer, indexSettings.Analysis.Tokenizers);
+				}
+				if (indexSettings.Analysis.CharFilters.Count > 0)
+				{
+					writer.WritePropertyName("char_filter");
+					serializer.Serialize(writer, indexSettings.Analysis.CharFilters);
+				}
 
-            if (indexSettings.Analysis.TokenFilters.Count > 0)
-            {
-                writer.WritePropertyName("filter");
-                serializer.Serialize(writer, indexSettings.Analysis.TokenFilters);
-            }
+				writer.WriteEndObject();
+			}
 
-            writer.WriteEndObject();
+			writer.WriteEndObject();
 
-            writer.WriteEndObject();
+			if (indexSettings.Similarity != null)
+			{
+				writer.WritePropertyName("similarity");
+				writer.WriteStartObject();
 
-            if (indexSettings.Mappings.Count > 0)
-            { 
-                writer.WritePropertyName("mappings");
-                serializer.Serialize(writer, indexSettings.Mappings.ToDictionary(m => m.Name));
-            }
+				if (!string.IsNullOrEmpty(indexSettings.Similarity.BaseSimilarity))
+				{
+					writer.WritePropertyName("base");
+					writer.WriteStartObject();
+					writer.WritePropertyName("type");
+					writer.WriteValue(indexSettings.Similarity.BaseSimilarity);
+					writer.WriteEndObject();
+				}
 
-            writer.WriteEndObject();
-        }
+				if (indexSettings.Similarity.CustomSimilarities != null)
+				{
+					foreach (var customSimilarity in indexSettings.Similarity.CustomSimilarities)
+					{
+						writer.WritePropertyName(customSimilarity.Name);
+						writer.WriteStartObject();
+						writer.WritePropertyName("type");
+						writer.WriteValue(customSimilarity.Type);
+						if (customSimilarity.SimilarityParameters.HasAny())
+						{
+							foreach (var kv in customSimilarity.SimilarityParameters)
+							{
+								writer.WritePropertyName(kv.Key);
+								writer.WriteValue(kv.Value);
+							}
+						}
+						writer.WriteEndObject();
+					}
+				}
+				writer.WriteEndObject();
+			}
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-                                        JsonSerializer serializer)
-        {
-          return null;
-        }
+			writer.WriteEndObject();
+			if (indexSettings.Mappings.Count > 0)
+			{
+				var settings = serializer.ContractResolver as ElasticResolver;
+				if (settings != null && settings.ConnectionSettings != null)
+				{
+					writer.WritePropertyName("mappings");
+					serializer.Serialize(writer,
+					                     indexSettings.Mappings.ToDictionary(m => 
+										 { 
+											 if (m.Name.IsNullOrEmpty() && m.TypeNameMarker == null)
+												 throw new DslException("{0} should have a name!".F(m.GetType()));
 
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof (IndexSettings);
-        }
-    }
+
+											 var fieldName = m.Name;
+											 return m.TypeNameMarker != null ? m.TypeNameMarker.Resolve(settings.ConnectionSettings) : fieldName;
+										 }));
+				}
+			}
+			if (indexSettings.Warmers.Count > 0)
+			{
+				writer.WritePropertyName("warmers");
+				serializer.Serialize(writer, indexSettings.Warmers);
+			}
+
+			writer.WriteEndObject();
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+										JsonSerializer serializer)
+		{
+			return null;
+		}
+
+		private static Type _type = typeof (IndexSettings);
+		public override bool CanConvert(Type objectType)
+		{
+			return objectType == _type;
+		}
+	}
 }

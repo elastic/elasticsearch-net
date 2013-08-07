@@ -20,15 +20,15 @@ namespace Nest.Tests.Integration.Indices
 			Assert.NotNull(r.Stats.Primaries.Search);
 			Assert.NotNull(r.Stats.Primaries.Store);
 			Assert.NotNull(r.Stats.Total);
-			Assert.NotNull(r.Stats.Indices);
-			Assert.True(r.Stats.Indices.Count > 0);
+			Assert.NotNull(r.Indices);
+			Assert.True(r.Indices.Count > 0);
 			var deletedOnPrimaries = r.Stats.Primaries.Documents.Deleted;
 
 		}
 		[Test]
 		public void SimpleIndexStats()
 		{
-			var r = this._client.Stats(this.Settings.DefaultIndex);
+			var r = this._client.Stats(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
@@ -64,8 +64,8 @@ namespace Nest.Tests.Integration.Indices
 			Assert.NotNull(r.Stats.Primaries.Refresh);
 			Assert.NotNull(r.Stats.Primaries.Merges);
 			Assert.NotNull(r.Stats.Total);
-			Assert.NotNull(r.Stats.Indices);
-			Assert.True(r.Stats.Indices.Count > 0);
+			Assert.NotNull(r.Indices);
+			Assert.True(r.Indices.Count > 0);
 			Assert.NotNull(r.Stats.Primaries.Indexing.Types);
 			Assert.True(r.Stats.Primaries.Indexing.Types.Count > 0);
 			var deletedOnPrimaries = r.Stats.Primaries.Documents.Deleted;

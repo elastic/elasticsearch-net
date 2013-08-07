@@ -10,27 +10,20 @@ using System.Collections.Concurrent;
 
 namespace Nest.Resolvers.Writers
 {
-	internal class TypeMappingWriter<T> : TypeMappingWriter where T : class
-	{
-		public TypeMappingWriter(string typeName, PropertyNameResolver propertyNameResolver)
-			: base(typeof(T), typeName)
-		{
-		}
-	}
-
 	internal class TypeMappingWriter
 	{
 		private readonly Type _type;
 		private readonly PropertyNameResolver _propertyNameResolver = new PropertyNameResolver();
+		private readonly IConnectionSettings _connectionSettings;
 
 		private int MaxRecursion { get; set; }
-		private string TypeName { get; set; }
+		private TypeNameMarker TypeName { get; set; }
 		private ConcurrentDictionary<Type, int> SeenTypes { get; set; }
-		
-		public TypeMappingWriter(Type t, string typeName) : this(t, typeName, 0) {}
-		public TypeMappingWriter(Type t, string typeName, int maxRecursion)
+
+		public TypeMappingWriter(Type t, TypeNameMarker typeName, IConnectionSettings connectionSettings, int maxRecursion)
 		{
 			this._type = t;
+			this._connectionSettings = connectionSettings;
 
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
@@ -38,9 +31,11 @@ namespace Nest.Resolvers.Writers
 			this.SeenTypes = new ConcurrentDictionary<Type, int>();
 			this.SeenTypes.TryAdd(t, 0);
 		}
-		public TypeMappingWriter(Type t, string typeName, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
+		internal TypeMappingWriter(Type t, string typeName, IConnectionSettings connectionSettings, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
 		    this._type = GetUnderlyingType(t);
+			this._connectionSettings = connectionSettings;
+
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
 			this.SeenTypes = seenTypes;
@@ -97,7 +92,7 @@ namespace Nest.Resolvers.Writers
 				jsonWriter.Formatting = Formatting.Indented;
 				jsonWriter.WriteStartObject();
 				{
-					var typeName = this.TypeName;
+					var typeName = this.TypeName.Resolve(this._connectionSettings);
 					jsonWriter.WritePropertyName(typeName);
 					jsonWriter.WriteStartObject();
 					{
@@ -159,6 +154,16 @@ namespace Nest.Resolvers.Writers
 				}
 				jsonWriter.WriteEndObject();
 			}
+			if (att.DisableAllField)
+			{
+				jsonWriter.WritePropertyName("_all");
+				jsonWriter.WriteStartObject();
+				{
+					jsonWriter.WritePropertyName("enabled");
+					jsonWriter.WriteValue("false");
+				}
+				jsonWriter.WriteEndObject();
+			}
 			if (att.DynamicDateFormats != null && att.DynamicDateFormats.Any())
 			{
 				jsonWriter.WritePropertyName("dynamic_date_formats");
@@ -203,11 +208,11 @@ namespace Nest.Resolvers.Writers
 					{
 						
 						var deepType = p.PropertyType;
-						var deepTypeName = new TypeNameResolver().GetTypeNameFor(deepType);
+						var deepTypeName = new TypeNameResolver().GetTypeNameFor(deepType).Resolve(this._connectionSettings);
 						var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
 						seenTypes.AddOrUpdate(deepType, 0, (t, i) => ++i);
 
-						var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, MaxRecursion, seenTypes);
+						var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, this._connectionSettings, MaxRecursion, seenTypes);
 						var nestedProperties = newTypeMappingWriter.MapPropertiesFromAttributes();
 						
 						jsonWriter.WritePropertyName("properties");
@@ -218,115 +223,11 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
-		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, ElasticPropertyAttribute att, string propertyName, string type)
+		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, IElasticPropertyAttribute att, string propertyName, string type)
 		{
-			if (att.AddSortField)
-			{
-				jsonWriter.WritePropertyName("type");
-				jsonWriter.WriteValue("multi_field");
-				jsonWriter.WritePropertyName("fields");
-				jsonWriter.WriteStartObject();
-				jsonWriter.WritePropertyName(propertyName);
-				jsonWriter.WriteStartObject();
-			}
-			if (att.NumericType != NumericType.Default)
-			{
-				jsonWriter.WritePropertyName("type");
-				var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
-				jsonWriter.WriteValue(numericType.ToLower());
-			}
-			else
-			{
-				jsonWriter.WritePropertyName("type");
-				jsonWriter.WriteValue(type);
-			}
-			if (!att.Analyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("analyzer");
-				jsonWriter.WriteValue(att.Analyzer);
-			}
-			if (!att.IndexAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("index_analyzer");
-				jsonWriter.WriteValue(att.IndexAnalyzer);
-			}
-			if (!att.IndexAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("index_analyzer");
-				jsonWriter.WriteValue(att.IndexAnalyzer);
-			}
-			if (!att.NullValue.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("null_value");
-				jsonWriter.WriteValue(att.NullValue);
-			}
-			if (!att.SearchAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("search_analyzer");
-				jsonWriter.WriteValue(att.SearchAnalyzer);
-			}
-			if (att.Index != FieldIndexOption.analyzed)
-			{
-				jsonWriter.WritePropertyName("index");
-				jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), att.Index));
-			}
-			if (att.TermVector != TermVectorOption.no)
-			{
-				jsonWriter.WritePropertyName("term_vector");
-				jsonWriter.WriteValue(Enum.GetName(typeof(TermVectorOption), att.TermVector));
-			}
-			if (att.OmitNorms)
-			{
-				jsonWriter.WritePropertyName("omit_norms");
-				jsonWriter.WriteValue("true");
-			}
-			if (att.OmitTermFrequencyAndPositions)
-			{
-				jsonWriter.WritePropertyName("omit_term_freq_and_positions");
-				jsonWriter.WriteValue("true");
-			}
-			if (!att.IncludeInAll)
-			{
-				jsonWriter.WritePropertyName("include_in_all");
-				jsonWriter.WriteValue("false");
-			}
-			if (att.Store)
-			{
-				jsonWriter.WritePropertyName("store");
-				jsonWriter.WriteValue("yes");
-			}
-			if (att.Boost != 1)
-			{
-				jsonWriter.WritePropertyName("boost");
-				jsonWriter.WriteRawValue(att.Boost.ToString());
-			}
-			if (att.PrecisionStep != 4)
-			{
-				jsonWriter.WritePropertyName("precision_step");
-				jsonWriter.WriteRawValue(att.PrecisionStep.ToString());
-			}
-			if (att.AddSortField)
-			{
-				jsonWriter.WriteEnd();
-				jsonWriter.WritePropertyName("sort");
-				jsonWriter.WriteStartObject();
+		    var visitor = new WritePropertiesFromAttributeVisitor(jsonWriter, propertyName, type);
+            att.Accept(visitor);
 
-				if (att.NumericType != NumericType.Default)
-				{
-					jsonWriter.WritePropertyName("type");
-					var numericType = Enum.GetName(typeof(NumericType), att.NumericType);
-					jsonWriter.WriteValue(numericType.ToLower());
-				}
-				else
-				{
-					jsonWriter.WritePropertyName("type");
-					jsonWriter.WriteValue(type);
-				}
-				jsonWriter.WritePropertyName("index");
-				jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
-				jsonWriter.WriteEnd();
-				jsonWriter.WriteEnd();
-			}
 		}
 
 		/// <summary>
@@ -335,7 +236,7 @@ namespace Nest.Resolvers.Writers
 		/// <param name="att">ElasticPropertyAttribute</param>
 		/// <param name="p">Property Field</param>
 		/// <returns>String with the type name or null if can not be inferres</returns>
-		private string GetElasticSearchType(ElasticPropertyAttribute att, PropertyInfo p)
+		private string GetElasticSearchType(IElasticPropertyAttribute att, PropertyInfo p)
 		{
 			FieldType? fieldType = null;
 			if (att != null)

@@ -4,30 +4,30 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Mapping
 {
 	[TestFixture]
-	public class MapTests : CleanStateIntegrationTests
+	public class MapTests : IntegrationTests
 	{
 		private void TestMapping(RootObjectMapping typeMapping)
 		{
 			Assert.NotNull(typeMapping);
-			Assert.AreEqual("string", typeMapping.Properties["content"].Type);
-			Assert.AreEqual("string", typeMapping.Properties["country"].Type);
-			Assert.AreEqual("double", typeMapping.Properties["doubleValue"].Type);
-			Assert.AreEqual("long", typeMapping.Properties["longValue"].Type);
-			Assert.AreEqual("boolean", typeMapping.Properties["boolValue"].Type);
-			Assert.AreEqual("integer", typeMapping.Properties["intValues"].Type);
-			Assert.AreEqual("float", typeMapping.Properties["floatValues"].Type);
-			Assert.AreEqual("multi_field", typeMapping.Properties["name"].Type);
-			Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type);
-			Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type);
-			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type);
-			Assert.AreEqual("integer", typeMapping.Properties["id"].Type);
-			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type);
+			Assert.AreEqual("string", typeMapping.Properties["content"].Type.Name);
+			Assert.AreEqual("string", typeMapping.Properties["country"].Type.Name);
+			Assert.AreEqual("double", typeMapping.Properties["doubleValue"].Type.Name);
+			Assert.AreEqual("long", typeMapping.Properties["longValue"].Type.Name);
+			Assert.AreEqual("boolean", typeMapping.Properties["boolValue"].Type.Name);
+			Assert.AreEqual("integer", typeMapping.Properties["intValues"].Type.Name);
+			Assert.AreEqual("float", typeMapping.Properties["floatValues"].Type.Name);
+			Assert.AreEqual("multi_field", typeMapping.Properties["name"].Type.Name);
+			Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type.Name);
+			Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type.Name);
+			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type.Name);
+			Assert.AreEqual("integer", typeMapping.Properties["id"].Type.Name);
+			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type.Name);
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
 			//Assert.AreEqual("elasticsearchprojects", typeMapping.Parent.Type);
 
-			Assert.AreEqual("geo_point", typeMapping.Properties["origin"].Type);
+			Assert.AreEqual("geo_point", typeMapping.Properties["origin"].Type.Name);
 
 			//Assert.IsTrue(typeMapping.Properties["origin"].Dynamic);
 			//Assert.AreEqual("double", typeMapping.Properties["origin"].Properties["lat"].Type);
@@ -50,11 +50,11 @@ namespace Nest.Tests.Integration.Mapping
 		public void SimpleMapByAttributes()
 		{
 			this._client.DeleteMapping<ElasticSearchProject>();
-			this._client.DeleteMapping<ElasticSearchProject>(Test.Default.DefaultIndex + "_clone");
+			this._client.DeleteMapping<ElasticSearchProject>(ElasticsearchConfiguration.DefaultIndex + "_clone");
 			var x = this._client.MapFromAttributes<ElasticSearchProject>();
 			Assert.IsTrue(x.OK);
 
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			TestMapping(typeMapping);
 		}
 
@@ -66,18 +66,18 @@ namespace Nest.Tests.Integration.Mapping
 		{
 			var t = typeof(ElasticSearchProject);
 			this._client.DeleteMapping(t);
-			this._client.DeleteMapping(t, Test.Default.DefaultIndex + "_clone");
+			this._client.DeleteMapping(t, ElasticsearchConfiguration.DefaultIndex + "_clone");
 			var x = this._client.MapFromAttributes(t);
 			Assert.IsTrue(x.OK);
 
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			TestMapping(typeMapping);
 		}
 
 		[Test]
 		public void GetMapping()
 		{
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex + "_clone", "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			this.TestMapping(typeMapping);
 		}
 
@@ -95,14 +95,14 @@ namespace Nest.Tests.Integration.Mapping
 		[Test]
 		public void DynamicMap()
 		{
-			var typeMapping = this._client.GetMapping(Test.Default.DefaultIndex + "_clone", "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			mapping.Boost = 3;
-			typeMapping.Name = "elasticsearchprojects2";
-			this._client.Map(typeMapping, Test.Default.DefaultIndex + "_clone");
+			typeMapping.TypeNameMarker = "elasticsearchprojects2";
+			this._client.Map(typeMapping, ElasticsearchConfiguration.DefaultIndex + "_clone");
 
-			typeMapping = this._client.GetMapping(Test.Default.DefaultIndex + "_clone",
+			typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex + "_clone",
 												  "elasticsearchprojects2");
 			var countryMapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(countryMapping);

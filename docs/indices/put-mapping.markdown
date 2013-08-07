@@ -50,7 +50,7 @@ You can decorate your classes with `ElasticProperty` and `ElasticType` attribute
 
 You can persist this mapping by simpling calling 
 
-	var response = this.ConnectedClient.Map<ElasticSearchProject>();
+	var response = this.ConnectedClient.MapFromAttributes<ElasticSearchProject>();
 
 
 **NOTE**: Whenever the client needs to infer the typename for `ElasticSearchProject` it will resolve nicely to `"elasticsearchprojects2"` now too. This gives you great control over naming without having to specify the typename on each call.

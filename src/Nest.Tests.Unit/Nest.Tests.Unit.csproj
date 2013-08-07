@@ -54,8 +54,9 @@
     <Reference Include="Moq">
       <HintPath>..\..\dep\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\dep\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
@@ -72,7 +73,14 @@
     <Compile Include="BaseJsonTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
+    <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\Bulk\BulkUrlTests.cs" />
+    <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
+    <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
+    <Compile Include="Core\Index\IndexTests.cs" />
+    <Compile Include="Core\Indices\Analysis\BaseAnalysisTests.cs" />
+    <Compile Include="Core\Indices\Analysis\Tokenizers\TokenizerTests.cs" />
     <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
     <Compile Include="Core\Map\BoostField\BoostFieldTests.cs" />
     <Compile Include="Core\Map\PutMappingRequestTests.cs" />
@@ -89,7 +97,21 @@
     <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
+    <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
+    <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
+    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
+    <Compile Include="Extensions\UriExtensionsTests.cs" />
+    <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
+    <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
+    <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
+    <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
+    <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
+    <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
+    <Compile Include="Search\Rescore\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
     <Compile Include="Search\Facets\FacetJson.cs" />
     <Compile Include="Search\Facets\FilterFacetJson.cs" />
@@ -97,6 +119,10 @@
     <Compile Include="Search\Facets\HistogramFacetJson.cs" />
     <Compile Include="Search\Facets\QueryFacetJson.cs" />
     <Compile Include="Search\Facets\RangeFacetJson.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\DateEntriesConstraint.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\DateEntrySequenceEqualityComparer.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\when_date_histogram_query_has_no_value_field.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\when_date_histogram_query_has_value_field.cs" />
     <Compile Include="Search\Facets\StatisticalFacetJson.cs" />
     <Compile Include="Search\Facets\TermsFacetJson.cs" />
     <Compile Include="Search\Facets\TermsStatsFacetJson.cs" />
@@ -147,6 +173,7 @@
     <Compile Include="Search\Query\ConditionLessStrict\ConditionLessStrictTests.cs" />
     <Compile Include="Search\Query\ConditionLessStrict\SemiStrictBoolTests.cs" />
     <Compile Include="Search\Query\QueriesInQueries\QueriesInQueriesTests.cs" />
+    <Compile Include="Search\Query\Singles\MatchQueryJson.cs" />
     <Compile Include="Search\Query\UpdateQuery\UpdateQueriesTests.cs" />
     <Compile Include="Search\Query\Singles\BoolQueryJson.cs" />
     <Compile Include="Search\Query\Singles\BoostingQueryJson.cs" />
@@ -173,8 +200,8 @@
     <Compile Include="Search\Query\Singles\SpanNotQueryJson.cs" />
     <Compile Include="Search\Query\Singles\SpanOrQueryJson.cs" />
     <Compile Include="Search\Query\Singles\SpanTermQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\TermQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\TermsQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\Term\TermQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\Terms\TermsQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TextPhrasePrefixQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TextPhraseQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TextQueryJson.cs" />
@@ -188,6 +215,7 @@
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
     <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Settings\UsePrettyResponseTests.cs" />
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -198,6 +226,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Core\Bulk\BulkOperations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Bulk\BulkUpdateDetails.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Tokenizers\TestTokenizers.json" />
     <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingExpression.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -300,7 +335,39 @@
     <None Include="Core\AttributeBasedMap\TestNestedWriter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpsertUsingScriptAndPartialObject.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpdateUsingPartial.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpsertUsingScript.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Serialize\ClassWithCollectionSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Serialize\OptOutDuringIndexing.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Serialize\OptOutDuringMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
+    <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
+    <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />
+    <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />
+    <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\LongToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\FloatToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\DoubleToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\IntToStringTest.json" />
+    <None Include="Search\Rescore\RescoreSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Filter\BoolCombinations\CombineNotAnd.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -498,7 +565,9 @@
     <None Include="Search\Query\ConditionlessBool\MyTermNot.json" />
     <None Include="Search\Query\ConditionlessBool\MyTerm.json" />
     <None Include="Search\Query\ConditionlessBool\MatchAll.json" />
-    <None Include="Search\Query\ConditionLess\MatchAll.json" />
+    <None Include="Search\Query\ConditionLess\MatchAll.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\ConditionLessStrict\MatchAll.json" />
     <None Include="Search\Query\InsideBoolCalls\InsideMust.json" />
     <None Include="Search\Query\InsideBoolCalls\InsideMustNot.json" />
@@ -552,6 +621,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\SimpleClassUsesCamelCase.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Sort\RandomScriptSort.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Test.settings">

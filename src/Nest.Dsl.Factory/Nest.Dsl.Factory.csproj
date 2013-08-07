@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F5DD2CF2-CC4A-42F2-97A9-9F915CCA020F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nest.Dsl.Factory</RootNamespace>
+    <AssemblyName>Nest.Dsl.Factory</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Nest.Dsl.Factory.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Nest.Dsl.Factory.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ElasticClient-Search.cs" />
+    <Compile Include="Extensions\DateExtensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Factory\Common\EsRegex.cs" />
+    <Compile Include="Factory\Common\GeoHashUtils.cs" />
+    <Compile Include="Factory\Common\Point.cs" />
+    <Compile Include="Factory\FacetFactory.cs" />
+    <Compile Include="Factory\Facet\AbstractFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\DateHistogramFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\FilterFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\GeoDistanceFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\HistogramFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\HistogramScriptFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\QueryFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\RangeFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\RangeScriptFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\StatisticalFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\StatisticalScriptFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\TermsFacetBuilder.cs" />
+    <Compile Include="Factory\Facet\TermsStatsFacetBuilder.cs" />
+    <Compile Include="Factory\FilterFactory.cs" />
+    <Compile Include="Factory\Filter\AndFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\BoolFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\ExistsFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\GeoBoundingBoxFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\GeoDistanceFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\GeoDistanceRangeFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\GeoPolygonFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\HasChildFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\IdsFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\IFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\LimitFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\MatchAllFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\MissingFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\NestedFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\NotFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\NumericRangeFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\OrFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\PrefixFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\QueryFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\RangeFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\ScriptFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\TermFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\TermsFilterBuilder.cs" />
+    <Compile Include="Factory\Filter\TypeFilterBuilder.cs" />
+    <Compile Include="Factory\HighlightBuilder.cs" />
+    <Compile Include="Factory\IJsonSerializable.cs" />
+    <Compile Include="Factory\NameRegistry.cs" />
+    <Compile Include="Factory\QueryBuilderException.cs" />
+    <Compile Include="Factory\QueryFactory.cs" />
+    <Compile Include="Factory\Query\BoolQueryBuilder.cs" />
+    <Compile Include="Factory\Query\BoostingQueryBuilder.cs" />
+    <Compile Include="Factory\Query\ConstantScoreQueryBuilder.cs" />
+    <Compile Include="Factory\Query\CustomBoostFactorQueryBuilder.cs" />
+    <Compile Include="Factory\Query\CustomFiltersScoreQueryBuilder.cs" />
+    <Compile Include="Factory\Query\CustomScoreQueryBuilder.cs" />
+    <Compile Include="Factory\Query\DisMaxQueryBuilder.cs" />
+    <Compile Include="Factory\Query\FieldMaskingSpanQueryBuilder.cs" />
+    <Compile Include="Factory\Query\FieldQueryBuilder.cs" />
+    <Compile Include="Factory\Query\FilteredQueryBuilder.cs" />
+    <Compile Include="Factory\Query\FuzzyLikeThisFieldQueryBuilder.cs" />
+    <Compile Include="Factory\Query\FuzzyLikeThisQueryBuilder.cs" />
+    <Compile Include="Factory\Query\FuzzyQueryBuilder.cs" />
+    <Compile Include="Factory\Query\HasChildQueryBuilder.cs" />
+    <Compile Include="Factory\Query\IdsQueryBuilder.cs" />
+    <Compile Include="Factory\Query\IndicesQueryBuilder.cs" />
+    <Compile Include="Factory\Query\IQueryBuilder.cs" />
+    <Compile Include="Factory\Query\ISpanQueryBuilder .cs" />
+    <Compile Include="Factory\Query\MatchAllQueryBuilder.cs" />
+    <Compile Include="Factory\Query\MatchQueryBuilder.cs" />
+    <Compile Include="Factory\Query\MoreLikeThisFieldQueryBuilder.cs" />
+    <Compile Include="Factory\Query\MoreLikeThisQueryBuilder.cs" />
+    <Compile Include="Factory\Query\NestedQueryBuilder.cs" />
+    <Compile Include="Factory\Query\PrefixQueryBuilder.cs" />
+    <Compile Include="Factory\Query\QueryStringQueryBuilder.cs" />
+    <Compile Include="Factory\Query\RangeQueryBuilder.cs" />
+    <Compile Include="Factory\Query\SpanFirstQueryBuilder.cs" />
+    <Compile Include="Factory\Query\SpanNearQueryBuilder.cs" />
+    <Compile Include="Factory\Query\SpanNotQueryBuilder.cs" />
+    <Compile Include="Factory\Query\SpanOrQueryBuilder.cs" />
+    <Compile Include="Factory\Query\SpanTermQueryBuilder.cs" />
+    <Compile Include="Factory\Query\TermQueryBuilder.cs" />
+    <Compile Include="Factory\Query\TermsQueryBuilder.cs" />
+    <Compile Include="Factory\Query\TextQueryBuilder.cs" />
+    <Compile Include="Factory\Query\TopChildrenQueryBuilder.cs" />
+    <Compile Include="Factory\Query\WildcardQueryBuilder.cs" />
+    <Compile Include="Factory\Query\WrapperQueryBuilder.cs" />
+    <Compile Include="Factory\SearchBuilder.cs" />
+    <Compile Include="Factory\SearchBuilderException.cs" />
+    <Compile Include="Factory\SortFactory.cs" />
+    <Compile Include="Factory\Sort\FieldSortBuilder.cs" />
+    <Compile Include="Factory\Sort\GeoDistanceSortBuilder.cs" />
+    <Compile Include="Factory\Sort\ISortBuilder.cs" />
+    <Compile Include="Factory\Sort\ScoreSortBuilder.cs" />
+    <Compile Include="Factory\Sort\ScriptSortBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nest\Nest.csproj">
+      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Name>Nest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

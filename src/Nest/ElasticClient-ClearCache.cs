@@ -44,7 +44,7 @@ namespace Nest
 			if (indices != null && indices.Any(s => !string.IsNullOrEmpty(s)))
 			{
 				indices = indices.Where(s => !string.IsNullOrEmpty(s));
-				path = this.PathResolver.CreateIndexPath(indices, path);
+				path = this.PathResolver.CreateIndexPath(indices) + path;
 			}
 			if (options != ClearCacheOptions.All)
 			{

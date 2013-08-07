@@ -8,8 +8,15 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class DeleteTests : CleanStateIntegrationTests
+	public class DeleteTests : IntegrationTests
 	{
+		private void ResetIndexes()
+		{
+			IntegrationSetup.TearDown();
+			IntegrationSetup.Setup();
+		}
+
+
 		[Test]
 		public void ShouldThowOnNullId()
 		{
@@ -40,7 +47,7 @@ namespace Nest.Tests.Integration.Core
 			);
 			Assert.Greater(queryResults.Total, 0);
 
-			var hit = queryResults.Hits.Hits[0];
+			var hit = queryResults.Hits.Hits.First();
 			var documentToFind = hit.Source;
 
 			//act
@@ -172,7 +179,7 @@ namespace Nest.Tests.Integration.Core
 			var totalResults = result.Total;
 			Assert.Greater(totalSet, 0);
 
-			var deleteResult = this._client.Delete(result.Documents, new SimpleBulkParameters() { Refresh = true });
+			var deleteResult = this._client.DeleteMany(result.Documents, new SimpleBulkParameters() { Refresh = true });
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
@@ -196,7 +203,7 @@ namespace Nest.Tests.Integration.Core
 
 			var parameterizedDocuments = result.Documents.Select(d => new BulkParameters<ElasticSearchProject>(d) { VersionType = VersionType.Internal });
 
-			var deleteResult = this._client.Delete(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
+			var deleteResult = this._client.DeleteMany(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
@@ -279,7 +286,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 			this._client.DeleteByQuery<ElasticSearchProject>(q => q
-					  .Indices(new[] { Test.Default.DefaultIndex, Test.Default.DefaultIndex + "_clone" })
+					  .Indices(new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" })
 					  .Term(f => f.Name, "elasticsearch.pm")
 				  );
 

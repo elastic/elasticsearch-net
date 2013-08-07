@@ -6,7 +6,20 @@ menuitem: preference
 ---
 
 
-# Documentation still in progress
+# Preference
 
-This is sadly still a marker file.
+Signals on what node to execute the search
+
+You can call the following methods on `SearchDescriptor`
+
+	.Preference("my_custom_preference")
+
+
+	.ExecuteOnPrimary()
+
+
+	.ExecuteOnLocalShard
+
+
+	.ExecuteOnNode("mynodename")
 

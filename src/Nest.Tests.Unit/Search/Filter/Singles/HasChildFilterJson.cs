@@ -33,7 +33,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					}
 				}
 			}";
-			Assert.True(json.JsonEquals(expected), json);		
+			Assert.True(json.JsonEquals(expected), json);
 		}
 	}
 }

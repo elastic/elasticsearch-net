@@ -25,9 +25,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new StringMappingDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsNullOrEmpty())
+			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
 				throw new Exception("Could not get field name for string mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
 			return this;
 		}
 
@@ -35,9 +35,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new NumberMappingDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsNullOrEmpty())
+			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
 				throw new Exception("Could not get field name for number mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
 			return this;
 		}
 
@@ -45,9 +45,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new DateMappingDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsNullOrEmpty())
+			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
 				throw new Exception("Could not get field name for date mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
 			return this;
 		}
 
@@ -55,9 +55,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new BooleanMappingDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsNullOrEmpty())
+			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
 				throw new Exception("Could not get field name for boolean mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
 			return this;
 		}
 
@@ -65,9 +65,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new BinaryMappingDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsNullOrEmpty())
+			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
 				throw new Exception("Could not get field name for binary mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
 			return this;
 		}
 
@@ -75,9 +75,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new GenericMappingDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsNullOrEmpty())
+			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
 				throw new Exception("Could not get field name for generic mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
 			return this;
 		}
 

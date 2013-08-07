@@ -5,6 +5,7 @@ aside#menu
 			ul
 				li: a(class=(page.metadata.menuitem == 'introduction')? "selected" : "", href="/") Introduction
 				li: a(class=(page.metadata.menuitem == 'connecting')? "selected" : "", href="/concepts/connecting.html") Connecting
+				li: a(class=(page.metadata.menuitem == 'index-type-inference')? "selected" : "", href="/concepts/index-type-inference.html") Type/Index Inference
 				li: a(class=(page.metadata.menuitem == 'handling-responces')? "selected" : "", href="/concepts/handling-responces.html") Response handling
 				li: a(class=(page.metadata.menuitem == 'writing-queries')? "selected" : "", href="/concepts/writing-queries.html") Writing queries
 		- else 
@@ -31,8 +32,8 @@ aside#menu
 			ul
 				li: a(class=(page.metadata.menuitem == 'aliases')? "selected" : "", href="/indices/aliases.html") Aliases
 				li: a(class=(page.metadata.menuitem == 'analyze')? "selected" : "", href="/indices/analyze.html") Analyze
-				li: a(class=(page.metadata.menuitem == 'create-index')? "selected" : "", href="/indices/create-index.html") Create Index
-				li: a(class=(page.metadata.menuitem == 'delete-index')? "selected" : "", href="/indices/delete-index.html") Delete Index
+				li: a(class=(page.metadata.menuitem == 'create-indices')? "selected" : "", href="/indices/create-indices.html") Create Index
+				li: a(class=(page.metadata.menuitem == 'delete-indices')? "selected" : "", href="/indices/delete-indices.html") Delete Index
 				li: a(class=(page.metadata.menuitem == 'open-close')? "selected" : "", href="/indices/open-close.html") Open/Close Index
 				li: a(class=(page.metadata.menuitem == 'get-settings')? "selected" : "", href="/indices/get-settings.html") Get Settings
 				li: a(class=(page.metadata.menuitem == 'get-mapping')? "selected" : "", href="/indices/get-mapping.html") Get Mapping

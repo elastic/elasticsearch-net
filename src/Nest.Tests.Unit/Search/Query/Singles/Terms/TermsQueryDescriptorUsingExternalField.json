@@ -1,0 +1,17 @@
+{
+  "from": 0,
+  "size": 10,
+  "query": {
+    "terms": {
+      "intValues": {
+        "index": "nest_test_data",
+        "type": "people",
+        "id": "4",
+        "path": "id"
+      },
+      "minimum_match": 2,
+      "disable_coord": true,
+      "_cache_key": "user_4_key"
+    }
+  }
+}

@@ -26,8 +26,26 @@ namespace Nest
 			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 
+			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
+		}
+		/// <summary>
+		/// Gets multiple documents of T by id in the specified index
+		/// </summary>
+		public IEnumerable<T> MultiGet<T>(string index, IEnumerable<int> ids)
+			where T : class
+		{
+			return this.MultiGet<T>(index, ids.Select(i => Convert.ToString(i)));
+		}
+		/// <summary>
+		/// Gets multiple documents of T by id in the specified index
+		/// </summary>
+		public IEnumerable<T> MultiGet<T>(string index, IEnumerable<string> ids)
+			where T : class
+		{
+			var typeName = this.GetTypeNameFor<T>();
+			
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
 		/// <summary>
@@ -74,14 +92,14 @@ namespace Nest
 					var index = string.IsNullOrEmpty(g._Index) ? this.IndexNameResolver.GetIndexForType(g._ClrType) : g._Index;
 					properties.Add(@"""_index"" : " + this.Serialize(index));
 				}
-
 				if (descriptor._FixedType.IsNullOrEmpty())
 				{
-					var type = string.IsNullOrEmpty(g._Type) ? this.TypeNameResolver.GetTypeNameFor(g._ClrType) : g._Type;
+					var type = this.ResolveTypeName(g._Type, this.GetTypeNameFor(g._ClrType));
 					properties.Add(@"""_type"" : " + this.Serialize(type));
 				}
 				properties.Add(@"""_id"" : " + this.Serialize(g._Id));
-
+				if (!g._Routing.IsNullOrEmpty())
+					properties.Add(@"""_routing"" : " + this.Serialize(g._Routing));
 				if (g._Fields.HasAny())
 					properties.Add(@"""fields"" : " + this.Serialize(g._Fields));
 

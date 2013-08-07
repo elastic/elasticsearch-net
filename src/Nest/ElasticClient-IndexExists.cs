@@ -20,12 +20,12 @@
 				ConnectionStatus = status
 			};
 			if (status.Error == null || status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
-			{ 
+			{	
 				//404 is an expected possible status code for this call.
 				response.IsValid = true;
 			}
 			if (status.Error == null)
-			{ 
+			{
 				response.Exists = true;
 			}
 			return response;

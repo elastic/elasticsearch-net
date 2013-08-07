@@ -49,8 +49,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetReflector">
-      <HintPath>..\..\dep\NetReflector.dll</HintPath>
+    <Reference Include="NetReflector, Version=1.1.2009.1214, Culture=neutral, PublicKeyToken=2f4dd8b32acbcd8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\NetReflector.1.1.2009\lib\net20\NetReflector.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -106,6 +111,9 @@
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

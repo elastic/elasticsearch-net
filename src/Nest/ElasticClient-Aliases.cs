@@ -30,19 +30,23 @@ namespace Nest
 			return cmd;
 		}
 
-		/// <summary>
-		/// Get all the indices pointing to an alias
-		/// </summary>
-		public IEnumerable<string> GetIndicesPointingToAlias(string alias)
-		{
-			var path = this.PathResolver.CreateIndexPath(alias, "/_aliases");
-			var status = this.Connection.GetSync(path);
-			var r = this.Deserialize<Dictionary<string, object>>(status.Result);
-			return r == null ? Enumerable.Empty<string>() : r.Keys;
-		}
+	    /// <summary>
+	    /// Get all the indices pointing to an alias
+	    /// </summary>
+	    public IEnumerable<string> GetIndicesPointingToAlias(string alias)
+	    {
+	        var path = this.PathResolver.CreateIndexPath(alias, "/_aliases");
+	        var status = this.Connection.GetSync(path);
+	        if (!status.Success)
+	        {
+	            return Enumerable.Empty<string>();
+	        }
+	        var r = this.Deserialize<Dictionary<string, object>>(status.Result);
+	        return r == null ? Enumerable.Empty<string>() : r.Keys;
+	    }
 
-		/// <summary>
-		/// Rename an old alias for index to a new alias in one operation
+	    /// <summary>
+		/// Repoint an alias from a set of old indices to a set of new indices in one operation
 		/// </summary>
 		public IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
 		{
@@ -51,6 +55,22 @@ namespace Nest
 				commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = alias }));
 			foreach (var i in newIndices)
 				commands.Add(_createCommand("add", new AliasParams { Index = i, Alias = alias }));
+			return this._Alias(string.Join(", ", commands));
+		}
+
+		/// <summary>
+		/// Repoint an alias from a set of old indices to a set of new indices in one operation
+		/// </summary>
+		public IIndicesOperationResponse Swap(AliasParams aliasParam, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
+		{
+			var commands = new List<string>();
+			foreach (var i in oldIndices)
+				commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = aliasParam.Alias }));
+			foreach (var i in newIndices)
+			{
+				aliasParam.Index = i;
+				commands.Add(_createCommand("add", aliasParam));
+			}
 			return this._Alias(string.Join(", ", commands));
 		}
 

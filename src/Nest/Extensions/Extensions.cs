@@ -6,10 +6,11 @@ using System.Linq.Expressions;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Globalization;
+using Nest.Resolvers;
 
 namespace Nest
 {
-	public static class Extensions
+	internal static class Extensions
 	{
 		internal static string ToCamelCase(this string s)
 		{
@@ -59,16 +60,41 @@ namespace Nest
 			format.ThrowIfNull("format");
 			return string.Format(format, args);
 		}
+		internal static string EscapedFormat(this string format, params object[] args)
+		{
+			format.ThrowIfNull("format");
+			var arguments = new List<object>();
+			foreach (var a in args)
+			{
+				var s = a as string;
+				arguments.Add(s != null ? Uri.EscapeDataString(s) : a);
+			}
+			return string.Format(format, arguments.ToArray());
+		}
 		internal static bool IsNullOrEmpty(this string value)
 		{
 			return string.IsNullOrEmpty(value);
 		}
+		internal static bool IsNullOrEmpty(this TypeNameMarker value)
+		{
+			return value == null || value.GetHashCode() == 0;
+		}
+		
 		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
 		{
 			int idx = 0;
 			foreach (T item in enumerable)
 				handler(item, idx++);
 		}
+        internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs)
+        {
+            if (xs == null)
+            {
+                return new T[0];
+            }
+
+            return xs;
+        }
 	}
 
 	

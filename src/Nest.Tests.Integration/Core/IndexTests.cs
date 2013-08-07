@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Core
 {
 	[TestFixture]
-	public class IndexTests : CleanStateIntegrationTests
+	public class IndexTests : IntegrationTests
 	{
         private readonly Random idGen = new Random();
 

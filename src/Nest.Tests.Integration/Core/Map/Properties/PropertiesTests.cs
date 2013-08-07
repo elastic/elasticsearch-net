@@ -203,7 +203,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 						.Name(p => p.PingIP)
 						.Boost(0.7)
 						.IncludeInAll()
-						.Index()
+						.NoIndex()
 						.IndexName("ip")
 						.NullValue("0.0.0.0")
 						.PrecisionStep(4)

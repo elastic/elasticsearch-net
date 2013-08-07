@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Nest.Tests.MockData;
+using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
+using System.Diagnostics;
+using FluentAssertions;
+
+namespace Nest.Tests.Integration.Reproduce
+{
+	/// <summary>
+	/// tests to reproduce reported errors
+	/// </summary>
+	[TestFixture]
+	public class Reproduce319Tests : IntegrationTests
+	{
+		
+		/// <summary>
+		///	https://github.com/Mpdreamz/NEST/issues/319
+		/// </summary>
+		[Test]
+		public void CreateIndexShouldNotThrowNullReference()
+		{
+			var settings = new IndexSettings();
+			settings.Similarity = new SimilaritySettings();
+			settings.NumberOfReplicas = 1;
+			settings.NumberOfShards = 5;
+			settings.Add("index.refresh_interval", "10s");
+			settings.Add("merge.policy.merge_factor", "10");
+			settings.Add("search.slowlog.threshold.fetch.warn", "1s");
+			settings.Analysis.Analyzers.Add(new KeyValuePair<string, AnalyzerBase>("keyword", new KeywordAnalyzer()));
+			settings.Analysis.Analyzers.Add(new KeyValuePair<string, AnalyzerBase>("simple", new SimpleAnalyzer()));
+			settings.Mappings.Add(new RootObjectMapping
+			{
+				Name = "my_root_object",
+				Properties = new Dictionary<string, IElasticType>
+				{
+					{"my_field", new StringMapping() { Name = "my_string_field "}}
+				}
+			});
+
+			Assert.DoesNotThrow(() =>
+			{
+				var idxRsp = this._client.CreateIndex(ElasticsearchConfiguration.NewUniqueIndexName(), settings);
+				Assert.IsTrue(idxRsp.IsValid, idxRsp.ConnectionStatus.ToString());			
+			});
+		}
+
+	}
+}

@@ -2,7 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "/D/Programming/NEST/new_docs"
+			"path": ".",
+			"folder_exclude_patterns": ["build"]
 		}
 	]
 }

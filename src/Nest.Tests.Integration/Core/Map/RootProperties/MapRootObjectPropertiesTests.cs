@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 		{
 			var result = this._client.MapFluent<ElasticSearchProject>(m => m
 				.TypeName("elasticsearchprojects2")
-				.IndexNames("nest_test_data", "nest_test_data_clone")
+				.IndexNames(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.IgnoreConflicts()
 				.IndexAnalyzer("standard")
 				.SearchAnalyzer("standard")

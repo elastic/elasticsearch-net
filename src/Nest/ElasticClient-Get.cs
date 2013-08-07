@@ -28,9 +28,9 @@ namespace Nest
 			var index = this.IndexNameResolver.GetIndexForType<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 
-			return this.Get<T>(id, this.PathResolver.CreateIndexTypePath(index, typeName));
+			return this._Get<T>(this.PathResolver.CreateIndexTypeIdPath(index, typeName, id));
 		}
 		/// <summary>
 		/// Gets a document of T by id in the specified index and the specified typename
@@ -38,7 +38,7 @@ namespace Nest
 		/// <returns>an instance of T</returns>
 		public T Get<T>(string index, string type, string id) where T : class
 		{
-			return this.Get<T>(id, index + "/" + type + "/");
+			return this._Get<T>(this.PathResolver.CreateIndexTypeIdPath(index, type, id));
 		}
 		/// <summary>
 		/// Gets a document of T by id in the specified index and the specified typename
@@ -46,12 +46,9 @@ namespace Nest
 		/// <returns>an instance of T</returns>
 		public T Get<T>(string index, string type, int id) where T : class
 		{
-			return this.Get<T>(id.ToString(), index + "/" + type + "/");
+			return this._Get<T>(this.PathResolver.CreateIndexTypeIdPath(index, type, id.ToString()));
 		}
-		private T Get<T>(string id, string path) where T : class
-		{
-			return this._Get<T>(path + id);
-		}
+		
 		public FieldSelection<T> GetFieldSelection<T>(Action<GetDescriptor<T>> getSelector) where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");

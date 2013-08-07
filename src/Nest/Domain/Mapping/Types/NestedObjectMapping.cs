@@ -1,12 +1,16 @@
 using System;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class NestedObjectMapping : ObjectMapping
 	{
 		[JsonProperty("type")]
-		public override string Type { get { return "nested"; } }
+		public override TypeNameMarker Type
+		{
+			get { return new TypeNameMarker { Name = "nested" }; }
+		}
 
 		[JsonProperty("include_in_parent")]
 		public bool? IncludeInParent { get; set; }

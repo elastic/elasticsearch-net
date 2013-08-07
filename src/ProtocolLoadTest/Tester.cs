@@ -4,19 +4,25 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 
 namespace ProtocolLoadTest
 {
 	internal abstract class Tester
 	{
 		// Number of messages sent by all ThriftTester instances
-		private static int NumSent;
+		protected static int NumSent;
 
 		protected ConnectionSettings CreateSettings(string indexName, int port)
 		{
-			return new ConnectionSettings("localhost", port)
+			var host = "localhost";
+			if (Process.GetProcessesByName("fiddler").Any())
+				host = "ipv4.fiddler";
+			var uri = new UriBuilder("http", host, port).Uri;
+			return new ConnectionSettings(uri)
 			   .SetDefaultIndex(indexName)
-			   .SetMaximumAsyncConnections(1);
+			   .SetMaximumAsyncConnections(2);
 		}
 
 		protected void Connect(ElasticClient client, ConnectionSettings settings)
@@ -39,11 +45,8 @@ namespace ProtocolLoadTest
 
 			var msgGenerator = new MessageGenerator();
 			var tasks = new List<Task>();
-
 			var partitionedMessages = msgGenerator.Generate(numMessages).Partition(bufferSize);
-			
 			Interlocked.Exchange(ref NumSent, 0);
-
 			foreach (var messages in partitionedMessages)
 			{
 				var t = client.IndexManyAsync(messages, indexName, bulkParms);

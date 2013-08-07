@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Search.SearchType
 {
 	[TestFixture]
-	public class SearchTypeScanTests : CleanStateIntegrationTests
+	public class SearchTypeScanTests : IntegrationTests
 	{
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 

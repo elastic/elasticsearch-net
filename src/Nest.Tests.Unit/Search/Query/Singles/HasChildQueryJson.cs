@@ -16,6 +16,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.HasChild<Person>(fz => fz
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
 						.Scope("my_scope")
+						.Score(ChildScoreType.avg)
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
@@ -23,6 +24,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			{ has_child: { 
 				type: ""people"",
 				_scope: ""my_scope"",
+				score_type: ""avg"",
 				query: {
 					term: {
 						firstName: {

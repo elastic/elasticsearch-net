@@ -36,6 +36,10 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,20 +47,29 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\..\dep\Newtonsoft.Json.4.5.10\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
+    <Compile Include="Core\Bulk\BulkPercolateTests.cs" />
+    <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
+    <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
+    <Compile Include="ElasticsearchConfiguration.cs" />
     <Compile Include="Core\IndexTests.cs" />
+    <Compile Include="Help\AliasTests.cs" />
+    <Compile Include="Index\IndexUsingUrlIdTests.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTest.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
+    <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Cluster\StateTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="ConnectionTests.cs" />
-    <Compile Include="CleanStateIntegrationTests.cs" />
+    <Compile Include="IntegrationSetup.cs" />
     <Compile Include="Core\Get\GetFullTests.cs" />
     <Compile Include="Core\Get\GetMultiTests.cs" />
     <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
@@ -87,6 +100,7 @@
     <Compile Include="Integration\Filter\MissingExistsFilterTests.cs" />
     <Compile Include="Integration\Filter\PrefixFilterTests.cs" />
     <Compile Include="Integration\Filter\RangeFilterTests.cs" />
+    <Compile Include="Integration\Query\TermToString.cs" />
     <Compile Include="Integration\Query\TextPhraseQueryTests.cs" />
     <Compile Include="Integration\Query\TextPhrasePrefixQueryTests.cs" />
     <Compile Include="Integration\Filter\NumericRangeFilterTests.cs" />
@@ -95,6 +109,10 @@
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
+    <Compile Include="Reproduce\Reproduce308Tests.cs" />
+    <Compile Include="Reproduce\Reproduce319Tests.cs" />
+    <Compile Include="Reproduce\Reproduce211Tests.cs" />
+    <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />
     <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
@@ -124,15 +142,23 @@
     <Compile Include="Search\SearchType\SearchTypeScanTests.cs" />
     <Compile Include="Search\SearchType\SearchTypeCountTests.cs" />
     <Compile Include="Search\SearchType\SearchTypeTests.cs" />
+    <Compile Include="Search\SubClassSupport\SubClassSupportTests.cs" />
     <Compile Include="Search\VersionTests.cs" />
     <Compile Include="Search\ExplainTests.cs" />
+    <Compile Include="Template\TemplateTests.cs" />
     <Compile Include="Test.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Test.settings</DependentUpon>
     </Compile>
+    <Compile Include="Warmers\IndicesWarmersTests.cs" />
+    <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Nest.Connection.Thrift\Nest.Connection.Thrift.csproj">
+      <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
+      <Name>Nest.Connection.Thrift</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>
@@ -151,9 +177,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

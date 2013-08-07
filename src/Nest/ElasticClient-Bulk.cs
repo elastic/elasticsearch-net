@@ -14,7 +14,61 @@ namespace Nest
 	{
 		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
 
+		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
+		{
+			bulkSelector.ThrowIfNull("bulkSelector");
+			var bulkDescriptor = bulkSelector(new BulkDescriptor());
+			return this.Bulk(bulkDescriptor);
+		}
+		public IBulkResponse Bulk(BulkDescriptor bulkDescriptor)
+		{
+			bulkDescriptor.ThrowIfNull("bulkDescriptor");
+			bulkDescriptor._Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
+			var sb = new StringBuilder();
+			
+			foreach (var operation in bulkDescriptor._Operations)
+			{
+				var command = operation._Operation;
+				var index = operation._Index ??
+				            bulkDescriptor._FixedIndex ?? 
+							new IndexNameResolver(this.Settings).GetIndexForType(operation._ClrType);
+				var typeName = operation._Type
+				               ?? bulkDescriptor._FixedType
+				               ?? this.GetTypeNameFor(operation._ClrType);
 
+				var id = operation.GetIdForObject(this.IdResolver);
+				operation._Index = index;
+				operation._Type = typeName;
+				operation._Id = id;
+
+				var opJson = JsonConvert.SerializeObject(operation, Formatting.None, IndexSerializationSettings);
+
+				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
+				sb.Append(action);
+
+				if (command == "index" || command == "create")
+				{
+					string jsonCommand = JsonConvert.SerializeObject(operation._Object, Formatting.None, IndexSerializationSettings);
+					sb.Append(jsonCommand + "\n");
+				}
+				else if (command == "update")
+				{
+					string jsonCommand = JsonConvert.SerializeObject(operation.GetBody(), Formatting.None, IndexSerializationSettings);
+					sb.Append(jsonCommand + "\n");
+				}
+			}
+			var json = sb.ToString();
+			var path = "_bulk";
+			if (!bulkDescriptor._FixedIndex.IsNullOrEmpty())
+			{
+				if (!bulkDescriptor._FixedType.IsNullOrEmpty())
+					path = bulkDescriptor._FixedType + "/" + path;
+				path = bulkDescriptor._FixedIndex + "/" + path;
+			}
+			var status = this.Connection.PostSync(path, json);
+			return this.ToParsedResponse<BulkResponse>(status);
+		}
+		
 		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class
 		{
 			return this.GenerateBulkCommand<T>(@objects, "index");
@@ -67,7 +121,7 @@ namespace Nest
 
 		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 
 			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
@@ -77,7 +131,7 @@ namespace Nest
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> objects, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 
 			var index = this.IndexNameResolver.GetIndexForType<T>();
 			if (string.IsNullOrEmpty(index))
@@ -87,21 +141,21 @@ namespace Nest
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string index, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> objects, string index, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.TypeNameResolver.GetTypeNameFor<T>();
+			var typeName = this.GetTypeNameFor<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}
@@ -109,8 +163,7 @@ namespace Nest
 
 		private string GenerateBulkCommand<T>(IEnumerable<T> @objects, string index, string typeName, string command) where T : class
 		{
-			if (!@objects.Any())
-				return null;
+			objects.ThrowIfEmpty("objects");
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
@@ -140,8 +193,7 @@ namespace Nest
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName, string command) where T : class
 		{
-			if (!@objects.Any())
-				return null;
+			objects.ThrowIfEmpty("objects");
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);

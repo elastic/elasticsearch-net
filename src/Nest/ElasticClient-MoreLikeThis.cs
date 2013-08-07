@@ -1,6 +1,7 @@
 ﻿using System;
-using Nest.FactoryDsl;
+using System.Collections.Generic;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -25,7 +26,10 @@ namespace Nest
 				var search = this.Serialize(descriptor._Search);
 				status = this.Connection.PostSync(path, search);
 			}
-			return this.ToParsedResponse<QueryResponse<T>>(status);
+			return this.ToParsedResponse<QueryResponse<T>>(status, extraConverters: new List<JsonConverter>
+			{
+				new ConcreteTypeConverter(typeof (T), (d, h) => typeof (T))
+			});
 		}
 	}
 }

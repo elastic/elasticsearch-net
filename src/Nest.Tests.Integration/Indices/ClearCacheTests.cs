@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Indices
 		public void test_clear_cache_generic_specific_indices()
 		{
 			var client = this._client;
-			var status = client.ClearCache(new List<string> { Settings.DefaultIndex, Settings.DefaultIndex + "_clone" }, ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
+			var status = client.ClearCache(new List<string> { _settings.DefaultIndex, _settings.DefaultIndex }, ClearCacheOptions.Filter | ClearCacheOptions.Bloom);
 			Assert.True(status.IsValid);
 			Assert.True(status.OK);
 		}

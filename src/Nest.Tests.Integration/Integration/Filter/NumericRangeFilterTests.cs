@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 	/// Integrated tests of NumericRangeFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class NumericRangeFilterTests : CleanStateIntegrationTests
+	public class NumericRangeFilterTests : IntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.

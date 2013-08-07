@@ -13,18 +13,27 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void TestSettings()
 		{
-			Assert.AreEqual(this.Settings.Host, Test.Default.Host);
-			Assert.AreEqual(this.Settings.Port, Test.Default.Port);
-			Assert.AreEqual(this.Settings.DefaultIndex, Test.Default.DefaultIndex);
-			Assert.AreEqual(this.Settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
+			Assert.AreEqual(this._settings.Host, ElasticsearchConfiguration.Settings().Host);
+			Assert.AreEqual(this._settings.Port, Test.Default.Port);
+            Assert.AreEqual(new Uri(string.Format("http://{0}:{1}", ElasticsearchConfiguration.Settings().Host, Test.Default.Port)), this._settings.Uri);
+			Assert.AreEqual(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex);
+			Assert.AreEqual(this._settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
 		}
-		[Test]
+        [Test]
+        public void TestSettingsWithUri()
+        {
+            var uri = new Uri(string.Format("http://{0}:{1}", ElasticsearchConfiguration.Settings().Host, ElasticsearchConfiguration.Settings().Port));
+            var settings = new ConnectionSettings(uri);
+            Assert.AreEqual(settings.Host, ElasticsearchConfiguration.Settings().Host);
+            Assert.AreEqual(settings.Port, Test.Default.Port);
+            Assert.AreEqual(uri, this._settings.Uri);
+        }
+        [Test]
 		public void TestConnectSuccess()
 		{
-			var client = this.CreateClient();
 			ConnectionStatus status;
-			client.TryConnect(out status);
-			Assert.True(client.IsValid);
+			_client.TryConnect(out status);
+			Assert.True(_client.IsValid);
 			Assert.True(status.Success);
 			Assert.Null(status.Error);
 		}
@@ -39,14 +48,14 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void construct_client_with_null_or_empy_settings()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
+			Assert.Throws<UriFormatException>(() =>
 			{
 				string host = null;
-				var settings = new ConnectionSettings(host, 80);
+				var settings = new ConnectionSettings(new Uri("http://:80"));
 			});
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings(":asda:asdasd", 80);
+				var settings = new ConnectionSettings(new Uri(":asda:asdasd:80"));
 			});
 		}
 		[Test]
@@ -54,7 +63,7 @@ namespace Nest.Tests.Integration
 		{
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings("some mangled hostname", 80);
+				var settings = new ConnectionSettings(new Uri("some mangled hostname:80"));
 			});
 			
 		}
@@ -63,7 +72,7 @@ namespace Nest.Tests.Integration
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var settings = new ConnectionSettings("youdontownthis.domain.do.you", 80);
+				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"));
 				var client = new ElasticClient(settings);
 				ConnectionStatus connectionStatus;
 				client.TryConnect(out connectionStatus);

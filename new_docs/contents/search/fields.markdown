@@ -6,7 +6,15 @@ menuitem: fields
 ---
 
 
-# Documentation still in progress
+# Fields
 
-This is sadly still a marker file.
+Quite often you don't need to waste bandwidth by returning the complete object graph foreach hit. 
+
+Using 
+
+	.Fields(p=>p.Id, p=>p.Name, p=>p.Followers.First().Name, ...)
+
+You can limit the returned fields for each hit.
+
+An overload taking plain strings also exists
 

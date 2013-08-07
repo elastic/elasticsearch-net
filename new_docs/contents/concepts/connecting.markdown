@@ -11,9 +11,10 @@ This section describes how to instantiate a client and have it connect to the se
 
 ## Basic plumbing:
 
-	var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
-							  .SetDefaultIndex("mpdreamz");
-	var client = new ElasticClient(elasticSettings);
+	var uri = new Uri("http://localhost:9200");
+	var settings = new ConnectionSettings(uri)
+		.SetDefaultIndex("mydefaultindex");
+	var client = new ElasticClient(settings);
 
 `ConnectionSettings`'s constructor has many overloads, including support for connecting through proxies.
 
@@ -53,3 +54,18 @@ You can pass a `Func<string,string>` to `SetTypeNameInferrer()` on `ConnectionSe
 ### UsePrettyResponses
 Setting `UsePrettyResponses()` on `ConnectionSettings` will append `pretty=true` to all the requests to inform ElasticSearch we want nicely formatted responses, setting this does **not** prettify requests themselves because bulk requests in ElasticSearch follow a very exact line delimited format. 
 
+### MapDefaultTypeIndices
+Allows you to globally set the default index a type will be index to/searched in. This will take precedence over `SetDefaultIndex()`.
+
+    .MapDefaultTypeIndices(s=>s
+        .Add(typeof(MyType), "mytype_does_not_live_under_the_default_index")
+        .Add(typeof(YoutubeMovie), "webcontent")
+    );
+
+### MapDefaultTypeNames
+Allows you to globally set the default type name for a type. This will take precedence over `TypeNameInferrer`.
+
+    .MapDefaultTypeNames(s=>s
+        .Add(typeof(MyType), "mytupo")
+        .Add(typeof(YoutubeMovie), "mov")
+    );

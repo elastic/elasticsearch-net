@@ -11,11 +11,9 @@ This section describes how to instantiate a client and have it connect to the se
 
 ## Basic plumbing:
 
-	var elasticSettings = new ConnectionSettings("127.0.0.1.", 9200)
+	var elasticSettings = new ConnectionSettings(new Uri("http://127.0.0.1:9200"))
 							  .SetDefaultIndex("mpdreamz");
 	var client = new ElasticClient(elasticSettings);
-
-`ConnectionSettings`'s constructor has many overloads, including support for connecting through proxies.
 
 ## Connecting
 

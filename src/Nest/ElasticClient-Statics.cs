@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -12,24 +13,35 @@ namespace Nest
 		internal readonly JsonSerializerSettings SerializationSettings;
 		internal readonly JsonSerializerSettings IndexSerializationSettings;
 		internal readonly PropertyNameResolver PropertyNameResolver;
+		private readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
+
+		private readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
+		{
+			new IsoDateTimeConverter(),
+			new FacetConverter()
+		};
 
 		private JsonSerializerSettings CreateSettings()
 		{
 			return new JsonSerializerSettings()
 			{
-				ContractResolver = new ElasticResolver(),
+				ContractResolver = new ElasticResolver(this.Settings),
 				NullValueHandling = NullValueHandling.Ignore,
 				DefaultValueHandling = DefaultValueHandling.Include,
-				Converters = new List<JsonConverter> 
-				{ 
-					new IsoDateTimeConverter(), new FacetConverter(), new BulkOperationResponseItemConverter()
-				}
+				Converters = _defaultConverters.Concat(_extraConverters).ToList()
 			};
 		}
 		public void AddConverter(JsonConverter converter)
 		{
 			this.IndexSerializationSettings.Converters.Add(converter);
 			this.SerializationSettings.Converters.Add(converter);
+			_extraConverters.Add(converter);
+		}
+
+		public void ModifyJsonSerializationSettings(Action<JsonSerializerSettings> modifier)
+		{
+			modifier(this.IndexSerializationSettings);
+			modifier(this.SerializationSettings);
 		}
 
 		/// <summary>
@@ -54,13 +66,35 @@ namespace Nest
 		/// </summary>
 		public T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
 		{
+
 			var settings = this.SerializationSettings;
 			if (extraConverters.HasAny())
 			{
 				settings = this.CreateSettings();
-				settings.Converters = settings.Converters.Concat(extraConverters).ToList();
+				var concrete = extraConverters.OfType<ConcreteTypeConverter>().FirstOrDefault();
+				if (concrete != null)
+				{
+					((ElasticResolver) settings.ContractResolver).ConcreteTypeConverter = concrete;
+				}
+				else
+					settings.Converters = settings.Converters.Concat(extraConverters).ToList();
+				
 			}
 			return JsonConvert.DeserializeObject<T>(value, settings);
+		}
+
+		public string GetTypeNameFor<T>()
+		{
+			return GetTypeNameFor(typeof (T));
+		}
+		public string GetTypeNameFor(Type type)
+		{
+			return this.TypeNameResolver.GetTypeNameFor(type).Resolve(this.Settings);
+		}
+
+		private string ResolveTypeName(TypeNameMarker typeNameMarker, string defaultIndexName = null)
+		{
+			return typeNameMarker != null ? typeNameMarker.Resolve(this.Settings) : defaultIndexName;
 		}
 
 	}

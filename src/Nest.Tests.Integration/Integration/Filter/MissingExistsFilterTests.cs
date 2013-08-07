@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -11,7 +12,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 	/// Integrated tests of RangeFilter with elasticsearch.
 	/// </summary>
 	[TestFixture]
-	public class MissingExistsFilterTests : CleanStateIntegrationTests
+	public class MissingExistsFilterTests : IntegrationTests
 	{
 		/// <summary>
 		/// Document used in test.
@@ -29,28 +30,25 @@ namespace Nest.Tests.Integration.Integration.Filter
 		private Expression<Func<ElasticSearchProject, object>> _ExistsField;
 
 
-		/// <summary>
-		/// Create document for test.
-		/// </summary>
-		protected override void ResetIndexes()
+		[TestFixtureSetUp]
+		public void Initialize()
 		{
-			base.ResetIndexes();
-			var client = this._client;
-			if (client.IsValid)
-			{
-				_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
-				_MissingField = f => f.Name;
-				_ExistsField = f => f.Id;
+			_client.IsValid.Should().BeTrue();
 
-				// missing
-				_LookFor.Name = null;
+			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
+			_MissingField = f => f.Name;
+			_ExistsField = f => f.Id;
 
-				var status = this._client.Index(_LookFor).ConnectionStatus;
-				Assert.True(status.Success, status.Result);
+			// missing
+			_LookFor.Name = null;
 
-				Assert.True(this._client.Flush<ElasticSearchProject>().OK, "Flush");
-			}
+			var status = this._client.Index(_LookFor, new IndexParameters { Refresh = true }).ConnectionStatus;
+			Assert.True(status.Success, status.Result);
 		}
+
+
+
+
 
 		/// <summary>
 		/// Set of filters that should not filter de documento _LookFor.

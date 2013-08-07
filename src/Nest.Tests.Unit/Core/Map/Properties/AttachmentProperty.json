@@ -4,7 +4,7 @@
       "myAttachment": {
         "type": "attachment",
         "fields": {
-          "file": {
+          "myAttachment": {
             "type": "string",
             "store": "yes",
             "index": "not_analyzed"

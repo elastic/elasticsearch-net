@@ -9,12 +9,18 @@ namespace Nest
 	{
 		internal IDictionary<string, DynamicTemplate>  Templates = new Dictionary<string, DynamicTemplate>();
 		internal IList<string> _Deletes = new List<string>();
+		private readonly IConnectionSettings _connectionSettings;
+
+		public DynamicTemplatesDescriptor(IConnectionSettings connectionSettings)
+		{
+			this._connectionSettings = connectionSettings;
+		}
 
 		public DynamicTemplatesDescriptor<T> Add(
 			Func<DynamicTemplateDescriptor<T>, DynamicTemplateDescriptor<T>> templateSelector)
 		{
 			templateSelector.ThrowIfNull("templateSelector");
-			var d = templateSelector(new DynamicTemplateDescriptor<T>());
+			var d = templateSelector(new DynamicTemplateDescriptor<T>(this._connectionSettings));
 			if (d == null || d._Name.IsNullOrEmpty())
 				throw new Exception("Could not get name for dynamic template");
 
@@ -29,12 +35,15 @@ namespace Nest
 	}
 	public class DynamicTemplateDescriptor<T> where T : class
 	{
+		private readonly IConnectionSettings _connectionSettings;
+
 		internal string _Name { get; private set; }
 		internal DynamicTemplate _Template { get; private set; }
 
-		public DynamicTemplateDescriptor()
+		public DynamicTemplateDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._Template = new DynamicTemplate();
+			this._connectionSettings = connectionSettings;
 		}
 
 		public DynamicTemplateDescriptor<T> Name(string name)
@@ -76,7 +85,7 @@ namespace Nest
 		public DynamicTemplateDescriptor<T> Mapping(Func<SingleMappingDescriptor<T>, IElasticType> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var mapping = mappingSelector(new SingleMappingDescriptor<T>());
+			var mapping = mappingSelector(new SingleMappingDescriptor<T>(this._connectionSettings));
 
 			this._Template.Mapping = mapping;
 			return this;

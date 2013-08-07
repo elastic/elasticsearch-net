@@ -5,7 +5,7 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Facet
 {
-	public class BaseFacetTestFixture : CleanStateIntegrationTests
+	public class BaseFacetTestFixture : IntegrationTests
     {
         protected string _LookFor = NestTestData.Data.First().Followers.First().LastName;
 

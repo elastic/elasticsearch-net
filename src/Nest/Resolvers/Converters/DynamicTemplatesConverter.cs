@@ -37,28 +37,26 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 											JsonSerializer serializer)
 		{
-			var r = new Dictionary<string, DynamicTemplate>();
+			var dict = new Dictionary<string, DynamicTemplate>();
 
 			JArray o = JArray.Load(reader);
 
 			foreach (JObject p in o)
 			{
-				var firstProperty = p.Properties().First();
-				var name = firstProperty.Name;
-				var po = firstProperty.First as JObject;
-				if (po == null)
+				var prop = p.Properties().First();
+				var po = prop.Value as JObject;
+				var name = prop.Name;
+				if (po ==null)
 					continue;
 
-				var dict = serializer.Deserialize(po.CreateReader(), typeof(Dictionary<string, DynamicTemplate>)) as Dictionary<string, DynamicTemplate>;
-				if (dict == null || dict.Count < 1)
+				var template = serializer.Deserialize(po.CreateReader(), typeof(DynamicTemplate)) as DynamicTemplate;
+				if (template == null)
 					continue;
 
-				var onlyMapping = dict.First();
-
-				r.Add(onlyMapping.Key, onlyMapping.Value);
+				dict.Add(name, template);
 
 			}
-			return r;
+			return dict;
 		}
 
 		public override bool CanConvert(Type objectType)

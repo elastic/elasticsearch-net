@@ -8,20 +8,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-
-[assembly: AssemblyTitle("Nest.Connection.Thrift")]
-[assembly: AssemblyDescription("Thrift connection support for NEST Elasticsearch client")]
-[assembly: AssemblyProduct("Nest.Connection.Thrift")]
-[assembly: AssemblyCopyright("Martijn Laarman MIT LICENSED")]
-[assembly: ComVisible(false)]
-[assembly: CLSCompliant(true)]
-[assembly: Guid("4d165338-2060-4641-8be6-b7aacbdee52d")]
-[assembly: AssemblyVersion("0.9.13.0")]
-[assembly: AssemblyFileVersion("0.9.13.0")]
+[assembly: System.Reflection.AssemblyTitle("Nest.Connection.Thrift")]
+[assembly: System.Reflection.AssemblyDescription("Thrift connection support for NEST Elasticsearch client")]
+[assembly: System.Reflection.AssemblyProduct("Nest.Connection.Thrift")]
+[assembly: System.Reflection.AssemblyCopyright("Martijn Laarman MIT LICENSED")]
+[assembly: System.Runtime.InteropServices.ComVisible(false)]
+[assembly: System.CLSCompliant(true)]
+[assembly: System.Runtime.InteropServices.Guid("4d165338-2060-4641-8be6-b7aacbdee52d")]
+[assembly: System.Reflection.AssemblyVersion("0.11.2.0")]
+[assembly: System.Reflection.AssemblyFileVersion("0.11.2.0")]
 
 

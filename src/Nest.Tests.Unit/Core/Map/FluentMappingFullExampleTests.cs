@@ -43,6 +43,10 @@ namespace Nest.Tests.Unit.Core.Map
 				.DisableSizeField(false)
 				.Dynamic()
 				.Enabled()
+				.SourceField(s=>s
+					.SetDisabled(false)
+					.SetExcludes(new [] {"anyfromthis.prop.*"})
+				)
 				.IncludeInAll()
 				.Path("full")
 				.IdField(i => i
@@ -206,7 +210,7 @@ namespace Nest.Tests.Unit.Core.Map
 						.Name(p=>p.PingIP)
 						.Boost(0.7)
 						.IncludeInAll()
-						.Index()
+						.NoIndex()
 						.IndexName("ip")
 						.NullValue("0.0.0.0")
 						.PrecisionStep(4)

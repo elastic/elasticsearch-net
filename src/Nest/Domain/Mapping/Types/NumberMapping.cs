@@ -3,17 +3,24 @@ using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using Newtonsoft.Json.Converters;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public class NumberMapping : IElasticType, IElasticCoreType
 	{
 		[JsonIgnore]
+		public TypeNameMarker TypeNameMarker { get; set; }
+
+		[JsonProperty(PropertyName = "name")]
 		public string Name { get; set; }
 
-		private string __type;
+		private TypeNameMarker __type;
 		[JsonProperty("type")]
-		public virtual string Type { get { return __type ?? "double"; } set { __type = value; } }
+		public virtual TypeNameMarker Type { get { return (TypeNameMarker)(__type ?? "double"); } set { __type = value; } }
+
+		[JsonProperty("similarity")]
+		public string Similarity { get; set; }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.
