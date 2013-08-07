@@ -22,9 +22,9 @@ namespace Nest
 			scrollId = Uri.EscapeDataString(scrollId);
 			scrollTime = Uri.EscapeDataString(scrollTime);
 
-			var path = "_search/scroll?scroll={0}&scroll_id={1}".F(scrollTime, scrollId);
+			var path = "_search/scroll?scroll={0}".F(scrollTime);
 
-			ConnectionStatus status = this.Connection.GetSync(path);
+			ConnectionStatus status = this.Connection.PostSync(path, scrollId);
 			var r = this.ToParsedResponse<QueryResponse<T>>(status
 				, extraConverters: new[] { new ConcreteTypeConverter(typeof(T), (d, h) => typeof(T)) }	
 			);

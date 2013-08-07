@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Reproduce
 	/// tests to reproduce reported errors
 	/// </summary>
 	[TestFixture]
-	public class ReproduceTests : IntegrationTests
+	public class Reproduce211Tests : IntegrationTests
 	{
 		public class Post
 		{

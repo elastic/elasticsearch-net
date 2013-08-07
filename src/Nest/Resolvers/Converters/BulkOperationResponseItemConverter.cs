@@ -29,6 +29,12 @@ namespace Nest.Resolvers.Converters
 					if (deleteItem != null)
 						deleteItem.Operation = key;
 					return deleteItem;
+				case "update":
+					var updateItem = new BulkUpdateResponseItem();
+					serializer.Populate(prop.Value.CreateReader(), updateItem);
+					if (updateItem != null)
+						updateItem.Operation = key;
+					return updateItem;
 				case "index":
 					var indexItem = new BulkIndexResponseItem();
 					serializer.Populate(prop.Value.CreateReader(), indexItem);

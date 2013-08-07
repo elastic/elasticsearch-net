@@ -36,6 +36,13 @@ namespace Nest.Resolvers.Converters
 			var reader = tuple.Hit.CreateReader();
 			serializer.Populate(reader, hit);
 
+			var errorProperty = tuple.Hit.Children<JProperty>().FirstOrDefault(c=>c.Name == "error");
+			if (errorProperty != null)
+			{
+				hit.IsValid = false;
+				hit.ConnectionStatus = new ConnectionStatus(new ConnectionError(errorProperty.Value.ToString(), 500));
+			}
+
 			collection.Add(tuple.Descriptor.Key, hit);
 
 		}

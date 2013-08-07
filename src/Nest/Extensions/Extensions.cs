@@ -79,6 +79,7 @@ namespace Nest
 		{
 			return value == null || value.GetHashCode() == 0;
 		}
+		
 		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
 		{
 			int idx = 0;

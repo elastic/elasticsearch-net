@@ -153,6 +153,9 @@ namespace Nest
 
 		IEnumerable<T> MultiGet<T>(IEnumerable<int> ids) where T : class;
 		IEnumerable<T> MultiGet<T>(IEnumerable<string> ids) where T : class;
+		IEnumerable<T> MultiGet<T>(string index, IEnumerable<int> ids) where T : class;
+		IEnumerable<T> MultiGet<T>(string index, IEnumerable<string> ids) where T : class;
+		
 		IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<int> ids) where T : class;
 		IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<string> ids) where T : class;
 
@@ -288,6 +291,11 @@ namespace Nest
 		IIndicesOperationResponse RemoveAlias(string index, string alias);
 		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
+
+
+		IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId);
+		IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class;
+
 
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;

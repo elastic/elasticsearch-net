@@ -141,7 +141,7 @@ namespace Nest
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<T> objects, string index, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
@@ -151,7 +151,7 @@ namespace Nest
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> objects, string index, string command) where T : class
 		{
-			objects.ThrowIfNull("objects");
+			objects.ThrowIfEmpty("objects");
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
@@ -163,8 +163,7 @@ namespace Nest
 
 		private string GenerateBulkCommand<T>(IEnumerable<T> @objects, string index, string typeName, string command) where T : class
 		{
-			if (!@objects.Any())
-				return null;
+			objects.ThrowIfEmpty("objects");
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
@@ -194,8 +193,7 @@ namespace Nest
 		}
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName, string command) where T : class
 		{
-			if (!@objects.Any())
-				return null;
+			objects.ThrowIfEmpty("objects");
 
 			var sb = new StringBuilder();
 			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);

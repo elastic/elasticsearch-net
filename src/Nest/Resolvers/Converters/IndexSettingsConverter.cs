@@ -110,7 +110,15 @@ namespace Nest.Resolvers.Converters
 				{
 					writer.WritePropertyName("mappings");
 					serializer.Serialize(writer,
-					                     indexSettings.Mappings.ToDictionary(m => m.TypeNameMarker.Resolve(settings.ConnectionSettings)));
+					                     indexSettings.Mappings.ToDictionary(m => 
+										 { 
+											 if (m.Name.IsNullOrEmpty() && m.TypeNameMarker == null)
+												 throw new DslException("{0} should have a name!".F(m.GetType()));
+
+
+											 var fieldName = m.Name;
+											 return m.TypeNameMarker != null ? m.TypeNameMarker.Resolve(settings.ConnectionSettings) : fieldName;
+										 }));
 				}
 			}
 			if (indexSettings.Warmers.Count > 0)

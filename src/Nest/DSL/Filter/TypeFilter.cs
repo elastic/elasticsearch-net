@@ -13,7 +13,7 @@ namespace Nest
 		{
 			get
 			{
-				return this.Value.IsNullOrEmpty();
+				return this.Value.IsConditionless();
 			}
 
 		}

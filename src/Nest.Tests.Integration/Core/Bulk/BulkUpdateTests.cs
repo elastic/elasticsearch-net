@@ -35,6 +35,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 			result = this._client.Bulk(descriptor);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
+			result.Items.Count().Should().Be(1000);
+			result.Items.All(i => i != null).Should().BeTrue();
+			result.Items.All(i => i.OK).Should().BeTrue();
 
 			var updatedObject = this._client.Get<ElasticSearchProject>(5000);
 			Assert.NotNull(updatedObject);
