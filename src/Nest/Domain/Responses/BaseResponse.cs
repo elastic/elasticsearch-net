@@ -14,7 +14,7 @@ namespace Nest
 		{
 			this.IsValid = true;
 		}
-		public bool IsValid { get; internal set; }
+		public virtual bool IsValid { get; internal set; }
 		public ConnectionStatus ConnectionStatus { get; internal set; }
 
 		internal PropertyNameResolver PropertyNameResolver { get; set; }

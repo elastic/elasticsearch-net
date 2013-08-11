@@ -278,6 +278,9 @@ namespace Nest
 		IIndicesShardResponse Refresh(string index);
 		IIndicesShardResponse Refresh<T>() where T : class;
 
+
+		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) where T : class;
+
 		IRegisterPercolateResponse RegisterPercolator<T>(
 			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class;
 

@@ -68,6 +68,13 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Responses\IReindexResponse.cs" />
+    <Compile Include="DSL\ReindexDescriptor.cs" />
+    <Compile Include="Exception\ReindexException.cs" />
+    <Compile Include="Domain\Responses\ReindexObservable.cs" />
+    <Compile Include="Domain\Responses\ReindexObserver.cs" />
+    <Compile Include="Domain\Responses\ReindexResponse.cs" />
+    <Compile Include="ElasticClient-Reindex.cs" />
     <Compile Include="Domain\Connection\ConnectionStatusTracer.cs" />
     <Compile Include="Domain\Hit\HighlightCollection.cs" />
     <Compile Include="Domain\PathAndData.cs" />
