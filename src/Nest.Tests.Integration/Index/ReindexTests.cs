@@ -11,7 +11,27 @@ namespace Nest.Tests.Integration.Index
 	[TestFixture]
 	public class ReindexTests : IntegrationTests
 	{
+		[Test]
+		public void ReindexMinimal()
+		{
+			var toIndex = ElasticsearchConfiguration.NewUniqueIndexName();
+			var observable = this._client.Reindex<object>(r => r
+				.FromIndex(ElasticsearchConfiguration.DefaultIndex)
+				.ToIndex(toIndex)
+			);
+			var observer = new ReindexObserver<object>(
+				onError: (e) => Assert.Fail(e.Message),
+				completed: () =>
+				{
+					var originalIndexCount = this._client.Count(new[] { ElasticsearchConfiguration.DefaultIndex }, q => q.MatchAll());
+					var newIndexCount = this._client.Count(new[] { toIndex }, q => q.MatchAll());
+					Assert.Greater(newIndexCount.Count, 0);
+					Assert.AreEqual(originalIndexCount.Count, newIndexCount.Count);
+				}
+			);
 
+			observable.Subscribe(observer);
+		}
 
 		[Test]
 		public void Reindex()
@@ -44,6 +64,7 @@ namespace Nest.Tests.Integration.Index
 				{
 					var originalIndexCount = this._client.Count(new[] { ElasticsearchConfiguration.DefaultIndex }, q=>q.MatchAll());
 					var newIndexCount = this._client.Count(new[] { toIndex  }, q=>q.MatchAll());
+					Assert.Greater(newIndexCount.Count, 0);
 					Assert.AreEqual(originalIndexCount.Count, newIndexCount.Count);
 				}
 			);

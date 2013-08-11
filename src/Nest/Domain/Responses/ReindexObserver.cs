@@ -8,7 +8,7 @@ namespace Nest
 		private readonly Action<Exception> _onError;
 		private readonly Action _completed;
 
-		public ReindexObserver(Action<IReindexResponse<T>> onNext, Action<Exception> onError, Action completed)
+		public ReindexObserver(Action<IReindexResponse<T>> onNext = null, Action<Exception> onError = null, Action completed = null)
 		{
 			this._completed = completed;
 			this._onError = onError;

@@ -41,7 +41,12 @@ namespace Nest
 			var indexSettings = this.CurrentClient.GetIndexSettings(this._reindexDescriptor._FromIndexName);
 			var createSettings = new CreateIndexDescriptor(this.CurrentClient.Settings).InitializeUsing(indexSettings.Settings);
 			var createIndexResponse = this.CurrentClient
-				.CreateIndex(toIndex, (c) => this._reindexDescriptor._CreateIndexSelector(createSettings));
+				.CreateIndex(toIndex, (c) =>
+				{
+					if (this._reindexDescriptor._CreateIndexSelector != null)
+						return this._reindexDescriptor._CreateIndexSelector(createSettings);
+					return c;
+				});
 			if (!createIndexResponse.IsValid)
 				throw new ReindexException(createIndexResponse.ConnectionStatus);
 
@@ -52,7 +57,7 @@ namespace Nest
 					.AllTypes()
 					.From(0)
 					.Take(100)
-					.Query(this._reindexDescriptor._QuerySelector)
+					.Query(this._reindexDescriptor._QuerySelector ?? (q=>q.MatchAll()))
 					.SearchType(SearchType.Scan)
 					.Scroll(scroll)
 				);
