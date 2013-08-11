@@ -9,6 +9,9 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class CustomScoreQueryDescriptor<T> : IQuery where T : class
 	{
+		[JsonProperty(PropertyName = "lang")]
+		internal string _Lang { get; set; }
+
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
 
@@ -24,6 +27,12 @@ namespace Nest
 			{
 				return this._Query == null || this._Query.IsConditionless;
 			}
+		}
+
+		public CustomScoreQueryDescriptor<T> Lang(string lang)
+		{
+			this._Lang = lang;
+			return this;
 		}
 
 		public CustomScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
