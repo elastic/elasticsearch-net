@@ -8,6 +8,7 @@ namespace Nest.Dsl.Factory
         private object _missing;
         private SortOrder _order;
         private bool? _ignoreUnampped;
+        private TermFilterBuilder _nestedFilter;
 
         public FieldSortBuilder(string fieldName)
         {
@@ -23,6 +24,17 @@ namespace Nest.Dsl.Factory
         public FieldSortBuilder IgnoreUnmapped(bool ignoreUnmapped)
         {
             _ignoreUnampped = ignoreUnmapped;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets sort nested filter
+        /// </summary>
+        /// <param name="nestedFilter">nested filter</param>
+        /// <returns></returns>
+        public FieldSortBuilder NestedFilter(TermFilterBuilder nestedFilter)
+        {
+            _nestedFilter = nestedFilter;
             return this;
         }
 
@@ -58,6 +70,11 @@ namespace Nest.Dsl.Factory
             if (_ignoreUnampped != null)
             {
                 content[_fieldName]["ignore_unmapped"] = _ignoreUnampped;
+            }
+
+            if (_nestedFilter != null)
+            {
+              content[_fieldName]["nested_filter"] = _nestedFilter.ToJsonObject() as JObject;
             }
 
             return content;
