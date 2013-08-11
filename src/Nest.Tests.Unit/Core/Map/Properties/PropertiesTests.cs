@@ -115,6 +115,8 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 					.Attachment(s => s
 						.Name(p => p.MyAttachment)
 						.FileField(fs => fs.Index(FieldIndexOption.not_analyzed).Store())
+						.TitleField(fs => fs.Index(FieldIndexOption.not_analyzed).Store(false))
+						.MetadataField("contents", fs => fs.Index(FieldIndexOption.not_analyzed).Store(false))
 						.AuthorField(fs => fs.Index(FieldIndexOption.analyzed).Store(false))
 						.DateField(fs => fs.Store(false).IncludeInAll())
 					)

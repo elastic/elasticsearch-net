@@ -1,4 +1,4 @@
-  {
+{
   "elasticsearchprojects": {
     "properties": {
       "myAttachment": {
@@ -7,6 +7,16 @@
           "myAttachment": {
             "type": "string",
             "store": "yes",
+            "index": "not_analyzed"
+          },
+          "title": {
+            "type": "string",
+            "store": "no",
+            "index": "not_analyzed"
+          },
+          "contents": {
+            "type": "string",
+            "store": "no",
             "index": "not_analyzed"
           },
           "author": {

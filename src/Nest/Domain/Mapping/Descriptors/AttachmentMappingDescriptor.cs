@@ -34,9 +34,28 @@ namespace Nest
 		{
 			stringMapper.ThrowIfNull("stringMapper");
 			var d = stringMapper(new StringMappingDescriptor<T>());
-			d.ThrowIfNull("stringMapper return value");
+			d.ThrowIfNull("attachment author field mapping");
 
 			this._Mapping.Fields["author"] = d._Mapping;
+			return this;
+		}
+		public AttachmentMappingDescriptor<T> TitleField(Func<StringMappingDescriptor<T>, StringMappingDescriptor<T>> stringMapper)
+		{
+			stringMapper.ThrowIfNull("stringMapper");
+			var d = stringMapper(new StringMappingDescriptor<T>());
+			d.ThrowIfNull("attachment title field");
+
+			this._Mapping.Fields["title"] = d._Mapping;
+			return this;
+		}
+		public AttachmentMappingDescriptor<T> MetadataField(string metadataFieldName, Func<StringMappingDescriptor<T>, StringMappingDescriptor<T>> stringMapper)
+		{
+			metadataFieldName.ThrowIfNullOrEmpty("metadataFieldName");
+			stringMapper.ThrowIfNull("stringMapper");
+			var d = stringMapper(new StringMappingDescriptor<T>());
+			d.ThrowIfNull("attachment metadata field");
+
+			this._Mapping.Fields[metadataFieldName] = d._Mapping;
 			return this;
 		}
 		public AttachmentMappingDescriptor<T> DateField(Func<DateMappingDescriptor<T>, DateMappingDescriptor<T>> dateMapper)
