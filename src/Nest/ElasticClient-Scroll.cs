@@ -19,7 +19,6 @@ namespace Nest
 			scrollId.ThrowIfNullOrEmpty("scrollId");
 			scrollTime.ThrowIfNullOrEmpty("scrollTime");
 
-			scrollId = Uri.EscapeDataString(scrollId);
 			scrollTime = Uri.EscapeDataString(scrollTime);
 
 			var path = "_search/scroll?scroll={0}".F(scrollTime);
