@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -12,6 +13,9 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		internal class SomeClass
 		{
 			public MyCustomClass MyCustomClass { get; set; }
+			public Dictionary<string, SomeOtherClass> StringDict { get; set; }
+			public Dictionary<int, MyCustomClass> IntDict { get; set; }
+			public IList<MyCustomClass> ListOfCustomClasses { get; set; } 
 		}
 		[ElasticType(IdProperty = "Guid")]
 		internal class SomeOtherClass
@@ -44,6 +48,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 				return "static id ftw";
 			}
 		}
+		
 		[Test]
 		public void TestUsesElasticProperty()
 		{
@@ -52,6 +57,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "myCustomClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
+		
 		[Test]
 		public void TestUsesOtherElasticProperty()
 		{
@@ -60,6 +66,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "custom.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
+		
 		[Test]
 		public void TestUsesOtherElasticTypePropertyIsIgnored()
 		{
@@ -68,6 +75,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "myCustomOtherClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
+		
 		[Test]
 		public void TestCreatedDate()
 		{
@@ -76,6 +84,34 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var expected = "CreateDate";
 			Assert.AreEqual(expected, propertyName);
 		}
+		
+		[Test]
+		public void TestDictionaryStringExpression()
+		{
+			Expression<Func<SomeClass, object>> exp = (m) => m.StringDict["someValue"].CreateDate;
+			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var expected = "stringDict.someValue.CreateDate";
+			Assert.AreEqual(expected, propertyName);
+		}
+
+		[Test]
+		public void TestDictionaryIntExpression()
+		{
+			Expression<Func<SomeClass, object>> exp = (m) => m.IntDict[101].MyProperty;
+			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var expected = "intDict.101.MID";
+			Assert.AreEqual(expected, propertyName);
+		}
+
+		[Test]
+		public void TestCollectionIndexExpressionDoesNotEndUpInPath()
+		{
+			Expression<Func<SomeClass, object>> exp = (m) => m.ListOfCustomClasses[101].MyProperty;
+			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var expected = "listOfCustomClasses.MID";
+			Assert.AreEqual(expected, propertyName);
+		}
+
 		[Test] 
 		public void SearchUsesTheProperResolver()
 		{

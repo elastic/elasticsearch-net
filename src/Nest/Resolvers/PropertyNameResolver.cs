@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -136,6 +137,16 @@ namespace Nest.Resolvers
 				var constantExpression = m.Arguments.Last() as ConstantExpression;
 				if (constantExpression != null)
 					stack.Push(constantExpression.Value as string);
+			}
+			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
+			{
+				if (!typeof(IDictionary).IsAssignableFrom(m.Object.Type))
+				{
+					return base.VisitMethodCall(m, stack, properties);
+				}
+				var constantExpression = m.Arguments.Last() as ConstantExpression;
+				if (constantExpression != null)
+					stack.Push(constantExpression.Value.ToString());
 			}
 			if (IsLinqOperator(m.Method))
 			{
