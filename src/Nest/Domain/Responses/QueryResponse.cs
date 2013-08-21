@@ -11,6 +11,7 @@ namespace Nest
 		ShardsMetaData Shards { get; }
 		HitsMetaData<T> Hits { get; }
 		IDictionary<string, Facet> Facets { get; }
+		IDictionary<string, Suggest[]> Suggest { get; }
 		int ElapsedMilliseconds { get; }
 		string ScrollId { get; }
 		int Total { get; }
@@ -40,6 +41,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "facets")]
 		public IDictionary<string, Facet> Facets { get; internal set; }
+
+		[JsonProperty(PropertyName = "suggest")]
+		public IDictionary<string, Suggest[]> Suggest { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
 		public int ElapsedMilliseconds { get; internal set; }

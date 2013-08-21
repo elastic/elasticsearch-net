@@ -31,13 +31,13 @@ namespace Nest
 	public class SearchDescriptor<T> : SearchDescriptorBase where T : class
 	{
 		private readonly TypeNameResolver typeNameResolver;
-		
+
 		public SearchDescriptor()
 		{
 			this.typeNameResolver = new TypeNameResolver();
 		}
 
-		
+
 		internal override Type _ClrType { get { return typeof(T); } }
 		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
 
@@ -71,7 +71,7 @@ namespace Nest
 		public SearchDescriptor<T> Types(IEnumerable<string> types)
 		{
 			types.ThrowIfEmpty("types");
-			this._Types = types.Select(s=>(TypeNameMarker)s);
+			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -91,7 +91,7 @@ namespace Nest
 			types.ThrowIfEmpty("types");
 			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
-			
+
 		}
 		/// <summary>
 		/// The types to execute the search on. Defaults to the inferred typename of T 
@@ -200,6 +200,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "facets")]
 		internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
 
+		[JsonProperty(PropertyName = "suggest")]
+		internal IDictionary<string, SuggestDescriptorBucket<T>> _Suggest { get; set; }
+
 		[JsonProperty(PropertyName = "query")]
 		internal RawOrQueryDescriptor<T> _QueryOrRaw
 		{
@@ -246,10 +249,10 @@ namespace Nest
 		internal IList<string> _Fields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-        internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
+		internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
 
-        [JsonProperty(PropertyName = "partial_fields")]
-        internal Dictionary<string, PartialFieldDescriptor<T>> _PartialFields { get; set; }
+		[JsonProperty(PropertyName = "partial_fields")]
+		internal Dictionary<string, PartialFieldDescriptor<T>> _PartialFields { get; set; }
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
@@ -440,30 +443,30 @@ namespace Nest
 			return this;
 		}
 
-        public SearchDescriptor<T> PartialFields(params Action<PartialFieldDescriptor<T>>[] partialFieldDescriptor)
-        {
-            if (this._PartialFields == null)
-                this._PartialFields = new Dictionary<string, PartialFieldDescriptor<T>>();
+		public SearchDescriptor<T> PartialFields(params Action<PartialFieldDescriptor<T>>[] partialFieldDescriptor)
+		{
+			if (this._PartialFields == null)
+				this._PartialFields = new Dictionary<string, PartialFieldDescriptor<T>>();
 
-            var descriptors = new List<PartialFieldDescriptor<T>>();
+			var descriptors = new List<PartialFieldDescriptor<T>>();
 
-            foreach (var selector in partialFieldDescriptor)
-            {
-                var filter = new PartialFieldDescriptor<T>();
-                selector(filter);
-                descriptors.Add(filter);
-            }
+			foreach (var selector in partialFieldDescriptor)
+			{
+				var filter = new PartialFieldDescriptor<T>();
+				selector(filter);
+				descriptors.Add(filter);
+			}
 
-            foreach (var d in descriptors)
-            {
-                var key = d._Field;
-                if (string.IsNullOrEmpty(key))
-                    throw new DslException("Could not infer key for highlight field descriptor");
+			foreach (var d in descriptors)
+			{
+				var key = d._Field;
+				if (string.IsNullOrEmpty(key))
+					throw new DslException("Could not infer key for highlight field descriptor");
 
-                this._PartialFields.Add(key, d);
-            }
-            return this;
-        }
+				this._PartialFields.Add(key, d);
+			}
+			return this;
+		}
 
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
@@ -833,6 +836,32 @@ namespace Nest
 			var f = filterSelector(filter);
 			this._Facets.Add(name, new FacetDescriptorsBucket<T> { Filter = f });
 
+			return this;
+		}
+
+		public SearchDescriptor<T> TermSuggest(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			suggest.ThrowIfNull("suggest");
+			if (this._Suggest == null)
+				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
+			TermSuggestDescriptor<T> desc = new TermSuggestDescriptor<T>();
+			TermSuggestDescriptor<T> item = suggest(desc);
+			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
+			this._Suggest.Add(name, bucket);
+			return this;
+		}
+
+		public SearchDescriptor<T> PhraseSuggest(string name, Func<PhraseSuggestDescriptor<T>, PhraseSuggestDescriptor<T>> suggest)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			suggest.ThrowIfNull("suggest");
+			if (this._Suggest == null)
+				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
+			PhraseSuggestDescriptor<T> desc = new PhraseSuggestDescriptor<T>();
+			PhraseSuggestDescriptor<T> item = suggest(desc);
+			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, PhraseSuggest = item };
+			this._Suggest.Add(name, bucket);
 			return this;
 		}
 
