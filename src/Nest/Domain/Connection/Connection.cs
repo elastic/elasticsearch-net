@@ -227,17 +227,13 @@ namespace Nest
 			}
 			try
 			{
-				return Task.Factory.StartNew(() =>
-				{
-					using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
-					{
+				//return Task.Factory.StartNew(() =>
+				//{
+					
 						this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
-						var cs = tcs.Task.Result;
-						tracer.SetResult(cs);
-						_ConnectionSettings.ConnectionStatusHandler(cs);
-						return cs;
-					}
-				}, TaskCreationOptions.LongRunning);
+						return tcs.Task;
+					
+				//}, TaskCreationOptions.LongRunning);
 			}
 			finally
 			{
@@ -247,55 +243,60 @@ namespace Nest
 
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
 		{
-			var timeout = this._ConnectionSettings.Timeout;
-
-			var state = new ConnectionState { Connection = request };
-
-			if (data != null)
+			using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
 			{
-				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-				ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-				yield return getRequestStream;
+				var timeout = this._ConnectionSettings.Timeout;
 
-				var requestStream = getRequestStream.Result;
-				try
+				var state = new ConnectionState { Connection = request };
+
+				if (data != null)
 				{
-					byte[] buffer = Encoding.UTF8.GetBytes(data);
-					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, buffer, 0, buffer.Length, state);
-					yield return writeToRequestStream;
+					var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+					//ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+					yield return getRequestStream;
+
+					var requestStream = getRequestStream.Result;
+					try
+					{
+						byte[] buffer = Encoding.UTF8.GetBytes(data);
+						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, buffer, 0, buffer.Length, state);
+						yield return writeToRequestStream;
+					}
+					finally
+					{
+						requestStream.Close();
+					}
 				}
-				finally
+
+				// Get the response
+				var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
+				//ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+				yield return getResponse;
+
+				// Get the response stream
+				using (var response = (HttpWebResponse)getResponse.Result)
+				using (var responseStream = response.GetResponseStream())
 				{
-					requestStream.Close();
+					// Copy all data from the response stream
+					var output = new MemoryStream();
+					var buffer = new byte[BUFFER_SIZE];
+					while (responseStream != null)
+					{
+						var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
+						yield return read;
+						if (read.Result == 0) break;
+						output.Write(buffer, 0, read.Result);
+					}
+
+					// Decode the data and store the result
+					var result = Encoding.UTF8.GetString(output.ToArray());
+					var cs = new ConnectionStatus(result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+					tcs.TrySetResult(cs);
+					tracer.SetResult(cs);
+					_ConnectionSettings.ConnectionStatusHandler(cs);
 				}
+				yield break;
 			}
-
-			// Get the response
-			var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
-			ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-			yield return getResponse;
-
-			// Get the response stream
-			using (var response = (HttpWebResponse)getResponse.Result)
-			using (var responseStream = response.GetResponseStream())
-			{
-				// Copy all data from the response stream
-				var output = new MemoryStream();
-				var buffer = new byte[BUFFER_SIZE];
-				while (responseStream != null)
-				{
-					var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
-					yield return read;
-					if (read.Result == 0) break;
-					output.Write(buffer, 0, read.Result);
-				}
-
-				// Decode the data and store the result
-				var result = Encoding.UTF8.GetString(output.ToArray());
-				var cs = new ConnectionStatus(result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
-				tcs.TrySetResult(cs);
-			}
-			yield break;
 
 		}
 

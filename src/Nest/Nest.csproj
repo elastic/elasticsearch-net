@@ -68,6 +68,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
+    <Compile Include="Domain\Connection\TrueAsyncConnection.cs" />
     <Compile Include="Domain\Responses\IReindexResponse.cs" />
     <Compile Include="DSL\ReindexDescriptor.cs" />
     <Compile Include="Exception\ReindexException.cs" />

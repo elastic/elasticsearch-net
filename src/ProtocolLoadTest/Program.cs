@@ -22,12 +22,14 @@ namespace ProtocolLoadTest
 		static void Main(string[] args)
 		{
 			double httpRate = RunTest<HttpTester>(HTTP_PORT);
-			double manualAsyncHttpRate = RunTest<HttpManualAsyncTester>(HTTP_PORT);
+			///double manualAsyncHttpRate = RunTest<HttpManualAsyncTester>(HTTP_PORT);
+			double trueAsyncRate = RunTest<TrueAsyncTester>(HTTP_PORT);
 			//double thriftRate = RunTest<ThriftTester>(THRIFT_PORT);
 
 			Console.WriteLine();
 			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s", httpRate);
-			Console.WriteLine("HTTP (IndexMany + TaskFactory.StartNew): {0:0,0}/s", manualAsyncHttpRate);
+			//Console.WriteLine("HTTP (IndexMany wrapped TaskFactory.StartNew): {0:0,0}/s", manualAsyncHttpRate);
+			Console.WriteLine("HTTP (IndexManyAsyc using TrueAsyncConnection): {0:0,0}/s", trueAsyncRate);
 			//Console.WriteLine("Thrift: {0:0,0}/s", thriftRate);
 
 			Console.ReadLine();
