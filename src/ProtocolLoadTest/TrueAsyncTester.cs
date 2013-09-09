@@ -10,7 +10,7 @@ namespace ProtocolLoadTest
         public void Run(string indexName, int port, int numMessages, int bufferSize)
         {
 			var settings = this.CreateSettings(indexName, port);
-			var connection = new TrueAsyncConnection(settings);
+			var connection = new NoTaskHttpConnection(settings);
             var client = new ElasticClient(settings, connection);
             
             Connect(client, settings);
