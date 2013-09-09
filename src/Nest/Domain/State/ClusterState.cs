@@ -77,8 +77,8 @@ namespace Nest
         [JsonProperty("settings")]
         public Dictionary<string, string> Settings { get; internal set; }
 
-        //[JsonProperty("mappings")]
-        //public Dictionary<string, MetadataIndexStateMapping> Mappings { get; internal set; }
+        [JsonProperty("mappings")]
+        public Dictionary<string, dynamic> Mappings { get; internal set; }
 
         //[JsonProperty("aliases")]
         //public ?? Aliases { get; internal set; }

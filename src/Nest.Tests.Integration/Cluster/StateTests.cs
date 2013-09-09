@@ -16,6 +16,12 @@ namespace Nest.Tests.Integration.Cluster
             Assert.NotNull(r.Metadata);
             Assert.NotNull(r.Metadata.Indices);
             Assert.True(r.Metadata.Indices.Count > 0);
+            foreach (var index in r.Metadata.Indices)
+            {
+                Assert.NotNull(index.Value.Mappings);
+                Assert.True(index.Value.Mappings.Count > 0);
+            }
+
             Assert.NotNull(r.Nodes);
             Assert.True(r.Nodes.Count > 0);
             Assert.NotNull(r.RoutingNodes);
