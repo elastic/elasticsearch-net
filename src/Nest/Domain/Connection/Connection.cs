@@ -15,7 +15,7 @@ namespace Nest
 	{
 		const int BUFFER_SIZE = 1024;
 
-		private IConnectionSettings _ConnectionSettings { get; set; }
+		protected IConnectionSettings _ConnectionSettings { get; set; }
 		private Semaphore _ResourceLock;
 		private readonly bool _enableTrace;
 
