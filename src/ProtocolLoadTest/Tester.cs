@@ -21,8 +21,7 @@ namespace ProtocolLoadTest
 				host = "ipv4.fiddler";
 			var uri = new UriBuilder("http", host, port).Uri;
 			return new ConnectionSettings(uri)
-			   .SetDefaultIndex(indexName)
-			   .SetMaximumAsyncConnections(2);
+			   .SetDefaultIndex(indexName);
 		}
 
 		protected void Connect(ElasticClient client, ConnectionSettings settings)

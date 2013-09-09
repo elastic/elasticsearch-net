@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TrueAsyncTester.cs" />
     <Compile Include="HttpManualAsyncTester.cs" />
     <Compile Include="HttpTester.cs" />
     <Compile Include="ITester.cs" />
