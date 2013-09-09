@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Nest.Domain.Connection;
 
@@ -16,7 +13,6 @@ namespace Nest
 		const int BUFFER_SIZE = 1024;
 
 		private IConnectionSettings _ConnectionSettings { get; set; }
-		private Semaphore _ResourceLock;
 		private readonly bool _enableTrace;
 
 		public Connection(IConnectionSettings settings)
@@ -25,7 +21,6 @@ namespace Nest
 				throw new ArgumentNullException("settings");
 
 			this._ConnectionSettings = settings;
-			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
 			this._enableTrace = settings.TraceEnabled;
 		}
 
@@ -205,126 +200,17 @@ namespace Nest
 
 					return cs;
 				}
-			}
-				
+			}	
 		}
 
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
-			var tcs = new TaskCompletionSource<ConnectionStatus>();
-			var timeout = this._ConnectionSettings.Timeout;
-			if (!this._ResourceLock.WaitOne(timeout))
-			{
-				using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
-				{
-					var m = "Could not start the operation before the timeout of " + timeout +
-						"ms completed while waiting for the semaphore";
-					var cs = new ConnectionStatus(new TimeoutException(m));
-					tcs.SetResult(cs);
-					tracer.SetResult(cs);
-					return tcs.Task;
-				}
-			}
-			try
-			{
-				return Task.Factory.StartNew(() =>
-				{
-					using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
-					{
-						this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
-						var cs = tcs.Task.Result;
-						tracer.SetResult(cs);
-						_ConnectionSettings.ConnectionStatusHandler(cs);
-						return cs;
-					}
-				}, TaskCreationOptions.LongRunning);
-			}
-			finally
-			{
-				this._ResourceLock.Release();
-			}
-		}
-
-		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
-		{
-			var timeout = this._ConnectionSettings.Timeout;
-
-			var state = new ConnectionState { Connection = request };
-
-			if (data != null)
-			{
-				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-				ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-				yield return getRequestStream;
-
-				var requestStream = getRequestStream.Result;
-				try
-				{
-					byte[] buffer = Encoding.UTF8.GetBytes(data);
-					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, buffer, 0, buffer.Length, state);
-					yield return writeToRequestStream;
-				}
-				finally
-				{
-					requestStream.Close();
-				}
-			}
-
-			// Get the response
-			var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
-			ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-			yield return getResponse;
-
-			// Get the response stream
-			using (var response = (HttpWebResponse)getResponse.Result)
-			using (var responseStream = response.GetResponseStream())
-			{
-				// Copy all data from the response stream
-				var output = new MemoryStream();
-				var buffer = new byte[BUFFER_SIZE];
-				while (responseStream != null)
-				{
-					var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
-					yield return read;
-					if (read.Result == 0) break;
-					output.Write(buffer, 0, read.Result);
-				}
-
-				// Decode the data and store the result
-				var result = Encoding.UTF8.GetString(output.ToArray());
-				var cs = new ConnectionStatus(result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
-				tcs.TrySetResult(cs);
-			}
-			yield break;
-
-		}
-
-		public void Iterate(IEnumerable<Task> asyncIterator, TaskCompletionSource<ConnectionStatus> tcs)
-		{
-			var enumerator = asyncIterator.GetEnumerator();
-			Action<Task> recursiveBody = null;
-			recursiveBody = completedTask =>
-			{
-				if (completedTask != null && completedTask.IsFaulted)
-				{
-					//none of the individual steps in _AsyncSteps run in parallel for 1 request
-					//as this would be impossible we can assume Aggregate Exception.InnerException
-					var exception = completedTask.Exception.InnerException;
-
-					//cleanly exit from exceptions in stages if the exception is a webexception
-					if (exception is WebException)
-						tcs.SetResult(new ConnectionStatus(exception));
-					else
-						tcs.TrySetException(exception);
-					enumerator.Dispose();
-				}
-				else if (enumerator.MoveNext())
-				{
-					enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
-				}
-				else enumerator.Dispose();
-			};
-			recursiveBody(null);
+			var operation = new AsyncRequestOperation( 
+				request, 
+				data, 
+				_ConnectionSettings, 
+				new ConnectionStatusTracer( this._ConnectionSettings.TraceEnabled ) );
+			return operation.Task;
 		}
 
 		private Uri _CreateUriString(string path)
