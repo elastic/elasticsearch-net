@@ -62,6 +62,16 @@ namespace Nest
 			this._FromInclusive = false;
 			return this;
 		}
+		
+		/// <summary>
+		/// Boosts the range query by the specified boost factor
+		/// </summary>
+		/// <param name="boost">Boost factor</param>
+		public RangeQueryDescriptor<T> Boost(double boost)
+		{
+			this._Boost = boost;
+			return this;
+		}
 
 
 		#region int
