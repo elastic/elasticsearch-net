@@ -48,7 +48,7 @@ namespace Nest
 			this.Host = uri.Host;
 			this.Port = uri.Port;
 
-			this.MaximumAsyncConnections = 20;
+			this.MaximumAsyncConnections = 0;
 			this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
 			this.DefaultIndices = new FluentDictionary<Type, string>();
 			this.DefaultTypeNames = new FluentDictionary<Type, string>();

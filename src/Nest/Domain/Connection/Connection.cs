@@ -25,7 +25,8 @@ namespace Nest
 				throw new ArgumentNullException("settings");
 
 			this._ConnectionSettings = settings;
-			this._ResourceLock = new Semaphore(settings.MaximumAsyncConnections, settings.MaximumAsyncConnections);
+			var semaphore = Math.Max(1, settings.MaximumAsyncConnections);
+			this._ResourceLock = new Semaphore(semaphore, semaphore);
 			this._enableTrace = settings.TraceEnabled;
 		}
 
@@ -212,6 +213,9 @@ namespace Nest
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
+			if (this._ConnectionSettings.MaximumAsyncConnections <= 0)
+				return this.CreateIterateTask(request, data, tcs);
+
 			var timeout = this._ConnectionSettings.Timeout;
 			if (!this._ResourceLock.WaitOne(timeout))
 			{
@@ -227,18 +231,21 @@ namespace Nest
 			}
 			try
 			{
-				//return Task.Factory.StartNew(() =>
-				//{
-					
-						this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
-						return tcs.Task;
-					
-				//}, TaskCreationOptions.LongRunning);
+				return Task.Factory.StartNew(
+					() => this.CreateIterateTask(request, data, tcs).Result
+					, TaskCreationOptions.LongRunning
+				);
 			}
 			finally
 			{
 				this._ResourceLock.Release();
 			}
+		}
+
+		private Task<ConnectionStatus> CreateIterateTask(HttpWebRequest request, string data, TaskCompletionSource<ConnectionStatus> tcs)
+		{
+			this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
+			return tcs.Task;
 		}
 
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
