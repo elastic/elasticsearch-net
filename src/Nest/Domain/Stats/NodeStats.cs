@@ -260,7 +260,7 @@ namespace Nest
             {
                 [JsonProperty("used")]
                 public string Used { get; internal set; }
-                [JsonProperty("")]
+                [JsonProperty("used_in_bytes")]
                 public long UsedInBytes { get; internal set; }
                 [JsonProperty("max")]
                 public string Max { get; internal set; }
