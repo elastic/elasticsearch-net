@@ -346,11 +346,9 @@ namespace Nest
 				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
 				path += qs;
 			}
-			LeaveDotsAndSlashesEscaped(s.Uri);
+			path = this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? path : path.Replace("%2F", "%252F");
 			var uri = new Uri(s.Uri, path);
-			LeaveDotsAndSlashesEscaped(uri);
-			return uri;
-			var url = s.Uri.AbsoluteUri + path;
+		
 			//WebRequest.Create will replace %2F with / 
 			//this is a 'security feature'
 			//see http://mikehadlow.blogspot.nl/2011/08/how-to-stop-systemuri-un-escaping.html
@@ -360,38 +358,9 @@ namespace Nest
 			//If you manually set the config settings to NOT forefully unescape dots and slashes be sure to call 
 			//.SetDontDoubleEscapePathDotsAndSlashes() on the connection settings.
 			//return );
-
-			//return this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? url : url.Replace("%2F", "%252F");
+			//
+			return uri;
 		}
 
-		// System.UriSyntaxFlags is internal, so let's duplicate the flag privately
-		private const int UnEscapeDotsAndSlashes = 0x2000000;
-
-		public static void LeaveDotsAndSlashesEscaped(Uri uri)
-		{
-			if (uri == null)
-			{
-				throw new ArgumentNullException("uri");
-			}
-
-			FieldInfo fieldInfo = uri.GetType().GetField("m_Syntax", BindingFlags.Instance | BindingFlags.NonPublic);
-			if (fieldInfo == null)
-			{
-				throw new MissingFieldException("'m_Syntax' field not found");
-			}
-			object uriParser = fieldInfo.GetValue(uri);
-
-			fieldInfo = typeof(UriParser).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic);
-			if (fieldInfo == null)
-			{
-				throw new MissingFieldException("'m_Flags' field not found");
-			}
-			object uriSyntaxFlags = fieldInfo.GetValue(uriParser);
-
-			// Clear the flag that we don't want
-			uriSyntaxFlags = (int)uriSyntaxFlags & ~UnEscapeDotsAndSlashes;
-
-			fieldInfo.SetValue(uriParser, uriSyntaxFlags);
-		}
 	}
 }
