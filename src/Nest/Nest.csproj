@@ -99,6 +99,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="IRawElasticClient.cs" />
     <Compile Include="Resolvers\Converters\ConcreteTypeConverter.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />

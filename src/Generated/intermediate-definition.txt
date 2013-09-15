@@ -1,0 +1,1584 @@
+///<summary>HEAD /_alias/{name}</summary>
+ConnectionStatus AliasesExistHEAD(/_alias/{name});
+
+///<summary>HEAD /_alias/{name}</summary>
+Task<ConnectionStatus> AliasesExistHEADAsync(/_alias/{name});
+
+///<summary>HEAD /{index}/_alias/{name}</summary>
+ConnectionStatus AliasesExistHEAD(/{index}/_alias/{name});
+
+///<summary>HEAD /{index}/_alias/{name}</summary>
+Task<ConnectionStatus> AliasesExistHEADAsync(/{index}/_alias/{name});
+
+///<summary>GET /_analyze</summary>
+ConnectionStatus AnalyzeGET(/_analyze);
+
+///<summary>GET /_analyze</summary>
+Task<ConnectionStatus> AnalyzeGETAsync(/_analyze);
+
+///<summary>GET /{index}/_analyze</summary>
+ConnectionStatus AnalyzeGET(/{index}/_analyze);
+
+///<summary>GET /{index}/_analyze</summary>
+Task<ConnectionStatus> AnalyzeGETAsync(/{index}/_analyze);
+
+///<summary>POST /_analyze</summary>
+ConnectionStatus AnalyzePOST(/_analyze);
+
+///<summary>POST /_analyze</summary>
+Task<ConnectionStatus> AnalyzePOSTAsync(/_analyze);
+
+///<summary>POST /{index}/_analyze</summary>
+ConnectionStatus AnalyzePOST(/{index}/_analyze);
+
+///<summary>POST /{index}/_analyze</summary>
+Task<ConnectionStatus> AnalyzePOSTAsync(/{index}/_analyze);
+
+///<summary>POST /_bulk</summary>
+ConnectionStatus BulkPOST(/_bulk);
+
+///<summary>POST /_bulk</summary>
+Task<ConnectionStatus> BulkPOSTAsync(/_bulk);
+
+///<summary>POST /{index}/_bulk</summary>
+ConnectionStatus BulkPOST(/{index}/_bulk);
+
+///<summary>POST /{index}/_bulk</summary>
+Task<ConnectionStatus> BulkPOSTAsync(/{index}/_bulk);
+
+///<summary>POST /{index}/{type}/_bulk</summary>
+ConnectionStatus BulkPOST(/{index}/{type}/_bulk);
+
+///<summary>POST /{index}/{type}/_bulk</summary>
+Task<ConnectionStatus> BulkPOSTAsync(/{index}/{type}/_bulk);
+
+///<summary>PUT /_bulk</summary>
+ConnectionStatus BulkPUT(/_bulk);
+
+///<summary>PUT /_bulk</summary>
+Task<ConnectionStatus> BulkPUTAsync(/_bulk);
+
+///<summary>PUT /{index}/_bulk</summary>
+ConnectionStatus BulkPUT(/{index}/_bulk);
+
+///<summary>PUT /{index}/_bulk</summary>
+Task<ConnectionStatus> BulkPUTAsync(/{index}/_bulk);
+
+///<summary>PUT /{index}/{type}/_bulk</summary>
+ConnectionStatus BulkPUT(/{index}/{type}/_bulk);
+
+///<summary>PUT /{index}/{type}/_bulk</summary>
+Task<ConnectionStatus> BulkPUTAsync(/{index}/{type}/_bulk);
+
+///<summary>GET /_cache/clear</summary>
+ConnectionStatus ClearIndicesCacheGET(/_cache/clear);
+
+///<summary>GET /_cache/clear</summary>
+Task<ConnectionStatus> ClearIndicesCacheGETAsync(/_cache/clear);
+
+///<summary>GET /{index}/_cache/clear</summary>
+ConnectionStatus ClearIndicesCacheGET(/{index}/_cache/clear);
+
+///<summary>GET /{index}/_cache/clear</summary>
+Task<ConnectionStatus> ClearIndicesCacheGETAsync(/{index}/_cache/clear);
+
+///<summary>POST /_cache/clear</summary>
+ConnectionStatus ClearIndicesCachePOST(/_cache/clear);
+
+///<summary>POST /_cache/clear</summary>
+Task<ConnectionStatus> ClearIndicesCachePOSTAsync(/_cache/clear);
+
+///<summary>POST /{index}/_cache/clear</summary>
+ConnectionStatus ClearIndicesCachePOST(/{index}/_cache/clear);
+
+///<summary>POST /{index}/_cache/clear</summary>
+Task<ConnectionStatus> ClearIndicesCachePOSTAsync(/{index}/_cache/clear);
+
+///<summary>DELETE /_search/scroll</summary>
+ConnectionStatus ClearScrollDELETE(/_search/scroll);
+
+///<summary>DELETE /_search/scroll</summary>
+Task<ConnectionStatus> ClearScrollDELETEAsync(/_search/scroll);
+
+///<summary>DELETE /_search/scroll/{scroll_id}</summary>
+ConnectionStatus ClearScrollDELETE(/_search/scroll/{scroll_id});
+
+///<summary>DELETE /_search/scroll/{scroll_id}</summary>
+Task<ConnectionStatus> ClearScrollDELETEAsync(/_search/scroll/{scroll_id});
+
+///<summary>POST /_close</summary>
+ConnectionStatus CloseIndexPOST(/_close);
+
+///<summary>POST /_close</summary>
+Task<ConnectionStatus> CloseIndexPOSTAsync(/_close);
+
+///<summary>POST /{index}/_close</summary>
+ConnectionStatus CloseIndexPOST(/{index}/_close);
+
+///<summary>POST /{index}/_close</summary>
+Task<ConnectionStatus> CloseIndexPOSTAsync(/{index}/_close);
+
+///<summary>GET /_cluster/settings</summary>
+ConnectionStatus ClusterGetSettingsGET(/_cluster/settings);
+
+///<summary>GET /_cluster/settings</summary>
+Task<ConnectionStatus> ClusterGetSettingsGETAsync(/_cluster/settings);
+
+///<summary>GET /_cluster/health</summary>
+ConnectionStatus ClusterHealthGET(/_cluster/health);
+
+///<summary>GET /_cluster/health</summary>
+Task<ConnectionStatus> ClusterHealthGETAsync(/_cluster/health);
+
+///<summary>GET /_cluster/health/{index}</summary>
+ConnectionStatus ClusterHealthGET(/_cluster/health/{index});
+
+///<summary>GET /_cluster/health/{index}</summary>
+Task<ConnectionStatus> ClusterHealthGETAsync(/_cluster/health/{index});
+
+///<summary>POST /_cluster/reroute</summary>
+ConnectionStatus ClusterReroutePOST(/_cluster/reroute);
+
+///<summary>POST /_cluster/reroute</summary>
+Task<ConnectionStatus> ClusterReroutePOSTAsync(/_cluster/reroute);
+
+///<summary>GET /_search_shards</summary>
+ConnectionStatus ClusterSearchShardsGET(/_search_shards);
+
+///<summary>GET /_search_shards</summary>
+Task<ConnectionStatus> ClusterSearchShardsGETAsync(/_search_shards);
+
+///<summary>GET /{index}/_search_shards</summary>
+ConnectionStatus ClusterSearchShardsGET(/{index}/_search_shards);
+
+///<summary>GET /{index}/_search_shards</summary>
+Task<ConnectionStatus> ClusterSearchShardsGETAsync(/{index}/_search_shards);
+
+///<summary>GET /{index}/{type}/_search_shards</summary>
+ConnectionStatus ClusterSearchShardsGET(/{index}/{type}/_search_shards);
+
+///<summary>GET /{index}/{type}/_search_shards</summary>
+Task<ConnectionStatus> ClusterSearchShardsGETAsync(/{index}/{type}/_search_shards);
+
+///<summary>POST /_search_shards</summary>
+ConnectionStatus ClusterSearchShardsPOST(/_search_shards);
+
+///<summary>POST /_search_shards</summary>
+Task<ConnectionStatus> ClusterSearchShardsPOSTAsync(/_search_shards);
+
+///<summary>POST /{index}/_search_shards</summary>
+ConnectionStatus ClusterSearchShardsPOST(/{index}/_search_shards);
+
+///<summary>POST /{index}/_search_shards</summary>
+Task<ConnectionStatus> ClusterSearchShardsPOSTAsync(/{index}/_search_shards);
+
+///<summary>POST /{index}/{type}/_search_shards</summary>
+ConnectionStatus ClusterSearchShardsPOST(/{index}/{type}/_search_shards);
+
+///<summary>POST /{index}/{type}/_search_shards</summary>
+Task<ConnectionStatus> ClusterSearchShardsPOSTAsync(/{index}/{type}/_search_shards);
+
+///<summary>GET /_cluster/state</summary>
+ConnectionStatus ClusterStateGET(/_cluster/state);
+
+///<summary>GET /_cluster/state</summary>
+Task<ConnectionStatus> ClusterStateGETAsync(/_cluster/state);
+
+///<summary>PUT /_cluster/settings</summary>
+ConnectionStatus ClusterUpdateSettingsPUT(/_cluster/settings);
+
+///<summary>PUT /_cluster/settings</summary>
+Task<ConnectionStatus> ClusterUpdateSettingsPUTAsync(/_cluster/settings);
+
+///<summary>GET /_count</summary>
+ConnectionStatus CountGET(/_count);
+
+///<summary>GET /_count</summary>
+Task<ConnectionStatus> CountGETAsync(/_count);
+
+///<summary>GET /{index}/_count</summary>
+ConnectionStatus CountGET(/{index}/_count);
+
+///<summary>GET /{index}/_count</summary>
+Task<ConnectionStatus> CountGETAsync(/{index}/_count);
+
+///<summary>GET /{index}/{type}/_count</summary>
+ConnectionStatus CountGET(/{index}/{type}/_count);
+
+///<summary>GET /{index}/{type}/_count</summary>
+Task<ConnectionStatus> CountGETAsync(/{index}/{type}/_count);
+
+///<summary>POST /_count</summary>
+ConnectionStatus CountPOST(/_count);
+
+///<summary>POST /_count</summary>
+Task<ConnectionStatus> CountPOSTAsync(/_count);
+
+///<summary>POST /{index}/_count</summary>
+ConnectionStatus CountPOST(/{index}/_count);
+
+///<summary>POST /{index}/_count</summary>
+Task<ConnectionStatus> CountPOSTAsync(/{index}/_count);
+
+///<summary>POST /{index}/{type}/_count</summary>
+ConnectionStatus CountPOST(/{index}/{type}/_count);
+
+///<summary>POST /{index}/{type}/_count</summary>
+Task<ConnectionStatus> CountPOSTAsync(/{index}/{type}/_count);
+
+///<summary>POST /{index}/{type}/{id}/_create</summary>
+ConnectionStatus CreatePOST(/{index}/{type}/{id}/_create);
+
+///<summary>POST /{index}/{type}/{id}/_create</summary>
+Task<ConnectionStatus> CreatePOSTAsync(/{index}/{type}/{id}/_create);
+
+///<summary>PUT /{index}/{type}/{id}/_create</summary>
+ConnectionStatus CreatePUT(/{index}/{type}/{id}/_create);
+
+///<summary>PUT /{index}/{type}/{id}/_create</summary>
+Task<ConnectionStatus> CreatePUTAsync(/{index}/{type}/{id}/_create);
+
+///<summary>POST /{index}</summary>
+ConnectionStatus CreateIndexPOST(/{index});
+
+///<summary>POST /{index}</summary>
+Task<ConnectionStatus> CreateIndexPOSTAsync(/{index});
+
+///<summary>PUT /{index}</summary>
+ConnectionStatus CreateIndexPUT(/{index});
+
+///<summary>PUT /{index}</summary>
+Task<ConnectionStatus> CreateIndexPUTAsync(/{index});
+
+///<summary>DELETE /{index}/{type}/{id}</summary>
+ConnectionStatus DeleteDELETE(/{index}/{type}/{id});
+
+///<summary>DELETE /{index}/{type}/{id}</summary>
+Task<ConnectionStatus> DeleteDELETEAsync(/{index}/{type}/{id});
+
+///<summary>DELETE /{index}/_query</summary>
+ConnectionStatus DeleteByQueryDELETE(/{index}/_query);
+
+///<summary>DELETE /{index}/_query</summary>
+Task<ConnectionStatus> DeleteByQueryDELETEAsync(/{index}/_query);
+
+///<summary>DELETE /{index}/{type}/_query</summary>
+ConnectionStatus DeleteByQueryDELETE(/{index}/{type}/_query);
+
+///<summary>DELETE /{index}/{type}/_query</summary>
+Task<ConnectionStatus> DeleteByQueryDELETEAsync(/{index}/{type}/_query);
+
+///<summary>DELETE /</summary>
+ConnectionStatus DeleteIndexDELETE(/);
+
+///<summary>DELETE /</summary>
+Task<ConnectionStatus> DeleteIndexDELETEAsync(/);
+
+///<summary>DELETE /{index}</summary>
+ConnectionStatus DeleteIndexDELETE(/{index});
+
+///<summary>DELETE /{index}</summary>
+Task<ConnectionStatus> DeleteIndexDELETEAsync(/{index});
+
+///<summary>DELETE /_template/{name}</summary>
+ConnectionStatus DeleteIndexTemplateDELETE(/_template/{name});
+
+///<summary>DELETE /_template/{name}</summary>
+Task<ConnectionStatus> DeleteIndexTemplateDELETEAsync(/_template/{name});
+
+///<summary>DELETE /{index}/{type}/_mapping</summary>
+ConnectionStatus DeleteMappingDELETE(/{index}/{type}/_mapping);
+
+///<summary>DELETE /{index}/{type}/_mapping</summary>
+Task<ConnectionStatus> DeleteMappingDELETEAsync(/{index}/{type}/_mapping);
+
+///<summary>DELETE /{index}/_warmer</summary>
+ConnectionStatus DeleteWarmerDELETE(/{index}/_warmer);
+
+///<summary>DELETE /{index}/_warmer</summary>
+Task<ConnectionStatus> DeleteWarmerDELETEAsync(/{index}/_warmer);
+
+///<summary>DELETE /{index}/_warmer/{name}</summary>
+ConnectionStatus DeleteWarmerDELETE(/{index}/_warmer/{name});
+
+///<summary>DELETE /{index}/_warmer/{name}</summary>
+Task<ConnectionStatus> DeleteWarmerDELETEAsync(/{index}/_warmer/{name});
+
+///<summary>DELETE /{index}/{type}/_warmer/{name}</summary>
+ConnectionStatus DeleteWarmerDELETE(/{index}/{type}/_warmer/{name});
+
+///<summary>DELETE /{index}/{type}/_warmer/{name}</summary>
+Task<ConnectionStatus> DeleteWarmerDELETEAsync(/{index}/{type}/_warmer/{name});
+
+///<summary>GET /{index}/{type}/{id}/_explain</summary>
+ConnectionStatus ExplainGET(/{index}/{type}/{id}/_explain);
+
+///<summary>GET /{index}/{type}/{id}/_explain</summary>
+Task<ConnectionStatus> ExplainGETAsync(/{index}/{type}/{id}/_explain);
+
+///<summary>POST /{index}/{type}/{id}/_explain</summary>
+ConnectionStatus ExplainPOST(/{index}/{type}/{id}/_explain);
+
+///<summary>POST /{index}/{type}/{id}/_explain</summary>
+Task<ConnectionStatus> ExplainPOSTAsync(/{index}/{type}/{id}/_explain);
+
+///<summary>GET /_flush</summary>
+ConnectionStatus FlushGET(/_flush);
+
+///<summary>GET /_flush</summary>
+Task<ConnectionStatus> FlushGETAsync(/_flush);
+
+///<summary>GET /{index}/_flush</summary>
+ConnectionStatus FlushGET(/{index}/_flush);
+
+///<summary>GET /{index}/_flush</summary>
+Task<ConnectionStatus> FlushGETAsync(/{index}/_flush);
+
+///<summary>POST /_flush</summary>
+ConnectionStatus FlushPOST(/_flush);
+
+///<summary>POST /_flush</summary>
+Task<ConnectionStatus> FlushPOSTAsync(/_flush);
+
+///<summary>POST /{index}/_flush</summary>
+ConnectionStatus FlushPOST(/{index}/_flush);
+
+///<summary>POST /{index}/_flush</summary>
+Task<ConnectionStatus> FlushPOSTAsync(/{index}/_flush);
+
+///<summary>POST /_gateway/snapshot</summary>
+ConnectionStatus GatewaySnapshotPOST(/_gateway/snapshot);
+
+///<summary>POST /_gateway/snapshot</summary>
+Task<ConnectionStatus> GatewaySnapshotPOSTAsync(/_gateway/snapshot);
+
+///<summary>POST /{index}/_gateway/snapshot</summary>
+ConnectionStatus GatewaySnapshotPOST(/{index}/_gateway/snapshot);
+
+///<summary>POST /{index}/_gateway/snapshot</summary>
+Task<ConnectionStatus> GatewaySnapshotPOSTAsync(/{index}/_gateway/snapshot);
+
+///<summary>GET /{index}/{type}/{id}</summary>
+ConnectionStatus GetGET(/{index}/{type}/{id});
+
+///<summary>GET /{index}/{type}/{id}</summary>
+Task<ConnectionStatus> GetGETAsync(/{index}/{type}/{id});
+
+///<summary>GET /_alias/{name}</summary>
+ConnectionStatus GetAliasesGET(/_alias/{name});
+
+///<summary>GET /_alias/{name}</summary>
+Task<ConnectionStatus> GetAliasesGETAsync(/_alias/{name});
+
+///<summary>GET /{index}/_alias/{name}</summary>
+ConnectionStatus GetAliasesGET(/{index}/_alias/{name});
+
+///<summary>GET /{index}/_alias/{name}</summary>
+Task<ConnectionStatus> GetAliasesGETAsync(/{index}/_alias/{name});
+
+///<summary>GET /_template</summary>
+ConnectionStatus GetIndexTemplateGET(/_template);
+
+///<summary>GET /_template</summary>
+Task<ConnectionStatus> GetIndexTemplateGETAsync(/_template);
+
+///<summary>GET /_template/{name}</summary>
+ConnectionStatus GetIndexTemplateGET(/_template/{name});
+
+///<summary>GET /_template/{name}</summary>
+Task<ConnectionStatus> GetIndexTemplateGETAsync(/_template/{name});
+
+///<summary>GET /_aliases</summary>
+ConnectionStatus GetIndicesAliasesGET(/_aliases);
+
+///<summary>GET /_aliases</summary>
+Task<ConnectionStatus> GetIndicesAliasesGETAsync(/_aliases);
+
+///<summary>GET /{index}/_aliases</summary>
+ConnectionStatus GetIndicesAliasesGET(/{index}/_aliases);
+
+///<summary>GET /{index}/_aliases</summary>
+Task<ConnectionStatus> GetIndicesAliasesGETAsync(/{index}/_aliases);
+
+///<summary>GET /_mapping</summary>
+ConnectionStatus GetMappingGET(/_mapping);
+
+///<summary>GET /_mapping</summary>
+Task<ConnectionStatus> GetMappingGETAsync(/_mapping);
+
+///<summary>GET /{index}/_mapping</summary>
+ConnectionStatus GetMappingGET(/{index}/_mapping);
+
+///<summary>GET /{index}/_mapping</summary>
+Task<ConnectionStatus> GetMappingGETAsync(/{index}/_mapping);
+
+///<summary>GET /{index}/{type}/_mapping</summary>
+ConnectionStatus GetMappingGET(/{index}/{type}/_mapping);
+
+///<summary>GET /{index}/{type}/_mapping</summary>
+Task<ConnectionStatus> GetMappingGETAsync(/{index}/{type}/_mapping);
+
+///<summary>GET /_settings</summary>
+ConnectionStatus GetSettingsGET(/_settings);
+
+///<summary>GET /_settings</summary>
+Task<ConnectionStatus> GetSettingsGETAsync(/_settings);
+
+///<summary>GET /{index}/_settings</summary>
+ConnectionStatus GetSettingsGET(/{index}/_settings);
+
+///<summary>GET /{index}/_settings</summary>
+Task<ConnectionStatus> GetSettingsGETAsync(/{index}/_settings);
+
+///<summary>GET /{index}/{type}/{id}/_source</summary>
+ConnectionStatus GetSourceGET(/{index}/{type}/{id}/_source);
+
+///<summary>GET /{index}/{type}/{id}/_source</summary>
+Task<ConnectionStatus> GetSourceGETAsync(/{index}/{type}/{id}/_source);
+
+///<summary>GET /{index}/_warmer</summary>
+ConnectionStatus GetWarmerGET(/{index}/_warmer);
+
+///<summary>GET /{index}/_warmer</summary>
+Task<ConnectionStatus> GetWarmerGETAsync(/{index}/_warmer);
+
+///<summary>GET /{index}/_warmer/{name}</summary>
+ConnectionStatus GetWarmerGET(/{index}/_warmer/{name});
+
+///<summary>GET /{index}/_warmer/{name}</summary>
+Task<ConnectionStatus> GetWarmerGETAsync(/{index}/_warmer/{name});
+
+///<summary>GET /{index}/{type}/_warmer/{name}</summary>
+ConnectionStatus GetWarmerGET(/{index}/{type}/_warmer/{name});
+
+///<summary>GET /{index}/{type}/_warmer/{name}</summary>
+Task<ConnectionStatus> GetWarmerGETAsync(/{index}/{type}/_warmer/{name});
+
+///<summary>HEAD /{index}/{type}/{id}</summary>
+ConnectionStatus HeadHEAD(/{index}/{type}/{id});
+
+///<summary>HEAD /{index}/{type}/{id}</summary>
+Task<ConnectionStatus> HeadHEADAsync(/{index}/{type}/{id});
+
+///<summary>HEAD /_template/{name}</summary>
+ConnectionStatus HeadIndexTemplateHEAD(/_template/{name});
+
+///<summary>HEAD /_template/{name}</summary>
+Task<ConnectionStatus> HeadIndexTemplateHEADAsync(/_template/{name});
+
+///<summary>HEAD /{index}/{type}/{id}/_source</summary>
+ConnectionStatus HeadSourceHEAD(/{index}/{type}/{id}/_source);
+
+///<summary>HEAD /{index}/{type}/{id}/_source</summary>
+Task<ConnectionStatus> HeadSourceHEADAsync(/{index}/{type}/{id}/_source);
+
+///<summary>POST /{index}/{type}</summary>
+ConnectionStatus IndexPOST(/{index}/{type});
+
+///<summary>POST /{index}/{type}</summary>
+Task<ConnectionStatus> IndexPOSTAsync(/{index}/{type});
+
+///<summary>POST /{index}/{type}/{id}</summary>
+ConnectionStatus IndexPOST(/{index}/{type}/{id});
+
+///<summary>POST /{index}/{type}/{id}</summary>
+Task<ConnectionStatus> IndexPOSTAsync(/{index}/{type}/{id});
+
+///<summary>PUT /{index}/{type}/{id}</summary>
+ConnectionStatus IndexPUT(/{index}/{type}/{id});
+
+///<summary>PUT /{index}/{type}/{id}</summary>
+Task<ConnectionStatus> IndexPUTAsync(/{index}/{type}/{id});
+
+///<summary>DELETE /{index}/_alias/{name}</summary>
+ConnectionStatus IndexDeleteAliasesDELETE(/{index}/_alias/{name});
+
+///<summary>DELETE /{index}/_alias/{name}</summary>
+Task<ConnectionStatus> IndexDeleteAliasesDELETEAsync(/{index}/_alias/{name});
+
+///<summary>GET /{index}/_stats/completion</summary>
+ConnectionStatus IndexFilteredStatsCompletionGET(/{index}/_stats/completion);
+
+///<summary>GET /{index}/_stats/completion</summary>
+Task<ConnectionStatus> IndexFilteredStatsCompletionGETAsync(/{index}/_stats/completion);
+
+///<summary>GET /{index}/_stats/completion/{fields}</summary>
+ConnectionStatus IndexFilteredStatsCompletionGET(/{index}/_stats/completion/{fields});
+
+///<summary>GET /{index}/_stats/completion/{fields}</summary>
+Task<ConnectionStatus> IndexFilteredStatsCompletionGETAsync(/{index}/_stats/completion/{fields});
+
+///<summary>GET /{index}/_stats/docs</summary>
+ConnectionStatus IndexFilteredStatsDocsGET(/{index}/_stats/docs);
+
+///<summary>GET /{index}/_stats/docs</summary>
+Task<ConnectionStatus> IndexFilteredStatsDocsGETAsync(/{index}/_stats/docs);
+
+///<summary>GET /{index}/_stats/fielddata</summary>
+ConnectionStatus IndexFilteredStatsFielddataGET(/{index}/_stats/fielddata);
+
+///<summary>GET /{index}/_stats/fielddata</summary>
+Task<ConnectionStatus> IndexFilteredStatsFielddataGETAsync(/{index}/_stats/fielddata);
+
+///<summary>GET /{index}/_stats/fielddata/{fields}</summary>
+ConnectionStatus IndexFilteredStatsFielddataGET(/{index}/_stats/fielddata/{fields});
+
+///<summary>GET /{index}/_stats/fielddata/{fields}</summary>
+Task<ConnectionStatus> IndexFilteredStatsFielddataGETAsync(/{index}/_stats/fielddata/{fields});
+
+///<summary>GET /{index}/_stats/filter_cache</summary>
+ConnectionStatus IndexFilteredStatsFilter_cacheGET(/{index}/_stats/filter_cache);
+
+///<summary>GET /{index}/_stats/filter_cache</summary>
+Task<ConnectionStatus> IndexFilteredStatsFilter_cacheGETAsync(/{index}/_stats/filter_cache);
+
+///<summary>GET /{index}/_stats/flush</summary>
+ConnectionStatus IndexFilteredStatsFlushGET(/{index}/_stats/flush);
+
+///<summary>GET /{index}/_stats/flush</summary>
+Task<ConnectionStatus> IndexFilteredStatsFlushGETAsync(/{index}/_stats/flush);
+
+///<summary>GET /{index}/_stats/get</summary>
+ConnectionStatus IndexFilteredStatsGetGET(/{index}/_stats/get);
+
+///<summary>GET /{index}/_stats/get</summary>
+Task<ConnectionStatus> IndexFilteredStatsGetGETAsync(/{index}/_stats/get);
+
+///<summary>GET /{index}/_stats/id_cache</summary>
+ConnectionStatus IndexFilteredStatsId_cacheGET(/{index}/_stats/id_cache);
+
+///<summary>GET /{index}/_stats/id_cache</summary>
+Task<ConnectionStatus> IndexFilteredStatsId_cacheGETAsync(/{index}/_stats/id_cache);
+
+///<summary>GET /{index}/_stats/indexing</summary>
+ConnectionStatus IndexFilteredStatsIndexingGET(/{index}/_stats/indexing);
+
+///<summary>GET /{index}/_stats/indexing</summary>
+Task<ConnectionStatus> IndexFilteredStatsIndexingGETAsync(/{index}/_stats/indexing);
+
+///<summary>GET /{index}/_stats/indexing/{indexingTypes2}</summary>
+ConnectionStatus IndexFilteredStatsIndexingGET(/{index}/_stats/indexing/{indexingTypes2});
+
+///<summary>GET /{index}/_stats/indexing/{indexingTypes2}</summary>
+Task<ConnectionStatus> IndexFilteredStatsIndexingGETAsync(/{index}/_stats/indexing/{indexingTypes2});
+
+///<summary>GET /{index}/_stats/merge</summary>
+ConnectionStatus IndexFilteredStatsMergeGET(/{index}/_stats/merge);
+
+///<summary>GET /{index}/_stats/merge</summary>
+Task<ConnectionStatus> IndexFilteredStatsMergeGETAsync(/{index}/_stats/merge);
+
+///<summary>GET /{index}/_stats/percolate</summary>
+ConnectionStatus IndexFilteredStatsPercolateGET(/{index}/_stats/percolate);
+
+///<summary>GET /{index}/_stats/percolate</summary>
+Task<ConnectionStatus> IndexFilteredStatsPercolateGETAsync(/{index}/_stats/percolate);
+
+///<summary>GET /{index}/_stats/refresh</summary>
+ConnectionStatus IndexFilteredStatsRefreshGET(/{index}/_stats/refresh);
+
+///<summary>GET /{index}/_stats/refresh</summary>
+Task<ConnectionStatus> IndexFilteredStatsRefreshGETAsync(/{index}/_stats/refresh);
+
+///<summary>GET /{index}/_stats/search</summary>
+ConnectionStatus IndexFilteredStatsSearchGET(/{index}/_stats/search);
+
+///<summary>GET /{index}/_stats/search</summary>
+Task<ConnectionStatus> IndexFilteredStatsSearchGETAsync(/{index}/_stats/search);
+
+///<summary>GET /{index}/_stats/search/{searchGroupsStats2}</summary>
+ConnectionStatus IndexFilteredStatsSearchGET(/{index}/_stats/search/{searchGroupsStats2});
+
+///<summary>GET /{index}/_stats/search/{searchGroupsStats2}</summary>
+Task<ConnectionStatus> IndexFilteredStatsSearchGETAsync(/{index}/_stats/search/{searchGroupsStats2});
+
+///<summary>GET /{index}/_stats/store</summary>
+ConnectionStatus IndexFilteredStatsStoreGET(/{index}/_stats/store);
+
+///<summary>GET /{index}/_stats/store</summary>
+Task<ConnectionStatus> IndexFilteredStatsStoreGETAsync(/{index}/_stats/store);
+
+///<summary>GET /{index}/_stats/warmer</summary>
+ConnectionStatus IndexFilteredStatsWarmerGET(/{index}/_stats/warmer);
+
+///<summary>GET /{index}/_stats/warmer</summary>
+Task<ConnectionStatus> IndexFilteredStatsWarmerGETAsync(/{index}/_stats/warmer);
+
+///<summary>PUT /_alias</summary>
+ConnectionStatus IndexPutAliasPUT(/_alias);
+
+///<summary>PUT /_alias</summary>
+Task<ConnectionStatus> IndexPutAliasPUTAsync(/_alias);
+
+///<summary>PUT /{index}/_alias</summary>
+ConnectionStatus IndexPutAliasPUT(/{index}/_alias);
+
+///<summary>PUT /{index}/_alias</summary>
+Task<ConnectionStatus> IndexPutAliasPUTAsync(/{index}/_alias);
+
+///<summary>PUT /{index}/_alias/{name}</summary>
+ConnectionStatus IndexPutAliasPUT(/{index}/_alias/{name});
+
+///<summary>PUT /{index}/_alias/{name}</summary>
+Task<ConnectionStatus> IndexPutAliasPUTAsync(/{index}/_alias/{name});
+
+///<summary>PUT /_alias/{name}</summary>
+ConnectionStatus IndexPutAliasByNamePUT(/_alias/{name});
+
+///<summary>PUT /_alias/{name}</summary>
+Task<ConnectionStatus> IndexPutAliasByNamePUTAsync(/_alias/{name});
+
+///<summary>GET /_cat/indices</summary>
+ConnectionStatus IndicesGET(/_cat/indices);
+
+///<summary>GET /_cat/indices</summary>
+Task<ConnectionStatus> IndicesGETAsync(/_cat/indices);
+
+///<summary>GET /_cat/indices/{index}</summary>
+ConnectionStatus IndicesGET(/_cat/indices/{index});
+
+///<summary>GET /_cat/indices/{index}</summary>
+Task<ConnectionStatus> IndicesGETAsync(/_cat/indices/{index});
+
+///<summary>POST /_aliases</summary>
+ConnectionStatus IndicesAliasesPOST(/_aliases);
+
+///<summary>POST /_aliases</summary>
+Task<ConnectionStatus> IndicesAliasesPOSTAsync(/_aliases);
+
+///<summary>HEAD /{index}</summary>
+ConnectionStatus IndicesExistsHEAD(/{index});
+
+///<summary>HEAD /{index}</summary>
+Task<ConnectionStatus> IndicesExistsHEADAsync(/{index});
+
+///<summary>GET /_segments</summary>
+ConnectionStatus IndicesSegmentsGET(/_segments);
+
+///<summary>GET /_segments</summary>
+Task<ConnectionStatus> IndicesSegmentsGETAsync(/_segments);
+
+///<summary>GET /{index}/_segments</summary>
+ConnectionStatus IndicesSegmentsGET(/{index}/_segments);
+
+///<summary>GET /{index}/_segments</summary>
+Task<ConnectionStatus> IndicesSegmentsGETAsync(/{index}/_segments);
+
+///<summary>GET /_stats/completion</summary>
+ConnectionStatus IndicesStatCompletionGET(/_stats/completion);
+
+///<summary>GET /_stats/completion</summary>
+Task<ConnectionStatus> IndicesStatCompletionGETAsync(/_stats/completion);
+
+///<summary>GET /_stats/completion/{fields}</summary>
+ConnectionStatus IndicesStatCompletionGET(/_stats/completion/{fields});
+
+///<summary>GET /_stats/completion/{fields}</summary>
+Task<ConnectionStatus> IndicesStatCompletionGETAsync(/_stats/completion/{fields});
+
+///<summary>GET /_stats/docs</summary>
+ConnectionStatus IndicesStatDocsGET(/_stats/docs);
+
+///<summary>GET /_stats/docs</summary>
+Task<ConnectionStatus> IndicesStatDocsGETAsync(/_stats/docs);
+
+///<summary>GET /_stats/fielddata</summary>
+ConnectionStatus IndicesStatFielddataGET(/_stats/fielddata);
+
+///<summary>GET /_stats/fielddata</summary>
+Task<ConnectionStatus> IndicesStatFielddataGETAsync(/_stats/fielddata);
+
+///<summary>GET /_stats/fielddata/{fields}</summary>
+ConnectionStatus IndicesStatFielddataGET(/_stats/fielddata/{fields});
+
+///<summary>GET /_stats/fielddata/{fields}</summary>
+Task<ConnectionStatus> IndicesStatFielddataGETAsync(/_stats/fielddata/{fields});
+
+///<summary>GET /_stats/filter_cache</summary>
+ConnectionStatus IndicesStatFilter_cacheGET(/_stats/filter_cache);
+
+///<summary>GET /_stats/filter_cache</summary>
+Task<ConnectionStatus> IndicesStatFilter_cacheGETAsync(/_stats/filter_cache);
+
+///<summary>GET /_stats/flush</summary>
+ConnectionStatus IndicesStatFlushGET(/_stats/flush);
+
+///<summary>GET /_stats/flush</summary>
+Task<ConnectionStatus> IndicesStatFlushGETAsync(/_stats/flush);
+
+///<summary>GET /_stats/get</summary>
+ConnectionStatus IndicesStatGetGET(/_stats/get);
+
+///<summary>GET /_stats/get</summary>
+Task<ConnectionStatus> IndicesStatGetGETAsync(/_stats/get);
+
+///<summary>GET /_stats/id_cache</summary>
+ConnectionStatus IndicesStatId_cacheGET(/_stats/id_cache);
+
+///<summary>GET /_stats/id_cache</summary>
+Task<ConnectionStatus> IndicesStatId_cacheGETAsync(/_stats/id_cache);
+
+///<summary>GET /_stats/indexing</summary>
+ConnectionStatus IndicesStatIndexingGET(/_stats/indexing);
+
+///<summary>GET /_stats/indexing</summary>
+Task<ConnectionStatus> IndicesStatIndexingGETAsync(/_stats/indexing);
+
+///<summary>GET /_stats/indexing/{indexingTypes1}</summary>
+ConnectionStatus IndicesStatIndexingGET(/_stats/indexing/{indexingTypes1});
+
+///<summary>GET /_stats/indexing/{indexingTypes1}</summary>
+Task<ConnectionStatus> IndicesStatIndexingGETAsync(/_stats/indexing/{indexingTypes1});
+
+///<summary>GET /_stats/merge</summary>
+ConnectionStatus IndicesStatMergeGET(/_stats/merge);
+
+///<summary>GET /_stats/merge</summary>
+Task<ConnectionStatus> IndicesStatMergeGETAsync(/_stats/merge);
+
+///<summary>GET /_stats/percolate</summary>
+ConnectionStatus IndicesStatPercolateGET(/_stats/percolate);
+
+///<summary>GET /_stats/percolate</summary>
+Task<ConnectionStatus> IndicesStatPercolateGETAsync(/_stats/percolate);
+
+///<summary>GET /_stats/refresh</summary>
+ConnectionStatus IndicesStatRefreshGET(/_stats/refresh);
+
+///<summary>GET /_stats/refresh</summary>
+Task<ConnectionStatus> IndicesStatRefreshGETAsync(/_stats/refresh);
+
+///<summary>GET /_stats/search</summary>
+ConnectionStatus IndicesStatSearchGET(/_stats/search);
+
+///<summary>GET /_stats/search</summary>
+Task<ConnectionStatus> IndicesStatSearchGETAsync(/_stats/search);
+
+///<summary>GET /_stats/search/{searchGroupsStats1}</summary>
+ConnectionStatus IndicesStatSearchGET(/_stats/search/{searchGroupsStats1});
+
+///<summary>GET /_stats/search/{searchGroupsStats1}</summary>
+Task<ConnectionStatus> IndicesStatSearchGETAsync(/_stats/search/{searchGroupsStats1});
+
+///<summary>GET /_stats/store</summary>
+ConnectionStatus IndicesStatStoreGET(/_stats/store);
+
+///<summary>GET /_stats/store</summary>
+Task<ConnectionStatus> IndicesStatStoreGETAsync(/_stats/store);
+
+///<summary>GET /_stats/warmer</summary>
+ConnectionStatus IndicesStatWarmerGET(/_stats/warmer);
+
+///<summary>GET /_stats/warmer</summary>
+Task<ConnectionStatus> IndicesStatWarmerGETAsync(/_stats/warmer);
+
+///<summary>GET /_stats</summary>
+ConnectionStatus IndicesStatsGET(/_stats);
+
+///<summary>GET /_stats</summary>
+Task<ConnectionStatus> IndicesStatsGETAsync(/_stats);
+
+///<summary>GET /{index}/_stats</summary>
+ConnectionStatus IndicesStatsGET(/{index}/_stats);
+
+///<summary>GET /{index}/_stats</summary>
+Task<ConnectionStatus> IndicesStatsGETAsync(/{index}/_stats);
+
+///<summary>GET /_status</summary>
+ConnectionStatus IndicesStatusGET(/_status);
+
+///<summary>GET /_status</summary>
+Task<ConnectionStatus> IndicesStatusGETAsync(/_status);
+
+///<summary>GET /{index}/_status</summary>
+ConnectionStatus IndicesStatusGET(/{index}/_status);
+
+///<summary>GET /{index}/_status</summary>
+Task<ConnectionStatus> IndicesStatusGETAsync(/{index}/_status);
+
+///<summary>GET /</summary>
+ConnectionStatus MainGET(/);
+
+///<summary>GET /</summary>
+Task<ConnectionStatus> MainGETAsync(/);
+
+///<summary>HEAD /</summary>
+ConnectionStatus MainHEAD(/);
+
+///<summary>HEAD /</summary>
+Task<ConnectionStatus> MainHEADAsync(/);
+
+///<summary>GET /_cat/master</summary>
+ConnectionStatus MasterGET(/_cat/master);
+
+///<summary>GET /_cat/master</summary>
+Task<ConnectionStatus> MasterGETAsync(/_cat/master);
+
+///<summary>GET /{index}/{type}/{id}/_mlt</summary>
+ConnectionStatus MoreLikeThisGET(/{index}/{type}/{id}/_mlt);
+
+///<summary>GET /{index}/{type}/{id}/_mlt</summary>
+Task<ConnectionStatus> MoreLikeThisGETAsync(/{index}/{type}/{id}/_mlt);
+
+///<summary>POST /{index}/{type}/{id}/_mlt</summary>
+ConnectionStatus MoreLikeThisPOST(/{index}/{type}/{id}/_mlt);
+
+///<summary>POST /{index}/{type}/{id}/_mlt</summary>
+Task<ConnectionStatus> MoreLikeThisPOSTAsync(/{index}/{type}/{id}/_mlt);
+
+///<summary>GET /_mget</summary>
+ConnectionStatus MultiGetGET(/_mget);
+
+///<summary>GET /_mget</summary>
+Task<ConnectionStatus> MultiGetGETAsync(/_mget);
+
+///<summary>GET /{index}/_mget</summary>
+ConnectionStatus MultiGetGET(/{index}/_mget);
+
+///<summary>GET /{index}/_mget</summary>
+Task<ConnectionStatus> MultiGetGETAsync(/{index}/_mget);
+
+///<summary>GET /{index}/{type}/_mget</summary>
+ConnectionStatus MultiGetGET(/{index}/{type}/_mget);
+
+///<summary>GET /{index}/{type}/_mget</summary>
+Task<ConnectionStatus> MultiGetGETAsync(/{index}/{type}/_mget);
+
+///<summary>POST /_mget</summary>
+ConnectionStatus MultiGetPOST(/_mget);
+
+///<summary>POST /_mget</summary>
+Task<ConnectionStatus> MultiGetPOSTAsync(/_mget);
+
+///<summary>POST /{index}/_mget</summary>
+ConnectionStatus MultiGetPOST(/{index}/_mget);
+
+///<summary>POST /{index}/_mget</summary>
+Task<ConnectionStatus> MultiGetPOSTAsync(/{index}/_mget);
+
+///<summary>POST /{index}/{type}/_mget</summary>
+ConnectionStatus MultiGetPOST(/{index}/{type}/_mget);
+
+///<summary>POST /{index}/{type}/_mget</summary>
+Task<ConnectionStatus> MultiGetPOSTAsync(/{index}/{type}/_mget);
+
+///<summary>POST /_mpercolate</summary>
+ConnectionStatus MultiPercolatePOST(/_mpercolate);
+
+///<summary>POST /_mpercolate</summary>
+Task<ConnectionStatus> MultiPercolatePOSTAsync(/_mpercolate);
+
+///<summary>POST /{index}/_mpercolate</summary>
+ConnectionStatus MultiPercolatePOST(/{index}/_mpercolate);
+
+///<summary>POST /{index}/_mpercolate</summary>
+Task<ConnectionStatus> MultiPercolatePOSTAsync(/{index}/_mpercolate);
+
+///<summary>POST /{index}/{type}/_mpercolate</summary>
+ConnectionStatus MultiPercolatePOST(/{index}/{type}/_mpercolate);
+
+///<summary>POST /{index}/{type}/_mpercolate</summary>
+Task<ConnectionStatus> MultiPercolatePOSTAsync(/{index}/{type}/_mpercolate);
+
+///<summary>GET /_msearch</summary>
+ConnectionStatus MultiSearchGET(/_msearch);
+
+///<summary>GET /_msearch</summary>
+Task<ConnectionStatus> MultiSearchGETAsync(/_msearch);
+
+///<summary>GET /{index}/_msearch</summary>
+ConnectionStatus MultiSearchGET(/{index}/_msearch);
+
+///<summary>GET /{index}/_msearch</summary>
+Task<ConnectionStatus> MultiSearchGETAsync(/{index}/_msearch);
+
+///<summary>GET /{index}/{type}/_msearch</summary>
+ConnectionStatus MultiSearchGET(/{index}/{type}/_msearch);
+
+///<summary>GET /{index}/{type}/_msearch</summary>
+Task<ConnectionStatus> MultiSearchGETAsync(/{index}/{type}/_msearch);
+
+///<summary>POST /_msearch</summary>
+ConnectionStatus MultiSearchPOST(/_msearch);
+
+///<summary>POST /_msearch</summary>
+Task<ConnectionStatus> MultiSearchPOSTAsync(/_msearch);
+
+///<summary>POST /{index}/_msearch</summary>
+ConnectionStatus MultiSearchPOST(/{index}/_msearch);
+
+///<summary>POST /{index}/_msearch</summary>
+Task<ConnectionStatus> MultiSearchPOSTAsync(/{index}/_msearch);
+
+///<summary>POST /{index}/{type}/_msearch</summary>
+ConnectionStatus MultiSearchPOST(/{index}/{type}/_msearch);
+
+///<summary>POST /{index}/{type}/_msearch</summary>
+Task<ConnectionStatus> MultiSearchPOSTAsync(/{index}/{type}/_msearch);
+
+///<summary>GET /_mtermvectors</summary>
+ConnectionStatus MultiTermVectorsGET(/_mtermvectors);
+
+///<summary>GET /_mtermvectors</summary>
+Task<ConnectionStatus> MultiTermVectorsGETAsync(/_mtermvectors);
+
+///<summary>GET /{index}/_mtermvectors</summary>
+ConnectionStatus MultiTermVectorsGET(/{index}/_mtermvectors);
+
+///<summary>GET /{index}/_mtermvectors</summary>
+Task<ConnectionStatus> MultiTermVectorsGETAsync(/{index}/_mtermvectors);
+
+///<summary>GET /{index}/{type}/_mtermvectors</summary>
+ConnectionStatus MultiTermVectorsGET(/{index}/{type}/_mtermvectors);
+
+///<summary>GET /{index}/{type}/_mtermvectors</summary>
+Task<ConnectionStatus> MultiTermVectorsGETAsync(/{index}/{type}/_mtermvectors);
+
+///<summary>POST /_mtermvectors</summary>
+ConnectionStatus MultiTermVectorsPOST(/_mtermvectors);
+
+///<summary>POST /_mtermvectors</summary>
+Task<ConnectionStatus> MultiTermVectorsPOSTAsync(/_mtermvectors);
+
+///<summary>POST /{index}/_mtermvectors</summary>
+ConnectionStatus MultiTermVectorsPOST(/{index}/_mtermvectors);
+
+///<summary>POST /{index}/_mtermvectors</summary>
+Task<ConnectionStatus> MultiTermVectorsPOSTAsync(/{index}/_mtermvectors);
+
+///<summary>POST /{index}/{type}/_mtermvectors</summary>
+ConnectionStatus MultiTermVectorsPOST(/{index}/{type}/_mtermvectors);
+
+///<summary>POST /{index}/{type}/_mtermvectors</summary>
+Task<ConnectionStatus> MultiTermVectorsPOSTAsync(/{index}/{type}/_mtermvectors);
+
+///<summary>GET /_nodes/{nodeId}/http</summary>
+ConnectionStatus NodeInfoHttpGET(/_nodes/{nodeId}/http);
+
+///<summary>GET /_nodes/{nodeId}/http</summary>
+Task<ConnectionStatus> NodeInfoHttpGETAsync(/_nodes/{nodeId}/http);
+
+///<summary>GET /_nodes/{nodeId}/jvm</summary>
+ConnectionStatus NodeInfoJvmGET(/_nodes/{nodeId}/jvm);
+
+///<summary>GET /_nodes/{nodeId}/jvm</summary>
+Task<ConnectionStatus> NodeInfoJvmGETAsync(/_nodes/{nodeId}/jvm);
+
+///<summary>GET /_nodes/{nodeId}/network</summary>
+ConnectionStatus NodeInfoNetworkGET(/_nodes/{nodeId}/network);
+
+///<summary>GET /_nodes/{nodeId}/network</summary>
+Task<ConnectionStatus> NodeInfoNetworkGETAsync(/_nodes/{nodeId}/network);
+
+///<summary>GET /_nodes/{nodeId}/os</summary>
+ConnectionStatus NodeInfoOsGET(/_nodes/{nodeId}/os);
+
+///<summary>GET /_nodes/{nodeId}/os</summary>
+Task<ConnectionStatus> NodeInfoOsGETAsync(/_nodes/{nodeId}/os);
+
+///<summary>GET /_nodes/{nodeId}/plugin</summary>
+ConnectionStatus NodeInfoPluginGET(/_nodes/{nodeId}/plugin);
+
+///<summary>GET /_nodes/{nodeId}/plugin</summary>
+Task<ConnectionStatus> NodeInfoPluginGETAsync(/_nodes/{nodeId}/plugin);
+
+///<summary>GET /_nodes/{nodeId}/process</summary>
+ConnectionStatus NodeInfoProcessGET(/_nodes/{nodeId}/process);
+
+///<summary>GET /_nodes/{nodeId}/process</summary>
+Task<ConnectionStatus> NodeInfoProcessGETAsync(/_nodes/{nodeId}/process);
+
+///<summary>GET /_nodes/{nodeId}/settings</summary>
+ConnectionStatus NodeInfoSettingsGET(/_nodes/{nodeId}/settings);
+
+///<summary>GET /_nodes/{nodeId}/settings</summary>
+Task<ConnectionStatus> NodeInfoSettingsGETAsync(/_nodes/{nodeId}/settings);
+
+///<summary>GET /_nodes/{nodeId}/thread_pool</summary>
+ConnectionStatus NodeInfoThread_poolGET(/_nodes/{nodeId}/thread_pool);
+
+///<summary>GET /_nodes/{nodeId}/thread_pool</summary>
+Task<ConnectionStatus> NodeInfoThread_poolGETAsync(/_nodes/{nodeId}/thread_pool);
+
+///<summary>GET /_nodes/{nodeId}/transport</summary>
+ConnectionStatus NodeInfoTransportGET(/_nodes/{nodeId}/transport);
+
+///<summary>GET /_nodes/{nodeId}/transport</summary>
+Task<ConnectionStatus> NodeInfoTransportGETAsync(/_nodes/{nodeId}/transport);
+
+///<summary>GET /_nodes/{nodeId}/stats/fs</summary>
+ConnectionStatus NodeStatsFsGET(/_nodes/{nodeId}/stats/fs);
+
+///<summary>GET /_nodes/{nodeId}/stats/fs</summary>
+Task<ConnectionStatus> NodeStatsFsGETAsync(/_nodes/{nodeId}/stats/fs);
+
+///<summary>GET /_nodes/{nodeId}/stats/http</summary>
+ConnectionStatus NodeStatsHttpGET(/_nodes/{nodeId}/stats/http);
+
+///<summary>GET /_nodes/{nodeId}/stats/http</summary>
+Task<ConnectionStatus> NodeStatsHttpGETAsync(/_nodes/{nodeId}/stats/http);
+
+///<summary>GET /_nodes/{nodeId}/stats/indices</summary>
+ConnectionStatus NodeStatsIndicesGET(/_nodes/{nodeId}/stats/indices);
+
+///<summary>GET /_nodes/{nodeId}/stats/indices</summary>
+Task<ConnectionStatus> NodeStatsIndicesGETAsync(/_nodes/{nodeId}/stats/indices);
+
+///<summary>GET /_nodes/{nodeId}/stats/indices/{flags}</summary>
+ConnectionStatus NodeStatsIndicesGET(/_nodes/{nodeId}/stats/indices/{flags});
+
+///<summary>GET /_nodes/{nodeId}/stats/indices/{flags}</summary>
+Task<ConnectionStatus> NodeStatsIndicesGETAsync(/_nodes/{nodeId}/stats/indices/{flags});
+
+///<summary>GET /_nodes/{nodeId}/stats/indices/{flags}/{fields}</summary>
+ConnectionStatus NodeStatsIndicesGET(/_nodes/{nodeId}/stats/indices/{flags}/{fields});
+
+///<summary>GET /_nodes/{nodeId}/stats/indices/{flags}/{fields}</summary>
+Task<ConnectionStatus> NodeStatsIndicesGETAsync(/_nodes/{nodeId}/stats/indices/{flags}/{fields});
+
+///<summary>GET /_nodes/{nodeId}/stats/jvm</summary>
+ConnectionStatus NodeStatsJvmGET(/_nodes/{nodeId}/stats/jvm);
+
+///<summary>GET /_nodes/{nodeId}/stats/jvm</summary>
+Task<ConnectionStatus> NodeStatsJvmGETAsync(/_nodes/{nodeId}/stats/jvm);
+
+///<summary>GET /_nodes/{nodeId}/stats/network</summary>
+ConnectionStatus NodeStatsNetworkGET(/_nodes/{nodeId}/stats/network);
+
+///<summary>GET /_nodes/{nodeId}/stats/network</summary>
+Task<ConnectionStatus> NodeStatsNetworkGETAsync(/_nodes/{nodeId}/stats/network);
+
+///<summary>GET /_nodes/{nodeId}/stats/os</summary>
+ConnectionStatus NodeStatsOsGET(/_nodes/{nodeId}/stats/os);
+
+///<summary>GET /_nodes/{nodeId}/stats/os</summary>
+Task<ConnectionStatus> NodeStatsOsGETAsync(/_nodes/{nodeId}/stats/os);
+
+///<summary>GET /_nodes/{nodeId}/stats/process</summary>
+ConnectionStatus NodeStatsProcessGET(/_nodes/{nodeId}/stats/process);
+
+///<summary>GET /_nodes/{nodeId}/stats/process</summary>
+Task<ConnectionStatus> NodeStatsProcessGETAsync(/_nodes/{nodeId}/stats/process);
+
+///<summary>GET /_nodes/{nodeId}/stats/thread_pool</summary>
+ConnectionStatus NodeStatsThread_poolGET(/_nodes/{nodeId}/stats/thread_pool);
+
+///<summary>GET /_nodes/{nodeId}/stats/thread_pool</summary>
+Task<ConnectionStatus> NodeStatsThread_poolGETAsync(/_nodes/{nodeId}/stats/thread_pool);
+
+///<summary>GET /_nodes/{nodeId}/stats/transport</summary>
+ConnectionStatus NodeStatsTransportGET(/_nodes/{nodeId}/stats/transport);
+
+///<summary>GET /_nodes/{nodeId}/stats/transport</summary>
+Task<ConnectionStatus> NodeStatsTransportGETAsync(/_nodes/{nodeId}/stats/transport);
+
+///<summary>GET /_cat/nodes</summary>
+ConnectionStatus NodesGET(/_cat/nodes);
+
+///<summary>GET /_cat/nodes</summary>
+Task<ConnectionStatus> NodesGETAsync(/_cat/nodes);
+
+///<summary>GET /_nodes/hot_threads</summary>
+ConnectionStatus NodesHotThreadsGET(/_nodes/hot_threads);
+
+///<summary>GET /_nodes/hot_threads</summary>
+Task<ConnectionStatus> NodesHotThreadsGETAsync(/_nodes/hot_threads);
+
+///<summary>GET /_nodes/{nodeId}/hot_threads</summary>
+ConnectionStatus NodesHotThreadsGET(/_nodes/{nodeId}/hot_threads);
+
+///<summary>GET /_nodes/{nodeId}/hot_threads</summary>
+Task<ConnectionStatus> NodesHotThreadsGETAsync(/_nodes/{nodeId}/hot_threads);
+
+///<summary>GET /_nodes</summary>
+ConnectionStatus NodesInfoGET(/_nodes);
+
+///<summary>GET /_nodes</summary>
+Task<ConnectionStatus> NodesInfoGETAsync(/_nodes);
+
+///<summary>GET /_nodes/{nodeId}</summary>
+ConnectionStatus NodesInfoGET(/_nodes/{nodeId});
+
+///<summary>GET /_nodes/{nodeId}</summary>
+Task<ConnectionStatus> NodesInfoGETAsync(/_nodes/{nodeId});
+
+///<summary>GET /_nodes/http</summary>
+ConnectionStatus NodesInfoHttpGET(/_nodes/http);
+
+///<summary>GET /_nodes/http</summary>
+Task<ConnectionStatus> NodesInfoHttpGETAsync(/_nodes/http);
+
+///<summary>GET /_nodes/jvm</summary>
+ConnectionStatus NodesInfoJvmGET(/_nodes/jvm);
+
+///<summary>GET /_nodes/jvm</summary>
+Task<ConnectionStatus> NodesInfoJvmGETAsync(/_nodes/jvm);
+
+///<summary>GET /_nodes/network</summary>
+ConnectionStatus NodesInfoNetworkGET(/_nodes/network);
+
+///<summary>GET /_nodes/network</summary>
+Task<ConnectionStatus> NodesInfoNetworkGETAsync(/_nodes/network);
+
+///<summary>GET /_nodes/os</summary>
+ConnectionStatus NodesInfoOsGET(/_nodes/os);
+
+///<summary>GET /_nodes/os</summary>
+Task<ConnectionStatus> NodesInfoOsGETAsync(/_nodes/os);
+
+///<summary>GET /_nodes/plugin</summary>
+ConnectionStatus NodesInfoPluginGET(/_nodes/plugin);
+
+///<summary>GET /_nodes/plugin</summary>
+Task<ConnectionStatus> NodesInfoPluginGETAsync(/_nodes/plugin);
+
+///<summary>GET /_nodes/process</summary>
+ConnectionStatus NodesInfoProcessGET(/_nodes/process);
+
+///<summary>GET /_nodes/process</summary>
+Task<ConnectionStatus> NodesInfoProcessGETAsync(/_nodes/process);
+
+///<summary>GET /_nodes/settings</summary>
+ConnectionStatus NodesInfoSettingsGET(/_nodes/settings);
+
+///<summary>GET /_nodes/settings</summary>
+Task<ConnectionStatus> NodesInfoSettingsGETAsync(/_nodes/settings);
+
+///<summary>GET /_nodes/thread_pool</summary>
+ConnectionStatus NodesInfoThread_poolGET(/_nodes/thread_pool);
+
+///<summary>GET /_nodes/thread_pool</summary>
+Task<ConnectionStatus> NodesInfoThread_poolGETAsync(/_nodes/thread_pool);
+
+///<summary>GET /_nodes/transport</summary>
+ConnectionStatus NodesInfoTransportGET(/_nodes/transport);
+
+///<summary>GET /_nodes/transport</summary>
+Task<ConnectionStatus> NodesInfoTransportGETAsync(/_nodes/transport);
+
+///<summary>POST /_cluster/nodes/_restart</summary>
+ConnectionStatus NodesRestartPOST(/_cluster/nodes/_restart);
+
+///<summary>POST /_cluster/nodes/_restart</summary>
+Task<ConnectionStatus> NodesRestartPOSTAsync(/_cluster/nodes/_restart);
+
+///<summary>POST /_cluster/nodes/{nodeId}/_restart</summary>
+ConnectionStatus NodesRestartPOST(/_cluster/nodes/{nodeId}/_restart);
+
+///<summary>POST /_cluster/nodes/{nodeId}/_restart</summary>
+Task<ConnectionStatus> NodesRestartPOSTAsync(/_cluster/nodes/{nodeId}/_restart);
+
+///<summary>POST /_cluster/nodes/{nodeId}/_shutdown</summary>
+ConnectionStatus NodesShutdownPOST(/_cluster/nodes/{nodeId}/_shutdown);
+
+///<summary>POST /_cluster/nodes/{nodeId}/_shutdown</summary>
+Task<ConnectionStatus> NodesShutdownPOSTAsync(/_cluster/nodes/{nodeId}/_shutdown);
+
+///<summary>POST /_shutdown</summary>
+ConnectionStatus NodesShutdownPOST(/_shutdown);
+
+///<summary>POST /_shutdown</summary>
+Task<ConnectionStatus> NodesShutdownPOSTAsync(/_shutdown);
+
+///<summary>GET /_nodes/stats</summary>
+ConnectionStatus NodesStatsGET(/_nodes/stats);
+
+///<summary>GET /_nodes/stats</summary>
+Task<ConnectionStatus> NodesStatsGETAsync(/_nodes/stats);
+
+///<summary>GET /_nodes/{nodeId}/stats</summary>
+ConnectionStatus NodesStatsGET(/_nodes/{nodeId}/stats);
+
+///<summary>GET /_nodes/{nodeId}/stats</summary>
+Task<ConnectionStatus> NodesStatsGETAsync(/_nodes/{nodeId}/stats);
+
+///<summary>GET /_nodes/stats/fs</summary>
+ConnectionStatus NodesStatsFsGET(/_nodes/stats/fs);
+
+///<summary>GET /_nodes/stats/fs</summary>
+Task<ConnectionStatus> NodesStatsFsGETAsync(/_nodes/stats/fs);
+
+///<summary>GET /_nodes/stats/http</summary>
+ConnectionStatus NodesStatsHttpGET(/_nodes/stats/http);
+
+///<summary>GET /_nodes/stats/http</summary>
+Task<ConnectionStatus> NodesStatsHttpGETAsync(/_nodes/stats/http);
+
+///<summary>GET /_nodes/stats/indices</summary>
+ConnectionStatus NodesStatsIndicesGET(/_nodes/stats/indices);
+
+///<summary>GET /_nodes/stats/indices</summary>
+Task<ConnectionStatus> NodesStatsIndicesGETAsync(/_nodes/stats/indices);
+
+///<summary>GET /_nodes/stats/indices/{flags}</summary>
+ConnectionStatus NodesStatsIndicesGET(/_nodes/stats/indices/{flags});
+
+///<summary>GET /_nodes/stats/indices/{flags}</summary>
+Task<ConnectionStatus> NodesStatsIndicesGETAsync(/_nodes/stats/indices/{flags});
+
+///<summary>GET /_nodes/stats/indices/{flags}/{fields}</summary>
+ConnectionStatus NodesStatsIndicesGET(/_nodes/stats/indices/{flags}/{fields});
+
+///<summary>GET /_nodes/stats/indices/{flags}/{fields}</summary>
+Task<ConnectionStatus> NodesStatsIndicesGETAsync(/_nodes/stats/indices/{flags}/{fields});
+
+///<summary>GET /_nodes/stats/jvm</summary>
+ConnectionStatus NodesStatsJvmGET(/_nodes/stats/jvm);
+
+///<summary>GET /_nodes/stats/jvm</summary>
+Task<ConnectionStatus> NodesStatsJvmGETAsync(/_nodes/stats/jvm);
+
+///<summary>GET /_nodes/stats/network</summary>
+ConnectionStatus NodesStatsNetworkGET(/_nodes/stats/network);
+
+///<summary>GET /_nodes/stats/network</summary>
+Task<ConnectionStatus> NodesStatsNetworkGETAsync(/_nodes/stats/network);
+
+///<summary>GET /_nodes/stats/os</summary>
+ConnectionStatus NodesStatsOsGET(/_nodes/stats/os);
+
+///<summary>GET /_nodes/stats/os</summary>
+Task<ConnectionStatus> NodesStatsOsGETAsync(/_nodes/stats/os);
+
+///<summary>GET /_nodes/stats/process</summary>
+ConnectionStatus NodesStatsProcessGET(/_nodes/stats/process);
+
+///<summary>GET /_nodes/stats/process</summary>
+Task<ConnectionStatus> NodesStatsProcessGETAsync(/_nodes/stats/process);
+
+///<summary>GET /_nodes/stats/thread_pool</summary>
+ConnectionStatus NodesStatsThread_poolGET(/_nodes/stats/thread_pool);
+
+///<summary>GET /_nodes/stats/thread_pool</summary>
+Task<ConnectionStatus> NodesStatsThread_poolGETAsync(/_nodes/stats/thread_pool);
+
+///<summary>GET /_nodes/stats/transport</summary>
+ConnectionStatus NodesStatsTransportGET(/_nodes/stats/transport);
+
+///<summary>GET /_nodes/stats/transport</summary>
+Task<ConnectionStatus> NodesStatsTransportGETAsync(/_nodes/stats/transport);
+
+///<summary>POST /_open</summary>
+ConnectionStatus OpenIndexPOST(/_open);
+
+///<summary>POST /_open</summary>
+Task<ConnectionStatus> OpenIndexPOSTAsync(/_open);
+
+///<summary>POST /{index}/_open</summary>
+ConnectionStatus OpenIndexPOST(/{index}/_open);
+
+///<summary>POST /{index}/_open</summary>
+Task<ConnectionStatus> OpenIndexPOSTAsync(/{index}/_open);
+
+///<summary>GET /_optimize</summary>
+ConnectionStatus OptimizeGET(/_optimize);
+
+///<summary>GET /_optimize</summary>
+Task<ConnectionStatus> OptimizeGETAsync(/_optimize);
+
+///<summary>GET /{index}/_optimize</summary>
+ConnectionStatus OptimizeGET(/{index}/_optimize);
+
+///<summary>GET /{index}/_optimize</summary>
+Task<ConnectionStatus> OptimizeGETAsync(/{index}/_optimize);
+
+///<summary>POST /_optimize</summary>
+ConnectionStatus OptimizePOST(/_optimize);
+
+///<summary>POST /_optimize</summary>
+Task<ConnectionStatus> OptimizePOSTAsync(/_optimize);
+
+///<summary>POST /{index}/_optimize</summary>
+ConnectionStatus OptimizePOST(/{index}/_optimize);
+
+///<summary>POST /{index}/_optimize</summary>
+Task<ConnectionStatus> OptimizePOSTAsync(/{index}/_optimize);
+
+///<summary>GET /_cluster/pending_tasks</summary>
+ConnectionStatus PendingClusterTasksGET(/_cluster/pending_tasks);
+
+///<summary>GET /_cluster/pending_tasks</summary>
+Task<ConnectionStatus> PendingClusterTasksGETAsync(/_cluster/pending_tasks);
+
+///<summary>GET /{index}/{type}/_percolate</summary>
+ConnectionStatus PercolateGET(/{index}/{type}/_percolate);
+
+///<summary>GET /{index}/{type}/_percolate</summary>
+Task<ConnectionStatus> PercolateGETAsync(/{index}/{type}/_percolate);
+
+///<summary>GET /{index}/{type}/{id}/_percolate</summary>
+ConnectionStatus PercolateGET(/{index}/{type}/{id}/_percolate);
+
+///<summary>GET /{index}/{type}/{id}/_percolate</summary>
+Task<ConnectionStatus> PercolateGETAsync(/{index}/{type}/{id}/_percolate);
+
+///<summary>POST /{index}/{type}/_percolate</summary>
+ConnectionStatus PercolatePOST(/{index}/{type}/_percolate);
+
+///<summary>POST /{index}/{type}/_percolate</summary>
+Task<ConnectionStatus> PercolatePOSTAsync(/{index}/{type}/_percolate);
+
+///<summary>POST /{index}/{type}/{id}/_percolate</summary>
+ConnectionStatus PercolatePOST(/{index}/{type}/{id}/_percolate);
+
+///<summary>POST /{index}/{type}/{id}/_percolate</summary>
+Task<ConnectionStatus> PercolatePOSTAsync(/{index}/{type}/{id}/_percolate);
+
+///<summary>GET /{index}/{type}/_percolate/count</summary>
+ConnectionStatus PercolateCountGET(/{index}/{type}/_percolate/count);
+
+///<summary>GET /{index}/{type}/_percolate/count</summary>
+Task<ConnectionStatus> PercolateCountGETAsync(/{index}/{type}/_percolate/count);
+
+///<summary>GET /{index}/{type}/{id}/_percolate/count</summary>
+ConnectionStatus PercolateCountGET(/{index}/{type}/{id}/_percolate/count);
+
+///<summary>GET /{index}/{type}/{id}/_percolate/count</summary>
+Task<ConnectionStatus> PercolateCountGETAsync(/{index}/{type}/{id}/_percolate/count);
+
+///<summary>POST /{index}/{type}/_percolate/count</summary>
+ConnectionStatus PercolateCountPOST(/{index}/{type}/_percolate/count);
+
+///<summary>POST /{index}/{type}/_percolate/count</summary>
+Task<ConnectionStatus> PercolateCountPOSTAsync(/{index}/{type}/_percolate/count);
+
+///<summary>POST /{index}/{type}/{id}/_percolate/count</summary>
+ConnectionStatus PercolateCountPOST(/{index}/{type}/{id}/_percolate/count);
+
+///<summary>POST /{index}/{type}/{id}/_percolate/count</summary>
+Task<ConnectionStatus> PercolateCountPOSTAsync(/{index}/{type}/{id}/_percolate/count);
+
+///<summary>POST /_template/{name}</summary>
+ConnectionStatus PutIndexTemplatePOST(/_template/{name});
+
+///<summary>POST /_template/{name}</summary>
+Task<ConnectionStatus> PutIndexTemplatePOSTAsync(/_template/{name});
+
+///<summary>PUT /_template/{name}</summary>
+ConnectionStatus PutIndexTemplatePUT(/_template/{name});
+
+///<summary>PUT /_template/{name}</summary>
+Task<ConnectionStatus> PutIndexTemplatePUTAsync(/_template/{name});
+
+///<summary>POST /{index}/_mapping</summary>
+ConnectionStatus PutMappingPOST(/{index}/_mapping);
+
+///<summary>POST /{index}/_mapping</summary>
+Task<ConnectionStatus> PutMappingPOSTAsync(/{index}/_mapping);
+
+///<summary>POST /{index}/{type}/_mapping</summary>
+ConnectionStatus PutMappingPOST(/{index}/{type}/_mapping);
+
+///<summary>POST /{index}/{type}/_mapping</summary>
+Task<ConnectionStatus> PutMappingPOSTAsync(/{index}/{type}/_mapping);
+
+///<summary>PUT /{index}/_mapping</summary>
+ConnectionStatus PutMappingPUT(/{index}/_mapping);
+
+///<summary>PUT /{index}/_mapping</summary>
+Task<ConnectionStatus> PutMappingPUTAsync(/{index}/_mapping);
+
+///<summary>PUT /{index}/{type}/_mapping</summary>
+ConnectionStatus PutMappingPUT(/{index}/{type}/_mapping);
+
+///<summary>PUT /{index}/{type}/_mapping</summary>
+Task<ConnectionStatus> PutMappingPUTAsync(/{index}/{type}/_mapping);
+
+///<summary>PUT /{index}/_warmer/{name}</summary>
+ConnectionStatus PutWarmerPUT(/{index}/_warmer/{name});
+
+///<summary>PUT /{index}/_warmer/{name}</summary>
+Task<ConnectionStatus> PutWarmerPUTAsync(/{index}/_warmer/{name});
+
+///<summary>PUT /{index}/{type}/_warmer/{name}</summary>
+ConnectionStatus PutWarmerPUT(/{index}/{type}/_warmer/{name});
+
+///<summary>PUT /{index}/{type}/_warmer/{name}</summary>
+Task<ConnectionStatus> PutWarmerPUTAsync(/{index}/{type}/_warmer/{name});
+
+///<summary>GET /_refresh</summary>
+ConnectionStatus RefreshGET(/_refresh);
+
+///<summary>GET /_refresh</summary>
+Task<ConnectionStatus> RefreshGETAsync(/_refresh);
+
+///<summary>GET /{index}/_refresh</summary>
+ConnectionStatus RefreshGET(/{index}/_refresh);
+
+///<summary>GET /{index}/_refresh</summary>
+Task<ConnectionStatus> RefreshGETAsync(/{index}/_refresh);
+
+///<summary>POST /_refresh</summary>
+ConnectionStatus RefreshPOST(/_refresh);
+
+///<summary>POST /_refresh</summary>
+Task<ConnectionStatus> RefreshPOSTAsync(/_refresh);
+
+///<summary>POST /{index}/_refresh</summary>
+ConnectionStatus RefreshPOST(/{index}/_refresh);
+
+///<summary>POST /{index}/_refresh</summary>
+Task<ConnectionStatus> RefreshPOSTAsync(/{index}/_refresh);
+
+///<summary>GET /_search</summary>
+ConnectionStatus SearchGET(/_search);
+
+///<summary>GET /_search</summary>
+Task<ConnectionStatus> SearchGETAsync(/_search);
+
+///<summary>GET /{index}/_search</summary>
+ConnectionStatus SearchGET(/{index}/_search);
+
+///<summary>GET /{index}/_search</summary>
+Task<ConnectionStatus> SearchGETAsync(/{index}/_search);
+
+///<summary>GET /{index}/{type}/_search</summary>
+ConnectionStatus SearchGET(/{index}/{type}/_search);
+
+///<summary>GET /{index}/{type}/_search</summary>
+Task<ConnectionStatus> SearchGETAsync(/{index}/{type}/_search);
+
+///<summary>POST /_search</summary>
+ConnectionStatus SearchPOST(/_search);
+
+///<summary>POST /_search</summary>
+Task<ConnectionStatus> SearchPOSTAsync(/_search);
+
+///<summary>POST /{index}/_search</summary>
+ConnectionStatus SearchPOST(/{index}/_search);
+
+///<summary>POST /{index}/_search</summary>
+Task<ConnectionStatus> SearchPOSTAsync(/{index}/_search);
+
+///<summary>POST /{index}/{type}/_search</summary>
+ConnectionStatus SearchPOST(/{index}/{type}/_search);
+
+///<summary>POST /{index}/{type}/_search</summary>
+Task<ConnectionStatus> SearchPOSTAsync(/{index}/{type}/_search);
+
+///<summary>GET /_search/scroll</summary>
+ConnectionStatus SearchScrollGET(/_search/scroll);
+
+///<summary>GET /_search/scroll</summary>
+Task<ConnectionStatus> SearchScrollGETAsync(/_search/scroll);
+
+///<summary>GET /_search/scroll/{scroll_id}</summary>
+ConnectionStatus SearchScrollGET(/_search/scroll/{scroll_id});
+
+///<summary>GET /_search/scroll/{scroll_id}</summary>
+Task<ConnectionStatus> SearchScrollGETAsync(/_search/scroll/{scroll_id});
+
+///<summary>POST /_search/scroll</summary>
+ConnectionStatus SearchScrollPOST(/_search/scroll);
+
+///<summary>POST /_search/scroll</summary>
+Task<ConnectionStatus> SearchScrollPOSTAsync(/_search/scroll);
+
+///<summary>POST /_search/scroll/{scroll_id}</summary>
+ConnectionStatus SearchScrollPOST(/_search/scroll/{scroll_id});
+
+///<summary>POST /_search/scroll/{scroll_id}</summary>
+Task<ConnectionStatus> SearchScrollPOSTAsync(/_search/scroll/{scroll_id});
+
+///<summary>GET /_cat/shards</summary>
+ConnectionStatus ShardsGET(/_cat/shards);
+
+///<summary>GET /_cat/shards</summary>
+Task<ConnectionStatus> ShardsGETAsync(/_cat/shards);
+
+///<summary>GET /_suggest</summary>
+ConnectionStatus SuggestGET(/_suggest);
+
+///<summary>GET /_suggest</summary>
+Task<ConnectionStatus> SuggestGETAsync(/_suggest);
+
+///<summary>GET /{index}/_suggest</summary>
+ConnectionStatus SuggestGET(/{index}/_suggest);
+
+///<summary>GET /{index}/_suggest</summary>
+Task<ConnectionStatus> SuggestGETAsync(/{index}/_suggest);
+
+///<summary>POST /_suggest</summary>
+ConnectionStatus SuggestPOST(/_suggest);
+
+///<summary>POST /_suggest</summary>
+Task<ConnectionStatus> SuggestPOSTAsync(/_suggest);
+
+///<summary>POST /{index}/_suggest</summary>
+ConnectionStatus SuggestPOST(/{index}/_suggest);
+
+///<summary>POST /{index}/_suggest</summary>
+Task<ConnectionStatus> SuggestPOSTAsync(/{index}/_suggest);
+
+///<summary>GET /{index}/{type}/{id}/_termvector</summary>
+ConnectionStatus TermVectorGET(/{index}/{type}/{id}/_termvector);
+
+///<summary>GET /{index}/{type}/{id}/_termvector</summary>
+Task<ConnectionStatus> TermVectorGETAsync(/{index}/{type}/{id}/_termvector);
+
+///<summary>POST /{index}/{type}/{id}/_termvector</summary>
+ConnectionStatus TermVectorPOST(/{index}/{type}/{id}/_termvector);
+
+///<summary>POST /{index}/{type}/{id}/_termvector</summary>
+Task<ConnectionStatus> TermVectorPOSTAsync(/{index}/{type}/{id}/_termvector);
+
+///<summary>HEAD /{index}/{type}</summary>
+ConnectionStatus TypesExistsHEAD(/{index}/{type});
+
+///<summary>HEAD /{index}/{type}</summary>
+Task<ConnectionStatus> TypesExistsHEADAsync(/{index}/{type});
+
+///<summary>POST /{index}/{type}/{id}/_update</summary>
+ConnectionStatus UpdatePOST(/{index}/{type}/{id}/_update);
+
+///<summary>POST /{index}/{type}/{id}/_update</summary>
+Task<ConnectionStatus> UpdatePOSTAsync(/{index}/{type}/{id}/_update);
+
+///<summary>PUT /_settings</summary>
+ConnectionStatus UpdateSettingsPUT(/_settings);
+
+///<summary>PUT /_settings</summary>
+Task<ConnectionStatus> UpdateSettingsPUTAsync(/_settings);
+
+///<summary>PUT /{index}/_settings</summary>
+ConnectionStatus UpdateSettingsPUT(/{index}/_settings);
+
+///<summary>PUT /{index}/_settings</summary>
+Task<ConnectionStatus> UpdateSettingsPUTAsync(/{index}/_settings);
+
+///<summary>GET /_validate/query</summary>
+ConnectionStatus ValidateQueryGET(/_validate/query);
+
+///<summary>GET /_validate/query</summary>
+Task<ConnectionStatus> ValidateQueryGETAsync(/_validate/query);
+
+///<summary>GET /{index}/_validate/query</summary>
+ConnectionStatus ValidateQueryGET(/{index}/_validate/query);
+
+///<summary>GET /{index}/_validate/query</summary>
+Task<ConnectionStatus> ValidateQueryGETAsync(/{index}/_validate/query);
+
+///<summary>GET /{index}/{type}/_validate/query</summary>
+ConnectionStatus ValidateQueryGET(/{index}/{type}/_validate/query);
+
+///<summary>GET /{index}/{type}/_validate/query</summary>
+Task<ConnectionStatus> ValidateQueryGETAsync(/{index}/{type}/_validate/query);
+
+///<summary>POST /_validate/query</summary>
+ConnectionStatus ValidateQueryPOST(/_validate/query);
+
+///<summary>POST /_validate/query</summary>
+Task<ConnectionStatus> ValidateQueryPOSTAsync(/_validate/query);
+
+///<summary>POST /{index}/_validate/query</summary>
+ConnectionStatus ValidateQueryPOST(/{index}/_validate/query);
+
+///<summary>POST /{index}/_validate/query</summary>
+Task<ConnectionStatus> ValidateQueryPOSTAsync(/{index}/_validate/query);
+
+///<summary>POST /{index}/{type}/_validate/query</summary>
+ConnectionStatus ValidateQueryPOST(/{index}/{type}/_validate/query);
+
+///<summary>POST /{index}/{type}/_validate/query</summary>
+Task<ConnectionStatus> ValidateQueryPOSTAsync(/{index}/{type}/_validate/query);
+
