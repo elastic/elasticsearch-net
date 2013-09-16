@@ -161,8 +161,5 @@ namespace Nest
 		}
 
 
-
-
-
 	}
 }
