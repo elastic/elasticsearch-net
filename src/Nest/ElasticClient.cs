@@ -45,6 +45,8 @@ namespace Nest
 			}
 		}
 
+		public IRawElasticClient Raw { get; private set; }
+
 		public ElasticClient(IConnectionSettings settings)
 			: this(settings, new Connection(settings))
 		{
@@ -71,6 +73,8 @@ namespace Nest
 			indexSettings.ContractResolver = new ElasticCamelCaseResolver(this.Settings);
 			this.IndexSerializationSettings = indexSettings;
 			this.PropertyNameResolver = new PropertyNameResolver();
+
+			this.Raw = new RawElasticClient(this.Settings, connection);
 
 		}
 
