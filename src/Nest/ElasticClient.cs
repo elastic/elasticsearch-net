@@ -87,7 +87,7 @@ namespace Nest
 			}
 			catch (Exception e)
 			{
-				status = new ConnectionStatus(e);
+				status = new ConnectionStatus(this.Settings, e);
 			}
 			return false;
 		}
@@ -159,7 +159,7 @@ namespace Nest
 			catch (Exception e)
 			{
 				this._IsValid = false;
-				return new ConnectionStatus(e);
+				return new ConnectionStatus(this.Settings, e);
 			}
 
 		}

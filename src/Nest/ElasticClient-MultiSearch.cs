@@ -62,7 +62,7 @@ namespace Nest
 			}
 			var status = this.Connection.PostSync(path, json);
 
-			var multiSearchConverter = new MultiSearchConverter(multiSearchDescriptor);
+			var multiSearchConverter = new MultiSearchConverter(this.Settings, multiSearchDescriptor);
 			var multiSearchResponse = this.ToParsedResponse<MultiSearchResponse>(status, 
 				extraConverters: new List<JsonConverter> 
 				{ 
