@@ -12,21 +12,14 @@ namespace Nest
 	{
 		internal readonly PropertyNameResolver PropertyNameResolver;
 		
-		/// <summary>
-		/// serialize an object using the internal registered converters without camelcasing properties as is done 
-		/// while indexing objects
-		/// </summary>
-		public string Serialize(object @object)
+		private string Serialize(object @object)
 		{
-			return this._elasticSerializer.Serialize(@object);
+			return this.Serializer.Serialize(@object);
 		}
 
-		/// <summary>
-		/// Deserialize an object 
-		/// </summary>
-		public T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
+		private T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
 		{
-			return this._elasticSerializer.Deserialize<T>(value, extraConverters);
+			return this.Serializer.Deserialize<T>(value, extraConverters);
 		}
 
 		public string GetTypeNameFor<T>()
@@ -35,21 +28,30 @@ namespace Nest
 		}
 		public string GetTypeNameFor(Type type)
 		{
-			return this.TypeNameResolver.GetTypeNameFor(type).Resolve(this.Settings);
+			return this.TypeNameResolver.GetTypeNameFor(type).Resolve(this._connectionSettings);
 		}
 
 		public string GetIndexNameFor<T>()
 		{
-			return GetIndexName(typeof(T));
+			return GetIndexNameFor(typeof(T));
 		}
-		public string GetIndexName(Type type)
+		public string GetIndexNameFor(Type type)
 		{
 			return this.IndexNameResolver.GetIndexForType(type);
 		}
 
+		/// <summary>
+		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
+		/// </summary>
+		/// <returns></returns>
+		protected virtual R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
+		{
+			return this.Serializer.ToParsedResponse<R>(status, allow404, extraConverters);
+		}
+
 		private string ResolveTypeName(TypeNameMarker typeNameMarker, string defaultIndexName = null)
 		{
-			return typeNameMarker != null ? typeNameMarker.Resolve(this.Settings) : defaultIndexName;
+			return typeNameMarker != null ? typeNameMarker.Resolve(this._connectionSettings) : defaultIndexName;
 		}
 
 	}

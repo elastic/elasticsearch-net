@@ -20,8 +20,6 @@ namespace Nest.Tests.Integration.Integration.Filter
 		[TestFixtureSetUp]
 		public void Initialize()
 		{
-			_client.IsValid.Should().BeTrue();
-
 			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
 			_LookFor.Name = "mmm";
 			var status = this._client.Index(_LookFor, new IndexParameters { Refresh = true }).ConnectionStatus;

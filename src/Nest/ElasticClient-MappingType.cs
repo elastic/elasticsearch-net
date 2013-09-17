@@ -94,7 +94,7 @@ namespace Nest
 		public IIndicesResponse MapFluent<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this.Settings));
+			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this._connectionSettings));
 			var typeMapping = d._Mapping;
 			var indexName = d._IndexName;
 			if (indexName.IsNullOrEmpty())
@@ -109,7 +109,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse Map(RootObjectMapping typeMapping)
 		{
-			return this.Map(typeMapping, this.Settings.DefaultIndex);
+			return this.Map(typeMapping, this._connectionSettings.DefaultIndex);
 		}
 		/// <summary>
 		/// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping.
@@ -122,7 +122,7 @@ namespace Nest
 			var mapping = new Dictionary<string, RootObjectMapping>();
 			mapping.Add(this.ResolveTypeName(typeMapping.TypeNameMarker), typeMapping);
 
-			string map = this._elasticSerializer.Serialize(mapping, Formatting.None);
+			string map = this.Serializer.Serialize(mapping, Formatting.None);
 			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_mapping");
 			if (ignoreConflicts)
 				path += "?ignore_conflicts=true";
@@ -139,7 +139,7 @@ namespace Nest
 		}
 		private RootObjectMapping CreateMapFor(Type t, string type, int maxRecursion = 0)
 		{
-			var writer = new TypeMappingWriter(t, type, this.Settings, maxRecursion);
+			var writer = new TypeMappingWriter(t, type, this._connectionSettings, maxRecursion);
 			var typeMapping = writer.RootObjectMappingFromAttributes();
 			return typeMapping;
 		}

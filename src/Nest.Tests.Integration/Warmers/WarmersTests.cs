@@ -37,8 +37,8 @@ namespace Nest.Tests.Integration.Warmers
 			warmerResponse.Indices[_settings.DefaultIndex].Should().ContainKey("warmer_simpleputandget");
 			var warmerMapping = warmerResponse.Indices[_settings.DefaultIndex]["warmer_simpleputandget"];
 			warmerMapping.Name.Should().Be("warmer_simpleputandget");
-			var typeName = typeNameResolver.GetTypeNameFor<ElasticSearchProject>().Resolve(_client.Settings);
-			warmerMapping.Types.Select(s => s.Resolve(_client.Settings)).Contains(typeName).Should().Be(true);
+			var typeName = typeNameResolver.GetTypeNameFor<ElasticSearchProject>().Resolve(_settings);
+			warmerMapping.Types.Select(s => s.Resolve(_settings)).Contains(typeName).Should().Be(true);
 			warmerMapping.Source.Should().Contain("\"strange-value\"");
 		}
 

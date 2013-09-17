@@ -31,11 +31,9 @@ namespace Nest.Tests.Integration
         [Test]
 		public void TestConnectSuccess()
 		{
-			ConnectionStatus status;
-			_client.TryConnect(out status);
-			Assert.True(_client.IsValid);
-			Assert.True(status.Success);
-			Assert.Null(status.Error);
+			var rootNodeInfo = _client.GetRootNodeInfo();
+			Assert.True(rootNodeInfo.IsValid);
+			Assert.Null(rootNodeInfo.ConnectionStatus.Error);
 		}
 		[Test]
 		public void construct_client_with_null()
@@ -74,13 +72,13 @@ namespace Nest.Tests.Integration
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"));
 				var client = new ElasticClient(settings);
-				ConnectionStatus connectionStatus;
-				client.TryConnect(out connectionStatus);
+				var result = client.GetRootNodeInfo();
 
-				Assert.False(client.IsValid);
-				Assert.True(connectionStatus != null);
-				Assert.True(connectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.BadGateway
-					|| connectionStatus.Error.ExceptionMessage.StartsWith("The remote name could not be resolved"));
+				Assert.False(result.IsValid);
+				Assert.NotNull(result.ConnectionStatus);
+
+				Assert.True(result.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.BadGateway
+					|| result.ConnectionStatus.Error.ExceptionMessage.StartsWith("The remote name could not be resolved"));
 			});
 		}
 		[Test]
@@ -88,11 +86,10 @@ namespace Nest.Tests.Integration
 		{
 			var settings = new ConnectionSettings(Test.Default.Uri);
 			var client = new ElasticClient(settings);
-			ConnectionStatus status;
-			client.TryConnect(out status);
-			Assert.True(client.IsValid);
-			Assert.True(status.Success);
-			Assert.Null(status.Error);
+			var result = client.GetRootNodeInfo();
+
+			Assert.True(result.IsValid);
+			Assert.Null(result.ConnectionStatus.Error);
 		}
 		[Test]
 		public void construct_client_with_null_uri()

@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 					new SimpleClass {Id = 1, Name = "class 1"},
 				}
 			};
-			var json = this._client.Serialize(col);
+			var json = this._client.Serializer.Serialize(col);
 			this.JsonEquals(json, MethodInfo.GetCurrentMethod());
 		}
 	}

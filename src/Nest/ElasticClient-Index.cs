@@ -420,7 +420,7 @@ namespace Nest
 		{
 			path.ThrowIfNull("path");
 
-			string json = this._elasticSerializer.Serialize(@object, Formatting.Indented);
+			string json = this.Serializer.Serialize(@object, Formatting.Indented);
 
 			var status = this.Connection.PostSync(path, json);
 			return this.ToParsedResponse<IndexResponse>(status);
@@ -428,7 +428,7 @@ namespace Nest
 
 		private Task<IIndexResponse> _indexAsyncToPath<T>(T @object, string path) where T : class
 		{
-			string json = this._elasticSerializer.Serialize(@object, Formatting.None);
+			string json = this.Serializer.Serialize(@object, Formatting.None);
 			var postTask = this.Connection.Post(path, json);
 			return postTask.ContinueWith<IIndexResponse>(t => this.ToParsedResponse<IndexResponse>(t.Result));
 		}

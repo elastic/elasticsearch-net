@@ -5,11 +5,13 @@ namespace Nest
 	public class ReindexObservable<T> : IDisposable, IObservable<IReindexResponse<T>> where T : class
 	{
 		private ReindexDescriptor<T> _reindexDescriptor;
+		private readonly IConnectionSettings _connectionSettings;
 		internal IElasticClient CurrentClient { get; set; }
 		internal ReindexDescriptor<T> ReindexDescriptor { get; set; } 
 
-		public ReindexObservable(IElasticClient client, ReindexDescriptor<T> reindexDescriptor)
+		public ReindexObservable(IElasticClient client, IConnectionSettings connectionSettings, ReindexDescriptor<T> reindexDescriptor)
 		{
+			this._connectionSettings = connectionSettings;
 			this._reindexDescriptor = reindexDescriptor;
 			this.CurrentClient = client;
 		}
@@ -39,7 +41,8 @@ namespace Nest
 			toIndex.ThrowIfNullOrEmpty("toIndex");
 
 			var indexSettings = this.CurrentClient.GetIndexSettings(this._reindexDescriptor._FromIndexName);
-			var createSettings = new CreateIndexDescriptor(this.CurrentClient.Settings).InitializeUsing(indexSettings.Settings);
+			var createSettings = new CreateIndexDescriptor(this._connectionSettings)
+				.InitializeUsing(indexSettings.Settings);
 			var createIndexResponse = this.CurrentClient
 				.CreateIndex(toIndex, (c) =>
 				{

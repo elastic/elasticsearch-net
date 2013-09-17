@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit
 		}
 		public static string Serialize<T>(T obj)
 		{
-			return Client.Serialize(obj);
+			return Client.Serializer.Serialize(obj);
 		}
 	}
 }

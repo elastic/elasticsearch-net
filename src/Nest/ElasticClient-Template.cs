@@ -24,7 +24,7 @@ namespace Nest
 		{
 			templateMappingSelector.ThrowIfNull("templateMappingSelector");
 
-			var templateMappingDescriptor = templateMappingSelector(new TemplateMappingDescriptor(this.Settings));
+			var templateMappingDescriptor = templateMappingSelector(new TemplateMappingDescriptor(this._connectionSettings));
 			templateMappingDescriptor.ThrowIfNull("templateMappingDescriptor");
 
 			var templateMapping = templateMappingDescriptor._TemplateMapping;
@@ -35,7 +35,7 @@ namespace Nest
 			templateName.ThrowIfNull("templateName");
 			templateMapping.ThrowIfNull("templateMapping");
 
-			string template = this._elasticSerializer.Serialize(templateMapping, Formatting.None);
+			string template = this.Serializer.Serialize(templateMapping, Formatting.None);
 
 			return PutTemplateRaw(templateName, template);
 		}

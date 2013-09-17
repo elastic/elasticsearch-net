@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,12 @@ namespace Nest
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
 
-		private readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
-		private readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
+		private static readonly ConcurrentBag<JsonConverter> _extraConverters = new ConcurrentBag<JsonConverter>();
+		private static readonly ConcurrentBag<JsonConverter> _defaultConverters = new ConcurrentBag<JsonConverter>
 		{
 			new IsoDateTimeConverter(),
 			new FacetConverter()
 		};
-
-		
 
 		public ElasticSerializer(IConnectionSettings settings)
 		{

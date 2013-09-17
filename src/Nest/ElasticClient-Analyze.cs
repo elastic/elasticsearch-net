@@ -12,7 +12,7 @@ namespace Nest
 		/// <returns></returns>
 		public IAnalyzeResponse Analyze(string text)
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			return this._Analyze(new AnalyzeParams() { Index = index }, text);
 		}
 		/// <summary>

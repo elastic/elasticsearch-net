@@ -29,7 +29,7 @@ namespace Nest
 			index.ThrowIfEmpty("index");
 			createIndexSelector.ThrowIfNull("createIndexSelector");
 
-			var d = createIndexSelector(new CreateIndexDescriptor(this.Settings));
+			var d = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
 			var settings = d._IndexSettings;
 			return this.CreateIndex(index, settings);
 
