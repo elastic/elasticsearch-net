@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration
 			var index = this._client.GetIndexNameFor<T>();
 			var typeName = this._client.GetTypeNameFor<T>();
 			var connectionStatus = this._client.Raw.SearchPost(index, typeName, query);
-			return this._client.ToParsedResponse<QueryResponse<T>>(connectionStatus);
+			return connectionStatus.ToParsedResponse<QueryResponse<T>>();
 		} 
 
 		public void DoFilterTest(Func<FilterDescriptor<ElasticSearchProject>, Nest.BaseFilter> filter, ElasticSearchProject project, bool queryMustHaveResults)

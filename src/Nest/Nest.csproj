@@ -70,7 +70,7 @@
   <ItemGroup>
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\Connection\NoTasksHttpConnection.cs" />
-    <Compile Include="ElasticSerializations.cs" />
+    <Compile Include="ElasticSerializer.cs" />
     <Compile Include="Exception\ConnectionException.cs" />
     <Compile Include="RawElasticClient-Generated.cs" />
     <Compile Include="Extensions\StringInject.cs" />

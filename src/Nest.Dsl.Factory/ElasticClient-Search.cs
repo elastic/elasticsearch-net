@@ -13,14 +13,14 @@ namespace Nest
 			string path, string query) where T  : class
 		{
 			var connectionStatus = client.Connection.PostSync(path, query);
-			return client.ToParsedResponse<QueryResponse<T>>(connectionStatus);
+			return connectionStatus.ToParsedResponse<QueryResponse<T>>();
 		}
 
 		public static Task<IQueryResponse<T>> SearchRawAsync<T>(this IElasticClient client,
 			string path, string query) where T : class
 		{
 			return client.Connection.Post(path, query)
-				.ContinueWith(t=> client.ToParsedResponse<QueryResponse<T>>(t.Result) as IQueryResponse<T>);
+				.ContinueWith(t => t.Result.ToParsedResponse<QueryResponse<T>>() as IQueryResponse<T>);
 		}
 		/// <summary>
 		/// Synchronously search using dynamic as its return type.

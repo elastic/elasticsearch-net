@@ -346,8 +346,6 @@ namespace Nest
 		string GetTypeNameFor(Type type);
 		string GetIndexNameFor<T>();
 		string GetIndexName(Type type);
-		R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) 
-			where R : BaseResponse;
-
+		
 	}
 }

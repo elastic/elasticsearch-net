@@ -13,30 +13,39 @@ namespace Nest
 	{
 		private readonly IConnectionSettings _settings;
 		private readonly PropertyNameResolver _propertyNameResolver;
-		private readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
 		private readonly JsonSerializerSettings _serializationSettings;
+
+		private readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
 		private readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
 		{
 			new IsoDateTimeConverter(),
 			new FacetConverter()
 		};
 
-		public void ModifyJsonSerializationSettings(Action<JsonSerializerSettings> modifier)
-		{
-			modifier(this._serializationSettings);
-		}
-
-		public void AddConverter(JsonConverter converter)
-		{
-			this._serializationSettings.Converters.Add(converter);
-			_extraConverters.Add(converter);
-		}
+		
 
 		public ElasticSerializer(IConnectionSettings settings)
 		{
 			this._settings = settings;
 			this._serializationSettings = this.CreateSettings();
 			this._propertyNameResolver = new PropertyNameResolver();
+		}
+
+		/// <summary>
+		/// Allows you to adjust the buildin JsonSerializerSettings to your liking
+		/// </summary>
+		public void ModifyJsonSerializationSettings(Action<JsonSerializerSettings> modifier)
+		{
+			modifier(this._serializationSettings);
+		}
+			
+		/// <summary>
+		/// Add a JsonConverter to the build in serialization
+		/// </summary>
+		public void AddConverter(JsonConverter converter)
+		{
+			this._serializationSettings.Converters.Add(converter);
+			_extraConverters.Add(converter);
 		}
 
 		/// <summary>

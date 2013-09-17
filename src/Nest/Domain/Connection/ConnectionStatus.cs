@@ -15,6 +15,7 @@ namespace Nest
 	public class ConnectionStatus
 	{
 		private readonly IConnectionSettings _settings;
+		private readonly ElasticSerializer _elasticSerializer;
 		private string mockJsonResponse;
 		public bool Success { get; private set; }
 		public ConnectionError Error { get; private set; }
@@ -32,6 +33,9 @@ namespace Nest
 			this.TypeNameResolver = new TypeNameResolver();
 			this.IdResolver = new IdResolver();
 			this.IndexNameResolver = new IndexNameResolver(settings);
+			
+			this._settings = settings;
+			this._elasticSerializer = new ElasticSerializer(settings);
 		}
 
 		protected IndexNameResolver IndexNameResolver { get; private set; }
@@ -50,6 +54,16 @@ namespace Nest
 			this._settings = settings;
 			this.Success = true;
 			this.Result = result;
+		}
+
+
+		/// <summary>
+		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
+		/// </summary>
+		/// <returns></returns>
+		public virtual R ToParsedResponse<R>(bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
+		{
+			return this._elasticSerializer.ToParsedResponse<R>(this, allow404, extraConverters);
 		}
 
 		public override string ToString()
