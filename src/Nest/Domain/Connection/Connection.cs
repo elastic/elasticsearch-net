@@ -231,10 +231,7 @@ namespace Nest
 			}
 			try
 			{
-				return Task.Factory.StartNew(
-					() => this.CreateIterateTask(request, data, tcs).Result
-					, TaskCreationOptions.LongRunning
-				);
+				return this.CreateIterateTask(request, data, tcs);
 			}
 			finally
 			{

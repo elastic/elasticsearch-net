@@ -68,11 +68,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
+    <Compile Include="Domain\Connection\NoTasksHttpConnection.cs" />
     <Compile Include="RawElasticClient-Generated.cs" />
     <Compile Include="Extensions\StringInject.cs" />
     <Compile Include="RawElasticClient.cs" />
-    <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
-    <Compile Include="Domain\Connection\NoTasksHttpConnection.cs" />
     <Compile Include="Domain\Responses\IReindexResponse.cs" />
     <Compile Include="DSL\ReindexDescriptor.cs" />
     <Compile Include="Exception\ReindexException.cs" />

@@ -21,15 +21,24 @@ namespace ProtocolLoadTest
 
 		static void Main(string[] args)
 		{
+			var process = Process.GetCurrentProcess();
+			
+			double notTaskRate = RunTest<TrueAsyncTester>(HTTP_PORT);
+			var threadCountNoTasks = process.Threads.Count;
+			var memorySizeNoTasks = process.VirtualMemorySize64;
+
 			double httpRate = RunTest<HttpTester>(HTTP_PORT);
-			///double manualAsyncHttpRate = RunTest<HttpManualAsyncTester>(HTTP_PORT);
-			double trueAsyncRate = RunTest<TrueAsyncTester>(HTTP_PORT);
+			var threadCountHttp = process.Threads.Count;
+			var memorySizeHttp = process.VirtualMemorySize64;
+
 			//double thriftRate = RunTest<ThriftTester>(THRIFT_PORT);
 
 			Console.WriteLine();
-			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s", httpRate);
+			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
+				, httpRate, threadCountHttp, memorySizeHttp);
 			//Console.WriteLine("HTTP (IndexMany wrapped TaskFactory.StartNew): {0:0,0}/s", manualAsyncHttpRate);
-			Console.WriteLine("HTTP (IndexManyAsyc using TrueAsyncConnection): {0:0,0}/s", trueAsyncRate);
+			Console.WriteLine("HTTP (IndexManyAsyc using NoTasksHttpConnection): {0:0,0}/s {1} Threads {2} Virual memory"
+				, notTaskRate, threadCountNoTasks, memorySizeNoTasks);
 			//Console.WriteLine("Thrift: {0:0,0}/s", thriftRate);
 
 			Console.ReadLine();
