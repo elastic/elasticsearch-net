@@ -96,7 +96,7 @@ namespace Nest
 			var descriptor = percolateSelector(new PercolateDescriptor<T>());
 			var index = descriptor._Index ?? this.IndexNameResolver.GetIndexForType<T>();
 			var type = descriptor._Type ?? this.GetTypeNameFor<T>();
-			var percolateJson = this.SerializeCamelCase(descriptor);
+			var percolateJson = this.Serialize(descriptor);
 
 			var path = this.PathResolver.CreateIndexTypePath(index, type, "_percolate");
 			return new PathAndData() { Path = path, Data = percolateJson };

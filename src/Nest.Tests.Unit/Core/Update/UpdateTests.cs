@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.Core.Update
 				.Add("count", 1)
 			  );
 
-			this.JsonEqualsCamelCase(s, MethodInfo.GetCurrentMethod()); 
+			this.JsonEquals(s, MethodInfo.GetCurrentMethod()); 
 		}
 		[Test]
 		public void UpsertUsingScriptAndPartialObject()
@@ -37,7 +37,7 @@ namespace Nest.Tests.Unit.Core.Update
 			  )
 			  .Upsert(new { count = 4});
 
-			this.JsonEqualsCamelCase(s, MethodInfo.GetCurrentMethod());
+			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
 
 		[Test]
@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit.Core.Update
 				.Object(originalProject) //only used to infer the id
 				.Document(partialUpdate); //the actual partial update statement;
 
-			this.JsonEqualsCamelCase(s, MethodInfo.GetCurrentMethod());
+			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
 
 	}

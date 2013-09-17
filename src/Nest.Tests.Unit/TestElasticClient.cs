@@ -18,9 +18,5 @@ namespace Nest.Tests.Unit
 		{
 			return Client.Serialize(obj);
 		}
-		public static string SerializeCamelCase<T>(T obj)
-		{
-			return Client.SerializeCamelCase(obj);
-		}
 	}
 }

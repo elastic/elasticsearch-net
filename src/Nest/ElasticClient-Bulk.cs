@@ -41,19 +41,19 @@ namespace Nest
 				operation._Type = typeName;
 				operation._Id = id;
 
-				var opJson = JsonConvert.SerializeObject(operation, Formatting.None, IndexSerializationSettings);
+				var opJson = this._elasticSerializer.Serialize(operation, Formatting.None);
 
 				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
 				sb.Append(action);
 
 				if (command == "index" || command == "create")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(operation._Object, Formatting.None, IndexSerializationSettings);
+					string jsonCommand = this._elasticSerializer.Serialize(operation._Object, Formatting.None);
 					sb.Append(jsonCommand + "\n");
 				}
 				else if (command == "update")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(operation.GetBody(), Formatting.None, IndexSerializationSettings);
+					string jsonCommand = this._elasticSerializer.Serialize(operation.GetBody(), Formatting.None);
 					sb.Append(jsonCommand + "\n");
 				}
 			}
@@ -181,7 +181,7 @@ namespace Nest
 				sb.Append(objectAction);
 				if (command == "index")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(@object, Formatting.None, IndexSerializationSettings);
+					string jsonCommand = this._elasticSerializer.Serialize(@object, Formatting.None);
 					sb.Append(jsonCommand + "\n");
 				}
 			}
@@ -220,7 +220,7 @@ namespace Nest
 				sb.Append(objectAction);
 				if (command == "index")
 				{
-					string jsonCommand = JsonConvert.SerializeObject(@object.Document, Formatting.None, IndexSerializationSettings);
+					string jsonCommand = this._elasticSerializer.Serialize(@object.Document, Formatting.None);
 					sb.Append(jsonCommand + "\n");
 				}
 			}

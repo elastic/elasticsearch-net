@@ -17,7 +17,7 @@ namespace Nest
 			var updateDescriptor = new UpdateDescriptor<T, K>();
 			updateSelector(updateDescriptor);
 			//var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
-			var data = this.SerializeCamelCase(updateDescriptor);
+			var data = this.Serialize(updateDescriptor);
 			var path = this.CreateUpdatePath<T, K>(updateDescriptor);
 			return this._Update(path, data);
 		}

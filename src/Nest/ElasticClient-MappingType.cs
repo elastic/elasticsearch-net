@@ -122,7 +122,7 @@ namespace Nest
 			var mapping = new Dictionary<string, RootObjectMapping>();
 			mapping.Add(this.ResolveTypeName(typeMapping.TypeNameMarker), typeMapping);
 
-			string map = JsonConvert.SerializeObject(mapping, Formatting.None, IndexSerializationSettings);
+			string map = this._elasticSerializer.Serialize(mapping, Formatting.None);
 			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_mapping");
 			if (ignoreConflicts)
 				path += "?ignore_conflicts=true";

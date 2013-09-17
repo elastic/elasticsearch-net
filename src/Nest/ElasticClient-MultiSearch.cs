@@ -44,11 +44,11 @@ namespace Nest
 					typeName = null; //force empty typename so we'll query all types.
 
 				var op = new { index = index, type = typeName, search_type = this.GetSearchType(operation), preference = operation._Preference, routing = operation._Routing };
-				var opJson = JsonConvert.SerializeObject(op, Formatting.None, IndexSerializationSettings);
+				var opJson = this._elasticSerializer.Serialize(op, Formatting.None);
 
 				var action = "{0}\n".F(opJson);
 				sb.Append(action);
-				var searchJson = JsonConvert.SerializeObject(operation, Formatting.None, IndexSerializationSettings);
+				var searchJson = this._elasticSerializer.Serialize(operation, Formatting.None);
 				sb.Append(searchJson + "\n");
 
 			}

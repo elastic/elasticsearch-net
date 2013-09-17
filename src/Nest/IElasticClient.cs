@@ -315,10 +315,6 @@ namespace Nest
 		/// </summary>
 		string Serialize(object @object);
 
-		/// <summary>
-		/// Serialize an object using the default camelCasing used while indexing objects
-		/// </summary>
-		string SerializeCamelCase(object @object);
 		IIndicesShardResponse Snapshot();
 		IIndicesShardResponse Snapshot(IEnumerable<string> indices);
 		IIndicesShardResponse Snapshot(string index);

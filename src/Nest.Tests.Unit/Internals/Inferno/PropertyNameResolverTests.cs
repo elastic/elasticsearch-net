@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest.Tests.Unit.Internals.Inferno
 {
