@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void SimpleExplain()
 		{
-			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticSearchProject>(
 					@" {
 						""explain"": true,
 						""query"" : {
@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void ComplexExplain()
 		{
-			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticSearchProject>(
 					@" { ""explain"": true, 
 						""query"" : {
 						  ""fuzzy"" : { 

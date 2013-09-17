@@ -30,6 +30,15 @@ namespace Nest.Tests.Integration
 			return new TypeNameResolver().GetTypeNameFor(t).Resolve(this._settings);
 		}
 
+
+		protected IQueryResponse<T> SearchRaw<T>(string query) where T : class
+		{
+			var index = this._client.GetIndexNameFor<T>();
+			var typeName = this._client.GetTypeNameFor<T>();
+			var connectionStatus = this._client.Raw.SearchPost(index, typeName, query);
+			return this._client.ToParsedResponse<QueryResponse<T>>(connectionStatus);
+		} 
+
 		public void DoFilterTest(Func<FilterDescriptor<ElasticSearchProject>, Nest.BaseFilter> filter, ElasticSearchProject project, bool queryMustHaveResults)
 		{
 			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, project.Id.ToString());

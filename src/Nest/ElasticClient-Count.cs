@@ -12,6 +12,7 @@ namespace Nest
 		{
 			return this._Count("_count", query);
 		}
+		
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
@@ -23,6 +24,7 @@ namespace Nest
 			var query = this.Serialize(bq);
 			return this._Count("_count", query);
 		}
+		
 		/// <summary>
 		/// Performs a count query over all indices
 		/// </summary>
@@ -35,17 +37,7 @@ namespace Nest
 			return this._Count("_count", query);
 		}
 
-        /// <summary>
-        /// Performs a count query over the default index set in the client settings
-        /// </summary>
-        public ICountResponse CountRaw(string query)
-        {
-            var index = this.Settings.DefaultIndex;
-            index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-            string path = this.PathResolver.CreateIndexPath(index, "_count");
-            return _Count(path, query);
-        }
+        
 		/// <summary>
 		/// Performs a count query over the default index set in the client settings
 		/// </summary>
@@ -60,6 +52,7 @@ namespace Nest
 			var query = this.Serialize(bq);
 			return _Count(path, query);
 		}
+		
 		/// <summary>
 		/// Performs a count query over the passed indices
 		/// </summary>
@@ -86,18 +79,7 @@ namespace Nest
 			return _Count(path, query);
 		}
 
-        /// <summary>
-        /// Perform a count query over the default index and the inferred type name for T
-        /// </summary>
-        public ICountResponse CountRaw<T>(string query) where T : class
-        {
-            var index = this.Settings.DefaultIndex;
-            index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-            var typeName = this.GetTypeNameFor<T>();
-			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_count");
-            return _Count(path, query);
-        }
+        
 		/// <summary>
 		/// Perform a count query over the default index and the inferred type name for T
 		/// </summary>
@@ -114,6 +96,7 @@ namespace Nest
 			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
+		
 		/// <summary>
 		/// Performs a count query over the specified indices
 		/// </summary>
@@ -126,6 +109,7 @@ namespace Nest
 			var query = this.Serialize(descriptor);
 			return _Count(path, query);
 		}
+		
 		/// <summary>
 		///  Performs a count query over the multiple types in multiple indices.
 		/// </summary>

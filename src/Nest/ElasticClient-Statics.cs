@@ -92,6 +92,15 @@ namespace Nest
 			return this.TypeNameResolver.GetTypeNameFor(type).Resolve(this.Settings);
 		}
 
+		public string GetIndexNameFor<T>()
+		{
+			return GetIndexName(typeof(T));
+		}
+		public string GetIndexName(Type type)
+		{
+			return this.IndexNameResolver.GetIndexForType(type);
+		}
+
 		private string ResolveTypeName(TypeNameMarker typeNameMarker, string defaultIndexName = null)
 		{
 			return typeNameMarker != null ? typeNameMarker.Resolve(this.Settings) : defaultIndexName;

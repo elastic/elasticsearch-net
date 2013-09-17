@@ -8,14 +8,6 @@ namespace Nest
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		public IValidateResponse ValidateRaw(string query)
-		{
-			return this._Validate("_validate/query", query);
-		}
-
-		/// <summary>
-		/// The validate API allows a user to validate a potentially expensive query without executing it. 
-		/// </summary>
 		public IValidateResponse Validate(Action<ValidateQueryPathDescriptor> querySelector)
 		{
 			var descriptor = new ValidateQueryPathDescriptor();

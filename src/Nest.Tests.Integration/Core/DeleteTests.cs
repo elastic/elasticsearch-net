@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Core
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
-			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticSearchProject>(
 				@" { ""query"" : {
 						 ""fuzzy"" : {
 							""followers.firstName"" : """ + NestTestData.Data.First().Followers.First().FirstName.ToLower() + @"x""

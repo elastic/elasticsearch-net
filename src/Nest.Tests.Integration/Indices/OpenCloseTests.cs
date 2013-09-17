@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			var results = this._client.SearchRaw<ElasticSearchProject>(
+			var results = this.SearchRaw<ElasticSearchProject>(
 				@" { ""query"" : {
 						    ""match_all"" : { }
 				} }"

@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleHistogramFacet()
 		{
-			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },
@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void DateHistogramFacet()
 		{
-			var queryResults = this._client.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticSearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },

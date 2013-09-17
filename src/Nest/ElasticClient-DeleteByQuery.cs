@@ -41,21 +41,6 @@ namespace Nest
 	  }
 
 	  /// <summary>
-	  /// Deletes all documents that match the string query.
-	  /// </summary>
-	  /// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
-	  /// <param name="parameters">Control routing/consistency and replication</param>
-	  /// <returns>IDeleteResponse, check .IsValid to validate success</returns>
-	  public IDeleteResponse DeleteByQueryRaw(string query, DeleteByQueryParameters parameters = null)
-	  {
-		  var descriptor = new RoutingQueryPathDescriptor();
-		  var path = this.PathResolver.GetDeleteByQueryPathForDynamic(descriptor, "_query");
-		  if (parameters != null)
-			  path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
-		  return this._deleteToPath(path, query);
-	  }
-
-	  /// <summary>
 	  /// Deletes all documents that match the query
 	  /// </summary>
 	  /// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
@@ -89,19 +74,5 @@ namespace Nest
 		  return this._deleteToPathAsync(path, stringQuery);
 	  }
 
-	  /// <summary>
-	  /// Deletes all documents that match the string query.
-	  /// </summary>
-	  /// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
-	  /// <param name="parameters">Control routing/consistency and replication</param>
-	  /// <returns>IDeleteResponse, check .IsValid to validate success</returns>
-	  public Task<IDeleteResponse> DeleteByQueryRawAsync(string query, DeleteByQueryParameters parameters = null)
-	  {
-		  var descriptor = new RoutingQueryPathDescriptor();
-		  var path = this.PathResolver.GetDeleteByQueryPathForDynamic(descriptor, "_query");
-		  if (parameters != null)
-			  path = this.PathResolver.AppendDeleteByQueryParametersToPath(path, parameters);
-		  return this._deleteToPathAsync(path, query);
-	  }
   }
 }

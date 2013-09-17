@@ -16,8 +16,11 @@ namespace Nest
 		public IIndicesOperationResponse CreateIndex(string index, IndexSettings settings)
 		{
 			string data = this.Serialize(settings);
-			return CreateIndexRaw(index, data);
+			string path = this.PathResolver.CreateIndexPath(index);
+			var status = this.Connection.PostSync(path, data);
+			return this.ToParsedResponse<IndicesOperationResponse>(status);
 		}
+		
 		/// <summary>
 		/// Create an index with the specified index settings
 		/// </summary>
@@ -32,12 +35,5 @@ namespace Nest
 
 		}
 
-
-		public IIndicesOperationResponse CreateIndexRaw(string index, string settings)
-		{
-			string path = this.PathResolver.CreateIndexPath(index);
-			var status = this.Connection.PostSync(path, settings);
-			return this.ToParsedResponse<IndicesOperationResponse>(status);
-		}
 	}
 }

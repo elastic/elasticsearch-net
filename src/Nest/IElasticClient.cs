@@ -2,10 +2,14 @@
 using System.Threading.Tasks;
 using Nest.Domain;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+
 namespace Nest
 {
 	public interface IElasticClient
 	{
+
+		IConnection Connection { get; }
 		bool IsValid { get; }
 		IConnectionSettings Settings { get; }
 
@@ -39,21 +43,17 @@ namespace Nest
 		ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector);
-		ICountResponse CountRaw(string query);
 
 		ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		ICountResponse Count<T>(IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 		ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-		ICountResponse CountRaw<T>(string query) where T : class;
 
 		ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
-		ICountResponse CountAllRaw(string query);
 
 		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 
 		IIndicesOperationResponse CreateIndex(string index, IndexSettings settings);
 		IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
-		IIndicesOperationResponse CreateIndexRaw(string index, string settings);
 
 		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
@@ -114,11 +114,9 @@ namespace Nest
 		Task<IDeleteResponse> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class;
 
 		IDeleteResponse DeleteByQuery(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
-		IDeleteResponse DeleteByQueryRaw(string query, DeleteByQueryParameters parameters = null);
 		IDeleteResponse DeleteByQuery<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
 
 		Task<IDeleteResponse> DeleteByQueryAsync(Action<RoutingQueryPathDescriptor> query, DeleteByQueryParameters parameters = null);
-		Task<IDeleteResponse> DeleteByQueryRawAsync(string query, DeleteByQueryParameters parameters = null);
 		Task<IDeleteResponse> DeleteByQueryAsync<T>(Action<RoutingQueryPathDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
 
 		IIndicesResponse DeleteIndex(string index);
@@ -233,7 +231,6 @@ namespace Nest
 
 		IIndicesResponse Map(RootObjectMapping typeMapping);
 		IIndicesResponse Map(RootObjectMapping typeMapping, string index, string typeName, bool ignoreConflicts);
-		IIndicesResponse MapRaw(string typeName, string map, string index, bool ignoreConflicts = false);
 		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
 		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;
@@ -272,7 +269,7 @@ namespace Nest
 		IIndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class;
 
 		IPercolateResponse Percolate<T>(
-			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class;
+		Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class;
 		IIndicesShardResponse Refresh();
 		IIndicesShardResponse Refresh(IEnumerable<string> indices);
 		IIndicesShardResponse Refresh(string index);
@@ -303,12 +300,10 @@ namespace Nest
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-		IQueryResponse<T> SearchRaw<T>(string query, string path = null) where T : class;
 
 		Task<IQueryResponse<dynamic>> SearchAsync(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		Task<IQueryResponse<T>> SearchAsync<T>(SearchDescriptor<T> descriptor) where T : class;
 		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-		Task<IQueryResponse<T>> SearchRawAsync<T>(string query, string path = null) where T : class;
 
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(IEnumerable<string> indices);
@@ -346,11 +341,17 @@ namespace Nest
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 		IElasticSearchVersionInfo VersionInfo { get; }
 
-		IValidateResponse ValidateRaw(string query);
-
 		IValidateResponse Validate(Action<ValidateQueryPathDescriptor> querySelector);
 
 		IValidateResponse Validate<T>(Action<ValidateQueryPathDescriptor<T>> querySelector) where T : class;
+
+
+		string GetTypeNameFor<T>();
+		string GetTypeNameFor(Type type);
+		string GetIndexNameFor<T>();
+		string GetIndexName(Type type);
+		R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) 
+			where R : BaseResponse;
 
 	}
 }

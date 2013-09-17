@@ -63,24 +63,6 @@ namespace Nest
         }
 
         /// <summary>
-        /// Synchronously search using T as the return type, string based.
-        /// </summary>
-        /// <param name="path">EXPERT OPTION: Pass the path and querystring used to perform the search on, when null it will be infered from the type</param>
-        public IQueryResponse<T> SearchRaw<T>(string query, string path = null) where T : class
-        {
-            return SearchRaw<T, T>(query, path);
-        }
-
-        /// <summary>
-        /// Asynchronously search using T as the return type, string based.
-        /// </summary>
-        /// <param name="path">EXPERT OPTION: Pass the path and querystring used to perform the search on, when null it will be infered from the type</param>
-        public Task<IQueryResponse<T>> SearchRawAsync<T>(string query, string path = null) where T : class
-        {
-            return SearchRawAsync<T, T>(query, path);
-        }
-
-        /// <summary>
         /// Synchronously search using TResult as the return type, string based.
         /// </summary>
         /// <param name="path">EXPERT OPTION: Pass the path and querystring used to perform the search on, when null it will be infered from the type</param>

@@ -9,7 +9,7 @@ namespace Nest
 {
 	public partial class ElasticClient : Nest.IElasticClient
 	{
-		protected IConnection Connection { get; set; }
+		public IConnection Connection { get; protected set; }
 		public IConnectionSettings Settings { get; protected set; }
 		private bool _gotNodeInfo = false;
 		private bool _IsValid { get; set; }
@@ -114,7 +114,7 @@ namespace Nest
 		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		protected virtual R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
+		public virtual R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
 		{
 			var isValid =
 				(allow404)

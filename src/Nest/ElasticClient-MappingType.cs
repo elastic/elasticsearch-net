@@ -123,22 +123,15 @@ namespace Nest
 			mapping.Add(this.ResolveTypeName(typeMapping.TypeNameMarker), typeMapping);
 
 			string map = JsonConvert.SerializeObject(mapping, Formatting.None, SerializationSettings);
-
-            return MapRaw(typeName, map, index, ignoreConflicts);
-        }
-        /// <summary>
-        /// Explicitly map an object using direct json input, the json should be of the form { "type" = {mapping} }.
-        /// </summary>
-        public IIndicesResponse MapRaw(string typeName, string map, string index, bool ignoreConflicts = false)
-        {
-            string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_mapping");
+			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_mapping");
 			if (ignoreConflicts)
 				path += "?ignore_conflicts=true";
 			ConnectionStatus status = this.Connection.PutSync(path, map);
 
 			var r = this.ToParsedResponse<IndicesResponse>(status);
 			return r;
-		}
+        }
+       
 
 		private RootObjectMapping CreateMapFor<T>(string type, int maxRecursion = 0) where T : class
 		{

@@ -9,7 +9,19 @@ namespace Nest
 {
 	public static class ElasticClientExtensions
 	{
+		public static IQueryResponse<T> SearchRaw<T>(this IElasticClient client,
+			string path, string query) where T  : class
+		{
+			var connectionStatus = client.Connection.PostSync(path, query);
+			return client.ToParsedResponse<QueryResponse<T>>(connectionStatus);
+		}
 
+		public static Task<IQueryResponse<T>> SearchRawAsync<T>(this IElasticClient client,
+			string path, string query) where T : class
+		{
+			return client.Connection.Post(path, query)
+				.ContinueWith(t=> client.ToParsedResponse<QueryResponse<T>>(t.Result) as IQueryResponse<T>);
+		}
 		/// <summary>
 		/// Synchronously search using dynamic as its return type.
 		/// </summary>
