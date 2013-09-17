@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System;
@@ -39,6 +40,7 @@ namespace Nest
 		public HitsMetaData<T> Hits { get; internal set; }
 
 		[JsonProperty(PropertyName = "facets")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public IDictionary<string, Facet> Facets { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
@@ -171,10 +173,10 @@ namespace Nest
 
 				foreach (var hit in this.Hits.Hits)
 				{
-					if (!hit.Highlight.Any())
+					if (!hit.Highlights.Any())
 						continue;
 
-					dict.Add(hit.Id, hit.Highlight);
+					dict.Add(hit.Id, hit.Highlights);
 
 				}
 				return dict;

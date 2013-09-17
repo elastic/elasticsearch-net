@@ -53,6 +53,7 @@ namespace Nest
 		public int UnassignedShards { get; internal set; }
 
 		[JsonProperty(PropertyName = "indices")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, IndexHealthStats> Indices { get; set; }
 	}
 }

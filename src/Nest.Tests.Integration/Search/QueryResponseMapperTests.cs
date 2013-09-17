@@ -530,7 +530,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticSearchProject>(query);
 
 			//assert
-			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlight["content"].Highlights.Count() > 0);
+			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlights["content"].Highlights.Count() > 0);
 
 		}
 	}

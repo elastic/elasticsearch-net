@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -16,6 +17,7 @@ namespace Nest
 		internal string _Script { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> _Params { get; set; }
 
 		[JsonProperty(PropertyName = "query")]

@@ -67,9 +67,7 @@ namespace Nest
 			//this._defaultConverters.Add(new TypeNameMarkerConverter(this.Settings));
 			//this._defaultConverters.Add(new IndexSettingsConverter(this.Settings));
 
-			this.SerializationSettings = this.CreateSettings();
 			var indexSettings = this.CreateSettings();
-
 			indexSettings.ContractResolver = new ElasticCamelCaseResolver(this.Settings);
 			this.IndexSerializationSettings = indexSettings;
 			this.PropertyNameResolver = new PropertyNameResolver();

@@ -10,7 +10,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		internal readonly JsonSerializerSettings SerializationSettings;
+		//internal readonly JsonSerializerSettings SerializationSettings;
 		internal readonly JsonSerializerSettings IndexSerializationSettings;
 		internal readonly PropertyNameResolver PropertyNameResolver;
 		private readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
@@ -34,14 +34,12 @@ namespace Nest
 		public void AddConverter(JsonConverter converter)
 		{
 			this.IndexSerializationSettings.Converters.Add(converter);
-			this.SerializationSettings.Converters.Add(converter);
 			_extraConverters.Add(converter);
 		}
 
 		public void ModifyJsonSerializationSettings(Action<JsonSerializerSettings> modifier)
 		{
 			modifier(this.IndexSerializationSettings);
-			modifier(this.SerializationSettings);
 		}
 
 		/// <summary>
@@ -50,7 +48,7 @@ namespace Nest
 		/// </summary>
 		public string Serialize(object @object)
 		{
-			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.SerializationSettings);
+			return JsonConvert.SerializeObject(@object, Formatting.Indented, this.IndexSerializationSettings);
 		}
 
 		/// <summary>
@@ -67,7 +65,7 @@ namespace Nest
 		public T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
 		{
 
-			var settings = this.SerializationSettings;
+			var settings = this.IndexSerializationSettings;
 			if (extraConverters.HasAny())
 			{
 				settings = this.CreateSettings();

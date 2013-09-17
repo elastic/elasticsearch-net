@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -14,8 +15,11 @@ namespace Nest
 		internal K _Document { get; set; }
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
+		
 		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> _Params { get; set; }
+		
 		[JsonProperty(PropertyName = "upsert")]
 		internal object _Upsert { get; set; }
 	}

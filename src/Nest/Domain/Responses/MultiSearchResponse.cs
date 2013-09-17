@@ -12,7 +12,8 @@ namespace Nest
 		{
 			this._Responses = new Dictionary<string, object>();
 		}
-		
+
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]	
 		internal IDictionary<string, object> _Responses { get; set; }
 
 		public IEnumerable<QueryResponse<T>> GetResponses<T>() where T : class

@@ -22,7 +22,8 @@ namespace Nest.DSL.Descriptors
     internal string _Script { get; set; }
 
     [JsonProperty(PropertyName = "params")]
-    internal Dictionary<string, object> _Params { get; set; }
+	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+	internal Dictionary<string, object> _Params { get; set; }
 
     public SortScriptDescriptor<T> Script(string script)
     {

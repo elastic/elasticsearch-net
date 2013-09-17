@@ -38,7 +38,8 @@ namespace Nest
 	internal int? _Size { get; set; }
 
     [JsonProperty(PropertyName = "params")]
-    internal Dictionary<string,object> _Params { get; set; }
+	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+	internal Dictionary<string, object> _Params { get; set; }
 
     public TermsStatsFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
     {

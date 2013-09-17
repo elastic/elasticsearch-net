@@ -34,7 +34,8 @@ namespace Nest
     internal string _TimeInterval { get; set; }
 
     [JsonProperty(PropertyName = "params")]
-    internal Dictionary<string,object> _Params { get; set; }
+	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+	internal Dictionary<string, object> _Params { get; set; }
 
     public HistogramFacetDescriptor<T> OnField(string field)
     {

@@ -35,7 +35,7 @@ namespace Nest
 			templateName.ThrowIfNull("templateName");
 			templateMapping.ThrowIfNull("templateMapping");
 
-			string template = JsonConvert.SerializeObject(templateMapping, Formatting.None, SerializationSettings);
+			string template = JsonConvert.SerializeObject(templateMapping, Formatting.None, IndexSerializationSettings);
 
 			return PutTemplateRaw(templateName, template);
 		}

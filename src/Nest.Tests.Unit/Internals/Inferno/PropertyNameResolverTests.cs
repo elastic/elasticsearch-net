@@ -13,6 +13,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		internal class SomeClass
 		{
 			public MyCustomClass MyCustomClass { get; set; }
+			[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 			public Dictionary<string, SomeOtherClass> StringDict { get; set; }
 			public Dictionary<int, MyCustomClass> IntDict { get; set; }
 			public IList<MyCustomClass> ListOfCustomClasses { get; set; } 

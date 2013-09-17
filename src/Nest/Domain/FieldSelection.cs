@@ -1,4 +1,6 @@
 ﻿using Nest.Resolvers;
+using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
@@ -17,6 +19,8 @@ namespace Nest.Domain
 	public class FieldSelection<T> : IFieldSelection<T>
 	{
 		public T Document { get; set; }
+
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> FieldValues { get; set; }
 
 		public K FieldValue<K>(Expression<Func<T, object>> objectPath)

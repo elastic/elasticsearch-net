@@ -15,19 +15,22 @@ namespace Nest
         public string TransportAddress { get; internal set; }
 
         [JsonProperty("attributes")]
-        public Dictionary<string, string> Attributes { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, string> Attributes { get; internal set; }
     }
 
     public class RoutingTableState
     {
         [JsonProperty("indices")]
-        public Dictionary<string, IndexRoutingTable> Indices { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, IndexRoutingTable> Indices { get; internal set; }
     }
 
     public class IndexRoutingTable
     {
         [JsonProperty("shards")]
-        public Dictionary<string, List<RoutingShard>> Shards { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, List<RoutingShard>> Shards { get; internal set; }
     }
 
     public class RoutingShard
@@ -66,7 +69,8 @@ namespace Nest
         //public ?? Templates { get; internal set; }
 
         [JsonProperty("indices")]
-        public Dictionary<string, MetadataIndexState> Indices { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, MetadataIndexState> Indices { get; internal set; }
     }
 
     public class MetadataIndexState
@@ -75,10 +79,12 @@ namespace Nest
         public string State { get; internal set; }
 
         [JsonProperty("settings")]
-        public Dictionary<string, string> Settings { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, string> Settings { get; internal set; }
 
         [JsonProperty("mappings")]
-        public Dictionary<string, dynamic> Mappings { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, dynamic> Mappings { get; internal set; }
 
         //[JsonProperty("aliases")]
         //public ?? Aliases { get; internal set; }

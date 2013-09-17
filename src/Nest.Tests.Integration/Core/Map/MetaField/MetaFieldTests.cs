@@ -14,9 +14,11 @@ namespace Nest.Tests.Integration.Core.Map.MetaField
 				.Meta(d => d
 					.Add("attr1", "value1")
 					.Add("attr2", new { attr3 = "value3" })
-					.Add("attr4", 10)
+					.Add("Attr4", 10)
 				)
 			);
+			//make sure Attr4 is not serialized as attr4
+			StringAssert.DoesNotContain("attr4", result.ConnectionStatus.Request, result.ConnectionStatus.Request);
 			this.DefaultResponseAssertations(result);
 		}
 	}

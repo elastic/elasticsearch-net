@@ -29,6 +29,7 @@ namespace Nest
 		public int UnassignedShards { get; set; }
 
 		[JsonProperty(PropertyName = "shards")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, ShardHealthStats> Shards { get; set; }
 	}
 }

@@ -43,14 +43,7 @@ namespace Nest.Resolvers
 			property.Ignored = att.OptOut;
 			return property;
 		}
-		protected override string ResolvePropertyName(string propertyName)
-		{
-			return base.ResolvePropertyName(propertyName);
-		}
-		public string Resolve(string name)
-		{
-			return this.ResolvePropertyName(name);
-		}
+
 	}
 	public class ElasticCamelCaseResolver : ElasticResolver
 	{

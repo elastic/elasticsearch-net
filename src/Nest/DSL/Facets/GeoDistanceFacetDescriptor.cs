@@ -28,6 +28,7 @@ namespace Nest
 
     internal GeoDistance? _GeoDistance { get; set; }
 
+	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
     internal Dictionary<string, object> _Params { get; set; }
   }
 
