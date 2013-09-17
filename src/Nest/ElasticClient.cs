@@ -50,17 +50,18 @@ namespace Nest
 		/// Get the data when you hit the elasticsearch endpoint at the too
 		/// </summary>
 		/// <returns></returns>
-		public IRootInfoResponse GetRootNodeInfo()
+		public IRootInfoResponse RootNodeInfo()
 		{
 			var response = this.Connection.GetSync("/");
 			return response.ToParsedResponse<RootInfoResponse>();
 
 		}
+
 		/// <summary>
 		/// Get the data when you hit the elasticsearch endpoint at the too
 		/// </summary>
 		/// <returns></returns>
-		public Task<IRootInfoResponse> GetRootNodeInfoAsync()
+		public Task<IRootInfoResponse> RootNodeInfoAsync()
 		{
 			var response = this.Connection.Get("/");
 			return response

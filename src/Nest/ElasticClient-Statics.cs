@@ -26,6 +26,7 @@ namespace Nest
 		{
 			return GetTypeNameFor(typeof (T));
 		}
+
 		public string GetTypeNameFor(Type type)
 		{
 			return this.TypeNameResolver.GetTypeNameFor(type).Resolve(this._connectionSettings);
@@ -35,15 +36,12 @@ namespace Nest
 		{
 			return GetIndexNameFor(typeof(T));
 		}
+
 		public string GetIndexNameFor(Type type)
 		{
 			return this.IndexNameResolver.GetIndexForType(type);
 		}
 
-		/// <summary>
-		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
-		/// </summary>
-		/// <returns></returns>
 		protected virtual R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
 		{
 			return this.Serializer.ToParsedResponse<R>(status, allow404, extraConverters);

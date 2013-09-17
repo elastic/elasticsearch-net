@@ -8,7 +8,6 @@ namespace Nest
 {
 	public interface IElasticClient
 	{
-
 		IConnection Connection { get; }
 		ElasticSerializer Serializer { get;  }
 		IRawElasticClient Raw { get; }
@@ -17,7 +16,6 @@ namespace Nest
 		string GetTypeNameFor(Type type);
 		string GetIndexNameFor<T>();
 		string GetIndexNameFor(Type type);
-
 
 		IIndicesOperationResponse Alias(AliasParams aliasParams);
 		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
@@ -296,10 +294,8 @@ namespace Nest
 		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
 
-
 		IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId);
 		IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class;
-
 
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
@@ -337,8 +333,9 @@ namespace Nest
 
 		IValidateResponse Validate<T>(Action<ValidateQueryPathDescriptor<T>> querySelector) where T : class;
 
-		IRootInfoResponse GetRootNodeInfo();
-		Task<IRootInfoResponse> GetRootNodeInfoAsync();
+		IRootInfoResponse RootNodeInfo();
+
+		Task<IRootInfoResponse> RootNodeInfoAsync();
 		
 	}
 }

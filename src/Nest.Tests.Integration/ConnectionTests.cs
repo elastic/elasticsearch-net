@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration
         [Test]
 		public void TestConnectSuccess()
 		{
-			var rootNodeInfo = _client.GetRootNodeInfo();
+			var rootNodeInfo = _client.RootNodeInfo();
 			Assert.True(rootNodeInfo.IsValid);
 			Assert.Null(rootNodeInfo.ConnectionStatus.Error);
 		}
@@ -72,7 +72,7 @@ namespace Nest.Tests.Integration
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"));
 				var client = new ElasticClient(settings);
-				var result = client.GetRootNodeInfo();
+				var result = client.RootNodeInfo();
 
 				Assert.False(result.IsValid);
 				Assert.NotNull(result.ConnectionStatus);
@@ -86,7 +86,7 @@ namespace Nest.Tests.Integration
 		{
 			var settings = new ConnectionSettings(Test.Default.Uri);
 			var client = new ElasticClient(settings);
-			var result = client.GetRootNodeInfo();
+			var result = client.RootNodeInfo();
 
 			Assert.True(result.IsValid);
 			Assert.Null(result.ConnectionStatus.Error);

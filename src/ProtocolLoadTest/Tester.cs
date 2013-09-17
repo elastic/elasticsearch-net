@@ -26,7 +26,7 @@ namespace ProtocolLoadTest
 
 		protected void Connect(ElasticClient client, ConnectionSettings settings)
 		{
-			var result = client.GetRootNodeInfo();
+			var result = client.RootNodeInfo();
 			if (!result.IsValid)
 			{
 				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",

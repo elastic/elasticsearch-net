@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 		[Test]
 		public void IndexExistShouldNotThrowOn404()
 		{
-			var isValidThriftConnection = this._thriftClient.GetRootNodeInfo().IsValid;
+			var isValidThriftConnection = this._thriftClient.RootNodeInfo().IsValid;
 			isValidThriftConnection.Should().BeTrue();
 
 			var unknownIndexResult = this._thriftClient.IndexExists("i-am-running-out-of-clever-index-names");
