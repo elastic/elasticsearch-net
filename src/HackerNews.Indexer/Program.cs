@@ -27,8 +27,8 @@ namespace HackerNews.Indexer
 										.SetDefaultIndex("mpdreamz")
 										.SetMaximumAsyncConnections(50);
 			var client = new ElasticClient(elasticSettings);
-			ConnectionStatus connectionStatus;
-			if (!client.TryConnect(out connectionStatus))
+			var result >
+			if (!client.(out connectionStatus))
 			{
 				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",
 					elasticSettings.Host, connectionStatus.Error.OriginalException.Message);

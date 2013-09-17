@@ -26,14 +26,12 @@ namespace ProtocolLoadTest
 
 		protected void Connect(ElasticClient client, ConnectionSettings settings)
 		{
-			ConnectionStatus indexConnectionStatus;
-
-			if (!client.TryConnect(out indexConnectionStatus))
+			var result = client.GetRootNodeInfo();
+			if (!result.IsValid)
 			{
 				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",
-					settings.Host, indexConnectionStatus.Error.OriginalException.Message);
+					settings.Host, result.ConnectionStatus.Error.OriginalException.Message);
 				Console.Read();
-				return;
 			}
 		}
 		
