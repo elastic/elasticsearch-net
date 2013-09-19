@@ -19,7 +19,7 @@ namespace Nest
         public string Hostname { get; internal set; }
 
         [JsonProperty("indices")]
-        public Dictionary<string, NodeStatsIndexes> Indices { get; internal set; }
+        public NodeStatsIndexes Indices { get; internal set; }
 
         [JsonProperty("os")]
         public OSStats OS { get; internal set; }
