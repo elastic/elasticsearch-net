@@ -30,22 +30,25 @@ namespace Nest.Tests.Unit.Core.Index
 		}
 	
 		[Test]
-		public void GetSupportsVersioning()
+		public void IndexingDictionaryRespectsCasing()
 		{
-			//TODO: investigate version on get
-			//The elasticsearch docs make no mention of being able to specify version
-			//http://www.elasticsearch.org/guide/reference/api/get.html
+			var x = new
+			{
+				FirstDictionary = new Dictionary<string, object>
+				{
+					{"ALLCAPS", 1 },
+					{"PascalCase", "should work as well"},
+					{"camelCase", DateTime.Now}
+				}
+			};
+			var result = this._client.Index(x);
 
-			//this._client.Get<ElasticSearchProject>(g=>g.);
-		}
-		[Test]
-		public void UpdateSupportsVersioning()
-		{
-			//TODO: investigate version on update
-			//The elasticsearch docs make no mention of being able to specify version
-			//http://www.elasticsearch.org/guide/reference/api/get.html
+			var request = result.ConnectionStatus.Request;
+			StringAssert.Contains("ALLCAPS", request);
+			StringAssert.Contains("PascalCase", request);
+			StringAssert.Contains("camelCase", request);
+			StringAssert.Contains("firstDictionary", request);
 
-			//this._client.Get<ElasticSearchProject>(g=>g.);
 		}
 	}
 }

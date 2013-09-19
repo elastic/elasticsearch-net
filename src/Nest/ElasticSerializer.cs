@@ -20,7 +20,8 @@ namespace Nest
 		private static readonly ConcurrentBag<JsonConverter> _defaultConverters = new ConcurrentBag<JsonConverter>
 		{
 			new IsoDateTimeConverter(),
-			new FacetConverter()
+			new FacetConverter(),
+			new DictionaryKeysAreNotPropertyNamesJsonConverter()
 		};
 
 		public ElasticSerializer(IConnectionSettings settings)
