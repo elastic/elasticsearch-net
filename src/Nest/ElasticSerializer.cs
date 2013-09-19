@@ -108,7 +108,7 @@ namespace Nest
 				var concrete = extraConverters.OfType<ConcreteTypeConverter>().FirstOrDefault();
 				if (concrete != null)
 				{
-					((ElasticResolver)settings.ContractResolver).ConcreteTypeConverter = concrete;
+					((ElasticContractResolver)settings.ContractResolver).ConcreteTypeConverter = concrete;
 				}
 				else
 					settings.Converters = settings.Converters.Concat(extraConverters).ToList();
@@ -120,7 +120,7 @@ namespace Nest
 		{
 			return new JsonSerializerSettings()
 			{
-				ContractResolver = new ElasticCamelCaseResolver(this._settings),
+				ContractResolver = new ElasticContractResolver(this._settings),
 				NullValueHandling = NullValueHandling.Ignore,
 				DefaultValueHandling = DefaultValueHandling.Include,
 				Converters = _defaultConverters.Concat(_extraConverters).ToList()

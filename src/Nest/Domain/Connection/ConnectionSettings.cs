@@ -35,6 +35,7 @@ namespace Nest
 		public FluentDictionary<Type, string> DefaultIndices { get; private set; }
 		public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
 		public NameValueCollection QueryStringParameters { get; private set; }
+    public Func<string, string> DefaultPropertyNameInferrer { get; private set; }
 
 		public ConnectionSettings(Uri uri)
 		{
@@ -160,6 +161,19 @@ namespace Nest
 			return;
 		}
 
+    /// <summary>
+    /// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit propertyname 
+    /// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
+    /// <pre>
+    /// Here you can register a function that transforms propertynames (default casing, pre- or suffixing)
+    /// </pre>
+    /// </summary>
+    public ConnectionSettings SetDefaultPropertyNameInferrer(Func<string, string> propertyNameSelector)
+    {
+      this.DefaultPropertyNameInferrer = propertyNameSelector;
+      return this;
+    }
+
 		public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
 		{
 			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
@@ -187,5 +201,6 @@ namespace Nest
 			return this;
 		}
 
-	}
+
+  }
 }

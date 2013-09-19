@@ -539,7 +539,7 @@
     <Compile Include="DSL\Query\Term.cs" />
     <Compile Include="DSL\Query\Wildcard.cs" />
     <Compile Include="ElasticClient-Search.cs" />
-    <Compile Include="Resolvers\ElasticSearchJsonResolver.cs" />
+    <Compile Include="Resolvers\ElasticContractResolver.cs" />
     <Compile Include="Enums\Consistency.cs" />
     <Compile Include="Enums\FacetTypes.cs" />
     <Compile Include="Enums\Replication.cs" />
