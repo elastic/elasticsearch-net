@@ -74,7 +74,16 @@
     <Compile Include="Extensions\StringInject.cs" />
     <Compile Include="RawElasticClient.cs" />
     <Compile Include="Domain\Responses\IReindexResponse.cs" />
+    <Compile Include="Domain\Suggest\Suggest.cs" />
+    <Compile Include="Domain\Suggest\SuggestOption.cs" />
     <Compile Include="DSL\ReindexDescriptor.cs" />
+    <Compile Include="DSL\Suggest\BaseSuggestDescriptor.cs" />
+    <Compile Include="DSL\Suggest\DirectGeneratorDescriptor.cs" />
+    <Compile Include="DSL\Suggest\ISuggestDescriptor.cs" />
+    <Compile Include="DSL\Suggest\PhraseSuggestDescriptor.cs" />
+    <Compile Include="DSL\Suggest\SuggestDescriptorBucket.cs" />
+    <Compile Include="DSL\Suggest\TermSuggestDescriptor.cs" />
+    <Compile Include="Enums\SuggestMode.cs" />
     <Compile Include="Exception\ReindexException.cs" />
     <Compile Include="Domain\Responses\ReindexObservable.cs" />
     <Compile Include="Domain\Responses\ReindexObserver.cs" />

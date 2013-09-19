@@ -13,7 +13,7 @@ namespace Nest
 	public class MultiMatchQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "type")]
-		internal virtual string _Type { get { return null; } }
+		internal virtual string _Type { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		internal string _Query { get; set; }
@@ -148,6 +148,12 @@ namespace Nest
 		public MultiMatchQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
 			this._TieBreaker = tieBreaker;
+			return this;
+		}
+
+		public MultiMatchQueryDescriptor<T> Type(TextQueryType type)
+		{
+			this._Type = type.ToString().ToLower();
 			return this;
 		}
 	}
