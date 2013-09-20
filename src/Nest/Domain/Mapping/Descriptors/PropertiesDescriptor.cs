@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
 
@@ -8,6 +9,8 @@ namespace Nest
 	public class PropertiesDescriptor<T> where T : class
 	{
 		private readonly IConnectionSettings _connectionSettings;
+		
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public IDictionary<string, IElasticType> Properties { get; private set; }
 		internal IList<string> _Deletes = new List<string>();
 

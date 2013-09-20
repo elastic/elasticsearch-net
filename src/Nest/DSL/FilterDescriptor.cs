@@ -52,15 +52,19 @@ namespace Nest
 		internal IdsFilter IdsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_bounding_box")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> GeoBoundingBoxFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> GeoDistanceFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> GeoDistanceRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_polygon")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> GeoPolygonFilter { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]
@@ -79,30 +83,39 @@ namespace Nest
 		internal object HasParentFilter { get; set; }
 
 		[JsonProperty(PropertyName = "numeric_range")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> NumericRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> RangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> PrefixFilter { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> TermFilter { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> TermsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "fquery")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> QueryFilter { get; set; }
 
 		[JsonProperty(PropertyName = "and")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> AndFilter { get; set; }
 
 		[JsonProperty(PropertyName = "or")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> OrFilter { get; set; }
 
 		[JsonProperty(PropertyName = "not")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> NotFilter { get; set; }
 
 		[JsonProperty(PropertyName = "bool")]

@@ -60,7 +60,7 @@ namespace Nest
 
 			d._Id.ThrowIfNullOrEmpty("Id on getselector");
 
-			var p = new PathResolver(this.Settings);
+			var p = new PathResolver(this._connectionSettings);
 			var path = p.CreateGetPath<T>(d);
 			return this._GetFull<T>(path);
 		}

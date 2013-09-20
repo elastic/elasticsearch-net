@@ -8,10 +8,14 @@ namespace Nest
 {
 	public interface IElasticClient
 	{
-
 		IConnection Connection { get; }
-		bool IsValid { get; }
-		IConnectionSettings Settings { get; }
+		ElasticSerializer Serializer { get;  }
+		IRawElasticClient Raw { get; }
+
+		string GetTypeNameFor<T>();
+		string GetTypeNameFor(Type type);
+		string GetIndexNameFor<T>();
+		string GetIndexNameFor(Type type);
 
 		IIndicesOperationResponse Alias(AliasParams aliasParams);
 		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
@@ -23,8 +27,6 @@ namespace Nest
 
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
-
-
 
 		IAnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text);
 		IAnalyzeResponse Analyze(string text);
@@ -292,10 +294,8 @@ namespace Nest
 		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
 
-
 		IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId);
 		IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class;
-
 
 		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
 		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
@@ -308,17 +308,7 @@ namespace Nest
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(IEnumerable<string> indices);
 		ISegmentsResponse Segments(string index);
-
-		/// <summary>
-		/// serialize an object using the internal registered converters without camelcasing properties as is done 
-		/// while indexing objects
-		/// </summary>
-		string Serialize(object @object);
-
-		/// <summary>
-		/// Serialize an object using the default camelCasing used while indexing objects
-		/// </summary>
-		string SerializeCamelCase(object @object);
+		
 		IIndicesShardResponse Snapshot();
 		IIndicesShardResponse Snapshot(IEnumerable<string> indices);
 		IIndicesShardResponse Snapshot(string index);
@@ -330,7 +320,6 @@ namespace Nest
 		IStatsResponse Stats(IEnumerable<string> indices, StatsParams parameters);
 		IStatsResponse Stats(string index);
 		IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices);
-		bool TryConnect(out ConnectionStatus status);
 		IUnregisterPercolateResponse UnregisterPercolator(string index, string name);
 		IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class;
 		IUpdateResponse Update<T>(Action<UpdateDescriptor<T, T>> updateSelector) where T : class;
@@ -339,19 +328,14 @@ namespace Nest
 			where K : class;
 		ISettingsOperationResponse UpdateSettings(IndexSettings settings);
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
-		IElasticSearchVersionInfo VersionInfo { get; }
 
 		IValidateResponse Validate(Action<ValidateQueryPathDescriptor> querySelector);
 
 		IValidateResponse Validate<T>(Action<ValidateQueryPathDescriptor<T>> querySelector) where T : class;
 
+		IRootInfoResponse RootNodeInfo();
 
-		string GetTypeNameFor<T>();
-		string GetTypeNameFor(Type type);
-		string GetIndexNameFor<T>();
-		string GetIndexName(Type type);
-		R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) 
-			where R : BaseResponse;
-
+		Task<IRootInfoResponse> RootNodeInfoAsync();
+		
 	}
 }

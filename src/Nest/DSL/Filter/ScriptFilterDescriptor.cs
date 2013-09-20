@@ -17,6 +17,7 @@ namespace Nest
 		internal string _Script { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> _Params { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]

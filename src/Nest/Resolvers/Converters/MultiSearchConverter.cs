@@ -20,9 +20,11 @@ namespace Nest.Resolvers.Converters
 		private readonly MultiSearchDescriptor _descriptor;
 
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
+		private readonly IConnectionSettings _settings;
 
-		public MultiSearchConverter(MultiSearchDescriptor descriptor)
+		public MultiSearchConverter(IConnectionSettings settings, MultiSearchDescriptor descriptor)
 		{
+			this._settings = settings;
 			_descriptor = descriptor;
 		}
 
@@ -30,7 +32,13 @@ namespace Nest.Resolvers.Converters
 		{
 			throw new NotSupportedException();
 		}
-		private static void CreateMultiHit<T>(MultiHitTuple tuple, JsonSerializer serializer, IDictionary<string, object> collection) where T : class
+		private static void CreateMultiHit<T>(
+			MultiHitTuple tuple, 
+			JsonSerializer serializer, 
+			IDictionary<string, object> collection, 
+			IConnectionSettings settings
+		)
+			where T : class
 		{
 			var hit = new QueryResponse<T>();
 			var reader = tuple.Hit.CreateReader();
@@ -40,7 +48,10 @@ namespace Nest.Resolvers.Converters
 			if (errorProperty != null)
 			{
 				hit.IsValid = false;
-				hit.ConnectionStatus = new ConnectionStatus(new ConnectionError(errorProperty.Value.ToString(), 500));
+				hit.ConnectionStatus = new ConnectionStatus(settings, new ConnectionException(
+					msg: errorProperty.Value.ToString(),
+					response: errorProperty.Value.ToString()
+				));
 			}
 
 			collection.Add(tuple.Descriptor.Key, hit);
@@ -63,7 +74,7 @@ namespace Nest.Resolvers.Converters
 			foreach (var m in withMeta)
 			{
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(m.Descriptor.Value._ClrType);
-				generic.Invoke(null, new object[] { m, serializer, response._Responses });
+				generic.Invoke(null, new object[] { m, serializer, response._Responses, this._settings });
 			}
 
 			return response;

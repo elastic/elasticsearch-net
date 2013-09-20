@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -12,9 +14,16 @@ namespace Nest
 			this.CharFilters = new Dictionary<string, CharFilterBase>();
         }
 
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public IDictionary<string, AnalyzerBase> Analyzers { get; set; }
-        public IDictionary<string, TokenFilterBase> TokenFilters { get; set; }
+
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public IDictionary<string, TokenFilterBase> TokenFilters { get; set; }
+	
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public IDictionary<string, TokenizerBase> Tokenizers { get; set; }
+		
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public IDictionary<string, CharFilterBase> CharFilters { get; set; }
     }
 }

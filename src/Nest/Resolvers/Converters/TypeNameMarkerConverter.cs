@@ -22,7 +22,7 @@ namespace Nest.Resolvers.Converters
 				writer.WriteNull();
 				return;
 			}
-			var settings = serializer.ContractResolver as ElasticResolver;
+			var settings = serializer.ContractResolver as ElasticContractResolver;
 			if (settings != null && settings.ConnectionSettings != null)
 			{
 				var typeName = marker.Resolve(settings.ConnectionSettings);

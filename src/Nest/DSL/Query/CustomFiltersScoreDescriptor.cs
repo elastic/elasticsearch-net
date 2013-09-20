@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.DSL.Query;
 using Newtonsoft.Json.Converters;
@@ -21,8 +22,9 @@ namespace Nest
         [JsonConverter(typeof(StringEnumConverter))]
         internal ScoreMode _ScoreMode { get; set; }
 
-        [JsonProperty(PropertyName = "params")]
-        internal Dictionary<string, object> _Params { get; set; }
+		[JsonProperty(PropertyName = "params")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal Dictionary<string, object> _Params { get; set; }
 
         [JsonProperty(PropertyName = "lang")]
         internal string _Lang { get; set; }

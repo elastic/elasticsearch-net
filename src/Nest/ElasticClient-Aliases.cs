@@ -79,7 +79,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Alias(string alias)
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
@@ -105,7 +105,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Alias(IEnumerable<string> aliases)
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);
@@ -115,7 +115,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse RemoveAlias(string alias)
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
 			return this._Alias(q);
 		}
@@ -132,7 +132,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse RemoveAlias(IEnumerable<string> aliases)
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
 			var q = string.Join(",", aliases);
 			return this._Alias(q);

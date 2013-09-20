@@ -33,7 +33,8 @@ namespace Nest
     internal string _Order { get; set; }
 
     [JsonProperty(PropertyName = "fields")]
-    internal Dictionary<string, HighlightFieldDescriptor<T>> _Fields { get; set; }
+	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+	internal Dictionary<string, HighlightFieldDescriptor<T>> _Fields { get; set; }
 
     [JsonProperty("require_field_match")]
     internal bool? _RequireFieldMatch { get; set; }

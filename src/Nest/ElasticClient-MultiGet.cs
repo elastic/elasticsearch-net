@@ -127,7 +127,7 @@ namespace Nest
 		private IEnumerable<T> MultiGet<T>(IEnumerable<string> ids, string path)
 			where T : class
 		{
-			var data = @"{{ ""ids"": {0} }}".F(JsonConvert.SerializeObject(ids));
+			var data = @"{{ ""ids"": {0} }}".F(this.Serialize(ids));
 			var response = this.Connection.PostSync(path + "_mget", data);
 
 			if (response.Result == null)

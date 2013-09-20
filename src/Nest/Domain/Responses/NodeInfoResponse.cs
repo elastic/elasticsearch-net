@@ -27,6 +27,7 @@ namespace Nest
         public string ClusterName { get; internal set; }
 
         [JsonProperty(PropertyName = "nodes")]
-        public Dictionary<string, NodeInfo> Nodes { get; set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, NodeInfo> Nodes { get; set; }
     }
 }

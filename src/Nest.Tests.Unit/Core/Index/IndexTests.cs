@@ -13,39 +13,40 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Core.Index
 {
-	[TestFixture]
-	public class IndexTests : BaseJsonTests
-	{
-		[Test]
-		public void IndexParameters()
-		{
-			var o = new ElasticSearchProject { Id = 1, Name = "Test" };
-			var result = this._client.Index(o, new IndexParameters 
-			{ 
-				Version = "1",
+  [TestFixture]
+  public class IndexTests : BaseJsonTests
+  {
+    [Test]
+    public void IndexParameters()
+    {
+      var o = new ElasticSearchProject { Id = 1, Name = "Test" };
+      var result = this._client.Index(o, new IndexParameters
+      {
+        Version = "1",
+      });
+      var status = result.ConnectionStatus;
+      StringAssert.Contains("version=1", status.RequestUrl);
+    }
 
-			});
-			var status = result.ConnectionStatus;
-			StringAssert.Contains("version=1", status.RequestUrl);
-		}
-	
-		[Test]
-		public void GetSupportsVersioning()
-		{
-			//TODO: investigate version on get
-			//The elasticsearch docs make no mention of being able to specify version
-			//http://www.elasticsearch.org/guide/reference/api/get.html
+    [Test]
+    public void IndexingDictionaryRespectsCasing()
+    {
+      var x = new
+      {
+        FirstDictionary = new Dictionary<string, object>
+				{
+					{"ALLCAPS", 1 },
+					{"PascalCase", "should work as well"},
+					{"camelCase", DateTime.Now}
+				}
+      };
+      var result = this._client.Index(x);
 
-			//this._client.Get<ElasticSearchProject>(g=>g.);
-		}
-		[Test]
-		public void UpdateSupportsVersioning()
-		{
-			//TODO: investigate version on update
-			//The elasticsearch docs make no mention of being able to specify version
-			//http://www.elasticsearch.org/guide/reference/api/get.html
-
-			//this._client.Get<ElasticSearchProject>(g=>g.);
-		}
-	}
+      var request = result.ConnectionStatus.Request;
+      StringAssert.Contains("ALLCAPS", request);
+      StringAssert.Contains("PascalCase", request);
+      StringAssert.Contains("camelCase", request);
+      StringAssert.Contains("firstDictionary", request);
+    }
+  }
 }

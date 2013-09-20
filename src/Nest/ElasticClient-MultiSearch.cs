@@ -33,7 +33,7 @@ namespace Nest
 				
 				var index = indeces ??
 							multiSearchDescriptor._FixedIndex ??
-				            new IndexNameResolver(this.Settings).GetIndexForType(operation._ClrType);
+				            new IndexNameResolver(this._connectionSettings).GetIndexForType(operation._ClrType);
 				
 				var types = operation._Types.HasAny() ? string.Join(",", operation._Types) : null;
 
@@ -44,11 +44,11 @@ namespace Nest
 					typeName = null; //force empty typename so we'll query all types.
 
 				var op = new { index = index, type = typeName, search_type = this.GetSearchType(operation), preference = operation._Preference, routing = operation._Routing };
-				var opJson = JsonConvert.SerializeObject(op, Formatting.None, IndexSerializationSettings);
+				var opJson = this.Serializer.Serialize(op, Formatting.None);
 
 				var action = "{0}\n".F(opJson);
 				sb.Append(action);
-				var searchJson = JsonConvert.SerializeObject(operation, Formatting.None, IndexSerializationSettings);
+				var searchJson = this.Serializer.Serialize(operation, Formatting.None);
 				sb.Append(searchJson + "\n");
 
 			}
@@ -62,7 +62,7 @@ namespace Nest
 			}
 			var status = this.Connection.PostSync(path, json);
 
-			var multiSearchConverter = new MultiSearchConverter(multiSearchDescriptor);
+			var multiSearchConverter = new MultiSearchConverter(this._connectionSettings, multiSearchDescriptor);
 			var multiSearchResponse = this.ToParsedResponse<MultiSearchResponse>(status, 
 				extraConverters: new List<JsonConverter> 
 				{ 

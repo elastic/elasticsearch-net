@@ -41,16 +41,10 @@ namespace Nest.Tests.Unit
 			//Lazy programmers for the win!
 			throw new Exception(s);
 		}
-		protected void JsonEqualsCamelCase(object o, MethodBase method, string fileName = null)
-		{
-			//Todo find a way to have a single code path for serializations 
-			//Serialize vs SerializeCamelCase smells a bit.
-			var json = _client.SerializeCamelCase(o);
-			this.JsonEquals(json, method, fileName);
-		}
+	
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
-			var json = _client.Serialize(o);
+			var json = _client.Serializer.Serialize(o);
 			this.JsonEquals(json, method, fileName);
 		}
 		protected void JsonEquals(string json, MethodBase method, string fileName = null)

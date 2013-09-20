@@ -13,7 +13,7 @@ namespace Nest
 		public IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
 		{
 			selector.ThrowIfNull("selector");
-			var descriptor = selector(new PutWarmerDescriptor(Settings));
+			var descriptor = selector(new PutWarmerDescriptor(_connectionSettings));
 			descriptor.ThrowIfNull("descriptor");
 
 			var query = this.Serialize(descriptor._SearchDescriptor);
@@ -31,7 +31,7 @@ namespace Nest
 		public IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
 		{
 			selector.ThrowIfNull("selector");
-			var descriptor = selector(new GetWarmerDescriptor(Settings));
+			var descriptor = selector(new GetWarmerDescriptor(_connectionSettings));
 			descriptor.ThrowIfNull("descriptor");
 			var path = this.PathResolver.GetWarmerPath(descriptor);
 
@@ -46,7 +46,7 @@ namespace Nest
 		public IIndicesOperationResponse DeleteWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
 		{
 			selector.ThrowIfNull("selector");
-			var descriptor = selector(new GetWarmerDescriptor(Settings));
+			var descriptor = selector(new GetWarmerDescriptor(_connectionSettings));
 			descriptor.ThrowIfNull("descriptor");
 			var path = this.PathResolver.GetWarmerPath(descriptor);
 

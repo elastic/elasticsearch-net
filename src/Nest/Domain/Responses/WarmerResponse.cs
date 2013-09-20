@@ -13,6 +13,7 @@ namespace Nest
 	[JsonConverter(typeof(WarmerResponseConverter))]
 	public class WarmerResponse : BaseResponse, IWarmerResponse
 	{
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, Dictionary<string, WarmerMapping>> Indices { get; internal set; }
 
 	}

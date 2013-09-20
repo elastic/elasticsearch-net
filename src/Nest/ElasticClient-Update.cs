@@ -17,7 +17,7 @@ namespace Nest
 			var updateDescriptor = new UpdateDescriptor<T, K>();
 			updateSelector(updateDescriptor);
 			//var data = JsonConvert.SerializeObject(updateDescriptor, Formatting.Indented, IndexSerializationSettings);
-			var data = this.SerializeCamelCase(updateDescriptor);
+			var data = this.Serialize(updateDescriptor);
 			var path = this.CreateUpdatePath<T, K>(updateDescriptor);
 			return this._Update(path, data);
 		}
@@ -26,7 +26,7 @@ namespace Nest
             where K : class
         {
             var index = s._Index ?? this.IndexNameResolver.GetIndexForType<T>();
-            var type = s._Type != null ? s._Type.Resolve(this.Settings) : this.GetTypeNameFor<T>();
+            var type = s._Type != null ? s._Type.Resolve(this._connectionSettings) : this.GetTypeNameFor<T>();
             var id = s._Id ?? this.IdResolver.GetIdFor(s._Object);
 
             index.ThrowIfNullOrEmpty("index");

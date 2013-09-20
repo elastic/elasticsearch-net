@@ -90,7 +90,7 @@ namespace Nest
 		{
 			result.Position = 0;
 			var reader = new StreamReader(result);
-			Done(new ConnectionStatus(reader.ReadToEnd())
+			Done(new ConnectionStatus(this.m_connectionSettings, reader.ReadToEnd())
 			{
 				Request = this.m_requestData,
 				RequestUrl = this.m_request.RequestUri.ToString(),
@@ -109,7 +109,7 @@ namespace Nest
 				}
 				catch (WebException webException)
 				{
-					var connectionStatus = new ConnectionStatus(webException)
+					var connectionStatus = new ConnectionStatus(this.m_connectionSettings, webException)
 					{
 						Request = this.m_requestData,
 						RequestUrl = this.m_request.RequestUri.ToString(),

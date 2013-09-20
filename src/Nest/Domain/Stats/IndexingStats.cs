@@ -26,6 +26,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "delete_current")]
 		public int DeleteCurrent { get; set; }
 		[JsonProperty(PropertyName = "types")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, TypeStats> Types { get; set; }
 	}
 }

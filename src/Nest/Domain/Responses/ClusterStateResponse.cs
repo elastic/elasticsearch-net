@@ -26,7 +26,8 @@ namespace Nest
         public string MasterNode { get; internal set; }
 
         [JsonProperty("nodes")]
-        public Dictionary<string, NodeState> Nodes { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, NodeState> Nodes { get; internal set; }
 
         [JsonProperty("metadata")]
         public MetadataState Metadata { get; internal set; }

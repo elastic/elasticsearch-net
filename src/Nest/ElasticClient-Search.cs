@@ -160,7 +160,7 @@ namespace Nest
 				)
             {
 				var typeDictionary = types
-					.ToDictionary(t => t.Resolve(this.Settings), t => t.Type);
+					.ToDictionary(t => t.Resolve(this._connectionSettings), t => t.Type);
 
 				descriptor._ConcreteTypeSelector = (o, h) =>
 				{
