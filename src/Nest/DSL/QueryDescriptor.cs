@@ -47,15 +47,20 @@ namespace Nest
 		internal DismaxQueryDescriptor<T> DismaxQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "filtered")]
 		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
+		
 		[JsonProperty(PropertyName = "text")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]		
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "multi_match")]
 		internal MultiMatchQueryDescriptor<T> MultiMatchQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "match")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> MatchQueryDescriptor { get; set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		[JsonProperty(PropertyName = "fuzzy")]
 		internal IDictionary<string, object> FuzzyQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "terms")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> TermsQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
@@ -69,6 +74,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "mlt")]
 		internal MoreLikeThisQueryDescriptor<T> MoreLikeThisDescriptor { get; set; }
 		[JsonProperty(PropertyName = "range")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> RangeQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "span_term")]

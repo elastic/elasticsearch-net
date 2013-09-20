@@ -16,7 +16,7 @@ namespace Nest
 		/// </summary>
 		public IIndexSettingsResponse GetIndexSettings()
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			return this.GetIndexSettings(index);
 		}
 		/// <summary>
@@ -53,7 +53,7 @@ namespace Nest
 		/// </summary>
 		public ISettingsOperationResponse UpdateSettings(IndexSettings settings)
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			return this.UpdateSettings(index, settings);
 		}
 		/// <summary>

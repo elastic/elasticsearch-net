@@ -82,12 +82,11 @@ namespace ProtocolLoadTest
 
 			var client = new ElasticClient(connSettings);
 
-			ConnectionStatus connStatus;
-
-			if (!client.TryConnect(out connStatus))
+			var result = client.RootNodeInfo();
+			if (!result.IsValid)
 			{
 				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",
-					connSettings.Host, connStatus.Error.OriginalException.Message);
+					connSettings.Host, result.ConnectionStatus.Error.OriginalException.Message);
 				Console.Read();
 				return;
 			}
@@ -116,12 +115,11 @@ namespace ProtocolLoadTest
 
 			var client = new ElasticClient(connSettings);
 
-			ConnectionStatus connStatus;
-
-			if (!client.TryConnect(out connStatus))
+			var result = client.RootNodeInfo();
+			if (!result.IsValid)
 			{
 				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",
-					connSettings.Host, connStatus.Error.OriginalException.Message);
+					connSettings.Host, result.ConnectionStatus.Error.OriginalException.Message);
 				Console.Read();
 				return;
 			}

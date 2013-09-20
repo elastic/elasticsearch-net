@@ -43,7 +43,7 @@ namespace Nest
 		/// </summary>
 		public ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector)
 		{
-			var index = this.Settings.DefaultIndex;
+			var index = this._connectionSettings.DefaultIndex;
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			string path = this.PathResolver.CreateIndexPath(index, "_count");

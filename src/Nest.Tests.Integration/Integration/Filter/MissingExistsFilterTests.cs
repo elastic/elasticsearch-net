@@ -33,8 +33,6 @@ namespace Nest.Tests.Integration.Integration.Filter
 		[TestFixtureSetUp]
 		public void Initialize()
 		{
-			_client.IsValid.Should().BeTrue();
-
 			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
 			_MissingField = f => f.Name;
 			_ExistsField = f => f.Id;

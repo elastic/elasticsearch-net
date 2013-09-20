@@ -70,6 +70,9 @@
   <ItemGroup>
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\Connection\NoTasksHttpConnection.cs" />
+    <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="ElasticSerializer.cs" />
+    <Compile Include="Exception\ConnectionException.cs" />
     <Compile Include="RawElasticClient-Generated.cs" />
     <Compile Include="Extensions\StringInject.cs" />
     <Compile Include="RawElasticClient.cs" />
@@ -488,6 +491,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerResponseConverter.cs" />
@@ -535,7 +539,7 @@
     <Compile Include="DSL\Query\Term.cs" />
     <Compile Include="DSL\Query\Wildcard.cs" />
     <Compile Include="ElasticClient-Search.cs" />
-    <Compile Include="Resolvers\ElasticSearchJsonResolver.cs" />
+    <Compile Include="Resolvers\ElasticContractResolver.cs" />
     <Compile Include="Enums\Consistency.cs" />
     <Compile Include="Enums\FacetTypes.cs" />
     <Compile Include="Enums\Replication.cs" />

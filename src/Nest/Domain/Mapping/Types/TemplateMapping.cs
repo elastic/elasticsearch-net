@@ -23,12 +23,15 @@ namespace Nest
 		public int Order { get; set; }
 
 		[JsonProperty("settings")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public FluentDictionary<string, object> Settings { get; set; }
 
 		[JsonProperty("mappings")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, RootObjectMapping> Mappings { get; set; }
 
 		[JsonProperty("warmers")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 	}
 }

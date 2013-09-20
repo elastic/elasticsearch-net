@@ -35,7 +35,7 @@ namespace Nest
 
 		private ConnectionStatus ReturnConnectionStatus(HttpWebRequest request, string data)
 		{
-			return this._fixedResult ?? new ConnectionStatus("{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
+			return this._fixedResult ?? new ConnectionStatus(this._ConnectionSettings, "{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
 			{
 				Request = data,
 				RequestUrl = request.RequestUri.ToString(),

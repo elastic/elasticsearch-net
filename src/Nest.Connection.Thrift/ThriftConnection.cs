@@ -18,9 +18,11 @@ namespace Nest.Thrift
 		private readonly int _timeout;
 		private readonly int _poolSize;
 		private bool _disposed;
+		private readonly IConnectionSettings _connectionSettings;
 
 		public ThriftConnection(IConnectionSettings connectionSettings)
 		{
+			this._connectionSettings = connectionSettings;
 			this._timeout = connectionSettings.Timeout;
 			this._poolSize = connectionSettings.MaximumAsyncConnections;
 
@@ -261,7 +263,7 @@ namespace Nest.Thrift
 			if (!this._resourceLock.WaitOne(this._timeout))
 			{
 				var m = "Could not start the thrift operation before the timeout of " + this._timeout + "ms completed while waiting for the semaphore";
-				return new ConnectionStatus(new TimeoutException(m));
+				return new ConnectionStatus(this._connectionSettings, new TimeoutException(m));
 			}
 			try
 			{
@@ -269,7 +271,7 @@ namespace Nest.Thrift
 				if (!this._clients.TryDequeue(out client))
 				{
 					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
-					var status = new ConnectionStatus(new Exception(m));
+					var status = new ConnectionStatus(this._connectionSettings, new Exception(m));
 					return status;
 				}
 				try
@@ -279,14 +281,15 @@ namespace Nest.Thrift
 
 					var result = client.execute(restRequest);
 					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
-						return new ConnectionStatus(DecodeStr(result.Body));
+						return new ConnectionStatus(this._connectionSettings, DecodeStr(result.Body));
 					else
 					{
-						var connectionError = new ConnectionError(DecodeStr(result.Body), (int)result.Status)
-						{
-							ExceptionMessage = Enum.GetName(typeof (Status), result.Status)						
-						};
-						return new ConnectionStatus(connectionError);
+						var connectionException = new ConnectionException(
+							msg: Enum.GetName(typeof (Status), result.Status), 
+							statusCode: (int)result.Status, 
+							response: DecodeStr(result.Body)
+						);
+						return new ConnectionStatus(this._connectionSettings, connectionException);
 					}
 				}
 				catch
@@ -302,7 +305,7 @@ namespace Nest.Thrift
 			}
 			catch (Exception e)
 			{
-				return new ConnectionStatus(e);
+				return new ConnectionStatus(this._connectionSettings, e);
 			}
 			finally
 			{

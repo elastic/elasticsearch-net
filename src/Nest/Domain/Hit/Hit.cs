@@ -19,7 +19,7 @@ namespace Nest
 
         IEnumerable<object> Sorts { get; }
 
-		HighlightFieldDictionary Highlight { get; }
+		HighlightFieldDictionary Highlights { get; }
         Explanation Explanation { get; }
         ICovariantDictionary<T> PartialFields { get; }
     }
@@ -47,9 +47,10 @@ namespace Nest
         public IEnumerable<object> Sorts { get; internal set; }
 
         [JsonProperty(PropertyName = "highlight")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 
-		public HighlightFieldDictionary Highlight
+		public HighlightFieldDictionary Highlights
 		{
 			get
 			{

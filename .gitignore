@@ -7,6 +7,7 @@
 *.user
 *.aps
 *.pch
+*.tss
 *.vspscc
 *_i.c
 *_p.c

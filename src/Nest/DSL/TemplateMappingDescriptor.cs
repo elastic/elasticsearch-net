@@ -15,11 +15,13 @@ namespace Nest
 
 		internal string _Name { get; set; }
 		internal TemplateMapping _TemplateMapping { get; set; }
-		private readonly JsonSerializerSettings _serializationSettings;
+    private readonly ElasticSerializer _serializer;
+
 		public TemplateMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._TemplateMapping = new TemplateMapping();
 			this._connectionSettings = connectionSettings;
+      this._serializer = new ElasticSerializer(this._connectionSettings);
 		}
 
 		public TemplateMappingDescriptor Name(string name)
@@ -85,7 +87,6 @@ namespace Nest
 			return this;
 		}
 
-
 		public TemplateMappingDescriptor AddWarmer<T>(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
 			where T : class
 		{
@@ -94,7 +95,7 @@ namespace Nest
 			warmerDescriptor.ThrowIfNull("warmerDescriptor");
 			warmerDescriptor._WarmerName.ThrowIfNull("warmer has no name");
 
-			var query = JsonConvert.SerializeObject(warmerDescriptor._SearchDescriptor, this._serializationSettings);
+      var query = this._serializer.Serialize(warmerDescriptor._SearchDescriptor);
 
 			var warmer = new WarmerMapping { Name = warmerDescriptor._WarmerName, Types = warmerDescriptor._Types, Source = query };
 

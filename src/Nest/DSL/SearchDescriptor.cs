@@ -192,12 +192,15 @@ namespace Nest
 		internal double? _MinScore { get; set; }
 
 		[JsonProperty(PropertyName = "indices_boost")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, double> _IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> _Sort { get; set; }
 
 		[JsonProperty(PropertyName = "facets")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
@@ -246,10 +249,12 @@ namespace Nest
 		internal IList<string> _Fields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-        internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
 
         [JsonProperty(PropertyName = "partial_fields")]
-        internal Dictionary<string, PartialFieldDescriptor<T>> _PartialFields { get; set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal Dictionary<string, PartialFieldDescriptor<T>> _PartialFields { get; set; }
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 

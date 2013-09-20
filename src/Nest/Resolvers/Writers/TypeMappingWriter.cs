@@ -15,6 +15,7 @@ namespace Nest.Resolvers.Writers
 		private readonly Type _type;
 		private readonly PropertyNameResolver _propertyNameResolver = new PropertyNameResolver();
 		private readonly IConnectionSettings _connectionSettings;
+    private readonly ElasticSerializer _elasticSerializer;
 
 		private int MaxRecursion { get; set; }
 		private TypeNameMarker TypeName { get; set; }
@@ -30,6 +31,8 @@ namespace Nest.Resolvers.Writers
 
 			this.SeenTypes = new ConcurrentDictionary<Type, int>();
 			this.SeenTypes.TryAdd(t, 0);
+
+      this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
 		}
 		internal TypeMappingWriter(Type t, string typeName, IConnectionSettings connectionSettings, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
@@ -39,6 +42,8 @@ namespace Nest.Resolvers.Writers
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
 			this.SeenTypes = seenTypes;
+
+      this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
 		}
 
 		internal JObject MapPropertiesFromAttributes()
@@ -67,21 +72,21 @@ namespace Nest.Resolvers.Writers
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
-			return JsonConvert.DeserializeObject<RootObjectMapping>(nestedJson);
+			return this._elasticSerializer.Deserialize<RootObjectMapping>(nestedJson);
 		}
 		internal ObjectMapping ObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
-			return JsonConvert.DeserializeObject<ObjectMapping>(nestedJson);
+			return this._elasticSerializer.Deserialize<ObjectMapping>(nestedJson);
 		}
 		internal NestedObjectMapping NestedObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
-			return JsonConvert.DeserializeObject<NestedObjectMapping>(nestedJson);
+			return this._elasticSerializer.Deserialize<NestedObjectMapping>(nestedJson);
 		}
 		internal string MapFromAttributes()
 		{

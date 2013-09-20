@@ -10,7 +10,7 @@ using System.Globalization;
 
 namespace Nest.Resolvers
 {
-	public class ElasticResolver : DefaultContractResolver
+	public class ElasticContractResolver : DefaultContractResolver
 	{
 		/// <summary>
 		/// ConnectionSettings can be requested by JsonConverter's.
@@ -23,9 +23,17 @@ namespace Nest.Resolvers
 		/// </summary>
 		internal ConcreteTypeConverter ConcreteTypeConverter { get; set; }
 
-		public ElasticResolver(IConnectionSettings connectionSettings) : base(true)
+		public ElasticContractResolver(IConnectionSettings connectionSettings) : base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
+		}
+
+		protected override string ResolvePropertyName(string propertyName)
+		{
+      if (this.ConnectionSettings.DefaultPropertyNameInferrer != null)
+        return this.ConnectionSettings.DefaultPropertyNameInferrer(propertyName);
+
+			return propertyName.ToCamelCase();
 		}
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
@@ -43,22 +51,6 @@ namespace Nest.Resolvers
 			property.Ignored = att.OptOut;
 			return property;
 		}
-		protected override string ResolvePropertyName(string propertyName)
-		{
-			return base.ResolvePropertyName(propertyName);
-		}
-		public string Resolve(string name)
-		{
-			return this.ResolvePropertyName(name);
-		}
-	}
-	public class ElasticCamelCaseResolver : ElasticResolver
-	{
-		public ElasticCamelCaseResolver(IConnectionSettings connectionSettings) : base(connectionSettings) { }
 
-		protected override string ResolvePropertyName(string propertyName)
-		{
-			return propertyName.ToCamelCase();
-		}
 	}
 }

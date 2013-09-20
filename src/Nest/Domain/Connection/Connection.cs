@@ -182,7 +182,7 @@ namespace Nest
 					using (var streamReader = new StreamReader(responseStream))
 					{
 						string result = streamReader.ReadToEnd();
-						cs = new ConnectionStatus(result)
+						cs = new ConnectionStatus(this._ConnectionSettings, result)
 						{
 							Request = data,
 							RequestUrl = request.RequestUri.ToString(),
@@ -194,7 +194,7 @@ namespace Nest
 				}
 				catch (WebException webException)
 				{
-					cs = new ConnectionStatus(webException)
+					cs = new ConnectionStatus(this._ConnectionSettings, webException)
 					{
 						Request = data,
 						RequestUrl = request.RequestUri.ToString(),
@@ -223,7 +223,7 @@ namespace Nest
 				{
 					var m = "Could not start the operation before the timeout of " + timeout +
 						"ms completed while waiting for the semaphore";
-					var cs = new ConnectionStatus(new TimeoutException(m));
+					var cs = new ConnectionStatus(this._ConnectionSettings, new TimeoutException(m));
 					tcs.SetResult(cs);
 					tracer.SetResult(cs);
 					return tcs.Task;
@@ -294,7 +294,7 @@ namespace Nest
 
 					// Decode the data and store the result
 					var result = Encoding.UTF8.GetString(output.ToArray());
-					var cs = new ConnectionStatus(result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+					var cs = new ConnectionStatus(this._ConnectionSettings, result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
 					tcs.TrySetResult(cs);
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);
@@ -318,7 +318,7 @@ namespace Nest
 
 					//cleanly exit from exceptions in stages if the exception is a webexception
 					if (exception is WebException)
-						tcs.SetResult(new ConnectionStatus(exception));
+						tcs.SetResult(new ConnectionStatus(this._ConnectionSettings, exception));
 					else
 						tcs.TrySetException(exception);
 					enumerator.Dispose();

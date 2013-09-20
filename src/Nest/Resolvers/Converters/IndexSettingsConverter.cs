@@ -105,7 +105,7 @@ namespace Nest.Resolvers.Converters
 			writer.WriteEndObject();
 			if (indexSettings.Mappings.Count > 0)
 			{
-				var settings = serializer.ContractResolver as ElasticResolver;
+				var settings = serializer.ContractResolver as ElasticContractResolver;
 				if (settings != null && settings.ConnectionSettings != null)
 				{
 					writer.WritePropertyName("mappings");

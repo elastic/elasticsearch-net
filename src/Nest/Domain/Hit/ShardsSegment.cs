@@ -18,7 +18,8 @@ namespace Nest
         public ShardSegmentRouting Routing { get; internal set; }
 
         [JsonProperty]
-        public Dictionary<string, Segment> Segments { get; internal set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public Dictionary<string, Segment> Segments { get; internal set; }
 
     }
 }

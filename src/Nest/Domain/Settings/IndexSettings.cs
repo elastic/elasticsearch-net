@@ -83,12 +83,14 @@ namespace Nest
 				this.Add(key, value);
 		}
 
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> Settings { get; set; }
 
 		public AnalysisSettings Analysis { get; internal set; }
 
 		public IList<RootObjectMapping> Mappings { get; internal set; }
 
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; internal set; }
 
 		public SimilaritySettings Similarity { get; set; }

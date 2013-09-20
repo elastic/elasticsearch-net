@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest.Tests.Unit.Internals.Inferno
 {
@@ -13,6 +14,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		internal class SomeClass
 		{
 			public MyCustomClass MyCustomClass { get; set; }
+			[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 			public Dictionary<string, SomeOtherClass> StringDict { get; set; }
 			public Dictionary<int, MyCustomClass> IntDict { get; set; }
 			public IList<MyCustomClass> ListOfCustomClasses { get; set; } 

@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElasticClient-Search.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Factory\Common\EsRegex.cs" />

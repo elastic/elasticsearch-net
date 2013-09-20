@@ -36,8 +36,14 @@ namespace Nest
 
 			var webException = e as WebException;
 			if (webException == null)
+			{
+				var connectionException = e as ConnectionException;
+				if (connectionException == null)
+					return;
+				this.HttpStatusCode = (HttpStatusCode)connectionException.HttpStatusCode;
+				this.Response = connectionException.Response;
 				return;
-
+			}
 			this.Type = ConnectionErrorType.Server;
 			var response = (HttpWebResponse)webException.Response;
 			this.SetWebResponseData(response);

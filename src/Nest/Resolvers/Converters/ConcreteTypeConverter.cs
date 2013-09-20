@@ -32,7 +32,7 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var realConcreteConverter = ((ElasticResolver) serializer.ContractResolver).ConcreteTypeConverter;
+			var realConcreteConverter = ((ElasticContractResolver) serializer.ContractResolver).ConcreteTypeConverter;
 
 			if (realConcreteConverter != null)
 			{

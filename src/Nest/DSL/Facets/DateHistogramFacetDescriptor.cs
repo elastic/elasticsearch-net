@@ -47,7 +47,8 @@ namespace Nest
     internal string _PostOffset { get; set; }
 
     [JsonProperty(PropertyName = "params")]
-    internal Dictionary<string,object> _Params { get; set; }
+	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+	internal Dictionary<string, object> _Params { get; set; }
 
     public DateHistogramFacetDescriptor<T> OnField(string field)
     {

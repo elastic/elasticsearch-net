@@ -25,6 +25,7 @@ namespace Nest
 		public ShardsMetaData Shards { get; internal set; }
 
 		[JsonProperty(PropertyName = "indices")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, IndexSegment> Indices { get; set; } 
 
 		
