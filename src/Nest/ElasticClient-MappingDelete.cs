@@ -32,7 +32,7 @@ namespace Nest
             string path = this.PathResolver.CreateIndexTypePath(index, type);
             
 			ConnectionStatus status = this.Connection.DeleteSync(path);
-	        return this.ToParsedResponse<IndicesResponse>(status, allow404: true);
+	        return this.Deserialize<IndicesResponse>(status, allow404: true);
         }
 
         /// <summary>

@@ -118,7 +118,7 @@ namespace Nest
 			string path = this.PathResolver.CreateIndexPath(index);
 
 			var status = this.Connection.DeleteSync(path);
-			var r = this.ToParsedResponse<IndicesResponse>(status);
+			var r = this.Deserialize<IndicesResponse>(status);
 			return r;
 		}
 

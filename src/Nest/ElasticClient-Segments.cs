@@ -29,7 +29,7 @@ namespace Nest
 		private SegmentsResponse _Segments(string path)
 		{
 			var status = this.Connection.GetSync(path);
-			var r = this.ToParsedResponse<SegmentsResponse>(status);
+			var r = this.Deserialize<SegmentsResponse>(status);
 			return r;
 		}
 	}

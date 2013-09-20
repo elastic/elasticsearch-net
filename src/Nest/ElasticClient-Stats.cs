@@ -69,7 +69,7 @@ namespace Nest
 		public IGlobalStatsResponse Stats(StatsParams parameters)
 		{
 			var status = this.Connection.GetSync(this._BuildStatsUrl(parameters));
-			var r = this.ToParsedResponse<GlobalStatsResponse>(status);
+			var r = this.Deserialize<GlobalStatsResponse>(status);
 			return r;
 		}
 
@@ -97,7 +97,7 @@ namespace Nest
 			indices.ThrowIfEmpty("indices");
 			var path = this.PathResolver.CreateIndexPath(indices, this._BuildStatsUrl(parameters));
 			var status = this.Connection.GetSync(path);
-			var r = this.ToParsedResponse<StatsResponse>(status);
+			var r = this.Deserialize<StatsResponse>(status);
 			return r;
 		}
 		

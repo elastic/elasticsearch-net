@@ -119,41 +119,41 @@ namespace Nest
     {
       path.ThrowIfNull("path");
       var status = this.Connection.DeleteSync(path);
-      return this.ToParsedResponse<DeleteResponse>(status);
+      return this.Deserialize<DeleteResponse>(status);
     }
 
     private IDeleteResponse _deleteToPath(string path, string data)
     {
       path.ThrowIfNull("path");
       var status = this.Connection.DeleteSync(path, data);
-      return this.ToParsedResponse<DeleteResponse>(status);
+      return this.Deserialize<DeleteResponse>(status);
     }
 
     private IBulkResponse _deleteToBulkPath(string path, string data)
     {
       path.ThrowIfNull("path");
       var status = this.Connection.PostSync(path, data);
-      return this.ToParsedResponse<BulkResponse>(status);
+      return this.Deserialize<BulkResponse>(status);
     }
 
     private Task<IDeleteResponse> _deleteToPathAsync(string path)
     {
       path.ThrowIfNull("path");
       var task = this.Connection.Delete(path);
-      return task.ContinueWith<IDeleteResponse>(t => this.ToParsedResponse<DeleteResponse>(t.Result));
+      return task.ContinueWith<IDeleteResponse>(t => this.Deserialize<DeleteResponse>(t.Result));
     }
 
     private Task<IDeleteResponse> _deleteToPathAsync(string path, string data)
     {
       path.ThrowIfNull("path");
       var task = this.Connection.Delete(path, data);
-      return task.ContinueWith<IDeleteResponse>(t => this.ToParsedResponse<DeleteResponse>(t.Result));
+      return task.ContinueWith<IDeleteResponse>(t => this.Deserialize<DeleteResponse>(t.Result));
     }
     private Task<IBulkResponse> _deleteToBulkPathAsync(string path, string data)
     {
       path.ThrowIfNull("path");
       var task = this.Connection.Post(path, data);
-      return task.ContinueWith<IBulkResponse>(t => this.ToParsedResponse<BulkResponse>(t.Result));
+      return task.ContinueWith<IBulkResponse>(t => this.Deserialize<BulkResponse>(t.Result));
     }
   }
 }

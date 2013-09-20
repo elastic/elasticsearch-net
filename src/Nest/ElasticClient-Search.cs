@@ -173,8 +173,8 @@ namespace Nest
 
             
 	        if (descriptor._ConcreteTypeSelector == null)
-		        return this.ToParsedResponse<QueryResponse<TResult>>(status);
-            return this.ToParsedResponse<QueryResponse<TResult>>(
+		        return this.Deserialize<QueryResponse<TResult>>(status);
+            return this.Deserialize<QueryResponse<TResult>>(
                 status,
 
 				extraConverters: new[]

@@ -64,7 +64,7 @@ namespace Nest
 		        path += "&wait_for_relocating_shards=" + healthParams.WaitForRelocatingShards;
 
 			var status = this.Connection.GetSync(path);
-		    var r = this.ToParsedResponse<HealthResponse>(status);
+		    var r = this.Deserialize<HealthResponse>(status);
 			return r;
 		}
 	}

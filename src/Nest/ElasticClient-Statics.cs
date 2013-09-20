@@ -17,10 +17,7 @@ namespace Nest
 			return this.Serializer.Serialize(@object);
 		}
 
-		private T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
-		{
-			return this.Serializer.Deserialize<T>(value, extraConverters);
-		}
+		
 
 		public string GetTypeNameFor<T>()
 		{
@@ -42,9 +39,9 @@ namespace Nest
 			return this.IndexNameResolver.GetIndexForType(type);
 		}
 
-		protected virtual R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
+		protected virtual T Deserialize<T>(object value,IEnumerable<JsonConverter> extraConverters = null, bool allow404 = false) where T : class
 		{
-			return this.Serializer.ToParsedResponse<R>(status, allow404, extraConverters);
+			return this.Serializer.Deserialize<T>(value, extraConverters, allow404);
 		}
 
 		private string ResolveTypeName(TypeNameMarker typeNameMarker, string defaultIndexName = null)

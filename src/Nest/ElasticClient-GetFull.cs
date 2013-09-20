@@ -68,7 +68,7 @@ namespace Nest
 		private IGetResponse<T> _GetFull<T>(string path) where T : class
 		{
 			var response = this.Connection.GetSync(path);
-			var getResponse = this.ToParsedResponse<GetResponse<T>>(response);
+			var getResponse = this.Deserialize<GetResponse<T>>(response);
 
 			if (response.Result != null)
 			{

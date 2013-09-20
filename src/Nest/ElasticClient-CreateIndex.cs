@@ -18,7 +18,7 @@ namespace Nest
 			string data = this.Serialize(settings);
 			string path = this.PathResolver.CreateIndexPath(index);
 			var status = this.Connection.PostSync(path, data);
-			return this.ToParsedResponse<IndicesOperationResponse>(status);
+			return this.Deserialize<IndicesOperationResponse>(status);
 		}
 		
 		/// <summary>

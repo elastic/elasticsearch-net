@@ -17,7 +17,7 @@ namespace Nest
 			string path = this.PathResolver.CreateTemplatePath(templateName);
 			ConnectionStatus status = this.Connection.GetSync(path);
 
-			return this.ToParsedResponse<TemplateResponse>(status);
+			return this.Deserialize<TemplateResponse>(status);
 		}
 
 		public IIndicesOperationResponse PutTemplate(Func<TemplateMappingDescriptor, TemplateMappingDescriptor> templateMappingSelector)
@@ -45,7 +45,7 @@ namespace Nest
 			string path = this.PathResolver.CreateTemplatePath(templateName);
 			ConnectionStatus status = this.Connection.PutSync(path, template);
 
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			var r = this.Deserialize<IndicesOperationResponse>(status);
 			return r;
 		}
 
@@ -54,7 +54,7 @@ namespace Nest
 			string path = this.PathResolver.CreateTemplatePath(templateName);
 			ConnectionStatus status = this.Connection.DeleteSync(path);
 
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			var r = this.Deserialize<IndicesOperationResponse>(status);
 			return r;
 		}
 	}

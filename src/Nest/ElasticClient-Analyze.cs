@@ -64,7 +64,7 @@ namespace Nest
             }
 
 			var status = this.Connection.GetSync(path);
-			var r = this.ToParsedResponse<AnalyzeResponse>(status);
+			var r = this.Deserialize<AnalyzeResponse>(status);
 			return r;
 		}
 	}

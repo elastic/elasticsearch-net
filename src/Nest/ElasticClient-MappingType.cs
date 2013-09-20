@@ -128,7 +128,7 @@ namespace Nest
 				path += "?ignore_conflicts=true";
 			ConnectionStatus status = this.Connection.PutSync(path, map);
 
-			var r = this.ToParsedResponse<IndicesResponse>(status);
+			var r = this.Deserialize<IndicesResponse>(status);
 			return r;
         }
        

@@ -53,7 +53,7 @@ namespace Nest
 		public IRootInfoResponse RootNodeInfo()
 		{
 			var response = this.Connection.GetSync("/");
-			return response.ToParsedResponse<RootInfoResponse>();
+			return response.Deserialize<RootInfoResponse>();
 
 		}
 
@@ -65,7 +65,7 @@ namespace Nest
 		{
 			var response = this.Connection.Get("/");
 			return response
-				.ContinueWith(t => t.Result.ToParsedResponse<RootInfoResponse>() as IRootInfoResponse);
+				.ContinueWith(t => t.Result.Deserialize<RootInfoResponse>() as IRootInfoResponse);
 
 		}
 

@@ -82,7 +82,7 @@ namespace Nest
 				path += "&wait_for_merge=" + optimizeParameters.WaitForMerge.ToString().ToLower();
 			}
 			var status = this.Connection.PostSync(path, "");
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			var r = this.Deserialize<IndicesOperationResponse>(status);
 			return r;
 		}
 

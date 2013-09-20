@@ -66,7 +66,7 @@ namespace Nest
 				path = bulkDescriptor._FixedIndex + "/" + path;
 			}
 			var status = this.Connection.PostSync(path, json);
-			return this.ToParsedResponse<BulkResponse>(status);
+			return this.Deserialize<BulkResponse>(status);
 		}
 		
 		internal string GenerateBulkIndexCommand<T>(IEnumerable<T> objects) where T : class

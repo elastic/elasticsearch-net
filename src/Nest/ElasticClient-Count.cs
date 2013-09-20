@@ -127,7 +127,7 @@ namespace Nest
 		private CountResponse _Count(string path, string query)
 		{
 			var status = this.Connection.PostSync(path, query);
-			var r = this.ToParsedResponse<CountResponse>(status);
+			var r = this.Deserialize<CountResponse>(status);
 			return r;
 		}
 

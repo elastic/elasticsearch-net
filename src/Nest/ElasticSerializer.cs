@@ -52,7 +52,7 @@ namespace Nest
 		/// Returns a response of type R based on the connection status without parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		protected virtual R ToResponse<R>(ConnectionStatus status, bool allow404 = false) where R : BaseResponse
+		protected virtual R ToResponse<R>(ConnectionStatus status, bool allow404 = false) where R : class
 		{
 			var isValid =
 				(allow404)
@@ -60,16 +60,20 @@ namespace Nest
 					|| status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
 				: (status.Error == null);
 			var r = (R)Activator.CreateInstance(typeof(R));
-			r.IsValid = isValid;
-			r.ConnectionStatus = status;
-			r.PropertyNameResolver = this._propertyNameResolver;
+      var baseResponse = r as BaseResponse;
+      if (baseResponse == null)
+        return null;
+
+			baseResponse.IsValid = isValid;
+			baseResponse.ConnectionStatus = status;
+			baseResponse.PropertyNameResolver = this._propertyNameResolver;
 			return r;
 		}
 		/// <summary>
 		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		public virtual R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : BaseResponse
+		protected virtual R ToParsedResponse<R>(ConnectionStatus status, bool allow404 = false, IEnumerable<JsonConverter> extraConverters = null) where R : class
 		{
 			var isValid =
 				(allow404)
@@ -80,9 +84,12 @@ namespace Nest
 				return this.ToResponse<R>(status, allow404);
 
 			var r = this.Deserialize<R>(status.Result, extraConverters: extraConverters);
-			r.IsValid = isValid;
-			r.ConnectionStatus = status;
-			r.PropertyNameResolver = this._propertyNameResolver;
+      var baseResponse = r as BaseResponse;
+      if (baseResponse == null)
+        return null;
+			baseResponse.IsValid = isValid;
+			baseResponse.ConnectionStatus = status;
+			baseResponse.PropertyNameResolver = this._propertyNameResolver;
 			return r;
 		}
 
@@ -98,9 +105,10 @@ namespace Nest
 		/// <summary>
 		/// Deserialize an object 
 		/// </summary>
-		public T Deserialize<T>(string value, IEnumerable<JsonConverter> extraConverters = null)
+		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse this controls whether a 404 is a valid response</param>
+		public T Deserialize<T>(object value, IEnumerable<JsonConverter> extraConverters = null, bool notFoundIsValidResponse = false) where T : class
 		{
-
+      
 			var settings = this._serializationSettings;
 			if (extraConverters.HasAny())
 			{
@@ -114,7 +122,12 @@ namespace Nest
 					settings.Converters = settings.Converters.Concat(extraConverters).ToList();
 
 			}
-			return JsonConvert.DeserializeObject<T>(value, settings);
+      var status = value as ConnectionStatus;
+      if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
+        return JsonConvert.DeserializeObject<T>(value.ToString(), settings);
+
+      return this.ToParsedResponse<T>(status, notFoundIsValidResponse, extraConverters);
+
 		}
 		private JsonSerializerSettings CreateSettings()
 		{

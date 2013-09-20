@@ -30,7 +30,7 @@ namespace Nest
             path += "?" + string.Join("&", options);
 
             var status = this.Connection.GetSync(path);
-            var r = this.ToParsedResponse<ClusterStateResponse>(status);
+            var r = this.Deserialize<ClusterStateResponse>(status);
             return r;
         }
     }

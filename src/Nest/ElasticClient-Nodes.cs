@@ -53,7 +53,7 @@ namespace Nest
                 path += "?" + string.Join("&", options);
             }
             var status = this.Connection.GetSync(path);
-            var r = this.ToParsedResponse<NodeInfoResponse>(status);
+            var r = this.Deserialize<NodeInfoResponse>(status);
             return r;
         }
 
@@ -105,7 +105,7 @@ namespace Nest
                 path += "?" + string.Join("&", options);
             }
             var status = this.Connection.GetSync(path);
-            var r = this.ToParsedResponse<NodeStatsResponse>(status);
+            var r = this.Deserialize<NodeStatsResponse>(status);
             return r;
         }
 	}

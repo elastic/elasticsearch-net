@@ -41,7 +41,7 @@
 		private IndicesOperationResponse _OpenClose(string path)
 		{
 			var status = this.Connection.PostSync(path, "");
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			var r = this.Deserialize<IndicesOperationResponse>(status);
 			return r;
 		}
 

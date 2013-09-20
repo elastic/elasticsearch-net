@@ -20,7 +20,7 @@ namespace Nest
 
 			var path = this.PathResolver.GetWarmerPath(descriptor);
 			ConnectionStatus status = this.Connection.PutSync(path, query);
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			var r = this.Deserialize<IndicesOperationResponse>(status);
 
 			return r;
 		}
@@ -36,7 +36,7 @@ namespace Nest
 			var path = this.PathResolver.GetWarmerPath(descriptor);
 
 			ConnectionStatus status = this.Connection.GetSync(path);
-			var r = this.ToParsedResponse<WarmerResponse>(status);
+			var r = this.Deserialize<WarmerResponse>(status);
 			return r;
 		}
 
@@ -51,7 +51,7 @@ namespace Nest
 			var path = this.PathResolver.GetWarmerPath(descriptor);
 
 			ConnectionStatus status = this.Connection.DeleteSync(path);
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			var r = this.Deserialize<IndicesOperationResponse>(status);
 			return r;
 		}
 

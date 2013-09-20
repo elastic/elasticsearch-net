@@ -41,7 +41,7 @@ namespace Nest
 		private IndicesShardResponse _Snapshot(string path)
 		{
 			var status = this.Connection.PostSync(path, "");
-			var r = this.ToParsedResponse<IndicesShardResponse>(status);
+			var r = this.Deserialize<IndicesShardResponse>(status);
 			return r;
 		}
 

@@ -35,13 +35,13 @@ namespace Nest
 		private IValidateResponse _Validate(string path, string query)
 		{
 			var status = this.Connection.PostSync(path, query);
-			var r = this.ToParsedResponse<ValidateResponse>(status);
+			var r = this.Deserialize<ValidateResponse>(status);
 			return r;
 		}
 		private IValidateResponse _ValidateQueryString(string path)
 		{
 			var status = this.Connection.GetSync(path);
-			var r = this.ToParsedResponse<ValidateResponse>(status);
+			var r = this.Deserialize<ValidateResponse>(status);
 			return r;
 		}
 	}

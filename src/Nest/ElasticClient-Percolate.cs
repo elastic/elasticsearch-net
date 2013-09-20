@@ -28,7 +28,7 @@ namespace Nest
 		private UnregisterPercolateResponse _UnregisterPercolator(string path)
 		{
 			var status = this.Connection.DeleteSync(path);
-			var r = this.ToParsedResponse<UnregisterPercolateResponse>(status, allow404: true);
+			var r = this.Deserialize<UnregisterPercolateResponse>(status, allow404: true);
 			return r;
 		}
 
@@ -37,7 +37,7 @@ namespace Nest
 		{
 			var pathAndData = this._registerPercolator(percolatorSelector);
 			var status = this.Connection.PutSync(pathAndData.Path, pathAndData.Data);
-			var r = this.ToParsedResponse<RegisterPercolateResponse>(status);
+			var r = this.Deserialize<RegisterPercolateResponse>(status);
 			return r;
 		}
 
@@ -48,7 +48,7 @@ namespace Nest
 			var pathAndData = this._registerPercolator(percolatorSelector);
 			return this.Connection.Put(pathAndData.Path, pathAndData.Data).ContinueWith(c =>
 			{
-				var r = this.ToParsedResponse<RegisterPercolateResponse>(c.Result);
+				var r = this.Deserialize<RegisterPercolateResponse>(c.Result);
 				return (IRegisterPercolateResponse)r;
 			});
 			
@@ -73,7 +73,7 @@ namespace Nest
 		{
 			var pathAndData = this._percolate(percolateSelector);
 			var status = this.Connection.PostSync(pathAndData.Path, pathAndData.Data);
-			var r = this.ToParsedResponse<PercolateResponse>(status);
+			var r = this.Deserialize<PercolateResponse>(status);
 			return r;
 		}
 
@@ -85,7 +85,7 @@ namespace Nest
 			var pathAndData = this._percolate(percolateSelector);
 			var status = this.Connection.Post(pathAndData.Path, pathAndData.Data).ContinueWith(c =>
 			{
-				var r = this.ToParsedResponse<PercolateResponse>(c.Result);
+				var r = this.Deserialize<PercolateResponse>(c.Result);
 				return (IPercolateResponse)r;
 			});
 			return status;

@@ -59,7 +59,7 @@ namespace Nest
 		private UpdateResponse _Update(string path, string data)
 		{
 			var status = this.Connection.PostSync(path, data);
-			var r = this.ToParsedResponse<UpdateResponse>(status);
+			var r = this.Deserialize<UpdateResponse>(status);
 			return r;
 		}
 

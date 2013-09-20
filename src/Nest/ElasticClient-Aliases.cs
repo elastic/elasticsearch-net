@@ -202,7 +202,7 @@ namespace Nest
 			query = _aliasBody.F(query);
 			var status = this.Connection.PostSync(path, query);
 
-			var r = this.ToParsedResponse<IndicesOperationResponse>(status);
+			var r = this.Deserialize<IndicesOperationResponse>(status);
 			return r;
 		}
 	}

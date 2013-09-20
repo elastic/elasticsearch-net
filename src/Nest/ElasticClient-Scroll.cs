@@ -24,7 +24,7 @@ namespace Nest
 			var path = "_search/scroll?scroll={0}".F(scrollTime);
 
 			ConnectionStatus status = this.Connection.PostSync(path, scrollId);
-			var r = this.ToParsedResponse<QueryResponse<T>>(status
+			var r = this.Deserialize<QueryResponse<T>>(status
 				, extraConverters: new[] { new ConcreteTypeConverter(typeof(T), (d, h) => typeof(T)) }	
 			);
 			return r;

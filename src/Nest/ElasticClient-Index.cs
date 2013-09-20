@@ -423,26 +423,26 @@ namespace Nest
 			string json = this.Serializer.Serialize(@object, Formatting.Indented);
 
 			var status = this.Connection.PostSync(path, json);
-			return this.ToParsedResponse<IndexResponse>(status);
+			return this.Deserialize<IndexResponse>(status);
 		}
 
 		private Task<IIndexResponse> _indexAsyncToPath<T>(T @object, string path) where T : class
 		{
 			string json = this.Serializer.Serialize(@object, Formatting.None);
 			var postTask = this.Connection.Post(path, json);
-			return postTask.ContinueWith<IIndexResponse>(t => this.ToParsedResponse<IndexResponse>(t.Result));
+			return postTask.ContinueWith<IIndexResponse>(t => this.Deserialize<IndexResponse>(t.Result));
 		}
 
 		private IBulkResponse _indexManyToPath(string path, string json)
 		{
 			var status = this.Connection.PostSync(path, json);
-			return this.ToParsedResponse<BulkResponse>(status);
+			return this.Deserialize<BulkResponse>(status);
 		}
 
 		private Task<IBulkResponse> _indexManyAsyncToPath(string path, string json)
 		{
 			var postTask = this.Connection.Post(path, json);
-			return postTask.ContinueWith<IBulkResponse>(t => this.ToParsedResponse<BulkResponse>(t.Result));
+			return postTask.ContinueWith<IBulkResponse>(t => this.Deserialize<BulkResponse>(t.Result));
 		}
 	}
 }
