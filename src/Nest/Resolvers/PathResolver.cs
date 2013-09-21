@@ -343,7 +343,7 @@ namespace Nest.Resolvers
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
 			else
-				indices = this.Infer.TypeName<T>();
+				indices = this.Infer.IndexName<T>();
 
 			var types = this.Infer.TypeName<T>();
 			if (descriptor._Types.HasAny())
