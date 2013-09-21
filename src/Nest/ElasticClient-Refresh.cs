@@ -34,7 +34,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesShardResponse Refresh<T>() where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			return Refresh(index);

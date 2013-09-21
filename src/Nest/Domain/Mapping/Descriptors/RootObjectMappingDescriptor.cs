@@ -18,7 +18,7 @@ namespace Nest
 		public RootObjectMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this._TypeName = new TypeNameResolver().GetTypeNameFor<T>();
+			this._TypeName = TypeNameMarker.Create<T>();
 			this._Mapping = new RootObjectMapping() { TypeNameMarker = this._TypeName };
 		}
 
@@ -129,7 +129,7 @@ namespace Nest
 		}
 		public RootObjectMappingDescriptor<T> SetParent<K>() where K : class
 		{
-			var parentType = new TypeNameResolver().GetTypeNameFor<K>();
+			var parentType = TypeNameMarker.Create<K>();
 			this._Mapping.Parent = new ParentTypeMapping() { Type = parentType };
 			return this;
 		}

@@ -18,7 +18,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse ClearCache<T>() where T : class
 		{
-			return this.ClearCache(new List<string> { this.IndexNameResolver.GetIndexForType<T>() }, ClearCacheOptions.All);
+			return this.ClearCache(new List<string> { this.Infer.IndexName<T>() }, ClearCacheOptions.All);
 		}
 
 		/// <summary>
@@ -26,7 +26,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse ClearCache<T>(ClearCacheOptions options) where T : class
 		{
-			return this.ClearCache(new List<string> { this.IndexNameResolver.GetIndexForType<T>() }, options);
+			return this.ClearCache(new List<string> { this.Infer.IndexName<T>() }, options);
 		}
 		/// <summary>
 		/// Clears the specified caches for all indices

@@ -20,7 +20,7 @@ namespace Nest
 		public NestedObjectMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this._TypeName = new TypeNameResolver().GetTypeNameFor<TChild>();
+			this._TypeName = TypeNameMarker.Create<TChild>();
 			this._Mapping = new NestedObjectMapping() { };
 		}
 		public NestedObjectMappingDescriptor<TParent, TChild> Name(string name)

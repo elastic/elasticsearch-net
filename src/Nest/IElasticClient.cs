@@ -12,11 +12,6 @@ namespace Nest
 		ElasticSerializer Serializer { get;  }
 		IRawElasticClient Raw { get; }
 
-		string GetTypeNameFor<T>();
-		string GetTypeNameFor(Type type);
-		string GetIndexNameFor<T>();
-		string GetIndexNameFor(Type type);
-
 		IIndicesOperationResponse Alias(AliasParams aliasParams);
 		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
 		IIndicesOperationResponse Alias(IEnumerable<string> aliases);

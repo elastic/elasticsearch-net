@@ -34,9 +34,9 @@ namespace Nest
 							new IndexNameResolver(this._connectionSettings).GetIndexForType(operation._ClrType);
 				var typeName = operation._Type
 				               ?? bulkDescriptor._FixedType
-				               ?? this.GetTypeNameFor(operation._ClrType);
+				               ?? this.Infer.TypeName(operation._ClrType);
 
-				var id = operation.GetIdForObject(this.IdResolver);
+				var id = operation.GetIdForObject(this.Infer);
 				operation._Index = index;
 				operation._Type = typeName;
 				operation._Id = id;
@@ -123,7 +123,7 @@ namespace Nest
 		{
 			objects.ThrowIfEmpty("objects");
 
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -133,7 +133,7 @@ namespace Nest
 		{
 			objects.ThrowIfEmpty("objects");
 
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			if (string.IsNullOrEmpty(index))
 				throw new NullReferenceException("Cannot infer default index for current connection.");
 
@@ -145,7 +145,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.GetTypeNameFor<T>();
+			var typeName = this.Infer.TypeName<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}
@@ -155,7 +155,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 
 			var type = typeof(T);
-			var typeName = this.GetTypeNameFor<T>();
+			var typeName = this.Infer.TypeName<T>();
 
 			return this.GenerateBulkCommand<T>(objects, index, typeName, command);
 		}
@@ -172,7 +172,7 @@ namespace Nest
 			{
 				var objectAction = action;
 				
-					var id = this.IdResolver.GetIdFor(@object);
+					var id = this.Infer.Id(@object);
 					if (!id.IsNullOrEmpty())
 						objectAction += ", \"_id\" : \"{0}\" ".F(id);
 
@@ -205,7 +205,7 @@ namespace Nest
 
 				var objectAction = action;
 
-				objectAction += ", \"_id\" : \"{0}\" ".F(this.IdResolver.GetIdFor(@object.Document));
+				objectAction += ", \"_id\" : \"{0}\" ".F(this.Infer.Id(@object.Document));
 
 				if (!@object.Version.IsNullOrEmpty())
 					objectAction += ", \"version\" : \"{0}\" ".F(@object.Version);

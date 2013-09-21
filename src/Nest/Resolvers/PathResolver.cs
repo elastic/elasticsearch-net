@@ -8,34 +8,21 @@ namespace Nest.Resolvers
 {
 	public class PathResolver
 	{
+    private ElasticInferrer Infer { get; set; } 
+
 		private readonly IConnectionSettings _connectionSettings;
-		private readonly IndexNameResolver _indexNameResolver;
-		private readonly TypeNameResolver _typeNameResolver;
-		private readonly IdResolver _idResolver;
 
 		public PathResolver(IConnectionSettings connectionSettings)
 		{
 			connectionSettings.ThrowIfNull("hasDefaultIndices");
 			this._connectionSettings = connectionSettings;
-			this._indexNameResolver = new IndexNameResolver(connectionSettings);
-			this._typeNameResolver = new TypeNameResolver();
-			this._idResolver = new IdResolver();
+      this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
-
-		private string GetTypeNameFor<T>()
-		{
-			return GetTypeNameFor(typeof(T));
-		}
-		private string GetTypeNameFor(Type type)
-		{
-			return this._typeNameResolver.GetTypeNameFor(type).Resolve(this._connectionSettings);
-		}
-
 		
 		public string CreateGetPath<T>(GetDescriptor<T> d) where T : class
 		{
-			var index = d._Index ?? this._indexNameResolver.GetIndexForType<T>();
-			var type = d._Type ?? this._typeNameResolver.GetTypeNameFor<T>();
+			var index = d._Index ?? this.Infer.IndexName<T>();
+			var type = d._Type ?? this.Infer.TypeName<T>();
 			var id = d._Id;
 			id.ThrowIfNullOrEmpty("id");
 
@@ -58,11 +45,11 @@ namespace Nest.Resolvers
 		public string CreatePathFor<T>(T @object, string index = null, string type = null, string id = null) where T : class
 		{
 			if (index == null)
-				index = this._indexNameResolver.GetIndexForType<T>();
+				index = this.Infer.IndexName<T>();
 			if (type == null)
-				type = this.GetTypeNameFor<T>();
+				type = this.Infer.TypeName<T>();
 			if (id == null)
-				id = this._idResolver.GetIdFor<T>(@object);
+				id = this.Infer.Id(@object);
 
 			return this.CreateIndexTypeIdPath(index, type, id);
 		}
@@ -70,11 +57,11 @@ namespace Nest.Resolvers
 		public string CreateIdOptionalPathFor<T>(T @object, string index = null, string type = null, string id = null) where T : class
 		{
 			if (index == null)
-				index = this._indexNameResolver.GetIndexForType<T>();
+				index = this.Infer.IndexName<T>();
 			if (type == null)
-				type = this.GetTypeNameFor<T>();
+				type = this.Infer.TypeName<T>();
 			if (id == null)
-				id = this._idResolver.GetIdFor<T>(@object);
+				id = this.Infer.Id(@object);
 
 			if (id == null)
 				return this.CreateIndexTypePath(index, type);
@@ -278,9 +265,9 @@ namespace Nest.Resolvers
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
 			else
-				indices = this._indexNameResolver.GetIndexForType<T>();
+				indices = this.Infer.IndexName<T>();
 
-			var types = this.GetTypeNameFor<T>();
+			var types = this.Infer.TypeName<T>();
 			if (descriptor._Types.HasAny())
 				types = this.JoinTypes(descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
@@ -356,9 +343,9 @@ namespace Nest.Resolvers
 			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
 				indices = "_all";
 			else
-				indices = this._indexNameResolver.GetIndexForType<T>();
+				indices = this.Infer.TypeName<T>();
 
-			var types = this.GetTypeNameFor<T>();
+			var types = this.Infer.TypeName<T>();
 			if (descriptor._Types.HasAny())
 				types = string.Join(",", descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
@@ -371,11 +358,11 @@ namespace Nest.Resolvers
 		{
 			var index = descriptor._Index;
 			if (index.IsNullOrEmpty())
-				index = this._indexNameResolver.GetIndexForType<T>();
+				index = this.Infer.IndexName<T>();
 
 			var type = descriptor._Type;
 			if (type.IsNullOrEmpty())
-				type = this.GetTypeNameFor<T>();
+				type = this.Infer.TypeName<T>();
 
 			var id = descriptor._Id;
 

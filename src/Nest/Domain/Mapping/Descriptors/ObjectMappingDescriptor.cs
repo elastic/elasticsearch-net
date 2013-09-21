@@ -19,7 +19,7 @@ namespace Nest
 
 		public ObjectMappingDescriptor(IConnectionSettings connectionSettings)
 		{
-			this._TypeName = new TypeNameResolver().GetTypeNameFor<TChild>();
+			this._TypeName = TypeNameMarker.Create<TChild>();
 			this._Mapping = new ObjectMapping() { };
 			this._connectionSettings = connectionSettings;
 		}

@@ -20,12 +20,12 @@ namespace Nest
 			this._typeNameResolver = new TypeNameResolver();
 		}
 
-		internal override string GetIdForObject(IdResolver resolver)
+		internal override string GetIdForObject(ElasticInferrer inferrer)
 		{
 			if (!this._Id.IsNullOrEmpty())
 				return this._Id;
 			
-			return resolver.GetIdFor<T>((T)_Object);
+			return inferrer.Id((T)_Object);
 
 		}
 

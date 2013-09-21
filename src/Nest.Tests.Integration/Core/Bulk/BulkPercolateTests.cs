@@ -48,12 +48,12 @@ namespace Nest.Tests.Integration.Core.Bulk
 
 			indexResponses.First().Id.Should().BeEquivalentTo("2");
 			indexResponses.First().Index.Should().BeEquivalentTo(ElasticsearchConfiguration.DefaultIndex);
-			indexResponses.First().Type.Should().BeEquivalentTo(this.GetTypeNameFor<ElasticSearchProject>());
+			indexResponses.First().Type.Should().BeEquivalentTo(this._client.Infer.TypeName<ElasticSearchProject>());
 			indexResponses.First().Matches.Should().NotBeNull();
 
 			indexResponses.ElementAt(1).Id.Should().BeEquivalentTo("3");
 			indexResponses.ElementAt(1).Index.Should().BeEquivalentTo(ElasticsearchConfiguration.DefaultIndex);
-			indexResponses.ElementAt(1).Type.Should().BeEquivalentTo(this.GetTypeNameFor<ElasticSearchProject>());
+			indexResponses.ElementAt(1).Type.Should().BeEquivalentTo(this._client.Infer.TypeName<ElasticSearchProject>());
 			indexResponses.First().Matches.Should().BeNull();
 
 			// cleanup

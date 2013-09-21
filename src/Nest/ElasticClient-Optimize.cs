@@ -9,7 +9,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Optimize<T>() where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 			return Optimize(index);
 		}
@@ -18,7 +18,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 			return Optimize(index, optimizeParameters);
 		}

@@ -12,14 +12,13 @@ namespace Nest
 	{
 		private readonly IConnectionSettings _connectionSettings;
 
-		private TypeNameResolver TypeNameResolver { get; set; }
-		private IdResolver IdResolver { get; set; }
-		private IndexNameResolver IndexNameResolver { get; set; }
+	
 		private PathResolver PathResolver { get; set; }
 
 		public IConnection Connection { get; protected set; }
 		public ElasticSerializer Serializer { get; protected set; }
 		public IRawElasticClient Raw { get; private set; }
+    public ElasticInferrer Infer { get; private set; }
 
 		public ElasticClient(IConnectionSettings settings)
 			: this(settings, new Connection(settings))
@@ -32,17 +31,17 @@ namespace Nest
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
+      
 			this._connectionSettings = settings;
 			this.Connection = connection;
-			this.TypeNameResolver = new TypeNameResolver();
-			this.IdResolver = new IdResolver();
-			this.IndexNameResolver = new IndexNameResolver(settings);
+		
 			this.PathResolver = new PathResolver(settings);
 
 			this.PropertyNameResolver = new PropertyNameResolver();
 
 			this.Serializer = new ElasticSerializer(this._connectionSettings);
 			this.Raw = new RawElasticClient(this._connectionSettings, connection);
+      this.Infer = new ElasticInferrer(this._connectionSettings);
 
 		}
 

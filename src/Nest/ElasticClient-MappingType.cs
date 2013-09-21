@@ -17,8 +17,8 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class
 		{
-			string type = this.GetTypeNameFor<T>();
-			return this.MapFromAttributes<T>(this.IndexNameResolver.GetIndexForType<T>(), type, maxRecursion);
+			string type = this.Infer.TypeName<T>();
+			return this.MapFromAttributes<T>(this.Infer.IndexName<T>(), type, maxRecursion);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -29,7 +29,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class
 		{
-			string type = this.GetTypeNameFor<T>();
+			string type = this.Infer.TypeName<T>();
 			return this.MapFromAttributes<T>(index, type, maxRecursion);
 		}
 		/// <summary>
@@ -56,8 +56,8 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes(Type t, int maxRecursion = 0)
 		{
-			string type = this.GetTypeNameFor(t);
-			return this.MapFromAttributes(t, this.IndexNameResolver.GetIndexForType(t), type, maxRecursion);
+			string type = this.Infer.TypeName(t);
+			return this.MapFromAttributes(t, this.Infer.IndexName(t), type, maxRecursion);
 		}
 		/// <summary>
 		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
@@ -68,7 +68,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse MapFromAttributes(Type t, string index, int maxRecursion = 0)
 		{
-			string type = this.GetTypeNameFor(t);
+			string type = this.Infer.TypeName(t);
 			return this.MapFromAttributes(t, index, type, maxRecursion);
 		}
 		/// <summary>
@@ -98,7 +98,7 @@ namespace Nest
 			var typeMapping = d._Mapping;
 			var indexName = d._IndexName;
 			if (indexName.IsNullOrEmpty())
-				indexName = this.IndexNameResolver.GetIndexForType<T>();
+				indexName = this.Infer.IndexName<T>();
 
 			return this.Map(typeMapping, indexName, this.ResolveTypeName(d._TypeName), d._IgnoreConflicts);
 

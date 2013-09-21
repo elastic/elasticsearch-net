@@ -85,11 +85,11 @@ namespace Nest
 		/// </summary>
 		public ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
 			var type = typeof(T);
-			var typeName = this.GetTypeNameFor<T>();
+			var typeName = this.Infer.TypeName<T>();
 			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_count");
 			var descriptor = new QueryDescriptor<T>();
 			querySelector(descriptor);

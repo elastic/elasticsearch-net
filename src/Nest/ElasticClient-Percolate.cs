@@ -13,7 +13,7 @@ namespace Nest
 		/// <param name="name">Name of the percolator</param>
 		public IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			return this.UnregisterPercolator(index, name);
 		}
 		/// <summary>
@@ -62,7 +62,7 @@ namespace Nest
 			if (string.IsNullOrEmpty(descriptor._Name))
 				throw new Exception("A percolator needs a name");
 			var query = this.Serialize(descriptor);
-			var index = descriptor._Index ?? this.IndexNameResolver.GetIndexForType<T>();
+			var index = descriptor._Index ?? this.Infer.IndexName<T>();
 
 			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(descriptor._Name));
 			return new PathAndData() { Path = path, Data = query };
@@ -94,8 +94,8 @@ namespace Nest
 		private PathAndData _percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class
 		{
 			var descriptor = percolateSelector(new PercolateDescriptor<T>());
-			var index = descriptor._Index ?? this.IndexNameResolver.GetIndexForType<T>();
-			var type = descriptor._Type ?? this.GetTypeNameFor<T>();
+			var index = descriptor._Index ?? this.Infer.IndexName<T>();
+			var type = descriptor._Type ?? this.Infer.TypeName<T>();
 			var percolateJson = this.Serialize(descriptor);
 
 			var path = this.PathResolver.CreateIndexTypePath(index, type, "_percolate");

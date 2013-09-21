@@ -22,7 +22,7 @@ namespace Nest
 
 		public TopChildrenQueryDescriptor()
 		{
-			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
+			this._Type = TypeNameMarker.Create<T>();
 		}
 		[JsonProperty("type")]
 		internal TypeNameMarker _Type { get; set; }

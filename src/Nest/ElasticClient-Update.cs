@@ -25,9 +25,9 @@ namespace Nest
             where T : class
             where K : class
         {
-            var index = s._Index ?? this.IndexNameResolver.GetIndexForType<T>();
-            var type = s._Type != null ? s._Type.Resolve(this._connectionSettings) : this.GetTypeNameFor<T>();
-            var id = s._Id ?? this.IdResolver.GetIdFor(s._Object);
+            var index = s._Index ?? this.Infer.IndexName<T>();
+            var type = s._Type != null ? s._Type.Resolve(this._connectionSettings) : this.Infer.TypeName<T>();
+            var id = s._Id ?? this.Infer.Id(s._Object);
 
             index.ThrowIfNullOrEmpty("index");
             type.ThrowIfNullOrEmpty("type");

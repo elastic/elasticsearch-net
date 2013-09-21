@@ -108,7 +108,7 @@ namespace Nest
 		/// </summary>
 		public IIndicesResponse DeleteIndex<T>() where T : class
 		{
-			return this.DeleteIndex(this.IndexNameResolver.GetIndexForType<T>());
+			return this.DeleteIndex(this.Infer.IndexName<T>());
 		}
 		/// <summary>
 		/// Delete the specified index

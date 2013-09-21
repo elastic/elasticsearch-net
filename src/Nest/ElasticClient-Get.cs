@@ -25,10 +25,10 @@ namespace Nest
 		/// <returns>an instance of T</returns>
 		public T Get<T>(string id) where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.GetTypeNameFor<T>();
+			var typeName = this.Infer.TypeName<T>();
 
 			return this._Get<T>(this.PathResolver.CreateIndexTypeIdPath(index, typeName, id));
 		}

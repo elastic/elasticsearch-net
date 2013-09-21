@@ -53,7 +53,7 @@ namespace Nest
 
 		internal virtual object _Object { get; set; }
 
-		internal virtual string GetIdForObject(IdResolver resolver)
+		internal virtual string GetIdForObject(ElasticInferrer inferrer)
 		{
 			return this._Id;
 		}

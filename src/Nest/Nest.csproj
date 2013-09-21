@@ -71,7 +71,8 @@
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\Connection\NoTasksHttpConnection.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
-    <Compile Include="ElasticSerializer.cs" />
+    <Compile Include="ExposedInternals\ElasticInferrer.cs" />
+    <Compile Include="ExposedInternals\ElasticSerializer.cs" />
     <Compile Include="Exception\ConnectionException.cs" />
     <Compile Include="RawElasticClient-Generated.cs" />
     <Compile Include="Extensions\StringInject.cs" />

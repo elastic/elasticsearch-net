@@ -23,10 +23,10 @@ namespace Nest
 		public IEnumerable<T> MultiGet<T>(IEnumerable<string> ids)
 			where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			var typeName = this.GetTypeNameFor<T>();
+			var typeName = this.Infer.TypeName<T>();
 
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
@@ -44,7 +44,7 @@ namespace Nest
 		public IEnumerable<T> MultiGet<T>(string index, IEnumerable<string> ids)
 			where T : class
 		{
-			var typeName = this.GetTypeNameFor<T>();
+			var typeName = this.Infer.TypeName<T>();
 			
 			return this.MultiGet<T>(ids, this.PathResolver.CreateIndexTypePath(index, typeName));
 		}
@@ -89,12 +89,12 @@ namespace Nest
 				var properties = new List<string>();
 				if (descriptor._FixedIndex.IsNullOrEmpty())
 				{
-					var index = string.IsNullOrEmpty(g._Index) ? this.IndexNameResolver.GetIndexForType(g._ClrType) : g._Index;
+					var index = string.IsNullOrEmpty(g._Index) ? this.Infer.IndexName(g._ClrType) : g._Index;
 					properties.Add(@"""_index"" : " + this.Serialize(index));
 				}
 				if (descriptor._FixedType.IsNullOrEmpty())
 				{
-					var type = this.ResolveTypeName(g._Type, this.GetTypeNameFor(g._ClrType));
+					var type = this.ResolveTypeName(g._Type, this.Infer.TypeName(g._ClrType));
 					properties.Add(@"""_type"" : " + this.Serialize(type));
 				}
 				properties.Add(@"""_id"" : " + this.Serialize(g._Id));

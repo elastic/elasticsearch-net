@@ -13,7 +13,7 @@ namespace Nest
 	{
 		public HasParentFilterDescriptor()
 		{
-			this._Type = new TypeNameResolver().GetTypeNameFor<T>();
+			this._Type = TypeNameMarker.Create<T>();
 		}
 		internal override bool IsConditionless
 		{

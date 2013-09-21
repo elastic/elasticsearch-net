@@ -33,17 +33,17 @@ namespace Nest.Tests.Integration.Core.Bulk
 			deleteResponses.Should().HaveCount(1);
 			deleteResponses.First().Id.Should().BeEquivalentTo("4");
 			deleteResponses.First().Index.Should().BeEquivalentTo(ElasticsearchConfiguration.DefaultIndex);
-			deleteResponses.First().Type.Should().BeEquivalentTo(this.GetTypeNameFor<ElasticSearchProject>());
+			deleteResponses.First().Type.Should().BeEquivalentTo(this._client.Infer.TypeName<ElasticSearchProject>());
 
 			createResponses.Should().HaveCount(1);
 			createResponses.First().Id.Should().BeEquivalentTo("123123");
 			createResponses.First().Index.Should().BeEquivalentTo(ElasticsearchConfiguration.DefaultIndex);
-			createResponses.First().Type.Should().BeEquivalentTo(this.GetTypeNameFor<ElasticSearchProject>());
+			createResponses.First().Type.Should().BeEquivalentTo(this._client.Infer.TypeName<ElasticSearchProject>());
 
 			indexResponses.Should().HaveCount(1);
 			indexResponses.First().Id.Should().BeEquivalentTo("2");
 			indexResponses.First().Index.Should().BeEquivalentTo(ElasticsearchConfiguration.DefaultIndex);
-			indexResponses.First().Type.Should().BeEquivalentTo(this.GetTypeNameFor<ElasticSearchProject>());
+			indexResponses.First().Type.Should().BeEquivalentTo(this._client.Infer.TypeName<ElasticSearchProject>());
 		}
 
 		[Test]

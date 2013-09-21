@@ -19,10 +19,10 @@ namespace Nest
 	  /// </summary>
 	  public IDeleteResponse DeleteById<T>(string id) where T : class
 	  {
-		  var index = this.IndexNameResolver.GetIndexForType<T>();
+		  var index = this.Infer.IndexName<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.GetTypeNameFor<T>();
+		  var typeName = this.Infer.TypeName<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  return this._deleteToPath(path);
 	  }
@@ -60,10 +60,10 @@ namespace Nest
 	  /// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 	  public IDeleteResponse DeleteById<T>(string id, DeleteParameters deleteParameters) where T : class
 	  {
-		  var index = this.IndexNameResolver.GetIndexForType<T>();
+		  var index = this.Infer.IndexName<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.GetTypeNameFor<T>();
+		  var typeName = this.Infer.TypeName<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 		  return this._deleteToPath(path);
@@ -104,10 +104,10 @@ namespace Nest
 	  /// </summary>
 	  public Task<IDeleteResponse> DeleteByIdAsync<T>(string id) where T : class
 	  {
-		  var index = this.IndexNameResolver.GetIndexForType<T>();
+		  var index = this.Infer.IndexName<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.GetTypeNameFor<T>();
+		  var typeName = this.Infer.TypeName<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  return this._deleteToPathAsync(path);
 	  }
@@ -145,10 +145,10 @@ namespace Nest
 	  /// <param name="deleteParameters">Allows you to pass in additional delete parameters such as version and routing</param>
 	  public Task<IDeleteResponse> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class
 	  {
-		  var index = this.IndexNameResolver.GetIndexForType<T>();
+		  var index = this.Infer.IndexName<T>();
 		  index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-		  var typeName = this.GetTypeNameFor<T>();
+		  var typeName = this.Infer.TypeName<T>();
 		  var path = this.PathResolver.CreateIndexTypeIdPath(index, typeName, id);
 		  path = this.PathResolver.AppendParametersToPath(path, deleteParameters);
 		  return this._deleteToPathAsync(path);

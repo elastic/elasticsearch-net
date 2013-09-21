@@ -31,7 +31,7 @@ namespace Nest
 		/// <returns>AnalyzeResponse contains a breakdown of the token under .Tokens</returns>
 		public IAnalyzeResponse Analyze<T>(Expression<Func<T, object>> selector, string text) where T : class
 		{
-			var index = this.IndexNameResolver.GetIndexForType<T>();
+			var index = this.Infer.IndexName<T>();
 			return this.Analyze<T>(selector, index, text);
 		}
 		/// <summary>

@@ -16,7 +16,6 @@ namespace Nest
 		{
 			return this.Serializer.Serialize(@object);
 		}
-
 		
 
 		public string GetTypeNameFor<T>()
@@ -26,18 +25,9 @@ namespace Nest
 
 		public string GetTypeNameFor(Type type)
 		{
-			return this.TypeNameResolver.GetTypeNameFor(type).Resolve(this._connectionSettings);
+			return this.Infer.TypeName(type);
 		}
 
-		public string GetIndexNameFor<T>()
-		{
-			return GetIndexNameFor(typeof(T));
-		}
-
-		public string GetIndexNameFor(Type type)
-		{
-			return this.IndexNameResolver.GetIndexForType(type);
-		}
 
 		protected virtual T Deserialize<T>(object value,IEnumerable<JsonConverter> extraConverters = null, bool allow404 = false) where T : class
 		{

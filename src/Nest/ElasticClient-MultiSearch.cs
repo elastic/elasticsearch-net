@@ -39,7 +39,7 @@ namespace Nest
 
 				var typeName = types
 							   ?? multiSearchDescriptor._FixedType
-				               ?? new TypeNameResolver().GetTypeNameForType(operation._ClrType);
+				               ?? TypeNameMarker.Create(operation._ClrType);
 				if (operation._AllTypes)
 					typeName = null; //force empty typename so we'll query all types.
 

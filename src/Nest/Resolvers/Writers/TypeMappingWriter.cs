@@ -16,6 +16,7 @@ namespace Nest.Resolvers.Writers
 		private readonly PropertyNameResolver _propertyNameResolver = new PropertyNameResolver();
 		private readonly IConnectionSettings _connectionSettings;
     private readonly ElasticSerializer _elasticSerializer;
+    private ElasticInferrer Infer { get; set; }
 
 		private int MaxRecursion { get; set; }
 		private TypeNameMarker TypeName { get; set; }
@@ -33,7 +34,12 @@ namespace Nest.Resolvers.Writers
 			this.SeenTypes.TryAdd(t, 0);
 
       this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
+      this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
+
+    /// <summary>
+    /// internal constructor by TypeMappingWriter itself when it recurses, passes seenTypes as safeguard agains maxRecursion
+    /// </summary>
 		internal TypeMappingWriter(Type t, string typeName, IConnectionSettings connectionSettings, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
 		    this._type = GetUnderlyingType(t);
@@ -44,6 +50,7 @@ namespace Nest.Resolvers.Writers
 			this.SeenTypes = seenTypes;
 
       this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
+      this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
 
 		internal JObject MapPropertiesFromAttributes()
@@ -213,7 +220,7 @@ namespace Nest.Resolvers.Writers
 					{
 						
 						var deepType = p.PropertyType;
-						var deepTypeName = new TypeNameResolver().GetTypeNameFor(deepType).Resolve(this._connectionSettings);
+						var deepTypeName = this.Infer.TypeName(deepType);
 						var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
 						seenTypes.AddOrUpdate(deepType, 0, (t, i) => ++i);
 

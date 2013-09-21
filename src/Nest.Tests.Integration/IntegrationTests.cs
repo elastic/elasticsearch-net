@@ -21,19 +21,9 @@ namespace Nest.Tests.Integration
 			
 		}
 
-		protected string GetTypeNameFor<T>() where T : class
-		{
-			return this.GetTypeNameFor(typeof (T));
-		}
-		protected string GetTypeNameFor(Type t)
-		{
-			return new TypeNameResolver().GetTypeNameFor(t).Resolve(this._settings);
-		}
-
-
 		protected IQueryResponse<T> SearchRaw<T>(string query) where T : class
 		{
-			var index = this._client.GetIndexNameFor<T>();
+			var index = this._client.Infer.IndexName<T>();
 			var typeName = this._client.GetTypeNameFor<T>();
 			var connectionStatus = this._client.Raw.SearchPost(index, typeName, query);
 			return connectionStatus.Deserialize<QueryResponse<T>>();
