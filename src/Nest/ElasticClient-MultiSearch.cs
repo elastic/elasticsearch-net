@@ -35,7 +35,7 @@ namespace Nest
 							multiSearchDescriptor._FixedIndex ??
 				            new IndexNameResolver(this._connectionSettings).GetIndexForType(operation._ClrType);
 				
-				var types = operation._Types.HasAny() ? string.Join(",", operation._Types) : null;
+				var types =  operation._Types.HasAny() ? string.Join(",", operation._Types.Select(x => x.Resolve(this.Settings)) ) : null;
 
 				var typeName = types
 							   ?? multiSearchDescriptor._FixedType
