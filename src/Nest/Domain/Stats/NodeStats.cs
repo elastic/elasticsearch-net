@@ -19,8 +19,7 @@ namespace Nest
         public string Hostname { get; internal set; }
 
         [JsonProperty("indices")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public Dictionary<string, NodeStatsIndexes> Indices { get; internal set; }
+        public NodeStatsIndexes Indices { get; internal set; }
 
         [JsonProperty("os")]
         public OSStats OS { get; internal set; }
@@ -32,8 +31,9 @@ namespace Nest
         public JVM JVM { get; internal set; }
 
         [JsonProperty("thread_pool")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
+        [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+        public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
+
 
         [JsonProperty("network")]
         public NetworkStats Network { get; internal set; }
@@ -233,8 +233,8 @@ namespace Nest
         [JsonProperty("gc")]
         public GCOverallStats GC { get; internal set; }
         [JsonProperty("buffer_pools")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
+        [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+        public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
 
         [JsonObject]
         public class MemoryStats
@@ -256,15 +256,15 @@ namespace Nest
             [JsonProperty("non_heap_committed_in_bytes")]
             public long NonHeapCommittedInBytes { get; internal set; }
             [JsonProperty("pools")]
-			[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-			public Dictionary<string, JVMPool> Pools { get; internal set; }
+            [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+            public Dictionary<string, JVMPool> Pools { get; internal set; }
 
             [JsonObject]
             public class JVMPool
             {
                 [JsonProperty("used")]
                 public string Used { get; internal set; }
-                [JsonProperty("used_in_bytes")]
+                [JsonProperty("")]
                 public long UsedInBytes { get; internal set; }
                 [JsonProperty("max")]
                 public string Max { get; internal set; }
@@ -294,8 +294,8 @@ namespace Nest
         public class GCOverallStats : GarbageCollectorStats
         {
             [JsonProperty("Collectors")]
-			[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-			public Dictionary<string, GarbageCollectorStats> collectors { get; internal set; }
+            [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+            public Dictionary<string, GarbageCollectorStats> collectors { get; internal set; }
         }
 
         [JsonObject]
