@@ -18,7 +18,8 @@ namespace Nest.Tests.Unit.Search.Facets
           .OnValueField(f=>f.Origin)
           .PinTo(Lat: 40, Lon: -70)
           .Ranges(
-            r=>r.To(10),
+            r=>r.To(0.5),
+            r=>r.From(0.5).To(10),
             r=>r.From(10).To(20),
             r=>r.From(20).To(100),
             r=>r.From(100)
@@ -32,10 +33,11 @@ namespace Nest.Tests.Unit.Search.Facets
                   ""origin"" : ""40, -70"",
                   value_field: ""origin"",
                   ""ranges"" : [
-                    { ""to"" : 10 },
-                    { ""from"" : 10, ""to"" : 20 },
-                    { ""from"" : 20, ""to"" : 100 },
-                    { ""from"" : 100 }
+                    { ""to"" : 0.5 },
+                    { ""from"" : 0.5, ""to"" : 10.0 },
+                    { ""from"" : 10.0, ""to"" : 20.0 },
+                    { ""from"" : 20.0, ""to"" : 100.0 },
+                    { ""from"" : 100.0 }
                   ]
                 } 
             }
