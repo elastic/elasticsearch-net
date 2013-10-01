@@ -22,7 +22,7 @@ namespace Nest
 
     internal string _ValueScript { get; set; }
 
-    internal IEnumerable<Range<int>> _Ranges { get; set; }
+    internal IEnumerable<Range<double>> _Ranges { get; set; }
 
     internal GeoUnit? _GeoUnit { get; set; }
 
@@ -99,12 +99,12 @@ namespace Nest
       this._GeoDistance = distance;
       return this;
     }
-    public GeoDistanceFacetDescriptor<T> Ranges(params Func<Range<int>, Range<int>>[] ranges)
+    public GeoDistanceFacetDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges)
     {
-      var newRanges = new List<Range<int>>();
+      var newRanges = new List<Range<double>>();
       foreach (var range in ranges)
       {
-        var r = new Range<int>();
+        var r = new Range<double>();
         newRanges.Add(range(r));
       }
       this._Ranges = newRanges;
