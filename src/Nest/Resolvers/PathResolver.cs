@@ -466,6 +466,15 @@ namespace Nest.Resolvers
 			if (!descriptor._Scroll.IsNullOrEmpty())
 				dict.Add("scroll", descriptor._Scroll);
 			this.AddSearchType<T>(descriptor, dict);
+			
+			if (descriptor._CustomParameters != null)
+			{
+				foreach (string key in descriptor._CustomParameters.Keys)
+				{
+					if (!dict.ContainsKey(key))
+						dict.Add(key, descriptor._CustomParameters[key]);
+				}
+			}			
 			return dict;
 		}
 
