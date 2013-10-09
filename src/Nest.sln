@@ -136,9 +136,6 @@ Global
 		{B9FE4875-0171-40F7-A357-064A93BE09C6} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
 		{2727A374-9866-4A9D-9A40-6175334B5992} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
 	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj
 	EndGlobalSection
