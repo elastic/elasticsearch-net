@@ -60,6 +60,10 @@ namespace Nest
 					path = multiSearchDescriptor._FixedType + "/" + path;
 				path = multiSearchDescriptor._FixedIndex + "/" + path;
 			}
+
+			if (multiSearchDescriptor._CustomParameters != null && multiSearchDescriptor._CustomParameters.Count > 0)
+				path = string.Format("{0}?{1}", path, string.Join("&", multiSearchDescriptor._CustomParameters.Select(kv => "{0}={1}".EscapedFormat(kv.Key, kv.Value))));
+
 			var status = this.Connection.PostSync(path, json);
 
 			var multiSearchConverter = new MultiSearchConverter(this._connectionSettings, multiSearchDescriptor);

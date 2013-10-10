@@ -31,6 +31,7 @@ namespace Nest
 	public class SearchDescriptor<T> : SearchDescriptorBase where T : class
 	{
 		private readonly TypeNameResolver typeNameResolver;
+		internal Dictionary<string, string> _CustomParameters { get; set; }
 
 		public SearchDescriptor()
 		{
@@ -1000,6 +1001,22 @@ namespace Nest
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
 		{
 			this._ConcreteTypeSelector = typeSelector;
+			return this;
+		}
+
+		/// <summary>
+		/// Adds custom query string parameters and values to request (e.g. for logging purposes, etc.)
+		/// </summary>
+		public SearchDescriptor<T> CustomParameter(string name, string value)
+		{
+			if (this._CustomParameters == null)
+				_CustomParameters = new Dictionary<string, string>();
+
+			if (!_CustomParameters.ContainsKey(name))
+				_CustomParameters.Add(name, value);
+			else
+				_CustomParameters[name] = value;
+
 			return this;
 		}
 	}

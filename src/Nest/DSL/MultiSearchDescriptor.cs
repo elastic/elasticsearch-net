@@ -13,6 +13,9 @@ namespace Nest
 	{
 		internal string _FixedIndex { get; set; }
 		internal string _FixedType { get; set; }
+		
+		[JsonIgnore]
+		internal Dictionary<string, string> _CustomParameters { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, SearchDescriptorBase> _Operations = new Dictionary<string, SearchDescriptorBase>();
@@ -45,5 +48,22 @@ namespace Nest
 			this._FixedType = type;
 			return this;
 		}
+
+		/// <summary>
+		/// Adds custom query string parameters and values to request (e.g. for logging purposes, etc.)
+		/// </summary>
+		public MultiSearchDescriptor CustomParameter(string name, string value)
+		{
+			if (this._CustomParameters == null)
+				_CustomParameters = new Dictionary<string, string>();
+
+			if (!_CustomParameters.ContainsKey(name))
+				_CustomParameters.Add(name, value);
+			else
+				_CustomParameters[name] = value;
+
+			return this;
+		}
+
 	}
 }
