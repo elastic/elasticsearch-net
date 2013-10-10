@@ -148,7 +148,7 @@ namespace Nest.Tests.Integration.Search
         {
             var results = this._client.Search<ElasticSearchProject>(s => s
                 .Query(q => q.MatchAll())
-                .TermSuggest("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text("Sanskrti").Size(1).OnField("country"))
+                .TermSuggest("myTermSuggest", m => m.SuggestMode(SuggestMode.Always).Text("Sanskrti").Size(1).OnField("country"))
             );
 
             Assert.NotNull(results);
@@ -164,6 +164,29 @@ namespace Nest.Tests.Integration.Search
             Assert.GreaterOrEqual(results.Suggest.Values.First().First().Options.Count(), 1);
 
             Assert.AreEqual(results.Suggest.Values.First().First().Options.First().Text, "Sanskrit");
+        }
+
+        [Test]
+        public void PhraseSuggest()
+        {
+            var results = this._client.Search<ElasticSearchProject>(s => s
+                .Query(q => q.MatchAll())
+                .PhraseSuggest("myPhraseSuggest", m => m.Text("Nostrud frankufrter dseerunt ulalmco").Size(1).OnField("content"))
+            );
+
+            Assert.NotNull(results);
+            Assert.True(results.IsValid);
+
+            Assert.NotNull(results.Suggest);
+            Assert.NotNull(results.Suggest.Values);
+
+            Assert.AreEqual(results.Suggest.Values.Count, 1);
+            Assert.AreEqual(results.Suggest.Values.First().Count(), 1);
+
+            Assert.NotNull(results.Suggest.Values.First().First().Options);
+            Assert.GreaterOrEqual(results.Suggest.Values.First().First().Options.Count(), 1);
+
+            Assert.AreEqual(results.Suggest.Values.First().First().Options.First().Text, "nostrud frankfurter deserunt ulalmco");
         }
 
         [Test]
