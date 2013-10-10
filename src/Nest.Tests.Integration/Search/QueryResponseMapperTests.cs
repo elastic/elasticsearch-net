@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.False(queryResults.IsValid);
 			var error = queryResults.ConnectionStatus.Error;
 			Assert.NotNull(error);
-			Assert.True(error.HttpStatusCode == System.Net.HttpStatusCode.InternalServerError);
+			Assert.True(error.HttpStatusCode == System.Net.HttpStatusCode.BadRequest, error.HttpStatusCode.ToString());
 		}
 
 		[Test]

@@ -94,8 +94,8 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 					.Boolean(s => s
 						.Name(p => p.BoolValue) //reminder .Name(string) exists too!
 						.Boost(1.4)
-						.IncludeInAll()
-						.Index()
+						//.IncludeInAll() //makes no sense 
+						//.Index() //since 0.90.5 this will throw an exception on elasticsearch.
 						.IndexName("bool_name_in_lucene_index")
 						.NullValue(false)
 						.Store()

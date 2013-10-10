@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 					.Term(f => f.Country, "netherlands")
 				)
 				);
-
+			this._client.Refresh<ElasticSearchProject>();
 			var descriptor = new BulkDescriptor();
 
 			// match against any doc
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			indexResponses.ElementAt(1).Id.Should().BeEquivalentTo("3");
 			indexResponses.ElementAt(1).Index.Should().BeEquivalentTo(ElasticsearchConfiguration.DefaultIndex);
 			indexResponses.ElementAt(1).Type.Should().BeEquivalentTo(this._client.Infer.TypeName<ElasticSearchProject>());
-			indexResponses.First().Matches.Should().BeNull();
+			indexResponses.ElementAt(1).Matches.Should().BeNull();
 
 			// cleanup
 			this._client.UnregisterPercolator<ElasticSearchProject>(query1);

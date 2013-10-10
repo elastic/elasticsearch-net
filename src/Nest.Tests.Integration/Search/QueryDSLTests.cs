@@ -146,9 +146,12 @@ namespace Nest.Tests.Integration.Search
         [Test]
         public void TermSuggest()
         {
+			var country = this._client.Search<ElasticSearchProject>(s => s.Size(1)).Documents.First().Country;
+			var wrongCountry = country + "x";
+
             var results = this._client.Search<ElasticSearchProject>(s => s
                 .Query(q => q.MatchAll())
-                .TermSuggest("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text("Sanskrti").Size(1).OnField("country"))
+				.TermSuggest("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text(wrongCountry).Size(1).OnField("country"))
             );
 
             Assert.NotNull(results);
@@ -163,7 +166,9 @@ namespace Nest.Tests.Integration.Search
             Assert.NotNull(results.Suggest.Values.First().First().Options);
             Assert.GreaterOrEqual(results.Suggest.Values.First().First().Options.Count(), 1);
 
-            Assert.AreEqual(results.Suggest.Values.First().First().Options.First().Text, "Sanskrit");
+            Assert.AreEqual(results.Suggest.Values.First().First().Options.First().Text, country);
+
+			Assert.AreEqual(results.Suggest["mySuggest"].First().Options.First().Text, country);
         }
 
         [Test]
