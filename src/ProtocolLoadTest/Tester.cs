@@ -46,8 +46,7 @@ namespace ProtocolLoadTest
 			Interlocked.Exchange(ref NumSent, 0);
 			foreach (var messages in partitionedMessages)
 			{
-				var t = client.IndexManyAsync(messages, indexName, bulkParms);
-				tasks.Add(t);
+				var t = client.IndexMany(messages, indexName, bulkParms);
 
 				Interlocked.Add(ref NumSent, bufferSize);
 				if (NumSent % 10000 == 0)
@@ -55,7 +54,7 @@ namespace ProtocolLoadTest
 					Console.WriteLine("Sent {0:0,0} messages to {1}", NumSent, indexName);
 				}
 			}
-			Task.WaitAll(tasks.ToArray());
+			//Task.WaitAll(tasks.ToArray());
 		}
 	}
 }
