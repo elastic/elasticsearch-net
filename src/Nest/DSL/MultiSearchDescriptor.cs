@@ -17,6 +17,15 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, SearchDescriptorBase> _Operations = new Dictionary<string, SearchDescriptorBase>();
 
+    public MultiSearchDescriptor Search(string name, SearchDescriptorBase searchDescriptorBase)
+    {
+      name.ThrowIfNull("name");
+      if (searchDescriptorBase == null)
+        return this;
+      this._Operations.Add(name, searchDescriptorBase);
+      return this;
+    }
+
 		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
 		{
 			name.ThrowIfNull("name");
