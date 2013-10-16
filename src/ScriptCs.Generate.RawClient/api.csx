@@ -1,6 +1,8 @@
 using System.Net;
 using CsQuery;
 using Newtonsoft.Json;
+using Xipton.Razor;
+using System.IO;
 
 public class ApiEndpoint {
 	public string Documentation { get; set; }
@@ -32,6 +34,10 @@ public static class ApiGenerator
 {
 	private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch-rest-api-spec/tree/master/api";
 	private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch-rest-api-spec/master/api/";
+	private readonly static RazorMachine _razorMachine = new RazorMachine();
+
+	static ApiGenerator() {
+	}
 
 	public static IDictionary<string, ApiEndpoint> GetAllApiEndpoints() 
 	{
@@ -40,6 +46,7 @@ public static class ApiGenerator
 		var endpoints = dom[".js-directory-link"]
 			.Select(s=>s.InnerText)
 			.Where(s=>!string.IsNullOrEmpty(s) && s.EndsWith(".json"))
+			.Take(3)
 			.Select(s=>{
 				using (var client = new WebClient())
 				{
@@ -54,4 +61,10 @@ public static class ApiGenerator
 
 		return endpoints;
 	}
+
+	public static void GenerateClientInterface(IDictionary<string, ApiEndpoint> model)
+	{
+		Console.WriteLine(_razorMachine.Execute(File.ReadAllText(@"Views\IRawElasticClient.cshtml"), model));
+	}
+
 }
