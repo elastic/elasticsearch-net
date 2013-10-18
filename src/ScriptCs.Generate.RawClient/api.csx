@@ -14,13 +14,23 @@ public class ApiEndpoint {
 	public string PascalCase(string s) {
 		return ApiGenerator.PascalCase(s);
 	}
+
+	public IEnumerable<CsharpMethod> GetCsharpMethods() 
+	{
+		//we distinct by here to catch aliased endpoints like:
+		//  /_cluster/nodes/hotthreads and /_nodes/hotthreads
+		return Extensions.DistinctBy(this.CsharpMethods.ToList(), m=> m.ReturnType + "--" + m.FullName + "--" + m.Arguments);
+	}
+
 	public IEnumerable<CsharpMethod> CsharpMethods {
 		get
 		{
 			foreach(var method in this.Methods) 
 			{
 				var methodName = this.CsharpMethodName + this.PascalCase(method);
-				foreach (var path in this.Url.Paths) 
+				//the distinctby here catches aliases routes i.e
+				//  /_cluster/nodes/{node_id}/hotthreads vs  /_cluster/nodes/{node_id}/hot_threads
+				foreach (var path in Extensions.DistinctBy(this.Url.Paths, p=>p.Replace("_", "")))
 				{
 
 					var parts = this.Url.Parts
@@ -37,18 +47,22 @@ public class ApiEndpoint {
 							case "int":
 							case "string":
 								return p.Type + " " + p.Name;
-							case "enum":
-								return this.CsharpMethodName + "Options " + p.Name;
-							default:
+							case "list":
 								return "string " + p.Name;
+							case "enum":
+								return this.PascalCase(p.Name) + "Options " + p.Name;
+							default:
+								return p.Type + " " + p.Name;
+								//return "string " + p.Name;
 
 						}
 					});
 					if (this.Body != null)
 					{
-						args = args.Concat(new [] { "object body" });
+						//args = args.Concat(new [] { "object body" });
 						parts.Add(new ApiUrlPart {
 							Name = "body",
+							Type = "object",
 							Description = this.Body.Description
 						});
 					}
@@ -64,15 +78,24 @@ public class ApiEndpoint {
 						Path = path,
 						Parts = parts
 					};
+					ApiGenerator.PatchMethod(apiMethod);
 					yield return apiMethod;
-					apiMethod.FullName += "Async";
-					apiMethod.ReturnType = "Task<ConnectionStatus>";
+					apiMethod = new CsharpMethod 
+					{
+						ReturnType = "Task<ConnectionStatus>",
+						FullName = methodName + "Async",
+						HttpMethod = method,
+						Documentation = this.Documentation,
+						Arguments = string.Join(", ", args),
+						Path = path,
+						Parts = parts
+					};
+					ApiGenerator.PatchMethod(apiMethod);
 					yield return apiMethod;
 				}
 			}
 		}
 	}
-
 }
 public class CsharpMethod {
 	public string ReturnType { get; set; }
@@ -108,7 +131,7 @@ public static class ApiGenerator
 {
 	private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch-rest-api-spec/tree/master/api";
 	private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch-rest-api-spec/master/api/";
-	private readonly static RazorMachine _razorMachine = new RazorMachine();
+	private readonly static RazorMachine _razorMachine = new RazorMachine();	
 
 	static ApiGenerator() {
 	}
@@ -124,7 +147,6 @@ public static class ApiGenerator
 		var endpoints = dom[".js-directory-link"]
 			.Select(s=>s.InnerText)
 			.Where(s=>!string.IsNullOrEmpty(s) && s.EndsWith(".json"))
-			.Take(3)
 			.Select(s=>{
 				using (var client = new WebClient())
 				{
@@ -132,7 +154,10 @@ public static class ApiGenerator
 					Console.WriteLine("Downloading {0}", rawFile);
 					var json = client.DownloadString(rawFile);
 					var apiDocumentation = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
-					apiDocumentation.Value.CsharpMethodName = PascalCase(apiDocumentation.Key);
+					apiDocumentation.Value.CsharpMethodName = CreateMethodName(
+						apiDocumentation.Key, 
+						apiDocumentation.Value
+					);
 					return apiDocumentation;
 				}
 			})
@@ -141,9 +166,46 @@ public static class ApiGenerator
 		return endpoints;
 	}
 
-	public static void GenerateClientInterface(IDictionary<string, ApiEndpoint> model)
+	//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
+	//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
+	public static void PatchMethod(CsharpMethod method) 
 	{
-		Console.WriteLine(_razorMachine.Execute(File.ReadAllText(@"Views\IRawElasticClient.cshtml"), model));
+		if (method.FullName.StartsWith("IndicesStats") && method.Path.Contains("{index}"))
+			method.FullName = method.FullName.Replace("IndicesStats", "IndexStats");
+		//IndicesPutAliasPutAsync
+		if (method.FullName.StartsWith("IndicesPutAlias") && method.Path.Contains("{index}"))
+			method.FullName = method.FullName.Replace("IndicesPutAlias", "IndexPutAlias");
+
+		if (method.FullName.StartsWith("IndicesStats") || method.FullName.StartsWith("IndexStats"))
+		{
+			if (method.Path.Contains("/indexing/"))
+				method.FullName = method.FullName.Replace("Stats", "IndexingStats");
+			if (method.Path.Contains("/search/"))
+				method.FullName = method.FullName.Replace("Stats", "SearchStats");
+			if (method.Path.Contains("/fielddata/"))
+				method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
+		}
+		
+
+	}
+	public static string CreateMethodName(string apiEnpointKey, ApiEndpoint endpoint) 
+	{
+		return PascalCase(apiEnpointKey);
 	}
 
+	public static void GenerateClientInterface(IDictionary<string, ApiEndpoint> model)
+	{
+		var targetFile = @"..\Nest\IRawElasticClient.cs";
+		var source = _razorMachine.Execute(File.ReadAllText(@"Views\IRawElasticClient.cshtml"), model).ToString();
+		File.WriteAllText(targetFile, source);
+	}
+}
+
+
+//extensions methods dont work becuase scriptcs wraps everything.
+public static class Extensions {
+	public static IEnumerable<T> DistinctBy<T, TKey>(IEnumerable<T> items, Func<T, TKey> property)
+	{
+    	return items.GroupBy(property).Select(x => x.First());
+	}
 }

@@ -6,6 +6,22 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 	[TestFixture]
 	public class BoolQueryJson
 	{
+
+		[Test]
+		public void EmptyBoolQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(qd => null);
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10 }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+
+
 		[Test]
 		public void BoolQuery()
 		{
