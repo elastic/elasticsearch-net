@@ -16,8 +16,8 @@ namespace Nest
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
 
-		private static readonly ConcurrentBag<JsonConverter> _extraConverters = new ConcurrentBag<JsonConverter>();
-		private static readonly ConcurrentBag<JsonConverter> _defaultConverters = new ConcurrentBag<JsonConverter>
+		private static readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
+		private static readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
 		{
 			new IsoDateTimeConverter(),
 			new FacetConverter(),
