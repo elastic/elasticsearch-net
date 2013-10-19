@@ -11,6 +11,7 @@ namespace Nest
 		IConnection Connection { get; }
 		ElasticSerializer Serializer { get;  }
 		IRawElasticClient Raw { get; }
+		ElasticInferrer Infer { get; }
 
 		IIndicesOperationResponse Alias(AliasParams aliasParams);
 		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
