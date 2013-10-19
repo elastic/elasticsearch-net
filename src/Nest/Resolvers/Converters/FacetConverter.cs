@@ -8,8 +8,6 @@ namespace Nest.Resolvers.Converters
 
 	public class FacetConverter : JsonConverter
 	{
-		#region Overrides of CustomCreationConverter<Facet>
-
 		public override bool CanWrite
 		{
 			get { return false; }
@@ -72,7 +70,5 @@ namespace Nest.Resolvers.Converters
 		{
 			return objectType == typeof(Facet);
 		}
-
-		#endregion
 	}
 }

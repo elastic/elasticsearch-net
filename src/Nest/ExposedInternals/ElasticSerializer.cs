@@ -16,12 +16,10 @@ namespace Nest
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
 
-		private static readonly ConcurrentBag<JsonConverter> _extraConverters = new ConcurrentBag<JsonConverter>();
-		private static readonly ConcurrentBag<JsonConverter> _defaultConverters = new ConcurrentBag<JsonConverter>
+		private static readonly List<JsonConverter> _extraConverters = new List<JsonConverter>();
+		private static readonly List<JsonConverter> _defaultConverters = new List<JsonConverter>
 		{
-			new IsoDateTimeConverter(),
-			new FacetConverter(),
-			new DictionaryKeysAreNotPropertyNamesJsonConverter()
+			new IsoDateTimeConverter()
 		};
 
 		public ElasticSerializer(IConnectionSettings settings)
@@ -38,7 +36,7 @@ namespace Nest
 		{
 			modifier(this._serializationSettings);
 		}
-			
+
 		/// <summary>
 		/// Add a JsonConverter to the build in serialization
 		/// </summary>
@@ -60,9 +58,9 @@ namespace Nest
 					|| status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
 				: (status.Error == null);
 			var r = (R)Activator.CreateInstance(typeof(R));
-      var baseResponse = r as BaseResponse;
-      if (baseResponse == null)
-        return null;
+			var baseResponse = r as BaseResponse;
+			if (baseResponse == null)
+				return null;
 
 			baseResponse.IsValid = isValid;
 			baseResponse.ConnectionStatus = status;
@@ -84,9 +82,9 @@ namespace Nest
 				return this.ToResponse<R>(status, allow404);
 
 			var r = this.Deserialize<R>(status.Result, extraConverters: extraConverters);
-      var baseResponse = r as BaseResponse;
-      if (baseResponse == null)
-        return null;
+			var baseResponse = r as BaseResponse;
+			if (baseResponse == null)
+				return null;
 			baseResponse.IsValid = isValid;
 			baseResponse.ConnectionStatus = status;
 			baseResponse.PropertyNameResolver = this._propertyNameResolver;
@@ -108,7 +106,7 @@ namespace Nest
 		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse this controls whether a 404 is a valid response</param>
 		public T Deserialize<T>(object value, IEnumerable<JsonConverter> extraConverters = null, bool notFoundIsValidResponse = false) where T : class
 		{
-      
+
 			var settings = this._serializationSettings;
 			if (extraConverters.HasAny())
 			{
@@ -122,13 +120,14 @@ namespace Nest
 					settings.Converters = settings.Converters.Concat(extraConverters).ToList();
 
 			}
-      var status = value as ConnectionStatus;
-      if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
-        return JsonConvert.DeserializeObject<T>(value.ToString(), settings);
+			var status = value as ConnectionStatus;
+			if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
+				return JsonConvert.DeserializeObject<T>(value.ToString(), settings);
 
-      return this.ToParsedResponse<T>(status, notFoundIsValidResponse, extraConverters);
+			return this.ToParsedResponse<T>(status, notFoundIsValidResponse, extraConverters);
 
 		}
+	
 		private JsonSerializerSettings CreateSettings()
 		{
 			return new JsonSerializerSettings()
@@ -136,7 +135,8 @@ namespace Nest
 				ContractResolver = new ElasticContractResolver(this._settings),
 				NullValueHandling = NullValueHandling.Ignore,
 				DefaultValueHandling = DefaultValueHandling.Include,
-				Converters = _defaultConverters.Concat(_extraConverters).ToList()
+				Converters = _defaultConverters.Concat(_extraConverters).ToList(),
+				
 			};
 		}
 	}

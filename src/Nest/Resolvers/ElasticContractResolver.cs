@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Reflection;
 using System.Globalization;
+using System.Collections;
+using Nest.Resolvers.Converters;
 
 namespace Nest.Resolvers
 {
@@ -23,15 +25,30 @@ namespace Nest.Resolvers
 		/// </summary>
 		internal ConcreteTypeConverter ConcreteTypeConverter { get; set; }
 
-		public ElasticContractResolver(IConnectionSettings connectionSettings) : base(true)
+		public ElasticContractResolver(IConnectionSettings connectionSettings)
+			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
 		}
 
+		protected override JsonContract CreateContract(Type objectType)
+		{
+			JsonContract contract = base.CreateContract(objectType);
+
+			// this will only be called once and then cached
+			if (typeof(IDictionary).IsAssignableFrom(objectType))
+				contract.Converter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
+
+			if (objectType == typeof(Facet))
+				contract.Converter = new FacetConverter();
+
+			return contract;
+		}
+
 		protected override string ResolvePropertyName(string propertyName)
 		{
-      if (this.ConnectionSettings.DefaultPropertyNameInferrer != null)
-        return this.ConnectionSettings.DefaultPropertyNameInferrer(propertyName);
+			if (this.ConnectionSettings.DefaultPropertyNameInferrer != null)
+				return this.ConnectionSettings.DefaultPropertyNameInferrer(propertyName);
 
 			return propertyName.ToCamelCase();
 		}

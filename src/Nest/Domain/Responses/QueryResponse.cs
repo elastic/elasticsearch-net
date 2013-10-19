@@ -18,7 +18,7 @@ namespace Nest
 		int Total { get; }
 		double MaxScore { get; }
 		IEnumerable<T> Documents { get; }
-		IEnumerable<IHit<T>> DocumentsWithMetaData { get; }
+		IEnumerable<Hit<T>> DocumentsWithMetaData { get; }
 		HighlightDocumentDictionary Highlights { get; }
 		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
 		F Facet<F>(string fieldName) where F : class, IFacet;
@@ -94,7 +94,7 @@ namespace Nest
 			}
 		}
 
-		public IEnumerable<IHit<T>> DocumentsWithMetaData
+		public IEnumerable<Hit<T>> DocumentsWithMetaData
 		{
 			get
 			{
