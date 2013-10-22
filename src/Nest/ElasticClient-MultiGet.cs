@@ -71,7 +71,9 @@ namespace Nest
 			var response = _multiGetUsingDescriptor(multiGetSelector, out descriptor);
 
 			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
-			var multiGetResponse = this.Deserialize<MultiGetResponse>(response, extraConverters: new List<JsonConverter> { multiGetHitConverter });
+			var multiGetResponse = this.Serializer.DeserializeInternal<MultiGetResponse>(
+				response, 
+				extraConverters: new List<JsonConverter> { multiGetHitConverter });
 
 			return multiGetResponse;
 		}

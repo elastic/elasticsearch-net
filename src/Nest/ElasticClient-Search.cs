@@ -156,7 +156,7 @@ namespace Nest
 		        .Where(t => t.Type != null);
 			var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
             if (descriptor._ConcreteTypeSelector == null && (
-				types.Any(t=>t.Type != typeof(TResult))) || partialFields.Any()
+				types.Any(t=>t.Type != typeof(TResult)))
 				)
             {
 				var typeDictionary = types
@@ -171,15 +171,14 @@ namespace Nest
 				};
             }
 
-            
 	        if (descriptor._ConcreteTypeSelector == null)
 		        return this.Deserialize<QueryResponse<TResult>>(status);
-            return this.Deserialize<QueryResponse<TResult>>(
-                status,
 
+            return this.Serializer.DeserializeInternal<QueryResponse<TResult>>(
+                status,
 				extraConverters: new[]
 				{
-					new ConcreteTypeConverter(descriptor._ClrType, descriptor._ConcreteTypeSelector, partialFields)
+					new ConcreteTypeConverter<TResult>(descriptor._ConcreteTypeSelector, partialFields)
 				}
             );
         }

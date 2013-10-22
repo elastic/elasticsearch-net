@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
@@ -20,10 +21,10 @@ namespace Nest.Resolvers
 		public IConnectionSettings ConnectionSettings { get; private set; }
 
 		/// <summary>
-		/// The ConcreteTypeConverter piggy backs on the resolver to inject meta data.
-		/// This is a bit of a hack but a massive performance gain.
+		/// Signals to custom converter that it can get serialization state from one of the converters
+		/// Ugly but massive performance gain
 		/// </summary>
-		internal ConcreteTypeConverter ConcreteTypeConverter { get; set; }
+		internal bool HasExtraConverters { get; set; }
 
 		public ElasticContractResolver(IConnectionSettings connectionSettings)
 			: base(true)
@@ -41,6 +42,12 @@ namespace Nest.Resolvers
 
 			if (objectType == typeof(Facet))
 				contract.Converter = new FacetConverter();
+			
+			if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
+				contract.Converter = new IsoDateTimeConverter();
+
+			if (typeof(IHit<object>).IsAssignableFrom(objectType))
+				contract.Converter = new DefaultHitConverter();
 
 			return contract;
 		}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -7,7 +8,42 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	internal class ConcreteTypeConverter : JsonConverter
+	internal class DefaultHitConverter : JsonConverter
+	{
+		private static readonly ConcurrentDictionary<Type, JsonConverter> _hitTypes = new ConcurrentDictionary<Type, JsonConverter>();
+
+		public override bool CanWrite { get { return false; } }
+		public override bool CanRead { get { return true; } }
+
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override bool CanConvert(Type objectType)
+		{
+			return true;
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			JsonConverter converter;
+			if (!_hitTypes.TryGetValue(objectType, out converter))
+			{
+				var genericType = typeof(ConcreteTypeConverter<>);
+				var closedType = genericType.MakeGenericType(objectType.GetGenericArguments()[0]);
+				converter = (JsonConverter)closedType.CreateInstance();
+				_hitTypes.TryAdd(objectType, converter);
+
+			}
+			return converter.ReadJson(reader, objectType, existingValue, serializer);
+		}
+
+	}
+
+
+	internal class ConcreteTypeConverter<T> : JsonConverter where T : class
 	{
 		internal readonly Type _baseType;
 		internal readonly Func<dynamic, Hit<dynamic>, Type> _concreteTypeSelector;
@@ -18,45 +54,34 @@ namespace Nest
 
 		public ConcreteTypeConverter() {}
 
-		public ConcreteTypeConverter(Type baseType, Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
-			: this(baseType, concreteTypeSelector, new string[0]) { }
+		public ConcreteTypeConverter(Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
+			: this(concreteTypeSelector, new string[0]) { }
 
-		public ConcreteTypeConverter(Type baseType, Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector, IEnumerable<string> partialFields)
+		public ConcreteTypeConverter(Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector, IEnumerable<string> partialFields)
 		{
 			concreteTypeSelector.ThrowIfNull("concreteTypeSelector");
 
-			this._baseType = baseType;
+			this._baseType = typeof(T);
 			this._concreteTypeSelector = concreteTypeSelector;
 			this._partialFields = partialFields;
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var realConcreteConverter = ((ElasticContractResolver) serializer.ContractResolver).ConcreteTypeConverter;
-
-			if (realConcreteConverter != null)
+			var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+			if (elasticContractResolver != null && elasticContractResolver.HasExtraConverters)
 			{
-				return GetUsingConcreteTypeConverter(reader, serializer, realConcreteConverter);
+				var realConcreteConverter = serializer.Converters.OfType<ConcreteTypeConverter<T>>().FirstOrDefault();
+				if (realConcreteConverter != null)
+					return GetUsingConcreteTypeConverter(reader, serializer, realConcreteConverter);
 			}
-			return ReadUsingGenericType(reader, objectType, serializer);
+
+			var instance = typeof(Hit<T>).CreateInstance();
+			serializer.Populate(reader, instance);
+			return instance;
 		}
 
-		private static object ReadUsingGenericType(JsonReader reader, Type objectType, JsonSerializer serializer)
-		{
-			var concreteType = GetConcreteTypeFromGenericArgument(objectType);
-			var hit = GetHitTypeInstance(concreteType);
-			PopulateHit(serializer, reader, hit);
-			return hit;
-		}
-
-		private static Type GetConcreteTypeFromGenericArgument(Type objectType)
-		{
-			var concreteType = objectType.GetGenericArguments()[0];
-			return concreteType;
-		}
-
-		private static object GetUsingConcreteTypeConverter(JsonReader reader, JsonSerializer serializer,
-		                                                    ConcreteTypeConverter realConcreteConverter)
+		private static object GetUsingConcreteTypeConverter(JsonReader reader, JsonSerializer serializer, ConcreteTypeConverter<T> realConcreteConverter)
 		{
 			var jObject = CreateIntermediateJObject(reader);
 			var concreteType = GetConcreteTypeUsingSelector(realConcreteConverter, jObject);
@@ -85,7 +110,7 @@ namespace Nest
 		}
 
 		private static void AppendPartialFields(JsonSerializer serializer, 
-			ConcreteTypeConverter realConcreteConverter,
+			ConcreteTypeConverter<T> realConcreteConverter,
 		    Type concreteType, dynamic hit, JObject jObject)
 		{
 			if (realConcreteConverter == null)
@@ -118,7 +143,7 @@ namespace Nest
 		}
 
 		private static dynamic GetConcreteTypeUsingSelector(
-			ConcreteTypeConverter realConcreteConverter,
+			ConcreteTypeConverter<T> realConcreteConverter,
 			JObject jObject)
 		{
 			var baseType = realConcreteConverter._baseType;
