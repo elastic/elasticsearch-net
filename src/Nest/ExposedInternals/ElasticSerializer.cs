@@ -22,9 +22,9 @@ namespace Nest
 		public ElasticSerializer(IConnectionSettings settings)
 		{
 			this._settings = settings;
+			this._extraConverters = settings.ExtraConverters;
 			this._serializationSettings = this.CreateSettings();
 			this._propertyNameResolver = new PropertyNameResolver();
-			this._extraConverters = settings.ExtraConverters;
 		}
 
 		/// <summary>
@@ -67,18 +67,21 @@ namespace Nest
 		/// Deserialize an object 
 		/// </summary>
 		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse type this controls whether a 404 is a valid response</param>
-		public T Deserialize<T>(object value, bool notFoundIsValidResponse = false) where T : class
+		public T Deserialize<T>(object value, IList<JsonConverter> extraConverters = null, bool notFoundIsValidResponse = false) where T : class
 		{
-			return this.DeserializeInternal<T>(value, null, notFoundIsValidResponse);
+			return this.DeserializeInternal<T>(value, null, extraConverters, notFoundIsValidResponse);
 		}
 
 		internal T DeserializeInternal<T>(
 			object value, 
+			JsonConverter piggyBackJsonConverter,
 			IList<JsonConverter> extraConverters = null, 
 
 			bool notFoundIsValidResponse = false) where T : class
 		{
-			var jsonSettings = extraConverters.HasAny() ? this.CreateSettings(extraConverters) : this._serializationSettings;
+			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null 
+				? this.CreateSettings(extraConverters, piggyBackJsonConverter) 
+				: this._serializationSettings;
 			var status = value as ConnectionStatus;
 			if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
 				return JsonConvert.DeserializeObject<T>(value.ToString(), jsonSettings);
@@ -86,17 +89,35 @@ namespace Nest
 			return this.ToParsedResponse<T>(status, jsonSettings, notFoundIsValidResponse);
 		}
 
-		private JsonSerializerSettings CreateSettings(IList<JsonConverter> extraConverters = null)
+		internal JsonSerializerSettings CreateSettings(IList<JsonConverter> extraConverters = null, JsonConverter piggyBackJsonConverter = null)
 		{
-			var converters = extraConverters.HasAny() ? extraConverters.Concat(extraConverters).ToList() : extraConverters;
+			var converters = extraConverters.HasAny() 
+				? this._extraConverters.Concat(extraConverters).ToList().AsReadOnly()
+				: this._extraConverters;
+			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			return new JsonSerializerSettings()
 			{
-				ContractResolver = new ElasticContractResolver(this._settings) { HasExtraConverters = extraConverters.HasAny() },
-				NullValueHandling = NullValueHandling.Ignore,
+				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
 				DefaultValueHandling = DefaultValueHandling.Include,
+				NullValueHandling = NullValueHandling.Ignore,
 				Converters = converters,
 			};
 		}
-	}
 
+
+		
+	}
+	/// <summary>
+	/// Registerering global jsonconverters is very costly,
+	/// The best thing is to specify them as a contract (see ElasticContractResolver)
+	/// This however prevents a way to give a jsonconverter state which for some calls is needed i.e:
+	/// A multiget and multisearch need access to the descriptor that describes what types are used.
+	/// When NEST knows it has to piggyback this it has to pass serialization state it will create a new 
+	/// serializersettings object with a new contract resolver which holds this state. Its ugly but it does boost
+	/// massive performance gains.
+	/// </summary>
+	internal class JsonConverterPiggyBackState
+	{
+		public JsonConverter ActualJsonConverter { get; set; }
+	}
 }

@@ -69,9 +69,10 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
-			if (elasticContractResolver != null && elasticContractResolver.HasExtraConverters)
+			if (elasticContractResolver != null && elasticContractResolver.PiggyBackState != null
+				&& elasticContractResolver.PiggyBackState.ActualJsonConverter != null)
 			{
-				var realConcreteConverter = serializer.Converters.OfType<ConcreteTypeConverter<T>>().FirstOrDefault();
+				var realConcreteConverter = elasticContractResolver.PiggyBackState.ActualJsonConverter as ConcreteTypeConverter<T>;
 				if (realConcreteConverter != null)
 					return GetUsingConcreteTypeConverter(reader, serializer, realConcreteConverter);
 			}

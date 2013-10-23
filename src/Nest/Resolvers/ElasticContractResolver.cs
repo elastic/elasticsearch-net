@@ -24,7 +24,7 @@ namespace Nest.Resolvers
 		/// Signals to custom converter that it can get serialization state from one of the converters
 		/// Ugly but massive performance gain
 		/// </summary>
-		internal bool HasExtraConverters { get; set; }
+		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
 
 		public ElasticContractResolver(IConnectionSettings connectionSettings)
 			: base(true)
@@ -48,6 +48,24 @@ namespace Nest.Resolvers
 
 			if (typeof(IHit<object>).IsAssignableFrom(objectType))
 				contract.Converter = new DefaultHitConverter();
+
+			if (objectType == typeof(MultiGetResponse))
+				contract.Converter = new MultiGetHitConverter();
+
+			if (objectType == typeof(MultiSearchResponse))
+				contract.Converter = new MultiSearchConverter();
+
+			if (this.ConnectionSettings.ContractConverters.HasAny())
+			{
+				foreach (var c in this.ConnectionSettings.ContractConverters)
+				{
+					var converter = c(objectType);
+					if (converter == null)
+						continue;
+					contract.Converter = converter;
+					break;
+				}
+			}
 
 			return contract;
 		}

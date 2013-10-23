@@ -22,6 +22,11 @@ namespace Nest.Resolvers.Converters
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettings _settings;
 
+		internal MultiSearchConverter()
+		{
+			
+		}
+
 		public MultiSearchConverter(IConnectionSettings settings, MultiSearchDescriptor descriptor)
 		{
 			this._settings = settings;
@@ -32,6 +37,7 @@ namespace Nest.Resolvers.Converters
 		{
 			throw new NotSupportedException();
 		}
+		
 		private static void CreateMultiHit<T>(
 			MultiHitTuple tuple, 
 			JsonSerializer serializer, 
@@ -60,6 +66,23 @@ namespace Nest.Resolvers.Converters
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			if (this._settings == null)
+			{
+				var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+				if (elasticContractResolver == null)
+					return new MultiSearchResponse { IsValid = false };
+				var piggyBackState = elasticContractResolver.PiggyBackState;
+				if (piggyBackState == null || piggyBackState.ActualJsonConverter == null)
+					return new MultiSearchResponse { IsValid = false };
+
+				var realConverter = piggyBackState.ActualJsonConverter as MultiSearchConverter;
+				if (realConverter == null)
+					return new MultiSearchResponse { IsValid = false };
+
+				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
+			}
+
+
 			var response = new MultiSearchResponse();
 			var jsonObject = JObject.Load(reader);
 
@@ -71,44 +94,54 @@ namespace Nest.Resolvers.Converters
 				return multiSearchDescriptor;
 
 			var withMeta = docsJarray.Zip(this._descriptor._Operations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
-			var originalConverters = serializer.Converters.ToList();
 			var originalResolver = serializer.ContractResolver;
 			foreach (var m in withMeta)
 			{
-				//bool newConverter = false;
-				//if (m.Descriptor.Value._Types != null && m.Descriptor.Value._Types.Count() > 0 && m.Descriptor.Value._Types.Count() > m.Descriptor.Value._Types.Where(x => x.Type == m.Descriptor.Value._ClrType).Count())
-				//{
-				//	var typeDict = m.Descriptor.Value._Types.ToDictionary(t => t.Resolve(this._settings), t => t.Type);
-				//	Func<dynamic, Hit<dynamic>, Type> typeSelector = (o, h) =>
-				//	{
-				//		Type t;
-				//		if (!typeDict.TryGetValue(h.Type, out t))
-				//			return m.Descriptor.Value._ClrType;
-				//		return t;
-				//	};
-				//	serializer.Converters.Clear();
-				//	foreach (var orig in originalConverters)
-				//	{
-				//		if (!(orig is MultiSearchConverter))
-				//			serializer.Converters.Add(orig);
-				//	}
-				//	var converter = new ConcreteTypeConverter(m.Descriptor.Value._ClrType, typeSelector);
-				//	serializer.Converters.Add(converter);
-				//	serializer.ContractResolver = new ElasticContractResolver(this._settings);
-				//	(serializer.ContractResolver as ElasticContractResolver).ConcreteTypeConverter = converter;
-				//	newConverter = true;
-				//}
+				var descriptor = m.Descriptor.Value;
+				var concreteTypeSelector = descriptor._ConcreteTypeSelector;
+				var baseType = m.Descriptor.Value._ClrType;
+				var types = m.Descriptor.Value._Types.EmptyIfNull().ToList();
 
-				//var generic = MakeDelegateMethodInfo.MakeGenericMethod(m.Descriptor.Value._ClrType);
-				//generic.Invoke(null, new object[] { m, serializer, response._Responses, this._settings });
+				//if we dont already have a concrete type converter but we have selected more types then
+				//just the base return type automagically create our own concrete type converter
+				if (concreteTypeSelector == null
+					&& types.HasAny() 
+					&& types.Count() > types.Count(x => x.Type == baseType))
+				{
+					var typeDict = types.ToDictionary(t => t.Resolve(this._settings), t => t.Type);
+					concreteTypeSelector = (o, h) =>
+					{
+						Type t;
+						if (!typeDict.TryGetValue(h.Type, out t))
+							return baseType;
+						return t;
+					};
+						
+				}
+				var generic = MakeDelegateMethodInfo.MakeGenericMethod(baseType);
 
-				//if (newConverter)
-				//{
-				//	serializer.Converters.Clear();
-				//	serializer.ContractResolver = originalResolver;
-				//	foreach (var converter in originalConverters)
-				//		serializer.Converters.Add(converter);
-				//}
+				if (concreteTypeSelector != null)
+				{
+					var elasticSerializer = new ElasticSerializer(this._settings);
+					var state = typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector) as JsonConverter;
+					if (state != null)
+					{
+						var settings = elasticSerializer.CreateSettings(piggyBackJsonConverter: state);
+
+						var jsonSerializer = new JsonSerializer()
+						{
+							NullValueHandling = settings.NullValueHandling,
+							DefaultValueHandling = settings.DefaultValueHandling,
+							ContractResolver = settings.ContractResolver,
+						};
+						foreach (var converter in settings.Converters.EmptyIfNull())
+							jsonSerializer.Converters.Add(converter);
+						generic.Invoke(null, new object[] { m, jsonSerializer, response._Responses, this._settings });
+						continue;
+					}
+				}
+				generic.Invoke(null, new object[] { m, serializer, response._Responses, this._settings });
+				
 			}
 
 			return response;

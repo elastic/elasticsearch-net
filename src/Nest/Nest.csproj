@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
-    <Compile Include="Domain\Connection\NoTasksHttpConnection.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
     <Compile Include="ExposedInternals\ElasticSerializer.cs" />

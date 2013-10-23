@@ -12,22 +12,41 @@ namespace Nest
 	{
 		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
 
-		private static ConcurrentDictionary<Type, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<Type, ObjectActivator<object>>(); 
+		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>(); 
+		private static ConcurrentDictionary<string, Type> _cachedGenericClosedTypes = new ConcurrentDictionary<string, Type>();
 
 		public delegate T ObjectActivator<out T>(params object[] args);
 		
 
-		public static object CreateInstance(this Type t)
+		public static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
+		{
+			var key = t.FullName + "--" + closeOver.FullName;
+			Type closedType;
+			if (!_cachedGenericClosedTypes.TryGetValue(key, out closedType))
+			{
+				closedType = t.MakeGenericType(closeOver);
+				_cachedGenericClosedTypes.TryAdd(key, closedType);
+			}
+			return closedType.CreateInstance(args);
+		}
+
+		public static object CreateInstance(this Type t, params object[] args)
 		{
 			ObjectActivator<object> activator;
-			if (!_cachedActivators.TryGetValue(t, out activator))
+			var argLength = args.Count();
+			var key = argLength + "--" + t.FullName;
+			if (!_cachedActivators.TryGetValue(key, out activator))
 			{
 				var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
-				ConstructorInfo ctor = t.GetConstructors().First();
+
+				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c=>c.GetParameters().Count() == argLength);
+				if (ctor == null)
+					throw new DslException("Cannot create an instance of " + t.FullName 
+						+ "because it has no constructor taking " + argLength + " arguments");
 				activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
-				_cachedActivators.TryAdd(t, activator);
+				_cachedActivators.TryAdd(key, activator);
 			}
-			return activator();
+			return activator(args);
 		}
 
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)

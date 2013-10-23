@@ -20,6 +20,11 @@ namespace Nest.Resolvers.Converters
 		private readonly MultiGetDescriptor _descriptor;
 
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiGetHitConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
+		
+		internal MultiGetHitConverter()
+		{
+			
+		}
 
 		public MultiGetHitConverter(MultiGetDescriptor descriptor)
 		{
@@ -33,7 +38,7 @@ namespace Nest.Resolvers.Converters
 		private static void CreateMultiHit<T>(MultiHitTuple tuple, JsonSerializer serializer, ICollection<IMultiGetHit<object>> collection) where T : class
 		{
 			var hit = new MultiGetHit<T>();
-			var reader = tuple.Hit.CreateReader();
+			var reader = tuple.Hit.CreateReader();	
 			serializer.Populate(reader, hit);
 
 			var f = new FieldSelection<T>();
@@ -51,6 +56,23 @@ namespace Nest.Resolvers.Converters
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			if (this._descriptor == null)
+			{
+				var elasticContractResolver = serializer.ContractResolver as ElasticContractResolver;
+				if (elasticContractResolver == null)
+					return new MultiGetResponse { IsValid = false };
+				var piggyBackState = elasticContractResolver.PiggyBackState;
+				if (piggyBackState == null || piggyBackState.ActualJsonConverter == null)
+					return new MultiGetResponse { IsValid = false };
+
+				var realConverter = piggyBackState.ActualJsonConverter as MultiGetHitConverter;
+				if (realConverter == null)
+					return new MultiGetResponse { IsValid = false };
+
+				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
+			}
+
+
 			var response = new MultiGetResponse();
 			var jsonObject = JObject.Load(reader);
 
@@ -71,7 +93,7 @@ namespace Nest.Resolvers.Converters
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(MultiGetResponse);
+			return true;
 		}
 	}
 }

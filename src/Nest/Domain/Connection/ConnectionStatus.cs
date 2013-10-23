@@ -64,8 +64,8 @@ namespace Nest
 		public virtual T Deserialize<T>(bool allow404 = false) where T : class
 		{
 			if (typeof(BaseResponse).IsAssignableFrom(typeof(T)))
-			  return this._elasticSerializer.Deserialize<T>(this, allow404);
-			return this._elasticSerializer.Deserialize<T>(this.Result, allow404);
+			  return this._elasticSerializer.Deserialize<T>(this, notFoundIsValidResponse: allow404);
+			return this._elasticSerializer.Deserialize<T>(this.Result, notFoundIsValidResponse: allow404);
 		}
 
 		public override string ToString()

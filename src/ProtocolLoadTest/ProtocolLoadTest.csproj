@@ -64,10 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\AsyncRequestOperation.cs" />
-    <Compile Include="Connection\NoTasksHttpConnection.cs" />
-    <Compile Include="TrueAsyncTester.cs" />
-    <Compile Include="HttpManualAsyncTester.cs" />
     <Compile Include="HttpTester.cs" />
     <Compile Include="ITester.cs" />
     <Compile Include="MessageGenerator.cs" />

@@ -46,6 +46,7 @@ namespace Nest
 
 		public ReadOnlyCollection<JsonConverter> ExtraConverters { get; private set; }
 
+		public ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; private set; }
 
 		public ConnectionSettings(Uri uri)
 		{
@@ -67,6 +68,7 @@ namespace Nest
 
 			this.ModifyJsonSerializerSettings = (j) => { };
 			this.ExtraConverters = Enumerable.Empty<JsonConverter>().ToList().AsReadOnly();
+			this.ContractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
 
 		}
 
@@ -96,9 +98,21 @@ namespace Nest
 		/// <summary>
 		/// Add a custom JsonConverter to the build in json serialization
 		/// </summary>
-		public void AddJsonConverters(IEnumerable<JsonConverter> converters)
+		public ConnectionSettings AddJsonConverters(IEnumerable<JsonConverter> converters)
 		{
 			this.ExtraConverters = converters.ToList().AsReadOnly();
+			return this;
+		}
+
+		/// <summary>
+		/// Add a custom JsonConverter to the build in json serialization by passing in a predicate for a type.
+		/// This is faster then adding them using AddJsonConverters() because this way they will be part of the cached 
+		/// Json.net contract for a type.
+		/// </summary>
+		public ConnectionSettings AddContractJsonConverters(params Func<Type, JsonConverter>[] contractSelectors)
+		{
+			this.ContractConverters = contractSelectors.ToList().AsReadOnly();
+			return this;
 		}
 
 		/// <summary>

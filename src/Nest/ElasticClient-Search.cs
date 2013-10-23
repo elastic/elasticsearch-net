@@ -157,7 +157,7 @@ namespace Nest
 			var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
             if (descriptor._ConcreteTypeSelector == null && (
 				types.Any(t=>t.Type != typeof(TResult)))
-				)
+				|| partialFields.Any())
             {
 				var typeDictionary = types
 					.ToDictionary(t => t.Resolve(this._connectionSettings), t => t.Type);
@@ -176,10 +176,7 @@ namespace Nest
 
             return this.Serializer.DeserializeInternal<QueryResponse<TResult>>(
                 status,
-				extraConverters: new[]
-				{
-					new ConcreteTypeConverter<TResult>(descriptor._ConcreteTypeSelector, partialFields)
-				}
+				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(descriptor._ConcreteTypeSelector, partialFields)
             );
         }
     }
