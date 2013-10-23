@@ -17,13 +17,13 @@ namespace ProtocolLoadTest
 
 			GenerateAndIndex(client, indexName, numMessages, bufferSize);
         }
-		public void SearchUsingSingleClient(string indexName, int port, int numMessages, int bufferSize)
+		public void SearchUsingSingleClient(string indexName, int port, int numberOfSearches)
 		{
 			var settings = this.CreateSettings(indexName, port);
             var client = new ElasticClient(settings);
 
 			var tasks = new List<Task>();
-			for (var p = 0;p<1000;p++)
+			for (var p = 0; p < numberOfSearches; p++)
 			{
 				var t = client.SearchAsync<Message>(s=>s.MatchAll())
 					.ContinueWith(ta=>
@@ -35,11 +35,11 @@ namespace ProtocolLoadTest
 			}
 			Task.WaitAll(tasks.ToArray());
 		}
-		public void SearchUsingMultipleClients(string indexName, int port, int numMessages, int bufferSize)
+		public void SearchUsingMultipleClients(string indexName, int port, int numberOfSearches)
 		{
 			var settings = this.CreateSettings(indexName, port);
 			var tasks = new List<Task>();
-			for (var p = 0; p < 1000; p++)
+			for (var p = 0; p < numberOfSearches; p++)
 			{
 				var client = new ElasticClient(settings);
 				var t = client.SearchAsync<Message>(s => s.MatchAll())
@@ -50,6 +50,7 @@ namespace ProtocolLoadTest
 					}); 
 				tasks.Add(t);
 			}
+
 			Task.WaitAll(tasks.ToArray());
 
 		}

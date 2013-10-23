@@ -17,35 +17,41 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			JObject o = JObject.Load(reader);
+			reader.Read();
+			if (reader.TokenType != JsonToken.PropertyName)
+				return null;
 
-			var prop = o.Properties().First();
-			var key = prop.Name;
+			var key = reader.Value as string;
+			reader.Read();
 			switch (key)
 			{
 				case "delete":
 					var deleteItem = new BulkDeleteResponseItem();
-					serializer.Populate(prop.Value.CreateReader(), deleteItem);
+					serializer.Populate(reader, deleteItem);
 					if (deleteItem != null)
 						deleteItem.Operation = key;
+					reader.Read();
 					return deleteItem;
 				case "update":
 					var updateItem = new BulkUpdateResponseItem();
-					serializer.Populate(prop.Value.CreateReader(), updateItem);
+					serializer.Populate(reader, updateItem);
 					if (updateItem != null)
 						updateItem.Operation = key;
+					reader.Read();
 					return updateItem;
 				case "index":
 					var indexItem = new BulkIndexResponseItem();
-					serializer.Populate(prop.Value.CreateReader(), indexItem);
+					serializer.Populate(reader, indexItem);
 					if (indexItem != null)
 						indexItem.Operation = key;
+					reader.Read();
 					return indexItem;
 				case "create":
 					var createItem = new BulkCreateResponseItem();
-					serializer.Populate(prop.Value.CreateReader(), createItem);
+					serializer.Populate(reader, createItem);
 					if (createItem != null)
 						createItem.Operation = key;
+					reader.Read();
 					return createItem;
 			}
 			return null;

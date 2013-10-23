@@ -120,24 +120,21 @@ namespace Nest
 			var partialFields = realConcreteConverter._partialFields;
 			if (partialFields.Any())
 			{
-				var itemType = typeof (CovariantItem<>).MakeGenericType(concreteType);
-				var listType = typeof (List<>).MakeGenericType(itemType);
-				var dictType = typeof (CovariantDictionary<>).MakeGenericType(concreteType);
+				var item = typeof (CovariantItem<>).CreateGenericInstance(concreteType);
 
-				dynamic items = Activator.CreateInstance(listType);
+				dynamic items = typeof(List<>).CreateGenericInstance(item.GetType());
 				foreach (var pf in partialFields)
 				{
-					dynamic partial = Activator.CreateInstance(concreteType);
+					dynamic partial = concreteType.CreateInstance();
 
 					serializer.Populate(d.fields[pf].CreateReader(), partial);
 
-					dynamic dictItem = Activator.CreateInstance(itemType);
+					dynamic dictItem = item.GetType().CreateInstance();
 					dictItem.Key = pf;
 					dictItem.Value = partial;
 					items.Add(dictItem);
 				}
-
-				dynamic dict = Activator.CreateInstance(dictType);
+				dynamic dict = typeof(CovariantDictionary<>).CreateGenericInstance(concreteType); ;
 				dict.Items = items;
 				hit.PartialFields = dict;
 			}

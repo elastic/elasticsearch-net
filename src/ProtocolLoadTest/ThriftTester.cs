@@ -20,12 +20,12 @@ namespace ProtocolLoadTest
 			GenerateAndIndex(client, indexName, numMessages, bufferSize);
         }
 
-	    public void SearchUsingSingleClient(string indexName, int port, int numMessages, int bufferSize)
+	    public void SearchUsingSingleClient(string indexName, int port, int numberOfSearches)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public void SearchUsingMultipleClients(string indexName, int port, int numMessages, int bufferSize)
+	    public void SearchUsingMultipleClients(string indexName, int port, int numberOfSearches)
 	    {
 		    throw new NotImplementedException();
 	    }
