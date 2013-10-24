@@ -36,5 +36,5 @@ build/tmp
 build/tmp/*
 build/_out/*
 build/keys/private.snk
-!build/NuGet.exe
+!build/tools/*
 /dep/Newtonsoft.Json.4.0.2
