@@ -56,7 +56,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
@@ -215,6 +215,7 @@
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
     <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
     <Compile Include="Search\Suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />
     <Compile Include="Test.Designer.cs">

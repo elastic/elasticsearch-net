@@ -1,6 +1,7 @@
 # Ignore Visual Studio 2010 files
 *.obj
 *.exe
+*.DotSettings
 *.pdb
 *.user
 *.aps

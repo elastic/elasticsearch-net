@@ -9,9 +9,9 @@
     <iconUrl>http://nest.azurewebsites.net/images/nuget-icon.png</iconUrl>
     <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
     <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
-    <summary>Elasticsearch client, focuses on a strongly typed interface to elasticsearch but works well with dynamic use cases too.</summary>
+    <summary>Elasticsearch client, strongly typed interface to Elasticsearch but also comes with great low level support.</summary>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Elasticsearch client, focuses on a strongly typed interface to elasticsearch but works well with dynamic use cases too.</description>
+    <description>Elasticsearch client, strongly typed interface to Elasticsearch but also comes with great low level support.</description>
     <dependencies>
       <dependency id="Newtonsoft.Json" />
     </dependencies>

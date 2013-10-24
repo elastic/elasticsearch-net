@@ -25,8 +25,11 @@ namespace Nest
 				throw new ArgumentNullException("settings");
 
 			this._ConnectionSettings = settings;
-			var semaphore = Math.Max(1, settings.MaximumAsyncConnections);
-			this._ResourceLock = new Semaphore(semaphore, semaphore);
+			if (settings.MaximumAsyncConnections > 0)
+			{
+				var semaphore = Math.Max(1, settings.MaximumAsyncConnections);
+				this._ResourceLock = new Semaphore(semaphore, semaphore);
+			}
 			this._enableTrace = settings.TraceEnabled;
 		}
 
@@ -213,7 +216,8 @@ namespace Nest
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
-			if (this._ConnectionSettings.MaximumAsyncConnections <= 0)
+			if (this._ConnectionSettings.MaximumAsyncConnections <= 0
+				|| this._ResourceLock == null)
 				return this.CreateIterateTask(request, data, tcs);
 
 			var timeout = this._ConnectionSettings.Timeout;

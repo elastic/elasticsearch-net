@@ -25,6 +25,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "preference")]
 		internal string _Preference { get; set; }
+
+		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
+
+		
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -39,7 +43,6 @@ namespace Nest
 
 
 		internal override Type _ClrType { get { return typeof(T); } }
-		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
