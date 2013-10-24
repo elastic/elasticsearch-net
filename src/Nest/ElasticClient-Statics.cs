@@ -29,9 +29,9 @@ namespace Nest
 		}
 
 
-		protected virtual T Deserialize<T>(object value,IEnumerable<JsonConverter> extraConverters = null, bool allow404 = false) where T : class
+		protected virtual T Deserialize<T>(object value, bool allow404 = false) where T : class
 		{
-			return this.Serializer.Deserialize<T>(value, extraConverters, allow404);
+			return this.Serializer.Deserialize<T>(value, notFoundIsValidResponse: allow404);
 		}
 
 		private string ResolveTypeName(TypeNameMarker typeNameMarker, string defaultIndexName = null)

@@ -26,10 +26,7 @@ namespace Nest
 				var search = this.Serialize(descriptor._Search);
 				status = this.Connection.PostSync(path, search);
 			}
-			return this.Deserialize<QueryResponse<T>>(status, extraConverters: new List<JsonConverter>
-			{
-				new ConcreteTypeConverter(typeof (T), (d, h) => typeof (T))
-			});
+			return this.Deserialize<QueryResponse<T>>(status);
 		}
 	}
 }

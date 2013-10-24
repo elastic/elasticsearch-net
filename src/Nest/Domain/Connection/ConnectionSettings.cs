@@ -1,6 +1,10 @@
-﻿using Nest.Resolvers;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Nest.Resolvers;
 using System;
 using System.Collections.Specialized;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -35,7 +39,12 @@ namespace Nest
 		public FluentDictionary<Type, string> DefaultIndices { get; private set; }
 		public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
 		public NameValueCollection QueryStringParameters { get; private set; }
-    public Func<string, string> DefaultPropertyNameInferrer { get; private set; }
+		public Func<string, string> DefaultPropertyNameInferrer { get; private set; }
+
+		//Serializer settings
+		public Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; private set; }
+
+		public ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; private set; }
 
 		public ConnectionSettings(Uri uri)
 		{
@@ -44,8 +53,8 @@ namespace Nest
 			this.Timeout = 60 * 1000;
 
 			this.Uri = uri;
-			if (!uri.ToString().EndsWith("/"))
-				this.Uri = new Uri(uri.ToString() + "/");
+			if (!uri.OriginalString.EndsWith("/"))
+				this.Uri = new Uri(uri.OriginalString + "/");
 			this.Host = uri.Host;
 			this.Port = uri.Port;
 
@@ -54,6 +63,10 @@ namespace Nest
 			this.DefaultIndices = new FluentDictionary<Type, string>();
 			this.DefaultTypeNames = new FluentDictionary<Type, string>();
 			this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
+
+			this.ModifyJsonSerializerSettings = (j) => { };
+			this.ContractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
+
 		}
 
 		/// <summary>
@@ -65,6 +78,29 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// Allows you to update internal the json.net serializer settings to your liking
+		/// </summary>
+		/// <param name="modifier"></param>
+		/// <returns></returns>
+		public ConnectionSettings SetJsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
+		{
+			if (modifier == null)
+				return this;
+			this.ModifyJsonSerializerSettings = modifier;
+			return this;
+
+		}
+		/// <summary>
+		/// Add a custom JsonConverter to the build in json serialization by passing in a predicate for a type.
+		/// This is faster then adding them using AddJsonConverters() because this way they will be part of the cached 
+		/// Json.net contract for a type.
+		/// </summary>
+		public ConnectionSettings AddContractJsonConverters(params Func<Type, JsonConverter>[] contractSelectors)
+		{
+			this.ContractConverters = contractSelectors.ToList().AsReadOnly();
+			return this;
+		}
 
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
@@ -161,18 +197,18 @@ namespace Nest
 			return;
 		}
 
-    /// <summary>
-    /// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit propertyname 
-    /// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
-    /// <pre>
-    /// Here you can register a function that transforms propertynames (default casing, pre- or suffixing)
-    /// </pre>
-    /// </summary>
-    public ConnectionSettings SetDefaultPropertyNameInferrer(Func<string, string> propertyNameSelector)
-    {
-      this.DefaultPropertyNameInferrer = propertyNameSelector;
-      return this;
-    }
+		/// <summary>
+		/// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit propertyname 
+		/// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
+		/// <pre>
+		/// Here you can register a function that transforms propertynames (default casing, pre- or suffixing)
+		/// </pre>
+		/// </summary>
+		public ConnectionSettings SetDefaultPropertyNameInferrer(Func<string, string> propertyNameSelector)
+		{
+			this.DefaultPropertyNameInferrer = propertyNameSelector;
+			return this;
+		}
 
 		public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
 		{
@@ -202,5 +238,5 @@ namespace Nest
 		}
 
 
-  }
+	}
 }

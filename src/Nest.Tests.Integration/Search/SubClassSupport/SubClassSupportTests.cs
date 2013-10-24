@@ -88,5 +88,51 @@ namespace Nest.Tests.Integration.Search.SearchType
 			queryResults.Documents.OfType<ClassA>().Any().Should().BeTrue();
 			queryResults.Documents.OfType<ClassB>().Any().Should().BeTrue();
 		}
+
+		[Test]
+		public void MultipleTypesUsingBaseClassMultiSearch()
+		{
+			var data = Enumerable.Range(0, 100)
+				.Select(i =>
+				{
+					MyBaseClass o = null;
+					if (i % 2 == 0)
+						o = new ClassA() { ClassAProperty = Guid.NewGuid().ToString() };
+					else
+						o = new ClassB() { ClassBProperty = Guid.NewGuid().ToString() };
+					o.Title = Guid.NewGuid().ToString();
+					return o;
+				});
+
+			var resulta = this._client.IndexMany(data.OfType<ClassA>(), new SimpleBulkParameters { Refresh = true });
+			var resultb = this._client.IndexMany(data.OfType<ClassB>(), new SimpleBulkParameters { Refresh = true });
+
+			var queryResults = this._client.MultiSearch(ms => ms
+				.Search<MyBaseClass>("using_types", s=>s.AllIndices()
+					.Types(typeof(ClassA), typeof(ClassB))
+					.From(0)
+					.Size(100)
+					.MatchAll()
+				)
+				.Search<MyBaseClass>("using_selector", s => s.AllIndices()
+					.ConcreteTypeSelector((o, h) => o.classBProperty != null ? typeof(ClassB) : typeof(ClassA))
+					.From(0)
+					.Size(100)
+					.MatchAll()
+				)
+			);
+			Assert.True(queryResults.IsValid);
+			var firstResult = queryResults.GetResponse<MyBaseClass>("using_types");
+
+			Assert.True(firstResult.Documents.Any());
+			firstResult.Documents.OfType<ClassA>().Any().Should().BeTrue();
+			firstResult.Documents.OfType<ClassB>().Any().Should().BeTrue();
+
+			var secondResult = queryResults.GetResponse<MyBaseClass>("using_selector");
+
+			Assert.True(secondResult.Documents.Any());
+			secondResult.Documents.OfType<ClassA>().Any().Should().BeTrue();
+			secondResult.Documents.OfType<ClassB>().Any().Should().BeTrue();
+		}
 	}
 }
