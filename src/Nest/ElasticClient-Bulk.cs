@@ -12,8 +12,6 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		private Regex _bulkReplace = new Regex(@",\n|^\[", RegexOptions.Compiled | RegexOptions.Multiline);
-
 		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
 			bulkSelector.ThrowIfNull("bulkSelector");

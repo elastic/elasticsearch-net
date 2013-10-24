@@ -23,6 +23,8 @@ namespace Nest.ProfilerHelper
 
 			public SearchResultActionArgs SearchResultArgs { get; set; }
 
+			public SerializationActionArgs SerializationArgs { get; set; }
+
 			public static void Search(SearchActionArgs args)
 			{
 				SearchAction.Search(args);
@@ -36,6 +38,11 @@ namespace Nest.ProfilerHelper
 			public static void Index(IndexActionArgs args)
 			{
 				IndexAction.Index(args);
+			}
+
+			public static void Serialization(SerializationActionArgs args)
+			{
+				SerializationAction.DoLoadsOfSerializations(args);
 			}
 		}
 		

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -26,5 +28,9 @@ namespace Nest
     Func<string, string> DefaultPropertyNameInferrer { get; }
 
     Func<Type, string> DefaultTypeNameInferrer { get; }
+
+	Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; }
+
+	ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; }
   }
 }

@@ -61,11 +61,11 @@ namespace Nest
 		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		public virtual T Deserialize<T>(IEnumerable<JsonConverter> extraConverters = null, bool allow404 = false) where T : class
+		public virtual T Deserialize<T>(bool allow404 = false) where T : class
 		{
-      if (typeof(BaseResponse).IsAssignableFrom(typeof(T)))
-			  return this._elasticSerializer.Deserialize<T>(this, extraConverters, allow404);
-			return this._elasticSerializer.Deserialize<T>(this.Result, extraConverters, allow404);
+			if (typeof(BaseResponse).IsAssignableFrom(typeof(T)))
+			  return this._elasticSerializer.Deserialize<T>(this, notFoundIsValidResponse: allow404);
+			return this._elasticSerializer.Deserialize<T>(this.Result, notFoundIsValidResponse: allow404);
 		}
 
 		public override string ToString()

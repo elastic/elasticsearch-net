@@ -17,9 +17,6 @@ namespace Nest.Tests.Integration
 		{
 			var client = ElasticsearchConfiguration.Client;
 
-			if (client.IndexExists(ElasticsearchConfiguration.DefaultIndex).Exists)
-				return;
-
 			var projects = NestTestData.Data;
 			var people = NestTestData.People;
 
@@ -36,9 +33,13 @@ namespace Nest.Tests.Integration
 				.AddMapping<Person>(m => m.MapFromAttributes())
 			);
 
-			var bulkParameters = new SimpleBulkParameters() { Refresh = true };
-			client.IndexMany(projects, bulkParameters);
-			client.IndexMany(people, bulkParameters);
+			var bulk = new BulkDescriptor();
+			foreach (var p in projects)
+				bulk.Index<ElasticSearchProject>(i=>i.Object(p));
+			foreach (var p in people)
+				bulk.Index<Person>(i => i.Object(p));
+			client.Bulk(bulk);
+
 			client.Refresh(new[] {ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone"});
 
 		}
