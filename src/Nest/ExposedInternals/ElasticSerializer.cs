@@ -17,12 +17,9 @@ namespace Nest
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
 
-		private readonly ReadOnlyCollection<JsonConverter> _extraConverters = new List<JsonConverter>().AsReadOnly();
-
 		public ElasticSerializer(IConnectionSettings settings)
 		{
 			this._settings = settings;
-			this._extraConverters = settings.ExtraConverters;
 			this._serializationSettings = this.CreateSettings();
 			this._propertyNameResolver = new PropertyNameResolver();
 		}
@@ -91,9 +88,9 @@ namespace Nest
 
 		internal JsonSerializerSettings CreateSettings(IList<JsonConverter> extraConverters = null, JsonConverter piggyBackJsonConverter = null)
 		{
-			var converters = extraConverters.HasAny() 
-				? this._extraConverters.Concat(extraConverters).ToList().AsReadOnly()
-				: this._extraConverters;
+			var converters = extraConverters.HasAny()
+				? extraConverters.ToList()
+				: null;
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			return new JsonSerializerSettings()
 			{

@@ -31,8 +31,6 @@ namespace Nest
 
 	Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; }
 
-	ReadOnlyCollection<JsonConverter> ExtraConverters { get; }
-
 	ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; }
   }
 }
