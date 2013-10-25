@@ -96,8 +96,8 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Alias(string index, IEnumerable<string> aliases)
 		{
-			aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", aliases);
+			var cmds = aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
+			var q = string.Join(",", cmds);
 			return this._Alias(q);
 		}
 		/// <summary>
@@ -106,8 +106,8 @@ namespace Nest
 		public IIndicesOperationResponse Alias(IEnumerable<string> aliases)
 		{
 			var index = this._connectionSettings.DefaultIndex;
-			aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", aliases);
+			var cmds = aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
+			var q = string.Join(",", cmds);
 			return this._Alias(q);
 		}
 		/// <summary>
@@ -133,8 +133,8 @@ namespace Nest
 		public IIndicesOperationResponse RemoveAlias(IEnumerable<string> aliases)
 		{
 			var index = this._connectionSettings.DefaultIndex;
-			aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", aliases);
+			var cmds = aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
+			var q = string.Join(",", cmds);
 			return this._Alias(q);
 		}
 		/// <summary>
@@ -142,8 +142,8 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases)
 		{
-			aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", aliases);
+			var cmds = aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
+			var q = string.Join(",", cmds);
 			return this._Alias(q);
 		}
 		/// <summary>
@@ -151,8 +151,8 @@ namespace Nest
 		/// </summary>
 		public IIndicesOperationResponse Alias(IEnumerable<string> indices, string alias)
 		{
-			indices.Select(i => _createCommand("add", new AliasParams { Index = i, Alias = alias }));
-			var q = string.Join(",", indices);
+			var cmds = indices.Select(i => _createCommand("add", new AliasParams { Index = i, Alias = alias }));
+			var q = string.Join(",", cmds);
 			return this._Alias(q);
 		}
 		/// <summary>
@@ -177,7 +177,7 @@ namespace Nest
 		public IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases)
 		{
 			var cmds = aliases.Select(a => _aliasBody.F(_createCommand("add", a)));
-			var q = string.Join(",", aliases);
+			var q = string.Join(",", cmds);
 			return this._Alias(q);
 		}
 		/// <summary>
@@ -193,7 +193,7 @@ namespace Nest
 		public IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases)
 		{
 			var cmds = aliases.Select(a => _aliasBody.F(_createCommand("remove", a)));
-			var q = string.Join(",", aliases);
+			var q = string.Join(",", cmds);
 			return this._Alias(q);
 		}
 		private IndicesOperationResponse _Alias(string query)

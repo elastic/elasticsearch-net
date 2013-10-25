@@ -5,6 +5,14 @@ using Xipton.Razor;
 using System.IO;
 using System.Globalization;
 
+
+public class RestApiSpec {
+	public string Commit { get; set; }
+	public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
+
+	public IList<ApiQueryParameters> ApiQueryParameters { get; set; }
+}
+
 public class ApiEndpoint {
 	public string CsharpMethodName { get; set; }
 	public string Documentation { get; set; }
@@ -66,7 +74,14 @@ public class ApiEndpoint {
 							Description = this.Body.Description
 						});
 					}
-					args = args.Concat(new [] { "NameValueCollection queryString = null" });
+					var queryStringParamName = "FluentQueryString";
+					if (this.Url.Params != null && this.Url.Params.Any())
+						queryStringParamName = methodName + "QueryString";
+
+					args = args.Concat(new [] 
+					{ 
+						"Func<"+queryStringParamName+", NameValueCollection> queryString = null" 
+					});
 
 					var apiMethod = new CsharpMethod 
 					{
@@ -115,6 +130,7 @@ public class ApiUrl {
 	public IDictionary<string, ApiUrlPart> Parts { get; set; }
 	public IDictionary<string, ApiQueryParameters> Params { get; set; }
 }
+
 public class ApiUrlPart {
 	public string Name { get; set; }
 	public string Type { get; set; }
@@ -140,7 +156,7 @@ public static class ApiGenerator
 		var textInfo = new CultureInfo("en-US").TextInfo;
 		return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
 	}
-	public static IDictionary<string, ApiEndpoint> GetAllApiEndpoints() 
+	public static RestApiSpec GetRestSpec() 
 	{
 		Console.WriteLine("Getting a listing of all the api endpoints from the elasticsearch-rest-api-spec repos");
 		var dom = CQ.CreateFromUrl(_listingUrl);
@@ -163,7 +179,13 @@ public static class ApiGenerator
 			})
 			.ToDictionary(d=>d.Key, d=>d.Value);
 
-		return endpoints;
+		var restSpec = new RestApiSpec {
+			Endpoints = endpoints,
+			Commit = dom[".sha:first"].Text()
+		};
+
+
+		return restSpec;
 	}
 
 	//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
@@ -185,24 +207,31 @@ public static class ApiGenerator
 			if (method.Path.Contains("/fielddata/"))
 				method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
 		}
-		
-
 	}
+
 	public static string CreateMethodName(string apiEnpointKey, ApiEndpoint endpoint) 
 	{
 		return PascalCase(apiEnpointKey);
 	}
 
-	public static void GenerateClientInterface(IDictionary<string, ApiEndpoint> model)
+	public static void GenerateClientInterface(RestApiSpec model)
 	{
 		var targetFile = @"..\Nest\IRawElasticClient.cs";
 		var source = _razorMachine.Execute(File.ReadAllText(@"Views\IRawElasticClient.cshtml"), model).ToString();
 		File.WriteAllText(targetFile, source);
 	}
+
+	public static void GenerateQueryStringParameters(RestApiSpec model)
+	{
+		var targetFile = @"..\Nest\QueryStringParameters\GeneratedQueryStringParameters.cs";
+		var source = _razorMachine.Execute(File.ReadAllText(@"Views\GeneratedQueryStringParameters.cshtml"), model).ToString();
+		File.WriteAllText(targetFile, source);
+	}
 }
 
 
-//extensions methods dont work becuase scriptcs wraps everything.
+//extensions methods dont work because scriptcs wraps everything
+//in its own class
 public static class Extensions {
 	public static IEnumerable<T> DistinctBy<T, TKey>(IEnumerable<T> items, Func<T, TKey> property)
 	{

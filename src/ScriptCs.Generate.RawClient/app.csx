@@ -4,8 +4,10 @@ using System.Net;
 using CsQuery;
 using Newtonsoft.Json;
 
-var apiEndpoints = ApiGenerator.GetAllApiEndpoints();
+var spec = ApiGenerator.GetRestSpec();
 
-ApiGenerator.GenerateClientInterface(apiEndpoints);
+ApiGenerator.GenerateClientInterface(spec);
 
-Console.WriteLine("Found {0} api documentation endpoints", apiEndpoints.Count());
+ApiGenerator.GenerateQueryStringParameters(spec);
+
+Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count());
