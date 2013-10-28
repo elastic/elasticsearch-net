@@ -6,17 +6,23 @@ using System.Linq.Expressions;
 using System.Text;
 using Nest.Resolvers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest.DSL.Query
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class FunctionScoreQueryDescriptor<T> : IQuery where T : class
     {
+        [JsonProperty(PropertyName = "functions")]
+        internal IEnumerable<FunctionScoreFunction<T>> _Functions { get; set; }
+
         [JsonProperty(PropertyName = "query")]
         internal BaseQuery _Query { get; set; }
 
-        [JsonProperty(PropertyName = "functions")]
-        internal IEnumerable<FunctionScoreFunction<T>> _Functions { get; set; }
+        [JsonProperty(PropertyName = "score_mode")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        FunctionScoreScoreMode _ScoreMode { get; set; }
+
 
         internal bool IsConditionless
         {
@@ -49,6 +55,22 @@ namespace Nest.DSL.Query
 
             return this;
 		}
+
+        public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreScoreMode mode)
+        {
+            this._ScoreMode = mode;
+            return this;
+        }
+    }
+
+    public enum FunctionScoreScoreMode
+    {
+        multiply,
+        sum,
+        avg,
+        first,
+        max,
+        min
     }
 
     public class FunctionScoreFunctionsDescriptor<T> : IEnumerable<FunctionScoreFunction<T>>
@@ -60,9 +82,23 @@ namespace Nest.DSL.Query
             this._Functions = new List<FunctionScoreFunction<T>>();
         }
 
-        public FunctionScoreFunction<T> Gauss(Expression<Func<T, object>> objectPath, string scale)
+        public FunctionScoreFunction<T> Gauss(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> db)
         {
-            var fn = new GaussFunction<T>(objectPath, scale);
+            var fn = new GaussFunction<T>(objectPath, db);
+            this._Functions.Add(fn);
+            return fn;
+        }
+
+        public FunctionScoreFunction<T> Linear(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> db)
+        {
+            var fn = new LinearFunction<T>(objectPath, db);
+            this._Functions.Add(fn);
+            return fn;
+        }
+
+        public FunctionScoreFunction<T> Exp(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> db)
+        {
+            var fn = new ExpFunction<T>(objectPath, db);
             this._Functions.Add(fn);
             return fn;
         }
@@ -91,20 +127,104 @@ namespace Nest.DSL.Query
     {
     }
 
+    public class FunctionScoreDecayFieldDescriptor
+    {
+        [JsonProperty(PropertyName = "origin")]
+        internal string _Origin { get; set; }
+
+        [JsonProperty(PropertyName = "scale")]
+        internal string _Scale { get; set; }
+
+        [JsonProperty(PropertyName = "offset")]
+        internal string _Offset { get; set; }
+
+        [JsonProperty(PropertyName = "decay")]
+        internal double? _Decay { get; set; }
+
+        public FunctionScoreDecayFieldDescriptor Origin(string origin)
+        {
+            this._Origin = origin;
+            return this;
+        }
+
+        public FunctionScoreDecayFieldDescriptor Scale(string scale)
+        {
+            this._Scale = scale;
+            return this;
+        }
+
+        public FunctionScoreDecayFieldDescriptor Offset(string offset)
+        {
+            this._Offset = offset;
+            return this;
+        }
+
+        public FunctionScoreDecayFieldDescriptor Decay(double? decay)
+        {
+            this._Decay = decay;
+            return this;
+        }
+    }
+
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GaussFunction<T> : FunctionScoreFunction<T>
+    public class FunctionScoreDecayFunction<T> : FunctionScoreFunction<T>
+    {
+    }
+
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class GaussFunction<T> : FunctionScoreDecayFunction<T>
     {
         [JsonProperty(PropertyName = "gauss")]
         [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-        internal IDictionary<string, object> _GaussDescriptor { get; set; }
+        internal IDictionary<string, FunctionScoreDecayFieldDescriptor> _GaussDescriptor { get; set; }
 
-        public GaussFunction(Expression<Func<T, object>> objectPath, string scale)
+        public GaussFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
         {
-            _GaussDescriptor = new Dictionary<string, object>();
+            _GaussDescriptor = new Dictionary<string, FunctionScoreDecayFieldDescriptor>();
 
             var resolver = new PropertyNameResolver();
             var fieldName = resolver.Resolve(objectPath);
-            _GaussDescriptor[fieldName] = new { scale = scale};
+            var descriptor = new FunctionScoreDecayFieldDescriptor();
+            descriptorBuilder(descriptor);
+            _GaussDescriptor[fieldName] = descriptor;
+        }
+    }
+
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class LinearFunction<T> : FunctionScoreDecayFunction<T>
+    {
+        [JsonProperty(PropertyName = "linear")]
+        [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+        internal IDictionary<string, FunctionScoreDecayFieldDescriptor> _LinearDescriptor { get; set; }
+
+        public LinearFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+        {
+            _LinearDescriptor = new Dictionary<string, FunctionScoreDecayFieldDescriptor>();
+
+            var resolver = new PropertyNameResolver();
+            var fieldName = resolver.Resolve(objectPath);
+            var descriptor = new FunctionScoreDecayFieldDescriptor();
+            descriptorBuilder(descriptor);
+            _LinearDescriptor[fieldName] = descriptor;
+        }
+    }
+
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class ExpFunction<T> : FunctionScoreDecayFunction<T>
+    {
+        [JsonProperty(PropertyName = "exp")]
+        [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+        internal IDictionary<string, FunctionScoreDecayFieldDescriptor> _ExpDescriptor { get; set; }
+
+        public ExpFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+        {
+            _ExpDescriptor = new Dictionary<string, FunctionScoreDecayFieldDescriptor>();
+
+            var resolver = new PropertyNameResolver();
+            var fieldName = resolver.Resolve(objectPath);
+            var descriptor = new FunctionScoreDecayFieldDescriptor();
+            descriptorBuilder(descriptor);
+            _ExpDescriptor[fieldName] = descriptor;
         }
     }
 
