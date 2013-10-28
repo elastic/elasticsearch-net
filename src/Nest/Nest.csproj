@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="DSL\Query\FunctionScoreQueryDescriptor.cs" />
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
     <Compile Include="ExposedInternals\ElasticSerializer.cs" />
     <Compile Include="Exception\ConnectionException.cs" />

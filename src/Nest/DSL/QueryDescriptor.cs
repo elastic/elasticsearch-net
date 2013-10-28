@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -35,6 +36,9 @@ namespace Nest
 		internal BoostingQueryDescriptor<T> BoostingQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "ids")]
 		internal IdsQuery IdsQuery { get; set; }
+
+        [JsonProperty(PropertyName = "function_score")]
+        internal FunctionScoreQueryDescriptor<T> FunctionScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "custom_score")]
 		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "custom_filters_score")]
@@ -128,6 +132,7 @@ namespace Nest
 
 				BoostingQueryDescriptor = BoostingQueryDescriptor,
 				IdsQuery = IdsQuery,
+                FunctionScoreQueryDescriptor = FunctionScoreQueryDescriptor,
 				CustomScoreQueryDescriptor = CustomScoreQueryDescriptor,
 				CustomBoostFactorQueryDescriptor = CustomBoostFactorQueryDescriptor,
 				ConstantScoreQueryDescriptor = ConstantScoreQueryDescriptor,
@@ -939,5 +944,20 @@ namespace Nest
 			return new QueryDescriptor<T> { SpanNotQueryDescriptor = this.SpanNotQueryDescriptor };
 		}
 
-	}
+        /// <summary>
+        /// Function score query
+        /// </summary>
+        /// <returns></returns>
+	    public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
+		{
+            var query = new FunctionScoreQueryDescriptor<T>();
+            functionScoreQuery(query);
+
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			this.FunctionScoreQueryDescriptor = query;
+            return new QueryDescriptor<T> { FunctionScoreQueryDescriptor = this.FunctionScoreQueryDescriptor };
+		}
+    }
 }
