@@ -21,7 +21,7 @@ namespace Nest.DSL.Query
 
         [JsonProperty(PropertyName = "score_mode")]
         [JsonConverter(typeof(StringEnumConverter))]
-        FunctionScoreScoreMode _ScoreMode { get; set; }
+        FunctionScoreMode _ScoreMode { get; set; }
 
 
         internal bool IsConditionless
@@ -56,14 +56,14 @@ namespace Nest.DSL.Query
             return this;
 		}
 
-        public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreScoreMode mode)
+        public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
         {
             this._ScoreMode = mode;
             return this;
         }
     }
 
-    public enum FunctionScoreScoreMode
+    public enum FunctionScoreMode
     {
         multiply,
         sum,
