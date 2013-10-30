@@ -17,8 +17,8 @@ namespace Nest
 		Task<ConnectionStatus> Put(string path, string data);
 		ConnectionStatus PutSync(string path, string data);
 
-	    Task<ConnectionStatus> Delete(string path);
-	    ConnectionStatus DeleteSync(string path);
+		Task<ConnectionStatus> Delete(string path);
+		ConnectionStatus DeleteSync(string path);
 
 		Task<ConnectionStatus> Delete(string path, string data);
 		ConnectionStatus DeleteSync(string path, string data);

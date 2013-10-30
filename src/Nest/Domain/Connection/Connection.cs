@@ -75,13 +75,14 @@ namespace Nest
 		{
 			var r = this.CreateConnection(path, "POST");
 			return this.DoAsyncRequest(r, data);
-
 		}
+
 		public Task<ConnectionStatus> Put(string path, string data)
 		{
 			var r = this.CreateConnection(path, "PUT");
 			return this.DoAsyncRequest(r, data);
 		}
+
 		public Task<ConnectionStatus> Delete(string path, string data)
 		{
 			var r = this.CreateConnection(path, "DELETE");
@@ -146,14 +147,14 @@ namespace Nest
 			if (myUri != null && !string.IsNullOrEmpty(myUri.UserInfo))
 			{
 				myReq.Headers["Authorization"] =
-					"Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
+				  "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
 			}
 		}
 
 		protected virtual HttpWebRequest CreateWebRequest(string path, string method)
 		{
 			var url = this._CreateUriString(path);
-			
+
 			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
@@ -205,19 +206,19 @@ namespace Nest
 					};
 					tracer.SetResult(cs);
 
-                    _ConnectionSettings.ConnectionStatusHandler(cs);
+					_ConnectionSettings.ConnectionStatusHandler(cs);
 
 					return cs;
 				}
 			}
-				
+
 		}
 
 		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
 			if (this._ConnectionSettings.MaximumAsyncConnections <= 0
-				|| this._ResourceLock == null)
+			  || this._ResourceLock == null)
 				return this.CreateIterateTask(request, data, tcs);
 
 			var timeout = this._ConnectionSettings.Timeout;
@@ -226,7 +227,7 @@ namespace Nest
 				using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
 				{
 					var m = "Could not start the operation before the timeout of " + timeout +
-						"ms completed while waiting for the semaphore";
+					  "ms completed while waiting for the semaphore";
 					var cs = new ConnectionStatus(this._ConnectionSettings, new TimeoutException(m));
 					tcs.SetResult(cs);
 					tracer.SetResult(cs);
@@ -338,9 +339,9 @@ namespace Nest
 
 		private Uri _CreateUriString(string path)
 		{
-            var s = this._ConnectionSettings;
-			
-				
+			var s = this._ConnectionSettings;
+
+
 			if (s.QueryStringParameters != null)
 			{
 				var tempUri = new Uri(s.Uri, path);
@@ -349,7 +350,7 @@ namespace Nest
 			}
 			path = this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? path : path.Replace("%2F", "%252F");
 			var uri = new Uri(s.Uri, path);
-		
+
 			//WebRequest.Create will replace %2F with / 
 			//this is a 'security feature'
 			//see http://mikehadlow.blogspot.nl/2011/08/how-to-stop-systemuri-un-escaping.html
