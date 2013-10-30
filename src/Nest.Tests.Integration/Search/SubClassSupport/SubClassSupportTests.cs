@@ -115,6 +115,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 					.MatchAll()
 				)
 				.Search<MyBaseClass>("using_selector", s => s.AllIndices()
+          .Types("classas","classbs")
 					.ConcreteTypeSelector((o, h) => o.classBProperty != null ? typeof(ClassB) : typeof(ClassA))
 					.From(0)
 					.Size(100)
