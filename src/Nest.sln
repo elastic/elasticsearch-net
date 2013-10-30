@@ -36,6 +36,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtocolLoadTest", "Protoco
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generate-raw-client", "generate-raw-client", "{C974EC97-1E2A-43C2-93DC-44440354D5F7}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\generate-raw-client\api.csx = ..\build\generate-raw-client\api.csx
+		..\build\generate-raw-client\app.csx = ..\build\generate-raw-client\app.csx
+		..\build\generate-raw-client\packages.config = ..\build\generate-raw-client\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{7603AED1-568B-42C8-A510-107E464CF0D5}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\generate-raw-client\Views\GeneratedQueryStringParameters.cshtml = ..\build\generate-raw-client\Views\GeneratedQueryStringParameters.cshtml
+		..\build\generate-raw-client\Views\IRawElasticClient.cshtml = ..\build\generate-raw-client\Views\IRawElasticClient.cshtml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,10 +124,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B9FE4875-0171-40F7-A357-064A93BE09C6} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
-		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
 		{27143A05-5655-447C-ADAF-405E1CF43741} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
 		{97408393-78AC-45DF-BE6E-4C219A2E456D} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
+		{B9FE4875-0171-40F7-A357-064A93BE09C6} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
+		{C974EC97-1E2A-43C2-93DC-44440354D5F7} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
+		{7603AED1-568B-42C8-A510-107E464CF0D5} = {C974EC97-1E2A-43C2-93DC-44440354D5F7}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj
