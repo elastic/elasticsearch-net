@@ -405,7 +405,7 @@ namespace Nest
 				dd.Add("distance", filter._Distance);
 
 				if (!string.IsNullOrWhiteSpace(filter._GeoUnit))
-					dd.Add("distance_unit", filter._GeoUnit);
+					dd.Add("unit", filter._GeoUnit);
 
 				if (!string.IsNullOrWhiteSpace(filter._GeoOptimizeBBox))
 					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
