@@ -49,11 +49,14 @@ namespace Nest
 		}
 			NameValueCollection nv = null;
 			if (queryString != null)
-				nv = queryString(new @(method.QueryStringParamName)());
+			{
+				var qs = queryString(new @(method.QueryStringParamName)());
+				if (qs != null) nv = qs.NameValueCollection;
+			}
 		@{
 			string requestMethod = method.ReturnType.StartsWith("Task<") ? "DoRequestAsync" : "DoRequest";
 		}
-			return this.@(requestMethod)("@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : string.Empty), nv);
+			return this.@(requestMethod)("@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), queryString: nv);
 		}</text>
 
 		}

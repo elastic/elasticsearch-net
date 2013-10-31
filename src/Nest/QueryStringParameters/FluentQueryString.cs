@@ -11,11 +11,13 @@ namespace Nest
 	/// You can always pass a simple NameValueCollection if you want.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public abstract class FluentQueryString<T> : NameValueCollection where T : FluentQueryString<T>
+	public abstract class FluentQueryString<T> where T : FluentQueryString<T>
 	{
-		public new T Add(string name, string value)
+		internal readonly NameValueCollection NameValueCollection = new NameValueCollection();
+
+		public T Add(string name, string value)
 		{
-			base.Add(name, value);
+			NameValueCollection.Add(name, value);
 			return (T)this;
 		}
 

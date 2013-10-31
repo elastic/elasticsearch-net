@@ -40,6 +40,9 @@ namespace Nest
 
 		protected ConnectionStatus DoRequest(string method, string path, object data = null,  NameValueCollection queryString = null)
 		{
+			if (queryString != null)
+				path += queryString.ToQueryString();
+
 			var postData = string.Empty;
 			var s = data as string;
 			if (s != null)
@@ -58,11 +61,17 @@ namespace Nest
 				case "head": return this.Connection.HeadSync(path);
 				case "get": return this.Connection.GetSync(path);
 			}
+
+			
+
 			throw new DslException("Unknown HTTP method " + method);
 		}
 
 		protected Task<ConnectionStatus> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
+			if (queryString != null)
+				path += queryString.ToQueryString(); 
+
 			var postData = string.Empty;
 			var s = data as string;
 			if (s != null)
