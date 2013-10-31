@@ -14,6 +14,8 @@ namespace Nest
 	///</summary>
 	public partial class RawElasticClient : IRawElasticClient
 	{
+	
+		
 		///<summary>POST /_bulk
 	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
 	    ///</summary>
@@ -239,7 +241,7 @@ namespace Nest
 		///<summary>GET /_cluster/settings
 	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 	    ///</summary>
-		public ConnectionStatus ClusterGetSettingsGet(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus ClusterGetSettings(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_cluster/settings";
 			NameValueCollection nv = null;
@@ -252,7 +254,7 @@ namespace Nest
 		///<summary>GET /_cluster/settings
 	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> ClusterGetSettingsGetAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> ClusterGetSettingsAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_cluster/settings";
 			NameValueCollection nv = null;
@@ -682,7 +684,7 @@ namespace Nest
 	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
-		public ConnectionStatus ClusterPutSettingsPut(object body, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus ClusterPutSettings(object body, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_cluster/settings".Inject(new {  });
 			NameValueCollection nv = null;
@@ -696,7 +698,7 @@ namespace Nest
 	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
-		public Task<ConnectionStatus> ClusterPutSettingsPutAsync(object body, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> ClusterPutSettingsAsync(object body, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_cluster/settings".Inject(new {  });
 			NameValueCollection nv = null;
@@ -1110,7 +1112,7 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
-		public ConnectionStatus DeleteDelete(string id, string index, string type, Func<DeleteDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus Delete(string id, string index, string type, Func<DeleteDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			id.ThrowIfNull("id");
 			index.ThrowIfNull("index");
@@ -1129,7 +1131,7 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
-		public Task<ConnectionStatus> DeleteDeleteAsync(string id, string index, string type, Func<DeleteDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> DeleteAsync(string id, string index, string type, Func<DeleteDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			id.ThrowIfNull("id");
 			index.ThrowIfNull("index");
@@ -1147,7 +1149,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation</param>
-		public ConnectionStatus DeleteByQueryDelete(string index, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus DeleteByQuery(string index, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_query".Inject(new { index = index });
@@ -1163,7 +1165,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation</param>
-		public Task<ConnectionStatus> DeleteByQueryDeleteAsync(string index, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> DeleteByQueryAsync(string index, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_query".Inject(new { index = index });
@@ -1180,7 +1182,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
 		///<param name="body">A query to restrict the operation</param>
-		public ConnectionStatus DeleteByQueryDelete(string index, string type, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus DeleteByQuery(string index, string type, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -1198,7 +1200,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
 		///<param name="body">A query to restrict the operation</param>
-		public Task<ConnectionStatus> DeleteByQueryDeleteAsync(string index, string type, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> DeleteByQueryAsync(string index, string type, object body, Func<DeleteByQueryDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -1334,7 +1336,7 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
-		public ConnectionStatus GetGet(string id, string index, string type, Func<GetGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus Get(string id, string index, string type, Func<GetGetQueryString, NameValueCollection> queryString = null)
 		{
 			id.ThrowIfNull("id");
 			index.ThrowIfNull("index");
@@ -1353,7 +1355,7 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
-		public Task<ConnectionStatus> GetGetAsync(string id, string index, string type, Func<GetGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> GetAsync(string id, string index, string type, Func<GetGetQueryString, NameValueCollection> queryString = null)
 		{
 			id.ThrowIfNull("id");
 			index.ThrowIfNull("index");
@@ -1372,7 +1374,7 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
-		public ConnectionStatus GetSourceGet(string id, string index, string type, Func<GetSourceGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus GetSource(string id, string index, string type, Func<GetSourceGetQueryString, NameValueCollection> queryString = null)
 		{
 			id.ThrowIfNull("id");
 			index.ThrowIfNull("index");
@@ -1391,7 +1393,7 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
-		public Task<ConnectionStatus> GetSourceGetAsync(string id, string index, string type, Func<GetSourceGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> GetSourceAsync(string id, string index, string type, Func<GetSourceGetQueryString, NameValueCollection> queryString = null)
 		{
 			id.ThrowIfNull("id");
 			index.ThrowIfNull("index");
@@ -1885,7 +1887,7 @@ namespace Nest
 		///<summary>DELETE /
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesDeleteDelete(Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDelete(Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/";
 			NameValueCollection nv = null;
@@ -1898,7 +1900,7 @@ namespace Nest
 		///<summary>DELETE /
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesDeleteDeleteAsync(Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteAsync(Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/";
 			NameValueCollection nv = null;
@@ -1912,7 +1914,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or empty string to delete all indices</param>
-		public ConnectionStatus IndicesDeleteDelete(string index, Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDelete(string index, Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = index });
@@ -1927,7 +1929,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or empty string to delete all indices</param>
-		public Task<ConnectionStatus> IndicesDeleteDeleteAsync(string index, Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteAsync(string index, Func<IndicesDeleteDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = index });
@@ -1943,7 +1945,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be deleted</param>
-		public ConnectionStatus IndicesDeleteAliasDelete(string index, string name, Func<IndicesDeleteAliasDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDeleteAlias(string index, string name, Func<IndicesDeleteAliasDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -1960,7 +1962,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be deleted</param>
-		public Task<ConnectionStatus> IndicesDeleteAliasDeleteAsync(string index, string name, Func<IndicesDeleteAliasDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteAliasAsync(string index, string name, Func<IndicesDeleteAliasDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -1977,7 +1979,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` for all indices</param>
 		///<param name="type">The name of the document type to delete</param>
-		public ConnectionStatus IndicesDeleteMappingDelete(string index, string type, Func<IndicesDeleteMappingDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDeleteMapping(string index, string type, Func<IndicesDeleteMappingDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -1994,7 +1996,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` for all indices</param>
 		///<param name="type">The name of the document type to delete</param>
-		public Task<ConnectionStatus> IndicesDeleteMappingDeleteAsync(string index, string type, Func<IndicesDeleteMappingDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteMappingAsync(string index, string type, Func<IndicesDeleteMappingDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -2010,7 +2012,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
-		public ConnectionStatus IndicesDeleteTemplateDelete(string name, Func<IndicesDeleteTemplateDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDeleteTemplate(string name, Func<IndicesDeleteTemplateDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_template/{name}".Inject(new { name = name });
@@ -2025,7 +2027,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
-		public Task<ConnectionStatus> IndicesDeleteTemplateDeleteAsync(string name, Func<IndicesDeleteTemplateDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteTemplateAsync(string name, Func<IndicesDeleteTemplateDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_template/{name}".Inject(new { name = name });
@@ -2040,7 +2042,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
-		public ConnectionStatus IndicesDeleteWarmerDelete(string index, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDeleteWarmer(string index, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_warmer".Inject(new { index = index });
@@ -2055,7 +2057,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
-		public Task<ConnectionStatus> IndicesDeleteWarmerDeleteAsync(string index, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_warmer".Inject(new { index = index });
@@ -2071,7 +2073,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
-		public ConnectionStatus IndicesDeleteWarmerDelete(string index, string name, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDeleteWarmer(string index, string name, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2088,7 +2090,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
-		public Task<ConnectionStatus> IndicesDeleteWarmerDeleteAsync(string index, string name, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, string name, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2106,7 +2108,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
 		///<param name="type">A comma-separated list of document types to register warmer for; use `_all` or empty string to perform the operation on all types</param>
-		public ConnectionStatus IndicesDeleteWarmerDelete(string index, string name, string type, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesDeleteWarmer(string index, string name, string type, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2125,7 +2127,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
 		///<param name="type">A comma-separated list of document types to register warmer for; use `_all` or empty string to perform the operation on all types</param>
-		public Task<ConnectionStatus> IndicesDeleteWarmerDeleteAsync(string index, string name, string type, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, string name, string type, Func<IndicesDeleteWarmerDeleteQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2382,7 +2384,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public ConnectionStatus IndicesGetAliasGet(string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetAlias(string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_alias/{name}".Inject(new { name = name });
@@ -2397,7 +2399,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public Task<ConnectionStatus> IndicesGetAliasGetAsync(string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetAliasAsync(string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_alias/{name}".Inject(new { name = name });
@@ -2413,7 +2415,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public ConnectionStatus IndicesGetAliasGet(string index, string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetAlias(string index, string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2430,7 +2432,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public Task<ConnectionStatus> IndicesGetAliasGetAsync(string index, string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetAliasAsync(string index, string name, Func<IndicesGetAliasGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2445,7 +2447,7 @@ namespace Nest
 		///<summary>GET /_aliases
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesGetAliasesGet(Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetAliases(Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_aliases";
 			NameValueCollection nv = null;
@@ -2458,7 +2460,7 @@ namespace Nest
 		///<summary>GET /_aliases
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesGetAliasesGetAsync(Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetAliasesAsync(Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_aliases";
 			NameValueCollection nv = null;
@@ -2472,7 +2474,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		public ConnectionStatus IndicesGetAliasesGet(string index, Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetAliases(string index, Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_aliases".Inject(new { index = index });
@@ -2487,7 +2489,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		public Task<ConnectionStatus> IndicesGetAliasesGetAsync(string index, Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetAliasesAsync(string index, Func<IndicesGetAliasesGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_aliases".Inject(new { index = index });
@@ -2502,7 +2504,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="field">A comma-separated list of fields</param>
-		public ConnectionStatus IndicesGetFieldMappingGet(string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetFieldMapping(string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
 		{
 			field.ThrowIfNull("field");
 			var url = "/_mapping/field/{field}".Inject(new { field = field });
@@ -2517,7 +2519,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="field">A comma-separated list of fields</param>
-		public Task<ConnectionStatus> IndicesGetFieldMappingGetAsync(string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetFieldMappingAsync(string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
 		{
 			field.ThrowIfNull("field");
 			var url = "/_mapping/field/{field}".Inject(new { field = field });
@@ -2533,7 +2535,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
-		public ConnectionStatus IndicesGetFieldMappingGet(string index, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetFieldMapping(string index, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			field.ThrowIfNull("field");
@@ -2550,7 +2552,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
-		public Task<ConnectionStatus> IndicesGetFieldMappingGetAsync(string index, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetFieldMappingAsync(string index, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			field.ThrowIfNull("field");
@@ -2568,7 +2570,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="field">A comma-separated list of fields</param>
-		public ConnectionStatus IndicesGetFieldMappingGet(string index, string type, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetFieldMapping(string index, string type, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -2587,7 +2589,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="field">A comma-separated list of fields</param>
-		public Task<ConnectionStatus> IndicesGetFieldMappingGetAsync(string index, string type, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetFieldMappingAsync(string index, string type, string field, Func<IndicesGetFieldMappingGetQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -2603,7 +2605,7 @@ namespace Nest
 		///<summary>GET /_mapping
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesGetMappingGet(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetMapping(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_mapping";
 			NameValueCollection nv = null;
@@ -2616,7 +2618,7 @@ namespace Nest
 		///<summary>GET /_mapping
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesGetMappingGetAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetMappingAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_mapping";
 			NameValueCollection nv = null;
@@ -2630,7 +2632,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
-		public ConnectionStatus IndicesGetMappingGet(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetMapping(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_mapping".Inject(new { index = index });
@@ -2645,7 +2647,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
-		public Task<ConnectionStatus> IndicesGetMappingGetAsync(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetMappingAsync(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_mapping".Inject(new { index = index });
@@ -2661,7 +2663,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
-		public ConnectionStatus IndicesGetMappingGet(string index, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetMapping(string index, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -2678,7 +2680,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
-		public Task<ConnectionStatus> IndicesGetMappingGetAsync(string index, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetMappingAsync(string index, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -2693,7 +2695,7 @@ namespace Nest
 		///<summary>GET /_settings
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesGetSettingsGet(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetSettings(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_settings";
 			NameValueCollection nv = null;
@@ -2706,7 +2708,7 @@ namespace Nest
 		///<summary>GET /_settings
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesGetSettingsGetAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetSettingsAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_settings";
 			NameValueCollection nv = null;
@@ -2720,7 +2722,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		public ConnectionStatus IndicesGetSettingsGet(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetSettings(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_settings".Inject(new { index = index });
@@ -2735,7 +2737,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		public Task<ConnectionStatus> IndicesGetSettingsGetAsync(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetSettingsAsync(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_settings".Inject(new { index = index });
@@ -2749,7 +2751,7 @@ namespace Nest
 		///<summary>GET /_template
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesGetTemplateGet(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetTemplate(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_template";
 			NameValueCollection nv = null;
@@ -2762,7 +2764,7 @@ namespace Nest
 		///<summary>GET /_template
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesGetTemplateGetAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetTemplateAsync(Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_template";
 			NameValueCollection nv = null;
@@ -2776,7 +2778,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
-		public ConnectionStatus IndicesGetTemplateGet(string name, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetTemplate(string name, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_template/{name}".Inject(new { name = name });
@@ -2791,7 +2793,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
-		public Task<ConnectionStatus> IndicesGetTemplateGetAsync(string name, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetTemplateAsync(string name, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_template/{name}".Inject(new { name = name });
@@ -2806,7 +2808,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		public ConnectionStatus IndicesGetWarmerGet(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetWarmer(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_warmer".Inject(new { index = index });
@@ -2821,7 +2823,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		public Task<ConnectionStatus> IndicesGetWarmerGetAsync(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetWarmerAsync(string index, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_warmer".Inject(new { index = index });
@@ -2837,7 +2839,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		public ConnectionStatus IndicesGetWarmerGet(string index, string name, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetWarmer(string index, string name, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2854,7 +2856,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		public Task<ConnectionStatus> IndicesGetWarmerGetAsync(string index, string name, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string name, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2872,7 +2874,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		public ConnectionStatus IndicesGetWarmerGet(string index, string name, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesGetWarmer(string index, string name, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2891,7 +2893,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		public Task<ConnectionStatus> IndicesGetWarmerGetAsync(string index, string name, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string name, string type, Func<FluentQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -3052,7 +3054,7 @@ namespace Nest
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public ConnectionStatus IndexPutAliasPut(string index, string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndexPutAlias(string index, string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -3070,7 +3072,7 @@ namespace Nest
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public Task<ConnectionStatus> IndexPutAliasPutAsync(string index, string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndexPutAliasAsync(string index, string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -3087,7 +3089,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public ConnectionStatus IndicesPutAliasPut(string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutAlias(string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_alias/{name}".Inject(new { name = name });
@@ -3103,7 +3105,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public Task<ConnectionStatus> IndicesPutAliasPutAsync(string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutAliasAsync(string name, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_alias/{name}".Inject(new { name = name });
@@ -3119,7 +3121,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public ConnectionStatus IndexPutAliasPut(string index, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndexPutAlias(string index, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_alias".Inject(new { index = index });
@@ -3135,7 +3137,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public Task<ConnectionStatus> IndexPutAliasPutAsync(string index, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndexPutAliasAsync(string index, object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_alias".Inject(new { index = index });
@@ -3150,7 +3152,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public ConnectionStatus IndicesPutAliasPut(object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutAlias(object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_alias".Inject(new {  });
 			NameValueCollection nv = null;
@@ -3164,7 +3166,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		public Task<ConnectionStatus> IndicesPutAliasPutAsync(object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutAliasAsync(object body, Func<IndicesPutAliasPutQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_alias".Inject(new {  });
 			NameValueCollection nv = null;
@@ -3180,7 +3182,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
-		public ConnectionStatus IndicesPutMappingPut(string index, string type, object body, Func<IndicesPutMappingPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutMapping(string index, string type, object body, Func<IndicesPutMappingPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -3198,7 +3200,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
-		public Task<ConnectionStatus> IndicesPutMappingPutAsync(string index, string type, object body, Func<IndicesPutMappingPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutMappingAsync(string index, string type, object body, Func<IndicesPutMappingPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -3250,7 +3252,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
-		public ConnectionStatus IndicesPutSettingsPut(object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutSettings(object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_settings".Inject(new {  });
 			NameValueCollection nv = null;
@@ -3264,7 +3266,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
-		public Task<ConnectionStatus> IndicesPutSettingsPutAsync(object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutSettingsAsync(object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
 		{
 			var url = "/_settings".Inject(new {  });
 			NameValueCollection nv = null;
@@ -3279,7 +3281,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
-		public ConnectionStatus IndicesPutSettingsPut(string index, object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutSettings(string index, object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_settings".Inject(new { index = index });
@@ -3295,7 +3297,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
-		public Task<ConnectionStatus> IndicesPutSettingsPutAsync(string index, object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutSettingsAsync(string index, object body, Func<IndicesPutSettingsPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_settings".Inject(new { index = index });
@@ -3311,7 +3313,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
-		public ConnectionStatus IndicesPutTemplatePut(string name, object body, Func<IndicesPutTemplatePutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutTemplate(string name, object body, Func<IndicesPutTemplatePutQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_template/{name}".Inject(new { name = name });
@@ -3327,7 +3329,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
-		public Task<ConnectionStatus> IndicesPutTemplatePutAsync(string name, object body, Func<IndicesPutTemplatePutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutTemplateAsync(string name, object body, Func<IndicesPutTemplatePutQueryString, NameValueCollection> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_template/{name}".Inject(new { name = name });
@@ -3376,7 +3378,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		public ConnectionStatus IndicesPutWarmerPut(string index, string name, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutWarmer(string index, string name, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -3394,7 +3396,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		public Task<ConnectionStatus> IndicesPutWarmerPutAsync(string index, string name, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string name, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -3413,7 +3415,7 @@ namespace Nest
 		///<param name="name">The name of the warmer</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		public ConnectionStatus IndicesPutWarmerPut(string index, string name, string type, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
+		public ConnectionStatus IndicesPutWarmer(string index, string name, string type, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -3433,7 +3435,7 @@ namespace Nest
 		///<param name="name">The name of the warmer</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		public Task<ConnectionStatus> IndicesPutWarmerPutAsync(string index, string name, string type, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
+		public Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string name, string type, object body, Func<IndicesPutWarmerPutQueryString, NameValueCollection> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");

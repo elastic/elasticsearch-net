@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using CsQuery;
 using Newtonsoft.Json;
 using Xipton.Razor;
@@ -104,6 +105,11 @@ namespace RawClientGenerator
 				if (method.Path.Contains("/fielddata/"))
 					method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
 			}
+			//remove duplicate occurance of the HTTP method name
+			var m = method.HttpMethod.ToPascalCase();
+			method.FullName =
+				Regex.Replace(method.FullName, m, (a) => a.Index != method.FullName.IndexOf(m) ? "" : m);
+
 		}
 
 		public static string CreateMethodName(string apiEnpointKey, ApiEndpoint endpoint)

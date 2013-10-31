@@ -771,7 +771,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for DeleteDelete
+	///<summary>Query string descriptor for Delete
 	///<pre>
 	///http://elasticsearch.org/guide/reference/api/delete/
 	///</pre>
@@ -837,7 +837,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for DeleteByQueryDelete
+	///<summary>Query string descriptor for DeleteByQuery
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/delete-by-query/
 	///</pre>
@@ -1192,7 +1192,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for GetGet
+	///<summary>Query string descriptor for Get
 	///<pre>
 	///http://elasticsearch.org/guide/reference/api/get/
 	///</pre>
@@ -1265,7 +1265,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for GetSourceGet
+	///<summary>Query string descriptor for GetSource
 	///<pre>
 	///http://elasticsearch.org/guide/reference/api/get/
 	///</pre>
@@ -1890,7 +1890,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesDeleteDelete
+	///<summary>Query string descriptor for IndicesDelete
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/
 	///</pre>
@@ -1914,7 +1914,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesDeleteAliasDelete
+	///<summary>Query string descriptor for IndicesDeleteAlias
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
@@ -1938,7 +1938,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesDeleteMappingDelete
+	///<summary>Query string descriptor for IndicesDeleteMapping
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-mapping/
 	///</pre>
@@ -1955,7 +1955,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesDeleteTemplateDelete
+	///<summary>Query string descriptor for IndicesDeleteTemplate
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
 	///</pre>
@@ -1979,7 +1979,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesDeleteWarmerDelete
+	///<summary>Query string descriptor for IndicesDeleteWarmer
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/
 	///</pre>
@@ -2106,7 +2106,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesGetAliasGet
+	///<summary>Query string descriptor for IndicesGetAlias
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
@@ -2123,7 +2123,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesGetAliasesGet
+	///<summary>Query string descriptor for IndicesGetAliases
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
@@ -2140,7 +2140,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesGetFieldMappingGet
+	///<summary>Query string descriptor for IndicesGetFieldMapping
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html
 	///</pre>
@@ -2299,7 +2299,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndexPutAliasPut
+	///<summary>Query string descriptor for IndexPutAlias
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
@@ -2323,7 +2323,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesPutMappingPut
+	///<summary>Query string descriptor for IndicesPutMapping
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/
 	///</pre>
@@ -2385,7 +2385,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesPutSettingsPut
+	///<summary>Query string descriptor for IndicesPutSettings
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/
 	///</pre>
@@ -2402,7 +2402,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesPutTemplatePut
+	///<summary>Query string descriptor for IndicesPutTemplate
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
 	///</pre>
@@ -2464,7 +2464,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesPutWarmerPut
+	///<summary>Query string descriptor for IndicesPutWarmer
 	///<pre>
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/
 	///</pre>
