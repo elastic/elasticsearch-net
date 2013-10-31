@@ -77,7 +77,7 @@ namespace RawClientGenerator
 
 						args = args.Concat(new[] 
 						{ 
-							"Func<"+queryStringParamName+", FluentQueryString> queryString = null" 
+							"Func<"+queryStringParamName+", " + queryStringParamName + "> queryString = null" 
 						});
 
 						var apiMethod = new CsharpMethod

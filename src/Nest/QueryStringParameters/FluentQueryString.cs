@@ -23,7 +23,7 @@ namespace Nest
 
 		protected string CreateString(object s)
 		{
-			return s.ToString();
+			return RawElasticClient.Stringify(s);
 		}
 
 	}

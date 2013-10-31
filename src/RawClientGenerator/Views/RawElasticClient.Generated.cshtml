@@ -41,7 +41,7 @@ namespace Nest
 		}
 		@if (method.Parts.Any())
 		{
-	<text>var url = "@method.Path".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = " + p.Name )) });</text>
+	<text>var url = "@method.Path".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = Stringify(" + p.Name +")" )) });</text>
 		}
 		else
 		{

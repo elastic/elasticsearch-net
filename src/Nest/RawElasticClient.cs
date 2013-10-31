@@ -15,7 +15,7 @@ namespace Nest
 	{
 		public IConnection Connection { get; protected set; }
 		public IConnectionSettings Settings { get; protected set; }
-    public ElasticSerializer Serializer { get; protected set; }
+		public ElasticSerializer Serializer { get; protected set; }
 
 		public RawElasticClient(IConnectionSettings settings)
 			: this(settings, new Connection(settings))
@@ -30,15 +30,28 @@ namespace Nest
 
 			this.Settings = settings;
 			this.Connection = connection;
-      this.Serializer = new ElasticSerializer(this.Settings);
+			this.Serializer = new ElasticSerializer(this.Settings);
 		}
 
-		public string Serialize(object @object)
+		public static string Stringify(object o)
 		{
-      return this.Serializer.Serialize(@object);
+			var s = o as string;
+			if (s != null)
+				return s;
+			var e = o as Enum;
+			if (e != null)
+				return JsonConvert.SerializeObject(o).Trim(new [] { '"' } );
+				
+
+			return JsonConvert.SerializeObject(o);
 		}
 
-		protected ConnectionStatus DoRequest(string method, string path, object data = null,  NameValueCollection queryString = null)
+		private string Serialize(object @object)
+		{
+			return this.Serializer.Serialize(@object);
+		}
+
+		protected ConnectionStatus DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
 			if (queryString != null)
 				path += queryString.ToQueryString();
@@ -54,15 +67,15 @@ namespace Nest
 			{
 				case "post": return this.Connection.PostSync(path, postData);
 				case "put": return this.Connection.PutSync(path, postData);
-				case "delete": 
-					return string.IsNullOrWhiteSpace(postData) 
-						? this.Connection.DeleteSync(path) 
+				case "delete":
+					return string.IsNullOrWhiteSpace(postData)
+						? this.Connection.DeleteSync(path)
 						: this.Connection.DeleteSync(path, postData);
 				case "head": return this.Connection.HeadSync(path);
 				case "get": return this.Connection.GetSync(path);
 			}
 
-			
+
 
 			throw new DslException("Unknown HTTP method " + method);
 		}
@@ -70,7 +83,7 @@ namespace Nest
 		protected Task<ConnectionStatus> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
 			if (queryString != null)
-				path += queryString.ToQueryString(); 
+				path += queryString.ToQueryString();
 
 			var postData = string.Empty;
 			var s = data as string;

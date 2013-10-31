@@ -114,5 +114,14 @@ namespace Nest.Tests.Integration
 
 			StringAssert.EndsWith(":9200/?hello=world&pretty=true", resultWithQueryString.RequestUrl);
 		}
+
+		[Test]
+		public void ConnectUsingRawClientComplexCall()
+		{
+			var result = this._client.Raw.ClusterHealthGet(s=>s.Level(LevelOptions.Indices).Local(true));
+			Assert.IsTrue(result.Success);
+			StringAssert.EndsWith(":9200/_cluster/health?level=indices&local=true&pretty=true", result.RequestUrl);
+
+		}
 	}
 }
