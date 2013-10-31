@@ -36,18 +36,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtocolLoadTest", "Protoco
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generate-raw-client", "generate-raw-client", "{C974EC97-1E2A-43C2-93DC-44440354D5F7}"
-	ProjectSection(SolutionItems) = preProject
-		..\build\generate-raw-client\api.csx = ..\build\generate-raw-client\api.csx
-		..\build\generate-raw-client\app.csx = ..\build\generate-raw-client\app.csx
-		..\build\generate-raw-client\packages.config = ..\build\generate-raw-client\packages.config
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Generation", "Code Generation", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{7603AED1-568B-42C8-A510-107E464CF0D5}"
-	ProjectSection(SolutionItems) = preProject
-		..\build\generate-raw-client\Views\GeneratedQueryStringParameters.cshtml = ..\build\generate-raw-client\Views\GeneratedQueryStringParameters.cshtml
-		..\build\generate-raw-client\Views\IRawElasticClient.cshtml = ..\build\generate-raw-client\Views\IRawElasticClient.cshtml
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawClientGenerator", "RawClientGenerator\RawClientGenerator.csproj", "{56A87048-9065-459B-826D-3DF68B409845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +110,16 @@ Global
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,8 +129,7 @@ Global
 		{97408393-78AC-45DF-BE6E-4C219A2E456D} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
 		{B9FE4875-0171-40F7-A357-064A93BE09C6} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
-		{C974EC97-1E2A-43C2-93DC-44440354D5F7} = {432D5575-2347-4D3C-BF8C-3E38410C46CA}
-		{7603AED1-568B-42C8-A510-107E464CF0D5} = {C974EC97-1E2A-43C2-93DC-44440354D5F7}
+		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj

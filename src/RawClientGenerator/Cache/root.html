@@ -1,0 +1,1365 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>elasticsearch-rest-api-spec/api at master Â· elasticsearch/elasticsearch-rest-api-spec Â· GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub" />
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png" />
+    <link rel="logo" type="image/svg" href="https://github-media-downloads.s3.amazonaws.com/github-logo.svg" />
+    <meta property="og:image" content="https://github.global.ssl.fastly.net/images/modules/logos_page/Octocat.png">
+    <meta name="hostname" content="github-fe129-cp1-prd.iad.github.net">
+    <meta name="ruby" content="ruby 1.9.3p194-tcs-github-tcmalloc (0e75de19f8) [x86_64-linux]">
+    <link rel="assets" href="https://github.global.ssl.fastly.net/">
+    <link rel="conduit-xhr" href="https://ghconduit.com:25035/">
+    <link rel="xhr-socket" href="/_sockets" />
+    
+
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="selected-link" value="repo_source" data-pjax-transient />
+    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="5C43259A:6699:1E0300E:52727578" name="octolytics-dimension-request_id" />
+    
+
+    
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="n7oCjjUmXdniCWMpXfCxMPIlip2GhlbNoaMHybZuGPQ=" name="csrf-token" />
+
+    <link href="https://github.global.ssl.fastly.net/assets/github-c1c8f4d1225e3ae12e7eed7a87e6125ec4f4c50a.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://github.global.ssl.fastly.net/assets/github2-6ca1cf184423f082ccd30296372104601de151e8.css" media="all" rel="stylesheet" type="text/css" />
+    
+
+    
+
+      <script src="https://github.global.ssl.fastly.net/assets/frameworks-fedd15115b82c3d5d2afa34f475ba2caa6283613.js" type="text/javascript"></script>
+      <script src="https://github.global.ssl.fastly.net/assets/github-32c6bb6e4158fa642e474640b8074f3fb50b3795.js" type="text/javascript"></script>
+      
+      <meta http-equiv="x-pjax-version" content="4715596bc36f40085dee20cc3a6c2497">
+
+        <meta property="og:title" content="elasticsearch-rest-api-spec"/>
+  <meta property="og:type" content="githubog:gitrepository"/>
+  <meta property="og:url" content="https://github.com/elasticsearch/elasticsearch-rest-api-spec"/>
+  <meta property="og:image" content="https://github.global.ssl.fastly.net/images/gravatars/gravatar-user-420.png"/>
+  <meta property="og:site_name" content="GitHub"/>
+  <meta property="og:description" content="elasticsearch-rest-api-spec - JSON specification for the Elasticsearch&#39;s REST API"/>
+
+  <meta name="description" content="elasticsearch-rest-api-spec - JSON specification for the Elasticsearch&#39;s REST API" />
+
+  <meta content="141304" name="octolytics-dimension-user_id" /><meta content="elasticsearch" name="octolytics-dimension-user_login" /><meta content="10249659" name="octolytics-dimension-repository_id" /><meta content="elasticsearch/elasticsearch-rest-api-spec" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="10249659" name="octolytics-dimension-repository_network_root_id" /><meta content="elasticsearch/elasticsearch-rest-api-spec" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/elasticsearch/elasticsearch-rest-api-spec/commits/master.atom" rel="alternate" title="Recent Commits to elasticsearch-rest-api-spec:master" type="application/atom+xml" />
+
+  </head>
+
+
+  <body class="logged_out  env-production  vis-public">
+    <div class="wrapper">
+      
+      
+      
+
+
+      
+      <div class="header header-logged-out">
+  <div class="container clearfix">
+
+    <a class="header-logo-wordmark" href="https://github.com/">
+      <span class="mega-octicon octicon-logo-github"></span>
+    </a>
+
+    <div class="header-actions">
+        <a class="button primary" href="/join">Sign up</a>
+      <a class="button signin" href="/login?return_to=%2Felasticsearch%2Felasticsearch-rest-api-spec%2Ftree%2Fmaster%2Fapi">Sign in</a>
+    </div>
+
+    <div class="command-bar js-command-bar  in-repository">
+
+      <ul class="top-nav">
+          <li class="explore"><a href="/explore">Explore</a></li>
+        <li class="features"><a href="/features">Features</a></li>
+          <li class="enterprise"><a href="https://enterprise.github.com/">Enterprise</a></li>
+          <li class="blog"><a href="/blog">Blog</a></li>
+      </ul>
+        <form accept-charset="UTF-8" action="/search" class="command-bar-form" id="top_search_form" method="get">
+
+<input type="text" data-hotkey="/ s" name="q" id="js-command-bar-field" placeholder="Search or type a command" tabindex="1" autocapitalize="off"
+    
+    
+      data-repo="elasticsearch/elasticsearch-rest-api-spec"
+      data-branch="master"
+      data-sha="fb66ebd2e47e04dc6ac97f9e99f35b66483cc4e1"
+  >
+
+    <input type="hidden" name="nwo" value="elasticsearch/elasticsearch-rest-api-spec" />
+
+    <div class="select-menu js-menu-container js-select-menu search-context-select-menu">
+      <span class="minibutton select-menu-button js-menu-target">
+        <span class="js-select-button">This repository</span>
+      </span>
+
+      <div class="select-menu-modal-holder js-menu-content js-navigation-container">
+        <div class="select-menu-modal">
+
+          <div class="select-menu-item js-navigation-item js-this-repository-navigation-item selected">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input type="radio" class="js-search-this-repository" name="search_target" value="repository" checked="checked" />
+            <div class="select-menu-item-text js-select-button-text">This repository</div>
+          </div> <!-- /.select-menu-item -->
+
+          <div class="select-menu-item js-navigation-item js-all-repositories-navigation-item">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input type="radio" name="search_target" value="global" />
+            <div class="select-menu-item-text js-select-button-text">All repositories</div>
+          </div> <!-- /.select-menu-item -->
+
+        </div>
+      </div>
+    </div>
+
+  <span class="octicon help tooltipped downwards" title="Show command bar help">
+    <span class="octicon octicon-question"></span>
+  </span>
+
+
+  <input type="hidden" name="ref" value="cmdform">
+
+</form>
+    </div>
+
+  </div>
+</div>
+
+
+      
+
+
+          <div class="site" itemscope itemtype="http://schema.org/WebPage">
+    
+    <div class="pagehead repohead instapaper_ignore readability-menu">
+      <div class="container">
+        
+
+<ul class="pagehead-actions">
+
+
+  <li>
+  <a href="/login?return_to=%2Felasticsearch%2Felasticsearch-rest-api-spec"
+  class="minibutton with-count js-toggler-target star-button entice tooltipped upwards"
+  title="You must be signed in to use this feature" rel="nofollow">
+  <span class="octicon octicon-star"></span>Star
+</a>
+<a class="social-count js-social-count" href="/elasticsearch/elasticsearch-rest-api-spec/stargazers">
+  3
+</a>
+
+  </li>
+
+    <li>
+      <a href="/login?return_to=%2Felasticsearch%2Felasticsearch-rest-api-spec"
+        class="minibutton with-count js-toggler-target fork-button entice tooltipped upwards"
+        title="You must be signed in to fork a repository" rel="nofollow">
+        <span class="octicon octicon-git-branch"></span>Fork
+      </a>
+      <a href="/elasticsearch/elasticsearch-rest-api-spec/network" class="social-count">
+        1
+      </a>
+    </li>
+</ul>
+
+        <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public">
+          <span class="repo-label"><span>public</span></span>
+          <span class="mega-octicon octicon-repo"></span>
+          <span class="author">
+            <a href="/elasticsearch" class="url fn" itemprop="url" rel="author"><span itemprop="title">elasticsearch</span></a>
+          </span>
+          <span class="repohead-name-divider">/</span>
+          <strong><a href="/elasticsearch/elasticsearch-rest-api-spec" class="js-current-repository js-repo-home-link">elasticsearch-rest-api-spec</a></strong>
+
+          <span class="page-context-loader">
+            <img alt="Octocat-spinner-32" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+          </span>
+
+        </h1>
+      </div><!-- /.container -->
+    </div><!-- /.repohead -->
+
+    <div class="container">
+
+      <div class="repository-with-sidebar repo-container ">
+
+        <div class="repository-sidebar">
+            
+
+<div class="sunken-menu vertical-right repo-nav js-repo-nav js-repository-container-pjax js-octicon-loaders">
+  <div class="sunken-menu-contents">
+    <ul class="sunken-menu-group">
+      <li class="tooltipped leftwards" title="Code">
+        <a href="/elasticsearch/elasticsearch-rest-api-spec" aria-label="Code" class="selected js-selected-navigation-item sunken-menu-item" data-gotokey="c" data-pjax="true" data-selected-links="repo_source repo_downloads repo_commits repo_tags repo_branches /elasticsearch/elasticsearch-rest-api-spec">
+          <span class="octicon octicon-code"></span> <span class="full-word">Code</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+        <li class="tooltipped leftwards" title="Issues">
+          <a href="/elasticsearch/elasticsearch-rest-api-spec/issues" aria-label="Issues" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-gotokey="i" data-selected-links="repo_issues /elasticsearch/elasticsearch-rest-api-spec/issues">
+            <span class="octicon octicon-issue-opened"></span> <span class="full-word">Issues</span>
+            <span class='counter'>1</span>
+            <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>        </li>
+
+      <li class="tooltipped leftwards" title="Pull Requests"><a href="/elasticsearch/elasticsearch-rest-api-spec/pulls" aria-label="Pull Requests" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-gotokey="p" data-selected-links="repo_pulls /elasticsearch/elasticsearch-rest-api-spec/pulls">
+            <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull Requests</span>
+            <span class='counter'>0</span>
+            <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+
+    </ul>
+    <div class="sunken-menu-separator"></div>
+    <ul class="sunken-menu-group">
+
+      <li class="tooltipped leftwards" title="Pulse">
+        <a href="/elasticsearch/elasticsearch-rest-api-spec/pulse" aria-label="Pulse" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="pulse /elasticsearch/elasticsearch-rest-api-spec/pulse">
+          <span class="octicon octicon-pulse"></span> <span class="full-word">Pulse</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+      <li class="tooltipped leftwards" title="Graphs">
+        <a href="/elasticsearch/elasticsearch-rest-api-spec/graphs" aria-label="Graphs" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="repo_graphs repo_contributors /elasticsearch/elasticsearch-rest-api-spec/graphs">
+          <span class="octicon octicon-graph"></span> <span class="full-word">Graphs</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+      <li class="tooltipped leftwards" title="Network">
+        <a href="/elasticsearch/elasticsearch-rest-api-spec/network" aria-label="Network" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-selected-links="repo_network /elasticsearch/elasticsearch-rest-api-spec/network">
+          <span class="octicon octicon-git-branch"></span> <span class="full-word">Network</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+    </ul>
+
+
+  </div>
+</div>
+
+            <div class="only-with-full-nav">
+              
+
+  
+
+<div class="clone-url open"
+  data-protocol-type="http"
+  data-url="/users/set_protocol?protocol_selector=http&amp;protocol_type=clone">
+  <h3><strong>HTTPS</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone js-url-field"
+           value="https://github.com/elasticsearch/elasticsearch-rest-api-spec.git" readonly="readonly">
+
+    <span class="js-zeroclipboard url-box-clippy minibutton zeroclipboard-button" data-clipboard-text="https://github.com/elasticsearch/elasticsearch-rest-api-spec.git" data-copied-hint="copied!" title="copy to clipboard"><span class="octicon octicon-clippy"></span></span>
+  </div>
+</div>
+
+  
+
+<div class="clone-url "
+  data-protocol-type="subversion"
+  data-url="/users/set_protocol?protocol_selector=subversion&amp;protocol_type=clone">
+  <h3><strong>Subversion</strong> checkout URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone js-url-field"
+           value="https://github.com/elasticsearch/elasticsearch-rest-api-spec" readonly="readonly">
+
+    <span class="js-zeroclipboard url-box-clippy minibutton zeroclipboard-button" data-clipboard-text="https://github.com/elasticsearch/elasticsearch-rest-api-spec" data-copied-hint="copied!" title="copy to clipboard"><span class="octicon octicon-clippy"></span></span>
+  </div>
+</div>
+
+
+<p class="clone-options">You can clone with
+      <a href="#" class="js-clone-selector" data-protocol="http">HTTPS</a>,
+      or <a href="#" class="js-clone-selector" data-protocol="subversion">Subversion</a>.
+  <span class="octicon help tooltipped upwards" title="Get help on which URL is right for you.">
+    <a href="https://help.github.com/articles/which-remote-url-should-i-use">
+    <span class="octicon octicon-question"></span>
+    </a>
+  </span>
+</p>
+
+
+
+              <a href="/elasticsearch/elasticsearch-rest-api-spec/archive/master.zip"
+                 class="minibutton sidebar-button"
+                 title="Download this repository as a zip file"
+                 rel="nofollow">
+                <span class="octicon octicon-cloud-download"></span>
+                Download ZIP
+              </a>
+            </div>
+        </div><!-- /.repository-sidebar -->
+
+        <div id="js-repo-pjax-container" class="repository-content context-loader-container" data-pjax-container>
+          
+
+<div class="file-navigation">
+  
+  
+
+<div class="select-menu js-menu-container js-select-menu" >
+  <span class="minibutton select-menu-button js-menu-target" data-hotkey="w"
+    data-master-branch="master"
+    data-ref="master"
+    role="button" aria-label="Switch branches or tags" tabindex="0">
+    <span class="octicon octicon-git-branch"></span>
+    <i>branch:</i>
+    <span class="js-select-button">master</span>
+  </span>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax>
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <span class="select-menu-title">Switch branches/tags</span>
+        <span class="octicon octicon-remove-close js-menu-close"></span>
+      </div> <!-- /.select-menu-header -->
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" class="js-select-menu-tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" class="js-select-menu-tab">Tags</a>
+            </li>
+          </ul>
+        </div><!-- /.select-menu-tabs -->
+      </div><!-- /.select-menu-filters -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <div class="select-menu-item js-navigation-item selected">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch-rest-api-spec/tree/master/api"
+                 data-name="master"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="master">master</a>
+            </div> <!-- /.select-menu-item -->
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+    </div> <!-- /.select-menu-modal -->
+  </div> <!-- /.select-menu-modal-holder -->
+</div> <!-- /.select-menu -->
+
+
+  <div class="breadcrumb"><span class='repo-root js-repo-root'><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/elasticsearch/elasticsearch-rest-api-spec" data-branch="master" data-direction="back" data-pjax="true" itemscope="url"><span itemprop="title">elasticsearch-rest-api-spec</span></a></span></span><span class="separator"> / </span><strong class="final-path">api</strong><span class="separator"> / </span><form action="/login?return_to=%2Felasticsearch%2Felasticsearch-rest-api-spec%2Ftree%2Fmaster%2Fapi" class="js-new-blob-form tooltipped rightwards new-file-link" method="post" title="Sign in to make or propose changes"><span aria-label="Sign in to make or propose changes" class="js-new-blob-submit octicon octicon-file-add" data-test-id="create-new-git-file" role="button"></span></form></div>
+
+  <p class="history-link">
+<a href="/elasticsearch/elasticsearch-rest-api-spec/commits/master/api">      <span class="octicon octicon-history tooltipped" title="Browse commits for this branch"></span>
+      History
+</a>  </p>
+</div>
+
+
+
+<a href="/elasticsearch/elasticsearch-rest-api-spec/find/master"
+  data-hotkey="t" class="js-show-file-finder" style="display:none" data-pjax>Show File Finder</a>
+<div class="bubble files-bubble">
+  <table class="files" data-pjax>
+    <thead>
+
+
+  <div class="commit commit-tease js-details-container" >
+    <p class="commit-title ">
+        <a href="/elasticsearch/elasticsearch-rest-api-spec/commit/8537d3f55e8a3a241c991117918633bf1372d71f" class="message" data-pjax="true" title="Updated &quot;version_type&quot; to match delete.json">Updated "version_type" to match delete.json</a>
+        
+    </p>
+    <div class="commit-meta">
+      <span class="js-zeroclipboard zeroclipboard-link" data-clipboard-text="8537d3f55e8a3a241c991117918633bf1372d71f" data-copied-hint="copied!" title="Copy SHA"><span class="octicon octicon-clippy"></span></span>
+      <a href="/elasticsearch/elasticsearch-rest-api-spec/commit/8537d3f55e8a3a241c991117918633bf1372d71f" class="sha-block" data-pjax>latest commit <span class="sha">8537d3f55e</span></a>
+
+      <div class="authorship">
+        <img class="gravatar" height="20" src="https://2.gravatar.com/avatar/73577de10c63c04f926cf48a6643522f?d=https%3A%2F%2Fidenticons.github.com%2F8859575faabec8c4e759e50d24e59c52.png&amp;r=x&amp;s=140" width="20" />
+        <span class="author-name"><a href="/spenceralger" data-skip-pjax="true" rel="contributor">spenceralger</a></span>
+        authored <time class="js-relative-date updated" datetime="2013-10-30T17:26:32-07:00" title="2013-10-30 17:26:32">October 30, 2013</time>
+
+      </div>
+    </div>
+  </div>
+    </thead>
+      <tr class="up-tree">
+        <td></td>
+        <td><a href="/elasticsearch/elasticsearch-rest-api-spec" rel="nofollow" title="Go to parent directory">..</a></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+    
+<tbody class=""
+  data-url="/elasticsearch/elasticsearch-rest-api-spec/file-list/master/api">
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/bulk.json" class="js-directory-link" id="6c4fbc1bd36df5d9905ce1df9cf222c0-a1e5b59b24bbff50f061ee06d7e9fa7ea08a5681" title="bulk.json">bulk.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/7c33eee1e3e0b44065e45f0716b1bd701bb32a8d" class="message" data-pjax="true" title="Removed the incorrect `index` URL parameter from `_bulk`">Removed the incorrect `index` URL parameter from `_bulk`</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-05-28T00:55:28-07:00" title="2013-05-28 00:55:28">May 28, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/clear_scroll.json" class="js-directory-link" id="fb88c998e68dce2106c94c0bc6cc3dac-f4d8a6058e9ff89c3a2f06b78f2ab8396862a018" title="clear_scroll.json">clear_scroll.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/6652b41a8b516ed30502208e13529a17d327559a" class="message" data-pjax="true" title="[API] formatting issues">[API] formatting issues</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-25T05:08:18-07:00" title="2013-09-25 05:08:18">September 25, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.get_settings.json" class="js-directory-link" id="381ace7cc8ee62a6a019ff3d4fa5918b-8fee806455ae6add4eaa4236a2a47cdf99a495b8" title="cluster.get_settings.json">cluster.get_settings.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/f047b0e45ddf85aee591a88d78b8f87a9a28892c" class="message" data-pjax="true" title="Extracted the `cluster.get_settings` API spec from `cluster.settings`">Extracted the `cluster.get_settings` API spec from `cluster.settings`</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-17T09:54:25-07:00" title="2013-06-17 09:54:25">June 17, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.health.json" class="js-directory-link" id="c2c52db081b723be399bb732f65aca84-bc6765e676198f328a195f6c4ad8f511e8c5410b" title="cluster.health.json">cluster.health.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/6050b839f450448f5bbb7aad44b08acb7a9f7a58" class="message" data-pjax="true" title="[API] cluster.health wait_for_nodes is a string, not a number">[API] cluster.health wait_for_nodes is a string, not a number</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-10-01T10:28:46-07:00" title="2013-10-01 10:28:46">October 01, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.node_hot_threads.json" class="js-directory-link" id="cfc944673a0dfd16063c30b33ea4f085-4777cb9e4565727453d263e98d7ac3a9663ce012" title="cluster.node_hot_threads.json">cluster.node_hot_threads.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/f65c74d2e88df22a7abca13cfa47bd3d65761dcc" class="message" data-pjax="true" title="Changed the `nodeID` parameter to `node_id`">Changed the `nodeID` parameter to `node_id`</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-12T08:52:32-07:00" title="2013-06-12 08:52:32">June 12, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.node_info.json" class="js-directory-link" id="8da7bbe2e1d9770ff7ff17922911cf2e-2dc123b4eb2e66ccbd0fbdbc7b8199f7470ef4db" title="cluster.node_info.json">cluster.node_info.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/05797f9bc513666009558a52adfdf0137f27c25f" class="message" data-pjax="true" title="Added timeout param to cluster.node_info">Added timeout param to cluster.node_info</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-20T02:44:02-07:00" title="2013-06-20 02:44:02">June 20, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.node_shutdown.json" class="js-directory-link" id="34a60824555936580b63bbc0297c5ce3-1fa327b370703e38f6436e89903f613f948b6578" title="cluster.node_shutdown.json">cluster.node_shutdown.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/f65c74d2e88df22a7abca13cfa47bd3d65761dcc" class="message" data-pjax="true" title="Changed the `nodeID` parameter to `node_id`">Changed the `nodeID` parameter to `node_id`</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-12T08:52:32-07:00" title="2013-06-12 08:52:32">June 12, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.node_stats.json" class="js-directory-link" id="8768c799060ade06a39f2775796cdca5-2d38c107691d41bbb14f24ad8539e4d1dd973873" title="cluster.node_stats.json">cluster.node_stats.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d8c005ffcdc40abb77a5063f8f721fca56534265" class="message" data-pjax="true" title="completion_fields and field_data fields not support in node stats yet.
+
+See https://github.com/elasticsearch/elasticsearch/issues/3746">completion_fields and field_data fields not support in node stats yet.</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-20T05:15:08-07:00" title="2013-09-20 05:15:08">September 20, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.put_settings.json" class="js-directory-link" id="e87166468da155e9d9c15de6e56a9f9e-b072966a875a71a5eccff6d85360a2144f12f9e8" title="cluster.put_settings.json">cluster.put_settings.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/1e8a60b39fb9d8a1e63a8722cea0207435abb205" class="message" data-pjax="true" title="Added the `cluster.put_settings` API">Added the `cluster.put_settings` API</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-17T09:55:34-07:00" title="2013-06-17 09:55:34">June 17, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.reroute.json" class="js-directory-link" id="a2b21ed6ff197a1803c961126ab8960c-53c1280ca468b2781adc21cc9a3b1d76902e0dc5" title="cluster.reroute.json">cluster.reroute.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/76800d73e0da15ebe43ed12ea79b38808e4df0b1" class="message" data-pjax="true" title="cluster reroute filter_metadata description">cluster reroute filter_metadata description</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-04T08:35:22-07:00" title="2013-06-04 08:35:22">June 04, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/cluster.state.json" class="js-directory-link" id="6acc013937ed94065ffab45cc3d7ec36-9207e51283be9d89924e24bb3b69d089e9a253f5" title="cluster.state.json">cluster.state.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/5cca1bd387ed6bc6cf6e45a37d1fd0a0dcd7c42c" class="message" data-pjax="true" title="Added the API definition for `_cluster/state`">Added the API definition for `_cluster/state`</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-05-26T06:51:58-07:00" title="2013-05-26 06:51:58">May 26, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/count.json" class="js-directory-link" id="3baa357d5adf340622c003b0856dd25f-af3735104f837aa05b0402fd562e81a8465f35fe" title="count.json">count.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/8e71ba5d9b1aba032e75e2579d274f3c7f46f447" class="message" data-pjax="true" title="Improved the preference description to distinguish get requests from sea...
+
+...rch requests">Improved the preference description to distinguish get requests from â€¦</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-17T07:43:02-07:00" title="2013-06-17 07:43:02">June 17, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/create.json" class="js-directory-link" id="2068f1e5e846cac32ba7374c97633c78-abc42e05df1847cc4bc28e817438d524a99314bb" title="create.json">create.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/3dc6ea4a961a766bdcf27041ac573983e070e88e" class="message" data-pjax="true" title="Separate endpoint for op_type create">Separate endpoint for op_type create</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-04T04:27:25-07:00" title="2013-06-04 04:27:25">June 04, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/delete.json" class="js-directory-link" id="32e7b62c510daf7d16345f4d4bb54d69-05eb08dc3f84b43091d28d130ed90a7cc7988dd4" title="delete.json">delete.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/ae08663149689df234ad688842752d93f5d683c9" class="message" data-pjax="true" title="Added &quot;version&quot; param to delete and update">Added "version" param to delete and update</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-20T02:34:18-07:00" title="2013-06-20 02:34:18">June 20, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/delete_by_query.json" class="js-directory-link" id="1be069693a43a7efc73e3cbbee3df9d6-c5e5f93baeec7a2f0a2bda6f43bae6a4f06d288e" title="delete_by_query.json">delete_by_query.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/ecf777a5a679f1bf7b9cee59b10c4c23bb0cc3a6" class="message" data-pjax="true" title="Added missing parameters to the &quot;delete_by_query&quot; API
+
+(Added parameters related to qs queries.)">Added missing parameters to the "delete_by_query" API</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-22T08:04:21-07:00" title="2013-06-22 08:04:21">June 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/exists.json" class="js-directory-link" id="3d89dbbbdf2cfe3ecaccea759487838f-354adef1abb5a180eae1ca88174dbb984de87bb9" title="exists.json">exists.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d780763986bab07f186fa90bc2ce22a86fc78f39" class="message" data-pjax="true" title="Reverse course
+
+See comment [here](https://github.com/elasticsearch/elasticsearch-rest-api-spec/commit/2dd7f4f65282288a0e21933f930a40eb7cbec2fd#commitcomment-4189612)">Reverse course</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-26T09:52:23-07:00" title="2013-09-26 09:52:23">September 26, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/explain.json" class="js-directory-link" id="f1262f2a3266d79bc85a4907d455c177-325fdc184c8a9e28960bc8a9eb5e935fa01958ba" title="explain.json">explain.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/6652b41a8b516ed30502208e13529a17d327559a" class="message" data-pjax="true" title="[API] formatting issues">[API] formatting issues</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-25T05:08:18-07:00" title="2013-09-25 05:08:18">September 25, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/get.json" class="js-directory-link" id="08e364c89f4f291dd93f7be65f3c1629-9649888228875fc4dfff0dacb98128219791727e" title="get.json">get.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/bba52a8923a36c4bb30af9ee6d21da09caef9cb1" class="message" data-pjax="true" title="[API] Added _source,_source_include,_source_exclude to
+
+* explain
+* get
+* mget
+* search
+* get_source">[API] Added _source,_source_include,_source_exclude to</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-23T04:23:25-07:00" title="2013-09-23 04:23:25">September 23, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/get_source.json" class="js-directory-link" id="06c3cb0e17ebff492b057f22db913580-f0c36828b33f713b4d5464f24ddb750b8ef7f163" title="get_source.json">get_source.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/4efda5d1806019c195005d72f299d7b13047b81c" class="message" data-pjax="true" title="updated source filtering tests and spec
+
+Fixed id tests to be strings.
+Changed the _source_* param of get_source as they have changed in core.">updated source filtering tests and spec</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-10-08T09:18:20-07:00" title="2013-10-08 09:18:20">October 08, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/index.json" class="js-directory-link" id="9e743aa713dcae5405f290e3db88178b-6f74c9d586a9e3ac37e9507fef046bc9c7a56ecc" title="index.json">index.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/558da05f307e3ce8551c62c7fd6aeb7eb5b64f30" class="message" data-pjax="true" title="In the index API, id should be specified in the URL, not the query strin...
+
+...g">In the index API, id should be specified in the URL, not the query stâ€¦</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-19T06:32:30-07:00" title="2013-06-19 06:32:30">June 19, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.analyze.json" class="js-directory-link" id="ea53ca0f9f948fb3fa7fb805c578af11-804501c6885a57175825f016c01f7995c77187f8" title="indices.analyze.json">indices.analyze.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/3edc7520ba4a0c44526e080db9f64e5a915dfd87" class="message" data-pjax="true" title="Corrected the missing `field` parameter description for `indices.analyze...
+
+...` API">Corrected the missing `field` parameter description for `indices.analâ€¦</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-18T13:16:52-07:00" title="2013-06-18 13:16:52">June 18, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.clear_cache.json" class="js-directory-link" id="2c9d7dd90e792d3063a65d93493a8d3e-ad05af4aa3b3fa919dcbfbfc24f77e89369c64ad" title="indices.clear_cache.json">indices.clear_cache.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/890e2cf6d7f6326838e068dcc43128dd8c4aa10f" class="message" data-pjax="true" title="Rename api methods to verb_object for consistency">Rename api methods to verb_object for consistency</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T09:56:11-07:00" title="2013-06-07 09:56:11">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.close.json" class="js-directory-link" id="d613995d3cc3e47e00e6584ccfb82a35-875a467c0392762dbc129ee3f30fa2c8299529b3" title="indices.close.json">indices.close.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.create.json" class="js-directory-link" id="63f95a3c21061e2fb572cef0eb2eab90-4ef525a5a665e0385c80261895d9bbe882ac1eb6" title="indices.create.json">indices.create.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.delete.json" class="js-directory-link" id="a48e4dc86992215871f3270ad541bc6d-03c2350c12efecf5cc23c73a65989de29bf47099" title="indices.delete.json">indices.delete.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.delete_alias.json" class="js-directory-link" id="9a24979aa4a99ba087361de8997ba9d8-75ea65f0a2e994b9e22ad8d233cb4eb170024df0" title="indices.delete_alias.json">indices.delete_alias.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.delete_mapping.json" class="js-directory-link" id="e3979fad32decf2cf51ff65aa1509d47-b40fe820c43c0b6af16d697fd3f79abbc0776d78" title="indices.delete_mapping.json">indices.delete_mapping.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.delete_template.json" class="js-directory-link" id="7e86ed5d6fec40fca7550c69311db515-132ef949c526ae26e69cb6c4c027cda9a3dd8b38" title="indices.delete_template.json">indices.delete_template.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.delete_warmer.json" class="js-directory-link" id="0cb555d38237effd9567bb06c47530c3-c0a35d27c04ad463ab13bffb025dc52e6b93ff31" title="indices.delete_warmer.json">indices.delete_warmer.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.exists.json" class="js-directory-link" id="8adc33572e46831f609304d8616b1b1d-bfb6175e94bd53fca2322c559620f7901eebe3cf" title="indices.exists.json">indices.exists.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/cb7cc38e7b79b40c3c6126850b7062c68fdb87fc" class="message" data-pjax="true" title="Use singular for index and type, index is default for exists methods">Use singular for index and type, index is default for exists methods</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T14:24:04-07:00" title="2013-06-07 14:24:04">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.exists_alias.json" class="js-directory-link" id="a8d7a4ce4b4a60cb658f043d5488dd39-ba30bcc7720a2d6769c5c354015c7527d6bd3410" title="indices.exists_alias.json">indices.exists_alias.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/890e2cf6d7f6326838e068dcc43128dd8c4aa10f" class="message" data-pjax="true" title="Rename api methods to verb_object for consistency">Rename api methods to verb_object for consistency</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T09:56:11-07:00" title="2013-06-07 09:56:11">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.exists_type.json" class="js-directory-link" id="e3050c1e9f7f37ca82a87ed38a0bb95f-2f33e3a58022fd6b73495a2df7da46e8d4af7b43" title="indices.exists_type.json">indices.exists_type.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/cb7cc38e7b79b40c3c6126850b7062c68fdb87fc" class="message" data-pjax="true" title="Use singular for index and type, index is default for exists methods">Use singular for index and type, index is default for exists methods</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T14:24:04-07:00" title="2013-06-07 14:24:04">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.flush.json" class="js-directory-link" id="9c0d06f79fd7551fb765652a4296136e-c612a337a4b563b23c648ac1f3dc89e8f9ec655c" title="indices.flush.json">indices.flush.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/8bb5310b40fac3ffa7c83cac47a9e814b15e5006" class="message" data-pjax="true" title="Index is not required for flush">Index is not required for flush</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T11:23:02-07:00" title="2013-06-07 11:23:02">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.get_alias.json" class="js-directory-link" id="b359991822afa51a4920347b06236830-faba1714da959f401b9832d8eefa642013584649" title="indices.get_alias.json">indices.get_alias.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/62e3f16627171fe7186a6e0f9eee4b9dab69d285" class="message" data-pjax="true" title="Removed `index` and `name` parameters from the &quot;Get Alias&quot; API">Removed `index` and `name` parameters from the "Get Alias" API</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-19T08:53:15-07:00" title="2013-06-19 08:53:15">June 19, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.get_aliases.json" class="js-directory-link" id="a4b0f80dfc2206cac0dae0dd5c2edf63-e61dffe421b2bb240eeea272eb3d5ea28c466c7d" title="indices.get_aliases.json">indices.get_aliases.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/0cec1868a9ac3c492092475c4479a7c72196263f" class="message" data-pjax="true" title="Corrected `timeout` description in the `indices.get_aliases` API">Corrected `timeout` description in the `indices.get_aliases` API</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-20T04:05:06-07:00" title="2013-06-20 04:05:06">June 20, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.get_field_mapping.json" class="js-directory-link" id="7a95e8e39115ae0693c0e9ebac94aae4-2f5a0018fd9c2096af4f9b5ec8877a76e5a971c2" title="indices.get_field_mapping.json">indices.get_field_mapping.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/35d91b5ea88119e111308cdcf85b096e759bd11e" class="message" data-pjax="true" title="Fixed method name, and the doc url">Fixed method name, and the doc url</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-10-30T14:16:55-07:00" title="2013-10-30 14:16:55">October 30, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.get_mapping.json" class="js-directory-link" id="043a6a009b58931d43b9f4fcf495e584-9210aef366ff4b70b242ef89698cd5dc9900bdbc" title="indices.get_mapping.json">indices.get_mapping.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/1372643e47ba2621edbdde6b85b1d2bd8b924219" class="message" data-pjax="true" title="Removed the incorrect info about `_all` default for index in `indices.ge...
+
+...t_mapping` API">Removed the incorrect info about `_all` default for index in `indicesâ€¦</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-09T14:36:45-07:00" title="2013-09-09 14:36:45">September 09, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.get_settings.json" class="js-directory-link" id="573611d97c9a674af4eb1fd67f06ba87-3e54399ea9643b3a2ce5692862669ec908c15ce6" title="indices.get_settings.json">indices.get_settings.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d47e4660a2eb7b25aefa46f8f7f2f4ab71b74b26" class="message" data-pjax="true" title="Split settings to get_ and set_ methods">Split settings to get_ and set_ methods</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T10:44:28-07:00" title="2013-06-07 10:44:28">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.get_template.json" class="js-directory-link" id="6a31359bb097d3ebbe0a9ee6758c86ea-ce7d3f49048b80a83140040952165d71a5120e9e" title="indices.get_template.json">indices.get_template.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/38b6771b55211b3c9ce03c5178b45ac671e0877a" class="message" data-pjax="true" title="Added URL to indices.get_template to match previous change
+
+Since the name is no longer required, added a supporting path to the paths array.">Added URL to indices.get_template to match previous change</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-10-23T21:14:02-07:00" title="2013-10-23 21:14:02">October 23, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.get_warmer.json" class="js-directory-link" id="696ba757658b41eb345ac40688505bf3-d630b08dabcc2e6c14d0516e9c63830706c55cb8" title="indices.get_warmer.json">indices.get_warmer.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/cfaed702ed4066793c6e44c8788c260523ad70d5" class="message" data-pjax="true" title="Revert &quot;Corrected `indices.get_warmer` API (index not required, base pat...
+
+...h just `/_warmer`)&quot;
+
+This reverts commit 9834e49a86c609e0e7dc7e28e0ee94c97eb4628c.">Revert "Corrected `indices.get_warmer` API (index not required, base â€¦</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-20T02:21:19-07:00" title="2013-06-20 02:21:19">June 20, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.open.json" class="js-directory-link" id="373e5d7e5484cc081c4980032ab53333-d125200d48b23509679603e58b6965a2e5c8a6b0" title="indices.open.json">indices.open.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.optimize.json" class="js-directory-link" id="8efebf88db11882bb5adedfc25de4847-723b0c5c1e24316abda841d6b6897f10efa9c5f8" title="indices.optimize.json">indices.optimize.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d33573118bd23931f8eb4048f86dcb79dc9f735b" class="message" data-pjax="true" title="Index is not required for optimize">Index is not required for optimize</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T11:38:55-07:00" title="2013-06-07 11:38:55">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.put_alias.json" class="js-directory-link" id="7c4d55dd18903fbe6a08229325f31825-a76e5bbf5c5705ea834e60c9c25f3946e97638d3" title="indices.put_alias.json">indices.put_alias.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.put_mapping.json" class="js-directory-link" id="250bd21a9bccfcf55d2e743ea58da37e-2773d7f2da71e3f2aab651e6e36ed1608a7da00e" title="indices.put_mapping.json">indices.put_mapping.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.put_settings.json" class="js-directory-link" id="d6b150b68eeb6f484cdae6fec82c913f-8b50e1f56114040ba12b3edc0644cac711882ff7" title="indices.put_settings.json">indices.put_settings.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.put_template.json" class="js-directory-link" id="481ea697fa69449ad04daf3c10691415-51675c5dc9e60e9ecf70ec661722a6d76a6e8c3a" title="indices.put_template.json">indices.put_template.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.put_warmer.json" class="js-directory-link" id="7144ddc1e315d2eb87f6d7fa415b3027-f60f80f14bd9d6e563a5accc54f236b0af9e1224" title="indices.put_warmer.json">indices.put_warmer.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.refresh.json" class="js-directory-link" id="3717be850ac7c14c749c955fb79f61d7-8e79221827c3949f5025f776a2153be331acdcad" title="indices.refresh.json">indices.refresh.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/4075d719a9cb2c7beda2cee0e029158eefaea62c" class="message" data-pjax="true" title="Index is not required for refresh">Index is not required for refresh</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T11:50:14-07:00" title="2013-06-07 11:50:14">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.segments.json" class="js-directory-link" id="56a2f2774152e652738ca9703cf447dc-caded349a6a61cbed0d8de1af7e2929ff13f8dc7" title="indices.segments.json">indices.segments.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/aaa3ed0eaff5926fe89a98f8dfd3194ee1ac770a" class="message" data-pjax="true" title="Index is not required for segments">Index is not required for segments</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-07T11:53:03-07:00" title="2013-06-07 11:53:03">June 07, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.snapshot_index.json" class="js-directory-link" id="f53f4200ecadbcf6481f4fc539f2641f-dc66ac673fb65be2bd4474dc063d4b84b8f3c5ef" title="indices.snapshot_index.json">indices.snapshot_index.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/228ac0d3b230409e212d5649e43287df249e53f6" class="message" data-pjax="true" title="Required settings for path parts">Required settings for path parts</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-09T12:17:29-07:00" title="2013-06-09 12:17:29">June 09, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.stats.json" class="js-directory-link" id="cb782133ac617be36b33b196df8059b5-c350b58ed023617d9e127c86f0961e437a3ae3c8" title="indices.stats.json">indices.stats.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/0bca570b5a9aecf0c874706618b4506ec9e6353d" class="message" data-pjax="true" title="Added completion stats to cluster.node_stats and indices.stats">Added completion stats to cluster.node_stats and indices.stats</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-20T04:26:04-07:00" title="2013-09-20 04:26:04">September 20, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.status.json" class="js-directory-link" id="2cc01e73929605ba4a1f29ef7bd89c47-bca394511a106a04cbc993c590610067a8baebfe" title="indices.status.json">indices.status.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/ef519df8cd54934faad116bd6959ef7049b4e5e3" class="message" data-pjax="true" title="Added the API definition for `{index}/_status`">Added the API definition for `{index}/_status`</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-05-27T12:46:23-07:00" title="2013-05-27 12:46:23">May 27, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.update_aliases.json" class="js-directory-link" id="655e7332a9c5cd438b45d4ff1cb30b85-ad1a327035eb62c1b16ce336c3c68f1257f7ce45" title="indices.update_aliases.json">indices.update_aliases.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/d71affb2e302593fcdd49c26d250d30a49ca1f44" class="message" data-pjax="true" title="add master_timeout to cluster state changing operations">add master_timeout to cluster state changing operations</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-07-22T15:06:25-07:00" title="2013-07-22 15:06:25">July 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/indices.validate_query.json" class="js-directory-link" id="abeaaf04f453c9902ecb8d3315d3d43d-a761ca3f7fdc681e58727553e285012d45dcf7a1" title="indices.validate_query.json">indices.validate_query.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/e6253f93671df4eda7324af45edb3ee4964030b3" class="message" data-pjax="true" title="Added the `q` URL parameter to the `indices.validate_query` API">Added the `q` URL parameter to the `indices.validate_query` API</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-21T09:02:22-07:00" title="2013-06-21 09:02:22">June 21, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/info.json" class="js-directory-link" id="379da8ee275d0393f12cdff8542d368d-f3516a2c7d149c1bdd8d64904a229404680f1f2e" title="info.json">info.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/6e0ff8012bd0a9292dc6581066673360a66d8a6d" class="message" data-pjax="true" title="Correct name for the `info` API (root endpoint)">Correct name for the `info` API (root endpoint)</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-05-28T01:45:10-07:00" title="2013-05-28 01:45:10">May 28, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/mget.json" class="js-directory-link" id="7db3deffe9680ffd2cdb16a331aea2fa-a875136db9f6c9602a0190c6d867bfbfd513c96b" title="mget.json">mget.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/bba52a8923a36c4bb30af9ee6d21da09caef9cb1" class="message" data-pjax="true" title="[API] Added _source,_source_include,_source_exclude to
+
+* explain
+* get
+* mget
+* search
+* get_source">[API] Added _source,_source_include,_source_exclude to</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-23T04:23:25-07:00" title="2013-09-23 04:23:25">September 23, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/mlt.json" class="js-directory-link" id="85fe94abc6068cd67d547c5c09f278b3-476cf7ed1dec2675db8e5aab5e5b1437a19aabc2" title="mlt.json">mlt.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/7d9cc9020d7c93ac2abdd1452600a5a9559e86f7" class="message" data-pjax="true" title="Corrected the formatting in the `_mlt` API">Corrected the formatting in the `_mlt` API</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-05-28T01:48:23-07:00" title="2013-05-28 01:48:23">May 28, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/msearch.json" class="js-directory-link" id="41473f6391667dbfeb8f12856e6dbf9b-caed3736ae7a27221713e202c8e4579a0ca020d3" title="msearch.json">msearch.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/a4ad89fdd6e3fa293e859cddfa132461ad223464" class="message" data-pjax="true" title="Added, that `body` is required in &quot;msearch&quot;">Added, that `body` is required in "msearch"</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-21T13:35:25-07:00" title="2013-06-21 13:35:25">June 21, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/percolate.json" class="js-directory-link" id="4b2043d3c446183feab58857c7d22954-ef9d348824aeb060209d1c273c611a8974df91df" title="percolate.json">percolate.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/b4ce819e6d9dec4a12ae8e17f20896caad7ea59f" class="message" data-pjax="true" title="Added, that `body` is required in &quot;percolate&quot; API">Added, that `body` is required in "percolate" API</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-22T02:28:14-07:00" title="2013-06-22 02:28:14">June 22, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/scroll.json" class="js-directory-link" id="b68a77ffff64b26fa9efb03e5f4fec69-953d1cebd156269113804d4d05ab73fbf6164bdf" title="scroll.json">scroll.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/f9ba0135417190c3df1fb2aacf6ddde675466337" class="message" data-pjax="true" title="Fix documentation URL for Scroll">Fix documentation URL for Scroll</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-13T18:06:00-07:00" title="2013-06-13 18:06:00">June 13, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/search.json" class="js-directory-link" id="36e64ee591eb44c77488faec76357456-90fab84dec1a6e3839519cd3422e1c6fc12aec36" title="search.json">search.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/bba52a8923a36c4bb30af9ee6d21da09caef9cb1" class="message" data-pjax="true" title="[API] Added _source,_source_include,_source_exclude to
+
+* explain
+* get
+* mget
+* search
+* get_source">[API] Added _source,_source_include,_source_exclude to</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-09-23T04:23:25-07:00" title="2013-09-23 04:23:25">September 23, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/suggest.json" class="js-directory-link" id="ede60bf6805d74020a897b7189fd2c28-5003193a12693fd381e40138486d700b585ff3ec" title="suggest.json">suggest.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/8e71ba5d9b1aba032e75e2579d274f3c7f46f447" class="message" data-pjax="true" title="Improved the preference description to distinguish get requests from sea...
+
+...rch requests">Improved the preference description to distinguish get requests from â€¦</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-06-17T07:43:02-07:00" title="2013-06-17 07:43:02">June 17, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/blob/master/api/update.json" class="js-directory-link" id="2103efac9db966ed8688bc9b541c1638-204f024cdb9db079df80fada2758ac4d79240536" title="update.json">update.json</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch-rest-api-spec/commit/8537d3f55e8a3a241c991117918633bf1372d71f" class="message" data-pjax="true" title="Updated &quot;version_type&quot; to match delete.json">Updated "version_type" to match delete.json</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" datetime="2013-10-30T17:26:32-07:00" title="2013-10-30 17:26:32">October 30, 2013</time></span></td>
+    </tr>
+</tbody>
+
+  </table>
+</div>
+
+  
+
+
+        </div>
+
+      </div><!-- /.repo-container -->
+      <div class="modal-backdrop"></div>
+    </div><!-- /.container -->
+  </div><!-- /.site -->
+
+
+    </div><!-- /.wrapper -->
+
+      <div class="container">
+  <div class="site-footer">
+    <ul class="site-footer-links right">
+      <li><a href="https://status.github.com/">Status</a></li>
+      <li><a href="http://developer.github.com">API</a></li>
+      <li><a href="http://training.github.com">Training</a></li>
+      <li><a href="http://shop.github.com">Shop</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/about">About</a></li>
+
+    </ul>
+
+    <a href="/">
+      <span class="mega-octicon octicon-mark-github"></span>
+    </a>
+
+    <ul class="site-footer-links">
+      <li>&copy; 2013 <span title="0.05197s from github-fe129-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="/site/terms">Terms</a></li>
+        <li><a href="/site/privacy">Privacy</a></li>
+        <li><a href="/security">Security</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div><!-- /.site-footer -->
+</div><!-- /.container -->
+
+
+    <div class="fullscreen-overlay js-fullscreen-overlay" id="fullscreen_overlay">
+  <div class="fullscreen-container js-fullscreen-container">
+    <div class="textarea-wrap">
+      <textarea name="fullscreen-contents" id="fullscreen-contents" class="js-fullscreen-contents" placeholder="" data-suggester="fullscreen_suggester"></textarea>
+          <div class="suggester-container">
+              <div class="suggester fullscreen-suggester js-navigation-container" id="fullscreen_suggester"
+                 data-url="/elasticsearch/elasticsearch-rest-api-spec/suggestions/commit">
+              </div>
+          </div>
+    </div>
+  </div>
+  <div class="fullscreen-sidebar">
+    <a href="#" class="exit-fullscreen js-exit-fullscreen tooltipped leftwards" title="Exit Zen Mode">
+      <span class="mega-octicon octicon-screen-normal"></span>
+    </a>
+    <a href="#" class="theme-switcher js-theme-switcher tooltipped leftwards"
+      title="Switch themes">
+      <span class="octicon octicon-color-mode"></span>
+    </a>
+  </div>
+</div>
+
+
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="octicon octicon-alert"></span>
+      <a href="#" class="octicon octicon-remove-close close ajax-error-dismiss"></a>
+      Something went wrong with that request. Please try again.
+    </div>
+
+  </body>
+</html>
+

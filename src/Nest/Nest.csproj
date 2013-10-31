@@ -70,12 +70,13 @@
   <ItemGroup>
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="Enums\Enums.Generated.cs" />
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
     <Compile Include="ExposedInternals\ElasticSerializer.cs" />
     <Compile Include="Exception\ConnectionException.cs" />
     <Compile Include="QueryStringParameters\FluentQueryString.cs" />
-    <Compile Include="QueryStringParameters\GeneratedQueryStringParameters.cs" />
-    <Compile Include="RawElasticClient-Generated.cs" />
+    <Compile Include="QueryStringParameters\QueryStringParameters.Generated.cs" />
+    <Compile Include="RawElasticClient.Generated.cs" />
     <Compile Include="Extensions\StringInject.cs" />
     <Compile Include="RawElasticClient.cs" />
     <Compile Include="Domain\Responses\IReindexResponse.cs" />
@@ -116,7 +117,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
-    <Compile Include="IRawElasticClient.cs" />
+    <Compile Include="IRawElasticClient.Generated.cs" />
     <Compile Include="Resolvers\Converters\ConcreteTypeConverter.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />

@@ -13,15 +13,21 @@ namespace Nest
 	/// <typeparam name="T"></typeparam>
 	public abstract class FluentQueryString<T> : NameValueCollection where T : FluentQueryString<T>
 	{
-		 public new T Add(string name, string value)
-		 {
-			 base.Add(name, value);
-			 return (T)this;
-		 }
+		public new T Add(string name, string value)
+		{
+			base.Add(name, value);
+			return (T)this;
+		}
+
+		protected string CreateString(object s)
+		{
+			return s.ToString();
+		}
+
 	}
 
 	public class FluentQueryString : FluentQueryString<FluentQueryString>
 	{
-		
+
 	}
 }

@@ -11,6 +11,15 @@ public class RestApiSpec {
 	public IDictionary<string, ApiEndpoint> Endpoints { get; set; }
 
 	public IList<ApiQueryParameters> ApiQueryParameters { get; set; }
+
+	public IDictionary<CsharpMethod> MethodsThatNeedDescriptors
+	{
+		get
+		{
+			return from m in this.SelectMany
+				   select m;
+		}
+	}
 }
 
 public class ApiEndpoint {
@@ -30,7 +39,7 @@ public class ApiEndpoint {
 		return Extensions.DistinctBy(this.CsharpMethods.ToList(), m=> m.ReturnType + "--" + m.FullName + "--" + m.Arguments);
 	}
 
-	public IDictionary<string>
+	
 
 	public IEnumerable<CsharpMethod> CsharpMethods {
 		get
