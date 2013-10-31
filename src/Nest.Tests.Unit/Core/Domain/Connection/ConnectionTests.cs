@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.Domain.Connection
     }
 
     [TestFixture]
-    public class ConnectionTests
+    public class ConnectionTests : BaseJsonTests
     {
         [Test]
         public void CanCreateConnectionWithCustomQueryStringParameters()
@@ -51,5 +51,32 @@ namespace Nest.Tests.Unit.Domain.Connection
             // Assert
 	        Assert.AreEqual(req.Address.ToString(), "http://localhost:9000/index/?authToken=ABCDEFGHIJK");
         }
+
+
+		[Test]
+		public void SendStringAsJsonBody()
+		{
+			var jsonAsString = "{ \"json_as_a_string\" : true}";
+			var result = this._client.Raw.BulkPost(jsonAsString, qs => qs
+				.Replication(ReplicationOptions.Async)
+				.Refresh(true)
+			);
+			StringAssert.EndsWith(":9200/_bulk?replication=async&refresh=true", result.RequestUrl);
+			Assert.AreEqual(jsonAsString, result.Request);
+		}
+
+		[Test]
+		public void SendAnonymousObjectAsJsonBody()
+		{
+			var jsonAsString = "{\r\n  \"json_as_a_string\": true\r\n}";
+			var result = this._client.Raw.BulkPost(
+				new { json_as_a_string = true }
+				, qs => qs
+					.Replication(ReplicationOptions.Async)
+					.Refresh(true)
+			);
+			StringAssert.EndsWith(":9200/_bulk?replication=async&refresh=true", result.RequestUrl);
+			Assert.AreEqual(jsonAsString, result.Request);
+		}
     }
 }
