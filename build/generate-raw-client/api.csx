@@ -30,6 +30,8 @@ public class ApiEndpoint {
 		return Extensions.DistinctBy(this.CsharpMethods.ToList(), m=> m.ReturnType + "--" + m.FullName + "--" + m.Arguments);
 	}
 
+	public IDictionary<string>
+
 	public IEnumerable<CsharpMethod> CsharpMethods {
 		get
 		{
@@ -120,6 +122,7 @@ public class CsharpMethod {
 	public string Path { get; set; }
 	public string Arguments { get; set; }
 	public IEnumerable<ApiUrlPart> Parts { get; set; }
+	public ApiUrl Url { get; set; }
 }
 public class ApiBody {
 	public string Description { get; set; }
@@ -147,7 +150,9 @@ public static class ApiGenerator
 {
 	private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch-rest-api-spec/tree/master/api";
 	private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch-rest-api-spec/master/api/";
+	private readonly static string _nestFolder = @"..\..\src\Nest\";
 	private readonly static RazorMachine _razorMachine = new RazorMachine();	
+
 
 	static ApiGenerator() {
 	}
@@ -216,14 +221,14 @@ public static class ApiGenerator
 
 	public static void GenerateClientInterface(RestApiSpec model)
 	{
-		var targetFile = @"..\Nest\IRawElasticClient.cs";
+		var targetFile =_nestFolder + @"IRawElasticClient.cs";
 		var source = _razorMachine.Execute(File.ReadAllText(@"Views\IRawElasticClient.cshtml"), model).ToString();
 		File.WriteAllText(targetFile, source);
 	}
 
 	public static void GenerateQueryStringParameters(RestApiSpec model)
 	{
-		var targetFile = @"..\Nest\QueryStringParameters\GeneratedQueryStringParameters.cs";
+		var targetFile = _nestFolder + @"QueryStringParameters\GeneratedQueryStringParameters.cs";
 		var source = _razorMachine.Execute(File.ReadAllText(@"Views\GeneratedQueryStringParameters.cshtml"), model).ToString();
 		File.WriteAllText(targetFile, source);
 	}

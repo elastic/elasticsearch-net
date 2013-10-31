@@ -73,7 +73,7 @@
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
     <Compile Include="ExposedInternals\ElasticSerializer.cs" />
     <Compile Include="Exception\ConnectionException.cs" />
-    <Compile Include="QueryStringParameters\BaseQueryStringParameters.cs" />
+    <Compile Include="QueryStringParameters\FluentQueryString.cs" />
     <Compile Include="QueryStringParameters\GeneratedQueryStringParameters.cs" />
     <Compile Include="RawElasticClient-Generated.cs" />
     <Compile Include="Extensions\StringInject.cs" />

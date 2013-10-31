@@ -33,7 +33,7 @@ namespace Nest
 			{
 		<text>@Raw("///<param name=\""+part.Name+"\">")@part.Description@Raw("</param>")</text>
 			}
-		@Raw(method.ReturnType) @(method.FullName)(@method.Arguments);
+		@Raw(method.ReturnType) @(method.FullName)(@Raw(method.Arguments));
 		</text>
 			}
 		}
