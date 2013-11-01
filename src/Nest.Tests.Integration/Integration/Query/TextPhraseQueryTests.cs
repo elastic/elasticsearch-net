@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void TestControl()
 		{
 			var id = _LookFor.Id;
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id.ToString());
+			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id);
 
 			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId)
@@ -53,7 +53,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void TestNotFiltered()
 		{
 			var id = _LookFor.Id;
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id.ToString());
+			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id);
 			var querySlop0 = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void TestFiltered()
 		{
 			var id = _LookFor.Id;
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id.ToString());
+			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id);
 			var querySlop0 = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)

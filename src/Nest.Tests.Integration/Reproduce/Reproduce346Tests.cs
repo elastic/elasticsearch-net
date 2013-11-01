@@ -79,8 +79,8 @@ namespace Nest.Tests.Integration.Reproduce
 				x => x.Bool(
 					b => b.Must
 						(
-							Query<MediaStreamEntry>.Term(f => f.StreamId, streamId.ToString())
-							, Query<MediaStreamEntry>.Term(f => f.ApprovalSettings.Approved, approved.ToString())
+							Query<MediaStreamEntry>.Term(f => f.StreamId, streamId)
+							, Query<MediaStreamEntry>.Term(f => f.ApprovalSettings.Approved, approved)
 						)
 					)
 				);

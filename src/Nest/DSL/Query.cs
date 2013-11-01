@@ -162,12 +162,12 @@ namespace Nest
 			return new QueryDescriptor<T>().SpanTerm(field, value, Boost);
 		}
 
-		public static BaseQuery Term(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null)
+		public static BaseQuery Term<K>(Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null)
 		{
 			return new QueryDescriptor<T>().Term(fieldDescriptor, value, Boost);
 		}
 
-		public static BaseQuery Term(string field, string value, double? Boost = null)
+		public static BaseQuery Term<K>(string field, K value, double? Boost = null)
 		{
 			return new QueryDescriptor<T>().Term(field, value, Boost);
 		}
