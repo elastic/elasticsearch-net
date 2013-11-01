@@ -36,7 +36,6 @@ namespace Nest
 
 		public CustomBoostFactorQueryDescriptor<T> BoostFactor(double boostFactor)
 		{
-			boostFactor.ThrowIfNull("boostFactor");
 			this._BoostFactor = boostFactor;
 			return this;
 		}

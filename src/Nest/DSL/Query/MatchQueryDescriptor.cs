@@ -97,7 +97,6 @@ namespace Nest
 
 		public MatchQueryDescriptor<T> Boost(double boost)
 		{
-			boost.ThrowIfNull("boost");
 			this._Boost = boost;
 			return this;
 		}

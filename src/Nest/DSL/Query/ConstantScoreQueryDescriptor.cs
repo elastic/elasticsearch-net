@@ -56,7 +56,6 @@ namespace Nest
 
 		public ConstantScoreQueryDescriptor<T> Boost(double boost)
 		{
-			boost.ThrowIfNull("boostFactor");
 			this._Boost = boost;
 			return this;
 		}

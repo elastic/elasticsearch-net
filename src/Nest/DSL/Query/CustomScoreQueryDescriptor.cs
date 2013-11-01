@@ -53,7 +53,6 @@ namespace Nest
 		/// <returns></returns>
 		public CustomScoreQueryDescriptor<T> Script(string script)
 		{
-			script.ThrowIfNull("script");
 			this._Script = script;
 			return this;
 		}

@@ -20,7 +20,6 @@ namespace Nest.DSL.Query
 
         public FilterScoreDescriptor<T> Boost(float boost)
         {
-            boost.ThrowIfNull("boost");
             this._Boost = boost;
 
             return this;
@@ -28,7 +27,6 @@ namespace Nest.DSL.Query
 
         public FilterScoreDescriptor<T> Script(string script)
         {
-            script.ThrowIfNull("script");
             this._Script = script;
 
             return this;

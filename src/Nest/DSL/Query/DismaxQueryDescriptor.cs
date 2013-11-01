@@ -45,13 +45,11 @@ namespace Nest
 
 		public DismaxQueryDescriptor<T> Boost(double boost)
 		{
-			boost.ThrowIfNull("boost");
 			this._Boost = boost;
 			return this;
 		}
 		public DismaxQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
-			tieBreaker.ThrowIfNull("tieBreaker");
 			this._TieBreaker = tieBreaker;
 			return this;
 		}
