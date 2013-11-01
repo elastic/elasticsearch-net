@@ -39,7 +39,6 @@ namespace Nest
 		/// <returns>this</returns>
 		public ScriptFilterDescriptor Script(string script)
 		{
-			script.ThrowIfNull("script");
 			this._Script = script;
 			return this;
 		}
