@@ -675,7 +675,7 @@ namespace Nest
 		/// Filters documents that have fields that contain a term (not analyzed). 
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilter Term(Expression<Func<T, object>> fieldDescriptor, string term)
+		public BaseFilter Term<K>(Expression<Func<T, K>> fieldDescriptor, K term)
 		{
 			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
 			return this.Term(field, term);
@@ -684,10 +684,12 @@ namespace Nest
 		/// Filters documents that have fields that contain a term (not analyzed).
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilter Term(string field, string term)
+		public BaseFilter Term<K>(string field, K term)
 		{
-			if (term.IsNullOrEmpty() || field.IsNullOrEmpty())
+			var t = new Term() { Field = field, Value = (object)term };
+			if (t.IsConditionless)
 				return CreateConditionlessFilterDescriptor("term", new { term = term, field = field });
+
 			return this.SetDictionary("term", field, term, (d, b) =>
 			{
 				b.TermFilter = d;

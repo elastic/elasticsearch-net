@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration
 
 			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(ff => ff.And(
-						f => f.Term(e => e.Id, project.Id.ToString()),
+						f => f.Term(e => e.Id, project.Id),
 						filter
 					))
 				);

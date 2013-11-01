@@ -83,12 +83,12 @@ namespace Nest.Tests.Integration.Integration.Filter
 		public void TestNotFilter()
 		{
 			this.DoFilterTest(
-				f => f.Not(n => n.Term(o => o.Id, (_LookFor.Id + 1).ToString())),
+				f => f.Not(n => n.Term(o => o.Id, (_LookFor.Id + 1))),
 				_LookFor,
 				true);
 
 			this.DoFilterTest(
-				f => f.Not(n => n.Term(o => o.Id, _LookFor.Id.ToString())),
+				f => f.Not(n => n.Term(o => o.Id, _LookFor.Id)),
 				_LookFor,
 				false);
 		}
