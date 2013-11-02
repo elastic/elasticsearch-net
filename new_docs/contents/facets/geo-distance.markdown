@@ -26,6 +26,6 @@ The geo_distance facet is a facet providing information for ranges of distances 
 		)
 	);
 
-See [original docs](http://www.elasticsearch.org/guide/reference/api/search/facets/geo-distance-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-geo-distance-facet.html) for more information
 
 
