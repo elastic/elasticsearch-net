@@ -17,6 +17,6 @@ The terms_stats facet combines both the terms and statistical allowing to comput
 		.FacetTerm(t => t.OnField(f => f.Country).Size(20))
 	);
 
-See [original docs](http://www.elasticsearch.org/guide/reference/api/search/facets/terms-stats-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-terms-stats-facet.html) for more information
 
 
