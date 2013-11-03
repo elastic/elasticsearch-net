@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 		[Test]
 		public void SendAnonymousObjectAsJsonBody()
 		{
-			var jsonAsString = "{\r\n  \"json_as_a_string\": true\r\n}";
+            var jsonAsString = string.Format("{{{0}  \"json_as_a_string\": true{0}}}", System.Environment.NewLine);
 			var result = this._client.Raw.BulkPost(
 				new { json_as_a_string = true }
 				, qs => qs
