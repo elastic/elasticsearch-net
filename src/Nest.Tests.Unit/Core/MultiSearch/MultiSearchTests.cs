@@ -45,7 +45,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		public void MultiSearchRespectsSearchTypePreferenceAndRouting()
 		{
 			var result = this._client.MultiSearch(b => b
-				.FixedPath("myindex", "mytype")
+				.FixedPath("myindex", "mytype") 
 				.Search<ElasticSearchProject>(s => s.MatchAll().Preference("_primary").Routing("customvalue1").SearchType(SearchType.DfsQueryAndFetch))
 				.Search<Person>(s => s.MatchAll().Preference("_primary_first").Routing("customvalue2").SearchType(SearchType.Count))
 			);
@@ -56,7 +56,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			const string second = @"{""index"":""myindex"",""type"":""mytype"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}";
 
             StringAssert.Contains(first, status.Request);
-            StringAssert.Contains(second, status.Request);
+            StringAssert.Contains(second, status.Request); 
 			
 
 		}

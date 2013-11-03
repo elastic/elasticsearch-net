@@ -128,7 +128,6 @@ namespace Nest
 		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
 
 
-		internal bool _Strict { get; set; }
 
 		public FilterDescriptor<T> Strict(bool strict = true)
 		{

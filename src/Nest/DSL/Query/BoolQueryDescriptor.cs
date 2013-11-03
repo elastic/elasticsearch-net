@@ -11,15 +11,15 @@ namespace Nest
 	{
 		internal static bool CanJoinMust(this BoolBaseQueryDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinMust());
+			return bq == null || (bq._CanJoinMust());
 		}
 		internal static bool CanJoinMustNot(this BoolBaseQueryDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinMustNot());
+			return bq == null || (bq._CanJoinMustNot());
 		}
 		internal static bool CanJoinShould(this BoolBaseQueryDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinShould());
+			return bq == null || (bq._MinimumNumberShouldMatches == null && bq._CanJoinShould());
 		}
 		internal static IEnumerable<BaseQuery> MergeMustQueries(this BaseQuery lbq, BaseQuery rbq)
 		{
@@ -87,6 +87,9 @@ namespace Nest
 		[JsonProperty("should")]
 		internal IEnumerable<BaseQuery> _ShouldQueries { get; set; }
 
+		[JsonProperty("minimum_number_should_match")]
+		internal object _MinimumNumberShouldMatches { get; set; }
+
 		internal bool _HasOnlyMustNot()
 		{
 			return _MustNotQueries.HasAny() && !_ShouldQueries.HasAny() && !_MustQueries.HasAny();
@@ -119,8 +122,7 @@ namespace Nest
 			return this;
 		}
 
-		[JsonProperty("minimum_number_should_match")]
-		internal int? _MinimumNumberShouldMatches { get; set; }
+		
 
 		[JsonProperty("boost")]
 		internal double? _Boost { get; set; }
@@ -144,6 +146,16 @@ namespace Nest
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(int minimumShouldMatches)
+		{
+			this._MinimumNumberShouldMatches = minimumShouldMatches;
+			return this;
+		}
+		/// <summary>
+		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied. String overload where you can specify percentages
+		/// </summary>
+		/// <param name="minimumShouldMatches"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(string minimumShouldMatches)
 		{
 			this._MinimumNumberShouldMatches = minimumShouldMatches;
 			return this;

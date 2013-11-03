@@ -15,6 +15,7 @@ namespace Nest
 		internal BoolBaseFilterDescriptor BoolFilterDescriptor { get; set; }
 
 		internal bool IsConditionless { get; set; }
+		internal bool _Strict { get; set; }
 
 		public static BaseFilter operator &(BaseFilter lbq, BaseFilter rbq)
 		{
@@ -111,24 +112,30 @@ namespace Nest
 			fq._ShouldFilters = new[] { lbq, rbq };
 			f.BoolFilterDescriptor = fq;
 
+			//if neither the left nor the right side represent a bool filter join them
 			if (lbq.BoolFilterDescriptor == null && rbq.BoolFilterDescriptor == null)
 			{
 				fq._ShouldFilters = lbq.MergeShouldFilters(rbq);
 				return f;
 			}
-			else if (lbq.BoolFilterDescriptor != null && rbq.BoolFilterDescriptor == null)
+			//if the left or right sight already is a bool filter determine join the non bool query side of the 
+			//of the operation onto the other.
+			else if (lbq.BoolFilterDescriptor != null && rbq.BoolFilterDescriptor == null && !lbq._Strict)
 			{
 				JoinShouldOnSide(lbq, rbq, fq);
 			}
-			else if (rbq.BoolFilterDescriptor != null && lbq.BoolFilterDescriptor == null)
+			else if (rbq.BoolFilterDescriptor != null && lbq.BoolFilterDescriptor == null && !rbq._Strict)
 			{
 				JoinShouldOnSide(rbq, lbq, fq);
 			}
+			//both sides already represent a bool filter
 			else
 			{
-				if (lbq.BoolFilterDescriptor.CanJoinShould() && rbq.BoolFilterDescriptor.CanJoinShould())
+				//both sides report that we may merge the shoulds
+				if (!lbq._Strict && !rbq._Strict && lbq.BoolFilterDescriptor.CanJoinShould() && rbq.BoolFilterDescriptor.CanJoinShould())
 					fq._ShouldFilters = lbq.MergeShouldFilters(rbq);
 				else
+					//create a new nested bool with two separate should bool sections
 					fq._ShouldFilters = new[] { lbq, rbq };
 			}
 

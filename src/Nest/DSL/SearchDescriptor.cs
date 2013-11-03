@@ -879,29 +879,28 @@ namespace Nest
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>().Strict(this._Strict);
+			var q = new QueryDescriptor<T>() {_Strict = this._Strict};
 
 			var bq = query(q);
-			if (bq == null)
-				return this;
-			if (this._Strict && bq.IsConditionless)
-				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(bq, Formatting.Indented)));
+			return this.Query(bq);
 
-			else if (bq.IsConditionless)
-				return this;
-			this._Query = bq;
-			return this;
 		}
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
 		public SearchDescriptor<T> Query(BaseQuery query)
 		{
-			query.ThrowIfNull("query");
-			if (query == null || query.IsConditionless)
+			if (query == null)
+				return this;
+
+			if (this._Strict && query.IsConditionless)
+				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
+
+			else if (query.IsConditionless)
 				return this;
 			this._Query = query;
 			return this;
+
 		}
 
 		/// <summary>
@@ -998,10 +997,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> MatchAll()
 		{
-			var q = new QueryDescriptor<T>();
-			q.MatchAll();
-			this._Query = q;
-			return this;
+			return this.Query(q => q.MatchAll());
 		}
 
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)

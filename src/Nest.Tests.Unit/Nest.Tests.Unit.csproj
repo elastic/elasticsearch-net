@@ -107,6 +107,7 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Search\Filter\BoolQueryMerges\BoolQueryMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
@@ -359,6 +360,33 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldJoinMustNotIntoMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldJoinIntoMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoStrictMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatchPercentage.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldJoinIntoNonStrictShouldQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoStrictShouldQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
     <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />
     <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />

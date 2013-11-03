@@ -11,15 +11,15 @@ namespace Nest
 	{
 		internal static bool CanJoinMust(this BoolBaseFilterDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinMust());
+			return bq == null || (bq._CanJoinMust());
 		}
 		internal static bool CanJoinMustNot(this BoolBaseFilterDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinMustNot());
+			return bq == null || (bq._CanJoinMustNot());
 		}
 		internal static bool CanJoinShould(this BoolBaseFilterDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinShould());
+			return bq == null || ( bq._CanJoinShould());
 		}
 		internal static IEnumerable<BaseFilter> MergeMustFilters(this BaseFilter lbq, BaseFilter rbq)
 		{
