@@ -18,11 +18,9 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 			public int? Int1 { get; set; }
 			public DateTime? Date { get; set; }
 		}
-		private readonly Criteria _c = new Criteria();
 
 		private void DoConditionlessFilter(Func<FilterDescriptor<ElasticSearchProject>, BaseFilter> filter)
 		{
-			var criteria = new Criteria { };
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Take(10)
@@ -32,7 +30,6 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 		}
 		private void DoNonConditionlessFilter(Func<FilterDescriptor<ElasticSearchProject>, BaseFilter> filter)
 		{
-			var criteria = new Criteria { };
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Take(10)

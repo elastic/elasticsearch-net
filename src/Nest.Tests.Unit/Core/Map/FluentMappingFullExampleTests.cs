@@ -230,6 +230,8 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 				)
 			);
+
+            Assert.NotNull(result.ConnectionStatus.Request);
 		}
 	}
 }

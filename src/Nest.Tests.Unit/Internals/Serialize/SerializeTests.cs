@@ -62,6 +62,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 					   .MatchAll()
 				   )
 			   );
+            Assert.NotNull(data);
 			var sw = Stopwatch.StartNew();
 
 			data = this._client.Serializer.Serialize(new SearchDescriptor<ElasticSearchProject>()
@@ -75,6 +76,8 @@ namespace Nest.Tests.Unit.Internals.Serialize
 				)
 			);
 			Assert.LessOrEqual(sw.ElapsedMilliseconds, 10);
+            Assert.NotNull(data);
+
 		}
 	}
 }

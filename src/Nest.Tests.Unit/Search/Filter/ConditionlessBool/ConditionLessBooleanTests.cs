@@ -18,13 +18,12 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionlessBool
 
 		private void DoSemiConditionlessQuery(Func<FilterDescriptor<ElasticSearchProject>, BaseFilter> filter, string Filename= "MatchAll")
 		{
-			var criteria = new Criteria { };
 			var s = new SearchDescriptor<ElasticSearchProject>()
 			 .From(0)
 			 .Take(10)
 			 .Filter(filter);
 
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), Filename);
+			this.JsonEquals(s, System.Reflection.MethodBase.GetCurrentMethod(), Filename);
 		}
 
 		[Test]

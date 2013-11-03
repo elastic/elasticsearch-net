@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Search.Facets.ResponseDeserialisation
             var xArray = x as DateEntry[] ?? x.ToArray();
             var yArray = y as DateEntry[] ?? y.ToArray();
 
-            return xArray.Count() == yArray.Count() && xArray.SequenceEqual(yArray, this);
+            return xArray.Count() == yArray.Count() && xArray.SequenceEqual<DateEntry>(yArray, this);
         }
 
         public int GetHashCode(IEnumerable<DateEntry> sequence)

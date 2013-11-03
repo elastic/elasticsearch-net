@@ -18,7 +18,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionlessBool
 
 		private void DoSemiConditionlessQuery(Func<QueryDescriptor<ElasticSearchProject>, BaseQuery> query, string Filename= "MatchAll")
 		{
-			var criteria = new Criteria { };
 			var s = new SearchDescriptor<ElasticSearchProject>()
 			 .From(0)
 			 .Take(10)
