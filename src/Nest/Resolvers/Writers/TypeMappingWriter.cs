@@ -297,6 +297,8 @@ namespace Nest.Resolvers.Writers
 					return "boolean";
 				case FieldType.nested:
 					return "nested";
+                case FieldType.completion:
+                    return "completion";
 				case FieldType.@object:
 					return "object";
 				default:
