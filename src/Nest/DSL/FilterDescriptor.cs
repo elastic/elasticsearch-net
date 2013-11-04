@@ -118,9 +118,6 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> NotFilter { get; set; }
 
-		[JsonProperty(PropertyName = "bool")]
-		internal BoolFilterDescriptor<T> BoolFilter { get; set; }
-
 		[JsonProperty(PropertyName = "script")]
 		internal ScriptFilterDescriptor ScriptFilter { get; set; }
 
@@ -131,55 +128,31 @@ namespace Nest
 
 		public FilterDescriptor<T> Strict(bool strict = true)
 		{
-			var f = this.Clone();
-			f._Strict = strict;
-			return f;
+			return new FilterDescriptor<T> { IsStrict = strict };
+
 		}
 
 		internal BaseFilter CreateConditionlessFilterDescriptor(string type, object filter)
 		{
-			if (this._Strict)
+			if (this.IsStrict)
 				throw new DslException("Filter resulted in a conditionless '{1}' filter (json by approx):\n{0}"
 					.F(
-						JsonConvert.SerializeObject(filter, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
+						JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
 						, type ?? filter.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
 					)
 				);
-			return new FilterDescriptor<T> { IsConditionless = !this._Strict };
+			return new FilterDescriptor<T> { IsConditionless = !this.IsStrict };
 		}
 
-		internal FilterDescriptor<T> Clone()
+		internal FilterDescriptor<T> New(Action<FilterDescriptor<T>> fillProperty)
 		{
-			return new FilterDescriptor<T>
-			{
-				_Name = _Name,
-				_Cache = _Cache,
-				ExistsFilter = ExistsFilter,
-				MissingFilter = MissingFilter,
-				IdsFilter = IdsFilter,
-				GeoBoundingBoxFilter = GeoBoundingBoxFilter,
-				GeoDistanceFilter = GeoDistanceFilter,
-				GeoDistanceRangeFilter = GeoDistanceRangeFilter,
-				GeoPolygonFilter = GeoPolygonFilter,
-				LimitFilter = LimitFilter,
-				TypeFilter = TypeFilter,
-				MatchAllFilter = MatchAllFilter,
-				HasChildFilter = HasChildFilter,
-				HasParentFilter = HasParentFilter,
-				NumericRangeFilter = NumericRangeFilter,
-				RangeFilter = RangeFilter,
-				PrefixFilter = PrefixFilter,
-				TermFilter = TermFilter,
-				TermsFilter = TermsFilter,
-				QueryFilter = QueryFilter,
-				AndFilter = AndFilter,
-				OrFilter = OrFilter,
-				NotFilter = NotFilter,
-				BoolFilter = BoolFilter,
-				ScriptFilter = ScriptFilter,
-				NestedFilter = NestedFilter,
-			};
-	}
+			var f = new FilterDescriptor<T>();
+			f.IsStrict = this.IsStrict;
+
+			if (fillProperty != null)
+				fillProperty(f);
+			return f;
+		}
 
 		private void SetCacheAndName(FilterBase filter)
 		{
@@ -205,7 +178,7 @@ namespace Nest
 			if (!string.IsNullOrWhiteSpace(this._Name))
 				dictionary.Add("_name", this._Name);
 
-			var bucket = new FilterDescriptor<T>();
+			var bucket = this.New(null);
 			setter(dictionary, bucket);
 
 			var conditionlessReturn = CreateConditionlessFilterDescriptor(type, dictionary);
@@ -269,7 +242,7 @@ namespace Nest
 			this.SetCacheAndName(filter);
 			if (filter.IsConditionless)
 				return CreateConditionlessFilterDescriptor("exists", filter);
-			return new FilterDescriptor<T> { ExistsFilter = filter };
+			return this.New(f => f.ExistsFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
@@ -289,7 +262,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("ids", filter);
 
 			this.SetCacheAndName(filter);
-			return new FilterDescriptor<T> { MissingFilter = filter };
+			return  this.New(f => f.MissingFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -302,7 +275,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("ids", filter);
 
 			this.SetCacheAndName(filter);
-			return new FilterDescriptor<T> { IdsFilter = filter };
+			return this.New(f => f.IdsFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -318,7 +291,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("ids", filter);
 
 			this.SetCacheAndName(filter);
-			return new FilterDescriptor<T> { IdsFilter = filter };
+			return this.New(f => f.IdsFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -334,7 +307,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("ids", filter);
 			
 			this.SetCacheAndName(filter);
-			return new FilterDescriptor<T> { IdsFilter = filter };
+			return  this.New(f => f.IdsFilter = filter);
 		}
 
 		/// <summary>
@@ -432,10 +405,10 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("geo_distance", filter);
 
 			filterDescriptor(filter);
-			if (this._Strict && filter._FromDistance == null)
+			if (this.IsStrict && filter._FromDistance == null)
 				throw new DslException("Missing from distance, Distance should be set when using the geo distance range DSL in strict mode");
 
-			if (this._Strict && filter._ToDistance == null)
+			if (this.IsStrict && filter._ToDistance == null)
 				throw new DslException("Missing to distance, Distance should be set when using the geo distance range DSL in strict mode");
 
 			if (filter.IsConditionless)
@@ -512,7 +485,7 @@ namespace Nest
 			if (filter.IsConditionless)
 				return CreateConditionlessFilterDescriptor("has_child", filter);
 
-			return new FilterDescriptor<T>() { HasChildFilter = filter };
+			return  this.New(f => f.HasChildFilter = filter);
 		}
 
 		/// <summary>
@@ -531,7 +504,7 @@ namespace Nest
 			if (filter.IsConditionless)
 				return CreateConditionlessFilterDescriptor("has_parent", filter);
 
-			return new FilterDescriptor<T>() { HasParentFilter = filter };
+			return  this.New(f => f.HasParentFilter = filter);
 		}
 
 		/// <summary>
@@ -544,7 +517,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("limit", filter);
 
 			this.SetCacheAndName(filter);
-			return new FilterDescriptor<T>() { LimitFilter = filter };
+			return  this.New(f => f.LimitFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents matching the provided document / mapping type. 
@@ -558,8 +531,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("filter", filter);
 
 			this.SetCacheAndName(filter);
-			this.TypeFilter = filter;
-			return new FilterDescriptor<T>() { TypeFilter = filter };
+			return  this.New(f => f.TypeFilter = filter);
 		}
 
 		/// <summary>
@@ -574,8 +546,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("filter", filter);
 
 			this.SetCacheAndName(filter);
-			this.TypeFilter = filter;
-			return new FilterDescriptor<T>() { TypeFilter = filter };
+			return this.New(f=> f.TypeFilter = filter);
 		}
 
 		/// <summary>
@@ -585,8 +556,7 @@ namespace Nest
 		{
 			var filter = new MatchAllFilter { };
 			this.SetCacheAndName(filter);
-			this.MatchAllFilter = filter;
-			return new FilterDescriptor<T>() { MatchAllFilter = filter };
+			return this.New(f=> f.MatchAllFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents with fields that have values within a certain numeric range. 
@@ -644,8 +614,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("script", descriptor);
 
 			this.SetCacheAndName(descriptor);
-			this.ScriptFilter = descriptor;
-			return new FilterDescriptor<T>() { ScriptFilter = descriptor };
+			return this.New(f=>f.ScriptFilter = descriptor);
 		}
 		/// <summary>
 		/// Filters documents that have fields containing terms with a specified prefix 
@@ -823,8 +792,8 @@ namespace Nest
 			this.SetCacheAndName(filter);
 			if (filter.IsConditionless)
 				return CreateConditionlessFilterDescriptor("bool", filter);
-			this.BoolFilter = filter;
-			return new FilterDescriptor<T> { BoolFilter = filter };
+
+			return this.New(f => f.BoolFilterDescriptor = filter);
 
 		}
 		/// <summary>
@@ -865,8 +834,7 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("nested", filter);
 
 			this.SetCacheAndName(filter);
-			this.NestedFilter = filter;
-			return new FilterDescriptor<T> { NestedFilter = filter };
+			return this.New(f=>f.NestedFilter = filter);
 		}
 
 	}

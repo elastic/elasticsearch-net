@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
-namespace Nest.Tests.Unit.Search.Filter.BoolQueryMerges
+namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 {
 	[TestFixture]
 	public class BoolQueryMergesTests : BaseJsonTests

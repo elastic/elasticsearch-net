@@ -1,0 +1,29 @@
+  {
+  "filter": {
+    "bool": {
+      "should": [
+        {
+          "bool": {
+            "should": [
+              {
+                "term": {
+                  "name": "foo2"
+                }
+              },
+              {
+                "term": {
+                  "name": "bar2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "term": {
+            "name": "blah2"
+          }
+        }
+      ]
+    }
+  }
+}

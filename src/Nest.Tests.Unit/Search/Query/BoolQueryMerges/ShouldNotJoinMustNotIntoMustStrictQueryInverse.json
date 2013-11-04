@@ -1,0 +1,41 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must_not": [
+              {
+                "term": {
+                  "name": {
+                    "value": "blah2"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "name": {
+                    "value": "foo2"
+                  }
+                }
+              },
+              {
+                "term": {
+                  "name": {
+                    "value": "bar2"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

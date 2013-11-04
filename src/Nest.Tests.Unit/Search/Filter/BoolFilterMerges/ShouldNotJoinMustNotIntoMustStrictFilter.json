@@ -1,0 +1,31 @@
+  {
+  "filter": {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "name": "foo2"
+                }
+              },
+              {
+                "term": {
+                  "name": "bar2"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "term": {
+            "name": "blah2"
+          }
+        }
+      ]
+    }
+  }
+}

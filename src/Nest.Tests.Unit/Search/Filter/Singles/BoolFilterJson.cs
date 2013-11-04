@@ -117,7 +117,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(Nest.Filter.MatchAll() & Filter<ElasticSearchProject>.Missing(p => p.LOC))
+				.Filter(Nest.Filter.MatchAll() && Filter<ElasticSearchProject>.Missing(p => p.LOC))
 			;
 
 			var json = TestElasticClient.Serialize(s);

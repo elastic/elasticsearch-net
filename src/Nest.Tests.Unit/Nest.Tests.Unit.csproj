@@ -107,7 +107,8 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
-    <Compile Include="Search\Filter\BoolQueryMerges\BoolQueryMergesTests.cs" />
+    <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
+    <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
@@ -360,31 +361,52 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQuery.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQuery.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldJoinMustNotIntoMustQuery.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinMustNotIntoMustQuery.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldJoinIntoMustQuery.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinIntoMustQuery.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoStrictMustQuery.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoStrictMustQuery.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatchPercentage.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatchPercentage.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatch.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatch.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldJoinIntoNonStrictShouldQuery.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinIntoNonStrictShouldQuery.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Filter\BoolQueryMerges\ShouldNotJoinIntoStrictShouldQuery.json">
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoStrictShouldQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoNonStrictShouldFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinMustNotIntoMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictShouldFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilterInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />

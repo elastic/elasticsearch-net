@@ -45,9 +45,15 @@ namespace Nest
 			//if both sides of the operation are bool queries
 			if (lbq.BoolQueryDescriptor != null && rbq.BoolQueryDescriptor != null)
 			{
+				if (lbq._Strict || rbq._Strict)
+				{
+					bq._MustQueries = new[] { lbq, rbq };
+				return q;
+				}
+
 				//if both sides only define must_not's join them if they are not marked with strict()
-				if (lbq.BoolQueryDescriptor._HasOnlyMustNot() && !lbq._Strict
-					&& rbq.BoolQueryDescriptor._HasOnlyMustNot() && !lbq._Strict
+				if (lbq.BoolQueryDescriptor._HasOnlyMustNot()
+					&& rbq.BoolQueryDescriptor._HasOnlyMustNot()
 				)
 				{
 					bq._MustQueries = null;
@@ -56,8 +62,8 @@ namespace Nest
 				}
 
 				//if both sides indicate its safe to merge must_not's with musts and neither is strict
-				if (lbq.BoolQueryDescriptor.CanJoinMustNot() && !lbq._Strict
-					&& rbq.BoolQueryDescriptor.CanJoinMustNot() && !rbq._Strict
+				if (lbq.BoolQueryDescriptor.CanJoinMustNot()
+					&& rbq.BoolQueryDescriptor.CanJoinMustNot()
 					)
 					bq._MustNotQueries = lbq.MergeMustNotQueries(rbq);
 
@@ -74,8 +80,8 @@ namespace Nest
 					bq._MustNotQueries = rbq.BoolQueryDescriptor._MustNotQueries;
 				}
 				//if both sides can join must queries and neither is strict: merge
-				else if (lbq.BoolQueryDescriptor.CanJoinMust() && !lbq._Strict
-						 && rbq.BoolQueryDescriptor.CanJoinMust() && !rbq._Strict
+				else if (lbq.BoolQueryDescriptor.CanJoinMust()
+						 && rbq.BoolQueryDescriptor.CanJoinMust()
 					)
 					bq._MustQueries = lbq.MergeMustQueries(rbq);
 				//otherwise create a new nested scope for both

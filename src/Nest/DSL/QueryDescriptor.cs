@@ -106,7 +106,8 @@ namespace Nest
 				throw new DslException("Query resulted in a conditionless {0} query (json by approx):\n{1}"
 					.F(
 						query.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
-						, JsonConvert.SerializeObject(this, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
+						, JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
+
 					)
 				);
 			return this.New(q => q.IsConditionless = !this._Strict);
@@ -120,7 +121,6 @@ namespace Nest
 			if (fillProperty != null)
 				fillProperty(q);
 			return q;
-
 		}
 
 		/// <summary>

@@ -50,6 +50,11 @@ namespace Nest
 		{
 			return list != null && list.Any();
 		}
+
+		internal static IEnumerable<T> NullIfEmpty<T>(this IEnumerable<T> list)
+		{
+			return list.HasAny() ? list : null;
+		}
 		internal static void ThrowIfNull<T>(this T value, string name)
 		{
 			if (value == null)
