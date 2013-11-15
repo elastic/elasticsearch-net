@@ -20,8 +20,8 @@
     <tags>elasticsearch elastic search lucene nest</tags>
   </metadata>
   <files>
-    <file src="lib\**\Nest.Connection.Thrift.Signed.dll" target="lib"/> 
-    <file src="lib\**\Nest.Connection.Thrift.Signed.pdb" target="lib"/> 
-    <file src="lib\**\Nest.Connection.Thrift.Signed.XML" target="lib"/> 
+    <file src="lib\**\Nest.Connection.Thrift.dll" target="lib"/> 
+    <file src="lib\**\Nest.Connection.Thrift.pdb" target="lib"/> 
+    <file src="lib\**\Nest.Connection.Thrift.XML" target="lib"/> 
   </files>
 </package>
