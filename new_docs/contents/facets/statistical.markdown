@@ -19,5 +19,5 @@ Statistical facet allows to compute statistical data on a numeric fields. The st
 		)
 	);
 
-See [original docs](http://www.elasticsearch.org/guide/reference/api/search/facets/statistical-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-statistical-facet.html) for more information
 

@@ -21,5 +21,8 @@ namespace Nest
 
 		[JsonProperty("side")]
 		public string Side { get; set; }
+
+        [JsonProperty("token_chars")]
+        public IList<string> TokenChars { get; set; }
     }
 }

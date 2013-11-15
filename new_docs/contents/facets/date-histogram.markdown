@@ -21,4 +21,4 @@ A specific histogram facet that can work with date field types enhancing it over
       )
     );
 
-See [original docs](http://www.elasticsearch.org/guide/reference/api/search/facets/date-histogram-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-date-histogram-facet.html) for more information

@@ -18,5 +18,8 @@ namespace Nest
 
 		[JsonProperty("max_gram")]
 		public int? MaxGram { get; set; }
+
+        [JsonProperty("token_chars")]
+        public IList<string> TokenChars { get; set; }
     }
 }

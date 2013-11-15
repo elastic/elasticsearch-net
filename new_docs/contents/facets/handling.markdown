@@ -7,7 +7,7 @@ menuitem: handling
 
 
 # Faceting
-For a good overview of what facets are see the [original docs](http://www.elasticsearch.org/guide/reference/api/search/facets/) on the subject.
+For a good overview of what facets are see the [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-) on the subject.
 
 ## Specify facets during search.
 In its simplest form you can add a facet to your query like this:

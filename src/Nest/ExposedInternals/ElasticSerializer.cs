@@ -92,13 +92,18 @@ namespace Nest
 				? extraConverters.ToList()
 				: null;
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
-			return new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings()
 			{
 				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore,
 				Converters = converters,
 			};
+
+            if (_settings.ModifyJsonSerializerSettings != null)
+		        _settings.ModifyJsonSerializerSettings(settings);
+
+		    return settings;
 		}
 
 

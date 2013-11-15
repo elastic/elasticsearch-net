@@ -24,5 +24,8 @@ namespace Nest
 
         [JsonProperty("stopwords")]
         public IEnumerable<string> Stopwords { get; set; }
+
+		[JsonProperty("remove_trailing")]
+		public bool? RemoveTrailing { get; set; }
     }
 }
