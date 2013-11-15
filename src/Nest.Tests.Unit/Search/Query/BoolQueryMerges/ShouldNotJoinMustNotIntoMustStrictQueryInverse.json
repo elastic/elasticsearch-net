@@ -1,20 +1,7 @@
-{
+  {
   "query": {
     "bool": {
       "must": [
-        {
-          "bool": {
-            "must_not": [
-              {
-                "term": {
-                  "name": {
-                    "value": "blah2"
-                  }
-                }
-              }
-            ]
-          }
-        },
         {
           "bool": {
             "must": [
@@ -33,6 +20,15 @@
                 }
               }
             ]
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "term": {
+            "name": {
+              "value": "blah2"
+            }
           }
         }
       ]

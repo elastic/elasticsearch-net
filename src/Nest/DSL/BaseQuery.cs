@@ -11,183 +11,111 @@ namespace Nest
 {
 	public class BaseQuery
 	{
+		private static readonly IEnumerable<BaseQuery> Empty = Enumerable.Empty<BaseQuery>();
+
 		[JsonProperty(PropertyName = "bool")]
 		internal BoolBaseQueryDescriptor BoolQueryDescriptor { get; set; }
 
 		internal bool IsConditionless { get; set; }
 
-		internal bool _Strict { get; set; }
+		internal bool IsStrict { get; set; }
 
-		public static BaseQuery operator &(BaseQuery lbq, BaseQuery rbq)
+		/// <summary>
+		/// AND's two BaseQueries
+		/// </summary>
+		/// <returns>A new basequery that represents the AND of the two</returns>
+		public static BaseQuery operator &(BaseQuery leftQuery, BaseQuery rightQuery)
 		{
-			if (lbq == null)
-				return rbq;
-			if (rbq == null)
-				return lbq;
+			var defaultQuery = new BaseQuery() { IsConditionless = true };
+			leftQuery = leftQuery ?? defaultQuery;
+			rightQuery = rightQuery ?? defaultQuery;
+			var combined = new[] { leftQuery, rightQuery };
 
-			if (lbq.IsConditionless && rbq.IsConditionless)
-				return new BaseQuery() { IsConditionless = true };
-			else if (lbq.IsConditionless)
-				return rbq;
-			else if (rbq.IsConditionless)
-				return lbq;
+			//if any of the queries is conditionless return the first one that is not
+			//or return the defaultQuery
+			if (combined.Any(bf => bf.IsConditionless))
+				return combined.FirstOrDefault(bf => !bf.IsConditionless) ?? defaultQuery;
 
-			var q = new BaseQuery();
-			var bq = new BoolBaseQueryDescriptor();
-			q.BoolQueryDescriptor = bq;
-			
-			//if neither side is already a bool query lets join them
-			if (lbq.BoolQueryDescriptor == null && rbq.BoolQueryDescriptor == null)
-			{
-				bq._MustQueries = new[] { lbq, rbq };
-				return q;
-			}
-			//if both sides of the operation are bool queries
-			if (lbq.BoolQueryDescriptor != null && rbq.BoolQueryDescriptor != null)
-			{
-				if (lbq._Strict || rbq._Strict)
-				{
-					bq._MustQueries = new[] { lbq, rbq };
-				return q;
-				}
+			//return simple combination of the two if merging is not possible/necessary
+			var noMergeQuery = CombineIfNoMergeIsNecessary(leftQuery, rightQuery, combined);
+			if (noMergeQuery != null)
+				return noMergeQuery;
 
-				//if both sides only define must_not's join them if they are not marked with strict()
-				if (lbq.BoolQueryDescriptor._HasOnlyMustNot()
-					&& rbq.BoolQueryDescriptor._HasOnlyMustNot()
-				)
-				{
-					bq._MustQueries = null;
-					bq._MustNotQueries = lbq.MergeMustNotQueries(rbq);
-					return q;
-				}
+			//if the left is a strict bool try to merge right on left first 
+			var joinStrictLeft = StrictSingleSideAndMerge(leftQuery, rightQuery);
+			if (joinStrictLeft != null)
+				return joinStrictLeft;
 
-				//if both sides indicate its safe to merge must_not's with musts and neither is strict
-				if (lbq.BoolQueryDescriptor.CanJoinMustNot()
-					&& rbq.BoolQueryDescriptor.CanJoinMustNot()
-					)
-					bq._MustNotQueries = lbq.MergeMustNotQueries(rbq);
+			// if the right side is a strict bool try to merge left on right
+			var joinStrictRight = StrictSingleSideAndMerge(rightQuery, leftQuery);
+			if (joinStrictRight != null)
+				return joinStrictRight;
 
-				//if left side has only must queries take only the musts from the right
-				if (lbq.BoolQueryDescriptor._HasOnlyMustNot())
-				{
-					bq._MustNotQueries = lbq.BoolQueryDescriptor._MustNotQueries;
-					bq._MustQueries = rbq.BoolQueryDescriptor._MustQueries;
-				}
-				//and visa versa
-				else if (rbq.BoolQueryDescriptor._HasOnlyMustNot())
-				{
-					bq._MustQueries = lbq.BoolQueryDescriptor._MustQueries;
-					bq._MustNotQueries = rbq.BoolQueryDescriptor._MustNotQueries;
-				}
-				//if both sides can join must queries and neither is strict: merge
-				else if (lbq.BoolQueryDescriptor.CanJoinMust()
-						 && rbq.BoolQueryDescriptor.CanJoinMust()
-					)
-					bq._MustQueries = lbq.MergeMustQueries(rbq);
-				//otherwise create a new nested scope for both
-				else
-					bq._MustQueries = new[] {lbq, rbq};
+			// if the left side is a normal bool try to merge right on left
+			var joinLeft = SingleSideAndMerge(leftQuery, rightQuery);
+			if (joinLeft != null)
+				return joinLeft;
 
-
-			}
-			//if the left side is already a bool query 
-			else if (lbq.BoolQueryDescriptor != null)
-			{
-				//if the left  side has only must not queries assume its safe to join the right side
-				if (lbq.BoolQueryDescriptor._HasOnlyMustNot())
-				{
-					bq._MustNotQueries = lbq.BoolQueryDescriptor._MustNotQueries;
-					bq._MustQueries = new[] { rbq };
-					return q;
-				}
-
-				//if left side indicates we can join must clause and lbq is not marked strict 
-				//merge right side onto left side must clauses
-				else if (lbq.BoolQueryDescriptor.CanJoinMust() && !lbq._Strict)
-					bq._MustQueries = lbq.MergeMustQueries(rbq);
-				else
-					bq._MustQueries = new[] { lbq, rbq };
-
-
-				if (lbq.BoolQueryDescriptor.CanJoinMustNot())
-					bq._MustNotQueries = lbq.MergeMustNotQueries(rbq);
-			}
-			//if the right side is already a bool query
-			else if (rbq.BoolQueryDescriptor != null)
-			{
-				if (rbq.BoolQueryDescriptor._HasOnlyMustNot())
-				{
-					bq._MustNotQueries = rbq.BoolQueryDescriptor._MustNotQueries;
-					bq._MustQueries = new[] {lbq};
-					return q;
-				}
-
-				if (rbq.BoolQueryDescriptor.CanJoinMust())
-					bq._MustQueries = rbq.MergeMustQueries(lbq);
-				else
-					bq._MustQueries = new[] {rbq, lbq};
-
-				if (rbq.BoolQueryDescriptor.CanJoinMustNot())
-					bq._MustNotQueries = rbq.MergeMustNotQueries(lbq);
-			}
-			return q;
-
+			// if the right side is a normal bool try to merge lefft on right
+			var joinRight = SingleSideAndMerge(rightQuery, leftQuery);
+			return joinRight ?? defaultQuery;
 		}
 
-		public static BaseQuery operator |(BaseQuery lbq, BaseQuery rbq)
+		public static BaseQuery operator |(BaseQuery leftQuery, BaseQuery rightQuery)
 		{
-			if (lbq == null)
-				return rbq;
-			if (rbq == null)
-				return lbq;
+			var defaultQuery = new BaseQuery() { IsConditionless = true };
+			leftQuery = leftQuery ?? defaultQuery;
+			rightQuery = rightQuery ?? defaultQuery;
+			var combined = new[] { leftQuery, rightQuery };
 
-			if (lbq.IsConditionless && rbq.IsConditionless)
-				return new BaseQuery() { IsConditionless = true };
-			else if (lbq.IsConditionless)
-				return rbq;
-			else if (rbq.IsConditionless)
-				return lbq;
+			if (combined.Any(bf => bf.IsConditionless))
+				return combined.FirstOrDefault(bf => !bf.IsConditionless) ?? defaultQuery;
 
-			var q = new BaseQuery();
-			var bq = new BoolBaseQueryDescriptor();
-			bq._ShouldQueries = new[] { lbq, rbq };
-			q.BoolQueryDescriptor = bq;
+			var leftBoolQuery = leftQuery.BoolQueryDescriptor;
+			var rightBoolQuery = rightQuery.BoolQueryDescriptor;
 
-			// if neither side is already a bool query we can merge the should
-			if (lbq.BoolQueryDescriptor == null && rbq.BoolQueryDescriptor == null)
+
+			var f = new BaseQuery();
+			var fq = new BoolBaseQueryDescriptor();
+			fq._ShouldQueries = new[] { leftQuery, rightQuery };
+			f.BoolQueryDescriptor = fq;
+
+			var mergeLeft = !leftQuery.IsStrict && (leftBoolQuery == null || leftBoolQuery._MinimumNumberShouldMatches == null);
+			var mergeRight = !rightQuery.IsStrict && (rightBoolQuery == null || rightBoolQuery._MinimumNumberShouldMatches == null);
+
+			//if neither the left nor the right side represent a bool query join them
+			if (leftQuery.BoolQueryDescriptor == null && rightQuery.BoolQueryDescriptor == null)
 			{
-				bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
-				return q;
+				fq._ShouldQueries = leftQuery.MergeShouldQueries(rightQuery);
+				return f;
 			}
-			//if left side is a bool query and the right side is not
-			//merge the right side but only if the left bool is not strict
-			//or defines a minimum number should match.
-			else if (lbq.BoolQueryDescriptor != null && rbq.BoolQueryDescriptor == null 
-				&& !lbq._Strict && lbq.BoolQueryDescriptor._MinimumNumberShouldMatches == null)
+			//if the left or right sight already is a bool query join the non bool query side of the 
+			//of the operation onto the other.
+			if (leftQuery.BoolQueryDescriptor != null 
+				&& rightQuery.BoolQueryDescriptor == null
+				&& mergeLeft)
 			{
-				JoinShouldOnSide(lbq, rbq, bq);
+				JoinShouldOnSide(leftQuery, rightQuery, fq);
 			}
-			//if right side is a bool query and the left side is not
-			//merge the left side but only if the right bool is not strict
-			//or defines a minimum number should match.
-			else if (rbq.BoolQueryDescriptor != null && lbq.BoolQueryDescriptor == null
-				&& !rbq._Strict && rbq.BoolQueryDescriptor._MinimumNumberShouldMatches == null)
+			else if (rightQuery.BoolQueryDescriptor != null 
+				&& leftQuery.BoolQueryDescriptor == null
+				&& mergeRight)
 			{
-				JoinShouldOnSide(rbq, lbq, bq);
+				JoinShouldOnSide(rightQuery, leftQuery, fq);
 			}
+			//both sides already represent a bool query
 			else
 			{
-				//if both are bool queries carrying only should clauses
-				//and neither is marked with strict and neither has minimum_must_match set.
-				if (!lbq._Strict && !rbq._Strict && 
-					lbq.BoolQueryDescriptor.CanJoinShould() 
-					&& rbq.BoolQueryDescriptor.CanJoinShould())
-					bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
+				//both sides report that we may merge the shoulds
+				if (mergeLeft && mergeRight
+					&& leftBoolQuery.CanJoinShould()
+					&& rightBoolQuery.CanJoinShould())
+					fq._ShouldQueries = leftQuery.MergeShouldQueries(rightQuery);
 				else
-					bq._ShouldQueries = new[] { lbq, rbq };
+					//create a new nested bool with two separate should bool sections
+					fq._ShouldQueries = new[] { leftQuery, rightQuery };
 			}
-
-			return q;
+			return f;
 		}
 
 		public static BaseQuery operator !(BaseQuery lbq)
@@ -195,12 +123,12 @@ namespace Nest
 			if (lbq == null || lbq.IsConditionless)
 				return new BaseQuery { IsConditionless = true };
 
-			var q = new BaseQuery();
-			var bq = new BoolBaseQueryDescriptor();
-			bq._MustNotQueries = new[] { lbq };
+			var f = new BaseQuery();
+			var fq = new BoolBaseQueryDescriptor();
+			fq._MustNotQueries = new[] { lbq };
 
-			q.BoolQueryDescriptor = bq;
-			return q;
+			f.BoolQueryDescriptor = fq;
+			return f;
 		}
 
 		public static bool operator false(BaseQuery a)
@@ -216,6 +144,94 @@ namespace Nest
 		private static void JoinShouldOnSide(BaseQuery lbq, BaseQuery rbq, BoolBaseQueryDescriptor bq)
 		{
 			bq._ShouldQueries = lbq.MergeShouldQueries(rbq);
+		}
+
+		private static BaseQuery CombineIfNoMergeIsNecessary(
+			BaseQuery leftQuery,
+			BaseQuery rightQuery,
+			BaseQuery[] combined)
+		{
+			var leftBoolQuery = leftQuery.BoolQueryDescriptor;
+			var rightBoolQuery = rightQuery.BoolQueryDescriptor;
+			//if neither side is already a boolquery 
+			//  or if all boolqueries are strict.
+			//  or if one side is strict and the other is null
+
+			var mergeLeft = !leftQuery.IsStrict && (leftBoolQuery == null || leftBoolQuery._MinimumNumberShouldMatches == null);
+			var mergeRight = !rightQuery.IsStrict && (rightBoolQuery == null || rightBoolQuery._MinimumNumberShouldMatches == null);
+
+			//no merging is needed just return the combination
+			if (
+				(leftBoolQuery == null && rightBoolQuery == null)
+				|| (!mergeLeft && !mergeRight)
+				|| (leftQuery.IsStrict && rightBoolQuery == null)
+				|| (rightQuery.IsStrict && leftBoolQuery == null)
+				)
+			{
+				return CreateReturnQuery((returnQuery, returnBoolQuery) => returnBoolQuery._MustQueries = combined);
+			}
+			return null;
+		}
+
+		private static BaseQuery StrictSingleSideAndMerge(BaseQuery targetQuery, BaseQuery mergeQuery)
+		{
+			//if the target is not strict return
+			if (!targetQuery.IsStrict) return null;
+
+			var mergeBoolQuery = mergeQuery.BoolQueryDescriptor;
+
+			return CreateReturnQuery((returnQuery, returnBoolQuery) =>
+			{
+				if (mergeBoolQuery._MustNotQueries.HasAny())
+				{
+					returnBoolQuery._MustNotQueries = mergeBoolQuery._MustNotQueries;
+					mergeBoolQuery._MustNotQueries = null;
+				}
+
+				returnBoolQuery._MustQueries = new[] { targetQuery }.Concat(mergeBoolQuery._MustQueries ?? Empty);
+			});
+		}
+
+		private static BaseQuery SingleSideAndMerge(BaseQuery targetQuery, BaseQuery mergeQuery)
+		{
+			var targetBoolQuery = targetQuery.BoolQueryDescriptor;
+			var mergeBoolQuery = mergeQuery.BoolQueryDescriptor;
+
+			if (targetBoolQuery == null) return null;
+
+			var combined = new[] { targetQuery, mergeQuery };
+			return CreateReturnQuery((returnQuery, returnBoolQuery) =>
+			{
+				if (!targetBoolQuery.CanMergeMustAndMustNots() || !mergeBoolQuery.CanMergeMustAndMustNots())
+				{
+					returnBoolQuery._MustQueries = combined;
+					return;
+				}
+
+				returnBoolQuery._MustQueries = (targetBoolQuery._MustQueries ?? Empty)
+					.Concat(mergeBoolQuery != null
+						? (mergeBoolQuery._MustQueries ?? Empty)
+						: new[] { mergeQuery })
+					.NullIfEmpty();
+				returnBoolQuery._MustNotQueries = (targetBoolQuery._MustNotQueries ?? Empty)
+					.Concat(mergeBoolQuery != null
+						? (mergeBoolQuery._MustNotQueries ?? Empty)
+						: Empty
+					).NullIfEmpty();
+
+			});
+		}
+
+		public static BaseQuery CreateReturnQuery(Action<BaseQuery, BoolBaseQueryDescriptor> modify = null)
+		{
+			var returnQuery = new BaseQuery();
+			var returnBoolQuery = new BoolBaseQueryDescriptor() { };
+			returnQuery.BoolQueryDescriptor = returnBoolQuery;
+			if (modify != null)
+			{
+				modify(returnQuery, returnBoolQuery);
+			}
+			return returnQuery;
 		}
 	}
 }

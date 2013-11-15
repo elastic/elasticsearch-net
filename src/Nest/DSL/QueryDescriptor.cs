@@ -97,12 +97,12 @@ namespace Nest
 
 		public QueryDescriptor<T> Strict(bool strict = true)
 		{
-			return new QueryDescriptor<T> { _Strict = strict };
+			return new QueryDescriptor<T> { IsStrict = strict };
 		}
 
 		internal QueryDescriptor<T> CreateConditionlessQueryDescriptor(IQuery query)
 		{
-			if (this._Strict)
+			if (this.IsStrict)
 				throw new DslException("Query resulted in a conditionless {0} query (json by approx):\n{1}"
 					.F(
 						query.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
@@ -110,13 +110,13 @@ namespace Nest
 
 					)
 				);
-			return this.New(q => q.IsConditionless = !this._Strict);
+			return this.New(q => q.IsConditionless = !this.IsStrict);
 		}
 
 		internal QueryDescriptor<T> New(Action<QueryDescriptor<T>> fillProperty)
 		{
 			var q = new QueryDescriptor<T>();
-			q._Strict = this._Strict;
+			q.IsStrict = this.IsStrict;
 			
 			if (fillProperty != null)
 				fillProperty(q);

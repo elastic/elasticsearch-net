@@ -30,6 +30,8 @@ namespace Nest
 			rightFilter = rightFilter ?? defaultFilter;
 			var combined = new[] { leftFilter, rightFilter };
 
+			//if any of the queries is conditionless return the first one that is not
+			//or return the defaultQuery
 			if (combined.Any(bf => bf.IsConditionless))
 				return combined.FirstOrDefault(bf=>!bf.IsConditionless) ?? defaultFilter;
 
@@ -85,7 +87,7 @@ namespace Nest
 			}
 			//if the left or right sight already is a bool filter determine join the non bool query side of the 
 			//of the operation onto the other.
-			else if (leftFilter.BoolFilterDescriptor != null && rightFilter.BoolFilterDescriptor == null && !leftFilter.IsStrict)
+			if (leftFilter.BoolFilterDescriptor != null && rightFilter.BoolFilterDescriptor == null && !leftFilter.IsStrict)
 			{
 				JoinShouldOnSide(leftFilter, rightFilter, fq);
 			}
@@ -105,9 +107,6 @@ namespace Nest
 					//create a new nested bool with two separate should bool sections
 					fq._ShouldFilters = new[] { leftFilter, rightFilter };
 			}
-
-
-
 			return f;
 		}
 
@@ -163,21 +162,21 @@ namespace Nest
 
 		private static BaseFilter StrictSingleSideAndMerge(BaseFilter targetFilter, BaseFilter mergeFilter)
 		{
-			if (targetFilter.IsStrict)
-			{
-				var mergeBoolFilter = mergeFilter.BoolFilterDescriptor;
-				return CreateReturnFilter((returnFilter, returnBoolFilter) =>
-				{
-					if (mergeBoolFilter._MustNotFilters.HasAny())
-					{
-						returnBoolFilter._MustNotFilters = mergeBoolFilter._MustNotFilters;
-						mergeBoolFilter._MustNotFilters = null;
-					}
+			//if the target is not strict return
+			if (!targetFilter.IsStrict) return null;
 
-					returnBoolFilter._MustFilters = new[] { targetFilter }.Concat(mergeBoolFilter._MustFilters ?? Empty);
-				});
-			}
-			return null;
+			var mergeBoolFilter = mergeFilter.BoolFilterDescriptor;
+
+			return CreateReturnFilter((returnFilter, returnBoolFilter) =>
+			{
+				if (mergeBoolFilter._MustNotFilters.HasAny())
+				{
+					returnBoolFilter._MustNotFilters = mergeBoolFilter._MustNotFilters;
+					mergeBoolFilter._MustNotFilters = null;
+				}
+
+				returnBoolFilter._MustFilters = new[] { targetFilter }.Concat(mergeBoolFilter._MustFilters ?? Empty);
+			});
 		}
 
 		private static BaseFilter SingleSideAndMerge(BaseFilter targetFilter, BaseFilter mergeFilter)
@@ -185,32 +184,29 @@ namespace Nest
 			var targetBoolFilter = targetFilter.BoolFilterDescriptor;
 			var mergeBoolFilter = mergeFilter.BoolFilterDescriptor;
 
-			if (targetBoolFilter != null)
+			if (targetBoolFilter == null) return null;
+
+			var combined = new[] { targetFilter, mergeFilter };
+			return CreateReturnFilter((returnFilter, returnBoolFilter) =>
 			{
-				var combined = new[] { targetFilter, mergeFilter };
-				return CreateReturnFilter((returnFilter, returnBoolFilter) =>
+				if (!targetBoolFilter.CanMergeMustAndMustNots() || !mergeBoolFilter.CanMergeMustAndMustNots())
 				{
-					if (!targetBoolFilter.CanMergeMustAndMustNots() || !mergeBoolFilter.CanMergeMustAndMustNots())
-					{
-						returnBoolFilter._MustFilters = combined;
-						return;
-					}
+					returnBoolFilter._MustFilters = combined;
+					return;
+				}
 
-					returnBoolFilter._MustFilters = (targetBoolFilter._MustFilters ?? Empty)
-						.Concat(mergeBoolFilter != null
-							? (mergeBoolFilter._MustFilters ?? Empty)
-							: new[] {mergeFilter})
-						.NullIfEmpty();
-					returnBoolFilter._MustNotFilters = (targetBoolFilter._MustNotFilters ?? Empty)
-						.Concat(mergeBoolFilter != null
-							? (mergeBoolFilter._MustNotFilters ?? Empty)
-							: Empty
-						).NullIfEmpty();
+				returnBoolFilter._MustFilters = (targetBoolFilter._MustFilters ?? Empty)
+					.Concat(mergeBoolFilter != null
+						? (mergeBoolFilter._MustFilters ?? Empty)
+						: new[] {mergeFilter})
+					.NullIfEmpty();
+				returnBoolFilter._MustNotFilters = (targetBoolFilter._MustNotFilters ?? Empty)
+					.Concat(mergeBoolFilter != null
+						? (mergeBoolFilter._MustNotFilters ?? Empty)
+						: Empty
+					).NullIfEmpty();
 					
-				});
-			}
-
-			return null;
+			});
 		}
 
 		public static BaseFilter CreateReturnFilter(Action<BaseFilter, BoolBaseFilterDescriptor> modify = null)

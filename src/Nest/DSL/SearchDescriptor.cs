@@ -879,7 +879,7 @@ namespace Nest
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>() {_Strict = this._Strict};
+			var q = new QueryDescriptor<T>() {IsStrict = this._Strict};
 
 			var bq = query(q);
 			return this.Query(bq);

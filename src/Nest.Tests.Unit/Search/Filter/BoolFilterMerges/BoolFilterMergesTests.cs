@@ -87,6 +87,21 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 			  );
 			this.JsonEquals(s, MethodBase.GetCurrentMethod());
 		}
+		[Test]
+		public void ShouldNotJoinTermIntoMustStrictFilter()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+			  .Filter(q =>
+				  q.Strict().Bool(
+						bf => bf.Must(
+							qq => qq.Term(f => f.Name, "foo2"),
+							qq => qq.Term(f => f.Name, "bar2")
+						)
+					)
+					&& q.Term(f => f.Name, "blah2")
+			  );
+			this.JsonEquals(s, MethodBase.GetCurrentMethod());
+		}
 
 		[Test]
 		public void ShouldNotJoinMustNotIntoMustStrictFilterInverse()

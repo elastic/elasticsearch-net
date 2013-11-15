@@ -13,6 +13,7 @@
 	<PropertyGroup>
 		<Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
 		<BuildDir>$(MSBuildProjectDirectory)\tmp</BuildDir>
+		<BuildDirSigned>$(MSBuildProjectDirectory)\tmp-signed</BuildDirSigned>
 		<SolutionFile>$(SrcDir)\Nest.sln</SolutionFile>
 	</PropertyGroup>
 
@@ -56,30 +57,25 @@
 		<!-- First copy the nuspec template files to the build dir -->
 		<Copy SourceFiles="..\build\NEST.nuspec" DestinationFolder="$(BuildDir)" />
 		<Copy SourceFiles="..\build\NEST.Signed.nuspec" DestinationFolder="$(BuildDir)" />
-		<Copy SourceFiles="..\build\Nest.Connection.Thrift.nuspec" DestinationFolder="$(BuildDir)" />
-		<Copy SourceFiles="..\build\Nest.Connection.Thrift.Signed.nuspec" DestinationFolder="$(BuildDir)" />
+		<Copy SourceFiles="..\build\Nest.Connection.Thrift.nuspec" DestinationFolder="$(BuildDirSigned)" />
+		<Copy SourceFiles="..\build\Nest.Connection.Thrift.Signed.nuspec" DestinationFolder="$(BuildDirSigned)" />
 		<!-- Copy the source files to the package dir -->
 		<Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
 		<Copy SourceFiles="@(ThriftBinaries)" DestinationFolder="$(BuildDir)\lib\NET4\" />
+		<!-- Copy the source files to the package dir for the signed nugets -->
+                <Copy SourceFiles="@(MainBinaries)" DestinationFolder="$(BuildDirSigned)\lib\NET4\" />
+		<Copy SourceFiles="@(ThriftBinaries)" DestinationFolder="$(BuildDirSigned)\lib\NET4\" />
 
 		<!-- Get the version number of the main FV assembly to insert into the nuspec files -->
 		<GetAssemblyIdentity AssemblyFiles="$(BuildDir)\lib\NET4\Nest.dll">
 			<Output TaskParameter="Assemblies" ItemName="AsmInfo" />
 		</GetAssemblyIdentity>
 
-		<!-- ilmerge.exe Nest.dll /keyfile:PublicKey.snk /out:out\Nest.dll -->
-
 		<!-- Create signed copies -->
-
-		<!--<Exec WorkingDirectory="$(BuildDir)"
-			  Command="$(MSBuildProjectDirectory)\tools\nuget.exe pack $(BuildDir)\NEST.nuspec" />-->
-
-		<Exec WorkingDirectory="$(BuildDir)"
-			  Command='$(MSBuildProjectDirectory)\tools\ilmerge.exe $(BuildDir)\lib\NET4\Nest.dll /keyfile:$(MSBuildProjectDirectory)\keys\public.snk /out:$(BuildDir)\lib\NET4\Nest.Signed.dll /targetplatform:v4,"%ProgramFiles(x86)%\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /delaysign' />
-
-
-		<Exec WorkingDirectory="$(BuildDir)"
-			  Command='$(MSBuildProjectDirectory)\tools\ilmerge.exe $(BuildDir)\lib\NET4\Nest.Connection.Thrift.dll /keyfile:$(MSBuildProjectDirectory)\keys\public.snk /out:$(BuildDir)\lib\NET4\Nest.Connection.Thrift.Signed.dll /targetplatform:v4,"%ProgramFiles(x86)%\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /delaysign' />
+		<Exec WorkingDirectory="$(BuildDirSigned)"
+			  Command='$(MSBuildProjectDirectory)\tools\ilmerge.exe $(<BuildDirSigned>)\lib\NET4\Nest.dll /keyfile:$(MSBuildProjectDirectory)\keys\keypair.snk /out:$(<BuildDirSigned>)\lib\NET4\Nest.dll /targetplatform:v4,"%ProgramFiles(x86)%\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0"' />
+		<Exec WorkingDirectory="$(BuildDirSigned)"
+			  Command='$(MSBuildProjectDirectory)\tools\ilmerge.exe $(<BuildDirSigned>)\lib\NET4\Nest.Connection.Thrift.dll /keyfile:$(MSBuildProjectDirectory)\keys\keypair.snk /out:$(<BuildDirSigned>)\lib\NET4\Nest.Connection.Thrift.dll /targetplatform:v4,"%ProgramFiles(x86)%\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0"' />
 
 		<!-- insert the version number into the nuspec files -->
 		<XmlUpdate
@@ -99,8 +95,8 @@
 		  XPath="/n:package/n:metadata/n:version"
 		  Value="%(AsmInfo.Version)" />
 
-		<Exec WorkingDirectory="$(BuildDir)"
-			  Command="$(MSBuildProjectDirectory)\tools\nuget.exe pack $(BuildDir)\NEST.Signed.nuspec" />
+		<Exec WorkingDirectory="$(BuildDirSigned)"
+			  Command="$(MSBuildProjectDirectory)\tools\nuget.exe pack $(BuildDirSigned)\NEST.Signed.nuspec" />
 
 		<XmlUpdate
 	      Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
@@ -119,16 +115,19 @@
 	      XPath="/n:package/n:metadata/n:version"
 	      Value="%(AsmInfo.Version)" />
 
-		<Exec WorkingDirectory="$(BuildDir)"
-          Command="$(MSBuildProjectDirectory)\tools\nuget.exe pack $(BuildDir)\Nest.Connection.Thrift.Signed.nuspec" />
+		<Exec WorkingDirectory="$(BuildDirSigned)"
+          Command="$(MSBuildProjectDirectory)\tools\nuget.exe pack $(BuildDirSigned)\Nest.Connection.Thrift.Signed.nuspec" />
 
 
 
 		<ItemGroup>
 			<Packages Include="$(BuildDir)\*.nupkg" />
+                        <PackagesSigned Include="$(BuildDirSigned)\*.nupkg" />
 		</ItemGroup>
 		<Copy SourceFiles="@(Packages)" DestinationFolder="$(BuildDir)\..\_out" />
+		<Copy SourceFiles="@(PackagesSigned)" DestinationFolder="$(BuildDirSigned)\..\_out" />
 		
 		<RemoveDir Directories="$(BuildDir)" />
+		<RemoveDir Directories="$(BuildDirSigned)" />
 	</Target>
 </Project>

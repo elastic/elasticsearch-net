@@ -361,6 +361,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinTermIntoMustStrictFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

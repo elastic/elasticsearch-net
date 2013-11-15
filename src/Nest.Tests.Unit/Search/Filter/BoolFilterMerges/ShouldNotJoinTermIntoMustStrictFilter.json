@@ -1,5 +1,5 @@
   {
-  "query": {
+  "filter": {
     "bool": {
       "must": [
         {
@@ -7,28 +7,20 @@
             "must": [
               {
                 "term": {
-                  "name": {
-                    "value": "foo2"
-                  }
+                  "name": "foo2"
                 }
               },
               {
                 "term": {
-                  "name": {
-                    "value": "bar2"
-                  }
+                  "name": "bar2"
                 }
               }
             ]
           }
-        }
-      ],
-      "must_not": [
-        {
+        },
+		{
           "term": {
-            "name": {
-              "value": "blah2"
-            }
+            "name": "blah2"
           }
         }
       ]
