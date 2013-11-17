@@ -35,6 +35,9 @@ namespace Nest
     [JsonProperty("order")]
     internal string _Order { get; set; }
 
+	[JsonProperty("tags_schema")]
+	internal string _TagsSchema { get; set; }
+
     [JsonProperty("require_field_match")]
     internal bool? _RequireFieldMatch { get; set; }
 
@@ -55,6 +58,12 @@ namespace Nest
     {
       return this.OnField("_all");
     }
+	public HighlightFieldDescriptor<T> TagsSchema(string schema = "styled")
+	{
+		this._TagsSchema = schema;
+		return this;
+	}
+
     public HighlightFieldDescriptor<T> PreTags(string preTags)
     {
       this._PreTags = new [] { preTags };

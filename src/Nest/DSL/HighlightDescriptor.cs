@@ -17,6 +17,9 @@ namespace Nest
     [JsonProperty("fragment_size")]
     internal int? _FragmentSize { get; set; }
 
+	[JsonProperty("tags_schema")]
+	internal string _TagsSchema { get; set; }
+
     [JsonProperty("number_of_fragments")]
     internal int? _NumberOfFragments { get; set; }
 
@@ -65,6 +68,12 @@ namespace Nest
       }
       return this;
     }
+
+	public HighlightDescriptor<T> TagsSchema(string schema = "styled")
+	{
+		this._TagsSchema = schema;
+		return this;
+	}
     public HighlightDescriptor<T> PreTags(string preTags)
     {
       this._PreTags = new[] { preTags };
