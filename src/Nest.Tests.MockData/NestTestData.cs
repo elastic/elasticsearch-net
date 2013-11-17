@@ -14,6 +14,7 @@ namespace Nest.Tests.MockData
 	public static class NestTestData
 	{
 		private static IEnumerable<Person> _People { get; set; }
+		private static IEnumerable<BoolTerm> _BoolTerms { get; set; }
 		private static IEnumerable<ElasticSearchProject> _Data { get; set; }
 		public static IGenerationSession _Session { get; set; }
 		public static IGenerationSession Session
@@ -34,6 +35,9 @@ namespace Nest.Tests.MockData
 					x.Include<GeoLocation>()
 						.Setup(c => c.lat).Use<FloatSource>()
 						.Setup(c => c.lon).Use<FloatSource>();
+					x.Include<BoolTerm>()
+						.Setup(c => c.Name1).Use<IncrementalNameSource>("a")
+						.Setup(c => c.Name2).Use<IncrementalNameSource>("b");
 					x.Include<Person>()
 						.Setup(c => c.Id).Use<IntegerIdSource>()
 						.Setup(c => c.Email).Use<EmailAddressSource>()
@@ -70,6 +74,18 @@ namespace Nest.Tests.MockData
 					return _People;
 				_People = Session.List<Person>(100).Get();
 				return _People;
+
+			}
+		}
+
+		public static IEnumerable<BoolTerm> BoolTerms
+		{
+			get
+			{
+				if (_BoolTerms != null)
+					return _BoolTerms;
+				_BoolTerms = Session.List<BoolTerm>(100).Get();
+				return _BoolTerms;
 
 			}
 		}

@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSources\BoolSource.cs" />
+    <Compile Include="DataSources\IncrementalNameSource.cs" />
     <Compile Include="DataSources\FloatArraySource.cs" />
     <Compile Include="DataSources\IntSource.cs" />
     <Compile Include="DataSources\ElasticSearchProjectDescriptionSource.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="DataSources\DoubleSource.cs" />
     <Compile Include="DataSources\LongSource.cs" />
     <Compile Include="DataSources\FloatSource.cs" />
+    <Compile Include="Domain\BoolTerm.cs" />
     <Compile Include="Domain\GeoShape.cs" />
     <Compile Include="Domain\ElasticSearchProject.cs" />
     <Compile Include="Domain\GeoLocation.cs" />

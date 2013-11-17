@@ -19,18 +19,27 @@ namespace Nest.Tests.Integration
 
 			var projects = NestTestData.Data;
 			var people = NestTestData.People;
+			var boolTerms = NestTestData.BoolTerms;
 
 			client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddMapping<ElasticSearchProject>(m => m.MapFromAttributes())
 				.AddMapping<Person>(m => m.MapFromAttributes())
+				.AddMapping<BoolTerm>(m => m.Properties(pp=>pp
+					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
+					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.not_analyzed))	
+				))
 			);
 			client.CreateIndex(ElasticsearchConfiguration.DefaultIndex + "_clone", c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddMapping<ElasticSearchProject>(m => m.MapFromAttributes())
 				.AddMapping<Person>(m => m.MapFromAttributes())
+				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
+					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
+					.String(sm => sm.Name(p => p.Name2).Index(FieldIndexOption.not_analyzed))
+				))
 			);
 
 			var bulk = new BulkDescriptor();
@@ -38,6 +47,8 @@ namespace Nest.Tests.Integration
 				bulk.Index<ElasticSearchProject>(i=>i.Object(p));
 			foreach (var p in people)
 				bulk.Index<Person>(i => i.Object(p));
+			foreach (var p in boolTerms)
+				bulk.Index<BoolTerm>(i => i.Object(p));
 			client.Bulk(bulk);
 
 			client.Refresh(new[] {ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone"});
