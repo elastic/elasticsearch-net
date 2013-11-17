@@ -8,16 +8,19 @@ namespace Nest
 	{
 		internal GenericMapping _Mapping = new GenericMapping();
 
-		public GenericMappingDescriptor<T> Name(string name)
+		public GenericMappingDescriptor<T> Name(string name, bool noNameProperty = false)
 		{
-			this._Mapping.Name = name;
+			if (!noNameProperty)
+				this._Mapping.Name = name;
+
 			this._Mapping.TypeNameMarker = name;
 			return this;
 		}
-		public GenericMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
+		public GenericMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath, bool noNameProperty = false)
 		{
 			var name = new PropertyNameResolver().ResolveToLastToken(objectPath);
-			this._Mapping.Name = name;
+			if (!noNameProperty)
+				this._Mapping.Name = name;
 			this._Mapping.TypeNameMarker = name;
 			return this;
 		}

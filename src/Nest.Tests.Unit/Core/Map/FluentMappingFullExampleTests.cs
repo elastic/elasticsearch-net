@@ -108,6 +108,12 @@ namespace Nest.Tests.Unit.Core.Map
 										.Index("not_analyzed")
 										.Store()
 									)
+									.Generic(g => g
+										.Name("do_no_render_name_property", noNameProperty: true)
+										.Type("{dynamic_type}")
+										.Index("not_analyzed")
+										.Store()
+									)
 								)							
 							)
 						)
