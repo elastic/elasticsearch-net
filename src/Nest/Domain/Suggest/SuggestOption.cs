@@ -14,5 +14,8 @@ namespace Nest
 
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
+
+        [JsonProperty("payload")]
+        public object Payload { get; internal set; }
 	}
 }

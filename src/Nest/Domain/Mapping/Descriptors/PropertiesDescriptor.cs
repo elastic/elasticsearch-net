@@ -155,6 +155,16 @@ namespace Nest
 			return this;
 		}
 
+        public PropertiesDescriptor<T> Completion(Func<CompletionMappingDescriptor<T>, CompletionMappingDescriptor<T>> selector)
+        {
+            selector.ThrowIfNull("selector");
+            var d = selector(new CompletionMappingDescriptor<T>());
+            if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+                throw new Exception("Could not get field name for completion mapping");
+            this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
+            return this;
+        }
+
 		//Reminder if you are adding a new mapping type, may one appear in the future
 		//Add them to PropertiesDescriptor, CorePropertiesDescriptor (if its a new core type), SingleMappingDescriptor
 	}

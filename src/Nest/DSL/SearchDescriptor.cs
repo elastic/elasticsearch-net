@@ -873,6 +873,19 @@ namespace Nest
 			return this;
 		}
 
+        public SearchDescriptor<T> CompletionSuggest(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest)
+        {
+            name.ThrowIfNullOrEmpty("name");
+            suggest.ThrowIfNull("suggest");
+            if (this._Suggest == null)
+                this._Suggest = new Dictionary<String, SuggestDescriptorBucket<T>>();
+            CompletionSuggestDescriptor<T> desc = new CompletionSuggestDescriptor<T>();
+            CompletionSuggestDescriptor<T> item = suggest(desc);
+            SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
+            this._Suggest.Add(name, bucket);
+            return this;
+        }
+
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
