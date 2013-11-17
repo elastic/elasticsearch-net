@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="Enums\DynamicMappingOption.cs" />
     <Compile Include="Enums\Enums.Generated.cs" />
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
     <Compile Include="ExposedInternals\ElasticSerializer.cs" />
@@ -504,6 +505,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
