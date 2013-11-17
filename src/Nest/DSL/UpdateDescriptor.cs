@@ -29,6 +29,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "upsert")]
 		internal object _Upsert { get; set; }
 
+		[JsonProperty(PropertyName = "doc_as_upsert")]
+		internal bool? _DocAsUpsert { get; set; }
+
 		[JsonProperty(PropertyName = "doc")]
 		internal K _Document { get; set; }
 
@@ -82,6 +85,12 @@ namespace Nest
 			return this;
 		}
 
+		public UpdateDescriptor<T, K> DocAsUpsert(bool docAsUpsert = true)
+		{
+			this._DocAsUpsert = docAsUpsert;
+			return this;
+		}
+		
 
 		public UpdateDescriptor<T, K> Index(string index)
 		{
