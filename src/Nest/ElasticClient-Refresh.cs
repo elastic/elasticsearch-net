@@ -41,7 +41,7 @@ namespace Nest
 		}
 		private IndicesShardResponse _Refresh(string path)
 		{
-			var status = this.Connection.GetSync(path);
+			var status = this.Connection.PostSync(path, null);
 			var r = this.Deserialize<IndicesShardResponse>(status);
 			return r;
 		}
