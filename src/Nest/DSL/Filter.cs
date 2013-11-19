@@ -164,6 +164,10 @@ namespace Nest
 		{
 			return new FilterDescriptor<T>().Type(type);
 		}
+		public static BaseFilter Regexp(Action<RegexpFilterDescriptor<T>> regexpSelector)
+		{
+			return new FilterDescriptor<T>().Regexp(regexpSelector);
+		}
 	}
 
 

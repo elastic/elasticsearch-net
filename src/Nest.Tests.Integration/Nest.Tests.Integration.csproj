@@ -111,6 +111,7 @@
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
+    <Compile Include="Reproduce\Reproduce389Tests.cs" />
     <Compile Include="Reproduce\Reproduce346Tests.cs" />
     <Compile Include="Reproduce\Reproduce325Tests.cs" />
     <Compile Include="Reproduce\Reproduce308Tests.cs" />

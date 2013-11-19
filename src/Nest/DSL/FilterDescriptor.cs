@@ -124,6 +124,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "nested")]
 		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
 
+		[JsonProperty(PropertyName = "regexp")]
+		internal Dictionary<string, object> RegexpFilter { get; set; }
+
 
 
 		public FilterDescriptor<T> Strict(bool strict = true)
@@ -835,6 +838,28 @@ namespace Nest
 
 			this.SetCacheAndName(filter);
 			return this.New(f=>f.NestedFilter = filter);
+		}
+
+		/// <summary>
+		///  The regexp filter allows you to use regular expression term queries. 
+		/// </summary>
+		/// <param name="selector"></param>
+		public BaseFilter Regexp(Action<RegexpFilterDescriptor<T>> selector)
+		{
+			var filter = new RegexpFilterDescriptor<T>();
+			if (selector == null)
+				return CreateConditionlessFilterDescriptor("regexp", filter);
+
+			selector(filter);
+			if (filter.IsConditionless)
+				return CreateConditionlessFilterDescriptor("regexp", filter);
+
+			//this.SetCacheAndName(filter);
+			return this.SetDictionary("regexp", filter._Field, filter, (d, b) =>
+			{
+				this.RegexpFilter = d;
+				b.RegexpFilter = d;
+			});
 		}
 
 	}

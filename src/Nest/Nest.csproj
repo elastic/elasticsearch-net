@@ -73,6 +73,7 @@
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="DSL\Filter\RegexpFilterDescriptor.cs" />
     <Compile Include="Enums\DynamicMappingOption.cs" />
     <Compile Include="Enums\Enums.Generated.cs" />
     <Compile Include="DSL\Suggest\CompletionSuggestDescriptor.cs" />
