@@ -896,5 +896,21 @@ namespace Nest
 			};
 			return this.New(q => q.RegexpQueryDescriptor = regexp);
 		}
+
+    /// <summary>
+    /// Function score query
+    /// </summary>
+    /// <returns></returns>
+	  public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
+		{
+            var query = new FunctionScoreQueryDescriptor<T>();
+            functionScoreQuery(query);
+
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			this.FunctionScoreQueryDescriptor = query;
+            return new QueryDescriptor<T> { FunctionScoreQueryDescriptor = this.FunctionScoreQueryDescriptor };
+		}
 	}
 }

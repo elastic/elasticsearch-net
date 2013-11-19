@@ -78,6 +78,7 @@
     <Compile Include="Enums\DynamicMappingOption.cs" />
     <Compile Include="Enums\Enums.Generated.cs" />
     <Compile Include="DSL\Suggest\CompletionSuggestDescriptor.cs" />
+    <Compile Include="DSL\Query\FunctionScoreQueryDescriptor.cs" />
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
     <Compile Include="ExposedInternals\ElasticSerializer.cs" />
     <Compile Include="Exception\ConnectionException.cs" />

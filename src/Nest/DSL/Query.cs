@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Query;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -238,10 +239,13 @@ namespace Nest
 			return new QueryDescriptor<T>().Wildcard(field, value, Boost);
 		}
 
-		public static BaseQuery Regexp(Action<RegexpQueryDescriptor<T>> regexpSelector) 
+	  public static BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
+	  {
+    	return new QueryDescriptor<T>().FunctionScore(functionScoreQuery);
+    } 
+    public static BaseQuery Regexp(Action<RegexpQueryDescriptor<T>> regexpSelector) 
 		{
 			return new QueryDescriptor<T>().Regexp(regexpSelector);
 		}
-
 	}
 }
