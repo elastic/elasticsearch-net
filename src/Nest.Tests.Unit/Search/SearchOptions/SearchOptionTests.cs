@@ -90,6 +90,16 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 			StringAssert.Contains("preference=_primary", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
+		public void TestExecuteOnPrimaryFirst()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.ExecuteOnPrimaryFirst();
+			var result = this._client.Search(s);
+			StringAssert.Contains("preference=_primary_first", result.ConnectionStatus.RequestUrl);
+		}
+		[Test]
 		public void TestExecuteOnLocalShard()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()

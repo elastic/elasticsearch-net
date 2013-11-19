@@ -373,6 +373,21 @@ namespace Nest
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
+		/// The operation will go and be executed on the primary shard, and if not available (failover), 
+		/// will execute on other shards.
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> ExecuteOnPrimaryFirst()
+		{
+			this._Preference = "_primary_first";
+			return this;
+		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
 		/// The operation will prefer to be executed on a local allocated shard is possible.
 		/// </para>
 		/// </summary>
