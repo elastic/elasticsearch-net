@@ -438,7 +438,6 @@ namespace Nest
 					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
 
 				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
-				this.GeoDistanceRangeFilter = dd;
 				b.GeoDistanceRangeFilter = dd;
 			});
 
@@ -475,7 +474,6 @@ namespace Nest
 			var filter = new GeoPolygonFilter { Points = points };
 			return this.SetDictionary("geo_polygon", fieldName, filter, (d, b) =>
 			{
-				this.GeoPolygonFilter = d;
 				b.GeoPolygonFilter = d;
 			});
 
@@ -586,7 +584,6 @@ namespace Nest
 
 			return this.SetDictionary("numeric_range", filter._Field, filter, (d, b) =>
 			{
-				this.NumericRangeFilter = d;
 				b.NumericRangeFilter = d;
 			});
 
@@ -607,7 +604,6 @@ namespace Nest
 
 			return this.SetDictionary("range", filter._Field, filter, (d, b) =>
 			{
-				this.RangeFilter = d;
 				b.RangeFilter = d;
 			});
 
@@ -645,7 +641,6 @@ namespace Nest
 			var descriptor = new FilterDescriptor<T>();
 			return this.SetDictionary("prefix", field, prefix, (d, b) =>
 			{
-				this.PrefixFilter = d;
 				b.PrefixFilter = d;
 			});
 
@@ -746,7 +741,6 @@ namespace Nest
 			}
 			return this.SetDictionary("or", "filters", descriptors, (d, b) =>
 			{
-				this.OrFilter = d;
 				b.OrFilter = d;
 			});
 		}
@@ -766,7 +760,6 @@ namespace Nest
 			}
 			return this.SetDictionary("or", "filters", descriptors, (d, b) =>
 			{
-				this.OrFilter = d;
 				b.OrFilter = d;
 			});
 		}
@@ -786,7 +779,6 @@ namespace Nest
 
 			return this.SetDictionary("not", "filter", f, (d, b) =>
 			{
-				this.NotFilter = d;
 				b.NotFilter = d;
 			});
 
@@ -822,7 +814,6 @@ namespace Nest
 
 			return this.SetDictionary("query", "query", bq, (d, b) =>
 			{
-				this.QueryFilter = d;
 				b.QueryFilter = d;
 			});
 		}
@@ -865,7 +856,6 @@ namespace Nest
 			//this.SetCacheAndName(filter);
 			return this.SetDictionary("regexp", filter._Field, filter, (d, b) =>
 			{
-				this.RegexpFilter = d;
 				b.RegexpFilter = d;
 			});
 		}
