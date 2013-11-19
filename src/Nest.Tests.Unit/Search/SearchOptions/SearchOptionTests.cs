@@ -120,6 +120,26 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 			StringAssert.Contains("preference=_only_node:somenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
+		public void TestExecuteOnCustomNode()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.ExecuteOnCustomNode("somenode");
+			var result = this._client.Search(s);
+			StringAssert.Contains("preference=somenode", result.ConnectionStatus.RequestUrl);
+		}
+		[Test]
+		public void TestExecuteOnPreferredNode()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.ExecuteOnPreferredNode("somenode");
+			var result = this._client.Search(s);
+			StringAssert.Contains("preference=_prefer_node:somenode", result.ConnectionStatus.RequestUrl);
+		}
+		[Test]
 		public void TestFields()
 		{
 			var s = new SearchDescriptor<ElasticSearchProject>()

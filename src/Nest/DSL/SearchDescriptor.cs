@@ -28,7 +28,7 @@ namespace Nest
 
 		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
 
-		
+
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -409,6 +409,39 @@ namespace Nest
 		{
 			node.ThrowIfNull("node");
 			this._Preference = "_only_node:" + node;
+			return this;
+		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
+		/// A custom value will be used to guarantee that the same shards will be used for 
+		/// the same custom value. This can help with "jumping values" when hitting different 
+		/// shards in different refresh states. A sample value can be something like the 
+		/// web session id, or the user name.
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> ExecuteOnCustomNode(string node)
+		{
+			node.ThrowIfNull("node");
+			this._Preference = node;
+			return this;
+		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
+		/// Prefers execution on the node with the provided node id if applicable.
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> ExecuteOnPreferredNode(string node)
+		{
+			node.ThrowIfNull("node");
+			this._Preference = string.Format("_prefer_node:{0}", node);
 			return this;
 		}
 		/// <summary>
@@ -888,18 +921,18 @@ namespace Nest
 			return this;
 		}
 
-        public SearchDescriptor<T> CompletionSuggest(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest)
-        {
-            name.ThrowIfNullOrEmpty("name");
-            suggest.ThrowIfNull("suggest");
-            if (this._Suggest == null)
-                this._Suggest = new Dictionary<String, SuggestDescriptorBucket<T>>();
-            CompletionSuggestDescriptor<T> desc = new CompletionSuggestDescriptor<T>();
-            CompletionSuggestDescriptor<T> item = suggest(desc);
-            SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
-            this._Suggest.Add(name, bucket);
-            return this;
-        }
+		public SearchDescriptor<T> CompletionSuggest(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			suggest.ThrowIfNull("suggest");
+			if (this._Suggest == null)
+				this._Suggest = new Dictionary<String, SuggestDescriptorBucket<T>>();
+			CompletionSuggestDescriptor<T> desc = new CompletionSuggestDescriptor<T>();
+			CompletionSuggestDescriptor<T> item = suggest(desc);
+			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
+			this._Suggest.Add(name, bucket);
+			return this;
+		}
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
@@ -907,7 +940,7 @@ namespace Nest
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>() {IsStrict = this._Strict};
+			var q = new QueryDescriptor<T>() { IsStrict = this._Strict };
 
 			var bq = query(q);
 			return this.Query(bq);
