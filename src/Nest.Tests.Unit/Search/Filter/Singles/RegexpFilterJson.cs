@@ -60,7 +60,12 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(ff => ff
 					.Cache(true)
 					.Name("regexp_filter")
-					.Regexp(r => r.OnField(p => p.Name).Value("ab?").Flags("INTERSECTION|COMPLEMENT|EMPTY"))
+					.CacheKey("2problems")
+					.Regexp(r => r
+						.OnField(p => p.Name)
+						.Value("ab?")
+						.Flags("INTERSECTION|COMPLEMENT|EMPTY")
+					)
 				);
 
 			var json = TestElasticClient.Serialize(s);
@@ -72,7 +77,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 								""flags"": ""INTERSECTION|COMPLEMENT|EMPTY""
 							},
 							_cache:true,
-							_name : ""regexp_filter""
+							_name : ""regexp_filter"",
+							_cache_key:""2problems""
 						}
 					}
 			}";

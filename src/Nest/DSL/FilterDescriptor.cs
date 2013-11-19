@@ -27,17 +27,21 @@ namespace Nest
 		}
 
 		internal string _Name { get; set; }
+		internal string _CacheKey { get; set; }
 		internal bool? _Cache { get; set; }
 
 		public FilterDescriptor<T> Name(string name)
 		{
-			name.ThrowIfNull("name");
 			this._Name = name;
+			return this;
+		}
+		public FilterDescriptor<T> CacheKey(string cacheKey)
+		{
+			this._CacheKey = cacheKey;
 			return this;
 		}
 		public FilterDescriptor<T> Cache(bool cache)
 		{
-			cache.ThrowIfNull("cache");
 			this._Cache = cache;
 			return this;
 		}
@@ -163,6 +167,8 @@ namespace Nest
 				filter._Cache = this._Cache;
 			if (!string.IsNullOrWhiteSpace(this._Name))
 				filter._Name = this._Name;
+			if (!string.IsNullOrWhiteSpace(this._CacheKey))
+				filter._CacheKey = this._Name;
 		}
 
 		private BaseFilter SetDictionary(
@@ -180,6 +186,8 @@ namespace Nest
 				dictionary.Add("_cache", this._Cache);
 			if (!string.IsNullOrWhiteSpace(this._Name))
 				dictionary.Add("_name", this._Name);
+			if (!string.IsNullOrWhiteSpace(this._CacheKey))
+				dictionary.Add("_cache_key", this._CacheKey);
 
 			var bucket = this.New(null);
 			setter(dictionary, bucket);
