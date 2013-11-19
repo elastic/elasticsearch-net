@@ -39,6 +39,7 @@ namespace Nest
 		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "custom_filters_score")]
 		internal CustomFiltersScoreDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
+
 		[JsonProperty(PropertyName = "custom_boost_factor")]
 		internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "constant_score")]
@@ -64,6 +65,9 @@ namespace Nest
 		internal IDictionary<string, object> TermsQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
+		[JsonProperty(PropertyName = "regexp")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal IDictionary<string, object> RegexpQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "flt")]
 		internal FuzzyLikeThisDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
@@ -874,5 +878,23 @@ namespace Nest
 			return this.New(q => q.SpanNotQueryDescriptor = span);
 		}
 
+		/// <summary>
+		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
+		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
+		/// </summary>
+		public BaseQuery Regexp(Action<RegexpQueryDescriptor<T>> regexpSelector)
+		{
+			var query = new RegexpQueryDescriptor<T>();
+			regexpSelector(query);
+
+			if (query.IsConditionless)
+				return CreateConditionlessQueryDescriptor(query);
+
+			var regexp = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+			return this.New(q => q.RegexpQueryDescriptor = regexp);
+		}
 	}
 }
