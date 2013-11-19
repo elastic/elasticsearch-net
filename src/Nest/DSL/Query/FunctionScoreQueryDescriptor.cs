@@ -8,7 +8,7 @@ using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Nest.DSL.Query
+namespace Nest
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class FunctionScoreQueryDescriptor<T> : IQuery where T : class

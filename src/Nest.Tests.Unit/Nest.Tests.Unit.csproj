@@ -112,7 +112,6 @@
     <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
@@ -365,6 +364,12 @@
     </None>
     <None Include="packages.config" />
     <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinTermIntoMustStrictFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOp.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOpNew.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">

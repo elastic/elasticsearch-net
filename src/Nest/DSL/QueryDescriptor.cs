@@ -99,6 +99,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "indices")]
 		internal IndicesQueryDescriptor<T> IndicesQueryDescriptor { get; set; }
 
+		[JsonProperty(PropertyName = "function_score")]
+		internal FunctionScoreQueryDescriptor<T> FunctionScoreQueryDescriptor { get; set; }
+
 		public QueryDescriptor<T> Strict(bool strict = true)
 		{
 			return new QueryDescriptor<T> { IsStrict = strict };
