@@ -417,24 +417,6 @@ namespace Nest
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
-		/// A custom value will be used to guarantee that the same shards will be used for 
-		/// the same custom value. This can help with "jumping values" when hitting different 
-		/// shards in different refresh states. A sample value can be something like the 
-		/// web session id, or the user name.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> ExecuteOnCustomNode(string node)
-		{
-			node.ThrowIfNull("node");
-			this._Preference = node;
-			return this;
-		}
-		/// <summary>
-		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
-		/// By default, the operation is randomized between the each shard replicas.
-		/// </para>
-		/// <para>
 		/// Prefers execution on the node with the provided node id if applicable.
 		/// </para>
 		/// </summary>
