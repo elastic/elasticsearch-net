@@ -4,7 +4,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Unit.Search.SearchOptions
 {
 	[TestFixture]
-	public class SearchOptionTests
+	public class SearchOptionTests : BaseJsonTests
 	{
 		[Test]
 		public void TestFromSize()
@@ -76,9 +76,8 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.Preference("_primary");
-			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
-			Assert.True(json.JsonEquals(expected));
+			var result = this._client.Search(s);
+			StringAssert.Contains("preference=_primary", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnPrimary()
@@ -87,9 +86,8 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnPrimary();
-			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, preference: ""_primary"" }";
-			Assert.True(json.JsonEquals(expected));
+			var result = this._client.Search(s);
+			StringAssert.Contains("preference=_primary", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnLocalShard()
@@ -98,9 +96,8 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnLocalShard();
-			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, preference: ""_local"" }";
-			Assert.True(json.JsonEquals(expected));
+			var result = this._client.Search(s);
+			StringAssert.Contains("preference=_local", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnNode()
@@ -109,10 +106,8 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnNode("somenode");
-			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, 
-				preference: ""_only_node:somenode"" }";
-			Assert.True(json.JsonEquals(expected));
+			var result = this._client.Search(s);
+			StringAssert.Contains("preference=_only_node:somenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestFields()

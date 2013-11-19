@@ -465,6 +465,8 @@ namespace Nest.Resolvers
 				dict.Add("routing", descriptor._Routing);
 			if (!descriptor._Scroll.IsNullOrEmpty())
 				dict.Add("scroll", descriptor._Scroll);
+			if (!descriptor._Preference.IsNullOrEmpty())
+				dict.Add("preference", descriptor._Preference);
 			this.AddSearchType<T>(descriptor, dict);
 			return dict;
 		}

@@ -40,3 +40,5 @@ build/keys/keypair.snk
 !build/tools/*
 !build/tools/scriptcs/*
 /dep/Newtonsoft.Json.4.0.2
+
+/src/Nest.Tests.Unit/*.ncrunchproject
