@@ -1,0 +1,23 @@
+  {
+  "from": 0,
+  "size": 10,
+  "filter": {
+    "bool": {
+      "must": [
+        {
+          "exists": {
+            "field": "name",
+            "_cache": true,
+            "_name": "first_cache_name",
+            "_cache_key": "first_cache_name"
+          }
+        },
+        {
+          "exists": {
+            "field": "content"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -158,7 +158,16 @@ namespace Nest
 
 			if (fillProperty != null)
 				fillProperty(f);
+
+			this.ResetCache();
 			return f;
+		}
+
+		private void ResetCache()
+		{
+			this._Cache = null;
+			this._CacheKey = null;
+			this._Name = null;
 		}
 
 		private void SetCacheAndName(FilterBase filter)
@@ -188,6 +197,8 @@ namespace Nest
 				dictionary.Add("_name", this._Name);
 			if (!string.IsNullOrWhiteSpace(this._CacheKey))
 				dictionary.Add("_cache_key", this._CacheKey);
+
+			this.ResetCache();
 
 			var bucket = this.New(null);
 			setter(dictionary, bucket);
