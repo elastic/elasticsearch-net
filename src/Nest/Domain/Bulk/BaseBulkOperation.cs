@@ -29,8 +29,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "_routing")]
 		internal string _Routing { get; set; }
 
-		[JsonProperty(PropertyName = "_percolate")]
-		internal string _Percolate { get; set; }
 
 		[JsonProperty(PropertyName = "_parent")]
 		internal string _Parent { get; set; }

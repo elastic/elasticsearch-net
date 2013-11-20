@@ -33,6 +33,10 @@ namespace Nest.Tests.Unit.Core.Bulk
 					.Document(new { name = "NEST" })
 					.RetriesOnConflict(4)
 				)
+				.Index<ElasticSearchProject>(i=>i
+					.Object(new ElasticSearchProject { Name = "yodawg", Id = 90})
+					.Percolate("percolateme")
+				)
 			);
 			var status = result.ConnectionStatus;
 			this.BulkJsonEquals(status.Request, MethodInfo.GetCurrentMethod());

@@ -104,12 +104,6 @@ namespace Nest
 			return this;
 		}
 
-		public BulkCreateDescriptor<T> Percolate(string percolate)
-		{
-			this._Percolate = percolate; 
-			return this;
-		}
-
 		public BulkCreateDescriptor<T> Parent(string parent)
 		{
 			this._Parent = parent; 

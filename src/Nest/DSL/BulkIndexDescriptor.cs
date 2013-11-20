@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -12,6 +13,8 @@ namespace Nest
 		internal override string _Operation { get { return "index"; } }
 		internal override object _Object { get; set; }
 
+		[JsonProperty(PropertyName = "_percolate")]
+		internal string _Percolate { get; set; }
 
 		private readonly TypeNameResolver _typeNameResolver;
 
