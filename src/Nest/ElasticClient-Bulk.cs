@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,24 @@ namespace Nest
                     path = bulkDescriptor._FixedType + "/" + path;
                 path = bulkDescriptor._FixedIndex + "/" + path;
             }
+	        var queryString = new NameValueCollection();
+	        if (bulkDescriptor._Refresh.HasValue)
+		        queryString.Add("refresh", bulkDescriptor._Refresh.ToString().ToLowerInvariant());
+	        switch (bulkDescriptor._Consistency)
+	        {
+		        case Consistency.All:
+			        queryString.Add("consistency", "all");
+					break;
+				case Consistency.Quorum:
+					queryString.Add("consistency", "quorem");
+					break;
+				case Consistency.One:
+					queryString.Add("consistency", "one");
+					break;
+	        }
+	        if (queryString.HasKeys())
+		        path += queryString.ToQueryString();
+
         }
 		public IBulkResponse Bulk(BulkDescriptor bulkDescriptor)
 		{

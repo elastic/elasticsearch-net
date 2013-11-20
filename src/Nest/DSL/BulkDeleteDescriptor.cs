@@ -127,21 +127,5 @@ namespace Nest
 			this._Ttl = ttl; 
 			return this;
 		}
-
-		public BulkDeleteDescriptor<T> Consistency(Consistency consistency)
-		{
-			this._Consistency = consistency; 
-			return this;
-		}
-
-		public BulkDeleteDescriptor<T> Refresh(bool refresh = true)
-		{
-			this._Refresh = refresh; 
-			return this;
-		}
-
-
-
-
 	}
 }

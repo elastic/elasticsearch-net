@@ -41,12 +41,7 @@ namespace Nest
 		[JsonProperty("_ttl")]
 		internal string _Ttl { get; set; }
 
-		[JsonProperty("consistency")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal Consistency? _Consistency { get; set; }
 
-		[JsonProperty("refresh ")]
-		internal bool? _Refresh { get; set; }
 
 		[JsonProperty("_retry_on_conflict")]
 		internal int? _RetriesOnConflict { get; set; }

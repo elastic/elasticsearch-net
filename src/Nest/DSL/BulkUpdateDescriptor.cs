@@ -201,18 +201,6 @@ namespace Nest
 			return this;
 		}
 
-		public BulkUpdateDescriptor<T, K> Consistency(Consistency consistency)
-		{
-			this._Consistency = consistency; 
-			return this;
-		}
-
-		public BulkUpdateDescriptor<T, K> Refresh(bool refresh = true)
-		{
-			this._Refresh = refresh; 
-			return this;
-		}
-
 		public BulkUpdateDescriptor<T, K> RetriesOnConflict(int retriesOnConflict)
 		{
 			this._RetriesOnConflict = retriesOnConflict;
