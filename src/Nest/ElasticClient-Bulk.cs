@@ -86,6 +86,7 @@ namespace Nest
 		        path += queryString.ToQueryString();
 
         }
+	
 		public IBulkResponse Bulk(BulkDescriptor bulkDescriptor)
 		{
 		    string json, path;
@@ -193,72 +194,64 @@ namespace Nest
 		}
 
 
+
+		//used by IndexMany and DeleteMany
 		private string GenerateBulkCommand<T>(IEnumerable<T> @objects, string index, string typeName, string command) where T : class
 		{
 			objects.ThrowIfEmpty("objects");
 
-			var sb = new StringBuilder();
-			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
-
-			foreach (var @object in objects)
+			var b = new BulkDescriptor();
+			b.FixedPath(index, typeName);
+			foreach (var @object in @objects)
 			{
-				var objectAction = action;
-				
-					var id = this.Infer.Id(@object);
-					if (!id.IsNullOrEmpty())
-						objectAction += ", \"_id\" : \"{0}\" ".F(id);
-
-				objectAction += "} }\n";
-
-				sb.Append(objectAction);
+				var o = @object;
 				if (command == "index")
-				{
-					string jsonCommand = this.Serializer.Serialize(@object, Formatting.None);
-					sb.Append(jsonCommand + "\n");
-				}
+					b.Index<T>(bb => bb.Object(o));
+				else if (command == "delete")
+					b.Delete<T>(bb => bb.Object(o));
 			}
-			var json = sb.ToString();
+			
+			string json, path;
+			this.GenerateBulkPathAndJson(b, out json, out path);
 			return json;
-
-
-
 		}
+
+
+		//used by IndexMany and DeleteMany
 		private string GenerateBulkCommand<T>(IEnumerable<BulkParameters<T>> @objects, string index, string typeName, string command) where T : class
 		{
 			objects.ThrowIfEmpty("objects");
 
-			var sb = new StringBuilder();
-			var action = "{{ \"{0}\" : {{ \"_index\" : \"{1}\", \"_type\" : \"{2}\"".F(command, index, typeName);
 
-			foreach (var @object in objects)
+			var b = new BulkDescriptor();
+			b.FixedPath(index, typeName);
+			foreach (var @object in @objects)
 			{
-				if (@object.Document == null)
-					continue;
-
-				var objectAction = action;
-				if (!@object.Id.IsNullOrEmpty())
-					objectAction += ", \"_id\" : \"{0}\" ".F(@object.Id);
-				else 
-					objectAction += ", \"_id\" : \"{0}\" ".F(this.Infer.Id(@object.Document));
-
-				if (!@object.Version.IsNullOrEmpty())
-					objectAction += ", \"version\" : \"{0}\" ".F(@object.Version);
-				if (!@object.Parent.IsNullOrEmpty())
-					objectAction += ", \"parent\" : \"{0}\" ".F(@object.Parent);
-				if (@object.VersionType != VersionType.Internal)
-					objectAction += ", \"version_type\" : \"{0}\" ".F(@object.VersionType.ToString().ToLower());
-				if (!@object.Routing.IsNullOrEmpty())
-					objectAction += ", \"routing\" : \"{0}\" ".F(@object.Routing);
-				objectAction += "} }\n";
-
-				sb.Append(objectAction);
+				var o = @object;
 				if (command == "index")
-				{
-					string jsonCommand = this.Serializer.Serialize(@object.Document, Formatting.None);
-					sb.Append(jsonCommand + "\n");
-				}
+					b.Index<T>(bb => bb
+						.Object(o.Document)
+						.Id(o.Id)
+						.Parent(o.Parent)
+						.Percolate(o.Percolate)
+						.Routing(o.Routing)
+						.Timestamp(o.Timestamp)
+						.Ttl(o.Ttl)
+						.Version(o.Version)
+						.VersionType(o.VersionType));
+				else if (command == "delete")
+					b.Delete<T>(bb => bb
+						.Object(o.Document)
+						.Parent(o.Parent)
+						.Routing(o.Routing)
+						.Timestamp(o.Timestamp)
+						.Ttl(o.Ttl)
+						.Version(o.Version)
+						.VersionType(o.VersionType));
 			}
-			var json = sb.ToString();
+
+			string json, path;
+			this.GenerateBulkPathAndJson(b, out json, out path);
 			return json;
 		}
 

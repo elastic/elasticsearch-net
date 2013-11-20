@@ -98,6 +98,20 @@ namespace Nest
 			return this;
 		}
 
+		public BulkCreateDescriptor<T> VersionType(VersionType versionType)
+		{
+			switch (versionType)
+			{
+				case Nest.VersionType.External:
+					this._VersionType = "external";
+					break;
+				case Nest.VersionType.Internal:
+					this._VersionType = "internal";
+					break;
+			}
+			return this;
+		}
+
 		public BulkCreateDescriptor<T> Routing(string routing)
 		{
 			this._Routing = routing; 

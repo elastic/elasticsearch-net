@@ -19,6 +19,10 @@ namespace Nest
 		public string Parent { get; set; }
 
 		public T Document { get; private set; }
+		public string Ttl { get; set; }
+		public long Timestamp { get; set; }
+		public string Percolate { get; set; }
+
 		public BulkParameters(T document)
 		{
 			this.Document = document;

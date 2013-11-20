@@ -171,6 +171,21 @@ namespace Nest
 			return this;
 		}
 
+
+		public BulkUpdateDescriptor<T, K> VersionType(VersionType versionType)
+		{
+			switch (versionType)
+			{
+				case Nest.VersionType.External:
+					this._VersionType = "external";
+					break;
+				case Nest.VersionType.Internal:
+					this._VersionType = "internal";
+					break;
+			}
+			return this;
+		}
+
 		public BulkUpdateDescriptor<T, K> Routing(string routing)
 		{
 			this._Routing = routing; 

@@ -938,11 +938,12 @@ namespace Nest
 		public SearchDescriptor<T> QueryString(string userInput)
 		{
 			var q = new QueryDescriptor<T>();
+			BaseQuery bq;
 			if (userInput.IsNullOrEmpty())
-				q.MatchAll();
+				bq = q.MatchAll();
 			else
-				q.QueryString(qs => qs.Query(userInput));
-			this._Query = q;
+				bq = q.QueryString(qs => qs.Query(userInput));
+			this._Query = bq;
 			return this;
 		}
 

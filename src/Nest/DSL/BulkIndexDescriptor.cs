@@ -37,7 +37,6 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("indices");
 			this._Index = index;
 			return this;
 		}
@@ -47,7 +46,6 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Type(string type)
 		{
-			type.ThrowIfNullOrEmpty("type");
 			this._Type = type;
 			return this;
 		}
@@ -57,7 +55,6 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Type(Type type)
 		{
-			type.ThrowIfNull("type");
 			this._Type = type;
 			return this;
 		}
@@ -98,6 +95,20 @@ namespace Nest
 		public BulkIndexDescriptor<T> VersionType(string versionType)
 		{
 			this._VersionType = versionType;
+			return this;
+		}
+
+		public BulkIndexDescriptor<T> VersionType(VersionType versionType)
+		{
+			switch (versionType)
+			{
+				case Nest.VersionType.External:
+					this._VersionType = "external";
+					break;
+				case Nest.VersionType.Internal:
+					this._VersionType = "internal";
+					break;
+			}
 			return this;
 		}
 
