@@ -236,8 +236,10 @@ namespace Nest
 					continue;
 
 				var objectAction = action;
-
-				objectAction += ", \"_id\" : \"{0}\" ".F(this.Infer.Id(@object.Document));
+				if (!@object.Id.IsNullOrEmpty())
+					objectAction += ", \"_id\" : \"{0}\" ".F(@object.Id);
+				else 
+					objectAction += ", \"_id\" : \"{0}\" ".F(this.Infer.Id(@object.Document));
 
 				if (!@object.Version.IsNullOrEmpty())
 					objectAction += ", \"version\" : \"{0}\" ".F(@object.Version);

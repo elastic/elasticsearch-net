@@ -14,6 +14,7 @@ namespace Nest
 	{
 		public VersionType VersionType { get; set; }
 		public string Version { get; set; }
+		public string Id { get; set; }
 		public string Routing { get; set; }
 		public string Parent { get; set; }
 
