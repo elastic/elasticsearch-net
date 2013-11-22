@@ -73,6 +73,7 @@
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
     <Compile Include="DSL\Suggest\CompletionSuggestDescriptor.cs" />
+    <Compile Include="DSL\Suggest\FuzzySuggestDescriptor.cs" />
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
     <Compile Include="ExposedInternals\ElasticSerializer.cs" />
     <Compile Include="Exception\ConnectionException.cs" />

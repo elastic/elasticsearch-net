@@ -215,6 +215,7 @@
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
     <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
     <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
     <Compile Include="Search\Suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />

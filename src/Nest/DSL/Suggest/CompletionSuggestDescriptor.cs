@@ -11,6 +11,9 @@ namespace Nest
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class CompletionSuggestDescriptor<T> : BaseSuggestDescriptor<T> where T : class
     {
+        [JsonProperty(PropertyName="fuzzy")]
+        internal FuzzySuggestDescriptor<T> _Fuzzy { get; set; }
+
         public CompletionSuggestDescriptor<T> Text(string text)
         {
             this._Text = text;
@@ -27,6 +30,18 @@ namespace Nest
         {
             var fieldName = new PropertyNameResolver().Resolve(objectPath);
             return this.OnField(fieldName);
+        }
+
+        public CompletionSuggestDescriptor<T> Fuzzy(Func<FuzzySuggestDescriptor<T>, FuzzySuggestDescriptor<T>> fuzzyDescriptor)
+        {
+            this._Fuzzy = fuzzyDescriptor(new FuzzySuggestDescriptor<T>());
+            return this;
+        }
+
+        public CompletionSuggestDescriptor<T> Fuzzy()
+        {
+            this._Fuzzy = new FuzzySuggestDescriptor<T>();
+            return this;
         }
     }
 }
