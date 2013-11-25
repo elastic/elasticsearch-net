@@ -329,7 +329,7 @@ namespace Nest.Resolvers
 			else
 				indices = this._connectionSettings.DefaultIndex;
 
-			string types = (descriptor._Types.HasAny()) ? string.Join(",", descriptor._Types) : null;
+			string types = (descriptor._Types.HasAny()) ? this.JoinTypes(descriptor._Types) : null;
 
 			return this.SearchPathJoin(indices, types, descriptor.GetUrlParams(), suffix);
 		}
@@ -347,7 +347,7 @@ namespace Nest.Resolvers
 
 			var types = this.Infer.TypeName<T>();
 			if (descriptor._Types.HasAny())
-				types = string.Join(",", descriptor._Types);
+				types = this.JoinTypes(descriptor._Types);
 			else if (descriptor._Types != null || descriptor._AllTypes) //if set to empty array assume all
 				types = null;
 
