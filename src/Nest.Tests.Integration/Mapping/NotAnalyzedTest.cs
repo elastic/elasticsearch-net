@@ -10,13 +10,13 @@ namespace Nest.Tests.Integration.Mapping
 		[Test]
 		public void NotAnalyzedReturnsOneItem()
 		{
-			this._client.DeleteMapping<ElasticSearchProject>();
-			this._client.DeleteMapping<ElasticSearchProject>(ElasticsearchConfiguration.DefaultIndex + "_clone");
-			this._client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, new IndexSettings());
-			var x = this._client.MapFromAttributes<ElasticSearchProject>();
+			var index = ElasticsearchConfiguration.NewUniqueIndexName();
+			var x = this._client.CreateIndex(index, s => s
+				.AddMapping<ElasticSearchProject>(m=>m.MapFromAttributes())
+			);
 			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
-			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
+			var typeMapping = this._client.GetMapping(index, "elasticsearchprojects");
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
@@ -24,10 +24,11 @@ namespace Nest.Tests.Integration.Mapping
 			var indexResult = this._client.Index(new ElasticSearchProject
 			{
 				Country = "The Royal Kingdom Of The Netherlands"
-			}, new IndexParameters { Refresh = true });
+			}, indexParameters: new IndexParameters { Refresh = true }, index: index);
 			Assert.IsTrue(indexResult.IsValid);
 
 			var result = this._client.Search<ElasticSearchProject>(s=>s
+				.Index(index)
 				.FacetTerm(ft=>ft.OnField(f=>f.Country))
 				.MatchAll()
 			);
@@ -37,27 +38,30 @@ namespace Nest.Tests.Integration.Mapping
 		}
 
 		[Test]
-		public void AnalyzedReturnsTwoItems()
+		public void AnalyzedReturnsMoreItems()
 		{
-			this._client.DeleteMapping<ElasticSearchProject>();
-			var x = this._client.MapFromAttributes<ElasticSearchProject>();
-			Assert.IsTrue(x.OK);
+			var index = ElasticsearchConfiguration.NewUniqueIndexName();
+			var x = this._client.CreateIndex(index, s => s
+				.AddMapping<ElasticSearchProject>(m => m
+					.MapFromAttributes()
+					.Properties(pp=>pp
+						.String(pps=>pps.Name(p=>p.Country).Index(FieldIndexOption.analyzed))
+					)
+				)
+			);
+			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
-			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
-			this._client.DeleteMapping<ElasticSearchProject>();
-			var mapping = typeMapping.Properties["country"] as StringMapping;
-			Assert.NotNull(mapping);
-			mapping.Index = FieldIndexOption.analyzed;
-			var updateMapResult = this._client.Map(typeMapping);
-			Assert.True(updateMapResult.IsValid);
-
-			var indexResult = this._client.Index(new ElasticSearchProject
-			{
-				Country = "The Royal Kingdom Of The Netherlands"
-			}, new IndexParameters { Refresh = true });
+			var indexResult = this._client.Index(
+				new ElasticSearchProject
+				{
+					Country = "The Royal Kingdom Of The Netherlands"
+				},
+				indexParameters: new IndexParameters { Refresh = true }
+				, index: index);
 			Assert.IsTrue(indexResult.IsValid);
 
 			var result = this._client.Search<ElasticSearchProject>(s => s
+				.Index(index)
 				.FacetTerm(ft => ft.OnField(f => f.Country))
 				.MatchAll()
 			);

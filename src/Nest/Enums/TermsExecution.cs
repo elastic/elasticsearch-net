@@ -8,10 +8,12 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-  public enum TermsExecution
-  {
-   plain,
-   @bool,
-   and
-  }
+	public enum TermsExecution
+	{
+		plain,
+		@bool,
+		and,
+		or,
+		fielddata
+	}
 }

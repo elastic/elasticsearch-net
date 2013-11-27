@@ -14,9 +14,7 @@ namespace Nest.Tests.Integration.Warmers
 		[Test]
 		public void CreateIndexWithWarmer()
 		{
-			var index = ElasticsearchConfiguration.DefaultIndex + "_clone";
-			if (this._client.IndexExists(index).Exists)
-				this._client.DeleteIndex(index);
+			var index = ElasticsearchConfiguration.NewUniqueIndexName();
 
 			var result = this._client.CreateIndex(index, c => c
 				.NumberOfReplicas(0)
