@@ -71,6 +71,10 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal Dictionary<string, object> GeoPolygonFilter { get; set; }
 
+		[JsonProperty(PropertyName = "geo_shape")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal Dictionary<string, object> GeoShapeFilter { get; set; }
+
 		[JsonProperty(PropertyName = "limit")]
 		internal LimitFilter LimitFilter { get; set; }
 
@@ -409,6 +413,7 @@ namespace Nest
 			});
 
 		}
+		
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
@@ -424,17 +429,11 @@ namespace Nest
 		{
 			var filter = new GeoDistanceRangeFilterDescriptor();
 			if (filterDescriptor == null)
-				return CreateConditionlessFilterDescriptor("geo_distance", filter);
+				return CreateConditionlessFilterDescriptor("geo_distance_range", filter);
 
 			filterDescriptor(filter);
-			if (this.IsStrict && filter._FromDistance == null)
-				throw new DslException("Missing from distance, Distance should be set when using the geo distance range DSL in strict mode");
-
-			if (this.IsStrict && filter._ToDistance == null)
-				throw new DslException("Missing to distance, Distance should be set when using the geo distance range DSL in strict mode");
-
 			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("geo_distance", filter);
+				return CreateConditionlessFilterDescriptor("geo_distance_range", filter);
 			
 			return this.SetDictionary("geo_distance_range", field, filter._Location, (d, b) =>
 			{
@@ -451,8 +450,36 @@ namespace Nest
 				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
 				b.GeoDistanceRangeFilter = dd;
 			});
+		}
+
+		/// <summary>
+		/// Filters documents that exists within a range from a specific point:
+		/// </summary>
+		public BaseFilter GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		{
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
+			return this.GeoShape(field, filterDescriptor);
+		}
+		/// <summary>
+		/// Filters documents that exists within a range from a specific point:
+		/// </summary>
+		public BaseFilter GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoShapeFilterDescriptor();
+			if (filterDescriptor == null)
+				return CreateConditionlessFilterDescriptor("geo_shape", filter);
+
+			filterDescriptor(filter);
+			if (filter.IsConditionless)
+				return CreateConditionlessFilterDescriptor("geo_shape", filter);
+
+			return this.SetDictionary("geo_shape", field, filter, (d, b) =>
+			{
+				b.GeoShapeFilter = d;
+			});
 
 		}
+
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>

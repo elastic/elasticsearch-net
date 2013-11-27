@@ -70,9 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
+    <Compile Include="Domain\DSL\GeoShapeVector.cs" />
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="DSL\Filter\GeoShapeFilterDescriptor.cs" />
     <Compile Include="DSL\Suggest\FuzzySuggestDescriptor.cs" />
     <Compile Include="DSL\Filter\RegexpFilterDescriptor.cs" />
     <Compile Include="DSL\Query\RegexpQueryDescriptor.cs" />
