@@ -4,7 +4,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Unit.Search.Filter.Singles
 {
 	[TestFixture]
-	public class GeoShapeFilterJson
+	public class GeoIndexedShapeFilterJson
 	{
 		[Test]
 		public void GeoShapeFilter()
@@ -16,9 +16,8 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(filter => filter
 					.Cache(true) 
 					.Name("my_geo_filter")
-					.GeoShape(f=>f.Origin, d=>d
-						.Type("envelope")
-						.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
+					.GeoIndexedShape(f=>f.Origin, d=>d
+						.Lookup<ElasticSearchProject>(p=>p.MyGeoShape, "1")
 					)
 				);
 
@@ -27,9 +26,11 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				filter : {
 					geo_shape: {
 						origin: {
-							shape: {
-								type: ""envelope"",
-								coordinates: [[13.0, 53.0], [14.0, 52.0]]
+							indexed_shape: {
+								id: ""1"",
+								type: ""elasticsearchprojects"",
+								index: ""mydefaultindex"",
+								shape_field_name: ""myGeoShape""
 							}
 						},
 						_cache: true,

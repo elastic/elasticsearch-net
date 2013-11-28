@@ -74,6 +74,7 @@
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="DSL\Filter\GeoIndexedShapeFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeFilterDescriptor.cs" />
     <Compile Include="DSL\Suggest\FuzzySuggestDescriptor.cs" />
     <Compile Include="DSL\Filter\RegexpFilterDescriptor.cs" />

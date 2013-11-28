@@ -20,12 +20,6 @@ namespace Nest
 
 	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T> where T : class
 	{
-		private readonly TypeNameResolver typeNameResolver;
-		public FilterDescriptor()
-		{
-			this.typeNameResolver = new TypeNameResolver();
-		}
-
 		internal string _Name { get; set; }
 		internal string _CacheKey { get; set; }
 		internal bool? _Cache { get; set; }
@@ -453,7 +447,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Filters documents that exists within a range from a specific point:
+		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
 		public BaseFilter GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
@@ -461,7 +455,7 @@ namespace Nest
 			return this.GeoShape(field, filterDescriptor);
 		}
 		/// <summary>
-		/// Filters documents that exists within a range from a specific point:
+		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
 		public BaseFilter GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
@@ -479,6 +473,34 @@ namespace Nest
 			});
 
 		}
+		/// <summary>
+		/// Filter documents indexed using the geo_shape type.
+		/// </summary>
+		public BaseFilter GeoIndexedShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		{
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
+			return this.GeoIndexedShape(field, filterDescriptor);
+		}
+		/// <summary>
+		/// Filter documents indexed using the geo_shape type.
+		/// </summary>
+		public BaseFilter GeoIndexedShape(string field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		{
+			var filter = new GeoIndexedShapeFilterDescriptor();
+			if (filterDescriptor == null)
+				return CreateConditionlessFilterDescriptor("geo_shape", filter);
+
+			filterDescriptor(filter);
+			if (filter.IsConditionless)
+				return CreateConditionlessFilterDescriptor("geo_shape", filter);
+
+			return this.SetDictionary("geo_shape", field, filter, (d, b) =>
+			{
+				b.GeoShapeFilter = d;
+			});
+
+		}
+
 
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
