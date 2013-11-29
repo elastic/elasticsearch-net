@@ -207,7 +207,7 @@ namespace Nest
 		internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]
-		internal IDictionary<string, SuggestDescriptorBucket<T>> _Suggest { get; set; }
+		internal IDictionary<string, object> _Suggest { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		internal RawOrQueryDescriptor<T> _QueryOrRaw
@@ -877,12 +877,23 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// To avoid repetition of the suggest text, it is possible to define a global text.
+		/// </summary>
+		public SearchDescriptor<T> SuggestGlobalText(string globalSuggestText)
+		{
+			if (this._Suggest == null)
+				this._Suggest = new Dictionary<string, object>();
+			this._Suggest.Add("text", globalSuggestText);
+			return this;
+		}
+
 		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
+				this._Suggest = new Dictionary<string, object>();
 			var desc = new TermSuggestDescriptor<T>();
 			var item = suggest(desc);
 			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
@@ -895,7 +906,7 @@ namespace Nest
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
+				this._Suggest = new Dictionary<string, object>();
 
 			var desc = new PhraseSuggestDescriptor<T>();
 			var item = suggest(desc);
@@ -909,7 +920,7 @@ namespace Nest
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
+				this._Suggest = new Dictionary<string, object>();
 
 			var desc = new CompletionSuggestDescriptor<T>();
 			var item = suggest(desc);

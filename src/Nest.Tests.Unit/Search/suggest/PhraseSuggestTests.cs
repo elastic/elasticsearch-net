@@ -56,6 +56,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		public void PhraseSuggestOnSearchTest()
 		{
 			var search = this._client.Search<ElasticSearchProject>(s => s
+				.SuggestGlobalText("glob")
 				.SuggestPhrase("myphrasesuggest", ts => ts
 					.Text("n")
 					.Analyzer("body")
@@ -68,6 +69,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 
 			var expected = @"{
 				suggest: {
+					text: ""glob"",
 					myphrasesuggest: {
 						text: ""n"",
 						phrase: {
