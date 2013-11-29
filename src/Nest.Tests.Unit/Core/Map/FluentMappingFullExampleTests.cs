@@ -234,6 +234,15 @@ namespace Nest.Tests.Unit.Core.Map
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)
+					.Completion(s=>s
+						.Name(p=>p.Name)
+						.IndexAnalyzer("standard")
+						.SearchAnalyzer("standard")
+						.MaxInputLength(20)
+						.Payloads()
+						.PreservePositionIncrements()
+						.PreserveSeparators()
+					)
 				)
 			);
 

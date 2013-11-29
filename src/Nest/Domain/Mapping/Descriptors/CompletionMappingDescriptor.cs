@@ -36,19 +36,19 @@ namespace Nest
             return this;
         }
 
-        public CompletionMappingDescriptor<T> Payloads(bool payloads)
+        public CompletionMappingDescriptor<T> Payloads(bool payloads = true)
         {
             this._Mapping.Payloads = payloads;
             return this;
         }
 
-        public CompletionMappingDescriptor<T> PreserveSeparators(bool preserveSeparators)
+        public CompletionMappingDescriptor<T> PreserveSeparators(bool preserveSeparators = true)
         {
             this._Mapping.PreserveSeparators = preserveSeparators;
             return this;
         }
 
-        public CompletionMappingDescriptor<T> PreservePositionIncrements(bool preservePositionIncrements)
+        public CompletionMappingDescriptor<T> PreservePositionIncrements(bool preservePositionIncrements = true)
         {
             this._Mapping.PreservePositionIncrements = preservePositionIncrements;
             return this;
