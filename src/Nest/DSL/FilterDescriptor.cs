@@ -751,6 +751,36 @@ namespace Nest
 			});
 
 		}
+
+		/// <summary>
+		/// Filter documents indexed using the geo_shape type.
+		/// </summary>
+		public BaseFilter TermsLookup(Expression<Func<T, object>> fieldDescriptor, Action<TermsLookupFilterDescriptor> filterDescriptor)
+		{
+			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
+			return this.TermsLookup(field, filterDescriptor);
+		}
+		/// <summary>
+		/// Filter documents indexed using the geo_shape type.
+		/// </summary>
+		public BaseFilter TermsLookup(string field, Action<TermsLookupFilterDescriptor> filterDescriptor)
+		{
+			var filter = new TermsLookupFilterDescriptor();
+			if (filterDescriptor == null)
+				return CreateConditionlessFilterDescriptor("terms", filter);
+
+			filterDescriptor(filter);
+			if (filter.IsConditionless)
+				return CreateConditionlessFilterDescriptor("terms", filter);
+
+			return this.SetDictionary("terms", field, filter, (d, b) =>
+			{
+				b.TermsFilter = d;
+			});
+
+		}
+
+
 		/// <summary>
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
