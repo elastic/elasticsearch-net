@@ -73,5 +73,36 @@ namespace Nest.Tests.Unit.Search.Suggest
 
             Assert.IsTrue(json.JsonEquals(expected), json);
         }
+
+		[Test]
+		public void CompletionSuggestOnSearchTest()
+		{
+			var search = this._client.Search<ElasticSearchProject>(s => s
+				.SuggestCompletion("mycompletionsuggest", ts => ts
+					.Text("n")
+					.OnField(p=>p.Name)
+					.Fuzzy()
+				)
+			);
+
+			var expected = @"{
+				suggest: {
+					mycompletionsuggest: {
+						text: ""n"",
+						completion: {
+							fuzzy: {
+								edit_distance: 1,
+								transpositions: true,
+								min_length: 3,
+								prefix_length: 1
+							},
+							field: ""name""
+						}
+					}
+				}
+			}";
+			var json = search.ConnectionStatus.Request;
+			Assert.True(json.JsonEquals(expected), json);
+		}
     }
 }
