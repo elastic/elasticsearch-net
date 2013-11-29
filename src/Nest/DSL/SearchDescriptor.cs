@@ -877,41 +877,43 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> TermSuggest(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest)
+		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
 				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
-			TermSuggestDescriptor<T> desc = new TermSuggestDescriptor<T>();
-			TermSuggestDescriptor<T> item = suggest(desc);
-			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
+			var desc = new TermSuggestDescriptor<T>();
+			var item = suggest(desc);
+			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}
 
-		public SearchDescriptor<T> PhraseSuggest(string name, Func<PhraseSuggestDescriptor<T>, PhraseSuggestDescriptor<T>> suggest)
+		public SearchDescriptor<T> SuggestPhrase(string name, Func<PhraseSuggestDescriptor<T>, PhraseSuggestDescriptor<T>> suggest)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
 				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
-			PhraseSuggestDescriptor<T> desc = new PhraseSuggestDescriptor<T>();
-			PhraseSuggestDescriptor<T> item = suggest(desc);
-			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, PhraseSuggest = item };
+
+			var desc = new PhraseSuggestDescriptor<T>();
+			var item = suggest(desc);
+			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, PhraseSuggest = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}
 
-		public SearchDescriptor<T> CompletionSuggest(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest)
+		public SearchDescriptor<T> SuggestCompletion(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
-				this._Suggest = new Dictionary<String, SuggestDescriptorBucket<T>>();
-			CompletionSuggestDescriptor<T> desc = new CompletionSuggestDescriptor<T>();
-			CompletionSuggestDescriptor<T> item = suggest(desc);
-			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
+				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
+
+			var desc = new CompletionSuggestDescriptor<T>();
+			var item = suggest(desc);
+			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}

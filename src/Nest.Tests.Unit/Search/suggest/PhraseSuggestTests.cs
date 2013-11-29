@@ -52,6 +52,36 @@ namespace Nest.Tests.Unit.Search.Suggest
             Assert.True(json.JsonEquals(expected), json);
         }
 
+		[Test]
+		public void PhraseSuggestOnSearchTest()
+		{
+			var search = this._client.Search<ElasticSearchProject>(s => s
+				.SuggestPhrase("myphrasesuggest", ts => ts
+					.Text("n")
+					.Analyzer("body")
+					.OnField("bigram")
+					.Size(1)
+					.MaxErrors(0.5m)
+					.GramSize(2)
+				)
+			);
 
+			var expected = @"{
+				suggest: {
+					myphrasesuggest: {
+						text: ""n"",
+						phrase: {
+							  ""gram_size"": 2,
+                              ""max_errors"": 0.5,
+                              ""field"": ""bigram"",
+                              ""analyzer"": ""body"",
+                              ""size"": 1
+						}
+					}
+				}
+			}";
+			var json = search.ConnectionStatus.Request;
+			Assert.True(json.JsonEquals(expected), json);
+		}
 	} 
 }

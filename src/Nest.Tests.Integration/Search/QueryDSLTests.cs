@@ -154,7 +154,7 @@ namespace Nest.Tests.Integration.Search
 
             var results = this._client.Search<ElasticSearchProject>(s => s
                 .Query(q => q.MatchAll())
-				.TermSuggest("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text(wrongCountry).Size(1).OnField("country"))
+				.SuggestTerm("mySuggest", m => m.SuggestMode(SuggestMode.Always).Text(wrongCountry).Size(1).OnField("country"))
             );
 
             Assert.NotNull(results);
@@ -179,7 +179,7 @@ namespace Nest.Tests.Integration.Search
         {
             var results = this._client.Search<ElasticSearchProject>(s => s
                 .Query(q => q.MatchAll())
-                .PhraseSuggest("myPhraseSuggest", m => m.Text("Nostrud frankufrter dseerunt ulalmco").Size(1).OnField("content"))
+                .SuggestPhrase("myPhraseSuggest", m => m.Text("Nostrud frankufrter dseerunt ulalmco").Size(1).OnField("content"))
             );
 
             Assert.NotNull(results);
