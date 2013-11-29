@@ -29,8 +29,8 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum @e.Name 
 	{
-	  @Raw(string.Join(",\r\n\t\t", e.Options.Select(CreateEnum)))
-	  }
+		  @Raw(string.Join(",\r\n\t\t", e.Options.Select(CreateEnum)))
+	}
 	</text>
 	}
 }
