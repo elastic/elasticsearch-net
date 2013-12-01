@@ -8,6 +8,7 @@ using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -16,6 +17,14 @@ namespace Nest
 		private readonly IConnectionSettings _settings;
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
+
+		private static readonly JsonConverter[] _defaultConverters =
+		{
+			new AnalyzerCollectionConverter(), 
+			new TokenFilterCollectionConverter(), 
+			new TokenizerCollectionConverter(), 
+			new CharFilterCollectionConverter()
+		};
 
 		public ElasticSerializer(IConnectionSettings settings)
 		{
@@ -79,6 +88,11 @@ namespace Nest
 			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null 
 				? this.CreateSettings(extraConverters, piggyBackJsonConverter) 
 				: this._serializationSettings;
+
+			var jObjectValue = value as JObject;
+			if (jObjectValue != null)
+				return JsonSerializer.Create(jsonSettings).Deserialize<T>(jObjectValue.CreateReader());
+
 			var status = value as ConnectionStatus;
 			if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
 				return JsonConvert.DeserializeObject<T>(value.ToString(), jsonSettings);
@@ -89,15 +103,15 @@ namespace Nest
 		internal JsonSerializerSettings CreateSettings(IList<JsonConverter> extraConverters = null, JsonConverter piggyBackJsonConverter = null)
 		{
 			var converters = extraConverters.HasAny()
-				? extraConverters.ToList()
-				: null;
+				? extraConverters.Concat(_defaultConverters)
+				: _defaultConverters;
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
             var settings = new JsonSerializerSettings()
 			{
 				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore,
-				Converters = converters,
+				Converters = converters.ToList(),
 			};
 
             if (_settings.ModifyJsonSerializerSettings != null)

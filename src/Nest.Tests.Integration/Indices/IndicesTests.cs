@@ -46,6 +46,7 @@ namespace Nest.Tests.Integration.Indices
 			settings.NumberOfReplicas = 4;
 			settings.NumberOfShards = 8;
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
+			settings.Analysis.Analyzers.Add("standard", new StandardAnalyzer { StopWords = new[]{"word1", "word2"}});
 			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			typeMapping.TypeNameMarker = index;
 			settings.Mappings.Add(typeMapping);
@@ -61,6 +62,9 @@ namespace Nest.Tests.Integration.Indices
 			Assert.AreEqual(r.Settings.NumberOfShards, 8);
 			Assert.Greater(r.Settings.Count(), 0);
 			Assert.True(r.Settings.ContainsKey("merge.policy.merge_factor"));
+			Assert.AreEqual(2, r.Settings.Analysis.Analyzers.Count);
+			Assert.True(r.Settings.Analysis.Analyzers.ContainsKey("snowball"));
+			Assert.True(r.Settings.Analysis.Analyzers.ContainsKey("standard"));
 
 			this._client.DeleteIndex(index);
 		}

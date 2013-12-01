@@ -4,7 +4,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class AnalysisSettings
+	[JsonConverter(typeof(AnalysisSettingsConverter))]
+	public class AnalysisSettings
     {
         public AnalysisSettings()
         {
@@ -14,16 +15,16 @@ namespace Nest
 			this.CharFilters = new Dictionary<string, CharFilterBase>();
         }
 
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(AnalyzerCollectionConverter))]
 		public IDictionary<string, AnalyzerBase> Analyzers { get; set; }
 
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(TokenFilterCollectionConverter))]
 		public IDictionary<string, TokenFilterBase> TokenFilters { get; set; }
 	
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(TokenizerCollectionConverter))]
 		public IDictionary<string, TokenizerBase> Tokenizers { get; set; }
 		
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(CharFilterCollectionConverter))]
 		public IDictionary<string, CharFilterBase> CharFilters { get; set; }
     }
 }
