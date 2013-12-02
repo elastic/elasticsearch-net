@@ -18,14 +18,6 @@ namespace Nest
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
 
-		private static readonly JsonConverter[] _defaultConverters =
-		{
-			new AnalyzerCollectionConverter(), 
-			new TokenFilterCollectionConverter(), 
-			new TokenizerCollectionConverter(), 
-			new CharFilterCollectionConverter()
-		};
-
 		public ElasticSerializer(IConnectionSettings settings)
 		{
 			this._settings = settings;
@@ -103,15 +95,15 @@ namespace Nest
 		internal JsonSerializerSettings CreateSettings(IList<JsonConverter> extraConverters = null, JsonConverter piggyBackJsonConverter = null)
 		{
 			var converters = extraConverters.HasAny()
-				? extraConverters.Concat(_defaultConverters)
-				: _defaultConverters;
+				? extraConverters.ToList()
+				: null;
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
             var settings = new JsonSerializerSettings()
 			{
 				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore,
-				Converters = converters.ToList(),
+				Converters = converters,
 			};
 
             if (_settings.ModifyJsonSerializerSettings != null)

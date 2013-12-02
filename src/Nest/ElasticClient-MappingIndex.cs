@@ -37,17 +37,18 @@ namespace Nest
 				var settingsObject = o.First.First.First.First;
 
 				var settingsContainer = new JObject();
+				// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
 				foreach (JProperty s in settingsObject.Children<JProperty>())
 				{
 					var name = StripIndex.Replace(s.Name, "");
 					if (name.StartsWith("analysis"))
 					{
 						var key = name.Split('.');
-						WriteJObject(settingsContainer, key, s.Value);
+						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, key, s.Value);
 					}
 					else
 					{
-						WriteJObject(settingsContainer, new[] { name }, s.Value);
+						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] { name }, s.Value);
 					}
 				}
 
@@ -57,45 +58,6 @@ namespace Nest
 			catch { }
 			response.ConnectionStatus = status;
 			return response;
-		}
-
-		private JToken WriteJObject(JContainer container, string[] key, JToken value)
-		{
-			var thisKey = key.First();
-			int indexer;
-			if (key.Length > 2 || (key.Length == 2 && !int.TryParse(key.Last(), out indexer)))
-			{
-				var property = (JContainer)((JObject)container).GetValue(thisKey);
-				if (property == null)
-				{
-					property = new JObject();
-					((JObject)container).Add(thisKey, property);
-				}
-				var innerValue = WriteJObject(property, key.Skip(1).ToArray(), value);
-
-				//property.Add(new JValue(innerValue));
-				//return property;
-				return property;
-			}
-			
-			if (key.Length == 2 && int.TryParse(key.Last(), out indexer))
-			{
-				var property = ((JObject)container).Property(thisKey);
-				if (property == null)
-				{
-					property = new JProperty(thisKey, new JArray());
-					container.Add(property);
-				}
-				var jArray = (JArray)property.Value;
-				jArray.Add(value);
-				return property;
-			}
-
-			{
-				var property = new JProperty(thisKey, value);
-				container.Add(property);
-				return property;
-			}
 		}
 
 		/// <summary>
@@ -150,6 +112,45 @@ namespace Nest
 			var status = this.Connection.DeleteSync(path);
 			var r = this.Deserialize<IndicesResponse>(status);
 			return r;
+		}
+
+		/// <summary>
+		/// Rewrites the index settings response to index settings json.
+		/// </summary>
+		/// <param name="container">The container.</param>
+		/// <param name="key">The key.</param>
+		/// <param name="value">The value.</param>
+		private void RewriteIndexSettingsResponseToIndexSettingsJSon(JContainer container, string[] key, JToken value)
+		{
+			var thisKey = key.First();
+			int indexer;
+			
+			if (key.Length > 2 || (key.Length == 2 && !int.TryParse(key.Last(), out indexer)))
+			{
+				var property = (JContainer)((JObject)container).GetValue(thisKey);
+				if (property == null)
+				{
+					property = new JObject();
+					((JObject)container).Add(thisKey, property);
+				}
+				RewriteIndexSettingsResponseToIndexSettingsJSon(property, key.Skip(1).ToArray(), value);
+			}
+			else if (key.Length == 2 && int.TryParse(key.Last(), out indexer))
+			{
+				var property = ((JObject)container).Property(thisKey);
+				if (property == null)
+				{
+					property = new JProperty(thisKey, new JArray());
+					container.Add(property);
+				}
+				var jArray = (JArray)property.Value;
+				jArray.Add(value);
+			}
+			else
+			{
+				var property = new JProperty(thisKey, value);
+				container.Add(property);
+			}
 		}
 
 	}
