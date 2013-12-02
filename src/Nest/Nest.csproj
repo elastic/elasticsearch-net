@@ -132,6 +132,9 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="IRawElasticClient.Generated.cs" />
+    <Compile Include="Resolvers\Converters\AnalysisSettingsConverter.cs" />
+    <Compile Include="Resolvers\Converters\AnalyzerCollectionConverter.cs" />
+    <Compile Include="Resolvers\Converters\CharFilterCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\ConcreteTypeConverter.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />
@@ -520,6 +523,8 @@
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />
+    <Compile Include="Resolvers\Converters\TokenFilterCollectionConverter.cs" />
+    <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />

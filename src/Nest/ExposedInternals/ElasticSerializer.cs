@@ -8,6 +8,7 @@ using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -79,6 +80,11 @@ namespace Nest
 			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null 
 				? this.CreateSettings(extraConverters, piggyBackJsonConverter) 
 				: this._serializationSettings;
+
+			var jTokenValue = value as JToken;
+			if (jTokenValue != null)
+				return JsonSerializer.Create(jsonSettings).Deserialize<T>(jTokenValue.CreateReader());
+
 			var status = value as ConnectionStatus;
 			if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
 				return JsonConvert.DeserializeObject<T>(value.ToString(), jsonSettings);

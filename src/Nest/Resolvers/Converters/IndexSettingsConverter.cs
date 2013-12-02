@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Nest.Domain.Settings;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
@@ -38,30 +40,7 @@ namespace Nest.Resolvers.Converters
 				)
 			{
 				writer.WritePropertyName("analysis");
-				writer.WriteStartObject();
-				if (indexSettings.Analysis.Analyzers.Count > 0)
-				{
-					writer.WritePropertyName("analyzer");
-					serializer.Serialize(writer, indexSettings.Analysis.Analyzers);
-				}
-
-				if (indexSettings.Analysis.TokenFilters.Count > 0)
-				{
-					writer.WritePropertyName("filter");
-					serializer.Serialize(writer, indexSettings.Analysis.TokenFilters);
-				}
-				if (indexSettings.Analysis.Tokenizers.Count > 0)
-				{
-					writer.WritePropertyName("tokenizer");
-					serializer.Serialize(writer, indexSettings.Analysis.Tokenizers);
-				}
-				if (indexSettings.Analysis.CharFilters.Count > 0)
-				{
-					writer.WritePropertyName("char_filter");
-					serializer.Serialize(writer, indexSettings.Analysis.CharFilters);
-				}
-
-				writer.WriteEndObject();
+				serializer.Serialize(writer, indexSettings.Analysis);
 			}
 
 			writer.WriteEndObject();
@@ -133,7 +112,54 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			return null;
+			JObject o = JObject.Load(reader);
+			var result = new IndexSettings();
+			foreach (var rootProperty in o.Children<JProperty>())
+			{
+				if (rootProperty.Name.Equals("analysis", StringComparison.InvariantCultureIgnoreCase))
+				{
+					result.Analysis = serializer.Deserialize<AnalysisSettings>(rootProperty.Value.CreateReader());
+				}
+				else if (rootProperty.Name.Equals("warmers", StringComparison.InvariantCultureIgnoreCase))
+				{
+					foreach (var jWarmer in rootProperty.Value.Children<JProperty>())
+					{
+						result.Warmers[jWarmer.Name] = serializer.Deserialize<WarmerMapping>(jWarmer.Value.CreateReader());
+					}
+				}
+				else if (rootProperty.Name.Equals("similarity", StringComparison.InvariantCultureIgnoreCase))
+				{
+					var baseSimilarity = ((JObject)rootProperty.Value).Property("base");
+					if (baseSimilarity != null)
+					{
+						baseSimilarity.Remove();
+						result.Similarity = new SimilaritySettings(((JObject)baseSimilarity.Value).Property("type").Value.ToString());
+					}
+					else
+					{
+						result.Similarity = new SimilaritySettings();
+					}
+
+					foreach(var similarityProperty in rootProperty.Value.Children<JProperty>())
+					{
+						var typeProperty = ((JObject)similarityProperty.Value).Property("type");
+						typeProperty.Remove();
+						var customSimilarity = new CustomSimilaritySettings(similarityProperty.Name, typeProperty.Value.ToString());
+						foreach (var similaritySetting in similarityProperty.Value.Children<JProperty>())
+						{
+							customSimilarity.SimilarityParameters.Add(similaritySetting.Name, similaritySetting.Value.ToString());
+						}
+
+						result.Similarity.CustomSimilarities.RemoveAll(x => x.Name == customSimilarity.Name);
+						result.Similarity.CustomSimilarities.Add(customSimilarity);
+					}
+				}
+				else
+				{
+					result.Settings[rootProperty.Name] = rootProperty.Value.ToString();
+				}
+			}
+			return result;
 		}
 
 		private static Type _type = typeof (IndexSettings);

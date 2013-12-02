@@ -55,6 +55,18 @@ namespace Nest.Resolvers
 			if (objectType == typeof(MultiSearchResponse))
 				contract.Converter = new MultiSearchConverter();
 
+			if (objectType == typeof(IDictionary<string, AnalyzerBase>))
+				contract.Converter = new AnalyzerCollectionConverter();
+
+			if (objectType == typeof(IDictionary<string, TokenFilterBase>))
+				contract.Converter = new TokenFilterCollectionConverter();
+
+			if (objectType == typeof(IDictionary<string, TokenizerBase>))
+				contract.Converter = new TokenizerCollectionConverter();
+
+			if (objectType == typeof(IDictionary<string, CharFilterBase>))
+				contract.Converter = new CharFilterCollectionConverter();
+
 			if (this.ConnectionSettings.ContractConverters.HasAny())
 			{
 				foreach (var c in this.ConnectionSettings.ContractConverters)

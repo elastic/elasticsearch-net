@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
@@ -33,21 +35,37 @@ namespace Nest
 			{
 				var o = JObject.Parse(status.Result);
 				var settingsObject = o.First.First.First.First;
-				var settings = new IndexSettings(); //this.Deserialize<IndexSettings>(settingsObject.ToString());
 
+				var settingsContainer = new JObject();
+				// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
 				foreach (JProperty s in settingsObject.Children<JProperty>())
 				{
-					settings.Add(StripIndex.Replace(s.Name, ""), s.Value.ToString());
+					var name = StripIndex.Replace(s.Name, "");
+					if (name.StartsWith("analysis."))
+					{
+						var keys = name.Split('.');
+						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, keys, s.Value);
+					}
+					else if (name.StartsWith("similarity."))
+					{
+						var keys = name.Split('.');
+						var similaryKeys = new[] { keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray()) };
+						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
+					}
+					else
+					{
+						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] { name }, s.Value);
+					}
 				}
 
-
-				response.Settings = settings;
+				response.Settings = this.Deserialize<IndexSettings>(settingsContainer);
 				response.IsValid = true;
 			}
 			catch { }
 			response.ConnectionStatus = status;
 			return response;
 		}
+
 		/// <summary>
 		/// Update the index settings for the default index
 		/// </summary>
@@ -64,29 +82,9 @@ namespace Nest
 
 			string path = this.PathResolver.CreateIndexPath(index, "_settings");
 			settings.Settings = settings.Settings
-					.Where(kv => IndexSettings.UpdateWhiteList.Any(p =>
-					{
-						return kv.Key.StartsWith(p);
-					}
-					)).ToDictionary(kv => kv.Key, kv => kv.Value);
+					.Where(kv => IndexSettings.UpdateWhiteList.Any(p => kv.Key.StartsWith(p))).ToDictionary(kv => kv.Key, kv => kv.Value);
 
-			var sb = new StringBuilder();
-			var sw = new StringWriter(sb);
-			using (JsonWriter jsonWriter = new JsonTextWriter(sw))
-			{
-				jsonWriter.WriteStartObject();
-				jsonWriter.WritePropertyName("index");
-				jsonWriter.WriteStartObject();
-				foreach (var kv in settings.Settings)
-				{
-					jsonWriter.WritePropertyName(kv.Key);
-					jsonWriter.WriteValue(kv.Value);
-				}
-
-				jsonWriter.WriteEndObject();
-			}
-			string data = sb.ToString();
-
+			string data = this.Serializer.Serialize(settings, Formatting.None);
 			var status = this.Connection.PutSync(path, data);
 
 			var r = new SettingsOperationResponse();
@@ -120,6 +118,45 @@ namespace Nest
 			var status = this.Connection.DeleteSync(path);
 			var r = this.Deserialize<IndicesResponse>(status);
 			return r;
+		}
+
+		/// <summary>
+		/// Rewrites the index settings response to index settings json.
+		/// </summary>
+		/// <param name="container">The container.</param>
+		/// <param name="key">The key.</param>
+		/// <param name="value">The value.</param>
+		private void RewriteIndexSettingsResponseToIndexSettingsJSon(JContainer container, string[] key, JToken value)
+		{
+			var thisKey = key.First();
+			int indexer;
+			
+			if (key.Length > 2 || (key.Length == 2 && !int.TryParse(key.Last(), out indexer)))
+			{
+				var property = (JContainer)((JObject)container).GetValue(thisKey);
+				if (property == null)
+				{
+					property = new JObject();
+					((JObject)container).Add(thisKey, property);
+				}
+				RewriteIndexSettingsResponseToIndexSettingsJSon(property, key.Skip(1).ToArray(), value);
+			}
+			else if (key.Length == 2 && int.TryParse(key.Last(), out indexer))
+			{
+				var property = ((JObject)container).Property(thisKey);
+				if (property == null)
+				{
+					property = new JProperty(thisKey, new JArray());
+					container.Add(property);
+				}
+				var jArray = (JArray)property.Value;
+				jArray.Add(value);
+			}
+			else
+			{
+				var property = new JProperty(thisKey, value);
+				container.Add(property);
+			}
 		}
 
 	}
