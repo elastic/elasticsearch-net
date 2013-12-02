@@ -81,9 +81,9 @@ namespace Nest
 				? this.CreateSettings(extraConverters, piggyBackJsonConverter) 
 				: this._serializationSettings;
 
-			var jObjectValue = value as JObject;
-			if (jObjectValue != null)
-				return JsonSerializer.Create(jsonSettings).Deserialize<T>(jObjectValue.CreateReader());
+			var jTokenValue = value as JToken;
+			if (jTokenValue != null)
+				return JsonSerializer.Create(jsonSettings).Deserialize<T>(jTokenValue.CreateReader());
 
 			var status = value as ConnectionStatus;
 			if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
