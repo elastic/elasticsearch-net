@@ -42,3 +42,4 @@ build/keys/keypair.snk
 /dep/Newtonsoft.Json.4.0.2
 
 /src/Nest.Tests.Unit/*.ncrunchproject
+*.ncrunchproject

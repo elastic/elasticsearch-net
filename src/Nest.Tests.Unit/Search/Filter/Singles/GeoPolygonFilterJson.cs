@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.Filter(filter => filter
 					.GeoPolygon("origin", "drn5x1g8cu2y", "30, -80", "20, -90")
 				);
-
+			 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 				filter : {

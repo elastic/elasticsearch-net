@@ -100,7 +100,15 @@ namespace Nest
 				});
 			return this.OnFields(fieldNames);
 		}
-
+		public QueryStringDescriptor<T> OnFieldsWithBoost(
+		Action<FluentDictionary<string, double?>> boostableSelector)
+		{
+			var d = new FluentDictionary<string, double?>();
+			boostableSelector(d);
+			var fieldNames = d
+				.Select(o => "{0}^{1}".F(o.Key, o.Value.GetValueOrDefault(1.0).ToString(CultureInfo.InvariantCulture)));
+			return this.OnFields(fieldNames);
+		}
 
 		public QueryStringDescriptor<T> Query(string query)
 		{

@@ -107,6 +107,9 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\RegexpFilterJson.cs" />
     <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
     <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
@@ -219,6 +222,7 @@
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
     <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
     <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
     <Compile Include="Search\Suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />

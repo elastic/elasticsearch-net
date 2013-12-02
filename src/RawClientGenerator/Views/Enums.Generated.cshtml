@@ -1,6 +1,14 @@
 @using System.Collections.Generic
 @using System.Linq
 @using RawClientGenerator
+
+@functions {
+	private string CreateEnum
+   (string o)
+	{
+		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}", o, o.ToPascalCase());
+	}
+}
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +29,7 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum @e.Name 
 	{
-		@Raw(string.Join(",\r\n\t\t", e.Options.Select(o=> string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}", o, o.ToPascalCase()))))
+		  @Raw(string.Join(",\r\n\t\t", e.Options.Select(CreateEnum)))
 	}
 	</text>
 	}
