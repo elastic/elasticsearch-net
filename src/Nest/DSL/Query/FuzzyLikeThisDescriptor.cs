@@ -59,6 +59,11 @@ namespace Nest
 			this._IgnoreTermFrequency = ignore;
 			return this;
 		}
+		public FuzzyLikeThisDescriptor<T> MinimumSimilarity(int minSimilarity)
+		{
+			this._MinSimilarity = minSimilarity;
+			return this;
+		}
 		public FuzzyLikeThisDescriptor<T> MaxQueryTerms(int maxQueryTerms)
 		{
 			this._MaxQueryTerms = maxQueryTerms;

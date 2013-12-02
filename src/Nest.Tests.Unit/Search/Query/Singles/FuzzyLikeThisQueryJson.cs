@@ -38,6 +38,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.LikeText("elasticsearcc")
 						.PrefixLength(3)
 						.MaxQueryTerms(25)
+						.MinimumSimilarity(3)
 						.IgnoreTermFrequency(true)
 						.Boost(1.1)
 						.Analyzer("my_analyzer")
@@ -50,6 +51,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				like_text : ""elasticsearcc"",
 				ignore_tf: true,
 				max_query_terms: 25,
+				min_similarity: 3,
 				prefix_length: 3,
 				boost: 1.1,
 				analyzer: ""my_analyzer""
