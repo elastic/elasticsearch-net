@@ -41,10 +41,16 @@ namespace Nest
 				foreach (JProperty s in settingsObject.Children<JProperty>())
 				{
 					var name = StripIndex.Replace(s.Name, "");
-					if (name.StartsWith("analysis"))
+					if (name.StartsWith("analysis."))
 					{
-						var key = name.Split('.');
-						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, key, s.Value);
+						var keys = name.Split('.');
+						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, keys, s.Value);
+					}
+					else if (name.StartsWith("similarity."))
+					{
+						var keys = name.Split('.');
+						var similaryKeys = new[] { keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray()) };
+						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
 					}
 					else
 					{
