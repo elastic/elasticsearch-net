@@ -58,10 +58,10 @@ namespace Nest.Resolvers
 			if (objectType == typeof(IDictionary<string, AnalyzerBase>))
 				contract.Converter = new AnalyzerCollectionConverter();
 
-			if (objectType == typeof(IDictionary<string, TokenizerBase>))
+			if (objectType == typeof(IDictionary<string, TokenFilterBase>))
 				contract.Converter = new TokenFilterCollectionConverter();
 
-			if (objectType == typeof(MultiSearchResponse))
+			if (objectType == typeof(IDictionary<string, TokenizerBase>))
 				contract.Converter = new TokenizerCollectionConverter();
 
 			if (objectType == typeof(IDictionary<string, CharFilterBase>))
