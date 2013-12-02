@@ -68,21 +68,6 @@ namespace Nest.Resolvers.Converters
 			return result;
 		}
 
-		private void ReadCharFilterJson(JsonSerializer serializer, JProperty rootProperty, AnalysisSettings result)
-		{
-			
-		}
-
-		private void ReadTokenizerJson(JsonSerializer serializer, JProperty rootProperty, AnalysisSettings result)
-		{
-			
-		}
-
-		private void ReadFilterJson(JsonSerializer serializer, JProperty rootProperty, AnalysisSettings result)
-		{
-			
-		}
-
 		private static Type _type = typeof(AnalysisSettings);
 		public override bool CanConvert(Type objectType)
 		{
