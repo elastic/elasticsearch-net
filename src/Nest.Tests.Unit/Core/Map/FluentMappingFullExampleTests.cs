@@ -235,7 +235,7 @@ namespace Nest.Tests.Unit.Core.Map
 						.DistanceErrorPercentage(0.025)
 					)
 					.Completion(s=>s
-						.Name(p=>p.Name)
+						.Name(p=>p.Name.Suffix("completion"))
 						.IndexAnalyzer("standard")
 						.SearchAnalyzer("standard")
 						.MaxInputLength(20)
