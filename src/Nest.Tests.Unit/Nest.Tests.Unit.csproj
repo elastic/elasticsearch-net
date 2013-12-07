@@ -221,6 +221,7 @@
     <Compile Include="Search\SearchOptions\SearchOptionTests.cs" />
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
+    <Compile Include="Search\Sort\FunctionScoreTests.cs" />
     <Compile Include="Search\Sort\SortTests.cs" />
     <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
     <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
