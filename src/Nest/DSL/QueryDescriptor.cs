@@ -124,7 +124,7 @@ namespace Nest
 		{
 			var q = new QueryDescriptor<T>();
 			q.IsStrict = this.IsStrict;
-			
+
 			if (fillProperty != null)
 				fillProperty(q);
 			return q;
@@ -416,6 +416,19 @@ namespace Nest
 
 			return this.New(q => q.NestedQueryDescriptor = query);
 		}
+
+		/// <summary>
+		/// A thin wrapper allowing fined grained control what should happen if a query is conditionless
+		/// if you need to fallback to something other than a match_all query
+		/// </summary>
+		public BaseQuery Conditionless(Action<ConditionlessQueryDescriptor<T>> selector)
+		{
+			var query = new ConditionlessQueryDescriptor<T>();
+			selector(query);
+
+			return (query._Query == null || query._Query.IsConditionless) ? query._Fallback : query._Query;
+		}
+
 
 		/// <summary>
 		/// The indices query can be used when executed across multiple indices, allowing to have a query that executes
@@ -900,20 +913,20 @@ namespace Nest
 			return this.New(q => q.RegexpQueryDescriptor = regexp);
 		}
 
-    /// <summary>
-    /// Function score query
-    /// </summary>
-    /// <returns></returns>
-	  public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
+		/// <summary>
+		/// Function score query
+		/// </summary>
+		/// <returns></returns>
+		public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
 		{
-            var query = new FunctionScoreQueryDescriptor<T>();
-            functionScoreQuery(query);
+			var query = new FunctionScoreQueryDescriptor<T>();
+			functionScoreQuery(query);
 
 			if (query.IsConditionless)
 				return CreateConditionlessQueryDescriptor(query);
 
 			this.FunctionScoreQueryDescriptor = query;
-            return new QueryDescriptor<T> { FunctionScoreQueryDescriptor = this.FunctionScoreQueryDescriptor };
+			return new QueryDescriptor<T> { FunctionScoreQueryDescriptor = this.FunctionScoreQueryDescriptor };
 		}
 	}
 }
