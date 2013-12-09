@@ -522,8 +522,6 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
-    <Compile Include="Resolvers\Converters\ConditionlessQueryDescriptorConverter.cs" />
-    <Compile Include="Resolvers\Converters\ConditionlessFilterDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />

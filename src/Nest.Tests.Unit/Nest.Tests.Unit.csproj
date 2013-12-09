@@ -107,6 +107,7 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Search\Filter\Singles\ConditionlessFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
     <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
+    <Compile Include="Search\Query\Singles\ConditionlessQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
