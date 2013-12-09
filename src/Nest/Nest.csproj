@@ -75,9 +75,11 @@
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="DSL\Filter\ConditionlessFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\TermsLookupFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoIndexedShapeFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\GeoShapeFilterDescriptor.cs" />
+    <Compile Include="DSL\Query\ConditionlessQueryDescriptor.cs" />
     <Compile Include="DSL\Suggest\FuzzySuggestDescriptor.cs" />
     <Compile Include="DSL\Filter\RegexpFilterDescriptor.cs" />
     <Compile Include="DSL\Query\RegexpQueryDescriptor.cs" />

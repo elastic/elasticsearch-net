@@ -374,6 +374,19 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// A thin wrapper allowing fined grained control what should happen if a query is conditionless
+		/// if you need to fallback to something other than a match_all query
+		/// </summary>
+		public BaseQuery Conditionless(Action<ConditionlessQueryDescriptor<T>> selector)
+		{
+			var query = new ConditionlessQueryDescriptor<T>();
+			selector(query);
+
+			return (query._Query == null || query._Query.IsConditionless) ? query._Fallback : query._Query;
+		}
+
+
+		/// <summary>
 		/// The indices query can be used when executed across multiple indices, allowing to have a query that executes
 		/// only when executed on an index that matches a specific list of indices, and another query that executes 
 		/// when it is executed on an index that does not match the listed indices.

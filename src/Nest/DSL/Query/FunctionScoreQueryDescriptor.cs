@@ -10,6 +10,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+    //More info about it http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/query-dsl-function-score-query.html
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class FunctionScoreQueryDescriptor<T> : IQuery where T : class
     {
@@ -21,14 +22,16 @@ namespace Nest
 
         [JsonProperty(PropertyName = "score_mode")]
         [JsonConverter(typeof(StringEnumConverter))]
-        FunctionScoreMode _ScoreMode { get; set; }
+        FunctionScoreMode? _ScoreMode { get; set; }
 
+        [JsonProperty(PropertyName = "random_score")]
+        RandomScoreFunction _RandomScore { get; set; }
 
 		bool IQuery.IsConditionless
         {
             get
-            {
-                return this._Query == null || this._Query.IsConditionless;
+            {                
+                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null;
             }
         }
 
@@ -59,6 +62,16 @@ namespace Nest
         public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
         {
             this._ScoreMode = mode;
+            return this;
+        }
+
+        public FunctionScoreQueryDescriptor<T> RandomScore(int? seed=null)
+        {
+            this._RandomScore = new RandomScoreFunction();
+            if (seed.HasValue)
+            {
+                _RandomScore._Seed = seed.Value;
+            }
             return this;
         }
     }
@@ -237,6 +250,22 @@ namespace Nest
         public BoostFactorFunction(double boostFactor)
         {
             _BoostFactor = boostFactor;
+        }
+    }
+
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class RandomScoreFunction
+    {
+        [JsonProperty(PropertyName = "seed")]
+        internal int? _Seed { get; set; }
+
+        public RandomScoreFunction(int seed)
+        {
+            _Seed = seed;
+        }
+
+        public RandomScoreFunction()
+        {
         }
     }
 }

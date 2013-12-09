@@ -28,6 +28,10 @@ namespace Nest
 		{
 			return new FilterDescriptor<T>().Exists(field);
 		}
+		public static BaseFilter Conditionless(Action<ConditionlessFilterDescriptor<T>> conditionlessFilter)
+		{
+			return new FilterDescriptor<T>().Conditionless(conditionlessFilter);
+		}
 		public static BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
 		{
 			return new FilterDescriptor<T>().GeoBoundingBox(fieldDescriptor, topLeftX, topLeftY, bottomRightX, bottomRightY, Type);

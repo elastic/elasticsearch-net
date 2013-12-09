@@ -113,6 +113,8 @@ namespace Nest
     {
       var filter = new FilterDescriptor<T>();
       var f = facetFilter(filter);
+	  if (f.IsConditionless)
+		  f = null;
       this._FacetFilter = f;
       return this;
     }

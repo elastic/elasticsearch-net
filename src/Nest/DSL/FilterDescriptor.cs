@@ -246,6 +246,18 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// A thin wrapper allowing fined grained control what should happen if a filter is conditionless
+		/// if you need to fallback to something other than a match_all query
+		/// </summary>
+		public BaseFilter Conditionless(Action<ConditionlessFilterDescriptor<T>> selector)
+		{
+			var filter = new ConditionlessFilterDescriptor<T>();
+			selector(filter);
+
+			return (filter._Filter == null || filter._Filter.IsConditionless) ? filter._Fallback : filter._Filter;
+		}
+
+		/// <summary>
 		/// Filters documents where a specific field has a value in them.
 		/// </summary>
 		public BaseFilter Exists(Expression<Func<T, object>> fieldDescriptor)

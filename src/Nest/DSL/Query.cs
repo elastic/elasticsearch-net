@@ -43,6 +43,11 @@ namespace Nest
 			return new QueryDescriptor<T>().CustomScore(customScoreQuery);
 		}
 
+		public static BaseQuery Conditionless(Action<ConditionlessQueryDescriptor<T>> conditionlessQuery)
+		{
+			return new QueryDescriptor<T>().Conditionless(conditionlessQuery);
+		}
+
 		public static BaseQuery Dismax(Action<DismaxQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().Dismax(selector);
