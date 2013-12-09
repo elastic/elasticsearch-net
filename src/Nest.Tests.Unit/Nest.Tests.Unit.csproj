@@ -117,6 +117,7 @@
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
+    <Compile Include="Search\Query\Singles\Terms\TermsConditionlessQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
     <Compile Include="Search\Rescore\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
@@ -425,6 +426,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
+    <None Include="Search\Query\Singles\Terms\VerbatimDoesNotThrowOnEmptyTerm.json" />
     <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />
     <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />
     <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json" />

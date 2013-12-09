@@ -20,6 +20,8 @@ namespace Nest
 
 		internal bool IsStrict { get; set; }
 
+		internal bool IsVerbatim { get; set; }
+
 		/// <summary>
 		/// AND's two BaseQueries
 		/// </summary>

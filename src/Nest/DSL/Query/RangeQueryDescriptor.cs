@@ -27,7 +27,7 @@ namespace Nest
 		internal string _Name { get; set; }
 
 		internal string _Field { get; set; }
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

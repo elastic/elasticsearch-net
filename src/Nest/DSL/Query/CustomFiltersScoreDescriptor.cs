@@ -32,7 +32,7 @@ namespace Nest
         [JsonProperty(PropertyName = "max_boost")]
         internal string _MaxBoost { get; set; }
 
-        internal bool IsConditionless
+		bool IQuery.IsConditionless
         {
             get
             {

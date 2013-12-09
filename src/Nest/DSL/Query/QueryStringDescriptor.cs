@@ -55,7 +55,7 @@ namespace Nest
 		internal RewriteMultiTerm? _Rewrite { get; set; }
 
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

@@ -8,6 +8,6 @@ namespace Nest
 {
 	internal interface IQuery
 	{
-		//bool IsConditionless { get; }
+		bool IsConditionless { get; }
 	}
 }

@@ -20,7 +20,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "value")]
 		internal DateTime? _Value { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
