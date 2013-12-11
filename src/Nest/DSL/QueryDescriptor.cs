@@ -26,7 +26,7 @@ namespace Nest
 
 		internal QueryDescriptor(bool forceConditionless)
 		{
-			this._forceConditionless = forceConditionless;
+			this.IsConditionless = forceConditionless;
 		}
 
 		[JsonProperty(PropertyName = "match_all")]
@@ -136,7 +136,7 @@ namespace Nest
 			if (query.IsConditionless && !this.IsVerbatim)
 				return CreateConditionlessQueryDescriptor(query);
 
-			var q = new QueryDescriptor<T> {IsStrict = this.IsStrict};
+			var q = new QueryDescriptor<T> {IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim};
 
 			if (fillProperty != null)
 				fillProperty(q);
@@ -746,10 +746,8 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			var span = new SpanNearQueryDescriptor<T>();
 			selector(span);
-			if (span.IsConditionless)
-				return CreateConditionlessQueryDescriptor(span);
 
-			return this.New(q => q.SpanNearQueryDescriptor = span);
+			return this.New(span, q => q.SpanNearQueryDescriptor = span);
 		}
 		/// <summary>
 		/// Matches the union of its span clauses. 
@@ -760,9 +758,8 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			var span = new SpanOrQueryDescriptor<T>();
 			selector(span);
-			if (span.IsConditionless)
-				return CreateConditionlessQueryDescriptor(span);
-			return this.New(q => q.SpanOrQueryDescriptor = span);
+
+			return this.New(span, q => q.SpanOrQueryDescriptor = span);
 		}
 		/// <summary>
 		/// Removes matches which overlap with another span query. 
@@ -773,9 +770,8 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			var span = new SpanNotQueryDescriptor<T>();
 			selector(span);
-			if (span.IsConditionless)
-				return CreateConditionlessQueryDescriptor(span);
-			return this.New(q => q.SpanNotQueryDescriptor = span);
+
+			return this.New(span, q => q.SpanNotQueryDescriptor = span);
 		}
 
 		/// <summary>
@@ -787,14 +783,11 @@ namespace Nest
 			var query = new RegexpQueryDescriptor<T>();
 			regexpSelector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
 			var regexp = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return this.New(q => q.RegexpQueryDescriptor = regexp);
+			return this.New(query, q => q.RegexpQueryDescriptor = regexp);
 		}
 
     /// <summary>
@@ -806,11 +799,8 @@ namespace Nest
             var query = new FunctionScoreQueryDescriptor<T>();
             functionScoreQuery(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
+			return this.New(query, q => q.FunctionScoreQueryDescriptor = query);
 
-			this.FunctionScoreQueryDescriptor = query;
-            return new QueryDescriptor<T> { FunctionScoreQueryDescriptor = this.FunctionScoreQueryDescriptor };
 		}
 	}
 }

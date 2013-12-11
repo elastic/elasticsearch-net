@@ -20,8 +20,8 @@ namespace Nest
 			get
 			{
 				return this._Include == null && this._Exclude == null
-					|| (this._Include != null && this._Include.IsConditionless)
-					|| (this._Exclude != null && this._Exclude.IsConditionless);
+					|| (this._Include != null && (this._Include as IQuery).IsConditionless)
+					|| (this._Exclude != null && (this._Exclude as IQuery).IsConditionless);
 			}
 		}
 

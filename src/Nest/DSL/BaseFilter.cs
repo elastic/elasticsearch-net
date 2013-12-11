@@ -16,8 +16,9 @@ namespace Nest
 
 		private static readonly IEnumerable<BaseFilter> Empty = Enumerable.Empty<BaseFilter>();
 
-		internal bool IsConditionless { get; set; }
+		internal virtual bool IsConditionless { get; set; }
 		internal bool IsStrict { get; set; }
+		internal bool IsVerbatim { get; set; }
 		
 		/// <summary>
 		/// AND's two BaseFilters

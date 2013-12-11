@@ -107,7 +107,8 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
-    <Compile Include="Search\Filter\Singles\ConditionlessFilterJson.cs" />
+    <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
+    <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
     <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
@@ -115,11 +116,11 @@
     <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
     <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
-    <Compile Include="Search\Query\Singles\ConditionlessQueryJson.cs" />
+    <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
     <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
-    <Compile Include="Search\Query\Singles\Terms\TermsConditionlessQueryJson.cs" />
+    <Compile Include="Search\Query\Modes\QueryModesTests.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
     <Compile Include="Search\Rescore\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
@@ -380,6 +381,7 @@
     <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOpNew.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\Filter\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
     <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -429,7 +431,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
-    <None Include="Search\Query\Singles\Terms\VerbatimDoesNotThrowOnEmptyTerm.json" />
+    <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
     <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />
     <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />
     <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json" />

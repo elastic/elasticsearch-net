@@ -51,7 +51,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				like_text : ""elasticsearcc"",
 				ignore_tf: true,
 				max_query_terms: 25,
-				min_similarity: 3,
+				min_similarity: 3.0,
 				prefix_length: 3,
 				boost: 1.1,
 				analyzer: ""my_analyzer""

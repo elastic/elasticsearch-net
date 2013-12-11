@@ -11,16 +11,12 @@ namespace Nest
 {
 	[JsonConverter(typeof(TermConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class Term : IQuery
+	public class TermFilter : BaseFilter
 	{
 		internal string Field { get; set; }
 		internal object Value { get; set; }
 		internal double? Boost { get; set; }
 
-		bool IQuery.IsConditionless { get { return this.Value == null || this.Value.ToString().IsNullOrEmpty() || this.Field.IsNullOrEmpty(); } }	
-
-		public Term()
-		{
-		}
+		internal bool IsConditionless { get { return this.Value == null || this.Value.ToString().IsNullOrEmpty() || this.Field.IsNullOrEmpty(); } }	
 	}
 }

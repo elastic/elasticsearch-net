@@ -7,40 +7,41 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class ConditionlessQueryDescriptor<T> : IQuery where T : class
+	public class ConditionlessFilterDescriptor<T> where T : class
 	{
-		internal BaseQuery _Query { get; set; }
+		internal BaseFilter _Filter { get; set; }
 
-		internal BaseQuery _Fallback { get; set; }
+		internal BaseFilter _Fallback { get; set; }
 
 		internal bool IsConditionless
 		{
 			get
 			{
-				return (this._Query == null || this._Query.IsConditionless)
+				return (this._Filter == null || this._Filter.IsConditionless)
 					   && (this._Fallback == null || this._Fallback.IsConditionless);
 
 			}
 		}
 
-		public ConditionlessQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ConditionlessFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
-			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryDescriptor<T>();
-			var q = querySelector(query);
+			filterSelector.ThrowIfNull("filterSelector");
+			var filter = new FilterDescriptor<T>();
+			var f = filterSelector(filter);
 
-			this._Query = q;
+			this._Filter = f;
 			return this;
 		}
 
-		public ConditionlessQueryDescriptor<T> Fallback(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public ConditionlessFilterDescriptor<T> Fallback(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
 		{
-			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryDescriptor<T>();
-			var q = querySelector(query);
+			filterSelector.ThrowIfNull("filterSelector");
+			var filter = new FilterDescriptor<T>();
+			var f = filterSelector(filter);
 
-			this._Fallback = q;
+			this._Fallback = f;
 			return this;
 		}
 	}
 }
+

@@ -21,7 +21,7 @@ namespace Nest
 		{
 			get
 			{
-				return this._SpanQueryDescriptor == null || _SpanQueryDescriptor.IsConditionless;
+				return this._SpanQueryDescriptor == null || (_SpanQueryDescriptor as IQuery).IsConditionless;
 			}
 		}
 
@@ -35,8 +35,8 @@ namespace Nest
 		}
 		public SpanFirstQueryDescriptor<T> MatchTerm(string field, string value, double? Boost = null)
 		{
-			var span = new SpanQueryDescriptor<T>();
-			span.SpanTerm(field, value, Boost);
+			var span = new SpanQueryDescriptor<T>(true);
+			span = span.SpanTerm(field, value, Boost);
 			this._SpanQueryDescriptor = span;
 			return this;
 		}

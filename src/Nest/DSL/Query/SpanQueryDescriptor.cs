@@ -12,7 +12,15 @@ namespace Nest
 	public class SpanQueryDescriptor<T> : IQuery where T : class
 	{
 		private bool _spanNewQuery = false;
+		public SpanQueryDescriptor() : this(false)
+		{
+		}
 
+		internal SpanQueryDescriptor(bool forceNewQuery)
+		{
+			this._spanNewQuery = forceNewQuery;
+		}
+		
 		[JsonProperty(PropertyName = "span_term")]
 		internal SpanTerm SpanTermQuery { get; set; }
 
@@ -72,7 +80,6 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanOrQueryDescriptor<T>());
 			return CreateQuery(q, (sq) => sq.SpanOrQueryDescriptor = q);
-			return new SpanQueryDescriptor<T> { SpanOrQueryDescriptor = this.SpanOrQueryDescriptor };
 		}
 		public SpanQueryDescriptor<T> SpanNot(Func<SpanNotQueryDescriptor<T>, SpanNotQueryDescriptor<T>> selector)
 		{
@@ -86,7 +93,7 @@ namespace Nest
 			if (((IQuery)(query)).IsConditionless)
 				return this;
 
-			var newSpanQuery = new SpanQueryDescriptor<T>();
+			var newSpanQuery = new SpanQueryDescriptor<T>(true);
 			setProperty(newSpanQuery);
 			_spanNewQuery = true;
 			return newSpanQuery;

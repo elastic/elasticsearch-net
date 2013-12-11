@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using Nest.Tests.MockData.Domain;
+﻿using Nest.Tests.MockData.Domain;
+using NUnit.Framework;
 
-namespace Nest.Tests.Unit.Search.Filter.Singles
+namespace Nest.Tests.Unit.Search.Filter.Modes
 {
 	[TestFixture]
 	public class ConditionlessFilterJson

@@ -12,7 +12,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class Prefix : Term, IQuery, IMultiTermQuery
 	{
-		bool IQuery.IsConditionless { get { return base.IsConditionless; } }
+		bool IQuery.IsConditionless { get { return this.Value == null || this.Value.ToString().IsNullOrEmpty() || this.Field.IsNullOrEmpty(); } }
+
 
 		[JsonProperty(PropertyName = "rewrite")]
 		[JsonConverter(typeof(StringEnumConverter))]

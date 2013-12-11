@@ -13,10 +13,10 @@ using System.Collections;
 
 namespace Nest
 {
-	public class FilterDescriptor : FilterDescriptor<dynamic>
-	{
-
-	}
+	/* Adding a new filter:
+	 *   - make sure it calls in to New() or SetDictionary() for immutable sake
+	 *   - add a null check to IsConditionless
+	 */
 
 	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T> where T : class
 	{
@@ -24,21 +24,49 @@ namespace Nest
 		internal string _CacheKey { get; set; }
 		internal bool? _Cache { get; set; }
 
-		public FilterDescriptor<T> Name(string name)
+		
+
+		private bool _forcedConditionless;
+		internal override bool IsConditionless
 		{
-			this._Name = name;
-			return this;
+			get
+			{
+				if (_forcedConditionless)
+					return true;
+				return this.ExistsFilter == null
+					&& this.MissingFilter == null
+					&& this.IdsFilter == null
+					&& this.BoolFilterDescriptor == null
+					&& this.GeoBoundingBoxFilter == null
+					&& this.GeoDistanceFilter == null
+					&& this.GeoDistanceRangeFilter == null
+					&& this.GeoPolygonFilter == null
+					&& this.GeoShapeFilter == null
+					&& this.LimitFilter == null
+					&& this.TypeFilter == null
+					&& this.MatchAllFilter == null
+					&& this.HasChildFilter == null
+					&& this.HasParentFilter == null
+					&& this.NumericRangeFilter == null
+					&& this.RangeFilter == null
+					&& this.PrefixFilter == null
+					&& this.TermFilter == null
+					&& this.TermsFilter == null
+					&& this.QueryFilter == null
+					&& this.AndFilter == null
+					&& this.OrFilter == null
+					&& this.NotFilter == null
+					&& this.ScriptFilter == null
+					&& this.NestedFilter == null
+					&& this.RegexpFilter == null
+					;
+			}
+			set
+			{
+				_forcedConditionless = value;
+			}
 		}
-		public FilterDescriptor<T> CacheKey(string cacheKey)
-		{
-			this._CacheKey = cacheKey;
-			return this;
-		}
-		public FilterDescriptor<T> Cache(bool cache)
-		{
-			this._Cache = cache;
-			return this;
-		}
+
 
 		[JsonProperty(PropertyName = "exists")]
 		internal ExistsFilter ExistsFilter { get; set; }
@@ -129,7 +157,21 @@ namespace Nest
 		[JsonProperty(PropertyName = "regexp")]
 		internal Dictionary<string, object> RegexpFilter { get; set; }
 
-
+		public FilterDescriptor<T> Name(string name)
+		{
+			this._Name = name;
+			return this;
+		}
+		public FilterDescriptor<T> CacheKey(string cacheKey)
+		{
+			this._CacheKey = cacheKey;
+			return this;
+		}
+		public FilterDescriptor<T> Cache(bool cache)
+		{
+			this._Cache = cache;
+			return this;
+		}
 
 		public FilterDescriptor<T> Strict(bool strict = true)
 		{
@@ -137,114 +179,12 @@ namespace Nest
 
 		}
 
-		internal BaseFilter CreateConditionlessFilterDescriptor(string type, object filter)
+		public FilterDescriptor<T> Verbatim(bool verbatim = true)
 		{
-			if (this.IsStrict)
-				throw new DslException("Filter resulted in a conditionless '{1}' filter (json by approx):\n{0}"
-					.F(
-						JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
-						, type ?? filter.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
-					)
-				);
-			return new FilterDescriptor<T> { IsConditionless = !this.IsStrict };
+			return new FilterDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
 		}
 
-		internal FilterDescriptor<T> New(Action<FilterDescriptor<T>> fillProperty)
-		{
-			var f = new FilterDescriptor<T>();
-			f.IsStrict = this.IsStrict;
-
-			if (fillProperty != null)
-				fillProperty(f);
-
-			this.ResetCache();
-			return f;
-		}
-
-		private void ResetCache()
-		{
-			this._Cache = null;
-			this._CacheKey = null;
-			this._Name = null;
-		}
-
-		private void SetCacheAndName(FilterBase filter)
-		{
-			if (this._Cache.HasValue)
-				filter._Cache = this._Cache;
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				filter._Name = this._Name;
-			if (!string.IsNullOrWhiteSpace(this._CacheKey))
-				filter._CacheKey = this._Name;
-		}
-
-		private BaseFilter SetDictionary(
-			string type,
-			string key,
-			object value,
-			Action<Dictionary<string, object>, FilterDescriptor<T>> setter
-		)
-		{
-			setter.ThrowIfNull("setter");
-
-			var dictionary = new Dictionary<string, object>();
-			dictionary.Add(key, value);
-			if (this._Cache.HasValue)
-				dictionary.Add("_cache", this._Cache);
-			if (!string.IsNullOrWhiteSpace(this._Name))
-				dictionary.Add("_name", this._Name);
-			if (!string.IsNullOrWhiteSpace(this._CacheKey))
-				dictionary.Add("_cache_key", this._CacheKey);
-
-			this.ResetCache();
-
-			var bucket = this.New(null);
-			setter(dictionary, bucket);
-
-			var conditionlessReturn = CreateConditionlessFilterDescriptor(type, dictionary);
-
-
-			if (value is IEnumerable<BaseFilter>)
-			{
-				var l = (IEnumerable<object>)value;
-				var baseFilters = l.OfType<BaseFilter>();
-				var allBaseFiltersConditionless = baseFilters.All(b => b.IsConditionless);
-				if (!baseFilters.HasAny() || allBaseFiltersConditionless)
-					return conditionlessReturn;
-			}
-			else if (value is IEnumerable<string>)
-			{
-				var l = (IEnumerable<string>)value;
-				var strings = l.OfType<string>();
-				var allStringsNullOrEmpty = strings.All(s=>s.IsNullOrEmpty());
-				if (!strings.HasAny() || allStringsNullOrEmpty)
-					return conditionlessReturn;
-			}
-			else if (value is IEnumerable<object>)
-			{
-				var l = (IEnumerable<object>)value;
-				if (!l.HasAny())
-					return conditionlessReturn;
-			}
-			else if (value is FilterBase)
-			{
-				var bf = (FilterBase)value;
-				if (bf.IsConditionless)
-					return CreateConditionlessFilterDescriptor(type, bf);
-				else if (key.IsNullOrEmpty())
-					return CreateConditionlessFilterDescriptor(type, bf);
-			}
-			else if (value is string)
-			{
-				if (string.IsNullOrEmpty(value.ToString()))
-					return CreateConditionlessFilterDescriptor(type, value);
-			}
-			if (key.IsNullOrEmpty())
-				return CreateConditionlessFilterDescriptor(type, value);
-
-			return bucket;
-		}
-
+		
 		/// <summary>
 		/// A thin wrapper allowing fined grained control what should happen if a filter is conditionless
 		/// if you need to fallback to something other than a match_all query
@@ -272,9 +212,8 @@ namespace Nest
 		{
 			var filter = new ExistsFilter { Field = field };
 			this.SetCacheAndName(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("exists", filter);
-			return this.New(f => f.ExistsFilter = filter);
+
+			return this.New(filter, f => f.ExistsFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
@@ -290,11 +229,8 @@ namespace Nest
 		public BaseFilter Missing(string field)
 		{
 			var filter = new MissingFilter { Field = field };
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("ids", filter);
-
 			this.SetCacheAndName(filter);
-			return  this.New(f => f.MissingFilter = filter);
+			return  this.New(filter, f => f.MissingFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -303,11 +239,8 @@ namespace Nest
 		public BaseFilter Ids(IEnumerable<string> values)
 		{
 			var filter = new IdsFilter { Values = values };
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("ids", filter);
-
 			this.SetCacheAndName(filter);
-			return this.New(f => f.IdsFilter = filter);
+			return this.New(filter, f => f.IdsFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -319,11 +252,9 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("ids", null);
 
 			var filter = new IdsFilter { Values = values, Type = new[] { type } };
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("ids", filter);
 
 			this.SetCacheAndName(filter);
-			return this.New(f => f.IdsFilter = filter);
+			return this.New(filter, f => f.IdsFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -335,11 +266,9 @@ namespace Nest
 				return CreateConditionlessFilterDescriptor("ids", null);
 			
 			var filter = new IdsFilter { Values = values, Type = types };
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("ids", filter);
 			
 			this.SetCacheAndName(filter);
-			return  this.New(f => f.IdsFilter = filter);
+			return  this.New(filter, f => f.IdsFilter = filter);
 		}
 
 		/// <summary>
@@ -399,11 +328,10 @@ namespace Nest
 		public BaseFilter GeoDistance(string field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoDistanceFilterDescriptor();
-			if (filterDescriptor == null)
-				return CreateConditionlessFilterDescriptor("geo_distance", filter);
-			filterDescriptor(filter);
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
 
-			return this.SetDictionary("geo_distance", field, filter._Location, (d, b) =>
+			return this.SetDictionary("geo_distance", field, filter, (d, b) =>
 			{
 				var dd = new Dictionary<string, object>();
 				dd.Add("distance", filter._Distance);
@@ -415,6 +343,7 @@ namespace Nest
 					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
 
 				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
+				dd[field] = filter._Location;
 				b.GeoDistanceFilter = dd;
 			});
 
@@ -434,16 +363,11 @@ namespace Nest
 		public BaseFilter GeoDistanceRange(string field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoDistanceRangeFilterDescriptor();
-			if (filterDescriptor == null)
-				return CreateConditionlessFilterDescriptor("geo_distance_range", filter);
-
-			filterDescriptor(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("geo_distance_range", filter);
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
 			
-			return this.SetDictionary("geo_distance_range", field, filter._Location, (d, b) =>
+			return this.SetDictionary("geo_distance_range", field, filter, (d, b) =>
 			{
-
 				var dd = new Dictionary<string, object>();
 				dd.Add("from", filter._FromDistance);
 				dd.Add("to", filter._ToDistance);
@@ -454,6 +378,7 @@ namespace Nest
 					dd.Add("optimize_bbox", filter._GeoOptimizeBBox);
 
 				d.ForEachWithIndex((kv, i) => dd.Add(kv.Key, kv.Value));
+				dd[field] = filter._Location;
 				b.GeoDistanceRangeFilter = dd;
 			});
 		}
@@ -472,12 +397,8 @@ namespace Nest
 		public BaseFilter GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoShapeFilterDescriptor();
-			if (filterDescriptor == null)
-				return CreateConditionlessFilterDescriptor("geo_shape", filter);
-
-			filterDescriptor(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("geo_shape", filter);
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
 
 			return this.SetDictionary("geo_shape", field, filter, (d, b) =>
 			{
@@ -499,20 +420,14 @@ namespace Nest
 		public BaseFilter GeoIndexedShape(string field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoIndexedShapeFilterDescriptor();
-			if (filterDescriptor == null)
-				return CreateConditionlessFilterDescriptor("geo_shape", filter);
-
-			filterDescriptor(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("geo_shape", filter);
-
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			
 			return this.SetDictionary("geo_shape", field, filter, (d, b) =>
 			{
 				b.GeoShapeFilter = d;
 			});
-
 		}
-
 
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
@@ -558,15 +473,10 @@ namespace Nest
 		public BaseFilter HasChild<K>(Action<HasChildFilterDescriptor<K>> filterSelector) where K : class
 		{
 			var filter = new HasChildFilterDescriptor<K>();
-			if (filterSelector == null)
-				return CreateConditionlessFilterDescriptor("has_child", filter);
-			
-			filterSelector(filter);
-			
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("has_child", filter);
+			if (filterSelector != null)
+				filterSelector(filter);
 
-			return  this.New(f => f.HasChildFilter = filter);
+			return this.New(filter, f => f.HasChildFilter = filter);
 		}
 
 		/// <summary>
@@ -577,15 +487,10 @@ namespace Nest
 		public BaseFilter HasParent<K>(Action<HasParentFilterDescriptor<K>> filterSelector) where K : class
 		{
 			var filter = new HasParentFilterDescriptor<K>();
-			if (filterSelector == null)
-				return CreateConditionlessFilterDescriptor("has_parent", filter);
+			if (filterSelector != null)
+				filterSelector(filter);
 
-			filterSelector(filter);
-
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("has_parent", filter);
-
-			return  this.New(f => f.HasParentFilter = filter);
+			return this.New(filter, f => f.HasParentFilter = filter);
 		}
 
 		/// <summary>
@@ -594,11 +499,8 @@ namespace Nest
 		public BaseFilter Limit(int? limit)
 		{
 			var filter = new LimitFilter { Value = limit };
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("limit", filter);
 
-			this.SetCacheAndName(filter);
-			return  this.New(f => f.LimitFilter = filter);
+			return  this.New(filter, f => f.LimitFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents matching the provided document / mapping type. 
@@ -608,11 +510,7 @@ namespace Nest
 		public BaseFilter Type(string type)
 		{
 			var filter = new TypeFilter { Value = type };
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("filter", filter);
-
-			this.SetCacheAndName(filter);
-			return  this.New(f => f.TypeFilter = filter);
+			return  this.New(filter, f => f.TypeFilter = filter);
 		}
 
 		/// <summary>
@@ -623,11 +521,7 @@ namespace Nest
 		public BaseFilter Type(Type type)
 		{
 			var filter = new TypeFilter { Value = type };
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("filter", filter);
-
-			this.SetCacheAndName(filter);
-			return this.New(f=> f.TypeFilter = filter);
+			return this.New(filter, f=> f.TypeFilter = filter);
 		}
 
 		/// <summary>
@@ -636,8 +530,7 @@ namespace Nest
 		public BaseFilter MatchAll()
 		{
 			var filter = new MatchAllFilter { };
-			this.SetCacheAndName(filter);
-			return this.New(f=> f.MatchAllFilter = filter);
+			return this.New(filter, f=> f.MatchAllFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents with fields that have values within a certain numeric range. 
@@ -647,13 +540,9 @@ namespace Nest
 		public BaseFilter NumericRange(Action<NumericRangeFilterDescriptor<T>> numericRangeSelector)
 		{
 			var filter = new NumericRangeFilterDescriptor<T>();
-			if (numericRangeSelector == null)
-				return CreateConditionlessFilterDescriptor("numeric_range", filter);
-
-			numericRangeSelector(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("numeric_range", filter);
-
+			if (numericRangeSelector != null)
+				numericRangeSelector(filter);
+			
 			return this.SetDictionary("numeric_range", filter._Field, filter, (d, b) =>
 			{
 				b.NumericRangeFilter = d;
@@ -667,13 +556,9 @@ namespace Nest
 		public BaseFilter Range(Action<RangeFilterDescriptor<T>> rangeSelector)
 		{
 			var filter = new RangeFilterDescriptor<T>();
-			if (rangeSelector == null)
-				return CreateConditionlessFilterDescriptor("range", filter);
+			if (rangeSelector != null)
+				rangeSelector(filter);
 			
-			rangeSelector(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("range", filter);
-
 			return this.SetDictionary("range", filter._Field, filter, (d, b) =>
 			{
 				b.RangeFilter = d;
@@ -686,14 +571,10 @@ namespace Nest
 		public BaseFilter Script(Action<ScriptFilterDescriptor> scriptSelector)
 		{
 			var descriptor = new ScriptFilterDescriptor();
-			if (scriptSelector == null)
-				return CreateConditionlessFilterDescriptor("script", descriptor);
-			scriptSelector(descriptor);
-			if (descriptor.IsConditionless)
-				return CreateConditionlessFilterDescriptor("script", descriptor);
+			if (scriptSelector != null)
+				scriptSelector(descriptor);
 
-			this.SetCacheAndName(descriptor);
-			return this.New(f=>f.ScriptFilter = descriptor);
+			return this.New(descriptor, f=>f.ScriptFilter = descriptor);
 		}
 		/// <summary>
 		/// Filters documents that have fields containing terms with a specified prefix 
@@ -710,7 +591,6 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Prefix(string field, string prefix)
 		{
-			var descriptor = new FilterDescriptor<T>();
 			return this.SetDictionary("prefix", field, prefix, (d, b) =>
 			{
 				b.PrefixFilter = d;
@@ -732,9 +612,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Term<K>(string field, K term)
 		{
-			var t = new Term() { Field = field, Value = (object)term };
-			if (t.IsConditionless)
-				return CreateConditionlessFilterDescriptor("term", new { term = term, field = field });
+			var t = new TermFilter() { Field = field, Value = (object)term };
 
 			return this.SetDictionary("term", field, term, (d, b) =>
 			{
@@ -778,12 +656,8 @@ namespace Nest
 		public BaseFilter TermsLookup(string field, Action<TermsLookupFilterDescriptor> filterDescriptor)
 		{
 			var filter = new TermsLookupFilterDescriptor();
-			if (filterDescriptor == null)
-				return CreateConditionlessFilterDescriptor("terms", filter);
-
-			filterDescriptor(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("terms", filter);
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
 
 			return this.SetDictionary("terms", field, filter, (d, b) =>
 			{
@@ -797,18 +671,12 @@ namespace Nest
 		/// A filter that matches documents using AND boolean operator on other queries. 
 		/// This filter is more performant then bool filter. 
 		/// </summary>
-		public BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
+		public BaseFilter And(params Func<FilterDescriptor<T>, BaseFilter>[] selectors)
 		{
-			var descriptors = new List<BaseFilter>();
-			foreach (var selector in filters)
-			{
-				var filter = new FilterDescriptor<T>();
-				var f = selector(filter);
-				if (f.IsConditionless)
-					continue;
-				descriptors.Add(f);
-			}
-			return this.SetDictionary("and", "filters", descriptors, (d, b) => b.AndFilter = d);
+			return this.And((from selector in selectors 
+							 let filter = new FilterDescriptor<T>() 
+							 select selector(filter))
+							 .ToArray());
 		}
 		/// <summary>
 		/// A filter that matches documents using AND boolean operator on other queries. 
@@ -816,35 +684,20 @@ namespace Nest
 		/// </summary>
 		public BaseFilter And(params BaseFilter[] filters)
 		{
-			var descriptors = new List<BaseFilter>();
-			foreach (var f in filters)
-			{
-				var filter = new FilterDescriptor<T>();
-				if (f.IsConditionless)
-					continue;
-				descriptors.Add(f);
-			}
-			return this.SetDictionary("and", "filters", descriptors, (d, b) => b.AndFilter = d);
+			return this.SetDictionary("and", "filters", filters.ToList(), (d, b) => b.AndFilter = d);
 		}
 		/// <summary>
 		/// A filter that matches documents using OR boolean operator on other queries. 
 		/// This filter is more performant then bool filter
 		/// </summary>
-		public BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
+		public BaseFilter Or(params Func<FilterDescriptor<T>, BaseFilter>[] selectors)
 		{
-			var descriptors = new List<BaseFilter>();
-			foreach (var selector in filters)
-			{
-				var filter = new FilterDescriptor<T>();
-				var f = selector(filter);
-				if (f.IsConditionless)
-					continue;
-				descriptors.Add(f);
-			}
-			return this.SetDictionary("or", "filters", descriptors, (d, b) =>
-			{
-				b.OrFilter = d;
-			});
+			var descriptors = (from selector in selectors 
+							   let filter = new FilterDescriptor<T>() 
+							   select selector(filter)
+							  ).ToArray();
+			return this.Or(descriptors);
+
 		}
 		/// <summary>
 		/// A filter that matches documents using OR boolean operator on other queries. 
@@ -852,15 +705,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Or(params BaseFilter[] filters)
 		{
-			var descriptors = new List<BaseFilter>();
-			foreach (var f in filters)
-			{
-				var filter = new FilterDescriptor<T>();
-				if (f.IsConditionless)
-					continue;
-				descriptors.Add(f);
-			}
-			return this.SetDictionary("or", "filters", descriptors, (d, b) =>
+			return this.SetDictionary("or", "filters", filters.ToList(), (d, b) =>
 			{
 				b.OrFilter = d;
 			});
@@ -872,14 +717,11 @@ namespace Nest
 		public BaseFilter Not(Func<FilterDescriptor<T>, BaseFilter> selector)
 		{
 			var filter = new FilterDescriptor<T>();
-			if (selector == null)
-				return CreateConditionlessFilterDescriptor("not", filter);
+			BaseFilter bf = filter;
+			if (selector != null)
+				bf = selector(filter);
 
-			var f = selector(filter);
-			if (f.IsConditionless)
-				return CreateConditionlessFilterDescriptor("not", filter);
-
-			return this.SetDictionary("not", "filter", f, (d, b) =>
+			return this.SetDictionary("not", "filter", bf, (d, b) =>
 			{
 				b.NotFilter = d;
 			});
@@ -893,12 +735,10 @@ namespace Nest
 		public BaseFilter Bool(Action<BoolFilterDescriptor<T>> booleanFilter)
 		{
 			var filter = new BoolFilterDescriptor<T>();
-			booleanFilter(filter);
-			this.SetCacheAndName(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("bool", filter);
+			if (booleanFilter != null)
+				booleanFilter(filter);
 
-			return this.New(f => f.BoolFilterDescriptor = filter);
+			return this.New(filter, f => f.BoolFilterDescriptor = filter);
 
 		}
 		/// <summary>
@@ -906,13 +746,11 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
-			var descriptor = new QueryDescriptor<T>();
-			if (querySelector == null)
-				return CreateConditionlessFilterDescriptor("query", descriptor);
 
-			var bq = querySelector(descriptor);
-			if (bq.IsConditionless)
-				return CreateConditionlessFilterDescriptor("query", bq);
+			var descriptor = new QueryDescriptor<T>();
+			BaseQuery bq = descriptor;
+			if (querySelector != null)
+				bq = querySelector(descriptor);
 
 			return this.SetDictionary("query", "query", bq, (d, b) =>
 			{
@@ -930,15 +768,10 @@ namespace Nest
 		public BaseFilter Nested(Action<NestedFilterDescriptor<T>> selector)
 		{
 			var filter = new NestedFilterDescriptor<T>();
-			if (selector == null)
-				return CreateConditionlessFilterDescriptor("nested", filter);
+			if (selector != null)
+				selector(filter);
 
-			selector(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("nested", filter);
-
-			this.SetCacheAndName(filter);
-			return this.New(f=>f.NestedFilter = filter);
+			return this.New(filter, f=>f.NestedFilter = filter);
 		}
 
 		/// <summary>
@@ -948,19 +781,144 @@ namespace Nest
 		public BaseFilter Regexp(Action<RegexpFilterDescriptor<T>> selector)
 		{
 			var filter = new RegexpFilterDescriptor<T>();
-			if (selector == null)
-				return CreateConditionlessFilterDescriptor("regexp", filter);
+			if (selector != null)
+				selector(filter);
 
-			selector(filter);
-			if (filter.IsConditionless)
-				return CreateConditionlessFilterDescriptor("regexp", filter);
-
-			//this.SetCacheAndName(filter);
 			return this.SetDictionary("regexp", filter._Field, filter, (d, b) =>
 			{
 				b.RegexpFilter = d;
 			});
 		}
+
+		private FilterDescriptor<T> CreateConditionlessFilterDescriptor(object filter, string type = null)
+		{
+			if (this.IsStrict && !this.IsVerbatim)
+				throw new DslException("Filter resulted in a conditionless '{1}' filter (json by approx):\n{0}"
+					.F(
+						JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
+						, type ?? filter.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
+					)
+				);
+			return new FilterDescriptor<T> { IsConditionless = true, IsVerbatim = this.IsVerbatim, IsStrict = this.IsStrict };
+		}
+
+		private FilterDescriptor<T> New(FilterBase filter, Action<FilterDescriptor<T>> fillProperty)
+		{
+			if (filter.IsConditionless && !this.IsVerbatim)
+				return CreateConditionlessFilterDescriptor(filter);
+
+			this.SetCacheAndName(filter);
+
+			var f = new FilterDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
+
+			if (fillProperty != null)
+				fillProperty(f);
+
+			this.ResetCache();
+			return f;
+		}
+
+		private void ResetCache()
+		{
+			this._Cache = null;
+			this._CacheKey = null;
+			this._Name = null;
+		}
+
+		private void SetCacheAndName(FilterBase filter)
+		{
+			if (this._Cache.HasValue)
+				filter._Cache = this._Cache;
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				filter._Name = this._Name;
+			if (!string.IsNullOrWhiteSpace(this._CacheKey))
+				filter._CacheKey = this._Name;
+		}
+
+		private BaseFilter SetDictionary(
+			string type,
+			string key,
+			object value,
+			Action<Dictionary<string, object>, FilterDescriptor<T>> setter
+		)
+		{
+			setter.ThrowIfNull("setter");
+			var dictionary = new Dictionary<string, object>();
+
+			if (key.IsNullOrEmpty())
+				return CreateConditionlessFilterDescriptor(dictionary, type);
+
+			dictionary.Add(key, value);
+			if (this._Cache.HasValue)
+				dictionary.Add("_cache", this._Cache);
+			if (!string.IsNullOrWhiteSpace(this._Name))
+				dictionary.Add("_name", this._Name);
+			if (!string.IsNullOrWhiteSpace(this._CacheKey))
+				dictionary.Add("_cache_key", this._CacheKey);
+
+			this.ResetCache();
+
+			var bucket = new FilterDescriptor<T> { IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim };
+			setter(dictionary, bucket);
+			if (this.IsVerbatim)
+				return bucket;
+			
+			//find out if we are conditionless
+
+			if (value == null)
+				return CreateConditionlessFilterDescriptor(dictionary, type);
+			else if (value is string)
+			{
+				if (string.IsNullOrEmpty(value.ToString()))
+					return CreateConditionlessFilterDescriptor(value, type);
+			}
+			else if (value is IEnumerable<BaseFilter>)
+			{
+				var l = (IEnumerable<object>)value;
+				var baseFilters = l.OfType<BaseFilter>().ToList();
+				var allBaseFiltersConditionless = baseFilters.All(b => b.IsConditionless);
+				if (!baseFilters.HasAny() || allBaseFiltersConditionless)
+					return CreateConditionlessFilterDescriptor(dictionary, type);
+			}
+			else if (value is IEnumerable<string>)
+			{
+				var l = (IEnumerable<string>)value;
+				var strings = l.ToList();
+				var allStringsNullOrEmpty = strings.All(s => s.IsNullOrEmpty());
+				if (!strings.HasAny() || allStringsNullOrEmpty)
+					return CreateConditionlessFilterDescriptor(dictionary, type);
+			}
+			else if (value is IEnumerable<object>)
+			{
+				var l = (IEnumerable<object>)value;
+				if (!l.HasAny())
+					return CreateConditionlessFilterDescriptor(dictionary, type);
+			}
+			else if (value is FilterBase)
+			{
+				var bf = (FilterBase)value;
+				if (bf.IsConditionless)
+					return CreateConditionlessFilterDescriptor(bf, type);
+			}
+			else if (value is FilterDescriptor<T>)
+			{
+				var bf = (FilterDescriptor<T>)value;
+				if (bf.IsConditionless)
+					return CreateConditionlessFilterDescriptor(bf, type);
+			}
+			else if (value is BaseQuery)
+			{
+				var bf = (BaseQuery)value;
+				if (bf.IsConditionless)
+					return CreateConditionlessFilterDescriptor(bf, type);
+			}
+
+			if (key.IsNullOrEmpty())
+				return CreateConditionlessFilterDescriptor(value, type);
+
+			return bucket;
+		}
+
 
 	}
 }
