@@ -23,6 +23,7 @@ namespace Nest
 
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
+		Task<IBulkResponse> BulkAsync(BulkDescriptor bulkDescriptor);
 
 		IAnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text);
 		IAnalyzeResponse Analyze(string text);
