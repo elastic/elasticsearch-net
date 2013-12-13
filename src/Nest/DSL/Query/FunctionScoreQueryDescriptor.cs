@@ -28,7 +28,7 @@ namespace Nest
         RandomScoreFunction _RandomScore { get; set; }
 
         [JsonProperty(PropertyName = "script_score")]
-        ScriptScoreFunction _ScriptScore { get; set; }
+        ScriptFilterDescriptor _ScriptScore { get; set; }
 
         bool IQuery.IsConditionless
         {
@@ -78,16 +78,13 @@ namespace Nest
             return this;
         }
 
-        public FunctionScoreQueryDescriptor<T> ScriptScore(string script, params dynamic[] parameters)
+        public FunctionScoreQueryDescriptor<T> ScriptScore(Action<ScriptFilterDescriptor> scriptSelector)
         {
-            this._ScriptScore = new ScriptScoreFunction();
+            var descriptor = new ScriptFilterDescriptor();
+            if (scriptSelector != null)
+                scriptSelector(descriptor);
 
-            _ScriptScore._Script = script;
-
-            if (parameters != null)
-            {
-                _ScriptScore._Parameters = new List<dynamic>(parameters);
-            }
+            this._ScriptScore = descriptor;
 
             return this;
         }
@@ -285,28 +282,4 @@ namespace Nest
         }
     }
 
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ScriptScoreFunction
-    {
-        [JsonProperty(PropertyName = "script")]
-        internal string _Script { get; set; }
-
-        [JsonProperty(PropertyName = "params")]
-        internal List<dynamic> _Parameters { get; set; }
-
-        public ScriptScoreFunction(string script, params dynamic[] parameters)
-            : this(script)
-        {
-            _Parameters = new List<dynamic>(parameters);
-        }
-
-        public ScriptScoreFunction(string script)
-        {
-            _Script = script;
-        }
-
-        public ScriptScoreFunction()
-        {
-        }
-    }
 }
