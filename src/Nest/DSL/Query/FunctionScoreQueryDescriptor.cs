@@ -27,11 +27,14 @@ namespace Nest
         [JsonProperty(PropertyName = "random_score")]
         RandomScoreFunction _RandomScore { get; set; }
 
-		bool IQuery.IsConditionless
+        [JsonProperty(PropertyName = "script_score")]
+        ScriptScoreFunction _ScriptScore { get; set; }
+
+        bool IQuery.IsConditionless
         {
             get
-            {                
-                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null;
+            {
+                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null && _ScriptScore == null;
             }
         }
 
@@ -46,7 +49,7 @@ namespace Nest
         }
 
         public FunctionScoreQueryDescriptor<T> Functions(params Func<FunctionScoreFunctionsDescriptor<T>, FunctionScoreFunction<T>>[] functions)
-		{
+        {
             var descriptor = new FunctionScoreFunctionsDescriptor<T>();
 
             foreach (var f in functions)
@@ -57,7 +60,7 @@ namespace Nest
             _Functions = descriptor;
 
             return this;
-		}
+        }
 
         public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
         {
@@ -74,6 +77,20 @@ namespace Nest
             }
             return this;
         }
+
+        public FunctionScoreQueryDescriptor<T> ScriptScore(string script, params dynamic[] parameters)
+        {
+            this._ScriptScore = new ScriptScoreFunction();
+
+            _ScriptScore._Script = script;
+
+            if (parameters != null)
+            {
+                _ScriptScore._Parameters = new List<dynamic>(parameters);
+            }
+
+            return this;
+        }
     }
 
     public enum FunctionScoreMode
@@ -88,7 +105,7 @@ namespace Nest
 
     public class FunctionScoreFunctionsDescriptor<T> : IEnumerable<FunctionScoreFunction<T>>
     {
-        internal List<FunctionScoreFunction<T>>  _Functions { get; set; }
+        internal List<FunctionScoreFunction<T>> _Functions { get; set; }
 
         public FunctionScoreFunctionsDescriptor()
         {
@@ -123,7 +140,6 @@ namespace Nest
             return fn;
         }
 
-        
         public IEnumerator<FunctionScoreFunction<T>> GetEnumerator()
         {
             return _Functions.GetEnumerator();
@@ -265,6 +281,31 @@ namespace Nest
         }
 
         public RandomScoreFunction()
+        {
+        }
+    }
+
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class ScriptScoreFunction
+    {
+        [JsonProperty(PropertyName = "script")]
+        internal string _Script { get; set; }
+
+        [JsonProperty(PropertyName = "params")]
+        internal List<dynamic> _Parameters { get; set; }
+
+        public ScriptScoreFunction(string script, params dynamic[] parameters)
+            : this(script)
+        {
+            _Parameters = new List<dynamic>(parameters);
+        }
+
+        public ScriptScoreFunction(string script)
+        {
+            _Script = script;
+        }
+
+        public ScriptScoreFunction()
         {
         }
     }
