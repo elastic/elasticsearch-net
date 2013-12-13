@@ -52,5 +52,33 @@ namespace Nest.Tests.Unit.Search.Sort
                     }";
             Assert.True(json.JsonEquals(expected), json);
         }
+
+        [Test]
+        public void TestScriptScore()
+        {
+            var s = new SearchDescriptor<ElasticSearchProject>()
+                .Query(q => q.FunctionScore(
+                        fs => fs.ScriptScore(ss => ss.Script("_score / pow(param1, param2)").Params(p => p.Add("param1", 1.75).Add("param2", 4)).Lang(Lang.mvel)
+                        )
+                    )
+                );
+            var json = TestElasticClient.Serialize(s);
+            var expected = @"{
+                          query: {
+                            function_score: {
+                              script_score: {
+                                script: ""_score / pow(param1, param2)"",
+                                params: {
+                                  param1: 1.75,
+                                  param2: 4
+                                },
+                                lang: ""mvel""
+                              }
+                            }
+                          }
+                        }";
+
+            Assert.True(json.JsonEquals(expected), json);
+        }
     }
 }

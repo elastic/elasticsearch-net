@@ -27,11 +27,14 @@ namespace Nest
         [JsonProperty(PropertyName = "random_score")]
         RandomScoreFunction _RandomScore { get; set; }
 
-		bool IQuery.IsConditionless
+        [JsonProperty(PropertyName = "script_score")]
+        ScriptFilterDescriptor _ScriptScore { get; set; }
+
+        bool IQuery.IsConditionless
         {
             get
-            {                
-                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null;
+            {
+                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null && _ScriptScore == null;
             }
         }
 
@@ -46,7 +49,7 @@ namespace Nest
         }
 
         public FunctionScoreQueryDescriptor<T> Functions(params Func<FunctionScoreFunctionsDescriptor<T>, FunctionScoreFunction<T>>[] functions)
-		{
+        {
             var descriptor = new FunctionScoreFunctionsDescriptor<T>();
 
             foreach (var f in functions)
@@ -57,7 +60,7 @@ namespace Nest
             _Functions = descriptor;
 
             return this;
-		}
+        }
 
         public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
         {
@@ -74,6 +77,17 @@ namespace Nest
             }
             return this;
         }
+
+        public FunctionScoreQueryDescriptor<T> ScriptScore(Action<ScriptFilterDescriptor> scriptSelector)
+        {
+            var descriptor = new ScriptFilterDescriptor();
+            if (scriptSelector != null)
+                scriptSelector(descriptor);
+
+            this._ScriptScore = descriptor;
+
+            return this;
+        }
     }
 
     public enum FunctionScoreMode
@@ -88,7 +102,7 @@ namespace Nest
 
     public class FunctionScoreFunctionsDescriptor<T> : IEnumerable<FunctionScoreFunction<T>>
     {
-        internal List<FunctionScoreFunction<T>>  _Functions { get; set; }
+        internal List<FunctionScoreFunction<T>> _Functions { get; set; }
 
         public FunctionScoreFunctionsDescriptor()
         {
@@ -123,7 +137,6 @@ namespace Nest
             return fn;
         }
 
-        
         public IEnumerator<FunctionScoreFunction<T>> GetEnumerator()
         {
             return _Functions.GetEnumerator();
@@ -268,4 +281,5 @@ namespace Nest
         {
         }
     }
+
 }
