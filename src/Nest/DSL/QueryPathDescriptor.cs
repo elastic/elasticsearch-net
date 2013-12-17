@@ -10,15 +10,30 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public abstract class QueryPathDescriptor : QueryPathDescriptor<dynamic>
-	{
 
+	public class QueryPathDescriptor : QueryPathDescriptor<dynamic>
+	{
+		internal override bool AllowInfer
+		{
+			get { return false; }
+		}
 	}
-	public abstract class QueryPathDescriptor<T> : QueryDescriptor<T>, IQueryPathDescriptor where T : class
+
+	public class QueryPathDescriptor<T> : QueryPathDescriptorBase<QueryPathDescriptor<T>, T>
+		where T : class
+	{
+		
+	}
+
+	public class QueryPathDescriptorBase<TQueryPathDescriptor, T> : 
+		QueryDescriptor<T>
+		where TQueryPathDescriptor : QueryPathDescriptorBase<TQueryPathDescriptor, T>, new() where T : class
 	{
 		protected readonly TypeNameResolver typeNameResolver;
 
-		public QueryPathDescriptor()
+		internal virtual bool AllowInfer { get { return true; } }
+
+		public QueryPathDescriptorBase()
 		{
 			this.typeNameResolver = new TypeNameResolver();
 		}
@@ -27,78 +42,70 @@ namespace Nest
 		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
-		public IQueryPathDescriptor Indices(IEnumerable<string> indices)
+		public TQueryPathDescriptor Indices(IEnumerable<string> indices)
 		{
-			indices.ThrowIfEmpty("indices");
 			this._Indices = indices;
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
-		public IQueryPathDescriptor Index(string index)
+		public TQueryPathDescriptor Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("indices");
 			this._Indices = new[] { index };
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
-		public IQueryPathDescriptor Types(IEnumerable<string> types)
+		public TQueryPathDescriptor Types(IEnumerable<string> types)
 		{
-			types.ThrowIfEmpty("types");
 			this._Types = types.Select(s => (TypeNameMarker)s); ;
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
-		public IQueryPathDescriptor Types(params string[] types)
+		public TQueryPathDescriptor Types(params string[] types)
 		{
-			return this.Types((IEnumerable<string>) types);
+			return (TQueryPathDescriptor)this.Types((IEnumerable<string>) types);
 		}
-		public IQueryPathDescriptor Types(IEnumerable<Type> types)
+		public TQueryPathDescriptor Types(IEnumerable<Type> types)
 		{
-			types.ThrowIfEmpty("types");
 			this._Types = types.Cast<TypeNameMarker>();
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
-		public IQueryPathDescriptor Types(params Type[] types)
+		public TQueryPathDescriptor Types(params Type[] types)
 		{
-			return this.Types((IEnumerable<Type>)types);
+			return (TQueryPathDescriptor)this.Types((IEnumerable<Type>)types);
 		}
-		public IQueryPathDescriptor Type(string type)
+		public TQueryPathDescriptor Type(string type)
 		{
-			type.ThrowIfNullOrEmpty("type");
 			this._Types = new[] { (TypeNameMarker)type };
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
-		public IQueryPathDescriptor Type(Type type)
+		public TQueryPathDescriptor Type(Type type)
 		{
-			type.ThrowIfNull("type");
 			this._Types = new[] { (TypeNameMarker)type };
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
-		public IQueryPathDescriptor AllIndices()
+		public TQueryPathDescriptor AllIndices()
 		{
 			this._AllIndices = true;
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
-		public IQueryPathDescriptor AllTypes()
+		public TQueryPathDescriptor AllTypes()
 		{
 			this._AllTypes = true;
-			return this;
+			return (TQueryPathDescriptor)this;
 		}
 	
+		protected override QueryDescriptor<T> Clone()
+		{
+			return new TQueryPathDescriptor
+			{
+				IsStrict = this.IsStrict,
+				IsVerbatim = this.IsVerbatim,
+				_AllIndices = this._AllIndices,
+				_AllTypes = this._AllTypes,
+				_Indices = this._Indices,
+				_Types = this._Types
+			};
+		}
 		public virtual IDictionary<string, string> GetUrlParams()
 		{
 			return null;
 		}
-	}
-
-	public interface IQueryPathDescriptor
-	{
-		IQueryPathDescriptor Indices(IEnumerable<string> indices);
-		IQueryPathDescriptor Index(string index);
-		IQueryPathDescriptor Types(IEnumerable<string> types);
-		IQueryPathDescriptor Types(params string[] types);
-		IQueryPathDescriptor Types(IEnumerable<Type> types);
-		IQueryPathDescriptor Types(params Type[] types);
-		IQueryPathDescriptor Type(string type);
-		IQueryPathDescriptor Type(Type type);
-		IQueryPathDescriptor AllIndices();
-		IQueryPathDescriptor AllTypes();
 	}
 }

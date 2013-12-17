@@ -112,9 +112,7 @@ namespace Nest
 		Task<IDeleteResponse> DeleteByIdAsync<T>(string id) where T : class;
 		Task<IDeleteResponse> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class;
 
-		IDeleteResponse DeleteByQuery(Func<RoutingQueryPathDescriptor, BaseQuery> query, DeleteByQueryParameters parameters = null);
 		IDeleteResponse DeleteByQuery<T>(Func<RoutingQueryPathDescriptor<T>, BaseQuery> query, DeleteByQueryParameters parameters = null) where T : class;
-		Task<IDeleteResponse> DeleteByQueryAsync(Func<RoutingQueryPathDescriptor, BaseQuery> query, DeleteByQueryParameters parameters = null);
 		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<RoutingQueryPathDescriptor<T>, BaseQuery> query, DeleteByQueryParameters parameters = null) where T : class;
 
 		IIndicesResponse DeleteIndex(string index);
@@ -325,12 +323,10 @@ namespace Nest
 		ISettingsOperationResponse UpdateSettings(IndexSettings settings);
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 
-		IValidateResponse Validate(Func<ValidateQueryPathDescriptor, BaseQuery> querySelector);
-
-		IValidateResponse Validate<T>(Func<ValidateQueryPathDescriptor<T>, BaseQuery> querySelector) where T : class;
+		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, BaseQuery> querySelector) where T : class;
+		//Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryPathDescriptor<T>, BaseQuery> querySelector) where T : class;
 
 		IRootInfoResponse RootNodeInfo();
-
 		Task<IRootInfoResponse> RootNodeInfoAsync();
 		
 	}

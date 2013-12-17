@@ -201,7 +201,8 @@ namespace Nest
 			objects.ThrowIfEmpty("objects");
 
 			var b = new BulkDescriptor();
-			b.FixedPath(index, typeName);
+			b.Index(index);
+			b.Type(typeName);
 			foreach (var @object in @objects)
 			{
 				var o = @object;
@@ -224,7 +225,8 @@ namespace Nest
 
 
 			var b = new BulkDescriptor();
-			b.FixedPath(index, typeName);
+			b.Index(index);
+			b.Type(typeName);
 			foreach (var @object in @objects)
 			{
 				var o = @object;

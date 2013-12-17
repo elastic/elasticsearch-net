@@ -12,6 +12,7 @@ namespace Nest
 	{
 		private readonly IConnectionSettings _connectionSettings;
 
+		internal RawDispatch RawDispatch { get; private set; }
 
 		private PathResolver PathResolver { get; set; }
 
@@ -41,6 +42,7 @@ namespace Nest
 
 			this.Serializer = new ElasticSerializer(this._connectionSettings);
 			this.Raw = new RawElasticClient(this._connectionSettings, connection);
+			this.RawDispatch = new RawDispatch(this.Raw);
 			this.Infer = new ElasticInferrer(this._connectionSettings);
 
 		}
@@ -65,8 +67,6 @@ namespace Nest
 			var response = this.Connection.Get("/");
 			return response
 				.ContinueWith(t => t.Result.Deserialize<RootInfoResponse>() as IRootInfoResponse);
-
 		}
-
 	}
 }

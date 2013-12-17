@@ -10,82 +10,54 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class ValidateQueryPathDescriptor : ValidateQueryPathDescriptor<dynamic> { }
-	public class ValidateQueryPathDescriptor<T> : QueryPathDescriptor<T>, IQueryPathDescriptor where T : class
+	public partial class ValidateQueryDescriptor<T> : QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T>
+		where T : class
 	{
-		internal bool _Explain { get; set; }
+		
+		internal bool? _Explain { get; set; }
+		
 		internal string _QueryStringQuery { get; set; }
-		public ValidateQueryPathDescriptor<T> UseSimpleQueryString(string query)
+		
+		internal string _Source { get; set; }
+
+		internal string _OperationThreading { get; set; }
+	
+		internal IgnoreIndicesOptions? _IgnoreIndices { get; set; }
+
+		///<summary>Query in the Lucene query string syntax will use a GET and ?q= instead of POST</summary>
+		public ValidateQueryDescriptor<T> UseSimpleQueryString(string query)
 		{
 			this._QueryStringQuery = query;
 			return this;
 		}
-		public ValidateQueryPathDescriptor<T> Explain()
+
+		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		public ValidateQueryDescriptor<T> Source(string source)
+		{
+			this._Source = source;
+			return this;
+		}
+
+		///<summary>TODO: ?</summary>
+		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading)
+		{
+			this._OperationThreading = operationThreading;
+			return this;
+		}
+
+		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
+		public ValidateQueryDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignoreIndices)
+		{
+			this._IgnoreIndices = ignoreIndices;
+			return this;
+		}
+
+		///<summary>Return detailed information about the error</summary>
+		public ValidateQueryDescriptor<T> Explain()
 		{
 			this._Explain = true;
 			return this;
 		}
-		public override IDictionary<string, string> GetUrlParams()
-		{
-			var dict = new Dictionary<string, string>();
-			if (this._Explain)
-				dict.Add("explain", "true");
-			if (!this._QueryStringQuery.IsNullOrEmpty())
-				dict.Add("q", this._QueryStringQuery);
-			return dict;
-		}
 
-		#region newing querypath funcs for fluent interface sake
-		public new ValidateQueryPathDescriptor<T> Indices(IEnumerable<string> indices)
-		{
-			base.Indices(indices);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> Index(string index)
-		{
-			base.Index(index);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> Types(IEnumerable<string> types)
-		{
-			base.Types(types);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> Types(params string[] types)
-		{
-			base.Types(types);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> Types(IEnumerable<Type> types)
-		{
-			base.Types(types);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> Types(params Type[] types)
-		{
-			base.Types(types);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> Type(string type)
-		{
-			base.Type(type);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> Type(Type type)
-		{
-			base.Type(type);
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> AllIndices()
-		{
-			base.AllIndices();
-			return this;
-		}
-		public new ValidateQueryPathDescriptor<T> AllTypes()
-		{
-			base.AllTypes();
-			return this;
-		}
-		#endregion
 	}
 }

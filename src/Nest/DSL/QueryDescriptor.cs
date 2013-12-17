@@ -136,11 +136,20 @@ namespace Nest
 			if (query.IsConditionless && !this.IsVerbatim)
 				return CreateConditionlessQueryDescriptor(query);
 
-			var q = new QueryDescriptor<T> {IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim};
+			var q = this.Clone();
 
 			if (fillProperty != null)
 				fillProperty(q);
 			return q;
+		}
+
+		protected virtual QueryDescriptor<T> Clone()
+		{
+			return new QueryDescriptor<T>
+			{
+				IsStrict = this.IsStrict,
+				IsVerbatim = this.IsVerbatim
+			};
 		}
 
 		/// <summary>

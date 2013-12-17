@@ -28,6 +28,9 @@ namespace Nest.Resolvers
 
         public string GetIdFor<T>(T @object)
         {
+	        if (@object == null)
+		        return null;
+
             var type = typeof(T);
             Func<object, string> cachedLookup;
             if (IdDelegates.TryGetValue(type, out cachedLookup))

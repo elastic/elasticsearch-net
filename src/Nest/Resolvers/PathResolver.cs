@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -319,21 +320,6 @@ namespace Nest.Resolvers
 		}
 
 		
-		public string GetDeleteByQueryPathForDynamic(QueryPathDescriptor<dynamic> descriptor, string suffix)
-		{
-			string indices;
-			if (descriptor._Indices.HasAny())
-				indices = string.Join(",", descriptor._Indices);
-			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
-				indices = "_all";
-			else
-				indices = this._connectionSettings.DefaultIndex;
-
-			string types = (descriptor._Types.HasAny()) ? this.JoinTypes(descriptor._Types) : null;
-
-			return this.SearchPathJoin(indices, types, descriptor.GetUrlParams(), suffix);
-		}
-		
 		//TODO merge with GetDeleteByQueryPathForDynamic
 		public string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor, string suffix) where T : class
 		{
@@ -415,17 +401,12 @@ namespace Nest.Resolvers
 			return path;
 		}
 
-
-
-
 		private string JoinTypes(IEnumerable<TypeNameMarker> markers)
 		{
 			if (!markers.HasAny())
 				return null;
 			return string.Join(",", markers.Select(t => t.Resolve(this._connectionSettings)));
 		}
-
-		
 
 		private string NormalizeSuffix(string suffix)
 		{
@@ -498,8 +479,6 @@ namespace Nest.Resolvers
 				}
 			}
 		}
-
-
 
 		private string AppendEscapedQueryString(IDictionary<string, string> urlparams, string path)
 		{

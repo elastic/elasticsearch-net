@@ -1,4 +1,5 @@
 @using System.Linq
+@using RawClientGenerator
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -22,9 +23,9 @@ namespace Nest
 	{
 		var identifier = kv.Key;
 		var endpoint = kv.Value;
-		foreach (var method in endpoint.GetCsharpMethods())
+		var methods = endpoint.GetCsharpMethods().ToList();
+		foreach (var method in methods)
 		{
-
 		<text>
 		///<summary>@method.HttpMethod @method.Path
 	    ///<pre>@method.Documentation</pre>	

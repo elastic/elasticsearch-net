@@ -69,6 +69,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\_Descriptors.Generated.cshtml" />
+    <None Include="Views\RawDispatch.Generated.cshtml" />
     <None Include="Views\RawElasticClient.Generated.cshtml" />
     <None Include="Views\Enums.Generated.cshtml" />
     <None Include="Views\QueryStringParameters.Generated.cshtml" />

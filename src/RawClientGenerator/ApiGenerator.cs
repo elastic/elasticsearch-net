@@ -86,6 +86,13 @@ namespace RawClientGenerator
 			}
 		}
 
+		private static readonly Dictionary<string, string> MethodNameOverrides =
+ 			new Dictionary<string, string>
+ 			{
+ 				{"IndicesValidateQueryQueryString", "ValidateQueryQueryString"}
+ 			};
+
+
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
 		public static void PatchMethod(CsharpMethod method)
@@ -105,11 +112,16 @@ namespace RawClientGenerator
 				if (method.Path.Contains("/fielddata/"))
 					method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
 			}
+
+
 			//remove duplicate occurance of the HTTP method name
 			var m = method.HttpMethod.ToPascalCase();
 			method.FullName =
 				Regex.Replace(method.FullName, m, (a) => a.Index != method.FullName.IndexOf(m) ? "" : m);
 
+			string manualOverride;
+			if (MethodNameOverrides.TryGetValue(method.QueryStringParamName, out manualOverride))
+				method.QueryStringParamName = manualOverride;
 		}
 
 		public static string CreateMethodName(string apiEnpointKey, ApiEndpoint endpoint)
@@ -124,10 +136,24 @@ namespace RawClientGenerator
 			File.WriteAllText(targetFile, source);
 		}
 
+
+		public static void GenerateRawDispatch(RestApiSpec model)
+		{
+			var targetFile = _nestFolder + @"RawDispatch.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawDispatch.Generated.cshtml"), model).ToString();
+			File.WriteAllText(targetFile, source);
+		}
 		public static void GenerateRawClient(RestApiSpec model)
 		{
 			var targetFile = _nestFolder + @"RawElasticClient.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawElasticClient.Generated.cshtml"), model).ToString();
+			File.WriteAllText(targetFile, source);
+		}
+
+		public static void GenerateDescriptors(RestApiSpec model)
+		{
+			var targetFile = _nestFolder + @"DSL\_Descriptors.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_Descriptors.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 

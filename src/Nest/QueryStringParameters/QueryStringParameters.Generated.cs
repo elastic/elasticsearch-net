@@ -16,83 +16,38 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/bulk/
 	///</pre>
 	///</summary>
-	public class BulkPostQueryString : FluentQueryString<BulkPostQueryString> 
+	public class BulkQueryString : FluentQueryString<BulkQueryString> 
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public BulkPostQueryString Consistency(ConsistencyOptions consistency)
+		public BulkQueryString Consistency(ConsistencyOptions consistency)
 		{
 			this.Add("consistency", this.CreateString(consistency));
 			return this;
 		}
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public BulkPostQueryString Refresh(bool refresh)
+		public BulkQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Explicitely set the replication type</summary>
-		public BulkPostQueryString Replication(ReplicationOptions replication)
+		public BulkQueryString Replication(ReplicationOptions replication)
 		{
 			this.Add("replication", this.CreateString(replication));
 			return this;
 		}
 
 		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public BulkPostQueryString Type(string type)
+		public BulkQueryString Type(string type)
 		{
 			this.Add("type", this.CreateString(type));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public BulkPostQueryString Timeout(string timeout)
-		{
-			this.Add("timeout", this.CreateString(timeout));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for BulkPut
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/bulk/
-	///</pre>
-	///</summary>
-	public class BulkPutQueryString : FluentQueryString<BulkPutQueryString> 
-	{
-		///<summary>Explicit write consistency setting for the operation</summary>
-		public BulkPutQueryString Consistency(ConsistencyOptions consistency)
-		{
-			this.Add("consistency", this.CreateString(consistency));
-			return this;
-		}
-
-		///<summary>Refresh the index after performing the operation</summary>
-		public BulkPutQueryString Refresh(bool refresh)
-		{
-			this.Add("refresh", this.CreateString(refresh));
-			return this;
-		}
-
-		///<summary>Explicitely set the replication type</summary>
-		public BulkPutQueryString Replication(ReplicationOptions replication)
-		{
-			this.Add("replication", this.CreateString(replication));
-			return this;
-		}
-
-		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public BulkPutQueryString Type(string type)
-		{
-			this.Add("type", this.CreateString(type));
-			return this;
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public BulkPutQueryString Timeout(string timeout)
+		public BulkQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
@@ -106,59 +61,59 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-cluster-health/
 	///</pre>
 	///</summary>
-	public class ClusterHealthGetQueryString : FluentQueryString<ClusterHealthGetQueryString> 
+	public class ClusterHealthQueryString : FluentQueryString<ClusterHealthQueryString> 
 	{
 		///<summary>Specify the level of detail for returned information</summary>
-		public ClusterHealthGetQueryString Level(LevelOptions level)
+		public ClusterHealthQueryString Level(LevelOptions level)
 		{
 			this.Add("level", this.CreateString(level));
 			return this;
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ClusterHealthGetQueryString Local(bool local)
+		public ClusterHealthQueryString Local(bool local)
 		{
 			this.Add("local", this.CreateString(local));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterHealthGetQueryString MasterTimeout(string master_timeout)
+		public ClusterHealthQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterHealthGetQueryString Timeout(string timeout)
+		public ClusterHealthQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Wait until the specified number of shards is active</summary>
-		public ClusterHealthGetQueryString WaitForActiveShards(int wait_for_active_shards)
+		public ClusterHealthQueryString WaitForActiveShards(int wait_for_active_shards)
 		{
 			this.Add("wait_for_active_shards", this.CreateString(wait_for_active_shards));
 			return this;
 		}
 
 		///<summary>Wait until the specified number of nodes is available</summary>
-		public ClusterHealthGetQueryString WaitForNodes(string wait_for_nodes)
+		public ClusterHealthQueryString WaitForNodes(string wait_for_nodes)
 		{
 			this.Add("wait_for_nodes", this.CreateString(wait_for_nodes));
 			return this;
 		}
 
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public ClusterHealthGetQueryString WaitForRelocatingShards(int wait_for_relocating_shards)
+		public ClusterHealthQueryString WaitForRelocatingShards(int wait_for_relocating_shards)
 		{
 			this.Add("wait_for_relocating_shards", this.CreateString(wait_for_relocating_shards));
 			return this;
 		}
 
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthGetQueryString WaitForStatus(WaitForStatusOptions wait_for_status)
+		public ClusterHealthQueryString WaitForStatus(WaitForStatusOptions wait_for_status)
 		{
 			this.Add("wait_for_status", this.CreateString(wait_for_status));
 			return this;
@@ -172,31 +127,31 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-hot-threads/
 	///</pre>
 	///</summary>
-	public class ClusterNodeHotThreadsGetQueryString : FluentQueryString<ClusterNodeHotThreadsGetQueryString> 
+	public class ClusterNodeHotThreadsQueryString : FluentQueryString<ClusterNodeHotThreadsQueryString> 
 	{
 		///<summary>The interval for the second sampling of threads</summary>
-		public ClusterNodeHotThreadsGetQueryString Interval(string interval)
+		public ClusterNodeHotThreadsQueryString Interval(string interval)
 		{
 			this.Add("interval", this.CreateString(interval));
 			return this;
 		}
 
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public ClusterNodeHotThreadsGetQueryString Snapshots(int snapshots)
+		public ClusterNodeHotThreadsQueryString Snapshots(int snapshots)
 		{
 			this.Add("snapshots", this.CreateString(snapshots));
 			return this;
 		}
 
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public ClusterNodeHotThreadsGetQueryString Threads(int threads)
+		public ClusterNodeHotThreadsQueryString Threads(int threads)
 		{
 			this.Add("threads", this.CreateString(threads));
 			return this;
 		}
 
 		///<summary>The type to sample (default: cpu)</summary>
-		public ClusterNodeHotThreadsGetQueryString Type(TypeOptions type)
+		public ClusterNodeHotThreadsQueryString Type(TypeOptions type)
 		{
 			this.Add("type", this.CreateString(type));
 			return this;
@@ -210,87 +165,87 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-info/
 	///</pre>
 	///</summary>
-	public class ClusterNodeInfoGetQueryString : FluentQueryString<ClusterNodeInfoGetQueryString> 
+	public class ClusterNodeInfoQueryString : FluentQueryString<ClusterNodeInfoQueryString> 
 	{
 		///<summary>Return all available information</summary>
-		public ClusterNodeInfoGetQueryString All(bool all)
+		public ClusterNodeInfoQueryString All(bool all)
 		{
 			this.Add("all", this.CreateString(all));
 			return this;
 		}
 
 		///<summary>Reset the default settings</summary>
-		public ClusterNodeInfoGetQueryString Clear(bool clear)
+		public ClusterNodeInfoQueryString Clear(bool clear)
 		{
 			this.Add("clear", this.CreateString(clear));
 			return this;
 		}
 
 		///<summary>Return information about HTTP</summary>
-		public ClusterNodeInfoGetQueryString Http(bool http)
+		public ClusterNodeInfoQueryString Http(bool http)
 		{
 			this.Add("http", this.CreateString(http));
 			return this;
 		}
 
 		///<summary>Return information about the JVM</summary>
-		public ClusterNodeInfoGetQueryString Jvm(bool jvm)
+		public ClusterNodeInfoQueryString Jvm(bool jvm)
 		{
 			this.Add("jvm", this.CreateString(jvm));
 			return this;
 		}
 
 		///<summary>Return information about network</summary>
-		public ClusterNodeInfoGetQueryString Network(bool network)
+		public ClusterNodeInfoQueryString Network(bool network)
 		{
 			this.Add("network", this.CreateString(network));
 			return this;
 		}
 
 		///<summary>Return information about the operating system</summary>
-		public ClusterNodeInfoGetQueryString Os(bool os)
+		public ClusterNodeInfoQueryString Os(bool os)
 		{
 			this.Add("os", this.CreateString(os));
 			return this;
 		}
 
 		///<summary>Return information about plugins</summary>
-		public ClusterNodeInfoGetQueryString Plugin(bool plugin)
+		public ClusterNodeInfoQueryString Plugin(bool plugin)
 		{
 			this.Add("plugin", this.CreateString(plugin));
 			return this;
 		}
 
 		///<summary>Return information about the Elasticsearch process</summary>
-		public ClusterNodeInfoGetQueryString Process(bool process)
+		public ClusterNodeInfoQueryString Process(bool process)
 		{
 			this.Add("process", this.CreateString(process));
 			return this;
 		}
 
 		///<summary>Return information about node settings</summary>
-		public ClusterNodeInfoGetQueryString Settings(bool settings)
+		public ClusterNodeInfoQueryString Settings(bool settings)
 		{
 			this.Add("settings", this.CreateString(settings));
 			return this;
 		}
 
 		///<summary>Return information about the thread pool</summary>
-		public ClusterNodeInfoGetQueryString ThreadPool(bool thread_pool)
+		public ClusterNodeInfoQueryString ThreadPool(bool thread_pool)
 		{
 			this.Add("thread_pool", this.CreateString(thread_pool));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterNodeInfoGetQueryString Timeout(string timeout)
+		public ClusterNodeInfoQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Return information about transport</summary>
-		public ClusterNodeInfoGetQueryString Transport(bool transport)
+		public ClusterNodeInfoQueryString Transport(bool transport)
 		{
 			this.Add("transport", this.CreateString(transport));
 			return this;
@@ -304,17 +259,17 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown/
 	///</pre>
 	///</summary>
-	public class ClusterNodeShutdownPostQueryString : FluentQueryString<ClusterNodeShutdownPostQueryString> 
+	public class ClusterNodeShutdownQueryString : FluentQueryString<ClusterNodeShutdownQueryString> 
 	{
 		///<summary>Set the delay for the operation (default: 1s)</summary>
-		public ClusterNodeShutdownPostQueryString Delay(string delay)
+		public ClusterNodeShutdownQueryString Delay(string delay)
 		{
 			this.Add("delay", this.CreateString(delay));
 			return this;
 		}
 
 		///<summary>Exit the JVM as well (default: true)</summary>
-		public ClusterNodeShutdownPostQueryString Exit(bool exit)
+		public ClusterNodeShutdownQueryString Exit(bool exit)
 		{
 			this.Add("exit", this.CreateString(exit));
 			return this;
@@ -328,87 +283,87 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/
 	///</pre>
 	///</summary>
-	public class ClusterNodeStatsGetQueryString : FluentQueryString<ClusterNodeStatsGetQueryString> 
+	public class ClusterNodeStatsQueryString : FluentQueryString<ClusterNodeStatsQueryString> 
 	{
 		///<summary>Return all available information</summary>
-		public ClusterNodeStatsGetQueryString All(bool all)
+		public ClusterNodeStatsQueryString All(bool all)
 		{
 			this.Add("all", this.CreateString(all));
 			return this;
 		}
 
 		///<summary>Reset the default level of detail</summary>
-		public ClusterNodeStatsGetQueryString Clear(bool clear)
+		public ClusterNodeStatsQueryString Clear(bool clear)
 		{
 			this.Add("clear", this.CreateString(clear));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
-		public ClusterNodeStatsGetQueryString Fields(params string[] fields)
+		public ClusterNodeStatsQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>Return information about the filesystem</summary>
-		public ClusterNodeStatsGetQueryString Fs(bool fs)
+		public ClusterNodeStatsQueryString Fs(bool fs)
 		{
 			this.Add("fs", this.CreateString(fs));
 			return this;
 		}
 
 		///<summary>Return information about HTTP</summary>
-		public ClusterNodeStatsGetQueryString Http(bool http)
+		public ClusterNodeStatsQueryString Http(bool http)
 		{
 			this.Add("http", this.CreateString(http));
 			return this;
 		}
 
 		///<summary>Return information about indices</summary>
-		public ClusterNodeStatsGetQueryString Indices(bool indices)
+		public ClusterNodeStatsQueryString Indices(bool indices)
 		{
 			this.Add("indices", this.CreateString(indices));
 			return this;
 		}
 
 		///<summary>Return information about the JVM</summary>
-		public ClusterNodeStatsGetQueryString Jvm(bool jvm)
+		public ClusterNodeStatsQueryString Jvm(bool jvm)
 		{
 			this.Add("jvm", this.CreateString(jvm));
 			return this;
 		}
 
 		///<summary>Return information about network</summary>
-		public ClusterNodeStatsGetQueryString Network(bool network)
+		public ClusterNodeStatsQueryString Network(bool network)
 		{
 			this.Add("network", this.CreateString(network));
 			return this;
 		}
 
 		///<summary>Return information about the operating system</summary>
-		public ClusterNodeStatsGetQueryString Os(bool os)
+		public ClusterNodeStatsQueryString Os(bool os)
 		{
 			this.Add("os", this.CreateString(os));
 			return this;
 		}
 
 		///<summary>Return information about the Elasticsearch process</summary>
-		public ClusterNodeStatsGetQueryString Process(bool process)
+		public ClusterNodeStatsQueryString Process(bool process)
 		{
 			this.Add("process", this.CreateString(process));
 			return this;
 		}
 
 		///<summary>Return information about the thread pool</summary>
-		public ClusterNodeStatsGetQueryString ThreadPool(bool thread_pool)
+		public ClusterNodeStatsQueryString ThreadPool(bool thread_pool)
 		{
 			this.Add("thread_pool", this.CreateString(thread_pool));
 			return this;
 		}
 
 		///<summary>Return information about transport</summary>
-		public ClusterNodeStatsGetQueryString Transport(bool transport)
+		public ClusterNodeStatsQueryString Transport(bool transport)
 		{
 			this.Add("transport", this.CreateString(transport));
 			return this;
@@ -422,17 +377,17 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-cluster-reroute/
 	///</pre>
 	///</summary>
-	public class ClusterReroutePostQueryString : FluentQueryString<ClusterReroutePostQueryString> 
+	public class ClusterRerouteQueryString : FluentQueryString<ClusterRerouteQueryString> 
 	{
 		///<summary>Simulate the operation only and return the resulting state</summary>
-		public ClusterReroutePostQueryString DryRun(bool dry_run)
+		public ClusterRerouteQueryString DryRun(bool dry_run)
 		{
 			this.Add("dry_run", this.CreateString(dry_run));
 			return this;
 		}
 
 		///<summary>Don&#39;t return cluster state metadata (default: false)</summary>
-		public ClusterReroutePostQueryString FilterMetadata(bool filter_metadata)
+		public ClusterRerouteQueryString FilterMetadata(bool filter_metadata)
 		{
 			this.Add("filter_metadata", this.CreateString(filter_metadata));
 			return this;
@@ -446,59 +401,59 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-cluster-state/
 	///</pre>
 	///</summary>
-	public class ClusterStateGetQueryString : FluentQueryString<ClusterStateGetQueryString> 
+	public class ClusterStateQueryString : FluentQueryString<ClusterStateQueryString> 
 	{
 		///<summary>Do not return information about blocks</summary>
-		public ClusterStateGetQueryString FilterBlocks(bool filter_blocks)
+		public ClusterStateQueryString FilterBlocks(bool filter_blocks)
 		{
 			this.Add("filter_blocks", this.CreateString(filter_blocks));
 			return this;
 		}
 
 		///<summary>Do not return information about index templates</summary>
-		public ClusterStateGetQueryString FilterIndexTemplates(bool filter_index_templates)
+		public ClusterStateQueryString FilterIndexTemplates(bool filter_index_templates)
 		{
 			this.Add("filter_index_templates", this.CreateString(filter_index_templates));
 			return this;
 		}
 
 		///<summary>Limit returned metadata information to specific indices</summary>
-		public ClusterStateGetQueryString FilterIndices(params string[] filter_indices)
+		public ClusterStateQueryString FilterIndices(params string[] filter_indices)
 		{
 			this.Add("filter_indices", this.CreateString(filter_indices));
 			return this;
 		}
 
 		///<summary>Do not return information about indices metadata</summary>
-		public ClusterStateGetQueryString FilterMetadata(bool filter_metadata)
+		public ClusterStateQueryString FilterMetadata(bool filter_metadata)
 		{
 			this.Add("filter_metadata", this.CreateString(filter_metadata));
 			return this;
 		}
 
 		///<summary>Do not return information about nodes</summary>
-		public ClusterStateGetQueryString FilterNodes(bool filter_nodes)
+		public ClusterStateQueryString FilterNodes(bool filter_nodes)
 		{
 			this.Add("filter_nodes", this.CreateString(filter_nodes));
 			return this;
 		}
 
 		///<summary>Do not return information about shard allocation (`routing_table` and `routing_nodes`)</summary>
-		public ClusterStateGetQueryString FilterRoutingTable(bool filter_routing_table)
+		public ClusterStateQueryString FilterRoutingTable(bool filter_routing_table)
 		{
 			this.Add("filter_routing_table", this.CreateString(filter_routing_table));
 			return this;
 		}
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ClusterStateGetQueryString Local(bool local)
+		public ClusterStateQueryString Local(bool local)
 		{
 			this.Add("local", this.CreateString(local));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterStateGetQueryString MasterTimeout(string master_timeout)
+		public ClusterStateQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -512,83 +467,38 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/count/
 	///</pre>
 	///</summary>
-	public class CountPostQueryString : FluentQueryString<CountPostQueryString> 
+	public class CountQueryString : FluentQueryString<CountQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public CountPostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public CountQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountPostQueryString MinScore(int min_score)
+		public CountQueryString MinScore(int min_score)
 		{
 			this.Add("min_score", this.CreateString(min_score));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public CountPostQueryString Preference(string preference)
+		public CountQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public CountPostQueryString Routing(string routing)
+		public CountQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public CountPostQueryString Source(string source)
-		{
-			this.Add("source", this.CreateString(source));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for CountGet
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/count/
-	///</pre>
-	///</summary>
-	public class CountGetQueryString : FluentQueryString<CountGetQueryString> 
-	{
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public CountGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountGetQueryString MinScore(int min_score)
-		{
-			this.Add("min_score", this.CreateString(min_score));
-			return this;
-		}
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public CountGetQueryString Preference(string preference)
-		{
-			this.Add("preference", this.CreateString(preference));
-			return this;
-		}
-
-		///<summary>Specific routing value</summary>
-		public CountGetQueryString Routing(string routing)
-		{
-			this.Add("routing", this.CreateString(routing));
-			return this;
-		}
-
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public CountGetQueryString Source(string source)
+		public CountQueryString Source(string source)
 		{
 			this.Add("source", this.CreateString(source));
 			return this;
@@ -602,181 +512,87 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/index_/
 	///</pre>
 	///</summary>
-	public class CreatePostQueryString : FluentQueryString<CreatePostQueryString> 
+	public class CreateQueryString : FluentQueryString<CreateQueryString> 
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public CreatePostQueryString Consistency(ConsistencyOptions consistency)
+		public CreateQueryString Consistency(ConsistencyOptions consistency)
 		{
 			this.Add("consistency", this.CreateString(consistency));
 			return this;
 		}
 
 		///<summary>Specific document ID (when the POST method is used)</summary>
-		public CreatePostQueryString Id(string id)
+		public CreateQueryString Id(string id)
 		{
 			this.Add("id", this.CreateString(id));
 			return this;
 		}
 
 		///<summary>ID of the parent document</summary>
-		public CreatePostQueryString Parent(string parent)
+		public CreateQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Percolator queries to execute while indexing the document</summary>
-		public CreatePostQueryString Percolate(string percolate)
+		public CreateQueryString Percolate(string percolate)
 		{
 			this.Add("percolate", this.CreateString(percolate));
 			return this;
 		}
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public CreatePostQueryString Refresh(bool refresh)
+		public CreateQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specific replication type</summary>
-		public CreatePostQueryString Replication(ReplicationOptions replication)
+		public CreateQueryString Replication(ReplicationOptions replication)
 		{
 			this.Add("replication", this.CreateString(replication));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public CreatePostQueryString Routing(string routing)
+		public CreateQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public CreatePostQueryString Timeout(string timeout)
+		public CreateQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Explicit timestamp for the document</summary>
-		public CreatePostQueryString Timestamp(string timestamp)
+		public CreateQueryString Timestamp(string timestamp)
 		{
 			this.Add("timestamp", this.CreateString(timestamp));
 			return this;
 		}
 
 		///<summary>Expiration time for the document</summary>
-		public CreatePostQueryString Ttl(string ttl)
+		public CreateQueryString Ttl(string ttl)
 		{
 			this.Add("ttl", this.CreateString(ttl));
 			return this;
 		}
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public CreatePostQueryString Version(int version)
+		public CreateQueryString Version(int version)
 		{
 			this.Add("version", this.CreateString(version));
 			return this;
 		}
 
 		///<summary>Specific version type</summary>
-		public CreatePostQueryString VersionType(VersionTypeOptions version_type)
-		{
-			this.Add("version_type", this.CreateString(version_type));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for CreatePut
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/index_/
-	///</pre>
-	///</summary>
-	public class CreatePutQueryString : FluentQueryString<CreatePutQueryString> 
-	{
-		///<summary>Explicit write consistency setting for the operation</summary>
-		public CreatePutQueryString Consistency(ConsistencyOptions consistency)
-		{
-			this.Add("consistency", this.CreateString(consistency));
-			return this;
-		}
-
-		///<summary>Specific document ID (when the POST method is used)</summary>
-		public CreatePutQueryString Id(string id)
-		{
-			this.Add("id", this.CreateString(id));
-			return this;
-		}
-
-		///<summary>ID of the parent document</summary>
-		public CreatePutQueryString Parent(string parent)
-		{
-			this.Add("parent", this.CreateString(parent));
-			return this;
-		}
-
-		///<summary>Percolator queries to execute while indexing the document</summary>
-		public CreatePutQueryString Percolate(string percolate)
-		{
-			this.Add("percolate", this.CreateString(percolate));
-			return this;
-		}
-
-		///<summary>Refresh the index after performing the operation</summary>
-		public CreatePutQueryString Refresh(bool refresh)
-		{
-			this.Add("refresh", this.CreateString(refresh));
-			return this;
-		}
-
-		///<summary>Specific replication type</summary>
-		public CreatePutQueryString Replication(ReplicationOptions replication)
-		{
-			this.Add("replication", this.CreateString(replication));
-			return this;
-		}
-
-		///<summary>Specific routing value</summary>
-		public CreatePutQueryString Routing(string routing)
-		{
-			this.Add("routing", this.CreateString(routing));
-			return this;
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public CreatePutQueryString Timeout(string timeout)
-		{
-			this.Add("timeout", this.CreateString(timeout));
-			return this;
-		}
-
-		///<summary>Explicit timestamp for the document</summary>
-		public CreatePutQueryString Timestamp(string timestamp)
-		{
-			this.Add("timestamp", this.CreateString(timestamp));
-			return this;
-		}
-
-		///<summary>Expiration time for the document</summary>
-		public CreatePutQueryString Ttl(string ttl)
-		{
-			this.Add("ttl", this.CreateString(ttl));
-			return this;
-		}
-
-		///<summary>Explicit version number for concurrency control</summary>
-		public CreatePutQueryString Version(int version)
-		{
-			this.Add("version", this.CreateString(version));
-			return this;
-		}
-
-		///<summary>Specific version type</summary>
-		public CreatePutQueryString VersionType(VersionTypeOptions version_type)
+		public CreateQueryString VersionType(VersionTypeOptions version_type)
 		{
 			this.Add("version_type", this.CreateString(version_type));
 			return this;
@@ -790,59 +606,59 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/delete/
 	///</pre>
 	///</summary>
-	public class DeleteDeleteQueryString : FluentQueryString<DeleteDeleteQueryString> 
+	public class DeleteQueryString : FluentQueryString<DeleteQueryString> 
 	{
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteDeleteQueryString Consistency(ConsistencyOptions consistency)
+		public DeleteQueryString Consistency(ConsistencyOptions consistency)
 		{
 			this.Add("consistency", this.CreateString(consistency));
 			return this;
 		}
 
 		///<summary>ID of parent document</summary>
-		public DeleteDeleteQueryString Parent(string parent)
+		public DeleteQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public DeleteDeleteQueryString Refresh(bool refresh)
+		public DeleteQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specific replication type</summary>
-		public DeleteDeleteQueryString Replication(ReplicationOptions replication)
+		public DeleteQueryString Replication(ReplicationOptions replication)
 		{
 			this.Add("replication", this.CreateString(replication));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public DeleteDeleteQueryString Routing(string routing)
+		public DeleteQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteDeleteQueryString Timeout(string timeout)
+		public DeleteQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteDeleteQueryString Version(int version)
+		public DeleteQueryString Version(int version)
 		{
 			this.Add("version", this.CreateString(version));
 			return this;
 		}
 
 		///<summary>Specific version type</summary>
-		public DeleteDeleteQueryString VersionType(VersionTypeOptions version_type)
+		public DeleteQueryString VersionType(VersionTypeOptions version_type)
 		{
 			this.Add("version_type", this.CreateString(version_type));
 			return this;
@@ -856,73 +672,73 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/delete-by-query/
 	///</pre>
 	///</summary>
-	public class DeleteByQueryDeleteQueryString : FluentQueryString<DeleteByQueryDeleteQueryString> 
+	public class DeleteByQueryQueryString : FluentQueryString<DeleteByQueryQueryString> 
 	{
 		///<summary>The analyzer to use for the query string</summary>
-		public DeleteByQueryDeleteQueryString Analyzer(string analyzer)
+		public DeleteByQueryQueryString Analyzer(string analyzer)
 		{
 			this.Add("analyzer", this.CreateString(analyzer));
 			return this;
 		}
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteByQueryDeleteQueryString Consistency(ConsistencyOptions consistency)
+		public DeleteByQueryQueryString Consistency(ConsistencyOptions consistency)
 		{
 			this.Add("consistency", this.CreateString(consistency));
 			return this;
 		}
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDeleteQueryString DefaultOperator(DefaultOperatorOptions default_operator)
+		public DeleteByQueryQueryString DefaultOperator(DefaultOperatorOptions default_operator)
 		{
 			this.Add("default_operator", this.CreateString(default_operator));
 			return this;
 		}
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public DeleteByQueryDeleteQueryString Df(string df)
+		public DeleteByQueryQueryString Df(string df)
 		{
 			this.Add("df", this.CreateString(df));
 			return this;
 		}
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public DeleteByQueryDeleteQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public DeleteByQueryQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>Specific replication type</summary>
-		public DeleteByQueryDeleteQueryString Replication(ReplicationOptions replication)
+		public DeleteByQueryQueryString Replication(ReplicationOptions replication)
 		{
 			this.Add("replication", this.CreateString(replication));
 			return this;
 		}
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDeleteQueryString Q(string q)
+		public DeleteByQueryQueryString Q(string q)
 		{
 			this.Add("q", this.CreateString(q));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public DeleteByQueryDeleteQueryString Routing(string routing)
+		public DeleteByQueryQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public DeleteByQueryDeleteQueryString Source(string source)
+		public DeleteByQueryQueryString Source(string source)
 		{
 			this.Add("source", this.CreateString(source));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteByQueryDeleteQueryString Timeout(string timeout)
+		public DeleteByQueryQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
@@ -936,38 +752,38 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/get/
 	///</pre>
 	///</summary>
-	public class ExistsHeadQueryString : FluentQueryString<ExistsHeadQueryString> 
+	public class ExistsQueryString : FluentQueryString<ExistsQueryString> 
 	{
 		///<summary>The ID of the parent document</summary>
-		public ExistsHeadQueryString Parent(string parent)
+		public ExistsQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExistsHeadQueryString Preference(string preference)
+		public ExistsQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public ExistsHeadQueryString Realtime(bool realtime)
+		public ExistsQueryString Realtime(bool realtime)
 		{
 			this.Add("realtime", this.CreateString(realtime));
 			return this;
 		}
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public ExistsHeadQueryString Refresh(bool refresh)
+		public ExistsQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public ExistsHeadQueryString Routing(string routing)
+		public ExistsQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
@@ -981,223 +797,108 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/explain/
 	///</pre>
 	///</summary>
-	public class ExplainGetQueryString : FluentQueryString<ExplainGetQueryString> 
+	public class ExplainQueryString : FluentQueryString<ExplainQueryString> 
 	{
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public ExplainGetQueryString AnalyzeWildcard(bool analyze_wildcard)
+		public ExplainQueryString AnalyzeWildcard(bool analyze_wildcard)
 		{
 			this.Add("analyze_wildcard", this.CreateString(analyze_wildcard));
 			return this;
 		}
 
 		///<summary>The analyzer for the query string query</summary>
-		public ExplainGetQueryString Analyzer(string analyzer)
+		public ExplainQueryString Analyzer(string analyzer)
 		{
 			this.Add("analyzer", this.CreateString(analyzer));
 			return this;
 		}
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainGetQueryString DefaultOperator(DefaultOperatorOptions default_operator)
+		public ExplainQueryString DefaultOperator(DefaultOperatorOptions default_operator)
 		{
 			this.Add("default_operator", this.CreateString(default_operator));
 			return this;
 		}
 
 		///<summary>The default field for query string query (default: _all)</summary>
-		public ExplainGetQueryString Df(string df)
+		public ExplainQueryString Df(string df)
 		{
 			this.Add("df", this.CreateString(df));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainGetQueryString Fields(params string[] fields)
+		public ExplainQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public ExplainGetQueryString Lenient(bool lenient)
+		public ExplainQueryString Lenient(bool lenient)
 		{
 			this.Add("lenient", this.CreateString(lenient));
 			return this;
 		}
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public ExplainGetQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
+		public ExplainQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
 		{
 			this.Add("lowercase_expanded_terms", this.CreateString(lowercase_expanded_terms));
 			return this;
 		}
 
 		///<summary>The ID of the parent document</summary>
-		public ExplainGetQueryString Parent(string parent)
+		public ExplainQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExplainGetQueryString Preference(string preference)
+		public ExplainQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainGetQueryString Q(string q)
+		public ExplainQueryString Q(string q)
 		{
 			this.Add("q", this.CreateString(q));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public ExplainGetQueryString Routing(string routing)
+		public ExplainQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ExplainGetQueryString Source(string source)
+		public ExplainQueryString Source(string source)
 		{
 			this.Add("source", this.CreateString(source));
 			return this;
 		}
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainGetQueryString Source(params string[] _source)
+		public ExplainQueryString Source(params string[] _source)
 		{
 			this.Add("_source", this.CreateString(_source));
 			return this;
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainGetQueryString SourceExclude(params string[] _source_exclude)
+		public ExplainQueryString SourceExclude(params string[] _source_exclude)
 		{
 			this.Add("_source_exclude", this.CreateString(_source_exclude));
 			return this;
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainGetQueryString SourceInclude(params string[] _source_include)
-		{
-			this.Add("_source_include", this.CreateString(_source_include));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for ExplainPost
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/explain/
-	///</pre>
-	///</summary>
-	public class ExplainPostQueryString : FluentQueryString<ExplainPostQueryString> 
-	{
-		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public ExplainPostQueryString AnalyzeWildcard(bool analyze_wildcard)
-		{
-			this.Add("analyze_wildcard", this.CreateString(analyze_wildcard));
-			return this;
-		}
-
-		///<summary>The analyzer for the query string query</summary>
-		public ExplainPostQueryString Analyzer(string analyzer)
-		{
-			this.Add("analyzer", this.CreateString(analyzer));
-			return this;
-		}
-
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainPostQueryString DefaultOperator(DefaultOperatorOptions default_operator)
-		{
-			this.Add("default_operator", this.CreateString(default_operator));
-			return this;
-		}
-
-		///<summary>The default field for query string query (default: _all)</summary>
-		public ExplainPostQueryString Df(string df)
-		{
-			this.Add("df", this.CreateString(df));
-			return this;
-		}
-
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainPostQueryString Fields(params string[] fields)
-		{
-			this.Add("fields", this.CreateString(fields));
-			return this;
-		}
-
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public ExplainPostQueryString Lenient(bool lenient)
-		{
-			this.Add("lenient", this.CreateString(lenient));
-			return this;
-		}
-
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public ExplainPostQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
-		{
-			this.Add("lowercase_expanded_terms", this.CreateString(lowercase_expanded_terms));
-			return this;
-		}
-
-		///<summary>The ID of the parent document</summary>
-		public ExplainPostQueryString Parent(string parent)
-		{
-			this.Add("parent", this.CreateString(parent));
-			return this;
-		}
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExplainPostQueryString Preference(string preference)
-		{
-			this.Add("preference", this.CreateString(preference));
-			return this;
-		}
-
-		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainPostQueryString Q(string q)
-		{
-			this.Add("q", this.CreateString(q));
-			return this;
-		}
-
-		///<summary>Specific routing value</summary>
-		public ExplainPostQueryString Routing(string routing)
-		{
-			this.Add("routing", this.CreateString(routing));
-			return this;
-		}
-
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ExplainPostQueryString Source(string source)
-		{
-			this.Add("source", this.CreateString(source));
-			return this;
-		}
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainPostQueryString Source(params string[] _source)
-		{
-			this.Add("_source", this.CreateString(_source));
-			return this;
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainPostQueryString SourceExclude(params string[] _source_exclude)
-		{
-			this.Add("_source_exclude", this.CreateString(_source_exclude));
-			return this;
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainPostQueryString SourceInclude(params string[] _source_include)
+		public ExplainQueryString SourceInclude(params string[] _source_include)
 		{
 			this.Add("_source_include", this.CreateString(_source_include));
 			return this;
@@ -1211,66 +912,66 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/get/
 	///</pre>
 	///</summary>
-	public class GetGetQueryString : FluentQueryString<GetGetQueryString> 
+	public class GetQueryString : FluentQueryString<GetQueryString> 
 	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetGetQueryString Fields(params string[] fields)
+		public GetQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>The ID of the parent document</summary>
-		public GetGetQueryString Parent(string parent)
+		public GetQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public GetGetQueryString Preference(string preference)
+		public GetQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public GetGetQueryString Realtime(bool realtime)
+		public GetQueryString Realtime(bool realtime)
 		{
 			this.Add("realtime", this.CreateString(realtime));
 			return this;
 		}
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public GetGetQueryString Refresh(bool refresh)
+		public GetQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public GetGetQueryString Routing(string routing)
+		public GetQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetGetQueryString Source(params string[] _source)
+		public GetQueryString Source(params string[] _source)
 		{
 			this.Add("_source", this.CreateString(_source));
 			return this;
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetGetQueryString SourceExclude(params string[] _source_exclude)
+		public GetQueryString SourceExclude(params string[] _source_exclude)
 		{
 			this.Add("_source_exclude", this.CreateString(_source_exclude));
 			return this;
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetGetQueryString SourceInclude(params string[] _source_include)
+		public GetQueryString SourceInclude(params string[] _source_include)
 		{
 			this.Add("_source_include", this.CreateString(_source_include));
 			return this;
@@ -1284,52 +985,52 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/get/
 	///</pre>
 	///</summary>
-	public class GetSourceGetQueryString : FluentQueryString<GetSourceGetQueryString> 
+	public class GetSourceQueryString : FluentQueryString<GetSourceQueryString> 
 	{
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetSourceGetQueryString Exclude(params string[] exclude)
+		public GetSourceQueryString Exclude(params string[] exclude)
 		{
 			this.Add("exclude", this.CreateString(exclude));
 			return this;
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetSourceGetQueryString Include(params string[] include)
+		public GetSourceQueryString Include(params string[] include)
 		{
 			this.Add("include", this.CreateString(include));
 			return this;
 		}
 
 		///<summary>The ID of the parent document</summary>
-		public GetSourceGetQueryString Parent(string parent)
+		public GetSourceQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public GetSourceGetQueryString Preference(string preference)
+		public GetSourceQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public GetSourceGetQueryString Realtime(bool realtime)
+		public GetSourceQueryString Realtime(bool realtime)
 		{
 			this.Add("realtime", this.CreateString(realtime));
 			return this;
 		}
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public GetSourceGetQueryString Refresh(bool refresh)
+		public GetSourceQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public GetSourceGetQueryString Routing(string routing)
+		public GetSourceQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
@@ -1343,181 +1044,87 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/index_/
 	///</pre>
 	///</summary>
-	public class IndexPostQueryString : FluentQueryString<IndexPostQueryString> 
+	public class IndexQueryString : FluentQueryString<IndexQueryString> 
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexPostQueryString Consistency(ConsistencyOptions consistency)
+		public IndexQueryString Consistency(ConsistencyOptions consistency)
 		{
 			this.Add("consistency", this.CreateString(consistency));
 			return this;
 		}
 
 		///<summary>Explicit operation type</summary>
-		public IndexPostQueryString OpType(OpTypeOptions op_type)
+		public IndexQueryString OpType(OpTypeOptions op_type)
 		{
 			this.Add("op_type", this.CreateString(op_type));
 			return this;
 		}
 
 		///<summary>ID of the parent document</summary>
-		public IndexPostQueryString Parent(string parent)
+		public IndexQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Percolator queries to execute while indexing the document</summary>
-		public IndexPostQueryString Percolate(string percolate)
+		public IndexQueryString Percolate(string percolate)
 		{
 			this.Add("percolate", this.CreateString(percolate));
 			return this;
 		}
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public IndexPostQueryString Refresh(bool refresh)
+		public IndexQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specific replication type</summary>
-		public IndexPostQueryString Replication(ReplicationOptions replication)
+		public IndexQueryString Replication(ReplicationOptions replication)
 		{
 			this.Add("replication", this.CreateString(replication));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public IndexPostQueryString Routing(string routing)
+		public IndexQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public IndexPostQueryString Timeout(string timeout)
+		public IndexQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndexPostQueryString Timestamp(string timestamp)
+		public IndexQueryString Timestamp(string timestamp)
 		{
 			this.Add("timestamp", this.CreateString(timestamp));
 			return this;
 		}
 
 		///<summary>Expiration time for the document</summary>
-		public IndexPostQueryString Ttl(string ttl)
+		public IndexQueryString Ttl(string ttl)
 		{
 			this.Add("ttl", this.CreateString(ttl));
 			return this;
 		}
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public IndexPostQueryString Version(int version)
+		public IndexQueryString Version(int version)
 		{
 			this.Add("version", this.CreateString(version));
 			return this;
 		}
 
 		///<summary>Specific version type</summary>
-		public IndexPostQueryString VersionType(VersionTypeOptions version_type)
-		{
-			this.Add("version_type", this.CreateString(version_type));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndexPut
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/index_/
-	///</pre>
-	///</summary>
-	public class IndexPutQueryString : FluentQueryString<IndexPutQueryString> 
-	{
-		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexPutQueryString Consistency(ConsistencyOptions consistency)
-		{
-			this.Add("consistency", this.CreateString(consistency));
-			return this;
-		}
-
-		///<summary>Explicit operation type</summary>
-		public IndexPutQueryString OpType(OpTypeOptions op_type)
-		{
-			this.Add("op_type", this.CreateString(op_type));
-			return this;
-		}
-
-		///<summary>ID of the parent document</summary>
-		public IndexPutQueryString Parent(string parent)
-		{
-			this.Add("parent", this.CreateString(parent));
-			return this;
-		}
-
-		///<summary>Percolator queries to execute while indexing the document</summary>
-		public IndexPutQueryString Percolate(string percolate)
-		{
-			this.Add("percolate", this.CreateString(percolate));
-			return this;
-		}
-
-		///<summary>Refresh the index after performing the operation</summary>
-		public IndexPutQueryString Refresh(bool refresh)
-		{
-			this.Add("refresh", this.CreateString(refresh));
-			return this;
-		}
-
-		///<summary>Specific replication type</summary>
-		public IndexPutQueryString Replication(ReplicationOptions replication)
-		{
-			this.Add("replication", this.CreateString(replication));
-			return this;
-		}
-
-		///<summary>Specific routing value</summary>
-		public IndexPutQueryString Routing(string routing)
-		{
-			this.Add("routing", this.CreateString(routing));
-			return this;
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public IndexPutQueryString Timeout(string timeout)
-		{
-			this.Add("timeout", this.CreateString(timeout));
-			return this;
-		}
-
-		///<summary>Explicit timestamp for the document</summary>
-		public IndexPutQueryString Timestamp(string timestamp)
-		{
-			this.Add("timestamp", this.CreateString(timestamp));
-			return this;
-		}
-
-		///<summary>Expiration time for the document</summary>
-		public IndexPutQueryString Ttl(string ttl)
-		{
-			this.Add("ttl", this.CreateString(ttl));
-			return this;
-		}
-
-		///<summary>Explicit version number for concurrency control</summary>
-		public IndexPutQueryString Version(int version)
-		{
-			this.Add("version", this.CreateString(version));
-			return this;
-		}
-
-		///<summary>Specific version type</summary>
-		public IndexPutQueryString VersionType(VersionTypeOptions version_type)
+		public IndexQueryString VersionType(VersionTypeOptions version_type)
 		{
 			this.Add("version_type", this.CreateString(version_type));
 			return this;
@@ -1531,125 +1138,59 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/
 	///</pre>
 	///</summary>
-	public class IndicesAnalyzeGetQueryString : FluentQueryString<IndicesAnalyzeGetQueryString> 
+	public class IndicesAnalyzeQueryString : FluentQueryString<IndicesAnalyzeQueryString> 
 	{
 		///<summary>The name of the analyzer to use</summary>
-		public IndicesAnalyzeGetQueryString Analyzer(string analyzer)
+		public IndicesAnalyzeQueryString Analyzer(string analyzer)
 		{
 			this.Add("analyzer", this.CreateString(analyzer));
 			return this;
 		}
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public IndicesAnalyzeGetQueryString Field(string field)
+		public IndicesAnalyzeQueryString Field(string field)
 		{
 			this.Add("field", this.CreateString(field));
 			return this;
 		}
 
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public IndicesAnalyzeGetQueryString Filters(params string[] filters)
+		public IndicesAnalyzeQueryString Filters(params string[] filters)
 		{
 			this.Add("filters", this.CreateString(filters));
 			return this;
 		}
 
 		///<summary>The name of the index to scope the operation</summary>
-		public IndicesAnalyzeGetQueryString Index(string index)
+		public IndicesAnalyzeQueryString Index(string index)
 		{
 			this.Add("index", this.CreateString(index));
 			return this;
 		}
 
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public IndicesAnalyzeGetQueryString PreferLocal(bool prefer_local)
+		public IndicesAnalyzeQueryString PreferLocal(bool prefer_local)
 		{
 			this.Add("prefer_local", this.CreateString(prefer_local));
 			return this;
 		}
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public IndicesAnalyzeGetQueryString Text(string text)
+		public IndicesAnalyzeQueryString Text(string text)
 		{
 			this.Add("text", this.CreateString(text));
 			return this;
 		}
 
 		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public IndicesAnalyzeGetQueryString Tokenizer(string tokenizer)
+		public IndicesAnalyzeQueryString Tokenizer(string tokenizer)
 		{
 			this.Add("tokenizer", this.CreateString(tokenizer));
 			return this;
 		}
 
 		///<summary>Format of the output</summary>
-		public IndicesAnalyzeGetQueryString Format(FormatOptions format)
-		{
-			this.Add("format", this.CreateString(format));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesAnalyzePost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/
-	///</pre>
-	///</summary>
-	public class IndicesAnalyzePostQueryString : FluentQueryString<IndicesAnalyzePostQueryString> 
-	{
-		///<summary>The name of the analyzer to use</summary>
-		public IndicesAnalyzePostQueryString Analyzer(string analyzer)
-		{
-			this.Add("analyzer", this.CreateString(analyzer));
-			return this;
-		}
-
-		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public IndicesAnalyzePostQueryString Field(string field)
-		{
-			this.Add("field", this.CreateString(field));
-			return this;
-		}
-
-		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public IndicesAnalyzePostQueryString Filters(params string[] filters)
-		{
-			this.Add("filters", this.CreateString(filters));
-			return this;
-		}
-
-		///<summary>The name of the index to scope the operation</summary>
-		public IndicesAnalyzePostQueryString Index(string index)
-		{
-			this.Add("index", this.CreateString(index));
-			return this;
-		}
-
-		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public IndicesAnalyzePostQueryString PreferLocal(bool prefer_local)
-		{
-			this.Add("prefer_local", this.CreateString(prefer_local));
-			return this;
-		}
-
-		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public IndicesAnalyzePostQueryString Text(string text)
-		{
-			this.Add("text", this.CreateString(text));
-			return this;
-		}
-
-		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public IndicesAnalyzePostQueryString Tokenizer(string tokenizer)
-		{
-			this.Add("tokenizer", this.CreateString(tokenizer));
-			return this;
-		}
-
-		///<summary>Format of the output</summary>
-		public IndicesAnalyzePostQueryString Format(FormatOptions format)
+		public IndicesAnalyzeQueryString Format(FormatOptions format)
 		{
 			this.Add("format", this.CreateString(format));
 			return this;
@@ -1663,167 +1204,80 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/
 	///</pre>
 	///</summary>
-	public class IndicesClearCachePostQueryString : FluentQueryString<IndicesClearCachePostQueryString> 
+	public class IndicesClearCacheQueryString : FluentQueryString<IndicesClearCacheQueryString> 
 	{
 		///<summary>Clear field data</summary>
-		public IndicesClearCachePostQueryString FieldData(bool field_data)
+		public IndicesClearCacheQueryString FieldData(bool field_data)
 		{
 			this.Add("field_data", this.CreateString(field_data));
 			return this;
 		}
 
 		///<summary>Clear field data</summary>
-		public IndicesClearCachePostQueryString Fielddata(bool fielddata)
+		public IndicesClearCacheQueryString Fielddata(bool fielddata)
 		{
 			this.Add("fielddata", this.CreateString(fielddata));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IndicesClearCachePostQueryString Fields(params string[] fields)
+		public IndicesClearCacheQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>Clear filter caches</summary>
-		public IndicesClearCachePostQueryString Filter(bool filter)
+		public IndicesClearCacheQueryString Filter(bool filter)
 		{
 			this.Add("filter", this.CreateString(filter));
 			return this;
 		}
 
 		///<summary>Clear filter caches</summary>
-		public IndicesClearCachePostQueryString FilterCache(bool filter_cache)
+		public IndicesClearCacheQueryString FilterCache(bool filter_cache)
 		{
 			this.Add("filter_cache", this.CreateString(filter_cache));
 			return this;
 		}
 
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public IndicesClearCachePostQueryString FilterKeys(bool filter_keys)
+		public IndicesClearCacheQueryString FilterKeys(bool filter_keys)
 		{
 			this.Add("filter_keys", this.CreateString(filter_keys));
 			return this;
 		}
 
 		///<summary>Clear ID caches for parent/child</summary>
-		public IndicesClearCachePostQueryString Id(bool id)
+		public IndicesClearCacheQueryString Id(bool id)
 		{
 			this.Add("id", this.CreateString(id));
 			return this;
 		}
 
 		///<summary>Clear ID caches for parent/child</summary>
-		public IndicesClearCachePostQueryString IdCache(bool id_cache)
+		public IndicesClearCacheQueryString IdCache(bool id_cache)
 		{
 			this.Add("id_cache", this.CreateString(id_cache));
 			return this;
 		}
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesClearCachePostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesClearCacheQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public IndicesClearCachePostQueryString Index(params string[] index)
+		public IndicesClearCacheQueryString Index(params string[] index)
 		{
 			this.Add("index", this.CreateString(index));
 			return this;
 		}
 
 		///<summary>Clear the recycler cache</summary>
-		public IndicesClearCachePostQueryString Recycler(bool recycler)
-		{
-			this.Add("recycler", this.CreateString(recycler));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesClearCacheGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/
-	///</pre>
-	///</summary>
-	public class IndicesClearCacheGetQueryString : FluentQueryString<IndicesClearCacheGetQueryString> 
-	{
-		///<summary>Clear field data</summary>
-		public IndicesClearCacheGetQueryString FieldData(bool field_data)
-		{
-			this.Add("field_data", this.CreateString(field_data));
-			return this;
-		}
-
-		///<summary>Clear field data</summary>
-		public IndicesClearCacheGetQueryString Fielddata(bool fielddata)
-		{
-			this.Add("fielddata", this.CreateString(fielddata));
-			return this;
-		}
-
-		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IndicesClearCacheGetQueryString Fields(params string[] fields)
-		{
-			this.Add("fields", this.CreateString(fields));
-			return this;
-		}
-
-		///<summary>Clear filter caches</summary>
-		public IndicesClearCacheGetQueryString Filter(bool filter)
-		{
-			this.Add("filter", this.CreateString(filter));
-			return this;
-		}
-
-		///<summary>Clear filter caches</summary>
-		public IndicesClearCacheGetQueryString FilterCache(bool filter_cache)
-		{
-			this.Add("filter_cache", this.CreateString(filter_cache));
-			return this;
-		}
-
-		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public IndicesClearCacheGetQueryString FilterKeys(bool filter_keys)
-		{
-			this.Add("filter_keys", this.CreateString(filter_keys));
-			return this;
-		}
-
-		///<summary>Clear ID caches for parent/child</summary>
-		public IndicesClearCacheGetQueryString Id(bool id)
-		{
-			this.Add("id", this.CreateString(id));
-			return this;
-		}
-
-		///<summary>Clear ID caches for parent/child</summary>
-		public IndicesClearCacheGetQueryString IdCache(bool id_cache)
-		{
-			this.Add("id_cache", this.CreateString(id_cache));
-			return this;
-		}
-
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesClearCacheGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public IndicesClearCacheGetQueryString Index(params string[] index)
-		{
-			this.Add("index", this.CreateString(index));
-			return this;
-		}
-
-		///<summary>Clear the recycler cache</summary>
-		public IndicesClearCacheGetQueryString Recycler(bool recycler)
+		public IndicesClearCacheQueryString Recycler(bool recycler)
 		{
 			this.Add("recycler", this.CreateString(recycler));
 			return this;
@@ -1837,17 +1291,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/
 	///</pre>
 	///</summary>
-	public class IndicesClosePostQueryString : FluentQueryString<IndicesClosePostQueryString> 
+	public class IndicesCloseQueryString : FluentQueryString<IndicesCloseQueryString> 
 	{
 		///<summary>Explicit operation timeout</summary>
-		public IndicesClosePostQueryString Timeout(string timeout)
+		public IndicesCloseQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesClosePostQueryString MasterTimeout(string master_timeout)
+		public IndicesCloseQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -1861,41 +1315,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/
 	///</pre>
 	///</summary>
-	public class IndicesCreatePutQueryString : FluentQueryString<IndicesCreatePutQueryString> 
+	public class IndicesCreateQueryString : FluentQueryString<IndicesCreateQueryString> 
 	{
 		///<summary>Explicit operation timeout</summary>
-		public IndicesCreatePutQueryString Timeout(string timeout)
+		public IndicesCreateQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesCreatePutQueryString MasterTimeout(string master_timeout)
-		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesCreatePost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/
-	///</pre>
-	///</summary>
-	public class IndicesCreatePostQueryString : FluentQueryString<IndicesCreatePostQueryString> 
-	{
-		///<summary>Explicit operation timeout</summary>
-		public IndicesCreatePostQueryString Timeout(string timeout)
-		{
-			this.Add("timeout", this.CreateString(timeout));
-			return this;
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public IndicesCreatePostQueryString MasterTimeout(string master_timeout)
+		public IndicesCreateQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -1909,17 +1339,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteDeleteQueryString : FluentQueryString<IndicesDeleteDeleteQueryString> 
+	public class IndicesDeleteQueryString : FluentQueryString<IndicesDeleteQueryString> 
 	{
 		///<summary>Explicit operation timeout</summary>
-		public IndicesDeleteDeleteQueryString Timeout(string timeout)
+		public IndicesDeleteQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteDeleteQueryString MasterTimeout(string master_timeout)
+		public IndicesDeleteQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -1933,17 +1363,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteAliasDeleteQueryString : FluentQueryString<IndicesDeleteAliasDeleteQueryString> 
+	public class IndicesDeleteAliasQueryString : FluentQueryString<IndicesDeleteAliasQueryString> 
 	{
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesDeleteAliasDeleteQueryString Timeout(string timeout)
+		public IndicesDeleteAliasQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteAliasDeleteQueryString MasterTimeout(string master_timeout)
+		public IndicesDeleteAliasQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -1957,10 +1387,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-mapping/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteMappingDeleteQueryString : FluentQueryString<IndicesDeleteMappingDeleteQueryString> 
+	public class IndicesDeleteMappingQueryString : FluentQueryString<IndicesDeleteMappingQueryString> 
 	{
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteMappingDeleteQueryString MasterTimeout(string master_timeout)
+		public IndicesDeleteMappingQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -1974,17 +1404,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteTemplateDeleteQueryString : FluentQueryString<IndicesDeleteTemplateDeleteQueryString> 
+	public class IndicesDeleteTemplateQueryString : FluentQueryString<IndicesDeleteTemplateQueryString> 
 	{
 		///<summary>Explicit operation timeout</summary>
-		public IndicesDeleteTemplateDeleteQueryString Timeout(string timeout)
+		public IndicesDeleteTemplateQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteTemplateDeleteQueryString MasterTimeout(string master_timeout)
+		public IndicesDeleteTemplateQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -1998,10 +1428,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteWarmerDeleteQueryString : FluentQueryString<IndicesDeleteWarmerDeleteQueryString> 
+	public class IndicesDeleteWarmerQueryString : FluentQueryString<IndicesDeleteWarmerQueryString> 
 	{
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteWarmerDeleteQueryString MasterTimeout(string master_timeout)
+		public IndicesDeleteWarmerQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2015,10 +1445,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesExistsAliasHeadQueryString : FluentQueryString<IndicesExistsAliasHeadQueryString> 
+	public class IndicesExistsAliasQueryString : FluentQueryString<IndicesExistsAliasQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesExistsAliasHeadQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesExistsAliasQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
@@ -2032,10 +1462,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-types-exists/
 	///</pre>
 	///</summary>
-	public class IndicesExistsTypeHeadQueryString : FluentQueryString<IndicesExistsTypeHeadQueryString> 
+	public class IndicesExistsTypeQueryString : FluentQueryString<IndicesExistsTypeQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesExistsTypeHeadQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesExistsTypeQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
@@ -2049,69 +1479,31 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/
 	///</pre>
 	///</summary>
-	public class IndicesFlushPostQueryString : FluentQueryString<IndicesFlushPostQueryString> 
+	public class IndicesFlushQueryString : FluentQueryString<IndicesFlushQueryString> 
 	{
 		///<summary>TODO: ?</summary>
-		public IndicesFlushPostQueryString Force(bool force)
+		public IndicesFlushQueryString Force(bool force)
 		{
 			this.Add("force", this.CreateString(force));
 			return this;
 		}
 
 		///<summary>TODO: ?</summary>
-		public IndicesFlushPostQueryString Full(bool full)
+		public IndicesFlushQueryString Full(bool full)
 		{
 			this.Add("full", this.CreateString(full));
 			return this;
 		}
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesFlushPostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesFlushQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public IndicesFlushPostQueryString Refresh(bool refresh)
-		{
-			this.Add("refresh", this.CreateString(refresh));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesFlushGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/
-	///</pre>
-	///</summary>
-	public class IndicesFlushGetQueryString : FluentQueryString<IndicesFlushGetQueryString> 
-	{
-		///<summary>TODO: ?</summary>
-		public IndicesFlushGetQueryString Force(bool force)
-		{
-			this.Add("force", this.CreateString(force));
-			return this;
-		}
-
-		///<summary>TODO: ?</summary>
-		public IndicesFlushGetQueryString Full(bool full)
-		{
-			this.Add("full", this.CreateString(full));
-			return this;
-		}
-
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesFlushGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>Refresh the index after performing the operation</summary>
-		public IndicesFlushGetQueryString Refresh(bool refresh)
+		public IndicesFlushQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
@@ -2125,10 +1517,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesGetAliasGetQueryString : FluentQueryString<IndicesGetAliasGetQueryString> 
+	public class IndicesGetAliasQueryString : FluentQueryString<IndicesGetAliasQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesGetAliasGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesGetAliasQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
@@ -2142,10 +1534,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesGetAliasesGetQueryString : FluentQueryString<IndicesGetAliasesGetQueryString> 
+	public class IndicesGetAliasesQueryString : FluentQueryString<IndicesGetAliasesQueryString> 
 	{
 		///<summary>Explicit operation timeout</summary>
-		public IndicesGetAliasesGetQueryString Timeout(string timeout)
+		public IndicesGetAliasesQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
@@ -2159,10 +1551,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
-	public class IndicesGetFieldMappingGetQueryString : FluentQueryString<IndicesGetFieldMappingGetQueryString> 
+	public class IndicesGetFieldMappingQueryString : FluentQueryString<IndicesGetFieldMappingQueryString> 
 	{
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public IndicesGetFieldMappingGetQueryString IncludeDefaults(bool include_defaults)
+		public IndicesGetFieldMappingQueryString IncludeDefaults(bool include_defaults)
 		{
 			this.Add("include_defaults", this.CreateString(include_defaults));
 			return this;
@@ -2176,17 +1568,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/
 	///</pre>
 	///</summary>
-	public class IndicesOpenPostQueryString : FluentQueryString<IndicesOpenPostQueryString> 
+	public class IndicesOpenQueryString : FluentQueryString<IndicesOpenQueryString> 
 	{
 		///<summary>Explicit operation timeout</summary>
-		public IndicesOpenPostQueryString Timeout(string timeout)
+		public IndicesOpenQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesOpenPostQueryString MasterTimeout(string master_timeout)
+		public IndicesOpenQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2200,111 +1592,52 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/
 	///</pre>
 	///</summary>
-	public class IndicesOptimizePostQueryString : FluentQueryString<IndicesOptimizePostQueryString> 
+	public class IndicesOptimizeQueryString : FluentQueryString<IndicesOptimizeQueryString> 
 	{
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public IndicesOptimizePostQueryString Flush(bool flush)
+		public IndicesOptimizeQueryString Flush(bool flush)
 		{
 			this.Add("flush", this.CreateString(flush));
 			return this;
 		}
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesOptimizePostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesOptimizeQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public IndicesOptimizePostQueryString MaxNumSegments(int max_num_segments)
+		public IndicesOptimizeQueryString MaxNumSegments(int max_num_segments)
 		{
 			this.Add("max_num_segments", this.CreateString(max_num_segments));
 			return this;
 		}
 
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public IndicesOptimizePostQueryString OnlyExpungeDeletes(bool only_expunge_deletes)
+		public IndicesOptimizeQueryString OnlyExpungeDeletes(bool only_expunge_deletes)
 		{
 			this.Add("only_expunge_deletes", this.CreateString(only_expunge_deletes));
 			return this;
 		}
 
 		///<summary>TODO: ?</summary>
-		public IndicesOptimizePostQueryString OperationThreading(string operation_threading)
+		public IndicesOptimizeQueryString OperationThreading(string operation_threading)
 		{
 			this.Add("operation_threading", this.CreateString(operation_threading));
 			return this;
 		}
 
 		///<summary>Specify whether the index should be refreshed after performing the operation (default: true)</summary>
-		public IndicesOptimizePostQueryString Refresh(bool refresh)
+		public IndicesOptimizeQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public IndicesOptimizePostQueryString WaitForMerge(bool wait_for_merge)
-		{
-			this.Add("wait_for_merge", this.CreateString(wait_for_merge));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesOptimizeGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/
-	///</pre>
-	///</summary>
-	public class IndicesOptimizeGetQueryString : FluentQueryString<IndicesOptimizeGetQueryString> 
-	{
-		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public IndicesOptimizeGetQueryString Flush(bool flush)
-		{
-			this.Add("flush", this.CreateString(flush));
-			return this;
-		}
-
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesOptimizeGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public IndicesOptimizeGetQueryString MaxNumSegments(int max_num_segments)
-		{
-			this.Add("max_num_segments", this.CreateString(max_num_segments));
-			return this;
-		}
-
-		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public IndicesOptimizeGetQueryString OnlyExpungeDeletes(bool only_expunge_deletes)
-		{
-			this.Add("only_expunge_deletes", this.CreateString(only_expunge_deletes));
-			return this;
-		}
-
-		///<summary>TODO: ?</summary>
-		public IndicesOptimizeGetQueryString OperationThreading(string operation_threading)
-		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
-			return this;
-		}
-
-		///<summary>Specify whether the index should be refreshed after performing the operation (default: true)</summary>
-		public IndicesOptimizeGetQueryString Refresh(bool refresh)
-		{
-			this.Add("refresh", this.CreateString(refresh));
-			return this;
-		}
-
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public IndicesOptimizeGetQueryString WaitForMerge(bool wait_for_merge)
+		public IndicesOptimizeQueryString WaitForMerge(bool wait_for_merge)
 		{
 			this.Add("wait_for_merge", this.CreateString(wait_for_merge));
 			return this;
@@ -2318,17 +1651,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesPutAliasPutQueryString : FluentQueryString<IndicesPutAliasPutQueryString> 
+	public class IndicesPutAliasQueryString : FluentQueryString<IndicesPutAliasQueryString> 
 	{
 		///<summary>Explicit timestamp for the document</summary>
-		public IndicesPutAliasPutQueryString Timeout(string timeout)
+		public IndicesPutAliasQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutAliasPutQueryString MasterTimeout(string master_timeout)
+		public IndicesPutAliasQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2342,55 +1675,24 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/
 	///</pre>
 	///</summary>
-	public class IndicesPutMappingPutQueryString : FluentQueryString<IndicesPutMappingPutQueryString> 
+	public class IndicesPutMappingQueryString : FluentQueryString<IndicesPutMappingQueryString> 
 	{
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public IndicesPutMappingPutQueryString IgnoreConflicts(bool ignore_conflicts)
+		public IndicesPutMappingQueryString IgnoreConflicts(bool ignore_conflicts)
 		{
 			this.Add("ignore_conflicts", this.CreateString(ignore_conflicts));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public IndicesPutMappingPutQueryString Timeout(string timeout)
+		public IndicesPutMappingQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutMappingPutQueryString MasterTimeout(string master_timeout)
-		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesPutMappingPost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/
-	///</pre>
-	///</summary>
-	public class IndicesPutMappingPostQueryString : FluentQueryString<IndicesPutMappingPostQueryString> 
-	{
-		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public IndicesPutMappingPostQueryString IgnoreConflicts(bool ignore_conflicts)
-		{
-			this.Add("ignore_conflicts", this.CreateString(ignore_conflicts));
-			return this;
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public IndicesPutMappingPostQueryString Timeout(string timeout)
-		{
-			this.Add("timeout", this.CreateString(timeout));
-			return this;
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutMappingPostQueryString MasterTimeout(string master_timeout)
+		public IndicesPutMappingQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2404,10 +1706,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/
 	///</pre>
 	///</summary>
-	public class IndicesPutSettingsPutQueryString : FluentQueryString<IndicesPutSettingsPutQueryString> 
+	public class IndicesPutSettingsQueryString : FluentQueryString<IndicesPutSettingsQueryString> 
 	{
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutSettingsPutQueryString MasterTimeout(string master_timeout)
+		public IndicesPutSettingsQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2421,55 +1723,24 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
 	///</pre>
 	///</summary>
-	public class IndicesPutTemplatePutQueryString : FluentQueryString<IndicesPutTemplatePutQueryString> 
+	public class IndicesPutTemplateQueryString : FluentQueryString<IndicesPutTemplateQueryString> 
 	{
 		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public IndicesPutTemplatePutQueryString Order(int order)
+		public IndicesPutTemplateQueryString Order(int order)
 		{
 			this.Add("order", this.CreateString(order));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public IndicesPutTemplatePutQueryString Timeout(string timeout)
+		public IndicesPutTemplateQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutTemplatePutQueryString MasterTimeout(string master_timeout)
-		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesPutTemplatePost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
-	///</pre>
-	///</summary>
-	public class IndicesPutTemplatePostQueryString : FluentQueryString<IndicesPutTemplatePostQueryString> 
-	{
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public IndicesPutTemplatePostQueryString Order(int order)
-		{
-			this.Add("order", this.CreateString(order));
-			return this;
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public IndicesPutTemplatePostQueryString Timeout(string timeout)
-		{
-			this.Add("timeout", this.CreateString(timeout));
-			return this;
-		}
-
-		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutTemplatePostQueryString MasterTimeout(string master_timeout)
+		public IndicesPutTemplateQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2483,10 +1754,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/
 	///</pre>
 	///</summary>
-	public class IndicesPutWarmerPutQueryString : FluentQueryString<IndicesPutWarmerPutQueryString> 
+	public class IndicesPutWarmerQueryString : FluentQueryString<IndicesPutWarmerQueryString> 
 	{
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutWarmerPutQueryString MasterTimeout(string master_timeout)
+		public IndicesPutWarmerQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2500,41 +1771,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/
 	///</pre>
 	///</summary>
-	public class IndicesRefreshPostQueryString : FluentQueryString<IndicesRefreshPostQueryString> 
+	public class IndicesRefreshQueryString : FluentQueryString<IndicesRefreshQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesRefreshPostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesRefreshQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>TODO: ?</summary>
-		public IndicesRefreshPostQueryString OperationThreading(string operation_threading)
-		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesRefreshGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/
-	///</pre>
-	///</summary>
-	public class IndicesRefreshGetQueryString : FluentQueryString<IndicesRefreshGetQueryString> 
-	{
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesRefreshGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>TODO: ?</summary>
-		public IndicesRefreshGetQueryString OperationThreading(string operation_threading)
+		public IndicesRefreshQueryString OperationThreading(string operation_threading)
 		{
 			this.Add("operation_threading", this.CreateString(operation_threading));
 			return this;
@@ -2548,17 +1795,17 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-indices-segments/
 	///</pre>
 	///</summary>
-	public class IndicesSegmentsGetQueryString : FluentQueryString<IndicesSegmentsGetQueryString> 
+	public class IndicesSegmentsQueryString : FluentQueryString<IndicesSegmentsQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesSegmentsGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesSegmentsQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>TODO: ?</summary>
-		public IndicesSegmentsGetQueryString OperationThreading(string operation_threading)
+		public IndicesSegmentsQueryString OperationThreading(string operation_threading)
 		{
 			this.Add("operation_threading", this.CreateString(operation_threading));
 			return this;
@@ -2572,10 +1819,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/
 	///</pre>
 	///</summary>
-	public class IndicesSnapshotIndexPostQueryString : FluentQueryString<IndicesSnapshotIndexPostQueryString> 
+	public class IndicesSnapshotIndexQueryString : FluentQueryString<IndicesSnapshotIndexQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesSnapshotIndexPostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesSnapshotIndexQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
@@ -2589,143 +1836,143 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-indices-stats/
 	///</pre>
 	///</summary>
-	public class IndicesStatsGetQueryString : FluentQueryString<IndicesStatsGetQueryString> 
+	public class IndicesStatsQueryString : FluentQueryString<IndicesStatsQueryString> 
 	{
 		///<summary>Return all available information</summary>
-		public IndicesStatsGetQueryString All(bool all)
+		public IndicesStatsQueryString All(bool all)
 		{
 			this.Add("all", this.CreateString(all));
 			return this;
 		}
 
 		///<summary>Reset the default level of detail</summary>
-		public IndicesStatsGetQueryString Clear(bool clear)
+		public IndicesStatsQueryString Clear(bool clear)
 		{
 			this.Add("clear", this.CreateString(clear));
 			return this;
 		}
 
 		///<summary>Return information about completion suggester stats</summary>
-		public IndicesStatsGetQueryString Completion(bool completion)
+		public IndicesStatsQueryString Completion(bool completion)
 		{
 			this.Add("completion", this.CreateString(completion));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
-		public IndicesStatsGetQueryString CompletionFields(params string[] completion_fields)
+		public IndicesStatsQueryString CompletionFields(params string[] completion_fields)
 		{
 			this.Add("completion_fields", this.CreateString(completion_fields));
 			return this;
 		}
 
 		///<summary>Return information about indexed and deleted documents</summary>
-		public IndicesStatsGetQueryString Docs(bool docs)
+		public IndicesStatsQueryString Docs(bool docs)
 		{
 			this.Add("docs", this.CreateString(docs));
 			return this;
 		}
 
 		///<summary>Return information about field data</summary>
-		public IndicesStatsGetQueryString Fielddata(bool fielddata)
+		public IndicesStatsQueryString Fielddata(bool fielddata)
 		{
 			this.Add("fielddata", this.CreateString(fielddata));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
-		public IndicesStatsGetQueryString FielddataFields(params string[] fielddata_fields)
+		public IndicesStatsQueryString FielddataFields(params string[] fielddata_fields)
 		{
 			this.Add("fielddata_fields", this.CreateString(fielddata_fields));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` metric (supports wildcards)</summary>
-		public IndicesStatsGetQueryString Fields(params string[] fields)
+		public IndicesStatsQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>Return information about filter cache</summary>
-		public IndicesStatsGetQueryString FilterCache(bool filter_cache)
+		public IndicesStatsQueryString FilterCache(bool filter_cache)
 		{
 			this.Add("filter_cache", this.CreateString(filter_cache));
 			return this;
 		}
 
 		///<summary>Return information about flush operations</summary>
-		public IndicesStatsGetQueryString Flush(bool flush)
+		public IndicesStatsQueryString Flush(bool flush)
 		{
 			this.Add("flush", this.CreateString(flush));
 			return this;
 		}
 
 		///<summary>Return information about get operations</summary>
-		public IndicesStatsGetQueryString Get(bool get)
+		public IndicesStatsQueryString Get(bool get)
 		{
 			this.Add("get", this.CreateString(get));
 			return this;
 		}
 
 		///<summary>A comma-separated list of search groups for `search` statistics</summary>
-		public IndicesStatsGetQueryString Groups(bool groups)
+		public IndicesStatsQueryString Groups(bool groups)
 		{
 			this.Add("groups", this.CreateString(groups));
 			return this;
 		}
 
 		///<summary>Return information about ID cache</summary>
-		public IndicesStatsGetQueryString IdCache(bool id_cache)
+		public IndicesStatsQueryString IdCache(bool id_cache)
 		{
 			this.Add("id_cache", this.CreateString(id_cache));
 			return this;
 		}
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesStatsGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesStatsQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>Return information about indexing operations</summary>
-		public IndicesStatsGetQueryString Indexing(bool indexing)
+		public IndicesStatsQueryString Indexing(bool indexing)
 		{
 			this.Add("indexing", this.CreateString(indexing));
 			return this;
 		}
 
 		///<summary>Return information about merge operations</summary>
-		public IndicesStatsGetQueryString Merge(bool merge)
+		public IndicesStatsQueryString Merge(bool merge)
 		{
 			this.Add("merge", this.CreateString(merge));
 			return this;
 		}
 
 		///<summary>Return information about refresh operations</summary>
-		public IndicesStatsGetQueryString Refresh(bool refresh)
+		public IndicesStatsQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Return information about search operations; use the `groups` parameter to include information for specific search groups</summary>
-		public IndicesStatsGetQueryString Search(bool search)
+		public IndicesStatsQueryString Search(bool search)
 		{
 			this.Add("search", this.CreateString(search));
 			return this;
 		}
 
 		///<summary>Return information about the size of the index</summary>
-		public IndicesStatsGetQueryString Store(bool store)
+		public IndicesStatsQueryString Store(bool store)
 		{
 			this.Add("store", this.CreateString(store));
 			return this;
 		}
 
 		///<summary>Return information about warmers</summary>
-		public IndicesStatsGetQueryString Warmer(bool warmer)
+		public IndicesStatsQueryString Warmer(bool warmer)
 		{
 			this.Add("warmer", this.CreateString(warmer));
 			return this;
@@ -2739,31 +1986,31 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-indices-status/
 	///</pre>
 	///</summary>
-	public class IndicesStatusGetQueryString : FluentQueryString<IndicesStatusGetQueryString> 
+	public class IndicesStatusQueryString : FluentQueryString<IndicesStatusQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesStatusGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public IndicesStatusQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>TODO: ?</summary>
-		public IndicesStatusGetQueryString OperationThreading(string operation_threading)
+		public IndicesStatusQueryString OperationThreading(string operation_threading)
 		{
 			this.Add("operation_threading", this.CreateString(operation_threading));
 			return this;
 		}
 
 		///<summary>Return information about shard recovery</summary>
-		public IndicesStatusGetQueryString Recovery(bool recovery)
+		public IndicesStatusQueryString Recovery(bool recovery)
 		{
 			this.Add("recovery", this.CreateString(recovery));
 			return this;
 		}
 
 		///<summary>TODO: ?</summary>
-		public IndicesStatusGetQueryString Snapshot(bool snapshot)
+		public IndicesStatusQueryString Snapshot(bool snapshot)
 		{
 			this.Add("snapshot", this.CreateString(snapshot));
 			return this;
@@ -2777,17 +2024,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesUpdateAliasesPostQueryString : FluentQueryString<IndicesUpdateAliasesPostQueryString> 
+	public class IndicesUpdateAliasesQueryString : FluentQueryString<IndicesUpdateAliasesQueryString> 
 	{
 		///<summary>Request timeout</summary>
-		public IndicesUpdateAliasesPostQueryString Timeout(string timeout)
+		public IndicesUpdateAliasesQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesUpdateAliasesPostQueryString MasterTimeout(string master_timeout)
+		public IndicesUpdateAliasesQueryString MasterTimeout(string master_timeout)
 		{
 			this.Add("master_timeout", this.CreateString(master_timeout));
 			return this;
@@ -2801,83 +2048,38 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/validate/
 	///</pre>
 	///</summary>
-	public class IndicesValidateQueryGetQueryString : FluentQueryString<IndicesValidateQueryGetQueryString> 
+	public class ValidateQueryQueryString : FluentQueryString<ValidateQueryQueryString> 
 	{
 		///<summary>Return detailed information about the error</summary>
-		public IndicesValidateQueryGetQueryString Explain(bool explain)
+		public ValidateQueryQueryString Explain(bool explain)
 		{
 			this.Add("explain", this.CreateString(explain));
 			return this;
 		}
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesValidateQueryGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public ValidateQueryQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>TODO: ?</summary>
-		public IndicesValidateQueryGetQueryString OperationThreading(string operation_threading)
+		public ValidateQueryQueryString OperationThreading(string operation_threading)
 		{
 			this.Add("operation_threading", this.CreateString(operation_threading));
 			return this;
 		}
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public IndicesValidateQueryGetQueryString Source(string source)
+		public ValidateQueryQueryString Source(string source)
 		{
 			this.Add("source", this.CreateString(source));
 			return this;
 		}
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public IndicesValidateQueryGetQueryString Q(string q)
-		{
-			this.Add("q", this.CreateString(q));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for IndicesValidateQueryPost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/validate/
-	///</pre>
-	///</summary>
-	public class IndicesValidateQueryPostQueryString : FluentQueryString<IndicesValidateQueryPostQueryString> 
-	{
-		///<summary>Return detailed information about the error</summary>
-		public IndicesValidateQueryPostQueryString Explain(bool explain)
-		{
-			this.Add("explain", this.CreateString(explain));
-			return this;
-		}
-
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesValidateQueryPostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>TODO: ?</summary>
-		public IndicesValidateQueryPostQueryString OperationThreading(string operation_threading)
-		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
-			return this;
-		}
-
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public IndicesValidateQueryPostQueryString Source(string source)
-		{
-			this.Add("source", this.CreateString(source));
-			return this;
-		}
-
-		///<summary>Query in the Lucene query string syntax</summary>
-		public IndicesValidateQueryPostQueryString Q(string q)
+		public ValidateQueryQueryString Q(string q)
 		{
 			this.Add("q", this.CreateString(q));
 			return this;
@@ -2891,111 +2093,52 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/multi-get/
 	///</pre>
 	///</summary>
-	public class MgetGetQueryString : FluentQueryString<MgetGetQueryString> 
+	public class MgetQueryString : FluentQueryString<MgetQueryString> 
 	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MgetGetQueryString Fields(params string[] fields)
+		public MgetQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public MgetGetQueryString Preference(string preference)
+		public MgetQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public MgetGetQueryString Realtime(bool realtime)
+		public MgetQueryString Realtime(bool realtime)
 		{
 			this.Add("realtime", this.CreateString(realtime));
 			return this;
 		}
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public MgetGetQueryString Refresh(bool refresh)
+		public MgetQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MgetGetQueryString Source(params string[] _source)
+		public MgetQueryString Source(params string[] _source)
 		{
 			this.Add("_source", this.CreateString(_source));
 			return this;
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MgetGetQueryString SourceExclude(params string[] _source_exclude)
+		public MgetQueryString SourceExclude(params string[] _source_exclude)
 		{
 			this.Add("_source_exclude", this.CreateString(_source_exclude));
 			return this;
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MgetGetQueryString SourceInclude(params string[] _source_include)
-		{
-			this.Add("_source_include", this.CreateString(_source_include));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for MgetPost
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/multi-get/
-	///</pre>
-	///</summary>
-	public class MgetPostQueryString : FluentQueryString<MgetPostQueryString> 
-	{
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MgetPostQueryString Fields(params string[] fields)
-		{
-			this.Add("fields", this.CreateString(fields));
-			return this;
-		}
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public MgetPostQueryString Preference(string preference)
-		{
-			this.Add("preference", this.CreateString(preference));
-			return this;
-		}
-
-		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public MgetPostQueryString Realtime(bool realtime)
-		{
-			this.Add("realtime", this.CreateString(realtime));
-			return this;
-		}
-
-		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public MgetPostQueryString Refresh(bool refresh)
-		{
-			this.Add("refresh", this.CreateString(refresh));
-			return this;
-		}
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MgetPostQueryString Source(params string[] _source)
-		{
-			this.Add("_source", this.CreateString(_source));
-			return this;
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MgetPostQueryString SourceExclude(params string[] _source_exclude)
-		{
-			this.Add("_source_exclude", this.CreateString(_source_exclude));
-			return this;
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MgetPostQueryString SourceInclude(params string[] _source_include)
+		public MgetQueryString SourceInclude(params string[] _source_include)
 		{
 			this.Add("_source_include", this.CreateString(_source_include));
 			return this;
@@ -3009,279 +2152,136 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/more-like-this/
 	///</pre>
 	///</summary>
-	public class MltGetQueryString : FluentQueryString<MltGetQueryString> 
+	public class MltQueryString : FluentQueryString<MltQueryString> 
 	{
 		///<summary>The boost factor</summary>
-		public MltGetQueryString BoostTerms(int boost_terms)
+		public MltQueryString BoostTerms(int boost_terms)
 		{
 			this.Add("boost_terms", this.CreateString(boost_terms));
 			return this;
 		}
 
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public MltGetQueryString MaxDocFreq(int max_doc_freq)
+		public MltQueryString MaxDocFreq(int max_doc_freq)
 		{
 			this.Add("max_doc_freq", this.CreateString(max_doc_freq));
 			return this;
 		}
 
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public MltGetQueryString MaxQueryTerms(int max_query_terms)
+		public MltQueryString MaxQueryTerms(int max_query_terms)
 		{
 			this.Add("max_query_terms", this.CreateString(max_query_terms));
 			return this;
 		}
 
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MltGetQueryString MaxWordLen(int max_word_len)
+		public MltQueryString MaxWordLen(int max_word_len)
 		{
 			this.Add("max_word_len", this.CreateString(max_word_len));
 			return this;
 		}
 
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public MltGetQueryString MinDocFreq(int min_doc_freq)
+		public MltQueryString MinDocFreq(int min_doc_freq)
 		{
 			this.Add("min_doc_freq", this.CreateString(min_doc_freq));
 			return this;
 		}
 
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public MltGetQueryString MinTermFreq(int min_term_freq)
+		public MltQueryString MinTermFreq(int min_term_freq)
 		{
 			this.Add("min_term_freq", this.CreateString(min_term_freq));
 			return this;
 		}
 
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MltGetQueryString MinWordLen(int min_word_len)
+		public MltQueryString MinWordLen(int min_word_len)
 		{
 			this.Add("min_word_len", this.CreateString(min_word_len));
 			return this;
 		}
 
 		///<summary>Specific fields to perform the query against</summary>
-		public MltGetQueryString MltFields(params string[] mlt_fields)
+		public MltQueryString MltFields(params string[] mlt_fields)
 		{
 			this.Add("mlt_fields", this.CreateString(mlt_fields));
 			return this;
 		}
 
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public MltGetQueryString PercentTermsToMatch(int percent_terms_to_match)
+		public MltQueryString PercentTermsToMatch(int percent_terms_to_match)
 		{
 			this.Add("percent_terms_to_match", this.CreateString(percent_terms_to_match));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public MltGetQueryString Routing(string routing)
+		public MltQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>The offset from which to return results</summary>
-		public MltGetQueryString SearchFrom(int search_from)
+		public MltQueryString SearchFrom(int search_from)
 		{
 			this.Add("search_from", this.CreateString(search_from));
 			return this;
 		}
 
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public MltGetQueryString SearchIndices(params string[] search_indices)
+		public MltQueryString SearchIndices(params string[] search_indices)
 		{
 			this.Add("search_indices", this.CreateString(search_indices));
 			return this;
 		}
 
 		///<summary>The search query hint</summary>
-		public MltGetQueryString SearchQueryHint(string search_query_hint)
+		public MltQueryString SearchQueryHint(string search_query_hint)
 		{
 			this.Add("search_query_hint", this.CreateString(search_query_hint));
 			return this;
 		}
 
 		///<summary>A scroll search request definition</summary>
-		public MltGetQueryString SearchScroll(string search_scroll)
+		public MltQueryString SearchScroll(string search_scroll)
 		{
 			this.Add("search_scroll", this.CreateString(search_scroll));
 			return this;
 		}
 
 		///<summary>The number of documents to return (default: 10)</summary>
-		public MltGetQueryString SearchSize(int search_size)
+		public MltQueryString SearchSize(int search_size)
 		{
 			this.Add("search_size", this.CreateString(search_size));
 			return this;
 		}
 
 		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public MltGetQueryString SearchSource(string search_source)
+		public MltQueryString SearchSource(string search_source)
 		{
 			this.Add("search_source", this.CreateString(search_source));
 			return this;
 		}
 
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public MltGetQueryString SearchType(string search_type)
+		public MltQueryString SearchType(string search_type)
 		{
 			this.Add("search_type", this.CreateString(search_type));
 			return this;
 		}
 
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public MltGetQueryString SearchTypes(params string[] search_types)
+		public MltQueryString SearchTypes(params string[] search_types)
 		{
 			this.Add("search_types", this.CreateString(search_types));
 			return this;
 		}
 
 		///<summary>A list of stop words to be ignored</summary>
-		public MltGetQueryString StopWords(params string[] stop_words)
-		{
-			this.Add("stop_words", this.CreateString(stop_words));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for MltPost
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/more-like-this/
-	///</pre>
-	///</summary>
-	public class MltPostQueryString : FluentQueryString<MltPostQueryString> 
-	{
-		///<summary>The boost factor</summary>
-		public MltPostQueryString BoostTerms(int boost_terms)
-		{
-			this.Add("boost_terms", this.CreateString(boost_terms));
-			return this;
-		}
-
-		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public MltPostQueryString MaxDocFreq(int max_doc_freq)
-		{
-			this.Add("max_doc_freq", this.CreateString(max_doc_freq));
-			return this;
-		}
-
-		///<summary>The maximum query terms to be included in the generated query</summary>
-		public MltPostQueryString MaxQueryTerms(int max_query_terms)
-		{
-			this.Add("max_query_terms", this.CreateString(max_query_terms));
-			return this;
-		}
-
-		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MltPostQueryString MaxWordLen(int max_word_len)
-		{
-			this.Add("max_word_len", this.CreateString(max_word_len));
-			return this;
-		}
-
-		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public MltPostQueryString MinDocFreq(int min_doc_freq)
-		{
-			this.Add("min_doc_freq", this.CreateString(min_doc_freq));
-			return this;
-		}
-
-		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public MltPostQueryString MinTermFreq(int min_term_freq)
-		{
-			this.Add("min_term_freq", this.CreateString(min_term_freq));
-			return this;
-		}
-
-		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MltPostQueryString MinWordLen(int min_word_len)
-		{
-			this.Add("min_word_len", this.CreateString(min_word_len));
-			return this;
-		}
-
-		///<summary>Specific fields to perform the query against</summary>
-		public MltPostQueryString MltFields(params string[] mlt_fields)
-		{
-			this.Add("mlt_fields", this.CreateString(mlt_fields));
-			return this;
-		}
-
-		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public MltPostQueryString PercentTermsToMatch(int percent_terms_to_match)
-		{
-			this.Add("percent_terms_to_match", this.CreateString(percent_terms_to_match));
-			return this;
-		}
-
-		///<summary>Specific routing value</summary>
-		public MltPostQueryString Routing(string routing)
-		{
-			this.Add("routing", this.CreateString(routing));
-			return this;
-		}
-
-		///<summary>The offset from which to return results</summary>
-		public MltPostQueryString SearchFrom(int search_from)
-		{
-			this.Add("search_from", this.CreateString(search_from));
-			return this;
-		}
-
-		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public MltPostQueryString SearchIndices(params string[] search_indices)
-		{
-			this.Add("search_indices", this.CreateString(search_indices));
-			return this;
-		}
-
-		///<summary>The search query hint</summary>
-		public MltPostQueryString SearchQueryHint(string search_query_hint)
-		{
-			this.Add("search_query_hint", this.CreateString(search_query_hint));
-			return this;
-		}
-
-		///<summary>A scroll search request definition</summary>
-		public MltPostQueryString SearchScroll(string search_scroll)
-		{
-			this.Add("search_scroll", this.CreateString(search_scroll));
-			return this;
-		}
-
-		///<summary>The number of documents to return (default: 10)</summary>
-		public MltPostQueryString SearchSize(int search_size)
-		{
-			this.Add("search_size", this.CreateString(search_size));
-			return this;
-		}
-
-		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public MltPostQueryString SearchSource(string search_source)
-		{
-			this.Add("search_source", this.CreateString(search_source));
-			return this;
-		}
-
-		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public MltPostQueryString SearchType(string search_type)
-		{
-			this.Add("search_type", this.CreateString(search_type));
-			return this;
-		}
-
-		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public MltPostQueryString SearchTypes(params string[] search_types)
-		{
-			this.Add("search_types", this.CreateString(search_types));
-			return this;
-		}
-
-		///<summary>A list of stop words to be ignored</summary>
-		public MltPostQueryString StopWords(params string[] stop_words)
+		public MltQueryString StopWords(params string[] stop_words)
 		{
 			this.Add("stop_words", this.CreateString(stop_words));
 			return this;
@@ -3295,27 +2295,10 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/multi-search/
 	///</pre>
 	///</summary>
-	public class MsearchGetQueryString : FluentQueryString<MsearchGetQueryString> 
+	public class MsearchQueryString : FluentQueryString<MsearchQueryString> 
 	{
 		///<summary>Search operation type</summary>
-		public MsearchGetQueryString SearchType(SearchTypeOptions search_type)
-		{
-			this.Add("search_type", this.CreateString(search_type));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for MsearchPost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/multi-search/
-	///</pre>
-	///</summary>
-	public class MsearchPostQueryString : FluentQueryString<MsearchPostQueryString> 
-	{
-		///<summary>Search operation type</summary>
-		public MsearchPostQueryString SearchType(SearchTypeOptions search_type)
+		public MsearchQueryString SearchType(SearchTypeOptions search_type)
 		{
 			this.Add("search_type", this.CreateString(search_type));
 			return this;
@@ -3329,27 +2312,10 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/percolate/
 	///</pre>
 	///</summary>
-	public class PercolateGetQueryString : FluentQueryString<PercolateGetQueryString> 
+	public class PercolateQueryString : FluentQueryString<PercolateQueryString> 
 	{
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public PercolateGetQueryString PreferLocal(bool prefer_local)
-		{
-			this.Add("prefer_local", this.CreateString(prefer_local));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for PercolatePost
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/percolate/
-	///</pre>
-	///</summary>
-	public class PercolatePostQueryString : FluentQueryString<PercolatePostQueryString> 
-	{
-		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public PercolatePostQueryString PreferLocal(bool prefer_local)
+		public PercolateQueryString PreferLocal(bool prefer_local)
 		{
 			this.Add("prefer_local", this.CreateString(prefer_local));
 			return this;
@@ -3363,41 +2329,17 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/search/scroll/
 	///</pre>
 	///</summary>
-	public class ScrollGetQueryString : FluentQueryString<ScrollGetQueryString> 
+	public class ScrollQueryString : FluentQueryString<ScrollQueryString> 
 	{
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollGetQueryString Scroll(string scroll)
+		public ScrollQueryString Scroll(string scroll)
 		{
 			this.Add("scroll", this.CreateString(scroll));
 			return this;
 		}
 
 		///<summary>The scroll ID for scrolled search</summary>
-		public ScrollGetQueryString ScrollId(string scroll_id)
-		{
-			this.Add("scroll_id", this.CreateString(scroll_id));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for ScrollPost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/search/scroll/
-	///</pre>
-	///</summary>
-	public class ScrollPostQueryString : FluentQueryString<ScrollPostQueryString> 
-	{
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollPostQueryString Scroll(string scroll)
-		{
-			this.Add("scroll", this.CreateString(scroll));
-			return this;
-		}
-
-		///<summary>The scroll ID for scrolled search</summary>
-		public ScrollPostQueryString ScrollId(string scroll_id)
+		public ScrollQueryString ScrollId(string scroll_id)
 		{
 			this.Add("scroll_id", this.CreateString(scroll_id));
 			return this;
@@ -3411,419 +2353,206 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/search/
 	///</pre>
 	///</summary>
-	public class SearchGetQueryString : FluentQueryString<SearchGetQueryString> 
+	public class SearchQueryString : FluentQueryString<SearchQueryString> 
 	{
 		///<summary>The analyzer to use for the query string</summary>
-		public SearchGetQueryString Analyzer(string analyzer)
+		public SearchQueryString Analyzer(string analyzer)
 		{
 			this.Add("analyzer", this.CreateString(analyzer));
 			return this;
 		}
 
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchGetQueryString AnalyzeWildcard(bool analyze_wildcard)
+		public SearchQueryString AnalyzeWildcard(bool analyze_wildcard)
 		{
 			this.Add("analyze_wildcard", this.CreateString(analyze_wildcard));
 			return this;
 		}
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchGetQueryString DefaultOperator(DefaultOperatorOptions default_operator)
+		public SearchQueryString DefaultOperator(DefaultOperatorOptions default_operator)
 		{
 			this.Add("default_operator", this.CreateString(default_operator));
 			return this;
 		}
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchGetQueryString Df(string df)
+		public SearchQueryString Df(string df)
 		{
 			this.Add("df", this.CreateString(df));
 			return this;
 		}
 
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public SearchGetQueryString Explain(bool explain)
+		public SearchQueryString Explain(bool explain)
 		{
 			this.Add("explain", this.CreateString(explain));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public SearchGetQueryString Fields(params string[] fields)
+		public SearchQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>Starting offset (default: 0)</summary>
-		public SearchGetQueryString From(int from)
+		public SearchQueryString From(int from)
 		{
 			this.Add("from", this.CreateString(from));
 			return this;
 		}
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SearchGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public SearchQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>Comma-separated list of index boosts</summary>
-		public SearchGetQueryString IndicesBoost(params string[] indices_boost)
+		public SearchQueryString IndicesBoost(params string[] indices_boost)
 		{
 			this.Add("indices_boost", this.CreateString(indices_boost));
 			return this;
 		}
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchGetQueryString Lenient(bool lenient)
+		public SearchQueryString Lenient(bool lenient)
 		{
 			this.Add("lenient", this.CreateString(lenient));
 			return this;
 		}
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchGetQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
+		public SearchQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
 		{
 			this.Add("lowercase_expanded_terms", this.CreateString(lowercase_expanded_terms));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchGetQueryString Preference(string preference)
+		public SearchQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchGetQueryString Q(string q)
+		public SearchQueryString Q(string q)
 		{
 			this.Add("q", this.CreateString(q));
 			return this;
 		}
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public SearchGetQueryString Routing(params string[] routing)
+		public SearchQueryString Routing(params string[] routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchGetQueryString Scroll(string scroll)
+		public SearchQueryString Scroll(string scroll)
 		{
 			this.Add("scroll", this.CreateString(scroll));
 			return this;
 		}
 
 		///<summary>Search operation type</summary>
-		public SearchGetQueryString SearchType(SearchTypeOptions search_type)
+		public SearchQueryString SearchType(SearchTypeOptions search_type)
 		{
 			this.Add("search_type", this.CreateString(search_type));
 			return this;
 		}
 
 		///<summary>Number of hits to return (default: 10)</summary>
-		public SearchGetQueryString Size(int size)
+		public SearchQueryString Size(int size)
 		{
 			this.Add("size", this.CreateString(size));
 			return this;
 		}
 
 		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public SearchGetQueryString Sort(params string[] sort)
+		public SearchQueryString Sort(params string[] sort)
 		{
 			this.Add("sort", this.CreateString(sort));
 			return this;
 		}
 
 		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
-		public SearchGetQueryString Source(string source)
+		public SearchQueryString Source(string source)
 		{
 			this.Add("source", this.CreateString(source));
 			return this;
 		}
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SearchGetQueryString Source(params string[] _source)
+		public SearchQueryString Source(params string[] _source)
 		{
 			this.Add("_source", this.CreateString(_source));
 			return this;
 		}
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SearchGetQueryString SourceExclude(params string[] _source_exclude)
+		public SearchQueryString SourceExclude(params string[] _source_exclude)
 		{
 			this.Add("_source_exclude", this.CreateString(_source_exclude));
 			return this;
 		}
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SearchGetQueryString SourceInclude(params string[] _source_include)
+		public SearchQueryString SourceInclude(params string[] _source_include)
 		{
 			this.Add("_source_include", this.CreateString(_source_include));
 			return this;
 		}
 
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public SearchGetQueryString Stats(params string[] stats)
+		public SearchQueryString Stats(params string[] stats)
 		{
 			this.Add("stats", this.CreateString(stats));
 			return this;
 		}
 
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchGetQueryString SuggestField(string suggest_field)
+		public SearchQueryString SuggestField(string suggest_field)
 		{
 			this.Add("suggest_field", this.CreateString(suggest_field));
 			return this;
 		}
 
 		///<summary>Specify suggest mode</summary>
-		public SearchGetQueryString SuggestMode(SuggestModeOptions suggest_mode)
+		public SearchQueryString SuggestMode(SuggestModeOptions suggest_mode)
 		{
 			this.Add("suggest_mode", this.CreateString(suggest_mode));
 			return this;
 		}
 
 		///<summary>How many suggestions to return in response</summary>
-		public SearchGetQueryString SuggestSize(int suggest_size)
+		public SearchQueryString SuggestSize(int suggest_size)
 		{
 			this.Add("suggest_size", this.CreateString(suggest_size));
 			return this;
 		}
 
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchGetQueryString SuggestText(string suggest_text)
+		public SearchQueryString SuggestText(string suggest_text)
 		{
 			this.Add("suggest_text", this.CreateString(suggest_text));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public SearchGetQueryString Timeout(string timeout)
+		public SearchQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Specify whether to return document version as part of a hit</summary>
-		public SearchGetQueryString Version(bool version)
-		{
-			this.Add("version", this.CreateString(version));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for SearchPost
-	///<pre>
-	///http://www.elasticsearch.org/guide/reference/api/search/
-	///</pre>
-	///</summary>
-	public class SearchPostQueryString : FluentQueryString<SearchPostQueryString> 
-	{
-		///<summary>The analyzer to use for the query string</summary>
-		public SearchPostQueryString Analyzer(string analyzer)
-		{
-			this.Add("analyzer", this.CreateString(analyzer));
-			return this;
-		}
-
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchPostQueryString AnalyzeWildcard(bool analyze_wildcard)
-		{
-			this.Add("analyze_wildcard", this.CreateString(analyze_wildcard));
-			return this;
-		}
-
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchPostQueryString DefaultOperator(DefaultOperatorOptions default_operator)
-		{
-			this.Add("default_operator", this.CreateString(default_operator));
-			return this;
-		}
-
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchPostQueryString Df(string df)
-		{
-			this.Add("df", this.CreateString(df));
-			return this;
-		}
-
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public SearchPostQueryString Explain(bool explain)
-		{
-			this.Add("explain", this.CreateString(explain));
-			return this;
-		}
-
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public SearchPostQueryString Fields(params string[] fields)
-		{
-			this.Add("fields", this.CreateString(fields));
-			return this;
-		}
-
-		///<summary>Starting offset (default: 0)</summary>
-		public SearchPostQueryString From(int from)
-		{
-			this.Add("from", this.CreateString(from));
-			return this;
-		}
-
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SearchPostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>Comma-separated list of index boosts</summary>
-		public SearchPostQueryString IndicesBoost(params string[] indices_boost)
-		{
-			this.Add("indices_boost", this.CreateString(indices_boost));
-			return this;
-		}
-
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchPostQueryString Lenient(bool lenient)
-		{
-			this.Add("lenient", this.CreateString(lenient));
-			return this;
-		}
-
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchPostQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
-		{
-			this.Add("lowercase_expanded_terms", this.CreateString(lowercase_expanded_terms));
-			return this;
-		}
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchPostQueryString Preference(string preference)
-		{
-			this.Add("preference", this.CreateString(preference));
-			return this;
-		}
-
-		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchPostQueryString Q(string q)
-		{
-			this.Add("q", this.CreateString(q));
-			return this;
-		}
-
-		///<summary>A comma-separated list of specific routing values</summary>
-		public SearchPostQueryString Routing(params string[] routing)
-		{
-			this.Add("routing", this.CreateString(routing));
-			return this;
-		}
-
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchPostQueryString Scroll(string scroll)
-		{
-			this.Add("scroll", this.CreateString(scroll));
-			return this;
-		}
-
-		///<summary>Search operation type</summary>
-		public SearchPostQueryString SearchType(SearchTypeOptions search_type)
-		{
-			this.Add("search_type", this.CreateString(search_type));
-			return this;
-		}
-
-		///<summary>Number of hits to return (default: 10)</summary>
-		public SearchPostQueryString Size(int size)
-		{
-			this.Add("size", this.CreateString(size));
-			return this;
-		}
-
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public SearchPostQueryString Sort(params string[] sort)
-		{
-			this.Add("sort", this.CreateString(sort));
-			return this;
-		}
-
-		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
-		public SearchPostQueryString Source(string source)
-		{
-			this.Add("source", this.CreateString(source));
-			return this;
-		}
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SearchPostQueryString Source(params string[] _source)
-		{
-			this.Add("_source", this.CreateString(_source));
-			return this;
-		}
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SearchPostQueryString SourceExclude(params string[] _source_exclude)
-		{
-			this.Add("_source_exclude", this.CreateString(_source_exclude));
-			return this;
-		}
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SearchPostQueryString SourceInclude(params string[] _source_include)
-		{
-			this.Add("_source_include", this.CreateString(_source_include));
-			return this;
-		}
-
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public SearchPostQueryString Stats(params string[] stats)
-		{
-			this.Add("stats", this.CreateString(stats));
-			return this;
-		}
-
-		///<summary>Specify which field to use for suggestions</summary>
-		public SearchPostQueryString SuggestField(string suggest_field)
-		{
-			this.Add("suggest_field", this.CreateString(suggest_field));
-			return this;
-		}
-
-		///<summary>Specify suggest mode</summary>
-		public SearchPostQueryString SuggestMode(SuggestModeOptions suggest_mode)
-		{
-			this.Add("suggest_mode", this.CreateString(suggest_mode));
-			return this;
-		}
-
-		///<summary>How many suggestions to return in response</summary>
-		public SearchPostQueryString SuggestSize(int suggest_size)
-		{
-			this.Add("suggest_size", this.CreateString(suggest_size));
-			return this;
-		}
-
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchPostQueryString SuggestText(string suggest_text)
-		{
-			this.Add("suggest_text", this.CreateString(suggest_text));
-			return this;
-		}
-
-		///<summary>Explicit operation timeout</summary>
-		public SearchPostQueryString Timeout(string timeout)
-		{
-			this.Add("timeout", this.CreateString(timeout));
-			return this;
-		}
-
-		///<summary>Specify whether to return document version as part of a hit</summary>
-		public SearchPostQueryString Version(bool version)
+		public SearchQueryString Version(bool version)
 		{
 			this.Add("version", this.CreateString(version));
 			return this;
@@ -3837,69 +2566,31 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/search/suggest/
 	///</pre>
 	///</summary>
-	public class SuggestPostQueryString : FluentQueryString<SuggestPostQueryString> 
+	public class SuggestQueryString : FluentQueryString<SuggestQueryString> 
 	{
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SuggestPostQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public SuggestQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this.Add("ignore_indices", this.CreateString(ignore_indices));
 			return this;
 		}
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SuggestPostQueryString Preference(string preference)
+		public SuggestQueryString Preference(string preference)
 		{
 			this.Add("preference", this.CreateString(preference));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public SuggestPostQueryString Routing(string routing)
+		public SuggestQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>The URL-encoded request definition (instead of using request body)</summary>
-		public SuggestPostQueryString Source(string source)
-		{
-			this.Add("source", this.CreateString(source));
-			return this;
-		}
-
-	}
-	
-	
-	///<summary>Query string descriptor for SuggestGet
-	///<pre>
-	///http://elasticsearch.org/guide/reference/api/search/suggest/
-	///</pre>
-	///</summary>
-	public class SuggestGetQueryString : FluentQueryString<SuggestGetQueryString> 
-	{
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SuggestGetQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
-		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
-			return this;
-		}
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SuggestGetQueryString Preference(string preference)
-		{
-			this.Add("preference", this.CreateString(preference));
-			return this;
-		}
-
-		///<summary>Specific routing value</summary>
-		public SuggestGetQueryString Routing(string routing)
-		{
-			this.Add("routing", this.CreateString(routing));
-			return this;
-		}
-
-		///<summary>The URL-encoded request definition (instead of using request body)</summary>
-		public SuggestGetQueryString Source(string source)
+		public SuggestQueryString Source(string source)
 		{
 			this.Add("source", this.CreateString(source));
 			return this;
@@ -3913,108 +2604,108 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/update/
 	///</pre>
 	///</summary>
-	public class UpdatePostQueryString : FluentQueryString<UpdatePostQueryString> 
+	public class UpdateQueryString : FluentQueryString<UpdateQueryString> 
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdatePostQueryString Consistency(ConsistencyOptions consistency)
+		public UpdateQueryString Consistency(ConsistencyOptions consistency)
 		{
 			this.Add("consistency", this.CreateString(consistency));
 			return this;
 		}
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdatePostQueryString Fields(params string[] fields)
+		public UpdateQueryString Fields(params string[] fields)
 		{
 			this.Add("fields", this.CreateString(fields));
 			return this;
 		}
 
 		///<summary>The script language (default: mvel)</summary>
-		public UpdatePostQueryString Lang(string lang)
+		public UpdateQueryString Lang(string lang)
 		{
 			this.Add("lang", this.CreateString(lang));
 			return this;
 		}
 
 		///<summary>ID of the parent document</summary>
-		public UpdatePostQueryString Parent(string parent)
+		public UpdateQueryString Parent(string parent)
 		{
 			this.Add("parent", this.CreateString(parent));
 			return this;
 		}
 
 		///<summary>Perform percolation during the operation; use specific registered query name, attribute, or wildcard</summary>
-		public UpdatePostQueryString Percolate(string percolate)
+		public UpdateQueryString Percolate(string percolate)
 		{
 			this.Add("percolate", this.CreateString(percolate));
 			return this;
 		}
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdatePostQueryString Refresh(bool refresh)
+		public UpdateQueryString Refresh(bool refresh)
 		{
 			this.Add("refresh", this.CreateString(refresh));
 			return this;
 		}
 
 		///<summary>Specific replication type</summary>
-		public UpdatePostQueryString Replication(ReplicationOptions replication)
+		public UpdateQueryString Replication(ReplicationOptions replication)
 		{
 			this.Add("replication", this.CreateString(replication));
 			return this;
 		}
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdatePostQueryString RetryOnConflict(int retry_on_conflict)
+		public UpdateQueryString RetryOnConflict(int retry_on_conflict)
 		{
 			this.Add("retry_on_conflict", this.CreateString(retry_on_conflict));
 			return this;
 		}
 
 		///<summary>Specific routing value</summary>
-		public UpdatePostQueryString Routing(string routing)
+		public UpdateQueryString Routing(string routing)
 		{
 			this.Add("routing", this.CreateString(routing));
 			return this;
 		}
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdatePostQueryString Script(string script)
+		public UpdateQueryString Script(string script)
 		{
 			this.Add("script", this.CreateString(script));
 			return this;
 		}
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdatePostQueryString Timeout(string timeout)
+		public UpdateQueryString Timeout(string timeout)
 		{
 			this.Add("timeout", this.CreateString(timeout));
 			return this;
 		}
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdatePostQueryString Timestamp(string timestamp)
+		public UpdateQueryString Timestamp(string timestamp)
 		{
 			this.Add("timestamp", this.CreateString(timestamp));
 			return this;
 		}
 
 		///<summary>Expiration time for the document</summary>
-		public UpdatePostQueryString Ttl(string ttl)
+		public UpdateQueryString Ttl(string ttl)
 		{
 			this.Add("ttl", this.CreateString(ttl));
 			return this;
 		}
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdatePostQueryString Version(int version)
+		public UpdateQueryString Version(int version)
 		{
 			this.Add("version", this.CreateString(version));
 			return this;
 		}
 
 		///<summary>Specific version type</summary>
-		public UpdatePostQueryString VersionType(VersionTypeOptions version_type)
+		public UpdateQueryString VersionType(VersionTypeOptions version_type)
 		{
 			this.Add("version_type", this.CreateString(version_type));
 			return this;

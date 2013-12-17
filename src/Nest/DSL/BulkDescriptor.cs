@@ -11,7 +11,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public class BulkDescriptor
+	public partial class BulkDescriptor : QueryPathDescriptor
 	{
 		internal string _FixedIndex { get; set; }
 		internal string _FixedType { get; set; }
@@ -85,29 +85,10 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// The refresh parameter can be set to true in order to refresh the relevant shards immediately after the bulk operation has occurred and 
-		/// make it searchable, instead of waiting for the normal refresh interval to expire. 
-		/// Setting it to true can trigger additional load, and may slow down indexing.
-		/// </summary>
-		/// <param name="refresh"></param>
-		/// <returns></returns>
-		public BulkDescriptor Refresh(bool refresh = true)
-		{
-			this._Refresh = refresh;
-			return this;
-		}
-
-		/// <summary>
-		/// Allows you to perform the multiget on a fixed path. 
-		/// Each operation that doesn't specify an index or type will use this fixed index/type
-		/// over the default infered index and type.
-		/// </summary>
 		public BulkDescriptor FixedPath(string index, string type = null)
 		{
-			index.ThrowIfNullOrEmpty("index");
-			this._FixedIndex = index;
-			this._FixedType = type;
+			this.Index(index);
+			this.Type(type);
 			return this;
 		}
 	}
