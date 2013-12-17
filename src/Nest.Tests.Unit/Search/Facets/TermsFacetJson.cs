@@ -38,6 +38,7 @@ namespace Nest.Tests.Unit.Search.Facets
         .FacetTerm(t => t
           .OnField(f => f.Country)
           .Size(20)
+          .ShardSize(100)
           .Order(TermsOrder.reverse_count)
           .Exclude("term1", "term2")
           .AllTerms()
@@ -52,6 +53,7 @@ namespace Nest.Tests.Unit.Search.Facets
                 terms : {
                     field : ""country"",
                     size : 20,
+                    shard_size: 100,
                     order: ""reverse_count"",
                     all_terms: true,
                     exclude: [ ""term1"", ""term2"" ],        
