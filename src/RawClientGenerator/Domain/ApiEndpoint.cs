@@ -132,10 +132,7 @@ namespace RawClientGenerator
 						if (this.Url.Params != null && this.Url.Params.Any())
 							queryStringParamName = this.CsharpMethodName + "QueryString";
 
-						args = args.Concat(new[] 
-						{ 
-							"Func<"+queryStringParamName+", " + queryStringParamName + "> queryString = null" 
-						});
+						
 
 						var apiMethod = new CsharpMethod
 						{
@@ -144,12 +141,18 @@ namespace RawClientGenerator
 							FullName = methodName,
 							HttpMethod = method,
 							Documentation = this.Documentation,
-							Arguments = string.Join(", ", args),
 							Path = path,
 							Parts = parts,
 							Url = this.Url
 						};
 						ApiGenerator.PatchMethod(apiMethod);
+
+						args = args.Concat(new[] 
+						{ 
+							"Func<"+apiMethod.QueryStringParamName+", " + apiMethod.QueryStringParamName + "> queryString = null" 
+						});
+						apiMethod.Arguments = string.Join(", ", args);
+
 						yield return apiMethod;
 						apiMethod = new CsharpMethod
 						{

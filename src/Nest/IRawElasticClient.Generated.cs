@@ -1680,64 +1680,64 @@ namespace Nest
 		///<summary>GET /_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
-		ConnectionStatus IndicesValidateQueryGet(Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQueryGet(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>GET /_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesValidateQueryGetAsync(Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryGetAsync(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesValidateQueryGet(string index, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQueryGet(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		ConnectionStatus IndicesValidateQueryGet(string index, string type, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQueryGet(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, string type, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="body">The query definition</param>
-		ConnectionStatus IndicesValidateQueryPost(object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQueryPost(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="body">The query definition</param>
-		Task<ConnectionStatus> IndicesValidateQueryPostAsync(object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryPostAsync(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition</param>
-		ConnectionStatus IndicesValidateQueryPost(string index, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQueryPost(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition</param>
-		Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
@@ -1745,7 +1745,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition</param>
-		ConnectionStatus IndicesValidateQueryPost(string index, string type, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQueryPost(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
@@ -1753,7 +1753,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition</param>
-		Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, string type, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>GET /
 		///<pre>http://elasticsearch.org/guide/</pre>	

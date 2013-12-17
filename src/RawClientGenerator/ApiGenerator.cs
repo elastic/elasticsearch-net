@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using CsQuery;
 using Newtonsoft.Json;
@@ -91,6 +92,14 @@ namespace RawClientGenerator
  			{
  				{"IndicesValidateQueryQueryString", "ValidateQueryQueryString"}
  			};
+
+		private static readonly Dictionary<string, string> KnownDescriptors =
+			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			 where f.FullName.EndsWith("Descriptor.cs")
+			let contents = File.ReadAllText(f.FullName)
+			let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
+			select c)
+			.ToDictionary(k => Regex.Replace(k, "<.*$", ""), v => Regex.Replace(v, @"^.*?(?:(\<.+>).*?)?$", "$1"));
 
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)

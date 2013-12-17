@@ -4793,7 +4793,7 @@ namespace Nest
 		///<summary>GET /_validate/query
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesValidateQueryGet(Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public ConnectionStatus IndicesValidateQueryGet(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			var url = "/_validate/query";
 			NameValueCollection nv = null;
@@ -4809,7 +4809,7 @@ namespace Nest
 		///<summary>GET /_validate/query
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			var url = "/_validate/query";
 			NameValueCollection nv = null;
@@ -4826,7 +4826,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
-		public ConnectionStatus IndicesValidateQueryGet(string index, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public ConnectionStatus IndicesValidateQueryGet(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_validate/query".Inject(new { index = Stringify(index) });
@@ -4844,7 +4844,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
-		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_validate/query".Inject(new { index = Stringify(index) });
@@ -4863,7 +4863,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		public ConnectionStatus IndicesValidateQueryGet(string index, string type, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public ConnectionStatus IndicesValidateQueryGet(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -4883,7 +4883,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, string type, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -4902,7 +4902,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 	    ///</summary>
 		///<param name="body">The query definition</param>
-		public ConnectionStatus IndicesValidateQueryPost(object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public ConnectionStatus IndicesValidateQueryPost(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			var url = "/_validate/query".Inject(new {  });
 			NameValueCollection nv = null;
@@ -4919,7 +4919,7 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
 	    ///</summary>
 		///<param name="body">The query definition</param>
-		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			var url = "/_validate/query".Inject(new {  });
 			NameValueCollection nv = null;
@@ -4937,7 +4937,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition</param>
-		public ConnectionStatus IndicesValidateQueryPost(string index, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public ConnectionStatus IndicesValidateQueryPost(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_validate/query".Inject(new { index = Stringify(index) });
@@ -4956,7 +4956,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition</param>
-		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_validate/query".Inject(new { index = Stringify(index) });
@@ -4976,7 +4976,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition</param>
-		public ConnectionStatus IndicesValidateQueryPost(string index, string type, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public ConnectionStatus IndicesValidateQueryPost(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -4997,7 +4997,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition</param>
-		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, string type, object body, Func<IndicesValidateQueryQueryString, IndicesValidateQueryQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");

@@ -303,7 +303,7 @@
     <Compile Include="Domain\Hit\ValidationExplanation.cs" />
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
     <Compile Include="DSL\RoutingQueryPathDescriptor.cs" />
-    <Compile Include="DSL\ValidateQueryPathDescriptor.cs" />
+    <Compile Include="DSL\ValidateQueryDescriptor.cs" />
     <Compile Include="ElasticClient-Validate.cs" />
     <Compile Include="DSL\Filter.cs" />
     <Compile Include="DSL\Query.cs" />
