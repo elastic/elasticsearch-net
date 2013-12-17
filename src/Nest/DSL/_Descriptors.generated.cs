@@ -17,13 +17,13 @@ namespace Nest
 	///</summary>
 	public partial class BulkDescriptor
 	{
-		internal BulkQueryString QueryString { get; set; }
+		internal BulkQueryString _QueryString = new BulkQueryString(); 
 
 
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public BulkDescriptor Consistency(ConsistencyOptions consistency)
 		{
-			this.QueryString.Consistency(consistency);
+			this._QueryString.Consistency(consistency);
 			return this;
 		}
 		
@@ -31,7 +31,7 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public BulkDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -39,7 +39,7 @@ namespace Nest
 		///<summary>Explicitely set the replication type</summary>
 		public BulkDescriptor Replication(ReplicationOptions replication)
 		{
-			this.QueryString.Replication(replication);
+			this._QueryString.Replication(replication);
 			return this;
 		}
 		
@@ -47,7 +47,7 @@ namespace Nest
 		///<summary>Default document type for items which don&#39;t provide one</summary>
 		public BulkDescriptor TypeQueryString(string type)
 		{
-			this.QueryString.Type(type);
+			this._QueryString.Type(type);
 			return this;
 		}
 		
@@ -55,7 +55,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -70,13 +70,13 @@ namespace Nest
 	///</summary>
 	public partial class ClusterHealthDescriptor
 	{
-		internal ClusterHealthQueryString QueryString { get; set; }
+		internal ClusterHealthQueryString _QueryString = new ClusterHealthQueryString(); 
 
 
 		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthDescriptor Level(LevelOptions level)
 		{
-			this.QueryString.Level(level);
+			this._QueryString.Level(level);
 			return this;
 		}
 		
@@ -84,7 +84,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterHealthDescriptor Local(bool local = true)
 		{
-			this.QueryString.Local(local);
+			this._QueryString.Local(local);
 			return this;
 		}
 		
@@ -92,7 +92,7 @@ namespace Nest
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ClusterHealthDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -100,7 +100,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public ClusterHealthDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -108,7 +108,7 @@ namespace Nest
 		///<summary>Wait until the specified number of shards is active</summary>
 		public ClusterHealthDescriptor WaitForActiveShards(int wait_for_active_shards)
 		{
-			this.QueryString.WaitForActiveShards(wait_for_active_shards);
+			this._QueryString.WaitForActiveShards(wait_for_active_shards);
 			return this;
 		}
 		
@@ -116,7 +116,7 @@ namespace Nest
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes)
 		{
-			this.QueryString.WaitForNodes(wait_for_nodes);
+			this._QueryString.WaitForNodes(wait_for_nodes);
 			return this;
 		}
 		
@@ -124,7 +124,7 @@ namespace Nest
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
 		public ClusterHealthDescriptor WaitForRelocatingShards(int wait_for_relocating_shards)
 		{
-			this.QueryString.WaitForRelocatingShards(wait_for_relocating_shards);
+			this._QueryString.WaitForRelocatingShards(wait_for_relocating_shards);
 			return this;
 		}
 		
@@ -132,7 +132,7 @@ namespace Nest
 		///<summary>Wait until cluster is in a specific state</summary>
 		public ClusterHealthDescriptor WaitForStatus(WaitForStatusOptions wait_for_status)
 		{
-			this.QueryString.WaitForStatus(wait_for_status);
+			this._QueryString.WaitForStatus(wait_for_status);
 			return this;
 		}
 		
@@ -147,13 +147,13 @@ namespace Nest
 	///</summary>
 	public partial class ClusterNodeHotThreadsDescriptor
 	{
-		internal ClusterNodeHotThreadsQueryString QueryString { get; set; }
+		internal ClusterNodeHotThreadsQueryString _QueryString = new ClusterNodeHotThreadsQueryString(); 
 
 
 		///<summary>The interval for the second sampling of threads</summary>
 		public ClusterNodeHotThreadsDescriptor Interval(string interval)
 		{
-			this.QueryString.Interval(interval);
+			this._QueryString.Interval(interval);
 			return this;
 		}
 		
@@ -161,7 +161,7 @@ namespace Nest
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public ClusterNodeHotThreadsDescriptor Snapshots(int snapshots)
 		{
-			this.QueryString.Snapshots(snapshots);
+			this._QueryString.Snapshots(snapshots);
 			return this;
 		}
 		
@@ -169,7 +169,7 @@ namespace Nest
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
 		public ClusterNodeHotThreadsDescriptor Threads(int threads)
 		{
-			this.QueryString.Threads(threads);
+			this._QueryString.Threads(threads);
 			return this;
 		}
 		
@@ -177,7 +177,7 @@ namespace Nest
 		///<summary>The type to sample (default: cpu)</summary>
 		public ClusterNodeHotThreadsDescriptor TypeQueryString(TypeOptions type)
 		{
-			this.QueryString.Type(type);
+			this._QueryString.Type(type);
 			return this;
 		}
 		
@@ -192,13 +192,13 @@ namespace Nest
 	///</summary>
 	public partial class ClusterNodeInfoDescriptor
 	{
-		internal ClusterNodeInfoQueryString QueryString { get; set; }
+		internal ClusterNodeInfoQueryString _QueryString = new ClusterNodeInfoQueryString(); 
 
 
 		///<summary>Return all available information</summary>
 		public ClusterNodeInfoDescriptor All(bool all = true)
 		{
-			this.QueryString.All(all);
+			this._QueryString.All(all);
 			return this;
 		}
 		
@@ -206,7 +206,7 @@ namespace Nest
 		///<summary>Reset the default settings</summary>
 		public ClusterNodeInfoDescriptor Clear(bool clear = true)
 		{
-			this.QueryString.Clear(clear);
+			this._QueryString.Clear(clear);
 			return this;
 		}
 		
@@ -214,7 +214,7 @@ namespace Nest
 		///<summary>Return information about HTTP</summary>
 		public ClusterNodeInfoDescriptor Http(bool http = true)
 		{
-			this.QueryString.Http(http);
+			this._QueryString.Http(http);
 			return this;
 		}
 		
@@ -222,7 +222,7 @@ namespace Nest
 		///<summary>Return information about the JVM</summary>
 		public ClusterNodeInfoDescriptor Jvm(bool jvm = true)
 		{
-			this.QueryString.Jvm(jvm);
+			this._QueryString.Jvm(jvm);
 			return this;
 		}
 		
@@ -230,7 +230,7 @@ namespace Nest
 		///<summary>Return information about network</summary>
 		public ClusterNodeInfoDescriptor Network(bool network = true)
 		{
-			this.QueryString.Network(network);
+			this._QueryString.Network(network);
 			return this;
 		}
 		
@@ -238,7 +238,7 @@ namespace Nest
 		///<summary>Return information about the operating system</summary>
 		public ClusterNodeInfoDescriptor Os(bool os = true)
 		{
-			this.QueryString.Os(os);
+			this._QueryString.Os(os);
 			return this;
 		}
 		
@@ -246,7 +246,7 @@ namespace Nest
 		///<summary>Return information about plugins</summary>
 		public ClusterNodeInfoDescriptor Plugin(bool plugin = true)
 		{
-			this.QueryString.Plugin(plugin);
+			this._QueryString.Plugin(plugin);
 			return this;
 		}
 		
@@ -254,7 +254,7 @@ namespace Nest
 		///<summary>Return information about the Elasticsearch process</summary>
 		public ClusterNodeInfoDescriptor Process(bool process = true)
 		{
-			this.QueryString.Process(process);
+			this._QueryString.Process(process);
 			return this;
 		}
 		
@@ -262,7 +262,7 @@ namespace Nest
 		///<summary>Return information about node settings</summary>
 		public ClusterNodeInfoDescriptor Settings(bool settings = true)
 		{
-			this.QueryString.Settings(settings);
+			this._QueryString.Settings(settings);
 			return this;
 		}
 		
@@ -270,7 +270,7 @@ namespace Nest
 		///<summary>Return information about the thread pool</summary>
 		public ClusterNodeInfoDescriptor ThreadPool(bool thread_pool = true)
 		{
-			this.QueryString.ThreadPool(thread_pool);
+			this._QueryString.ThreadPool(thread_pool);
 			return this;
 		}
 		
@@ -278,7 +278,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public ClusterNodeInfoDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -286,7 +286,7 @@ namespace Nest
 		///<summary>Return information about transport</summary>
 		public ClusterNodeInfoDescriptor Transport(bool transport = true)
 		{
-			this.QueryString.Transport(transport);
+			this._QueryString.Transport(transport);
 			return this;
 		}
 		
@@ -301,13 +301,13 @@ namespace Nest
 	///</summary>
 	public partial class ClusterNodeShutdownDescriptor
 	{
-		internal ClusterNodeShutdownQueryString QueryString { get; set; }
+		internal ClusterNodeShutdownQueryString _QueryString = new ClusterNodeShutdownQueryString(); 
 
 
 		///<summary>Set the delay for the operation (default: 1s)</summary>
 		public ClusterNodeShutdownDescriptor Delay(string delay)
 		{
-			this.QueryString.Delay(delay);
+			this._QueryString.Delay(delay);
 			return this;
 		}
 		
@@ -315,7 +315,7 @@ namespace Nest
 		///<summary>Exit the JVM as well (default: true)</summary>
 		public ClusterNodeShutdownDescriptor Exit(bool exit = true)
 		{
-			this.QueryString.Exit(exit);
+			this._QueryString.Exit(exit);
 			return this;
 		}
 		
@@ -330,13 +330,13 @@ namespace Nest
 	///</summary>
 	public partial class ClusterNodeStatsDescriptor
 	{
-		internal ClusterNodeStatsQueryString QueryString { get; set; }
+		internal ClusterNodeStatsQueryString _QueryString = new ClusterNodeStatsQueryString(); 
 
 
 		///<summary>Return all available information</summary>
 		public ClusterNodeStatsDescriptor All(bool all = true)
 		{
-			this.QueryString.All(all);
+			this._QueryString.All(all);
 			return this;
 		}
 		
@@ -344,7 +344,7 @@ namespace Nest
 		///<summary>Reset the default level of detail</summary>
 		public ClusterNodeStatsDescriptor Clear(bool clear = true)
 		{
-			this.QueryString.Clear(clear);
+			this._QueryString.Clear(clear);
 			return this;
 		}
 		
@@ -352,7 +352,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
 		public ClusterNodeStatsDescriptor Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
@@ -360,7 +360,7 @@ namespace Nest
 		///<summary>Return information about the filesystem</summary>
 		public ClusterNodeStatsDescriptor Fs(bool fs = true)
 		{
-			this.QueryString.Fs(fs);
+			this._QueryString.Fs(fs);
 			return this;
 		}
 		
@@ -368,7 +368,7 @@ namespace Nest
 		///<summary>Return information about HTTP</summary>
 		public ClusterNodeStatsDescriptor Http(bool http = true)
 		{
-			this.QueryString.Http(http);
+			this._QueryString.Http(http);
 			return this;
 		}
 		
@@ -376,7 +376,7 @@ namespace Nest
 		///<summary>Return information about indices</summary>
 		public ClusterNodeStatsDescriptor Indices(bool indices = true)
 		{
-			this.QueryString.Indices(indices);
+			this._QueryString.Indices(indices);
 			return this;
 		}
 		
@@ -384,7 +384,7 @@ namespace Nest
 		///<summary>Return information about the JVM</summary>
 		public ClusterNodeStatsDescriptor Jvm(bool jvm = true)
 		{
-			this.QueryString.Jvm(jvm);
+			this._QueryString.Jvm(jvm);
 			return this;
 		}
 		
@@ -392,7 +392,7 @@ namespace Nest
 		///<summary>Return information about network</summary>
 		public ClusterNodeStatsDescriptor Network(bool network = true)
 		{
-			this.QueryString.Network(network);
+			this._QueryString.Network(network);
 			return this;
 		}
 		
@@ -400,7 +400,7 @@ namespace Nest
 		///<summary>Return information about the operating system</summary>
 		public ClusterNodeStatsDescriptor Os(bool os = true)
 		{
-			this.QueryString.Os(os);
+			this._QueryString.Os(os);
 			return this;
 		}
 		
@@ -408,7 +408,7 @@ namespace Nest
 		///<summary>Return information about the Elasticsearch process</summary>
 		public ClusterNodeStatsDescriptor Process(bool process = true)
 		{
-			this.QueryString.Process(process);
+			this._QueryString.Process(process);
 			return this;
 		}
 		
@@ -416,7 +416,7 @@ namespace Nest
 		///<summary>Return information about the thread pool</summary>
 		public ClusterNodeStatsDescriptor ThreadPool(bool thread_pool = true)
 		{
-			this.QueryString.ThreadPool(thread_pool);
+			this._QueryString.ThreadPool(thread_pool);
 			return this;
 		}
 		
@@ -424,7 +424,7 @@ namespace Nest
 		///<summary>Return information about transport</summary>
 		public ClusterNodeStatsDescriptor Transport(bool transport = true)
 		{
-			this.QueryString.Transport(transport);
+			this._QueryString.Transport(transport);
 			return this;
 		}
 		
@@ -439,13 +439,13 @@ namespace Nest
 	///</summary>
 	public partial class ClusterRerouteDescriptor
 	{
-		internal ClusterRerouteQueryString QueryString { get; set; }
+		internal ClusterRerouteQueryString _QueryString = new ClusterRerouteQueryString(); 
 
 
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public ClusterRerouteDescriptor DryRun(bool dry_run = true)
 		{
-			this.QueryString.DryRun(dry_run);
+			this._QueryString.DryRun(dry_run);
 			return this;
 		}
 		
@@ -453,7 +453,7 @@ namespace Nest
 		///<summary>Don&#39;t return cluster state metadata (default: false)</summary>
 		public ClusterRerouteDescriptor FilterMetadata(bool filter_metadata = true)
 		{
-			this.QueryString.FilterMetadata(filter_metadata);
+			this._QueryString.FilterMetadata(filter_metadata);
 			return this;
 		}
 		
@@ -468,13 +468,13 @@ namespace Nest
 	///</summary>
 	public partial class ClusterStateDescriptor
 	{
-		internal ClusterStateQueryString QueryString { get; set; }
+		internal ClusterStateQueryString _QueryString = new ClusterStateQueryString(); 
 
 
 		///<summary>Do not return information about blocks</summary>
 		public ClusterStateDescriptor FilterBlocks(bool filter_blocks = true)
 		{
-			this.QueryString.FilterBlocks(filter_blocks);
+			this._QueryString.FilterBlocks(filter_blocks);
 			return this;
 		}
 		
@@ -482,7 +482,7 @@ namespace Nest
 		///<summary>Do not return information about index templates</summary>
 		public ClusterStateDescriptor FilterIndexTemplates(bool filter_index_templates = true)
 		{
-			this.QueryString.FilterIndexTemplates(filter_index_templates);
+			this._QueryString.FilterIndexTemplates(filter_index_templates);
 			return this;
 		}
 		
@@ -490,7 +490,7 @@ namespace Nest
 		///<summary>Limit returned metadata information to specific indices</summary>
 		public ClusterStateDescriptor FilterIndices(params string[] filter_indices)
 		{
-			this.QueryString.FilterIndices(filter_indices);
+			this._QueryString.FilterIndices(filter_indices);
 			return this;
 		}
 		
@@ -498,7 +498,7 @@ namespace Nest
 		///<summary>Do not return information about indices metadata</summary>
 		public ClusterStateDescriptor FilterMetadata(bool filter_metadata = true)
 		{
-			this.QueryString.FilterMetadata(filter_metadata);
+			this._QueryString.FilterMetadata(filter_metadata);
 			return this;
 		}
 		
@@ -506,7 +506,7 @@ namespace Nest
 		///<summary>Do not return information about nodes</summary>
 		public ClusterStateDescriptor FilterNodes(bool filter_nodes = true)
 		{
-			this.QueryString.FilterNodes(filter_nodes);
+			this._QueryString.FilterNodes(filter_nodes);
 			return this;
 		}
 		
@@ -514,7 +514,7 @@ namespace Nest
 		///<summary>Do not return information about shard allocation (`routing_table` and `routing_nodes`)</summary>
 		public ClusterStateDescriptor FilterRoutingTable(bool filter_routing_table = true)
 		{
-			this.QueryString.FilterRoutingTable(filter_routing_table);
+			this._QueryString.FilterRoutingTable(filter_routing_table);
 			return this;
 		}
 		
@@ -522,7 +522,7 @@ namespace Nest
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool local = true)
 		{
-			this.QueryString.Local(local);
+			this._QueryString.Local(local);
 			return this;
 		}
 		
@@ -530,7 +530,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public ClusterStateDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -545,13 +545,13 @@ namespace Nest
 	///</summary>
 	public partial class CountDescriptor
 	{
-		internal CountQueryString QueryString { get; set; }
+		internal CountQueryString _QueryString = new CountQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public CountDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -559,7 +559,7 @@ namespace Nest
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
 		public CountDescriptor MinScore(int min_score)
 		{
-			this.QueryString.MinScore(min_score);
+			this._QueryString.MinScore(min_score);
 			return this;
 		}
 		
@@ -567,7 +567,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public CountDescriptor Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
@@ -575,7 +575,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public CountDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -583,7 +583,7 @@ namespace Nest
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public CountDescriptor Source(string source)
 		{
-			this.QueryString.Source(source);
+			this._QueryString.Source(source);
 			return this;
 		}
 		
@@ -598,13 +598,13 @@ namespace Nest
 	///</summary>
 	public partial class CreateDescriptor
 	{
-		internal CreateQueryString QueryString { get; set; }
+		internal CreateQueryString _QueryString = new CreateQueryString(); 
 
 
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public CreateDescriptor Consistency(ConsistencyOptions consistency)
 		{
-			this.QueryString.Consistency(consistency);
+			this._QueryString.Consistency(consistency);
 			return this;
 		}
 		
@@ -612,7 +612,7 @@ namespace Nest
 		///<summary>Specific document ID (when the POST method is used)</summary>
 		public CreateDescriptor Id(string id)
 		{
-			this.QueryString.Id(id);
+			this._QueryString.Id(id);
 			return this;
 		}
 		
@@ -620,7 +620,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public CreateDescriptor Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
@@ -628,7 +628,7 @@ namespace Nest
 		///<summary>Percolator queries to execute while indexing the document</summary>
 		public CreateDescriptor Percolate(string percolate)
 		{
-			this.QueryString.Percolate(percolate);
+			this._QueryString.Percolate(percolate);
 			return this;
 		}
 		
@@ -636,7 +636,7 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public CreateDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -644,7 +644,7 @@ namespace Nest
 		///<summary>Specific replication type</summary>
 		public CreateDescriptor Replication(ReplicationOptions replication)
 		{
-			this.QueryString.Replication(replication);
+			this._QueryString.Replication(replication);
 			return this;
 		}
 		
@@ -652,7 +652,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public CreateDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -660,7 +660,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public CreateDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -668,7 +668,7 @@ namespace Nest
 		///<summary>Explicit timestamp for the document</summary>
 		public CreateDescriptor Timestamp(string timestamp)
 		{
-			this.QueryString.Timestamp(timestamp);
+			this._QueryString.Timestamp(timestamp);
 			return this;
 		}
 		
@@ -676,7 +676,7 @@ namespace Nest
 		///<summary>Expiration time for the document</summary>
 		public CreateDescriptor Ttl(string ttl)
 		{
-			this.QueryString.Ttl(ttl);
+			this._QueryString.Ttl(ttl);
 			return this;
 		}
 		
@@ -684,7 +684,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public CreateDescriptor Version(int version)
 		{
-			this.QueryString.Version(version);
+			this._QueryString.Version(version);
 			return this;
 		}
 		
@@ -692,7 +692,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public CreateDescriptor VersionType(VersionTypeOptions version_type)
 		{
-			this.QueryString.VersionType(version_type);
+			this._QueryString.VersionType(version_type);
 			return this;
 		}
 		
@@ -707,13 +707,13 @@ namespace Nest
 	///</summary>
 	public partial class DeleteDescriptor
 	{
-		internal DeleteQueryString QueryString { get; set; }
+		internal DeleteQueryString _QueryString = new DeleteQueryString(); 
 
 
 		///<summary>Specific write consistency setting for the operation</summary>
 		public DeleteDescriptor Consistency(ConsistencyOptions consistency)
 		{
-			this.QueryString.Consistency(consistency);
+			this._QueryString.Consistency(consistency);
 			return this;
 		}
 		
@@ -721,7 +721,7 @@ namespace Nest
 		///<summary>ID of parent document</summary>
 		public DeleteDescriptor Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
@@ -729,7 +729,7 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public DeleteDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -737,7 +737,7 @@ namespace Nest
 		///<summary>Specific replication type</summary>
 		public DeleteDescriptor Replication(ReplicationOptions replication)
 		{
-			this.QueryString.Replication(replication);
+			this._QueryString.Replication(replication);
 			return this;
 		}
 		
@@ -745,7 +745,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public DeleteDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -753,7 +753,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public DeleteDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -761,7 +761,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor Version(int version)
 		{
-			this.QueryString.Version(version);
+			this._QueryString.Version(version);
 			return this;
 		}
 		
@@ -769,7 +769,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public DeleteDescriptor VersionType(VersionTypeOptions version_type)
 		{
-			this.QueryString.VersionType(version_type);
+			this._QueryString.VersionType(version_type);
 			return this;
 		}
 		
@@ -782,87 +782,87 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/delete-by-query/
 	///</pre>
 	///</summary>
-	public partial class DeleteByQueryDescriptor
+	public partial class DeleteByQueryDescriptor<T>
 	{
-		internal DeleteByQueryQueryString QueryString { get; set; }
+		internal DeleteByQueryQueryString _QueryString = new DeleteByQueryQueryString(); 
 
 
 		///<summary>The analyzer to use for the query string</summary>
-		public DeleteByQueryDescriptor Analyzer(string analyzer)
+		public DeleteByQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			this.QueryString.Analyzer(analyzer);
+			this._QueryString.Analyzer(analyzer);
 			return this;
 		}
 		
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteByQueryDescriptor Consistency(ConsistencyOptions consistency)
+		public DeleteByQueryDescriptor<T> Consistency(ConsistencyOptions consistency)
 		{
-			this.QueryString.Consistency(consistency);
+			this._QueryString.Consistency(consistency);
 			return this;
 		}
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor DefaultOperator(DefaultOperatorOptions default_operator)
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
 		{
-			this.QueryString.DefaultOperator(default_operator);
+			this._QueryString.DefaultOperator(default_operator);
 			return this;
 		}
 		
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public DeleteByQueryDescriptor Df(string df)
+		public DeleteByQueryDescriptor<T> Df(string df)
 		{
-			this.QueryString.Df(df);
+			this._QueryString.Df(df);
 			return this;
 		}
 		
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public DeleteByQueryDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public DeleteByQueryDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
 
 		///<summary>Specific replication type</summary>
-		public DeleteByQueryDescriptor Replication(ReplicationOptions replication)
+		public DeleteByQueryDescriptor<T> Replication(ReplicationOptions replication)
 		{
-			this.QueryString.Replication(replication);
+			this._QueryString.Replication(replication);
 			return this;
 		}
 		
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor Q(string q)
+		public DeleteByQueryDescriptor<T> Q(string q)
 		{
-			this.QueryString.Q(q);
+			this._QueryString.Q(q);
 			return this;
 		}
 		
 
 		///<summary>Specific routing value</summary>
-		public DeleteByQueryDescriptor Routing(string routing)
+		public DeleteByQueryDescriptor<T> Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public DeleteByQueryDescriptor Source(string source)
+		public DeleteByQueryDescriptor<T> Source(string source)
 		{
-			this.QueryString.Source(source);
+			this._QueryString.Source(source);
 			return this;
 		}
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteByQueryDescriptor Timeout(string timeout)
+		public DeleteByQueryDescriptor<T> Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -877,13 +877,13 @@ namespace Nest
 	///</summary>
 	public partial class ExistsDescriptor
 	{
-		internal ExistsQueryString QueryString { get; set; }
+		internal ExistsQueryString _QueryString = new ExistsQueryString(); 
 
 
 		///<summary>The ID of the parent document</summary>
 		public ExistsDescriptor Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
@@ -891,7 +891,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExistsDescriptor Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
@@ -899,7 +899,7 @@ namespace Nest
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public ExistsDescriptor Realtime(bool realtime = true)
 		{
-			this.QueryString.Realtime(realtime);
+			this._QueryString.Realtime(realtime);
 			return this;
 		}
 		
@@ -907,7 +907,7 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public ExistsDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -915,7 +915,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public ExistsDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -930,13 +930,13 @@ namespace Nest
 	///</summary>
 	public partial class ExplainDescriptor
 	{
-		internal ExplainQueryString QueryString { get; set; }
+		internal ExplainQueryString _QueryString = new ExplainQueryString(); 
 
 
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainDescriptor AnalyzeWildcard(bool analyze_wildcard = true)
 		{
-			this.QueryString.AnalyzeWildcard(analyze_wildcard);
+			this._QueryString.AnalyzeWildcard(analyze_wildcard);
 			return this;
 		}
 		
@@ -944,7 +944,7 @@ namespace Nest
 		///<summary>The analyzer for the query string query</summary>
 		public ExplainDescriptor Analyzer(string analyzer)
 		{
-			this.QueryString.Analyzer(analyzer);
+			this._QueryString.Analyzer(analyzer);
 			return this;
 		}
 		
@@ -952,7 +952,7 @@ namespace Nest
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public ExplainDescriptor DefaultOperator(DefaultOperatorOptions default_operator)
 		{
-			this.QueryString.DefaultOperator(default_operator);
+			this._QueryString.DefaultOperator(default_operator);
 			return this;
 		}
 		
@@ -960,7 +960,7 @@ namespace Nest
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainDescriptor Df(string df)
 		{
-			this.QueryString.Df(df);
+			this._QueryString.Df(df);
 			return this;
 		}
 		
@@ -968,7 +968,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public ExplainDescriptor Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
@@ -976,7 +976,7 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor Lenient(bool lenient = true)
 		{
-			this.QueryString.Lenient(lenient);
+			this._QueryString.Lenient(lenient);
 			return this;
 		}
 		
@@ -984,7 +984,7 @@ namespace Nest
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public ExplainDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
-			this.QueryString.LowercaseExpandedTerms(lowercase_expanded_terms);
+			this._QueryString.LowercaseExpandedTerms(lowercase_expanded_terms);
 			return this;
 		}
 		
@@ -992,7 +992,7 @@ namespace Nest
 		///<summary>The ID of the parent document</summary>
 		public ExplainDescriptor Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
@@ -1000,7 +1000,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainDescriptor Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
@@ -1008,7 +1008,7 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public ExplainDescriptor Q(string q)
 		{
-			this.QueryString.Q(q);
+			this._QueryString.Q(q);
 			return this;
 		}
 		
@@ -1016,7 +1016,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public ExplainDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -1024,7 +1024,7 @@ namespace Nest
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public ExplainDescriptor Source(string source)
 		{
-			this.QueryString.Source(source);
+			this._QueryString.Source(source);
 			return this;
 		}
 		
@@ -1032,7 +1032,7 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public ExplainDescriptor Source(params string[] _source)
 		{
-			this.QueryString.Source(_source);
+			this._QueryString.Source(_source);
 			return this;
 		}
 		
@@ -1040,7 +1040,7 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainDescriptor SourceExclude(params string[] _source_exclude)
 		{
-			this.QueryString.SourceExclude(_source_exclude);
+			this._QueryString.SourceExclude(_source_exclude);
 			return this;
 		}
 		
@@ -1048,7 +1048,7 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor SourceInclude(params string[] _source_include)
 		{
-			this.QueryString.SourceInclude(_source_include);
+			this._QueryString.SourceInclude(_source_include);
 			return this;
 		}
 		
@@ -1061,79 +1061,79 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/get/
 	///</pre>
 	///</summary>
-	public partial class GetDescriptor
+	public partial class GetDescriptor<T>
 	{
-		internal GetQueryString QueryString { get; set; }
+		internal GetQueryString _QueryString = new GetQueryString(); 
 
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetDescriptor Fields(params string[] fields)
+		public GetDescriptor<T> Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
 
 		///<summary>The ID of the parent document</summary>
-		public GetDescriptor Parent(string parent)
+		public GetDescriptor<T> Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public GetDescriptor Preference(string preference)
+		public GetDescriptor<T> Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public GetDescriptor Realtime(bool realtime = true)
+		public GetDescriptor<T> Realtime(bool realtime = true)
 		{
-			this.QueryString.Realtime(realtime);
+			this._QueryString.Realtime(realtime);
 			return this;
 		}
 		
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public GetDescriptor Refresh(bool refresh = true)
+		public GetDescriptor<T> Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
 
 		///<summary>Specific routing value</summary>
-		public GetDescriptor Routing(string routing)
+		public GetDescriptor<T> Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor Source(params string[] _source)
+		public GetDescriptor<T> Source(params string[] _source)
 		{
-			this.QueryString.Source(_source);
+			this._QueryString.Source(_source);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor SourceExclude(params string[] _source_exclude)
+		public GetDescriptor<T> SourceExclude(params string[] _source_exclude)
 		{
-			this.QueryString.SourceExclude(_source_exclude);
+			this._QueryString.SourceExclude(_source_exclude);
 			return this;
 		}
 		
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor SourceInclude(params string[] _source_include)
+		public GetDescriptor<T> SourceInclude(params string[] _source_include)
 		{
-			this.QueryString.SourceInclude(_source_include);
+			this._QueryString.SourceInclude(_source_include);
 			return this;
 		}
 		
@@ -1148,13 +1148,13 @@ namespace Nest
 	///</summary>
 	public partial class GetSourceDescriptor
 	{
-		internal GetSourceQueryString QueryString { get; set; }
+		internal GetSourceQueryString _QueryString = new GetSourceQueryString(); 
 
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetSourceDescriptor Exclude(params string[] exclude)
 		{
-			this.QueryString.Exclude(exclude);
+			this._QueryString.Exclude(exclude);
 			return this;
 		}
 		
@@ -1162,7 +1162,7 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetSourceDescriptor Include(params string[] include)
 		{
-			this.QueryString.Include(include);
+			this._QueryString.Include(include);
 			return this;
 		}
 		
@@ -1170,7 +1170,7 @@ namespace Nest
 		///<summary>The ID of the parent document</summary>
 		public GetSourceDescriptor Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
@@ -1178,7 +1178,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public GetSourceDescriptor Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
@@ -1186,7 +1186,7 @@ namespace Nest
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public GetSourceDescriptor Realtime(bool realtime = true)
 		{
-			this.QueryString.Realtime(realtime);
+			this._QueryString.Realtime(realtime);
 			return this;
 		}
 		
@@ -1194,7 +1194,7 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public GetSourceDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -1202,7 +1202,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public GetSourceDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -1217,13 +1217,13 @@ namespace Nest
 	///</summary>
 	public partial class IndexDescriptor
 	{
-		internal IndexQueryString QueryString { get; set; }
+		internal IndexQueryString _QueryString = new IndexQueryString(); 
 
 
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public IndexDescriptor Consistency(ConsistencyOptions consistency)
 		{
-			this.QueryString.Consistency(consistency);
+			this._QueryString.Consistency(consistency);
 			return this;
 		}
 		
@@ -1231,7 +1231,7 @@ namespace Nest
 		///<summary>Explicit operation type</summary>
 		public IndexDescriptor OpType(OpTypeOptions op_type)
 		{
-			this.QueryString.OpType(op_type);
+			this._QueryString.OpType(op_type);
 			return this;
 		}
 		
@@ -1239,7 +1239,7 @@ namespace Nest
 		///<summary>ID of the parent document</summary>
 		public IndexDescriptor Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
@@ -1247,7 +1247,7 @@ namespace Nest
 		///<summary>Percolator queries to execute while indexing the document</summary>
 		public IndexDescriptor Percolate(string percolate)
 		{
-			this.QueryString.Percolate(percolate);
+			this._QueryString.Percolate(percolate);
 			return this;
 		}
 		
@@ -1255,7 +1255,7 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public IndexDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -1263,7 +1263,7 @@ namespace Nest
 		///<summary>Specific replication type</summary>
 		public IndexDescriptor Replication(ReplicationOptions replication)
 		{
-			this.QueryString.Replication(replication);
+			this._QueryString.Replication(replication);
 			return this;
 		}
 		
@@ -1271,7 +1271,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public IndexDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -1279,7 +1279,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public IndexDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1287,7 +1287,7 @@ namespace Nest
 		///<summary>Explicit timestamp for the document</summary>
 		public IndexDescriptor Timestamp(string timestamp)
 		{
-			this.QueryString.Timestamp(timestamp);
+			this._QueryString.Timestamp(timestamp);
 			return this;
 		}
 		
@@ -1295,7 +1295,7 @@ namespace Nest
 		///<summary>Expiration time for the document</summary>
 		public IndexDescriptor Ttl(string ttl)
 		{
-			this.QueryString.Ttl(ttl);
+			this._QueryString.Ttl(ttl);
 			return this;
 		}
 		
@@ -1303,7 +1303,7 @@ namespace Nest
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexDescriptor Version(int version)
 		{
-			this.QueryString.Version(version);
+			this._QueryString.Version(version);
 			return this;
 		}
 		
@@ -1311,7 +1311,7 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public IndexDescriptor VersionType(VersionTypeOptions version_type)
 		{
-			this.QueryString.VersionType(version_type);
+			this._QueryString.VersionType(version_type);
 			return this;
 		}
 		
@@ -1326,13 +1326,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesAnalyzeDescriptor
 	{
-		internal IndicesAnalyzeQueryString QueryString { get; set; }
+		internal IndicesAnalyzeQueryString _QueryString = new IndicesAnalyzeQueryString(); 
 
 
 		///<summary>The name of the analyzer to use</summary>
 		public IndicesAnalyzeDescriptor Analyzer(string analyzer)
 		{
-			this.QueryString.Analyzer(analyzer);
+			this._QueryString.Analyzer(analyzer);
 			return this;
 		}
 		
@@ -1340,7 +1340,7 @@ namespace Nest
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		public IndicesAnalyzeDescriptor Field(string field)
 		{
-			this.QueryString.Field(field);
+			this._QueryString.Field(field);
 			return this;
 		}
 		
@@ -1348,7 +1348,7 @@ namespace Nest
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
 		public IndicesAnalyzeDescriptor Filters(params string[] filters)
 		{
-			this.QueryString.Filters(filters);
+			this._QueryString.Filters(filters);
 			return this;
 		}
 		
@@ -1356,7 +1356,7 @@ namespace Nest
 		///<summary>The name of the index to scope the operation</summary>
 		public IndicesAnalyzeDescriptor IndexQueryString(string index)
 		{
-			this.QueryString.Index(index);
+			this._QueryString.Index(index);
 			return this;
 		}
 		
@@ -1364,7 +1364,7 @@ namespace Nest
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public IndicesAnalyzeDescriptor PreferLocal(bool prefer_local = true)
 		{
-			this.QueryString.PreferLocal(prefer_local);
+			this._QueryString.PreferLocal(prefer_local);
 			return this;
 		}
 		
@@ -1372,7 +1372,7 @@ namespace Nest
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
 		public IndicesAnalyzeDescriptor Text(string text)
 		{
-			this.QueryString.Text(text);
+			this._QueryString.Text(text);
 			return this;
 		}
 		
@@ -1380,7 +1380,7 @@ namespace Nest
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		public IndicesAnalyzeDescriptor Tokenizer(string tokenizer)
 		{
-			this.QueryString.Tokenizer(tokenizer);
+			this._QueryString.Tokenizer(tokenizer);
 			return this;
 		}
 		
@@ -1388,7 +1388,7 @@ namespace Nest
 		///<summary>Format of the output</summary>
 		public IndicesAnalyzeDescriptor Format(FormatOptions format)
 		{
-			this.QueryString.Format(format);
+			this._QueryString.Format(format);
 			return this;
 		}
 		
@@ -1403,13 +1403,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesClearCacheDescriptor
 	{
-		internal IndicesClearCacheQueryString QueryString { get; set; }
+		internal IndicesClearCacheQueryString _QueryString = new IndicesClearCacheQueryString(); 
 
 
 		///<summary>Clear field data</summary>
 		public IndicesClearCacheDescriptor FieldData(bool field_data = true)
 		{
-			this.QueryString.FieldData(field_data);
+			this._QueryString.FieldData(field_data);
 			return this;
 		}
 		
@@ -1417,7 +1417,7 @@ namespace Nest
 		///<summary>Clear field data</summary>
 		public IndicesClearCacheDescriptor Fielddata(bool fielddata = true)
 		{
-			this.QueryString.Fielddata(fielddata);
+			this._QueryString.Fielddata(fielddata);
 			return this;
 		}
 		
@@ -1425,7 +1425,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public IndicesClearCacheDescriptor Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
@@ -1433,7 +1433,7 @@ namespace Nest
 		///<summary>Clear filter caches</summary>
 		public IndicesClearCacheDescriptor Filter(bool filter = true)
 		{
-			this.QueryString.Filter(filter);
+			this._QueryString.Filter(filter);
 			return this;
 		}
 		
@@ -1441,7 +1441,7 @@ namespace Nest
 		///<summary>Clear filter caches</summary>
 		public IndicesClearCacheDescriptor FilterCache(bool filter_cache = true)
 		{
-			this.QueryString.FilterCache(filter_cache);
+			this._QueryString.FilterCache(filter_cache);
 			return this;
 		}
 		
@@ -1449,7 +1449,7 @@ namespace Nest
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
 		public IndicesClearCacheDescriptor FilterKeys(bool filter_keys = true)
 		{
-			this.QueryString.FilterKeys(filter_keys);
+			this._QueryString.FilterKeys(filter_keys);
 			return this;
 		}
 		
@@ -1457,7 +1457,7 @@ namespace Nest
 		///<summary>Clear ID caches for parent/child</summary>
 		public IndicesClearCacheDescriptor Id(bool id = true)
 		{
-			this.QueryString.Id(id);
+			this._QueryString.Id(id);
 			return this;
 		}
 		
@@ -1465,7 +1465,7 @@ namespace Nest
 		///<summary>Clear ID caches for parent/child</summary>
 		public IndicesClearCacheDescriptor IdCache(bool id_cache = true)
 		{
-			this.QueryString.IdCache(id_cache);
+			this._QueryString.IdCache(id_cache);
 			return this;
 		}
 		
@@ -1473,7 +1473,7 @@ namespace Nest
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesClearCacheDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -1481,7 +1481,7 @@ namespace Nest
 		///<summary>A comma-separated list of index name to limit the operation</summary>
 		public IndicesClearCacheDescriptor IndexQueryString(params string[] index)
 		{
-			this.QueryString.Index(index);
+			this._QueryString.Index(index);
 			return this;
 		}
 		
@@ -1489,7 +1489,7 @@ namespace Nest
 		///<summary>Clear the recycler cache</summary>
 		public IndicesClearCacheDescriptor Recycler(bool recycler = true)
 		{
-			this.QueryString.Recycler(recycler);
+			this._QueryString.Recycler(recycler);
 			return this;
 		}
 		
@@ -1504,13 +1504,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesCloseDescriptor
 	{
-		internal IndicesCloseQueryString QueryString { get; set; }
+		internal IndicesCloseQueryString _QueryString = new IndicesCloseQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
 		public IndicesCloseDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1518,7 +1518,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesCloseDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1533,13 +1533,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesCreateDescriptor
 	{
-		internal IndicesCreateQueryString QueryString { get; set; }
+		internal IndicesCreateQueryString _QueryString = new IndicesCreateQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
 		public IndicesCreateDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1547,7 +1547,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesCreateDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1562,13 +1562,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesDeleteDescriptor
 	{
-		internal IndicesDeleteQueryString QueryString { get; set; }
+		internal IndicesDeleteQueryString _QueryString = new IndicesDeleteQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
 		public IndicesDeleteDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1576,7 +1576,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1591,13 +1591,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesDeleteAliasDescriptor
 	{
-		internal IndicesDeleteAliasQueryString QueryString { get; set; }
+		internal IndicesDeleteAliasQueryString _QueryString = new IndicesDeleteAliasQueryString(); 
 
 
 		///<summary>Explicit timestamp for the document</summary>
 		public IndicesDeleteAliasDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1605,7 +1605,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteAliasDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1620,13 +1620,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesDeleteMappingDescriptor
 	{
-		internal IndicesDeleteMappingQueryString QueryString { get; set; }
+		internal IndicesDeleteMappingQueryString _QueryString = new IndicesDeleteMappingQueryString(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteMappingDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1641,13 +1641,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesDeleteTemplateDescriptor
 	{
-		internal IndicesDeleteTemplateQueryString QueryString { get; set; }
+		internal IndicesDeleteTemplateQueryString _QueryString = new IndicesDeleteTemplateQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
 		public IndicesDeleteTemplateDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1655,7 +1655,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteTemplateDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1670,13 +1670,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesDeleteWarmerDescriptor
 	{
-		internal IndicesDeleteWarmerQueryString QueryString { get; set; }
+		internal IndicesDeleteWarmerQueryString _QueryString = new IndicesDeleteWarmerQueryString(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteWarmerDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1691,13 +1691,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesExistsAliasDescriptor
 	{
-		internal IndicesExistsAliasQueryString QueryString { get; set; }
+		internal IndicesExistsAliasQueryString _QueryString = new IndicesExistsAliasQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesExistsAliasDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -1712,13 +1712,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesExistsTypeDescriptor
 	{
-		internal IndicesExistsTypeQueryString QueryString { get; set; }
+		internal IndicesExistsTypeQueryString _QueryString = new IndicesExistsTypeQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesExistsTypeDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -1733,13 +1733,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesFlushDescriptor
 	{
-		internal IndicesFlushQueryString QueryString { get; set; }
+		internal IndicesFlushQueryString _QueryString = new IndicesFlushQueryString(); 
 
 
 		///<summary>TODO: ?</summary>
 		public IndicesFlushDescriptor Force(bool force = true)
 		{
-			this.QueryString.Force(force);
+			this._QueryString.Force(force);
 			return this;
 		}
 		
@@ -1747,7 +1747,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesFlushDescriptor Full(bool full = true)
 		{
-			this.QueryString.Full(full);
+			this._QueryString.Full(full);
 			return this;
 		}
 		
@@ -1755,7 +1755,7 @@ namespace Nest
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesFlushDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -1763,7 +1763,7 @@ namespace Nest
 		///<summary>Refresh the index after performing the operation</summary>
 		public IndicesFlushDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -1778,13 +1778,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesGetAliasDescriptor
 	{
-		internal IndicesGetAliasQueryString QueryString { get; set; }
+		internal IndicesGetAliasQueryString _QueryString = new IndicesGetAliasQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesGetAliasDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -1799,13 +1799,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesGetAliasesDescriptor
 	{
-		internal IndicesGetAliasesQueryString QueryString { get; set; }
+		internal IndicesGetAliasesQueryString _QueryString = new IndicesGetAliasesQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
 		public IndicesGetAliasesDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1820,13 +1820,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesGetFieldMappingDescriptor
 	{
-		internal IndicesGetFieldMappingQueryString QueryString { get; set; }
+		internal IndicesGetFieldMappingQueryString _QueryString = new IndicesGetFieldMappingQueryString(); 
 
 
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public IndicesGetFieldMappingDescriptor IncludeDefaults(bool include_defaults = true)
 		{
-			this.QueryString.IncludeDefaults(include_defaults);
+			this._QueryString.IncludeDefaults(include_defaults);
 			return this;
 		}
 		
@@ -1841,13 +1841,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesOpenDescriptor
 	{
-		internal IndicesOpenQueryString QueryString { get; set; }
+		internal IndicesOpenQueryString _QueryString = new IndicesOpenQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
 		public IndicesOpenDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1855,7 +1855,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesOpenDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1870,13 +1870,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesOptimizeDescriptor
 	{
-		internal IndicesOptimizeQueryString QueryString { get; set; }
+		internal IndicesOptimizeQueryString _QueryString = new IndicesOptimizeQueryString(); 
 
 
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public IndicesOptimizeDescriptor Flush(bool flush = true)
 		{
-			this.QueryString.Flush(flush);
+			this._QueryString.Flush(flush);
 			return this;
 		}
 		
@@ -1884,7 +1884,7 @@ namespace Nest
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesOptimizeDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -1892,7 +1892,7 @@ namespace Nest
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
 		public IndicesOptimizeDescriptor MaxNumSegments(int max_num_segments)
 		{
-			this.QueryString.MaxNumSegments(max_num_segments);
+			this._QueryString.MaxNumSegments(max_num_segments);
 			return this;
 		}
 		
@@ -1900,7 +1900,7 @@ namespace Nest
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public IndicesOptimizeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true)
 		{
-			this.QueryString.OnlyExpungeDeletes(only_expunge_deletes);
+			this._QueryString.OnlyExpungeDeletes(only_expunge_deletes);
 			return this;
 		}
 		
@@ -1908,7 +1908,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesOptimizeDescriptor OperationThreading(string operation_threading)
 		{
-			this.QueryString.OperationThreading(operation_threading);
+			this._QueryString.OperationThreading(operation_threading);
 			return this;
 		}
 		
@@ -1916,7 +1916,7 @@ namespace Nest
 		///<summary>Specify whether the index should be refreshed after performing the operation (default: true)</summary>
 		public IndicesOptimizeDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -1924,7 +1924,7 @@ namespace Nest
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public IndicesOptimizeDescriptor WaitForMerge(bool wait_for_merge = true)
 		{
-			this.QueryString.WaitForMerge(wait_for_merge);
+			this._QueryString.WaitForMerge(wait_for_merge);
 			return this;
 		}
 		
@@ -1939,13 +1939,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesPutAliasDescriptor
 	{
-		internal IndicesPutAliasQueryString QueryString { get; set; }
+		internal IndicesPutAliasQueryString _QueryString = new IndicesPutAliasQueryString(); 
 
 
 		///<summary>Explicit timestamp for the document</summary>
 		public IndicesPutAliasDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1953,7 +1953,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutAliasDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -1968,13 +1968,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesPutMappingDescriptor
 	{
-		internal IndicesPutMappingQueryString QueryString { get; set; }
+		internal IndicesPutMappingQueryString _QueryString = new IndicesPutMappingQueryString(); 
 
 
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
 		public IndicesPutMappingDescriptor IgnoreConflicts(bool ignore_conflicts = true)
 		{
-			this.QueryString.IgnoreConflicts(ignore_conflicts);
+			this._QueryString.IgnoreConflicts(ignore_conflicts);
 			return this;
 		}
 		
@@ -1982,7 +1982,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public IndicesPutMappingDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -1990,7 +1990,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutMappingDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -2005,13 +2005,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesPutSettingsDescriptor
 	{
-		internal IndicesPutSettingsQueryString QueryString { get; set; }
+		internal IndicesPutSettingsQueryString _QueryString = new IndicesPutSettingsQueryString(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutSettingsDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -2026,13 +2026,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesPutTemplateDescriptor
 	{
-		internal IndicesPutTemplateQueryString QueryString { get; set; }
+		internal IndicesPutTemplateQueryString _QueryString = new IndicesPutTemplateQueryString(); 
 
 
 		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
 		public IndicesPutTemplateDescriptor Order(int order)
 		{
-			this.QueryString.Order(order);
+			this._QueryString.Order(order);
 			return this;
 		}
 		
@@ -2040,7 +2040,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public IndicesPutTemplateDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -2048,7 +2048,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutTemplateDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -2063,13 +2063,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesPutWarmerDescriptor
 	{
-		internal IndicesPutWarmerQueryString QueryString { get; set; }
+		internal IndicesPutWarmerQueryString _QueryString = new IndicesPutWarmerQueryString(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutWarmerDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -2084,13 +2084,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesRefreshDescriptor
 	{
-		internal IndicesRefreshQueryString QueryString { get; set; }
+		internal IndicesRefreshQueryString _QueryString = new IndicesRefreshQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesRefreshDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -2098,7 +2098,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesRefreshDescriptor OperationThreading(string operation_threading)
 		{
-			this.QueryString.OperationThreading(operation_threading);
+			this._QueryString.OperationThreading(operation_threading);
 			return this;
 		}
 		
@@ -2113,13 +2113,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesSegmentsDescriptor
 	{
-		internal IndicesSegmentsQueryString QueryString { get; set; }
+		internal IndicesSegmentsQueryString _QueryString = new IndicesSegmentsQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesSegmentsDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -2127,7 +2127,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesSegmentsDescriptor OperationThreading(string operation_threading)
 		{
-			this.QueryString.OperationThreading(operation_threading);
+			this._QueryString.OperationThreading(operation_threading);
 			return this;
 		}
 		
@@ -2142,13 +2142,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesSnapshotIndexDescriptor
 	{
-		internal IndicesSnapshotIndexQueryString QueryString { get; set; }
+		internal IndicesSnapshotIndexQueryString _QueryString = new IndicesSnapshotIndexQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesSnapshotIndexDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -2163,13 +2163,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesStatsDescriptor
 	{
-		internal IndicesStatsQueryString QueryString { get; set; }
+		internal IndicesStatsQueryString _QueryString = new IndicesStatsQueryString(); 
 
 
 		///<summary>Return all available information</summary>
 		public IndicesStatsDescriptor All(bool all = true)
 		{
-			this.QueryString.All(all);
+			this._QueryString.All(all);
 			return this;
 		}
 		
@@ -2177,7 +2177,7 @@ namespace Nest
 		///<summary>Reset the default level of detail</summary>
 		public IndicesStatsDescriptor Clear(bool clear = true)
 		{
-			this.QueryString.Clear(clear);
+			this._QueryString.Clear(clear);
 			return this;
 		}
 		
@@ -2185,7 +2185,7 @@ namespace Nest
 		///<summary>Return information about completion suggester stats</summary>
 		public IndicesStatsDescriptor Completion(bool completion = true)
 		{
-			this.QueryString.Completion(completion);
+			this._QueryString.Completion(completion);
 			return this;
 		}
 		
@@ -2193,7 +2193,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields)
 		{
-			this.QueryString.CompletionFields(completion_fields);
+			this._QueryString.CompletionFields(completion_fields);
 			return this;
 		}
 		
@@ -2201,7 +2201,7 @@ namespace Nest
 		///<summary>Return information about indexed and deleted documents</summary>
 		public IndicesStatsDescriptor Docs(bool docs = true)
 		{
-			this.QueryString.Docs(docs);
+			this._QueryString.Docs(docs);
 			return this;
 		}
 		
@@ -2209,7 +2209,7 @@ namespace Nest
 		///<summary>Return information about field data</summary>
 		public IndicesStatsDescriptor Fielddata(bool fielddata = true)
 		{
-			this.QueryString.Fielddata(fielddata);
+			this._QueryString.Fielddata(fielddata);
 			return this;
 		}
 		
@@ -2217,7 +2217,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields)
 		{
-			this.QueryString.FielddataFields(fielddata_fields);
+			this._QueryString.FielddataFields(fielddata_fields);
 			return this;
 		}
 		
@@ -2225,7 +2225,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
@@ -2233,7 +2233,7 @@ namespace Nest
 		///<summary>Return information about filter cache</summary>
 		public IndicesStatsDescriptor FilterCache(bool filter_cache = true)
 		{
-			this.QueryString.FilterCache(filter_cache);
+			this._QueryString.FilterCache(filter_cache);
 			return this;
 		}
 		
@@ -2241,7 +2241,7 @@ namespace Nest
 		///<summary>Return information about flush operations</summary>
 		public IndicesStatsDescriptor Flush(bool flush = true)
 		{
-			this.QueryString.Flush(flush);
+			this._QueryString.Flush(flush);
 			return this;
 		}
 		
@@ -2249,7 +2249,7 @@ namespace Nest
 		///<summary>Return information about get operations</summary>
 		public IndicesStatsDescriptor Get(bool get = true)
 		{
-			this.QueryString.Get(get);
+			this._QueryString.Get(get);
 			return this;
 		}
 		
@@ -2257,7 +2257,7 @@ namespace Nest
 		///<summary>A comma-separated list of search groups for `search` statistics</summary>
 		public IndicesStatsDescriptor Groups(bool groups = true)
 		{
-			this.QueryString.Groups(groups);
+			this._QueryString.Groups(groups);
 			return this;
 		}
 		
@@ -2265,7 +2265,7 @@ namespace Nest
 		///<summary>Return information about ID cache</summary>
 		public IndicesStatsDescriptor IdCache(bool id_cache = true)
 		{
-			this.QueryString.IdCache(id_cache);
+			this._QueryString.IdCache(id_cache);
 			return this;
 		}
 		
@@ -2273,7 +2273,7 @@ namespace Nest
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesStatsDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -2281,7 +2281,7 @@ namespace Nest
 		///<summary>Return information about indexing operations</summary>
 		public IndicesStatsDescriptor Indexing(bool indexing = true)
 		{
-			this.QueryString.Indexing(indexing);
+			this._QueryString.Indexing(indexing);
 			return this;
 		}
 		
@@ -2289,7 +2289,7 @@ namespace Nest
 		///<summary>Return information about merge operations</summary>
 		public IndicesStatsDescriptor Merge(bool merge = true)
 		{
-			this.QueryString.Merge(merge);
+			this._QueryString.Merge(merge);
 			return this;
 		}
 		
@@ -2297,7 +2297,7 @@ namespace Nest
 		///<summary>Return information about refresh operations</summary>
 		public IndicesStatsDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -2305,7 +2305,7 @@ namespace Nest
 		///<summary>Return information about search operations; use the `groups` parameter to include information for specific search groups</summary>
 		public IndicesStatsDescriptor Search(bool search = true)
 		{
-			this.QueryString.Search(search);
+			this._QueryString.Search(search);
 			return this;
 		}
 		
@@ -2313,7 +2313,7 @@ namespace Nest
 		///<summary>Return information about the size of the index</summary>
 		public IndicesStatsDescriptor Store(bool store = true)
 		{
-			this.QueryString.Store(store);
+			this._QueryString.Store(store);
 			return this;
 		}
 		
@@ -2321,7 +2321,7 @@ namespace Nest
 		///<summary>Return information about warmers</summary>
 		public IndicesStatsDescriptor Warmer(bool warmer = true)
 		{
-			this.QueryString.Warmer(warmer);
+			this._QueryString.Warmer(warmer);
 			return this;
 		}
 		
@@ -2336,13 +2336,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesStatusDescriptor
 	{
-		internal IndicesStatusQueryString QueryString { get; set; }
+		internal IndicesStatusQueryString _QueryString = new IndicesStatusQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesStatusDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -2350,7 +2350,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesStatusDescriptor OperationThreading(string operation_threading)
 		{
-			this.QueryString.OperationThreading(operation_threading);
+			this._QueryString.OperationThreading(operation_threading);
 			return this;
 		}
 		
@@ -2358,7 +2358,7 @@ namespace Nest
 		///<summary>Return information about shard recovery</summary>
 		public IndicesStatusDescriptor Recovery(bool recovery = true)
 		{
-			this.QueryString.Recovery(recovery);
+			this._QueryString.Recovery(recovery);
 			return this;
 		}
 		
@@ -2366,7 +2366,7 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public IndicesStatusDescriptor Snapshot(bool snapshot = true)
 		{
-			this.QueryString.Snapshot(snapshot);
+			this._QueryString.Snapshot(snapshot);
 			return this;
 		}
 		
@@ -2381,13 +2381,13 @@ namespace Nest
 	///</summary>
 	public partial class IndicesUpdateAliasesDescriptor
 	{
-		internal IndicesUpdateAliasesQueryString QueryString { get; set; }
+		internal IndicesUpdateAliasesQueryString _QueryString = new IndicesUpdateAliasesQueryString(); 
 
 
 		///<summary>Request timeout</summary>
 		public IndicesUpdateAliasesDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -2395,7 +2395,7 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesUpdateAliasesDescriptor MasterTimeout(string master_timeout)
 		{
-			this.QueryString.MasterTimeout(master_timeout);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -2408,47 +2408,47 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/validate/
 	///</pre>
 	///</summary>
-	public partial class ValidateQueryDescriptor
+	public partial class ValidateQueryDescriptor<T>
 	{
-		internal ValidateQueryQueryString QueryString { get; set; }
+		internal ValidateQueryQueryString _QueryString = new ValidateQueryQueryString(); 
 
 
 		///<summary>Return detailed information about the error</summary>
-		public ValidateQueryDescriptor Explain(bool explain = true)
+		public ValidateQueryDescriptor<T> Explain(bool explain = true)
 		{
-			this.QueryString.Explain(explain);
+			this._QueryString.Explain(explain);
 			return this;
 		}
 		
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public ValidateQueryDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public ValidateQueryDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
 
 		///<summary>TODO: ?</summary>
-		public ValidateQueryDescriptor OperationThreading(string operation_threading)
+		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading)
 		{
-			this.QueryString.OperationThreading(operation_threading);
+			this._QueryString.OperationThreading(operation_threading);
 			return this;
 		}
 		
 
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ValidateQueryDescriptor Source(string source)
+		public ValidateQueryDescriptor<T> Source(string source)
 		{
-			this.QueryString.Source(source);
+			this._QueryString.Source(source);
 			return this;
 		}
 		
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryDescriptor Q(string q)
+		public ValidateQueryDescriptor<T> Q(string q)
 		{
-			this.QueryString.Q(q);
+			this._QueryString.Q(q);
 			return this;
 		}
 		
@@ -2463,13 +2463,13 @@ namespace Nest
 	///</summary>
 	public partial class MgetDescriptor
 	{
-		internal MgetQueryString QueryString { get; set; }
+		internal MgetQueryString _QueryString = new MgetQueryString(); 
 
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public MgetDescriptor Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
@@ -2477,7 +2477,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MgetDescriptor Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
@@ -2485,7 +2485,7 @@ namespace Nest
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public MgetDescriptor Realtime(bool realtime = true)
 		{
-			this.QueryString.Realtime(realtime);
+			this._QueryString.Realtime(realtime);
 			return this;
 		}
 		
@@ -2493,7 +2493,7 @@ namespace Nest
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public MgetDescriptor Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
@@ -2501,7 +2501,7 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public MgetDescriptor Source(params string[] _source)
 		{
-			this.QueryString.Source(_source);
+			this._QueryString.Source(_source);
 			return this;
 		}
 		
@@ -2509,7 +2509,7 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MgetDescriptor SourceExclude(params string[] _source_exclude)
 		{
-			this.QueryString.SourceExclude(_source_exclude);
+			this._QueryString.SourceExclude(_source_exclude);
 			return this;
 		}
 		
@@ -2517,7 +2517,7 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MgetDescriptor SourceInclude(params string[] _source_include)
 		{
-			this.QueryString.SourceInclude(_source_include);
+			this._QueryString.SourceInclude(_source_include);
 			return this;
 		}
 		
@@ -2532,13 +2532,13 @@ namespace Nest
 	///</summary>
 	public partial class MltDescriptor
 	{
-		internal MltQueryString QueryString { get; set; }
+		internal MltQueryString _QueryString = new MltQueryString(); 
 
 
 		///<summary>The boost factor</summary>
 		public MltDescriptor BoostTerms(int boost_terms)
 		{
-			this.QueryString.BoostTerms(boost_terms);
+			this._QueryString.BoostTerms(boost_terms);
 			return this;
 		}
 		
@@ -2546,7 +2546,7 @@ namespace Nest
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
 		public MltDescriptor MaxDocFreq(int max_doc_freq)
 		{
-			this.QueryString.MaxDocFreq(max_doc_freq);
+			this._QueryString.MaxDocFreq(max_doc_freq);
 			return this;
 		}
 		
@@ -2554,7 +2554,7 @@ namespace Nest
 		///<summary>The maximum query terms to be included in the generated query</summary>
 		public MltDescriptor MaxQueryTerms(int max_query_terms)
 		{
-			this.QueryString.MaxQueryTerms(max_query_terms);
+			this._QueryString.MaxQueryTerms(max_query_terms);
 			return this;
 		}
 		
@@ -2562,7 +2562,7 @@ namespace Nest
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
 		public MltDescriptor MaxWordLen(int max_word_len)
 		{
-			this.QueryString.MaxWordLen(max_word_len);
+			this._QueryString.MaxWordLen(max_word_len);
 			return this;
 		}
 		
@@ -2570,7 +2570,7 @@ namespace Nest
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
 		public MltDescriptor MinDocFreq(int min_doc_freq)
 		{
-			this.QueryString.MinDocFreq(min_doc_freq);
+			this._QueryString.MinDocFreq(min_doc_freq);
 			return this;
 		}
 		
@@ -2578,7 +2578,7 @@ namespace Nest
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
 		public MltDescriptor MinTermFreq(int min_term_freq)
 		{
-			this.QueryString.MinTermFreq(min_term_freq);
+			this._QueryString.MinTermFreq(min_term_freq);
 			return this;
 		}
 		
@@ -2586,7 +2586,7 @@ namespace Nest
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
 		public MltDescriptor MinWordLen(int min_word_len)
 		{
-			this.QueryString.MinWordLen(min_word_len);
+			this._QueryString.MinWordLen(min_word_len);
 			return this;
 		}
 		
@@ -2594,7 +2594,7 @@ namespace Nest
 		///<summary>Specific fields to perform the query against</summary>
 		public MltDescriptor MltFields(params string[] mlt_fields)
 		{
-			this.QueryString.MltFields(mlt_fields);
+			this._QueryString.MltFields(mlt_fields);
 			return this;
 		}
 		
@@ -2602,7 +2602,7 @@ namespace Nest
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
 		public MltDescriptor PercentTermsToMatch(int percent_terms_to_match)
 		{
-			this.QueryString.PercentTermsToMatch(percent_terms_to_match);
+			this._QueryString.PercentTermsToMatch(percent_terms_to_match);
 			return this;
 		}
 		
@@ -2610,7 +2610,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public MltDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -2618,7 +2618,7 @@ namespace Nest
 		///<summary>The offset from which to return results</summary>
 		public MltDescriptor SearchFrom(int search_from)
 		{
-			this.QueryString.SearchFrom(search_from);
+			this._QueryString.SearchFrom(search_from);
 			return this;
 		}
 		
@@ -2626,7 +2626,7 @@ namespace Nest
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
 		public MltDescriptor SearchIndices(params string[] search_indices)
 		{
-			this.QueryString.SearchIndices(search_indices);
+			this._QueryString.SearchIndices(search_indices);
 			return this;
 		}
 		
@@ -2634,7 +2634,7 @@ namespace Nest
 		///<summary>The search query hint</summary>
 		public MltDescriptor SearchQueryHint(string search_query_hint)
 		{
-			this.QueryString.SearchQueryHint(search_query_hint);
+			this._QueryString.SearchQueryHint(search_query_hint);
 			return this;
 		}
 		
@@ -2642,7 +2642,7 @@ namespace Nest
 		///<summary>A scroll search request definition</summary>
 		public MltDescriptor SearchScroll(string search_scroll)
 		{
-			this.QueryString.SearchScroll(search_scroll);
+			this._QueryString.SearchScroll(search_scroll);
 			return this;
 		}
 		
@@ -2650,7 +2650,7 @@ namespace Nest
 		///<summary>The number of documents to return (default: 10)</summary>
 		public MltDescriptor SearchSize(int search_size)
 		{
-			this.QueryString.SearchSize(search_size);
+			this._QueryString.SearchSize(search_size);
 			return this;
 		}
 		
@@ -2658,7 +2658,7 @@ namespace Nest
 		///<summary>A specific search request definition (instead of using the request body)</summary>
 		public MltDescriptor SearchSource(string search_source)
 		{
-			this.QueryString.SearchSource(search_source);
+			this._QueryString.SearchSource(search_source);
 			return this;
 		}
 		
@@ -2666,7 +2666,7 @@ namespace Nest
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
 		public MltDescriptor SearchType(string search_type)
 		{
-			this.QueryString.SearchType(search_type);
+			this._QueryString.SearchType(search_type);
 			return this;
 		}
 		
@@ -2674,7 +2674,7 @@ namespace Nest
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
 		public MltDescriptor SearchTypes(params string[] search_types)
 		{
-			this.QueryString.SearchTypes(search_types);
+			this._QueryString.SearchTypes(search_types);
 			return this;
 		}
 		
@@ -2682,7 +2682,7 @@ namespace Nest
 		///<summary>A list of stop words to be ignored</summary>
 		public MltDescriptor StopWords(params string[] stop_words)
 		{
-			this.QueryString.StopWords(stop_words);
+			this._QueryString.StopWords(stop_words);
 			return this;
 		}
 		
@@ -2697,13 +2697,13 @@ namespace Nest
 	///</summary>
 	public partial class MsearchDescriptor
 	{
-		internal MsearchQueryString QueryString { get; set; }
+		internal MsearchQueryString _QueryString = new MsearchQueryString(); 
 
 
 		///<summary>Search operation type</summary>
 		public MsearchDescriptor SearchType(SearchTypeOptions search_type)
 		{
-			this.QueryString.SearchType(search_type);
+			this._QueryString.SearchType(search_type);
 			return this;
 		}
 		
@@ -2716,15 +2716,15 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/percolate/
 	///</pre>
 	///</summary>
-	public partial class PercolateDescriptor
+	public partial class PercolateDescriptor<T>
 	{
-		internal PercolateQueryString QueryString { get; set; }
+		internal PercolateQueryString _QueryString = new PercolateQueryString(); 
 
 
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public PercolateDescriptor PreferLocal(bool prefer_local = true)
+		public PercolateDescriptor<T> PreferLocal(bool prefer_local = true)
 		{
-			this.QueryString.PreferLocal(prefer_local);
+			this._QueryString.PreferLocal(prefer_local);
 			return this;
 		}
 		
@@ -2739,13 +2739,13 @@ namespace Nest
 	///</summary>
 	public partial class ScrollDescriptor
 	{
-		internal ScrollQueryString QueryString { get; set; }
+		internal ScrollQueryString _QueryString = new ScrollQueryString(); 
 
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public ScrollDescriptor Scroll(string scroll)
 		{
-			this.QueryString.Scroll(scroll);
+			this._QueryString.Scroll(scroll);
 			return this;
 		}
 		
@@ -2753,7 +2753,7 @@ namespace Nest
 		///<summary>The scroll ID for scrolled search</summary>
 		public ScrollDescriptor ScrollId(string scroll_id)
 		{
-			this.QueryString.ScrollId(scroll_id);
+			this._QueryString.ScrollId(scroll_id);
 			return this;
 		}
 		
@@ -2768,13 +2768,13 @@ namespace Nest
 	///</summary>
 	public partial class SearchDescriptor
 	{
-		internal SearchQueryString QueryString { get; set; }
+		internal SearchQueryString _QueryString = new SearchQueryString(); 
 
 
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchDescriptor Analyzer(string analyzer)
 		{
-			this.QueryString.Analyzer(analyzer);
+			this._QueryString.Analyzer(analyzer);
 			return this;
 		}
 		
@@ -2782,7 +2782,7 @@ namespace Nest
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public SearchDescriptor AnalyzeWildcard(bool analyze_wildcard = true)
 		{
-			this.QueryString.AnalyzeWildcard(analyze_wildcard);
+			this._QueryString.AnalyzeWildcard(analyze_wildcard);
 			return this;
 		}
 		
@@ -2790,7 +2790,7 @@ namespace Nest
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public SearchDescriptor DefaultOperator(DefaultOperatorOptions default_operator)
 		{
-			this.QueryString.DefaultOperator(default_operator);
+			this._QueryString.DefaultOperator(default_operator);
 			return this;
 		}
 		
@@ -2798,7 +2798,7 @@ namespace Nest
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchDescriptor Df(string df)
 		{
-			this.QueryString.Df(df);
+			this._QueryString.Df(df);
 			return this;
 		}
 		
@@ -2806,7 +2806,7 @@ namespace Nest
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public SearchDescriptor Explain(bool explain = true)
 		{
-			this.QueryString.Explain(explain);
+			this._QueryString.Explain(explain);
 			return this;
 		}
 		
@@ -2814,7 +2814,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return as part of a hit</summary>
 		public SearchDescriptor Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
@@ -2822,7 +2822,7 @@ namespace Nest
 		///<summary>Starting offset (default: 0)</summary>
 		public SearchDescriptor From(int from)
 		{
-			this.QueryString.From(from);
+			this._QueryString.From(from);
 			return this;
 		}
 		
@@ -2830,7 +2830,7 @@ namespace Nest
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public SearchDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -2838,7 +2838,7 @@ namespace Nest
 		///<summary>Comma-separated list of index boosts</summary>
 		public SearchDescriptor IndicesBoost(params string[] indices_boost)
 		{
-			this.QueryString.IndicesBoost(indices_boost);
+			this._QueryString.IndicesBoost(indices_boost);
 			return this;
 		}
 		
@@ -2846,7 +2846,7 @@ namespace Nest
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchDescriptor Lenient(bool lenient = true)
 		{
-			this.QueryString.Lenient(lenient);
+			this._QueryString.Lenient(lenient);
 			return this;
 		}
 		
@@ -2854,7 +2854,7 @@ namespace Nest
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public SearchDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
-			this.QueryString.LowercaseExpandedTerms(lowercase_expanded_terms);
+			this._QueryString.LowercaseExpandedTerms(lowercase_expanded_terms);
 			return this;
 		}
 		
@@ -2862,7 +2862,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchDescriptor Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
@@ -2870,7 +2870,7 @@ namespace Nest
 		///<summary>Query in the Lucene query string syntax</summary>
 		public SearchDescriptor Q(string q)
 		{
-			this.QueryString.Q(q);
+			this._QueryString.Q(q);
 			return this;
 		}
 		
@@ -2878,7 +2878,7 @@ namespace Nest
 		///<summary>A comma-separated list of specific routing values</summary>
 		public SearchDescriptor Routing(params string[] routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -2886,7 +2886,7 @@ namespace Nest
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchDescriptor Scroll(string scroll)
 		{
-			this.QueryString.Scroll(scroll);
+			this._QueryString.Scroll(scroll);
 			return this;
 		}
 		
@@ -2894,7 +2894,7 @@ namespace Nest
 		///<summary>Search operation type</summary>
 		public SearchDescriptor SearchType(SearchTypeOptions search_type)
 		{
-			this.QueryString.SearchType(search_type);
+			this._QueryString.SearchType(search_type);
 			return this;
 		}
 		
@@ -2902,7 +2902,7 @@ namespace Nest
 		///<summary>Number of hits to return (default: 10)</summary>
 		public SearchDescriptor Size(int size)
 		{
-			this.QueryString.Size(size);
+			this._QueryString.Size(size);
 			return this;
 		}
 		
@@ -2910,7 +2910,7 @@ namespace Nest
 		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
 		public SearchDescriptor Sort(params string[] sort)
 		{
-			this.QueryString.Sort(sort);
+			this._QueryString.Sort(sort);
 			return this;
 		}
 		
@@ -2918,7 +2918,7 @@ namespace Nest
 		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
 		public SearchDescriptor Source(string source)
 		{
-			this.QueryString.Source(source);
+			this._QueryString.Source(source);
 			return this;
 		}
 		
@@ -2926,7 +2926,7 @@ namespace Nest
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SearchDescriptor Source(params string[] _source)
 		{
-			this.QueryString.Source(_source);
+			this._QueryString.Source(_source);
 			return this;
 		}
 		
@@ -2934,7 +2934,7 @@ namespace Nest
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SearchDescriptor SourceExclude(params string[] _source_exclude)
 		{
-			this.QueryString.SourceExclude(_source_exclude);
+			this._QueryString.SourceExclude(_source_exclude);
 			return this;
 		}
 		
@@ -2942,7 +2942,7 @@ namespace Nest
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SearchDescriptor SourceInclude(params string[] _source_include)
 		{
-			this.QueryString.SourceInclude(_source_include);
+			this._QueryString.SourceInclude(_source_include);
 			return this;
 		}
 		
@@ -2950,7 +2950,7 @@ namespace Nest
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public SearchDescriptor Stats(params string[] stats)
 		{
-			this.QueryString.Stats(stats);
+			this._QueryString.Stats(stats);
 			return this;
 		}
 		
@@ -2958,7 +2958,7 @@ namespace Nest
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor SuggestField(string suggest_field)
 		{
-			this.QueryString.SuggestField(suggest_field);
+			this._QueryString.SuggestField(suggest_field);
 			return this;
 		}
 		
@@ -2966,7 +2966,7 @@ namespace Nest
 		///<summary>Specify suggest mode</summary>
 		public SearchDescriptor SuggestMode(SuggestModeOptions suggest_mode)
 		{
-			this.QueryString.SuggestMode(suggest_mode);
+			this._QueryString.SuggestMode(suggest_mode);
 			return this;
 		}
 		
@@ -2974,7 +2974,7 @@ namespace Nest
 		///<summary>How many suggestions to return in response</summary>
 		public SearchDescriptor SuggestSize(int suggest_size)
 		{
-			this.QueryString.SuggestSize(suggest_size);
+			this._QueryString.SuggestSize(suggest_size);
 			return this;
 		}
 		
@@ -2982,7 +2982,7 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public SearchDescriptor SuggestText(string suggest_text)
 		{
-			this.QueryString.SuggestText(suggest_text);
+			this._QueryString.SuggestText(suggest_text);
 			return this;
 		}
 		
@@ -2990,7 +2990,7 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public SearchDescriptor Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
@@ -2998,7 +2998,7 @@ namespace Nest
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public SearchDescriptor Version(bool version = true)
 		{
-			this.QueryString.Version(version);
+			this._QueryString.Version(version);
 			return this;
 		}
 		
@@ -3013,13 +3013,13 @@ namespace Nest
 	///</summary>
 	public partial class SuggestDescriptor
 	{
-		internal SuggestQueryString QueryString { get; set; }
+		internal SuggestQueryString _QueryString = new SuggestQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public SuggestDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
 		}
 		
@@ -3027,7 +3027,7 @@ namespace Nest
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SuggestDescriptor Preference(string preference)
 		{
-			this.QueryString.Preference(preference);
+			this._QueryString.Preference(preference);
 			return this;
 		}
 		
@@ -3035,7 +3035,7 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public SuggestDescriptor Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -3043,7 +3043,7 @@ namespace Nest
 		///<summary>The URL-encoded request definition (instead of using request body)</summary>
 		public SuggestDescriptor Source(string source)
 		{
-			this.QueryString.Source(source);
+			this._QueryString.Source(source);
 			return this;
 		}
 		
@@ -3056,127 +3056,127 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/update/
 	///</pre>
 	///</summary>
-	public partial class UpdateDescriptor
+	public partial class UpdateDescriptor<T,K>
 	{
-		internal UpdateQueryString QueryString { get; set; }
+		internal UpdateQueryString _QueryString = new UpdateQueryString(); 
 
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor Consistency(ConsistencyOptions consistency)
+		public UpdateDescriptor<T,K> Consistency(ConsistencyOptions consistency)
 		{
-			this.QueryString.Consistency(consistency);
+			this._QueryString.Consistency(consistency);
 			return this;
 		}
 		
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor Fields(params string[] fields)
+		public UpdateDescriptor<T,K> Fields(params string[] fields)
 		{
-			this.QueryString.Fields(fields);
+			this._QueryString.Fields(fields);
 			return this;
 		}
 		
 
 		///<summary>The script language (default: mvel)</summary>
-		public UpdateDescriptor Lang(string lang)
+		public UpdateDescriptor<T,K> Lang(string lang)
 		{
-			this.QueryString.Lang(lang);
+			this._QueryString.Lang(lang);
 			return this;
 		}
 		
 
 		///<summary>ID of the parent document</summary>
-		public UpdateDescriptor Parent(string parent)
+		public UpdateDescriptor<T,K> Parent(string parent)
 		{
-			this.QueryString.Parent(parent);
+			this._QueryString.Parent(parent);
 			return this;
 		}
 		
 
 		///<summary>Perform percolation during the operation; use specific registered query name, attribute, or wildcard</summary>
-		public UpdateDescriptor Percolate(string percolate)
+		public UpdateDescriptor<T,K> Percolate(string percolate)
 		{
-			this.QueryString.Percolate(percolate);
+			this._QueryString.Percolate(percolate);
 			return this;
 		}
 		
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor Refresh(bool refresh = true)
+		public UpdateDescriptor<T,K> Refresh(bool refresh = true)
 		{
-			this.QueryString.Refresh(refresh);
+			this._QueryString.Refresh(refresh);
 			return this;
 		}
 		
 
 		///<summary>Specific replication type</summary>
-		public UpdateDescriptor Replication(ReplicationOptions replication)
+		public UpdateDescriptor<T,K> Replication(ReplicationOptions replication)
 		{
-			this.QueryString.Replication(replication);
+			this._QueryString.Replication(replication);
 			return this;
 		}
 		
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor RetryOnConflict(int retry_on_conflict)
+		public UpdateDescriptor<T,K> RetryOnConflict(int retry_on_conflict)
 		{
-			this.QueryString.RetryOnConflict(retry_on_conflict);
+			this._QueryString.RetryOnConflict(retry_on_conflict);
 			return this;
 		}
 		
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor Routing(string routing)
+		public UpdateDescriptor<T,K> Routing(string routing)
 		{
-			this.QueryString.Routing(routing);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor Script(string script)
+		public UpdateDescriptor<T,K> ScriptQueryString(string script)
 		{
-			this.QueryString.Script(script);
+			this._QueryString.Script(script);
 			return this;
 		}
 		
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor Timeout(string timeout)
+		public UpdateDescriptor<T,K> Timeout(string timeout)
 		{
-			this.QueryString.Timeout(timeout);
+			this._QueryString.Timeout(timeout);
 			return this;
 		}
 		
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor Timestamp(string timestamp)
+		public UpdateDescriptor<T,K> Timestamp(string timestamp)
 		{
-			this.QueryString.Timestamp(timestamp);
+			this._QueryString.Timestamp(timestamp);
 			return this;
 		}
 		
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor Ttl(string ttl)
+		public UpdateDescriptor<T,K> Ttl(string ttl)
 		{
-			this.QueryString.Ttl(ttl);
+			this._QueryString.Ttl(ttl);
 			return this;
 		}
 		
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor Version(int version)
+		public UpdateDescriptor<T,K> Version(int version)
 		{
-			this.QueryString.Version(version);
+			this._QueryString.Version(version);
 			return this;
 		}
 		
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor VersionType(VersionTypeOptions version_type)
+		public UpdateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
 		{
-			this.QueryString.VersionType(version_type);
+			this._QueryString.VersionType(version_type);
 			return this;
 		}
 		

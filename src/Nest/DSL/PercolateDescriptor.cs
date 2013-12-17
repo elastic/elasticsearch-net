@@ -10,7 +10,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class PercolateDescriptor<T> where T : class
+	public partial class PercolateDescriptor<T> where T : class
 	{
 		protected readonly TypeNameResolver typeNameResolver;
 

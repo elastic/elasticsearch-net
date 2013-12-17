@@ -11,7 +11,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public partial class BulkDescriptor : QueryPathDescriptor
+	public partial class BulkDescriptor : QueryPathDescriptor<BulkQueryString>
 	{
 		internal string _FixedIndex { get; set; }
 		internal string _FixedType { get; set; }

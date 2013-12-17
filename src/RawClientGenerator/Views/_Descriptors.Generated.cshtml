@@ -14,16 +14,16 @@ namespace Nest
 {
 	@foreach (RawClientGenerator.CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
 	{
-		var type = method.QueryStringParamName.Replace("QueryString", "Descriptor"); 
+		var type = method.DescriptorType + method.DescriptorTypeGeneric;
 	<text>
 	///<summary>descriptor for @method.FullName
 	///<pre>
 	///@method.Documentation
 	///</pre>
 	///</summary>
-	public partial class @type
+	public partial class @Raw(type)
 	{
-		internal @method.QueryStringParamName QueryString { get; set; }
+		internal @method.QueryStringParamName _QueryString = new @(method.QueryStringParamName)(); 
 </text>
 	  foreach (KeyValuePair<string, RawClientGenerator.ApiQueryParameters> kv 
 				in method.Url.Params)
@@ -31,12 +31,12 @@ namespace Nest
 			var t = @kv.Value.CsharpType(kv.Key);
 			var tSuffix = (t == "bool") ? " = true" : "";
 			var m = kv.Key.ToPascalCase();
-			var mm = (m != "Type" && m != "Index") ? m : m + "QueryString";
+			var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
 		<text>
 		///<summary>@kv.Value.Description</summary>
-		public @type @(mm)(@t @kv.Key@tSuffix)
+		public @Raw(type) @(mm)(@t @kv.Key@tSuffix)
 		{
-			this.QueryString.@(m)(@kv.Key);
+			this._QueryString.@(m)(@kv.Key);
 			return this;
 		}
 		</text>

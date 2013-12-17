@@ -98,6 +98,7 @@
     <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="Core\Update\UpdateRequestTests.cs" />
     <Compile Include="Core\Validate\ValidateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />

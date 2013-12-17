@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -10,54 +11,35 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class ValidateQueryDescriptor<T> : QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T>
+	public interface IActAsQuery
+	{
+		BaseQuery _Query { get; set; }
+	}
+
+	[JsonConverter(typeof(ActAsQueryConverter))]
+	public partial class ValidateQueryDescriptor<T> 
+		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryQueryString>,
+			IActAsQuery
 		where T : class
 	{
-		
-		internal bool? _Explain { get; set; }
-		
-		internal string _QueryStringQuery { get; set; }
-		
-		internal string _Source { get; set; }
+		BaseQuery IActAsQuery._Query { get; set; }
 
-		internal string _OperationThreading { get; set; }
-	
-		internal IgnoreIndicesOptions? _IgnoreIndices { get; set; }
-
-		///<summary>Query in the Lucene query string syntax will use a GET and ?q= instead of POST</summary>
-		public ValidateQueryDescriptor<T> UseSimpleQueryString(string query)
+		public ValidateQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
-			this._QueryStringQuery = query;
+			((IActAsQuery)this)._Query = querySelector(new QueryDescriptor<T>());
 			return this;
 		}
 
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ValidateQueryDescriptor<T> Source(string source)
+		internal new ElasticSearchPathInfo<ValidateQueryQueryString> ToPathInfo(IConnectionSettings settings)
 		{
-			this._Source = source;
-			return this;
+			var pathInfo = base.ToPathInfo<ValidateQueryQueryString>(settings);
+			pathInfo.QueryString = this._QueryString;
+			var qs = this._QueryString;
+			pathInfo.HttpMethod = (!qs._source.IsNullOrEmpty() || !qs._q.IsNullOrEmpty())
+				? PathInfoHttpMethod.GET
+				: PathInfoHttpMethod.POST;
+				
+			return pathInfo;
 		}
-
-		///<summary>TODO: ?</summary>
-		public ValidateQueryDescriptor<T> OperationThreading(string operationThreading)
-		{
-			this._OperationThreading = operationThreading;
-			return this;
-		}
-
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public ValidateQueryDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignoreIndices)
-		{
-			this._IgnoreIndices = ignoreIndices;
-			return this;
-		}
-
-		///<summary>Return detailed information about the error</summary>
-		public ValidateQueryDescriptor<T> Explain()
-		{
-			this._Explain = true;
-			return this;
-		}
-
 	}
 }

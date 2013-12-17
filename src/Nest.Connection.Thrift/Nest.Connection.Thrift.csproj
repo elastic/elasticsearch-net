@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>False</Optimize>
     <DocumentationFile>bin\Debug\Nest.Connection.Thrift.XML</DocumentationFile>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>

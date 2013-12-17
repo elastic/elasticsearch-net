@@ -112,8 +112,8 @@ namespace Nest
 		Task<IDeleteResponse> DeleteByIdAsync<T>(string id) where T : class;
 		Task<IDeleteResponse> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class;
 
-		IDeleteResponse DeleteByQuery<T>(Func<RoutingQueryPathDescriptor<T>, BaseQuery> query, DeleteByQueryParameters parameters = null) where T : class;
-		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<RoutingQueryPathDescriptor<T>, BaseQuery> query, DeleteByQueryParameters parameters = null) where T : class;
+		IDeleteResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
+		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
 
 		IIndicesResponse DeleteIndex(string index);
 		IIndicesResponse DeleteIndex<T>() where T : class;
@@ -316,15 +316,21 @@ namespace Nest
 		IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices);
 		IUnregisterPercolateResponse UnregisterPercolator(string index, string name);
 		IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class;
-		IUpdateResponse Update<T>(Action<UpdateDescriptor<T, T>> updateSelector) where T : class;
-		IUpdateResponse Update<T, K>(Action<UpdateDescriptor<T, K>> updateSelector) 
+		
+		IUpdateResponse Update<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) where T : class;
+		IUpdateResponse Update<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector) 
 			where T : class
 			where K : class;
+		Task<IUpdateResponse> UpdateAsync<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) where T : class;
+		Task<IUpdateResponse> UpdateAsync<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector) 
+			where T : class
+			where K : class;
+		
 		ISettingsOperationResponse UpdateSettings(IndexSettings settings);
 		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
 
-		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-		//Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryPathDescriptor<T>, BaseQuery> querySelector) where T : class;
+		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) where T : class;
+		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) where T : class;
 
 		IRootInfoResponse RootNodeInfo();
 		Task<IRootInfoResponse> RootNodeInfoAsync();

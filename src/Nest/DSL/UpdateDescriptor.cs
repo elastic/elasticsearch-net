@@ -8,16 +8,10 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class UpdateDescriptor<T, K> 
+	public partial class UpdateDescriptor<T,K> : DocumentPathDescriptorBase<UpdateDescriptor<T, K>, T, UpdateQueryString> 
 		where T : class 
 		where K : class
 	{
-		private readonly TypeNameResolver typeNameResolver;
-
-		public UpdateDescriptor()
-		{
-			this.typeNameResolver = new TypeNameResolver();
-		}
 
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
@@ -34,19 +28,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "doc")]
 		internal K _Document { get; set; }
-
-		internal int? _RetriesOnConflict { get; set; }
-		internal bool? _Refresh { get; set; }
-		internal string _Percolate { get; set; }
-		internal Consistency? _Consistency { get; set; }
-		internal Nest.Replication? _Replication { get; set; }
-		internal int? _Timeout { get; set; }
-		internal string _Parent { get; set; }
-		internal string _Routing { get; set; }
-		internal string _Index { get; set; }
-		internal TypeNameMarker _Type { get; set; }
-		internal string _Id { get; set; }
-		internal T _Object { get; set; }
 
 		public UpdateDescriptor<T, K> Script(string script)
 		{
@@ -90,82 +71,14 @@ namespace Nest
 			this._DocAsUpsert = docAsUpsert;
 			return this;
 		}
-		
 
-		public UpdateDescriptor<T, K> Index(string index)
+		internal new ElasticSearchPathInfo<UpdateQueryString> ToPathInfo(IConnectionSettings settings)
 		{
-			index.ThrowIfNullOrEmpty("indices");
-			this._Index = index;
-			return this;
+			var pathInfo = base.ToPathInfo<UpdateQueryString>(settings);
+			pathInfo.QueryString = this._QueryString;
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			
+			return pathInfo;
 		}
-		public UpdateDescriptor<T, K> Type(string type)
-		{
-			type.ThrowIfNullOrEmpty("type");
-			this._Type = type;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Type(Type type)
-		{
-			type.ThrowIfNull("type");
-			this._Type = type;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Routing(string routing)
-		{
-			routing.ThrowIfNullOrEmpty("routing");
-			this._Routing = routing;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Parent(string parent)
-		{
-			parent.ThrowIfNullOrEmpty("parent");
-			this._Parent = parent;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Timeout(int timeout)
-		{
-			this._Timeout = timeout;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Replication(Replication replication)
-		{
-			this._Replication = replication;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Concistency(Consistency consistency)
-		{
-			this._Consistency = consistency;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Percolate(string percolation)
-		{
-			this._Percolate = percolation;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Refresh(bool refresh = true)
-		{
-			this._Refresh = refresh;
-			return this;
-		}
-		public UpdateDescriptor<T, K> RetriesOnConflict(int retriesOnConflict)
-		{
-			this._RetriesOnConflict = retriesOnConflict;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Id(int id)
-		{
-			return this.Id(id.ToString());
-		}
-		public UpdateDescriptor<T, K> Id(string id)
-		{
-			this._Id = id;
-			return this;
-		}
-		public UpdateDescriptor<T, K> Object(T @object)
-		{
-			this._Object = @object;
-			return this;
-		}
-
 	}
 }

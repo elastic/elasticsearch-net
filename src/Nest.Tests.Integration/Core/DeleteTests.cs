@@ -226,8 +226,10 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticSearchProject>(
-				q => q.Term(f => f.Name, "elasticsearch.pm")
+			this._client.DeleteByQuery<ElasticSearchProject>(d => d
+				.Query(q=>q
+					.Term(f => f.Name, "elasticsearch.pm")
+				)
 			);
 
 			result = this._client.Search<ElasticSearchProject>(s => s
@@ -259,7 +261,11 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticSearchProject>(q => q.Term(f => f.Name, "elasticsearch.pm"));
+			this._client.DeleteByQuery<ElasticSearchProject>(d => d
+				.Query(q=>q
+					.Term(f => f.Name, "elasticsearch.pm")
+				)
+			);
 
 			result = this._client.Search<ElasticSearchProject>(s => s
 				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
@@ -285,10 +291,16 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticSearchProject>(q => q
-					  .Indices(new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" })
-					  .Term(f => f.Name, "elasticsearch.pm")
-				  );
+			this._client.DeleteByQuery<ElasticSearchProject>(d => d
+				.Indices(new[]
+				{
+					ElasticsearchConfiguration.DefaultIndex, 
+					ElasticsearchConfiguration.DefaultIndex + "_clone"
+				})
+				.Query(q=>q 
+					.Term(f => f.Name, "elasticsearch.pm")
+				)
+			);
 
 			result = this._client.Search<ElasticSearchProject>(s => s
 				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))

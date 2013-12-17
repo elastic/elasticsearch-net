@@ -12,7 +12,9 @@ namespace Nest.Tests.Unit.Core.Validate
 		public void Inferred()
 		{
 			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
-				.MatchAll()	
+				.Query(q=>q
+					.MatchAll()	
+				)
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
@@ -26,7 +28,9 @@ namespace Nest.Tests.Unit.Core.Validate
 		{
 			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
 				.AllIndices()
-				.MatchAll()
+				.Query(q=>q
+					.MatchAll()
+				)
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
@@ -36,12 +40,30 @@ namespace Nest.Tests.Unit.Core.Validate
 		}
 
 		[Test]
+		public void CustomIndex()
+		{
+			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+				.Index("myindex")
+				.AllTypes()
+				.Query(q=>q
+					.MatchAll()
+				)
+			);
+			Assert.NotNull(result, "PutWarmer result should not be null");
+			var status = result.ConnectionStatus;
+			var uri = new Uri(status.RequestUrl);
+			Assert.AreEqual("/myindex/_validate/query", uri.AbsolutePath);
+			StringAssert.AreEqualIgnoringCase("POST", status.RequestMethod);
+		}
+		[Test]
 		public void CustomIndexAndType()
 		{
 			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
 				.Index("myindex")
 				.Type("mytype")
-				.MatchAll()
+				.Query(q=>q
+					.MatchAll()
+				)
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;

@@ -42,6 +42,7 @@
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Debug\Nest.XML</DocumentationFile>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -69,7 +70,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\BaseSimpleGetDescriptor.cs" />
+    <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
+    <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
+    <Compile Include="DSL\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
+    <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
@@ -138,6 +144,7 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="IRawElasticClient.Generated.cs" />
+    <Compile Include="Resolvers\Converters\ActAsQueryConverter.cs" />
     <Compile Include="Resolvers\Converters\AnalysisSettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\AnalyzerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\CharFilterCollectionConverter.cs" />
@@ -302,7 +309,6 @@
     <Compile Include="ElasticClient-Scroll.cs" />
     <Compile Include="Domain\Hit\ValidationExplanation.cs" />
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
-    <Compile Include="DSL\RoutingQueryPathDescriptor.cs" />
     <Compile Include="DSL\ValidateQueryDescriptor.cs" />
     <Compile Include="ElasticClient-Validate.cs" />
     <Compile Include="DSL\Filter.cs" />
@@ -319,7 +325,7 @@
     <Compile Include="Domain\Facets\QueryFacet.cs" />
     <Compile Include="DSL\HighlightDescriptor.cs" />
     <Compile Include="DSL\HighlightFieldDescriptor.cs" />
-    <Compile Include="DSL\QueryPathDescriptor.cs" />
+    <Compile Include="DSL\Paths\QueryPathDescriptor.cs" />
     <Compile Include="DSL\Facets\BaseFacetDescriptor.cs" />
     <Compile Include="DSL\FilterDescriptor.cs" />
     <Compile Include="DSL\Filter\NestedFilterDescriptor.cs" />

@@ -12,9 +12,9 @@ namespace Nest
 	  /// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 	  /// <param name="parameters">Control routing/consistency and replication</param>
 	  /// <returns>IDeleteResponse, check .IsValid to validate success</returns>
-	  public IDeleteResponse DeleteByQuery<T>(Func<RoutingQueryPathDescriptor<T>, BaseQuery> query, DeleteByQueryParameters parameters = null) where T : class
+	  public IDeleteResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 	  {
-		  var descriptor = new RoutingQueryPathDescriptor<T>();
+		  var descriptor = new DeleteByQueryDescriptor<T>();
 		  var bq = query(descriptor);
 		  var stringQuery = this.Serialize(bq);
 
@@ -33,9 +33,9 @@ namespace Nest
 	  /// <param name="query">RoutingQueryPathDescriptor also allows you to control which indices and types are affected</param>
 	  /// <param name="parameters">Control routing/consistency and replication</param>
 	  /// <returns>IDeleteResponse, check .IsValid to validate success</returns>
-	  public Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<RoutingQueryPathDescriptor<T>, BaseQuery> query, DeleteByQueryParameters parameters = null) where T : class
+	  public Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class
 	  {
-		  var descriptor = new RoutingQueryPathDescriptor<T>();
+		  var descriptor = new DeleteByQueryDescriptor<T>();
 		  var bq = query(descriptor);
 		  var stringQuery = this.Serialize(bq);
 

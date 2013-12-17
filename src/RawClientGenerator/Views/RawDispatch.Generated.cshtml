@@ -45,7 +45,7 @@ namespace Nest
 				{
 					var method = dispatch.CsharpMethod;
 					var name = method.FullName + ((gen.Async) ? "Async" : "");
-					<text>//@method.Path</text>
+					<text>//@method.HttpMethod @method.Path</text>
 					if (i == 0 && !dispatch.IfChecks.Any())
 					{
 					<text>return this.Raw.@(name)(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
@@ -70,7 +70,7 @@ namespace Nest
 				}</text>
 			}
 			}
-			return null;
+			throw new DispatchException("Could not dispatch IElasticClient.@(endpoint.CsharpMethodName)() into any of the following paths: \r\n - @string.Join("\\r\\n - ", endpoint.Url.Paths)");
 		}
 		</text>
 	} 

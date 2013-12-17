@@ -18,38 +18,58 @@ namespace Nest
 	///</summary>
 	public class BulkQueryString : FluentQueryString<BulkQueryString> 
 	{
+		
+		internal ConsistencyOptions _consistency { get; set; }
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public BulkQueryString Consistency(ConsistencyOptions consistency)
 		{
-			this.Add("consistency", this.CreateString(consistency));
+			var v = this.CreateString(consistency);
+			this._consistency = consistency;
+			this.Add("consistency", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the index after performing the operation</summary>
 		public BulkQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal ReplicationOptions _replication { get; set; }
 		///<summary>Explicitely set the replication type</summary>
 		public BulkQueryString Replication(ReplicationOptions replication)
 		{
-			this.Add("replication", this.CreateString(replication));
+			var v = this.CreateString(replication);
+			this._replication = replication;
+			this.Add("replication", v);
 			return this;
 		}
 
+		
+		internal string _type { get; set; }
 		///<summary>Default document type for items which don&#39;t provide one</summary>
 		public BulkQueryString Type(string type)
 		{
-			this.Add("type", this.CreateString(type));
+			var v = this.CreateString(type);
+			this._type = type;
+			this.Add("type", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public BulkQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
@@ -63,59 +83,91 @@ namespace Nest
 	///</summary>
 	public class ClusterHealthQueryString : FluentQueryString<ClusterHealthQueryString> 
 	{
+		
+		internal LevelOptions _level { get; set; }
 		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthQueryString Level(LevelOptions level)
 		{
-			this.Add("level", this.CreateString(level));
+			var v = this.CreateString(level);
+			this._level = level;
+			this.Add("level", v);
 			return this;
 		}
 
+		
+		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterHealthQueryString Local(bool local)
 		{
-			this.Add("local", this.CreateString(local));
+			var v = this.CreateString(local);
+			this._local = local;
+			this.Add("local", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public ClusterHealthQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public ClusterHealthQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal int _wait_for_active_shards { get; set; }
 		///<summary>Wait until the specified number of shards is active</summary>
 		public ClusterHealthQueryString WaitForActiveShards(int wait_for_active_shards)
 		{
-			this.Add("wait_for_active_shards", this.CreateString(wait_for_active_shards));
+			var v = this.CreateString(wait_for_active_shards);
+			this._wait_for_active_shards = wait_for_active_shards;
+			this.Add("wait_for_active_shards", v);
 			return this;
 		}
 
+		
+		internal string _wait_for_nodes { get; set; }
 		///<summary>Wait until the specified number of nodes is available</summary>
 		public ClusterHealthQueryString WaitForNodes(string wait_for_nodes)
 		{
-			this.Add("wait_for_nodes", this.CreateString(wait_for_nodes));
+			var v = this.CreateString(wait_for_nodes);
+			this._wait_for_nodes = wait_for_nodes;
+			this.Add("wait_for_nodes", v);
 			return this;
 		}
 
+		
+		internal int _wait_for_relocating_shards { get; set; }
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
 		public ClusterHealthQueryString WaitForRelocatingShards(int wait_for_relocating_shards)
 		{
-			this.Add("wait_for_relocating_shards", this.CreateString(wait_for_relocating_shards));
+			var v = this.CreateString(wait_for_relocating_shards);
+			this._wait_for_relocating_shards = wait_for_relocating_shards;
+			this.Add("wait_for_relocating_shards", v);
 			return this;
 		}
 
+		
+		internal WaitForStatusOptions _wait_for_status { get; set; }
 		///<summary>Wait until cluster is in a specific state</summary>
 		public ClusterHealthQueryString WaitForStatus(WaitForStatusOptions wait_for_status)
 		{
-			this.Add("wait_for_status", this.CreateString(wait_for_status));
+			var v = this.CreateString(wait_for_status);
+			this._wait_for_status = wait_for_status;
+			this.Add("wait_for_status", v);
 			return this;
 		}
 
@@ -129,31 +181,47 @@ namespace Nest
 	///</summary>
 	public class ClusterNodeHotThreadsQueryString : FluentQueryString<ClusterNodeHotThreadsQueryString> 
 	{
+		
+		internal string _interval { get; set; }
 		///<summary>The interval for the second sampling of threads</summary>
 		public ClusterNodeHotThreadsQueryString Interval(string interval)
 		{
-			this.Add("interval", this.CreateString(interval));
+			var v = this.CreateString(interval);
+			this._interval = interval;
+			this.Add("interval", v);
 			return this;
 		}
 
+		
+		internal int _snapshots { get; set; }
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public ClusterNodeHotThreadsQueryString Snapshots(int snapshots)
 		{
-			this.Add("snapshots", this.CreateString(snapshots));
+			var v = this.CreateString(snapshots);
+			this._snapshots = snapshots;
+			this.Add("snapshots", v);
 			return this;
 		}
 
+		
+		internal int _threads { get; set; }
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
 		public ClusterNodeHotThreadsQueryString Threads(int threads)
 		{
-			this.Add("threads", this.CreateString(threads));
+			var v = this.CreateString(threads);
+			this._threads = threads;
+			this.Add("threads", v);
 			return this;
 		}
 
+		
+		internal TypeOptions _type { get; set; }
 		///<summary>The type to sample (default: cpu)</summary>
 		public ClusterNodeHotThreadsQueryString Type(TypeOptions type)
 		{
-			this.Add("type", this.CreateString(type));
+			var v = this.CreateString(type);
+			this._type = type;
+			this.Add("type", v);
 			return this;
 		}
 
@@ -167,87 +235,135 @@ namespace Nest
 	///</summary>
 	public class ClusterNodeInfoQueryString : FluentQueryString<ClusterNodeInfoQueryString> 
 	{
+		
+		internal bool _all { get; set; }
 		///<summary>Return all available information</summary>
 		public ClusterNodeInfoQueryString All(bool all)
 		{
-			this.Add("all", this.CreateString(all));
+			var v = this.CreateString(all);
+			this._all = all;
+			this.Add("all", v);
 			return this;
 		}
 
+		
+		internal bool _clear { get; set; }
 		///<summary>Reset the default settings</summary>
 		public ClusterNodeInfoQueryString Clear(bool clear)
 		{
-			this.Add("clear", this.CreateString(clear));
+			var v = this.CreateString(clear);
+			this._clear = clear;
+			this.Add("clear", v);
 			return this;
 		}
 
+		
+		internal bool _http { get; set; }
 		///<summary>Return information about HTTP</summary>
 		public ClusterNodeInfoQueryString Http(bool http)
 		{
-			this.Add("http", this.CreateString(http));
+			var v = this.CreateString(http);
+			this._http = http;
+			this.Add("http", v);
 			return this;
 		}
 
+		
+		internal bool _jvm { get; set; }
 		///<summary>Return information about the JVM</summary>
 		public ClusterNodeInfoQueryString Jvm(bool jvm)
 		{
-			this.Add("jvm", this.CreateString(jvm));
+			var v = this.CreateString(jvm);
+			this._jvm = jvm;
+			this.Add("jvm", v);
 			return this;
 		}
 
+		
+		internal bool _network { get; set; }
 		///<summary>Return information about network</summary>
 		public ClusterNodeInfoQueryString Network(bool network)
 		{
-			this.Add("network", this.CreateString(network));
+			var v = this.CreateString(network);
+			this._network = network;
+			this.Add("network", v);
 			return this;
 		}
 
+		
+		internal bool _os { get; set; }
 		///<summary>Return information about the operating system</summary>
 		public ClusterNodeInfoQueryString Os(bool os)
 		{
-			this.Add("os", this.CreateString(os));
+			var v = this.CreateString(os);
+			this._os = os;
+			this.Add("os", v);
 			return this;
 		}
 
+		
+		internal bool _plugin { get; set; }
 		///<summary>Return information about plugins</summary>
 		public ClusterNodeInfoQueryString Plugin(bool plugin)
 		{
-			this.Add("plugin", this.CreateString(plugin));
+			var v = this.CreateString(plugin);
+			this._plugin = plugin;
+			this.Add("plugin", v);
 			return this;
 		}
 
+		
+		internal bool _process { get; set; }
 		///<summary>Return information about the Elasticsearch process</summary>
 		public ClusterNodeInfoQueryString Process(bool process)
 		{
-			this.Add("process", this.CreateString(process));
+			var v = this.CreateString(process);
+			this._process = process;
+			this.Add("process", v);
 			return this;
 		}
 
+		
+		internal bool _settings { get; set; }
 		///<summary>Return information about node settings</summary>
 		public ClusterNodeInfoQueryString Settings(bool settings)
 		{
-			this.Add("settings", this.CreateString(settings));
+			var v = this.CreateString(settings);
+			this._settings = settings;
+			this.Add("settings", v);
 			return this;
 		}
 
+		
+		internal bool _thread_pool { get; set; }
 		///<summary>Return information about the thread pool</summary>
 		public ClusterNodeInfoQueryString ThreadPool(bool thread_pool)
 		{
-			this.Add("thread_pool", this.CreateString(thread_pool));
+			var v = this.CreateString(thread_pool);
+			this._thread_pool = thread_pool;
+			this.Add("thread_pool", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public ClusterNodeInfoQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal bool _transport { get; set; }
 		///<summary>Return information about transport</summary>
 		public ClusterNodeInfoQueryString Transport(bool transport)
 		{
-			this.Add("transport", this.CreateString(transport));
+			var v = this.CreateString(transport);
+			this._transport = transport;
+			this.Add("transport", v);
 			return this;
 		}
 
@@ -261,17 +377,25 @@ namespace Nest
 	///</summary>
 	public class ClusterNodeShutdownQueryString : FluentQueryString<ClusterNodeShutdownQueryString> 
 	{
+		
+		internal string _delay { get; set; }
 		///<summary>Set the delay for the operation (default: 1s)</summary>
 		public ClusterNodeShutdownQueryString Delay(string delay)
 		{
-			this.Add("delay", this.CreateString(delay));
+			var v = this.CreateString(delay);
+			this._delay = delay;
+			this.Add("delay", v);
 			return this;
 		}
 
+		
+		internal bool _exit { get; set; }
 		///<summary>Exit the JVM as well (default: true)</summary>
 		public ClusterNodeShutdownQueryString Exit(bool exit)
 		{
-			this.Add("exit", this.CreateString(exit));
+			var v = this.CreateString(exit);
+			this._exit = exit;
+			this.Add("exit", v);
 			return this;
 		}
 
@@ -285,87 +409,135 @@ namespace Nest
 	///</summary>
 	public class ClusterNodeStatsQueryString : FluentQueryString<ClusterNodeStatsQueryString> 
 	{
+		
+		internal bool _all { get; set; }
 		///<summary>Return all available information</summary>
 		public ClusterNodeStatsQueryString All(bool all)
 		{
-			this.Add("all", this.CreateString(all));
+			var v = this.CreateString(all);
+			this._all = all;
+			this.Add("all", v);
 			return this;
 		}
 
+		
+		internal bool _clear { get; set; }
 		///<summary>Reset the default level of detail</summary>
 		public ClusterNodeStatsQueryString Clear(bool clear)
 		{
-			this.Add("clear", this.CreateString(clear));
+			var v = this.CreateString(clear);
+			this._clear = clear;
+			this.Add("clear", v);
 			return this;
 		}
 
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
 		public ClusterNodeStatsQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal bool _fs { get; set; }
 		///<summary>Return information about the filesystem</summary>
 		public ClusterNodeStatsQueryString Fs(bool fs)
 		{
-			this.Add("fs", this.CreateString(fs));
+			var v = this.CreateString(fs);
+			this._fs = fs;
+			this.Add("fs", v);
 			return this;
 		}
 
+		
+		internal bool _http { get; set; }
 		///<summary>Return information about HTTP</summary>
 		public ClusterNodeStatsQueryString Http(bool http)
 		{
-			this.Add("http", this.CreateString(http));
+			var v = this.CreateString(http);
+			this._http = http;
+			this.Add("http", v);
 			return this;
 		}
 
+		
+		internal bool _indices { get; set; }
 		///<summary>Return information about indices</summary>
 		public ClusterNodeStatsQueryString Indices(bool indices)
 		{
-			this.Add("indices", this.CreateString(indices));
+			var v = this.CreateString(indices);
+			this._indices = indices;
+			this.Add("indices", v);
 			return this;
 		}
 
+		
+		internal bool _jvm { get; set; }
 		///<summary>Return information about the JVM</summary>
 		public ClusterNodeStatsQueryString Jvm(bool jvm)
 		{
-			this.Add("jvm", this.CreateString(jvm));
+			var v = this.CreateString(jvm);
+			this._jvm = jvm;
+			this.Add("jvm", v);
 			return this;
 		}
 
+		
+		internal bool _network { get; set; }
 		///<summary>Return information about network</summary>
 		public ClusterNodeStatsQueryString Network(bool network)
 		{
-			this.Add("network", this.CreateString(network));
+			var v = this.CreateString(network);
+			this._network = network;
+			this.Add("network", v);
 			return this;
 		}
 
+		
+		internal bool _os { get; set; }
 		///<summary>Return information about the operating system</summary>
 		public ClusterNodeStatsQueryString Os(bool os)
 		{
-			this.Add("os", this.CreateString(os));
+			var v = this.CreateString(os);
+			this._os = os;
+			this.Add("os", v);
 			return this;
 		}
 
+		
+		internal bool _process { get; set; }
 		///<summary>Return information about the Elasticsearch process</summary>
 		public ClusterNodeStatsQueryString Process(bool process)
 		{
-			this.Add("process", this.CreateString(process));
+			var v = this.CreateString(process);
+			this._process = process;
+			this.Add("process", v);
 			return this;
 		}
 
+		
+		internal bool _thread_pool { get; set; }
 		///<summary>Return information about the thread pool</summary>
 		public ClusterNodeStatsQueryString ThreadPool(bool thread_pool)
 		{
-			this.Add("thread_pool", this.CreateString(thread_pool));
+			var v = this.CreateString(thread_pool);
+			this._thread_pool = thread_pool;
+			this.Add("thread_pool", v);
 			return this;
 		}
 
+		
+		internal bool _transport { get; set; }
 		///<summary>Return information about transport</summary>
 		public ClusterNodeStatsQueryString Transport(bool transport)
 		{
-			this.Add("transport", this.CreateString(transport));
+			var v = this.CreateString(transport);
+			this._transport = transport;
+			this.Add("transport", v);
 			return this;
 		}
 
@@ -379,17 +551,25 @@ namespace Nest
 	///</summary>
 	public class ClusterRerouteQueryString : FluentQueryString<ClusterRerouteQueryString> 
 	{
+		
+		internal bool _dry_run { get; set; }
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public ClusterRerouteQueryString DryRun(bool dry_run)
 		{
-			this.Add("dry_run", this.CreateString(dry_run));
+			var v = this.CreateString(dry_run);
+			this._dry_run = dry_run;
+			this.Add("dry_run", v);
 			return this;
 		}
 
+		
+		internal bool _filter_metadata { get; set; }
 		///<summary>Don&#39;t return cluster state metadata (default: false)</summary>
 		public ClusterRerouteQueryString FilterMetadata(bool filter_metadata)
 		{
-			this.Add("filter_metadata", this.CreateString(filter_metadata));
+			var v = this.CreateString(filter_metadata);
+			this._filter_metadata = filter_metadata;
+			this.Add("filter_metadata", v);
 			return this;
 		}
 
@@ -403,59 +583,91 @@ namespace Nest
 	///</summary>
 	public class ClusterStateQueryString : FluentQueryString<ClusterStateQueryString> 
 	{
+		
+		internal bool _filter_blocks { get; set; }
 		///<summary>Do not return information about blocks</summary>
 		public ClusterStateQueryString FilterBlocks(bool filter_blocks)
 		{
-			this.Add("filter_blocks", this.CreateString(filter_blocks));
+			var v = this.CreateString(filter_blocks);
+			this._filter_blocks = filter_blocks;
+			this.Add("filter_blocks", v);
 			return this;
 		}
 
+		
+		internal bool _filter_index_templates { get; set; }
 		///<summary>Do not return information about index templates</summary>
 		public ClusterStateQueryString FilterIndexTemplates(bool filter_index_templates)
 		{
-			this.Add("filter_index_templates", this.CreateString(filter_index_templates));
+			var v = this.CreateString(filter_index_templates);
+			this._filter_index_templates = filter_index_templates;
+			this.Add("filter_index_templates", v);
 			return this;
 		}
 
+		
+		internal string[] _filter_indices { get; set; }
 		///<summary>Limit returned metadata information to specific indices</summary>
 		public ClusterStateQueryString FilterIndices(params string[] filter_indices)
 		{
-			this.Add("filter_indices", this.CreateString(filter_indices));
+			var v = this.CreateString(filter_indices);
+			this._filter_indices = filter_indices;
+			this.Add("filter_indices", v);
 			return this;
 		}
 
+		
+		internal bool _filter_metadata { get; set; }
 		///<summary>Do not return information about indices metadata</summary>
 		public ClusterStateQueryString FilterMetadata(bool filter_metadata)
 		{
-			this.Add("filter_metadata", this.CreateString(filter_metadata));
+			var v = this.CreateString(filter_metadata);
+			this._filter_metadata = filter_metadata;
+			this.Add("filter_metadata", v);
 			return this;
 		}
 
+		
+		internal bool _filter_nodes { get; set; }
 		///<summary>Do not return information about nodes</summary>
 		public ClusterStateQueryString FilterNodes(bool filter_nodes)
 		{
-			this.Add("filter_nodes", this.CreateString(filter_nodes));
+			var v = this.CreateString(filter_nodes);
+			this._filter_nodes = filter_nodes;
+			this.Add("filter_nodes", v);
 			return this;
 		}
 
+		
+		internal bool _filter_routing_table { get; set; }
 		///<summary>Do not return information about shard allocation (`routing_table` and `routing_nodes`)</summary>
 		public ClusterStateQueryString FilterRoutingTable(bool filter_routing_table)
 		{
-			this.Add("filter_routing_table", this.CreateString(filter_routing_table));
+			var v = this.CreateString(filter_routing_table);
+			this._filter_routing_table = filter_routing_table;
+			this.Add("filter_routing_table", v);
 			return this;
 		}
 
+		
+		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateQueryString Local(bool local)
 		{
-			this.Add("local", this.CreateString(local));
+			var v = this.CreateString(local);
+			this._local = local;
+			this.Add("local", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public ClusterStateQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -469,38 +681,58 @@ namespace Nest
 	///</summary>
 	public class CountQueryString : FluentQueryString<CountQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public CountQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal int _min_score { get; set; }
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
 		public CountQueryString MinScore(int min_score)
 		{
-			this.Add("min_score", this.CreateString(min_score));
+			var v = this.CreateString(min_score);
+			this._min_score = min_score;
+			this.Add("min_score", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public CountQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public CountQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _source { get; set; }
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public CountQueryString Source(string source)
 		{
-			this.Add("source", this.CreateString(source));
+			var v = this.CreateString(source);
+			this._source = source;
+			this.Add("source", v);
 			return this;
 		}
 
@@ -514,87 +746,135 @@ namespace Nest
 	///</summary>
 	public class CreateQueryString : FluentQueryString<CreateQueryString> 
 	{
+		
+		internal ConsistencyOptions _consistency { get; set; }
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public CreateQueryString Consistency(ConsistencyOptions consistency)
 		{
-			this.Add("consistency", this.CreateString(consistency));
+			var v = this.CreateString(consistency);
+			this._consistency = consistency;
+			this.Add("consistency", v);
 			return this;
 		}
 
+		
+		internal string _id { get; set; }
 		///<summary>Specific document ID (when the POST method is used)</summary>
 		public CreateQueryString Id(string id)
 		{
-			this.Add("id", this.CreateString(id));
+			var v = this.CreateString(id);
+			this._id = id;
+			this.Add("id", v);
 			return this;
 		}
 
+		
+		internal string _parent { get; set; }
 		///<summary>ID of the parent document</summary>
 		public CreateQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal string _percolate { get; set; }
 		///<summary>Percolator queries to execute while indexing the document</summary>
 		public CreateQueryString Percolate(string percolate)
 		{
-			this.Add("percolate", this.CreateString(percolate));
+			var v = this.CreateString(percolate);
+			this._percolate = percolate;
+			this.Add("percolate", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the index after performing the operation</summary>
 		public CreateQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal ReplicationOptions _replication { get; set; }
 		///<summary>Specific replication type</summary>
 		public CreateQueryString Replication(ReplicationOptions replication)
 		{
-			this.Add("replication", this.CreateString(replication));
+			var v = this.CreateString(replication);
+			this._replication = replication;
+			this.Add("replication", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public CreateQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public CreateQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _timestamp { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
 		public CreateQueryString Timestamp(string timestamp)
 		{
-			this.Add("timestamp", this.CreateString(timestamp));
+			var v = this.CreateString(timestamp);
+			this._timestamp = timestamp;
+			this.Add("timestamp", v);
 			return this;
 		}
 
+		
+		internal string _ttl { get; set; }
 		///<summary>Expiration time for the document</summary>
 		public CreateQueryString Ttl(string ttl)
 		{
-			this.Add("ttl", this.CreateString(ttl));
+			var v = this.CreateString(ttl);
+			this._ttl = ttl;
+			this.Add("ttl", v);
 			return this;
 		}
 
+		
+		internal int _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
 		public CreateQueryString Version(int version)
 		{
-			this.Add("version", this.CreateString(version));
+			var v = this.CreateString(version);
+			this._version = version;
+			this.Add("version", v);
 			return this;
 		}
 
+		
+		internal VersionTypeOptions _version_type { get; set; }
 		///<summary>Specific version type</summary>
 		public CreateQueryString VersionType(VersionTypeOptions version_type)
 		{
-			this.Add("version_type", this.CreateString(version_type));
+			var v = this.CreateString(version_type);
+			this._version_type = version_type;
+			this.Add("version_type", v);
 			return this;
 		}
 
@@ -608,59 +888,91 @@ namespace Nest
 	///</summary>
 	public class DeleteQueryString : FluentQueryString<DeleteQueryString> 
 	{
+		
+		internal ConsistencyOptions _consistency { get; set; }
 		///<summary>Specific write consistency setting for the operation</summary>
 		public DeleteQueryString Consistency(ConsistencyOptions consistency)
 		{
-			this.Add("consistency", this.CreateString(consistency));
+			var v = this.CreateString(consistency);
+			this._consistency = consistency;
+			this.Add("consistency", v);
 			return this;
 		}
 
+		
+		internal string _parent { get; set; }
 		///<summary>ID of parent document</summary>
 		public DeleteQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the index after performing the operation</summary>
 		public DeleteQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal ReplicationOptions _replication { get; set; }
 		///<summary>Specific replication type</summary>
 		public DeleteQueryString Replication(ReplicationOptions replication)
 		{
-			this.Add("replication", this.CreateString(replication));
+			var v = this.CreateString(replication);
+			this._replication = replication;
+			this.Add("replication", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public DeleteQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public DeleteQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal int _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteQueryString Version(int version)
 		{
-			this.Add("version", this.CreateString(version));
+			var v = this.CreateString(version);
+			this._version = version;
+			this.Add("version", v);
 			return this;
 		}
 
+		
+		internal VersionTypeOptions _version_type { get; set; }
 		///<summary>Specific version type</summary>
 		public DeleteQueryString VersionType(VersionTypeOptions version_type)
 		{
-			this.Add("version_type", this.CreateString(version_type));
+			var v = this.CreateString(version_type);
+			this._version_type = version_type;
+			this.Add("version_type", v);
 			return this;
 		}
 
@@ -674,73 +986,113 @@ namespace Nest
 	///</summary>
 	public class DeleteByQueryQueryString : FluentQueryString<DeleteByQueryQueryString> 
 	{
+		
+		internal string _analyzer { get; set; }
 		///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryQueryString Analyzer(string analyzer)
 		{
-			this.Add("analyzer", this.CreateString(analyzer));
+			var v = this.CreateString(analyzer);
+			this._analyzer = analyzer;
+			this.Add("analyzer", v);
 			return this;
 		}
 
+		
+		internal ConsistencyOptions _consistency { get; set; }
 		///<summary>Specific write consistency setting for the operation</summary>
 		public DeleteByQueryQueryString Consistency(ConsistencyOptions consistency)
 		{
-			this.Add("consistency", this.CreateString(consistency));
+			var v = this.CreateString(consistency);
+			this._consistency = consistency;
+			this.Add("consistency", v);
 			return this;
 		}
 
+		
+		internal DefaultOperatorOptions _default_operator { get; set; }
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DeleteByQueryQueryString DefaultOperator(DefaultOperatorOptions default_operator)
 		{
-			this.Add("default_operator", this.CreateString(default_operator));
+			var v = this.CreateString(default_operator);
+			this._default_operator = default_operator;
+			this.Add("default_operator", v);
 			return this;
 		}
 
+		
+		internal string _df { get; set; }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public DeleteByQueryQueryString Df(string df)
 		{
-			this.Add("df", this.CreateString(df));
+			var v = this.CreateString(df);
+			this._df = df;
+			this.Add("df", v);
 			return this;
 		}
 
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public DeleteByQueryQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal ReplicationOptions _replication { get; set; }
 		///<summary>Specific replication type</summary>
 		public DeleteByQueryQueryString Replication(ReplicationOptions replication)
 		{
-			this.Add("replication", this.CreateString(replication));
+			var v = this.CreateString(replication);
+			this._replication = replication;
+			this.Add("replication", v);
 			return this;
 		}
 
+		
+		internal string _q { get; set; }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public DeleteByQueryQueryString Q(string q)
 		{
-			this.Add("q", this.CreateString(q));
+			var v = this.CreateString(q);
+			this._q = q;
+			this.Add("q", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public DeleteByQueryQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _source { get; set; }
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public DeleteByQueryQueryString Source(string source)
 		{
-			this.Add("source", this.CreateString(source));
+			var v = this.CreateString(source);
+			this._source = source;
+			this.Add("source", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public DeleteByQueryQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
@@ -754,38 +1106,58 @@ namespace Nest
 	///</summary>
 	public class ExistsQueryString : FluentQueryString<ExistsQueryString> 
 	{
+		
+		internal string _parent { get; set; }
 		///<summary>The ID of the parent document</summary>
 		public ExistsQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExistsQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal bool _realtime { get; set; }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public ExistsQueryString Realtime(bool realtime)
 		{
-			this.Add("realtime", this.CreateString(realtime));
+			var v = this.CreateString(realtime);
+			this._realtime = realtime;
+			this.Add("realtime", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public ExistsQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public ExistsQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
@@ -799,108 +1171,168 @@ namespace Nest
 	///</summary>
 	public class ExplainQueryString : FluentQueryString<ExplainQueryString> 
 	{
+		
+		internal bool _analyze_wildcard { get; set; }
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainQueryString AnalyzeWildcard(bool analyze_wildcard)
 		{
-			this.Add("analyze_wildcard", this.CreateString(analyze_wildcard));
+			var v = this.CreateString(analyze_wildcard);
+			this._analyze_wildcard = analyze_wildcard;
+			this.Add("analyze_wildcard", v);
 			return this;
 		}
 
+		
+		internal string _analyzer { get; set; }
 		///<summary>The analyzer for the query string query</summary>
 		public ExplainQueryString Analyzer(string analyzer)
 		{
-			this.Add("analyzer", this.CreateString(analyzer));
+			var v = this.CreateString(analyzer);
+			this._analyzer = analyzer;
+			this.Add("analyzer", v);
 			return this;
 		}
 
+		
+		internal DefaultOperatorOptions _default_operator { get; set; }
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public ExplainQueryString DefaultOperator(DefaultOperatorOptions default_operator)
 		{
-			this.Add("default_operator", this.CreateString(default_operator));
+			var v = this.CreateString(default_operator);
+			this._default_operator = default_operator;
+			this.Add("default_operator", v);
 			return this;
 		}
 
+		
+		internal string _df { get; set; }
 		///<summary>The default field for query string query (default: _all)</summary>
 		public ExplainQueryString Df(string df)
 		{
-			this.Add("df", this.CreateString(df));
+			var v = this.CreateString(df);
+			this._df = df;
+			this.Add("df", v);
 			return this;
 		}
 
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public ExplainQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal bool _lenient { get; set; }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainQueryString Lenient(bool lenient)
 		{
-			this.Add("lenient", this.CreateString(lenient));
+			var v = this.CreateString(lenient);
+			this._lenient = lenient;
+			this.Add("lenient", v);
 			return this;
 		}
 
+		
+		internal bool _lowercase_expanded_terms { get; set; }
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public ExplainQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
 		{
-			this.Add("lowercase_expanded_terms", this.CreateString(lowercase_expanded_terms));
+			var v = this.CreateString(lowercase_expanded_terms);
+			this._lowercase_expanded_terms = lowercase_expanded_terms;
+			this.Add("lowercase_expanded_terms", v);
 			return this;
 		}
 
+		
+		internal string _parent { get; set; }
 		///<summary>The ID of the parent document</summary>
 		public ExplainQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public ExplainQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal string _q { get; set; }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public ExplainQueryString Q(string q)
 		{
-			this.Add("q", this.CreateString(q));
+			var v = this.CreateString(q);
+			this._q = q;
+			this.Add("q", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public ExplainQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _source { get; set; }
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public ExplainQueryString Source(string source)
 		{
-			this.Add("source", this.CreateString(source));
+			var v = this.CreateString(source);
+			this._source = source;
+			this.Add("source", v);
 			return this;
 		}
 
+		
+		internal string[] __source { get; set; }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public ExplainQueryString Source(params string[] _source)
 		{
-			this.Add("_source", this.CreateString(_source));
+			var v = this.CreateString(_source);
+			this.__source = _source;
+			this.Add("_source", v);
 			return this;
 		}
 
+		
+		internal string[] __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.Add("_source_exclude", this.CreateString(_source_exclude));
+			var v = this.CreateString(_source_exclude);
+			this.__source_exclude = _source_exclude;
+			this.Add("_source_exclude", v);
 			return this;
 		}
 
+		
+		internal string[] __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainQueryString SourceInclude(params string[] _source_include)
 		{
-			this.Add("_source_include", this.CreateString(_source_include));
+			var v = this.CreateString(_source_include);
+			this.__source_include = _source_include;
+			this.Add("_source_include", v);
 			return this;
 		}
 
@@ -914,66 +1346,102 @@ namespace Nest
 	///</summary>
 	public class GetQueryString : FluentQueryString<GetQueryString> 
 	{
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public GetQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal string _parent { get; set; }
 		///<summary>The ID of the parent document</summary>
 		public GetQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public GetQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal bool _realtime { get; set; }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public GetQueryString Realtime(bool realtime)
 		{
-			this.Add("realtime", this.CreateString(realtime));
+			var v = this.CreateString(realtime);
+			this._realtime = realtime;
+			this.Add("realtime", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public GetQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public GetQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string[] __source { get; set; }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public GetQueryString Source(params string[] _source)
 		{
-			this.Add("_source", this.CreateString(_source));
+			var v = this.CreateString(_source);
+			this.__source = _source;
+			this.Add("_source", v);
 			return this;
 		}
 
+		
+		internal string[] __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.Add("_source_exclude", this.CreateString(_source_exclude));
+			var v = this.CreateString(_source_exclude);
+			this.__source_exclude = _source_exclude;
+			this.Add("_source_exclude", v);
 			return this;
 		}
 
+		
+		internal string[] __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetQueryString SourceInclude(params string[] _source_include)
 		{
-			this.Add("_source_include", this.CreateString(_source_include));
+			var v = this.CreateString(_source_include);
+			this.__source_include = _source_include;
+			this.Add("_source_include", v);
 			return this;
 		}
 
@@ -987,52 +1455,80 @@ namespace Nest
 	///</summary>
 	public class GetSourceQueryString : FluentQueryString<GetSourceQueryString> 
 	{
+		
+		internal string[] _exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetSourceQueryString Exclude(params string[] exclude)
 		{
-			this.Add("exclude", this.CreateString(exclude));
+			var v = this.CreateString(exclude);
+			this._exclude = exclude;
+			this.Add("exclude", v);
 			return this;
 		}
 
+		
+		internal string[] _include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetSourceQueryString Include(params string[] include)
 		{
-			this.Add("include", this.CreateString(include));
+			var v = this.CreateString(include);
+			this._include = include;
+			this.Add("include", v);
 			return this;
 		}
 
+		
+		internal string _parent { get; set; }
 		///<summary>The ID of the parent document</summary>
 		public GetSourceQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public GetSourceQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal bool _realtime { get; set; }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public GetSourceQueryString Realtime(bool realtime)
 		{
-			this.Add("realtime", this.CreateString(realtime));
+			var v = this.CreateString(realtime);
+			this._realtime = realtime;
+			this.Add("realtime", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public GetSourceQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public GetSourceQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
@@ -1046,87 +1542,135 @@ namespace Nest
 	///</summary>
 	public class IndexQueryString : FluentQueryString<IndexQueryString> 
 	{
+		
+		internal ConsistencyOptions _consistency { get; set; }
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public IndexQueryString Consistency(ConsistencyOptions consistency)
 		{
-			this.Add("consistency", this.CreateString(consistency));
+			var v = this.CreateString(consistency);
+			this._consistency = consistency;
+			this.Add("consistency", v);
 			return this;
 		}
 
+		
+		internal OpTypeOptions _op_type { get; set; }
 		///<summary>Explicit operation type</summary>
 		public IndexQueryString OpType(OpTypeOptions op_type)
 		{
-			this.Add("op_type", this.CreateString(op_type));
+			var v = this.CreateString(op_type);
+			this._op_type = op_type;
+			this.Add("op_type", v);
 			return this;
 		}
 
+		
+		internal string _parent { get; set; }
 		///<summary>ID of the parent document</summary>
 		public IndexQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal string _percolate { get; set; }
 		///<summary>Percolator queries to execute while indexing the document</summary>
 		public IndexQueryString Percolate(string percolate)
 		{
-			this.Add("percolate", this.CreateString(percolate));
+			var v = this.CreateString(percolate);
+			this._percolate = percolate;
+			this.Add("percolate", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the index after performing the operation</summary>
 		public IndexQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal ReplicationOptions _replication { get; set; }
 		///<summary>Specific replication type</summary>
 		public IndexQueryString Replication(ReplicationOptions replication)
 		{
-			this.Add("replication", this.CreateString(replication));
+			var v = this.CreateString(replication);
+			this._replication = replication;
+			this.Add("replication", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public IndexQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndexQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _timestamp { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
 		public IndexQueryString Timestamp(string timestamp)
 		{
-			this.Add("timestamp", this.CreateString(timestamp));
+			var v = this.CreateString(timestamp);
+			this._timestamp = timestamp;
+			this.Add("timestamp", v);
 			return this;
 		}
 
+		
+		internal string _ttl { get; set; }
 		///<summary>Expiration time for the document</summary>
 		public IndexQueryString Ttl(string ttl)
 		{
-			this.Add("ttl", this.CreateString(ttl));
+			var v = this.CreateString(ttl);
+			this._ttl = ttl;
+			this.Add("ttl", v);
 			return this;
 		}
 
+		
+		internal int _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexQueryString Version(int version)
 		{
-			this.Add("version", this.CreateString(version));
+			var v = this.CreateString(version);
+			this._version = version;
+			this.Add("version", v);
 			return this;
 		}
 
+		
+		internal VersionTypeOptions _version_type { get; set; }
 		///<summary>Specific version type</summary>
 		public IndexQueryString VersionType(VersionTypeOptions version_type)
 		{
-			this.Add("version_type", this.CreateString(version_type));
+			var v = this.CreateString(version_type);
+			this._version_type = version_type;
+			this.Add("version_type", v);
 			return this;
 		}
 
@@ -1140,59 +1684,91 @@ namespace Nest
 	///</summary>
 	public class IndicesAnalyzeQueryString : FluentQueryString<IndicesAnalyzeQueryString> 
 	{
+		
+		internal string _analyzer { get; set; }
 		///<summary>The name of the analyzer to use</summary>
 		public IndicesAnalyzeQueryString Analyzer(string analyzer)
 		{
-			this.Add("analyzer", this.CreateString(analyzer));
+			var v = this.CreateString(analyzer);
+			this._analyzer = analyzer;
+			this.Add("analyzer", v);
 			return this;
 		}
 
+		
+		internal string _field { get; set; }
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		public IndicesAnalyzeQueryString Field(string field)
 		{
-			this.Add("field", this.CreateString(field));
+			var v = this.CreateString(field);
+			this._field = field;
+			this.Add("field", v);
 			return this;
 		}
 
+		
+		internal string[] _filters { get; set; }
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
 		public IndicesAnalyzeQueryString Filters(params string[] filters)
 		{
-			this.Add("filters", this.CreateString(filters));
+			var v = this.CreateString(filters);
+			this._filters = filters;
+			this.Add("filters", v);
 			return this;
 		}
 
+		
+		internal string _index { get; set; }
 		///<summary>The name of the index to scope the operation</summary>
 		public IndicesAnalyzeQueryString Index(string index)
 		{
-			this.Add("index", this.CreateString(index));
+			var v = this.CreateString(index);
+			this._index = index;
+			this.Add("index", v);
 			return this;
 		}
 
+		
+		internal bool _prefer_local { get; set; }
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public IndicesAnalyzeQueryString PreferLocal(bool prefer_local)
 		{
-			this.Add("prefer_local", this.CreateString(prefer_local));
+			var v = this.CreateString(prefer_local);
+			this._prefer_local = prefer_local;
+			this.Add("prefer_local", v);
 			return this;
 		}
 
+		
+		internal string _text { get; set; }
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
 		public IndicesAnalyzeQueryString Text(string text)
 		{
-			this.Add("text", this.CreateString(text));
+			var v = this.CreateString(text);
+			this._text = text;
+			this.Add("text", v);
 			return this;
 		}
 
+		
+		internal string _tokenizer { get; set; }
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		public IndicesAnalyzeQueryString Tokenizer(string tokenizer)
 		{
-			this.Add("tokenizer", this.CreateString(tokenizer));
+			var v = this.CreateString(tokenizer);
+			this._tokenizer = tokenizer;
+			this.Add("tokenizer", v);
 			return this;
 		}
 
+		
+		internal FormatOptions _format { get; set; }
 		///<summary>Format of the output</summary>
 		public IndicesAnalyzeQueryString Format(FormatOptions format)
 		{
-			this.Add("format", this.CreateString(format));
+			var v = this.CreateString(format);
+			this._format = format;
+			this.Add("format", v);
 			return this;
 		}
 
@@ -1206,80 +1782,124 @@ namespace Nest
 	///</summary>
 	public class IndicesClearCacheQueryString : FluentQueryString<IndicesClearCacheQueryString> 
 	{
+		
+		internal bool _field_data { get; set; }
 		///<summary>Clear field data</summary>
 		public IndicesClearCacheQueryString FieldData(bool field_data)
 		{
-			this.Add("field_data", this.CreateString(field_data));
+			var v = this.CreateString(field_data);
+			this._field_data = field_data;
+			this.Add("field_data", v);
 			return this;
 		}
 
+		
+		internal bool _fielddata { get; set; }
 		///<summary>Clear field data</summary>
 		public IndicesClearCacheQueryString Fielddata(bool fielddata)
 		{
-			this.Add("fielddata", this.CreateString(fielddata));
+			var v = this.CreateString(fielddata);
+			this._fielddata = fielddata;
+			this.Add("fielddata", v);
 			return this;
 		}
 
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public IndicesClearCacheQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal bool _filter { get; set; }
 		///<summary>Clear filter caches</summary>
 		public IndicesClearCacheQueryString Filter(bool filter)
 		{
-			this.Add("filter", this.CreateString(filter));
+			var v = this.CreateString(filter);
+			this._filter = filter;
+			this.Add("filter", v);
 			return this;
 		}
 
+		
+		internal bool _filter_cache { get; set; }
 		///<summary>Clear filter caches</summary>
 		public IndicesClearCacheQueryString FilterCache(bool filter_cache)
 		{
-			this.Add("filter_cache", this.CreateString(filter_cache));
+			var v = this.CreateString(filter_cache);
+			this._filter_cache = filter_cache;
+			this.Add("filter_cache", v);
 			return this;
 		}
 
+		
+		internal bool _filter_keys { get; set; }
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
 		public IndicesClearCacheQueryString FilterKeys(bool filter_keys)
 		{
-			this.Add("filter_keys", this.CreateString(filter_keys));
+			var v = this.CreateString(filter_keys);
+			this._filter_keys = filter_keys;
+			this.Add("filter_keys", v);
 			return this;
 		}
 
+		
+		internal bool _id { get; set; }
 		///<summary>Clear ID caches for parent/child</summary>
 		public IndicesClearCacheQueryString Id(bool id)
 		{
-			this.Add("id", this.CreateString(id));
+			var v = this.CreateString(id);
+			this._id = id;
+			this.Add("id", v);
 			return this;
 		}
 
+		
+		internal bool _id_cache { get; set; }
 		///<summary>Clear ID caches for parent/child</summary>
 		public IndicesClearCacheQueryString IdCache(bool id_cache)
 		{
-			this.Add("id_cache", this.CreateString(id_cache));
+			var v = this.CreateString(id_cache);
+			this._id_cache = id_cache;
+			this.Add("id_cache", v);
 			return this;
 		}
 
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesClearCacheQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal string[] _index { get; set; }
 		///<summary>A comma-separated list of index name to limit the operation</summary>
 		public IndicesClearCacheQueryString Index(params string[] index)
 		{
-			this.Add("index", this.CreateString(index));
+			var v = this.CreateString(index);
+			this._index = index;
+			this.Add("index", v);
 			return this;
 		}
 
+		
+		internal bool _recycler { get; set; }
 		///<summary>Clear the recycler cache</summary>
 		public IndicesClearCacheQueryString Recycler(bool recycler)
 		{
-			this.Add("recycler", this.CreateString(recycler));
+			var v = this.CreateString(recycler);
+			this._recycler = recycler;
+			this.Add("recycler", v);
 			return this;
 		}
 
@@ -1293,17 +1913,25 @@ namespace Nest
 	///</summary>
 	public class IndicesCloseQueryString : FluentQueryString<IndicesCloseQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesCloseQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesCloseQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1317,17 +1945,25 @@ namespace Nest
 	///</summary>
 	public class IndicesCreateQueryString : FluentQueryString<IndicesCreateQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesCreateQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesCreateQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1341,17 +1977,25 @@ namespace Nest
 	///</summary>
 	public class IndicesDeleteQueryString : FluentQueryString<IndicesDeleteQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesDeleteQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1365,17 +2009,25 @@ namespace Nest
 	///</summary>
 	public class IndicesDeleteAliasQueryString : FluentQueryString<IndicesDeleteAliasQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
 		public IndicesDeleteAliasQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteAliasQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1389,10 +2041,14 @@ namespace Nest
 	///</summary>
 	public class IndicesDeleteMappingQueryString : FluentQueryString<IndicesDeleteMappingQueryString> 
 	{
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteMappingQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1406,17 +2062,25 @@ namespace Nest
 	///</summary>
 	public class IndicesDeleteTemplateQueryString : FluentQueryString<IndicesDeleteTemplateQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesDeleteTemplateQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteTemplateQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1430,10 +2094,14 @@ namespace Nest
 	///</summary>
 	public class IndicesDeleteWarmerQueryString : FluentQueryString<IndicesDeleteWarmerQueryString> 
 	{
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesDeleteWarmerQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1447,10 +2115,14 @@ namespace Nest
 	///</summary>
 	public class IndicesExistsAliasQueryString : FluentQueryString<IndicesExistsAliasQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesExistsAliasQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
@@ -1464,10 +2136,14 @@ namespace Nest
 	///</summary>
 	public class IndicesExistsTypeQueryString : FluentQueryString<IndicesExistsTypeQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesExistsTypeQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
@@ -1481,31 +2157,47 @@ namespace Nest
 	///</summary>
 	public class IndicesFlushQueryString : FluentQueryString<IndicesFlushQueryString> 
 	{
+		
+		internal bool _force { get; set; }
 		///<summary>TODO: ?</summary>
 		public IndicesFlushQueryString Force(bool force)
 		{
-			this.Add("force", this.CreateString(force));
+			var v = this.CreateString(force);
+			this._force = force;
+			this.Add("force", v);
 			return this;
 		}
 
+		
+		internal bool _full { get; set; }
 		///<summary>TODO: ?</summary>
 		public IndicesFlushQueryString Full(bool full)
 		{
-			this.Add("full", this.CreateString(full));
+			var v = this.CreateString(full);
+			this._full = full;
+			this.Add("full", v);
 			return this;
 		}
 
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesFlushQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the index after performing the operation</summary>
 		public IndicesFlushQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
@@ -1519,10 +2211,14 @@ namespace Nest
 	///</summary>
 	public class IndicesGetAliasQueryString : FluentQueryString<IndicesGetAliasQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesGetAliasQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
@@ -1536,10 +2232,14 @@ namespace Nest
 	///</summary>
 	public class IndicesGetAliasesQueryString : FluentQueryString<IndicesGetAliasesQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesGetAliasesQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
@@ -1553,10 +2253,14 @@ namespace Nest
 	///</summary>
 	public class IndicesGetFieldMappingQueryString : FluentQueryString<IndicesGetFieldMappingQueryString> 
 	{
+		
+		internal bool _include_defaults { get; set; }
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public IndicesGetFieldMappingQueryString IncludeDefaults(bool include_defaults)
 		{
-			this.Add("include_defaults", this.CreateString(include_defaults));
+			var v = this.CreateString(include_defaults);
+			this._include_defaults = include_defaults;
+			this.Add("include_defaults", v);
 			return this;
 		}
 
@@ -1570,17 +2274,25 @@ namespace Nest
 	///</summary>
 	public class IndicesOpenQueryString : FluentQueryString<IndicesOpenQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesOpenQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesOpenQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1594,52 +2306,80 @@ namespace Nest
 	///</summary>
 	public class IndicesOptimizeQueryString : FluentQueryString<IndicesOptimizeQueryString> 
 	{
+		
+		internal bool _flush { get; set; }
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public IndicesOptimizeQueryString Flush(bool flush)
 		{
-			this.Add("flush", this.CreateString(flush));
+			var v = this.CreateString(flush);
+			this._flush = flush;
+			this.Add("flush", v);
 			return this;
 		}
 
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesOptimizeQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal int _max_num_segments { get; set; }
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
 		public IndicesOptimizeQueryString MaxNumSegments(int max_num_segments)
 		{
-			this.Add("max_num_segments", this.CreateString(max_num_segments));
+			var v = this.CreateString(max_num_segments);
+			this._max_num_segments = max_num_segments;
+			this.Add("max_num_segments", v);
 			return this;
 		}
 
+		
+		internal bool _only_expunge_deletes { get; set; }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
 		public IndicesOptimizeQueryString OnlyExpungeDeletes(bool only_expunge_deletes)
 		{
-			this.Add("only_expunge_deletes", this.CreateString(only_expunge_deletes));
+			var v = this.CreateString(only_expunge_deletes);
+			this._only_expunge_deletes = only_expunge_deletes;
+			this.Add("only_expunge_deletes", v);
 			return this;
 		}
 
+		
+		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
 		public IndicesOptimizeQueryString OperationThreading(string operation_threading)
 		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
+			var v = this.CreateString(operation_threading);
+			this._operation_threading = operation_threading;
+			this.Add("operation_threading", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Specify whether the index should be refreshed after performing the operation (default: true)</summary>
 		public IndicesOptimizeQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal bool _wait_for_merge { get; set; }
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public IndicesOptimizeQueryString WaitForMerge(bool wait_for_merge)
 		{
-			this.Add("wait_for_merge", this.CreateString(wait_for_merge));
+			var v = this.CreateString(wait_for_merge);
+			this._wait_for_merge = wait_for_merge;
+			this.Add("wait_for_merge", v);
 			return this;
 		}
 
@@ -1653,17 +2393,25 @@ namespace Nest
 	///</summary>
 	public class IndicesPutAliasQueryString : FluentQueryString<IndicesPutAliasQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
 		public IndicesPutAliasQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutAliasQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1677,24 +2425,36 @@ namespace Nest
 	///</summary>
 	public class IndicesPutMappingQueryString : FluentQueryString<IndicesPutMappingQueryString> 
 	{
+		
+		internal bool _ignore_conflicts { get; set; }
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
 		public IndicesPutMappingQueryString IgnoreConflicts(bool ignore_conflicts)
 		{
-			this.Add("ignore_conflicts", this.CreateString(ignore_conflicts));
+			var v = this.CreateString(ignore_conflicts);
+			this._ignore_conflicts = ignore_conflicts;
+			this.Add("ignore_conflicts", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesPutMappingQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutMappingQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1708,10 +2468,14 @@ namespace Nest
 	///</summary>
 	public class IndicesPutSettingsQueryString : FluentQueryString<IndicesPutSettingsQueryString> 
 	{
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutSettingsQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1725,24 +2489,36 @@ namespace Nest
 	///</summary>
 	public class IndicesPutTemplateQueryString : FluentQueryString<IndicesPutTemplateQueryString> 
 	{
+		
+		internal int _order { get; set; }
 		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
 		public IndicesPutTemplateQueryString Order(int order)
 		{
-			this.Add("order", this.CreateString(order));
+			var v = this.CreateString(order);
+			this._order = order;
+			this.Add("order", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public IndicesPutTemplateQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutTemplateQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1756,10 +2532,14 @@ namespace Nest
 	///</summary>
 	public class IndicesPutWarmerQueryString : FluentQueryString<IndicesPutWarmerQueryString> 
 	{
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesPutWarmerQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -1773,17 +2553,25 @@ namespace Nest
 	///</summary>
 	public class IndicesRefreshQueryString : FluentQueryString<IndicesRefreshQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesRefreshQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
 		public IndicesRefreshQueryString OperationThreading(string operation_threading)
 		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
+			var v = this.CreateString(operation_threading);
+			this._operation_threading = operation_threading;
+			this.Add("operation_threading", v);
 			return this;
 		}
 
@@ -1797,17 +2585,25 @@ namespace Nest
 	///</summary>
 	public class IndicesSegmentsQueryString : FluentQueryString<IndicesSegmentsQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesSegmentsQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
 		public IndicesSegmentsQueryString OperationThreading(string operation_threading)
 		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
+			var v = this.CreateString(operation_threading);
+			this._operation_threading = operation_threading;
+			this.Add("operation_threading", v);
 			return this;
 		}
 
@@ -1821,10 +2617,14 @@ namespace Nest
 	///</summary>
 	public class IndicesSnapshotIndexQueryString : FluentQueryString<IndicesSnapshotIndexQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesSnapshotIndexQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
@@ -1838,143 +2638,223 @@ namespace Nest
 	///</summary>
 	public class IndicesStatsQueryString : FluentQueryString<IndicesStatsQueryString> 
 	{
+		
+		internal bool _all { get; set; }
 		///<summary>Return all available information</summary>
 		public IndicesStatsQueryString All(bool all)
 		{
-			this.Add("all", this.CreateString(all));
+			var v = this.CreateString(all);
+			this._all = all;
+			this.Add("all", v);
 			return this;
 		}
 
+		
+		internal bool _clear { get; set; }
 		///<summary>Reset the default level of detail</summary>
 		public IndicesStatsQueryString Clear(bool clear)
 		{
-			this.Add("clear", this.CreateString(clear));
+			var v = this.CreateString(clear);
+			this._clear = clear;
+			this.Add("clear", v);
 			return this;
 		}
 
+		
+		internal bool _completion { get; set; }
 		///<summary>Return information about completion suggester stats</summary>
 		public IndicesStatsQueryString Completion(bool completion)
 		{
-			this.Add("completion", this.CreateString(completion));
+			var v = this.CreateString(completion);
+			this._completion = completion;
+			this.Add("completion", v);
 			return this;
 		}
 
+		
+		internal string[] _completion_fields { get; set; }
 		///<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesStatsQueryString CompletionFields(params string[] completion_fields)
 		{
-			this.Add("completion_fields", this.CreateString(completion_fields));
+			var v = this.CreateString(completion_fields);
+			this._completion_fields = completion_fields;
+			this.Add("completion_fields", v);
 			return this;
 		}
 
+		
+		internal bool _docs { get; set; }
 		///<summary>Return information about indexed and deleted documents</summary>
 		public IndicesStatsQueryString Docs(bool docs)
 		{
-			this.Add("docs", this.CreateString(docs));
+			var v = this.CreateString(docs);
+			this._docs = docs;
+			this.Add("docs", v);
 			return this;
 		}
 
+		
+		internal bool _fielddata { get; set; }
 		///<summary>Return information about field data</summary>
 		public IndicesStatsQueryString Fielddata(bool fielddata)
 		{
-			this.Add("fielddata", this.CreateString(fielddata));
+			var v = this.CreateString(fielddata);
+			this._fielddata = fielddata;
+			this.Add("fielddata", v);
 			return this;
 		}
 
+		
+		internal string[] _fielddata_fields { get; set; }
 		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
 		public IndicesStatsQueryString FielddataFields(params string[] fielddata_fields)
 		{
-			this.Add("fielddata_fields", this.CreateString(fielddata_fields));
+			var v = this.CreateString(fielddata_fields);
+			this._fielddata_fields = fielddata_fields;
+			this.Add("fielddata_fields", v);
 			return this;
 		}
 
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` metric (supports wildcards)</summary>
 		public IndicesStatsQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal bool _filter_cache { get; set; }
 		///<summary>Return information about filter cache</summary>
 		public IndicesStatsQueryString FilterCache(bool filter_cache)
 		{
-			this.Add("filter_cache", this.CreateString(filter_cache));
+			var v = this.CreateString(filter_cache);
+			this._filter_cache = filter_cache;
+			this.Add("filter_cache", v);
 			return this;
 		}
 
+		
+		internal bool _flush { get; set; }
 		///<summary>Return information about flush operations</summary>
 		public IndicesStatsQueryString Flush(bool flush)
 		{
-			this.Add("flush", this.CreateString(flush));
+			var v = this.CreateString(flush);
+			this._flush = flush;
+			this.Add("flush", v);
 			return this;
 		}
 
+		
+		internal bool _get { get; set; }
 		///<summary>Return information about get operations</summary>
 		public IndicesStatsQueryString Get(bool get)
 		{
-			this.Add("get", this.CreateString(get));
+			var v = this.CreateString(get);
+			this._get = get;
+			this.Add("get", v);
 			return this;
 		}
 
+		
+		internal bool _groups { get; set; }
 		///<summary>A comma-separated list of search groups for `search` statistics</summary>
 		public IndicesStatsQueryString Groups(bool groups)
 		{
-			this.Add("groups", this.CreateString(groups));
+			var v = this.CreateString(groups);
+			this._groups = groups;
+			this.Add("groups", v);
 			return this;
 		}
 
+		
+		internal bool _id_cache { get; set; }
 		///<summary>Return information about ID cache</summary>
 		public IndicesStatsQueryString IdCache(bool id_cache)
 		{
-			this.Add("id_cache", this.CreateString(id_cache));
+			var v = this.CreateString(id_cache);
+			this._id_cache = id_cache;
+			this.Add("id_cache", v);
 			return this;
 		}
 
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesStatsQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal bool _indexing { get; set; }
 		///<summary>Return information about indexing operations</summary>
 		public IndicesStatsQueryString Indexing(bool indexing)
 		{
-			this.Add("indexing", this.CreateString(indexing));
+			var v = this.CreateString(indexing);
+			this._indexing = indexing;
+			this.Add("indexing", v);
 			return this;
 		}
 
+		
+		internal bool _merge { get; set; }
 		///<summary>Return information about merge operations</summary>
 		public IndicesStatsQueryString Merge(bool merge)
 		{
-			this.Add("merge", this.CreateString(merge));
+			var v = this.CreateString(merge);
+			this._merge = merge;
+			this.Add("merge", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Return information about refresh operations</summary>
 		public IndicesStatsQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal bool _search { get; set; }
 		///<summary>Return information about search operations; use the `groups` parameter to include information for specific search groups</summary>
 		public IndicesStatsQueryString Search(bool search)
 		{
-			this.Add("search", this.CreateString(search));
+			var v = this.CreateString(search);
+			this._search = search;
+			this.Add("search", v);
 			return this;
 		}
 
+		
+		internal bool _store { get; set; }
 		///<summary>Return information about the size of the index</summary>
 		public IndicesStatsQueryString Store(bool store)
 		{
-			this.Add("store", this.CreateString(store));
+			var v = this.CreateString(store);
+			this._store = store;
+			this.Add("store", v);
 			return this;
 		}
 
+		
+		internal bool _warmer { get; set; }
 		///<summary>Return information about warmers</summary>
 		public IndicesStatsQueryString Warmer(bool warmer)
 		{
-			this.Add("warmer", this.CreateString(warmer));
+			var v = this.CreateString(warmer);
+			this._warmer = warmer;
+			this.Add("warmer", v);
 			return this;
 		}
 
@@ -1988,31 +2868,47 @@ namespace Nest
 	///</summary>
 	public class IndicesStatusQueryString : FluentQueryString<IndicesStatusQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public IndicesStatusQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
 		public IndicesStatusQueryString OperationThreading(string operation_threading)
 		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
+			var v = this.CreateString(operation_threading);
+			this._operation_threading = operation_threading;
+			this.Add("operation_threading", v);
 			return this;
 		}
 
+		
+		internal bool _recovery { get; set; }
 		///<summary>Return information about shard recovery</summary>
 		public IndicesStatusQueryString Recovery(bool recovery)
 		{
-			this.Add("recovery", this.CreateString(recovery));
+			var v = this.CreateString(recovery);
+			this._recovery = recovery;
+			this.Add("recovery", v);
 			return this;
 		}
 
+		
+		internal bool _snapshot { get; set; }
 		///<summary>TODO: ?</summary>
 		public IndicesStatusQueryString Snapshot(bool snapshot)
 		{
-			this.Add("snapshot", this.CreateString(snapshot));
+			var v = this.CreateString(snapshot);
+			this._snapshot = snapshot;
+			this.Add("snapshot", v);
 			return this;
 		}
 
@@ -2026,17 +2922,25 @@ namespace Nest
 	///</summary>
 	public class IndicesUpdateAliasesQueryString : FluentQueryString<IndicesUpdateAliasesQueryString> 
 	{
+		
+		internal string _timeout { get; set; }
 		///<summary>Request timeout</summary>
 		public IndicesUpdateAliasesQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
 		public IndicesUpdateAliasesQueryString MasterTimeout(string master_timeout)
 		{
-			this.Add("master_timeout", this.CreateString(master_timeout));
+			var v = this.CreateString(master_timeout);
+			this._master_timeout = master_timeout;
+			this.Add("master_timeout", v);
 			return this;
 		}
 
@@ -2050,38 +2954,58 @@ namespace Nest
 	///</summary>
 	public class ValidateQueryQueryString : FluentQueryString<ValidateQueryQueryString> 
 	{
+		
+		internal bool _explain { get; set; }
 		///<summary>Return detailed information about the error</summary>
 		public ValidateQueryQueryString Explain(bool explain)
 		{
-			this.Add("explain", this.CreateString(explain));
+			var v = this.CreateString(explain);
+			this._explain = explain;
+			this.Add("explain", v);
 			return this;
 		}
 
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public ValidateQueryQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
 		public ValidateQueryQueryString OperationThreading(string operation_threading)
 		{
-			this.Add("operation_threading", this.CreateString(operation_threading));
+			var v = this.CreateString(operation_threading);
+			this._operation_threading = operation_threading;
+			this.Add("operation_threading", v);
 			return this;
 		}
 
+		
+		internal string _source { get; set; }
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
 		public ValidateQueryQueryString Source(string source)
 		{
-			this.Add("source", this.CreateString(source));
+			var v = this.CreateString(source);
+			this._source = source;
+			this.Add("source", v);
 			return this;
 		}
 
+		
+		internal string _q { get; set; }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public ValidateQueryQueryString Q(string q)
 		{
-			this.Add("q", this.CreateString(q));
+			var v = this.CreateString(q);
+			this._q = q;
+			this.Add("q", v);
 			return this;
 		}
 
@@ -2095,52 +3019,80 @@ namespace Nest
 	///</summary>
 	public class MgetQueryString : FluentQueryString<MgetQueryString> 
 	{
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public MgetQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MgetQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal bool _realtime { get; set; }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
 		public MgetQueryString Realtime(bool realtime)
 		{
-			this.Add("realtime", this.CreateString(realtime));
+			var v = this.CreateString(realtime);
+			this._realtime = realtime;
+			this.Add("realtime", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
 		public MgetQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal string[] __source { get; set; }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public MgetQueryString Source(params string[] _source)
 		{
-			this.Add("_source", this.CreateString(_source));
+			var v = this.CreateString(_source);
+			this.__source = _source;
+			this.Add("_source", v);
 			return this;
 		}
 
+		
+		internal string[] __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MgetQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.Add("_source_exclude", this.CreateString(_source_exclude));
+			var v = this.CreateString(_source_exclude);
+			this.__source_exclude = _source_exclude;
+			this.Add("_source_exclude", v);
 			return this;
 		}
 
+		
+		internal string[] __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MgetQueryString SourceInclude(params string[] _source_include)
 		{
-			this.Add("_source_include", this.CreateString(_source_include));
+			var v = this.CreateString(_source_include);
+			this.__source_include = _source_include;
+			this.Add("_source_include", v);
 			return this;
 		}
 
@@ -2154,136 +3106,212 @@ namespace Nest
 	///</summary>
 	public class MltQueryString : FluentQueryString<MltQueryString> 
 	{
+		
+		internal int _boost_terms { get; set; }
 		///<summary>The boost factor</summary>
 		public MltQueryString BoostTerms(int boost_terms)
 		{
-			this.Add("boost_terms", this.CreateString(boost_terms));
+			var v = this.CreateString(boost_terms);
+			this._boost_terms = boost_terms;
+			this.Add("boost_terms", v);
 			return this;
 		}
 
+		
+		internal int _max_doc_freq { get; set; }
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
 		public MltQueryString MaxDocFreq(int max_doc_freq)
 		{
-			this.Add("max_doc_freq", this.CreateString(max_doc_freq));
+			var v = this.CreateString(max_doc_freq);
+			this._max_doc_freq = max_doc_freq;
+			this.Add("max_doc_freq", v);
 			return this;
 		}
 
+		
+		internal int _max_query_terms { get; set; }
 		///<summary>The maximum query terms to be included in the generated query</summary>
 		public MltQueryString MaxQueryTerms(int max_query_terms)
 		{
-			this.Add("max_query_terms", this.CreateString(max_query_terms));
+			var v = this.CreateString(max_query_terms);
+			this._max_query_terms = max_query_terms;
+			this.Add("max_query_terms", v);
 			return this;
 		}
 
+		
+		internal int _max_word_len { get; set; }
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
 		public MltQueryString MaxWordLen(int max_word_len)
 		{
-			this.Add("max_word_len", this.CreateString(max_word_len));
+			var v = this.CreateString(max_word_len);
+			this._max_word_len = max_word_len;
+			this.Add("max_word_len", v);
 			return this;
 		}
 
+		
+		internal int _min_doc_freq { get; set; }
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
 		public MltQueryString MinDocFreq(int min_doc_freq)
 		{
-			this.Add("min_doc_freq", this.CreateString(min_doc_freq));
+			var v = this.CreateString(min_doc_freq);
+			this._min_doc_freq = min_doc_freq;
+			this.Add("min_doc_freq", v);
 			return this;
 		}
 
+		
+		internal int _min_term_freq { get; set; }
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
 		public MltQueryString MinTermFreq(int min_term_freq)
 		{
-			this.Add("min_term_freq", this.CreateString(min_term_freq));
+			var v = this.CreateString(min_term_freq);
+			this._min_term_freq = min_term_freq;
+			this.Add("min_term_freq", v);
 			return this;
 		}
 
+		
+		internal int _min_word_len { get; set; }
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
 		public MltQueryString MinWordLen(int min_word_len)
 		{
-			this.Add("min_word_len", this.CreateString(min_word_len));
+			var v = this.CreateString(min_word_len);
+			this._min_word_len = min_word_len;
+			this.Add("min_word_len", v);
 			return this;
 		}
 
+		
+		internal string[] _mlt_fields { get; set; }
 		///<summary>Specific fields to perform the query against</summary>
 		public MltQueryString MltFields(params string[] mlt_fields)
 		{
-			this.Add("mlt_fields", this.CreateString(mlt_fields));
+			var v = this.CreateString(mlt_fields);
+			this._mlt_fields = mlt_fields;
+			this.Add("mlt_fields", v);
 			return this;
 		}
 
+		
+		internal int _percent_terms_to_match { get; set; }
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
 		public MltQueryString PercentTermsToMatch(int percent_terms_to_match)
 		{
-			this.Add("percent_terms_to_match", this.CreateString(percent_terms_to_match));
+			var v = this.CreateString(percent_terms_to_match);
+			this._percent_terms_to_match = percent_terms_to_match;
+			this.Add("percent_terms_to_match", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public MltQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal int _search_from { get; set; }
 		///<summary>The offset from which to return results</summary>
 		public MltQueryString SearchFrom(int search_from)
 		{
-			this.Add("search_from", this.CreateString(search_from));
+			var v = this.CreateString(search_from);
+			this._search_from = search_from;
+			this.Add("search_from", v);
 			return this;
 		}
 
+		
+		internal string[] _search_indices { get; set; }
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
 		public MltQueryString SearchIndices(params string[] search_indices)
 		{
-			this.Add("search_indices", this.CreateString(search_indices));
+			var v = this.CreateString(search_indices);
+			this._search_indices = search_indices;
+			this.Add("search_indices", v);
 			return this;
 		}
 
+		
+		internal string _search_query_hint { get; set; }
 		///<summary>The search query hint</summary>
 		public MltQueryString SearchQueryHint(string search_query_hint)
 		{
-			this.Add("search_query_hint", this.CreateString(search_query_hint));
+			var v = this.CreateString(search_query_hint);
+			this._search_query_hint = search_query_hint;
+			this.Add("search_query_hint", v);
 			return this;
 		}
 
+		
+		internal string _search_scroll { get; set; }
 		///<summary>A scroll search request definition</summary>
 		public MltQueryString SearchScroll(string search_scroll)
 		{
-			this.Add("search_scroll", this.CreateString(search_scroll));
+			var v = this.CreateString(search_scroll);
+			this._search_scroll = search_scroll;
+			this.Add("search_scroll", v);
 			return this;
 		}
 
+		
+		internal int _search_size { get; set; }
 		///<summary>The number of documents to return (default: 10)</summary>
 		public MltQueryString SearchSize(int search_size)
 		{
-			this.Add("search_size", this.CreateString(search_size));
+			var v = this.CreateString(search_size);
+			this._search_size = search_size;
+			this.Add("search_size", v);
 			return this;
 		}
 
+		
+		internal string _search_source { get; set; }
 		///<summary>A specific search request definition (instead of using the request body)</summary>
 		public MltQueryString SearchSource(string search_source)
 		{
-			this.Add("search_source", this.CreateString(search_source));
+			var v = this.CreateString(search_source);
+			this._search_source = search_source;
+			this.Add("search_source", v);
 			return this;
 		}
 
+		
+		internal string _search_type { get; set; }
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
 		public MltQueryString SearchType(string search_type)
 		{
-			this.Add("search_type", this.CreateString(search_type));
+			var v = this.CreateString(search_type);
+			this._search_type = search_type;
+			this.Add("search_type", v);
 			return this;
 		}
 
+		
+		internal string[] _search_types { get; set; }
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
 		public MltQueryString SearchTypes(params string[] search_types)
 		{
-			this.Add("search_types", this.CreateString(search_types));
+			var v = this.CreateString(search_types);
+			this._search_types = search_types;
+			this.Add("search_types", v);
 			return this;
 		}
 
+		
+		internal string[] _stop_words { get; set; }
 		///<summary>A list of stop words to be ignored</summary>
 		public MltQueryString StopWords(params string[] stop_words)
 		{
-			this.Add("stop_words", this.CreateString(stop_words));
+			var v = this.CreateString(stop_words);
+			this._stop_words = stop_words;
+			this.Add("stop_words", v);
 			return this;
 		}
 
@@ -2297,10 +3325,14 @@ namespace Nest
 	///</summary>
 	public class MsearchQueryString : FluentQueryString<MsearchQueryString> 
 	{
+		
+		internal SearchTypeOptions _search_type { get; set; }
 		///<summary>Search operation type</summary>
 		public MsearchQueryString SearchType(SearchTypeOptions search_type)
 		{
-			this.Add("search_type", this.CreateString(search_type));
+			var v = this.CreateString(search_type);
+			this._search_type = search_type;
+			this.Add("search_type", v);
 			return this;
 		}
 
@@ -2314,10 +3346,14 @@ namespace Nest
 	///</summary>
 	public class PercolateQueryString : FluentQueryString<PercolateQueryString> 
 	{
+		
+		internal bool _prefer_local { get; set; }
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public PercolateQueryString PreferLocal(bool prefer_local)
 		{
-			this.Add("prefer_local", this.CreateString(prefer_local));
+			var v = this.CreateString(prefer_local);
+			this._prefer_local = prefer_local;
+			this.Add("prefer_local", v);
 			return this;
 		}
 
@@ -2331,17 +3367,25 @@ namespace Nest
 	///</summary>
 	public class ScrollQueryString : FluentQueryString<ScrollQueryString> 
 	{
+		
+		internal string _scroll { get; set; }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public ScrollQueryString Scroll(string scroll)
 		{
-			this.Add("scroll", this.CreateString(scroll));
+			var v = this.CreateString(scroll);
+			this._scroll = scroll;
+			this.Add("scroll", v);
 			return this;
 		}
 
+		
+		internal string _scroll_id { get; set; }
 		///<summary>The scroll ID for scrolled search</summary>
 		public ScrollQueryString ScrollId(string scroll_id)
 		{
-			this.Add("scroll_id", this.CreateString(scroll_id));
+			var v = this.CreateString(scroll_id);
+			this._scroll_id = scroll_id;
+			this.Add("scroll_id", v);
 			return this;
 		}
 
@@ -2355,206 +3399,322 @@ namespace Nest
 	///</summary>
 	public class SearchQueryString : FluentQueryString<SearchQueryString> 
 	{
+		
+		internal string _analyzer { get; set; }
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchQueryString Analyzer(string analyzer)
 		{
-			this.Add("analyzer", this.CreateString(analyzer));
+			var v = this.CreateString(analyzer);
+			this._analyzer = analyzer;
+			this.Add("analyzer", v);
 			return this;
 		}
 
+		
+		internal bool _analyze_wildcard { get; set; }
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
 		public SearchQueryString AnalyzeWildcard(bool analyze_wildcard)
 		{
-			this.Add("analyze_wildcard", this.CreateString(analyze_wildcard));
+			var v = this.CreateString(analyze_wildcard);
+			this._analyze_wildcard = analyze_wildcard;
+			this.Add("analyze_wildcard", v);
 			return this;
 		}
 
+		
+		internal DefaultOperatorOptions _default_operator { get; set; }
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public SearchQueryString DefaultOperator(DefaultOperatorOptions default_operator)
 		{
-			this.Add("default_operator", this.CreateString(default_operator));
+			var v = this.CreateString(default_operator);
+			this._default_operator = default_operator;
+			this.Add("default_operator", v);
 			return this;
 		}
 
+		
+		internal string _df { get; set; }
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
 		public SearchQueryString Df(string df)
 		{
-			this.Add("df", this.CreateString(df));
+			var v = this.CreateString(df);
+			this._df = df;
+			this.Add("df", v);
 			return this;
 		}
 
+		
+		internal bool _explain { get; set; }
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
 		public SearchQueryString Explain(bool explain)
 		{
-			this.Add("explain", this.CreateString(explain));
+			var v = this.CreateString(explain);
+			this._explain = explain;
+			this.Add("explain", v);
 			return this;
 		}
 
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to return as part of a hit</summary>
 		public SearchQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal int _from { get; set; }
 		///<summary>Starting offset (default: 0)</summary>
 		public SearchQueryString From(int from)
 		{
-			this.Add("from", this.CreateString(from));
+			var v = this.CreateString(from);
+			this._from = from;
+			this.Add("from", v);
 			return this;
 		}
 
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public SearchQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal string[] _indices_boost { get; set; }
 		///<summary>Comma-separated list of index boosts</summary>
 		public SearchQueryString IndicesBoost(params string[] indices_boost)
 		{
-			this.Add("indices_boost", this.CreateString(indices_boost));
+			var v = this.CreateString(indices_boost);
+			this._indices_boost = indices_boost;
+			this.Add("indices_boost", v);
 			return this;
 		}
 
+		
+		internal bool _lenient { get; set; }
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public SearchQueryString Lenient(bool lenient)
 		{
-			this.Add("lenient", this.CreateString(lenient));
+			var v = this.CreateString(lenient);
+			this._lenient = lenient;
+			this.Add("lenient", v);
 			return this;
 		}
 
+		
+		internal bool _lowercase_expanded_terms { get; set; }
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public SearchQueryString LowercaseExpandedTerms(bool lowercase_expanded_terms)
 		{
-			this.Add("lowercase_expanded_terms", this.CreateString(lowercase_expanded_terms));
+			var v = this.CreateString(lowercase_expanded_terms);
+			this._lowercase_expanded_terms = lowercase_expanded_terms;
+			this.Add("lowercase_expanded_terms", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal string _q { get; set; }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public SearchQueryString Q(string q)
 		{
-			this.Add("q", this.CreateString(q));
+			var v = this.CreateString(q);
+			this._q = q;
+			this.Add("q", v);
 			return this;
 		}
 
+		
+		internal string[] _routing { get; set; }
 		///<summary>A comma-separated list of specific routing values</summary>
 		public SearchQueryString Routing(params string[] routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _scroll { get; set; }
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public SearchQueryString Scroll(string scroll)
 		{
-			this.Add("scroll", this.CreateString(scroll));
+			var v = this.CreateString(scroll);
+			this._scroll = scroll;
+			this.Add("scroll", v);
 			return this;
 		}
 
+		
+		internal SearchTypeOptions _search_type { get; set; }
 		///<summary>Search operation type</summary>
 		public SearchQueryString SearchType(SearchTypeOptions search_type)
 		{
-			this.Add("search_type", this.CreateString(search_type));
+			var v = this.CreateString(search_type);
+			this._search_type = search_type;
+			this.Add("search_type", v);
 			return this;
 		}
 
+		
+		internal int _size { get; set; }
 		///<summary>Number of hits to return (default: 10)</summary>
 		public SearchQueryString Size(int size)
 		{
-			this.Add("size", this.CreateString(size));
+			var v = this.CreateString(size);
+			this._size = size;
+			this.Add("size", v);
 			return this;
 		}
 
+		
+		internal string[] _sort { get; set; }
 		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
 		public SearchQueryString Sort(params string[] sort)
 		{
-			this.Add("sort", this.CreateString(sort));
+			var v = this.CreateString(sort);
+			this._sort = sort;
+			this.Add("sort", v);
 			return this;
 		}
 
+		
+		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
 		public SearchQueryString Source(string source)
 		{
-			this.Add("source", this.CreateString(source));
+			var v = this.CreateString(source);
+			this._source = source;
+			this.Add("source", v);
 			return this;
 		}
 
+		
+		internal string[] __source { get; set; }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public SearchQueryString Source(params string[] _source)
 		{
-			this.Add("_source", this.CreateString(_source));
+			var v = this.CreateString(_source);
+			this.__source = _source;
+			this.Add("_source", v);
 			return this;
 		}
 
+		
+		internal string[] __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public SearchQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.Add("_source_exclude", this.CreateString(_source_exclude));
+			var v = this.CreateString(_source_exclude);
+			this.__source_exclude = _source_exclude;
+			this.Add("_source_exclude", v);
 			return this;
 		}
 
+		
+		internal string[] __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SearchQueryString SourceInclude(params string[] _source_include)
 		{
-			this.Add("_source_include", this.CreateString(_source_include));
+			var v = this.CreateString(_source_include);
+			this.__source_include = _source_include;
+			this.Add("_source_include", v);
 			return this;
 		}
 
+		
+		internal string[] _stats { get; set; }
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public SearchQueryString Stats(params string[] stats)
 		{
-			this.Add("stats", this.CreateString(stats));
+			var v = this.CreateString(stats);
+			this._stats = stats;
+			this.Add("stats", v);
 			return this;
 		}
 
+		
+		internal string _suggest_field { get; set; }
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchQueryString SuggestField(string suggest_field)
 		{
-			this.Add("suggest_field", this.CreateString(suggest_field));
+			var v = this.CreateString(suggest_field);
+			this._suggest_field = suggest_field;
+			this.Add("suggest_field", v);
 			return this;
 		}
 
+		
+		internal SuggestModeOptions _suggest_mode { get; set; }
 		///<summary>Specify suggest mode</summary>
 		public SearchQueryString SuggestMode(SuggestModeOptions suggest_mode)
 		{
-			this.Add("suggest_mode", this.CreateString(suggest_mode));
+			var v = this.CreateString(suggest_mode);
+			this._suggest_mode = suggest_mode;
+			this.Add("suggest_mode", v);
 			return this;
 		}
 
+		
+		internal int _suggest_size { get; set; }
 		///<summary>How many suggestions to return in response</summary>
 		public SearchQueryString SuggestSize(int suggest_size)
 		{
-			this.Add("suggest_size", this.CreateString(suggest_size));
+			var v = this.CreateString(suggest_size);
+			this._suggest_size = suggest_size;
+			this.Add("suggest_size", v);
 			return this;
 		}
 
+		
+		internal string _suggest_text { get; set; }
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public SearchQueryString SuggestText(string suggest_text)
 		{
-			this.Add("suggest_text", this.CreateString(suggest_text));
+			var v = this.CreateString(suggest_text);
+			this._suggest_text = suggest_text;
+			this.Add("suggest_text", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public SearchQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal bool _version { get; set; }
 		///<summary>Specify whether to return document version as part of a hit</summary>
 		public SearchQueryString Version(bool version)
 		{
-			this.Add("version", this.CreateString(version));
+			var v = this.CreateString(version);
+			this._version = version;
+			this.Add("version", v);
 			return this;
 		}
 
@@ -2568,31 +3728,47 @@ namespace Nest
 	///</summary>
 	public class SuggestQueryString : FluentQueryString<SuggestQueryString> 
 	{
+		
+		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public SuggestQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
-			this.Add("ignore_indices", this.CreateString(ignore_indices));
+			var v = this.CreateString(ignore_indices);
+			this._ignore_indices = ignore_indices;
+			this.Add("ignore_indices", v);
 			return this;
 		}
 
+		
+		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SuggestQueryString Preference(string preference)
 		{
-			this.Add("preference", this.CreateString(preference));
+			var v = this.CreateString(preference);
+			this._preference = preference;
+			this.Add("preference", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public SuggestQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition (instead of using request body)</summary>
 		public SuggestQueryString Source(string source)
 		{
-			this.Add("source", this.CreateString(source));
+			var v = this.CreateString(source);
+			this._source = source;
+			this.Add("source", v);
 			return this;
 		}
 
@@ -2606,108 +3782,168 @@ namespace Nest
 	///</summary>
 	public class UpdateQueryString : FluentQueryString<UpdateQueryString> 
 	{
+		
+		internal ConsistencyOptions _consistency { get; set; }
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public UpdateQueryString Consistency(ConsistencyOptions consistency)
 		{
-			this.Add("consistency", this.CreateString(consistency));
+			var v = this.CreateString(consistency);
+			this._consistency = consistency;
+			this.Add("consistency", v);
 			return this;
 		}
 
+		
+		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public UpdateQueryString Fields(params string[] fields)
 		{
-			this.Add("fields", this.CreateString(fields));
+			var v = this.CreateString(fields);
+			this._fields = fields;
+			this.Add("fields", v);
 			return this;
 		}
 
+		
+		internal string _lang { get; set; }
 		///<summary>The script language (default: mvel)</summary>
 		public UpdateQueryString Lang(string lang)
 		{
-			this.Add("lang", this.CreateString(lang));
+			var v = this.CreateString(lang);
+			this._lang = lang;
+			this.Add("lang", v);
 			return this;
 		}
 
+		
+		internal string _parent { get; set; }
 		///<summary>ID of the parent document</summary>
 		public UpdateQueryString Parent(string parent)
 		{
-			this.Add("parent", this.CreateString(parent));
+			var v = this.CreateString(parent);
+			this._parent = parent;
+			this.Add("parent", v);
 			return this;
 		}
 
+		
+		internal string _percolate { get; set; }
 		///<summary>Perform percolation during the operation; use specific registered query name, attribute, or wildcard</summary>
 		public UpdateQueryString Percolate(string percolate)
 		{
-			this.Add("percolate", this.CreateString(percolate));
+			var v = this.CreateString(percolate);
+			this._percolate = percolate;
+			this.Add("percolate", v);
 			return this;
 		}
 
+		
+		internal bool _refresh { get; set; }
 		///<summary>Refresh the index after performing the operation</summary>
 		public UpdateQueryString Refresh(bool refresh)
 		{
-			this.Add("refresh", this.CreateString(refresh));
+			var v = this.CreateString(refresh);
+			this._refresh = refresh;
+			this.Add("refresh", v);
 			return this;
 		}
 
+		
+		internal ReplicationOptions _replication { get; set; }
 		///<summary>Specific replication type</summary>
 		public UpdateQueryString Replication(ReplicationOptions replication)
 		{
-			this.Add("replication", this.CreateString(replication));
+			var v = this.CreateString(replication);
+			this._replication = replication;
+			this.Add("replication", v);
 			return this;
 		}
 
+		
+		internal int _retry_on_conflict { get; set; }
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public UpdateQueryString RetryOnConflict(int retry_on_conflict)
 		{
-			this.Add("retry_on_conflict", this.CreateString(retry_on_conflict));
+			var v = this.CreateString(retry_on_conflict);
+			this._retry_on_conflict = retry_on_conflict;
+			this.Add("retry_on_conflict", v);
 			return this;
 		}
 
+		
+		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
 		public UpdateQueryString Routing(string routing)
 		{
-			this.Add("routing", this.CreateString(routing));
+			var v = this.CreateString(routing);
+			this._routing = routing;
+			this.Add("routing", v);
 			return this;
 		}
 
+		
+		internal string _script { get; set; }
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
 		public UpdateQueryString Script(string script)
 		{
-			this.Add("script", this.CreateString(script));
+			var v = this.CreateString(script);
+			this._script = script;
+			this.Add("script", v);
 			return this;
 		}
 
+		
+		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public UpdateQueryString Timeout(string timeout)
 		{
-			this.Add("timeout", this.CreateString(timeout));
+			var v = this.CreateString(timeout);
+			this._timeout = timeout;
+			this.Add("timeout", v);
 			return this;
 		}
 
+		
+		internal string _timestamp { get; set; }
 		///<summary>Explicit timestamp for the document</summary>
 		public UpdateQueryString Timestamp(string timestamp)
 		{
-			this.Add("timestamp", this.CreateString(timestamp));
+			var v = this.CreateString(timestamp);
+			this._timestamp = timestamp;
+			this.Add("timestamp", v);
 			return this;
 		}
 
+		
+		internal string _ttl { get; set; }
 		///<summary>Expiration time for the document</summary>
 		public UpdateQueryString Ttl(string ttl)
 		{
-			this.Add("ttl", this.CreateString(ttl));
+			var v = this.CreateString(ttl);
+			this._ttl = ttl;
+			this.Add("ttl", v);
 			return this;
 		}
 
+		
+		internal int _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
 		public UpdateQueryString Version(int version)
 		{
-			this.Add("version", this.CreateString(version));
+			var v = this.CreateString(version);
+			this._version = version;
+			this.Add("version", v);
 			return this;
 		}
 
+		
+		internal VersionTypeOptions _version_type { get; set; }
 		///<summary>Specific version type</summary>
 		public UpdateQueryString VersionType(VersionTypeOptions version_type)
 		{
-			this.Add("version_type", this.CreateString(version_type));
+			var v = this.CreateString(version_type);
+			this._version_type = version_type;
+			this.Add("version_type", v);
 			return this;
 		}
 

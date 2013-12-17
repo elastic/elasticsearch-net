@@ -11,27 +11,26 @@ namespace Nest
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, BaseQuery> querySelector) 
+		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
 			where T : class
 		{
-			var bq = querySelector(new ValidateQueryDescriptor<T>());
-			var descriptor = bq as ValidateQueryDescriptor<T>;
-			
+			querySelector.ThrowIfNull("querySelector");
+			var descriptor = querySelector(new ValidateQueryDescriptor<T>());
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesValidateQueryDispatch(pathInfo, bq)
+			return this.RawDispatch.IndicesValidateQueryDispatch(pathInfo, descriptor)
 				.Deserialize<ValidateResponse>();
 		}
 
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, BaseQuery> querySelector) where T : class
+		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
+			where T : class
 		{
-			var bq = querySelector(new ValidateQueryDescriptor<T>());
-			var descriptor = bq as ValidateQueryDescriptor<T>;
-			
+			querySelector.ThrowIfNull("querySelector");
+			var descriptor = querySelector(new ValidateQueryDescriptor<T>());
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesValidateQueryDispatchAsync(pathInfo, bq)
+			return this.RawDispatch.IndicesValidateQueryDispatchAsync(pathInfo, descriptor)
 				.ContinueWith(r => r.Result.Deserialize<ValidateResponse>() as IValidateResponse);
 		}
 

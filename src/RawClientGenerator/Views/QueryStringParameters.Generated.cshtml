@@ -24,10 +24,14 @@ namespace Nest
 	{
 	  @foreach (KeyValuePair<string, RawClientGenerator.ApiQueryParameters> kv in method.Url.Params)
 	  {
-		<text>///<summary>@kv.Value.Description</summary>
+		<text>
+		internal @kv.Value.CsharpType(kv.Key).Replace("params ", "") _@(kv.Key) { get; set; }
+		///<summary>@kv.Value.Description</summary>
 		public @method.QueryStringParamName @(kv.Key.ToPascalCase())(@kv.Value.CsharpType(kv.Key) @kv.Key)
 		{
-			this.Add("@kv.Key", this.CreateString(@kv.Key));
+			var v = this.CreateString(@kv.Key);
+			this._@(kv.Key) = @kv.Key;
+			this.Add("@kv.Key", v);
 			return this;
 		}
 </text>

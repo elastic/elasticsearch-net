@@ -122,7 +122,6 @@ namespace RawClientGenerator
 					method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
 			}
 
-
 			//remove duplicate occurance of the HTTP method name
 			var m = method.HttpMethod.ToPascalCase();
 			method.FullName =
@@ -131,6 +130,13 @@ namespace RawClientGenerator
 			string manualOverride;
 			if (MethodNameOverrides.TryGetValue(method.QueryStringParamName, out manualOverride))
 				method.QueryStringParamName = manualOverride;
+
+			method.DescriptorType = method.QueryStringParamName.Replace("QueryString", "Descriptor");
+			string generic;
+			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
+				method.DescriptorTypeGeneric = generic;
+
+
 		}
 
 		public static string CreateMethodName(string apiEnpointKey, ApiEndpoint endpoint)
