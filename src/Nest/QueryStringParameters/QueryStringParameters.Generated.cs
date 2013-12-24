@@ -2466,12 +2466,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/
 	///</pre>
 	///</summary>
-	public class IndicesPutSettingsQueryString : FluentQueryString<IndicesPutSettingsQueryString> 
+	public class UpdateSettingsQueryString : FluentQueryString<UpdateSettingsQueryString> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutSettingsQueryString MasterTimeout(string master_timeout)
+		public UpdateSettingsQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;

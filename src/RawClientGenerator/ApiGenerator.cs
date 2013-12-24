@@ -90,7 +90,8 @@ namespace RawClientGenerator
 		private static readonly Dictionary<string, string> MethodNameOverrides =
  			new Dictionary<string, string>
  			{
- 				{"IndicesValidateQueryQueryString", "ValidateQueryQueryString"}
+ 				{"IndicesValidateQueryQueryString", "ValidateQueryQueryString"},
+ 				{"IndicesPutSettingsQueryString", "UpdateSettingsQueryString"}
  			};
 
 		private static readonly Dictionary<string, string> KnownDescriptors =

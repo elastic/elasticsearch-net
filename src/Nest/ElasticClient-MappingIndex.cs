@@ -67,41 +67,6 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Update the index settings for the default index
-		/// </summary>
-		public ISettingsOperationResponse UpdateSettings(IndexSettings settings)
-		{
-			var index = this._connectionSettings.DefaultIndex;
-			return this.UpdateSettings(index, settings);
-		}
-		/// <summary>
-		/// Update the index settings for the specified index
-		/// </summary>
-		public ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings)
-		{
-
-			string path = this.PathResolver.CreateIndexPath(index, "_settings");
-			settings.Settings = settings.Settings
-					.Where(kv => IndexSettings.UpdateWhiteList.Any(p => kv.Key.StartsWith(p))).ToDictionary(kv => kv.Key, kv => kv.Value);
-
-			string data = this.Serializer.Serialize(settings, Formatting.None);
-			var status = this.Connection.PutSync(path, data);
-
-			var r = new SettingsOperationResponse();
-			try
-			{
-				r = this.Deserialize<SettingsOperationResponse>(status.Result);
-			}
-			catch
-			{
-
-			}
-			r.IsValid = status.Success;
-			r.ConnectionStatus = status;
-			return r;
-		}
-
-		/// <summary>
 		/// Delete the default index
 		/// </summary>
 		public IIndicesResponse DeleteIndex<T>() where T : class

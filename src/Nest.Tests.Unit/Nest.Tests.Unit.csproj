@@ -98,6 +98,8 @@
     <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
     <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
     <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="Core\UpdateSettings\UpdateSettingsRequestTests.cs" />
+    <Compile Include="Core\UpdateSettings\UpdateSettingsTests.cs" />
     <Compile Include="Core\Update\UpdateRequestTests.cs" />
     <Compile Include="Core\Validate\ValidateRequestTests.cs" />
     <Compile Include="Core\Versioning\VersioningTests.cs" />
@@ -353,6 +355,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\UpdateSettings\AllUpdateSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\UpdateSettings\CanTakeUnknownUpdateSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Update\UpsertUsingScriptAndPartialObject.json">

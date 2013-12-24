@@ -39,6 +39,11 @@ namespace Nest
 			return this.IndexNameResolver.GetIndexForType(type);
 		}
 
+		public string IndexName(IndexNameMarker index)
+		{
+			return index.Resolve(this._connectionSettings);
+		}
+
 		public string Id<T>(T obj) where T : class
 		{
 			return this.IdResolver.GetIdFor(obj);

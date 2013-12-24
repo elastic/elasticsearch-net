@@ -1807,7 +1807,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesPutSettingsDispatch(ElasticSearchPathInfo<IndicesPutSettingsQueryString> pathInfo , object body)
+		internal ConnectionStatus IndicesPutSettingsDispatch(ElasticSearchPathInfo<UpdateSettingsQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1825,7 +1825,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesPutSettingsDispatchAsync(ElasticSearchPathInfo<IndicesPutSettingsQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> IndicesPutSettingsDispatchAsync(ElasticSearchPathInfo<UpdateSettingsQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

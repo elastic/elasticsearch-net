@@ -2003,13 +2003,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/
 	///</pre>
 	///</summary>
-	public partial class IndicesPutSettingsDescriptor
+	public partial class UpdateSettingsDescriptor
 	{
-		internal IndicesPutSettingsQueryString _QueryString = new IndicesPutSettingsQueryString(); 
+		internal UpdateSettingsQueryString _QueryString = new UpdateSettingsQueryString(); 
 
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutSettingsDescriptor MasterTimeout(string master_timeout)
+		public UpdateSettingsDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;

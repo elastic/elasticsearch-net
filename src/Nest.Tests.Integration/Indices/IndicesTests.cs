@@ -189,15 +189,16 @@ namespace Nest.Tests.Integration.Indices
 			client.CreateIndex(index, settings);
 
 			settings["refresh_interval"] = "-1";
-			settings["search.slowlog.threshold.fetch.warn"] = "5s";
 
-			var r = this._client.UpdateSettings(index, settings);
+			var r = this._client.UpdateSettings(us=>us
+				.Index(index)
+				.RefreshInterval("-1")
+			);
 
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			var getResponse = this._client.GetIndexSettings(index);
 			Assert.AreEqual(getResponse.Settings["refresh_interval"], "-1");
-			Assert.AreEqual(getResponse.Settings["search.slowlog.threshold.fetch.warn"], "1s");
 
 			this._client.DeleteIndex(index);
 		}

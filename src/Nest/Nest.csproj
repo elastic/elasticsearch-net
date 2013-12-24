@@ -70,6 +70,10 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\Paths\RawJsonDescriptorBase.cs" />
+    <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
+    <Compile Include="ElasticClient-UpdateSettings.cs" />
     <Compile Include="DSL\BaseSimpleGetDescriptor.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
@@ -532,6 +536,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\RawJsonConverterConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />

@@ -3852,13 +3852,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
-		public ConnectionStatus IndicesPutSettings(object body, Func<IndicesPutSettingsQueryString, IndicesPutSettingsQueryString> queryString = null)
+		public ConnectionStatus IndicesPutSettings(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
 			var url = "/_settings".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutSettingsQueryString());
+				var qs = queryString(new UpdateSettingsQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3869,13 +3869,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
-		public Task<ConnectionStatus> IndicesPutSettingsAsync(object body, Func<IndicesPutSettingsQueryString, IndicesPutSettingsQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesPutSettingsAsync(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
 			var url = "/_settings".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutSettingsQueryString());
+				var qs = queryString(new UpdateSettingsQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3887,14 +3887,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
-		public ConnectionStatus IndicesPutSettings(string index, object body, Func<IndicesPutSettingsQueryString, IndicesPutSettingsQueryString> queryString = null)
+		public ConnectionStatus IndicesPutSettings(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_settings".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutSettingsQueryString());
+				var qs = queryString(new UpdateSettingsQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3906,14 +3906,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
-		public Task<ConnectionStatus> IndicesPutSettingsAsync(string index, object body, Func<IndicesPutSettingsQueryString, IndicesPutSettingsQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesPutSettingsAsync(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_settings".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesPutSettingsQueryString());
+				var qs = queryString(new UpdateSettingsQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 

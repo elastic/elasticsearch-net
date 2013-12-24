@@ -326,8 +326,8 @@ namespace Nest
 			where T : class
 			where K : class;
 		
-		ISettingsOperationResponse UpdateSettings(IndexSettings settings);
-		ISettingsOperationResponse UpdateSettings(string index, IndexSettings settings);
+		ISettingsOperationResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
+		Task<ISettingsOperationResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
 
 		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) where T : class;
 		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) where T : class;
