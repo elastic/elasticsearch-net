@@ -6,6 +6,22 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 	[TestFixture]
 	public class BoolQueryJson
 	{
+
+		[Test]
+		public void EmptyBoolQuery()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(qd => null);
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10 }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+
+
 		[Test]
 		public void BoolQuery()
 		{
@@ -123,7 +139,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""bool"": {
-							minimum_number_should_match: 1,
 							boost: 2.0,
 						
 							""must"": [
@@ -144,7 +159,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 										""name"": { value: ""elasticflume"" }
 									}
 								}
-							]
+							],
+							minimum_number_should_match: 1,
+
 						}
 					}
 			}";

@@ -32,7 +32,7 @@ namespace Nest
         [JsonProperty(PropertyName = "max_boost")]
         internal string _MaxBoost { get; set; }
 
-        internal bool IsConditionless
+		bool IQuery.IsConditionless
         {
             get
             {
@@ -52,7 +52,6 @@ namespace Nest
 
         public CustomFiltersScoreDescriptor<T> ScoreMode(ScoreMode scoreMode)
         {
-            scoreMode.ThrowIfNull("scoreMode");
             this._ScoreMode = scoreMode;
             return this;
         }
@@ -82,14 +81,12 @@ namespace Nest
 
         public CustomFiltersScoreDescriptor<T> Language(string language)
         {
-            language.ThrowIfNull("language");
             this._Lang = language;
             return this;
         }
 
         public CustomFiltersScoreDescriptor<T> MaxBoost(string maxBoost)
         {
-            maxBoost.ThrowIfNull("maxBoost");
             this._MaxBoost = maxBoost;
             return this;
         }

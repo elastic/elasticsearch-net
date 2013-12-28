@@ -29,8 +29,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "_routing")]
 		internal string _Routing { get; set; }
 
-		[JsonProperty(PropertyName = "_percolate")]
-		internal string _Percolate { get; set; }
 
 		[JsonProperty(PropertyName = "_parent")]
 		internal string _Parent { get; set; }
@@ -41,12 +39,7 @@ namespace Nest
 		[JsonProperty("_ttl")]
 		internal string _Ttl { get; set; }
 
-		[JsonProperty("consistency")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal Consistency? _Consistency { get; set; }
 
-		[JsonProperty("refresh ")]
-		internal bool? _Refresh { get; set; }
 
 		[JsonProperty("_retry_on_conflict")]
 		internal int? _RetriesOnConflict { get; set; }

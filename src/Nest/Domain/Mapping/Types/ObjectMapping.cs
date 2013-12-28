@@ -24,7 +24,8 @@ namespace Nest
     public string Similarity { get; set; }
 
 		[JsonProperty("dynamic")]
-		public bool? Dynamic { get; set; }
+		[JsonConverter(typeof(DynamicMappingOptionConverter))]
+		public DynamicMappingOption? Dynamic { get; set; }
 
 		[JsonProperty("enabled")]
 		public bool? Enabled { get; set; }

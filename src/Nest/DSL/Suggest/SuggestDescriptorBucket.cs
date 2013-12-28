@@ -13,5 +13,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "phrase")]
 		public PhraseSuggestDescriptor<T> PhraseSuggest { get; set; }
+
+        [JsonProperty(PropertyName = "completion")]
+        public CompletionSuggestDescriptor<T> CompletionSuggest { get; set; }
 	}
 }

@@ -19,7 +19,7 @@ namespace Nest
 		[JsonProperty("negative_boost")]
 		internal double? _NegativeBoost { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

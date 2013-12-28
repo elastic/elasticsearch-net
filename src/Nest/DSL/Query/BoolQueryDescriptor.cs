@@ -9,66 +9,33 @@ namespace Nest
 {
 	internal static class BoolBaseQueryDescriptorExtensions
 	{
-		internal static bool CanJoinMust(this BoolBaseQueryDescriptor bq)
+		internal static bool CanMergeMustAndMustNots(this BoolBaseQueryDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinMust());
+			return bq == null || !bq._ShouldQueries.HasAny();
 		}
-		internal static bool CanJoinMustNot(this BoolBaseQueryDescriptor bq)
-		{
-			return bq == null || (bq != null && bq._CanJoinMustNot());
-		}
+
 		internal static bool CanJoinShould(this BoolBaseQueryDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinShould());
+			return bq == null
+				|| (
+					(bq._ShouldQueries.HasAny() && !bq._MustQueries.HasAny() && !bq._MustNotQueries.HasAny())
+					|| !bq._ShouldQueries.HasAny()
+				);
 		}
-		internal static IEnumerable<BaseQuery> MergeMustQueries(this BaseQuery lbq, BaseQuery rbq)
-		{
-			var lBoolDescriptor = lbq.BoolQueryDescriptor;
-			var lHasMustQueries = lBoolDescriptor != null &&
-				lBoolDescriptor._MustQueries.HasAny();
 
-			var rBoolDescriptor = rbq.BoolQueryDescriptor;
-			var rHasMustQueries = rBoolDescriptor != null &&
-				rBoolDescriptor._MustQueries.HasAny();
-
-			var lq = lHasMustQueries
-			? lBoolDescriptor._MustQueries
-			: new[] { lbq };
-			var rq = rHasMustQueries ? rBoolDescriptor._MustQueries : new[] { rbq };
-
-			return lq.Concat(rq);
-		}
 		internal static IEnumerable<BaseQuery> MergeShouldQueries(this BaseQuery lbq, BaseQuery rbq)
 		{
 			var lBoolDescriptor = lbq.BoolQueryDescriptor;
 			var lHasShouldQueries = lBoolDescriptor != null &&
-				lBoolDescriptor._ShouldQueries.HasAny();
+			  lBoolDescriptor._ShouldQueries.HasAny();
 
 			var rBoolDescriptor = rbq.BoolQueryDescriptor;
 			var rHasShouldQueries = rBoolDescriptor != null &&
-				rBoolDescriptor._ShouldQueries.HasAny();
+			  rBoolDescriptor._ShouldQueries.HasAny();
 
 
 			var lq = lHasShouldQueries ? lBoolDescriptor._ShouldQueries : new[] { lbq };
 			var rq = rHasShouldQueries ? rBoolDescriptor._ShouldQueries : new[] { rbq };
-
-			return lq.Concat(rq);
-		}
-		internal static IEnumerable<BaseQuery> MergeMustNotQueries(this BaseQuery lbq, BaseQuery rbq)
-		{
-			var lBoolDescriptor = lbq.BoolQueryDescriptor;
-			var lHasMustNotQueries = lBoolDescriptor != null &&
-				lBoolDescriptor._MustNotQueries.HasAny();
-
-			var rBoolDescriptor = rbq.BoolQueryDescriptor;
-			var rHasMustNotQueries = rBoolDescriptor != null &&
-				rBoolDescriptor._MustNotQueries.HasAny();
-
-
-			var lq = lHasMustNotQueries ? lBoolDescriptor._MustNotQueries : Enumerable.Empty<BaseQuery>();
-			var rq = rHasMustNotQueries ? rBoolDescriptor._MustNotQueries : Enumerable.Empty<BaseQuery>();
-			if (!lq.HasAny() && !rq.HasAny())
-				return null;
 
 			return lq.Concat(rq);
 		}
@@ -86,6 +53,9 @@ namespace Nest
 
 		[JsonProperty("should")]
 		internal IEnumerable<BaseQuery> _ShouldQueries { get; set; }
+
+		[JsonProperty("minimum_number_should_match")]
+		internal object _MinimumNumberShouldMatches { get; set; }
 
 		internal bool _HasOnlyMustNot()
 		{
@@ -119,13 +89,12 @@ namespace Nest
 			return this;
 		}
 
-		[JsonProperty("minimum_number_should_match")]
-		internal int? _MinimumNumberShouldMatches { get; set; }
+		
 
 		[JsonProperty("boost")]
 		internal double? _Boost { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -135,7 +104,6 @@ namespace Nest
 					|| (this._ShouldQueries.HasAny() && this._ShouldQueries.All(q => q.IsConditionless))
 					|| (this._MustQueries.HasAny() && this._MustQueries.All(q => q.IsConditionless));
 			}
-
 		}
 
 		/// <summary>
@@ -144,6 +112,16 @@ namespace Nest
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(int minimumShouldMatches)
+		{
+			this._MinimumNumberShouldMatches = minimumShouldMatches;
+			return this;
+		}
+		/// <summary>
+		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied. String overload where you can specify percentages
+		/// </summary>
+		/// <param name="minimumShouldMatches"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> MinimumNumberShouldMatch(string minimumShouldMatches)
 		{
 			this._MinimumNumberShouldMatches = minimumShouldMatches;
 			return this;

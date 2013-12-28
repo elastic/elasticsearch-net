@@ -90,6 +90,7 @@ namespace Nest.Resolvers
 			}
 			return resolved;
 		}
+		
 		public string ResolveToLastToken(Expression expression)
 		{
 			var stack = new Stack<string>();

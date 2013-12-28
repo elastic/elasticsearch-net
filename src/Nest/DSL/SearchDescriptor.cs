@@ -23,8 +23,12 @@ namespace Nest
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
 
-		[JsonProperty(PropertyName = "preference")]
+		//[JsonProperty(PropertyName = "preference")]
 		internal string _Preference { get; set; }
+
+		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
+
+
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -39,7 +43,6 @@ namespace Nest
 
 
 		internal override Type _ClrType { get { return typeof(T); } }
-		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -204,7 +207,7 @@ namespace Nest
 		internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]
-		internal IDictionary<string, SuggestDescriptorBucket<T>> _Suggest { get; set; }
+		internal IDictionary<string, object> _Suggest { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		internal RawOrQueryDescriptor<T> _QueryOrRaw
@@ -370,6 +373,21 @@ namespace Nest
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
+		/// The operation will go and be executed on the primary shard, and if not available (failover), 
+		/// will execute on other shards.
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> ExecuteOnPrimaryFirst()
+		{
+			this._Preference = "_primary_first";
+			return this;
+		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
 		/// The operation will prefer to be executed on a local allocated shard is possible.
 		/// </para>
 		/// </summary>
@@ -391,6 +409,21 @@ namespace Nest
 		{
 			node.ThrowIfNull("node");
 			this._Preference = "_only_node:" + node;
+			return this;
+		}
+		/// <summary>
+		/// <para>
+		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// By default, the operation is randomized between the each shard replicas.
+		/// </para>
+		/// <para>
+		/// Prefers execution on the node with the provided node id if applicable.
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> ExecuteOnPreferredNode(string node)
+		{
+			node.ThrowIfNull("node");
+			this._Preference = string.Format("_prefer_node:{0}", node);
 			return this;
 		}
 		/// <summary>
@@ -844,28 +877,67 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> TermSuggest(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest)
+		/// <summary>
+		/// To avoid repetition of the suggest text, it is possible to define a global text.
+		/// </summary>
+		public SearchDescriptor<T> SuggestGlobalText(string globalSuggestText)
+		{
+			if (this._Suggest == null)
+				this._Suggest = new Dictionary<string, object>();
+			this._Suggest.Add("text", globalSuggestText);
+			return this;
+		}
+
+
+		/// <summary>
+		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. 
+		/// The suggested terms are provided per analyzed suggest text token. The term suggester doesn’t take the query into account that is part of request.
+		/// </summary>
+		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
-			TermSuggestDescriptor<T> desc = new TermSuggestDescriptor<T>();
-			TermSuggestDescriptor<T> item = suggest(desc);
-			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
+				this._Suggest = new Dictionary<string, object>();
+			var desc = new TermSuggestDescriptor<T>();
+			var item = suggest(desc);
+			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, TermSuggest = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}
 
-		public SearchDescriptor<T> PhraseSuggest(string name, Func<PhraseSuggestDescriptor<T>, PhraseSuggestDescriptor<T>> suggest)
+		/// <summary>
+		/// The phrase suggester adds additional logic on top of the term suggester to select entire corrected phrases 
+		/// instead of individual tokens weighted based on ngram-langugage models. 
+		/// </summary>
+		public SearchDescriptor<T> SuggestPhrase(string name, Func<PhraseSuggestDescriptor<T>, PhraseSuggestDescriptor<T>> suggest)
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (this._Suggest == null)
-				this._Suggest = new Dictionary<string, SuggestDescriptorBucket<T>>();
-			PhraseSuggestDescriptor<T> desc = new PhraseSuggestDescriptor<T>();
-			PhraseSuggestDescriptor<T> item = suggest(desc);
-			SuggestDescriptorBucket<T> bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, PhraseSuggest = item };
+				this._Suggest = new Dictionary<string, object>();
+
+			var desc = new PhraseSuggestDescriptor<T>();
+			var item = suggest(desc);
+			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, PhraseSuggest = item };
+			this._Suggest.Add(name, bucket);
+			return this;
+		}
+
+		/// <summary>
+		/// The completion suggester is a so-called prefix suggester. 
+		/// It does not do spell correction like the term or phrase suggesters but allows basic auto-complete functionality.
+		/// </summary>
+		public SearchDescriptor<T> SuggestCompletion(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest)
+		{
+			name.ThrowIfNullOrEmpty("name");
+			suggest.ThrowIfNull("suggest");
+			if (this._Suggest == null)
+				this._Suggest = new Dictionary<string, object>();
+
+			var desc = new CompletionSuggestDescriptor<T>();
+			var item = suggest(desc);
+			var bucket = new SuggestDescriptorBucket<T> { _Text = item._Text, CompletionSuggest = item };
 			this._Suggest.Add(name, bucket);
 			return this;
 		}
@@ -876,27 +948,28 @@ namespace Nest
 		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>().Strict(this._Strict);
+			var q = new QueryDescriptor<T>() { IsStrict = this._Strict };
 
 			var bq = query(q);
-			if (this._Strict && bq.IsConditionless)
-				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(bq, Formatting.Indented)));
+			return this.Query(bq);
 
-			else if (bq.IsConditionless)
-				return this;
-			this._Query = bq;
-			return this;
 		}
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
 		public SearchDescriptor<T> Query(BaseQuery query)
 		{
-			query.ThrowIfNull("query");
-			if (query.IsConditionless)
+			if (query == null)
+				return this;
+
+			if (this._Strict && query.IsConditionless)
+				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
+
+			else if (query.IsConditionless)
 				return this;
 			this._Query = query;
 			return this;
+
 		}
 
 		/// <summary>
@@ -906,11 +979,12 @@ namespace Nest
 		public SearchDescriptor<T> QueryString(string userInput)
 		{
 			var q = new QueryDescriptor<T>();
+			BaseQuery bq;
 			if (userInput.IsNullOrEmpty())
-				q.MatchAll();
+				bq = q.MatchAll();
 			else
-				q.QueryString(qs => qs.Query(userInput));
-			this._Query = q;
+				bq = q.QueryString(qs => qs.Query(userInput));
+			this._Query = bq;
 			return this;
 		}
 
@@ -933,6 +1007,8 @@ namespace Nest
 			var f = new FilterDescriptor<T>().Strict(this._Strict);
 
 			var bf = filter(f);
+			if (bf == null)
+				return this;
 			if (this._Strict && bf.IsConditionless)
 				throw new DslException("Filter resulted in a conditionless filter:\n{0}".F(JsonConvert.SerializeObject(bf, Formatting.Indented)));
 
@@ -991,10 +1067,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> MatchAll()
 		{
-			var q = new QueryDescriptor<T>();
-			q.MatchAll();
-			this._Query = q;
-			return this;
+			return this.Query(q => q.MatchAll());
 		}
 
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)

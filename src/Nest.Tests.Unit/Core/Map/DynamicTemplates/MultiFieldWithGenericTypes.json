@@ -17,6 +17,10 @@
               "type": "{dynamic_type}",
               "store": "yes",
               "index": "not_analyzed"
+            },
+            "suggest": {
+              "type": "completion",
+              "index_analyzer": "default"
             }
           }
         }

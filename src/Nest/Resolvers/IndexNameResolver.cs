@@ -25,13 +25,12 @@ namespace Nest.Resolvers
 		public string GetIndexForType(Type type)
 		{
 			var defaultIndices = this._connectionSettings.DefaultIndices;
-			var defaultIndex = this._connectionSettings.DefaultIndex;
 
 			if (defaultIndices == null)
-				return defaultIndex;
+				return this._connectionSettings.DefaultIndex;
 			if (defaultIndices.ContainsKey(type) && !string.IsNullOrWhiteSpace(defaultIndices[type]))
 				return defaultIndices[type];
-			return defaultIndex;
+			return this._connectionSettings.DefaultIndex;
 		}
 
 	}

@@ -15,7 +15,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "filter")]
 		internal BaseFilter _Filter { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

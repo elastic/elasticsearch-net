@@ -1,0 +1,11 @@
+{
+  "from": 0,
+  "size": 10,
+  "query": {
+    "term": {
+      "name": {
+        "value": ""
+      }
+    }
+  }
+}

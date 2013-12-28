@@ -15,6 +15,8 @@ namespace Nest.Domain.Settings
     {
       Name = name;
       Type = type;
+
+		SimilarityParameters = new Dictionary<string, object>();
     }
 
   }

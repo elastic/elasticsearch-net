@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>RazorMachine</id>
+    <version>2.5</version>
+    <title>RazorMachine</title>
+    <authors>Jaap Lamfers</authors>
+    <owners>Jaap Lamfers</owners>
+    <licenseUrl>http://www.microsoft.com/en-us/openness/licenses.aspx#MPL</licenseUrl>
+    <projectUrl>https://github.com/jlamfers/RazorMachine</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>RazorMachine is a robust Razor 2.0 templating engine that supports layouts as well as a _viewStart construct like Asp.Net MVC</description>
+    <releaseNotes>release 2.5 - 01/25/2013 - several improvements (like @helper support), no breaking changes in public API</releaseNotes>
+    <copyright>Copyright 2013 - Jaap Lamfers</copyright>
+    <language />
+    <tags>razor razor2 razorengine razormachine templating generator layouts masterpages</tags>
+  </metadata>
+</package>

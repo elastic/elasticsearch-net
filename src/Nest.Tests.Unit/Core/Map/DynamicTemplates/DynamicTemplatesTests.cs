@@ -30,6 +30,11 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 										.Index("not_analyzed")
 										.Store()
 									)
+									.Generic(g => g
+										.Name("suggest", noNameProperty: true)
+										.Type("completion")
+										.IndexAnalyzer("default")
+									)
 								)
 							)
 						)

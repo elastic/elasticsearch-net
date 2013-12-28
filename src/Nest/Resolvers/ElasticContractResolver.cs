@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
@@ -7,6 +8,8 @@ using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Reflection;
 using System.Globalization;
+using System.Collections;
+using Nest.Resolvers.Converters;
 
 namespace Nest.Resolvers
 {
@@ -18,20 +21,71 @@ namespace Nest.Resolvers
 		public IConnectionSettings ConnectionSettings { get; private set; }
 
 		/// <summary>
-		/// The ConcreteTypeConverter piggy backs on the resolver to inject meta data.
-		/// This is a bit of a hack but a massive performance gain.
+		/// Signals to custom converter that it can get serialization state from one of the converters
+		/// Ugly but massive performance gain
 		/// </summary>
-		internal ConcreteTypeConverter ConcreteTypeConverter { get; set; }
+		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
 
-		public ElasticContractResolver(IConnectionSettings connectionSettings) : base(true)
+		public ElasticContractResolver(IConnectionSettings connectionSettings)
+			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
 		}
 
+		protected override JsonContract CreateContract(Type objectType)
+		{
+			JsonContract contract = base.CreateContract(objectType);
+
+			// this will only be called once and then cached
+			if (typeof(IDictionary).IsAssignableFrom(objectType))
+				contract.Converter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
+
+			if (objectType == typeof(Facet))
+				contract.Converter = new FacetConverter();
+			
+			if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
+				contract.Converter = new IsoDateTimeConverter();
+
+			if (typeof(IHit<object>).IsAssignableFrom(objectType))
+				contract.Converter = new DefaultHitConverter();
+
+			if (objectType == typeof(MultiGetResponse))
+				contract.Converter = new MultiGetHitConverter();
+
+			if (objectType == typeof(MultiSearchResponse))
+				contract.Converter = new MultiSearchConverter();
+
+			if (objectType == typeof(IDictionary<string, AnalyzerBase>))
+				contract.Converter = new AnalyzerCollectionConverter();
+
+			if (objectType == typeof(IDictionary<string, TokenFilterBase>))
+				contract.Converter = new TokenFilterCollectionConverter();
+
+			if (objectType == typeof(IDictionary<string, TokenizerBase>))
+				contract.Converter = new TokenizerCollectionConverter();
+
+			if (objectType == typeof(IDictionary<string, CharFilterBase>))
+				contract.Converter = new CharFilterCollectionConverter();
+
+			if (this.ConnectionSettings.ContractConverters.HasAny())
+			{
+				foreach (var c in this.ConnectionSettings.ContractConverters)
+				{
+					var converter = c(objectType);
+					if (converter == null)
+						continue;
+					contract.Converter = converter;
+					break;
+				}
+			}
+
+			return contract;
+		}
+
 		protected override string ResolvePropertyName(string propertyName)
 		{
-      if (this.ConnectionSettings.DefaultPropertyNameInferrer != null)
-        return this.ConnectionSettings.DefaultPropertyNameInferrer(propertyName);
+			if (this.ConnectionSettings.DefaultPropertyNameInferrer != null)
+				return this.ConnectionSettings.DefaultPropertyNameInferrer(propertyName);
 
 			return propertyName.ToCamelCase();
 		}

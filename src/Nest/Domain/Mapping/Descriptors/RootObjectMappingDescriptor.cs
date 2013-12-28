@@ -100,10 +100,14 @@ namespace Nest
 			return this;
 		}
 
-		public RootObjectMappingDescriptor<T> Dynamic(bool dynamic = true)
+		public RootObjectMappingDescriptor<T> Dynamic(DynamicMappingOption dynamic)
 		{
 			this._Mapping.Dynamic = dynamic;
 			return this;
+		}
+		public RootObjectMappingDescriptor<T> Dynamic(bool dynamic = true)
+		{
+			return this.Dynamic(dynamic ? DynamicMappingOption.allow : DynamicMappingOption.ignore);
 		}
 		public RootObjectMappingDescriptor<T> Enabled(bool enabled = true)
 		{

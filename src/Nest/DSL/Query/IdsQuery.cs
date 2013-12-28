@@ -14,7 +14,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "values")]
 		public IEnumerable<string> Values { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

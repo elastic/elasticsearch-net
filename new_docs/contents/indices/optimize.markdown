@@ -18,5 +18,5 @@ The optimize API allows to optimize one or more indices through an API. The opti
 
 	var r = this.ConnectedClient.Optimize(new[] { "index", "index2" }, new OptimizeParams {MaximumSegments=2});
 
-More overloads exists and all OptimizeParams are mapped. See [the original docs](http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize.html) for parameters
+More overloads exists and all OptimizeParams are mapped. See [the original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html) for parameters
 

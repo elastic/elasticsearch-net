@@ -20,7 +20,7 @@ namespace Nest
 
 		internal string _CacheKey { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

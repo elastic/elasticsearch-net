@@ -16,10 +16,17 @@ namespace Nest
 	}
 	public class QueryDescriptor<T> : BaseQuery, IQueryDescriptor<T> where T : class
 	{
+		private readonly bool _forceConditionless;
 		private readonly TypeNameResolver typeNameResolver;
+		
 		public QueryDescriptor()
 		{
 			this.typeNameResolver = new TypeNameResolver();
+		}
+
+		internal QueryDescriptor(bool forceConditionless)
+		{
+			this.IsConditionless = forceConditionless;
 		}
 
 		[JsonProperty(PropertyName = "match_all")]
@@ -39,6 +46,7 @@ namespace Nest
 		internal CustomScoreQueryDescriptor<T> CustomScoreQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "custom_filters_score")]
 		internal CustomFiltersScoreDescriptor<T> CustomFiltersScoreQueryDescriptor { get; set; }
+
 		[JsonProperty(PropertyName = "custom_boost_factor")]
 		internal CustomBoostFactorQueryDescriptor<T> CustomBoostFactorQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "constant_score")]
@@ -47,9 +55,9 @@ namespace Nest
 		internal DismaxQueryDescriptor<T> DismaxQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "filtered")]
 		internal FilteredQueryDescriptor<T> FilteredQueryDescriptor { get; set; }
-		
+
 		[JsonProperty(PropertyName = "text")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]		
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "multi_match")]
 		internal MultiMatchQueryDescriptor<T> MultiMatchQueryDescriptor { get; set; }
@@ -64,6 +72,9 @@ namespace Nest
 		internal IDictionary<string, object> TermsQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
+		[JsonProperty(PropertyName = "regexp")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal IDictionary<string, object> RegexpQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "flt")]
 		internal FuzzyLikeThisDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
@@ -95,69 +106,41 @@ namespace Nest
 		[JsonProperty(PropertyName = "indices")]
 		internal IndicesQueryDescriptor<T> IndicesQueryDescriptor { get; set; }
 
-		internal bool _Strict { get; set; }
+		[JsonProperty(PropertyName = "function_score")]
+		internal FunctionScoreQueryDescriptor<T> FunctionScoreQueryDescriptor { get; set; }
 
 		public QueryDescriptor<T> Strict(bool strict = true)
 		{
-			//TODO: is this clone really neccessary ?
-			var q = this.Clone();
-			q._Strict = strict;
-			return q;
+			return new QueryDescriptor<T> { IsStrict = strict };
 		}
 
-		internal QueryDescriptor<T> CreateConditionlessQueryDescriptor(IQuery query)
+		public QueryDescriptor<T> Verbatim(bool verbatim = true)
 		{
-			if (this._Strict)
-				throw new DslException("Query resulted in a conditionless {0} query (json by approx):\n"
+			return new QueryDescriptor<T> { IsVerbatim = verbatim, IsStrict = verbatim };
+		}
+
+		private QueryDescriptor<T> CreateConditionlessQueryDescriptor(IQuery query)
+		{
+			if (this.IsStrict && !this.IsVerbatim)
+				throw new DslException("Query resulted in a conditionless {0} query (json by approx):\n{1}"
 					.F(
 						query.GetType().Name.Replace("Descriptor", "").Replace("`1", "")
+						, JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
 					)
 				);
-			return new QueryDescriptor<T> { IsConditionless = !this._Strict };
+			return new QueryDescriptor<T>(forceConditionless:true);
 		}
 
-
-		internal QueryDescriptor<T> Clone()
+		private QueryDescriptor<T> New(IQuery query, Action<QueryDescriptor<T>> fillProperty)
 		{
-			return new QueryDescriptor<T>
-			{
-				MatchAllQuery = MatchAllQuery,
-				TermQuery = TermQuery,
-				WildcardQuery = WildcardQuery,
-				PrefixQuery = PrefixQuery,
+			if (query.IsConditionless && !this.IsVerbatim)
+				return CreateConditionlessQueryDescriptor(query);
 
-				BoostingQueryDescriptor = BoostingQueryDescriptor,
-				IdsQuery = IdsQuery,
-				CustomScoreQueryDescriptor = CustomScoreQueryDescriptor,
-				CustomBoostFactorQueryDescriptor = CustomBoostFactorQueryDescriptor,
-				ConstantScoreQueryDescriptor = ConstantScoreQueryDescriptor,
-				DismaxQueryDescriptor = DismaxQueryDescriptor,
-				FilteredQueryDescriptor = FilteredQueryDescriptor,
-				TextQueryDescriptor = TextQueryDescriptor,
-				MatchQueryDescriptor = MatchQueryDescriptor,
-				FuzzyQueryDescriptor = FuzzyQueryDescriptor,
-				TermsQueryDescriptor = TermsQueryDescriptor,
-				QueryStringDescriptor = QueryStringDescriptor,
+			var q = new QueryDescriptor<T> {IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim};
 
-				FuzzyLikeThisDescriptor = FuzzyLikeThisDescriptor,
-				HasChildQueryDescriptor = HasChildQueryDescriptor,
-				HasParentQueryDescriptor = HasParentQueryDescriptor,
-				MoreLikeThisDescriptor = MoreLikeThisDescriptor,
-				RangeQueryDescriptor = RangeQueryDescriptor,
-
-				SpanTermQuery = SpanTermQuery,
-				SpanFirstQueryDescriptor = SpanFirstQueryDescriptor,
-				SpanOrQueryDescriptor = SpanOrQueryDescriptor,
-				SpanNearQueryDescriptor = SpanNearQueryDescriptor,
-				SpanNotQueryDescriptor = SpanNotQueryDescriptor,
-
-				TopChildrenQueryDescriptor = TopChildrenQueryDescriptor,
-				NestedQueryDescriptor = NestedQueryDescriptor,
-				IndicesQueryDescriptor = IndicesQueryDescriptor,
-
-				_Strict = _Strict,
-
-			};
+			if (fillProperty != null)
+				fillProperty(q);
+			return q;
 		}
 
 		/// <summary>
@@ -167,11 +150,7 @@ namespace Nest
 		{
 			var query = new QueryStringDescriptor<T>();
 			selector(query);
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.QueryStringDescriptor = query;
-			return new QueryDescriptor<T> { QueryStringDescriptor = query };
+			return this.New(query, q => q.QueryStringDescriptor = query);
 		}
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
@@ -199,40 +178,30 @@ namespace Nest
 			var query = new TermsQueryDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
+			var termsQueryDescriptor = new Dictionary<string, object>();
 
 			if (query._ExternalField == null)
 			{
-				this.TermsQueryDescriptor = new Dictionary<string, object>() 
-				{
-					{ query._Field, query._Terms}
-				};
+				termsQueryDescriptor.Add(query._Field, query._Terms);
 			}
 			else
 			{
-				if (query._ExternalField._Id.IsNullOrEmpty())
-					throw new DslException("terms query external field has no id set");
-
-				this.TermsQueryDescriptor = new Dictionary<string, object>() 
-				{
-					{ query._Field, query._ExternalField}
-				};
+				termsQueryDescriptor.Add(query._Field, query._ExternalField);
 			}
 
 			if (query._MinMatch.HasValue)
 			{
-				this.TermsQueryDescriptor.Add("minimum_match", query._MinMatch);
+				termsQueryDescriptor.Add("minimum_match", query._MinMatch);
 			}
 			if (query._DisableCord)
 			{
-				this.TermsQueryDescriptor.Add("disable_coord", query._DisableCord);
+				termsQueryDescriptor.Add("disable_coord", query._DisableCord);
 			}
 			if (!query._CacheKey.IsNullOrEmpty())
 			{
-				this.TermsQueryDescriptor.Add("_cache_key", query._CacheKey);
+				termsQueryDescriptor.Add("_cache_key", query._CacheKey);
 			}
-			return new QueryDescriptor<T> { TermsQueryDescriptor = this.TermsQueryDescriptor };
+			return this.New(query, q => q.TermsQueryDescriptor = termsQueryDescriptor);
 		}
 
 
@@ -248,14 +217,11 @@ namespace Nest
 			if (string.IsNullOrWhiteSpace(query._Field))
 				throw new DslException("Field name not set for fuzzy query");
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
+			var fuzzy = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
+			return this.New(query, q => q.FuzzyQueryDescriptor = fuzzy);
 		}
 		/// <summary>
 		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
@@ -264,17 +230,12 @@ namespace Nest
 		{
 			var query = new FuzzyNumericQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for fuzzy query");
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
+			var fuzzy = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
+			return this.New(query, q => q.FuzzyQueryDescriptor = fuzzy);
 		}
 		/// <summary>
 		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
@@ -284,17 +245,12 @@ namespace Nest
 		{
 			var query = new FuzzyDateQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for fuzzy query");
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.FuzzyQueryDescriptor = new Dictionary<string, object>() 
+			var fuzzy = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { FuzzyQueryDescriptor = this.FuzzyQueryDescriptor };
+			return this.New(query, q => q.FuzzyQueryDescriptor = fuzzy);
 		}
 
 		/// <summary>
@@ -305,17 +261,12 @@ namespace Nest
 		{
 			var query = new TextQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for text query");
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.TextQueryDescriptor = new Dictionary<string, object>() 
+			var text = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+			return this.New(query, q => q.TextQueryDescriptor = text);
 		}
 
 		/// <summary>
@@ -325,17 +276,12 @@ namespace Nest
 		{
 			var query = new TextPhraseQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for text_phrase query");
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.TextQueryDescriptor = new Dictionary<string, object>() 
+			var text = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+			return this.New(query, q => q.TextQueryDescriptor = text);
 		}
 
 		/// <summary>
@@ -347,17 +293,11 @@ namespace Nest
 			var query = new TextPhrasePrefixQueryDescriptor<T>();
 			selector(query);
 
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for text_phrase query");
-
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.TextQueryDescriptor = new Dictionary<string, object>() 
+			var text = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { TextQueryDescriptor = this.TextQueryDescriptor };
+			return this.New(query, q => q.TextQueryDescriptor = text);
 		}
 
 		/// <summary>
@@ -368,17 +308,12 @@ namespace Nest
 		{
 			var query = new MatchQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for text query");
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.MatchQueryDescriptor = new Dictionary<string, object>() 
+			var match = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { MatchQueryDescriptor = this.MatchQueryDescriptor };
+			return this.New(query, q => q.MatchQueryDescriptor = match);
 		}
 
 		/// <summary>
@@ -388,17 +323,12 @@ namespace Nest
 		{
 			var query = new MatchPhraseQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for text_phrase query");
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.MatchQueryDescriptor = new Dictionary<string, object>() 
+			var match = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { MatchQueryDescriptor = this.MatchQueryDescriptor };
+			return this.New(query, q => q.MatchQueryDescriptor = match);
 		}
 
 		/// <summary>
@@ -410,17 +340,11 @@ namespace Nest
 			var query = new MatchPhrasePrefixQueryDescriptor<T>();
 			selector(query);
 
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for text_phrase query");
-
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.MatchQueryDescriptor = new Dictionary<string, object>() 
+			var match = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { MatchQueryDescriptor = this.MatchQueryDescriptor };
+			return this.New(query, q => q.MatchQueryDescriptor = match);
 		}
 
 		/// <summary>
@@ -433,11 +357,7 @@ namespace Nest
 			var query = new MultiMatchQueryDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.MultiMatchQueryDescriptor = query;
-			return new QueryDescriptor<T> { MultiMatchQueryDescriptor = this.MultiMatchQueryDescriptor };
+			return this.New(query, q => q.MultiMatchQueryDescriptor = query);
 		}
 
 		/// <summary>
@@ -450,12 +370,21 @@ namespace Nest
 			var query = new NestedQueryDescriptor<T>();
 			selector(query);
 
-			if (query._QueryDescriptor.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.NestedQueryDescriptor = query;
-			return new QueryDescriptor<T> { NestedQueryDescriptor = this.NestedQueryDescriptor };
+			return this.New(query, q => q.NestedQueryDescriptor = query);
 		}
+
+		/// <summary>
+		/// A thin wrapper allowing fined grained control what should happen if a query is conditionless
+		/// if you need to fallback to something other than a match_all query
+		/// </summary>
+		public BaseQuery Conditionless(Action<ConditionlessQueryDescriptor<T>> selector)
+		{
+			var query = new ConditionlessQueryDescriptor<T>();
+			selector(query);
+
+			return (query._Query == null || query._Query.IsConditionless) ? query._Fallback : query._Query;
+		}
+
 
 		/// <summary>
 		/// The indices query can be used when executed across multiple indices, allowing to have a query that executes
@@ -467,11 +396,7 @@ namespace Nest
 			var query = new IndicesQueryDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.IndicesQueryDescriptor = query;
-			return new QueryDescriptor<T> { IndicesQueryDescriptor = this.IndicesQueryDescriptor };
+			return this.New(query, q => q.IndicesQueryDescriptor = query);
 		}
 		/// <summary>
 		/// Matches documents with fields that have terms within a certain range. The type of the Lucene query depends
@@ -482,17 +407,12 @@ namespace Nest
 		{
 			var query = new RangeQueryDescriptor<T>();
 			selector(query);
-
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			if (string.IsNullOrWhiteSpace(query._Field))
-				throw new DslException("Field name not set for range query");
-			this.RangeQueryDescriptor = new Dictionary<string, object>() 
+			
+			var range = new Dictionary<string, object>() 
 			{
 				{ query._Field, query}
 			};
-			return new QueryDescriptor<T> { RangeQueryDescriptor = this.RangeQueryDescriptor };
+			return this.New(query, q => q.RangeQueryDescriptor = range);
 		}
 		/// <summary>
 		/// Fuzzy like this query find documents that are “like” provided text by running it against one or more fields.
@@ -502,11 +422,7 @@ namespace Nest
 			var query = new FuzzyLikeThisDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.FuzzyLikeThisDescriptor = query;
-			return new QueryDescriptor<T> { FuzzyLikeThisDescriptor = this.FuzzyLikeThisDescriptor };
+			return this.New(query, q => q.FuzzyLikeThisDescriptor = query);
 		}
 		/// <summary>
 		/// More like this query find documents that are “like” provided text by running it against one or more fields.
@@ -515,11 +431,8 @@ namespace Nest
 		{
 			var query = new MoreLikeThisQueryDescriptor<T>();
 			selector(query);
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
 
-			this.MoreLikeThisDescriptor = query;
-			return new QueryDescriptor<T> { MoreLikeThisDescriptor = this.MoreLikeThisDescriptor };
+			return this.New(query, q => q.MoreLikeThisDescriptor = query);
 		}
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
@@ -530,11 +443,8 @@ namespace Nest
 		{
 			var query = new HasChildQueryDescriptor<K>();
 			selector(query);
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
 
-			this.HasChildQueryDescriptor = query;
-			return new QueryDescriptor<T> { HasChildQueryDescriptor = this.HasChildQueryDescriptor };
+			return this.New(query, q => q.HasChildQueryDescriptor = query);
 		}
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
@@ -545,11 +455,8 @@ namespace Nest
 		{
 			var query = new HasParentQueryDescriptor<K>();
 			selector(query);
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.HasParentQueryDescriptor = query;
-			return new QueryDescriptor<T> { HasParentQueryDescriptor = this.HasParentQueryDescriptor };
+			
+			return this.New(query, q => q.HasParentQueryDescriptor = query);
 		}
 		/// <summary>
 		/// The top_children query runs the child query with an estimated hits size, and out of the hit docs, aggregates 
@@ -561,11 +468,8 @@ namespace Nest
 		{
 			var query = new TopChildrenQueryDescriptor<K>();
 			selector(query);
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.TopChildrenQueryDescriptor = query;
-			return new QueryDescriptor<T> { TopChildrenQueryDescriptor = this.TopChildrenQueryDescriptor };
+			
+			return this.New(query, q => q.TopChildrenQueryDescriptor = query);
 		}
 		/// <summary>
 		/// A query that applies a filter to the results of another query. This query maps to Lucene FilteredQuery.
@@ -575,11 +479,7 @@ namespace Nest
 			var query = new FilteredQueryDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.FilteredQueryDescriptor = query;
-			return new QueryDescriptor<T> { FilteredQueryDescriptor = this.FilteredQueryDescriptor };
+			return this.New(query, q => q.FilteredQueryDescriptor = query);
 		}
 
 		/// <summary>
@@ -592,11 +492,7 @@ namespace Nest
 			var query = new DismaxQueryDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.DismaxQueryDescriptor = query;
-			return new QueryDescriptor<T> { DismaxQueryDescriptor = this.DismaxQueryDescriptor };
+			return this.New(query, q => q.DismaxQueryDescriptor = query);
 		}
 		/// <summary>
 		/// A query that wraps a filter or another query and simply returns a constant score equal to the query boost 
@@ -607,11 +503,7 @@ namespace Nest
 			var query = new ConstantScoreQueryDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.ConstantScoreQueryDescriptor = query;
-			return new QueryDescriptor<T> { ConstantScoreQueryDescriptor = this.ConstantScoreQueryDescriptor };
+			return this.New(query, q => q.ConstantScoreQueryDescriptor = query);
 		}
 		/// <summary>
 		/// custom_boost_factor query allows to wrap another query and multiply its score by the provided boost_factor.
@@ -623,11 +515,7 @@ namespace Nest
 			var query = new CustomBoostFactorQueryDescriptor<T>();
 			selector(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.CustomBoostFactorQueryDescriptor = query;
-			return new QueryDescriptor<T> { CustomBoostFactorQueryDescriptor = this.CustomBoostFactorQueryDescriptor };
+			return this.New(query, q => q.CustomBoostFactorQueryDescriptor = query);
 		}
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
@@ -638,11 +526,7 @@ namespace Nest
 			var query = new CustomScoreQueryDescriptor<T>();
 			customScoreQuery(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.CustomScoreQueryDescriptor = query;
-			return new QueryDescriptor<T> { CustomScoreQueryDescriptor = this.CustomScoreQueryDescriptor };
+			return this.New(query, q => q.CustomScoreQueryDescriptor = query);
 		}
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
@@ -653,11 +537,7 @@ namespace Nest
 			var query = new CustomFiltersScoreDescriptor<T>();
 			customFiltersScoreQuery(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.CustomFiltersScoreQueryDescriptor = query;
-			return new QueryDescriptor<T> { CustomFiltersScoreQueryDescriptor = this.CustomFiltersScoreQueryDescriptor };
+			return this.New(query, q => q.CustomFiltersScoreQueryDescriptor = query);
 		}
 		/// <summary>
 		/// A query that matches documents matching boolean combinations of other queries. The bool query maps to 
@@ -668,11 +548,7 @@ namespace Nest
 		{
 			var query = new BoolQueryDescriptor<T>();
 			booleanQuery(query);
-			this.BoolQueryDescriptor = query;
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			return new QueryDescriptor<T> { BoolQueryDescriptor = this.BoolQueryDescriptor };
+			return this.New(query, q => q.BoolQueryDescriptor = query);
 		}
 		/// <summary>
 		/// the boosting query can be used to effectively demote results that match a given query. 
@@ -685,11 +561,7 @@ namespace Nest
 			var query = new BoostingQueryDescriptor<T>();
 			boostingQuery(query);
 
-			if (query.IsConditionless)
-				return CreateConditionlessQueryDescriptor(query);
-
-			this.BoostingQueryDescriptor = query;
-			return new QueryDescriptor<T> { BoostingQueryDescriptor = this.BoostingQueryDescriptor };
+			return this.New(query, q => q.BoostingQueryDescriptor = query);
 		}
 		/// <summary>
 		/// A query that matches all documents. Maps to Lucene MatchAllDocsQuery.
@@ -702,11 +574,11 @@ namespace Nest
 		/// </param>
 		public BaseQuery MatchAll(double? Boost = null, string NormField = null)
 		{
-			this.MatchAllQuery = new MatchAll() { NormField = NormField };
+			var query = new MatchAll() { NormField = NormField };
 			if (Boost.HasValue)
-				this.MatchAllQuery.Boost = Boost.Value;
+				query.Boost = Boost.Value;
 
-			return new QueryDescriptor<T> { MatchAllQuery = this.MatchAllQuery };
+			return this.New(query, q => q.MatchAllQuery = query);
 		}
 
 		/// <summary>
@@ -737,13 +609,8 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Term(string field, object value, double? Boost = null)
 		{
-			var term = new Term() { Field = field, Value = (value != null) ? value : null };
-			if (term.IsConditionless)
-				return CreateConditionlessQueryDescriptor(term);
-			if (Boost.HasValue)
-				term.Boost = Boost;
-			this.TermQuery = term;
-			return new QueryDescriptor<T> { TermQuery = this.TermQuery };
+			var term = new Term() { Field = field, Value = value ?? null, Boost = Boost };
+			return this.New(term, q => q.TermQuery = term);
 		}
 
 		/// <summary>
@@ -774,18 +641,13 @@ namespace Nest
 			double? Boost = null,
 			RewriteMultiTerm? Rewrite = null)
 		{
-			var wildcard = new Wildcard() { Field = field, Value = value };
-			if (wildcard.IsConditionless)
-				return CreateConditionlessQueryDescriptor(wildcard);
+			var wildcard = new Wildcard()
+			{
+				Field = field, Value = value, Boost = Boost, Rewrite = Rewrite
+			
+			};
 
-			if (Boost.HasValue)
-				wildcard.Boost = Boost;
-
-			if (Rewrite.HasValue)
-				wildcard.Rewrite = Rewrite;
-
-			this.WildcardQuery = wildcard;
-			return new QueryDescriptor<T> { WildcardQuery = this.WildcardQuery };
+			return this.New(wildcard, q => q.WildcardQuery = wildcard);
 		}
 
 		/// <summary>
@@ -811,18 +673,9 @@ namespace Nest
 			double? Boost = null,
 			RewriteMultiTerm? Rewrite = null)
 		{
-			var prefix = new Prefix() { Field = field, Value = value };
-			if (prefix.IsConditionless)
-				return CreateConditionlessQueryDescriptor(prefix);
+			var prefix = new Prefix() { Field = field, Value = value, Boost = Boost, Rewrite = Rewrite };
 
-			if (Boost.HasValue)
-				prefix.Boost = Boost;
-
-			if (Rewrite.HasValue)
-				prefix.Rewrite = Rewrite;
-
-			this.PrefixQuery = prefix;
-			return new QueryDescriptor<T> { PrefixQuery = this.PrefixQuery };
+			return this.New(prefix, q => q.PrefixQuery = prefix);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. Note, this filter does not require 
@@ -830,10 +683,8 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Ids(IEnumerable<string> values)
 		{
-			this.IdsQuery = new IdsQuery { Values = values };
-			if (this.IdsQuery.IsConditionless)
-				return CreateConditionlessQueryDescriptor(this.IdsQuery);
-			return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
+			var ids = new IdsQuery { Values = values };
+			return this.New(ids, q => q.IdsQuery = ids);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -843,10 +694,8 @@ namespace Nest
 		public BaseQuery Ids(string type, IEnumerable<string> values)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			this.IdsQuery = new IdsQuery { Values = values, Type = new[] { type } };
-			if (this.IdsQuery.IsConditionless)
-				return CreateConditionlessQueryDescriptor(this.IdsQuery);
-			return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
+			var ids = new IdsQuery { Values = values, Type = new[] { type } };
+			return this.New(ids, q => q.IdsQuery = ids);
 		}
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -855,10 +704,8 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
-			this.IdsQuery = new IdsQuery { Values = values, Type = types };
-			if (this.IdsQuery.IsConditionless)
-				return CreateConditionlessQueryDescriptor(this.IdsQuery);
-			return new QueryDescriptor<T> { IdsQuery = this.IdsQuery };
+			var ids = new IdsQuery { Values = values, Type = types };
+			return this.New(ids, q => q.IdsQuery = ids);
 		}
 
 		/// <summary>
@@ -876,14 +723,8 @@ namespace Nest
 		/// </summary>
 		public BaseQuery SpanTerm(string field, string value, double? Boost = null)
 		{
-			var spanTerm = new SpanTerm() { Field = field, Value = value };
-			if (spanTerm.IsConditionless)
-				return CreateConditionlessQueryDescriptor(spanTerm);
-
-			if (Boost.HasValue)
-				spanTerm.Boost = Boost;
-			this.SpanTermQuery = spanTerm;
-			return new QueryDescriptor<T> { SpanTermQuery = this.SpanTermQuery };
+			var spanTerm = new SpanTerm() { Field = field, Value = value, Boost = Boost};
+			return this.New(spanTerm, q => q.SpanTermQuery = spanTerm);
 		}
 		/// <summary>
 		/// Matches spans near the beginning of a field. The span first query maps to Lucene SpanFirstQuery. 
@@ -891,11 +732,9 @@ namespace Nest
 		public BaseQuery SpanFirst(Action<SpanFirstQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			this.SpanFirstQueryDescriptor = new SpanFirstQueryDescriptor<T>();
-			selector(this.SpanFirstQueryDescriptor);
-			if (this.SpanFirstQueryDescriptor.IsConditionless)
-				return CreateConditionlessQueryDescriptor(this.SpanFirstQueryDescriptor);
-			return new QueryDescriptor<T> { SpanFirstQueryDescriptor = this.SpanFirstQueryDescriptor };
+			var span = new SpanFirstQueryDescriptor<T>();
+			selector(span);
+			return this.New(span, q => q.SpanFirstQueryDescriptor = span);
 		}
 		/// <summary>
 		/// Matches spans which are near one another. One can specify slop, the maximum number of 
@@ -905,12 +744,10 @@ namespace Nest
 		public BaseQuery SpanNear(Action<SpanNearQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			this.SpanNearQueryDescriptor = new SpanNearQueryDescriptor<T>();
-			selector(this.SpanNearQueryDescriptor);
-			if (this.SpanNearQueryDescriptor.IsConditionless)
-				return CreateConditionlessQueryDescriptor(this.SpanNearQueryDescriptor);
+			var span = new SpanNearQueryDescriptor<T>();
+			selector(span);
 
-			return new QueryDescriptor<T> { SpanNearQueryDescriptor = this.SpanNearQueryDescriptor };
+			return this.New(span, q => q.SpanNearQueryDescriptor = span);
 		}
 		/// <summary>
 		/// Matches the union of its span clauses. 
@@ -919,11 +756,10 @@ namespace Nest
 		public BaseQuery SpanOr(Action<SpanOrQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			this.SpanOrQueryDescriptor = new SpanOrQueryDescriptor<T>();
-			selector(this.SpanOrQueryDescriptor);
-			if (this.SpanOrQueryDescriptor.IsConditionless)
-				return CreateConditionlessQueryDescriptor(this.SpanOrQueryDescriptor);
-			return new QueryDescriptor<T> { SpanOrQueryDescriptor = this.SpanOrQueryDescriptor };
+			var span = new SpanOrQueryDescriptor<T>();
+			selector(span);
+
+			return this.New(span, q => q.SpanOrQueryDescriptor = span);
 		}
 		/// <summary>
 		/// Removes matches which overlap with another span query. 
@@ -932,12 +768,39 @@ namespace Nest
 		public BaseQuery SpanNot(Action<SpanNotQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			this.SpanNotQueryDescriptor = new SpanNotQueryDescriptor<T>();
-			selector(this.SpanNotQueryDescriptor);
-			if (this.SpanNotQueryDescriptor.IsConditionless)
-				return CreateConditionlessQueryDescriptor(this.SpanNotQueryDescriptor);
-			return new QueryDescriptor<T> { SpanNotQueryDescriptor = this.SpanNotQueryDescriptor };
+			var span = new SpanNotQueryDescriptor<T>();
+			selector(span);
+
+			return this.New(span, q => q.SpanNotQueryDescriptor = span);
 		}
 
+		/// <summary>
+		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
+		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
+		/// </summary>
+		public BaseQuery Regexp(Action<RegexpQueryDescriptor<T>> regexpSelector)
+		{
+			var query = new RegexpQueryDescriptor<T>();
+			regexpSelector(query);
+
+			var regexp = new Dictionary<string, object>() 
+			{
+				{ query._Field, query}
+			};
+			return this.New(query, q => q.RegexpQueryDescriptor = regexp);
+		}
+
+    /// <summary>
+    /// Function score query
+    /// </summary>
+    /// <returns></returns>
+	  public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
+		{
+            var query = new FunctionScoreQueryDescriptor<T>();
+            functionScoreQuery(query);
+
+			return this.New(query, q => q.FunctionScoreQueryDescriptor = query);
+
+		}
 	}
 }

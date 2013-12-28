@@ -12,7 +12,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class HasChildQueryDescriptor<T> : IQuery where T : class
 	{
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

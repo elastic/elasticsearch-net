@@ -108,6 +108,12 @@ namespace Nest.Tests.Unit.Core.Map
 										.Index("not_analyzed")
 										.Store()
 									)
+									.Generic(g => g
+										.Name("do_no_render_name_property", noNameProperty: true)
+										.Type("{dynamic_type}")
+										.Index("not_analyzed")
+										.Store()
+									)
 								)							
 							)
 						)
@@ -228,8 +234,19 @@ namespace Nest.Tests.Unit.Core.Map
 						.TreeLevels(2)
 						.DistanceErrorPercentage(0.025)
 					)
+					.Completion(s=>s
+						.Name(p=>p.Name.Suffix("completion"))
+						.IndexAnalyzer("standard")
+						.SearchAnalyzer("standard")
+						.MaxInputLength(20)
+						.Payloads()
+						.PreservePositionIncrements()
+						.PreserveSeparators()
+					)
 				)
 			);
+
+            Assert.NotNull(result.ConnectionStatus.Request);
 		}
 	}
 }

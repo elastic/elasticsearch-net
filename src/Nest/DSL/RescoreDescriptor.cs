@@ -15,6 +15,7 @@ namespace Nest.DSL.Descriptors
 		/// Whether conditionless queries are allowed or not
 		/// </summary>
 		internal bool _Strict { get; set; }
+		internal bool _Verbatim { get; set; }
 		internal string _RawQuery { get; set; }
 		internal BaseQuery _Query { get; set; }
 
@@ -58,10 +59,10 @@ namespace Nest.DSL.Descriptors
 			var q = new QueryDescriptor<T>().Strict(this._Strict);
 
 			var bq = query(q);
-			if (this._Strict && bq.IsConditionless)
+			if (this._Strict && !this._Verbatim && bq.IsConditionless)
 				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(bq, Formatting.Indented)));
 
-			else if (bq.IsConditionless)
+			else if (bq.IsConditionless && !this._Verbatim)
 				return this;
 			this._Query = bq;
 			return this;
@@ -72,7 +73,7 @@ namespace Nest.DSL.Descriptors
 		public virtual RescoreQueryDescriptor<T> Query(BaseQuery query)
 		{
 			query.ThrowIfNull("query");
-			if (query.IsConditionless)
+			if (query.IsConditionless && !this._Verbatim)
 				return this;
 			this._Query = query;
 			return this;
@@ -87,11 +88,23 @@ namespace Nest.DSL.Descriptors
 			this._RawQuery = rawQuery;
 			return this;
 		}
+		
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
+		/// </summary>
 		public virtual RescoreQueryDescriptor<T> Strict(bool strict = true)
 		{
 			this._Strict = strict;
+			return this;
+		}
+
+		/// <summary>
+		/// When strict is set, conditionless queries are still send.
+		/// </summary> 
+		public virtual RescoreQueryDescriptor<T> Verbatim(bool verbatim = true)
+		{
+			this._Strict = verbatim;
+			this._Verbatim = verbatim;
 			return this;
 		}
 	}

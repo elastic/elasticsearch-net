@@ -32,8 +32,8 @@ namespace Nest
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var descriptor = new QueryDescriptor<T>();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return this._Count("_count", query);
 		}
 
@@ -92,8 +92,8 @@ namespace Nest
 			var typeName = this.Infer.TypeName<T>();
 			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_count");
 			var descriptor = new QueryDescriptor<T>();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return _Count(path, query);
 		}
 		
@@ -105,8 +105,8 @@ namespace Nest
 			indices.ThrowIfEmpty("indices");
 			string path = this.PathResolver.CreateIndexPath(indices, "_count");
 			var descriptor = new QueryDescriptor<T>();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return _Count(path, query);
 		}
 		
@@ -119,8 +119,8 @@ namespace Nest
 			indices.ThrowIfEmpty("types");
 			string path = this.PathResolver.CreateIndexTypePath(indices, types, "_count");
 			var descriptor = new QueryDescriptor<T>();
-			querySelector(descriptor);
-			var query = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var query = this.Serialize(bq);
 			return _Count(path, query);
 		}
 

@@ -40,7 +40,7 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Operator? _Operator { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -68,37 +68,31 @@ namespace Nest
 		}
 		public TextQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			analyzer.ThrowIfNullOrEmpty("analyzer");
 			this._Analyzer = analyzer;
 			return this;
 		}
 		public TextQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			fuzziness.ThrowIfNull("fuzziness");
 			this._Fuzziness = fuzziness;
 			return this;
 		}
 		public TextQueryDescriptor<T> Boost(double boost)
 		{
-			boost.ThrowIfNull("boost");
 			this._Boost = boost;
 			return this;
 		}
 		public TextQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			prefixLength.ThrowIfNull("prefixLength");
 			this._PrefixLength = prefixLength;
 			return this;
 		}
 		public TextQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
-			maxExpansions.ThrowIfNull("maxExpansions");
 			this._MaxExpansions = maxExpansions;
 			return this;
 		}
 		public TextQueryDescriptor<T> Slop(int slop)
 		{
-			slop.ThrowIfNull("slop");
 			this._Slop = slop;
 			return this;
 		}

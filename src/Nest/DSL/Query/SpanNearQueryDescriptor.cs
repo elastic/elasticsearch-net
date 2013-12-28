@@ -22,11 +22,11 @@ namespace Nest
 		[JsonProperty(PropertyName = "collect_payloads")]
 		internal bool? _CollectPayloads { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !_SpanQueryDescriptors.HasAny() || _SpanQueryDescriptors.All(q => q.IsConditionless);
+				return !_SpanQueryDescriptors.HasAny() || _SpanQueryDescriptors.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
 
@@ -38,7 +38,7 @@ namespace Nest
 			{
 				var x = new SpanQueryDescriptor<T>();
 				var q = selector(x);
-				if (q.IsConditionless)
+				if ((q as IQuery).IsConditionless)
 					continue;
 
 				descriptors.Add(q);

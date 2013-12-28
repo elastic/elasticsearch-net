@@ -22,14 +22,6 @@ namespace Nest.Tests.Unit.Internals.Serialize
 		[Test]
 		public void OptOutDuringMapping()
 		{
-			var obj = new SimpleOptOutClass
-			{
-				Id = 1,
-				Name = "ABC",
-				Description = "efghijklmnop",
-				IgnoreThisAsWell = "qrstuvwxyz"
-			};
-
 			var result = this._client.MapFromAttributes<SimpleOptOutClass>();
 			var call = result.ConnectionStatus.Request;
 

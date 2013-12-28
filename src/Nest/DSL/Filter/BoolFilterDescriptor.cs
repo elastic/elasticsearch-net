@@ -9,35 +9,20 @@ namespace Nest
 {
 	internal static class BoolBaseFilterDescriptorExtensions
 	{
-		internal static bool CanJoinMust(this BoolBaseFilterDescriptor bq)
+		internal static bool CanMergeMustAndMustNots(this BoolBaseFilterDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinMust());
+			return bq == null || !bq._ShouldFilters.HasAny();
 		}
-		internal static bool CanJoinMustNot(this BoolBaseFilterDescriptor bq)
-		{
-			return bq == null || (bq != null && bq._CanJoinMustNot());
-		}
+
 		internal static bool CanJoinShould(this BoolBaseFilterDescriptor bq)
 		{
-			return bq == null || (bq != null && bq._CanJoinShould());
+			return bq == null 
+				|| (
+					(bq._ShouldFilters.HasAny() && !bq._MustFilters.HasAny() && !bq._MustNotFilters.HasAny())
+					|| !bq._ShouldFilters.HasAny()
+				);
 		}
-		internal static IEnumerable<BaseFilter> MergeMustFilters(this BaseFilter lbq, BaseFilter rbq)
-		{
-			var lBoolDescriptor = lbq.BoolFilterDescriptor;
-			var lHasMustFilters = lBoolDescriptor != null &&
-			  lBoolDescriptor._MustFilters.HasAny();
-
-			var rBoolDescriptor = rbq.BoolFilterDescriptor;
-			var rHasMustFilters = rBoolDescriptor != null &&
-			  rBoolDescriptor._MustFilters.HasAny();
-
-			var lq = lHasMustFilters
-			? lBoolDescriptor._MustFilters
-			: new[] { lbq };
-			var rq = rHasMustFilters ? rBoolDescriptor._MustFilters : new[] { rbq };
-
-			return lq.Concat(rq);
-		}
+		
 		internal static IEnumerable<BaseFilter> MergeShouldFilters(this BaseFilter lbq, BaseFilter rbq)
 		{
 			var lBoolDescriptor = lbq.BoolFilterDescriptor;
@@ -54,74 +39,11 @@ namespace Nest
 
 			return lq.Concat(rq);
 		}
-		internal static IEnumerable<BaseFilter> MergeMustNotFilters(this BaseFilter lbq, BaseFilter rbq)
-		{
-			var lBoolDescriptor = lbq.BoolFilterDescriptor;
-			var lHasMustNotFilters = lBoolDescriptor != null &&
-			  lBoolDescriptor._MustNotFilters.HasAny();
-
-			var rBoolDescriptor = rbq.BoolFilterDescriptor;
-			var rHasMustNotFilters = rBoolDescriptor != null &&
-			  rBoolDescriptor._MustNotFilters.HasAny();
-
-
-			var lq = lHasMustNotFilters ? lBoolDescriptor._MustNotFilters : Enumerable.Empty<BaseFilter>();
-			var rq = rHasMustNotFilters ? rBoolDescriptor._MustNotFilters : Enumerable.Empty<BaseFilter>();
-			if (!lq.HasAny() && !rq.HasAny())
-				return null;
-
-			return lq.Concat(rq);
-		}
 	}
 
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	internal class BoolBaseFilterDescriptor : FilterBase
-	{
-		[JsonProperty("must")]
-		internal IEnumerable<BaseFilter> _MustFilters { get; set; }
-
-		[JsonProperty("should")]
-		internal IEnumerable<BaseFilter> _ShouldFilters { get; set; }
-
-		[JsonProperty("must_not")]
-		internal IEnumerable<BaseFilter> _MustNotFilters { get; set; }
-
-		internal override bool IsConditionless
-		{
-			get
-			{
-				if (!this._MustFilters.HasAny() && !this._ShouldFilters.HasAny() && !this._MustNotFilters.HasAny())
-					return true;
-				return (this._MustNotFilters.HasAny() && this._MustNotFilters.All(q => q.IsConditionless))
-					|| (this._ShouldFilters.HasAny() && this._ShouldFilters.All(q => q.IsConditionless))
-					|| (this._MustFilters.HasAny() && this._MustFilters.All(q => q.IsConditionless));
-			}
-		}
-
-		internal bool _HasOnlyMustNot()
-		{
-			return _MustNotFilters.HasAny() && !_ShouldFilters.HasAny() && !_MustFilters.HasAny();
-		}
-
-		internal bool _CanJoinMust()
-		{
-			return !_ShouldFilters.HasAny();
-		}
-		internal bool _CanJoinShould()
-		{
-			return (_ShouldFilters.HasAny() && !_MustFilters.HasAny() && !_MustNotFilters.HasAny())
-			  || !_ShouldFilters.HasAny();
-		}
-		internal bool _CanJoinMustNot()
-		{
-			return !_ShouldFilters.HasAny();
-		}
-
-	}
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BoolFilterDescriptor<T> : FilterBase where T : class
+	public class BoolBaseFilterDescriptor : FilterBase
 	{
 		[JsonProperty("must")]
 		internal IEnumerable<BaseFilter> _MustFilters { get; set; }
@@ -139,11 +61,15 @@ namespace Nest
 				if (!this._MustFilters.HasAny() && !this._ShouldFilters.HasAny() && !this._MustNotFilters.HasAny())
 					return true;
 				return (this._MustNotFilters.HasAny() && this._MustNotFilters.All(q => q.IsConditionless))
-					|| (this._ShouldFilters.HasAny() && this._ShouldFilters.All(q => q.IsConditionless))
-					|| (this._MustFilters.HasAny() && this._MustFilters.All(q => q.IsConditionless));
+					   || (this._ShouldFilters.HasAny() && this._ShouldFilters.All(q => q.IsConditionless))
+					   || (this._MustFilters.HasAny() && this._MustFilters.All(q => q.IsConditionless));
 			}
 		}
+	}
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class BoolFilterDescriptor<T> : BoolBaseFilterDescriptor where T : class
+	{
 		public BoolFilterDescriptor<T> Must(params Func<FilterDescriptor<T>, BaseFilter>[] filters)
 		{
 			var descriptors = new List<BaseFilter>();

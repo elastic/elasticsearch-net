@@ -38,7 +38,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,6 +66,7 @@
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Cluster\StateTests.cs" />
+    <Compile Include="Indices\StatusTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Integration\Filter\MissingExistsFilterTests.cs" />
     <Compile Include="Integration\Filter\PrefixFilterTests.cs" />
     <Compile Include="Integration\Filter\RangeFilterTests.cs" />
+    <Compile Include="Integration\Query\BoolQueryResults.cs" />
     <Compile Include="Integration\Query\TermToString.cs" />
     <Compile Include="Integration\Query\TextPhraseQueryTests.cs" />
     <Compile Include="Integration\Query\TextPhrasePrefixQueryTests.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
+    <Compile Include="Reproduce\Reproduce389Tests.cs" />
     <Compile Include="Reproduce\Reproduce346Tests.cs" />
     <Compile Include="Reproduce\Reproduce325Tests.cs" />
     <Compile Include="Reproduce\Reproduce308Tests.cs" />

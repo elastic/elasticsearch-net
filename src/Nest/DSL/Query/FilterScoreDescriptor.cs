@@ -9,6 +9,8 @@ namespace Nest.DSL.Query
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class FilterScoreDescriptor<T> : IQuery where T : class
     {
+		bool IQuery.IsConditionless { get { return this._Filter == null; }}
+
         [JsonProperty(PropertyName = "filter")]
         internal BaseFilter _Filter { get; set; }
 
@@ -20,7 +22,6 @@ namespace Nest.DSL.Query
 
         public FilterScoreDescriptor<T> Boost(float boost)
         {
-            boost.ThrowIfNull("boost");
             this._Boost = boost;
 
             return this;
@@ -28,7 +29,6 @@ namespace Nest.DSL.Query
 
         public FilterScoreDescriptor<T> Script(string script)
         {
-            script.ThrowIfNull("script");
             this._Script = script;
 
             return this;

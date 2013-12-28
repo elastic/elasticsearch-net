@@ -18,8 +18,9 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void EscapeInvalidUrlCharacters()
 		{
-			var formattedId = "{0}".EscapedFormat("../../!@#& {}|<>?=/hello");
-			Assert.AreEqual("..%2F..%2F!%40%23%26%20%7B%7D%7C%3C%3E%3F%3D%2Fhello", formattedId);
+            //NOTE Mono escapes ! using Uri.EscapeDataString .NET does not.
+			var formattedId = "{0}".EscapedFormat("../../@#& {}|<>?=/hello");
+			Assert.AreEqual("..%2F..%2F%40%23%26%20%7B%7D%7C%3C%3E%3F%3D%2Fhello", formattedId);
 		}		
 	}
 }

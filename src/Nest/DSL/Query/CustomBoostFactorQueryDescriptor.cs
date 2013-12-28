@@ -15,7 +15,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost_factor")]
 		internal double? _BoostFactor { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -36,7 +36,6 @@ namespace Nest
 
 		public CustomBoostFactorQueryDescriptor<T> BoostFactor(double boostFactor)
 		{
-			boostFactor.ThrowIfNull("boostFactor");
 			this._BoostFactor = boostFactor;
 			return this;
 		}

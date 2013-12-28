@@ -54,7 +54,7 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Operator? _Operator { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -85,51 +85,43 @@ namespace Nest
 		}
 		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			analyzer.ThrowIfNullOrEmpty("analyzer");
 			this._Analyzer = analyzer;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			fuzziness.ThrowIfNull("fuzziness");
 			this._Fuzziness = fuzziness;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
 		{
-			cutoffFrequency.ThrowIfNull("cutoffFrequency");
 			this._CutoffFrequency = cutoffFrequency;
 			return this;
 		}
 
 		public MultiMatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			rewrite.ThrowIfNull("rewrite");
 			this._Rewrite = rewrite;
 			return this;
 		}
 
 		public MultiMatchQueryDescriptor<T> Boost(double boost)
 		{
-			boost.ThrowIfNull("boost");
 			this._Boost = boost;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			prefixLength.ThrowIfNull("prefixLength");
 			this._PrefixLength = prefixLength;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
-			maxExpansions.ThrowIfNull("maxExpansions");
 			this._MaxExpansions = maxExpansions;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> Slop(int slop)
 		{
-			slop.ThrowIfNull("slop");
 			this._Slop = slop;
 			return this;
 		}

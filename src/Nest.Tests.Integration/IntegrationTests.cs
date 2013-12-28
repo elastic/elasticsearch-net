@@ -31,11 +31,11 @@ namespace Nest.Tests.Integration
 
 		public void DoFilterTest(Func<FilterDescriptor<ElasticSearchProject>, Nest.BaseFilter> filter, ElasticSearchProject project, bool queryMustHaveResults)
 		{
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, project.Id.ToString());
+			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, project.Id);
 
 			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(ff => ff.And(
-						f => f.Term(e => e.Id, project.Id.ToString()),
+						f => f.Term(e => e.Id, project.Id),
 						filter
 					))
 				);

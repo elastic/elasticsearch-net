@@ -24,7 +24,7 @@ namespace Nest
 		[JsonProperty("_scope")]
 		internal string _Scope { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

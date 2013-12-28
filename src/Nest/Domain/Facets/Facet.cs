@@ -14,7 +14,7 @@ namespace Nest
         IEnumerable<T> Items { get; }
     }
     [JsonObject]
-    public abstract class Facet
+    public abstract class Facet : IFacet
     {
     }
 }

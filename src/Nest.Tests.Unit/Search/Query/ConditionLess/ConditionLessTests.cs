@@ -21,7 +21,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 
 		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticSearchProject>, BaseQuery> query)
 		{
-			var criteria = new Criteria { };
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				//.Strict()
 				.From(0)

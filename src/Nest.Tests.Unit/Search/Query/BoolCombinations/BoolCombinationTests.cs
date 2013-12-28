@@ -1,5 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
+using System.Diagnostics;
 
 namespace Nest.Tests.Unit.Search.Query.BoolCombinations
 {
@@ -20,11 +22,14 @@ namespace Nest.Tests.Unit.Search.Query.BoolCombinations
 			//The should may not join the boolean query as this would change the semantics.
 			//expected is a should query with a nested boolean query that has a must and must not clause 
 			//and a simple term query
+			var sw = Stopwatch.StartNew();
 			var s = !Query<ElasticSearchProject>.Term(f => f.Name, "foo")
 			 && !Query<ElasticSearchProject>.Term(f => f.Name, "bar")
 			 && Query<ElasticSearchProject>.Term(f => f.Name, "derp")
 			 || Query<ElasticSearchProject>.Term(f => f.Name, "blah");
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+			sw.Stop();
+			Assert.LessOrEqual(sw.ElapsedMilliseconds, 1000);
 		}
 		[Test]
 		public void ForceBranchOr()

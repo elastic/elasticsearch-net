@@ -56,7 +56,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
@@ -107,9 +107,20 @@
     <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
     <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
+    <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
+    <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\RegexpFilterJson.cs" />
+    <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
+    <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
     <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
+    <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
     <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
+    <Compile Include="Search\Query\Modes\QueryModesTests.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
     <Compile Include="Search\Rescore\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
@@ -214,7 +225,11 @@
     <Compile Include="Search\SearchOptions\SearchOptionTests.cs" />
     <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
     <Compile Include="Internals\Serialize\SerializeTests.cs" />
+    <Compile Include="Search\Sort\FunctionScoreTests.cs" />
     <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
+    <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
+    <Compile Include="Search\Suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.settings</DependentUpon>
@@ -357,7 +372,66 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinTermIntoMustStrictFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOp.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOpNew.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinMustNotIntoMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinIntoMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoStrictMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatchPercentage.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinIntoNonStrictShouldQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoStrictShouldQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoNonStrictShouldFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinMustNotIntoMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictShouldFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilterInverse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
+    <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
     <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />
     <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />
     <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json" />

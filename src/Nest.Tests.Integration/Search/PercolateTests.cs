@@ -132,7 +132,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.True(percolateResponse.IsValid);
 			Assert.True(percolateResponse.OK);
 			Assert.NotNull(percolateResponse.Matches);
-			Assert.True(percolateResponse.Matches.Contains(name));
+			Assert.True(percolateResponse.Matches.Contains(name), percolateResponse.Matches.Count().ToString());
 
 			//should not match since we registered with the color blue
 			percolateResponse = this._client.Percolate<ElasticSearchProject>(p => p

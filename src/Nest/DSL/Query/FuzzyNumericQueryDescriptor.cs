@@ -21,7 +21,7 @@ namespace Nest
 		internal double? _Value { get; set; }
 
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{

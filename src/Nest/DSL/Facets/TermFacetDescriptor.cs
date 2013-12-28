@@ -18,6 +18,8 @@ namespace Nest
     internal IEnumerable<string> _Fields { get; set; }
     [JsonProperty(PropertyName = "size")]
     internal int? _Size { get; set; }
+    [JsonProperty(PropertyName = "shard_size")]
+    internal int? _ShardSize { get; set; }
     [JsonConverter(typeof(StringEnumConverter))]
     [JsonProperty(PropertyName = "order")]
     internal TermsOrder? _FacetOrder { get; set; }
@@ -69,6 +71,11 @@ namespace Nest
       this._Size = size;
       return this;
     }
+    public TermFacetDescriptor<T> ShardSize(int shardSize)
+    {
+        this._ShardSize = shardSize;
+        return this;
+    }
     public TermFacetDescriptor<T> Order(TermsOrder order)
     {
       this._FacetOrder = order;
@@ -113,6 +120,8 @@ namespace Nest
     {
       var filter = new FilterDescriptor<T>();
       var f = facetFilter(filter);
+	  if (f.IsConditionless)
+		  f = null;
       this._FacetFilter = f;
       return this;
     }

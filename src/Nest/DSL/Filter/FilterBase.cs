@@ -15,5 +15,8 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_name")]
 		internal string _Name { get; set; }
+
+		[JsonProperty(PropertyName = "_cache_key")]
+		internal string _CacheKey { get; set; }
 	}
 }

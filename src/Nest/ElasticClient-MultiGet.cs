@@ -71,7 +71,10 @@ namespace Nest
 			var response = _multiGetUsingDescriptor(multiGetSelector, out descriptor);
 
 			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
-			var multiGetResponse = this.Deserialize<MultiGetResponse>(response, extraConverters: new List<JsonConverter> { multiGetHitConverter });
+			var multiGetResponse = this.Serializer.DeserializeInternal<MultiGetResponse>(
+				response, 
+				piggyBackJsonConverter:  multiGetHitConverter
+			);
 
 			return multiGetResponse;
 		}
@@ -83,6 +86,9 @@ namespace Nest
 			multiGetSelector(descriptor);
 			var data = @"{ ""docs"" : [";
 			var objects = new List<string>();
+
+			descriptor._GetOperations.ThrowIfEmpty("MultiGetFull called but no get operations were specified");
+
 			foreach (var g in descriptor._GetOperations)
 			{
 				string objectJson = "{";
@@ -127,6 +133,8 @@ namespace Nest
 		private IEnumerable<T> MultiGet<T>(IEnumerable<string> ids, string path)
 			where T : class
 		{
+			ids.ThrowIfEmpty("ids");
+
 			var data = @"{{ ""ids"": {0} }}".F(this.Serialize(ids));
 			var response = this.Connection.PostSync(path + "_mget", data);
 

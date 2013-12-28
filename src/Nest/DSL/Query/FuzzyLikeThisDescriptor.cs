@@ -21,7 +21,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "max_query_terms")]
 		internal int? _MaxQueryTerms { get; set; }
 		[JsonProperty(PropertyName = "min_similarity")]
-		internal int? _MinSimilarity { get; set; }
+		internal double? _MinSimilarity { get; set; }
 		[JsonProperty(PropertyName = "prefix_length")]
 		internal int? _PrefixLength { get; set; }
 		[JsonProperty(PropertyName = "boost")]
@@ -29,7 +29,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "analyzer")]
 		internal string _Analyzer { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -57,6 +57,11 @@ namespace Nest
 		public FuzzyLikeThisDescriptor<T> IgnoreTermFrequency(bool ignore)
 		{
 			this._IgnoreTermFrequency = ignore;
+			return this;
+		}
+		public FuzzyLikeThisDescriptor<T> MinimumSimilarity(double minSimilarity)
+		{
+			this._MinSimilarity = minSimilarity;
 			return this;
 		}
 		public FuzzyLikeThisDescriptor<T> MaxQueryTerms(int maxQueryTerms)

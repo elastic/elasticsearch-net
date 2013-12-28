@@ -11,18 +11,27 @@ namespace Nest.Tests.Integration.Search
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 		[Test]
-		public void SimpleVersion()
+		public void WithVersion()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
-					@" {
-						""version"": true,
-						""query"" : {
-							""match_all"" : { }
-					} }"
-				);
-
-			Assert.True(queryResults.DocumentsWithMetaData.All(h=>!h.Version.IsNullOrEmpty()));
+			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
+				.Version()
+				.MatchAll() //not explicitly needed.
+			);
+			Assert.True(queryResults.IsValid);
+			Assert.Greater(queryResults.Total, 0);
+			Assert.True(queryResults.DocumentsWithMetaData.All(h => !h.Version.IsNullOrEmpty()));
 		}
-	
+		[Test]
+		public void NoVersion()
+		{
+			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+				   .Version(false)
+				   .MatchAll() //not explicitly needed.
+			   );
+
+			Assert.True(queryResults.IsValid);
+			Assert.Greater(queryResults.Total, 0);
+			Assert.True(queryResults.DocumentsWithMetaData.All(h => h.Version.IsNullOrEmpty()));
+		}
 	}
 }

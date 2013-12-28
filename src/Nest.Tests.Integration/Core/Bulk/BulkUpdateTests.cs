@@ -21,14 +21,13 @@ namespace Nest.Tests.Integration.Core.Bulk
 			result.IsValid.Should().BeTrue();
 
 			//Now lets update all of them giving them a name
-			descriptor = new BulkDescriptor();
+			descriptor = new BulkDescriptor().Refresh();
 			foreach (var i in Enumerable.Range(5000, 1000))
 			{
 				int id = i;
 				descriptor.Update<ElasticSearchProject, object>(op => op
 					.Object(new ElasticSearchProject { Id = id })
 					.Document(new { name = "SufixedName-" + id})
-					.Refresh()
 				);
 			}
 

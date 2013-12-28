@@ -171,15 +171,24 @@ namespace Nest
 			return this;
 		}
 
-		public BulkUpdateDescriptor<T, K> Routing(string routing)
+
+		public BulkUpdateDescriptor<T, K> VersionType(VersionType versionType)
 		{
-			this._Routing = routing; 
+			switch (versionType)
+			{
+				case Nest.VersionType.External:
+					this._VersionType = "external";
+					break;
+				case Nest.VersionType.Internal:
+					this._VersionType = "internal";
+					break;
+			}
 			return this;
 		}
 
-		public BulkUpdateDescriptor<T, K> Percolate(string percolate)
+		public BulkUpdateDescriptor<T, K> Routing(string routing)
 		{
-			this._Percolate = percolate; 
+			this._Routing = routing; 
 			return this;
 		}
 
@@ -198,18 +207,6 @@ namespace Nest
 		public BulkUpdateDescriptor<T, K> Ttl(string ttl)
 		{
 			this._Ttl = ttl; 
-			return this;
-		}
-
-		public BulkUpdateDescriptor<T, K> Consistency(Consistency consistency)
-		{
-			this._Consistency = consistency; 
-			return this;
-		}
-
-		public BulkUpdateDescriptor<T, K> Refresh(bool refresh = true)
-		{
-			this._Refresh = refresh; 
 			return this;
 		}
 

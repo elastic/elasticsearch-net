@@ -24,7 +24,7 @@ namespace Nest.Thrift
 		{
 			this._connectionSettings = connectionSettings;
 			this._timeout = connectionSettings.Timeout;
-			this._poolSize = connectionSettings.MaximumAsyncConnections;
+			this._poolSize = Math.Max(1, connectionSettings.MaximumAsyncConnections);
 
 			this._resourceLock = new Semaphore(_poolSize, _poolSize);
 

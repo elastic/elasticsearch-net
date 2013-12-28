@@ -59,10 +59,14 @@ namespace Nest
 			return this;
 		}
 
-		public ObjectMappingDescriptor<TParent, TChild> Dynamic(bool dynamic = true)
+		public ObjectMappingDescriptor<TParent, TChild> Dynamic(DynamicMappingOption dynamic)
 		{
 			this._Mapping.Dynamic = dynamic;
 			return this;
+		}
+		public ObjectMappingDescriptor<TParent, TChild> Dynamic(bool dynamic = true)
+		{
+			return this.Dynamic(dynamic ? DynamicMappingOption.allow : DynamicMappingOption.ignore);
 		}
 		public ObjectMappingDescriptor<TParent, TChild> Enabled(bool enabled = true)
 		{

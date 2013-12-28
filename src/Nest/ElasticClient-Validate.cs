@@ -8,11 +8,11 @@ namespace Nest
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		public IValidateResponse Validate(Action<ValidateQueryPathDescriptor> querySelector)
+		public IValidateResponse Validate(Func<ValidateQueryPathDescriptor, BaseQuery> querySelector)
 		{
 			var descriptor = new ValidateQueryPathDescriptor();
-			querySelector(descriptor);
-			var stringQuery = this.Serialize(descriptor);
+			var bq = querySelector(descriptor);
+			var stringQuery = this.Serialize(bq);
 			var path = this.PathResolver.GetPathForTyped(descriptor, "_validate/query");
 			if (descriptor._QueryStringQuery.IsNullOrEmpty())
 				return this._Validate(path, stringQuery);
@@ -22,10 +22,10 @@ namespace Nest
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		public IValidateResponse Validate<T>(Action<ValidateQueryPathDescriptor<T>> querySelector) where T : class
+		public IValidateResponse Validate<T>(Func<ValidateQueryPathDescriptor<T>, BaseQuery> querySelector) where T : class
 		{
 			var descriptor = new ValidateQueryPathDescriptor<T>();
-			querySelector(descriptor);
+			var bq = querySelector(descriptor);
 			var stringQuery = this.Serialize(descriptor);
 			var path = this.PathResolver.GetPathForTyped(descriptor, "_validate/query");
 			if (descriptor._QueryStringQuery.IsNullOrEmpty())

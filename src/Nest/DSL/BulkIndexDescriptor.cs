@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -12,6 +13,8 @@ namespace Nest
 		internal override string _Operation { get { return "index"; } }
 		internal override object _Object { get; set; }
 
+		[JsonProperty(PropertyName = "_percolate")]
+		internal string _Percolate { get; set; }
 
 		private readonly TypeNameResolver _typeNameResolver;
 
@@ -34,7 +37,6 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("indices");
 			this._Index = index;
 			return this;
 		}
@@ -44,7 +46,6 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Type(string type)
 		{
-			type.ThrowIfNullOrEmpty("type");
 			this._Type = type;
 			return this;
 		}
@@ -54,7 +55,6 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Type(Type type)
 		{
-			type.ThrowIfNull("type");
 			this._Type = type;
 			return this;
 		}
@@ -98,6 +98,20 @@ namespace Nest
 			return this;
 		}
 
+		public BulkIndexDescriptor<T> VersionType(VersionType versionType)
+		{
+			switch (versionType)
+			{
+				case Nest.VersionType.External:
+					this._VersionType = "external";
+					break;
+				case Nest.VersionType.Internal:
+					this._VersionType = "internal";
+					break;
+			}
+			return this;
+		}
+
 		public BulkIndexDescriptor<T> Routing(string routing)
 		{
 			this._Routing = routing; 
@@ -133,21 +147,5 @@ namespace Nest
 			this._Ttl = ttl; 
 			return this;
 		}
-
-		public BulkIndexDescriptor<T> Consistency(Consistency consistency)
-		{
-			this._Consistency = consistency; 
-			return this;
-		}
-
-		public BulkIndexDescriptor<T> Refresh(bool refresh = true)
-		{
-			this._Refresh = refresh; 
-			return this;
-		}
-
-
-
-
 	}
 }

@@ -4,6 +4,7 @@ namespace Nest
 {
     public enum DistanceUnit
     {
+
         MILES,
         KILOMETERS
     }

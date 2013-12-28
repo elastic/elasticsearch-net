@@ -20,6 +20,23 @@ namespace Nest.Tests.Unit.Core.Bulk
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
 			uri.AbsolutePath.Should().Be("/_bulk");
 		}
+
+		[Test]
+		public void BulkNonFixedWithParams()
+		{
+			var result = this._client.Bulk(b => b
+				.Refresh()
+				.Consistency(Consistency.Quorum)
+				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
+				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
+				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+			);
+			var status = result.ConnectionStatus;
+			var uri = new Uri(result.ConnectionStatus.RequestUrl);
+			uri.AbsolutePath.Should().Be("/_bulk");
+			uri.Query.Should().Be("?refresh=true&consistency=quorem");
+		}
+
 		[Test]
 		public void BulkFixedIndex()
 		{

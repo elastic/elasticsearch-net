@@ -20,5 +20,5 @@ A facet query allows to return a count of the hits matching the facet query. The
 		);
 	);
 
-See [original docs](http://www.elasticsearch.org/guide/reference/api/search/facets/query-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-query-facet.html) for more information
 

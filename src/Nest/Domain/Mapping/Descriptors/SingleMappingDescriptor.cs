@@ -130,6 +130,15 @@ namespace Nest
 			return d._Mapping;
 		}
 
+        public IElasticType Completion(Func<CompletionMappingDescriptor<T>, CompletionMappingDescriptor<T>> selector)
+        {
+            selector.ThrowIfNull("selector");
+            var d = selector(new CompletionMappingDescriptor<T>());
+            if (d == null)
+                throw new Exception("Could not get completion mapping");
+            return d._Mapping;
+        }
+
 		//Reminder if you are adding a new mapping type, may one appear in the future
 		//Add them to PropertiesDescriptor, CorePropertiesDescriptor (if its a new core type), SingleMappingDescriptor
 	}

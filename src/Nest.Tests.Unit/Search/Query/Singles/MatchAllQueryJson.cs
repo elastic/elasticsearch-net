@@ -15,7 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q.MatchAll());
 			var json = TestElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : { match_all: {}}}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
 		public void TestMatchAllShortcut()
@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.MatchAll();
 			var json = TestElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : { match_all: {}}}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 
 		[Test]
@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = "{ from: 0, size: 10, query : { match_all: { boost: 1.2 }}}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 
 		[Test]
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : { match_all: { norm_field: ""name"" }}}";
-			Assert.True(json.JsonEquals(expected));
+			Assert.True(json.JsonEquals(expected), json);
 		}
 	}
 }

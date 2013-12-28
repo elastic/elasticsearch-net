@@ -54,8 +54,8 @@ namespace Nest.Tests.Integration.Reproduce
 					)
 				);
 
-			//Approval settings appears twice because we are spawing the nested queries of x
-			Assert.AreEqual(2, Regex.Matches(response.ConnectionStatus.Request, @"approvalSettings\.approved").Count);
+			//Approval settings should not appear twice just because we are spawing the nested queries of wrong lambda parameter (x)
+			Assert.AreEqual(1, Regex.Matches(response.ConnectionStatus.Request, @"approvalSettings\.approved").Count, response.ConnectionStatus.Request);
 			
 			//either use the lambda overload
 			response = client.Count<MediaStreamEntry>(
@@ -79,8 +79,8 @@ namespace Nest.Tests.Integration.Reproduce
 				x => x.Bool(
 					b => b.Must
 						(
-							Query<MediaStreamEntry>.Term(f => f.StreamId, streamId.ToString())
-							, Query<MediaStreamEntry>.Term(f => f.ApprovalSettings.Approved, approved.ToString())
+							Query<MediaStreamEntry>.Term(f => f.StreamId, streamId)
+							, Query<MediaStreamEntry>.Term(f => f.ApprovalSettings.Approved, approved)
 						)
 					)
 				);

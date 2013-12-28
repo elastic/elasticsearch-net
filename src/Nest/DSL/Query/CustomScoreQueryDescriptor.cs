@@ -23,7 +23,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
 
-		internal bool IsConditionless
+		bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -53,7 +53,6 @@ namespace Nest
 		/// <returns></returns>
 		public CustomScoreQueryDescriptor<T> Script(string script)
 		{
-			script.ThrowIfNull("script");
 			this._Script = script;
 			return this;
 		}
