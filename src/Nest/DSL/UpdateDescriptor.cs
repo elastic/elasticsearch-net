@@ -33,7 +33,7 @@ namespace Nest
 		internal bool? _DocAsUpsert { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
-		internal object _Document { get; set; }
+		internal K _Document { get; set; }
 
 		internal int? _RetriesOnConflict { get; set; }
 		internal bool? _Refresh { get; set; }
@@ -85,7 +85,7 @@ namespace Nest
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public UpdateDescriptor<T, K> Document(object @object)
+		public UpdateDescriptor<T, K> Document(K @object)
 		{
 			this._Document = @object;
 			return this;

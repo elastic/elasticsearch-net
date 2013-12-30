@@ -12,7 +12,7 @@ namespace Nest
  		where K : class
 	{
 		[JsonProperty(PropertyName = "doc")]
-		internal object _Document { get; set; }
+		internal K _Document { get; set; }
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
 		
@@ -33,7 +33,7 @@ namespace Nest
 		internal override object _Object { get; set; }
 
 		
-		internal object _Document { get; set; }
+		internal K _Document { get; set; }
 		internal string _Script { get; set; }
 		internal Dictionary<string, object> _Params { get; set; }
 		internal object _Upsert { get; set; }
@@ -125,7 +125,7 @@ namespace Nest
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public BulkUpdateDescriptor<T, K> Document(object @object)
+		public BulkUpdateDescriptor<T, K> Document(K @object)
 		{
 			this._Document = @object;
 			return this;
