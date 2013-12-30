@@ -14,6 +14,9 @@ namespace Nest
 {
 	/// <summary>
 	/// Provides all descriptors with an option to inject raw json
+	/// DO NOT USE, this is an attempt to make json.net take a IDictionary with extra properties 
+	/// However the GetEnumerator it depends on is not performant nor does it use any registered 
+	/// JSON.net property resolvers.
 	/// </summary>
 	public class RawJsonDescriptorBase<TPathDescriptor> : IDictionary<string, object>
 		where TPathDescriptor : RawJsonDescriptorBase<TPathDescriptor>

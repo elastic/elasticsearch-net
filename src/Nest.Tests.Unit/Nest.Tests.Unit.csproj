@@ -360,7 +360,7 @@
     <None Include="Core\UpdateSettings\AllUpdateSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Core\UpdateSettings\CanTakeUnknownUpdateSettings.json">
+    <None Include="Core\UpdateSettings\CanSpecifyNewAnalysisSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Update\UpsertUsingScriptAndPartialObject.json">

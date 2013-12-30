@@ -10,12 +10,14 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	/// <summary>
+	/// Provides a base for descriptor that need to form a url path
+	/// in the form of /{index}/[anythinghere] where index is optional.
+	/// </summary>
 	public class IndexOptionalPathDescriptorBase<TIndexOptionalPathDescriptor, K> 
-		: RawJsonDescriptorBase<TIndexOptionalPathDescriptor>
 		where TIndexOptionalPathDescriptor : IndexOptionalPathDescriptorBase<TIndexOptionalPathDescriptor, K>, new()
 		where K : FluentQueryString<K>, new()
 	{
-
 		internal IndexNameMarker _Index { get; set; }
 		
 		internal bool? _AllIndices { get; set; }

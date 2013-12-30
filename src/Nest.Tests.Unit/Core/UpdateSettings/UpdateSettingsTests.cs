@@ -51,14 +51,21 @@ namespace Nest.Tests.Unit.Core.UpdateSettings
 		}
 
 		[Test]
-		public void CanTakeUnknownUpdateSettings()
+		public void CanSpecifyNewAnalysisSettings()
 		{
+			// do note that you need to close and reopen 
+			// an index before you can update analysis settings
+
 			var s = new UpdateSettingsDescriptor()
 				.NumberOfReplicas(5)
-				.RawJson(new Dictionary<string, object>()
-				{
-					{ "silly_nest_forgot_to_map", "this"}
-				});
+				.Analysis(a => a
+					.Analyzers(an => an
+						.Add("content", new CustomAnalyzer()
+						{
+							Tokenizer = "whitespace"
+						})
+					)
+				);
 			
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}

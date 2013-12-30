@@ -381,6 +381,20 @@ namespace Nest
 			return this;
 		}
 
+		[JsonProperty("analysis")]
+		internal AnalysisSettings _Analysis { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public UpdateSettingsDescriptor Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
+		{
+			analysisSelector.ThrowIfNull("analysisSelector");
+			var descriptor = analysisSelector(new AnalysisDescriptor());
+			this._Analysis = descriptor != null ? descriptor._AnalysisSettings : null;
+			return this;
+		}
+
 		internal new ElasticSearchPathInfo<UpdateSettingsQueryString> ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<UpdateSettingsQueryString>(settings);
