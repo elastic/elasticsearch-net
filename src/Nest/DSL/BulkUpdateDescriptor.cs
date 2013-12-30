@@ -158,7 +158,7 @@ namespace Nest
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.
 		/// </summary>
-		public BulkUpdateDescriptor<T, K> Upsert(K upsertObject)
+		public BulkUpdateDescriptor<T, K> Upsert(T upsertObject)
 		{
 			upsertObject.ThrowIfNull("upsertObject");
 			this._Upsert = upsertObject;
