@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -9,12 +10,15 @@ namespace Nest
 	/// </summary>
 	public class CustomAnalyzer : AnalyzerBase
     {
-        public CustomAnalyzer()
-        {
-            this.Type = "custom";
-        }
+	    public CustomAnalyzer(string type)
+	    {
+	        Type = type;
+	    }
 
-        [JsonProperty("tokenizer")]
+        [Obsolete("ctor(string) is preferred")]
+	    public CustomAnalyzer() : this("custom") {}
+
+	    [JsonProperty("tokenizer")]
         public string Tokenizer { get; set; }
 
         [JsonProperty("filter")]
