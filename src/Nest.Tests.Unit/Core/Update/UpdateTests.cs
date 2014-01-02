@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void UpsertUsingScriptAndPartialObject()
 		{
-			var s = new UpdateDescriptor<ElasticSearchProject, object>()
+			var s = new UpdateDescriptor<object, object>()
 			  .Script("ctx._source.counter += count")
 			  .Params(p => p
 				  .Add("count", 4)
