@@ -70,6 +70,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSL\FluentDictionary.cs" />
+    <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\Paths\RawJsonDescriptorBase.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />

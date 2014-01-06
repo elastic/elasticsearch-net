@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -9,23 +10,33 @@ namespace Nest
 		/// Please consult the docs http://www.elasticsearch.org/guide/reference/api/search/scroll.html
 		/// on the do's and don'ts!
 		/// </summary>
-		public IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId)
+		public IQueryResponse<T> Scroll<T>(
+			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			where T : class
 		{
-			return Scroll<dynamic>(scrollTime, scrollId);
+			string scrollId;
+			var pathInfo = GetPathInfo(scrollSelector, out scrollId);
+			return this.RawDispatch.ScrollDispatch(pathInfo, scrollId)
+				.Deserialize<QueryResponse<T>>();
 		}
-
-		public IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class
+		public Task<IQueryResponse<T>> ScrollAsync<T>(
+			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			where T : class
 		{
+			string scrollId;
+			var pathInfo = GetPathInfo(scrollSelector, out scrollId);
+			return this.RawDispatch.ScrollDispatchAsync(pathInfo, scrollId)
+				.ContinueWith<IQueryResponse<T>>(t => t.Result.Deserialize<QueryResponse<T>>());
+		}
+		private ElasticSearchPathInfo<ScrollQueryString> GetPathInfo<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector, out string scrollId) where T : class
+		{
+			scrollSelector.ThrowIfNull("scrollSelector");
+			var scrollDescriptor = scrollSelector(new ScrollDescriptor<T>());
+			scrollId = scrollDescriptor._QueryString._scroll_id;
 			scrollId.ThrowIfNullOrEmpty("scrollId");
-			scrollTime.ThrowIfNullOrEmpty("scrollTime");
 
-			scrollTime = Uri.EscapeDataString(scrollTime);
-
-			var path = "_search/scroll?scroll={0}".F(scrollTime);
-
-			ConnectionStatus status = this.Connection.PostSync(path, scrollId);
-			var r = this.Deserialize<QueryResponse<T>>(status);
-			return r;
+			var pathInfo = scrollDescriptor.ToPathInfo(this._connectionSettings);
+			return pathInfo;
 		}
 	}
 }

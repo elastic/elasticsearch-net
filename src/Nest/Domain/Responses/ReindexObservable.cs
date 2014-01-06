@@ -69,7 +69,11 @@ namespace Nest
 			IBulkResponse indexResult = null;
 			do
 			{
-				searchResult = this.CurrentClient.Scroll<T>(scroll, searchResult.ScrollId);
+				var result = searchResult;
+				searchResult = this.CurrentClient.Scroll<T>(s => s
+					.Scroll(scroll)
+					.ScrollId(result.ScrollId)
+				);
 				if (searchResult.Documents.HasAny())
 					indexResult = this.IndexSearchResults(searchResult, observer, toIndex, page);
 				page++;

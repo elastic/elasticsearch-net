@@ -25,13 +25,19 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
 			var scrolls = 0;
-			var results = this._client.Scroll<ElasticSearchProject>("4s", scanResults.ScrollId);
+			var results = this._client.Scroll<ElasticSearchProject>(s=>s
+				.Scroll("4s") 
+				.ScrollId(scanResults.ScrollId)
+			);
 			while (results.Documents.Any())
 			{
 				Assert.True(results.IsValid);
 				Assert.True(results.Documents.Any());
 				Assert.IsNotNullOrEmpty(results.ScrollId);
-				results = this._client.Scroll<ElasticSearchProject>("4s", results.ScrollId);
+				var localResults = results;
+				results = this._client.Scroll<ElasticSearchProject>(s=>s
+					.Scroll("4s")
+					.ScrollId(localResults.ScrollId));
 				scrolls++;
 			}
 			Assert.AreEqual(18, scrolls);
@@ -53,14 +59,19 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
 			var scrolls = 0;
-			var results = this._client.Scroll<ElasticSearchProject>("4s", scanResults.ScrollId);
+			var results = this._client.Scroll<ElasticSearchProject>(s =>s
+				.Scroll("4s")
+				.ScrollId(scanResults.ScrollId));
 			results.Documents.Count().Should().Be(18);
 			while (results.Documents.Any())
 			{
 				Assert.True(results.IsValid);
 				Assert.True(results.Documents.Any());
 				Assert.IsNotNullOrEmpty(results.ScrollId);
-				results = this._client.Scroll<ElasticSearchProject>("4s", results.ScrollId);
+				var results1 = results;
+				results = this._client.Scroll<ElasticSearchProject>(s=>s
+					.Scroll("4s")
+					.ScrollId(results1.ScrollId));
 				scrolls++;
 			}
 			Assert.AreEqual(1, scrolls);

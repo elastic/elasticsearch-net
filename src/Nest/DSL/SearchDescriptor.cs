@@ -11,7 +11,6 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-
 	public abstract class SearchDescriptorBase
 	{
 		internal abstract Type _ClrType { get; }
@@ -19,7 +18,6 @@ namespace Nest
 		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal string _Routing { get; set; }
 		internal SearchType? _SearchType { get; set; }
-		internal string _Scroll { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
 
@@ -27,20 +25,11 @@ namespace Nest
 		internal string _Preference { get; set; }
 
 		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
-
-
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SearchDescriptor<T> : SearchDescriptorBase where T : class
+	public partial class SearchDescriptor<T> : SearchDescriptorBase where T : class
 	{
-		private readonly TypeNameResolver typeNameResolver;
-
-		public SearchDescriptor()
-		{
-			this.typeNameResolver = new TypeNameResolver();
-		}
-
 
 		internal override Type _ClrType { get { return typeof(T); } }
 
@@ -159,17 +148,7 @@ namespace Nest
 			this._SearchType = searchType;
 			return this;
 		}
-		/// <summary>
-		/// A search request can be scrolled by specifying the scroll parameter. The scroll parameter is a time value parameter (for example: scroll=5m), indicating for how long the nodes that participate in the search will maintain relevant resources in order to continue and support it. This is very similar in its idea to opening a cursor against a database.
-		/// </summary>
-		/// <param name="scrollTime">The scroll parameter is a time value parameter (for example: scroll=5m)</param>
-		/// <returns></returns>
-		public SearchDescriptor<T> Scroll(string scrollTime)
-		{
-			scrollTime.ThrowIfNullOrEmpty("scrollTime");
-			this._Scroll = scrollTime;
-			return this;
-		}
+		
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
 		public SearchDescriptor<T> Strict(bool strict = true)
@@ -336,23 +315,7 @@ namespace Nest
 			this._MinScore = minScore;
 			return this;
 		}
-		/// <summary>
-		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
-		/// By default, the operation is randomized between the each shard replicas.
-		/// </para>
-		/// <para>
-		/// Custom (string) value: A custom value will be used to guarantee that the same shards
-		/// will be used for the same custom value. This can help with “jumping values” 
-		/// when hitting different shards in different refresh states. 
-		/// A sample value can be something like the web session id, or the user name.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> Preference(string preference)
-		{
-			this._Preference = preference;
-			return this;
-		}
+		
 		/// <summary>
 		/// <para>
 		/// Controls a preference of which shard replicas to execute the search request on. 
@@ -1073,33 +1036,6 @@ namespace Nest
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
 		{
 			this._ConcreteTypeSelector = typeSelector;
-			return this;
-		}
-	}
-
-	public class FluentDictionary<K, V> : Dictionary<K, V>
-	{
-		public FluentDictionary()
-		{
-		}
-
-		public FluentDictionary(IDictionary<K, V> copy)
-		{
-			if (copy == null)
-				return;
-
-			foreach (var kv in copy)
-				this[kv.Key] = kv.Value;
-		}
-
-		public new FluentDictionary<K, V> Add(K k, V v)
-		{
-			base.Add(k, v);
-			return this;
-		}
-		public new FluentDictionary<K, V> Remove(K k)
-		{
-			base.Remove(k);
 			return this;
 		}
 	}

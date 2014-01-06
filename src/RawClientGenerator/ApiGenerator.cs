@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using CsQuery;
 using Newtonsoft.Json;
+using RawClientGenerator.Overrides.Descriptors;
 using Xipton.Razor;
 
 namespace RawClientGenerator
@@ -137,6 +138,20 @@ namespace RawClientGenerator
 			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
 				method.DescriptorTypeGeneric = generic;
 
+			try
+			{
+				var typeName = "RawClientGenerator.Overrides.Descriptors." + method.DescriptorType + "Overrides";
+				var type = typeof (ApiGenerator).Assembly.GetType(typeName);
+				var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
+				if (overrides == null)
+					return;
+				method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
+					.ToDictionary(k => k.Key, v => v.Value);
+			}
+// ReSharper disable once EmptyGeneralCatchClause
+			catch (Exception e)
+			{
+			}
 
 		}
 

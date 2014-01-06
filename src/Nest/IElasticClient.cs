@@ -271,32 +271,27 @@ namespace Nest
 		IIndicesShardResponse Refresh(string index);
 		IIndicesShardResponse Refresh<T>() where T : class;
 
-
 		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) where T : class;
 
 		IRegisterPercolateResponse RegisterPercolator<T>(
 			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class;
-
 		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(
 			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class;
-
+		IUnregisterPercolateResponse UnregisterPercolator(string index, string name);
+		IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class;
+		
 		IIndicesOperationResponse RemoveAlias(AliasParams aliasParams);
 		IIndicesOperationResponse RemoveAlias(IEnumerable<string> aliases);
 		IIndicesOperationResponse RemoveAlias(string alias);
 		IIndicesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases);
 		IIndicesOperationResponse RemoveAlias(string index, string alias);
 		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
+		
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
 
-		IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId);
-		IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class;
 
-		IQueryResponse<dynamic> Search(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
-		IQueryResponse<T> Search<T>(SearchDescriptor<T> descriptor) where T : class;
+
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-
-		Task<IQueryResponse<dynamic>> SearchAsync(Func<SearchDescriptor<dynamic>, SearchDescriptor<dynamic>> searcher);
-		Task<IQueryResponse<T>> SearchAsync<T>(SearchDescriptor<T> descriptor) where T : class;
 		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
 
 		ISegmentsResponse Segments();
@@ -307,15 +302,27 @@ namespace Nest
 		IIndicesShardResponse Snapshot(IEnumerable<string> indices);
 		IIndicesShardResponse Snapshot(string index);
 		IIndicesShardResponse Snapshot<T>() where T : class;
-	    IClusterStateResponse ClusterState(ClusterStateInfo stateInfo, IEnumerable<string> indices = null);
+		
+		IClusterStateResponse ClusterState(ClusterStateInfo stateInfo, IEnumerable<string> indices = null);
+		
 		IGlobalStatsResponse Stats();
 		IGlobalStatsResponse Stats(StatsParams parameters);
+
 		IStatsResponse Stats(IEnumerable<string> indices);
 		IStatsResponse Stats(IEnumerable<string> indices, StatsParams parameters);
 		IStatsResponse Stats(string index);
+		
 		IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices);
-		IUnregisterPercolateResponse UnregisterPercolator(string index, string name);
-		IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class;
+
+
+
+		//converted
+
+
+		IQueryResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
+			where T : class;
+		Task<IQueryResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
+			where T : class;
 		
 		IUpdateResponse Update<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) where T : class;
 		IUpdateResponse Update<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector) 

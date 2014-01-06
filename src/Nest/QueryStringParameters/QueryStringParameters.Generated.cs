@@ -3444,39 +3444,6 @@ namespace Nest
 		}
 
 		
-		internal bool _explain { get; set; }
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public SearchQueryString Explain(bool explain)
-		{
-			var v = this.CreateString(explain);
-			this._explain = explain;
-			this.Add("explain", v);
-			return this;
-		}
-
-		
-		internal string[] _fields { get; set; }
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public SearchQueryString Fields(params string[] fields)
-		{
-			var v = this.CreateString(fields);
-			this._fields = fields;
-			this.Add("fields", v);
-			return this;
-		}
-
-		
-		internal int _from { get; set; }
-		///<summary>Starting offset (default: 0)</summary>
-		public SearchQueryString From(int from)
-		{
-			var v = this.CreateString(from);
-			this._from = from;
-			this.Add("from", v);
-			return this;
-		}
-
-		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
 		public SearchQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
@@ -3532,17 +3499,6 @@ namespace Nest
 		}
 
 		
-		internal string _q { get; set; }
-		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchQueryString Q(string q)
-		{
-			var v = this.CreateString(q);
-			this._q = q;
-			this.Add("q", v);
-			return this;
-		}
-
-		
 		internal string[] _routing { get; set; }
 		///<summary>A comma-separated list of specific routing values</summary>
 		public SearchQueryString Routing(params string[] routing)
@@ -3572,28 +3528,6 @@ namespace Nest
 			var v = this.CreateString(search_type);
 			this._search_type = search_type;
 			this.Add("search_type", v);
-			return this;
-		}
-
-		
-		internal int _size { get; set; }
-		///<summary>Number of hits to return (default: 10)</summary>
-		public SearchQueryString Size(int size)
-		{
-			var v = this.CreateString(size);
-			this._size = size;
-			this.Add("size", v);
-			return this;
-		}
-
-		
-		internal string[] _sort { get; set; }
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public SearchQueryString Sort(params string[] sort)
-		{
-			var v = this.CreateString(sort);
-			this._sort = sort;
-			this.Add("sort", v);
 			return this;
 		}
 
@@ -3693,28 +3627,6 @@ namespace Nest
 			var v = this.CreateString(suggest_text);
 			this._suggest_text = suggest_text;
 			this.Add("suggest_text", v);
-			return this;
-		}
-
-		
-		internal string _timeout { get; set; }
-		///<summary>Explicit operation timeout</summary>
-		public SearchQueryString Timeout(string timeout)
-		{
-			var v = this.CreateString(timeout);
-			this._timeout = timeout;
-			this.Add("timeout", v);
-			return this;
-		}
-
-		
-		internal bool _version { get; set; }
-		///<summary>Specify whether to return document version as part of a hit</summary>
-		public SearchQueryString Version(bool version)
-		{
-			var v = this.CreateString(version);
-			this._version = version;
-			this.Add("version", v);
 			return this;
 		}
 

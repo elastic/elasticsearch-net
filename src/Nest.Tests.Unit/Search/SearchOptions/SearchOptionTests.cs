@@ -76,7 +76,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.Preference("_primary");
-			var result = this._client.Search(s);
+			var result = this._client.Search<ElasticSearchProject>(ss=>s);
 			StringAssert.Contains("preference=_primary", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
@@ -86,7 +86,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnPrimary();
-			var result = this._client.Search(s);
+			var result = this._client.Search<ElasticSearchProject>(ss=>s);
 			StringAssert.Contains("preference=_primary", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
@@ -96,7 +96,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnPrimaryFirst();
-			var result = this._client.Search(s);
+			var result = this._client.Search<ElasticSearchProject>(ss=>s);
 			StringAssert.Contains("preference=_primary_first", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
@@ -106,7 +106,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnLocalShard();
-			var result = this._client.Search(s);
+			var result = this._client.Search<ElasticSearchProject>(ss=>s);
 			StringAssert.Contains("preference=_local", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
@@ -116,7 +116,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnNode("somenode");
-			var result = this._client.Search(s);
+			var result = this._client.Search<ElasticSearchProject>(ss=>s);
 			StringAssert.Contains("preference=_only_node:somenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
@@ -126,7 +126,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.ExecuteOnPreferredNode("somenode");
-			var result = this._client.Search(s);
+			var result = this._client.Search<ElasticSearchProject>(ss=>s);
 			StringAssert.Contains("preference=_prefer_node:somenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]

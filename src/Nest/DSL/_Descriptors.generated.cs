@@ -2737,13 +2737,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/search/scroll/
 	///</pre>
 	///</summary>
-	public partial class ScrollDescriptor
+	public partial class ScrollDescriptor<T>
 	{
 		internal ScrollQueryString _QueryString = new ScrollQueryString(); 
 
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor Scroll(string scroll)
+		public ScrollDescriptor<T> Scroll(string scroll)
 		{
 			this._QueryString.Scroll(scroll);
 			return this;
@@ -2751,7 +2751,7 @@ namespace Nest
 		
 
 		///<summary>The scroll ID for scrolled search</summary>
-		public ScrollDescriptor ScrollId(string scroll_id)
+		public ScrollDescriptor<T> ScrollId(string scroll_id)
 		{
 			this._QueryString.ScrollId(scroll_id);
 			return this;
@@ -2766,13 +2766,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/search/
 	///</pre>
 	///</summary>
-	public partial class SearchDescriptor
+	public partial class SearchDescriptor<T>
 	{
 		internal SearchQueryString _QueryString = new SearchQueryString(); 
 
 
 		///<summary>The analyzer to use for the query string</summary>
-		public SearchDescriptor Analyzer(string analyzer)
+		public SearchDescriptor<T> Analyzer(string analyzer)
 		{
 			this._QueryString.Analyzer(analyzer);
 			return this;
@@ -2780,7 +2780,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchDescriptor AnalyzeWildcard(bool analyze_wildcard = true)
+		public SearchDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
 		{
 			this._QueryString.AnalyzeWildcard(analyze_wildcard);
 			return this;
@@ -2788,7 +2788,7 @@ namespace Nest
 		
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor DefaultOperator(DefaultOperatorOptions default_operator)
+		public SearchDescriptor<T> DefaultOperator(DefaultOperatorOptions default_operator)
 		{
 			this._QueryString.DefaultOperator(default_operator);
 			return this;
@@ -2796,39 +2796,15 @@ namespace Nest
 		
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchDescriptor Df(string df)
+		public SearchDescriptor<T> Df(string df)
 		{
 			this._QueryString.Df(df);
 			return this;
 		}
 		
 
-		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public SearchDescriptor Explain(bool explain = true)
-		{
-			this._QueryString.Explain(explain);
-			return this;
-		}
-		
-
-		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public SearchDescriptor Fields(params string[] fields)
-		{
-			this._QueryString.Fields(fields);
-			return this;
-		}
-		
-
-		///<summary>Starting offset (default: 0)</summary>
-		public SearchDescriptor From(int from)
-		{
-			this._QueryString.From(from);
-			return this;
-		}
-		
-
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SearchDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public SearchDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
@@ -2836,7 +2812,7 @@ namespace Nest
 		
 
 		///<summary>Comma-separated list of index boosts</summary>
-		public SearchDescriptor IndicesBoost(params string[] indices_boost)
+		public SearchDescriptor<T> IndicesBoost(params string[] indices_boost)
 		{
 			this._QueryString.IndicesBoost(indices_boost);
 			return this;
@@ -2844,7 +2820,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchDescriptor Lenient(bool lenient = true)
+		public SearchDescriptor<T> Lenient(bool lenient = true)
 		{
 			this._QueryString.Lenient(lenient);
 			return this;
@@ -2852,7 +2828,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
+		public SearchDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
 			this._QueryString.LowercaseExpandedTerms(lowercase_expanded_terms);
 			return this;
@@ -2860,23 +2836,15 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchDescriptor Preference(string preference)
+		public SearchDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
 		}
 		
 
-		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchDescriptor Q(string q)
-		{
-			this._QueryString.Q(q);
-			return this;
-		}
-		
-
 		///<summary>A comma-separated list of specific routing values</summary>
-		public SearchDescriptor Routing(params string[] routing)
+		public SearchDescriptor<T> Routing(params string[] routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -2884,7 +2852,7 @@ namespace Nest
 		
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchDescriptor Scroll(string scroll)
+		public SearchDescriptor<T> Scroll(string scroll)
 		{
 			this._QueryString.Scroll(scroll);
 			return this;
@@ -2892,31 +2860,15 @@ namespace Nest
 		
 
 		///<summary>Search operation type</summary>
-		public SearchDescriptor SearchType(SearchTypeOptions search_type)
+		public SearchDescriptor<T> SearchType(SearchTypeOptions search_type)
 		{
 			this._QueryString.SearchType(search_type);
 			return this;
 		}
 		
 
-		///<summary>Number of hits to return (default: 10)</summary>
-		public SearchDescriptor Size(int size)
-		{
-			this._QueryString.Size(size);
-			return this;
-		}
-		
-
-		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public SearchDescriptor Sort(params string[] sort)
-		{
-			this._QueryString.Sort(sort);
-			return this;
-		}
-		
-
 		///<summary>The URL-encoded request definition using the Query DSL (instead of using request body)</summary>
-		public SearchDescriptor Source(string source)
+		public SearchDescriptor<T> Source(string source)
 		{
 			this._QueryString.Source(source);
 			return this;
@@ -2924,7 +2876,7 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SearchDescriptor Source(params string[] _source)
+		public SearchDescriptor<T> Source(params string[] _source)
 		{
 			this._QueryString.Source(_source);
 			return this;
@@ -2932,7 +2884,7 @@ namespace Nest
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SearchDescriptor SourceExclude(params string[] _source_exclude)
+		public SearchDescriptor<T> SourceExclude(params string[] _source_exclude)
 		{
 			this._QueryString.SourceExclude(_source_exclude);
 			return this;
@@ -2940,7 +2892,7 @@ namespace Nest
 		
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SearchDescriptor SourceInclude(params string[] _source_include)
+		public SearchDescriptor<T> SourceInclude(params string[] _source_include)
 		{
 			this._QueryString.SourceInclude(_source_include);
 			return this;
@@ -2948,7 +2900,7 @@ namespace Nest
 		
 
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public SearchDescriptor Stats(params string[] stats)
+		public SearchDescriptor<T> Stats(params string[] stats)
 		{
 			this._QueryString.Stats(stats);
 			return this;
@@ -2956,7 +2908,7 @@ namespace Nest
 		
 
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor SuggestField(string suggest_field)
+		public SearchDescriptor<T> SuggestField(string suggest_field)
 		{
 			this._QueryString.SuggestField(suggest_field);
 			return this;
@@ -2964,7 +2916,7 @@ namespace Nest
 		
 
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor SuggestMode(SuggestModeOptions suggest_mode)
+		public SearchDescriptor<T> SuggestMode(SuggestModeOptions suggest_mode)
 		{
 			this._QueryString.SuggestMode(suggest_mode);
 			return this;
@@ -2972,7 +2924,7 @@ namespace Nest
 		
 
 		///<summary>How many suggestions to return in response</summary>
-		public SearchDescriptor SuggestSize(int suggest_size)
+		public SearchDescriptor<T> SuggestSize(int suggest_size)
 		{
 			this._QueryString.SuggestSize(suggest_size);
 			return this;
@@ -2980,25 +2932,9 @@ namespace Nest
 		
 
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchDescriptor SuggestText(string suggest_text)
+		public SearchDescriptor<T> SuggestText(string suggest_text)
 		{
 			this._QueryString.SuggestText(suggest_text);
-			return this;
-		}
-		
-
-		///<summary>Explicit operation timeout</summary>
-		public SearchDescriptor Timeout(string timeout)
-		{
-			this._QueryString.Timeout(timeout);
-			return this;
-		}
-		
-
-		///<summary>Specify whether to return document version as part of a hit</summary>
-		public SearchDescriptor Version(bool version = true)
-		{
-			this._QueryString.Version(version);
 			return this;
 		}
 		
