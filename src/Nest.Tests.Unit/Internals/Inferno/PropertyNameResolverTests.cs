@@ -88,7 +88,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		}
 		
 		[Test]
-		public void TestDictionaryStringExpression()
+		public void TestDictionaryConstStringExpression()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.StringDict["someValue"].CreateDate;
 			var propertyName = new PropertyNameResolver().Resolve(exp);
@@ -97,13 +97,48 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		}
 
 		[Test]
-		public void TestDictionaryIntExpression()
+		public void TestDictionaryConstIntExpression()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.IntDict[101].MyProperty;
 			var propertyName = new PropertyNameResolver().Resolve(exp);
 			var expected = "intDict.101.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
+
+        [Test]
+        public void TestDictionaryStringExpression()
+        {
+            string index = "someValue";
+            Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
+            var propertyName = new PropertyNameResolver().Resolve(exp);
+            var expected = "stringDict.someValue.CreateDate";
+            Assert.AreEqual(expected, propertyName);
+        }
+
+        [Test]
+        public void TestDictionaryIntExpression()
+        {
+            var index = 101;
+            Expression<Func<SomeClass, object>> exp = (m) => m.IntDict[index].MyProperty;
+            var propertyName = new PropertyNameResolver().Resolve(exp);
+            var expected = "intDict.101.MID";
+            Assert.AreEqual(expected, propertyName);
+        }
+
+        [Test]
+        public void TestDictionaryStringDiffValues()
+        {
+            string index = "someValue1";
+            Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
+            var propertyName = new PropertyNameResolver().Resolve(exp);
+            var expected1 = "stringDict.someValue1.CreateDate";
+            Assert.AreEqual(expected1, propertyName);
+            index = "someValue2";
+            exp = (m) => m.StringDict[index].CreateDate;
+            propertyName = new PropertyNameResolver().Resolve(exp);
+            var expected2 = "stringDict.someValue2.CreateDate";
+            Assert.AreEqual(expected2, propertyName);
+        }
 
 		[Test]
 		public void TestCollectionIndexExpressionDoesNotEndUpInPath()
