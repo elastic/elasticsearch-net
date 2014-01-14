@@ -1,48 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Snapshot all indices
-		/// </summary>
-		public IIndicesShardResponse Snapshot()
+		public IIndicesShardResponse Snapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector)
 		{
-			return this.Snapshot("_all");
+			snapShotSelector.ThrowIfNull("snapShotSelector");
+			var descriptor = snapShotSelector(new SnapshotDescriptor());
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return this.RawDispatch.IndicesSnapshotIndexDispatch(pathInfo)
+				.Deserialize<IndicesShardResponse>();
 		}
-		/// <summary>
-		/// Snapshot the default index
-		/// </summary>
-		public IIndicesShardResponse Snapshot<T>() where T : class
-		{
-			var index = this.Infer.IndexName<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			return Snapshot(index);
-		}
-		/// <summary>
-		/// Snapshot the specified index
-		/// </summary>
-		public IIndicesShardResponse Snapshot(string index)
+		public Task<IIndicesShardResponse> SnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector)
 		{
-			index.ThrowIfNull("index");
-			return this.Snapshot(new[] { index });
-		}
-		/// <summary>
-		/// Snapshot the specified indices
-		/// </summary>
-		public IIndicesShardResponse Snapshot(IEnumerable<string> indices)
-		{
-			indices.ThrowIfNull("indices");
-			string path = this.PathResolver.CreateIndexPath(indices, "/_gateway/snapshot");
-			return this._Snapshot(path);
-		}
-		private IndicesShardResponse _Snapshot(string path)
-		{
-			var status = this.Connection.PostSync(path, "");
-			var r = this.Deserialize<IndicesShardResponse>(status);
-			return r;
+			snapShotSelector.ThrowIfNull("snapShotSelector");
+			var descriptor = snapShotSelector(new SnapshotDescriptor());
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return this.RawDispatch.IndicesSnapshotIndexDispatchAsync(pathInfo)
+				.ContinueWith<IIndicesShardResponse>(r=>r.Result.Deserialize<IndicesShardResponse>());
 		}
 
 	}

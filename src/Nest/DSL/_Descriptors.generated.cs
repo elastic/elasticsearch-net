@@ -1502,13 +1502,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/
 	///</pre>
 	///</summary>
-	public partial class IndicesCloseDescriptor
+	public partial class CloseIndexDescriptor
 	{
-		internal IndicesCloseQueryString _QueryString = new IndicesCloseQueryString(); 
+		internal CloseIndexQueryString _QueryString = new CloseIndexQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
-		public IndicesCloseDescriptor Timeout(string timeout)
+		public CloseIndexDescriptor Timeout(string timeout)
 		{
 			this._QueryString.Timeout(timeout);
 			return this;
@@ -1516,7 +1516,7 @@ namespace Nest
 		
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesCloseDescriptor MasterTimeout(string master_timeout)
+		public CloseIndexDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -1839,13 +1839,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/
 	///</pre>
 	///</summary>
-	public partial class IndicesOpenDescriptor
+	public partial class OpenIndexDescriptor
 	{
-		internal IndicesOpenQueryString _QueryString = new IndicesOpenQueryString(); 
+		internal OpenIndexQueryString _QueryString = new OpenIndexQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
-		public IndicesOpenDescriptor Timeout(string timeout)
+		public OpenIndexDescriptor Timeout(string timeout)
 		{
 			this._QueryString.Timeout(timeout);
 			return this;
@@ -1853,7 +1853,7 @@ namespace Nest
 		
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesOpenDescriptor MasterTimeout(string master_timeout)
+		public OpenIndexDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -1868,13 +1868,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/
 	///</pre>
 	///</summary>
-	public partial class IndicesOptimizeDescriptor
+	public partial class OptimizeDescriptor
 	{
-		internal IndicesOptimizeQueryString _QueryString = new IndicesOptimizeQueryString(); 
+		internal OptimizeQueryString _QueryString = new OptimizeQueryString(); 
 
 
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public IndicesOptimizeDescriptor Flush(bool flush = true)
+		public OptimizeDescriptor Flush(bool flush = true)
 		{
 			this._QueryString.Flush(flush);
 			return this;
@@ -1882,7 +1882,7 @@ namespace Nest
 		
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesOptimizeDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public OptimizeDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;
@@ -1890,7 +1890,7 @@ namespace Nest
 		
 
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public IndicesOptimizeDescriptor MaxNumSegments(int max_num_segments)
+		public OptimizeDescriptor MaxNumSegments(int max_num_segments)
 		{
 			this._QueryString.MaxNumSegments(max_num_segments);
 			return this;
@@ -1898,7 +1898,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public IndicesOptimizeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true)
+		public OptimizeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true)
 		{
 			this._QueryString.OnlyExpungeDeletes(only_expunge_deletes);
 			return this;
@@ -1906,7 +1906,7 @@ namespace Nest
 		
 
 		///<summary>TODO: ?</summary>
-		public IndicesOptimizeDescriptor OperationThreading(string operation_threading)
+		public OptimizeDescriptor OperationThreading(string operation_threading)
 		{
 			this._QueryString.OperationThreading(operation_threading);
 			return this;
@@ -1914,7 +1914,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether the index should be refreshed after performing the operation (default: true)</summary>
-		public IndicesOptimizeDescriptor Refresh(bool refresh = true)
+		public OptimizeDescriptor Refresh(bool refresh = true)
 		{
 			this._QueryString.Refresh(refresh);
 			return this;
@@ -1922,7 +1922,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public IndicesOptimizeDescriptor WaitForMerge(bool wait_for_merge = true)
+		public OptimizeDescriptor WaitForMerge(bool wait_for_merge = true)
 		{
 			this._QueryString.WaitForMerge(wait_for_merge);
 			return this;
@@ -2140,13 +2140,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/
 	///</pre>
 	///</summary>
-	public partial class IndicesSnapshotIndexDescriptor
+	public partial class SnapshotDescriptor
 	{
-		internal IndicesSnapshotIndexQueryString _QueryString = new IndicesSnapshotIndexQueryString(); 
+		internal SnapshotQueryString _QueryString = new SnapshotQueryString(); 
 
 
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesSnapshotIndexDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public SnapshotDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			this._QueryString.IgnoreIndices(ignore_indices);
 			return this;

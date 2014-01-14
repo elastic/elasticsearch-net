@@ -54,6 +54,16 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\Nest.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug - Generator\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\Nest.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -70,7 +80,16 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackwardsCompatibility\IElasticClientExtensions.cs" />
+    <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
+    <Compile Include="DSL\CloseIndexDescriptor.cs" />
+    <Compile Include="DSL\OptimizeDescriptor.cs" />
+    <Compile Include="DSL\SnapshotDescriptor.cs" />
+    <Compile Include="DSL\IActAsQuery.cs" />
+    <Compile Include="DSL\OpenIndexDescriptor.cs" />
     <Compile Include="DSL\FluentDictionary.cs" />
+    <Compile Include="DSL\Paths\IndicesOptionalPathDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\Paths\RawJsonDescriptorBase.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />

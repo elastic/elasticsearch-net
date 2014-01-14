@@ -1,5 +1,6 @@
 ﻿using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Nest.BackwardsCompatibility;
 
 namespace Nest.Tests.Integration.Indices
 {

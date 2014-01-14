@@ -131,7 +131,7 @@ namespace ProtocolLoadTest
 				return;
 			}
 
-			client.CloseIndex(indexName);
+			client.CloseIndex(ci=>ci.Index(indexName));
 		}
 	}
 }

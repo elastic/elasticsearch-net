@@ -1911,12 +1911,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/
 	///</pre>
 	///</summary>
-	public class IndicesCloseQueryString : FluentQueryString<IndicesCloseQueryString> 
+	public class CloseIndexQueryString : FluentQueryString<CloseIndexQueryString> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public IndicesCloseQueryString Timeout(string timeout)
+		public CloseIndexQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -1927,7 +1927,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesCloseQueryString MasterTimeout(string master_timeout)
+		public CloseIndexQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2272,12 +2272,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/
 	///</pre>
 	///</summary>
-	public class IndicesOpenQueryString : FluentQueryString<IndicesOpenQueryString> 
+	public class OpenIndexQueryString : FluentQueryString<OpenIndexQueryString> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public IndicesOpenQueryString Timeout(string timeout)
+		public OpenIndexQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -2288,7 +2288,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesOpenQueryString MasterTimeout(string master_timeout)
+		public OpenIndexQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2304,12 +2304,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/
 	///</pre>
 	///</summary>
-	public class IndicesOptimizeQueryString : FluentQueryString<IndicesOptimizeQueryString> 
+	public class OptimizeQueryString : FluentQueryString<OptimizeQueryString> 
 	{
 		
 		internal bool _flush { get; set; }
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public IndicesOptimizeQueryString Flush(bool flush)
+		public OptimizeQueryString Flush(bool flush)
 		{
 			var v = this.CreateString(flush);
 			this._flush = flush;
@@ -2320,7 +2320,7 @@ namespace Nest
 		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesOptimizeQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public OptimizeQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			var v = this.CreateString(ignore_indices);
 			this._ignore_indices = ignore_indices;
@@ -2331,7 +2331,7 @@ namespace Nest
 		
 		internal int _max_num_segments { get; set; }
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public IndicesOptimizeQueryString MaxNumSegments(int max_num_segments)
+		public OptimizeQueryString MaxNumSegments(int max_num_segments)
 		{
 			var v = this.CreateString(max_num_segments);
 			this._max_num_segments = max_num_segments;
@@ -2342,7 +2342,7 @@ namespace Nest
 		
 		internal bool _only_expunge_deletes { get; set; }
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public IndicesOptimizeQueryString OnlyExpungeDeletes(bool only_expunge_deletes)
+		public OptimizeQueryString OnlyExpungeDeletes(bool only_expunge_deletes)
 		{
 			var v = this.CreateString(only_expunge_deletes);
 			this._only_expunge_deletes = only_expunge_deletes;
@@ -2353,7 +2353,7 @@ namespace Nest
 		
 		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
-		public IndicesOptimizeQueryString OperationThreading(string operation_threading)
+		public OptimizeQueryString OperationThreading(string operation_threading)
 		{
 			var v = this.CreateString(operation_threading);
 			this._operation_threading = operation_threading;
@@ -2364,7 +2364,7 @@ namespace Nest
 		
 		internal bool _refresh { get; set; }
 		///<summary>Specify whether the index should be refreshed after performing the operation (default: true)</summary>
-		public IndicesOptimizeQueryString Refresh(bool refresh)
+		public OptimizeQueryString Refresh(bool refresh)
 		{
 			var v = this.CreateString(refresh);
 			this._refresh = refresh;
@@ -2375,7 +2375,7 @@ namespace Nest
 		
 		internal bool _wait_for_merge { get; set; }
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public IndicesOptimizeQueryString WaitForMerge(bool wait_for_merge)
+		public OptimizeQueryString WaitForMerge(bool wait_for_merge)
 		{
 			var v = this.CreateString(wait_for_merge);
 			this._wait_for_merge = wait_for_merge;
@@ -2615,12 +2615,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/
 	///</pre>
 	///</summary>
-	public class IndicesSnapshotIndexQueryString : FluentQueryString<IndicesSnapshotIndexQueryString> 
+	public class SnapshotQueryString : FluentQueryString<SnapshotQueryString> 
 	{
 		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesSnapshotIndexQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public SnapshotQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			var v = this.CreateString(ignore_indices);
 			this._ignore_indices = ignore_indices;

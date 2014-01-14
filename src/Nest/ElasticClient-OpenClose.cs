@@ -1,49 +1,46 @@
-﻿namespace Nest
+﻿using System;
+using System.Threading.Tasks;
+
+namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Open index
-		/// </summary>
-		public IIndicesOperationResponse OpenIndex(string index)
+		public IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			string path = this.PathResolver.CreateIndexPath(index, "_open");
-			return this._OpenClose(path);
+			openIndexSelector.ThrowIfNull("openIndexSelector");
+			var descriptor = openIndexSelector(new OpenIndexDescriptor());
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return this.RawDispatch.IndicesOpenDispatch(pathInfo)
+				.Deserialize<IndicesOperationResponse>();
 		}
-		/// <summary>
-		/// Close index
-		/// </summary>
-		public IIndicesOperationResponse CloseIndex(string index)
-		{
-			string path = this.PathResolver.CreateIndexPath(index, "_close");
-			return this._OpenClose(path);
-		}
-		/// <summary>
-		/// Open the default index
-		/// </summary>
-		public IIndicesOperationResponse OpenIndex<T>() where T : class
-		{
-			var index = this.Infer.IndexName<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
 
-			return OpenIndex(index);
-		}
-		/// <summary>
-		/// Close the default index
-		/// </summary>
-		public IIndicesOperationResponse CloseIndex<T>() where T : class
+		public Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			var index = this.Infer.IndexName<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
+			openIndexSelector.ThrowIfNull("openIndexSelector");
+			var descriptor = openIndexSelector(new OpenIndexDescriptor());
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return this.RawDispatch.IndicesOpenDispatchAsync(pathInfo)
+				.ContinueWith<IIndicesOperationResponse>(t => t.Result.Deserialize<IndicesOperationResponse>());
+		}
 
-			return CloseIndex(index);
-		}
-		private IndicesOperationResponse _OpenClose(string path)
+		public IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
 		{
-			var status = this.Connection.PostSync(path, "");
-			var r = this.Deserialize<IndicesOperationResponse>(status);
-			return r;
+			closeIndexSelector.ThrowIfNull("closeIndexSelector");
+			var descriptor = closeIndexSelector(new CloseIndexDescriptor());
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return this.RawDispatch.IndicesCloseDispatch(pathInfo)
+				.Deserialize<IndicesOperationResponse>();
 		}
+
+		public Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
+		{
+			closeIndexSelector.ThrowIfNull("closeIndexSelector");
+			var descriptor = closeIndexSelector(new CloseIndexDescriptor());
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return this.RawDispatch.IndicesCloseDispatchAsync(pathInfo)
+				.ContinueWith<IIndicesOperationResponse>(t => t.Result.Deserialize<IndicesOperationResponse>());
+		}
+
 
 	}
 }

@@ -763,13 +763,13 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		ConnectionStatus IndicesClosePost(string index, Func<IndicesCloseQueryString, IndicesCloseQueryString> queryString = null);
+		ConnectionStatus IndicesClosePost(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_close
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		Task<ConnectionStatus> IndicesClosePostAsync(string index, Func<IndicesCloseQueryString, IndicesCloseQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesClosePostAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null);
 		
 		///<summary>PUT /{index}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/</pre>	
@@ -1215,57 +1215,57 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		ConnectionStatus IndicesOpenPost(string index, Func<IndicesOpenQueryString, IndicesOpenQueryString> queryString = null);
+		ConnectionStatus IndicesOpenPost(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_open
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		Task<ConnectionStatus> IndicesOpenPostAsync(string index, Func<IndicesOpenQueryString, IndicesOpenQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOpenPostAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null);
 		
 		///<summary>POST /_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
-		ConnectionStatus IndicesOptimizePost(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		ConnectionStatus IndicesOptimizePost(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>POST /_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesOptimizePostAsync(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOptimizePostAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesOptimizePost(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		ConnectionStatus IndicesOptimizePost(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesOptimizePostAsync(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOptimizePostAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>GET /_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
-		ConnectionStatus IndicesOptimizeGet(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		ConnectionStatus IndicesOptimizeGet(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>GET /_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesOptimizeGetAsync(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOptimizeGetAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesOptimizeGet(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		ConnectionStatus IndicesOptimizeGet(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_optimize
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesOptimizeGetAsync(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOptimizeGetAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>PUT /{index}/_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
@@ -1512,24 +1512,24 @@ namespace Nest
 		///<summary>POST /_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 		///</summary>
-		ConnectionStatus IndicesSnapshotIndexPost(Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null);
+		ConnectionStatus IndicesSnapshotIndexPost(Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>POST /_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		ConnectionStatus IndicesSnapshotIndexPost(string index, Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null);
+		ConnectionStatus IndicesSnapshotIndexPost(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(string index, Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>GET /_stats
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	

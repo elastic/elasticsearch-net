@@ -34,9 +34,6 @@ namespace Nest
 			var query = this.Serialize(descriptor);
 			var path = this.PathResolver.GetSearchPathForTyped(descriptor);
 			var status = this.Connection.PostSync(path, query);
-
-//			status = this.RawDispatch.SearchDispatch()
-
 			return this.GetParsedResponse<T, TResult>(status, descriptor);
 
 		}

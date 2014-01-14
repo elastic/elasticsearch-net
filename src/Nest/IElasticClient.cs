@@ -36,9 +36,6 @@ namespace Nest
 		IIndicesResponse ClearCache<T>() where T : class;
 		IIndicesResponse ClearCache<T>(ClearCacheOptions options) where T : class;
 
-		IIndicesOperationResponse CloseIndex(string index);
-		IIndicesOperationResponse CloseIndex<T>() where T : class;
-
 		ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector);
@@ -253,17 +250,6 @@ namespace Nest
 		INodeStatsResponse NodeStats(NodeInfoStats nodeInfoStats);
 		INodeStatsResponse NodeStats(IEnumerable<string> nodes, NodeInfoStats nodeInfoStats);
 
-		IIndicesOperationResponse OpenIndex(string index);
-		IIndicesOperationResponse OpenIndex<T>() where T : class;
-		IIndicesOperationResponse Optimize();
-		IIndicesOperationResponse Optimize(OptimizeParams optimizeParameters);
-		IIndicesOperationResponse Optimize(IEnumerable<string> indices);
-		IIndicesOperationResponse Optimize(IEnumerable<string> indices, OptimizeParams optimizeParameters);
-		IIndicesOperationResponse Optimize(string index);
-		IIndicesOperationResponse Optimize(string index, OptimizeParams optimizeParameters);
-		IIndicesOperationResponse Optimize<T>() where T : class;
-		IIndicesOperationResponse Optimize<T>(OptimizeParams optimizeParameters) where T : class;
-
 		IPercolateResponse Percolate<T>(
 		Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class;
 		IIndicesShardResponse Refresh();
@@ -297,11 +283,6 @@ namespace Nest
 		ISegmentsResponse Segments();
 		ISegmentsResponse Segments(IEnumerable<string> indices);
 		ISegmentsResponse Segments(string index);
-		
-		IIndicesShardResponse Snapshot();
-		IIndicesShardResponse Snapshot(IEnumerable<string> indices);
-		IIndicesShardResponse Snapshot(string index);
-		IIndicesShardResponse Snapshot<T>() where T : class;
 		
 		IClusterStateResponse ClusterState(ClusterStateInfo stateInfo, IEnumerable<string> indices = null);
 		
@@ -341,6 +322,12 @@ namespace Nest
 
 		IRootInfoResponse RootNodeInfo();
 		Task<IRootInfoResponse> RootNodeInfoAsync();
-		
+
+		IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
+		Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
+		IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
+		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
+		IIndicesShardResponse Snapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector);
+		Task<IIndicesShardResponse> SnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector);
 	}
 }

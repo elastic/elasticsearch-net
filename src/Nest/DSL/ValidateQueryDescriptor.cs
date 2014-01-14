@@ -11,11 +11,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public interface IActAsQuery
-	{
-		BaseQuery _Query { get; set; }
-	}
-
+	[DescriptorFor("IndicesValidateQuery")]
 	[JsonConverter(typeof(ActAsQueryConverter))]
 	public partial class ValidateQueryDescriptor<T> 
 		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryQueryString>,

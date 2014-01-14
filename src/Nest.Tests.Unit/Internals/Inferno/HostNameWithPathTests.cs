@@ -22,6 +22,5 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var url = result.ConnectionStatus.RequestUrl;
 			url.Should().Be("http://localhost:9200/my-api-token/nest_test_data/elasticsearchprojects/1");
 		}
-		
 	}
 }

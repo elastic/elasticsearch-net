@@ -2112,14 +2112,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
-		public ConnectionStatus IndicesClosePost(string index, Func<IndicesCloseQueryString, IndicesCloseQueryString> queryString = null)
+		public ConnectionStatus IndicesClosePost(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_close".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesCloseQueryString());
+				var qs = queryString(new CloseIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2130,14 +2130,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
-		public Task<ConnectionStatus> IndicesClosePostAsync(string index, Func<IndicesCloseQueryString, IndicesCloseQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesClosePostAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_close".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesCloseQueryString());
+				var qs = queryString(new CloseIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3444,14 +3444,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
-		public ConnectionStatus IndicesOpenPost(string index, Func<IndicesOpenQueryString, IndicesOpenQueryString> queryString = null)
+		public ConnectionStatus IndicesOpenPost(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_open".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOpenQueryString());
+				var qs = queryString(new OpenIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3462,14 +3462,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
-		public Task<ConnectionStatus> IndicesOpenPostAsync(string index, Func<IndicesOpenQueryString, IndicesOpenQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesOpenPostAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_open".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOpenQueryString());
+				var qs = queryString(new OpenIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3479,13 +3479,13 @@ namespace Nest
 		///<summary>POST /_optimize
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesOptimizePost(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public ConnectionStatus IndicesOptimizePost(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			var url = "/_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3495,13 +3495,13 @@ namespace Nest
 		///<summary>POST /_optimize
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesOptimizePostAsync(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesOptimizePostAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			var url = "/_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3512,14 +3512,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		public ConnectionStatus IndicesOptimizePost(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public ConnectionStatus IndicesOptimizePost(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_optimize".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3530,14 +3530,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		public Task<ConnectionStatus> IndicesOptimizePostAsync(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesOptimizePostAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_optimize".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3547,13 +3547,13 @@ namespace Nest
 		///<summary>GET /_optimize
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesOptimizeGet(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public ConnectionStatus IndicesOptimizeGet(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			var url = "/_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3563,13 +3563,13 @@ namespace Nest
 		///<summary>GET /_optimize
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesOptimizeGetAsync(Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesOptimizeGetAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			var url = "/_optimize";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3580,14 +3580,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		public ConnectionStatus IndicesOptimizeGet(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public ConnectionStatus IndicesOptimizeGet(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_optimize".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -3598,14 +3598,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		public Task<ConnectionStatus> IndicesOptimizeGetAsync(string index, Func<IndicesOptimizeQueryString, IndicesOptimizeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesOptimizeGetAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_optimize".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesOptimizeQueryString());
+				var qs = queryString(new OptimizeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4291,13 +4291,13 @@ namespace Nest
 		///<summary>POST /_gateway/snapshot
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesSnapshotIndexPost(Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null)
+		public ConnectionStatus IndicesSnapshotIndexPost(Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
 			var url = "/_gateway/snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesSnapshotIndexQueryString());
+				var qs = queryString(new SnapshotQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4307,13 +4307,13 @@ namespace Nest
 		///<summary>POST /_gateway/snapshot
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
 			var url = "/_gateway/snapshot";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesSnapshotIndexQueryString());
+				var qs = queryString(new SnapshotQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4324,14 +4324,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		public ConnectionStatus IndicesSnapshotIndexPost(string index, Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null)
+		public ConnectionStatus IndicesSnapshotIndexPost(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesSnapshotIndexQueryString());
+				var qs = queryString(new SnapshotQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4342,14 +4342,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		public Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(string index, Func<IndicesSnapshotIndexQueryString, IndicesSnapshotIndexQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesSnapshotIndexQueryString());
+				var qs = queryString(new SnapshotQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 

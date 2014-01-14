@@ -23,6 +23,7 @@ namespace RawClientGenerator
 		private readonly static string _cacheFolder = @"..\..\Cache\";
 		private readonly static RazorMachine _razorMachine = new RazorMachine();
 
+		private static readonly Assembly _assembly = typeof (ApiGenerator).Assembly;
 
 		static ApiGenerator()
 		{
@@ -87,13 +88,14 @@ namespace RawClientGenerator
 				return apiDocumentation;
 			}
 		}
-
 		private static readonly Dictionary<string, string> MethodNameOverrides =
- 			new Dictionary<string, string>
- 			{
- 				{"IndicesValidateQueryQueryString", "ValidateQueryQueryString"},
- 				{"IndicesPutSettingsQueryString", "UpdateSettingsQueryString"}
- 			};
+			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			 where f.FullName.EndsWith("Descriptor.cs")
+			let contents = File.ReadAllText(f.FullName)
+			let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
+			where !c.Contains(" ") //filter results that did not match
+			select new { Value = f.Name.Replace("Descriptor.cs",""), Key = c })
+			.ToDictionary(k => k.Key, v => v.Value);
 
 		private static readonly Dictionary<string, string> KnownDescriptors =
 			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
@@ -102,6 +104,7 @@ namespace RawClientGenerator
 			let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
 			select c)
 			.ToDictionary(k => Regex.Replace(k, "<.*$", ""), v => Regex.Replace(v, @"^.*?(?:(\<.+>).*?)?$", "$1"));
+
 
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
@@ -130,10 +133,12 @@ namespace RawClientGenerator
 				Regex.Replace(method.FullName, m, (a) => a.Index != method.FullName.IndexOf(m) ? "" : m);
 
 			string manualOverride;
-			if (MethodNameOverrides.TryGetValue(method.QueryStringParamName, out manualOverride))
-				method.QueryStringParamName = manualOverride;
+			var key = method.QueryStringParamName.Replace("QueryString", "");
+			if (MethodNameOverrides.TryGetValue(key, out manualOverride))
+				method.QueryStringParamName = manualOverride + "QueryString";
 
-			method.DescriptorType = method.QueryStringParamName.Replace("QueryString", "Descriptor");
+			method.DescriptorType = method.QueryStringParamName.Replace("QueryString","Descriptor");
+
 			string generic;
 			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
 				method.DescriptorTypeGeneric = generic;
@@ -141,7 +146,9 @@ namespace RawClientGenerator
 			try
 			{
 				var typeName = "RawClientGenerator.Overrides.Descriptors." + method.DescriptorType + "Overrides";
-				var type = typeof (ApiGenerator).Assembly.GetType(typeName);
+				var type = _assembly.GetType(typeName);
+				if (type == null)
+					return;
 				var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
 				if (overrides == null)
 					return;

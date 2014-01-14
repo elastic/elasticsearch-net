@@ -9,6 +9,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[DescriptorFor("IndicesPutSettings")]
 	public partial class UpdateSettingsDescriptor
 		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateQueryString>
 	{
