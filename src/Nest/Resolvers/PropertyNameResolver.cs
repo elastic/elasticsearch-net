@@ -18,8 +18,6 @@ namespace Nest.Resolvers
 
 	public class PropertyNameResolver : ExpressionVisitor
 	{
-		private static readonly ConcurrentDictionary<string, string> _memoizedExpressions = new ConcurrentDictionary<string, string>(); 
-
 		public IElasticPropertyAttribute GetElasticProperty(MemberInfo info)
 		{
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
@@ -70,25 +68,15 @@ namespace Nest.Resolvers
 
 		public string Resolve(Expression expression)
 		{
-			//We can rely on ToString() because we only work with 
-			//Property.Lookups.Only with Some.First().And[0].Mixin'd
-			//To get field names
-			var key = expression.ToString() + expression.Type.GetHashCode();
-			string resolved;
-			if (!_memoizedExpressions.TryGetValue(key, out resolved))
-			{
-				var stack = new Stack<string>();
-				var properties = new Stack<IElasticPropertyAttribute>();
-				Visit(expression, stack, properties);
-				resolved = stack
-					.Aggregate(
-						new StringBuilder(),
-						(sb, name) =>
-						(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
-					.ToString();
-				_memoizedExpressions.TryAdd(key, resolved);
-			}
-			return resolved;
+			var stack = new Stack<string>();
+			var properties = new Stack<IElasticPropertyAttribute>();
+			Visit(expression, stack, properties);
+			return stack
+				.Aggregate(
+					new StringBuilder(),
+					(sb, name) =>
+					(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
+				.ToString();
 		}
 		
 		public string ResolveToLastToken(Expression expression)
@@ -145,9 +133,14 @@ namespace Nest.Resolvers
 				{
 					return base.VisitMethodCall(m, stack, properties);
 				}
-				var constantExpression = m.Arguments.Last() as ConstantExpression;
-				if (constantExpression != null)
-					stack.Push(constantExpression.Value.ToString());
+                var lastArg = m.Arguments.Last();
+                var constantExpression = lastArg as ConstantExpression;
+                var value = constantExpression != null
+                               ? constantExpression.Value.ToString()
+                               : Expression.Lambda(lastArg).Compile().DynamicInvoke().ToString();
+                stack.Push(value);
+                Visit(m.Object, stack, properties);
+                return m;
 			}
 			if (IsLinqOperator(m.Method))
 			{
