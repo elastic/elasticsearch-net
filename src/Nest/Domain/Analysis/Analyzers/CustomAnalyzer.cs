@@ -15,8 +15,7 @@ namespace Nest
 	        Type = type;
 	    }
 
-        [Obsolete("ctor(string) is preferred")]
-	    public CustomAnalyzer() : this("custom") {}
+        public CustomAnalyzer() : this("custom") {}
 
 	    [JsonProperty("tokenizer")]
         public string Tokenizer { get; set; }
