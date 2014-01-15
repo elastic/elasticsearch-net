@@ -125,6 +125,12 @@ namespace Nest
       this._FacetFilter = f;
       return this;
     }
+    public TermFacetDescriptor<T> FacetFilter(BaseFilter filter)
+    {
+        filter.ThrowIfNull("filter");
+        this._FacetFilter = filter;
+        return this;
+    }
     public new TermFacetDescriptor<T> Nested(string nested)
     {
       this._Nested = nested;
