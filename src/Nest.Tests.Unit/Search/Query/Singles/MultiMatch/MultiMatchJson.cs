@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.MultiMatch
 				.Query(q => q
 					.MultiMatch(m=>m
 						.OnFields(p=>p.Name, p=>p.Country)
-						.QueryString("this is a query")
+						.Query("this is a query")
 						.UseDisMax(true)
 						.TieBreaker(0.7)
 					)

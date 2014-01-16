@@ -78,9 +78,9 @@ namespace Nest
 			return this.OnFields(fieldNames);
 		}
 
-		public MultiMatchQueryDescriptor<T> QueryString(string queryString)
+		public MultiMatchQueryDescriptor<T> Query(string query)
 		{
-			this._Query = queryString;
+			this._Query = query;
 			return this;
 		}
 		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer)
