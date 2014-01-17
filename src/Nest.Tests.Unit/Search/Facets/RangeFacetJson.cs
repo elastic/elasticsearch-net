@@ -163,6 +163,47 @@ namespace Nest.Tests.Unit.Search.Facets
       Assert.True(json.JsonEquals(expected), json);
     }
     [Test]
+    public void TestRangeKeyScriptParams()
+    {
+        var s = new SearchDescriptor<ElasticSearchProject>()
+            .From(0)
+            .Size(10)
+            .QueryRaw(@"{ raw : ""query""}")
+            .FacetRange<DateTime>("needs_a_name", t => t
+                                                           .KeyScript("doc['date'].date.minuteOfHour * factor1")
+                                                           .ValueScript("doc['num1'].value * factor2")
+                                                           .Ranges(
+                                                               r => r.To(new DateTime(1990, 1, 1).Date)
+                                                           )
+                                                           .Params(p => p
+                                                                            .Add("factor1", 2)
+                                                                            .Add("factor2", 3)
+                                                                            .Add("randomString", "stringy"))
+            );
+        var json = TestElasticClient.Serialize(s);
+        var expected = @"{ from: 0, size: 10, 
+          facets :  {
+            ""needs_a_name"" : {
+                range : {
+                    key_script : ""doc['date'].date.minuteOfHour * factor1"",
+                    value_script : ""doc['num1'].value * factor2"",
+                    ranges: [
+                      {
+                        to: ""1990-01-01T00:00:00""
+                      }
+                    ],
+                    params : {
+                      factor1 : 2,
+                      factor2 : 3,
+                      randomString : ""stringy""
+                    }
+                }
+            }
+          }, query : { raw : ""query""}
+      }";
+        Assert.True(json.JsonEquals(expected), json);
+    }
+    [Test]
     public void TestRangeDateFacetKeyField()
     {
       var s = new SearchDescriptor<ElasticSearchProject>()
