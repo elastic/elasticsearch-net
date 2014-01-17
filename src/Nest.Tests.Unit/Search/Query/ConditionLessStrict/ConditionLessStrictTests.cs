@@ -74,19 +74,19 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		[Test]
 		public void Text()
 		{
-			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).QueryString(this._c.Name1)));
+			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).Query(this._c.Name1)));
 		}
 
 		[Test]
 		public void TextPhrase()
 		{
-			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).QueryString(this._c.Name1)));
+			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).Query(this._c.Name1)));
 		}
 
 		[Test]
 		public void TextPhrasePrefix()
 		{
-			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).QueryString(this._c.Name1)));
+			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).Query(this._c.Name1)));
 		}
 
 		[Test]
@@ -98,7 +98,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 				.Query(nqq => nqq
 				  .Text(tq => tq
 					.OnField(p => p.Name)
-					.QueryString(this._c.Name1)
+					.Query(this._c.Name1)
 				  )
 				)
 			  )

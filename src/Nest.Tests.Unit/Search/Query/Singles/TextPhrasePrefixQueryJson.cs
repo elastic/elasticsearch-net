@@ -15,7 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q=>q
 					.TextPhrasePrefix(t=>t
 						.OnField(f=>f.Name)
-						.QueryString("this is a test")
+						.Query("this is a test")
 					)
 			);
 				
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q
 					.TextPhrasePrefix(t => t
 						.OnField(f => f.Name)
-						.QueryString("this is a test")
+						.Query("this is a test")
 						.Fuzziness(1.0)
 						.Analyzer("my_analyzer")
 						.PrefixLength(2)

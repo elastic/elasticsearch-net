@@ -57,23 +57,23 @@ namespace Nest.Tests.Integration.Integration.Query
 			var querySlop0 = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one two")
+					.Query("one two")
 					.Slop(0));
 			var querySlop1 = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one three")
+					.Query("one three")
 					.Slop(1));
 			var queryPrefix1 = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one t")
+					.Query("one t")
 					.Slop(0)
 					.PrefixLength(1));
 			var queryPrefix2 = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one tw")
+					.Query("one tw")
 					.Slop(0)
 					.PrefixLength(2));
 
@@ -98,23 +98,23 @@ namespace Nest.Tests.Integration.Integration.Query
 			var querySlop0 = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one three")
+					.Query("one three")
 					.Slop(0));
 			var querySlop1 = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one four")
+					.Query("one four")
 					.Slop(1));
 			var queryPrefix2 = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one th")
+					.Query("one th")
 					.Slop(0)
 					.PrefixLength(2));
 			var queryFail = Query<ElasticSearchProject>.TextPhrasePrefix(
 				textPhrasePrefix => textPhrasePrefix
 					.OnField(p => p.Name)
-					.QueryString("one fail"));
+					.Query("one fail"));
 
 			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId)
