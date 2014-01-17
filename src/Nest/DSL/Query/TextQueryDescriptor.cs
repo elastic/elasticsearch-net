@@ -61,9 +61,9 @@ namespace Nest
 			return this.OnField(fieldName);
 		}
 
-		public TextQueryDescriptor<T> QueryString(string queryString)
+		public TextQueryDescriptor<T> Query(string query)
 		{
-			this._Query = queryString;
+			this._Query = query;
 			return this;
 		}
 		public TextQueryDescriptor<T> Analyzer(string analyzer)
