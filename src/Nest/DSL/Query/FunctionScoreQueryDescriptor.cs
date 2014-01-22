@@ -34,7 +34,7 @@ namespace Nest
         {
             get
             {
-                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null && _ScriptScore == null;
+                return (this._Query == null || this._Query.IsConditionless) && _RandomScore == null && _ScriptScore == null && (_Functions == null || _Functions.Count() == 0);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Nest
         min
     }
 
-    public class FunctionScoreFunctionsDescriptor<T> : IEnumerable<FunctionScoreFunction<T>>
+    public class FunctionScoreFunctionsDescriptor<T> : IEnumerable<FunctionScoreFunction<T>> where T : class
     {
         internal List<FunctionScoreFunction<T>> _Functions { get; set; }
 
@@ -133,6 +133,13 @@ namespace Nest
         public BoostFactorFunction<T> BoostFactor(double value)
         {
             var fn = new BoostFactorFunction<T>(value);
+            this._Functions.Add(fn);
+            return fn;
+        }
+
+        public ScriptScoreFunction<T> ScriptScore(Action<ScriptFilterDescriptor> scriptSelector)
+        {
+            var fn = new ScriptScoreFunction<T>(scriptSelector);
             this._Functions.Add(fn);
             return fn;
         }
@@ -198,6 +205,23 @@ namespace Nest
     }
 
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class FunctionScoreFilteredFunction<T> : FunctionScoreFunction<T> where T : class
+    {
+        [JsonProperty(PropertyName = "filter")]
+        internal BaseFilter _Filter { get; set; }
+
+        public FunctionScoreFunction<T> Filter(Func<FilterDescriptor<T>, BaseFilter> filterSelector)
+        {
+            filterSelector.ThrowIfNull("filterSelector");
+            var filter = new FilterDescriptor<T>();
+            var f = filterSelector(filter);
+
+            this._Filter = f;
+            return this;
+        }
+    }
+
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class GaussFunction<T> : FunctionScoreDecayFunction<T>
     {
         [JsonProperty(PropertyName = "gauss")]
@@ -255,7 +279,7 @@ namespace Nest
     }
 
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class BoostFactorFunction<T> : FunctionScoreFunction<T>
+    public class BoostFactorFunction<T> : FunctionScoreFilteredFunction<T> where T : class
     {
         [JsonProperty(PropertyName = "boost_factor")]
         internal double _BoostFactor { get; set; }
@@ -263,6 +287,22 @@ namespace Nest
         public BoostFactorFunction(double boostFactor)
         {
             _BoostFactor = boostFactor;
+        }
+    }
+
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class ScriptScoreFunction<T> : FunctionScoreFilteredFunction<T> where T : class
+    {
+        [JsonProperty(PropertyName = "script_score")]
+        internal ScriptFilterDescriptor _ScriptScore { get; set; }
+
+        public ScriptScoreFunction(Action<ScriptFilterDescriptor> scriptSelector)
+        {
+            var descriptor = new ScriptFilterDescriptor();
+            if (scriptSelector != null)
+                scriptSelector(descriptor);
+
+            this._ScriptScore = descriptor;
         }
     }
 
@@ -281,5 +321,4 @@ namespace Nest
         {
         }
     }
-
 }
