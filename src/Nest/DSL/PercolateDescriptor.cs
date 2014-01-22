@@ -10,41 +10,15 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class PercolateDescriptor<T> where T : class
+	public partial class PercolateDescriptor<T> : IndexTypePathTypedDescriptor<PercolateDescriptor<T>, PercolateQueryString, T> 
+		, IPathInfo<PercolateQueryString> 
+		where T : class
 	{
-		protected readonly TypeNameResolver typeNameResolver;
-
-		public PercolateDescriptor()
-		{
-			this.typeNameResolver = new TypeNameResolver();
-		}
-
-		internal string _Index { get; set; }
-		internal string _Type { get; set; }
-		internal string _Id { get; set; }
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
 		internal T _Document { get; set; }
-
-		/// <summary>
-		/// Explicitly specify an index, otherwise the default index for T is used.
-		/// </summary>
-		public PercolateDescriptor<T> Index(string index)
-		{
-			this._Index = index;
-			return this;
-		}
-		
-		/// <summary>
-		/// Explicitly specify an type, otherwise the default type for T is used.
-		/// </summary>
-		public PercolateDescriptor<T> Type(string type)
-		{
-			this._Type = type;
-			return this;
-		}
 
 		/// <summary>
 		/// The object to perculate
@@ -64,6 +38,14 @@ namespace Nest
 			var d = querySelector(new QueryDescriptor<T>());
 			this._Query = d;
 			return this;
+		}
+
+		ElasticSearchPathInfo<PercolateQueryString> IPathInfo<PercolateQueryString>.ToPathInfo(IConnectionSettings settings)
+		{
+			var pathInfo = base.ToPathInfo<PercolateQueryString>(settings);
+			//.NET does not like sending data using get so we use POST
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			return pathInfo;
 		}
 	}
 }

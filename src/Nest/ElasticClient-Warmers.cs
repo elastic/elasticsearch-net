@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
 
@@ -9,51 +10,52 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-
 		public IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
 		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new PutWarmerDescriptor(_connectionSettings));
-			descriptor.ThrowIfNull("descriptor");
-
-			var query = this.Serialize(descriptor._SearchDescriptor);
-
-			var path = this.PathResolver.GetWarmerPath(descriptor);
-			ConnectionStatus status = this.Connection.PutSync(path, query);
-			var r = this.Deserialize<IndicesOperationResponse>(status);
-
-			return r;
+			return this.Dispatch<PutWarmerDescriptor, PutWarmerQueryString, IndicesOperationResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesPutWarmerDispatch(p, d)
+			);
+		}
+		
+		public Task<IIndicesOperationResponse> PutWarmerAsync(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
+		{
+			return this.DispatchAsync<PutWarmerDescriptor, PutWarmerQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesPutWarmerDispatchAsync(p, d)
+			);
 		}
 
-		/// <summary>
-		/// Gets warmers, query will be returned as json string
-		/// </summary>
 		public IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
 		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new GetWarmerDescriptor(_connectionSettings));
-			descriptor.ThrowIfNull("descriptor");
-			var path = this.PathResolver.GetWarmerPath(descriptor);
-
-			ConnectionStatus status = this.Connection.GetSync(path);
-			var r = this.Deserialize<WarmerResponse>(status);
-			return r;
+			return this.Dispatch<GetWarmerDescriptor, GetWarmerQueryString, IWarmerResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesGetWarmerDispatch(p)
+			);
 		}
 
-		/// <summary>
-		/// Delete warmers
-		/// </summary>
-		public IIndicesOperationResponse DeleteWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
+		public Task<IWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
 		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new GetWarmerDescriptor(_connectionSettings));
-			descriptor.ThrowIfNull("descriptor");
-			var path = this.PathResolver.GetWarmerPath(descriptor);
-
-			ConnectionStatus status = this.Connection.DeleteSync(path);
-			var r = this.Deserialize<IndicesOperationResponse>(status);
-			return r;
+			return this.DispatchAsync<GetWarmerDescriptor, GetWarmerQueryString, WarmerResponse, IWarmerResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesGetWarmerDispatchAsync(p)
+			);
+		}
+		
+		public IIndicesOperationResponse DeleteWarmer(Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector)
+		{
+			return this.Dispatch<DeleteWarmerDescriptor, DeleteWarmerQueryString, IIndicesOperationResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatch(p)
+			);
 		}
 
+		public Task<IIndicesOperationResponse> DeleteWarmerAsync(Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector)
+		{
+			return this.DispatchAsync<DeleteWarmerDescriptor, DeleteWarmerQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatchAsync(p)
+			);
+		}
 	}
 }

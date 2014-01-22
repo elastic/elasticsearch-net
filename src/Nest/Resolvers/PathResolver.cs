@@ -280,46 +280,6 @@ namespace Nest.Resolvers
 		}
 
 		
-		public string GetWarmerPath(PutWarmerDescriptor descriptor)
-		{
-			var extension = string.Format("_warmer/{0}", descriptor._WarmerName);
-
-			string indices;
-			if (descriptor._Indices.HasAny())
-				indices = string.Join(",", descriptor._Indices);
-			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
-				indices = "_all";
-			else
-				indices = this._connectionSettings.DefaultIndex;
-
-			string types;
-			if (descriptor._Types.HasAny())
-				types = this.JoinTypes(descriptor._Types);
-			else
-				types = null;
-
-			return this.SearchPathJoin(indices, types, null, extension);
-		}
-
-		/// <summary>
-		/// For GetWarmer and DeleteWarmer operations
-		/// </summary>
-		public string GetWarmerPath(GetWarmerDescriptor descriptor)
-		{
-			var extension = string.Format("_warmer/{0}", descriptor._WarmerName);
-
-			string indices;
-			if (descriptor._Indices.HasAny())
-				indices = string.Join(",", descriptor._Indices);
-			else if (descriptor._Indices != null || descriptor._AllIndices) //if set to empty array asume all
-				indices = "_all";
-			else
-				indices = this._connectionSettings.DefaultIndex;
-
-			return this.SearchPathJoin(indices, null, null, extension);
-		}
-
-		
 		//TODO merge with GetDeleteByQueryPathForDynamic
 		public string GetPathForTyped<T>(QueryPathDescriptor<T> descriptor, string suffix) where T : class
 		{

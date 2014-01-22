@@ -13,8 +13,9 @@ namespace Nest
 {
 	[DescriptorFor("IndicesSnapshotIndex")]
 	public partial class SnapshotDescriptor : IndicesOptionalPathDescriptorBase<SnapshotDescriptor, SnapshotQueryString>
+		, IPathInfo<SnapshotQueryString>
 	{
-		internal new ElasticSearchPathInfo<SnapshotQueryString> ToPathInfo(IConnectionSettings settings)
+		ElasticSearchPathInfo<SnapshotQueryString> IPathInfo<SnapshotQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<SnapshotQueryString>(settings);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

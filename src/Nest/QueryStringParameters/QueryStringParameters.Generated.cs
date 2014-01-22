@@ -76,6 +76,26 @@ namespace Nest
 	}
 	
 	
+	///<summary>Query string descriptor for ClearScrollDelete
+	///<pre>
+	///http://www.elasticsearch.org/guide/reference/api/search/scroll/
+	///</pre>
+	///</summary>
+	public class ClearScrollQueryString : FluentQueryString<ClearScrollQueryString> 
+	{
+	}
+	
+	
+	///<summary>Query string descriptor for ClusterGetSettings
+	///<pre>
+	///http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/
+	///</pre>
+	///</summary>
+	public class ClusterGetSettingsQueryString : FluentQueryString<ClusterGetSettingsQueryString> 
+	{
+	}
+	
+	
 	///<summary>Query string descriptor for ClusterHealthGet
 	///<pre>
 	///http://elasticsearch.org/guide/reference/api/admin-cluster-health/
@@ -541,6 +561,16 @@ namespace Nest
 			return this;
 		}
 
+	}
+	
+	
+	///<summary>Query string descriptor for ClusterPutSettings
+	///<pre>
+	///http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/
+	///</pre>
+	///</summary>
+	public class ClusterPutSettingsQueryString : FluentQueryString<ClusterPutSettingsQueryString> 
+	{
 	}
 	
 	
@@ -1780,12 +1810,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/
 	///</pre>
 	///</summary>
-	public class IndicesClearCacheQueryString : FluentQueryString<IndicesClearCacheQueryString> 
+	public class ClearCacheQueryString : FluentQueryString<ClearCacheQueryString> 
 	{
 		
 		internal bool _field_data { get; set; }
 		///<summary>Clear field data</summary>
-		public IndicesClearCacheQueryString FieldData(bool field_data)
+		public ClearCacheQueryString FieldData(bool field_data)
 		{
 			var v = this.CreateString(field_data);
 			this._field_data = field_data;
@@ -1796,7 +1826,7 @@ namespace Nest
 		
 		internal bool _fielddata { get; set; }
 		///<summary>Clear field data</summary>
-		public IndicesClearCacheQueryString Fielddata(bool fielddata)
+		public ClearCacheQueryString Fielddata(bool fielddata)
 		{
 			var v = this.CreateString(fielddata);
 			this._fielddata = fielddata;
@@ -1807,7 +1837,7 @@ namespace Nest
 		
 		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IndicesClearCacheQueryString Fields(params string[] fields)
+		public ClearCacheQueryString Fields(params string[] fields)
 		{
 			var v = this.CreateString(fields);
 			this._fields = fields;
@@ -1818,7 +1848,7 @@ namespace Nest
 		
 		internal bool _filter { get; set; }
 		///<summary>Clear filter caches</summary>
-		public IndicesClearCacheQueryString Filter(bool filter)
+		public ClearCacheQueryString Filter(bool filter)
 		{
 			var v = this.CreateString(filter);
 			this._filter = filter;
@@ -1829,7 +1859,7 @@ namespace Nest
 		
 		internal bool _filter_cache { get; set; }
 		///<summary>Clear filter caches</summary>
-		public IndicesClearCacheQueryString FilterCache(bool filter_cache)
+		public ClearCacheQueryString FilterCache(bool filter_cache)
 		{
 			var v = this.CreateString(filter_cache);
 			this._filter_cache = filter_cache;
@@ -1840,7 +1870,7 @@ namespace Nest
 		
 		internal bool _filter_keys { get; set; }
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public IndicesClearCacheQueryString FilterKeys(bool filter_keys)
+		public ClearCacheQueryString FilterKeys(bool filter_keys)
 		{
 			var v = this.CreateString(filter_keys);
 			this._filter_keys = filter_keys;
@@ -1851,7 +1881,7 @@ namespace Nest
 		
 		internal bool _id { get; set; }
 		///<summary>Clear ID caches for parent/child</summary>
-		public IndicesClearCacheQueryString Id(bool id)
+		public ClearCacheQueryString Id(bool id)
 		{
 			var v = this.CreateString(id);
 			this._id = id;
@@ -1862,7 +1892,7 @@ namespace Nest
 		
 		internal bool _id_cache { get; set; }
 		///<summary>Clear ID caches for parent/child</summary>
-		public IndicesClearCacheQueryString IdCache(bool id_cache)
+		public ClearCacheQueryString IdCache(bool id_cache)
 		{
 			var v = this.CreateString(id_cache);
 			this._id_cache = id_cache;
@@ -1873,7 +1903,7 @@ namespace Nest
 		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesClearCacheQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public ClearCacheQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			var v = this.CreateString(ignore_indices);
 			this._ignore_indices = ignore_indices;
@@ -1884,7 +1914,7 @@ namespace Nest
 		
 		internal string[] _index { get; set; }
 		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public IndicesClearCacheQueryString Index(params string[] index)
+		public ClearCacheQueryString Index(params string[] index)
 		{
 			var v = this.CreateString(index);
 			this._index = index;
@@ -1895,7 +1925,7 @@ namespace Nest
 		
 		internal bool _recycler { get; set; }
 		///<summary>Clear the recycler cache</summary>
-		public IndicesClearCacheQueryString Recycler(bool recycler)
+		public ClearCacheQueryString Recycler(bool recycler)
 		{
 			var v = this.CreateString(recycler);
 			this._recycler = recycler;
@@ -1975,12 +2005,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteQueryString : FluentQueryString<IndicesDeleteQueryString> 
+	public class DeleteIndexQueryString : FluentQueryString<DeleteIndexQueryString> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public IndicesDeleteQueryString Timeout(string timeout)
+		public DeleteIndexQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -1991,7 +2021,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteQueryString MasterTimeout(string master_timeout)
+		public DeleteIndexQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2039,12 +2069,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-mapping/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteMappingQueryString : FluentQueryString<IndicesDeleteMappingQueryString> 
+	public class DeleteMappingQueryString : FluentQueryString<DeleteMappingQueryString> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteMappingQueryString MasterTimeout(string master_timeout)
+		public DeleteMappingQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2060,12 +2090,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteTemplateQueryString : FluentQueryString<IndicesDeleteTemplateQueryString> 
+	public class DeleteTemplateQueryString : FluentQueryString<DeleteTemplateQueryString> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public IndicesDeleteTemplateQueryString Timeout(string timeout)
+		public DeleteTemplateQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -2076,7 +2106,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteTemplateQueryString MasterTimeout(string master_timeout)
+		public DeleteTemplateQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2092,12 +2122,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/
 	///</pre>
 	///</summary>
-	public class IndicesDeleteWarmerQueryString : FluentQueryString<IndicesDeleteWarmerQueryString> 
+	public class DeleteWarmerQueryString : FluentQueryString<DeleteWarmerQueryString> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesDeleteWarmerQueryString MasterTimeout(string master_timeout)
+		public DeleteWarmerQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2105,6 +2135,16 @@ namespace Nest
 			return this;
 		}
 
+	}
+	
+	
+	///<summary>Query string descriptor for IndicesExistsHead
+	///<pre>
+	///http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/
+	///</pre>
+	///</summary>
+	public class IndicesExistsQueryString : FluentQueryString<IndicesExistsQueryString> 
+	{
 	}
 	
 	
@@ -2155,12 +2195,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/
 	///</pre>
 	///</summary>
-	public class IndicesFlushQueryString : FluentQueryString<IndicesFlushQueryString> 
+	public class FlushQueryString : FluentQueryString<FlushQueryString> 
 	{
 		
 		internal bool _force { get; set; }
 		///<summary>TODO: ?</summary>
-		public IndicesFlushQueryString Force(bool force)
+		public FlushQueryString Force(bool force)
 		{
 			var v = this.CreateString(force);
 			this._force = force;
@@ -2171,7 +2211,7 @@ namespace Nest
 		
 		internal bool _full { get; set; }
 		///<summary>TODO: ?</summary>
-		public IndicesFlushQueryString Full(bool full)
+		public FlushQueryString Full(bool full)
 		{
 			var v = this.CreateString(full);
 			this._full = full;
@@ -2182,7 +2222,7 @@ namespace Nest
 		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesFlushQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public FlushQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			var v = this.CreateString(ignore_indices);
 			this._ignore_indices = ignore_indices;
@@ -2193,7 +2233,7 @@ namespace Nest
 		
 		internal bool _refresh { get; set; }
 		///<summary>Refresh the index after performing the operation</summary>
-		public IndicesFlushQueryString Refresh(bool refresh)
+		public FlushQueryString Refresh(bool refresh)
 		{
 			var v = this.CreateString(refresh);
 			this._refresh = refresh;
@@ -2264,6 +2304,46 @@ namespace Nest
 			return this;
 		}
 
+	}
+	
+	
+	///<summary>Query string descriptor for IndicesGetMapping
+	///<pre>
+	///http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/
+	///</pre>
+	///</summary>
+	public class GetMappingQueryString : FluentQueryString<GetMappingQueryString> 
+	{
+	}
+	
+	
+	///<summary>Query string descriptor for IndicesGetSettings
+	///<pre>
+	///http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/
+	///</pre>
+	///</summary>
+	public class GetIndexSettingsQueryString : FluentQueryString<GetIndexSettingsQueryString> 
+	{
+	}
+	
+	
+	///<summary>Query string descriptor for IndicesGetTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
+	///</pre>
+	///</summary>
+	public class GetTemplateQueryString : FluentQueryString<GetTemplateQueryString> 
+	{
+	}
+	
+	
+	///<summary>Query string descriptor for IndicesGetWarmer
+	///<pre>
+	///http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/
+	///</pre>
+	///</summary>
+	public class GetWarmerQueryString : FluentQueryString<GetWarmerQueryString> 
+	{
 	}
 	
 	
@@ -2423,12 +2503,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/
 	///</pre>
 	///</summary>
-	public class IndicesPutMappingQueryString : FluentQueryString<IndicesPutMappingQueryString> 
+	public class PutMappingQueryString : FluentQueryString<PutMappingQueryString> 
 	{
 		
 		internal bool _ignore_conflicts { get; set; }
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public IndicesPutMappingQueryString IgnoreConflicts(bool ignore_conflicts)
+		public PutMappingQueryString IgnoreConflicts(bool ignore_conflicts)
 		{
 			var v = this.CreateString(ignore_conflicts);
 			this._ignore_conflicts = ignore_conflicts;
@@ -2439,7 +2519,7 @@ namespace Nest
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public IndicesPutMappingQueryString Timeout(string timeout)
+		public PutMappingQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -2450,7 +2530,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutMappingQueryString MasterTimeout(string master_timeout)
+		public PutMappingQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2487,23 +2567,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/
 	///</pre>
 	///</summary>
-	public class IndicesPutTemplateQueryString : FluentQueryString<IndicesPutTemplateQueryString> 
+	public class PutTemplateQueryString : FluentQueryString<PutTemplateQueryString> 
 	{
-		
-		internal int _order { get; set; }
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public IndicesPutTemplateQueryString Order(int order)
-		{
-			var v = this.CreateString(order);
-			this._order = order;
-			this.Add("order", v);
-			return this;
-		}
-
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public IndicesPutTemplateQueryString Timeout(string timeout)
+		public PutTemplateQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -2514,7 +2583,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutTemplateQueryString MasterTimeout(string master_timeout)
+		public PutTemplateQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2530,12 +2599,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/
 	///</pre>
 	///</summary>
-	public class IndicesPutWarmerQueryString : FluentQueryString<IndicesPutWarmerQueryString> 
+	public class PutWarmerQueryString : FluentQueryString<PutWarmerQueryString> 
 	{
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesPutWarmerQueryString MasterTimeout(string master_timeout)
+		public PutWarmerQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2551,12 +2620,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/
 	///</pre>
 	///</summary>
-	public class IndicesRefreshQueryString : FluentQueryString<IndicesRefreshQueryString> 
+	public class RefreshQueryString : FluentQueryString<RefreshQueryString> 
 	{
 		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesRefreshQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public RefreshQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			var v = this.CreateString(ignore_indices);
 			this._ignore_indices = ignore_indices;
@@ -2567,7 +2636,7 @@ namespace Nest
 		
 		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
-		public IndicesRefreshQueryString OperationThreading(string operation_threading)
+		public RefreshQueryString OperationThreading(string operation_threading)
 		{
 			var v = this.CreateString(operation_threading);
 			this._operation_threading = operation_threading;
@@ -2583,12 +2652,12 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/admin-indices-segments/
 	///</pre>
 	///</summary>
-	public class IndicesSegmentsQueryString : FluentQueryString<IndicesSegmentsQueryString> 
+	public class SegmentsQueryString : FluentQueryString<SegmentsQueryString> 
 	{
 		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesSegmentsQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public SegmentsQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			var v = this.CreateString(ignore_indices);
 			this._ignore_indices = ignore_indices;
@@ -2599,7 +2668,7 @@ namespace Nest
 		
 		internal string _operation_threading { get; set; }
 		///<summary>TODO: ?</summary>
-		public IndicesSegmentsQueryString OperationThreading(string operation_threading)
+		public SegmentsQueryString OperationThreading(string operation_threading)
 		{
 			var v = this.CreateString(operation_threading);
 			this._operation_threading = operation_threading;
@@ -3009,6 +3078,16 @@ namespace Nest
 			return this;
 		}
 
+	}
+	
+	
+	///<summary>Query string descriptor for InfoGet
+	///<pre>
+	///http://elasticsearch.org/guide/
+	///</pre>
+	///</summary>
+	public class InfoQueryString : FluentQueryString<InfoQueryString> 
+	{
 	}
 	
 	

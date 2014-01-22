@@ -106,7 +106,7 @@ namespace ProtocolLoadTest
 			indexSettings.Add("index.refresh_interval", "-1");
 
 			var createResponse = client.CreateIndex(indexName, indexSettings);
-			client.MapFromAttributes<Message>();
+			client.MapFluent<Message>(m=>m.MapFromAttributes());
 		}
 
 		private static void CloseIndex(string suffix)

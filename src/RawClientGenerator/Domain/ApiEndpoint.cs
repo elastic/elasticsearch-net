@@ -129,8 +129,11 @@ namespace RawClientGenerator
 							});
 						}
 						var queryStringParamName = "FluentQueryString";
-						if (this.Url.Params != null && this.Url.Params.Any())
-							queryStringParamName = this.CsharpMethodName + "QueryString";
+						if (this.Url.Params == null || !this.Url.Params.Any())
+						{
+							this.Url.Params = new Dictionary<string, ApiQueryParameters>();
+						}
+						queryStringParamName = this.CsharpMethodName + "QueryString";
 
 						
 

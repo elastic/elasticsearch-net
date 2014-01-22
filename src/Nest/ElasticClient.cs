@@ -47,12 +47,68 @@ namespace Nest
 
 		}
 
+
+		private R Dispatch<D, Q, R>(
+			Func<D, D> selector
+			, Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
+			)
+			where Q : FluentQueryString<Q>, new()
+			where D : IPathInfo<Q>, new()
+			where R : class
+		{
+			selector.ThrowIfNull("selector");
+			var descriptor = selector(new D());
+			return Dispatch<D, Q, R>(descriptor, dispatch);
+		}
+
+		private R Dispatch<D, Q, R>(
+			D descriptor, 
+			Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
+			) 
+			where Q : FluentQueryString<Q>, new()
+			where D : IPathInfo<Q>
+			where R : class
+		{
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return dispatch(pathInfo, descriptor)
+				.Deserialize<R>();
+		}
+
+		internal Task<I> DispatchAsync<D, Q, R, I>(
+			Func<D, D> selector
+			, Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
+			)
+			where Q : FluentQueryString<Q>, new()
+			where D : IPathInfo<Q>, new()
+			where R : class, I
+			where I : class
+		{
+			selector.ThrowIfNull("selector");
+			var descriptor = selector(new D());
+			return DispatchAsync<D, Q, R, I>(descriptor, dispatch);
+		}
+
+		private Task<I> DispatchAsync<D, Q, R, I>(
+			D descriptor, 
+			Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch) 
+			where Q : FluentQueryString<Q>, new()
+			where D : IPathInfo<Q>
+			where R : class, I 
+			where I : class
+		{
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return dispatch(pathInfo, descriptor)
+				.ContinueWith<I>(r => r.Result.Deserialize<R>());
+		}
+
+
 		/// <summary>
 		/// Get the data when you hit the elasticsearch endpoint at the too
 		/// </summary>
 		/// <returns></returns>
 		public IRootInfoResponse RootNodeInfo()
 		{
+
 			var response = this.Connection.GetSync("/");
 			return response.Deserialize<RootInfoResponse>();
 

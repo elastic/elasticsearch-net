@@ -17,7 +17,7 @@ namespace Nest.Resolvers.Converters
 			serializer.Serialize(writer, mapping.Types);
 
 			writer.WritePropertyName("source");
-			writer.WriteRawValue(mapping.Source);
+			serializer.Serialize(writer, mapping.Source);
 
 			writer.WriteEndObject();
 		}
@@ -30,7 +30,13 @@ namespace Nest.Resolvers.Converters
 				.Select(s=>(TypeNameMarker)s);
 			var source = jObject.Property("source").Value.ToString();
 
-			return new WarmerMapping { Types = types, Source = source };
+			return new WarmerMapping
+			{
+				Types = types, 
+				//TODO source here was a string representation of the query
+				//See if we can do this differently 
+				//Source = source
+			};
 		}
 
 		public override bool CanConvert(Type objectType)

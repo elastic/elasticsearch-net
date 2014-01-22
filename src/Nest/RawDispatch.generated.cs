@@ -83,7 +83,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus ClearScrollDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus ClearScrollDispatch(ElasticSearchPathInfo<ClearScrollQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -98,7 +98,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> ClearScrollDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> ClearScrollDispatchAsync(ElasticSearchPathInfo<ClearScrollQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -113,7 +113,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus ClusterGetSettingsDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus ClusterGetSettingsDispatch(ElasticSearchPathInfo<ClusterGetSettingsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -126,7 +126,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> ClusterGetSettingsDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> ClusterGetSettingsDispatchAsync(ElasticSearchPathInfo<ClusterGetSettingsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -447,7 +447,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus ClusterPutSettingsDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo , object body)
+		internal ConnectionStatus ClusterPutSettingsDispatch(ElasticSearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -462,7 +462,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> ClusterPutSettingsDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> ClusterPutSettingsDispatchAsync(ElasticSearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -957,7 +957,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesClearCacheDispatch(ElasticSearchPathInfo<IndicesClearCacheQueryString> pathInfo )
+		internal ConnectionStatus IndicesClearCacheDispatch(ElasticSearchPathInfo<ClearCacheQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -980,7 +980,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesClearCacheDispatchAsync(ElasticSearchPathInfo<IndicesClearCacheQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesClearCacheDispatchAsync(ElasticSearchPathInfo<ClearCacheQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1075,7 +1075,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesDeleteDispatch(ElasticSearchPathInfo<IndicesDeleteQueryString> pathInfo )
+		internal ConnectionStatus IndicesDeleteDispatch(ElasticSearchPathInfo<DeleteIndexQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1091,7 +1091,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesDeleteDispatchAsync(ElasticSearchPathInfo<IndicesDeleteQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesDeleteDispatchAsync(ElasticSearchPathInfo<DeleteIndexQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1137,7 +1137,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesDeleteMappingDispatch(ElasticSearchPathInfo<IndicesDeleteMappingQueryString> pathInfo )
+		internal ConnectionStatus IndicesDeleteMappingDispatch(ElasticSearchPathInfo<DeleteMappingQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1155,7 +1155,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesDeleteMappingDispatchAsync(ElasticSearchPathInfo<IndicesDeleteMappingQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesDeleteMappingDispatchAsync(ElasticSearchPathInfo<DeleteMappingQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1173,7 +1173,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesDeleteTemplateDispatch(ElasticSearchPathInfo<IndicesDeleteTemplateQueryString> pathInfo )
+		internal ConnectionStatus IndicesDeleteTemplateDispatch(ElasticSearchPathInfo<DeleteTemplateQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1188,7 +1188,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesDeleteTemplateDispatchAsync(ElasticSearchPathInfo<IndicesDeleteTemplateQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesDeleteTemplateDispatchAsync(ElasticSearchPathInfo<DeleteTemplateQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1203,7 +1203,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesDeleteWarmerDispatch(ElasticSearchPathInfo<IndicesDeleteWarmerQueryString> pathInfo )
+		internal ConnectionStatus IndicesDeleteWarmerDispatch(ElasticSearchPathInfo<DeleteWarmerQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1224,7 +1224,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesDeleteWarmerDispatchAsync(ElasticSearchPathInfo<IndicesDeleteWarmerQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesDeleteWarmerDispatchAsync(ElasticSearchPathInfo<DeleteWarmerQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1245,7 +1245,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesExistsDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus IndicesExistsDispatch(ElasticSearchPathInfo<IndicesExistsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1260,7 +1260,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesExistsDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesExistsDispatchAsync(ElasticSearchPathInfo<IndicesExistsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1341,7 +1341,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesFlushDispatch(ElasticSearchPathInfo<IndicesFlushQueryString> pathInfo )
+		internal ConnectionStatus IndicesFlushDispatch(ElasticSearchPathInfo<FlushQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1364,7 +1364,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesFlushDispatchAsync(ElasticSearchPathInfo<IndicesFlushQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesFlushDispatchAsync(ElasticSearchPathInfo<FlushQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1497,7 +1497,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesGetMappingDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus IndicesGetMappingDispatch(ElasticSearchPathInfo<GetMappingQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1516,7 +1516,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesGetMappingDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesGetMappingDispatchAsync(ElasticSearchPathInfo<GetMappingQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1535,7 +1535,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesGetSettingsDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus IndicesGetSettingsDispatch(ElasticSearchPathInfo<GetIndexSettingsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1551,7 +1551,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesGetSettingsDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesGetSettingsDispatchAsync(ElasticSearchPathInfo<GetIndexSettingsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1567,7 +1567,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesGetTemplateDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus IndicesGetTemplateDispatch(ElasticSearchPathInfo<GetTemplateQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1583,7 +1583,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesGetTemplateDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesGetTemplateDispatchAsync(ElasticSearchPathInfo<GetTemplateQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1599,7 +1599,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesGetWarmerDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus IndicesGetWarmerDispatch(ElasticSearchPathInfo<GetWarmerQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1620,7 +1620,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesGetWarmerDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesGetWarmerDispatchAsync(ElasticSearchPathInfo<GetWarmerQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1765,7 +1765,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesPutMappingDispatch(ElasticSearchPathInfo<IndicesPutMappingQueryString> pathInfo , object body)
+		internal ConnectionStatus IndicesPutMappingDispatch(ElasticSearchPathInfo<PutMappingQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1786,7 +1786,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesPutMappingDispatchAsync(ElasticSearchPathInfo<IndicesPutMappingQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> IndicesPutMappingDispatchAsync(ElasticSearchPathInfo<PutMappingQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1843,7 +1843,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesPutTemplateDispatch(ElasticSearchPathInfo<IndicesPutTemplateQueryString> pathInfo , object body)
+		internal ConnectionStatus IndicesPutTemplateDispatch(ElasticSearchPathInfo<PutTemplateQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1864,7 +1864,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesPutTemplateDispatchAsync(ElasticSearchPathInfo<IndicesPutTemplateQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> IndicesPutTemplateDispatchAsync(ElasticSearchPathInfo<PutTemplateQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1885,7 +1885,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesPutWarmerDispatch(ElasticSearchPathInfo<IndicesPutWarmerQueryString> pathInfo , object body)
+		internal ConnectionStatus IndicesPutWarmerDispatch(ElasticSearchPathInfo<PutWarmerQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1903,7 +1903,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesPutWarmerDispatchAsync(ElasticSearchPathInfo<IndicesPutWarmerQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> IndicesPutWarmerDispatchAsync(ElasticSearchPathInfo<PutWarmerQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1921,7 +1921,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesRefreshDispatch(ElasticSearchPathInfo<IndicesRefreshQueryString> pathInfo )
+		internal ConnectionStatus IndicesRefreshDispatch(ElasticSearchPathInfo<RefreshQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1944,7 +1944,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesRefreshDispatchAsync(ElasticSearchPathInfo<IndicesRefreshQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesRefreshDispatchAsync(ElasticSearchPathInfo<RefreshQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1967,7 +1967,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesSegmentsDispatch(ElasticSearchPathInfo<IndicesSegmentsQueryString> pathInfo )
+		internal ConnectionStatus IndicesSegmentsDispatch(ElasticSearchPathInfo<SegmentsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1983,7 +1983,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesSegmentsDispatchAsync(ElasticSearchPathInfo<IndicesSegmentsQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesSegmentsDispatchAsync(ElasticSearchPathInfo<SegmentsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2239,7 +2239,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus InfoDispatch(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal ConnectionStatus InfoDispatch(ElasticSearchPathInfo<InfoQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2256,7 +2256,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> InfoDispatchAsync(ElasticSearchPathInfo<FluentQueryString> pathInfo )
+		internal Task<ConnectionStatus> InfoDispatchAsync(ElasticSearchPathInfo<InfoQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{

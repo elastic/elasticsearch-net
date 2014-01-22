@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 		
 		public AnalyzerTestResult MapAndAnalyze(
 			Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector,
-			Func<RootObjectMappingDescriptor<AnalyzerTest>, RootObjectMappingDescriptor<AnalyzerTest>> typeMappingDescriptor,
+			Func<PutMappingDescriptor<AnalyzerTest>, PutMappingDescriptor<AnalyzerTest>> typeMappingDescriptor,
 			string text = "ElasticSearch is yummy"
 			)
 		{

@@ -11,7 +11,8 @@ namespace Nest
 {
 	[DescriptorFor("IndicesPutSettings")]
 	public partial class UpdateSettingsDescriptor
-		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateQueryString>
+		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsQueryString>
+		, IPathInfo<UpdateSettingsQueryString>
 	{
 		[JsonProperty("index.number_of_replicas")]
 		internal int? _NumberOfReplicas { get; set; }
@@ -372,7 +373,6 @@ namespace Nest
 
 		[JsonProperty("index.warmer.enabled")]
 		internal bool? _WarmersEnabled { get; set; }
-		
 		///<summary>
 		/// See Warmers. Defaults to true. 
 		/// </summary>
@@ -384,9 +384,8 @@ namespace Nest
 
 		[JsonProperty("analysis")]
 		internal AnalysisSettings _Analysis { get; set; }
-
 		/// <summary>
-		/// 
+		/// When updating analysis settings you need to close and open the index prior and afterwards
 		/// </summary>
 		public UpdateSettingsDescriptor Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
 		{
@@ -396,7 +395,7 @@ namespace Nest
 			return this;
 		}
 
-		internal new ElasticSearchPathInfo<UpdateSettingsQueryString> ToPathInfo(IConnectionSettings settings)
+		ElasticSearchPathInfo<UpdateSettingsQueryString> IPathInfo<UpdateSettingsQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<UpdateSettingsQueryString>(settings);
 			pathInfo.QueryString = this._QueryString;
@@ -405,6 +404,5 @@ namespace Nest
 			return pathInfo;
 		}
 
-		public int? numberOfReplicas { get; set; }
 	}
 }

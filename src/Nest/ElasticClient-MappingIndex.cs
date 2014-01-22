@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
@@ -11,78 +12,87 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		private static Regex StripIndex = new Regex(@"^index\.");
+		private static readonly Regex StripIndex = new Regex(@"^index\.");
 
-		/// <summary>
-		/// Gets the index settings for the default index
-		/// </summary>
-		public IIndexSettingsResponse GetIndexSettings()
+		public IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
 		{
-			var index = this._connectionSettings.DefaultIndex;
-			return this.GetIndexSettings(index);
+			selector.ThrowIfNull("selector");
+			var descriptor = selector(new GetIndexSettingsDescriptor());
+			var pathInfo = descriptor.ToPathInfo<GetIndexSettingsQueryString>(this._connectionSettings);
+			var status = this.RawDispatch.IndicesGetSettingsDispatch(pathInfo);
+
+			return CreateIndexSettingsResponse(status);
 		}
-		/// <summary>
-		/// Gets the index settings for the specified index
-		/// </summary>
-		public IIndexSettingsResponse GetIndexSettings(string index)
-		{
-			string path = this.PathResolver.CreateIndexPath(index, "_settings");
-			var status = this.Connection.GetSync(path);
 
-			var response = new IndexSettingsResponse();
-			response.IsValid = false;
+
+		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var descriptor = selector(new GetIndexSettingsDescriptor());
+			var pathInfo = descriptor.ToPathInfo<GetIndexSettingsQueryString>(this._connectionSettings);
+			return this.RawDispatch.IndicesGetSettingsDispatchAsync(pathInfo)
+				.ContinueWith(t => CreateIndexSettingsResponse(t.Result));
+		}
+
+		private IIndexSettingsResponse CreateIndexSettingsResponse(ConnectionStatus status)
+		{
+			var response = new IndexSettingsResponse {IsValid = false};
 			try
 			{
-				var o = JObject.Parse(status.Result);
-				var settingsObject = o.First.First.First.First;
-
-				var settingsContainer = new JObject();
-				// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
-				foreach (JProperty s in settingsObject.Children<JProperty>())
-				{
-					var name = StripIndex.Replace(s.Name, "");
-					if (name.StartsWith("analysis."))
-					{
-						var keys = name.Split('.');
-						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, keys, s.Value);
-					}
-					else if (name.StartsWith("similarity."))
-					{
-						var keys = name.Split('.');
-						var similaryKeys = new[] { keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray()) };
-						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
-					}
-					else
-					{
-						RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] { name }, s.Value);
-					}
-				}
-
+				var settingsContainer = SettingsContainer(status);
 				response.Settings = this.Deserialize<IndexSettings>(settingsContainer);
 				response.IsValid = true;
 			}
-			catch { }
+			// ReSharper disable once EmptyGeneralCatchClause
+			catch
+			{
+			}
 			response.ConnectionStatus = status;
 			return response;
 		}
-
-		/// <summary>
-		/// Delete the default index
-		/// </summary>
-		public IIndicesResponse DeleteIndex<T>() where T : class
+		public IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector)
 		{
-			return this.DeleteIndex(this.Infer.IndexName<T>());
+			return this.Dispatch<DeleteIndexDescriptor, DeleteIndexQueryString, IndicesResponse>(
+				selector, 
+				(p, d)=> this.RawDispatch.IndicesDeleteDispatch(p)
+			);
 		}
-		/// <summary>
-		/// Delete the specified index
-		/// </summary>
-		public IIndicesResponse DeleteIndex(string index)
+		public Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector)
 		{
-			string path = this.PathResolver.CreateIndexPath(index);
+			return this.DispatchAsync<DeleteIndexDescriptor, DeleteIndexQueryString, IndicesResponse, IIndicesResponse>(
+				selector, 
+				(p, d)=> this.RawDispatch.IndicesDeleteDispatchAsync(p)
+			);
+		}
+		
+		//TODO although this gets the job done this looks a bit iffy, refactor
+		private JObject SettingsContainer(ConnectionStatus status)
+		{
+			var o = JObject.Parse(status.Result);
+			var settingsObject = o.First.First.First.First;
 
-			var status = this.Connection.DeleteSync(path);
-			var r = this.Deserialize<IndicesResponse>(status);
-			return r;
+			var settingsContainer = new JObject();
+			// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
+			foreach (JProperty s in settingsObject.Children<JProperty>())
+			{
+				var name = StripIndex.Replace(s.Name, "");
+				if (name.StartsWith("analysis."))
+				{
+					var keys = name.Split('.');
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, keys, s.Value);
+				}
+				else if (name.StartsWith("similarity."))
+				{
+					var keys = name.Split('.');
+					var similaryKeys = new[] {keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray())};
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
+				}
+				else
+				{
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] {name}, s.Value);
+				}
+			}
+			return settingsContainer;
 		}
 
 		/// <summary>

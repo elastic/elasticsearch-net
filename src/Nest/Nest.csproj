@@ -82,7 +82,29 @@
   <ItemGroup>
     <Compile Include="BackwardsCompatibility\IElasticClientExtensions.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
+    <Compile Include="Domain\Responses\GetMappingResponse.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
+    <Compile Include="DSL\ClusterStateDescriptor.cs" />
+    <Compile Include="DSL\ClearCacheDescriptor.cs" />
+    <Compile Include="DSL\GetIndexSettingsDescriptor.cs" />
+    <Compile Include="DSL\DeleteIndexDescriptor.cs" />
+    <Compile Include="DSL\FlushDescriptor.cs" />
+    <Compile Include="DSL\DeleteMappingDescriptor.cs" />
+    <Compile Include="DSL\GetMappingDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndexTypePathDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndicesTypePathDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
+    <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
+    <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
+    <Compile Include="DSL\GetTemplateDescriptor.cs" />
+    <Compile Include="DSL\DeleteWarmerDescriptor.cs" />
+    <Compile Include="DSL\IActAsSearchDescriptor.cs" />
+    <Compile Include="DSL\IPathInfo.cs" />
+    <Compile Include="DSL\Paths\IndexNamePathDescriptor.cs" />
+    <Compile Include="DSL\Paths\NamePathDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
+    <Compile Include="DSL\SegmentsDescriptor.cs" />
+    <Compile Include="DSL\RefreshDescriptor.cs" />
     <Compile Include="DSL\OptimizeDescriptor.cs" />
     <Compile Include="DSL\SnapshotDescriptor.cs" />
     <Compile Include="DSL\IActAsQuery.cs" />
@@ -91,7 +113,6 @@
     <Compile Include="DSL\Paths\IndicesOptionalPathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
     <Compile Include="DSL\ScrollDescriptor.cs" />
-    <Compile Include="DSL\Paths\RawJsonDescriptorBase.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
@@ -101,6 +122,7 @@
     <Compile Include="DSL\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Exception\DispatchException.cs" />
+    <Compile Include="IElasticClient-Migrator.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
@@ -157,7 +179,7 @@
     <Compile Include="DSL\Query\ChildScoreType.cs" />
     <Compile Include="DSL\Query\HasParentQueryDescriptor.cs" />
     <Compile Include="DSL\Query\ParentScoreType.cs" />
-    <Compile Include="DSL\PercolatorDescriptor.cs" />
+    <Compile Include="DSL\RegisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\PercolateDescriptor.cs" />
     <Compile Include="DSL\Query\ExternalFieldDeclarationDescriptor.cs" />
     <Compile Include="DSL\Query\IExternalFieldDeclarationDescriptor.cs" />
@@ -205,7 +227,7 @@
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
     <Compile Include="DSL\MultiSearchDescriptor.cs" />
-    <Compile Include="DSL\TemplateMappingDescriptor.cs" />
+    <Compile Include="DSL\PutTemplateDescriptor.cs" />
     <Compile Include="ElasticClient-Template.cs" />
     <Compile Include="Domain\Bulk\BaseBulkOperation.cs" />
     <Compile Include="DSL\BulkCreateDescriptor.cs" />
@@ -316,7 +338,7 @@
     <Compile Include="Domain\Mapping\SpecialFields\RoutingFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\TypeFieldMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\SourceFieldMapping.cs" />
-    <Compile Include="Domain\Mapping\Descriptors\RootObjectMappingDescriptor.cs" />
+    <Compile Include="DSL\PutMappingDescriptor.cs" />
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\MultiGetDescriptor.cs" />
     <Compile Include="ElasticClient-GetFull.cs" />
@@ -557,6 +579,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\ActAsSearchDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawJsonConverterConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />

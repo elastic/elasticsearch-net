@@ -11,8 +11,8 @@ using Nest.Resolvers;
 namespace Nest
 {
 
-	public class DocumentPathDescriptorBase<TDocumentPathDescriptor, T, K>
-		where TDocumentPathDescriptor : DocumentPathDescriptorBase<TDocumentPathDescriptor, T, K>, new() where T : class
+	public class DocumentPathDescriptorBase<P, T, K>
+		where P : DocumentPathDescriptorBase<P, T, K>, new() where T : class
 		where K : FluentQueryString<K>, new()
 	{
 
@@ -21,35 +21,35 @@ namespace Nest
 		internal string _Id { get; set; }
 		internal T _Object { get; set; }
 
-		public TDocumentPathDescriptor Index(string index)
+		public P Index(string index)
 		{
 			this._Index = index;
-			return (TDocumentPathDescriptor)this;
+			return (P)this;
 		}
 		
-		public TDocumentPathDescriptor Type(string type)
+		public P Type(string type)
 		{
 			this._Type = type;
-			return (TDocumentPathDescriptor)this;
+			return (P)this;
 		}
-		public TDocumentPathDescriptor Type(Type type)
+		public P Type(Type type)
 		{
 			this._Type = type;
-			return (TDocumentPathDescriptor)this;
+			return (P)this;
 		}
-		public TDocumentPathDescriptor Id(int id)
+		public P Id(int id)
 		{
 			return this.Id(id.ToString());
 		}
-		public TDocumentPathDescriptor Id(string id)
+		public P Id(string id)
 		{
 			this._Id = id;
-			return (TDocumentPathDescriptor)this;
+			return (P)this;
 		}
-		public TDocumentPathDescriptor Object(T @object)
+		public P Object(T @object)
 		{
 			this._Object = @object;
-			return (TDocumentPathDescriptor)this;
+			return (P)this;
 		}
 		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings) 
 			where K : FluentQueryString<K>, new()

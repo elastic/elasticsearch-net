@@ -9,6 +9,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class UpdateDescriptor<T,K> : DocumentPathDescriptorBase<UpdateDescriptor<T, K>, T, UpdateQueryString> 
+		, IPathInfo<UpdateQueryString> 
 		where T : class 
 		where K : class
 	{
@@ -72,7 +73,7 @@ namespace Nest
 			return this;
 		}
 
-		internal new ElasticSearchPathInfo<UpdateQueryString> ToPathInfo(IConnectionSettings settings)
+		ElasticSearchPathInfo<UpdateQueryString> IPathInfo<UpdateQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<UpdateQueryString>(settings);
 			pathInfo.QueryString = this._QueryString;

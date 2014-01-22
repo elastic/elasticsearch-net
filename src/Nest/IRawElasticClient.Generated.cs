@@ -107,23 +107,23 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
-		ConnectionStatus ClearScrollDelete(string scroll_id, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus ClearScrollDelete(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null);
 		
 		///<summary>DELETE /_search/scroll/{scroll_id}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
-		Task<ConnectionStatus> ClearScrollDeleteAsync(string scroll_id, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> ClearScrollDeleteAsync(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/settings
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 		///</summary>
-		ConnectionStatus ClusterGetSettings(Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus ClusterGetSettings(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/settings
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 		///</summary>
-		Task<ConnectionStatus> ClusterGetSettingsAsync(Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterGetSettingsAsync(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/health
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-health/</pre>	
@@ -295,13 +295,13 @@ namespace Nest
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
-		ConnectionStatus ClusterPutSettings(object body, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus ClusterPutSettings(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null);
 		
 		///<summary>PUT /_cluster/settings
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
-		Task<ConnectionStatus> ClusterPutSettingsAsync(object body, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterPutSettingsAsync(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null);
 		
 		///<summary>POST /_cluster/reroute
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-reroute/</pre>	
@@ -718,46 +718,46 @@ namespace Nest
 		///<summary>POST /_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
-		ConnectionStatus IndicesClearCachePost(Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		ConnectionStatus IndicesClearCachePost(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>POST /_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesClearCachePostAsync(Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesClearCachePostAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
-		ConnectionStatus IndicesClearCachePost(string index, Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		ConnectionStatus IndicesClearCachePost(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
-		Task<ConnectionStatus> IndicesClearCachePostAsync(string index, Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesClearCachePostAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>GET /_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
-		ConnectionStatus IndicesClearCacheGet(Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		ConnectionStatus IndicesClearCacheGet(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>GET /_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesClearCacheGetAsync(Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesClearCacheGetAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
-		ConnectionStatus IndicesClearCacheGet(string index, Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		ConnectionStatus IndicesClearCacheGet(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
-		Task<ConnectionStatus> IndicesClearCacheGetAsync(string index, Func<IndicesClearCacheQueryString, IndicesClearCacheQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesClearCacheGetAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_close
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
@@ -802,24 +802,24 @@ namespace Nest
 		///<summary>DELETE /
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 		///</summary>
-		ConnectionStatus IndicesDelete(Func<IndicesDeleteQueryString, IndicesDeleteQueryString> queryString = null);
+		ConnectionStatus IndicesDelete(Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null);
 		
 		///<summary>DELETE /
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesDeleteAsync(Func<IndicesDeleteQueryString, IndicesDeleteQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesDeleteAsync(Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or empty string to delete all indices</param>
-		ConnectionStatus IndicesDelete(string index, Func<IndicesDeleteQueryString, IndicesDeleteQueryString> queryString = null);
+		ConnectionStatus IndicesDelete(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or empty string to delete all indices</param>
-		Task<ConnectionStatus> IndicesDeleteAsync(string index, Func<IndicesDeleteQueryString, IndicesDeleteQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesDeleteAsync(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
@@ -840,52 +840,52 @@ namespace Nest
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` for all indices</param>
 		///<param name="type">The name of the document type to delete</param>
-		ConnectionStatus IndicesDeleteMapping(string index, string type, Func<IndicesDeleteMappingQueryString, IndicesDeleteMappingQueryString> queryString = null);
+		ConnectionStatus IndicesDeleteMapping(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/{type}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-mapping/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` for all indices</param>
 		///<param name="type">The name of the document type to delete</param>
-		Task<ConnectionStatus> IndicesDeleteMappingAsync(string index, string type, Func<IndicesDeleteMappingQueryString, IndicesDeleteMappingQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesDeleteMappingAsync(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null);
 		
 		///<summary>DELETE /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
-		ConnectionStatus IndicesDeleteTemplate(string name, Func<IndicesDeleteTemplateQueryString, IndicesDeleteTemplateQueryString> queryString = null);
+		ConnectionStatus IndicesDeleteTemplate(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null);
 		
 		///<summary>DELETE /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
-		Task<ConnectionStatus> IndicesDeleteTemplateAsync(string name, Func<IndicesDeleteTemplateQueryString, IndicesDeleteTemplateQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesDeleteTemplateAsync(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/_warmer
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesDeleteWarmer(string index, Func<IndicesDeleteWarmerQueryString, IndicesDeleteWarmerQueryString> queryString = null);
+		ConnectionStatus IndicesDeleteWarmer(string index, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/_warmer
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, Func<IndicesDeleteWarmerQueryString, IndicesDeleteWarmerQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
-		ConnectionStatus IndicesDeleteWarmer(string index, string name, Func<IndicesDeleteWarmerQueryString, IndicesDeleteWarmerQueryString> queryString = null);
+		ConnectionStatus IndicesDeleteWarmer(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
-		Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, string name, Func<IndicesDeleteWarmerQueryString, IndicesDeleteWarmerQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/{type}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -893,7 +893,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register warmer for; use `_all` or empty string to perform the operation on all types</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
-		ConnectionStatus IndicesDeleteWarmer(string index, string type, string name, Func<IndicesDeleteWarmerQueryString, IndicesDeleteWarmerQueryString> queryString = null);
+		ConnectionStatus IndicesDeleteWarmer(string index, string type, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/{type}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -901,19 +901,19 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register warmer for; use `_all` or empty string to perform the operation on all types</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
-		Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, string type, string name, Func<IndicesDeleteWarmerQueryString, IndicesDeleteWarmerQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, string type, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
-		ConnectionStatus IndicesExistsHead(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesExistsHead(string index, Func<IndicesExistsQueryString, IndicesExistsQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
-		Task<ConnectionStatus> IndicesExistsHeadAsync(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesExistsHeadAsync(string index, Func<IndicesExistsQueryString, IndicesExistsQueryString> queryString = null);
 		
 		///<summary>HEAD /_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
@@ -958,46 +958,46 @@ namespace Nest
 		///<summary>POST /_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
-		ConnectionStatus IndicesFlushPost(Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		ConnectionStatus IndicesFlushPost(Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>POST /_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesFlushPostAsync(Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesFlushPostAsync(Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		ConnectionStatus IndicesFlushPost(string index, Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		ConnectionStatus IndicesFlushPost(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		Task<ConnectionStatus> IndicesFlushPostAsync(string index, Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesFlushPostAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>GET /_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
-		ConnectionStatus IndicesFlushGet(Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		ConnectionStatus IndicesFlushGet(Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>GET /_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesFlushGetAsync(Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesFlushGetAsync(Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		ConnectionStatus IndicesFlushGet(string index, Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		ConnectionStatus IndicesFlushGet(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_flush
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		Task<ConnectionStatus> IndicesFlushGetAsync(string index, Func<IndicesFlushQueryString, IndicesFlushQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesFlushGetAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>GET /_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
@@ -1092,108 +1092,108 @@ namespace Nest
 		///<summary>GET /_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 		///</summary>
-		ConnectionStatus IndicesGetMapping(Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetMapping(Func<GetMappingQueryString, GetMappingQueryString> queryString = null);
 		
 		///<summary>GET /_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesGetMappingAsync(Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetMappingAsync(Func<GetMappingQueryString, GetMappingQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
-		ConnectionStatus IndicesGetMapping(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetMapping(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
-		Task<ConnectionStatus> IndicesGetMappingAsync(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetMappingAsync(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
-		ConnectionStatus IndicesGetMapping(string index, string type, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetMapping(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
-		Task<ConnectionStatus> IndicesGetMappingAsync(string index, string type, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetMappingAsync(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null);
 		
 		///<summary>GET /_settings
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 		///</summary>
-		ConnectionStatus IndicesGetSettings(Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetSettings(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null);
 		
 		///<summary>GET /_settings
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesGetSettingsAsync(Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetSettingsAsync(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_settings
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesGetSettings(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetSettings(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_settings
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesGetSettingsAsync(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetSettingsAsync(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null);
 		
 		///<summary>GET /_template
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
-		ConnectionStatus IndicesGetTemplate(Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetTemplate(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null);
 		
 		///<summary>GET /_template
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesGetTemplateAsync(Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetTemplateAsync(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null);
 		
 		///<summary>GET /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
-		ConnectionStatus IndicesGetTemplate(string name, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetTemplate(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null);
 		
 		///<summary>GET /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
-		Task<ConnectionStatus> IndicesGetTemplateAsync(string name, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetTemplateAsync(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_warmer
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		ConnectionStatus IndicesGetWarmer(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetWarmer(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_warmer
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesGetWarmerAsync(string index, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetWarmerAsync(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		ConnectionStatus IndicesGetWarmer(string index, string name, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetWarmer(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string name, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -1201,7 +1201,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		ConnectionStatus IndicesGetWarmer(string index, string type, string name, Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus IndicesGetWarmer(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -1209,7 +1209,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string type, string name, Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_open
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
@@ -1329,7 +1329,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
-		ConnectionStatus IndicesPutMapping(string index, string type, object body, Func<IndicesPutMappingQueryString, IndicesPutMappingQueryString> queryString = null);
+		ConnectionStatus IndicesPutMapping(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null);
 		
 		///<summary>PUT /{index}/{type}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/</pre>	
@@ -1337,7 +1337,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
-		Task<ConnectionStatus> IndicesPutMappingAsync(string index, string type, object body, Func<IndicesPutMappingQueryString, IndicesPutMappingQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesPutMappingAsync(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/</pre>	
@@ -1345,7 +1345,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
-		ConnectionStatus IndicesPutMappingPost(string index, string type, object body, Func<IndicesPutMappingQueryString, IndicesPutMappingQueryString> queryString = null);
+		ConnectionStatus IndicesPutMappingPost(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mapping
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/</pre>	
@@ -1353,7 +1353,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
-		Task<ConnectionStatus> IndicesPutMappingPostAsync(string index, string type, object body, Func<IndicesPutMappingQueryString, IndicesPutMappingQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesPutMappingPostAsync(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null);
 		
 		///<summary>PUT /_settings
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
@@ -1386,28 +1386,28 @@ namespace Nest
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
-		ConnectionStatus IndicesPutTemplate(string name, object body, Func<IndicesPutTemplateQueryString, IndicesPutTemplateQueryString> queryString = null);
+		ConnectionStatus IndicesPutTemplate(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null);
 		
 		///<summary>PUT /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
-		Task<ConnectionStatus> IndicesPutTemplateAsync(string name, object body, Func<IndicesPutTemplateQueryString, IndicesPutTemplateQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesPutTemplateAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null);
 		
 		///<summary>POST /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
-		ConnectionStatus IndicesPutTemplatePost(string name, object body, Func<IndicesPutTemplateQueryString, IndicesPutTemplateQueryString> queryString = null);
+		ConnectionStatus IndicesPutTemplatePost(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null);
 		
 		///<summary>POST /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
-		Task<ConnectionStatus> IndicesPutTemplatePostAsync(string name, object body, Func<IndicesPutTemplateQueryString, IndicesPutTemplateQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesPutTemplatePostAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null);
 		
 		///<summary>PUT /{index}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -1415,7 +1415,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		ConnectionStatus IndicesPutWarmer(string index, string name, object body, Func<IndicesPutWarmerQueryString, IndicesPutWarmerQueryString> queryString = null);
+		ConnectionStatus IndicesPutWarmer(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null);
 		
 		///<summary>PUT /{index}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -1423,7 +1423,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string name, object body, Func<IndicesPutWarmerQueryString, IndicesPutWarmerQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null);
 		
 		///<summary>PUT /{index}/{type}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -1432,7 +1432,7 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		ConnectionStatus IndicesPutWarmer(string index, string type, string name, object body, Func<IndicesPutWarmerQueryString, IndicesPutWarmerQueryString> queryString = null);
+		ConnectionStatus IndicesPutWarmer(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null);
 		
 		///<summary>PUT /{index}/{type}/_warmer/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
@@ -1441,73 +1441,73 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string type, string name, object body, Func<IndicesPutWarmerQueryString, IndicesPutWarmerQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null);
 		
 		///<summary>POST /_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
-		ConnectionStatus IndicesRefreshPost(Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		ConnectionStatus IndicesRefreshPost(Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>POST /_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesRefreshPostAsync(Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesRefreshPostAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesRefreshPost(string index, Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		ConnectionStatus IndicesRefreshPost(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesRefreshPostAsync(string index, Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesRefreshPostAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>GET /_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
-		ConnectionStatus IndicesRefreshGet(Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		ConnectionStatus IndicesRefreshGet(Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>GET /_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesRefreshGetAsync(Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesRefreshGetAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesRefreshGet(string index, Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		ConnectionStatus IndicesRefreshGet(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_refresh
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesRefreshGetAsync(string index, Func<IndicesRefreshQueryString, IndicesRefreshQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesRefreshGetAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>GET /_segments
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
 		///</summary>
-		ConnectionStatus IndicesSegmentsGet(Func<IndicesSegmentsQueryString, IndicesSegmentsQueryString> queryString = null);
+		ConnectionStatus IndicesSegmentsGet(Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>GET /_segments
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesSegmentsGetAsync(Func<IndicesSegmentsQueryString, IndicesSegmentsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSegmentsGetAsync(Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_segments
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesSegmentsGet(string index, Func<IndicesSegmentsQueryString, IndicesSegmentsQueryString> queryString = null);
+		ConnectionStatus IndicesSegmentsGet(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_segments
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesSegmentsGetAsync(string index, Func<IndicesSegmentsQueryString, IndicesSegmentsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSegmentsGetAsync(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>POST /_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
@@ -1758,22 +1758,22 @@ namespace Nest
 		///<summary>GET /
 		///<pre>http://elasticsearch.org/guide/</pre>	
 		///</summary>
-		ConnectionStatus InfoGet(Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus InfoGet(Func<InfoQueryString, InfoQueryString> queryString = null);
 		
 		///<summary>GET /
 		///<pre>http://elasticsearch.org/guide/</pre>	
 		///</summary>
-		Task<ConnectionStatus> InfoGetAsync(Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> InfoGetAsync(Func<InfoQueryString, InfoQueryString> queryString = null);
 		
 		///<summary>HEAD /
 		///<pre>http://elasticsearch.org/guide/</pre>	
 		///</summary>
-		ConnectionStatus InfoHead(Func<FluentQueryString, FluentQueryString> queryString = null);
+		ConnectionStatus InfoHead(Func<InfoQueryString, InfoQueryString> queryString = null);
 		
 		///<summary>HEAD /
 		///<pre>http://elasticsearch.org/guide/</pre>	
 		///</summary>
-		Task<ConnectionStatus> InfoHeadAsync(Func<FluentQueryString, FluentQueryString> queryString = null);
+		Task<ConnectionStatus> InfoHeadAsync(Func<InfoQueryString, InfoQueryString> queryString = null);
 		
 		///<summary>GET /_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	

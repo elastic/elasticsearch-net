@@ -14,36 +14,36 @@ namespace Nest
 	/// Provides a base for descriptor that need to form a url path
 	/// in the form of /{index}/[anythinghere] where index is optional.
 	/// </summary>
-	public class IndexOptionalPathDescriptorBase<TIndexOptionalPathDescriptor, K> 
-		where TIndexOptionalPathDescriptor : IndexOptionalPathDescriptorBase<TIndexOptionalPathDescriptor, K>, new()
+	public class IndexOptionalPathDescriptorBase<P, K> 
+		where P : IndexOptionalPathDescriptorBase<P, K>, new()
 		where K : FluentQueryString<K>, new()
 	{
 		internal IndexNameMarker _Index { get; set; }
 		
 		internal bool? _AllIndices { get; set; }
 
-		public TIndexOptionalPathDescriptor AllIndices(bool allIndices = true)
+		public P AllIndices(bool allIndices = true)
 		{
 			this._AllIndices = allIndices;
-			return (TIndexOptionalPathDescriptor)this;
+			return (P)this;
 		}
 		
-		public TIndexOptionalPathDescriptor Index<T>() where T : class
+		public P Index<T>() where T : class
 		{
 			this._Index = typeof(T);
-			return (TIndexOptionalPathDescriptor)this;
+			return (P)this;
 		}
 			
-		public TIndexOptionalPathDescriptor Index(string indexType)
+		public P Index(string indexType)
 		{
 			this._Index = indexType;
-			return (TIndexOptionalPathDescriptor)this;
+			return (P)this;
 		}
 
-		public TIndexOptionalPathDescriptor Index(Type indexType)
+		public P Index(Type indexType)
 		{
 			this._Index = indexType;
-			return (TIndexOptionalPathDescriptor)this;
+			return (P)this;
 		}
 
 		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)

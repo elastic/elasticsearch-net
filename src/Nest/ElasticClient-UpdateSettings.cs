@@ -12,37 +12,25 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-
-		/// <summary>
-		/// Update index settings
-		/// </summary>
 		public ISettingsOperationResponse UpdateSettings(
 			Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector
 		)
 		{
-			updateSettingsSelector.ThrowIfNull("updateSettingsSelector");
-			var descriptor = updateSettingsSelector(new UpdateSettingsDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesPutSettingsDispatch(pathInfo, descriptor)
-				.Deserialize<SettingsOperationResponse>();
+			return this.Dispatch<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse>(
+				updateSettingsSelector,
+				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch(p, d)
+			);
 		}
 
-		/// <summary>
-		/// Update index settings
-		/// </summary>
 		public Task<ISettingsOperationResponse> UpdateSettingsAsync(
 			Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector
 		)
 		{
-			updateSettingsSelector.ThrowIfNull("updateSettingsSelector");
-			var descriptor = updateSettingsSelector(new UpdateSettingsDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesPutSettingsDispatchAsync(pathInfo, descriptor)
-				.ContinueWith<ISettingsOperationResponse>(
-					t => t.Result.Deserialize<SettingsOperationResponse>()
-				);
+			return this.DispatchAsync<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse, ISettingsOperationResponse>(
+				updateSettingsSelector,
+				(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync(p, d)
+			);
 		}
-
 
 	}
 }

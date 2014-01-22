@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
-using System.Linq.Expressions;
-using Nest.Resolvers;
 
 namespace Nest
 {
 	[DescriptorFor("IndicesValidateQuery")]
 	[JsonConverter(typeof(ActAsQueryConverter))]
 	public partial class ValidateQueryDescriptor<T> 
-		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryQueryString>,
-			IActAsQuery
+		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryQueryString>
+		, IActAsQuery
+		, IPathInfo<ValidateQueryQueryString> 
 		where T : class
 	{
 		BaseQuery IActAsQuery._Query { get; set; }
@@ -26,7 +20,7 @@ namespace Nest
 			return this;
 		}
 
-		internal new ElasticSearchPathInfo<ValidateQueryQueryString> ToPathInfo(IConnectionSettings settings)
+		ElasticSearchPathInfo<ValidateQueryQueryString> IPathInfo<ValidateQueryQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<ValidateQueryQueryString>(settings);
 			pathInfo.QueryString = this._QueryString;

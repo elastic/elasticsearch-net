@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Reproduce
 		}
 
 
-		private static RootObjectMappingDescriptor<TechnicalProduct> MapTechnicalProduct(RootObjectMappingDescriptor<TechnicalProduct> m, string indexName)
+		private static PutMappingDescriptor<TechnicalProduct> MapTechnicalProduct(PutMappingDescriptor<TechnicalProduct> m, string indexName)
 		{
 			return m
 			.TypeName("technicalProducts")

@@ -14,11 +14,10 @@ namespace Nest
 		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
 			where T : class
 		{
-			querySelector.ThrowIfNull("querySelector");
-			var descriptor = querySelector(new ValidateQueryDescriptor<T>());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesValidateQueryDispatch(pathInfo, descriptor)
-				.Deserialize<ValidateResponse>();
+			return this.Dispatch<ValidateQueryDescriptor<T>, ValidateQueryQueryString,IValidateResponse>(
+				querySelector,
+				(p, d) => this.RawDispatch.IndicesValidateQueryDispatch(p, d)
+			);
 		}
 
 		/// <summary>
@@ -27,11 +26,10 @@ namespace Nest
 		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
 			where T : class
 		{
-			querySelector.ThrowIfNull("querySelector");
-			var descriptor = querySelector(new ValidateQueryDescriptor<T>());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesValidateQueryDispatchAsync(pathInfo, descriptor)
-				.ContinueWith(r => r.Result.Deserialize<ValidateResponse>() as IValidateResponse);
+			return this.DispatchAsync<ValidateQueryDescriptor<T>, ValidateQueryQueryString, ValidateResponse, IValidateResponse>(
+				querySelector,
+				(p, d) => this.RawDispatch.IndicesValidateQueryDispatchAsync(p, d)
+			);
 		}
 
 	}

@@ -6,22 +6,20 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IIndicesShardResponse Snapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector)
+		public IIndicesShardResponse Snapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector)
 		{
-			snapShotSelector.ThrowIfNull("snapShotSelector");
-			var descriptor = snapShotSelector(new SnapshotDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesSnapshotIndexDispatch(pathInfo)
-				.Deserialize<IndicesShardResponse>();
+			return this.Dispatch<SnapshotDescriptor, SnapshotQueryString, IndicesShardResponse>(
+				snapshotSelector,
+				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatch(p)
+			);
 		}
 
-		public Task<IIndicesShardResponse> SnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector)
+		public Task<IIndicesShardResponse> SnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector)
 		{
-			snapShotSelector.ThrowIfNull("snapShotSelector");
-			var descriptor = snapShotSelector(new SnapshotDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesSnapshotIndexDispatchAsync(pathInfo)
-				.ContinueWith<IIndicesShardResponse>(r=>r.Result.Deserialize<IndicesShardResponse>());
+			return this.DispatchAsync<SnapshotDescriptor, SnapshotQueryString, IndicesShardResponse, IIndicesShardResponse>(
+				snapshotSelector,
+				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatchAsync(p)
+			);
 		}
 
 	}

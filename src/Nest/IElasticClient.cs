@@ -13,13 +13,6 @@ namespace Nest
 		IRawElasticClient Raw { get; }
 		ElasticInferrer Infer { get; }
 
-		IIndicesOperationResponse Alias(AliasParams aliasParams);
-		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
-		IIndicesOperationResponse Alias(IEnumerable<string> aliases);
-		IIndicesOperationResponse Alias(IEnumerable<string> indices, string alias);
-		IIndicesOperationResponse Alias(string alias);
-		IIndicesOperationResponse Alias(string index, IEnumerable<string> aliases);
-		IIndicesOperationResponse Alias(string index, string alias);
 
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
@@ -30,12 +23,6 @@ namespace Nest
 		IAnalyzeResponse Analyze<T>(System.Linq.Expressions.Expression<Func<T, object>> selector, string index, string text) where T : class;
 		IAnalyzeResponse Analyze<T>(System.Linq.Expressions.Expression<Func<T, object>> selector, string text) where T : class;
 
-		IIndicesResponse ClearCache();
-		IIndicesResponse ClearCache(ClearCacheOptions options);
-		IIndicesResponse ClearCache(IEnumerable<string> indices, ClearCacheOptions options);
-		IIndicesResponse ClearCache<T>() where T : class;
-		IIndicesResponse ClearCache<T>(ClearCacheOptions options) where T : class;
-
 		ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector);
@@ -45,7 +32,6 @@ namespace Nest
 		ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 
 		ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
-
 		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
 
 		IIndicesOperationResponse CreateIndex(string index, IndexSettings settings);
@@ -112,22 +98,6 @@ namespace Nest
 		IDeleteResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
 		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
 
-		IIndicesResponse DeleteIndex(string index);
-		IIndicesResponse DeleteIndex<T>() where T : class;
-
-		IIndicesResponse DeleteMapping<T>() where T : class;
-		IIndicesResponse DeleteMapping<T>(string index) where T : class;
-		IIndicesResponse DeleteMapping<T>(string index, string type) where T : class;
-
-		IIndicesResponse DeleteMapping(Type t);
-		IIndicesResponse DeleteMapping(Type t, string index);
-		IIndicesResponse DeleteMapping(Type t, string index, string type);
-
-		IIndicesOperationResponse Flush(bool refresh = false);
-		IIndicesOperationResponse Flush(IEnumerable<string> indices, bool refresh = false);
-		IIndicesOperationResponse Flush(string index, bool refresh = false);
-		IIndicesOperationResponse Flush<T>(bool refresh = false) where T : class;
-
 		T Get<T>(int id) where T : class;
 		T Get<T>(string id) where T : class;
 		T Get<T>(string index, string type, int id) where T : class;
@@ -158,16 +128,6 @@ namespace Nest
 		MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
 		MultiSearchResponse MultiSearch(MultiSearchDescriptor multiSearchSelector);
 
-		IIndexSettingsResponse GetIndexSettings();
-		IIndexSettingsResponse GetIndexSettings(string index);
-
-		IEnumerable<string> GetIndicesPointingToAlias(string alias);
-
-		RootObjectMapping GetMapping(string index, string type);
-		RootObjectMapping GetMapping<T>() where T : class;
-		RootObjectMapping GetMapping<T>(string index) where T : class;
-		RootObjectMapping GetMapping(Type t);
-		RootObjectMapping GetMapping(Type t, string index);
 
 		IHealthResponse Health(HealthLevel level);
 		IHealthResponse Health(IEnumerable<string> indices, HealthLevel level);
@@ -222,27 +182,6 @@ namespace Nest
 		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class;
 		IIndexExistsResponse IndexExists(string index);
 
-		IIndicesResponse Map(RootObjectMapping typeMapping);
-		IIndicesResponse Map(RootObjectMapping typeMapping, string index, string typeName, bool ignoreConflicts);
-		IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class;
-		IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class;
-		IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class;
-		IIndicesResponse MapFromAttributes(Type t, int maxRecursion = 0);
-		IIndicesResponse MapFromAttributes(Type t, string index, int maxRecursion = 0);
-		IIndicesResponse MapFromAttributes(Type t, string index, string type, int maxRecursion = 0);
-
-		IIndicesResponse MapFluent(Func<RootObjectMappingDescriptor<dynamic>, RootObjectMappingDescriptor<dynamic>> typeMappingDescriptor);
-		IIndicesResponse MapFluent<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor)
-			where T : class;
-
-		IIndicesOperationResponse DeleteTemplate(string templateName);
-		IIndicesOperationResponse PutTemplate(Func<TemplateMappingDescriptor, TemplateMappingDescriptor> templateMappingSelector);
-		IIndicesOperationResponse PutTemplateRaw(string templateName, string template);
-		ITemplateResponse GetTemplate(string templateName);
-
-		IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
-		IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
-		IIndicesOperationResponse DeleteWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
 
 		INodeInfoResponse NodeInfo(NodesInfo nodesInfo);
 		INodeInfoResponse NodeInfo(IEnumerable<string> nodes, NodesInfo nodesInfo);
@@ -250,22 +189,19 @@ namespace Nest
 		INodeStatsResponse NodeStats(NodeInfoStats nodeInfoStats);
 		INodeStatsResponse NodeStats(IEnumerable<string> nodes, NodeInfoStats nodeInfoStats);
 
-		IPercolateResponse Percolate<T>(
-		Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class;
-		IIndicesShardResponse Refresh();
-		IIndicesShardResponse Refresh(IEnumerable<string> indices);
-		IIndicesShardResponse Refresh(string index);
-		IIndicesShardResponse Refresh<T>() where T : class;
 
 		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) where T : class;
 
-		IRegisterPercolateResponse RegisterPercolator<T>(
-			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class;
-		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(
-			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class;
-		IUnregisterPercolateResponse UnregisterPercolator(string index, string name);
-		IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class;
 		
+
+		//alias
+		IIndicesOperationResponse Alias(AliasParams aliasParams);
+		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
+		IIndicesOperationResponse Alias(IEnumerable<string> aliases);
+		IIndicesOperationResponse Alias(IEnumerable<string> indices, string alias);
+		IIndicesOperationResponse Alias(string alias);
+		IIndicesOperationResponse Alias(string index, IEnumerable<string> aliases);
+		IIndicesOperationResponse Alias(string index, string alias);
 		IIndicesOperationResponse RemoveAlias(AliasParams aliasParams);
 		IIndicesOperationResponse RemoveAlias(IEnumerable<string> aliases);
 		IIndicesOperationResponse RemoveAlias(string alias);
@@ -273,18 +209,14 @@ namespace Nest
 		IIndicesOperationResponse RemoveAlias(string index, string alias);
 		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
 		
+		IEnumerable<string> GetIndicesPointingToAlias(string alias);
+		IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices);
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
-
-
-
+		//end alias
+		
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
 		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
 
-		ISegmentsResponse Segments();
-		ISegmentsResponse Segments(IEnumerable<string> indices);
-		ISegmentsResponse Segments(string index);
-		
-		IClusterStateResponse ClusterState(ClusterStateInfo stateInfo, IEnumerable<string> indices = null);
 		
 		IGlobalStatsResponse Stats();
 		IGlobalStatsResponse Stats(StatsParams parameters);
@@ -293,9 +225,9 @@ namespace Nest
 		IStatsResponse Stats(IEnumerable<string> indices, StatsParams parameters);
 		IStatsResponse Stats(string index);
 		
-		IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices);
 
-
+		IRootInfoResponse RootNodeInfo();
+		Task<IRootInfoResponse> RootNodeInfoAsync();
 
 		//converted
 
@@ -313,21 +245,57 @@ namespace Nest
 		Task<IUpdateResponse> UpdateAsync<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector) 
 			where T : class
 			where K : class;
-		
 		ISettingsOperationResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
 		Task<ISettingsOperationResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
-
 		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) where T : class;
 		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) where T : class;
-
-		IRootInfoResponse RootNodeInfo();
-		Task<IRootInfoResponse> RootNodeInfoAsync();
-
 		IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
 		Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
 		IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 		IIndicesShardResponse Snapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector);
 		Task<IIndicesShardResponse> SnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapShotSelector);
+		IIndicesShardResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector);
+		Task<IIndicesShardResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector);
+		ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector);
+		Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector);
+		IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector);
+		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector);
+		IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
+		Task<IIndicesOperationResponse> PutWarmerAsync(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
+		IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
+		Task<IWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector);
+		IIndicesOperationResponse DeleteWarmer(Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector);
+		Task<IIndicesOperationResponse> DeleteWarmerAsync(Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector);
+		ITemplateResponse GetTemplate(Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector);
+		Task<ITemplateResponse> GetTemplateAsync(Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector);
+		IIndicesOperationResponse PutTemplate(Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
+		Task<IIndicesOperationResponse> PutTemplateAsync(Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
+		IIndicesOperationResponse DeleteTemplate(Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector);
+		Task<IIndicesOperationResponse> DeleteTemplateAync(Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector);
+		IUnregisterPercolateResponse UnregisterPercolator(Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector);
+		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector);
+		IRegisterPercolateResponse RegisterPercolator<T>(
+			Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) where T : class;
+		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(
+			Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) where T : class;
+		IPercolateResponse Percolate<T>(
+			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class;
+		Task<IPercolateResponse> PercolateAsync<T>(
+			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class;
+		IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector) where T : class;
+		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector) where T : class;
+		IGetMappingResponse GetMapping(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
+		Task<IGetMappingResponse> GetMappingAsync(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
+		IIndicesResponse DeleteMapping(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector);
+		Task<IIndicesResponse> DeleteMappingAsync(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector);
+		IIndicesOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector);
+		Task<IIndicesOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector);
+		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
+		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
+		IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
+		Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
+		IIndicesResponse ClearCache(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector);
+		Task<IIndicesResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector);
 	}
 }

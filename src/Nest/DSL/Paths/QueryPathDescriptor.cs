@@ -35,8 +35,8 @@ namespace Nest
 		
 	}
 
-	public class QueryPathDescriptorBase<TQueryPathDescriptor, T, K>
-		where TQueryPathDescriptor : QueryPathDescriptorBase<TQueryPathDescriptor, T, K>, new() where T : class
+	public class QueryPathDescriptorBase<P, T, K>
+		where P : QueryPathDescriptorBase<P, T, K>, new() where T : class
 		where K : FluentQueryString<K>, new()
 	{
 		internal virtual bool AllowInfer { get { return true; } }
@@ -45,53 +45,53 @@ namespace Nest
 		internal IEnumerable<TypeNameMarker> _Types { get; set; }
 		internal bool _AllIndices { get; set; }
 		internal bool _AllTypes { get; set; }
-		public TQueryPathDescriptor Indices(IEnumerable<string> indices)
+		public P Indices(IEnumerable<string> indices)
 		{
 			this._Indices = indices;
-			return (TQueryPathDescriptor)this;
+			return (P)this;
 		}
-		public TQueryPathDescriptor Index(string index)
+		public P Index(string index)
 		{
 			this._Indices = new[] { index };
-			return (TQueryPathDescriptor)this;
+			return (P)this;
 		}
-		public TQueryPathDescriptor Types(IEnumerable<string> types)
+		public P Types(IEnumerable<string> types)
 		{
 			this._Types = types.Select(s => (TypeNameMarker)s); ;
-			return (TQueryPathDescriptor)this;
+			return (P)this;
 		}
-		public TQueryPathDescriptor Types(params string[] types)
+		public P Types(params string[] types)
 		{
-			return (TQueryPathDescriptor)this.Types((IEnumerable<string>) types);
+			return (P)this.Types((IEnumerable<string>) types);
 		}
-		public TQueryPathDescriptor Types(IEnumerable<Type> types)
+		public P Types(IEnumerable<Type> types)
 		{
 			this._Types = types.Cast<TypeNameMarker>();
-			return (TQueryPathDescriptor)this;
+			return (P)this;
 		}
-		public TQueryPathDescriptor Types(params Type[] types)
+		public P Types(params Type[] types)
 		{
-			return (TQueryPathDescriptor)this.Types((IEnumerable<Type>)types);
+			return (P)this.Types((IEnumerable<Type>)types);
 		}
-		public TQueryPathDescriptor Type(string type)
-		{
-			this._Types = new[] { (TypeNameMarker)type };
-			return (TQueryPathDescriptor)this;
-		}
-		public TQueryPathDescriptor Type(Type type)
+		public P Type(string type)
 		{
 			this._Types = new[] { (TypeNameMarker)type };
-			return (TQueryPathDescriptor)this;
+			return (P)this;
 		}
-		public TQueryPathDescriptor AllIndices()
+		public P Type(Type type)
+		{
+			this._Types = new[] { (TypeNameMarker)type };
+			return (P)this;
+		}
+		public P AllIndices()
 		{
 			this._AllIndices = true;
-			return (TQueryPathDescriptor)this;
+			return (P)this;
 		}
-		public TQueryPathDescriptor AllTypes()
+		public P AllTypes()
 		{
 			this._AllTypes = true;
-			return (TQueryPathDescriptor)this;
+			return (P)this;
 		}
 	
 		public virtual IDictionary<string, string> GetUrlParams()

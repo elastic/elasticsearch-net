@@ -12,7 +12,7 @@ namespace Nest
 
 		internal Func<CreateIndexDescriptor, CreateIndexDescriptor> _CreateIndexSelector { get; set; }
 
-		internal RootObjectMappingDescriptor<T> _RootObjectMappingDescriptor { get; set; } 
+		internal PutMappingDescriptor<T> _RootObjectMappingDescriptor { get; set; } 
 
 		/// <summary>
 		/// The index into which we're indexing

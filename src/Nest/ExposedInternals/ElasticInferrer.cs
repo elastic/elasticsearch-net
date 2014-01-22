@@ -57,5 +57,9 @@ namespace Nest
 		{
 			return TypeNameMarker.Create(t).Resolve(this._connectionSettings);
 		}
+		public string TypeName(TypeNameMarker type)
+		{
+			return type.Resolve(this._connectionSettings);
+		}
 	}
 }

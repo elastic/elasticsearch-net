@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
 
@@ -8,140 +9,38 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
-		/// if they are not marked with any attributes.</para>
-		/// <para>
-		/// Type name is the inferred type name for T under the default index
-		/// </para>
-		/// </summary>
-		public IIndicesResponse MapFromAttributes<T>(int maxRecursion = 0) where T : class
-		{
-			string type = this.Infer.TypeName<T>();
-			return this.MapFromAttributes<T>(this.Infer.IndexName<T>(), type, maxRecursion);
-		}
-		/// <summary>
-		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
-		/// if they are not marked with any attributes.</para>
-		/// <para>
-		/// Type name is the inferred type name for T under the specified index
-		/// </para>
-		/// </summary>
-		public IIndicesResponse MapFromAttributes<T>(string index, int maxRecursion = 0) where T : class
-		{
-			string type = this.Infer.TypeName<T>();
-			return this.MapFromAttributes<T>(index, type, maxRecursion);
-		}
-		/// <summary>
-		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
-		/// if they are not marked with any attributes.</para>
-		/// <para>
-		/// Type name is the specified type name under the specified index
-		/// </para>
-		/// </summary>
-		public IIndicesResponse MapFromAttributes<T>(string index, string type, int maxRecursion = 0) where T : class
-		{
-			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
-			var typeMapping = this.CreateMapFor<T>(type, maxRecursion);
-			typeMapping.TypeNameMarker = type;
-			return this.Map(typeMapping, index, type, ignoreConflicts: false);
-		}
 
-		/// <summary>
-		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
-		/// if they are not marked with any attributes.</para>
-		/// <para>
-		/// Type name is the inferred type name for T under the default index
-		/// </para>
-		/// </summary>
-		public IIndicesResponse MapFromAttributes(Type t, int maxRecursion = 0)
+		public IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector) where T : class
 		{
-			string type = this.Infer.TypeName(t);
-			return this.MapFromAttributes(t, this.Infer.IndexName(t), type, maxRecursion);
-		}
-		/// <summary>
-		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
-		/// if they are not marked with any attributes.</para>
-		/// <para>
-		/// Type name is the inferred type name for T under the specified index
-		/// </para>
-		/// </summary>
-		public IIndicesResponse MapFromAttributes(Type t, string index, int maxRecursion = 0)
+			mappingSelector.ThrowIfNull("mappingSelector");
+			var descriptor = mappingSelector(new PutMappingDescriptor<T>(this._connectionSettings));
+			return this.Dispatch<PutMappingDescriptor<T>, PutMappingQueryString, IndicesResponse>(
+				descriptor,
+				(p, d) =>
+				{
+					var o = new Dictionary<string, RootObjectMapping>
+					{
+						{p.Type, d._Mapping}
+					};
+					return this.RawDispatch.IndicesPutMappingDispatch(p, o);
+				}
+			);
+		}	
+		public Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector) where T : class
 		{
-			string type = this.Infer.TypeName(t);
-			return this.MapFromAttributes(t, index, type, maxRecursion);
-		}
-		/// <summary>
-		/// <para>Automatically map an object based on its attributes, this will also explicitly map strings to strings, datetimes to dates etc even 
-		/// if they are not marked with any attributes.</para>
-		/// <para>
-		/// Type name is the specified type name under the specified index
-		/// </para>
-		/// </summary>
-		public IIndicesResponse MapFromAttributes(Type t, string index, string type, int maxRecursion = 0)
-		{
-			string path = this.PathResolver.CreateIndexTypePath(index, type, "_mapping");
-			var typeMapping = this.CreateMapFor(t, type, maxRecursion);
-			typeMapping.TypeNameMarker = type;
-			return this.Map(typeMapping, index, type, ignoreConflicts: false);
-		}
-
-		public IIndicesResponse MapFluent(Func<RootObjectMappingDescriptor<dynamic>, RootObjectMappingDescriptor<dynamic>> typeMappingDescriptor)
-		{
-			return this.MapFluent<dynamic>(typeMappingDescriptor);
-		}
-
-		public IIndicesResponse MapFluent<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
-		{
-			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this._connectionSettings));
-			var typeMapping = d._Mapping;
-			var indexName = d._IndexName;
-			if (indexName.IsNullOrEmpty())
-				indexName = this.Infer.IndexName<T>();
-
-			return this.Map(typeMapping, indexName, this.ResolveTypeName(d._TypeName), d._IgnoreConflicts);
-
-		}
-
-		/// <summary>
-		/// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping. Index is the inferred default index
-		/// </summary>
-		public IIndicesResponse Map(RootObjectMapping typeMapping)
-		{
-			return this.Map(typeMapping, this._connectionSettings.DefaultIndex);
-		}
-		/// <summary>
-		/// Verbosely and explicitly map an object using a TypeMapping object, this gives you exact control over the mapping.
-		/// </summary>
-		public IIndicesResponse Map(RootObjectMapping typeMapping, string index, string typeName = null, bool ignoreConflicts = false)
-		{
-			if (typeName.IsNullOrEmpty())
-				typeName = this.ResolveTypeName(typeMapping.TypeNameMarker);
-
-			var mapping = new Dictionary<string, RootObjectMapping>();
-			mapping.Add(this.ResolveTypeName(typeMapping.TypeNameMarker), typeMapping);
-
-			string map = this.Serializer.Serialize(mapping, Formatting.None);
-			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_mapping");
-			if (ignoreConflicts)
-				path += "?ignore_conflicts=true";
-			ConnectionStatus status = this.Connection.PutSync(path, map);
-
-			var r = this.Deserialize<IndicesResponse>(status);
-			return r;
-        }
-       
-
-		private RootObjectMapping CreateMapFor<T>(string type, int maxRecursion = 0) where T : class
-		{
-			return this.CreateMapFor(typeof(T), type, maxRecursion);
-		}
-		private RootObjectMapping CreateMapFor(Type t, string type, int maxRecursion = 0)
-		{
-			var writer = new TypeMappingWriter(t, type, this._connectionSettings, maxRecursion);
-			var typeMapping = writer.RootObjectMappingFromAttributes();
-			return typeMapping;
+			mappingSelector.ThrowIfNull("mappingSelector");
+			var descriptor = mappingSelector(new PutMappingDescriptor<T>(this._connectionSettings));
+			return this.DispatchAsync<PutMappingDescriptor<T>, PutMappingQueryString, IndicesResponse, IIndicesResponse>(
+				descriptor,
+				(p, d) =>
+				{
+					var o = new Dictionary<string, RootObjectMapping>
+					{
+						{p.Type, d._Mapping}
+					};
+					return this.RawDispatch.IndicesPutMappingDispatchAsync(p, o);
+				}
+			);
 		}
 	}
 }

@@ -15,10 +15,10 @@ namespace Nest
 			where T : class
 			where K : class
 		{
-			var updateDescriptor = updateSelector(new UpdateDescriptor<T, K>());
-			var pathInfo = updateDescriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.UpdateDispatch(pathInfo, updateDescriptor)
-				.Deserialize<UpdateResponse>();
+			return this.Dispatch<UpdateDescriptor<T, K>, UpdateQueryString, UpdateResponse>(
+				updateSelector,
+				(p, d) => this.RawDispatch.UpdateDispatch(p, d)
+			);
 		}
 		
 		public Task<IUpdateResponse> UpdateAsync<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) where T : class
@@ -29,10 +29,10 @@ namespace Nest
 			where T : class
 			where K : class
 		{
-			var updateDescriptor = updateSelector(new UpdateDescriptor<T, K>());
-			var pathInfo = updateDescriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.UpdateDispatchAsync(pathInfo, updateDescriptor)
-				.ContinueWith(r => r.Result.Deserialize<UpdateResponse>() as IUpdateResponse);
+			return this.DispatchAsync<UpdateDescriptor<T, K>, UpdateQueryString, UpdateResponse, IUpdateResponse>(
+				updateSelector,
+				(p, d) => this.RawDispatch.UpdateDispatchAsync(p, d)
+			);
 		}
 	}
 }

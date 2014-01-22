@@ -7,40 +7,34 @@ namespace Nest
 	{
 		public IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			openIndexSelector.ThrowIfNull("openIndexSelector");
-			var descriptor = openIndexSelector(new OpenIndexDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesOpenDispatch(pathInfo)
-				.Deserialize<IndicesOperationResponse>();
+			return this.Dispatch<OpenIndexDescriptor, OpenIndexQueryString, IIndicesOperationResponse>(
+				openIndexSelector,
+				(p, d) => this.RawDispatch.IndicesOpenDispatch(p)
+			);
 		}
 
 		public Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			openIndexSelector.ThrowIfNull("openIndexSelector");
-			var descriptor = openIndexSelector(new OpenIndexDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesOpenDispatchAsync(pathInfo)
-				.ContinueWith<IIndicesOperationResponse>(t => t.Result.Deserialize<IndicesOperationResponse>());
+			return this.DispatchAsync<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				openIndexSelector,
+				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync(p)
+			);
 		}
 
 		public IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
 		{
-			closeIndexSelector.ThrowIfNull("closeIndexSelector");
-			var descriptor = closeIndexSelector(new CloseIndexDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesCloseDispatch(pathInfo)
-				.Deserialize<IndicesOperationResponse>();
+			return this.Dispatch<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse>(
+				closeIndexSelector,
+				(p, d) => this.RawDispatch.IndicesCloseDispatch(p)
+			);
 		}
 
 		public Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
 		{
-			closeIndexSelector.ThrowIfNull("closeIndexSelector");
-			var descriptor = closeIndexSelector(new CloseIndexDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesCloseDispatchAsync(pathInfo)
-				.ContinueWith<IIndicesOperationResponse>(t => t.Result.Deserialize<IndicesOperationResponse>());
+			return this.DispatchAsync<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				closeIndexSelector,
+				(p, d) => this.RawDispatch.IndicesCloseDispatchAsync(p)
+			);
 		}
-
-
 	}
 }
