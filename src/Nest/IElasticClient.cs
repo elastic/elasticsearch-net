@@ -13,15 +13,9 @@ namespace Nest
 		IRawElasticClient Raw { get; }
 		ElasticInferrer Infer { get; }
 
-
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
 		Task<IBulkResponse> BulkAsync(BulkDescriptor bulkDescriptor);
-
-		IAnalyzeResponse Analyze(AnalyzeParams analyzeParams, string text);
-		IAnalyzeResponse Analyze(string text);
-		IAnalyzeResponse Analyze<T>(System.Linq.Expressions.Expression<Func<T, object>> selector, string index, string text) where T : class;
-		IAnalyzeResponse Analyze<T>(System.Linq.Expressions.Expression<Func<T, object>> selector, string text) where T : class;
 
 		ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse Count(IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector);
@@ -33,9 +27,6 @@ namespace Nest
 
 		ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
 		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-
-		IIndicesOperationResponse CreateIndex(string index, IndexSettings settings);
-		IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
 
 		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
@@ -56,7 +47,7 @@ namespace Nest
 		IDeleteResponse Delete<T>(T @object, string index, DeleteParameters deleteParameters) where T : class;
 		IDeleteResponse Delete<T>(T @object, string index, string type) where T : class;
 		IDeleteResponse Delete<T>(T @object, string index, string type, DeleteParameters deleteParameters) where T : class;
-
+		 
 		Task<IDeleteResponse> DeleteAsync<T>(T @object) where T : class;
 		Task<IDeleteResponse> DeleteAsync<T>(T @object, DeleteParameters deleteParameters) where T : class;
 		Task<IDeleteResponse> DeleteAsync<T>(T @object, string index) where T : class;
@@ -122,17 +113,8 @@ namespace Nest
 
 		MultiGetResponse MultiGetFull(Action<MultiGetDescriptor> multiGetSelector);
 
-		IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
-			where T : class;
-
 		MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
 		MultiSearchResponse MultiSearch(MultiSearchDescriptor multiSearchSelector);
-
-
-		IHealthResponse Health(HealthLevel level);
-		IHealthResponse Health(IEnumerable<string> indices, HealthLevel level);
-		IHealthResponse Health(HealthParams healthParams);
-		IHealthResponse Health(IEnumerable<string> indices, HealthParams healthParams);
 
 		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
@@ -180,19 +162,11 @@ namespace Nest
 		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, int id, IndexParameters indexParameters) where T : class;
 		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id) where T : class;
 		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class;
-		IIndexExistsResponse IndexExists(string index);
-
-
-		INodeInfoResponse NodeInfo(NodesInfo nodesInfo);
-		INodeInfoResponse NodeInfo(IEnumerable<string> nodes, NodesInfo nodesInfo);
-
-		INodeStatsResponse NodeStats(NodeInfoStats nodeInfoStats);
-		INodeStatsResponse NodeStats(IEnumerable<string> nodes, NodeInfoStats nodeInfoStats);
+		
+		
 
 
 		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) where T : class;
-
-		
 
 		//alias
 		IIndicesOperationResponse Alias(AliasParams aliasParams);
@@ -217,20 +191,7 @@ namespace Nest
 		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
 		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
 
-		
-		IGlobalStatsResponse Stats();
-		IGlobalStatsResponse Stats(StatsParams parameters);
-
-		IStatsResponse Stats(IEnumerable<string> indices);
-		IStatsResponse Stats(IEnumerable<string> indices, StatsParams parameters);
-		IStatsResponse Stats(string index);
-		
-
-		IRootInfoResponse RootNodeInfo();
-		Task<IRootInfoResponse> RootNodeInfoAsync();
-
 		//converted
-
 
 		IQueryResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
@@ -297,5 +258,24 @@ namespace Nest
 		Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 		IIndicesResponse ClearCache(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector);
 		Task<IIndicesResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector);
+		IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		Task<IIndicesOperationResponse> CreateIndexAsync(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, InfoDescriptor> selector = null);
+		Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null);
+
+		IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector);
+		Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector);
+		INodeInfoResponse ClusterNodeInfo(Func<ClusterNodeInfoDescriptor, ClusterNodeInfoDescriptor> selector);
+		Task<INodeInfoResponse> ClusterNodeInfoAsync(Func<ClusterNodeInfoDescriptor, ClusterNodeInfoDescriptor> selector);
+		INodeStatsResponse ClusterNodeStats(Func<ClusterNodeStatsDescriptor, ClusterNodeStatsDescriptor> selector);
+		Task<INodeStatsResponse> ClusterNodeStatsAsync(Func<ClusterNodeStatsDescriptor, ClusterNodeStatsDescriptor> selector);
+		IIndexExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
+		Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
+		IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class;
+		Task<IQueryResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class;
+		IHealthResponse Health(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector);
+		Task<IHealthResponse> HealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector);
+		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
+		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 	}
 }

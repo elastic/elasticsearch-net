@@ -21,7 +21,7 @@ namespace Nest
 			)
 			where T : class
 		{
-			return client.MapFluent<T>(m => m.MapFromAttributes());
+			return client.Map<T>(m => m.MapFromAttributes());
 		}
 
 	}

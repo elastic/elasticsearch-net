@@ -70,6 +70,41 @@ namespace Nest
 			return this.DeserializeInternal<T>(value, null, extraConverters, notFoundIsValidResponse);
 		}
 
+
+		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> originalSearchDescriptor)
+			where TResult : class
+			where T : class
+		{
+			var types = (originalSearchDescriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
+				.Where(t => t.Type != null);
+			var partialFields = originalSearchDescriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
+			if (originalSearchDescriptor._ConcreteTypeSelector == null && (
+				types.Any(t => t.Type != typeof(TResult)))
+				|| partialFields.Any())
+			{
+				var typeDictionary = types
+					.ToDictionary(t => t.Resolve(this._settings), t => t.Type);
+
+				originalSearchDescriptor._ConcreteTypeSelector = (o, h) =>
+				{
+					Type t;
+					if (!typeDictionary.TryGetValue(h.Type, out t))
+						return typeof(TResult);
+					return t;
+				};
+			}
+
+			if (originalSearchDescriptor._ConcreteTypeSelector == null)
+				return this.Deserialize<QueryResponse<TResult>>(status);
+
+			return this.DeserializeInternal<QueryResponse<TResult>>(
+				status,
+				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector, partialFields)
+			);
+		}
+
+
+
 		internal T DeserializeInternal<T>(
 			object value, 
 			JsonConverter piggyBackJsonConverter,

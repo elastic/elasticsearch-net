@@ -179,12 +179,7 @@ namespace Nest
 					//GET /_cluster/nodes/{node_id}/hotthreads
 					if (!pathInfo.NodeId.IsNullOrEmpty())
 						return this.Raw.ClusterNodeHotThreadsGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/hotthreads
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeHotThreadsGet(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/hotthreads
-					return this.Raw.ClusterNodeHotThreadsGet(u => pathInfo.QueryString);
-					//GET /_nodes/hotthreads
 					return this.Raw.ClusterNodeHotThreadsGet(u => pathInfo.QueryString);
 
 			}
@@ -200,12 +195,7 @@ namespace Nest
 					//GET /_cluster/nodes/{node_id}/hotthreads
 					if (!pathInfo.NodeId.IsNullOrEmpty())
 						return this.Raw.ClusterNodeHotThreadsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/hotthreads
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeHotThreadsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/hotthreads
-					return this.Raw.ClusterNodeHotThreadsGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/hotthreads
 					return this.Raw.ClusterNodeHotThreadsGetAsync(u => pathInfo.QueryString);
 
 			}
@@ -221,57 +211,7 @@ namespace Nest
 					//GET /_cluster/nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
 						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/settings
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/os
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/process
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/jvm
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/thread_pool
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/network
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/transport
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/http
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/plugin
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/nodes
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/settings
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/os
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/process
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/jvm
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/thread_pool
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/network
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/transport
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/http
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-					//GET /_nodes/plugin
 					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
 
 			}
@@ -287,57 +227,7 @@ namespace Nest
 					//GET /_cluster/nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
 						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/settings
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/os
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/process
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/jvm
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/thread_pool
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/network
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/transport
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/http
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/plugin
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/nodes
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/settings
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/os
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/process
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/jvm
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/thread_pool
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/network
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/transport
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/http
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/plugin
 					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
 
 			}
@@ -355,8 +245,6 @@ namespace Nest
 						return this.Raw.ClusterNodeShutdownPost(pathInfo.NodeId,u => pathInfo.QueryString);
 					//POST /_shutdown
 					return this.Raw.ClusterNodeShutdownPost(u => pathInfo.QueryString);
-					//POST /_cluster/nodes/_shutdown
-					return this.Raw.ClusterNodeShutdownPost(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
@@ -373,8 +261,6 @@ namespace Nest
 						return this.Raw.ClusterNodeShutdownPostAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//POST /_shutdown
 					return this.Raw.ClusterNodeShutdownPostAsync(u => pathInfo.QueryString);
-					//POST /_cluster/nodes/_shutdown
-					return this.Raw.ClusterNodeShutdownPostAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
@@ -386,31 +272,14 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /_nodes/{node_id}/stats/indices/{metric}/{fields}
-					if (!pathInfo.NodeId.IsNullOrEmpty() && pathInfo.Metric != null && !pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGet(pathInfo.NodeId,pathInfo.Metric,pathInfo.Fields,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/stats/{metric_family}
-					if (!pathInfo.NodeId.IsNullOrEmpty() && pathInfo.MetricFamily != null)
-						return this.Raw.ClusterNodeStatsGet(pathInfo.NodeId,pathInfo.MetricFamily,u => pathInfo.QueryString);
-					//GET /_nodes/stats/indices/{metric}/{fields}
-					if (pathInfo.Metric != null && !pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGet(pathInfo.Metric,pathInfo.Fields,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/{node_id}/stats
 					if (!pathInfo.NodeId.IsNullOrEmpty())
 						return this.Raw.ClusterNodeStatsGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/stats
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/stats/{metric_family}
-					if (pathInfo.MetricFamily != null)
-						return this.Raw.ClusterNodeStatsGet(pathInfo.MetricFamily,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/stats
-					return this.Raw.ClusterNodeStatsGet(u => pathInfo.QueryString);
-					//GET /_nodes/stats
 					return this.Raw.ClusterNodeStatsGet(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeStats() into any of the following paths: \r\n - /_cluster/nodes/stats\r\n - /_cluster/nodes/{node_id}/stats\r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric_family}\r\n - /_nodes/{node_id}/stats/{metric_family}\r\n - /_nodes/stats/indices/{metric}/{fields}\r\n - /_nodes/{node_id}/stats/indices/{metric}/{fields}");
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeStats() into any of the following paths: \r\n - /_cluster/nodes/stats\r\n - /_cluster/nodes/{node_id}/stats\r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats");
 		}
 		
 		
@@ -419,31 +288,14 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /_nodes/{node_id}/stats/indices/{metric}/{fields}
-					if (!pathInfo.NodeId.IsNullOrEmpty() && pathInfo.Metric != null && !pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGetAsync(pathInfo.NodeId,pathInfo.Metric,pathInfo.Fields,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/stats/{metric_family}
-					if (!pathInfo.NodeId.IsNullOrEmpty() && pathInfo.MetricFamily != null)
-						return this.Raw.ClusterNodeStatsGetAsync(pathInfo.NodeId,pathInfo.MetricFamily,u => pathInfo.QueryString);
-					//GET /_nodes/stats/indices/{metric}/{fields}
-					if (pathInfo.Metric != null && !pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGetAsync(pathInfo.Metric,pathInfo.Fields,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/{node_id}/stats
 					if (!pathInfo.NodeId.IsNullOrEmpty())
 						return this.Raw.ClusterNodeStatsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/{node_id}/stats
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_nodes/stats/{metric_family}
-					if (pathInfo.MetricFamily != null)
-						return this.Raw.ClusterNodeStatsGetAsync(pathInfo.MetricFamily,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/stats
-					return this.Raw.ClusterNodeStatsGetAsync(u => pathInfo.QueryString);
-					//GET /_nodes/stats
 					return this.Raw.ClusterNodeStatsGetAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeStats() into any of the following paths: \r\n - /_cluster/nodes/stats\r\n - /_cluster/nodes/{node_id}/stats\r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric_family}\r\n - /_nodes/{node_id}/stats/{metric_family}\r\n - /_nodes/stats/indices/{metric}/{fields}\r\n - /_nodes/{node_id}/stats/indices/{metric}/{fields}");
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeStats() into any of the following paths: \r\n - /_cluster/nodes/stats\r\n - /_cluster/nodes/{node_id}/stats\r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats");
 		}
 		
 		
@@ -795,9 +647,6 @@ namespace Nest
 					//GET /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
 						return this.Raw.Get(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
-					//GET /{index}/{type}/{id}/_source
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.Get(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -811,9 +660,6 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.GetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
-					//GET /{index}/{type}/{id}/_source
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
 						return this.Raw.GetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
 					break;
@@ -907,7 +753,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesAnalyzeDispatch(ElasticSearchPathInfo<IndicesAnalyzeQueryString> pathInfo , object body)
+		internal ConnectionStatus IndicesAnalyzeDispatch(ElasticSearchPathInfo<AnalyzeQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -932,7 +778,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesAnalyzeDispatchAsync(ElasticSearchPathInfo<IndicesAnalyzeQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> IndicesAnalyzeDispatchAsync(ElasticSearchPathInfo<AnalyzeQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1033,7 +879,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesCreateDispatch(ElasticSearchPathInfo<IndicesCreateQueryString> pathInfo , object body)
+		internal ConnectionStatus IndicesCreateDispatch(ElasticSearchPathInfo<CreateIndexQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1054,7 +900,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesCreateDispatchAsync(ElasticSearchPathInfo<IndicesCreateQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> IndicesCreateDispatchAsync(ElasticSearchPathInfo<CreateIndexQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1145,9 +991,6 @@ namespace Nest
 					//DELETE /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
 						return this.Raw.IndicesDeleteMapping(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
-					//DELETE /{index}/{type}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteMapping(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1161,9 +1004,6 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/{type}/_mapping
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteMappingAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
-					//DELETE /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
 						return this.Raw.IndicesDeleteMappingAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					break;
@@ -1245,7 +1085,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesExistsDispatch(ElasticSearchPathInfo<IndicesExistsQueryString> pathInfo )
+		internal ConnectionStatus IndicesExistsDispatch(ElasticSearchPathInfo<IndexExistsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1260,7 +1100,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesExistsDispatchAsync(ElasticSearchPathInfo<IndicesExistsQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesExistsDispatchAsync(ElasticSearchPathInfo<IndexExistsQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2036,40 +1876,14 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /{index}/_stats/{metric_family}
-					if (!pathInfo.Index.IsNullOrEmpty() && pathInfo.MetricFamily != null)
-						return this.Raw.IndexStatsGet(pathInfo.Index,pathInfo.MetricFamily,u => pathInfo.QueryString);
-					//GET /{index}/_stats/search/{search_groups}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.SearchGroups.IsNullOrEmpty())
-						return this.Raw.IndexSearchStatsGet(pathInfo.Index,pathInfo.SearchGroups,u => pathInfo.QueryString);
-					//GET /{index}/_stats/fielddata/{fields}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.IndexFieldDataStatsGet(pathInfo.Index,pathInfo.Fields,u => pathInfo.QueryString);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndexStatsGet(pathInfo.Index,u => pathInfo.QueryString);
-					//GET _stats/{metric_family}
-					if (pathInfo.MetricFamily != null)
-						return this.Raw.IndicesStatsGet(pathInfo.MetricFamily,u => pathInfo.QueryString);
-					//GET /{index}/_stats/indexing
-					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndexStatsGet(pathInfo.Index,u => pathInfo.QueryString);
-					//GET /_stats/indexing/{indexing_types}
-					if (!pathInfo.IndexingTypes.IsNullOrEmpty())
-						return this.Raw.IndicesIndexingStatsGet(pathInfo.IndexingTypes,u => pathInfo.QueryString);
-					//GET /_stats/search/{search_groups}
-					if (!pathInfo.SearchGroups.IsNullOrEmpty())
-						return this.Raw.IndicesSearchStatsGet(pathInfo.SearchGroups,u => pathInfo.QueryString);
-					//GET /_stats/fielddata/{fields}
-					if (!pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.IndicesFieldDataStatsGet(pathInfo.Fields,u => pathInfo.QueryString);
 					//GET /_stats
-					return this.Raw.IndicesStatsGet(u => pathInfo.QueryString);
-					//GET /_stats/indexing
 					return this.Raw.IndicesStatsGet(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /{index}/_stats\r\n - _stats/{metric_family}\r\n - /{index}/_stats/{metric_family}\r\n - /_stats/indexing\r\n - /{index}/_stats/indexing\r\n - /_stats/indexing/{indexing_types}\r\n - /_stats/search/{search_groups}\r\n - /{index}/_stats/search/{search_groups}\r\n - /_stats/fielddata/{fields}\r\n - /{index}/_stats/fielddata/{fields}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /{index}/_stats\r\n - /_stats/indexing\r\n - /{index}/_stats/indexing");
 		}
 		
 		
@@ -2078,40 +1892,14 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /{index}/_stats/{metric_family}
-					if (!pathInfo.Index.IsNullOrEmpty() && pathInfo.MetricFamily != null)
-						return this.Raw.IndexStatsGetAsync(pathInfo.Index,pathInfo.MetricFamily,u => pathInfo.QueryString);
-					//GET /{index}/_stats/search/{search_groups}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.SearchGroups.IsNullOrEmpty())
-						return this.Raw.IndexSearchStatsGetAsync(pathInfo.Index,pathInfo.SearchGroups,u => pathInfo.QueryString);
-					//GET /{index}/_stats/fielddata/{fields}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.IndexFieldDataStatsGetAsync(pathInfo.Index,pathInfo.Fields,u => pathInfo.QueryString);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndexStatsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
-					//GET _stats/{metric_family}
-					if (pathInfo.MetricFamily != null)
-						return this.Raw.IndicesStatsGetAsync(pathInfo.MetricFamily,u => pathInfo.QueryString);
-					//GET /{index}/_stats/indexing
-					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndexStatsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
-					//GET /_stats/indexing/{indexing_types}
-					if (!pathInfo.IndexingTypes.IsNullOrEmpty())
-						return this.Raw.IndicesIndexingStatsGetAsync(pathInfo.IndexingTypes,u => pathInfo.QueryString);
-					//GET /_stats/search/{search_groups}
-					if (!pathInfo.SearchGroups.IsNullOrEmpty())
-						return this.Raw.IndicesSearchStatsGetAsync(pathInfo.SearchGroups,u => pathInfo.QueryString);
-					//GET /_stats/fielddata/{fields}
-					if (!pathInfo.Fields.IsNullOrEmpty())
-						return this.Raw.IndicesFieldDataStatsGetAsync(pathInfo.Fields,u => pathInfo.QueryString);
 					//GET /_stats
-					return this.Raw.IndicesStatsGetAsync(u => pathInfo.QueryString);
-					//GET /_stats/indexing
 					return this.Raw.IndicesStatsGetAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /{index}/_stats\r\n - _stats/{metric_family}\r\n - /{index}/_stats/{metric_family}\r\n - /_stats/indexing\r\n - /{index}/_stats/indexing\r\n - /_stats/indexing/{indexing_types}\r\n - /_stats/search/{search_groups}\r\n - /{index}/_stats/search/{search_groups}\r\n - /_stats/fielddata/{fields}\r\n - /{index}/_stats/fielddata/{fields}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /{index}/_stats\r\n - /_stats/indexing\r\n - /{index}/_stats/indexing");
 		}
 		
 		
@@ -2335,7 +2123,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus MltDispatch(ElasticSearchPathInfo<MltQueryString> pathInfo , object body)
+		internal ConnectionStatus MltDispatch(ElasticSearchPathInfo<MoreLikeThisQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2356,7 +2144,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> MltDispatchAsync(ElasticSearchPathInfo<MltQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> MltDispatchAsync(ElasticSearchPathInfo<MoreLikeThisQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

@@ -1363,13 +1363,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/
 	///</pre>
 	///</summary>
-	public partial class IndicesAnalyzeDescriptor
+	public partial class AnalyzeDescriptor
 	{
-		internal IndicesAnalyzeQueryString _QueryString = new IndicesAnalyzeQueryString(); 
+		internal AnalyzeQueryString _QueryString = new AnalyzeQueryString(); 
 
 
 		///<summary>The name of the analyzer to use</summary>
-		public IndicesAnalyzeDescriptor Analyzer(string analyzer)
+		public AnalyzeDescriptor Analyzer(string analyzer)
 		{
 			this._QueryString.Analyzer(analyzer);
 			return this;
@@ -1377,7 +1377,7 @@ namespace Nest
 		
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public IndicesAnalyzeDescriptor Field(string field)
+		public AnalyzeDescriptor Field(string field)
 		{
 			this._QueryString.Field(field);
 			return this;
@@ -1385,7 +1385,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public IndicesAnalyzeDescriptor Filters(params string[] filters)
+		public AnalyzeDescriptor Filters(params string[] filters)
 		{
 			this._QueryString.Filters(filters);
 			return this;
@@ -1393,7 +1393,7 @@ namespace Nest
 		
 
 		///<summary>The name of the index to scope the operation</summary>
-		public IndicesAnalyzeDescriptor IndexQueryString(string index)
+		public AnalyzeDescriptor IndexQueryString(string index)
 		{
 			this._QueryString.Index(index);
 			return this;
@@ -1401,7 +1401,7 @@ namespace Nest
 		
 
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public IndicesAnalyzeDescriptor PreferLocal(bool prefer_local = true)
+		public AnalyzeDescriptor PreferLocal(bool prefer_local = true)
 		{
 			this._QueryString.PreferLocal(prefer_local);
 			return this;
@@ -1409,7 +1409,7 @@ namespace Nest
 		
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public IndicesAnalyzeDescriptor Text(string text)
+		public AnalyzeDescriptor Text(string text)
 		{
 			this._QueryString.Text(text);
 			return this;
@@ -1417,7 +1417,7 @@ namespace Nest
 		
 
 		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public IndicesAnalyzeDescriptor Tokenizer(string tokenizer)
+		public AnalyzeDescriptor Tokenizer(string tokenizer)
 		{
 			this._QueryString.Tokenizer(tokenizer);
 			return this;
@@ -1425,7 +1425,7 @@ namespace Nest
 		
 
 		///<summary>Format of the output</summary>
-		public IndicesAnalyzeDescriptor Format(FormatOptions format)
+		public AnalyzeDescriptor Format(FormatOptions format)
 		{
 			this._QueryString.Format(format);
 			return this;
@@ -1570,13 +1570,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/
 	///</pre>
 	///</summary>
-	public partial class IndicesCreateDescriptor
+	public partial class CreateIndexDescriptor
 	{
-		internal IndicesCreateQueryString _QueryString = new IndicesCreateQueryString(); 
+		internal CreateIndexQueryString _QueryString = new CreateIndexQueryString(); 
 
 
 		///<summary>Explicit operation timeout</summary>
-		public IndicesCreateDescriptor Timeout(string timeout)
+		public CreateIndexDescriptor Timeout(string timeout)
 		{
 			this._QueryString.Timeout(timeout);
 			return this;
@@ -1584,7 +1584,7 @@ namespace Nest
 		
 
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesCreateDescriptor MasterTimeout(string master_timeout)
+		public CreateIndexDescriptor MasterTimeout(string master_timeout)
 		{
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
@@ -1728,9 +1728,9 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/
 	///</pre>
 	///</summary>
-	public partial class IndicesExistsDescriptor
+	public partial class IndexExistsDescriptor
 	{
-		internal IndicesExistsQueryString _QueryString = new IndicesExistsQueryString(); 
+		internal IndexExistsQueryString _QueryString = new IndexExistsQueryString(); 
 
 		
 	}
@@ -2639,13 +2639,13 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/more-like-this/
 	///</pre>
 	///</summary>
-	public partial class MltDescriptor
+	public partial class MoreLikeThisDescriptor<T>
 	{
-		internal MltQueryString _QueryString = new MltQueryString(); 
+		internal MoreLikeThisQueryString _QueryString = new MoreLikeThisQueryString(); 
 
 
 		///<summary>The boost factor</summary>
-		public MltDescriptor BoostTerms(int boost_terms)
+		public MoreLikeThisDescriptor<T> BoostTerms(int boost_terms)
 		{
 			this._QueryString.BoostTerms(boost_terms);
 			return this;
@@ -2653,7 +2653,7 @@ namespace Nest
 		
 
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public MltDescriptor MaxDocFreq(int max_doc_freq)
+		public MoreLikeThisDescriptor<T> MaxDocFreq(int max_doc_freq)
 		{
 			this._QueryString.MaxDocFreq(max_doc_freq);
 			return this;
@@ -2661,7 +2661,7 @@ namespace Nest
 		
 
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public MltDescriptor MaxQueryTerms(int max_query_terms)
+		public MoreLikeThisDescriptor<T> MaxQueryTerms(int max_query_terms)
 		{
 			this._QueryString.MaxQueryTerms(max_query_terms);
 			return this;
@@ -2669,7 +2669,7 @@ namespace Nest
 		
 
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MltDescriptor MaxWordLen(int max_word_len)
+		public MoreLikeThisDescriptor<T> MaxWordLen(int max_word_len)
 		{
 			this._QueryString.MaxWordLen(max_word_len);
 			return this;
@@ -2677,7 +2677,7 @@ namespace Nest
 		
 
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public MltDescriptor MinDocFreq(int min_doc_freq)
+		public MoreLikeThisDescriptor<T> MinDocFreq(int min_doc_freq)
 		{
 			this._QueryString.MinDocFreq(min_doc_freq);
 			return this;
@@ -2685,7 +2685,7 @@ namespace Nest
 		
 
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public MltDescriptor MinTermFreq(int min_term_freq)
+		public MoreLikeThisDescriptor<T> MinTermFreq(int min_term_freq)
 		{
 			this._QueryString.MinTermFreq(min_term_freq);
 			return this;
@@ -2693,7 +2693,7 @@ namespace Nest
 		
 
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MltDescriptor MinWordLen(int min_word_len)
+		public MoreLikeThisDescriptor<T> MinWordLen(int min_word_len)
 		{
 			this._QueryString.MinWordLen(min_word_len);
 			return this;
@@ -2701,7 +2701,7 @@ namespace Nest
 		
 
 		///<summary>Specific fields to perform the query against</summary>
-		public MltDescriptor MltFields(params string[] mlt_fields)
+		public MoreLikeThisDescriptor<T> MltFields(params string[] mlt_fields)
 		{
 			this._QueryString.MltFields(mlt_fields);
 			return this;
@@ -2709,7 +2709,7 @@ namespace Nest
 		
 
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public MltDescriptor PercentTermsToMatch(int percent_terms_to_match)
+		public MoreLikeThisDescriptor<T> PercentTermsToMatch(int percent_terms_to_match)
 		{
 			this._QueryString.PercentTermsToMatch(percent_terms_to_match);
 			return this;
@@ -2717,7 +2717,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public MltDescriptor Routing(string routing)
+		public MoreLikeThisDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -2725,7 +2725,7 @@ namespace Nest
 		
 
 		///<summary>The offset from which to return results</summary>
-		public MltDescriptor SearchFrom(int search_from)
+		public MoreLikeThisDescriptor<T> SearchFrom(int search_from)
 		{
 			this._QueryString.SearchFrom(search_from);
 			return this;
@@ -2733,7 +2733,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public MltDescriptor SearchIndices(params string[] search_indices)
+		public MoreLikeThisDescriptor<T> SearchIndices(params string[] search_indices)
 		{
 			this._QueryString.SearchIndices(search_indices);
 			return this;
@@ -2741,7 +2741,7 @@ namespace Nest
 		
 
 		///<summary>The search query hint</summary>
-		public MltDescriptor SearchQueryHint(string search_query_hint)
+		public MoreLikeThisDescriptor<T> SearchQueryHint(string search_query_hint)
 		{
 			this._QueryString.SearchQueryHint(search_query_hint);
 			return this;
@@ -2749,7 +2749,7 @@ namespace Nest
 		
 
 		///<summary>A scroll search request definition</summary>
-		public MltDescriptor SearchScroll(string search_scroll)
+		public MoreLikeThisDescriptor<T> SearchScroll(string search_scroll)
 		{
 			this._QueryString.SearchScroll(search_scroll);
 			return this;
@@ -2757,7 +2757,7 @@ namespace Nest
 		
 
 		///<summary>The number of documents to return (default: 10)</summary>
-		public MltDescriptor SearchSize(int search_size)
+		public MoreLikeThisDescriptor<T> SearchSize(int search_size)
 		{
 			this._QueryString.SearchSize(search_size);
 			return this;
@@ -2765,7 +2765,7 @@ namespace Nest
 		
 
 		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public MltDescriptor SearchSource(string search_source)
+		public MoreLikeThisDescriptor<T> SearchSource(string search_source)
 		{
 			this._QueryString.SearchSource(search_source);
 			return this;
@@ -2773,7 +2773,7 @@ namespace Nest
 		
 
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public MltDescriptor SearchType(string search_type)
+		public MoreLikeThisDescriptor<T> SearchType(string search_type)
 		{
 			this._QueryString.SearchType(search_type);
 			return this;
@@ -2781,7 +2781,7 @@ namespace Nest
 		
 
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public MltDescriptor SearchTypes(params string[] search_types)
+		public MoreLikeThisDescriptor<T> SearchTypes(params string[] search_types)
 		{
 			this._QueryString.SearchTypes(search_types);
 			return this;
@@ -2789,7 +2789,7 @@ namespace Nest
 		
 
 		///<summary>A list of stop words to be ignored</summary>
-		public MltDescriptor StopWords(params string[] stop_words)
+		public MoreLikeThisDescriptor<T> StopWords(params string[] stop_words)
 		{
 			this._QueryString.StopWords(stop_words);
 			return this;

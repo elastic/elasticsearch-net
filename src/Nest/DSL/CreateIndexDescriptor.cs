@@ -9,22 +9,16 @@ using Nest.Domain;
 
 namespace Nest
 {
-
-	public class CreateIndexDescriptor
+	[DescriptorFor("IndicesCreate")]
+	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexQueryString>
 	{
+		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
 		private readonly IConnectionSettings _connectionSettings;
 
 		public CreateIndexDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-		}
-
-		private readonly JsonSerializerSettings serializationSettings;
-
-		public CreateIndexDescriptor(JsonSerializerSettings SerializationSettings)
-		{
-			this.serializationSettings = SerializationSettings;
 		}
 
 		/// <summary>
@@ -152,6 +146,16 @@ namespace Nest
 			return this;
 		}
 
+
+		ElasticSearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(
+			IConnectionSettings settings)
+		{
+			var pathInfo = new ElasticSearchPathInfo<CreateIndexQueryString>();
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.Index = this._Index;
+			return pathInfo;
+
+		}
 
 	}
 }

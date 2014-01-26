@@ -24,6 +24,5 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync(p)
 			);
 		}
-}
 	}
 }

@@ -32,11 +32,12 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 			//index a doc so we can be sure a shard is available
 			this._client.Index<AnalyzerTest>(new AnalyzerTest() { Txt = text }, index, new IndexParameters { Refresh = true });
 
-			var settingsResult = this._client.GetMapping<AnalyzerTest>(index);
-			settingsResult.Should().NotBeNull();
-			settingsResult.Properties.Should().NotBeNull();
-			settingsResult.Properties["txt"].Should().NotBeNull();
-			settingsResult.Properties["txt"].Type.Name.Should().NotBeNullOrEmpty().And.BeEquivalentTo("string");
+			var settingsResult = this._client.GetMapping(gm=>gm.Index(index).Type<AnalyzerTest>());
+			var mapping = settingsResult.Mapping;
+			mapping.Should().NotBeNull();
+			mapping.Properties.Should().NotBeNull();
+			mapping.Properties["txt"].Should().NotBeNull();
+			mapping.Properties["txt"].Type.Name.Should().NotBeNullOrEmpty().And.BeEquivalentTo("string");
 
 			var validateResult = this._client.Analyze<AnalyzerTest>(p => p.Txt, index, text);
 			validateResult.Should().NotBeNull();
@@ -46,7 +47,7 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 			return new AnalyzerTestResult
 			{
 				AnalyzeResponse = validateResult,
-				ElasticType = settingsResult.Properties["txt"]
+				ElasticType = mapping.Properties["txt"]
 			};
 		}
 

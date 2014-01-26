@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Core.Map
 		[Test]
 		public void DefaultPath()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m=>m
+			var result = this._client.Map<ElasticSearchProject>(m=>m
 				
 			);
 			var status = result.ConnectionStatus;
@@ -30,8 +30,8 @@ namespace Nest.Tests.Unit.Core.Map
 		[Test]
 		public void AllIndices()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.IndexName("_all")
+			var result = this._client.Map<ElasticSearchProject>(m => m
+				.Indices("_all")
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
@@ -41,8 +41,8 @@ namespace Nest.Tests.Unit.Core.Map
 		[Test]
 		public void MultipleIndices()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.IndexNames("nest_test_data", "nest_test_data_clone")
+			var result = this._client.Map<ElasticSearchProject>(m => m
+				.Indices("nest_test_data", "nest_test_data_clone")
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
@@ -52,9 +52,9 @@ namespace Nest.Tests.Unit.Core.Map
 		[Test]
 		public void MultipleIndicesIgnoreConflicts()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticSearchProject>(m => m
 				.IgnoreConflicts()
-				.IndexNames("nest_test_data", "nest_test_data_clone")
+				.Indices("nest_test_data", "nest_test_data_clone")
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
@@ -64,10 +64,10 @@ namespace Nest.Tests.Unit.Core.Map
 		[Test]
 		public void MultipleIndicesIgnoreConflictsCustomTypeName()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticSearchProject>(m => m
 				.IgnoreConflicts()
-				.TypeName("es_projects")
-				.IndexNames("nest_test_data", "nest_test_data_clone")
+				.Type("es_projects")
+				.Indices("nest_test_data", "nest_test_data_clone")
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);

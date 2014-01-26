@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Core.Template
 			var result = this._client.PutWarmer(wd => wd
 				.Type<ElasticSearchProject>()
 				.Name("warmer_pathwithtype")
-				.Search(s => s));
+				.Search<ElasticSearchProject>(s => s));
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
@@ -49,8 +49,8 @@ namespace Nest.Tests.Unit.Core.Template
 		{
 			var result = this._client.PutWarmer(wd => wd
 				.AllIndices()
-				.WarmerName("warmer_pathwithallindices")
-				.Search(s => s));
+				.Name("warmer_pathwithallindices")
+				.Search<dynamic>(s => s));
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);

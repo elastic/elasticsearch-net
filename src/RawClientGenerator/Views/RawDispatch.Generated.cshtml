@@ -22,6 +22,11 @@ namespace Nest
 	{
 		var endpoint = kv.Value;
 		var peek = endpoint.GetCsharpMethods().FirstOrDefault();
+		if (peek == null)
+		{
+			<text>//NO METHOD FOR @endpoint.Url.Path</text>
+			continue;
+		}
 		var generate = new [] {
 			new { Name = endpoint.CsharpMethodName + "Dispatch", Returns = "ConnectionStatus" , Async = false},
 			new { Name = endpoint.CsharpMethodName + "DispatchAsync", Returns = "Task<ConnectionStatus>", Async = true },

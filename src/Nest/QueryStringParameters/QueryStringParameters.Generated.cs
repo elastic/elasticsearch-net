@@ -1712,12 +1712,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/
 	///</pre>
 	///</summary>
-	public class IndicesAnalyzeQueryString : FluentQueryString<IndicesAnalyzeQueryString> 
+	public class AnalyzeQueryString : FluentQueryString<AnalyzeQueryString> 
 	{
 		
 		internal string _analyzer { get; set; }
 		///<summary>The name of the analyzer to use</summary>
-		public IndicesAnalyzeQueryString Analyzer(string analyzer)
+		public AnalyzeQueryString Analyzer(string analyzer)
 		{
 			var v = this.CreateString(analyzer);
 			this._analyzer = analyzer;
@@ -1728,7 +1728,7 @@ namespace Nest
 		
 		internal string _field { get; set; }
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public IndicesAnalyzeQueryString Field(string field)
+		public AnalyzeQueryString Field(string field)
 		{
 			var v = this.CreateString(field);
 			this._field = field;
@@ -1739,7 +1739,7 @@ namespace Nest
 		
 		internal string[] _filters { get; set; }
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public IndicesAnalyzeQueryString Filters(params string[] filters)
+		public AnalyzeQueryString Filters(params string[] filters)
 		{
 			var v = this.CreateString(filters);
 			this._filters = filters;
@@ -1750,7 +1750,7 @@ namespace Nest
 		
 		internal string _index { get; set; }
 		///<summary>The name of the index to scope the operation</summary>
-		public IndicesAnalyzeQueryString Index(string index)
+		public AnalyzeQueryString Index(string index)
 		{
 			var v = this.CreateString(index);
 			this._index = index;
@@ -1761,7 +1761,7 @@ namespace Nest
 		
 		internal bool _prefer_local { get; set; }
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public IndicesAnalyzeQueryString PreferLocal(bool prefer_local)
+		public AnalyzeQueryString PreferLocal(bool prefer_local)
 		{
 			var v = this.CreateString(prefer_local);
 			this._prefer_local = prefer_local;
@@ -1772,7 +1772,7 @@ namespace Nest
 		
 		internal string _text { get; set; }
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public IndicesAnalyzeQueryString Text(string text)
+		public AnalyzeQueryString Text(string text)
 		{
 			var v = this.CreateString(text);
 			this._text = text;
@@ -1783,7 +1783,7 @@ namespace Nest
 		
 		internal string _tokenizer { get; set; }
 		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public IndicesAnalyzeQueryString Tokenizer(string tokenizer)
+		public AnalyzeQueryString Tokenizer(string tokenizer)
 		{
 			var v = this.CreateString(tokenizer);
 			this._tokenizer = tokenizer;
@@ -1794,7 +1794,7 @@ namespace Nest
 		
 		internal FormatOptions _format { get; set; }
 		///<summary>Format of the output</summary>
-		public IndicesAnalyzeQueryString Format(FormatOptions format)
+		public AnalyzeQueryString Format(FormatOptions format)
 		{
 			var v = this.CreateString(format);
 			this._format = format;
@@ -1973,12 +1973,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/
 	///</pre>
 	///</summary>
-	public class IndicesCreateQueryString : FluentQueryString<IndicesCreateQueryString> 
+	public class CreateIndexQueryString : FluentQueryString<CreateIndexQueryString> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
-		public IndicesCreateQueryString Timeout(string timeout)
+		public CreateIndexQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -1989,7 +1989,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesCreateQueryString MasterTimeout(string master_timeout)
+		public CreateIndexQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -2143,7 +2143,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/
 	///</pre>
 	///</summary>
-	public class IndicesExistsQueryString : FluentQueryString<IndicesExistsQueryString> 
+	public class IndexExistsQueryString : FluentQueryString<IndexExistsQueryString> 
 	{
 	}
 	
@@ -3183,12 +3183,12 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/more-like-this/
 	///</pre>
 	///</summary>
-	public class MltQueryString : FluentQueryString<MltQueryString> 
+	public class MoreLikeThisQueryString : FluentQueryString<MoreLikeThisQueryString> 
 	{
 		
 		internal int _boost_terms { get; set; }
 		///<summary>The boost factor</summary>
-		public MltQueryString BoostTerms(int boost_terms)
+		public MoreLikeThisQueryString BoostTerms(int boost_terms)
 		{
 			var v = this.CreateString(boost_terms);
 			this._boost_terms = boost_terms;
@@ -3199,7 +3199,7 @@ namespace Nest
 		
 		internal int _max_doc_freq { get; set; }
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public MltQueryString MaxDocFreq(int max_doc_freq)
+		public MoreLikeThisQueryString MaxDocFreq(int max_doc_freq)
 		{
 			var v = this.CreateString(max_doc_freq);
 			this._max_doc_freq = max_doc_freq;
@@ -3210,7 +3210,7 @@ namespace Nest
 		
 		internal int _max_query_terms { get; set; }
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public MltQueryString MaxQueryTerms(int max_query_terms)
+		public MoreLikeThisQueryString MaxQueryTerms(int max_query_terms)
 		{
 			var v = this.CreateString(max_query_terms);
 			this._max_query_terms = max_query_terms;
@@ -3221,7 +3221,7 @@ namespace Nest
 		
 		internal int _max_word_len { get; set; }
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MltQueryString MaxWordLen(int max_word_len)
+		public MoreLikeThisQueryString MaxWordLen(int max_word_len)
 		{
 			var v = this.CreateString(max_word_len);
 			this._max_word_len = max_word_len;
@@ -3232,7 +3232,7 @@ namespace Nest
 		
 		internal int _min_doc_freq { get; set; }
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public MltQueryString MinDocFreq(int min_doc_freq)
+		public MoreLikeThisQueryString MinDocFreq(int min_doc_freq)
 		{
 			var v = this.CreateString(min_doc_freq);
 			this._min_doc_freq = min_doc_freq;
@@ -3243,7 +3243,7 @@ namespace Nest
 		
 		internal int _min_term_freq { get; set; }
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public MltQueryString MinTermFreq(int min_term_freq)
+		public MoreLikeThisQueryString MinTermFreq(int min_term_freq)
 		{
 			var v = this.CreateString(min_term_freq);
 			this._min_term_freq = min_term_freq;
@@ -3254,7 +3254,7 @@ namespace Nest
 		
 		internal int _min_word_len { get; set; }
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MltQueryString MinWordLen(int min_word_len)
+		public MoreLikeThisQueryString MinWordLen(int min_word_len)
 		{
 			var v = this.CreateString(min_word_len);
 			this._min_word_len = min_word_len;
@@ -3265,7 +3265,7 @@ namespace Nest
 		
 		internal string[] _mlt_fields { get; set; }
 		///<summary>Specific fields to perform the query against</summary>
-		public MltQueryString MltFields(params string[] mlt_fields)
+		public MoreLikeThisQueryString MltFields(params string[] mlt_fields)
 		{
 			var v = this.CreateString(mlt_fields);
 			this._mlt_fields = mlt_fields;
@@ -3276,7 +3276,7 @@ namespace Nest
 		
 		internal int _percent_terms_to_match { get; set; }
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public MltQueryString PercentTermsToMatch(int percent_terms_to_match)
+		public MoreLikeThisQueryString PercentTermsToMatch(int percent_terms_to_match)
 		{
 			var v = this.CreateString(percent_terms_to_match);
 			this._percent_terms_to_match = percent_terms_to_match;
@@ -3287,7 +3287,7 @@ namespace Nest
 		
 		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
-		public MltQueryString Routing(string routing)
+		public MoreLikeThisQueryString Routing(string routing)
 		{
 			var v = this.CreateString(routing);
 			this._routing = routing;
@@ -3298,7 +3298,7 @@ namespace Nest
 		
 		internal int _search_from { get; set; }
 		///<summary>The offset from which to return results</summary>
-		public MltQueryString SearchFrom(int search_from)
+		public MoreLikeThisQueryString SearchFrom(int search_from)
 		{
 			var v = this.CreateString(search_from);
 			this._search_from = search_from;
@@ -3309,7 +3309,7 @@ namespace Nest
 		
 		internal string[] _search_indices { get; set; }
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public MltQueryString SearchIndices(params string[] search_indices)
+		public MoreLikeThisQueryString SearchIndices(params string[] search_indices)
 		{
 			var v = this.CreateString(search_indices);
 			this._search_indices = search_indices;
@@ -3320,7 +3320,7 @@ namespace Nest
 		
 		internal string _search_query_hint { get; set; }
 		///<summary>The search query hint</summary>
-		public MltQueryString SearchQueryHint(string search_query_hint)
+		public MoreLikeThisQueryString SearchQueryHint(string search_query_hint)
 		{
 			var v = this.CreateString(search_query_hint);
 			this._search_query_hint = search_query_hint;
@@ -3331,7 +3331,7 @@ namespace Nest
 		
 		internal string _search_scroll { get; set; }
 		///<summary>A scroll search request definition</summary>
-		public MltQueryString SearchScroll(string search_scroll)
+		public MoreLikeThisQueryString SearchScroll(string search_scroll)
 		{
 			var v = this.CreateString(search_scroll);
 			this._search_scroll = search_scroll;
@@ -3342,7 +3342,7 @@ namespace Nest
 		
 		internal int _search_size { get; set; }
 		///<summary>The number of documents to return (default: 10)</summary>
-		public MltQueryString SearchSize(int search_size)
+		public MoreLikeThisQueryString SearchSize(int search_size)
 		{
 			var v = this.CreateString(search_size);
 			this._search_size = search_size;
@@ -3353,7 +3353,7 @@ namespace Nest
 		
 		internal string _search_source { get; set; }
 		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public MltQueryString SearchSource(string search_source)
+		public MoreLikeThisQueryString SearchSource(string search_source)
 		{
 			var v = this.CreateString(search_source);
 			this._search_source = search_source;
@@ -3364,7 +3364,7 @@ namespace Nest
 		
 		internal string _search_type { get; set; }
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public MltQueryString SearchType(string search_type)
+		public MoreLikeThisQueryString SearchType(string search_type)
 		{
 			var v = this.CreateString(search_type);
 			this._search_type = search_type;
@@ -3375,7 +3375,7 @@ namespace Nest
 		
 		internal string[] _search_types { get; set; }
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public MltQueryString SearchTypes(params string[] search_types)
+		public MoreLikeThisQueryString SearchTypes(params string[] search_types)
 		{
 			var v = this.CreateString(search_types);
 			this._search_types = search_types;
@@ -3386,7 +3386,7 @@ namespace Nest
 		
 		internal string[] _stop_words { get; set; }
 		///<summary>A list of stop words to be ignored</summary>
-		public MltQueryString StopWords(params string[] stop_words)
+		public MoreLikeThisQueryString StopWords(params string[] stop_words)
 		{
 			var v = this.CreateString(stop_words);
 			this._stop_words = stop_words;

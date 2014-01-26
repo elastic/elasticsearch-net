@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace RawClientGenerator
 {
@@ -64,7 +65,7 @@ namespace RawClientGenerator
 		{
 			get
 			{
-				return this.CsharpMethods
+				return this.GetCsharpMethods()
 					.GroupBy(p => p.HttpMethod)
 					.ToDictionary(kv => kv.Key, kv => kv
 						.DistinctBy(m => m.Path)

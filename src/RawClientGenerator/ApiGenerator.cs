@@ -21,12 +21,14 @@ namespace RawClientGenerator
 		private readonly static string _nestFolder = @"..\..\..\..\src\Nest\";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _cacheFolder = @"..\..\Cache\";
-		private readonly static RazorMachine _razorMachine = new RazorMachine();
+		private static readonly RazorMachine _razorMachine;
 
-		private static readonly Assembly _assembly = typeof (ApiGenerator).Assembly;
+		private static readonly Assembly _assembly;
 
 		static ApiGenerator()
 		{
+			_razorMachine = new RazorMachine();
+			_assembly = typeof (ApiGenerator).Assembly;
 		}
 		public static string PascalCase(string s)
 		{
@@ -95,6 +97,7 @@ namespace RawClientGenerator
 			let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
 			where !c.Contains(" ") //filter results that did not match
 			select new { Value = f.Name.Replace("Descriptor.cs",""), Key = c })
+			.DistinctBy(v=>v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
 
 		private static readonly Dictionary<string, string> KnownDescriptors =
@@ -102,8 +105,9 @@ namespace RawClientGenerator
 			 where f.FullName.EndsWith("Descriptor.cs")
 			let contents = File.ReadAllText(f.FullName)
 			let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
-			select c)
-			.ToDictionary(k => Regex.Replace(k, "<.*$", ""), v => Regex.Replace(v, @"^.*?(?:(\<.+>).*?)?$", "$1"));
+			select new { Key =  Regex.Replace(c, "<.*$", ""), Value =  Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")})
+			.DistinctBy(v=>v.Key)
+			.ToDictionary(k => k.Key, v => v.Value);
 
 
 

@@ -67,32 +67,7 @@ namespace Nest
 			where T : class
 			where TResult : class
 		{
-			var types = (descriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
-				.Where(t => t.Type != null);
-			var partialFields = descriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
-			if (descriptor._ConcreteTypeSelector == null && (
-				types.Any(t => t.Type != typeof(TResult)))
-				|| partialFields.Any())
-			{
-				var typeDictionary = types
-					.ToDictionary(t => t.Resolve(this._connectionSettings), t => t.Type);
-
-				descriptor._ConcreteTypeSelector = (o, h) =>
-				{
-					Type t;
-					if (!typeDictionary.TryGetValue(h.Type, out t))
-						return typeof(TResult);
-					return t;
-				};
-			}
-
-			if (descriptor._ConcreteTypeSelector == null)
-				return this.Deserialize<QueryResponse<TResult>>(status);
-
-			return this.Serializer.DeserializeInternal<QueryResponse<TResult>>(
-				status,
-				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(descriptor._ConcreteTypeSelector, partialFields)
-			);
+			
 		}
 	}
 }

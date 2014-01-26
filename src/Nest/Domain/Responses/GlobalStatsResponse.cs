@@ -7,7 +7,7 @@ namespace Nest
     {
         bool OK { get; }
         ShardsMetaData Shards { get; }
-        GlobalStats Stats { get; set; }
+        Stats Stats { get; set; }
 		Dictionary<string, Stats> Indices { get; set; }
     }
 
@@ -26,7 +26,7 @@ namespace Nest
 		public ShardsMetaData Shards { get; internal set; }
 
 		[JsonProperty(PropertyName = "_all")]
-		public GlobalStats Stats { get; set; }
+		public Stats Stats { get; set; }
 
 		[JsonProperty(PropertyName = "indices")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]

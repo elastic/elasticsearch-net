@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void FlushAll()
 		{
-			var r = this._client.Flush();
+			var r = this._client.Flush(f=>f.AllIndices());
 			Assert.True(r.OK, r.ConnectionStatus.ToString());
 		}
 		[Test]

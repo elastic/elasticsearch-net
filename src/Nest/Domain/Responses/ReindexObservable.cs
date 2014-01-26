@@ -40,7 +40,7 @@ namespace Nest
 			fromIndex.ThrowIfNullOrEmpty("fromIndex");
 			toIndex.ThrowIfNullOrEmpty("toIndex");
 
-			var indexSettings = this.CurrentClient.GetIndexSettings(this._reindexDescriptor._FromIndexName);
+			var indexSettings = this.CurrentClient.GetIndexSettings(i=>i.Index(this._reindexDescriptor._FromIndexName));
 			var createSettings = new CreateIndexDescriptor(this._connectionSettings)
 				.InitializeUsing(indexSettings.Settings);
 			var createIndexResponse = this.CurrentClient

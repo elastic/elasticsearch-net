@@ -59,7 +59,7 @@ namespace Nest
 			var rootObjectMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>(this._connectionSettings));
 			rootObjectMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
-			var typeName = rootObjectMappingDescriptor._TypeName.Resolve(this._connectionSettings);
+			var typeName = rootObjectMappingDescriptor._Type.Resolve(this._connectionSettings);
 			this._TemplateMapping.Mappings[typeName] = rootObjectMappingDescriptor._Mapping;
 			return this;
 

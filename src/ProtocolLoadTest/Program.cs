@@ -98,7 +98,7 @@ namespace ProtocolLoadTest
 				return;
 			}
 
-			client.DeleteIndex(indexName);
+			client.DeleteIndex(i=>i.Index(indexName));
 
 			var indexSettings = new IndexSettings();
 			indexSettings.NumberOfReplicas = 1;
@@ -106,7 +106,7 @@ namespace ProtocolLoadTest
 			indexSettings.Add("index.refresh_interval", "-1");
 
 			var createResponse = client.CreateIndex(indexName, indexSettings);
-			client.MapFluent<Message>(m=>m.MapFromAttributes());
+			client.Map<Message>(m=>m.MapFromAttributes());
 		}
 
 		private static void CloseIndex(string suffix)

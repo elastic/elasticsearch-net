@@ -13,7 +13,6 @@
 		public string NodeId { get; set; }
 		public MetricOptions Metric { get; set; }
 		public string Fields { get; set; }
-		public MetricFamilyOptions MetricFamily { get; set; }
 		public string SearchGroups { get; set; }
 		public string IndexingTypes { get; set; }
 

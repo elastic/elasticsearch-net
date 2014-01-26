@@ -652,166 +652,6 @@ namespace Nest
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
 		}
 		
-		///<summary>GET /_nodes/stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="metric_family">Limit the information returned to a certain metric family</param>
-		public ConnectionStatus ClusterNodeStatsGet(MetricFamilyOptions metric_family, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			metric_family.ThrowIfNull("metric_family");
-			var url = "/_nodes/stats/{metric_family}".Inject(new { metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_nodes/stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="metric_family">Limit the information returned to a certain metric family</param>
-		public Task<ConnectionStatus> ClusterNodeStatsGetAsync(MetricFamilyOptions metric_family, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			metric_family.ThrowIfNull("metric_family");
-			var url = "/_nodes/stats/{metric_family}".Inject(new { metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_nodes/{node_id}/stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		///<param name="metric_family">Limit the information returned to a certain metric family</param>
-		public ConnectionStatus ClusterNodeStatsGet(string node_id, MetricFamilyOptions metric_family, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			node_id.ThrowIfNull("node_id");
-			metric_family.ThrowIfNull("metric_family");
-			var url = "/_nodes/{node_id}/stats/{metric_family}".Inject(new { node_id = Stringify(node_id), metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_nodes/{node_id}/stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		///<param name="metric_family">Limit the information returned to a certain metric family</param>
-		public Task<ConnectionStatus> ClusterNodeStatsGetAsync(string node_id, MetricFamilyOptions metric_family, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			node_id.ThrowIfNull("node_id");
-			metric_family.ThrowIfNull("metric_family");
-			var url = "/_nodes/{node_id}/stats/{metric_family}".Inject(new { node_id = Stringify(node_id), metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_nodes/stats/indices/{metric}/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="metric">Limit the information returned for `indices` family to a specific metric</param>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `indices` metric family (supports wildcards)</param>
-		public ConnectionStatus ClusterNodeStatsGet(MetricOptions metric, string fields, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			metric.ThrowIfNull("metric");
-			fields.ThrowIfNull("fields");
-			var url = "/_nodes/stats/indices/{metric}/{fields}".Inject(new { metric = Stringify(metric), fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_nodes/stats/indices/{metric}/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="metric">Limit the information returned for `indices` family to a specific metric</param>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `indices` metric family (supports wildcards)</param>
-		public Task<ConnectionStatus> ClusterNodeStatsGetAsync(MetricOptions metric, string fields, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			metric.ThrowIfNull("metric");
-			fields.ThrowIfNull("fields");
-			var url = "/_nodes/stats/indices/{metric}/{fields}".Inject(new { metric = Stringify(metric), fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_nodes/{node_id}/stats/indices/{metric}/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		///<param name="metric">Limit the information returned for `indices` family to a specific metric</param>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `indices` metric family (supports wildcards)</param>
-		public ConnectionStatus ClusterNodeStatsGet(string node_id, MetricOptions metric, string fields, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
-			fields.ThrowIfNull("fields");
-			var url = "/_nodes/{node_id}/stats/indices/{metric}/{fields}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric), fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_nodes/{node_id}/stats/indices/{metric}/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
-	    ///</summary>
-		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		///<param name="metric">Limit the information returned for `indices` family to a specific metric</param>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `indices` metric family (supports wildcards)</param>
-		public Task<ConnectionStatus> ClusterNodeStatsGetAsync(string node_id, MetricOptions metric, string fields, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
-		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
-			fields.ThrowIfNull("fields");
-			var url = "/_nodes/{node_id}/stats/indices/{metric}/{fields}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric), fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
 		///<summary>PUT /_cluster/settings
 	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
 	    ///</summary>
@@ -1835,13 +1675,13 @@ namespace Nest
 		///<summary>GET /_analyze
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
 	    ///</summary>
-		public ConnectionStatus IndicesAnalyzeGet(Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public ConnectionStatus IndicesAnalyzeGet(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			var url = "/_analyze";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -1851,13 +1691,13 @@ namespace Nest
 		///<summary>GET /_analyze
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> IndicesAnalyzeGetAsync(Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesAnalyzeGetAsync(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			var url = "/_analyze";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -1868,14 +1708,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
-		public ConnectionStatus IndicesAnalyzeGet(string index, Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public ConnectionStatus IndicesAnalyzeGet(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_analyze".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -1886,14 +1726,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
-		public Task<ConnectionStatus> IndicesAnalyzeGetAsync(string index, Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesAnalyzeGetAsync(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_analyze".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -1904,13 +1744,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
 	    ///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
-		public ConnectionStatus IndicesAnalyzePost(object body, Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public ConnectionStatus IndicesAnalyzePost(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			var url = "/_analyze".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -1921,13 +1761,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
 	    ///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
-		public Task<ConnectionStatus> IndicesAnalyzePostAsync(object body, Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesAnalyzePostAsync(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			var url = "/_analyze".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -1939,14 +1779,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
-		public ConnectionStatus IndicesAnalyzePost(string index, object body, Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public ConnectionStatus IndicesAnalyzePost(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_analyze".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -1958,14 +1798,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
-		public Task<ConnectionStatus> IndicesAnalyzePostAsync(string index, object body, Func<IndicesAnalyzeQueryString, IndicesAnalyzeQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesAnalyzePostAsync(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_analyze".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesAnalyzeQueryString());
+				var qs = queryString(new AnalyzeQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2149,14 +1989,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
-		public ConnectionStatus IndicesCreatePut(string index, object body, Func<IndicesCreateQueryString, IndicesCreateQueryString> queryString = null)
+		public ConnectionStatus IndicesCreatePut(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesCreateQueryString());
+				var qs = queryString(new CreateIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2168,14 +2008,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
-		public Task<ConnectionStatus> IndicesCreatePutAsync(string index, object body, Func<IndicesCreateQueryString, IndicesCreateQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesCreatePutAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesCreateQueryString());
+				var qs = queryString(new CreateIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2187,14 +2027,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
-		public ConnectionStatus IndicesCreatePost(string index, object body, Func<IndicesCreateQueryString, IndicesCreateQueryString> queryString = null)
+		public ConnectionStatus IndicesCreatePost(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesCreateQueryString());
+				var qs = queryString(new CreateIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2206,14 +2046,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
-		public Task<ConnectionStatus> IndicesCreatePostAsync(string index, object body, Func<IndicesCreateQueryString, IndicesCreateQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesCreatePostAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesCreateQueryString());
+				var qs = queryString(new CreateIndexQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2528,14 +2368,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
-		public ConnectionStatus IndicesExistsHead(string index, Func<IndicesExistsQueryString, IndicesExistsQueryString> queryString = null)
+		public ConnectionStatus IndicesExistsHead(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsQueryString());
+				var qs = queryString(new IndexExistsQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2546,14 +2386,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
-		public Task<ConnectionStatus> IndicesExistsHeadAsync(string index, Func<IndicesExistsQueryString, IndicesExistsQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesExistsHeadAsync(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesExistsQueryString());
+				var qs = queryString(new IndexExistsQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4424,270 +4264,6 @@ namespace Nest
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
 		}
 		
-		///<summary>GET _stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="metric_family">Limit the information returned to a specific metric</param>
-		public ConnectionStatus IndicesStatsGet(MetricFamilyOptions metric_family, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			metric_family.ThrowIfNull("metric_family");
-			var url = "_stats/{metric_family}".Inject(new { metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET _stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="metric_family">Limit the information returned to a specific metric</param>
-		public Task<ConnectionStatus> IndicesStatsGetAsync(MetricFamilyOptions metric_family, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			metric_family.ThrowIfNull("metric_family");
-			var url = "_stats/{metric_family}".Inject(new { metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /{index}/_stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="metric_family">Limit the information returned to a specific metric</param>
-		public ConnectionStatus IndexStatsGet(string index, MetricFamilyOptions metric_family, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			metric_family.ThrowIfNull("metric_family");
-			var url = "/{index}/_stats/{metric_family}".Inject(new { index = Stringify(index), metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /{index}/_stats/{metric_family}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="metric_family">Limit the information returned to a specific metric</param>
-		public Task<ConnectionStatus> IndexStatsGetAsync(string index, MetricFamilyOptions metric_family, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			metric_family.ThrowIfNull("metric_family");
-			var url = "/{index}/_stats/{metric_family}".Inject(new { index = Stringify(index), metric_family = Stringify(metric_family) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_stats/indexing/{indexing_types}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="indexing_types">A comma-separated list of document types to include in the `indexing` statistics</param>
-		public ConnectionStatus IndicesIndexingStatsGet(string indexing_types, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			indexing_types.ThrowIfNull("indexing_types");
-			var url = "/_stats/indexing/{indexing_types}".Inject(new { indexing_types = Stringify(indexing_types) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_stats/indexing/{indexing_types}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="indexing_types">A comma-separated list of document types to include in the `indexing` statistics</param>
-		public Task<ConnectionStatus> IndicesIndexingStatsGetAsync(string indexing_types, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			indexing_types.ThrowIfNull("indexing_types");
-			var url = "/_stats/indexing/{indexing_types}".Inject(new { indexing_types = Stringify(indexing_types) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_stats/search/{search_groups}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="search_groups">A comma-separated list of search groups to include in the `search` statistics</param>
-		public ConnectionStatus IndicesSearchStatsGet(string search_groups, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			search_groups.ThrowIfNull("search_groups");
-			var url = "/_stats/search/{search_groups}".Inject(new { search_groups = Stringify(search_groups) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_stats/search/{search_groups}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="search_groups">A comma-separated list of search groups to include in the `search` statistics</param>
-		public Task<ConnectionStatus> IndicesSearchStatsGetAsync(string search_groups, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			search_groups.ThrowIfNull("search_groups");
-			var url = "/_stats/search/{search_groups}".Inject(new { search_groups = Stringify(search_groups) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /{index}/_stats/search/{search_groups}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="search_groups">A comma-separated list of search groups to include in the `search` statistics</param>
-		public ConnectionStatus IndexSearchStatsGet(string index, string search_groups, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			search_groups.ThrowIfNull("search_groups");
-			var url = "/{index}/_stats/search/{search_groups}".Inject(new { index = Stringify(index), search_groups = Stringify(search_groups) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /{index}/_stats/search/{search_groups}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="search_groups">A comma-separated list of search groups to include in the `search` statistics</param>
-		public Task<ConnectionStatus> IndexSearchStatsGetAsync(string index, string search_groups, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			search_groups.ThrowIfNull("search_groups");
-			var url = "/{index}/_stats/search/{search_groups}".Inject(new { index = Stringify(index), search_groups = Stringify(search_groups) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_stats/fielddata/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `search` statistics</param>
-		public ConnectionStatus IndicesFieldDataStatsGet(string fields, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			fields.ThrowIfNull("fields");
-			var url = "/_stats/fielddata/{fields}".Inject(new { fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /_stats/fielddata/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `search` statistics</param>
-		public Task<ConnectionStatus> IndicesFieldDataStatsGetAsync(string fields, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			fields.ThrowIfNull("fields");
-			var url = "/_stats/fielddata/{fields}".Inject(new { fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /{index}/_stats/fielddata/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `search` statistics</param>
-		public ConnectionStatus IndexFieldDataStatsGet(string index, string fields, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			fields.ThrowIfNull("fields");
-			var url = "/{index}/_stats/fielddata/{fields}".Inject(new { index = Stringify(index), fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequest("GET", url, data: null, queryString: nv);
-		}
-		
-		///<summary>GET /{index}/_stats/fielddata/{fields}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="fields">A comma-separated list of fields to return detailed information for, when returning the `search` statistics</param>
-		public Task<ConnectionStatus> IndexFieldDataStatsGetAsync(string index, string fields, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			fields.ThrowIfNull("fields");
-			var url = "/{index}/_stats/fielddata/{fields}".Inject(new { index = Stringify(index), fields = Stringify(fields) });
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
-			}
-
-			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
-		}
-		
 		///<summary>GET /_status
 	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-status/</pre>	
 	    ///</summary>
@@ -5304,7 +4880,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
-		public ConnectionStatus MltGet(string index, string type, string id, Func<MltQueryString, MltQueryString> queryString = null)
+		public ConnectionStatus MltGet(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5313,7 +4889,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MltQueryString());
+				var qs = queryString(new MoreLikeThisQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5326,7 +4902,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
-		public Task<ConnectionStatus> MltGetAsync(string index, string type, string id, Func<MltQueryString, MltQueryString> queryString = null)
+		public Task<ConnectionStatus> MltGetAsync(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5335,7 +4911,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MltQueryString());
+				var qs = queryString(new MoreLikeThisQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5349,7 +4925,7 @@ namespace Nest
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
 		///<param name="body">A specific search request definition</param>
-		public ConnectionStatus MltPost(string index, string type, string id, object body, Func<MltQueryString, MltQueryString> queryString = null)
+		public ConnectionStatus MltPost(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5358,7 +4934,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MltQueryString());
+				var qs = queryString(new MoreLikeThisQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5372,7 +4948,7 @@ namespace Nest
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
 		///<param name="body">A specific search request definition</param>
-		public Task<ConnectionStatus> MltPostAsync(string index, string type, string id, object body, Func<MltQueryString, MltQueryString> queryString = null)
+		public Task<ConnectionStatus> MltPostAsync(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5381,7 +4957,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MltQueryString());
+				var qs = queryString(new MoreLikeThisQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
