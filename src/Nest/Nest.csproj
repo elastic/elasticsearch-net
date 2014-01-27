@@ -83,6 +83,7 @@
     <Compile Include="BackwardsCompatibility\IElasticClientExtensions.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\Responses\GetMappingResponse.cs" />
+    <Compile Include="Domain\Responses\IMultiSearchResponse.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
@@ -98,10 +99,12 @@
     <Compile Include="DSL\FlushDescriptor.cs" />
     <Compile Include="DSL\DeleteMappingDescriptor.cs" />
     <Compile Include="DSL\GetMappingDescriptor.cs" />
+    <Compile Include="DSL\Paths\FixedIndexTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\NodeIdOptionalDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
+    <Compile Include="DSL\SearchDescriptorBase.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
     <Compile Include="DSL\GetTemplateDescriptor.cs" />

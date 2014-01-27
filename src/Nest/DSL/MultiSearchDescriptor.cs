@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
@@ -9,7 +10,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class MultiSearchDescriptor
+	[DescriptorFor("Msearch")]
+	public partial class MultiSearchDescriptor 
+		: FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchQueryString>
+		, IPathInfo<MultiSearchQueryString>
 	{
 		internal string _FixedIndex { get; set; }
 		internal string _FixedType { get; set; }
@@ -33,17 +37,11 @@ namespace Nest
 			return this.Search(Guid.NewGuid().ToString(), searchSelector);
 		}
 
-		/// <summary>
-		/// Allows you to perform the multi search on a fixed path. 
-		/// Each operation that doesn't specify an index or type will use this fixed index/type
-		/// over the default infered index and type.
-		/// </summary>
-		public MultiSearchDescriptor FixedPath(string index, string type = null)
+		ElasticSearchPathInfo<MultiSearchQueryString> IPathInfo<MultiSearchQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			index.ThrowIfNullOrEmpty("index");
-			this._FixedIndex = index;
-			this._FixedType = type;
-			return this;
+			var pathInfo = base.ToPathInfo<MultiSearchQueryString>(settings);
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			return pathInfo;
 		}
 	}
 }

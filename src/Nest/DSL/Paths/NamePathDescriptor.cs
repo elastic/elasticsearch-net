@@ -10,7 +10,13 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-
+	/// <summary>
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{name}
+	/// </pre>
+	/// name is mandatory.
+	/// </summary>
 	public class NamePathDescriptor<P, K>
 		where P : NamePathDescriptor<P, K> 
 		where K : FluentQueryString<K>, new()

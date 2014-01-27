@@ -11,6 +11,13 @@ using Nest.Resolvers;
 namespace Nest
 {
 
+	/// <summary>
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{indices}/{types/{name}
+	/// </pre>
+	/// {types} is optional, {indices} is too but needs an explicit AllIndices().
+	/// </summary>
 	public class IndicesOptionalTypesNamePathDecriptor<P, K>
 		where P : IndicesOptionalTypesNamePathDecriptor<P, K>, new()
 		where K : FluentQueryString<K>, new()

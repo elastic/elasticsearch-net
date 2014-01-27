@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using Nest.Resolvers;
 
@@ -43,6 +44,16 @@ namespace Nest
 		{
 			return index.Resolve(this._connectionSettings);
 		}
+		
+		public string IndexNames(params IndexNameMarker[] indices)
+		{
+			return string.Join(",", indices.Select(i=>i.Resolve(this._connectionSettings)));
+		}
+		
+		public string IndexNames(IEnumerable<IndexNameMarker> indices)
+		{
+			return indices.HasAny() ? null : this.IndexNames(indices.ToArray());
+		}
 
 		public string Id<T>(T obj) where T : class
 		{
@@ -56,6 +67,14 @@ namespace Nest
 		public string TypeName(Type t)
 		{
 			return TypeNameMarker.Create(t).Resolve(this._connectionSettings);
+		}
+		public string TypeNames(params TypeNameMarker[] typeNames)
+		{
+			return string.Join(",", typeNames.Select(t=>t.Resolve(this._connectionSettings)));
+		}
+		public string TypeNames(IEnumerable<TypeNameMarker> typeNames)
+		{
+			return typeNames.HasAny() ? null : this.TypeNames(typeNames.ToArray());
 		}
 		public string TypeName(TypeNameMarker type)
 		{

@@ -2165,7 +2165,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus MsearchDispatch(ElasticSearchPathInfo<MsearchQueryString> pathInfo , object body)
+		internal ConnectionStatus MsearchDispatch(ElasticSearchPathInfo<MultiSearchQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2196,7 +2196,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> MsearchDispatchAsync(ElasticSearchPathInfo<MsearchQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> MsearchDispatchAsync(ElasticSearchPathInfo<MultiSearchQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

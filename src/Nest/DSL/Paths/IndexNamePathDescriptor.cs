@@ -11,8 +11,11 @@ using Nest.Resolvers;
 namespace Nest
 {
 	/// <summary>
-	/// Provides a base for descriptor that need to form a url path
-	/// in the form of /{index}/[anythinghere] where index is optional.
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{index}/{name}
+	/// </pre>
+	/// neither parameter is optional 
 	/// </summary>
 	public class IndexNamePathDescriptor<P, K> 
 		where P : IndexNamePathDescriptor<P, K>, new()

@@ -11,24 +11,16 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public abstract class SearchDescriptorBase
-	{
-		internal abstract Type _ClrType { get; }
-		internal IEnumerable<string> _Indices { get; set; }
-		internal IEnumerable<TypeNameMarker> _Types { get; set; }
-		internal string _Routing { get; set; }
-		internal SearchType? _SearchType { get; set; }
-		internal bool _AllIndices { get; set; }
-		internal bool _AllTypes { get; set; }
-
-		//[JsonProperty(PropertyName = "preference")]
-		internal string _Preference { get; set; }
-
-		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
-	}
-
+	/// <summary>
+	/// A descriptor wich describes a search operation for _search and _msearch
+	/// </summary>
+	/// <remarks>Doesn't inherit from QueryPathDescriptorBase because it already needs an untyped supperclass 
+	/// that has specifics that we can push to QueryPathDescriptorBase</remarks>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class SearchDescriptor<T> : SearchDescriptorBase where T : class
+	public partial class SearchDescriptor<T> : 
+		SearchDescriptorBase 
+		, IPathInfo<SearchQueryString>
+		where T : class
 	{
 
 		internal override Type _ClrType { get { return typeof(T); } }
@@ -44,7 +36,32 @@ namespace Nest
 		public SearchDescriptor<T> Indices(IEnumerable<string> indices)
 		{
 			indices.ThrowIfEmpty("indices");
-			this._Indices = indices;
+			return this.Indices(indices.ToArray());
+		}
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Indices(IEnumerable<Type> indices)
+		{
+			indices.ThrowIfEmpty("indices");
+			return this.Indices(indices.ToArray());
+		}
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Indices(params string[] indices)
+		{
+			indices.ThrowIfEmpty("indices");
+			this._Indices = indices.Cast<IndexNameMarker>();
+			return this;
+		}
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Indices(params Type[] indices)
+		{
+			indices.ThrowIfEmpty("indices");
+			this._Indices = indices.Cast<IndexNameMarker>();
 			return this;
 		}
 		/// <summary>
@@ -53,8 +70,22 @@ namespace Nest
 		public SearchDescriptor<T> Index(string index)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			this._Indices = new[] { index };
-			return this;
+			return this.Indices(index);
+		}
+		/// <summary>
+		/// The index to execute the search on, using the default index for typeof TAlternative. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Index<TAlternative>() where TAlternative : class
+		{
+			return this.Indices(typeof(Type));
+		}
+		/// <summary>
+		/// The index to execute the search on using the inferred default for 'type'. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Index(Type type)
+		{
+			type.ThrowIfNull("type");
+			return this.Indices(type);
 		}
 		/// <summary>
 		/// The types to execute the search on. Defaults to the inferred typename of T 
@@ -1037,6 +1068,36 @@ namespace Nest
 		{
 			this._ConcreteTypeSelector = typeSelector;
 			return this;
+		}
+
+		ElasticSearchPathInfo<SearchQueryString> IPathInfo<SearchQueryString>.ToPathInfo(IConnectionSettings settings)
+		{
+			var pathInfo = new ElasticSearchPathInfo<SearchQueryString>();
+			pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
+				? PathInfoHttpMethod.GET
+				: PathInfoHttpMethod.POST;
+			
+			var inferrer = new ElasticInferrer(settings);
+			string indices;
+			if (this._AllIndices.GetValueOrDefault(false))
+				indices = "_all";
+			else if (this._Indices.HasAny())
+				indices = inferrer.IndexNames(this._Indices);
+			else
+				indices = inferrer.IndexName<T>();
+
+			string types;
+			if (this._AllTypes.GetValueOrDefault(false))
+				types = null;
+			else if (this._Types.HasAny())
+				types = inferrer.TypeNames(this._Types);
+			else
+				types = inferrer.TypeName<T>();
+
+			pathInfo.Index = indices;
+			pathInfo.Type = types;
+
+			return pathInfo;
 		}
 	}
 }

@@ -6,7 +6,7 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[JsonObject]
-	public class MultiSearchResponse : BaseResponse
+	public class MultiSearchResponse : BaseResponse, IMultiSearchResponse
 	{
 		public MultiSearchResponse()
 		{

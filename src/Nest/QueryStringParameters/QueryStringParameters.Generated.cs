@@ -3402,12 +3402,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/multi-search/
 	///</pre>
 	///</summary>
-	public class MsearchQueryString : FluentQueryString<MsearchQueryString> 
+	public class MultiSearchQueryString : FluentQueryString<MultiSearchQueryString> 
 	{
 		
 		internal SearchTypeOptions _search_type { get; set; }
 		///<summary>Search operation type</summary>
-		public MsearchQueryString SearchType(SearchTypeOptions search_type)
+		public MultiSearchQueryString SearchType(SearchTypeOptions search_type)
 		{
 			var v = this.CreateString(search_type);
 			this._search_type = search_type;

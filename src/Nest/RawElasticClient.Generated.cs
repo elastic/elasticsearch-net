@@ -4967,13 +4967,13 @@ namespace Nest
 		///<summary>GET /_msearch
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 	    ///</summary>
-		public ConnectionStatus MsearchGet(Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public ConnectionStatus MsearchGet(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			var url = "/_msearch";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4983,13 +4983,13 @@ namespace Nest
 		///<summary>GET /_msearch
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> MsearchGetAsync(Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public Task<ConnectionStatus> MsearchGetAsync(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			var url = "/_msearch";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5000,14 +5000,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
-		public ConnectionStatus MsearchGet(string index, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public ConnectionStatus MsearchGet(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_msearch".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5018,14 +5018,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
-		public Task<ConnectionStatus> MsearchGetAsync(string index, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public Task<ConnectionStatus> MsearchGetAsync(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_msearch".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5037,7 +5037,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
-		public ConnectionStatus MsearchGet(string index, string type, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public ConnectionStatus MsearchGet(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5045,7 +5045,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5057,7 +5057,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
-		public Task<ConnectionStatus> MsearchGetAsync(string index, string type, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public Task<ConnectionStatus> MsearchGetAsync(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5065,7 +5065,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5076,13 +5076,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		public ConnectionStatus MsearchPost(object body, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public ConnectionStatus MsearchPost(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			var url = "/_msearch".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5093,13 +5093,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		public Task<ConnectionStatus> MsearchPostAsync(object body, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public Task<ConnectionStatus> MsearchPostAsync(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			var url = "/_msearch".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5111,14 +5111,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		public ConnectionStatus MsearchPost(string index, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public ConnectionStatus MsearchPost(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_msearch".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5130,14 +5130,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		public Task<ConnectionStatus> MsearchPostAsync(string index, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public Task<ConnectionStatus> MsearchPostAsync(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_msearch".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5150,7 +5150,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		public ConnectionStatus MsearchPost(string index, string type, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public ConnectionStatus MsearchPost(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5158,7 +5158,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -5171,7 +5171,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		public Task<ConnectionStatus> MsearchPostAsync(string index, string type, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null)
+		public Task<ConnectionStatus> MsearchPostAsync(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -5179,7 +5179,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MsearchQueryString());
+				var qs = queryString(new MultiSearchQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 

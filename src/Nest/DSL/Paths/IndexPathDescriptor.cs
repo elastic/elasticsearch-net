@@ -11,8 +11,11 @@ using Nest.Resolvers;
 namespace Nest
 {
 	/// <summary>
-	/// Provides a base for descriptor that need to form a url path
-	/// in the form of /{index}/[anythinghere] where index is optional.
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{index}
+	/// </pre>
+	/// index is not optional 
 	/// </summary>
 	public class IndexPathDescriptorBase<P, K> 
 		where P : IndexPathDescriptorBase<P, K>, new()
@@ -42,7 +45,7 @@ namespace Nest
 			where K : FluentQueryString<K>, new()
 		{
 			if (this._Index == null)
-				throw new DslException("IndexPathDescriptor missing Index()");
+				throw new DslException("missing call to Index()");
 
 			var index = new ElasticInferrer(settings).IndexName(this._Index); 
 			var pathInfo = new ElasticSearchPathInfo<K>()

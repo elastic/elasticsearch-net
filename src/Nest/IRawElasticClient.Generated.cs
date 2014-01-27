@@ -1744,64 +1744,64 @@ namespace Nest
 		///<summary>GET /_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
-		ConnectionStatus MsearchGet(Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		ConnectionStatus MsearchGet(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>GET /_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
-		Task<ConnectionStatus> MsearchGetAsync(Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchGetAsync(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
-		ConnectionStatus MsearchGet(string index, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		ConnectionStatus MsearchGet(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
-		Task<ConnectionStatus> MsearchGetAsync(string index, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchGetAsync(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
-		ConnectionStatus MsearchGet(string index, string type, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		ConnectionStatus MsearchGet(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
-		Task<ConnectionStatus> MsearchGetAsync(string index, string type, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchGetAsync(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		ConnectionStatus MsearchPost(object body, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		ConnectionStatus MsearchPost(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		Task<ConnectionStatus> MsearchPostAsync(object body, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchPostAsync(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		ConnectionStatus MsearchPost(string index, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		ConnectionStatus MsearchPost(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		Task<ConnectionStatus> MsearchPostAsync(string index, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchPostAsync(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
@@ -1809,7 +1809,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		ConnectionStatus MsearchPost(string index, string type, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		ConnectionStatus MsearchPost(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
@@ -1817,7 +1817,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		Task<ConnectionStatus> MsearchPostAsync(string index, string type, object body, Func<MsearchQueryString, MsearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchPostAsync(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_percolate
 		///<pre>http://elasticsearch.org/guide/reference/api/percolate/</pre>	

@@ -70,7 +70,6 @@ namespace Nest
 			return this.DeserializeInternal<T>(value, null, extraConverters, notFoundIsValidResponse);
 		}
 
-
 		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> originalSearchDescriptor)
 			where TResult : class
 			where T : class
@@ -102,8 +101,6 @@ namespace Nest
 				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector, partialFields)
 			);
 		}
-
-
 
 		internal T DeserializeInternal<T>(
 			object value, 
@@ -147,8 +144,66 @@ namespace Nest
 		    return settings;
 		}
 
+		/// <summary>
+		/// _msearch needs a specialized json format in the body
+		/// </summary>
+		internal string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor)
+		{
+			var sb = new StringBuilder();
+			foreach (var operation in multiSearchDescriptor._Operations.Values)
+			{
+				var indeces = operation._Indices.HasAny() ? string.Join(",", operation._Indices) : null;
+				if (operation._AllIndices.GetValueOrDefault(false))
+					indeces = "_all";
+				
+				var index = indeces ??
+							multiSearchDescriptor._FixedIndex ??
+				            new IndexNameResolver(this._settings).GetIndexForType(operation._ClrType);
+				
+				var types =  operation._Types.HasAny() ? string.Join(",", operation._Types.Select(x => x.Resolve(this._settings)) ) : null;
+				var typeName = types
+							   ?? multiSearchDescriptor._FixedType
+				               ?? TypeNameMarker.Create(operation._ClrType);
+				if (operation._AllTypes.GetValueOrDefault(false))
+					typeName = null; //force empty typename so we'll query all types.
 
-		
+				var op = new { index = index, type = typeName, search_type = this.GetSearchType(operation, multiSearchDescriptor), 
+					preference = operation._Preference, routing = operation._Routing };
+				var opJson =  JsonConvert.SerializeObject(op, Formatting.None);
+
+				var action = "{0}\n".F(opJson);
+				sb.Append(action);
+				var searchJson = JsonConvert.SerializeObject(operation, Formatting.None);
+				sb.Append(searchJson + "\n");
+
+			}
+			var json = sb.ToString();
+			return json;
+		}
+		private string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
+		{
+			if (!descriptor._SearchType.HasValue)
+				return null;
+			switch (descriptor._SearchType.Value)
+			{
+				case SearchType.Count:
+					return "count";
+				case SearchType.DfsQueryThenFetch:
+					return "dfs_query_then_fetch";
+				case SearchType.DfsQueryAndFetch:
+					return "dfs_query_and_fetch";
+				case SearchType.QueryThenFetch:
+					return "query_then_fetch";
+				case SearchType.QueryAndFetch:
+					return "query_and_fetch";
+				case SearchType.Scan:
+					return "scan";
+			}
+			return multiSearchDescriptor._QueryString.ContainsKey("search_type") 
+				? multiSearchDescriptor._QueryString.NameValueCollection["search_type"] 
+				: null;
+			
+		}
 	}
 	/// <summary>
 	/// Registerering global jsonconverters is very costly,

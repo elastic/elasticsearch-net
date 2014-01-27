@@ -10,6 +10,13 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	/// <summary>
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{index}/{type}
+	/// </pre>
+	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type <para>T</para>
+	/// </summary>
 	public class IndexTypePathTypedDescriptor<P, K, T> 
 		where P : IndexTypePathTypedDescriptor<P, K, T>, new()
 		where K : FluentQueryString<K>, new()

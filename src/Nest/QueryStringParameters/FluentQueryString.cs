@@ -21,6 +21,11 @@ namespace Nest
 			return (T)this;
 		}
 
+		public bool ContainsKey(string name)
+		{
+			return this.NameValueCollection != null && this.NameValueCollection.AllKeys.Contains(name);
+		}
+
 		protected string CreateString(object s)
 		{
 			return RawElasticClient.Stringify(s);

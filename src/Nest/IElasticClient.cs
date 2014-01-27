@@ -113,9 +113,6 @@ namespace Nest
 
 		MultiGetResponse MultiGetFull(Action<MultiGetDescriptor> multiGetSelector);
 
-		MultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
-		MultiSearchResponse MultiSearch(MultiSearchDescriptor multiSearchSelector);
-
 		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
 		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
 		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class;
@@ -163,8 +160,6 @@ namespace Nest
 		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id) where T : class;
 		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class;
 		
-		
-
 
 		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) where T : class;
 
@@ -188,9 +183,6 @@ namespace Nest
 		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
 		//end alias
 		
-		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searcher) where T : class;
-
 		//converted
 
 		IQueryResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
@@ -277,5 +269,15 @@ namespace Nest
 		Task<IHealthResponse> HealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector);
 		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
+
+		IQueryResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class;
+		IQueryResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+			where T : class
+			where TResult : class;
+
+		Task<IQueryResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class;
+		Task<IQueryResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+			where T : class
+			where TResult : class;
 	}
 }

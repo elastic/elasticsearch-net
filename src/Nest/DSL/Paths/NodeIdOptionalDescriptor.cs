@@ -10,7 +10,13 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-
+	/// <summary>
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{nodeid}
+	/// </pre>
+	/// node id is optional
+	/// </summary>
 	public class NodeIdOptionalDescriptor<P, K>
 		where P : NodeIdOptionalDescriptor<P, K> 
 		where K : FluentQueryString<K>, new()

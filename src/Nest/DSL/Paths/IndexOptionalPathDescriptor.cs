@@ -11,8 +11,11 @@ using Nest.Resolvers;
 namespace Nest
 {
 	/// <summary>
-	/// Provides a base for descriptor that need to form a url path
-	/// in the form of /{index}/[anythinghere] where index is optional.
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{index}
+	/// </pre>
+	/// index is optional but AllIndices() needs to be explicitly specified for it to be optional
 	/// </summary>
 	public class IndexOptionalPathDescriptorBase<P, K> 
 		where P : IndexOptionalPathDescriptorBase<P, K>, new()
@@ -50,7 +53,7 @@ namespace Nest
 			where K : FluentQueryString<K>, new()
 		{
 			if (!this._AllIndices.HasValue && this._Index == null)
-				throw new DslException("UpdateSettings missing Index() or explicit OnAllIndices()");
+				throw new DslException("missing Index() or explicit OnAllIndices()");
 
 			string index = null;
 			if (!this._AllIndices.GetValueOrDefault(false))

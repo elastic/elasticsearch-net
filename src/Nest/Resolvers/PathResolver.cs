@@ -71,36 +71,6 @@ namespace Nest.Resolvers
 		}
 		
 		
-		public string CreateClusterPath(string suffix = null)
-		{
-			suffix.ThrowIfNullOrEmpty("suffix");
-			return "_cluster/{0}/".EscapedFormat(suffix);
-		}
-
-		public string CreateClusterPath(IEnumerable<string> indices, string suffix = null)
-		{
-			indices.ThrowIfEmpty("indices");
-			suffix.ThrowIfNullOrEmpty("suffix");
-			var index = string.Join(",", indices);
-			return "_cluster/{0}/{1}".EscapedFormat(suffix, index);
-		}
-
-		
-		public string CreateNodePath(string suffix = null)
-		{
-			return suffix.IsNullOrEmpty() ? "_nodes" : "_nodes/{0}/".EscapedFormat(suffix);
-		}
-
-		public string CreateNodePath(IEnumerable<string> nodes, string suffix = null)
-		{
-			nodes.ThrowIfEmpty("indices");
-			var nodeStr = string.Join(",", nodes);
-			return suffix.IsNullOrEmpty()
-				? "_nodes/{0}".EscapedFormat(nodeStr)
-				: "_nodes/{0}/".EscapedFormat(nodeStr) + this.NormalizeSuffix(suffix);
-		}
-
-		
 		public string CreateIndexPath(string index, string suffix = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
@@ -151,11 +121,6 @@ namespace Nest.Resolvers
 			return "{0}/{1}/{2}".EscapedFormat(index, type, id);
 		}
 
-
-		public string CreateTemplatePath(string templateName)
-		{
-			return "/_template/{0}".EscapedFormat(templateName);
-		}
 
 		
 		public string AppendSimpleParametersToPath(string path, ISimpleUrlParameters urlParameters)
@@ -298,67 +263,6 @@ namespace Nest.Resolvers
 				types = null;
 
 			return this.SearchPathJoin(indices, types, descriptor.GetUrlParams(), suffix);
-		}
-
-		public string GetMoreLikeThisPathFor<T>(MoreLikeThisDescriptor<T> descriptor) where T : class
-		{
-			var index = descriptor._Index;
-			if (index.IsNullOrEmpty())
-				index = this.Infer.IndexName<T>();
-
-			var type = descriptor._Type;
-			if (type.IsNullOrEmpty())
-				type = this.Infer.TypeName<T>();
-
-			var id = descriptor._Id;
-
-			var dict = new Dictionary<string, string>();
-			if (descriptor._Options != null)
-			{
-				var options = descriptor._Options;
-				if (options._Fields.HasAny())
-				{
-					var fields = string.Join(",", options._Fields);
-					dict.Add("mlt_fields", fields);
-				}
-				if (options._StopWords.HasAny())
-				{
-					var stopwords = string.Join(",", options._StopWords);
-					dict.Add("stop_words", stopwords);
-				}
-				if (!options._LikeText.IsNullOrEmpty())
-					dict.Add("like_text", options._LikeText);
-				if (options._TermMatchPercentage != null)
-					dict.Add("percent_terms_to_match", options._TermMatchPercentage.Value.ToString(CultureInfo.InvariantCulture));
-				if (options._MinTermFrequency != null)
-					dict.Add("min_term_freq", options._MinTermFrequency.ToString());
-				if (options._MaxQueryTerms != null)
-					dict.Add("max_query_terms", options._MaxQueryTerms.ToString());
-				if (options._MinDocumentFrequency != null)
-					dict.Add("min_doc_freq", options._MinDocumentFrequency.ToString());
-				if (options._MaxDocumentFrequency != null)
-					dict.Add("max_doc_freq", options._MaxDocumentFrequency.ToString());
-				if (options._MinWordLength != null)
-					dict.Add("min_word_len", options._MinWordLength.ToString());
-				if (options._MaxWordLength != null)
-					dict.Add("max_word_len", options._MaxWordLength.ToString());
-				if (options._BoostTerms != null)
-					dict.Add("boost_terms", options._BoostTerms.Value.ToString(CultureInfo.InvariantCulture));
-				if (options._Boost != null)
-					dict.Add("boost", options._Boost.Value.ToString(CultureInfo.InvariantCulture));
-				if (!options._Analyzer.IsNullOrEmpty())
-					dict.Add("analyzer", options._Analyzer);
-			}
-			if (descriptor._Search != null)
-			{
-				var searchDict = this.GetSearchParameters(descriptor._Search);
-				foreach (var kv in searchDict)
-					dict.Add(kv.Key, kv.Value);
-				this.AddSearchType(descriptor._Search, dict);
-			}
-
-			var path = this.JoinParamsAndSegments(dict, index, type, id, "_mlt");
-			return path;
 		}
 
 		private string JoinTypes(IEnumerable<TypeNameMarker> markers)

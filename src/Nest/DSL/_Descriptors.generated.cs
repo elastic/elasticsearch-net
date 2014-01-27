@@ -2804,13 +2804,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/multi-search/
 	///</pre>
 	///</summary>
-	public partial class MsearchDescriptor
+	public partial class MultiSearchDescriptor
 	{
-		internal MsearchQueryString _QueryString = new MsearchQueryString(); 
+		internal MultiSearchQueryString _QueryString = new MultiSearchQueryString(); 
 
 
 		///<summary>Search operation type</summary>
-		public MsearchDescriptor SearchType(SearchTypeOptions search_type)
+		public MultiSearchDescriptor SearchType(SearchTypeOptions search_type)
 		{
 			this._QueryString.SearchType(search_type);
 			return this;

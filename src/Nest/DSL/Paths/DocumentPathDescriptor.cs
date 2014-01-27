@@ -10,9 +10,16 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-
+	/// <summary>
+	/// Provides a base for descriptors that need to describe a path in the form of 
+	/// <pre>
+	///	/{index}/{type}/{id}
+	/// </pre>
+	/// if one of the parameters is not explicitly specified this will fall back to the defaults for type <para>T</para>
+	/// </summary>
 	public class DocumentPathDescriptorBase<P, T, K>
-		where P : DocumentPathDescriptorBase<P, T, K>, new() where T : class
+		where P : DocumentPathDescriptorBase<P, T, K>, new()
+		where T : class
 		where K : FluentQueryString<K>, new()
 	{
 
@@ -26,7 +33,7 @@ namespace Nest
 			this._Index = index;
 			return (P)this;
 		}
-		
+
 		public P Type(string type)
 		{
 			this._Type = type;
@@ -51,13 +58,13 @@ namespace Nest
 			this._Object = @object;
 			return (P)this;
 		}
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings) 
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
 			where K : FluentQueryString<K>, new()
 		{
 			var inferrer = new ElasticInferrer(settings);
-            var index = this._Index ?? inferrer.IndexName<T>();
-            var type = this._Type != null ? this._Type.Resolve(settings) : inferrer.TypeName<T>();
-            var id = this._Id ?? inferrer.Id(this._Object);
+			var index = this._Index ?? inferrer.IndexName<T>();
+			var type = this._Type != null ? this._Type.Resolve(settings) : inferrer.TypeName<T>();
+			var id = this._Id ?? inferrer.Id(this._Object);
 			var pathInfo = new ElasticSearchPathInfo<K>()
 			{
 				Index = index,
