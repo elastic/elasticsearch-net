@@ -6,16 +6,15 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public class SimpleGetDescriptor<T> : BaseSimpleGetDescriptor
+	public class SimpleGetDescriptor<T> : ISimpleGetDescriptor
 		where T : class
 	{
-		internal override string _Index { get; set; }
-		internal override TypeNameMarker _Type { get; set; }
-		internal override string _Id { get; set; }
-		internal override string _Routing { get; set; }
-		internal override IList<string> _Fields { get; set; }
-
-		internal override Type _ClrType { get { return typeof(T); } }
+		IndexNameMarker ISimpleGetDescriptor._Index { get; set; }
+		TypeNameMarker ISimpleGetDescriptor._Type { get; set; }
+		string ISimpleGetDescriptor._Id { get; set; }
+		string ISimpleGetDescriptor._Routing { get; set; }
+		IList<string> ISimpleGetDescriptor._Fields { get; set; }
+		Type ISimpleGetDescriptor._ClrType { get { return typeof(T); } }
 
 		protected readonly TypeNameResolver typeNameResolver;
 

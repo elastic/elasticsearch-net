@@ -1,209 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		private readonly string _aliasBody = @"{{""actions"" : [{0}] }}";
-		private string _createCommand(string command, AliasParams aliasParam)
+		public IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector)
 		{
-			var cmd = @"{{ ""{0}"" : {{
-				index: ""{1}"",
-				alias: ""{2}""".F(command, aliasParam.Index, aliasParam.Alias);
-
-			if (!aliasParam.Filter.IsNullOrEmpty())
-				cmd += @", ""filter"": {0} ".F(aliasParam.Filter);
-
-			if (!aliasParam.Routing.IsNullOrEmpty())
-				cmd += @", ""routing"": ""{0}"" ".F(aliasParam.Routing);
-			else
-			{
-				if (!aliasParam.IndexRouting.IsNullOrEmpty())
-					cmd += @", ""index_routing"": ""{0}"" ".F(aliasParam.IndexRouting);
-				if (!aliasParam.SearchRouting.IsNullOrEmpty())
-					cmd += @", ""search_routing"": ""{0}"" ".F(aliasParam.SearchRouting);
-			}
-			cmd += "} }";
-
-			return cmd;
+			return this.Dispatch<AliasDescriptor, AliasQueryString, IndicesOperationResponse>(
+				aliasSelector,
+				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatch(p, d)
+			);
+		}
+		
+		public Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector)
+		{
+			return this.DispatchAsync<AliasDescriptor, AliasQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				aliasSelector,
+				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatchAsync(p, d)
+			);
 		}
 
-		/// <summary>
-		/// Get all the indices pointing to an alias
-		/// </summary>
-		public IEnumerable<string> GetIndicesPointingToAlias(string alias)
+		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
 		{
-			var path = this.PathResolver.CreateIndexPath(alias, "/_aliases");
-			var status = this.Connection.GetSync(path);
-			if (!status.Success)
-			{
-				return Enumerable.Empty<string>();
-			}
-			var r = this.Deserialize<Dictionary<string, object>>(status.Result);
-			return r == null ? Enumerable.Empty<string>() : r.Keys;
+			return this.Dispatch<GetAliasesDescriptor, GetAliasesQueryString, GetAliasesResponse>(
+				getAliasesDescriptor,
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatch(p)
+			);
 		}
-
-		/// <summary>
-		/// Repoint an alias from a set of old indices to a set of new indices in one operation
-		/// </summary>
-		public IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
+		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
 		{
-			var commands = new List<string>();
-			foreach (var i in oldIndices)
-				commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = alias }));
-			foreach (var i in newIndices)
-				commands.Add(_createCommand("add", new AliasParams { Index = i, Alias = alias }));
-			return this._Alias(string.Join(", ", commands));
-		}
-
-		/// <summary>
-		/// Repoint an alias from a set of old indices to a set of new indices in one operation
-		/// </summary>
-		public IIndicesOperationResponse Swap(AliasParams aliasParam, IEnumerable<string> oldIndices, IEnumerable<string> newIndices)
-		{
-			var commands = new List<string>();
-			foreach (var i in oldIndices)
-				commands.Add(_createCommand("remove", new AliasParams { Index = i, Alias = aliasParam.Alias }));
-			foreach (var i in newIndices)
-			{
-				aliasParam.Index = i;
-				commands.Add(_createCommand("add", aliasParam));
-			}
-			return this._Alias(string.Join(", ", commands));
-		}
-
-		/// <summary>
-		/// Add an alias to the default index
-		/// </summary>
-		public IIndicesOperationResponse Alias(string alias)
-		{
-			var index = this._connectionSettings.DefaultIndex;
-			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Add an alias to the specified index
-		/// </summary>
-		public IIndicesOperationResponse Alias(string index, string alias)
-		{
-			var q = _createCommand("add", new AliasParams { Index = index, Alias = alias });
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Add multiple aliases to the specified index
-		/// </summary>
-		public IIndicesOperationResponse Alias(string index, IEnumerable<string> aliases)
-		{
-			var cmds = aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", cmds);
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Add multiple aliases to the default index
-		/// </summary>
-		public IIndicesOperationResponse Alias(IEnumerable<string> aliases)
-		{
-			var index = this._connectionSettings.DefaultIndex;
-			var cmds = aliases.Select(a => _createCommand("add", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", cmds);
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Remove an alias for the default index
-		/// </summary>
-		public IIndicesOperationResponse RemoveAlias(string alias)
-		{
-			var index = this._connectionSettings.DefaultIndex;
-			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Remove an alias for the specified index
-		/// </summary>
-		public IIndicesOperationResponse RemoveAlias(string index, string alias)
-		{
-			var q = _createCommand("remove", new AliasParams { Index = index, Alias = alias });
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Remove multiple alias for the default index
-		/// </summary>
-		public IIndicesOperationResponse RemoveAlias(IEnumerable<string> aliases)
-		{
-			var index = this._connectionSettings.DefaultIndex;
-			var cmds = aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", cmds);
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Remove multiple alias for the specified index
-		/// </summary>
-		public IIndicesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases)
-		{
-			var cmds = aliases.Select(a => _createCommand("remove", new AliasParams { Index = index, Alias = a }));
-			var q = string.Join(",", cmds);
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Associate multiple indices with one alias
-		/// </summary>
-		public IIndicesOperationResponse Alias(IEnumerable<string> indices, string alias)
-		{
-			var cmds = indices.Select(i => _createCommand("add", new AliasParams { Index = i, Alias = alias }));
-			var q = string.Join(",", cmds);
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Rename an old alias for index to a new alias in one operation
-		/// </summary>
-		public IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias)
-		{
-			var r = _createCommand("remove", new AliasParams { Index = index, Alias = oldAlias });
-			var a = _createCommand("add", new AliasParams { Index = index, Alias = newAlias });
-			return this._Alias(r + ", " + a);
-		}
-		/// <summary>
-		/// Freeform alias overload for complete control of all the aspects (does an add operation)
-		/// </summary>
-		public IIndicesOperationResponse Alias(AliasParams aliasParams)
-		{
-			return this._Alias(_createCommand("add", aliasParams));
-		}
-		/// <summary>
-		/// Freeform multi alias overload for complete control of all the aspects (does multiple add operations)
-		/// </summary>
-		public IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases)
-		{
-			var cmds = aliases.Select(a => _aliasBody.F(_createCommand("add", a)));
-			var q = string.Join(",", cmds);
-			return this._Alias(q);
-		}
-		/// <summary>
-		/// Freeform remove alias overload for complete control of all the aspects
-		/// </summary>
-		public IIndicesOperationResponse RemoveAlias(AliasParams aliasParams)
-		{
-			return this._Alias(_createCommand("remove", aliasParams));
-		}
-		/// <summary>
-		/// Freeform remove multi alias overload for complete control of all the aspects
-		/// </summary>
-		public IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases)
-		{
-			var cmds = aliases.Select(a => _aliasBody.F(_createCommand("remove", a)));
-			var q = string.Join(",", cmds);
-			return this._Alias(q);
-		}
-		private IndicesOperationResponse _Alias(string query)
-		{
-			var path = "/_aliases";
-			query = _aliasBody.F(query);
-			var status = this.Connection.PostSync(path, query);
-
-			var r = this.Deserialize<IndicesOperationResponse>(status);
-			return r;
+			return this.DispatchAsync<GetAliasesDescriptor, GetAliasesQueryString, GetAliasesResponse, IGetAliasesResponse>(
+				getAliasesDescriptor,
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync(p)
+			);
 		}
 	}
 }

@@ -2249,12 +2249,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesGetAliasQueryString : FluentQueryString<IndicesGetAliasQueryString> 
+	public class GetAliasesQueryString : FluentQueryString<GetAliasesQueryString> 
 	{
 		
 		internal IgnoreIndicesOptions _ignore_indices { get; set; }
 		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesGetAliasQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		public GetAliasesQueryString IgnoreIndices(IgnoreIndicesOptions ignore_indices)
 		{
 			var v = this.CreateString(ignore_indices);
 			this._ignore_indices = ignore_indices;
@@ -2989,12 +2989,12 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/
 	///</pre>
 	///</summary>
-	public class IndicesUpdateAliasesQueryString : FluentQueryString<IndicesUpdateAliasesQueryString> 
+	public class AliasQueryString : FluentQueryString<AliasQueryString> 
 	{
 		
 		internal string _timeout { get; set; }
 		///<summary>Request timeout</summary>
-		public IndicesUpdateAliasesQueryString Timeout(string timeout)
+		public AliasQueryString Timeout(string timeout)
 		{
 			var v = this.CreateString(timeout);
 			this._timeout = timeout;
@@ -3005,7 +3005,7 @@ namespace Nest
 		
 		internal string _master_timeout { get; set; }
 		///<summary>Specify timeout for connection to master</summary>
-		public IndicesUpdateAliasesQueryString MasterTimeout(string master_timeout)
+		public AliasQueryString MasterTimeout(string master_timeout)
 		{
 			var v = this.CreateString(master_timeout);
 			this._master_timeout = master_timeout;
@@ -3096,12 +3096,12 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/multi-get/
 	///</pre>
 	///</summary>
-	public class MgetQueryString : FluentQueryString<MgetQueryString> 
+	public class MultiGetQueryString : FluentQueryString<MultiGetQueryString> 
 	{
 		
 		internal string[] _fields { get; set; }
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MgetQueryString Fields(params string[] fields)
+		public MultiGetQueryString Fields(params string[] fields)
 		{
 			var v = this.CreateString(fields);
 			this._fields = fields;
@@ -3112,7 +3112,7 @@ namespace Nest
 		
 		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public MgetQueryString Preference(string preference)
+		public MultiGetQueryString Preference(string preference)
 		{
 			var v = this.CreateString(preference);
 			this._preference = preference;
@@ -3123,7 +3123,7 @@ namespace Nest
 		
 		internal bool _realtime { get; set; }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public MgetQueryString Realtime(bool realtime)
+		public MultiGetQueryString Realtime(bool realtime)
 		{
 			var v = this.CreateString(realtime);
 			this._realtime = realtime;
@@ -3134,7 +3134,7 @@ namespace Nest
 		
 		internal bool _refresh { get; set; }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public MgetQueryString Refresh(bool refresh)
+		public MultiGetQueryString Refresh(bool refresh)
 		{
 			var v = this.CreateString(refresh);
 			this._refresh = refresh;
@@ -3145,7 +3145,7 @@ namespace Nest
 		
 		internal string[] __source { get; set; }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MgetQueryString Source(params string[] _source)
+		public MultiGetQueryString Source(params string[] _source)
 		{
 			var v = this.CreateString(_source);
 			this.__source = _source;
@@ -3156,7 +3156,7 @@ namespace Nest
 		
 		internal string[] __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MgetQueryString SourceExclude(params string[] _source_exclude)
+		public MultiGetQueryString SourceExclude(params string[] _source_exclude)
 		{
 			var v = this.CreateString(_source_exclude);
 			this.__source_exclude = _source_exclude;
@@ -3167,7 +3167,7 @@ namespace Nest
 		
 		internal string[] __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MgetQueryString SourceInclude(params string[] _source_include)
+		public MultiGetQueryString SourceInclude(params string[] _source_include)
 		{
 			var v = this.CreateString(_source_include);
 			this.__source_include = _source_include;

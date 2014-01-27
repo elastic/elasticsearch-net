@@ -12,7 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class ClusterStateDescriptor : 
-		IndicesOptionalPathDescriptorBase<ClusterStateDescriptor, ClusterStateQueryString>
+		IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateQueryString>
 		, IPathInfo<ClusterStateQueryString>
 	{
 		ElasticSearchPathInfo<ClusterStateQueryString> IPathInfo<ClusterStateQueryString>.ToPathInfo(IConnectionSettings settings)

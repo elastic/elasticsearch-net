@@ -12,7 +12,7 @@ namespace Nest
 {
 	[DescriptorFor("IndicesAnalyze")]
 	public partial class AnalyzeDescriptor : 
-		IndicesOptionalPathDescriptorBase<AnalyzeDescriptor, AnalyzeQueryString>
+		IndicesOptionalPathDescriptor<AnalyzeDescriptor, AnalyzeQueryString>
 		, IPathInfo<AnalyzeQueryString>
 	{
 

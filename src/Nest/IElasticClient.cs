@@ -13,178 +13,8 @@ namespace Nest
 		IRawElasticClient Raw { get; }
 		ElasticInferrer Infer { get; }
 
-		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
-		IBulkResponse Bulk(BulkDescriptor bulkDescriptor);
-		Task<IBulkResponse> BulkAsync(BulkDescriptor bulkDescriptor);
-
-		ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector);
-		ICountResponse Count(IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector);
-		ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector);
-
-		ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-		ICountResponse Count<T>(IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-		ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-
-		ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector);
-		ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class;
-
-		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<T> objects) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<T> objects, string index) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<T> objects, string index, string type) where T : class;
-		IBulkResponse DeleteMany<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class;
-
-		IDeleteResponse Delete<T>(T @object) where T : class;
-		IDeleteResponse Delete<T>(T @object, DeleteParameters deleteParameters) where T : class;
-		IDeleteResponse Delete<T>(T @object, string index) where T : class;
-		IDeleteResponse Delete<T>(T @object, string index, DeleteParameters deleteParameters) where T : class;
-		IDeleteResponse Delete<T>(T @object, string index, string type) where T : class;
-		IDeleteResponse Delete<T>(T @object, string index, string type, DeleteParameters deleteParameters) where T : class;
-		 
-		Task<IDeleteResponse> DeleteAsync<T>(T @object) where T : class;
-		Task<IDeleteResponse> DeleteAsync<T>(T @object, DeleteParameters deleteParameters) where T : class;
-		Task<IDeleteResponse> DeleteAsync<T>(T @object, string index) where T : class;
-		Task<IDeleteResponse> DeleteAsync<T>(T @object, string index, DeleteParameters deleteParameters) where T : class;
-		Task<IDeleteResponse> DeleteAsync<T>(T @object, string index, string type) where T : class;
-		Task<IDeleteResponse> DeleteAsync<T>(T @object, string index, string type, DeleteParameters deleteParameters) where T : class;
-
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters, string type) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters, string type) where T : class;
-		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index, string type) where T : class;
-
-
-		IDeleteResponse DeleteById(string index, string type, int id);
-		IDeleteResponse DeleteById(string index, string type, int id, DeleteParameters deleteParameters);
-		IDeleteResponse DeleteById(string index, string type, string id);
-		IDeleteResponse DeleteById(string index, string type, string id, DeleteParameters deleteParameters);
-		IDeleteResponse DeleteById<T>(int id) where T : class;
-		IDeleteResponse DeleteById<T>(int id, DeleteParameters deleteParameters) where T : class;
-		IDeleteResponse DeleteById<T>(string id) where T : class;
-		IDeleteResponse DeleteById<T>(string id, DeleteParameters deleteParameters) where T : class;
-		Task<IDeleteResponse> DeleteByIdAsync(string index, string type, int id);
-		Task<IDeleteResponse> DeleteByIdAsync(string index, string type, int id, DeleteParameters deleteParameters);
-		Task<IDeleteResponse> DeleteByIdAsync(string index, string type, string id);
-		Task<IDeleteResponse> DeleteByIdAsync(string index, string type, string id, DeleteParameters deleteParameters);
-		Task<IDeleteResponse> DeleteByIdAsync<T>(int id) where T : class;
-		Task<IDeleteResponse> DeleteByIdAsync<T>(int id, DeleteParameters deleteParameters) where T : class;
-		Task<IDeleteResponse> DeleteByIdAsync<T>(string id) where T : class;
-		Task<IDeleteResponse> DeleteByIdAsync<T>(string id, DeleteParameters deleteParameters) where T : class;
-
-		IDeleteResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
-		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> query, DeleteByQueryParameters parameters = null) where T : class;
-
-		T Get<T>(int id) where T : class;
-		T Get<T>(string id) where T : class;
-		T Get<T>(string index, string type, int id) where T : class;
-		T Get<T>(string index, string type, string id) where T : class;
-		T Get<T>(Action<GetDescriptor<T>> getSelector) where T : class;
-
-		FieldSelection<T> GetFieldSelection<T>(Action<GetDescriptor<T>> getSelector) where T : class;
-
-		IGetResponse<T> GetFull<T>(int id) where T : class;
-		IGetResponse<T> GetFull<T>(string id) where T : class;
-		IGetResponse<T> GetFull<T>(string index, string type, int id) where T : class;
-		IGetResponse<T> GetFull<T>(string index, string type, string id) where T : class;
-		IGetResponse<T> GetFull<T>(Action<GetDescriptor<T>> getSelector) where T : class;
-
-		IEnumerable<T> MultiGet<T>(IEnumerable<int> ids) where T : class;
-		IEnumerable<T> MultiGet<T>(IEnumerable<string> ids) where T : class;
-		IEnumerable<T> MultiGet<T>(string index, IEnumerable<int> ids) where T : class;
-		IEnumerable<T> MultiGet<T>(string index, IEnumerable<string> ids) where T : class;
-		
-		IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<int> ids) where T : class;
-		IEnumerable<T> MultiGet<T>(string index, string type, IEnumerable<string> ids) where T : class;
-
-		MultiGetResponse MultiGetFull(Action<MultiGetDescriptor> multiGetSelector);
-
-		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<T> objects) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, string type) where T : class;
-		IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class;
-
-		IIndexResponse Index<T>(T @object) where T : class;
-		IIndexResponse Index<T>(T @object, IndexParameters indexParameters) where T : class;
-		IIndexResponse Index<T>(T @object, string index) where T : class;
-		IIndexResponse Index<T>(T @object, string index, IndexParameters indexParameters) where T : class;
-		IIndexResponse Index<T>(T @object, string index, string type) where T : class;
-		IIndexResponse Index<T>(T @object, string index = null, string type = null, IndexParameters indexParameters = null) where T : class;
-		IIndexResponse Index<T>(T @object, string index, string type, int id) where T : class;
-		IIndexResponse Index<T>(T @object, string index, string type, int id, IndexParameters indexParameters) where T : class;
-		IIndexResponse Index<T>(T @object, string index, string type, string id) where T : class;
-		IIndexResponse Index<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class;
-
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type) where T : class;
-		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, IndexParameters indexParameters) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index, IndexParameters indexParameters) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, IndexParameters indexParameters) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, int id) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, int id, IndexParameters indexParameters) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id) where T : class;
-		Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class;
-		
 
 		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector) where T : class;
-
-		//alias
-		IIndicesOperationResponse Alias(AliasParams aliasParams);
-		IIndicesOperationResponse Alias(IEnumerable<AliasParams> aliases);
-		IIndicesOperationResponse Alias(IEnumerable<string> aliases);
-		IIndicesOperationResponse Alias(IEnumerable<string> indices, string alias);
-		IIndicesOperationResponse Alias(string alias);
-		IIndicesOperationResponse Alias(string index, IEnumerable<string> aliases);
-		IIndicesOperationResponse Alias(string index, string alias);
-		IIndicesOperationResponse RemoveAlias(AliasParams aliasParams);
-		IIndicesOperationResponse RemoveAlias(IEnumerable<string> aliases);
-		IIndicesOperationResponse RemoveAlias(string alias);
-		IIndicesOperationResponse RemoveAlias(string index, IEnumerable<string> aliases);
-		IIndicesOperationResponse RemoveAlias(string index, string alias);
-		IIndicesOperationResponse RemoveAliases(IEnumerable<AliasParams> aliases);
-		
-		IEnumerable<string> GetIndicesPointingToAlias(string alias);
-		IIndicesOperationResponse Swap(string alias, IEnumerable<string> oldIndices, IEnumerable<string> newIndices);
-		IIndicesOperationResponse Rename(string index, string oldAlias, string newAlias);
-		//end alias
-		
-		//converted
-
 		IQueryResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 		Task<IQueryResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
@@ -279,5 +109,37 @@ namespace Nest
 		Task<IQueryResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
 			where T : class
 			where TResult : class;
+
+		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
+		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
+		ICountResponse Count<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector) where T : class;
+		Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector) where T : class;
+		IDeleteResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector) where T : class;
+		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector) where T : class;
+		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
+		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
+		IBulkResponse DeleteMany<T>(IEnumerable<T> @objects, string index = null, string type = null) where T : class;
+		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null) where T : class;
+
+		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+			where T : class;
+
+		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+			where T : class;
+
+		IDeleteResponse Delete<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) where T : class;
+		Task<IDeleteResponse> DeleteAsync<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) where T : class;
+		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
+		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
+		FieldSelection<T> SourceFields<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
+		Task<FieldSelection<T>> SourceFieldsAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
+		T Source<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
+		Task<T> SourceAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
+		IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
+		Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
+		IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
+		Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
+		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
+		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 	}
 }

@@ -12,7 +12,7 @@ namespace Nest
 		internal virtual Type _ClrType { get; set; }
 
 		[JsonProperty(PropertyName = "_index")]
-		internal string _Index { get; set; }
+		internal IndexNameMarker _Index { get; set; }
 
 		[JsonProperty(PropertyName = "_type")]
 		internal TypeNameMarker _Type { get; set; }

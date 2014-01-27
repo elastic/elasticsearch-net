@@ -1227,7 +1227,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesGetAliasDispatch(ElasticSearchPathInfo<IndicesGetAliasQueryString> pathInfo )
+		internal ConnectionStatus IndicesGetAliasDispatch(ElasticSearchPathInfo<GetAliasesQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1245,7 +1245,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesGetAliasDispatchAsync(ElasticSearchPathInfo<IndicesGetAliasQueryString> pathInfo )
+		internal Task<ConnectionStatus> IndicesGetAliasDispatchAsync(ElasticSearchPathInfo<GetAliasesQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1935,7 +1935,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus IndicesUpdateAliasesDispatch(ElasticSearchPathInfo<IndicesUpdateAliasesQueryString> pathInfo , object body)
+		internal ConnectionStatus IndicesUpdateAliasesDispatch(ElasticSearchPathInfo<AliasQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -1950,7 +1950,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> IndicesUpdateAliasesDispatchAsync(ElasticSearchPathInfo<IndicesUpdateAliasesQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> IndicesUpdateAliasesDispatchAsync(ElasticSearchPathInfo<AliasQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2061,7 +2061,7 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus MgetDispatch(ElasticSearchPathInfo<MgetQueryString> pathInfo , object body)
+		internal ConnectionStatus MgetDispatch(ElasticSearchPathInfo<MultiGetQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -2092,7 +2092,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ConnectionStatus> MgetDispatchAsync(ElasticSearchPathInfo<MgetQueryString> pathInfo , object body)
+		internal Task<ConnectionStatus> MgetDispatchAsync(ElasticSearchPathInfo<MultiGetQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{

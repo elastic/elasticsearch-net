@@ -23,7 +23,7 @@ namespace Nest
 		where K : FluentQueryString<K>, new()
 	{
 
-		internal string _Index { get; set; }
+		internal IndexNameMarker _Index { get; set; }
 		internal TypeNameMarker _Type { get; set; }
 		internal string _Id { get; set; }
 		internal T _Object { get; set; }
@@ -31,6 +31,18 @@ namespace Nest
 		public P Index(string index)
 		{
 			this._Index = index;
+			return (P)this;
+		}
+
+		public P Index(Type index)
+		{
+			this._Index = index;
+			return (P)this;
+		}
+
+		public P Index<TAlternative>() where TAlternative : class
+		{
+			this._Index = typeof(T);
 			return (P)this;
 		}
 
@@ -42,6 +54,11 @@ namespace Nest
 		public P Type(Type type)
 		{
 			this._Type = type;
+			return (P)this;
+		}
+		public P Type<TAlternative>() where TAlternative : class
+		{
+			this._Type = typeof(TAlternative);
 			return (P)this;
 		}
 		public P Id(int id)
@@ -62,7 +79,7 @@ namespace Nest
 			where K : FluentQueryString<K>, new()
 		{
 			var inferrer = new ElasticInferrer(settings);
-			var index = this._Index ?? inferrer.IndexName<T>();
+			var index = this._Index != null ? inferrer.IndexName(this._Index) : inferrer.IndexName<T>();
 			var type = this._Type != null ? this._Type.Resolve(settings) : inferrer.TypeName<T>();
 			var id = this._Id ?? inferrer.Id(this._Object);
 			var pathInfo = new ElasticSearchPathInfo<K>()

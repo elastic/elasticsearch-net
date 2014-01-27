@@ -81,9 +81,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackwardsCompatibility\IElasticClientExtensions.cs" />
+    <Compile Include="Domain\Alias\AliasAddDescriptor.cs" />
+    <Compile Include="Domain\Alias\AliasAddOperation.cs" />
+    <Compile Include="Domain\Alias\AliasRemoveDescriptor.cs" />
+    <Compile Include="Domain\Alias\AliasRemoveOperation.cs" />
+    <Compile Include="Domain\Alias\IAliasAction.cs" />
+    <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
+    <Compile Include="Domain\Responses\GetAliasesResponse.cs" />
     <Compile Include="Domain\Responses\GetMappingResponse.cs" />
     <Compile Include="Domain\Responses\IMultiSearchResponse.cs" />
+    <Compile Include="Domain\Bulk\BulkUpdateBody.cs" />
+    <Compile Include="Domain\Alias\IndexAliases.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
@@ -91,6 +100,11 @@
     <Compile Include="DSL\ClusterNodeInfoDescriptor.cs" />
     <Compile Include="DSL\ClusterHealthDescriptor.cs" />
     <Compile Include="DSL\AnalyzeDescriptor.cs" />
+    <Compile Include="DSL\AliasDescriptor.cs" />
+    <Compile Include="DSL\GetAliasesDescriptor.cs" />
+    <Compile Include="DSL\DeleteDescriptor.cs" />
+    <Compile Include="DSL\IndexDescriptor.cs" />
+    <Compile Include="DSL\CountDescriptor.cs" />
     <Compile Include="DSL\IndexExistsDescriptor.cs" />
     <Compile Include="DSL\IndicesStatsDescriptor.cs" />
     <Compile Include="DSL\InfoDescriptor.cs" />
@@ -99,6 +113,8 @@
     <Compile Include="DSL\FlushDescriptor.cs" />
     <Compile Include="DSL\DeleteMappingDescriptor.cs" />
     <Compile Include="DSL\GetMappingDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndicesOptionalPathDescriptor.cs" />
+    <Compile Include="DSL\Paths\IndicesOptionalExplicitAllPathDescriptor.cs" />
     <Compile Include="DSL\Paths\FixedIndexTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\NodeIdOptionalDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathDescriptor.cs" />
@@ -110,7 +126,7 @@
     <Compile Include="DSL\GetTemplateDescriptor.cs" />
     <Compile Include="DSL\DeleteWarmerDescriptor.cs" />
     <Compile Include="DSL\IActAsSearchDescriptor.cs" />
-    <Compile Include="DSL\IPathInfo.cs" />
+    <Compile Include="Domain\DSL\IPathInfo.cs" />
     <Compile Include="DSL\Paths\IndexNamePathDescriptor.cs" />
     <Compile Include="DSL\Paths\NamePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
@@ -121,13 +137,12 @@
     <Compile Include="DSL\IActAsQuery.cs" />
     <Compile Include="DSL\OpenIndexDescriptor.cs" />
     <Compile Include="DSL\FluentDictionary.cs" />
-    <Compile Include="DSL\Paths\IndicesOptionalPathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexPathDescriptor.cs" />
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
-    <Compile Include="DSL\BaseSimpleGetDescriptor.cs" />
+    <Compile Include="DSL\ISimpleGetDescriptor.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
     <Compile Include="DSL\SimpleGetDescriptor.cs" />
@@ -246,7 +261,6 @@
     <Compile Include="DSL\BulkIndexDescriptor.cs" />
     <Compile Include="DSL\BulkDeleteDescriptor.cs" />
     <Compile Include="DSL\Query\IMultiTermQuery.cs" />
-    <Compile Include="ElasticClient-DeleteById.cs" />
     <Compile Include="ElasticClient-DeleteByQuery.cs" />
     <Compile Include="ElasticClient-DeleteMany.cs" />
     <Compile Include="Domain\Analysis\Analyzers\Language.cs" />
@@ -352,7 +366,7 @@
     <Compile Include="DSL\PutMappingDescriptor.cs" />
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\MultiGetDescriptor.cs" />
-    <Compile Include="ElasticClient-GetFull.cs" />
+    <Compile Include="ElasticClient-Get.cs" />
     <Compile Include="Domain\Connection\InMemoryConnection.cs" />
     <Compile Include="Domain\FieldSelection.cs" />
     <Compile Include="Domain\Responses\BulkResponse.cs" />
@@ -369,12 +383,12 @@
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
     <Compile Include="DSL\ValidateQueryDescriptor.cs" />
     <Compile Include="ElasticClient-Validate.cs" />
-    <Compile Include="DSL\Filter.cs" />
-    <Compile Include="DSL\Query.cs" />
+    <Compile Include="Domain\DSL\Filter.cs" />
+    <Compile Include="Domain\DSL\Query.cs" />
     <Compile Include="ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
-    <Compile Include="DSL\BaseQuery.cs" />
-    <Compile Include="DSL\BaseFilter.cs" />
+    <Compile Include="Domain\DSL\BaseQuery.cs" />
+    <Compile Include="Domain\DSL\BaseFilter.cs" />
     <Compile Include="DSL\IFilterDescriptor.cs" />
     <Compile Include="DSL\IQueryDescriptor.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
@@ -589,6 +603,7 @@
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="Resolvers\Converters\ActAsSearchDescriptorConverter.cs" />
+    <Compile Include="Resolvers\Converters\GetAliasesResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\RawJsonConverterConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
@@ -615,7 +630,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\TokenFilterBase.cs" />
     <Compile Include="ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-MappingType.cs" />
-    <Compile Include="ElasticClient-Get.cs" />
+    <Compile Include="ElasticClient-Source.cs" />
     <Compile Include="ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
     <Compile Include="Extensions\Extensions.cs" />

@@ -16,13 +16,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "_percolate")]
 		internal string _Percolate { get; set; }
 
-		private readonly TypeNameResolver _typeNameResolver;
-
-		public BulkIndexDescriptor()
-		{
-			this._typeNameResolver = new TypeNameResolver();
-		}
-
 		internal override string GetIdForObject(ElasticInferrer inferrer)
 		{
 			if (!this._Id.IsNullOrEmpty())

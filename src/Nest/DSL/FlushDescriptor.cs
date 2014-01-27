@@ -12,7 +12,7 @@ namespace Nest
 {
 	[DescriptorFor("IndicesFlush")]
 	public partial class FlushDescriptor : 
-		IndicesOptionalPathDescriptorBase<FlushDescriptor, FlushQueryString>
+		IndicesOptionalExplicitAllPathDescriptor<FlushDescriptor, FlushQueryString>
 		, IPathInfo<FlushQueryString>
 	{
 		ElasticSearchPathInfo<FlushQueryString> IPathInfo<FlushQueryString>.ToPathInfo(IConnectionSettings settings)

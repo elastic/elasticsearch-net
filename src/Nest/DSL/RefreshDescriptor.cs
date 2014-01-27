@@ -12,7 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("IndicesRefresh")]
-	public partial class RefreshDescriptor : IndicesOptionalPathDescriptorBase<RefreshDescriptor, RefreshQueryString>
+	public partial class RefreshDescriptor : IndicesOptionalPathDescriptor<RefreshDescriptor, RefreshQueryString>
 		, IPathInfo<RefreshQueryString>
 	{
 		ElasticSearchPathInfo<RefreshQueryString> IPathInfo<RefreshQueryString>.ToPathInfo(IConnectionSettings settings)

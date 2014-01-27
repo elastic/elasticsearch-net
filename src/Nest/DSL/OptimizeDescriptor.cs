@@ -12,7 +12,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[DescriptorFor("IndicesOptimize")]
-	public partial class OptimizeDescriptor : IndicesOptionalPathDescriptorBase<OptimizeDescriptor, OptimizeQueryString>
+	public partial class OptimizeDescriptor : IndicesOptionalPathDescriptor<OptimizeDescriptor, OptimizeQueryString>
 	{
 		internal new ElasticSearchPathInfo<OptimizeQueryString> ToPathInfo(IConnectionSettings settings)
 		{

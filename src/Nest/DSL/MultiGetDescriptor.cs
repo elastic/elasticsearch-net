@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -9,12 +10,36 @@ using Nest.Domain;
 
 namespace Nest
 {
-	public class MultiGetDescriptor
+
+	[DescriptorFor("Mget")]
+	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetQueryString>
+		, IPathInfo<MultiGetQueryString>
 	{
 		internal readonly IList<BaseSimpleGetDescriptor> _GetOperations = new List<BaseSimpleGetDescriptor>();
+		private readonly IConnectionSettings _settings;
 
-		internal string _FixedIndex { get; set; }
-		internal string _FixedType { get; set; }
+		[JsonProperty("docs")]
+		internal IEnumerable<MultiGetDoc> Docs
+		{
+			get
+			{
+				var inferrer = new ElasticInferrer(this._settings);
+				return this._GetOperations.Select(g => new MultiGetDoc
+				{
+					Index = g._Index == null ? inferrer.IndexName(g._ClrType) : inferrer.IndexName(g._Index),
+					Type = g._Type == null ? inferrer.TypeName(g._ClrType) : inferrer.TypeName(g._Type),
+					Fields = g._Fields,
+					Routing = g._Routing,
+					Id = g._Id
+
+				});
+			}
+		} 
+
+		public MultiGetDescriptor(IConnectionSettings settings)
+		{
+			_settings = settings;
+		}
 
 		public MultiGetDescriptor Get<K>(Action<SimpleGetDescriptor<K>> getSelector) where K : class
 		{
@@ -28,15 +53,11 @@ namespace Nest
 
 		}
 
-		/// <summary>
-		/// Allows you to perform the multiget on a fixed path. 
-		/// The index and optionally type specified here take precedence over the chained get operations.
-		/// </summary>
-		public void FixedPath(string index, string type = null)
+		ElasticSearchPathInfo<MultiGetQueryString> IPathInfo<MultiGetQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			index.ThrowIfNullOrEmpty("index");
-			this._FixedIndex = index;
-			this._FixedType = type;
+			var pathInfo = this.ToPathInfo<MultiGetQueryString>(settings);
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST; // no data in GETS in the .net world
+			return pathInfo;
 		}
 	}
 }

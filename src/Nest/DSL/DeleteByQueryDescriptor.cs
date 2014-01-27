@@ -12,8 +12,9 @@ namespace Nest
 {
 	[JsonConverter(typeof(ActAsQueryConverter))]
 	public partial class DeleteByQueryDescriptor<T> 
-		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryQueryString>,
-		IActAsQuery
+		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryQueryString>
+		, IActAsQuery
+		, IPathInfo<DeleteByQueryQueryString> 
 		where T : class
 	{
 		BaseQuery IActAsQuery._Query { get; set; }
@@ -24,12 +25,11 @@ namespace Nest
 			return this;
 		}
 
-
-		internal override ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
+		ElasticSearchPathInfo<DeleteByQueryQueryString> IPathInfo<DeleteByQueryQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var x = base.ToPathInfo<K>(settings);
-
-			return x;
+			var pathInfo = this.ToPathInfo<DeleteByQueryQueryString>(settings);
+			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+			return pathInfo;
 		}
 	}
 }

@@ -15,14 +15,22 @@ namespace Nest
 	/// <pre>
 	///	/{indices}
 	/// </pre>
-	/// {indices} is optional 
+	/// {indices} is optional but AllIndices() needs to be explicitly called.
 	/// </summary>
-	public class IndicesOptionalPathDescriptor<P, K> 
-		where P : IndicesOptionalPathDescriptor<P, K>, new()
+	public class IndicesOptionalExplicitAllPathDescriptor<P, K> 
+		where P : IndicesOptionalExplicitAllPathDescriptor<P, K>, new()
 		where K : FluentQueryString<K>, new()
 	{
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
 		
+		internal bool? _AllIndices { get; set; }
+
+		public P AllIndices(bool allIndices = true)
+		{
+			this._AllIndices = allIndices;
+			return (P)this;
+		}
+			
 		public P Index(string index)
 		{
 			return this.Indices(index);
@@ -48,7 +56,12 @@ namespace Nest
 		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
 			where K : FluentQueryString<K>, new()
 		{
-			var index = this._Indices == null ? null : string.Join(",", this._Indices.Select(i => new ElasticInferrer(settings).IndexName(i)));
+			if (!this._AllIndices.HasValue && this._Indices == null)
+				throw new DslException("missing Index() or explicit OnAllIndices()");
+
+			string index = "_all";
+			if (!this._AllIndices.GetValueOrDefault(false))
+				index = string.Join(",", this._Indices.Select(i => new ElasticInferrer(settings).IndexName(i)));
 
 			var pathInfo = new ElasticSearchPathInfo<K>()
 			{

@@ -947,27 +947,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		ConnectionStatus IndicesGetAlias(string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null);
+		ConnectionStatus IndicesGetAlias(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null);
 		
 		///<summary>GET /_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		Task<ConnectionStatus> IndicesGetAliasAsync(string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetAliasAsync(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		ConnectionStatus IndicesGetAlias(string index, string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null);
+		ConnectionStatus IndicesGetAlias(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		Task<ConnectionStatus> IndicesGetAliasAsync(string index, string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesGetAliasAsync(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null);
 		
 		///<summary>GET /_aliases
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
@@ -1523,13 +1523,13 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
-		ConnectionStatus IndicesUpdateAliasesPost(object body, Func<IndicesUpdateAliasesQueryString, IndicesUpdateAliasesQueryString> queryString = null);
+		ConnectionStatus IndicesUpdateAliasesPost(object body, Func<AliasQueryString, AliasQueryString> queryString = null);
 		
 		///<summary>POST /_aliases
 		///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
-		Task<ConnectionStatus> IndicesUpdateAliasesPostAsync(object body, Func<IndicesUpdateAliasesQueryString, IndicesUpdateAliasesQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesUpdateAliasesPostAsync(object body, Func<AliasQueryString, AliasQueryString> queryString = null);
 		
 		///<summary>GET /_validate/query
 		///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
@@ -1632,64 +1632,64 @@ namespace Nest
 		///<summary>GET /_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
-		ConnectionStatus MgetGet(Func<MgetQueryString, MgetQueryString> queryString = null);
+		ConnectionStatus MgetGet(Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>GET /_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
-		Task<ConnectionStatus> MgetGetAsync(Func<MgetQueryString, MgetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetGetAsync(Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		ConnectionStatus MgetGet(string index, Func<MgetQueryString, MgetQueryString> queryString = null);
+		ConnectionStatus MgetGet(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		Task<ConnectionStatus> MgetGetAsync(string index, Func<MgetQueryString, MgetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetGetAsync(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
-		ConnectionStatus MgetGet(string index, string type, Func<MgetQueryString, MgetQueryString> queryString = null);
+		ConnectionStatus MgetGet(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
-		Task<ConnectionStatus> MgetGetAsync(string index, string type, Func<MgetQueryString, MgetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetGetAsync(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		ConnectionStatus MgetPost(object body, Func<MgetQueryString, MgetQueryString> queryString = null);
+		ConnectionStatus MgetPost(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		Task<ConnectionStatus> MgetPostAsync(object body, Func<MgetQueryString, MgetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetPostAsync(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		ConnectionStatus MgetPost(string index, object body, Func<MgetQueryString, MgetQueryString> queryString = null);
+		ConnectionStatus MgetPost(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		Task<ConnectionStatus> MgetPostAsync(string index, object body, Func<MgetQueryString, MgetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetPostAsync(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
@@ -1697,7 +1697,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		ConnectionStatus MgetPost(string index, string type, object body, Func<MgetQueryString, MgetQueryString> queryString = null);
+		ConnectionStatus MgetPost(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mget
 		///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
@@ -1705,7 +1705,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		Task<ConnectionStatus> MgetPostAsync(string index, string type, object body, Func<MgetQueryString, MgetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetPostAsync(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/{id}/_mlt
 		///<pre>http://elasticsearch.org/guide/reference/api/more-like-this/</pre>	

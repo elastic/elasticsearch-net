@@ -143,11 +143,54 @@ namespace Nest
 
 		    return settings;
 		}
+		
+		public 
 
+		public string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor)
+		{
+			bulkDescriptor.ThrowIfNull("bulkDescriptor");
+			bulkDescriptor._Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
+			var sb = new StringBuilder();
+			var inferrer = new ElasticInferrer(this._settings);
+
+			foreach (var operation in bulkDescriptor._Operations)
+			{
+				var command = operation._Operation;
+				var index = operation._Index ??
+							bulkDescriptor._Index ??
+							inferrer.IndexName(operation._ClrType);
+				var typeName = operation._Type
+							   ?? bulkDescriptor._Type
+							   ?? inferrer.TypeName(operation._ClrType);
+
+				var id = operation.GetIdForObject(inferrer);
+				operation._Index = index;
+				operation._Type = typeName;
+				operation._Id = id;
+
+				var opJson = this.Serialize(operation, Formatting.None);
+
+				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
+				sb.Append(action);
+
+				if (command == "index" || command == "create")
+				{
+					string jsonCommand = this.Serialize(operation._Object, Formatting.None);
+					sb.Append(jsonCommand + "\n");
+				}
+				else if (command == "update")
+				{
+					string jsonCommand = this.Serialize(operation.GetBody(), Formatting.None);
+					sb.Append(jsonCommand + "\n");
+				}
+			}
+			var json = sb.ToString();
+			return json;
+		}
 		/// <summary>
 		/// _msearch needs a specialized json format in the body
 		/// </summary>
-		internal string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor)
+		public string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor)
 		{
 			var sb = new StringBuilder();
 			foreach (var operation in multiSearchDescriptor._Operations.Values)
@@ -169,18 +212,19 @@ namespace Nest
 
 				var op = new { index = index, type = typeName, search_type = this.GetSearchType(operation, multiSearchDescriptor), 
 					preference = operation._Preference, routing = operation._Routing };
-				var opJson =  JsonConvert.SerializeObject(op, Formatting.None);
+				var opJson =  this.Serialize(op, Formatting.None);
 
 				var action = "{0}\n".F(opJson);
 				sb.Append(action);
-				var searchJson = JsonConvert.SerializeObject(operation, Formatting.None);
+				var searchJson = this.Serialize(operation, Formatting.None);
 				sb.Append(searchJson + "\n");
 
 			}
 			var json = sb.ToString();
 			return json;
 		}
-		private string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
+	
+		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
 			if (!descriptor._SearchType.HasValue)
 				return null;

@@ -2656,14 +2656,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public ConnectionStatus IndicesGetAlias(string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null)
+		public ConnectionStatus IndicesGetAlias(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_alias/{name}".Inject(new { name = Stringify(name) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasQueryString());
+				var qs = queryString(new GetAliasesQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2674,14 +2674,14 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public Task<ConnectionStatus> IndicesGetAliasAsync(string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesGetAliasAsync(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNull("name");
 			var url = "/_alias/{name}".Inject(new { name = Stringify(name) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasQueryString());
+				var qs = queryString(new GetAliasesQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2693,7 +2693,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public ConnectionStatus IndicesGetAlias(string index, string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null)
+		public ConnectionStatus IndicesGetAlias(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2701,7 +2701,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasQueryString());
+				var qs = queryString(new GetAliasesQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -2713,7 +2713,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		public Task<ConnectionStatus> IndicesGetAliasAsync(string index, string name, Func<IndicesGetAliasQueryString, IndicesGetAliasQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesGetAliasAsync(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
@@ -2721,7 +2721,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesGetAliasQueryString());
+				var qs = queryString(new GetAliasesQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4336,13 +4336,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
-		public ConnectionStatus IndicesUpdateAliasesPost(object body, Func<IndicesUpdateAliasesQueryString, IndicesUpdateAliasesQueryString> queryString = null)
+		public ConnectionStatus IndicesUpdateAliasesPost(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
 		{
 			var url = "/_aliases".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesUpdateAliasesQueryString());
+				var qs = queryString(new AliasQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4353,13 +4353,13 @@ namespace Nest
 	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
 	    ///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
-		public Task<ConnectionStatus> IndicesUpdateAliasesPostAsync(object body, Func<IndicesUpdateAliasesQueryString, IndicesUpdateAliasesQueryString> queryString = null)
+		public Task<ConnectionStatus> IndicesUpdateAliasesPostAsync(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
 		{
 			var url = "/_aliases".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new IndicesUpdateAliasesQueryString());
+				var qs = queryString(new AliasQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4655,13 +4655,13 @@ namespace Nest
 		///<summary>GET /_mget
 	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 	    ///</summary>
-		public ConnectionStatus MgetGet(Func<MgetQueryString, MgetQueryString> queryString = null)
+		public ConnectionStatus MgetGet(Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			var url = "/_mget";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4671,13 +4671,13 @@ namespace Nest
 		///<summary>GET /_mget
 	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 	    ///</summary>
-		public Task<ConnectionStatus> MgetGetAsync(Func<MgetQueryString, MgetQueryString> queryString = null)
+		public Task<ConnectionStatus> MgetGetAsync(Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			var url = "/_mget";
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4688,14 +4688,14 @@ namespace Nest
 	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
-		public ConnectionStatus MgetGet(string index, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public ConnectionStatus MgetGet(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_mget".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4706,14 +4706,14 @@ namespace Nest
 	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
-		public Task<ConnectionStatus> MgetGetAsync(string index, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public Task<ConnectionStatus> MgetGetAsync(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_mget".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4725,7 +4725,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
-		public ConnectionStatus MgetGet(string index, string type, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public ConnectionStatus MgetGet(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -4733,7 +4733,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4745,7 +4745,7 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
-		public Task<ConnectionStatus> MgetGetAsync(string index, string type, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public Task<ConnectionStatus> MgetGetAsync(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -4753,7 +4753,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4764,13 +4764,13 @@ namespace Nest
 	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 	    ///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		public ConnectionStatus MgetPost(object body, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public ConnectionStatus MgetPost(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			var url = "/_mget".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4781,13 +4781,13 @@ namespace Nest
 	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
 	    ///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		public Task<ConnectionStatus> MgetPostAsync(object body, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public Task<ConnectionStatus> MgetPostAsync(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			var url = "/_mget".Inject(new {  });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4799,14 +4799,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		public ConnectionStatus MgetPost(string index, object body, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public ConnectionStatus MgetPost(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_mget".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4818,14 +4818,14 @@ namespace Nest
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		public Task<ConnectionStatus> MgetPostAsync(string index, object body, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public Task<ConnectionStatus> MgetPostAsync(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			var url = "/{index}/_mget".Inject(new { index = Stringify(index) });
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4838,7 +4838,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		public ConnectionStatus MgetPost(string index, string type, object body, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public ConnectionStatus MgetPost(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -4846,7 +4846,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 
@@ -4859,7 +4859,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		public Task<ConnectionStatus> MgetPostAsync(string index, string type, object body, Func<MgetQueryString, MgetQueryString> queryString = null)
+		public Task<ConnectionStatus> MgetPostAsync(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
@@ -4867,7 +4867,7 @@ namespace Nest
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new MgetQueryString());
+				var qs = queryString(new MultiGetQueryString());
 				if (qs != null) nv = qs.NameValueCollection;
 			}
 

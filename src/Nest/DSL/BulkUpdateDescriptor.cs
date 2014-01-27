@@ -3,27 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class BulkUpdateBody<T, K> 
-		where T : class
- 		where K : class
-	{
-		[JsonProperty(PropertyName = "doc")]
-		internal K _Document { get; set; }
-		[JsonProperty(PropertyName = "script")]
-		internal string _Script { get; set; }
-		
-		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> _Params { get; set; }
-		
-		[JsonProperty(PropertyName = "upsert")]
-		internal object _Upsert { get; set; }
-	}
-
 	public class BulkUpdateDescriptor<T, K> : BaseBulkOperation
 		 where T : class
 		where K : class
@@ -38,13 +20,6 @@ namespace Nest
 		internal Dictionary<string, object> _Params { get; set; }
 		internal object _Upsert { get; set; }
 
-
-		private readonly TypeNameResolver _typeNameResolver;
-
-		public BulkUpdateDescriptor()
-		{
-			this._typeNameResolver = new TypeNameResolver();
-		}
 
 		internal override object GetBody()
 		{

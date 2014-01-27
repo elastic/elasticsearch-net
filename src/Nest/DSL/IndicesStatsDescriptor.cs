@@ -12,7 +12,7 @@ namespace Nest
 {
 	[DescriptorFor("IndicesStats")]
 	public partial class IndicesStatsDescriptor : 
-		IndicesOptionalPathDescriptorBase<IndicesStatsDescriptor, IndicesStatsQueryString>
+		IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsQueryString>
 		, IPathInfo<IndicesStatsQueryString>
 	{
 		ElasticSearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettings settings)
