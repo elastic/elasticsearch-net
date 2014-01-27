@@ -438,10 +438,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			if (this._Fields == null)
-				this._Fields = new List<string>();
-			foreach (var e in expressions)
-				this._Fields.Add(new PropertyNameResolver().Resolve(e));
+			var pr = new PropertyNameResolver();
+			this._Fields = expressions.Select(pr.Resolve).ToList();
 			return this;
 		}
 		/// <summary>

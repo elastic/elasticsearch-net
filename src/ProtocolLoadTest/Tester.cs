@@ -37,16 +37,13 @@ namespace ProtocolLoadTest
 		
 		protected static void GenerateAndIndex(ElasticClient client, string indexName, int numMessages, int bufferSize)
 		{
-			// refresh = false is default on elasticsearch's side.
-			var bulkParms = new SimpleBulkParameters() { Refresh = false };
-
 			var msgGenerator = new MessageGenerator();
 			var tasks = new List<Task>();
 			var partitionedMessages = msgGenerator.Generate(numMessages).Partition(bufferSize);
 			Interlocked.Exchange(ref NumSent, 0);
 			foreach (var messages in partitionedMessages)
 			{
-				var t = client.IndexMany(messages, indexName, bulkParms);
+				var t = client.IndexMany(messages, indexName);
 
 				Interlocked.Add(ref NumSent, bufferSize);
 				if (NumSent % 10000 == 0)

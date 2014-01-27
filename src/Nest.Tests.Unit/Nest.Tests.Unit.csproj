@@ -89,7 +89,7 @@
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
-    <Compile Include="Core\Get\GetFullTests.cs" />
+    <Compile Include="Core\Get\GetTests.cs" />
     <Compile Include="Core\Index\IndexTests.cs" />
     <Compile Include="Core\Indices\Analysis\BaseAnalysisTests.cs" />
     <Compile Include="Core\Indices\Analysis\Tokenizers\TokenizerTests.cs" />
@@ -184,8 +184,6 @@
     <Compile Include="Search\Filter\Singles\TermFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\TermsFilterJson.cs" />
     <Compile Include="Search\Filter\Singles\TypeFilterJson.cs" />
-    <Compile Include="Internals\Inferno\PathResolverTest.cs" />
-    <Compile Include="Internals\Inferno\MapTypeIndicesTests.cs" />
     <Compile Include="Internals\Inferno\IdLookupTests.cs" />
     <Compile Include="Internals\Inferno\PropertyNameResolverTests.cs" />
     <Compile Include="Core\AttributeBasedMap\BaseAttributeMappingTests.cs" />

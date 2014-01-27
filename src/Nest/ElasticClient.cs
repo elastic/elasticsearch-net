@@ -14,8 +14,6 @@ namespace Nest
 
 		internal RawDispatch RawDispatch { get; private set; }
 
-		private PathResolver PathResolver { get; set; }
-
 		public IConnection Connection { get; protected set; }
 		public ElasticSerializer Serializer { get; protected set; }
 		public IRawElasticClient Raw { get; private set; }
@@ -35,8 +33,6 @@ namespace Nest
 
 			this._connectionSettings = settings;
 			this.Connection = connection;
-
-			this.PathResolver = new PathResolver(settings);
 
 			this.PropertyNameResolver = new PropertyNameResolver();
 

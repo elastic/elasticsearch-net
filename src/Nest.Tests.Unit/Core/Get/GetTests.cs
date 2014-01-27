@@ -14,27 +14,21 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Unit.Core.Get
 {
 	[TestFixture]
-	public class GetFullTests : BaseJsonTests
+	public class GetTests : BaseJsonTests
 	{
 		[Test]
 		public void GetSimple()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>(1);
+			var result = this._client.Get<ElasticSearchProject>(g=>g.Id(1));
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1", status.RequestUrl);
 		}
-		[Test]
-		public void GetWithPathInfo()
-		{
-			var result = this._client.GetFull<ElasticSearchProject>("myindex", "mytype", 404);
-			var status = result.ConnectionStatus;
-			StringAssert.EndsWith("/myindex/mytype/404", status.RequestUrl);
-		}
+		
 		[Test]
 		public void GetUsingDescriptor()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>(g=>g
+			var result = this._client.Get<ElasticSearchProject>(g=>g
 				.Index("myindex")
 				.Id(404)
 			);
@@ -45,7 +39,7 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetUsingDescriptorWithType()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>(g => g
+			var result = this._client.Get<ElasticSearchProject>(g => g
 				.Index("myindex")
 				.Type("mytype")
 				.Id(404)
@@ -56,7 +50,7 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetUsingDescriptorWithTypeAndFields()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>(g => g
+			var result = this._client.Get<ElasticSearchProject>(g => g
 				.Index("myindex")
 				.Type("mytype")
 				.Id(404)

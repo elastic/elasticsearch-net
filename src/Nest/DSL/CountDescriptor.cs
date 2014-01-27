@@ -25,7 +25,7 @@ namespace Nest
 			var pathInfo = base.ToPathInfo<CountQueryString>(settings);
 			pathInfo.QueryString = this._QueryString;
 			var qs = this._QueryString;
-			pathInfo.HttpMethod = (!qs._source.IsNullOrEmpty() || !qs._q.IsNullOrEmpty())
+			pathInfo.HttpMethod = !qs._source.IsNullOrEmpty() 
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
 				

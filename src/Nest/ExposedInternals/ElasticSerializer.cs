@@ -144,8 +144,6 @@ namespace Nest
 		    return settings;
 		}
 		
-		public 
-
 		public string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor)
 		{
 			bulkDescriptor.ThrowIfNull("bulkDescriptor");

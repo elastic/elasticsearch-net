@@ -16,7 +16,7 @@ namespace Nest
 		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
-			var descriptor = multiGetSelector(new MultiGetDescriptor());
+			var descriptor = multiGetSelector(new MultiGetDescriptor(this._connectionSettings));
 			descriptor._GetOperations.ThrowIfEmpty("MultiGetFull called but no get operations were specified");
 			var pathInfo = ((IPathInfo<MultiGetQueryString>)descriptor).ToPathInfo(this._connectionSettings);
 			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
@@ -32,7 +32,7 @@ namespace Nest
 		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
-			var descriptor = multiGetSelector(new MultiGetDescriptor());
+			var descriptor = multiGetSelector(new MultiGetDescriptor(this._connectionSettings));
 			descriptor._GetOperations.ThrowIfEmpty("MultiGetFull called but no get operations were specified");
 			var pathInfo = ((IPathInfo<MultiGetQueryString>)descriptor).ToPathInfo(this._connectionSettings);
 			var multiGetHitConverter = new MultiGetHitConverter(descriptor);

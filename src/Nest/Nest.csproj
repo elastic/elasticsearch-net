@@ -649,7 +649,6 @@
     <Compile Include="Domain\Paths\ElasticSearchPathInfoExtensions.cs" />
     <Compile Include="Resolvers\IndexNameMarker.cs" />
     <Compile Include="Domain\Paths\PathInfoHttpMethod.cs" />
-    <Compile Include="Resolvers\PathResolver.cs" />
     <Compile Include="Resolvers\IndexNameResolver.cs" />
     <Compile Include="Resolvers\IdResolver.cs" />
     <Compile Include="Resolvers\ExpressionVisitor.cs" />

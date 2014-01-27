@@ -59,24 +59,6 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		}
 
 		[Test]
-		public void TypesShouldMakeItIntoPaths()
-		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri)
-				.SetDefaultIndex("mydefaultindex")
-				.MapDefaultTypeNames(p => p
-					.Add(typeof(Car), "automobile")
-					.Add(typeof(Person), "human")
-					.Add(typeof(Organization), "organisation")
-					.Add(typeof(Developer), "codemonkey")
-				);
-			var c = new PathResolver(clientSettings);
-			var searchPath = c.GetSearchPathForTyped(new SearchDescriptor<Person>());
-			StringAssert.Contains("/human/", searchPath);
-			searchPath = c.GetSearchPathForTyped(new SearchDescriptor<Developer>());
-			StringAssert.Contains("/codemonkey/", searchPath);
-		}
-
-		[Test]
 		public void DefaultTypeNamesTakePrecedenceOverCustomTypeNameInferrer()
 		{
 			var clientSettings = new ConnectionSettings(Test.Default.Uri)

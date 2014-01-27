@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Windows.Forms.VisualStyles;
 using Nest.Resolvers;
 
 namespace Nest
@@ -29,7 +31,7 @@ namespace Nest
 		public SimpleGetDescriptor<T> Index(string index)
 		{
 			index.ThrowIfNullOrEmpty("indices");
-			this._Index = index;
+			((ISimpleGetDescriptor)this)._Index = index;
 			return this;
 		}
 		/// <summary>
@@ -39,7 +41,7 @@ namespace Nest
 		public SimpleGetDescriptor<T> Type(string type)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			this._Type = type;
+			((ISimpleGetDescriptor)this)._Type = type;
 			return this;
 		}
 
@@ -49,7 +51,7 @@ namespace Nest
 		public SimpleGetDescriptor<T> Type(Type type)
 		{
 			type.ThrowIfNull("type");
-			this._Type = type;
+			((ISimpleGetDescriptor)this)._Type = type;
 			return this;
 		}
 
@@ -60,7 +62,7 @@ namespace Nest
 
 		public SimpleGetDescriptor<T> Id(string id)
 		{
-			this._Id = id;
+			((ISimpleGetDescriptor)this)._Id = id;
 			return this;
 		}
 
@@ -70,7 +72,7 @@ namespace Nest
 		public SimpleGetDescriptor<T> Routing(string routing)
 		{
 			routing.ThrowIfNullOrEmpty("routing");
-			this._Routing = routing;
+			((ISimpleGetDescriptor)this)._Routing = routing;
 			return this;
 		}
 
@@ -80,10 +82,8 @@ namespace Nest
 		/// </summary>
 		public SimpleGetDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			if (this._Fields == null)
-				this._Fields = new List<string>();
-			foreach (var e in expressions)
-				this._Fields.Add(new PropertyNameResolver().Resolve(e));
+			var pr = new PropertyNameResolver();
+			((ISimpleGetDescriptor)this)._Fields = expressions.Select(pr.Resolve).ToList();
 			return this;
 		}
 
@@ -93,7 +93,7 @@ namespace Nest
 		/// </summary>
 		public SimpleGetDescriptor<T> Fields(params string[] fields)
 		{
-			this._Fields = fields;
+			((ISimpleGetDescriptor)this)._Fields = fields;
 			return this;
 		}
 	}

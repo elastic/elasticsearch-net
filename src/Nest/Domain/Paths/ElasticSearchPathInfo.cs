@@ -11,7 +11,6 @@
 		public string Field { get; set; }
 		public string ScrollId { get; set; }
 		public string NodeId { get; set; }
-		public MetricOptions Metric { get; set; }
 		public string Fields { get; set; }
 		public string SearchGroups { get; set; }
 		public string IndexingTypes { get; set; }

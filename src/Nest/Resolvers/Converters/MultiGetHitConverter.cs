@@ -14,7 +14,7 @@ namespace Nest.Resolvers.Converters
 		private class MultiHitTuple
 		{
 			public JToken Hit { get; set; }
-			public BaseSimpleGetDescriptor Descriptor { get; set; }
+			public ISimpleGetDescriptor Descriptor { get; set; }
 		}
 
 		private readonly MultiGetDescriptor _descriptor;

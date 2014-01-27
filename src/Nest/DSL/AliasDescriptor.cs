@@ -15,7 +15,7 @@ namespace Nest
 	public partial class AliasDescriptor : 
 		 IPathInfo<AliasQueryString>
 	{
-		public AliasAddDescriptor()
+		public AliasDescriptor()
 		{
 			this._Actions = new List<IAliasAction>();
 		}

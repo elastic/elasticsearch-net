@@ -105,7 +105,7 @@ namespace ProtocolLoadTest
 			indexSettings.NumberOfShards = 5;
 			indexSettings.Add("index.refresh_interval", "-1");
 
-			var createResponse = client.CreateIndex(indexName, indexSettings);
+			var createResponse = client.CreateIndex(indexName, i=>i.InitializeUsing(indexSettings));
 			client.Map<Message>(m=>m.MapFromAttributes());
 		}
 

@@ -15,7 +15,7 @@ namespace Nest
 	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetQueryString>
 		, IPathInfo<MultiGetQueryString>
 	{
-		internal readonly IList<BaseSimpleGetDescriptor> _GetOperations = new List<BaseSimpleGetDescriptor>();
+		internal readonly IList<ISimpleGetDescriptor> _GetOperations = new List<ISimpleGetDescriptor>();
 		private readonly IConnectionSettings _settings;
 
 		[JsonProperty("docs")]
