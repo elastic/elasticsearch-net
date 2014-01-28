@@ -22,8 +22,7 @@ namespace Nest
 
 		ElasticSearchPathInfo<CountQueryString> IPathInfo<CountQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<CountQueryString>(settings);
-			pathInfo.QueryString = this._QueryString;
+			var pathInfo = base.ToPathInfo<CountQueryString>(settings, this._QueryString);
 			var qs = this._QueryString;
 			pathInfo.HttpMethod = !qs._source.IsNullOrEmpty() 
 				? PathInfoHttpMethod.GET

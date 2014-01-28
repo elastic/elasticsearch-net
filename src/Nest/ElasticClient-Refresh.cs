@@ -10,7 +10,7 @@ namespace Nest
 		public IIndicesShardResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
 		{
 			refreshSelector = refreshSelector ?? (s => s);
-			return this.Dispatch<RefreshDescriptor, RefreshQueryString, IIndicesShardResponse>(
+			return this.Dispatch<RefreshDescriptor, RefreshQueryString, IndicesShardResponse>(
 				refreshSelector,
 				(p,d) => this.RawDispatch.IndicesRefreshDispatch(p)
 			);

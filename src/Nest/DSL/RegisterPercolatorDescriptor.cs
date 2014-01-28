@@ -49,7 +49,10 @@ namespace Nest
 			//registering a percolator in elasticsearch < 1.0 is actually indexing a document in a 
 			//special _percolator index where the passed index is actually a type
 			//the name is actually the id, we rectify that here
-			var pathInfo = base.ToPathInfo<IndexQueryString>(settings);
+
+			//TODO Make this an alias to IndexDescriptor so we can this._QueryString
+
+			var pathInfo = base.ToPathInfo<IndexQueryString>(settings, new IndexQueryString());
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Type = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;

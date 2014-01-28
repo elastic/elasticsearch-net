@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f=>f.Name)
-				.SearchType(Nest.SearchType.QueryAndFetch)
+				.SearchType(SearchTypeOptions.QueryAndFetch)
 				
 			);
 			Assert.True(queryResults.IsValid);
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(Nest.SearchType.QueryThenFetch)
+				.SearchType(SearchTypeOptions.QueryThenFetch)
 
 			);
 			Assert.True(queryResults.IsValid);
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(Nest.SearchType.DfsQueryAndFetch)
+				.SearchType(SearchTypeOptions.DfsQueryAndFetch)
 
 			);
 			Assert.True(queryResults.IsValid);
@@ -61,7 +61,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(Nest.SearchType.DfsQueryThenFetch)
+				.SearchType(SearchTypeOptions.DfsQueryThenFetch)
 
 			);
 			Assert.True(queryResults.IsValid);

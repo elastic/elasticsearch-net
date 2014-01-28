@@ -41,7 +41,7 @@ namespace Nest
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
 			if (this._Index == null)
@@ -52,7 +52,7 @@ namespace Nest
 			{
 				Index = index,
 			};
-			pathInfo.QueryString = new K();
+			pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 

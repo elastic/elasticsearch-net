@@ -30,7 +30,6 @@ namespace Nest
 
 		private ConnectionStatus(IConnectionSettings settings)
 		{
-			this.TypeNameResolver = new TypeNameResolver();
 			this.IdResolver = new IdResolver();
 			this.IndexNameResolver = new IndexNameResolver(settings);
 			

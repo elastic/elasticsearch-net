@@ -80,7 +80,11 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		{
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex", "mytype")
-				.Search<ElasticSearchProject>(s => s.MatchAll().Preference("_primary").Routing("customvalue1").SearchType(SearchType.DfsQueryAndFetch))
+				.Search<ElasticSearchProject>(s => s
+					.MatchAll()
+					.Preference("_primary")
+					.Routing("customvalue1")
+					.SearchType(SearchTypeOptions.DfsQueryAndFetch))
 				.Search<Person>(s => s.Query(q=>q.Term("THIS FIELD DOES NOT EXIST", "BOOM")))
 			);
 			var status = result.ConnectionStatus;

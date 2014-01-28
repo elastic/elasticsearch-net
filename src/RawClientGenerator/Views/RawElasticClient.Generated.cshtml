@@ -42,11 +42,11 @@ namespace Nest
 		}
 		@if (method.Parts.Any())
 		{
-	<text>var url = "@method.Path".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = Stringify(" + p.Name +")" )) });</text>
+	<text>var url = "@(method.Path.Split(new []{'/'},2).Last())".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = Stringify(" + p.Name +")" )) });</text>
 		}
 		else
 		{
-	<text>var url = "@method.Path";</text>
+	<text>var url = "@(method.Path.Split(new []{'/'},2).Last())";</text>
 		}
 			NameValueCollection nv = null;
 			if (queryString != null)

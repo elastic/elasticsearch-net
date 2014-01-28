@@ -12,8 +12,8 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		[Test]
 		public void MultiSearchNonFixed()
 		{
-			var result = this._client.MultiSearch(m=>m
-				.Search<ElasticSearchProject>(s=>s.MatchAll())	
+			var result = this._client.MultiSearch(m => m
+				.Search<ElasticSearchProject>(s => s.MatchAll())
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		{
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex", "mytype")
-				.Search<ElasticSearchProject>(s => s.MatchAll())	
+				.Search<ElasticSearchProject>(s => s.MatchAll())
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -45,9 +45,16 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		public void MultiSearchRespectsSearchTypePreferenceAndRouting()
 		{
 			var result = this._client.MultiSearch(b => b
-				.FixedPath("myindex", "mytype") 
-				.Search<ElasticSearchProject>(s => s.MatchAll().Preference("_primary").Routing("customvalue1").SearchType(SearchType.DfsQueryAndFetch))
-				.Search<Person>(s => s.MatchAll().Preference("_primary_first").Routing("customvalue2").SearchType(SearchType.Count))
+				.FixedPath("myindex", "mytype")
+				.Search<ElasticSearchProject>(s => s
+					.MatchAll()
+					.Preference("_primary")
+					.Routing("customvalue1")
+					.SearchType(SearchTypeOptions.DfsQueryAndFetch))
+				.Search<Person>(s => s.MatchAll()
+					.Preference("_primary_first")
+					.Routing("customvalue2")
+					.SearchType(SearchTypeOptions.Count))
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -55,11 +62,11 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			const string first = @"{""index"":""myindex"",""type"":""mytype"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}";
 			const string second = @"{""index"":""myindex"",""type"":""mytype"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}";
 
-            StringAssert.Contains(first, status.Request);
-            StringAssert.Contains(second, status.Request); 
-			
+			StringAssert.Contains(first, status.Request);
+			StringAssert.Contains(second, status.Request);
+
 
 		}
-		
+
 	}
 }

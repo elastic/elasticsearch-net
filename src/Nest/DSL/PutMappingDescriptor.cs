@@ -18,6 +18,10 @@ namespace Nest
 		public PutMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
+			this._Mapping = new RootObjectMapping()
+			{
+				TypeNameMarker = typeof(T)
+			};
 		}
 
 		public PutMappingDescriptor<T> InitializeUsing(RootObjectMapping rootObjectMapping)
@@ -26,7 +30,7 @@ namespace Nest
 				return this;
 
 			this._Mapping = rootObjectMapping;
-			this._Mapping.TypeNameMarker = this._Type;
+			this._Mapping.TypeNameMarker = typeof (T);
 			return this;
 		}
 
@@ -228,7 +232,7 @@ namespace Nest
 
 		ElasticSearchPathInfo<PutMappingQueryString> IPathInfo<PutMappingQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<PutMappingQueryString>(settings);
+			var pathInfo = base.ToPathInfo<PutMappingQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 
 			return pathInfo;

@@ -12,7 +12,11 @@ namespace Nest
 		{
 			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>>(
 				mltSelector,
-				(p, d) => this.RawDispatch.MltDispatch(p, d)
+				(p, d) =>
+				{
+					CopySearchQueryString(d);
+					return this.RawDispatch.MltDispatch(p, d._Search);
+				}
 
 			);
 		}
@@ -20,9 +24,21 @@ namespace Nest
 		{
 			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>, IQueryResponse<T>>(
 				mltSelector,
-				(p, d) => this.RawDispatch.MltDispatchAsync(p, d)
+				(p, d) =>
+				{
+					CopySearchQueryString(d);
+					return this.RawDispatch.MltDispatchAsync(p, d._Search);
+				});
+		}
 
-			);
+		private static void CopySearchQueryString<T>(MoreLikeThisDescriptor<T> d) where T : class
+		{
+			if (d._Search != null)
+			{
+				var searchQs = d._Search._QueryString.NameValueCollection;
+				foreach (var k in searchQs.AllKeys)
+					d._QueryString.NameValueCollection[k] = searchQs[k];
+			}
 		}
 	}
 }

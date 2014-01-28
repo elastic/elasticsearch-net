@@ -21,7 +21,6 @@ namespace Nest
 		
 		public QueryDescriptor()
 		{
-			this.typeNameResolver = new TypeNameResolver();
 		}
 
 		internal QueryDescriptor(bool forceConditionless)

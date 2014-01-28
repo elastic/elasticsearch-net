@@ -38,7 +38,7 @@ namespace Nest
 		{
 			@object.ThrowIfNull(parameterName);
 			if (string.IsNullOrWhiteSpace(@object))
-					throw new ArgumentException("Argument can't be null or empty", parameterName);
+				throw new ArgumentException("Argument can't be null or empty", parameterName);
 		}
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
@@ -84,26 +84,28 @@ namespace Nest
 		{
 			return value == null || value.GetHashCode() == 0;
 		}
-		
+
 		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
 		{
 			int idx = 0;
 			foreach (T item in enumerable)
 				handler(item, idx++);
 		}
-        internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs)
-        {
-            if (xs == null)
-            {
-                return new T[0];
-            }
 
-            return xs;
-        }
+		
+		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs)
+		{
+			if (xs == null)
+			{
+				return new T[0];
+			}
+
+			return xs;
+		}
 
 
 	}
 
-	
-	
+
+
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -22,6 +23,21 @@ namespace Nest
 		, IPathInfo<SearchQueryString>
 		where T : class
 	{
+		internal override SearchTypeOptions? _SearchType
+		{
+			get { return this._QueryString._search_type; }
+		}
+		internal override string _Preference
+		{
+			get { return this._QueryString._preference; }
+		}
+
+		internal override string _Routing
+		{
+			get { return this._QueryString._routing == null 
+				? null 
+				: string.Join(",", this._QueryString._routing); }
+		}
 
 		internal override Type _ClrType { get { return typeof(T); } }
 
@@ -35,7 +51,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Indices(IEnumerable<string> indices)
 		{
-			indices.ThrowIfEmpty("indices");
+			if (indices == null) return this;
 			return this.Indices(indices.ToArray());
 		}
 		/// <summary>
@@ -43,7 +59,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Indices(IEnumerable<Type> indices)
 		{
-			indices.ThrowIfEmpty("indices");
+			if (indices == null) return this;
 			return this.Indices(indices.ToArray());
 		}
 		/// <summary>
@@ -51,8 +67,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Indices(params string[] indices)
 		{
-			indices.ThrowIfEmpty("indices");
-			this._Indices = indices.Cast<IndexNameMarker>();
+			if (indices == null) return this;
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -60,8 +76,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Indices(params Type[] indices)
 		{
-			indices.ThrowIfEmpty("indices");
-			this._Indices = indices.Cast<IndexNameMarker>();
+			if (indices == null) return this;
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -69,8 +85,14 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("index");
 			return this.Indices(index);
+		}
+
+		internal SearchDescriptor<T> Index(IndexNameMarker index)
+		{
+			if (index == null) return this;
+			this._Indices = new[] {index};
+			return this;
 		}
 		/// <summary>
 		/// The index to execute the search on, using the default index for typeof TAlternative. Defaults to the default index
@@ -84,7 +106,6 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Index(Type type)
 		{
-			type.ThrowIfNull("type");
 			return this.Indices(type);
 		}
 		/// <summary>
@@ -93,7 +114,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Types(IEnumerable<string> types)
 		{
-			types.ThrowIfEmpty("types");
+			if (types == null) return this;
 			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 		}
@@ -111,7 +132,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
-			types.ThrowIfEmpty("types");
+			if (types == null) return this;
 			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 
@@ -128,9 +149,9 @@ namespace Nest
 		/// The type to execute the search on. Defaults to the inferred typename of T 
 		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
 		/// </summary>
-		public SearchDescriptor<T> Type(string type)
+		public SearchDescriptor<T>Type(string type)
 		{
-			type.ThrowIfNullOrEmpty("type");
+			if (type == null) return this;
 			this._Types = new[] { (TypeNameMarker)type };
 			return this;
 		}
@@ -140,8 +161,15 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Type(Type type)
 		{
-			type.ThrowIfNull("type");
+			if (type == null) return this;
 			this._Types = new[] { (TypeNameMarker)type };
+			return this;
+		}
+
+		internal SearchDescriptor<T> Type(TypeNameMarker type)
+		{
+			if (type == null) return this;
+			this._Types = new[] {type};
 			return this;
 		}
 		/// <summary>
@@ -158,25 +186,6 @@ namespace Nest
 		public SearchDescriptor<T> AllTypes()
 		{
 			this._AllTypes = true;
-			return this;
-		}
-		/// <summary>
-		/// When executing a search, it will be broadcasted to all the index/indices shards (round robin between replicas).
-		/// Which shards will be searched on can be controlled by providing the routing parameter.
-		/// </summary>
-		public SearchDescriptor<T> Routing(string routing)
-		{
-			routing.ThrowIfNullOrEmpty("routing");
-			this._Routing = routing;
-			return this;
-		}
-		/// <summary>
-		/// controls how the distributed search behaves. http://www.elasticsearch.org/guide/reference/api/search/search-type.html
-		/// </summary>
-		public SearchDescriptor<T> SearchType(SearchType searchType)
-		{
-			searchType.ThrowIfNull("searchType");
-			this._SearchType = searchType;
 			return this;
 		}
 		
@@ -358,8 +367,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> ExecuteOnPrimary()
 		{
-			this._Preference = "_primary";
-			return this;
+			return this.Preference("_primary");
 		}
 		/// <summary>
 		/// <para>
@@ -373,8 +381,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> ExecuteOnPrimaryFirst()
 		{
-			this._Preference = "_primary_first";
-			return this;
+			return this.Preference("_primary_first");
 		}
 		/// <summary>
 		/// <para>
@@ -387,8 +394,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> ExecuteOnLocalShard()
 		{
-			this._Preference = "_local";
-			return this;
+			return this.Preference("_local");
 		}
 		/// <summary>
 		/// <para>
@@ -402,8 +408,7 @@ namespace Nest
 		public SearchDescriptor<T> ExecuteOnNode(string node)
 		{
 			node.ThrowIfNull("node");
-			this._Preference = "_only_node:" + node;
-			return this;
+			return this.Preference("_only_node:" + node);
 		}
 		/// <summary>
 		/// <para>
@@ -417,7 +422,7 @@ namespace Nest
 		public SearchDescriptor<T> ExecuteOnPreferredNode(string node)
 		{
 			node.ThrowIfNull("node");
-			this._Preference = string.Format("_prefer_node:{0}", node);
+			this.Preference(string.Format("_prefer_node:{0}", node));
 			return this;
 		}
 		/// <summary>
@@ -1074,7 +1079,9 @@ namespace Nest
 			pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
 				? PathInfoHttpMethod.GET
 				: PathInfoHttpMethod.POST;
-			
+
+			pathInfo.QueryString = this._QueryString;
+
 			var inferrer = new ElasticInferrer(settings);
 			string indices;
 			if (this._AllIndices.GetValueOrDefault(false))

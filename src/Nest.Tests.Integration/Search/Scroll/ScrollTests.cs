@@ -17,7 +17,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 				.Size(1)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(Nest.SearchType.Scan)
+				.SearchType(SearchTypeOptions.Scan)
 				.Scroll("2s")
 			);
 			Assert.True(scanResults.IsValid);
@@ -51,7 +51,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 				.Size(20)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(Nest.SearchType.Scan)
+				.SearchType(SearchTypeOptions.Scan)
 				.Scroll("4s")
 			);
 			Assert.True(scanResults.IsValid);

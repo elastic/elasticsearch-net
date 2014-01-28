@@ -20,7 +20,11 @@ namespace Nest
 			//deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
 			//special _percolator index where the passed index is actually a type
 			//the name is actually the id, we rectify that here
-			var pathInfo = base.ToPathInfo<DeleteQueryString>(settings);
+
+			//TODO make UnregisterPercolator an alias for DeleteDescriptor, so this._QueryString will be generated.
+			//and we can pass this._QueryString instead
+
+			var pathInfo = base.ToPathInfo<DeleteQueryString>(settings, new DeleteQueryString());
 			pathInfo.Type = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;
 			pathInfo.Index = "_percolator";

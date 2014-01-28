@@ -24,8 +24,8 @@ namespace Nest.Tests.Unit.Search.SearchType
 				.From(0)
 				.Size(10)
 				.MatchAll()
-				.SearchType(Nest.SearchType.QueryAndFetch);
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+				.SearchType(SearchTypeOptions.QueryAndFetch);
+			this.JsonEquals(s, System.Reflection.MethodBase.GetCurrentMethod());
 		}
 		
 	}

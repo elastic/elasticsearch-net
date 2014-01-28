@@ -17,7 +17,7 @@ namespace Nest
 	{
 		ElasticSearchPathInfo<ClusterStateQueryString> IPathInfo<ClusterStateQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<ClusterStateQueryString>(settings);
+			var pathInfo = base.ToPathInfo<ClusterStateQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			
 			return pathInfo;

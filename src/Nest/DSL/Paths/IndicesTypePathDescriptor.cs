@@ -41,13 +41,13 @@ namespace Nest
 		}
 		public P Indices(params string[] indices)
 		{
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 
 		public P Indices(params Type[] indices)
 		{
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 		
@@ -69,11 +69,9 @@ namespace Nest
 			return (P)this;
 		}
 		
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
-			if (!this._AllIndices.HasValue && this._Indices == null)
-				throw new DslException("missing Index() or explicit OnAllIndices()");
 			var inferrer = new ElasticInferrer(settings);
 			if (this._Type == null)
 				this._Type = inferrer.TypeName<T>();
@@ -90,7 +88,7 @@ namespace Nest
 				Index = index,
 				Type = type
 			};
-			pathInfo.QueryString = new K();
+			pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 

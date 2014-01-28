@@ -3186,9 +3186,9 @@ namespace Nest
 	public class MoreLikeThisQueryString : FluentQueryString<MoreLikeThisQueryString> 
 	{
 		
-		internal int _boost_terms { get; set; }
+		internal double _boost_terms { get; set; }
 		///<summary>The boost factor</summary>
-		public MoreLikeThisQueryString BoostTerms(int boost_terms)
+		public MoreLikeThisQueryString BoostTerms(double boost_terms)
 		{
 			var v = this.CreateString(boost_terms);
 			this._boost_terms = boost_terms;
@@ -3274,9 +3274,9 @@ namespace Nest
 		}
 
 		
-		internal int _percent_terms_to_match { get; set; }
+		internal double _percent_terms_to_match { get; set; }
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public MoreLikeThisQueryString PercentTermsToMatch(int percent_terms_to_match)
+		public MoreLikeThisQueryString PercentTermsToMatch(double percent_terms_to_match)
 		{
 			var v = this.CreateString(percent_terms_to_match);
 			this._percent_terms_to_match = percent_terms_to_match;

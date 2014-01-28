@@ -17,7 +17,7 @@ namespace Nest
 	{
 		ElasticSearchPathInfo<CloseIndexQueryString> IPathInfo<CloseIndexQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<CloseIndexQueryString>(settings);
+			var pathInfo = base.ToPathInfo<CloseIndexQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
 			return pathInfo;

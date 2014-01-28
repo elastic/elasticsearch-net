@@ -48,21 +48,19 @@ namespace Nest
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
-			if (this._Index == null)
-				throw new DslException("missing Index()");
 			if (this._Name == null)
 				throw new DslException("missing Name()");
-
-			var index = new ElasticInferrer(settings).IndexName(this._Index); 
+			var inferrer = new ElasticInferrer(settings);
+			var index = inferrer.IndexName(this._Index) ?? inferrer.DefaultIndex; 
 			var pathInfo = new ElasticSearchPathInfo<K>()
 			{
 				Index = index,
 				Name = this._Name
 			};
-			pathInfo.QueryString = new K();
+			pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 

@@ -11,7 +11,12 @@ namespace Nest
 		{
 			return this.Dispatch<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>>(
 				scrollSelector,
-				(p, d) => this.RawDispatch.ScrollDispatch(p, p.ScrollId)
+				(p, d) =>
+				{
+					var scrollId = p.ScrollId;
+					p.ScrollId = null;
+					return this.RawDispatch.ScrollDispatch(p, scrollId);
+				}
 			);
 		}
 		public Task<IQueryResponse<T>> ScrollAsync<T>(
@@ -20,7 +25,12 @@ namespace Nest
 		{
 			return this.DispatchAsync<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>, IQueryResponse<T>>(
 				scrollSelector,
-				(p, d) => this.RawDispatch.ScrollDispatchAsync(p, p.ScrollId)
+				(p, d) =>
+				{
+					var scrollId = p.ScrollId;
+					p.ScrollId = null;
+					return this.RawDispatch.ScrollDispatchAsync(p, scrollId);
+				}
 			);
 		}
 	}

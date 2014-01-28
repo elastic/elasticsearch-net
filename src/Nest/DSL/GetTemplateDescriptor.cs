@@ -19,7 +19,7 @@ namespace Nest
 	{
 		ElasticSearchPathInfo<GetTemplateQueryString> IPathInfo<GetTemplateQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<GetTemplateQueryString>(settings);
+			var pathInfo = base.ToPathInfo<GetTemplateQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Core.Versioning
         public void IndexOpTypeCreate()
         {
             var o = new ElasticSearchProject { Id = 1, Name = "Test" };
-            var result = this._client.Index(o, i => i.OpType(OpTypeOptions.Index));
+            var result = this._client.Index(o, i => i.OpType(OpTypeOptions.Create));
             var status = result.ConnectionStatus;
             StringAssert.Contains("op_type=create", status.RequestUrl);
         }

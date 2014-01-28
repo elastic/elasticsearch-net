@@ -15,8 +15,6 @@ namespace Nest
 		: FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchQueryString>
 		, IPathInfo<MultiSearchQueryString>
 	{
-		internal string _FixedIndex { get; set; }
-		internal string _FixedType { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, SearchDescriptorBase> _Operations = new Dictionary<string, SearchDescriptorBase>();
@@ -25,7 +23,7 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			searchSelector.ThrowIfNull("searchSelector");
-			var descriptor = searchSelector(new SearchDescriptor<T>());
+			var descriptor = searchSelector(new SearchDescriptor<T>().Index(this._Index).Type(this._Type));
 			if (descriptor == null)
 				return this;
 			this._Operations.Add(name, descriptor);
@@ -39,7 +37,7 @@ namespace Nest
 
 		ElasticSearchPathInfo<MultiSearchQueryString> IPathInfo<MultiSearchQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<MultiSearchQueryString>(settings);
+			var pathInfo = base.ToPathInfo<MultiSearchQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			return pathInfo;
 		}

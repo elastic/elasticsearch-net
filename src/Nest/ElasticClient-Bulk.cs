@@ -22,7 +22,7 @@ namespace Nest
 			var bulkDescriptor = bulkSelector(new BulkDescriptor());
 			var json = this.Serializer.SerializeBulkDescriptor(bulkDescriptor);
 			var pathInfo = ((IPathInfo<BulkQueryString>) bulkDescriptor).ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.BulkDispatch(pathInfo, pathInfo)
+			return this.RawDispatch.BulkDispatch(pathInfo, json)
 				.Deserialize<BulkResponse>();
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 			var bulkDescriptor = bulkSelector(new BulkDescriptor());
 			var json = this.Serializer.SerializeBulkDescriptor(bulkDescriptor);
 			var pathInfo = ((IPathInfo<BulkQueryString>) bulkDescriptor).ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.BulkDispatchAsync(pathInfo, pathInfo)
+			return this.RawDispatch.BulkDispatchAsync(pathInfo, json)
 				.ContinueWith<IBulkResponse>(t =>this.Deserialize<BulkResponse>(t.Result));
 		}
 

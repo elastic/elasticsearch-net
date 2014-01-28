@@ -19,18 +19,18 @@ namespace Nest
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Types(params string[] completion_fields)
 		{
-			this._Types = completion_fields.Cast<TypeNameMarker>();
+			this._Types = completion_fields.Select(t=>(TypeNameMarker)t);
 			return this;
 		}
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Types(params Type[] completion_fields)
 		{
-			this._Types = completion_fields.Cast<TypeNameMarker>();
+			this._Types = completion_fields.Select(t=>(TypeNameMarker)t);
 			return this;
 		}
 		ElasticSearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<IndicesStatsQueryString>(settings);
+			var pathInfo = base.ToPathInfo<IndicesStatsQueryString>(settings, this._QueryString);
 			if (this._Types.HasAny())
 			{
 				var inferrer = new ElasticInferrer(settings);

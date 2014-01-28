@@ -155,10 +155,10 @@ namespace Nest
 			{
 				var command = operation._Operation;
 				var index = operation._Index ??
-							bulkDescriptor._Index ??
+							bulkDescriptor._Index.Resolve(this._settings) ??
 							inferrer.IndexName(operation._ClrType);
 				var typeName = operation._Type
-							   ?? bulkDescriptor._Type
+							   ?? bulkDescriptor._Type.Resolve(this._settings)
 							   ?? inferrer.TypeName(operation._ClrType);
 
 				var id = operation.GetIdForObject(inferrer);
@@ -193,23 +193,27 @@ namespace Nest
 			var sb = new StringBuilder();
 			foreach (var operation in multiSearchDescriptor._Operations.Values)
 			{
-				var indeces = operation._Indices.HasAny() ? string.Join(",", operation._Indices) : null;
+				var indeces = operation._Indices.HasAny() ? string.Join(",", operation._Indices.Select(x=>x.Resolve(this._settings))) : null;
 				if (operation._AllIndices.GetValueOrDefault(false))
 					indeces = "_all";
 				
 				var index = indeces ??
-							multiSearchDescriptor._FixedIndex ??
+							multiSearchDescriptor._Index.Resolve(this._settings) ??
 				            new IndexNameResolver(this._settings).GetIndexForType(operation._ClrType);
 				
 				var types =  operation._Types.HasAny() ? string.Join(",", operation._Types.Select(x => x.Resolve(this._settings)) ) : null;
 				var typeName = types
-							   ?? multiSearchDescriptor._FixedType
+							   ?? multiSearchDescriptor._Type.Resolve(this._settings)
 				               ?? TypeNameMarker.Create(operation._ClrType);
 				if (operation._AllTypes.GetValueOrDefault(false))
 					typeName = null; //force empty typename so we'll query all types.
 
-				var op = new { index = index, type = typeName, search_type = this.GetSearchType(operation, multiSearchDescriptor), 
-					preference = operation._Preference, routing = operation._Routing };
+				var op = new { 
+					index = index, 
+					type = typeName, 
+					search_type = this.GetSearchType(operation, multiSearchDescriptor), 
+					preference = operation._Preference, 
+					routing = operation._Routing };
 				var opJson =  this.Serialize(op, Formatting.None);
 
 				var action = "{0}\n".F(opJson);
@@ -224,27 +228,27 @@ namespace Nest
 	
 		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
-			if (!descriptor._SearchType.HasValue)
-				return null;
-			switch (descriptor._SearchType.Value)
+			if (descriptor._SearchType != null)
 			{
-				case SearchType.Count:
-					return "count";
-				case SearchType.DfsQueryThenFetch:
-					return "dfs_query_then_fetch";
-				case SearchType.DfsQueryAndFetch:
-					return "dfs_query_and_fetch";
-				case SearchType.QueryThenFetch:
-					return "query_then_fetch";
-				case SearchType.QueryAndFetch:
-					return "query_and_fetch";
-				case SearchType.Scan:
-					return "scan";
+				switch (descriptor._SearchType.Value)
+				{
+					case SearchTypeOptions.Count:
+						return "count";
+					case SearchTypeOptions.DfsQueryThenFetch:
+						return "dfs_query_then_fetch";
+					case SearchTypeOptions.DfsQueryAndFetch:
+						return "dfs_query_and_fetch";
+					case SearchTypeOptions.QueryThenFetch:
+						return "query_then_fetch";
+					case SearchTypeOptions.QueryAndFetch:
+						return "query_and_fetch";
+					case SearchTypeOptions.Scan:
+						return "scan";
+				}
 			}
 			return multiSearchDescriptor._QueryString.ContainsKey("search_type") 
 				? multiSearchDescriptor._QueryString.NameValueCollection["search_type"] 
 				: null;
-			
 		}
 	}
 	/// <summary>

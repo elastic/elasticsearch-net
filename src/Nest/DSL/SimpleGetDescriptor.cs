@@ -18,12 +18,6 @@ namespace Nest
 		IList<string> ISimpleGetDescriptor._Fields { get; set; }
 		Type ISimpleGetDescriptor._ClrType { get { return typeof(T); } }
 
-		protected readonly TypeNameResolver typeNameResolver;
-
-		public SimpleGetDescriptor()
-		{
-			this.typeNameResolver = new TypeNameResolver();
-		}
 
 		/// <summary>
 		/// Manually set the index, default to the default index or the index set for the type on the connectionsettings.

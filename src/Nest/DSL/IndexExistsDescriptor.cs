@@ -17,7 +17,7 @@ namespace Nest
 	{
 		ElasticSearchPathInfo<IndexExistsQueryString> IPathInfo<IndexExistsQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<IndexExistsQueryString>(settings);
+			var pathInfo = base.ToPathInfo<IndexExistsQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
 
 			return pathInfo;

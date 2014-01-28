@@ -17,13 +17,6 @@ namespace Nest
 
 		internal SearchDescriptorBase _SearchDescriptor { get; set; }
 
-		private readonly TypeNameResolver typeNameResolver;
-
-		public CreateWarmerDescriptor()
-		{
-			this.typeNameResolver = new TypeNameResolver();
-		}
-
 		/// <summary>
 		/// The name of the warmer
 		/// </summary>

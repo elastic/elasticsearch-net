@@ -39,7 +39,7 @@ namespace Nest
 		public P Indices(params string[] indices)
 		{
 			indices = indices ?? new string[]{};
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P) this;
 		}
 
@@ -50,7 +50,7 @@ namespace Nest
 		public P Indices(params Type[] indices)
 		{
 			indices = indices ?? new Type[] {};
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P) this;
 		}
 		
@@ -81,7 +81,7 @@ namespace Nest
 		public P Types(params string[] types)
 		{
 			types = types ?? new string[]{};
-			this._Types = types.Cast<TypeNameMarker>();
+			this._Types = types.Select(t=>(TypeNameMarker)t);
 			return (P)this;
 		}
 		
@@ -91,7 +91,7 @@ namespace Nest
 		public P Types(params Type[] types)
 		{
 			types = types ?? new Type[]{};
-			this._Types = types.Cast<TypeNameMarker>();
+			this._Types = types.Select(t=>(TypeNameMarker)t);
 			return (P)this;
 		}
 
@@ -112,7 +112,7 @@ namespace Nest
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
 			if (!this._AllIndices.HasValue && this._Indices == null)
@@ -139,7 +139,7 @@ namespace Nest
 				Type = types,
 				Name = this._Name
 			};
-			pathInfo.QueryString = new K();
+			pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 

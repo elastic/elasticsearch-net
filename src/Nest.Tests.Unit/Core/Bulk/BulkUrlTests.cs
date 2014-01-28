@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
 			uri.AbsolutePath.Should().Be("/_bulk");
-			uri.Query.Should().Be("?refresh=true&consistency=quorem");
+			uri.Query.Should().Be("?refresh=true&consistency=quorum");
 		}
 
 		[Test]

@@ -20,6 +20,7 @@ namespace Nest
 		public PutTemplateDescriptor(IConnectionSettings connectionSettings)
 		{
 			_connectionSettings = connectionSettings;
+			this._TemplateMapping = new TemplateMapping();
 		}
 
 
@@ -87,7 +88,7 @@ namespace Nest
 
 		ElasticSearchPathInfo<PutTemplateQueryString> IPathInfo<PutTemplateQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<PutTemplateQueryString>(settings);
+			var pathInfo = base.ToPathInfo<PutTemplateQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
 			pathInfo.Name = this._Name;
 			return pathInfo;

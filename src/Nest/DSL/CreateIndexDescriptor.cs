@@ -111,7 +111,7 @@ namespace Nest
 		public CreateIndexDescriptor AddMapping<T>(RootObjectMapping rootObjectMapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping });
+			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping,});
 			var typeMapping = d._Mapping;
 			this._IndexSettings.Mappings.Add(typeMapping);
 
@@ -153,6 +153,7 @@ namespace Nest
 			var pathInfo = new ElasticSearchPathInfo<CreateIndexQueryString>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Index = this._Index;
+			pathInfo.QueryString = this._QueryString;
 			return pathInfo;
 
 		}

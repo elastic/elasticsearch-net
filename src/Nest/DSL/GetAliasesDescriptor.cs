@@ -25,7 +25,7 @@ namespace Nest
 
 		ElasticSearchPathInfo<GetAliasesQueryString> IPathInfo<GetAliasesQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<GetAliasesQueryString>(settings);
+			var pathInfo = base.ToPathInfo<GetAliasesQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 			pathInfo.Name = _Alias ?? "*";
 			return pathInfo;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace RawClientGenerator
 {
@@ -17,7 +18,8 @@ namespace RawClientGenerator
 				case "list":
 					return "params string[]";
 				case "number":
-					return "int";
+					return new [] {"boost", "percen"}.Any(s=>paramName.ToLower().Contains(s)) 
+						? "double" : "int";
 				case "time":
 				case "duration":
 				case "text":

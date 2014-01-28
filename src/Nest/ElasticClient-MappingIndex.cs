@@ -18,7 +18,7 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new GetIndexSettingsDescriptor());
-			var pathInfo = descriptor.ToPathInfo<GetIndexSettingsQueryString>(this._connectionSettings);
+			var pathInfo = descriptor.ToPathInfo<GetIndexSettingsQueryString>(this._connectionSettings, descriptor._QueryString);
 			var status = this.RawDispatch.IndicesGetSettingsDispatch(pathInfo);
 
 			return CreateIndexSettingsResponse(status);
@@ -29,7 +29,7 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new GetIndexSettingsDescriptor());
-			var pathInfo = descriptor.ToPathInfo<GetIndexSettingsQueryString>(this._connectionSettings);
+			var pathInfo = descriptor.ToPathInfo<GetIndexSettingsQueryString>(this._connectionSettings, descriptor._QueryString);
 			return this.RawDispatch.IndicesGetSettingsDispatchAsync(pathInfo)
 				.ContinueWith(t => CreateIndexSettingsResponse(t.Result));
 		}

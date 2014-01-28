@@ -35,25 +35,25 @@ namespace Nest
 		public P Indices(params Type[] indices)
 		{
 			if (indices == null) return (P) this;
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 		public P Indices(params string[] indices)
 		{
 			if (indices == null) return (P) this;
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 		public P Indices(IEnumerable<Type> indices)
 		{
 			if (indices == null) return (P) this;
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 		public P Indices(IEnumerable<string> indices)
 		{
 			if (indices == null) return (P) this;
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 
@@ -84,7 +84,7 @@ namespace Nest
 		public P Types(IEnumerable<Type> types)
 		{
 			if (types == null) return (P) this;
-			this._Types = types.Cast<TypeNameMarker>();
+			this._Types = types.Select(t=>(TypeNameMarker)t);
 			return (P)this;
 		}
 		public P Types(params Type[] types)
@@ -115,7 +115,7 @@ namespace Nest
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings) 
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString) 
 			where K : FluentQueryString<K>, new()
 		{
 			//start out with defaults
@@ -141,9 +141,9 @@ namespace Nest
 			else if (this._AllIndices)
 				pathInfo.Index = null;
 			else if (this._Indices.HasAny())
-				pathInfo.Index = string.Join(",", this._Indices);
+				pathInfo.Index = string.Join(",", this._Indices.Select(s=>s.Resolve(settings)));
 
-			pathInfo.QueryString = new K();
+			pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 

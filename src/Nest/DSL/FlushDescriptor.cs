@@ -17,7 +17,7 @@ namespace Nest
 	{
 		ElasticSearchPathInfo<FlushQueryString> IPathInfo<FlushQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<FlushQueryString>(settings);
+			var pathInfo = base.ToPathInfo<FlushQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
 			return pathInfo;

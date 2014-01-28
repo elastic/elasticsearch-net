@@ -18,6 +18,7 @@ namespace Nest
 		{
 			var pathInfo = new ElasticSearchPathInfo<InfoQueryString>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.QueryString = this._QueryString;
 
 			return pathInfo;
 		}

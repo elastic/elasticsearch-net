@@ -17,19 +17,14 @@ namespace Nest
 		where T : class
 	{
 		internal SearchDescriptor<T> _Search { get; set; }
-		internal MoreLikeThisQueryDescriptor<T> _Options { get; set; }
-
-		/// <summary>
-		/// Specify on which fields the _mlt should act and how it should behave
-		/// </summary>
-		public MoreLikeThisDescriptor<T> Options(Func<MoreLikeThisQueryDescriptor<T>, MoreLikeThisQueryDescriptor<T>> optionsSelector)
+		
+		public MoreLikeThisDescriptor<T> MltFields(
+			params Expression<Func<T, object>>[] objectPaths)
 		{
-			optionsSelector.ThrowIfNull("optionsSelector");
-			var d = optionsSelector(new MoreLikeThisQueryDescriptor<T>());
-			this._Options = d;
-			return this;
+			var fieldNames = objectPaths
+				.Select(o => new PropertyNameResolver().Resolve(o));
+			return this.MltFields(fieldNames.ToArray());
 		}
-
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.
 		/// </summary>
@@ -43,7 +38,7 @@ namespace Nest
 
 		ElasticSearchPathInfo<MoreLikeThisQueryString> IPathInfo<MoreLikeThisQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<MoreLikeThisQueryString>(settings);
+			var pathInfo = base.ToPathInfo<MoreLikeThisQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = this._Search == null ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
 
 			return pathInfo;

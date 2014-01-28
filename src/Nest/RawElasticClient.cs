@@ -38,6 +38,10 @@ namespace Nest
 			var s = o as string;
 			if (s != null)
 				return s;
+			var ss = o as string[];
+			if (ss != null)
+				return string.Join(",", ss);
+
 			var e = o as Enum;
 			if (e != null)
 				return JsonConvert.SerializeObject(o).Trim(new [] { '"' } );

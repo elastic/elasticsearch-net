@@ -2119,6 +2119,8 @@ namespace Nest
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
+		
+		
 	}
 	
 	
@@ -2726,7 +2728,7 @@ namespace Nest
 
 
 		///<summary>The boost factor</summary>
-		public MoreLikeThisDescriptor<T> BoostTerms(int boost_terms)
+		public MoreLikeThisDescriptor<T> BoostTerms(double boost_terms)
 		{
 			this._QueryString.BoostTerms(boost_terms);
 			return this;
@@ -2790,7 +2792,7 @@ namespace Nest
 		
 
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public MoreLikeThisDescriptor<T> PercentTermsToMatch(int percent_terms_to_match)
+		public MoreLikeThisDescriptor<T> PercentTermsToMatch(double percent_terms_to_match)
 		{
 			this._QueryString.PercentTermsToMatch(percent_terms_to_match);
 			return this;

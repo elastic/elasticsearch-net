@@ -17,7 +17,7 @@ namespace Nest
 	{
 		ElasticSearchPathInfo<ClearCacheQueryString> IPathInfo<ClearCacheQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = base.ToPathInfo<ClearCacheQueryString>(settings);
+			var pathInfo = base.ToPathInfo<ClearCacheQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 
 			return pathInfo;

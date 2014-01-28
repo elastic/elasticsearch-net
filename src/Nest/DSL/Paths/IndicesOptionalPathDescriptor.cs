@@ -35,17 +35,17 @@ namespace Nest
 			
 		public P Indices(params string[] indices)
 		{
-			this._Indices = indices.Cast<IndexNameMarker>();
+			this._Indices = indices.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 
 		public P Indices(params Type[] indicesTypes)
 		{
-			this._Indices = indicesTypes.Cast<IndexNameMarker>();
+			this._Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings)
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
 			var index = this._Indices == null ? null : string.Join(",", this._Indices.Select(i => new ElasticInferrer(settings).IndexName(i)));
@@ -54,7 +54,7 @@ namespace Nest
 			{
 				Index = index,
 			};
-			pathInfo.QueryString = new K();
+			pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 
