@@ -385,13 +385,13 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
-		public ClusterNodeStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] expressions) where T : class
+		public ClusterNodeStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			
@@ -1026,13 +1026,13 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor Fields<T>(params Expression<Func<T, object>>[] expressions) where T : class
+		public ExplainDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			
@@ -1139,13 +1139,13 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions) 
+		public GetDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			
@@ -1420,6 +1420,16 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
+		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> typedPathLookup) where T : class
+		{
+			typedPathLookup.ThrowIfNull("typedPathLookup");
+			var pr = new PropertyNameResolver();
+			this._QueryString.Field(pr.Resolve(typedPathLookup));
+			return this;
+		}
+			
 
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
 		public AnalyzeDescriptor Filters(params string[] filters)
@@ -1507,13 +1517,13 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] expressions) where T : class
+		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			
@@ -2109,8 +2119,6 @@ namespace Nest
 			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
-		
-		
 	}
 	
 	
@@ -2376,13 +2384,13 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] expressions) where T : class
+		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			
@@ -2645,13 +2653,13 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MultiGetDescriptor Fields<T>(params Expression<Func<T, object>>[] expressions) where T : class
+		public MultiGetDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			
@@ -3196,13 +3204,13 @@ namespace Nest
 		
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<T,K> Fields(params Expression<Func<T, object>>[] expressions) 
+		public UpdateDescriptor<T,K> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			

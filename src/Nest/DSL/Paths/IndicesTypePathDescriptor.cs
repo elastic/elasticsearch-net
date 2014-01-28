@@ -35,7 +35,10 @@ namespace Nest
 		{
 			return this.Indices(typeof (T));
 		}
-			
+		public P Index(string index)
+		{
+			return this.Indices(index);
+		}
 		public P Indices(params string[] indices)
 		{
 			this._Indices = indices.Cast<IndexNameMarker>();

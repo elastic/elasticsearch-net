@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Indices
 		public void test_clear_cache()
 		{
 			var client = this._client;
-			var status = client.ClearCache(cc=>cc.AllIndices());
+			var status = client.ClearCache();
 			Assert.True(status.IsValid);
 			Assert.True(status.OK);
 		}
@@ -19,7 +19,7 @@ namespace Nest.Tests.Integration.Indices
 		public void test_clear_cache_specific()
 		{
 			var client = this._client;
-			var status = client.ClearCache(cc=>cc.AllIndices().Filter().Recycler());
+			var status = client.ClearCache(cc=>cc.Filter().Recycler());
 			Assert.True(status.IsValid);
 			Assert.True(status.OK);
 		}

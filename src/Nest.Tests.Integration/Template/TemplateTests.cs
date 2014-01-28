@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Template
 		[Test]
 		public void SimplePutAndGet()
 		{
-			this._client.DeleteTemplate("put-template-with-settings");
+			this._client.DeleteTemplate(t=>t.Name("put-template-with-settings"));
 			var putResponse = this._client.PutTemplate(t => t
 				.Name("put-template-with-settings")
 				.Template("donotinfluencothertests-*")
@@ -19,7 +19,7 @@ namespace Nest.Tests.Integration.Template
 			);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-settings");
+			var templateResponse = this._client.GetTemplate(t=>t.Name("put-template-with-settings"));
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Template
 		[Test]
 		public void PutTemplateWithSettings()
 		{
-			this._client.DeleteTemplate("put-template-with-settings");
+			this._client.DeleteTemplate(t=>t.Name("put-template-with-settings"));
 			var putResponse = this._client.PutTemplate(t=>t
 				.Name("put-template-with-settings")
 				.Template("donotinfluencothertests-*")
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Template
 			);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-settings");
+			var templateResponse = this._client.GetTemplate(t=>t.Name("put-template-with-settings"));
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();
@@ -62,18 +62,18 @@ namespace Nest.Tests.Integration.Template
 		[Test]
 		public void PutTemplateWithMappings()
 		{
-			this._client.DeleteTemplate("put-template-with-mappings");
+			this._client.DeleteTemplate(t=>t.Name("put-template-with-mappings"));
 			var putResponse = this._client.PutTemplate(t => t
 				.Name("put-template-with-mappings")
 				.Template("donotinfluencothertests")
 				.AddMapping<dynamic>(s=>s
-					.TypeName("mytype")
+					.Type("mytype")
 					.DisableAllField()
 				)
 			);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-mappings");
+			var templateResponse = this._client.GetTemplate(t=>t.Name("put-template-with-mappings"));
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();
@@ -89,7 +89,7 @@ namespace Nest.Tests.Integration.Template
 		[Test]
 		public void PutTemplateWithWarmers()
 		{
-			this._client.DeleteTemplate("put-template-with-warmers");
+			this._client.DeleteTemplate(t=>t.Name("put-template-with-warmers"));
 			var putResponse = this._client.PutTemplate(t => t
 				.Name("put-template-with-warmers")
 				.Template("donotinfluencothertests2")
@@ -103,7 +103,7 @@ namespace Nest.Tests.Integration.Template
 			);
 			Assert.IsTrue(putResponse.OK);
 
-			var templateResponse = this._client.GetTemplate("put-template-with-warmers"); 
+			var templateResponse = this._client.GetTemplate(t=>t.Name("put-template-with-warmers")); 
 			templateResponse.Should().NotBeNull();
 			templateResponse.IsValid.Should().BeTrue();
 			templateResponse.TemplateMapping.Should().NotBeNull();

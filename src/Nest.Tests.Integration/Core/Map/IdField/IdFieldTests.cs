@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Core.Map.IdField
 		[Test]
 		public void IdFieldSerializesFully()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticSearchProject>(m => m
 				.IdField(i => i
 					.SetIndex("not_analyzed")
 					.SetPath("myOtherId")

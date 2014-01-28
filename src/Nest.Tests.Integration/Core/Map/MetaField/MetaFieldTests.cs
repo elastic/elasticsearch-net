@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Core.Map.MetaField
 		[Test]
 		public void MetaFieldSerializes()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticSearchProject>(m => m
 				.Meta(d => d
 					.Add("attr1", "value1")
 					.Add("attr2", new { attr3 = "value3" })

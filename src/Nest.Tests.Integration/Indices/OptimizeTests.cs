@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void OptimizeAll()
 		{
-			var r = this._client.Optimize(o=>o.AllIndices());
+			var r = this._client.Optimize();
 			Assert.True(r.OK, r.ConnectionStatus.ToString());
 		}
 		[Test]
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Indices
 		}
 		public void OptimizeAllWithParameters()
 		{
-			var r = this._client.Optimize(o=>o.AllIndices().MaxNumSegments(2));
+			var r = this._client.Optimize(o=>o.MaxNumSegments(2));
 			Assert.True(r.OK, r.ConnectionStatus.ToString());
 		}
 

@@ -41,18 +41,33 @@ namespace Nest
 			_settings = settings;
 		}
 
-		public MultiGetDescriptor Get<K>(Action<SimpleGetDescriptor<K>> getSelector) where K : class
+		public MultiGetDescriptor Get<K>(Func<SimpleGetDescriptor<K>, SimpleGetDescriptor<K>> getSelector) where K : class
 		{
 			getSelector.ThrowIfNull("getSelector");
 
-			var descriptor = new SimpleGetDescriptor<K>();
-			getSelector(descriptor);
+			var descriptor = getSelector(new SimpleGetDescriptor<K>());
 
 			this._GetOperations.Add(descriptor);
 			return this;
 
 		}
 
+		public MultiGetDescriptor GetMany<K>(IEnumerable<int> ids, Func<SimpleGetDescriptor<K>, int, SimpleGetDescriptor<K>> getSelector=null) where K : class
+		{
+			getSelector = getSelector ?? ((sg, s) => sg);
+			foreach (var sg in ids.Select(id => getSelector(new SimpleGetDescriptor<K>().Id(id), id)))
+				this._GetOperations.Add(sg);
+			return this;
+
+		}
+		public MultiGetDescriptor GetMany<K>(IEnumerable<string> ids, Func<SimpleGetDescriptor<K>, string, SimpleGetDescriptor<K>> getSelector=null) where K : class
+		{
+			getSelector = getSelector ?? ((sg, s) => sg);
+			foreach (var sg in ids.Select(id => getSelector(new SimpleGetDescriptor<K>().Id(id), id)))
+				this._GetOperations.Add(sg);
+			return this;
+
+		}
 		ElasticSearchPathInfo<MultiGetQueryString> IPathInfo<MultiGetQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = this.ToPathInfo<MultiGetQueryString>(settings);

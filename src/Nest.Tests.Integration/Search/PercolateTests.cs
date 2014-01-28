@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Search
 			var c = this._client;
 			var r = c.RegisterPercolator<ElasticSearchProject>(p => p
 				.Name(name)
-				.Add("color", "blue")
+				.AddMetadata(md=>md.Add("color", "blue"))
 				.Query(q => q
 					.Term(f => f.Name, "elasticsearch.pm")
 				)
@@ -45,14 +45,14 @@ namespace Nest.Tests.Integration.Search
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
 
-			var re = c.UnregisterPercolator<ElasticSearchProject>(name);
+			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticSearchProject>());
 			Assert.True(re.IsValid);
 			Assert.True(re.OK);
 			Assert.True(re.Found);
 			Assert.AreEqual(re.Type, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(re.Id, name);
 			Assert.Greater(re.Version, 0);
-			re = c.UnregisterPercolator<ElasticSearchProject>(name);
+			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticSearchProject>());
 			Assert.True(re.IsValid);
 			Assert.True(re.OK);
 			Assert.False(re.Found);
@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Search
 			Assert.True(r.OK);
 			Assert.NotNull(r.Matches);
 			Assert.True(r.Matches.Contains(name));
-			var re = c.UnregisterPercolator<ElasticSearchProject>(name);
+			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticSearchProject>());
 		}
 		[Test]
 		public void PercolateTypedDoc()
@@ -103,17 +103,17 @@ namespace Nest.Tests.Integration.Search
 			Assert.NotNull(percolateResponse.Matches);
 			Assert.True(percolateResponse.Matches.Contains(name));
 
-			var re = c.UnregisterPercolator<ElasticSearchProject>(name);
+			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticSearchProject>());
 		}
 		[Test]
 		public void PercolateTypedDocWithQuery()
 		{
 			var c = this._client;
 			var name = "eclecticsearch" + ElasticsearchConfiguration.NewUniqueIndexName();
-			var re = c.UnregisterPercolator<ElasticSearchProject>(name);
+			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticSearchProject>());
 			var r = c.RegisterPercolator<ElasticSearchProject>(p => p
 				 .Name(name)
-				 .Add("color", "blue")
+				 .AddMetadata(md=>md.Add("color", "blue"))
 				 .Query(q => q
 					.Term(f => f.Country, "netherlands")
 				 )
@@ -149,7 +149,8 @@ namespace Nest.Tests.Integration.Search
 			Assert.NotNull(percolateResponse.Matches);
 			Assert.False(percolateResponse.Matches.Contains(name));
 
-			re = c.UnregisterPercolator<ElasticSearchProject>(name);
+			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticSearchProject>());
+
 		}
 	}
 }

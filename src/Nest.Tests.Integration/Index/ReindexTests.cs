@@ -23,9 +23,15 @@ namespace Nest.Tests.Integration.Index
 				onError: (e) => Assert.Fail(e.Message),
 				completed: () =>
 				{
-					var refresh = this._client.Refresh(new[] { toIndex, ElasticsearchConfiguration.DefaultIndex });
-					var originalIndexCount = this._client.Count(new[] { ElasticsearchConfiguration.DefaultIndex }, q => q.MatchAll());
-					var newIndexCount = this._client.Count(new[] { toIndex }, q => q.MatchAll());
+					var refresh = this._client.Refresh(r=>r.Indices(toIndex, ElasticsearchConfiguration.DefaultIndex));
+					var originalIndexCount = this._client.Count<dynamic>(c=>c
+						.Index(ElasticsearchConfiguration.DefaultIndex)
+						.Query(q => q.MatchAll())
+					);
+					var newIndexCount = this._client.Count<dynamic>(c => c
+						.Index(toIndex)
+						.Query(q => q.MatchAll())
+					);
 					Assert.Greater(newIndexCount.Count, 0);
 					Assert.AreEqual(originalIndexCount.Count, newIndexCount.Count);
 				}
@@ -63,9 +69,13 @@ namespace Nest.Tests.Integration.Index
 				onError: (e) => Assert.Fail(e.Message),
 				completed: () =>
 				{
-					var refresh = this._client.Refresh(new[] { toIndex, ElasticsearchConfiguration.DefaultIndex });
-					var originalIndexCount = this._client.Count(new[] { ElasticsearchConfiguration.DefaultIndex }, q=>q.MatchAll());
-					var newIndexCount = this._client.Count(new[] { toIndex  }, q=>q.MatchAll());
+					var refresh = this._client.Refresh(r=>r.Index(ElasticsearchConfiguration.DefaultIndex));
+
+					var originalIndexCount = this._client.Count(c=>c
+						.Index(ElasticsearchConfiguration.DefaultIndex)
+						.Query(q=>q.MatchAll())
+					);
+					var newIndexCount = this._client.Count(i=>i.Index(toIndex).Query(q=>q.MatchAll()));
 					Assert.Greater(newIndexCount.Count, 0);
 					Assert.AreEqual(originalIndexCount.Count, newIndexCount.Count);
 				}

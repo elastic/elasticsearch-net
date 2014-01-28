@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SnapshotAll()
 		{
-			var r = this._client.Snapshot(s=>s.AllIndices());
+			var r = this._client.Snapshot();
 			Assert.True(r.OK);
 		}
 		[Test]

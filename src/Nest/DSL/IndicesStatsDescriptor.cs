@@ -15,9 +15,28 @@ namespace Nest
 		IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsQueryString>
 		, IPathInfo<IndicesStatsQueryString>
 	{
+		private IEnumerable<TypeNameMarker> _Types { get; set; }
+		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
+		public IndicesStatsDescriptor Types(params string[] completion_fields)
+		{
+			this._Types = completion_fields.Cast<TypeNameMarker>();
+			return this;
+		}
+		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
+		public IndicesStatsDescriptor Types(params Type[] completion_fields)
+		{
+			this._Types = completion_fields.Cast<TypeNameMarker>();
+			return this;
+		}
 		ElasticSearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<IndicesStatsQueryString>(settings);
+			if (this._Types.HasAny())
+			{
+				var inferrer = new ElasticInferrer(settings);
+				var types = inferrer.TypeNames(this._Types);
+				this._QueryString.Add("types", string.Join(",", types));
+			}
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
 
 			return pathInfo;

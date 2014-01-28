@@ -8,50 +8,48 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void ClusterHealth()
 		{
-			var r = this._client.Health(HealthLevel.Cluster);
+			var r = this._client.Health(h=>h.Level(LevelOptions.Cluster));
 			Assert.True(r.IsValid);
 		}
 		[Test]
 		public void ClusterHealthPerIndex()
 		{
-			var r = this._client.Health(new[] { ElasticsearchConfiguration.DefaultIndex }, HealthLevel.Cluster);
+			var r = this._client.Health(h=>h.Index(ElasticsearchConfiguration.DefaultIndex).Level(LevelOptions.Cluster));
 			Assert.True(r.IsValid);
 		}
 		[Test]
 		public void IndexHealth()
 		{
-			var r = this._client.Health(HealthLevel.Indices);
+			var r = this._client.Health(h=>h.Level(LevelOptions.Indices));
 			Assert.True(r.IsValid);
 		}
 		[Test]
 		public void ShardHealth()
 		{
-			var r = this._client.Health(HealthLevel.Shards);
+			var r = this._client.Health(h=>h.Level(LevelOptions.Shards));
 			Assert.True(r.IsValid);
 		}
 		[Test]
 		public void DetailedHealth()
 		{
-			var r = this._client.Health(new HealthParams
-				{
-					CheckLevel = HealthLevel.Shards,
-					Timeout = "30s",
-					WaitForMinNodes = 1,
-					WaitForRelocatingShards = 0
-				});
+			var r = this._client.Health(h => h
+				.Level(LevelOptions.Shards)
+				.Timeout("30s")
+				.WaitForNodes("1")
+				.WaitForRelocatingShards(0)
+			);
 			Assert.True(r.IsValid);
 		}
 		[Test]
 		public void DetailedHealthPerIndex()
 		{
-			var r = this._client.Health(new[] { ElasticsearchConfiguration.DefaultIndex },
-												new HealthParams
-													{
-														CheckLevel = HealthLevel.Shards,
-														Timeout = "30s",
-														WaitForMinNodes = 1,
-														WaitForRelocatingShards = 0
-													});
+			var r = this._client.Health(h => h
+				.Indices(ElasticsearchConfiguration.DefaultIndex)
+				.Level(LevelOptions.Shards)
+				.Timeout("30s")
+				.WaitForNodes("1")
+				.WaitForRelocatingShards(0)
+			);
 			Assert.True(r.IsValid);
 		}
 	}

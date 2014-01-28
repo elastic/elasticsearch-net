@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SimpleStats()
 		{
-			var r = this._client.Stats();
+			var r = this._client.IndicesStats();
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SimpleIndexStats()
 		{
-			var r = this._client.Stats(ElasticsearchConfiguration.DefaultIndex);
+			var r = this._client.IndicesStats(i=>i.Index(ElasticsearchConfiguration.DefaultIndex));
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
@@ -43,13 +43,11 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void ComplexStats()
 		{
-			var r = this._client.Stats(new StatsParams()
-			{
-				InfoOn = StatsInfo.All,
-				Refresh = true,
-				Types = new List<string>{ "elasticsearchprojects" }
-
-			});
+			var r = this._client.IndicesStats(i => i
+				.All()
+				.Refresh()
+				.Types("elasticsearchprojects")
+			);
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);

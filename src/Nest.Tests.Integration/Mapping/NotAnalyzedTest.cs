@@ -16,7 +16,8 @@ namespace Nest.Tests.Integration.Mapping
 			);
 			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
-			var typeMapping = this._client.GetMapping(index, "elasticsearchprojects");
+			var typeMappingResponse = this._client.GetMapping(gm=>gm.Index(index).Type("elasticsearchprojects"));
+			var typeMapping = typeMappingResponse.Mapping;
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
@@ -24,7 +25,7 @@ namespace Nest.Tests.Integration.Mapping
 			var indexResult = this._client.Index(new ElasticSearchProject
 			{
 				Country = "The Royal Kingdom Of The Netherlands"
-			}, indexParameters: new IndexParameters { Refresh = true }, index: index);
+			}, i=>i.Index(index).Refresh());
 			Assert.IsTrue(indexResult.IsValid);
 
 			var result = this._client.Search<ElasticSearchProject>(s=>s
@@ -55,9 +56,8 @@ namespace Nest.Tests.Integration.Mapping
 				new ElasticSearchProject
 				{
 					Country = "The Royal Kingdom Of The Netherlands"
-				},
-				indexParameters: new IndexParameters { Refresh = true }
-				, index: index);
+				}, i=> i.Index(index).Refresh()
+				);
 			Assert.IsTrue(indexResult.IsValid);
 
 			var result = this._client.Search<ElasticSearchProject>(s => s

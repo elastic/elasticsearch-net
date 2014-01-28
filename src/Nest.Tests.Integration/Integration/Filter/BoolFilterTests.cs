@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 			//https://github.com/elasticsearch/elasticsearch/issues/2996
 			
 
-			var totalInIndex = this._client.Count<ElasticSearchProject>(q=>q.MatchAll()).Count;
+			var totalInIndex = this._client.Count<ElasticSearchProject>(c=>c.Query(q=>q.MatchAll())).Count;
 			Assert.Less(results.Total, totalInIndex);
 		}
 	}

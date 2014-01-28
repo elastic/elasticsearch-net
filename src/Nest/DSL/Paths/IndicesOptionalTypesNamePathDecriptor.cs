@@ -61,7 +61,20 @@ namespace Nest
 		{
 			return this.Indices(new[] {typeof (T)});
 		}
-
+		/// <summary>
+		/// Use the default index of T
+		/// </summary>
+		public P Index(Type index) 
+		{
+			return this.Indices(new[] { index });
+		}
+		/// <summary>
+		/// Use the default index of T
+		/// </summary>
+		public P Index(string index) 
+		{
+			return this.Indices(new[] { index });
+		}
 		/// <summary>
 		/// limit the types to operate on by specifiying them by string
 		/// </summary>

@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void NodeInfoSimple()
 		{
-			var r = this._client.NodeInfo(NodesInfo.All);
+			var r = this._client.ClusterNodeInfo(c=>c.All());
 			var status = r.ConnectionStatus;
 			var url = new Uri(status.RequestUrl);
 			url.Query.Should().Contain("all=true");
@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void NodeInfoFlags()
 		{
-			var r = this._client.NodeInfo(NodesInfo.Process | NodesInfo.OS);
+			var r = this._client.ClusterNodeInfo(c=>c.Process().Os());
 			var status = r.ConnectionStatus;
 			var url = new Uri(status.RequestUrl);
 			url.Query.Should().Contain("os=true");
@@ -31,7 +31,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void NodeInfoFlagsAndNodes()
 		{
-			var r = this._client.NodeInfo(new [] { "127.0.0.1"}, NodesInfo.Process | NodesInfo.OS);
+			var r = this._client.ClusterNodeInfo(c=>c.Process().Os().NodeId("127.0.0.1"));
 			var status = r.ConnectionStatus;
 			var url = new Uri(status.RequestUrl);
 			url.Query.Should().Contain("os=true");
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void NodeStats()
 		{
-			var r = this._client.NodeStats(NodeInfoStats.All);
+			var r = this._client.ClusterNodeStats(c=>c.All());
 			var status = r.ConnectionStatus;
 			var url = new Uri(status.RequestUrl);
 			url.AbsolutePath.Should().StartWith("/_nodes/stats");
@@ -53,7 +53,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void NodeStatsSpecificNodeWithFlags()
 		{
-			var r = this._client.NodeStats(new [] { "127.0.0.1"}, NodeInfoStats.Network | NodeInfoStats.HTTP);
+			var r = this._client.ClusterNodeStats(c=>c.NodeId("127.0.0.1").Network().Http());
 			var status = r.ConnectionStatus;
 			var url = new Uri(status.RequestUrl);
 			url.AbsolutePath.Should().StartWith("/_nodes/127.0.0.1/stats");

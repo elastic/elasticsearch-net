@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 
-			result._Responses.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(1);
+			result.GetResponses<ElasticSearchProject>().Should().NotBeNull().And.NotBeEmpty().And.HaveCount(1);
 
 			var queryResponses = result.GetResponses<ElasticSearchProject>();
 			queryResponses.Should().NotBeNull().And.HaveCount(1);
@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 
-			result._Responses.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(2);
+			result.TotalResponses.Should().Be(2);
 
 			var queryResponse = result.GetResponse<ElasticSearchProject>("elasticsearchprojects");
 			queryResponse.Documents.Should().NotBeNull()

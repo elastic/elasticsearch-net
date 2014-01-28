@@ -47,19 +47,32 @@ namespace Nest
 		 {
 			<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) Fields@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") expressions) @Raw(typed ? "" : "where T : class")
+		public @Raw(type) Fields@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") typedPathLookups) @Raw(typed ? "" : "where T : class")
 		{
-			if (!expressions.HasAny())
+			if (!typedPathLookups.HasAny())
 				return this;
 
 			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(expressions.Select(pr.Resolve).ToArray());
+			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
 			return this;
 		}
 			</text>
 
 		 }
+		  if (mm == "Field")
+		 {
+			<text>
+		///<summary>@kv.Value.Description</summary>
+		public @Raw(type) Field@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") typedPathLookup) @Raw(typed ? "" : "where T : class")
+		{
+			typedPathLookup.ThrowIfNull("typedPathLookup");
+			var pr = new PropertyNameResolver();
+			this._QueryString.Field(pr.Resolve(typedPathLookup));
+			return this;
+		}
+			</text>
 
+		 }
 	}
 	<text>	
 	}

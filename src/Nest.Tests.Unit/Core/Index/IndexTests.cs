@@ -20,10 +20,7 @@ namespace Nest.Tests.Unit.Core.Index
     public void IndexParameters()
     {
       var o = new ElasticSearchProject { Id = 1, Name = "Test" };
-      var result = this._client.Index(o, new IndexParameters
-      {
-        Version = "1",
-      });
+      var result = this._client.Index(o, i=>i.Version(1));
       var status = result.ConnectionStatus;
       StringAssert.Contains("version=1", status.RequestUrl);
     }

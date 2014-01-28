@@ -7,23 +7,22 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		public IIndicesOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector)
+		public IIndicesOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
 		{
-			optimizeSelector.ThrowIfNull("optimizeSelector");
-			var descriptor = optimizeSelector(new OptimizeDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.IndicesOptimizeDispatch(pathInfo)
-				.Deserialize<IndicesOperationResponse>();
+			optimizeSelector = optimizeSelector ?? (s => s);
+			return this.Dispatch<OptimizeDescriptor, OptimizeQueryString, IndicesOperationResponse>(
+				optimizeSelector,
+				(p,d) => this.RawDispatch.IndicesOptimizeDispatch(p)
+			);
 		}
 
-		public Task<IIndicesOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector)
+		public Task<IIndicesOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
 		{
-			optimizeSelector.ThrowIfNull("optimizeSelector");
-			var descriptor = optimizeSelector(new OptimizeDescriptor());
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-
-			return this.RawDispatch.IndicesOptimizeDispatchAsync(pathInfo)
-				.ContinueWith<IIndicesOperationResponse>(r => r.Result.Deserialize<IndicesOperationResponse>());
+			optimizeSelector = optimizeSelector ?? (s => s);
+			return this.DispatchAsync<OptimizeDescriptor, OptimizeQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				optimizeSelector,
+				(p,d) => this.RawDispatch.IndicesOptimizeDispatchAsync(p)
+			);
 
 		}
 	}

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IMultiGetResponse
+	public interface IMultiGetResponse : IResponse
 	{
 		IEnumerable<IMultiGetHit<object>> Documents { get; }
 		MultiGetHit<T> Get<T>(string id) where T : class;
@@ -15,6 +15,10 @@ namespace Nest
 		T Source<T>(int id) where T : class;
 		FieldSelection<T> GetFieldSelection<T>(string id) where T : class;
 		FieldSelection<T> GetFieldSelection<T>(int id) where T : class;
+		IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class;
+		IEnumerable<T> SourceMany<T>(IEnumerable<int> ids) where T : class;
+		IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class;
+		IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<int> ids) where T : class;
 	}
 
 	[JsonObject]
@@ -48,6 +52,29 @@ namespace Nest
 		public T Source<T>(int id) where T : class
 		{
 			return this.Source<T>(id.ToString(CultureInfo.InvariantCulture));
+		}
+		public IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class
+		{
+			var docs = this.Documents.OfType<IMultiGetHit<T>>();
+			return from d in docs
+				join id in ids on d.Id equals id
+				select d.Source;
+		}
+		public IEnumerable<T> SourceMany<T>(IEnumerable<int> ids) where T : class
+		{
+			return this.SourceMany<T>(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)));
+		}
+		
+		public IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class
+		{
+			var docs = this.Documents.OfType<IMultiGetHit<T>>();
+			return from d in docs
+				join id in ids on d.Id equals id
+				select d;
+		}
+		public IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<int> ids) where T : class
+		{
+			return this.GetMany<T>(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)));
 		}
 		public FieldSelection<T> GetFieldSelection<T>(string id) where T : class
 		{

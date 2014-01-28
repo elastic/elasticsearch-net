@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var result = this._client.IndexMany(data, new SimpleBulkParameters { Refresh = true });
+			var result = this._client.Bulk(b=>b.IndexMany(data));
 
 			result.IsValid.Should().BeTrue();
 			result.Items.Count().Should().Be(100);
@@ -73,8 +73,8 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.IndexMany(data.OfType<ClassA>(), new SimpleBulkParameters { Refresh = true });
-			var resultb = this._client.IndexMany(data.OfType<ClassB>(), new SimpleBulkParameters { Refresh = true });
+			var resulta = this._client.Bulk(b=>b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this._client.Bulk(b=>b.IndexMany(data.OfType<ClassB>()).Refresh());
 
 			var queryResults = this._client.Search<MyBaseClass>(s => s
 				.Types(typeof(ClassA), typeof(ClassB))
@@ -104,8 +104,8 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.IndexMany(data.OfType<ClassA>(), new SimpleBulkParameters { Refresh = true });
-			var resultb = this._client.IndexMany(data.OfType<ClassB>(), new SimpleBulkParameters { Refresh = true });
+			var resulta = this._client.Bulk(b=>b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this._client.Bulk(b=>b.IndexMany(data.OfType<ClassB>()).Refresh());
 
 			var queryResults = this._client.MultiSearch(ms => ms
 				.Search<MyBaseClass>("using_types", s=>s.AllIndices()

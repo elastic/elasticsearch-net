@@ -7,18 +7,20 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IUnregisterPercolateResponse UnregisterPercolator(Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector)
+		public IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
+			selector = selector ?? (s => s);
 			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse>(
-				selector,
+				s => selector(s.Name(name)),
 				(p, d) => this.RawDispatch.DeleteDispatch(p)
 			);
 		}
 		
-		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector)
+		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
+			selector = selector ?? (s => s);
 			return this.DispatchAsync<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
-				selector,
+				s => selector(s.Name(name)),
 				(p, d) => this.RawDispatch.DeleteDispatchAsync(p)
 			);
 		}

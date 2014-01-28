@@ -16,6 +16,8 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]	
 		internal IDictionary<string, object> _Responses { get; set; }
 
+		public int TotalResponses { get { return this._Responses.HasAny() ? this._Responses.Count() : 0 ; } }
+
 		public IEnumerable<QueryResponse<T>> GetResponses<T>() where T : class
 		{
 			return this._Responses.Values.OfType<QueryResponse<T>>();

@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Settings
 			var connection = new InMemoryConnection(settings);
 			var client = new ElasticClient(settings, connection);
 
-			var r = client.Health(HealthLevel.Cluster);
+			var r = client.Health(h=>h.Level(LevelOptions.Cluster));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=cluster");

@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 			Assert.DoesNotThrow(() =>
 			{
-				var idxRsp = this._client.CreateIndex(ElasticsearchConfiguration.NewUniqueIndexName(), settings);
+				var idxRsp = this._client.CreateIndex(ElasticsearchConfiguration.NewUniqueIndexName(), i=>i.InitializeUsing(settings));
 				Assert.IsTrue(idxRsp.IsValid, idxRsp.ConnectionStatus.ToString());			
 			});
 		}

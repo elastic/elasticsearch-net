@@ -43,47 +43,50 @@ namespace Nest.Tests.Integration.Reproduce
 			var streamId = new Guid("8d00cf65-bf84-4035-9adb-695b1366304c");
 			var approved = true;
 
-			var response = client.Count<MediaStreamEntry>(
-				new[] { "StreamEntry" },
-				x => x.Bool(
+			var response = client.Count<MediaStreamEntry>(c=>c
+				.Index("StreamEntry")
+				.Query(x => x.Bool(
 					b => b.Must
 						(
 							x.Term(f => f.StreamId, streamId.ToString())
 							, x.Term(f => f.ApprovalSettings.Approved, approved)
 						)
 					)
-				);
+				)
+			);
 
 			//Approval settings should not appear twice just because we are spawing the nested queries of wrong lambda parameter (x)
 			Assert.AreEqual(1, Regex.Matches(response.ConnectionStatus.Request, @"approvalSettings\.approved").Count, response.ConnectionStatus.Request);
 			
 			//either use the lambda overload
-			response = client.Count<MediaStreamEntry>(
-				new[] { "StreamEntry" },
-				x => x.Bool(
+			response = client.Count<MediaStreamEntry>(c=>c
+				.Index("StreamEntry")
+				.Query(x => x.Bool(
 					b => b.Must
 						(
 							m=> m.Term(f => f.StreamId, streamId.ToString())
 							, m => m.Term(f => f.ApprovalSettings.Approved, approved)
 						)
 					)
-				);
+				)
+			);
 
 			//now we only see the query once
 			Assert.AreEqual(1, Regex.Matches(response.ConnectionStatus.Request, @"approvalSettings\.approved").Count);
 
 
 			//or use the static Query<MediaStreamEntry>
-			response = client.Count<MediaStreamEntry>(
-				new[] { "StreamEntry" },
-				x => x.Bool(
+			response = client.Count<MediaStreamEntry>(c=>c
+				.Index("StreamEntry")
+				.Query(x => x.Bool(
 					b => b.Must
 						(
 							Query<MediaStreamEntry>.Term(f => f.StreamId, streamId)
 							, Query<MediaStreamEntry>.Term(f => f.ApprovalSettings.Approved, approved)
 						)
 					)
-				);
+				)
+			);
 
 			//now we still only see the query once
 			Assert.AreEqual(1, Regex.Matches(response.ConnectionStatus.Request, @"approvalSettings\.approved").Count);
