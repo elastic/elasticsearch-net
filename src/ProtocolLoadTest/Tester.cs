@@ -43,15 +43,16 @@ namespace ProtocolLoadTest
 			Interlocked.Exchange(ref NumSent, 0);
 			foreach (var messages in partitionedMessages)
 			{
-				var t = client.IndexMany(messages, indexName);
-
-				Interlocked.Add(ref NumSent, bufferSize);
-				if (NumSent % 10000 == 0)
-				{
-					Console.WriteLine("Sent {0:0,0} messages to {1}", NumSent, indexName);
-				}
+				var t = client.IndexManyAsync(messages, indexName)
+					.ContinueWith(tt =>
+					{
+						Interlocked.Add(ref NumSent, bufferSize);
+						Console.WriteLine("Sent {0:0,0} messages to {1}, {2}", NumSent, indexName, tt.Result.Took);
+					})
+					;
+				tasks.Add(t);
 			}
-			//Task.WaitAll(tasks.ToArray());
+			Task.WaitAll(tasks.ToArray());
 		}
 	}
 }

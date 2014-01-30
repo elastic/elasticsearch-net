@@ -59,20 +59,20 @@ namespace ProtocolLoadTest
 
 			Console.WriteLine("{0} index test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, rate);
 
-			var numberOfSearches = 10000;
+			//var numberOfSearches = 10000;
 
-			sw.Restart();
-			tester.SearchUsingSingleClient(INDEX_PREFIX + type, port, numberOfSearches);
-			double singleClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
-			Console.WriteLine("{0} search single client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, singleClientSearchRate);
+			//sw.Restart();
+			//tester.SearchUsingSingleClient(INDEX_PREFIX + type, port, numberOfSearches);
+			//double singleClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
+			//Console.WriteLine("{0} search single client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, singleClientSearchRate);
 
-			sw.Restart();
-			tester.SearchUsingMultipleClients(INDEX_PREFIX + type, port, numberOfSearches);
-			double multiClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
-			Console.WriteLine("{0} search multi client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, multiClientSearchRate);
+			//sw.Restart();
+			//tester.SearchUsingMultipleClients(INDEX_PREFIX + type, port, numberOfSearches);
+			//double multiClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
+			//Console.WriteLine("{0} search multi client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, multiClientSearchRate);
 
-			// Close the index so we don't interfere with the next test
-			CloseIndex(type);
+			//// Close the index so we don't interfere with the next test
+			//CloseIndex(type);
 
 			return rate;
 		}

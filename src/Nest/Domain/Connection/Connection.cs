@@ -330,7 +330,8 @@ namespace Nest
 				}
 				else if (enumerator.MoveNext())
 				{
-					enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
+					//enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
+					enumerator.Current.ContinueWith(recursiveBody);
 				}
 				else enumerator.Dispose();
 			};
