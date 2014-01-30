@@ -44,6 +44,9 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// The full document to be created if an existing document does not exist for a partial merge.
+		/// </summary>
 		public UpdateDescriptor<T, K> Upsert(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> upsertValues)
 		{
 			upsertValues.ThrowIfNull("upsertValues");
@@ -51,7 +54,10 @@ namespace Nest
 			return this;
 		}
 
-		public UpdateDescriptor<T, K> Upsert(K upsertObject)
+		/// <summary>
+		/// The full document to be created if an existing document does not exist for a partial merge.
+		/// </summary>
+		public UpdateDescriptor<T, K> Upsert(T upsertObject)
 		{
 			upsertObject.ThrowIfNull("upsertObject");
 			this._Upsert = upsertObject;

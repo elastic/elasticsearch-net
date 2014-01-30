@@ -11,6 +11,8 @@
     <RootNamespace>Nest.Tests.Integration</RootNamespace>
     <AssemblyName>Nest.Tests.Integration</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -75,6 +77,7 @@
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTestResult.cs" />
     <Compile Include="Indices\Analysis\Analyzers\AnalyzerTests.cs" />
     <Compile Include="Cluster\StateTests.cs" />
+    <Compile Include="Indices\StatusTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />
     <Compile Include="Cluster\NodeTests.cs" />
@@ -120,6 +123,7 @@
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
+    <Compile Include="Reproduce\Reproduce450Tests.cs" />
     <Compile Include="Reproduce\Reproduce389Tests.cs" />
     <Compile Include="Reproduce\Reproduce346Tests.cs" />
     <Compile Include="Reproduce\Reproduce325Tests.cs" />
@@ -194,6 +198,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

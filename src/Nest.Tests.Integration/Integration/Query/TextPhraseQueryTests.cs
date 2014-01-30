@@ -57,13 +57,13 @@ namespace Nest.Tests.Integration.Integration.Query
 			var querySlop0 = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
-					.QueryString("one two")
+					.Query("one two")
 					.Slop(0)
 					.Operator(Operator.and));
 			var querySlop1 = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
-					.QueryString("one three")
+					.Query("one three")
 					.Slop(1)
 					.Operator(Operator.and));
 
@@ -88,21 +88,21 @@ namespace Nest.Tests.Integration.Integration.Query
 			var querySlop0 = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
-					.QueryString("one three")
+					.Query("one three")
 					.Slop(0));
 			var querySlop1 = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
-					.QueryString("one four")
+					.Query("one four")
 					.Slop(1));
 			var queryFail = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
-					.QueryString("one fail"));
+					.Query("one fail"));
 			var queryFailOr = Query<ElasticSearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
-					.QueryString("fail fail"));
+					.Query("fail fail"));
 
 			var results = this._client.Search<ElasticSearchProject>(
 				s => s.Filter(filterId)

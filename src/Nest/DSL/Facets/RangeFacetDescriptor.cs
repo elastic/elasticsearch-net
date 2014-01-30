@@ -32,6 +32,10 @@ namespace Nest
     [JsonProperty(PropertyName = "ranges")]
     internal IEnumerable<Range<K>> _Ranges { get; set; }
 
+    [JsonProperty(PropertyName = "params")]
+    [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+    internal Dictionary<string, object> _Params { get; set; }
+
     public RangeFacetDescriptor<T, K> OnField(string field)
     {
       field.ThrowIfNull("field");
@@ -89,6 +93,12 @@ namespace Nest
       }
       this._Ranges = newRanges;
       return this;
+    }
+    public RangeFacetDescriptor<T, K> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
+    {
+        paramDictionary.ThrowIfNull("paramDictionary");
+        this._Params = paramDictionary(new FluentDictionary<string, object>());
+        return this;
     }
 
     public new RangeFacetDescriptor<T, K> Global()

@@ -30,6 +30,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -156,7 +158,13 @@
     <Compile Include="Domain\DSL\GeoShapeVector.cs" />
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
+    <Compile Include="Domain\Parameters\StatusParams.cs" />
     <Compile Include="Domain\Responses\RootVersionInfoResponse.cs" />
+    <Compile Include="Domain\Responses\StatusResponse.cs" />
+    <Compile Include="Domain\Stats\IndexSizeStats.cs" />
+    <Compile Include="Domain\Stats\IndexDocStats.cs" />
+    <Compile Include="Domain\Status\IndexStatus.cs" />
+    <Compile Include="Domain\Stats\TranslogStats.cs" />
     <Compile Include="DSL\Filter\ConditionlessFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\Term.cs" />
     <Compile Include="DSL\Filter\TermsLookupFilterDescriptor.cs" />
@@ -166,6 +174,7 @@
     <Compile Include="DSL\Suggest\FuzzySuggestDescriptor.cs" />
     <Compile Include="DSL\Filter\RegexpFilterDescriptor.cs" />
     <Compile Include="DSL\Query\RegexpQueryDescriptor.cs" />
+    <Compile Include="ElasticClient-Status.cs" />
     <Compile Include="Enums\DynamicMappingOption.cs" />
     <Compile Include="Enums\Enums.Generated.cs" />
     <Compile Include="DSL\Suggest\CompletionSuggestDescriptor.cs" />
@@ -701,8 +710,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
