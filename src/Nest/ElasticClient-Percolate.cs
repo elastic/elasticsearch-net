@@ -12,7 +12,8 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse>(
 				s => selector(s.Name(name)),
-				(p, d) => this.RawDispatch.DeleteDispatch(p)
+				(p, d) => this.RawDispatch.DeleteDispatch(p),
+				allow404: true
 			);
 		}
 		
@@ -21,7 +22,8 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
 				s => selector(s.Name(name)),
-				(p, d) => this.RawDispatch.DeleteDispatchAsync(p)
+				(p, d) => this.RawDispatch.DeleteDispatchAsync(p),
+				allow404: true
 			);
 		}
 		
@@ -31,7 +33,7 @@ namespace Nest
 		{
 			return this.Dispatch<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse>(
 				percolatorSelector,
-				(p, d) => this.RawDispatch.IndexDispatch(p, d)
+				(p, d) => this.RawDispatch.IndexDispatch(p, d._RequestBody)
 			);
 		}
 	
@@ -40,7 +42,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse, IRegisterPercolateResponse>(
 				percolatorSelector,
-				(p, d) => this.RawDispatch.IndexDispatchAsync(p, d)
+				(p, d) => this.RawDispatch.IndexDispatchAsync(p, d._RequestBody)
 			);
 			
 		}

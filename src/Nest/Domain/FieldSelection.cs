@@ -18,11 +18,26 @@ namespace Nest.Domain
 
 	public class FieldSelection<T> : IFieldSelection<T>
 	{
+		public FieldSelection()
+		{
+			
+		}
+
+		internal FieldSelection(IDictionary<string, object> values)
+		{
+			this.FieldValues = values;
+		}
+
 		public T Document { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> FieldValues { get; set; }
 
+		public K FieldValue<K>(Expression<Func<T, K>> objectPath)
+		{
+			var path = new PropertyNameResolver().Resolve(objectPath);
+			return this.FieldValue<K>(path);
+		}
 		public K FieldValue<K>(Expression<Func<T, object>> objectPath)
 		{
 			var path = new PropertyNameResolver().Resolve(objectPath);

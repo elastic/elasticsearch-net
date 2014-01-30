@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Core.Get
 			missingPerson.Should().NotBeNull();
 			missingPerson.Exists.Should().BeFalse();
 
-			var missingPersonDirect = result.Get<Person>(100000);
+			var missingPersonDirect = result.Source<Person>(100000);
 			missingPersonDirect.Should().BeNull();
 
 			var lewis = result.Source<Person>(105);

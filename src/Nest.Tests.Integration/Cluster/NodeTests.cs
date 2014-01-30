@@ -15,14 +15,11 @@ namespace Nest.Tests.Integration.Cluster
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
 			var node = r.Nodes.Values.First();
-			Assert.IsNotNull(node.Settings);
-			Assert.IsNotNull(node.OS);
-			Assert.IsNotNull(node.Process);
-			Assert.IsNotNull(node.JVM);
-			Assert.IsNotNull(node.ThreadPool);
-			Assert.IsNotNull(node.Network);
-			Assert.IsNotNull(node.Transport); 
-			Assert.IsNotNull(node.HTTP);
+			Assert.IsNotNull(node.Name);
+			Assert.IsNotNull(node.TransportAddress);
+			Assert.IsNotNull(node.Hostname);
+			Assert.IsNull(node.JVM);
+			Assert.IsNull(node.ThreadPool);
 		}
 
 		[Test]

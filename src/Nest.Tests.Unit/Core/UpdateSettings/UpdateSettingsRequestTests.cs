@@ -9,12 +9,6 @@ namespace Nest.Tests.Unit.Core.UpdateSettings
 	{
 
 		[Test]
-		public void IfNoIndexAndNotExplicitlyOnAllIndicesThrows()
-		{
-			Assert.Throws<DslException>(()=> this._client.UpdateSettings(us=>us.RefreshInterval("1s")));
-		}
-
-		[Test]
 		public void CustomIndexInferred()
 		{
 			var result = this._client.UpdateSettings(us=>us

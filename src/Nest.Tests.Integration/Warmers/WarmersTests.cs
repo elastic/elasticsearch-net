@@ -109,6 +109,7 @@ namespace Nest.Tests.Integration.Warmers
 			//			this._client.DeleTemplate("put-template-with-settings");
 			var putResponse = this._client.PutWarmer(wd => wd
 				.Name("warmer_delete")
+				.AllIndices()
 				.Search<ElasticSearchProject>(s => s
 					.Query(q => q
 						.Terms(p => p.Name, "strange-value")

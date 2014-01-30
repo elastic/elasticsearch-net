@@ -546,26 +546,6 @@ namespace Nest.Tests.Integration.Search
 			Assert.IsNotEmpty(result.Result);
 		}
 
-		[Test]
-		public void Test()
-		{
-			this._client.PutTemplate(pt => pt
-				.Template("*")
-				.AddMapping<ElasticSearchProject>(m => m
-					.DynamicTemplates(dt => dt
-						.Add(t => t
-							.Name("list_nested")
-							.Match("list_*")
-							.Mapping(tm => tm
-								.NestedObject<object>(no => no
-
-								)
-							)
-						)
-
-					)
-				)
-			);
-		}
+		
 	}
 }

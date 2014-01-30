@@ -25,6 +25,7 @@ namespace Nest.Tests.Unit.Core.Map
 			
 			//TODO unit and integration tests for individual pieces!
 
+
 			var result = this._client.Map<ElasticSearchProject>(m => m
 				.Type("elasticsearchprojects2")
 				.Indices("nest_test_data", "nest_test_data_clone")
@@ -248,5 +249,7 @@ namespace Nest.Tests.Unit.Core.Map
 
             Assert.NotNull(result.ConnectionStatus.Request);
 		}
+
+
 	}
 }

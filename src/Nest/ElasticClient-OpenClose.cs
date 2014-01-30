@@ -7,7 +7,7 @@ namespace Nest
 	{
 		public IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			return this.Dispatch<OpenIndexDescriptor, OpenIndexQueryString, IIndicesOperationResponse>(
+			return this.Dispatch<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse>(
 				openIndexSelector,
 				(p, d) => this.RawDispatch.IndicesOpenDispatch(p)
 			);

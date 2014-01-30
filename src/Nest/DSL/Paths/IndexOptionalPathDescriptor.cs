@@ -52,12 +52,13 @@ namespace Nest
 		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
+			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Index == null)
-				throw new DslException("missing Index() or explicit OnAllIndices()");
+				this._Index = inferrer.DefaultIndex;
 
 			string index = null;
 			if (!this._AllIndices.GetValueOrDefault(false))
-				index = new ElasticInferrer(settings).IndexName(this._Index);
+				index = inferrer.IndexName(this._Index);
 
 			var pathInfo = new ElasticSearchPathInfo<K>()
 			{

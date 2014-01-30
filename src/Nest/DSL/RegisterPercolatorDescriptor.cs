@@ -11,12 +11,19 @@ using Nest.Resolvers;
 namespace Nest
 {
 
-	//TODO write custom converter for this that merges metadata and query
 	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexQueryString>
  		, IPathInfo<IndexQueryString> 
 		where T : class
 	{
-	
+		internal FluentDictionary<string, object> _RequestBody
+		{
+			get
+			{
+				var body = new FluentDictionary<string, object>(this._Metadata);
+				body.Add("query", this._Query);
+				return body;
+			}
+		}
 		internal BaseQuery _Query { get; set; }
 
 		internal FluentDictionary<string, object> _Metadata { get; set; } 

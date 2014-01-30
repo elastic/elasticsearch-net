@@ -11,21 +11,32 @@ namespace Nest
 	{
 		public IGetMappingResponse GetMapping(Func<GetMappingDescriptor, GetMappingDescriptor> selector)
 		{
-			//TODO: this will barf come back and fix the unit test that should fail on this
-			//IDictionary<string, RootObjectMapping>
 			return this.Dispatch<GetMappingDescriptor, GetMappingQueryString, GetMappingResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesGetMappingDispatch(p)
+				(p, d) => this.RawDispatch.IndicesGetMappingDispatch(p),
+				(d, s) =>
+				{
+					var dict = s.Success 
+						? s.Deserialize<Dictionary<string, RootObjectMapping>>()
+						: null;
+					return new GetMappingResponse(s, dict);
+				}
 			);
 		}
 		public Task<IGetMappingResponse> GetMappingAsync(Func<GetMappingDescriptor, GetMappingDescriptor> selector)
 		{
-			//TODO: this will barf come back and fix the unit test that should fail on this
-			//IDictionary<string, RootObjectMapping>
 			return this.DispatchAsync<GetMappingDescriptor, GetMappingQueryString, GetMappingResponse, IGetMappingResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesGetMappingDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesGetMappingDispatchAsync(p),
+				(d, s) =>
+				{
+					var dict = s.Success ? 
+						s.Deserialize<Dictionary<string, RootObjectMapping>>()
+						: null;
+					return new GetMappingResponse(s, dict);
+				}
 			);
+		
 		}
 
 	}

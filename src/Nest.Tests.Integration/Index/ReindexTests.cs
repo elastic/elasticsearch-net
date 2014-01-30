@@ -24,11 +24,11 @@ namespace Nest.Tests.Integration.Index
 				completed: () =>
 				{
 					var refresh = this._client.Refresh(r=>r.Indices(toIndex, ElasticsearchConfiguration.DefaultIndex));
-					var originalIndexCount = this._client.Count<dynamic>(c=>c
+					var originalIndexCount = this._client.Count(c=>c
 						.Index(ElasticsearchConfiguration.DefaultIndex)
 						.Query(q => q.MatchAll())
 					);
-					var newIndexCount = this._client.Count<dynamic>(c => c
+					var newIndexCount = this._client.Count(c => c
 						.Index(toIndex)
 						.Query(q => q.MatchAll())
 					);

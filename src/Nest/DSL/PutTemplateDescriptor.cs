@@ -61,6 +61,8 @@ namespace Nest
 			rootObjectMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
 			var typeName = rootObjectMappingDescriptor._Type.Resolve(this._connectionSettings);
+			if (typeName == null)
+				return this;
 			this._TemplateMapping.Mappings[typeName] = rootObjectMappingDescriptor._Mapping;
 			return this;
 

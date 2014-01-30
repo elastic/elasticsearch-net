@@ -28,7 +28,7 @@ namespace Nest
 
 		public IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
 		{
-			return this.Dispatch<GetWarmerDescriptor, GetWarmerQueryString, IWarmerResponse>(
+			return this.Dispatch<GetWarmerDescriptor, GetWarmerQueryString, WarmerResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetWarmerDispatch(p)
 			);
@@ -44,7 +44,7 @@ namespace Nest
 		
 		public IIndicesOperationResponse DeleteWarmer(Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector)
 		{
-			return this.Dispatch<DeleteWarmerDescriptor, DeleteWarmerQueryString, IIndicesOperationResponse>(
+			return this.Dispatch<DeleteWarmerDescriptor, DeleteWarmerQueryString, IndicesOperationResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatch(p)
 			);

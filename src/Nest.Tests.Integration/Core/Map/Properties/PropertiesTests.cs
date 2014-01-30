@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void StringProperty()
 		{
-			this._client.DeleteMapping(d=>d.Index<ElasticSearchProject>());
+			this._client.DeleteMapping<ElasticSearchProject>();
 			var result = this._client.Map<ElasticSearchProject>(m => m
 				.Properties(props => props
 					.String(s => s
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 				)
 			);
 			this.DefaultResponseAssertations(result);
-			var mappingResponse = this._client.GetMapping(gm=>gm.Index<ElasticSearchProject>());
+			var mappingResponse = this._client.GetMapping<ElasticSearchProject>();
 			mappingResponse.Should().NotBeNull();
 			var mapping = mappingResponse.Mapping;
 			mapping.Should().NotBeNull();
@@ -109,7 +109,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 		[Test]
 		public void BinaryProperty()
 		{
-			this._client.DeleteMapping(d=>d.Index<ElasticSearchProject>());
+			this._client.DeleteMapping(d=>d.Index<ElasticSearchProject>().Type<ElasticSearchProject>());
 			var result = this._client.Map<ElasticSearchProject>(m => m
 				.Properties(props => props
 					.Binary(s => s

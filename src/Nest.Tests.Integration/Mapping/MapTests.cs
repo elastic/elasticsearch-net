@@ -71,7 +71,7 @@ namespace Nest.Tests.Integration.Mapping
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
 			var x = this._client.CreateIndex(index, s => s
-				
+				.AddMapping<ElasticSearchProject>(a=>a.MapFromAttributes())
 			);
 			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 			var xx = this._client.Map<object>(m=>m.Type(typeof(ElasticSearchProject)).Index(index));
@@ -108,19 +108,27 @@ namespace Nest.Tests.Integration.Mapping
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
 			var x = this._client.CreateIndex(index, s => s);
 			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
-			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Index("elasticsearchprojects"));
+			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			typeMappingResult.IsValid.Should().BeTrue();
 			var typeMapping = typeMappingResult.Mapping;
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			mapping.Boost = 3;
-			typeMapping.TypeNameMarker = "elasticsearchprojects2";
-			this._client.Map<object>(m=>m.InitializeUsing(typeMapping).Index(index));
+			this._client.Map<object>(m=>m.InitializeUsing(typeMapping).Index(index).Type("elasticsearchprojects2"));
 
 			typeMapping = this._client.GetMapping(gm=>gm.Index(index).Type("elasticsearchprojects2")).Mapping;
 			var countryMapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(countryMapping);
 			Assert.AreEqual(3, countryMapping.Boost);
 		}
+
+		[Test]
+		public void GetMissingMap()
+		{
+			Assert.DoesNotThrow(() => {
+				var typeMapping = this._client.GetMapping(gm => gm.Index("asdasdasdsada").Type("elasticsearchprojects2")).Mapping;
+			});
+		}
+
 	}
 }

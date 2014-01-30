@@ -47,6 +47,7 @@ namespace Nest
 		private R Dispatch<D, Q, R>(
 			Func<D, D> selector
 			, Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
+			, Func<D,ConnectionStatus, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -55,26 +56,28 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return Dispatch<D, Q, R>(descriptor, dispatch, allow404);
+			return Dispatch<D, Q, R>(descriptor, dispatch, resultSelector, allow404);
 		}
 
 		private R Dispatch<D, Q, R>(
-			D descriptor, 
-			Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch,
-			bool allow404 = false
+			D descriptor
+			, Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
+			, Func<D,ConnectionStatus, R> resultSelector = null
+			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
 			where D : IPathInfo<Q>
 			where R : class
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return dispatch(pathInfo, descriptor)
-				.Deserialize<R>(allow404: allow404);
+			resultSelector = resultSelector ?? ((d, s) => s.Deserialize<R>(allow404: allow404));
+			return resultSelector(descriptor, dispatch(pathInfo, descriptor));
 		}
 
 		internal Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
 			, Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
+			, Func<D,ConnectionStatus, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -84,13 +87,14 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return DispatchAsync<D, Q, R, I>(descriptor, dispatch, allow404);
+			return DispatchAsync<D, Q, R, I>(descriptor, dispatch, resultSelector, allow404);
 		}
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
-			D descriptor, 
-			Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch,
-			bool allow404 = false
+			D descriptor 
+			, Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
+			, Func<D,ConnectionStatus, R> resultSelector = null
+			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
 			where D : IPathInfo<Q>
@@ -98,8 +102,9 @@ namespace Nest
 			where I : class
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			resultSelector = resultSelector ?? ((d, s) => s.Deserialize<R>(allow404: allow404));
 			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r => r.Result.Deserialize<R>(allow404: allow404));
+				.ContinueWith<I>(r => resultSelector(descriptor, r.Result));
 		}
 
 

@@ -287,7 +287,7 @@ namespace Nest.Tests.Integration.Indices
 		public void PutMapping()
 		{
 			var fieldName = Guid.NewGuid().ToString();
-			var mapping = this._client.GetMapping(gm=>gm.Index<ElasticSearchProject>()).Mapping;
+			var mapping = this._client.GetMapping<ElasticSearchProject>().Mapping;
 			var property = new StringMapping
 			{
 				Index = FieldIndexOption.not_analyzed

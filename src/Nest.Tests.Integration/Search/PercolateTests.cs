@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -26,6 +27,8 @@ namespace Nest.Tests.Integration.Search
 			Assert.AreEqual(r.Type, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
+			r.ConnectionStatus.Request.Should().NotBeNullOrEmpty().And.NotBe("{}");
+
 		}
 		[Test]
 		public void UnregisterPercolateTest()
@@ -38,7 +41,7 @@ namespace Nest.Tests.Integration.Search
 				.Query(q => q
 					.Term(f => f.Name, "elasticsearch.pm")
 				)
-			); 
+			);
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 			Assert.AreEqual(r.Type, ElasticsearchConfiguration.DefaultIndex);
@@ -64,7 +67,9 @@ namespace Nest.Tests.Integration.Search
 			this.RegisterPercolateTest(); // I feel a little dirty.
 			var c = this._client;
 			var name = "mypercolator";
-			var r = c.Percolate<ElasticSearchProject>(p=>p.Object(new ElasticSearchProject()
+			var r = c.Percolate<ElasticSearchProject>(p=>p
+				.Index<ElasticSearchProject>()
+				.Object(new ElasticSearchProject()
 			{
 				Name = "elasticsearch.pm",
 				Country = "netherlands",
@@ -120,6 +125,7 @@ namespace Nest.Tests.Integration.Search
 			 );
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
+			c.Refresh();
 			var percolateResponse = this._client.Percolate<ElasticSearchProject>(p => p
 				.Object(new ElasticSearchProject()
 				{
@@ -127,7 +133,7 @@ namespace Nest.Tests.Integration.Search
 					Country = "netherlands",
 					LOC = 100000, //Too many :(
 				})
-				.Query(q=>q.Term("color", "blue"))
+				.Query(q=>q.Match(m=>m.OnField("color").QueryString("blue")))
 			);
 			Assert.True(percolateResponse.IsValid);
 			Assert.True(percolateResponse.OK);

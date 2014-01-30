@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -16,7 +17,7 @@ namespace Nest.Tests.Integration.Core
 		public void IndexUsingCreateFlag()
 		{
 			// Document to be indexed.
-			ElasticSearchProject doc = new ElasticSearchProject
+			var doc = new ElasticSearchProject
 			{
 				Country = "Mozambique",
 				Followers = new List<Person>(),
@@ -25,7 +26,8 @@ namespace Nest.Tests.Integration.Core
 			};
 
 			// Index the document
-			this._client.Index<ElasticSearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			var indexResult = this._client.Index<ElasticSearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			indexResult.IsValid.Should().BeTrue();
 
 			// Grab the indexed document.
 			var foundDoc = this._client.Source<ElasticSearchProject>(doc.Id);

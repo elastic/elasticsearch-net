@@ -34,10 +34,6 @@ namespace Nest.Resolvers
 			return new TypeNameMarker { Name = typeName, Type = type };
 		}
 
-		public bool IsConditionless()
-		{
-			return this.Name.IsNullOrEmpty() && this.Type == null;
-		}
 
 		public static implicit operator TypeNameMarker(string typeName)
 		{

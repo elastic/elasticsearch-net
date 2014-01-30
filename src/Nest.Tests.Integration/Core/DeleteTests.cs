@@ -20,19 +20,12 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void ShouldThowOnNullId()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
+			Assert.Throws<DispatchException>(() =>
 			{
 				this._client.Delete<object>(d=>d.Index("someindex").Type("sometype").Id(null));
 			});
 		}
-		[Test]
-		public void ShouldThowOnEmptyId()
-		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				this._client.Delete<object>(d=>d.Index("someindex").Type("sometype").Id("				"));
-			});
-		}
+		
 		[Test]
 		public void GetDocumentById()
 		{
@@ -201,9 +194,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 
-			var parameterizedDocuments = result.Documents.Select(d => new BulkParameters<ElasticSearchProject>(d) { VersionType = VersionType.Internal });
-
-			var deleteResult = this._client.Bulk(b=>b.DeleteMany(parameterizedDocuments).Refresh());
+			var deleteResult = this._client.Bulk(b=>b.DeleteMany(result.Documents, (p, o) => p.VersionType(VersionType.Internal)).Refresh());
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);

@@ -48,7 +48,7 @@ namespace Nest.Resolvers
 
 			if (typeof(IHit<object>).IsAssignableFrom(objectType))
 				contract.Converter = new DefaultHitConverter();
-
+			
 			if (objectType == typeof(MultiGetResponse))
 				contract.Converter = new MultiGetHitConverter();
 

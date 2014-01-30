@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -56,12 +57,13 @@ namespace Nest
 		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
+			var inferrer = new ElasticInferrer(settings);
 			if (!this._AllIndices.HasValue && this._Indices == null)
-				throw new DslException("missing Index() or explicit OnAllIndices()");
+				this._Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
 
 			string index = "_all";
 			if (!this._AllIndices.GetValueOrDefault(false))
-				index = string.Join(",", this._Indices.Select(i => new ElasticInferrer(settings).IndexName(i)));
+				index = string.Join(",", this._Indices.Select(inferrer.IndexName));
 
 			var pathInfo = new ElasticSearchPathInfo<K>()
 			{

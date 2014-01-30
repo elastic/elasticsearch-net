@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var result = this._client.Bulk(b=>b.IndexMany(data));
+			var result = this._client.Bulk(b=>b.IndexMany(data).Refresh());
 
 			result.IsValid.Should().BeTrue();
 			result.Items.Count().Should().Be(100);

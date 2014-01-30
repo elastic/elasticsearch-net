@@ -33,13 +33,13 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetWithFields()
 		{
-			var elasticSearchProject = this._client.Source<ElasticSearchProject>(g=>g
+			var elasticSearchProject = this._client.SourceFields<ElasticSearchProject>(g=>g
 				.Id(4)
 				.Fields(f=>f.Name)
 			);
 
 			Assert.NotNull(elasticSearchProject);
-			Assert.IsNotNullOrEmpty(elasticSearchProject.Name);
+			Assert.IsNotNullOrEmpty(elasticSearchProject.FieldValue(p=>p.Name));
 		}
 		[Test]
 		public void GetWithFieldsDeep()
@@ -50,8 +50,8 @@ namespace Nest.Tests.Integration.Core.Get
 			).Fields;
 
 			Assert.NotNull(fieldSelection);
-			Assert.IsNotNullOrEmpty(fieldSelection.Document.Name);
-			var name = fieldSelection.FieldValue<string>(f => f.Name);
+			Assert.IsNull(fieldSelection.Document);
+			var name = fieldSelection.FieldValue(f => f.Name);
 			Assert.IsNotNullOrEmpty(name);
 			var list = fieldSelection.FieldValue<List<string>>(f=>f.Followers.First().FirstName);
 			Assert.NotNull(list);

@@ -12,7 +12,7 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesPutWarmer")]
-	[JsonConverter(typeof(ActAsQueryConverter))]
+	[JsonConverter(typeof(ActAsSearchDescriptorConverter))]
 	public partial class PutWarmerDescriptor :
 		IndicesOptionalTypesNamePathDecriptor<PutWarmerDescriptor, PutWarmerQueryString>
 		, IPathInfo<PutWarmerQueryString>

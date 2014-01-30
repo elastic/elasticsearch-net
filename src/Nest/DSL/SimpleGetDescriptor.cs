@@ -24,7 +24,6 @@ namespace Nest
 		/// </summary>
 		public SimpleGetDescriptor<T> Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("indices");
 			((ISimpleGetDescriptor)this)._Index = index;
 			return this;
 		}
@@ -34,7 +33,6 @@ namespace Nest
 		/// </summary>
 		public SimpleGetDescriptor<T> Type(string type)
 		{
-			type.ThrowIfNullOrEmpty("type");
 			((ISimpleGetDescriptor)this)._Type = type;
 			return this;
 		}
@@ -44,7 +42,6 @@ namespace Nest
 		/// </summary>
 		public SimpleGetDescriptor<T> Type(Type type)
 		{
-			type.ThrowIfNull("type");
 			((ISimpleGetDescriptor)this)._Type = type;
 			return this;
 		}

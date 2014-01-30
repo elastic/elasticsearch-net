@@ -18,6 +18,8 @@ namespace Nest.Tests.Integration.Cluster
 			Assert.True(r.Metadata.Indices.Count > 0);
 			foreach (var index in r.Metadata.Indices)
 			{
+				if (!index.Key.StartsWith("nest"))
+					continue;
 				Assert.NotNull(index.Value.Mappings);
 				Assert.True(index.Value.Mappings.Count > 0);
 			}
