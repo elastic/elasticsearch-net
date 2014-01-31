@@ -26,14 +26,12 @@ namespace Nest.Tests.Integration.Core.Get
 			);
 			var objects = result.Documents;
 
-			objects.Should().NotBeNull()
-				.And.HaveCount(2);
+			objects.Should().NotBeNull().And.HaveCount(2);
 
 
 			var person = result.Source<Person>(100);
 			person.Should().NotBeNull();
-			person.FirstName.Should().NotBeNullOrEmpty()
-				.And.Match("Ellie");
+			person.FirstName.Should().NotBeNullOrEmpty();
 
 		}
 
@@ -59,7 +57,7 @@ namespace Nest.Tests.Integration.Core.Get
 
 			var lewis = result.Source<Person>(105);
 			lewis.Should().NotBeNull();
-			lewis.FirstName.Should().NotBeNullOrEmpty().And.Match("Lewis");
+			lewis.FirstName.Should().NotBeNullOrEmpty();
 		}
 		
 		[Test]
@@ -85,8 +83,8 @@ namespace Nest.Tests.Integration.Core.Get
 			var person = personHit.FieldSelection;
 			person.Should().NotBeNull();
 			person.FieldValue<int>(p=>p.Id).Should().Be(100);
-			person.FieldValue<string>(p=>p.FirstName)
-				.Should().NotBeNullOrEmpty().And.Match("Ellie");
+			person.FieldValue<string>(p => p.FirstName)
+				.Should().NotBeNullOrEmpty();
 
 		}
 
@@ -113,13 +111,13 @@ namespace Nest.Tests.Integration.Core.Get
 			personFieldSelection.Should().NotBeNull();
 			personFieldSelection.FieldValue<int>(p => p.Id).Should().Be(100);
 			personFieldSelection.FieldValue<string>(p => p.FirstName)
-				.Should().NotBeNullOrEmpty().And.Match("Ellie");
+				.Should().NotBeNullOrEmpty();
 
 			var projectFieldSelection = result.GetFieldSelection<ElasticSearchProject>(1);
 			projectFieldSelection.Should().NotBeNull();
 			projectFieldSelection.FieldValue<int>(p => p.Id).Should().Be(1);
 			projectFieldSelection.FieldValue<string[]>(p => p.Followers.First().FirstName)
-				.Should().NotBeEmpty().And.Contain("Lewis");
+				.Should().NotBeEmpty();
 
 		}
 

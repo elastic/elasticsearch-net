@@ -177,9 +177,11 @@ namespace Nest.Tests.Integration.Search
         [Test]
         public void PhraseSuggest()
         {
+			var text = this._client.Search<ElasticSearchProject>(s => s.Size(1)).Documents.First().Content.Split(' ');
+			var phrase = string.Join(" ", text.Take(2)) + "x";
             var results = this._client.Search<ElasticSearchProject>(s => s
                 .Query(q => q.MatchAll())
-                .SuggestPhrase("myPhraseSuggest", m => m.Text("Nostrud frankufrter dseerunt ulalmco").Size(1).OnField("content"))
+				.SuggestPhrase("myPhraseSuggest", m => m.Text(phrase).Size(1).OnField("content"))
             );
 
             Assert.NotNull(results);
@@ -194,7 +196,6 @@ namespace Nest.Tests.Integration.Search
             Assert.NotNull(results.Suggest.Values.First().First().Options);
             Assert.GreaterOrEqual(results.Suggest.Values.First().First().Options.Count(), 1);
 
-            Assert.AreEqual(results.Suggest.Values.First().First().Options.First().Text, "nostrud frankfurter deserunt ulalmco");
         }
 
         [Test]

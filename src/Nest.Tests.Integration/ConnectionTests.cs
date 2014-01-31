@@ -77,8 +77,7 @@ namespace Nest.Tests.Integration
 				Assert.False(result.IsValid);
 				Assert.NotNull(result.ConnectionStatus);
 
-				Assert.True(result.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.BadGateway
-					|| result.ConnectionStatus.Error.ExceptionMessage.StartsWith("The remote name could not be resolved"));
+				Assert.True(result.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.BadGateway);
 			});
 		}
 		[Test]
@@ -121,10 +120,10 @@ namespace Nest.Tests.Integration
 			var result = this._client.Raw.ClusterHealthGet(s=>s
 				.Level(LevelOptions.Indices)
 				.Local(true)
-				.WaitForActiveShards(12)
+				.WaitForActiveShards(1)
 			);
 			Assert.IsTrue(result.Success);
-			StringAssert.EndsWith(":9200/_cluster/health?level=indices&local=true&wait_for_active_shards=12&pretty=true", result.RequestUrl);
+			StringAssert.EndsWith(":9200/_cluster/health?level=indices&local=true&wait_for_active_shards=1&pretty=true", result.RequestUrl);
 
 		}
 	}
