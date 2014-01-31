@@ -103,6 +103,7 @@
     <Compile Include="DSL\ClusterHealthDescriptor.cs" />
     <Compile Include="DSL\AnalyzeDescriptor.cs" />
     <Compile Include="DSL\AliasDescriptor.cs" />
+    <Compile Include="DSL\IndicesStatusDescriptor.cs" />
     <Compile Include="DSL\GetAliasesDescriptor.cs" />
     <Compile Include="DSL\DeleteDescriptor.cs" />
     <Compile Include="DSL\IndexDescriptor.cs" />

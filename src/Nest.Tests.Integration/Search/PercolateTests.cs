@@ -133,7 +133,7 @@ namespace Nest.Tests.Integration.Search
 					Country = "netherlands",
 					LOC = 100000, //Too many :(
 				})
-				.Query(q=>q.Match(m=>m.OnField("color").QueryString("blue")))
+				.Query(q=>q.Match(m=>m.OnField("color").Query("blue")))
 			);
 			Assert.True(percolateResponse.IsValid);
 			Assert.True(percolateResponse.OK);

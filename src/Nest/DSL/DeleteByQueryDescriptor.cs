@@ -19,6 +19,12 @@ namespace Nest
 	{
 		BaseQuery IActAsQuery._Query { get; set; }
 
+		public DeleteByQueryDescriptor<T> MatchAll()
+		{
+			((IActAsQuery)this)._Query = new QueryDescriptor<T>().MatchAll();
+			return this;
+		}
+
 		public DeleteByQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			((IActAsQuery)this)._Query = querySelector(new QueryDescriptor<T>());

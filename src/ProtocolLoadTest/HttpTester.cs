@@ -6,27 +6,27 @@ using Nest;
 
 namespace ProtocolLoadTest
 {
-    internal class HttpTester : Tester, ITester
-    {
-        public void Run(string indexName, int port, int numMessages, int bufferSize)
-        {
+	internal class HttpTester : Tester, ITester
+	{
+		public void Run(string indexName, int port, int numMessages, int bufferSize)
+		{
 			var settings = this.CreateSettings(indexName, port);
-            var client = new ElasticClient(settings);
-            
-            Connect(client, settings);
+			var client = new ElasticClient(settings);
+
+			Connect(client, settings);
 
 			GenerateAndIndex(client, indexName, numMessages, bufferSize);
-        }
+		}
 		public void SearchUsingSingleClient(string indexName, int port, int numberOfSearches)
 		{
 			var settings = this.CreateSettings(indexName, port);
-            var client = new ElasticClient(settings);
+			var client = new ElasticClient(settings);
 
 			var tasks = new List<Task>();
 			for (var p = 0; p < numberOfSearches; p++)
 			{
-				var t = client.SearchAsync<Message>(s=>s.MatchAll())
-					.ContinueWith(ta=>
+				var t = client.SearchAsync<Message>(s => s.MatchAll())
+					.ContinueWith(ta =>
 					{
 						if (!ta.Result.IsValid)
 							throw new ApplicationException(ta.Result.ConnectionStatus.ToString());
@@ -47,7 +47,7 @@ namespace ProtocolLoadTest
 					{
 						if (!ta.Result.IsValid)
 							throw new ApplicationException(ta.Result.ConnectionStatus.ToString());
-					}); 
+					});
 				tasks.Add(t);
 			}
 
@@ -55,5 +55,5 @@ namespace ProtocolLoadTest
 
 		}
 
-    }
+	}
 }
