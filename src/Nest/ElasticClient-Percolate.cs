@@ -28,41 +28,58 @@ namespace Nest
 		}
 		
 
-		public IRegisterPercolateResponse RegisterPercolator<T>(
-			Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) where T : class
+		public IRegisterPercolateResponse RegisterPercolator<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) 
+			where T : class
 		{
+			percolatorSelector.ThrowIfNull("percolatorSelector");
 			return this.Dispatch<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse>(
-				percolatorSelector,
+				s => percolatorSelector(s.Name(name)),
 				(p, d) => this.RawDispatch.IndexDispatch(p, d._RequestBody)
 			);
 		}
 	
-		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(
-			Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) where T : class
+		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) where T : class
 		{
+			percolatorSelector.ThrowIfNull("percolatorSelector");
 			return this.DispatchAsync<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse, IRegisterPercolateResponse>(
-				percolatorSelector,
+				s => percolatorSelector(s.Name(name)),
 				(p, d) => this.RawDispatch.IndexDispatchAsync(p, d._RequestBody)
 			);
 			
 		}
 
-		public IPercolateResponse Percolate<T>(
-			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class
+
+		public IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
+			where T : class
 		{
-			return this.Dispatch<PercolateDescriptor<T>, PercolateQueryString, PercolateResponse>(
-				percolateSelector,
+			return this.Percolate<T, T>(@object, percolateSelector);
+		}
+
+		public Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
+			where T : class
+		{
+			return this.PercolateAsync<T, T>(@object, percolateSelector);
+		}
+
+
+		public IPercolateResponse Percolate<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class
+		{
+			percolateSelector = percolateSelector ?? (s => s);
+			return this.Dispatch<PercolateDescriptor<T, K>, PercolateQueryString, PercolateResponse>(
+				s => percolateSelector(s.Object(@object)),
 				(p, d) => this.RawDispatch.PercolateDispatch(p, d)
 			);
 		}
 
-		
-
-		public Task<IPercolateResponse> PercolateAsync<T>(
-			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class
+		public Task<IPercolateResponse> PercolateAsync<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class
 		{
-			return this.DispatchAsync<PercolateDescriptor<T>, PercolateQueryString, PercolateResponse, IPercolateResponse>(
-				percolateSelector,
+			percolateSelector = percolateSelector ?? (s => s);
+			return this.DispatchAsync<PercolateDescriptor<T, K>, PercolateQueryString, PercolateResponse, IPercolateResponse>(
+				s => percolateSelector(s.Object(@object)),
 				(p, d) => this.RawDispatch.PercolateDispatchAsync(p, d)
 			);	
 		}

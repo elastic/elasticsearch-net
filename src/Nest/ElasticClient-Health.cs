@@ -9,16 +9,18 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IHealthResponse Health(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector)
+		public IHealthResponse Health(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
+			clusterHealthSelector = clusterHealthSelector ?? (s => s);
 			return this.Dispatch<ClusterHealthDescriptor, ClusterHealthQueryString, HealthResponse>(
 				clusterHealthSelector,
 				(p, d) => this.RawDispatch.ClusterHealthDispatch(p)
 			);
 		}
 		
-		public Task<IHealthResponse> HealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector)
+		public Task<IHealthResponse> HealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
+			clusterHealthSelector = clusterHealthSelector ?? (s => s);
 			return this.DispatchAsync<ClusterHealthDescriptor, ClusterHealthQueryString, HealthResponse, IHealthResponse>(
 				clusterHealthSelector,
 				(p, d) => this.RawDispatch.ClusterHealthDispatchAsync(p)

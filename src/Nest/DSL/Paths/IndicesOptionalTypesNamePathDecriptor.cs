@@ -125,11 +125,11 @@ namespace Nest
 			var indices = string.Join(",", 
 				this._Indices.HasAny()
 					? this._Indices.Select(i => i.Resolve(settings)).ToArray()
-					: new[] {inferrer.DefaultIndex}
+					: this._AllIndices.GetValueOrDefault(false)
+						? new [] {"_all"}
+						: new[] {inferrer.DefaultIndex}
 				);
 
-			if (this._AllIndices.GetValueOrDefault(false))
-				indices = "_all";
 			var types = this._Types.HasAny()
 				? string.Join(",", this._Types.Select(t => t.Resolve(settings)))
 				: null;

@@ -10,20 +10,21 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class PercolateDescriptor<T> : IndexTypePathTypedDescriptor<PercolateDescriptor<T>, PercolateQueryString, T> 
+	public partial class PercolateDescriptor<T,K> : IndexTypePathTypedDescriptor<PercolateDescriptor<T, K>, PercolateQueryString, T> 
 		, IPathInfo<PercolateQueryString> 
 		where T : class
+		where K : class
 	{
 		[JsonProperty(PropertyName = "query")]
 		internal BaseQuery _Query { get; set; }
 
 		[JsonProperty(PropertyName = "doc")]
-		internal T _Document { get; set; }
+		internal K _Document { get; set; }
 
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
-		public PercolateDescriptor<T> Object(T @object)
+		public PercolateDescriptor<T, K> Object(K @object)
 		{
 			this._Document = @object;
 			return this;
@@ -32,7 +33,7 @@ namespace Nest
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.
 		/// </summary>
-		public PercolateDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
+		public PercolateDescriptor<T, K> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			var d = querySelector(new QueryDescriptor<T>());

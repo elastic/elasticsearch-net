@@ -9,8 +9,7 @@ namespace Nest
 		TemplateMapping TemplateMapping { get; }
 	}
 
-	[JsonObject]
-	[JsonConverter(typeof(TemplateResponseConverter))]
+	[JsonObject(MemberSerialization.OptIn)]
 	public class TemplateResponse : BaseResponse, ITemplateResponse
 	{
 		public string Name { get; internal set; }

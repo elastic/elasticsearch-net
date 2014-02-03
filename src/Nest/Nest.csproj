@@ -621,7 +621,6 @@
     <Compile Include="Resolvers\Converters\TokenFilterCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
-    <Compile Include="Resolvers\Converters\WarmerResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
@@ -632,7 +631,6 @@
     <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
-    <Compile Include="Resolvers\Converters\TemplateResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Hit\ShardsMetaData.cs" />
     <Compile Include="ElasticClient-Count.cs" />

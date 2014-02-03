@@ -29,6 +29,30 @@ namespace Nest
 			return client.CountAsync<dynamic>(c => countSelector(c.AllIndices().AllTypes()));
 		}
 
+		public static IDeleteResponse Delete<T>(this IElasticClient client, int id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
+		{
+			selector = selector ?? (s => s);
+			return client.Delete<T>(s => selector(s.Id(id)));
+		}
+
+		public static IDeleteResponse Delete<T>(this IElasticClient client, string id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
+		{
+			selector = selector ?? (s => s);
+			return client.Delete<T>(s => selector(s.Id(id)));
+		}
+
+		public static Task<IDeleteResponse> DeleteAsync<T>(this IElasticClient client, int id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
+		{
+			selector = selector ?? (s => s);
+			return client.DeleteAsync<T>(s => selector(s.Id(id)));
+		}
+
+		public static Task<IDeleteResponse> DeleteAsync<T>(this IElasticClient client, string id, Func<DeleteDescriptor<T>, DeleteDescriptor<T>> selector = null) where T : class
+		{
+			selector = selector ?? (s => s);
+			return client.DeleteAsync<T>(s => selector(s.Id(id)));
+		}
+
 		public static IIndicesOperationResponse OpenIndex(this IElasticClient client, string index)
 		{
 			return client.OpenIndex(f => f.Index(index));
@@ -51,6 +75,14 @@ namespace Nest
 			return client.CloseIndex(f => f.Index<T>());
 		}
 
+		public static IQueryResponse<T> Scroll<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
+		{
+			return client.Scroll<T>(s => s.Scroll(scrollTime).ScrollId(scrollId));
+		}
+		public static Task<IQueryResponse<T>> ScrollAsync<T>(this IElasticClient client, string scrollTime, string scrollId) where T : class
+		{
+			return client.ScrollAsync<T>(s => s.Scroll(scrollTime).ScrollId(scrollId));
+		}
 
 
 		public static T Source<T>(this IElasticClient client, string id, string index = null, string type = null)
@@ -114,7 +146,7 @@ namespace Nest
 		public static Task<IEnumerable<T>> SourceManyAsync<T>(this IElasticClient client, IEnumerable<int> ids, string index = null, string type = null)
 			where T : class
 		{
-			return client.SourceManyAsync<T>(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)), index, type);
+			return client.SourceManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
 		}
 		public static IEnumerable<IMultiGetHit<T>> GetMany<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
 			where T : class
@@ -136,7 +168,7 @@ namespace Nest
 		public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(this IElasticClient client, IEnumerable<int> ids, string index = null, string type = null)
 			where T : class
 		{
-			return client.GetManyAsync<T>(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)), index, type);
+			return client.GetManyAsync<T>(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), index, type);
 		}
 
 		public static IIndicesResponse DeleteMapping<T>(
@@ -147,7 +179,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return client.DeleteMapping(s => selector(s.Index<T>().Type<T>()));
 		}
-		
+
 		public static Task<IIndicesResponse> DeleteMappingAsync<T>(
 			this IElasticClient client,
 			Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector = null)
@@ -156,7 +188,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return client.DeleteMappingAsync(s => selector(s.Index<T>().Type<T>()));
 		}
-		
+
 		public static IGetMappingResponse GetMapping<T>(
 			this IElasticClient client,
 			Func<GetMappingDescriptor, GetMappingDescriptor> selector = null)
@@ -173,6 +205,6 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return client.GetMappingAsync(s => selector(s.Index<T>().Type<T>()));
 		}
-		
+
 	}
 }

@@ -14,7 +14,6 @@ namespace Nest
 {
 	public class ConnectionStatus
 	{
-		private readonly IConnectionSettings _settings;
 		private readonly ElasticSerializer _elasticSerializer;
 		private string mockJsonResponse;
 		public bool Success { get; private set; }
@@ -31,10 +30,11 @@ namespace Nest
 		private ConnectionStatus(IConnectionSettings settings)
 		{
 			this.IdResolver = new IdResolver();
-			this.IndexNameResolver = new IndexNameResolver(settings);
-			
-			this._settings = settings;
-			this._elasticSerializer = new ElasticSerializer(settings);
+			if (settings != null)
+			{
+				this.IndexNameResolver = new IndexNameResolver(settings);
+				this._elasticSerializer = new ElasticSerializer(settings);
+			}
 		}
 
 		protected IndexNameResolver IndexNameResolver { get; private set; }
@@ -43,14 +43,12 @@ namespace Nest
 
 		public ConnectionStatus(IConnectionSettings settings, Exception e) : this(settings)
 		{
-			this._settings = settings;
 			this.Success = false;
 			this.Error = new ConnectionError(e);
 			this.Result = this.Error.Response;
 		}
 		public ConnectionStatus(IConnectionSettings settings, string result) : this(settings)
 		{
-			this._settings = settings;
 			this.Success = true;
 			this.Result = result;
 		}

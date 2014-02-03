@@ -34,8 +34,7 @@ namespace Nest.Tests.Integration.Warmers
 			result.IsValid.Should().BeTrue();
 			result.ConnectionStatus.Should().NotBeNull();
 
-			var warmerResult = this._client.GetWarmer(w => w
-				.Index(index)
+			var warmerResult = this._client.GetWarmer("warmer_createindexwithwarmer", w => w
 				.Name("warmer_createindexwithwarmer")
 			);
 

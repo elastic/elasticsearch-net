@@ -10,7 +10,6 @@ namespace Nest
 	}
 
 	[JsonObject]
-	[JsonConverter(typeof(WarmerResponseConverter))]
 	public class WarmerResponse : BaseResponse, IWarmerResponse
 	{
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]

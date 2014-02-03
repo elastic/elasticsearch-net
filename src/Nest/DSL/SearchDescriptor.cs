@@ -1085,7 +1085,7 @@ namespace Nest
 			var inferrer = new ElasticInferrer(settings);
 			string indices;
 			if (this._AllIndices.GetValueOrDefault(false))
-				indices = "_all";
+				indices = !this._AllTypes.GetValueOrDefault(false) ? "_all" : null;
 			else if (this._Indices.HasAny())
 				indices = inferrer.IndexNames(this._Indices);
 			else

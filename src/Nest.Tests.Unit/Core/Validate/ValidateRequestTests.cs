@@ -23,11 +23,29 @@ namespace Nest.Tests.Unit.Core.Validate
 			StringAssert.AreEqualIgnoringCase("POST", status.RequestMethod);
 		}
 
-		[Test]
-		public void AllIndices()
+		
+        [Test]
+        public void AllIndices()
 		{
 			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
 				.AllIndices()
+				.Query(q=>q
+					.MatchAll()
+				)
+			);
+			Assert.NotNull(result, "PutWarmer result should not be null");
+			var status = result.ConnectionStatus;
+			var uri = new Uri(status.RequestUrl);
+			Assert.AreEqual("/_all/elasticsearchprojects/_validate/query", uri.AbsolutePath);
+			StringAssert.AreEqualIgnoringCase("POST", status.RequestMethod);
+		}
+		
+        [Test]
+		public void AllIndicesAllTypes()
+		{
+			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+				.AllIndices()
+                .AllTypes()
 				.Query(q=>q
 					.MatchAll()
 				)

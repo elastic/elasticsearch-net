@@ -2908,13 +2908,13 @@ namespace Nest
 	///http://elasticsearch.org/guide/reference/api/percolate/
 	///</pre>
 	///</summary>
-	public partial class PercolateDescriptor<T>
+	public partial class PercolateDescriptor<T,K>
 	{
 		internal PercolateQueryString _QueryString = new PercolateQueryString(); 
 
 
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public PercolateDescriptor<T> PreferLocal(bool prefer_local = true)
+		public PercolateDescriptor<T,K> PreferLocal(bool prefer_local = true)
 		{
 			this._QueryString.PreferLocal(prefer_local);
 			return this;

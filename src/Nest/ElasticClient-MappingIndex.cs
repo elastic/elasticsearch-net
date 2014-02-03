@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,7 +13,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		private static readonly Regex StripIndex = new Regex(@"^index\.");
+		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(()=> new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 
 		public IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
 		{
@@ -75,7 +76,7 @@ namespace Nest
 			// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
 			foreach (JProperty s in settingsObject.Children<JProperty>())
 			{
-				var name = StripIndex.Replace(s.Name, "");
+				var name = StripIndex.Value.Replace(s.Name, "");
 				if (name.StartsWith("analysis."))
 				{
 					var keys = name.Split('.');

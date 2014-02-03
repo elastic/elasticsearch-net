@@ -21,6 +21,8 @@ namespace Nest
 			this.IsValid = status.Success;
 			if (dict == null || dict.Count <= 0) return;
 			var mapping = dict.First();
+			if (mapping.Value == null)
+				return;
 			mapping.Value.TypeNameMarker = mapping.Key;
 			this.Mapping = mapping.Value;
 		}

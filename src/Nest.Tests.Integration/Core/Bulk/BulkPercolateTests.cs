@@ -15,12 +15,11 @@ namespace Nest.Tests.Integration.Core.Bulk
 
 			this._client.UnregisterPercolator(query1, ur=>ur.Index<ElasticSearchProject>());
 
-			var perc = this._client.RegisterPercolator<ElasticSearchProject>(p => p
-				.Name(query1)
+			var perc = this._client.RegisterPercolator<ElasticSearchProject>(query1, p => p
 				.Query(q => q
 					.Term(f => f.Country, "netherlands")
 				)
-				);
+			);
 			this._client.Refresh(r=>r.Index<ElasticSearchProject>());
 			var descriptor = new BulkDescriptor();
 

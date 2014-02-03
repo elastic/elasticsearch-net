@@ -9,51 +9,80 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-
-		public IIndicesOperationResponse PutWarmer(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
+		public IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
 		{
+            selector.ThrowIfNull("selector");
 			return this.Dispatch<PutWarmerDescriptor, PutWarmerQueryString, IndicesOperationResponse>(
-				selector,
+				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesPutWarmerDispatch(p, d)
 			);
 		}
 		
-		public Task<IIndicesOperationResponse> PutWarmerAsync(Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
+		public Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
 		{
+            selector.ThrowIfNull("selector");
 			return this.DispatchAsync<PutWarmerDescriptor, PutWarmerQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
-				selector,
+				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesPutWarmerDispatchAsync(p, d)
 			);
 		}
 
-		public IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
+		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
 		{
+		    selector = selector ?? (s => s);
 			return this.Dispatch<GetWarmerDescriptor, GetWarmerQueryString, WarmerResponse>(
-				selector,
-				(p, d) => this.RawDispatch.IndicesGetWarmerDispatch(p)
+				d => selector(d.Name(name).AllIndices()),
+				(p, d) => this.RawDispatch.IndicesGetWarmerDispatch(p),
+				DeserializeToWarmerResponse
 			);
 		}
 
-		public Task<IWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, GetWarmerDescriptor> selector)
+		public Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
 		{
+		    selector = selector ?? (s => s);
 			return this.DispatchAsync<GetWarmerDescriptor, GetWarmerQueryString, WarmerResponse, IWarmerResponse>(
-				selector,
-				(p, d) => this.RawDispatch.IndicesGetWarmerDispatchAsync(p)
+				d => selector(d.Name(name).AllIndices()),
+				(p, d) => this.RawDispatch.IndicesGetWarmerDispatchAsync(p),
+				DeserializeToWarmerResponse
 			);
 		}
 		
-		public IIndicesOperationResponse DeleteWarmer(Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector)
+		private WarmerResponse DeserializeToWarmerResponse(GetWarmerDescriptor getWarmerDescriptor, ConnectionStatus connectionStatus)
 		{
+			var dict =  connectionStatus.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>>();
+			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
+			foreach (var kv in dict)
+			{
+				var indexDict = kv.Value;
+				Dictionary<string, WarmerMapping> warmers;
+				if (indexDict == null || !indexDict.TryGetValue("warmers", out warmers) || warmers == null)
+					continue;
+				foreach (var kvW in warmers)
+				{
+					kvW.Value.Name = kvW.Key;
+				}
+				indices.Add(kv.Key, warmers);
+			}
+
+			return new WarmerResponse
+			{
+				Indices = indices
+			};
+		}
+		public IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null)
+		{
+		    selector = selector ?? (s => s);
 			return this.Dispatch<DeleteWarmerDescriptor, DeleteWarmerQueryString, IndicesOperationResponse>(
-				selector,
+				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatch(p)
 			);
 		}
 
-		public Task<IIndicesOperationResponse> DeleteWarmerAsync(Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector)
+		public Task<IIndicesOperationResponse> DeleteWarmerAsync(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null)
 		{
+		    selector = selector ?? (s => s);
 			return this.DispatchAsync<DeleteWarmerDescriptor, DeleteWarmerQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
-				selector,
+				d => selector(d.Name(name).AllIndices()),
 				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatchAsync(p)
 			);
 		}

@@ -128,22 +128,22 @@ namespace Nest
 				Type = type
 			};
 
-			if (this._AllTypes)
-				pathInfo.Type = null;
-			else if (this._Types.HasAny())
+			if (this._Types.HasAny())
 				pathInfo.Type = string.Join(",", this._Types.Select(s=>s.Resolve(settings)));
+			else if (this._AllTypes)
+			    pathInfo.Type = null;
+			else pathInfo.Type = inferrer.TypeName<T>();
 
-			if (this._AllIndices && pathInfo.Type == inferrer.TypeName<T>())
-				pathInfo.Type = null;
-
-			if (this._AllIndices && !pathInfo.Type.IsNullOrEmpty())
-				pathInfo.Index = "_all";
-			else if (this._AllIndices)
-				pathInfo.Index = null;
-			else if (this._Indices.HasAny())
+			if (this._Indices.HasAny())
 				pathInfo.Index = string.Join(",", this._Indices.Select(s=>s.Resolve(settings)));
+			else if (this._AllIndices && !pathInfo.Type.IsNullOrEmpty())
+			    pathInfo.Index = "_all";
+			else
+			    pathInfo.Index = this._AllIndices ? null : inferrer.IndexName<T>();
+            
 
-			pathInfo.QueryString = queryString ?? new K();
+
+		    pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 
