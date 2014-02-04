@@ -16,40 +16,28 @@ namespace Nest
 	{
 		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector)
 		{
-			multiSearchSelector.ThrowIfNull("multiSearchSelector");
-			var descriptor = multiSearchSelector(new MultiSearchDescriptor());
-
-			var multiSearchConverter = new MultiSearchConverter(this._connectionSettings, descriptor);
-			var pathInfo = ((IPathInfo<MultiSearchQueryString>) descriptor).ToPathInfo(this._connectionSettings);
-			var json = this.Serializer.SerializeMultiSearch(descriptor);
-			var status = this.RawDispatch.MsearchDispatch(pathInfo, json);
-
-			var multiSearchResponse = this.Serializer.DeserializeInternal<MultiSearchResponse>(
-				status, 
-				piggyBackJsonConverter: multiSearchConverter
+			return this.Dispatch<MultiSearchDescriptor, MultiSearchQueryString, MultiSearchResponse>(
+				multiSearchSelector,
+				(p, d) =>
+				{
+					var json = this.Serializer.SerializeMultiSearch(d);
+					return this.RawDispatch.MsearchDispatch(p, json);
+				},
+				this.Serializer.DeserializeMultiSearchResponse
 			);
-			return multiSearchResponse;
 		}
 
 		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector)
 		{
-			multiSearchSelector.ThrowIfNull("multiSearchSelector");
-			var descriptor = multiSearchSelector(new MultiSearchDescriptor());
-
-			var multiSearchConverter = new MultiSearchConverter(this._connectionSettings, descriptor);
-			var pathInfo = ((IPathInfo<MultiSearchQueryString>) descriptor).ToPathInfo(this._connectionSettings);
-			var json = this.Serializer.SerializeMultiSearch(descriptor);
-			return this.RawDispatch.MsearchDispatchAsync(pathInfo, json)
-				.ContinueWith<IMultiSearchResponse>(t =>
+			return this.DispatchAsync<MultiSearchDescriptor, MultiSearchQueryString, MultiSearchResponse, IMultiSearchResponse>(
+				multiSearchSelector,
+				(p, d) =>
 				{
-					var status = t.Result;
-					var multiSearchResponse = this.Serializer.DeserializeInternal<MultiSearchResponse>(
-						status,
-						piggyBackJsonConverter: multiSearchConverter
-					);
-					return multiSearchResponse;
-				});
-
+					var json = this.Serializer.SerializeMultiSearch(d);
+					return this.RawDispatch.MsearchDispatchAsync(p, json);
+				},
+				this.Serializer.DeserializeMultiSearchResponse
+			);
 		}
 	}
 }

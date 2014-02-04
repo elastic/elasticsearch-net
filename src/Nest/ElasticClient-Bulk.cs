@@ -18,22 +18,26 @@ namespace Nest
 	{
 		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
-			bulkSelector.ThrowIfNull("bulkSelector");
-			var bulkDescriptor = bulkSelector(new BulkDescriptor());
-			var json = this.Serializer.SerializeBulkDescriptor(bulkDescriptor);
-			var pathInfo = ((IPathInfo<BulkQueryString>) bulkDescriptor).ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.BulkDispatch(pathInfo, json)
-				.Deserialize<BulkResponse>();
+			return this.Dispatch<BulkDescriptor, BulkQueryString, BulkResponse>(
+				bulkSelector,
+				(p, d) =>
+				{
+					var json = this.Serializer.SerializeBulkDescriptor(d);
+					return this.RawDispatch.BulkDispatch(p, json);
+				}
+			);
 		}
 
 		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
-			bulkSelector.ThrowIfNull("bulkSelector");
-			var bulkDescriptor = bulkSelector(new BulkDescriptor());
-			var json = this.Serializer.SerializeBulkDescriptor(bulkDescriptor);
-			var pathInfo = ((IPathInfo<BulkQueryString>) bulkDescriptor).ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.BulkDispatchAsync(pathInfo, json)
-				.ContinueWith<IBulkResponse>(t =>this.Deserialize<BulkResponse>(t.Result));
+			return this.DispatchAsync<BulkDescriptor, BulkQueryString, BulkResponse, IBulkResponse>(
+				bulkSelector,
+				(p, d) =>
+				{
+					var json = this.Serializer.SerializeBulkDescriptor(d);
+					return this.RawDispatch.BulkDispatchAsync(p, json);
+				}
+			);
 		}
 
 	}

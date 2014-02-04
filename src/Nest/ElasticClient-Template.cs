@@ -15,27 +15,19 @@ namespace Nest
 			return this.Dispatch<GetTemplateDescriptor, GetTemplateQueryString, TemplateResponse>(
 				(d) => getTemplateSelector(d.Name(name)),
 				(p, d) => this.RawDispatch.IndicesGetTemplateDispatch(p),
-				(gt, c) =>
-				{
-					var dict = c.Deserialize<Dictionary<string, TemplateMapping>>();
-					if (dict.Count == 0)
-						throw new DslException("Could not deserialize TemplateMapping");
-
-					return new TemplateResponse
-					{
-						Name = dict.First().Key,
-						TemplateMapping = dict.First().Value
-					};
-				}
+				this.Serializer.DeserializeTemplateResponse
 			);
 		}
+
+	
 
 		public Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
 		    getTemplateSelector = getTemplateSelector ?? (s => s);
 			return this.DispatchAsync<GetTemplateDescriptor, GetTemplateQueryString, TemplateResponse, ITemplateResponse>(
 				d => getTemplateSelector(d.Name(name)),
-				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync(p),
+				this.Serializer.DeserializeTemplateResponse
 			);
 		}
 

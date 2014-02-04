@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Linq;
@@ -34,8 +35,6 @@ namespace Nest
 			this._connectionSettings = settings;
 			this.Connection = connection;
 
-			this.PropertyNameResolver = new PropertyNameResolver();
-
 			this.Serializer = new ElasticSerializer(this._connectionSettings);
 			this.Raw = new RawElasticClient(this._connectionSettings, connection);
 			this.RawDispatch = new RawDispatch(this.Raw);
@@ -47,7 +46,7 @@ namespace Nest
 		private R Dispatch<D, Q, R>(
 			Func<D, D> selector
 			, Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
-			, Func<D,ConnectionStatus, R> resultSelector = null
+			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -62,7 +61,7 @@ namespace Nest
 		private R Dispatch<D, Q, R>(
 			D descriptor
 			, Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
-			, Func<D,ConnectionStatus, R> resultSelector = null
+			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
@@ -70,14 +69,14 @@ namespace Nest
 			where R : class
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			resultSelector = resultSelector ?? ((d, s) => s.Deserialize<R>(allow404: allow404));
-			return resultSelector(descriptor, dispatch(pathInfo, descriptor));
+			resultSelector = resultSelector ?? ((c, d) => c.Deserialize<R>(allow404: allow404));
+			return resultSelector(dispatch(pathInfo, descriptor), descriptor);
 		}
 
 		internal Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
 			, Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
-			, Func<D,ConnectionStatus, R> resultSelector = null
+			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -93,7 +92,7 @@ namespace Nest
 		private Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor 
 			, Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
-			, Func<D,ConnectionStatus, R> resultSelector = null
+			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
@@ -102,36 +101,11 @@ namespace Nest
 			where I : class
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			resultSelector = resultSelector ?? ((d, s) => s.Deserialize<R>(allow404: allow404));
+			resultSelector = resultSelector ?? ((c, d) => c.Deserialize<R>(allow404: allow404));
 			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r => resultSelector(descriptor, r.Result));
+				.ContinueWith<I>(r => resultSelector(r.Result, descriptor));
 		}
 
 
-		/// <summary>
-		/// Get the data when you hit the elasticsearch endpoint at the root
-		/// </summary>
-		/// <returns></returns>
-		public IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, InfoDescriptor> selector = null)
-		{
-			selector = selector ?? ((i) => i);
-			return this.Dispatch<InfoDescriptor, InfoQueryString, RootInfoResponse>(
-				selector,
-				(p, d) => this.RawDispatch.InfoDispatch(p)
-			);
-		}
-
-		/// <summary>
-		/// Get the data when you hit the elasticsearch endpoint at the root
-		/// </summary>
-		/// <returns></returns>
-		public Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null)
-		{
-			selector = selector ?? ((i) => i);
-			return this.DispatchAsync<InfoDescriptor, InfoQueryString, RootInfoResponse, IRootInfoResponse>(
-				selector,
-				(p, d) => this.RawDispatch.InfoDispatchAsync(p)
-			);
-		}
 	}
 }

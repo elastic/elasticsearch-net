@@ -14,7 +14,7 @@ namespace Nest
 			return this.Dispatch<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatch(p),
-				(d, s) => new IndexExistsResponse(s),
+				(c, d) => new IndexExistsResponse(c),
 				allow404:true
 			);
 		}
@@ -23,7 +23,7 @@ namespace Nest
 			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse, IIndexExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync(p),
-				(d, s) => new IndexExistsResponse(s),
+				(c, d) => new IndexExistsResponse(c),
 				allow404:true
 			);
 		}

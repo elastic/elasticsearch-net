@@ -12,11 +12,11 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		
+
 		public IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
 		{
 			index.ThrowIfEmpty("index");
-		    createIndexSelector = createIndexSelector ?? (c => c);
+			createIndexSelector = createIndexSelector ?? (c => c);
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
 			descriptor._Index = index;
 			return this.Dispatch<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse>(
@@ -27,7 +27,7 @@ namespace Nest
 		public Task<IIndicesOperationResponse> CreateIndexAsync(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
 		{
 			index.ThrowIfEmpty("index");
-		    createIndexSelector = createIndexSelector ?? (c => c);
+			createIndexSelector = createIndexSelector ?? (c => c);
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
 			descriptor._Index = index;
 			return this.DispatchAsync<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(

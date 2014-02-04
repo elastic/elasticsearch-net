@@ -147,6 +147,7 @@
     <Compile Include="DSL\ScrollDescriptor.cs" />
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
+    <Compile Include="ElasticClient-RootNodeInfo.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
     <Compile Include="DSL\ISimpleGetDescriptor.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
@@ -154,7 +155,7 @@
     <Compile Include="DSL\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Exception\DispatchException.cs" />
-    <Compile Include="IElasticClient-Migrator.cs" />
+    <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
@@ -507,7 +508,6 @@
     <Compile Include="DSL\RawOrFilterDescriptor.cs" />
     <Compile Include="DSL\RawOrQueryDescriptor.cs" />
     <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />
-    <Compile Include="ElasticClient-Statics.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
     <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />

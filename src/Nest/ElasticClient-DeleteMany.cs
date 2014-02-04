@@ -9,25 +9,13 @@ namespace Nest
 		public IBulkResponse DeleteMany<T>(IEnumerable<T> @objects, string index = null, string type = null) where T : class
 		{
 			@objects.ThrowIfEmpty("objects");
-			var bulk = new BulkDescriptor().FixedPath(index, type);
-			foreach (var o in @objects)
-			{
-				T o1 = o;
-				bulk.Delete<T>(b => b.Object(o1));
-			}
-			return this.Bulk(b => bulk);
+			return this.Bulk(b => b.FixedPath(index, type).DeleteMany(@objects));
 		}
 
 		public Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null) where T : class
 		{
 			@objects.ThrowIfEmpty("objects");
-			var bulk = new BulkDescriptor().FixedPath(index, type);
-			foreach (var o in @objects)
-			{
-				T o1 = o;
-				bulk.Delete<T>(b => b.Object(o1));
-			}
-			return this.BulkAsync(b => bulk);
+			return this.BulkAsync(b => b.FixedPath(index, type).DeleteMany(@objects));
 		}
 
 

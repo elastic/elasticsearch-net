@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -14,6 +16,7 @@ namespace Nest
 {
 	public class ElasticSerializer
 	{
+		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(()=> new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 		private readonly IConnectionSettings _settings;
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
@@ -226,6 +229,74 @@ namespace Nest
 			return json;
 		}
 	
+		public TemplateResponse DeserializeTemplateResponse(ConnectionStatus c, GetTemplateDescriptor d)
+		{
+			if (!c.Success) return new TemplateResponse {ConnectionStatus = c, IsValid = false};
+
+			var dict = c.Deserialize<Dictionary<string, TemplateMapping>>();
+			if (dict.Count == 0)
+				throw new DslException("Could not deserialize TemplateMapping");
+
+			return new TemplateResponse
+			{
+				ConnectionStatus = c,
+				IsValid = true,
+				Name = dict.First().Key,
+				TemplateMapping = dict.First().Value
+			};
+		}
+		public GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c)
+		{
+				var dict = c.Success
+					? c.Deserialize<Dictionary<string, RootObjectMapping>>()
+					: null;
+				return new GetMappingResponse(c, dict);
+			
+		}
+
+		public MultiGetResponse DeserializeMultiGetResponse(ConnectionStatus c, MultiGetDescriptor d)
+		{
+			var multiGetHitConverter = new MultiGetHitConverter(d);
+			var multiGetResponse = this.DeserializeInternal<MultiGetResponse>(c, piggyBackJsonConverter: multiGetHitConverter);
+			return multiGetResponse;
+		
+		}
+
+		public MultiSearchResponse DeserializeMultiSearchResponse(ConnectionStatus c, MultiSearchDescriptor d)
+		{
+			var multiSearchConverter = new MultiSearchConverter(this._settings, d);
+			var multiSearchResponse = this.DeserializeInternal<MultiSearchResponse>(c, piggyBackJsonConverter: multiSearchConverter);
+			return multiSearchResponse;
+		
+		}
+
+		public WarmerResponse DeserializeWarmerResponse(ConnectionStatus connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
+		{
+			if (!connectionStatus.Success)
+				return new WarmerResponse() { ConnectionStatus = connectionStatus, IsValid = false };
+
+			var dict = connectionStatus.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>>();
+			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
+			foreach (var kv in dict)
+			{
+				var indexDict = kv.Value;
+				Dictionary<string, WarmerMapping> warmers;
+				if (indexDict == null || !indexDict.TryGetValue("warmers", out warmers) || warmers == null)
+					continue;
+				foreach (var kvW in warmers)
+				{
+					kvW.Value.Name = kvW.Key;
+				}
+				indices.Add(kv.Key, warmers);
+			}
+
+			return new WarmerResponse
+			{
+				ConnectionStatus = connectionStatus,
+				IsValid = true,
+				Indices = indices
+			};
+		}
 		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
 			if (descriptor._SearchType != null)
@@ -250,18 +321,91 @@ namespace Nest
 				? multiSearchDescriptor._QueryString._QueryStringDictionary["search_type"] as string
 				: null;
 		}
-	}
-	/// <summary>
-	/// Registerering global jsonconverters is very costly,
-	/// The best thing is to specify them as a contract (see ElasticContractResolver)
-	/// This however prevents a way to give a jsonconverter state which for some calls is needed i.e:
-	/// A multiget and multisearch need access to the descriptor that describes what types are used.
-	/// When NEST knows it has to piggyback this it has to pass serialization state it will create a new 
-	/// serializersettings object with a new contract resolver which holds this state. Its ugly but it does boost
-	/// massive performance gains.
-	/// </summary>
-	internal class JsonConverterPiggyBackState
-	{
-		public JsonConverter ActualJsonConverter { get; set; }
+		
+		public IndexSettingsResponse DeserializeIndexSettingsResponse(ConnectionStatus status)
+		{
+			var response = new IndexSettingsResponse {IsValid = false};
+			try
+			{
+				var settingsContainer = SettingsContainer(status);
+				response.Settings = this.Deserialize<IndexSettings>(settingsContainer);
+				response.IsValid = true;
+			}
+			// ReSharper disable once EmptyGeneralCatchClause
+			catch
+			{
+			}
+			response.ConnectionStatus = status;
+			return response;
+		}
+		
+		//TODO although this gets the job done this looks a bit iffy, refactor
+		private JObject SettingsContainer(ConnectionStatus status)
+		{
+			var o = JObject.Parse(status.Result);
+			var settingsObject = o.First.First.First.First;
+
+			var settingsContainer = new JObject();
+			// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
+			foreach (JProperty s in settingsObject.Children<JProperty>())
+			{
+				var name = StripIndex.Value.Replace(s.Name, "");
+				if (name.StartsWith("analysis."))
+				{
+					var keys = name.Split('.');
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, keys, s.Value);
+				}
+				else if (name.StartsWith("similarity."))
+				{
+					var keys = name.Split('.');
+					var similaryKeys = new[] {keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray())};
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
+				}
+				else
+				{
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] {name}, s.Value);
+				}
+			}
+			return settingsContainer;
+		}
+
+		/// <summary>
+		/// Rewrites the index settings response to index settings json.
+		/// </summary>
+		/// <param name="container">The container.</param>
+		/// <param name="key">The key.</param>
+		/// <param name="value">The value.</param>
+		private void RewriteIndexSettingsResponseToIndexSettingsJSon(JContainer container, string[] key, JToken value)
+		{
+			var thisKey = key.First();
+			int indexer;
+			
+			if (key.Length > 2 || (key.Length == 2 && !int.TryParse(key.Last(), out indexer)))
+			{
+				var property = (JContainer)((JObject)container).GetValue(thisKey);
+				if (property == null)
+				{
+					property = new JObject();
+					((JObject)container).Add(thisKey, property);
+				}
+				RewriteIndexSettingsResponseToIndexSettingsJSon(property, key.Skip(1).ToArray(), value);
+			}
+			else if (key.Length == 2 && int.TryParse(key.Last(), out indexer))
+			{
+				var property = ((JObject)container).Property(thisKey);
+				if (property == null)
+				{
+					property = new JProperty(thisKey, new JArray());
+					container.Add(property);
+				}
+				var jArray = (JArray)property.Value;
+				jArray.Add(value);
+			}
+			else
+			{
+				var property = new JProperty(thisKey, value);
+				container.Add(property);
+			}
+		}
 	}
 }

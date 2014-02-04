@@ -17,36 +17,21 @@ namespace Nest
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
 			var descriptor = multiGetSelector(new MultiGetDescriptor(this._connectionSettings));
-			descriptor._GetOperations.ThrowIfEmpty("MultiGetFull called but no get operations were specified");
-			var pathInfo = ((IPathInfo<MultiGetQueryString>)descriptor).ToPathInfo(this._connectionSettings);
-			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
-			var status = this.RawDispatch.MgetDispatch(pathInfo, descriptor);
-
-			var multiGetResponse = this.Serializer.DeserializeInternal<MultiGetResponse>(
-				status,
-				piggyBackJsonConverter: multiGetHitConverter
+			return this.Dispatch<MultiGetDescriptor, MultiGetQueryString, MultiGetResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.MgetDispatch(p, d),
+				this.Serializer.DeserializeMultiGetResponse
 			);
-
-			return multiGetResponse;
 		}
 		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
 			var descriptor = multiGetSelector(new MultiGetDescriptor(this._connectionSettings));
-			descriptor._GetOperations.ThrowIfEmpty("MultiGetFull called but no get operations were specified");
-			var pathInfo = ((IPathInfo<MultiGetQueryString>)descriptor).ToPathInfo(this._connectionSettings);
-			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
-			return this.RawDispatch.MgetDispatchAsync(pathInfo, descriptor)
-				.ContinueWith<IMultiGetResponse>(t =>
-				{
-					var status = t.Result;
-					var multiGetResponse = this.Serializer.DeserializeInternal<MultiGetResponse>(
-						status,
-						piggyBackJsonConverter: multiGetHitConverter
-						);
-
-					return multiGetResponse;
-				});
+			return this.DispatchAsync<MultiGetDescriptor, MultiGetQueryString, MultiGetResponse, IMultiGetResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.MgetDispatchAsync(p, d),
+				this.Serializer.DeserializeMultiGetResponse
+			);
 		}
 
 	}

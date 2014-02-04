@@ -14,7 +14,7 @@ namespace Nest
 			return this.Dispatch<GetMappingDescriptor, GetMappingQueryString, GetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatch(p),
-				(d, s) => GetMappingResponse(s)
+				(c, d) => this.Serializer.DeserializeGetMappingResponse(c)
 			);
 		}
 
@@ -24,23 +24,10 @@ namespace Nest
 			return this.DispatchAsync<GetMappingDescriptor, GetMappingQueryString, GetMappingResponse, IGetMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetMappingDispatchAsync(p),
-				(d, s) => GetMappingResponse(s)
+				(c, d) => this.Serializer.DeserializeGetMappingResponse(c)
 			);
 		
 		}
 
-		private static GetMappingResponse GetMappingResponse(ConnectionStatus s)
-		{
-				var dict = s.Success
-					? TryDeserializeMapping(s)
-					: null;
-				return new GetMappingResponse(s, dict);
-			
-		}
-
-		private static Dictionary<string, RootObjectMapping> TryDeserializeMapping(ConnectionStatus s)
-		{
-			return s.Deserialize<Dictionary<string, RootObjectMapping>>();
-		}
 	}
 }
