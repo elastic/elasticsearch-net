@@ -3,7 +3,7 @@
   "size": 10,
   "query": {
     "top_children": {
-      "type": "people",
+      "type": "person",
       "query": {
         "bool": {
           "should": [

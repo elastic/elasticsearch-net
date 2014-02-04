@@ -28,7 +28,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -46,7 +46,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -61,12 +61,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Stringify(index));
+			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -81,12 +81,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Stringify(index));
+			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -103,12 +103,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -125,12 +125,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -148,7 +148,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -166,7 +166,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -181,12 +181,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Stringify(index));
+			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -201,12 +201,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Stringify(index));
+			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -223,12 +223,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -245,12 +245,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new BulkQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -264,12 +264,12 @@ namespace Nest
 		{
 			scroll_id.ThrowIfNull("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Stringify(scroll_id));
+			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -283,12 +283,12 @@ namespace Nest
 		{
 			scroll_id.ThrowIfNull("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Stringify(scroll_id));
+			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -304,7 +304,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterGetSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -320,7 +320,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterGetSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -336,7 +336,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterHealthQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -352,7 +352,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterHealthQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -366,12 +366,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "_cluster/health/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cluster/health/{0}".F(Stringify(index));
+			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterHealthQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -385,12 +385,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "_cluster/health/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cluster/health/{0}".F(Stringify(index));
+			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterHealthQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -406,7 +406,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeHotThreadsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -422,7 +422,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeHotThreadsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -436,12 +436,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}/hotthreads".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/hotthreads".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeHotThreadsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -455,12 +455,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}/hotthreads".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/hotthreads".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeHotThreadsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -476,7 +476,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeInfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -492,7 +492,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeInfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -506,12 +506,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeInfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -525,12 +525,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeInfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -546,7 +546,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeShutdownQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -562,7 +562,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeShutdownQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -576,12 +576,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}/_shutdown".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/_shutdown".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeShutdownQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -595,12 +595,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}/_shutdown".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/_shutdown".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeShutdownQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -616,7 +616,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -632,7 +632,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -646,12 +646,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}/stats".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/stats".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -665,12 +665,12 @@ namespace Nest
 		{
 			node_id.ThrowIfNull("node_id");
 			//var url = "_cluster/nodes/{node_id}/stats".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/stats".F(Stringify(node_id));
+			var url = "_cluster/nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterNodeStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -688,7 +688,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterPutSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -706,7 +706,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterPutSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -724,7 +724,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterRerouteQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -742,7 +742,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterRerouteQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -758,7 +758,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterStateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -774,7 +774,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClusterStateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -792,7 +792,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -810,7 +810,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -825,12 +825,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Stringify(index));
+			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -845,12 +845,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Stringify(index));
+			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -867,12 +867,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -889,12 +889,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -910,7 +910,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -926,7 +926,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -940,12 +940,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Stringify(index));
+			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -959,12 +959,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Stringify(index));
+			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -980,12 +980,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -1001,12 +1001,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CountQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -1023,12 +1023,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -1045,12 +1045,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -1069,12 +1069,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -1093,12 +1093,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -1115,12 +1115,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -1137,12 +1137,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -1161,12 +1161,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -1185,12 +1185,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -1208,12 +1208,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -1231,12 +1231,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -1251,12 +1251,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_query".F(Stringify(index));
+			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteByQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, body, queryString: nv);
@@ -1271,12 +1271,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_query".F(Stringify(index));
+			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteByQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, body, queryString: nv);
@@ -1293,12 +1293,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_query".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteByQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, body, queryString: nv);
@@ -1315,12 +1315,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_query".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteByQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, body, queryString: nv);
@@ -1338,12 +1338,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ExistsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("HEAD", url, data: null, queryString: nv);
@@ -1361,12 +1361,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ExistsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
@@ -1384,12 +1384,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ExplainQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -1407,12 +1407,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ExplainQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -1431,12 +1431,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ExplainQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -1455,12 +1455,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ExplainQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -1478,12 +1478,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -1501,12 +1501,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -1524,12 +1524,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_source".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_source".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetSourceQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -1547,12 +1547,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_source".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_source".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetSourceQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -1569,12 +1569,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -1591,12 +1591,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -1615,12 +1615,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -1639,12 +1639,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -1661,12 +1661,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -1683,12 +1683,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -1707,12 +1707,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -1731,12 +1731,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -1752,7 +1752,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -1768,7 +1768,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -1782,12 +1782,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Stringify(index));
+			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -1801,12 +1801,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Stringify(index));
+			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -1824,7 +1824,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -1842,7 +1842,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -1857,12 +1857,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Stringify(index));
+			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -1877,12 +1877,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Stringify(index));
+			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new AnalyzeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -1898,7 +1898,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -1914,7 +1914,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -1928,12 +1928,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Stringify(index));
+			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -1947,12 +1947,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Stringify(index));
+			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -1968,7 +1968,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -1984,7 +1984,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -1998,12 +1998,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Stringify(index));
+			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2017,12 +2017,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Stringify(index));
+			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ClearCacheQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2036,12 +2036,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_close".Inject(new { index = Stringify(index) });
-			var url = "{0}/_close".F(Stringify(index));
+			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CloseIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -2055,12 +2055,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_close".Inject(new { index = Stringify(index) });
-			var url = "{0}/_close".F(Stringify(index));
+			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CloseIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -2075,12 +2075,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -2095,12 +2095,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -2115,12 +2115,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -2135,12 +2135,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new CreateIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -2156,7 +2156,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2172,7 +2172,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2186,12 +2186,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2205,12 +2205,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2226,12 +2226,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesDeleteAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2247,12 +2247,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesDeleteAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2268,12 +2268,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2289,12 +2289,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2308,12 +2308,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2327,12 +2327,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2346,12 +2346,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
-			var url = "{0}/_warmer".F(Stringify(index));
+			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2365,12 +2365,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
-			var url = "{0}/_warmer".F(Stringify(index));
+			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2386,12 +2386,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2407,12 +2407,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2430,12 +2430,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			name.ThrowIfNull("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Stringify(index), Stringify(type), Stringify(name));
+			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("DELETE", url, data: null, queryString: nv);
@@ -2453,12 +2453,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			name.ThrowIfNull("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Stringify(index), Stringify(type), Stringify(name));
+			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new DeleteWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("DELETE", url, data: null, queryString: nv);
@@ -2472,12 +2472,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexExistsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("HEAD", url, data: null, queryString: nv);
@@ -2491,12 +2491,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Stringify(index));
+			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndexExistsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
@@ -2510,12 +2510,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Stringify(name));
+			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesExistsAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("HEAD", url, data: null, queryString: nv);
@@ -2529,12 +2529,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Stringify(name));
+			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesExistsAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
@@ -2550,12 +2550,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesExistsAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("HEAD", url, data: null, queryString: nv);
@@ -2571,12 +2571,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesExistsAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
@@ -2592,12 +2592,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesExistsTypeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("HEAD", url, data: null, queryString: nv);
@@ -2613,12 +2613,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesExistsTypeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
@@ -2634,7 +2634,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -2650,7 +2650,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -2664,12 +2664,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Stringify(index));
+			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -2683,12 +2683,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Stringify(index));
+			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -2704,7 +2704,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2720,7 +2720,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2734,12 +2734,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Stringify(index));
+			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2753,12 +2753,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Stringify(index));
+			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new FlushQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2772,12 +2772,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Stringify(name));
+			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2791,12 +2791,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Stringify(name));
+			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2812,12 +2812,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2833,12 +2833,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2854,7 +2854,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2870,7 +2870,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2884,12 +2884,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_aliases".Inject(new { index = Stringify(index) });
-			var url = "{0}/_aliases".F(Stringify(index));
+			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2903,12 +2903,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_aliases".Inject(new { index = Stringify(index) });
-			var url = "{0}/_aliases".F(Stringify(index));
+			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetAliasesQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2922,12 +2922,12 @@ namespace Nest
 		{
 			field.ThrowIfNull("field");
 			//var url = "_mapping/field/{field}".Inject(new { field = Stringify(field) });
-			var url = "_mapping/field/{0}".F(Stringify(field));
+			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetFieldMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2941,12 +2941,12 @@ namespace Nest
 		{
 			field.ThrowIfNull("field");
 			//var url = "_mapping/field/{field}".Inject(new { field = Stringify(field) });
-			var url = "_mapping/field/{0}".F(Stringify(field));
+			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetFieldMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -2962,12 +2962,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			field.ThrowIfNull("field");
 			//var url = "{index}/_mapping/field/{field}".Inject(new { index = Stringify(index), field = Stringify(field) });
-			var url = "{0}/_mapping/field/{1}".F(Stringify(index), Stringify(field));
+			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetFieldMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -2983,12 +2983,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			field.ThrowIfNull("field");
 			//var url = "{index}/_mapping/field/{field}".Inject(new { index = Stringify(index), field = Stringify(field) });
-			var url = "{0}/_mapping/field/{1}".F(Stringify(index), Stringify(field));
+			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetFieldMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3006,12 +3006,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			field.ThrowIfNull("field");
 			//var url = "{index}/{type}/_mapping/field/{field}".Inject(new { index = Stringify(index), type = Stringify(type), field = Stringify(field) });
-			var url = "{0}/{1}/_mapping/field/{2}".F(Stringify(index), Stringify(type), Stringify(field));
+			var url = "{0}/{1}/_mapping/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetFieldMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3029,12 +3029,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			field.ThrowIfNull("field");
 			//var url = "{index}/{type}/_mapping/field/{field}".Inject(new { index = Stringify(index), type = Stringify(type), field = Stringify(field) });
-			var url = "{0}/{1}/_mapping/field/{2}".F(Stringify(index), Stringify(type), Stringify(field));
+			var url = "{0}/{1}/_mapping/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesGetFieldMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3050,7 +3050,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new GetMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3066,7 +3066,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new GetMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3080,12 +3080,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_mapping".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mapping".F(Stringify(index));
+			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3099,12 +3099,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_mapping".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mapping".F(Stringify(index));
+			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3120,12 +3120,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3141,12 +3141,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3162,7 +3162,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new GetIndexSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3178,7 +3178,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new GetIndexSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3192,12 +3192,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Stringify(index));
+			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetIndexSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3211,12 +3211,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Stringify(index));
+			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetIndexSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3232,7 +3232,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new GetTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3248,7 +3248,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new GetTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3262,12 +3262,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3281,12 +3281,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3300,12 +3300,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
-			var url = "{0}/_warmer".F(Stringify(index));
+			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3319,12 +3319,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
-			var url = "{0}/_warmer".F(Stringify(index));
+			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3340,12 +3340,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3361,12 +3361,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3384,12 +3384,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			name.ThrowIfNull("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Stringify(index), Stringify(type), Stringify(name));
+			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3407,12 +3407,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			name.ThrowIfNull("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Stringify(index), Stringify(type), Stringify(name));
+			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new GetWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3426,12 +3426,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_open".Inject(new { index = Stringify(index) });
-			var url = "{0}/_open".F(Stringify(index));
+			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new OpenIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -3445,12 +3445,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_open".Inject(new { index = Stringify(index) });
-			var url = "{0}/_open".F(Stringify(index));
+			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new OpenIndexQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -3466,7 +3466,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -3482,7 +3482,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -3496,12 +3496,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Stringify(index));
+			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -3515,12 +3515,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Stringify(index));
+			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -3536,7 +3536,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3552,7 +3552,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3566,12 +3566,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Stringify(index));
+			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -3585,12 +3585,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Stringify(index));
+			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new OptimizeQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -3607,12 +3607,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3629,12 +3629,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3649,12 +3649,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Stringify(name));
+			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3669,12 +3669,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Stringify(name));
+			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3689,12 +3689,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
-			var url = "{0}/_alias".F(Stringify(index));
+			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3709,12 +3709,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
-			var url = "{0}/_alias".F(Stringify(index));
+			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3732,7 +3732,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3750,7 +3750,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesPutAliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3767,12 +3767,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3789,12 +3789,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3811,12 +3811,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -3833,12 +3833,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutMappingQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -3856,7 +3856,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new UpdateSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3874,7 +3874,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new UpdateSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3889,12 +3889,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Stringify(index));
+			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new UpdateSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3909,12 +3909,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Stringify(index));
+			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new UpdateSettingsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3929,12 +3929,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -3949,12 +3949,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -3969,12 +3969,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -3989,12 +3989,12 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Stringify(name));
+			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutTemplateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -4011,12 +4011,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -4033,12 +4033,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			name.ThrowIfNull("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Stringify(index), Stringify(name));
+			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -4057,12 +4057,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			name.ThrowIfNull("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Stringify(index), Stringify(type), Stringify(name));
+			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("PUT", url, body, queryString: nv);
@@ -4081,12 +4081,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			name.ThrowIfNull("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Stringify(index), Stringify(type), Stringify(name));
+			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PutWarmerQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("PUT", url, body, queryString: nv);
@@ -4102,7 +4102,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -4118,7 +4118,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -4132,12 +4132,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Stringify(index));
+			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -4151,12 +4151,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Stringify(index));
+			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -4172,7 +4172,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4188,7 +4188,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4202,12 +4202,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Stringify(index));
+			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4221,12 +4221,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Stringify(index));
+			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new RefreshQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4242,7 +4242,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SegmentsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4258,7 +4258,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SegmentsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4272,12 +4272,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_segments".Inject(new { index = Stringify(index) });
-			var url = "{0}/_segments".F(Stringify(index));
+			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SegmentsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4291,12 +4291,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_segments".Inject(new { index = Stringify(index) });
-			var url = "{0}/_segments".F(Stringify(index));
+			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SegmentsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4312,7 +4312,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SnapshotQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -4328,7 +4328,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SnapshotQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -4342,12 +4342,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
-			var url = "{0}/_gateway/snapshot".F(Stringify(index));
+			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SnapshotQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, data: null, queryString: nv);
@@ -4361,12 +4361,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
-			var url = "{0}/_gateway/snapshot".F(Stringify(index));
+			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SnapshotQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, data: null, queryString: nv);
@@ -4382,7 +4382,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4398,7 +4398,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4412,12 +4412,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_stats".Inject(new { index = Stringify(index) });
-			var url = "{0}/_stats".F(Stringify(index));
+			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4431,12 +4431,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_stats".Inject(new { index = Stringify(index) });
-			var url = "{0}/_stats".F(Stringify(index));
+			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatsQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4452,7 +4452,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatusQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4468,7 +4468,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatusQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4482,12 +4482,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_status".Inject(new { index = Stringify(index) });
-			var url = "{0}/_status".F(Stringify(index));
+			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatusQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4501,12 +4501,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_status".Inject(new { index = Stringify(index) });
-			var url = "{0}/_status".F(Stringify(index));
+			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new IndicesStatusQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4524,7 +4524,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new AliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -4542,7 +4542,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new AliasQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -4558,7 +4558,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4574,7 +4574,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4588,12 +4588,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Stringify(index));
+			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4607,12 +4607,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Stringify(index));
+			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4628,12 +4628,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4649,12 +4649,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4672,7 +4672,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -4690,7 +4690,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -4705,12 +4705,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Stringify(index));
+			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -4725,12 +4725,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Stringify(index));
+			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -4747,12 +4747,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -4769,12 +4769,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ValidateQueryQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -4790,7 +4790,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new InfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4806,7 +4806,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new InfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4822,7 +4822,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new InfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("HEAD", url, data: null, queryString: nv);
@@ -4838,7 +4838,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new InfoQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
@@ -4854,7 +4854,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4870,7 +4870,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4884,12 +4884,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Stringify(index));
+			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4903,12 +4903,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Stringify(index));
+			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4924,12 +4924,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -4945,12 +4945,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -4968,7 +4968,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -4986,7 +4986,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5001,12 +5001,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Stringify(index));
+			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5021,12 +5021,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Stringify(index));
+			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5043,12 +5043,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5065,12 +5065,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiGetQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5088,12 +5088,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MoreLikeThisQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5111,12 +5111,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MoreLikeThisQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5135,12 +5135,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MoreLikeThisQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5159,12 +5159,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MoreLikeThisQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5180,7 +5180,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5196,7 +5196,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5210,12 +5210,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Stringify(index));
+			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5229,12 +5229,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Stringify(index));
+			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5250,12 +5250,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5271,12 +5271,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5294,7 +5294,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5312,7 +5312,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5327,12 +5327,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Stringify(index));
+			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5347,12 +5347,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Stringify(index));
+			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5369,12 +5369,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5391,12 +5391,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new MultiSearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5412,12 +5412,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PercolateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5433,12 +5433,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PercolateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5455,12 +5455,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PercolateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5477,12 +5477,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new PercolateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5498,7 +5498,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5514,7 +5514,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5528,12 +5528,12 @@ namespace Nest
 		{
 			scroll_id.ThrowIfNull("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Stringify(scroll_id));
+			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5547,12 +5547,12 @@ namespace Nest
 		{
 			scroll_id.ThrowIfNull("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Stringify(scroll_id));
+			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5570,7 +5570,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5588,7 +5588,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5603,12 +5603,12 @@ namespace Nest
 		{
 			scroll_id.ThrowIfNull("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Stringify(scroll_id));
+			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5623,12 +5623,12 @@ namespace Nest
 		{
 			scroll_id.ThrowIfNull("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Stringify(scroll_id));
+			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new ScrollQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5644,7 +5644,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5660,7 +5660,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5674,12 +5674,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Stringify(index));
+			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5693,12 +5693,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Stringify(index));
+			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5714,12 +5714,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5735,12 +5735,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5758,7 +5758,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5776,7 +5776,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5791,12 +5791,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Stringify(index));
+			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5811,12 +5811,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Stringify(index));
+			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5833,12 +5833,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5855,12 +5855,12 @@ namespace Nest
 			index.ThrowIfNull("index");
 			type.ThrowIfNull("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Stringify(index), Stringify(type));
+			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SearchQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5878,7 +5878,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5896,7 +5896,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5911,12 +5911,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Stringify(index));
+			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -5931,12 +5931,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Stringify(index));
+			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
@@ -5952,7 +5952,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -5968,7 +5968,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -5982,12 +5982,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Stringify(index));
+			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("GET", url, data: null, queryString: nv);
@@ -6001,12 +6001,12 @@ namespace Nest
 		{
 			index.ThrowIfNull("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Stringify(index));
+			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new SuggestQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
@@ -6025,12 +6025,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_update".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_update".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new UpdateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequest("POST", url, body, queryString: nv);
@@ -6049,12 +6049,12 @@ namespace Nest
 			type.ThrowIfNull("type");
 			id.ThrowIfNull("id");
 			//var url = "{index}/{type}/{id}/_update".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_update".F(Stringify(index), Stringify(type), Stringify(id));
+			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
 				var qs = queryString(new UpdateQueryString());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
 			return this.DoRequestAsync("POST", url, body, queryString: nv);

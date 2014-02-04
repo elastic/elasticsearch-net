@@ -52,8 +52,8 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 				.BoostTerms(1.4)
 			);
 			var status = result.ConnectionStatus;
-			StringAssert.Contains("mlt_fields=country,content", status.RequestUrl);
-			StringAssert.Contains("stop_words=c%23,es", status.RequestUrl);
+			StringAssert.Contains("mlt_fields=country%2Ccontent", status.RequestUrl);
+			StringAssert.Contains("stop_words=c%23%2Ces", status.RequestUrl);
 			StringAssert.Contains("percent_terms_to_match=0.3", status.RequestUrl);
 			StringAssert.Contains("min_term_freq=2", status.RequestUrl);
 			StringAssert.Contains("max_query_terms=25", status.RequestUrl);
@@ -76,7 +76,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.AreEqualIgnoringCase("POST", status.RequestMethod);
-			StringAssert.Contains("mlt_fields=country,content", status.RequestUrl);
+			StringAssert.Contains("mlt_fields=country%2Ccontent", status.RequestUrl);
 			StringAssert.Contains("search_type=dfs_query_and_fetch", status.RequestUrl);
 			StringAssert.Contains("scroll=5m", status.RequestUrl);
 			//We are using the search descriptor so this should trigger the POST

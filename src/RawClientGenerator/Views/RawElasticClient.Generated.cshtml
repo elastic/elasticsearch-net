@@ -49,7 +49,7 @@ namespace Nest
 		@if (method.Parts.Any())
 		{
 	<text>//var url = "@(url)".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = Stringify(" + p.Name +")" )) });</text>
-	<text>		var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> "Stringify(" + p.Name +")" )));</text>
+	<text>		var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> "Encoded(" + p.Name +")" )));</text>
 		}
 		else
 		{
@@ -59,7 +59,7 @@ namespace Nest
 			if (queryString != null)
 			{
 				var qs = queryString(new @(method.QueryStringParamName)());
-				if (qs != null) nv = qs.NameValueCollection;
+				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 		@{
 			string requestMethod = method.ReturnType.StartsWith("Task<") ? "DoRequestAsync" : "DoRequest";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -49,6 +50,9 @@ namespace Nest
 		
 		private WarmerResponse DeserializeToWarmerResponse(GetWarmerDescriptor getWarmerDescriptor, ConnectionStatus connectionStatus)
 		{
+			if (!connectionStatus.Success)
+				return new WarmerResponse() {ConnectionStatus = connectionStatus, IsValid = false};
+
 			var dict =  connectionStatus.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>>();
 			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
 			foreach (var kv in dict)
@@ -66,6 +70,8 @@ namespace Nest
 
 			return new WarmerResponse
 			{
+				ConnectionStatus = connectionStatus,
+				IsValid = true,
 				Indices = indices
 			};
 		}

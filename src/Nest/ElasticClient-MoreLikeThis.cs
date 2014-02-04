@@ -35,9 +35,9 @@ namespace Nest
 		{
 			if (d._Search != null)
 			{
-				var searchQs = d._Search._QueryString.NameValueCollection;
-				foreach (var k in searchQs.AllKeys)
-					d._QueryString.NameValueCollection[k] = searchQs[k];
+				var searchQs = d._Search._QueryString._QueryStringDictionary;
+				foreach (var k in searchQs.Keys)
+					d._QueryString._QueryStringDictionary[k] = searchQs[k];
 			}
 		}
 	}

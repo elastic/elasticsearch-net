@@ -117,7 +117,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.Size(10)
 				.ExecuteOnNode("somenode");
 			var result = this._client.Search<ElasticSearchProject>(ss=>s);
-			StringAssert.Contains("preference=_only_node:somenode", result.ConnectionStatus.RequestUrl);
+			StringAssert.Contains("preference=_only_node%3Asomenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnPreferredNode()
@@ -127,7 +127,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.Size(10)
 				.ExecuteOnPreferredNode("somenode");
 			var result = this._client.Search<ElasticSearchProject>(ss=>s);
-			StringAssert.Contains("preference=_prefer_node:somenode", result.ConnectionStatus.RequestUrl);
+			StringAssert.Contains("preference=_prefer_node%3Asomenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestFields()

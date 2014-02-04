@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Core.Update
 			var status = result.ConnectionStatus;
 			var uri = new Uri(status.RequestUrl);
 			Assert.AreEqual("/myindex/mytype/1/_update", uri.AbsolutePath);
-			Assert.AreEqual("?script=_source.something%20=%201;", uri.Query);
+			Assert.AreEqual("?script=_source.something%20%3D%201%3B", uri.Query);
 			StringAssert.AreEqualIgnoringCase("POST", status.RequestMethod);
 		}
 	}

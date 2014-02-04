@@ -29,9 +29,8 @@ namespace Nest
 		///<summary>@kv.Value.Description</summary>
 		public @method.QueryStringParamName @(kv.Key.ToPascalCase())(@kv.Value.CsharpType(kv.Key) @kv.Key)
 		{
-			var v = this.CreateString(@kv.Key);
 			this._@(kv.Key) = @kv.Key;
-			this.Add("@kv.Key", v);
+			this.Add("@kv.Key", @kv.Key);
 			return this;
 		}
 </text>

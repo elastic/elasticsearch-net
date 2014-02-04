@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ top_children: { 
-				type: ""people"",
+				type: ""person"",
 				_scope: ""my_scope"",
 				query: {
 					term: {

@@ -22,7 +22,7 @@ namespace Nest
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.ScrollId = this._QueryString._scroll_id;
 			// force scroll id out of querystring (potentially very large)
-			this._QueryString.NameValueCollection.Remove("scroll_id");
+			this._QueryString._QueryStringDictionary.Remove("scroll_id");
 			pathInfo.QueryString = this._QueryString;
 			return pathInfo;
 		}

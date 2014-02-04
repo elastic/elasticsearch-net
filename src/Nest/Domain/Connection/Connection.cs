@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Nest.Domain.Connection;
+using PUrify;
 
 namespace Nest
 {
@@ -350,19 +351,7 @@ namespace Nest
 				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
 				path += qs;
 			}
-			path = this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? path : path.Replace("%2F", "%252F");
-			var uri = new Uri(s.Uri, path);
-
-			//WebRequest.Create will replace %2F with / 
-			//this is a 'security feature'
-			//see http://mikehadlow.blogspot.nl/2011/08/how-to-stop-systemuri-un-escaping.html
-			//and http://msdn.microsoft.com/en-us/library/ee656542%28v=vs.100%29.aspx
-			//NEST will by default double escape these so that if nest is the only way you talk to elasticsearch
-			//it won't barf.
-			//If you manually set the config settings to NOT forefully unescape dots and slashes be sure to call 
-			//.SetDontDoubleEscapePathDotsAndSlashes() on the connection settings.
-			//return );
-			//
+			var uri = new Uri(s.Uri, path).Purify();
 			return uri;
 		}
 

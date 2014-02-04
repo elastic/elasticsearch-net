@@ -1,5 +1,5 @@
   {
-  "nestedrecursivemapparents": {
+  "nestedrecursivemapparent": {
     "properties": {
       "name": {
         "type": "string"

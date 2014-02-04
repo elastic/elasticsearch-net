@@ -16,15 +16,14 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void SimpleCount()
 		{
-            var countResults = this._client.Count<dynamic>(c=>c.AllIndices().Query(q=>q.MatchAll()));
-
+			var countResults = this._client.Count<dynamic>(c => c.AllIndices().AllTypes().Query(q => q.MatchAll()));
 			Assert.True(countResults.Count > 0);
 		}
 
 		[Test]
 		public void SimpleQueryCount()
 		{
-			var countResults = this._client.Count<ElasticSearchProject>(c=>c
+			var countResults = this._client.Count<ElasticSearchProject>(c => c
 			.Query(q => q
 				.Fuzzy(fq => fq
 					.Value(this._LookFor.ToLower())
@@ -38,7 +37,7 @@ namespace Nest.Tests.Integration.Search
 		public void SimpleQueryWithIndexAndTypeCount()
 		{
 			//does a match_all on the default specified index
-			var countResults = this._client.Count<ElasticSearchProject>(c=>c
+			var countResults = this._client.Count<ElasticSearchProject>(c => c
 			.Query(q => q
 				.Fuzzy(fq => fq
 					.PrefixLength(4)
@@ -56,7 +55,7 @@ namespace Nest.Tests.Integration.Search
 			var index = ElasticsearchConfiguration.DefaultIndex;
 			var indices = new[] { index, index + "_clone" };
 			var types = new[] { this._client.Infer.TypeName<ElasticSearchProject>() };
-			var countResults = this._client.Count<ElasticSearchProject>(c=>c
+			var countResults = this._client.Count<ElasticSearchProject>(c => c
 				.Indices(indices).Types(types)
 				.Query(q => q
 					.Fuzzy(fq => fq
@@ -73,7 +72,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void SimpleTypedCount()
 		{
-			var countResults = this._client.Count<ElasticSearchProject>(c=>c.Query(q => q.MatchAll()));
+			var countResults = this._client.Count<ElasticSearchProject>(c => c.Query(q => q.MatchAll()));
 
 			Assert.True(countResults.Count > 0);
 		}

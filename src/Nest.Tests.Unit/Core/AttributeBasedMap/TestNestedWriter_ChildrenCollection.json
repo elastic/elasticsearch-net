@@ -1,5 +1,5 @@
 ﻿{
-  "nestedparentmanychildrens": {
+  "nestedparentmanychildren": {
     "properties": {
       "name": {
         "type": "string"

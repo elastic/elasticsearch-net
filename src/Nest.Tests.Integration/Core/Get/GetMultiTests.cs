@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Core.Get
 		{
 			var result = this._client.MultiGet(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
-				.Get<Person>(g => g.Id(100).Type("people").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
+				.Get<Person>(g => g.Id(100).Type("person").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
 			);
 
 			var objects = result.Documents;
@@ -95,7 +95,7 @@ namespace Nest.Tests.Integration.Core.Get
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p => p.Id, p => p.Followers.First().FirstName))
 				.Get<Person>(g => g
 					.Id(100)
-					.Type("people")
+					.Type("person")
 					.Index(ElasticsearchConfiguration.DefaultIndex)
 					.Fields(p => p.Id, p => p.FirstName)
 				)

@@ -36,7 +36,6 @@ namespace Nest.Tests.Integration.Template
 		{
 			this._client.DeleteTemplate("put-template-with-settings");
 			var putResponse = this._client.PutTemplate("put-template-with-settings", t=>t
-				.Name("")
 				.Template("donotinfluencothertests-*")
 				.Settings(s=>s
 					.Add("index.number_of_shards", 3)

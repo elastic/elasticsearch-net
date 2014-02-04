@@ -247,7 +247,7 @@ namespace Nest
 				}
 			}
 			return multiSearchDescriptor._QueryString.ContainsKey("search_type") 
-				? multiSearchDescriptor._QueryString.NameValueCollection["search_type"] 
+				? multiSearchDescriptor._QueryString._QueryStringDictionary["search_type"] as string
 				: null;
 		}
 	}

@@ -51,10 +51,10 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			marker = typeof(MyGeneric<Organization>);
 			marker.Resolve(clientSettings).Should().Be("org-wrapped-in-bacon");
 
-			//Should fall back to the default lowercase pluralize since
+			//Should fall back to the default lowercase since
 			//it doesn't have an explicit default
 			marker = typeof(NoopObject);
-			marker.Resolve(clientSettings).Should().Be("noopobjects");
+			marker.Resolve(clientSettings).Should().Be("noopobject");
 
 		}
 

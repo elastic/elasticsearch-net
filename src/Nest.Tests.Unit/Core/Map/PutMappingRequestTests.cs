@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Core.Map
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
-			StringAssert.EndsWith("/nest_test_data,nest_test_data_clone/elasticsearchprojects/_mapping", status.RequestUrl);
+			StringAssert.EndsWith("/nest_test_data%2Cnest_test_data_clone/elasticsearchprojects/_mapping", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("PUT", status.RequestMethod);
 		}
 		[Test]
@@ -58,7 +58,7 @@ namespace Nest.Tests.Unit.Core.Map
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
-			StringAssert.EndsWith("/nest_test_data,nest_test_data_clone/elasticsearchprojects/_mapping?ignore_conflicts=true", status.RequestUrl);
+			StringAssert.EndsWith("/nest_test_data%2Cnest_test_data_clone/elasticsearchprojects/_mapping?ignore_conflicts=true", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("PUT", status.RequestMethod);
 		}
 		[Test]
@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Core.Map
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
-			StringAssert.EndsWith("/nest_test_data,nest_test_data_clone/es_projects/_mapping?ignore_conflicts=true", status.RequestUrl);
+			StringAssert.EndsWith("/nest_test_data%2Cnest_test_data_clone/es_projects/_mapping?ignore_conflicts=true", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("PUT", status.RequestMethod);
 		}
 	}

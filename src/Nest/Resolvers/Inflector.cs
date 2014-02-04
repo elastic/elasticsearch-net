@@ -184,7 +184,7 @@ namespace Nest.Resolvers
 		/// </summary>
 		private class InflectorRule
 		{
-			private readonly Lazy<Regex> regex;
+			private readonly Regex regex;
 			private readonly string replacement;
 
 			/// <summary>
@@ -194,7 +194,7 @@ namespace Nest.Resolvers
 			/// <param name="replacementText">The replacement text.</param>
 			public InflectorRule(string regexPattern, string replacementText)
 			{
-				regex = new Lazy<Regex>(()=>new Regex(regexPattern, RegexOptions.IgnoreCase), LazyThreadSafetyMode.PublicationOnly);
+				regex = new Regex(regexPattern, RegexOptions.IgnoreCase);
 				replacement = replacementText;
 			}
 
@@ -205,10 +205,10 @@ namespace Nest.Resolvers
 			/// <returns></returns>
 			public string Apply(string word)
 			{
-				if (!regex.Value.IsMatch(word))
+				if (!regex.IsMatch(word))
 					return null;
 
-				string replace = regex.Value.Replace(word, replacement);
+				string replace = regex.Replace(word, replacement);
 				if (word == word.ToUpper())
 					replace = replace.ToUpper();
 

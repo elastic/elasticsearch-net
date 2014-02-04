@@ -57,7 +57,7 @@ namespace Nest.Tests.Unit.Core.Get
 				.Fields(p=>p.Content, p=>p.Name)
 			);
 			var status = result.ConnectionStatus;
-			StringAssert.EndsWith("/myindex/mytype/404?fields=content,name", status.RequestUrl);
+			StringAssert.EndsWith("/myindex/mytype/404?fields=content%2Cname", status.RequestUrl);
 		}
 	}
 }
