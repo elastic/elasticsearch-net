@@ -28,6 +28,10 @@ namespace Nest
 		var methods = endpoint.GetCsharpMethods().ToList();
 		foreach (var method in methods)
 		{
+			var url = method.Path.Split(new[] {'/'}, 2).Last();
+			int i = -1;
+			var patchedUrl = Regex.Replace(url, @"{\w+}", (m) => "{" + (++i).ToString(CultureInfo.InvariantCulture) +"}");
+			
 		<text>
 		///<summary>@method.HttpMethod @method.Path
 	    ///<pre>@method.Documentation</pre>	
@@ -40,15 +44,12 @@ namespace Nest
 		{
 		@foreach (RawClientGenerator.ApiUrlPart part in method.Parts.Where(p=>p.Name != "body").ToList())
 		{
-		    var url = method.Path.Split(new[] {'/'}, 2).Last();
-		    int i = -1;
-            var patchedUrl = Regex.Replace(x, @"{\w+}", (m) => "{" + (++i).ToString(CultureInfo.InvariantCulture) +"}");
 			<text>@(part.Name).ThrowIfNull("@part.Name");</text>
 		}
 		@if (method.Parts.Any())
 		{
-	<text>var url = "@(url)".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = Stringify(" + p.Name +")" )) });</text>
-	<text>//var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name)));</text>
+	<text>//var url = "@(url)".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = Stringify(" + p.Name +")" )) });</text>
+	<text>		var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> "Stringify(" + p.Name +")" )));</text>
 		}
 		else
 		{
