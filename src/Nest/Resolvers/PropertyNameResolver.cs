@@ -18,12 +18,14 @@ namespace Nest.Resolvers
 
 	public class PropertyNameResolver : ExpressionVisitor
 	{
+		private static readonly ConcurrentDictionary<Type, ElasticTypeAttribute> CachedTypeLookups =
+			new ConcurrentDictionary<Type, ElasticTypeAttribute>();
 		public IElasticPropertyAttribute GetElasticProperty(MemberInfo info)
 		{
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
 			if (attributes != null && attributes.Any())
 				return ((IElasticPropertyAttribute)attributes.First());
-			
+
 			var ignoreAttrutes = info.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
 			if (ignoreAttrutes != null && ignoreAttrutes.Any())
 				return new ElasticPropertyAttribute { OptOut = true };
@@ -38,20 +40,23 @@ namespace Nest.Resolvers
 
 		public ElasticTypeAttribute GetElasticPropertyFor(Type type)
 		{
-			if (!type.IsClass && !type.IsInterface)
-				throw new ArgumentException("Type is not a class or interface", "type");
 			return GetElasticPropertyForType(type);
 		}
 
 		private ElasticTypeAttribute GetElasticPropertyForType(Type type)
 		{
+			ElasticTypeAttribute attr = null;
+			if (CachedTypeLookups.TryGetValue(type, out attr))
+				return attr;
+
 			if (!type.IsClass && !type.IsInterface)
 				throw new ArgumentException("Type is not a class or interface", "type");
 
 			var attributes = type.GetCustomAttributes(typeof(ElasticTypeAttribute), true);
-			if (attributes != null && attributes.Any())
-				return ((ElasticTypeAttribute)attributes.First());
-			return null;
+			if (attributes.HasAny())
+				attr = ((ElasticTypeAttribute)attributes.First());
+			CachedTypeLookups.TryAdd(type, attr);
+			return attr;
 		}
 
 		public string Resolve(MemberInfo info)
@@ -78,7 +83,7 @@ namespace Nest.Resolvers
 					(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
 				.ToString();
 		}
-		
+
 		public string ResolveToLastToken(Expression expression)
 		{
 			var stack = new Stack<string>();
@@ -133,14 +138,14 @@ namespace Nest.Resolvers
 				{
 					return base.VisitMethodCall(m, stack, properties);
 				}
-                var lastArg = m.Arguments.Last();
-                var constantExpression = lastArg as ConstantExpression;
-                var value = constantExpression != null
-                               ? constantExpression.Value.ToString()
-                               : Expression.Lambda(lastArg).Compile().DynamicInvoke().ToString();
-                stack.Push(value);
-                Visit(m.Object, stack, properties);
-                return m;
+				var lastArg = m.Arguments.Last();
+				var constantExpression = lastArg as ConstantExpression;
+				var value = constantExpression != null
+					? constantExpression.Value.ToString()
+					: Expression.Lambda(lastArg).Compile().DynamicInvoke().ToString();
+				stack.Push(value);
+				Visit(m.Object, stack, properties);
+				return m;
 			}
 			if (IsLinqOperator(m.Method))
 			{

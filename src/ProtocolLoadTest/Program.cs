@@ -32,9 +32,6 @@ namespace ProtocolLoadTest
 			Console.WriteLine();
 			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
 				, httpRate, threadCountHttp, memorySizeHttp);
-			
-
-
 
 			Console.ReadLine();
 		}

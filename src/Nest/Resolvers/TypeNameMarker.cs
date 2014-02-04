@@ -34,7 +34,6 @@ namespace Nest.Resolvers
 			return new TypeNameMarker { Name = typeName, Type = type };
 		}
 
-
 		public static implicit operator TypeNameMarker(string typeName)
 		{
 			if (typeName == null)

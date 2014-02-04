@@ -15,8 +15,8 @@ namespace Nest.Resolvers.Writers
 		private readonly Type _type;
 		private readonly PropertyNameResolver _propertyNameResolver = new PropertyNameResolver();
 		private readonly IConnectionSettings _connectionSettings;
-    private readonly ElasticSerializer _elasticSerializer;
-    private ElasticInferrer Infer { get; set; }
+		private readonly ElasticSerializer _elasticSerializer;
+		private ElasticInferrer Infer { get; set; }
 
 		private int MaxRecursion { get; set; }
 		private TypeNameMarker TypeName { get; set; }
@@ -33,24 +33,24 @@ namespace Nest.Resolvers.Writers
 			this.SeenTypes = new ConcurrentDictionary<Type, int>();
 			this.SeenTypes.TryAdd(t, 0);
 
-      this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
-      this.Infer = new ElasticInferrer(this._connectionSettings);
+			this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
+			this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
 
-    /// <summary>
-    /// internal constructor by TypeMappingWriter itself when it recurses, passes seenTypes as safeguard agains maxRecursion
-    /// </summary>
+		/// <summary>
+		/// internal constructor by TypeMappingWriter itself when it recurses, passes seenTypes as safeguard agains maxRecursion
+		/// </summary>
 		internal TypeMappingWriter(Type t, string typeName, IConnectionSettings connectionSettings, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
-		    this._type = GetUnderlyingType(t);
+			this._type = GetUnderlyingType(t);
 			this._connectionSettings = connectionSettings;
 
 			this.TypeName = typeName;
 			this.MaxRecursion = maxRecursion;
 			this.SeenTypes = seenTypes;
 
-      this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
-      this.Infer = new ElasticInferrer(this._connectionSettings);
+			this._elasticSerializer = new ElasticSerializer(this._connectionSettings);
+			this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
 
 		internal JObject MapPropertiesFromAttributes()
@@ -64,7 +64,7 @@ namespace Nest.Resolvers.Writers
 			using (StringWriter sw = new StringWriter(sb))
 			using (JsonWriter jsonWriter = new JsonTextWriter(sw))
 			{
-				
+
 				jsonWriter.WriteStartObject();
 				{
 					this.WriteProperties(jsonWriter);
@@ -104,12 +104,12 @@ namespace Nest.Resolvers.Writers
 				jsonWriter.Formatting = Formatting.Indented;
 				jsonWriter.WriteStartObject();
 				{
-					var typeName = this.TypeName.Resolve(this._connectionSettings);
+					var typeName = this.Infer.TypeName(this.TypeName);
 					jsonWriter.WritePropertyName(typeName);
 					jsonWriter.WriteStartObject();
 					{
 						this.WriteRootObjectProperties(jsonWriter);
-							
+
 						jsonWriter.WritePropertyName("properties");
 						jsonWriter.WriteStartObject();
 						{
@@ -124,7 +124,7 @@ namespace Nest.Resolvers.Writers
 				return sw.ToString();
 			}
 		}
-		
+
 		private void WriteRootObjectProperties(JsonWriter jsonWriter)
 		{
 			var att = this._propertyNameResolver.GetElasticPropertyFor(this._type);
@@ -180,12 +180,12 @@ namespace Nest.Resolvers.Writers
 			{
 				jsonWriter.WritePropertyName("dynamic_date_formats");
 				jsonWriter.WriteStartArray();
-				foreach(var d in att.DynamicDateFormats)
+				foreach (var d in att.DynamicDateFormats)
 				{
-					jsonWriter.WriteValue(d);	
+					jsonWriter.WriteValue(d);
 				}
 				jsonWriter.WriteEndArray();
-				
+
 			}
 		}
 
@@ -218,7 +218,7 @@ namespace Nest.Resolvers.Writers
 						this.WritePropertiesFromAttribute(jsonWriter, att, propertyName, type);
 					if (type == "object" || type == "nested")
 					{
-						
+
 						var deepType = p.PropertyType;
 						var deepTypeName = this.Infer.TypeName(deepType);
 						var seenTypes = new ConcurrentDictionary<Type, int>(this.SeenTypes);
@@ -226,7 +226,7 @@ namespace Nest.Resolvers.Writers
 
 						var newTypeMappingWriter = new TypeMappingWriter(deepType, deepTypeName, this._connectionSettings, MaxRecursion, seenTypes);
 						var nestedProperties = newTypeMappingWriter.MapPropertiesFromAttributes();
-						
+
 						jsonWriter.WritePropertyName("properties");
 						nestedProperties.WriteTo(jsonWriter);
 					}
@@ -237,8 +237,8 @@ namespace Nest.Resolvers.Writers
 
 		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, IElasticPropertyAttribute att, string propertyName, string type)
 		{
-		    var visitor = new WritePropertiesFromAttributeVisitor(jsonWriter, propertyName, type);
-            att.Accept(visitor);
+			var visitor = new WritePropertiesFromAttributeVisitor(jsonWriter, propertyName, type);
+			att.Accept(visitor);
 
 		}
 
@@ -297,8 +297,8 @@ namespace Nest.Resolvers.Writers
 					return "boolean";
 				case FieldType.nested:
 					return "nested";
-                case FieldType.completion:
-                    return "completion";
+				case FieldType.completion:
+					return "completion";
 				case FieldType.@object:
 					return "object";
 				default:
@@ -315,7 +315,7 @@ namespace Nest.Resolvers.Writers
 		{
 			propertyType = GetUnderlyingType(propertyType);
 
-		    if (propertyType == typeof(string))
+			if (propertyType == typeof(string))
 				return FieldType.string_type;
 
 			if (propertyType.IsValueType)
@@ -342,15 +342,15 @@ namespace Nest.Resolvers.Writers
 			return null;
 		}
 
-	    private static Type GetUnderlyingType(Type type)
-	    {
-	        if (type.IsArray)
-	            return type.GetElementType();
+		private static Type GetUnderlyingType(Type type)
+		{
+			if (type.IsArray)
+				return type.GetElementType();
 
-	        if (type.IsGenericType && type.GetGenericArguments().Length >= 1)
-                return type.GetGenericArguments()[0];
+			if (type.IsGenericType && type.GetGenericArguments().Length >= 1)
+				return type.GetGenericArguments()[0];
 
-	        return type;
-	    }
+			return type;
+		}
 	}
 }

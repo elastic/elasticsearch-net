@@ -108,13 +108,12 @@ namespace Nest.Resolvers.Converters
 					&& types.HasAny() 
 					&& types.Count() > types.Count(x => x.Type == baseType))
 				{
-					var typeDict = types.ToDictionary(t => t.Resolve(this._settings), t => t.Type);
+					var inferrer = new ElasticInferrer(this._settings);
+					var typeDict = types.ToDictionary(inferrer.TypeName, t => t.Type);
 					concreteTypeSelector = (o, h) =>
 					{
 						Type t;
-						if (!typeDict.TryGetValue(h.Type, out t))
-							return baseType;
-						return t;
+						return !typeDict.TryGetValue(h.Type, out t) ? baseType : t;
 					};
 						
 				}

@@ -32,29 +32,30 @@ namespace Nest.Tests.Unit.Internals.Inferno
 					.Add(typeof(MyGeneric<Developer>), "codemonkey-wrapped-in-bacon")
 					.Add(typeof(MyGeneric<Organization>), "org-wrapped-in-bacon")
 				);
+			var inferrer = new ElasticInferrer(clientSettings);
 
 			TypeNameMarker marker = typeof (Car);
-			marker.Resolve(clientSettings).Should().Be("automobile");
+			inferrer.TypeName(marker).Should().Be("automobile");
 
 			marker = typeof (Person);
-			marker.Resolve(clientSettings).Should().Be("human");
+			inferrer.TypeName(marker).Should().Be("human");
 
 			marker = typeof(Organization);
-			marker.Resolve(clientSettings).Should().Be("organisation");
+			inferrer.TypeName(marker).Should().Be("organisation");
 
 			marker = typeof(Developer);
-			marker.Resolve(clientSettings).Should().Be("codemonkey");
+			inferrer.TypeName(marker).Should().Be("codemonkey");
 
 			marker = typeof(MyGeneric<Developer>);
-			marker.Resolve(clientSettings).Should().Be("codemonkey-wrapped-in-bacon");
+			inferrer.TypeName(marker).Should().Be("codemonkey-wrapped-in-bacon");
 
 			marker = typeof(MyGeneric<Organization>);
-			marker.Resolve(clientSettings).Should().Be("org-wrapped-in-bacon");
+			inferrer.TypeName(marker).Should().Be("org-wrapped-in-bacon");
 
 			//Should fall back to the default lowercase since
 			//it doesn't have an explicit default
 			marker = typeof(NoopObject);
-			marker.Resolve(clientSettings).Should().Be("noopobject");
+			inferrer.TypeName(marker).Should().Be("noopobject");
 
 		}
 
@@ -69,12 +70,13 @@ namespace Nest.Tests.Unit.Internals.Inferno
 				.SetDefaultTypeNameInferrer(t=>t.Name.ToUpperInvariant())
 				;
 
+			var inferrer = new ElasticInferrer(clientSettings);
 			TypeNameMarker marker = typeof(Developer);
-			marker.Resolve(clientSettings).Should().Be("codemonkey");
+			inferrer.TypeName(marker).Should().Be("codemonkey");
 
 			//Should use the custom type name inferrer that upper cases
 			marker = typeof(NoopObject);
-			marker.Resolve(clientSettings).Should().Be("NOOPOBJECT");
+			inferrer.TypeName(marker).Should().Be("NOOPOBJECT");
 
 		}
 
@@ -86,8 +88,9 @@ namespace Nest.Tests.Unit.Internals.Inferno
 				.SetDefaultTypeNameInferrer(t => t.Name.ToUpperInvariant())
 				;
 
+			var inferrer = new ElasticInferrer(clientSettings);
 			TypeNameMarker marker = typeof(MyCustomAtrributeName);
-			marker.Resolve(clientSettings).Should().Be("custotypo");
+			inferrer.TypeName(marker).Should().Be("custotypo");
 
 		}
 
@@ -102,8 +105,9 @@ namespace Nest.Tests.Unit.Internals.Inferno
 				.SetDefaultTypeNameInferrer(t => t.Name.ToUpperInvariant())
 				;
 
+			var inferrer = new ElasticInferrer(clientSettings);
 			TypeNameMarker marker = typeof(MyCustomAtrributeName);
-			marker.Resolve(clientSettings).Should().Be("micutype");
+			inferrer.TypeName(marker).Should().Be("micutype");
 
 		}
 	}

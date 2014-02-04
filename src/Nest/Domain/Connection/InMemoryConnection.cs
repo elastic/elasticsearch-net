@@ -24,9 +24,7 @@ namespace Nest
 			: base(settings)
 		{
 			this._fixedResult = fixedResult;
-			
 		}
-
 
 		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
@@ -42,7 +40,7 @@ namespace Nest
 				RequestMethod = request.Method
 			};
 			_ConnectionSettings.ConnectionStatusHandler(cs);
-		    return cs;
+			return cs;
 		}
 
 		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
@@ -50,8 +48,8 @@ namespace Nest
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
 			{
 				var cs = this.ReturnConnectionStatus(request, data);
-			    _ConnectionSettings.ConnectionStatusHandler(cs);
-			    return cs;
+				_ConnectionSettings.ConnectionStatusHandler(cs);
+				return cs;
 			});
 		}
 

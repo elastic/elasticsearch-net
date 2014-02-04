@@ -21,8 +21,8 @@ namespace Nest
 	}
 
 
-    public class AnalyzerFieldMapping<T> : AnalyzerFieldMapping
-    {
+	public class AnalyzerFieldMapping<T> : AnalyzerFieldMapping
+	{
 		public AnalyzerFieldMapping<T> SetIndexed(bool indexed = true)
 		{
 			this.Index = indexed;
@@ -37,7 +37,7 @@ namespace Nest
 		{
 			objectPath.ThrowIfNull("objectPath");
 			this.Path = new PropertyNameResolver().Resolve(objectPath);
-			return this;	
+			return this;
 		}
-    }
+	}
 }

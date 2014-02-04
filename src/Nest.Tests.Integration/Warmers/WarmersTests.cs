@@ -36,14 +36,15 @@ namespace Nest.Tests.Integration.Warmers
 			var warmerMapping = warmerResponse.Indices[_settings.DefaultIndex]["warmer_simpleputandget"];
 			warmerMapping.Name.Should().Be("warmer_simpleputandget");
 			var typeName = _client.Infer.TypeName<ElasticSearchProject>();
-			warmerMapping.Types.Select(s => s.Resolve(_settings)).Contains(typeName).Should().Be(true);
+			var typeNames = new ElasticInferrer(_settings).TypeNames(warmerMapping.Types);
+			typeNames.Contains(typeName).Should().Be(true);
 			//warmerMapping.Source.Should().Contain("\"strange-value\"");
 		}
 
 		[Test]
 		public void PutWithEmptyTypes()
 		{
-			//			this._client.DeleTemplate("put-template-with-settings");
+			//this._client.DeleTemplate("put-template-with-settings");
 			var putResponse = this._client.PutWarmer("warmer_putwithemptytypes", wd => wd
 				.Index<ElasticSearchProject>()
 				.Search<ElasticSearchProject>(s => s

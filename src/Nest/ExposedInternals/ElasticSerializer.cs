@@ -16,7 +16,7 @@ namespace Nest
 {
 	public class ElasticSerializer
 	{
-		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(()=> new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
+		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(() => new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 		private readonly IConnectionSettings _settings;
 		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
@@ -84,8 +84,9 @@ namespace Nest
 				types.Any(t => t.Type != typeof(TResult)))
 				|| partialFields.Any())
 			{
+				var inferrer = new ElasticInferrer(this._settings);
 				var typeDictionary = types
-					.ToDictionary(t => t.Resolve(this._settings), t => t.Type);
+					.ToDictionary(inferrer.TypeName, t => t.Type);
 
 				originalSearchDescriptor._ConcreteTypeSelector = (o, h) =>
 				{
@@ -106,14 +107,14 @@ namespace Nest
 		}
 
 		internal T DeserializeInternal<T>(
-			object value, 
+			object value,
 			JsonConverter piggyBackJsonConverter,
-			IList<JsonConverter> extraConverters = null, 
+			IList<JsonConverter> extraConverters = null,
 
 			bool notFoundIsValidResponse = false) where T : class
 		{
-			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null 
-				? this.CreateSettings(extraConverters, piggyBackJsonConverter) 
+			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null
+				? this.CreateSettings(extraConverters, piggyBackJsonConverter)
 				: this._serializationSettings;
 
 			var jTokenValue = value as JToken;
@@ -133,7 +134,7 @@ namespace Nest
 				? extraConverters.ToList()
 				: null;
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
-            var settings = new JsonSerializerSettings()
+			var settings = new JsonSerializerSettings()
 			{
 				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
 				DefaultValueHandling = DefaultValueHandling.Include,
@@ -141,12 +142,12 @@ namespace Nest
 				Converters = converters,
 			};
 
-            if (_settings.ModifyJsonSerializerSettings != null)
-		        _settings.ModifyJsonSerializerSettings(settings);
+			if (_settings.ModifyJsonSerializerSettings != null)
+				_settings.ModifyJsonSerializerSettings(settings);
 
-		    return settings;
+			return settings;
 		}
-		
+
 		public string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor)
 		{
 			bulkDescriptor.ThrowIfNull("bulkDescriptor");
@@ -157,12 +158,12 @@ namespace Nest
 			foreach (var operation in bulkDescriptor._Operations)
 			{
 				var command = operation._Operation;
-				var index = operation._Index ??
-							bulkDescriptor._Index.Resolve(this._settings) ??
-							inferrer.IndexName(operation._ClrType);
+				var index = operation._Index
+					?? inferrer.IndexName(bulkDescriptor._Index)
+					?? inferrer.IndexName(operation._ClrType);
 				var typeName = operation._Type
-							   ?? bulkDescriptor._Type.Resolve(this._settings)
-							   ?? inferrer.TypeName(operation._ClrType);
+					?? inferrer.TypeName(bulkDescriptor._Type)
+					?? inferrer.TypeName(operation._ClrType);
 
 				var id = operation.GetIdForObject(inferrer);
 				operation._Index = index;
@@ -194,30 +195,33 @@ namespace Nest
 		public string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor)
 		{
 			var sb = new StringBuilder();
+			var inferrer = new ElasticInferrer(this._settings);
 			foreach (var operation in multiSearchDescriptor._Operations.Values)
 			{
-				var indeces = operation._Indices.HasAny() ? string.Join(",", operation._Indices.Select(x=>x.Resolve(this._settings))) : null;
+				var indices = inferrer.IndexNames(operation._Indices);
 				if (operation._AllIndices.GetValueOrDefault(false))
-					indeces = "_all";
-				
-				var index = indeces ??
-							multiSearchDescriptor._Index.Resolve(this._settings) ??
-				            new IndexNameResolver(this._settings).GetIndexForType(operation._ClrType);
-				
-				var types =  operation._Types.HasAny() ? string.Join(",", operation._Types.Select(x => x.Resolve(this._settings)) ) : null;
+					indices = "_all";
+
+				var index = indices 
+					?? inferrer.IndexName(multiSearchDescriptor._Index)
+					?? inferrer.IndexName(operation._ClrType);
+
+				var types = inferrer.TypeNames(operation._Types);
 				var typeName = types
-							   ?? multiSearchDescriptor._Type.Resolve(this._settings)
-				               ?? TypeNameMarker.Create(operation._ClrType);
+					?? inferrer.TypeName(multiSearchDescriptor._Type)
+					?? inferrer.TypeName(operation._ClrType);
 				if (operation._AllTypes.GetValueOrDefault(false))
 					typeName = null; //force empty typename so we'll query all types.
 
-				var op = new { 
-					index = index, 
-					type = typeName, 
-					search_type = this.GetSearchType(operation, multiSearchDescriptor), 
-					preference = operation._Preference, 
-					routing = operation._Routing };
-				var opJson =  this.Serialize(op, Formatting.None);
+				var op = new
+				{
+					index = index,
+					type = typeName,
+					search_type = this.GetSearchType(operation, multiSearchDescriptor),
+					preference = operation._Preference,
+					routing = operation._Routing
+				};
+				var opJson = this.Serialize(op, Formatting.None);
 
 				var action = "{0}\n".F(opJson);
 				sb.Append(action);
@@ -228,10 +232,10 @@ namespace Nest
 			var json = sb.ToString();
 			return json;
 		}
-	
+
 		public TemplateResponse DeserializeTemplateResponse(ConnectionStatus c, GetTemplateDescriptor d)
 		{
-			if (!c.Success) return new TemplateResponse {ConnectionStatus = c, IsValid = false};
+			if (!c.Success) return new TemplateResponse { ConnectionStatus = c, IsValid = false };
 
 			var dict = c.Deserialize<Dictionary<string, TemplateMapping>>();
 			if (dict.Count == 0)
@@ -247,11 +251,11 @@ namespace Nest
 		}
 		public GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c)
 		{
-				var dict = c.Success
-					? c.Deserialize<Dictionary<string, RootObjectMapping>>()
-					: null;
-				return new GetMappingResponse(c, dict);
-			
+			var dict = c.Success
+				? c.Deserialize<Dictionary<string, RootObjectMapping>>()
+				: null;
+			return new GetMappingResponse(c, dict);
+
 		}
 
 		public MultiGetResponse DeserializeMultiGetResponse(ConnectionStatus c, MultiGetDescriptor d)
@@ -259,7 +263,7 @@ namespace Nest
 			var multiGetHitConverter = new MultiGetHitConverter(d);
 			var multiGetResponse = this.DeserializeInternal<MultiGetResponse>(c, piggyBackJsonConverter: multiGetHitConverter);
 			return multiGetResponse;
-		
+
 		}
 
 		public MultiSearchResponse DeserializeMultiSearchResponse(ConnectionStatus c, MultiSearchDescriptor d)
@@ -267,7 +271,7 @@ namespace Nest
 			var multiSearchConverter = new MultiSearchConverter(this._settings, d);
 			var multiSearchResponse = this.DeserializeInternal<MultiSearchResponse>(c, piggyBackJsonConverter: multiSearchConverter);
 			return multiSearchResponse;
-		
+
 		}
 
 		public WarmerResponse DeserializeWarmerResponse(ConnectionStatus connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
@@ -317,14 +321,14 @@ namespace Nest
 						return "scan";
 				}
 			}
-			return multiSearchDescriptor._QueryString.ContainsKey("search_type") 
+			return multiSearchDescriptor._QueryString.ContainsKey("search_type")
 				? multiSearchDescriptor._QueryString._QueryStringDictionary["search_type"] as string
 				: null;
 		}
-		
+
 		public IndexSettingsResponse DeserializeIndexSettingsResponse(ConnectionStatus status)
 		{
-			var response = new IndexSettingsResponse {IsValid = false};
+			var response = new IndexSettingsResponse { IsValid = false };
 			try
 			{
 				var settingsContainer = SettingsContainer(status);
@@ -338,7 +342,7 @@ namespace Nest
 			response.ConnectionStatus = status;
 			return response;
 		}
-		
+
 		//TODO although this gets the job done this looks a bit iffy, refactor
 		private JObject SettingsContainer(ConnectionStatus status)
 		{
@@ -358,12 +362,12 @@ namespace Nest
 				else if (name.StartsWith("similarity."))
 				{
 					var keys = name.Split('.');
-					var similaryKeys = new[] {keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray())};
+					var similaryKeys = new[] { keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray()) };
 					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
 				}
 				else
 				{
-					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] {name}, s.Value);
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] { name }, s.Value);
 				}
 			}
 			return settingsContainer;
@@ -379,7 +383,7 @@ namespace Nest
 		{
 			var thisKey = key.First();
 			int indexer;
-			
+
 			if (key.Length > 2 || (key.Length == 2 && !int.TryParse(key.Last(), out indexer)))
 			{
 				var property = (JContainer)((JObject)container).GetValue(thisKey);

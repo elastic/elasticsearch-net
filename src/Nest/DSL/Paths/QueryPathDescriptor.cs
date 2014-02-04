@@ -25,7 +25,8 @@ namespace Nest
 	/// all parameters are optional and will default to the defaults for <para>T</para>
 	/// </summary>
 	public class QueryPathDescriptorBase<P, T, K>
-		where P : QueryPathDescriptorBase<P, T, K>, new() where T : class
+		where P : QueryPathDescriptorBase<P, T, K>, new()
+		where T : class
 		where K : FluentQueryString<K>, new()
 	{
 		internal IEnumerable<IndexNameMarker> _Indices { get; set; }
@@ -34,26 +35,26 @@ namespace Nest
 		internal bool _AllTypes { get; set; }
 		public P Indices(params Type[] indices)
 		{
-			if (indices == null) return (P) this;
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			if (indices == null) return (P)this;
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return (P)this;
 		}
 		public P Indices(params string[] indices)
 		{
-			if (indices == null) return (P) this;
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			if (indices == null) return (P)this;
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return (P)this;
 		}
 		public P Indices(IEnumerable<Type> indices)
 		{
-			if (indices == null) return (P) this;
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			if (indices == null) return (P)this;
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return (P)this;
 		}
 		public P Indices(IEnumerable<string> indices)
 		{
-			if (indices == null) return (P) this;
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			if (indices == null) return (P)this;
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return (P)this;
 		}
 
@@ -72,24 +73,24 @@ namespace Nest
 		}
 		public P Types(IEnumerable<string> types)
 		{
-			if (types == null) return (P) this;
+			if (types == null) return (P)this;
 			this._Types = types.Select(s => (TypeNameMarker)s); ;
 			return (P)this;
 		}
 		public P Types(params string[] types)
 		{
-			if (types == null) return (P) this;
-			return this.Types((IEnumerable<string>) types);
+			if (types == null) return (P)this;
+			return this.Types((IEnumerable<string>)types);
 		}
 		public P Types(IEnumerable<Type> types)
 		{
-			if (types == null) return (P) this;
-			this._Types = types.Select(t=>(TypeNameMarker)t);
+			if (types == null) return (P)this;
+			this._Types = types.Select(t => (TypeNameMarker)t);
 			return (P)this;
 		}
 		public P Types(params Type[] types)
 		{
-			if (types == null) return (P) this;
+			if (types == null) return (P)this;
 			return this.Types((IEnumerable<Type>)types);
 		}
 		public P Type(string type)
@@ -115,7 +116,7 @@ namespace Nest
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString) 
+		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
 			//start out with defaults
@@ -129,21 +130,21 @@ namespace Nest
 			};
 
 			if (this._Types.HasAny())
-				pathInfo.Type = string.Join(",", this._Types.Select(s=>s.Resolve(settings)));
+				pathInfo.Type = inferrer.TypeNames(this._Types);
 			else if (this._AllTypes)
-			    pathInfo.Type = null;
+				pathInfo.Type = null;
 			else pathInfo.Type = inferrer.TypeName<T>();
 
 			if (this._Indices.HasAny())
-				pathInfo.Index = string.Join(",", this._Indices.Select(s=>s.Resolve(settings)));
+				pathInfo.Index = inferrer.IndexNames(this._Indices);
 			else if (this._AllIndices && !pathInfo.Type.IsNullOrEmpty())
-			    pathInfo.Index = "_all";
+				pathInfo.Index = "_all";
 			else
-			    pathInfo.Index = this._AllIndices ? null : inferrer.IndexName<T>();
-            
+				pathInfo.Index = this._AllIndices ? null : inferrer.IndexName<T>();
 
 
-		    pathInfo.QueryString = queryString ?? new K();
+
+			pathInfo.QueryString = queryString ?? new K();
 			return pathInfo;
 		}
 

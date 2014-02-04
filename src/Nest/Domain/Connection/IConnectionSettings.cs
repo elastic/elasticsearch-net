@@ -25,6 +25,7 @@ namespace Nest
 		string ProxyPassword { get; }
 
 		bool TraceEnabled { get; }
+		bool UriSpecifiedBasicAuth { get; }
 		NameValueCollection QueryStringParameters { get; }
 		Action<ConnectionStatus> ConnectionStatusHandler { get; }
 

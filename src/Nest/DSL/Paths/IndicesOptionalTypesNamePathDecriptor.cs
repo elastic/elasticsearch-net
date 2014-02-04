@@ -122,16 +122,14 @@ namespace Nest
 			if (this._Name.IsNullOrEmpty())
 				throw new DslException("missing Name()");
 
-			var indices = string.Join(",", 
-				this._Indices.HasAny()
-					? this._Indices.Select(i => i.Resolve(settings)).ToArray()
-					: this._AllIndices.GetValueOrDefault(false)
-						? new [] {"_all"}
-						: new[] {inferrer.DefaultIndex}
-				);
+			var indices = this._Indices.HasAny()
+				? inferrer.IndexNames(this._Indices)
+				: this._AllIndices.GetValueOrDefault(false)
+					? "_all"
+					: inferrer.DefaultIndex;
 
 			var types = this._Types.HasAny()
-				? string.Join(",", this._Types.Select(t => t.Resolve(settings)))
+				? inferrer.TypeNames(this._Types)
 				: null;
 
 			var pathInfo = new ElasticSearchPathInfo<K>()

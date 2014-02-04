@@ -43,6 +43,9 @@ namespace Nest
 		public NameValueCollection QueryStringParameters { get; private set; }
 		public Func<string, string> DefaultPropertyNameInferrer { get; private set; }
 
+		//these are set once to make sure we don't query the Uri too often
+		public bool UriSpecifiedBasicAuth { get; private set; }
+			 
 		//Serializer settings
 		public Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; private set; }
 
@@ -59,6 +62,7 @@ namespace Nest
 				this.Uri = new Uri(uri.OriginalString + "/");
 			this.Host = uri.Host;
 			this.Port = uri.Port;
+			this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
 
 			this.MaximumAsyncConnections = 0;
 			this.DefaultTypeNameInferrer = (t => t.Name.ToLower()); 

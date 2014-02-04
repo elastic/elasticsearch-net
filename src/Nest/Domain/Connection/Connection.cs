@@ -130,7 +130,6 @@ namespace Nest
 
 		private void SetProxyIfNeeded(HttpWebRequest myReq)
 		{
-			//myReq.Proxy = null;
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{
 				var proxy = new WebProxy();
@@ -140,15 +139,15 @@ namespace Nest
 				proxy.Credentials = credentials;
 				myReq.Proxy = proxy;
 			}
+			//myReq.Proxy = null;
 		}
 
 		private void SetBasicAuthorizationIfNeeded(HttpWebRequest myReq)
 		{
-			var myUri = this._ConnectionSettings.Uri;
-			if (myUri != null && !string.IsNullOrEmpty(myUri.UserInfo))
+			if (this._ConnectionSettings.UriSpecifiedBasicAuth)
 			{
 				myReq.Headers["Authorization"] =
-				  "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
+				  "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(this._ConnectionSettings.Uri.UserInfo));
 			}
 		}
 
@@ -156,7 +155,7 @@ namespace Nest
 		{
 			var url = this._CreateUriString(path);
 
-			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
+			var myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 

@@ -80,7 +80,7 @@ namespace Nest
 		{
 			var inferrer = new ElasticInferrer(settings);
 			var index = this._Index != null ? inferrer.IndexName(this._Index) : inferrer.IndexName<T>();
-			var type = this._Type != null ? this._Type.Resolve(settings) : inferrer.TypeName<T>();
+			var type = this._Type != null ? inferrer.TypeName(this._Type) : inferrer.TypeName<T>();
 			var id = this._Id ?? inferrer.Id(this._Object);
 			var pathInfo = new ElasticSearchPathInfo<K>()
 			{

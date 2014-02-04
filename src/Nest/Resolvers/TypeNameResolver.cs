@@ -21,6 +21,7 @@ namespace Nest.Resolvers
 
 		public string GetTypeNameFor(Type type)
 		{
+			if (type == null) return null;
 			string typeName;
 
 			if (_connectionSettings.DefaultTypeNames.TryGetValue(type, out typeName))
@@ -35,6 +36,11 @@ namespace Nest.Resolvers
 				typeName = _connectionSettings.DefaultTypeNameInferrer(type);
 			return typeName;
 		}
-		
+
+
+		internal string GetTypeNameFor(TypeNameMarker t)
+		{
+			return t.Name ?? this.GetTypeNameFor(t.Type);
+		}
 	}
 }

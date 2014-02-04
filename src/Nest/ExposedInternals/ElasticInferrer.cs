@@ -13,6 +13,7 @@ namespace Nest
 
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
+		private TypeNameResolver TypeNameResolver { get; set; }
 
 		public string DefaultIndex
 		{
@@ -26,6 +27,7 @@ namespace Nest
 			this._connectionSettings = connectionSettings;
 			this.IdResolver = new IdResolver();
 			this.IndexNameResolver = new IndexNameResolver(this._connectionSettings);
+			this.TypeNameResolver = new TypeNameResolver(this._connectionSettings);
 		}
 
 		public string IndexName<T>() where T : class
@@ -48,7 +50,7 @@ namespace Nest
 		public string IndexNames(params IndexNameMarker[] indices)
 		{
 			if (indices == null) return null;
-			return string.Join(",", indices.Select(i=>i.Resolve(this._connectionSettings)));
+			return string.Join(",", indices.Select(i => this.IndexNameResolver.GetIndexForType(i)));
 		}
 		
 		public string IndexNames(IEnumerable<IndexNameMarker> indices)
@@ -68,22 +70,23 @@ namespace Nest
 		}
 		public string TypeName(Type t)
 		{
-			if (t == null) return null;
-			return TypeNameMarker.Create(t).Resolve(this._connectionSettings);
+			return t == null ? null : this.TypeNameResolver.GetTypeNameFor(t);
 		}
+
 		public string TypeNames(params TypeNameMarker[] typeNames)
 		{
-			if (typeNames == null) return null;
-			return string.Join(",", typeNames.Select(t=>t.Resolve(this._connectionSettings)));
+			return typeNames == null 
+				? null 
+				: string.Join(",", typeNames.Select(t => this.TypeNameResolver.GetTypeNameFor(t)));
 		}
+
 		public string TypeNames(IEnumerable<TypeNameMarker> typeNames)
 		{
 			return !typeNames.HasAny() ? null : this.TypeNames(typeNames.ToArray());
 		}
 		public string TypeName(TypeNameMarker type)
 		{
-			if (type == null) return null;
-			return type.Resolve(this._connectionSettings);
+			return type == null ? null : this.TypeNameResolver.GetTypeNameFor(type);
 		}
 	}
 }

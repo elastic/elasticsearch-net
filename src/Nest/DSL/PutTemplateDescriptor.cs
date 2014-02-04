@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -60,7 +61,8 @@ namespace Nest
 			var rootObjectMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>(this._connectionSettings));
 			rootObjectMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
-			var typeName = rootObjectMappingDescriptor._Type.Resolve(this._connectionSettings);
+			var inferrer = new ElasticInferrer(this._connectionSettings);
+			var typeName = inferrer.TypeName(rootObjectMappingDescriptor._Type);
 			if (typeName == null)
 				return this;
 			this._TemplateMapping.Mappings[typeName] = rootObjectMappingDescriptor._Mapping;
