@@ -69,7 +69,7 @@ namespace Nest.Tests.Integration.Index
 				onError: (e) => Assert.Fail(e.Message),
 				completed: () =>
 				{
-					var refresh = this._client.Refresh(r=>r.Index(ElasticsearchConfiguration.DefaultIndex));
+					var refresh = this._client.Refresh(r=>r.Indices(toIndex, ElasticsearchConfiguration.DefaultIndex));
 
 					var originalIndexCount = this._client.Count(c=>c
 						.Index(ElasticsearchConfiguration.DefaultIndex)
