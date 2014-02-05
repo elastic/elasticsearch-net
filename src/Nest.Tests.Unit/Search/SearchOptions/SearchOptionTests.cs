@@ -189,7 +189,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
                     }
                 } 
             }";
-            Assert.True(json.JsonEquals(expected));
+            Assert.True(json.JsonEquals(expected), json);
         }
 
 		[Test]
@@ -199,7 +199,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name)
-				.SortAscending(e => e.LOC);
+				.SortAscending(e => e.LOC.Suffix("sort"));
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {
@@ -216,8 +216,8 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.From(0)
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name)
-				.SortAscending(e => e.LOC)
-				.SortDescending(e => e.Name);
+				.SortAscending(e => e.LOC.Suffix("sort"))
+				.SortDescending(e => e.Name.Suffix("sort"));
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
 					sort: {

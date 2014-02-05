@@ -12,7 +12,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ICustomJson))]
+	[JsonConverter(typeof(ICustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class GeoDistanceFacetDescriptor<T> : ICustomJson
 		where T : class

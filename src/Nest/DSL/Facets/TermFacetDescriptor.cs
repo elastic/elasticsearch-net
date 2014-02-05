@@ -121,9 +121,7 @@ namespace Nest
 			this._IsGlobal = true;
 			return this;
 		}
-		public TermFacetDescriptor<T> FacetFilter(
-		  Func<FilterDescriptor<T>, BaseFilter> facetFilter
-		)
+		public TermFacetDescriptor<T> FacetFilter(Func<FilterDescriptor<T>, BaseFilter> facetFilter)
 		{
 			var filter = new FilterDescriptor<T>();
 			var f = facetFilter(filter);

@@ -7,12 +7,13 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class StringMapping : IElasticType, IElasticCoreType
 	{
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "string" }; } }
 
-		[JsonProperty(PropertyName = "name")]
+		//[JsonProperty(PropertyName = "name")]
 		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("similarity")]

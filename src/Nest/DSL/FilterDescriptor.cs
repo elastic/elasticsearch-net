@@ -17,7 +17,6 @@ namespace Nest
 	 *   - make sure it calls in to New() or SetDictionary() for immutable sake
 	 *   - add a null check to IsConditionless
 	 */
-
 	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T> where T : class
 	{
 		internal string _Name { get; set; }

@@ -32,7 +32,7 @@ namespace Nest
 
 		public PartialFieldDescriptor<T> Exclude(params string[] paths)
 		{
-			this._Include = paths.Select(p => (PropertyPathMarker) p);
+			this._Exclude = paths.Select(p => (PropertyPathMarker) p);
 			return this;
 		}
 		public PartialFieldDescriptor<T> Include(params Expression<Func<T, object>>[] paths)

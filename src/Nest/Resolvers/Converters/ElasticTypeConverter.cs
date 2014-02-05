@@ -81,19 +81,19 @@ namespace Nest.Resolvers.Converters
 	{
 		public override bool CanWrite
 		{
-			get { return false; }
+			get { return true; }
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			throw new NotSupportedException();
+			new DictionaryKeysAreNotPropertyNamesJsonConverter().WriteJson(writer, value, serializer);
 		}
 
 	
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var r = new Dictionary<string, IElasticType>();
+			var r = new Dictionary<PropertyNameMarker, IElasticType>();
 
 			JObject o = JObject.Load(reader);
 
@@ -108,7 +108,6 @@ namespace Nest.Resolvers.Converters
 					 as IElasticType;
 				if (mapping == null)
 					continue;
-
 				mapping.Name = name;
 
 				r.Add(name, mapping);

@@ -7,9 +7,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class AttachmentMapping : IElasticType
 	{
-		[JsonProperty(PropertyName = "name")]
 		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("type")]

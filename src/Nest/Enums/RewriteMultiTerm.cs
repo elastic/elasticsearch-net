@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[Flags]
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum RewriteMultiTerm
 	{
 		constant_score_default,

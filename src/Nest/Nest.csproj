@@ -618,6 +618,7 @@
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="Resolvers\Converters\ActAsSearchDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\GetAliasesResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\RawJsonConverterConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
@@ -652,7 +653,7 @@
     <Compile Include="Enums\StoreOption.cs" />
     <Compile Include="Enums\NumericType.cs" />
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
-    <Compile Include="Resolvers\Converters\TermConverter.cs" />
+    <Compile Include="Resolvers\Converters\ICustomJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Domain\Paths\ElasticSearchPathInfo.cs" />

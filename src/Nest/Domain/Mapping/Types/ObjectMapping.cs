@@ -6,9 +6,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class ObjectMapping : IElasticType
 	{
-		[JsonProperty(PropertyName = "name")]
 		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("type")]
@@ -17,8 +17,8 @@ namespace Nest
 			get { return new TypeNameMarker { Name = "object" }; }
 		}
 
-    [JsonProperty("similarity")]
-    public string Similarity { get; set; }
+		[JsonProperty("similarity")]
+		public string Similarity { get; set; }
 
 		[JsonProperty("dynamic")]
 		[JsonConverter(typeof(DynamicMappingOptionConverter))]

@@ -74,7 +74,6 @@ namespace Nest.Resolvers.Converters
 				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
 			}
 
-
 			var response = new MultiGetResponse();
 			var jsonObject = JObject.Load(reader);
 

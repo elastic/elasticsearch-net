@@ -2,12 +2,10 @@
   "simpleoptoutclass": {
     "properties": {
       "id": {
-        "name": "id",
         "type": "integer"
       },
       "name": {
-        "type": "string",
-        "name": "name"
+        "type": "string"
       }
     }
   }

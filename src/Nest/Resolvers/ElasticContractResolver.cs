@@ -35,6 +35,11 @@ namespace Nest.Resolvers
 			this.Infer = new ElasticInferrer(this.ConnectionSettings);
 		}
 
+		protected override JsonConverter ResolveContractConverter(Type objectType)
+		{
+			return base.ResolveContractConverter(objectType);
+		}
+
 		protected override JsonContract CreateContract(Type objectType)
 		{
 			JsonContract contract = base.CreateContract(objectType);
@@ -54,6 +59,11 @@ namespace Nest.Resolvers
 			
 			if (objectType == typeof(MultiGetResponse))
 				contract.Converter = new MultiGetHitConverter();
+
+			if (objectType == typeof(PropertyNameMarker))
+				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
+			if (objectType == typeof(PropertyPathMarker))
+				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
 
 			if (objectType == typeof(MultiSearchResponse))
 				contract.Converter = new MultiSearchConverter();

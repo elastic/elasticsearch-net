@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
@@ -36,7 +37,11 @@ namespace Nest
 		{
 			if (marker.IsConditionless())
 				return null;
-			return !marker.Name.IsNullOrEmpty() ? marker.Name : this.PropertyNameResolver.Resolve(marker.Type);
+			var name = !marker.Name.IsNullOrEmpty() ? marker.Name : this.PropertyNameResolver.Resolve(marker.Type);
+			if (marker.Boost.HasValue)
+				name += "^" + marker.Boost.Value.ToString(CultureInfo.InvariantCulture);
+
+			return name;
 		}
 
 		public string PropertyPath(MemberInfo member)

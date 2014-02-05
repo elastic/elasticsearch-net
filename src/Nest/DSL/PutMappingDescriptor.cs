@@ -18,7 +18,7 @@ namespace Nest
 		public PutMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this._Mapping = new RootObjectMapping() { Name = typeof(T) };
+			this._Mapping = new RootObjectMapping() {  };
 		}
 
 		public PutMappingDescriptor<T> InitializeUsing(RootObjectMapping rootObjectMapping)
@@ -27,7 +27,6 @@ namespace Nest
 				return this;
 
 			this._Mapping = rootObjectMapping;
-			this._Mapping.Name = typeof (T);
 			return this;
 		}
 

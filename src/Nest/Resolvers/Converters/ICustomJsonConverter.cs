@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest.Resolvers.Converters
 {
+	//TODO rename and remove I Prefix
 	public class ICustomJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)

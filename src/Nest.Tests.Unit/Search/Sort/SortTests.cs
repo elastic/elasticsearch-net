@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.Search.Sort
 				.From(0)
 				.Size(10)
 				.Sort(sort => sort
-					.OnField(e => e.Name)
+					.OnField(e => e.Name.Suffix("sort"))
 					.MissingLast()
 					.Descending()
 				);
@@ -105,7 +105,7 @@ namespace Nest.Tests.Unit.Search.Sort
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.SortAscending(f => f.Name);
+				.SortAscending(f => f.Name.Suffix("sort"));
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
                 {
@@ -124,7 +124,7 @@ namespace Nest.Tests.Unit.Search.Sort
 			var s = new SearchDescriptor<ElasticSearchProject>()
 				.From(0)
 				.Size(10)
-				.SortDescending(f => f.Name);
+				.SortDescending(f => f.Name.Suffix("sort"));
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
                 {
@@ -157,9 +157,9 @@ namespace Nest.Tests.Unit.Search.Sort
                   size: 10,
                   sort: {
                     _geo_distance: {
+                      ""origin"": ""40, -70"",
                       missing: ""_last"",
                       order: ""desc"",
-                      ""origin"": ""40, -70"",
                       unit: ""km""
                     }
                   }

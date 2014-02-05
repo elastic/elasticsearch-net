@@ -16,6 +16,7 @@ namespace Nest
 		public IConnection Connection { get; protected set; }
 		public IConnectionSettings Settings { get; protected set; }
 		public ElasticSerializer Serializer { get; protected set; }
+		public ElasticInferrer Infer { get; protected set; }
 
 		public RawElasticClient(IConnectionSettings settings)
 			: this(settings, new Connection(settings))
@@ -31,6 +32,7 @@ namespace Nest
 			this.Settings = settings;
 			this.Connection = connection;
 			this.Serializer = new ElasticSerializer(this.Settings);
+			this.Infer = new ElasticInferrer(this.Settings);
 		}
 
 		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)
@@ -63,6 +65,15 @@ namespace Nest
 			var ss = o as string[];
 			if (ss != null)
 				return string.Join(",", ss);
+
+			var pn = o as PropertyPathMarker;
+			if (pn != null)
+				return this.Infer.PropertyPath(pn);
+			
+			var pns = o as IEnumerable<PropertyPathMarker>;
+			if (pns != null)
+				return string.Join(",", pns.Select(p=>this.Infer.PropertyPath(p)));
+
 
 			var e = o as Enum;
 			if (e != null)

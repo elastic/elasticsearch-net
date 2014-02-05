@@ -8,9 +8,10 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-  public enum GeoUnit
-  {
-    km,
-    mi
-  }
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum GeoUnit
+	{
+		km,
+		mi
+	}
 }
