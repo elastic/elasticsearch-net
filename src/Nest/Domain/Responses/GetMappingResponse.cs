@@ -23,7 +23,7 @@ namespace Nest
 			var mapping = dict.First();
 			if (mapping.Value == null)
 				return;
-			mapping.Value.TypeNameMarker = mapping.Key;
+			mapping.Value.Name = mapping.Key;
 			this.Mapping = mapping.Value;
 		}
 

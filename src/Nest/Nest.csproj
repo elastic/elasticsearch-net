@@ -93,6 +93,7 @@
     <Compile Include="Domain\Alias\IAliasAction.cs" />
     <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
+    <Compile Include="Domain\ICustomJson.cs" />
     <Compile Include="Domain\Responses\GetAliasesResponse.cs" />
     <Compile Include="Domain\Responses\GetMappingResponse.cs" />
     <Compile Include="Domain\Responses\IMultiSearchResponse.cs" />
@@ -631,8 +632,6 @@
     <Compile Include="Resolvers\Converters\ElasticCoreTypeConverter.cs" />
     <Compile Include="Resolvers\Converters\ElasticTypeConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiSearchConverter.cs" />
-    <Compile Include="Resolvers\Converters\GeoDistanceFacetDescriptorConverter.cs" />
-    <Compile Include="Resolvers\Converters\SortGeoDistanceDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\RawOrQueryDescriptorConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsConverter.cs" />
     <Compile Include="Domain\Hit\ShardsMetaData.cs" />
@@ -682,6 +681,8 @@
     <Compile Include="Enums\FieldType.cs" />
     <Compile Include="Enums\NamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resolvers\PropertyNameMarker.cs" />
+    <Compile Include="Resolvers\PropertyPathMarker.cs" />
     <Compile Include="Resolvers\TypeNameMarker.cs" />
     <Compile Include="Resolvers\TypeNameMarkerExtensions.cs" />
     <Compile Include="Resolvers\TypeNameResolver.cs" />

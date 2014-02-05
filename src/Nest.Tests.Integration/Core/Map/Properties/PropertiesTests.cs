@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 			mapping.Properties.Should().NotBeEmpty();
 			var nameMapping = mapping.Properties["name"] as StringMapping;
 			nameMapping.Should().NotBeNull();
-			nameMapping.Name.Should().NotBeNullOrEmpty().And.Equals("name");
+			nameMapping.Name.Name.Should().NotBeNull().And.Equals("name");
 			nameMapping.IndexName.Should().NotBeNullOrEmpty().And.Equals("my_crazy_name_i_want_in_lucene");
 		}
 		[Test]

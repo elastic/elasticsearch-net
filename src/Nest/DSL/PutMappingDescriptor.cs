@@ -18,10 +18,7 @@ namespace Nest
 		public PutMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this._Mapping = new RootObjectMapping()
-			{
-				TypeNameMarker = typeof(T)
-			};
+			this._Mapping = new RootObjectMapping() { Name = typeof(T) };
 		}
 
 		public PutMappingDescriptor<T> InitializeUsing(RootObjectMapping rootObjectMapping)
@@ -30,7 +27,7 @@ namespace Nest
 				return this;
 
 			this._Mapping = rootObjectMapping;
-			this._Mapping.TypeNameMarker = typeof (T);
+			this._Mapping.Name = typeof (T);
 			return this;
 		}
 
@@ -48,7 +45,7 @@ namespace Nest
 				return this;
 			var properties = mapping.Properties;
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
 
 			foreach (var p in properties)
 			{
@@ -194,7 +191,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<T>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{

@@ -226,17 +226,15 @@ namespace Nest
     {
         [JsonProperty(PropertyName = "gauss")]
         [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-        internal IDictionary<string, FunctionScoreDecayFieldDescriptor> _GaussDescriptor { get; set; }
+        internal IDictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor> _GaussDescriptor { get; set; }
 
         public GaussFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
         {
-            _GaussDescriptor = new Dictionary<string, FunctionScoreDecayFieldDescriptor>();
+            _GaussDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
 
-            var resolver = new PropertyNameResolver();
-            var fieldName = resolver.Resolve(objectPath);
             var descriptor = new FunctionScoreDecayFieldDescriptor();
             descriptorBuilder(descriptor);
-            _GaussDescriptor[fieldName] = descriptor;
+            _GaussDescriptor[objectPath] = descriptor;
         }
     }
 
@@ -245,17 +243,15 @@ namespace Nest
     {
         [JsonProperty(PropertyName = "linear")]
         [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-        internal IDictionary<string, FunctionScoreDecayFieldDescriptor> _LinearDescriptor { get; set; }
+        internal IDictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor> _LinearDescriptor { get; set; }
 
         public LinearFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
         {
-            _LinearDescriptor = new Dictionary<string, FunctionScoreDecayFieldDescriptor>();
+            _LinearDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
 
-            var resolver = new PropertyNameResolver();
-            var fieldName = resolver.Resolve(objectPath);
             var descriptor = new FunctionScoreDecayFieldDescriptor();
             descriptorBuilder(descriptor);
-            _LinearDescriptor[fieldName] = descriptor;
+            _LinearDescriptor[objectPath] = descriptor;
         }
     }
 
@@ -264,17 +260,15 @@ namespace Nest
     {
         [JsonProperty(PropertyName = "exp")]
         [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-        internal IDictionary<string, FunctionScoreDecayFieldDescriptor> _ExpDescriptor { get; set; }
+        internal IDictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor> _ExpDescriptor { get; set; }
 
         public ExpFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
         {
-            _ExpDescriptor = new Dictionary<string, FunctionScoreDecayFieldDescriptor>();
+            _ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
 
-            var resolver = new PropertyNameResolver();
-            var fieldName = resolver.Resolve(objectPath);
             var descriptor = new FunctionScoreDecayFieldDescriptor();
             descriptorBuilder(descriptor);
-            _ExpDescriptor[fieldName] = descriptor;
+            _ExpDescriptor[objectPath] = descriptor;
         }
     }
 

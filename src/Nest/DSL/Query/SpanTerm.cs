@@ -7,13 +7,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TermConverter))]
+	[JsonConverter(typeof(ICustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SpanTerm : Term, ISpanQuery
 	{
-		public SpanTerm()
-		{
-		
-		}
 	}
 }

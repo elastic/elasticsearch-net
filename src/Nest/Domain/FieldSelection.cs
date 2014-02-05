@@ -18,16 +18,19 @@ namespace Nest.Domain
 
 	public class FieldSelection<T> : IFieldSelection<T>
 	{
-		public FieldSelection()
+		private ElasticInferrer Infer { get; set; }
+		public FieldSelection(IConnectionSettings settings)
 		{
-			
+			this.Infer = new ElasticInferrer(settings);
 		}
+
 
 		internal FieldSelection(IDictionary<string, object> values)
 		{
 			this.FieldValues = values;
 		}
-
+		
+		//TODO REMOVE ?
 		public T Document { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -35,12 +38,12 @@ namespace Nest.Domain
 
 		public K FieldValue<K>(Expression<Func<T, K>> objectPath)
 		{
-			var path = new PropertyNameResolver().Resolve(objectPath);
+			var path = this.Infer.PropertyPath(objectPath);
 			return this.FieldValue<K>(path);
 		}
 		public K FieldValue<K>(Expression<Func<T, object>> objectPath)
 		{
-			var path = new PropertyNameResolver().Resolve(objectPath);
+			var path = this.Infer.PropertyPath(objectPath);
 			return this.FieldValue<K>(path);
 		}
 

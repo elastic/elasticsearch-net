@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
@@ -18,7 +19,7 @@ namespace Nest
     public string Scope { get; set; }
 
     [JsonProperty(PropertyName = "nested")]
-    public string Nested { get; set; }
+    public PropertyPathMarker Nested { get; set; }
 
     [JsonProperty(PropertyName = "terms")]
     public TermFacetDescriptor<T> Terms { get; set; }

@@ -8,10 +8,13 @@ namespace Nest.Resolvers
 	public class TypeNameResolver
 	{
 		private readonly IConnectionSettings _connectionSettings;
+		private PropertyNameResolver _propertyNameResolver;
+
 		public TypeNameResolver(IConnectionSettings connectionSettings)
 		{
 			connectionSettings.ThrowIfNull("hasDefaultIndices");
 			this._connectionSettings = connectionSettings;
+			this._propertyNameResolver = new PropertyNameResolver(this._connectionSettings);
 		}
 
 		public string GetTypeNameFor<T>()
@@ -27,10 +30,8 @@ namespace Nest.Resolvers
 			if (_connectionSettings.DefaultTypeNames.TryGetValue(type, out typeName))
 				return typeName;
 
-			var att = new PropertyNameResolver().GetElasticPropertyFor(type);
-			if (att != null && !att.TypeNameMarker.IsNullOrEmpty())
-				typeName = att.TypeNameMarker.Name;
-			else if (att != null && !string.IsNullOrEmpty(att.Name))
+			var att = ElasticAttributes.Type(type);
+			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else
 				typeName = _connectionSettings.DefaultTypeNameInferrer(type);

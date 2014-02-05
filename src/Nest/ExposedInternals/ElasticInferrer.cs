@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using Nest.Resolvers;
@@ -14,7 +15,7 @@ namespace Nest
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
 		private TypeNameResolver TypeNameResolver { get; set; }
-
+		private PropertyNameResolver PropertyNameResolver { get; set; }
 		public string DefaultIndex
 		{
 			get
@@ -28,6 +29,35 @@ namespace Nest
 			this.IdResolver = new IdResolver();
 			this.IndexNameResolver = new IndexNameResolver(this._connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(this._connectionSettings);
+			this.PropertyNameResolver = new PropertyNameResolver(this._connectionSettings);
+		}
+
+		public string PropertyPath(PropertyPathMarker marker)
+		{
+			if (marker.IsConditionless())
+				return null;
+			return !marker.Name.IsNullOrEmpty() ? marker.Name : this.PropertyNameResolver.Resolve(marker.Type);
+		}
+
+		public string PropertyPath(MemberInfo member)
+		{
+			return member == null ? null : this.PropertyNameResolver.Resolve(member);
+		}
+
+		public string PropertyName(PropertyNameMarker marker)
+		{
+			if (marker.IsConditionless())
+				return null;
+			return !marker.Name.IsNullOrEmpty() 
+				? marker.Name 
+				: marker.Expression != null 
+					? this.PropertyNameResolver.ResolveToLastToken(marker.Expression)
+					: this.TypeName(marker.Type);
+		}
+		
+		public string PropertyName(MemberInfo member)
+		{
+			return member == null ? null : this.PropertyNameResolver.ResolveToLastToken(member);
 		}
 
 		public string IndexName<T>() where T : class

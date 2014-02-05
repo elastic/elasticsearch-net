@@ -9,7 +9,7 @@ namespace Nest
 		IndexNameMarker _Index { get; set; }
 		TypeNameMarker _Type { get; set; }
 		string _Id { get; set; }
-		IList<string> _Fields { get; set; }
+		IList<PropertyPathMarker> _Fields { get; set; }
 		string _Routing { get; set; }
 		Type _ClrType { get; }
 	}

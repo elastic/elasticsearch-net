@@ -390,8 +390,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -1031,8 +1030,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -1144,8 +1142,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -1425,8 +1422,7 @@ namespace Nest
 		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> typedPathLookup) where T : class
 		{
 			typedPathLookup.ThrowIfNull("typedPathLookup");
-			var pr = new PropertyNameResolver();
-			this._QueryString.Field(pr.Resolve(typedPathLookup));
+			this._QueryString._Field(typedPathLookup);
 			return this;
 		}
 			
@@ -1522,8 +1518,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -2352,6 +2347,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
+		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._CompletionFields(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>Return information about indexed and deleted documents</summary>
 		public IndicesStatsDescriptor Docs(bool docs = true)
@@ -2376,6 +2382,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
+		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._FielddataFields(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields(params string[] fields)
@@ -2391,8 +2408,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -2660,8 +2676,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._Fields(typedPathLookups);
 			return this;
 		}
 			
@@ -2790,6 +2805,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>Specific fields to perform the query against</summary>
+		public MoreLikeThisDescriptor<T> MltFields(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._MltFields(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
 		public MoreLikeThisDescriptor<T> PercentTermsToMatch(double percent_terms_to_match)
@@ -3106,6 +3132,15 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>Specify which field to use for suggestions</summary>
+		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> typedPathLookup) 
+		{
+			typedPathLookup.ThrowIfNull("typedPathLookup");
+			this._QueryString._SuggestField(typedPathLookup);
+			return this;
+		}
+			
 
 		///<summary>Specify suggest mode</summary>
 		public SearchDescriptor<T> SuggestMode(SuggestModeOptions suggest_mode)
@@ -3211,8 +3246,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._Fields(typedPathLookups);
 			return this;
 		}
 			

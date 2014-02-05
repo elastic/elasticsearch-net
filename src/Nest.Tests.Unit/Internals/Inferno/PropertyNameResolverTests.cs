@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Channels;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -55,7 +56,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestUsesElasticProperty()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.MyCustomClass.MyProperty;
-			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var propertyName = _client.Infer.PropertyPath(exp);
 			var expected = "myCustomClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -64,7 +65,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestUsesOtherElasticProperty()
 		{
 			Expression<Func<SomeOtherClass, object>> exp = (m) => m.MyCustomClass.MyProperty;
-			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var propertyName = _client.Infer.PropertyPath(exp);
 			var expected = "custom.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -73,7 +74,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestUsesOtherElasticTypePropertyIsIgnored()
 		{
 			Expression<Func<SomeOtherClass, object>> exp = (m) => m.MyCustomOtherClass.MyProperty;
-			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var propertyName = _client.Infer.PropertyPath(exp);
 			var expected = "myCustomOtherClass.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -82,7 +83,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestCreatedDate()
 		{
 			Expression<Func<SomeOtherClass, object>> exp = (m) => m.CreateDate;
-			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var propertyName = _client.Infer.PropertyPath(exp);
 			var expected = "CreateDate";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -91,7 +92,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestDictionaryConstStringExpression()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.StringDict["someValue"].CreateDate;
-			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var propertyName =_client.Infer.PropertyPath(exp);
 			var expected = "stringDict.someValue.CreateDate";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -100,7 +101,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestDictionaryConstIntExpression()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.IntDict[101].MyProperty;
-			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var propertyName = _client.Infer.PropertyPath(exp);
 			var expected = "intDict.101.MID";
 			Assert.AreEqual(expected, propertyName);
 		}
@@ -110,7 +111,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
         {
             string index = "someValue";
             Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
-            var propertyName = new PropertyNameResolver().Resolve(exp);
+            var propertyName = _client.Infer.PropertyPath(exp);
             var expected = "stringDict.someValue.CreateDate";
             Assert.AreEqual(expected, propertyName);
         }
@@ -120,7 +121,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
         {
             var index = 101;
             Expression<Func<SomeClass, object>> exp = (m) => m.IntDict[index].MyProperty;
-            var propertyName = new PropertyNameResolver().Resolve(exp);
+            var propertyName =_client.Infer.PropertyPath(exp);
             var expected = "intDict.101.MID";
             Assert.AreEqual(expected, propertyName);
         }
@@ -130,12 +131,12 @@ namespace Nest.Tests.Unit.Internals.Inferno
         {
             string index = "someValue1";
             Expression<Func<SomeClass, object>> exp = (m) => m.StringDict[index].CreateDate;
-            var propertyName = new PropertyNameResolver().Resolve(exp);
+            var propertyName =_client.Infer.PropertyPath(exp);
             var expected1 = "stringDict.someValue1.CreateDate";
             Assert.AreEqual(expected1, propertyName);
             index = "someValue2";
             exp = (m) => m.StringDict[index].CreateDate;
-            propertyName = new PropertyNameResolver().Resolve(exp);
+            propertyName = _client.Infer.PropertyPath(exp);
             var expected2 = "stringDict.someValue2.CreateDate";
             Assert.AreEqual(expected2, propertyName);
         }
@@ -144,7 +145,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestCollectionIndexExpressionDoesNotEndUpInPath()
 		{
 			Expression<Func<SomeClass, object>> exp = (m) => m.ListOfCustomClasses[101].MyProperty;
-			var propertyName = new PropertyNameResolver().Resolve(exp);
+			var propertyName = _client.Infer.PropertyPath(exp);
 			var expected = "listOfCustomClasses.MID";
 			Assert.AreEqual(expected, propertyName);
 		}

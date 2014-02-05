@@ -51,12 +51,12 @@ namespace Nest
 		{
 			get
 			{
-				return this._Field.IsNullOrEmpty() || this._Query.IsNullOrEmpty();
+				return this._Field.IsConditionless() || this._Query.IsNullOrEmpty();
 			}
 		}
 
 
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 		public MatchQueryDescriptor<T> OnField(string field)
 		{
 			this._Field = field;
@@ -64,8 +64,8 @@ namespace Nest
 		}
 		public MatchQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 
 		public MatchQueryDescriptor<T> Query(string query)

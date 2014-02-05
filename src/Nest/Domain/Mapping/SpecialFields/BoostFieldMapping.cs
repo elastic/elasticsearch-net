@@ -8,7 +8,7 @@ namespace Nest
 	public class BoostFieldMapping
 	{
 		[JsonProperty("name")]
-		public string Name { get; internal set; }
+		public PropertyNameMarker Name { get; internal set; }
 
 		[JsonProperty("null_value")]
 		public double NullValue { get; internal set; }
@@ -30,7 +30,7 @@ namespace Nest
 		public BoostFieldMapping<T> SetName(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			this.Name = new PropertyNameResolver().Resolve(objectPath);
+			this.Name = objectPath;
 			return this;
 		}
 	}

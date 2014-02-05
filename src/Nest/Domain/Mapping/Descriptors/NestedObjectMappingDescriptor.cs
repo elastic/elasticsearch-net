@@ -25,13 +25,12 @@ namespace Nest
 		}
 		public NestedObjectMappingDescriptor<TParent, TChild> Name(string name)
 		{
-			this._Mapping.TypeNameMarker = name;
+			this._Mapping.Name = name;
 			return this;
 		}
 		public NestedObjectMappingDescriptor<TParent, TChild> Name(Expression<Func<TParent, TChild>> objectPath)
 		{
-			var name = new PropertyNameResolver().ResolveToLastToken(objectPath);
-			this._Mapping.TypeNameMarker = name;
+			this._Mapping.Name = objectPath;
 			return this;
 		}
 
@@ -48,7 +47,7 @@ namespace Nest
 			if (mapping == null)
 				return this;
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
 
 			var properties = mapping.Properties;
 			foreach (var p in properties)
@@ -98,7 +97,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<TChild>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<string, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{

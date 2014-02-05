@@ -13,7 +13,6 @@ namespace Nest.Resolvers.Writers
 	internal class TypeMappingWriter
 	{
 		private readonly Type _type;
-		private readonly PropertyNameResolver _propertyNameResolver = new PropertyNameResolver();
 		private readonly IConnectionSettings _connectionSettings;
 		private readonly ElasticSerializer _elasticSerializer;
 		private ElasticInferrer Infer { get; set; }
@@ -98,8 +97,8 @@ namespace Nest.Resolvers.Writers
 		internal string MapFromAttributes()
 		{
 			var sb = new StringBuilder();
-			using (StringWriter sw = new StringWriter(sb))
-			using (JsonWriter jsonWriter = new JsonTextWriter(sw))
+			using (var sw = new StringWriter(sb))
+			using (var jsonWriter = new JsonTextWriter(sw))
 			{
 				jsonWriter.Formatting = Formatting.Indented;
 				jsonWriter.WriteStartObject();
@@ -108,8 +107,6 @@ namespace Nest.Resolvers.Writers
 					jsonWriter.WritePropertyName(typeName);
 					jsonWriter.WriteStartObject();
 					{
-						this.WriteRootObjectProperties(jsonWriter);
-
 						jsonWriter.WritePropertyName("properties");
 						jsonWriter.WriteStartObject();
 						{
@@ -125,83 +122,18 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
-		private void WriteRootObjectProperties(JsonWriter jsonWriter)
-		{
-			var att = this._propertyNameResolver.GetElasticPropertyFor(this._type);
-			if (att == null)
-				return;
-
-			if (!att.DateDetection)
-			{
-				jsonWriter.WritePropertyName("date_detection");
-				jsonWriter.WriteRawValue("false");
-			}
-			if (att.NumericDetection)
-			{
-				jsonWriter.WritePropertyName("numeric_detection");
-				jsonWriter.WriteRawValue("true");
-			}
-			if (!att.IndexAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("index_analyzer");
-				jsonWriter.WriteValue(att.IndexAnalyzer);
-			}
-			if (!att.SearchAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("search_analyzer");
-				jsonWriter.WriteValue(att.SearchAnalyzer);
-			}
-			if (!att.SearchAnalyzer.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("search_analyzer");
-				jsonWriter.WriteValue(att.SearchAnalyzer);
-			}
-			if (!att.ParentType.IsNullOrEmpty())
-			{
-				jsonWriter.WritePropertyName("_parent");
-				jsonWriter.WriteStartObject();
-				{
-					jsonWriter.WritePropertyName("type");
-					jsonWriter.WriteValue(att.ParentType);
-				}
-				jsonWriter.WriteEndObject();
-			}
-			if (att.DisableAllField)
-			{
-				jsonWriter.WritePropertyName("_all");
-				jsonWriter.WriteStartObject();
-				{
-					jsonWriter.WritePropertyName("enabled");
-					jsonWriter.WriteValue("false");
-				}
-				jsonWriter.WriteEndObject();
-			}
-			if (att.DynamicDateFormats != null && att.DynamicDateFormats.Any())
-			{
-				jsonWriter.WritePropertyName("dynamic_date_formats");
-				jsonWriter.WriteStartArray();
-				foreach (var d in att.DynamicDateFormats)
-				{
-					jsonWriter.WriteValue(d);
-				}
-				jsonWriter.WriteEndArray();
-
-			}
-		}
-
 		internal void WriteProperties(JsonWriter jsonWriter)
 		{
 			var properties = this._type.GetProperties();
 			foreach (var p in properties)
 			{
-				var att = this._propertyNameResolver.GetElasticProperty(p);
+				var att = ElasticAttributes.Property(p);
 				if (att != null && att.OptOut)
 					continue;
 
-				var propertyName = new PropertyNameResolver().Resolve(p);
-
+				var propertyName = this.Infer.PropertyName(p);
 				var type = GetElasticSearchType(att, p);
-
+				
 				if (type == null) //could not get type from attribute or infer from CLR type.
 					continue;
 

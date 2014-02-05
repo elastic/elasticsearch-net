@@ -26,12 +26,12 @@ namespace Nest
 		[JsonProperty(PropertyName = "_name")]
 		internal string _Name { get; set; }
 
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return this._Field.IsNullOrEmpty() || (this._From == null && this._To == null);
+				return this._Field.IsConditionless() || (this._From == null && this._To == null);
 			}
 		}
 
@@ -43,8 +43,8 @@ namespace Nest
 		}
 		public RangeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 		/// <summary>
 		/// Forces the 'To()' to be exclusive (which is inclusive by default).

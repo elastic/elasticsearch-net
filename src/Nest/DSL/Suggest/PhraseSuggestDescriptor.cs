@@ -42,8 +42,8 @@ namespace Nest
 
 		public PhraseSuggestDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 
 		public PhraseSuggestDescriptor<T> Analyzer(string analyzer)

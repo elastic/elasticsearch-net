@@ -13,9 +13,9 @@ namespace Nest
 	public class TermFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
 	{
 		[JsonProperty(PropertyName = "field")]
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<string> _Fields { get; set; }
+		internal IEnumerable<PropertyPathMarker> _Fields { get; set; }
 		[JsonProperty(PropertyName = "size")]
 		internal int? _Size { get; set; }
 		[JsonProperty(PropertyName = "shard_size")]
@@ -45,29 +45,27 @@ namespace Nest
 
 		public TermFacetDescriptor<T> OnField(string field)
 		{
-			if (this._Fields != null)
-				this._Fields = null;
+			this._Fields = null;
 			this._Field = field;
 			return this;
 		}
 		public TermFacetDescriptor<T> OnFields(params string[] fields)
 		{
-			if (this._Field != null)
-				this._Field = null;
-			this._Fields = fields;
+			this._Field = null;
+			this._Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public TermFacetDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Fields = null;
+			this._Field = objectPath;
+			return this;
 		}
 		public TermFacetDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths)
 		{
-			var fieldNames = objectPaths.Select(o => new PropertyNameResolver().Resolve(o))
-			  .ToArray();
-
-			return this.OnFields(fieldNames);
+			this._Field = null;
+			this._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			return this;
 		}
 		public TermFacetDescriptor<T> Size(int size)
 		{
@@ -141,8 +139,8 @@ namespace Nest
 		}
 		public new TermFacetDescriptor<T> Nested(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.Nested(fieldName);
+			this._Nested = objectPath;
+			return this;
 		}
 		public new TermFacetDescriptor<T> Scope(string scope)
 		{

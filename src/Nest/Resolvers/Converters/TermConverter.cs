@@ -7,45 +7,20 @@ using Newtonsoft.Json;
 
 namespace Nest.Resolvers.Converters
 {
-	public class TermConverter : JsonConverter
+	public class ICustomJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(Term).IsAssignableFrom(objectType);
+			return true; //only to be used with attribute or contract registration.
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var term = value as Term;
-			if (term != null)
-			{
-				writer.WriteStartObject();
-				writer.WritePropertyName(term.Field);
-				writer.WriteStartObject();
+			var custom = value as ICustomJson;
+			if (custom == null)
+				return;
 
-				writer.WritePropertyName("value");
-				writer.WriteValue(term.Value);
-
-				if (term.Boost.HasValue)
-				{
-					writer.WritePropertyName("boost");
-					writer.WriteValue(term.Boost.Value);
-				}
-				var multiTerm = value as IMultiTermQuery;
-				if (multiTerm != null)
-				{
-					if (multiTerm.Rewrite.HasValue)
-					{
-						writer.WritePropertyName("rewrite");
-						writer.WriteValue(Enum.GetName(typeof(RewriteMultiTerm), multiTerm.Rewrite.Value));
-					}
-				}
-
-
-				writer.WriteEndObject();
-				writer.WriteEndObject();
-			}
-			else
-				writer.WriteNull();
+			var json = custom.GetCustomJson();
+			serializer.Serialize(writer, json);
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

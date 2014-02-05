@@ -8,11 +8,8 @@ namespace Nest
 {
 	public class IPMapping : IElasticType
 	{
-		[JsonIgnore]
-		public TypeNameMarker TypeNameMarker { get; set; }
-
-    [JsonProperty(PropertyName = "name")]
-    public string Name { get; set; }
+		[JsonProperty(PropertyName = "name")]
+		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
@@ -20,8 +17,8 @@ namespace Nest
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "ip" }; } }
 
-    [JsonProperty("similarity")]
-    public string Similarity { get; set; }
+		[JsonProperty("similarity")]
+		public string Similarity { get; set; }
 
 		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; set; }

@@ -219,11 +219,11 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "sort")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> _Sort { get; set; }
+		internal IDictionary<PropertyPathMarker, object> _Sort { get; set; }
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
+		internal IDictionary<PropertyPathMarker, FacetDescriptorsBucket<T>> _Facets { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]
 		internal IDictionary<string, object> _Suggest { get; set; }
@@ -271,7 +271,7 @@ namespace Nest
 		internal BaseFilter _Filter { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		internal IList<string> _Fields { get; set; }
+		internal IList<PropertyPathMarker> _Fields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -443,8 +443,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			var pr = new PropertyNameResolver();
-			this._Fields = expressions.Select(pr.Resolve).ToList();
+			this._Fields = expressions.Select(e => (PropertyPathMarker) e).ToList();
 			return this;
 		}
 		/// <summary>
@@ -453,7 +452,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
 		{
-			this._Fields = fields;
+			this._Fields = fields.Select(f => (PropertyPathMarker) f).ToList();
 			return this;
 		}
 
@@ -463,7 +462,7 @@ namespace Nest
 		{
 			scriptFields.ThrowIfNull("scriptFields");
 			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
-			if (scriptFieldDescriptors == null || !scriptFieldDescriptors.Any(d => d.Value != null))
+			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 			{
 				this._ScriptFields = null;
 				return this;
@@ -514,18 +513,9 @@ namespace Nest
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
-			var resolver = new PropertyNameResolver();
-			var fieldName = resolver.Resolve(objectPath);
-
-			var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
-			if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
-			{
-				fieldName += ".sort";
-			}
-
-			this._Sort.Add(fieldName, "asc");
+			this._Sort.Add(objectPath, "asc");
 			return this;
 		}
 		/// <summary>
@@ -539,18 +529,9 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
-			var resolver = new PropertyNameResolver();
-			var fieldName = resolver.Resolve(objectPath);
-
-			var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
-			if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
-			{
-				fieldName += ".sort";
-			}
-
-			this._Sort.Add(fieldName, "desc");
+			this._Sort.Add(objectPath, "desc");
 			return this;
 		}
 		/// <summary>
@@ -564,7 +545,7 @@ namespace Nest
 		public SearchDescriptor<T> SortAscending(string field)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 			this._Sort.Add(field, "asc");
 			return this;
 		}
@@ -579,7 +560,7 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(string field)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			this._Sort.Add(field, "desc");
 			return this;
@@ -591,7 +572,7 @@ namespace Nest
 		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = new SortDescriptor<T>();
@@ -606,7 +587,7 @@ namespace Nest
 		public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = new SortGeoDistanceDescriptor<T>();
@@ -621,7 +602,7 @@ namespace Nest
 		public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = new SortScriptDescriptor<T>();
@@ -633,7 +614,7 @@ namespace Nest
 		private SearchDescriptor<T> _Facet<F>(
 			string name,
 			Func<F, F> facet,
-			Func<F, string> inferedFieldNameSelector,
+			Func<F, PropertyPathMarker> inferedFieldNameSelector,
 			Action<FacetDescriptorsBucket<T>, F> fillBucket
 			)
 			where F : new()
@@ -643,12 +624,12 @@ namespace Nest
 			fillBucket.ThrowIfNull("fillBucket");
 
 			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
 
 			var descriptor = new F();
 			var f = facet(descriptor);
 			var key = string.IsNullOrWhiteSpace(name) ? inferedFieldNameSelector(descriptor) : name;
-			if (string.IsNullOrWhiteSpace(key))
+			if (key.IsConditionless())
 			{
 				throw new DslException(
 					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
@@ -846,7 +827,7 @@ namespace Nest
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
 			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
 
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
@@ -865,7 +846,7 @@ namespace Nest
 			filterSelector.ThrowIfNull("filterSelector");
 
 			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
 
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);

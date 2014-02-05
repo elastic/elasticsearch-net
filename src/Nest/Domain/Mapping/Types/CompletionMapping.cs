@@ -10,10 +10,7 @@ namespace Nest
     public class CompletionMapping : IElasticType
     {
         [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonIgnore]
-        public TypeNameMarker TypeNameMarker { get; set; }
+        public PropertyNameMarker Name { get; set; }
 
         [JsonProperty("type")]
         public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "completion" }; } }

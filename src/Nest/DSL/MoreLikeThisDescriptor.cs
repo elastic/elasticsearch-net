@@ -18,13 +18,6 @@ namespace Nest
 	{
 		internal SearchDescriptor<T> _Search { get; set; }
 		
-		public MoreLikeThisDescriptor<T> MltFields(
-			params Expression<Func<T, object>>[] objectPaths)
-		{
-			var fieldNames = objectPaths
-				.Select(o => new PropertyNameResolver().Resolve(o));
-			return this.MltFields(fieldNames.ToArray());
-		}
 		/// <summary>
 		/// Optionally specify more search options such as facets, from/to etcetera.
 		/// </summary>

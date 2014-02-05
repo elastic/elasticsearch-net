@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -15,7 +16,7 @@ namespace Nest
 		internal string Id { get; set; }
 		
 		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<string> Fields { get; set; }
+		internal IEnumerable<PropertyPathMarker> Fields { get; set; }
 		
 		[JsonProperty(PropertyName = "_routing")]
 		internal string Routing { get; set; }

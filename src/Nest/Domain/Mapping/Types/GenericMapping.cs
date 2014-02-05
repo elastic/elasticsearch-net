@@ -13,17 +13,15 @@ namespace Nest
 	/// </summary>
 	public class GenericMapping : IElasticType, IElasticCoreType
 	{
-		[JsonIgnore]
-		public TypeNameMarker TypeNameMarker { get; set; }
 
 		[JsonProperty(PropertyName = "name")]
-		public string Name { get; set; }
+		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("type")]
 		public TypeNameMarker Type { get; set; }
 
-    [JsonProperty("similarity")]
-    public string Similarity { get; set; }
+		[JsonProperty("similarity")]
+		public string Similarity { get; set; }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.

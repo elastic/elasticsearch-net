@@ -18,14 +18,12 @@ namespace Nest
 	{
 		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(() => new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 		private readonly IConnectionSettings _settings;
-		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
 
 		public ElasticSerializer(IConnectionSettings settings)
 		{
 			this._settings = settings;
 			this._serializationSettings = this.CreateSettings();
-			this._propertyNameResolver = new PropertyNameResolver();
 		}
 
 		/// <summary>
@@ -51,7 +49,6 @@ namespace Nest
 				return null;
 			baseResponse.IsValid = isValid;
 			baseResponse.ConnectionStatus = status;
-			baseResponse.PropertyNameResolver = this._propertyNameResolver;
 			return r;
 		}
 

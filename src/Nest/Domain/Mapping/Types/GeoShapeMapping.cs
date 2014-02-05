@@ -9,18 +9,15 @@ namespace Nest
 {
 	public class GeoShapeMapping : IElasticType
 	{
-		[JsonIgnore]
-		public TypeNameMarker TypeNameMarker { get; set; }
-
-    [JsonProperty(PropertyName = "name")]
-    public string Name { get; set; }
+		[JsonProperty(PropertyName = "name")]
+		public PropertyNameMarker Name { get; set; }
 
 		private TypeNameMarker __type;
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return (TypeNameMarker)(__type ?? "point"); } set { __type = value; } }
 
-    [JsonProperty("similarity")]
-    public string Similarity { get; set; }
+		[JsonProperty("similarity")]
+		public string Similarity { get; set; }
 
 		[JsonProperty("tree"), JsonConverter(typeof(StringEnumConverter))]
 		public GeoTree? Tree { get; set; }

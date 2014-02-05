@@ -15,7 +15,7 @@ namespace Nest
 		TypeNameMarker ISimpleGetDescriptor._Type { get; set; }
 		string ISimpleGetDescriptor._Id { get; set; }
 		string ISimpleGetDescriptor._Routing { get; set; }
-		IList<string> ISimpleGetDescriptor._Fields { get; set; }
+		IList<PropertyPathMarker> ISimpleGetDescriptor._Fields { get; set; }
 		Type ISimpleGetDescriptor._ClrType { get { return typeof(T); } }
 
 
@@ -73,8 +73,7 @@ namespace Nest
 		/// </summary>
 		public SimpleGetDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			var pr = new PropertyNameResolver();
-			((ISimpleGetDescriptor)this)._Fields = expressions.Select(pr.Resolve).ToList();
+			((ISimpleGetDescriptor) this)._Fields = expressions.Select(e => (PropertyPathMarker) e).ToList();
 			return this;
 		}
 
@@ -84,7 +83,7 @@ namespace Nest
 		/// </summary>
 		public SimpleGetDescriptor<T> Fields(params string[] fields)
 		{
-			((ISimpleGetDescriptor)this)._Fields = fields;
+			((ISimpleGetDescriptor) this)._Fields = fields.Select(f => (PropertyPathMarker) f).ToList();
 			return this;
 		}
 	}

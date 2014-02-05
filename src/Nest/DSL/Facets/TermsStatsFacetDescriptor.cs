@@ -16,10 +16,10 @@ namespace Nest
 		internal IEnumerable<string> _Fields { get; set; }
 
 		[JsonProperty(PropertyName = "key_field")]
-		internal string _KeyField { get; set; }
+		internal PropertyPathMarker _KeyField { get; set; }
 
 		[JsonProperty(PropertyName = "value_field")]
-		internal string _ValueField { get; set; }
+		internal PropertyPathMarker _ValueField { get; set; }
 
 		[JsonProperty(PropertyName = "key_script")]
 		internal string _KeyScript { get; set; }
@@ -44,8 +44,8 @@ namespace Nest
 		public TermsStatsFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.KeyField(fieldName);
+			this._KeyField = objectPath;
+			return this;
 		}
 		public TermsStatsFacetDescriptor<T> KeyField(string keyField)
 		{
@@ -62,8 +62,8 @@ namespace Nest
 		public TermsStatsFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.ValueField(fieldName);
+			this._ValueField = objectPath;
+			return this;
 		}
 		public TermsStatsFacetDescriptor<T> ValueField(string valueField)
 		{

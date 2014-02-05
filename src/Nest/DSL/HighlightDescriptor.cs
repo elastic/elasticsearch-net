@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -37,7 +38,7 @@ namespace Nest
 
     [JsonProperty(PropertyName = "fields")]
 	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-	internal Dictionary<string, HighlightFieldDescriptor<T>> _Fields { get; set; }
+	internal Dictionary<PropertyPathMarker, HighlightFieldDescriptor<T>> _Fields { get; set; }
 
     [JsonProperty("require_field_match")]
     internal bool? _RequireFieldMatch { get; set; }
@@ -56,11 +57,11 @@ namespace Nest
         selector(filter);
         descriptors.Add(filter);
       }
-      this._Fields = new Dictionary<string, HighlightFieldDescriptor<T>>();
+      this._Fields = new Dictionary<PropertyPathMarker, HighlightFieldDescriptor<T>>();
       foreach (var d in descriptors)
       {
         var key = d._Field;
-        if (string.IsNullOrEmpty(key))
+        if (key == null)
           throw new DslException("Could not infer key for highlight field descriptor");
 
         this._Fields.Add(key, d);

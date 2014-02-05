@@ -19,7 +19,5 @@ namespace Nest
 		}
 		public virtual bool IsValid { get; internal set; }
 		public ConnectionStatus ConnectionStatus { get; internal set; }
-
-		internal PropertyNameResolver PropertyNameResolver { get; set; }
 	}
 }

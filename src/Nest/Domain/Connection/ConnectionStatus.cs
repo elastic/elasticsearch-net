@@ -24,15 +24,14 @@ namespace Nest
 		public string Result { get; internal set; }
 		public string Request { get; internal set; }
 		public ElasticSerializer Serializer { get; private set; }
+		public ElasticInferrer Infer { get; private set; }
 
 		//TODO probably nicer if we make this factory ConnectionStatus.Error() and ConnectionStatus.Valid()
 		//and make these constructors private.
 		private ConnectionStatus(IConnectionSettings settings)
 		{
-			if (settings != null)
-			{
-				this.Serializer = new ElasticSerializer(settings);
-			}
+			this.Serializer = new ElasticSerializer(settings);
+			this.Infer = new ElasticInferrer(settings);
 		}
 
 		public ConnectionStatus(IConnectionSettings settings, Exception e) : this(settings)

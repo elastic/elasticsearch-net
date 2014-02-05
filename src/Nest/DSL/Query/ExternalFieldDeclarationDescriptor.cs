@@ -18,7 +18,7 @@ namespace Nest
 		[JsonProperty("id")]
 		public string _Id { get; set; }
 		[JsonProperty("path")]
-		public string _Path { get; set; }
+		public PropertyPathMarker _Path { get; set; }
 
 		public ExternalFieldDeclarationDescriptor()
 		{
@@ -53,8 +53,7 @@ namespace Nest
 		}
 		public ExternalFieldDeclarationDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			this._Path = fieldName;
+			this._Path = objectPath;
 			return this;
 		}
 	}

@@ -12,7 +12,6 @@ namespace Nest.Resolvers
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
-
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
 			Func<T, string> idSelector = (@object) => this.GetIdFor(@object);
@@ -67,7 +66,7 @@ namespace Nest.Resolvers
 		{
 			// if the type specifies through ElasticAttribute what the id prop is 
 			// use that no matter what
-			var esTypeAtt = new PropertyNameResolver().GetElasticPropertyFor(type);
+			var esTypeAtt = ElasticAttributes.Type(type);
 			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
 				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
 

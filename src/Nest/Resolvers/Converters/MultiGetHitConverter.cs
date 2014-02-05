@@ -41,7 +41,9 @@ namespace Nest.Resolvers.Converters
 			var reader = tuple.Hit.CreateReader();	
 			serializer.Populate(reader, hit);
 
-			var f = new FieldSelection<T>();
+			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var settings = contract.ConnectionSettings;
+			var f = new FieldSelection<T>(settings);
 			var source = tuple.Hit["fields"];
 			if (source != null)
 			{

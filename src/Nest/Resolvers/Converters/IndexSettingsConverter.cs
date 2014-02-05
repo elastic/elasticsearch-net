@@ -92,7 +92,7 @@ namespace Nest.Resolvers.Converters
 						writer,
 						indexSettings.Mappings.ToDictionary(m =>
 						{
-							var name = contract.Infer.TypeName(m.TypeNameMarker) ?? m.Name;
+							var name = contract.Infer.PropertyName(m.Name);
 							if (name.IsNullOrEmpty())
 								throw new DslException("{0} should have a name!".F(m.GetType()));
 							return name;

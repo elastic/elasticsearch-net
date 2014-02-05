@@ -16,11 +16,12 @@ namespace Nest.Resolvers
 	//Shout out to http://tomlev2.wordpress.com/2010/10/03/entity-framework-using-include-with-lambda-expressions/
 	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.
 
-	public class PropertyNameResolver : ExpressionVisitor
+	public static class ElasticAttributes
 	{
 		private static readonly ConcurrentDictionary<Type, ElasticTypeAttribute> CachedTypeLookups =
 			new ConcurrentDictionary<Type, ElasticTypeAttribute>();
-		public IElasticPropertyAttribute GetElasticProperty(MemberInfo info)
+		
+		public static IElasticPropertyAttribute Property(MemberInfo info)
 		{
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
 			if (attributes != null && attributes.Any())
@@ -33,17 +34,17 @@ namespace Nest.Resolvers
 			return null;
 		}
 
-		public ElasticTypeAttribute GetElasticPropertyFor<T>() where T : class
+		public static ElasticTypeAttribute Type<T>() where T : class
 		{
-			return GetElasticPropertyForType(typeof(T));
+			return _Type(typeof(T));
 		}
 
-		public ElasticTypeAttribute GetElasticPropertyFor(Type type)
+		public static ElasticTypeAttribute Type(Type type)
 		{
-			return GetElasticPropertyForType(type);
+			return _Type(type);
 		}
 
-		private ElasticTypeAttribute GetElasticPropertyForType(Type type)
+		private static ElasticTypeAttribute _Type(Type type)
 		{
 			ElasticTypeAttribute attr = null;
 			if (CachedTypeLookups.TryGetValue(type, out attr))
@@ -58,18 +59,37 @@ namespace Nest.Resolvers
 			CachedTypeLookups.TryAdd(type, attr);
 			return attr;
 		}
+	}
+
+	public class PropertyNameResolver : ExpressionVisitor
+	{
+
+		private readonly IConnectionSettings _settings;
+		public PropertyNameResolver(IConnectionSettings settings)
+		{
+			//TODO remove settings for leave it in to find places its used where it shouldnt
+			_settings = settings;
+		}
 
 		public string Resolve(MemberInfo info)
 		{
+			if (info == null)
+				return null;
+
 			var name = info.Name;
 			var resolvedName = name.ToCamelCase();
-			var att = this.GetElasticProperty(info);
+			var att = ElasticAttributes.Property(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				resolvedName = att.Name;
 
 			return resolvedName;
 		}
 
+		public string ResolveToLastToken(MemberInfo info)
+		{
+			var propertyName = this.Resolve(info);
+			return propertyName == null ? null : propertyName.Split(',').Last();
+		}
 
 		public string Resolve(Expression expression)
 		{
@@ -109,7 +129,7 @@ namespace Nest.Resolvers
 				var name = expression.Member.Name;
 				var resolvedName = name.ToCamelCase();
 
-				var att = this.GetElasticProperty(expression.Member);
+				var att = ElasticAttributes.Property(expression.Member);
 				if (att != null)
 				{
 					properties.Push(att);

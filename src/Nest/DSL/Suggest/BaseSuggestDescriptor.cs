@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -8,7 +9,7 @@ namespace Nest
 		internal string _Text { get; set; }
 
 		[JsonProperty(PropertyName = "field")]
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
 		internal string _Analyzer { get; set; }

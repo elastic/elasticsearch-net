@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest.Domain.Settings;
+using Nest.Resolvers;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -76,7 +77,7 @@ namespace Nest.Tests.Integration.Indices
 
 			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
-			typeMapping.TypeNameMarker = index;
+			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
 
 			settings.Add("merge.policy.merge_factor", "10");
@@ -213,7 +214,7 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResult.Mapping;
-			typeMapping.TypeNameMarker = "mytype";
+			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
 			settings.Mappings.Add(typeMapping);
 			settings.NumberOfReplicas = 1;
@@ -310,7 +311,7 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 
 			var typeMapping = new RootObjectMapping();
-			typeMapping.TypeNameMarker = Guid.NewGuid().ToString("n");
+			typeMapping.Name = Guid.NewGuid().ToString("n");
 			var property = new MultiFieldMapping();
 
 			var primaryField = new StringMapping()
@@ -325,7 +326,7 @@ namespace Nest.Tests.Integration.Indices
 
 			property.Fields.Add("name", primaryField);
 			property.Fields.Add("name_analyzed", analyzedField);
-			typeMapping.Properties = typeMapping.Properties ?? new Dictionary<string, IElasticType>();
+			typeMapping.Properties = typeMapping.Properties ?? new Dictionary<PropertyNameMarker, IElasticType>();
 			typeMapping.Properties.Add("name", property);
 
 			var settings = new IndexSettings();
@@ -341,7 +342,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.OK);
 
 			var inferrer = new ElasticInferrer(this._settings);
-			var typeName = inferrer.TypeName(typeMapping.TypeNameMarker);
+			var typeName = inferrer.TypeName(typeMapping.Name.Type);
 			Assert.IsNotNull(this._client.GetMapping(gm=>gm.Index(indexName).Type(typeName)));
 
 			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));

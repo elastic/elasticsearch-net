@@ -43,31 +43,29 @@ namespace Nest
 			return this;
 		}
 		</text>
-		if (mm == "Fields")
+		if (mm.ToLowerInvariant().Contains("fields") && t.Contains("string"))
 		 {
 			<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) Fields@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") typedPathLookups) @Raw(typed ? "" : "where T : class")
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") typedPathLookups) @Raw(typed ? "" : "where T : class")
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			var pr = new PropertyNameResolver();
-			this._QueryString.Fields(typedPathLookups.Select(pr.Resolve).ToArray());
+			this._QueryString._@(mm)(typedPathLookups);
 			return this;
 		}
 			</text>
 
 		 }
-		  if (mm == "Field")
+		 else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
 		 {
 			<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) Field@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") typedPathLookup) @Raw(typed ? "" : "where T : class")
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") typedPathLookup) @Raw(typed ? "" : "where T : class")
 		{
 			typedPathLookup.ThrowIfNull("typedPathLookup");
-			var pr = new PropertyNameResolver();
-			this._QueryString.Field(pr.Resolve(typedPathLookup));
+			this._QueryString._@(mm)(typedPathLookup);
 			return this;
 		}
 			</text>
