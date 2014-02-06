@@ -23,9 +23,6 @@ namespace Nest.Tests.Unit.Core.Map
 			//most of these merely specify the defaults and are superfluous
 			//No asserts just a global overview of what the fluent mapping is capable off.
 			
-			//TODO unit and integration tests for individual pieces!
-
-
 			var result = this._client.Map<ElasticSearchProject>(m => m
 				.Type("elasticsearchprojects2")
 				.Indices("nest_test_data", "nest_test_data_clone")

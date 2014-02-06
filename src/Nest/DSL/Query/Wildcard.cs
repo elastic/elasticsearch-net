@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ICustomJsonConverter))]
+	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class Wildcard : Term, IQuery, IMultiTermQuery, ICustomJson
 	{

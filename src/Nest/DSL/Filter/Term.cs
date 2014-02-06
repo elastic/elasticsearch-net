@@ -10,7 +10,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ICustomJsonConverter))]
+	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class TermFilter : BaseFilter, ICustomJson
 	{

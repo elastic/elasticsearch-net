@@ -33,9 +33,6 @@ namespace Nest.Resolvers.Converters
 			return new WarmerMapping
 			{
 				Types = types, 
-				//TODO source here was a string representation of the query
-				//See if we can do this differently 
-				//Source = source
 			};
 		}
 

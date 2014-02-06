@@ -11,7 +11,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest.DSL.Descriptors
 {
-	[JsonConverter(typeof(ICustomJsonConverter))]
+	[JsonConverter(typeof(CustomJsonConverter))]
 	public class SortGeoDistanceDescriptor<T> : ICustomJson where T : class
 	{
 		internal PropertyPathMarker _Field { get; set; }

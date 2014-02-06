@@ -57,8 +57,6 @@ namespace Nest
 			//special _percolator index where the passed index is actually a type
 			//the name is actually the id, we rectify that here
 
-			//TODO Make this an alias to IndexDescriptor so we can this._QueryString
-
 			var pathInfo = base.ToPathInfo<IndexQueryString>(settings, new IndexQueryString());
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Type = pathInfo.Index;

@@ -68,19 +68,5 @@ namespace Nest.Tests.Integration.Search.SearchType
 			Assert.True(queryResults.Documents.Any());
 		}
 
-		//TODO move to factory test project
-
-		//[Test]
-		//public void SearchDfsQueryThenFetchUsingFactory()
-		//{
-		//	var sb = SearchBuilder.Builder()
-		//		.From(0)
-		//		.Size(10)
-		//		.Field("name")
-		//		.Query(QueryFactory.MatchAllQuery());
-		//	var queryResults = this._client.Search<ElasticSearchProject>(sb, searchType: Nest.SearchType.DfsQueryAndFetch);
-		//	Assert.True(queryResults.IsValid);
-		//	Assert.True(queryResults.Documents.Any());
-		//}
 	}
 }

@@ -4,19 +4,19 @@ using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Search.Facets
 {
-    [TestFixture]
-    public class HistogramFacetJson
-    {
-        [Test]
-        public void HistogramTest()
-        {
-            var s = new SearchDescriptor<ElasticSearchProject>()
-                .From(0)
-                .Size(10)
-                .QueryRaw(@"{ raw : ""query""}")
-                .FacetHistogram(h => h.OnField(f => f.LOC).Interval(100));
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{ from: 0, size: 10, 
+	[TestFixture]
+	public class HistogramFacetJson
+	{
+		[Test]
+		public void HistogramTest()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.QueryRaw(@"{ raw : ""query""}")
+				.FacetHistogram(h => h.OnField(f => f.LOC).Interval(100));
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""loc"" :  {
                 histogram : {
@@ -26,23 +26,23 @@ namespace Nest.Tests.Unit.Search.Facets
             }
           }, query : { raw : ""query""}
       }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void HistogramTestKeyField()
-        {
-            var s = new SearchDescriptor<ElasticSearchProject>()
-                .From(0)
-                .Size(10)
-                .QueryRaw(@"{ raw : ""query""}")
-                .FacetHistogram("needs_a_name", h => h
-                                                         .KeyField("key_field_name")
-                                                         .ValueField("value_field_name")
-                                                         .Interval(100)
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{ from: 0, size: 10, 
+		[Test]
+		public void HistogramTestKeyField()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.QueryRaw(@"{ raw : ""query""}")
+				.FacetHistogram("needs_a_name", h => h
+														 .KeyField("key_field_name")
+														 .ValueField("value_field_name")
+														 .Interval(100)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {
                 histogram : {
@@ -53,23 +53,23 @@ namespace Nest.Tests.Unit.Search.Facets
             }
           }, query : { raw : ""query""}
       }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void HistogramTestKeyScript()
-        {
-            var s = new SearchDescriptor<ElasticSearchProject>()
-                .From(0)
-                .Size(10)
-                .QueryRaw(@"{ raw : ""query""}")
-                .FacetHistogram("needs_a_name", h => h
-                                                         .KeyScript("doc['date'].date.minuteOfHour")
-                                                         .ValueScript("doc['num1'].value")
-                                                         .Interval(100)
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{ from: 0, size: 10, 
+		[Test]
+		public void HistogramTestKeyScript()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.QueryRaw(@"{ raw : ""query""}")
+				.FacetHistogram("needs_a_name", h => h
+														 .KeyScript("doc['date'].date.minuteOfHour")
+														 .ValueScript("doc['num1'].value")
+														 .Interval(100)
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {
                 histogram : {
@@ -80,28 +80,28 @@ namespace Nest.Tests.Unit.Search.Facets
             }
           }, query : { raw : ""query""}
       }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void HistogramTestKeyScriptParams()
-        {
-            var s = new SearchDescriptor<ElasticSearchProject>()
-                .From(0)
-                .Size(10)
-                .QueryRaw(@"{ raw : ""query""}")
-                .FacetHistogram("needs_a_name", h => h
-                                                         .KeyScript("doc['date'].date.minuteOfHour * factor1")
-                                                         .ValueScript("doc['num1'].value * factor2")
-                                                         .Interval(100)
-                                                         .Params(p => p
-                                                                          .Add("factor1", 2)
-                                                                          .Add("factor2", 3)
-                                                                          .Add("randomString", "stringy")
-                                                         )
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{ from: 0, size: 10, 
+		[Test]
+		public void HistogramTestKeyScriptParams()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.QueryRaw(@"{ raw : ""query""}")
+				.FacetHistogram("needs_a_name", h => h
+														 .KeyScript("doc['date'].date.minuteOfHour * factor1")
+														 .ValueScript("doc['num1'].value * factor2")
+														 .Interval(100)
+														 .Params(p => p
+																		  .Add("factor1", 2)
+																		  .Add("factor2", 3)
+																		  .Add("randomString", "stringy")
+														 )
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""needs_a_name"" :  {
                 histogram : {
@@ -117,19 +117,19 @@ namespace Nest.Tests.Unit.Search.Facets
             }
           }, query : { raw : ""query""}
       }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void HistogramTestTimeInterval()
-        {
-            var s = new SearchDescriptor<ElasticSearchProject>()
-                .From(0)
-                .Size(10)
-                .QueryRaw(@"{ raw : ""query""}")
-                .FacetHistogram(h => h.OnField(f => f.StartedOn).TimeInterval("1.5h"));
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{ from: 0, size: 10, 
+		[Test]
+		public void HistogramTestTimeInterval()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.QueryRaw(@"{ raw : ""query""}")
+				.FacetHistogram(h => h.OnField(f => f.StartedOn).TimeInterval("1.5h"));
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
                 histogram : {
@@ -139,22 +139,22 @@ namespace Nest.Tests.Unit.Search.Facets
             }
           }, query : { raw : ""query""}
       }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-        [Test]
-        public void HistogramTestTimeSpanInterval()
-        {
-            var s = new SearchDescriptor<ElasticSearchProject>()
-                .From(0)
-                .Size(10)
-                .QueryRaw(@"{ raw : ""query""}")
-                .FacetHistogram(h => h
-                                         .OnField(f => f.StartedOn)
-                                         .TimeInterval(TimeSpan.FromHours(1.5))
-                );
-            var json = TestElasticClient.Serialize(s);
-            var expected = @"{ from: 0, size: 10, 
+		[Test]
+		public void HistogramTestTimeSpanInterval()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.QueryRaw(@"{ raw : ""query""}")
+				.FacetHistogram(h => h
+					.OnField(f => f.StartedOn)
+					.TimeInterval(TimeSpan.FromHours(1.5))
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, 
           facets :  {
             ""startedOn"" :  {
                 histogram : {
@@ -164,8 +164,8 @@ namespace Nest.Tests.Unit.Search.Facets
             }
           }, query : { raw : ""query""}
       }";
-            Assert.True(json.JsonEquals(expected), json);
-        }
+			Assert.True(json.JsonEquals(expected), json);
+		}
 
-    }
+	}
 }

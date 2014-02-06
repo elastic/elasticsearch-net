@@ -16,8 +16,6 @@ namespace Nest
 		, IPathInfo<AnalyzeQueryString>
 	{
 
-		//TODO add Field() with expression support
-
 		ElasticSearchPathInfo<AnalyzeQueryString> IPathInfo<AnalyzeQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<AnalyzeQueryString>(settings, this._QueryString);
