@@ -20,32 +20,6 @@ namespace Nest.Tests.Integration.Reproduce
 		[ElasticType(IdProperty = "IndexId")]
 		public class IndexableEvent: BaseElasticIndexablePage
 		{
-
-			public string Title { get; set; }
-
-			public DateTime StartDate { get; set; }
-
-			public DateTime EndDate { get; set; }
-
-			public string EventTypeGuid { get; set; }
-
-			public string Location { get; set; }
-
-			public string LocationDetails { get; set; }
-
-			public string Link { get; set; }
-
-			public string Logo { get; set; }
-
-			public string Notice { get; set; }
-
-			public string Image { get; set; }
-
-			public string EventCategoryGuid { get; set; }
-
-			//public string EventCategoryName { get; set; }
-
-			public string PageTagging { get; set; }
 		}
 
 		[ElasticType(IdProperty = "ContentGuid")]
