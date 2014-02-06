@@ -50,10 +50,23 @@ namespace Nest
 		internal IDictionary<string, object> FieldValues
 		{
 			get { return _fieldValues; }
-			set { _fieldValues = value; Fields = new FieldSelection<T>(value); }
+			set { _fieldValues = value; }
 		}
 
-		public FieldSelection<T> Fields { get; private set; }
+		private FieldSelection<T> _fields = null; 
+		public FieldSelection<T> Fields
+		{
+			get
+			{
+				if (_fields != null)
+					return _fields;
+
+				if (this.ConnectionStatus == null)
+					return null;
+				_fields = new FieldSelection<T>(settings, FieldValues);
+				return _fields;
+			}
+		}
 
 		public K FieldValue<K>(Expression<Func<T, object>> objectPath)
 		{

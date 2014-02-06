@@ -342,7 +342,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.IsTrue(response.OK);
 
 			var inferrer = new ElasticInferrer(this._settings);
-			var typeName = inferrer.TypeName(typeMapping.Name.Type);
+			var typeName = inferrer.PropertyName(typeMapping.Name);
 			Assert.IsNotNull(this._client.GetMapping(gm=>gm.Index(indexName).Type(typeName)));
 
 			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));

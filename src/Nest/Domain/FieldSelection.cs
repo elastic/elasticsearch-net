@@ -25,8 +25,9 @@ namespace Nest.Domain
 		}
 
 
-		internal FieldSelection(IDictionary<string, object> values)
+		internal FieldSelection(ElasticInferrer inferrer, IDictionary<string, object> values)
 		{
+			this.Infer = inferrer;
 			this.FieldValues = values;
 		}
 		
