@@ -10,22 +10,16 @@ namespace Nest.Resolvers
 		public string Name { get; set; }
 		public Type Type { get; set; }
 
-		public string Resolve(IConnectionSettings connectionSettings)
-		{
-			connectionSettings.ThrowIfNull("connectionSettings");
-
-			string typeName = this.Name;
-			if (this.Type == null)
-				return this.Name;
-			return new IndexNameResolver(connectionSettings).GetIndexForType(this.Type);
-		}
-
 		public static implicit operator IndexNameMarker(string typeName)
 		{
+			if (typeName == null)
+				return null;
 			return new IndexNameMarker { Name = typeName };
 		}
 		public static implicit operator IndexNameMarker(Type type)
 		{
+			if (type == null)
+				return null;
 			return new IndexNameMarker { Type = type };
 		}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -12,12 +13,12 @@ namespace Nest
 		{
 			get
 			{
-				return this.Field.IsNullOrEmpty();
+				return this.Field.IsConditionless();
 			}
 
 		}
 
 		[JsonProperty(PropertyName = "field")]
-		public string Field { get; set;}
+		public PropertyPathMarker Field { get; set;}
 	}
 }

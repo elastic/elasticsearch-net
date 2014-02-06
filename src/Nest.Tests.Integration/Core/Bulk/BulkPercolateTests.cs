@@ -13,15 +13,14 @@ namespace Nest.Tests.Integration.Core.Bulk
 			// register up some percolator queries to test matching
 			var query1 = "bulkindex-test-doc-1";
 
-			this._client.UnregisterPercolator<ElasticSearchProject>(query1);
+			this._client.UnregisterPercolator(query1, ur=>ur.Index<ElasticSearchProject>());
 
-			var perc = this._client.RegisterPercolator<ElasticSearchProject>(p => p
-				.Name(query1)
+			var perc = this._client.RegisterPercolator<ElasticSearchProject>(query1, p => p
 				.Query(q => q
 					.Term(f => f.Country, "netherlands")
 				)
-				);
-			this._client.Refresh<ElasticSearchProject>();
+			);
+			this._client.Refresh(r=>r.Index<ElasticSearchProject>());
 			var descriptor = new BulkDescriptor();
 
 			// match against any doc
@@ -35,7 +34,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 				.Object(new ElasticSearchProject { Id = 3, Country = "netherlands" })
 				);
 
-			var result = this._client.Bulk(descriptor);
+			var result = this._client.Bulk(d=>descriptor);
 
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
@@ -57,7 +56,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			indexResponses.ElementAt(1).Matches.Should().BeNull();
 
 			// cleanup
-			this._client.UnregisterPercolator<ElasticSearchProject>(query1);
+			this._client.UnregisterPercolator(query1, ur=>ur.Index<ElasticSearchProject>());
 		}
 	}
 }

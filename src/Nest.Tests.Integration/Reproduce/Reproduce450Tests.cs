@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Reproduce
 		public void MultiGetDoesNotSetId()
 		{
 			_client.DeleteByQuery<MyTestType>(q => q.MatchAll());
-			_client.Refresh<MyTestType>();
+			_client.Refresh(i=>i.Index<MyTestType>());
 			var someNewObjects = new List<MyTestType>()
 			{
 				new MyTestType(){Id="1",Data="1 Data"},
@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Reproduce
 			var indexResult = this._client.IndexMany(someNewObjects);
 			indexResult.IsValid.Should().BeTrue();
 
-			var multiGetResult = this._client.MultiGet<MyTestType>(new[] {"1", "2"});
+			var multiGetResult = this._client.SourceMany<MyTestType>(new[] {"1", "2"});
 			multiGetResult.Should().HaveCount(2);
 			multiGetResult.Should().OnlyContain(h => !h.Id.IsNullOrEmpty());
 

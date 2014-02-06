@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetSimple()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>(1);
+			var result = this._client.Get<ElasticSearchProject>(1);
 			this.DefaultAssertations(result);
 			
 			
@@ -37,14 +37,14 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetWithPathInfo()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects", 1);
+			var result = this._client.Get<ElasticSearchProject>(1, ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			this.DefaultAssertations(result);
 		}
 		
 		[Test]
 		public void GetUsingDescriptorWithTypeAndFields()
 		{
-			var result = this._client.GetFull<ElasticSearchProject>(g => g
+			var result = this._client.Get<ElasticSearchProject>(g => g
 				.Index(ElasticsearchConfiguration.DefaultIndex)
 				.Type("elasticsearchprojects")
 				.Id(1)
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Core.Get
 			result.Fields.FieldValues.Should().NotBeNull().And.HaveCount(4);
 			result.Fields.FieldValue<string>(p => p.Name).Should().Be("pyelasticsearch");
 			result.Fields.FieldValue<int>(p => p.Id).Should().Be(1);
-			result.Fields.FieldValue<double>(p => p.DoubleValue).Should().BeApproximately(31.931359384177D, 0.00000001D);
+			result.Fields.FieldValue<double>(p => p.DoubleValue).Should().NotBe(default(double));
 
 		}
 
@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetMissing()
 		{
 			int doesNotExistId = 1234567;
-			var result = this._client.GetFull<ElasticSearchProject>(doesNotExistId);
+			var result = this._client.Get<ElasticSearchProject>(doesNotExistId);
 			result.Exists.Should().BeFalse();
 		}
 	}

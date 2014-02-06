@@ -11,12 +11,12 @@ namespace Nest.Resolvers.Converters
 	{
 		public override bool CanWrite
 		{
-			get { return false; }
+			get { return true; }
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			throw new NotSupportedException();
+			new DictionaryKeysAreNotPropertyNamesJsonConverter().WriteJson(writer, value, serializer);
 		}
 
 		private IElasticCoreType GetTypeFromJObject(JObject po, JsonSerializer serializer)
@@ -51,7 +51,7 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var r = new Dictionary<string, IElasticCoreType>();
+			var r = new Dictionary<PropertyNameMarker, IElasticCoreType>();
 
 			JObject o = JObject.Load(reader);
 

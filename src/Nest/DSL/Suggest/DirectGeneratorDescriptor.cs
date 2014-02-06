@@ -9,7 +9,7 @@ namespace Nest
 	public class DirectGeneratorDescriptor<T> where T : class
 	{
 		[JsonProperty(PropertyName = "field")]
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 
 		[JsonProperty(PropertyName = "size")]
 		internal int? _Size { get; set; }
@@ -49,8 +49,8 @@ namespace Nest
 
 		public DirectGeneratorDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 
 		public DirectGeneratorDescriptor<T> Size(int size)

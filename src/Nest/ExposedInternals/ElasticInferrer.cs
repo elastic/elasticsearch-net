@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using Nest.Resolvers;
 
@@ -10,10 +13,10 @@ namespace Nest
 	{
 		private readonly IConnectionSettings _connectionSettings;
 
-		private TypeNameResolver TypeNameResolver { get; set; }
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
-
+		private TypeNameResolver TypeNameResolver { get; set; }
+		private PropertyNameResolver PropertyNameResolver { get; set; }
 		public string DefaultIndex
 		{
 			get
@@ -24,9 +27,42 @@ namespace Nest
 		public ElasticInferrer(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this.TypeNameResolver = new TypeNameResolver();
 			this.IdResolver = new IdResolver();
 			this.IndexNameResolver = new IndexNameResolver(this._connectionSettings);
+			this.TypeNameResolver = new TypeNameResolver(this._connectionSettings);
+			this.PropertyNameResolver = new PropertyNameResolver(this._connectionSettings);
+		}
+
+		public string PropertyPath(PropertyPathMarker marker)
+		{
+			if (marker.IsConditionless())
+				return null;
+			var name = !marker.Name.IsNullOrEmpty() ? marker.Name : this.PropertyNameResolver.Resolve(marker.Type);
+			if (marker.Boost.HasValue)
+				name += "^" + marker.Boost.Value.ToString(CultureInfo.InvariantCulture);
+
+			return name;
+		}
+
+		public string PropertyPath(MemberInfo member)
+		{
+			return member == null ? null : this.PropertyNameResolver.Resolve(member);
+		}
+
+		public string PropertyName(PropertyNameMarker marker)
+		{
+			if (marker.IsConditionless())
+				return null;
+			return !marker.Name.IsNullOrEmpty() 
+				? marker.Name 
+				: marker.Expression != null 
+					? this.PropertyNameResolver.ResolveToLastToken(marker.Expression)
+					: this.TypeName(marker.Type);
+		}
+		
+		public string PropertyName(MemberInfo member)
+		{
+			return member == null ? null : this.PropertyNameResolver.ResolveToLastToken(member);
 		}
 
 		public string IndexName<T>() where T : class
@@ -39,8 +75,27 @@ namespace Nest
 			return this.IndexNameResolver.GetIndexForType(type);
 		}
 
+		public string IndexName(IndexNameMarker index)
+		{
+			if (index == null)
+				return null;
+			return index.Resolve(this._connectionSettings);
+		}
+		
+		public string IndexNames(params IndexNameMarker[] indices)
+		{
+			if (indices == null) return null;
+			return string.Join(",", indices.Select(i => this.IndexNameResolver.GetIndexForType(i)));
+		}
+		
+		public string IndexNames(IEnumerable<IndexNameMarker> indices)
+		{
+			return !indices.HasAny() ? null : this.IndexNames(indices.ToArray());
+		}
+
 		public string Id<T>(T obj) where T : class
 		{
+			if (obj == null) return null;
 			return this.IdResolver.GetIdFor(obj);
 		}
 
@@ -50,7 +105,23 @@ namespace Nest
 		}
 		public string TypeName(Type t)
 		{
-			return TypeNameMarker.Create(t).Resolve(this._connectionSettings);
+			return t == null ? null : this.TypeNameResolver.GetTypeNameFor(t);
+		}
+
+		public string TypeNames(params TypeNameMarker[] typeNames)
+		{
+			return typeNames == null 
+				? null 
+				: string.Join(",", typeNames.Select(t => this.TypeNameResolver.GetTypeNameFor(t)));
+		}
+
+		public string TypeNames(IEnumerable<TypeNameMarker> typeNames)
+		{
+			return !typeNames.HasAny() ? null : this.TypeNames(typeNames.ToArray());
+		}
+		public string TypeName(TypeNameMarker type)
+		{
+			return type == null ? null : this.TypeNameResolver.GetTypeNameFor(type);
 		}
 	}
 }

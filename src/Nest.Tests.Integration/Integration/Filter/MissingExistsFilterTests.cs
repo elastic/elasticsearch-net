@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 			// missing
 			_LookFor.Name = null;
 
-			var status = this._client.Index(_LookFor, new IndexParameters { Refresh = true }).ConnectionStatus;
+			var status = this._client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
 			Assert.True(status.Success, status.Result);
 		}
 

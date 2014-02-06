@@ -11,15 +11,11 @@ namespace Nest
 	public class WarmerMapping
 	{
 
-		public WarmerMapping()
-		{
-		}
-
 		public string Name { get; internal set; }
 
 		public IEnumerable<TypeNameMarker> Types { get; internal set; }
 
-		public string Source { get; internal set; }
+		public SearchDescriptorBase Source { get; internal set; }
 
 	}
 }

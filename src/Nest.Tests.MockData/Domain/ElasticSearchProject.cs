@@ -6,14 +6,7 @@ using Nest;
 
 namespace Nest.Tests.MockData.Domain
 {
-	[ElasticType(
-		Name = "elasticsearchprojects",
-		DateDetection = true,
-		NumericDetection = true,
-		SearchAnalyzer = "standard",
-		IndexAnalyzer = "standard",
-		DynamicDateFormats = new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" }
-	)]
+	[ElasticType(Name = "elasticsearchprojects")]
 	public class ElasticSearchProject
 	{
 		public int Id { get; set;  }

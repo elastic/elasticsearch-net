@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Core.Template
 		[Test]
 		public void DefaultPath()
 		{
-			var result = this._client.PutTemplate(t=>t.Name("myTestTemplateName").Template("tmasdasda"));
+			var result = this._client.PutTemplate("myTestTemplateName", t=>t.Template("tmasdasda"));
 			Assert.NotNull(result, "PutTemplate result should not be null");
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);

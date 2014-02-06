@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 		[Test]
 		public void OptOutDuringMapping()
 		{
-			var result = this._client.MapFromAttributes<SimpleOptOutClass>();
+			var result = this._client.Map<SimpleOptOutClass>(m=>m.MapFromAttributes());
 			var call = result.ConnectionStatus.Request;
 
 			this.JsonEquals(call, MethodInfo.GetCurrentMethod());

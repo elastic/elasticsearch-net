@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Core.Map.TimestampField
 		[Test]
 		public void TimestampFieldUsingExpression()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticSearchProject>(m => m
 				.TimestampField(a => a
 					.SetPath(p => p.Name)
 					.SetDisabled()
@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Core.Map.TimestampField
 		[Test]
 		public void TimestampFieldUsingString()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticSearchProject>(m => m
 				.TimestampField(a => a
 					.SetPath("my_difficult_field_name")
 					.SetDisabled(false)

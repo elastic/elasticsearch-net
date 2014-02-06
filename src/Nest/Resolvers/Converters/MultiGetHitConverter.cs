@@ -14,7 +14,7 @@ namespace Nest.Resolvers.Converters
 		private class MultiHitTuple
 		{
 			public JToken Hit { get; set; }
-			public BaseSimpleGetDescriptor Descriptor { get; set; }
+			public ISimpleGetDescriptor Descriptor { get; set; }
 		}
 
 		private readonly MultiGetDescriptor _descriptor;
@@ -41,11 +41,12 @@ namespace Nest.Resolvers.Converters
 			var reader = tuple.Hit.CreateReader();	
 			serializer.Populate(reader, hit);
 
-			var f = new FieldSelection<T>();
+			var contract = serializer.ContractResolver as ElasticContractResolver;
+			var settings = contract.ConnectionSettings;
+			var f = new FieldSelection<T>(settings);
 			var source = tuple.Hit["fields"];
 			if (source != null)
 			{
-				f.Document = serializer.Deserialize<T>( source.CreateReader());
 				f.FieldValues = serializer.Deserialize<Dictionary<string, object>>( source.CreateReader());
 				hit.FieldSelection = f;
 			}
@@ -71,7 +72,6 @@ namespace Nest.Resolvers.Converters
 
 				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
 			}
-
 
 			var response = new MultiGetResponse();
 			var jsonObject = JObject.Load(reader);

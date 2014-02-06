@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f=>f.Name)
-				.SearchType(Nest.SearchType.Scan)
+				.SearchType(SearchTypeOptions.Scan)
 			);
 			Assert.False(queryResults.IsValid);
 			StringAssert.Contains("Scroll must be provided when scanning", queryResults.ConnectionStatus.Error.ExceptionMessage);
@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f => f.Name)
-				.SearchType(Nest.SearchType.Scan)
+				.SearchType(SearchTypeOptions.Scan)
 				.Scroll("2s")
 			);
 			Assert.True(queryResults.IsValid);

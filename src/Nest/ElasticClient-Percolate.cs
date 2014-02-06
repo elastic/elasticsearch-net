@@ -7,99 +7,81 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Unregister a percolator, on the default index.
-		/// </summary>
-		/// <param name="name">Name of the percolator</param>
-		public IUnregisterPercolateResponse UnregisterPercolator<T>(string name) where T : class
+		public IUnregisterPercolateResponse UnregisterPercolator(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
-			var index = this.Infer.IndexName<T>();
-			return this.UnregisterPercolator(index, name);
+			selector = selector ?? (s => s);
+			return this.Dispatch<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse>(
+				s => selector(s.Name(name)),
+				(p, d) => this.RawDispatch.DeleteDispatch(p),
+				allow404: true
+			);
 		}
-		/// <summary>
-		/// Unregister a percolator
-		/// </summary>
-		/// <param name="name">Name of the percolator</param>
-		public IUnregisterPercolateResponse UnregisterPercolator(string index, string name)
+		
+		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(string name, Func<UnregisterPercolatorDescriptor, UnregisterPercolatorDescriptor> selector = null)
 		{
-			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(name));
-			return this._UnregisterPercolator(path);
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<UnregisterPercolatorDescriptor, DeleteQueryString, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
+				s => selector(s.Name(name)),
+				(p, d) => this.RawDispatch.DeleteDispatchAsync(p),
+				allow404: true
+			);
 		}
-		private UnregisterPercolateResponse _UnregisterPercolator(string path)
-		{
-			var status = this.Connection.DeleteSync(path);
-			var r = this.Deserialize<UnregisterPercolateResponse>(status, allow404: true);
-			return r;
-		}
+		
 
-		public IRegisterPercolateResponse RegisterPercolator<T>(
-			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class
+		public IRegisterPercolateResponse RegisterPercolator<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) 
+			where T : class
 		{
-			var pathAndData = this._registerPercolator(percolatorSelector);
-			var status = this.Connection.PutSync(pathAndData.Path, pathAndData.Data);
-			var r = this.Deserialize<RegisterPercolateResponse>(status);
-			return r;
+			percolatorSelector.ThrowIfNull("percolatorSelector");
+			return this.Dispatch<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse>(
+				s => percolatorSelector(s.Name(name)),
+				(p, d) => this.RawDispatch.IndexDispatch(p, d._RequestBody)
+			);
 		}
-
 	
-		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(
-			Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class
+		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector) where T : class
 		{
-			var pathAndData = this._registerPercolator(percolatorSelector);
-			return this.Connection.Put(pathAndData.Path, pathAndData.Data).ContinueWith(c =>
-			{
-				var r = this.Deserialize<RegisterPercolateResponse>(c.Result);
-				return (IRegisterPercolateResponse)r;
-			});
+			percolatorSelector.ThrowIfNull("percolatorSelector");
+			return this.DispatchAsync<RegisterPercolatorDescriptor<T>, IndexQueryString, RegisterPercolateResponse, IRegisterPercolateResponse>(
+				s => percolatorSelector(s.Name(name)),
+				(p, d) => this.RawDispatch.IndexDispatchAsync(p, d._RequestBody)
+			);
 			
 		}
 
-		private PathAndData _registerPercolator<T>(Func<PercolatorDescriptor<T>, PercolatorDescriptor<T>> percolatorSelector) where T : class
+
+		public IPercolateResponse Percolate<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
+			where T : class
 		{
-			percolatorSelector.ThrowIfNull("percolatorSelector");
-
-			var descriptor = percolatorSelector(new PercolatorDescriptor<T>());
-			if (string.IsNullOrEmpty(descriptor._Name))
-				throw new Exception("A percolator needs a name");
-			var query = this.Serialize(descriptor);
-			var index = descriptor._Index ?? this.Infer.IndexName<T>();
-
-			var path = "_percolator/{0}/{1}".F(Uri.EscapeDataString(index), Uri.EscapeDataString(descriptor._Name));
-			return new PathAndData() { Path = path, Data = query };
+			return this.Percolate<T, T>(@object, percolateSelector);
 		}
 
-		public IPercolateResponse Percolate<T>(
-			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class
+		public Task<IPercolateResponse> PercolateAsync<T>(T @object, Func<PercolateDescriptor<T, T>, PercolateDescriptor<T, T>> percolateSelector = null)
+			where T : class
 		{
-			var pathAndData = this._percolate(percolateSelector);
-			var status = this.Connection.PostSync(pathAndData.Path, pathAndData.Data);
-			var r = this.Deserialize<PercolateResponse>(status);
-			return r;
+			return this.PercolateAsync<T, T>(@object, percolateSelector);
 		}
 
-		
 
-		public Task<IPercolateResponse> PercolateAsync<T>(
-			Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class
+		public IPercolateResponse Percolate<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class
 		{
-			var pathAndData = this._percolate(percolateSelector);
-			var status = this.Connection.Post(pathAndData.Path, pathAndData.Data).ContinueWith(c =>
-			{
-				var r = this.Deserialize<PercolateResponse>(c.Result);
-				return (IPercolateResponse)r;
-			});
-			return status;
+			percolateSelector = percolateSelector ?? (s => s);
+			return this.Dispatch<PercolateDescriptor<T, K>, PercolateQueryString, PercolateResponse>(
+				s => percolateSelector(s.Object(@object)),
+				(p, d) => this.RawDispatch.PercolateDispatch(p, d)
+			);
 		}
 
-		private PathAndData _percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector) where T : class
+		public Task<IPercolateResponse> PercolateAsync<T, K>(K @object, Func<PercolateDescriptor<T, K>, PercolateDescriptor<T, K>> percolateSelector = null)
+			where T : class
+			where K : class
 		{
-			var descriptor = percolateSelector(new PercolateDescriptor<T>());
-			var index = descriptor._Index ?? this.Infer.IndexName<T>();
-			var type = descriptor._Type ?? this.Infer.TypeName<T>();
-			var percolateJson = this.Serialize(descriptor);
-
-			var path = this.PathResolver.CreateIndexTypePath(index, type, "_percolate");
-			return new PathAndData() { Path = path, Data = percolateJson };
+			percolateSelector = percolateSelector ?? (s => s);
+			return this.DispatchAsync<PercolateDescriptor<T, K>, PercolateQueryString, PercolateResponse, IPercolateResponse>(
+				s => percolateSelector(s.Object(@object)),
+				(p, d) => this.RawDispatch.PercolateDispatchAsync(p, d)
+			);	
 		}
 	}
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -14,15 +16,14 @@ namespace Nest
 {
 	public class ElasticSerializer
 	{
+		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(() => new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 		private readonly IConnectionSettings _settings;
-		private readonly PropertyNameResolver _propertyNameResolver;
 		private readonly JsonSerializerSettings _serializationSettings;
 
 		public ElasticSerializer(IConnectionSettings settings)
 		{
 			this._settings = settings;
 			this._serializationSettings = this.CreateSettings();
-			this._propertyNameResolver = new PropertyNameResolver();
 		}
 
 		/// <summary>
@@ -48,7 +49,6 @@ namespace Nest
 				return null;
 			baseResponse.IsValid = isValid;
 			baseResponse.ConnectionStatus = status;
-			baseResponse.PropertyNameResolver = this._propertyNameResolver;
 			return r;
 		}
 
@@ -70,15 +70,48 @@ namespace Nest
 			return this.DeserializeInternal<T>(value, null, extraConverters, notFoundIsValidResponse);
 		}
 
+		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> originalSearchDescriptor)
+			where TResult : class
+			where T : class
+		{
+			var types = (originalSearchDescriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
+				.Where(t => t.Type != null);
+			var partialFields = originalSearchDescriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
+			if (originalSearchDescriptor._ConcreteTypeSelector == null && (
+				types.Any(t => t.Type != typeof(TResult)))
+				|| partialFields.Any())
+			{
+				var inferrer = new ElasticInferrer(this._settings);
+				var typeDictionary = types
+					.ToDictionary(inferrer.TypeName, t => t.Type);
+
+				originalSearchDescriptor._ConcreteTypeSelector = (o, h) =>
+				{
+					Type t;
+					if (!typeDictionary.TryGetValue(h.Type, out t))
+						return typeof(TResult);
+					return t;
+				};
+			}
+
+			if (originalSearchDescriptor._ConcreteTypeSelector == null)
+				return this.Deserialize<QueryResponse<TResult>>(status);
+
+			return this.DeserializeInternal<QueryResponse<TResult>>(
+				status,
+				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector, partialFields)
+			);
+		}
+
 		internal T DeserializeInternal<T>(
-			object value, 
+			object value,
 			JsonConverter piggyBackJsonConverter,
-			IList<JsonConverter> extraConverters = null, 
+			IList<JsonConverter> extraConverters = null,
 
 			bool notFoundIsValidResponse = false) where T : class
 		{
-			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null 
-				? this.CreateSettings(extraConverters, piggyBackJsonConverter) 
+			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null
+				? this.CreateSettings(extraConverters, piggyBackJsonConverter)
 				: this._serializationSettings;
 
 			var jTokenValue = value as JToken;
@@ -98,7 +131,7 @@ namespace Nest
 				? extraConverters.ToList()
 				: null;
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
-            var settings = new JsonSerializerSettings()
+			var settings = new JsonSerializerSettings()
 			{
 				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
 				DefaultValueHandling = DefaultValueHandling.Include,
@@ -106,26 +139,274 @@ namespace Nest
 				Converters = converters,
 			};
 
-            if (_settings.ModifyJsonSerializerSettings != null)
-		        _settings.ModifyJsonSerializerSettings(settings);
+			if (_settings.ModifyJsonSerializerSettings != null)
+				_settings.ModifyJsonSerializerSettings(settings);
 
-		    return settings;
+			return settings;
 		}
 
+		public string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor)
+		{
+			bulkDescriptor.ThrowIfNull("bulkDescriptor");
+			bulkDescriptor._Operations.ThrowIfEmpty("Bulk descriptor does not define any operations");
+			var sb = new StringBuilder();
+			var inferrer = new ElasticInferrer(this._settings);
 
-		
-	}
-	/// <summary>
-	/// Registerering global jsonconverters is very costly,
-	/// The best thing is to specify them as a contract (see ElasticContractResolver)
-	/// This however prevents a way to give a jsonconverter state which for some calls is needed i.e:
-	/// A multiget and multisearch need access to the descriptor that describes what types are used.
-	/// When NEST knows it has to piggyback this it has to pass serialization state it will create a new 
-	/// serializersettings object with a new contract resolver which holds this state. Its ugly but it does boost
-	/// massive performance gains.
-	/// </summary>
-	internal class JsonConverterPiggyBackState
-	{
-		public JsonConverter ActualJsonConverter { get; set; }
+			foreach (var operation in bulkDescriptor._Operations)
+			{
+				var command = operation._Operation;
+				var index = operation._Index
+					?? inferrer.IndexName(bulkDescriptor._Index)
+					?? inferrer.IndexName(operation._ClrType);
+				var typeName = operation._Type
+					?? inferrer.TypeName(bulkDescriptor._Type)
+					?? inferrer.TypeName(operation._ClrType);
+
+				var id = operation.GetIdForObject(inferrer);
+				operation._Index = index;
+				operation._Type = typeName;
+				operation._Id = id;
+
+				var opJson = this.Serialize(operation, Formatting.None);
+
+				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
+				sb.Append(action);
+
+				if (command == "index" || command == "create")
+				{
+					string jsonCommand = this.Serialize(operation._Object, Formatting.None);
+					sb.Append(jsonCommand + "\n");
+				}
+				else if (command == "update")
+				{
+					string jsonCommand = this.Serialize(operation.GetBody(), Formatting.None);
+					sb.Append(jsonCommand + "\n");
+				}
+			}
+			var json = sb.ToString();
+			return json;
+		}
+		/// <summary>
+		/// _msearch needs a specialized json format in the body
+		/// </summary>
+		public string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor)
+		{
+			var sb = new StringBuilder();
+			var inferrer = new ElasticInferrer(this._settings);
+			foreach (var operation in multiSearchDescriptor._Operations.Values)
+			{
+				var indices = inferrer.IndexNames(operation._Indices);
+				if (operation._AllIndices.GetValueOrDefault(false))
+					indices = "_all";
+
+				var index = indices 
+					?? inferrer.IndexName(multiSearchDescriptor._Index)
+					?? inferrer.IndexName(operation._ClrType);
+
+				var types = inferrer.TypeNames(operation._Types);
+				var typeName = types
+					?? inferrer.TypeName(multiSearchDescriptor._Type)
+					?? inferrer.TypeName(operation._ClrType);
+				if (operation._AllTypes.GetValueOrDefault(false))
+					typeName = null; //force empty typename so we'll query all types.
+
+				var op = new
+				{
+					index = index,
+					type = typeName,
+					search_type = this.GetSearchType(operation, multiSearchDescriptor),
+					preference = operation._Preference,
+					routing = operation._Routing
+				};
+				var opJson = this.Serialize(op, Formatting.None);
+
+				var action = "{0}\n".F(opJson);
+				sb.Append(action);
+				var searchJson = this.Serialize(operation, Formatting.None);
+				sb.Append(searchJson + "\n");
+
+			}
+			var json = sb.ToString();
+			return json;
+		}
+
+		public TemplateResponse DeserializeTemplateResponse(ConnectionStatus c, GetTemplateDescriptor d)
+		{
+			if (!c.Success) return new TemplateResponse { ConnectionStatus = c, IsValid = false };
+
+			var dict = c.Deserialize<Dictionary<string, TemplateMapping>>();
+			if (dict.Count == 0)
+				throw new DslException("Could not deserialize TemplateMapping");
+
+			return new TemplateResponse
+			{
+				ConnectionStatus = c,
+				IsValid = true,
+				Name = dict.First().Key,
+				TemplateMapping = dict.First().Value
+			};
+		}
+		public GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c)
+		{
+			var dict = c.Success
+				? c.Deserialize<Dictionary<string, RootObjectMapping>>()
+				: null;
+			return new GetMappingResponse(c, dict);
+
+		}
+
+		public MultiGetResponse DeserializeMultiGetResponse(ConnectionStatus c, MultiGetDescriptor d)
+		{
+			var multiGetHitConverter = new MultiGetHitConverter(d);
+			var multiGetResponse = this.DeserializeInternal<MultiGetResponse>(c, piggyBackJsonConverter: multiGetHitConverter);
+			return multiGetResponse;
+
+		}
+
+		public MultiSearchResponse DeserializeMultiSearchResponse(ConnectionStatus c, MultiSearchDescriptor d)
+		{
+			var multiSearchConverter = new MultiSearchConverter(this._settings, d);
+			var multiSearchResponse = this.DeserializeInternal<MultiSearchResponse>(c, piggyBackJsonConverter: multiSearchConverter);
+			return multiSearchResponse;
+
+		}
+
+		public WarmerResponse DeserializeWarmerResponse(ConnectionStatus connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
+		{
+			if (!connectionStatus.Success)
+				return new WarmerResponse() { ConnectionStatus = connectionStatus, IsValid = false };
+
+			var dict = connectionStatus.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>>();
+			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
+			foreach (var kv in dict)
+			{
+				var indexDict = kv.Value;
+				Dictionary<string, WarmerMapping> warmers;
+				if (indexDict == null || !indexDict.TryGetValue("warmers", out warmers) || warmers == null)
+					continue;
+				foreach (var kvW in warmers)
+				{
+					kvW.Value.Name = kvW.Key;
+				}
+				indices.Add(kv.Key, warmers);
+			}
+
+			return new WarmerResponse
+			{
+				ConnectionStatus = connectionStatus,
+				IsValid = true,
+				Indices = indices
+			};
+		}
+		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
+		{
+			if (descriptor._SearchType != null)
+			{
+				switch (descriptor._SearchType.Value)
+				{
+					case SearchTypeOptions.Count:
+						return "count";
+					case SearchTypeOptions.DfsQueryThenFetch:
+						return "dfs_query_then_fetch";
+					case SearchTypeOptions.DfsQueryAndFetch:
+						return "dfs_query_and_fetch";
+					case SearchTypeOptions.QueryThenFetch:
+						return "query_then_fetch";
+					case SearchTypeOptions.QueryAndFetch:
+						return "query_and_fetch";
+					case SearchTypeOptions.Scan:
+						return "scan";
+				}
+			}
+			return multiSearchDescriptor._QueryString.ContainsKey("search_type")
+				? multiSearchDescriptor._QueryString._QueryStringDictionary["search_type"] as string
+				: null;
+		}
+
+		public IndexSettingsResponse DeserializeIndexSettingsResponse(ConnectionStatus status)
+		{
+			var response = new IndexSettingsResponse { IsValid = false };
+			try
+			{
+				var settingsContainer = SettingsContainer(status);
+				response.Settings = this.Deserialize<IndexSettings>(settingsContainer);
+				response.IsValid = true;
+			}
+			// ReSharper disable once EmptyGeneralCatchClause
+			catch
+			{
+			}
+			response.ConnectionStatus = status;
+			return response;
+		}
+
+		//TODO although this gets the job done this looks a bit iffy, refactor
+		private JObject SettingsContainer(ConnectionStatus status)
+		{
+			var o = JObject.Parse(status.Result);
+			var settingsObject = o.First.First.First.First;
+
+			var settingsContainer = new JObject();
+			// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
+			foreach (JProperty s in settingsObject.Children<JProperty>())
+			{
+				var name = StripIndex.Value.Replace(s.Name, "");
+				if (name.StartsWith("analysis."))
+				{
+					var keys = name.Split('.');
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, keys, s.Value);
+				}
+				else if (name.StartsWith("similarity."))
+				{
+					var keys = name.Split('.');
+					var similaryKeys = new[] { keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray()) };
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
+				}
+				else
+				{
+					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] { name }, s.Value);
+				}
+			}
+			return settingsContainer;
+		}
+
+		/// <summary>
+		/// Rewrites the index settings response to index settings json.
+		/// </summary>
+		/// <param name="container">The container.</param>
+		/// <param name="key">The key.</param>
+		/// <param name="value">The value.</param>
+		private void RewriteIndexSettingsResponseToIndexSettingsJSon(JContainer container, string[] key, JToken value)
+		{
+			var thisKey = key.First();
+			int indexer;
+
+			if (key.Length > 2 || (key.Length == 2 && !int.TryParse(key.Last(), out indexer)))
+			{
+				var property = (JContainer)((JObject)container).GetValue(thisKey);
+				if (property == null)
+				{
+					property = new JObject();
+					((JObject)container).Add(thisKey, property);
+				}
+				RewriteIndexSettingsResponseToIndexSettingsJSon(property, key.Skip(1).ToArray(), value);
+			}
+			else if (key.Length == 2 && int.TryParse(key.Last(), out indexer))
+			{
+				var property = ((JObject)container).Property(thisKey);
+				if (property == null)
+				{
+					property = new JProperty(thisKey, new JArray());
+					container.Add(property);
+				}
+				var jArray = (JArray)property.Value;
+				jArray.Add(value);
+			}
+			else
+			{
+				var property = new JProperty(thisKey, value);
+				container.Add(property);
+			}
+		}
 	}
 }

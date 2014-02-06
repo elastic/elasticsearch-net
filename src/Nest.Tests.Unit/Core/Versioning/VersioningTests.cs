@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Core.Versioning
 		public void IndexSupportsVersioning()
 		{
 			var o = new ElasticSearchProject { Id = 1, Name = "Test" };
-			var result = this._client.Index(o, new IndexParameters { Version = "1" });
+			var result = this._client.Index(o, i=>i.Version(1));
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("version=1", status.RequestUrl);
 		}
@@ -29,16 +29,7 @@ namespace Nest.Tests.Unit.Core.Versioning
         public void IndexOpTypeDefault()
         {
             var o = new ElasticSearchProject { Id = 1, Name = "Test" };
-            var result = this._client.Index(o, new IndexParameters());
-            var status = result.ConnectionStatus;
-            StringAssert.DoesNotContain("op_type=create", status.RequestUrl);
-        }
-
-        [Test]
-        public void IndexOpTypeNone()
-        {
-            var o = new ElasticSearchProject { Id = 1, Name = "Test" };
-            var result = this._client.Index(o, new IndexParameters { OpType = OpType.None });
+            var result = this._client.Index(o);
             var status = result.ConnectionStatus;
             StringAssert.DoesNotContain("op_type=create", status.RequestUrl);
         }
@@ -47,7 +38,7 @@ namespace Nest.Tests.Unit.Core.Versioning
         public void IndexOpTypeCreate()
         {
             var o = new ElasticSearchProject { Id = 1, Name = "Test" };
-            var result = this._client.Index(o, new IndexParameters { OpType = OpType.Create });
+            var result = this._client.Index(o, i => i.OpType(OpTypeOptions.Create));
             var status = result.ConnectionStatus;
             StringAssert.Contains("op_type=create", status.RequestUrl);
         }

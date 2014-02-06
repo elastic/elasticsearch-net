@@ -10,8 +10,10 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestValidation()
 		{
-			var response = this._client.Validate<ElasticSearchProject>(q=>q
-				.Term(f=>f.Country, "netherlands")
+			var response = this._client.Validate<ElasticSearchProject>(v=>v
+				.Query(q=>q
+					.Term(f=>f.Country, "netherlands")
+				)
 			);
 			Assert.NotNull(response);
 			Assert.True(response.IsValid);
@@ -22,7 +24,7 @@ namespace Nest.Tests.Integration.Core
 		{
 			var response = this._client.Validate<ElasticSearchProject>(q => q
 				.Explain()
-				.UseSimpleQueryString("loc:asdasd")
+				.Q("loc:asdasd")
 			);
 			Assert.NotNull(response);
 			Assert.True(response.IsValid);

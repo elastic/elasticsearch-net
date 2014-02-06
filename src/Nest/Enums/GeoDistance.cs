@@ -8,10 +8,11 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-  public enum GeoDistance
-  {
-    arc,
-    plane,
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum GeoDistance
+	{
+		arc,
+		plane,
 		factor
-  }
+	}
 }

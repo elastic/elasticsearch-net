@@ -20,8 +20,7 @@ namespace ProtocolLoadTest
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new UriBuilder("http", host, port).Uri;
-			return new ConnectionSettings(uri)
-			   .SetDefaultIndex(indexName);
+			return new ConnectionSettings(uri, "indexName");
 		}
 
 		protected void Connect(ElasticClient client, ConnectionSettings settings)
@@ -37,24 +36,22 @@ namespace ProtocolLoadTest
 		
 		protected static void GenerateAndIndex(ElasticClient client, string indexName, int numMessages, int bufferSize)
 		{
-			// refresh = false is default on elasticsearch's side.
-			var bulkParms = new SimpleBulkParameters() { Refresh = false };
-
 			var msgGenerator = new MessageGenerator();
 			var tasks = new List<Task>();
 			var partitionedMessages = msgGenerator.Generate(numMessages).Partition(bufferSize);
 			Interlocked.Exchange(ref NumSent, 0);
 			foreach (var messages in partitionedMessages)
 			{
-				var t = client.IndexMany(messages, indexName, bulkParms);
-
-				Interlocked.Add(ref NumSent, bufferSize);
-				if (NumSent % 10000 == 0)
-				{
-					Console.WriteLine("Sent {0:0,0} messages to {1}", NumSent, indexName);
-				}
+				var t = client.IndexManyAsync(messages, indexName)
+					.ContinueWith(tt =>
+					{
+						Interlocked.Add(ref NumSent, bufferSize);
+						Console.WriteLine("Sent {0:0,0} messages to {1}, {2}", NumSent, indexName, tt.Result.Took);
+					})
+					;
+				tasks.Add(t);
 			}
-			//Task.WaitAll(tasks.ToArray());
+			Task.WaitAll(tasks.ToArray());
 		}
 	}
 }

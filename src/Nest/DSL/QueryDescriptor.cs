@@ -17,11 +17,9 @@ namespace Nest
 	public class QueryDescriptor<T> : BaseQuery, IQueryDescriptor<T> where T : class
 	{
 		private readonly bool _forceConditionless;
-		private readonly TypeNameResolver typeNameResolver;
-		
+
 		public QueryDescriptor()
 		{
-			this.typeNameResolver = new TypeNameResolver();
 		}
 
 		internal QueryDescriptor(bool forceConditionless)
@@ -58,23 +56,23 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "text")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> TextQueryDescriptor { get; set; }
+		internal IDictionary<PropertyPathMarker, object> TextQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "multi_match")]
 		internal MultiMatchQueryDescriptor<T> MultiMatchQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "match")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> MatchQueryDescriptor { get; set; }
+		internal IDictionary<PropertyPathMarker, object> MatchQueryDescriptor { get; set; }
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		[JsonProperty(PropertyName = "fuzzy")]
-		internal IDictionary<string, object> FuzzyQueryDescriptor { get; set; }
+		internal IDictionary<PropertyPathMarker, object> FuzzyQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "terms")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> TermsQueryDescriptor { get; set; }
+		internal IDictionary<PropertyPathMarker, object> TermsQueryDescriptor { get; set; }
 		[JsonProperty(PropertyName = "query_string")]
 		internal QueryStringDescriptor<T> QueryStringDescriptor { get; set; }
 		[JsonProperty(PropertyName = "regexp")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> RegexpQueryDescriptor { get; set; }
+		internal IDictionary<PropertyPathMarker, object> RegexpQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "flt")]
 		internal FuzzyLikeThisDescriptor<T> FuzzyLikeThisDescriptor { get; set; }
@@ -86,7 +84,7 @@ namespace Nest
 		internal MoreLikeThisQueryDescriptor<T> MoreLikeThisDescriptor { get; set; }
 		[JsonProperty(PropertyName = "range")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> RangeQueryDescriptor { get; set; }
+		internal IDictionary<PropertyPathMarker, object> RangeQueryDescriptor { get; set; }
 
 		[JsonProperty(PropertyName = "span_term")]
 		internal SpanTerm SpanTermQuery { get; set; }
@@ -128,7 +126,7 @@ namespace Nest
 						, JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore })
 					)
 				);
-			return new QueryDescriptor<T>(forceConditionless:true);
+			return new QueryDescriptor<T>(forceConditionless: true);
 		}
 
 		private QueryDescriptor<T> New(IQuery query, Action<QueryDescriptor<T>> fillProperty)
@@ -136,11 +134,20 @@ namespace Nest
 			if (query.IsConditionless && !this.IsVerbatim)
 				return CreateConditionlessQueryDescriptor(query);
 
-			var q = new QueryDescriptor<T> {IsStrict = this.IsStrict, IsVerbatim = this.IsVerbatim};
+			var q = this.Clone();
 
 			if (fillProperty != null)
 				fillProperty(q);
 			return q;
+		}
+
+		protected virtual QueryDescriptor<T> Clone()
+		{
+			return new QueryDescriptor<T>
+			{
+				IsStrict = this.IsStrict,
+				IsVerbatim = this.IsVerbatim
+			};
 		}
 
 		/// <summary>
@@ -167,8 +174,10 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Terms(Expression<Func<T, object>> objectPath, params string[] terms)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.Terms(fieldName, terms);
+			return this.TermsDescriptor(t => t
+				.OnField(objectPath)
+				.Terms(terms)
+			);
 		}
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
@@ -178,7 +187,7 @@ namespace Nest
 			var query = new TermsQueryDescriptor<T>();
 			selector(query);
 
-			var termsQueryDescriptor = new Dictionary<string, object>();
+			var termsQueryDescriptor = new Dictionary<PropertyPathMarker, object>();
 
 			if (query._ExternalField == null)
 			{
@@ -214,10 +223,10 @@ namespace Nest
 		{
 			var query = new FuzzyQueryDescriptor<T>();
 			selector(query);
-			if (string.IsNullOrWhiteSpace(query._Field))
+			if (query._Field.IsConditionless())
 				throw new DslException("Field name not set for fuzzy query");
 
-			var fuzzy = new Dictionary<string, object>() 
+			var fuzzy = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -231,7 +240,7 @@ namespace Nest
 			var query = new FuzzyNumericQueryDescriptor<T>();
 			selector(query);
 
-			var fuzzy = new Dictionary<string, object>() 
+			var fuzzy = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -246,7 +255,7 @@ namespace Nest
 			var query = new FuzzyDateQueryDescriptor<T>();
 			selector(query);
 
-			var fuzzy = new Dictionary<string, object>() 
+			var fuzzy = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -262,7 +271,7 @@ namespace Nest
 			var query = new TextQueryDescriptor<T>();
 			selector(query);
 
-			var text = new Dictionary<string, object>() 
+			var text = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -277,7 +286,7 @@ namespace Nest
 			var query = new TextPhraseQueryDescriptor<T>();
 			selector(query);
 
-			var text = new Dictionary<string, object>() 
+			var text = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -293,7 +302,7 @@ namespace Nest
 			var query = new TextPhrasePrefixQueryDescriptor<T>();
 			selector(query);
 
-			var text = new Dictionary<string, object>() 
+			var text = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -309,7 +318,7 @@ namespace Nest
 			var query = new MatchQueryDescriptor<T>();
 			selector(query);
 
-			var match = new Dictionary<string, object>() 
+			var match = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -324,7 +333,7 @@ namespace Nest
 			var query = new MatchPhraseQueryDescriptor<T>();
 			selector(query);
 
-			var match = new Dictionary<string, object>() 
+			var match = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -340,7 +349,7 @@ namespace Nest
 			var query = new MatchPhrasePrefixQueryDescriptor<T>();
 			selector(query);
 
-			var match = new Dictionary<string, object>() 
+			var match = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -407,8 +416,8 @@ namespace Nest
 		{
 			var query = new RangeQueryDescriptor<T>();
 			selector(query);
-			
-			var range = new Dictionary<string, object>() 
+
+			var range = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
@@ -455,7 +464,7 @@ namespace Nest
 		{
 			var query = new HasParentQueryDescriptor<K>();
 			selector(query);
-			
+
 			return this.New(query, q => q.HasParentQueryDescriptor = query);
 		}
 		/// <summary>
@@ -468,7 +477,7 @@ namespace Nest
 		{
 			var query = new TopChildrenQueryDescriptor<K>();
 			selector(query);
-			
+
 			return this.New(query, q => q.TopChildrenQueryDescriptor = query);
 		}
 		/// <summary>
@@ -585,23 +594,19 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term<K>(Expression<Func<T, K>> fieldDescriptor
-			, K value
-			, double? Boost = null)
+		public BaseQuery Term<K>(Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Term(field, value, Boost);
+			var term = new Term() { Field = fieldDescriptor, Value = value, Boost = Boost };
+			return this.New(term, q => q.TermQuery = term);
 		}
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public BaseQuery Term(Expression<Func<T, object>> fieldDescriptor
-			, object value
-			, double? Boost = null)
+		public BaseQuery Term(Expression<Func<T, object>> fieldDescriptor, object value, double? Boost = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Term(field, value, Boost);
+			var term = new Term() { Field = fieldDescriptor, Value = value, Boost = Boost };
+			return this.New(term, q => q.TermQuery = term);
 		}
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
@@ -609,7 +614,7 @@ namespace Nest
 		/// </summary>
 		public BaseQuery Term(string field, object value, double? Boost = null)
 		{
-			var term = new Term() { Field = field, Value = value ?? null, Boost = Boost };
+			var term = new Term() { Field = field, Value = value, Boost = Boost };
 			return this.New(term, q => q.TermQuery = term);
 		}
 
@@ -620,13 +625,10 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should 
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public BaseQuery Wildcard(Expression<Func<T, object>> fieldDescriptor
-			, string value
-			, double? Boost = null
-			, RewriteMultiTerm? Rewrite = null)
+		public BaseQuery Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Wildcard(field, value, Boost, Rewrite);
+			var wildcard = new Wildcard { Field = fieldDescriptor, Value = value, Boost = Boost, Rewrite = Rewrite };
+			return this.New(wildcard, q => q.WildcardQuery = wildcard);
 		}
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
@@ -635,18 +637,9 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with 
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public BaseQuery Wildcard(
-			string field,
-			string value,
-			double? Boost = null,
-			RewriteMultiTerm? Rewrite = null)
+		public BaseQuery Wildcard(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
-			var wildcard = new Wildcard()
-			{
-				Field = field, Value = value, Boost = Boost, Rewrite = Rewrite
-			
-			};
-
+			var wildcard = new Wildcard { Field = field, Value = value, Boost = Boost, Rewrite = Rewrite };
 			return this.New(wildcard, q => q.WildcardQuery = wildcard);
 		}
 
@@ -654,29 +647,22 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>
-		public BaseQuery Prefix(Expression<Func<T, object>> fieldDescriptor
-			, string value
-			, double? Boost = null,
-			RewriteMultiTerm? Rewrite = null)
+		public BaseQuery Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-
-			return this.Prefix(field, value, Boost, Rewrite);
+			var prefix = new Prefix() { Field = fieldDescriptor, Value = value, Boost = Boost, Rewrite = Rewrite };
+			return this.New(prefix, q => q.PrefixQuery = prefix);
 		}
+
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
-		public BaseQuery Prefix(
-			string field,
-			string value,
-			double? Boost = null,
-			RewriteMultiTerm? Rewrite = null)
+		public BaseQuery Prefix(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
 		{
 			var prefix = new Prefix() { Field = field, Value = value, Boost = Boost, Rewrite = Rewrite };
-
 			return this.New(prefix, q => q.PrefixQuery = prefix);
 		}
+
 		/// <summary>
 		/// Filters documents that only have the provided ids. Note, this filter does not require 
 		/// the _id field to be indexed since it works using the _uid field.
@@ -686,6 +672,7 @@ namespace Nest
 			var ids = new IdsQuery { Values = values };
 			return this.New(ids, q => q.IdsQuery = ids);
 		}
+
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since
@@ -697,6 +684,7 @@ namespace Nest
 			var ids = new IdsQuery { Values = values, Type = new[] { type } };
 			return this.New(ids, q => q.IdsQuery = ids);
 		}
+
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
 		/// Note, this filter does not require the _id field to be indexed since 
@@ -711,21 +699,21 @@ namespace Nest
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
 		/// </summary>
-		public BaseQuery SpanTerm(Expression<Func<T, object>> fieldDescriptor
-				, string value
-				, double? Boost = null)
+		public BaseQuery SpanTerm(Expression<Func<T, object>> fieldDescriptor , string value , double? Boost = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.SpanTerm(field, value, Boost);
+			var spanTerm = new SpanTerm() { Field = fieldDescriptor, Value = value, Boost = Boost };
+			return this.New(spanTerm, q => q.SpanTermQuery = spanTerm);
 		}
+
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
 		/// </summary>
 		public BaseQuery SpanTerm(string field, string value, double? Boost = null)
 		{
-			var spanTerm = new SpanTerm() { Field = field, Value = value, Boost = Boost};
+			var spanTerm = new SpanTerm() { Field = field, Value = value, Boost = Boost };
 			return this.New(spanTerm, q => q.SpanTermQuery = spanTerm);
 		}
+
 		/// <summary>
 		/// Matches spans near the beginning of a field. The span first query maps to Lucene SpanFirstQuery. 
 		/// </summary>
@@ -736,6 +724,7 @@ namespace Nest
 			selector(span);
 			return this.New(span, q => q.SpanFirstQueryDescriptor = span);
 		}
+
 		/// <summary>
 		/// Matches spans which are near one another. One can specify slop, the maximum number of 
 		/// intervening unmatched positions, as well as whether matches are required to be in-order.
@@ -749,6 +738,7 @@ namespace Nest
 
 			return this.New(span, q => q.SpanNearQueryDescriptor = span);
 		}
+
 		/// <summary>
 		/// Matches the union of its span clauses. 
 		/// The span or query maps to Lucene SpanOrQuery. 
@@ -761,6 +751,7 @@ namespace Nest
 
 			return this.New(span, q => q.SpanOrQueryDescriptor = span);
 		}
+
 		/// <summary>
 		/// Removes matches which overlap with another span query. 
 		/// The span not query maps to Lucene SpanNotQuery.
@@ -783,22 +774,21 @@ namespace Nest
 			var query = new RegexpQueryDescriptor<T>();
 			regexpSelector(query);
 
-			var regexp = new Dictionary<string, object>() 
+			var regexp = new Dictionary<PropertyPathMarker, object>() 
 			{
 				{ query._Field, query}
 			};
 			return this.New(query, q => q.RegexpQueryDescriptor = regexp);
 		}
 
-    /// <summary>
-    /// Function score query
-    /// </summary>
-    /// <returns></returns>
-	  public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
+		/// <summary>
+		/// Function score query
+		/// </summary>
+		/// <returns></returns>
+		public BaseQuery FunctionScore(Action<FunctionScoreQueryDescriptor<T>> functionScoreQuery)
 		{
-            var query = new FunctionScoreQueryDescriptor<T>();
-            functionScoreQuery(query);
-
+			var query = new FunctionScoreQueryDescriptor<T>();
+			functionScoreQuery(query);
 			return this.New(query, q => q.FunctionScoreQueryDescriptor = query);
 
 		}

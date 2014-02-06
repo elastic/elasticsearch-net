@@ -16,6 +16,7 @@ namespace Nest
 		public IConnection Connection { get; protected set; }
 		public IConnectionSettings Settings { get; protected set; }
 		public ElasticSerializer Serializer { get; protected set; }
+		public ElasticInferrer Infer { get; protected set; }
 
 		public RawElasticClient(IConnectionSettings settings)
 			: this(settings, new Connection(settings))
@@ -31,25 +32,56 @@ namespace Nest
 			this.Settings = settings;
 			this.Connection = connection;
 			this.Serializer = new ElasticSerializer(this.Settings);
+			this.Infer = new ElasticInferrer(this.Settings);
 		}
 
-		public static string Stringify(object o)
+		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)
+			where TQueryString : FluentQueryString<TQueryString>
+		{
+			if (qs == null)
+				return null;
+			var dict = qs._QueryStringDictionary;
+			if (dict == null || dict.Count < 0)
+				return null;
+
+			var nv = new NameValueCollection();
+			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
+			{
+				nv.Add(kv.Key, Stringify(kv.Value));
+			}
+			return nv;
+		}
+
+		public string Encoded(object o)
+		{
+			return Uri.EscapeDataString(Stringify(o));
+		}
+
+		public string Stringify(object o)
 		{
 			var s = o as string;
 			if (s != null)
 				return s;
+			var ss = o as string[];
+			if (ss != null)
+				return string.Join(",", ss);
+
+			var pn = o as PropertyPathMarker;
+			if (pn != null)
+				return this.Infer.PropertyPath(pn);
+			
+			var pns = o as IEnumerable<PropertyPathMarker>;
+			if (pns != null)
+				return string.Join(",", pns.Select(p=>this.Infer.PropertyPath(p)));
+
+
 			var e = o as Enum;
 			if (e != null)
-				return JsonConvert.SerializeObject(o).Trim(new [] { '"' } );
-				
+				return this.Serializer.Serialize(o).Trim(new [] { '"' } );
 
-			return JsonConvert.SerializeObject(o);
+			return this.Serializer.Serialize(o);
 		}
 
-		private string Serialize(object @object)
-		{
-			return this.Serializer.Serialize(@object);
-		}
 
 		protected ConnectionStatus DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
@@ -61,7 +93,7 @@ namespace Nest
 			if (s != null)
 				postData = s;
 			else if (data != null)
-				postData = this.Serialize(data);
+				postData = this.Serializer.Serialize(data);
 
 			switch (method.ToLowerInvariant())
 			{
@@ -90,7 +122,7 @@ namespace Nest
 			if (s != null)
 				postData = s;
 			else if (data != null)
-				postData = this.Serialize(data);
+				postData = this.Serializer.Serialize(data);
 
 			switch (method.ToLowerInvariant())
 			{

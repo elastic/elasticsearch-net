@@ -17,7 +17,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			var isValidThriftConnection = this._thriftClient.RootNodeInfo().IsValid;
 			isValidThriftConnection.Should().BeTrue();
 
-			var unknownIndexResult = this._thriftClient.IndexExists("i-am-running-out-of-clever-index-names");
+			var unknownIndexResult = this._thriftClient.IndexExists(i=>i.Index("i-am-running-out-of-clever-index-names"));
 			unknownIndexResult.Should().NotBeNull();
 			unknownIndexResult.IsValid.Should().BeTrue();
 

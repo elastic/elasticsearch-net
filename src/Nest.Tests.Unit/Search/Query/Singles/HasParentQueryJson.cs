@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ has_parent: { 
-				type: ""people"",
+				type: ""person"",
 				_scope: ""my_scope"",
 				score_type: ""score"",
 				query: {

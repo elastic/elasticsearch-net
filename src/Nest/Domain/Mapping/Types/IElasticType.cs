@@ -10,9 +10,7 @@ namespace Nest
 {
 	public interface IElasticType 
 	{
-		string Name { get; set; }
-		TypeNameMarker TypeNameMarker { get; set; }
+		PropertyNameMarker Name { get; set; }
 		TypeNameMarker Type { get; }
-		string Similarity { get; set; }
 	}
 }

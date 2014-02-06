@@ -15,20 +15,20 @@ namespace Nest.Tests.Integration
 		{
 			Assert.AreEqual(this._settings.Host, ElasticsearchConfiguration.Settings().Host);
 			Assert.AreEqual(this._settings.Port, Test.Default.Port);
-            Assert.AreEqual(new Uri(string.Format("http://{0}:{1}", ElasticsearchConfiguration.Settings().Host, Test.Default.Port)), this._settings.Uri);
+			Assert.AreEqual(new Uri(string.Format("http://{0}:{1}", ElasticsearchConfiguration.Settings().Host, Test.Default.Port)), this._settings.Uri);
 			Assert.AreEqual(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(this._settings.MaximumAsyncConnections, Test.Default.MaximumAsyncConnections);
 		}
-        [Test]
-        public void TestSettingsWithUri()
-        {
-            var uri = new Uri(string.Format("http://{0}:{1}", ElasticsearchConfiguration.Settings().Host, ElasticsearchConfiguration.Settings().Port));
-            var settings = new ConnectionSettings(uri);
-            Assert.AreEqual(settings.Host, ElasticsearchConfiguration.Settings().Host);
-            Assert.AreEqual(settings.Port, Test.Default.Port);
-            Assert.AreEqual(uri, this._settings.Uri);
-        }
-        [Test]
+		[Test]
+		public void TestSettingsWithUri()
+		{
+			var uri = new Uri(string.Format("http://{0}:{1}", ElasticsearchConfiguration.Settings().Host, ElasticsearchConfiguration.Settings().Port));
+			var settings = new ConnectionSettings(uri, "index");
+			Assert.AreEqual(settings.Host, ElasticsearchConfiguration.Settings().Host);
+			Assert.AreEqual(settings.Port, Test.Default.Port);
+			Assert.AreEqual(uri, this._settings.Uri);
+		}
+		[Test]
 		public void TestConnectSuccess()
 		{
 			var rootNodeInfo = _client.RootNodeInfo();
@@ -49,11 +49,11 @@ namespace Nest.Tests.Integration
 			Assert.Throws<UriFormatException>(() =>
 			{
 				string host = null;
-				var settings = new ConnectionSettings(new Uri("http://:80"));
+				var settings = new ConnectionSettings(new Uri("http://:80"), "index");
 			});
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings(new Uri(":asda:asdasd:80"));
+				var settings = new ConnectionSettings(new Uri(":asda:asdasd:80"), "index");
 			});
 		}
 		[Test]
@@ -61,30 +61,28 @@ namespace Nest.Tests.Integration
 		{
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings(new Uri("some mangled hostname:80"));
+				var settings = new ConnectionSettings(new Uri("some mangled hostname:80"), "index");
 			});
-			
+
 		}
 		[Test]
 		public void connect_to_unknown_hostname()
 		{
+			IRootInfoResponse result = null;
+
 			Assert.DoesNotThrow(() =>
 			{
-				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"));
+				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");
 				var client = new ElasticClient(settings);
-				var result = client.RootNodeInfo();
-
-				Assert.False(result.IsValid);
-				Assert.NotNull(result.ConnectionStatus);
-
-				Assert.True(result.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.BadGateway
-					|| result.ConnectionStatus.Error.ExceptionMessage.StartsWith("The remote name could not be resolved"));
+				result = client.RootNodeInfo();
 			});
+			Assert.False(result.IsValid);
+			Assert.NotNull(result.ConnectionStatus);
 		}
 		[Test]
 		public void TestConnectSuccessWithUri()
 		{
-			var settings = new ConnectionSettings(Test.Default.Uri);
+			var settings = new ConnectionSettings(Test.Default.Uri, "index");
 			var client = new ElasticClient(settings);
 			var result = client.RootNodeInfo();
 
@@ -97,7 +95,7 @@ namespace Nest.Tests.Integration
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				Uri uri = null;
-				var settings = new ConnectionSettings(uri);
+				var settings = new ConnectionSettings(uri, "index");
 			});
 		}
 
@@ -118,13 +116,13 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void ConnectUsingRawClientComplexCall()
 		{
-			var result = this._client.Raw.ClusterHealthGet(s=>s
+			var result = this._client.Raw.ClusterHealthGet(s => s
 				.Level(LevelOptions.Indices)
 				.Local(true)
-				.WaitForActiveShards(12)
+				.WaitForActiveShards(1)
 			);
 			Assert.IsTrue(result.Success);
-			StringAssert.EndsWith(":9200/_cluster/health?level=indices&local=true&wait_for_active_shards=12&pretty=true", result.RequestUrl);
+			StringAssert.EndsWith(":9200/_cluster/health?level=indices&local=true&wait_for_active_shards=1&pretty=true", result.RequestUrl);
 
 		}
 	}

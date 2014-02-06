@@ -20,27 +20,25 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetMultiSimple()
 		{
-			var result = this._client.MultiGetFull(a => a
+			var result = this._client.MultiGet(a => a
 				.Get<ElasticSearchProject>(g=>g.Id(1))
 				.Get<Person>(g => g.Id(100))
 			);
 			var objects = result.Documents;
 
-			objects.Should().NotBeNull()
-				.And.HaveCount(2);
+			objects.Should().NotBeNull().And.HaveCount(2);
 
 
-			var person = result.Get<Person>(100);
+			var person = result.Source<Person>(100);
 			person.Should().NotBeNull();
-			person.FirstName.Should().NotBeNullOrEmpty()
-				.And.Match("Ellie");
+			person.FirstName.Should().NotBeNullOrEmpty();
 
 		}
 
 		[Test]
 		public void GetMultiSimpleWithMissingItem()
 		{
-			var result = this._client.MultiGetFull(a => a
+			var result = this._client.MultiGet(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1))
 				.Get<Person>(g => g.Id(100000))
 				.Get<Person>(g => g.Id(105))
@@ -50,24 +48,24 @@ namespace Nest.Tests.Integration.Core.Get
 			objects.Should().NotBeNull()
 				.And.HaveCount(3);
 
-			var missingPerson = result.GetWithMetaData<Person>(100000);
+			var missingPerson = result.Get<Person>(100000);
 			missingPerson.Should().NotBeNull();
 			missingPerson.Exists.Should().BeFalse();
 
-			var missingPersonDirect = result.Get<Person>(100000);
+			var missingPersonDirect = result.Source<Person>(100000);
 			missingPersonDirect.Should().BeNull();
 
-			var lewis = result.Get<Person>(105);
+			var lewis = result.Source<Person>(105);
 			lewis.Should().NotBeNull();
-			lewis.FirstName.Should().NotBeNullOrEmpty().And.Match("Lewis");
+			lewis.FirstName.Should().NotBeNullOrEmpty();
 		}
 		
 		[Test]
 		public void GetMultiWithMetaData()
 		{
-			var result = this._client.MultiGetFull(a => a
+			var result = this._client.MultiGet(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
-				.Get<Person>(g => g.Id(100).Type("people").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
+				.Get<Person>(g => g.Id(100).Type("person").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
 			);
 
 			var objects = result.Documents;
@@ -85,25 +83,25 @@ namespace Nest.Tests.Integration.Core.Get
 			var person = personHit.FieldSelection;
 			person.Should().NotBeNull();
 			person.FieldValue<int>(p=>p.Id).Should().Be(100);
-			person.FieldValue<string>(p=>p.FirstName)
-				.Should().NotBeNullOrEmpty().And.Match("Ellie");
+			person.FieldValue<string>(p => p.FirstName)
+				.Should().NotBeNullOrEmpty();
 
 		}
 
 		[Test]
 		public void GetMultiWithMetaDataUsingCleanApi()
 		{
-			var result = this._client.MultiGetFull(a => a
+			var result = this._client.MultiGet(a => a
 				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p => p.Id, p => p.Followers.First().FirstName))
 				.Get<Person>(g => g
 					.Id(100)
-					.Type("people")
+					.Type("person")
 					.Index(ElasticsearchConfiguration.DefaultIndex)
 					.Fields(p => p.Id, p => p.FirstName)
 				)
 			);
 
-			var personHit = result.GetWithMetaData<Person>(100);
+			var personHit = result.Get<Person>(100);
 			personHit.Should().NotBeNull();
 			personHit.Exists.Should().BeTrue();
 			personHit.Version.Should().NotBeNullOrEmpty().And.Match("1");
@@ -113,13 +111,13 @@ namespace Nest.Tests.Integration.Core.Get
 			personFieldSelection.Should().NotBeNull();
 			personFieldSelection.FieldValue<int>(p => p.Id).Should().Be(100);
 			personFieldSelection.FieldValue<string>(p => p.FirstName)
-				.Should().NotBeNullOrEmpty().And.Match("Ellie");
+				.Should().NotBeNullOrEmpty();
 
 			var projectFieldSelection = result.GetFieldSelection<ElasticSearchProject>(1);
 			projectFieldSelection.Should().NotBeNull();
 			projectFieldSelection.FieldValue<int>(p => p.Id).Should().Be(1);
 			projectFieldSelection.FieldValue<string[]>(p => p.Followers.First().FirstName)
-				.Should().NotBeEmpty().And.Contain("Lewis");
+				.Should().NotBeEmpty();
 
 		}
 

@@ -5,7 +5,7 @@
     "terms": {
       "intValues": {
         "index": "nest_test_data",
-        "type": "people",
+        "type": "person",
         "id": "4",
         "path": "id"
       },

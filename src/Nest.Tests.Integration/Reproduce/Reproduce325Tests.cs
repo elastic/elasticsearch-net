@@ -47,33 +47,33 @@ namespace Nest.Tests.Integration.Reproduce
 		}
 
 
-		private static RootObjectMappingDescriptor<TechnicalProduct> MapTechnicalProduct(RootObjectMappingDescriptor<TechnicalProduct> m, string indexName)
+		private static PutMappingDescriptor<TechnicalProduct> MapTechnicalProduct(PutMappingDescriptor<TechnicalProduct> m, string indexName)
 		{
 			return m
-			.TypeName("technicalProducts")
-			.DateDetection()
-			.NumericDetection()
-			.DynamicDateFormats(new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" })
-			.IndexName(indexName)
-			.Dynamic(false)
-			.IdField(i => i
-				.SetIndex("not_analyzed")
-				.SetStored()
-			)
-			.Properties(o => o
-				.String(i => i
-					.Name(x => x.Name)
-					.Index(FieldIndexOption.analyzed)
-					.IndexAnalyzer("autocomplete")
-					.SearchAnalyzer("standard")
+				.Index(indexName)
+				.Type("technicalProducts")
+				.DateDetection()
+				.NumericDetection()
+				.DynamicDateFormats(new[] { "dateOptionalTime", "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z" })
+				.Dynamic(false)
+				.IdField(i => i
+					.SetIndex("not_analyzed")
+					.SetStored()
 				)
-				.String(i => i
-					.Name(x => x.Brand)
-					.Index(FieldIndexOption.analyzed)
-					.IndexAnalyzer("autocomplete")
-					.SearchAnalyzer("standard")
-				)
-			);
+				.Properties(o => o
+					.String(i => i
+						.Name(x => x.Name)
+						.Index(FieldIndexOption.analyzed)
+						.IndexAnalyzer("autocomplete")
+						.SearchAnalyzer("standard")
+					)
+					.String(i => i
+						.Name(x => x.Brand)
+						.Index(FieldIndexOption.analyzed)
+						.IndexAnalyzer("autocomplete")
+						.SearchAnalyzer("standard")
+					)
+				);
 		}
 
 		public class TechnicalProduct : Product

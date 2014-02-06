@@ -9,22 +9,16 @@ using Nest.Domain;
 
 namespace Nest
 {
-
-	public class CreateIndexDescriptor
+	[DescriptorFor("IndicesCreate")]
+	public partial class CreateIndexDescriptor : IPathInfo<CreateIndexQueryString>
 	{
+		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
 		private readonly IConnectionSettings _connectionSettings;
 
 		public CreateIndexDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-		}
-
-		private readonly JsonSerializerSettings serializationSettings;
-
-		public CreateIndexDescriptor(JsonSerializerSettings SerializationSettings)
-		{
-			this.serializationSettings = SerializationSettings;
 		}
 
 		/// <summary>
@@ -100,11 +94,12 @@ namespace Nest
 		/// <summary>
 		/// Add a new mapping for T
 		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		public CreateIndexDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this._connectionSettings));
+			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings));
 			var typeMapping = d._Mapping;
+			typeMapping.Name = typeof (T);
 			this._IndexSettings.Mappings.Add(typeMapping);
 
 			return this;
@@ -114,11 +109,12 @@ namespace Nest
 		/// Add a new mapping using the first rootObjectMapping parameter as the base to construct the new mapping.
 		/// Handy if you wish to reuse a mapping.
 		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(RootObjectMapping rootObjectMapping, Func<RootObjectMappingDescriptor<T>, RootObjectMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		public CreateIndexDescriptor AddMapping<T>(RootObjectMapping rootObjectMapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new RootObjectMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping });
+			var d = typeMappingDescriptor(new PutMappingDescriptor<T>(this._connectionSettings) { _Mapping = rootObjectMapping,});
 			var typeMapping = d._Mapping;
+			typeMapping.Name = typeof (T);
 			this._IndexSettings.Mappings.Add(typeMapping);
 
 			return this;
@@ -129,9 +125,7 @@ namespace Nest
 			warmerSelector.ThrowIfNull("warmerSelector");
 			var descriptor = warmerSelector(new CreateWarmerDescriptor());
 
-			var query = JsonConvert.SerializeObject(descriptor._SearchDescriptor, serializationSettings);
-
-			var mapping = new WarmerMapping { Name = descriptor._WarmerName, Types = descriptor._Types, Source = query };
+			var mapping = new WarmerMapping { Name = descriptor._WarmerName, Types = descriptor._Types, Source = descriptor._SearchDescriptor };
 			this._IndexSettings.Warmers.Add(descriptor._WarmerName, mapping);
 
 			return this;
@@ -154,6 +148,17 @@ namespace Nest
 			return this;
 		}
 
+
+		ElasticSearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(
+			IConnectionSettings settings)
+		{
+			var pathInfo = new ElasticSearchPathInfo<CreateIndexQueryString>();
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.Index = this._Index;
+			pathInfo.QueryString = this._QueryString;
+			return pathInfo;
+
+		}
 
 	}
 }

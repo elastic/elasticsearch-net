@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var expected = @"{ from: 0, size: 10, 
 				filter : {
 					""has_child"": {
-					  ""type"": ""people"",
+					  ""type"": ""person"",
 					  ""_scope"": ""my_scope"",
 					  ""query"": {
 						""term"": {

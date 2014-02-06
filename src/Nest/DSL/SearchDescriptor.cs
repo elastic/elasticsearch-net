@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -11,36 +12,35 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-
-	public abstract class SearchDescriptorBase
-	{
-		internal abstract Type _ClrType { get; }
-		internal IEnumerable<string> _Indices { get; set; }
-		internal IEnumerable<TypeNameMarker> _Types { get; set; }
-		internal string _Routing { get; set; }
-		internal SearchType? _SearchType { get; set; }
-		internal string _Scroll { get; set; }
-		internal bool _AllIndices { get; set; }
-		internal bool _AllTypes { get; set; }
-
-		//[JsonProperty(PropertyName = "preference")]
-		internal string _Preference { get; set; }
-
-		internal Func<dynamic, Hit<dynamic>, Type> _ConcreteTypeSelector;
-
-
-	}
-
+	/// <summary>
+	/// A descriptor wich describes a search operation for _search and _msearch
+	/// </summary>
+	/// <remarks>Doesn't inherit from QueryPathDescriptorBase because it already needs an untyped supperclass 
+	/// that has specifics that we can push to QueryPathDescriptorBase</remarks>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class SearchDescriptor<T> : SearchDescriptorBase where T : class
+	public partial class SearchDescriptor<T> :
+		SearchDescriptorBase
+		, IPathInfo<SearchQueryString>
+		where T : class
 	{
-		private readonly TypeNameResolver typeNameResolver;
-
-		public SearchDescriptor()
+		internal override SearchTypeOptions? _SearchType
 		{
-			this.typeNameResolver = new TypeNameResolver();
+			get { return this._QueryString._search_type; }
+		}
+		internal override string _Preference
+		{
+			get { return this._QueryString._preference; }
 		}
 
+		internal override string _Routing
+		{
+			get
+			{
+				return this._QueryString._routing == null
+					? null
+					: string.Join(",", this._QueryString._routing);
+			}
+		}
 
 		internal override Type _ClrType { get { return typeof(T); } }
 
@@ -54,8 +54,33 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Indices(IEnumerable<string> indices)
 		{
-			indices.ThrowIfEmpty("indices");
-			this._Indices = indices;
+			if (indices == null) return this;
+			return this.Indices(indices.ToArray());
+		}
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Indices(IEnumerable<Type> indices)
+		{
+			if (indices == null) return this;
+			return this.Indices(indices.ToArray());
+		}
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Indices(params string[] indices)
+		{
+			if (indices == null) return this;
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
+			return this;
+		}
+		/// <summary>
+		/// The indices to execute the search on. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Indices(params Type[] indices)
+		{
+			if (indices == null) return this;
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -63,9 +88,28 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("index");
+			return this.Indices(index);
+		}
+
+		internal SearchDescriptor<T> Index(IndexNameMarker index)
+		{
+			if (index == null) return this;
 			this._Indices = new[] { index };
 			return this;
+		}
+		/// <summary>
+		/// The index to execute the search on, using the default index for typeof TAlternative. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Index<TAlternative>() where TAlternative : class
+		{
+			return this.Indices(typeof(Type));
+		}
+		/// <summary>
+		/// The index to execute the search on using the inferred default for 'type'. Defaults to the default index
+		/// </summary>
+		public SearchDescriptor<T> Index(Type type)
+		{
+			return this.Indices(type);
 		}
 		/// <summary>
 		/// The types to execute the search on. Defaults to the inferred typename of T 
@@ -73,7 +117,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Types(IEnumerable<string> types)
 		{
-			types.ThrowIfEmpty("types");
+			if (types == null) return this;
 			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 		}
@@ -91,7 +135,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Types(IEnumerable<Type> types)
 		{
-			types.ThrowIfEmpty("types");
+			if (types == null) return this;
 			this._Types = types.Select(s => (TypeNameMarker)s);
 			return this;
 
@@ -110,7 +154,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Type(string type)
 		{
-			type.ThrowIfNullOrEmpty("type");
+			if (type == null) return this;
 			this._Types = new[] { (TypeNameMarker)type };
 			return this;
 		}
@@ -120,8 +164,15 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Type(Type type)
 		{
-			type.ThrowIfNull("type");
+			if (type == null) return this;
 			this._Types = new[] { (TypeNameMarker)type };
+			return this;
+		}
+
+		internal SearchDescriptor<T> Type(TypeNameMarker type)
+		{
+			if (type == null) return this;
+			this._Types = new[] { type };
 			return this;
 		}
 		/// <summary>
@@ -140,36 +191,7 @@ namespace Nest
 			this._AllTypes = true;
 			return this;
 		}
-		/// <summary>
-		/// When executing a search, it will be broadcasted to all the index/indices shards (round robin between replicas).
-		/// Which shards will be searched on can be controlled by providing the routing parameter.
-		/// </summary>
-		public SearchDescriptor<T> Routing(string routing)
-		{
-			routing.ThrowIfNullOrEmpty("routing");
-			this._Routing = routing;
-			return this;
-		}
-		/// <summary>
-		/// controls how the distributed search behaves. http://www.elasticsearch.org/guide/reference/api/search/search-type.html
-		/// </summary>
-		public SearchDescriptor<T> SearchType(SearchType searchType)
-		{
-			searchType.ThrowIfNull("searchType");
-			this._SearchType = searchType;
-			return this;
-		}
-		/// <summary>
-		/// A search request can be scrolled by specifying the scroll parameter. The scroll parameter is a time value parameter (for example: scroll=5m), indicating for how long the nodes that participate in the search will maintain relevant resources in order to continue and support it. This is very similar in its idea to opening a cursor against a database.
-		/// </summary>
-		/// <param name="scrollTime">The scroll parameter is a time value parameter (for example: scroll=5m)</param>
-		/// <returns></returns>
-		public SearchDescriptor<T> Scroll(string scrollTime)
-		{
-			scrollTime.ThrowIfNullOrEmpty("scrollTime");
-			this._Scroll = scrollTime;
-			return this;
-		}
+
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
 		public SearchDescriptor<T> Strict(bool strict = true)
@@ -200,11 +222,11 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "sort")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, object> _Sort { get; set; }
+		internal IDictionary<PropertyPathMarker, object> _Sort { get; set; }
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<string, FacetDescriptorsBucket<T>> _Facets { get; set; }
+		internal IDictionary<PropertyPathMarker, FacetDescriptorsBucket<T>> _Facets { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]
 		internal IDictionary<string, object> _Suggest { get; set; }
@@ -252,7 +274,7 @@ namespace Nest
 		internal BaseFilter _Filter { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		internal IList<string> _Fields { get; set; }
+		internal IList<PropertyPathMarker> _Fields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -336,23 +358,7 @@ namespace Nest
 			this._MinScore = minScore;
 			return this;
 		}
-		/// <summary>
-		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
-		/// By default, the operation is randomized between the each shard replicas.
-		/// </para>
-		/// <para>
-		/// Custom (string) value: A custom value will be used to guarantee that the same shards
-		/// will be used for the same custom value. This can help with “jumping values” 
-		/// when hitting different shards in different refresh states. 
-		/// A sample value can be something like the web session id, or the user name.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> Preference(string preference)
-		{
-			this._Preference = preference;
-			return this;
-		}
+
 		/// <summary>
 		/// <para>
 		/// Controls a preference of which shard replicas to execute the search request on. 
@@ -364,8 +370,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> ExecuteOnPrimary()
 		{
-			this._Preference = "_primary";
-			return this;
+			return this.Preference("_primary");
 		}
 		/// <summary>
 		/// <para>
@@ -379,8 +384,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> ExecuteOnPrimaryFirst()
 		{
-			this._Preference = "_primary_first";
-			return this;
+			return this.Preference("_primary_first");
 		}
 		/// <summary>
 		/// <para>
@@ -393,8 +397,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> ExecuteOnLocalShard()
 		{
-			this._Preference = "_local";
-			return this;
+			return this.Preference("_local");
 		}
 		/// <summary>
 		/// <para>
@@ -408,8 +411,7 @@ namespace Nest
 		public SearchDescriptor<T> ExecuteOnNode(string node)
 		{
 			node.ThrowIfNull("node");
-			this._Preference = "_only_node:" + node;
-			return this;
+			return this.Preference("_only_node:" + node);
 		}
 		/// <summary>
 		/// <para>
@@ -423,7 +425,7 @@ namespace Nest
 		public SearchDescriptor<T> ExecuteOnPreferredNode(string node)
 		{
 			node.ThrowIfNull("node");
-			this._Preference = string.Format("_prefer_node:{0}", node);
+			this.Preference(string.Format("_prefer_node:{0}", node));
 			return this;
 		}
 		/// <summary>
@@ -444,10 +446,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			if (this._Fields == null)
-				this._Fields = new List<string>();
-			foreach (var e in expressions)
-				this._Fields.Add(new PropertyNameResolver().Resolve(e));
+			this._Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
 		/// <summary>
@@ -456,7 +455,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
 		{
-			this._Fields = fields;
+			this._Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
 		}
 
@@ -466,7 +465,7 @@ namespace Nest
 		{
 			scriptFields.ThrowIfNull("scriptFields");
 			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
-			if (scriptFieldDescriptors == null || !scriptFieldDescriptors.Any(d => d.Value != null))
+			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 			{
 				this._ScriptFields = null;
 				return this;
@@ -517,18 +516,9 @@ namespace Nest
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
-			var resolver = new PropertyNameResolver();
-			var fieldName = resolver.Resolve(objectPath);
-
-			var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
-			if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
-			{
-				fieldName += ".sort";
-			}
-
-			this._Sort.Add(fieldName, "asc");
+			this._Sort.Add(objectPath, "asc");
 			return this;
 		}
 		/// <summary>
@@ -542,18 +532,9 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
-			var resolver = new PropertyNameResolver();
-			var fieldName = resolver.Resolve(objectPath);
-
-			var fieldAttributes = resolver.ResolvePropertyAttributes(objectPath);
-			if ((fieldAttributes.Where(x => x.AddSortField == true)).Any())
-			{
-				fieldName += ".sort";
-			}
-
-			this._Sort.Add(fieldName, "desc");
+			this._Sort.Add(objectPath, "desc");
 			return this;
 		}
 		/// <summary>
@@ -567,7 +548,7 @@ namespace Nest
 		public SearchDescriptor<T> SortAscending(string field)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 			this._Sort.Add(field, "asc");
 			return this;
 		}
@@ -582,7 +563,7 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(string field)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			this._Sort.Add(field, "desc");
 			return this;
@@ -594,7 +575,7 @@ namespace Nest
 		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = new SortDescriptor<T>();
@@ -609,7 +590,7 @@ namespace Nest
 		public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, SortGeoDistanceDescriptor<T>> sortSelector)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = new SortGeoDistanceDescriptor<T>();
@@ -624,7 +605,7 @@ namespace Nest
 		public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, SortScriptDescriptor<T>> sortSelector)
 		{
 			if (this._Sort == null)
-				this._Sort = new Dictionary<string, object>();
+				this._Sort = new Dictionary<PropertyPathMarker, object>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = new SortScriptDescriptor<T>();
@@ -636,44 +617,32 @@ namespace Nest
 		private SearchDescriptor<T> _Facet<F>(
 			string name,
 			Func<F, F> facet,
-			Func<F, string> inferedFieldNameSelector,
+			Func<F, PropertyPathMarker> inferedFieldNameSelector,
 			Action<FacetDescriptorsBucket<T>, F> fillBucket
 			)
-			where F : new()
+			where F : IFacetDescriptor, new()
 		{
 			facet.ThrowIfNull("facet");
 			inferedFieldNameSelector.ThrowIfNull("inferedFieldNameSelector");
 			fillBucket.ThrowIfNull("fillBucket");
 
 			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
 
 			var descriptor = new F();
 			var f = facet(descriptor);
 			var key = string.IsNullOrWhiteSpace(name) ? inferedFieldNameSelector(descriptor) : name;
-			if (string.IsNullOrWhiteSpace(key))
+			if (key.IsConditionless())
 			{
 				throw new DslException(
 					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
 				);
 			}
-			var bff = f as BaseFacetDescriptor<T>;
-			var gff = f as GeoDistanceFacetDescriptor<T>;
 			var bucket = new FacetDescriptorsBucket<T>();
-			if (bff != null)
-			{
-				bucket.Global = bff._IsGlobal;
-				bucket.FacetFilter = bff._FacetFilter;
-				bucket.Nested = bff._Nested;
-				bucket.Scope = bff._Scope;
-			}
-			else if (gff != null)
-			{
-				bucket.Global = gff._IsGlobal;
-				bucket.FacetFilter = gff._FacetFilter;
-				bucket.Nested = gff._Nested;
-				bucket.Scope = gff._Scope;
-			}
+			bucket.Global = f.IsGlobal;
+			bucket.FacetFilter = f.FacetFilter;
+			bucket.Nested = f.Nested;
+			bucket.Scope = f.Scope;
 			fillBucket(bucket, descriptor);
 			this._Facets.Add(key, bucket);
 
@@ -849,7 +818,7 @@ namespace Nest
 			name.ThrowIfNullOrEmpty("name");
 			querySelector.ThrowIfNull("query");
 			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
 
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
@@ -868,7 +837,7 @@ namespace Nest
 			filterSelector.ThrowIfNull("filterSelector");
 
 			if (this._Facets == null)
-				this._Facets = new Dictionary<string, FacetDescriptorsBucket<T>>();
+				this._Facets = new Dictionary<PropertyPathMarker, FacetDescriptorsBucket<T>>();
 
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
@@ -1075,32 +1044,37 @@ namespace Nest
 			this._ConcreteTypeSelector = typeSelector;
 			return this;
 		}
-	}
 
-	public class FluentDictionary<K, V> : Dictionary<K, V>
-	{
-		public FluentDictionary()
+		ElasticSearchPathInfo<SearchQueryString> IPathInfo<SearchQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-		}
+			var pathInfo = new ElasticSearchPathInfo<SearchQueryString>();
+			pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
+				? PathInfoHttpMethod.GET
+				: PathInfoHttpMethod.POST;
 
-		public FluentDictionary(IDictionary<K, V> copy)
-		{
-			if (copy == null)
-				return;
+			pathInfo.QueryString = this._QueryString;
 
-			foreach (var kv in copy)
-				this[kv.Key] = kv.Value;
-		}
+			var inferrer = new ElasticInferrer(settings);
+			string indices;
+			if (this._AllIndices.GetValueOrDefault(false))
+				indices = !this._AllTypes.GetValueOrDefault(false) ? "_all" : null;
+			else if (this._Indices.HasAny())
+				indices = inferrer.IndexNames(this._Indices);
+			else
+				indices = inferrer.IndexName<T>();
 
-		public new FluentDictionary<K, V> Add(K k, V v)
-		{
-			base.Add(k, v);
-			return this;
-		}
-		public new FluentDictionary<K, V> Remove(K k)
-		{
-			base.Remove(k);
-			return this;
+			string types;
+			if (this._AllTypes.GetValueOrDefault(false))
+				types = null;
+			else if (this._Types.HasAny())
+				types = inferrer.TypeNames(this._Types);
+			else
+				types = inferrer.TypeName<T>();
+
+			pathInfo.Index = indices;
+			pathInfo.Type = types;
+
+			return pathInfo;
 		}
 	}
 }

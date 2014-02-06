@@ -20,19 +20,12 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void ShouldThowOnNullId()
 		{
-			Assert.Throws<ArgumentNullException>(() =>
+			Assert.Throws<DispatchException>(() =>
 			{
-				this._client.DeleteById("someindex", "sometype", null);
+				this._client.Delete<object>(d=>d.Index("someindex").Type("sometype").Id(null));
 			});
 		}
-		[Test]
-		public void ShouldThowOnEmptyId()
-		{
-			Assert.Throws<ArgumentException>(() =>
-			{
-				this._client.DeleteById("someindex", "sometype", "				");
-			});
-		}
+		
 		[Test]
 		public void GetDocumentById()
 		{
@@ -52,7 +45,7 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//attempt to grab the same document using the document's id
-			var foundDocument = this._client.Get<ElasticSearchProject>(hit.Id);
+			var foundDocument = this._client.Source<ElasticSearchProject>(hit.Id);
 
 			//assert
 			//make sure that these are in fact the same documents
@@ -77,11 +70,11 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//index the new item
-			this._client.Index<ElasticSearchProject>(newDocument, new IndexParameters { Refresh = true });
+			this._client.Index<ElasticSearchProject>(newDocument, i=>i.Refresh());
 
 			//assert
 			//grab document back from the index and make sure it is the same document
-			var foundDocument = this._client.Get<ElasticSearchProject>(newDocument.Id);
+			var foundDocument = this._client.Source<ElasticSearchProject>(newDocument.Id);
 
 			//Assert.Equal(newDocument.Country, foundDocument.Country);
 			Assert.AreEqual(newDocument.Followers.Count, foundDocument.Followers.Count);
@@ -90,11 +83,11 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//now remove the item that was added
-			var response = this._client.DeleteById<ElasticSearchProject>(newDocument.Id, new DeleteParameters { Refresh = true });
+			var response = this._client.Delete<ElasticSearchProject>(f=>f.Id(newDocument.Id).Refresh());
 
 			//assert
 			//make sure getting by id returns nothing
-			foundDocument = this._client.Get<ElasticSearchProject>(newDocument.Id);
+			foundDocument = this._client.Source<ElasticSearchProject>(newDocument.Id);
 			Assert.Null(foundDocument);
 		}
 		[Test]
@@ -112,11 +105,11 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//index the new item
-			this._client.Index(newDocument, new IndexParameters { Refresh = true });
+			this._client.Index(newDocument, i=>i.Refresh());
 
 			//assert
 			//grab document back from the index and make sure it is the same document
-			var foundDocument = this._client.Get<ElasticSearchProject>(newDocument.Id);
+			var foundDocument = this._client.Source<ElasticSearchProject>(newDocument.Id);
 
 			//Assert.Equal(newDocument.Country, foundDocument.Country);
 			Assert.AreEqual(newDocument.Followers.Count, foundDocument.Followers.Count);
@@ -125,11 +118,11 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//now remove the item that was added
-			this._client.Delete(newDocument, new DeleteParameters { Refresh = true });
+			this._client.Delete<ElasticSearchProject>(f=>f.Object(newDocument).Refresh());
 
 			//assert
 			//make sure getting by id returns nothing
-			foundDocument = this._client.Get<ElasticSearchProject>(newDocument.Id);
+			foundDocument = this._client.Source<ElasticSearchProject>(newDocument.Id);
 			Assert.Null(foundDocument);
 		}
 
@@ -148,11 +141,11 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//index the new item
-			this._client.Index(newDocument, new IndexParameters { Refresh = true });
+			this._client.Index(newDocument, i=>i.Refresh());
 
 			//assert
 			//grab document back from the index and make sure it is the same document
-			var foundDocument = this._client.Get<ElasticSearchProject>(newDocument.Id);
+			var foundDocument = this._client.Source<ElasticSearchProject>(newDocument.Id);
 
 			//Assert.Equal(newDocument.Country, foundDocument.Country);
 			Assert.AreEqual(newDocument.Followers.Count, foundDocument.Followers.Count);
@@ -161,11 +154,11 @@ namespace Nest.Tests.Integration.Core
 
 			//act
 			//now remove the item that was added
-			this._client.Delete(newDocument, new DeleteParameters() { Refresh = true });
+			this._client.Delete<ElasticSearchProject>(d=>d.Object(newDocument).Refresh());
 
 			//assert
 			//make sure getting by id returns nothing
-			foundDocument = this._client.Get<ElasticSearchProject>(newDocument.Id);
+			foundDocument = this._client.Source<ElasticSearchProject>(newDocument.Id);
 			Assert.Null(foundDocument);
 		}
 		[Test]
@@ -179,7 +172,7 @@ namespace Nest.Tests.Integration.Core
 			var totalResults = result.Total;
 			Assert.Greater(totalSet, 0);
 
-			var deleteResult = this._client.DeleteMany(result.Documents, new SimpleBulkParameters() { Refresh = true });
+			var deleteResult = this._client.Bulk(b => b.DeleteMany(result.Documents).Refresh());
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
@@ -201,9 +194,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
 
-			var parameterizedDocuments = result.Documents.Select(d => new BulkParameters<ElasticSearchProject>(d) { VersionType = VersionType.Internal });
-
-			var deleteResult = this._client.DeleteMany(parameterizedDocuments, new SimpleBulkParameters() { Refresh = true });
+			var deleteResult = this._client.Bulk(b=>b.DeleteMany(result.Documents, (p, o) => p.VersionType(VersionType.Internal)).Refresh());
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
@@ -226,8 +217,10 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticSearchProject>(
-				q => q.Term(f => f.Name, "elasticsearch.pm")
+			this._client.DeleteByQuery<ElasticSearchProject>(d => d
+				.Query(q=>q
+					.Term(f => f.Name, "elasticsearch.pm")
+				)
 			);
 
 			result = this._client.Search<ElasticSearchProject>(s => s
@@ -238,7 +231,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.True(result.Total == 0);
 
 			//make sure we did not delete all.
-			var countResult = this._client.CountAll(q => q.MatchAll());
+			var countResult = this._client.Count(c=>c.Query(q => q.MatchAll()));
 			Assert.True(countResult.IsValid);
 			Assert.Greater(countResult.Count, 0);
 
@@ -259,7 +252,11 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticSearchProject>(q => q.Term(f => f.Name, "elasticsearch.pm"));
+			this._client.DeleteByQuery<ElasticSearchProject>(d => d
+				.Query(q=>q
+					.Term(f => f.Name, "elasticsearch.pm")
+				)
+			);
 
 			result = this._client.Search<ElasticSearchProject>(s => s
 				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
@@ -269,7 +266,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.True(result.Total == 0);
 
 			//make sure we did not delete all.
-			var countResult = this._client.Count<ElasticSearchProject>(q => q.MatchAll());
+			var countResult = this._client.Count<ElasticSearchProject>(c=>c.Query(q => q.MatchAll()));
 			Assert.True(countResult.IsValid);
 			Assert.Greater(countResult.Count, 0);
 		}
@@ -285,10 +282,16 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticSearchProject>(q => q
-					  .Indices(new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" })
-					  .Term(f => f.Name, "elasticsearch.pm")
-				  );
+			this._client.DeleteByQuery<ElasticSearchProject>(d => d
+				.Indices(new[]
+				{
+					ElasticsearchConfiguration.DefaultIndex, 
+					ElasticsearchConfiguration.DefaultIndex + "_clone"
+				})
+				.Query(q=>q 
+					.Term(f => f.Name, "elasticsearch.pm")
+				)
+			);
 
 			result = this._client.Search<ElasticSearchProject>(s => s
 				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
@@ -298,7 +301,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.True(result.Total == 0);
 
 			//make sure we did not delete all.
-			var countResult = this._client.Count<ElasticSearchProject>(q => q.MatchAll());
+			var countResult = this._client.Count<ElasticSearchProject>(c=>c.Query(q => q.MatchAll()));
 			Assert.True(countResult.IsValid);
 			Assert.Greater(countResult.Count, 0);
 

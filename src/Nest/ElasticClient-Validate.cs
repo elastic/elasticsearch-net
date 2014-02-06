@@ -1,48 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Nest.Resolvers;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
+
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		public IValidateResponse Validate(Func<ValidateQueryPathDescriptor, BaseQuery> querySelector)
+		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
+			where T : class
 		{
-			var descriptor = new ValidateQueryPathDescriptor();
-			var bq = querySelector(descriptor);
-			var stringQuery = this.Serialize(bq);
-			var path = this.PathResolver.GetPathForTyped(descriptor, "_validate/query");
-			if (descriptor._QueryStringQuery.IsNullOrEmpty())
-				return this._Validate(path, stringQuery);
-			return this._ValidateQueryString(path);
+			return this.Dispatch<ValidateQueryDescriptor<T>, ValidateQueryQueryString, ValidateResponse>(
+				querySelector,
+				(p, d) => this.RawDispatch.IndicesValidateQueryDispatch(p, d)
+			);
 		}
 
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it. 
 		/// </summary>
-		public IValidateResponse Validate<T>(Func<ValidateQueryPathDescriptor<T>, BaseQuery> querySelector) where T : class
+		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector) 
+			where T : class
 		{
-			var descriptor = new ValidateQueryPathDescriptor<T>();
-			var bq = querySelector(descriptor);
-			var stringQuery = this.Serialize(descriptor);
-			var path = this.PathResolver.GetPathForTyped(descriptor, "_validate/query");
-			if (descriptor._QueryStringQuery.IsNullOrEmpty())
-				return this._Validate(path, stringQuery);
-			return this._ValidateQueryString(path);
+			return this.DispatchAsync<ValidateQueryDescriptor<T>, ValidateQueryQueryString, ValidateResponse, IValidateResponse>(
+				querySelector,
+				(p, d) => this.RawDispatch.IndicesValidateQueryDispatchAsync(p, d)
+			);
 		}
-		private IValidateResponse _Validate(string path, string query)
-		{
-			var status = this.Connection.PostSync(path, query);
-			var r = this.Deserialize<ValidateResponse>(status);
-			return r;
-		}
-		private IValidateResponse _ValidateQueryString(string path)
-		{
-			var status = this.Connection.GetSync(path);
-			var r = this.Deserialize<ValidateResponse>(status);
-			return r;
-		}
+
 	}
 }

@@ -13,13 +13,6 @@ namespace Nest
 		internal override object _Object { get; set; }
 
 
-		private readonly TypeNameResolver _typeNameResolver;
-
-		public BulkCreateDescriptor()
-		{
-			this._typeNameResolver = new TypeNameResolver();
-		}
-
 		internal override string GetIdForObject(ElasticInferrer inferrer)
 		{
 			if (!this._Id.IsNullOrEmpty())

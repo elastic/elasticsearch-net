@@ -13,17 +13,17 @@ namespace Nest
 	/// <typeparam name="T"></typeparam>
 	public abstract class FluentQueryString<T> where T : FluentQueryString<T>
 	{
-		internal readonly NameValueCollection NameValueCollection = new NameValueCollection();
+		internal readonly IDictionary<string, object> _QueryStringDictionary = new Dictionary<string, object>();
 
-		public T Add(string name, string value)
+		public T Add(string name, object value)
 		{
-			NameValueCollection.Add(name, value);
+			_QueryStringDictionary.Add(name, value);
 			return (T)this;
 		}
 
-		protected string CreateString(object s)
+		public bool ContainsKey(string name)
 		{
-			return RawElasticClient.Stringify(s);
+			return this._QueryStringDictionary != null && this._QueryStringDictionary.ContainsKey(name);
 		}
 
 	}

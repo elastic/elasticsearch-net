@@ -6,8 +6,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class RootObjectMapping : ObjectMapping
-    {
+	{
 		[JsonProperty("type")]
 		public override TypeNameMarker Type { get { return null; } }
 
@@ -73,5 +74,5 @@ namespace Nest
 		[JsonConverter(typeof(DynamicTemplatesConverter))]
 		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
 
-    }
+	}
 }

@@ -20,6 +20,8 @@ namespace Nest.Resolvers
 		/// </summary>
 		public IConnectionSettings ConnectionSettings { get; private set; }
 
+		public ElasticInferrer Infer { get; private set; }
+
 		/// <summary>
 		/// Signals to custom converter that it can get serialization state from one of the converters
 		/// Ugly but massive performance gain
@@ -30,6 +32,12 @@ namespace Nest.Resolvers
 			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
+			this.Infer = new ElasticInferrer(this.ConnectionSettings);
+		}
+
+		protected override JsonConverter ResolveContractConverter(Type objectType)
+		{
+			return base.ResolveContractConverter(objectType);
 		}
 
 		protected override JsonContract CreateContract(Type objectType)
@@ -48,9 +56,14 @@ namespace Nest.Resolvers
 
 			if (typeof(IHit<object>).IsAssignableFrom(objectType))
 				contract.Converter = new DefaultHitConverter();
-
+			
 			if (objectType == typeof(MultiGetResponse))
 				contract.Converter = new MultiGetHitConverter();
+
+			if (objectType == typeof(PropertyNameMarker))
+				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
+			if (objectType == typeof(PropertyPathMarker))
+				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
 
 			if (objectType == typeof(MultiSearchResponse))
 				contract.Converter = new MultiSearchConverter();

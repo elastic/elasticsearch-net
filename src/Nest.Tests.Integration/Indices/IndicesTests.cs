@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest.Domain.Settings;
+using Nest.Resolvers;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -32,7 +33,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void GetIndexSettingsSimple()
 		{
-			var r = this._client.GetIndexSettings();
+			var r = this._client.GetIndexSettings(i=>i.Index<ElasticSearchProject>());
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
 			Assert.GreaterOrEqual(r.Settings.NumberOfReplicas, 0);
@@ -74,15 +75,16 @@ namespace Nest.Tests.Integration.Indices
 			ib.SimilarityParameters.Add("normalization", "h1");
 			settings.Similarity.CustomSimilarities.Add(ib);
 
-			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
-			typeMapping.TypeNameMarker = index;
+			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMapping = typeMappingResult.Mapping;
+			typeMapping.Name = index;
 			settings.Mappings.Add(typeMapping);
 
 			settings.Add("merge.policy.merge_factor", "10");
 
-			var createResponse = this._client.CreateIndex(index, settings);
+			var createResponse = this._client.CreateIndex(index, i=>i.InitializeUsing(settings));
 
-			var r = this._client.GetIndexSettings(index);
+			var r = this._client.GetIndexSettings(i=>i.Index(index));
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
 			Assert.AreEqual(r.Settings.NumberOfReplicas, 4);
@@ -174,7 +176,7 @@ namespace Nest.Tests.Integration.Indices
 				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("lambda") && x.Value.ToString().Equals("ttf")));
 				Assert.True(similarity2.SimilarityParameters.Any(x => x.Key.Equals("normalization") && x.Value.ToString().Equals("h1")));
 			}
-			this._client.DeleteIndex(index);
+			this._client.DeleteIndex(i=>i.Index(index));
 		}
 		[Test]
 		public void UpdateSettingsSimple()
@@ -186,20 +188,21 @@ namespace Nest.Tests.Integration.Indices
 			settings.NumberOfShards = 5;
 			settings.Add("refresh_interval", "1s");
 			settings.Add("search.slowlog.threshold.fetch.warn", "1s");
-			client.CreateIndex(index, settings);
+			client.CreateIndex(index, i=>i.InitializeUsing(settings));
 
 			settings["refresh_interval"] = "-1";
-			settings["search.slowlog.threshold.fetch.warn"] = "5s";
 
-			var r = this._client.UpdateSettings(index, settings);
+			var r = this._client.UpdateSettings(us=>us
+				.Index(index)
+				.RefreshInterval("-1")
+			);
 
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
-			var getResponse = this._client.GetIndexSettings(index);
+			var getResponse = this._client.GetIndexSettings(i=>i.Index(index));
 			Assert.AreEqual(getResponse.Settings["refresh_interval"], "-1");
-			Assert.AreEqual(getResponse.Settings["search.slowlog.threshold.fetch.warn"], "1s");
 
-			this._client.DeleteIndex(index);
+			this._client.DeleteIndex(i=>i.Index(index));
 		}
 
 
@@ -209,8 +212,9 @@ namespace Nest.Tests.Integration.Indices
 		public void CreateIndex()
 		{
 			var client = this._client;
-			var typeMapping = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
-			typeMapping.TypeNameMarker = "mytype";
+			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
+			var typeMapping = typeMappingResult.Mapping;
+			typeMapping.Name = "mytype";
 			var settings = new IndexSettings();
 			settings.Mappings.Add(typeMapping);
 			settings.NumberOfReplicas = 1;
@@ -218,14 +222,14 @@ namespace Nest.Tests.Integration.Indices
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
-			var response = client.CreateIndex(indexName, settings);
+			var response = client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
 
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.OK);
 
-			Assert.IsNotNull(this._client.GetMapping(indexName, "mytype"));
-
-			var deleteResponse = client.DeleteIndex(indexName);
+			var mappingResult = this._client.GetMapping(gm=>gm.Index(indexName).Type("mytype"));
+			mappingResult.Mapping.Should().NotBeNull();
+			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
 
 			Assert.IsTrue(deleteResponse.IsValid);
 			Assert.IsTrue(deleteResponse.OK);
@@ -236,8 +240,8 @@ namespace Nest.Tests.Integration.Indices
 		public void CreateIndexUsingDescriptor()
 		{
 			var index = ElasticsearchConfiguration.DefaultIndex + "_clone";
-			if (this._client.IndexExists(index).Exists)
-				_client.DeleteIndex(index);
+			if (this._client.IndexExists(i=>i.Index(index)).Exists)
+				_client.DeleteIndex(d=>d.Index(index));
 
 			var result = this._client.CreateIndex(index, c => c
 				.NumberOfReplicas(1)
@@ -284,19 +288,19 @@ namespace Nest.Tests.Integration.Indices
 		public void PutMapping()
 		{
 			var fieldName = Guid.NewGuid().ToString();
-			var mapping = this._client.GetMapping<ElasticSearchProject>();
+			var mapping = this._client.GetMapping<ElasticSearchProject>().Mapping;
 			var property = new StringMapping
 			{
 				Index = FieldIndexOption.not_analyzed
 			};
 			mapping.Properties.Add(fieldName, property);
 
-			var response = this._client.Map(mapping);
+			var response = this._client.Map<ElasticSearchProject>(m=>m.InitializeUsing(mapping));
 
 			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
 			Assert.IsTrue(response.OK, response.ConnectionStatus.ToString());
 
-			mapping = this._client.GetMapping<ElasticSearchProject>();
+			mapping = this._client.GetMapping(gm => gm.Index<ElasticSearchProject>().Type<ElasticSearchProject>()).Mapping;
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
 		}
 
@@ -307,7 +311,7 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 
 			var typeMapping = new RootObjectMapping();
-			typeMapping.TypeNameMarker = Guid.NewGuid().ToString("n");
+			typeMapping.Name = Guid.NewGuid().ToString("n");
 			var property = new MultiFieldMapping();
 
 			var primaryField = new StringMapping()
@@ -322,7 +326,7 @@ namespace Nest.Tests.Integration.Indices
 
 			property.Fields.Add("name", primaryField);
 			property.Fields.Add("name_analyzed", analyzedField);
-			typeMapping.Properties = typeMapping.Properties ?? new Dictionary<string, IElasticType>();
+			typeMapping.Properties = typeMapping.Properties ?? new Dictionary<PropertyNameMarker, IElasticType>();
 			typeMapping.Properties.Add("name", property);
 
 			var settings = new IndexSettings();
@@ -332,15 +336,16 @@ namespace Nest.Tests.Integration.Indices
 			settings.Analysis.Analyzers.Add("snowball", new SnowballAnalyzer { Language = "English" });
 
 			var indexName = Guid.NewGuid().ToString();
-			var response = client.CreateIndex(indexName, settings);
+			var response = client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
 
 			Assert.IsTrue(response.IsValid);
 			Assert.IsTrue(response.OK);
 
-			var typeName = typeMapping.TypeNameMarker.Resolve(this._settings);
-			Assert.IsNotNull(this._client.GetMapping(indexName, typeName));
+			var inferrer = new ElasticInferrer(this._settings);
+			var typeName = inferrer.PropertyName(typeMapping.Name);
+			Assert.IsNotNull(this._client.GetMapping(gm=>gm.Index(indexName).Type(typeName)));
 
-			var deleteResponse = client.DeleteIndex(indexName);
+			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
 
 			Assert.IsTrue(deleteResponse.IsValid);
 			Assert.IsTrue(deleteResponse.OK);

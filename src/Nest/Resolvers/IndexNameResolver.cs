@@ -33,5 +33,10 @@ namespace Nest.Resolvers
 			return this._connectionSettings.DefaultIndex;
 		}
 
+
+		internal string GetIndexForType(IndexNameMarker i)
+		{
+			return i.Name ?? this.GetIndexForType(i.Type);
+		}
 	}
 }

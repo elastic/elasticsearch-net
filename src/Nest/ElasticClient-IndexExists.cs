@@ -1,34 +1,31 @@
-﻿namespace Nest
+﻿using System;
+using System.Runtime.Remoting.Messaging;
+using System.Threading.Tasks;
+
+namespace Nest
 {
 	public partial class ElasticClient
 	{
 		/// <summary>
 		/// Check if the index already exists
 		/// </summary>
-		public IIndexExistsResponse IndexExists(string index)
+		public IIndexExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
-			return this._IndexExists(index);
+			return this.Dispatch<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesExistsDispatch(p),
+				(c, d) => new IndexExistsResponse(c),
+				allow404:true
+			);
 		}
-		private IndexExistsResponse _IndexExists(string index)
+		public Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
-			var path = this.PathResolver.CreateIndexPath(index);
-			var status = this.Connection.HeadSync(path);
-			var response = new IndexExistsResponse()
-			{
-				IsValid = false,
-				Exists = false,
-				ConnectionStatus = status
-			};
-			if (status.Error == null || status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
-			{	
-				//404 is an expected possible status code for this call.
-				response.IsValid = true;
-			}
-			if (status.Error == null)
-			{
-				response.Exists = true;
-			}
-			return response;
+			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse, IIndexExistsResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync(p),
+				(c, d) => new IndexExistsResponse(c),
+				allow404:true
+			);
 		}
 	}
 }

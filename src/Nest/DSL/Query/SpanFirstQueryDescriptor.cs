@@ -29,8 +29,9 @@ namespace Nest
 			, string value
 			, double? Boost = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			this.MatchTerm(field, value, Boost: Boost);
+			var span = new SpanQueryDescriptor<T>(true);
+			span = span.SpanTerm(fieldDescriptor, value, Boost);
+			this._SpanQueryDescriptor = span;
 			return this;
 		}
 		public SpanFirstQueryDescriptor<T> MatchTerm(string field, string value, double? Boost = null)

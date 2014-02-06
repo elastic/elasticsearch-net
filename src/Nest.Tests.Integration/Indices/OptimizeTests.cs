@@ -15,44 +15,25 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void OptimizeIndex()
 		{
-			var r = this._client.Optimize(ElasticsearchConfiguration.DefaultIndex);
+			var r = this._client.Optimize(o=>o.Index(ElasticsearchConfiguration.DefaultIndex));
 			Assert.True(r.OK);
 		}
 		[Test]
-		public void OptimizeIndeces()
+		public void OptimizeIndices()
 		{
-			var r = this._client.Optimize(new []{ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" });
+			var r = this._client.Optimize(o=>o.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" ));
 			Assert.True(r.OK);
 		}
 		[Test]
 		public void OptimizeTyped()
 		{
-			var r = this._client.Optimize<ElasticSearchProject>();
+			var r = this._client.Optimize(o=>o.Index<ElasticSearchProject>());
 			Assert.True(r.OK);
 		}
-		[Test]
 		public void OptimizeAllWithParameters()
 		{
-			var r = this._client.Optimize(new OptimizeParams());
+			var r = this._client.Optimize(o=>o.MaxNumSegments(2));
 			Assert.True(r.OK, r.ConnectionStatus.ToString());
-		}
-		[Test]
-		public void OptimizeIndexWithParameters()
-		{
-			var r = this._client.Optimize(ElasticsearchConfiguration.DefaultIndex, new OptimizeParams());
-			Assert.True(r.OK);
-		}
-		[Test]
-		public void OptimizeIndecesWithParameters()
-		{
-			var r = this._client.Optimize(new[] { ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" }, new OptimizeParams());
-			Assert.True(r.OK);
-		}
-		[Test]
-		public void OptimizeTypedWithParameters()
-		{
-			var r = this._client.Optimize<ElasticSearchProject>(new OptimizeParams());
-			Assert.True(r.OK);
 		}
 
 	}

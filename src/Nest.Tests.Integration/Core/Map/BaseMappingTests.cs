@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Core.Map
 		[TestFixtureSetUp]
 		public void Initialize()
 		{
-			this._client.DeleteMapping<ElasticSearchProject>();
+			this._client.DeleteMapping(dm=>dm.Index<ElasticSearchProject>().Type<ElasticSearchProject>());
 		}
 
 		protected void DefaultResponseAssertations(IIndicesResponse result)

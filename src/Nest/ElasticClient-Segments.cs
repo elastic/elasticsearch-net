@@ -1,36 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Get segment information for all the indices
-		/// </summary>
-		public ISegmentsResponse Segments()
+		public ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null)
 		{
-			return _Segments("_segments");
+			segmentsSelector = segmentsSelector ?? (s => s);
+			return this.Dispatch<SegmentsDescriptor, SegmentsQueryString, SegmentsResponse>(
+				segmentsSelector,
+				(p, d) => this.RawDispatch.IndicesSegmentsDispatch(p)
+			);
 		}
-		/// <summary>
-		/// Get the segment information for the specified index
-		/// </summary>
-		public ISegmentsResponse Segments(string index)
+	
+		public Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null)
 		{
-			return this.Segments(new [] { index });
-		}
-		/// <summary>
-		/// Get the segment information for the specified indices
-		/// </summary>
-		public ISegmentsResponse Segments(IEnumerable<string> indices)
-		{
-			var path = this.PathResolver.CreateIndexPath(indices, "_segments");
-			return this._Segments(path);
-		}
-		private SegmentsResponse _Segments(string path)
-		{
-			var status = this.Connection.GetSync(path);
-			var r = this.Deserialize<SegmentsResponse>(status);
-			return r;
+			segmentsSelector = segmentsSelector ?? (s => s);
+			return this.DispatchAsync<SegmentsDescriptor, SegmentsQueryString, SegmentsResponse, ISegmentsResponse>(
+				segmentsSelector,
+				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync(p)
+			);
 		}
 	}
 }

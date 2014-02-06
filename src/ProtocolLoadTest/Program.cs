@@ -32,9 +32,6 @@ namespace ProtocolLoadTest
 			Console.WriteLine();
 			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
 				, httpRate, threadCountHttp, memorySizeHttp);
-			
-
-
 
 			Console.ReadLine();
 		}
@@ -59,20 +56,20 @@ namespace ProtocolLoadTest
 
 			Console.WriteLine("{0} index test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, rate);
 
-			var numberOfSearches = 10000;
+			//var numberOfSearches = 10000;
 
-			sw.Restart();
-			tester.SearchUsingSingleClient(INDEX_PREFIX + type, port, numberOfSearches);
-			double singleClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
-			Console.WriteLine("{0} search single client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, singleClientSearchRate);
+			//sw.Restart();
+			//tester.SearchUsingSingleClient(INDEX_PREFIX + type, port, numberOfSearches);
+			//double singleClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
+			//Console.WriteLine("{0} search single client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, singleClientSearchRate);
 
-			sw.Restart();
-			tester.SearchUsingMultipleClients(INDEX_PREFIX + type, port, numberOfSearches);
-			double multiClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
-			Console.WriteLine("{0} search multi client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, multiClientSearchRate);
+			//sw.Restart();
+			//tester.SearchUsingMultipleClients(INDEX_PREFIX + type, port, numberOfSearches);
+			//double multiClientSearchRate = numberOfSearches / ((double)sw.ElapsedMilliseconds / 1000);
+			//Console.WriteLine("{0} search multi client test completed in {1}ms ({2:0,0}/s)", type, sw.ElapsedMilliseconds, multiClientSearchRate);
 
-			// Close the index so we don't interfere with the next test
-			CloseIndex(type);
+			//// Close the index so we don't interfere with the next test
+			//CloseIndex(type);
 
 			return rate;
 		}
@@ -84,8 +81,7 @@ namespace ProtocolLoadTest
 				host = "ipv4.fiddler";
 			string indexName = INDEX_PREFIX + suffix;
 
-			var connSettings = new ConnectionSettings(new Uri("http://"+host+":9200"))
-				.SetDefaultIndex(indexName);
+			var connSettings = new ConnectionSettings(new Uri("http://"+host+":9200"), indexName);
 
 			var client = new ElasticClient(connSettings);
 
@@ -98,15 +94,15 @@ namespace ProtocolLoadTest
 				return;
 			}
 
-			client.DeleteIndex(indexName);
+			client.DeleteIndex(i=>i.Index(indexName));
 
 			var indexSettings = new IndexSettings();
 			indexSettings.NumberOfReplicas = 1;
 			indexSettings.NumberOfShards = 5;
 			indexSettings.Add("index.refresh_interval", "-1");
 
-			var createResponse = client.CreateIndex(indexName, indexSettings);
-			client.MapFromAttributes<Message>();
+			var createResponse = client.CreateIndex(indexName, i=>i.InitializeUsing(indexSettings));
+			client.Map<Message>(m=>m.MapFromAttributes());
 		}
 
 		private static void CloseIndex(string suffix)
@@ -117,8 +113,7 @@ namespace ProtocolLoadTest
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 
-			var connSettings = new ConnectionSettings(new Uri("http://" + host + ":9200"))
-				.SetDefaultIndex(indexName);
+			var connSettings = new ConnectionSettings(new Uri("http://" + host + ":9200"), indexName);
 
 			var client = new ElasticClient(connSettings);
 
@@ -131,7 +126,7 @@ namespace ProtocolLoadTest
 				return;
 			}
 
-			client.CloseIndex(indexName);
+			client.CloseIndex(ci=>ci.Index(indexName));
 		}
 	}
 }

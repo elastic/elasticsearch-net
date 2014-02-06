@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SingleSegment()
 		{
-			var r = this._client.Segments(ElasticsearchConfiguration.DefaultIndex);
+			var r = this._client.Segments(s=>s.Index(ElasticsearchConfiguration.DefaultIndex));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Indices
 		public void MultipleSegment()
 		{
 			var indices = new [] {ElasticsearchConfiguration.DefaultIndex , ElasticsearchConfiguration.DefaultIndex + "_clone"};
-			var r = this._client.Segments(indices);
+			var r = this._client.Segments(s=>s.Indices(indices));
 			Assert.True(r.IsValid);
 			Assert.True(r.OK);
 

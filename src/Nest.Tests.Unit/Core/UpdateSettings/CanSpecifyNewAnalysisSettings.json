@@ -1,0 +1,11 @@
+{
+  "index.number_of_replicas": 5,
+  "analysis": {
+    "analyzer": {
+      "content": {
+        "tokenizer": "whitespace",
+        "type": "custom"
+      }
+    }
+  }
+}

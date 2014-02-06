@@ -22,8 +22,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void ResolveToSepcifiedTypeNames()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri)
-				.SetDefaultIndex("mydefaultindex")
+			var clientSettings = new ConnectionSettings(Test.Default.Uri, "mydefaultindex")
 				.MapDefaultTypeNames(p => p
 					.Add(typeof(Car), "automobile")
 					.Add(typeof(Person), "human")
@@ -32,96 +31,79 @@ namespace Nest.Tests.Unit.Internals.Inferno
 					.Add(typeof(MyGeneric<Developer>), "codemonkey-wrapped-in-bacon")
 					.Add(typeof(MyGeneric<Organization>), "org-wrapped-in-bacon")
 				);
+			var inferrer = new ElasticInferrer(clientSettings);
 
 			TypeNameMarker marker = typeof (Car);
-			marker.Resolve(clientSettings).Should().Be("automobile");
+			inferrer.TypeName(marker).Should().Be("automobile");
 
 			marker = typeof (Person);
-			marker.Resolve(clientSettings).Should().Be("human");
+			inferrer.TypeName(marker).Should().Be("human");
 
 			marker = typeof(Organization);
-			marker.Resolve(clientSettings).Should().Be("organisation");
+			inferrer.TypeName(marker).Should().Be("organisation");
 
 			marker = typeof(Developer);
-			marker.Resolve(clientSettings).Should().Be("codemonkey");
+			inferrer.TypeName(marker).Should().Be("codemonkey");
 
 			marker = typeof(MyGeneric<Developer>);
-			marker.Resolve(clientSettings).Should().Be("codemonkey-wrapped-in-bacon");
+			inferrer.TypeName(marker).Should().Be("codemonkey-wrapped-in-bacon");
 
 			marker = typeof(MyGeneric<Organization>);
-			marker.Resolve(clientSettings).Should().Be("org-wrapped-in-bacon");
+			inferrer.TypeName(marker).Should().Be("org-wrapped-in-bacon");
 
-			//Should fall back to the default lowercase pluralize since
+			//Should fall back to the default lowercase since
 			//it doesn't have an explicit default
 			marker = typeof(NoopObject);
-			marker.Resolve(clientSettings).Should().Be("noopobjects");
+			inferrer.TypeName(marker).Should().Be("noopobject");
 
-		}
-
-		[Test]
-		public void TypesShouldMakeItIntoPaths()
-		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri)
-				.SetDefaultIndex("mydefaultindex")
-				.MapDefaultTypeNames(p => p
-					.Add(typeof(Car), "automobile")
-					.Add(typeof(Person), "human")
-					.Add(typeof(Organization), "organisation")
-					.Add(typeof(Developer), "codemonkey")
-				);
-			var c = new PathResolver(clientSettings);
-			var searchPath = c.GetSearchPathForTyped(new SearchDescriptor<Person>());
-			StringAssert.Contains("/human/", searchPath);
-			searchPath = c.GetSearchPathForTyped(new SearchDescriptor<Developer>());
-			StringAssert.Contains("/codemonkey/", searchPath);
 		}
 
 		[Test]
 		public void DefaultTypeNamesTakePrecedenceOverCustomTypeNameInferrer()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri)
-				.SetDefaultIndex("mydefaultindex")
+			var clientSettings = new ConnectionSettings(Test.Default.Uri, "mydefaultindex")
 				.MapDefaultTypeNames(p => p
 					.Add(typeof(Developer), "codemonkey")
 				)
 				.SetDefaultTypeNameInferrer(t=>t.Name.ToUpperInvariant())
 				;
 
+			var inferrer = new ElasticInferrer(clientSettings);
 			TypeNameMarker marker = typeof(Developer);
-			marker.Resolve(clientSettings).Should().Be("codemonkey");
+			inferrer.TypeName(marker).Should().Be("codemonkey");
 
 			//Should use the custom type name inferrer that upper cases
 			marker = typeof(NoopObject);
-			marker.Resolve(clientSettings).Should().Be("NOOPOBJECT");
+			inferrer.TypeName(marker).Should().Be("NOOPOBJECT");
 
 		}
 
 		[Test]
 		public void AttributeTypeNamesTakePrecedenceOverDefaultTypeNameInferrer()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri)
-				.SetDefaultIndex("mydefaultindex")
+			var clientSettings = new ConnectionSettings(Test.Default.Uri, "mydefaultindex")
 				.SetDefaultTypeNameInferrer(t => t.Name.ToUpperInvariant())
 				;
 
+			var inferrer = new ElasticInferrer(clientSettings);
 			TypeNameMarker marker = typeof(MyCustomAtrributeName);
-			marker.Resolve(clientSettings).Should().Be("custotypo");
+			inferrer.TypeName(marker).Should().Be("custotypo");
 
 		}
 
 		[Test]
 		public void MapTypeIndicesTakesPrecedenceOverAttributeName()
 		{
-			var clientSettings = new ConnectionSettings(Test.Default.Uri)
-				.SetDefaultIndex("mydefaultindex")
+			var clientSettings = new ConnectionSettings(Test.Default.Uri,"mydefaultindex")
 				.MapDefaultTypeNames(dt=>dt
 					.Add(typeof(MyCustomAtrributeName), "micutype")
 				)
 				.SetDefaultTypeNameInferrer(t => t.Name.ToUpperInvariant())
 				;
 
+			var inferrer = new ElasticInferrer(clientSettings);
 			TypeNameMarker marker = typeof(MyCustomAtrributeName);
-			marker.Resolve(clientSettings).Should().Be("micutype");
+			inferrer.TypeName(marker).Should().Be("micutype");
 
 		}
 	}

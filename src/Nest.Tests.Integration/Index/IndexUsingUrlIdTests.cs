@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Index
 			};
 			var response = this._client.Index(newProduct);
 
-			var productInElasticsearch = this._client.Get<Product>(id);
+			var productInElasticsearch = this._client.Source<Product>(i=>i.Id(id));
 			Assert.NotNull(productInElasticsearch);
 			Assert.AreEqual(productInElasticsearch.Id, id);
 			Assert.True(response.IsValid);
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Index
 			};
 			var response = client.Index(newProduct);
 
-			var productInElasticsearch = client.Get<Product>(id);
+			var productInElasticsearch = client.Source<Product>(id);
 			Assert.NotNull(productInElasticsearch);
 			Assert.AreEqual(productInElasticsearch.Id, id);
 			Assert.True(response.IsValid);

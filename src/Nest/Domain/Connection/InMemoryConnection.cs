@@ -24,9 +24,7 @@ namespace Nest
 			: base(settings)
 		{
 			this._fixedResult = fixedResult;
-			
 		}
-
 
 		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
 		{
@@ -35,19 +33,23 @@ namespace Nest
 
 		private ConnectionStatus ReturnConnectionStatus(HttpWebRequest request, string data)
 		{
-			return this._fixedResult ?? new ConnectionStatus(this._ConnectionSettings, "{ \"status\" : \"USING NEST IN MEMORY CONNECTION\" }")
+			var cs = this._fixedResult ?? new ConnectionStatus(this._ConnectionSettings, "{ \"USING NEST IN MEMORY CONNECTION\"  : null }")
 			{
 				Request = data,
 				RequestUrl = request.RequestUri.ToString(),
 				RequestMethod = request.Method
 			};
+			_ConnectionSettings.ConnectionStatusHandler(cs);
+			return cs;
 		}
 
 		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
 		{
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
 			{
-				return this.ReturnConnectionStatus(request, data);
+				var cs = this.ReturnConnectionStatus(request, data);
+				_ConnectionSettings.ConnectionStatusHandler(cs);
+				return cs;
 			});
 		}
 

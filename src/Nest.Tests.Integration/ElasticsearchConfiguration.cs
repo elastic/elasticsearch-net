@@ -16,8 +16,7 @@ namespace Nest.Tests.Integration
 
 			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 
-			return new ConnectionSettings(uri)
-				.SetDefaultIndex(ElasticsearchConfiguration.DefaultIndex)
+			return new ConnectionSettings(uri, ElasticsearchConfiguration.DefaultIndex)
 				.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
 				.UsePrettyResponses();
 		}

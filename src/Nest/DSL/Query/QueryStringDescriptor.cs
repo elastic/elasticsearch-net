@@ -16,9 +16,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "query")]
 		internal string _QueryString { get; set; }
 		[JsonProperty(PropertyName = "default_field")]
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<string> _Fields { get; set; }
+		internal IEnumerable<PropertyPathMarker> _Fields { get; set; }
 		[JsonProperty(PropertyName = "default_operator")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal Operator? _DefaultOperator { get; set; }
@@ -71,43 +71,33 @@ namespace Nest
 		}
 		public QueryStringDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 		public QueryStringDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			this._Fields = fields;
+			this._Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public QueryStringDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			var fieldNames = objectPaths
-				.Select(o => new PropertyNameResolver().Resolve(o));
-			return this.OnFields(fieldNames);
+			this._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			return this;
 		}
-		public QueryStringDescriptor<T> OnFieldsWithBoost(
-			Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
+		public QueryStringDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
 		{
 			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
 			boostableSelector(d);
-			var fieldNames = d
-				.Select(o =>
-				{
-					var field = new PropertyNameResolver().Resolve(o.Key);
-					var boost = o.Value.GetValueOrDefault(1.0);
-					return "{0}^{1}".F(field, boost.ToString(CultureInfo.InvariantCulture));
-				});
-			return this.OnFields(fieldNames);
+			this._Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			return this;
 		}
-		public QueryStringDescriptor<T> OnFieldsWithBoost(
-		Action<FluentDictionary<string, double?>> boostableSelector)
+		public QueryStringDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector) 
 		{
 			var d = new FluentDictionary<string, double?>();
 			boostableSelector(d);
-			var fieldNames = d
-				.Select(o => "{0}^{1}".F(o.Key, o.Value.GetValueOrDefault(1.0).ToString(CultureInfo.InvariantCulture)));
-			return this.OnFields(fieldNames);
+			this._Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			return this;
 		}
 
 		public QueryStringDescriptor<T> Query(string query)

@@ -24,13 +24,13 @@ namespace Nest
 		[JsonProperty("include_upper")]
 		internal bool? _ToInclusive { get; set; }
 
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 
 		internal override bool IsConditionless
 		{
 			get
 			{
-				return this._Field.IsNullOrEmpty() || (this._From == null && this._To == null);
+				return this._Field.IsConditionless() || (this._From == null && this._To == null);
 			}
 		}
 
@@ -42,11 +42,10 @@ namespace Nest
 		}
 		public NumericRangeFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 
-		
 		/// <summary>
 		/// Forces the 'From()' to be exclusive (which is inclusive by default).
 		/// </summary>

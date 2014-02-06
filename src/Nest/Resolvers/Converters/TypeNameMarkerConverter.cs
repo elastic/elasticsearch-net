@@ -22,10 +22,10 @@ namespace Nest.Resolvers.Converters
 				writer.WriteNull();
 				return;
 			}
-			var settings = serializer.ContractResolver as ElasticContractResolver;
-			if (settings != null && settings.ConnectionSettings != null)
+			var contract = serializer.ContractResolver as ElasticContractResolver;
+			if (contract != null && contract.ConnectionSettings != null)
 			{
-				var typeName = marker.Resolve(settings.ConnectionSettings);
+				var typeName = contract.Infer.TypeName(marker);
 				writer.WriteValue(typeName);
 			}
 			else throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");

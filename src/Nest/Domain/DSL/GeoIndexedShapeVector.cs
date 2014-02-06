@@ -19,6 +19,6 @@ namespace Nest
 		public IndexNameMarker Index { get; set; }
 
 		[JsonProperty("shape_field_name")]
-		public string Field { get; set; }
+		public PropertyPathMarker Field { get; set; }
 	}
 }

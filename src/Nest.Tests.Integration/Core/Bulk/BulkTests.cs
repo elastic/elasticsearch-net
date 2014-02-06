@@ -122,7 +122,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			foreach (var i in Enumerable.Range(3000, 1000))
 				descriptor.Index<ElasticSearchProject>(op => op.Object(new ElasticSearchProject {Id = i}));
 
-			var result = this._client.Bulk(descriptor);
+			var result = this._client.Bulk(d=>descriptor);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
 
@@ -8,54 +9,64 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-
-		public ITemplateResponse GetTemplate(string templateName)
+		public ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
-			templateName.ThrowIfNull("templateName");
-			//TODO validate templateName for invalid url chars?
-
-			string path = this.PathResolver.CreateTemplatePath(templateName);
-			ConnectionStatus status = this.Connection.GetSync(path);
-
-			return this.Deserialize<TemplateResponse>(status);
+		    getTemplateSelector = getTemplateSelector ?? (s => s);
+			return this.Dispatch<GetTemplateDescriptor, GetTemplateQueryString, TemplateResponse>(
+				(d) => getTemplateSelector(d.Name(name)),
+				(p, d) => this.RawDispatch.IndicesGetTemplateDispatch(p),
+				this.Serializer.DeserializeTemplateResponse
+			);
 		}
 
-		public IIndicesOperationResponse PutTemplate(Func<TemplateMappingDescriptor, TemplateMappingDescriptor> templateMappingSelector)
+	
+
+		public Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
-			templateMappingSelector.ThrowIfNull("templateMappingSelector");
-
-			var templateMappingDescriptor = templateMappingSelector(new TemplateMappingDescriptor(this._connectionSettings));
-			templateMappingDescriptor.ThrowIfNull("templateMappingDescriptor");
-
-			var templateMapping = templateMappingDescriptor._TemplateMapping;
-			templateMapping.ThrowIfNull("templateMapping");
-
-			var templateName = templateMappingDescriptor._Name;
-
-			templateName.ThrowIfNull("templateName");
-			templateMapping.ThrowIfNull("templateMapping");
-
-			string template = this.Serializer.Serialize(templateMapping, Formatting.None);
-
-			return PutTemplateRaw(templateName, template);
+		    getTemplateSelector = getTemplateSelector ?? (s => s);
+			return this.DispatchAsync<GetTemplateDescriptor, GetTemplateQueryString, TemplateResponse, ITemplateResponse>(
+				d => getTemplateSelector(d.Name(name)),
+				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync(p),
+				this.Serializer.DeserializeTemplateResponse
+			);
 		}
 
-		public IIndicesOperationResponse PutTemplateRaw(string templateName, string template)
+		public IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
-			string path = this.PathResolver.CreateTemplatePath(templateName);
-			ConnectionStatus status = this.Connection.PutSync(path, template);
-
-			var r = this.Deserialize<IndicesOperationResponse>(status);
-			return r;
+			putTemplateSelector.ThrowIfNull("putTemplateSelector");
+			var descriptor = putTemplateSelector(new PutTemplateDescriptor(this._connectionSettings).Name(name));
+			return this.Dispatch<PutTemplateDescriptor, PutTemplateQueryString, IndicesOperationResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch(p, d._TemplateMapping)
+			);
 		}
 
-		public IIndicesOperationResponse DeleteTemplate(string templateName)
+		public Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
-			string path = this.PathResolver.CreateTemplatePath(templateName);
-			ConnectionStatus status = this.Connection.DeleteSync(path);
-
-			var r = this.Deserialize<IndicesOperationResponse>(status);
-			return r;
+			putTemplateSelector.ThrowIfNull("putTemplateSelector");
+			var descriptor = putTemplateSelector(new PutTemplateDescriptor(this._connectionSettings).Name(name));
+			return this.DispatchAsync<PutTemplateDescriptor, PutTemplateQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync(p, d._TemplateMapping)
+			);
+		}
+		
+		public IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
+		{
+		    deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
+			return this.Dispatch<DeleteTemplateDescriptor, DeleteTemplateQueryString, IndicesOperationResponse>(
+				d => deleteTemplateSelector(d.Name(name)),
+				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatch(p)
+			);
+		}
+		
+		public Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
+		{
+		    deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
+			return this.DispatchAsync<DeleteTemplateDescriptor, DeleteTemplateQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				d => deleteTemplateSelector(d.Name(name)),
+				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync(p)
+			);
 		}
 	}
 }

@@ -12,7 +12,7 @@
       "enabled": false
     },
     "_parent": {
-      "type": "people"
+      "type": "person"
     },
     "_index": {
       "enabled": false

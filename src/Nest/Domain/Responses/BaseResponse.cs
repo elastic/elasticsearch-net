@@ -1,4 +1,7 @@
-﻿using Nest.Resolvers;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Nest.Resolvers;
 
 namespace Nest
 {
@@ -16,7 +19,5 @@ namespace Nest
 		}
 		public virtual bool IsValid { get; internal set; }
 		public ConnectionStatus ConnectionStatus { get; internal set; }
-
-		internal PropertyNameResolver PropertyNameResolver { get; set; }
 	}
 }

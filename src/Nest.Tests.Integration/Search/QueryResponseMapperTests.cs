@@ -531,7 +531,21 @@ namespace Nest.Tests.Integration.Search
 
 			//assert
 			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlights["content"].Highlights.Count() > 0);
-
 		}
+
+		[Test]
+		public void TestRawClientSearch()
+		{
+			
+			var searchDescriptor = new SearchDescriptor<ElasticSearchProject>()
+				.Query(q=>q.MatchAll());
+			var request = this._client.Serializer.Serialize(searchDescriptor);
+			var result = this._client.Raw.SearchPost(request);
+			Assert.NotNull(result);
+			Assert.True(result.Success);
+			Assert.IsNotEmpty(result.Result);
+		}
+
+		
 	}
 }

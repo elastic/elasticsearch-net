@@ -84,20 +84,20 @@ namespace Nest.Resolvers.Converters
 			writer.WriteEndObject();
 			if (indexSettings.Mappings.Count > 0)
 			{
-				var settings = serializer.ContractResolver as ElasticContractResolver;
-				if (settings != null && settings.ConnectionSettings != null)
+				var contract = serializer.ContractResolver as ElasticContractResolver;
+				if (contract != null && contract.ConnectionSettings != null)
 				{
 					writer.WritePropertyName("mappings");
-					serializer.Serialize(writer,
-					                     indexSettings.Mappings.ToDictionary(m => 
-										 { 
-											 if (m.Name.IsNullOrEmpty() && m.TypeNameMarker == null)
-												 throw new DslException("{0} should have a name!".F(m.GetType()));
-
-
-											 var fieldName = m.Name;
-											 return m.TypeNameMarker != null ? m.TypeNameMarker.Resolve(settings.ConnectionSettings) : fieldName;
-										 }));
+					serializer.Serialize(
+						writer,
+						indexSettings.Mappings.ToDictionary(m =>
+						{
+							var name = contract.Infer.PropertyName(m.Name);
+							if (name.IsNullOrEmpty())
+								throw new DslException("{0} should have a name!".F(m.GetType()));
+							return name;
+						})
+					);
 				}
 			}
 			if (indexSettings.Warmers.Count > 0)
@@ -140,7 +140,7 @@ namespace Nest.Resolvers.Converters
 						result.Similarity = new SimilaritySettings();
 					}
 
-					foreach(var similarityProperty in rootProperty.Value.Children<JProperty>())
+					foreach (var similarityProperty in rootProperty.Value.Children<JProperty>())
 					{
 						var typeProperty = ((JObject)similarityProperty.Value).Property("type");
 						typeProperty.Remove();
@@ -162,7 +162,7 @@ namespace Nest.Resolvers.Converters
 			return result;
 		}
 
-		private static Type _type = typeof (IndexSettings);
+		private static Type _type = typeof(IndexSettings);
 		public override bool CanConvert(Type objectType)
 		{
 			return objectType == _type;

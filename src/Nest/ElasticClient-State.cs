@@ -1,37 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Nest
 {
-    public partial class ElasticClient
-    {
-        /// <summary>
-        /// Gets the health status of the cluster.
-        /// </summary>
-        public IClusterStateResponse ClusterState(ClusterStateInfo stateInfo, IEnumerable<string> indices = null)
-        {
-            var path = this.PathResolver.CreateClusterPath("state");
-
-            var options = new List<string>();
-            if (indices != null && indices.HasAny() && (!stateInfo.HasFlag(ClusterStateInfo.ExcludeMetadata)))
-            {
-                options.Add("filter_indices=" + string.Join(",", indices));
-            }
-
-
-            if (stateInfo.HasFlag(ClusterStateInfo.ExcludeNodes))
-                options.Add("filter_nodes=true");
-            if (stateInfo.HasFlag(ClusterStateInfo.ExcludeRoutingTable))
-                options.Add("filter_routing_table=true");
-            if (stateInfo.HasFlag(ClusterStateInfo.ExcludeMetadata))
-                options.Add("filter_metadata=true");
-            if (stateInfo.HasFlag(ClusterStateInfo.ExcludeBlocks))
-                options.Add("filter_blocks=true");
-
-            path += "?" + string.Join("&", options);
-
-            var status = this.Connection.GetSync(path);
-            var r = this.Deserialize<ClusterStateResponse>(status);
-            return r;
-        }
-    }
+	public partial class ElasticClient
+	{
+		public IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
+		{
+			clusterStateSelector = clusterStateSelector ?? (s => s);
+			return this.Dispatch<ClusterStateDescriptor, ClusterStateQueryString, ClusterStateResponse>(
+				clusterStateSelector,
+				(p, d) => this.RawDispatch.ClusterStateDispatch(p)
+			);
+		}
+		
+		public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
+		{
+			clusterStateSelector = clusterStateSelector ?? (s => s);
+			return this
+				.DispatchAsync<ClusterStateDescriptor, ClusterStateQueryString, ClusterStateResponse, IClusterStateResponse>(
+					clusterStateSelector,
+					(p, d) => this.RawDispatch.ClusterStateDispatchAsync(p)
+				);
+		}
+	}
 }

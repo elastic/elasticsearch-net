@@ -13,10 +13,8 @@ namespace Nest.Tests.Integration.Core.MoreLikeThis
 		{
 			var result = this._client.MoreLikeThis<ElasticSearchProject>(mlt => mlt
 				.Id(1)
-				.Options(o => o
-					.OnFields(p => p.Country, p => p.Content)
-					.MinDocumentFrequency(1)
-				)
+				.MltFields(p => p.Country, p => p.Content)
+				.MinDocFreq(1)
 				.Search(s=>s
 					.From(0)
 					.Take(20)

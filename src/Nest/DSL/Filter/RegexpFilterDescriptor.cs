@@ -18,13 +18,13 @@ namespace Nest
 		[JsonProperty("flags")]
 		internal string _Flags { get; set; }
 
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 
 		internal override bool IsConditionless
 		{
 			get
 			{
-				return this._Field.IsNullOrEmpty() || this._Value.IsNullOrEmpty();
+				return this._Field.IsConditionless() || this._Value.IsNullOrEmpty();
 			}
 		}
 
@@ -45,8 +45,8 @@ namespace Nest
 		}
 		public RegexpFilterDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 
 	}

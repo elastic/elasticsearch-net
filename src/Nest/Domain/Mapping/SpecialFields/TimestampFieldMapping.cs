@@ -16,7 +16,7 @@ namespace Nest
 		public bool Enabled { get; internal set; }
 
 		[JsonProperty("path")]
-		public string Path { get; internal set; }
+		public PropertyPathMarker Path { get; internal set; }
 
 		[JsonProperty("format")]
 		public string Format { get; internal set; }
@@ -38,7 +38,7 @@ namespace Nest
 		public TimestampFieldMapping<T> SetPath(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			this.Path = new PropertyNameResolver().Resolve(objectPath);
+			this.Path = objectPath;
 			return this;	
 		}
 		public TimestampFieldMapping<T> SetFormat(string format)

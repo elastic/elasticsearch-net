@@ -7,13 +7,10 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class NumberMapping : IElasticType, IElasticCoreType
 	{
-		[JsonIgnore]
-		public TypeNameMarker TypeNameMarker { get; set; }
-
-		[JsonProperty(PropertyName = "name")]
-		public string Name { get; set; }
+		public PropertyNameMarker Name { get; set; }
 
 		private TypeNameMarker __type;
 		[JsonProperty("type")]

@@ -10,9 +10,9 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 		[Test]
 		public void RootPropertiesShouldSerialize()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.TypeName("elasticsearchprojects2")
-				.IndexNames(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
+			var result = this._client.Map<ElasticSearchProject>(m => m
+				.Type("elasticsearchprojects2")
+				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.IgnoreConflicts()
 				.IndexAnalyzer("standard")
 				.SearchAnalyzer("standard")
@@ -34,59 +34,59 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 		[Test]
 		public void DynamicAllowSetAndGet()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.TypeName("elasticsearchprojects_allow")
-				.IndexNames(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
+			var result = this._client.Map<ElasticSearchProject>(m => m
+				.Type("elasticsearchprojects_allow")
+				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(DynamicMappingOption.allow)
 			);
 			this.DefaultResponseAssertations(result);
-			var getResult = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects_allow");
-			Assert.AreEqual(getResult.Dynamic, DynamicMappingOption.allow);
+			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_allow"));
+			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.allow);
 
-			result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.TypeName("elasticsearchprojects_allow2")
-				.IndexNames(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
+			result = this._client.Map<ElasticSearchProject>(m => m
+				.Type("elasticsearchprojects_allow2")
+				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(true)
 			);
 			this.DefaultResponseAssertations(result);
-			getResult = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects_allow2");
-			Assert.AreEqual(getResult.Dynamic, DynamicMappingOption.allow);
+			getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_allow"));
+			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.allow);
 
 		}
 
 		[Test]
 		public void DynamicIgnoreSetAndGet()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.TypeName("elasticsearchprojects_ignore")
-				.IndexNames(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
+			var result = this._client.Map<ElasticSearchProject>(m => m
+				.Type("elasticsearchprojects_ignore")
+				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(DynamicMappingOption.ignore)
 			);
 			this.DefaultResponseAssertations(result);
-			var getResult = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects_ignore");
-			Assert.AreEqual(getResult.Dynamic, DynamicMappingOption.ignore);
+			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_ignore"));
+			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.ignore);
 
-			result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.TypeName("elasticsearchprojects_ignore2")
-				.IndexNames(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
+			result = this._client.Map<ElasticSearchProject>(m => m
+				.Type("elasticsearchprojects_ignore2")
+				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(false)
 			);
 			this.DefaultResponseAssertations(result);
-			getResult = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects_ignore2");
-			Assert.AreEqual(getResult.Dynamic, DynamicMappingOption.ignore);
+			getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_ignore2"));
+			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.ignore);
 
 		}
 		[Test]
 		public void DynamicStrictSetAndGet()
 		{
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.TypeName("elasticsearchprojects_strict")
-				.IndexNames(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
+			var result = this._client.Map<ElasticSearchProject>(m => m
+				.Type("elasticsearchprojects_strict")
+				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(DynamicMappingOption.strict)
 			);
 			this.DefaultResponseAssertations(result);
-			var getResult = this._client.GetMapping(ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects_strict");
-			Assert.AreEqual(getResult.Dynamic, DynamicMappingOption.strict);
+			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_strict"));
+			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.strict);
 
 		}
 	}

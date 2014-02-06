@@ -13,7 +13,7 @@ namespace Nest
 	public class MoreLikeThisQueryDescriptor<T> : IQuery where T : class
 	{
 		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<string> _Fields { get; set; }
+		internal IEnumerable<PropertyPathMarker> _Fields { get; set; }
 		[JsonProperty(PropertyName = "like_text")]
 		internal string _LikeText { get; set; }
 
@@ -50,15 +50,14 @@ namespace Nest
 
 		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			this._Fields = fields;
+			this._Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			var fieldNames = objectPaths
-				.Select(o => new PropertyNameResolver().Resolve(o));
-			return this.OnFields(fieldNames);
+			this._Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			return this;
 		}
 		public MoreLikeThisQueryDescriptor<T> LikeText(string likeText)
 		{

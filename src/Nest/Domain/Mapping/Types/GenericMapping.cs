@@ -11,19 +11,17 @@ namespace Nest
 	/// Sometimes you need a generic type mapping, i.e when using dynamic templates 
 	/// in order to specify "{dynamic_template}" the type, or if you have some plugin that exposes a new type.
 	/// </summary>
+	[JsonObject(MemberSerialization.OptIn)]
 	public class GenericMapping : IElasticType, IElasticCoreType
 	{
-		[JsonIgnore]
-		public TypeNameMarker TypeNameMarker { get; set; }
 
-		[JsonProperty(PropertyName = "name")]
-		public string Name { get; set; }
+		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("type")]
 		public TypeNameMarker Type { get; set; }
 
-    [JsonProperty("similarity")]
-    public string Similarity { get; set; }
+		[JsonProperty("similarity")]
+		public string Similarity { get; set; }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.

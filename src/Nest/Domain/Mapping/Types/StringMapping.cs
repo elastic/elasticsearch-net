@@ -7,19 +7,17 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class StringMapping : IElasticType, IElasticCoreType
 	{
-		[JsonIgnore]
-		public TypeNameMarker TypeNameMarker { get; set; }
-
 		[JsonProperty("type")]
 		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "string" }; } }
 
-		[JsonProperty(PropertyName = "name")]
-		public string Name { get; set; }
+		//[JsonProperty(PropertyName = "name")]
+		public PropertyNameMarker Name { get; set; }
 
-    [JsonProperty("similarity")]
-    public string Similarity { get; set; }
+		[JsonProperty("similarity")]
+		public string Similarity { get; set; }
 
 		/// <summary>
 		/// The name of the field that will be stored in the index. Defaults to the property/field name.

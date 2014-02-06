@@ -1,32 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Search using T as the return type
-		/// </summary>
 		public IQueryResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
 		{
-			var mltDescriptor = new MoreLikeThisDescriptor<T>();
-			var descriptor = mltSelector(mltDescriptor);
+			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>>(
+				mltSelector,
+				(p, d) =>
+				{
+					CopySearchQueryString(d);
+					return this.RawDispatch.MltDispatch(p, d._Search);
+				}
 
-			var path = this.PathResolver.GetMoreLikeThisPathFor(descriptor);
-			ConnectionStatus status = null;
-			if (descriptor._Search == null)
+			);
+		}
+		public Task<IQueryResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) where T : class
+		{
+			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisQueryString, QueryResponse<T>, IQueryResponse<T>>(
+				mltSelector,
+				(p, d) =>
+				{
+					CopySearchQueryString(d);
+					return this.RawDispatch.MltDispatchAsync(p, d._Search);
+				});
+		}
+
+		private static void CopySearchQueryString<T>(MoreLikeThisDescriptor<T> d) where T : class
+		{
+			if (d._Search != null)
 			{
-				status = this.Connection.GetSync(path);
+				var searchQs = d._Search._QueryString._QueryStringDictionary;
+				foreach (var k in searchQs.Keys)
+					d._QueryString._QueryStringDictionary[k] = searchQs[k];
 			}
-			else
-			{
-				var search = this.Serialize(descriptor._Search);
-				status = this.Connection.PostSync(path, search);
-			}
-			return this.Deserialize<QueryResponse<T>>(status);
 		}
 	}
 }

@@ -1,50 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		///  refreshes all
-		/// </summary>
-		/// <returns></returns>
-		public IIndicesShardResponse Refresh()
+		
+		public IIndicesShardResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
 		{
-			return this.Refresh("_all");
+			refreshSelector = refreshSelector ?? (s => s);
+			return this.Dispatch<RefreshDescriptor, RefreshQueryString, IndicesShardResponse>(
+				refreshSelector,
+				(p,d) => this.RawDispatch.IndicesRefreshDispatch(p)
+			);
 		}
-		/// <summary>
-		/// Refresh an index
-		/// </summary>
-		public IIndicesShardResponse Refresh(string index)
+		
+		public Task<IIndicesShardResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
 		{
-			index.ThrowIfNull("index");
-			return this.Refresh(new []{ index });
+			refreshSelector = refreshSelector ?? (s => s);
+			return this.DispatchAsync<RefreshDescriptor, RefreshQueryString, IndicesShardResponse, IIndicesShardResponse>(
+				refreshSelector,
+				(p,d)=> this.RawDispatch.IndicesRefreshDispatchAsync(p)
+			);
 		}
-		/// <summary>
-		/// Refresh multiple indices at once.
-		/// </summary>
-		public IIndicesShardResponse Refresh(IEnumerable<string> indices)
-		{
-			indices.ThrowIfNull("indices");
-			string path = this.PathResolver.CreateIndexPath(indices, "_refresh");
-			return this._Refresh(path);
-		}
-		/// <summary>
-		/// refresh the connection settings default index for type T
-		/// </summary>
-		public IIndicesShardResponse Refresh<T>() where T : class
-		{
-			var index = this.Infer.IndexName<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-			return Refresh(index);
-		}
-		private IndicesShardResponse _Refresh(string path)
-		{
-			var status = this.Connection.PostSync(path, null);
-			var r = this.Deserialize<IndicesShardResponse>(status);
-			return r;
-		}
+		
 
 	}
 }

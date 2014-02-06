@@ -23,11 +23,9 @@ namespace Nest.Tests.Unit.Core.Map
 			//most of these merely specify the defaults and are superfluous
 			//No asserts just a global overview of what the fluent mapping is capable off.
 			
-			//TODO unit and integration tests for individual pieces!
-
-			var result = this._client.MapFluent<ElasticSearchProject>(m => m
-				.TypeName("elasticsearchprojects2")
-				.IndexNames("nest_test_data", "nest_test_data_clone")
+			var result = this._client.Map<ElasticSearchProject>(m => m
+				.Type("elasticsearchprojects2")
+				.Indices("nest_test_data", "nest_test_data_clone")
 				.IgnoreConflicts()
 				.IndexAnalyzer("standard")
 				.SearchAnalyzer("standard")
@@ -248,5 +246,7 @@ namespace Nest.Tests.Unit.Core.Map
 
             Assert.NotNull(result.ConnectionStatus.Request);
 		}
+
+
 	}
 }

@@ -12,7 +12,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class FuzzyDateQueryDescriptor<T> : IQuery where T : class
 	{
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 		[JsonProperty(PropertyName = "boost")]
 		internal double? _Boost { get; set; }
 		[JsonProperty(PropertyName = "min_similarity")]
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			get
 			{
-				return this._Field.IsNullOrEmpty() || this._Value == null;
+				return this._Field.IsConditionless() || this._Value == null;
 			}
 		}
 
@@ -35,8 +35,8 @@ namespace Nest
 		}
 		public FuzzyDateQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Boost(double boost)
 		{

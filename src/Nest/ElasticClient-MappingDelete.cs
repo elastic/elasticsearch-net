@@ -1,76 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
 
 namespace Nest
 {
-    public partial class ElasticClient
-    {
-        /// <summary>
-        /// Deletes the mapping for the inferred type name of T under the default index
-        /// </summary>
-        public IIndicesResponse DeleteMapping<T>() where T : class
-        {
-            string type = this.Infer.TypeName<T>();
-            return this.DeleteMapping<T>(this.Infer.IndexName<T>(), type);
-        }
-        /// <summary>
-        /// Deletes the mapping for the inferred type name of T under the specified index
-        /// </summary>
-        public IIndicesResponse DeleteMapping<T>(string index) where T : class
-        {
-            string type = this.Infer.TypeName<T>();
-            return this.DeleteMapping<T>(index, type);
-        }
-        /// <summary>
-        /// Deletes the mapping for the specified type name under the specified index
-        /// </summary>
-        public IIndicesResponse DeleteMapping<T>(string index, string type) where T : class
-        {
-            string path = this.PathResolver.CreateIndexTypePath(index, type);
-            
-			ConnectionStatus status = this.Connection.DeleteSync(path);
-	        return this.Deserialize<IndicesResponse>(status, allow404: true);
-        }
+	public partial class ElasticClient
+	{
+		public IIndicesResponse DeleteMapping(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
+		{
+			return this.Dispatch<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch(p)
+			);
+		}
 
-        /// <summary>
-        /// Deletes the mapping for the inferred type name of T under the default index
-        /// </summary>
-        public IIndicesResponse DeleteMapping(Type t)
-        {
-            string index = this.Infer.IndexName(t);
-            string type = this.Infer.TypeName(t);
-            return this.DeleteMapping(t, index, type);
-        }
-        /// <summary>
-        /// Deletes the mapping for the inferred type name of T under the specified index
-        /// </summary>
-        public IIndicesResponse DeleteMapping(Type t, string index)
-        {
-            string type = this.Infer.TypeName(t);
-            return this.DeleteMapping(t, index, type);
-        }
-        /// <summary>
-        /// Deletes the mapping for the specified type name under the specified index
-        /// </summary>
-        public IIndicesResponse DeleteMapping(Type t, string index, string type)
-        {
-            string path = this.PathResolver.CreateIndexTypePath(index, type);
-            ConnectionStatus status = this.Connection.DeleteSync(path);
-
-            var response = new IndicesResponse();
-            try
-            {
-                response = this.Deserialize<IndicesResponse>(status.Result);
-            }
-            catch
-            {
-            }
-
-            response.ConnectionStatus = status;
-            return response;
-        }
-    }
+		public Task<IIndicesResponse> DeleteMappingAsync(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
+		{
+			return this.DispatchAsync<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse, IIndicesResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync(p)
+			);
+		}
+	}
 }

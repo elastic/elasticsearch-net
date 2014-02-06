@@ -10,9 +10,9 @@ namespace Nest.Tests.Integration.Search.SearchType
 	[TestFixture]
 	public class SubClassSupportTests : IntegrationTests
 	{
-		private Random _random = new Random(1337); 
+		private Random _random = new Random(1337);
 
-		public abstract class MyBaseClass 
+		public abstract class MyBaseClass
 		{
 			public string Title { get; set; }
 		}
@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		{
 			public string ClassBProperty { get; set; }
 		}
-		
+
 		[Test]
 		public void SingleIndexWithMultipleTypes()
 		{
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var result = this._client.IndexMany(data, new SimpleBulkParameters { Refresh = true });
+			var result = this._client.Bulk(b => b.IndexMany(data).Refresh());
 
 			result.IsValid.Should().BeTrue();
 			result.Items.Count().Should().Be(100);
@@ -73,8 +73,8 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.IndexMany(data.OfType<ClassA>(), new SimpleBulkParameters { Refresh = true });
-			var resultb = this._client.IndexMany(data.OfType<ClassB>(), new SimpleBulkParameters { Refresh = true });
+			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
 
 			var queryResults = this._client.Search<MyBaseClass>(s => s
 				.Types(typeof(ClassA), typeof(ClassB))
@@ -104,18 +104,18 @@ namespace Nest.Tests.Integration.Search.SearchType
 					return o;
 				});
 
-			var resulta = this._client.IndexMany(data.OfType<ClassA>(), new SimpleBulkParameters { Refresh = true });
-			var resultb = this._client.IndexMany(data.OfType<ClassB>(), new SimpleBulkParameters { Refresh = true });
+			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
 
 			var queryResults = this._client.MultiSearch(ms => ms
-				.Search<MyBaseClass>("using_types", s=>s.AllIndices()
+				.Search<MyBaseClass>("using_types", s => s.AllIndices()
 					.Types(typeof(ClassA), typeof(ClassB))
 					.From(0)
 					.Size(100)
 					.MatchAll()
 				)
 				.Search<MyBaseClass>("using_selector", s => s.AllIndices()
-          .Types("classas","classbs")
+					.Types("classa", "classb")
 					.ConcreteTypeSelector((o, h) => o.classBProperty != null ? typeof(ClassB) : typeof(ClassA))
 					.From(0)
 					.Size(100)

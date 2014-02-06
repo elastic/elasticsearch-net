@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Nest.Domain.Connection;
+using PUrify;
 
 namespace Nest
 {
@@ -129,7 +130,6 @@ namespace Nest
 
 		private void SetProxyIfNeeded(HttpWebRequest myReq)
 		{
-			//myReq.Proxy = null;
 			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
 			{
 				var proxy = new WebProxy();
@@ -139,15 +139,15 @@ namespace Nest
 				proxy.Credentials = credentials;
 				myReq.Proxy = proxy;
 			}
+			//myReq.Proxy = null;
 		}
 
 		private void SetBasicAuthorizationIfNeeded(HttpWebRequest myReq)
 		{
-			var myUri = this._ConnectionSettings.Uri;
-			if (myUri != null && !string.IsNullOrEmpty(myUri.UserInfo))
+			if (this._ConnectionSettings.UriSpecifiedBasicAuth)
 			{
 				myReq.Headers["Authorization"] =
-				  "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myUri.UserInfo));
+				  "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(this._ConnectionSettings.Uri.UserInfo));
 			}
 		}
 
@@ -155,7 +155,7 @@ namespace Nest
 		{
 			var url = this._CreateUriString(path);
 
-			HttpWebRequest myReq = (HttpWebRequest)WebRequest.Create(url);
+			var myReq = (HttpWebRequest)WebRequest.Create(url);
 			myReq.Accept = "application/json";
 			myReq.ContentType = "application/json";
 
@@ -231,6 +231,7 @@ namespace Nest
 					var cs = new ConnectionStatus(this._ConnectionSettings, new TimeoutException(m));
 					tcs.SetResult(cs);
 					tracer.SetResult(cs);
+					_ConnectionSettings.ConnectionStatusHandler(cs);
 					return tcs.Task;
 				}
 			}
@@ -330,7 +331,8 @@ namespace Nest
 				}
 				else if (enumerator.MoveNext())
 				{
-					enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
+					//enumerator.Current.ContinueWith(recursiveBody, TaskContinuationOptions.ExecuteSynchronously);
+					enumerator.Current.ContinueWith(recursiveBody);
 				}
 				else enumerator.Dispose();
 			};
@@ -348,19 +350,7 @@ namespace Nest
 				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
 				path += qs;
 			}
-			path = this._ConnectionSettings.DontDoubleEscapePathDotsAndSlashes ? path : path.Replace("%2F", "%252F");
-			var uri = new Uri(s.Uri, path);
-
-			//WebRequest.Create will replace %2F with / 
-			//this is a 'security feature'
-			//see http://mikehadlow.blogspot.nl/2011/08/how-to-stop-systemuri-un-escaping.html
-			//and http://msdn.microsoft.com/en-us/library/ee656542%28v=vs.100%29.aspx
-			//NEST will by default double escape these so that if nest is the only way you talk to elasticsearch
-			//it won't barf.
-			//If you manually set the config settings to NOT forefully unescape dots and slashes be sure to call 
-			//.SetDontDoubleEscapePathDotsAndSlashes() on the connection settings.
-			//return );
-			//
+			var uri = new Uri(s.Uri, path).Purify();
 			return uri;
 		}
 

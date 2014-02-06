@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Size(10)
 				.MatchAll()
 				.Fields(f=>f.Name)
-				.SearchType(Nest.SearchType.Count)
+				.SearchType(SearchTypeOptions.Count)
 			);
 			Assert.True(queryResults.IsValid);
 			Assert.False(queryResults.Documents.Any());

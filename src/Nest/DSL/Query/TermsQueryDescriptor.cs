@@ -11,7 +11,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class TermsQueryDescriptor<T> : IQuery where T : class
 	{
-		internal string _Field { get; set; }
+		internal PropertyPathMarker _Field { get; set; }
 		internal int? _MinMatch { get; set; }
 		internal bool _DisableCord { get; set; }
 		internal IEnumerable<string> _Terms { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			get
 			{
-				return this._Field.IsNullOrEmpty() 
+				return this._Field.IsConditionless() 
 					|| 
 					(!this._Terms.HasAny() && this._ExternalField == null);
 			}
@@ -41,8 +41,8 @@ namespace Nest
 		}
 		public TermsQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.OnField(fieldName);
+			this._Field = objectPath;
+			return this;
 		}
 
 		public TermsQueryDescriptor<T> OnExternalField<K>(

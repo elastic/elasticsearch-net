@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration
 {
 	public class IntegrationTests
 	{
-		protected readonly ElasticClient _client = ElasticsearchConfiguration.Client;
+		protected readonly IElasticClient _client = ElasticsearchConfiguration.Client;
 		protected readonly ElasticClient _thriftClient = ElasticsearchConfiguration.ThriftClient;
 		protected readonly IConnectionSettings _settings = ElasticsearchConfiguration.Settings();
 	
@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration
 		protected IQueryResponse<T> SearchRaw<T>(string query) where T : class
 		{
 			var index = this._client.Infer.IndexName<T>();
-			var typeName = this._client.GetTypeNameFor<T>();
+			var typeName = this._client.Infer.TypeName<T>();
 			var connectionStatus = this._client.Raw.SearchPost(index, typeName, query);
 			return connectionStatus.Deserialize<QueryResponse<T>>();
 		} 

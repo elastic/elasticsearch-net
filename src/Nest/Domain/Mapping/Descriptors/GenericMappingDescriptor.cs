@@ -13,15 +13,12 @@ namespace Nest
 			if (!noNameProperty)
 				this._Mapping.Name = name;
 
-			this._Mapping.TypeNameMarker = name;
+			this._Mapping.Name = name;
 			return this;
 		}
 		public GenericMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath, bool noNameProperty = false)
 		{
-			var name = new PropertyNameResolver().ResolveToLastToken(objectPath);
-			if (!noNameProperty)
-				this._Mapping.Name = name;
-			this._Mapping.TypeNameMarker = name;
+			this._Mapping.Name = objectPath;
 			return this;
 		}
 		public GenericMappingDescriptor<T> Type(string type)

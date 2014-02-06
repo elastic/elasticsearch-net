@@ -25,20 +25,24 @@ namespace Nest
 
 		public GeoIndexedShapeFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
 		{
+			return _SetShape<T>(field, id, index, type);
+		}
+
+		private GeoIndexedShapeFilterDescriptor _SetShape<T>(PropertyPathMarker field, string id, string index, string type)
+		{
 			this._Shape = new GeoIndexedShapeVector
 			{
 				Field = field,
 				Id = id,
-				Type = type ?? new TypeNameMarker { Type = typeof(T) },
-				Index = index ?? new IndexNameMarker { Type = typeof(T) }
+				Type = type ?? new TypeNameMarker {Type = typeof (T)},
+				Index = index ?? new IndexNameMarker {Type = typeof (T)}
 			};
 			return this;
 		}
 
 		public GeoIndexedShapeFilterDescriptor Lookup<T>(Expression<Func<T, object>> field, string id, string index = null, string type = null)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(field);
-			return this.Lookup<T>(fieldName, id, index, type);
+			return _SetShape<T>(field, id, index, type);
 		}
 
 	}

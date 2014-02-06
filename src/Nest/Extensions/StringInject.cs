@@ -8,6 +8,8 @@ namespace Nest
 {
 	public static class StringInjectExtension
 	{
+		private static Regex _attributeRegex;
+
 		/// <summary>
 		/// Extension method that replaces keys in a string with the values of matching object properties.
 		/// <remarks>Uses <see cref="String.Format()"/> internally; custom formats should match those used for that method.</remarks>
@@ -64,10 +66,10 @@ namespace Nest
 			string result = formatString;
 			//regex replacement of key with value, where the generic key format is:
 			//Regex foo = new Regex("{(foo)(?:}|(?::(.[^}]*)}))");
-			Regex attributeRegex = new Regex("{(" + key + ")(?:}|(?::(.[^}]*)}))");  //for key = foo, matches {foo} and {foo:SomeFormat}
+			_attributeRegex = new Regex("{(" + key + ")(?:}|(?::(.[^}]*)}))");
 
 			//loop through matches, since each key may be used more than once (and with a different format string)
-			foreach (Match m in attributeRegex.Matches(formatString))
+			foreach (Match m in _attributeRegex.Matches(formatString))
 			{
 				string replacement = m.ToString();
 				if (m.Groups[2].Length > 0) //matched {foo:SomeFormat}

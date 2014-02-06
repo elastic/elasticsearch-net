@@ -19,7 +19,7 @@ namespace Nest
 		internal BaseQuery _QueryDescriptor { get; set; }
 
 		[JsonProperty("path")]
-		internal string _Path { get; set; }
+		internal PropertyPathMarker _Path { get; set; }
 
 		[JsonProperty("_scope")]
 		internal string _Scope { get; set; }
@@ -51,8 +51,8 @@ namespace Nest
 		}
 		public NestedFilterDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.Path(fieldName);
+			this._Path = objectPath;
+			return this;
 		}
 		public NestedFilterDescriptor<T> Scope(string scope)
 		{

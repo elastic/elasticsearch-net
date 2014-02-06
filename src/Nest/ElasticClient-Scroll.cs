@@ -1,31 +1,37 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Scrolling search, ideal for scrolling on the server as it allows to keep a query open on the serverside.
-		/// Please consult the docs http://www.elasticsearch.org/guide/reference/api/search/scroll.html
-		/// on the do's and don'ts!
-		/// </summary>
-		public IQueryResponse<dynamic> Scroll(string scrollTime, string scrollId)
+		public IQueryResponse<T> Scroll<T>(
+			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			where T : class
 		{
-			return Scroll<dynamic>(scrollTime, scrollId);
+			return this.Dispatch<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>>(
+				scrollSelector,
+				(p, d) =>
+				{
+					var scrollId = p.ScrollId;
+					p.ScrollId = null;
+					return this.RawDispatch.ScrollDispatch(p, scrollId);
+				}
+			);
 		}
-
-		public IQueryResponse<T> Scroll<T>(string scrollTime, string scrollId) where T : class
+		public Task<IQueryResponse<T>> ScrollAsync<T>(
+			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			where T : class
 		{
-			scrollId.ThrowIfNullOrEmpty("scrollId");
-			scrollTime.ThrowIfNullOrEmpty("scrollTime");
-
-			scrollTime = Uri.EscapeDataString(scrollTime);
-
-			var path = "_search/scroll?scroll={0}".F(scrollTime);
-
-			ConnectionStatus status = this.Connection.PostSync(path, scrollId);
-			var r = this.Deserialize<QueryResponse<T>>(status);
-			return r;
+			return this.DispatchAsync<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>, IQueryResponse<T>>(
+				scrollSelector,
+				(p, d) =>
+				{
+					var scrollId = p.ScrollId;
+					p.ScrollId = null;
+					return this.RawDispatch.ScrollDispatchAsync(p, scrollId);
+				}
+			);
 		}
 	}
 }

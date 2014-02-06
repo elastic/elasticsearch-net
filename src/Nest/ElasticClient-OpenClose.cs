@@ -1,49 +1,40 @@
-﻿namespace Nest
+﻿using System;
+using System.Threading.Tasks;
+
+namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Open index
-		/// </summary>
-		public IIndicesOperationResponse OpenIndex(string index)
+		public IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
 		{
-			string path = this.PathResolver.CreateIndexPath(index, "_open");
-			return this._OpenClose(path);
-		}
-		/// <summary>
-		/// Close index
-		/// </summary>
-		public IIndicesOperationResponse CloseIndex(string index)
-		{
-			string path = this.PathResolver.CreateIndexPath(index, "_close");
-			return this._OpenClose(path);
-		}
-		/// <summary>
-		/// Open the default index
-		/// </summary>
-		public IIndicesOperationResponse OpenIndex<T>() where T : class
-		{
-			var index = this.Infer.IndexName<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-			return OpenIndex(index);
-		}
-		/// <summary>
-		/// Close the default index
-		/// </summary>
-		public IIndicesOperationResponse CloseIndex<T>() where T : class
-		{
-			var index = this.Infer.IndexName<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-			return CloseIndex(index);
-		}
-		private IndicesOperationResponse _OpenClose(string path)
-		{
-			var status = this.Connection.PostSync(path, "");
-			var r = this.Deserialize<IndicesOperationResponse>(status);
-			return r;
+			return this.Dispatch<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse>(
+				openIndexSelector,
+				(p, d) => this.RawDispatch.IndicesOpenDispatch(p)
+			);
 		}
 
+		public Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector)
+		{
+			return this.DispatchAsync<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				openIndexSelector,
+				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync(p)
+			);
+		}
+
+		public IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
+		{
+			return this.Dispatch<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse>(
+				closeIndexSelector,
+				(p, d) => this.RawDispatch.IndicesCloseDispatch(p)
+			);
+		}
+
+		public Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector)
+		{
+			return this.DispatchAsync<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				closeIndexSelector,
+				(p, d) => this.RawDispatch.IndicesCloseDispatchAsync(p)
+			);
+		}
 	}
 }

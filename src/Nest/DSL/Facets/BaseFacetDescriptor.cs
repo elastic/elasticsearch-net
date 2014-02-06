@@ -2,37 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
 
 namespace Nest
 {
-	public partial class BaseFacetDescriptor<T> : IFacetDescriptor<T> where T : class 
+	public class BaseFacetDescriptor<TFacetDescriptor, T> : IFacetDescriptor<T> 
+		where TFacetDescriptor : BaseFacetDescriptor<TFacetDescriptor, T> 
+		where T : class 
 	{
-		internal bool? _IsGlobal { get; set; }
-		public BaseFacetDescriptor<T> Global() 
+		bool? IFacetDescriptor.IsGlobal { get; set; }
+		public TFacetDescriptor Global(bool global = true)
 		{
-			throw new NotImplementedException("Cannot call Base directly");
+			((IFacetDescriptor)this).IsGlobal = global;
+			return (TFacetDescriptor) this;
 		}
 
-		internal BaseFilter _FacetFilter { get; set; }
-		public virtual BaseFacetDescriptor<T> FacetFilter(
-			Func<FilterDescriptor<T>, FilterDescriptor<T>> facetFilter
-		)
+		BaseFilter IFacetDescriptor.FacetFilter { get; set; }
+		public TFacetDescriptor FacetFilter(Func<FilterDescriptor<T>, BaseFilter> facetFilter)
 		{
-			throw new NotImplementedException("Cannot call Base directly");
+			facetFilter.ThrowIfNull("facetFilter");
+			var filter = facetFilter(new FilterDescriptor<T>());
+			if (filter.IsConditionless)
+				filter = null;
+			((IFacetDescriptor) this).FacetFilter = filter;
+			return (TFacetDescriptor) this;
 		}
 
-		internal string _Scope { get; set;}
-		public virtual BaseFacetDescriptor<T> Scope(string scope)
+		string IFacetDescriptor.Scope { get; set;}
+		public TFacetDescriptor Scope(string scope)
 		{
-			throw new NotImplementedException("Cannot call Base directly");
+			((IFacetDescriptor)this).Scope = scope;
+			return (TFacetDescriptor) this;
 		}
-		internal string _Nested { get; set; }
-		public virtual BaseFacetDescriptor<T> Nested(string nested)
+		
+		PropertyPathMarker IFacetDescriptor.Nested { get; set; }
+		public TFacetDescriptor Nested(string nested)
 		{
-			throw new NotImplementedException("Cannot call Base directly");
+			((IFacetDescriptor)this).Nested = nested;
+			return (TFacetDescriptor) this;
+		}
+		public TFacetDescriptor Nested(Expression<Func<T, object>> objectPath)
+		{
+			((IFacetDescriptor)this).Nested = objectPath;
+			return (TFacetDescriptor) this;
 		}
 	}
 }

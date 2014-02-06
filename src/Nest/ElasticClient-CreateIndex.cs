@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
@@ -10,29 +12,28 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Create an index with the specified index settings
-		/// </summary>
-		public IIndicesOperationResponse CreateIndex(string index, IndexSettings settings)
-		{
-			string data = this.Serialize(settings);
-			string path = this.PathResolver.CreateIndexPath(index);
-			var status = this.Connection.PostSync(path, data);
-			return this.Deserialize<IndicesOperationResponse>(status);
-		}
-		
-		/// <summary>
-		/// Create an index with the specified index settings
-		/// </summary>
-		public IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
+
+		public IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
 		{
 			index.ThrowIfEmpty("index");
-			createIndexSelector.ThrowIfNull("createIndexSelector");
-
-			var d = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
-			var settings = d._IndexSettings;
-			return this.CreateIndex(index, settings);
-
+			createIndexSelector = createIndexSelector ?? (c => c);
+			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
+			descriptor._Index = index;
+			return this.Dispatch<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.IndicesCreateDispatch(p, d._IndexSettings)
+			);
+		}
+		public Task<IIndicesOperationResponse> CreateIndexAsync(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
+		{
+			index.ThrowIfEmpty("index");
+			createIndexSelector = createIndexSelector ?? (c => c);
+			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
+			descriptor._Index = index;
+			return this.DispatchAsync<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.IndicesCreateDispatchAsync(p, d._IndexSettings)
+			);
 		}
 
 	}

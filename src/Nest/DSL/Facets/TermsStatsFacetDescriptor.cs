@@ -10,16 +10,16 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermsStatsFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
+	public class TermsStatsFacetDescriptor<T> : BaseFacetDescriptor<TermsStatsFacetDescriptor<T>,T> where T : class
 	{
 		[JsonProperty(PropertyName = "fields")]
 		internal IEnumerable<string> _Fields { get; set; }
 
 		[JsonProperty(PropertyName = "key_field")]
-		internal string _KeyField { get; set; }
+		internal PropertyPathMarker _KeyField { get; set; }
 
 		[JsonProperty(PropertyName = "value_field")]
-		internal string _ValueField { get; set; }
+		internal PropertyPathMarker _ValueField { get; set; }
 
 		[JsonProperty(PropertyName = "key_script")]
 		internal string _KeyScript { get; set; }
@@ -44,8 +44,8 @@ namespace Nest
 		public TermsStatsFacetDescriptor<T> KeyField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.KeyField(fieldName);
+			this._KeyField = objectPath;
+			return this;
 		}
 		public TermsStatsFacetDescriptor<T> KeyField(string keyField)
 		{
@@ -62,8 +62,8 @@ namespace Nest
 		public TermsStatsFacetDescriptor<T> ValueField(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			var fieldName = new PropertyNameResolver().Resolve(objectPath);
-			return this.ValueField(fieldName);
+			this._ValueField = objectPath;
+			return this;
 		}
 		public TermsStatsFacetDescriptor<T> ValueField(string valueField)
 		{
@@ -99,36 +99,6 @@ namespace Nest
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
 			this._Params = paramDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
-
-
-
-		public new TermsStatsFacetDescriptor<T> Global()
-		{
-			this._IsGlobal = true;
-			return this;
-		}
-		
-		public new TermsStatsFacetDescriptor<T> FacetFilter(
-			Func<FilterDescriptor<T>, BaseFilter> facetFilter
-		)
-		{
-			var filter = facetFilter(new FilterDescriptor<T>());
-			if (filter.IsConditionless)
-				filter = null;
-
-			this._FacetFilter = filter;
-			return this;
-		}
-		public new TermsStatsFacetDescriptor<T> Nested(string nested)
-		{
-			this._Nested = nested;
-			return this;
-		}
-		public new TermsStatsFacetDescriptor<T> Scope(string scope)
-		{
-			this._Scope = scope;
 			return this;
 		}
 	}

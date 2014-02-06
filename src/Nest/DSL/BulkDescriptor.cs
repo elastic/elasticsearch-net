@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
@@ -11,16 +12,11 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public class BulkDescriptor
+	
+	public partial class BulkDescriptor :
+		FixedIndexTypePathDescriptor<BulkDescriptor, BulkQueryString>
+		, IPathInfo<BulkQueryString>
 	{
-		internal string _FixedIndex { get; set; }
-		internal string _FixedType { get; set; }
-
-		[JsonConverter(typeof(StringEnumConverter))]
-		internal Consistency? _Consistency { get; set; }
-
-		internal bool? _Refresh { get; set; }
-
 		internal IList<BaseBulkOperation> _Operations = new SynchronizedCollection<BaseBulkOperation>();
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
@@ -30,6 +26,19 @@ namespace Nest
 			if (descriptor == null)
 				return this;
 			this._Operations.Add(descriptor);
+			return this;
+		}
+		
+		/// <summary>
+		/// CreateMany, convenience method to create many documents at once.
+		/// </summary>
+		/// <param name="objects">the objects to create</param>
+		/// <param name="bulkCreateSelector">A func called on each object to describe the individual create operation</param>
+		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects, Func<BulkCreateDescriptor<T>, T, BulkCreateDescriptor<T>> bulkCreateSelector = null) where T : class
+		{
+			bulkCreateSelector = bulkCreateSelector ?? ((d, o) => d);
+			foreach (var descriptor in @objects.Select(o => bulkCreateSelector(new BulkCreateDescriptor<T>().Object(o), o)))
+				this._Operations.Add(descriptor);
 			return this;
 		}
 
@@ -43,6 +52,19 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// IndexMany, convenience method to pass many objects at once.
+		/// </summary>
+		/// <param name="objects">the objects to index</param>
+		/// <param name="bulkIndexSelector">A func called on each object to describe the individual index operation</param>
+		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class
+		{
+			bulkIndexSelector = bulkIndexSelector ?? ((d, o) => d);
+			foreach (var descriptor in @objects.Select(o => bulkIndexSelector(new BulkIndexDescriptor<T>().Object(o), o)))
+				this._Operations.Add(descriptor);
+			return this;
+		}
+
 		public BulkDescriptor Delete<T>(Func<BulkDeleteDescriptor<T>, BulkDeleteDescriptor<T>> bulkDeleteSelector) where T : class
 		{
 			bulkDeleteSelector.ThrowIfNull("bulkDeleteSelector");
@@ -52,6 +74,43 @@ namespace Nest
 			this._Operations.Add(descriptor);
 			return this;
 		}
+		
+		/// <summary>
+		/// DeleteMany, convenience method to delete many objects at once.
+		/// </summary>
+		/// <param name="objects">the objects to delete</param>
+		/// <param name="bulkDeleteSelector">A func called on each object to describe the individual delete operation</param>
+		public BulkDescriptor DeleteMany<T>(IEnumerable<T> @objects, Func<BulkDeleteDescriptor<T>, T, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
+		{
+			bulkDeleteSelector = bulkDeleteSelector ?? ((d, o)=>d);
+			foreach (var descriptor in @objects.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Object(o), o)))
+				this._Operations.Add(descriptor);
+			return this;
+		}
+		
+		/// <summary>
+		/// DeleteMany, convenience method to delete many objects at once.
+		/// </summary>
+		/// <param name="ids">Enumerable of string ids to delete</param>
+		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
+		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
+		{
+			bulkDeleteSelector = bulkDeleteSelector ?? ((d, s)=> d);
+			foreach (var descriptor in ids.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Id(o), o)))
+				this._Operations.Add(descriptor);
+			return this;
+		}
+		
+		/// <summary>
+		/// DeleteMany, convenience method to delete many objects at once.
+		/// </summary>
+		/// <param name="ids">Enumerable of int ids to delete</param>
+		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
+		public BulkDescriptor DeleteMany<T>(IEnumerable<int> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
+		{
+			return this.DeleteMany(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)), bulkDeleteSelector);
+		}
+
 		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, BulkUpdateDescriptor<T, T>> bulkUpdateSelector) where T : class
 		{
 			return this.Update<T, T>(bulkUpdateSelector);
@@ -68,47 +127,11 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// When making bulk calls, you can require a minimum number of active shards in the partition 
-		/// through the consistency parameter. The values allowed are one, quorum, and all. It defaults to the node level
-		/// setting of action.write_consistency, which in turn defaults to quorum.
-		/// <pre>
-		/// For example, in a N shards with 2 replicas index, there will have to be at least 2 active shards within the relevant partition (quorum) for the 
-		/// operation to succeed. In a N shards with 1 replica scenario, there will need to be a single shard active (in this case, one and quorum is the same).
-		/// </pre>
-		/// </summary>
-		/// <param name="consistency"></param>
-		/// <returns></returns>
-		public BulkDescriptor Consistency(Consistency consistency)
+		ElasticSearchPathInfo<BulkQueryString> IPathInfo<BulkQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			this._Consistency = consistency;
-			return this;
-		}
-
-		/// <summary>
-		/// The refresh parameter can be set to true in order to refresh the relevant shards immediately after the bulk operation has occurred and 
-		/// make it searchable, instead of waiting for the normal refresh interval to expire. 
-		/// Setting it to true can trigger additional load, and may slow down indexing.
-		/// </summary>
-		/// <param name="refresh"></param>
-		/// <returns></returns>
-		public BulkDescriptor Refresh(bool refresh = true)
-		{
-			this._Refresh = refresh;
-			return this;
-		}
-
-		/// <summary>
-		/// Allows you to perform the multiget on a fixed path. 
-		/// Each operation that doesn't specify an index or type will use this fixed index/type
-		/// over the default infered index and type.
-		/// </summary>
-		public BulkDescriptor FixedPath(string index, string type = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			this._FixedIndex = index;
-			this._FixedType = type;
-			return this;
+			var pathInfo = this.ToPathInfo<BulkQueryString>(settings, this._QueryString);
+			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			return pathInfo;
 		}
 	}
 }

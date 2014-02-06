@@ -8,17 +8,28 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TermConverter))]
+	[JsonConverter(typeof(CustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class Wildcard : Term, IQuery, IMultiTermQuery
+	public class Wildcard : Term, IQuery, IMultiTermQuery, ICustomJson
 	{
 		[JsonProperty(PropertyName = "rewrite")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		public RewriteMultiTerm? Rewrite { get; set; }
 
-		public Wildcard()
-		{
 
+		IDictionary<object, object> ICustomJson.GetCustomJson()
+		{	
+			return new Dictionary<object, object>
+			{
+				{
+					Field, new Dictionary<string, object>
+					{
+						{ "value", Value },
+						{ "boost", Boost },
+						{ "rewrite", Rewrite },
+					}
+				}
+			};
 		}
 	}
 }

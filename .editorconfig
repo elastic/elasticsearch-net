@@ -4,6 +4,10 @@ root=true
 indent_style = tab
 indent_size = 4
 
+[*.cshtml]
+indent_style = tab
+indent_size = 4
+
 [*.js]
 indent_style = spaces
 indent_size = 2

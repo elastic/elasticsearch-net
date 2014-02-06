@@ -40,16 +40,12 @@ namespace Nest
 			fromIndex.ThrowIfNullOrEmpty("fromIndex");
 			toIndex.ThrowIfNullOrEmpty("toIndex");
 
-			var indexSettings = this.CurrentClient.GetIndexSettings(this._reindexDescriptor._FromIndexName);
-			var createSettings = new CreateIndexDescriptor(this._connectionSettings)
-				.InitializeUsing(indexSettings.Settings);
-			var createIndexResponse = this.CurrentClient
-				.CreateIndex(toIndex, (c) =>
-				{
-					if (this._reindexDescriptor._CreateIndexSelector != null)
-						return this._reindexDescriptor._CreateIndexSelector(createSettings);
-					return c;
-				});
+			var indexSettings = this.CurrentClient.GetIndexSettings(i=>i.Index(this._reindexDescriptor._FromIndexName));
+			Func<CreateIndexDescriptor, CreateIndexDescriptor> settings =
+				this._reindexDescriptor._CreateIndexSelector ?? ((ci) => ci);
+
+			var createIndexResponse = this.CurrentClient.CreateIndex(
+				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Settings)));
 			if (!createIndexResponse.IsValid)
 				throw new ReindexException(createIndexResponse.ConnectionStatus);
 
@@ -61,7 +57,7 @@ namespace Nest
 					.From(0)
 					.Take(100)
 					.Query(this._reindexDescriptor._QuerySelector ?? (q=>q.MatchAll()))
-					.SearchType(SearchType.Scan)
+					.SearchType(SearchTypeOptions.Scan)
 					.Scroll(scroll)
 				);
 			if (searchResult.Total <= 0)
@@ -69,7 +65,11 @@ namespace Nest
 			IBulkResponse indexResult = null;
 			do
 			{
-				searchResult = this.CurrentClient.Scroll<T>(scroll, searchResult.ScrollId);
+				var result = searchResult;
+				searchResult = this.CurrentClient.Scroll<T>(s => s
+					.Scroll(scroll)
+					.ScrollId(result.ScrollId)
+				);
 				if (searchResult.Documents.HasAny())
 					indexResult = this.IndexSearchResults(searchResult, observer, toIndex, page);
 				page++;
@@ -84,7 +84,14 @@ namespace Nest
 			if (!searchResult.IsValid)
 				throw new ReindexException(searchResult.ConnectionStatus, "reindex failed on scroll #" + page);
 
-			var indexResult = this.CurrentClient.IndexMany(searchResult.Documents, toIndex);
+			var bb = new BulkDescriptor();
+			foreach (var d in searchResult.DocumentsWithMetaData)
+			{
+				IHit<T> d1 = d;
+				bb.Index<T>(bi => bi.Object(d1.Source).Type(d1.Type).Index(toIndex).Id(d.Id));
+			}
+
+			var indexResult = this.CurrentClient.Bulk(b=>bb);
 			if (!indexResult.IsValid)
 				throw new ReindexException(indexResult.ConnectionStatus, "reindex failed when indexing page " + page);
 

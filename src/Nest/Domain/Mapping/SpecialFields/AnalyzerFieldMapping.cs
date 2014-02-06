@@ -17,12 +17,12 @@ namespace Nest
 		public bool? Index { get; internal set; }
 
 		[JsonProperty("path")]
-		public string Path { get; internal set; }
+		public PropertyPathMarker Path { get; internal set; }
 	}
 
 
-    public class AnalyzerFieldMapping<T> : AnalyzerFieldMapping
-    {
+	public class AnalyzerFieldMapping<T> : AnalyzerFieldMapping
+	{
 		public AnalyzerFieldMapping<T> SetIndexed(bool indexed = true)
 		{
 			this.Index = indexed;
@@ -36,8 +36,8 @@ namespace Nest
 		public AnalyzerFieldMapping<T> SetPath(Expression<Func<T, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
-			this.Path = new PropertyNameResolver().Resolve(objectPath);
-			return this;	
+			this.Path = objectPath;
+			return this;
 		}
-    }
+	}
 }

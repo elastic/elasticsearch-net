@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.Refresh()
-				.Consistency(Consistency.Quorum)
+				.Consistency(ConsistencyOptions.Quorum)
 				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
 				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
 				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
 			uri.AbsolutePath.Should().Be("/_bulk");
-			uri.Query.Should().Be("?refresh=true&consistency=quorem");
+			uri.Query.Should().Be("?refresh=true&consistency=quorum");
 		}
 
 		[Test]

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nest.Resolvers;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -34,7 +35,7 @@ namespace Nest.Tests.Integration.Reproduce
 			settings.Mappings.Add(new RootObjectMapping
 			{
 				Name = "my_root_object",
-				Properties = new Dictionary<string, IElasticType>
+				Properties = new Dictionary<PropertyNameMarker, IElasticType>
 				{
 					{"my_field", new StringMapping() { Name = "my_string_field "}}
 				}
@@ -42,7 +43,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 			Assert.DoesNotThrow(() =>
 			{
-				var idxRsp = this._client.CreateIndex(ElasticsearchConfiguration.NewUniqueIndexName(), settings);
+				var idxRsp = this._client.CreateIndex(ElasticsearchConfiguration.NewUniqueIndexName(), i=>i.InitializeUsing(settings));
 				Assert.IsTrue(idxRsp.IsValid, idxRsp.ConnectionStatus.ToString());			
 			});
 		}

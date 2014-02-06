@@ -17,10 +17,14 @@ namespace RawClientGenerator
 			ApiGenerator.GenerateClientInterface(spec);
 
 			ApiGenerator.GenerateQueryStringParameters(spec);
+			
+			ApiGenerator.GenerateDescriptors(spec);
 
 			ApiGenerator.GenerateEnums(spec);
 
 			ApiGenerator.GenerateRawClient(spec);
+			
+			ApiGenerator.GenerateRawDispatch(spec);
 
 			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count());
 		}

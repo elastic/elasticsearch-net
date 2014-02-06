@@ -29,14 +29,13 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			JsonConverter converter;
-			if (!_hitTypes.TryGetValue(objectType, out converter))
-			{
-				var genericType = typeof(ConcreteTypeConverter<>);
-				var closedType = genericType.MakeGenericType(objectType.GetGenericArguments()[0]);
-				converter = (JsonConverter)closedType.CreateInstance();
-				_hitTypes.TryAdd(objectType, converter);
+			if (_hitTypes.TryGetValue(objectType, out converter))
+				return converter.ReadJson(reader, objectType, existingValue, serializer);
 
-			}
+			var genericType = typeof(ConcreteTypeConverter<>);
+			var closedType = genericType.MakeGenericType(objectType.GetGenericArguments()[0]);
+			converter = (JsonConverter)closedType.CreateInstance();
+			_hitTypes.TryAdd(objectType, converter);
 			return converter.ReadJson(reader, objectType, existingValue, serializer);
 		}
 

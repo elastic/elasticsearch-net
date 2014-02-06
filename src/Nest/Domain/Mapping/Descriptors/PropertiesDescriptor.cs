@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
@@ -11,13 +12,13 @@ namespace Nest
 		private readonly IConnectionSettings _connectionSettings;
 		
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public IDictionary<string, IElasticType> Properties { get; private set; }
+		public IDictionary<PropertyNameMarker, IElasticType> Properties { get; private set; }
 		internal IList<string> _Deletes = new List<string>();
 
 		public PropertiesDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this.Properties = new Dictionary<string, IElasticType>();
+			this.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
 		}
 
 		public PropertiesDescriptor<T> Remove(string name)
@@ -30,9 +31,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new StringMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for string mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -40,9 +41,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new NumberMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for number mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -50,9 +51,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new DateMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for date mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -60,9 +61,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new BooleanMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for boolean mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -70,18 +71,18 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new BinaryMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for binary mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		public PropertiesDescriptor<T> Attachment(Func<AttachmentMappingDescriptor<T>, AttachmentMappingDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new AttachmentMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for attachment mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -90,9 +91,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new ObjectMappingDescriptor<T, TChild>(this._connectionSettings));
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for object mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		
@@ -101,9 +102,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new NestedObjectMappingDescriptor<T, TChild>(this._connectionSettings));
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for nested sobject mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		
@@ -111,18 +112,18 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new MultiFieldMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for multifield mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		public PropertiesDescriptor<T> IP(Func<IPMappingDescriptor<T>, IPMappingDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new IPMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for IP mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -130,9 +131,9 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new GeoPointMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for geo point mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 
@@ -140,18 +141,18 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new GeoShapeMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for geo shape mapping");
-			this.Properties[d._Mapping.TypeNameMarker.Name] = d._Mapping;
+			this.Properties[d._Mapping.Name] = d._Mapping;
 			return this;
 		}
 		public PropertiesDescriptor<T> Generic(Func<GenericMappingDescriptor<T>, GenericMappingDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var d = selector(new GenericMappingDescriptor<T>());
-			if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+			if (d == null || d._Mapping.Name.IsConditionless())
 				throw new Exception("Could not get field name for generic mapping");
-			this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
+			this.Properties.Add(d._Mapping.Name, d._Mapping);
 			return this;
 		}
 
@@ -159,9 +160,9 @@ namespace Nest
         {
             selector.ThrowIfNull("selector");
             var d = selector(new CompletionMappingDescriptor<T>());
-            if (d == null || d._Mapping.TypeNameMarker.IsNullOrEmpty())
+            if (d == null || d._Mapping.Name.IsConditionless())
                 throw new Exception("Could not get field name for completion mapping");
-            this.Properties.Add(d._Mapping.TypeNameMarker.Name, d._Mapping);
+            this.Properties.Add(d._Mapping.Name, d._Mapping);
             return this;
         }
 

@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Control how NEST's behaviour.
+	/// </summary>
 	public class ConnectionSettings : IConnectionSettings
 	{
 		private string _defaultIndex;
@@ -32,7 +35,6 @@ namespace Nest
 		public int MaximumAsyncConnections { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
 		public bool TraceEnabled { get; private set; }
-		public bool DontDoubleEscapePathDotsAndSlashes { get; private set; }
 
 		public Func<Type, string> DefaultTypeNameInferrer { get; private set; }
 		public Action<ConnectionStatus> ConnectionStatusHandler { get; private set; }
@@ -41,31 +43,40 @@ namespace Nest
 		public NameValueCollection QueryStringParameters { get; private set; }
 		public Func<string, string> DefaultPropertyNameInferrer { get; private set; }
 
+		//these are set once to make sure we don't query the Uri too often
+		public bool UriSpecifiedBasicAuth { get; private set; }
+			 
 		//Serializer settings
 		public Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; private set; }
 
 		public ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; private set; }
 
-		public ConnectionSettings(Uri uri)
+		public ConnectionSettings(Uri uri, string defaultIndex)
 		{
 			uri.ThrowIfNull("uri");
+			defaultIndex.ThrowIfNullOrEmpty("defaultIndex");
 
 			this.Timeout = 60 * 1000;
 
+			this.SetDefaultIndex(defaultIndex);
 			this.Uri = uri;
+			
+			
 			if (!uri.OriginalString.EndsWith("/"))
 				this.Uri = new Uri(uri.OriginalString + "/");
 			this.Host = uri.Host;
 			this.Port = uri.Port;
+			this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
 
 			this.MaximumAsyncConnections = 0;
-			this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
+			this.DefaultTypeNameInferrer = (t => t.Name.ToLower()); 
 			this.DefaultIndices = new FluentDictionary<Type, string>();
 			this.DefaultTypeNames = new FluentDictionary<Type, string>();
 			this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
 
 			this.ModifyJsonSerializerSettings = (j) => { };
 			this.ContractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
+
 
 		}
 
@@ -79,10 +90,17 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90
+		/// </summary>
+		public ConnectionSettings PluralizeTypeNames()
+		{
+			this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
+			return this;
+		}
+
+		/// <summary>
 		/// Allows you to update internal the json.net serializer settings to your liking
 		/// </summary>
-		/// <param name="modifier"></param>
-		/// <returns></returns>
 		public ConnectionSettings SetJsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
 		{
 			if (modifier == null)
@@ -105,8 +123,6 @@ namespace Nest
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
 		/// </summary>
-		/// <param name="queryStringParameters"></param>
-		/// <returns></returns>
 		public ConnectionSettings SetGlobalQueryStringParameters(NameValueCollection queryStringParameters)
 		{
 			if (this.QueryStringParameters != null)
@@ -133,7 +149,6 @@ namespace Nest
 		/// <param name="defaultIndex">When null/empty/not set might throw NRE later on
 		/// when not specifying index explicitly while indexing.
 		/// </param>
-		/// <returns></returns>
 		public ConnectionSettings SetDefaultIndex(string defaultIndex)
 		{
 			this.DefaultIndex = defaultIndex;
@@ -141,11 +156,9 @@ namespace Nest
 		}
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
-		/// it a maximum concurrent connections. Great to prevent 
-		/// out of memory exceptions
+		/// it a maximum concurrent connections. 
 		/// </summary>
-		/// <param name="maximum">defaults to 20</param>
-		/// <returns></returns>
+		/// <param name="maximum">defaults to 0 (unbounded)</param>
 		public ConnectionSettings SetMaximumAsyncConnections(int maximum)
 		{
 			this.MaximumAsyncConnections = maximum;
@@ -155,7 +168,6 @@ namespace Nest
 		/// <summary>
 		/// If your connection has to go through proxy use this method to specify the proxy url
 		/// </summary>
-		/// <returns></returns>
 		public ConnectionSettings SetProxy(Uri proxyAdress, string username, string password)
 		{
 			proxyAdress.ThrowIfNull("proxyAdress");
@@ -168,21 +180,10 @@ namespace Nest
 		/// <summary>
 		/// Append ?pretty=true to requests, this helps to debug send and received json.
 		/// </summary>
-		/// <returns></returns>
 		public ConnectionSettings UsePrettyResponses(bool b = true)
 		{
 			this.UsesPrettyResponses = b;
 			this.SetGlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
-			return this;
-		}
-
-		/// <summary>
-		/// Append ?pretty=true to requests, this helps to debug send and received json.
-		/// </summary>
-		/// <returns></returns>
-		public ConnectionSettings SetDontDoubleEscapePathDotsAndSlashes(bool b = true)
-		{
-			this.DontDoubleEscapePathDotsAndSlashes = b;
 			return this;
 		}
 
@@ -210,33 +211,42 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// Allows you to override how type names should be reprented, the default will call .ToLowerInvariant() on the type's name.
+		/// </summary>
 		public ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
 		{
 			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
 			this.DefaultTypeNameInferrer = defaultTypeNameInferrer;
 			return this;
 		}
-
+		
+		/// <summary>
+		/// Global callback for every response that NEST receives, useful for custom logging.
+		/// </summary>
 		public ConnectionSettings SetConnectionStatusHandler(Action<ConnectionStatus> handler)
 		{
 			handler.ThrowIfNull("handler");
 			this.ConnectionStatusHandler = handler;
 			return this;
 		}
-
+		/// <summary>
+		/// Map types to a index names. Takes precedence over SetDefaultIndex().
+		/// </summary>
 		public ConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			mappingSelector(this.DefaultIndices);
 			return this;
 		}
+		/// <summary>
+		/// Allows you to override typenames, takes priority over the global SetDefaultTypeNameInferrer()
+		/// </summary>
 		public ConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			mappingSelector(this.DefaultTypeNames);
 			return this;
 		}
-
-
 	}
 }

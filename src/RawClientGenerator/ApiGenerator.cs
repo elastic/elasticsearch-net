@@ -5,9 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using CsQuery;
 using Newtonsoft.Json;
+using RawClientGenerator.Overrides.Descriptors;
 using Xipton.Razor;
 
 namespace RawClientGenerator
@@ -19,11 +21,14 @@ namespace RawClientGenerator
 		private readonly static string _nestFolder = @"..\..\..\..\src\Nest\";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _cacheFolder = @"..\..\Cache\";
-		private readonly static RazorMachine _razorMachine = new RazorMachine();
+		private static readonly RazorMachine _razorMachine;
 
+		private static readonly Assembly _assembly;
 
 		static ApiGenerator()
 		{
+			_razorMachine = new RazorMachine();
+			_assembly = typeof (ApiGenerator).Assembly;
 		}
 		public static string PascalCase(string s)
 		{
@@ -85,6 +90,26 @@ namespace RawClientGenerator
 				return apiDocumentation;
 			}
 		}
+		private static readonly Dictionary<string, string> MethodNameOverrides =
+			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			 where f.FullName.EndsWith("Descriptor.cs")
+			let contents = File.ReadAllText(f.FullName)
+			let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
+			where !c.Contains(" ") //filter results that did not match
+			select new { Value = f.Name.Replace("Descriptor.cs",""), Key = c })
+			.DistinctBy(v=>v.Key)
+			.ToDictionary(k => k.Key, v => v.Value);
+
+		private static readonly Dictionary<string, string> KnownDescriptors =
+			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			 where f.FullName.EndsWith("Descriptor.cs")
+			let contents = File.ReadAllText(f.FullName)
+			let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
+			select new { Key =  Regex.Replace(c, "<.*$", ""), Value =  Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1")})
+			.DistinctBy(v=>v.Key)
+			.ToDictionary(k => k.Key, v => v.Value);
+
+
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
@@ -105,10 +130,39 @@ namespace RawClientGenerator
 				if (method.Path.Contains("/fielddata/"))
 					method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
 			}
+
 			//remove duplicate occurance of the HTTP method name
 			var m = method.HttpMethod.ToPascalCase();
 			method.FullName =
 				Regex.Replace(method.FullName, m, (a) => a.Index != method.FullName.IndexOf(m) ? "" : m);
+
+			string manualOverride;
+			var key = method.QueryStringParamName.Replace("QueryString", "");
+			if (MethodNameOverrides.TryGetValue(key, out manualOverride))
+				method.QueryStringParamName = manualOverride + "QueryString";
+
+			method.DescriptorType = method.QueryStringParamName.Replace("QueryString","Descriptor");
+
+			string generic;
+			if (KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
+				method.DescriptorTypeGeneric = generic;
+
+			try
+			{
+				var typeName = "RawClientGenerator.Overrides.Descriptors." + method.DescriptorType + "Overrides";
+				var type = _assembly.GetType(typeName);
+				if (type == null)
+					return;
+				var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
+				if (overrides == null)
+					return;
+				method.Url.Params = method.Url.Params.Where(p => !overrides.SkipQueryStringParams.Contains(p.Key))
+					.ToDictionary(k => k.Key, v => v.Value);
+			}
+// ReSharper disable once EmptyGeneralCatchClause
+			catch (Exception e)
+			{
+			}
 
 		}
 
@@ -124,10 +178,24 @@ namespace RawClientGenerator
 			File.WriteAllText(targetFile, source);
 		}
 
+
+		public static void GenerateRawDispatch(RestApiSpec model)
+		{
+			var targetFile = _nestFolder + @"RawDispatch.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawDispatch.Generated.cshtml"), model).ToString();
+			File.WriteAllText(targetFile, source);
+		}
 		public static void GenerateRawClient(RestApiSpec model)
 		{
 			var targetFile = _nestFolder + @"RawElasticClient.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawElasticClient.Generated.cshtml"), model).ToString();
+			File.WriteAllText(targetFile, source);
+		}
+
+		public static void GenerateDescriptors(RestApiSpec model)
+		{
+			var targetFile = _nestFolder + @"DSL\_Descriptors.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_Descriptors.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 

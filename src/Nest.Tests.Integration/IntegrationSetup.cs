@@ -49,9 +49,9 @@ namespace Nest.Tests.Integration
 				bulk.Index<Person>(i => i.Object(p));
 			foreach (var p in boolTerms)
 				bulk.Index<BoolTerm>(i => i.Object(p));
-			client.Bulk(bulk);
+			client.Bulk(b=>bulk);
 
-			client.Refresh(new[] {ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone"});
+			client.Refresh(r=>r.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone"));
 
 		}
 
@@ -59,7 +59,7 @@ namespace Nest.Tests.Integration
 		public static void TearDown()
 		{
 			var client = ElasticsearchConfiguration.Client;
-			client.DeleteIndex(ElasticsearchConfiguration.DefaultIndex + "," + ElasticsearchConfiguration.DefaultIndex + "_*");
+			client.DeleteIndex(di=>di.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_*"));
 		}
 	}
 }

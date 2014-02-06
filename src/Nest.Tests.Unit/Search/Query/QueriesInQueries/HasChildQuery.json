@@ -3,7 +3,7 @@
   "size": 10,
   "query": {
     "has_child": {
-      "type": "people",
+      "type": "person",
       "query": {
         "bool": {
           "should": [

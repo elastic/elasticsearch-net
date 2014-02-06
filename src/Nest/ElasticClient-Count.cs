@@ -1,135 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Performs a count query over all indices
-		/// </summary>
-		public ICountResponse CountAllRaw(string query)
+		public ICountResponse Count<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null) where T : class
 		{
-			return this._Count("_count", query);
-		}
-		
-		/// <summary>
-		/// Performs a count query over all indices
-		/// </summary>
-		public ICountResponse CountAll(Func<QueryDescriptor, BaseQuery> querySelector)
-		{
-			querySelector.ThrowIfNull("querySelector");
-			var descriptor = new QueryDescriptor();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return this._Count("_count", query);
-		}
-		
-		/// <summary>
-		/// Performs a count query over all indices
-		/// </summary>
-		public ICountResponse CountAll<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
-		{
-			querySelector.ThrowIfNull("querySelector");
-			var descriptor = new QueryDescriptor<T>();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return this._Count("_count", query);
+		    countSelector = countSelector ?? (s => s);
+			return this.Dispatch<CountDescriptor<T>, CountQueryString, CountResponse>(
+				countSelector,
+				(p,d) => this.RawDispatch.CountDispatch(p, d)
+			);
 		}
 
-        
-		/// <summary>
-		/// Performs a count query over the default index set in the client settings
-		/// </summary>
-		public ICountResponse Count(Func<QueryDescriptor, BaseQuery> querySelector)
+		public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null) where T : class
 		{
-			var index = this._connectionSettings.DefaultIndex;
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-			string path = this.PathResolver.CreateIndexPath(index, "_count");
-			var descriptor = new QueryDescriptor();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return _Count(path, query);
+		    countSelector = countSelector ?? (s => s);
+			return this.DispatchAsync<CountDescriptor<T>, CountQueryString, CountResponse, ICountResponse>(
+				countSelector,
+				(p,d) => this.RawDispatch.CountDispatchAsync(p, d)
+			);
 		}
-		
-		/// <summary>
-		/// Performs a count query over the passed indices
-		/// </summary>
-		public ICountResponse Count(IEnumerable<string> indices, Func<QueryDescriptor, BaseQuery> querySelector)
-		{
-			indices.ThrowIfEmpty("indices");
-			string path = this.PathResolver.CreateIndexPath(indices, "_count");
-			var descriptor = new QueryDescriptor();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return _Count(path, query);
-		}
-		/// <summary>
-		/// Performs a count query over the multiple types in multiple indices.
-		/// </summary>
-		public ICountResponse Count(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor, BaseQuery> querySelector)
-		{
-			indices.ThrowIfEmpty("indices");
-			indices.ThrowIfEmpty("types");
-			string path = this.PathResolver.CreateIndexTypePath(indices, types, "_count");
-			var descriptor = new QueryDescriptor();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return _Count(path, query);
-		}
-
-        
-		/// <summary>
-		/// Perform a count query over the default index and the inferred type name for T
-		/// </summary>
-		public ICountResponse Count<T>(Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
-		{
-			var index = this.Infer.IndexName<T>();
-			index.ThrowIfNullOrEmpty("Cannot infer default index for current connection.");
-
-			var type = typeof(T);
-			var typeName = this.Infer.TypeName<T>();
-			string path = this.PathResolver.CreateIndexTypePath(index, typeName, "_count");
-			var descriptor = new QueryDescriptor<T>();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return _Count(path, query);
-		}
-		
-		/// <summary>
-		/// Performs a count query over the specified indices
-		/// </summary>
-		public ICountResponse Count<T>(IEnumerable<string> indices, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
-		{
-			indices.ThrowIfEmpty("indices");
-			string path = this.PathResolver.CreateIndexPath(indices, "_count");
-			var descriptor = new QueryDescriptor<T>();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return _Count(path, query);
-		}
-		
-		/// <summary>
-		///  Performs a count query over the multiple types in multiple indices.
-		/// </summary>
-		public ICountResponse Count<T>(IEnumerable<string> indices, IEnumerable<string> types, Func<QueryDescriptor<T>, BaseQuery> querySelector) where T : class
-		{
-			indices.ThrowIfEmpty("indices");
-			indices.ThrowIfEmpty("types");
-			string path = this.PathResolver.CreateIndexTypePath(indices, types, "_count");
-			var descriptor = new QueryDescriptor<T>();
-			var bq = querySelector(descriptor);
-			var query = this.Serialize(bq);
-			return _Count(path, query);
-		}
-
-		private CountResponse _Count(string path, string query)
-		{
-			var status = this.Connection.PostSync(path, query);
-			var r = this.Deserialize<CountResponse>(status);
-			return r;
-		}
-
 	}
 }

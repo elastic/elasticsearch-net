@@ -48,8 +48,11 @@ namespace Nest
 			, string value	
 			, double? Boost = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.SpanTerm(field, value, Boost: Boost);
+			if (fieldDescriptor == null || value.IsNullOrEmpty())
+				return this;
+
+			var spanTerm = new SpanTerm() { Field = fieldDescriptor, Value = value, Boost = Boost};
+			return CreateQuery(spanTerm, (sq) => sq.SpanTermQuery = spanTerm);
 		}
 		
 		public SpanQueryDescriptor<T> SpanTerm(string field, string value, double? Boost = null)

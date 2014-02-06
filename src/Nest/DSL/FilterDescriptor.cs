@@ -17,7 +17,6 @@ namespace Nest
 	 *   - make sure it calls in to New() or SetDictionary() for immutable sake
 	 *   - add a null check to IsConditionless
 	 */
-
 	public class FilterDescriptor<T> : BaseFilter, IFilterDescriptor<T> where T : class
 	{
 		internal string _Name { get; set; }
@@ -79,23 +78,23 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "geo_bounding_box")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> GeoBoundingBoxFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> GeoBoundingBoxFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> GeoDistanceFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> GeoDistanceFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_distance_range")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> GeoDistanceRangeFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> GeoDistanceRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_polygon")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> GeoPolygonFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> GeoPolygonFilter { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> GeoShapeFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> GeoShapeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "limit")]
 		internal LimitFilter LimitFilter { get; set; }
@@ -114,39 +113,39 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "numeric_range")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> NumericRangeFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> NumericRangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> RangeFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> RangeFilter { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> PrefixFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> PrefixFilter { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> TermFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> TermFilter { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> TermsFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> TermsFilter { get; set; }
 
 		[JsonProperty(PropertyName = "fquery")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> QueryFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> QueryFilter { get; set; }
 
 		[JsonProperty(PropertyName = "and")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> AndFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> AndFilter { get; set; }
 
 		[JsonProperty(PropertyName = "or")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> OrFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> OrFilter { get; set; }
 
 		[JsonProperty(PropertyName = "not")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, object> NotFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> NotFilter { get; set; }
 
 		[JsonProperty(PropertyName = "script")]
 		internal ScriptFilterDescriptor ScriptFilter { get; set; }
@@ -155,7 +154,7 @@ namespace Nest
 		internal NestedFilterDescriptor<T> NestedFilter { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
-		internal Dictionary<string, object> RegexpFilter { get; set; }
+		internal Dictionary<PropertyPathMarker, object> RegexpFilter { get; set; }
 
 		public FilterDescriptor<T> Name(string name)
 		{
@@ -202,8 +201,9 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Exists(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Exists(field);
+			var filter = new ExistsFilter { Field = fieldDescriptor };
+			this.SetCacheAndName(filter);
+			return this.New(filter, f => f.ExistsFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents where a specific field has a value in them.
@@ -212,7 +212,6 @@ namespace Nest
 		{
 			var filter = new ExistsFilter { Field = field };
 			this.SetCacheAndName(filter);
-
 			return this.New(filter, f => f.ExistsFilter = filter);
 		}
 		/// <summary>
@@ -220,8 +219,9 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Missing(Expression<Func<T, object>> fieldDescriptor)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Missing(field);
+			var filter = new MissingFilter { Field = fieldDescriptor };
+			this.SetCacheAndName(filter);
+			return  this.New(filter, f => f.MissingFilter = filter);
 		}
 		/// <summary>
 		/// Filters documents where a specific field has no value in them.
@@ -274,18 +274,16 @@ namespace Nest
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
 		/// </summary>
-		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
-		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoBoundingBox(field, geoHashTopLeft, geoHashBottomRight, Type);
-		}
-		/// <summary>
-		/// A filter allowing to filter hits based on a point location using a bounding box
-		/// </summary>
 		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, double topLeftX, double topLeftY, double bottomRightX, double bottomRightY, GeoExecution? Type = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoBoundingBox(field, topLeftX, topLeftY, bottomRightX, bottomRightY, Type);
+			var c = CultureInfo.InvariantCulture;
+			topLeftX.ThrowIfNull("topLeftX");
+			topLeftY.ThrowIfNull("topLeftY");
+			bottomRightX.ThrowIfNull("bottomRightX");
+			bottomRightY.ThrowIfNull("bottomRightY");
+			var geoHashTopLeft = "{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c));
+			var geoHashBottomRight = "{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c));
+			return this.GeoBoundingBox(fieldDescriptor, geoHashTopLeft, geoHashBottomRight, Type);
 		}
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
@@ -297,9 +295,21 @@ namespace Nest
 			topLeftY.ThrowIfNull("topLeftY");
 			bottomRightX.ThrowIfNull("bottomRightX");
 			bottomRightY.ThrowIfNull("bottomRightY");
-			return this.GeoBoundingBox(fieldName,
-				"{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c)),
-				"{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c)), Type);
+			var geoHashTopLeft = "{0}, {1}".F(topLeftX.ToString(c), topLeftY.ToString(c));
+			var geoHashBottomRight = "{0}, {1}".F(bottomRightX.ToString(c), bottomRightY.ToString(c));
+			return this.GeoBoundingBox(fieldName, geoHashTopLeft, geoHashBottomRight, Type);
+		}
+		/// <summary>
+		/// A filter allowing to filter hits based on a point location using a bounding box
+		/// </summary>
+		public BaseFilter GeoBoundingBox(Expression<Func<T, object>> fieldDescriptor, string geoHashTopLeft, string geoHashBottomRight, GeoExecution? Type = null)
+		{
+			var filter = new GeoBoundingBoxFilter { TopLeft = geoHashTopLeft, BottomRight = geoHashBottomRight };
+			return this.SetDictionary("geo_bounding_box", fieldDescriptor, filter, (d, b) =>
+			{
+				if (Type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), Type.Value));
+				b.GeoBoundingBoxFilter = d;
+			});
 		}
 		/// <summary>
 		/// A filter allowing to filter hits based on a point location using a bounding box
@@ -309,23 +319,28 @@ namespace Nest
 			var filter = new GeoBoundingBoxFilter { TopLeft = geoHashTopLeft, BottomRight = geoHashBottomRight };
 			return this.SetDictionary("geo_bounding_box", fieldName, filter, (d, b) =>
 			{
-				if (Type.HasValue)
-					d.Add("type", Enum.GetName(typeof(GeoExecution), Type.Value));
+				if (Type.HasValue) d.Add("type", Enum.GetName(typeof(GeoExecution), Type.Value));
 				b.GeoBoundingBoxFilter = d;
 			});
 		}
+
 		/// <summary>
 		/// Filters documents that include only hits that exists within a specific distance from a geo point. 
 		/// </summary>
 		public BaseFilter GeoDistance(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoDistance(field, filterDescriptor);
+			return _GeoDistance(fieldDescriptor, filterDescriptor);
 		}
+
 		/// <summary>
 		/// Filters documents that include only hits that exists within a specific distance from a geo point. 
 		/// </summary>
 		public BaseFilter GeoDistance(string field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
+		{
+			return _GeoDistance(field, filterDescriptor);
+		}
+
+		private BaseFilter _GeoDistance(PropertyPathMarker field, Action<GeoDistanceFilterDescriptor> filterDescriptor)
 		{
 			var filter = new GeoDistanceFilterDescriptor();
 			if (filterDescriptor != null)
@@ -333,7 +348,7 @@ namespace Nest
 
 			return this.SetDictionary("geo_distance", field, filter, (d, b) =>
 			{
-				var dd = new Dictionary<string, object>();
+				var dd = new Dictionary<PropertyPathMarker, object>();
 				dd.Add("distance", filter._Distance);
 
 				if (!string.IsNullOrWhiteSpace(filter._GeoUnit))
@@ -346,29 +361,32 @@ namespace Nest
 				dd[field] = filter._Location;
 				b.GeoDistanceFilter = dd;
 			});
-
 		}
-		
+
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
 		public BaseFilter GeoDistanceRange(Expression<Func<T, object>> fieldDescriptor, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoDistanceRange(field, filterDescriptor);
+			return _GeoDistanceRange(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filters documents that exists within a range from a specific point:
 		/// </summary>
 		public BaseFilter GeoDistanceRange(string field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
 		{
+			return _GeoDistanceRange(field, filterDescriptor);
+		}
+
+		private BaseFilter _GeoDistanceRange(PropertyPathMarker field, Action<GeoDistanceRangeFilterDescriptor> filterDescriptor)
+		{
 			var filter = new GeoDistanceRangeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-			
+
 			return this.SetDictionary("geo_distance_range", field, filter, (d, b) =>
 			{
-				var dd = new Dictionary<string, object>();
+				var dd = new Dictionary<PropertyPathMarker, object>();
 				dd.Add("from", filter._FromDistance);
 				dd.Add("to", filter._ToDistance);
 				if (!string.IsNullOrWhiteSpace(filter._GeoUnit))
@@ -388,45 +406,47 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoShape(field, filterDescriptor);
+			return _GeoShape(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
 		public BaseFilter GeoShape(string field, Action<GeoShapeFilterDescriptor> filterDescriptor)
 		{
+			return _GeoShape(field, filterDescriptor);
+		}
+
+		private BaseFilter _GeoShape(PropertyPathMarker field, Action<GeoShapeFilterDescriptor> filterDescriptor)
+		{
 			var filter = new GeoShapeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
 
-			return this.SetDictionary("geo_shape", field, filter, (d, b) =>
-			{
-				b.GeoShapeFilter = d;
-			});
-
+			return this.SetDictionary("geo_shape", field, filter, (d, b) => { b.GeoShapeFilter = d; });
 		}
+
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
 		public BaseFilter GeoIndexedShape(Expression<Func<T, object>> fieldDescriptor, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoIndexedShape(field, filterDescriptor);
+			return this._GeoIndexedShape(fieldDescriptor, filterDescriptor);
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
 		/// </summary>
 		public BaseFilter GeoIndexedShape(string field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
 		{
+			return _GeoIndexedShape(field, filterDescriptor);
+		}
+
+		private BaseFilter _GeoIndexedShape(PropertyPathMarker field, Action<GeoIndexedShapeFilterDescriptor> filterDescriptor)
+		{
 			var filter = new GeoIndexedShapeFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-			
-			return this.SetDictionary("geo_shape", field, filter, (d, b) =>
-			{
-				b.GeoShapeFilter = d;
-			});
+
+			return this.SetDictionary("geo_shape", field, filter, (d, b) => { b.GeoShapeFilter = d; });
 		}
 
 		/// <summary>
@@ -434,8 +454,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoPolygon(field, points);
+			var c = CultureInfo.InvariantCulture;
+			return this._GeoPolygon(fieldDescriptor, points.Select(p => "{0}, {1}".F(p.Item1.ToString(c), p.Item2.ToString(c))).ToArray());
 		}
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
@@ -450,21 +470,22 @@ namespace Nest
 		/// </summary>
 		public BaseFilter GeoPolygon(Expression<Func<T, object>> fieldDescriptor, params string[] points)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.GeoPolygon(field, points);
+			return this._GeoPolygon(fieldDescriptor, points);
 		}
 		/// <summary>
 		/// A filter allowing to include hits that only fall within a polygon of points. 
 		/// </summary>
 		public BaseFilter GeoPolygon(string fieldName, params string[] points)
 		{
-			var filter = new GeoPolygonFilter { Points = points };
-			return this.SetDictionary("geo_polygon", fieldName, filter, (d, b) =>
-			{
-				b.GeoPolygonFilter = d;
-			});
-
+			return _GeoPolygon(fieldName, points);
 		}
+
+		private BaseFilter _GeoPolygon(PropertyPathMarker fieldName, string[] points)
+		{
+			var filter = new GeoPolygonFilter {Points = points};
+			return this.SetDictionary("geo_polygon", fieldName, filter, (d, b) => { b.GeoPolygonFilter = d; });
+		}
+
 		/// <summary>
 		/// The has_child filter accepts a query and the child type to run against, 
 		/// and results in parent documents that have child docs matching the query.
@@ -582,8 +603,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Prefix(Expression<Func<T, object>> fieldDescriptor, string prefix)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Prefix(field, prefix);
+			return this.SetDictionary("prefix", fieldDescriptor, prefix, (d, b) => { b.PrefixFilter = d; });
 		}
 		/// <summary>
 		/// Filters documents that have fields containing terms with a specified prefix 
@@ -591,10 +611,7 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Prefix(string field, string prefix)
 		{
-			return this.SetDictionary("prefix", field, prefix, (d, b) =>
-			{
-				b.PrefixFilter = d;
-			});
+			return this.SetDictionary("prefix", field, prefix, (d, b) => { b.PrefixFilter = d; });
 
 		}
 		/// <summary>
@@ -603,8 +620,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Term<K>(Expression<Func<T, K>> fieldDescriptor, K term)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Term(field, term);
+			var t = new TermFilter() { Field = fieldDescriptor, Value = term };
+			return this.SetDictionary("term", fieldDescriptor, term, (d, b) => { b.TermFilter = d; });
 		}
 		/// <summary>
 		/// Filters documents that have fields that contain a term (not analyzed).
@@ -612,12 +629,8 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Term<K>(string field, K term)
 		{
-			var t = new TermFilter() { Field = field, Value = (object)term };
-
-			return this.SetDictionary("term", field, term, (d, b) =>
-			{
-				b.TermFilter = d;
-			});
+			var t = new TermFilter() { Field = field, Value = term };
+			return this.SetDictionary("term", field, term, (d, b) => { b.TermFilter = d; });
 
 		}
 		/// <summary>
@@ -625,9 +638,13 @@ namespace Nest
 		/// </summary>
 		public BaseFilter Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.Terms(field, terms, Execution);
+			return this.SetDictionary("terms", fieldDescriptor, terms, (d, b) =>
+			{
+				if (Execution.HasValue) d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
+				b.TermsFilter = d;
+			});
 		}
+
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>
@@ -635,11 +652,9 @@ namespace Nest
 		{
 			return this.SetDictionary("terms", field, terms, (d, b) =>
 			{
-				if (Execution.HasValue)
-					d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
+				if (Execution.HasValue) d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
 				b.TermsFilter = d;
 			});
-
 		}
 
 		/// <summary>
@@ -647,8 +662,10 @@ namespace Nest
 		/// </summary>
 		public BaseFilter TermsLookup(Expression<Func<T, object>> fieldDescriptor, Action<TermsLookupFilterDescriptor> filterDescriptor)
 		{
-			var field = new PropertyNameResolver().Resolve(fieldDescriptor);
-			return this.TermsLookup(field, filterDescriptor);
+			var filter = new TermsLookupFilterDescriptor();
+			if (filterDescriptor != null)
+				filterDescriptor(filter);
+			return this.SetDictionary("terms", fieldDescriptor, filter, (d, b) => { b.TermsFilter = d; });
 		}
 		/// <summary>
 		/// Filter documents indexed using the geo_shape type.
@@ -658,12 +675,7 @@ namespace Nest
 			var filter = new TermsLookupFilterDescriptor();
 			if (filterDescriptor != null)
 				filterDescriptor(filter);
-
-			return this.SetDictionary("terms", field, filter, (d, b) =>
-			{
-				b.TermsFilter = d;
-			});
-
+			return this.SetDictionary("terms", field, filter, (d, b) => { b.TermsFilter = d; });
 		}
 
 
@@ -675,8 +687,7 @@ namespace Nest
 		{
 			return this.And((from selector in selectors 
 							 let filter = new FilterDescriptor<T>() 
-							 select selector(filter))
-							 .ToArray());
+							 select selector(filter)).ToArray());
 		}
 		/// <summary>
 		/// A filter that matches documents using AND boolean operator on other queries. 
@@ -837,15 +848,15 @@ namespace Nest
 
 		private BaseFilter SetDictionary(
 			string type,
-			string key,
+			PropertyPathMarker key,
 			object value,
-			Action<Dictionary<string, object>, FilterDescriptor<T>> setter
+			Action<Dictionary<PropertyPathMarker, object>, FilterDescriptor<T>> setter
 		)
 		{
 			setter.ThrowIfNull("setter");
-			var dictionary = new Dictionary<string, object>();
+			var dictionary = new Dictionary<PropertyPathMarker, object>();
 
-			if (key.IsNullOrEmpty())
+			if (key.IsConditionless())
 				return CreateConditionlessFilterDescriptor(dictionary, type);
 
 			dictionary.Add(key, value);
@@ -913,7 +924,7 @@ namespace Nest
 					return CreateConditionlessFilterDescriptor(bf, type);
 			}
 
-			if (key.IsNullOrEmpty())
+			if (key.IsConditionless())
 				return CreateConditionlessFilterDescriptor(value, type);
 
 			return bucket;

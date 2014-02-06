@@ -18,7 +18,7 @@ namespace Nest
 			get
 			{
 				return this._Type == null || this._Index == null || this._Id.IsNullOrEmpty() 
-					|| this._Path.IsNullOrEmpty();
+					|| this._Path.IsConditionless();
 			}
 		}
 
@@ -32,13 +32,18 @@ namespace Nest
 		internal IndexNameMarker _Index { get; set; }
 
 		[JsonProperty("path")]
-		internal string _Path { get; set; }
+		internal PropertyPathMarker _Path { get; set; }
 
 		[JsonProperty("routing")]
 		internal string _Routing { get; set; }
 
 
 		public TermsLookupFilterDescriptor Lookup<T>(string field, string id, string index = null, string type = null)
+		{
+			return _Lookup<T>(field, id, index, type);
+		}
+
+		private TermsLookupFilterDescriptor _Lookup<T>(PropertyPathMarker field, string id, string index, string type)
 		{
 			this._Path = field;
 			this._Id = id;
@@ -49,8 +54,7 @@ namespace Nest
 
 		public TermsLookupFilterDescriptor Lookup<T>(Expression<Func<T, object>> field, string id, string index = null, string type = null)
 		{
-			var fieldName = new PropertyNameResolver().Resolve(field);
-			return this.Lookup<T>(fieldName, id, index, type);
+			return _Lookup<T>(field, id, index, type);
 		}
 
 		/// <summary>

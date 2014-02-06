@@ -1,448 +1,58 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace Nest
 {
-
 	public partial class ElasticClient
 	{
-		/// <summary>
-		/// Index object to the default index and the inferred type name for T
-		/// </summary>
-		public IIndexResponse Index<T>(T @object) where T : class
+		public IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+			where T : class
 		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object);
-			return this._indexToPath(@object, path);
+			@object.ThrowIfNull("object");
+			indexSelector = indexSelector ?? (s => s);
+			var descriptor = indexSelector(new IndexDescriptor<T>().Object(@object));
+			return this.Dispatch<IndexDescriptor<T>, IndexQueryString, IndexResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.IndexDispatch(p, @object));
 		}
-		/// <summary>
-		/// Index object to the default index and the inferred type name for T, using index parameters to further control the operation
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, IndexParameters indexParameters) where T : class
+		public Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+			where T : class
 		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the inferred type name for T
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index);
-			return this._indexToPath<T>(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the inferred type name for T, using index parameters to further control the operation
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexToPath<T>(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index, string type) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type);
-			return this._indexToPath<T>(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name, using index parameters to further control the operation
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index = null, string type = null, IndexParameters indexParameters = null) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexToPath<T>(@object, path);
-		}
-
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index, string type, string id) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id);
-			return this._indexToPath<T>(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update, using index parameters to further control the operation
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexToPath<T>(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index, string type, int id) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id.ToString());
-			return this._indexToPath<T>(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update, using index parameters to further control the operation
-		/// </summary>
-		public IIndexResponse Index<T>(T @object, string index, string type, int id, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id.ToString());
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexToPath<T>(@object, path);
+			@object.ThrowIfNull("object");
+			indexSelector = indexSelector ?? (s => s);
+			var descriptor = indexSelector(new IndexDescriptor<T>().Object(@object));
+			return this.DispatchAsync<IndexDescriptor<T>, IndexQueryString, IndexResponse, IIndexResponse>(
+				descriptor,
+				(p, d) => this.RawDispatch.IndexDispatchAsync(p, @object));
 		}
 
 
-
-		/// <summary>
-		/// Index object to the default index and the inferred type name for T
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object) where T : class
+		public IBulkResponse IndexMany<T>(IEnumerable<T> @objects, string index = null, string type = null) where T : class
 		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object);
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the default index and the inferred type name for T, using index parameters to further control the operation
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the inferred type name for T
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index);
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the inferred type name for T, using index parameters to further control the operation
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type);
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name, using index parameters to further control the operation
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexAsyncToPath(@object, path);
+			@objects.ThrowIfEmpty("objects");
+			var bulk = new BulkDescriptor().FixedPath(index, type);
+			foreach (var o in @objects)
+			{
+				T o1 = o;
+				bulk.Index<T>(b => b.Object(o1));
+			}
+			return this.Bulk(b => bulk);
 		}
 
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id) where T : class
+		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
+			where T : class
 		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id);
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update, using index parameters to further control the operation
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, string id, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id);
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, int id) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id.ToString());
-			return this._indexAsyncToPath(@object, path);
-		}
-		/// <summary>
-		/// Index object to the specified index and the specified type name and force the id of the object to update, using index parameters to further control the operation
-		/// </summary>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, string index, string type, int id, IndexParameters indexParameters) where T : class
-		{
-			var path = this.PathResolver.CreateIdOptionalPathFor<T>(@object, index, type, id.ToString());
-			path = this.PathResolver.AppendParametersToPath(path, indexParameters);
-			return this._indexAsyncToPath(@object, path);
+			@objects.ThrowIfEmpty("objects");
+			var bulk = new BulkDescriptor().FixedPath(index, type);
+			foreach (var o in @objects)
+			{
+				T o1 = o;
+				bulk.Index<T>(b => b.Object(o1));
+			}
+			return this.BulkAsync(b => bulk);
 		}
 
-
-
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<T> objects) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			return this._indexManyToPath("_bulk", json);
-		}
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			return this._indexManyToPath("_bulk", json);
-		}
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			return this._indexManyToPath(path, json);
-		}
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			return this._indexManyToPath(path, json);
-		}
-
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            return this._indexManyToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            return this._indexManyToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyToPath(path, json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyToPath(path, json);
-		}
-
-		/// <summary>
-		/// Index objects to the specified index and the specified type name
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, string type) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-            return this._indexManyToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-            return this._indexManyToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the specified type name
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyToPath(path, json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public IBulkResponse IndexMany<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyToPath(path, json);
-		}
-
-
-
-
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			return this._indexManyAsyncToPath("_bulk", json);
-		}
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			return this._indexManyAsyncToPath("_bulk", json);
-		}
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			return this._indexManyAsyncToPath(path, json);
-		}
-		/// <summary>
-		/// Index objects to the default index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects);
-			var path = this.PathResolver.AppendSimpleParametersToPath("_bulk", bulkParameters);
-			return this._indexManyAsyncToPath(path, json);
-		}
-
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyAsyncToPath(path, json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the inferred type name for T, using bulk parameters to control the individual objects
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index);
-            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyAsyncToPath(path, json);
-		}
-
-		/// <summary>
-		/// Index objects to the specified index and the specified type name
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-            return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			return this._indexManyAsyncToPath(this.BulkIndexPath(index), json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the specified type name
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-            var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyAsyncToPath(path, json);
-		}
-		/// <summary>
-		/// Index objects to the specified index and the specified type name, using bulk parameters to control the individual objects
-		/// and SimpleBulkParameters to control the entire operation
-		/// </summary>
-		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<BulkParameters<T>> objects, string index, string type, SimpleBulkParameters bulkParameters) where T : class
-		{
-			var json = this.GenerateBulkIndexCommand(@objects, index, type);
-			var path = this.PathResolver.AppendSimpleParametersToPath(this.BulkIndexPath(index), bulkParameters);
-			return this._indexManyAsyncToPath(path, json);
-		}
-
-
-		private string BulkIndexPath(string index)
-		{
-			return this.PathResolver.CreateIndexPath(index, "_bulk");
-		}
-
-		private IIndexResponse _indexToPath<T>(T @object, string path) where T : class
-		{
-			path.ThrowIfNull("path");
-
-			string json = this.Serializer.Serialize(@object, Formatting.Indented);
-
-			var status = this.Connection.PostSync(path, json);
-			return this.Deserialize<IndexResponse>(status);
-		}
-
-		private Task<IIndexResponse> _indexAsyncToPath<T>(T @object, string path) where T : class
-		{
-			string json = this.Serializer.Serialize(@object, Formatting.None);
-			var postTask = this.Connection.Post(path, json);
-			return postTask.ContinueWith<IIndexResponse>(t => this.Deserialize<IndexResponse>(t.Result));
-		}
-
-		private IBulkResponse _indexManyToPath(string path, string json)
-		{
-			var status = this.Connection.PostSync(path, json);
-			return this.Deserialize<BulkResponse>(status);
-		}
-
-		private Task<IBulkResponse> _indexManyAsyncToPath(string path, string json)
-		{
-			var postTask = this.Connection.Post(path, json);
-			return postTask.ContinueWith<IBulkResponse>(t => this.Deserialize<BulkResponse>(t.Result));
-		}
 	}
 }

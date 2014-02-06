@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Linq.Expressions;
+using Nest.Resolvers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,43 +8,42 @@ using System.Text;
 
 namespace Nest
 {
-    public class PartialFieldDescriptor<T> where T : class
-    {
-        internal string _Field { get; set; }
+	public class PartialFieldDescriptor<T> where T : class
+	{
+		internal string _Field { get; set; }
 
-        [JsonProperty("include")]
-        internal List<string> _Include { get; set; }
+		[JsonProperty("include")]
+		internal IEnumerable<PropertyPathMarker> _Include { get; set; }
 
-        [JsonProperty("exclude")]
-        internal List<string> _Exclude { get; set; }
+		[JsonProperty("exclude")]
+		internal IEnumerable<PropertyPathMarker> _Exclude { get; set; }
 
-        public PartialFieldDescriptor<T> PartialField(string field)
-        {
-            this._Field = field;
+		public PartialFieldDescriptor<T> PartialField(string field)
+		{
+			this._Field = field;
+			return this;
+		}
 
-            return this;
-        }
+		public PartialFieldDescriptor<T> Include(params string[] paths)
+		{
+			this._Include = paths.Select(p => (PropertyPathMarker) p);
+			return this;
+		}
 
-        public PartialFieldDescriptor<T> Include(params string[] path)
-        {
-            List<string> includes = new List<string>();
-            foreach (var include in path)
-                includes.Add(include);
-
-            this._Include = includes;
-
-            return this;
-        }
-
-        public PartialFieldDescriptor<T> Exclude(params string[] path)
-        {
-            List<string> excludes = new List<string>();
-            foreach (var exclude in path)
-                excludes.Add(exclude);
-
-            this._Exclude = excludes;
-
-            return this;
-        }
-    }
+		public PartialFieldDescriptor<T> Exclude(params string[] paths)
+		{
+			this._Exclude = paths.Select(p => (PropertyPathMarker) p);
+			return this;
+		}
+		public PartialFieldDescriptor<T> Include(params Expression<Func<T, object>>[] paths)
+		{
+			this._Include = paths.Select(p => (PropertyPathMarker) p);
+			return this;
+		}
+		public PartialFieldDescriptor<T> Exclude(params Expression<Func<T, object>>[] paths)
+		{
+			this._Exclude = paths.Select(p => (PropertyPathMarker) p);
+			return this;
+		}
+	}
 }
