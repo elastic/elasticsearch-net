@@ -13,12 +13,12 @@ namespace Nest
 	{
 		protected readonly IConnectionSettings _connectionSettings;
 
-		internal RawDispatch RawDispatch { get; private set; }
+		internal RawDispatch RawDispatch { get; set; }
 
 		public IConnection Connection { get; protected set; }
 		public ElasticSerializer Serializer { get; protected set; }
-		public IRawElasticClient Raw { get; private set; }
-		public ElasticInferrer Infer { get; private set; }
+		public IRawElasticClient Raw { get; protected set; }
+		public ElasticInferrer Infer { get; protected set; }
 
 		public ElasticClient(IConnectionSettings settings)
 			: this(settings, new Connection(settings))
