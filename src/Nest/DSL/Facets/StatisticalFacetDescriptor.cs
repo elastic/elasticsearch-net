@@ -10,7 +10,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class StatisticalFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
+	public class StatisticalFacetDescriptor<T> : BaseFacetDescriptor<StatisticalFacetDescriptor<T>, T> where T : class
 	{
 		[JsonProperty(PropertyName = "field")]
 		internal PropertyPathMarker _Field { get; set; }
@@ -67,30 +67,5 @@ namespace Nest
 			return this;
 		}
 
-		public new StatisticalFacetDescriptor<T> Global()
-		{
-			this._IsGlobal = true;
-			return this;
-		}
-		public new StatisticalFacetDescriptor<T> FacetFilter(
-		  Func<FilterDescriptor<T>, BaseFilter> facetFilter
-		)
-		{
-			var filter = facetFilter(new FilterDescriptor<T>());
-			if (filter.IsConditionless)
-				filter = null;
-			this._FacetFilter = filter;
-			return this;
-		}
-		public new StatisticalFacetDescriptor<T> Nested(string nested)
-		{
-			this._Nested = nested;
-			return this;
-		}
-		public new StatisticalFacetDescriptor<T> Scope(string scope)
-		{
-			this._Scope = scope;
-			return this;
-		}
 	}
 }

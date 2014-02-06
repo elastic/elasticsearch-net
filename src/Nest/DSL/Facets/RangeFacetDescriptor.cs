@@ -10,7 +10,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class RangeFacetDescriptor<T, K> : BaseFacetDescriptor<T>
+	public class RangeFacetDescriptor<T, K> : BaseFacetDescriptor<RangeFacetDescriptor<T, K>,T>
 		where T : class
 		where K : struct
 	{
@@ -99,32 +99,6 @@ namespace Nest
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
 			this._Params = paramDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
-
-		public new RangeFacetDescriptor<T, K> Global()
-		{
-			this._IsGlobal = true;
-			return this;
-		}
-		public new RangeFacetDescriptor<T, K> FacetFilter(
-	  Func<FilterDescriptor<T>, BaseFilter> facetFilter
-	)
-		{
-			var filter = facetFilter(new FilterDescriptor<T>());
-			if (filter.IsConditionless)
-				filter = null;
-			this._FacetFilter = filter;
-			return this;
-		}
-		public new RangeFacetDescriptor<T, K> Nested(string nested)
-		{
-			this._Nested = nested;
-			return this;
-		}
-		public new RangeFacetDescriptor<T, K> Scope(string scope)
-		{
-			this._Scope = scope;
 			return this;
 		}
 

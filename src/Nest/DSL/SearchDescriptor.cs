@@ -18,8 +18,8 @@ namespace Nest
 	/// <remarks>Doesn't inherit from QueryPathDescriptorBase because it already needs an untyped supperclass 
 	/// that has specifics that we can push to QueryPathDescriptorBase</remarks>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class SearchDescriptor<T> : 
-		SearchDescriptorBase 
+	public partial class SearchDescriptor<T> :
+		SearchDescriptorBase
 		, IPathInfo<SearchQueryString>
 		where T : class
 	{
@@ -34,9 +34,12 @@ namespace Nest
 
 		internal override string _Routing
 		{
-			get { return this._QueryString._routing == null 
-				? null 
-				: string.Join(",", this._QueryString._routing); }
+			get
+			{
+				return this._QueryString._routing == null
+					? null
+					: string.Join(",", this._QueryString._routing);
+			}
 		}
 
 		internal override Type _ClrType { get { return typeof(T); } }
@@ -68,7 +71,7 @@ namespace Nest
 		public SearchDescriptor<T> Indices(params string[] indices)
 		{
 			if (indices == null) return this;
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -77,7 +80,7 @@ namespace Nest
 		public SearchDescriptor<T> Indices(params Type[] indices)
 		{
 			if (indices == null) return this;
-			this._Indices = indices.Select(s=>(IndexNameMarker)s);
+			this._Indices = indices.Select(s => (IndexNameMarker)s);
 			return this;
 		}
 		/// <summary>
@@ -91,7 +94,7 @@ namespace Nest
 		internal SearchDescriptor<T> Index(IndexNameMarker index)
 		{
 			if (index == null) return this;
-			this._Indices = new[] {index};
+			this._Indices = new[] { index };
 			return this;
 		}
 		/// <summary>
@@ -149,7 +152,7 @@ namespace Nest
 		/// The type to execute the search on. Defaults to the inferred typename of T 
 		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
 		/// </summary>
-		public SearchDescriptor<T>Type(string type)
+		public SearchDescriptor<T> Type(string type)
 		{
 			if (type == null) return this;
 			this._Types = new[] { (TypeNameMarker)type };
@@ -169,7 +172,7 @@ namespace Nest
 		internal SearchDescriptor<T> Type(TypeNameMarker type)
 		{
 			if (type == null) return this;
-			this._Types = new[] {type};
+			this._Types = new[] { type };
 			return this;
 		}
 		/// <summary>
@@ -188,7 +191,7 @@ namespace Nest
 			this._AllTypes = true;
 			return this;
 		}
-		
+
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
 		public SearchDescriptor<T> Strict(bool strict = true)
@@ -355,7 +358,7 @@ namespace Nest
 			this._MinScore = minScore;
 			return this;
 		}
-		
+
 		/// <summary>
 		/// <para>
 		/// Controls a preference of which shard replicas to execute the search request on. 
@@ -443,7 +446,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			this._Fields = expressions.Select(e => (PropertyPathMarker) e).ToList();
+			this._Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
 		/// <summary>
@@ -452,7 +455,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
 		{
-			this._Fields = fields.Select(f => (PropertyPathMarker) f).ToList();
+			this._Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
 		}
 
@@ -617,7 +620,7 @@ namespace Nest
 			Func<F, PropertyPathMarker> inferedFieldNameSelector,
 			Action<FacetDescriptorsBucket<T>, F> fillBucket
 			)
-			where F : new()
+			where F : IFacetDescriptor, new()
 		{
 			facet.ThrowIfNull("facet");
 			inferedFieldNameSelector.ThrowIfNull("inferedFieldNameSelector");
@@ -635,23 +638,11 @@ namespace Nest
 					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
 				);
 			}
-			var bff = f as BaseFacetDescriptor<T>;
-			var gff = f as GeoDistanceFacetDescriptor<T>;
 			var bucket = new FacetDescriptorsBucket<T>();
-			if (bff != null)
-			{
-				bucket.Global = bff._IsGlobal;
-				bucket.FacetFilter = bff._FacetFilter;
-				bucket.Nested = bff._Nested;
-				bucket.Scope = bff._Scope;
-			}
-			else if (gff != null)
-			{
-				bucket.Global = gff._IsGlobal;
-				bucket.FacetFilter = gff._FacetFilter;
-				bucket.Nested = gff._Nested;
-				bucket.Scope = gff._Scope;
-			}
+			bucket.Global = f.IsGlobal;
+			bucket.FacetFilter = f.FacetFilter;
+			bucket.Nested = f.Nested;
+			bucket.Scope = f.Scope;
 			fillBucket(bucket, descriptor);
 			this._Facets.Add(key, bucket);
 

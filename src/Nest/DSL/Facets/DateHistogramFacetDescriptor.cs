@@ -10,7 +10,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class DateHistogramFacetDescriptor<T> : BaseFacetDescriptor<T> 
+	public class DateHistogramFacetDescriptor<T> : BaseFacetDescriptor<DateHistogramFacetDescriptor<T>,T> 
 		where T : class
 	{
 		[JsonProperty(PropertyName = "field")]
@@ -144,31 +144,5 @@ namespace Nest
 			return this;
 		}
 
-		public new DateHistogramFacetDescriptor<T> Global()
-		{
-			this._IsGlobal = true;
-			return this;
-		}
-		public new DateHistogramFacetDescriptor<T> FacetFilter(
-	  Func<FilterDescriptor<T>, BaseFilter> facetFilter
-	)
-		{
-			var filter = facetFilter(new FilterDescriptor<T>());
-			if (filter.IsConditionless)
-				filter = null;
-			this._FacetFilter = filter;
-			return this;
-		}
-
-		public new DateHistogramFacetDescriptor<T> Nested(string nested)
-		{
-			this._Nested = nested;
-			return this;
-		}
-		public new DateHistogramFacetDescriptor<T> Scope(string scope)
-		{
-			this._Scope = scope;
-			return this;
-		}
 	}
 }

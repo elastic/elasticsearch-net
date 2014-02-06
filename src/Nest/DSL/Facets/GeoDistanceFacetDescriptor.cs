@@ -14,7 +14,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(ICustomJsonConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class GeoDistanceFacetDescriptor<T> : ICustomJson
+	public class GeoDistanceFacetDescriptor<T> : BaseFacetDescriptor<GeoDistanceFacetDescriptor<T>, T>, ICustomJson
 		where T : class
 	{
 		internal string _Nested { get; set; }
@@ -103,32 +103,6 @@ namespace Nest
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
 			this._Params = paramDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
-
-		public new GeoDistanceFacetDescriptor<T> Global()
-		{
-			this._IsGlobal = true;
-			return this;
-		}
-		public new GeoDistanceFacetDescriptor<T> FacetFilter(
-		  Func<FilterDescriptor<T>, BaseFilter> facetFilter
-		)
-		{
-			var filter = facetFilter(new FilterDescriptor<T>());
-			if (filter.IsConditionless)
-				filter = null;
-			this._FacetFilter = filter;
-			return this;
-		}
-		public new GeoDistanceFacetDescriptor<T> Nested(string nested)
-		{
-			this._Nested = nested;
-			return this;
-		}
-		public new GeoDistanceFacetDescriptor<T> Scope(string scope)
-		{
-			this._Scope = scope;
 			return this;
 		}
 

@@ -10,7 +10,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class TermFacetDescriptor<T> : BaseFacetDescriptor<T> where T : class
+	public class TermFacetDescriptor<T> : BaseFacetDescriptor<TermFacetDescriptor<T>,T> where T : class
 	{
 		[JsonProperty(PropertyName = "field")]
 		internal PropertyPathMarker _Field { get; set; }
@@ -112,37 +112,6 @@ namespace Nest
 		public TermFacetDescriptor<T> ScriptField(string scriptField)
 		{
 			this._ScriptField = scriptField;
-			return this;
-		}
-
-
-		public new TermFacetDescriptor<T> Global()
-		{
-			this._IsGlobal = true;
-			return this;
-		}
-		public TermFacetDescriptor<T> FacetFilter(Func<FilterDescriptor<T>, BaseFilter> facetFilter)
-		{
-			var filter = new FilterDescriptor<T>();
-			var f = facetFilter(filter);
-			if (f.IsConditionless)
-				f = null;
-			this._FacetFilter = f;
-			return this;
-		}
-		public new TermFacetDescriptor<T> Nested(string nested)
-		{
-			this._Nested = nested;
-			return this;
-		}
-		public new TermFacetDescriptor<T> Nested(Expression<Func<T, object>> objectPath)
-		{
-			this._Nested = objectPath;
-			return this;
-		}
-		public new TermFacetDescriptor<T> Scope(string scope)
-		{
-			this._Scope = scope;
 			return this;
 		}
 
