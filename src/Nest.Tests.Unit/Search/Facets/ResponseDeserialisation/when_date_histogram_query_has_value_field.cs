@@ -62,7 +62,7 @@ namespace Nest.Tests.Unit.Search.Facets.ResponseDeserialisation
 				@"{""took"":378,""timed_out"":false,""_shards"":{""total"":4,""successful"":4,""failed"":0},""hits"":{""total"":3700979,""max_score"":1,""hits"":[]},""facets"":{""widget_1:histogram"":{""_type"":""date_histogram"",""entries"":[{""time"":1351728000000,""count"":5181,""min"":7.989999771118164,""max"":7.989999771118164,""total"":41396.18881416321,""total_count"":5181,""mean"":7.989999771118164},{""time"":1354320000000,""count"":5509,""min"":7.989999771118164,""max"":7.989999771118164,""total"":44016.908739089966,""total_count"":5509,""mean"":7.989999771118164}]},""widget_2:histogram"":{""_type"":""date_histogram"",""entries"":[{""time"":1330560000000,""count"":173,""min"":7.989999771118164,""max"":7.989999771118164,""total"":1382.2699604034424,""total_count"":173,""mean"":7.989999771118164},{""time"":1333238400000,""count"":162,""min"":7.989999771118164,""max"":7.989999771118164,""total"":1294.3799629211426,""total_count"":162,""mean"":7.989999771118164}]},""widget_1:terms"":{""_type"":""terms"",""missing"":0,""total"":14797,""other"":0,""terms"":[{""term"":""widget 1"",""count"":14797}]},""widget_2:terms"":{""_type"":""terms"",""missing"":0,""total"":2002,""other"":0,""terms"":[{""term"":""widget 2"",""count"":2002}]}}}";
 
 			var connectionMockery = new Mock<IConnection>();
-			var connectionSettings = new ConnectionSettings(Test.Default.Uri).SetDefaultIndex("index");
+			var connectionSettings = new ConnectionSettings(Test.Default.Uri, "index");
 
 			connectionMockery
 				.Setup(status => status.PostSync("index/_search", "{}"))

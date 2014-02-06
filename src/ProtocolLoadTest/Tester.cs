@@ -20,8 +20,7 @@ namespace ProtocolLoadTest
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new UriBuilder("http", host, port).Uri;
-			return new ConnectionSettings(uri)
-			   .SetDefaultIndex(indexName);
+			return new ConnectionSettings(uri, "indexName");
 		}
 
 		protected void Connect(ElasticClient client, ConnectionSettings settings)

@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration
 		public void TestSettingsWithUri()
 		{
 			var uri = new Uri(string.Format("http://{0}:{1}", ElasticsearchConfiguration.Settings().Host, ElasticsearchConfiguration.Settings().Port));
-			var settings = new ConnectionSettings(uri);
+			var settings = new ConnectionSettings(uri, "index");
 			Assert.AreEqual(settings.Host, ElasticsearchConfiguration.Settings().Host);
 			Assert.AreEqual(settings.Port, Test.Default.Port);
 			Assert.AreEqual(uri, this._settings.Uri);
@@ -49,11 +49,11 @@ namespace Nest.Tests.Integration
 			Assert.Throws<UriFormatException>(() =>
 			{
 				string host = null;
-				var settings = new ConnectionSettings(new Uri("http://:80"));
+				var settings = new ConnectionSettings(new Uri("http://:80"), "index");
 			});
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings(new Uri(":asda:asdasd:80"));
+				var settings = new ConnectionSettings(new Uri(":asda:asdasd:80"), "index");
 			});
 		}
 		[Test]
@@ -61,7 +61,7 @@ namespace Nest.Tests.Integration
 		{
 			Assert.Throws<UriFormatException>(() =>
 			{
-				var settings = new ConnectionSettings(new Uri("some mangled hostname:80"));
+				var settings = new ConnectionSettings(new Uri("some mangled hostname:80"), "index");
 			});
 
 		}
@@ -72,7 +72,7 @@ namespace Nest.Tests.Integration
 
 			Assert.DoesNotThrow(() =>
 			{
-				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"));
+				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");
 				var client = new ElasticClient(settings);
 				result = client.RootNodeInfo();
 			});
@@ -82,7 +82,7 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void TestConnectSuccessWithUri()
 		{
-			var settings = new ConnectionSettings(Test.Default.Uri);
+			var settings = new ConnectionSettings(Test.Default.Uri, "index");
 			var client = new ElasticClient(settings);
 			var result = client.RootNodeInfo();
 
@@ -95,7 +95,7 @@ namespace Nest.Tests.Integration
 			Assert.Throws<ArgumentNullException>(() =>
 			{
 				Uri uri = null;
-				var settings = new ConnectionSettings(uri);
+				var settings = new ConnectionSettings(uri, "index");
 			});
 		}
 

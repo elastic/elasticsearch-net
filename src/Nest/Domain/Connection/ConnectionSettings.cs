@@ -51,13 +51,17 @@ namespace Nest
 
 		public ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; private set; }
 
-		public ConnectionSettings(Uri uri)
+		public ConnectionSettings(Uri uri, string defaultIndex)
 		{
 			uri.ThrowIfNull("uri");
+			defaultIndex.ThrowIfNullOrEmpty("defaultIndex");
 
 			this.Timeout = 60 * 1000;
 
+			this.SetDefaultIndex(defaultIndex);
 			this.Uri = uri;
+			
+			
 			if (!uri.OriginalString.EndsWith("/"))
 				this.Uri = new Uri(uri.OriginalString + "/");
 			this.Host = uri.Host;
@@ -72,6 +76,7 @@ namespace Nest
 
 			this.ModifyJsonSerializerSettings = (j) => { };
 			this.ContractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
+
 
 		}
 

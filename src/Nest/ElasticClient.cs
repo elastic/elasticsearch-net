@@ -11,7 +11,7 @@ namespace Nest
 {
 	public partial class ElasticClient : Nest.IElasticClient
 	{
-		private readonly IConnectionSettings _connectionSettings;
+		protected readonly IConnectionSettings _connectionSettings;
 
 		internal RawDispatch RawDispatch { get; private set; }
 
@@ -30,7 +30,6 @@ namespace Nest
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
-
 
 			this._connectionSettings = settings;
 			this.Connection = connection;

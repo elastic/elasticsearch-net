@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Domain.Connection
             // Arrange
             var uri = new Uri("http://localhost");
             var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
-            var connectionSettings = new ConnectionSettings(uri).SetGlobalQueryStringParameters(query);
+            var connectionSettings = new ConnectionSettings(uri, "index").SetGlobalQueryStringParameters(query);
             var connection = new TestConnection(connectionSettings);
 
             // Act
@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.Domain.Connection
             // Arrange
             var uri = new Uri("http://localhost:9000");
             var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
-			var connectionSettings = new ConnectionSettings(uri).SetGlobalQueryStringParameters(query);            
+			var connectionSettings = new ConnectionSettings(uri, "index").SetGlobalQueryStringParameters(query);            
             var connection = new TestConnection(connectionSettings);
 
             // Act

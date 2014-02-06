@@ -10,8 +10,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 	public class HostNameWithPathTests
 	{
 		private static Uri HostName = new Uri(Test.Default.Uri, "/my-api-token");
-		private static ConnectionSettings Settings = new ConnectionSettings(HostName)
-			.SetDefaultIndex(Test.Default.DefaultIndex);
+		private static ConnectionSettings Settings = new ConnectionSettings(HostName,Test.Default.DefaultIndex);
 
 		private static ElasticClient Client = new ElasticClient(Settings, new InMemoryConnection(Settings));
 

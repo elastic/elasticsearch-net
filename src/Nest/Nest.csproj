@@ -85,7 +85,16 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackwardsCompatibility\IElasticClientExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\DeleteMappingExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\GetExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\GetManyExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\GetMappingExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\OpenCloseIndexExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\SourceExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\SourceManyExtensions.cs" />
     <Compile Include="Domain\Alias\AliasAddDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasAddOperation.cs" />
     <Compile Include="Domain\Alias\AliasRemoveDescriptor.cs" />
@@ -652,7 +661,7 @@
     <Compile Include="Enums\StoreOption.cs" />
     <Compile Include="Enums\NumericType.cs" />
     <Compile Include="Resolvers\Converters\FacetConverter.cs" />
-    <Compile Include="Resolvers\Converters\ICustomJsonConverter.cs" />
+    <Compile Include="Resolvers\Converters\CustomJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
     <Compile Include="Domain\Paths\ElasticSearchPathInfo.cs" />

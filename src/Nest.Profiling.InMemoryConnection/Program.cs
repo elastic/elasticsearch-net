@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShellProgressBar;
 
 namespace Nest.Profiling.InMemoryConnection
 {
@@ -17,8 +12,7 @@ namespace Nest.Profiling.InMemoryConnection
 
 		static void Main(string[] args)
 		{
-			var settings = new ConnectionSettings(new Uri("http://localhost:9200"))
-				.SetDefaultIndex("test-index");
+			var settings = new ConnectionSettings(new Uri("http://localhost:9200"),"test-index");
 			var client = new ElasticClient(settings, new Nest.InMemoryConnection(settings));
 			int calls = 100000;
 			var steps = calls/10;

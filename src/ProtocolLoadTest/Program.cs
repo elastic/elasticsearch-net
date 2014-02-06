@@ -81,8 +81,7 @@ namespace ProtocolLoadTest
 				host = "ipv4.fiddler";
 			string indexName = INDEX_PREFIX + suffix;
 
-			var connSettings = new ConnectionSettings(new Uri("http://"+host+":9200"))
-				.SetDefaultIndex(indexName);
+			var connSettings = new ConnectionSettings(new Uri("http://"+host+":9200"), indexName);
 
 			var client = new ElasticClient(connSettings);
 
@@ -114,8 +113,7 @@ namespace ProtocolLoadTest
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 
-			var connSettings = new ConnectionSettings(new Uri("http://" + host + ":9200"))
-				.SetDefaultIndex(indexName);
+			var connSettings = new ConnectionSettings(new Uri("http://" + host + ":9200"), indexName);
 
 			var client = new ElasticClient(connSettings);
 

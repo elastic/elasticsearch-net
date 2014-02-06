@@ -14,8 +14,7 @@ namespace Nest.Tests.Unit.Cluster
 	{
 		private void Do(string method, string expectedUrl, Action<IElasticClient> call)
 		{
-			var settings = new ConnectionSettings(new Uri("http://localhost:9200/"))
-				.SetDefaultIndex("mydefaultindex")
+			var settings = new ConnectionSettings(new Uri("http://localhost:9200/"), "mydefaultindex")
 				.SetConnectionStatusHandler(c =>
 				{
 					new Uri(c.RequestUrl).PathAndQuery.Should().Be(expectedUrl);
