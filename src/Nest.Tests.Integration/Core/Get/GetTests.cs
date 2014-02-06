@@ -50,7 +50,6 @@ namespace Nest.Tests.Integration.Core.Get
 			).Fields;
 
 			Assert.NotNull(fieldSelection);
-			Assert.IsNull(fieldSelection.Document);
 			var name = fieldSelection.FieldValue(f => f.Name);
 			Assert.IsNotNullOrEmpty(name);
 			var list = fieldSelection.FieldValue<List<string>>(f=>f.Followers.First().FirstName);

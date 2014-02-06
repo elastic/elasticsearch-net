@@ -10,7 +10,6 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class CompletionMapping : IElasticType
 	{
-		[JsonProperty("name")]
 		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("type")]

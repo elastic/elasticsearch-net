@@ -7,9 +7,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class GeoShapeMapping : IElasticType
 	{
-		[JsonProperty(PropertyName = "name")]
 		public PropertyNameMarker Name { get; set; }
 
 		private TypeNameMarker __type;

@@ -554,7 +554,6 @@
     <Compile Include="Domain\Mapping\Attributes\ElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Types\IElasticType.cs" />
     <Compile Include="Domain\Mapping\Attributes\ElasticTypeAttribute.cs" />
-    <Compile Include="Domain\Mapping\Map.cs" />
     <Compile Include="Domain\Mapping\Types\RootObjectMapping.cs" />
     <Compile Include="Domain\Mapping\Types\GenericMapping.cs" />
     <Compile Include="Domain\Mapping\SpecialFields\IdFieldMapping.cs" />

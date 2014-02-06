@@ -18,7 +18,6 @@ namespace Nest
 		}
 		public GenericMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath, bool noNameProperty = false)
 		{
-			//TODO noNameProperty still checks out?
 			this._Mapping.Name = objectPath;
 			return this;
 		}

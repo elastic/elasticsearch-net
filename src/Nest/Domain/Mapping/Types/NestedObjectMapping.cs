@@ -4,6 +4,7 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class NestedObjectMapping : ObjectMapping
 	{
 		[JsonProperty("type")]

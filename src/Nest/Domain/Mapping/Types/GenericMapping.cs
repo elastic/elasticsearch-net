@@ -11,10 +11,10 @@ namespace Nest
 	/// Sometimes you need a generic type mapping, i.e when using dynamic templates 
 	/// in order to specify "{dynamic_template}" the type, or if you have some plugin that exposes a new type.
 	/// </summary>
+	[JsonObject(MemberSerialization.OptIn)]
 	public class GenericMapping : IElasticType, IElasticCoreType
 	{
 
-		[JsonProperty(PropertyName = "name")]
 		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("type")]

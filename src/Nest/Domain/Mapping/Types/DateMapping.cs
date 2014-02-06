@@ -7,9 +7,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public class DateMapping : IElasticType, IElasticCoreType
 	{
-		[JsonProperty(PropertyName = "name")]
 		public PropertyNameMarker Name { get; set; }
 
 		[JsonProperty("type")]

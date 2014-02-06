@@ -31,9 +31,6 @@ namespace Nest.Domain
 			this.FieldValues = values;
 		}
 		
-		//TODO REMOVE ?
-		public T Document { get; set; }
-
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> FieldValues { get; set; }
 
