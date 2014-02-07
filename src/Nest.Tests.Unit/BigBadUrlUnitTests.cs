@@ -85,8 +85,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/doc/1", c => c.Get<Doc>(1));
 			Do("GET", "/mycustomindex/mycustomtype/1", c => c.Get<Doc>(1, index: "mycustomindex", type: "mycustomtype"));
 			Do("GET", "/mycustomindex/mycustomtype/1", c => c.Get<Doc>(g => g.Id(1).Index("mycustomindex").Type("mycustomtype")));
-			Do("GET", "/mydefaultindex/_alias/%2A", c => c.GetAliases(a => a.Index<Doc>()));
-			Do("GET", "/_alias/prefix-%2A", c => c.GetAliases(a => a.Alias("prefix-*")));
+			Do("GET", "/mydefaultindex/_alias/*", c => c.GetAliases(a => a.Index<Doc>()));
+			Do("GET", "/_alias/prefix-*", c => c.GetAliases(a => a.Alias("prefix-*")));
 			Do("GET", "/mydefaultindex/_settings", c => c.GetIndexSettings(i => i.Index<Doc>()));
 			Do("GET", "/mydefaultindex/doc/_mapping", c => c.GetMapping<Doc>());
 			Do("GET", "/mycustomindex/doc/_mapping", c => c.GetMapping<Doc>(m => m.Index("mycustomindex")));
@@ -133,7 +133,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_all/doc/_search", c => c.Search<Doc>(s => s.AllIndices().MatchAll()));
 			Do("POST", "/_search", c => c.Search<Doc>(s => s.AllIndices().AllTypes().MatchAll()));
 			Do("POST", "/mydefaultindex/_search", c => c.Search<Doc>(s => s.AllTypes().MatchAll()));
-			Do("POST", "/prefix-%2A/a%2Cb/_search", c => c.Search<Doc>(s => s.Index("prefix-*").Types("a", "b").MatchAll()));
+			Do("POST", "/prefix-*/a%2Cb/_search", c => c.Search<Doc>(s => s.Index("prefix-*").Types("a", "b").MatchAll()));
 			Do("GET", "/_segments", c => c.Segments());
 			Do("GET", "/mycustomindex/_segments", c => c.Segments(s => s.Index("mycustomindex")));
 			Do("POST", "/_gateway/snapshot", c => c.Snapshot());
