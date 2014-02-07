@@ -95,5 +95,25 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
+		
+		[Test]
+		public void TermsOfTypeInt()
+		{
+			var s = new SearchDescriptor<ElasticSearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(ff => ff.
+					TermsDescriptor<int>(tq => tq
+						.OnField(p=>p.LOC)
+						.MinimumMatch(2)
+						.DisableCoord()
+						.Terms(1,2,3,4)
+						.CacheKey("user_4_key")
+
+					)
+				);
+
+			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
+		}
 	}
 }

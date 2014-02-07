@@ -39,7 +39,8 @@ namespace Nest
 		BaseQuery Term(string field, object value, double? Boost = null);
 		BaseQuery Terms(System.Linq.Expressions.Expression<Func<T, object>> objectPath, params string[] terms);
 		BaseQuery Terms(string field, params string[] terms);
-		BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T>> selector);
+		BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T, object>> selector);
+		BaseQuery TermsDescriptor<K>(Action<TermsQueryDescriptor<T, K>> selector);
 		BaseQuery Text(Action<TextQueryDescriptor<T>> selector);
 		BaseQuery TextPhrase(Action<TextPhraseQueryDescriptor<T>> selector);
 		BaseQuery TextPhrasePrefix(Action<TextPhrasePrefixQueryDescriptor<T>> selector);

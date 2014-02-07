@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -17,7 +18,8 @@ namespace Nest.Tests.Integration.Search.NamedFilter
 				.From(0)
 				.Size(10)
 				.Fields(p=>p.Name)
-				.Filter(f => f.Name("myfilter").Terms(p => p.Name.Suffix("sort"), new [] {_LookFor.ToLower() })
+				.Filter(f => 
+					f.Name("myfilter").Terms(p => p.Name.Suffix("sort"), new [] {_LookFor.ToLower() })
 					|| f.Name("myfilter2").Terms(p => p.Name.Suffix("sort"), new [] { "nest" }) 
 				)
 			);

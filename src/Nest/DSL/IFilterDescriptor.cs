@@ -42,7 +42,9 @@ namespace Nest
 		BaseFilter Range(Action<RangeFilterDescriptor<T>> rangeSelector);
 		BaseFilter Script(Action<ScriptFilterDescriptor> scriptSelector);
 		BaseFilter Term<K>(Expression<Func<T, K>> fieldDescriptor, K term);
-		BaseFilter Term<K>(string field, K term);
+		BaseFilter Term(Expression<Func<T, object>> fieldDescriptor, object term);
+		BaseFilter Term(string field, object term);
+		BaseFilter Terms<K>(Expression<Func<T, K>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null);
 		BaseFilter Terms(Expression<Func<T, object>> fieldDescriptor, IEnumerable<string> terms, TermsExecution? Execution = null);
 		BaseFilter Terms(string field, IEnumerable<string> terms, TermsExecution? Execution = null);
 		BaseFilter Type(string type);

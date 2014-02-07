@@ -177,7 +177,10 @@ namespace Nest
 		{
 			return new QueryDescriptor<T>().Term(field, value, Boost);
 		}
-
+		public static BaseQuery Terms<K>(Expression<Func<T, K>> objectPath, params K[] terms)
+		{
+			return new QueryDescriptor<T>().Terms<K>(objectPath, terms);
+		}
 		public static BaseQuery Terms(Expression<Func<T, object>> objectPath, params string[] terms)
 		{
 			return new QueryDescriptor<T>().Terms(objectPath, terms);
@@ -188,7 +191,12 @@ namespace Nest
 			return new QueryDescriptor<T>().Terms(field, terms);
 		}
 
-		public static BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T>> selector)
+		public static BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T, object>> selector)
+		{
+			return new QueryDescriptor<T>().TermsDescriptor(selector);
+		}
+		
+		public static BaseQuery TermsDescriptor<K>(Action<TermsQueryDescriptor<T, K>> selector)
 		{
 			return new QueryDescriptor<T>().TermsDescriptor(selector);
 		}

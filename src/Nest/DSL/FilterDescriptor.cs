@@ -624,15 +624,37 @@ namespace Nest
 			return this.SetDictionary("term", fieldDescriptor, term, (d, b) => { b.TermFilter = d; });
 		}
 		/// <summary>
+		/// Filters documents that have fields that contain a term (not analyzed). 
+		/// Similar to term query, except that it acts as a filter
+		/// </summary>
+		public BaseFilter Term(Expression<Func<T, object>> fieldDescriptor, object term)
+		{
+			var t = new TermFilter() { Field = fieldDescriptor, Value = term };
+			return this.SetDictionary("term", fieldDescriptor, term, (d, b) => { b.TermFilter = d; });
+		}
+	
+		/// <summary>
 		/// Filters documents that have fields that contain a term (not analyzed).
 		/// Similar to term query, except that it acts as a filter
 		/// </summary>
-		public BaseFilter Term<K>(string field, K term)
+		public BaseFilter Term(string field, object term)
 		{
 			var t = new TermFilter() { Field = field, Value = term };
 			return this.SetDictionary("term", field, term, (d, b) => { b.TermFilter = d; });
 
 		}
+		/// <summary>
+		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
+		/// </summary>
+		public BaseFilter Terms<K>(Expression<Func<T, K>> fieldDescriptor, IEnumerable<K> terms, TermsExecution? Execution = null)
+		{
+			return this.SetDictionary("terms", fieldDescriptor, terms, (d, b) =>
+			{
+				if (Execution.HasValue) d.Add("execution", Enum.GetName(typeof(TermsExecution), Execution));
+				b.TermsFilter = d;
+			});
+		}	
+		
 		/// <summary>
 		/// Filters documents that have fields that match any of the provided terms (not analyzed). 
 		/// </summary>

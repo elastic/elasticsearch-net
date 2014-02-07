@@ -172,9 +172,9 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery Terms(Expression<Func<T, object>> objectPath, params string[] terms)
+		public BaseQuery Terms<K>(Expression<Func<T, K>> objectPath, params K[] terms)
 		{
-			return this.TermsDescriptor(t => t
+			return this.TermsDescriptor<K>(t => t
 				.OnField(objectPath)
 				.Terms(terms)
 			);
@@ -182,9 +182,28 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T>> selector)
+		public BaseQuery Terms(Expression<Func<T, object>> objectPath, params string[] terms)
 		{
-			var query = new TermsQueryDescriptor<T>();
+			return this.TermsDescriptor(t => t
+				.OnField(objectPath)
+				.Terms(terms)
+			);
+		}
+
+		/// <summary>
+		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+		/// </summary>
+		public BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T, object>> selector)
+		{
+			return this.TermsDescriptor<object>(selector);
+
+		}
+		/// <summary>
+		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+		/// </summary>
+		public BaseQuery TermsDescriptor<K>(Action<TermsQueryDescriptor<T, K>> selector)
+		{
+			var query = new TermsQueryDescriptor<T, K>();
 			selector(query);
 
 			var termsQueryDescriptor = new Dictionary<PropertyPathMarker, object>();
