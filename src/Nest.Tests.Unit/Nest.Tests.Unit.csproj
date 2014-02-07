@@ -59,6 +59,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FakeItEasy">
@@ -70,10 +72,6 @@
     <Reference Include="Moq">
       <HintPath>..\..\dep\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -84,6 +82,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PUrify">
+      <HintPath>..\..\dep\Purify - Preview\PUrify.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseJsonTests.cs" />
@@ -727,6 +731,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Test.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Search\Query\Singles\Terms\TermsOfTypeInt.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">

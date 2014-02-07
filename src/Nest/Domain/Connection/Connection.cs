@@ -327,7 +327,7 @@ namespace Nest
 						tcs.SetResult(new ConnectionStatus(this._ConnectionSettings, exception));
 					else
 						tcs.TrySetException(exception);
-					enumerator.Dispose();
+//					enumerator.Dispose();
 				}
 				else if (enumerator.MoveNext())
 				{
@@ -350,8 +350,8 @@ namespace Nest
 				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
 				path += qs;
 			}
-			var uri = new Uri(s.Uri, path).Purify();
-			return uri;
+			Uri uri = path.IsNullOrEmpty() ? s.Uri : new Uri(s.Uri, path);
+			return uri.Purify();
 		}
 
 	}
