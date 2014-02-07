@@ -102,12 +102,12 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void ConnectUsingRawClient()
 		{
-			var result = this._client.Raw.InfoHead();
+			var result = this._client.Raw.InfoGet();
 			Assert.IsTrue(result.Success);
 			StringAssert.EndsWith(":9200/?pretty=true", result.RequestUrl);
 
 
-			var resultWithQueryString = this._client.Raw.InfoHead(qs => qs.Add("hello", "world"));
+			var resultWithQueryString = this._client.Raw.InfoGet(qs => qs.Add("hello", "world"));
 			Assert.IsTrue(resultWithQueryString.Success);
 
 			StringAssert.EndsWith(":9200/?hello=world&pretty=true", resultWithQueryString.RequestUrl);

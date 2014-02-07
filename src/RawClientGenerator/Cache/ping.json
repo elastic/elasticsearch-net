@@ -1,7 +1,7 @@
 {
-  "info": {
+  "ping": {
     "documentation": "http://www.elasticsearch.org/guide/",
-    "methods": ["GET"],
+    "methods": ["HEAD"],
     "url": {
       "path": "/",
       "paths": ["/"],

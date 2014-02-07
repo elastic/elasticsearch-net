@@ -447,60 +447,6 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus CreateDispatch(ElasticSearchPathInfo<CreateQueryString> pathInfo , object body)
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.POST:
-					//POST /{index}/{type}/{id}/_create
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
-					//POST /{index}/{type}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
-					break;
-
-				case PathInfoHttpMethod.PUT:
-					//PUT /{index}/{type}/{id}/_create
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePut(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
-					//PUT /{index}/{type}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePut(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
-					break;
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.Create() into any of the following paths: \r\n - /{index}/{type}\r\n - /{index}/{type}/{id}/_create");
-		}
-		
-		
-		internal Task<ConnectionStatus> CreateDispatchAsync(ElasticSearchPathInfo<CreateQueryString> pathInfo , object body)
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.POST:
-					//POST /{index}/{type}/{id}/_create
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
-					//POST /{index}/{type}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
-					break;
-
-				case PathInfoHttpMethod.PUT:
-					//PUT /{index}/{type}/{id}/_create
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePutAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
-					//PUT /{index}/{type}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CreatePutAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
-					break;
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.Create() into any of the following paths: \r\n - /{index}/{type}\r\n - /{index}/{type}/{id}/_create");
-		}
-		
-		
 		internal ConnectionStatus DeleteDispatch(ElasticSearchPathInfo<DeleteQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -650,7 +596,7 @@ namespace Nest
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.Get() into any of the following paths: \r\n - /{index}/{type}/{id}\r\n - /{index}/{type}/{id}/_source");
+			throw new DispatchException("Could not dispatch IElasticClient.Get() into any of the following paths: \r\n - /{index}/{type}/{id}");
 		}
 		
 		
@@ -665,7 +611,7 @@ namespace Nest
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.Get() into any of the following paths: \r\n - /{index}/{type}/{id}\r\n - /{index}/{type}/{id}/_source");
+			throw new DispatchException("Could not dispatch IElasticClient.Get() into any of the following paths: \r\n - /{index}/{type}/{id}");
 		}
 		
 		
@@ -2035,10 +1981,6 @@ namespace Nest
 					//GET /
 					return this.Raw.InfoGet(u => pathInfo.QueryString);
 
-				case PathInfoHttpMethod.HEAD:
-					//HEAD /
-					return this.Raw.InfoHead(u => pathInfo.QueryString);
-
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Info() into any of the following paths: \r\n - /");
 		}
@@ -2051,10 +1993,6 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /
 					return this.Raw.InfoGetAsync(u => pathInfo.QueryString);
-
-				case PathInfoHttpMethod.HEAD:
-					//HEAD /
-					return this.Raw.InfoHeadAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Info() into any of the following paths: \r\n - /");
@@ -2266,6 +2204,32 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Percolate() into any of the following paths: \r\n - /{index}/{type}/_percolate");
+		}
+		
+		
+		internal ConnectionStatus PingDispatch(ElasticSearchPathInfo<PingQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.HEAD:
+					//HEAD /
+					return this.Raw.PingHead(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Ping() into any of the following paths: \r\n - /");
+		}
+		
+		
+		internal Task<ConnectionStatus> PingDispatchAsync(ElasticSearchPathInfo<PingQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.HEAD:
+					//HEAD /
+					return this.Raw.PingHeadAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Ping() into any of the following paths: \r\n - /");
 		}
 		
 		

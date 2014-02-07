@@ -17,7 +17,7 @@ namespace Nest
 	
 		
 		///<summary>POST /_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ConnectionStatus BulkPost(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
@@ -35,7 +35,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ConnectionStatus> BulkPostAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
@@ -53,7 +53,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -73,7 +73,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -93,7 +93,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -115,7 +115,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -137,7 +137,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ConnectionStatus BulkPut(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
@@ -155,7 +155,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ConnectionStatus> BulkPutAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
@@ -173,7 +173,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -193,7 +193,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -213,7 +213,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -235,7 +235,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/_bulk
-	    ///<pre>http://elasticsearch.org/guide/reference/api/bulk/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html</pre>	
 	    ///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -257,7 +257,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /_search/scroll/{scroll_id}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		public ConnectionStatus ClearScrollDelete(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
@@ -276,7 +276,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /_search/scroll/{scroll_id}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		public Task<ConnectionStatus> ClearScrollDeleteAsync(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
@@ -295,7 +295,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/settings
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-update-settings.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ClusterGetSettings(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null)
 		{
@@ -311,7 +311,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/settings
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-update-settings.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ClusterGetSettingsAsync(Func<ClusterGetSettingsQueryString, ClusterGetSettingsQueryString> queryString = null)
 		{
@@ -327,7 +327,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/health
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-health/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-health.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ClusterHealthGet(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
 		{
@@ -343,7 +343,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/health
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-health/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-health.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ClusterHealthGetAsync(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
 		{
@@ -359,7 +359,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/health/{index}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-health/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-health.html</pre>	
 	    ///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
 		public ConnectionStatus ClusterHealthGet(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
@@ -378,7 +378,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/health/{index}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-health/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-health.html</pre>	
 	    ///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
 		public Task<ConnectionStatus> ClusterHealthGetAsync(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
@@ -397,7 +397,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/hotthreads
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-hot-threads/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-hot-threads.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ClusterNodeHotThreadsGet(Func<ClusterNodeHotThreadsQueryString, ClusterNodeHotThreadsQueryString> queryString = null)
 		{
@@ -413,7 +413,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/hotthreads
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-hot-threads/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-hot-threads.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ClusterNodeHotThreadsGetAsync(Func<ClusterNodeHotThreadsQueryString, ClusterNodeHotThreadsQueryString> queryString = null)
 		{
@@ -429,7 +429,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/{node_id}/hotthreads
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-hot-threads/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-hot-threads.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public ConnectionStatus ClusterNodeHotThreadsGet(string node_id, Func<ClusterNodeHotThreadsQueryString, ClusterNodeHotThreadsQueryString> queryString = null)
@@ -448,7 +448,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/{node_id}/hotthreads
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-hot-threads/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-hot-threads.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public Task<ConnectionStatus> ClusterNodeHotThreadsGetAsync(string node_id, Func<ClusterNodeHotThreadsQueryString, ClusterNodeHotThreadsQueryString> queryString = null)
@@ -467,7 +467,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-info/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-info.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ClusterNodeInfoGet(Func<ClusterNodeInfoQueryString, ClusterNodeInfoQueryString> queryString = null)
 		{
@@ -483,7 +483,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-info/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-info.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ClusterNodeInfoGetAsync(Func<ClusterNodeInfoQueryString, ClusterNodeInfoQueryString> queryString = null)
 		{
@@ -499,7 +499,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/{node_id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-info/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-info.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public ConnectionStatus ClusterNodeInfoGet(string node_id, Func<ClusterNodeInfoQueryString, ClusterNodeInfoQueryString> queryString = null)
@@ -518,7 +518,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/{node_id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-info/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-info.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public Task<ConnectionStatus> ClusterNodeInfoGetAsync(string node_id, Func<ClusterNodeInfoQueryString, ClusterNodeInfoQueryString> queryString = null)
@@ -537,7 +537,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_shutdown
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-shutdown.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ClusterNodeShutdownPost(Func<ClusterNodeShutdownQueryString, ClusterNodeShutdownQueryString> queryString = null)
 		{
@@ -553,7 +553,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_shutdown
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-shutdown.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ClusterNodeShutdownPostAsync(Func<ClusterNodeShutdownQueryString, ClusterNodeShutdownQueryString> queryString = null)
 		{
@@ -569,7 +569,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_cluster/nodes/{node_id}/_shutdown
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-shutdown.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		public ConnectionStatus ClusterNodeShutdownPost(string node_id, Func<ClusterNodeShutdownQueryString, ClusterNodeShutdownQueryString> queryString = null)
@@ -588,7 +588,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_cluster/nodes/{node_id}/_shutdown
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-shutdown.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		public Task<ConnectionStatus> ClusterNodeShutdownPostAsync(string node_id, Func<ClusterNodeShutdownQueryString, ClusterNodeShutdownQueryString> queryString = null)
@@ -607,7 +607,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-stats.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ClusterNodeStatsGet(Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
 		{
@@ -623,7 +623,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-stats.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ClusterNodeStatsGetAsync(Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
 		{
@@ -639,7 +639,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/{node_id}/stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-stats.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public ConnectionStatus ClusterNodeStatsGet(string node_id, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
@@ -658,7 +658,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/nodes/{node_id}/stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-stats.html</pre>	
 	    ///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public Task<ConnectionStatus> ClusterNodeStatsGetAsync(string node_id, Func<ClusterNodeStatsQueryString, ClusterNodeStatsQueryString> queryString = null)
@@ -677,7 +677,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_cluster/settings
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-update-settings.html</pre>	
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		public ConnectionStatus ClusterPutSettings(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null)
@@ -695,7 +695,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_cluster/settings
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-update-settings.html</pre>	
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		public Task<ConnectionStatus> ClusterPutSettingsAsync(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null)
@@ -713,7 +713,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_cluster/reroute
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-reroute/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-reroute.html</pre>	
 	    ///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		public ConnectionStatus ClusterReroutePost(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null)
@@ -731,7 +731,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_cluster/reroute
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-reroute/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-reroute.html</pre>	
 	    ///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		public Task<ConnectionStatus> ClusterReroutePostAsync(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null)
@@ -749,7 +749,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/state
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-state/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-state.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ClusterStateGet(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
@@ -765,7 +765,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cluster/state
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-state/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-state.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ClusterStateGetAsync(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
@@ -781,7 +781,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="body">A query to restrict the results (optional)</param>
 		public ConnectionStatus CountPost(object body, Func<CountQueryString, CountQueryString> queryString = null)
@@ -799,7 +799,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="body">A query to restrict the results (optional)</param>
 		public Task<ConnectionStatus> CountPostAsync(object body, Func<CountQueryString, CountQueryString> queryString = null)
@@ -817,7 +817,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results (optional)</param>
@@ -837,7 +837,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results (optional)</param>
@@ -857,7 +857,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -879,7 +879,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -901,7 +901,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		public ConnectionStatus CountGet(Func<CountQueryString, CountQueryString> queryString = null)
 		{
@@ -917,7 +917,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> CountGetAsync(Func<CountQueryString, CountQueryString> queryString = null)
 		{
@@ -933,7 +933,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		public ConnectionStatus CountGet(string index, Func<CountQueryString, CountQueryString> queryString = null)
@@ -952,7 +952,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		public Task<ConnectionStatus> CountGetAsync(string index, Func<CountQueryString, CountQueryString> queryString = null)
@@ -971,7 +971,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -992,7 +992,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_count
-	    ///<pre>http://elasticsearch.org/guide/reference/api/count/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -1012,192 +1012,8 @@ namespace Nest
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
 		}
 		
-		///<summary>POST /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="body">The document</param>
-		public ConnectionStatus CreatePost(string index, string type, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequest("POST", url, body, queryString: nv);
-		}
-		
-		///<summary>POST /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="body">The document</param>
-		public Task<ConnectionStatus> CreatePostAsync(string index, string type, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequestAsync("POST", url, body, queryString: nv);
-		}
-		
-		///<summary>POST /{index}/{type}/{id}/_create
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="id">Document ID</param>
-		///<param name="body">The document</param>
-		public ConnectionStatus CreatePost(string index, string type, string id, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
-			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequest("POST", url, body, queryString: nv);
-		}
-		
-		///<summary>POST /{index}/{type}/{id}/_create
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="id">Document ID</param>
-		///<param name="body">The document</param>
-		public Task<ConnectionStatus> CreatePostAsync(string index, string type, string id, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
-			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequestAsync("POST", url, body, queryString: nv);
-		}
-		
-		///<summary>PUT /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="body">The document</param>
-		public ConnectionStatus CreatePut(string index, string type, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequest("PUT", url, body, queryString: nv);
-		}
-		
-		///<summary>PUT /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="body">The document</param>
-		public Task<ConnectionStatus> CreatePutAsync(string index, string type, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequestAsync("PUT", url, body, queryString: nv);
-		}
-		
-		///<summary>PUT /{index}/{type}/{id}/_create
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="id">Document ID</param>
-		///<param name="body">The document</param>
-		public ConnectionStatus CreatePut(string index, string type, string id, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
-			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequest("PUT", url, body, queryString: nv);
-		}
-		
-		///<summary>PUT /{index}/{type}/{id}/_create
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
-	    ///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="id">Document ID</param>
-		///<param name="body">The document</param>
-		public Task<ConnectionStatus> CreatePutAsync(string index, string type, string id, object body, Func<CreateQueryString, CreateQueryString> queryString = null)
-		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
-			//var url = "{index}/{type}/{id}/_create".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_create".F(Encoded(index), Encoded(type), Encoded(id));
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new CreateQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequestAsync("PUT", url, body, queryString: nv);
-		}
-		
 		///<summary>DELETE /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/delete/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1220,7 +1036,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/delete/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1243,7 +1059,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/delete-by-query/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete-by-query.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation</param>
@@ -1263,7 +1079,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/delete-by-query/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete-by-query.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation</param>
@@ -1283,7 +1099,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/{type}/_query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/delete-by-query/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete-by-query.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -1305,7 +1121,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/{type}/_query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/delete-by-query/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete-by-query.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -1327,7 +1143,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -1350,7 +1166,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -1373,7 +1189,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}/_explain
-	    ///<pre>http://elasticsearch.org/guide/reference/api/explain/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-explain.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1396,7 +1212,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}/_explain
-	    ///<pre>http://elasticsearch.org/guide/reference/api/explain/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-explain.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1419,7 +1235,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}/_explain
-	    ///<pre>http://elasticsearch.org/guide/reference/api/explain/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-explain.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1443,7 +1259,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}/_explain
-	    ///<pre>http://elasticsearch.org/guide/reference/api/explain/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-explain.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1467,7 +1283,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -1490,7 +1306,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -1513,7 +1329,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}/_source
-	    ///<pre>http://elasticsearch.org/guide/reference/api/get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
@@ -1536,7 +1352,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}/_source
-	    ///<pre>http://elasticsearch.org/guide/reference/api/get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
@@ -1559,7 +1375,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1581,7 +1397,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1603,7 +1419,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1627,7 +1443,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1651,7 +1467,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1673,7 +1489,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1695,7 +1511,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1719,7 +1535,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/{id}
-	    ///<pre>http://elasticsearch.org/guide/reference/api/index_/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -1743,7 +1559,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesAnalyzeGet(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
@@ -1759,7 +1575,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesAnalyzeGetAsync(Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
@@ -1775,7 +1591,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		public ConnectionStatus IndicesAnalyzeGet(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
@@ -1794,7 +1610,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		public Task<ConnectionStatus> IndicesAnalyzeGetAsync(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
@@ -1813,7 +1629,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
 		public ConnectionStatus IndicesAnalyzePost(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
@@ -1831,7 +1647,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
 		public Task<ConnectionStatus> IndicesAnalyzePostAsync(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
@@ -1849,7 +1665,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
@@ -1869,7 +1685,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_analyze
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-analyze/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
@@ -1889,7 +1705,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesClearCachePost(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
@@ -1905,7 +1721,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesClearCachePostAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
@@ -1921,7 +1737,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public ConnectionStatus IndicesClearCachePost(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
@@ -1940,7 +1756,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public Task<ConnectionStatus> IndicesClearCachePostAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
@@ -1959,7 +1775,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesClearCacheGet(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
@@ -1975,7 +1791,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesClearCacheGetAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
@@ -1991,7 +1807,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public ConnectionStatus IndicesClearCacheGet(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
@@ -2010,7 +1826,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_cache/clear
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-clearcache/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public Task<ConnectionStatus> IndicesClearCacheGetAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
@@ -2029,7 +1845,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_close
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-open-close.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		public ConnectionStatus IndicesClosePost(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
@@ -2048,7 +1864,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_close
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-open-close.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		public Task<ConnectionStatus> IndicesClosePostAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
@@ -2067,7 +1883,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -2087,7 +1903,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -2107,7 +1923,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -2127,7 +1943,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-create-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -2147,7 +1963,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-index.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesDelete(Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
 		{
@@ -2163,7 +1979,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-index.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesDeleteAsync(Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
 		{
@@ -2179,7 +1995,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-index.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or empty string to delete all indices</param>
 		public ConnectionStatus IndicesDelete(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
@@ -2198,7 +2014,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-index/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-index.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or empty string to delete all indices</param>
 		public Task<ConnectionStatus> IndicesDeleteAsync(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
@@ -2217,7 +2033,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be deleted</param>
@@ -2238,7 +2054,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be deleted</param>
@@ -2259,7 +2075,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` for all indices</param>
 		///<param name="type">The name of the document type to delete</param>
@@ -2280,7 +2096,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-delete-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` for all indices</param>
 		///<param name="type">The name of the document type to delete</param>
@@ -2301,7 +2117,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		public ConnectionStatus IndicesDeleteTemplate(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
@@ -2320,7 +2136,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		public Task<ConnectionStatus> IndicesDeleteTemplateAsync(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
@@ -2339,7 +2155,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_warmer
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesDeleteWarmer(string index, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null)
@@ -2358,7 +2174,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_warmer
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null)
@@ -2377,7 +2193,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
@@ -2398,7 +2214,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to delete all warmers</param>
@@ -2419,7 +2235,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/{type}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register warmer for; use `_all` or empty string to perform the operation on all types</param>
@@ -2442,7 +2258,7 @@ namespace Nest
 		}
 		
 		///<summary>DELETE /{index}/{type}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register warmer for; use `_all` or empty string to perform the operation on all types</param>
@@ -2465,7 +2281,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-settings.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
 		public ConnectionStatus IndicesExistsHead(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
@@ -2484,7 +2300,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-indices-exists/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-settings.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
 		public Task<ConnectionStatus> IndicesExistsHeadAsync(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
@@ -2503,7 +2319,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public ConnectionStatus IndicesExistsAliasHead(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
@@ -2522,7 +2338,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public Task<ConnectionStatus> IndicesExistsAliasHeadAsync(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
@@ -2541,7 +2357,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -2562,7 +2378,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -2583,7 +2399,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}/{type}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-types-exists/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-types-exists.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
@@ -2604,7 +2420,7 @@ namespace Nest
 		}
 		
 		///<summary>HEAD /{index}/{type}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-types-exists/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-types-exists.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
@@ -2625,7 +2441,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesFlushPost(Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
@@ -2641,7 +2457,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesFlushPostAsync(Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
@@ -2657,7 +2473,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public ConnectionStatus IndicesFlushPost(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
@@ -2676,7 +2492,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public Task<ConnectionStatus> IndicesFlushPostAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
@@ -2695,7 +2511,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesFlushGet(Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
@@ -2711,7 +2527,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesFlushGetAsync(Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
@@ -2727,7 +2543,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public ConnectionStatus IndicesFlushGet(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
@@ -2746,7 +2562,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_flush
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-flush/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public Task<ConnectionStatus> IndicesFlushGetAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
@@ -2765,7 +2581,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public ConnectionStatus IndicesGetAlias(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
@@ -2784,7 +2600,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public Task<ConnectionStatus> IndicesGetAliasAsync(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
@@ -2803,7 +2619,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -2824,7 +2640,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -2845,7 +2661,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_aliases
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesGetAliases(Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
@@ -2861,7 +2677,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_aliases
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesGetAliasesAsync(Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
@@ -2877,7 +2693,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_aliases
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public ConnectionStatus IndicesGetAliases(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
@@ -2896,7 +2712,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_aliases
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public Task<ConnectionStatus> IndicesGetAliasesAsync(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
@@ -2915,7 +2731,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_mapping/field/{field}
-	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="field">A comma-separated list of fields</param>
 		public ConnectionStatus IndicesGetFieldMapping(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
@@ -2934,7 +2750,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_mapping/field/{field}
-	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="field">A comma-separated list of fields</param>
 		public Task<ConnectionStatus> IndicesGetFieldMappingAsync(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
@@ -2953,7 +2769,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_mapping/field/{field}
-	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -2974,7 +2790,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_mapping/field/{field}
-	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -2995,7 +2811,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_mapping/field/{field}
-	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -3018,7 +2834,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_mapping/field/{field}
-	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-field-mapping.html</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-field-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -3041,7 +2857,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesGetMapping(Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
@@ -3057,7 +2873,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesGetMappingAsync(Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
@@ -3073,7 +2889,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		public ConnectionStatus IndicesGetMapping(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
@@ -3092,7 +2908,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		public Task<ConnectionStatus> IndicesGetMappingAsync(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
@@ -3111,7 +2927,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -3132,7 +2948,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -3153,7 +2969,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesGetSettings(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
@@ -3169,7 +2985,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesGetSettingsAsync(Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
@@ -3185,7 +3001,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesGetSettings(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
@@ -3204,7 +3020,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-get-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesGetSettingsAsync(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
@@ -3223,7 +3039,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_template
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesGetTemplate(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
 		{
@@ -3239,7 +3055,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_template
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesGetTemplateAsync(Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
 		{
@@ -3255,7 +3071,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		public ConnectionStatus IndicesGetTemplate(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
@@ -3274,7 +3090,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		public Task<ConnectionStatus> IndicesGetTemplateAsync(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
@@ -3293,7 +3109,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_warmer
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		public ConnectionStatus IndicesGetWarmer(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
@@ -3312,7 +3128,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_warmer
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesGetWarmerAsync(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
@@ -3331,7 +3147,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
@@ -3352,7 +3168,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
@@ -3373,7 +3189,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -3396,7 +3212,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -3419,7 +3235,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_open
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-open-close.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		public ConnectionStatus IndicesOpenPost(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
@@ -3438,7 +3254,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_open
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-open-close/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-open-close.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		public Task<ConnectionStatus> IndicesOpenPostAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
@@ -3457,7 +3273,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesOptimizePost(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
@@ -3473,7 +3289,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesOptimizePostAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
@@ -3489,7 +3305,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesOptimizePost(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
@@ -3508,7 +3324,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesOptimizePostAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
@@ -3527,7 +3343,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesOptimizeGet(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
@@ -3543,7 +3359,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesOptimizeGetAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
@@ -3559,7 +3375,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesOptimizeGet(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
@@ -3578,7 +3394,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_optimize
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-optimize/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesOptimizeGetAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
@@ -3597,7 +3413,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be created or updated</param>
@@ -3619,7 +3435,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="name">The name of the alias to be created or updated</param>
@@ -3641,7 +3457,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
@@ -3661,7 +3477,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_alias/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
@@ -3681,7 +3497,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_alias
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
@@ -3701,7 +3517,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_alias
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with an alias</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
@@ -3721,7 +3537,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_alias
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public ConnectionStatus IndicesPutAlias(object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
@@ -3739,7 +3555,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_alias
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public Task<ConnectionStatus> IndicesPutAliasAsync(object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
@@ -3757,7 +3573,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-put-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
@@ -3779,7 +3595,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-put-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
@@ -3801,7 +3617,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-put-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
@@ -3823,7 +3639,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_mapping
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-put-mapping/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-put-mapping.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to perform the operation on all indices</param>
 		///<param name="type">The name of the document type</param>
@@ -3845,7 +3661,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-update-settings.html</pre>	
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
 		public ConnectionStatus IndicesPutSettings(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
@@ -3863,7 +3679,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-update-settings.html</pre>	
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
 		public Task<ConnectionStatus> IndicesPutSettingsAsync(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
@@ -3881,7 +3697,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-update-settings.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
@@ -3901,7 +3717,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_settings
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-update-settings.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
@@ -3921,7 +3737,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -3941,7 +3757,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -3961,7 +3777,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -3981,7 +3797,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_template/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-templates/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html</pre>	
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -4001,7 +3817,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -4023,7 +3839,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -4045,7 +3861,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -4069,7 +3885,7 @@ namespace Nest
 		}
 		
 		///<summary>PUT /{index}/{type}/_warmer/{name}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-warmers/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -4093,7 +3909,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesRefreshPost(Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
@@ -4109,7 +3925,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesRefreshPostAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
@@ -4125,7 +3941,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesRefreshPost(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
@@ -4144,7 +3960,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesRefreshPostAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
@@ -4163,7 +3979,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesRefreshGet(Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
@@ -4179,7 +3995,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesRefreshGetAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
@@ -4195,7 +4011,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesRefreshGet(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
@@ -4214,7 +4030,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_refresh
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-refresh/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesRefreshGetAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
@@ -4233,7 +4049,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_segments
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-segments.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesSegmentsGet(Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
 		{
@@ -4249,7 +4065,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_segments
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-segments.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesSegmentsGetAsync(Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
 		{
@@ -4265,7 +4081,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_segments
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-segments.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesSegmentsGet(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
@@ -4284,7 +4100,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_segments
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-segments/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-segments.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesSegmentsGetAsync(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
@@ -4303,7 +4119,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_gateway/snapshot
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-gateway-snapshot.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesSnapshotIndexPost(Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
@@ -4319,7 +4135,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_gateway/snapshot
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-gateway-snapshot.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
@@ -4335,7 +4151,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_gateway/snapshot
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-gateway-snapshot.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public ConnectionStatus IndicesSnapshotIndexPost(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
@@ -4354,7 +4170,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_gateway/snapshot
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-gateway-snapshot/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-gateway-snapshot.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
@@ -4373,7 +4189,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-stats.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesStatsGet(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
@@ -4389,7 +4205,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-stats.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesStatsGetAsync(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
@@ -4405,7 +4221,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-stats.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndexStatsGet(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
@@ -4424,7 +4240,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_stats
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-stats/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-stats.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndexStatsGetAsync(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
@@ -4443,7 +4259,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_status
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-status/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-status.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesStatusGet(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
 		{
@@ -4459,7 +4275,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_status
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-status/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-status.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesStatusGetAsync(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
 		{
@@ -4475,7 +4291,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_status
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-status/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-status.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesStatusGet(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
@@ -4494,7 +4310,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_status
-	    ///<pre>http://elasticsearch.org/guide/reference/api/admin-indices-status/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-status.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesStatusGetAsync(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
@@ -4513,7 +4329,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_aliases
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		public ConnectionStatus IndicesUpdateAliasesPost(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
@@ -4531,7 +4347,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_aliases
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/admin-indices-aliases/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html</pre>	
 	    ///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		public Task<ConnectionStatus> IndicesUpdateAliasesPostAsync(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
@@ -4549,7 +4365,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		public ConnectionStatus IndicesValidateQueryGet(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
@@ -4565,7 +4381,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
@@ -4581,7 +4397,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesValidateQueryGet(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
@@ -4600,7 +4416,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
@@ -4619,7 +4435,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -4640,7 +4456,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -4661,7 +4477,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="body">The query definition</param>
 		public ConnectionStatus IndicesValidateQueryPost(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
@@ -4679,7 +4495,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="body">The query definition</param>
 		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
@@ -4697,7 +4513,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition</param>
@@ -4717,7 +4533,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition</param>
@@ -4737,7 +4553,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -4759,7 +4575,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_validate/query
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/validate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -4781,7 +4597,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /
-	    ///<pre>http://elasticsearch.org/guide/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/</pre>	
 	    ///</summary>
 		public ConnectionStatus InfoGet(Func<InfoQueryString, InfoQueryString> queryString = null)
 		{
@@ -4797,7 +4613,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /
-	    ///<pre>http://elasticsearch.org/guide/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> InfoGetAsync(Func<InfoQueryString, InfoQueryString> queryString = null)
 		{
@@ -4812,40 +4628,8 @@ namespace Nest
 			return this.DoRequestAsync("GET", url, data: null, queryString: nv);
 		}
 		
-		///<summary>HEAD /
-	    ///<pre>http://elasticsearch.org/guide/</pre>	
-	    ///</summary>
-		public ConnectionStatus InfoHead(Func<InfoQueryString, InfoQueryString> queryString = null)
-		{
-			var url = "";
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new InfoQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequest("HEAD", url, data: null, queryString: nv);
-		}
-		
-		///<summary>HEAD /
-	    ///<pre>http://elasticsearch.org/guide/</pre>	
-	    ///</summary>
-		public Task<ConnectionStatus> InfoHeadAsync(Func<InfoQueryString, InfoQueryString> queryString = null)
-		{
-			var url = "";
-			NameValueCollection nv = null;
-			if (queryString != null)
-			{
-				var qs = queryString(new InfoQueryString());
-				if (qs != null) nv = this.ToNameValueCollection(qs);
-			}
-
-			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
-		}
-		
 		///<summary>GET /_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		public ConnectionStatus MgetGet(Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
@@ -4861,7 +4645,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> MgetGetAsync(Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
@@ -4877,7 +4661,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		public ConnectionStatus MgetGet(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
@@ -4896,7 +4680,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		public Task<ConnectionStatus> MgetGetAsync(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
@@ -4915,7 +4699,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4936,7 +4720,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4957,7 +4741,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public ConnectionStatus MgetPost(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
@@ -4975,7 +4759,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public Task<ConnectionStatus> MgetPostAsync(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
@@ -4993,7 +4777,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
@@ -5013,7 +4797,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
@@ -5033,7 +4817,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5055,7 +4839,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_mget
-	    ///<pre>http://elasticsearch.org/guide/reference/api/multi-get/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5077,7 +4861,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}/_mlt
-	    ///<pre>http://elasticsearch.org/guide/reference/api/more-like-this/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-more-like-this.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -5100,7 +4884,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/{id}/_mlt
-	    ///<pre>http://elasticsearch.org/guide/reference/api/more-like-this/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-more-like-this.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -5123,7 +4907,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}/_mlt
-	    ///<pre>http://elasticsearch.org/guide/reference/api/more-like-this/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-more-like-this.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -5147,7 +4931,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}/_mlt
-	    ///<pre>http://elasticsearch.org/guide/reference/api/more-like-this/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-more-like-this.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -5171,7 +4955,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		public ConnectionStatus MsearchGet(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
@@ -5187,7 +4971,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> MsearchGetAsync(Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
@@ -5203,7 +4987,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		public ConnectionStatus MsearchGet(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
@@ -5222,7 +5006,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		public Task<ConnectionStatus> MsearchGetAsync(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
@@ -5241,7 +5025,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -5262,7 +5046,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -5283,7 +5067,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public ConnectionStatus MsearchPost(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
@@ -5301,7 +5085,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public Task<ConnectionStatus> MsearchPostAsync(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
@@ -5319,7 +5103,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -5339,7 +5123,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -5359,7 +5143,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -5381,7 +5165,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_msearch
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/multi-search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -5403,7 +5187,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_percolate
-	    ///<pre>http://elasticsearch.org/guide/reference/api/percolate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-percolate.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with a registered percolator query</param>
 		///<param name="type">The document type</param>
@@ -5424,7 +5208,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_percolate
-	    ///<pre>http://elasticsearch.org/guide/reference/api/percolate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-percolate.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with a registered percolator query</param>
 		///<param name="type">The document type</param>
@@ -5445,7 +5229,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_percolate
-	    ///<pre>http://elasticsearch.org/guide/reference/api/percolate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-percolate.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with a registered percolator query</param>
 		///<param name="type">The document type</param>
@@ -5467,7 +5251,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_percolate
-	    ///<pre>http://elasticsearch.org/guide/reference/api/percolate/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-percolate.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index with a registered percolator query</param>
 		///<param name="type">The document type</param>
@@ -5488,8 +5272,40 @@ namespace Nest
 			return this.DoRequestAsync("POST", url, body, queryString: nv);
 		}
 		
+		///<summary>HEAD /
+	    ///<pre>http://www.elasticsearch.org/guide/</pre>	
+	    ///</summary>
+		public ConnectionStatus PingHead(Func<PingQueryString, PingQueryString> queryString = null)
+		{
+			var url = "";
+			NameValueCollection nv = null;
+			if (queryString != null)
+			{
+				var qs = queryString(new PingQueryString());
+				if (qs != null) nv = this.ToNameValueCollection(qs);
+			}
+
+			return this.DoRequest("HEAD", url, data: null, queryString: nv);
+		}
+		
+		///<summary>HEAD /
+	    ///<pre>http://www.elasticsearch.org/guide/</pre>	
+	    ///</summary>
+		public Task<ConnectionStatus> PingHeadAsync(Func<PingQueryString, PingQueryString> queryString = null)
+		{
+			var url = "";
+			NameValueCollection nv = null;
+			if (queryString != null)
+			{
+				var qs = queryString(new PingQueryString());
+				if (qs != null) nv = this.ToNameValueCollection(qs);
+			}
+
+			return this.DoRequestAsync("HEAD", url, data: null, queryString: nv);
+		}
+		
 		///<summary>GET /_search/scroll
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		public ConnectionStatus ScrollGet(Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
@@ -5505,7 +5321,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_search/scroll
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> ScrollGetAsync(Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
@@ -5521,7 +5337,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_search/scroll/{scroll_id}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		public ConnectionStatus ScrollGet(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
@@ -5540,7 +5356,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_search/scroll/{scroll_id}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		public Task<ConnectionStatus> ScrollGetAsync(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
@@ -5559,7 +5375,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_search/scroll
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		public ConnectionStatus ScrollPost(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
@@ -5577,7 +5393,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_search/scroll
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		public Task<ConnectionStatus> ScrollPostAsync(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
@@ -5595,7 +5411,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_search/scroll/{scroll_id}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
@@ -5615,7 +5431,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_search/scroll/{scroll_id}
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/scroll/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html</pre>	
 	    ///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
@@ -5635,7 +5451,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		public ConnectionStatus SearchGet(Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
@@ -5651,7 +5467,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> SearchGetAsync(Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
@@ -5667,7 +5483,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus SearchGet(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
@@ -5686,7 +5502,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> SearchGetAsync(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
@@ -5705,7 +5521,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -5726,7 +5542,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/{type}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -5747,7 +5563,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		public ConnectionStatus SearchPost(object body, Func<SearchQueryString, SearchQueryString> queryString = null)
@@ -5765,7 +5581,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		public Task<ConnectionStatus> SearchPostAsync(object body, Func<SearchQueryString, SearchQueryString> queryString = null)
@@ -5783,7 +5599,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
@@ -5803,7 +5619,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
@@ -5823,7 +5639,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -5845,7 +5661,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/_search
-	    ///<pre>http://www.elasticsearch.org/guide/reference/api/search/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -5867,7 +5683,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="body">The request definition</param>
 		public ConnectionStatus SuggestPost(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
@@ -5885,7 +5701,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="body">The request definition</param>
 		public Task<ConnectionStatus> SuggestPostAsync(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
@@ -5903,7 +5719,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
@@ -5923,7 +5739,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
@@ -5943,7 +5759,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		public ConnectionStatus SuggestGet(Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
@@ -5959,7 +5775,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		public Task<ConnectionStatus> SuggestGetAsync(Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
@@ -5975,7 +5791,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus SuggestGet(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
@@ -5994,7 +5810,7 @@ namespace Nest
 		}
 		
 		///<summary>GET /{index}/_suggest
-	    ///<pre>http://elasticsearch.org/guide/reference/api/search/suggest/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html</pre>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> SuggestGetAsync(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
@@ -6013,7 +5829,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}/_update
-	    ///<pre>http://elasticsearch.org/guide/reference/api/update/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-update.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -6037,7 +5853,7 @@ namespace Nest
 		}
 		
 		///<summary>POST /{index}/{type}/{id}/_update
-	    ///<pre>http://elasticsearch.org/guide/reference/api/update/</pre>	
+	    ///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-update.html</pre>	
 	    ///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
