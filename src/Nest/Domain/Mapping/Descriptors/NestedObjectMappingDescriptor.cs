@@ -16,18 +16,21 @@ namespace Nest
 
 		internal NestedObjectMapping _Mapping { get; set; }
 		internal TypeNameMarker _TypeName { get; set; }
+		public ElasticInferrer Infer { get; set; }
 
 		public NestedObjectMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 			this._TypeName = TypeNameMarker.Create<TChild>();
 			this._Mapping = new NestedObjectMapping() { };
+			this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
 		public NestedObjectMappingDescriptor<TParent, TChild> Name(string name)
 		{
 			this._Mapping.Name = name;
 			return this;
 		}
+
 		public NestedObjectMappingDescriptor<TParent, TChild> Name(Expression<Func<TParent, TChild>> objectPath)
 		{
 			this._Mapping.Name = objectPath;
@@ -52,7 +55,8 @@ namespace Nest
 			var properties = mapping.Properties;
 			foreach (var p in properties)
 			{
-				this._Mapping.Properties[p.Key] = p.Value;
+				var key = this.Infer.PropertyName(p.Key);
+				this._Mapping.Properties[key] = p.Value;
 			}
 			return this;
 		}

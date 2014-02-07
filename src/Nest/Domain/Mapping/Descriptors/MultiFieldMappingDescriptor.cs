@@ -13,6 +13,7 @@ namespace Nest
 			this._Mapping.Name = name;
 			return this;
 		}
+
 		public MultiFieldMappingDescriptor<T> Name(Expression<Func<T, object>> objectPath)
 		{
 			this._Mapping.Name = objectPath;

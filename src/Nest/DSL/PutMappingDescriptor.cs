@@ -14,12 +14,15 @@ namespace Nest
 	{
 		private readonly IConnectionSettings _connectionSettings;
 		internal RootObjectMapping _Mapping { get; set; }
+		public ElasticInferrer Infer { get; set; }
 
 		public PutMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 			this._Mapping = new RootObjectMapping() {  };
+			this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
+
 
 		public PutMappingDescriptor<T> InitializeUsing(RootObjectMapping rootObjectMapping)
 		{
@@ -198,7 +201,8 @@ namespace Nest
 			}
 			foreach (var p in properties.Properties)
 			{
-				_Mapping.Properties[p.Key] = p.Value;
+				var key = this.Infer.PropertyName(p.Key);
+				_Mapping.Properties[key] = p.Value;
 			}
 			return this;
 		}

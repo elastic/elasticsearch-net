@@ -248,7 +248,6 @@
     <Compile Include="Resolvers\Converters\ConcreteTypeConverter.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Attributes\IElasticPropertyVisitor.cs" />
-    <Compile Include="Domain\Mapping\Attributes\NestedPropertyAttribute.cs" />
     <Compile Include="Domain\Mapping\Types\WarmerMapping.cs" />
     <Compile Include="Domain\Responses\WarmerResponse.cs">
       <SubType>Code</SubType>

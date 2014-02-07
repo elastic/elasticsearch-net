@@ -21,23 +21,6 @@ namespace Nest.Resolvers.Writers {
             this.VisitBaseAttribute(attribute);
         }
 
-        public void Visit(NestedElasticPropertyAttribute attribute)
-        {
-            this.VisitBaseAttribute(attribute);
-
-            if (attribute.IncludeInParent)
-            {
-                this._jsonWriter.WritePropertyName("include_in_parent");
-                this._jsonWriter.WriteValue("true");
-            }
-
-            if (attribute.IncludeInRoot)
-            {
-                this._jsonWriter.WritePropertyName("include_in_root");
-                this._jsonWriter.WriteValue("true");
-            }
-        }
-
         public void VisitBaseAttribute(IElasticPropertyAttribute att) {
             if (att.AddSortField)
             {

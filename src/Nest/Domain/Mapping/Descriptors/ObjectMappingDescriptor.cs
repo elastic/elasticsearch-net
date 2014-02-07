@@ -7,22 +7,24 @@ using Nest.Resolvers.Writers;
 
 namespace Nest
 {
-    public class ObjectMappingDescriptor<TParent, TChild> 
+	public class ObjectMappingDescriptor<TParent, TChild>
 		where TParent : class
 		where TChild : class
-
-    {
+	{
 		private readonly IConnectionSettings _connectionSettings;
 
 		internal ObjectMapping _Mapping { get; set; }
 		internal TypeNameMarker _TypeName { get; set; }
+		public ElasticInferrer Infer { get; set; }
 
 		public ObjectMappingDescriptor(IConnectionSettings connectionSettings)
 		{
 			this._TypeName = TypeNameMarker.Create<TChild>();
 			this._Mapping = new ObjectMapping() { };
 			this._connectionSettings = connectionSettings;
+			this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
+
 		public ObjectMappingDescriptor<TParent, TChild> Name(string name)
 		{
 			this._Mapping.Name = name;
@@ -95,9 +97,10 @@ namespace Nest
 			}
 			foreach (var p in properties.Properties)
 			{
-				_Mapping.Properties[p.Key] = p.Value;
+				var key = this.Infer.PropertyName(p.Key);
+				_Mapping.Properties[key] = p.Value;
 			}
 			return this;
 		}
-    }
+	}
 }

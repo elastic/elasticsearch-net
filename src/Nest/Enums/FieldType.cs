@@ -59,13 +59,9 @@ namespace Nest
 		/// </summary>
 		boolean_type,
 		/// <summary>
-		/// Nested type.
+		/// Completion type.
 		/// </summary>
-		nested,
-        /// <summary>
-        /// Completion type.
-        /// </summary>
-        completion,
+		completion,
 		/// <summary>
 		/// object type, no need to set this manually if its not a value type this will be set.
 		/// Only set this if you need to force a value type to be mapped to an elasticsearch object type.

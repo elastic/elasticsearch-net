@@ -91,6 +91,7 @@
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
+    <Compile Include="Core\Map\MappingBehaviourTests.cs" />
     <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
     <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
@@ -194,7 +195,6 @@
     <Compile Include="Internals\Inferno\PropertyNameResolverTests.cs" />
     <Compile Include="Core\AttributeBasedMap\BaseAttributeMappingTests.cs" />
     <Compile Include="Core\AttributeBasedMap\DeepObjectMappingTests.cs" />
-    <Compile Include="Core\AttributeBasedMap\NestedMappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Internals\Inferno\PropertyVisitorTests.cs" />
     <Compile Include="Search\Highlight\HighlightTests.cs" />
@@ -365,9 +365,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\AttributeBasedMap\TestDeepObjectWriter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Core\AttributeBasedMap\TestNestedWriter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
@@ -743,11 +740,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Search\ScriptFields\TestScriptFields.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Core\AttributeBasedMap\TestNestedWriter_ChildrenCollection.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
