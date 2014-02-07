@@ -15,7 +15,7 @@ namespace Nest
 	public partial class SegmentsDescriptor : IndicesOptionalPathDescriptor<SegmentsDescriptor, SegmentsQueryString>
 		, IPathInfo<SegmentsQueryString>
 	{
-		ElasticSearchPathInfo<SegmentsQueryString> IPathInfo<SegmentsQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<SegmentsQueryString> IPathInfo<SegmentsQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<SegmentsQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

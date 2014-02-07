@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	internal class ElasticSearchPathInfo<T> where T : FluentQueryString<T>, new()
+	internal class ElasticsearchPathInfo<T> where T : FluentQueryString<T>, new()
 	{
 		public PathInfoHttpMethod HttpMethod { get; set; }
 		public string Index { get; set; }
@@ -15,7 +15,7 @@
 		public string SearchGroups { get; set; }
 		public string IndexingTypes { get; set; }
 
-		public ElasticSearchPathInfo()
+		public ElasticsearchPathInfo()
 		{
 			this.QueryString = new T();
 		}

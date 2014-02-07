@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void SuffixMakesItIntoPropertyName()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Size(10)
 			  .Query(q => q.Term(f => f.Name.Suffix("sort"), "value"));

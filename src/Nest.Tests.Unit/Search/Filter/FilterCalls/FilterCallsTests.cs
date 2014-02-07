@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 		[Test]
 		public void AndFilterCombines()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
 			  .Filter(ff =>
@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 		[Test]
 		public void AndFilterMultipleCombines()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
 			  .Filter(ff =>
@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 		[Test]
 		public void OrFilterCombines()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
 			  .Filter(ff =>
@@ -51,7 +51,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 		[Test]
 		public void OrFilterMultipleCombines()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
 			  .Filter(ff =>
@@ -68,7 +68,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 		[Test]
 		public void NotFilterCombines()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
 			  .Filter(ff =>
@@ -82,7 +82,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 		[Test]
 		public void CacheSettingsDoNotSurviceBoolOp()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
 				.Filter(ff => 
@@ -95,7 +95,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 		[Test]
 		public void CacheSettingsDoNotSurviceBoolOpNew()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
 				.Filter(ff =>

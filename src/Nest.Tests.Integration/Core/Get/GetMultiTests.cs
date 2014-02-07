@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetMultiSimple()
 		{
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticSearchProject>(g=>g.Id(1))
+				.Get<ElasticsearchProject>(g=>g.Id(1))
 				.Get<Person>(g => g.Id(100))
 			);
 			var objects = result.Documents;
@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetMultiSimpleWithMissingItem()
 		{
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticSearchProject>(g => g.Id(1))
+				.Get<ElasticsearchProject>(g => g.Id(1))
 				.Get<Person>(g => g.Id(100000))
 				.Get<Person>(g => g.Id(105))
 			);
@@ -64,7 +64,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetMultiWithMetaData()
 		{
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
+				.Get<ElasticsearchProject>(g => g.Id(1).Fields(p=>p.Id, p=>p.Followers.First().FirstName))
 				.Get<Person>(g => g.Id(100).Type("person").Index(ElasticsearchConfiguration.DefaultIndex).Fields(p => p.Id, p => p.FirstName))
 			);
 
@@ -92,7 +92,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetMultiWithMetaDataUsingCleanApi()
 		{
 			var result = this._client.MultiGet(a => a
-				.Get<ElasticSearchProject>(g => g.Id(1).Fields(p => p.Id, p => p.Followers.First().FirstName))
+				.Get<ElasticsearchProject>(g => g.Id(1).Fields(p => p.Id, p => p.Followers.First().FirstName))
 				.Get<Person>(g => g
 					.Id(100)
 					.Type("person")
@@ -113,7 +113,7 @@ namespace Nest.Tests.Integration.Core.Get
 			personFieldSelection.FieldValue<string>(p => p.FirstName)
 				.Should().NotBeNullOrEmpty();
 
-			var projectFieldSelection = result.GetFieldSelection<ElasticSearchProject>(1);
+			var projectFieldSelection = result.GetFieldSelection<ElasticsearchProject>(1);
 			projectFieldSelection.Should().NotBeNull();
 			projectFieldSelection.FieldValue<int>(p => p.Id).Should().Be(1);
 			projectFieldSelection.FieldValue<string[]>(p => p.Followers.First().FirstName)

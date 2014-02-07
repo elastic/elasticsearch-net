@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestPrefixQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q
@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestPrefixWithBoostQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q
@@ -37,7 +37,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestPrefixWithBoostRewriteQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q

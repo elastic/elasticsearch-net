@@ -19,9 +19,9 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		}
 		private readonly Criteria _c = new Criteria();
 
-		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticSearchProject>, BaseQuery> query)
+		private void DoConditionlessQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query)
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				//.Strict()
 				.From(0)
 				.Take(10)

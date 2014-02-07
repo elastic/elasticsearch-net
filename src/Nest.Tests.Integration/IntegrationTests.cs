@@ -29,11 +29,11 @@ namespace Nest.Tests.Integration
 			return connectionStatus.Deserialize<QueryResponse<T>>();
 		} 
 
-		public void DoFilterTest(Func<FilterDescriptor<ElasticSearchProject>, Nest.BaseFilter> filter, ElasticSearchProject project, bool queryMustHaveResults)
+		public void DoFilterTest(Func<FilterDescriptor<ElasticsearchProject>, Nest.BaseFilter> filter, ElasticsearchProject project, bool queryMustHaveResults)
 		{
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, project.Id);
+			var filterId = Filter<ElasticsearchProject>.Term(e => e.Id, project.Id);
 
-			var results = this._client.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticsearchProject>(
 				s => s.Filter(ff => ff.And(
 						f => f.Term(e => e.Id, project.Id),
 						filter

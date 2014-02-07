@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void FilteredQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(qd=>qd
 					.Filtered(cs=>cs
 						.Query(q=>q.MatchAll())

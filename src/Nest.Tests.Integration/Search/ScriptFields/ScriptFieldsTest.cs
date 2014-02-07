@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Search.ScriptFields
 		[Test]
 		public void SimpleExplain()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticsearchProject>(s=>s
 				.From(0)
 				.Size(10)
 				.MatchAll()

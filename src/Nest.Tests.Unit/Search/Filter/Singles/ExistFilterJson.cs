@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void ExistFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(filter=>filter
 					.Exists(f=>f.Name)
 			);

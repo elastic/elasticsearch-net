@@ -6,7 +6,7 @@ using AutoPoco.Engine;
 
 namespace Nest.Tests.MockData.DataSources
 {
-	public class ElasticSearchProjectsDataSource : DatasourceBase<String>
+	public class ElasticsearchProjectsDataSource : DatasourceBase<String>
 	{
 		private Random mRandom = new Random(1337);
 
@@ -21,24 +21,24 @@ namespace Nest.Tests.MockData.DataSources
 		}
 
 		private static string[] Projects = new String[]{
-            "ElasticSearch.pm",
-            "pyes",
-            "pyelasticsearch",
-            "em-elasticsearch",
-            "rubberband",
-            "ruby_elasticsearch",
-            "slingshot",
-            "erlastic_search",
-            "Elastica",
-            "NEST",
-            "ElasticSearch.NET",
-            "Grails",
-            "escargot",
-            "catalyst",
-            "django-elasticsearch",
-            "elasticflume",
-            "Terrastore Search",
-            "Wonderdog"
-        };
+			"ElasticSearch.pm",
+			"pyes",
+			"pyelasticsearch",
+			"em-elasticsearch",
+			"rubberband",
+			"ruby_elasticsearch",
+			"slingshot",
+			"erlastic_search",
+			"Elastica",
+			"NEST",
+			"ElasticSearch.NET",
+			"Grails",
+			"escargot",
+			"catalyst",
+			"django-elasticsearch",
+			"elasticflume",
+			"Terrastore Search",
+			"Wonderdog"
+		};
 	}
 }

@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestTermQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q
@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestTermWithBoostQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q

@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		[Test]
         public void TermSuggestDescriptorTest()
 		{
-		    var termSuggestDescriptor = new TermSuggestDescriptor<ElasticSearchProject>()
+		    var termSuggestDescriptor = new TermSuggestDescriptor<ElasticsearchProject>()
 		        .MaxEdits(3)
 		        .MaxInspections(17)
 		        .OnField("field1")
@@ -33,7 +33,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		[Test]
 		public void TermSuggestOnSearchTest()
 		{
-			var search = this._client.Search<ElasticSearchProject>(s => s
+			var search = this._client.Search<ElasticsearchProject>(s => s
 				.SuggestTerm("mytermsuggest", ts=>ts
 					.Text("n")
 					.MaxEdits(3)

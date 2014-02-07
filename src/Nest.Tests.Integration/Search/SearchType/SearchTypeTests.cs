@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		[Test]
 		public void SearchQueryAndFetch()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticsearchProject>(s=>s
 				.From(0)
 				.Size(10)
 				.MatchAll()
@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		[Test]
 		public void SearchQueryThenFetch()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.MatchAll()
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		[Test]
 		public void SearchDfsQueryAndFetch()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.MatchAll()
@@ -56,7 +56,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		[Test]
 		public void SearchDfsQueryThenFetch()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
 				.MatchAll()

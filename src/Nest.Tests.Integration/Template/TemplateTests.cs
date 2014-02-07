@@ -89,7 +89,7 @@ namespace Nest.Tests.Integration.Template
 			this._client.DeleteTemplate("put-template-with-warmers");
 			var putResponse = this._client.PutTemplate("put-template-with-warmers", t => t
 				.Template("donotinfluencothertests2")
-				.AddWarmer<ElasticSearchProject>(w => w
+				.AddWarmer<ElasticsearchProject>(w => w
 					.WarmerName("matchall")
 					.Type("elasticsearchprojects")
 					.Search(s=>s

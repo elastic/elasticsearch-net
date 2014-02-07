@@ -12,9 +12,9 @@ namespace Nest.Tests.Unit.Core.Bulk
 		public void BulkNonFixed()
 		{
 			var result = this._client.Bulk(b => b
-				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
-				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject {Id = 2}))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
+				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -27,9 +27,9 @@ namespace Nest.Tests.Unit.Core.Bulk
 			var result = this._client.Bulk(b => b
 				.Refresh()
 				.Consistency(ConsistencyOptions.Quorum)
-				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
-				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject {Id = 2}))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
+				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -42,9 +42,9 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.FixedPath("myindex")
-				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 2 }))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
-				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 2 }))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
+				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -55,9 +55,9 @@ namespace Nest.Tests.Unit.Core.Bulk
 		{
 			var result = this._client.Bulk(b => b
 				.FixedPath("myindex", "mytype")
-				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 2 }))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
-				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
+				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 2 }))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
+				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);

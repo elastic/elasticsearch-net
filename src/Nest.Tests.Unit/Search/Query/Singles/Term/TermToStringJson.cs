@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Term
 		[Test]
 		public void IntToStringTest()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.Term(p=>p.LOC, 20000)
 				);
@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Term
 		[Test]
 		public void DoubleToStringTest()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.Term(p => p.DoubleValue, 20.5)
 				);
@@ -31,7 +31,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Term
 		[Test]
 		public void FloatToStringTest()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.Term(p => p.FloatValue, 20.9f)
 				);
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Term
 		[Test]
 		public void LongToStringTest()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.Term(p => p.LongValue, 20000L)
 				);
@@ -51,7 +51,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Term
 		public void DateTimeToStringTest()
 		{
 			//this should serialize to ISO NOT simply datetime.tostring()!
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.Term(p => p.StartedOn, new DateTime(1999,2,2))
 				);
@@ -60,7 +60,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Term
 		[Test]
 		public void DateTimeWithCustomStringValue()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.Term(p => p.StartedOn, "1986-03-08")
 				);

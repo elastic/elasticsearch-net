@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		{
 			Assert.Throws<DslException>(() =>
 			{
-				var s = new SearchDescriptor<ElasticSearchProject>()
+				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Size(10)
 					.Filter(ff => ff.Strict().Term(p => p.Name, ""));
@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 			var mi = MethodInfo.GetCurrentMethod();
 			Assert.DoesNotThrow(() =>
 			{
-				var s = new SearchDescriptor<ElasticSearchProject>()
+				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Size(10)
 					.Filter(ff => ff.Verbatim().Term(p => p.Name, ""));
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		public void ConditionlessIsStillConditionless()
 		{
 			var mi = MethodInfo.GetCurrentMethod();
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Size(10)
 					.Filter(ff => ff.Term(p => p.Name, ""));

@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetSimple()
 		{
-			var result = this._client.Get<ElasticSearchProject>(g=>g.Id(1));
+			var result = this._client.Get<ElasticsearchProject>(g=>g.Id(1));
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1", status.RequestUrl);
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetUsingDescriptor()
 		{
-			var result = this._client.Get<ElasticSearchProject>(g=>g
+			var result = this._client.Get<ElasticsearchProject>(g=>g
 				.Index("myindex")
 				.Id(404)
 			);
@@ -39,7 +39,7 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetUsingDescriptorWithType()
 		{
-			var result = this._client.Get<ElasticSearchProject>(g => g
+			var result = this._client.Get<ElasticsearchProject>(g => g
 				.Index("myindex")
 				.Type("mytype")
 				.Id(404)
@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit.Core.Get
 		[Test]
 		public void GetUsingDescriptorWithTypeAndFields()
 		{
-			var result = this._client.Get<ElasticSearchProject>(g => g
+			var result = this._client.Get<ElasticsearchProject>(g => g
 				.Index("myindex")
 				.Type("mytype")
 				.Id(404)

@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 		[Test]
 		public void MultiFieldWithGenericTypes()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.DynamicTemplates(d => d
 					.Add(t => t
 						.Name("template_1")
@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 		[Test]
 		public void CompletelyGenericTemplate()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.DynamicTemplates(d => d
 					.Add(t => t
 						.Name("store_generic")
@@ -62,7 +62,7 @@ namespace Nest.Tests.Unit.Core.Map.DynamicTemplates
 		[Test]
 		public void MultipleTemplates()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.DynamicTemplates(d => d
 					.Add(t => t
 						.Name("string")

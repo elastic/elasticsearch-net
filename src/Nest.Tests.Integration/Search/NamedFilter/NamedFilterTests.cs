@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Search.NamedFilter
 		[Test]
 		public void SimpleNamedFilter()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticsearchProject>(s=>s
 				.From(0)
 				.Size(10)
 				.Fields(p=>p.Name)

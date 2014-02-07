@@ -16,13 +16,13 @@ namespace Nest.Tests.Integration.Integration.Query
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
-		private ElasticSearchProject _LookFor;
+		private ElasticsearchProject _LookFor;
 
 
 		[TestFixtureSetUp]
 		public void Initialize()
 		{
-			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
+			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_LookFor.Name = "one two three four";
 			var status = this._client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
 			Assert.True(status.Success, status.Result);
@@ -35,9 +35,9 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void TestControl()
 		{
 			var id = _LookFor.Id;
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id);
+			var filterId = Filter<ElasticsearchProject>.Term(e => e.Id, id);
 
-			var results = this._client.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticsearchProject>(
 				s => s.Filter(filterId)
 				);
 
@@ -53,21 +53,21 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void TestNotFiltered()
 		{
 			var id = _LookFor.Id;
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id);
-			var querySlop0 = Query<ElasticSearchProject>.TextPhrase(
+			var filterId = Filter<ElasticsearchProject>.Term(e => e.Id, id);
+			var querySlop0 = Query<ElasticsearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
 					.Query("one two")
 					.Slop(0)
 					.Operator(Operator.and));
-			var querySlop1 = Query<ElasticSearchProject>.TextPhrase(
+			var querySlop1 = Query<ElasticsearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
 					.Query("one three")
 					.Slop(1)
 					.Operator(Operator.and));
 
-			var results = this._client.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticsearchProject>(
 				s => s.Filter(filterId)
 					.Query(querySlop0 && querySlop1)
 				);
@@ -84,27 +84,27 @@ namespace Nest.Tests.Integration.Integration.Query
 		public void TestFiltered()
 		{
 			var id = _LookFor.Id;
-			var filterId = Filter<ElasticSearchProject>.Term(e => e.Id, id);
-			var querySlop0 = Query<ElasticSearchProject>.TextPhrase(
+			var filterId = Filter<ElasticsearchProject>.Term(e => e.Id, id);
+			var querySlop0 = Query<ElasticsearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
 					.Query("one three")
 					.Slop(0));
-			var querySlop1 = Query<ElasticSearchProject>.TextPhrase(
+			var querySlop1 = Query<ElasticsearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
 					.Query("one four")
 					.Slop(1));
-			var queryFail = Query<ElasticSearchProject>.TextPhrase(
+			var queryFail = Query<ElasticsearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
 					.Query("one fail"));
-			var queryFailOr = Query<ElasticSearchProject>.TextPhrase(
+			var queryFailOr = Query<ElasticsearchProject>.TextPhrase(
 				textPhrase => textPhrase
 					.OnField(p => p.Name)
 					.Query("fail fail"));
 
-			var results = this._client.Search<ElasticSearchProject>(
+			var results = this._client.Search<ElasticsearchProject>(
 				s => s.Filter(filterId)
 					.Query(querySlop0 || querySlop1 || queryFail || queryFailOr)
 				);

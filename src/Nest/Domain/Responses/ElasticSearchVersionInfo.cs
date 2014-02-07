@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-    public class ElasticSearchVersionInfo
-    {
+	public class ElasticsearchVersionInfo
+	{
 		public string Number { get; set; }
 
 		[JsonProperty(PropertyName = "snapshot_build")]

@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Highlight
 		[Test]
 		public void TestHighlight()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Highlight(h => h

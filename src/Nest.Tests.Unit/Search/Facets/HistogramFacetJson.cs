@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Facets
 		[Test]
 		public void HistogramTest()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.QueryRaw(@"{ raw : ""query""}")
@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.Search.Facets
 		[Test]
 		public void HistogramTestKeyField()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.QueryRaw(@"{ raw : ""query""}")
@@ -59,7 +59,7 @@ namespace Nest.Tests.Unit.Search.Facets
 		[Test]
 		public void HistogramTestKeyScript()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.QueryRaw(@"{ raw : ""query""}")
@@ -86,7 +86,7 @@ namespace Nest.Tests.Unit.Search.Facets
 		[Test]
 		public void HistogramTestKeyScriptParams()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.QueryRaw(@"{ raw : ""query""}")
@@ -123,7 +123,7 @@ namespace Nest.Tests.Unit.Search.Facets
 		[Test]
 		public void HistogramTestTimeInterval()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.QueryRaw(@"{ raw : ""query""}")
@@ -145,7 +145,7 @@ namespace Nest.Tests.Unit.Search.Facets
 		[Test]
 		public void HistogramTestTimeSpanInterval()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.QueryRaw(@"{ raw : ""query""}")

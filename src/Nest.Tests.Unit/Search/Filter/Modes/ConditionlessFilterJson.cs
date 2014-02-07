@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		[Test]
 		public void Fallback()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(q=>q
 					.Conditionless(qs=>qs
 						.Filter(qcq=>qcq.Term("this_term_is_conditionless", ""))
@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		[Test]
 		public void UseFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(q => q
 					.Conditionless(qs => qs
 						.Filter(qcq => qcq.Term("name", "NEST"))
@@ -55,7 +55,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		[Test]
 		public void BothConditionless()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(q => q
 					.Conditionless(qs => qs
 						.Filter(qcq => qcq.Term("name", ""))

@@ -19,18 +19,18 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 			public DateTime? Date { get; set; }
 		}
 
-		private void DoConditionlessFilter(Func<FilterDescriptor<ElasticSearchProject>, BaseFilter> filter)
+		private void DoConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, BaseFilter> filter)
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
 				.Filter(filter);
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 		}
-		private void DoNonConditionlessFilter(Func<FilterDescriptor<ElasticSearchProject>, BaseFilter> filter)
+		private void DoNonConditionlessFilter(Func<FilterDescriptor<ElasticsearchProject>, BaseFilter> filter)
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
 				.Filter(filter);

@@ -15,12 +15,12 @@ namespace Nest.Tests.Integration.Integration.Filter
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
-		private ElasticSearchProject _LookFor;
+		private ElasticsearchProject _LookFor;
 
 		[TestFixtureSetUp]
 		public void Initialize()
 		{
-			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
+			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_LookFor.Name = "mmm";
 			var status = this._client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
 			Assert.True(status.Success, status.Result);

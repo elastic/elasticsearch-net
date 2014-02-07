@@ -13,7 +13,7 @@ namespace Nest.Tests.Unit.Search.Suggest
         [Test]
         public void CompletionSuggestDescriptorTest()
         {
-            var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticSearchProject>()
+            var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
                 .OnField("suggest")
                 .Text("n");
 
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Search.Suggest
         [Test]
         public void CompletionSuggestDescriptorDefaultFuzzyTest()
         {
-            var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticSearchProject>()
+            var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
                 .OnField("suggest")
                 .Text("n")
                 .Fuzzy();
@@ -50,7 +50,7 @@ namespace Nest.Tests.Unit.Search.Suggest
         [Test]
         public void CompletionSuggestDescriptorFuzzyTest()
         {
-            var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticSearchProject>()
+            var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
                 .OnField("suggest")
                 .Text("n")
                 .Fuzzy(f => f
@@ -77,7 +77,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		[Test]
 		public void CompletionSuggestOnSearchTest()
 		{
-			var search = this._client.Search<ElasticSearchProject>(s => s
+			var search = this._client.Search<ElasticsearchProject>(s => s
 				.SuggestCompletion("mycompletionsuggest", ts => ts
 					.Text("n")
 					.OnField(p=>p.Name)

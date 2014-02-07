@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSort()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Sort(sort => sort
@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSortOnSortField()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Sort(sort => sort
@@ -64,7 +64,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSortAscending()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.SortAscending(f => f.Country);
@@ -83,7 +83,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSortDescending()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.SortDescending(f => f.Country);
@@ -102,7 +102,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSortAscendingOnSortField()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.SortAscending(f => f.Name.Suffix("sort"));
@@ -121,7 +121,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSortDescendingOnSortField()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.SortDescending(f => f.Name.Suffix("sort"));
@@ -140,7 +140,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSortGeo()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.SortGeoDistance(sort => sort
@@ -170,7 +170,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestSortScript()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.SortScript(sort => sort
@@ -205,7 +205,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestNestedFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Sort(sort => sort
 					.OnField(e => e.Id)
 					.NestedFilter(f => f.Term("name", "value"))
@@ -229,7 +229,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestNestedPath()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Sort(sort => sort
 					.OnField(e => e.Id)
 					.NestedPath("name")
@@ -249,7 +249,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void TestNestedPathObject()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Sort(sort => sort
 					.OnField(e => e.Id)
 					.NestedPath(f => f.Name)
@@ -268,7 +268,7 @@ namespace Nest.Tests.Unit.Search.Sort
 		[Test]
 		public void RandomScriptSort()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Size(10)
 			  .SortScript(sort => sort

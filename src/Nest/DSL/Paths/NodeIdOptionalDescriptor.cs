@@ -32,10 +32,10 @@ namespace Nest
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
+		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
-			var pathInfo = new ElasticSearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<K>()
 			{
 				NodeId = this._NodeId
 			};

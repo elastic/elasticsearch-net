@@ -11,8 +11,8 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void Inferred()
 		{
-			var result = this._client.Update<ElasticSearchProject>(u => u
-				.Object(new ElasticSearchProject { Id = 2 })
+			var result = this._client.Update<ElasticsearchProject>(u => u
+				.Object(new ElasticsearchProject { Id = 2 })
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
@@ -23,9 +23,9 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void InferredWithOverrides()
 		{
-			var result = this._client.Update<ElasticSearchProject>(u => u
+			var result = this._client.Update<ElasticsearchProject>(u => u
 				.Index("myindex")
-				.Object(new ElasticSearchProject { Id = 2 })
+				.Object(new ElasticsearchProject { Id = 2 })
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");
 			var status = result.ConnectionStatus;
@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Core.Update
 		{
 			Assert.Throws<DispatchException>(() =>
 			{
-				var result = this._client.Update<ElasticSearchProject>(u => u
+				var result = this._client.Update<ElasticsearchProject>(u => u
 					.Index("myindex")
 					);
 			});
@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void AllFilledIn()
 		{
-			var result = this._client.Update<ElasticSearchProject>(u => u
+			var result = this._client.Update<ElasticsearchProject>(u => u
 				.Index("myindex")
 				.Type("mytype")
 				.Id("1")
@@ -61,7 +61,7 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void ScriptQueryStringShouldNotUseGet()
 		{
-			var result = this._client.Update<ElasticSearchProject>(u => u
+			var result = this._client.Update<ElasticsearchProject>(u => u
 				.Index("myindex")
 				.Type("mytype")
 				.Id("1")

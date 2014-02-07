@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void GeoBoundingBoxFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(filter => filter
@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void GeoBoundingBoxFilterCacheNamed()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(filter => filter

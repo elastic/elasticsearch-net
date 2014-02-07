@@ -9,11 +9,11 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void TermsLookupFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff=>ff
-					.TermsLookup(f=>f.Name, t => t.Lookup<ElasticSearchProject>(p=>p.Name, "NEST"))
+					.TermsLookup(f=>f.Name, t => t.Lookup<ElasticsearchProject>(p=>p.Name, "NEST"))
 				);
 				
 			var json = TestElasticClient.Serialize(s);
@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void TermsLookupFilterWithCache()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff
@@ -42,7 +42,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					.Name("terms_filter")
 					.CacheKey("NEST_TERMS")
 					.TermsLookup(f => f.Name, t => t
-						.Lookup<ElasticSearchProject>(p => p.Name, "NEST")
+						.Lookup<ElasticsearchProject>(p => p.Name, "NEST")
 						.Routing("dot_net_clients")
 					)
 				);

@@ -17,23 +17,23 @@ namespace Nest.Tests.Integration.Integration.Filter
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
-		private ElasticSearchProject _LookFor;
+		private ElasticsearchProject _LookFor;
 
 		/// <summary>
 		/// Field missing on document.
 		/// </summary>
-		private Expression<Func<ElasticSearchProject, object>> _MissingField;
+		private Expression<Func<ElasticsearchProject, object>> _MissingField;
 
 		/// <summary>
 		/// Field exists on document.
 		/// </summary>
-		private Expression<Func<ElasticSearchProject, object>> _ExistsField;
+		private Expression<Func<ElasticsearchProject, object>> _ExistsField;
 
 
 		[TestFixtureSetUp]
 		public void Initialize()
 		{
-			_LookFor = NestTestData.Session.Single<ElasticSearchProject>().Get();
+			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_MissingField = f => f.Name;
 			_ExistsField = f => f.Id;
 

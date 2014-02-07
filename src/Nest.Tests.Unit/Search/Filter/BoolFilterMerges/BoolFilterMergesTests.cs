@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldNotJoinIntoStrictShouldFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  q.Strict().Bool(
 						bf=>bf.Should(
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldJoinIntoNonStrictShouldFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  q.Bool(
 						bf => bf.Should(
@@ -44,7 +44,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldJoinIntoMustFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  q.Bool(
 						bf => bf.Must(
@@ -59,7 +59,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldJoinMustNotIntoMustFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  q.Bool(
 						bf => bf.Must(
@@ -75,7 +75,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldNotJoinMustNotIntoMustStrictFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  q.Strict().Bool(
 						bf => bf.Must(
@@ -90,7 +90,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldNotJoinTermIntoMustStrictFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  q.Strict().Bool(
 						bf => bf.Must(
@@ -106,7 +106,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldNotJoinMustNotIntoMustStrictFilterInverse()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  !q.Term(f => f.Name, "blah2")
 				  && q.Strict().Bool(
@@ -122,7 +122,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFilterMerges
 		[Test]
 		public void ShouldNotJoinIntoStrictMustFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Filter(q =>
 				  q.Strict().Bool(
 						bf => bf.Must(

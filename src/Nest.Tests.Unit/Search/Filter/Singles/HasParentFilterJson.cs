@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		{
 			var s = new SearchDescriptor<Person>().From(0).Size(10)
 				.Filter(ff=>ff
-					.HasParent<ElasticSearchProject>(d=>d
+					.HasParent<ElasticsearchProject>(d=>d
 						.Scope("my_scope")
 						.Query(q=>q.Term(p=>p.Country, "value"))
 					)

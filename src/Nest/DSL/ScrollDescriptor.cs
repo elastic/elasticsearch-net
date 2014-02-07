@@ -15,9 +15,9 @@ namespace Nest
 		IPathInfo<ScrollQueryString>
 		where T : class
 	{
-		ElasticSearchPathInfo<ScrollQueryString> IPathInfo<ScrollQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<ScrollQueryString> IPathInfo<ScrollQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
-			var pathInfo = new ElasticSearchPathInfo<ScrollQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<ScrollQueryString>();
 			// force POST scrollId can be quite big
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.ScrollId = this._QueryString._scroll_id;

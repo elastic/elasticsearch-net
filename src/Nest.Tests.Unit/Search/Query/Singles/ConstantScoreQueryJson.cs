@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void ConstantScoreQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q=>q
 					.ConstantScore(cs=>cs
 						.Query(qq=>qq.MatchAll())
@@ -31,7 +31,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void ConstantScoreQueryWithFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q => q
 					.ConstantScore(cs => cs
 						.Filter(qq => qq.MatchAll())

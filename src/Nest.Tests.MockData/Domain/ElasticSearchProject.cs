@@ -7,7 +7,7 @@ using Nest;
 namespace Nest.Tests.MockData.Domain
 {
 	[ElasticType(Name = "elasticsearchprojects")]
-	public class ElasticSearchProject
+	public class ElasticsearchProject
 	{
 		public int Id { get; set;  }
 		[ElasticProperty(AddSortField=true)]

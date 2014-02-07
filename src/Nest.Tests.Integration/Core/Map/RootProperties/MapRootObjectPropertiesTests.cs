@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 		[Test]
 		public void RootPropertiesShouldSerialize()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Type("elasticsearchprojects2")
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.IgnoreConflicts()
@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 		[Test]
 		public void DynamicAllowSetAndGet()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Type("elasticsearchprojects_allow")
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(DynamicMappingOption.allow)
@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_allow"));
 			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.allow);
 
-			result = this._client.Map<ElasticSearchProject>(m => m
+			result = this._client.Map<ElasticsearchProject>(m => m
 				.Type("elasticsearchprojects_allow2")
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(true)
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 		[Test]
 		public void DynamicIgnoreSetAndGet()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Type("elasticsearchprojects_ignore")
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(DynamicMappingOption.ignore)
@@ -66,7 +66,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 			var getResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects_ignore"));
 			Assert.AreEqual(getResult.Mapping.Dynamic, DynamicMappingOption.ignore);
 
-			result = this._client.Map<ElasticSearchProject>(m => m
+			result = this._client.Map<ElasticsearchProject>(m => m
 				.Type("elasticsearchprojects_ignore2")
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(false)
@@ -79,7 +79,7 @@ namespace Nest.Tests.Integration.Core.Map.RootProperties
 		[Test]
 		public void DynamicStrictSetAndGet()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Type("elasticsearchprojects_strict")
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex)
 				.Dynamic(DynamicMappingOption.strict)

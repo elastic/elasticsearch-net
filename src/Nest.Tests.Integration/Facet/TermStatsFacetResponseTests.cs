@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleTermStatsFacet()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },

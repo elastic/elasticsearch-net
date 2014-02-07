@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void RangeStrings()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void RangeInts()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff
@@ -72,7 +72,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void RangeDoubles()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff
@@ -102,7 +102,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void RangeFloats()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff
@@ -135,7 +135,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		{
 			var lowerBound = DateTime.UtcNow.AddYears(-1);
 			var upperBound = DateTime.UtcNow.AddYears(1);
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff
@@ -168,7 +168,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var format = "yyyy/MM/dd";
 			var lowerBound = DateTime.UtcNow.AddYears(-1);
 			var upperBound = DateTime.UtcNow.AddYears(1);
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff

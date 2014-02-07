@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestFuzzDateQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q
@@ -31,7 +31,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestFuzzyDateWithBoostQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q

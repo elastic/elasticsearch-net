@@ -7,7 +7,7 @@ namespace Nest
 		bool OK { get; }
 		string Name { get; }
 		string Tagline { get;  }
-		ElasticSearchVersionInfo Version { get;  }
+		ElasticsearchVersionInfo Version { get;  }
 	}
 
 	[JsonObject]
@@ -28,7 +28,7 @@ namespace Nest
 		public string Tagline { get; internal set; }
 		
 		[JsonProperty(PropertyName = "version")]
-		public ElasticSearchVersionInfo Version { get; internal set; }
+		public ElasticsearchVersionInfo Version { get; internal set; }
 
 	}
 }

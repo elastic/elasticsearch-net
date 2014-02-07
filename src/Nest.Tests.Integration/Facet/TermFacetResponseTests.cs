@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleTermFacet()
 		{
-			IQueryResponse<ElasticSearchProject> queryResults = this.SearchRaw<ElasticSearchProject>(
+			IQueryResponse<ElasticsearchProject> queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 							""match_all"" : { }
 					},
@@ -55,7 +55,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleTermFacetWithExclude()
 		{
-			IQueryResponse<ElasticSearchProject> queryResults = this.SearchRaw<ElasticSearchProject>(
+			IQueryResponse<ElasticsearchProject> queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 							""match_all"" : { }
 					},
@@ -82,7 +82,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleTermFacetWithGlobal()
 		{
-			IQueryResponse<ElasticSearchProject> queryResults = this.SearchRaw<ElasticSearchProject>(
+			IQueryResponse<ElasticsearchProject> queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 							""term"" : { ""followers.lastName"" : """ + this._LookFor.ToLower() +
 				@""" }
@@ -105,7 +105,7 @@ namespace Nest.Tests.Integration.Facet
     [Test]
     public void TestWithDSL()
     {
-      var results = this._client.Search<ElasticSearchProject>(s => s
+      var results = this._client.Search<ElasticsearchProject>(s => s
         .FacetTerm(t=>t
           .Order(TermsOrder.count)
           .OnField(p => p.Name)

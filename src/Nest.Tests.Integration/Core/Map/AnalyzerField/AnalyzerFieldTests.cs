@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Core.Map.AnalyzerField
 		[Test]
 		public void AnalyzerFieldUsingExpression()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.AnalyzerField(a => a
 					.SetPath(p => p.Name)
 					.SetIndexed()
@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Core.Map.AnalyzerField
 		[Test]
 		public void AnalyzerFieldUsingString()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.AnalyzerField(a => a
 					.SetPath("my_difficult_field_name")
 					.SetIndexed(false)

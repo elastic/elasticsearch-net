@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration
 			var createIndexResult = client.CreateIndex(ElasticsearchConfiguration.DefaultIndex, c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-				.AddMapping<ElasticSearchProject>(m => m.MapFromAttributes())
+				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp=>pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration
 			var createAntotherIndexResult = client.CreateIndex(ElasticsearchConfiguration.DefaultIndex + "_clone", c => c
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
-				.AddMapping<ElasticSearchProject>(m => m.MapFromAttributes())
+				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
 				.AddMapping<Person>(m => m.MapFromAttributes())
 				.AddMapping<BoolTerm>(m => m.Properties(pp => pp
 					.String(sm => sm.Name(p => p.Name1).Index(FieldIndexOption.not_analyzed))

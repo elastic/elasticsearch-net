@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 		/// <summary>
 		/// Document used in test.
 		/// </summary>
-		private ElasticSearchProject _LookFor = NestTestData.Data.First();
+		private ElasticsearchProject _LookFor = NestTestData.Data.First();
 
 		/// <summary>
 		/// Test the AndFilter.

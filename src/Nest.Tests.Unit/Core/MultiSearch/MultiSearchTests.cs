@@ -13,7 +13,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		public void MultiSearchNonFixed()
 		{
 			var result = this._client.MultiSearch(m => m
-				.Search<ElasticSearchProject>(s => s.MatchAll())
+				.Search<ElasticsearchProject>(s => s.MatchAll())
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		{
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex")
-				.Search<ElasticSearchProject>(s => s.MatchAll())
+				.Search<ElasticsearchProject>(s => s.MatchAll())
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		{
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex", "mytype")
-				.Search<ElasticSearchProject>(s => s.MatchAll())
+				.Search<ElasticsearchProject>(s => s.MatchAll())
 			);
 			var status = result.ConnectionStatus;
 			var uri = new Uri(result.ConnectionStatus.RequestUrl);
@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 		{
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex", "mytype")
-				.Search<ElasticSearchProject>(s => s
+				.Search<ElasticsearchProject>(s => s
 					.MatchAll()
 					.Preference("_primary")
 					.Routing("customvalue1")

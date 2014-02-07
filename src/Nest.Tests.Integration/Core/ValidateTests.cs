@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestValidation()
 		{
-			var response = this._client.Validate<ElasticSearchProject>(v=>v
+			var response = this._client.Validate<ElasticsearchProject>(v=>v
 				.Query(q=>q
 					.Term(f=>f.Country, "netherlands")
 				)
@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestValidationWithExplain()
 		{
-			var response = this._client.Validate<ElasticSearchProject>(q => q
+			var response = this._client.Validate<ElasticsearchProject>(q => q
 				.Explain()
 				.Q("loc:asdasd")
 			);

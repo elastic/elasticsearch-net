@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.MultiMatch
 		[Test]
 		public void TestMultiMatchJson()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q

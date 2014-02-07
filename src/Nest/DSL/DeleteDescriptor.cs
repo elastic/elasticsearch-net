@@ -16,7 +16,7 @@ namespace Nest
 		, IPathInfo<DeleteQueryString>
 		where T : class
 	{
-		ElasticSearchPathInfo<DeleteQueryString> IPathInfo<DeleteQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<DeleteQueryString> IPathInfo<DeleteQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<DeleteQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;

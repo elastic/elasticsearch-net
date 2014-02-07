@@ -12,11 +12,11 @@ namespace Nest.Tests.Integration.Core
 		[Test]
 		public void TestIndex()
 		{
-			var newProject = new ElasticSearchProject
+			var newProject = new ElasticsearchProject
 			{
 				Name = "COBOLES", //COBOL ES client ?
 			};
-			var t = this._client.IndexAsync<ElasticSearchProject>(newProject);
+			var t = this._client.IndexAsync<ElasticsearchProject>(newProject);
 			t.Wait();
 			Assert.True(t.Result.IsValid);
 			Assert.True(t.IsCompleted, "task did not complete");
@@ -32,11 +32,11 @@ namespace Nest.Tests.Integration.Core
 
 			var client = new ElasticClient(s);
 
-			var newProject = new ElasticSearchProject
+			var newProject = new ElasticsearchProject
 			{
 				Name = "COBOLES", //COBOL ES client ?
 			};
-			var t = client.IndexAsync<ElasticSearchProject>(newProject);
+			var t = client.IndexAsync<ElasticsearchProject>(newProject);
 			t.Wait(1000);
 			var r = t.Result;
 			Assert.True(r.IsValid);

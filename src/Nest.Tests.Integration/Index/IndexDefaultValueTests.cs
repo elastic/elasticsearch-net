@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Index
 		[Test]
 		public void IndexDefaultValue()
 		{
-			var newProject = new ElasticSearchProject
+			var newProject = new ElasticsearchProject
 			{
 				Id = 2000,
 				Name = "TempProject",

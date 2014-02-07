@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 		public AnalyzerTestResult MapAndAnalyze(
 			Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector,
 			Func<PutMappingDescriptor<AnalyzerTest>, PutMappingDescriptor<AnalyzerTest>> typeMappingDescriptor,
-			string text = "ElasticSearch is yummy"
+			string text = "Elasticsearch is yummy"
 			)
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();

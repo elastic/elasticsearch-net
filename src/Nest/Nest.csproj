@@ -575,7 +575,7 @@
     <Compile Include="Domain\Parameters\OptimizeParams.cs" />
     <Compile Include="Domain\Responses\AnalyzeResponse.cs" />
     <Compile Include="Domain\Responses\CountResponse.cs" />
-    <Compile Include="Domain\Responses\ElasticSearchVersionInfo.cs" />
+    <Compile Include="Domain\Responses\ElasticsearchVersionInfo.cs" />
     <Compile Include="Domain\Responses\IndicesOperationResponse.cs" />
     <Compile Include="Domain\Responses\IndicesResponse.cs" />
     <Compile Include="Domain\Responses\IndicesShardResponse.cs" />
@@ -618,7 +618,6 @@
     <Compile Include="Domain\Hit\HitsMetaData.cs" />
     <Compile Include="Enums\ClearCacheOptions.cs" />
     <Compile Include="Enums\StatsInfo.cs" />
-    <Compile Include="Exception\DslException.cs" />
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
@@ -663,8 +662,7 @@
     <Compile Include="Resolvers\Converters\CustomJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="Resolvers\Converters\YesNoBoolConverter.cs" />
-    <Compile Include="Domain\Paths\ElasticSearchPathInfo.cs" />
-    <Compile Include="Domain\Paths\ElasticSearchPathInfoExtensions.cs" />
+    <Compile Include="Domain\Paths\ElasticsearchPathInfo.cs" />
     <Compile Include="Resolvers\IndexNameMarker.cs" />
     <Compile Include="Domain\Paths\PathInfoHttpMethod.cs" />
     <Compile Include="Resolvers\IndexNameMarkerExtensions.cs" />
@@ -682,7 +680,7 @@
     <Compile Include="Enums\FacetTypes.cs" />
     <Compile Include="Enums\Replication.cs" />
     <Compile Include="Enums\VersionType.cs" />
-    <Compile Include="Exception\ElasticSearchException.cs" />
+    <Compile Include="Exception\DslException.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Domain\Connection\IConnection.cs" />
     <Compile Include="Domain\Connection\IConnectionSettings.cs" />

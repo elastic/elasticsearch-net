@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 		[Test]
 		public void MltSimpleById()
 		{
-			var result = this._client.MoreLikeThis<ElasticSearchProject>(mlt => mlt.Id(1));
+			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt.Id(1));
 			var status = result.ConnectionStatus;
 			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1/_mlt", status.RequestUrl);
@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 		[Test]
 		public void MltSimpleByObject()
 		{
-			var result = this._client.MoreLikeThis<ElasticSearchProject>(mlt => mlt.Object(new ElasticSearchProject { Id = 1 }));
+			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt.Object(new ElasticsearchProject { Id = 1 }));
 			var status = result.ConnectionStatus;
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1/_mlt", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("GET", status.RequestMethod);
@@ -26,10 +26,10 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 		[Test]
 		public void MltSimpleByObjectAlternativeIndexAndType()
 		{
-			var result = this._client.MoreLikeThis<ElasticSearchProject>(mlt => mlt
+			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
 				.Index("someotherindex")
 				.Type("sillytypename")
-				.Object(new ElasticSearchProject { Id = 1 })
+				.Object(new ElasticsearchProject { Id = 1 })
 			);
 			var status = result.ConnectionStatus;
 			StringAssert.EndsWith("/someotherindex/sillytypename/1/_mlt", status.RequestUrl);
@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 		[Test]
 		public void MltOptions()
 		{
-			var result = this._client.MoreLikeThis<ElasticSearchProject>(mlt => mlt
+			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
 				.Id(1)
 				.MltFields(p => p.Country, p => p.Content)
 				.PercentTermsToMatch(0.3)
@@ -66,7 +66,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 		[Test]
 		public void SetSearchUrlOptions()
 		{
-			var result = this._client.MoreLikeThis<ElasticSearchProject>(mlt => mlt
+			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt
 				.Id(1)
 				.MltFields(p => p.Country, p => p.Content)
 				.Search(s => s

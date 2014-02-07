@@ -13,14 +13,14 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		public void SimpleSearch()
 		{
 			var result = this._client.MultiSearch(b => b
-				.Search<ElasticSearchProject>(s=>s.MatchAll())
+				.Search<ElasticsearchProject>(s=>s.MatchAll())
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
 
-			result.GetResponses<ElasticSearchProject>().Should().NotBeNull().And.NotBeEmpty().And.HaveCount(1);
+			result.GetResponses<ElasticsearchProject>().Should().NotBeNull().And.NotBeEmpty().And.HaveCount(1);
 
-			var queryResponses = result.GetResponses<ElasticSearchProject>();
+			var queryResponses = result.GetResponses<ElasticsearchProject>();
 			queryResponses.Should().NotBeNull().And.HaveCount(1);
 
 			var queryResponse = queryResponses.First();
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		public void SimpleNamedSearch()
 		{
 			var result = this._client.MultiSearch(b => b
-				.Search<ElasticSearchProject>("elasticsearchprojects", s => s.MatchAll())
+				.Search<ElasticsearchProject>("elasticsearchprojects", s => s.MatchAll())
 				.Search<Person>("persons", s => s.MatchAll())
 			);
 			result.Should().NotBeNull();
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 
 			result.TotalResponses.Should().Be(2);
 
-			var queryResponse = result.GetResponse<ElasticSearchProject>("elasticsearchprojects");
+			var queryResponse = result.GetResponse<ElasticsearchProject>("elasticsearchprojects");
 			queryResponse.Documents.Should().NotBeNull()
 				.And.HaveCount(10)
 				.And.OnlyContain(f => !f.Name.IsNullOrEmpty());
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		public void MultipleComplexSearches()
 		{
 			var result = this._client.MultiSearch(b => b
-				.Search<ElasticSearchProject>(s => s
+				.Search<ElasticsearchProject>(s => s
 					.Query(q=>q.Term(p=>p.Name, "NEST"))
 					.Filter(f => f.Term(p => p.Name, "NEST"))
 					.FacetTerm(tf=>tf.OnField(p=>p.Name).Global())
@@ -72,7 +72,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
-			result.GetResponses<ElasticSearchProject>().Should().NotBeEmpty();
+			result.GetResponses<ElasticsearchProject>().Should().NotBeEmpty();
 			result.GetResponses<Person>().Should().NotBeEmpty();
 		}
 		[Test]
@@ -80,7 +80,7 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 		{
 			var result = this._client.MultiSearch(b => b
 				.FixedPath("myindex", "mytype")
-				.Search<ElasticSearchProject>(s => s
+				.Search<ElasticsearchProject>(s => s
 					.MatchAll()
 					.Preference("_primary")
 					.Routing("customvalue1")

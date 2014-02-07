@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Core.Map.RootProperties
 		[Test]
 		public void RootPropertiesShouldSerialize()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Type("elasticsearchprojects2")
 				.Indices("nest_test_data", "nest_test_data_clone")
 				.IgnoreConflicts()

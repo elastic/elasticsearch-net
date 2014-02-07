@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestMatchAllQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q.MatchAll());
@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestMatchAllShortcut()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.MatchAll();
@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestMatchAllWithBoostQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q
@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestMatchAllWithNormFieldQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q

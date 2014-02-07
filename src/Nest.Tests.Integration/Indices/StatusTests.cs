@@ -115,7 +115,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void StatusTyped()
 		{
-			var r = this._client.Status(s=>s.Index<ElasticSearchProject>());
+			var r = this._client.Status(s=>s.Index<ElasticsearchProject>());
 			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Shards);

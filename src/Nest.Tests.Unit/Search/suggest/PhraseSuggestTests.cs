@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		[Test]
         public void PhraseSuggestDescriptorTest()
 		{
-		    var phraseSuggestDescriptor = new PhraseSuggestDescriptor<ElasticSearchProject>()
+		    var phraseSuggestDescriptor = new PhraseSuggestDescriptor<ElasticsearchProject>()
 		        .Analyzer("body")
 		        .OnField("bigram")
 		        .Size(1)
@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.Search.Suggest
         [Test]
         public void PhraseSuggestDescriptorDirectGeneratorTest()
         {
-            var phraseSuggestDescriptor = new PhraseSuggestDescriptor<ElasticSearchProject>()
+            var phraseSuggestDescriptor = new PhraseSuggestDescriptor<ElasticsearchProject>()
                 .Analyzer("body")
                 .DirectGenerator(m => m.OnField("body").SuggestMode(SuggestMode.Always).MinWordLength(3));
 
@@ -55,7 +55,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 		[Test]
 		public void PhraseSuggestOnSearchTest()
 		{
-			var search = this._client.Search<ElasticSearchProject>(s => s
+			var search = this._client.Search<ElasticsearchProject>(s => s
 				.SuggestGlobalText("glob")
 				.SuggestPhrase("myphrasesuggest", ts => ts
 					.Text("n")

@@ -149,10 +149,10 @@ namespace Nest
 		}
 
 
-		ElasticSearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(
+		ElasticsearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(
 			IConnectionSettings settings)
 		{
-			var pathInfo = new ElasticSearchPathInfo<CreateIndexQueryString>();
+			var pathInfo = new ElasticsearchPathInfo<CreateIndexQueryString>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 			pathInfo.Index = this._Index;
 			pathInfo.QueryString = this._QueryString;

@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Core.UpdateSettings
 		public void CustomIndexInferred()
 		{
 			var result = this._client.UpdateSettings(us=>us
-				.Index<ElasticSearchProject>()
+				.Index<ElasticsearchProject>()
 			);
 			Assert.NotNull(result);
 			var status = result.ConnectionStatus;

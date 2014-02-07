@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Core.Map.TtlField
 		[Test]
 		public void TtlFieldSerializes()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.TtlField(t => t
 					.SetDisabled(false)
 					.SetDefault("1d")

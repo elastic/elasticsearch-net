@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void NumericRange()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff=>ff
@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void NumericRangeGtLtWithCache()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff.Cache(true)
@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void NumericRangeDoubles()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff
@@ -104,7 +104,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var format = "yyyy/MM/dd";
 			var lowerBound = DateTime.UtcNow.AddYears(-1);
 			var upperBound = DateTime.UtcNow.AddYears(1);
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff

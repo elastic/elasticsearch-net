@@ -15,7 +15,7 @@ namespace Nest
 		IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheQueryString>
 		, IPathInfo<ClearCacheQueryString>
 	{
-		ElasticSearchPathInfo<ClearCacheQueryString> IPathInfo<ClearCacheQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<ClearCacheQueryString> IPathInfo<ClearCacheQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<ClearCacheQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

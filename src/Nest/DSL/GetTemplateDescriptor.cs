@@ -17,7 +17,7 @@ namespace Nest
 		NamePathDescriptor<GetTemplateDescriptor, GetTemplateQueryString>
 		, IPathInfo<GetTemplateQueryString>
 	{
-		ElasticSearchPathInfo<GetTemplateQueryString> IPathInfo<GetTemplateQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<GetTemplateQueryString> IPathInfo<GetTemplateQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<GetTemplateQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

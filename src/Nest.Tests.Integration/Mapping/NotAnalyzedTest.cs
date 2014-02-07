@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Mapping
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
 			var x = this._client.CreateIndex(index, s => s
-				.AddMapping<ElasticSearchProject>(m=>m.MapFromAttributes())
+				.AddMapping<ElasticsearchProject>(m=>m.MapFromAttributes())
 			);
 			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
@@ -22,13 +22,13 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.NotNull(mapping);
 			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);
 			
-			var indexResult = this._client.Index(new ElasticSearchProject
+			var indexResult = this._client.Index(new ElasticsearchProject
 			{
 				Country = "The Royal Kingdom Of The Netherlands"
 			}, i=>i.Index(index).Refresh());
 			Assert.IsTrue(indexResult.IsValid);
 
-			var result = this._client.Search<ElasticSearchProject>(s=>s
+			var result = this._client.Search<ElasticsearchProject>(s=>s
 				.Index(index)
 				.FacetTerm(ft=>ft.OnField(f=>f.Country))
 				.MatchAll()
@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Mapping
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
 			var x = this._client.CreateIndex(index, s => s
-				.AddMapping<ElasticSearchProject>(m => m
+				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
 					.Properties(pp=>pp
 						.String(pps=>pps.Name(p=>p.Country).Index(FieldIndexOption.analyzed))
@@ -53,14 +53,14 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
 
 			var indexResult = this._client.Index(
-				new ElasticSearchProject
+				new ElasticsearchProject
 				{
 					Country = "The Royal Kingdom Of The Netherlands"
 				}, i=> i.Index(index).Refresh()
 				);
 			Assert.IsTrue(indexResult.IsValid);
 
-			var result = this._client.Search<ElasticSearchProject>(s => s
+			var result = this._client.Search<ElasticsearchProject>(s => s
 				.Index(index)
 				.FacetTerm(ft => ft.OnField(f => f.Country))
 				.MatchAll()

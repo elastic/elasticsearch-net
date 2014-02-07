@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void CustomBoostFactorQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q=>q
 						.CustomBoostFactor(cs=>cs
 							.BoostFactor(5.2)

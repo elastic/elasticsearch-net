@@ -10,57 +10,57 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 		[Test]
 		public void StaticBoolTest()
 		{
-			var s = Filter<ElasticSearchProject>.Term(f=>f.Name, "foo")
-				&& Filter<ElasticSearchProject>.Term(f=>f.Name, "bar");
+			var s = Filter<ElasticsearchProject>.Term(f=>f.Name, "foo")
+				&& Filter<ElasticsearchProject>.Term(f=>f.Name, "bar");
 
 			this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}
 		[Test]
 		public void StaticBoolAssignTest()
 		{
-			var s = Filter<ElasticSearchProject>.Term(f => f.Name, "foo");
-			s &= Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
+			var s = Filter<ElasticsearchProject>.Term(f => f.Name, "foo");
+			s &= Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
 		}
 		[Test]
 		public void StaticBoolAssignNotTest()
 		{
-			var s = !Filter<ElasticSearchProject>.Term(f => f.Name, "foo") 
-			 && !Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
+			var s = !Filter<ElasticsearchProject>.Term(f => f.Name, "foo") 
+			 && !Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
 		}
 		[Test] 
 		public void StaticBoolAssignMultipleTest()
 		{ 
-			var s = Filter<ElasticSearchProject>.Term(f => f.Name, "foo");
-			s &= Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
-			s &= Filter<ElasticSearchProject>.Term(f => f.Name, "blah");
-			s &= Filter<ElasticSearchProject>.Term(f => f.Name, "derp");
+			var s = Filter<ElasticsearchProject>.Term(f => f.Name, "foo");
+			s &= Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
+			s &= Filter<ElasticsearchProject>.Term(f => f.Name, "blah");
+			s &= Filter<ElasticsearchProject>.Term(f => f.Name, "derp");
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
 		}
 		[Test]
 		public void StaticBoolAssignMultipleOrTest()
 		{ 
-			var s = Filter<ElasticSearchProject>.Term(f => f.Name, "foo");
-			s |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
-			s |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah");
-			s |= Filter<ElasticSearchProject>.Term(f => f.Name, "derp");
+			var s = Filter<ElasticsearchProject>.Term(f => f.Name, "foo");
+			s |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
+			s |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah");
+			s |= Filter<ElasticsearchProject>.Term(f => f.Name, "derp");
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
 		}
 		[Test]
 		public void StaticBoolAssignMultipleOrCombineWithAndTest()
 		{   
-			var or1 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo");
-			or1 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
-			or1 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah");
+			var or1 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo");
+			or1 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
+			or1 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah");
 
-			var or2 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah2");
+			var or2 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah2");
 
 			var s = or1 && or2;
 
@@ -69,15 +69,15 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 		[Test]
 		public void SearchDescriptorPicksUpBaseFilterTest()
 		{
-			var or1 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo");
-			or1 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
-			or1 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah");
+			var or1 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo");
+			or1 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
+			or1 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah");
 
-			var or2 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah");
+			var or2 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah");
 			 
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
 				.Filter(or1 && or2);
@@ -88,15 +88,15 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 		[Test]
 		public void SearchDescriptorPicksUpBaseFilterWithinLambdaTest()
 		{ 
-			var or1 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo");
-			or1 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar");
-			or1 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah");
+			var or1 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo");
+			or1 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar");
+			or1 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah");
 
-			var or2 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah2");
+			var or2 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah2");
 
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
 				.Filter(q=> {
@@ -109,11 +109,11 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 		[Test]
 		public void SearchDescriptorPicksUpBaseFilterWithinComplexLambdaTest()
 		{ 
-			var or2 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah2");
+			var or2 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah2");
 
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
 				.Filter(q =>
@@ -127,11 +127,11 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 		[Test]
 		public void BranchLambdaTest()
 		{ 
-			var or2 = Filter<ElasticSearchProject>.Term(f => f.Name, "foo2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "bar2");
-			or2 |= Filter<ElasticSearchProject>.Term(f => f.Name, "blah2");
+			var or2 = Filter<ElasticsearchProject>.Term(f => f.Name, "foo2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "bar2");
+			or2 |= Filter<ElasticsearchProject>.Term(f => f.Name, "blah2");
 
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
 				.Filter(q =>

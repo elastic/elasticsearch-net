@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Search
 		private string _LookFor = NestTestData.Data.First().Followers.First().FirstName;
 
 
-		protected void TestDefaultAssertions(IQueryResponse<ElasticSearchProject> queryResponse)
+		protected void TestDefaultAssertions(IQueryResponse<ElasticsearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Search
 		public void BogusQuery()
 		{
 			var client = this._client;
-			IQueryResponse<ElasticSearchProject> queryResults = client.Search<ElasticSearchProject>(s => s
+			IQueryResponse<ElasticsearchProject> queryResults = client.Search<ElasticsearchProject>(s => s
 				.QueryRaw("here be dragons")
 			);
 			Assert.False(queryResults.IsValid);
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Search
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
-			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				.QueryString("*")
 				//.SortAscending(p => p.Id)
 			);
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Search
 		{
 			//arrange
 			//pull existing example through method we know is functional based on other passing unit tests
-			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				.QueryString("*")
 				.SortAscending("_score")
 				.SortDescending(p => p.Id)
@@ -75,7 +75,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void HitsSortsIsSetWithStringSort()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				.QueryString("*")
 				.SortAscending(p => p.Name)
 				.SortDescending(p => p.Id)
@@ -90,7 +90,7 @@ namespace Nest.Tests.Integration.Search
 		public void BoolQuery()
 		{
 			var lookFor = this._LookFor.ToLower();
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""bool"" : {
 							""must"" : {
@@ -123,7 +123,7 @@ namespace Nest.Tests.Integration.Search
 		public void BoostingQuery()
 		{
 			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName.ToLower();
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""boosting"" : {
 							""positive"" : {
@@ -147,7 +147,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void ScoringQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""custom_score"" : {
 							""query"" : {
@@ -164,7 +164,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void ConstantScoreQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""constant_score"" : {
 							""filter"" : {
@@ -184,7 +184,7 @@ namespace Nest.Tests.Integration.Search
 			var boost2nd = NestTestData.Data.ToList()[2].Followers.First().FirstName.ToLower();
 
 
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""dis_max"" : {
 							""tie_breaker"" : 0.7,
@@ -209,7 +209,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void FieldQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""field"" : { 
 							""followers.firstName"" : ""+" + this._LookFor.ToLower() + @" -something else""
@@ -221,7 +221,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void ExtendedFieldQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""field"" : { 
 							""followers.firstName"" : {
@@ -237,7 +237,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void FilteredQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""filtered"" : {
 							""query"" : {
@@ -258,7 +258,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void FuzzyLikeThisQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""fuzzy_like_this"" : {
 							""fields"" : [""_all""],
@@ -272,7 +272,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void FuzzyLikeThisFieldQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""fuzzy_like_this_field"" : {
 							""followers.firstName"" : {
@@ -287,7 +287,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void FuzzyQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""fuzzy"" : {
 							""followers.firstName"" : """ + this._LookFor.ToLower() + @"x""
@@ -301,7 +301,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void ExtendedFuzzyQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						  ""fuzzy"" : { 
 							""followers.firstName"" : {
@@ -321,7 +321,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void MatchAllQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 							""match_all"" : { }
 					} }"
@@ -334,7 +334,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void MoreLikeThisQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""more_like_this"" : {
 							""fields"" : [""_all""],
@@ -350,7 +350,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void MoreLikeThisFieldQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""more_like_this_field"" : {
 							""followers.firstName"" : {
@@ -367,7 +367,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void PrefixQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""prefix"" : {
 							""followers.firstName"" : """ + this._LookFor.ToLower().Substring(0, 4) + @"""
@@ -379,7 +379,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void PrefixExtendedQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""prefix"" : {
 							""followers.firstName"" : { ""value"" : """ + this._LookFor.ToLower().Substring(0, 4) + @""", ""boost"" : 1.2 }
@@ -394,7 +394,7 @@ namespace Nest.Tests.Integration.Search
 			var firstFollower = NestTestData.Data.First().Followers.First();
 			var firstName = firstFollower.FirstName;
 			var lastName = firstFollower.LastName;
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""query_string"" : { 
 							""default_field"" : ""_all"", 
@@ -410,7 +410,7 @@ namespace Nest.Tests.Integration.Search
 			var firstFollower = NestTestData.Data.First().Followers.First();
 			var firstName = firstFollower.FirstName;
 			var lastName = firstFollower.LastName;
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						""query_string"" : { 
 							""fields"" : [""followers.firstName"", ""followers.lastName^5""], 
@@ -424,7 +424,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void RangeQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""range"" : {
 							""id"" : { 
@@ -443,7 +443,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void TermQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""term"" : {
 							""followers.firstName"" : """ + this._LookFor.ToLower() + @"""
@@ -457,7 +457,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void ExtendedTermQuery()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""term"" : {
 							""followers.firstName"" : { ""value"" : """ + this._LookFor.ToLower() + @""", ""boost"" : 2.0 }
@@ -475,7 +475,7 @@ namespace Nest.Tests.Integration.Search
 			var firstName = firstFollower.FirstName.ToLower();
 			var lastName = firstFollower.LastName.ToLower();
 
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""terms"" : {
 							""followers.firstName"" : [ """ + firstName + @""", """ + lastName + @""" ],
@@ -492,7 +492,7 @@ namespace Nest.Tests.Integration.Search
 		public void WildcardQuery()
 		{
 			var wildcard = this._LookFor.ToLower().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""wildcard"" : {
 							""followers.firstName"" : """ + wildcard + @"""
@@ -507,7 +507,7 @@ namespace Nest.Tests.Integration.Search
 		public void WildcardExtendedQuery()
 		{
 			var wildcard = this._LookFor.ToLower().Substring(0, this._LookFor.Length - 1).Replace("a", "?") + "*";
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						 ""wildcard"" : {
 							""followers.firstName"" : { ""value"" : """ + wildcard + @""", ""boost"" : 2.0 }
@@ -527,7 +527,7 @@ namespace Nest.Tests.Integration.Search
 			string query = "{\"query\":{\"query_string\":{\"default_field\":\"_all\",\"query\":\"pork\"}},\"highlight\":{\"pre_tags\":[\"<span class=\\\"searchTerm\\\">\"],\"post_tags\":[\"</span>\"],\"fields\":{\"content\":{\"fragment_size\":150,\"number_of_fragments\":3}}}}";
 
 			//act
-			var queryResults = this.SearchRaw<ElasticSearchProject>(query);
+			var queryResults = this.SearchRaw<ElasticsearchProject>(query);
 
 			//assert
 			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlights["content"].Highlights.Count() > 0);
@@ -537,7 +537,7 @@ namespace Nest.Tests.Integration.Search
 		public void TestRawClientSearch()
 		{
 			
-			var searchDescriptor = new SearchDescriptor<ElasticSearchProject>()
+			var searchDescriptor = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q=>q.MatchAll());
 			var request = this._client.Serializer.Serialize(searchDescriptor);
 			var result = this._client.Raw.SearchPost(request);

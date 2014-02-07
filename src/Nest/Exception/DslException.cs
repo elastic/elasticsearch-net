@@ -1,12 +1,12 @@
 namespace Nest
 {
-	public class ElasticSearchException : System.Exception
+	public class DslException : System.Exception
 	{
-		public ElasticSearchException(string msg) : base(msg)
+		public DslException(string msg) : base(msg)
 		{
 		}
 
-		public ElasticSearchException(string msg, System.Exception exp) : base(msg, exp)
+		public DslException(string msg, System.Exception exp) : base(msg, exp)
 		{
 		}
 	}

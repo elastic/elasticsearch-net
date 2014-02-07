@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestTermFacet()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -31,7 +31,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestTermFacetAll()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -74,7 +74,7 @@ namespace Nest.Tests.Unit.Search.Facets
       //automatically
       Assert.Throws<DslException>(() =>
       {
-        new SearchDescriptor<ElasticSearchProject>()
+        new SearchDescriptor<ElasticsearchProject>()
           .From(0)
           .Size(10)
           .QueryRaw(@"{ raw : ""query""}")
@@ -90,7 +90,7 @@ namespace Nest.Tests.Unit.Search.Facets
           );
       });
 
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")

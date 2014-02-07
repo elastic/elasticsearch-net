@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Reflection.AssemblyTitle("NEST")]
-[assembly: System.Reflection.AssemblyDescription("Strongly typed ElasticSearch client.")]
+[assembly: System.Reflection.AssemblyDescription("Strongly typed Elasticsearch client.")]
 [assembly: System.Reflection.AssemblyProduct("NEST")]
 [assembly: System.Reflection.AssemblyCopyright("Martijn Laarman MIT LICENSED")]
 [assembly: System.Runtime.InteropServices.ComVisible(false)]

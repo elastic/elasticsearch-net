@@ -12,7 +12,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 		[Test]
 		public void SearchTypeScan()
 		{
-			var scanResults = this._client.Search<ElasticSearchProject>(s => s
+			var scanResults = this._client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(1)
 				.MatchAll()
@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
 			var scrolls = 0;
-			var results = this._client.Scroll<ElasticSearchProject>(s=>s
+			var results = this._client.Scroll<ElasticsearchProject>(s=>s
 				.Scroll("4s") 
 				.ScrollId(scanResults.ScrollId)
 			);
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 				Assert.True(results.Documents.Any());
 				Assert.IsNotNullOrEmpty(results.ScrollId);
 				var localResults = results;
-				results = this._client.Scroll<ElasticSearchProject>(s=>s
+				results = this._client.Scroll<ElasticsearchProject>(s=>s
 					.Scroll("4s")
 					.ScrollId(localResults.ScrollId));
 				scrolls++;
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 		[Test]
 		public void SearchTypeScanMoreThanOne()
 		{
-			var scanResults = this._client.Search<ElasticSearchProject>(s => s
+			var scanResults = this._client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(20)
 				.MatchAll()
@@ -59,7 +59,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 			Assert.IsNotNullOrEmpty(scanResults.ScrollId);
 
 			var scrolls = 0;
-			var results = this._client.Scroll<ElasticSearchProject>(s =>s
+			var results = this._client.Scroll<ElasticsearchProject>(s =>s
 				.Scroll("4s")
 				.ScrollId(scanResults.ScrollId));
 			results.Documents.Count().Should().Be(18);
@@ -69,7 +69,7 @@ namespace Nest.Tests.Integration.Search.Scroll
 				Assert.True(results.Documents.Any());
 				Assert.IsNotNullOrEmpty(results.ScrollId);
 				var results1 = results;
-				results = this._client.Scroll<ElasticSearchProject>(s=>s
+				results = this._client.Scroll<ElasticsearchProject>(s=>s
 					.Scroll("4s")
 					.ScrollId(results1.ScrollId));
 				scrolls++;

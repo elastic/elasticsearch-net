@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void IdsQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(filter=>filter
 					.Ids(new[] { "1", "4", "100" })
 			);
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void IdsQueryWithType()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(filter => filter
 					.Ids("my_type", new[] { "1", "4", "100" })
 			);
@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void IdsQueryWithTypes()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(filter => filter
 					.Ids(new []{"my_type", "my_other_type"}, new[] { "1", "4", "100" })
 			);

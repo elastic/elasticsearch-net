@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void OptimizeTyped()
 		{
-			var r = this._client.Optimize(o=>o.Index<ElasticSearchProject>());
+			var r = this._client.Optimize(o=>o.Index<ElasticsearchProject>());
 			Assert.True(r.OK);
 		}
 		public void OptimizeAllWithParameters()

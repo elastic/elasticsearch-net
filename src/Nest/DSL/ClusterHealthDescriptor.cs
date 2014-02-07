@@ -15,7 +15,7 @@ namespace Nest
 		IndicesOptionalPathDescriptor<ClusterHealthDescriptor, ClusterHealthQueryString>
 		, IPathInfo<ClusterHealthQueryString>
 	{
-		ElasticSearchPathInfo<ClusterHealthQueryString> IPathInfo<ClusterHealthQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<ClusterHealthQueryString> IPathInfo<ClusterHealthQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<ClusterHealthQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

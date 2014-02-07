@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void PrefixFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff=>ff
@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void PrefixFilterWithCache()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff

@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
 		[Test]
 		public void FacetFilterOr()
 		{
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetFilter("myfilter", ff=> 
@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetGeoDistanceFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetGeoDistance(gf=>gf
@@ -36,7 +36,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetDateHistogramFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetDateHistogram(gf => gf
@@ -51,7 +51,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetHistogramFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetHistogram(gf => gf
@@ -66,7 +66,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetRangeFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetRange<int>(gf => gf
@@ -81,7 +81,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetStatisticalFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetStatistical(gf => gf
@@ -96,7 +96,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetTermFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetTerm(gf => gf
@@ -111,7 +111,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetTermsStatsFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetTermsStats(gf => gf
@@ -127,7 +127,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolFiltersInFacets
     [Test]
     public void FacetQueryFilter()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .FacetQuery("myquery", gf => gf.Term(f=>f.Name, "foo") && gf.Term(f=>f.Name, "bar"));

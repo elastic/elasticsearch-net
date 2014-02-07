@@ -28,7 +28,7 @@ namespace Nest
 			this._Types = completion_fields.Select(t=>(TypeNameMarker)t);
 			return this;
 		}
-		ElasticSearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<IndicesStatsQueryString>(settings, this._QueryString);
 			if (this._Types.HasAny())

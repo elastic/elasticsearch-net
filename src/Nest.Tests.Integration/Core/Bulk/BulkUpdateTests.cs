@@ -14,7 +14,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			//Lets first insert some documents with id range 5000-6000
 			var descriptor = new BulkDescriptor();
 			foreach (var i in Enumerable.Range(5000, 1000))
-				descriptor.Index<ElasticSearchProject>(op => op.Object(new ElasticSearchProject { Id = i }));
+				descriptor.Index<ElasticsearchProject>(op => op.Object(new ElasticsearchProject { Id = i }));
 
 			var result = this._client.Bulk(d=>descriptor);
 			result.Should().NotBeNull();
@@ -25,8 +25,8 @@ namespace Nest.Tests.Integration.Core.Bulk
 			foreach (var i in Enumerable.Range(5000, 1000))
 			{
 				int id = i;
-				descriptor.Update<ElasticSearchProject, object>(op => op
-					.Object(new ElasticSearchProject { Id = id })
+				descriptor.Update<ElasticsearchProject, object>(op => op
+					.Object(new ElasticsearchProject { Id = id })
 					.Document(new { name = "SufixedName-" + id})
 				);
 			}
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 			result.Items.All(i => i != null).Should().BeTrue();
 			result.Items.All(i => i.OK).Should().BeTrue();
 
-			var updatedObject = this._client.Source<ElasticSearchProject>(i=>i.Id(5000));
+			var updatedObject = this._client.Source<ElasticsearchProject>(i=>i.Id(5000));
 			Assert.NotNull(updatedObject);
 			Assert.AreEqual(updatedObject.Name, "SufixedName-5000");
 

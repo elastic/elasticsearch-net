@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void StringProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.String(s => s
 						.Name(p => p.Name)
@@ -37,7 +37,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void NumberProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Number(s => s
 						.Name(p => p.LOC)
@@ -58,7 +58,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void DateProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Date(s => s
 						.Name(p => p.StartedOn)
@@ -79,7 +79,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void BooleanProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Boolean(s => s
 						.Name(p => p.BoolValue) //reminder .Name(string) exists too!
@@ -97,7 +97,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void BinaryProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Binary(s => s
 						.Name(p => p.MyBinaryField)
@@ -110,7 +110,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void AttachmentProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Attachment(s => s
 						.Name(p => p.MyAttachment)
@@ -127,7 +127,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void ObjectProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.Object<Person>(s => s
 						.Name(p => p.Followers.First())
@@ -147,7 +147,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void NestedObjectProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.NestedObject<Person>(s => s
 						.Name(p => p.NestedFollowers.First())
@@ -169,7 +169,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void MultiFieldProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.MultiField(s => s
 						.Name(p => p.Name)
@@ -185,7 +185,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void IPProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.IP(s => s
 						.Name(p => p.PingIP)
@@ -204,7 +204,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void GeoPointProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.GeoPoint(s => s
 						.Name(p => p.Origin)
@@ -219,7 +219,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 		[Test]
 		public void GeoShapeProperty()
 		{
-			var result = this._client.Map<ElasticSearchProject>(m => m
+			var result = this._client.Map<ElasticsearchProject>(m => m
 				.Properties(props => props
 					.GeoShape(s => s
 						.Name(p => p.MyGeoShape)

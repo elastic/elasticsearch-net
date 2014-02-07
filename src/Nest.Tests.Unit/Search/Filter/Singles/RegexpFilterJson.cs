@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void RegexpFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff=>ff
@@ -32,10 +32,10 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void RegexpFilterStatic()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(Filter<ElasticSearchProject>.Regexp(r => r.OnField(p => p.Name).Value("ab?"))
+				.Filter(Filter<ElasticsearchProject>.Regexp(r => r.OnField(p => p.Name).Value("ab?"))
 				);
 
 			var json = TestElasticClient.Serialize(s);
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void RegexpFilterWithCache()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(ff => ff

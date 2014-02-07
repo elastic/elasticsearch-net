@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 		[Test]
 		public void TermsQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff
@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 		[Test]
 		public void TermsQueryParams()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff.Terms(f => f.Name, "elasticsearch.pm", "nest")
@@ -49,7 +49,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 		[Test]
 		public void TermsQueryDescriptor()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff.
@@ -76,7 +76,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 		[Test]
 		public void TermsQueryDescriptorUsingExternalField()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff.
@@ -99,7 +99,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 		[Test]
 		public void TermsOfTypeInt()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(ff => ff.

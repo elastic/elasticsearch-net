@@ -51,7 +51,7 @@ namespace Nest
 			return this;
 		}
 
-		ElasticSearchPathInfo<IndexQueryString> IPathInfo<IndexQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<IndexQueryString> IPathInfo<IndexQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			//registering a percolator in elasticsearch < 1.0 is actually indexing a document in a 
 			//special _percolator index where the passed index is actually a type

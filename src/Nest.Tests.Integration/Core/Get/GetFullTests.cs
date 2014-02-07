@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Core.Get
 	[TestFixture]
 	public class GetFullTests : IntegrationTests
 	{
-		private void DefaultAssertations(IGetResponse<ElasticSearchProject> result)
+		private void DefaultAssertations(IGetResponse<ElasticsearchProject> result)
 		{
 			result.IsValid.Should().BeTrue();
 			result.Id.Should().Be("1");
@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetSimple()
 		{
-			var result = this._client.Get<ElasticSearchProject>(1);
+			var result = this._client.Get<ElasticsearchProject>(1);
 			this.DefaultAssertations(result);
 			
 			
@@ -37,14 +37,14 @@ namespace Nest.Tests.Integration.Core.Get
 		[Test]
 		public void GetWithPathInfo()
 		{
-			var result = this._client.Get<ElasticSearchProject>(1, ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
+			var result = this._client.Get<ElasticsearchProject>(1, ElasticsearchConfiguration.DefaultIndex, "elasticsearchprojects");
 			this.DefaultAssertations(result);
 		}
 		
 		[Test]
 		public void GetUsingDescriptorWithTypeAndFields()
 		{
-			var result = this._client.Get<ElasticSearchProject>(g => g
+			var result = this._client.Get<ElasticsearchProject>(g => g
 				.Index(ElasticsearchConfiguration.DefaultIndex)
 				.Type("elasticsearchprojects")
 				.Id(1)
@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Core.Get
 		public void GetMissing()
 		{
 			int doesNotExistId = 1234567;
-			var result = this._client.Get<ElasticSearchProject>(doesNotExistId);
+			var result = this._client.Get<ElasticsearchProject>(doesNotExistId);
 			result.Exists.Should().BeFalse();
 		}
 	}

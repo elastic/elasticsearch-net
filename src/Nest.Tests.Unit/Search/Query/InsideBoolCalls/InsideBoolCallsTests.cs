@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.InsideBoolCalls
 		[Test]
 		public void InsideMust()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			 .From(0)
 			 .Take(10)
 			 .Query(q => q
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Search.Query.InsideBoolCalls
 		[Test]
 		public void InsideShould()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
 			  .Query(q => q
@@ -45,7 +45,7 @@ namespace Nest.Tests.Unit.Search.Query.InsideBoolCalls
 		[Test]
 		public void InsideMustNot()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
 			  .Query(q => q

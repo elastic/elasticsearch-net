@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void CustomScoreQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q=>q
 					.CustomScore(cs=>cs
 						.Script("doc['num1'].value > 1")
@@ -31,7 +31,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void CustomScoreQueryParams()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q => q
 					.CustomScore(cs => cs
 						.Script("doc['num1'].value > myvar")

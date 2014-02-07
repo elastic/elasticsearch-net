@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		[Test]
 		public void BasePathMakesItIntoReuqest()
 		{
-			var result = Client.Get<ElasticSearchProject>(g=>g.Id(1));
+			var result = Client.Get<ElasticsearchProject>(g=>g.Id(1));
 			var url = result.ConnectionStatus.RequestUrl;
 			url.Should().Be("http://localhost:9200/my-api-token/nest_test_data/elasticsearchprojects/1");
 		}

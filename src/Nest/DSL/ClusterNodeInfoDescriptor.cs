@@ -13,7 +13,7 @@ namespace Nest
 	public partial class ClusterNodeInfoDescriptor : NodeIdOptionalDescriptor<ClusterNodeInfoDescriptor, ClusterNodeInfoQueryString>
 		, IPathInfo<ClusterNodeInfoQueryString>
 	{
-		ElasticSearchPathInfo<ClusterNodeInfoQueryString> IPathInfo<ClusterNodeInfoQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<ClusterNodeInfoQueryString> IPathInfo<ClusterNodeInfoQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<ClusterNodeInfoQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

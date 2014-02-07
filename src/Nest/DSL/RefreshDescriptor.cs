@@ -15,7 +15,7 @@ namespace Nest
 	public partial class RefreshDescriptor : IndicesOptionalPathDescriptor<RefreshDescriptor, RefreshQueryString>
 		, IPathInfo<RefreshQueryString>
 	{
-		ElasticSearchPathInfo<RefreshQueryString> IPathInfo<RefreshQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<RefreshQueryString> IPathInfo<RefreshQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<RefreshQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

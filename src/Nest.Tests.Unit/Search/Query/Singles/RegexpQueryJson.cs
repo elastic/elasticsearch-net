@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void RegexpQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q
@@ -23,10 +23,10 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void RegexpQueryStatic()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Query(Query<ElasticSearchProject>.Regexp(r=>r.OnField(p=>p.Name).Value("ab?")));
+				.Query(Query<ElasticsearchProject>.Regexp(r=>r.OnField(p=>p.Name).Value("ab?")));
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ regexp: { name : { value : ""ab?"" } }}}";
@@ -36,7 +36,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void RegexpWithBoost()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q

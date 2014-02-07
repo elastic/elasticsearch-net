@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void UpsertUsingScript()
 		{
-			var s = new UpdateDescriptor<ElasticSearchProject, ElasticSearchProject>()
+			var s = new UpdateDescriptor<ElasticsearchProject, ElasticsearchProject>()
 			  .Script("ctx._source.counter += count")
 			  .Params(p => p
 				  .Add("count", 4)
@@ -43,10 +43,10 @@ namespace Nest.Tests.Unit.Core.Update
 		[Test]
 		public void UpdateUsingPartial()
 		{
-			var originalProject = new ElasticSearchProject { Id = 1, Name = "NeST", Country = "UK" };
+			var originalProject = new ElasticsearchProject { Id = 1, Name = "NeST", Country = "UK" };
 			var partialUpdate = new PartialElasticSearchProject { Name = "NEST", Country = "Netherlands" };
 
-			var s = new UpdateDescriptor<ElasticSearchProject, PartialElasticSearchProject>()
+			var s = new UpdateDescriptor<ElasticsearchProject, PartialElasticSearchProject>()
 				.Object(originalProject) //only used to infer the id
 				.Document(partialUpdate); //the actual partial update statement;
 

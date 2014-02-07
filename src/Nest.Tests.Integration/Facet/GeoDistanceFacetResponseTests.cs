@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Facet
 		[Test]
 		public void SimpleGeoFacet()
 		{
-			var queryResults = this.SearchRaw<ElasticSearchProject>(
+			var queryResults = this.SearchRaw<ElasticsearchProject>(
 				@"
 				{ 
 					""query"" : { ""match_all"" : { } },

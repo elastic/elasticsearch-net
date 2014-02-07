@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void FlushTyped()
 		{
-			var r = this._client.Flush(f=>f.Index<ElasticSearchProject>());
+			var r = this._client.Flush(f=>f.Index<ElasticsearchProject>());
 			Assert.True(r.OK);
 		}
 		[Test]
@@ -56,7 +56,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void FlushTypedRefresh()
 		{
-			var r = this._client.Flush(f=>f.Index<ElasticSearchProject>().Refresh());
+			var r = this._client.Flush(f=>f.Index<ElasticsearchProject>().Refresh());
 			Assert.True(r.OK);
 		}
 	}

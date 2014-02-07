@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void BoolFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(filter=>filter
@@ -57,7 +57,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void BoolFilterOverload()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(f => f.MatchAll() & f.Missing(p => p.LOC))
@@ -85,7 +85,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void BoolFilterOverloadConditional()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(f => (f.MatchAll() && f.Missing(p => p.LOC)) || f.Term("x","y"))
@@ -114,10 +114,10 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void BoolFilterOverloadStatic()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(Filter<dynamic>.MatchAll() && Filter<ElasticSearchProject>.Missing(p => p.LOC))
+				.Filter(Filter<dynamic>.MatchAll() && Filter<ElasticsearchProject>.Missing(p => p.LOC))
 			;
 
 			var json = TestElasticClient.Serialize(s);
@@ -144,7 +144,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void BoolFilterWithNameAndCache()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(filter => filter

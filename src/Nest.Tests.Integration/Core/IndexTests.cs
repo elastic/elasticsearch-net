@@ -17,7 +17,7 @@ namespace Nest.Tests.Integration.Core
 		public void IndexUsingCreateFlag()
 		{
 			// Document to be indexed.
-			var doc = new ElasticSearchProject
+			var doc = new ElasticsearchProject
 			{
 				Country = "Mozambique",
 				Followers = new List<Person>(),
@@ -26,11 +26,11 @@ namespace Nest.Tests.Integration.Core
 			};
 
 			// Index the document
-			var indexResult = this._client.Index<ElasticSearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			var indexResult = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
 			indexResult.IsValid.Should().BeTrue();
 
 			// Grab the indexed document.
-			var foundDoc = this._client.Source<ElasticSearchProject>(doc.Id);
+			var foundDoc = this._client.Source<ElasticsearchProject>(doc.Id);
 
 			// Check that the document was successfully indexed.
 			Assert.NotNull(foundDoc);
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Core
 			Assert.AreEqual(doc.Name, foundDoc.Name);
 
 			// Now try to index the document again while using the Create Flag
-			var response = this._client.Index<ElasticSearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
+			var response = this._client.Index<ElasticsearchProject>(doc, i => i.OpType(OpTypeOptions.Create));
 
 			// Make sure the index request failed with HTTP status 409 since document with same id already exists.
 			Assert.False(response.OK);

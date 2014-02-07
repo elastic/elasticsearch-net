@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldNotJoinIntoStrictShouldQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Strict().Bool(
 						bf=>bf.Should(
@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldNotJoinIntoShouldQueryWithMinimumMatch()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Bool(
 						bf => bf.Should(
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldNotJoinIntoShouldQueryWithMinimumMatchPercentage()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Bool(
 						bf => bf.Should(
@@ -58,7 +58,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldJoinIntoNonStrictShouldQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Bool(
 						bf => bf.Should(
@@ -75,7 +75,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldJoinIntoMustQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Bool(
 						bf => bf.Must(
@@ -90,7 +90,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldJoinMustNotIntoMustQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Bool(
 						bf => bf.Must(
@@ -106,7 +106,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldNotJoinMustNotIntoMustStrictQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Strict().Bool(
 						bf => bf.Must(
@@ -122,7 +122,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldNotJoinMustNotIntoMustStrictQueryInverse()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  !q.Term(f => f.Name, "blah2")
 				  && q.Strict().Bool(
@@ -138,7 +138,7 @@ namespace Nest.Tests.Unit.Search.Query.BoolQueryMerges
 		[Test]
 		public void ShouldNotJoinIntoStrictMustQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .Query(q =>
 				  q.Strict().Bool(
 						bf => bf.Must(

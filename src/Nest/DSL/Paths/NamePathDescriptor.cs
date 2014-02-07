@@ -32,13 +32,13 @@ namespace Nest
 			return (P)this;
 		}
 
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
+		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
 			if (this._Name.IsNullOrEmpty())
 				throw new DslException("missing Name()");
 
-			var pathInfo = new ElasticSearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<K>()
 			{
 				Name = this._Name
 			};

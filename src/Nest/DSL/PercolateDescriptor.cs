@@ -41,7 +41,7 @@ namespace Nest
 			return this;
 		}
 
-		ElasticSearchPathInfo<PercolateQueryString> IPathInfo<PercolateQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<PercolateQueryString> IPathInfo<PercolateQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<PercolateQueryString>(settings, this._QueryString);
 			//.NET does not like sending data using get so we use POST

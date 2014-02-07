@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void TopChildrenQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void NestedQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void IndicesAlternateChildQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -59,7 +59,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void IndicesQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -75,7 +75,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void IndicesNoMatchQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -91,7 +91,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void IndicesNoMatchAlternateQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -107,7 +107,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void HasChildQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -124,7 +124,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void FilteredQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -141,7 +141,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void DismaxQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -159,7 +159,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void CustomScoreQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -176,7 +176,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void CustomBoostFactorQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -193,7 +193,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void ConstantScore()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q
@@ -210,7 +210,7 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
     [Test]
     public void BoostingQuery()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q

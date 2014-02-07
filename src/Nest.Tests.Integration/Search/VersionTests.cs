@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void WithVersion()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s=>s
+			var queryResults = this._client.Search<ElasticsearchProject>(s=>s
 				.Version()
 				.MatchAll() //not explicitly needed.
 			);
@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration.Search
 		[Test]
 		public void NoVersion()
 		{
-			var queryResults = this._client.Search<ElasticSearchProject>(s => s
+			var queryResults = this._client.Search<ElasticsearchProject>(s => s
 				   .Version(false)
 				   .MatchAll() //not explicitly needed.
 			   );

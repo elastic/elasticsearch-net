@@ -13,11 +13,11 @@ namespace Nest.Tests.Unit.Core.Bulk
 		public void BulkOperations()
 		{
 			var result = this._client.Bulk(b => b
-				.Index<ElasticSearchProject>(i => i.Object(new ElasticSearchProject {Id = 2}))
-				.Create<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 3 }))
-				.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
-				.Update<ElasticSearchProject, object>(i => i
-					.Object(new ElasticSearchProject { Id = 3 })
+				.Index<ElasticsearchProject>(i => i.Object(new ElasticsearchProject {Id = 2}))
+				.Create<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 3 }))
+				.Delete<ElasticsearchProject>(i => i.Object(new ElasticsearchProject { Id = 4 }))
+				.Update<ElasticsearchProject, object>(i => i
+					.Object(new ElasticsearchProject { Id = 3 })
 					.Document(new { name = "NEST"})
 				)
 			);
@@ -28,13 +28,13 @@ namespace Nest.Tests.Unit.Core.Bulk
 		public void BulkUpdateDetails()
 		{
 			var result = this._client.Bulk(b => b
-				.Update<ElasticSearchProject, object>(i => i
-					.Object(new ElasticSearchProject { Id = 3 })
+				.Update<ElasticsearchProject, object>(i => i
+					.Object(new ElasticsearchProject { Id = 3 })
 					.Document(new { name = "NEST" })
 					.RetriesOnConflict(4)
 				)
-				.Index<ElasticSearchProject>(i=>i
-					.Object(new ElasticSearchProject { Name = "yodawg", Id = 90})
+				.Index<ElasticsearchProject>(i=>i
+					.Object(new ElasticsearchProject { Name = "yodawg", Id = 90})
 					.Percolate("percolateme")
 				)
 			);

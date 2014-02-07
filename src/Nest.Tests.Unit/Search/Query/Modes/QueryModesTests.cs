@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Query.Modes
 		{
 			Assert.Throws<DslException>(() =>
 			{
-				var s = new SearchDescriptor<ElasticSearchProject>()
+				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Size(10)
 					.Query(ff => ff.Strict().Term(p => p.Name, ""));
@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Search.Query.Modes
 			var mi = MethodInfo.GetCurrentMethod();
 			Assert.DoesNotThrow(() =>
 			{
-				var s = new SearchDescriptor<ElasticSearchProject>()
+				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Size(10)
 					.Query(ff => ff.Verbatim().Term(p => p.Name, ""));

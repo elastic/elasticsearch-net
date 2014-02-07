@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void ScriptFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(filter=>filter
 					.Script(sc=>sc
 						.Script("doc['num1'].value > 1")
@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void ScriptParamLangFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(filter => filter
 					.Script(sc => sc
 						.Script("doc['num1'].value > param1")
@@ -55,7 +55,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		[Test]
 		public void ScriptFilterParamsAndCache()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>().From(0).Size(10)
+			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Filter(filter => filter.Cache(true)
 					.Script(sc => sc
 						.Script("doc['num1'].value > param1")

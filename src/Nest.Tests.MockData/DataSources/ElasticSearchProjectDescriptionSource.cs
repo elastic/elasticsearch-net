@@ -6,7 +6,7 @@ using AutoPoco.Engine;
 
 namespace Nest.Tests.MockData.DataSources
 {
-	public class ElasticSearchProjectDescriptionSource : DatasourceBase<String>
+	public class ElasticsearchProjectDescriptionSource : DatasourceBase<String>
 	{
 		private Random mRandom = new Random(1337);
 

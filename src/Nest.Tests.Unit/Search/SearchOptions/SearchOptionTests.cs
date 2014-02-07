@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestFromSize()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10);
 			var json = TestElasticClient.Serialize(s);
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestSkipTake()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Skip(0)
 				.Take(10);
 			var json = TestElasticClient.Serialize(s);
@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestBasics()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Skip(0)
 				.Take(10)
 				.Explain()
@@ -47,7 +47,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestBasicsIndicesBoost()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Skip(0)
 				.Take(10)
 				.Explain()
@@ -72,67 +72,67 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestPreference()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Preference("_primary");
-			var result = this._client.Search<ElasticSearchProject>(ss=>s);
+			var result = this._client.Search<ElasticsearchProject>(ss=>s);
 			StringAssert.Contains("preference=_primary", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnPrimary()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.ExecuteOnPrimary();
-			var result = this._client.Search<ElasticSearchProject>(ss=>s);
+			var result = this._client.Search<ElasticsearchProject>(ss=>s);
 			StringAssert.Contains("preference=_primary", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnPrimaryFirst()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.ExecuteOnPrimaryFirst();
-			var result = this._client.Search<ElasticSearchProject>(ss=>s);
+			var result = this._client.Search<ElasticsearchProject>(ss=>s);
 			StringAssert.Contains("preference=_primary_first", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnLocalShard()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.ExecuteOnLocalShard();
-			var result = this._client.Search<ElasticSearchProject>(ss=>s);
+			var result = this._client.Search<ElasticsearchProject>(ss=>s);
 			StringAssert.Contains("preference=_local", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnNode()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.ExecuteOnNode("somenode");
-			var result = this._client.Search<ElasticSearchProject>(ss=>s);
+			var result = this._client.Search<ElasticsearchProject>(ss=>s);
 			StringAssert.Contains("preference=_only_node%3Asomenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestExecuteOnPreferredNode()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.ExecuteOnPreferredNode("somenode");
-			var result = this._client.Search<ElasticSearchProject>(ss=>s);
+			var result = this._client.Search<ElasticsearchProject>(ss=>s);
 			StringAssert.Contains("preference=_prefer_node%3Asomenode", result.ConnectionStatus.RequestUrl);
 		}
 		[Test]
 		public void TestFields()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name);
@@ -145,7 +145,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestFieldsByName()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Fields("id", "name");
@@ -159,7 +159,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
         [Test]
         public void TestPartialFields()
         {
-            var s = new SearchDescriptor<ElasticSearchProject>()
+            var s = new SearchDescriptor<ElasticsearchProject>()
                 .PartialFields(x => x.PartialField("partial1").Include("id", "name").Exclude("number"));
             var json = TestElasticClient.Serialize(s);
             var expected = @"{
@@ -176,7 +176,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
         [Test]
         public void TestManyPartialFields()
         {
-            var s = new SearchDescriptor<ElasticSearchProject>()
+            var s = new SearchDescriptor<ElasticsearchProject>()
                 .PartialFields(x => x.PartialField("partial1").Include("id"), x => x.PartialField("partial2").Exclude("id"));
             var json = TestElasticClient.Serialize(s);
             var expected = @"{
@@ -195,7 +195,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestSort()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name)
@@ -212,7 +212,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestSortDescending()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Fields(e => e.Id, e => e.Name)
@@ -232,7 +232,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestSuperSimpleQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Query(q => q);
@@ -246,7 +246,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestRawQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.QueryRaw(@"{ raw : ""query""}");
@@ -257,7 +257,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestRawFilter()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.FilterRaw(@"{ raw : ""query""}");
@@ -268,7 +268,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 		[Test]
 		public void TestRawFilterAndQuery()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.FilterRaw(@"{ raw : ""query""}")

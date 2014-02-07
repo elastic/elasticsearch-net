@@ -15,7 +15,7 @@ namespace Nest.Tests.MockData
 	{
 		private static IEnumerable<Person> _People { get; set; }
 		private static IEnumerable<BoolTerm> _BoolTerms { get; set; }
-		private static IEnumerable<ElasticSearchProject> _Data { get; set; }
+		private static IEnumerable<ElasticsearchProject> _Data { get; set; }
 		public static IGenerationSession _Session { get; set; }
 		public static IGenerationSession Session
 		{
@@ -45,7 +45,7 @@ namespace Nest.Tests.MockData
 						.Setup(c => c.LastName).Use<LastNameSource>()
 						.Setup(c => c.DateOfBirth).Use<DateOfBirthSource>()
 						.Setup(c => c.PlaceOfBirth).Use<GeoLocationSource>();
-					x.Include<ElasticSearchProject>()
+					x.Include<ElasticsearchProject>()
 						.Setup(c => c.Id).Use<IntegerIdSource>()
 						.Setup(c => c.LongValue).Use<LongSource>()
 						.Setup(c => c.FloatValue).Use<FloatSource>()
@@ -56,10 +56,10 @@ namespace Nest.Tests.MockData
 						.Setup(c => c.LOC).Use<LOCSource>()
 						.Setup(c => c.Country).Use<CountrySource>()
 						.Setup(c => c.Origin).Use<GeoLocationSource>()
-						.Setup(c => c.Name).Use<ElasticSearchProjectsDataSource>()
+						.Setup(c => c.Name).Use<ElasticsearchProjectsDataSource>()
 						.Setup(c => c.Followers).Value(new List<Person>())
 						.Setup(c => c.StartedOn).Use<DateOfBirthSource>()
-						.Setup(c => c.Content).Use<ElasticSearchProjectDescriptionSource>();
+						.Setup(c => c.Content).Use<ElasticsearchProjectDescriptionSource>();
 				});
 				_Session = factory.CreateSession();
 				return _Session;
@@ -90,16 +90,16 @@ namespace Nest.Tests.MockData
 			}
 		}
 
-		public static IEnumerable<ElasticSearchProject> Data
+		public static IEnumerable<ElasticsearchProject> Data
 		{
 			get
 			{
 				if (_Data == null)
 				{
 					// Get a single user
-					var count = ElasticSearchProjectsDataSource.Count();
+					var count = ElasticsearchProjectsDataSource.Count();
 					var users = Session.List<Person>(100).Get();
-					_Data = Session.List<ElasticSearchProject>(count).Get();
+					_Data = Session.List<ElasticsearchProject>(count).Get();
 					var i = 0;
 					foreach (var p in _Data)
 					{

@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Indices
 	[TestFixture]
 	public class IndicesTest : IntegrationTests 
 	{
-		protected void TestDefaultAssertions(QueryResponse<ElasticSearchProject> queryResponse)
+		protected void TestDefaultAssertions(QueryResponse<ElasticsearchProject> queryResponse)
 		{
 			Assert.True(queryResponse.IsValid);
 			Assert.NotNull(queryResponse.ConnectionStatus);
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void GetIndexSettingsSimple()
 		{
-			var r = this._client.GetIndexSettings(i=>i.Index<ElasticSearchProject>());
+			var r = this._client.GetIndexSettings(i=>i.Index<ElasticsearchProject>());
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Settings);
 			Assert.GreaterOrEqual(r.Settings.NumberOfReplicas, 0);
@@ -251,7 +251,7 @@ namespace Nest.Tests.Integration.Indices
 					.Add("term_index_interval", 128)
 					.Add("search.slowlog.threshold.query.warn", "2s")
 				)
-				.AddMapping<ElasticSearchProject>(m => m
+				.AddMapping<ElasticsearchProject>(m => m
 					.MapFromAttributes()
 					.NumericDetection()
 					.DateDetection()
@@ -288,19 +288,19 @@ namespace Nest.Tests.Integration.Indices
 		public void PutMapping()
 		{
 			var fieldName = Guid.NewGuid().ToString();
-			var mapping = this._client.GetMapping<ElasticSearchProject>().Mapping;
+			var mapping = this._client.GetMapping<ElasticsearchProject>().Mapping;
 			var property = new StringMapping
 			{
 				Index = FieldIndexOption.not_analyzed
 			};
 			mapping.Properties.Add(fieldName, property);
 
-			var response = this._client.Map<ElasticSearchProject>(m=>m.InitializeUsing(mapping));
+			var response = this._client.Map<ElasticsearchProject>(m=>m.InitializeUsing(mapping));
 
 			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
 			Assert.IsTrue(response.OK, response.ConnectionStatus.ToString());
 
-			mapping = this._client.GetMapping(gm => gm.Index<ElasticSearchProject>().Type<ElasticSearchProject>()).Mapping;
+			mapping = this._client.GetMapping(gm => gm.Index<ElasticsearchProject>().Type<ElasticsearchProject>()).Mapping;
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
 		}
 

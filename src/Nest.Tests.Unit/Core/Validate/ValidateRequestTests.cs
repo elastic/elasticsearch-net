@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Core.Validate
 		[Test]
 		public void Inferred()
 		{
-			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+			var result = this._client.Validate<ElasticsearchProject>(vq=>vq
 				.Query(q=>q
 					.MatchAll()	
 				)
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Core.Validate
         [Test]
         public void AllIndices()
 		{
-			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+			var result = this._client.Validate<ElasticsearchProject>(vq=>vq
 				.AllIndices()
 				.Query(q=>q
 					.MatchAll()
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Core.Validate
         [Test]
 		public void AllIndicesAllTypes()
 		{
-			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+			var result = this._client.Validate<ElasticsearchProject>(vq=>vq
 				.AllIndices()
                 .AllTypes()
 				.Query(q=>q
@@ -60,7 +60,7 @@ namespace Nest.Tests.Unit.Core.Validate
 		[Test]
 		public void CustomIndex()
 		{
-			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+			var result = this._client.Validate<ElasticsearchProject>(vq=>vq
 				.Index("myindex")
 				.AllTypes()
 				.Query(q=>q
@@ -76,7 +76,7 @@ namespace Nest.Tests.Unit.Core.Validate
 		[Test]
 		public void CustomIndexAndType()
 		{
-			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+			var result = this._client.Validate<ElasticsearchProject>(vq=>vq
 				.Index("myindex")
 				.Type("mytype")
 				.Query(q=>q
@@ -93,7 +93,7 @@ namespace Nest.Tests.Unit.Core.Validate
 		[Test]
 		public void InferredForceQueryString()
 		{
-			var result = this._client.Validate<ElasticSearchProject>(vq=>vq
+			var result = this._client.Validate<ElasticsearchProject>(vq=>vq
 				.Source("{ match_all : {} }")
 			);
 			Assert.NotNull(result, "PutWarmer result should not be null");

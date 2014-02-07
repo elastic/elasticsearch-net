@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Search.SearchType
 		[Test]
 		public void SearchTypeDoesNotPolluteQueryObject()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.MatchAll()

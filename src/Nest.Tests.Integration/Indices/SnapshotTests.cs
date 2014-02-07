@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void SnapshotTyped()
 		{
-			var r = this._client.Snapshot(s=>s.Index<ElasticSearchProject>());
+			var r = this._client.Snapshot(s=>s.Index<ElasticsearchProject>());
 			Assert.True(r.OK);
 		}
 	}

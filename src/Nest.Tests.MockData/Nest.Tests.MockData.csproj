@@ -81,8 +81,8 @@
     <Compile Include="DataSources\IncrementalNameSource.cs" />
     <Compile Include="DataSources\FloatArraySource.cs" />
     <Compile Include="DataSources\IntSource.cs" />
-    <Compile Include="DataSources\ElasticSearchProjectDescriptionSource.cs" />
-    <Compile Include="DataSources\ElasticSearchProjectsDataSource.cs" />
+    <Compile Include="DataSources\ElasticsearchProjectDescriptionSource.cs" />
+    <Compile Include="DataSources\ElasticsearchProjectsDataSource.cs" />
     <Compile Include="DataSources\GeoLocationSource.cs" />
     <Compile Include="DataSources\IntListSource.cs" />
     <Compile Include="DataSources\LOCSource.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="DataSources\FloatSource.cs" />
     <Compile Include="Domain\BoolTerm.cs" />
     <Compile Include="Domain\GeoShape.cs" />
-    <Compile Include="Domain\ElasticSearchProject.cs" />
+    <Compile Include="Domain\ElasticsearchProject.cs" />
     <Compile Include="Domain\GeoLocation.cs" />
     <Compile Include="Domain\Person.cs" />
     <Compile Include="Domain\Product.cs" />

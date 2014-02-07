@@ -21,11 +21,11 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void CloseAndOpenIndexTyped()
 		{
-			var r = this._client.CloseIndex<ElasticSearchProject>();
+			var r = this._client.CloseIndex<ElasticsearchProject>();
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			r = this._client.OpenIndex<ElasticSearchProject>();
+			r = this._client.OpenIndex<ElasticsearchProject>();
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			var results = this.SearchRaw<ElasticSearchProject>(
+			var results = this.SearchRaw<ElasticsearchProject>(
 				@" { ""query"" : {
 						    ""match_all"" : { }
 				} }"

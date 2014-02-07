@@ -20,9 +20,9 @@ namespace Nest.Tests.Integration.Warmers
 				.NumberOfReplicas(0)
 				.NumberOfShards(1)
 				.AddWarmer(wd => wd
-					.Type<ElasticSearchProject>()
+					.Type<ElasticsearchProject>()
 					.WarmerName("warmer_createindexwithwarmer")
-					.Search<ElasticSearchProject>(s => s
+					.Search<ElasticsearchProject>(s => s
 						.Query(q => q
 							.Term(p => p.Name, "strange-value")
 						)

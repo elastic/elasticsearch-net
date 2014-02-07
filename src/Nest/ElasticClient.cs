@@ -44,7 +44,7 @@ namespace Nest
 
 		private R Dispatch<D, Q, R>(
 			Func<D, D> selector
-			, Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
+			, Func<ElasticsearchPathInfo<Q>, D, ConnectionStatus> dispatch
 			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			)
@@ -59,7 +59,7 @@ namespace Nest
 
 		private R Dispatch<D, Q, R>(
 			D descriptor
-			, Func<ElasticSearchPathInfo<Q>, D, ConnectionStatus> dispatch
+			, Func<ElasticsearchPathInfo<Q>, D, ConnectionStatus> dispatch
 			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			) 
@@ -74,7 +74,7 @@ namespace Nest
 
 		internal Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
-			, Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
 			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			)
@@ -90,7 +90,7 @@ namespace Nest
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor 
-			, Func<ElasticSearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
 			, Func<ConnectionStatus, D, R> resultSelector = null
 			, bool allow404 = false
 			) 

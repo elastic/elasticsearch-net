@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Query.UpdateQuery
 		[Test]
 		public void FilteredQueryCombines()
 		{
-			var s = new ValidateQueryDescriptor<ElasticSearchProject>()
+			var s = new ValidateQueryDescriptor<ElasticsearchProject>()
 				.AllIndices()
 				.AllTypes()
 				.Query(q=>q
@@ -26,14 +26,14 @@ namespace Nest.Tests.Unit.Search.Query.UpdateQuery
 		[Test]
 		public void FilteredQueryCombinesUsingStatic()
 		{
-			var s = new ValidateQueryDescriptor<ElasticSearchProject>()
+			var s = new ValidateQueryDescriptor<ElasticsearchProject>()
 				.AllIndices()
 				.AllTypes()
 				.Query(q=>q
 					.Filtered(fq =>
 						fq.Filter(ff =>
-							Filter<ElasticSearchProject>.Term(f => f.Name, "foo")
-							|| Filter<ElasticSearchProject>.Term(f => f.Name, "bar")
+							Filter<ElasticsearchProject>.Term(f => f.Name, "foo")
+							|| Filter<ElasticsearchProject>.Term(f => f.Name, "bar")
 						)
 					)
 				);

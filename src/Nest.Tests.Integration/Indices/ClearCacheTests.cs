@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Indices
 		public void test_clear_cache_generic_specific()
 		{
 			var client = this._client;
-			var status = client.ClearCache(cc=>cc.Index<ElasticSearchProject>().Filter().Recycler());
+			var status = client.ClearCache(cc=>cc.Index<ElasticsearchProject>().Filter().Recycler());
 			Assert.True(status.IsValid);
 			Assert.True(status.OK);
 		}

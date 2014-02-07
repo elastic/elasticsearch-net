@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Indices
 		[Test]
 		public void RefreshTyped()
 		{
-			var r = this._client.Refresh(rr => rr.Index<ElasticSearchProject>());
+			var r = this._client.Refresh(rr => rr.Index<ElasticsearchProject>());
 			Assert.True(r.OK);
 		}
 	}

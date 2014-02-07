@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void DateHistogram()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -36,7 +36,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void DateHistogramRounding()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -60,7 +60,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void DateHistogramTimeZone()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -86,7 +86,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void DateHistogramTimeZones()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")

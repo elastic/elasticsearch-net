@@ -16,7 +16,7 @@ namespace Nest
 		, IPathInfo<IndexQueryString>
 		where T : class
 	{
-		ElasticSearchPathInfo<IndexQueryString> IPathInfo<IndexQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<IndexQueryString> IPathInfo<IndexQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<IndexQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = this._Id.IsNullOrEmpty() ? PathInfoHttpMethod.POST : PathInfoHttpMethod.PUT;

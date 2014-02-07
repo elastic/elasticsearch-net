@@ -75,14 +75,14 @@ namespace Nest
 			this._Object = @object;
 			return (P)this;
 		}
-		internal virtual ElasticSearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
+		internal virtual ElasticsearchPathInfo<K> ToPathInfo<K>(IConnectionSettings settings, K queryString)
 			where K : FluentQueryString<K>, new()
 		{
 			var inferrer = new ElasticInferrer(settings);
 			var index = this._Index != null ? inferrer.IndexName(this._Index) : inferrer.IndexName<T>();
 			var type = this._Type != null ? inferrer.TypeName(this._Type) : inferrer.TypeName<T>();
 			var id = this._Id ?? inferrer.Id(this._Object);
-			var pathInfo = new ElasticSearchPathInfo<K>()
+			var pathInfo = new ElasticsearchPathInfo<K>()
 			{
 				Index = index,
 				Type = type,

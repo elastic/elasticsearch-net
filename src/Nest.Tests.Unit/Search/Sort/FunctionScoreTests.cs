@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Sort
         [Test]
         public void TestRandomSortWithoutSeed()
         {
-            var s = new SearchDescriptor<ElasticSearchProject>()
+            var s = new SearchDescriptor<ElasticsearchProject>()
                 .Query(q => q.FunctionScore(
                         fs => fs.RandomScore()
                     )
@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.Search.Sort
         public void TestRandomSortWithSeed()
         {
             var seed = 222222;
-            var s = new SearchDescriptor<ElasticSearchProject>()
+            var s = new SearchDescriptor<ElasticsearchProject>()
                 .Query(q => q.FunctionScore(
                         fs => fs.RandomScore(seed)
                     )
@@ -56,7 +56,7 @@ namespace Nest.Tests.Unit.Search.Sort
         [Test]
         public void TestScriptScore()
         {
-            var s = new SearchDescriptor<ElasticSearchProject>()
+            var s = new SearchDescriptor<ElasticsearchProject>()
                 .Query(q => q.FunctionScore(
                         fs => fs.ScriptScore(ss => ss.Script("_score / pow(param1, param2)").Params(p => p.Add("param1", 1.75).Add("param2", 4)).Lang(Lang.mvel)
                         )
@@ -84,7 +84,7 @@ namespace Nest.Tests.Unit.Search.Sort
         [Test]
         public void TestScriptScoreWithFilter()
         {
-            var s = new SearchDescriptor<ElasticSearchProject>()
+            var s = new SearchDescriptor<ElasticsearchProject>()
                 .Query(q => q.FunctionScore(
                         fs => fs.Functions(
                                 func=> func.ScriptScore( 
@@ -129,7 +129,7 @@ namespace Nest.Tests.Unit.Search.Sort
         [Test]
         public void TestBoostFactorWithFilter()
         {
-            var s = new SearchDescriptor<ElasticSearchProject>().Query(
+            var s = new SearchDescriptor<ElasticsearchProject>().Query(
                 q => q.FunctionScore(
                     fs => fs.Functions(
                         f=>f.BoostFactor(2)

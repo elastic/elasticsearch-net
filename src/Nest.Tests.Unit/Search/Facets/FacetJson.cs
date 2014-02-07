@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void QueryFacetGlobal()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -39,7 +39,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void QueryFacetScoped()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -69,7 +69,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void QueryFacetNested()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")

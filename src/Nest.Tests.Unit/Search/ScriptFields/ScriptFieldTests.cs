@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search.ScriptFields
 		[Test]
 		public void TestScriptFields()
 		{
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.ScriptFields(sf=>sf

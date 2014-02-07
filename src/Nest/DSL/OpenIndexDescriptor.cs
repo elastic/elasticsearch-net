@@ -15,7 +15,7 @@ namespace Nest
 	public partial class OpenIndexDescriptor : IndexPathDescriptorBase<OpenIndexDescriptor, OpenIndexQueryString>
 		, IPathInfo<OpenIndexQueryString>
 	{
-		ElasticSearchPathInfo<OpenIndexQueryString> IPathInfo<OpenIndexQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<OpenIndexQueryString> IPathInfo<OpenIndexQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<OpenIndexQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

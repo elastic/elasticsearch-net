@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void GeoShapeFilter()
 		{
 			//[13.0, 53.0], [14.0, 52.0]]
-			var s = new SearchDescriptor<ElasticSearchProject>()
+			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
 				.Filter(filter => filter

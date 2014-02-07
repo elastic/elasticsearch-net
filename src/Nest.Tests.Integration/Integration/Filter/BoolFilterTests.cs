@@ -11,7 +11,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 		[Test]
 		public void BoolFilter()
 		{
-			var results = this._client.Search<ElasticSearchProject>(s=>s
+			var results = this._client.Search<ElasticsearchProject>(s=>s
 				.From(0)
 				.Size(20)
 				.Fields(p=>p.Id, p=>p.Name, p=>p.LOC)
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 			// A known bug exisits in 0.90.0.0 causing this test to fail
 			//https://github.com/elasticsearch/elasticsearch/issues/2996
 
-			var totalInIndex = this._client.Count<ElasticSearchProject>(c=>c.Query(q=>q.MatchAll())).Count;
+			var totalInIndex = this._client.Count<ElasticsearchProject>(c=>c.Query(q=>q.MatchAll())).Count;
 			Assert.Less(results.Total, totalInIndex);
 		}
 	}

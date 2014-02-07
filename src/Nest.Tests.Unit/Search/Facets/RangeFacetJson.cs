@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestRangeFacet()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -64,7 +64,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestRangeDoubleFacet()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -103,7 +103,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestRangeDateFacet()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -133,7 +133,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestRangeDateFacetKeyScript()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -165,7 +165,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestRangeKeyScriptParams()
     {
-        var s = new SearchDescriptor<ElasticSearchProject>()
+        var s = new SearchDescriptor<ElasticsearchProject>()
             .From(0)
             .Size(10)
             .QueryRaw(@"{ raw : ""query""}")
@@ -206,7 +206,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestRangeDateFacetKeyField()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")

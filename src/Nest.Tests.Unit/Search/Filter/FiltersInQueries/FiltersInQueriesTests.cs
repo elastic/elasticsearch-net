@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Filter.FiltersInQueries
 		[Test]
 		public void FilteredQueryCombines()
 		{
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q.Filtered(fq =>
@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Search.Filter.FiltersInQueries
     [Test]
     public void ConstantScoreQueryCombines()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
         .Query(q => q

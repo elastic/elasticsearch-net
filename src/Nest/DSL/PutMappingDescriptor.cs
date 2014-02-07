@@ -230,7 +230,7 @@ namespace Nest
 			return this;
 		}
 
-		ElasticSearchPathInfo<PutMappingQueryString> IPathInfo<PutMappingQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<PutMappingQueryString> IPathInfo<PutMappingQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<PutMappingQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;

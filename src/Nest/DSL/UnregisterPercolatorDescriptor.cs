@@ -15,7 +15,7 @@ namespace Nest
 		: IndexNamePathDescriptor<UnregisterPercolatorDescriptor, DeleteQueryString>
 		, IPathInfo<DeleteQueryString>
 	{
-		ElasticSearchPathInfo<DeleteQueryString> IPathInfo<DeleteQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<DeleteQueryString> IPathInfo<DeleteQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			//deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
 			//special _percolator index where the passed index is actually a type

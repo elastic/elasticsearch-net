@@ -13,7 +13,7 @@ namespace ProtocolLoadTest
 		const int HTTP_PORT = 9200;
 		const int THRIFT_PORT = 9500;
 
-		// Total number of messages to send to ElasticSearch
+		// Total number of messages to send to elasticsearch
 		const int NUM_MESSAGES = 250000;
 
 		// Number of messages to buffer before sending via bulk API

@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Core.Scroll
 		[Test]
 		public void ScrollIdGoesInBody()
 		{
-			var result = this._client.Scroll<ElasticSearchProject>(s => s
+			var result = this._client.Scroll<ElasticsearchProject>(s => s
 				.Scroll("4m")
 				.ScrollId("INBODY")
 			);

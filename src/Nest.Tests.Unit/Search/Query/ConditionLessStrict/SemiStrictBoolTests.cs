@@ -16,11 +16,11 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		}
 		private readonly Criteria _c = new Criteria();
 
-		private void DoSemiStrictBoolQuery(Func<QueryDescriptor<ElasticSearchProject>, BaseQuery> query)
+		private void DoSemiStrictBoolQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query)
 		{
 			Assert.Throws<DslException>(() =>
 			{
-				var s = new SearchDescriptor<ElasticSearchProject>()
+				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Take(10)
 					.Query(query);
@@ -28,11 +28,11 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 				this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 			});
 		}
-		private void DoValidSemiStrictBoolQuery(Func<QueryDescriptor<ElasticSearchProject>, BaseQuery> query)
+		private void DoValidSemiStrictBoolQuery(Func<QueryDescriptor<ElasticsearchProject>, BaseQuery> query)
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var s = new SearchDescriptor<ElasticSearchProject>()
+				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Take(10)
 					.Query(query);
@@ -44,7 +44,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		{
 			Assert.DoesNotThrow(() =>
 			{
-				var s = new SearchDescriptor<ElasticSearchProject>()
+				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Take(10)
 					.Query(query);
@@ -81,8 +81,8 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		[Test]
 		public void BothStrictValidStatic()
 		{
-			this.DoValidSemiStrictBoolQueryStatic(Query<ElasticSearchProject>.Strict().Terms(p => p.Name, new string[] { "term1" }) && Query<ElasticSearchProject>.Strict().Term(p => p.Name, "term2"));
-			this.DoValidSemiStrictBoolQueryStatic(Query<ElasticSearchProject>.Strict().Terms(p => p.Name, new string[] { "term1" }) || Query<ElasticSearchProject>.Strict().Term(p => p.Name, "term2"));
+			this.DoValidSemiStrictBoolQueryStatic(Query<ElasticsearchProject>.Strict().Terms(p => p.Name, new string[] { "term1" }) && Query<ElasticsearchProject>.Strict().Term(p => p.Name, "term2"));
+			this.DoValidSemiStrictBoolQueryStatic(Query<ElasticsearchProject>.Strict().Terms(p => p.Name, new string[] { "term1" }) || Query<ElasticsearchProject>.Strict().Term(p => p.Name, "term2"));
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void TestGeoDistance()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -48,7 +48,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void GeoDistanceUsingHash()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -73,7 +73,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void GeoDistanceUsingHashAndOptions()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")
@@ -102,7 +102,7 @@ namespace Nest.Tests.Unit.Search.Facets
     [Test]
     public void GeoDistanceScript()
     {
-      var s = new SearchDescriptor<ElasticSearchProject>()
+      var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Size(10)
         .QueryRaw(@"{ raw : ""query""}")

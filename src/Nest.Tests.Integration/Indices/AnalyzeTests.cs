@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			//analyze text using elasticssearchprojects content field settings
 			var text = "this is a string with some spaces and stuff";
-			var r = this._client.Analyze(a=>a.Index<ElasticSearchProject>().Field<ElasticSearchProject>(p => p.Content).Text(text));
+			var r = this._client.Analyze(a=>a.Index<ElasticsearchProject>().Field<ElasticsearchProject>(p => p.Content).Text(text));
 			this._defaultAnalyzeAssertations(r);
 			Assert.False(r.Tokens.Count() == text.Split(new[] { ' ' }).Count());
 		}
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Indices
 			//analyze text using elasticssearchprojects content field but on a different index
 			var text = "this is a string with some spaces and stuff";
 			var index = ElasticsearchConfiguration.DefaultIndex;
-			var r = this._client.Analyze(a=>a.Field<ElasticSearchProject>(p => p.Content).Index(index).Text(text));
+			var r = this._client.Analyze(a=>a.Field<ElasticsearchProject>(p => p.Content).Index(index).Text(text));
 			this._defaultAnalyzeAssertations(r);
 			Assert.False(r.Tokens.Count() == text.Split(new []{' '}).Count());
 		}
