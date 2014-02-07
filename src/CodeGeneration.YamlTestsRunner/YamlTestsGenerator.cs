@@ -35,15 +35,15 @@ namespace CodeGeneration.YamlTestsRunner
 
 		public static YamlSpecification GetYamlTestSpecification(bool useCache = false)
 		{
-			var folders = GetTestFolders();
+			var folders = GetTestFolders(useCache);
 
 			var yamlFiles = new ConcurrentDictionary<string, IList<YamlDefinition>>();
 			using (var pbar = new ProgressBar(folders.Count, "Finding all the yaml files"))
 			Parallel.ForEach(folders, (folder) =>
 			{
-				var definitions = GetFolderFiles(folder);
+				var definitions = GetFolderFiles(folder, useCache);
 				yamlFiles.TryAdd(folder, definitions);
-				pbar.Tick(string.Format("Found {0} yaml test files in {1}", definitions, folder));
+				pbar.Tick(string.Format("Found {0} yaml test files in {1}", definitions.Count(), folder));
 			});
 			return new YamlSpecification
 			{
@@ -51,7 +51,7 @@ namespace CodeGeneration.YamlTestsRunner
 			};
 		}
 
-		private static IList<YamlDefinition> GetFolderFiles(string folder)
+		private static IList<YamlDefinition> GetFolderFiles(string folder, bool useCache = false)
 		{
 			var folderHtml = new WebClient().DownloadString(_listingUrl + "/" + folder);
 			var files = (from a in CQ.Create(folderHtml)[".js-directory-link"]
@@ -62,7 +62,7 @@ namespace CodeGeneration.YamlTestsRunner
 			var definitions = new ConcurrentBag<YamlDefinition>();
 			foreach (var file in files)
 			{
-				var yaml = new WebClient().DownloadString(_rawUrlPrefix + folder + "/" + file);
+				var yaml = GetYamlFile(folder, useCache, file);
 				definitions.Add(new YamlDefinition
 				{
 					FileName = file,
@@ -73,9 +73,27 @@ namespace CodeGeneration.YamlTestsRunner
 			return definitions.ToList();
 		}
 
-		private static List<string> GetTestFolders()
+		private static string GetYamlFile(string folder, bool useCache, string file)
 		{
-			var folderListingHtml = new WebClient().DownloadString(_listingUrl);
+			var folderFile = folder + "/" + file;
+			var url = useCache ? LocalUri(folderFile) : _rawUrlPrefix + folderFile;
+			var yaml = new WebClient().DownloadString(url);
+			if (useCache) 
+				return yaml;
+			if (!Directory.Exists(_cacheFolder + folder))
+				Directory.CreateDirectory(_cacheFolder + folder);
+
+			File.WriteAllText(_cacheFolder + folderFile, yaml);
+			return yaml;
+		}
+
+		private static List<string> GetTestFolders(bool useCache)
+		{
+			var url = useCache ? LocalUri("root.html") : _listingUrl;
+			var folderListingHtml = new WebClient().DownloadString(url);
+			if (!useCache)
+				File.WriteAllText(_cacheFolder + "root.html", folderListingHtml);
+			
 			var folders = (from a in CQ.Create(folderListingHtml)[".js-directory-link"]
 				let folderName = a.InnerText
 				where !folderName.EndsWith(".asciidoc")
@@ -86,6 +104,10 @@ namespace CodeGeneration.YamlTestsRunner
 		public static void GenerateProject(YamlSpecification specification)
 		{
 			var project = CsProjFile.LoadFrom(_testProjectFolder + @"Nest.Tests.Integration.Yaml.csproj");
+			var existingYamlTests = project.All<CodeFile>().Where(c=>c.Link != null && c.Link.EndsWith(".yaml.cs"));
+			foreach (var c in existingYamlTests)
+				project.Remove(c);
+
 			var definitions = specification.Definitions;
 
 			using (var pbar = new ProgressBar(definitions.Count, "Generating Code and project for yaml tests", ConsoleColor.Blue))
@@ -95,12 +117,21 @@ namespace CodeGeneration.YamlTestsRunner
 				foreach (var d in kv.Value)
 				{
 					var path = folder + @"\" + d.FileName + ".cs";
-					File.WriteAllText(path, "");
+					if (!Directory.Exists(_testProjectFolder + folder))
+						Directory.CreateDirectory(_testProjectFolder + folder);
+					File.WriteAllText(_testProjectFolder + path, "");
 					project.Add<CodeFile>(path);
 				}
 				pbar.Tick();
 			}
 			project.Save();
+		}
+		private static string LocalUri(string file)
+		{
+			var basePath = Path.Combine(Assembly.GetEntryAssembly().Location, @"..\" + _cacheFolder + file);
+			var assemblyPath = Path.GetFullPath((new Uri(basePath)).LocalPath);
+			var fileUri = new Uri(assemblyPath).AbsoluteUri;
+			return fileUri;
 		}
 	}
 }

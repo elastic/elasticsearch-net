@@ -1,0 +1,41 @@
+---
+"Parent":
+
+ - do:
+      indices.create:
+          index: test_1
+          body:
+            mappings:
+              test:
+                _parent: { type: "foo" }
+ - do:
+      cluster.health:
+          wait_for_status: yellow
+
+ - do:
+      index:
+          index:   test_1
+          type:    test
+          id:      1
+          parent:  ä¸­æ–‡
+          body:    { foo: bar }
+
+ - do:
+      get:
+          index:   test_1
+          type:    test
+          id:      1
+          parent:  ä¸­æ–‡
+          fields:  [_parent, _routing]
+
+ - match:   { _id:      "1"}
+ - match:   { fields._parent: ä¸­æ–‡ }
+ - match:   { fields._routing: ä¸­æ–‡}
+
+ - do:
+      catch: missing
+      get:
+          index:   test_1
+          type:    test
+          id:      1
+
