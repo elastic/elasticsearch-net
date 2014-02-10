@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 
 				//do cluster.node_stats 
 				
-				_status = this._client.ClusterNodeStatsGet(, nv=>nv
+				_status = this._client.ClusterNodeStatsGet(nv=>nv
 					.Add("indices","true")
 					.Add("transport","true")
 				);

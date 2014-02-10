@@ -38,14 +38,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 
 				//do cluster.health 
 				
-				_status = this._client.ClusterHealthGet(, nv=>nv
+				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.validate_query 
 				
-				_status = this._client.IndicesValidateQueryGet(, nv=>nv
+				_status = this._client.IndicesValidateQueryGet(nv=>nv
 					.Add("q","query string")
 				);
 				_response = _status.Deserialize<dynamic>();

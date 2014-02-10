@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 
 				//do cluster.health 
 				
-				_status = this._client.ClusterHealthGet(, nv=>nv
+				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
 				_response = _status.Deserialize<dynamic>();

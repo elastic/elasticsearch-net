@@ -35,12 +35,12 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test-weird-index-ä¸­æ–‡", "weird.type", "1", _body);
+				_status = this._client.IndexPost("test-weird-index-Ã¤Â¸Â­Ã¦â€“â€¡", "weird.type", "1", _body);
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				_status = this._client.Get("test-weird-index-ä¸­æ–‡", "weird.type", "1");
+				_status = this._client.Get("test-weird-index-Ã¤Â¸Â­Ã¦â€“â€¡", "weird.type", "1");
 				_response = _status.Deserialize<dynamic>();
 			}
 		}

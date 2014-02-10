@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				
-				_status = this._client.IndicesAnalyzeGet(, nv=>nv
+				_status = this._client.IndicesAnalyzeGet(nv=>nv
 					.Add("text","Foo Bar")
 				);
 				_response = _status.Deserialize<dynamic>();
@@ -85,7 +85,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				
-				_status = this._client.IndicesAnalyzeGet(, nv=>nv
+				_status = this._client.IndicesAnalyzeGet(nv=>nv
 					.Add("filters","lowercase")
 					.Add("text","Foo Bar")
 					.Add("tokenizer","keyword")
@@ -130,7 +130,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do cluster.health 
 				
-				_status = this._client.ClusterHealthGet(, nv=>nv
+				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
 				_response = _status.Deserialize<dynamic>();

@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				
-				_status = this._client.IndicesAnalyzeGet(, nv=>nv
+				_status = this._client.IndicesAnalyzeGet(nv=>nv
 					.Add("format","text")
 					.Add("text","tHE BLACK and white! AND red")
 				);

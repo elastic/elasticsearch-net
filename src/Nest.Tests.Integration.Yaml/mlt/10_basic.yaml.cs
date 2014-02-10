@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 
 				//do cluster.health 
 				
-				_status = this._client.ClusterHealthGet(, nv=>nv
+				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
 					.Add("timeout","1s")
 				);

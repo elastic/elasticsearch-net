@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//do indices.flush 
 				
-				_status = this._client.IndicesFlushGet(, nv=>nv
+				_status = this._client.IndicesFlushGet(nv=>nv
 					.Add("refresh","true")
 				);
 				_response = _status.Deserialize<dynamic>();

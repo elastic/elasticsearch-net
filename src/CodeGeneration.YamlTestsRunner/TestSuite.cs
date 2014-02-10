@@ -239,17 +239,18 @@ namespace CodeGeneration.YamlTestsRunner
 			{
 				args.Add("null");
 			}
-			s += string.Join(", ", args);
 			var queryStringKeys = this.CsharpArguments(call, inverse: true);
 			if (queryStringKeys.Any())
 			{
-				s += ", nv=>nv\r\n";
-				s = queryStringKeys.Aggregate(s,
+				var nv = "nv=>nv\r\n";
+				nv += queryStringKeys.Aggregate("",
 					(current, k) => current + string.Format("\t\t\t\t\t.Add(\"{0}\",\"{1}\")\r\n", k, this.QueryString[k]));
-				s += "\t\t\t\t);";
+				nv += "\t\t\t\t";
+				args.Add(nv);
 			}
-			else s += ");";
 
+			s += string.Join(", ", args);
+			s += ");";
 			s += "\r\n\t\t\t\t_response = _status.Deserialize<dynamic>();";
 			return s;
 		}

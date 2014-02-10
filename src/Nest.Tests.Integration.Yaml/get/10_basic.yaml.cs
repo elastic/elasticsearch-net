@@ -33,19 +33,19 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do index 
 				_body = new {
-					foo= "Hello= ä¸­æ–‡"
+					foo= "Hello= Ã¤Â¸Â­Ã¦â€“â€¡"
 				};
-				_status = this._client.IndexPost("test_1", "test", "ä¸­æ–‡", _body);
+				_status = this._client.IndexPost("test_1", "test", "Ã¤Â¸Â­Ã¦â€“â€¡", _body);
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				_status = this._client.Get("test_1", "test", "ä¸­æ–‡");
+				_status = this._client.Get("test_1", "test", "Ã¤Â¸Â­Ã¦â€“â€¡");
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				_status = this._client.Get("test_1", "_all", "ä¸­æ–‡");
+				_status = this._client.Get("test_1", "_all", "Ã¤Â¸Â­Ã¦â€“â€¡");
 				_response = _status.Deserialize<dynamic>();
 			}
 		}

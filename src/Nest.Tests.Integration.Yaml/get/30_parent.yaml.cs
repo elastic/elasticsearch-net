@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do cluster.health 
 				
-				_status = this._client.ClusterHealthGet(, nv=>nv
+				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
 				_response = _status.Deserialize<dynamic>();
@@ -56,14 +56,14 @@ namespace Nest.Tests.Integration.Yaml.Get
 					foo= "bar"
 				};
 				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("parent","ä¸­æ–‡")
+					.Add("parent","Ã¤Â¸Â­Ã¦â€“â€¡")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent","ä¸­æ–‡")
+					.Add("parent","Ã¤Â¸Â­Ã¦â€“â€¡")
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
 				);
 				_response = _status.Deserialize<dynamic>();
