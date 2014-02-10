@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Setup10Tests()
 			{
@@ -33,11 +35,13 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 				_body = new {
 					body= "Amsterdam meetup"
 				};
-				this._client.IndexPost("test", "test", "testing_document", _body, nv=>nv);
+				_status = this._client.IndexPost("test", "test", "testing_document", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet(nv=>nv);
+				_status = this._client.IndicesRefreshGet();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -45,6 +49,8 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicTestsForSuggestApi10Tests()
 			{
@@ -66,7 +72,8 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 						}
 					}
 				};
-				this._client.SuggestPost(_body, nv=>nv);
+				_status = this._client.SuggestPost(_body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

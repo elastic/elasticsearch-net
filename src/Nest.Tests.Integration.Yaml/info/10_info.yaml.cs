@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Info
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Info10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.Info
 
 				//do info 
 				
-				this._client.InfoGet(nv=>nv);
+				_status = this._client.InfoGet();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

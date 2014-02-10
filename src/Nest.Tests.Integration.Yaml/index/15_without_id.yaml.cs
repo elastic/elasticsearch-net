@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Index
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public IndexWithoutId15Tests()
 			{
@@ -33,11 +35,13 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "$id", nv=>nv);
+				_status = this._client.Get("test_1", "test", "$id");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

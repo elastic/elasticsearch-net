@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicDeleteByQuery10Tests()
 			{
@@ -33,23 +35,27 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "baz"
 				};
-				this._client.IndexPost("test_1", "test", "2", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "2", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "foo"
 				};
-				this._client.IndexPost("test_1", "test", "3", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "3", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet(nv=>nv);
+				_status = this._client.IndicesRefreshGet();
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete_by_query 
 				_body = new {
@@ -57,15 +63,18 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 						foo= "bar"
 					}
 				};
-				this._client.DeleteByQuery("test_1", _body, nv=>nv);
+				_status = this._client.DeleteByQuery("test_1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet(nv=>nv);
+				_status = this._client.IndicesRefreshGet();
+				_response = _status.Deserialize<dynamic>();
 
 				//do count 
 				
-				this._client.CountGet("test_1", nv=>nv);
+				_status = this._client.CountGet("test_1");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

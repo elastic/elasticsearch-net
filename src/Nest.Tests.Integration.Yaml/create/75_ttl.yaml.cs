@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Create
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Ttl75Tests()
 			{
@@ -41,59 +43,91 @@ namespace Nest.Tests.Integration.Yaml.Create
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("op_type","create")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("fields","_ttl")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("ttl","100000")
+					.Add("op_type","create")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("fields","_ttl")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("ttl","20s")
+					.Add("op_type","create")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("fields","_ttl")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("ttl","20s")
+					.Add("timestamp","2013-06-23T18:14:40")
+					.Add("op_type","create")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

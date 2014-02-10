@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Setup50Tests()
 			{
@@ -60,7 +62,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", _body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -68,6 +71,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetFieldMappingWithForFields50Tests()
 			{
@@ -82,7 +87,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 
 				//do indices.get_field_mapping 
 				
-				this._client.IndicesGetFieldMapping("*", nv=>nv);
+				_status = this._client.IndicesGetFieldMapping("*");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -90,6 +96,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetFieldMappingWithTForFields50Tests()
 			{
@@ -104,7 +112,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 
 				//do indices.get_field_mapping 
 				
-				this._client.IndicesGetFieldMapping("t*", nv=>nv);
+				_status = this._client.IndicesGetFieldMapping("t*");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -112,6 +121,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetFieldMappingWithT1ForFields50Tests()
 			{
@@ -126,7 +137,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 
 				//do indices.get_field_mapping 
 				
-				this._client.IndicesGetFieldMapping("*t1", nv=>nv);
+				_status = this._client.IndicesGetFieldMapping("*t1");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -134,6 +146,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetFieldMappingWithWildcardedRelativeNames50Tests()
 			{
@@ -148,7 +162,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 
 				//do indices.get_field_mapping 
 				
-				this._client.IndicesGetFieldMapping("i_*", nv=>nv);
+				_status = this._client.IndicesGetFieldMapping("i_*");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

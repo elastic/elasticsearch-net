@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicTestForIndexOpenClose10Tests()
 			{
@@ -31,31 +33,42 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("test_index", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.close 
 				
-				this._client.IndicesClosePost("test_index", nv=>nv);
+				_status = this._client.IndicesClosePost("test_index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				
-				this._client.SearchGet("test_index", nv=>nv);
+				_status = this._client.SearchGet("test_index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.open 
 				
-				this._client.IndicesOpenPost("test_index", nv=>nv);
+				_status = this._client.IndicesOpenPost("test_index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				
-				this._client.SearchGet("test_index", nv=>nv);
+				_status = this._client.SearchGet("test_index");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

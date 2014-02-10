@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public MissingDocumentPartialDoc90Tests()
 			{
@@ -35,7 +37,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -43,7 +46,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+					.Add("ignore","404")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -51,6 +57,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public MissingDocumentScript90Tests()
 			{
@@ -70,7 +78,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -79,7 +88,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+					.Add("ignore","404")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

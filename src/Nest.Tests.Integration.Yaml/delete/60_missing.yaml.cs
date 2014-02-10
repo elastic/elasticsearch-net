@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public MissingDocumentWithCatch60Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.Delete
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -39,6 +42,8 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public MissingDocumentWithIgnore60Tests()
 			{
@@ -53,7 +58,10 @@ namespace Nest.Tests.Integration.Yaml.Delete
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1", nv=>nv
+					.Add("ignore","404")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicTestForWarmers10Tests()
 			{
@@ -31,15 +33,20 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("test_index", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_warmer 
 				
-				this._client.IndicesGetWarmer("test_index", "test_warmer", nv=>nv);
+				_status = this._client.IndicesGetWarmer("test_index", "test_warmer");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.put_warmer 
 				_body = new {
@@ -47,19 +54,23 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 						match_all= new {}
 					}
 				};
-				this._client.IndicesPutWarmer("test_index", "test_warmer", _body, nv=>nv);
+				_status = this._client.IndicesPutWarmer("test_index", "test_warmer", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_warmer 
 				
-				this._client.IndicesGetWarmer("test_index", "test_warmer", nv=>nv);
+				_status = this._client.IndicesGetWarmer("test_index", "test_warmer");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.delete_warmer 
 				
-				this._client.IndicesDeleteWarmer("test_index", nv=>nv);
+				_status = this._client.IndicesDeleteWarmer("test_index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_warmer 
 				
-				this._client.IndicesGetWarmer("test_index", "test_warmer", nv=>nv);
+				_status = this._client.IndicesGetWarmer("test_index", "test_warmer");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

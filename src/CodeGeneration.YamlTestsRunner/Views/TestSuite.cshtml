@@ -24,6 +24,8 @@ namespace Nest.Tests.Integration.Yaml.@(m.Folder.ToPascalCase())
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public @suite.Description.ToPascalCase()@(m.Suffix)Tests()
 			{

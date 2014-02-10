@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Explain
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicMlt10Tests()
 			{
@@ -34,11 +36,13 @@ namespace Nest.Tests.Integration.Yaml.Explain
 					foo= "bar",
 					title= "howdy"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet(nv=>nv);
+				_status = this._client.IndicesRefreshGet();
+				_response = _status.Deserialize<dynamic>();
 
 				//do explain 
 				_body = new {
@@ -46,7 +50,8 @@ namespace Nest.Tests.Integration.Yaml.Explain
 						match_all= new {}
 					}
 				};
-				this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.ExplainPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

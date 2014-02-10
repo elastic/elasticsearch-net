@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicPercolationTests10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("test_index", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
@@ -39,11 +42,13 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 						match_all= new {}
 					}
 				};
-				this._client.IndexPost("_percolator", "test_index", "test_percolator", _body, nv=>nv);
+				_status = this._client.IndexPost("_percolator", "test_index", "test_percolator", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet(nv=>nv);
+				_status = this._client.IndicesRefreshGet();
+				_response = _status.Deserialize<dynamic>();
 
 				//do percolate 
 				_body = new {
@@ -51,7 +56,8 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 						foo= "bar"
 					}
 				};
-				this._client.PercolatePost("test_index", "test_type", _body, nv=>nv);
+				_status = this._client.PercolatePost("test_index", "test_type", _body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

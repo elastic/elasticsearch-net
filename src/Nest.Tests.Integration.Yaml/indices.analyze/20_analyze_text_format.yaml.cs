@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public TextFormat20Tests()
 			{
@@ -31,7 +33,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				
-				this._client.IndicesAnalyzeGet(nv=>nv);
+				_status = this._client.IndicesAnalyzeGet(, nv=>nv
+					.Add("format","text")
+					.Add("text","tHE BLACK and white! AND red")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

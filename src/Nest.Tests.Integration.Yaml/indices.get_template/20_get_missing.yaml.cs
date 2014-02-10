@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Setup20Tests()
 			{
@@ -31,7 +33,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 
 				//do indices.delete_template 
 				
-				this._client.IndicesDeleteTemplate("*", nv=>nv);
+				_status = this._client.IndicesDeleteTemplate("*", nv=>nv
+					.Add("ignore","404")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -39,6 +44,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetMissingTemplatePost090320Tests()
 			{
@@ -53,7 +60,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 
 				//do indices.get_template 
 				
-				this._client.IndicesGetTemplate("test", nv=>nv);
+				_status = this._client.IndicesGetTemplate("test");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -61,6 +69,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetMissingTemplatePre090320Tests()
 			{
@@ -75,11 +85,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 
 				//do indices.delete_template 
 				
-				this._client.IndicesDeleteTemplate("test", nv=>nv);
+				_status = this._client.IndicesDeleteTemplate("test", nv=>nv
+					.Add("ignore","404")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_template 
 				
-				this._client.IndicesGetTemplate("test", nv=>nv);
+				_status = this._client.IndicesGetTemplate("test");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

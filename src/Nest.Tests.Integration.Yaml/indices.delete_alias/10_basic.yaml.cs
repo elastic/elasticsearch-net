@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicTestForDeleteAlias10Tests()
 			{
@@ -31,25 +33,32 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("testind", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("testind", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this._client.IndicesPutAlias("testali", _body, nv=>nv);
+				_status = this._client.IndicesPutAlias("testali", _body, nv=>nv
+					.Add("index","testind")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_alias 
 				
-				this._client.IndicesGetAlias("testali", nv=>nv);
+				_status = this._client.IndicesGetAlias("testali");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.delete_alias 
 				
-				this._client.IndicesDeleteAlias("testind", "testali", nv=>nv);
+				_status = this._client.IndicesDeleteAlias("testind", "testali");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_alias 
 				
-				this._client.IndicesGetAlias("testind", "testali", nv=>nv);
+				_status = this._client.IndicesGetAlias("testind", "testali");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

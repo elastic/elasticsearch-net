@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicMlt10Tests()
 			{
@@ -34,19 +36,28 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 					foo= "bar",
 					title= "howdy"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet(nv=>nv);
+				_status = this._client.IndicesRefreshGet();
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","green")
+					.Add("timeout","1s")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do mlt 
 				
-				this._client.MltGet("test_1", "test", "1", nv=>nv);
+				_status = this._client.MltGet("test_1", "test", "1", nv=>nv
+					.Add("mlt_fields","title")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

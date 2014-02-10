@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public TestIndicesSettings10Tests()
 			{
@@ -37,21 +39,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test-index", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test-index", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_settings 
 				
-				this._client.IndicesGetSettings("test-index", nv=>nv);
+				_status = this._client.IndicesGetSettings("test-index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.put_settings 
 				_body = new {
 					number_of_replicas= "1"
 				};
-				this._client.IndicesPutSettings(_body, nv=>nv);
+				_status = this._client.IndicesPutSettings(_body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_settings 
 				
-				this._client.IndicesGetSettings(nv=>nv);
+				_status = this._client.IndicesGetSettings();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

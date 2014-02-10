@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public ValidateQueryApi10Tests()
 			{
@@ -31,15 +33,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("testing", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("testing", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.validate_query 
 				
-				this._client.IndicesValidateQueryGet(nv=>nv);
+				_status = this._client.IndicesValidateQueryGet(, nv=>nv
+					.Add("q","query string")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.validate_query 
 				_body = new {
@@ -47,7 +56,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 						invalid_query= new {}
 					}
 				};
-				this._client.IndicesValidateQueryPost(_body, nv=>nv);
+				_status = this._client.IndicesValidateQueryPost(_body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

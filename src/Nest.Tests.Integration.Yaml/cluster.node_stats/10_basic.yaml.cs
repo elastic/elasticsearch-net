@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public NodesStats10Tests()
 			{
@@ -31,7 +33,11 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 
 				//do cluster.node_stats 
 				
-				this._client.ClusterNodeStatsGet(nv=>nv);
+				_status = this._client.ClusterNodeStatsGet(, nv=>nv
+					.Add("indices","true")
+					.Add("transport","true")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

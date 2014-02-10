@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public TestIndicesExists10Tests()
 			{
@@ -31,15 +33,18 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 
 				//do indices.exists 
 				
-				this._client.IndicesExistsHead("test_index", nv=>nv);
+				_status = this._client.IndicesExistsHead("test_index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("test_index", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.exists 
 				
-				this._client.IndicesExistsHead("test_index", nv=>nv);
+				_status = this._client.IndicesExistsHead("test_index");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

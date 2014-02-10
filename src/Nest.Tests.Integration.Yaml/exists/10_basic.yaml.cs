@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Exists
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Basic10Tests()
 			{
@@ -31,17 +33,20 @@ namespace Nest.Tests.Integration.Yaml.Exists
 
 				//do exists 
 				
-				this._client.ExistsHead("test_1", "test", "1", nv=>nv);
+				_status = this._client.ExistsHead("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do exists 
 				
-				this._client.ExistsHead("test_1", "test", "1", nv=>nv);
+				_status = this._client.ExistsHead("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

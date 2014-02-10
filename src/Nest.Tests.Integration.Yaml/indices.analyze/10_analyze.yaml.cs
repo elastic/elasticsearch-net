@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Setup10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do ping 
 				
-				this._client.PingHead(nv=>nv);
+				_status = this._client.PingHead();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -39,6 +42,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicTest10Tests()
 			{
@@ -53,7 +58,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				
-				this._client.IndicesAnalyzeGet(nv=>nv);
+				_status = this._client.IndicesAnalyzeGet(, nv=>nv
+					.Add("text","Foo Bar")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -61,6 +69,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public TokenizerAndFilter10Tests()
 			{
@@ -75,7 +85,12 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				
-				this._client.IndicesAnalyzeGet(nv=>nv);
+				_status = this._client.IndicesAnalyzeGet(, nv=>nv
+					.Add("filters","lowercase")
+					.Add("text","Foo Bar")
+					.Add("tokenizer","keyword")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -83,6 +98,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public IndexAndField10Tests()
 			{
@@ -108,15 +125,23 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.analyze 
 				
-				this._client.IndicesAnalyzeGet("test", nv=>nv);
+				_status = this._client.IndicesAnalyzeGet("test", nv=>nv
+					.Add("field","text")
+					.Add("text","Foo Bar!")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

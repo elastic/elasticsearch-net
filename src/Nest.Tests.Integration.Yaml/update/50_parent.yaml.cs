@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Parent50Tests()
 			{
@@ -39,11 +41,15 @@ namespace Nest.Tests.Integration.Yaml.Update
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -54,7 +60,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -65,11 +72,18 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+					.Add("parent","5")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("parent","5")
+					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -77,7 +91,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -85,7 +100,11 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+					.Add("parent","5")
+					.Add("fields","foo")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

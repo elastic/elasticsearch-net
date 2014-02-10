@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Create
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public ExternalVersion35Tests()
 			{
@@ -33,19 +35,34 @@ namespace Nest.Tests.Integration.Yaml.Create
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("version_type","external")
+					.Add("version","5")
+					.Add("op_type","create")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("version_type","external")
+					.Add("version","5")
+					.Add("op_type","create")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("version_type","external")
+					.Add("version","6")
+					.Add("op_type","create")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

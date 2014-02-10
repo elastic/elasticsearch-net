@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public MissingDocumentWithCatch80Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 
 				//do get_source 
 				
-				this._client.GetSource("test_1", "test", "1", nv=>nv);
+				_status = this._client.GetSource("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -39,6 +42,8 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public MissingDocumentWithIgnore80Tests()
 			{
@@ -53,7 +58,10 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 
 				//do get_source 
 				
-				this._client.GetSource("test_1", "test", "1", nv=>nv);
+				_status = this._client.GetSource("test_1", "test", "1", nv=>nv
+					.Add("ignore","404")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Get
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Fields20Tests()
 			{
@@ -34,19 +36,29 @@ namespace Nest.Tests.Integration.Yaml.Get
 					foo= "bar",
 					count= "1"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("fields","foo")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

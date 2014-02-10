@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Raise404WhenFieldDoesntExist20Tests()
 			{
@@ -42,11 +44,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_field_mapping 
 				
-				this._client.IndicesGetFieldMapping("test_index", "test_type", "not_text", nv=>nv);
+				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "not_text");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

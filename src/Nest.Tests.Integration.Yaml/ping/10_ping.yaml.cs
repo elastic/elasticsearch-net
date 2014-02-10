@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Ping
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Ping10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.Ping
 
 				//do ping 
 				
-				this._client.PingHead(nv=>nv);
+				_status = this._client.PingHead();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public TestPutSettings10Tests()
 			{
@@ -35,11 +37,13 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 						discovery= new { zen= new { minimum_master_nodes=  "1" } }
 					}
 				};
-				this._client.ClusterPutSettings(_body, nv=>nv);
+				_status = this._client.ClusterPutSettings(_body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.get_settings 
 				
-				this._client.ClusterGetSettings(nv=>nv);
+				_status = this._client.ClusterGetSettings();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

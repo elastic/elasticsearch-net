@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public ClearCacheTest10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache
 
 				//do indices.clear_cache 
 				
-				this._client.IndicesClearCacheGet(nv=>nv);
+				_status = this._client.IndicesClearCacheGet();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

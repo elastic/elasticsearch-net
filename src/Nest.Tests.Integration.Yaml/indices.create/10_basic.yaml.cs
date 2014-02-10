@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public CreateIndexWithMappings10Tests()
 			{
@@ -35,11 +37,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						type_1= new {}
 					}
 				};
-				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_mapping 
 				
-				this._client.IndicesGetMapping("test_index", nv=>nv);
+				_status = this._client.IndicesGetMapping("test_index");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -47,6 +51,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public CreateIndexWithSettings10Tests()
 			{
@@ -65,11 +71,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						number_of_replicas= "0"
 					}
 				};
-				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_settings 
 				
-				this._client.IndicesGetSettings("test_index", nv=>nv);
+				_status = this._client.IndicesGetSettings("test_index");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -77,6 +85,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public CreateIndexWithWarmers10Tests()
 			{
@@ -101,11 +111,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_warmer 
 				
-				this._client.IndicesGetWarmer("test_index", nv=>nv);
+				_status = this._client.IndicesGetWarmer("test_index");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -113,6 +125,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public CreateIndexWithMappingsSettingsAndWarmers10Tests()
 			{
@@ -143,19 +157,23 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_mapping 
 				
-				this._client.IndicesGetMapping("test_index", nv=>nv);
+				_status = this._client.IndicesGetMapping("test_index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_settings 
 				
-				this._client.IndicesGetSettings("test_index", nv=>nv);
+				_status = this._client.IndicesGetSettings("test_index");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_warmer 
 				
-				this._client.IndicesGetWarmer("test_index", nv=>nv);
+				_status = this._client.IndicesGetWarmer("test_index");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

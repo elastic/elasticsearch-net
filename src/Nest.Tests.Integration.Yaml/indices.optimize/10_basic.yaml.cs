@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public OptimizeIndexTests10Tests()
 			{
@@ -31,11 +33,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("testing", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("testing", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.optimize 
 				
-				this._client.IndicesOptimizeGet("testing", nv=>nv);
+				_status = this._client.IndicesOptimizeGet("testing", nv=>nv
+					.Add("max_num_segments","1")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

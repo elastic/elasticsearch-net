@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public ListOfStrings20Tests()
 			{
@@ -34,11 +36,15 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 ""{\""f1\"": \""v1\"", \""f2\"": 42}""
 ""{\""index\"": {\""_index\"": \""test_index\"", \""_type\"": \""test_type\"", \""_id\"": \""test_id2\""}}""
 ""{\""f1\"": \""v2\"", \""f2\"": 47}""";
-				this._client.BulkPost(_body, nv=>nv);
+				_status = this._client.BulkPost(_body, nv=>nv
+					.Add("refresh","true")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do count 
 				
-				this._client.CountGet("test_index", nv=>nv);
+				_status = this._client.CountGet("test_index");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

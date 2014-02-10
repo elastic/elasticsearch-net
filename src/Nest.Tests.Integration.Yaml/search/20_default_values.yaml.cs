@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Search
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public DefaultIndex20Tests()
 			{
@@ -31,27 +33,32 @@ namespace Nest.Tests.Integration.Yaml.Search
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("test_2", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_2", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("test_1", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_1", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_2", "test", "42", _body, nv=>nv);
+				_status = this._client.IndexPost("test_2", "test", "42", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet("System.Collections.Generic.List`1[System.Object]", nv=>nv);
+				_status = this._client.IndicesRefreshGet("System.Collections.Generic.List`1[System.Object]");
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				_body = new {
@@ -61,7 +68,8 @@ namespace Nest.Tests.Integration.Yaml.Search
 						}
 					}
 				};
-				this._client.SearchPost("_all", "test", _body, nv=>nv);
+				_status = this._client.SearchPost("_all", "test", _body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

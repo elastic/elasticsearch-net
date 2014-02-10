@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesSegments
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public SegmentsTest10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesSegments
 
 				//do indices.segments 
 				
-				this._client.IndicesSegmentsGet(nv=>nv);
+				_status = this._client.IndicesSegmentsGet();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

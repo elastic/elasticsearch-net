@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Refresh60Tests()
 			{
@@ -35,11 +37,15 @@ namespace Nest.Tests.Integration.Yaml.Update
 						index= new { refresh_interval= "-1" }
 					}
 				};
-				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","yellow")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -50,7 +56,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				_body = new {
@@ -60,7 +67,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 						}
 					}
 				};
-				this._client.SearchPost("test_1", "test", _body, nv=>nv);
+				_status = this._client.SearchPost("test_1", "test", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -71,7 +79,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "2", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "2", _body, nv=>nv
+					.Add("refresh","1")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				_body = new {
@@ -81,7 +92,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 						}
 					}
 				};
-				this._client.SearchPost("test_1", "test", _body, nv=>nv);
+				_status = this._client.SearchPost("test_1", "test", _body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

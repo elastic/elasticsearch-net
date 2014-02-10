@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Msearch
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicMultiSearch10Tests()
 			{
@@ -33,23 +35,27 @@ namespace Nest.Tests.Integration.Yaml.Msearch
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "baz"
 				};
-				this._client.IndexPost("test_1", "test", "2", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "2", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "foo"
 				};
-				this._client.IndexPost("test_1", "test", "3", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "3", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
 				
-				this._client.IndicesRefreshGet(nv=>nv);
+				_status = this._client.IndicesRefreshGet();
+				_response = _status.Deserialize<dynamic>();
 
 				//do msearch 
 				_body = @"{""index"":""test_1""}
@@ -58,7 +64,8 @@ namespace Nest.Tests.Integration.Yaml.Msearch
 {""query"":{""match_all"":{}}}
 {""search_type"":""count"",""index"":""test_1""}
 {""query"":{""match"":{""foo"":""bar""}}}";
-				this._client.MsearchPost(_body, nv=>nv);
+				_status = this._client.MsearchPost(_body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

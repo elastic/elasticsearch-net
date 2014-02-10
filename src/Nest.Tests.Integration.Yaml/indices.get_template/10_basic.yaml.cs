@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetTemplate10Tests()
 			{
@@ -37,11 +39,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_replicas= "0"
 					}
 				};
-				this._client.IndicesPutTemplatePost("test", _body, nv=>nv);
+				_status = this._client.IndicesPutTemplatePost("test", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_template 
 				
-				this._client.IndicesGetTemplate("test", nv=>nv);
+				_status = this._client.IndicesGetTemplate("test");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 		
@@ -49,6 +53,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public GetAllTemplates10Tests()
 			{
@@ -68,7 +74,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_shards= "1"
 					}
 				};
-				this._client.IndicesPutTemplatePost("test", _body, nv=>nv);
+				_status = this._client.IndicesPutTemplatePost("test", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.put_template 
 				_body = new {
@@ -77,11 +84,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_shards= "1"
 					}
 				};
-				this._client.IndicesPutTemplatePost("test2", _body, nv=>nv);
+				_status = this._client.IndicesPutTemplatePost("test2", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_template 
 				
-				this._client.IndicesGetTemplate(nv=>nv);
+				_status = this._client.IndicesGetTemplate();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

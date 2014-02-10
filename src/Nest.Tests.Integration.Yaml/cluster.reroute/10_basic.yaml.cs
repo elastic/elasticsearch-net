@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.ClusterReroute
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicSanityCheck10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.ClusterReroute
 
 				//do cluster.reroute 
 				
-				this._client.ClusterReroutePost(null, nv=>nv);
+				_status = this._client.ClusterReroutePost(null);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

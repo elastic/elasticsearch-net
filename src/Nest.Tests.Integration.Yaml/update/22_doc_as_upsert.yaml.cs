@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public DocAsUpsert22Tests()
 			{
@@ -37,11 +39,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 					},
 					doc_as_upsert= "1"
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -50,11 +54,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 					},
 					doc_as_upsert= "1"
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

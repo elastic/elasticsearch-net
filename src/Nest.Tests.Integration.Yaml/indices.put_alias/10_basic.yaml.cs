@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public BasicTestForPutAlias10Tests()
 			{
@@ -31,23 +33,30 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 
 				//do indices.create 
 				
-				this._client.IndicesCreatePost("test_index", null, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_index", null);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.exists_alias 
 				
-				this._client.IndicesExistsAliasHead("test_alias", nv=>nv);
+				_status = this._client.IndicesExistsAliasHead("test_alias");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.put_alias 
 				
-				this._client.IndicesPutAlias("test_alias", null, nv=>nv);
+				_status = this._client.IndicesPutAlias("test_alias", null, nv=>nv
+					.Add("index","test_index")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.exists_alias 
 				
-				this._client.IndicesExistsAliasHead("test_alias", nv=>nv);
+				_status = this._client.IndicesExistsAliasHead("test_alias");
+				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_alias 
 				
-				this._client.IndicesGetAlias("test_alias", nv=>nv);
+				_status = this._client.IndicesGetAlias("test_alias");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

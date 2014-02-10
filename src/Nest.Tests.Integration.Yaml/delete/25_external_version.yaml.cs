@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public ExternalVersion25Tests()
 			{
@@ -33,15 +35,27 @@ namespace Nest.Tests.Integration.Yaml.Delete
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("version_type","external")
+					.Add("version","5")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1", nv=>nv
+					.Add("version_type","external")
+					.Add("version","4")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1", nv=>nv
+					.Add("version_type","external")
+					.Add("version","6")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

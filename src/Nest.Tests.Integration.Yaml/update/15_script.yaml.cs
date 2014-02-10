@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Script15Tests()
 			{
@@ -34,7 +36,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 					foo= "bar",
 					count= "1"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -44,19 +47,28 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+					.Add("script","1")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				
-				this._client.UpdatePost("test_1", "test", "1", null, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
+					.Add("lang","mvel")
+					.Add("script","ctx._source.foo = 'yyy'")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				_body = new {
@@ -66,11 +78,16 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do update 
 				
-				this._client.UpdatePost("test_1", "test", "1", null, nv=>nv);
+				_status = this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
+					.Add("lang","doesnotexist")
+					.Add("script","1")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

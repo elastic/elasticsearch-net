@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Get
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Routing40Tests()
 			{
@@ -37,25 +39,37 @@ namespace Nest.Tests.Integration.Yaml.Get
 						}
 					}
 				};
-				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","green")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("routing","5")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1", nv=>nv
+					.Add("routing","5")
+					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do get 
 				
-				this._client.Get("test_1", "test", "1", nv=>nv);
+				_status = this._client.Get("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

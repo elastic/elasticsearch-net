@@ -225,26 +225,43 @@ namespace CodeGeneration.YamlTestsRunner
 
 		private string GenerateCall(string call)
 		{
-			var s = "this._client.";
+			var s = "_status = this._client.";
 			var csharpMethod = call.Split('(').First();
 			s += csharpMethod + "(";
-			var csharpArguments = this.QueryString.AllKeys
-				.Select(k => new {Key = k, Index = call.IndexOf(k + ",", System.StringComparison.Ordinal)})
-				.Where(ki => ki.Index > 0)
-				.OrderBy(ki => ki.Index)
-				.Select(ki => ki.Key);
-			foreach (var key in csharpArguments)
-				s += "\"" + this.QueryString[key] + "\", ";
+			var csharpArguments = CsharpArguments(call);
+			var args = csharpArguments
+				.Select(key => "\"" + this.QueryString[key] + "\"").ToList();
 			if (this.Body != null)
 			{
-				s += "_body, ";
+				args.Add("_body");
 			}
 			else if (call.Contains("object body,"))
 			{
-				s += "null, ";
+				args.Add("null");
 			}
-			s += "nv=>nv);";
+			s += string.Join(", ", args);
+			var queryStringKeys = this.CsharpArguments(call, inverse: true);
+			if (queryStringKeys.Any())
+			{
+				s += ", nv=>nv\r\n";
+				s = queryStringKeys.Aggregate(s,
+					(current, k) => current + string.Format("\t\t\t\t\t.Add(\"{0}\",\"{1}\")\r\n", k, this.QueryString[k]));
+				s += "\t\t\t\t);";
+			}
+			else s += ");";
+
+			s += "\r\n\t\t\t\t_response = _status.Deserialize<dynamic>();";
 			return s;
+		}
+
+		private IEnumerable<string> CsharpArguments(string call, bool inverse = false)
+		{
+			var csharpArguments = this.QueryString.AllKeys
+				.Select(k => new {Key = k, Index = call.IndexOf(k + ",", System.StringComparison.Ordinal)})
+				.Where(ki => inverse ? ki.Index < 0 : ki.Index >= 0)
+				.OrderBy(ki => ki.Index)
+				.Select(ki => ki.Key);
+			return csharpArguments.ToList();
 		}
 
 		private int QueryStringCount(string method)

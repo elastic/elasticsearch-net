@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public Refresh50Tests()
 			{
@@ -36,23 +38,33 @@ namespace Nest.Tests.Integration.Yaml.Delete
 						number_of_replicas= "0"
 					}
 				};
-				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
+				_status = this._client.IndicesCreatePost("test_1", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
 				
-				this._client.ClusterHealthGet(nv=>nv);
+				_status = this._client.ClusterHealthGet(, nv=>nv
+					.Add("wait_for_status","green")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("refresh","1")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "2", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "2", _body, nv=>nv
+					.Add("refresh","1")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				_body = new {
@@ -65,11 +77,13 @@ namespace Nest.Tests.Integration.Yaml.Delete
 						}
 					}
 				};
-				this._client.SearchPost("test_1", "test", _body, nv=>nv);
+				_status = this._client.SearchPost("test_1", "test", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "1", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "1");
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				_body = new {
@@ -82,11 +96,15 @@ namespace Nest.Tests.Integration.Yaml.Delete
 						}
 					}
 				};
-				this._client.SearchPost("test_1", "test", _body, nv=>nv);
+				_status = this._client.SearchPost("test_1", "test", _body);
+				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
 				
-				this._client.Delete("test_1", "test", "2", nv=>nv);
+				_status = this._client.Delete("test_1", "test", "2", nv=>nv
+					.Add("refresh","1")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do search 
 				_body = new {
@@ -99,7 +117,8 @@ namespace Nest.Tests.Integration.Yaml.Delete
 						}
 					}
 				};
-				this._client.SearchPost("test_1", "test", _body, nv=>nv);
+				_status = this._client.SearchPost("test_1", "test", _body);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

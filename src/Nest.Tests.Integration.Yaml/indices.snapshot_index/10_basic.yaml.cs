@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public SnapshotIndexTest10Tests()
 			{
@@ -31,7 +33,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex
 
 				//do indices.snapshot_index 
 				
-				this._client.IndicesSnapshotIndexPost(nv=>nv);
+				_status = this._client.IndicesSnapshotIndexPost();
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}

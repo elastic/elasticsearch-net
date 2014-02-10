@@ -17,6 +17,8 @@ namespace Nest.Tests.Integration.Yaml.Index
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
+			private ConnectionStatus _status;
+			private dynamic _response;
 		
 			public ExternalVersion35Tests()
 			{
@@ -33,19 +35,31 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("version_type","external")
+					.Add("version","5")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("version_type","external")
+					.Add("version","5")
+				);
+				_response = _status.Deserialize<dynamic>();
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
+				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("version_type","external")
+					.Add("version","6")
+				);
+				_response = _status.Deserialize<dynamic>();
 			}
 		}
 	}
