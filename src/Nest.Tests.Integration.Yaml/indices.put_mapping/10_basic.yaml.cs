@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 		public class TestCreateAndUpdateMapping10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public TestCreateAndUpdateMapping10Tests()
 			{
@@ -29,18 +30,50 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_index", null, nv=>nv);
 
 				//do indices.put_mapping 
-				this._client.IndicesPutMappingPost("test_index", "test_type", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					test_type= new {
+						properties= new {
+							text= new {
+								type= "string",
+								analyzer= "whitespace"
+							}
+						}
+					}
+				};
+				this._client.IndicesPutMappingPost("test_index", "test_type", _body, nv=>nv);
 
 				//do indices.get_mapping 
+				
 				this._client.IndicesGetMapping("test_index", nv=>nv);
 
 				//do indices.put_mapping 
-				this._client.IndicesPutMappingPost("test_index", "test_type", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					test_type= new {
+						properties= new {
+							text= new {
+								type= "multi_field",
+								fields= new {
+									text= new {
+										type= "string",
+										analyzer= "whitespace"
+									},
+									text_raw= new {
+										type= "string",
+										index= "not_analyzed"
+									}
+								}
+							}
+						}
+					}
+				};
+				this._client.IndicesPutMappingPost("test_index", "test_type", _body, nv=>nv);
 
 				//do indices.get_mapping 
+				
 				this._client.IndicesGetMapping("test_index", nv=>nv);
 			}
 		}

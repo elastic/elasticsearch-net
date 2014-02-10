@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		public class Setup20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Setup20Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{
 
 				//do indices.delete_template 
+				
 				this._client.IndicesDeleteTemplate("*", nv=>nv);
 			}
 		}
@@ -36,6 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		public class GetMissingTemplatePost090320Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetMissingTemplatePost090320Tests()
 			{
@@ -49,6 +52,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{
 
 				//do indices.get_template 
+				
 				this._client.IndicesGetTemplate("test", nv=>nv);
 			}
 		}
@@ -56,6 +60,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		public class GetMissingTemplatePre090320Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetMissingTemplatePre090320Tests()
 			{
@@ -69,9 +74,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{
 
 				//do indices.delete_template 
+				
 				this._client.IndicesDeleteTemplate("test", nv=>nv);
 
 				//do indices.get_template 
+				
 				this._client.IndicesGetTemplate("test", nv=>nv);
 			}
 		}

@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		public class InternalVersion20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public InternalVersion20Tests()
 			{
@@ -29,12 +30,17 @@ namespace Nest.Tests.Integration.Yaml.Delete
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 			}
 		}

@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		public class GetTemplate10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetTemplate10Tests()
 			{
@@ -29,9 +30,17 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{
 
 				//do indices.put_template 
-				this._client.IndicesPutTemplatePost("test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					template= "test-*",
+					settings= new {
+						number_of_shards= "1",
+						number_of_replicas= "0"
+					}
+				};
+				this._client.IndicesPutTemplatePost("test", _body, nv=>nv);
 
 				//do indices.get_template 
+				
 				this._client.IndicesGetTemplate("test", nv=>nv);
 			}
 		}
@@ -39,6 +48,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		public class GetAllTemplates10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetAllTemplates10Tests()
 			{
@@ -52,12 +62,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{
 
 				//do indices.put_template 
-				this._client.IndicesPutTemplatePost("test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					template= "test-*",
+					settings= new {
+						number_of_shards= "1"
+					}
+				};
+				this._client.IndicesPutTemplatePost("test", _body, nv=>nv);
 
 				//do indices.put_template 
-				this._client.IndicesPutTemplatePost("test2", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					template= "test2-*",
+					settings= new {
+						number_of_shards= "1"
+					}
+				};
+				this._client.IndicesPutTemplatePost("test2", _body, nv=>nv);
 
 				//do indices.get_template 
+				
 				this._client.IndicesGetTemplate(nv=>nv);
 			}
 		}

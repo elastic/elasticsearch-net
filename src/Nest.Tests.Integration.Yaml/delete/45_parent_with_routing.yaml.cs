@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		public class ParentWithRouting45Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public ParentWithRouting45Tests()
 			{
@@ -29,18 +30,36 @@ namespace Nest.Tests.Integration.Yaml.Delete
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						test= new {
+							_parent= new {
+								type= "foo"
+							}
+						}
+					},
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 			}
 		}

@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Explain
 		public class BasicMlt10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicMlt10Tests()
 			{
@@ -29,13 +30,23 @@ namespace Nest.Tests.Integration.Yaml.Explain
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar",
+					title= "howdy"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do indices.refresh 
+				
 				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do explain 
-				this._client.ExplainPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					query= new {
+						match_all= new {}
+					}
+				};
+				this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv);
 			}
 		}
 	}

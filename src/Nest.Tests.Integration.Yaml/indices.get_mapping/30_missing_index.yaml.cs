@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 		public class Raise404WhenIndexDoesntExist30Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Raise404WhenIndexDoesntExist30Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 			{
 
 				//do indices.get_mapping 
+				
 				this._client.IndicesGetMapping("test_index", "not_test_type", nv=>nv);
 			}
 		}

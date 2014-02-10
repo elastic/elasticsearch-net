@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 		public class ArrayOfObjects10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public ArrayOfObjects10Tests()
 			{
@@ -29,9 +30,14 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 			{
 
 				//do bulk 
-				this._client.BulkPost("SERIALIZED BODY HERE", nv=>nv);
+				_body = @"{""index"":{""_index"":""test_index"",""_type"":""test_type"",""_id"":""test_id""}}
+{""f1"":""v1"",""f2"":""42""}
+{""index"":{""_index"":""test_index"",""_type"":""test_type"",""_id"":""test_id2""}}
+{""f1"":""v2"",""f2"":""47""}";
+				this._client.BulkPost(_body, nv=>nv);
 
 				//do count 
+				
 				this._client.CountGet("test_index", nv=>nv);
 			}
 		}

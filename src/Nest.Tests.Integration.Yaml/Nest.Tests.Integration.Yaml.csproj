@@ -34,6 +34,9 @@
       <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>

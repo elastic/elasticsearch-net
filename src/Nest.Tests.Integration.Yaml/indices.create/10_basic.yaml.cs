@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		public class CreateIndexWithMappings10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public CreateIndexWithMappings10Tests()
 			{
@@ -29,9 +30,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						type_1= new {}
+					}
+				};
+				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
 
 				//do indices.get_mapping 
+				
 				this._client.IndicesGetMapping("test_index", nv=>nv);
 			}
 		}
@@ -39,6 +46,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		public class CreateIndexWithSettings10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public CreateIndexWithSettings10Tests()
 			{
@@ -52,9 +60,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
 
 				//do indices.get_settings 
+				
 				this._client.IndicesGetSettings("test_index", nv=>nv);
 			}
 		}
@@ -62,6 +76,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		public class CreateIndexWithWarmers10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public CreateIndexWithWarmers10Tests()
 			{
@@ -75,9 +90,21 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					warmers= new {
+						test_warmer= new {
+							source= new {
+								query= new {
+									match_all= new {}
+								}
+							}
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
 
 				//do indices.get_warmer 
+				
 				this._client.IndicesGetWarmer("test_index", nv=>nv);
 			}
 		}
@@ -85,6 +112,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 		public class CreateIndexWithMappingsSettingsAndWarmers10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public CreateIndexWithMappingsSettingsAndWarmers10Tests()
 			{
@@ -98,15 +126,35 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						type_1= new {}
+					},
+					settings= new {
+						number_of_replicas= "0"
+					},
+					warmers= new {
+						test_warmer= new {
+							source= new {
+								query= new {
+									match_all= new {}
+								}
+							}
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
 
 				//do indices.get_mapping 
+				
 				this._client.IndicesGetMapping("test_index", nv=>nv);
 
 				//do indices.get_settings 
+				
 				this._client.IndicesGetSettings("test_index", nv=>nv);
 
 				//do indices.get_warmer 
+				
 				this._client.IndicesGetWarmer("test_index", nv=>nv);
 			}
 		}

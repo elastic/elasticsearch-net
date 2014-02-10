@@ -42,6 +42,9 @@
       <HintPath>..\..\dep\FubuCsProjFile.1.1.0.83\lib\net40\FubuCsProjFile.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ShellProgressBar">
       <HintPath>..\..\dep\ShellProgressBar.1.0.0.0\lib\NET4\ShellProgressBar.dll</HintPath>
     </Reference>

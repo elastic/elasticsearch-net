@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 		public class BasicScroll10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicScroll10Tests()
 			{
@@ -29,18 +30,29 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_scroll", null, nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_scroll", "test", "42", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_scroll", "test", "42", _body, nv=>nv);
 
 				//do indices.refresh 
+				
 				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do search 
-				this._client.SearchPost("test_scroll", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					query= new {
+						match_all= new {}
+					}
+				};
+				this._client.SearchPost("test_scroll", _body, nv=>nv);
 
 				//do scroll 
+				
 				this._client.ScrollGet("$scroll_id", nv=>nv);
 			}
 		}

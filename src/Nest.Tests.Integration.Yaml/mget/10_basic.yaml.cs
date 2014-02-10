@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 		public class BasicMultiGet10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicMultiGet10Tests()
 			{
@@ -29,16 +30,45 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_2", null, nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do indices.flush 
+				
 				this._client.IndicesFlushGet(nv=>nv);
 
 				//do mget 
-				this._client.MgetPost("SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					docs= new dynamic[] {
+						new {
+							_index= "test_2",
+							_type= "test",
+							_id= "1"
+						},
+						new {
+							_index= "test_1",
+							_type= "none",
+							_id= "1"
+						},
+						new {
+							_index= "test_1",
+							_type= "test",
+							_id= "2"
+						},
+						new {
+							_index= "test_1",
+							_type= "test",
+							_id= "1"
+						}
+					}
+				};
+				this._client.MgetPost(_body, nv=>nv);
 			}
 		}
 	}

@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 		public class BasicTestForWarmers10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicTestForWarmers10Tests()
 			{
@@ -29,24 +30,35 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_index", null, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do indices.get_warmer 
+				
 				this._client.IndicesGetWarmer("test_index", "test_warmer", nv=>nv);
 
 				//do indices.put_warmer 
-				this._client.IndicesPutWarmer("test_index", "test_warmer", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					query= new {
+						match_all= new {}
+					}
+				};
+				this._client.IndicesPutWarmer("test_index", "test_warmer", _body, nv=>nv);
 
 				//do indices.get_warmer 
+				
 				this._client.IndicesGetWarmer("test_index", "test_warmer", nv=>nv);
 
 				//do indices.delete_warmer 
+				
 				this._client.IndicesDeleteWarmer("test_index", nv=>nv);
 
 				//do indices.get_warmer 
+				
 				this._client.IndicesGetWarmer("test_index", "test_warmer", nv=>nv);
 			}
 		}

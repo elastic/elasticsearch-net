@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 		public class MissingDocumentWithCatch80Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public MissingDocumentWithCatch80Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 			{
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 			}
 		}
@@ -36,6 +38,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 		public class MissingDocumentWithIgnore80Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public MissingDocumentWithIgnore80Tests()
 			{
@@ -49,6 +52,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 			{
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 			}
 		}

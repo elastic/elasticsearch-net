@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		public class MissingDocumentWithCatch60Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public MissingDocumentWithCatch60Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 			{
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 			}
 		}
@@ -36,6 +38,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		public class MissingDocumentWithIgnore60Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public MissingDocumentWithIgnore60Tests()
 			{
@@ -49,6 +52,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 			{
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 			}
 		}

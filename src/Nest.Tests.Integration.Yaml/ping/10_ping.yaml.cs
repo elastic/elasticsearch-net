@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Ping
 		public class Ping10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Ping10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.Ping
 			{
 
 				//do ping 
+				
 				this._client.PingHead(nv=>nv);
 			}
 		}

@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 		public class NonExistentIndex12Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public NonExistentIndex12Tests()
 			{
@@ -29,16 +30,39 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do mget 
-				this._client.MgetPost("SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					docs= new dynamic[] {
+						new {
+							_index= "test_2",
+							_type= "test",
+							_id= "1"
+						}
+					}
+				};
+				this._client.MgetPost(_body, nv=>nv);
 
 				//do mget 
-				this._client.MgetPost("SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					index= "test_2",
+					docs= new dynamic[] {
+						new {
+							_index= "test_1",
+							_type= "test",
+							_id= "1"
+						}
+					}
+				};
+				this._client.MgetPost(_body, nv=>nv);
 			}
 		}
 	}

@@ -23,6 +23,7 @@ namespace Nest.Tests.Integration.Yaml.@(m.Folder.ToPascalCase())
 		public class @suite.Description.ToPascalCase()@(m.Suffix)Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public @suite.Description.ToPascalCase()@(m.Suffix)Tests()
 			{

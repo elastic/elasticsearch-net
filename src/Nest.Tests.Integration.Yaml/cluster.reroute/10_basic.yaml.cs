@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterReroute
 		public class BasicSanityCheck10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicSanityCheck10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterReroute
 			{
 
 				//do cluster.reroute 
+				
 				this._client.ClusterReroutePost(null, nv=>nv);
 			}
 		}

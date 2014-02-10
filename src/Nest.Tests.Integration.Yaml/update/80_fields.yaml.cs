@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 		public class Fields80Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Fields80Tests()
 			{
@@ -29,7 +30,15 @@ namespace Nest.Tests.Integration.Yaml.Update
 			{
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					doc= new {
+						foo= "baz"
+					},
+					upsert= new {
+						foo= "bar"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 			}
 		}
 	}

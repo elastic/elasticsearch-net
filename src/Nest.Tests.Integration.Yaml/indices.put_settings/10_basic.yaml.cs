@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 		public class TestIndicesSettings10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public TestIndicesSettings10Tests()
 			{
@@ -29,15 +30,27 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test-index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					settings= new {
+						index= new {
+							number_of_replicas= "0"
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test-index", _body, nv=>nv);
 
 				//do indices.get_settings 
+				
 				this._client.IndicesGetSettings("test-index", nv=>nv);
 
 				//do indices.put_settings 
-				this._client.IndicesPutSettings("SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					number_of_replicas= "1"
+				};
+				this._client.IndicesPutSettings(_body, nv=>nv);
 
 				//do indices.get_settings 
+				
 				this._client.IndicesGetSettings(nv=>nv);
 			}
 		}

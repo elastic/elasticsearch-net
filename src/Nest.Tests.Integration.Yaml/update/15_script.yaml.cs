@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 		public class Script15Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Script15Tests()
 			{
@@ -29,24 +30,46 @@ namespace Nest.Tests.Integration.Yaml.Update
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar",
+					count= "1"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					lang= "mvel",
+					script= "ctx._source.foo = bar",
+					@params= new {
+						bar= "xxx"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do update 
+				
 				this._client.UpdatePost("test_1", "test", "1", null, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					script= "1",
+					lang= "doesnotexist",
+					@params= new {
+						bar= "xxx"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 
 				//do update 
+				
 				this._client.UpdatePost("test_1", "test", "1", null, nv=>nv);
 			}
 		}

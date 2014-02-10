@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 		public class BasicTestForPutAlias10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicTestForPutAlias10Tests()
 			{
@@ -29,18 +30,23 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_index", null, nv=>nv);
 
 				//do indices.exists_alias 
+				
 				this._client.IndicesExistsAliasHead("test_alias", nv=>nv);
 
 				//do indices.put_alias 
+				
 				this._client.IndicesPutAlias("test_alias", null, nv=>nv);
 
 				//do indices.exists_alias 
+				
 				this._client.IndicesExistsAliasHead("test_alias", nv=>nv);
 
 				//do indices.get_alias 
+				
 				this._client.IndicesGetAlias("test_alias", nv=>nv);
 			}
 		}

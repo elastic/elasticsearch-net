@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 		public class MissingDocumentPartialDoc90Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public MissingDocumentPartialDoc90Tests()
 			{
@@ -29,16 +30,27 @@ namespace Nest.Tests.Integration.Yaml.Update
 			{
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					doc= new {
+						foo= "bar"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					doc= new {
+						foo= "bar"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 			}
 		}
 		
 		public class MissingDocumentScript90Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public MissingDocumentScript90Tests()
 			{
@@ -52,10 +64,22 @@ namespace Nest.Tests.Integration.Yaml.Update
 			{
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					script= "ctx._source.foo = bar",
+					@params= new {
+						bar= "xxx"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					script= "ctx._source.foo = bar",
+					@params= new {
+						bar= "xxx"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 			}
 		}
 	}

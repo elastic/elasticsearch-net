@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 		public class Optype20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Optype20Tests()
 			{
@@ -29,13 +30,22 @@ namespace Nest.Tests.Integration.Yaml.Index
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 			}
 		}
 	}

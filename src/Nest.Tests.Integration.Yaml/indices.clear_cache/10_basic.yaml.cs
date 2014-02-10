@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache
 		public class ClearCacheTest10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public ClearCacheTest10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache
 			{
 
 				//do indices.clear_cache 
+				
 				this._client.IndicesClearCacheGet(nv=>nv);
 			}
 		}

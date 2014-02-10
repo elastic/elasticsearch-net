@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class Setup10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Setup10Tests()
 			{
@@ -29,13 +30,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						test_type= new {
+							properties= new {
+								text= new {
+									type= "string"
+								}
+							}
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
 			}
 		}
 		
 		public class GetFieldMappingWithNoIndexAndType10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingWithNoIndexAndType10Tests()
 			{
@@ -49,6 +62,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("text", nv=>nv);
 			}
 		}
@@ -56,6 +70,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class GetFieldMappingByIndexOnly10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingByIndexOnly10Tests()
 			{
@@ -69,6 +84,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("test_index", "text", nv=>nv);
 			}
 		}
@@ -76,6 +92,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class GetFieldMappingByTypeField10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingByTypeField10Tests()
 			{
@@ -89,6 +106,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv);
 			}
 		}
@@ -96,6 +114,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist10Tests()
 			{
@@ -109,6 +128,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("test_index", "test_type", "System.Collections.Generic.List`1[System.Object]", nv=>nv);
 			}
 		}
@@ -116,6 +136,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class GetFieldMappingWithIncludeDefaults10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingWithIncludeDefaults10Tests()
 			{
@@ -129,6 +150,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv);
 			}
 		}

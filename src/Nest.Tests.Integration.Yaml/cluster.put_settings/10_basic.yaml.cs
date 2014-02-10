@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 		public class TestPutSettings10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public TestPutSettings10Tests()
 			{
@@ -29,9 +30,15 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 			{
 
 				//do cluster.put_settings 
-				this._client.ClusterPutSettings("SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					transient= new {
+						discovery= new { zen= new { minimum_master_nodes=  "1" } }
+					}
+				};
+				this._client.ClusterPutSettings(_body, nv=>nv);
 
 				//do cluster.get_settings 
+				
 				this._client.ClusterGetSettings(nv=>nv);
 			}
 		}

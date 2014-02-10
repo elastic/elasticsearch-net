@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		public class TextFormat20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public TextFormat20Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do indices.analyze 
+				
 				this._client.IndicesAnalyzeGet(nv=>nv);
 			}
 		}

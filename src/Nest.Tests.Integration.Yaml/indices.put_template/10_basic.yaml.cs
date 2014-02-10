@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
 		public class PutTemplate10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public PutTemplate10Tests()
 			{
@@ -29,9 +30,17 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
 			{
 
 				//do indices.put_template 
-				this._client.IndicesPutTemplatePost("test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					template= "test-*",
+					settings= new {
+						number_of_shards= "1",
+						number_of_replicas= "0"
+					}
+				};
+				this._client.IndicesPutTemplatePost("test", _body, nv=>nv);
 
 				//do indices.get_template 
+				
 				this._client.IndicesGetTemplate("test", nv=>nv);
 			}
 		}

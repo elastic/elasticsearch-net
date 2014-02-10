@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 		public class CreateWithId10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public CreateWithId10Tests()
 			{
@@ -29,13 +30,20 @@ namespace Nest.Tests.Integration.Yaml.Create
 			{
 
 				//do create 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do create 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 			}
 		}
 	}

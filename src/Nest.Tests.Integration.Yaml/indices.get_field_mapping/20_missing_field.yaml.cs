@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class Raise404WhenFieldDoesntExist20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Raise404WhenFieldDoesntExist20Tests()
 			{
@@ -29,9 +30,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						test_type= new {
+							properties= new {
+								text= new {
+									type= "string",
+									analyzer= "whitespace"
+								}
+							}
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("test_index", "test_type", "not_text", nv=>nv);
 			}
 		}

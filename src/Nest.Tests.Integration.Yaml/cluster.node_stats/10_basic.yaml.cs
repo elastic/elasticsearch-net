@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 		public class NodesStats10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public NodesStats10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 			{
 
 				//do cluster.node_stats 
+				
 				this._client.ClusterNodeStatsGet(nv=>nv);
 			}
 		}

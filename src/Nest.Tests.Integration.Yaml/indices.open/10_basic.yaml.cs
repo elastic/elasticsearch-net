@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 		public class BasicTestForIndexOpenClose10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicTestForIndexOpenClose10Tests()
 			{
@@ -29,24 +30,31 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_index", null, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do indices.close 
+				
 				this._client.IndicesClosePost("test_index", nv=>nv);
 
 				//do search 
+				
 				this._client.SearchGet("test_index", nv=>nv);
 
 				//do indices.open 
+				
 				this._client.IndicesOpenPost("test_index", nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do search 
+				
 				this._client.SearchGet("test_index", nv=>nv);
 			}
 		}

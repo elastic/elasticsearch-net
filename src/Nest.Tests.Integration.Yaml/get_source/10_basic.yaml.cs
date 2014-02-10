@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 		public class Basic10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Basic10Tests()
 			{
@@ -29,12 +30,17 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get_source 
+				
 				this._client.GetSource("test_1", "test", "1", nv=>nv);
 
 				//do get_source 
+				
 				this._client.GetSource("test_1", "_all", "1", nv=>nv);
 			}
 		}

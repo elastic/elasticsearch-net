@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesSegments
 		public class SegmentsTest10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public SegmentsTest10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesSegments
 			{
 
 				//do indices.segments 
+				
 				this._client.IndicesSegmentsGet(nv=>nv);
 			}
 		}

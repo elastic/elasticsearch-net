@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Search
 		public class DefaultIndex20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public DefaultIndex20Tests()
 			{
@@ -29,22 +30,38 @@ namespace Nest.Tests.Integration.Yaml.Search
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_2", null, nv=>nv);
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_1", null, nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_2", "test", "42", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_2", "test", "42", _body, nv=>nv);
 
 				//do indices.refresh 
+				
 				this._client.IndicesRefreshGet("System.Collections.Generic.List`1[System.Object]", nv=>nv);
 
 				//do search 
-				this._client.SearchPost("_all", "test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					query= new {
+						match= new {
+							foo= "bar"
+						}
+					}
+				};
+				this._client.SearchPost("_all", "test", _body, nv=>nv);
 			}
 		}
 	}

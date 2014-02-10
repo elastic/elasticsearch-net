@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex
 		public class SnapshotIndexTest10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public SnapshotIndexTest10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex
 			{
 
 				//do indices.snapshot_index 
+				
 				this._client.IndicesSnapshotIndexPost(nv=>nv);
 			}
 		}

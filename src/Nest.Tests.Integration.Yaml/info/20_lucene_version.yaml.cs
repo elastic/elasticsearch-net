@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Info
 		public class LuceneVersion20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public LuceneVersion20Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.Info
 			{
 
 				//do info 
+				
 				this._client.InfoGet(nv=>nv);
 			}
 		}

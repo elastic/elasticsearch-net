@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class Setup50Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Setup50Tests()
 			{
@@ -29,13 +30,44 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_index", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						test_type= new {
+							properties= new {
+								t1= new {
+									type= "string"
+								},
+								t2= new {
+									type= "string"
+								},
+								obj= new {
+									path= "just_name",
+									properties= new {
+										t1= new {
+											type= "string"
+										},
+										i_t1= new {
+											type= "string",
+											index_name= "t1"
+										},
+										i_t3= new {
+											type= "string",
+											index_name= "t3"
+										}
+									}
+								}
+							}
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test_index", _body, nv=>nv);
 			}
 		}
 		
 		public class GetFieldMappingWithForFields50Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingWithForFields50Tests()
 			{
@@ -49,6 +81,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("*", nv=>nv);
 			}
 		}
@@ -56,6 +89,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class GetFieldMappingWithTForFields50Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingWithTForFields50Tests()
 			{
@@ -69,6 +103,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("t*", nv=>nv);
 			}
 		}
@@ -76,6 +111,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class GetFieldMappingWithT1ForFields50Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingWithT1ForFields50Tests()
 			{
@@ -89,6 +125,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("*t1", nv=>nv);
 			}
 		}
@@ -96,6 +133,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		public class GetFieldMappingWithWildcardedRelativeNames50Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public GetFieldMappingWithWildcardedRelativeNames50Tests()
 			{
@@ -109,6 +147,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{
 
 				//do indices.get_field_mapping 
+				
 				this._client.IndicesGetFieldMapping("i_*", nv=>nv);
 			}
 		}

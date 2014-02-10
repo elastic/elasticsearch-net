@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeInfo
 		public class NodeInfoTest10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public NodeInfoTest10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeInfo
 			{
 
 				//do cluster.node_info 
+				
 				this._client.ClusterNodeInfoGet(nv=>nv);
 			}
 		}

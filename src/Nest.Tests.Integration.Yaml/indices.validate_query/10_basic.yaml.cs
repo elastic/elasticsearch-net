@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 		public class ValidateQueryApi10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public ValidateQueryApi10Tests()
 			{
@@ -29,16 +30,24 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("testing", null, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do indices.validate_query 
+				
 				this._client.IndicesValidateQueryGet(nv=>nv);
 
 				//do indices.validate_query 
-				this._client.IndicesValidateQueryPost("SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					query= new {
+						invalid_query= new {}
+					}
+				};
+				this._client.IndicesValidateQueryPost(_body, nv=>nv);
 			}
 		}
 	}

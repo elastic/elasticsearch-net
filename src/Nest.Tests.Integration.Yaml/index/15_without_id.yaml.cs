@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 		public class IndexWithoutId15Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public IndexWithoutId15Tests()
 			{
@@ -29,9 +30,13 @@ namespace Nest.Tests.Integration.Yaml.Index
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "$id", nv=>nv);
 			}
 		}

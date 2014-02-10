@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 		public class PartialDocument10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public PartialDocument10Tests()
 			{
@@ -29,12 +30,29 @@ namespace Nest.Tests.Integration.Yaml.Update
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar",
+					count= "1",
+					nested= new {
+						one= "1",
+						two= "2"
+					}
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					doc= new {
+						foo= "baz",
+						nested= new {
+							one= "3"
+						}
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 			}
 		}

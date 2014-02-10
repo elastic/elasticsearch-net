@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 		public class Timestamp70Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Timestamp70Tests()
 			{
@@ -29,33 +30,58 @@ namespace Nest.Tests.Integration.Yaml.Create
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						test= new {
+							_timestamp= new {
+								enabled= "1",
+								store= "yes"
+							}
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do create 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 
 				//do create 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do delete 
+				
 				this._client.Delete("test_1", "test", "1", nv=>nv);
 
 				//do create 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 			}
 		}

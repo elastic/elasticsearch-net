@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		public class Setup10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Setup10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do ping 
+				
 				this._client.PingHead(nv=>nv);
 			}
 		}
@@ -36,6 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		public class BasicTest10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicTest10Tests()
 			{
@@ -49,6 +52,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do indices.analyze 
+				
 				this._client.IndicesAnalyzeGet(nv=>nv);
 			}
 		}
@@ -56,6 +60,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		public class TokenizerAndFilter10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public TokenizerAndFilter10Tests()
 			{
@@ -69,6 +74,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do indices.analyze 
+				
 				this._client.IndicesAnalyzeGet(nv=>nv);
 			}
 		}
@@ -76,6 +82,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		public class IndexAndField10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public IndexAndField10Tests()
 			{
@@ -89,12 +96,26 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					mappings= new {
+						test= new {
+							properties= new {
+								text= new {
+									type= "string",
+									analyzer= "whitespace"
+								}
+							}
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test", _body, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do indices.analyze 
+				
 				this._client.IndicesAnalyzeGet("test", nv=>nv);
 			}
 		}

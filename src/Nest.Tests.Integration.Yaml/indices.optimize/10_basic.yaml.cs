@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 		public class OptimizeIndexTests10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public OptimizeIndexTests10Tests()
 			{
@@ -29,9 +30,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("testing", null, nv=>nv);
 
 				//do indices.optimize 
+				
 				this._client.IndicesOptimizeGet("testing", nv=>nv);
 			}
 		}

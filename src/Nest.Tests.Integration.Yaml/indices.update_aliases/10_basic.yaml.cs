@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 		public class BasicTestForAliases10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicTestForAliases10Tests()
 			{
@@ -29,18 +30,33 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_index", null, nv=>nv);
 
 				//do indices.exists_alias 
+				
 				this._client.IndicesExistsAliasHead("test_alias", nv=>nv);
 
 				//do indices.update_aliases 
-				this._client.IndicesUpdateAliasesPost("SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					actions= new [] {
+						new {
+							add= new {
+								index= "test_index",
+								alias= "test_alias",
+								routing= "routing_value"
+							}
+						}
+					}
+				};
+				this._client.IndicesUpdateAliasesPost(_body, nv=>nv);
 
 				//do indices.exists_alias 
+				
 				this._client.IndicesExistsAliasHead("test_alias", nv=>nv);
 
 				//do indices.get_aliases 
+				
 				this._client.IndicesGetAliases("test_index", nv=>nv);
 			}
 		}

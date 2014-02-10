@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 		public class DocUpsert20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public DocUpsert20Tests()
 			{
@@ -29,15 +30,35 @@ namespace Nest.Tests.Integration.Yaml.Update
 			{
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					doc= new {
+						foo= "bar",
+						count= "1"
+					},
+					upsert= new {
+						foo= "baz"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do update 
-				this._client.UpdatePost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					doc= new {
+						foo= "bar",
+						count= "1"
+					},
+					upsert= new {
+						foo= "baz"
+					}
+				};
+				this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 			}
 		}

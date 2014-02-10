@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 		public class Refresh60Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Refresh60Tests()
 			{
@@ -29,22 +30,48 @@ namespace Nest.Tests.Integration.Yaml.Create
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					settings= new {
+						index= new { refresh_interval= "-1" }
+					}
+				};
+				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do create 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do search 
-				this._client.SearchPost("test_1", "test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					query= new {
+						term= new {
+							_id= "1"
+						}
+					}
+				};
+				this._client.SearchPost("test_1", "test", _body, nv=>nv);
 
 				//do create 
-				this._client.IndexPost("test_1", "test", "2", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "2", _body, nv=>nv);
 
 				//do search 
-				this._client.SearchPost("test_1", "test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					query= new {
+						term= new {
+							_id= "2"
+						}
+					}
+				};
+				this._client.SearchPost("test_1", "test", _body, nv=>nv);
 			}
 		}
 	}

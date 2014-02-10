@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesStats
 		public class StatsTest10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public StatsTest10Tests()
 			{
@@ -29,6 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesStats
 			{
 
 				//do indices.stats 
+				
 				this._client.IndicesStatsGet(nv=>nv);
 			}
 		}

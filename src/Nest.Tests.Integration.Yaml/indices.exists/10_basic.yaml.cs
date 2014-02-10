@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 		public class TestIndicesExists10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public TestIndicesExists10Tests()
 			{
@@ -29,12 +30,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 			{
 
 				//do indices.exists 
+				
 				this._client.IndicesExistsHead("test_index", nv=>nv);
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("test_index", null, nv=>nv);
 
 				//do indices.exists 
+				
 				this._client.IndicesExistsHead("test_index", nv=>nv);
 			}
 		}

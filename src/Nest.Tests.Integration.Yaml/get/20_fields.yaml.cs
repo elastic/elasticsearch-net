@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 		public class Fields20Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public Fields20Tests()
 			{
@@ -29,15 +30,22 @@ namespace Nest.Tests.Integration.Yaml.Get
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar",
+					count= "1"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 
 				//do get 
+				
 				this._client.Get("test_1", "test", "1", nv=>nv);
 			}
 		}

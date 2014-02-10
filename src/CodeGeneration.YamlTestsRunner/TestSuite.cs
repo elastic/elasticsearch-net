@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
@@ -11,6 +12,8 @@ using System.Threading.Tasks;
 using FubuCore.Logging;
 using FubuCore.Reflection;
 using FubuCsProjFile.Templating.Runtime;
+using Microsoft.SqlServer.Server;
+using Newtonsoft.Json;
 using YamlDotNet.Dynamic;
 
 namespace CodeGeneration.YamlTestsRunner
@@ -155,6 +158,71 @@ namespace CodeGeneration.YamlTestsRunner
 			return this.GenerateCall(call);
 		}
 
+		public string SerializeBody()
+		{
+			if (this.Body == null)
+				return null;
+			var body = "_body = ";
+			var s = this.Body as string;
+			if (s != null)
+			{
+				body += string.Format("@\"{0}\";", EscapeQuotes(s));
+				return body;
+			}
+			var ss = this.Body as IEnumerable<string>;
+			if (ss != null)
+			{
+				body += string.Format("@\"{0}\";", string.Join("\n", ss.Select(EscapeQuotes)));
+				return body;
+			}
+			
+			var os = this.Body as IEnumerable<object>;
+			if (os != null)
+			{
+
+				body += string.Format("@\"{0}\";", string.Join("\n", os
+					.Select(oss=>EscapeQuotes(JsonConvert.SerializeObject(oss, Formatting.None)))));
+				return body;
+			}
+			body += this.SerializeToAnonymousObject(this.Body) + ";";
+			return body;
+		}
+
+		private string SerializeToAnonymousObject(object o)
+		{
+			var serializer = new JsonSerializer() { Formatting = Formatting.Indented };
+			var stringWriter = new StringWriter();
+			var writer = new JsonTextWriter(stringWriter);
+			writer.QuoteName = false;
+			serializer.Serialize(writer, o);
+			writer.Close();
+			//anonymousify the json
+			var anon = stringWriter.ToString().Replace("{", "new {").Replace("]", "}").Replace("[", "new [] {").Replace(":", "=");
+			//match indentation of the view	
+			anon = Regex.Replace(anon, @"^(\s+)?", (m) =>
+			{
+				if (m.Index == 0)
+					return m.Value;
+				return "\t\t\t\t" + m.Value.Replace("  ", "\t");
+			}, RegexOptions.Multiline);
+			//escape c# keywords in the anon object
+			anon = anon.Replace("default=", "@default=").Replace("params=", "@params=");
+			//docs contain different types of anon objects, quick fix by making them a dynamic[]
+			anon = anon.Replace("docs= new []", "docs= new dynamic[]");
+			//fix empty untyped arrays, default to string
+			anon = anon.Replace("new [] {}", "new string[] {}");
+			//quick fixes for settings: index.* and discovery.zen.*
+			//needs some recursive regex love perhaps in the future
+			anon = Regex.Replace(anon, @"^(\s+)(index)\.([^\.]+)=([^\r\n]+)", "$1$2= new { $3=$4 }", RegexOptions.Multiline);
+			anon = Regex.Replace(anon, @"^(\s+)(discovery)\.([^\.]+)\.([^\.]+)=(.+)$", "$1$2= new { $3= new { $4= $5 } }", RegexOptions.Multiline);
+			return anon;
+		}
+
+		private string EscapeQuotes(string s)
+		{
+			return s.Replace("\"", "\"\"");
+		}
+
 		private string GenerateCall(string call)
 		{
 			var s = "this._client.";
@@ -169,7 +237,7 @@ namespace CodeGeneration.YamlTestsRunner
 				s += "\"" + this.QueryString[key] + "\", ";
 			if (this.Body != null)
 			{
-				s += "\"SERIALIZED BODY HERE\", ";
+				s += "_body, ";
 			}
 			else if (call.Contains("object body,"))
 			{
@@ -181,8 +249,6 @@ namespace CodeGeneration.YamlTestsRunner
 
 		private int QueryStringCount(string method)
 		{
-
-
 			return QueryString.AllKeys.Count(k => method.Contains(k + ","));
 		}
 		private int MethodPreference(string method)

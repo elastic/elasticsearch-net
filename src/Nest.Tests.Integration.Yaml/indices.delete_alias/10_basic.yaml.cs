@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 		public class BasicTestForDeleteAlias10Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public BasicTestForDeleteAlias10Tests()
 			{
@@ -29,18 +30,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 			{
 
 				//do indices.create 
+				
 				this._client.IndicesCreatePost("testind", null, nv=>nv);
 
 				//do indices.put_alias 
-				this._client.IndicesPutAlias("testali", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					routing= "routing value"
+				};
+				this._client.IndicesPutAlias("testali", _body, nv=>nv);
 
 				//do indices.get_alias 
+				
 				this._client.IndicesGetAlias("testali", nv=>nv);
 
 				//do indices.delete_alias 
+				
 				this._client.IndicesDeleteAlias("testind", "testali", nv=>nv);
 
 				//do indices.get_alias 
+				
 				this._client.IndicesGetAlias("testind", "testali", nv=>nv);
 			}
 		}

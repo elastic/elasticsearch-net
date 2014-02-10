@@ -16,6 +16,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 		public class RealtimeRefresh60Tests
 		{
 			private readonly RawElasticClient _client;
+			private object _body;
 		
 			public RealtimeRefresh60Tests()
 			{
@@ -29,22 +30,49 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			{
 
 				//do indices.create 
-				this._client.IndicesCreatePost("test_1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					settings= new {
+						index= new {
+							refresh_interval= "-1",
+							number_of_replicas= "0"
+						}
+					}
+				};
+				this._client.IndicesCreatePost("test_1", _body, nv=>nv);
 
 				//do cluster.health 
+				
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					foo= "bar"
+				};
+				this._client.IndexPost("test_1", "test", "1", _body, nv=>nv);
 
 				//do mget 
-				this._client.MgetPost("test_1", "test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					ids= new [] {
+						"1"
+					}
+				};
+				this._client.MgetPost("test_1", "test", _body, nv=>nv);
 
 				//do mget 
-				this._client.MgetPost("test_1", "test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					ids= new [] {
+						"1"
+					}
+				};
+				this._client.MgetPost("test_1", "test", _body, nv=>nv);
 
 				//do mget 
-				this._client.MgetPost("test_1", "test", "SERIALIZED BODY HERE", nv=>nv);
+				_body = new {
+					ids= new [] {
+						"1"
+					}
+				};
+				this._client.MgetPost("test_1", "test", _body, nv=>nv);
 			}
 		}
 	}
