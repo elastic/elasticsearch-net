@@ -10,5 +10,8 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 	{
 		public string FileName { get; set; }
 		public string Contents { get; set; }
+		public IEnumerable<TestSuite> Suites { get; set; }
+		public string Folder { get; set; }
+		public string Suffix { get; set; }
 	}
 }

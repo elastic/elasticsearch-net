@@ -1,0 +1,9 @@
+@using System.Net.Configuration
+@using CodeGeneration.YamlTestsRunner.Domain
+@using CodeGeneration.YamlTestsRunner;
+@{
+	DoStep m = Model;
+	var i = "				";
+}
+@i//do @m.Call 
+@i@Raw(m.RawElasticSearchCall)

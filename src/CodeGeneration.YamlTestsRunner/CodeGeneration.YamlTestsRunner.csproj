@@ -61,20 +61,30 @@
     <Reference Include="YamlDotNet">
       <HintPath>..\..\dep\YamlDotNet.3.0.0\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet.Dynamic">
+      <HintPath>..\..\dep\YamlDotNet.Dynamic.3.0.0\lib\net40\YamlDotNet.Dynamic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\YamlDefinition.cs" />
     <Compile Include="Domain\YamlSpecification.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestSuite.cs" />
     <Compile Include="YamlTestsGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\Do.cshtml" />
+    <None Include="Views\TestSuite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="razormachine.readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

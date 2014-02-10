@@ -1,0 +1,50 @@
+@using System.Net.Configuration
+@using CodeGeneration.YamlTestsRunner.Domain
+@using CodeGeneration.YamlTestsRunner;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Nest;
+using NUnit.Framework;
+@{
+	YamlDefinition m = Model;
+}
+
+namespace Nest.Tests.Integration.Yaml.@(m.Folder.ToPascalCase())
+{
+	public partial class @(m.Folder.ToPascalCase())@(m.FileName.ToPascalCase())@(m.Suffix)Tests
+	{
+		@foreach(var suite in m.Suites)
+		{
+		<text>
+		public class @suite.Description.ToPascalCase()@(m.Suffix)Tests
+		{
+			private readonly RawElasticClient _client;
+		
+			public @suite.Description.ToPascalCase()@(m.Suffix)Tests()
+			{
+				var uri = new Uri("http:localhost:9200");
+				var settings = new ConnectionSettings(uri, "nest-default-index");
+				_client = new RawElasticClient(settings);
+			}
+
+			[Test]
+			public void @(suite.Description.ToPascalCase())Tests()
+			{
+				@foreach (var step in suite.Steps)
+				{
+					switch (step.Type)
+					{
+						case "do":
+							@RenderPage("Do.cshtml", (DoStep)step)
+							break;
+					}
+				}
+			}
+		}</text>
+		}
+	}
+}

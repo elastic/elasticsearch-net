@@ -30,7 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -167,7 +173,14 @@
     <Compile Include="update\90_missing.yaml.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nest\Nest.csproj">
+      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Name>Nest</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

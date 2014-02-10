@@ -66,6 +66,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Cache", "http://localhost:6
 		SlnRelativePath = "CodeGeneration.LowLevelClient\Cache\"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "YamlCache", "http://localhost:58086", "{CB30721D-68FD-4895-9AB8-4CBA677BE404}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58086"
+		Debug.AspNetCompiler.PhysicalPath = "CodeGeneration.YamlTestsRunner\YamlCache\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58086\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58086"
+		Release.AspNetCompiler.PhysicalPath = "CodeGeneration.YamlTestsRunner\YamlCache\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58086\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "CodeGeneration.YamlTestsRunner\YamlCache\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeGeneration|Any CPU = CodeGeneration|Any CPU
@@ -236,6 +257,21 @@ Global
 		{00CC5680-33CE-4FB4-877E-7DAB18B3ED39}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{00CC5680-33CE-4FB4-877E-7DAB18B3ED39}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{00CC5680-33CE-4FB4-877E-7DAB18B3ED39}.Release|x86.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.CodeGeneration|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.CodeGeneration|Any CPU.Build.0 = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.CodeGeneration|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.CodeGeneration|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.CodeGeneration|x86.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -250,6 +286,7 @@ Global
 		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{00CC5680-33CE-4FB4-877E-7DAB18B3ED39} = {825DF939-A50E-4932-A551-12AEA871BB61}
+		{CB30721D-68FD-4895-9AB8-4CBA677BE404} = {825DF939-A50E-4932-A551-12AEA871BB61}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj
