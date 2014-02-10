@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.flush 
-				this._client.IndicesFlushPost(nv=>nv);
+				this._client.IndicesFlushGet(nv=>nv);
 
 				//do mget 
 				this._client.MgetPost("SERIALIZED BODY HERE", nv=>nv);

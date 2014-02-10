@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do indices.validate_query 
-				this._client.IndicesValidateQueryPost(null, nv=>nv);
+				this._client.IndicesValidateQueryGet(nv=>nv);
 
 				//do indices.validate_query 
 				this._client.IndicesValidateQueryPost("SERIALIZED BODY HERE", nv=>nv);

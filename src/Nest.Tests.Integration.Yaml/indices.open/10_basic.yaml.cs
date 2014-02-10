@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 				this._client.IndicesClosePost("test_index", nv=>nv);
 
 				//do search 
-				this._client.SearchPost("test_index", null, nv=>nv);
+				this._client.SearchGet("test_index", nv=>nv);
 
 				//do indices.open 
 				this._client.IndicesOpenPost("test_index", nv=>nv);
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do search 
-				this._client.SearchPost("test_index", null, nv=>nv);
+				this._client.SearchGet("test_index", nv=>nv);
 			}
 		}
 	}

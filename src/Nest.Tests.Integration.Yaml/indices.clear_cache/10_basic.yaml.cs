@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache
 			{
 
 				//do indices.clear_cache 
-				this._client.IndicesClearCachePost(nv=>nv);
+				this._client.IndicesClearCacheGet(nv=>nv);
 			}
 		}
 	}

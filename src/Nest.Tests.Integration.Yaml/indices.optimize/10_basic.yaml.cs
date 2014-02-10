@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 				this._client.IndicesCreatePost("testing", null, nv=>nv);
 
 				//do indices.optimize 
-				this._client.IndicesOptimizePost("testing", nv=>nv);
+				this._client.IndicesOptimizeGet("testing", nv=>nv);
 			}
 		}
 	}

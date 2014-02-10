@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.Explain
 				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.refresh 
-				this._client.IndicesRefreshPost(nv=>nv);
+				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do explain 
 				this._client.ExplainPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);

@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 				this._client.IndexPost("_percolator", "test_index", "test_percolator", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.refresh 
-				this._client.IndicesRefreshPost(nv=>nv);
+				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do percolate 
 				this._client.PercolatePost("test_index", "test_type", "SERIALIZED BODY HERE", nv=>nv);

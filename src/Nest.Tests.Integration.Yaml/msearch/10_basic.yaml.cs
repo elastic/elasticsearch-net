@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.Msearch
 				this._client.IndexPost("test_1", "test", "3", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.refresh 
-				this._client.IndicesRefreshPost(nv=>nv);
+				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do msearch 
 				this._client.MsearchPost("SERIALIZED BODY HERE", nv=>nv);

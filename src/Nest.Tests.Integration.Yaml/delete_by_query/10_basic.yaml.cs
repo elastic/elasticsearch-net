@@ -38,16 +38,16 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 				this._client.IndexPost("test_1", "test", "3", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.refresh 
-				this._client.IndicesRefreshPost(nv=>nv);
+				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do delete_by_query 
 				this._client.DeleteByQuery("test_1", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.refresh 
-				this._client.IndicesRefreshPost(nv=>nv);
+				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do count 
-				this._client.CountPost("test_1", null, nv=>nv);
+				this._client.CountGet("test_1", nv=>nv);
 			}
 		}
 	}

@@ -29,10 +29,10 @@ namespace Nest.Tests.Integration.Yaml.Index
 			{
 
 				//do index 
-				this._client.IndexPost("test-weird-index-Ã¤Â¸Â­Ã¦â€“â€¡", "weird.type", "1", "SERIALIZED BODY HERE", nv=>nv);
+				this._client.IndexPost("test-weird-index-ä¸­æ–‡", "weird.type", "1", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do get 
-				this._client.Get("test-weird-index-Ã¤Â¸Â­Ã¦â€“â€¡", "weird.type", "1", nv=>nv);
+				this._client.Get("test-weird-index-ä¸­æ–‡", "weird.type", "1", nv=>nv);
 			}
 		}
 	}

@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.Search
 				this._client.IndexPost("test_2", "test", "42", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.refresh 
-				this._client.IndicesRefreshPost("System.Collections.Generic.List`1[System.Object]", nv=>nv);
+				this._client.IndicesRefreshGet("System.Collections.Generic.List`1[System.Object]", nv=>nv);
 
 				//do search 
 				this._client.SearchPost("_all", "test", "SERIALIZED BODY HERE", nv=>nv);

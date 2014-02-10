@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 				this._client.BulkPost("SERIALIZED BODY HERE", nv=>nv);
 
 				//do count 
-				this._client.CountPost("test_index", null, nv=>nv);
+				this._client.CountGet("test_index", nv=>nv);
 			}
 		}
 	}

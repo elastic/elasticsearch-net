@@ -187,10 +187,13 @@ namespace CodeGeneration.YamlTestsRunner
 		}
 		private int MethodPreference(string method)
 		{
-			if (method.Contains("Post(")) return 5;
-			if (method.Contains("Put(")) return 4;
-			if (method.Contains("Get(")) return 3;
-			if (method.Contains("Head(")) return 2;
+			var postBoost = this.Body != null ? 10 : 0;
+			var getBoost = this.Body == null ? 10 : 0;
+
+			if (method.Contains("Post(")) return 5 + postBoost;
+			if (method.Contains("Put(")) return 4 + postBoost;
+			if (method.Contains("Get(")) return 3 + getBoost;
+			if (method.Contains("Head(")) return 2 + postBoost;
 			return 0;
 		}
 	} 

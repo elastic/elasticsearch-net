@@ -29,13 +29,13 @@ namespace Nest.Tests.Integration.Yaml.Get
 			{
 
 				//do index 
-				this._client.IndexPost("test_1", "test", "Ã¤Â¸Â­Ã¦â€“â€¡", "SERIALIZED BODY HERE", nv=>nv);
+				this._client.IndexPost("test_1", "test", "ä¸­æ–‡", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do get 
-				this._client.Get("test_1", "test", "Ã¤Â¸Â­Ã¦â€“â€¡", nv=>nv);
+				this._client.Get("test_1", "test", "ä¸­æ–‡", nv=>nv);
 
 				//do get 
-				this._client.Get("test_1", "_all", "Ã¤Â¸Â­Ã¦â€“â€¡", nv=>nv);
+				this._client.Get("test_1", "_all", "ä¸­æ–‡", nv=>nv);
 			}
 		}
 	}

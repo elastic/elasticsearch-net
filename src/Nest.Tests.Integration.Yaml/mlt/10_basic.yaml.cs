@@ -32,13 +32,13 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 				this._client.IndexPost("test_1", "test", "1", "SERIALIZED BODY HERE", nv=>nv);
 
 				//do indices.refresh 
-				this._client.IndicesRefreshPost(nv=>nv);
+				this._client.IndicesRefreshGet(nv=>nv);
 
 				//do cluster.health 
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do mlt 
-				this._client.MltPost("test_1", "test", "1", null, nv=>nv);
+				this._client.MltGet("test_1", "test", "1", nv=>nv);
 			}
 		}
 	}

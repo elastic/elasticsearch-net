@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do indices.analyze 
-				this._client.IndicesAnalyzePost(null, nv=>nv);
+				this._client.IndicesAnalyzeGet(nv=>nv);
 			}
 		}
 	}

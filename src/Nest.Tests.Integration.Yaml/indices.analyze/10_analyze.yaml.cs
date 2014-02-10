@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do indices.analyze 
-				this._client.IndicesAnalyzePost(null, nv=>nv);
+				this._client.IndicesAnalyzeGet(nv=>nv);
 			}
 		}
 		
@@ -69,7 +69,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{
 
 				//do indices.analyze 
-				this._client.IndicesAnalyzePost(null, nv=>nv);
+				this._client.IndicesAnalyzeGet(nv=>nv);
 			}
 		}
 		
@@ -95,7 +95,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 				this._client.ClusterHealthGet(nv=>nv);
 
 				//do indices.analyze 
-				this._client.IndicesAnalyzePost("test", null, nv=>nv);
+				this._client.IndicesAnalyzeGet("test", nv=>nv);
 			}
 		}
 	}
