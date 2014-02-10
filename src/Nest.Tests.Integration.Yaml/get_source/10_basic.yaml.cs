@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.GetSource
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 	public partial class GetSource10BasicYaml10Tests
 	{
 		
-		public class Basic10Tests
+		public class Basic10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Ping
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Ping
 	public partial class Ping10PingYaml10Tests
 	{
 		
-		public class Ping10Tests
+		public class Ping10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -35,6 +36,9 @@ namespace Nest.Tests.Integration.Yaml.Ping
 				
 				_status = this._client.PingHead();
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true ; 
+				this.IsTrue(_response);
 			}
 		}
 	}

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Create
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 	public partial class Create10WithIdYaml10Tests
 	{
 		
-		public class CreateWithId10Tests
+		public class CreateWithId10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -39,6 +40,9 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("op_type","create")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 
 				//do get 
 				

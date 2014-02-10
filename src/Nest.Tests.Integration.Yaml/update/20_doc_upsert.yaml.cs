@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Update
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 	public partial class Update20DocUpsertYaml20Tests
 	{
 		
-		public class DocUpsert20Tests
+		public class DocUpsert20Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -48,6 +49,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 				
 				_status = this._client.Get("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
+
+				//is_false ._source.count; 
+				this.IsFalse(_response._source.count);
 
 				//do update 
 				_body = new {

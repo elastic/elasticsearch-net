@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Suggest
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 	public partial class Suggest10BasicYaml10Tests
 	{
 		
-		public class Setup10Tests
+		public class Setup10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -45,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 			}
 		}
 		
-		public class BasicTestsForSuggestApi10Tests
+		public class BasicTestsForSuggestApi10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 	public partial class IndicesGetFieldMapping50FieldWildcardsYaml50Tests
 	{
 		
-		public class Setup50Tests
+		public class Setup50Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -67,7 +68,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingWithForFields50Tests
+		public class GetFieldMappingWithForFields50Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -92,7 +93,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingWithTForFields50Tests
+		public class GetFieldMappingWithTForFields50Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -117,7 +118,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingWithT1ForFields50Tests
+		public class GetFieldMappingWithT1ForFields50Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -142,7 +143,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingWithWildcardedRelativeNames50Tests
+		public class GetFieldMappingWithWildcardedRelativeNames50Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

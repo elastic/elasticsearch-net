@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 	public partial class IndicesPutWarmer10BasicYaml10Tests
 	{
 		
-		public class BasicTestForWarmers10Tests
+		public class BasicTestForWarmers10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -57,6 +58,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				_status = this._client.IndicesPutWarmer("test_index", "test_warmer", _body);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
+
 				//do indices.get_warmer 
 				
 				_status = this._client.IndicesGetWarmer("test_index", "test_warmer");
@@ -66,6 +70,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				
 				_status = this._client.IndicesDeleteWarmer("test_index");
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 
 				//do indices.get_warmer 
 				

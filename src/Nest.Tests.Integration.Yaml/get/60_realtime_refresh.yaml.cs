@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Get
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 	public partial class Get60RealtimeRefreshYaml60Tests
 	{
 		
-		public class RealtimeRefresh60Tests
+		public class RealtimeRefresh60Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -64,6 +65,9 @@ namespace Nest.Tests.Integration.Yaml.Get
 				);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_true .exists; 
+				this.IsTrue(_response.exists);
+
 				//do get 
 				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
@@ -78,6 +82,9 @@ namespace Nest.Tests.Integration.Yaml.Get
 					.Add("refresh","1")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .exists; 
+				this.IsTrue(_response.exists);
 			}
 		}
 	}

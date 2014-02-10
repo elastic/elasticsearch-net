@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Create
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 	public partial class Create15WithoutIdYaml15Tests
 	{
 		
-		public class CreateWithoutId15Tests
+		public class CreateWithoutId15Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -40,9 +41,18 @@ namespace Nest.Tests.Integration.Yaml.Create
 				);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
+
+				//is_true ._id; 
+				this.IsTrue(_response._id);
+
+				//set id = _id; 
+				var id = _response._id;
+
 				//do get 
 				
-				_status = this._client.Get("test_1", "test", "$id");
+				_status = this._client.Get("test_1", "test", id);
 				_response = _status.Deserialize<dynamic>();
 			}
 		}

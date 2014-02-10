@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 	public partial class IndicesGetFieldMapping20MissingFieldYaml20Tests
 	{
 		
-		public class Raise404WhenFieldDoesntExist20Tests
+		public class Raise404WhenFieldDoesntExist20Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

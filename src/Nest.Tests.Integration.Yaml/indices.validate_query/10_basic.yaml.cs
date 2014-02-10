@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 	public partial class IndicesValidateQuery10BasicYaml10Tests
 	{
 		
-		public class ValidateQueryApi10Tests
+		public class ValidateQueryApi10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -50,6 +51,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 				);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_true .valid; 
+				this.IsTrue(_response.valid);
+
 				//do indices.validate_query 
 				_body = new {
 					query= new {
@@ -58,6 +62,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 				};
 				_status = this._client.IndicesValidateQueryPost(_body);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_false .valid; 
+				this.IsFalse(_response.valid);
 			}
 		}
 	}

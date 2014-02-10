@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 	public partial class IndicesGetFieldMapping10BasicYaml10Tests
 	{
 		
-		public class Setup10Tests
+		public class Setup10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -48,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingWithNoIndexAndType10Tests
+		public class GetFieldMappingWithNoIndexAndType10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -73,7 +74,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingByIndexOnly10Tests
+		public class GetFieldMappingByIndexOnly10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -98,7 +99,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingByTypeField10Tests
+		public class GetFieldMappingByTypeField10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -123,7 +124,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 		
-		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist10Tests
+		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -145,10 +146,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				
 				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "System.Collections.Generic.List`1[System.Object]");
 				_response = _status.Deserialize<dynamic>();
+
+				//is_false .test_index.test_type.text1; 
+				this.IsFalse(_response.test_index.test_type.text1);
 			}
 		}
 		
-		public class GetFieldMappingWithIncludeDefaults10Tests
+		public class GetFieldMappingWithIncludeDefaults10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

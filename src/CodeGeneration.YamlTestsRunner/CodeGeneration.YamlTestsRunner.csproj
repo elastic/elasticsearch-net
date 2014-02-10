@@ -71,15 +71,21 @@
   <ItemGroup>
     <Compile Include="Domain\YamlDefinition.cs" />
     <Compile Include="Domain\YamlSpecification.cs" />
+    <Compile Include="DoStep.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ITestStep.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetStep.cs" />
     <Compile Include="TestSuite.cs" />
     <Compile Include="YamlTestsGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\IsFalse.cshtml" />
+    <None Include="Views\IsTrue.cshtml" />
+    <None Include="Views\Set.cshtml" />
     <None Include="Views\Do.cshtml" />
     <None Include="Views\TestSuite.cshtml" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesCreate
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 	public partial class IndicesCreate10BasicYaml10Tests
 	{
 		
-		public class CreateIndexWithMappings10Tests
+		public class CreateIndexWithMappings10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -47,7 +48,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			}
 		}
 		
-		public class CreateIndexWithSettings10Tests
+		public class CreateIndexWithSettings10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -81,7 +82,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			}
 		}
 		
-		public class CreateIndexWithWarmers10Tests
+		public class CreateIndexWithWarmers10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -121,7 +122,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			}
 		}
 		
-		public class CreateIndexWithMappingsSettingsAndWarmers10Tests
+		public class CreateIndexWithMappingsSettingsAndWarmers10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.DeleteByQuery
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 	public partial class DeleteByQuery10BasicYaml10Tests
 	{
 		
-		public class BasicDeleteByQuery10Tests
+		public class BasicDeleteByQuery10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -65,6 +66,9 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 				};
 				_status = this._client.DeleteByQuery("test_1", _body);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 
 				//do indices.refresh 
 				

@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Nest.Tests.Integration.Yaml
 {
-	public class Class1
+	public class YamlTestsBase
 	{
+		public void IsTrue(object o)
+		{
+			
+		}
+
+		public void IsFalse(object o)
+		{
+			
+		}
 	}
 }

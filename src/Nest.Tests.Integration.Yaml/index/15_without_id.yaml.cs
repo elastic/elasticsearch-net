@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Index
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 	public partial class Index15WithoutIdYaml15Tests
 	{
 		
-		public class IndexWithoutId15Tests
+		public class IndexWithoutId15Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -38,9 +39,18 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_status = this._client.IndexPost("test_1", "test", _body);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
+
+				//is_true ._id; 
+				this.IsTrue(_response._id);
+
+				//set id = _id; 
+				var id = _response._id;
+
 				//do get 
 				
-				_status = this._client.Get("test_1", "test", "$id");
+				_status = this._client.Get("test_1", "test", id);
 				_response = _status.Deserialize<dynamic>();
 			}
 		}

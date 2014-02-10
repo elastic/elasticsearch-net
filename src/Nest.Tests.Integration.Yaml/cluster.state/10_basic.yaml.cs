@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.ClusterState
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState
 	public partial class ClusterState10BasicYaml10Tests
 	{
 		
-		public class ClusterStateTest10Tests
+		public class ClusterStateTest10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -35,6 +36,9 @@ namespace Nest.Tests.Integration.Yaml.ClusterState
 				
 				_status = this._client.ClusterStateGet();
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .master_node; 
+				this.IsTrue(_response.master_node);
 			}
 		}
 	}

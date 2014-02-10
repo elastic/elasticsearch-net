@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 @{
 	YamlDefinition m = Model;
 }
@@ -20,7 +21,7 @@ namespace Nest.Tests.Integration.Yaml.@(m.Folder.ToPascalCase())
 		@foreach(var suite in m.Suites)
 		{
 		<text>
-		public class @suite.Description.ToPascalCase()@(m.Suffix)Tests
+		public class @suite.Description.ToPascalCase()@(m.Suffix)Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -42,7 +43,16 @@ namespace Nest.Tests.Integration.Yaml.@(m.Folder.ToPascalCase())
 					switch (step.Type)
 					{
 						case "do":
-							@RenderPage("Do.cshtml", (DoStep)step)
+							@RenderPage("Do.cshtml", (DoStep) step)
+							break;
+						case "set":
+							@RenderPage("Set.cshtml", (SetStep) step)
+							break;
+						case "is_true":
+							@RenderPage("IsTrue.cshtml", (IsTrueStep) step)
+							break;
+						case "is_false":
+							@RenderPage("IsFalse.cshtml", (IsFalseStep) step)
 							break;
 					}
 				}

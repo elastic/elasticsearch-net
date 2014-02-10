@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesStatus
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesStatus
 	public partial class IndicesStatus10BasicYaml10Tests
 	{
 		
-		public class IndicesStatusTest10Tests
+		public class IndicesStatusTest10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -35,6 +36,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesStatus
 				
 				_status = this._client.IndicesStatusGet();
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 
 				//do indices.status 
 				

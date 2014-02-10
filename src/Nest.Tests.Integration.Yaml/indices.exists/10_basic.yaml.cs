@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesExists
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 	public partial class IndicesExists10BasicYaml10Tests
 	{
 		
-		public class TestIndicesExists10Tests
+		public class TestIndicesExists10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -36,6 +37,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 				_status = this._client.IndicesExistsHead("test_index");
 				_response = _status.Deserialize<dynamic>();
 
+				//is_false ; 
+				this.IsFalse(_response);
+
 				//do indices.create 
 				
 				_status = this._client.IndicesCreatePost("test_index", null);
@@ -45,6 +49,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 				
 				_status = this._client.IndicesExistsHead("test_index");
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true ; 
+				this.IsTrue(_response);
 			}
 		}
 	}

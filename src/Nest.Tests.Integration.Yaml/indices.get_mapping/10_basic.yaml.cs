@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 	public partial class IndicesGetMapping10BasicYaml10Tests
 	{
 		
-		public class Setup10Tests
+		public class Setup10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -49,7 +50,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 			}
 		}
 		
-		public class GetIndexMapping10Tests
+		public class GetIndexMapping10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -74,7 +75,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 			}
 		}
 		
-		public class GetTypeMapping10Tests
+		public class GetTypeMapping10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

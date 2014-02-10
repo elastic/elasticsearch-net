@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Mget
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 	public partial class Mget20FieldsYaml20Tests
 	{
 		
-		public class Fields20Tests
+		public class Fields20Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -73,6 +74,15 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				_status = this._client.MgetPost("test_1", "test", _body);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_false .docs[0].fields; 
+				this.IsFalse(_response.docs[0].fields);
+
+				//is_false .docs[1]._source; 
+				this.IsFalse(_response.docs[1]._source);
+
+				//is_false .docs[2]._source; 
+				this.IsFalse(_response.docs[2]._source);
+
 				//do mget 
 				_body = new {
 					docs= new dynamic[] {
@@ -103,35 +113,14 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				);
 				_response = _status.Deserialize<dynamic>();
 
-				//do mget 
-				_body = new {
-					docs= new dynamic[] {
-						new {
-							_id= "1"
-						},
-						new {
-							_id= "1",
-							fields= "foo"
-						},
-						new {
-							_id= "1",
-							fields= new [] {
-								"foo"
-							}
-						},
-						new {
-							_id= "1",
-							fields= new [] {
-								"foo",
-								"_source"
-							}
-						}
-					}
-				};
-				_status = this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
-				);
-				_response = _status.Deserialize<dynamic>();
+				//is_false .docs[0]._source; 
+				this.IsFalse(_response.docs[0]._source);
+
+				//is_false .docs[1]._source; 
+				this.IsFalse(_response.docs[1]._source);
+
+				//is_false .docs[2]._source; 
+				this.IsFalse(_response.docs[2]._source);
 
 				//do mget 
 				_body = new {
@@ -162,6 +151,51 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_false .docs[0]._source; 
+				this.IsFalse(_response.docs[0]._source);
+
+				//is_false .docs[1]._source; 
+				this.IsFalse(_response.docs[1]._source);
+
+				//is_false .docs[2]._source; 
+				this.IsFalse(_response.docs[2]._source);
+
+				//do mget 
+				_body = new {
+					docs= new dynamic[] {
+						new {
+							_id= "1"
+						},
+						new {
+							_id= "1",
+							fields= "foo"
+						},
+						new {
+							_id= "1",
+							fields= new [] {
+								"foo"
+							}
+						},
+						new {
+							_id= "1",
+							fields= new [] {
+								"foo",
+								"_source"
+							}
+						}
+					}
+				};
+				_status = this._client.MgetPost("test_1", "test", _body, nv=>nv
+					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+				);
+				_response = _status.Deserialize<dynamic>();
+
+				//is_false .docs[1]._source; 
+				this.IsFalse(_response.docs[1]._source);
+
+				//is_false .docs[2]._source; 
+				this.IsFalse(_response.docs[2]._source);
 			}
 		}
 	}

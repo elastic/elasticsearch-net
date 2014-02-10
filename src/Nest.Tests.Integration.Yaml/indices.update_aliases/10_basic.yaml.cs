@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 	public partial class IndicesUpdateAliases10BasicYaml10Tests
 	{
 		
-		public class BasicTestForAliases10Tests
+		public class BasicTestForAliases10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -41,6 +42,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 				_status = this._client.IndicesExistsAliasHead("test_alias");
 				_response = _status.Deserialize<dynamic>();
 
+				//is_false ; 
+				this.IsFalse(_response);
+
 				//do indices.update_aliases 
 				_body = new {
 					actions= new [] {
@@ -56,10 +60,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 				_status = this._client.IndicesUpdateAliasesPost(_body);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
+
 				//do indices.exists_alias 
 				
 				_status = this._client.IndicesExistsAliasHead("test_alias");
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true ; 
+				this.IsTrue(_response);
 
 				//do indices.get_aliases 
 				

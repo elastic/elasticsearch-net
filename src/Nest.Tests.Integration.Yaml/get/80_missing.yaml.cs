@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Get
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 	public partial class Get80MissingYaml80Tests
 	{
 		
-		public class MissingDocumentWithCatch80Tests
+		public class MissingDocumentWithCatch80Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -38,7 +39,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 			}
 		}
 		
-		public class MissingDocumentWithIgnore80Tests
+		public class MissingDocumentWithIgnore80Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

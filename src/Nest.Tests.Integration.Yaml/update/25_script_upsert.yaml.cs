@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Update
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 	public partial class Update25ScriptUpsertYaml25Tests
 	{
 		
-		public class ScriptUpsert25Tests
+		public class ScriptUpsert25Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

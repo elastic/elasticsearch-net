@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Explain
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Explain
 	public partial class Explain10BasicYaml10Tests
 	{
 		
-		public class BasicMlt10Tests
+		public class BasicMlt10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -52,6 +53,12 @@ namespace Nest.Tests.Integration.Yaml.Explain
 				};
 				_status = this._client.ExplainPost("test_1", "test", "1", _body);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .matched; 
+				this.IsTrue(_response.matched);
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 			}
 		}
 	}

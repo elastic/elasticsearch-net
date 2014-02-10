@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Mget
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 	public partial class Mget10BasicYaml10Tests
 	{
 		
-		public class BasicMultiGet10Tests
+		public class BasicMultiGet10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -77,6 +78,18 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				_status = this._client.MgetPost(_body);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_false .docs[0].exists; 
+				this.IsFalse(_response.docs[0].exists);
+
+				//is_false .docs[1].exists; 
+				this.IsFalse(_response.docs[1].exists);
+
+				//is_false .docs[2].exists; 
+				this.IsFalse(_response.docs[2].exists);
+
+				//is_true .docs[3].exists; 
+				this.IsTrue(_response.docs[3].exists);
 			}
 		}
 	}

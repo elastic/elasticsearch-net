@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Exists
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Exists
 	public partial class Exists40RoutingYaml40Tests
 	{
 		
-		public class Routing40Tests
+		public class Routing40Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -65,10 +66,16 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_true ; 
+				this.IsTrue(_response);
+
 				//do exists 
 				
 				_status = this._client.ExistsHead("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
+
+				//is_false ; 
+				this.IsFalse(_response);
 			}
 		}
 	}

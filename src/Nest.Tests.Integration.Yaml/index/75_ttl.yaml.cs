@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Index
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 	public partial class Index75TtlYaml75Tests
 	{
 		
-		public class Ttl75Tests
+		public class Ttl75Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

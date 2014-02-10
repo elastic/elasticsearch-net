@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Index
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 	public partial class Index10WithIdYaml10Tests
 	{
 		
-		public class IndexWithId10Tests
+		public class IndexWithId10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -37,6 +38,9 @@ namespace Nest.Tests.Integration.Yaml.Index
 				};
 				_status = this._client.IndexPost("test-weird-index-Ã¤Â¸Â­Ã¦â€“â€¡", "weird.type", "1", _body);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 
 				//do get 
 				

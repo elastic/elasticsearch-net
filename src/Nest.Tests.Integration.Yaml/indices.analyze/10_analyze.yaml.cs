@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 	public partial class IndicesAnalyze10AnalyzeYaml10Tests
 	{
 		
-		public class Setup10Tests
+		public class Setup10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -38,7 +39,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			}
 		}
 		
-		public class BasicTest10Tests
+		public class BasicTest10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -65,7 +66,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			}
 		}
 		
-		public class TokenizerAndFilter10Tests
+		public class TokenizerAndFilter10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -94,7 +95,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			}
 		}
 		
-		public class IndexAndField10Tests
+		public class IndexAndField10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 	public partial class ClusterPutSettings10BasicYaml10Tests
 	{
 		
-		public class TestPutSettings10Tests
+		public class TestPutSettings10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

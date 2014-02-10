@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Delete
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 	public partial class Delete30RoutingYaml30Tests
 	{
 		
-		public class Routing30Tests
+		public class Routing30Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

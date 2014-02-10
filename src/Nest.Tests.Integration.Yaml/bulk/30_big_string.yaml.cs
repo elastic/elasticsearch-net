@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Bulk
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 	public partial class Bulk30BigStringYaml30Tests
 	{
 		
-		public class OneBigString30Tests
+		public class OneBigString30Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

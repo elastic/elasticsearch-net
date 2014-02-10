@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 	public partial class ClusterNodeStats10BasicYaml10Tests
 	{
 		
-		public class NodesStats10Tests
+		public class NodesStats10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -38,6 +39,12 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 					.Add("transport","true")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .cluster_name; 
+				this.IsTrue(_response.cluster_name);
+
+				//is_true .nodes; 
+				this.IsTrue(_response.nodes);
 			}
 		}
 	}

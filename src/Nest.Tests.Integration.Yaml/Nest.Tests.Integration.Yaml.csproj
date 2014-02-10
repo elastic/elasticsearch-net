@@ -51,7 +51,6 @@
     <Compile Include="bulk\10_basic.yaml.cs" />
     <Compile Include="bulk\20_list_of_strings.yaml.cs" />
     <Compile Include="bulk\30_big_string.yaml.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="cluster.node_info\10_basic.yaml.cs" />
     <Compile Include="cluster.node_stats\10_basic.yaml.cs" />
     <Compile Include="cluster.put_settings\10_basic.yaml.cs" />
@@ -174,6 +173,7 @@
     <Compile Include="update\80_fields.yaml.cs" />
     <Compile Include="update\85_fields_meta.yaml.cs" />
     <Compile Include="update\90_missing.yaml.cs" />
+    <Compile Include="YamlTestsBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

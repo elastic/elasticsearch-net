@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Mget
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 	public partial class Mget12NonExistentIndexYaml12Tests
 	{
 		
-		public class NonExistentIndex12Tests
+		public class NonExistentIndex12Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -58,6 +59,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				_status = this._client.MgetPost(_body);
 				_response = _status.Deserialize<dynamic>();
 
+				//is_false .docs[0].exists; 
+				this.IsFalse(_response.docs[0].exists);
+
 				//do mget 
 				_body = new {
 					index= "test_2",
@@ -71,6 +75,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				_status = this._client.MgetPost(_body);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .docs[0].exists; 
+				this.IsTrue(_response.docs[0].exists);
 			}
 		}
 	}

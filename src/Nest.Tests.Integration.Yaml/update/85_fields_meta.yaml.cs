@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Update
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 	public partial class Update85FieldsMetaYaml85Tests
 	{
 		
-		public class MetadataFields85Tests
+		public class MetadataFields85Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -74,6 +75,12 @@ namespace Nest.Tests.Integration.Yaml.Update
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .get.fields._timestamp; 
+				this.IsTrue(_response.get.fields._timestamp);
+
+				//is_true .get.fields._ttl; 
+				this.IsTrue(_response.get.fields._ttl);
 
 				//do get 
 				

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 	public partial class IndicesGetTemplate20GetMissingYaml20Tests
 	{
 		
-		public class Setup20Tests
+		public class Setup20Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -40,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			}
 		}
 		
-		public class GetMissingTemplatePost090320Tests
+		public class GetMissingTemplatePost090320Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -65,7 +66,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			}
 		}
 		
-		public class GetMissingTemplatePre090320Tests
+		public class GetMissingTemplatePre090320Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;

@@ -41,6 +41,9 @@ namespace CodeGeneration.YamlTestsRunner
 			_razorMachine = new RazorMachine();
 			_assembly = typeof (YamlTestsGenerator).Assembly;
 			_razorMachine.RegisterTemplate("~/_MemoryContent/Do.cshtml", File.ReadAllText(_viewFolder + @"Do.cshtml"));
+			_razorMachine.RegisterTemplate("~/_MemoryContent/Set.cshtml", File.ReadAllText(_viewFolder + @"Set.cshtml"));
+			_razorMachine.RegisterTemplate("~/_MemoryContent/IsTrue.cshtml", File.ReadAllText(_viewFolder + @"IsTrue.cshtml"));
+			_razorMachine.RegisterTemplate("~/_MemoryContent/IsFalse.cshtml", File.ReadAllText(_viewFolder + @"IsFalse.cshtml"));
 			var rawCalls = from l in File.ReadAllLines(_rawClientInterface)
 				where Regex.IsMatch(l, @"\tConnectionStatus ")
 				select l.Replace("\t\tConnectionStatus", "").Trim();
@@ -69,7 +72,10 @@ namespace CodeGeneration.YamlTestsRunner
 
 		private static IList<YamlDefinition> GetFolderFiles(string folder, bool useCache = false)
 		{
-			var folderHtml = new WebClient().DownloadString(_listingUrl + "/" + folder);
+			var url = useCache ? LocalUri(folder + ".html") : _listingUrl + "/" + folder;
+			var folderHtml = new WebClient().DownloadString(url);
+			if (!useCache)
+				File.WriteAllText(_cacheFolder + folder + ".html", folderHtml);
 			var files = (from a in CQ.Create(folderHtml)[".js-directory-link"]
 				let fileName = a.InnerText
 				where fileName.EndsWith(".yaml")

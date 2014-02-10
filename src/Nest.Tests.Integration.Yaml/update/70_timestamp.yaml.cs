@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Update
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 	public partial class Update70TimestampYaml70Tests
 	{
 		
-		public class Timestamp70Tests
+		public class Timestamp70Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -70,6 +71,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 					.Add("fields","_timestamp")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .fields._timestamp; 
+				this.IsTrue(_response.fields._timestamp);
 
 				//do update 
 				_body = new {

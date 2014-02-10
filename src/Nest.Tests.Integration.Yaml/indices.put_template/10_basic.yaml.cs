@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
 	public partial class IndicesPutTemplate10BasicYaml10Tests
 	{
 		
-		public class PutTemplate10Tests
+		public class PutTemplate10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -41,6 +42,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
 				};
 				_status = this._client.IndicesPutTemplatePost("test", _body);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 
 				//do indices.get_template 
 				

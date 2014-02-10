@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Scroll
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 	public partial class Scroll10BasicYaml10Tests
 	{
 		
-		public class BasicScroll10Tests
+		public class BasicScroll10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -60,9 +61,12 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 				);
 				_response = _status.Deserialize<dynamic>();
 
+				//set scroll_id = _scroll_id; 
+				var scroll_id = _response._scroll_id;
+
 				//do scroll 
 				
-				_status = this._client.ScrollGet("$scroll_id");
+				_status = this._client.ScrollGet(scroll_id);
 				_response = _status.Deserialize<dynamic>();
 			}
 		}

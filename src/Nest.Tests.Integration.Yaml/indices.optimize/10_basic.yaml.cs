@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.IndicesOptimize
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 	public partial class IndicesOptimize10BasicYaml10Tests
 	{
 		
-		public class OptimizeIndexTests10Tests
+		public class OptimizeIndexTests10Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
@@ -42,6 +43,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 					.Add("max_num_segments","1")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//is_true .ok; 
+				this.IsTrue(_response.ok);
 			}
 		}
 	}

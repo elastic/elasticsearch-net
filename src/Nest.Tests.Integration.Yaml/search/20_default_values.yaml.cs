@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Nest;
 using NUnit.Framework;
+using Nest.Tests.Integration.Yaml;
 
 
 namespace Nest.Tests.Integration.Yaml.Search
@@ -13,7 +14,7 @@ namespace Nest.Tests.Integration.Yaml.Search
 	public partial class Search20DefaultValuesYaml20Tests
 	{
 		
-		public class DefaultIndex20Tests
+		public class DefaultIndex20Tests : YamlTestsBase
 		{
 			private readonly RawElasticClient _client;
 			private object _body;
