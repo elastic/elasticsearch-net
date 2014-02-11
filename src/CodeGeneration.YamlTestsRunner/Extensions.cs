@@ -95,8 +95,8 @@ namespace CodeGeneration.YamlTestsRunner
 			anon = anon.Replace("new [] {}", "new string[] {}");
 			//quick fixes for settings: index.* and discovery.zen.*
 			//needs some recursive regex love perhaps in the future
-			anon = Regex.Replace(anon, @"^(\s+)(index)\.([^\.]+)=([^\r\n]+)", "$1$2= new { $3=$4 }", RegexOptions.Multiline);
-			anon = Regex.Replace(anon, @"^(\s+)(discovery)\.([^\.]+)\.([^\.]+)=(.+)$", "$1$2= new { $3= new { $4= $5 } }", RegexOptions.Multiline);
+			anon = Regex.Replace(anon, @"(index|discovery)\.([^=]+)=([^\r\n,]+)", " { \"$1.$2\", $3 }", RegexOptions.Multiline);
+			anon = Regex.Replace(anon, @"new \{(\r\n\s+\{ "")(index|discovery)", "new Dictionary<string, object> {$1$2", RegexOptions.Multiline);
 			return anon;
 		}
 

@@ -23,23 +23,23 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 
 				//do cluster.put_settings 
 				_body = new {
-					transient= new {
-						discovery= new { zen= new { minimum_master_nodes=  "1" } }
+					transient= new Dictionary<string, object> {
+						 { "discovery.zen.minimum_master_nodes",  "1" }
 					}
 				};
 				this.Do(()=> this._client.ClusterPutSettings(_body));
 
 				//match _response.transient: 
-				this.IsMatch(_response.transient, new {
-					discovery= new { zen= new { minimum_master_nodes=  "1" } }
+				this.IsMatch(_response.transient, new Dictionary<string, object> {
+					 { "discovery.zen.minimum_master_nodes",  "1" }
 				});
 
 				//do cluster.get_settings 
 				this.Do(()=> this._client.ClusterGetSettings());
 
 				//match _response.transient: 
-				this.IsMatch(_response.transient, new {
-					discovery= new { zen= new { minimum_master_nodes=  "1" } }
+				this.IsMatch(_response.transient, new Dictionary<string, object> {
+					 { "discovery.zen.minimum_master_nodes",  "1" }
 				});
 
 			}

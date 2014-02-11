@@ -38,9 +38,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 				this.IsMatch(_response.test.template, @"test-*");
 
 				//match _response.test.settings: 
-				this.IsMatch(_response.test.settings, new {
-					index= new { number_of_shards= "1", }
-					index= new { number_of_replicas= "0" }
+				this.IsMatch(_response.test.settings, new Dictionary<string, object> {
+					 { "index.number_of_shards",  "1" },
+					 { "index.number_of_replicas",  "0" }
 				});
 
 			}

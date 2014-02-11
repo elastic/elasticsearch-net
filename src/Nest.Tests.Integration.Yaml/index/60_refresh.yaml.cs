@@ -23,8 +23,8 @@ namespace Nest.Tests.Integration.Yaml.Index
 
 				//do indices.create 
 				_body = new {
-					settings= new {
-						index= new { refresh_interval= "-1" }
+					settings= new Dictionary<string, object> {
+						 { "index.refresh_interval",  "-1" }
 					}
 				};
 				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
