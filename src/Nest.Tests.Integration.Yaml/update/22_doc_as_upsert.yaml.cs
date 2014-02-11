@@ -29,12 +29,16 @@ namespace Nest.Tests.Integration.Yaml.Update
 					},
 					doc_as_upsert= "1"
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
+
+				//match _response._source.foo: 
+				this.IsMatch(_response._source.foo, @"bar");
+
+				//match _response._source.count: 
+				this.IsMatch(_response._source.count, 1);
 
 				//do update 
 				_body = new {
@@ -43,12 +47,16 @@ namespace Nest.Tests.Integration.Yaml.Update
 					},
 					doc_as_upsert= "1"
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
+
+				//match _response._source.foo: 
+				this.IsMatch(_response._source.foo, @"bar");
+
+				//match _response._source.count: 
+				this.IsMatch(_response._source.count, 2);
 
 			}
 		}

@@ -7,5 +7,5 @@
 	LengthStep m = Model;
 	var i = "				";
 }
-@i//length @m.ResponseValue: @m.Value; 
-@(i)this.IsLength(_response.@(m.ResponseValue), @m.Value);
+@i//length @Raw(m.ResponseValue): @m.Value; 
+@(i)this.IsLength(@Raw(m.ResponseValue), @m.Value);

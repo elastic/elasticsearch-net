@@ -27,14 +27,12 @@ namespace Nest.Tests.Integration.Yaml.Update
 						index= new { refresh_interval= "-1" }
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
 
 				//do cluster.health 
-				_status = this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do update 
 				_body = new {
@@ -45,8 +43,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do search 
 				_body = new {
@@ -56,8 +53,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 						}
 					}
 				};
-				_status = this._client.SearchPost("test_1", "test", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.SearchPost("test_1", "test", _body));
+
+				//match _response.hits.total: 
+				this.IsMatch(_response.hits.total, 0);
 
 				//do update 
 				_body = new {
@@ -68,10 +67,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "2", _body, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "2", _body, nv=>nv
 					.Add("refresh","1")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do search 
 				_body = new {
@@ -81,8 +79,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 						}
 					}
 				};
-				_status = this._client.SearchPost("test_1", "test", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.SearchPost("test_1", "test", _body));
+
+				//match _response.hits.total: 
+				this.IsMatch(_response.hits.total, 1);
 
 			}
 		}

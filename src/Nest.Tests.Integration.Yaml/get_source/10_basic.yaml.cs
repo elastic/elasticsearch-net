@@ -25,16 +25,23 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do get_source 
-				_status = this._client.GetSource("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.GetSource("test_1", "test", "1"));
+
+				//match this._status.Result: 
+				this.IsMatch(this._status.Result, new {
+					foo= "bar"
+				});
 
 				//do get_source 
-				_status = this._client.GetSource("test_1", "_all", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.GetSource("test_1", "_all", "1"));
+
+				//match this._status.Result: 
+				this.IsMatch(this._status.Result, new {
+					foo= "bar"
+				});
 
 			}
 		}

@@ -22,8 +22,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("test_index", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
 
 				//do indices.put_mapping 
 				_body = new {
@@ -36,12 +35,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 						}
 					}
 				};
-				_status = this._client.IndicesPutMappingPost("test_index", "test_type", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesPutMappingPost("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
-				_status = this._client.IndicesGetMapping("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetMapping("test_index"));
+
+				//match _response.test_index.test_type.properties.text.type: 
+				this.IsMatch(_response.test_index.test_type.properties.text.type, @"string");
+
+				//match _response.test_index.test_type.properties.text.analyzer: 
+				this.IsMatch(_response.test_index.test_type.properties.text.analyzer, @"whitespace");
 
 				//do indices.put_mapping 
 				_body = new {
@@ -63,12 +66,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 						}
 					}
 				};
-				_status = this._client.IndicesPutMappingPost("test_index", "test_type", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesPutMappingPost("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
-				_status = this._client.IndicesGetMapping("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetMapping("test_index"));
+
+				//match _response.test_index.test_type.properties.text.type: 
+				this.IsMatch(_response.test_index.test_type.properties.text.type, @"multi_field");
+
+				//match _response.test_index.test_type.properties.text.fields.text_raw.index: 
+				this.IsMatch(_response.test_index.test_type.properties.text.fields.text_raw.index, @"not_analyzed");
 
 			}
 		}

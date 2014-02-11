@@ -27,8 +27,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do update 
 				_body = new {
@@ -36,10 +35,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
 					.Add("ignore","404")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 			}
 		}
@@ -57,8 +55,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do update 
 				_body = new {
@@ -67,10 +64,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
 					.Add("ignore","404")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 			}
 		}

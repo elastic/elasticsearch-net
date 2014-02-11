@@ -22,35 +22,33 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("test_index", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
 
 				//do indices.exists_alias 
-				_status = this._client.IndicesExistsAliasHead("test_alias");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
 
-				//is_false ; 
-				this.IsFalse(_response);
+				//is_false this._status.Result; 
+				this.IsFalse(this._status.Result);
 
 				//do indices.put_alias 
-				_status = this._client.IndicesPutAlias("test_alias", null, nv=>nv
+				this.Do(()=> this._client.IndicesPutAlias("test_alias", null, nv=>nv
 					.Add("index","test_index")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 				//do indices.exists_alias 
-				_status = this._client.IndicesExistsAliasHead("test_alias");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
 
-				//is_true ; 
-				this.IsTrue(_response);
+				//is_true this._status.Result; 
+				this.IsTrue(this._status.Result);
 
 				//do indices.get_alias 
-				_status = this._client.IndicesGetAlias("test_alias");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetAlias("test_alias"));
+
+				//match _response.test_index.aliases.test_alias: 
+				this.IsMatch(_response.test_index.aliases.test_alias, new {});
 
 			}
 		}

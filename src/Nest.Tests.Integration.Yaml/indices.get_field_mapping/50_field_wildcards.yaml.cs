@@ -50,8 +50,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 			}
 		}
@@ -64,8 +63,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("*");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("*"));
+
+				//match _response.test_index.test_type.t1.full_name: 
+				this.IsMatch(_response.test_index.test_type.t1.full_name, @"t1");
+
+				//match _response.test_index.test_type.t2.full_name: 
+				this.IsMatch(_response.test_index.test_type.t2.full_name, @"t2");
+
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"], @"obj.t1");
+
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"], @"obj.i_t1");
+
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t3"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t3"][@"full_name"], @"obj.i_t3");
 
 			}
 		}
@@ -77,10 +90,18 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("t*");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("t*"));
 
-				//length test_index.test_type: 0; 
+				//match _response.test_index.test_type.t1.full_name: 
+				this.IsMatch(_response.test_index.test_type.t1.full_name, @"t1");
+
+				//match _response.test_index.test_type.t2.full_name: 
+				this.IsMatch(_response.test_index.test_type.t2.full_name, @"t2");
+
+				//match _response.test_index.test_type.t3.full_name: 
+				this.IsMatch(_response.test_index.test_type.t3.full_name, @"obj.i_t3");
+
+				//length _response.test_index.test_type: 0; 
 				this.IsLength(_response.test_index.test_type, 0);
 
 			}
@@ -93,10 +114,18 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("*t1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("*t1"));
 
-				//length test_index.test_type: 0; 
+				//match _response.test_index.test_type.t1.full_name: 
+				this.IsMatch(_response.test_index.test_type.t1.full_name, @"t1");
+
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"], @"obj.t1");
+
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"], @"obj.i_t1");
+
+				//length _response.test_index.test_type: 0; 
 				this.IsLength(_response.test_index.test_type, 0);
 
 			}
@@ -109,10 +138,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("i_*");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("i_*"));
 
-				//length test_index.test_type: 0; 
+				//match _response.test_index.test_type.i_t1.full_name: 
+				this.IsMatch(_response.test_index.test_type.i_t1.full_name, @"obj.i_t1");
+
+				//match _response.test_index.test_type.i_t3.full_name: 
+				this.IsMatch(_response.test_index.test_type.i_t3.full_name, @"obj.i_t3");
+
+				//length _response.test_index.test_type: 0; 
 				this.IsLength(_response.test_index.test_type, 0);
 
 			}

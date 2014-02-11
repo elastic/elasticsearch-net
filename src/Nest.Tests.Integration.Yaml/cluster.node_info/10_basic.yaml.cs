@@ -22,16 +22,15 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeInfo
 			{	
 
 				//do cluster.node_info 
-				_status = this._client.ClusterNodeInfoGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.ClusterNodeInfoGet());
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
-				//is_true .nodes; 
+				//is_true _response.nodes; 
 				this.IsTrue(_response.nodes);
 
-				//is_true .cluster_name; 
+				//is_true _response.cluster_name; 
 				this.IsTrue(_response.cluster_name);
 
 			}

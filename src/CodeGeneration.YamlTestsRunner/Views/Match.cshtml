@@ -2,9 +2,10 @@
 @using CodeGeneration.YamlTestsRunner.Domain
 @using CodeGeneration.YamlTestsRunner;
 @using CsQuery.EquationParser
+@using FubuCore.Reflection
 @{
-	IsFalseStep m = Model;
+	MatchStep m = Model;
 	var i = "				";
 }
-@i//is_false @Raw(m.ResponseValue); 
-@(i)this.IsFalse(@Raw(m.ResponseValue));
+@i//match @Raw(m.ResponseValue): 
+@(i)this.IsMatch(@Raw(m.ResponseValue), @Raw(m.RawValue));

@@ -22,29 +22,30 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("testind", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("testind", null));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				_status = this._client.IndicesPutAlias("testali", _body, nv=>nv
+				this.Do(()=> this._client.IndicesPutAlias("testali", _body, nv=>nv
 					.Add("index","testind")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do indices.get_alias 
-				_status = this._client.IndicesGetAlias("testali");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetAlias("testali"));
+
+				//match _response.testind.aliases.testali.search_routing: 
+				this.IsMatch(_response.testind.aliases.testali.search_routing, @"routing value");
+
+				//match _response.testind.aliases.testali.index_routing: 
+				this.IsMatch(_response.testind.aliases.testali.index_routing, @"routing value");
 
 				//do indices.delete_alias 
-				_status = this._client.IndicesDeleteAlias("testind", "testali");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesDeleteAlias("testind", "testali"));
 
 				//do indices.get_alias 
-				_status = this._client.IndicesGetAlias("testind", "testali");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetAlias("testind", "testali"));
 
 			}
 		}

@@ -31,8 +31,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 			}
 		}
@@ -45,8 +44,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("text");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("text"));
+
+				//match _response.test_index.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
 
 			}
 		}
@@ -58,8 +59,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("test_index", "text");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "text"));
+
+				//match _response.test_index.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
 
 			}
 		}
@@ -71,8 +74,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "text");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text"));
+
+				//match _response.test_index.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
 
 			}
 		}
@@ -84,10 +89,12 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "System.Collections.Generic.List`1[System.Object]");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "System.Collections.Generic.List`1[System.Object]"));
 
-				//is_false .test_index.test_type.text1; 
+				//match _response.test_index.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
+
+				//is_false _response.test_index.test_type.text1; 
 				this.IsFalse(_response.test_index.test_type.text1);
 
 			}
@@ -100,10 +107,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
 					.Add("include_defaults","true")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response.test_index.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
+
+				//match _response.test_index.test_type.text.mapping.text.analyzer: 
+				this.IsMatch(_response.test_index.test_type.text.mapping.text.analyzer, @"default");
 
 			}
 		}

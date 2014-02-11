@@ -22,22 +22,24 @@ namespace Nest.Tests.Integration.Yaml.Info
 			{	
 
 				//do info 
-				_status = this._client.InfoGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.InfoGet());
 
-				//is_true .ok; 
+				//match _response.status: 
+				this.IsMatch(_response.status, 200);
+
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
-				//is_true .name; 
+				//is_true _response.name; 
 				this.IsTrue(_response.name);
 
-				//is_true .tagline; 
+				//is_true _response.tagline; 
 				this.IsTrue(_response.tagline);
 
-				//is_true .version; 
+				//is_true _response.version; 
 				this.IsTrue(_response.version);
 
-				//is_true .version.number; 
+				//is_true _response.version.number; 
 				this.IsTrue(_response.version.number);
 
 			}

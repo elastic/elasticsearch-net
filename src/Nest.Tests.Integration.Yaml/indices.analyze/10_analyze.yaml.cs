@@ -20,8 +20,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{	
 
 				//do ping 
-				_status = this._client.PingHead();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.PingHead());
 
 			}
 		}
@@ -34,16 +33,20 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{	
 
 				//do indices.analyze 
-				_status = this._client.IndicesAnalyzeGet(nv=>nv
+				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
 					.Add("text","Foo Bar")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//length tokens: 0; 
+				//length _response.tokens: 0; 
 				this.IsLength(_response.tokens, 0);
 
-			}
+				//match _response.tokens[0].token: 
+				this.IsMatch(_response.tokens[0].token, @"foo");
 
+				//match _response.tokens[1].token: 
+				this.IsMatch(_response.tokens[1].token, @"bar");
+
+			}
 		}
 
 		public class TokenizerAndFilterTests : IndicesAnalyze10AnalyzeYamlBase
@@ -53,15 +56,17 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{	
 
 				//do indices.analyze 
-				_status = this._client.IndicesAnalyzeGet(nv=>nv
+				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
 					.Add("filters","lowercase")
 					.Add("text","Foo Bar")
 					.Add("tokenizer","keyword")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//length tokens: 0; 
+				//length _response.tokens: 0; 
 				this.IsLength(_response.tokens, 0);
+
+				//match _response.tokens[0].token: 
+				this.IsMatch(_response.tokens[0].token, @"foo bar");
 
 			}
 		}
@@ -85,24 +90,27 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test", _body));
 
 				//do cluster.health 
-				_status = this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do indices.analyze 
-				_status = this._client.IndicesAnalyzeGet("test", nv=>nv
+				this.Do(()=> this._client.IndicesAnalyzeGet("test", nv=>nv
 					.Add("field","text")
 					.Add("text","Foo Bar!")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//length tokens: 0; 
+				//length _response.tokens: 0; 
 				this.IsLength(_response.tokens, 0);
+
+				//match _response.tokens[0].token: 
+				this.IsMatch(_response.tokens[0].token, @"Foo");
+
+				//match _response.tokens[1].token: 
+				this.IsMatch(_response.tokens[1].token, @"Bar!");
 
 			}
 		}

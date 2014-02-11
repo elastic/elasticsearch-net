@@ -22,10 +22,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache
 			{	
 
 				//do indices.clear_cache 
-				_status = this._client.IndicesClearCacheGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesClearCacheGet());
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 			}

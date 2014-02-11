@@ -25,26 +25,52 @@ namespace Nest.Tests.Integration.Yaml.Create
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("op_type","create")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
+				//match _response._index: 
+				this.IsMatch(_response._index, @"test_1");
+
+				//match _response._type: 
+				this.IsMatch(_response._type, @"test");
+
+				//match _response._id: 
+				this.IsMatch(_response._id, 1);
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 1);
+
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
+
+				//match _response._index: 
+				this.IsMatch(_response._index, @"test_1");
+
+				//match _response._type: 
+				this.IsMatch(_response._type, @"test");
+
+				//match _response._id: 
+				this.IsMatch(_response._id, 1);
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 1);
+
+				//match _response._source: 
+				this.IsMatch(_response._source, new {
+					foo= "bar"
+				});
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("op_type","create")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 			}
 		}

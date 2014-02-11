@@ -26,32 +26,55 @@ namespace Nest.Tests.Integration.Yaml.Get
 					foo= "bar",
 					count= "1"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","foo")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_false ._source; 
+				//match _response._index: 
+				this.IsMatch(_response._index, @"test_1");
+
+				//match _response._type: 
+				this.IsMatch(_response._type, @"test");
+
+				//match _response._id: 
+				this.IsMatch(_response._id, 1);
+
+				//match _response.fields.foo: 
+				this.IsMatch(_response.fields.foo, @"bar");
+
+				//is_false _response._source; 
 				this.IsFalse(_response._source);
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_false ._source; 
+				//match _response.fields.foo: 
+				this.IsMatch(_response.fields.foo, @"bar");
+
+				//match _response.fields.count: 
+				this.IsMatch(_response.fields.count, 1);
+
+				//is_false _response._source; 
 				this.IsFalse(_response._source);
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response.fields.foo: 
+				this.IsMatch(_response.fields.foo, @"bar");
+
+				//match _response.fields.count: 
+				this.IsMatch(_response.fields.count, 1);
+
+				//match _response._source.foo: 
+				this.IsMatch(_response._source.foo, @"bar");
 
 			}
 		}

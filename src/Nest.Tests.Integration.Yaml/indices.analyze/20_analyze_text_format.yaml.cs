@@ -22,11 +22,20 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			{	
 
 				//do indices.analyze 
-				_status = this._client.IndicesAnalyzeGet(nv=>nv
+				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
 					.Add("format","text")
 					.Add("text","tHE BLACK and white! AND red")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response.tokens: 
+				this.IsMatch(_response.tokens, @"[black:4->9:<ALPHANUM>]
+
+4: 
+[white:14->19:<ALPHANUM>]
+
+6: 
+[red:25->28:<ALPHANUM>]
+");
 
 			}
 		}

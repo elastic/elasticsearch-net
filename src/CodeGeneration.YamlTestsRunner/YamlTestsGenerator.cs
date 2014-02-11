@@ -47,6 +47,7 @@ namespace CodeGeneration.YamlTestsRunner
 			RegisterView("LowerThan");
 			RegisterView("GreaterThan");
 			RegisterView("Length");
+			RegisterView("Match");
 			RegisterView("DispatchSteps");
 			RegisterView("SetupClass");
 			var rawCalls = from l in File.ReadAllLines(_rawClientInterface)

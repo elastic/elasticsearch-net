@@ -22,15 +22,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("test_index", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
 
 				//do indices.exists_alias 
-				_status = this._client.IndicesExistsAliasHead("test_alias");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
 
-				//is_false ; 
-				this.IsFalse(_response);
+				//is_false this._status.Result; 
+				this.IsFalse(this._status.Result);
 
 				//do indices.update_aliases 
 				_body = new {
@@ -44,22 +42,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 						}
 					}
 				};
-				_status = this._client.IndicesUpdateAliasesPost(_body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesUpdateAliasesPost(_body));
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 				//do indices.exists_alias 
-				_status = this._client.IndicesExistsAliasHead("test_alias");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
 
-				//is_true ; 
-				this.IsTrue(_response);
+				//is_true this._status.Result; 
+				this.IsTrue(this._status.Result);
 
 				//do indices.get_aliases 
-				_status = this._client.IndicesGetAliases("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetAliases("test_index"));
+
+				//match _response.test_index.aliases.test_alias: 
+				this.IsMatch(_response.test_index.aliases.test_alias, new {
+					index_routing= "routing_value",
+					search_routing= "routing_value"
+				});
 
 			}
 		}

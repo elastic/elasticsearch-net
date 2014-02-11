@@ -22,11 +22,10 @@ namespace Nest.Tests.Integration.Yaml.Ping
 			{	
 
 				//do ping 
-				_status = this._client.PingHead();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.PingHead());
 
-				//is_true ; 
-				this.IsTrue(_response);
+				//is_true this._status.Result; 
+				this.IsTrue(this._status.Result);
 
 			}
 		}

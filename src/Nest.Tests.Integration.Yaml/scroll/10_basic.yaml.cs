@@ -22,19 +22,16 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("test_scroll", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_scroll", null));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_scroll", "test", "42", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_scroll", "test", "42", _body));
 
 				//do indices.refresh 
-				_status = this._client.IndicesRefreshGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesRefreshGet());
 
 				//do search 
 				_body = new {
@@ -42,18 +39,22 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 						match_all= new {}
 					}
 				};
-				_status = this._client.SearchPost("test_scroll", _body, nv=>nv
+				this.Do(()=> this._client.SearchPost("test_scroll", _body, nv=>nv
 					.Add("search_type","scan")
 					.Add("scroll","1m")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//set scroll_id = _scroll_id; 
+				//set scroll_id = _response._scroll_id; 
 				var scroll_id = _response._scroll_id;
 
 				//do scroll 
-				_status = this._client.ScrollGet(scroll_id);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.ScrollGet(scroll_id));
+
+				//match _response.hits.total: 
+				this.IsMatch(_response.hits.total, 1);
+
+				//match _response.hits.hits[0]._id: 
+				this.IsMatch(_response.hits.hits[0]._id, 42);
 
 			}
 		}

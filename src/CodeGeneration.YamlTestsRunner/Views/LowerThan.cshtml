@@ -7,5 +7,5 @@
 	LowerThanStep m = Model;
 	var i = "				";
 }
-@i//lt @m.ResponseValue: @m.Value; 
-@(i)this.IsLowerThan(_response.@(m.ResponseValue), @m.Value);
+@i//lt @Raw(m.ResponseValue): @m.Value; 
+@(i)this.IsLowerThan(@Raw(m.ResponseValue), @m.Value);

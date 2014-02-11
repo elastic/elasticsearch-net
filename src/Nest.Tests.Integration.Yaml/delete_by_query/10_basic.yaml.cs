@@ -25,26 +25,22 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do index 
 				_body = new {
 					foo= "baz"
 				};
-				_status = this._client.IndexPost("test_1", "test", "2", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "2", _body));
 
 				//do index 
 				_body = new {
 					foo= "foo"
 				};
-				_status = this._client.IndexPost("test_1", "test", "3", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "3", _body));
 
 				//do indices.refresh 
-				_status = this._client.IndicesRefreshGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesRefreshGet());
 
 				//do delete_by_query 
 				_body = new {
@@ -52,19 +48,19 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 						foo= "bar"
 					}
 				};
-				_status = this._client.DeleteByQuery("test_1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.DeleteByQuery("test_1", _body));
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 				//do indices.refresh 
-				_status = this._client.IndicesRefreshGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesRefreshGet());
 
 				//do count 
-				_status = this._client.CountGet("test_1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.CountGet("test_1"));
+
+				//match _response.count: 
+				this.IsMatch(_response.count, 2);
 
 			}
 		}

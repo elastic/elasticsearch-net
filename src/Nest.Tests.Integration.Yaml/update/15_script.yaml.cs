@@ -26,8 +26,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 					foo= "bar",
 					count= "1"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do update 
 				_body = new {
@@ -37,25 +36,57 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
 					.Add("script","1")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response._index: 
+				this.IsMatch(_response._index, @"test_1");
+
+				//match _response._type: 
+				this.IsMatch(_response._type, @"test");
+
+				//match _response._id: 
+				this.IsMatch(_response._id, 1);
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 2);
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
+
+				//match _response._source.foo: 
+				this.IsMatch(_response._source.foo, @"xxx");
+
+				//match _response._source.count: 
+				this.IsMatch(_response._source.count, 1);
 
 				//do update 
-				_status = this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
 					.Add("lang","mvel")
 					.Add("script","ctx._source.foo = 'yyy'")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response._index: 
+				this.IsMatch(_response._index, @"test_1");
+
+				//match _response._type: 
+				this.IsMatch(_response._type, @"test");
+
+				//match _response._id: 
+				this.IsMatch(_response._id, 1);
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 3);
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
+
+				//match _response._source.foo: 
+				this.IsMatch(_response._source.foo, @"yyy");
+
+				//match _response._source.count: 
+				this.IsMatch(_response._source.count, 1);
 
 				//do update 
 				_body = new {
@@ -65,15 +96,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do update 
-				_status = this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
 					.Add("lang","doesnotexist")
 					.Add("script","1")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 			}
 		}

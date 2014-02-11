@@ -7,5 +7,5 @@
 	GreaterThanStep m = Model;
 	var i = "				";
 }
-@i//gt @m.ResponseValue: @m.Value; 
-@(i)this.IsGreaterThan(_response.@(m.ResponseValue), @m.Value);
+@i//gt @Raw(m.ResponseValue): @m.Value; 
+@(i)this.IsGreaterThan(@Raw(m.ResponseValue), @m.Value);

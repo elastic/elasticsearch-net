@@ -22,10 +22,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesStats
 			{	
 
 				//do indices.stats 
-				_status = this._client.IndicesStatsGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesStatsGet());
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 			}

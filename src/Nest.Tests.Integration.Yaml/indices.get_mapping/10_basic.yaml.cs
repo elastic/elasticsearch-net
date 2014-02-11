@@ -32,8 +32,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 			}
 		}
@@ -46,8 +45,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 			{	
 
 				//do indices.get_mapping 
-				_status = this._client.IndicesGetMapping("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetMapping("test_index"));
+
+				//match _response.test_index.test_type.properties.text.type: 
+				this.IsMatch(_response.test_index.test_type.properties.text.type, @"string");
+
+				//match _response.test_index.test_type.properties.text.analyzer: 
+				this.IsMatch(_response.test_index.test_type.properties.text.analyzer, @"whitespace");
 
 			}
 		}
@@ -59,8 +63,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 			{	
 
 				//do indices.get_mapping 
-				_status = this._client.IndicesGetMapping("test_index", "test_type");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetMapping("test_index", "test_type"));
+
+				//match _response.test_type.properties.text.type: 
+				this.IsMatch(_response.test_type.properties.text.type, @"string");
+
+				//match _response.test_type.properties.text.analyzer: 
+				this.IsMatch(_response.test_type.properties.text.analyzer, @"whitespace");
 
 			}
 		}

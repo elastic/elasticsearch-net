@@ -6,5 +6,5 @@
 	IsTrueStep m = Model;
 	var i = "				";
 }
-@i//is_true @m.ResponseValue; 
-@(i)this.IsTrue(_response@(m.ResponseValue));
+@i//is_true @Raw(m.ResponseValue); 
+@(i)this.IsTrue(@Raw(m.ResponseValue));

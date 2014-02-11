@@ -30,45 +30,39 @@ namespace Nest.Tests.Integration.Yaml.Get
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
 
 				//do cluster.health 
-				_status = this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("realtime","1")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_true .exists; 
+				//is_true _response.exists; 
 				this.IsTrue(_response.exists);
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("realtime","0")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("realtime","0")
 					.Add("refresh","1")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_true .exists; 
+				//is_true _response.exists; 
 				this.IsTrue(_response.exists);
 
 			}

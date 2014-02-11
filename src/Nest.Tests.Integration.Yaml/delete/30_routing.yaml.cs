@@ -25,28 +25,24 @@ namespace Nest.Tests.Integration.Yaml.Delete
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("routing","5")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do cluster.health 
-				_status = this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do delete 
-				_status = this._client.Delete("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("routing","4")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do delete 
-				_status = this._client.Delete("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("routing","5")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 			}
 		}

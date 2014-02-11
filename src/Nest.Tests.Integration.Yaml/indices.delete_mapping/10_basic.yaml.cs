@@ -34,26 +34,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.exists_type 
-				_status = this._client.IndicesExistsTypeHead("test_index", "test_type");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsTypeHead("test_index", "test_type"));
 
-				//is_true ; 
-				this.IsTrue(_response);
+				//is_true this._status.Result; 
+				this.IsTrue(this._status.Result);
 
 				//do indices.delete_mapping 
-				_status = this._client.IndicesDeleteMapping("test_index", "test_type");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesDeleteMapping("test_index", "test_type"));
 
 				//do indices.exists_type 
-				_status = this._client.IndicesExistsTypeHead("test_index", "test_type");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsTypeHead("test_index", "test_type"));
 
-				//is_false ; 
-				this.IsFalse(_response);
+				//is_false this._status.Result; 
+				this.IsFalse(this._status.Result);
 
 			}
 		}

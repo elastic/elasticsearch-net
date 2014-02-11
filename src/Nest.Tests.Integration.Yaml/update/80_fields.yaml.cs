@@ -30,12 +30,17 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
 					.Add("fields","foo,bar,_source")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_false .get.fields.bar; 
+				//match _response.get._source.foo: 
+				this.IsMatch(_response.get._source.foo, @"bar");
+
+				//match _response.get.fields.foo: 
+				this.IsMatch(_response.get.fields.foo, @"bar");
+
+				//is_false _response.get.fields.bar; 
 				this.IsFalse(_response.get.fields.bar);
 
 			}

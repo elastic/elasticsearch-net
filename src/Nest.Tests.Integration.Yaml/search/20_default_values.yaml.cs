@@ -22,30 +22,25 @@ namespace Nest.Tests.Integration.Yaml.Search
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("test_2", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_2", null));
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("test_1", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_1", null));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_2", "test", "42", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_2", "test", "42", _body));
 
 				//do indices.refresh 
-				_status = this._client.IndicesRefreshGet("System.Collections.Generic.List`1[System.Object]");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesRefreshGet("System.Collections.Generic.List`1[System.Object]"));
 
 				//do search 
 				_body = new {
@@ -55,8 +50,28 @@ namespace Nest.Tests.Integration.Yaml.Search
 						}
 					}
 				};
-				_status = this._client.SearchPost("_all", "test", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.SearchPost("_all", "test", _body));
+
+				//match _response.hits.total: 
+				this.IsMatch(_response.hits.total, 2);
+
+				//match _response.hits.hits[0]._index: 
+				this.IsMatch(_response.hits.hits[0]._index, @"test_1");
+
+				//match _response.hits.hits[0]._type: 
+				this.IsMatch(_response.hits.hits[0]._type, @"test");
+
+				//match _response.hits.hits[0]._id: 
+				this.IsMatch(_response.hits.hits[0]._id, 1);
+
+				//match _response.hits.hits[1]._index: 
+				this.IsMatch(_response.hits.hits[1]._index, @"test_2");
+
+				//match _response.hits.hits[1]._type: 
+				this.IsMatch(_response.hits.hits[1]._type, @"test");
+
+				//match _response.hits.hits[1]._id: 
+				this.IsMatch(_response.hits.hits[1]._id, 42);
 
 			}
 		}

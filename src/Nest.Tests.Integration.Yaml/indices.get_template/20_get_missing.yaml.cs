@@ -20,10 +20,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{	
 
 				//do indices.delete_template 
-				_status = this._client.IndicesDeleteTemplate("*", nv=>nv
+				this.Do(()=> this._client.IndicesDeleteTemplate("*", nv=>nv
 					.Add("ignore","404")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 			}
 		}
@@ -36,8 +35,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{	
 
 				//do indices.get_template 
-				_status = this._client.IndicesGetTemplate("test");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetTemplate("test"));
 
 			}
 		}
@@ -49,14 +47,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{	
 
 				//do indices.delete_template 
-				_status = this._client.IndicesDeleteTemplate("test", nv=>nv
+				this.Do(()=> this._client.IndicesDeleteTemplate("test", nv=>nv
 					.Add("ignore","404")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do indices.get_template 
-				_status = this._client.IndicesGetTemplate("test");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetTemplate("test"));
+
+				//match this._status.Result: 
+				this.IsMatch(this._status.Result, new {});
 
 			}
 		}

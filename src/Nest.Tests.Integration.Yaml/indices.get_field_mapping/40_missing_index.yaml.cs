@@ -22,8 +22,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			{	
 
 				//do indices.get_field_mapping 
-				_status = this._client.IndicesGetFieldMapping("test_index", "type", "field");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "type", "field"));
 
 			}
 		}

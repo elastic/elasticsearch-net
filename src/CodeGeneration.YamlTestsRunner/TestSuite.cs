@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
@@ -10,6 +11,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Markup;
+using CsQuery.ExtensionMethods.Internal;
 using FubuCore.Logging;
 using FubuCore.Reflection;
 using FubuCsProjFile.Templating.Runtime;
@@ -81,50 +84,72 @@ namespace CodeGeneration.YamlTestsRunner
 					case "length":
 						yield return CreateLengthStep(kv.Value as Dictionary<object, object>);
 						break;
+					case "match":
+						yield return CreateMatchStep(kv.Value as Dictionary<object, object>);
+						break;
 				}
 
 			}
 		}
-
+		
+		private static MatchStep CreateMatchStep(Dictionary<object, object> value)
+		{
+			var kv = value.First();
+			var s = kv.Value.ToStringRepresentation();
+			return new MatchStep { RawValue = s, ResponseValue = PropertyPath(kv.Key as string)};
+		}
 		private static LengthStep CreateLengthStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
-			return new LengthStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = kv.Key as string};
+			return new LengthStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = PropertyPath(kv.Key as string)};
 		}
 		private static LowerThanStep CreateLowerThanStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
-			return new LowerThanStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = kv.Key as string};
+			return new LowerThanStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = PropertyPath(kv.Key as string)};
 		}
 		private static GreaterThanStep CreateGreaterThanStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
-			return new GreaterThanStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = kv.Key as string};
+			return new GreaterThanStep
+			{
+				Value = kv.Value is int ? (int) kv.Value : 0,
+				ResponseValue = PropertyPath(kv.Key as string)
+			};
 		}
 		private static IsTrueStep CreateIsTrueStep(string value)
 		{
-			value = TrueFalseParam(value);
+			value = PropertyPath(value);
 			return new IsTrueStep {ResponseValue = value};
 		}
 
-		private static string TrueFalseParam(string value)
+		private static string PropertyPath(string value)
 		{
+			if (value.IsNullOrEmpty() || value == "$body")
+				return "this._status.Result";
+
 			value = Regex.Replace(value, @"\.(\d+)\.?", "[$1].");
 			if (value.Length > 0)
 				value = "." + value;
-			return value;
+			if (Regex.IsMatch(value, @"([\s\-]|\\\.)"))
+			{
+				value = value.Replace(@"\.", ".");
+				value = Regex.Replace(value, @"\.([^\.]+)", m => "[" + m.Value.Trim('.').SurroundWithQuotes() + "]");
+				return "_responseDictionary" + value;
+			}
+			return "_response" + value;
 		}
 
 		private static IsFalseStep CreateIsFalseStep(string value)
 		{
-			value = TrueFalseParam(value);
+			value = PropertyPath(value);
 			return new IsFalseStep { ResponseValue = value };
 		}
 
 		private static SetStep CreateSetStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
-			return new SetStep() {VariableName = kv.Value as string, ResponseValue = kv.Key as string};
+			return new SetStep() {VariableName = kv.Value as string, ResponseValue = PropertyPath(kv.Key as string)};
 		}
 
 		private static DoStep CreateDoStep(Dictionary<object, object> value)

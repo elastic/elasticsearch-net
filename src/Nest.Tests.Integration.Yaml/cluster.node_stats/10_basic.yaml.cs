@@ -22,16 +22,15 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 			{	
 
 				//do cluster.node_stats 
-				_status = this._client.ClusterNodeStatsGet(nv=>nv
+				this.Do(()=> this._client.ClusterNodeStatsGet(nv=>nv
 					.Add("indices","true")
 					.Add("transport","true")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_true .cluster_name; 
+				//is_true _response.cluster_name; 
 				this.IsTrue(_response.cluster_name);
 
-				//is_true .nodes; 
+				//is_true _response.nodes; 
 				this.IsTrue(_response.nodes);
 
 			}

@@ -29,23 +29,20 @@ namespace Nest.Tests.Integration.Yaml.Mget
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
 
 				//do cluster.health 
-				_status = this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("routing","5")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do mget 
 				_body = new {
@@ -63,19 +60,30 @@ namespace Nest.Tests.Integration.Yaml.Mget
 						}
 					}
 				};
-				_status = this._client.MgetPost("test_1", "test", _body, nv=>nv
+				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_false .docs[0].exists; 
+				//is_false _response.docs[0].exists; 
 				this.IsFalse(_response.docs[0].exists);
 
-				//is_false .docs[1].exists; 
+				//is_false _response.docs[1].exists; 
 				this.IsFalse(_response.docs[1].exists);
 
-				//is_true .docs[2].exists; 
+				//is_true _response.docs[2].exists; 
 				this.IsTrue(_response.docs[2].exists);
+
+				//match _response.docs[2]._index: 
+				this.IsMatch(_response.docs[2]._index, @"test_1");
+
+				//match _response.docs[2]._type: 
+				this.IsMatch(_response.docs[2]._type, @"test");
+
+				//match _response.docs[2]._id: 
+				this.IsMatch(_response.docs[2]._id, 1);
+
+				//match _response.docs[2].fields._routing: 
+				this.IsMatch(_response.docs[2].fields._routing, 5);
 
 			}
 		}

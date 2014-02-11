@@ -22,28 +22,25 @@ namespace Nest.Tests.Integration.Yaml.Exists
 			{	
 
 				//do exists 
-				_status = this._client.ExistsHead("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.ExistsHead("test_1", "test", "1"));
 
-				//is_false ; 
-				this.IsFalse(_response);
+				//is_false this._status.Result; 
+				this.IsFalse(this._status.Result);
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
-				//is_true ; 
-				this.IsTrue(_response);
+				//is_true this._status.Result; 
+				this.IsTrue(this._status.Result);
 
 				//do exists 
-				_status = this._client.ExistsHead("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.ExistsHead("test_1", "test", "1"));
 
-				//is_true ; 
-				this.IsTrue(_response);
+				//is_true this._status.Result; 
+				this.IsTrue(this._status.Result);
 
 			}
 		}

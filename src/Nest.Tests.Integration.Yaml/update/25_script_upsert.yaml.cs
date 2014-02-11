@@ -31,12 +31,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
+
+				//match _response._source.foo: 
+				this.IsMatch(_response._source.foo, @"baz");
 
 				//do update 
 				_body = new {
@@ -48,12 +49,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
+
+				//match _response._source.foo: 
+				this.IsMatch(_response._source.foo, @"xxx");
 
 			}
 		}

@@ -25,31 +25,34 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("version_type","external")
 					.Add("version","5")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 5);
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("version_type","external")
 					.Add("version","5")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("version_type","external")
 					.Add("version","6")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 6);
 
 			}
 		}

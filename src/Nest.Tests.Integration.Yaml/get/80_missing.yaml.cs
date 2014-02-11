@@ -22,8 +22,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 			{	
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "test", "1"));
 
 			}
 		}
@@ -35,10 +34,9 @@ namespace Nest.Tests.Integration.Yaml.Get
 			{	
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("ignore","404")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 			}
 		}

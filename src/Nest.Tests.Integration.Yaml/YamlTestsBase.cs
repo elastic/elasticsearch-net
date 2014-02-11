@@ -12,7 +12,8 @@ namespace Nest.Tests.Integration.Yaml
 		protected object _body;
 		protected ConnectionStatus _status;
 		protected dynamic _response;
-	
+		protected Dictionary<string, dynamic> _responseDictionary;
+
 		public YamlTestsBase()
 		{
 			var uri = new Uri("http:localhost:9200");
@@ -20,27 +21,39 @@ namespace Nest.Tests.Integration.Yaml
 			_client = new RawElasticClient(settings);
 		}
 
-		public void IsTrue(object o)
+		protected void Do(Func<ConnectionStatus> action)
+		{
+			this._status = action();
+			this._response = this._status.Deserialize<dynamic>();
+			this._responseDictionary = this._status.Deserialize<Dictionary<string, object>>();
+		}
+
+		protected void IsTrue(object o)
 		{
 			
 		}
 
-		public void IsFalse(object o)
+		protected void IsFalse(object o)
 		{
 			
 		}
 
-		public void IsLowerThan(object o, int value)
+		protected void IsLowerThan(object o, int value)
 		{
 			
 		}
 
-		public void IsGreaterThan(object o, int value)
+		protected void IsGreaterThan(object o, int value)
 		{
 			
 		}
 		
-		public void IsLength(object o, int value)
+		protected void IsLength(object o, int value)
+		{
+			
+		}
+
+		protected void IsMatch(object o, object value)
 		{
 			
 		}

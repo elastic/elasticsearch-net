@@ -22,22 +22,19 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("testing", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("testing", null));
 
 				//do cluster.health 
-				_status = this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do indices.validate_query 
-				_status = this._client.IndicesValidateQueryGet(nv=>nv
+				this.Do(()=> this._client.IndicesValidateQueryGet(nv=>nv
 					.Add("q","query string")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_true .valid; 
+				//is_true _response.valid; 
 				this.IsTrue(_response.valid);
 
 				//do indices.validate_query 
@@ -46,10 +43,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 						invalid_query= new {}
 					}
 				};
-				_status = this._client.IndicesValidateQueryPost(_body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesValidateQueryPost(_body));
 
-				//is_false .valid; 
+				//is_false _response.valid; 
 				this.IsFalse(_response.valid);
 
 			}

@@ -27,12 +27,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						type_1= new {}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_mapping 
-				_status = this._client.IndicesGetMapping("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetMapping("test_index"));
+
+				//match _response.test_index.type_1.properties: 
+				this.IsMatch(_response.test_index.type_1.properties, new {});
 
 			}
 		}
@@ -49,12 +50,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						number_of_replicas= "0"
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_settings 
-				_status = this._client.IndicesGetSettings("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetSettings("test_index"));
+
+				//match _responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"], 0);
 
 			}
 		}
@@ -77,12 +79,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_warmer 
-				_status = this._client.IndicesGetWarmer("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetWarmer("test_index"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
 
 			}
 		}
@@ -111,20 +114,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_mapping 
-				_status = this._client.IndicesGetMapping("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetMapping("test_index"));
+
+				//match _response.test_index.type_1.properties: 
+				this.IsMatch(_response.test_index.type_1.properties, new {});
 
 				//do indices.get_settings 
-				_status = this._client.IndicesGetSettings("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetSettings("test_index"));
+
+				//match _responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"], 0);
 
 				//do indices.get_warmer 
-				_status = this._client.IndicesGetWarmer("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetWarmer("test_index"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
 
 			}
 		}

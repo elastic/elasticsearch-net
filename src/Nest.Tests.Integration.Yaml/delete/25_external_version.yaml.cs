@@ -25,25 +25,28 @@ namespace Nest.Tests.Integration.Yaml.Delete
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("version_type","external")
 					.Add("version","5")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 5);
 
 				//do delete 
-				_status = this._client.Delete("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("version_type","external")
 					.Add("version","4")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do delete 
-				_status = this._client.Delete("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("version_type","external")
 					.Add("version","6")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response._version: 
+				this.IsMatch(_response._version, 6);
 
 			}
 		}

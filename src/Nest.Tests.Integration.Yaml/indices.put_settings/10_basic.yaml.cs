@@ -29,23 +29,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test-index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test-index", _body));
 
 				//do indices.get_settings 
-				_status = this._client.IndicesGetSettings("test-index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetSettings("test-index"));
+
+				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 0);
 
 				//do indices.put_settings 
 				_body = new {
 					number_of_replicas= "1"
 				};
-				_status = this._client.IndicesPutSettings(_body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesPutSettings(_body));
 
 				//do indices.get_settings 
-				_status = this._client.IndicesGetSettings();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetSettings());
+
+				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 1);
 
 			}
 		}

@@ -22,22 +22,19 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 			{	
 
 				//do indices.exists 
-				_status = this._client.IndicesExistsHead("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsHead("test_index"));
 
-				//is_false ; 
-				this.IsFalse(_response);
+				//is_false this._status.Result; 
+				this.IsFalse(this._status.Result);
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("test_index", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
 
 				//do indices.exists 
-				_status = this._client.IndicesExistsHead("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesExistsHead("test_index"));
 
-				//is_true ; 
-				this.IsTrue(_response);
+				//is_true this._status.Result; 
+				this.IsTrue(this._status.Result);
 
 			}
 		}

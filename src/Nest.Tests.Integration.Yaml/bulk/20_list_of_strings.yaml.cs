@@ -22,17 +22,21 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 			{	
 
 				//do bulk 
-				_body = @"""{\""index\"": {\""_index\"": \""test_index\"", \""_type\"": \""test_type\"", \""_id\"": \""test_id\""}}""
-""{\""f1\"": \""v1\"", \""f2\"": 42}""
-""{\""index\"": {\""_index\"": \""test_index\"", \""_type\"": \""test_type\"", \""_id\"": \""test_id2\""}}""
-""{\""f1\"": \""v2\"", \""f2\"": 47}""";				_status = this._client.BulkPost(_body, nv=>nv
+				_body = new dynamic[] {
+					"new {\"index\"= new {\"_index\"= \"test_index\", \"_type\"= \"test_type\", \"_id\"= \"test_id\"}}",
+					"new {\"f1\"= \"v1\", \"f2\"= 42}",
+					"new {\"index\"= new {\"_index\"= \"test_index\", \"_type\"= \"test_type\", \"_id\"= \"test_id2\"}}",
+					"new {\"f1\"= \"v2\", \"f2\"= 47}"
+				};
+				this.Do(()=> this._client.BulkPost(_body, nv=>nv
 					.Add("refresh","true")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do count 
-				_status = this._client.CountGet("test_index");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.CountGet("test_index"));
+
+				//match _response.count: 
+				this.IsMatch(_response.count, 2);
 
 			}
 		}

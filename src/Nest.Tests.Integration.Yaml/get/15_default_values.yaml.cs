@@ -25,12 +25,24 @@ namespace Nest.Tests.Integration.Yaml.Get
 				_body = new {
 					foo= "bar"
 				};
-				_status = this._client.IndexPost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do get 
-				_status = this._client.Get("test_1", "_all", "1");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.Get("test_1", "_all", "1"));
+
+				//match _response._index: 
+				this.IsMatch(_response._index, @"test_1");
+
+				//match _response._type: 
+				this.IsMatch(_response._type, @"test");
+
+				//match _response._id: 
+				this.IsMatch(_response._id, 1);
+
+				//match _response._source: 
+				this.IsMatch(_response._source, new {
+					foo= "bar"
+				});
 
 			}
 		}

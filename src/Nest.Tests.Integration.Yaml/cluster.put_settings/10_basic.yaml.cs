@@ -27,12 +27,20 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 						discovery= new { zen= new { minimum_master_nodes=  "1" } }
 					}
 				};
-				_status = this._client.ClusterPutSettings(_body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.ClusterPutSettings(_body));
+
+				//match _response.transient: 
+				this.IsMatch(_response.transient, new {
+					discovery= new { zen= new { minimum_master_nodes=  "1" } }
+				});
 
 				//do cluster.get_settings 
-				_status = this._client.ClusterGetSettings();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.ClusterGetSettings());
+
+				//match _response.transient: 
+				this.IsMatch(_response.transient, new {
+					discovery= new { zen= new { minimum_master_nodes=  "1" } }
+				});
 
 			}
 		}

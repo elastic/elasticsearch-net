@@ -6,5 +6,5 @@
 	SetStep m = Model;
 	var i = "				";
 }
-@i//set @m.VariableName = @m.ResponseValue; 
-@(i)var @m.VariableName = _response.@m.ResponseValue;
+@i//set @m.VariableName = @Raw(m.ResponseValue); 
+@(i)var @m.VariableName = @Raw(m.ResponseValue);

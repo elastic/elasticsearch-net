@@ -34,12 +34,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_index", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_mapping 
-				_status = this._client.IndicesGetMapping("test_index", "not_test_type");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetMapping("test_index", "not_test_type"));
 
 			}
 		}

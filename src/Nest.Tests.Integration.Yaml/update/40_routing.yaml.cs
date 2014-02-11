@@ -29,14 +29,12 @@ namespace Nest.Tests.Integration.Yaml.Update
 						}
 					}
 				};
-				_status = this._client.IndicesCreatePost("test_1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
 
 				//do cluster.health 
-				_status = this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do update 
 				_body = new {
@@ -47,17 +45,18 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
 					.Add("routing","5")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
 				//do get 
-				_status = this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("routing","5")
 					.Add("fields","_routing")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response.fields._routing: 
+				this.IsMatch(_response.fields._routing, 5);
 
 				//do update 
 				_body = new {
@@ -65,8 +64,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
 
 				//do update 
 				_body = new {
@@ -74,11 +72,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				_status = this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
 					.Add("routing","5")
 					.Add("fields","foo")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
+
+				//match _response.get.fields.foo: 
+				this.IsMatch(_response.get.fields.foo, @"baz");
 
 			}
 		}

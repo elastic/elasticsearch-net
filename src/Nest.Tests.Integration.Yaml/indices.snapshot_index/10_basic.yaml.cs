@@ -22,10 +22,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex
 			{	
 
 				//do indices.snapshot_index 
-				_status = this._client.IndicesSnapshotIndexPost();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesSnapshotIndexPost());
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 			}

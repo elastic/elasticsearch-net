@@ -29,12 +29,19 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_replicas= "0"
 					}
 				};
-				_status = this._client.IndicesPutTemplatePost("test", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesPutTemplatePost("test", _body));
 
 				//do indices.get_template 
-				_status = this._client.IndicesGetTemplate("test");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetTemplate("test"));
+
+				//match _response.test.template: 
+				this.IsMatch(_response.test.template, @"test-*");
+
+				//match _response.test.settings: 
+				this.IsMatch(_response.test.settings, new {
+					index= new { number_of_shards= "1", }
+					index= new { number_of_replicas= "0" }
+				});
 
 			}
 		}
@@ -52,8 +59,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_shards= "1"
 					}
 				};
-				_status = this._client.IndicesPutTemplatePost("test", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesPutTemplatePost("test", _body));
 
 				//do indices.put_template 
 				_body = new {
@@ -62,12 +68,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_shards= "1"
 					}
 				};
-				_status = this._client.IndicesPutTemplatePost("test2", _body);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesPutTemplatePost("test2", _body));
 
 				//do indices.get_template 
-				_status = this._client.IndicesGetTemplate();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesGetTemplate());
+
+				//match _response.test.template: 
+				this.IsMatch(_response.test.template, @"test-*");
+
+				//match _response.test2.template: 
+				this.IsMatch(_response.test2.template, @"test2-*");
 
 			}
 		}

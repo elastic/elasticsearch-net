@@ -22,15 +22,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesStatus
 			{	
 
 				//do indices.status 
-				_status = this._client.IndicesStatusGet();
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesStatusGet());
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 				//do indices.status 
-				_status = this._client.IndicesStatusGet("not_here");
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesStatusGet("not_here"));
 
 			}
 		}

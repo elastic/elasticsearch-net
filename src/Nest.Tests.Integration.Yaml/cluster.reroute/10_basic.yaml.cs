@@ -22,10 +22,9 @@ namespace Nest.Tests.Integration.Yaml.ClusterReroute
 			{	
 
 				//do cluster.reroute 
-				_status = this._client.ClusterReroutePost(null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.ClusterReroutePost(null));
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 			}

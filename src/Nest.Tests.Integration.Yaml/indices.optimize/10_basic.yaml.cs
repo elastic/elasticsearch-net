@@ -22,16 +22,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 			{	
 
 				//do indices.create 
-				_status = this._client.IndicesCreatePost("testing", null);
-				_response = _status.Deserialize<dynamic>();
+				this.Do(()=> this._client.IndicesCreatePost("testing", null));
 
 				//do indices.optimize 
-				_status = this._client.IndicesOptimizeGet("testing", nv=>nv
+				this.Do(()=> this._client.IndicesOptimizeGet("testing", nv=>nv
 					.Add("max_num_segments","1")
-				);
-				_response = _status.Deserialize<dynamic>();
+				));
 
-				//is_true .ok; 
+				//is_true _response.ok; 
 				this.IsTrue(_response.ok);
 
 			}
