@@ -54,8 +54,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 				//do indices.get_template 
 				this.Do(()=> this._client.IndicesGetTemplate("test"));
 
-				//match this._status.Result: 
-				this.IsMatch(this._status.Result, new {});
+				//match this._status: 
+				this.IsMatch(this._status, new {});
 
 			}
 		}

@@ -27,8 +27,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 				//do indices.exists_alias 
 				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
 
-				//is_false this._status.Result; 
-				this.IsFalse(this._status.Result);
+				//is_false this._status; 
+				this.IsFalse(this._status);
 
 				//do indices.put_alias 
 				this.Do(()=> this._client.IndicesPutAlias("test_alias", null, nv=>nv
@@ -41,8 +41,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 				//do indices.exists_alias 
 				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
 
-				//is_true this._status.Result; 
-				this.IsTrue(this._status.Result);
+				//is_true this._status; 
+				this.IsTrue(this._status);
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAlias("test_alias"));

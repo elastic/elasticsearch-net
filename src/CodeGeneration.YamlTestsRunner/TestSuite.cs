@@ -101,12 +101,16 @@ namespace CodeGeneration.YamlTestsRunner
 		private static LengthStep CreateLengthStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
-			return new LengthStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = PropertyPath(kv.Key as string)};
+			int i = 0;
+			int.TryParse(kv.Value as string, out i);
+			return new LengthStep { Value = i, ResponseValue = PropertyPath(kv.Key as string)};
 		}
 		private static LowerThanStep CreateLowerThanStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
-			return new LowerThanStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = PropertyPath(kv.Key as string)};
+			int i = 0;
+			int.TryParse(kv.Value as string, out i);
+			return new LowerThanStep { Value = i, ResponseValue = PropertyPath(kv.Key as string)};
 		}
 		private static GreaterThanStep CreateGreaterThanStep(Dictionary<object, object> value)
 		{
@@ -126,7 +130,7 @@ namespace CodeGeneration.YamlTestsRunner
 		private static string PropertyPath(string value)
 		{
 			if (value.IsNullOrEmpty() || value == "$body")
-				return "this._status.Result";
+				return "this._status";
 
 			value = Regex.Replace(value, @"\.(\d+)\.?", "[$1].");
 			if (value.Length > 0)

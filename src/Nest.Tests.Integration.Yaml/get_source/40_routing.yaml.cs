@@ -49,8 +49,8 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 					.Add("routing","5")
 				));
 
-				//match this._status.Result: 
-				this.IsMatch(this._status.Result, new {
+				//match this._status: 
+				this.IsMatch(this._status, new {
 					foo= "bar"
 				});
 

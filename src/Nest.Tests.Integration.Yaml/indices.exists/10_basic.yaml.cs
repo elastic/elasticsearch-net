@@ -24,8 +24,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 				//do indices.exists 
 				this.Do(()=> this._client.IndicesExistsHead("test_index"));
 
-				//is_false this._status.Result; 
-				this.IsFalse(this._status.Result);
+				//is_false this._status; 
+				this.IsFalse(this._status);
 
 				//do indices.create 
 				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
@@ -33,8 +33,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 				//do indices.exists 
 				this.Do(()=> this._client.IndicesExistsHead("test_index"));
 
-				//is_true this._status.Result; 
-				this.IsTrue(this._status.Result);
+				//is_true this._status; 
+				this.IsTrue(this._status);
 
 			}
 		}

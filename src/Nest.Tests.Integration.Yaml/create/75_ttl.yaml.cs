@@ -53,8 +53,8 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("fields","_ttl")
 				));
 
-				//lt _response.fields._ttl: 0; 
-				this.IsLowerThan(_response.fields._ttl, 0);
+				//lt _response.fields._ttl: 10000; 
+				this.IsLowerThan(_response.fields._ttl, 10000);
 
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);
@@ -76,8 +76,8 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("fields","_ttl")
 				));
 
-				//lt _response.fields._ttl: 0; 
-				this.IsLowerThan(_response.fields._ttl, 0);
+				//lt _response.fields._ttl: 100000; 
+				this.IsLowerThan(_response.fields._ttl, 100000);
 
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);
@@ -99,8 +99,8 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("fields","_ttl")
 				));
 
-				//lt _response.fields._ttl: 0; 
-				this.IsLowerThan(_response.fields._ttl, 0);
+				//lt _response.fields._ttl: 20000; 
+				this.IsLowerThan(_response.fields._ttl, 20000);
 
 				//gt _response.fields._ttl: 0; 
 				this.IsGreaterThan(_response.fields._ttl, 0);

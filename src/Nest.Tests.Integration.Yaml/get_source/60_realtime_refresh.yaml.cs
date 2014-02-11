@@ -46,8 +46,8 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 					.Add("realtime","1")
 				));
 
-				//match this._status.Result: 
-				this.IsMatch(this._status.Result, new {
+				//match this._status: 
+				this.IsMatch(this._status, new {
 					foo= "bar"
 				});
 
@@ -62,8 +62,8 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 					.Add("refresh","1")
 				));
 
-				//match this._status.Result: 
-				this.IsMatch(this._status.Result, new {
+				//match this._status: 
+				this.IsMatch(this._status, new {
 					foo= "bar"
 				});
 

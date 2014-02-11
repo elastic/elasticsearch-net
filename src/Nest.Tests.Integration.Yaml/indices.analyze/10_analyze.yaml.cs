@@ -37,8 +37,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 					.Add("text","Foo Bar")
 				));
 
-				//length _response.tokens: 0; 
-				this.IsLength(_response.tokens, 0);
+				//length _response.tokens: 2; 
+				this.IsLength(_response.tokens, 2);
 
 				//match _response.tokens[0].token: 
 				this.IsMatch(_response.tokens[0].token, @"foo");
@@ -62,8 +62,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 					.Add("tokenizer","keyword")
 				));
 
-				//length _response.tokens: 0; 
-				this.IsLength(_response.tokens, 0);
+				//length _response.tokens: 1; 
+				this.IsLength(_response.tokens, 1);
 
 				//match _response.tokens[0].token: 
 				this.IsMatch(_response.tokens[0].token, @"foo bar");
@@ -103,8 +103,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 					.Add("text","Foo Bar!")
 				));
 
-				//length _response.tokens: 0; 
-				this.IsLength(_response.tokens, 0);
+				//length _response.tokens: 2; 
+				this.IsLength(_response.tokens, 2);
 
 				//match _response.tokens[0].token: 
 				this.IsMatch(_response.tokens[0].token, @"Foo");

@@ -30,8 +30,8 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				//do exists 
 				this.Do(()=> this._client.ExistsHead("test_1", "_all", "1"));
 
-				//is_true this._status.Result; 
-				this.IsTrue(this._status.Result);
+				//is_true this._status; 
+				this.IsTrue(this._status);
 
 			}
 		}

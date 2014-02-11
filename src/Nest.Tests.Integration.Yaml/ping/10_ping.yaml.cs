@@ -24,8 +24,8 @@ namespace Nest.Tests.Integration.Yaml.Ping
 				//do ping 
 				this.Do(()=> this._client.PingHead());
 
-				//is_true this._status.Result; 
-				this.IsTrue(this._status.Result);
+				//is_true this._status; 
+				this.IsTrue(this._status);
 
 			}
 		}

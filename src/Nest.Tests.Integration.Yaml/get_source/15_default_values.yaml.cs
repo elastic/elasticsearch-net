@@ -30,8 +30,8 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "_all", "1"));
 
-				//match this._status.Result: 
-				this.IsMatch(this._status.Result, new {
+				//match this._status: 
+				this.IsMatch(this._status, new {
 					foo= "bar"
 				});
 

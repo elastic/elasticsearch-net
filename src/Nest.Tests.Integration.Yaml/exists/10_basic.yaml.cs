@@ -24,8 +24,8 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				//do exists 
 				this.Do(()=> this._client.ExistsHead("test_1", "test", "1"));
 
-				//is_false this._status.Result; 
-				this.IsFalse(this._status.Result);
+				//is_false this._status; 
+				this.IsFalse(this._status);
 
 				//do index 
 				_body = new {
@@ -33,14 +33,14 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
-				//is_true this._status.Result; 
-				this.IsTrue(this._status.Result);
+				//is_true this._status; 
+				this.IsTrue(this._status);
 
 				//do exists 
 				this.Do(()=> this._client.ExistsHead("test_1", "test", "1"));
 
-				//is_true this._status.Result; 
-				this.IsTrue(this._status.Result);
+				//is_true this._status; 
+				this.IsTrue(this._status);
 
 			}
 		}
