@@ -80,6 +80,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				_status = this._client.IndicesGetFieldMapping("t*");
 				_response = _status.Deserialize<dynamic>();
 
+				//length test_index.test_type: 0; 
+				this.IsLength(_response.test_index.test_type, 0);
+
 			}
 		}
 
@@ -93,6 +96,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				_status = this._client.IndicesGetFieldMapping("*t1");
 				_response = _status.Deserialize<dynamic>();
 
+				//length test_index.test_type: 0; 
+				this.IsLength(_response.test_index.test_type, 0);
+
 			}
 		}
 
@@ -105,6 +111,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				//do indices.get_field_mapping 
 				_status = this._client.IndicesGetFieldMapping("i_*");
 				_response = _status.Deserialize<dynamic>();
+
+				//length test_index.test_type: 0; 
+				this.IsLength(_response.test_index.test_type, 0);
 
 			}
 		}

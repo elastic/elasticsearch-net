@@ -39,5 +39,10 @@ namespace Nest.Tests.Integration.Yaml
 		{
 			
 		}
+		
+		public void IsLength(object o, int value)
+		{
+			
+		}
 	}
 }

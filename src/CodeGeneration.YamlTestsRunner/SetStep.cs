@@ -14,6 +14,13 @@
 		public int Value { get; set; }
 		public string ResponseValue { get; set; }
 	}
+	public class LengthStep : ITestStep
+	{
+		public string Type { get { return "length"; }}
+
+		public int Value { get; set; }
+		public string ResponseValue { get; set; }
+	}
 	public class SetStep : ITestStep
 	{
 		public string Type { get { return "set"; }}

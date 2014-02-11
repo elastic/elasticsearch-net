@@ -39,7 +39,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 				);
 				_response = _status.Deserialize<dynamic>();
 
+				//length tokens: 0; 
+				this.IsLength(_response.tokens, 0);
+
 			}
+
 		}
 
 		public class TokenizerAndFilterTests : IndicesAnalyze10AnalyzeYamlBase
@@ -55,6 +59,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 					.Add("tokenizer","keyword")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//length tokens: 0; 
+				this.IsLength(_response.tokens, 0);
 
 			}
 		}
@@ -93,6 +100,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 					.Add("text","Foo Bar!")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//length tokens: 0; 
+				this.IsLength(_response.tokens, 0);
 
 			}
 		}

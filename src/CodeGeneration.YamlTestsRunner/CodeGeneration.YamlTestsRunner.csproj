@@ -84,6 +84,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Views\DispatchSteps.cshtml" />
+    <None Include="Views\Length.cshtml" />
     <None Include="Views\IsFalse.cshtml" />
     <None Include="Views\GreaterThan.cshtml" />
     <None Include="Views\LowerThan.cshtml" />

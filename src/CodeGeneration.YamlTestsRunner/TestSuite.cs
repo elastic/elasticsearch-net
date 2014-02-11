@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -77,11 +78,19 @@ namespace CodeGeneration.YamlTestsRunner
 					case "gt":
 						yield return CreateGreaterThanStep(kv.Value as Dictionary<object, object>);
 						break;
+					case "length":
+						yield return CreateLengthStep(kv.Value as Dictionary<object, object>);
+						break;
 				}
 
 			}
 		}
 
+		private static LengthStep CreateLengthStep(Dictionary<object, object> value)
+		{
+			var kv = value.First();
+			return new LengthStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = kv.Key as string};
+		}
 		private static LowerThanStep CreateLowerThanStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
