@@ -11,91 +11,55 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 {
-	public partial class IndicesGetTemplate20GetMissingYaml20Tests
-	{
-		
-		public class Setup20Tests : YamlTestsBase
+	public partial class IndicesGetTemplateTests
+	{	
+	
+		public class IndicesGetTemplate20GetMissingYamlBase : YamlTestsBase
 		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Setup20Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
-			[Test]
-			public void SetupTests()
-			{
+			public IndicesGetTemplate20GetMissingYamlBase() : base()
+			{	
 
 				//do indices.delete_template 
-				
 				_status = this._client.IndicesDeleteTemplate("*", nv=>nv
 					.Add("ignore","404")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetMissingTemplatePost090320Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetMissingTemplatePost090320Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+
+		public class GetMissingTemplatePost0903Tests : IndicesGetTemplate20GetMissingYamlBase
+		{
 			[Test]
-			public void GetMissingTemplatePost0903Tests()
-			{
+			public void GetMissingTemplatePost0903Test()
+			{	
 
 				//do indices.get_template 
-				
 				_status = this._client.IndicesGetTemplate("test");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetMissingTemplatePre090320Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetMissingTemplatePre090320Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetMissingTemplatePre0903Tests : IndicesGetTemplate20GetMissingYamlBase
+		{
 			[Test]
-			public void GetMissingTemplatePre0903Tests()
-			{
+			public void GetMissingTemplatePre0903Test()
+			{	
 
 				//do indices.delete_template 
-				
 				_status = this._client.IndicesDeleteTemplate("test", nv=>nv
 					.Add("ignore","404")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_template 
-				
 				_status = this._client.IndicesGetTemplate("test");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

@@ -1,5 +1,19 @@
 ﻿namespace CodeGeneration.YamlTestsRunner
 {
+	public class LowerThanStep : ITestStep
+	{
+		public string Type { get { return "lt"; }}
+
+		public int Value { get; set; }
+		public string ResponseValue { get; set; }
+	}
+	public class GreaterThanStep : ITestStep
+	{
+		public string Type { get { return "gt"; }}
+
+		public int Value { get; set; }
+		public string ResponseValue { get; set; }
+	}
 	public class SetStep : ITestStep
 	{
 		public string Type { get { return "set"; }}

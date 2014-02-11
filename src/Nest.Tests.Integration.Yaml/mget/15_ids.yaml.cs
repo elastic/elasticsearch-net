@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Mget
 {
-	public partial class Mget15IdsYaml15Tests
-	{
-		
-		public class Ids15Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Ids15Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class MgetTests
+	{	
 
+
+		public class IdsTests : YamlTestsBase
+		{
 			[Test]
-			public void IdsTests()
-			{
+			public void IdsTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -47,7 +36,6 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
@@ -96,7 +84,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				_body = new {};
 				_status = this._client.MgetPost("test_1", _body);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

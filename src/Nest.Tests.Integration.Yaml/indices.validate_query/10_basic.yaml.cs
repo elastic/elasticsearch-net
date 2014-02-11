@@ -11,41 +11,27 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 {
-	public partial class IndicesValidateQuery10BasicYaml10Tests
-	{
-		
-		public class ValidateQueryApi10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public ValidateQueryApi10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesValidateQueryTests
+	{	
 
+
+		public class ValidateQueryApiTests : YamlTestsBase
+		{
 			[Test]
-			public void ValidateQueryApiTests()
-			{
+			public void ValidateQueryApiTest()
+			{	
 
 				//do indices.create 
-				
 				_status = this._client.IndicesCreatePost("testing", null);
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.validate_query 
-				
 				_status = this._client.IndicesValidateQueryGet(nv=>nv
 					.Add("q","query string")
 				);
@@ -65,7 +51,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 
 				//is_false .valid; 
 				this.IsFalse(_response.valid);
+
 			}
 		}
 	}
 }
+

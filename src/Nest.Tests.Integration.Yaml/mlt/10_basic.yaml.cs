@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Mlt
 {
-	public partial class Mlt10BasicYaml10Tests
-	{
-		
-		public class BasicMlt10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicMlt10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class MltTests
+	{	
 
+
+		public class BasicMltTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicMltTests()
-			{
+			public void BasicMltTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -41,12 +30,10 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
-				
 				_status = this._client.IndicesRefreshGet();
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
 					.Add("timeout","1s")
@@ -54,12 +41,13 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 				_response = _status.Deserialize<dynamic>();
 
 				//do mlt 
-				
 				_status = this._client.MltGet("test_1", "test", "1", nv=>nv
 					.Add("mlt_fields","title")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

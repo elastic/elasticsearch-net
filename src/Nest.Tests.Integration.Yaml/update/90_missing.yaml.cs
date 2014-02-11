@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Update
 {
-	public partial class Update90MissingYaml90Tests
-	{
-		
-		public class MissingDocumentPartialDoc90Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public MissingDocumentPartialDoc90Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class UpdateTests
+	{	
 
+
+		public class MissingDocumentPartialDocTests : YamlTestsBase
+		{
 			[Test]
-			public void MissingDocumentPartialDocTests()
-			{
+			public void MissingDocumentPartialDocTest()
+			{	
 
 				//do update 
 				_body = new {
@@ -51,26 +40,15 @@ namespace Nest.Tests.Integration.Yaml.Update
 					.Add("ignore","404")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class MissingDocumentScript90Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public MissingDocumentScript90Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class MissingDocumentScriptTests : YamlTestsBase
+		{
 			[Test]
-			public void MissingDocumentScriptTests()
-			{
+			public void MissingDocumentScriptTest()
+			{	
 
 				//do update 
 				_body = new {
@@ -93,7 +71,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 					.Add("ignore","404")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

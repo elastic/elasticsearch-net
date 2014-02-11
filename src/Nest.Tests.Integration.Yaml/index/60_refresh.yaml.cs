@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Index
 {
-	public partial class Index60RefreshYaml60Tests
-	{
-		
-		public class Refresh60Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Refresh60Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndexTests
+	{	
 
+
+		public class RefreshTests : YamlTestsBase
+		{
 			[Test]
-			public void RefreshTests()
-			{
+			public void RefreshTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -42,7 +31,6 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
@@ -85,7 +73,9 @@ namespace Nest.Tests.Integration.Yaml.Index
 				};
 				_status = this._client.SearchPost("test_1", "test", _body);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

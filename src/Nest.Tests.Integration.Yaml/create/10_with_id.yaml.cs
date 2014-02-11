@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Create
 {
-	public partial class Create10WithIdYaml10Tests
-	{
-		
-		public class CreateWithId10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public CreateWithId10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class CreateTests
+	{	
 
+
+		public class CreateWithIdTests : YamlTestsBase
+		{
 			[Test]
-			public void CreateWithIdTests()
-			{
+			public void CreateWithIdTest()
+			{	
 
 				//do create 
 				_body = new {
@@ -45,7 +34,6 @@ namespace Nest.Tests.Integration.Yaml.Create
 				this.IsTrue(_response.ok);
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
 
@@ -57,7 +45,9 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("op_type","create")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

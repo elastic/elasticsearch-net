@@ -11,35 +11,25 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Ping
 {
-	public partial class Ping10PingYaml10Tests
-	{
-		
-		public class Ping10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Ping10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class PingTests
+	{	
 
+
+		public class PingReturnsTrueTests : YamlTestsBase
+		{
 			[Test]
-			public void PingTests()
-			{
+			public void PingReturnsTrueTest()
+			{	
 
 				//do ping 
-				
 				_status = this._client.PingHead();
 				_response = _status.Deserialize<dynamic>();
 
 				//is_true ; 
 				this.IsTrue(_response);
+
 			}
 		}
 	}
 }
+

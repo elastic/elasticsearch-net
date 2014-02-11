@@ -11,34 +11,21 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 {
-	public partial class IndicesOptimize10BasicYaml10Tests
-	{
-		
-		public class OptimizeIndexTests10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public OptimizeIndexTests10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesOptimizeTests
+	{	
 
+
+		public class OptimizeIndexTestsTests : YamlTestsBase
+		{
 			[Test]
-			public void OptimizeIndexTestsTests()
-			{
+			public void OptimizeIndexTestsTest()
+			{	
 
 				//do indices.create 
-				
 				_status = this._client.IndicesCreatePost("testing", null);
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.optimize 
-				
 				_status = this._client.IndicesOptimizeGet("testing", nv=>nv
 					.Add("max_num_segments","1")
 				);
@@ -46,7 +33,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 
 				//is_true .ok; 
 				this.IsTrue(_response.ok);
+
 			}
 		}
 	}
 }
+

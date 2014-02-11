@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Mget
 {
-	public partial class Mget30ParentYaml30Tests
-	{
-		
-		public class Parent30Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Parent30Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class MgetTests
+	{	
 
+
+		public class ParentTests : YamlTestsBase
+		{
 			[Test]
-			public void ParentTests()
-			{
+			public void ParentTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -46,7 +35,6 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
@@ -116,7 +104,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//is_true .docs[3].exists; 
 				this.IsTrue(_response.docs[3].exists);
+
 			}
 		}
 	}
 }
+

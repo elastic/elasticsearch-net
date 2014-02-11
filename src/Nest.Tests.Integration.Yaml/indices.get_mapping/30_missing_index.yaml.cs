@@ -11,32 +11,22 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 {
-	public partial class IndicesGetMapping30MissingIndexYaml30Tests
-	{
-		
-		public class Raise404WhenIndexDoesntExist30Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Raise404WhenIndexDoesntExist30Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesGetMappingTests
+	{	
 
+
+		public class Raise404WhenIndexDoesntExistTests : YamlTestsBase
+		{
 			[Test]
-			public void Raise404WhenIndexDoesntExistTests()
-			{
+			public void Raise404WhenIndexDoesntExistTest()
+			{	
 
 				//do indices.get_mapping 
-				
 				_status = this._client.IndicesGetMapping("test_index", "not_test_type");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

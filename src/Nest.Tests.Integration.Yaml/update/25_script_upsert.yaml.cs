@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Update
 {
-	public partial class Update25ScriptUpsertYaml25Tests
-	{
-		
-		public class ScriptUpsert25Tests : YamlTestsBase
+	public partial class UpdateTests
+	{	
+
+
+		public class ScriptUpsertTests : YamlTestsBase
 		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public ScriptUpsert25Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
 			[Test]
-			public void ScriptUpsertTests()
-			{
+			public void ScriptUpsertTest()
+			{	
 
 				//do update 
 				_body = new {
@@ -46,7 +35,6 @@ namespace Nest.Tests.Integration.Yaml.Update
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
 
@@ -64,10 +52,11 @@ namespace Nest.Tests.Integration.Yaml.Update
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

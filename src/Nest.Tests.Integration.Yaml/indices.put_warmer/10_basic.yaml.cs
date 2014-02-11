@@ -11,41 +11,27 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 {
-	public partial class IndicesPutWarmer10BasicYaml10Tests
-	{
-		
-		public class BasicTestForWarmers10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicTestForWarmers10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesPutWarmerTests
+	{	
 
+
+		public class BasicTestForWarmersTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicTestForWarmersTests()
-			{
+			public void BasicTestForWarmersTest()
+			{	
 
 				//do indices.create 
-				
 				_status = this._client.IndicesCreatePost("test_index", null);
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_warmer 
-				
 				_status = this._client.IndicesGetWarmer("test_index", "test_warmer");
 				_response = _status.Deserialize<dynamic>();
 
@@ -62,12 +48,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				this.IsTrue(_response.ok);
 
 				//do indices.get_warmer 
-				
 				_status = this._client.IndicesGetWarmer("test_index", "test_warmer");
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.delete_warmer 
-				
 				_status = this._client.IndicesDeleteWarmer("test_index");
 				_response = _status.Deserialize<dynamic>();
 
@@ -75,10 +59,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				this.IsTrue(_response.ok);
 
 				//do indices.get_warmer 
-				
 				_status = this._client.IndicesGetWarmer("test_index", "test_warmer");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

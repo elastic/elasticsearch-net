@@ -83,10 +83,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Views\DispatchSteps.cshtml" />
     <None Include="Views\IsFalse.cshtml" />
+    <None Include="Views\GreaterThan.cshtml" />
+    <None Include="Views\LowerThan.cshtml" />
     <None Include="Views\IsTrue.cshtml" />
     <None Include="Views\Set.cshtml" />
     <None Include="Views\Do.cshtml" />
+    <None Include="Views\SetupClass.cshtml" />
     <None Include="Views\TestSuite.cshtml" />
   </ItemGroup>
   <ItemGroup>

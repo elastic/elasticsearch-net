@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
 {
-	public partial class IndicesPutTemplate10BasicYaml10Tests
-	{
-		
-		public class PutTemplate10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public PutTemplate10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesPutTemplateTests
+	{	
 
+
+		public class PutTemplateTests : YamlTestsBase
+		{
 			[Test]
-			public void PutTemplateTests()
-			{
+			public void PutTemplateTest()
+			{	
 
 				//do indices.put_template 
 				_body = new {
@@ -47,10 +36,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
 				this.IsTrue(_response.ok);
 
 				//do indices.get_template 
-				
 				_status = this._client.IndicesGetTemplate("test");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

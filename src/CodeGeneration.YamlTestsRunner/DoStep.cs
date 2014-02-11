@@ -81,7 +81,7 @@ namespace CodeGeneration.YamlTestsRunner
 					.Select(oss=>EscapeQuotes(JsonConvert.SerializeObject(oss, Formatting.None)))));
 				return body;
 			}
-			body += this.SerializeToAnonymousObject(this.Body) + ";";
+			body += this.SerializeToAnonymousObject(this.Body) + ";\n";
 			return body;
 		}
 

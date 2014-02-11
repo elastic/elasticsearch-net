@@ -11,26 +11,13 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Suggest
 {
-	public partial class Suggest10BasicYaml10Tests
-	{
-		
-		public class Setup10Tests : YamlTestsBase
+	public partial class SuggestTests
+	{	
+	
+		public class Suggest10BasicYamlBase : YamlTestsBase
 		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Setup10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
-			[Test]
-			public void SetupTests()
-			{
+			public Suggest10BasicYamlBase() : base()
+			{	
 
 				//do index 
 				_body = new {
@@ -40,29 +27,18 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
-				
 				_status = this._client.IndicesRefreshGet();
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class BasicTestsForSuggestApi10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicTestsForSuggestApi10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+
+		public class BasicTestsForSuggestApiTests : Suggest10BasicYamlBase
+		{
 			[Test]
-			public void BasicTestsForSuggestApiTests()
-			{
+			public void BasicTestsForSuggestApiTest()
+			{	
 
 				//do suggest 
 				_body = new {
@@ -75,7 +51,9 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 				};
 				_status = this._client.SuggestPost(_body);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

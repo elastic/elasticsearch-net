@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 {
-	public partial class IndicesGetFieldMapping30MissingTypeYaml30Tests
-	{
-		
-		public class Raise404WhenTypeDoesntExist30Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Raise404WhenTypeDoesntExist30Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesGetFieldMappingTests
+	{	
 
+
+		public class Raise404WhenTypeDoesntExistTests : YamlTestsBase
+		{
 			[Test]
-			public void Raise404WhenTypeDoesntExistTests()
-			{
+			public void Raise404WhenTypeDoesntExistTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -49,10 +38,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("test_index", "not_test_type", "text");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

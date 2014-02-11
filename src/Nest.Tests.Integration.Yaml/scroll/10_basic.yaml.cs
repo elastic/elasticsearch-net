@@ -11,29 +11,17 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Scroll
 {
-	public partial class Scroll10BasicYaml10Tests
-	{
-		
-		public class BasicScroll10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicScroll10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class ScrollTests
+	{	
 
+
+		public class BasicScrollTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicScrollTests()
-			{
+			public void BasicScrollTest()
+			{	
 
 				//do indices.create 
-				
 				_status = this._client.IndicesCreatePost("test_scroll", null);
 				_response = _status.Deserialize<dynamic>();
 
@@ -45,7 +33,6 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
-				
 				_status = this._client.IndicesRefreshGet();
 				_response = _status.Deserialize<dynamic>();
 
@@ -65,10 +52,11 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 				var scroll_id = _response._scroll_id;
 
 				//do scroll 
-				
 				_status = this._client.ScrollGet(scroll_id);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

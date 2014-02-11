@@ -11,26 +11,13 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 {
-	public partial class IndicesGetFieldMapping10BasicYaml10Tests
-	{
-		
-		public class Setup10Tests : YamlTestsBase
+	public partial class IndicesGetFieldMappingTests
+	{	
+	
+		public class IndicesGetFieldMapping10BasicYamlBase : YamlTestsBase
 		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Setup10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
-			[Test]
-			public void SetupTests()
-			{
+			public IndicesGetFieldMapping10BasicYamlBase() : base()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -46,137 +33,80 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				};
 				_status = this._client.IndicesCreatePost("test_index", _body);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingWithNoIndexAndType10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingWithNoIndexAndType10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+
+		public class GetFieldMappingWithNoIndexAndTypeTests : IndicesGetFieldMapping10BasicYamlBase
+		{
 			[Test]
-			public void GetFieldMappingWithNoIndexAndTypeTests()
-			{
+			public void GetFieldMappingWithNoIndexAndTypeTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("text");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingByIndexOnly10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingByIndexOnly10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetFieldMappingByIndexOnlyTests : IndicesGetFieldMapping10BasicYamlBase
+		{
 			[Test]
-			public void GetFieldMappingByIndexOnlyTests()
-			{
+			public void GetFieldMappingByIndexOnlyTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("test_index", "text");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingByTypeField10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingByTypeField10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetFieldMappingByTypeFieldTests : IndicesGetFieldMapping10BasicYamlBase
+		{
 			[Test]
-			public void GetFieldMappingByTypeFieldTests()
-			{
+			public void GetFieldMappingByTypeFieldTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "text");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExistTests : IndicesGetFieldMapping10BasicYamlBase
+		{
 			[Test]
-			public void GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExistTests()
-			{
+			public void GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExistTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "System.Collections.Generic.List`1[System.Object]");
 				_response = _status.Deserialize<dynamic>();
 
 				//is_false .test_index.test_type.text1; 
 				this.IsFalse(_response.test_index.test_type.text1);
+
 			}
 		}
-		
-		public class GetFieldMappingWithIncludeDefaults10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingWithIncludeDefaults10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetFieldMappingWithIncludeDefaultsTests : IndicesGetFieldMapping10BasicYamlBase
+		{
 			[Test]
-			public void GetFieldMappingWithIncludeDefaultsTests()
-			{
+			public void GetFieldMappingWithIncludeDefaultsTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
 					.Add("include_defaults","true")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

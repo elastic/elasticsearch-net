@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Create
 {
-	public partial class Create30InternalVersionYaml30Tests
-	{
-		
-		public class InternalVersion30Tests : YamlTestsBase
+	public partial class CreateTests
+	{	
+
+
+		public class InternalVersionTests : YamlTestsBase
 		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public InternalVersion30Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
 			[Test]
-			public void InternalVersionTests()
-			{
+			public void InternalVersionTest()
+			{	
 
 				//do create 
 				_body = new {
@@ -49,7 +38,9 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("op_type","create")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

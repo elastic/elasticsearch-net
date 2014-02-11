@@ -40,14 +40,23 @@ namespace CodeGeneration.YamlTestsRunner
 		{
 			_razorMachine = new RazorMachine();
 			_assembly = typeof (YamlTestsGenerator).Assembly;
-			_razorMachine.RegisterTemplate("~/_MemoryContent/Do.cshtml", File.ReadAllText(_viewFolder + @"Do.cshtml"));
-			_razorMachine.RegisterTemplate("~/_MemoryContent/Set.cshtml", File.ReadAllText(_viewFolder + @"Set.cshtml"));
-			_razorMachine.RegisterTemplate("~/_MemoryContent/IsTrue.cshtml", File.ReadAllText(_viewFolder + @"IsTrue.cshtml"));
-			_razorMachine.RegisterTemplate("~/_MemoryContent/IsFalse.cshtml", File.ReadAllText(_viewFolder + @"IsFalse.cshtml"));
+			RegisterView("Do");
+			RegisterView("Set");
+			RegisterView("IsTrue");
+			RegisterView("IsFalse");
+			RegisterView("LowerThan");
+			RegisterView("GreaterThan");
+			RegisterView("DispatchSteps");
+			RegisterView("SetupClass");
 			var rawCalls = from l in File.ReadAllLines(_rawClientInterface)
 				where Regex.IsMatch(l, @"\tConnectionStatus ")
 				select l.Replace("\t\tConnectionStatus", "").Trim();
 			RawElasticCalls = rawCalls.ToList();
+		}
+
+		private static void RegisterView(string name)
+		{
+			_razorMachine.RegisterTemplate("~/_MemoryContent/"+name+".cshtml", File.ReadAllText(_viewFolder + name + @".cshtml"));
 		}
 
 		public static YamlSpecification GetYamlTestSpecification(bool useCache = false)
@@ -87,16 +96,42 @@ namespace CodeGeneration.YamlTestsRunner
 				var yaml = GetYamlFile(folder, useCache, file);
 				var parsed = ParseYaml(yaml).ToList();
 				var prefix = Regex.Replace(file, @"^(\d+).*$", "$1");
-				definitions.Add(new YamlDefinition
+				var yamlDefinition = new YamlDefinition
 				{
 					Folder = folder,
 					FileName = file,
 					Contents = yaml,
 					Suites = parsed,
 					Suffix = prefix
-				});
+				};
+				PatchDefinition(yamlDefinition, folder, file);
+				definitions.Add(yamlDefinition);
 			}
 			return definitions.ToList();
+		}
+
+		/// <summary>
+		/// Path definition to catch known name clashes for instance
+		/// </summary>
+		private static void PatchDefinition(YamlDefinition yamlDefinition, string folder, string file)
+		{
+			if (file == "10_ping.yaml")
+				yamlDefinition.Suites.First().Description = "Ping returns true";
+			if (file == "55_parent_with_routing.yaml")
+				yamlDefinition.Suites.First().Description = "Parent with routing";
+			if (file == "10_info.yaml")
+				yamlDefinition.Suites.First().Description = "Info returns body";
+			if (file == "20_fields_pre_0.90.3.yaml")
+				yamlDefinition.Suites.First().Description = "Fields Pre 0.90.3";
+
+			var setupRoutine = yamlDefinition.Suites.FirstOrDefault(s => s.Description == "setup");
+			if (setupRoutine != null)
+			{
+				yamlDefinition.SetupSuite = setupRoutine;
+				foreach (var suite in yamlDefinition.Suites)
+					suite.HasSetup = true;
+				yamlDefinition.Suites = yamlDefinition.Suites.Where(s => s.Description != "setup");
+			}
 		}
 
 		private static IEnumerable<TestSuite> ParseYaml(string yaml)

@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Delete
 {
-	public partial class Delete20InternalVersionYaml20Tests
-	{
-		
-		public class InternalVersion20Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public InternalVersion20Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class DeleteTests
+	{	
 
+
+		public class InternalVersionTests : YamlTestsBase
+		{
 			[Test]
-			public void InternalVersionTests()
-			{
+			public void InternalVersionTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -40,19 +29,19 @@ namespace Nest.Tests.Integration.Yaml.Delete
 				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
-				
 				_status = this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("version","2")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do delete 
-				
 				_status = this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("version","1")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Index
 {
-	public partial class Index20OptypeYaml20Tests
-	{
-		
-		public class Optype20Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Optype20Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndexTests
+	{	
 
+
+		public class OptypeTests : YamlTestsBase
+		{
 			[Test]
-			public void OptypeTests()
-			{
+			public void OptypeTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -58,7 +47,9 @@ namespace Nest.Tests.Integration.Yaml.Index
 					.Add("op_type","index")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

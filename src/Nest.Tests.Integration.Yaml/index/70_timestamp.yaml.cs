@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Index
 {
-	public partial class Index70TimestampYaml70Tests
-	{
-		
-		public class Timestamp70Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Timestamp70Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndexTests
+	{	
 
+
+		public class TimestampTests : YamlTestsBase
+		{
 			[Test]
-			public void TimestampTests()
-			{
+			public void TimestampTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -47,7 +36,6 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
@@ -61,7 +49,6 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","_timestamp")
 				);
@@ -80,7 +67,6 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","_timestamp")
 				);
@@ -96,12 +82,13 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","_timestamp")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

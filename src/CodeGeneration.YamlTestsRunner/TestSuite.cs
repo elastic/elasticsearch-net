@@ -22,7 +22,8 @@ namespace CodeGeneration.YamlTestsRunner
 	{
 		public string Description { get; set; }
 		public IEnumerable<ITestStep> Steps { get; set; }
-
+		public bool HasSetup { get; set; }
+		public bool IsSetup { get; set; }
 
 		public static TestSuite CreateFrom(YamlTestSuite untyped, string yaml)
 		{
@@ -69,11 +70,28 @@ namespace CodeGeneration.YamlTestsRunner
 						break;
 					case "is_false":
 						yield return CreateIsFalseStep(kv.Value as string);
-						break;}
+						break;
+					case "lt":
+						yield return CreateLowerThanStep(kv.Value as Dictionary<object, object>);
+						break;
+					case "gt":
+						yield return CreateGreaterThanStep(kv.Value as Dictionary<object, object>);
+						break;
+				}
 
 			}
 		}
 
+		private static LowerThanStep CreateLowerThanStep(Dictionary<object, object> value)
+		{
+			var kv = value.First();
+			return new LowerThanStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = kv.Key as string};
+		}
+		private static GreaterThanStep CreateGreaterThanStep(Dictionary<object, object> value)
+		{
+			var kv = value.First();
+			return new GreaterThanStep { Value = kv.Value is int ? (int) kv.Value : 0, ResponseValue = kv.Key as string};
+		}
 		private static IsTrueStep CreateIsTrueStep(string value)
 		{
 			value = TrueFalseParam(value);
@@ -93,6 +111,7 @@ namespace CodeGeneration.YamlTestsRunner
 			value = TrueFalseParam(value);
 			return new IsFalseStep { ResponseValue = value };
 		}
+
 		private static SetStep CreateSetStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();

@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Update
 {
-	public partial class Update80FieldsYaml80Tests
-	{
-		
-		public class Fields80Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Fields80Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class UpdateTests
+	{	
 
+
+		public class FieldsTests : YamlTestsBase
+		{
 			[Test]
-			public void FieldsTests()
-			{
+			public void FieldsTest()
+			{	
 
 				//do update 
 				_body = new {
@@ -48,7 +37,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//is_false .get.fields.bar; 
 				this.IsFalse(_response.get.fields.bar);
+
 			}
 		}
 	}
 }
+

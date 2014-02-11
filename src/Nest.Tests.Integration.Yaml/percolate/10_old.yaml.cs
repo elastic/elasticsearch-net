@@ -11,29 +11,17 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Percolate
 {
-	public partial class Percolate10OldYaml10Tests
-	{
-		
-		public class BasicPercolationTests10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicPercolationTests10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class PercolateTests
+	{	
 
+
+		public class BasicPercolationTestsTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicPercolationTestsTests()
-			{
+			public void BasicPercolationTestsTest()
+			{	
 
 				//do indices.create 
-				
 				_status = this._client.IndicesCreatePost("test_index", null);
 				_response = _status.Deserialize<dynamic>();
 
@@ -47,7 +35,6 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
-				
 				_status = this._client.IndicesRefreshGet();
 				_response = _status.Deserialize<dynamic>();
 
@@ -62,7 +49,9 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 
 				//is_true .ok; 
 				this.IsTrue(_response.ok);
+
 			}
 		}
 	}
 }
+

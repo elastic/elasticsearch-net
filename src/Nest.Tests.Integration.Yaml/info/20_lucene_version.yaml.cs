@@ -11,35 +11,25 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Info
 {
-	public partial class Info20LuceneVersionYaml20Tests
-	{
-		
-		public class LuceneVersion20Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public LuceneVersion20Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class InfoTests
+	{	
 
+
+		public class LuceneVersionTests : YamlTestsBase
+		{
 			[Test]
-			public void LuceneVersionTests()
-			{
+			public void LuceneVersionTest()
+			{	
 
 				//do info 
-				
 				_status = this._client.InfoGet();
 				_response = _status.Deserialize<dynamic>();
 
 				//is_true .version.lucene_version; 
 				this.IsTrue(_response.version.lucene_version);
+
 			}
 		}
 	}
 }
+

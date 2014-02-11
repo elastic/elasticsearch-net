@@ -11,35 +11,25 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.ClusterState
 {
-	public partial class ClusterState10BasicYaml10Tests
-	{
-		
-		public class ClusterStateTest10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public ClusterStateTest10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class ClusterStateTests
+	{	
 
+
+		public class ClusterStateTestTests : YamlTestsBase
+		{
 			[Test]
-			public void ClusterStateTestTests()
-			{
+			public void ClusterStateTestTest()
+			{	
 
 				//do cluster.state 
-				
 				_status = this._client.ClusterStateGet();
 				_response = _status.Deserialize<dynamic>();
 
 				//is_true .master_node; 
 				this.IsTrue(_response.master_node);
+
 			}
 		}
 	}
 }
+

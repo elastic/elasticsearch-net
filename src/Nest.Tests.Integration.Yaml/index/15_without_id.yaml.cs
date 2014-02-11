@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Index
 {
-	public partial class Index15WithoutIdYaml15Tests
-	{
-		
-		public class IndexWithoutId15Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public IndexWithoutId15Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndexTests
+	{	
 
+
+		public class IndexWithoutIdTests : YamlTestsBase
+		{
 			[Test]
-			public void IndexWithoutIdTests()
-			{
+			public void IndexWithoutIdTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -49,10 +38,11 @@ namespace Nest.Tests.Integration.Yaml.Index
 				var id = _response._id;
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", id);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

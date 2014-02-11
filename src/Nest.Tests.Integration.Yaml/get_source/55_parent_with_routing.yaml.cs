@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.GetSource
 {
-	public partial class GetSource55ParentWithRoutingYaml55Tests
-	{
-		
-		public class ParentWithRouting55Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public ParentWithRouting55Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class GetSourceTests
+	{	
 
+
+		public class ParentWithRoutingTests : YamlTestsBase
+		{
 			[Test]
-			public void ParentWithRoutingTests()
-			{
+			public void ParentWithRoutingTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -49,7 +38,6 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
 				);
@@ -66,7 +54,6 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				_response = _status.Deserialize<dynamic>();
 
 				//do get_source 
-				
 				_status = this._client.GetSource("test_1", "test", "1", nv=>nv
 					.Add("parent","5")
 					.Add("routing","4")
@@ -74,19 +61,19 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				_response = _status.Deserialize<dynamic>();
 
 				//do get_source 
-				
 				_status = this._client.GetSource("test_1", "test", "1", nv=>nv
 					.Add("parent","5")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do get_source 
-				
 				_status = this._client.GetSource("test_1", "test", "1", nv=>nv
 					.Add("routing","4")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

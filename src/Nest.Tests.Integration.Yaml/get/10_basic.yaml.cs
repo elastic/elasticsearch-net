@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Get
 {
-	public partial class Get10BasicYaml10Tests
-	{
-		
-		public class Basic10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Basic10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class GetTests
+	{	
 
+
+		public class BasicTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicTests()
-			{
+			public void BasicTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -40,15 +29,15 @@ namespace Nest.Tests.Integration.Yaml.Get
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "Ã¤Â¸Â­Ã¦â€“â€¡");
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "_all", "Ã¤Â¸Â­Ã¦â€“â€¡");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

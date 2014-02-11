@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Get
 {
-	public partial class Get20FieldsYaml20Tests
-	{
-		
-		public class Fields20Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Fields20Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class GetTests
+	{	
 
+
+		public class FieldsTests : YamlTestsBase
+		{
 			[Test]
-			public void FieldsTests()
-			{
+			public void FieldsTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -41,7 +30,6 @@ namespace Nest.Tests.Integration.Yaml.Get
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","foo")
 				);
@@ -51,7 +39,6 @@ namespace Nest.Tests.Integration.Yaml.Get
 				this.IsFalse(_response._source);
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
 				);
@@ -61,12 +48,13 @@ namespace Nest.Tests.Integration.Yaml.Get
 				this.IsFalse(_response._source);
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","System.Collections.Generic.List`1[System.Object]")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

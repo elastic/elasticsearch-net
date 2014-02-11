@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 {
-	public partial class DeleteByQuery10BasicYaml10Tests
-	{
-		
-		public class BasicDeleteByQuery10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicDeleteByQuery10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class DeleteByQueryTests
+	{	
 
+
+		public class BasicDeleteByQueryTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicDeleteByQueryTests()
-			{
+			public void BasicDeleteByQueryTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -54,7 +43,6 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
-				
 				_status = this._client.IndicesRefreshGet();
 				_response = _status.Deserialize<dynamic>();
 
@@ -71,15 +59,15 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 				this.IsTrue(_response.ok);
 
 				//do indices.refresh 
-				
 				_status = this._client.IndicesRefreshGet();
 				_response = _status.Deserialize<dynamic>();
 
 				//do count 
-				
 				_status = this._client.CountGet("test_1");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

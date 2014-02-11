@@ -11,26 +11,13 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 {
-	public partial class IndicesGetMapping10BasicYaml10Tests
-	{
-		
-		public class Setup10Tests : YamlTestsBase
+	public partial class IndicesGetMappingTests
+	{	
+	
+		public class IndicesGetMapping10BasicYamlBase : YamlTestsBase
 		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Setup10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
-			[Test]
-			public void SetupTests()
-			{
+			public IndicesGetMapping10BasicYamlBase() : base()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -47,57 +34,36 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 				};
 				_status = this._client.IndicesCreatePost("test_index", _body);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetIndexMapping10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetIndexMapping10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+
+		public class GetIndexMappingTests : IndicesGetMapping10BasicYamlBase
+		{
 			[Test]
-			public void GetIndexMappingTests()
-			{
+			public void GetIndexMappingTest()
+			{	
 
 				//do indices.get_mapping 
-				
 				_status = this._client.IndicesGetMapping("test_index");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetTypeMapping10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetTypeMapping10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetTypeMappingTests : IndicesGetMapping10BasicYamlBase
+		{
 			[Test]
-			public void GetTypeMappingTests()
-			{
+			public void GetTypeMappingTest()
+			{	
 
 				//do indices.get_mapping 
-				
 				_status = this._client.IndicesGetMapping("test_index", "test_type");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

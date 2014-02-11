@@ -11,29 +11,17 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Info
 {
-	public partial class Info10InfoYaml10Tests
-	{
-		
-		public class Info10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Info10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class InfoTests
+	{	
 
+
+		public class InfoReturnsBodyTests : YamlTestsBase
+		{
 			[Test]
-			public void InfoTests()
-			{
+			public void InfoReturnsBodyTest()
+			{	
 
 				//do info 
-				
 				_status = this._client.InfoGet();
 				_response = _status.Deserialize<dynamic>();
 
@@ -51,7 +39,9 @@ namespace Nest.Tests.Integration.Yaml.Info
 
 				//is_true .version.number; 
 				this.IsTrue(_response.version.number);
+
 			}
 		}
 	}
 }
+

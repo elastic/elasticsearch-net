@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Exists
 {
-	public partial class Exists40RoutingYaml40Tests
-	{
-		
-		public class Routing40Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Routing40Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class ExistsTests
+	{	
 
+
+		public class RoutingTests : YamlTestsBase
+		{
 			[Test]
-			public void RoutingTests()
-			{
+			public void RoutingTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -44,7 +33,6 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
 				);
@@ -60,7 +48,6 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				_response = _status.Deserialize<dynamic>();
 
 				//do exists 
-				
 				_status = this._client.ExistsHead("test_1", "test", "1", nv=>nv
 					.Add("routing","5")
 				);
@@ -70,13 +57,14 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				this.IsTrue(_response);
 
 				//do exists 
-				
 				_status = this._client.ExistsHead("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
 
 				//is_false ; 
 				this.IsFalse(_response);
+
 			}
 		}
 	}
 }
+

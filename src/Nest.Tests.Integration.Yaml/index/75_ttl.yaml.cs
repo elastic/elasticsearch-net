@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Index
 {
-	public partial class Index75TtlYaml75Tests
-	{
-		
-		public class Ttl75Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Ttl75Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndexTests
+	{	
 
+
+		public class TtlTests : YamlTestsBase
+		{
 			[Test]
-			public void TtlTests()
-			{
+			public void TtlTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -48,7 +37,6 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","yellow")
 				);
@@ -62,11 +50,16 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","_ttl")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//lt fields._ttl: 0; 
+				this.IsLowerThan(_response.fields._ttl, 0);
+
+				//gt fields._ttl: 0; 
+				this.IsGreaterThan(_response.fields._ttl, 0);
 
 				//do index 
 				_body = new {
@@ -78,11 +71,16 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","_ttl")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//lt fields._ttl: 0; 
+				this.IsLowerThan(_response.fields._ttl, 0);
+
+				//gt fields._ttl: 0; 
+				this.IsGreaterThan(_response.fields._ttl, 0);
 
 				//do index 
 				_body = new {
@@ -94,11 +92,16 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields","_ttl")
 				);
 				_response = _status.Deserialize<dynamic>();
+
+				//lt fields._ttl: 0; 
+				this.IsLowerThan(_response.fields._ttl, 0);
+
+				//gt fields._ttl: 0; 
+				this.IsGreaterThan(_response.fields._ttl, 0);
 
 				//do index 
 				_body = new {
@@ -109,7 +112,9 @@ namespace Nest.Tests.Integration.Yaml.Index
 					.Add("timestamp","2013-06-23T18:14:40")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Update
 {
-	public partial class Update22DocAsUpsertYaml22Tests
-	{
-		
-		public class DocAsUpsert22Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public DocAsUpsert22Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class UpdateTests
+	{	
 
+
+		public class DocAsUpsertTests : YamlTestsBase
+		{
 			[Test]
-			public void DocAsUpsertTests()
-			{
+			public void DocAsUpsertTest()
+			{	
 
 				//do update 
 				_body = new {
@@ -44,7 +33,6 @@ namespace Nest.Tests.Integration.Yaml.Update
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
 
@@ -59,10 +47,11 @@ namespace Nest.Tests.Integration.Yaml.Update
 				_response = _status.Deserialize<dynamic>();
 
 				//do get 
-				
 				_status = this._client.Get("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

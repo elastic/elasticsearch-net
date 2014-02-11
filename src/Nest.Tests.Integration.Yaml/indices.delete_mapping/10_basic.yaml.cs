@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
 {
-	public partial class IndicesDeleteMapping10BasicYaml10Tests
-	{
-		
-		public class DeleteMappingTests10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public DeleteMappingTests10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesDeleteMappingTests
+	{	
 
+
+		public class DeleteMappingTestsTests : YamlTestsBase
+		{
 			[Test]
-			public void DeleteMappingTestsTests()
-			{
+			public void DeleteMappingTestsTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -49,7 +38,6 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.exists_type 
-				
 				_status = this._client.IndicesExistsTypeHead("test_index", "test_type");
 				_response = _status.Deserialize<dynamic>();
 
@@ -57,18 +45,18 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
 				this.IsTrue(_response);
 
 				//do indices.delete_mapping 
-				
 				_status = this._client.IndicesDeleteMapping("test_index", "test_type");
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.exists_type 
-				
 				_status = this._client.IndicesExistsTypeHead("test_index", "test_type");
 				_response = _status.Deserialize<dynamic>();
 
 				//is_false ; 
 				this.IsFalse(_response);
+
 			}
 		}
 	}
 }
+

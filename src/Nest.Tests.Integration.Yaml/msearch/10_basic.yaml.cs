@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Msearch
 {
-	public partial class Msearch10BasicYaml10Tests
-	{
-		
-		public class BasicMultiSearch10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicMultiSearch10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class MsearchTests
+	{	
 
+
+		public class BasicMultiSearchTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicMultiSearchTests()
-			{
+			public void BasicMultiSearchTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -54,7 +43,6 @@ namespace Nest.Tests.Integration.Yaml.Msearch
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.refresh 
-				
 				_status = this._client.IndicesRefreshGet();
 				_response = _status.Deserialize<dynamic>();
 
@@ -64,10 +52,11 @@ namespace Nest.Tests.Integration.Yaml.Msearch
 {""index"":""test_2""}
 {""query"":{""match_all"":{}}}
 {""search_type"":""count"",""index"":""test_1""}
-{""query"":{""match"":{""foo"":""bar""}}}";
-				_status = this._client.MsearchPost(_body);
+{""query"":{""match"":{""foo"":""bar""}}}";				_status = this._client.MsearchPost(_body);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

@@ -11,29 +11,17 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.ClusterNodeInfo
 {
-	public partial class ClusterNodeInfo10BasicYaml10Tests
-	{
-		
-		public class NodeInfoTest10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public NodeInfoTest10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class ClusterNodeInfoTests
+	{	
 
+
+		public class NodeInfoTestTests : YamlTestsBase
+		{
 			[Test]
-			public void NodeInfoTestTests()
-			{
+			public void NodeInfoTestTest()
+			{	
 
 				//do cluster.node_info 
-				
 				_status = this._client.ClusterNodeInfoGet();
 				_response = _status.Deserialize<dynamic>();
 
@@ -45,7 +33,9 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeInfo
 
 				//is_true .cluster_name; 
 				this.IsTrue(_response.cluster_name);
+
 			}
 		}
 	}
 }
+

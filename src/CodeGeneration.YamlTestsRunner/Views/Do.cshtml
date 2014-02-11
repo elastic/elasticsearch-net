@@ -4,7 +4,12 @@
 @{
 	DoStep m = Model;
 	var i = "				";
+	var body = m.SerializeBody();
 }
 @i//do @m.Call 
+@if (!string.IsNullOrEmpty(body))
+{
 @i@Raw(m.SerializeBody())
+
+}
 @i@Raw(m.RawElasticSearchCall)

@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 {
-	public partial class IndicesGetTemplate10BasicYaml10Tests
-	{
-		
-		public class GetTemplate10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetTemplate10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesGetTemplateTests
+	{	
 
+
+		public class GetTemplateTests : YamlTestsBase
+		{
 			[Test]
-			public void GetTemplateTests()
-			{
+			public void GetTemplateTest()
+			{	
 
 				//do indices.put_template 
 				_body = new {
@@ -44,29 +33,17 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_template 
-				
 				_status = this._client.IndicesGetTemplate("test");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetAllTemplates10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetAllTemplates10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetAllTemplatesTests : YamlTestsBase
+		{
 			[Test]
-			public void GetAllTemplatesTests()
-			{
+			public void GetAllTemplatesTest()
+			{	
 
 				//do indices.put_template 
 				_body = new {
@@ -89,10 +66,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_template 
-				
 				_status = this._client.IndicesGetTemplate();
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

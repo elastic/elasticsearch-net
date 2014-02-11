@@ -11,34 +11,21 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 {
-	public partial class IndicesUpdateAliases10BasicYaml10Tests
-	{
-		
-		public class BasicTestForAliases10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public BasicTestForAliases10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesUpdateAliasesTests
+	{	
 
+
+		public class BasicTestForAliasesTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicTestForAliasesTests()
-			{
+			public void BasicTestForAliasesTest()
+			{	
 
 				//do indices.create 
-				
 				_status = this._client.IndicesCreatePost("test_index", null);
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.exists_alias 
-				
 				_status = this._client.IndicesExistsAliasHead("test_alias");
 				_response = _status.Deserialize<dynamic>();
 
@@ -64,7 +51,6 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 				this.IsTrue(_response.ok);
 
 				//do indices.exists_alias 
-				
 				_status = this._client.IndicesExistsAliasHead("test_alias");
 				_response = _status.Deserialize<dynamic>();
 
@@ -72,10 +58,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 				this.IsTrue(_response);
 
 				//do indices.get_aliases 
-				
 				_status = this._client.IndicesGetAliases("test_index");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

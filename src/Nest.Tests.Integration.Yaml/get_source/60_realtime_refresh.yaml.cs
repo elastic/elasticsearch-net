@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.GetSource
 {
-	public partial class GetSource60RealtimeRefreshYaml60Tests
-	{
-		
-		public class Realtime60Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Realtime60Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class GetSourceTests
+	{	
 
+
+		public class RealtimeTests : YamlTestsBase
+		{
 			[Test]
-			public void RealtimeTests()
-			{
+			public void RealtimeTest()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -43,7 +32,6 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.health 
-				
 				_status = this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status","green")
 				);
@@ -57,27 +45,26 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				_response = _status.Deserialize<dynamic>();
 
 				//do get_source 
-				
 				_status = this._client.GetSource("test_1", "test", "1", nv=>nv
 					.Add("realtime","1")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do get_source 
-				
 				_status = this._client.GetSource("test_1", "test", "1", nv=>nv
 					.Add("realtime","0")
 				);
 				_response = _status.Deserialize<dynamic>();
 
 				//do get_source 
-				
 				_status = this._client.GetSource("test_1", "test", "1", nv=>nv
 					.Add("realtime","0")
 					.Add("refresh","1")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

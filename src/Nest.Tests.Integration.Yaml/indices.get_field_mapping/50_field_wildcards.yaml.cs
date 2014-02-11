@@ -11,26 +11,13 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 {
-	public partial class IndicesGetFieldMapping50FieldWildcardsYaml50Tests
-	{
-		
-		public class Setup50Tests : YamlTestsBase
+	public partial class IndicesGetFieldMappingTests
+	{	
+	
+		public class IndicesGetFieldMapping50FieldWildcardsYamlBase : YamlTestsBase
 		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Setup50Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
-			[Test]
-			public void SetupTests()
-			{
+			public IndicesGetFieldMapping50FieldWildcardsYamlBase() : base()
+			{	
 
 				//do indices.create 
 				_body = new {
@@ -65,107 +52,62 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				};
 				_status = this._client.IndicesCreatePost("test_index", _body);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingWithForFields50Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingWithForFields50Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+
+		public class GetFieldMappingWithForFieldsTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
+		{
 			[Test]
-			public void GetFieldMappingWithForFieldsTests()
-			{
+			public void GetFieldMappingWithForFieldsTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("*");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingWithTForFields50Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingWithTForFields50Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetFieldMappingWithTForFieldsTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
+		{
 			[Test]
-			public void GetFieldMappingWithTForFieldsTests()
-			{
+			public void GetFieldMappingWithTForFieldsTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("t*");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingWithT1ForFields50Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingWithT1ForFields50Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetFieldMappingWithT1ForFieldsTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
+		{
 			[Test]
-			public void GetFieldMappingWithT1ForFieldsTests()
-			{
+			public void GetFieldMappingWithT1ForFieldsTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("*t1");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
-		
-		public class GetFieldMappingWithWildcardedRelativeNames50Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public GetFieldMappingWithWildcardedRelativeNames50Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
 
+		public class GetFieldMappingWithWildcardedRelativeNamesTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
+		{
 			[Test]
-			public void GetFieldMappingWithWildcardedRelativeNamesTests()
-			{
+			public void GetFieldMappingWithWildcardedRelativeNamesTest()
+			{	
 
 				//do indices.get_field_mapping 
-				
 				_status = this._client.IndicesGetFieldMapping("i_*");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

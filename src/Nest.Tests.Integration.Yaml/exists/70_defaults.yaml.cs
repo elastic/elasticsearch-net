@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Exists
 {
-	public partial class Exists70DefaultsYaml70Tests
-	{
-		
-		public class ClientSideDefaultType70Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public ClientSideDefaultType70Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class ExistsTests
+	{	
 
+
+		public class ClientSideDefaultTypeTests : YamlTestsBase
+		{
 			[Test]
-			public void ClientSideDefaultTypeTests()
-			{
+			public void ClientSideDefaultTypeTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -40,13 +29,14 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				_response = _status.Deserialize<dynamic>();
 
 				//do exists 
-				
 				_status = this._client.ExistsHead("test_1", "_all", "1");
 				_response = _status.Deserialize<dynamic>();
 
 				//is_true ; 
 				this.IsTrue(_response);
+
 			}
 		}
 	}
 }
+

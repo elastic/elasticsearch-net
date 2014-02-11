@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 {
-	public partial class ClusterPutSettings10BasicYaml10Tests
-	{
-		
-		public class TestPutSettings10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public TestPutSettings10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class ClusterPutSettingsTests
+	{	
 
+
+		public class TestPutSettingsTests : YamlTestsBase
+		{
 			[Test]
-			public void TestPutSettingsTests()
-			{
+			public void TestPutSettingsTest()
+			{	
 
 				//do cluster.put_settings 
 				_body = new {
@@ -42,10 +31,11 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 				_response = _status.Deserialize<dynamic>();
 
 				//do cluster.get_settings 
-				
 				_status = this._client.ClusterGetSettings();
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

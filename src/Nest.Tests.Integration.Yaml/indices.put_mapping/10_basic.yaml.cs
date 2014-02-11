@@ -11,29 +11,17 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 {
-	public partial class IndicesPutMapping10BasicYaml10Tests
-	{
-		
-		public class TestCreateAndUpdateMapping10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public TestCreateAndUpdateMapping10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesPutMappingTests
+	{	
 
+
+		public class TestCreateAndUpdateMappingTests : YamlTestsBase
+		{
 			[Test]
-			public void TestCreateAndUpdateMappingTests()
-			{
+			public void TestCreateAndUpdateMappingTest()
+			{	
 
 				//do indices.create 
-				
 				_status = this._client.IndicesCreatePost("test_index", null);
 				_response = _status.Deserialize<dynamic>();
 
@@ -52,7 +40,6 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_mapping 
-				
 				_status = this._client.IndicesGetMapping("test_index");
 				_response = _status.Deserialize<dynamic>();
 
@@ -80,10 +67,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 				_response = _status.Deserialize<dynamic>();
 
 				//do indices.get_mapping 
-				
 				_status = this._client.IndicesGetMapping("test_index");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

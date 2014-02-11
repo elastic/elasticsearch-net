@@ -11,26 +11,15 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.Delete
 {
-	public partial class Delete10BasicYaml10Tests
-	{
-		
-		public class Basic10Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public Basic10Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class DeleteTests
+	{	
 
+
+		public class BasicTests : YamlTestsBase
+		{
 			[Test]
-			public void BasicTests()
-			{
+			public void BasicTest()
+			{	
 
 				//do index 
 				_body = new {
@@ -43,10 +32,11 @@ namespace Nest.Tests.Integration.Yaml.Delete
 				this.IsTrue(_response.ok);
 
 				//do delete 
-				
 				_status = this._client.Delete("test_1", "test", "1");
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

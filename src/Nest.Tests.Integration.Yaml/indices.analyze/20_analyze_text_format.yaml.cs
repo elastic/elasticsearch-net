@@ -11,35 +11,25 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 {
-	public partial class IndicesAnalyze20AnalyzeTextFormatYaml20Tests
-	{
-		
-		public class TextFormat20Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public TextFormat20Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
+	public partial class IndicesAnalyzeTests
+	{	
 
+
+		public class TextFormatTests : YamlTestsBase
+		{
 			[Test]
-			public void TextFormatTests()
-			{
+			public void TextFormatTest()
+			{	
 
 				//do indices.analyze 
-				
 				_status = this._client.IndicesAnalyzeGet(nv=>nv
 					.Add("format","text")
 					.Add("text","tHE BLACK and white! AND red")
 				);
 				_response = _status.Deserialize<dynamic>();
+
 			}
 		}
 	}
 }
+

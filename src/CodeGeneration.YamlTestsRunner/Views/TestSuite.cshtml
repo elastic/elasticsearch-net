@@ -16,48 +16,18 @@ using Nest.Tests.Integration.Yaml;
 
 namespace Nest.Tests.Integration.Yaml.@(m.Folder.ToPascalCase())
 {
-	public partial class @(m.Folder.ToPascalCase())@(m.FileName.ToPascalCase())@(m.Suffix)Tests
-	{
-		@foreach(var suite in m.Suites)
+	public partial class @(m.Folder.ToPascalCase())Tests
+	{	@RenderPage("SetupClass.cshtml", m)
+		@foreach (var suite in m.Suites)
+		{<text>
+		public class @suite.Description.ToPascalCase()Tests : @(suite.HasSetup ? m.Folder.ToPascalCase() + m.FileName.ToPascalCase() + "Base": "YamlTestsBase")
 		{
-		<text>
-		public class @suite.Description.ToPascalCase()@(m.Suffix)Tests : YamlTestsBase
-		{
-			private readonly RawElasticClient _client;
-			private object _body;
-			private ConnectionStatus _status;
-			private dynamic _response;
-		
-			public @suite.Description.ToPascalCase()@(m.Suffix)Tests()
-			{
-				var uri = new Uri("http:localhost:9200");
-				var settings = new ConnectionSettings(uri, "nest-default-index");
-				_client = new RawElasticClient(settings);
-			}
-
 			[Test]
-			public void @(suite.Description.ToPascalCase())Tests()
-			{
-				@foreach (var step in suite.Steps)
-				{
-					switch (step.Type)
-					{
-						case "do":
-							@RenderPage("Do.cshtml", (DoStep) step)
-							break;
-						case "set":
-							@RenderPage("Set.cshtml", (SetStep) step)
-							break;
-						case "is_true":
-							@RenderPage("IsTrue.cshtml", (IsTrueStep) step)
-							break;
-						case "is_false":
-							@RenderPage("IsFalse.cshtml", (IsFalseStep) step)
-							break;
-					}
-				}
+			public void @(suite.Description.ToPascalCase())Test()
+			{	@RenderPage("DispatchSteps.cshtml", suite.Steps)
 			}
 		}</text>
 		}
 	}
 }
+
