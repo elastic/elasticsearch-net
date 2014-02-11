@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 				this.IsMatch(_response._type, @"test");
 
 				//match _response._id: 
-				this.IsMatch(_response._id, @"Ã¤Â¸Â­Ã¦â€“â€¡");
+				this.IsMatch(_response._id, @"ä¸­æ–‡");
 
 				//match _response._source: 
 				this.IsMatch(_response._source, new {
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 				this.IsMatch(_response._type, @"test");
 
 				//match _response._id: 
-				this.IsMatch(_response._id, @"Ã¤Â¸Â­Ã¦â€“â€¡");
+				this.IsMatch(_response._id, @"ä¸­æ–‡");
 
 				//match _response._source: 
 				this.IsMatch(_response._source, new {

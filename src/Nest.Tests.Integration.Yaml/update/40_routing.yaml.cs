@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
+					.Add("wait_for_status", @"green")
 				));
 
 				//do update 
@@ -46,13 +46,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("routing","5")
+					.Add("routing", 5)
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("routing","5")
-					.Add("fields","_routing")
+					.Add("routing", 5)
+					.Add("fields", @"_routing")
 				));
 
 				//match _response.fields._routing: 
@@ -73,8 +73,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("routing","5")
-					.Add("fields","foo")
+					.Add("routing", 5)
+					.Add("fields", @"foo")
 				));
 
 				//match _response.get.fields.foo: 

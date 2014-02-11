@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","foo")
+					.Add("fields", @"foo")
 				));
 
 				//match _response._index: 
@@ -50,7 +50,10 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("fields", new [] {
+						"foo",
+						"count"
+					})
 				));
 
 				//match _response.fields.foo: 
@@ -64,7 +67,11 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("fields", new [] {
+						"foo",
+						"count",
+						"_source"
+					})
 				));
 
 				//match _response.fields.foo: 

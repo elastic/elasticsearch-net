@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("fields","foo,bar,_source")
+					.Add("fields", @"foo,bar,_source")
 				));
 
 				//match _response.get._source.foo: 

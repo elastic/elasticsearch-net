@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("script","1")
+					.Add("script", 1)
 				));
 
 				//match _response._index: 
@@ -63,8 +63,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//do update 
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
-					.Add("lang","mvel")
-					.Add("script","ctx._source.foo = 'yyy'")
+					.Add("lang", @"mvel")
+					.Add("script", @"ctx._source.foo = 'yyy'")
 				));
 
 				//match _response._index: 
@@ -100,8 +100,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//do update 
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
-					.Add("lang","doesnotexist")
-					.Add("script","1")
+					.Add("lang", @"doesnotexist")
+					.Add("script", 1)
 				));
 
 			}

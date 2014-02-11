@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//do indices.flush 
 				this.Do(()=> this._client.IndicesFlushGet(nv=>nv
-					.Add("refresh","true")
+					.Add("refresh", @"true")
 				));
 
 				//do mget 

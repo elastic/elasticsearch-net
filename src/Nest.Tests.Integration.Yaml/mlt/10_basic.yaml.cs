@@ -33,13 +33,13 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
-					.Add("timeout","1s")
+					.Add("wait_for_status", @"green")
+					.Add("timeout", @"1s")
 				));
 
 				//do mlt 
 				this.Do(()=> this._client.MltGet("test_1", "test", "1", nv=>nv
-					.Add("mlt_fields","title")
+					.Add("mlt_fields", @"title")
 				));
 
 				//match _response.hits.total: 

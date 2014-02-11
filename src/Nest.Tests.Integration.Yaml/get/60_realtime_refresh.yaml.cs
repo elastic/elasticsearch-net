@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
+					.Add("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("realtime","1")
+					.Add("realtime", 1)
 				));
 
 				//is_true _response.exists; 
@@ -53,13 +53,13 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("realtime","0")
+					.Add("realtime", 0)
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("realtime","0")
-					.Add("refresh","1")
+					.Add("realtime", 0)
+					.Add("refresh", 1)
 				));
 
 				//is_true _response.exists; 

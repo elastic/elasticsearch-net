@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
+					.Add("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -46,8 +46,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("parent","4")
-					.Add("routing","5")
+					.Add("parent", 4)
+					.Add("routing", 5)
 				));
 
 				//do mget 
@@ -68,7 +68,10 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					}
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("fields", new [] {
+						"_routing",
+						"_parent"
+					})
 				));
 
 				//is_false _response.docs[0].exists; 

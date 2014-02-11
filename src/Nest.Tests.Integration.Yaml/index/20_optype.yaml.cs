@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type","create")
+					.Add("op_type", @"create")
 				));
 
 				//do index 
@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type","create")
+					.Add("op_type", @"create")
 				));
 
 				//do index 
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type","index")
+					.Add("op_type", @"index")
 				));
 
 				//match _response._version: 

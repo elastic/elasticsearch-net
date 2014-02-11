@@ -26,9 +26,9 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("version_type","external")
-					.Add("version","5")
-					.Add("op_type","create")
+					.Add("version_type", @"external")
+					.Add("version", 5)
+					.Add("op_type", @"create")
 				));
 
 				//match _response._version: 
@@ -39,9 +39,9 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("version_type","external")
-					.Add("version","5")
-					.Add("op_type","create")
+					.Add("version_type", @"external")
+					.Add("version", 5)
+					.Add("op_type", @"create")
 				));
 
 				//do create 
@@ -49,9 +49,9 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("version_type","external")
-					.Add("version","6")
-					.Add("op_type","create")
+					.Add("version_type", @"external")
+					.Add("version", 6)
+					.Add("op_type", @"create")
 				));
 
 			}

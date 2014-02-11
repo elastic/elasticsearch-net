@@ -185,9 +185,10 @@ namespace CodeGeneration.YamlTestsRunner
 					body = complexArgument["body"];
 					complexArgument.Remove("body");
 				}
-				var nv = new NameValueCollection();
+				var nv = new Dictionary<string, object>();
 				foreach (var kv in complexArgument)
-					nv.Add(kv.Key as string, kv.Value.ToString());
+					nv.Add(kv.Key as string, kv.Value);
+				
 				return new DoStep {Call = call, Body = body, QueryString = nv, Catch = catchException};
 			}
 			return new DoStep { Call = call , Catch = catchException};

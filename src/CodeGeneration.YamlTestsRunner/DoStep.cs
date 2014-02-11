@@ -28,7 +28,7 @@ namespace CodeGeneration.YamlTestsRunner
 			}
 		}
 		public object Body { get; set; }
-		public NameValueCollection QueryString { get; set; }
+		public Dictionary<string, object> QueryString { get; set; }
 
 		private string FindBestRawElasticSearchMatch()
 		{
@@ -36,7 +36,7 @@ namespace CodeGeneration.YamlTestsRunner
 			{
 				this.Call = "index";
 				if (this.QueryString == null)
-					this.QueryString = new NameValueCollection();
+					this.QueryString = new Dictionary<string, object>();
 				this.QueryString.Add("op_type", "create");
 			}
 
@@ -65,7 +65,7 @@ namespace CodeGeneration.YamlTestsRunner
 			s += csharpMethod + "(";
 			var csharpArguments = CsharpArguments(call);
 			var args = csharpArguments
-				.Select(this.GetQueryStringValue)
+				.Select(this.GetMethodArgument)
 				.ToList();
 			if (this.Body != null)
 			{
@@ -80,7 +80,7 @@ namespace CodeGeneration.YamlTestsRunner
 			{
 				var nv = "nv=>nv\r\n";
 				nv += queryStringKeys.Aggregate("",
-					(current, k) => current + string.Format("\t\t\t\t\t.Add(\"{0}\",{1})\r\n", k, this.GetQueryStringValue(k)));
+					(current, k) => current + string.Format("\t\t\t\t\t.Add(\"{0}\", {1})\r\n", k, this.GetQueryStringValue(k)));
 				nv += "\t\t\t\t";
 				args.Add(nv);
 			}
@@ -99,17 +99,25 @@ namespace CodeGeneration.YamlTestsRunner
 			body += ";\n";
 			return body;
 		}
+		private string GetMethodArgument(string key)
+		{
+			var value = this.QueryString[key].ToString();
+			if (value.StartsWith("$"))
+				return "(string)" + value.Replace("$", "");
+			return "\"" + value + "\"";
+		}
+		
 		private string GetQueryStringValue(string key)
 		{
-			var value = this.QueryString[key];
-			if (value.StartsWith("$"))
-				return value.Replace("$", "");
-			return "\"" + value + "\"";
+			var value = this.QueryString[key].ToStringRepresentation("\t\t\t\t\t");
+			if (value.StartsWith("@\"$"))
+				return "(string)" + value.Replace("@\"$", "").Trim('"');
+			return value;
 		}
 
 		private IEnumerable<string> CsharpArguments(string call, bool inverse = false)
 		{
-			var csharpArguments = this.QueryString.AllKeys
+			var csharpArguments = this.QueryString.Keys
 				.Select(k => new {Key = k, Index = call.IndexOf(k + ",", System.StringComparison.Ordinal)})
 				.Where(ki => inverse ? ki.Index < 0 : ki.Index >= 0)
 				.OrderBy(ki => ki.Index)
@@ -119,7 +127,7 @@ namespace CodeGeneration.YamlTestsRunner
 
 		private int QueryStringCount(string method)
 		{
-			return QueryString.AllKeys.Count(k => method.Contains(k + ","));
+			return QueryString.Keys.Count(k => method.Contains(k + ","));
 		}
 		private int MethodPreference(string method)
 		{

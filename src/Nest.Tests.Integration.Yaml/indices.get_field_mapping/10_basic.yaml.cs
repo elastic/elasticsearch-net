@@ -108,7 +108,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
-					.Add("include_defaults","true")
+					.Add("include_defaults", @"true")
 				));
 
 				//match _response.test_index.test_type.text.mapping.text.type: 

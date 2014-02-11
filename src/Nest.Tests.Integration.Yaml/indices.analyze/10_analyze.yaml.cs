@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
-					.Add("text","Foo Bar")
+					.Add("text", @"Foo Bar")
 				));
 
 				//length _response.tokens: 2; 
@@ -57,9 +57,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
-					.Add("filters","lowercase")
-					.Add("text","Foo Bar")
-					.Add("tokenizer","keyword")
+					.Add("filters", @"lowercase")
+					.Add("text", @"Foo Bar")
+					.Add("tokenizer", @"keyword")
 				));
 
 				//length _response.tokens: 1; 
@@ -94,13 +94,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do indices.analyze 
 				this.Do(()=> this._client.IndicesAnalyzeGet("test", nv=>nv
-					.Add("field","text")
-					.Add("text","Foo Bar!")
+					.Add("field", @"text")
+					.Add("text", @"Foo Bar!")
 				));
 
 				//length _response.tokens: 2; 

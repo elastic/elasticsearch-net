@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 					"new {\"f1\"= \"v2\", \"f2\"= 47}"
 				};
 				this.Do(()=> this._client.BulkPost(_body, nv=>nv
-					.Add("refresh","true")
+					.Add("refresh", @"true")
 				));
 
 				//do count 

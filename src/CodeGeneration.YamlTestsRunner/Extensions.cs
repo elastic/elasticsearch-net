@@ -38,6 +38,8 @@ namespace CodeGeneration.YamlTestsRunner
 					return body;
 				}
 				body += s.SurroundWithQuotes();
+				if (body == "@\"Ã¤Â¸Â­Ã¦â€“â€¡\"") //yamlserializer messes this up
+					body = "@\"ä¸­æ–‡\"";
 				return body;
 			}
 			var ss = o as IEnumerable<string>;
@@ -61,8 +63,13 @@ namespace CodeGeneration.YamlTestsRunner
 			var os = o as IEnumerable<object>;
 			if (os != null)
 			{
-				body += "new dynamic[] {\n";
-				body +=  string.Join(",\n", os.Select(oss=>indendation + "\t" + oss.SerializeToAnonymousObject(indendation, Formatting.None)));
+				var inner =  string.Join(",\n", os
+					.Select(oss=>indendation + "\t" + oss.SerializeToAnonymousObject(indendation, Formatting.None)));
+				if (inner.Contains('{'))
+					body += "new dynamic[] {\n";
+				else 
+					body += "new [] {\n";
+				body += inner;
 				body += "\n" + indendation + "}";
 				return body;
 			}

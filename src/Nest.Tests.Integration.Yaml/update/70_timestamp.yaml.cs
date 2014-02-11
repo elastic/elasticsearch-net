@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do update 
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","_timestamp")
+					.Add("fields", @"_timestamp")
 				));
 
 				//is_true _response.fields._timestamp; 
@@ -68,12 +68,12 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp","1372011280000")
+					.Add("timestamp", @"1372011280000")
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","_timestamp")
+					.Add("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 
@@ -89,12 +89,12 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp","2013-06-23T18:14:40")
+					.Add("timestamp", @"2013-06-23T18:14:40")
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","_timestamp")
+					.Add("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 

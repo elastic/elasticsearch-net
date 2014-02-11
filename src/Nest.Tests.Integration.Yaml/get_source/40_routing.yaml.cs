@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
+					.Add("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -41,12 +41,12 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("routing","5")
+					.Add("routing", 5)
 				));
 
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("routing","5")
+					.Add("routing", 5)
 				));
 
 				//match this._status: 

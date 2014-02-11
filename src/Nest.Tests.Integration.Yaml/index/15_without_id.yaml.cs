@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 				var id = _response._id;
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", id));
+				this.Do(()=> this._client.Get("test_1", "test", (string)id));
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test_1");

@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("parent","4")
+					.Add("parent", 4)
 				));
 
 				//do index 
@@ -51,7 +51,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "2", _body, nv=>nv
-					.Add("parent","5")
+					.Add("parent", 5)
 				));
 
 				//do mget 

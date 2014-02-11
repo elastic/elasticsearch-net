@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("ignore","404")
+					.Add("ignore", 404)
 				));
 
 			}
@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("ignore","404")
+					.Add("ignore", 404)
 				));
 
 			}

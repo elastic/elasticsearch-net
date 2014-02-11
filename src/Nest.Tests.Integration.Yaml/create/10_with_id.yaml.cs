@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type","create")
+					.Add("op_type", @"create")
 				));
 
 				//is_true _response.ok; 
@@ -69,7 +69,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type","create")
+					.Add("op_type", @"create")
 				));
 
 			}

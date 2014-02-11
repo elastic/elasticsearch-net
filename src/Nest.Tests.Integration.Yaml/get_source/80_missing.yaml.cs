@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "test", "1", nv=>nv
-					.Add("ignore","404")
+					.Add("ignore", 404)
 				));
 
 			}

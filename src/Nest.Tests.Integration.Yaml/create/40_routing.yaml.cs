@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
+					.Add("wait_for_status", @"green")
 				));
 
 				//do create 
@@ -41,14 +41,16 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("routing","5")
-					.Add("op_type","create")
+					.Add("routing", 5)
+					.Add("op_type", @"create")
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("routing","5")
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("routing", 5)
+					.Add("fields", new [] {
+						"_routing"
+					})
 				));
 
 				//match _response._id: 

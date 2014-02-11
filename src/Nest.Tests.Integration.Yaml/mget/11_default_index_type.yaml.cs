@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do mget 

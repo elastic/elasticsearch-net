@@ -23,8 +23,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 				//do indices.analyze 
 				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
-					.Add("format","text")
-					.Add("text","tHE BLACK and white! AND red")
+					.Add("format", @"text")
+					.Add("text", @"tHE BLACK and white! AND red")
 				));
 
 				//match _response.tokens: 

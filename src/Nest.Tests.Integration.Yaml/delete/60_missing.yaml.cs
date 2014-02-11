@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 
 				//do delete 
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
-					.Add("ignore","404")
+					.Add("ignore", 404)
 				));
 
 			}

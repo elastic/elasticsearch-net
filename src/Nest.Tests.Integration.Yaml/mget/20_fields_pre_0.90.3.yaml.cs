@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do mget 
@@ -107,7 +107,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					}
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("fields","foo")
+					.Add("fields", @"foo")
 				));
 
 				//match _response.docs[0].fields.foo: 
@@ -162,7 +162,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					}
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("fields", new [] {
+						"foo"
+					})
 				));
 
 				//match _response.docs[0].fields.foo: 
@@ -217,7 +219,10 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					}
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("fields", new [] {
+						"foo",
+						"_source"
+					})
 				));
 
 				//match _response.docs[0].fields.foo: 

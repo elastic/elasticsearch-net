@@ -23,8 +23,8 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
 
 				//do cluster.node_stats 
 				this.Do(()=> this._client.ClusterNodeStatsGet(nv=>nv
-					.Add("indices","true")
-					.Add("transport","true")
+					.Add("indices", @"true")
+					.Add("transport", @"true")
 				));
 
 				//is_true _response.cluster_name; 

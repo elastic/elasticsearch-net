@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do update 
@@ -59,13 +59,16 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("parent","5")
+					.Add("parent", 5)
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent","5")
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("parent", 5)
+					.Add("fields", new [] {
+						"_parent",
+						"_routing"
+					})
 				));
 
 				//match _response.fields._parent: 
@@ -89,8 +92,8 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("parent","5")
-					.Add("fields","foo")
+					.Add("parent", 5)
+					.Add("fields", @"foo")
 				));
 
 				//match _response.get.fields.foo: 

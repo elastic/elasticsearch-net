@@ -40,15 +40,15 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 					}
 				};
 				this.Do(()=> this._client.SearchPost("test_scroll", _body, nv=>nv
-					.Add("search_type","scan")
-					.Add("scroll","1m")
+					.Add("search_type", @"scan")
+					.Add("scroll", @"1m")
 				));
 
 				//set scroll_id = _response._scroll_id; 
 				var scroll_id = _response._scroll_id;
 
 				//do scroll 
-				this.Do(()=> this._client.ScrollGet(scroll_id));
+				this.Do(()=> this._client.ScrollGet((string)scroll_id));
 
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 1);

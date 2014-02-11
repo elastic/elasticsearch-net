@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 
 				//do indices.optimize 
 				this.Do(()=> this._client.IndicesOptimizeGet("testing", nv=>nv
-					.Add("max_num_segments","1")
+					.Add("max_num_segments", 1)
 				));
 
 				//is_true _response.ok; 

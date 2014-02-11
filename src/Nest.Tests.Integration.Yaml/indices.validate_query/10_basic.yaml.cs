@@ -26,12 +26,12 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do indices.validate_query 
 				this.Do(()=> this._client.IndicesValidateQueryGet(nv=>nv
-					.Add("q","query string")
+					.Add("q", @"query string")
 				));
 
 				//is_true _response.valid; 

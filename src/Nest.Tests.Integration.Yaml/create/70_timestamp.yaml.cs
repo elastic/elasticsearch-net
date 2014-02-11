@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do create 
@@ -44,12 +44,12 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("op_type","create")
+					.Add("op_type", @"create")
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","_timestamp")
+					.Add("fields", @"_timestamp")
 				));
 
 				//is_true _response.fields._timestamp; 
@@ -63,13 +63,13 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp","1372011280000")
-					.Add("op_type","create")
+					.Add("timestamp", @"1372011280000")
+					.Add("op_type", @"create")
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","_timestamp")
+					.Add("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 
@@ -83,13 +83,13 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("timestamp","2013-06-23T18:14:40")
-					.Add("op_type","create")
+					.Add("timestamp", @"2013-06-23T18:14:40")
+					.Add("op_type", @"create")
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("fields","_timestamp")
+					.Add("fields", @"_timestamp")
 				));
 
 				//match _response.fields._timestamp: 

@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -43,23 +43,26 @@ namespace Nest.Tests.Integration.Yaml.Get
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("parent","Ã¤Â¸Â­Ã¦â€“â€¡")
+					.Add("parent", @"ä¸­æ–‡")
 				));
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
-					.Add("parent","Ã¤Â¸Â­Ã¦â€“â€¡")
-					.Add("fields","System.Collections.Generic.List`1[System.Object]")
+					.Add("parent", @"ä¸­æ–‡")
+					.Add("fields", new [] {
+						"_parent",
+						"_routing"
+					})
 				));
 
 				//match _response._id: 
 				this.IsMatch(_response._id, 1);
 
 				//match _response.fields._parent: 
-				this.IsMatch(_response.fields._parent, @"Ã¤Â¸Â­Ã¦â€“â€¡");
+				this.IsMatch(_response.fields._parent, @"ä¸­æ–‡");
 
 				//match _response.fields._routing: 
-				this.IsMatch(_response.fields._routing, @"Ã¤Â¸Â­Ã¦â€“â€¡");
+				this.IsMatch(_response.fields._routing, @"ä¸­æ–‡");
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1"));

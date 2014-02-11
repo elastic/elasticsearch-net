@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 
 				//do indices.put_alias 
 				this.Do(()=> this._client.IndicesPutAlias("test_alias", null, nv=>nv
-					.Add("index","test_index")
+					.Add("index", @"test_index")
 				));
 
 				//is_true _response.ok; 

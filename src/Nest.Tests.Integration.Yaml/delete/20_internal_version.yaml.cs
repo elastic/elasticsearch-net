@@ -32,12 +32,12 @@ namespace Nest.Tests.Integration.Yaml.Delete
 
 				//do delete 
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
-					.Add("version","2")
+					.Add("version", 2)
 				));
 
 				//do delete 
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
-					.Add("version","1")
+					.Add("version", 1)
 				));
 
 				//match _response._version: 

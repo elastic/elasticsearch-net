@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do index 
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "2", _body, nv=>nv
-					.Add("refresh","1")
+					.Add("refresh", 1)
 				));
 
 				//do search 

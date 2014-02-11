@@ -26,8 +26,8 @@ namespace Nest.Tests.Integration.Yaml.Delete
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("version_type","external")
-					.Add("version","5")
+					.Add("version_type", @"external")
+					.Add("version", 5)
 				));
 
 				//match _response._version: 
@@ -35,14 +35,14 @@ namespace Nest.Tests.Integration.Yaml.Delete
 
 				//do delete 
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
-					.Add("version_type","external")
-					.Add("version","4")
+					.Add("version_type", @"external")
+					.Add("version", 4)
 				));
 
 				//do delete 
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
-					.Add("version_type","external")
-					.Add("version","6")
+					.Add("version_type", @"external")
+					.Add("version", 6)
 				));
 
 				//match _response._version: 

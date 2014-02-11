@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.Exists
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
+					.Add("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -41,12 +41,12 @@ namespace Nest.Tests.Integration.Yaml.Exists
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
-					.Add("routing","5")
+					.Add("routing", 5)
 				));
 
 				//do exists 
 				this.Do(()=> this._client.ExistsHead("test_1", "test", "1", nv=>nv
-					.Add("routing","5")
+					.Add("routing", 5)
 				));
 
 				//is_true this._status; 

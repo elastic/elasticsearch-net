@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","green")
+					.Add("wait_for_status", @"green")
 				));
 
 				//do index 
@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					}
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("realtime","0")
+					.Add("realtime", 0)
 				));
 
 				//is_false _response.docs[0].exists; 
@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					}
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("realtime","1")
+					.Add("realtime", 1)
 				));
 
 				//is_true _response.docs[0].exists; 
@@ -76,8 +76,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					}
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
-					.Add("realtime","0")
-					.Add("refresh","1")
+					.Add("realtime", 0)
+					.Add("refresh", 1)
 				));
 
 				//is_true _response.docs[0].exists; 

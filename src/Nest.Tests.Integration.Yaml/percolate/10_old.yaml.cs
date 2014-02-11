@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 				this.IsTrue(_response.ok);
 
 				//match _response.matches: 
-				this.IsMatch(_response.matches, new dynamic[] {
+				this.IsMatch(_response.matches, new [] {
 					"test_percolator"
 				});
 

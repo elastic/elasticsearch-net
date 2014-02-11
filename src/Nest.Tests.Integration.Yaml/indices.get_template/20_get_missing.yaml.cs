@@ -21,7 +21,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 
 				//do indices.delete_template 
 				this.Do(()=> this._client.IndicesDeleteTemplate("*", nv=>nv
-					.Add("ignore","404")
+					.Add("ignore", 404)
 				));
 
 			}
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 
 				//do indices.delete_template 
 				this.Do(()=> this._client.IndicesDeleteTemplate("test", nv=>nv
-					.Add("ignore","404")
+					.Add("ignore", 404)
 				));
 
 				//do indices.get_template 

@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 					routing= "routing value"
 				};
 				this.Do(()=> this._client.IndicesPutAlias("testali", _body, nv=>nv
-					.Add("index","testind")
+					.Add("index", @"testind")
 				));
 
 				//do indices.get_alias 

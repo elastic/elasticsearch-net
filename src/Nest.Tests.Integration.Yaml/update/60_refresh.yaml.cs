@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status","yellow")
+					.Add("wait_for_status", @"yellow")
 				));
 
 				//do update 
@@ -68,7 +68,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 					}
 				};
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "2", _body, nv=>nv
-					.Add("refresh","1")
+					.Add("refresh", 1)
 				));
 
 				//do search 

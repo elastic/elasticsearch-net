@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", _body, nv=>nv
-					.Add("op_type","create")
+					.Add("op_type", @"create")
 				));
 
 				//is_true _response.ok; 
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 				var id = _response._id;
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", id));
+				this.Do(()=> this._client.Get("test_1", "test", (string)id));
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test_1");
