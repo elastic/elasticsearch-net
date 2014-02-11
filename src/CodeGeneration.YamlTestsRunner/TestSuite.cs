@@ -137,8 +137,9 @@ namespace CodeGeneration.YamlTestsRunner
 				value = "." + value;
 			if (Regex.IsMatch(value, @"([\s\-]|\\\.)"))
 			{
-				value = value.Replace(@"\.", ".");
+				value = value.Replace(@"\.", "|||");
 				value = Regex.Replace(value, @"\.([^\.]+)", m => "[" + m.Value.Trim('.').SurroundWithQuotes() + "]");
+				value = value.Replace("|||", ".");
 				return "_responseDictionary" + value;
 			}
 			return "_response" + value;

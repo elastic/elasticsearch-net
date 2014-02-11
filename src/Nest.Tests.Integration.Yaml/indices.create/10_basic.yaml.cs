@@ -57,8 +57,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings("test_index"));
 
-				//match _responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"], 0);
+				//match _responseDictionary[@"test_index"][@"settings"][@"index.number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"settings"][@"index.number_of_replicas"], 0);
 
 			}
 		}
@@ -129,7 +129,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings("test_index"));
 
-				//match _responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				//match _responseDictionary[@"test_index"][@"settings"][@"index.number_of_replicas"]: 
 				this.IsMatch(_responseDictionary[@"test_index"][@"settings"][@"index.number_of_replicas"], 0);
 
 				//do indices.get_warmer 

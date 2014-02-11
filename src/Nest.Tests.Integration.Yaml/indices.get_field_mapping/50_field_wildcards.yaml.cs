@@ -72,14 +72,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				//match _response.test_index.test_type.t2.full_name: 
 				this.IsMatch(_response.test_index.test_type.t2.full_name, @"t2");
 
-				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"], @"obj.t1");
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj.t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj.t1"][@"full_name"], @"obj.t1");
 
-				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"], @"obj.i_t1");
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj.i_t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj.i_t1"][@"full_name"], @"obj.i_t1");
 
-				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t3"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t3"][@"full_name"], @"obj.i_t3");
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj.i_t3"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj.i_t3"][@"full_name"], @"obj.i_t3");
 
 			}
 		}
@@ -122,11 +122,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				//match _response.test_index.test_type.t1.full_name: 
 				this.IsMatch(_response.test_index.test_type.t1.full_name, @"t1");
 
-				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"t1"][@"full_name"], @"obj.t1");
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj.t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj.t1"][@"full_name"], @"obj.t1");
 
-				//match _responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj"][@"i_t1"][@"full_name"], @"obj.i_t1");
+				//match _responseDictionary[@"test_index"][@"test_type"][@"obj.i_t1"][@"full_name"]: 
+				this.IsMatch(_responseDictionary[@"test_index"][@"test_type"][@"obj.i_t1"][@"full_name"], @"obj.i_t1");
 
 				//length _response.test_index.test_type: 3; 
 				this.IsLength(_response.test_index.test_type, 3);

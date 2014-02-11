@@ -35,8 +35,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings("test-index"));
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 0);
+				//match _responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"], 0);
 
 				//do indices.put_settings 
 				_body = new {
@@ -47,8 +47,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings());
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 1);
+				//match _responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"], 1);
 
 			}
 		}

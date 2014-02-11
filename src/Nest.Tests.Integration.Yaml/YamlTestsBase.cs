@@ -80,6 +80,9 @@ namespace Nest.Tests.Integration.Yaml
 
 		protected void IsFalse(object o)
 		{
+			if (o == null)
+				return;
+
 			if (o is JValue) o = ((JValue) o).Value;
 			if (o is ConnectionStatus)
 			{
