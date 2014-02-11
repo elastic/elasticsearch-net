@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class PartialDocumentTests : YamlTestsBase
 		{
 			[Test]

@@ -28,6 +28,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		}
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetMissingTemplatePost0903Tests : IndicesGetTemplate20GetMissingYamlBase
 		{
 			[Test]
@@ -40,6 +41,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetMissingTemplatePre0903Tests : IndicesGetTemplate20GetMissingYamlBase
 		{
 			[Test]

@@ -26,6 +26,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		}
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicTestTests : IndicesAnalyze10AnalyzeYamlBase
 		{
 			[Test]
@@ -49,6 +50,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class TokenizerAndFilterTests : IndicesAnalyze10AnalyzeYamlBase
 		{
 			[Test]
@@ -71,6 +73,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class IndexAndFieldTests : IndicesAnalyze10AnalyzeYamlBase
 		{
 			[Test]

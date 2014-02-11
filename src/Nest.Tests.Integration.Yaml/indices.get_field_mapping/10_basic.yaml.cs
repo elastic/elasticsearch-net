@@ -37,6 +37,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		}
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingWithNoIndexAndTypeTests : IndicesGetFieldMapping10BasicYamlBase
 		{
 			[Test]
@@ -52,6 +53,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingByIndexOnlyTests : IndicesGetFieldMapping10BasicYamlBase
 		{
 			[Test]
@@ -67,6 +69,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingByTypeFieldTests : IndicesGetFieldMapping10BasicYamlBase
 		{
 			[Test]
@@ -82,6 +85,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExistTests : IndicesGetFieldMapping10BasicYamlBase
 		{
 			[Test]
@@ -100,6 +104,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingWithIncludeDefaultsTests : IndicesGetFieldMapping10BasicYamlBase
 		{
 			[Test]

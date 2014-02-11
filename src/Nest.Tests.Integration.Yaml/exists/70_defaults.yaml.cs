@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Exists
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ClientSideDefaultTypeTests : YamlTestsBase
 		{
 			[Test]

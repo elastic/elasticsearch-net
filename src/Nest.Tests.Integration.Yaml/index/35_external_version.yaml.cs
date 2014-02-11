@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ExternalVersionTests : YamlTestsBase
 		{
 			[Test]

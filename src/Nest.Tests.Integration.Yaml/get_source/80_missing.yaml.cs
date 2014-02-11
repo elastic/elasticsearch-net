@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class MissingDocumentWithCatchTests : YamlTestsBase
 		{
 			[Test]
@@ -27,6 +28,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class MissingDocumentWithIgnoreTests : YamlTestsBase
 		{
 			[Test]

@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetTemplateTests : YamlTestsBase
 		{
 			[Test]
@@ -46,6 +47,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetAllTemplatesTests : YamlTestsBase
 		{
 			[Test]

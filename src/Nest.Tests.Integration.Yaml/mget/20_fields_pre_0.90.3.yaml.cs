@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class FieldsPre0903Tests : YamlTestsBase
 		{
 			[Test]

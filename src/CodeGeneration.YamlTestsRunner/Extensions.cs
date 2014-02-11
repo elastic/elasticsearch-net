@@ -37,9 +37,9 @@ namespace CodeGeneration.YamlTestsRunner
 					body += i.ToString(CultureInfo.InvariantCulture);
 					return body;
 				}
-				body += s.SurroundWithQuotes();
-				if (body == "@\"Ã¤Â¸Â­Ã¦â€“â€¡\"") //yamlserializer messes this up
-					body = "@\"ä¸­æ–‡\"";
+				body += s.SurroundWithQuotes()
+					//yaml deserializer messes these up
+					.Replace("Ã¤Â¸Â­Ã¦â€“â€¡", "ä¸­æ–‡");
 				return body;
 			}
 			var ss = o as IEnumerable<string>;

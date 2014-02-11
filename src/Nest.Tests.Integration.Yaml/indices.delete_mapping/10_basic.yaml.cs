@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class DeleteMappingTestsTests : YamlTestsBase
 		{
 			[Test]

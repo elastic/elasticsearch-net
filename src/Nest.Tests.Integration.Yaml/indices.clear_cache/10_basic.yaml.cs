@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ClearCacheTestTests : YamlTestsBase
 		{
 			[Test]

@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicTests : YamlTestsBase
 		{
 			[Test]

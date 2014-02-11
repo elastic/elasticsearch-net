@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class CreateIndexWithMappingsTests : YamlTestsBase
 		{
 			[Test]
@@ -38,6 +39,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class CreateIndexWithSettingsTests : YamlTestsBase
 		{
 			[Test]
@@ -61,6 +63,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class CreateIndexWithWarmersTests : YamlTestsBase
 		{
 			[Test]
@@ -90,6 +93,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class CreateIndexWithMappingsSettingsAndWarmersTests : YamlTestsBase
 		{
 			[Test]
@@ -126,7 +130,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate
 				this.Do(()=> this._client.IndicesGetSettings("test_index"));
 
 				//match _responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"settings"][@"index"][@"number_of_replicas"], 0);
+				this.IsMatch(_responseDictionary[@"test_index"][@"settings"][@"index.number_of_replicas"], 0);
 
 				//do indices.get_warmer 
 				this.Do(()=> this._client.IndicesGetWarmer("test_index"));

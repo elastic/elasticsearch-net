@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicTestForIndexOpenCloseTests : YamlTestsBase
 		{
 			[Test]

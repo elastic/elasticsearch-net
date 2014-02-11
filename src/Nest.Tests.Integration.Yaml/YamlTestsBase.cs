@@ -38,6 +38,9 @@ namespace Nest.Tests.Integration.Yaml
 
 		protected void IsTrue(object o)
 		{
+			if (o == null)
+				Assert.Fail("null is not true value");
+
 			string message = "Unknown type:" + o.GetType().FullName;
 			if (o is JValue) o = ((JValue) o).Value;
 			if (o is ConnectionStatus)
@@ -167,4 +170,6 @@ namespace Nest.Tests.Integration.Yaml
 			}
 		}
 	}
+
+
 }

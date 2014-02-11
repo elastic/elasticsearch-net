@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesStatus
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class IndicesStatusTestTests : YamlTestsBase
 		{
 			[Test]

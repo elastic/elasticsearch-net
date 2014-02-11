@@ -101,7 +101,8 @@ namespace CodeGeneration.YamlTestsRunner
 		}
 		private string GetMethodArgument(string key)
 		{
-			var value = this.QueryString[key].ToString();
+			var value = this.QueryString[key].ToString()
+					.Replace("Ã¤Â¸Â­Ã¦â€“â€¡", "ä¸­æ–‡");
 			if (value.StartsWith("$"))
 				return "(string)" + value.Replace("$", "");
 			return "\"" + value + "\"";

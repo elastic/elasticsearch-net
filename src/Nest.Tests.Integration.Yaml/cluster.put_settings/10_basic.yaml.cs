@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class TestPutSettingsTests : YamlTestsBase
 		{
 			[Test]

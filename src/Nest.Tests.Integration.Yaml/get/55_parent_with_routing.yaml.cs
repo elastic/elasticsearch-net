@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ParentWithRoutingTests : YamlTestsBase
 		{
 			[Test]

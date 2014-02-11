@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ClusterStateTestTests : YamlTestsBase
 		{
 			[Test]

@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ScriptTests : YamlTestsBase
 		{
 			[Test]

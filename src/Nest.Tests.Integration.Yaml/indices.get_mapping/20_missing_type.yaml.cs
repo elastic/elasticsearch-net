@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class Raise404WhenTypeDoesntExistTests : YamlTestsBase
 		{
 			[Test]

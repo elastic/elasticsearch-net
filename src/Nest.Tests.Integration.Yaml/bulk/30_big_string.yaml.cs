@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Bulk
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class OneBigStringTests : YamlTestsBase
 		{
 			[Test]

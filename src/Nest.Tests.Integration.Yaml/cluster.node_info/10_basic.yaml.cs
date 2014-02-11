@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterNodeInfo
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class NodeInfoTestTests : YamlTestsBase
 		{
 			[Test]

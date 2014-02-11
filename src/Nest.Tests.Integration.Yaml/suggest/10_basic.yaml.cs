@@ -32,6 +32,7 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 		}
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicTestsForSuggestApiTests : Suggest10BasicYamlBase
 		{
 			[Test]

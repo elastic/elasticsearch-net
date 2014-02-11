@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicTests : YamlTestsBase
 		{
 			[Test]
@@ -25,10 +26,10 @@ namespace Nest.Tests.Integration.Yaml.Get
 				_body = new {
 					foo= "Hello= Ã¤Â¸Â­Ã¦â€“â€¡"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "Ã¤Â¸Â­Ã¦â€“â€¡", _body));
+				this.Do(()=> this._client.IndexPost("test_1", "test", "ä¸­æ–‡", _body));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "Ã¤Â¸Â­Ã¦â€“â€¡"));
+				this.Do(()=> this._client.Get("test_1", "test", "ä¸­æ–‡"));
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test_1");
@@ -45,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 				});
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "_all", "Ã¤Â¸Â­Ã¦â€“â€¡"));
+				this.Do(()=> this._client.Get("test_1", "_all", "ä¸­æ–‡"));
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test_1");

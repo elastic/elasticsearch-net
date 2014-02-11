@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicPercolationTestsTests : YamlTestsBase
 		{
 			[Test]

@@ -38,6 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 		}
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetIndexMappingTests : IndicesGetMapping10BasicYamlBase
 		{
 			[Test]
@@ -56,6 +57,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetTypeMappingTests : IndicesGetMapping10BasicYamlBase
 		{
 			[Test]

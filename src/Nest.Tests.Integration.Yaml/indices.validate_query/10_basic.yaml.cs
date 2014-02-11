@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ValidateQueryApiTests : YamlTestsBase
 		{
 			[Test]

@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Info
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class LuceneVersionTests : YamlTestsBase
 		{
 			[Test]

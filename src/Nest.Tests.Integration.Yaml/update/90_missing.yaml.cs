@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class MissingDocumentPartialDocTests : YamlTestsBase
 		{
 			[Test]
@@ -42,6 +43,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class MissingDocumentScriptTests : YamlTestsBase
 		{
 			[Test]

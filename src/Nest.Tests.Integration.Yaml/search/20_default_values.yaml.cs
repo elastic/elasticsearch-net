@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Search
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class DefaultIndexTests : YamlTestsBase
 		{
 			[Test]

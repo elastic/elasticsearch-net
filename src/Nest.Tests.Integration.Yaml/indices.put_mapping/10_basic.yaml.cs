@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class TestCreateAndUpdateMappingTests : YamlTestsBase
 		{
 			[Test]

@@ -75,6 +75,7 @@
     <Compile Include="delete\50_refresh.yaml.cs" />
     <Compile Include="delete\60_missing.yaml.cs" />
     <Compile Include="delete_by_query\10_basic.yaml.cs" />
+    <Compile Include="ExclusivelyUsesAttribute.cs" />
     <Compile Include="exists\10_basic.yaml.cs" />
     <Compile Include="exists\30_parent.yaml.cs" />
     <Compile Include="exists\40_routing.yaml.cs" />

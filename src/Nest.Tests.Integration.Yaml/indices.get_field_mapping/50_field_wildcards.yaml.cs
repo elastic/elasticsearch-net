@@ -56,6 +56,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 		}
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingWithForFieldsTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
 		{
 			[Test]
@@ -83,6 +84,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingWithTForFieldsTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
 		{
 			[Test]
@@ -107,6 +109,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingWithT1ForFieldsTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
 		{
 			[Test]
@@ -131,6 +134,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			}
 		}
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class GetFieldMappingWithWildcardedRelativeNamesTests : IndicesGetFieldMapping50FieldWildcardsYamlBase
 		{
 			[Test]

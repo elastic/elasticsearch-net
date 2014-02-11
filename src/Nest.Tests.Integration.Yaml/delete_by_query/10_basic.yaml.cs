@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicDeleteByQueryTests : YamlTestsBase
 		{
 			[Test]

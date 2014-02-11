@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicMltTests : YamlTestsBase
 		{
 			[Test]

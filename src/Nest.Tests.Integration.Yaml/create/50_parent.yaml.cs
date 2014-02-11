@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class ParentTests : YamlTestsBase
 		{
 			[Test]

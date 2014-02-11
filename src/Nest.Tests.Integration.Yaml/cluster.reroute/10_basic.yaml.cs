@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterReroute
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicSanityCheckTests : YamlTestsBase
 		{
 			[Test]

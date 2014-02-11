@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class TextFormatTests : YamlTestsBase
 		{
 			[Test]

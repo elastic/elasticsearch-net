@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Ping
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class PingReturnsTrueTests : YamlTestsBase
 		{
 			[Test]

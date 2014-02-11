@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicScrollTests : YamlTestsBase
 		{
 			[Test]

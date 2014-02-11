@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicTestForWarmersTests : YamlTestsBase
 		{
 			[Test]

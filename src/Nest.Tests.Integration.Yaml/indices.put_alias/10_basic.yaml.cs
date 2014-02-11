@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
 	{	
 
 
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
 		public class BasicTestForPutAliasTests : YamlTestsBase
 		{
 			[Test]
