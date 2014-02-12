@@ -1,48 +1,54 @@
-# NEST
+# NEST [![Build Status](http://teamcity.codebetter.com/app/rest/builds/buildType:%28id:bt993%29/statusIcon)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt993&guest=1)
+
 
 *Strongly typed Elasticsearch client*
 
 NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. 
 
 Indexing is as simple as:
-
-	var post = new Post() { Id = 12, ... }
-	var result = client.Index(post);
-
+```csharp
+var post = new Post() { Id = 12, ... }
+var result = client.Index(post);
+````
 All the calls have async variants:
 
-	//t is a Task<ConnectionStatus>
-	var t = client.IndexAsync(post);
+```csharp
+//t is a Task<ConnectionStatus>
+var t = client.IndexAsync(post);
+```
+The typed client exposes a fluent interface and a [powerful query dsl](http://nest.azurewebsites.net/concepts/writing-queries.html)
 
-Searching is fluent:
-
-	var results = client.Search<ElasticSearchProject>(s => s
-			.From(0)
-			.Size(10)
-			.Fields(f => f.Id, f => f.Name)
-			.SortAscending(f => f.LOC)
-			.SortDescending(f => f.Name)
-			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
-	);
-
+```csharp
+var results = client.Search<ElasticSearchProject>(s => s
+	.From(0)
+	.Size(10)
+	.Fields(f => f.Id, f => f.Name)
+	.SortAscending(f => f.LOC)
+	.SortDescending(f => f.Name)
+	.Query(q=>
+		q.Term(f=>f.Name, "NEST", Boost: 2.0) 
+		|| q.Match(mq=>mq.OnField(f=>f.Name).Query(userInput))
+	)
+);
+```
 NEST also comes with a low level client that you can fall back to incase anything is missing:
-
-	//.Raw is of type IRawElasticClient
-	var results = this._client.Raw.SearchPost("myindex","elasticsearchprojects", new
-	{
-		from = 0,
-		size = 10,
-		fields = new [] {"id", "name"},
-		query = new {
-			term = new {
-				name = new {
-					value= "NEST",
-					boost = 2.0
-				}
+```csharp
+//.Raw is of type IRawElasticClient
+var results = this._client.Raw.SearchPost("myindex","elasticsearchprojects", new
+{
+	from = 0,
+	size = 10,
+	fields = new [] {"id", "name"},
+	query = new {
+		term = new {
+			name = new {
+				value= "NEST",
+				boost = 2.0
 			}
 		}
-	});
-
+	}
+});
+```
 #[Read the documentation here](http://nest.azurewebsites.net/)
 
 additionally [@joelabrahamsson](http://twitter.com/joelabrahamsson) wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
