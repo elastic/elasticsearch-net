@@ -52,8 +52,8 @@ namespace Nest.Tests.Integration.Yaml.Get
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", new [] {
-						"foo",
-						"count"
+						@"foo",
+						@"count"
 					})
 				));
 
@@ -69,9 +69,9 @@ namespace Nest.Tests.Integration.Yaml.Get
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", new [] {
-						"foo",
-						"count",
-						"_source"
+						@"foo",
+						@"count",
+						@"_source"
 					})
 				));
 

@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("routing", 5)
 					.Add("fields", new [] {
-						"_routing"
+						@"_routing"
 					})
 				));
 

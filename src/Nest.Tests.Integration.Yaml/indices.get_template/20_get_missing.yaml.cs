@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			{	
 
 				//skip 0.90.3 - 999; 
-				this.Skip("0.90.3 - 999", "Missing templates didn&#39;t throw 404 before 0.90.3");
+				this.Skip("0.90.3 - 999", "Missing templates didn't throw 404 before 0.90.3");
 
 				//do indices.delete_template 
 				this.Do(()=> this._client.IndicesDeleteTemplate("test", nv=>nv

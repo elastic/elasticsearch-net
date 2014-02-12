@@ -51,8 +51,8 @@ namespace Nest.Tests.Integration.Yaml.Get
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("parent", @"ä¸­æ–‡")
 					.Add("fields", new [] {
-						"_parent",
-						"_routing"
+						@"_parent",
+						@"_routing"
 					})
 				));
 

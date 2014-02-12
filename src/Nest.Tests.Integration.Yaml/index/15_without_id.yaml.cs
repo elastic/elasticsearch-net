@@ -56,7 +56,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 				this.IsMatch(_response._type, @"test");
 
 				//match _response._id: 
-				this.IsMatch(_response._id, @"$id");
+				this.IsMatch(_response._id, (string)id);
 
 				//match _response._version: 
 				this.IsMatch(_response._version, 1);

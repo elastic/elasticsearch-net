@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
 					.Add("fields", new [] {
-						"_routing"
+						@"_routing"
 					})
 				));
 

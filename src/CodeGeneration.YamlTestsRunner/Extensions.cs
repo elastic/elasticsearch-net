@@ -40,6 +40,8 @@ namespace CodeGeneration.YamlTestsRunner
 				body += s.SurroundWithQuotes()
 					//yaml deserializer messes these up
 					.Replace("Ã¤Â¸Â­Ã¦â€“â€¡", "ä¸­æ–‡");
+				if (body.StartsWith("@\"$"))
+					return "(string)" + body.Replace("@\"$", "").Trim('"');
 				return body;
 			}
 			var ss = o as IEnumerable<string>;
@@ -54,7 +56,7 @@ namespace CodeGeneration.YamlTestsRunner
 			var si = o as IEnumerable<int>;
 			if (si != null)
 			{
-				body +=  "new string [] {\n";
+				body +=  "new int [] {\n";
 				body +=  string.Join(",\n", si.Select(str=>indendation + "\t" + si.ToString()));
 				body += "\n" + indendation + "}";
 				return body;
@@ -65,7 +67,7 @@ namespace CodeGeneration.YamlTestsRunner
 			{
 				var inner =  string.Join(",\n", os
 					.Select(oss=>indendation + "\t" + oss.SerializeToAnonymousObject(indendation, Formatting.None)));
-				if (inner.Contains('{'))
+				if (inner.StartsWith(indendation + "\tnew {"))
 					body += "new dynamic[] {\n";
 				else 
 					body += "new [] {\n";
@@ -79,6 +81,9 @@ namespace CodeGeneration.YamlTestsRunner
 
 		public static string SerializeToAnonymousObject(this object o, string indentation = "\t\t\t\t", Formatting format = Formatting.Indented)
 		{
+			if (o is string)
+				return o.ToString().SurroundWithQuotes();
+
 			var serializer = new JsonSerializer() { Formatting = format };
 			var stringWriter = new StringWriter();
 			var writer = new JsonTextWriter(stringWriter);

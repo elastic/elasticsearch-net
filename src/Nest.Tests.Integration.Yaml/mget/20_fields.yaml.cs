@@ -173,7 +173,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
 					.Add("fields", new [] {
-						"foo"
+						@"foo"
 					})
 				));
 
@@ -230,8 +230,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
 					.Add("fields", new [] {
-						"foo",
-						"_source"
+						@"foo",
+						@"_source"
 					})
 				));
 

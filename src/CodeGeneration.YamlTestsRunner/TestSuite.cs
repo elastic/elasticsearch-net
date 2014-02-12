@@ -97,17 +97,18 @@ namespace CodeGeneration.YamlTestsRunner
 		
 		private static SkipStep CreateSkipStep(Dictionary<object, object> value)
 		{
-			var kv = value.First();
 			var version = value["version"] as string;
 			var reason = value["reason"] as string;
 			return new SkipStep { Version = version, Reason = reason};
 		}
+		
 		private static MatchStep CreateMatchStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();
 			var s = kv.Value.ToStringRepresentation();
 			return new MatchStep { RawValue = s, ResponseValue = PropertyPath(kv.Key as string)};
 		}
+		
 		private static LengthStep CreateLengthStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();

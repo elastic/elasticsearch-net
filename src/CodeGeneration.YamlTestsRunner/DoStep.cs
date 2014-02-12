@@ -122,8 +122,7 @@ namespace CodeGeneration.YamlTestsRunner
 		private string GetQueryStringValue(string key)
 		{
 			var value = this.QueryString[key].ToStringRepresentation("\t\t\t\t\t");
-			if (value.StartsWith("@\"$"))
-				return "(string)" + value.Replace("@\"$", "").Trim('"');
+			
 			return value;
 		}
 

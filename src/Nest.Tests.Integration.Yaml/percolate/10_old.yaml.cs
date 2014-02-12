@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 
 				//match _response.matches: 
 				this.IsMatch(_response.matches, new [] {
-					"test_percolator"
+					@"test_percolator"
 				});
 
 			}

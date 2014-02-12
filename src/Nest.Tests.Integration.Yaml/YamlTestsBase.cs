@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework.Constraints;
 
 namespace Nest.Tests.Integration.Yaml
 {
@@ -48,26 +50,19 @@ namespace Nest.Tests.Integration.Yaml
 			var second = new Version(this.PatchVersion(versions.Last()));
 			if (this._versionNumber.CompareTo(first) <= 0
 				|| this._versionNumber.CompareTo(second) <= 0)
-				Assert.Pass("Skipping because: " + reason);
-		}
+				Assert.Pass("Skipped as test ran against "+ this._versionNumber +" : " + reason);
+		} 
 	
 		//.net Version class needs atleast 2 significant numbers
 		private string PatchVersion(string version)
 		{
-			if (version == "999")
-				return "999.0";
-			if (version == "0")
-				return "0.0";
-			return version;
+			return (version == "999" || version == "0") ? version + ".0" : version;
 		}
 
 		protected void IsTrue(object o)
 		{
 			if (o == null)
 				Assert.Fail("null is not true value");
-
-			if (o is JValue) o = ((JValue) o).Value;
-			string message = "Unknown type:" + o.GetType().FullName;
 			if (o is ConnectionStatus)
 			{
 				var c = o as ConnectionStatus;
@@ -79,6 +74,9 @@ namespace Nest.Tests.Integration.Yaml
 				o = c.Result;
 			}
 
+			o = Unbox(o);
+			string message = "Unknown type:" + o.GetType().FullName;
+			
 			//The specified key exists and has a true value (ie not 0, false, undefined, null or the empty string)
 			if (o is int)
 			{
@@ -97,14 +95,15 @@ namespace Nest.Tests.Integration.Yaml
 			}
 			else if (o is string)
 			{
-				var s = (string)o;
+				var s = (string) o;
 				if (string.IsNullOrWhiteSpace(s)) Assert.Fail("Expected string to not be null or whitespace");
 			}
-			else if (o is JObject)
+			else
 			{
-				if (!((JObject)o).HasValues) Assert.Fail("Expected object not to be empty");
+				var s = _client.Serializer.Serialize(o);
+				if (string.IsNullOrWhiteSpace(s))
+					Assert.Fail(message);
 			}
-			else Assert.Fail(message);
 
 		}
 
@@ -112,8 +111,6 @@ namespace Nest.Tests.Integration.Yaml
 		{
 			if (o == null)
 				return;
-
-			if (o is JValue) o = ((JValue) o).Value;
 			if (o is ConnectionStatus)
 			{
 				var c = o as ConnectionStatus;
@@ -123,8 +120,9 @@ namespace Nest.Tests.Integration.Yaml
 						+ c.Error.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
-				o = c.Result;
 			}
+			o = Unbox(o);
+			
 			//The specified key exists and has a true value (ie not 0, false, undefined, null or the empty string)
 			string message = "Unknown type:" + o.GetType().FullName;
 			if (o is int)
@@ -144,14 +142,19 @@ namespace Nest.Tests.Integration.Yaml
 			}
 			else if (o is JObject)
 			{
-				if (((JObject)o).HasValues) Assert.Fail("Expected object to be empty");
+				if (((JObject) o).HasValues) Assert.Fail("Expected object to be empty");
 			}
-			else Assert.Fail(message);
+			else
+			{
+				var s = _client.Serializer.Serialize(o);
+				if (string.IsNullOrWhiteSpace(s))
+					Assert.Fail(message);
+			}
 		}
 
 		protected void IsLowerThan(object o, int value)
 		{
-			if (o is JValue) o = ((JValue) o).Value;
+			o = Unbox(o);
 			if (o is int)
 			{
 				var i = (int) o;
@@ -165,9 +168,17 @@ namespace Nest.Tests.Integration.Yaml
 			else Assert.Fail("unknown type for lt: " + o.GetType().FullName);
 		}
 
-		protected void IsGreaterThan(object o, int value)
+		private static object Unbox(object o)
 		{
 			if (o is JValue) o = ((JValue) o).Value;
+			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
+			if (o is ConnectionStatus) o = ((ConnectionStatus)o).Result;
+			return o;
+		}
+
+		protected void IsGreaterThan(object o, int value)
+		{
+			o = Unbox(o);
 			if (o is int)
 			{
 				var i = (int) o;
@@ -183,19 +194,29 @@ namespace Nest.Tests.Integration.Yaml
 		
 		protected void IsLength(object o, int value)
 		{
-			
+			int l = -1;
+			if (o is JArray) l = ((JArray) o).Count;
+			if (o is string) l =  ((string) o).Length;
+			Assert.AreEqual(l, value);
 		}
 
 		protected void IsMatch(object o, object value)
 		{
-			if (o is JValue) o = ((JValue) o).Value;
+			o = Unbox(o);
+			string message = "Unknown type ismatch:" + o.GetType().FullName;
 			if (o is int)
 			{
 				var i = (int)o;
 				var v = (int)value;
 				Assert.AreEqual(v,i);
 			}
-			if (o is long)
+			else if (o is double)
+			{
+				var i = (double)o;
+				var v = Convert.ToDouble((int)value);
+				Assert.AreEqual(v,i);
+			}
+			else if (o is long)
 			{
 				var i = (long)o;
 				if (value is int)
@@ -209,6 +230,31 @@ namespace Nest.Tests.Integration.Yaml
 					Assert.AreEqual(v, i);
 				}
 			}
+			else if (o is string)
+			{
+				var s = (string)o;
+				var v = value.ToString();
+				if (s.StartsWith("{") && !(value is string))
+				{
+					var json = _client.Serializer.Serialize(value);
+					var nJson = JObject.Parse(s).ToString();
+					var nOtherJson = JObject.Parse(json).ToString();
+					Assert.AreEqual(nJson, nOtherJson);
+				}
+				else Assert.AreEqual(s, v);
+			}
+			else if (o is Dictionary<string, object>)
+			{
+				var d = value as Dictionary<string, object>;
+				var dd = o as Dictionary<string, object>;
+				if (d == null)
+					d = (from x in value.GetType().GetProperties() select x)
+						.ToDictionary(
+							x => x.Name, 
+							x => (x.GetGetMethod().Invoke(value, null) ?? ""));
+				CollectionAssert.AreEquivalent(d.ToList(), dd.ToList());
+			}
+			else Assert.Fail(message);
 		}
 	}
 

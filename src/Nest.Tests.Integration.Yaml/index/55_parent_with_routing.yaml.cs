@@ -56,8 +56,8 @@ namespace Nest.Tests.Integration.Yaml.Index
 					.Add("parent", 5)
 					.Add("routing", 4)
 					.Add("fields", new [] {
-						"_parent",
-						"_routing"
+						@"_parent",
+						@"_routing"
 					})
 				));
 

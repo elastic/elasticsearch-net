@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 			{	
 
 				//skip 0 - 999; 
-				this.Skip("0 - 999", "Update doesn&#39;t return metadata fields, waiting for #3259");
+				this.Skip("0 - 999", "Update doesn't return metadata fields, waiting for #3259");
 
 				//do indices.create 
 				_body = new {
@@ -63,10 +63,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
 					.Add("parent", 5)
 					.Add("fields", new [] {
-						"_parent",
-						"_routing",
-						"_timestamp",
-						"_ttl"
+						@"_parent",
+						@"_routing",
+						@"_timestamp",
+						@"_ttl"
 					})
 				));
 
@@ -86,10 +86,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("parent", 5)
 					.Add("fields", new [] {
-						"_parent",
-						"_routing",
-						"_timestamp",
-						"_ttl"
+						@"_parent",
+						@"_routing",
+						@"_timestamp",
+						@"_ttl"
 					})
 				));
 
