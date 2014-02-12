@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Windows.Forms.VisualStyles;
 using Nest.Resolvers;
 
 namespace Nest

@@ -1,22 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Globalization;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Markup;
 using CsQuery.ExtensionMethods.Internal;
-using FubuCore.Logging;
-using FubuCore.Reflection;
-using FubuCsProjFile.Templating.Runtime;
-using Microsoft.SqlServer.Server;
 
 namespace CodeGeneration.YamlTestsRunner
 {
