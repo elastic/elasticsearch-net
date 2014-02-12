@@ -63,6 +63,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			public void GetFieldMappingWithForFieldsTest()
 			{	
 
+				//skip 0 - 0.90.7; 
+				this.Skip("0 - 0.90.7", "The API was added in 0.90.8");
+
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("*"));
 
@@ -91,6 +94,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			public void GetFieldMappingWithTForFieldsTest()
 			{	
 
+				//skip 0 - 0.90.7; 
+				this.Skip("0 - 0.90.7", "The API was added in 0.90.8");
+
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("t*"));
 
@@ -116,6 +122,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			public void GetFieldMappingWithT1ForFieldsTest()
 			{	
 
+				//skip 0 - 0.90.7; 
+				this.Skip("0 - 0.90.7", "The API was added in 0.90.8");
+
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("*t1"));
 
@@ -140,6 +149,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			[Test]
 			public void GetFieldMappingWithWildcardedRelativeNamesTest()
 			{	
+
+				//skip 0 - 0.90.7; 
+				this.Skip("0 - 0.90.7", "The API was added in 0.90.8");
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("i_*"));

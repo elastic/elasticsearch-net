@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.Search
 				this.Do(()=> this._client.IndexPost("test_2", "test", "42", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet("System.Collections.Generic.List`1[System.Object]"));
+				this.Do(()=> this._client.IndicesRefreshGet("test_1,test_2"));
 
 				//do search 
 				_body = new {

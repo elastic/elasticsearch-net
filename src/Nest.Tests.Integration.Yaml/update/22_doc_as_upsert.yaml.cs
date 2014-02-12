@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 			public void DocAsUpsertTest()
 			{	
 
+				//skip 0-0.90.1; 
+				this.Skip("0-0.90.1", "doc_as_upsert added in 0.90.2");
+
 				//do update 
 				_body = new {
 					doc= new {

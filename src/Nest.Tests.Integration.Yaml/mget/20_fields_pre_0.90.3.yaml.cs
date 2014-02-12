@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			public void FieldsPre0903Test()
 			{	
 
+				//skip 0.90.3 - 999; 
+				this.Skip("0.90.3 - 999", "Tests pre 0.90.2 for single string fields");
+
 				//do index 
 				_body = new {
 					foo= "bar"

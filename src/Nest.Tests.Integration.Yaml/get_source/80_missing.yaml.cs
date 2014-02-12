@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 			public void MissingDocumentWithCatchTest()
 			{	
 
+				//skip 0 - 0.90.0; 
+				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
+
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "test", "1"));
 
@@ -34,6 +37,9 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 			[Test]
 			public void MissingDocumentWithIgnoreTest()
 			{	
+
+				//skip 0 - 0.90.0; 
+				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
 
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "test", "1", nv=>nv

@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Delete
 			public void ParentTest()
 			{	
 
+				//skip 0 - 0.90.2; 
+				this.Skip("0 - 0.90.2", "Delete ignores the parent param");
+
 				//do indices.create 
 				_body = new {
 					mappings= new {

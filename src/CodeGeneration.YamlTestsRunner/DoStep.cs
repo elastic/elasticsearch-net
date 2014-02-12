@@ -101,11 +101,22 @@ namespace CodeGeneration.YamlTestsRunner
 		}
 		private string GetMethodArgument(string key)
 		{
-			var value = this.QueryString[key].ToString()
-					.Replace("Ã¤Â¸Â­Ã¦â€“â€¡", "ä¸­æ–‡");
-			if (value.StartsWith("$"))
-				return "(string)" + value.Replace("$", "");
-			return "\"" + value + "\"";
+			var value = this.QueryString[key];
+			string v = string.Empty;
+			if (value is IEnumerable<object>)
+			{
+				var os = value as IEnumerable<object>;
+				v = string.Join(",", os
+					.Select(oss => oss
+						.ToString()
+					)
+					);
+			}
+			else v = value.ToString();
+			v = v.Replace("Ã¤Â¸Â­Ã¦â€“â€¡", "ä¸­æ–‡");
+			if (v.StartsWith("$"))
+				return "(string)" + v.Replace("$", "");
+			return "\"" + v + "\"";
 		}
 		
 		private string GetQueryStringValue(string key)

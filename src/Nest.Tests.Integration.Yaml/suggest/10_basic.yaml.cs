@@ -19,6 +19,9 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 			public Suggest10BasicYamlBase() : base()
 			{	
 
+				//skip 0 - 0.90.2; 
+				this.Skip("0 - 0.90.2", "Suggest is broken on 0.90.2 - see #3246");
+
 				//do index 
 				_body = new {
 					body= "Amsterdam meetup"

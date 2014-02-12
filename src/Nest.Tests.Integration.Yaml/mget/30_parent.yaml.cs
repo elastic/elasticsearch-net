@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			public void ParentTest()
 			{	
 
+				//skip 0 - 0.90.2; 
+				this.Skip("0 - 0.90.2", "Parent not supported in mget. https://github.com/elasticsearch/elasticsearch/issues/3274");
+
 				//do indices.create 
 				_body = new {
 					mappings= new {

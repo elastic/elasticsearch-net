@@ -54,6 +54,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			public void GetAllTemplatesTest()
 			{	
 
+				//skip 0 - 0.90.3; 
+				this.Skip("0 - 0.90.3", "Get all templates not available before 0.90.4");
+
 				//do indices.put_template 
 				_body = new {
 					template= "test-*",

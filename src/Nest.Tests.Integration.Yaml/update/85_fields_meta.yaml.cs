@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 			public void MetadataFieldsTest()
 			{	
 
+				//skip 0 - 999; 
+				this.Skip("0 - 999", "Update doesn&#39;t return metadata fields, waiting for #3259");
+
 				//do indices.create 
 				_body = new {
 					mappings= new {

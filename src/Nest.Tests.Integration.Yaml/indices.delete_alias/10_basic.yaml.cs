@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 			public void BasicTestForDeleteAliasTest()
 			{	
 
+				//skip 0 - 0.90.0; 
+				this.Skip("0 - 0.90.0", "Delete alias not supported before 0.90.1");
+
 				//do indices.create 
 				this.Do(()=> this._client.IndicesCreatePost("testind", null));
 

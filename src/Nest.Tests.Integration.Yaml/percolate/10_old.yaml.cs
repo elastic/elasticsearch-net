@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 			public void BasicPercolationTestsTest()
 			{	
 
+				//skip 0.90.9 - 999; 
+				this.Skip("0.90.9 - 999", "Percolator redesign");
+
 				//do indices.create 
 				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
 

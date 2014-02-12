@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			public void FieldsTest()
 			{	
 
+				//skip 0 - 0.90.2; 
+				this.Skip("0 - 0.90.2", "Single string fields not supported pre 0.90.3. See https://github.com/elasticsearch/elasticsearch/issues/3270");
+
 				//do index 
 				_body = new {
 					foo= "bar"

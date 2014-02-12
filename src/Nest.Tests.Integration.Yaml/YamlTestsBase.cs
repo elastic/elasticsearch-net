@@ -12,6 +12,8 @@ namespace Nest.Tests.Integration.Yaml
 	public class YamlTestsBase
 	{
 		protected readonly RawElasticClient _client;
+		protected readonly Version _versionNumber;
+		
 		protected object _body;
 		protected ConnectionStatus _status;
 		protected dynamic _response;
@@ -27,6 +29,9 @@ namespace Nest.Tests.Integration.Yaml
 			_client = new RawElasticClient(settings);
 
 			_client.IndicesDelete(d => d.MasterTimeout("1m").Timeout("1m"));
+			var info = _client.InfoGet().Deserialize<dynamic>();
+			string version = info.version.number;
+			this._versionNumber = new Version(version);
 		}
 
 		protected void Do(Func<ConnectionStatus> action)
@@ -36,13 +41,33 @@ namespace Nest.Tests.Integration.Yaml
 			this._responseDictionary = this._status.Deserialize<Dictionary<string, object>>();
 		}
 
+		protected void Skip(string version, string reason)
+		{
+			var versions = version.Split('-').Select(v => v.Trim(' ')).ToList();
+			var first = new Version(this.PatchVersion(versions.First()));
+			var second = new Version(this.PatchVersion(versions.Last()));
+			if (this._versionNumber.CompareTo(first) <= 0
+				|| this._versionNumber.CompareTo(second) <= 0)
+				Assert.Pass("Skipping because: " + reason);
+		}
+	
+		//.net Version class needs atleast 2 significant numbers
+		private string PatchVersion(string version)
+		{
+			if (version == "999")
+				return "999.0";
+			if (version == "0")
+				return "0.0";
+			return version;
+		}
+
 		protected void IsTrue(object o)
 		{
 			if (o == null)
 				Assert.Fail("null is not true value");
 
-			string message = "Unknown type:" + o.GetType().FullName;
 			if (o is JValue) o = ((JValue) o).Value;
+			string message = "Unknown type:" + o.GetType().FullName;
 			if (o is ConnectionStatus)
 			{
 				var c = o as ConnectionStatus;
@@ -58,7 +83,12 @@ namespace Nest.Tests.Integration.Yaml
 			if (o is int)
 			{
 				var i = (int)o;
-				if (i != 0) Assert.Fail("Expected int to be not 0");
+				if (i == 0) Assert.Fail("Expected int to be not 0");
+			}
+			else if (o is long)
+			{
+				var i = (long)o;
+				if (i == 0) Assert.Fail("Expected long to be not 0");
 			}
 			else if (o is bool)
 			{
@@ -168,8 +198,16 @@ namespace Nest.Tests.Integration.Yaml
 			if (o is long)
 			{
 				var i = (long)o;
-				var v = (int)value;
-				Assert.AreEqual(v,i);
+				if (value is int)
+				{
+					var v = (int) value;
+					Assert.AreEqual(v, i);
+				}
+				else if (value is long)
+				{
+					var v = (long) value;
+					Assert.AreEqual(v, i);
+				}
 			}
 		}
 	}

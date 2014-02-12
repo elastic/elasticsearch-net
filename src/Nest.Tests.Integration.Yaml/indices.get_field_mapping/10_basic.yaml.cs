@@ -44,6 +44,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			public void GetFieldMappingWithNoIndexAndTypeTest()
 			{	
 
+				//skip 0 - 0.90.5; 
+				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
+
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("text"));
 
@@ -59,6 +62,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			[Test]
 			public void GetFieldMappingByIndexOnlyTest()
 			{	
+
+				//skip 0 - 0.90.5; 
+				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "text"));
@@ -76,6 +82,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			public void GetFieldMappingByTypeFieldTest()
 			{	
 
+				//skip 0 - 0.90.5; 
+				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
+
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text"));
 
@@ -92,8 +101,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			public void GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExistTest()
 			{	
 
+				//skip 0 - 0.90.5; 
+				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
+
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "System.Collections.Generic.List`1[System.Object]"));
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text,text1"));
 
 				//match _response.test_index.test_type.text.mapping.text.type: 
 				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
@@ -110,6 +122,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			[Test]
 			public void GetFieldMappingWithIncludeDefaultsTest()
 			{	
+
+				//skip 0 - 0.90.5; 
+				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv

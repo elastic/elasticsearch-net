@@ -35,6 +35,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			public void GetMissingTemplatePost0903Test()
 			{	
 
+				//skip 0 - 0.90.2; 
+				this.Skip("0 - 0.90.2", "Missing templates throw 404 from 0.90.3");
+
 				//do indices.get_template 
 				this.Do(()=> this._client.IndicesGetTemplate("test"));
 
@@ -47,6 +50,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 			[Test]
 			public void GetMissingTemplatePre0903Test()
 			{	
+
+				//skip 0.90.3 - 999; 
+				this.Skip("0.90.3 - 999", "Missing templates didn&#39;t throw 404 before 0.90.3");
 
 				//do indices.delete_template 
 				this.Do(()=> this._client.IndicesDeleteTemplate("test", nv=>nv

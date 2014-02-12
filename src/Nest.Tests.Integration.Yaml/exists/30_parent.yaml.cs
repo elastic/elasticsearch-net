@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Exists
 			public void ParentTest()
 			{	
 
+				//skip 0 - 0.90.2; 
+				this.Skip("0 - 0.90.2", "Parent not supported in exists https://github.com/elasticsearch/elasticsearch/issues/3276");
+
 				//do indices.create 
 				_body = new {
 					mappings= new {

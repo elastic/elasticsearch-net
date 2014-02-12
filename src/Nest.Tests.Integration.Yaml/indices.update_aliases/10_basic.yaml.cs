@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 			public void BasicTestForAliasesTest()
 			{	
 
+				//skip 0 - 0.90.0; 
+				this.Skip("0 - 0.90.0", "Exists alias not supported before 0.90.1");
+
 				//do indices.create 
 				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
 

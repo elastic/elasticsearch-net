@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 			public void ParentWithRoutingTest()
 			{	
 
+				//skip 0 - 0.90.0; 
+				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
+
 				//do indices.create 
 				_body = new {
 					mappings= new {

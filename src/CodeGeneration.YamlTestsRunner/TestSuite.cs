@@ -87,11 +87,21 @@ namespace CodeGeneration.YamlTestsRunner
 					case "match":
 						yield return CreateMatchStep(kv.Value as Dictionary<object, object>);
 						break;
+					case "skip":
+						yield return CreateSkipStep(kv.Value as Dictionary<object, object>);
+						break;
 				}
 
 			}
 		}
 		
+		private static SkipStep CreateSkipStep(Dictionary<object, object> value)
+		{
+			var kv = value.First();
+			var version = value["version"] as string;
+			var reason = value["reason"] as string;
+			return new SkipStep { Version = version, Reason = reason};
+		}
 		private static MatchStep CreateMatchStep(Dictionary<object, object> value)
 		{
 			var kv = value.First();

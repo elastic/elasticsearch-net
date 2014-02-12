@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 			public void Raise404WhenFieldDoesntExistTest()
 			{	
 
+				//skip 0 - 0.90.5; 
+				this.Skip("0 - 0.90.5", "get field mapping was added in 0.90.6");
+
 				//do indices.create 
 				_body = new {
 					mappings= new {

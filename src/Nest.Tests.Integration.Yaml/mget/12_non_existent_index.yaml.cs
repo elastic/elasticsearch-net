@@ -22,6 +22,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			public void NonExistentIndexTest()
 			{	
 
+				//skip 0 - 0.90.2; 
+				this.Skip("0 - 0.90.2", "See https://github.com/elasticsearch/elasticsearch/issues/3267");
+
 				//do index 
 				_body = new {
 					foo= "bar"
