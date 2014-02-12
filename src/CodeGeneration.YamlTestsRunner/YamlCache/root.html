@@ -1,0 +1,2464 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>elasticsearch/rest-api-spec/test at 0.90 Â· elasticsearch/elasticsearch Â· GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub" />
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png" />
+    <meta property="fb:app_id" content="1401488693436528"/>
+
+      <meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="elasticsearch/elasticsearch" name="twitter:title" /><meta content="elasticsearch - Open Source, Distributed, RESTful Search Engine" name="twitter:description" /><meta content="https://2.gravatar.com/avatar/1aecf795625bbc7251068cfbc39800ab?d=https%3A%2F%2Fidenticons.github.com%2F61ac5f52105a6cfd090389f295c1a7f9.png&amp;r=x&amp;s=400" name="twitter:image:src" />
+<meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="https://2.gravatar.com/avatar/1aecf795625bbc7251068cfbc39800ab?d=https%3A%2F%2Fidenticons.github.com%2F61ac5f52105a6cfd090389f295c1a7f9.png&amp;r=x&amp;s=400" property="og:image" /><meta content="elasticsearch/elasticsearch" property="og:title" /><meta content="https://github.com/elasticsearch/elasticsearch" property="og:url" /><meta content="elasticsearch - Open Source, Distributed, RESTful Search Engine" property="og:description" />
+
+    <meta name="hostname" content="github-fe129-cp1-prd.iad.github.net">
+    <meta name="ruby" content="ruby 2.1.0p0-github-tcmalloc (87d8860372) [x86_64-linux]">
+    <link rel="assets" href="https://github.global.ssl.fastly.net/">
+    <link rel="conduit-xhr" href="https://ghconduit.com:25035/">
+    <link rel="xhr-socket" href="/_sockets" />
+
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="selected-link" value="repo_source" data-pjax-transient />
+    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="D47BE622:27F9:D33FF9:52F9EE38" name="octolytics-dimension-request_id" />
+    
+
+    
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="8VLkS6JCZ9DfdG5+1+0HFuYJERcrWfhFK/ffLqc7dbo=" name="csrf-token" />
+
+    <link href="https://github.global.ssl.fastly.net/assets/github-3edaf451c5611e17e1cd26dd9e684f8c2ff7cdab.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://github.global.ssl.fastly.net/assets/github2-456a392493f696a3779ecd85c4913acdef7d9507.css" media="all" rel="stylesheet" type="text/css" />
+    
+
+
+      <script src="https://github.global.ssl.fastly.net/assets/frameworks-141ccdd45eb970761fa7cacc2cb60ed9726dd738.js" type="text/javascript"></script>
+      <script async="async" defer="defer" src="https://github.global.ssl.fastly.net/assets/github-b68d1e19c0b2aef3b0d249778034d8849a904f0e.js" type="text/javascript"></script>
+      
+      <meta http-equiv="x-pjax-version" content="b69b4a881f4921f927c68c221c42c1ee">
+
+      
+  <meta name="description" content="elasticsearch - Open Source, Distributed, RESTful Search Engine" />
+
+  <meta content="141304" name="octolytics-dimension-user_id" /><meta content="elasticsearch" name="octolytics-dimension-user_login" /><meta content="507775" name="octolytics-dimension-repository_id" /><meta content="elasticsearch/elasticsearch" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="507775" name="octolytics-dimension-repository_network_root_id" /><meta content="elasticsearch/elasticsearch" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/elasticsearch/elasticsearch/commits/0.90.atom" rel="alternate" title="Recent Commits to elasticsearch:0.90" type="application/atom+xml" />
+
+  </head>
+
+
+  <body class="logged_out  env-production  vis-public">
+    <div class="wrapper">
+      
+      
+      
+      
+
+
+      
+      <div class="header header-logged-out">
+  <div class="container clearfix">
+
+    <a class="header-logo-wordmark" href="https://github.com/">
+      <span class="mega-octicon octicon-logo-github"></span>
+    </a>
+
+    <div class="header-actions">
+        <a class="button primary" href="/join">Sign up</a>
+      <a class="button signin" href="/login?return_to=%2Felasticsearch%2Felasticsearch%2Ftree%2F0.90%2Frest-api-spec%2Ftest">Sign in</a>
+    </div>
+
+    <div class="command-bar js-command-bar  in-repository">
+
+      <ul class="top-nav">
+          <li class="explore"><a href="/explore">Explore</a></li>
+        <li class="features"><a href="/features">Features</a></li>
+          <li class="enterprise"><a href="https://enterprise.github.com/">Enterprise</a></li>
+          <li class="blog"><a href="/blog">Blog</a></li>
+      </ul>
+        <form accept-charset="UTF-8" action="/search" class="command-bar-form" id="top_search_form" method="get">
+
+<input type="text" data-hotkey="/ s" name="q" id="js-command-bar-field" placeholder="Search or type a command" tabindex="1" autocapitalize="off"
+    
+    
+      data-repo="elasticsearch/elasticsearch"
+      data-branch="0.90"
+      data-sha="fcb96bb3c1a408ffdea3ae24bca0995ba7c4b5ed"
+  >
+
+    <input type="hidden" name="nwo" value="elasticsearch/elasticsearch" />
+
+    <div class="select-menu js-menu-container js-select-menu search-context-select-menu">
+      <span class="minibutton select-menu-button js-menu-target">
+        <span class="js-select-button">This repository</span>
+      </span>
+
+      <div class="select-menu-modal-holder js-menu-content js-navigation-container">
+        <div class="select-menu-modal">
+
+          <div class="select-menu-item js-navigation-item js-this-repository-navigation-item selected">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input type="radio" class="js-search-this-repository" name="search_target" value="repository" checked="checked" />
+            <div class="select-menu-item-text js-select-button-text">This repository</div>
+          </div> <!-- /.select-menu-item -->
+
+          <div class="select-menu-item js-navigation-item js-all-repositories-navigation-item">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input type="radio" name="search_target" value="global" />
+            <div class="select-menu-item-text js-select-button-text">All repositories</div>
+          </div> <!-- /.select-menu-item -->
+
+        </div>
+      </div>
+    </div>
+
+  <span class="octicon help tooltipped downwards" title="Show command bar help">
+    <span class="octicon octicon-question"></span>
+  </span>
+
+
+  <input type="hidden" name="ref" value="cmdform">
+
+</form>
+    </div>
+
+  </div>
+</div>
+
+
+      
+
+
+          <div class="site" itemscope itemtype="http://schema.org/WebPage">
+    
+    <div class="pagehead repohead instapaper_ignore readability-menu">
+      <div class="container">
+        
+
+<ul class="pagehead-actions">
+
+
+  <li>
+    <a href="/login?return_to=%2Felasticsearch%2Felasticsearch"
+    class="minibutton with-count js-toggler-target star-button tooltipped upwards"
+    title="You must be signed in to use this feature" rel="nofollow">
+    <span class="octicon octicon-star"></span>Star
+  </a>
+
+    <a class="social-count js-social-count" href="/elasticsearch/elasticsearch/stargazers">
+      5,798
+    </a>
+
+  </li>
+
+    <li>
+      <a href="/login?return_to=%2Felasticsearch%2Felasticsearch"
+        class="minibutton with-count js-toggler-target fork-button tooltipped upwards"
+        title="You must be signed in to fork a repository" rel="nofollow">
+        <span class="octicon octicon-git-branch"></span>Fork
+      </a>
+      <a href="/elasticsearch/elasticsearch/network" class="social-count">
+        1,470
+      </a>
+    </li>
+</ul>
+
+        <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public">
+          <span class="repo-label"><span>public</span></span>
+          <span class="mega-octicon octicon-repo"></span>
+          <span class="author">
+            <a href="/elasticsearch" class="url fn" itemprop="url" rel="author"><span itemprop="title">elasticsearch</span></a>
+          </span>
+          <span class="repohead-name-divider">/</span>
+          <strong><a href="/elasticsearch/elasticsearch" class="js-current-repository js-repo-home-link">elasticsearch</a></strong>
+
+          <span class="page-context-loader">
+            <img alt="Octocat-spinner-32" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+          </span>
+
+        </h1>
+      </div><!-- /.container -->
+    </div><!-- /.repohead -->
+
+    <div class="container">
+      
+
+      <div class="repository-with-sidebar repo-container new-discussion-timeline js-new-discussion-timeline  ">
+        <div class="repository-sidebar">
+            
+
+<div class="sunken-menu vertical-right repo-nav js-repo-nav js-repository-container-pjax js-octicon-loaders">
+  <div class="sunken-menu-contents">
+    <ul class="sunken-menu-group">
+      <li class="tooltipped leftwards" title="Code">
+        <a href="/elasticsearch/elasticsearch/tree/0.90" aria-label="Code" class="selected js-selected-navigation-item sunken-menu-item" data-gotokey="c" data-pjax="true" data-selected-links="repo_source repo_downloads repo_commits repo_tags repo_branches /elasticsearch/elasticsearch/tree/0.90">
+          <span class="octicon octicon-code"></span> <span class="full-word">Code</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+        <li class="tooltipped leftwards" title="Issues">
+          <a href="/elasticsearch/elasticsearch/issues" aria-label="Issues" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-gotokey="i" data-selected-links="repo_issues /elasticsearch/elasticsearch/issues">
+            <span class="octicon octicon-issue-opened"></span> <span class="full-word">Issues</span>
+            <span class='counter'>795</span>
+            <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>        </li>
+
+      <li class="tooltipped leftwards" title="Pull Requests">
+        <a href="/elasticsearch/elasticsearch/pulls" aria-label="Pull Requests" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-gotokey="p" data-selected-links="repo_pulls /elasticsearch/elasticsearch/pulls">
+            <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull Requests</span>
+            <span class='counter'>130</span>
+            <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+
+    </ul>
+    <div class="sunken-menu-separator"></div>
+    <ul class="sunken-menu-group">
+
+      <li class="tooltipped leftwards" title="Pulse">
+        <a href="/elasticsearch/elasticsearch/pulse" aria-label="Pulse" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="pulse /elasticsearch/elasticsearch/pulse">
+          <span class="octicon octicon-pulse"></span> <span class="full-word">Pulse</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+      <li class="tooltipped leftwards" title="Graphs">
+        <a href="/elasticsearch/elasticsearch/graphs" aria-label="Graphs" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="repo_graphs repo_contributors /elasticsearch/elasticsearch/graphs">
+          <span class="octicon octicon-graph"></span> <span class="full-word">Graphs</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+      <li class="tooltipped leftwards" title="Network">
+        <a href="/elasticsearch/elasticsearch/network" aria-label="Network" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-selected-links="repo_network /elasticsearch/elasticsearch/network">
+          <span class="octicon octicon-git-branch"></span> <span class="full-word">Network</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+    </ul>
+
+
+  </div>
+</div>
+
+              <div class="only-with-full-nav">
+                
+
+  
+
+<div class="clone-url open"
+  data-protocol-type="http"
+  data-url="/users/set_protocol?protocol_selector=http&amp;protocol_type=clone">
+  <h3><strong>HTTPS</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone js-url-field"
+           value="https://github.com/elasticsearch/elasticsearch.git" readonly="readonly">
+
+    <span class="js-zeroclipboard url-box-clippy minibutton zeroclipboard-button" data-clipboard-text="https://github.com/elasticsearch/elasticsearch.git" data-copied-hint="copied!" title="copy to clipboard"><span class="octicon octicon-clippy"></span></span>
+  </div>
+</div>
+
+  
+
+<div class="clone-url "
+  data-protocol-type="subversion"
+  data-url="/users/set_protocol?protocol_selector=subversion&amp;protocol_type=clone">
+  <h3><strong>Subversion</strong> checkout URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone js-url-field"
+           value="https://github.com/elasticsearch/elasticsearch" readonly="readonly">
+
+    <span class="js-zeroclipboard url-box-clippy minibutton zeroclipboard-button" data-clipboard-text="https://github.com/elasticsearch/elasticsearch" data-copied-hint="copied!" title="copy to clipboard"><span class="octicon octicon-clippy"></span></span>
+  </div>
+</div>
+
+
+<p class="clone-options">You can clone with
+      <a href="#" class="js-clone-selector" data-protocol="http">HTTPS</a>,
+      or <a href="#" class="js-clone-selector" data-protocol="subversion">Subversion</a>.
+  <span class="octicon help tooltipped upwards" title="Get help on which URL is right for you.">
+    <a href="https://help.github.com/articles/which-remote-url-should-i-use">
+    <span class="octicon octicon-question"></span>
+    </a>
+  </span>
+</p>
+
+
+
+                <a href="/elasticsearch/elasticsearch/archive/0.90.zip"
+                   class="minibutton sidebar-button"
+                   title="Download this repository as a zip file"
+                   rel="nofollow">
+                  <span class="octicon octicon-cloud-download"></span>
+                  Download ZIP
+                </a>
+              </div>
+        </div><!-- /.repository-sidebar -->
+
+        <div id="js-repo-pjax-container" class="repository-content context-loader-container" data-pjax-container>
+          
+
+<div class="file-navigation">
+  
+
+<div class="select-menu js-menu-container js-select-menu" >
+  <span class="minibutton select-menu-button js-menu-target" data-hotkey="w"
+    data-master-branch="master"
+    data-ref="0.90"
+    role="button" aria-label="Switch branches or tags" tabindex="0">
+    <span class="octicon octicon-git-branch"></span>
+    <i>branch:</i>
+    <span class="js-select-button">0.90</span>
+  </span>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax>
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <span class="select-menu-title">Switch branches/tags</span>
+        <span class="octicon octicon-remove-close js-menu-close"></span>
+      </div> <!-- /.select-menu-header -->
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" class="js-select-menu-tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" class="js-select-menu-tab">Tags</a>
+            </li>
+          </ul>
+        </div><!-- /.select-menu-tabs -->
+      </div><!-- /.select-menu-filters -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.12/rest-api-spec/test"
+                 data-name="0.12"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.12">0.12</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.13/rest-api-spec/test"
+                 data-name="0.13"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.13">0.13</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.14/rest-api-spec/test"
+                 data-name="0.14"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.14">0.14</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.15/rest-api-spec/test"
+                 data-name="0.15"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.15">0.15</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.16/rest-api-spec/test"
+                 data-name="0.16"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.16">0.16</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.17/rest-api-spec/test"
+                 data-name="0.17"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.17">0.17</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.18/rest-api-spec/test"
+                 data-name="0.18"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.18">0.18</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.19/rest-api-spec/test"
+                 data-name="0.19"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.19">0.19</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.20/rest-api-spec/test"
+                 data-name="0.20"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.20">0.20</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item selected">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test"
+                 data-name="0.90"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="0.90">0.90</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/1.0/rest-api-spec/test"
+                 data-name="1.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="1.0">1.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/1.x/rest-api-spec/test"
+                 data-name="1.x"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="1.x">1.x</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/features/quantile_aggregations/rest-api-spec/test"
+                 data-name="features/quantile_aggregations"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="features/quantile_aggregations">features/quantile_aggregations</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/master/rest-api-spec/test"
+                 data-name="master"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="master">master</a>
+            </div> <!-- /.select-menu-item -->
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v1.0.0.RC2/rest-api-spec/test"
+                 data-name="v1.0.0.RC2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v1.0.0.RC2">v1.0.0.RC2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v1.0.0.RC1/rest-api-spec/test"
+                 data-name="v1.0.0.RC1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v1.0.0.RC1">v1.0.0.RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v1.0.0.Beta2/rest-api-spec/test"
+                 data-name="v1.0.0.Beta2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v1.0.0.Beta2">v1.0.0.Beta2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v1.0.0.Beta1/rest-api-spec/test"
+                 data-name="v1.0.0.Beta1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v1.0.0.Beta1">v1.0.0.Beta1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.11/rest-api-spec/test"
+                 data-name="v0.90.11"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.11">v0.90.11</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.10/rest-api-spec/test"
+                 data-name="v0.90.10"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.10">v0.90.10</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.9/rest-api-spec/test"
+                 data-name="v0.90.9"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.9">v0.90.9</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.8/rest-api-spec/test"
+                 data-name="v0.90.8"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.8">v0.90.8</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.7/rest-api-spec/test"
+                 data-name="v0.90.7"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.7">v0.90.7</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.6/rest-api-spec/test"
+                 data-name="v0.90.6"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.6">v0.90.6</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.5/rest-api-spec/test"
+                 data-name="v0.90.5"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.5">v0.90.5</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.4/rest-api-spec/test"
+                 data-name="v0.90.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.4">v0.90.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.3/rest-api-spec/test"
+                 data-name="v0.90.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.3">v0.90.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.2/rest-api-spec/test"
+                 data-name="v0.90.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.2">v0.90.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.1/rest-api-spec/test"
+                 data-name="v0.90.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.1">v0.90.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.0.RC2/rest-api-spec/test"
+                 data-name="v0.90.0.RC2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.0.RC2">v0.90.0.RC2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.0.RC1/rest-api-spec/test"
+                 data-name="v0.90.0.RC1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.0.RC1">v0.90.0.RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.0.Beta1/rest-api-spec/test"
+                 data-name="v0.90.0.Beta1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.0.Beta1">v0.90.0.Beta1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.90.0/rest-api-spec/test"
+                 data-name="v0.90.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.90.0">v0.90.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.6/rest-api-spec/test"
+                 data-name="v0.20.6"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.6">v0.20.6</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.5/rest-api-spec/test"
+                 data-name="v0.20.5"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.5">v0.20.5</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.4/rest-api-spec/test"
+                 data-name="v0.20.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.4">v0.20.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.3/rest-api-spec/test"
+                 data-name="v0.20.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.3">v0.20.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.2/rest-api-spec/test"
+                 data-name="v0.20.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.2">v0.20.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.1/rest-api-spec/test"
+                 data-name="v0.20.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.1">v0.20.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.0.RC1/rest-api-spec/test"
+                 data-name="v0.20.0.RC1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.0.RC1">v0.20.0.RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.20.0/rest-api-spec/test"
+                 data-name="v0.20.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.20.0">v0.20.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.12/rest-api-spec/test"
+                 data-name="v0.19.12"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.12">v0.19.12</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.11/rest-api-spec/test"
+                 data-name="v0.19.11"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.11">v0.19.11</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.10/rest-api-spec/test"
+                 data-name="v0.19.10"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.10">v0.19.10</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.9/rest-api-spec/test"
+                 data-name="v0.19.9"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.9">v0.19.9</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.8/rest-api-spec/test"
+                 data-name="v0.19.8"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.8">v0.19.8</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.7/rest-api-spec/test"
+                 data-name="v0.19.7"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.7">v0.19.7</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.6/rest-api-spec/test"
+                 data-name="v0.19.6"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.6">v0.19.6</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.5/rest-api-spec/test"
+                 data-name="v0.19.5"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.5">v0.19.5</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.4/rest-api-spec/test"
+                 data-name="v0.19.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.4">v0.19.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.3/rest-api-spec/test"
+                 data-name="v0.19.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.3">v0.19.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.2/rest-api-spec/test"
+                 data-name="v0.19.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.2">v0.19.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.1/rest-api-spec/test"
+                 data-name="v0.19.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.1">v0.19.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.0.RC3/rest-api-spec/test"
+                 data-name="v0.19.0.RC3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.0.RC3">v0.19.0.RC3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.0.RC2/rest-api-spec/test"
+                 data-name="v0.19.0.RC2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.0.RC2">v0.19.0.RC2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.0.RC1/rest-api-spec/test"
+                 data-name="v0.19.0.RC1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.0.RC1">v0.19.0.RC1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.19.0/rest-api-spec/test"
+                 data-name="v0.19.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.19.0">v0.19.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.7/rest-api-spec/test"
+                 data-name="v0.18.7"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.7">v0.18.7</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.6/rest-api-spec/test"
+                 data-name="v0.18.6"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.6">v0.18.6</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.5/rest-api-spec/test"
+                 data-name="v0.18.5"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.5">v0.18.5</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.4/rest-api-spec/test"
+                 data-name="v0.18.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.4">v0.18.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.3/rest-api-spec/test"
+                 data-name="v0.18.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.3">v0.18.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.2/rest-api-spec/test"
+                 data-name="v0.18.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.2">v0.18.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.1/rest-api-spec/test"
+                 data-name="v0.18.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.1">v0.18.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.18.0/rest-api-spec/test"
+                 data-name="v0.18.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.18.0">v0.18.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.10/rest-api-spec/test"
+                 data-name="v0.17.10"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.10">v0.17.10</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.9/rest-api-spec/test"
+                 data-name="v0.17.9"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.9">v0.17.9</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.8/rest-api-spec/test"
+                 data-name="v0.17.8"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.8">v0.17.8</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.7/rest-api-spec/test"
+                 data-name="v0.17.7"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.7">v0.17.7</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.6/rest-api-spec/test"
+                 data-name="v0.17.6"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.6">v0.17.6</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.5/rest-api-spec/test"
+                 data-name="v0.17.5"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.5">v0.17.5</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.4/rest-api-spec/test"
+                 data-name="v0.17.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.4">v0.17.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.3/rest-api-spec/test"
+                 data-name="v0.17.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.3">v0.17.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.2/rest-api-spec/test"
+                 data-name="v0.17.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.2">v0.17.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.1/rest-api-spec/test"
+                 data-name="v0.17.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.1">v0.17.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.17.0/rest-api-spec/test"
+                 data-name="v0.17.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.17.0">v0.17.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.16.5/rest-api-spec/test"
+                 data-name="v0.16.5"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.16.5">v0.16.5</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.16.4/rest-api-spec/test"
+                 data-name="v0.16.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.16.4">v0.16.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.16.3/rest-api-spec/test"
+                 data-name="v0.16.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.16.3">v0.16.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.16.2/rest-api-spec/test"
+                 data-name="v0.16.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.16.2">v0.16.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.16.1/rest-api-spec/test"
+                 data-name="v0.16.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.16.1">v0.16.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.16.0/rest-api-spec/test"
+                 data-name="v0.16.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.16.0">v0.16.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.15.2/rest-api-spec/test"
+                 data-name="v0.15.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.15.2">v0.15.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.15.1/rest-api-spec/test"
+                 data-name="v0.15.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.15.1">v0.15.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.15.0/rest-api-spec/test"
+                 data-name="v0.15.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.15.0">v0.15.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.14.4/rest-api-spec/test"
+                 data-name="v0.14.4"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.14.4">v0.14.4</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.14.3/rest-api-spec/test"
+                 data-name="v0.14.3"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.14.3">v0.14.3</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.14.2/rest-api-spec/test"
+                 data-name="v0.14.2"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.14.2">v0.14.2</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.14.1/rest-api-spec/test"
+                 data-name="v0.14.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.14.1">v0.14.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.14.0/rest-api-spec/test"
+                 data-name="v0.14.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.14.0">v0.14.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.13.1/rest-api-spec/test"
+                 data-name="v0.13.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.13.1">v0.13.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.13.0/rest-api-spec/test"
+                 data-name="v0.13.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.13.0">v0.13.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.12.1/rest-api-spec/test"
+                 data-name="v0.12.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.12.1">v0.12.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.12.0/rest-api-spec/test"
+                 data-name="v0.12.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.12.0">v0.12.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.11.0/rest-api-spec/test"
+                 data-name="v0.11.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.11.0">v0.11.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.10.0/rest-api-spec/test"
+                 data-name="v0.10.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.10.0">v0.10.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.9.0/rest-api-spec/test"
+                 data-name="v0.9.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.9.0">v0.9.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.8.0/rest-api-spec/test"
+                 data-name="v0.8.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.8.0">v0.8.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.7.1/rest-api-spec/test"
+                 data-name="v0.7.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.7.1">v0.7.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.7.0/rest-api-spec/test"
+                 data-name="v0.7.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.7.0">v0.7.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.6.0/rest-api-spec/test"
+                 data-name="v0.6.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.6.0">v0.6.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.5.1/rest-api-spec/test"
+                 data-name="v0.5.1"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.5.1">v0.5.1</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.5.0/rest-api-spec/test"
+                 data-name="v0.5.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.5.0">v0.5.0</a>
+            </div> <!-- /.select-menu-item -->
+            <div class="select-menu-item js-navigation-item ">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/elasticsearch/elasticsearch/tree/v0.4.0/rest-api-spec/test"
+                 data-name="v0.4.0"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="v0.4.0">v0.4.0</a>
+            </div> <!-- /.select-menu-item -->
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+    </div> <!-- /.select-menu-modal -->
+  </div> <!-- /.select-menu-modal-holder -->
+</div> <!-- /.select-menu -->
+
+
+  <div class="breadcrumb"><span class='repo-root js-repo-root'><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/elasticsearch/elasticsearch/tree/0.90" data-branch="0.90" data-direction="back" data-pjax="true" itemscope="url"><span itemprop="title">elasticsearch</span></a></span></span><span class="separator"> / </span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec" data-branch="0.90" data-direction="back" data-pjax="true" itemscope="url"><span itemprop="title">rest-api-spec</span></a></span><span class="separator"> / </span><strong class="final-path">test</strong><span class="separator"> / </span><form action="/login?return_to=%2Felasticsearch%2Felasticsearch%2Ftree%2F0.90%2Frest-api-spec%2Ftest" class="js-new-blob-form tooltipped rightwards new-file-link" method="post" title="Sign in to make or propose changes"><span aria-label="Sign in to make or propose changes" class="js-new-blob-submit octicon octicon-file-add" data-test-id="create-new-git-file" role="button"></span></form></div>
+
+  <p class="history-link">
+<a href="/elasticsearch/elasticsearch/commits/0.90/rest-api-spec/test">      <span class="octicon octicon-history tooltipped" title="Browse commits for this branch"></span>
+      History
+</a>  </p>
+</div>
+
+
+
+<a href="/elasticsearch/elasticsearch/find/0.90"
+  data-hotkey="t" class="js-show-file-finder" style="display:none" data-pjax>Show File Finder</a>
+<div class="bubble files-bubble">
+    <div class="branch-infobar clearfix">
+      <p>
+          This branch is
+          1636 commits ahead and
+          2249 commits behind master
+      </p>
+
+      <ul class="lightweight-actions">
+        <li>
+            <a href="/elasticsearch/elasticsearch/pull/new/0.90">
+              <span class="octicon octicon-git-pull-request"></span>
+              Pull Request
+            </a>
+        </li>
+        <!--
+        <li>
+          <a href="#">
+            <span class="octicon octicon-comment-discussion"></span>
+            Branch discussion
+          </a>
+        </li>
+        -->
+        <li>
+          <a href="/elasticsearch/elasticsearch/compare/0.90">
+            <span class="octicon octicon-diff"></span>
+            Compare
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  
+    <div class="commit commit-loader commit-tease js-details-container js-deferred-content" data-url="/elasticsearch/elasticsearch/tree-commit/0.90/rest-api-spec/test">
+      <p class="commit-title blank">
+        Fetching latest commitâ€¦
+      </p>
+      <div class="commit-meta">
+        <p class="loader-loading"><img alt="Octocat-spinner-32-eaf2f5" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32-EAF2F5.gif" width="16" /></p>
+        <p class="loader-error">Cannot retrieve the latest commit at this time</p>
+      </div>
+    </div>
+
+  <table class="files" data-pjax>
+      <tr class="up-tree">
+        <td></td>
+        <td><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec" rel="nofollow" title="Go to parent directory">..</a></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+    
+<tbody class="js-deferred-content"
+  data-url="/elasticsearch/elasticsearch/file-list/0.90/rest-api-spec/test">
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/bulk" class="js-directory-link" id="14f098921bc8c68a8dc0c5529b7013b4-5da74b41022877477973ef8cd0920eb56ca98fe0" title="bulk">bulk</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/7933dbe205740b5643f76cc3b5aeb5e166d947e9" class="message" data-pjax="true" title="Corrected test names for &quot;Bulk&quot; test suite">Corrected test names for "Bulk" test suite</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-09-09T14:36:43-07:00" title="2013-09-09 14:36:43">September 09, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/cluster.node_info" class="js-directory-link" id="39c655c530644c1b769bea61ef55e496-a995d5dbc9910a9a5387653a9d2a8312b80713e7" title="cluster.node_info">cluster.node_info</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/f4cce2c634b855f6d8d7ccbaa5ed9bcdc67853cf" class="message" data-pjax="true" title="cluster.node_info">cluster.node_info</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-24T08:13:03-07:00" title="2013-07-24 08:13:03">July 24, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/cluster.node_stats" class="js-directory-link" id="3a7f3e7eb444fbabb86090d2778bcef6-00c0b035a23d12b8cdbb3da603843c755456f7d8" title="cluster.node_stats">cluster.node_stats</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/1d1dc72e2335f7002ce675598a7fafa5ef2d9b07" class="message" data-pjax="true" title="cluster.node_stats">cluster.node_stats</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-24T07:51:38-07:00" title="2013-07-24 07:51:38">July 24, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/cluster.put_settings" class="js-directory-link" id="3fa870f5f3d02919f49a2e8f89ff43b2-362bd449189e49ef76bc0138cd0250fe4ef2b219" title="cluster.put_settings">cluster.put_settings</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/ac40b3a996c926540f931d740ef03232aa90c4e8" class="message" data-pjax="true" title="Basic tests for get/set cluster settings">Basic tests for get/set cluster settings</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-18T07:46:41-07:00" title="2013-07-18 07:46:41">July 18, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/cluster.reroute" class="js-directory-link" id="e7df0998742923aee47cf8b2e12d52f3-587acfa01c3d53456e7d40ac4e1f8a2c5a9c8c49" title="cluster.reroute">cluster.reroute</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/cluster.state" class="js-directory-link" id="8e8244c1d3de77c8ea7d3b89d4b25f57-1dcb0f3dd7a79026c2bf4bfee8bc860fd3a9e924" title="cluster.state">cluster.state</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/create" class="js-directory-link" id="76ea0bebb3c22822b4f0dd9c9fd021c5-2d55da4a505b9a2799b35befe888d29086ee1850" title="create">create</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/delete" class="js-directory-link" id="099af53f601532dbd31e0ea99ffdeb64-e128b1d098dd74665dd83385602d73bae89c681c" title="delete">delete</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/delete_by_query" class="js-directory-link" id="212339e0a618269f39ef9b157fd1eaa1-a52ce754963a1735268c4dff3838f453d0da4082" title="delete_by_query">delete_by_query</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/exists" class="js-directory-link" id="e087923eb5dd1310f5f25ddd5ae5b580-e314e31e1b276047840c5995291015a9cf75184a" title="exists">exists</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/explain" class="js-directory-link" id="979283b6c70653c5fdb14b7c1e77a50b-b5ea6c4955d5153a709560e222c072994030637e" title="explain">explain</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/4050aae925c19500dd442b59f1bca86333571c52" class="message" data-pjax="true" title="[TEST] remove yaml tests for 1.0 from 0.90 branch">[TEST] remove yaml tests for 1.0 from 0.90 branch</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-01-07T07:37:39-08:00" title="2014-01-07 07:37:39">January 07, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/get" class="js-directory-link" id="b5eda0a74558a342cf659187f06f746f-1f96b178056ada52671b38b52f820cdb66a312be" title="get">get</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/get_source" class="js-directory-link" id="fd01c1e910d144a86c99e1d17a77c180-a4de2ee70afda7351853633193358e879eee54d5" title="get_source">get_source</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/index" class="js-directory-link" id="6a992d5529f459a44fee58c733255e86-8ad220579761b229ea7ef3d90aaf3b2de93b1485" title="index">index</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.analyze" class="js-directory-link" id="9c0628e70ff02ee5e80d7b415d1d3c47-d45ce79ecad4ef15bb71698534d0fa1ffe46ed5f" title="indices.analyze">indices.analyze</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/4050aae925c19500dd442b59f1bca86333571c52" class="message" data-pjax="true" title="[TEST] remove yaml tests for 1.0 from 0.90 branch">[TEST] remove yaml tests for 1.0 from 0.90 branch</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-01-07T07:37:39-08:00" title="2014-01-07 07:37:39">January 07, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.clear_cache" class="js-directory-link" id="94dff8c66edd5592e3ebbba6b9b2e225-4e98ad540e36f729f01b02c3f40fecfbb0ab05d9" title="indices.clear_cache">indices.clear_cache</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/35deed9bc33638060c971a052400d0246a9cfee6" class="message" data-pjax="true" title="indices.clear_cache">indices.clear_cache</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-24T07:51:55-07:00" title="2013-07-24 07:51:55">July 24, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.create" class="js-directory-link" id="e56a9c99ad1a22e180294a06d7268425-60dec409c576ab4f5c28a34eac7eb8483baf500e" title="indices.create">indices.create</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/886cd9e74991ac41d8e6b108107e244199d9fb1c" class="message" data-pjax="true" title="[TEST] Adapted REST tests for create index api to 0.90 branch">[TEST] Adapted REST tests for create index api to 0.90 branch</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-01-27T06:54:25-08:00" title="2014-01-27 06:54:25">January 27, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.delete_alias" class="js-directory-link" id="bcd2164322e1ef30efad5873e17ab49f-fad1bd5310249d6af8108746519b493b8b2f1bda" title="indices.delete_alias">indices.delete_alias</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.delete_mapping" class="js-directory-link" id="444d988a3f1231e8526cf91a98a06a03-60039924ff6e67e74fe45c36d6b265a550f4c559" title="indices.delete_mapping">indices.delete_mapping</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/817f24798a4cec0838e5bb1ecc4781f72ec527da" class="message" data-pjax="true" title="Delete mapping tests
+
+also testing exists_type">Delete mapping tests</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-15T06:01:48-07:00" title="2013-07-15 06:01:48">July 15, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.exists" class="js-directory-link" id="a419ba11ea36f9b09d0adad74b8aecad-a91e4f22d30a6bc52981032f4d15b938a4447241" title="indices.exists">indices.exists</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/5e93ee610480ef71c4d94f50460a0cbfc64c9e34" class="message" data-pjax="true" title="Tests for indices.exists">Tests for indices.exists</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-15T06:04:56-07:00" title="2013-07-15 06:04:56">July 15, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.get_field_mapping" class="js-directory-link" id="383c57827c3c7ed2838ec11f5073d311-2bc11e8ec2fa5c8ec21b3af89f456cbcf339bcad" title="indices.get_field_mapping">indices.get_field_mapping</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.get_mapping" class="js-directory-link" id="3116b798ef5a70e76e8bda5774609965-7d499ab22e8e8fe6b7be175ad417922feed55fdc" title="indices.get_mapping">indices.get_mapping</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/4050aae925c19500dd442b59f1bca86333571c52" class="message" data-pjax="true" title="[TEST] remove yaml tests for 1.0 from 0.90 branch">[TEST] remove yaml tests for 1.0 from 0.90 branch</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-01-07T07:37:39-08:00" title="2014-01-07 07:37:39">January 07, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.get_template" class="js-directory-link" id="1e1e633044f047dd64db67352ad6de2d-e09ea3c4adee6e85a10ee25d6ed0f661c995c994" title="indices.get_template">indices.get_template</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.open" class="js-directory-link" id="5c427740ac97b380b040ee1c4fac3589-0c284e12be101259e33cf71dfb1024f9e4accbbf" title="indices.open">indices.open</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.optimize" class="js-directory-link" id="f0f7da80b9a2fc47bd2090f7df997121-05ae6d98ac426a809e57a32108bd8aa4c06a1461" title="indices.optimize">indices.optimize</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.put_alias" class="js-directory-link" id="c1cf4d35ea13f61cd913b9d3413a4e07-50063b70b93f5326b6369a733eac9b2d87060980" title="indices.put_alias">indices.put_alias</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.put_mapping" class="js-directory-link" id="0a7bc36480ebb7826d199b4bea2502e1-4f8bd918ded5852e0e751915c79d5f5d43c9edf4" title="indices.put_mapping">indices.put_mapping</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/2527f5a9fa6c64acc72d7f2717f1f999d49f87d1" class="message" data-pjax="true" title="Make put_mapping tests work for 0.90.2 and master">Make put_mapping tests work for 0.90.2 and master</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-23T11:26:58-07:00" title="2013-07-23 11:26:58">July 23, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.put_settings" class="js-directory-link" id="b6094c9acc656c972f88a1e1eb7f4bb1-bdb1b2d2e25f1bf5afa90809d941910298f3cfa9" title="indices.put_settings">indices.put_settings</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.put_template" class="js-directory-link" id="5e6b212e1dbbe6080f05dfc9cc290204-33aa538face2405f36dc1e7f61acb0da4d97a523" title="indices.put_template">indices.put_template</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/1eed74c9be1ce73dee3d2215bf55f625977a90d3" class="message" data-pjax="true" title="Moved get-missing template tests into their own file">Moved get-missing template tests into their own file</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-09-18T06:29:21-07:00" title="2013-09-18 06:29:21">September 18, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.put_warmer" class="js-directory-link" id="04cf1ba2234a2b2aa7f2af6e53942a1d-f777ed27316896802155e6f02d1a8338a4222776" title="indices.put_warmer">indices.put_warmer</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/d24fa520992f6ef4f1cbed32e59d57e02f5a3ac4" class="message" data-pjax="true" title="Warmer APIs">Warmer APIs</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-23T16:28:27-07:00" title="2013-07-23 16:28:27">July 23, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.segments" class="js-directory-link" id="55b55edadae2ee5719a83da7a7b412b5-9c0ca72e1a226fdf5a7f590280a17a1b4e46773e" title="indices.segments">indices.segments</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.snapshot_index" class="js-directory-link" id="decf988ca841a282ce49991d375ad33d-3ef219d4b68d9a60c475abbe239ff0a4c5992e3d" title="indices.snapshot_index">indices.snapshot_index</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.stats" class="js-directory-link" id="2161f07021a494928a67527739649e17-fa81d74556af1976d4f2fc0a711cc8ce09c33e1f" title="indices.stats">indices.stats</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/cf95ee9888de60ce19c84d228fe464488cc8b6bf" class="message" data-pjax="true" title="sanity check for stats">sanity check for stats</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-24T06:59:08-07:00" title="2013-07-24 06:59:08">July 24, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.status" class="js-directory-link" id="ae5b857d6c8c5c5e2bae4679615339c9-88fa9a5a10e171e6697e50967012e81cbcf1b3f0" title="indices.status">indices.status</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.update_aliases" class="js-directory-link" id="e7c07ea7425718a58fafb39b409a7cc0-30b63868a8833ea25567a1fe21c7ec522388ad7e" title="indices.update_aliases">indices.update_aliases</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/7d6869e14991acb8d1ed308e8d7e8b7389c93c1a" class="message" data-pjax="true" title="[TEST] single alias APIs not supported before 0.90.1">[TEST] single alias APIs not supported before 0.90.1</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-09-25T09:59:12-07:00" title="2013-09-25 09:59:12">September 25, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/indices.validate_query" class="js-directory-link" id="505a3937743a1916ab71bad4839b407d-54a0af36ce849c6b2e339ad82615d754bc8c16fb" title="indices.validate_query">indices.validate_query</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/e925ea3b786a656d56b8e826241fc4a2b4cce5e6" class="message" data-pjax="true" title="validate query">validate query</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-23T19:12:03-07:00" title="2013-07-23 19:12:03">July 23, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/info" class="js-directory-link" id="caf9b6b99962bf5c2264824231d7a40c-29b0ea3cacf7abee49ec6987e2785f618faaa0ef" title="info">info</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/mget" class="js-directory-link" id="6e3d8d4d91320c316d330da3a89b1b2d-51f470e297a9f63c43e4b01dabb22d3ef7ca5380" title="mget">mget</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/mlt" class="js-directory-link" id="4d9254acfdc372ccf15d9df40336bebc-8070276058c2609810c6ff2d4d8056e9a7237d4c" title="mlt">mlt</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/f9c19dba5654ac38bc75fbe0264d1d7c4e78580d" class="message" data-pjax="true" title="Wait for green in mlt tests">Wait for green in mlt tests</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-02-07T10:20:36-08:00" title="2014-02-07 10:20:36">February 07, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/msearch" class="js-directory-link" id="a63f22b39ad55ab9fcf8d350b1c04347-85672c52b2988f2cfb3befb4fb1de734f91153dc" title="msearch">msearch</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/2fb0ec9febe829ebce20fb996e5dc7c469874e22" class="message" data-pjax="true" title="msearch tests">msearch tests</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-21T15:40:12-07:00" title="2013-07-21 15:40:12">July 21, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/percolate" class="js-directory-link" id="2e77a7f77bec03b9d620e5dd096cbc0d-927bd76673cedd2d984242a8b28b363ac1e04ae6" title="percolate">percolate</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/ping" class="js-directory-link" id="df911f0151f9ef021d410b4be5060972-a65ac59e4db6fab07fb63dcf202a25d907125b8d" title="ping">ping</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/df94f08dabc51da09f314d009d5510a413e0cb1b" class="message" data-pjax="true" title="Renamed &quot;ok&quot; and &quot;not_ok&quot; to &quot;is_true&quot; and &quot;is_false&quot;
+
+and tidied up the layout to make it easier to read">Renamed "ok" and "not_ok" to "is_true" and "is_false"</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-07-01T06:58:23-07:00" title="2013-07-01 06:58:23">July 01, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/scroll" class="js-directory-link" id="089b0cdd8835d09cb1cabf38b3ce9c09-e2800c05119eec91a7aaf3804049f11f4113b9f6" title="scroll">scroll</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/de4a84ccee0ca99ab8d5a1d52ff4cfde019eb42c" class="message" data-pjax="true" title="Scroll test was missing an index - fails when other indices present">Scroll test was missing an index - fails when other indices present</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2013-09-16T11:56:32-07:00" title="2013-09-16 11:56:32">September 16, 2013</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/search" class="js-directory-link" id="06a943c59f33a34bb5924aaf72cd2995-8a894eeffd3dd5a6a7a0ed17a4e52156f72b78b9" title="search">search</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/e623f614d23b048740b452e5372c0d8c6669c84c" class="message" data-pjax="true" title="remove default `_all` for `type` and `index` if these are missing in RES...
+
+...T tests
+
+If a type or path is missing in the REST test yaml file, it is
+automatically replaced with _all. This makes it hard to test changes
+in the api, for example adding the possibility to leave the index
+blank in addition to _all and * in the uri.
+
+closes #4657">remove default `_all` for `type` and `index` if these are missing in â€¦</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-01-09T01:14:24-08:00" title="2014-01-09 01:14:24">January 09, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/suggest" class="js-directory-link" id="4466476a945cb091a8f4252b96f140d7-6a7537607f5fd126266923b7395a407b864c95a1" title="suggest">suggest</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/4050aae925c19500dd442b59f1bca86333571c52" class="message" data-pjax="true" title="[TEST] remove yaml tests for 1.0 from 0.90 branch">[TEST] remove yaml tests for 1.0 from 0.90 branch</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-01-07T07:37:39-08:00" title="2014-01-07 07:37:39">January 07, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-directory"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test/update" class="js-directory-link" id="3ac340832f29c11538fbe2d6f75e8bcc-1a635ca9725dbae81925a4c0f9209a5b70c062b3" title="update">update</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/cb270f5dd01f37eda1ab3055d53d3f620d6b5552" class="message" data-pjax="true" title="[TEST] moved routing REST tests to 0 replicas
+
+REST tests get run against either 1 node or multiple nodes. Wait for yellow with replicas&gt;0 is not enough when running against multiple nodes as replicas shard might get initialized  during testing, which can cause timing issues.">[TEST] moved routing REST tests to 0 replicas</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-02-10T03:44:10-08:00" title="2014-02-10 03:44:10">February 10, 2014</time></span></td>
+    </tr>
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/blob/0.90/rest-api-spec/test/README.asciidoc" class="js-directory-link" id="d03d78a73f737f7943dde0f33e6e2b24-97f7f0982ad8961847f959af1f70a04a6cfd4f1d" title="README.asciidoc">README.asciidoc</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/elasticsearch/elasticsearch/commit/88771fdf99e26ceb419a3d17557bd73e9f778df1" class="message" data-pjax="true" title="[TEST] Added ability to test apis that don&#39;t return json
+
+The last response body gets now always stashed in the REST tests and can be retrieved via `$body`. This implies that not only expected values can be retrieved from the stashed values, but actual values as well.
+
+Added support for regular expressions to `match` assertion, using `Pattern.COMMENTS` flag for better readability through new custom hamcrest matcher (adopted in do section as well). Functionality added through new feature called `regex` that needs to be mentioned in the skip sections whenever needed till all the runners support it.
+
+Added also example tests for cat count api">[TEST] Added ability to test apis that don't return json</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-02-03T02:26:38-08:00" title="2014-02-03 02:26:38">February 03, 2014</time></span></td>
+    </tr>
+</tbody>
+
+  </table>
+</div>
+
+  <div id="readme" class="clearfix announce instapaper_body asciidoc">
+    <span class="name">
+      <span class="octicon octicon-book"></span>
+      README.asciidoc
+    </span>
+
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a name="test-suite" class="anchor" href="#test-suite"><span class="octicon octicon-link"></span></a>Test Suite:</h1>
+<div>
+<div>
+<div>
+<p>A YAML test file consists of:
+* an optional <code>setup</code> section, followed by
+* one or more test sections</p>
+</div>
+<div>
+<p>For instance:</p>
+</div>
+<div>
+<div>
+<pre>setup:
+  - do: ....
+  - do: ....</pre>
+</div>
+</div>
+<div>
+<div>
+<pre>---
+"First test":
+  - do: ...
+  - match: ...</pre>
+</div>
+</div>
+<div>
+<div>
+<pre>---
+"Second test":
+  - do: ...
+  - match: ...</pre>
+</div>
+</div>
+<div>
+<p>A <code>setup</code> section contains a list of commands to run before each test
+section in order to setup the same environment for each test section.</p>
+</div>
+<div>
+<p>A test section represents an independent test, containing multiple <code>do</code>
+statements and assertions. The contents of a test section must be run in
+order, but individual test sections may be run in any order, as follows:</p>
+</div>
+<div>
+<ol>
+<li>
+<p>run <code>setup</code> (if any)</p>
+</li>
+<li>
+<p>reset the <code>response</code> var and the <code>stash</code> (see below)</p>
+</li>
+<li>
+<p>run test contents</p>
+</li>
+<li>
+<p>run teardown</p>
+</li>
+</ol>
+</div>
+<div>
+<p>The <code>teardown</code> should delete all indices and all templates.</p>
+</div>
+</div>
+</div>
+<div>
+<h2>
+<a name="dot-notation" class="anchor" href="#dot-notation"><span class="octicon octicon-link"></span></a>Dot notation:</h2>
+<div>
+<div>
+<p>Dot notation is used for (1) method calls and (2) hierarchical data structures.  For
+instance, a method call like <code>cluster.health</code> would do the equivalent of:</p>
+</div>
+<div>
+<div>
+<pre>client.cluster.health(...params...)</pre>
+</div>
+</div>
+<div>
+<p>A test against <code>_tokens.1.token</code> would examine the <code>token</code> key, in the second element
+of the <code>tokens</code> array, inside the <code>response</code> var (see below):</p>
+</div>
+<div>
+<div>
+<pre>$val = $response-&gt;{tokens}[1]{token}  # Perl syntax roolz!</pre>
+</div>
+</div>
+<div>
+<p>If one of the levels (eg <code>tokens</code>) does not exist, it should return an undefined value.
+If no field name is given (ie the empty string) then return the current
+$valâ€‰â€”â€‰used for testing the whole response body.</p>
+</div>
+<div>
+<p>Use \. to specify paths that actually contain <em>.</em> in the key name, for example
+in the <code>indices.get_settings</code> API.</p>
+</div>
+</div>
+</div>
+<div>
+<h2>
+<a name="skipping-tests" class="anchor" href="#skipping-tests"><span class="octicon octicon-link"></span></a>Skipping tests:</h2>
+<div>
+<div>
+<p>If a test section should only be run on certain versions of Elasticsearch,
+then the first entry in the section (after the title) should be called
+<code>skip</code>, and should contain the range of versions to be
+skipped, and the reason why the tests are skipped.  For instance:</p>
+</div>
+<div>
+<div>
+<pre>    "Parent":
+     - skip:
+          version:     "0 - 0.90.2"
+          reason:      Delete ignores the parent param
+
+     - do:
+       ... test definitions ...</pre>
+</div>
+</div>
+<div>
+<p>All tests in the file following the skip statement should be skipped if:
+<code>min &lt;= current &lt;= max</code>.</p>
+</div>
+<div>
+<p>The <code>version</code> range should always have an upper bound. Versions should
+either have each version part compared numerically, or should be converted
+to a string with sufficient digits to allow string comparison, eg</p>
+</div>
+<div>
+<div>
+<pre>0.90.2 -&gt; 000-090-002</pre>
+</div>
+</div>
+<div>
+<p>Snapshot versions and versions of the form <code>1.0.0.Beta1</code> can be treated
+as the rounded down version, eg <code>1.0.0</code>.</p>
+</div>
+<div>
+<p>The skip section can also be used to list new features that need to be
+supported in order to run a test. This way the up-to-date runners will
+run the test, while the ones that donâ€™t support the feature yet can
+temporarily skip it, and avoid having lots of test failures in the meantime.
+Once all runners have implemented the feature, it can be declared supported
+by default, thus the related skip sections can be removed from the tests.</p>
+</div>
+<div>
+<div>
+<pre>    "Parent":
+     - skip:
+          features:    regex
+
+     - do:
+       ... test definitions ...</pre>
+</div>
+</div>
+<div>
+<p>The <code>features</code> field can either be a string or an array of strings.
+The skip section requires to specify either a <code>version</code> or a <code>features</code> list.</p>
+</div>
+</div>
+</div>
+<div>
+<h2>
+<a name="required-operators" class="anchor" href="#required-operators"><span class="octicon octicon-link"></span></a>Required operators:</h2>
+<div>
+<div>
+<h3>
+<a name="do" class="anchor" href="#do"><span class="octicon octicon-link"></span></a><code>do</code>
+</h3>
+<div>
+<p>The <code>do</code> operator calls a method on the client. For instance:</p>
+</div>
+<div>
+<div>
+<pre>    - do:
+        cluster.health:
+            level: shards</pre>
+</div>
+</div>
+<div>
+<p>The response from the <code>do</code> operator should be stored in the <code>response</code> var, which
+is reset (1) at the beginning of a file or (2) on the next <code>do</code>.</p>
+</div>
+<div>
+<p>If the arguments to <code>do</code> include <code>catch</code>, then we are expecting an error, which should
+be caught and tested.  For instance:</p>
+</div>
+<div>
+<div>
+<pre>    - do:
+        catch:        missing
+        get:
+            index:    test
+            type:    test
+            id:        1</pre>
+</div>
+</div>
+<div>
+<p>The argument to <code>catch</code> can be any of:</p>
+</div>
+<div>
+<table>
+<tr>
+<td>
+<code>missing</code>
+</td>
+<td>
+<p>a 404 response from ES</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>conflict</code>
+</td>
+<td>
+<p>a 409 response from ES</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>request</code>
+</td>
+<td>
+<p>a generic error response from ES</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>param</code>
+</td>
+<td>
+<p>a client-side error indicating an unknown parameter has been passed
+to the method</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>/foo bar/</code>
+</td>
+<td>
+<p>the text of the error message matches this regular expression</p>
+</td>
+</tr>
+</table>
+</div>
+<div>
+<p>If <code>catch</code> is specified, then the <code>response</code> var must be cleared, and the test
+should fail if no error is thrown.</p>
+</div>
+</div>
+<div>
+<h3>
+<a name="set" class="anchor" href="#set"><span class="octicon octicon-link"></span></a><code>set</code>
+</h3>
+<div>
+<p>For some tests, it is necessary to extract a value from the previous <code>response</code>, in
+order to reuse it in a subsequent <code>do</code> and other tests.  For instance, when
+testing indexing a document without a specified ID:</p>
+</div>
+<div>
+<div>
+<pre>    - do:
+        index:
+            index: test
+            type:  test
+    - set:  { _id: id }   # stash the value of `response._id` as `id`
+    - do:
+        get:
+            index: test
+            type:  test
+            id:    $id    # replace `$id` with the stashed value
+    - match: { _id: $id } # the returned `response._id` matches the stashed `id`</pre>
+</div>
+</div>
+<div>
+<p>The last response obtained gets always stashed automatically as a string, called <code>body</code>.
+This is useful when needing to test apis that return text rather than json (e.g. cat api),
+as it allows to treat the whole body as an ordinary string field.</p>
+</div>
+<div>
+<p>Note that not only expected values can be retrieved from the stashed values (as in the
+example above), but the same goes for actual values:</p>
+</div>
+<div>
+<div>
+<pre>    - match: { $body: /^.+$/ } # the returned `body` matches the provided regex</pre>
+</div>
+</div>
+<div>
+<p>The stash should be reset at the beginning of each test file.</p>
+</div>
+</div>
+<div>
+<h3>
+<a name="is_true" class="anchor" href="#is_true"><span class="octicon octicon-link"></span></a><code>is_true</code>
+</h3>
+<div>
+<p>The specified key exists and has a true value (ie not <code>0</code>, <code>false</code>, <code>undefined</code>, <code>null</code>
+or the empty string), eg:</p>
+</div>
+<div>
+<div>
+<pre>    - is_true:  fields._parent  # the _parent key exists in the fields hash and is "true"</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>
+<a name="is_false" class="anchor" href="#is_false"><span class="octicon octicon-link"></span></a><code>is_false</code>
+</h3>
+<div>
+<p>The specified key doesnâ€™t exist or has a false value (ie <code>0</code>, <code>false</code>, <code>undefined</code>,
+<code>null</code> or the empty string), eg:</p>
+</div>
+<div>
+<div>
+<pre>    - is_false:  fields._source  # the _source key doesn't exist in the fields hash or is "false"</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>
+<a name="match" class="anchor" href="#match"><span class="octicon octicon-link"></span></a><code>match</code>
+</h3>
+<div>
+<p>Used to compare two variables (could be scalars, arrays or hashes).  The two variables
+should be identical, eg:</p>
+</div>
+<div>
+<div>
+<pre>    - match: { _source: { foo: bar }}</pre>
+</div>
+</div>
+<div>
+<p>Supports also regular expressions with flag X for more readability (accepts whitespaces and comments):</p>
+</div>
+<div>
+<div>
+<pre>  - match:
+      $body: &gt;
+               /^  epoch  \s+  timestamp          \s+  count  \s+  \n
+                   \d+    \s+  \d{2}:\d{2}:\d{2}  \s+  \d+    \s+  \n  $/</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>
+<a name="lt-and-gt" class="anchor" href="#lt-and-gt"><span class="octicon octicon-link"></span></a><code>lt</code> and <code>gt</code>
+</h3>
+<div>
+<p>Compares two numeric values, eg:</p>
+</div>
+<div>
+<div>
+<pre>    - lt: { fields._ttl: 10000 }  # the `_ttl` value is less than 10,000</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>
+<a name="length" class="anchor" href="#length"><span class="octicon octicon-link"></span></a><code>length</code>
+</h3>
+<div>
+<p>This depends on the datatype of the value being examined, eg:</p>
+</div>
+<div>
+<div>
+<pre>    - length: { _id: 22    }   # the `_id` string is 22 chars long
+    - length: { _tokens: 3 }   # the `_tokens` array has 3 elements
+    - length: { _source: 5 }   # the `_source` hash has 5 keys</pre>
+</div>
+</div>
+</div>
+</div>
+</div></article>
+  </div>
+
+
+        </div>
+
+      </div><!-- /.repo-container -->
+      <div class="modal-backdrop"></div>
+    </div><!-- /.container -->
+  </div><!-- /.site -->
+
+
+    </div><!-- /.wrapper -->
+
+      <div class="container">
+  <div class="site-footer">
+    <ul class="site-footer-links right">
+      <li><a href="https://status.github.com/">Status</a></li>
+      <li><a href="http://developer.github.com">API</a></li>
+      <li><a href="http://training.github.com">Training</a></li>
+      <li><a href="http://shop.github.com">Shop</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/about">About</a></li>
+
+    </ul>
+
+    <a href="/">
+      <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+    </a>
+
+    <ul class="site-footer-links">
+      <li>&copy; 2014 <span title="0.06754s from github-fe129-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="/site/terms">Terms</a></li>
+        <li><a href="/site/privacy">Privacy</a></li>
+        <li><a href="/security">Security</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div><!-- /.site-footer -->
+</div><!-- /.container -->
+
+
+    <div class="fullscreen-overlay js-fullscreen-overlay" id="fullscreen_overlay">
+  <div class="fullscreen-container js-fullscreen-container">
+    <div class="textarea-wrap">
+      <textarea name="fullscreen-contents" id="fullscreen-contents" class="js-fullscreen-contents" placeholder="" data-suggester="fullscreen_suggester"></textarea>
+          <div class="suggester-container">
+              <div class="suggester fullscreen-suggester js-navigation-container" id="fullscreen_suggester"
+                 data-url="/elasticsearch/elasticsearch/suggestions/commit">
+              </div>
+          </div>
+    </div>
+  </div>
+  <div class="fullscreen-sidebar">
+    <a href="#" class="exit-fullscreen js-exit-fullscreen tooltipped leftwards" title="Exit Zen Mode">
+      <span class="mega-octicon octicon-screen-normal"></span>
+    </a>
+    <a href="#" class="theme-switcher js-theme-switcher tooltipped leftwards"
+      title="Switch themes">
+      <span class="octicon octicon-color-mode"></span>
+    </a>
+  </div>
+</div>
+
+
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="octicon octicon-alert"></span>
+      <a href="#" class="octicon octicon-remove-close close js-ajax-error-dismiss"></a>
+      Something went wrong with that request. Please try again.
+    </div>
+
+  </body>
+</html>
+

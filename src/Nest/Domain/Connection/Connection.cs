@@ -20,6 +20,11 @@ namespace Nest
 		private Semaphore _ResourceLock;
 		private readonly bool _enableTrace;
 
+		 static Connection()
+		{
+			ServicePointManager.UseNagleAlgorithm = false;
+			ServicePointManager.Expect100Continue = false;
+		}
 		public Connection(IConnectionSettings settings)
 		{
 			if (settings == null)

@@ -88,12 +88,7 @@ namespace Nest
 			if (queryString != null)
 				path += queryString.ToQueryString();
 
-			var postData = string.Empty;
-			var s = data as string;
-			if (s != null)
-				postData = s;
-			else if (data != null)
-				postData = this.Serializer.Serialize(data);
+			var postData = PostData(data);
 
 			switch (method.ToLowerInvariant())
 			{
@@ -112,17 +107,28 @@ namespace Nest
 			throw new DslException("Unknown HTTP method " + method);
 		}
 
+		private string PostData(object data)
+		{
+			var postData = string.Empty;
+			var s = data as string;
+			if (s != null)
+				 return s;
+			if (data == null) return postData;
+			var ss = data as IEnumerable<string>;
+			if (ss != null)
+				return string.Join("\n", ss) + "\n";
+			var so = data as IEnumerable<object>;
+			return so != null 
+				? string.Join("\n", so.Select(soo=>this.Serializer.Serialize(soo, Formatting.None))) + "\n"
+				: this.Serializer.Serialize(data);
+		}
+
 		protected Task<ConnectionStatus> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
 			if (queryString != null)
 				path += queryString.ToQueryString();
 
-			var postData = string.Empty;
-			var s = data as string;
-			if (s != null)
-				postData = s;
-			else if (data != null)
-				postData = this.Serializer.Serialize(data);
+			var postData = PostData(data);
 
 			switch (method.ToLowerInvariant())
 			{
