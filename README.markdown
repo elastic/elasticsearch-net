@@ -2,21 +2,21 @@
 
 *Strongly typed Elasticsearch client*
 
-NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. It also has string/dynamic overloads for more dynamic usecases. 
+NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. 
 
 Indexing is as simple as:
 
 	var post = new Post() { Id = 12, ... }
 	var result = client.Index(post);
 
-Indexing asynchronously is as easy as:
+All the calls have async variants:
 
 	//t is a Task<ConnectionStatus>
 	var t = client.IndexAsync(post);
 
 Searching is fluent:
 
-	var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
+	var results = client.Search<ElasticSearchProject>(s => s
 			.From(0)
 			.Size(10)
 			.Fields(f => f.Id, f => f.Name)
@@ -24,6 +24,24 @@ Searching is fluent:
 			.SortDescending(f => f.Name)
 			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
 	);
+
+NEST also comes with a low level client that you can fall back to incase anything is missing:
+
+	//.Raw is of type IRawElasticClient
+	var results = this._client.Raw.SearchPost("myindex","elasticsearchprojects", new
+	{
+		from = 0,
+		size = 10,
+		fields = new [] {"id", "name"},
+		query = new {
+			term = new {
+				name = new {
+					value= "NEST",
+					boost = 2.0
+				}
+			}
+		}
+	});
 
 #[Read the documentation here](http://nest.azurewebsites.net/)
 
@@ -58,19 +76,13 @@ All of these are more then welcome on the github issues pages! I try to to at le
 
 Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](http://nest.azurewebsites.net/)
 
-A special shoutout to [@stephenpope](http://github.com/stephenpope) for allowing his port 
-of the java factory based dsl [Rubber](http://github.com/stephenpope/Rubber) to be merged into NEST. 
-NEST now has **two types of query dsl's** (lambda and factory based)!
+Many thanks to: 
 
-Many thanks to my employer [Q42](http://www.q42.nl) for supporting the development of NEST by donating 20% of my contract hours for NEST's development. That means I get a full paid day to work on NEST a week, whoohoo! If you are in the netherlands (The Hague/Amsterdam area) and looking for a great place to work: [we're hiring!](http://q42.nl/blog/tagged/vacature)
-
-Some of the other wonderful features in NEST were pushed by these wonderful folks:
-
-* [@nordbergm](https://github.com/nordbergm/NEST)
-* [@kevingessner](https://github.com/kevingessner/NEST)
-* [@EFJoseph](https://github.com/EFJoseph/NEST)
-* [@pkrakowiak](https://github.com/pkrakowiak/NEST) 
-* [@q42jaap] (https://github.com/q42jaap/NEST)
+* my ex-employer [Q42](http://www.q42.nl) for supporting the development of NEST by donating 20% of my contract hours for NEST's development. 
+* redgate for supplying me with an ANTS Memory Profiler 8 & ANTS Performance Profiler 8 licenses 
+* jetBrains for supplying me with a dotTrace profiler license and a Resharper license
+* CodeBetter for hosting the continuous integration for NEST
+* Everyone who's been awesome enough to contribute back to NEST (You're listed automatically on the [documentation page](http://nest.azurewebsites.net/))
 
 ## License
 
