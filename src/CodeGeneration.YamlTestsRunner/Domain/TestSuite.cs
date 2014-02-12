@@ -5,10 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using CsQuery.ExtensionMethods.Internal;
 
-namespace CodeGeneration.YamlTestsRunner
+namespace CodeGeneration.YamlTestsRunner.Domain
 {
-	using YamlTestSuite = Dictionary<string, object>;
-
 	public class TestSuite
 	{
 		public string Description { get; set; }
@@ -16,7 +14,7 @@ namespace CodeGeneration.YamlTestsRunner
 		public bool HasSetup { get; set; }
 		public bool IsSetup { get; set; }
 
-		public static TestSuite CreateFrom(YamlTestSuite untyped, string yaml)
+		public static TestSuite CreateFrom(Dictionary<string, object> untyped, string yaml)
 		{
 			if (untyped == null || untyped.Count == 0)
 				return null;

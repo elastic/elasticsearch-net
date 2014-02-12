@@ -140,7 +140,7 @@ namespace CodeGeneration.YamlTestsRunner
 		private static IEnumerable<TestSuite> ParseYaml(string yaml)
 		{
 			var deserializer = new Deserializer();
-			var tests = Regex.Split(yaml, @"---\n");
+			var tests = Regex.Split(yaml, @"---\r?\n");
 			var r = new List<TestSuite>();
 			foreach (var test in tests.Where(t=>!t.IsNullOrEmpty()))
 			{

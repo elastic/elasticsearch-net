@@ -1,4 +1,4 @@
-namespace CodeGeneration.YamlTestsRunner
+namespace CodeGeneration.YamlTestsRunner.Domain
 {
 	public interface ITestStep
 	{

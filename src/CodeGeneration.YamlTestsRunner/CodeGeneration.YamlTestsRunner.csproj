@@ -69,15 +69,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\GreaterThanStep.cs" />
+    <Compile Include="Domain\IsFalseStep.cs" />
+    <Compile Include="Domain\IsTrueStep.cs" />
+    <Compile Include="Domain\LengthStep.cs" />
+    <Compile Include="Domain\LowerThanStep.cs" />
+    <Compile Include="Domain\MatchStep.cs" />
+    <Compile Include="Domain\SkipStep.cs" />
     <Compile Include="Domain\YamlDefinition.cs" />
     <Compile Include="Domain\YamlSpecification.cs" />
-    <Compile Include="DoStep.cs" />
+    <Compile Include="Domain\DoStep.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="ITestStep.cs" />
+    <Compile Include="Domain\ITestStep.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetStep.cs" />
-    <Compile Include="TestSuite.cs" />
+    <Compile Include="Domain\SetStep.cs" />
+    <Compile Include="Domain\TestSuite.cs" />
     <Compile Include="YamlTestsGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,12 +103,7 @@
     <None Include="Views\SetupClass.cshtml" />
     <None Include="Views\TestSuite.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="razormachine.readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Microsoft.SqlServer.Server;
-using Newtonsoft.Json;
 using YamlDotNet.Dynamic;
 
-namespace CodeGeneration.YamlTestsRunner
+namespace CodeGeneration.YamlTestsRunner.Domain
 {
 	public class DoStep : ITestStep
 	{
