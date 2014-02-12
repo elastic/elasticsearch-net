@@ -4,7 +4,7 @@ VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest", "Nest\Nest.csproj", "{072BA7DA-7B60-407D-8B6E-95E3186BE70C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration", "Nest.Tests.Integration\Nest.Tests.Integration.csproj", "{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration", "Tests\Nest.Tests.Integration\Nest.Tests.Integration.csproj", "{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Notes", "_Notes", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Notes", "_Notes", "{E30CA2
 		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.MockData", "Nest.Tests.MockData\Nest.Tests.MockData.csproj", "{27143A05-5655-447C-ADAF-405E1CF43741}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.MockData", "Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj", "{27143A05-5655-447C-ADAF-405E1CF43741}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debugging-Profiling", "Debugging-Profiling", "{DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profiler", "Profiler", "{DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Connection.Thrift", "Nest.Connection.Thrift\Nest.Connection.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
 EndProject
@@ -27,65 +27,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\build\NESTBuild.proj = ..\build\NESTBuild.proj
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Unit", "Nest.Tests.Unit\Nest.Tests.Unit.csproj", "{97408393-78AC-45DF-BE6E-4C219A2E456D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Unit", "Tests\Nest.Tests.Unit\Nest.Tests.Unit.csproj", "{97408393-78AC-45DF-BE6E-4C219A2E456D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtocolLoadTest", "ProtocolLoadTest\ProtocolLoadTest.csproj", "{B9FE4875-0171-40F7-A357-064A93BE09C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profiling.Indexing", "Profiling\Profiling.Indexing\Profiling.Indexing.csproj", "{B9FE4875-0171-40F7-A357-064A93BE09C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Generation", "Code Generation", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.LowLevelClient", "CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj", "{56A87048-9065-459B-826D-3DF68B409845}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.LowLevelClient", "CodeGeneration\CodeGeneration.LowLevelClient\CodeGeneration.LowLevelClient.csproj", "{56A87048-9065-459B-826D-3DF68B409845}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Profiling.InMemoryConnection", "Nest.Profiling.InMemoryConnection\Nest.Profiling.InMemoryConnection.csproj", "{733A7657-69E9-444A-8AC0-BC123127A59A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profiling.InMemoryConnection", "Profiling\Profiling.InMemoryConnection\Profiling.InMemoryConnection.csproj", "{733A7657-69E9-444A-8AC0-BC123127A59A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration.Yaml", "Nest.Tests.Integration.Yaml\Nest.Tests.Integration.Yaml.csproj", "{E97EEFA7-BDAB-4417-97C0-14F971044C57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration.Yaml", "Tests\Nest.Tests.Integration.Yaml\Nest.Tests.Integration.Yaml.csproj", "{E97EEFA7-BDAB-4417-97C0-14F971044C57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.YamlTestsRunner", "CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj", "{04F53AA5-6346-4139-94CF-81BD8663875F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Cache", "_Cache", "{825DF939-A50E-4932-A551-12AEA871BB61}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Cache", "http://localhost:65386", "{00CC5680-33CE-4FB4-877E-7DAB18B3ED39}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_65386"
-		Debug.AspNetCompiler.PhysicalPath = "CodeGeneration.LowLevelClient\Cache\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65386\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_65386"
-		Release.AspNetCompiler.PhysicalPath = "CodeGeneration.LowLevelClient\Cache\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65386\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "CodeGeneration.LowLevelClient\Cache\"
-	EndProjectSection
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "YamlCache", "http://localhost:58086", "{CB30721D-68FD-4895-9AB8-4CBA677BE404}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_58086"
-		Debug.AspNetCompiler.PhysicalPath = "CodeGeneration.YamlTestsRunner\YamlCache\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58086\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_58086"
-		Release.AspNetCompiler.PhysicalPath = "CodeGeneration.YamlTestsRunner\YamlCache\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58086\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "CodeGeneration.YamlTestsRunner\YamlCache\"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.YamlTestsRunner", "CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj", "{04F53AA5-6346-4139-94CF-81BD8663875F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

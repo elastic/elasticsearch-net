@@ -1,0 +1,762 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97408393-78AC-45DF-BE6E-4C219A2E456D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nest.Tests.Unit</RootNamespace>
+    <AssemblyName>Nest.Tests.Unit</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>True</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Nest.Tests.Unit.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;d:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;d:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>True</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Nest.Tests.Unit.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;d:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;d:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug - Generator\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\..\dep\FakeItEasy.1.17.0\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net40\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\dep\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PUrify">
+      <HintPath>..\..\dep\Purify - Preview\PUrify.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseJsonTests.cs" />
+    <Compile Include="Cluster\HealthTests.cs" />
+    <Compile Include="Cluster\NodeTests.cs" />
+    <Compile Include="Core\Bulk\BulkTests.cs" />
+    <Compile Include="Core\Bulk\BulkUrlTests.cs" />
+    <Compile Include="Core\Map\MappingBehaviourTests.cs" />
+    <Compile Include="Core\Scroll\ScrollRequestTests.cs" />
+    <Compile Include="Core\Domain\Connection\ConnectionTests.cs" />
+    <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />
+    <Compile Include="Core\Get\GetTests.cs" />
+    <Compile Include="Core\Index\IndexTests.cs" />
+    <Compile Include="Core\Indices\Analysis\BaseAnalysisTests.cs" />
+    <Compile Include="Core\Indices\Analysis\Tokenizers\TokenizerTests.cs" />
+    <Compile Include="Core\Map\AnalyzerField\AnalyzerFieldTests.cs" />
+    <Compile Include="Core\Map\BoostField\BoostFieldTests.cs" />
+    <Compile Include="Core\Map\PutMappingRequestTests.cs" />
+    <Compile Include="Core\Map\Properties\PropertiesTests.cs" />
+    <Compile Include="Core\Map\DynamicTemplates\DynamicTemplatesTests.cs" />
+    <Compile Include="Core\Map\MetaField\MetaFieldTests.cs" />
+    <Compile Include="Core\Map\TtlField\TtlFieldTests.cs" />
+    <Compile Include="Core\Map\TimestampField\TimestampFieldTests.cs" />
+    <Compile Include="Core\Map\RoutingField\RoutingFieldTests.cs" />
+    <Compile Include="Core\Map\TypeField\TypeFieldTests.cs" />
+    <Compile Include="Core\Map\SourceField\SourceFieldTests.cs" />
+    <Compile Include="Core\Map\FluentMappingFullExampleTests.cs" />
+    <Compile Include="Core\Map\IdField\IdFieldTests.cs" />
+    <Compile Include="Core\Map\RootProperties\MapRootObjectPropertiesTests.cs" />
+    <Compile Include="Core\MoreLikeThis\MltSearchBodyTests.cs" />
+    <Compile Include="Core\MoreLikeThis\MltUrlTests.cs" />
+    <Compile Include="Core\Template\PutTemplateRequestTests.cs" />
+    <Compile Include="Core\UpdateSettings\UpdateSettingsRequestTests.cs" />
+    <Compile Include="Core\UpdateSettings\UpdateSettingsTests.cs" />
+    <Compile Include="Core\Update\UpdateRequestTests.cs" />
+    <Compile Include="Core\Validate\ValidateRequestTests.cs" />
+    <Compile Include="Core\Versioning\VersioningTests.cs" />
+    <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
+    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
+    <Compile Include="Extensions\UriExtensionsTests.cs" />
+    <Compile Include="BigBadUrlUnitTests.cs" />
+    <Compile Include="Internals\Inferno\EscapedFormatTests.cs" />
+    <Compile Include="Internals\Inferno\HostNameWithPathTests.cs" />
+    <Compile Include="Internals\Inferno\MapTypeNamesTests.cs" />
+    <Compile Include="Internals\Serialize\OptOutTests.cs" />
+    <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
+    <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
+    <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\RegexpFilterJson.cs" />
+    <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
+    <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
+    <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
+    <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\RegexpQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\HasParentQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\MultiMatch\MultiMatchJson.cs" />
+    <Compile Include="Search\Query\Modes\QueryModesTests.cs" />
+    <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
+    <Compile Include="Search\Rescore\RescoreTests.cs" />
+    <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
+    <Compile Include="Search\Facets\FacetJson.cs" />
+    <Compile Include="Search\Facets\FilterFacetJson.cs" />
+    <Compile Include="Search\Facets\GeoDistanceFacetJson.cs" />
+    <Compile Include="Search\Facets\HistogramFacetJson.cs" />
+    <Compile Include="Search\Facets\QueryFacetJson.cs" />
+    <Compile Include="Search\Facets\RangeFacetJson.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\DateEntriesConstraint.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\DateEntrySequenceEqualityComparer.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\when_date_histogram_query_has_no_value_field.cs" />
+    <Compile Include="Search\Facets\ResponseDeserialisation\when_date_histogram_query_has_value_field.cs" />
+    <Compile Include="Search\Facets\StatisticalFacetJson.cs" />
+    <Compile Include="Search\Facets\TermsFacetJson.cs" />
+    <Compile Include="Search\Facets\TermsStatsFacetJson.cs" />
+    <Compile Include="Search\Filter\BoolCombinations\BoolCombinationTests.cs" />
+    <Compile Include="Search\Filter\BoolFiltersInFacets\BoolFiltersInFacetsTests.cs" />
+    <Compile Include="Search\Filter\Bool\StaticBoolFilterTests.cs" />
+    <Compile Include="Search\Filter\ConditionlessBool\ConditionLessBooleanTests.cs" />
+    <Compile Include="Search\Filter\ConditionLess\ConditionLessTests.cs" />
+    <Compile Include="Search\Filter\FilterCalls\FilterCallsTests.cs" />
+    <Compile Include="Search\Filter\FiltersInQueries\FiltersInQueriesTests.cs" />
+    <Compile Include="Search\Filter\InsideBoolCalls\InsideBoolCallsTests.cs" />
+    <Compile Include="Search\Filter\Singles\AndFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\BoolFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\ExistFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoBoundingBoxFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoDistanceFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoDistanceRangeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\GeoPolygonFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\HasChildFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\IdsFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\LimitFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\MatchAllFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\MissingFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\NestedFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\NotFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\NumericRangeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\OrFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\PrefixFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\QueryFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\RangeFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\ScriptFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\TermFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\TermsFilterJson.cs" />
+    <Compile Include="Search\Filter\Singles\TypeFilterJson.cs" />
+    <Compile Include="Internals\Inferno\IdLookupTests.cs" />
+    <Compile Include="Internals\Inferno\PropertyNameResolverTests.cs" />
+    <Compile Include="Core\AttributeBasedMap\BaseAttributeMappingTests.cs" />
+    <Compile Include="Core\AttributeBasedMap\DeepObjectMappingTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Internals\Inferno\PropertyVisitorTests.cs" />
+    <Compile Include="Search\Highlight\HighlightTests.cs" />
+    <Compile Include="Search\Query\ConditionLess\ConditionLessTests.cs" />
+    <Compile Include="Search\Query\ConditionlessBool\ConditionLessBooleanTests.cs" />
+    <Compile Include="Search\Query\ConditionLess\SemiConditionLessTests.cs" />
+    <Compile Include="Search\Query\ConditionLessStrict\ConditionLessStrictTests.cs" />
+    <Compile Include="Search\Query\ConditionLessStrict\SemiStrictBoolTests.cs" />
+    <Compile Include="Search\Query\QueriesInQueries\QueriesInQueriesTests.cs" />
+    <Compile Include="Search\Query\Singles\MatchQueryJson.cs" />
+    <Compile Include="Search\Query\UpdateQuery\UpdateQueriesTests.cs" />
+    <Compile Include="Search\Query\Singles\BoolQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\BoostingQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\ConstantScoreQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\CustomBoostFactorQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\CustomScoreQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\DismaxQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\FilteredQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\FuzzyDateQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\FuzzyLikeThisQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\FuzzyNumericQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\FuzzyQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\HasChildQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\IdsQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\IndicesQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\MatchAllQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\MoreLikeThisQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\NestedQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\PrefixQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\QueryStringQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\RangeQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SpanFirstQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SpanNearQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SpanNotQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SpanOrQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\SpanTermQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\Term\TermQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\Terms\TermsQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\TextPhrasePrefixQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\TextPhraseQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\TextQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\TopChildrenQueryJson.cs" />
+    <Compile Include="Search\Query\Singles\WildcardQueryJson.cs" />
+    <Compile Include="Search\Query\BoolCombinations\BoolCombinationTests.cs" />
+    <Compile Include="Search\Query\Bool\StaticBoolQueryTests.cs" />
+    <Compile Include="Search\Query\InsideBoolCalls\InsideBoolCallsTests.cs" />
+    <Compile Include="Search\ScriptFields\ScriptFieldTests.cs" />
+    <Compile Include="Search\SearchOptions\SearchOptionTests.cs" />
+    <Compile Include="Search\SearchType\ScriptFieldTests.cs" />
+    <Compile Include="Internals\Serialize\SerializeTests.cs" />
+    <Compile Include="Search\Sort\FunctionScoreTests.cs" />
+    <Compile Include="Search\Sort\SortTests.cs" />
+    <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
+    <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
+    <Compile Include="Search\Suggest\TermSuggestTests.cs" />
+    <Compile Include="Settings\UsePrettyResponseTests.cs" />
+    <Compile Include="Test.Designer.cs">
+      <DependentUpon>Test.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TestElasticClient.cs" />
+    <Compile Include="Core\Update\UpdateTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Core\Bulk\BulkOperations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Bulk\BulkUpdateDetails.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Indices\Analysis\Tokenizers\TestTokenizers.json" />
+    <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\AnalyzerField\AnalyzerFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\BoostField\BoostFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\BoostField\BoostFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\DynamicTemplates\MultipleTemplates.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\BooleanProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\BinaryProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\AttachmentProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\GeoShapeProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\GeoPointProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\IPProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\MultiFieldProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\NestedObjectProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\ObjectProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\DateProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\NumberProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Properties\StringProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\DynamicTemplates\CompletelyGenericTemplate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\DynamicTemplates\MultiFieldWithGenericTypes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\MetaField\MetaFieldSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TtlField\TtlFieldSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TimestampField\TimestampFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TimestampField\TimestampFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\RoutingField\RoutingFieldUsingExpression.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\RoutingField\RoutingFieldUsingString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TypeField\TypeFieldSerializesNo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\TypeField\TypeFieldSerializesYes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\SourceField\SourceFieldSerializesFully.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\IdField\IdFieldSerializesFully.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\RootProperties\RootPropertiesShouldSerialize.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\MoreLikeThis\SearchBodyEndsUpInPost.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\AttributeBasedMap\TestDeepObjectResursiveWriter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\AttributeBasedMap\TestDeepObjectWriter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\MultiSearch\MultiSearchRespectsSearchTypePreferenceAndRouting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\UpdateSettings\AllUpdateSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\UpdateSettings\CanSpecifyNewAnalysisSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpsertUsingScriptAndPartialObject.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpdateUsingPartial.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Update\UpsertUsingScript.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Serialize\ClassWithCollectionSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Serialize\OptOutDuringIndexing.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Serialize\OptOutDuringMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinTermIntoMustStrictFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOp.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOpNew.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQueryInverse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinMustNotIntoMustStrictQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinMustNotIntoMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinIntoMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoStrictMustQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatchPercentage.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoShouldQueryWithMinimumMatch.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldJoinIntoNonStrictShouldQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoStrictShouldQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoNonStrictShouldFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinMustNotIntoMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictMustFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictShouldFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilterInverse.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
+    <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
+    <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />
+    <None Include="Search\Query\Singles\Term\DateTimeWithCustomStringValue.json" />
+    <None Include="Search\Query\Singles\Term\DateTimeToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\LongToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\FloatToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\DoubleToStringTest.json" />
+    <None Include="Search\Query\Singles\Term\IntToStringTest.json" />
+    <None Include="Search\Rescore\RescoreSerializes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\CombineNotAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\CombineNotAndShould.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\ForceBranchAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\ForceBranchOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\OrSimpleLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\OrWithExists.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\OrWithExistsLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\OrWithExistsLambdaSimple.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\RandomOrderAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolCombinations\RandomOrderOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetDateHistogramFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetFilterOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetGeoDistanceFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetHistogramFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetQueryFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetRangeFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetStatisticalFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetTermFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\BoolFiltersInFacets\FacetTermsStatsFilter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\BranchLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\SearchDescriptorPicksUpBaseFilterTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\SearchDescriptorPicksUpBaseFilterWithinComplexLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\SearchDescriptorPicksUpBaseFilterWithinLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\StaticBoolAssignMultipleOrCombineWithAndTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\StaticBoolAssignMultipleOrTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\StaticBoolAssignMultipleTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\StaticBoolAssignNotTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\StaticBoolAssignTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\Bool\StaticBoolTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\ConditionlessBool\Combination1.json" />
+    <None Include="Search\Filter\ConditionlessBool\Combination2.json" />
+    <None Include="Search\Filter\ConditionlessBool\Combination3.json" />
+    <None Include="Search\Filter\ConditionlessBool\MatchAll.json" />
+    <None Include="Search\Filter\ConditionlessBool\MyTerm.json" />
+    <None Include="Search\Filter\ConditionlessBool\MyTermNot.json" />
+    <None Include="Search\Filter\ConditionlessBool\MyTermsAnd.json" />
+    <None Include="Search\Filter\ConditionlessBool\MyTermsNot.json" />
+    <None Include="Search\Filter\ConditionlessBool\MyTermsOr.json" />
+    <None Include="Search\Filter\ConditionLess\MatchAll.json" />
+    <None Include="Search\Filter\FilterCalls\AndFilterCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\AndFilterMultipleCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\NotFilterCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\OrFilterCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FilterCalls\OrFilterMultipleCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\FiltersInQueries\ConstantScoreQueryCombines.json" />
+    <None Include="Search\Filter\FiltersInQueries\FilteredQueryCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\InsideBoolCalls\InsideMust.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\InsideBoolCalls\InsideMustNot.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Filter\InsideBoolCalls\InsideShould.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\CombineNotAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\CombineNotAndShould.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\OrWithQueryStringLambdaSimple.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\OrSimpleLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\OrWithQueryStringLambda.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\OrWithQueryString.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\RandomOrderOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\RandomOrderAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\ForceBranchAnd.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\BoolCombinations\ForceBranchOr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\BranchLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\BranchLambdaTestConditional.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\StaticBoolAssignNotTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\SearchDescriptorPicksUpBaseQueryWithinComplexLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\SearchDescriptorPicksUpBaseQueryWithinLambdaTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\SearchDescriptorPicksUpBaseQueryTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\StaticBoolAssignMultipleOrCombineWithAndTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\StaticBoolAssignMultipleOrTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\StaticBoolAssignMultipleTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\StaticBoolAssignTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\Bool\StaticBoolTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionlessBool\Combination1.json" />
+    <None Include="Search\Query\ConditionlessBool\Combination2.json" />
+    <None Include="Search\Query\ConditionlessBool\Combination3.json" />
+    <None Include="Search\Query\ConditionlessBool\MyTermsNot.json" />
+    <None Include="Search\Query\ConditionlessBool\MyTermsOr.json" />
+    <None Include="Search\Query\ConditionlessBool\MyTermsAnd.json" />
+    <None Include="Search\Query\ConditionlessBool\MyTermNot.json" />
+    <None Include="Search\Query\ConditionlessBool\MyTerm.json" />
+    <None Include="Search\Query\ConditionlessBool\MatchAll.json" />
+    <None Include="Search\Query\ConditionLess\MatchAll.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\ConditionLessStrict\MatchAll.json" />
+    <None Include="Search\Query\InsideBoolCalls\InsideMust.json" />
+    <None Include="Search\Query\InsideBoolCalls\InsideMustNot.json" />
+    <None Include="Search\Query\InsideBoolCalls\InsideShould.json" />
+    <None Include="Search\Query\QueriesInQueries\CustomBoostFactorQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\IndicesNoMatchAlternateQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\IndicesAlternateChildQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\TopChildrenQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\NestedQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\IndicesQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\IndicesNoMatchQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\HasChildQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\FilteredQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\DismaxQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\CustomScoreQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\BoostingQuery.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\QueriesInQueries\ConstantScore.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\UpdateQuery\FilteredQueryCombines.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Query\UpdateQuery\FilteredQueryCombinesUsingStatic.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\SearchType\SearchTypeDoesNotPolluteQueryObject.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Internals\Serialize\SimpleClassUsesCamelCase.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\Sort\RandomScriptSort.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Test.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Test.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Search\Query\Singles\Terms\TermsOfTypeInt.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
+      <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
+      <Name>Nest.Tests.MockData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Nest\Nest.csproj">
+      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Name>Nest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Search\ScriptFields\TestScriptFields.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

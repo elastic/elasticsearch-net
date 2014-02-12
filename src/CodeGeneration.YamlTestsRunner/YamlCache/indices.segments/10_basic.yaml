@@ -1,6 +1,0 @@
----
-"segments test":
-  - do:
-      indices.segments: {}
-  
-  - is_true: ok
