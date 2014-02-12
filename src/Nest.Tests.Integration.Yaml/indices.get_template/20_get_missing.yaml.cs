@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 				this.Skip("0 - 0.90.2", "Missing templates throw 404 from 0.90.3");
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplate("test"));
+				this.Do(()=> this._client.IndicesGetTemplate("test"), shouldCatch: @"missing");
 
 			}
 		}

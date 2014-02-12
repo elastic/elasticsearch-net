@@ -60,7 +60,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 				this.IsMatch(_response.fields._routing, 5);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1"));
+				this.Do(()=> this._client.Get("test_1", "test", "1"), shouldCatch: @"missing");
 
 			}
 		}

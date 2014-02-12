@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Yaml.Mget
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> this._client.MgetPost(_body), shouldCatch: @"/ActionRequestValidationException.+ id is missing/");
 
 				//do mget 
 				_body = new {
@@ -53,17 +53,17 @@ namespace Nest.Tests.Integration.Yaml.Mget
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> this._client.MgetPost(_body), shouldCatch: @"/ActionRequestValidationException.+ index is missing/");
 
 				//do mget 
 				_body = new {
 					docs= new dynamic[] {}
 				};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> this._client.MgetPost(_body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
 
 				//do mget 
 				_body = new {};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> this._client.MgetPost(_body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
 
 				//do mget 
 				_body = new {

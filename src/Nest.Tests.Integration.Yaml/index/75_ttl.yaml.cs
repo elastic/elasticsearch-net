@@ -103,7 +103,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("ttl", @"20s")
 					.Add("timestamp", @"2013-06-23T18:14:40")
-				));
+				), shouldCatch: @"/AlreadyExpiredException/");
 
 			}
 		}

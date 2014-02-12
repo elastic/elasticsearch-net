@@ -73,7 +73,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("parent", 5)
-				));
+				), shouldCatch: @"missing");
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv

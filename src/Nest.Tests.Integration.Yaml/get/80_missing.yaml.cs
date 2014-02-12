@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Get
 			{	
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1"));
+				this.Do(()=> this._client.Get("test_1", "test", "1"), shouldCatch: @"missing");
 
 			}
 		}

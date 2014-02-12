@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_index", "not_test_type"));
+				this.Do(()=> this._client.IndicesGetMapping("test_index", "not_test_type"), shouldCatch: @"missing");
 
 			}
 		}

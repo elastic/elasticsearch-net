@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("version_type", @"external")
 					.Add("version", 5)
 					.Add("op_type", @"create")
-				));
+				), shouldCatch: @"conflict");
 
 				//do create 
 				_body = new {
@@ -53,7 +53,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("version_type", @"external")
 					.Add("version", 6)
 					.Add("op_type", @"create")
-				));
+				), shouldCatch: @"conflict");
 
 			}
 		}

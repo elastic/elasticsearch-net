@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
@@ -31,14 +33,38 @@ namespace Nest.Tests.Integration.Yaml
 			_client = new RawElasticClient(settings);
 
 			_client.IndicesDelete(d => d.MasterTimeout("1m").Timeout("1m"));
+			_client.IndicesDeleteTemplate("*");
 			var info = _client.InfoGet().Deserialize<dynamic>();
 			string version = info.version.number;
 			this._versionNumber = new Version(version);
 		}
 
-		protected void Do(Func<ConnectionStatus> action)
+		protected void Do(Func<ConnectionStatus> action, string shouldCatch = null)
 		{
 			this._status = action();
+			if (shouldCatch == "missing")
+			{
+				Assert.NotNull(this._status.Error, "call specified missing is expected");
+				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.NotFound, "call specified missing (404) is expected");
+			}
+			else if (shouldCatch == "conflict")
+			{
+				Assert.NotNull(this._status.Error, "call specified conflict is expected");
+				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.Conflict, "call specified conflict (409) is expected");
+				
+			}
+			else if (shouldCatch == "forbidden")
+			{
+				Assert.NotNull(this._status.Error, "call specified forbidden is expected");
+				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.Forbidden, "call specified conflict (403) is expected");
+				
+			}
+			else if (shouldCatch != null && shouldCatch.StartsWith("/"))
+			{
+				var re = shouldCatch.Trim('/');
+				Assert.IsTrue(Regex.IsMatch(this._status.Result, re),
+					"response does not match regex: " + shouldCatch);
+			}
 			this._response = this._status.Deserialize<dynamic>();
 			this._responseDictionary = this._status.Deserialize<Dictionary<string, object>>();
 		}

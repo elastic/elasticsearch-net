@@ -133,11 +133,11 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				_body = new {
 					ids= new string[] {}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body));
+				this.Do(()=> this._client.MgetPost("test_1", _body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
 
 				//do mget 
 				_body = new {};
-				this.Do(()=> this._client.MgetPost("test_1", _body));
+				this.Do(()=> this._client.MgetPost("test_1", _body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
 
 			}
 		}

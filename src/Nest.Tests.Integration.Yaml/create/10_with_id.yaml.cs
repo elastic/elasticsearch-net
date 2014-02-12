@@ -71,7 +71,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("op_type", @"create")
-				));
+				), shouldCatch: @"conflict");
 
 			}
 		}

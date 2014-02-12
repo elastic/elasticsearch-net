@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesStatus
 				this.IsTrue(_response.ok);
 
 				//do indices.status 
-				this.Do(()=> this._client.IndicesStatusGet("not_here"));
+				this.Do(()=> this._client.IndicesStatusGet("not_here"), shouldCatch: @"missing");
 
 			}
 		}

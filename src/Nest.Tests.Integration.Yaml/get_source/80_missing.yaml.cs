@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
 
 				//do get_source 
-				this.Do(()=> this._client.GetSource("test_1", "test", "1"));
+				this.Do(()=> this._client.GetSource("test_1", "test", "1"), shouldCatch: @"missing");
 
 			}
 		}

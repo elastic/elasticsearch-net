@@ -55,7 +55,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("parent", 5)
 					.Add("routing", 1)
-				));
+				), shouldCatch: @"missing");
 
 				//do delete 
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv

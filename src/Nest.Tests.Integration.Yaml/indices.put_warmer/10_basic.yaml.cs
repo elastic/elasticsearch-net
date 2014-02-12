@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"));
+				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"), shouldCatch: @"missing");
 
 				//do indices.put_warmer 
 				_body = new {
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				this.IsTrue(_response.ok);
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"));
+				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"), shouldCatch: @"missing");
 
 			}
 		}

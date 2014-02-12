@@ -97,13 +97,13 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body), shouldCatch: @"/script_lang not supported \[doesnotexist\]/");
 
 				//do update 
 				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", null, nv=>nv
 					.Add("lang", @"doesnotexist")
 					.Add("script", 1)
-				));
+				), shouldCatch: @"/script_lang not supported \[doesnotexist\]/");
 
 			}
 		}

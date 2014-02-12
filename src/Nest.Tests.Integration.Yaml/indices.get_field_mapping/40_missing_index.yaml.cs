@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				this.Skip("0 - 0.90.5", "get field mapping was added in 0.90.6");
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "type", "field"));
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "type", "field"), shouldCatch: @"missing");
 
 			}
 		}

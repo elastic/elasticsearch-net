@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
 					.Add("version_type", @"external")
 					.Add("version", 4)
-				));
+				), shouldCatch: @"conflict");
 
 				//do delete 
 				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv

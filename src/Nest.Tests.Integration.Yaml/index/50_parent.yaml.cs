@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body), shouldCatch: @"/RoutingMissingException/");
 
 				//do index 
 				_body = new {
@@ -72,7 +72,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 				this.IsMatch(_response.fields._routing, 5);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1"));
+				this.Do(()=> this._client.Get("test_1", "test", "1"), shouldCatch: @"missing");
 
 			}
 		}

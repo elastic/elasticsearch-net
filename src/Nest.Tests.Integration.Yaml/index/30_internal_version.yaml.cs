@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Index
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
 					.Add("version", 1)
-				));
+				), shouldCatch: @"conflict");
 
 				//do index 
 				_body = new {

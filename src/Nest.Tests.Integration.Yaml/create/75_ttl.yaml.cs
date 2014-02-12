@@ -117,7 +117,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 					.Add("ttl", @"20s")
 					.Add("timestamp", @"2013-06-23T18:14:40")
 					.Add("op_type", @"create")
-				));
+				), shouldCatch: @"/AlreadyExpiredException/");
 
 			}
 		}

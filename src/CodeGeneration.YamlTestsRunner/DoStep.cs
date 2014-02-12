@@ -86,7 +86,10 @@ namespace CodeGeneration.YamlTestsRunner
 			}
 
 			s += string.Join(", ", args);
-			s += "));";
+			s += ")";
+			if (!string.IsNullOrEmpty(this.Catch))
+				s += ", shouldCatch: " + this.Catch.ToStringRepresentation();
+			s += ");";
 			return s;
 		}
 

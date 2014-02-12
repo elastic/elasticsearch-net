@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen
 				this.Do(()=> this._client.IndicesClosePost("test_index"));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index"));
+				this.Do(()=> this._client.SearchGet("test_index"), shouldCatch: @"forbidden");
 
 				//do indices.open 
 				this.Do(()=> this._client.IndicesOpenPost("test_index"));

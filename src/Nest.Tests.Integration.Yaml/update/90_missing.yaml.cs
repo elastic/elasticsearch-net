@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body), shouldCatch: @"missing");
 
 				//do update 
 				_body = new {
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						bar= "xxx"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body), shouldCatch: @"missing");
 
 				//do update 
 				_body = new {

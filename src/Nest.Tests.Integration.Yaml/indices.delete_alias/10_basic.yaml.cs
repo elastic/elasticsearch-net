@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 				this.Do(()=> this._client.IndicesDeleteAlias("testind", "testali"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAlias("testind", "testali"));
+				this.Do(()=> this._client.IndicesGetAlias("testind", "testali"), shouldCatch: @"missing");
 
 			}
 		}
