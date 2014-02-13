@@ -29,8 +29,8 @@ namespace Nest
 
 			this.Settings = settings;
 			this.Connection = connection ?? new Connection(settings);
-			this.Serializer = serializer ?? new ElasticSerializer(settings);
-			this.Serializer = new ElasticSerializer(this.Settings);
+			this.Serializer = serializer ?? new NestSerializer(settings);
+			this.Serializer = new NestSerializer(this.Settings);
 			this.Infer = new ElasticInferrer(this.Settings);
 		}
 

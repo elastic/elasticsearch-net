@@ -121,7 +121,7 @@ namespace Nest.Resolvers.Converters
 
 				if (concreteTypeSelector != null)
 				{
-					var elasticSerializer = new ElasticSerializer(this._settings);
+					var elasticSerializer = new NestSerializer(this._settings);
 					var state = typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector) as JsonConverter;
 					if (state != null)
 					{

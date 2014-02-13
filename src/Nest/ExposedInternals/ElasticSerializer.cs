@@ -25,16 +25,45 @@ namespace Nest
 	{
 		T Deserialize<T>(byte[] bytes) where T : class;
 		byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented);
+
 	}
 
 
-	public class ElasticSerializer : IElasticsearchSerializer
+	public interface INestSerializer : IElasticsearchSerializer
+	{
+		/// <summary>
+		/// Deserialize an object 
+		/// </summary>
+		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse type this controls whether a 404 is a valid response</param>
+		T Deserialize<T>(string value, bool notFoundIsValidResponse = false) where T : class;
+
+		T Deserialize<T>(ConnectionStatus value, bool notFoundIsValidResponse = false) where T : class;
+		IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> originalSearchDescriptor)
+			where TResult : class
+			where T : class;
+
+		string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor);
+
+		/// <summary>
+		/// _msearch needs a specialized json format in the body
+		/// </summary>
+		string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor);
+
+		TemplateResponse DeserializeTemplateResponse(ConnectionStatus c, GetTemplateDescriptor d);
+		GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c);
+		MultiGetResponse DeserializeMultiGetResponse(ConnectionStatus c, MultiGetDescriptor d);
+		MultiSearchResponse DeserializeMultiSearchResponse(ConnectionStatus c, MultiSearchDescriptor d);
+		WarmerResponse DeserializeWarmerResponse(ConnectionStatus connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
+		IndexSettingsResponse DeserializeIndexSettingsResponse(ConnectionStatus status);
+	}
+
+	public class NestSerializer : INestSerializer
 	{
 		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(() => new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 		private readonly IConnectionSettings _settings;
 		private readonly JsonSerializerSettings _serializationSettings;
 
-		public ElasticSerializer(IConnectionSettings settings)
+		public NestSerializer(IConnectionSettings settings)
 		{
 			this._settings = settings;
 			this._serializationSettings = this.CreateSettings();
@@ -66,12 +95,12 @@ namespace Nest
 			return r;
 		}
 
-		public T Deserialize<T>(byte[] bytes) where T : class
+		public virtual T Deserialize<T>(byte[] bytes) where T : class
 		{
 			return this.Deserialize<T>(bytes.Utf8String());
 		}
 
-		public byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public virtual byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			var format = formatting == SerializationFormatting.None ? Formatting.None : Formatting.Indented;
 			var serialized = JsonConvert.SerializeObject(data, format, this._serializationSettings);
@@ -82,11 +111,14 @@ namespace Nest
 		/// Deserialize an object 
 		/// </summary>
 		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse type this controls whether a 404 is a valid response</param>
-		public T Deserialize<T>(object value, IList<JsonConverter> extraConverters = null, bool notFoundIsValidResponse = false) where T : class
+		public T Deserialize<T>(string value, bool notFoundIsValidResponse = false) where T : class
 		{
-			return this.DeserializeInternal<T>(value, null, extraConverters, notFoundIsValidResponse);
+			return this.DeserializeInternal<T>(value, null, null, notFoundIsValidResponse);
 		}
-
+		public T Deserialize<T>(ConnectionStatus value, bool notFoundIsValidResponse = false) where T : class
+		{
+			return this.DeserializeInternal<T>(value, null, null, notFoundIsValidResponse);
+		}
 		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> originalSearchDescriptor)
 			where TResult : class
 			where T : class
@@ -349,7 +381,7 @@ namespace Nest
 			try
 			{
 				var settingsContainer = SettingsContainer(status);
-				response.Settings = this.Deserialize<IndexSettings>(settingsContainer);
+				response.Settings = settingsContainer.ToObject<IndexSettings>();
 				response.IsValid = true;
 			}
 			// ReSharper disable once EmptyGeneralCatchClause

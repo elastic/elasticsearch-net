@@ -16,7 +16,7 @@ namespace Nest
 		internal RawDispatch RawDispatch { get; set; }
 
 		public IConnection Connection { get; protected set; }
-		public ElasticSerializer Serializer { get; protected set; }
+		public NestSerializer Serializer { get; protected set; }
 		public IRawElasticClient Raw { get; protected set; }
 		public ElasticInferrer Infer { get; protected set; }
 
@@ -34,7 +34,7 @@ namespace Nest
 			this._connectionSettings = settings;
 			this.Connection = connection;
 
-			this.Serializer = new ElasticSerializer(this._connectionSettings);
+			this.Serializer = new NestSerializer(this._connectionSettings);
 			this.Raw = new RawElasticClient(this._connectionSettings, connection);
 			this.RawDispatch = new RawDispatch(this.Raw);
 			this.Infer = new ElasticInferrer(this._connectionSettings);
