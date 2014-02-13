@@ -19,7 +19,7 @@ namespace Nest
 		internal double? Boost { get; set; }
 
 		internal bool IsConditionless { get { return this.Value == null || this.Value.ToString().IsNullOrEmpty() || this.Field.IsConditionless(); } }	
-		IDictionary<object, object> ICustomJson.GetCustomJson()
+		object ICustomJson.GetCustomJson()
 		{
 			return new Dictionary<object, object>
 			{

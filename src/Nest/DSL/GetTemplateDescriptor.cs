@@ -12,7 +12,6 @@ using Nest.Domain;
 namespace Nest
 {
 	[DescriptorFor("IndicesGetTemplate")]
-	[JsonConverter(typeof(ActAsQueryConverter))]
 	public partial class GetTemplateDescriptor :
 		NamePathDescriptor<GetTemplateDescriptor, GetTemplateQueryString>
 		, IPathInfo<GetTemplateQueryString>
@@ -24,6 +23,6 @@ namespace Nest
 
 			return pathInfo;
 		}
-
+		
 	}
 }

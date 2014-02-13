@@ -90,7 +90,7 @@ namespace Nest.DSL.Descriptors
 			return this;
 		}
 
-		IDictionary<object, object> ICustomJson.GetCustomJson()
+		object ICustomJson.GetCustomJson()
 		{
 			return new Dictionary<object, object>
 			{

@@ -17,7 +17,7 @@ namespace Nest
 		public RewriteMultiTerm? Rewrite { get; set; }
 
 
-		IDictionary<object, object> ICustomJson.GetCustomJson()
+		object ICustomJson.GetCustomJson()
 		{	
 			return new Dictionary<object, object>
 			{
