@@ -28,7 +28,7 @@ namespace Nest
 		public float Total { get; internal set; }
 
 		[JsonProperty(PropertyName = "total_count")]
-		public int TotalCount { get; internal set; }
+		public long TotalCount { get; internal set; }
 
 		[JsonProperty(PropertyName = "mean")]
 		public float? Mean { get; internal set; }

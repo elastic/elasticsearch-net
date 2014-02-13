@@ -27,7 +27,7 @@ namespace Nest
 		public double TotalTimeInMilliseconds { get; set; }
 
 		[JsonProperty(PropertyName = "total_docs")]
-		public int TotalDocuments { get; set; }
+		public long TotalDocuments { get; set; }
 		[JsonProperty(PropertyName = "total_size")]
 		public string TotalSize { get; set; }
 		[JsonProperty(PropertyName = "total_size_in_bytes")]

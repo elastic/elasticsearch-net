@@ -16,9 +16,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "index_time_in_millis")]
 		public double TimeInMilliseconds { get; set; }
 		[JsonProperty(PropertyName = "index_current")]
-		public int Current { get; set; }
+		public long Current { get; set; }
 		[JsonProperty(PropertyName = "delete_total")]
-		public int DeleteTotal { get; set; }
+		public long DeleteTotal { get; set; }
 		[JsonProperty(PropertyName = "delete_time")]
 		public string DeleteTime { get; set; }
 		[JsonProperty(PropertyName = "delete_time_in_millis")]

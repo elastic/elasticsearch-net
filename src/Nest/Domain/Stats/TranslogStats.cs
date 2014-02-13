@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class TranslogStats
-    {
-        [JsonProperty(PropertyName = "operations")]
-        public int Operations { get; set; }
-    }
+	public class TranslogStats
+	{
+		[JsonProperty(PropertyName = "operations")]
+		public long Operations { get; set; }
+	}
 }
