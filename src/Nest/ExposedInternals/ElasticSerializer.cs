@@ -40,7 +40,7 @@ namespace Nest
 
 			R r;
 			if (!isValid)
-				r = Activator.CreateInstance<R>();
+				r = (R)typeof (R).CreateInstance();
 			else
 				r = JsonConvert.DeserializeObject<R>(status.Result, jsonSettings);
 
