@@ -60,7 +60,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoPoco">
-      <HintPath>..\..\dep\autopoco\AutoPoco.dll</HintPath>
+      <HintPath>..\..\..\dep\AutoPoco.1.0.0.0\lib\AutoPoco.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

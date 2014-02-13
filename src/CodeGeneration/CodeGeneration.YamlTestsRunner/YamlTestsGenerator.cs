@@ -16,7 +16,6 @@ using FubuCsProjFile;
 using ShellProgressBar;
 using Xipton.Razor;
 using YamlDotNet;
-using YamlDotNet.Dynamic;
 using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
 

@@ -43,8 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration.Yaml
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.YamlTestsRunner", "CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj", "{04F53AA5-6346-4139-94CF-81BD8663875F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Serializer.ServiceStack.Text", "Nest.Serializer.ServiceStack.Text\Nest.Serializer.ServiceStack.Text.csproj", "{D8673DE3-97C5-4C0A-9BC5-CA940472B383}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeGeneration|Any CPU = CodeGeneration|Any CPU
@@ -200,21 +198,6 @@ Global
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Release|x86.ActiveCfg = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D8673DE3-97C5-4C0A-9BC5-CA940472B383}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

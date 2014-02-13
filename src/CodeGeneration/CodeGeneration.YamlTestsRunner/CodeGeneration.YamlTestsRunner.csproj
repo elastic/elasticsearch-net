@@ -33,20 +33,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CsQuery">
-      <HintPath>..\..\dep\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
+      <HintPath>..\..\..\dep\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
     </Reference>
     <Reference Include="FubuCore">
-      <HintPath>..\..\dep\FubuCore.1.0.0.225\lib\FubuCore.dll</HintPath>
+      <HintPath>..\..\..\dep\FubuCore.1.0.0.225\lib\FubuCore.dll</HintPath>
     </Reference>
     <Reference Include="FubuCsProjFile">
-      <HintPath>..\..\dep\FubuCsProjFile.1.1.0.83\lib\net40\FubuCsProjFile.dll</HintPath>
+      <HintPath>..\..\..\dep\FubuCsProjFile.1.1.0.83\lib\net40\FubuCsProjFile.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq">
+      <HintPath>..\..\..\dep\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\dep\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\dep\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ShellProgressBar">
-      <HintPath>..\..\dep\ShellProgressBar.1.0.0.0\lib\NET4\ShellProgressBar.dll</HintPath>
+      <HintPath>..\..\..\dep\ShellProgressBar.1.0.0.0\lib\NET4\ShellProgressBar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,18 +57,15 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\..\dep\RazorMachine.2.5\lib\net40\System.Web.Razor.dll</HintPath>
+      <HintPath>..\..\..\dep\RazorMachine.2.6.1\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Xipton.Razor">
-      <HintPath>..\..\dep\RazorMachine.2.5\lib\net40\Xipton.Razor.dll</HintPath>
+      <HintPath>..\..\..\dep\RazorMachine.2.6.1\lib\net40\Xipton.Razor.dll</HintPath>
     </Reference>
     <Reference Include="YamlDotNet">
-      <HintPath>..\..\dep\YamlDotNet.3.0.0\lib\net35\YamlDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="YamlDotNet.Dynamic">
-      <HintPath>..\..\dep\YamlDotNet.Dynamic.3.0.0\lib\net40\YamlDotNet.Dynamic.dll</HintPath>
+      <HintPath>..\..\..\dep\YamlDotNet.3.0.0\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +103,9 @@
     <None Include="Views\SetupClass.cshtml" />
     <None Include="Views\TestSuite.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="razormachine.readme.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
