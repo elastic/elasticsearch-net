@@ -24,13 +24,16 @@ namespace Profiling.Indexing
 			double httpRate = RunTest<HttpTester>(HTTP_PORT);
 			var threadCountHttp = process.Threads.Count;
 			var memorySizeHttp = process.VirtualMemorySize64;
-
-			//double thriftRate = RunTest<ThriftTester>(THRIFT_PORT);
-
+			
+			double httpSsRate = RunTest<HttpSSTextTester>(HTTP_PORT);
+			var threadCountSsHttp = process.Threads.Count;
+			var memorySizeSsHttp = process.VirtualMemorySize64;
 			Console.WriteLine();
 			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
 				, httpRate, threadCountHttp, memorySizeHttp);
-
+			
+			Console.WriteLine("HTTP SS TEXT (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
+				, httpSsRate, threadCountSsHttp, memorySizeSsHttp);
 			Console.ReadLine();
 		}
 

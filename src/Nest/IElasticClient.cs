@@ -9,7 +9,7 @@ namespace Nest
 	public interface IElasticClient
 	{
 		IConnection Connection { get; }
-		NestSerializer Serializer { get;  }
+		INestSerializer Serializer { get;  }
 		IRawElasticClient Raw { get; }
 		ElasticInferrer Infer { get; }
 
