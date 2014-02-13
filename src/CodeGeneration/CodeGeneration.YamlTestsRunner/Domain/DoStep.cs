@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using YamlDotNet.Dynamic;
 
 namespace CodeGeneration.YamlTestsRunner.Domain
 {
@@ -17,7 +16,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 		{
 			get
 			{
-				if (!_rawElasticSearchCall.IsNullOrEmpty())
+				if (!string.IsNullOrWhiteSpace(_rawElasticSearchCall))
 					return _rawElasticSearchCall;
 				_rawElasticSearchCall = FindBestRawElasticSearchMatch();
 				return _rawElasticSearchCall;

@@ -1,4 +1,4 @@
-Xipton.Razor v2.5
+Xipton.Razor v2.6.1
 
 The web.config configuration file only is for activating Razor intellisense inside Razor templates, within non MVC projects. Note that for being able to use Razor intellisense MVC 3 or MVC 4 need to be installed on your system. MVC is not needed for compiling Xipton.Razor templates.
   
@@ -12,7 +12,7 @@ If you work with Xipton.Razor together with MVC, then you use your MVC project's
 <system.web>
   <compilation targetFramework="4.0">
     <assemblies>
-      <add assembly="Xipton.Razor, Version=2.5.0.0, Culture=neutral, PublicKeyToken=563e02c711ac8b7e" />
+      <add assembly="Xipton.Razor, Version=2.6.1.0, Culture=neutral, PublicKeyToken=563e02c711ac8b7e" />
     </assemblies>
   </compilation>
 </system.web>
