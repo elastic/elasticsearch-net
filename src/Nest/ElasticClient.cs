@@ -29,7 +29,7 @@ namespace Nest
 			this.Connection = connection ?? new Connection(settings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			this.Raw = new RawElasticClient(this._connectionSettings, connection);
+			this.Raw = new RawElasticClient(this._connectionSettings, this.Connection, this.Serializer);
 			this.RawDispatch = new RawDispatch(this.Raw);
 			this.Infer = new ElasticInferrer(this._connectionSettings);
 
