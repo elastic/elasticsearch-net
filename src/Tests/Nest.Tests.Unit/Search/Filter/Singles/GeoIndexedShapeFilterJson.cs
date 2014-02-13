@@ -29,7 +29,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 							indexed_shape: {
 								id: ""1"",
 								type: ""elasticsearchprojects"",
-								index: ""mydefaultindex"",
+								index: ""nest_test_data"",
 								shape_field_name: ""myGeoShape""
 							}
 						},

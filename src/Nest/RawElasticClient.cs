@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Text;
 using System.Threading.Tasks;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Converters;
@@ -15,22 +17,19 @@ namespace Nest
 	{
 		public IConnection Connection { get; protected set; }
 		public IConnectionSettings Settings { get; protected set; }
-		public ElasticSerializer Serializer { get; protected set; }
+		public IElasticsearchSerializer Serializer { get; protected set; }
 		public ElasticInferrer Infer { get; protected set; }
 
-		public RawElasticClient(IConnectionSettings settings)
-			: this(settings, new Connection(settings))
-		{
 
-		}
 
-		public RawElasticClient(IConnectionSettings settings, IConnection connection)
+		public RawElasticClient(IConnectionSettings settings, IConnection connection = null, IElasticsearchSerializer serializer = null)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
 			this.Settings = settings;
-			this.Connection = connection;
+			this.Connection = connection ?? new Connection(settings);
+			this.Serializer = serializer ?? new ElasticSerializer(settings);
 			this.Serializer = new ElasticSerializer(this.Settings);
 			this.Infer = new ElasticInferrer(this.Settings);
 		}
@@ -69,20 +68,31 @@ namespace Nest
 			var pn = o as PropertyPathMarker;
 			if (pn != null)
 				return this.Infer.PropertyPath(pn);
-			
+
 			var pns = o as IEnumerable<PropertyPathMarker>;
 			if (pns != null)
-				return string.Join(",", pns.Select(p=>this.Infer.PropertyPath(p)));
+				return string.Join(",", pns.Select(p => this.Infer.PropertyPath(p)));
 
-
+			//TODO: is this neccessarys
 			var e = o as Enum;
-			if (e != null)
-				return this.Serializer.Serialize(o).Trim(new [] { '"' } );
-
-			return this.Serializer.Serialize(o);
+			if (e != null) return GetEnumMemberValue(e);
+			if (o is bool)
+				return ((bool) o) ? "true" : "false";
+			//var serialized = this.Serializer.Serialize(o);
+			return o.ToString();
 		}
 
+		public static string GetEnumMemberValue(Enum enumValue)
+		{
+			var type = enumValue.GetType();
+			var info = type.GetField(enumValue.ToString());
+			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
 
+			if (da.Length > 0)
+				return da[0].Value;
+			else
+				return string.Empty;
+		}
 		protected ConnectionStatus DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
 			if (queryString != null)
@@ -95,7 +105,7 @@ namespace Nest
 				case "post": return this.Connection.PostSync(path, postData);
 				case "put": return this.Connection.PutSync(path, postData);
 				case "delete":
-					return string.IsNullOrWhiteSpace(postData)
+					return postData == null || postData.Length == 0
 						? this.Connection.DeleteSync(path)
 						: this.Connection.DeleteSync(path, postData);
 				case "head": return this.Connection.HeadSync(path);
@@ -107,20 +117,20 @@ namespace Nest
 			throw new DslException("Unknown HTTP method " + method);
 		}
 
-		private string PostData(object data)
+		private byte[] PostData(object data)
 		{
-			var postData = string.Empty;
 			var s = data as string;
 			if (s != null)
-				 return s;
-			if (data == null) return postData;
+				return s.Utf8Bytes();
+			if (data == null) return null;
 			var ss = data as IEnumerable<string>;
 			if (ss != null)
-				return string.Join("\n", ss) + "\n";
+				return (string.Join("\n", ss) + "\n").Utf8Bytes();
 			var so = data as IEnumerable<object>;
-			return so != null 
-				? string.Join("\n", so.Select(soo=>this.Serializer.Serialize(soo, Formatting.None))) + "\n"
-				: this.Serializer.Serialize(data);
+			if (so == null)
+				return this.Serializer.Serialize(data);
+			var joined = string.Join("\n", so.Select(soo => this.Serializer.Serialize(soo, SerializationFormatting.None))) + "\n";
+			return joined.Utf8Bytes();
 		}
 
 		protected Task<ConnectionStatus> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
@@ -135,7 +145,7 @@ namespace Nest
 				case "post": return this.Connection.Post(path, postData);
 				case "put": return this.Connection.Put(path, postData);
 				case "delete":
-					return string.IsNullOrWhiteSpace(postData)
+					return postData == null || postData.Length == 0
 						? this.Connection.Delete(path)
 						: this.Connection.Delete(path, postData);
 				case "head": return this.Connection.Head(path);

@@ -26,16 +26,16 @@ namespace Nest
 			this._fixedResult = fixedResult;
 		}
 
-		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
+		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, byte[] data = null)
 		{
 			return this.ReturnConnectionStatus(request, data);
 		}
 
-		private ConnectionStatus ReturnConnectionStatus(HttpWebRequest request, string data)
+		private ConnectionStatus ReturnConnectionStatus(HttpWebRequest request, byte[] data)
 		{
 			var cs = this._fixedResult ?? new ConnectionStatus(this._ConnectionSettings, "{ \"USING NEST IN MEMORY CONNECTION\"  : null }")
 			{
-				Request = data,
+				Request = data.Utf8String(),
 				RequestUrl = request.RequestUri.ToString(),
 				RequestMethod = request.Method
 			};
@@ -43,7 +43,7 @@ namespace Nest
 			return cs;
 		}
 
-		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
+		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, byte[] data = null)
 		{
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
 			{

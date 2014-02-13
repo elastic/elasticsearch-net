@@ -12,6 +12,15 @@ namespace Nest
 {
 	internal static class Extensions
 	{
+		internal static string Utf8String(this byte[] bytes)
+		{
+			return bytes == null ? null : Encoding.UTF8.GetString(bytes);
+		}
+		internal static byte[] Utf8Bytes(this string s)
+		{
+			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
+		}
+
 		internal static string ToCamelCase(this string s)
 		{
 			if (string.IsNullOrEmpty(s))

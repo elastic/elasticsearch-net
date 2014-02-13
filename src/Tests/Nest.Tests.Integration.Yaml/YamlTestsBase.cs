@@ -127,7 +127,7 @@ namespace Nest.Tests.Integration.Yaml
 			else
 			{
 				var s = _client.Serializer.Serialize(o);
-				if (string.IsNullOrWhiteSpace(s))
+				if (s == null || s.Length == 0)
 					Assert.Fail(message);
 			}
 
@@ -173,7 +173,7 @@ namespace Nest.Tests.Integration.Yaml
 			else
 			{
 				var s = _client.Serializer.Serialize(o);
-				if (string.IsNullOrWhiteSpace(s))
+				if (s == null || s.Length == 0)
 					Assert.Fail(message);
 			}
 		}
@@ -264,7 +264,7 @@ namespace Nest.Tests.Integration.Yaml
 				{
 					var json = _client.Serializer.Serialize(value);
 					var nJson = JObject.Parse(s).ToString();
-					var nOtherJson = JObject.Parse(json).ToString();
+					var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
 					Assert.AreEqual(nJson, nOtherJson);
 				}
 				else Assert.AreEqual(s, v);

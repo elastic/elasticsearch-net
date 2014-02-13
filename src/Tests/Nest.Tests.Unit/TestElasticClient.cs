@@ -11,12 +11,12 @@ namespace Nest.Tests.Unit
 		public static ConnectionSettings Settings;
 		static TestElasticClient()
 		{
-			Settings = new ConnectionSettings(Test.Default.Uri,"mydefaultindex");
+			Settings = new ConnectionSettings(Test.Default.Uri,"nest_test_data");
 			Client = new ElasticClient(Settings);
 		}
-		public static string Serialize<T>(T obj)
+		public static string Serialize<T>(T obj) where T : class
 		{
-			return Client.Serializer.Serialize(obj);
+			return Encoding.UTF8.GetString(Client.Serializer.Serialize(obj));
 		}
 	}
 }

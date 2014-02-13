@@ -48,11 +48,11 @@ namespace Nest
 			return this.HeaderOnlyRequest(path, "HEAD");
 		}
 
-		public ConnectionStatus PostSync(string path, string data)
+		public ConnectionStatus PostSync(string path, byte[] data)
 		{
 			return this.BodyRequest(path, data, "POST");
 		}
-		public ConnectionStatus PutSync(string path, string data)
+		public ConnectionStatus PutSync(string path, byte[] data)
 		{
 			return this.BodyRequest(path, data, "PUT");
 		}
@@ -61,7 +61,7 @@ namespace Nest
 			var connection = this.CreateConnection(path, "DELETE");
 			return this.DoSynchronousRequest(connection);
 		}
-		public ConnectionStatus DeleteSync(string path, string data)
+		public ConnectionStatus DeleteSync(string path, byte[] data)
 		{
 			var connection = this.CreateConnection(path, "DELETE");
 			return this.DoSynchronousRequest(connection, data);
@@ -77,19 +77,19 @@ namespace Nest
 			var r = this.CreateConnection(path, "HEAD");
 			return this.DoAsyncRequest(r);
 		}
-		public Task<ConnectionStatus> Post(string path, string data)
+		public Task<ConnectionStatus> Post(string path, byte[] data)
 		{
 			var r = this.CreateConnection(path, "POST");
 			return this.DoAsyncRequest(r, data);
 		}
 
-		public Task<ConnectionStatus> Put(string path, string data)
+		public Task<ConnectionStatus> Put(string path, byte[] data)
 		{
 			var r = this.CreateConnection(path, "PUT");
 			return this.DoAsyncRequest(r, data);
 		}
 
-		public Task<ConnectionStatus> Delete(string path, string data)
+		public Task<ConnectionStatus> Delete(string path, byte[] data)
 		{
 			var r = this.CreateConnection(path, "DELETE");
 			return this.DoAsyncRequest(r, data);
@@ -118,7 +118,7 @@ namespace Nest
 			return this.DoSynchronousRequest(connection);
 		}
 
-		private ConnectionStatus BodyRequest(string path, string data, string method)
+		private ConnectionStatus BodyRequest(string path, byte[] data, string method)
 		{
 			var connection = this.CreateConnection(path, method);
 			return this.DoSynchronousRequest(connection, data);
@@ -171,7 +171,7 @@ namespace Nest
 			return myReq;
 		}
 
-		protected virtual ConnectionStatus DoSynchronousRequest(HttpWebRequest request, string data = null)
+		protected virtual ConnectionStatus DoSynchronousRequest(HttpWebRequest request, byte[] data = null)
 		{
 			using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
 			{
@@ -180,20 +180,20 @@ namespace Nest
 				{
 					using (var r = request.GetRequestStream())
 					{
-						byte[] buffer = Encoding.UTF8.GetBytes(data);
-						r.Write(buffer, 0, buffer.Length);
+						r.Write(data, 0, data.Length);
 					}
 				}
+				var requestData = data.Utf8String();
 				try
 				{
 					using (var response = (HttpWebResponse)request.GetResponse())
 					using (var responseStream = response.GetResponseStream())
 					using (var streamReader = new StreamReader(responseStream))
 					{
-						string result = streamReader.ReadToEnd();
+						var result = streamReader.ReadToEnd();
 						cs = new ConnectionStatus(this._ConnectionSettings, result)
 						{
-							Request = data,
+							Request = requestData,
 							RequestUrl = request.RequestUri.ToString(),
 							RequestMethod = request.Method
 						};
@@ -205,21 +205,19 @@ namespace Nest
 				{
 					cs = new ConnectionStatus(this._ConnectionSettings, webException)
 					{
-						Request = data,
+						Request = requestData,
 						RequestUrl = request.RequestUri.ToString(),
 						RequestMethod = request.Method
 					};
 					tracer.SetResult(cs);
-
 					_ConnectionSettings.ConnectionStatusHandler(cs);
-
 					return cs;
 				}
 			}
 
 		}
 
-		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, string data = null)
+		protected virtual Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, byte[] data = null)
 		{
 			var tcs = new TaskCompletionSource<ConnectionStatus>();
 			if (this._ConnectionSettings.MaximumAsyncConnections <= 0
@@ -250,13 +248,13 @@ namespace Nest
 			}
 		}
 
-		private Task<ConnectionStatus> CreateIterateTask(HttpWebRequest request, string data, TaskCompletionSource<ConnectionStatus> tcs)
+		private Task<ConnectionStatus> CreateIterateTask(HttpWebRequest request, byte[] data, TaskCompletionSource<ConnectionStatus> tcs)
 		{
 			this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
 			return tcs.Task;
 		}
 
-		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, string data = null)
+		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ConnectionStatus> tcs, byte[] data = null)
 		{
 			using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
 			{
@@ -273,8 +271,7 @@ namespace Nest
 					var requestStream = getRequestStream.Result;
 					try
 					{
-						byte[] buffer = Encoding.UTF8.GetBytes(data);
-						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, buffer, 0, buffer.Length, state);
+						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, state);
 						yield return writeToRequestStream;
 					}
 					finally
@@ -304,8 +301,13 @@ namespace Nest
 					}
 
 					// Decode the data and store the result
-					var result = Encoding.UTF8.GetString(output.ToArray());
-					var cs = new ConnectionStatus(this._ConnectionSettings, result) { Request = data, RequestUrl = request.RequestUri.ToString(), RequestMethod = request.Method };
+					var result = output.ToArray().Utf8String();
+					var cs = new ConnectionStatus(this._ConnectionSettings, result)
+					{
+						Request = data.Utf8String(),
+						RequestUrl = request.RequestUri.ToString(), 
+						RequestMethod = request.Method
+					};
 					tcs.TrySetResult(cs);
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);

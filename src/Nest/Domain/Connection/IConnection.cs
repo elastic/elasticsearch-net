@@ -11,16 +11,16 @@ namespace Nest
 		Task<ConnectionStatus> Head(string path);
 		ConnectionStatus HeadSync(string path);
 
-		Task<ConnectionStatus> Post(string path, string data);
-		ConnectionStatus PostSync(string path, string data);
+		Task<ConnectionStatus> Post(string path, byte[] data);
+		ConnectionStatus PostSync(string path, byte[] data);
 
-		Task<ConnectionStatus> Put(string path, string data);
-		ConnectionStatus PutSync(string path, string data);
+		Task<ConnectionStatus> Put(string path, byte[] data);
+		ConnectionStatus PutSync(string path, byte[] data);
 
 		Task<ConnectionStatus> Delete(string path);
 		ConnectionStatus DeleteSync(string path);
 
-		Task<ConnectionStatus> Delete(string path, string data);
-		ConnectionStatus DeleteSync(string path, string data);
+		Task<ConnectionStatus> Delete(string path, byte[] data);
+		ConnectionStatus DeleteSync(string path, byte[] data);
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -14,7 +15,20 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class ElasticSerializer
+	public enum SerializationFormatting
+	{
+		None,
+		Indented
+	}
+
+	public interface IElasticsearchSerializer
+	{
+		T Deserialize<T>(byte[] bytes) where T : class;
+		byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented);
+	}
+
+
+	public class ElasticSerializer : IElasticsearchSerializer
 	{
 		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(() => new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 		private readonly IConnectionSettings _settings;
@@ -52,13 +66,16 @@ namespace Nest
 			return r;
 		}
 
-		/// <summary>
-		/// serialize an object using the internal registered converters without camelcasing properties as is done 
-		/// while indexing objects
-		/// </summary>
-		public string Serialize(object @object, Formatting formatting = Formatting.Indented)
+		public T Deserialize<T>(byte[] bytes) where T : class
 		{
-			return JsonConvert.SerializeObject(@object, formatting, this._serializationSettings);
+			return this.Deserialize<T>(bytes.Utf8String());
+		}
+
+		public byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		{
+			var format = formatting == SerializationFormatting.None ? Formatting.None : Formatting.Indented;
+			var serialized = JsonConvert.SerializeObject(data, format, this._serializationSettings);
+			return serialized.Utf8Bytes();
 		}
 
 		/// <summary>
@@ -167,19 +184,19 @@ namespace Nest
 				operation._Type = typeName;
 				operation._Id = id;
 
-				var opJson = this.Serialize(operation, Formatting.None);
+				var opJson = this.Serialize(operation, SerializationFormatting.None).Utf8String();
 
 				var action = "{{ \"{0}\" :  {1} }}\n".F(command, opJson);
 				sb.Append(action);
 
 				if (command == "index" || command == "create")
 				{
-					string jsonCommand = this.Serialize(operation._Object, Formatting.None);
+					var jsonCommand = this.Serialize(operation._Object, SerializationFormatting.None).Utf8String();
 					sb.Append(jsonCommand + "\n");
 				}
 				else if (command == "update")
 				{
-					string jsonCommand = this.Serialize(operation.GetBody(), Formatting.None);
+					var jsonCommand = this.Serialize(operation.GetBody(), SerializationFormatting.None).Utf8String();
 					sb.Append(jsonCommand + "\n");
 				}
 			}
@@ -218,11 +235,11 @@ namespace Nest
 					preference = operation._Preference,
 					routing = operation._Routing
 				};
-				var opJson = this.Serialize(op, Formatting.None);
+				var opJson = this.Serialize(op, SerializationFormatting.None).Utf8String();
 
 				var action = "{0}\n".F(opJson);
 				sb.Append(action);
-				var searchJson = this.Serialize(operation, Formatting.None);
+				var searchJson = this.Serialize(operation, SerializationFormatting.None).Utf8String();
 				sb.Append(searchJson + "\n");
 
 			}
@@ -408,5 +425,6 @@ namespace Nest
 				container.Add(property);
 			}
 		}
+
 	}
 }

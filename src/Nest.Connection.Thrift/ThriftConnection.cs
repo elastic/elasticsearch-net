@@ -90,16 +90,13 @@ namespace Nest.Thrift
 			return this.Execute(restRequest);
 		}
 
-		public Task<ConnectionStatus> Post(string path, string data)
+		public Task<ConnectionStatus> Post(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
 			restRequest.Uri = path;
 
-			if (!string.IsNullOrEmpty(data))
-			{
-				restRequest.Body = Encoding.UTF8.GetBytes(data);
-			}
+			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
@@ -107,16 +104,13 @@ namespace Nest.Thrift
 				return this.Execute(restRequest);
 			});
 		}
-		public Task<ConnectionStatus> Put(string path, string data)
+		public Task<ConnectionStatus> Put(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
 			restRequest.Uri = path;
 
-			if (!string.IsNullOrEmpty(data))
-			{
-				restRequest.Body = Encoding.UTF8.GetBytes(data);
-			}
+			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
@@ -124,16 +118,13 @@ namespace Nest.Thrift
 				return this.Execute(restRequest);
 			});
 		}
-		public Task<ConnectionStatus> Delete(string path, string data)
+		public Task<ConnectionStatus> Delete(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
 			restRequest.Uri = path;
 
-			if (!string.IsNullOrEmpty(data))
-			{
-				restRequest.Body = Encoding.UTF8.GetBytes(data);
-			}
+			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return Task.Factory.StartNew<ConnectionStatus>(() =>
@@ -142,30 +133,24 @@ namespace Nest.Thrift
 			});
 		}
 
-		public ConnectionStatus PostSync(string path, string data)
+		public ConnectionStatus PostSync(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
 			restRequest.Uri = path;
 
-			if (!string.IsNullOrEmpty(data))
-			{
-				restRequest.Body = Encoding.UTF8.GetBytes(data);
-			}
+			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public ConnectionStatus PutSync(string path, string data)
+		public ConnectionStatus PutSync(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
 			restRequest.Uri = path;
 
-			if (!string.IsNullOrEmpty(data))
-			{
-				restRequest.Body = Encoding.UTF8.GetBytes(data);
-			}
+			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
@@ -194,16 +179,13 @@ namespace Nest.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public ConnectionStatus DeleteSync(string path, string data)
+		public ConnectionStatus DeleteSync(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
 			restRequest.Uri = path;
 
-			if (!string.IsNullOrEmpty(data))
-			{
-				restRequest.Body = Encoding.UTF8.GetBytes(data);
-			}
+			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);

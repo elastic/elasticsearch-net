@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						""name"": {
 							id: ""NEST"",
 							type: ""elasticsearchprojects"",
-							index: ""mydefaultindex"",
+							index: ""nest_test_data"",
 							path: ""name""
 						}	
 					}
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 						""name"": {
 							id: ""NEST"",
 							type: ""elasticsearchprojects"",
-							index: ""mydefaultindex"",
+							index: ""nest_test_data"",
 							path: ""name"",
 							routing: ""dot_net_clients""
 						},
