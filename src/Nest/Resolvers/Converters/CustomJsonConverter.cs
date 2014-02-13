@@ -21,7 +21,12 @@ namespace Nest.Resolvers.Converters
 				return;
 
 			var json = custom.GetCustomJson();
-			serializer.Serialize(writer, json);
+			var rawJson = json as RawJson;
+			if (rawJson != null)
+				writer.WriteRawValue(rawJson.Data);
+			else 
+				serializer.Serialize(writer, json);
+
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

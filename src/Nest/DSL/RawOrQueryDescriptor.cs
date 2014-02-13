@@ -7,18 +7,16 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(RawOrQueryDescriptorConverter))]
-	public class RawOrQueryDescriptor<T> where T : class
+	[JsonConverter(typeof(CustomJsonConverter))]
+	public class RawOrQueryDescriptor<T> : ICustomJson where T : class
 	{
 		public string Raw { get; set; }
 		public BaseQuery Descriptor { get; set; }
-
-		internal bool IsConditionless
+	
+		object ICustomJson.GetCustomJson()
 		{
-			get
-			{
-				return this.Raw.IsNullOrEmpty() && Descriptor.IsConditionless;
-			}
+			return this.Descriptor != null ? (object) Descriptor : new RawJson(this.Raw);
 		}
+		
 	}
 }

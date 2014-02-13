@@ -9,9 +9,16 @@ using System.Text;
 
 namespace Nest
 {
-	internal class PathAndData
+	/// <summary>
+	/// Marker class that signals to the CustomJsonConverter to write the string verbatim
+	/// </summary>
+	internal class RawJson
 	{
-		public string Path { get; set; }
 		public string Data { get; set; }
+
+		public RawJson(string rawJsonData)
+		{
+			Data = rawJsonData;
+		}
 	}
 }

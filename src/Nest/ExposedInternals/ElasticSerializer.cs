@@ -203,6 +203,7 @@ namespace Nest
 			var json = sb.ToString();
 			return json;
 		}
+	
 		/// <summary>
 		/// _msearch needs a specialized json format in the body
 		/// </summary>
@@ -263,6 +264,7 @@ namespace Nest
 				TemplateMapping = dict.First().Value
 			};
 		}
+		
 		public GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c)
 		{
 			var dict = c.Success
@@ -315,6 +317,7 @@ namespace Nest
 				Indices = indices
 			};
 		}
+		
 		protected string GetSearchType(SearchDescriptorBase descriptor, MultiSearchDescriptor multiSearchDescriptor)
 		{
 			if (descriptor._SearchType != null)
