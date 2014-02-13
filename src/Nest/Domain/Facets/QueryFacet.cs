@@ -5,6 +5,6 @@ namespace Nest
 		public class QueryFacet : Facet
     {
         [JsonProperty(PropertyName = "count")]
-        public int Count { get; internal set; }
+        public long Count { get; internal set; }
     }
 }

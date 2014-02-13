@@ -7,7 +7,7 @@ namespace Nest
     public class TermStatsFacet : Facet, IFacet<TermStats>
     {
         [JsonProperty("missing")]
-        public int Missing { get; internal set; }
+        public long Missing { get; internal set; }
 
         [JsonProperty("terms")]
         public IEnumerable<TermStats> Items { get; internal set; }
@@ -28,7 +28,7 @@ namespace Nest
         public double Mean { get; internal set; }
 
         [JsonProperty("total_count")]
-        public int TotalCount { get; set; }
+        public long TotalCount { get; set; }
     }
 
 }

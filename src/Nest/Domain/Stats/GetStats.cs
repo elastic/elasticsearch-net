@@ -10,13 +10,13 @@ namespace Nest
 	public class GetStats
 	{
 		[JsonProperty(PropertyName = "total")]
-		public int Total { get; set; }
+		public long Total { get; set; }
 		[JsonProperty(PropertyName = "time")]
 		public string Time { get; set; }
 		[JsonProperty(PropertyName = "time_in_millis")]
 		public double TimeInMilliseconds { get; set; }
 		[JsonProperty(PropertyName = "current")]
-		public int Current { get; set; }
+		public long Current { get; set; }
 
 		[JsonProperty(PropertyName = "exists_total")]
 		public int ExistsTotal { get; set; }

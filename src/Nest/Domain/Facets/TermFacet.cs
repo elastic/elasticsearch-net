@@ -8,13 +8,13 @@ namespace Nest
     public class TermFacet : Facet, IFacet<TermItem>
     {
         [JsonProperty("missing")]
-        public int Missing { get; internal set; }
+        public long Missing { get; internal set; }
 
         [JsonProperty("other")]
-        public int Other { get; internal set; }
+        public long Other { get; internal set; }
 
         [JsonProperty("total")]
-        public int Total { get; internal set; }
+        public long Total { get; internal set; }
 
         [JsonProperty("terms")]
         public IEnumerable<TermItem> Items { get; internal set; }

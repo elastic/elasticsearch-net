@@ -15,7 +15,7 @@ namespace Nest
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int ElapsedMilliseconds { get; }
 		string ScrollId { get; }
-		int Total { get; }
+		long Total { get; }
 		double MaxScore { get; }
 		IEnumerable<T> Documents { get; }
 		IEnumerable<IHit<T>> DocumentsWithMetaData { get; }
@@ -56,7 +56,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "_scroll_id")]
 		public string ScrollId { get; internal set; }
 
-		public int Total
+		public long Total
 		{
 			get
 			{

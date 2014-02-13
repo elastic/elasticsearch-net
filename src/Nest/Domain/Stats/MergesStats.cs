@@ -11,16 +11,16 @@ namespace Nest
 	{
 	
 		[JsonProperty(PropertyName = "current")]
-		public int Current { get; set; }
+		public long Current { get; set; }
 		[JsonProperty(PropertyName = "current_docs")]
-		public int CurrentDocuments { get; set; }
+		public long CurrentDocuments { get; set; }
 		[JsonProperty(PropertyName = "current_size")]
 		public string CurrentSize { get; set; }
 		[JsonProperty(PropertyName = "current_size_in_bytes")]
 		public double CurrentSizeInBytes { get; set; }
 
 		[JsonProperty(PropertyName = "total")]
-		public int Total { get; set; }
+		public long Total { get; set; }
 		[JsonProperty(PropertyName = "total_time")]
 		public string TotalTime { get; set; }
 		[JsonProperty(PropertyName = "total_time_in_millis")]

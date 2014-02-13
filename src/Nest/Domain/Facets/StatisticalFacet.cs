@@ -12,7 +12,7 @@ namespace Nest
 
 
         [JsonProperty("count")]
-        public int Count { get; internal set; }
+        public long Count { get; internal set; }
 
         [JsonProperty(PropertyName = "min")]
         public double Min { get; internal set; }

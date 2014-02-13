@@ -10,7 +10,7 @@ namespace Nest
 	public class TypeStats
 	{
 		[JsonProperty(PropertyName = "index_total")]
-		public int Total { get; set; }
+		public long Total { get; set; }
 		[JsonProperty(PropertyName = "index_time")]
 		public string Time { get; set; }
 		[JsonProperty(PropertyName = "index_time_in_millis")]
@@ -24,6 +24,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "delete_time_in_millis")]
 		public double DeleteTimeInMilliseconds { get; set; }
 		[JsonProperty(PropertyName = "delete_current")]
-		public int DeleteCurrent { get; set; }
+		public long DeleteCurrent { get; set; }
 	}
 }

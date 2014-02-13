@@ -2,22 +2,22 @@
 
 namespace Nest
 {
-    public interface ICountResponse : IResponse
-    {
-        int Count { get; }
-        ShardsMetaData Shards { get; }
-    }
+	public interface ICountResponse : IResponse
+	{
+		long Count { get; }
+		ShardsMetaData Shards { get; }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class CountResponse : BaseResponse, ICountResponse
-    {
+	{
 		public CountResponse()
 		{
 			this.IsValid = true;
 		}
 
 		[JsonProperty(PropertyName = "count")]
-		public int Count { get; internal set; }
+		public long Count { get; internal set; }
 
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
