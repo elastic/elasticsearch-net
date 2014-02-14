@@ -25,7 +25,7 @@ namespace Nest
 					return this._Query.IsConditionless;
 				if (this._Filter != null && this._Query == null)
 					return this._Filter.IsConditionless;
-				return false;
+				return this._Query.IsConditionless && this._Filter.IsConditionless;
 			}
 		}
 
