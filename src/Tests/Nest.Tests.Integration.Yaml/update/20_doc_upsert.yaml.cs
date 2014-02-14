@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update3
 {
-	public partial class UpdateTests
+	public partial class Update3YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DocUpsertTests : YamlTestsBase
+		public class DocUpsert1Tests : YamlTestsBase
 		{
 			[Test]
-			public void DocUpsertTest()
+			public void DocUpsert1Test()
 			{	
 
 				//do update 

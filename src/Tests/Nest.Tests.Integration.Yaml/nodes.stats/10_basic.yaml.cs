@@ -9,24 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.ClusterNodeStats
+namespace Nest.Tests.Integration.Yaml.NodesStats1
 {
-	public partial class ClusterNodeStatsTests
+	public partial class NodesStats1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class NodesStatsTests : YamlTestsBase
+		public class NodesStats1Tests : YamlTestsBase
 		{
 			[Test]
-			public void NodesStatsTest()
+			public void NodesStats1Test()
 			{	
 
-				//do cluster.node_stats 
-				this.Do(()=> this._client.ClusterNodeStatsGet(nv=>nv
-					.Add("indices", @"true")
-					.Add("transport", @"true")
-				));
+				//do nodes.stats 
+				this.Do(()=> this._client.NodesStatsGetForAll("indices,transport"));
 
 				//is_true _response.cluster_name; 
 				this.IsTrue(_response.cluster_name);

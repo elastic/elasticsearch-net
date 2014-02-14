@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Scroll
+namespace Nest.Tests.Integration.Yaml.Scroll1
 {
-	public partial class ScrollTests
+	public partial class Scroll1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicScrollTests : YamlTestsBase
+		public class BasicScroll1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicScrollTest()
+			public void BasicScroll1Test()
 			{	
 
 				//do indices.create 
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.Scroll
 				this.Do(()=> this._client.IndexPost("test_scroll", "test", "42", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 				//do search 
 				_body = new {

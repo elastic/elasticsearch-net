@@ -22,7 +22,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			var untypedSuite = untyped.First();
 			var suite = new TestSuite();
 			suite.Description = untypedSuite.Key;
-			suite.Steps = Actions(untypedSuite).ToList();
+			suite.Steps = Actions(untypedSuite).Where(s=>s != null).ToList();
 			return suite;
 
 		}
@@ -82,6 +82,11 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 		
 		private static SkipStep CreateSkipStep(Dictionary<object, object> value)
 		{
+			if (!value.ContainsKey("version"))
+			{
+				return null;
+			}
+
 			var version = value["version"] as string;
 			var reason = value["reason"] as string;
 			return new SkipStep { Version = version, Reason = reason};

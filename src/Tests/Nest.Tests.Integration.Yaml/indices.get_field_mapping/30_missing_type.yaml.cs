@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
+namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping3
 {
-	public partial class IndicesGetFieldMappingTests
+	public partial class IndicesGetFieldMapping3YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Raise404WhenTypeDoesntExistTests : YamlTestsBase
+		public class Raise404WhenTypeDoesntExist1Tests : YamlTestsBase
 		{
 			[Test]
-			public void Raise404WhenTypeDoesntExistTest()
+			public void Raise404WhenTypeDoesntExist1Test()
 			{	
-
-				//skip 0 - 0.90.5; 
-				this.Skip("0 - 0.90.5", "get field mapping was added in 0.90.6");
 
 				//do indices.create 
 				_body = new {

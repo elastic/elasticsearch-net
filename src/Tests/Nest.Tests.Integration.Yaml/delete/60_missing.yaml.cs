@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Delete
+namespace Nest.Tests.Integration.Yaml.Delete8
 {
-	public partial class DeleteTests
+	public partial class Delete8YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentWithCatchTests : YamlTestsBase
+		public class MissingDocumentWithCatch1Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentWithCatchTest()
+			public void MissingDocumentWithCatch1Test()
 			{	
 
 				//do delete 
@@ -29,10 +29,10 @@ namespace Nest.Tests.Integration.Yaml.Delete
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentWithIgnoreTests : YamlTestsBase
+		public class MissingDocumentWithIgnore2Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentWithIgnoreTest()
+			public void MissingDocumentWithIgnore2Test()
 			{	
 
 				//do delete 

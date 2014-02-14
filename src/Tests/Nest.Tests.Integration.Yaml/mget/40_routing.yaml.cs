@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget8
 {
-	public partial class MgetTests
+	public partial class Mget8YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class RoutingTests : YamlTestsBase
+		public class Routing1Tests : YamlTestsBase
 		{
 			[Test]
-			public void RoutingTest()
+			public void Routing1Test()
 			{	
 
 				//do indices.create 
@@ -67,14 +67,14 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					})
 				));
 
-				//is_false _response.docs[0].exists; 
-				this.IsFalse(_response.docs[0].exists);
+				//is_false _response.docs[0].found; 
+				this.IsFalse(_response.docs[0].found);
 
-				//is_false _response.docs[1].exists; 
-				this.IsFalse(_response.docs[1].exists);
+				//is_false _response.docs[1].found; 
+				this.IsFalse(_response.docs[1].found);
 
-				//is_true _response.docs[2].exists; 
-				this.IsTrue(_response.docs[2].exists);
+				//is_true _response.docs[2].found; 
+				this.IsTrue(_response.docs[2].found);
 
 				//match _response.docs[2]._index: 
 				this.IsMatch(_response.docs[2]._index, @"test_1");

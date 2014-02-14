@@ -9,9 +9,9 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Get
+namespace Nest.Tests.Integration.Yaml.Get6
 {
-	public partial class GetTests
+	public partial class Get6YamlTests
 	{	
 
 

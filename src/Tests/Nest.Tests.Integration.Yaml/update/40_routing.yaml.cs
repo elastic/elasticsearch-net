@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update8
 {
-	public partial class UpdateTests
+	public partial class Update8YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class RoutingTests : YamlTestsBase
+		public class Routing1Tests : YamlTestsBase
 		{
 			[Test]
-			public void RoutingTest()
+			public void Routing1Test()
 			{	
 
 				//do indices.create 
@@ -79,7 +79,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 				));
 
 				//match _response.get.fields.foo: 
-				this.IsMatch(_response.get.fields.foo, @"baz");
+				this.IsMatch(_response.get.fields.foo, new [] {
+					@"baz"
+				});
 
 			}
 		}

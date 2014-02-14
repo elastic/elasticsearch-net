@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Create
+namespace Nest.Tests.Integration.Yaml.Create4
 {
-	public partial class CreateTests
+	public partial class Create4YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ExternalVersionTests : YamlTestsBase
+		public class ExternalVersion1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ExternalVersionTest()
+			public void ExternalVersion1Test()
 			{	
 
 				//do create 

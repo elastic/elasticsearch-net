@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update15
 {
-	public partial class UpdateTests
+	public partial class Update15YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MetadataFieldsTests : YamlTestsBase
+		public class MetadataFields1Tests : YamlTestsBase
 		{
 			[Test]
-			public void MetadataFieldsTest()
+			public void MetadataFields1Test()
 			{	
 
 				//skip 0 - 999; 

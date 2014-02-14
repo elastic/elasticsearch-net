@@ -9,9 +9,9 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget9
 {
-	public partial class MgetTests
+	public partial class Mget9YamlTests
 	{	
 
 
@@ -21,9 +21,6 @@ namespace Nest.Tests.Integration.Yaml.Mget
 			[Test]
 			public void ParentWithRoutingTest()
 			{	
-
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "Parent not supported in mget. https://github.com/elasticsearch/elasticsearch/issues/3274");
 
 				//do indices.create 
 				_body = new {
@@ -78,14 +75,14 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					})
 				));
 
-				//is_false _response.docs[0].exists; 
-				this.IsFalse(_response.docs[0].exists);
+				//is_false _response.docs[0].found; 
+				this.IsFalse(_response.docs[0].found);
 
-				//is_false _response.docs[1].exists; 
-				this.IsFalse(_response.docs[1].exists);
+				//is_false _response.docs[1].found; 
+				this.IsFalse(_response.docs[1].found);
 
-				//is_true _response.docs[2].exists; 
-				this.IsTrue(_response.docs[2].exists);
+				//is_true _response.docs[2].found; 
+				this.IsTrue(_response.docs[2].found);
 
 				//match _response.docs[2]._index: 
 				this.IsMatch(_response.docs[2]._index, @"test_1");

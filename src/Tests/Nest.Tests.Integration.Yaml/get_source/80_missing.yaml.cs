@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.GetSource
+namespace Nest.Tests.Integration.Yaml.GetSource8
 {
-	public partial class GetSourceTests
+	public partial class GetSource8YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentWithCatchTests : YamlTestsBase
+		public class MissingDocumentWithCatch1Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentWithCatchTest()
+			public void MissingDocumentWithCatch1Test()
 			{	
-
-				//skip 0 - 0.90.0; 
-				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
 
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "test", "1"), shouldCatch: @"missing");
@@ -32,14 +29,11 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentWithIgnoreTests : YamlTestsBase
+		public class MissingDocumentWithIgnore2Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentWithIgnoreTest()
+			public void MissingDocumentWithIgnore2Test()
 			{	
-
-				//skip 0 - 0.90.0; 
-				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
 
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "test", "1", nv=>nv

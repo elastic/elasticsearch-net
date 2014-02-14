@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Bulk
+namespace Nest.Tests.Integration.Yaml.Bulk1
 {
-	public partial class BulkTests
+	public partial class Bulk1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ArrayOfObjectsTests : YamlTestsBase
+		public class ArrayOfObjects1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ArrayOfObjectsTest()
+			public void ArrayOfObjects1Test()
 			{	
 
 				//do bulk 

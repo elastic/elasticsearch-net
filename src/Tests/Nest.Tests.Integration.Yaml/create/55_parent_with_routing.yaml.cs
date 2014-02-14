@@ -9,9 +9,9 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Create
+namespace Nest.Tests.Integration.Yaml.Create7
 {
-	public partial class CreateTests
+	public partial class Create7YamlTests
 	{	
 
 

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget10
 {
-	public partial class MgetTests
+	public partial class Mget10YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class RealtimeRefreshTests : YamlTestsBase
+		public class RealtimeRefresh1Tests : YamlTestsBase
 		{
 			[Test]
-			public void RealtimeRefreshTest()
+			public void RealtimeRefresh1Test()
 			{	
 
 				//do indices.create 
@@ -54,8 +54,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					.Add("realtime", 0)
 				));
 
-				//is_false _response.docs[0].exists; 
-				this.IsFalse(_response.docs[0].exists);
+				//is_false _response.docs[0].found; 
+				this.IsFalse(_response.docs[0].found);
 
 				//do mget 
 				_body = new {
@@ -67,8 +67,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					.Add("realtime", 1)
 				));
 
-				//is_true _response.docs[0].exists; 
-				this.IsTrue(_response.docs[0].exists);
+				//is_true _response.docs[0].found; 
+				this.IsTrue(_response.docs[0].found);
 
 				//do mget 
 				_body = new {
@@ -81,8 +81,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					.Add("refresh", 1)
 				));
 
-				//is_true _response.docs[0].exists; 
-				this.IsTrue(_response.docs[0].exists);
+				//is_true _response.docs[0].found; 
+				this.IsTrue(_response.docs[0].found);
 
 			}
 		}

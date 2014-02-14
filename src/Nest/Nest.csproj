@@ -110,8 +110,8 @@
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
-    <Compile Include="DSL\ClusterNodeStatsDescriptor.cs" />
-    <Compile Include="DSL\ClusterNodeInfoDescriptor.cs" />
+    <Compile Include="DSL\NodesStatsDescriptor.cs" />
+    <Compile Include="DSL\NodesInfoDescriptor.cs" />
     <Compile Include="DSL\ClusterHealthDescriptor.cs" />
     <Compile Include="DSL\AnalyzeDescriptor.cs" />
     <Compile Include="DSL\AliasDescriptor.cs" />

@@ -9,14 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
+namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 {
-	public partial class IndicesAnalyzeTests
+	public partial class IndicesAnalyze1YamlTests
 	{	
-	
-		public class IndicesAnalyze10AnalyzeYamlBase : YamlTestsBase
+
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class Setup1Tests : YamlTestsBase
 		{
-			public IndicesAnalyze10AnalyzeYamlBase() : base()
+			[Test]
+			public void Setup1Test()
 			{	
 
 				//do ping 
@@ -25,12 +28,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 			}
 		}
 
-
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestTests : IndicesAnalyze10AnalyzeYamlBase
+		public class BasicTest2Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicTestTest()
+			public void BasicTest2Test()
 			{	
 
 				//do indices.analyze 
@@ -51,10 +53,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TokenizerAndFilterTests : IndicesAnalyze10AnalyzeYamlBase
+		public class TokenizerAndFilter3Tests : YamlTestsBase
 		{
 			[Test]
-			public void TokenizerAndFilterTest()
+			public void TokenizerAndFilter3Test()
 			{	
 
 				//do indices.analyze 
@@ -74,10 +76,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class IndexAndFieldTests : IndicesAnalyze10AnalyzeYamlBase
+		public class IndexAndField4Tests : YamlTestsBase
 		{
 			[Test]
-			public void IndexAndFieldTest()
+			public void IndexAndField4Test()
 			{	
 
 				//do indices.create 

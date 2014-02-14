@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mlt
+namespace Nest.Tests.Integration.Yaml.Mlt1
 {
-	public partial class MltTests
+	public partial class Mlt1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicMltTests : YamlTestsBase
+		public class BasicMlt1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicMltTest()
+			public void BasicMlt1Test()
 			{	
 
 				//do index 
@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Yaml.Mlt
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

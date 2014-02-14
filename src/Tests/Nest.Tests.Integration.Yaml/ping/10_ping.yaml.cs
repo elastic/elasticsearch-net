@@ -9,9 +9,9 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Ping
+namespace Nest.Tests.Integration.Yaml.Ping1
 {
-	public partial class PingTests
+	public partial class Ping1YamlTests
 	{	
 
 

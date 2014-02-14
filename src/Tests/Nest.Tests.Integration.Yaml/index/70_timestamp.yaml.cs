@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Index
+namespace Nest.Tests.Integration.Yaml.Index10
 {
-	public partial class IndexTests
+	public partial class Index10YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TimestampTests : YamlTestsBase
+		public class Timestamp1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TimestampTest()
+			public void Timestamp1Test()
 			{	
 
 				//do indices.create 

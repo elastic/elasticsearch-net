@@ -9,24 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesStatus
+namespace Nest.Tests.Integration.Yaml.IndicesStatus1
 {
-	public partial class IndicesStatusTests
+	public partial class IndicesStatus1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class IndicesStatusTestTests : YamlTestsBase
+		public class IndicesStatusTest1Tests : YamlTestsBase
 		{
 			[Test]
-			public void IndicesStatusTestTest()
+			public void IndicesStatusTest1Test()
 			{	
 
 				//do indices.status 
-				this.Do(()=> this._client.IndicesStatusGet());
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesStatusGetForAll());
 
 				//do indices.status 
 				this.Do(()=> this._client.IndicesStatusGet("not_here"), shouldCatch: @"missing");

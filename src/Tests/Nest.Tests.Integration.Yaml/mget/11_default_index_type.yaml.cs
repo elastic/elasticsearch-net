@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget2
 {
-	public partial class MgetTests
+	public partial class Mget2YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DefaultIndexTypeTests : YamlTestsBase
+		public class DefaultIndexType1Tests : YamlTestsBase
 		{
 			[Test]
-			public void DefaultIndexTypeTest()
+			public void DefaultIndexType1Test()
 			{	
 
 				//do indices.create 
@@ -57,8 +57,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body));
 
-				//is_false _response.docs[0].exists; 
-				this.IsFalse(_response.docs[0].exists);
+				//is_false _response.docs[0].found; 
+				this.IsFalse(_response.docs[0].found);
 
 				//match _response.docs[0]._index: 
 				this.IsMatch(_response.docs[0]._index, @"test_2");
@@ -69,8 +69,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				//match _response.docs[0]._id: 
 				this.IsMatch(_response.docs[0]._id, 1);
 
-				//is_false _response.docs[1].exists; 
-				this.IsFalse(_response.docs[1].exists);
+				//is_false _response.docs[1].found; 
+				this.IsFalse(_response.docs[1].found);
 
 				//match _response.docs[1]._index: 
 				this.IsMatch(_response.docs[1]._index, @"test_1");
@@ -81,8 +81,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				//match _response.docs[1]._id: 
 				this.IsMatch(_response.docs[1]._id, 1);
 
-				//is_false _response.docs[2].exists; 
-				this.IsFalse(_response.docs[2].exists);
+				//is_false _response.docs[2].found; 
+				this.IsFalse(_response.docs[2].found);
 
 				//match _response.docs[2]._index: 
 				this.IsMatch(_response.docs[2]._index, @"test_1");
@@ -93,8 +93,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				//match _response.docs[2]._id: 
 				this.IsMatch(_response.docs[2]._id, 2);
 
-				//is_true _response.docs[3].exists; 
-				this.IsTrue(_response.docs[3].exists);
+				//is_true _response.docs[3].found; 
+				this.IsTrue(_response.docs[3].found);
 
 				//match _response.docs[3]._index: 
 				this.IsMatch(_response.docs[3]._index, @"test_1");

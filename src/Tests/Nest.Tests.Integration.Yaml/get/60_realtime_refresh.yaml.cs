@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Get
+namespace Nest.Tests.Integration.Yaml.Get7
 {
-	public partial class GetTests
+	public partial class Get7YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class RealtimeRefreshTests : YamlTestsBase
+		public class RealtimeRefresh1Tests : YamlTestsBase
 		{
 			[Test]
-			public void RealtimeRefreshTest()
+			public void RealtimeRefresh1Test()
 			{	
 
 				//do indices.create 
@@ -49,8 +49,8 @@ namespace Nest.Tests.Integration.Yaml.Get
 					.Add("realtime", 1)
 				));
 
-				//is_true _response.exists; 
-				this.IsTrue(_response.exists);
+				//is_true _response.found; 
+				this.IsTrue(_response.found);
 
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
@@ -63,8 +63,8 @@ namespace Nest.Tests.Integration.Yaml.Get
 					.Add("refresh", 1)
 				));
 
-				//is_true _response.exists; 
-				this.IsTrue(_response.exists);
+				//is_true _response.found; 
+				this.IsTrue(_response.found);
 
 			}
 		}

@@ -9,24 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.ClusterNodeInfo
+namespace Nest.Tests.Integration.Yaml.NodesInfo1
 {
-	public partial class ClusterNodeInfoTests
+	public partial class NodesInfo1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class NodeInfoTestTests : YamlTestsBase
+		public class NodeInfoTest1Tests : YamlTestsBase
 		{
 			[Test]
-			public void NodeInfoTestTest()
+			public void NodeInfoTest1Test()
 			{	
 
-				//do cluster.node_info 
-				this.Do(()=> this._client.ClusterNodeInfoGet());
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				//do nodes.info 
+				this.Do(()=> this._client.NodesInfoGetForAll());
 
 				//is_true _response.nodes; 
 				this.IsTrue(_response.nodes);

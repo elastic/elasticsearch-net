@@ -24,10 +24,10 @@ namespace CodeGeneration.YamlTestsRunner
 	using YamlTestSuite = Dictionary<string, object>;
 	public static class YamlTestsGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/test";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/0.90/rest-api-spec/test/";
-		private readonly static string _testProjectFolder = @"..\..\..\..\src\Nest.Tests.Integration.Yaml\";
-		private readonly static string _rawClientInterface = @"..\..\..\..\src\Nest\IRawElasticClient.generated.cs";
+		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/1.0/rest-api-spec/test";
+		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/1.0/rest-api-spec/test/";
+		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Nest.Tests.Integration.Yaml\";
+		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Nest\IRawElasticClient.generated.cs";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _cacheFolder = @"..\..\YamlCache\";
 		
@@ -93,14 +93,16 @@ namespace CodeGeneration.YamlTestsRunner
 				select fileName).ToList();
 
 			var definitions = new ConcurrentBag<YamlDefinition>();
+			var i = 0;
 			foreach (var file in files)
 			{
+				++i;
 				var yaml = GetYamlFile(folder, useCache, file);
 				var parsed = ParseYaml(yaml).ToList();
 				var prefix = Regex.Replace(file, @"^(\d+).*$", "$1");
 				var yamlDefinition = new YamlDefinition
 				{
-					Folder = folder,
+					Folder = folder + i,
 					FileName = file,
 					Contents = yaml,
 					Suites = parsed,
@@ -139,16 +141,20 @@ namespace CodeGeneration.YamlTestsRunner
 		private static IEnumerable<TestSuite> ParseYaml(string yaml)
 		{
 			var deserializer = new Deserializer();
-			var tests = Regex.Split(yaml, @"---\r?\n");
+			var tests = Regex.Split(yaml, @"--- ?\r?\n");
 			var r = new List<TestSuite>();
+			var i = 0;
 			foreach (var test in tests.Where(t=>!t.IsNullOrEmpty()))
 			{
+				++i;
 				try
 				{
 					using (var tx = new StringReader(test))
 					{
 						var parsed = deserializer.Deserialize<YamlTestSuite>(tx);
-						r.Add(TestSuite.CreateFrom(parsed, yaml));
+						var suite = TestSuite.CreateFrom(parsed, yaml);
+						suite.Description += i;
+						r.Add(suite);
 					}
 				}
 				catch (Exception exception)

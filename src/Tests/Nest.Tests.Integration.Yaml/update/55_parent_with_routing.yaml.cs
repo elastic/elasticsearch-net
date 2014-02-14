@@ -9,9 +9,9 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update10
 {
-	public partial class UpdateTests
+	public partial class Update10YamlTests
 	{	
 
 
@@ -95,7 +95,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 				));
 
 				//match _response.get.fields.foo: 
-				this.IsMatch(_response.get.fields.foo, @"baz");
+				this.IsMatch(_response.get.fields.foo, new [] {
+					@"baz"
+				});
 
 			}
 		}

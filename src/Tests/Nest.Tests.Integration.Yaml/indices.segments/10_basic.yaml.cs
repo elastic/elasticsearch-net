@@ -9,24 +9,23 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesSegments
+namespace Nest.Tests.Integration.Yaml.IndicesSegments1
 {
-	public partial class IndicesSegmentsTests
+	public partial class IndicesSegments1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SegmentsTestTests : YamlTestsBase
+		public class SegmentsTest1Tests : YamlTestsBase
 		{
 			[Test]
-			public void SegmentsTestTest()
+			public void SegmentsTest1Test()
 			{	
 
 				//do indices.segments 
-				this.Do(()=> this._client.IndicesSegmentsGet());
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesSegmentsGet(nv=>nv
+					.Add("allow_no_indices", @"true")
+				));
 
 			}
 		}

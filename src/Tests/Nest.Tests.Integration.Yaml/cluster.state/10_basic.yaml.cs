@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.ClusterState
+namespace Nest.Tests.Integration.Yaml.ClusterState1
 {
-	public partial class ClusterStateTests
+	public partial class ClusterState1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ClusterStateTestTests : YamlTestsBase
+		public class ClusterStateTest1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ClusterStateTestTest()
+			public void ClusterStateTest1Test()
 			{	
 
 				//do cluster.state 

@@ -14,6 +14,11 @@
 		public string Fields { get; set; }
 		public string SearchGroups { get; set; }
 		public string IndexingTypes { get; set; }
+		public string Repository { get; set; }
+		public string Snapshot { get; set; }
+
+		public string Metric { get; set; }
+		public string IndexMetric { get; set; }
 
 		public ElasticsearchPathInfo()
 		{

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
+namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping1
 {
-	public partial class IndicesDeleteMappingTests
+	public partial class IndicesDeleteMapping1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteMappingTestsTests : YamlTestsBase
+		public class DeleteMappingTests1Tests : YamlTestsBase
 		{
 			[Test]
-			public void DeleteMappingTestsTest()
+			public void DeleteMappingTests1Test()
 			{	
 
 				//do indices.create 

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
+namespace Nest.Tests.Integration.Yaml.IndicesGetMapping3
 {
-	public partial class IndicesGetMappingTests
+	public partial class IndicesGetMapping3YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Raise404WhenIndexDoesntExistTests : YamlTestsBase
+		public class Raise404WhenIndexDoesntExist1Tests : YamlTestsBase
 		{
 			[Test]
-			public void Raise404WhenIndexDoesntExistTest()
+			public void Raise404WhenIndexDoesntExist1Test()
 			{	
 
 				//do indices.get_mapping 

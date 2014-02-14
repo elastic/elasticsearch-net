@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
+namespace Nest.Tests.Integration.Yaml.IndicesGetMapping2
 {
-	public partial class IndicesGetMappingTests
+	public partial class IndicesGetMapping2YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Raise404WhenTypeDoesntExistTests : YamlTestsBase
+		public class ReturnEmptyResponseWhenTypeDoesntExist1Tests : YamlTestsBase
 		{
 			[Test]
-			public void Raise404WhenTypeDoesntExistTest()
+			public void ReturnEmptyResponseWhenTypeDoesntExist1Test()
 			{	
 
 				//do indices.create 
@@ -38,7 +38,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping
 				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_index", "not_test_type"), shouldCatch: @"missing");
+				this.Do(()=> this._client.IndicesGetMapping("test_index", "not_test_type"));
+
+				//match this._status: 
+				this.IsMatch(this._status, new {});
 
 			}
 		}

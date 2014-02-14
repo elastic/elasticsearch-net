@@ -31,9 +31,9 @@ namespace Nest.Tests.Integration.Yaml
 			var uri = new Uri("http://"+host+":9200/");
 			var settings = new ConnectionSettings(uri, "nest-default-index");
 			_client = new RawElasticClient(settings);
-
-			_client.IndicesDelete(d => d.MasterTimeout("1m").Timeout("1m"));
-			_client.IndicesDeleteTemplate("*");
+			
+			_client.IndicesDelete("_all", d => d.MasterTimeout("1m").Timeout("1m"));
+			_client.IndicesDeleteTemplateForAll("*");
 			var info = _client.InfoGet().Deserialize<dynamic>();
 			string version = info.version.number;
 			this._versionNumber = new Version(version);

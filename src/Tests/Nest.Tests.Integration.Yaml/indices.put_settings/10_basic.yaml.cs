@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
+namespace Nest.Tests.Integration.Yaml.IndicesPutSettings1
 {
-	public partial class IndicesPutSettingsTests
+	public partial class IndicesPutSettings1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestIndicesSettingsTests : YamlTestsBase
+		public class TestIndicesSettings1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestIndicesSettingsTest()
+			public void TestIndicesSettings1Test()
 			{	
 
 				//do indices.create 
@@ -33,7 +33,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 				this.Do(()=> this._client.IndicesCreatePost("test-index", _body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test-index"));
+				this.Do(()=> this._client.IndicesGetSettings("test-index", nv=>nv
+					.Add("flat_settings", @"true")
+				));
 
 				//match _responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"]: 
 				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"], 0);
@@ -42,13 +44,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings
 				_body = new {
 					number_of_replicas= "1"
 				};
-				this.Do(()=> this._client.IndicesPutSettings(_body));
+				this.Do(()=> this._client.IndicesPutSettingsForAll(_body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings());
+				this.Do(()=> this._client.IndicesGetSettingsForAll(nv=>nv
+					.Add("flat_settings", @"false")
+				));
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"], 1);
+				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 1);
 
 			}
 		}

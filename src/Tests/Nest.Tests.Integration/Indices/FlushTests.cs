@@ -32,32 +32,6 @@ namespace Nest.Tests.Integration.Indices
 			var r = this._client.Flush(f=>f.Index<ElasticsearchProject>());
 			Assert.True(r.OK);
 		}
-		[Test]
-		public void FlushAllRefresh()
-		{
-			var r = this._client.Flush(f=>f.AllIndices().Refresh());
-			Assert.True(r.OK);
-		}
-		[Test]
-		public void FlushIndexRefresh()
-		{
-			var r = this._client.Flush(f=>f.Index(ElasticsearchConfiguration.DefaultIndex).Refresh());
-			Assert.True(r.OK);
-		}
-		[Test]
-		public void FlushIndecesRefresh()
-		{
-			var r = this._client.Flush(f=>f
-				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone")
-				.Refresh()
-			);
-			Assert.True(r.OK);
-		}
-		[Test]
-		public void FlushTypedRefresh()
-		{
-			var r = this._client.Flush(f=>f.Index<ElasticsearchProject>().Refresh());
-			Assert.True(r.OK);
-		}
+		
 	}
 }

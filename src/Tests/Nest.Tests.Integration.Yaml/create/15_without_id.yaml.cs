@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Create
+namespace Nest.Tests.Integration.Yaml.Create2
 {
-	public partial class CreateTests
+	public partial class Create2YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CreateWithoutIdTests : YamlTestsBase
+		public class CreateWithoutId1Tests : YamlTestsBase
 		{
 			[Test]
-			public void CreateWithoutIdTest()
+			public void CreateWithoutId1Test()
 			{	
 
 				//do create 
@@ -29,9 +29,6 @@ namespace Nest.Tests.Integration.Yaml.Create
 				this.Do(()=> this._client.IndexPost("test_1", "test", _body, nv=>nv
 					.Add("op_type", @"create")
 				));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
 
 				//is_true _response._id; 
 				this.IsTrue(_response._id);

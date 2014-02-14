@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Exists
+namespace Nest.Tests.Integration.Yaml.Exists2
 {
-	public partial class ExistsTests
+	public partial class Exists2YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentTests : YamlTestsBase
+		public class Setup1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ParentTest()
+			public void Setup1Test()
 			{	
-
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "Parent not supported in exists https://github.com/elasticsearch/elasticsearch/issues/3276");
 
 				//do indices.create 
 				_body = new {
@@ -42,6 +39,16 @@ namespace Nest.Tests.Integration.Yaml.Exists
 					.Add("wait_for_status", @"yellow")
 				));
 
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class Parent2Tests : YamlTestsBase
+		{
+			[Test]
+			public void Parent2Test()
+			{	
+
 				//do index 
 				_body = new {
 					foo= "bar"
@@ -58,11 +65,18 @@ namespace Nest.Tests.Integration.Yaml.Exists
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
-				//do exists 
-				this.Do(()=> this._client.ExistsHead("test_1", "test", "1"));
+			}
+		}
 
-				//is_false this._status; 
-				this.IsFalse(this._status);
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class ParentOmitted3Tests : YamlTestsBase
+		{
+			[Test]
+			public void ParentOmitted3Test()
+			{	
+
+				//do exists 
+				this.Do(()=> this._client.ExistsHead("test_1", "test", "1"), shouldCatch: @"request");
 
 			}
 		}

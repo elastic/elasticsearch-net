@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesExists
+namespace Nest.Tests.Integration.Yaml.IndicesExists1
 {
-	public partial class IndicesExistsTests
+	public partial class IndicesExists1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestIndicesExistsTests : YamlTestsBase
+		public class TestIndicesExists1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestIndicesExistsTest()
+			public void TestIndicesExists1Test()
 			{	
 
 				//do indices.exists 
@@ -36,6 +36,24 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class TestIndicesExistsWithLocalFlag2Tests : YamlTestsBase
+		{
+			[Test]
+			public void TestIndicesExistsWithLocalFlag2Test()
+			{	
+
+				//do indices.exists 
+				this.Do(()=> this._client.IndicesExistsHead("test_index", nv=>nv
+					.Add("local", @"true")
+				));
+
+				//is_false this._status; 
+				this.IsFalse(this._status);
 
 			}
 		}

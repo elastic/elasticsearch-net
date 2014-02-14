@@ -9,35 +9,24 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Percolate
+namespace Nest.Tests.Integration.Yaml.Percolate3
 {
-	public partial class PercolateTests
+	public partial class Percolate3YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicPercolationTestsTests : YamlTestsBase
+		public class BasicPercolationTestsOnAnEmptyCluster1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicPercolationTestsTest()
+			public void BasicPercolationTestsOnAnEmptyCluster1Test()
 			{	
-
-				//skip 0.90.9 - 999; 
-				this.Skip("0.90.9 - 999", "Percolator redesign");
 
 				//do indices.create 
 				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
 
-				//do index 
-				_body = new {
-					query= new {
-						match_all= new {}
-					}
-				};
-				this.Do(()=> this._client.IndexPost("_percolator", "test_index", "test_percolator", _body));
-
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 				//do percolate 
 				_body = new {
@@ -47,13 +36,27 @@ namespace Nest.Tests.Integration.Yaml.Percolate
 				};
 				this.Do(()=> this._client.PercolatePost("test_index", "test_type", _body));
 
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				//match _response.total: 
+				this.IsMatch(_response.total, 0);
 
 				//match _response.matches: 
 				this.IsMatch(_response.matches, new [] {
-					@"test_percolator"
+
 				});
+
+				//do count_percolate 
+				_body = new {
+					doc= new {
+						foo= "bar"
+					}
+				};
+				this.Do(()=> this._client.CountPercolatePost("test_index", "test_type", _body));
+
+				//is_false _response.matches; 
+				this.IsFalse(_response.matches);
+
+				//match _response.total: 
+				this.IsMatch(_response.total, 0);
 
 			}
 		}

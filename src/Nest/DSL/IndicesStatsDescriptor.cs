@@ -16,12 +16,7 @@ namespace Nest
 		, IPathInfo<IndicesStatsQueryString>
 	{
 		private IEnumerable<TypeNameMarker> _Types { get; set; }
-		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Types(params string[] completion_fields)
-		{
-			this._Types = completion_fields.Select(t=>(TypeNameMarker)t);
-			return this;
-		}
+		
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Types(params Type[] completion_fields)
 		{

@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.GetSource
+namespace Nest.Tests.Integration.Yaml.GetSource6
 {
-	public partial class GetSourceTests
+	public partial class GetSource6YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class RealtimeTests : YamlTestsBase
+		public class Realtime1Tests : YamlTestsBase
 		{
 			[Test]
-			public void RealtimeTest()
+			public void Realtime1Test()
 			{	
-
-				//skip 0 - 0.90.0; 
-				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
 
 				//do indices.create 
 				_body = new {

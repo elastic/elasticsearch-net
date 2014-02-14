@@ -35,9 +35,15 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 				this.QueryString.Add("op_type", "create");
 			}
 
-			var re = "^" + this.Call.ToPascalCase() + @"(Get|Put|Head|Post|Delete)?\(";
+			var re = "^" + this.Call.ToPascalCase() + @"(Get|Put|Head|Post|Delete)?(ForAll)?\(";
+			var counts = YamlTestsGenerator.RawElasticCalls
+				.Where(c => Regex.IsMatch(c, re))
+				.Select(s => new {Method = s, Count = QueryStringCount(s)})
+				.ToList();
+
 			var calls = YamlTestsGenerator.RawElasticCalls
 				.Where(c => Regex.IsMatch(c, re))
+				.Where(c=> this.Body == null || c.Contains("object body"))
 				.OrderByDescending(QueryStringCount)
 				.ThenByDescending(MethodPreference)
 				.ToList();
@@ -136,7 +142,16 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 
 		private int QueryStringCount(string method)
 		{
-			return QueryString.Keys.Count(k => method.Contains(k + ","));
+			var matches = this.QueryString.Keys.Count(k => method.Contains(k + ","));
+			var parameters = method.Count(c => c == ',');
+			if (!QueryString.Any() && parameters == 1)
+				return 99;
+			if (matches == 0)
+				return -100;
+			if (QueryString.Count == matches && matches == parameters - 1)
+				return 98;
+			return matches;
+
 		}
 		private int MethodPreference(string method)
 		{

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesOptimize
+namespace Nest.Tests.Integration.Yaml.IndicesOptimize1
 {
-	public partial class IndicesOptimizeTests
+	public partial class IndicesOptimize1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class OptimizeIndexTestsTests : YamlTestsBase
+		public class OptimizeIndexTests1Tests : YamlTestsBase
 		{
 			[Test]
-			public void OptimizeIndexTestsTest()
+			public void OptimizeIndexTests1Test()
 			{	
 
 				//do indices.create 
@@ -29,9 +29,6 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize
 				this.Do(()=> this._client.IndicesOptimizeGet("testing", nv=>nv
 					.Add("max_num_segments", 1)
 				));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
 
 			}
 		}

@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Delete
+namespace Nest.Tests.Integration.Yaml.Delete5
 {
-	public partial class DeleteTests
+	public partial class Delete5YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentTests : YamlTestsBase
+		public class Parent1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ParentTest()
+			public void Parent1Test()
 			{	
-
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "Delete ignores the parent param");
 
 				//do indices.create 
 				_body = new {

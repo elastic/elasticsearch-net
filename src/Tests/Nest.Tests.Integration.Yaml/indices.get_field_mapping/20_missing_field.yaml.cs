@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
+namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping2
 {
-	public partial class IndicesGetFieldMappingTests
+	public partial class IndicesGetFieldMapping2YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Raise404WhenFieldDoesntExistTests : YamlTestsBase
+		public class ReturnEmptyObjectIfFieldDoesntExistButTypeAndIndexDo1Tests : YamlTestsBase
 		{
 			[Test]
-			public void Raise404WhenFieldDoesntExistTest()
+			public void ReturnEmptyObjectIfFieldDoesntExistButTypeAndIndexDo1Test()
 			{	
-
-				//skip 0 - 0.90.5; 
-				this.Skip("0 - 0.90.5", "get field mapping was added in 0.90.6");
 
 				//do indices.create 
 				_body = new {
@@ -41,7 +38,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "not_text"), shouldCatch: @"missing");
+				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "not_existent"));
+
+				//match this._status: 
+				this.IsMatch(this._status, new {});
 
 			}
 		}

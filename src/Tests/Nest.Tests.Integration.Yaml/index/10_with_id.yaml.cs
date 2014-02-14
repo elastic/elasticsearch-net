@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Index
+namespace Nest.Tests.Integration.Yaml.Index1
 {
-	public partial class IndexTests
+	public partial class Index1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class IndexWithIdTests : YamlTestsBase
+		public class IndexWithId1Tests : YamlTestsBase
 		{
 			[Test]
-			public void IndexWithIdTest()
+			public void IndexWithId1Test()
 			{	
 
 				//do index 
@@ -27,9 +27,6 @@ namespace Nest.Tests.Integration.Yaml.Index
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test-weird-index-ä¸­æ–‡", "weird.type", "1", _body));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test-weird-index-ä¸­æ–‡");

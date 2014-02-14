@@ -9,21 +9,26 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
+namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 {
-	public partial class IndicesValidateQueryTests
+	public partial class IndicesValidateQuery1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ValidateQueryApiTests : YamlTestsBase
+		public class ValidateQueryApi1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ValidateQueryApiTest()
+			public void ValidateQueryApi1Test()
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("testing", null));
+				_body = new {
+					settings= new {
+						number_of_replicas= "0"
+					}
+				};
+				this.Do(()=> this._client.IndicesCreatePost("testing", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

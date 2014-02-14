@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
+namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 {
-	public partial class IndicesGetTemplateTests
+	public partial class IndicesGetTemplate1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetTemplateTests : YamlTestsBase
+		public class Setup1Tests : YamlTestsBase
 		{
 			[Test]
-			public void GetTemplateTest()
+			public void Setup1Test()
 			{	
 
 				//do indices.put_template 
@@ -30,10 +30,20 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplatePost("test", _body));
+				this.Do(()=> this._client.IndicesPutTemplateForAll("test", _body));
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GetTemplate2Tests : YamlTestsBase
+		{
+			[Test]
+			public void GetTemplate2Test()
+			{	
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplate("test"));
+				this.Do(()=> this._client.IndicesGetTemplateForAll("test"));
 
 				//match _response.test.template: 
 				this.IsMatch(_response.test.template, @"test-*");
@@ -48,23 +58,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAllTemplatesTests : YamlTestsBase
+		public class GetAllTemplates3Tests : YamlTestsBase
 		{
 			[Test]
-			public void GetAllTemplatesTest()
+			public void GetAllTemplates3Test()
 			{	
-
-				//skip 0 - 0.90.3; 
-				this.Skip("0 - 0.90.3", "Get all templates not available before 0.90.4");
-
-				//do indices.put_template 
-				_body = new {
-					template= "test-*",
-					settings= new {
-						number_of_shards= "1"
-					}
-				};
-				this.Do(()=> this._client.IndicesPutTemplatePost("test", _body));
 
 				//do indices.put_template 
 				_body = new {
@@ -73,16 +71,34 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 						number_of_shards= "1"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplatePost("test2", _body));
+				this.Do(()=> this._client.IndicesPutTemplateForAll("test2", _body));
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplate());
+				this.Do(()=> this._client.IndicesGetTemplateForAll());
 
 				//match _response.test.template: 
 				this.IsMatch(_response.test.template, @"test-*");
 
 				//match _response.test2.template: 
 				this.IsMatch(_response.test2.template, @"test2-*");
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GetTemplateWithLocalFlag4Tests : YamlTestsBase
+		{
+			[Test]
+			public void GetTemplateWithLocalFlag4Test()
+			{	
+
+				//do indices.get_template 
+				this.Do(()=> this._client.IndicesGetTemplateForAll("test", nv=>nv
+					.Add("local", @"true")
+				));
+
+				//is_true _response.test; 
+				this.IsTrue(_response.test);
 
 			}
 		}

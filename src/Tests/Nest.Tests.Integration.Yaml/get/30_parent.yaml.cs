@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Get
+namespace Nest.Tests.Integration.Yaml.Get4
 {
-	public partial class GetTests
+	public partial class Get4YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentTests : YamlTestsBase
+		public class Setup1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ParentTest()
+			public void Setup1Test()
 			{	
 
 				//do indices.create 
@@ -47,6 +47,16 @@ namespace Nest.Tests.Integration.Yaml.Get
 					.Add("parent", @"ä¸­æ–‡")
 				));
 
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class Parent2Tests : YamlTestsBase
+		{
+			[Test]
+			public void Parent2Test()
+			{	
+
 				//do get 
 				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
 					.Add("parent", @"ä¸­æ–‡")
@@ -65,8 +75,18 @@ namespace Nest.Tests.Integration.Yaml.Get
 				//match _response.fields._routing: 
 				this.IsMatch(_response.fields._routing, @"ä¸­æ–‡");
 
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class ParentOmitted3Tests : YamlTestsBase
+		{
+			[Test]
+			public void ParentOmitted3Test()
+			{	
+
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1"), shouldCatch: @"missing");
+				this.Do(()=> this._client.Get("test_1", "test", "1"), shouldCatch: @"request");
 
 			}
 		}

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
+namespace Nest.Tests.Integration.Yaml.ClusterPutSettings1
 {
-	public partial class ClusterPutSettingsTests
+	public partial class ClusterPutSettings1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestPutSettingsTests : YamlTestsBase
+		public class TestPutSettings1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestPutSettingsTest()
+			public void TestPutSettings1Test()
 			{	
 
 				//do cluster.put_settings 
@@ -28,7 +28,9 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 						 { "discovery.zen.minimum_master_nodes",  "1" }
 					}
 				};
-				this.Do(()=> this._client.ClusterPutSettings(_body));
+				this.Do(()=> this._client.ClusterPutSettings(_body, nv=>nv
+					.Add("flat_settings", @"true")
+				));
 
 				//match _response.transient: 
 				this.IsMatch(_response.transient, new Dictionary<string, object> {
@@ -36,7 +38,9 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings
 				});
 
 				//do cluster.get_settings 
-				this.Do(()=> this._client.ClusterGetSettings());
+				this.Do(()=> this._client.ClusterGetSettings(nv=>nv
+					.Add("flat_settings", @"true")
+				));
 
 				//match _response.transient: 
 				this.IsMatch(_response.transient, new Dictionary<string, object> {
