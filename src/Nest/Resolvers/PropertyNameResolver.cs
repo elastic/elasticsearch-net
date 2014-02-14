@@ -127,7 +127,7 @@ namespace Nest.Resolvers
 			if (stack != null)
 			{
 				var name = expression.Member.Name;
-				var resolvedName = name.ToCamelCase();
+				var resolvedName = this._settings.DefaultPropertyNameInferrer(name);
 
 				var att = ElasticAttributes.Property(expression.Member);
 				if (att != null)

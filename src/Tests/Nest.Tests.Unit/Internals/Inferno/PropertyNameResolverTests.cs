@@ -51,7 +51,28 @@ namespace Nest.Tests.Unit.Internals.Inferno
 				return "static id ftw";
 			}
 		}
-		
+
+		internal class UserItemData
+		{
+			public string Id { get; set; }
+			public string UserId { get; set; }
+			public string Title { get; set; }
+			public string Hidden { get; set; }
+			public string UserLabels { get; set; }
+		}
+
+		[Test]
+		public void TestUsesDefaultPropertyNameResolver()
+		{
+			var settings = new ConnectionSettings(Test.Default.Uri, Test.Default.DefaultIndex)
+				.SetDefaultPropertyNameInferrer(p => p);
+			var client = new ElasticClient(settings);
+			Expression<Func<UserItemData, object>> exp = (m) => m.UserLabels;
+			var propertyName = client.Infer.PropertyPath(exp);
+			Assert.AreEqual("UserLabels", propertyName);
+
+		}
+
 		[Test]
 		public void TestUsesElasticProperty()
 		{

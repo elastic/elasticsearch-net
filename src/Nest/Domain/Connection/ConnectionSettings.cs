@@ -70,6 +70,7 @@ namespace Nest
 
 			this.MaximumAsyncConnections = 0;
 			this.DefaultTypeNameInferrer = (t => t.Name.ToLower()); 
+			this.DefaultPropertyNameInferrer = (p => p.ToCamelCase()); 
 			this.DefaultIndices = new FluentDictionary<Type, string>();
 			this.DefaultTypeNames = new FluentDictionary<Type, string>();
 			this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
