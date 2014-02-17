@@ -24,8 +24,8 @@ namespace CodeGeneration.YamlTestsRunner
 	using YamlTestSuite = Dictionary<string, object>;
 	public static class YamlTestsGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/1.0/rest-api-spec/test";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/1.0/rest-api-spec/test/";
+		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.0.0/rest-api-spec/test";
+		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.0.0/rest-api-spec/test/";
 		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Nest.Tests.Integration.Yaml\";
 		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Nest\IRawElasticClient.generated.cs";
 		private readonly static string _viewFolder = @"..\..\Views\";
@@ -128,13 +128,14 @@ namespace CodeGeneration.YamlTestsRunner
 			if (file == "20_fields_pre_0.90.3.yaml")
 				yamlDefinition.Suites.First().Description = "Fields Pre 0.90.3";
 
-			var setupRoutine = yamlDefinition.Suites.FirstOrDefault(s => s.Description == "setup");
+			var setupRoutine = yamlDefinition.Suites
+				.FirstOrDefault(s => s.Description.Contains("setup"));
 			if (setupRoutine != null)
 			{
 				yamlDefinition.SetupSuite = setupRoutine;
 				foreach (var suite in yamlDefinition.Suites)
 					suite.HasSetup = true;
-				yamlDefinition.Suites = yamlDefinition.Suites.Where(s => s.Description != "setup");
+				yamlDefinition.Suites = yamlDefinition.Suites.Where(s => !s.Description.Contains("setup"));
 			}
 		}
 

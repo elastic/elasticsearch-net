@@ -37,8 +37,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings1
 					.Add("flat_settings", @"true")
 				));
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index.number_of_replicas"], 0);
+				//match _response[@"test-index"][@"settings"][@"index.number_of_replicas"]: 
+				this.IsMatch(_response[@"test-index"][@"settings"][@"index.number_of_replicas"], 0);
 
 				//do indices.put_settings 
 				_body = new {
@@ -51,8 +51,8 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings1
 					.Add("flat_settings", @"false")
 				));
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 1);
+				//match _response[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				this.IsMatch(_response[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 1);
 
 			}
 		}

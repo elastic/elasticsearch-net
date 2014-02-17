@@ -13,20 +13,18 @@ namespace Nest.Tests.Integration.Yaml.CatCount1
 {
 	public partial class CatCount1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class CatCount110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public CatCount110BasicYamlBase() : base()
 			{	
 
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatCountHelp2Tests : YamlTestsBase
+		public class TestCatCountHelp2Tests : CatCount110BasicYamlBase
 		{
 			[Test]
 			public void TestCatCountHelp2Test()
@@ -47,7 +45,7 @@ namespace Nest.Tests.Integration.Yaml.CatCount1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatCountOutput3Tests : YamlTestsBase
+		public class TestCatCountOutput3Tests : CatCount110BasicYamlBase
 		{
 			[Test]
 			public void TestCatCountOutput3Test()

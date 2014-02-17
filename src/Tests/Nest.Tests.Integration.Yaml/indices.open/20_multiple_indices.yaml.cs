@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 {
 	public partial class IndicesOpen2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesOpen220MultipleIndicesYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesOpen220MultipleIndicesYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -39,8 +36,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class AllIndices2Tests : YamlTestsBase
+		public class AllIndices2Tests : IndicesOpen220MultipleIndicesYamlBase
 		{
 			[Test]
 			public void AllIndices2Test()
@@ -67,7 +65,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TrailingWildcard3Tests : YamlTestsBase
+		public class TrailingWildcard3Tests : IndicesOpen220MultipleIndicesYamlBase
 		{
 			[Test]
 			public void TrailingWildcard3Test()
@@ -94,7 +92,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class OnlyWildcard4Tests : YamlTestsBase
+		public class OnlyWildcard4Tests : IndicesOpen220MultipleIndicesYamlBase
 		{
 			[Test]
 			public void OnlyWildcard4Test()

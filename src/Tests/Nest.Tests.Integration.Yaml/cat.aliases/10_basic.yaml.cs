@@ -13,20 +13,18 @@ namespace Nest.Tests.Integration.Yaml.CatAliases1
 {
 	public partial class CatAliases1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class CatAliases110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public CatAliases110BasicYamlBase() : base()
 			{	
 
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Help2Tests : YamlTestsBase
+		public class Help2Tests : CatAliases110BasicYamlBase
 		{
 			[Test]
 			public void Help2Test()
@@ -50,7 +48,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class EmptyCluster3Tests : YamlTestsBase
+		public class EmptyCluster3Tests : CatAliases110BasicYamlBase
 		{
 			[Test]
 			public void EmptyCluster3Test()
@@ -67,7 +65,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SimpleAlias4Tests : YamlTestsBase
+		public class SimpleAlias4Tests : CatAliases110BasicYamlBase
 		{
 			[Test]
 			public void SimpleAlias4Test()
@@ -96,7 +94,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ComplexAlias5Tests : YamlTestsBase
+		public class ComplexAlias5Tests : CatAliases110BasicYamlBase
 		{
 			[Test]
 			public void ComplexAlias5Test()
@@ -134,7 +132,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class AliasName6Tests : YamlTestsBase
+		public class AliasName6Tests : CatAliases110BasicYamlBase
 		{
 			[Test]
 			public void AliasName6Test()
@@ -174,7 +172,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ColumnHeaders7Tests : YamlTestsBase
+		public class ColumnHeaders7Tests : CatAliases110BasicYamlBase
 		{
 			[Test]
 			public void ColumnHeaders7Test()
@@ -192,7 +190,8 @@ $/
 				));
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/^  alias           \s+
+				this.IsMatch(this._status, @"/^  
+	alias           \s+
     index           \s+
     filter          \s+
     routing.index   \s+
@@ -210,7 +209,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SelectColumns8Tests : YamlTestsBase
+		public class SelectColumns8Tests : CatAliases110BasicYamlBase
 		{
 			[Test]
 			public void SelectColumns8Test()

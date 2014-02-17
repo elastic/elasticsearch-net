@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 {
 	public partial class IndicesPutMapping2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesPutMapping2AllPathOptionsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesPutMapping2AllPathOptionsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -34,8 +31,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutOneMappingPerIndex2Tests : YamlTestsBase
+		public class PutOneMappingPerIndex2Tests : IndicesPutMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutOneMappingPerIndex2Test()
@@ -89,7 +87,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutMappingInAllIndex3Tests : YamlTestsBase
+		public class PutMappingInAllIndex3Tests : IndicesPutMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutMappingInAllIndex3Test()
@@ -133,7 +131,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutMappingInIndex4Tests : YamlTestsBase
+		public class PutMappingInIndex4Tests : IndicesPutMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutMappingInIndex4Test()
@@ -177,7 +175,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutMappingInPrefixIndex5Tests : YamlTestsBase
+		public class PutMappingInPrefixIndex5Tests : IndicesPutMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutMappingInPrefixIndex5Test()
@@ -218,7 +216,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutMappingInListOfIndices6Tests : YamlTestsBase
+		public class PutMappingInListOfIndices6Tests : IndicesPutMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutMappingInListOfIndices6Test()
@@ -259,7 +257,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutMappingWithBlankIndex7Tests : YamlTestsBase
+		public class PutMappingWithBlankIndex7Tests : IndicesPutMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutMappingWithBlankIndex7Test()
@@ -276,7 +274,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMapping("", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMappingForAll("test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMappingForAll());
@@ -303,7 +301,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutMappingWithMissingType8Tests : YamlTestsBase
+		public class PutMappingWithMissingType8Tests : IndicesPutMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutMappingWithMissingType8Test()

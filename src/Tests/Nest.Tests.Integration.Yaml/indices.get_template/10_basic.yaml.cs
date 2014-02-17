@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 {
 	public partial class IndicesGetTemplate1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesGetTemplate110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesGetTemplate110BasicYamlBase() : base()
 			{	
 
 				//do indices.put_template 
@@ -35,8 +32,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetTemplate2Tests : YamlTestsBase
+		public class GetTemplate2Tests : IndicesGetTemplate110BasicYamlBase
 		{
 			[Test]
 			public void GetTemplate2Test()
@@ -58,7 +56,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAllTemplates3Tests : YamlTestsBase
+		public class GetAllTemplates3Tests : IndicesGetTemplate110BasicYamlBase
 		{
 			[Test]
 			public void GetAllTemplates3Test()
@@ -86,7 +84,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetTemplateWithLocalFlag4Tests : YamlTestsBase
+		public class GetTemplateWithLocalFlag4Tests : IndicesGetTemplate110BasicYamlBase
 		{
 			[Test]
 			public void GetTemplateWithLocalFlag4Test()

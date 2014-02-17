@@ -13,20 +13,18 @@ namespace Nest.Tests.Integration.Yaml.CatAllocation1
 {
 	public partial class CatAllocation1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class CatAllocation110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public CatAllocation110BasicYamlBase() : base()
 			{	
 
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Help2Tests : YamlTestsBase
+		public class Help2Tests : CatAllocation110BasicYamlBase
 		{
 			[Test]
 			public void Help2Test()
@@ -53,7 +51,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class EmptyCluster3Tests : YamlTestsBase
+		public class EmptyCluster3Tests : CatAllocation110BasicYamlBase
 		{
 			[Test]
 			public void EmptyCluster3Test()
@@ -81,7 +79,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class OneIndex4Tests : YamlTestsBase
+		public class OneIndex4Tests : CatAllocation110BasicYamlBase
 		{
 			[Test]
 			public void OneIndex4Test()
@@ -123,7 +121,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class NodeId5Tests : YamlTestsBase
+		public class NodeId5Tests : CatAllocation110BasicYamlBase
 		{
 			[Test]
 			public void NodeId5Test()
@@ -158,7 +156,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ColumnHeaders6Tests : YamlTestsBase
+		public class ColumnHeaders6Tests : CatAllocation110BasicYamlBase
 		{
 			[Test]
 			public void ColumnHeaders6Test()
@@ -197,7 +195,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SelectColumns7Tests : YamlTestsBase
+		public class SelectColumns7Tests : CatAllocation110BasicYamlBase
 		{
 			[Test]
 			public void SelectColumns7Test()
@@ -246,7 +244,7 @@ $/
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Bytes8Tests : YamlTestsBase
+		public class Bytes8Tests : CatAllocation110BasicYamlBase
 		{
 			[Test]
 			public void Bytes8Test()

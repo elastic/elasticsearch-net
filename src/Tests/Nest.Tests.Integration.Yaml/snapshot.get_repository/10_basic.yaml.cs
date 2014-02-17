@@ -13,20 +13,17 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 {
 	public partial class SnapshotGetRepository1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class SnapshotGetRepository110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public SnapshotGetRepository110BasicYamlBase() : base()
 			{	
 
 				//do snapshot.create_repository 
 				_body = new {
 					type= "url",
 					settings= new {
-						url= "http=//snapshot.test1"
+						url= "http://snapshot.test1"
 					}
 				};
 				this.Do(()=> this._client.SnapshotCreateRepositoryPut("test_repo1", _body));
@@ -35,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 				_body = new {
 					type= "url",
 					settings= new {
-						url= "http=//snapshot.test2"
+						url= "http://snapshot.test2"
 					}
 				};
 				this.Do(()=> this._client.SnapshotCreateRepositoryPut("test_repo2", _body));
@@ -43,8 +40,9 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAllRepositories2Tests : YamlTestsBase
+		public class GetAllRepositories2Tests : SnapshotGetRepository110BasicYamlBase
 		{
 			[Test]
 			public void GetAllRepositories2Test()
@@ -63,7 +61,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetRepositoryByName3Tests : YamlTestsBase
+		public class GetRepositoryByName3Tests : SnapshotGetRepository110BasicYamlBase
 		{
 			[Test]
 			public void GetRepositoryByName3Test()
@@ -82,7 +80,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetMissingRepositoryByName4Tests : YamlTestsBase
+		public class GetMissingRepositoryByName4Tests : SnapshotGetRepository110BasicYamlBase
 		{
 			[Test]
 			public void GetMissingRepositoryByName4Test()
@@ -95,7 +93,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAllRepositoriesWithLocalFlag5Tests : YamlTestsBase
+		public class GetAllRepositoriesWithLocalFlag5Tests : SnapshotGetRepository110BasicYamlBase
 		{
 			[Test]
 			public void GetAllRepositoriesWithLocalFlag5Test()

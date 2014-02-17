@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 {
 	public partial class IndicesDeleteAlias2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesDeleteAlias2AllPathOptionsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesDeleteAlias2AllPathOptionsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -46,42 +43,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			}
 		}
 
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckSetup2Tests : YamlTestsBase
-		{
-			[Test]
-			public void CheckSetup2Test()
-			{	
-
-				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"));
-
-				//match _response.test_index1.aliases.alias1.search_routing: 
-				this.IsMatch(_response.test_index1.aliases.alias1.search_routing, @"routing value");
-
-				//match _response.test_index2.aliases.alias1.search_routing: 
-				this.IsMatch(_response.test_index2.aliases.alias1.search_routing, @"routing value");
-
-				//match _response.foo.aliases.alias1.search_routing: 
-				this.IsMatch(_response.foo.aliases.alias1.search_routing, @"routing value");
-
-				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
-
-				//match _response.test_index1.aliases.alias2.search_routing: 
-				this.IsMatch(_response.test_index1.aliases.alias2.search_routing, @"routing value");
-
-				//match _response.test_index2.aliases.alias2.search_routing: 
-				this.IsMatch(_response.test_index2.aliases.alias2.search_routing, @"routing value");
-
-				//match _response.foo.aliases.alias2.search_routing: 
-				this.IsMatch(_response.foo.aliases.alias2.search_routing, @"routing value");
-
-			}
-		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithAllIndex3Tests : YamlTestsBase
+		public class CheckDeleteWithAllIndex3Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithAllIndex3Test()
@@ -109,7 +73,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndex4Tests : YamlTestsBase
+		public class CheckDeleteWithIndex4Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndex4Test()
@@ -137,7 +101,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexList5Tests : YamlTestsBase
+		public class CheckDeleteWithIndexList5Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexList5Test()
@@ -174,7 +138,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithPrefixIndex6Tests : YamlTestsBase
+		public class CheckDeleteWithPrefixIndex6Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithPrefixIndex6Test()
@@ -211,7 +175,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexListAndAliases7Tests : YamlTestsBase
+		public class CheckDeleteWithIndexListAndAliases7Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexListAndAliases7Test()
@@ -248,7 +212,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexListAndAllAliases8Tests : YamlTestsBase
+		public class CheckDeleteWithIndexListAndAllAliases8Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexListAndAllAliases8Test()
@@ -285,7 +249,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexListAndWildcardAliases9Tests : YamlTestsBase
+		public class CheckDeleteWithIndexListAndWildcardAliases9Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexListAndWildcardAliases9Test()
@@ -322,7 +286,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Check404OnNoMatchingAlias10Tests : YamlTestsBase
+		public class Check404OnNoMatchingAlias10Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void Check404OnNoMatchingAlias10Test()
@@ -338,7 +302,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithBlankIndexAndBlankAlias11Tests : YamlTestsBase
+		public class CheckDeleteWithBlankIndexAndBlankAlias11Tests : IndicesDeleteAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithBlankIndexAndBlankAlias11Test()

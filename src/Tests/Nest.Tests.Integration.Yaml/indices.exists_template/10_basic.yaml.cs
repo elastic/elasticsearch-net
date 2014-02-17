@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsTemplate1
 {
 	public partial class IndicesExistsTemplate1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesExistsTemplate110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesExistsTemplate110BasicYamlBase() : base()
 			{	
 
 				//do indices.delete_template 
@@ -32,8 +29,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsTemplate1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestIndicesExistsTemplate2Tests : YamlTestsBase
+		public class TestIndicesExistsTemplate2Tests : IndicesExistsTemplate110BasicYamlBase
 		{
 			[Test]
 			public void TestIndicesExistsTemplate2Test()
@@ -65,7 +63,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsTemplate1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestIndicesExistsTemplateWithLocalFlag3Tests : YamlTestsBase
+		public class TestIndicesExistsTemplateWithLocalFlag3Tests : IndicesExistsTemplate110BasicYamlBase
 		{
 			[Test]
 			public void TestIndicesExistsTemplateWithLocalFlag3Test()

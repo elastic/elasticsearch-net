@@ -13,20 +13,18 @@ namespace Nest.Tests.Integration.Yaml.CatThreadPool1
 {
 	public partial class CatThreadPool1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class CatThreadPool110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public CatThreadPool110BasicYamlBase() : base()
 			{	
 
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatThreadPoolOutput2Tests : YamlTestsBase
+		public class TestCatThreadPoolOutput2Tests : CatThreadPool110BasicYamlBase
 		{
 			[Test]
 			public void TestCatThreadPoolOutput2Test()

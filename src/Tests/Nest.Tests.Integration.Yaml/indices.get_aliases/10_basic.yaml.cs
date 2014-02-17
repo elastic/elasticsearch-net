@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 {
 	public partial class IndicesGetAliases1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesGetAliases110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesGetAliases110BasicYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -43,8 +40,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAllAliasesViaAliases2Tests : YamlTestsBase
+		public class GetAllAliasesViaAliases2Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAllAliasesViaAliases2Test()
@@ -69,7 +67,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAllAliasesViaIndexAliases3Tests : YamlTestsBase
+		public class GetAllAliasesViaIndexAliases3Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAllAliasesViaIndexAliases3Test()
@@ -91,7 +89,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetSpecificAliasViaIndexAliasesName4Tests : YamlTestsBase
+		public class GetSpecificAliasViaIndexAliasesName4Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetSpecificAliasViaIndexAliasesName4Test()
@@ -113,7 +111,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaIndexAliasesAll5Tests : YamlTestsBase
+		public class GetAliasesViaIndexAliasesAll5Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaIndexAliasesAll5Test()
@@ -135,7 +133,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaIndexAliases6Tests : YamlTestsBase
+		public class GetAliasesViaIndexAliases6Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaIndexAliases6Test()
@@ -157,7 +155,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaIndexAliasesPrefix7Tests : YamlTestsBase
+		public class GetAliasesViaIndexAliasesPrefix7Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaIndexAliasesPrefix7Test()
@@ -179,7 +177,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaIndexAliasesNameName8Tests : YamlTestsBase
+		public class GetAliasesViaIndexAliasesNameName8Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaIndexAliasesNameName8Test()
@@ -201,7 +199,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaAliasesName9Tests : YamlTestsBase
+		public class GetAliasesViaAliasesName9Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaAliasesName9Test()
@@ -226,7 +224,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaAllAliasesName10Tests : YamlTestsBase
+		public class GetAliasesViaAllAliasesName10Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaAllAliasesName10Test()
@@ -251,7 +249,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaAliasesName11Tests : YamlTestsBase
+		public class GetAliasesViaAliasesName11Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaAliasesName11Test()
@@ -276,7 +274,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaPrefAliasesName12Tests : YamlTestsBase
+		public class GetAliasesViaPrefAliasesName12Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaPrefAliasesName12Test()
@@ -301,7 +299,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesViaNameNameAliasesName13Tests : YamlTestsBase
+		public class GetAliasesViaNameNameAliasesName13Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesViaNameNameAliasesName13Test()
@@ -326,7 +324,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class NonExistentAliasOnAnExistingIndexReturnsMatchingIndcies14Tests : YamlTestsBase
+		public class NonExistentAliasOnAnExistingIndexReturnsMatchingIndcies14Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void NonExistentAliasOnAnExistingIndexReturnsMatchingIndcies14Test()
@@ -342,7 +340,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ExistentAndNonExistentAliasReturnsJustTheExisting15Tests : YamlTestsBase
+		public class ExistentAndNonExistentAliasReturnsJustTheExisting15Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void ExistentAndNonExistentAliasReturnsJustTheExisting15Test()
@@ -354,14 +352,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
 
-				//is_false _responseDictionary[@"test_index"][@"aliases"][@"non-existent"]; 
-				this.IsFalse(_responseDictionary[@"test_index"][@"aliases"][@"non-existent"]);
+				//is_false _response[@"test_index"][@"aliases"][@"non-existent"]; 
+				this.IsFalse(_response[@"test_index"][@"aliases"][@"non-existent"]);
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingAliasOnAnNonExistentIndexShouldReturn40416Tests : YamlTestsBase
+		public class GettingAliasOnAnNonExistentIndexShouldReturn40416Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GettingAliasOnAnNonExistentIndexShouldReturn40416Test()
@@ -377,7 +375,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAliasesWithLocalFlag17Tests : YamlTestsBase
+		public class GetAliasesWithLocalFlag17Tests : IndicesGetAliases110BasicYamlBase
 		{
 			[Test]
 			public void GetAliasesWithLocalFlag17Test()

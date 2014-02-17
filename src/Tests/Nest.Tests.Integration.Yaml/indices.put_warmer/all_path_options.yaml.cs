@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 {
 	public partial class IndicesPutWarmer3YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesPutWarmer3AllPathOptionsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesPutWarmer3AllPathOptionsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -31,16 +28,12 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 				//do indices.create 
 				this.Do(()=> this._client.IndicesCreatePut("foo", null));
 
-				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
-					.Add("wait_for_status", @"yellow")
-				));
-
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutWarmerPerIndex2Tests : YamlTestsBase
+		public class PutWarmerPerIndex2Tests : IndicesPutWarmer3AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutWarmerPerIndex2Test()
@@ -78,7 +71,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutWarmerInAllIndex3Tests : YamlTestsBase
+		public class PutWarmerInAllIndex3Tests : IndicesPutWarmer3AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutWarmerInAllIndex3Test()
@@ -108,7 +101,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutWarmerInIndex4Tests : YamlTestsBase
+		public class PutWarmerInIndex4Tests : IndicesPutWarmer3AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutWarmerInIndex4Test()
@@ -138,7 +131,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutWarmerPrefixIndex5Tests : YamlTestsBase
+		public class PutWarmerPrefixIndex5Tests : IndicesPutWarmer3AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutWarmerPrefixIndex5Test()
@@ -168,7 +161,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutWarmerInListOfIndices6Tests : YamlTestsBase
+		public class PutWarmerInListOfIndices6Tests : IndicesPutWarmer3AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutWarmerInListOfIndices6Test()
@@ -198,7 +191,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutWarmerWithBlankIndex7Tests : YamlTestsBase
+		public class PutWarmerWithBlankIndex7Tests : IndicesPutWarmer3AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutWarmerWithBlankIndex7Test()
@@ -210,7 +203,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutWarmer("", "warmer", _body));
+				this.Do(()=> this._client.IndicesPutWarmerForAll("warmer", _body));
 
 				//do indices.get_warmer 
 				this.Do(()=> this._client.IndicesGetWarmer("_all", "*"));
@@ -228,7 +221,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer3
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutWarmerWithMissingName8Tests : YamlTestsBase
+		public class PutWarmerWithMissingName8Tests : IndicesPutWarmer3AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutWarmerWithMissingName8Test()

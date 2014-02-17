@@ -23,12 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 			{	
 
 				//do indices.create 
-				_body = new {
-					settings= new {
-						number_of_replicas= "0"
-					}
-				};
-				this.Do(()=> this._client.IndicesCreatePut("testing", _body));
+				this.Do(()=> this._client.IndicesCreatePut("testing", null));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

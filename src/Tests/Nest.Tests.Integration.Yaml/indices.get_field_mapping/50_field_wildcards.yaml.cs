@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 {
 	public partial class IndicesGetFieldMapping5YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesGetFieldMapping550FieldWildcardsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesGetFieldMapping550FieldWildcardsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -96,8 +93,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingWithForFields2Tests : YamlTestsBase
+		public class GetFieldMappingWithForFields2Tests : IndicesGetFieldMapping550FieldWildcardsYamlBase
 		{
 			[Test]
 			public void GetFieldMappingWithForFields2Test()
@@ -112,20 +110,20 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 				//match _response.test_index.mappings.test_type.t2.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.t2.full_name, @"t2");
 
-				//match _responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"], @"obj.t1");
+				//match _response[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"]: 
+				this.IsMatch(_response[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"], @"obj.t1");
 
-				//match _responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"], @"obj.i_t1");
+				//match _response[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"]: 
+				this.IsMatch(_response[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"], @"obj.i_t1");
 
-				//match _responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t3"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t3"][@"full_name"], @"obj.i_t3");
+				//match _response[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t3"][@"full_name"]: 
+				this.IsMatch(_response[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t3"][@"full_name"], @"obj.i_t3");
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingWithTForFields3Tests : YamlTestsBase
+		public class GetFieldMappingWithTForFields3Tests : IndicesGetFieldMapping550FieldWildcardsYamlBase
 		{
 			[Test]
 			public void GetFieldMappingWithTForFields3Test()
@@ -150,7 +148,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingWithT1ForFields4Tests : YamlTestsBase
+		public class GetFieldMappingWithT1ForFields4Tests : IndicesGetFieldMapping550FieldWildcardsYamlBase
 		{
 			[Test]
 			public void GetFieldMappingWithT1ForFields4Test()
@@ -162,11 +160,11 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 				//match _response.test_index.mappings.test_type.t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.t1.full_name, @"t1");
 
-				//match _responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"], @"obj.t1");
+				//match _response[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"]: 
+				this.IsMatch(_response[@"test_index"][@"mappings"][@"test_type"][@"obj.t1"][@"full_name"], @"obj.t1");
 
-				//match _responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"]: 
-				this.IsMatch(_responseDictionary[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"], @"obj.i_t1");
+				//match _response[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"]: 
+				this.IsMatch(_response[@"test_index"][@"mappings"][@"test_type"][@"obj.i_t1"][@"full_name"], @"obj.i_t1");
 
 				//length _response.test_index.mappings.test_type: 3; 
 				this.IsLength(_response.test_index.mappings.test_type, 3);
@@ -175,7 +173,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingWithWildcardedRelativeNames5Tests : YamlTestsBase
+		public class GetFieldMappingWithWildcardedRelativeNames5Tests : IndicesGetFieldMapping550FieldWildcardsYamlBase
 		{
 			[Test]
 			public void GetFieldMappingWithWildcardedRelativeNames5Test()
@@ -197,7 +195,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingShouldWorkUsingAllForIndicesAndTypes6Tests : YamlTestsBase
+		public class GetFieldMappingShouldWorkUsingAllForIndicesAndTypes6Tests : IndicesGetFieldMapping550FieldWildcardsYamlBase
 		{
 			[Test]
 			public void GetFieldMappingShouldWorkUsingAllForIndicesAndTypes6Test()
@@ -228,7 +226,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingShouldWorkUsingForIndicesAndTypes7Tests : YamlTestsBase
+		public class GetFieldMappingShouldWorkUsingForIndicesAndTypes7Tests : IndicesGetFieldMapping550FieldWildcardsYamlBase
 		{
 			[Test]
 			public void GetFieldMappingShouldWorkUsingForIndicesAndTypes7Test()
@@ -259,7 +257,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingShouldWorkUsingCommaSeparatedValuesForIndicesAndTypes8Tests : YamlTestsBase
+		public class GetFieldMappingShouldWorkUsingCommaSeparatedValuesForIndicesAndTypes8Tests : IndicesGetFieldMapping550FieldWildcardsYamlBase
 		{
 			[Test]
 			public void GetFieldMappingShouldWorkUsingCommaSeparatedValuesForIndicesAndTypes8Test()

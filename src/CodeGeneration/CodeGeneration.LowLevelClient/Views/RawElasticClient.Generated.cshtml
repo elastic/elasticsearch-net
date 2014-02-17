@@ -45,7 +45,7 @@ namespace Nest
 		{
 		@foreach (ApiUrlPart part in method.Parts.Where(p=>p.Name != "body").ToList())
 		{
-			<text>@(part.Name).ThrowIfNull("@part.Name");</text>
+			<text>@(part.Name).@(part.Type == "string" || part.Type == "list" ? "ThrowIfNullOrEmpty" : "ThrowIfNull")("@part.Name");</text>
 		}
 		@if (method.Parts.Any())
 		{

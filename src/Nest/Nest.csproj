@@ -101,6 +101,8 @@
     <Compile Include="Domain\Alias\IAliasAction.cs" />
     <Compile Include="Domain\Bulk\MultiGetDoc.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
+    <Compile Include="Domain\ElasticsearchResponse.cs" />
+    <Compile Include="Domain\ElasticsearchResponseValue.cs" />
     <Compile Include="Domain\ICustomJson.cs" />
     <Compile Include="Domain\Responses\GetAliasesResponse.cs" />
     <Compile Include="Domain\Responses\GetMappingResponse.cs" />
@@ -167,7 +169,6 @@
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
-    <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\DSL\GeoIndexedShapeVector.cs" />
     <Compile Include="Domain\DSL\GeoShapeVector.cs" />
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />

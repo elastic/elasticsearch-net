@@ -263,7 +263,7 @@ namespace Nest.Thrift
 
 					var result = client.execute(restRequest);
 					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
-						return new ConnectionStatus(this._connectionSettings, DecodeStr(result.Body));
+						return new ConnectionStatus(this._connectionSettings, result.Body);
 					else
 					{
 						var connectionException = new ConnectionException(

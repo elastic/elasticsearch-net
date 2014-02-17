@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 {
 	public partial class ClusterState2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class ClusterState220FilteringYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public ClusterState220FilteringYamlBase() : base()
 			{	
 
 				//do index 
@@ -34,8 +31,9 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateByBlocksShouldReturnTheBlocksFieldEvenIfTheResponseIsEmpty2Tests : YamlTestsBase
+		public class FilteringTheClusterStateByBlocksShouldReturnTheBlocksFieldEvenIfTheResponseIsEmpty2Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateByBlocksShouldReturnTheBlocksFieldEvenIfTheResponseIsEmpty2Test()
@@ -69,7 +67,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateByBlocksShouldReturnTheBlocks3Tests : YamlTestsBase
+		public class FilteringTheClusterStateByBlocksShouldReturnTheBlocks3Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateByBlocksShouldReturnTheBlocks3Test()
@@ -109,7 +107,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateByNodesOnlyShouldWork4Tests : YamlTestsBase
+		public class FilteringTheClusterStateByNodesOnlyShouldWork4Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateByNodesOnlyShouldWork4Test()
@@ -140,7 +138,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateByMetadataOnlyShouldWork5Tests : YamlTestsBase
+		public class FilteringTheClusterStateByMetadataOnlyShouldWork5Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateByMetadataOnlyShouldWork5Test()
@@ -171,7 +169,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateByRoutingTableOnlyShouldWork6Tests : YamlTestsBase
+		public class FilteringTheClusterStateByRoutingTableOnlyShouldWork6Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateByRoutingTableOnlyShouldWork6Test()
@@ -202,7 +200,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateForSpecificIndexTemplatesShouldWork7Tests : YamlTestsBase
+		public class FilteringTheClusterStateForSpecificIndexTemplatesShouldWork7Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateForSpecificIndexTemplatesShouldWork7Test()
@@ -274,7 +272,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateByIndicesShouldWorkInRoutingTableAndMetadata8Tests : YamlTestsBase
+		public class FilteringTheClusterStateByIndicesShouldWorkInRoutingTableAndMetadata8Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateByIndicesShouldWorkInRoutingTableAndMetadata8Test()
@@ -308,7 +306,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FilteringTheClusterStateUsingAllForIndicesAndMetricsShouldWork9Tests : YamlTestsBase
+		public class FilteringTheClusterStateUsingAllForIndicesAndMetricsShouldWork9Tests : ClusterState220FilteringYamlBase
 		{
 			[Test]
 			public void FilteringTheClusterStateUsingAllForIndicesAndMetricsShouldWork9Test()

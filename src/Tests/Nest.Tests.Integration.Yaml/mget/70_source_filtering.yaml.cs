@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 {
 	public partial class Mget11YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class Mget1170SourceFilteringYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public Mget1170SourceFilteringYamlBase() : base()
 			{	
 
 				//do index 
@@ -45,8 +42,9 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringTrueFalse2Tests : YamlTestsBase
+		public class SourceFilteringTrueFalse2Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringTrueFalse2Test()
@@ -87,7 +85,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringIncludeField3Tests : YamlTestsBase
+		public class SourceFilteringIncludeField3Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringIncludeField3Test()
@@ -132,7 +130,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringIncludeNestedField4Tests : YamlTestsBase
+		public class SourceFilteringIncludeNestedField4Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringIncludeNestedField4Test()
@@ -181,7 +179,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringExcludeField5Tests : YamlTestsBase
+		public class SourceFilteringExcludeField5Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringExcludeField5Test()
@@ -218,7 +216,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringIdsAndTrueFalse6Tests : YamlTestsBase
+		public class SourceFilteringIdsAndTrueFalse6Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringIdsAndTrueFalse6Test()
@@ -262,7 +260,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringIdsAndIncludeField7Tests : YamlTestsBase
+		public class SourceFilteringIdsAndIncludeField7Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringIdsAndIncludeField7Test()
@@ -297,7 +295,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringIdsAndIncludeNestedField8Tests : YamlTestsBase
+		public class SourceFilteringIdsAndIncludeNestedField8Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringIdsAndIncludeNestedField8Test()
@@ -334,7 +332,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SourceFilteringIdsAndExcludeField9Tests : YamlTestsBase
+		public class SourceFilteringIdsAndExcludeField9Tests : Mget1170SourceFilteringYamlBase
 		{
 			[Test]
 			public void SourceFilteringIdsAndExcludeField9Test()

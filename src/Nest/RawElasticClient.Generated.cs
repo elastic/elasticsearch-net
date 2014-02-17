@@ -59,7 +59,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ConnectionStatus BulkPost(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -79,7 +79,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ConnectionStatus> BulkPostAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -100,8 +100,8 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ConnectionStatus BulkPost(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -122,8 +122,8 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ConnectionStatus> BulkPostAsync(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -179,7 +179,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ConnectionStatus BulkPut(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -199,7 +199,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ConnectionStatus> BulkPutAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
 			var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -220,8 +220,8 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ConnectionStatus BulkPut(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -242,8 +242,8 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ConnectionStatus> BulkPutAsync(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -294,7 +294,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public ConnectionStatus CatAliasesGet(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_cat/aliases/{name}".Inject(new { name = Stringify(name) });
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -313,7 +313,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public Task<ConnectionStatus> CatAliasesGetAsync(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_cat/aliases/{name}".Inject(new { name = Stringify(name) });
 			var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -364,7 +364,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		public ConnectionStatus CatAllocationGet(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cat/allocation/{node_id}".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -383,7 +383,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		public Task<ConnectionStatus> CatAllocationGetAsync(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cat/allocation/{node_id}".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -434,7 +434,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public ConnectionStatus CatCountGet(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/count/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -453,7 +453,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public Task<ConnectionStatus> CatCountGetAsync(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/count/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -568,7 +568,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public ConnectionStatus CatIndicesGet(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/indices/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -587,7 +587,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public Task<ConnectionStatus> CatIndicesGetAsync(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/indices/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -734,7 +734,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public ConnectionStatus CatRecoveryGet(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/recovery/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -753,7 +753,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public Task<ConnectionStatus> CatRecoveryGetAsync(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/recovery/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -804,7 +804,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public ConnectionStatus CatShardsGet(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/shards/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -823,7 +823,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		public Task<ConnectionStatus> CatShardsGetAsync(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cat/shards/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -874,7 +874,7 @@ namespace Nest
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		public ConnectionStatus ClearScrollDelete(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
 		{
-			scroll_id.ThrowIfNull("scroll_id");
+			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
@@ -893,7 +893,7 @@ namespace Nest
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		public Task<ConnectionStatus> ClearScrollDeleteAsync(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
 		{
-			scroll_id.ThrowIfNull("scroll_id");
+			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
@@ -976,7 +976,7 @@ namespace Nest
 		///<param name="index">Limit the information returned to a specific index</param>
 		public ConnectionStatus ClusterHealthGet(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cluster/health/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -995,7 +995,7 @@ namespace Nest
 		///<param name="index">Limit the information returned to a specific index</param>
 		public Task<ConnectionStatus> ClusterHealthGetAsync(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cluster/health/{index}".Inject(new { index = Stringify(index) });
 			var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -1150,7 +1150,7 @@ namespace Nest
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		public ConnectionStatus ClusterStateGet(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_cluster/state/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -1169,7 +1169,7 @@ namespace Nest
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		public Task<ConnectionStatus> ClusterStateGetAsync(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_cluster/state/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -1189,8 +1189,8 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus ClusterStateGet(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
-			index.ThrowIfNull("index");
+			metric.ThrowIfNullOrEmpty("metric");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cluster/state/{metric}/{index}".Inject(new { metric = Stringify(metric), index = Stringify(index) });
 			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
 			NameValueCollection nv = null;
@@ -1210,8 +1210,8 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> ClusterStateGetAsync(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
-			index.ThrowIfNull("index");
+			metric.ThrowIfNullOrEmpty("metric");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "_cluster/state/{metric}/{index}".Inject(new { metric = Stringify(metric), index = Stringify(index) });
 			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
 			NameValueCollection nv = null;
@@ -1262,7 +1262,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public ConnectionStatus ClusterStatsGet(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cluster/stats/nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -1281,7 +1281,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public Task<ConnectionStatus> ClusterStatsGetAsync(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cluster/stats/nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -1337,7 +1337,7 @@ namespace Nest
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		public ConnectionStatus CountPost(string index, object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -1357,7 +1357,7 @@ namespace Nest
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		public Task<ConnectionStatus> CountPostAsync(string index, object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -1378,8 +1378,8 @@ namespace Nest
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		public ConnectionStatus CountPost(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1400,8 +1400,8 @@ namespace Nest
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		public Task<ConnectionStatus> CountPostAsync(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1452,7 +1452,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		public ConnectionStatus CountGet(string index, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -1471,7 +1471,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		public Task<ConnectionStatus> CountGetAsync(string index, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
 			var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -1491,8 +1491,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		public ConnectionStatus CountGet(string index, string type, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1512,8 +1512,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		public Task<ConnectionStatus> CountGetAsync(string index, string type, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1533,8 +1533,8 @@ namespace Nest
 		///<param name="type">The type of the document being count percolated.</param>
 		public ConnectionStatus CountPercolateGet(string index, string type, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1554,8 +1554,8 @@ namespace Nest
 		///<param name="type">The type of the document being count percolated.</param>
 		public Task<ConnectionStatus> CountPercolateGetAsync(string index, string type, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1576,9 +1576,9 @@ namespace Nest
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		public ConnectionStatus CountPercolateGet(string index, string type, string id, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1599,9 +1599,9 @@ namespace Nest
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		public Task<ConnectionStatus> CountPercolateGetAsync(string index, string type, string id, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1622,8 +1622,8 @@ namespace Nest
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		public ConnectionStatus CountPercolatePost(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1644,8 +1644,8 @@ namespace Nest
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		public Task<ConnectionStatus> CountPercolatePostAsync(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1667,9 +1667,9 @@ namespace Nest
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		public ConnectionStatus CountPercolatePost(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1691,9 +1691,9 @@ namespace Nest
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		public Task<ConnectionStatus> CountPercolatePostAsync(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1714,9 +1714,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public ConnectionStatus Delete(string index, string type, string id, Func<DeleteQueryString, DeleteQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1737,9 +1737,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public Task<ConnectionStatus> DeleteAsync(string index, string type, string id, Func<DeleteQueryString, DeleteQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1759,7 +1759,7 @@ namespace Nest
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		public ConnectionStatus DeleteByQuery(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_query".Inject(new { index = Stringify(index) });
 			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -1779,7 +1779,7 @@ namespace Nest
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		public Task<ConnectionStatus> DeleteByQueryAsync(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_query".Inject(new { index = Stringify(index) });
 			var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -1800,8 +1800,8 @@ namespace Nest
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		public ConnectionStatus DeleteByQuery(string index, string type, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_query".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1822,8 +1822,8 @@ namespace Nest
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		public Task<ConnectionStatus> DeleteByQueryAsync(string index, string type, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_query".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -1844,9 +1844,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public ConnectionStatus ExistsHead(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1867,9 +1867,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public Task<ConnectionStatus> ExistsHeadAsync(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1890,9 +1890,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public ConnectionStatus ExplainGet(string index, string type, string id, Func<ExplainQueryString, ExplainQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1913,9 +1913,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public Task<ConnectionStatus> ExplainGetAsync(string index, string type, string id, Func<ExplainQueryString, ExplainQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1937,9 +1937,9 @@ namespace Nest
 		///<param name="body">The query definition using the Query DSL</param>
 		public ConnectionStatus ExplainPost(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1961,9 +1961,9 @@ namespace Nest
 		///<param name="body">The query definition using the Query DSL</param>
 		public Task<ConnectionStatus> ExplainPostAsync(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -1984,9 +1984,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public ConnectionStatus Get(string index, string type, string id, Func<GetQueryString, GetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2007,9 +2007,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public Task<ConnectionStatus> GetAsync(string index, string type, string id, Func<GetQueryString, GetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2030,9 +2030,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public ConnectionStatus GetSource(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_source".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2053,9 +2053,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public Task<ConnectionStatus> GetSourceAsync(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_source".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2076,8 +2076,8 @@ namespace Nest
 		///<param name="body">The document</param>
 		public ConnectionStatus IndexPost(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -2098,8 +2098,8 @@ namespace Nest
 		///<param name="body">The document</param>
 		public Task<ConnectionStatus> IndexPostAsync(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -2121,9 +2121,9 @@ namespace Nest
 		///<param name="body">The document</param>
 		public ConnectionStatus IndexPost(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2145,9 +2145,9 @@ namespace Nest
 		///<param name="body">The document</param>
 		public Task<ConnectionStatus> IndexPostAsync(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2168,8 +2168,8 @@ namespace Nest
 		///<param name="body">The document</param>
 		public ConnectionStatus IndexPut(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -2190,8 +2190,8 @@ namespace Nest
 		///<param name="body">The document</param>
 		public Task<ConnectionStatus> IndexPutAsync(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -2213,9 +2213,9 @@ namespace Nest
 		///<param name="body">The document</param>
 		public ConnectionStatus IndexPut(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2237,9 +2237,9 @@ namespace Nest
 		///<param name="body">The document</param>
 		public Task<ConnectionStatus> IndexPutAsync(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -2290,7 +2290,7 @@ namespace Nest
 		///<param name="index">The name of the index to scope the operation</param>
 		public ConnectionStatus IndicesAnalyzeGet(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2309,7 +2309,7 @@ namespace Nest
 		///<param name="index">The name of the index to scope the operation</param>
 		public Task<ConnectionStatus> IndicesAnalyzeGetAsync(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2365,7 +2365,7 @@ namespace Nest
 		///<param name="body">The text on which the analysis should be performed</param>
 		public ConnectionStatus IndicesAnalyzePost(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2385,7 +2385,7 @@ namespace Nest
 		///<param name="body">The text on which the analysis should be performed</param>
 		public Task<ConnectionStatus> IndicesAnalyzePostAsync(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
 			var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2436,7 +2436,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public ConnectionStatus IndicesClearCachePost(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2455,7 +2455,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public Task<ConnectionStatus> IndicesClearCachePostAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2506,7 +2506,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public ConnectionStatus IndicesClearCacheGet(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2525,7 +2525,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		public Task<ConnectionStatus> IndicesClearCacheGetAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
 			var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2544,7 +2544,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		public ConnectionStatus IndicesClosePost(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_close".Inject(new { index = Stringify(index) });
 			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2563,7 +2563,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		public Task<ConnectionStatus> IndicesClosePostAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_close".Inject(new { index = Stringify(index) });
 			var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2583,7 +2583,7 @@ namespace Nest
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		public ConnectionStatus IndicesCreatePut(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2603,7 +2603,7 @@ namespace Nest
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		public Task<ConnectionStatus> IndicesCreatePutAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2623,7 +2623,7 @@ namespace Nest
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		public ConnectionStatus IndicesCreatePost(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2643,7 +2643,7 @@ namespace Nest
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		public Task<ConnectionStatus> IndicesCreatePostAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2662,7 +2662,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		public ConnectionStatus IndicesDelete(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2681,7 +2681,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		public Task<ConnectionStatus> IndicesDeleteAsync(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2701,8 +2701,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		public ConnectionStatus IndicesDeleteAlias(string index, string name, Func<IndicesDeleteAliasQueryString, IndicesDeleteAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -2722,8 +2722,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		public Task<ConnectionStatus> IndicesDeleteAliasAsync(string index, string name, Func<IndicesDeleteAliasQueryString, IndicesDeleteAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -2743,8 +2743,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
 		public ConnectionStatus IndicesDeleteMapping(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -2764,8 +2764,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
 		public Task<ConnectionStatus> IndicesDeleteMappingAsync(string index, string type, Func<DeleteMappingQueryString, DeleteMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -2784,7 +2784,7 @@ namespace Nest
 		///<param name="name">The name of the template</param>
 		public ConnectionStatus IndicesDeleteTemplateForAll(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -2803,7 +2803,7 @@ namespace Nest
 		///<param name="name">The name of the template</param>
 		public Task<ConnectionStatus> IndicesDeleteTemplateForAllAsync(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -2823,8 +2823,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
 		public ConnectionStatus IndicesDeleteWarmer(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -2844,8 +2844,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
 		public Task<ConnectionStatus> IndicesDeleteWarmerAsync(string index, string name, Func<DeleteWarmerQueryString, DeleteWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -2864,7 +2864,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to check</param>
 		public ConnectionStatus IndicesExistsHead(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2883,7 +2883,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to check</param>
 		public Task<ConnectionStatus> IndicesExistsHeadAsync(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}".Inject(new { index = Stringify(index) });
 			var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -2902,7 +2902,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public ConnectionStatus IndicesExistsAliasHeadForAll(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -2921,7 +2921,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public Task<ConnectionStatus> IndicesExistsAliasHeadForAllAsync(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -2941,8 +2941,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public ConnectionStatus IndicesExistsAliasHead(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -2962,8 +2962,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public Task<ConnectionStatus> IndicesExistsAliasHeadAsync(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -2982,7 +2982,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public ConnectionStatus IndicesExistsAliasHead(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3001,7 +3001,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public Task<ConnectionStatus> IndicesExistsAliasHeadAsync(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3020,7 +3020,7 @@ namespace Nest
 		///<param name="name">The name of the template</param>
 		public ConnectionStatus IndicesExistsTemplateHeadForAll(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -3039,7 +3039,7 @@ namespace Nest
 		///<param name="name">The name of the template</param>
 		public Task<ConnectionStatus> IndicesExistsTemplateHeadForAllAsync(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -3059,8 +3059,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to check</param>
 		public ConnectionStatus IndicesExistsTypeHead(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -3080,8 +3080,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to check</param>
 		public Task<ConnectionStatus> IndicesExistsTypeHeadAsync(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -3132,7 +3132,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public ConnectionStatus IndicesFlushPost(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3151,7 +3151,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public Task<ConnectionStatus> IndicesFlushPostAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3202,7 +3202,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public ConnectionStatus IndicesFlushGet(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3221,7 +3221,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public Task<ConnectionStatus> IndicesFlushGetAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
 			var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3272,7 +3272,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public ConnectionStatus IndicesGetAliasForAll(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -3291,7 +3291,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public Task<ConnectionStatus> IndicesGetAliasForAllAsync(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -3311,8 +3311,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public ConnectionStatus IndicesGetAlias(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -3332,8 +3332,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to return</param>
 		public Task<ConnectionStatus> IndicesGetAliasAsync(string index, string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -3352,7 +3352,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public ConnectionStatus IndicesGetAlias(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3371,7 +3371,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public Task<ConnectionStatus> IndicesGetAliasAsync(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
 			var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3422,7 +3422,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public ConnectionStatus IndicesGetAliases(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_aliases".Inject(new { index = Stringify(index) });
 			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3441,7 +3441,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		public Task<ConnectionStatus> IndicesGetAliasesAsync(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_aliases".Inject(new { index = Stringify(index) });
 			var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3461,8 +3461,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		public ConnectionStatus IndicesGetAliases(string index, string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_aliases/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -3482,8 +3482,8 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		public Task<ConnectionStatus> IndicesGetAliasesAsync(string index, string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_aliases/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -3502,7 +3502,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		public ConnectionStatus IndicesGetAliasesForAll(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_aliases/{name}".Inject(new { name = Stringify(name) });
 			var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -3521,7 +3521,7 @@ namespace Nest
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		public Task<ConnectionStatus> IndicesGetAliasesForAllAsync(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_aliases/{name}".Inject(new { name = Stringify(name) });
 			var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -3540,7 +3540,7 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public ConnectionStatus IndicesGetFieldMappingForAll(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			field.ThrowIfNull("field");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "_mapping/field/{field}".Inject(new { field = Stringify(field) });
 			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
@@ -3559,7 +3559,7 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public Task<ConnectionStatus> IndicesGetFieldMappingForAllAsync(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			field.ThrowIfNull("field");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "_mapping/field/{field}".Inject(new { field = Stringify(field) });
 			var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
@@ -3579,8 +3579,8 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public ConnectionStatus IndicesGetFieldMapping(string index, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			field.ThrowIfNull("field");
+			index.ThrowIfNullOrEmpty("index");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "{index}/_mapping/field/{field}".Inject(new { index = Stringify(index), field = Stringify(field) });
 			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
 			NameValueCollection nv = null;
@@ -3600,8 +3600,8 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public Task<ConnectionStatus> IndicesGetFieldMappingAsync(string index, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			field.ThrowIfNull("field");
+			index.ThrowIfNullOrEmpty("index");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "{index}/_mapping/field/{field}".Inject(new { index = Stringify(index), field = Stringify(field) });
 			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
 			NameValueCollection nv = null;
@@ -3621,8 +3621,8 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public ConnectionStatus IndicesGetFieldMappingForAll(string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
-			field.ThrowIfNull("field");
+			type.ThrowIfNullOrEmpty("type");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "_mapping/{type}/field/{field}".Inject(new { type = Stringify(type), field = Stringify(field) });
 			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
@@ -3642,8 +3642,8 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public Task<ConnectionStatus> IndicesGetFieldMappingForAllAsync(string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
-			field.ThrowIfNull("field");
+			type.ThrowIfNullOrEmpty("type");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "_mapping/{type}/field/{field}".Inject(new { type = Stringify(type), field = Stringify(field) });
 			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
@@ -3664,9 +3664,9 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public ConnectionStatus IndicesGetFieldMapping(string index, string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			field.ThrowIfNull("field");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "{index}/_mapping/{type}/field/{field}".Inject(new { index = Stringify(index), type = Stringify(type), field = Stringify(field) });
 			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
@@ -3687,9 +3687,9 @@ namespace Nest
 		///<param name="field">A comma-separated list of fields</param>
 		public Task<ConnectionStatus> IndicesGetFieldMappingAsync(string index, string type, string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			field.ThrowIfNull("field");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			field.ThrowIfNullOrEmpty("field");
 			//var url = "{index}/_mapping/{type}/field/{field}".Inject(new { index = Stringify(index), type = Stringify(type), field = Stringify(field) });
 			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
@@ -3740,7 +3740,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names</param>
 		public ConnectionStatus IndicesGetMapping(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mapping".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3759,7 +3759,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names</param>
 		public Task<ConnectionStatus> IndicesGetMappingAsync(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mapping".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3778,7 +3778,7 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types</param>
 		public ConnectionStatus IndicesGetMappingForAll(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
@@ -3797,7 +3797,7 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types</param>
 		public Task<ConnectionStatus> IndicesGetMappingForAllAsync(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
@@ -3817,8 +3817,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types</param>
 		public ConnectionStatus IndicesGetMapping(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/_mapping/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -3838,8 +3838,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types</param>
 		public Task<ConnectionStatus> IndicesGetMappingAsync(string index, string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/_mapping/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -3890,7 +3890,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesGetSettings(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3909,7 +3909,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesGetSettingsAsync(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -3929,8 +3929,8 @@ namespace Nest
 		///<param name="name">The name of the settings that should be included</param>
 		public ConnectionStatus IndicesGetSettings(string index, string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_settings/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -3950,8 +3950,8 @@ namespace Nest
 		///<param name="name">The name of the settings that should be included</param>
 		public Task<ConnectionStatus> IndicesGetSettingsAsync(string index, string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_settings/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -3970,7 +3970,7 @@ namespace Nest
 		///<param name="name">The name of the settings that should be included</param>
 		public ConnectionStatus IndicesGetSettingsForAll(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_settings/{name}".Inject(new { name = Stringify(name) });
 			var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -3989,7 +3989,7 @@ namespace Nest
 		///<param name="name">The name of the settings that should be included</param>
 		public Task<ConnectionStatus> IndicesGetSettingsForAllAsync(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_settings/{name}".Inject(new { name = Stringify(name) });
 			var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4040,7 +4040,7 @@ namespace Nest
 		///<param name="name">The name of the template</param>
 		public ConnectionStatus IndicesGetTemplateForAll(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4059,7 +4059,7 @@ namespace Nest
 		///<param name="name">The name of the template</param>
 		public Task<ConnectionStatus> IndicesGetTemplateForAllAsync(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4110,7 +4110,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		public ConnectionStatus IndicesGetWarmer(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
 			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4129,7 +4129,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesGetWarmerAsync(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
 			var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4149,8 +4149,8 @@ namespace Nest
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		public ConnectionStatus IndicesGetWarmer(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -4170,8 +4170,8 @@ namespace Nest
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		public Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -4190,7 +4190,7 @@ namespace Nest
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		public ConnectionStatus IndicesGetWarmerForAll(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4209,7 +4209,7 @@ namespace Nest
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		public Task<ConnectionStatus> IndicesGetWarmerForAllAsync(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4230,9 +4230,9 @@ namespace Nest
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		public ConnectionStatus IndicesGetWarmer(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
@@ -4253,9 +4253,9 @@ namespace Nest
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		public Task<ConnectionStatus> IndicesGetWarmerAsync(string index, string type, string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
@@ -4274,7 +4274,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		public ConnectionStatus IndicesOpenPost(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_open".Inject(new { index = Stringify(index) });
 			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4293,7 +4293,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		public Task<ConnectionStatus> IndicesOpenPostAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_open".Inject(new { index = Stringify(index) });
 			var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4344,7 +4344,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesOptimizePost(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4363,7 +4363,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesOptimizePostAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4414,7 +4414,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesOptimizeGet(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4433,7 +4433,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesOptimizeGetAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
 			var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4454,8 +4454,8 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public ConnectionStatus IndicesPutAlias(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -4476,8 +4476,8 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public Task<ConnectionStatus> IndicesPutAliasAsync(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -4497,7 +4497,7 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public ConnectionStatus IndicesPutAliasForAll(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4517,7 +4517,7 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public Task<ConnectionStatus> IndicesPutAliasForAllAsync(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4538,8 +4538,8 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public ConnectionStatus IndicesPutAliasPost(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -4560,8 +4560,8 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public Task<ConnectionStatus> IndicesPutAliasPostAsync(string index, string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -4581,7 +4581,7 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public ConnectionStatus IndicesPutAliasPostForAll(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4601,7 +4601,7 @@ namespace Nest
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		public Task<ConnectionStatus> IndicesPutAliasPostForAllAsync(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
 			var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4622,8 +4622,8 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public ConnectionStatus IndicesPutMapping(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -4644,8 +4644,8 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public Task<ConnectionStatus> IndicesPutMappingAsync(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -4665,7 +4665,7 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public ConnectionStatus IndicesPutMappingForAll(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
@@ -4685,7 +4685,7 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public Task<ConnectionStatus> IndicesPutMappingForAllAsync(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
@@ -4706,8 +4706,8 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public ConnectionStatus IndicesPutMappingPost(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -4728,8 +4728,8 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public Task<ConnectionStatus> IndicesPutMappingPostAsync(string index, string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -4749,7 +4749,7 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public ConnectionStatus IndicesPutMappingPostForAll(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
@@ -4769,7 +4769,7 @@ namespace Nest
 		///<param name="body">The mapping definition</param>
 		public Task<ConnectionStatus> IndicesPutMappingPostForAllAsync(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
-			type.ThrowIfNull("type");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
 			var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
@@ -4825,7 +4825,7 @@ namespace Nest
 		///<param name="body">The index settings to be updated</param>
 		public ConnectionStatus IndicesPutSettings(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4845,7 +4845,7 @@ namespace Nest
 		///<param name="body">The index settings to be updated</param>
 		public Task<ConnectionStatus> IndicesPutSettingsAsync(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
 			var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -4865,7 +4865,7 @@ namespace Nest
 		///<param name="body">The template definition</param>
 		public ConnectionStatus IndicesPutTemplateForAll(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4885,7 +4885,7 @@ namespace Nest
 		///<param name="body">The template definition</param>
 		public Task<ConnectionStatus> IndicesPutTemplateForAllAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4905,7 +4905,7 @@ namespace Nest
 		///<param name="body">The template definition</param>
 		public ConnectionStatus IndicesPutTemplatePostForAll(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4925,7 +4925,7 @@ namespace Nest
 		///<param name="body">The template definition</param>
 		public Task<ConnectionStatus> IndicesPutTemplatePostForAllAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
 			var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4945,7 +4945,7 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public ConnectionStatus IndicesPutWarmerForAll(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4965,7 +4965,7 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public Task<ConnectionStatus> IndicesPutWarmerForAllAsync(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -4986,8 +4986,8 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public ConnectionStatus IndicesPutWarmer(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -5008,8 +5008,8 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -5031,9 +5031,9 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public ConnectionStatus IndicesPutWarmer(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
@@ -5055,9 +5055,9 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public Task<ConnectionStatus> IndicesPutWarmerAsync(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
@@ -5077,7 +5077,7 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public ConnectionStatus IndicesPutWarmerPostForAll(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -5097,7 +5097,7 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public Task<ConnectionStatus> IndicesPutWarmerPostForAllAsync(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			name.ThrowIfNull("name");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
 			var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
@@ -5118,8 +5118,8 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public ConnectionStatus IndicesPutWarmerPost(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -5140,8 +5140,8 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public Task<ConnectionStatus> IndicesPutWarmerPostAsync(string index, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
 			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
@@ -5163,9 +5163,9 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public ConnectionStatus IndicesPutWarmerPost(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
@@ -5187,9 +5187,9 @@ namespace Nest
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		public Task<ConnectionStatus> IndicesPutWarmerPostAsync(string index, string type, string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			name.ThrowIfNull("name");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			name.ThrowIfNullOrEmpty("name");
 			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
 			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
@@ -5240,7 +5240,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesRefreshPost(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5259,7 +5259,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesRefreshPostAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5310,7 +5310,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesRefreshGet(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5329,7 +5329,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesRefreshGetAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
 			var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5380,7 +5380,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesSegmentsGet(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_segments".Inject(new { index = Stringify(index) });
 			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5399,7 +5399,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesSegmentsGetAsync(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_segments".Inject(new { index = Stringify(index) });
 			var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5450,7 +5450,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public ConnectionStatus IndicesSnapshotIndexPost(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5469,7 +5469,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		public Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
 			var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5520,7 +5520,7 @@ namespace Nest
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		public ConnectionStatus IndicesStatsGetForAll(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_stats/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -5539,7 +5539,7 @@ namespace Nest
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		public Task<ConnectionStatus> IndicesStatsGetForAllAsync(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_stats/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -5558,7 +5558,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesStatsGet(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_stats".Inject(new { index = Stringify(index) });
 			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5577,7 +5577,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesStatsGetAsync(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_stats".Inject(new { index = Stringify(index) });
 			var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5597,8 +5597,8 @@ namespace Nest
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		public ConnectionStatus IndicesStatsGet(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			metric.ThrowIfNull("metric");
+			index.ThrowIfNullOrEmpty("index");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "{index}/_stats/{metric}".Inject(new { index = Stringify(index), metric = Stringify(metric) });
 			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
 			NameValueCollection nv = null;
@@ -5618,8 +5618,8 @@ namespace Nest
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		public Task<ConnectionStatus> IndicesStatsGetAsync(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			metric.ThrowIfNull("metric");
+			index.ThrowIfNullOrEmpty("index");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "{index}/_stats/{metric}".Inject(new { index = Stringify(index), metric = Stringify(metric) });
 			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
 			NameValueCollection nv = null;
@@ -5670,7 +5670,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesStatusGet(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_status".Inject(new { index = Stringify(index) });
 			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5689,7 +5689,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesStatusGetAsync(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_status".Inject(new { index = Stringify(index) });
 			var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5776,7 +5776,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus IndicesValidateQueryGet(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5795,7 +5795,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5815,8 +5815,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		public ConnectionStatus IndicesValidateQueryGet(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -5836,8 +5836,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		public Task<ConnectionStatus> IndicesValidateQueryGetAsync(string index, string type, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -5893,7 +5893,7 @@ namespace Nest
 		///<param name="body">The query definition specified with the Query DSL</param>
 		public ConnectionStatus IndicesValidateQueryPost(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5913,7 +5913,7 @@ namespace Nest
 		///<param name="body">The query definition specified with the Query DSL</param>
 		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
 			var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -5934,8 +5934,8 @@ namespace Nest
 		///<param name="body">The query definition specified with the Query DSL</param>
 		public ConnectionStatus IndicesValidateQueryPost(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -5956,8 +5956,8 @@ namespace Nest
 		///<param name="body">The query definition specified with the Query DSL</param>
 		public Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6040,7 +6040,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		public ConnectionStatus MgetGet(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6059,7 +6059,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		public Task<ConnectionStatus> MgetGetAsync(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6079,8 +6079,8 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		public ConnectionStatus MgetGet(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6100,8 +6100,8 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		public Task<ConnectionStatus> MgetGetAsync(string index, string type, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6157,7 +6157,7 @@ namespace Nest
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public ConnectionStatus MgetPost(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6177,7 +6177,7 @@ namespace Nest
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public Task<ConnectionStatus> MgetPostAsync(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6198,8 +6198,8 @@ namespace Nest
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public ConnectionStatus MgetPost(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6220,8 +6220,8 @@ namespace Nest
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public Task<ConnectionStatus> MgetPostAsync(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6242,9 +6242,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public ConnectionStatus MltGet(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -6265,9 +6265,9 @@ namespace Nest
 		///<param name="id">The document ID</param>
 		public Task<ConnectionStatus> MltGetAsync(string index, string type, string id, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -6289,9 +6289,9 @@ namespace Nest
 		///<param name="body">A specific search request definition</param>
 		public ConnectionStatus MltPost(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -6313,9 +6313,9 @@ namespace Nest
 		///<param name="body">A specific search request definition</param>
 		public Task<ConnectionStatus> MltPostAsync(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -6366,7 +6366,7 @@ namespace Nest
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		public ConnectionStatus MpercolateGet(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6385,7 +6385,7 @@ namespace Nest
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		public Task<ConnectionStatus> MpercolateGetAsync(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6405,8 +6405,8 @@ namespace Nest
 		///<param name="type">The type of the document being percolated to use as default.</param>
 		public ConnectionStatus MpercolateGet(string index, string type, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6426,8 +6426,8 @@ namespace Nest
 		///<param name="type">The type of the document being percolated to use as default.</param>
 		public Task<ConnectionStatus> MpercolateGetAsync(string index, string type, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6483,7 +6483,7 @@ namespace Nest
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		public ConnectionStatus MpercolatePost(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6503,7 +6503,7 @@ namespace Nest
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		public Task<ConnectionStatus> MpercolatePostAsync(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6524,8 +6524,8 @@ namespace Nest
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		public ConnectionStatus MpercolatePost(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6546,8 +6546,8 @@ namespace Nest
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		public Task<ConnectionStatus> MpercolatePostAsync(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6598,7 +6598,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		public ConnectionStatus MsearchGet(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6617,7 +6617,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		public Task<ConnectionStatus> MsearchGetAsync(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6637,8 +6637,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		public ConnectionStatus MsearchGet(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6658,8 +6658,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		public Task<ConnectionStatus> MsearchGetAsync(string index, string type, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6715,7 +6715,7 @@ namespace Nest
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public ConnectionStatus MsearchPost(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6735,7 +6735,7 @@ namespace Nest
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public Task<ConnectionStatus> MsearchPostAsync(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
 			var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6756,8 +6756,8 @@ namespace Nest
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public ConnectionStatus MsearchPost(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6778,8 +6778,8 @@ namespace Nest
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public Task<ConnectionStatus> MsearchPostAsync(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6830,7 +6830,7 @@ namespace Nest
 		///<param name="index">The index in which the document resides.</param>
 		public ConnectionStatus MtermvectorsGet(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6849,7 +6849,7 @@ namespace Nest
 		///<param name="index">The index in which the document resides.</param>
 		public Task<ConnectionStatus> MtermvectorsGetAsync(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6869,8 +6869,8 @@ namespace Nest
 		///<param name="type">The type of the document.</param>
 		public ConnectionStatus MtermvectorsGet(string index, string type, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6890,8 +6890,8 @@ namespace Nest
 		///<param name="type">The type of the document.</param>
 		public Task<ConnectionStatus> MtermvectorsGetAsync(string index, string type, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -6947,7 +6947,7 @@ namespace Nest
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		public ConnectionStatus MtermvectorsPost(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6967,7 +6967,7 @@ namespace Nest
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		public Task<ConnectionStatus> MtermvectorsPostAsync(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
 			var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -6988,8 +6988,8 @@ namespace Nest
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		public ConnectionStatus MtermvectorsPost(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -7010,8 +7010,8 @@ namespace Nest
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		public Task<ConnectionStatus> MtermvectorsPostAsync(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -7062,7 +7062,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public ConnectionStatus NodesHotThreadsGet(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cluster/nodes/{node_id}/hotthreads".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7081,7 +7081,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public Task<ConnectionStatus> NodesHotThreadsGetAsync(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cluster/nodes/{node_id}/hotthreads".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7132,7 +7132,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public ConnectionStatus NodesInfoGet(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
 			var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7151,7 +7151,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public Task<ConnectionStatus> NodesInfoGetAsync(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
 			var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7170,7 +7170,7 @@ namespace Nest
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		public ConnectionStatus NodesInfoGetForAll(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -7189,7 +7189,7 @@ namespace Nest
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		public Task<ConnectionStatus> NodesInfoGetForAllAsync(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -7209,8 +7209,8 @@ namespace Nest
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		public ConnectionStatus NodesInfoGet(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
+			node_id.ThrowIfNullOrEmpty("node_id");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/{node_id}/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
 			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
@@ -7230,8 +7230,8 @@ namespace Nest
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		public Task<ConnectionStatus> NodesInfoGetAsync(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
+			node_id.ThrowIfNullOrEmpty("node_id");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/{node_id}/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
 			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
@@ -7282,7 +7282,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		public ConnectionStatus NodesShutdownPost(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cluster/nodes/{node_id}/_shutdown".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7301,7 +7301,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		public Task<ConnectionStatus> NodesShutdownPostAsync(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_cluster/nodes/{node_id}/_shutdown".Inject(new { node_id = Stringify(node_id) });
 			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7352,7 +7352,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public ConnectionStatus NodesStatsGet(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_nodes/{node_id}/stats".Inject(new { node_id = Stringify(node_id) });
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7371,7 +7371,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		public Task<ConnectionStatus> NodesStatsGetAsync(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
+			node_id.ThrowIfNullOrEmpty("node_id");
 			//var url = "_nodes/{node_id}/stats".Inject(new { node_id = Stringify(node_id) });
 			var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
@@ -7390,7 +7390,7 @@ namespace Nest
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		public ConnectionStatus NodesStatsGetForAll(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/stats/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -7409,7 +7409,7 @@ namespace Nest
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		public Task<ConnectionStatus> NodesStatsGetForAllAsync(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/stats/{metric}".Inject(new { metric = Stringify(metric) });
 			var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
@@ -7429,8 +7429,8 @@ namespace Nest
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		public ConnectionStatus NodesStatsGet(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
+			node_id.ThrowIfNullOrEmpty("node_id");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/{node_id}/stats/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
 			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
@@ -7450,8 +7450,8 @@ namespace Nest
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		public Task<ConnectionStatus> NodesStatsGetAsync(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
+			node_id.ThrowIfNullOrEmpty("node_id");
+			metric.ThrowIfNullOrEmpty("metric");
 			//var url = "_nodes/{node_id}/stats/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
 			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
@@ -7471,8 +7471,8 @@ namespace Nest
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		public ConnectionStatus NodesStatsGetForAll(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
-			index_metric.ThrowIfNull("index_metric");
+			metric.ThrowIfNullOrEmpty("metric");
+			index_metric.ThrowIfNullOrEmpty("index_metric");
 			//var url = "_nodes/stats/{metric}/{index_metric}".Inject(new { metric = Stringify(metric), index_metric = Stringify(index_metric) });
 			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
@@ -7492,8 +7492,8 @@ namespace Nest
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		public Task<ConnectionStatus> NodesStatsGetForAllAsync(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			metric.ThrowIfNull("metric");
-			index_metric.ThrowIfNull("index_metric");
+			metric.ThrowIfNullOrEmpty("metric");
+			index_metric.ThrowIfNullOrEmpty("index_metric");
 			//var url = "_nodes/stats/{metric}/{index_metric}".Inject(new { metric = Stringify(metric), index_metric = Stringify(index_metric) });
 			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
@@ -7514,9 +7514,9 @@ namespace Nest
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		public ConnectionStatus NodesStatsGet(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
-			index_metric.ThrowIfNull("index_metric");
+			node_id.ThrowIfNullOrEmpty("node_id");
+			metric.ThrowIfNullOrEmpty("metric");
+			index_metric.ThrowIfNullOrEmpty("index_metric");
 			//var url = "_nodes/{node_id}/stats/{metric}/{index_metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric), index_metric = Stringify(index_metric) });
 			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
@@ -7537,9 +7537,9 @@ namespace Nest
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		public Task<ConnectionStatus> NodesStatsGetAsync(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
-			node_id.ThrowIfNull("node_id");
-			metric.ThrowIfNull("metric");
-			index_metric.ThrowIfNull("index_metric");
+			node_id.ThrowIfNullOrEmpty("node_id");
+			metric.ThrowIfNullOrEmpty("metric");
+			index_metric.ThrowIfNullOrEmpty("index_metric");
 			//var url = "_nodes/{node_id}/stats/{metric}/{index_metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric), index_metric = Stringify(index_metric) });
 			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
@@ -7559,8 +7559,8 @@ namespace Nest
 		///<param name="type">The type of the document being percolated.</param>
 		public ConnectionStatus PercolateGet(string index, string type, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -7580,8 +7580,8 @@ namespace Nest
 		///<param name="type">The type of the document being percolated.</param>
 		public Task<ConnectionStatus> PercolateGetAsync(string index, string type, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -7602,9 +7602,9 @@ namespace Nest
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		public ConnectionStatus PercolateGet(string index, string type, string id, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -7625,9 +7625,9 @@ namespace Nest
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		public Task<ConnectionStatus> PercolateGetAsync(string index, string type, string id, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -7648,8 +7648,8 @@ namespace Nest
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		public ConnectionStatus PercolatePost(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -7670,8 +7670,8 @@ namespace Nest
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		public Task<ConnectionStatus> PercolatePostAsync(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -7693,9 +7693,9 @@ namespace Nest
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		public ConnectionStatus PercolatePost(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -7717,9 +7717,9 @@ namespace Nest
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		public Task<ConnectionStatus> PercolatePostAsync(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -7802,7 +7802,7 @@ namespace Nest
 		///<param name="scroll_id">The scroll ID</param>
 		public ConnectionStatus ScrollGet(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
-			scroll_id.ThrowIfNull("scroll_id");
+			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
@@ -7821,7 +7821,7 @@ namespace Nest
 		///<param name="scroll_id">The scroll ID</param>
 		public Task<ConnectionStatus> ScrollGetAsync(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
-			scroll_id.ThrowIfNull("scroll_id");
+			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
@@ -7877,7 +7877,7 @@ namespace Nest
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		public ConnectionStatus ScrollPost(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
-			scroll_id.ThrowIfNull("scroll_id");
+			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
@@ -7897,7 +7897,7 @@ namespace Nest
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		public Task<ConnectionStatus> ScrollPostAsync(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
-			scroll_id.ThrowIfNull("scroll_id");
+			scroll_id.ThrowIfNullOrEmpty("scroll_id");
 			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
 			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
@@ -7948,7 +7948,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus SearchGet(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -7967,7 +7967,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> SearchGetAsync(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -7987,8 +7987,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		public ConnectionStatus SearchGet(string index, string type, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -8008,8 +8008,8 @@ namespace Nest
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		public Task<ConnectionStatus> SearchGetAsync(string index, string type, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -8065,7 +8065,7 @@ namespace Nest
 		///<param name="body">The search definition using the Query DSL</param>
 		public ConnectionStatus SearchPost(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -8085,7 +8085,7 @@ namespace Nest
 		///<param name="body">The search definition using the Query DSL</param>
 		public Task<ConnectionStatus> SearchPostAsync(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
 			var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -8106,8 +8106,8 @@ namespace Nest
 		///<param name="body">The search definition using the Query DSL</param>
 		public ConnectionStatus SearchPost(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -8128,8 +8128,8 @@ namespace Nest
 		///<param name="body">The search definition using the Query DSL</param>
 		public Task<ConnectionStatus> SearchPostAsync(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
 			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
 			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
@@ -8150,8 +8150,8 @@ namespace Nest
 		///<param name="body">The snapshot definition</param>
 		public ConnectionStatus SnapshotCreatePut(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8172,8 +8172,8 @@ namespace Nest
 		///<param name="body">The snapshot definition</param>
 		public Task<ConnectionStatus> SnapshotCreatePutAsync(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8194,8 +8194,8 @@ namespace Nest
 		///<param name="body">The snapshot definition</param>
 		public ConnectionStatus SnapshotCreatePost(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8216,8 +8216,8 @@ namespace Nest
 		///<param name="body">The snapshot definition</param>
 		public Task<ConnectionStatus> SnapshotCreatePostAsync(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8237,7 +8237,7 @@ namespace Nest
 		///<param name="body">The repository definition</param>
 		public ConnectionStatus SnapshotCreateRepositoryPut(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8257,7 +8257,7 @@ namespace Nest
 		///<param name="body">The repository definition</param>
 		public Task<ConnectionStatus> SnapshotCreateRepositoryPutAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8277,7 +8277,7 @@ namespace Nest
 		///<param name="body">The repository definition</param>
 		public ConnectionStatus SnapshotCreateRepositoryPost(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8297,7 +8297,7 @@ namespace Nest
 		///<param name="body">The repository definition</param>
 		public Task<ConnectionStatus> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8317,8 +8317,8 @@ namespace Nest
 		///<param name="snapshot">A snapshot name</param>
 		public ConnectionStatus SnapshotDelete(string repository, string snapshot, Func<SnapshotDeleteQueryString, SnapshotDeleteQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8338,8 +8338,8 @@ namespace Nest
 		///<param name="snapshot">A snapshot name</param>
 		public Task<ConnectionStatus> SnapshotDeleteAsync(string repository, string snapshot, Func<SnapshotDeleteQueryString, SnapshotDeleteQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8358,7 +8358,7 @@ namespace Nest
 		///<param name="repository">A comma-separated list of repository names</param>
 		public ConnectionStatus SnapshotDeleteRepository(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8377,7 +8377,7 @@ namespace Nest
 		///<param name="repository">A comma-separated list of repository names</param>
 		public Task<ConnectionStatus> SnapshotDeleteRepositoryAsync(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8397,8 +8397,8 @@ namespace Nest
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		public ConnectionStatus SnapshotGet(string repository, string snapshot, Func<SnapshotGetQueryString, SnapshotGetQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8418,8 +8418,8 @@ namespace Nest
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		public Task<ConnectionStatus> SnapshotGetAsync(string repository, string snapshot, Func<SnapshotGetQueryString, SnapshotGetQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8470,7 +8470,7 @@ namespace Nest
 		///<param name="repository">A comma-separated list of repository names</param>
 		public ConnectionStatus SnapshotGetRepository(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8489,7 +8489,7 @@ namespace Nest
 		///<param name="repository">A comma-separated list of repository names</param>
 		public Task<ConnectionStatus> SnapshotGetRepositoryAsync(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
+			repository.ThrowIfNullOrEmpty("repository");
 			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
 			var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
@@ -8510,8 +8510,8 @@ namespace Nest
 		///<param name="body">Details of what to restore</param>
 		public ConnectionStatus SnapshotRestorePost(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}/_restore".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8532,8 +8532,8 @@ namespace Nest
 		///<param name="body">Details of what to restore</param>
 		public Task<ConnectionStatus> SnapshotRestorePostAsync(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null)
 		{
-			repository.ThrowIfNull("repository");
-			snapshot.ThrowIfNull("snapshot");
+			repository.ThrowIfNullOrEmpty("repository");
+			snapshot.ThrowIfNullOrEmpty("snapshot");
 			//var url = "_snapshot/{repository}/{snapshot}/_restore".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
 			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
@@ -8589,7 +8589,7 @@ namespace Nest
 		///<param name="body">The request definition</param>
 		public ConnectionStatus SuggestPost(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -8609,7 +8609,7 @@ namespace Nest
 		///<param name="body">The request definition</param>
 		public Task<ConnectionStatus> SuggestPostAsync(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -8660,7 +8660,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public ConnectionStatus SuggestGet(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -8679,7 +8679,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		public Task<ConnectionStatus> SuggestGetAsync(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
+			index.ThrowIfNullOrEmpty("index");
 			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
 			var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
@@ -8700,9 +8700,9 @@ namespace Nest
 		///<param name="id">The id of the document.</param>
 		public ConnectionStatus TermvectorGet(string index, string type, string id, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -8723,9 +8723,9 @@ namespace Nest
 		///<param name="id">The id of the document.</param>
 		public Task<ConnectionStatus> TermvectorGetAsync(string index, string type, string id, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -8747,9 +8747,9 @@ namespace Nest
 		///<param name="body">Define parameters. See documentation.</param>
 		public ConnectionStatus TermvectorPost(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -8771,9 +8771,9 @@ namespace Nest
 		///<param name="body">Define parameters. See documentation.</param>
 		public Task<ConnectionStatus> TermvectorPostAsync(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -8795,9 +8795,9 @@ namespace Nest
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		public ConnectionStatus UpdatePost(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_update".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
@@ -8819,9 +8819,9 @@ namespace Nest
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		public Task<ConnectionStatus> UpdatePostAsync(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null)
 		{
-			index.ThrowIfNull("index");
-			type.ThrowIfNull("type");
-			id.ThrowIfNull("id");
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			id.ThrowIfNullOrEmpty("id");
 			//var url = "{index}/{type}/{id}/_update".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
 			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;

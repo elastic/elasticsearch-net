@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 {
 	public partial class IndicesGetSettings1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesGetSettings110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesGetSettings110BasicYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -31,8 +28,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetSettings2Tests : YamlTestsBase
+		public class GetSettings2Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetSettings2Test()
@@ -57,7 +55,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexSettings3Tests : YamlTestsBase
+		public class GetIndexSettings3Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexSettings3Test()
@@ -79,7 +77,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexSettingsAll4Tests : YamlTestsBase
+		public class GetIndexSettingsAll4Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexSettingsAll4Test()
@@ -101,7 +99,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexSettings5Tests : YamlTestsBase
+		public class GetIndexSettings5Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexSettings5Test()
@@ -123,7 +121,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexSettingsName6Tests : YamlTestsBase
+		public class GetIndexSettingsName6Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexSettingsName6Test()
@@ -145,7 +143,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexSettingsNameName7Tests : YamlTestsBase
+		public class GetIndexSettingsNameName7Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexSettingsNameName7Test()
@@ -167,7 +165,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexSettingsName8Tests : YamlTestsBase
+		public class GetIndexSettingsName8Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexSettingsName8Test()
@@ -189,7 +187,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetSettingsName9Tests : YamlTestsBase
+		public class GetSettingsName9Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetSettingsName9Test()
@@ -214,7 +212,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetAllSettingsName10Tests : YamlTestsBase
+		public class GetAllSettingsName10Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetAllSettingsName10Test()
@@ -239,7 +237,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetSettingsName11Tests : YamlTestsBase
+		public class GetSettingsName11Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetSettingsName11Test()
@@ -264,7 +262,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexIndexSettingsName12Tests : YamlTestsBase
+		public class GetIndexIndexSettingsName12Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexIndexSettingsName12Test()
@@ -289,7 +287,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetIndexSettingsName13Tests : YamlTestsBase
+		public class GetIndexSettingsName13Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetIndexSettingsName13Test()
@@ -311,7 +309,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetSettingsWithLocalFlag14Tests : YamlTestsBase
+		public class GetSettingsWithLocalFlag14Tests : IndicesGetSettings110BasicYamlBase
 		{
 			[Test]
 			public void GetSettingsWithLocalFlag14Test()

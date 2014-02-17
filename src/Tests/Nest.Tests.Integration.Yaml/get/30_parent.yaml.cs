@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.Get4
 {
 	public partial class Get4YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class Get430ParentYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public Get430ParentYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -50,8 +47,9 @@ namespace Nest.Tests.Integration.Yaml.Get4
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Parent2Tests : YamlTestsBase
+		public class Parent2Tests : Get430ParentYamlBase
 		{
 			[Test]
 			public void Parent2Test()
@@ -79,7 +77,7 @@ namespace Nest.Tests.Integration.Yaml.Get4
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentOmitted3Tests : YamlTestsBase
+		public class ParentOmitted3Tests : Get430ParentYamlBase
 		{
 			[Test]
 			public void ParentOmitted3Test()

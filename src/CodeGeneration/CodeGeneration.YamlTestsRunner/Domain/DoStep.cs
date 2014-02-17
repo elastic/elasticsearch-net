@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using CsQuery.ExtensionMethods.Internal;
 
 namespace CodeGeneration.YamlTestsRunner.Domain
 {
@@ -64,13 +65,13 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 					this.QueryString = new Dictionary<string, object>();
 				this.QueryString.Add("op_type", "create");
 			}
-			else if (
-				this.Call == "indices.delete_alias"
+			else if (!this.Catch.IsNullOrEmpty() &&
+				(this.Call == "indices.delete_alias"
 				|| this.Call == "indices.delete_warmer"
 				|| this.Call == "indices.delete_mapping"
 				|| this.Call == "indices.put_alias"
 				|| this.Call == "indices.put_warmer"
-				|| this.Call == "indices.put_mapping")
+				|| this.Call == "indices.put_mapping"))
 			{
 				Func<string, bool> m = (s) => Regex.IsMatch(this.TestDescription, "(blank|empty|missing) " + s);
 
@@ -172,16 +173,6 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 				.Select(ki => ki.Key);
 			return csharpArguments.ToList();
 		}
-		private int MethodPreference(string method)
-		{
-			var postBoost = this.Body != null ? 10 : 0;
-			var getBoost = this.Body == null ? 10 : 0;
-
-			//if (method.Contains("Post(")) return 5 + postBoost;
-			//if (method.Contains("Put(")) return 4 + postBoost;
-			//if (method.Contains("Get(")) return 3 + getBoost;
-			//if (method.Contains("Head(")) return 2 + postBoost;
-			return 0;
-		}
+	
 	}
 }

@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 {
 	public partial class IndicesPutWarmer1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesPutWarmer110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesPutWarmer110BasicYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -52,8 +49,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestForWarmers2Tests : YamlTestsBase
+		public class BasicTestForWarmers2Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void BasicTestForWarmers2Test()
@@ -78,7 +76,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingAllWarmersViaWarmerShouldWork3Tests : YamlTestsBase
+		public class GettingAllWarmersViaWarmerShouldWork3Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingAllWarmersViaWarmerShouldWork3Test()
@@ -97,7 +95,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingWarmersForSeveralIndicesShouldWorkUsing4Tests : YamlTestsBase
+		public class GettingWarmersForSeveralIndicesShouldWorkUsing4Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingWarmersForSeveralIndicesShouldWorkUsing4Test()
@@ -116,7 +114,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingWarmersForSeveralIndicesShouldWorkUsingAll5Tests : YamlTestsBase
+		public class GettingWarmersForSeveralIndicesShouldWorkUsingAll5Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingWarmersForSeveralIndicesShouldWorkUsingAll5Test()
@@ -135,7 +133,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingAllWarmersWithoutSpecifyingIndexShouldWork6Tests : YamlTestsBase
+		public class GettingAllWarmersWithoutSpecifyingIndexShouldWork6Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingAllWarmersWithoutSpecifyingIndexShouldWork6Test()
@@ -154,7 +152,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingWarmersForSeveralIndicesShouldWorkUsingPrefix7Tests : YamlTestsBase
+		public class GettingWarmersForSeveralIndicesShouldWorkUsingPrefix7Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingWarmersForSeveralIndicesShouldWorkUsingPrefix7Test()
@@ -173,7 +171,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingWarmersForSeveralIndicesShouldWorkUsingCommaSeparatedLists8Tests : YamlTestsBase
+		public class GettingWarmersForSeveralIndicesShouldWorkUsingCommaSeparatedLists8Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingWarmersForSeveralIndicesShouldWorkUsingCommaSeparatedLists8Test()
@@ -192,7 +190,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingANonExistentWarmerOnAnExistingIndexShouldReturnAnEmptyBody9Tests : YamlTestsBase
+		public class GettingANonExistentWarmerOnAnExistingIndexShouldReturnAnEmptyBody9Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingANonExistentWarmerOnAnExistingIndexShouldReturnAnEmptyBody9Test()
@@ -208,7 +206,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingAnExistentAndNonExistentWarmerShouldReturnTheExistentAndNoDataAboutTheNonExistentWarmer10Tests : YamlTestsBase
+		public class GettingAnExistentAndNonExistentWarmerShouldReturnTheExistentAndNoDataAboutTheNonExistentWarmer10Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingAnExistentAndNonExistentWarmerShouldReturnTheExistentAndNoDataAboutTheNonExistentWarmer10Test()
@@ -220,14 +218,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
 
-				//is_false _responseDictionary[@"test_index"][@"warmers"][@"non-existent"]; 
-				this.IsFalse(_responseDictionary[@"test_index"][@"warmers"][@"non-existent"]);
+				//is_false _response[@"test_index"][@"warmers"][@"non-existent"]; 
+				this.IsFalse(_response[@"test_index"][@"warmers"][@"non-existent"]);
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GettingWarmerOnAnNonExistentIndexShouldReturn40411Tests : YamlTestsBase
+		public class GettingWarmerOnAnNonExistentIndexShouldReturn40411Tests : IndicesPutWarmer110BasicYamlBase
 		{
 			[Test]
 			public void GettingWarmerOnAnNonExistentIndexShouldReturn40411Test()

@@ -189,7 +189,6 @@
     <Compile Include="percolate\15_new.yaml.cs" />
     <Compile Include="percolate\16_existing_doc.yaml.cs" />
     <Compile Include="percolate\17_empty.yaml.cs" />
-    <Compile Include="percolate\18_highligh_with_query.yaml.cs" />
     <Compile Include="ping\10_ping.yaml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="scroll\10_basic.yaml.cs" />

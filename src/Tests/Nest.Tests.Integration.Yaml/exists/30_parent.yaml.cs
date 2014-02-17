@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.Exists2
 {
 	public partial class Exists2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class Exists230ParentYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public Exists230ParentYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -42,8 +39,9 @@ namespace Nest.Tests.Integration.Yaml.Exists2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Parent2Tests : YamlTestsBase
+		public class Parent2Tests : Exists230ParentYamlBase
 		{
 			[Test]
 			public void Parent2Test()
@@ -69,7 +67,7 @@ namespace Nest.Tests.Integration.Yaml.Exists2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentOmitted3Tests : YamlTestsBase
+		public class ParentOmitted3Tests : Exists230ParentYamlBase
 		{
 			[Test]
 			public void ParentOmitted3Test()

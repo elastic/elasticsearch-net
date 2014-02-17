@@ -13,20 +13,18 @@ namespace Nest.Tests.Integration.Yaml.CatShards1
 {
 	public partial class CatShards1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class CatShards110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public CatShards110BasicYamlBase() : base()
 			{	
 
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCatShardsOutput2Tests : YamlTestsBase
+		public class TestCatShardsOutput2Tests : CatShards110BasicYamlBase
 		{
 			[Test]
 			public void TestCatShardsOutput2Test()

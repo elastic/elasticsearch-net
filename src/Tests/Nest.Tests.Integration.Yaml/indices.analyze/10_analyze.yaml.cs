@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 {
 	public partial class IndicesAnalyze1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesAnalyze110AnalyzeYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesAnalyze110AnalyzeYamlBase() : base()
 			{	
 
 				//do ping 
@@ -28,8 +25,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTest2Tests : YamlTestsBase
+		public class BasicTest2Tests : IndicesAnalyze110AnalyzeYamlBase
 		{
 			[Test]
 			public void BasicTest2Test()
@@ -53,7 +51,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TokenizerAndFilter3Tests : YamlTestsBase
+		public class TokenizerAndFilter3Tests : IndicesAnalyze110AnalyzeYamlBase
 		{
 			[Test]
 			public void TokenizerAndFilter3Test()
@@ -76,7 +74,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class IndexAndField4Tests : YamlTestsBase
+		public class IndexAndField4Tests : IndicesAnalyze110AnalyzeYamlBase
 		{
 			[Test]
 			public void IndexAndField4Test()

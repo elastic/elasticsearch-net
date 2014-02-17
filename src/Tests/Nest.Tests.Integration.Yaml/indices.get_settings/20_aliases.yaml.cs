@@ -40,14 +40,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings2
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings("test-alias"));
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 3);
+				//match _response[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
+				this.IsMatch(_response[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 3);
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_shards"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"number_of_shards"], 2);
+				//match _response[@"test-index"][@"settings"][@"index"][@"number_of_shards"]: 
+				this.IsMatch(_response[@"test-index"][@"settings"][@"index"][@"number_of_shards"], 2);
 
-				//match _responseDictionary[@"test-index"][@"settings"][@"index"][@"refresh_interval"]: 
-				this.IsMatch(_responseDictionary[@"test-index"][@"settings"][@"index"][@"refresh_interval"], -1);
+				//match _response[@"test-index"][@"settings"][@"index"][@"refresh_interval"]: 
+				this.IsMatch(_response[@"test-index"][@"settings"][@"index"][@"refresh_interval"], -1);
 
 			}
 		}

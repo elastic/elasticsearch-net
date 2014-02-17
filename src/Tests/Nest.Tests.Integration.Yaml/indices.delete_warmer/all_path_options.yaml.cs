@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 {
 	public partial class IndicesDeleteWarmer1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesDeleteWarmer1AllPathOptionsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesDeleteWarmer1AllPathOptionsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -88,39 +85,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			}
 		}
 
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckSetup2Tests : YamlTestsBase
-		{
-			[Test]
-			public void CheckSetup2Test()
-			{	
-
-				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "*"));
-
-				//match _response.test_index1.warmers.test_warmer1.source.query.match_all: 
-				this.IsMatch(_response.test_index1.warmers.test_warmer1.source.query.match_all, new {});
-
-				//match _response.test_index1.warmers.test_warmer2.source.query.match_all: 
-				this.IsMatch(_response.test_index1.warmers.test_warmer2.source.query.match_all, new {});
-
-				//match _response.test_index2.warmers.test_warmer1.source.query.match_all: 
-				this.IsMatch(_response.test_index2.warmers.test_warmer1.source.query.match_all, new {});
-
-				//match _response.test_index2.warmers.test_warmer2.source.query.match_all: 
-				this.IsMatch(_response.test_index2.warmers.test_warmer2.source.query.match_all, new {});
-
-				//match _response.foo.warmers.test_warmer1.source.query.match_all: 
-				this.IsMatch(_response.foo.warmers.test_warmer1.source.query.match_all, new {});
-
-				//match _response.foo.warmers.test_warmer2.source.query.match_all: 
-				this.IsMatch(_response.foo.warmers.test_warmer2.source.query.match_all, new {});
-
-			}
-		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithAllIndex3Tests : YamlTestsBase
+		public class CheckDeleteWithAllIndex3Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithAllIndex3Test()
@@ -145,7 +112,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndex4Tests : YamlTestsBase
+		public class CheckDeleteWithIndex4Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndex4Test()
@@ -170,7 +137,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexList5Tests : YamlTestsBase
+		public class CheckDeleteWithIndexList5Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexList5Test()
@@ -207,7 +174,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithPrefixIndex6Tests : YamlTestsBase
+		public class CheckDeleteWithPrefixIndex6Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithPrefixIndex6Test()
@@ -244,7 +211,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexListAndWarmers7Tests : YamlTestsBase
+		public class CheckDeleteWithIndexListAndWarmers7Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexListAndWarmers7Test()
@@ -281,7 +248,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexListAndAllWarmers8Tests : YamlTestsBase
+		public class CheckDeleteWithIndexListAndAllWarmers8Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexListAndAllWarmers8Test()
@@ -318,7 +285,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithIndexListAndWildcardWarmers9Tests : YamlTestsBase
+		public class CheckDeleteWithIndexListAndWildcardWarmers9Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithIndexListAndWildcardWarmers9Test()
@@ -355,7 +322,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Check404OnNoMatchingTestWarmer10Tests : YamlTestsBase
+		public class Check404OnNoMatchingTestWarmer10Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void Check404OnNoMatchingTestWarmer10Test()
@@ -371,7 +338,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithBlankIndexAndBlankTestWarmer11Tests : YamlTestsBase
+		public class CheckDeleteWithBlankIndexAndBlankTestWarmer11Tests : IndicesDeleteWarmer1AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithBlankIndexAndBlankTestWarmer11Test()

@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.Update9
 {
 	public partial class Update9YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class Update950ParentYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public Update950ParentYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -42,8 +39,9 @@ namespace Nest.Tests.Integration.Yaml.Update9
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Parent2Tests : YamlTestsBase
+		public class Parent2Tests : Update950ParentYamlBase
 		{
 			[Test]
 			public void Parent2Test()
@@ -108,7 +106,7 @@ namespace Nest.Tests.Integration.Yaml.Update9
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentOmitted3Tests : YamlTestsBase
+		public class ParentOmitted3Tests : Update950ParentYamlBase
 		{
 			[Test]
 			public void ParentOmitted3Test()

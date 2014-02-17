@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 {
 	public partial class IndicesPutSettings2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesPutSettings2AllPathOptionsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesPutSettings2AllPathOptionsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -34,8 +31,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutSettingsPerIndex2Tests : YamlTestsBase
+		public class PutSettingsPerIndex2Tests : IndicesPutSettings2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutSettingsPerIndex2Test()
@@ -69,7 +67,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutSettingsInAllIndex3Tests : YamlTestsBase
+		public class PutSettingsInAllIndex3Tests : IndicesPutSettings2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutSettingsInAllIndex3Test()
@@ -97,7 +95,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutSettingsInIndex4Tests : YamlTestsBase
+		public class PutSettingsInIndex4Tests : IndicesPutSettings2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutSettingsInIndex4Test()
@@ -125,7 +123,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutSettingsInPrefixIndex5Tests : YamlTestsBase
+		public class PutSettingsInPrefixIndex5Tests : IndicesPutSettings2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutSettingsInPrefixIndex5Test()
@@ -153,7 +151,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutSettingsInListOfIndices6Tests : YamlTestsBase
+		public class PutSettingsInListOfIndices6Tests : IndicesPutSettings2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutSettingsInListOfIndices6Test()
@@ -184,7 +182,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutSettingsInBlankIndex7Tests : YamlTestsBase
+		public class PutSettingsInBlankIndex7Tests : IndicesPutSettings2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutSettingsInBlankIndex7Test()

@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.Termvector1
 {
 	public partial class Termvector1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class Termvector110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public Termvector110BasicYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -49,8 +46,9 @@ namespace Nest.Tests.Integration.Yaml.Termvector1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestsForTermvectorGet2Tests : YamlTestsBase
+		public class BasicTestsForTermvectorGet2Tests : Termvector110BasicYamlBase
 		{
 			[Test]
 			public void BasicTestsForTermvectorGet2Test()

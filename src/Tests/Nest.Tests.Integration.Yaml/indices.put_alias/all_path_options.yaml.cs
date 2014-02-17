@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 {
 	public partial class IndicesPutAlias2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesPutAlias2AllPathOptionsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesPutAlias2AllPathOptionsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -34,8 +31,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutAliasPerIndex2Tests : YamlTestsBase
+		public class PutAliasPerIndex2Tests : IndicesPutAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutAliasPerIndex2Test()
@@ -63,7 +61,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutAliasInAllIndex3Tests : YamlTestsBase
+		public class PutAliasInAllIndex3Tests : IndicesPutAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutAliasInAllIndex3Test()
@@ -88,7 +86,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutAliasInIndex4Tests : YamlTestsBase
+		public class PutAliasInIndex4Tests : IndicesPutAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutAliasInIndex4Test()
@@ -113,7 +111,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutAliasPrefixIndex5Tests : YamlTestsBase
+		public class PutAliasPrefixIndex5Tests : IndicesPutAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutAliasPrefixIndex5Test()
@@ -138,7 +136,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutAliasInListOfIndices6Tests : YamlTestsBase
+		public class PutAliasInListOfIndices6Tests : IndicesPutAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutAliasInListOfIndices6Test()
@@ -163,14 +161,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutAliasWithBlankIndex7Tests : YamlTestsBase
+		public class PutAliasWithBlankIndex7Tests : IndicesPutAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutAliasWithBlankIndex7Test()
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("", "alias", null));
+				this.Do(()=> this._client.IndicesPutAliasForAll("alias", null));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
@@ -188,7 +186,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutAliasWithMissingName8Tests : YamlTestsBase
+		public class PutAliasWithMissingName8Tests : IndicesPutAlias2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void PutAliasWithMissingName8Test()

@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 {
 	public partial class IndicesDeleteMapping2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesDeleteMapping2AllPathOptionsYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesDeleteMapping2AllPathOptionsYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -49,8 +46,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithAllIndex2Tests : YamlTestsBase
+		public class DeleteWithAllIndex2Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithAllIndex2Test()
@@ -81,7 +79,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithIndex3Tests : YamlTestsBase
+		public class DeleteWithIndex3Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithIndex3Test()
@@ -112,7 +110,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithPrefixIndex4Tests : YamlTestsBase
+		public class DeleteWithPrefixIndex4Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithPrefixIndex4Test()
@@ -143,7 +141,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithListOfIndices5Tests : YamlTestsBase
+		public class DeleteWithListOfIndices5Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithListOfIndices5Test()
@@ -174,7 +172,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithIndexListAndAllType6Tests : YamlTestsBase
+		public class DeleteWithIndexListAndAllType6Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithIndexListAndAllType6Test()
@@ -205,7 +203,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithIndexListAndType7Tests : YamlTestsBase
+		public class DeleteWithIndexListAndType7Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithIndexListAndType7Test()
@@ -236,7 +234,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithIndexListAndPrefixType8Tests : YamlTestsBase
+		public class DeleteWithIndexListAndPrefixType8Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithIndexListAndPrefixType8Test()
@@ -267,7 +265,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteWithIndexListAndListOfTypes9Tests : YamlTestsBase
+		public class DeleteWithIndexListAndListOfTypes9Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void DeleteWithIndexListAndListOfTypes9Test()
@@ -298,7 +296,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Check404OnNoMatchingType10Tests : YamlTestsBase
+		public class Check404OnNoMatchingType10Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void Check404OnNoMatchingType10Test()
@@ -314,7 +312,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class CheckDeleteWithBlankIndexAndBlankType11Tests : YamlTestsBase
+		public class CheckDeleteWithBlankIndexAndBlankType11Tests : IndicesDeleteMapping2AllPathOptionsYamlBase
 		{
 			[Test]
 			public void CheckDeleteWithBlankIndexAndBlankType11Test()

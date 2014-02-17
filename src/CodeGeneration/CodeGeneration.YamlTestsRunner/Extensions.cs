@@ -110,7 +110,12 @@ namespace CodeGeneration.YamlTestsRunner
 			serializer.Serialize(writer, o);
 			writer.Close();
 			//anonymousify the json
-			var anon = stringWriter.ToString().Replace("{", "new {").Replace("]", "}").Replace("[", "new [] {").Replace(":", "=");
+			var anon = stringWriter.ToString()
+				.Replace("{", "new {")
+				.Replace("]", "}")
+				.Replace("[", "new [] {")
+				.Replace(":", "=")
+				.Replace("http=", "http:");
 			//match indentation of the view	
 			anon = Regex.Replace(anon, @"^(\s+)?", (m) =>
 			{

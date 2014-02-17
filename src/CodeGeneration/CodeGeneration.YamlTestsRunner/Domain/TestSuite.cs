@@ -141,7 +141,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 				value = value.Replace(@"\.", "|||");
 				value = Regex.Replace(value, @"\.([^\.]+)", m => "[" + m.Value.Trim('.').SurroundWithQuotes() + "]");
 				value = value.Replace("|||", ".");
-				return "_responseDictionary" + value;
+				return "_response" + value;
 			}
 			return "_response" + value;
 		}

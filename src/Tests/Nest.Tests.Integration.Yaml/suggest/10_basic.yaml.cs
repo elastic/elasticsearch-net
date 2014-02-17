@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.Suggest1
 {
 	public partial class Suggest1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class Suggest110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public Suggest110BasicYamlBase() : base()
 			{	
 
 				//do index 
@@ -34,8 +31,9 @@ namespace Nest.Tests.Integration.Yaml.Suggest1
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestsForSuggestApi2Tests : YamlTestsBase
+		public class BasicTestsForSuggestApi2Tests : Suggest110BasicYamlBase
 		{
 			[Test]
 			public void BasicTestsForSuggestApi2Test()

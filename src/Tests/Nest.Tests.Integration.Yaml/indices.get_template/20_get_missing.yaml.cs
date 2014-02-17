@@ -13,13 +13,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate2
 {
 	public partial class IndicesGetTemplate2YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class Setup1Tests : YamlTestsBase
+	
+		public class IndicesGetTemplate220GetMissingYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void Setup1Test()
+			public IndicesGetTemplate220GetMissingYamlBase() : base()
 			{	
 
 				//do indices.delete_template 
@@ -30,8 +27,9 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate2
 			}
 		}
 
+
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetMissingTemplate2Tests : YamlTestsBase
+		public class GetMissingTemplate2Tests : IndicesGetTemplate220GetMissingYamlBase
 		{
 			[Test]
 			public void GetMissingTemplate2Test()
