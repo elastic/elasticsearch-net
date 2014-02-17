@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.put_mapping 
 				_body = new {
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMapping("test_index"));
@@ -87,7 +87,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMapping("test_index"));

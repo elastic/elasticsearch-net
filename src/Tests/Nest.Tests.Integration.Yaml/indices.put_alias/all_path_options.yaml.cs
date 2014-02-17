@@ -23,13 +23,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index1", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("foo", null));
+				this.Do(()=> this._client.IndicesCreatePut("foo", null));
 
 			}
 		}
@@ -42,10 +42,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index1", "alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index1", "alias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index2", "alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index2", "alias", null));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
@@ -70,7 +70,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("_all", "alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("_all", "alias", null));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
@@ -95,7 +95,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("*", "alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("*", "alias", null));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
@@ -120,7 +120,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_*", "alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_*", "alias", null));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
@@ -145,7 +145,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index1,test_index2", "alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index1,test_index2", "alias", null));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
@@ -170,7 +170,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("", "alias", null));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
@@ -195,7 +195,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost(null), shouldCatch: @"param");
+				this.Do(()=> this._client.IndicesPutAliasForAll("", null), shouldCatch: @"param");
 
 			}
 		}

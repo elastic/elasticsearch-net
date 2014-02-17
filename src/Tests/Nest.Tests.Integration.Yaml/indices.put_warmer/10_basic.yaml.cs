@@ -23,10 +23,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_idx", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_idx", null));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutWarmerPost("test_idx", "test_warmer2", _body));
+				this.Do(()=> this._client.IndicesPutWarmer("test_idx", "test_warmer2", _body));
 
 				//do indices.put_warmer 
 				_body = new {
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutWarmerPost("test_index", "test_warmer", _body));
+				this.Do(()=> this._client.IndicesPutWarmer("test_index", "test_warmer", _body));
 
 			}
 		}

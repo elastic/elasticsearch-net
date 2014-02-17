@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet("test_1"));
+				this.Do(()=> this._client.IndicesRefreshPost("test_1"));
 
 				//do explain 
 				_body = new {

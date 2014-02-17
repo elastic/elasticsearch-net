@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate3
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.refresh 
 				this.Do(()=> this._client.IndicesRefreshPostForAll());
@@ -40,9 +40,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate3
 				this.IsMatch(_response.total, 0);
 
 				//match _response.matches: 
-				this.IsMatch(_response.matches, new [] {
-
-				});
+				this.IsMatch(_response.matches, new string[] {});
 
 				//do count_percolate 
 				_body = new {

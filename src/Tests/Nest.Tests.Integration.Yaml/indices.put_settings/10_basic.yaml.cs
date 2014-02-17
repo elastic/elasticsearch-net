@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test-index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test-index", _body));
 
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings("test-index", nv=>nv

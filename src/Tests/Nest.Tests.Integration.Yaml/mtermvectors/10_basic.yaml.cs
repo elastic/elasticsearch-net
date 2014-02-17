@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Mtermvectors1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("testidx", _body));
+				this.Do(()=> this._client.IndicesCreatePut("testidx", _body));
 
 				//do index 
 				_body = new {

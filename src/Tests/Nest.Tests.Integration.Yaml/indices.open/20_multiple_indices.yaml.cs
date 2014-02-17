@@ -23,13 +23,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index1", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index3", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index3", null));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

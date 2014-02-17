@@ -23,10 +23,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_1", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_2", null));
 
 			}
 		}

@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("percolator_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("percolator_index", null));
 
 				//do index 
 				_body = new {
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate2
 				this.Do(()=> this._client.IndexPost("percolator_index", "test_type", "1", _body));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("my_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("my_index", null));
 
 				//do index 
 				_body = new {

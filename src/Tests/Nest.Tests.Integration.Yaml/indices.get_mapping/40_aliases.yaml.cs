@@ -35,10 +35,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping4
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index", "test_alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_alias", null));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMapping("test_alias"));

@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 						url= "http=//snapshot.test1"
 					}
 				};
-				this.Do(()=> this._client.SnapshotCreateRepositoryPost("test_repo1", _body));
+				this.Do(()=> this._client.SnapshotCreateRepositoryPut("test_repo1", _body));
 
 				//do snapshot.create_repository 
 				_body = new {
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 						url= "http=//snapshot.test2"
 					}
 				};
-				this.Do(()=> this._client.SnapshotCreateRepositoryPost("test_repo2", _body));
+				this.Do(()=> this._client.SnapshotCreateRepositoryPut("test_repo2", _body));
 
 			}
 		}

@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 						test_type1= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index1", _body));
 
 				//do indices.create 
 				_body = new {
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 						test_type2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index2", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index2", _body));
 
 				//do indices.create 
 				_body = new {
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 						test_type2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("foo", _body));
+				this.Do(()=> this._client.IndicesCreatePut("foo", _body));
 
 			}
 		}
@@ -321,12 +321,12 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping(nv=>nv
+				this.Do(()=> this._client.IndicesDeleteMapping("", "", nv=>nv
 					.Add("name", @"test_type1")
 				), shouldCatch: @"param");
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test_index1"), shouldCatch: @"param");
+				this.Do(()=> this._client.IndicesDeleteMapping("test_index1", ""), shouldCatch: @"param");
 
 			}
 		}

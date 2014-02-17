@@ -74,10 +74,10 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test", null));
+				this.Do(()=> this._client.IndicesCreatePut("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test", "test_alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test", "test_alias", null));
 
 				//do cat.aliases 
 				this.Do(()=> this._client.CatAliasesGet());
@@ -103,7 +103,7 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test", null));
+				this.Do(()=> this._client.IndicesCreatePut("test", null));
 
 				//do indices.put_alias 
 				_body = new {
@@ -115,7 +115,7 @@ $/
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutAliasPost("test", "test_alias", _body));
+				this.Do(()=> this._client.IndicesPutAlias("test", "test_alias", _body));
 
 				//do cat.aliases 
 				this.Do(()=> this._client.CatAliasesGet());
@@ -141,13 +141,13 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test", null));
+				this.Do(()=> this._client.IndicesCreatePut("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test", "test_1", null));
+				this.Do(()=> this._client.IndicesPutAlias("test", "test_1", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test", "test_2", null));
+				this.Do(()=> this._client.IndicesPutAlias("test", "test_2", null));
 
 				//do cat.aliases 
 				this.Do(()=> this._client.CatAliasesGet("test_1"));
@@ -181,10 +181,10 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test", null));
+				this.Do(()=> this._client.IndicesCreatePut("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test", "test_1", null));
+				this.Do(()=> this._client.IndicesPutAlias("test", "test_1", null));
 
 				//do cat.aliases 
 				this.Do(()=> this._client.CatAliasesGet(nv=>nv
@@ -217,10 +217,10 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test", null));
+				this.Do(()=> this._client.IndicesCreatePut("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test", "test_1", null));
+				this.Do(()=> this._client.IndicesPutAlias("test", "test_1", null));
 
 				//do cat.aliases 
 				this.Do(()=> this._client.CatAliasesGet(nv=>nv

@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Mget1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_2", null));
 
 				//do index 
 				_body = new {

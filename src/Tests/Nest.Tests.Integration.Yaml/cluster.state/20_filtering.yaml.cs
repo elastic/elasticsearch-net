@@ -77,7 +77,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 
 				//do indices.put_settings 
 				_body = new Dictionary<string, object> {
-					 { "index.blocks.read_only",  "true" }
+					{ @"index.blocks.read_only", @"true" }
 				};
 				this.Do(()=> this._client.IndicesPutSettings("testidx", _body));
 

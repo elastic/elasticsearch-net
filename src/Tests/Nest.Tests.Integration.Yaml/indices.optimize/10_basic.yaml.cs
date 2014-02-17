@@ -23,10 +23,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesOptimize1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("testing", null));
+				this.Do(()=> this._client.IndicesCreatePut("testing", null));
 
 				//do indices.optimize 
-				this.Do(()=> this._client.IndicesOptimizeGet("testing", nv=>nv
+				this.Do(()=> this._client.IndicesOptimizePost("testing", nv=>nv
 					.Add("max_num_segments", 1)
 				));
 

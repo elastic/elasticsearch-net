@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate1
 						type_1= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMapping("test_index"));
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate1
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings("test_index"));
@@ -82,7 +82,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.get_warmer 
 				this.Do(()=> this._client.IndicesGetWarmer("test_index"));
@@ -118,7 +118,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesCreate1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMapping("test_index"));

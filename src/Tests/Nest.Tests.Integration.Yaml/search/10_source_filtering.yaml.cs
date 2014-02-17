@@ -210,10 +210,8 @@ namespace Nest.Tests.Integration.Yaml.Search1
 				this.Do(()=> this._client.SearchPost(_body));
 
 				//match _response.hits.hits[0].fields: 
-				this.IsMatch(_response.hits.hits[0].fields, new {
-					include.field2= new [] {
-						"v2"
-					}
+				this.IsMatch(_response.hits.hits[0].fields, new Dictionary<string, object> {
+					{ @"include.field2", new [] {"v2"} }
 				});
 
 				//is_false _response.hits.hits[0]._source; 
@@ -232,10 +230,8 @@ namespace Nest.Tests.Integration.Yaml.Search1
 				this.Do(()=> this._client.SearchPost(_body));
 
 				//match _response.hits.hits[0].fields: 
-				this.IsMatch(_response.hits.hits[0].fields, new {
-					include.field2= new [] {
-						"v2"
-					}
+				this.IsMatch(_response.hits.hits[0].fields, new Dictionary<string, object> {
+					{ @"include.field2", new [] {"v2"} }
 				});
 
 				//is_true _response.hits.hits[0]._source; 

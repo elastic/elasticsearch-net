@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Update10
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

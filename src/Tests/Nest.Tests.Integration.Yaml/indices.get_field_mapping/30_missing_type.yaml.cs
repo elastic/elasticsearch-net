@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping3
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "not_test_type", "text"), shouldCatch: @"missing");

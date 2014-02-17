@@ -23,13 +23,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index1", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("foo", null));
+				this.Do(()=> this._client.IndicesCreatePut("foo", null));
 
 			}
 		}
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index1", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index1", "test_type", _body));
 
 				//do indices.put_mapping 
 				_body = new {
@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index2", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index2", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMappingForAll());
@@ -106,7 +106,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("_all", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("_all", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMappingForAll());
@@ -150,7 +150,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("*", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("*", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMappingForAll());
@@ -194,7 +194,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index*", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index*", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMappingForAll());
@@ -235,7 +235,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index1,test_index2", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index1,test_index2", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMappingForAll());
@@ -276,7 +276,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMappingForAll());
@@ -310,7 +310,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping2
 			{	
 
 				//do indices.put_mapping 
-				this.Do(()=> this._client.IndicesPutMappingPost(null), shouldCatch: @"param");
+				this.Do(()=> this._client.IndicesPutMappingForAll("", null), shouldCatch: @"param");
 
 			}
 		}

@@ -23,25 +23,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index1", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("foo", null));
+				this.Do(()=> this._client.IndicesCreatePut("foo", null));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this.Do(()=> this._client.IndicesPutAliasPost("alias1", _body));
+				this.Do(()=> this._client.IndicesPutAliasForAll("alias1", _body));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this.Do(()=> this._client.IndicesPutAliasPost("alias2", _body));
+				this.Do(()=> this._client.IndicesPutAliasForAll("alias2", _body));
 
 			}
 		}
@@ -345,10 +345,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("alias1"), shouldCatch: @"param");
+				this.Do(()=> this._client.IndicesDeleteAlias("", "alias1"), shouldCatch: @"param");
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("test_index1"), shouldCatch: @"param");
+				this.Do(()=> this._client.IndicesDeleteAlias("test_index1", ""), shouldCatch: @"param");
 
 			}
 		}

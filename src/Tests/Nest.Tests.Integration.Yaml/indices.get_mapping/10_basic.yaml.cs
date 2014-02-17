@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 						type_2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do indices.create 
 				_body = new {
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 						type_3= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_2", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_2", _body));
 
 			}
 		}

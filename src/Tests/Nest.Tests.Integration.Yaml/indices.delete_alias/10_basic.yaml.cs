@@ -23,13 +23,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("testind", null));
+				this.Do(()=> this._client.IndicesCreatePut("testind", null));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this.Do(()=> this._client.IndicesPutAliasPost("testind", "testali", _body));
+				this.Do(()=> this._client.IndicesPutAlias("testind", "testali", _body));
 
 				//do indices.get_alias 
 				this.Do(()=> this._client.IndicesGetAliasForAll("testali"));

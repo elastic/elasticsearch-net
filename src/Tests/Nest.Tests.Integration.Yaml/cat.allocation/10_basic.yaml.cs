@@ -88,7 +88,7 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test", null));
+				this.Do(()=> this._client.IndicesCreatePut("test", null));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Scroll1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_scroll", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_scroll", null));
 
 				//do index 
 				_body = new {

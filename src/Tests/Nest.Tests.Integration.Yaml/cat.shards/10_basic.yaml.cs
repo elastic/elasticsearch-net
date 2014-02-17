@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Yaml.CatShards1
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("index2", _body));
+				this.Do(()=> this._client.IndicesCreatePut("index2", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

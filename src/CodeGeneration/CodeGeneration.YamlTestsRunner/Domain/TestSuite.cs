@@ -22,12 +22,12 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			var untypedSuite = untyped.First();
 			var suite = new TestSuite();
 			suite.Description = untypedSuite.Key;
-			suite.Steps = Actions(untypedSuite).Where(s=>s != null).ToList();
+			suite.Steps = Actions(untypedSuite, suite.Description).Where(s=>s != null).ToList();
 			return suite;
 
 		}
 
-		private static IEnumerable<ITestStep> Actions(KeyValuePair<string, object> untypedSuite)
+		private static IEnumerable<ITestStep> Actions(KeyValuePair<string, object> untypedSuite, string description)
 		{
 			var actions = untypedSuite.Value as List<object>;
 			if (actions == null)
@@ -49,7 +49,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 				switch (testAction)
 				{
 					case "do":
-						yield return CreateDoStep(kv.Value as Dictionary<object, object>);
+						yield return CreateDoStep(kv.Value as Dictionary<object, object>, description);
 						break;
 					case "set":
 						yield return CreateSetStep(kv.Value as Dictionary<object, object>);
@@ -158,7 +158,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			return new SetStep() {VariableName = kv.Value as string, ResponseValue = PropertyPath(kv.Key as string)};
 		}
 
-		private static DoStep CreateDoStep(Dictionary<object, object> value)
+		private static DoStep CreateDoStep(Dictionary<object, object> value, string description)
 		{
 			if (value == null)
 				return null;
@@ -176,7 +176,13 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			var argumentString = arguments as string;
 			if (argumentString != null)
 			{
-				return new DoStep {Call = call, Body = argumentString, Catch = catchException};
+				return new DoStep
+				{
+					Call = call, 
+					Body = argumentString, 
+					Catch = catchException,
+					TestDescription = description
+				};
 			}
 			var complexArgument = arguments as Dictionary<object, object>;
 			if (complexArgument != null)
@@ -191,9 +197,16 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 				foreach (var kv in complexArgument)
 					nv.Add(kv.Key as string, kv.Value);
 				
-				return new DoStep {Call = call, Body = body, QueryString = nv, Catch = catchException};
+				return new DoStep
+				{
+					Call = call, 
+					Body = body, 
+					QueryString = nv, 
+					Catch = catchException,
+					TestDescription = description
+				};
 			}
-			return new DoStep { Call = call , Catch = catchException};
+			return new DoStep { Call = call , Catch = catchException, TestDescription = description};
 		}
 	}
 }

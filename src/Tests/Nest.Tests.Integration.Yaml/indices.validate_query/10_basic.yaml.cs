@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("testing", _body));
+				this.Do(()=> this._client.IndicesCreatePut("testing", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 				));
 
 				//do indices.validate_query 
-				this.Do(()=> this._client.IndicesValidateQueryGet(nv=>nv
+				this.Do(()=> this._client.IndicesValidateQueryGetForAll(nv=>nv
 					.Add("q", @"query string")
 				));
 
@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 						invalid_query= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesValidateQueryPost(_body));
+				this.Do(()=> this._client.IndicesValidateQueryPostForAll(_body));
 
 				//is_false _response.valid; 
 				this.IsFalse(_response.valid);

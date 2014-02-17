@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -10,6 +11,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 		public string Type { get { return "do"; } }
 		public string Call { get; set; }
 		public string Catch { get; set; }
+		public string TestDescription { get; set; }
 
 		private string _rawElasticSearchCall = null;
 		public string RawElasticSearchCall
@@ -27,25 +29,21 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 
 		private string FindBestRawElasticSearchMatch()
 		{
-			if (this.Call == "create")
-			{
-				this.Call = "index";
-				if (this.QueryString == null)
-					this.QueryString = new Dictionary<string, object>();
-				this.QueryString.Add("op_type", "create");
-			}
+			this.PatchCall();
 
 			var re = "^" + this.Call.ToPascalCase() + @"(Get|Put|Head|Post|Delete)?(ForAll)?\(";
 			var counts = YamlTestsGenerator.RawElasticCalls
 				.Where(c => Regex.IsMatch(c, re))
+				.Where(c=> this.Body == null || c.Contains("object body"))
 				.Select(s => new {Method = s, Count = QueryStringCount(s)})
+				.OrderByDescending(s=>s.Count)
 				.ToList();
 
 			var calls = YamlTestsGenerator.RawElasticCalls
 				.Where(c => Regex.IsMatch(c, re))
 				.Where(c=> this.Body == null || c.Contains("object body"))
 				.OrderByDescending(QueryStringCount)
-				.ThenByDescending(MethodPreference)
+				//.ThenByDescending(MethodPreference)
 				.ToList();
 
 			var call = calls.FirstOrDefault();
@@ -57,6 +55,46 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			return this.GenerateCall(call);
 		}
 
+		private void PatchCall()
+		{
+			if (this.Call == "create")
+			{
+				this.Call = "index";
+				if (this.QueryString == null)
+					this.QueryString = new Dictionary<string, object>();
+				this.QueryString.Add("op_type", "create");
+			}
+			else if (
+				this.Call == "indices.delete_alias"
+				|| this.Call == "indices.delete_warmer"
+				|| this.Call == "indices.delete_mapping"
+				|| this.Call == "indices.put_alias"
+				|| this.Call == "indices.put_warmer"
+				|| this.Call == "indices.put_mapping")
+			{
+				Func<string, bool> m = (s) => Regex.IsMatch(this.TestDescription, "(blank|empty|missing) " + s);
+
+				if (!this.QueryString.ContainsKey("index") && m("index"))
+					this.QueryString["index"] = string.Empty;
+				if (!this.QueryString.ContainsKey("type") && m("type"))
+					this.QueryString["type"] = string.Empty;
+				if (!this.QueryString.ContainsKey("name") 
+					&& (m("name") || m("alias") || m("(.+_)?warmer")))
+					this.QueryString["name"] = string.Empty;
+			}
+		}
+		private double QueryStringCount(string method)
+		{
+			var matches = (double)this.QueryString.Keys.Count(k => method.Contains(k + ","));
+			return 1 + matches / (method.Count(c=>c==','));
+
+		}
+		private string GetQueryStringValue(string key)
+		{
+			var value = this.QueryString[key].ToStringRepresentation("\t\t\t\t\t");
+
+			return value;
+		}
 	
 
 		private string GenerateCall(string call)
@@ -93,6 +131,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			s += ");";
 			return s;
 		}
+	
 
 		public static string SerializeBody(DoStep o)
 		{
@@ -123,12 +162,6 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 			return "\"" + v + "\"";
 		}
 		
-		private string GetQueryStringValue(string key)
-		{
-			var value = this.QueryString[key].ToStringRepresentation("\t\t\t\t\t");
-			
-			return value;
-		}
 
 		private IEnumerable<string> CsharpArguments(string call, bool inverse = false)
 		{
@@ -139,29 +172,15 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 				.Select(ki => ki.Key);
 			return csharpArguments.ToList();
 		}
-
-		private int QueryStringCount(string method)
-		{
-			var matches = this.QueryString.Keys.Count(k => method.Contains(k + ","));
-			var parameters = method.Count(c => c == ',');
-			if (!QueryString.Any() && parameters == 1)
-				return 99;
-			if (matches == 0)
-				return -100;
-			if (QueryString.Count == matches && matches == parameters - 1)
-				return 98;
-			return matches;
-
-		}
 		private int MethodPreference(string method)
 		{
 			var postBoost = this.Body != null ? 10 : 0;
 			var getBoost = this.Body == null ? 10 : 0;
 
-			if (method.Contains("Post(")) return 5 + postBoost;
-			if (method.Contains("Put(")) return 4 + postBoost;
-			if (method.Contains("Get(")) return 3 + getBoost;
-			if (method.Contains("Head(")) return 2 + postBoost;
+			//if (method.Contains("Post(")) return 5 + postBoost;
+			//if (method.Contains("Put(")) return 4 + postBoost;
+			//if (method.Contains("Get(")) return 3 + getBoost;
+			//if (method.Contains("Head(")) return 2 + postBoost;
 			return 0;
 		}
 	}

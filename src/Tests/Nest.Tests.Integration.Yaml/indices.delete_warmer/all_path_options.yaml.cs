@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index1", _body));
 
 				//do indices.create 
 				_body = new {
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index2", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index2", _body));
 
 				//do indices.create 
 				_body = new {
@@ -83,7 +83,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("foo", _body));
+				this.Do(()=> this._client.IndicesCreatePut("foo", _body));
 
 			}
 		}
@@ -378,10 +378,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_warmer1"), shouldCatch: @"param");
+				this.Do(()=> this._client.IndicesDeleteWarmer("", "test_warmer1"), shouldCatch: @"param");
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index1"), shouldCatch: @"param");
+				this.Do(()=> this._client.IndicesDeleteWarmer("test_index1", ""), shouldCatch: @"param");
 
 			}
 		}

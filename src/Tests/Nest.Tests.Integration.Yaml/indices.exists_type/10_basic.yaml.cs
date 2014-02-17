@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsType1
 						type_2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do indices.exists_type 
 				this.Do(()=> this._client.IndicesExistsTypeHead("test_2", "type_1"));

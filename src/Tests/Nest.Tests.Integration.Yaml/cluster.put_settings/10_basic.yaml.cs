@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings1
 
 				//match _response.transient: 
 				this.IsMatch(_response.transient, new Dictionary<string, object> {
-					 { "discovery.zen.minimum_master_nodes",  "1" }
+					{ @"discovery.zen.minimum_master_nodes", @"1" }
 				});
 
 				//do cluster.get_settings 
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings1
 
 				//match _response.transient: 
 				this.IsMatch(_response.transient, new Dictionary<string, object> {
-					 { "discovery.zen.minimum_master_nodes",  "1" }
+					{ @"discovery.zen.minimum_master_nodes", @"1" }
 				});
 
 			}

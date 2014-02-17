@@ -29,10 +29,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsAlias1
 				this.IsFalse(this._status);
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index", "test_alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_alias", null));
 
 				//do indices.exists_alias 
 				this.Do(()=> this._client.IndicesExistsAliasHeadForAll("test_alias"));
@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsAlias1
 			{	
 
 				//do indices.exists_alias 
-				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias", nv=>nv
+				this.Do(()=> this._client.IndicesExistsAliasHeadForAll("test_alias", nv=>nv
 					.Add("local", @"true")
 				));
 

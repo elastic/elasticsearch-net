@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.exists_type 
 				this.Do(()=> this._client.IndicesExistsTypeHead("test_index", "test_type"));

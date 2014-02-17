@@ -23,13 +23,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index1", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("foo", null));
+				this.Do(()=> this._client.IndicesCreatePut("foo", null));
 
 			}
 		}

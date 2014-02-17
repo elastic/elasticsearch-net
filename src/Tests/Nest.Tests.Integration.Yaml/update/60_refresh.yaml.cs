@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.Update11
 						 { "index.refresh_interval",  "-1" }
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

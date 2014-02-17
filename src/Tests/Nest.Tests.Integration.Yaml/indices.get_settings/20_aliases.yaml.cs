@@ -32,10 +32,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test-index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test-index", _body));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test-index", "test-alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test-index", "test-alias", null));
 
 				//do indices.get_settings 
 				this.Do(()=> this._client.IndicesGetSettings("test-alias"));

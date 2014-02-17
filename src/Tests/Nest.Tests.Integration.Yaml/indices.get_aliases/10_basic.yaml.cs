@@ -23,22 +23,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index_2", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index_2", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index", "test_alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_alias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index", "test_blias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_blias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index_2", "test_alias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index_2", "test_alias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasPost("test_index_2", "test_blias", null));
+				this.Do(()=> this._client.IndicesPutAlias("test_index_2", "test_blias", null));
 
 			}
 		}

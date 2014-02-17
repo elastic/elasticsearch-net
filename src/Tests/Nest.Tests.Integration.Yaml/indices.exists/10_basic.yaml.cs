@@ -29,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExists1
 				this.IsFalse(this._status);
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.exists 
 				this.Do(()=> this._client.IndicesExistsHead("test_index"));

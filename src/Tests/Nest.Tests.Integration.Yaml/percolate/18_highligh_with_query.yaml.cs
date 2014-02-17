@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate4
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do index 
 				_body = new {
