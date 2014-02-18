@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Nest.DSL.Search;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -280,8 +281,20 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
 
+		[JsonProperty(PropertyName = "_source")]
+		internal object _Source { get; set; }
 
+		public SearchDescriptor<T> Source(bool include = true)
+		{
+			this._Source = include;
+			return this;
+		}
 
+		public SearchDescriptor<T> Source(Func<SourceDescriptor<T>, SourceDescriptor<T>> sourceSelector)
+		{
+			this._Source = sourceSelector(new SourceDescriptor<T>());
+			return this;
+		}
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
 		/// size is actually multiplied by the number of shards!

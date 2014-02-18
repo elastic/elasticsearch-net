@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 		public abstract class MyBaseClass
 		{
 			public string Title { get; set; }
+			public string Description { get; set; }
 		}
 		public class ClassA : MyBaseClass
 		{
@@ -196,6 +197,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 					else
 						o = new ClassB() { ClassBProperty = Guid.NewGuid().ToString() };
 					o.Title = Guid.NewGuid().ToString();
+					o.Description = Guid.NewGuid().ToString();
 					return o;
 				});
 
@@ -207,8 +209,9 @@ namespace Nest.Tests.Integration.Search.SearchType
 					.Types(typeof(ClassA), typeof(ClassB))
 					.From(0)
 					.Size(100)
-					//.SourceExclude()
-					.Fields(p=>p.Title)
+					.Source(source=>source
+						.Include(i=>i.Add(p=>p.Title).Add("classBProperty"))
+					)
 					.MatchAll()
 				)
 				.Search<MyBaseClass>("using_selector", s => s.AllIndices()
@@ -216,7 +219,9 @@ namespace Nest.Tests.Integration.Search.SearchType
 					.ConcreteTypeSelector((o, h) => o.classBProperty != null ? typeof(ClassB) : typeof(ClassA))
 					.From(0)
 					.Size(100)
-					.Fields(f=>f.Add(p=>p.Title).Add("classBProperty"))
+					.Source(source=>source
+						.Include(i=>i.Add(p=>p.Description).Add("classBProperty"))
+					)
 					.MatchAll()
 				)
 			);
@@ -224,14 +229,18 @@ namespace Nest.Tests.Integration.Search.SearchType
 			var firstResult = queryResults.GetResponse<MyBaseClass>("using_types");
 
 			Assert.True(firstResult.Documents.Any());
-			firstResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
-			firstResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
+			firstResult.Documents.All(d => !d.Title.IsNullOrEmpty());
+			firstResult.Documents.All(d => d.Description.IsNullOrEmpty());
+			firstResult.Documents.OfType<ClassA>().Any().Should().BeTrue();
+			firstResult.Documents.OfType<ClassB>().Any().Should().BeTrue();
 
 			var secondResult = queryResults.GetResponse<MyBaseClass>("using_selector");
 
 			Assert.True(secondResult.Documents.Any());
-			secondResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
-			secondResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
+			secondResult.Documents.All(d => d.Title.IsNullOrEmpty());
+			secondResult.Documents.All(d => !d.Description.IsNullOrEmpty());
+			secondResult.Documents.OfType<ClassA>().Any().Should().BeTrue();
+			secondResult.Documents.OfType<ClassB>().Any().Should().BeTrue();
 		}
 	}
 }

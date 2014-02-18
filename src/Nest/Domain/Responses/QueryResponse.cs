@@ -80,17 +80,14 @@ namespace Nest
 			}
 		}
 
+		private IList<T> _documents; 
 		public IEnumerable<T> Documents
 		{
 			get
 			{
-				if (this.HitsMetaData != null)
-				{
-					foreach (var hit in this.HitsMetaData.Hits)
-					{
-						yield return hit.Source;
-					}
-				}
+				if (this.HitsMetaData != null && this._documents == null)
+					this._documents = this.HitsMetaData.Hits.Select(h => h.Source).ToList();
+				return this._documents;
 			}
 		}
 		
