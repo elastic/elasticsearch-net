@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.Domain;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -9,7 +10,7 @@ namespace Nest
 	//[JsonConverter(typeof(ConcreteTypeConverter))]
     public interface IHit<out T> where T : class
     {
-        T Fields { get; }
+        IFieldSelection<T> Fields { get; }
         T Source { get; }
         string Index { get; }
         double Score { get; }
@@ -29,7 +30,9 @@ namespace Nest
         where T : class
     {
         [JsonProperty(PropertyName = "fields")]
-        public T Fields { get; internal set; }
+		internal IDictionary<string, object> _fields { get; set; }
+		[JsonIgnore]
+        public IFieldSelection<T> Fields { get; internal set; }
         [JsonProperty(PropertyName = "_source")]
         public T Source { get; internal set; }
         [JsonProperty(PropertyName = "_index")]

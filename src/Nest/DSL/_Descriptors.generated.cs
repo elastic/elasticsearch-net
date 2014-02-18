@@ -2284,14 +2284,6 @@ namespace Nest
 			return this;
 		}
 		
-
-		///<summary>A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</summary>
-		public DeleteWarmerDescriptor Name(params string[] name)
-		{
-			this._QueryString.Name(name);
-			return this;
-		}
-		
 		
 	}
 	

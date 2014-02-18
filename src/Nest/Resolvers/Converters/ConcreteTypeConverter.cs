@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Nest.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Nest.Resolvers;
@@ -76,8 +77,9 @@ namespace Nest
 					return GetUsingConcreteTypeConverter(reader, serializer, realConcreteConverter);
 			}
 
-			var instance = typeof(Hit<T>).CreateInstance();
+			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
 			serializer.Populate(reader, instance);
+			instance.Fields = new FieldSelection<T>(elasticContractResolver.Infer, instance._fields);
 			return instance;
 		}
 
