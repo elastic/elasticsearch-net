@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -14,7 +15,7 @@ namespace Nest.Tests.Integration.Mapping
 			var x = this._client.CreateIndex(index, s => s
 				.AddMapping<ElasticsearchProject>(m=>m.MapFromAttributes())
 			);
-			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
+			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
 			var typeMappingResponse = this._client.GetMapping(gm=>gm.Index(index).Type("elasticsearchprojects"));
 			var typeMapping = typeMappingResponse.Mapping;
@@ -50,7 +51,7 @@ namespace Nest.Tests.Integration.Mapping
 					)
 				)
 			);
-			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
+			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
 			var indexResult = this._client.Index(
 				new ElasticsearchProject
@@ -66,8 +67,8 @@ namespace Nest.Tests.Integration.Mapping
 				.MatchAll()
 			);
 			var facets = result.FacetItems<TermItem>(f => f.Country);
-			Assert.AreEqual(3, facets.Count());
-			Assert.AreEqual("royal", facets.FirstOrDefault().Term);
+			Assert.AreEqual(5, facets.Count());
+			facets.Select(f=>f.Term).Should().Contain("royal");
 		}
 
 

@@ -46,9 +46,6 @@ namespace Nest
 		[JsonProperty("omit_norms")]
 		public bool? OmitNorms { get; set; }
 
-		[JsonProperty("omit_term_freq_and_positions")]
-		public bool? OmitTermFrequencyAndPositions { get; set; }
-
 		[JsonProperty("index_options"), JsonConverter(typeof(StringEnumConverter))]
 		public IndexOptions? IndexOptions { get; set; }
 

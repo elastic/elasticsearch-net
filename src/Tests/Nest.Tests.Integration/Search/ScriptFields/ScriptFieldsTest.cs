@@ -28,8 +28,9 @@ namespace Nest.Tests.Integration.Search.ScriptFields
 				)
 			);
 			Assert.True(queryResults.IsValid);
-			Assert.True(queryResults.Documents.Any());
-			Assert.True(queryResults.Documents.All(d=>d.LocScriptField != 0));
+			Assert.True(queryResults.Hits.Any());
+			Assert.Fail("Figure out how to expose fields");
+		//	Assert.True(queryResults.Hits.All(h=>h.Fields.FieldValue(p=>p.LocScriptField) != 0));
 		}
 	}
 }

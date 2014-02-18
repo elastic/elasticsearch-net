@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Core.Get
 			);
 
 			Assert.NotNull(elasticSearchProject);
-			Assert.IsNotNullOrEmpty(elasticSearchProject.FieldValue(p=>p.Name));
+			Assert.IsNotEmpty(elasticSearchProject.FieldValue(p=>p.Name));
 		}
 		[Test]
 		public void GetWithFieldsDeep()
@@ -51,16 +51,11 @@ namespace Nest.Tests.Integration.Core.Get
 
 			Assert.NotNull(fieldSelection);
 			var name = fieldSelection.FieldValue(f => f.Name);
-			Assert.IsNotNullOrEmpty(name);
-			var list = fieldSelection.FieldValue<List<string>>(f=>f.Followers.First().FirstName);
+			Assert.IsNotEmpty(name);
+			var list = fieldSelection.FieldValue(f=>f.Followers.First().FirstName);
 			Assert.NotNull(list);
 			Assert.IsNotEmpty(list);
-			var array = fieldSelection.FieldValue<string[]>(f => f.Followers.First().FirstName);
-			Assert.NotNull(array);
-			Assert.IsNotEmpty(array);
-			var enumerable = fieldSelection.FieldValue<IEnumerable<string>>(f => f.Followers.First().FirstName);
-			Assert.NotNull(enumerable);
-			Assert.IsNotEmpty(enumerable);
+			
 		}
 	}
 }

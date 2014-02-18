@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -13,7 +14,8 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 			var status = client.ClearCache();
 			Assert.True(status.IsValid);
-			Assert.True(status.OK);
+			status.Shards.Total.Should().BeGreaterThan(0);
+			Assert.AreEqual(status.Shards.Total, status.Shards.Successful);
 		}
 		[Test]
 		public void test_clear_cache_specific()
@@ -21,7 +23,8 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 			var status = client.ClearCache(cc=>cc.Filter().Recycler());
 			Assert.True(status.IsValid);
-			Assert.True(status.OK);
+			status.Shards.Total.Should().BeGreaterThan(0);
+			Assert.AreEqual(status.Shards.Total, status.Shards.Successful);
 		}
 		[Test]
 		public void test_clear_cache_generic_specific()
@@ -29,7 +32,8 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 			var status = client.ClearCache(cc=>cc.Index<ElasticsearchProject>().Filter().Recycler());
 			Assert.True(status.IsValid);
-			Assert.True(status.OK);
+			status.Shards.Total.Should().BeGreaterThan(0);
+			Assert.AreEqual(status.Shards.Total, status.Shards.Successful);
 		}
 		[Test]
 		public void test_clear_cache_generic_specific_indices()
@@ -37,7 +41,8 @@ namespace Nest.Tests.Integration.Indices
 			var client = this._client;
 			var status = client.ClearCache(cc=>cc.Indices(_settings.DefaultIndex, _settings.DefaultIndex + "_clone").Filter().Recycler());
 			Assert.True(status.IsValid);
-			Assert.True(status.OK);
+			status.Shards.Total.Should().BeGreaterThan(0);
+			Assert.AreEqual(status.Shards.Total, status.Shards.Successful);
 		}
 	}
 }

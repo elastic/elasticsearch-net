@@ -20,9 +20,9 @@ namespace Nest.Tests.Integration.Search
 							""match_all"" : { }
 					} }"
 				);
-			Assert.True(queryResults.DocumentsWithMetaData.All(h=>h.Explanation != null));
-			Assert.True(queryResults.DocumentsWithMetaData.All(h => h.Explanation.Details.Any()));
-			Assert.True(queryResults.DocumentsWithMetaData.All(h => h.Explanation.Details.All(d=>!d.Description.IsNullOrEmpty())));
+			Assert.True(queryResults.Hits.All(h=>h.Explanation != null));
+			Assert.True(queryResults.Hits.All(h => h.Explanation.Details.Any()));
+			Assert.True(queryResults.Hits.All(h => h.Explanation.Details.All(d=>!d.Description.IsNullOrEmpty())));
 		}
 		[Test]
 		public void ComplexExplain()
@@ -41,9 +41,9 @@ namespace Nest.Tests.Integration.Search
 					} }"
 				);
 
-			Assert.True(queryResults.DocumentsWithMetaData.All(h=>h.Explanation != null));
-			Assert.True(queryResults.DocumentsWithMetaData.All(h => h.Explanation.Details.Any()));
-			Assert.True(queryResults.DocumentsWithMetaData.All(h => h.Explanation.Details.All(d=>!d.Description.IsNullOrEmpty())));
+			Assert.True(queryResults.Hits.All(h=>h.Explanation != null));
+			Assert.True(queryResults.Hits.All(h => h.Explanation.Details.Any()));
+			Assert.True(queryResults.Hits.All(h => h.Explanation.Details.All(d=>!d.Description.IsNullOrEmpty())));
 		}
 
 		

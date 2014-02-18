@@ -109,6 +109,7 @@
     <Compile Include="Domain\Responses\IMultiSearchResponse.cs" />
     <Compile Include="Domain\Bulk\BulkUpdateBody.cs" />
     <Compile Include="Domain\Alias\IndexAliases.cs" />
+    <Compile Include="Domain\Responses\IShardsOperationResponse.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="DSL\Paths\IndicesTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
     <Compile Include="DSL\SearchDescriptorBase.cs" />
+    <Compile Include="DSL\Search\SourceDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
     <Compile Include="DSL\GetTemplateDescriptor.cs" />
@@ -262,7 +264,6 @@
     <Compile Include="DSL\Query\CustomFiltersScoreDescriptor.cs" />
     <Compile Include="DSL\Query\FilterScoreDescriptor.cs" />
     <Compile Include="ElasticClient-Warmers.cs" />
-    <Compile Include="Domain\CovariantDictionary.cs" />
     <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkDeleteResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkIndexResponseItem.cs" />
@@ -270,7 +271,6 @@
     <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
     <Compile Include="Domain\Responses\IBulkResponse.cs" />
     <Compile Include="Domain\Settings\SimilaritySettings.cs" />
-    <Compile Include="DSL\PartialFieldDescriptor.cs" />
     <Compile Include="ElasticClient-MultiSearch.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
@@ -448,9 +448,6 @@
     <Compile Include="DSL\Query\FuzzyQueryDescriptor.cs" />
     <Compile Include="DSL\Query\HasChildQueryDescriptor.cs" />
     <Compile Include="DSL\Query\RangeQueryDescriptor.cs" />
-    <Compile Include="DSL\Query\TextPhrasePrefixQueryDescriptor.cs" />
-    <Compile Include="DSL\Query\TextPhraseQueryDescriptor.cs" />
-    <Compile Include="DSL\Query\TextQueryDescriptor.cs" />
     <Compile Include="DSL\Query\CustomBoostFactorQueryDescriptor.cs" />
     <Compile Include="DSL\Query\CustomScoreQueryDescriptor.cs" />
     <Compile Include="DSL\Query\DismaxQueryDescriptor.cs" />
@@ -577,7 +574,6 @@
     <Compile Include="Domain\Responses\ElasticsearchVersionInfo.cs" />
     <Compile Include="Domain\Responses\IndicesOperationResponse.cs" />
     <Compile Include="Domain\Responses\IndicesResponse.cs" />
-    <Compile Include="Domain\Responses\IndicesShardResponse.cs" />
     <Compile Include="Domain\Responses\QueryResponse.cs" />
     <Compile Include="Domain\Analysis\Analyzers\AnalysisSettings.cs" />
     <Compile Include="Domain\Analysis\Analyzers\CustomAnalyzer.cs" />

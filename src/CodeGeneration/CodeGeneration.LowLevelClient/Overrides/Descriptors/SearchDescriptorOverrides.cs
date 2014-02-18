@@ -33,7 +33,10 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 					"version",
 					"q", //we dont support GET searches
 					"fields",
-					"sort"
+					"sort",
+					"_source",
+					"_source_include",
+					"_source_exclude"
 				};
 			}
 		}

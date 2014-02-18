@@ -2284,14 +2284,6 @@ namespace Nest
 			return this;
 		}
 		
-
-		///<summary>A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</summary>
-		public DeleteWarmerDescriptor Name(params string[] name)
-		{
-			this._QueryString.Name(name);
-			return this;
-		}
-		
 		
 	}
 	
@@ -4460,30 +4452,6 @@ namespace Nest
 		public SearchDescriptor<T> Source(string source)
 		{
 			this._QueryString.Source(source);
-			return this;
-		}
-		
-
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SearchDescriptor<T> Source(params string[] _source)
-		{
-			this._QueryString.Source(_source);
-			return this;
-		}
-		
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SearchDescriptor<T> SourceExclude(params string[] _source_exclude)
-		{
-			this._QueryString.SourceExclude(_source_exclude);
-			return this;
-		}
-		
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SearchDescriptor<T> SourceInclude(params string[] _source_include)
-		{
-			this._QueryString.SourceInclude(_source_include);
 			return this;
 		}
 		

@@ -38,8 +38,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
+			result.Errors.Should().BeFalse();
 
-			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(2).And.OnlyContain(r => r.OK);
+			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(2);
 			var indexResponses = result.Items.OfType<BulkIndexResponseItem>().ToList();
 
 			// tests on percolated responses

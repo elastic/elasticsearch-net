@@ -46,6 +46,9 @@ namespace Nest.Resolvers.Converters
 		)
 			where T : class
 		{
+			try
+			{
+
 			var hit = new QueryResponse<T>();
 			var reader = tuple.Hit.CreateReader();
 			serializer.Populate(reader, hit);
@@ -61,6 +64,12 @@ namespace Nest.Resolvers.Converters
 			}
 
 			collection.Add(tuple.Descriptor.Key, hit);
+			}
+			catch (Exception e)
+			{
+
+				throw;
+			}
 
 		}
 

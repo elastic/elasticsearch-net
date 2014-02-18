@@ -1,4 +1,5 @@
-﻿using Nest.Tests.MockData.Domain;
+﻿using FluentAssertions;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Indices
@@ -10,13 +11,17 @@ namespace Nest.Tests.Integration.Indices
 		public void RefreshAll()
 		{
 			var r = this._client.Refresh();
-			Assert.True(r.OK);
+			r.Shards.Should().NotBeNull();
+			r.Shards.Total.Should().BeGreaterThan(0);
+			r.Shards.Total.Should().Be(r.Shards.Successful);
 		}
 		[Test]
 		public void RefreshIndex()
 		{
 			var r = this._client.Refresh(e=>e.Index(ElasticsearchConfiguration.DefaultIndex));
-			Assert.True(r.OK);
+			r.Shards.Should().NotBeNull();
+			r.Shards.Total.Should().BeGreaterThan(0);
+			r.Shards.Total.Should().Be(r.Shards.Successful);
 		}
 		[Test]
 		public void RefreshIndeces()
@@ -24,13 +29,17 @@ namespace Nest.Tests.Integration.Indices
 			var r = this._client.Refresh(rr=>rr
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone" )
 			);
-			Assert.True(r.OK);
+			r.Shards.Should().NotBeNull();
+			r.Shards.Total.Should().BeGreaterThan(0);
+			r.Shards.Total.Should().Be(r.Shards.Successful);
 		}
 		[Test]
 		public void RefreshTyped()
 		{
 			var r = this._client.Refresh(rr => rr.Index<ElasticsearchProject>());
-			Assert.True(r.OK);
+			r.Shards.Should().NotBeNull();
+			r.Shards.Total.Should().BeGreaterThan(0);
+			r.Shards.Total.Should().Be(r.Shards.Successful);
 		}
 	}
 }

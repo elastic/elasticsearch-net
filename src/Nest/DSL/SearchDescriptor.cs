@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Nest.DSL.Search;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -280,10 +281,20 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
 
-		[JsonProperty(PropertyName = "partial_fields")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, PartialFieldDescriptor<T>> _PartialFields { get; set; }
+		[JsonProperty(PropertyName = "_source")]
+		internal object _Source { get; set; }
 
+		public SearchDescriptor<T> Source(bool include = true)
+		{
+			this._Source = include;
+			return this;
+		}
+
+		public SearchDescriptor<T> Source(Func<SourceDescriptor<T>, SourceDescriptor<T>> sourceSelector)
+		{
+			this._Source = sourceSelector(new SourceDescriptor<T>());
+			return this;
+		}
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
 		/// size is actually multiplied by the number of shards!
@@ -449,6 +460,16 @@ namespace Nest
 			this._Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
+		
+		/// <summary>
+		/// Allows to selectively load specific fields for each document 
+		/// represented by a search hit. Defaults to load the internal _source field.
+		/// </summary>
+		public SearchDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> properties)
+		{
+			this._Fields = properties(new FluentFieldList<T>()).ToList();
+			return this;
+		}
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
@@ -480,30 +501,6 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> PartialFields(params Action<PartialFieldDescriptor<T>>[] partialFieldDescriptor)
-		{
-			if (this._PartialFields == null)
-				this._PartialFields = new Dictionary<string, PartialFieldDescriptor<T>>();
-
-			var descriptors = new List<PartialFieldDescriptor<T>>();
-
-			foreach (var selector in partialFieldDescriptor)
-			{
-				var filter = new PartialFieldDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
-			}
-
-			foreach (var d in descriptors)
-			{
-				var key = d._Field;
-				if (string.IsNullOrEmpty(key))
-					throw new DslException("Could not infer key for highlight field descriptor");
-
-				this._PartialFields.Add(key, d);
-			}
-			return this;
-		}
 
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.

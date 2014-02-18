@@ -11,7 +11,7 @@ namespace Nest
 {
 	public interface IGetResponse<T> : IResponse where T : class
 	{
-		bool Exists { get; }
+		bool Found { get; }
 		string Index { get; }
 		string Type { get; }
 		string Id { get; }
@@ -38,8 +38,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "_version")]
 		public string Version { get; private set; }
 
-		[JsonProperty(PropertyName = "exists")]
-		public bool Exists { get; private set; }
+		[JsonProperty(PropertyName = "found")]
+		public bool Found { get; private set; }
 
 		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; private set; }
@@ -68,9 +68,9 @@ namespace Nest
 			}
 		}
 
-		public K FieldValue<K>(Expression<Func<T, object>> objectPath)
+		public K[] FieldValue<K>(Expression<Func<T, object>> objectPath)
 		{
-			if (this.Fields == null) return default(K);
+			if (this.Fields == null) return default(K[]);
 			return this.Fields.FieldValue<K>(objectPath);
 		}
 

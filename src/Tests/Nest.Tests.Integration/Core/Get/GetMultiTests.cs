@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Core.Get
 
 			var missingPerson = result.Get<Person>(100000);
 			missingPerson.Should().NotBeNull();
-			missingPerson.Exists.Should().BeFalse();
+			missingPerson.Found.Should().BeFalse();
 
 			var missingPersonDirect = result.Source<Person>(100000);
 			missingPersonDirect.Should().BeNull();
@@ -77,14 +77,14 @@ namespace Nest.Tests.Integration.Core.Get
 
 			var personHit = people.FirstOrDefault(p => p.Id == "100");
 			personHit.Should().NotBeNull();
-			personHit.Exists.Should().BeTrue();
+			personHit.Found.Should().BeTrue();
 			personHit.Version.Should().NotBeNullOrEmpty().And.Match("1");
 
 			var person = personHit.FieldSelection;
 			person.Should().NotBeNull();
-			person.FieldValue<int>(p=>p.Id).Should().Be(100);
-			person.FieldValue<string>(p => p.FirstName)
-				.Should().NotBeNullOrEmpty();
+			person.FieldValue(p=>p.Id).Should().BeEquivalentTo(new []{100});
+			person.FieldValue(p => p.FirstName)
+				.Should().NotBeEmpty();
 
 		}
 
@@ -103,20 +103,20 @@ namespace Nest.Tests.Integration.Core.Get
 
 			var personHit = result.Get<Person>(100);
 			personHit.Should().NotBeNull();
-			personHit.Exists.Should().BeTrue();
+			personHit.Found.Should().BeTrue();
 			personHit.Version.Should().NotBeNullOrEmpty().And.Match("1");
 
 			//personHit.FieldSelection would work too
 			var personFieldSelection = result.GetFieldSelection<Person>(100);
 			personFieldSelection.Should().NotBeNull();
-			personFieldSelection.FieldValue<int>(p => p.Id).Should().Be(100);
-			personFieldSelection.FieldValue<string>(p => p.FirstName)
-				.Should().NotBeNullOrEmpty();
+			personFieldSelection.FieldValue(p => p.Id).Should().BeEquivalentTo(new []{100});
+			personFieldSelection.FieldValue(p => p.FirstName)
+				.Should().NotBeEmpty();
 
 			var projectFieldSelection = result.GetFieldSelection<ElasticsearchProject>(1);
 			projectFieldSelection.Should().NotBeNull();
-			projectFieldSelection.FieldValue<int>(p => p.Id).Should().Be(1);
-			projectFieldSelection.FieldValue<string[]>(p => p.Followers.First().FirstName)
+			projectFieldSelection.FieldValue(p => p.Id).Should().BeEquivalentTo(new []{1});
+			projectFieldSelection.FieldValue(p => p.Followers.First().FirstName)
 				.Should().NotBeEmpty();
 
 		}

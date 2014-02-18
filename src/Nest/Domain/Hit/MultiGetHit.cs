@@ -13,7 +13,7 @@ namespace Nest
 
 		string Index { get; }
 
-		bool Exists { get; }
+		bool Found { get; }
 
 		string Type { get; }
 
@@ -35,8 +35,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }
 
-		[JsonProperty(PropertyName = "exists")]
-		public bool Exists { get; internal set; }
+		[JsonProperty(PropertyName = "found")]
+		public bool Found { get; internal set; }
 
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }

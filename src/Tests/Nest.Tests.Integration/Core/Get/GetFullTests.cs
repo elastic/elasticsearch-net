@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Core.Get
 			result.Index.Should().Be(ElasticsearchConfiguration.DefaultIndex);
 			result.Type.Should().Be("elasticsearchprojects");
 			result.Version.Should().Be("1");
-			result.Exists.Should().BeTrue();
+			result.Found.Should().BeTrue();
 		}
 
 		[Test]
@@ -55,9 +55,9 @@ namespace Nest.Tests.Integration.Core.Get
 			result.Source.Should().BeNull();
 			result.Fields.Should().NotBeNull();
 			result.Fields.FieldValues.Should().NotBeNull().And.HaveCount(4);
-			result.Fields.FieldValue<string>(p => p.Name).Should().Be("pyelasticsearch");
-			result.Fields.FieldValue<int>(p => p.Id).Should().Be(1);
-			result.Fields.FieldValue<double>(p => p.DoubleValue).Should().NotBe(default(double));
+			result.Fields.FieldValue(p => p.Name).Should().BeEquivalentTo(new [] {"pyelasticsearch"});
+			result.Fields.FieldValue(p => p.Id).Should().BeEquivalentTo( new []{1});
+			result.Fields.FieldValue(p => p.DoubleValue).Should().NotBeEquivalentTo(new [] {default(double) });
 
 		}
 
@@ -66,7 +66,7 @@ namespace Nest.Tests.Integration.Core.Get
 		{
 			int doesNotExistId = 1234567;
 			var result = this._client.Get<ElasticsearchProject>(doesNotExistId);
-			result.Exists.Should().BeFalse();
+			result.Found.Should().BeFalse();
 		}
 	}
 }

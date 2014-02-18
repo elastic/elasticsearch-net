@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				
 			);
 			Assert.True(queryResults.IsValid);
-			Assert.True(queryResults.Documents.Any());
+			Assert.True(queryResults.Hits.Any());
 		}
 		[Test]
 		public void SearchQueryThenFetch()
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 
 			);
 			Assert.True(queryResults.IsValid);
-			Assert.True(queryResults.Documents.Any());
+			Assert.True(queryResults.Hits.Any());
 		}
 
 		[Test]
@@ -51,7 +51,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 
 			);
 			Assert.True(queryResults.IsValid);
-			Assert.True(queryResults.Documents.Any());
+			Assert.True(queryResults.Hits.Any());
 		}
 		[Test]
 		public void SearchDfsQueryThenFetch()
@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 
 			);
 			Assert.True(queryResults.IsValid);
-			Assert.True(queryResults.Documents.Any());
+			Assert.True(queryResults.Hits.Any());
 		}
 
 	}

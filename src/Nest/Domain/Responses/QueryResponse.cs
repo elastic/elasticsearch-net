@@ -10,7 +10,7 @@ namespace Nest
 	public interface IQueryResponse<T> : IResponse where T : class
 	{
 		ShardsMetaData Shards { get; }
-		HitsMetaData<T> Hits { get; }
+		HitsMetaData<T> HitsMetaData { get; }
 		IDictionary<string, Facet> Facets { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int ElapsedMilliseconds { get; }
@@ -18,7 +18,7 @@ namespace Nest
 		long Total { get; }
 		double MaxScore { get; }
 		IEnumerable<T> Documents { get; }
-		IEnumerable<IHit<T>> DocumentsWithMetaData { get; }
+		IEnumerable<IHit<T>> Hits { get; }
 		HighlightDocumentDictionary Highlights { get; }
 		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
 		F Facet<F>(string fieldName) where F : class, IFacet;
@@ -38,7 +38,7 @@ namespace Nest
 		public ShardsMetaData Shards { get; internal set; }
 
 		[JsonProperty(PropertyName = "hits")]
-		public HitsMetaData<T> Hits { get; internal set; }
+		public HitsMetaData<T> HitsMetaData { get; internal set; }
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -60,11 +60,11 @@ namespace Nest
 		{
 			get
 			{
-				if (this.Hits == null)
+				if (this.HitsMetaData == null)
 				{
 					return 0;
 				}
-				return this.Hits.Total;
+				return this.HitsMetaData.Total;
 			}
 		}
 
@@ -72,41 +72,38 @@ namespace Nest
 		{
 			get
 			{
-				if (this.Hits == null)
+				if (this.HitsMetaData == null)
 				{
 					return 0;
 				}
-				return this.Hits.MaxScore;
+				return this.HitsMetaData.MaxScore;
 			}
 		}
 
+		private IList<T> _documents; 
 		public IEnumerable<T> Documents
 		{
 			get
 			{
-				if (this.Hits != null)
-				{
-					foreach (var hit in this.Hits.Hits)
-					{
-						yield return hit.Source ?? hit.Fields;
-					}
-				}
+				if (this.HitsMetaData != null && this._documents == null)
+					this._documents = this.HitsMetaData.Hits.Select(h => h.Source).ToList();
+				return this._documents;
 			}
 		}
-
-		public IEnumerable<IHit<T>> DocumentsWithMetaData
+		
+		[JsonIgnore]
+		public IEnumerable<IHit<T>> Hits
 		{
 			get
 			{
-				if (this.Hits != null)
+				if (this.HitsMetaData != null)
 				{
-					return this.Hits.Hits;
+					return this.HitsMetaData.Hits;
 				}
 
 				return new List<Hit<T>>();
 			}
 		}
-
 
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{
@@ -171,11 +168,11 @@ namespace Nest
 			get
 			{
 				var dict = new HighlightDocumentDictionary();
-				if (this.Hits == null || !this.Hits.Hits.HasAny())
+				if (this.HitsMetaData == null || !this.HitsMetaData.Hits.HasAny())
 					return dict;
 				
 
-				foreach (var hit in this.Hits.Hits)
+				foreach (var hit in this.HitsMetaData.Hits)
 				{
 					if (!hit.Highlights.Any())
 						continue;

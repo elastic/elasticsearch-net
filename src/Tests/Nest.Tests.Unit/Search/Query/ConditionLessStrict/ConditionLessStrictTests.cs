@@ -71,23 +71,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 			this.DoConditionlessQuery(q => q.FuzzyDate(fdq => fdq.OnField(p => p.StartedOn).Value(this._c.Date)));
 		}
 
-		[Test]
-		public void Text()
-		{
-			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).Query(this._c.Name1)));
-		}
-
-		[Test]
-		public void TextPhrase()
-		{
-			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).Query(this._c.Name1)));
-		}
-
-		[Test]
-		public void TextPhrasePrefix()
-		{
-			this.DoConditionlessQuery(q => q.Text(tq => tq.OnField(p => p.Name).Query(this._c.Name1)));
-		}
 
 		[Test]
 		public void Nested()
@@ -96,7 +79,7 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 			  .Nested(qn => qn
 				.Path(p => p.Followers)
 				.Query(nqq => nqq
-				  .Text(tq => tq
+				  .Match(tq => tq
 					.OnField(p => p.Name)
 					.Query(this._c.Name1)
 				  )

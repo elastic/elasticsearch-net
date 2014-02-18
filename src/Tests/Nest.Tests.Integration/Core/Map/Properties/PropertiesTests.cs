@@ -26,7 +26,6 @@ namespace Nest.Tests.Integration.Core.Map.Properties
 						.IndexOptions(IndexOptions.positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
-						.OmitTermFrequencyAndPositions()
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()

@@ -85,7 +85,7 @@ namespace Nest
 				throw new ReindexException(searchResult.ConnectionStatus, "reindex failed on scroll #" + page);
 
 			var bb = new BulkDescriptor();
-			foreach (var d in searchResult.DocumentsWithMetaData)
+			foreach (var d in searchResult.Hits)
 			{
 				IHit<T> d1 = d;
 				bb.Index<T>(bi => bi.Object(d1.Source).Type(d1.Type).Index(toIndex).Id(d.Id));

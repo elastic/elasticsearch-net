@@ -51,7 +51,7 @@ namespace Nest.Tests.Integration.Search
 				//.SortAscending(p => p.Id)
 			);
 
-			var hits = queryResults.Hits;
+			var hits = queryResults.HitsMetaData;
 
 			Assert.AreEqual(1, hits.MaxScore);
 			Assert.AreEqual(hits.Hits.Max(h => h.Score), hits.MaxScore);
@@ -68,7 +68,7 @@ namespace Nest.Tests.Integration.Search
 				.SortDescending(p => p.Id)
 			);
 
-			var hits = queryResults.Hits;
+			var hits = queryResults.HitsMetaData;
 
 			Assert.True(hits.Hits.All(h => h.Sorts.Count() == 2));
 		}
@@ -81,7 +81,7 @@ namespace Nest.Tests.Integration.Search
 				.SortDescending(p => p.Id)
 			);
 
-			var hits = queryResults.Hits;
+			var hits = queryResults.HitsMetaData;
 			Assert.NotNull(hits, queryResults.ConnectionStatus.ToString());
 			Assert.True(hits.Hits.All(h => h.Sorts.Count() == 2));
 		}
@@ -206,34 +206,7 @@ namespace Nest.Tests.Integration.Search
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Test]
-		public void FieldQuery()
-		{
-			var queryResults = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						 ""field"" : { 
-							""followers.firstName"" : ""+" + this._LookFor.ToLower() + @" -something else""
-						}
-					} }"
-			);
-			this.TestDefaultAssertions(queryResults);
-		}
-		[Test]
-		public void ExtendedFieldQuery()
-		{
-			var queryResults = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						""field"" : { 
-							""followers.firstName"" : {
-								""query"" : ""+" + this._LookFor.ToLower() + @" -something else"",
-								""boost"" : 2.0,
-								""enable_position_increments"": false
-							}
-						}
-					} }"
-			);
-			this.TestDefaultAssertions(queryResults);
-		}
+	
 		[Test]
 		public void FilteredQuery()
 		{
@@ -530,7 +503,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticsearchProject>(query);
 
 			//assert
-			Assert.IsTrue(queryResults.DocumentsWithMetaData.First().Highlights["content"].Highlights.Count() > 0);
+			Assert.IsTrue(queryResults.Hits.First().Highlights["content"].Highlights.Count() > 0);
 		}
 
 		[Test]

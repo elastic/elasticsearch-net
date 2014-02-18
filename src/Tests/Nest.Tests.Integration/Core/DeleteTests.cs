@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Core
 			);
 			Assert.Greater(queryResults.Total, 0);
 
-			var hit = queryResults.Hits.Hits.First();
+			var hit = queryResults.HitsMetaData.Hits.First();
 			var documentToFind = hit.Source;
 
 			//act
@@ -174,9 +174,9 @@ namespace Nest.Tests.Integration.Core
 
 			var deleteResult = this._client.Bulk(b => b.DeleteMany(result.Documents).Refresh());
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
+			Assert.False(deleteResult.Errors, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
-			Assert.True(deleteResult.Items.All(i => i.OK));
 
 			result = this._client.Search<ElasticsearchProject>(q => q.MatchAll());
 			Assert.IsNotEmpty(result.Documents);
@@ -196,9 +196,9 @@ namespace Nest.Tests.Integration.Core
 
 			var deleteResult = this._client.Bulk(b=>b.DeleteMany(result.Documents, (p, o) => p.VersionType(VersionType.Internal)).Refresh());
 			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
+			Assert.False(deleteResult.Errors, deleteResult.ConnectionStatus.Result);
 
 			Assert.IsNotEmpty(deleteResult.Items);
-			Assert.True(deleteResult.Items.All(i => i.OK));
 
 			result = this._client.Search<ElasticsearchProject>(q => q.MatchAll());
 			Assert.IsNotNull(result);

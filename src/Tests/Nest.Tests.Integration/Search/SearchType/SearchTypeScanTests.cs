@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.Scroll("2s")
 			);
 			Assert.True(queryResults.IsValid);
-			Assert.True(queryResults.Documents.Any());
+			Assert.True(queryResults.Hits.Any());
 			Assert.IsNotNullOrEmpty(queryResults.ScrollId);
 		}
 	}

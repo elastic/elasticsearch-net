@@ -241,9 +241,6 @@
     <Compile Include="Search\Query\Singles\SpanTermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Terms\TermsQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\TextPhrasePrefixQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\TextPhraseQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\TextQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TopChildrenQueryJson.cs" />
     <Compile Include="Search\Query\Singles\WildcardQueryJson.cs" />
     <Compile Include="Search\Query\BoolCombinations\BoolCombinationTests.cs" />

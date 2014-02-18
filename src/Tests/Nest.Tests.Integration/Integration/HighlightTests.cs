@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Integration
 			Assert.NotNull(highlights["content"]);
 			Assert.Greater(highlights["content"].Highlights.Count(), 0);
 
-			highlights = result.DocumentsWithMetaData.First().Highlights;
+			highlights = result.Hits.First().Highlights;
 			Assert.NotNull(highlights);
 			Assert.NotNull(highlights["content"]);
 			Assert.Greater(highlights["content"].Highlights.Count(), 0);

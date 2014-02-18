@@ -2601,16 +2601,6 @@ namespace Nest
 			return this;
 		}
 		
-		
-		internal  string[] _name { get; set; }
-		///<summary>A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</summary>
-		public DeleteWarmerQueryString Name(params string[] name)
-		{
-			this._name = name;
-			this.Add("name", this._name);
-			return this;
-		}
-		
 	}
 	
 	
@@ -5038,36 +5028,6 @@ namespace Nest
 		{
 			this._source = source;
 			this.Add("source", this._source);
-			return this;
-		}
-		
-		
-		internal  string[] __source { get; set; }
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SearchQueryString Source(params string[] _source)
-		{
-			this.__source = _source;
-			this.Add("_source", this.__source);
-			return this;
-		}
-		
-		
-		internal  string[] __source_exclude { get; set; }
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SearchQueryString SourceExclude(params string[] _source_exclude)
-		{
-			this.__source_exclude = _source_exclude;
-			this.Add("_source_exclude", this.__source_exclude);
-			return this;
-		}
-		
-		
-		internal  string[] __source_include { get; set; }
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SearchQueryString SourceInclude(params string[] _source_include)
-		{
-			this.__source_include = _source_include;
-			this.Add("_source_include", this.__source_include);
 			return this;
 		}
 		

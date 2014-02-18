@@ -17,7 +17,7 @@ namespace Nest
 
 		public T Add(string name, object value)
 		{
-			_QueryStringDictionary.Add(name, value);
+			_QueryStringDictionary[name] = value;
 			return (T)this;
 		}
 
