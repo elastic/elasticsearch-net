@@ -14,7 +14,6 @@ namespace Nest.Tests.Integration.Indices
 
 			var r = this._client.Alias(a=>a.Add(o=>o.Index(index).Alias(alias)));
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			var count1 = this._client.Count<ElasticsearchProject>(c => c.Index(index).Query(q => q.MatchAll()));
 			var count2 = this._client.Count<ElasticsearchProject>(c => c.Index(alias).Query(q => q.MatchAll()));
@@ -33,7 +32,6 @@ namespace Nest.Tests.Integration.Indices
 
 			var r = this._client.Alias(a=>a.Add(o=>o.Index(index).Alias(alias)));
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			var count1 = this._client.Count<ElasticsearchProject>(c=>c.Index(index).Query(q=>q.MatchAll()));
 			var count2 = this._client.Count<ElasticsearchProject>(c=>c.Index(alias).Query(q=>q.MatchAll()));

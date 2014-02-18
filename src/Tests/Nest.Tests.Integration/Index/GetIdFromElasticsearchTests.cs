@@ -40,8 +40,8 @@ namespace Nest.Tests.Integration.Index
 			};
 			var response = this._client.IndexMany(newProjects);
 			Assert.IsTrue(response.IsValid, response.ConnectionStatus.Result);
+			Assert.IsFalse(response.Errors, response.ConnectionStatus.Result);
 			Assert.IsNotEmpty(response.Items);
-			Assert.True(response.Items.All(i => i.OK), response.ConnectionStatus.Result);
 			Assert.True(response.Items.All(i => !i.Id.IsNullOrEmpty()));
 		}
 	}

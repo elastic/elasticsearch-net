@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
-			result.OK.Should().BeTrue();
+			result.Acknowledged.Should().BeTrue();
 			result.Acknowledged.Should().BeTrue();
 			
 			//index a doc so we can be sure a shard is available

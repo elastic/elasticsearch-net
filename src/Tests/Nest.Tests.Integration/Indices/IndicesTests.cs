@@ -225,7 +225,7 @@ namespace Nest.Tests.Integration.Indices
 			var response = client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
 
 			Assert.IsTrue(response.IsValid);
-			Assert.IsTrue(response.OK);
+			Assert.IsTrue(response.Acknowledged);
 
 			var mappingResult = this._client.GetMapping(gm=>gm.Index(indexName).Type("mytype"));
 			mappingResult.Mapping.Should().NotBeNull();
@@ -339,7 +339,7 @@ namespace Nest.Tests.Integration.Indices
 			var response = client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
 
 			Assert.IsTrue(response.IsValid);
-			Assert.IsTrue(response.OK);
+			Assert.IsTrue(response.Acknowledged);
 
 			var inferrer = new ElasticInferrer(this._settings);
 			var typeName = inferrer.PropertyName(typeMapping.Name);

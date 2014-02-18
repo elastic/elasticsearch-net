@@ -4,7 +4,6 @@ namespace Nest
 {
     public interface IIndicesOperationResponse : IResponse
     {
-        bool OK { get; }
         bool Acknowledged { get; }
     }
 
@@ -15,9 +14,6 @@ namespace Nest
 		{
 			this.IsValid = true;
 		}
-
-		[JsonProperty(PropertyName = "ok")]
-		public bool OK { get; internal set; }
 
 		[JsonProperty(PropertyName = "acknowledged")]
 		public bool Acknowledged { get; internal set; }

@@ -10,13 +10,13 @@ namespace Nest.Tests.Integration.Indices
 		public void FlushAll()
 		{
 			var r = this._client.Flush(f=>f.AllIndices());
-			Assert.True(r.OK, r.ConnectionStatus.ToString());
+			Assert.True(r.Acknowledged, r.ConnectionStatus.ToString());
 		}
 		[Test]
 		public void FlushIndex()
 		{
 			var r = this._client.Flush(f=>f.Index(ElasticsearchConfiguration.DefaultIndex));
-			Assert.True(r.OK);
+			Assert.True(r.Acknowledged);
 		}
 		[Test]
 		public void FlushIndeces()
@@ -24,13 +24,13 @@ namespace Nest.Tests.Integration.Indices
 			var r = this._client.Flush(f=>f
 				.Indices( ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone")
 			);
-			Assert.True(r.OK);
+			Assert.True(r.Acknowledged);
 		}
 		[Test]
 		public void FlushTyped()
 		{
 			var r = this._client.Flush(f=>f.Index<ElasticsearchProject>());
-			Assert.True(r.OK);
+			Assert.True(r.Acknowledged);
 		}
 		
 	}

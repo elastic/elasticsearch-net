@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Warmers
 				//.Filter(filter => filter)  // this is why there is a search descriptor
 				)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var warmerResponse = this._client.GetWarmer("warmer_simpleputandget", wd => wd
 				.Index<ElasticsearchProject>()
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Warmers
 				//.Filter(filter => filter)  // this is why there is a search descriptor
 				)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var warmerResponse = this._client.GetWarmer("warmer_putwithemptytypes", wd => wd
 				.Index<ElasticsearchProject>()
@@ -81,7 +81,7 @@ namespace Nest.Tests.Integration.Warmers
 					)
 				)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var warmerResponse = this._client.GetWarmer("warmer_puttodefaultindex", wd => wd
 				.Index<ElasticsearchProject>()
@@ -111,12 +111,12 @@ namespace Nest.Tests.Integration.Warmers
 					)
 				)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var deleteResponse = this._client.DeleteWarmer("warmer_delete", wd => wd
 				.Index<ElasticsearchProject>()
 			);
-			Assert.IsTrue(deleteResponse.OK);
+			Assert.IsTrue(deleteResponse.Acknowledged);
 
 			var warmerResponse = this._client.GetWarmer("warmer_delete", wd => wd
 				.Index<ElasticsearchProject>()

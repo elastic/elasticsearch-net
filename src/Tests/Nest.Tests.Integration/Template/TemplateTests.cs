@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Template
 				.Template("donotinfluencothertests-*")
 				.Order(42)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var templateResponse = this._client.GetTemplate("put-template-with-settings");
 			templateResponse.Should().NotBeNull();
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Template
 					.Add("index.number_of_replicas", 2)
 				)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var templateResponse = this._client.GetTemplate("put-template-with-settings");
 			templateResponse.Should().NotBeNull();
@@ -68,7 +68,7 @@ namespace Nest.Tests.Integration.Template
 					.DisableAllField()
 				)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var templateResponse = this._client.GetTemplate("put-template-with-mappings");
 			templateResponse.Should().NotBeNull();
@@ -97,7 +97,7 @@ namespace Nest.Tests.Integration.Template
 					)
 				)
 			);
-			Assert.IsTrue(putResponse.OK);
+			Assert.IsTrue(putResponse.Acknowledged);
 
 			var templateResponse = this._client.GetTemplate("put-template-with-warmers"); 
 			templateResponse.Should().NotBeNull();

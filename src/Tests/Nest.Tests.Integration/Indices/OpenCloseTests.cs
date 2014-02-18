@@ -10,11 +10,9 @@ namespace Nest.Tests.Integration.Indices
 		public void CloseAndOpenIndex()
 		{
 			var r = this._client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 		}
@@ -22,11 +20,9 @@ namespace Nest.Tests.Integration.Indices
 		public void CloseAndOpenIndexTyped()
 		{
 			var r = this._client.CloseIndex<ElasticsearchProject>();
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 			r = this._client.OpenIndex<ElasticsearchProject>();
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 		}
@@ -34,7 +30,6 @@ namespace Nest.Tests.Integration.Indices
 		public void CloseAndSearchAndOpenIndex()
 		{
 			var r = this._client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 			var results = this.SearchRaw<ElasticsearchProject>(
@@ -48,7 +43,6 @@ namespace Nest.Tests.Integration.Indices
 			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("ClusterBlockException"));
 			Assert.True(results.ConnectionStatus.Error.ExceptionMessage.Contains("index closed"));
 			r = this._client.OpenIndex(ElasticsearchConfiguration.DefaultIndex);
-			Assert.True(r.OK);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
 		}

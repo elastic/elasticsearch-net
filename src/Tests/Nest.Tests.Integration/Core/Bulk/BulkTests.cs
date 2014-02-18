@@ -24,8 +24,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
+			result.Errors.Should().BeFalse();
 
-			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(3).And.OnlyContain(r => r.OK);
+			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(3);
 			var deleteResponses = result.Items.OfType<BulkDeleteResponseItem>();
 			var createResponses = result.Items.OfType<BulkCreateResponseItem>();
 			var indexResponses = result.Items.OfType<BulkIndexResponseItem>();
@@ -58,8 +59,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
+			result.Errors.Should().BeFalse();
 
-			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(3).And.OnlyContain(r => r.OK);
+			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(3);
 			var deleteResponses = result.Items.OfType<BulkDeleteResponseItem>();
 			var createResponses = result.Items.OfType<BulkCreateResponseItem>();
 			var indexResponses = result.Items.OfType<BulkIndexResponseItem>();
@@ -93,8 +95,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 			);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
+			result.Errors.Should().BeFalse();
 
-			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(3).And.OnlyContain(r=>r.OK);
+			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(3);
 			var deleteResponses = result.Items.OfType<BulkDeleteResponseItem>();
 			var createResponses = result.Items.OfType<BulkCreateResponseItem>();
 			var indexResponses = result.Items.OfType<BulkIndexResponseItem>();
@@ -125,8 +128,9 @@ namespace Nest.Tests.Integration.Core.Bulk
 			var result = this._client.Bulk(d=>descriptor);
 			result.Should().NotBeNull();
 			result.IsValid.Should().BeTrue();
+			result.Errors.Should().BeFalse();
 
-			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(1000).And.OnlyContain(r => r.OK);
+			result.Items.Should().NotBeNull().And.NotBeEmpty().And.HaveCount(1000);
 		
 		}
 	}

@@ -55,8 +55,7 @@ namespace Nest.Tests.Integration.Mapping
 			var x = this._client.CreateIndex(index, s => s
 				.AddMapping<ElasticsearchProject>(m => m.MapFromAttributes())
 			);
-			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
-			Assert.IsTrue(x.OK);
+			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 
 			var typeMapping = this._client.GetMapping(i => i.Index(index).Type("elasticsearchprojects"));
 			typeMapping.Should().NotBeNull();
@@ -73,7 +72,7 @@ namespace Nest.Tests.Integration.Mapping
 			var x = this._client.CreateIndex(index, s => s
 				.AddMapping<ElasticsearchProject>(a=>a.MapFromAttributes())
 			);
-			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
+			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 			var xx = this._client.Map<object>(m=>m.Type(typeof(ElasticsearchProject)).Index(index));
 			Assert.IsTrue(xx.OK);
 
@@ -107,7 +106,7 @@ namespace Nest.Tests.Integration.Mapping
 		{
 			var index = ElasticsearchConfiguration.NewUniqueIndexName();
 			var x = this._client.CreateIndex(index, s => s);
-			Assert.IsTrue(x.OK, x.ConnectionStatus.ToString());
+			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 			var typeMappingResult = this._client.GetMapping(gm=>gm.Index(ElasticsearchConfiguration.DefaultIndex).Type("elasticsearchprojects"));
 			typeMappingResult.IsValid.Should().BeTrue();
 			var typeMapping = typeMappingResult.Mapping;
