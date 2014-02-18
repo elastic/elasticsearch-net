@@ -138,6 +138,7 @@
     <Compile Include="DSL\Paths\IndicesTypePathDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexTypePathTypedDescriptor.cs" />
     <Compile Include="DSL\SearchDescriptorBase.cs" />
+    <Compile Include="DSL\Search\SourceDescriptor.cs" />
     <Compile Include="DSL\UnregisterPercolatorDescriptor.cs" />
     <Compile Include="DSL\DeleteTemplateDescriptor.cs" />
     <Compile Include="DSL\GetTemplateDescriptor.cs" />
@@ -262,7 +263,6 @@
     <Compile Include="DSL\Query\CustomFiltersScoreDescriptor.cs" />
     <Compile Include="DSL\Query\FilterScoreDescriptor.cs" />
     <Compile Include="ElasticClient-Warmers.cs" />
-    <Compile Include="Domain\CovariantDictionary.cs" />
     <Compile Include="Domain\Responses\BulkCreateResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkDeleteResponseItem.cs" />
     <Compile Include="Domain\Responses\BulkIndexResponseItem.cs" />
@@ -270,7 +270,6 @@
     <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
     <Compile Include="Domain\Responses\IBulkResponse.cs" />
     <Compile Include="Domain\Settings\SimilaritySettings.cs" />
-    <Compile Include="DSL\PartialFieldDescriptor.cs" />
     <Compile Include="ElasticClient-MultiSearch.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
