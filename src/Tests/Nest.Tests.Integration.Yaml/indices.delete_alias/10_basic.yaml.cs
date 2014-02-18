@@ -9,35 +9,30 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
+namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias1
 {
-	public partial class IndicesDeleteAliasTests
+	public partial class IndicesDeleteAlias1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestForDeleteAliasTests : YamlTestsBase
+		public class BasicTestForDeleteAlias1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicTestForDeleteAliasTest()
+			public void BasicTestForDeleteAlias1Test()
 			{	
 
-				//skip 0 - 0.90.0; 
-				this.Skip("0 - 0.90.0", "Delete alias not supported before 0.90.1");
-
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("testind", null));
+				this.Do(()=> this._client.IndicesCreatePut("testind", null));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this.Do(()=> this._client.IndicesPutAlias("testali", _body, nv=>nv
-					.Add("index", @"testind")
-				));
+				this.Do(()=> this._client.IndicesPutAlias("testind", "testali", _body));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAlias("testali"));
+				this.Do(()=> this._client.IndicesGetAliasForAll("testali"));
 
 				//match _response.testind.aliases.testali.search_routing: 
 				this.IsMatch(_response.testind.aliases.testali.search_routing, @"routing value");
@@ -49,7 +44,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias
 				this.Do(()=> this._client.IndicesDeleteAlias("testind", "testali"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAlias("testind", "testali"), shouldCatch: @"missing");
+				this.Do(()=> this._client.IndicesGetAlias("testind", "testali"));
+
+				//match this._status: 
+				this.IsMatch(this._status, new {});
 
 			}
 		}

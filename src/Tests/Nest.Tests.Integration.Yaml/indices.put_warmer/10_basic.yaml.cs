@@ -9,29 +9,34 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
+namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 {
-	public partial class IndicesPutWarmerTests
+	public partial class IndicesPutWarmer1YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestForWarmersTests : YamlTestsBase
+	
+		public class IndicesPutWarmer110BasicYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void BasicTestForWarmersTest()
+			public IndicesPutWarmer110BasicYamlBase() : base()
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
+
+				//do indices.create 
+				this.Do(()=> this._client.IndicesCreatePut("test_idx", null));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
-				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"), shouldCatch: @"missing");
+				//do indices.put_warmer 
+				_body = new {
+					query= new {
+						match_all= new {}
+					}
+				};
+				this.Do(()=> this._client.IndicesPutWarmer("test_idx", "test_warmer2", _body));
 
 				//do indices.put_warmer 
 				_body = new {
@@ -41,8 +46,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				};
 				this.Do(()=> this._client.IndicesPutWarmer("test_index", "test_warmer", _body));
 
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+			}
+		}
+
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class BasicTestForWarmers2Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void BasicTestForWarmers2Test()
+			{	
 
 				//do indices.get_warmer 
 				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"));
@@ -51,13 +64,175 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index"));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesDeleteWarmer("test_index", "test_warmer"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"), shouldCatch: @"missing");
+				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"));
+
+				//match this._status: 
+				this.IsMatch(this._status, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingAllWarmersViaWarmerShouldWork3Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingAllWarmersViaWarmerShouldWork3Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmerForAll());
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
+
+				//match _response.test_idx.warmers.test_warmer2.source.query.match_all: 
+				this.IsMatch(_response.test_idx.warmers.test_warmer2.source.query.match_all, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingWarmersForSeveralIndicesShouldWorkUsing4Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingWarmersForSeveralIndicesShouldWorkUsing4Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmer("*", "*"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
+
+				//match _response.test_idx.warmers.test_warmer2.source.query.match_all: 
+				this.IsMatch(_response.test_idx.warmers.test_warmer2.source.query.match_all, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingWarmersForSeveralIndicesShouldWorkUsingAll5Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingWarmersForSeveralIndicesShouldWorkUsingAll5Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmer("_all", "_all"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
+
+				//match _response.test_idx.warmers.test_warmer2.source.query.match_all: 
+				this.IsMatch(_response.test_idx.warmers.test_warmer2.source.query.match_all, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingAllWarmersWithoutSpecifyingIndexShouldWork6Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingAllWarmersWithoutSpecifyingIndexShouldWork6Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmerForAll("_all"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
+
+				//match _response.test_idx.warmers.test_warmer2.source.query.match_all: 
+				this.IsMatch(_response.test_idx.warmers.test_warmer2.source.query.match_all, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingWarmersForSeveralIndicesShouldWorkUsingPrefix7Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingWarmersForSeveralIndicesShouldWorkUsingPrefix7Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmer("test_i*", "test_w*"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
+
+				//match _response.test_idx.warmers.test_warmer2.source.query.match_all: 
+				this.IsMatch(_response.test_idx.warmers.test_warmer2.source.query.match_all, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingWarmersForSeveralIndicesShouldWorkUsingCommaSeparatedLists8Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingWarmersForSeveralIndicesShouldWorkUsingCommaSeparatedLists8Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmer("test_index,test_idx", "test_warmer,test_warmer2"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
+
+				//match _response.test_idx.warmers.test_warmer2.source.query.match_all: 
+				this.IsMatch(_response.test_idx.warmers.test_warmer2.source.query.match_all, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingANonExistentWarmerOnAnExistingIndexShouldReturnAnEmptyBody9Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingANonExistentWarmerOnAnExistingIndexShouldReturnAnEmptyBody9Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmer("test_index", "non-existent"));
+
+				//match this._status: 
+				this.IsMatch(this._status, new {});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingAnExistentAndNonExistentWarmerShouldReturnTheExistentAndNoDataAboutTheNonExistentWarmer10Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingAnExistentAndNonExistentWarmerShouldReturnTheExistentAndNoDataAboutTheNonExistentWarmer10Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer,non-existent"));
+
+				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
+				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
+
+				//is_false _response[@"test_index"][@"warmers"][@"non-existent"]; 
+				this.IsFalse(_response[@"test_index"][@"warmers"][@"non-existent"]);
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GettingWarmerOnAnNonExistentIndexShouldReturn40411Tests : IndicesPutWarmer110BasicYamlBase
+		{
+			[Test]
+			public void GettingWarmerOnAnNonExistentIndexShouldReturn40411Test()
+			{	
+
+				//do indices.get_warmer 
+				this.Do(()=> this._client.IndicesGetWarmer("non-existent", "foo"), shouldCatch: @"missing");
 
 			}
 		}

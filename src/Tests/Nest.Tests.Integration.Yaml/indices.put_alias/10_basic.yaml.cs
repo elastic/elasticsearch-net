@@ -9,47 +9,39 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesPutAlias
+namespace Nest.Tests.Integration.Yaml.IndicesPutAlias1
 {
-	public partial class IndicesPutAliasTests
+	public partial class IndicesPutAlias1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestForPutAliasTests : YamlTestsBase
+		public class BasicTestForPutAlias1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicTestForPutAliasTest()
+			public void BasicTestForPutAlias1Test()
 			{	
 
-				//skip 0 - 0.90.0; 
-				this.Skip("0 - 0.90.0", "Put alias not supported before 0.90.1");
-
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.exists_alias 
-				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
+				this.Do(()=> this._client.IndicesExistsAliasHeadForAll("test_alias"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_alias", null, nv=>nv
-					.Add("index", @"test_index")
-				));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_alias", null));
 
 				//do indices.exists_alias 
-				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
+				this.Do(()=> this._client.IndicesExistsAliasHeadForAll("test_alias"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAlias("test_alias"));
+				this.Do(()=> this._client.IndicesGetAliasForAll("test_alias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});

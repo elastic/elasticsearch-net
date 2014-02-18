@@ -161,9 +161,11 @@ namespace Nest
 			var url = this._CreateUriString(path);
 
 			var myReq = (HttpWebRequest)WebRequest.Create(url);
-			myReq.Accept = "application/json";
-			myReq.ContentType = "application/json";
-
+			if (!path.StartsWith("_cat"))
+			{
+				myReq.Accept = "application/json";
+				myReq.ContentType = "application/json";
+			}
 			var timeout = this._ConnectionSettings.Timeout;
 			myReq.Timeout = timeout; // 1 minute timeout.
 			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
@@ -188,10 +190,10 @@ namespace Nest
 				{
 					using (var response = (HttpWebResponse)request.GetResponse())
 					using (var responseStream = response.GetResponseStream())
-					using (var streamReader = new StreamReader(responseStream))
+					using (var memoryStream = new MemoryStream())
 					{
-						var result = streamReader.ReadToEnd();
-						cs = new ConnectionStatus(this._ConnectionSettings, result)
+						responseStream.CopyTo(memoryStream);
+						cs = new ConnectionStatus(this._ConnectionSettings, memoryStream.ToArray())
 						{
 							Request = requestData,
 							RequestUrl = request.RequestUri.ToString(),
@@ -288,21 +290,20 @@ namespace Nest
 				// Get the response stream
 				using (var response = (HttpWebResponse)getResponse.Result)
 				using (var responseStream = response.GetResponseStream())
+				using (var memoryStream = new MemoryStream())
 				{
 					// Copy all data from the response stream
-					var output = new MemoryStream();
 					var buffer = new byte[BUFFER_SIZE];
 					while (responseStream != null)
 					{
 						var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
 						yield return read;
 						if (read.Result == 0) break;
-						output.Write(buffer, 0, read.Result);
+						memoryStream.Write(buffer, 0, read.Result);
 					}
 
 					// Decode the data and store the result
-					var result = output.ToArray().Utf8String();
-					var cs = new ConnectionStatus(this._ConnectionSettings, result)
+					var cs = new ConnectionStatus(this._ConnectionSettings, memoryStream.ToArray())
 					{
 						Request = data.Utf8String(),
 						RequestUrl = request.RequestUri.ToString(), 
@@ -312,9 +313,7 @@ namespace Nest
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);
 				}
-				yield break;
 			}
-
 		}
 
 		public void Iterate(IEnumerable<Task> asyncIterator, TaskCompletionSource<ConnectionStatus> tcs)

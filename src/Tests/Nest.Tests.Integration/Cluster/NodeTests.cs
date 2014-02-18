@@ -10,7 +10,7 @@ namespace Nest.Tests.Integration.Cluster
 		public void NodeInfo()
 		{
 
-			var r = this._client.ClusterNodeInfo();
+			var r = this._client.NodesInfo();
 
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void NodeStats()
 		{
-			var r = this._client.ClusterNodeStats(s=>s.All());
+			var r = this._client.NodesStats();
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
 			var node = r.Nodes.Values.First();

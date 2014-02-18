@@ -9,24 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.ClusterReroute
+namespace Nest.Tests.Integration.Yaml.ClusterReroute1
 {
-	public partial class ClusterRerouteTests
+	public partial class ClusterReroute1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicSanityCheckTests : YamlTestsBase
+		public class BasicSanityCheck1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicSanityCheckTest()
+			public void BasicSanityCheck1Test()
 			{	
 
 				//do cluster.reroute 
 				this.Do(()=> this._client.ClusterReroutePost(null));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
 
 			}
 		}

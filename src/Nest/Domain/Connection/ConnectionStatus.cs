@@ -21,7 +21,32 @@ namespace Nest
 		public ConnectionError Error { get; private set; }
 		public string RequestMethod { get; internal set; }
 		public string RequestUrl { get; internal set; }
-		public string Result { get; internal set; }
+
+		private string _result;
+		public string Result
+		{
+			get { return _result ?? (_result = this.ResultBytes.Utf8String()); }
+		}
+
+		public byte[] ResultBytes { get; internal set; }
+
+		private static readonly byte _startAccolade = (byte)'{';
+		private ElasticsearchResponse _response;
+		public ElasticsearchResponse Response
+		{
+			get
+			{
+				if (ResultBytes == null || ResultBytes.Length == 0)
+					return null;
+				if (ResultBytes[0] != _startAccolade)
+					return null;
+
+				if (_response == null)
+					this._response = this.Deserialize<ElasticsearchResponse>();
+				return this._response;
+			}
+		}
+
 		public string Request { get; internal set; }
 		public NestSerializer Serializer { get; private set; }
 		public ElasticInferrer Infer { get; private set; }
@@ -38,14 +63,18 @@ namespace Nest
 		{
 			this.Success = false;
 			this.Error = new ConnectionError(e);
-			this.Result = this.Error.Response;
+			this.ResultBytes = this.Error.Response.Utf8Bytes();
 		}
 		public ConnectionStatus(IConnectionSettings settings, string result) : this(settings)
 		{
 			this.Success = true;
-			this.Result = result;
+			this.ResultBytes = Encoding.UTF8.GetBytes(result);
 		}
-
+		public ConnectionStatus(IConnectionSettings settings, byte[] result) : this(settings)
+		{
+			this.Success = true;
+			this.ResultBytes = result;
+		}
 		static ConnectionStatus()
 		{
 			_printFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";

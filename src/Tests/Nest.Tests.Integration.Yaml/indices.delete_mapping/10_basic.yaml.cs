@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
+namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping1
 {
-	public partial class IndicesDeleteMappingTests
+	public partial class IndicesDeleteMapping1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DeleteMappingTestsTests : YamlTestsBase
+		public class DeleteMappingTests1Tests : YamlTestsBase
 		{
 			[Test]
-			public void DeleteMappingTestsTest()
+			public void DeleteMappingTests1Test()
 			{	
 
 				//do indices.create 
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 				//do indices.exists_type 
 				this.Do(()=> this._client.IndicesExistsTypeHead("test_index", "test_type"));

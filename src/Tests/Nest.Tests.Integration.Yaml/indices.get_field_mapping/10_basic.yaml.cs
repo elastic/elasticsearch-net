@@ -9,14 +9,14 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
+namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 {
-	public partial class IndicesGetFieldMappingTests
+	public partial class IndicesGetFieldMapping1YamlTests
 	{	
 	
-		public class IndicesGetFieldMapping10BasicYamlBase : YamlTestsBase
+		public class IndicesGetFieldMapping110BasicYamlBase : YamlTestsBase
 		{
-			public IndicesGetFieldMapping10BasicYamlBase() : base()
+			public IndicesGetFieldMapping110BasicYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -31,111 +31,112 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_index", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
 
 			}
 		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingWithNoIndexAndTypeTests : IndicesGetFieldMapping10BasicYamlBase
+		public class GetFieldMappingWithNoIndexAndType2Tests : IndicesGetFieldMapping110BasicYamlBase
 		{
 			[Test]
-			public void GetFieldMappingWithNoIndexAndTypeTest()
+			public void GetFieldMappingWithNoIndexAndType2Test()
 			{	
-
-				//skip 0 - 0.90.5; 
-				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("text"));
+				this.Do(()=> this._client.IndicesGetFieldMappingForAll("text"));
 
-				//match _response.test_index.test_type.text.mapping.text.type: 
-				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
+				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingByIndexOnlyTests : IndicesGetFieldMapping10BasicYamlBase
+		public class GetFieldMappingByIndexOnly3Tests : IndicesGetFieldMapping110BasicYamlBase
 		{
 			[Test]
-			public void GetFieldMappingByIndexOnlyTest()
+			public void GetFieldMappingByIndexOnly3Test()
 			{	
-
-				//skip 0 - 0.90.5; 
-				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "text"));
 
-				//match _response.test_index.test_type.text.mapping.text.type: 
-				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
+				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingByTypeFieldTests : IndicesGetFieldMapping10BasicYamlBase
+		public class GetFieldMappingByTypeField4Tests : IndicesGetFieldMapping110BasicYamlBase
 		{
 			[Test]
-			public void GetFieldMappingByTypeFieldTest()
+			public void GetFieldMappingByTypeField4Test()
 			{	
-
-				//skip 0 - 0.90.5; 
-				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text"));
 
-				//match _response.test_index.test_type.text.mapping.text.type: 
-				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
+				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExistTests : IndicesGetFieldMapping10BasicYamlBase
+		public class GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist5Tests : IndicesGetFieldMapping110BasicYamlBase
 		{
 			[Test]
-			public void GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExistTest()
+			public void GetFieldMappingByTypeFieldWithAnotherFieldThatDoesntExist5Test()
 			{	
-
-				//skip 0 - 0.90.5; 
-				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text,text1"));
 
-				//match _response.test_index.test_type.text.mapping.text.type: 
-				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
+				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
 
-				//is_false _response.test_index.test_type.text1; 
-				this.IsFalse(_response.test_index.test_type.text1);
+				//is_false _response.test_index.mappings.test_type.text1; 
+				this.IsFalse(_response.test_index.mappings.test_type.text1);
 
 			}
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetFieldMappingWithIncludeDefaultsTests : IndicesGetFieldMapping10BasicYamlBase
+		public class GetFieldMappingWithIncludeDefaults6Tests : IndicesGetFieldMapping110BasicYamlBase
 		{
 			[Test]
-			public void GetFieldMappingWithIncludeDefaultsTest()
+			public void GetFieldMappingWithIncludeDefaults6Test()
 			{	
-
-				//skip 0 - 0.90.5; 
-				this.Skip("0 - 0.90.5", "The API was added in 0.90.6");
 
 				//do indices.get_field_mapping 
 				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
 					.Add("include_defaults", @"true")
 				));
 
-				//match _response.test_index.test_type.text.mapping.text.type: 
-				this.IsMatch(_response.test_index.test_type.text.mapping.text.type, @"string");
+				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
 
-				//match _response.test_index.test_type.text.mapping.text.analyzer: 
-				this.IsMatch(_response.test_index.test_type.text.mapping.text.analyzer, @"default");
+				//match _response.test_index.mappings.test_type.text.mapping.text.analyzer: 
+				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.analyzer, @"default");
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class GetFieldMappingShouldWorkWithoutIndexSpecifyingTypeAndField7Tests : IndicesGetFieldMapping110BasicYamlBase
+		{
+			[Test]
+			public void GetFieldMappingShouldWorkWithoutIndexSpecifyingTypeAndField7Test()
+			{	
+
+				//do indices.get_field_mapping 
+				this.Do(()=> this._client.IndicesGetFieldMappingForAll("test_type", "text"));
+
+				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
 
 			}
 		}

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.DeleteByQuery
+namespace Nest.Tests.Integration.Yaml.DeleteByQuery1
 {
-	public partial class DeleteByQueryTests
+	public partial class DeleteByQuery1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicDeleteByQueryTests : YamlTestsBase
+		public class BasicDeleteByQuery1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicDeleteByQueryTest()
+			public void BasicDeleteByQuery1Test()
 			{	
 
 				//do index 
@@ -41,21 +41,20 @@ namespace Nest.Tests.Integration.Yaml.DeleteByQuery
 				this.Do(()=> this._client.IndexPost("test_1", "test", "3", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 				//do delete_by_query 
 				_body = new {
-					match= new {
-						foo= "bar"
+					query= new {
+						match= new {
+							foo= "bar"
+						}
 					}
 				};
 				this.Do(()=> this._client.DeleteByQuery("test_1", _body));
 
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
-
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 				//do count 
 				this.Do(()=> this._client.CountGet("test_1"));

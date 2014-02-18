@@ -9,27 +9,24 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
+namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases1
 {
-	public partial class IndicesUpdateAliasesTests
+	public partial class IndicesUpdateAliases1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestForAliasesTests : YamlTestsBase
+		public class BasicTestForAliases1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicTestForAliasesTest()
+			public void BasicTestForAliases1Test()
 			{	
 
-				//skip 0 - 0.90.0; 
-				this.Skip("0 - 0.90.0", "Exists alias not supported before 0.90.1");
-
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.exists_alias 
-				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
+				this.Do(()=> this._client.IndicesExistsAliasHeadForAll("test_alias"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
@@ -46,19 +43,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesUpdateAliases
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesUpdateAliasesPost(_body));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesUpdateAliasesPostForAll(_body));
 
 				//do indices.exists_alias 
-				this.Do(()=> this._client.IndicesExistsAliasHead("test_alias"));
+				this.Do(()=> this._client.IndicesExistsAliasHeadForAll("test_alias"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
-				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index"));
+				//do indices.get_alias 
+				this.Do(()=> this._client.IndicesGetAlias("test_index", "test_alias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {

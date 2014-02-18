@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Delete
+namespace Nest.Tests.Integration.Yaml.Delete3
 {
-	public partial class DeleteTests
+	public partial class Delete3YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ExternalVersionTests : YamlTestsBase
+		public class ExternalVersion1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ExternalVersionTest()
+			public void ExternalVersion1Test()
 			{	
 
 				//do index 

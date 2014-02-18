@@ -9,18 +9,15 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Suggest
+namespace Nest.Tests.Integration.Yaml.Suggest1
 {
-	public partial class SuggestTests
+	public partial class Suggest1YamlTests
 	{	
 	
-		public class Suggest10BasicYamlBase : YamlTestsBase
+		public class Suggest110BasicYamlBase : YamlTestsBase
 		{
-			public Suggest10BasicYamlBase() : base()
+			public Suggest110BasicYamlBase() : base()
 			{	
-
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "Suggest is broken on 0.90.2 - see #3246");
 
 				//do index 
 				_body = new {
@@ -29,17 +26,17 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 				this.Do(()=> this._client.IndexPost("test", "test", "testing_document", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 			}
 		}
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestsForSuggestApiTests : Suggest10BasicYamlBase
+		public class BasicTestsForSuggestApi2Tests : Suggest110BasicYamlBase
 		{
 			[Test]
-			public void BasicTestsForSuggestApiTest()
+			public void BasicTestsForSuggestApi2Test()
 			{	
 
 				//do suggest 
@@ -53,11 +50,11 @@ namespace Nest.Tests.Integration.Yaml.Suggest
 				};
 				this.Do(()=> this._client.SuggestPost(_body));
 
-				//match _response.test_suggestion[0].options[0].text: 
-				this.IsMatch(_response.test_suggestion[0].options[0].text, @"amsterdam");
-
 				//match _response.test_suggestion[1].options[0].text: 
-				this.IsMatch(_response.test_suggestion[1].options[0].text, @"meetup");
+				this.IsMatch(_response.test_suggestion[1].options[0].text, @"amsterdam");
+
+				//match _response.test_suggestion[2].options[0].text: 
+				this.IsMatch(_response.test_suggestion[2].options[0].text, @"meetup");
 
 			}
 		}

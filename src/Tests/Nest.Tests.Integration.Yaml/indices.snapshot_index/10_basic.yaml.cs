@@ -9,24 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex
+namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex1
 {
-	public partial class IndicesSnapshotIndexTests
+	public partial class IndicesSnapshotIndex1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class SnapshotIndexTestTests : YamlTestsBase
+		public class SnapshotIndexTest1Tests : YamlTestsBase
 		{
 			[Test]
-			public void SnapshotIndexTestTest()
+			public void SnapshotIndexTest1Test()
 			{	
 
 				//do indices.snapshot_index 
-				this.Do(()=> this._client.IndicesSnapshotIndexPost());
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesSnapshotIndexPostForAll());
 
 			}
 		}

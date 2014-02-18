@@ -9,24 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesClearCache
+namespace Nest.Tests.Integration.Yaml.IndicesClearCache1
 {
-	public partial class IndicesClearCacheTests
+	public partial class IndicesClearCache1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ClearCacheTestTests : YamlTestsBase
+		public class ClearCacheTest1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ClearCacheTestTest()
+			public void ClearCacheTest1Test()
 			{	
 
 				//do indices.clear_cache 
-				this.Do(()=> this._client.IndicesClearCacheGet());
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesClearCachePostForAll());
 
 			}
 		}

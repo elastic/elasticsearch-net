@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget3
 {
-	public partial class MgetTests
+	public partial class Mget3YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class NonExistentIndexTests : YamlTestsBase
+		public class NonExistentIndex1Tests : YamlTestsBase
 		{
 			[Test]
-			public void NonExistentIndexTest()
+			public void NonExistentIndex1Test()
 			{	
-
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "See https://github.com/elasticsearch/elasticsearch/issues/3267");
 
 				//do index 
 				_body = new {
@@ -48,8 +45,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost(_body));
 
-				//is_false _response.docs[0].exists; 
-				this.IsFalse(_response.docs[0].exists);
+				//is_false _response.docs[0].found; 
+				this.IsFalse(_response.docs[0].found);
 
 				//match _response.docs[0]._index: 
 				this.IsMatch(_response.docs[0]._index, @"test_2");
@@ -73,8 +70,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost(_body));
 
-				//is_true _response.docs[0].exists; 
-				this.IsTrue(_response.docs[0].exists);
+				//is_true _response.docs[0].found; 
+				this.IsTrue(_response.docs[0].found);
 
 				//match _response.docs[0]._index: 
 				this.IsMatch(_response.docs[0]._index, @"test_1");

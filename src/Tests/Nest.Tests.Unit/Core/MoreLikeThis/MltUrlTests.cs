@@ -47,8 +47,8 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 				.StopWords(new[] { "c#", "es" })
 				.MinDocFreq(5)
 				.MaxDocFreq(200)
-				.MinWordLen(2)
-				.MaxWordLen(200)
+				.MinWordLength(2)
+				.MaxWordLength(200)
 				.BoostTerms(1.4)
 			);
 			var status = result.ConnectionStatus;

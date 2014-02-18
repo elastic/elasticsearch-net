@@ -9,9 +9,9 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Info
+namespace Nest.Tests.Integration.Yaml.Info1
 {
-	public partial class InfoTests
+	public partial class Info1YamlTests
 	{	
 
 
@@ -27,9 +27,6 @@ namespace Nest.Tests.Integration.Yaml.Info
 
 				//match _response.status: 
 				this.IsMatch(_response.status, 200);
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
 
 				//is_true _response.name; 
 				this.IsTrue(_response.name);

@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget6
 {
-	public partial class MgetTests
+	public partial class Mget6YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FieldsTests : YamlTestsBase
+		public class Fields1Tests : YamlTestsBase
 		{
 			[Test]
-			public void FieldsTest()
+			public void Fields1Test()
 			{	
-
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "Single string fields not supported pre 0.90.3. See https://github.com/elasticsearch/elasticsearch/issues/3270");
 
 				//do index 
 				_body = new {
@@ -72,19 +69,25 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				});
 
 				//match _response.docs[1].fields.foo: 
-				this.IsMatch(_response.docs[1].fields.foo, @"bar");
+				this.IsMatch(_response.docs[1].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[1]._source; 
 				this.IsFalse(_response.docs[1]._source);
 
 				//match _response.docs[2].fields.foo: 
-				this.IsMatch(_response.docs[2].fields.foo, @"bar");
+				this.IsMatch(_response.docs[2].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[2]._source; 
 				this.IsFalse(_response.docs[2]._source);
 
 				//match _response.docs[3].fields.foo: 
-				this.IsMatch(_response.docs[3].fields.foo, @"bar");
+				this.IsMatch(_response.docs[3].fields.foo, new [] {
+					@"bar"
+				});
 
 				//match _response.docs[3]._source: 
 				this.IsMatch(_response.docs[3]._source, new {
@@ -121,25 +124,33 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				));
 
 				//match _response.docs[0].fields.foo: 
-				this.IsMatch(_response.docs[0].fields.foo, @"bar");
+				this.IsMatch(_response.docs[0].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[0]._source; 
 				this.IsFalse(_response.docs[0]._source);
 
 				//match _response.docs[1].fields.foo: 
-				this.IsMatch(_response.docs[1].fields.foo, @"bar");
+				this.IsMatch(_response.docs[1].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[1]._source; 
 				this.IsFalse(_response.docs[1]._source);
 
 				//match _response.docs[2].fields.foo: 
-				this.IsMatch(_response.docs[2].fields.foo, @"bar");
+				this.IsMatch(_response.docs[2].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[2]._source; 
 				this.IsFalse(_response.docs[2]._source);
 
 				//match _response.docs[3].fields.foo: 
-				this.IsMatch(_response.docs[3].fields.foo, @"bar");
+				this.IsMatch(_response.docs[3].fields.foo, new [] {
+					@"bar"
+				});
 
 				//match _response.docs[3]._source: 
 				this.IsMatch(_response.docs[3]._source, new {
@@ -178,25 +189,33 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				));
 
 				//match _response.docs[0].fields.foo: 
-				this.IsMatch(_response.docs[0].fields.foo, @"bar");
+				this.IsMatch(_response.docs[0].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[0]._source; 
 				this.IsFalse(_response.docs[0]._source);
 
 				//match _response.docs[1].fields.foo: 
-				this.IsMatch(_response.docs[1].fields.foo, @"bar");
+				this.IsMatch(_response.docs[1].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[1]._source; 
 				this.IsFalse(_response.docs[1]._source);
 
 				//match _response.docs[2].fields.foo: 
-				this.IsMatch(_response.docs[2].fields.foo, @"bar");
+				this.IsMatch(_response.docs[2].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[2]._source; 
 				this.IsFalse(_response.docs[2]._source);
 
 				//match _response.docs[3].fields.foo: 
-				this.IsMatch(_response.docs[3].fields.foo, @"bar");
+				this.IsMatch(_response.docs[3].fields.foo, new [] {
+					@"bar"
+				});
 
 				//match _response.docs[3]._source: 
 				this.IsMatch(_response.docs[3]._source, new {
@@ -236,7 +255,9 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				));
 
 				//match _response.docs[0].fields.foo: 
-				this.IsMatch(_response.docs[0].fields.foo, @"bar");
+				this.IsMatch(_response.docs[0].fields.foo, new [] {
+					@"bar"
+				});
 
 				//match _response.docs[0]._source: 
 				this.IsMatch(_response.docs[0]._source, new {
@@ -244,19 +265,25 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				});
 
 				//match _response.docs[1].fields.foo: 
-				this.IsMatch(_response.docs[1].fields.foo, @"bar");
+				this.IsMatch(_response.docs[1].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[1]._source; 
 				this.IsFalse(_response.docs[1]._source);
 
 				//match _response.docs[2].fields.foo: 
-				this.IsMatch(_response.docs[2].fields.foo, @"bar");
+				this.IsMatch(_response.docs[2].fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.docs[2]._source; 
 				this.IsFalse(_response.docs[2]._source);
 
 				//match _response.docs[3].fields.foo: 
-				this.IsMatch(_response.docs[3].fields.foo, @"bar");
+				this.IsMatch(_response.docs[3].fields.foo, new [] {
+					@"bar"
+				});
 
 				//match _response.docs[3]._source: 
 				this.IsMatch(_response.docs[3]._source, new {

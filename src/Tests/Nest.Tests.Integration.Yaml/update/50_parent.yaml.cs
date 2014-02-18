@@ -9,17 +9,14 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update9
 {
-	public partial class UpdateTests
+	public partial class Update9YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentTests : YamlTestsBase
+	
+		public class Update950ParentYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void ParentTest()
+			public Update950ParentYamlBase() : base()
 			{	
 
 				//do indices.create 
@@ -32,12 +29,23 @@ namespace Nest.Tests.Integration.Yaml.Update
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
+
+			}
+		}
+
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class Parent2Tests : Update950ParentYamlBase
+		{
+			[Test]
+			public void Parent2Test()
+			{	
 
 				//do update 
 				_body = new {
@@ -84,7 +92,33 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body), shouldCatch: @"missing");
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+					.Add("parent", 5)
+					.Add("fields", @"foo")
+				));
+
+				//match _response.get.fields.foo: 
+				this.IsMatch(_response.get.fields.foo, new [] {
+					@"baz"
+				});
+
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class ParentOmitted3Tests : Update950ParentYamlBase
+		{
+			[Test]
+			public void ParentOmitted3Test()
+			{	
+
+				//do index 
+				_body = new {
+					foo= "bar"
+				};
+				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+					.Add("parent", 5)
+				));
 
 				//do update 
 				_body = new {
@@ -92,13 +126,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						foo= "baz"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
-					.Add("parent", 5)
-					.Add("fields", @"foo")
-				));
-
-				//match _response.get.fields.foo: 
-				this.IsMatch(_response.get.fields.foo, @"baz");
+				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body), shouldCatch: @"request");
 
 			}
 		}

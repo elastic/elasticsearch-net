@@ -1,7 +1,7 @@
 @using System.Globalization
 @using System.Linq
 @using System.Text.RegularExpressions
-@using Domain
+@using CodeGeneration.LowLevelClient.Domain
 @using CodeGeneration.LowLevelClient 
 using System;
 using System.Collections.Generic;
@@ -45,7 +45,7 @@ namespace Nest
 		{
 		@foreach (ApiUrlPart part in method.Parts.Where(p=>p.Name != "body").ToList())
 		{
-			<text>@(part.Name).ThrowIfNull("@part.Name");</text>
+			<text>@(part.Name).@(part.Type == "string" || part.Type == "list" ? "ThrowIfNullOrEmpty" : "ThrowIfNull")("@part.Name");</text>
 		}
 		@if (method.Parts.Any())
 		{

@@ -9,21 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesOpen
+namespace Nest.Tests.Integration.Yaml.IndicesOpen1
 {
-	public partial class IndicesOpenTests
+	public partial class IndicesOpen1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestForIndexOpenCloseTests : YamlTestsBase
+		public class BasicTestForIndexOpenClose1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicTestForIndexOpenCloseTest()
+			public void BasicTestForIndexOpenClose1Test()
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

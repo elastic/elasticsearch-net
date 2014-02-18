@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget4
 {
-	public partial class MgetTests
+	public partial class Mget4YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingMetadataTests : YamlTestsBase
+		public class MissingMetadata1Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingMetadataTest()
+			public void MissingMetadata1Test()
 			{	
 
 				//do index 
@@ -76,8 +76,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost(_body));
 
-				//is_true _response.docs[0].exists; 
-				this.IsTrue(_response.docs[0].exists);
+				//is_true _response.docs[0].found; 
+				this.IsTrue(_response.docs[0].found);
 
 				//match _response.docs[0]._index: 
 				this.IsMatch(_response.docs[0]._index, @"test_1");

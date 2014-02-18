@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Get
+namespace Nest.Tests.Integration.Yaml.Get3
 {
-	public partial class GetTests
+	public partial class Get3YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FieldsTests : YamlTestsBase
+		public class Fields1Tests : YamlTestsBase
 		{
 			[Test]
-			public void FieldsTest()
+			public void Fields1Test()
 			{	
 
 				//do index 
@@ -44,7 +44,9 @@ namespace Nest.Tests.Integration.Yaml.Get
 				this.IsMatch(_response._id, 1);
 
 				//match _response.fields.foo: 
-				this.IsMatch(_response.fields.foo, @"bar");
+				this.IsMatch(_response.fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response._source; 
 				this.IsFalse(_response._source);
@@ -58,10 +60,14 @@ namespace Nest.Tests.Integration.Yaml.Get
 				));
 
 				//match _response.fields.foo: 
-				this.IsMatch(_response.fields.foo, @"bar");
+				this.IsMatch(_response.fields.foo, new [] {
+					@"bar"
+				});
 
 				//match _response.fields.count: 
-				this.IsMatch(_response.fields.count, 1);
+				this.IsMatch(_response.fields.count, new [] {
+					@"1"
+				});
 
 				//is_false _response._source; 
 				this.IsFalse(_response._source);
@@ -76,10 +82,14 @@ namespace Nest.Tests.Integration.Yaml.Get
 				));
 
 				//match _response.fields.foo: 
-				this.IsMatch(_response.fields.foo, @"bar");
+				this.IsMatch(_response.fields.foo, new [] {
+					@"bar"
+				});
 
 				//match _response.fields.count: 
-				this.IsMatch(_response.fields.count, 1);
+				this.IsMatch(_response.fields.count, new [] {
+					@"1"
+				});
 
 				//match _response._source.foo: 
 				this.IsMatch(_response._source.foo, @"bar");

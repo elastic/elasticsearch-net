@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Delete
+namespace Nest.Tests.Integration.Yaml.Delete1
 {
-	public partial class DeleteTests
+	public partial class Delete1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTests : YamlTestsBase
+		public class Basic1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicTest()
+			public void Basic1Test()
 			{	
 
 				//do index 
@@ -27,9 +27,6 @@ namespace Nest.Tests.Integration.Yaml.Delete
 					foo= "bar"
 				};
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
 
 				//match _response._version: 
 				this.IsMatch(_response._version, 1);

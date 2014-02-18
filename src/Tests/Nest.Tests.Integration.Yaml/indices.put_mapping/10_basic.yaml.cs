@@ -9,55 +9,75 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
+namespace Nest.Tests.Integration.Yaml.IndicesPutMapping1
 {
-	public partial class IndicesPutMappingTests
+	public partial class IndicesPutMapping1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TestCreateAndUpdateMappingTests : YamlTestsBase
+		public class TestCreateAndUpdateMapping1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TestCreateAndUpdateMappingTest()
+			public void TestCreateAndUpdateMapping1Test()
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("test_index", null));
+				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
 
 				//do indices.put_mapping 
 				_body = new {
 					test_type= new {
 						properties= new {
-							text= new {
+							text1= new {
+								type= "string",
+								analyzer= "whitespace"
+							},
+							text2= new {
 								type= "string",
 								analyzer= "whitespace"
 							}
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMapping("test_index"));
 
-				//match _response.test_index.test_type.properties.text.type: 
-				this.IsMatch(_response.test_index.test_type.properties.text.type, @"string");
+				//match _response.test_index.mappings.test_type.properties.text1.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text1.type, @"string");
 
-				//match _response.test_index.test_type.properties.text.analyzer: 
-				this.IsMatch(_response.test_index.test_type.properties.text.analyzer, @"whitespace");
+				//match _response.test_index.mappings.test_type.properties.text1.analyzer: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text1.analyzer, @"whitespace");
+
+				//match _response.test_index.mappings.test_type.properties.text2.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text2.type, @"string");
+
+				//match _response.test_index.mappings.test_type.properties.text2.analyzer: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text2.analyzer, @"whitespace");
 
 				//do indices.put_mapping 
 				_body = new {
 					test_type= new {
 						properties= new {
-							text= new {
+							text1= new {
 								type= "multi_field",
 								fields= new {
-									text= new {
+									text1= new {
 										type= "string",
 										analyzer= "whitespace"
 									},
+									text_raw= new {
+										type= "string",
+										index= "not_analyzed"
+									}
+								}
+							},
+							text2= new {
+								type= "string",
+								analyzer= "whitespace",
+								fields= new {
 									text_raw= new {
 										type= "string",
 										index= "not_analyzed"
@@ -67,16 +87,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMappingPost("test_index", "test_type", _body));
+				this.Do(()=> this._client.IndicesPutMapping("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
 				this.Do(()=> this._client.IndicesGetMapping("test_index"));
 
-				//match _response.test_index.test_type.properties.text.type: 
-				this.IsMatch(_response.test_index.test_type.properties.text.type, @"multi_field");
+				//match _response.test_index.mappings.test_type.properties.text1.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text1.type, @"string");
 
-				//match _response.test_index.test_type.properties.text.fields.text_raw.index: 
-				this.IsMatch(_response.test_index.test_type.properties.text.fields.text_raw.index, @"not_analyzed");
+				//match _response.test_index.mappings.test_type.properties.text1.fields.text_raw.index: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text1.fields.text_raw.index, @"not_analyzed");
+
+				//match _response.test_index.mappings.test_type.properties.text2.type: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text2.type, @"string");
+
+				//match _response.test_index.mappings.test_type.properties.text2.fields.text_raw.index: 
+				this.IsMatch(_response.test_index.mappings.test_type.properties.text2.fields.text_raw.index, @"not_analyzed");
 
 			}
 		}

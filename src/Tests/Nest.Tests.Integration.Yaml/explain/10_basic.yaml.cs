@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Explain
+namespace Nest.Tests.Integration.Yaml.Explain1
 {
-	public partial class ExplainTests
+	public partial class Explain1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicMltTests : YamlTestsBase
+		public class BasicMlt1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicMltTest()
+			public void BasicMlt1Test()
 			{	
 
 				//do index 
@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Yaml.Explain
 				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 				//do explain 
 				_body = new {
@@ -42,9 +42,6 @@ namespace Nest.Tests.Integration.Yaml.Explain
 
 				//is_true _response.matched; 
 				this.IsTrue(_response.matched);
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
 
 				//match _response.explanation.value: 
 				this.IsMatch(_response.explanation.value, 1);

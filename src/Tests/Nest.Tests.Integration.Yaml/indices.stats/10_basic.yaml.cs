@@ -9,24 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesStats
+namespace Nest.Tests.Integration.Yaml.IndicesStats1
 {
-	public partial class IndicesStatsTests
+	public partial class IndicesStats1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class StatsTestTests : YamlTestsBase
+		public class StatsTest1Tests : YamlTestsBase
 		{
 			[Test]
-			public void StatsTestTest()
+			public void StatsTest1Test()
 			{	
 
 				//do indices.stats 
-				this.Do(()=> this._client.IndicesStatsGet());
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesStatsGetForAll());
 
 			}
 		}

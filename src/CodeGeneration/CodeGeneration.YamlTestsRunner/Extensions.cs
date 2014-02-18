@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -45,7 +47,7 @@ namespace CodeGeneration.YamlTestsRunner
 				return body;
 			}
 			var ss = o as IEnumerable<string>;
-			if (ss != null)
+			if (ss != null && ss.Any())
 			{
 				body += "new string [] {\n";
 				body +=  string.Join(",\n", ss.Select(str=>indendation + "\t" + str.SurroundWithQuotes()));
@@ -54,7 +56,7 @@ namespace CodeGeneration.YamlTestsRunner
 			}
 			
 			var si = o as IEnumerable<int>;
-			if (si != null)
+			if (si != null && si.Any())
 			{
 				body +=  "new int [] {\n";
 				body +=  string.Join(",\n", si.Select(str=>indendation + "\t" + si.ToString()));
@@ -63,7 +65,7 @@ namespace CodeGeneration.YamlTestsRunner
 			}
 			
 			var os = o as IEnumerable<object>;
-			if (os != null)
+			if (os != null && os.Any())
 			{
 				var inner =  string.Join(",\n", os
 					.Select(oss=>indendation + "\t" + oss.SerializeToAnonymousObject(indendation, Formatting.None)));
@@ -74,6 +76,23 @@ namespace CodeGeneration.YamlTestsRunner
 				body += inner;
 				body += "\n" + indendation + "}";
 				return body;
+			}
+			else if (o is IDictionary<object, object>)
+			{
+				var d = o as IDictionary<object, object>;
+				if (d.Keys.Any(k => k.ToString().Contains(".")))
+				{
+					body += "new Dictionary<string, object> {\n";
+					var f = "{0}\t{{ {1}, {2} }}";
+					var inner = (from kv in d 
+								 let k = kv.Key.ToString().SurroundWithQuotes() 
+								 let v = kv.Value.SerializeToAnonymousObject(format: Formatting.None)
+								 select string.Format(f, indendation, k, v)
+								 ).ToList();
+					body += string.Join(",\n", inner);
+					body += "\n" + indendation + "}";
+					return body;
+				}
 			}
 			body += o.SerializeToAnonymousObject();
 			return body;
@@ -91,7 +110,12 @@ namespace CodeGeneration.YamlTestsRunner
 			serializer.Serialize(writer, o);
 			writer.Close();
 			//anonymousify the json
-			var anon = stringWriter.ToString().Replace("{", "new {").Replace("]", "}").Replace("[", "new [] {").Replace(":", "=");
+			var anon = stringWriter.ToString()
+				.Replace("{", "new {")
+				.Replace("]", "}")
+				.Replace("[", "new [] {")
+				.Replace(":", "=")
+				.Replace("http=", "http:");
 			//match indentation of the view	
 			anon = Regex.Replace(anon, @"^(\s+)?", (m) =>
 			{
@@ -104,7 +128,7 @@ namespace CodeGeneration.YamlTestsRunner
 			//docs contain different types of anon objects, quick fix by making them a dynamic[]
 			anon = anon.Replace("docs= new []", "docs= new dynamic[]");
 			//fix empty untyped arrays, default to string
-			anon = anon.Replace("new [] {}", "new string[] {}");
+			anon = Regex.Replace(anon, @"new \[\] \{[\s\t\r\n]*\}", "new string[] {}");
 			//quick fixes for settings: index.* and discovery.zen.*
 			//needs some recursive regex love perhaps in the future
 			anon = Regex.Replace(anon, @"(index|discovery)\.([^=]+)=([^\r\n,]+)", " { \"$1.$2\", $3 }", RegexOptions.Multiline);

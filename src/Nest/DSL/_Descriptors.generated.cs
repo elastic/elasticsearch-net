@@ -13,7 +13,7 @@ namespace Nest
 	
 	///<summary>descriptor for BulkPost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-bulk.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
 	///</pre>
 	///</summary>
 	public partial class BulkDescriptor
@@ -45,10 +45,10 @@ namespace Nest
 		}
 		
 
-		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public BulkDescriptor TypeQueryString(string type)
+		///<summary>Specific routing value</summary>
+		public BulkDescriptor Routing(string routing)
 		{
-			this._QueryString.Type(type);
+			this._QueryString.Routing(routing);
 			return this;
 		}
 		
@@ -60,13 +60,673 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Default document type for items which don&#39;t provide one</summary>
+		public BulkDescriptor TypeQueryString(string type)
+		{
+			this._QueryString.Type(type);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatAliasesGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
+	///</pre>
+	///</summary>
+	public partial class CatAliasesDescriptor
+	{
+		internal CatAliasesQueryString _QueryString = new CatAliasesQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatAliasesDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatAliasesDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatAliasesDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatAliasesDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatAliasesDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatAllocationGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
+	///</pre>
+	///</summary>
+	public partial class CatAllocationDescriptor
+	{
+		internal CatAllocationQueryString _QueryString = new CatAllocationQueryString(); 
+
+
+		///<summary>The unit in which to display byte values</summary>
+		public CatAllocationDescriptor Bytes(BytesOptions bytes)
+		{
+			this._QueryString.Bytes(bytes);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatAllocationDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatAllocationDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatAllocationDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatAllocationDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatAllocationDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatCountGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
+	///</pre>
+	///</summary>
+	public partial class CatCountDescriptor
+	{
+		internal CatCountQueryString _QueryString = new CatCountQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatCountDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatCountDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatCountDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatCountDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatCountDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatHealthGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
+	///</pre>
+	///</summary>
+	public partial class CatHealthDescriptor
+	{
+		internal CatHealthQueryString _QueryString = new CatHealthQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatHealthDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatHealthDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatHealthDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatHealthDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Set to false to disable timestamping</summary>
+		public CatHealthDescriptor Ts(bool ts = true)
+		{
+			this._QueryString.Ts(ts);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatHealthDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatHelpGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
+	///</pre>
+	///</summary>
+	public partial class CatHelpDescriptor
+	{
+		internal CatHelpQueryString _QueryString = new CatHelpQueryString(); 
+
+
+		///<summary>Return help information</summary>
+		public CatHelpDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatIndicesGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
+	///</pre>
+	///</summary>
+	public partial class CatIndicesDescriptor
+	{
+		internal CatIndicesQueryString _QueryString = new CatIndicesQueryString(); 
+
+
+		///<summary>The unit in which to display byte values</summary>
+		public CatIndicesDescriptor Bytes(BytesOptions bytes)
+		{
+			this._QueryString.Bytes(bytes);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatIndicesDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatIndicesDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatIndicesDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatIndicesDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Set to true to return stats only for primary shards</summary>
+		public CatIndicesDescriptor Pri(bool pri = true)
+		{
+			this._QueryString.Pri(pri);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatIndicesDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatMasterGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
+	///</pre>
+	///</summary>
+	public partial class CatMasterDescriptor
+	{
+		internal CatMasterQueryString _QueryString = new CatMasterQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatMasterDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatMasterDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatMasterDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatMasterDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatMasterDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatNodesGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
+	///</pre>
+	///</summary>
+	public partial class CatNodesDescriptor
+	{
+		internal CatNodesQueryString _QueryString = new CatNodesQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatNodesDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatNodesDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatNodesDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatNodesDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatNodesDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatPendingTasksGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
+	///</pre>
+	///</summary>
+	public partial class CatPendingTasksDescriptor
+	{
+		internal CatPendingTasksQueryString _QueryString = new CatPendingTasksQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatPendingTasksDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatPendingTasksDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatPendingTasksDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatPendingTasksDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatPendingTasksDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatRecoveryGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
+	///</pre>
+	///</summary>
+	public partial class CatRecoveryDescriptor
+	{
+		internal CatRecoveryQueryString _QueryString = new CatRecoveryQueryString(); 
+
+
+		///<summary>The unit in which to display byte values</summary>
+		public CatRecoveryDescriptor Bytes(BytesOptions bytes)
+		{
+			this._QueryString.Bytes(bytes);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatRecoveryDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatRecoveryDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatRecoveryDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatRecoveryDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatRecoveryDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatShardsGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
+	///</pre>
+	///</summary>
+	public partial class CatShardsDescriptor
+	{
+		internal CatShardsQueryString _QueryString = new CatShardsQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatShardsDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatShardsDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatShardsDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatShardsDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatShardsDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for CatThreadPoolGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
+	///</pre>
+	///</summary>
+	public partial class CatThreadPoolDescriptor
+	{
+		internal CatThreadPoolQueryString _QueryString = new CatThreadPoolQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public CatThreadPoolDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public CatThreadPoolDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatThreadPoolDescriptor H(params string[] h)
+		{
+			this._QueryString.H(h);
+			return this;
+		}
+		
+
+		///<summary>Return help information</summary>
+		public CatThreadPoolDescriptor Help(bool help = true)
+		{
+			this._QueryString.Help(help);
+			return this;
+		}
+		
+
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatThreadPoolDescriptor V(bool v = true)
+		{
+			this._QueryString.V(v);
+			return this;
+		}
+		
+
+		///<summary>Enables displaying the complete node ids</summary>
+		public CatThreadPoolDescriptor FullId(bool full_id = true)
+		{
+			this._QueryString.FullId(full_id);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for ClearScrollDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ClearScrollDescriptor
@@ -79,20 +739,44 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterGetSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterGetSettingsDescriptor
 	{
 		internal ClusterGetSettingsQueryString _QueryString = new ClusterGetSettingsQueryString(); 
 
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public ClusterGetSettingsDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ClusterGetSettingsDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout</summary>
+		public ClusterGetSettingsDescriptor Timeout(string timeout)
+		{
+			this._QueryString.Timeout(timeout);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for ClusterHealthGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-health.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
 	///</pre>
 	///</summary>
 	public partial class ClusterHealthDescriptor
@@ -167,302 +851,28 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ClusterNodeHotThreadsGet
+	///<summary>descriptor for ClusterPendingTasksGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-hot-threads.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
 	///</summary>
-	public partial class ClusterNodeHotThreadsDescriptor
+	public partial class ClusterPendingTasksDescriptor
 	{
-		internal ClusterNodeHotThreadsQueryString _QueryString = new ClusterNodeHotThreadsQueryString(); 
+		internal ClusterPendingTasksQueryString _QueryString = new ClusterPendingTasksQueryString(); 
 
 
-		///<summary>The interval for the second sampling of threads</summary>
-		public ClusterNodeHotThreadsDescriptor Interval(string interval)
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public ClusterPendingTasksDescriptor Local(bool local = true)
 		{
-			this._QueryString.Interval(interval);
+			this._QueryString.Local(local);
 			return this;
 		}
 		
 
-		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public ClusterNodeHotThreadsDescriptor Snapshots(int snapshots)
+		///<summary>Specify timeout for connection to master</summary>
+		public ClusterPendingTasksDescriptor MasterTimeout(string master_timeout)
 		{
-			this._QueryString.Snapshots(snapshots);
-			return this;
-		}
-		
-
-		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public ClusterNodeHotThreadsDescriptor Threads(int threads)
-		{
-			this._QueryString.Threads(threads);
-			return this;
-		}
-		
-
-		///<summary>The type to sample (default: cpu)</summary>
-		public ClusterNodeHotThreadsDescriptor TypeQueryString(TypeOptions type)
-		{
-			this._QueryString.Type(type);
-			return this;
-		}
-		
-		
-	}
-	
-	
-	///<summary>descriptor for ClusterNodeInfoGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-info.html
-	///</pre>
-	///</summary>
-	public partial class ClusterNodeInfoDescriptor
-	{
-		internal ClusterNodeInfoQueryString _QueryString = new ClusterNodeInfoQueryString(); 
-
-
-		///<summary>Return all available information</summary>
-		public ClusterNodeInfoDescriptor All(bool all = true)
-		{
-			this._QueryString.All(all);
-			return this;
-		}
-		
-
-		///<summary>Reset the default settings</summary>
-		public ClusterNodeInfoDescriptor Clear(bool clear = true)
-		{
-			this._QueryString.Clear(clear);
-			return this;
-		}
-		
-
-		///<summary>Return information about HTTP</summary>
-		public ClusterNodeInfoDescriptor Http(bool http = true)
-		{
-			this._QueryString.Http(http);
-			return this;
-		}
-		
-
-		///<summary>Return information about the JVM</summary>
-		public ClusterNodeInfoDescriptor Jvm(bool jvm = true)
-		{
-			this._QueryString.Jvm(jvm);
-			return this;
-		}
-		
-
-		///<summary>Return information about network</summary>
-		public ClusterNodeInfoDescriptor Network(bool network = true)
-		{
-			this._QueryString.Network(network);
-			return this;
-		}
-		
-
-		///<summary>Return information about the operating system</summary>
-		public ClusterNodeInfoDescriptor Os(bool os = true)
-		{
-			this._QueryString.Os(os);
-			return this;
-		}
-		
-
-		///<summary>Return information about plugins</summary>
-		public ClusterNodeInfoDescriptor Plugin(bool plugin = true)
-		{
-			this._QueryString.Plugin(plugin);
-			return this;
-		}
-		
-
-		///<summary>Return information about the Elasticsearch process</summary>
-		public ClusterNodeInfoDescriptor Process(bool process = true)
-		{
-			this._QueryString.Process(process);
-			return this;
-		}
-		
-
-		///<summary>Return information about node settings</summary>
-		public ClusterNodeInfoDescriptor Settings(bool settings = true)
-		{
-			this._QueryString.Settings(settings);
-			return this;
-		}
-		
-
-		///<summary>Return information about the thread pool</summary>
-		public ClusterNodeInfoDescriptor ThreadPool(bool thread_pool = true)
-		{
-			this._QueryString.ThreadPool(thread_pool);
-			return this;
-		}
-		
-
-		///<summary>Explicit operation timeout</summary>
-		public ClusterNodeInfoDescriptor Timeout(string timeout)
-		{
-			this._QueryString.Timeout(timeout);
-			return this;
-		}
-		
-
-		///<summary>Return information about transport</summary>
-		public ClusterNodeInfoDescriptor Transport(bool transport = true)
-		{
-			this._QueryString.Transport(transport);
-			return this;
-		}
-		
-		
-	}
-	
-	
-	///<summary>descriptor for ClusterNodeShutdownPost
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-shutdown.html
-	///</pre>
-	///</summary>
-	public partial class ClusterNodeShutdownDescriptor
-	{
-		internal ClusterNodeShutdownQueryString _QueryString = new ClusterNodeShutdownQueryString(); 
-
-
-		///<summary>Set the delay for the operation (default: 1s)</summary>
-		public ClusterNodeShutdownDescriptor Delay(string delay)
-		{
-			this._QueryString.Delay(delay);
-			return this;
-		}
-		
-
-		///<summary>Exit the JVM as well (default: true)</summary>
-		public ClusterNodeShutdownDescriptor Exit(bool exit = true)
-		{
-			this._QueryString.Exit(exit);
-			return this;
-		}
-		
-		
-	}
-	
-	
-	///<summary>descriptor for ClusterNodeStatsGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-nodes-stats.html
-	///</pre>
-	///</summary>
-	public partial class ClusterNodeStatsDescriptor
-	{
-		internal ClusterNodeStatsQueryString _QueryString = new ClusterNodeStatsQueryString(); 
-
-
-		///<summary>Return all available information</summary>
-		public ClusterNodeStatsDescriptor All(bool all = true)
-		{
-			this._QueryString.All(all);
-			return this;
-		}
-		
-
-		///<summary>Reset the default level of detail</summary>
-		public ClusterNodeStatsDescriptor Clear(bool clear = true)
-		{
-			this._QueryString.Clear(clear);
-			return this;
-		}
-		
-
-		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
-		public ClusterNodeStatsDescriptor Fields(params string[] fields)
-		{
-			this._QueryString.Fields(fields);
-			return this;
-		}
-		
-			
-		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
-		public ClusterNodeStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this._QueryString._Fields(typedPathLookups);
-			return this;
-		}
-			
-
-		///<summary>Return information about the filesystem</summary>
-		public ClusterNodeStatsDescriptor Fs(bool fs = true)
-		{
-			this._QueryString.Fs(fs);
-			return this;
-		}
-		
-
-		///<summary>Return information about HTTP</summary>
-		public ClusterNodeStatsDescriptor Http(bool http = true)
-		{
-			this._QueryString.Http(http);
-			return this;
-		}
-		
-
-		///<summary>Return information about indices</summary>
-		public ClusterNodeStatsDescriptor Indices(bool indices = true)
-		{
-			this._QueryString.Indices(indices);
-			return this;
-		}
-		
-
-		///<summary>Return information about the JVM</summary>
-		public ClusterNodeStatsDescriptor Jvm(bool jvm = true)
-		{
-			this._QueryString.Jvm(jvm);
-			return this;
-		}
-		
-
-		///<summary>Return information about network</summary>
-		public ClusterNodeStatsDescriptor Network(bool network = true)
-		{
-			this._QueryString.Network(network);
-			return this;
-		}
-		
-
-		///<summary>Return information about the operating system</summary>
-		public ClusterNodeStatsDescriptor Os(bool os = true)
-		{
-			this._QueryString.Os(os);
-			return this;
-		}
-		
-
-		///<summary>Return information about the Elasticsearch process</summary>
-		public ClusterNodeStatsDescriptor Process(bool process = true)
-		{
-			this._QueryString.Process(process);
-			return this;
-		}
-		
-
-		///<summary>Return information about the thread pool</summary>
-		public ClusterNodeStatsDescriptor ThreadPool(bool thread_pool = true)
-		{
-			this._QueryString.ThreadPool(thread_pool);
-			return this;
-		}
-		
-
-		///<summary>Return information about transport</summary>
-		public ClusterNodeStatsDescriptor Transport(bool transport = true)
-		{
-			this._QueryString.Transport(transport);
+			this._QueryString.MasterTimeout(master_timeout);
 			return this;
 		}
 		
@@ -472,20 +882,28 @@ namespace Nest
 	
 	///<summary>descriptor for ClusterPutSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterPutSettingsDescriptor
 	{
 		internal ClusterPutSettingsQueryString _QueryString = new ClusterPutSettingsQueryString(); 
 
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public ClusterPutSettingsDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for ClusterReroutePost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-reroute.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
 	///</pre>
 	///</summary>
 	public partial class ClusterRerouteDescriptor
@@ -508,67 +926,35 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ClusterRerouteDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout</summary>
+		public ClusterRerouteDescriptor Timeout(string timeout)
+		{
+			this._QueryString.Timeout(timeout);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for ClusterStateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/cluster-state.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
 	///</pre>
 	///</summary>
 	public partial class ClusterStateDescriptor
 	{
 		internal ClusterStateQueryString _QueryString = new ClusterStateQueryString(); 
 
-
-		///<summary>Do not return information about blocks</summary>
-		public ClusterStateDescriptor FilterBlocks(bool filter_blocks = true)
-		{
-			this._QueryString.FilterBlocks(filter_blocks);
-			return this;
-		}
-		
-
-		///<summary>Do not return information about index templates</summary>
-		public ClusterStateDescriptor FilterIndexTemplates(bool filter_index_templates = true)
-		{
-			this._QueryString.FilterIndexTemplates(filter_index_templates);
-			return this;
-		}
-		
-
-		///<summary>Limit returned metadata information to specific indices</summary>
-		public ClusterStateDescriptor FilterIndices(params string[] filter_indices)
-		{
-			this._QueryString.FilterIndices(filter_indices);
-			return this;
-		}
-		
-
-		///<summary>Do not return information about indices metadata</summary>
-		public ClusterStateDescriptor FilterMetadata(bool filter_metadata = true)
-		{
-			this._QueryString.FilterMetadata(filter_metadata);
-			return this;
-		}
-		
-
-		///<summary>Do not return information about nodes</summary>
-		public ClusterStateDescriptor FilterNodes(bool filter_nodes = true)
-		{
-			this._QueryString.FilterNodes(filter_nodes);
-			return this;
-		}
-		
-
-		///<summary>Do not return information about shard allocation (`routing_table` and `routing_nodes`)</summary>
-		public ClusterStateDescriptor FilterRoutingTable(bool filter_routing_table = true)
-		{
-			this._QueryString.FilterRoutingTable(filter_routing_table);
-			return this;
-		}
-		
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool local = true)
@@ -585,13 +971,58 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>A comma separated list to return specific index templates when returning metadata</summary>
+		public ClusterStateDescriptor IndexTemplates(params string[] index_templates)
+		{
+			this._QueryString.IndexTemplates(index_templates);
+			return this;
+		}
+		
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public ClusterStateDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for ClusterStatsGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
+	///</pre>
+	///</summary>
+	public partial class ClusterStatsDescriptor
+	{
+		internal ClusterStatsQueryString _QueryString = new ClusterStatsQueryString(); 
+
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
+
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public ClusterStatsDescriptor Human(bool human = true)
+		{
+			this._QueryString.Human(human);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for CountPost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
 	///</summary>
 	public partial class CountDescriptor<T>
@@ -599,10 +1030,26 @@ namespace Nest
 		internal CountQueryString _QueryString = new CountQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public CountDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public CountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public CountDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -642,9 +1089,94 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for CountPercolateGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
+	///</pre>
+	///</summary>
+	public partial class CountPercolateDescriptor
+	{
+		internal CountPercolateQueryString _QueryString = new CountPercolateQueryString(); 
+
+
+		///<summary>A comma-separated list of specific routing values</summary>
+		public CountPercolateDescriptor Routing(params string[] routing)
+		{
+			this._QueryString.Routing(routing);
+			return this;
+		}
+		
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public CountPercolateDescriptor Preference(string preference)
+		{
+			this._QueryString.Preference(preference);
+			return this;
+		}
+		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public CountPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public CountPercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CountPercolateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>The index to count percolate the document into. Defaults to index.</summary>
+		public CountPercolateDescriptor PercolateIndex(string percolate_index)
+		{
+			this._QueryString.PercolateIndex(percolate_index);
+			return this;
+		}
+		
+
+		///<summary>The type to count percolate document into. Defaults to type.</summary>
+		public CountPercolateDescriptor PercolateType(string percolate_type)
+		{
+			this._QueryString.PercolateType(percolate_type);
+			return this;
+		}
+		
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public CountPercolateDescriptor Version(int version)
+		{
+			this._QueryString.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public CountPercolateDescriptor VersionType(VersionTypeOptions version_type)
+		{
+			this._QueryString.VersionType(version_type);
+			return this;
+		}
+		
+		
+	}
+	
+	
 	///<summary>descriptor for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
 	///</pre>
 	///</summary>
 	public partial class DeleteDescriptor<T>
@@ -721,7 +1253,7 @@ namespace Nest
 	
 	///<summary>descriptor for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-delete-by-query.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public partial class DeleteByQueryDescriptor<T>
@@ -761,10 +1293,26 @@ namespace Nest
 		}
 		
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public DeleteByQueryDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public DeleteByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -814,7 +1362,7 @@ namespace Nest
 	
 	///<summary>descriptor for ExistsHead
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class ExistsDescriptor
@@ -867,7 +1415,7 @@ namespace Nest
 	
 	///<summary>descriptor for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-explain.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
 	public partial class ExplainDescriptor
@@ -1011,7 +1559,7 @@ namespace Nest
 	
 	///<summary>descriptor for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class GetDescriptor<T>
@@ -1101,13 +1649,29 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public GetDescriptor<T> Version(int version)
+		{
+			this._QueryString.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public GetDescriptor<T> VersionType(VersionTypeOptions version_type)
+		{
+			this._QueryString.VersionType(version_type);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class GetSourceDescriptor
@@ -1200,7 +1764,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndexPost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-index_.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
 	///</pre>
 	///</summary>
 	public partial class IndexDescriptor<T>
@@ -1228,14 +1792,6 @@ namespace Nest
 		public IndexDescriptor<T> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
-			return this;
-		}
-		
-
-		///<summary>Percolator queries to execute while indexing the document</summary>
-		public IndexDescriptor<T> Percolate(string percolate)
-		{
-			this._QueryString.Percolate(percolate);
 			return this;
 		}
 		
@@ -1307,9 +1863,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesAnalyzeGet
+	///<summary>descriptor for IndicesAnalyzeGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-analyze.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
 	///</pre>
 	///</summary>
 	public partial class AnalyzeDescriptor
@@ -1393,9 +1949,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesClearCachePost
+	///<summary>descriptor for IndicesClearCachePostForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-clearcache.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
 	///</pre>
 	///</summary>
 	public partial class ClearCacheDescriptor
@@ -1478,10 +2034,26 @@ namespace Nest
 		}
 		
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public ClearCacheDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public ClearCacheDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public ClearCacheDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -1507,7 +2079,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesClosePost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class CloseIndexDescriptor
@@ -1530,13 +2102,37 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public CloseIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public CloseIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for IndicesCreatePut
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
 	///</pre>
 	///</summary>
 	public partial class CreateIndexDescriptor
@@ -1565,7 +2161,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-index.html
 	///</pre>
 	///</summary>
 	public partial class DeleteIndexDescriptor
@@ -1594,7 +2190,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDeleteAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class IndicesDeleteAliasDescriptor
@@ -1623,7 +2219,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public partial class DeleteMappingDescriptor
@@ -1642,9 +2238,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesDeleteTemplate
+	///<summary>descriptor for IndicesDeleteTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class DeleteTemplateDescriptor
@@ -1673,7 +2269,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesDeleteWarmer
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class DeleteWarmerDescriptor
@@ -1688,26 +2284,66 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</summary>
+		public DeleteWarmerDescriptor Name(params string[] name)
+		{
+			this._QueryString.Name(name);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for IndicesExistsHead
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
 	///</pre>
 	///</summary>
 	public partial class IndexExistsDescriptor
 	{
 		internal IndexExistsQueryString _QueryString = new IndexExistsQueryString(); 
 
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public IndexExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndexExistsDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesExistsAliasHead
+	///<summary>descriptor for IndicesExistsAliasHeadForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class IndicesExistsAliasDescriptor
@@ -1715,10 +2351,55 @@ namespace Nest
 		internal IndicesExistsAliasQueryString _QueryString = new IndicesExistsAliasQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesExistsAliasDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public IndicesExistsAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public IndicesExistsAliasDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public IndicesExistsAliasDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndicesExistsAliasDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for IndicesExistsTemplateHeadForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
+	///</pre>
+	///</summary>
+	public partial class IndicesExistsTemplateDescriptor
+	{
+		internal IndicesExistsTemplateQueryString _QueryString = new IndicesExistsTemplateQueryString(); 
+
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndicesExistsTemplateDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
 			return this;
 		}
 		
@@ -1728,7 +2409,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesExistsTypeHead
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-types-exists.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
 	public partial class IndicesExistsTypeDescriptor
@@ -1736,10 +2417,34 @@ namespace Nest
 		internal IndicesExistsTypeQueryString _QueryString = new IndicesExistsTypeQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesExistsTypeDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public IndicesExistsTypeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public IndicesExistsTypeDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public IndicesExistsTypeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndicesExistsTypeDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
 			return this;
 		}
 		
@@ -1747,9 +2452,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesFlushPost
+	///<summary>descriptor for IndicesFlushPostForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-flush.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
 	///</pre>
 	///</summary>
 	public partial class FlushDescriptor
@@ -1773,18 +2478,26 @@ namespace Nest
 		}
 		
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public FlushDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public FlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
 			return this;
 		}
 		
 
-		///<summary>Refresh the index after performing the operation</summary>
-		public FlushDescriptor Refresh(bool refresh = true)
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public FlushDescriptor AllowNoIndices(bool allow_no_indices = true)
 		{
-			this._QueryString.Refresh(refresh);
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public FlushDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -1792,9 +2505,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesGetAlias
+	///<summary>descriptor for IndicesGetAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class GetAliasesDescriptor
@@ -1802,10 +2515,34 @@ namespace Nest
 		internal GetAliasesQueryString _QueryString = new GetAliasesQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public GetAliasesDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public GetAliasesDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public GetAliasesDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public GetAliasesDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetAliasesDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
 			return this;
 		}
 		
@@ -1813,9 +2550,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesGetAliases
+	///<summary>descriptor for IndicesGetAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class IndicesGetAliasesDescriptor
@@ -1830,13 +2567,21 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndicesGetAliasesDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesGetFieldMapping
+	///<summary>descriptor for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-field-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public partial class IndicesGetFieldMappingDescriptor
@@ -1851,65 +2596,217 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public IndicesGetFieldMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public IndicesGetFieldMappingDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public IndicesGetFieldMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public IndicesGetFieldMappingDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesGetMapping
+	///<summary>descriptor for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetMappingDescriptor
 	{
 		internal GetMappingQueryString _QueryString = new GetMappingQueryString(); 
 
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public GetMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public GetMappingDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public GetMappingDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetMappingDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesGetSettings
+	///<summary>descriptor for IndicesGetSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-get-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetIndexSettingsDescriptor
 	{
 		internal GetIndexSettingsQueryString _QueryString = new GetIndexSettingsQueryString(); 
 
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public GetIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public GetIndexSettingsDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public GetIndexSettingsDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetIndexSettingsDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesGetTemplate
+	///<summary>descriptor for IndicesGetTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class GetTemplateDescriptor
 	{
 		internal GetTemplateQueryString _QueryString = new GetTemplateQueryString(); 
 
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public GetTemplateDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetTemplateDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesGetWarmer
+	///<summary>descriptor for IndicesGetWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class GetWarmerDescriptor
 	{
 		internal GetWarmerQueryString _QueryString = new GetWarmerQueryString(); 
 
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public GetWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public GetWarmerDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public GetWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetWarmerDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
 		
 	}
 	
 	
 	///<summary>descriptor for IndicesOpenPost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class OpenIndexDescriptor
@@ -1932,13 +2829,37 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public OpenIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public OpenIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesOptimizePost
+	///<summary>descriptor for IndicesOptimizePostForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-optimize.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
 	///</pre>
 	///</summary>
 	public partial class OptimizeDescriptor
@@ -1954,10 +2875,26 @@ namespace Nest
 		}
 		
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public OptimizeDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public OptimizeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public OptimizeDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public OptimizeDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -1986,14 +2923,6 @@ namespace Nest
 		}
 		
 
-		///<summary>Specify whether the index should be refreshed after performing the operation (default: true)</summary>
-		public OptimizeDescriptor Refresh(bool refresh = true)
-		{
-			this._QueryString.Refresh(refresh);
-			return this;
-		}
-		
-
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public OptimizeDescriptor WaitForMerge(bool wait_for_merge = true)
 		{
@@ -2005,9 +2934,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndexPutAlias
+	///<summary>descriptor for IndicesPutAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class IndicesPutAliasDescriptor
@@ -2036,7 +2965,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-put-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public partial class PutMappingDescriptor<T>
@@ -2067,13 +2996,37 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public PutMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public PutMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesPutSettings
+	///<summary>descriptor for IndicesPutSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class UpdateSettingsDescriptor
@@ -2088,13 +3041,45 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public UpdateSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public UpdateSettingsDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public UpdateSettingsDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesPutTemplate
+	///<summary>descriptor for IndicesPutTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class PutTemplateDescriptor
@@ -2117,13 +3102,21 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public PutTemplateDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesPutWarmer
+	///<summary>descriptor for IndicesPutWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class PutWarmerDescriptor
@@ -2138,13 +3131,37 @@ namespace Nest
 			return this;
 		}
 		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
+		public PutWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
+		public PutWarmerDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
+		public PutWarmerDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
 		
 	}
 	
 	
-	///<summary>descriptor for IndicesRefreshPost
+	///<summary>descriptor for IndicesRefreshPostForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-refresh.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
 	///</pre>
 	///</summary>
 	public partial class RefreshDescriptor
@@ -2152,10 +3169,34 @@ namespace Nest
 		internal RefreshQueryString _QueryString = new RefreshQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public RefreshDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public RefreshDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public RefreshDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public RefreshDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Force a refresh even if not required</summary>
+		public RefreshDescriptor Force(bool force = true)
+		{
+			this._QueryString.Force(force);
 			return this;
 		}
 		
@@ -2171,9 +3212,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesSegmentsGet
+	///<summary>descriptor for IndicesSegmentsGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-segments.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
 	///</pre>
 	///</summary>
 	public partial class SegmentsDescriptor
@@ -2181,10 +3222,34 @@ namespace Nest
 		internal SegmentsQueryString _QueryString = new SegmentsQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SegmentsDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SegmentsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SegmentsDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public SegmentsDescriptor Human(bool human = true)
+		{
+			this._QueryString.Human(human);
 			return this;
 		}
 		
@@ -2200,9 +3265,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesSnapshotIndexPost
+	///<summary>descriptor for IndicesSnapshotIndexPostForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-gateway-snapshot.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html
 	///</pre>
 	///</summary>
 	public partial class SnapshotDescriptor
@@ -2210,10 +3275,26 @@ namespace Nest
 		internal SnapshotQueryString _QueryString = new SnapshotQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SnapshotDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SnapshotDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SnapshotDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SnapshotDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2221,9 +3302,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesStatsGet
+	///<summary>descriptor for IndicesStatsGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatsDescriptor
@@ -2231,31 +3312,7 @@ namespace Nest
 		internal IndicesStatsQueryString _QueryString = new IndicesStatsQueryString(); 
 
 
-		///<summary>Return all available information</summary>
-		public IndicesStatsDescriptor All(bool all = true)
-		{
-			this._QueryString.All(all);
-			return this;
-		}
-		
-
-		///<summary>Reset the default level of detail</summary>
-		public IndicesStatsDescriptor Clear(bool clear = true)
-		{
-			this._QueryString.Clear(clear);
-			return this;
-		}
-		
-
-		///<summary>Return information about completion suggester stats</summary>
-		public IndicesStatsDescriptor Completion(bool completion = true)
-		{
-			this._QueryString.Completion(completion);
-			return this;
-		}
-		
-
-		///<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields)
 		{
 			this._QueryString.CompletionFields(completion_fields);
@@ -2263,7 +3320,7 @@ namespace Nest
 		}
 		
 			
-		///<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
@@ -2274,23 +3331,7 @@ namespace Nest
 		}
 			
 
-		///<summary>Return information about indexed and deleted documents</summary>
-		public IndicesStatsDescriptor Docs(bool docs = true)
-		{
-			this._QueryString.Docs(docs);
-			return this;
-		}
-		
-
-		///<summary>Return information about field data</summary>
-		public IndicesStatsDescriptor Fielddata(bool fielddata = true)
-		{
-			this._QueryString.Fielddata(fielddata);
-			return this;
-		}
-		
-
-		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields)
 		{
 			this._QueryString.FielddataFields(fielddata_fields);
@@ -2298,7 +3339,7 @@ namespace Nest
 		}
 		
 			
-		///<summary>A comma-separated list of fields for `fielddata` metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
@@ -2309,7 +3350,7 @@ namespace Nest
 		}
 			
 
-		///<summary>A comma-separated list of fields for `fielddata` and `completion` metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields(params string[] fields)
 		{
 			this._QueryString.Fields(fields);
@@ -2317,7 +3358,7 @@ namespace Nest
 		}
 		
 			
-		///<summary>A comma-separated list of fields for `fielddata` and `completion` metric (supports wildcards)</summary>
+		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
 		{
 			if (!typedPathLookups.HasAny())
@@ -2328,31 +3369,7 @@ namespace Nest
 		}
 			
 
-		///<summary>Return information about filter cache</summary>
-		public IndicesStatsDescriptor FilterCache(bool filter_cache = true)
-		{
-			this._QueryString.FilterCache(filter_cache);
-			return this;
-		}
-		
-
-		///<summary>Return information about flush operations</summary>
-		public IndicesStatsDescriptor Flush(bool flush = true)
-		{
-			this._QueryString.Flush(flush);
-			return this;
-		}
-		
-
-		///<summary>Return information about get operations</summary>
-		public IndicesStatsDescriptor Get(bool get = true)
-		{
-			this._QueryString.Get(get);
-			return this;
-		}
-		
-
-		///<summary>A comma-separated list of search groups for `search` statistics</summary>
+		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public IndicesStatsDescriptor Groups(bool groups = true)
 		{
 			this._QueryString.Groups(groups);
@@ -2360,66 +3377,26 @@ namespace Nest
 		}
 		
 
-		///<summary>Return information about ID cache</summary>
-		public IndicesStatsDescriptor IdCache(bool id_cache = true)
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public IndicesStatsDescriptor Human(bool human = true)
 		{
-			this._QueryString.IdCache(id_cache);
+			this._QueryString.Human(human);
 			return this;
 		}
 		
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesStatsDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Return stats aggregated at cluster, index or shard level</summary>
+		public IndicesStatsDescriptor Level(LevelOptions level)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.Level(level);
 			return this;
 		}
 		
 
-		///<summary>Return information about indexing operations</summary>
-		public IndicesStatsDescriptor Indexing(bool indexing = true)
+		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
+		public IndicesStatsDescriptor Types(params string[] types)
 		{
-			this._QueryString.Indexing(indexing);
-			return this;
-		}
-		
-
-		///<summary>Return information about merge operations</summary>
-		public IndicesStatsDescriptor Merge(bool merge = true)
-		{
-			this._QueryString.Merge(merge);
-			return this;
-		}
-		
-
-		///<summary>Return information about refresh operations</summary>
-		public IndicesStatsDescriptor Refresh(bool refresh = true)
-		{
-			this._QueryString.Refresh(refresh);
-			return this;
-		}
-		
-
-		///<summary>Return information about search operations; use the `groups` parameter to include information for specific search groups</summary>
-		public IndicesStatsDescriptor Search(bool search = true)
-		{
-			this._QueryString.Search(search);
-			return this;
-		}
-		
-
-		///<summary>Return information about the size of the index</summary>
-		public IndicesStatsDescriptor Store(bool store = true)
-		{
-			this._QueryString.Store(store);
-			return this;
-		}
-		
-
-		///<summary>Return information about warmers</summary>
-		public IndicesStatsDescriptor Warmer(bool warmer = true)
-		{
-			this._QueryString.Warmer(warmer);
+			this._QueryString.Types(types);
 			return this;
 		}
 		
@@ -2427,9 +3404,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesStatusGet
+	///<summary>descriptor for IndicesStatusGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-status.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatusDescriptor
@@ -2437,10 +3414,34 @@ namespace Nest
 		internal IndicesStatusQueryString _QueryString = new IndicesStatusQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public IndicesStatusDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public IndicesStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public IndicesStatusDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public IndicesStatusDescriptor Human(bool human = true)
+		{
+			this._QueryString.Human(human);
 			return this;
 		}
 		
@@ -2472,9 +3473,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesUpdateAliasesPost
+	///<summary>descriptor for IndicesUpdateAliasesPostForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class AliasDescriptor
@@ -2501,9 +3502,9 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesValidateQueryGet
+	///<summary>descriptor for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-validate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
 	///</pre>
 	///</summary>
 	public partial class ValidateQueryDescriptor<T>
@@ -2519,10 +3520,26 @@ namespace Nest
 		}
 		
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public ValidateQueryDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public ValidateQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -2569,7 +3586,7 @@ namespace Nest
 	
 	///<summary>descriptor for MgetGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-multi-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
 	///</pre>
 	///</summary>
 	public partial class MultiGetDescriptor
@@ -2649,7 +3666,7 @@ namespace Nest
 	
 	///<summary>descriptor for MltGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-more-like-this.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
 	///</pre>
 	///</summary>
 	public partial class MoreLikeThisDescriptor<T>
@@ -2682,9 +3699,9 @@ namespace Nest
 		
 
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MaxWordLen(int max_word_len)
+		public MoreLikeThisDescriptor<T> MaxWordLength(int max_word_length)
 		{
-			this._QueryString.MaxWordLen(max_word_len);
+			this._QueryString.MaxWordLength(max_word_length);
 			return this;
 		}
 		
@@ -2706,9 +3723,9 @@ namespace Nest
 		
 
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MinWordLen(int min_word_len)
+		public MoreLikeThisDescriptor<T> MinWordLength(int min_word_length)
 		{
-			this._QueryString.MinWordLen(min_word_len);
+			this._QueryString.MinWordLength(min_word_length);
 			return this;
 		}
 		
@@ -2823,9 +3840,46 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for MpercolateGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
+	///</pre>
+	///</summary>
+	public partial class MpercolateDescriptor
+	{
+		internal MpercolateQueryString _QueryString = new MpercolateQueryString(); 
+
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public MpercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public MpercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public MpercolateDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+		
+	}
+	
+	
 	///<summary>descriptor for MsearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-multi-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
 	///</pre>
 	///</summary>
 	public partial class MultiSearchDescriptor
@@ -2844,9 +3898,318 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for MtermvectorsGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
+	///</pre>
+	///</summary>
+	public partial class MtermvectorsDescriptor
+	{
+		internal MtermvectorsQueryString _QueryString = new MtermvectorsQueryString(); 
+
+
+		///<summary>A comma-separated list of documents ids. You must define ids as parameter or set &quot;ids&quot; or &quot;docs&quot; in the request body</summary>
+		public MtermvectorsDescriptor Ids(params string[] ids)
+		{
+			this._QueryString.Ids(ids);
+			return this;
+		}
+		
+
+		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor TermStatistics(bool term_statistics = true)
+		{
+			this._QueryString.TermStatistics(term_statistics);
+			return this;
+		}
+		
+
+		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor FieldStatistics(bool field_statistics = true)
+		{
+			this._QueryString.FieldStatistics(field_statistics);
+			return this;
+		}
+		
+
+		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Fields(params string[] fields)
+		{
+			this._QueryString.Fields(fields);
+			return this;
+		}
+		
+			
+		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._Fields(typedPathLookups);
+			return this;
+		}
+			
+
+		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Offsets(bool offsets = true)
+		{
+			this._QueryString.Offsets(offsets);
+			return this;
+		}
+		
+
+		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Positions(bool positions = true)
+		{
+			this._QueryString.Positions(positions);
+			return this;
+		}
+		
+
+		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Payloads(bool payloads = true)
+		{
+			this._QueryString.Payloads(payloads);
+			return this;
+		}
+		
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Preference(string preference)
+		{
+			this._QueryString.Preference(preference);
+			return this;
+		}
+		
+
+		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Routing(string routing)
+		{
+			this._QueryString.Routing(routing);
+			return this;
+		}
+		
+
+		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+		public MtermvectorsDescriptor Parent(string parent)
+		{
+			this._QueryString.Parent(parent);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for NodesHotThreadsGetForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
+	///</pre>
+	///</summary>
+	public partial class NodesHotThreadsDescriptor
+	{
+		internal NodesHotThreadsQueryString _QueryString = new NodesHotThreadsQueryString(); 
+
+
+		///<summary>The interval for the second sampling of threads</summary>
+		public NodesHotThreadsDescriptor Interval(string interval)
+		{
+			this._QueryString.Interval(interval);
+			return this;
+		}
+		
+
+		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
+		public NodesHotThreadsDescriptor Snapshots(int snapshots)
+		{
+			this._QueryString.Snapshots(snapshots);
+			return this;
+		}
+		
+
+		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
+		public NodesHotThreadsDescriptor Threads(int threads)
+		{
+			this._QueryString.Threads(threads);
+			return this;
+		}
+		
+
+		///<summary>The type to sample (default: cpu)</summary>
+		public NodesHotThreadsDescriptor TypeQueryString(TypeOptions type)
+		{
+			this._QueryString.Type(type);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for NodesInfoGetForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
+	///</pre>
+	///</summary>
+	public partial class NodesInfoDescriptor
+	{
+		internal NodesInfoQueryString _QueryString = new NodesInfoQueryString(); 
+
+
+		///<summary>Return settings in flat format (default: false)</summary>
+		public NodesInfoDescriptor FlatSettings(bool flat_settings = true)
+		{
+			this._QueryString.FlatSettings(flat_settings);
+			return this;
+		}
+		
+
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public NodesInfoDescriptor Human(bool human = true)
+		{
+			this._QueryString.Human(human);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for NodesShutdownPostForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
+	///</pre>
+	///</summary>
+	public partial class NodesShutdownDescriptor
+	{
+		internal NodesShutdownQueryString _QueryString = new NodesShutdownQueryString(); 
+
+
+		///<summary>Set the delay for the operation (default: 1s)</summary>
+		public NodesShutdownDescriptor Delay(string delay)
+		{
+			this._QueryString.Delay(delay);
+			return this;
+		}
+		
+
+		///<summary>Exit the JVM as well (default: true)</summary>
+		public NodesShutdownDescriptor Exit(bool exit = true)
+		{
+			this._QueryString.Exit(exit);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for NodesStatsGetForAll
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
+	///</pre>
+	///</summary>
+	public partial class NodesStatsDescriptor
+	{
+		internal NodesStatsQueryString _QueryString = new NodesStatsQueryString(); 
+
+
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		public NodesStatsDescriptor CompletionFields(params string[] completion_fields)
+		{
+			this._QueryString.CompletionFields(completion_fields);
+			return this;
+		}
+		
+			
+		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._CompletionFields(typedPathLookups);
+			return this;
+		}
+			
+
+		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields)
+		{
+			this._QueryString.FielddataFields(fielddata_fields);
+			return this;
+		}
+		
+			
+		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
+		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._FielddataFields(typedPathLookups);
+			return this;
+		}
+			
+
+		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
+		public NodesStatsDescriptor Fields(params string[] fields)
+		{
+			this._QueryString.Fields(fields);
+			return this;
+		}
+		
+			
+		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
+		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._Fields(typedPathLookups);
+			return this;
+		}
+			
+
+		///<summary>A comma-separated list of search groups for `search` index metric</summary>
+		public NodesStatsDescriptor Groups(bool groups = true)
+		{
+			this._QueryString.Groups(groups);
+			return this;
+		}
+		
+
+		///<summary>Whether to return time and byte values in human-readable format.</summary>
+		public NodesStatsDescriptor Human(bool human = true)
+		{
+			this._QueryString.Human(human);
+			return this;
+		}
+		
+
+		///<summary>Return indices stats aggregated at node, index or shard level</summary>
+		public NodesStatsDescriptor Level(LevelOptions level)
+		{
+			this._QueryString.Level(level);
+			return this;
+		}
+		
+
+		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
+		public NodesStatsDescriptor Types(params string[] types)
+		{
+			this._QueryString.Types(types);
+			return this;
+		}
+		
+		
+	}
+	
+	
 	///<summary>descriptor for PercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
 	public partial class PercolateDescriptor<T,K>
@@ -2854,10 +4217,74 @@ namespace Nest
 		internal PercolateQueryString _QueryString = new PercolateQueryString(); 
 
 
-		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public PercolateDescriptor<T,K> PreferLocal(bool prefer_local = true)
+		///<summary>A comma-separated list of specific routing values</summary>
+		public PercolateDescriptor<T,K> Routing(params string[] routing)
 		{
-			this._QueryString.PreferLocal(prefer_local);
+			this._QueryString.Routing(routing);
+			return this;
+		}
+		
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public PercolateDescriptor<T,K> Preference(string preference)
+		{
+			this._QueryString.Preference(preference);
+			return this;
+		}
+		
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public PercolateDescriptor<T,K> IgnoreUnavailable(bool ignore_unavailable = true)
+		{
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public PercolateDescriptor<T,K> AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public PercolateDescriptor<T,K> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
+			return this;
+		}
+		
+
+		///<summary>The index to percolate the document into. Defaults to index.</summary>
+		public PercolateDescriptor<T,K> PercolateIndex(string percolate_index)
+		{
+			this._QueryString.PercolateIndex(percolate_index);
+			return this;
+		}
+		
+
+		///<summary>The type to percolate document into. Defaults to type.</summary>
+		public PercolateDescriptor<T,K> PercolateType(string percolate_type)
+		{
+			this._QueryString.PercolateType(percolate_type);
+			return this;
+		}
+		
+
+		///<summary>Explicit version number for concurrency control</summary>
+		public PercolateDescriptor<T,K> Version(int version)
+		{
+			this._QueryString.Version(version);
+			return this;
+		}
+		
+
+		///<summary>Specific version type</summary>
+		public PercolateDescriptor<T,K> VersionType(VersionTypeOptions version_type)
+		{
+			this._QueryString.VersionType(version_type);
 			return this;
 		}
 		
@@ -2880,7 +4307,7 @@ namespace Nest
 	
 	///<summary>descriptor for ScrollGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ScrollDescriptor<T>
@@ -2909,7 +4336,7 @@ namespace Nest
 	
 	///<summary>descriptor for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
 	public partial class SearchDescriptor<T>
@@ -2949,10 +4376,26 @@ namespace Nest
 		}
 		
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SearchDescriptor<T> IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SearchDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SearchDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3097,9 +4540,196 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for SnapshotCreatePut
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotCreateDescriptor
+	{
+		internal SnapshotCreateQueryString _QueryString = new SnapshotCreateQueryString(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotCreateDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Should this request wait until the operation has completed before returning</summary>
+		public SnapshotCreateDescriptor WaitForCompletion(bool wait_for_completion = true)
+		{
+			this._QueryString.WaitForCompletion(wait_for_completion);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for SnapshotCreateRepositoryPut
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotCreateRepositoryDescriptor
+	{
+		internal SnapshotCreateRepositoryQueryString _QueryString = new SnapshotCreateRepositoryQueryString(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotCreateRepositoryDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout</summary>
+		public SnapshotCreateRepositoryDescriptor Timeout(string timeout)
+		{
+			this._QueryString.Timeout(timeout);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for SnapshotDelete
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotDeleteDescriptor
+	{
+		internal SnapshotDeleteQueryString _QueryString = new SnapshotDeleteQueryString(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotDeleteDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for SnapshotDeleteRepository
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotDeleteRepositoryDescriptor
+	{
+		internal SnapshotDeleteRepositoryQueryString _QueryString = new SnapshotDeleteRepositoryQueryString(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotDeleteRepositoryDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Explicit operation timeout</summary>
+		public SnapshotDeleteRepositoryDescriptor Timeout(string timeout)
+		{
+			this._QueryString.Timeout(timeout);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for SnapshotGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotGetDescriptor
+	{
+		internal SnapshotGetQueryString _QueryString = new SnapshotGetQueryString(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotGetDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for SnapshotGetRepository
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotGetRepositoryDescriptor
+	{
+		internal SnapshotGetRepositoryQueryString _QueryString = new SnapshotGetRepositoryQueryString(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotGetRepositoryDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public SnapshotGetRepositoryDescriptor Local(bool local = true)
+		{
+			this._QueryString.Local(local);
+			return this;
+		}
+		
+		
+	}
+	
+	
+	///<summary>descriptor for SnapshotRestorePost
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///</pre>
+	///</summary>
+	public partial class SnapshotRestoreDescriptor
+	{
+		internal SnapshotRestoreQueryString _QueryString = new SnapshotRestoreQueryString(); 
+
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public SnapshotRestoreDescriptor MasterTimeout(string master_timeout)
+		{
+			this._QueryString.MasterTimeout(master_timeout);
+			return this;
+		}
+		
+
+		///<summary>Should this request wait until the operation has completed before returning</summary>
+		public SnapshotRestoreDescriptor WaitForCompletion(bool wait_for_completion = true)
+		{
+			this._QueryString.WaitForCompletion(wait_for_completion);
+			return this;
+		}
+		
+		
+	}
+	
+	
 	///<summary>descriptor for SuggestPost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/search-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
 	public partial class SuggestDescriptor
@@ -3107,10 +4737,26 @@ namespace Nest
 		internal SuggestQueryString _QueryString = new SuggestQueryString(); 
 
 
-		///<summary>When performed on multiple indices, allows to ignore `missing` ones</summary>
-		public SuggestDescriptor IgnoreIndices(IgnoreIndicesOptions ignore_indices)
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SuggestDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
 		{
-			this._QueryString.IgnoreIndices(ignore_indices);
+			this._QueryString.IgnoreUnavailable(ignore_unavailable);
+			return this;
+		}
+		
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SuggestDescriptor AllowNoIndices(bool allow_no_indices = true)
+		{
+			this._QueryString.AllowNoIndices(allow_no_indices);
+			return this;
+		}
+		
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SuggestDescriptor ExpandWildcards(ExpandWildcardsOptions expand_wildcards)
+		{
+			this._QueryString.ExpandWildcards(expand_wildcards);
 			return this;
 		}
 		
@@ -3142,9 +4788,105 @@ namespace Nest
 	}
 	
 	
+	///<summary>descriptor for TermvectorGet
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
+	///</pre>
+	///</summary>
+	public partial class TermvectorDescriptor
+	{
+		internal TermvectorQueryString _QueryString = new TermvectorQueryString(); 
+
+
+		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
+		public TermvectorDescriptor TermStatistics(bool term_statistics = true)
+		{
+			this._QueryString.TermStatistics(term_statistics);
+			return this;
+		}
+		
+
+		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
+		public TermvectorDescriptor FieldStatistics(bool field_statistics = true)
+		{
+			this._QueryString.FieldStatistics(field_statistics);
+			return this;
+		}
+		
+
+		///<summary>A comma-separated list of fields to return.</summary>
+		public TermvectorDescriptor Fields(params string[] fields)
+		{
+			this._QueryString.Fields(fields);
+			return this;
+		}
+		
+			
+		///<summary>A comma-separated list of fields to return.</summary>
+		public TermvectorDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._Fields(typedPathLookups);
+			return this;
+		}
+			
+
+		///<summary>Specifies if term offsets should be returned.</summary>
+		public TermvectorDescriptor Offsets(bool offsets = true)
+		{
+			this._QueryString.Offsets(offsets);
+			return this;
+		}
+		
+
+		///<summary>Specifies if term positions should be returned.</summary>
+		public TermvectorDescriptor Positions(bool positions = true)
+		{
+			this._QueryString.Positions(positions);
+			return this;
+		}
+		
+
+		///<summary>Specifies if term payloads should be returned.</summary>
+		public TermvectorDescriptor Payloads(bool payloads = true)
+		{
+			this._QueryString.Payloads(payloads);
+			return this;
+		}
+		
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
+		public TermvectorDescriptor Preference(string preference)
+		{
+			this._QueryString.Preference(preference);
+			return this;
+		}
+		
+
+		///<summary>Specific routing value.</summary>
+		public TermvectorDescriptor Routing(string routing)
+		{
+			this._QueryString.Routing(routing);
+			return this;
+		}
+		
+
+		///<summary>Parent id of documents.</summary>
+		public TermvectorDescriptor Parent(string parent)
+		{
+			this._QueryString.Parent(parent);
+			return this;
+		}
+		
+		
+	}
+	
+	
 	///<summary>descriptor for UpdatePost
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-update.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
 	public partial class UpdateDescriptor<T,K>
@@ -3191,14 +4933,6 @@ namespace Nest
 		public UpdateDescriptor<T,K> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
-			return this;
-		}
-		
-
-		///<summary>Perform percolation during the operation; use specific registered query name, attribute, or wildcard</summary>
-		public UpdateDescriptor<T,K> Percolate(string percolate)
-		{
-			this._QueryString.Percolate(percolate);
 			return this;
 		}
 		

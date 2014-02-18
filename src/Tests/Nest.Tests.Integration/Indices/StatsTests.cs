@@ -44,8 +44,6 @@ namespace Nest.Tests.Integration.Indices
 		public void ComplexStats()
 		{
 			var r = this._client.IndicesStats(i => i
-				.All()
-				.Refresh()
 				.Types("elasticsearchprojects")
 			);
 			Assert.True(r.OK);

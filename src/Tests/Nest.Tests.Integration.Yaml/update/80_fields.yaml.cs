@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update14
 {
-	public partial class UpdateTests
+	public partial class Update14YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class FieldsTests : YamlTestsBase
+		public class Fields1Tests : YamlTestsBase
 		{
 			[Test]
-			public void FieldsTest()
+			public void Fields1Test()
 			{	
 
 				//do update 
@@ -39,7 +39,9 @@ namespace Nest.Tests.Integration.Yaml.Update
 				this.IsMatch(_response.get._source.foo, @"bar");
 
 				//match _response.get.fields.foo: 
-				this.IsMatch(_response.get.fields.foo, @"bar");
+				this.IsMatch(_response.get.fields.foo, new [] {
+					@"bar"
+				});
 
 				//is_false _response.get.fields.bar; 
 				this.IsFalse(_response.get.fields.bar);

@@ -9,21 +9,15 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.GetSource
+namespace Nest.Tests.Integration.Yaml.GetSource3
 {
-	public partial class GetSourceTests
+	public partial class GetSource3YamlTests
 	{	
-
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentTests : YamlTestsBase
+	
+		public class GetSource330ParentYamlBase : YamlTestsBase
 		{
-			[Test]
-			public void ParentTest()
+			public GetSource330ParentYamlBase() : base()
 			{	
-
-				//skip 0 - 0.90.0; 
-				this.Skip("0 - 0.90.0", "Get source not supported in pre 0.90.1 versions.");
 
 				//do indices.create 
 				_body = new {
@@ -35,7 +29,7 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
@@ -50,6 +44,17 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 					.Add("parent", 5)
 				));
 
+			}
+		}
+
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class Parent2Tests : GetSource330ParentYamlBase
+		{
+			[Test]
+			public void Parent2Test()
+			{	
+
 				//do get_source 
 				this.Do(()=> this._client.GetSource("test_1", "test", "1", nv=>nv
 					.Add("parent", 5)
@@ -60,8 +65,18 @@ namespace Nest.Tests.Integration.Yaml.GetSource
 					foo= "bar"
 				});
 
+			}
+		}
+
+		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
+		public class ParentOmitted3Tests : GetSource330ParentYamlBase
+		{
+			[Test]
+			public void ParentOmitted3Test()
+			{	
+
 				//do get_source 
-				this.Do(()=> this._client.GetSource("test_1", "test", "1"), shouldCatch: @"missing");
+				this.Do(()=> this._client.GetSource("test_1", "test", "1"), shouldCatch: @"request");
 
 			}
 		}

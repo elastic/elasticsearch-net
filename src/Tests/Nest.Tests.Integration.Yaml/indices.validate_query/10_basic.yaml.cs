@@ -9,21 +9,21 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
+namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 {
-	public partial class IndicesValidateQueryTests
+	public partial class IndicesValidateQuery1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ValidateQueryApiTests : YamlTestsBase
+		public class ValidateQueryApi1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ValidateQueryApiTest()
+			public void ValidateQueryApi1Test()
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePost("testing", null));
+				this.Do(()=> this._client.IndicesCreatePut("testing", null));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 				));
 
 				//do indices.validate_query 
-				this.Do(()=> this._client.IndicesValidateQueryGet(nv=>nv
+				this.Do(()=> this._client.IndicesValidateQueryGetForAll(nv=>nv
 					.Add("q", @"query string")
 				));
 
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery
 						invalid_query= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesValidateQueryPost(_body));
+				this.Do(()=> this._client.IndicesValidateQueryPostForAll(_body));
 
 				//is_false _response.valid; 
 				this.IsFalse(_response.valid);

@@ -37,6 +37,20 @@ namespace Nest
 	
 	
 	[JsonConverter(typeof(StringEnumConverter))]
+	public enum BytesOptions 
+	{
+		  [EnumMember(Value = "b")]
+		B,
+		[EnumMember(Value = "k")]
+		K,
+		[EnumMember(Value = "m")]
+		M,
+		[EnumMember(Value = "g")]
+		G
+	}
+	
+	
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum LevelOptions 
 	{
 		  [EnumMember(Value = "cluster")]
@@ -61,24 +75,12 @@ namespace Nest
 	
 	
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum TypeOptions 
+	public enum ExpandWildcardsOptions 
 	{
-		  [EnumMember(Value = "cpu")]
-		Cpu,
-		[EnumMember(Value = "wait")]
-		Wait,
-		[EnumMember(Value = "block")]
-		Block
-	}
-	
-	
-	[JsonConverter(typeof(StringEnumConverter))]
-	public enum IgnoreIndicesOptions 
-	{
-		  [EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "missing")]
-		Missing
+		  [EnumMember(Value = "open")]
+		Open,
+		[EnumMember(Value = "closed")]
+		Closed
 	}
 	
 	
@@ -141,6 +143,18 @@ namespace Nest
 	
 	
 	[JsonConverter(typeof(StringEnumConverter))]
+	public enum TypeOptions 
+	{
+		  [EnumMember(Value = "cpu")]
+		Cpu,
+		[EnumMember(Value = "wait")]
+		Wait,
+		[EnumMember(Value = "block")]
+		Block
+	}
+	
+	
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum SuggestModeOptions 
 	{
 		  [EnumMember(Value = "missing")]
@@ -149,6 +163,60 @@ namespace Nest
 		Popular,
 		[EnumMember(Value = "always")]
 		Always
+	}
+	
+	
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum MetricOptions 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "blocks")]
+		Blocks,
+		[EnumMember(Value = "metadata")]
+		Metadata,
+		[EnumMember(Value = "nodes")]
+		Nodes,
+		[EnumMember(Value = "routing_table")]
+		RoutingTable
+	}
+	
+	
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum IndexMetricOptions 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "completion")]
+		Completion,
+		[EnumMember(Value = "docs")]
+		Docs,
+		[EnumMember(Value = "fielddata")]
+		Fielddata,
+		[EnumMember(Value = "filter_cache")]
+		FilterCache,
+		[EnumMember(Value = "flush")]
+		Flush,
+		[EnumMember(Value = "get")]
+		Get,
+		[EnumMember(Value = "id_cache")]
+		IdCache,
+		[EnumMember(Value = "indexing")]
+		Indexing,
+		[EnumMember(Value = "merge")]
+		Merge,
+		[EnumMember(Value = "percolate")]
+		Percolate,
+		[EnumMember(Value = "refresh")]
+		Refresh,
+		[EnumMember(Value = "search")]
+		Search,
+		[EnumMember(Value = "segments")]
+		Segments,
+		[EnumMember(Value = "store")]
+		Store,
+		[EnumMember(Value = "warmer")]
+		Warmer
 	}
 	
 }

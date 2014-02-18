@@ -9,9 +9,9 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Exists
+namespace Nest.Tests.Integration.Yaml.Exists4
 {
-	public partial class ExistsTests
+	public partial class Exists4YamlTests
 	{	
 
 
@@ -21,9 +21,6 @@ namespace Nest.Tests.Integration.Yaml.Exists
 			[Test]
 			public void ParentWithRoutingTest()
 			{	
-
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "Parent not supported in exists https://github.com/elasticsearch/elasticsearch/issues/3276");
 
 				//do indices.create 
 				_body = new {
@@ -38,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Exists
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

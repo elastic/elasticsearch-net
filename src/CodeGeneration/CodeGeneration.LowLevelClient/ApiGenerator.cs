@@ -16,9 +16,9 @@ namespace CodeGeneration.LowLevelClient
 {
 	public static class ApiGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/0.90/rest-api-spec/api";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/0.90/rest-api-spec/api/";
-		private readonly static string _nestFolder = @"..\..\..\..\src\Nest\";
+		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.0.0/rest-api-spec/api";
+		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.0.0/rest-api-spec/api/";
+		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _cacheFolder = @"..\..\Cache\";
 		private static readonly RazorMachine _razorMachine;
@@ -115,22 +115,38 @@ namespace CodeGeneration.LowLevelClient
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
 		public static void PatchMethod(CsharpMethod method)
 		{
-			if (method.FullName.StartsWith("IndicesStats") && method.Path.Contains("{index}"))
-				method.FullName = method.FullName.Replace("IndicesStats", "IndexStats");
-			//IndicesPutAliasPutAsync
-			if (method.FullName.StartsWith("IndicesPutAlias") && method.Path.Contains("{index}"))
-				method.FullName = method.FullName.Replace("IndicesPutAlias", "IndexPutAlias");
+			Func<string, bool> ms = (s) => method.FullName.StartsWith(s);
+			Func<string, bool> mc = (s) => method.FullName.Contains(s);
+			Func<string, bool> pc = (s) => method.Path.Contains(s);
 
-			if (method.FullName.StartsWith("IndicesStats") || method.FullName.StartsWith("IndexStats"))
+			//if (ms("IndicesStats") && pc("{index}"))
+				//method.FullName = method.FullName.Replace("IndicesStats", "IndexStats");
+			//IndicesPutAliasPutAsync
+			//if (ms("IndicesPutAlias") && pc("{index}"))
+				//method.FullName = method.FullName.Replace("IndicesPutAlias", "IndexPutAlias");
+
+			if (ms("IndicesStats") || ms("IndexStats"))
 			{
-				if (method.Path.Contains("/indexing/"))
+				if (pc("/indexing/"))
 					method.FullName = method.FullName.Replace("Stats", "IndexingStats");
-				if (method.Path.Contains("/search/"))
+				if (pc("/search/"))
 					method.FullName = method.FullName.Replace("Stats", "SearchStats");
-				if (method.Path.Contains("/fielddata/"))
+				if (pc("/fielddata/"))
 					method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
 			}
 
+			if (ms("Indices") && !pc("{index}"))
+				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+			
+			if (ms("Nodes") && !pc("{node_id}"))
+				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+			
+			//if (ms("IndicesGetSettings") && !pc("{index}") && pc("{"))
+			//	method.FullName = method.FullName.Replace("IndicesGetSettings", "IndicesSettings");
+			
+			//if (ms("IndicesGetMapping") && !pc("{index}") && pc("{"))
+			//	method.FullName = method.FullName.Replace("IndicesGetMapping", "IndicesGetGlobalSettings");
+			
 			//remove duplicate occurance of the HTTP method name
 			var m = method.HttpMethod.ToPascalCase();
 			method.FullName =
@@ -149,7 +165,7 @@ namespace CodeGeneration.LowLevelClient
 
 			try
 			{
-				var typeName = "RawClientGenerator.Overrides.Descriptors." + method.DescriptorType + "Overrides";
+				var typeName = "CodeGeneration.LowLevelClient.Overrides.Descriptors." + method.DescriptorType + "Overrides";
 				var type = _assembly.GetType(typeName);
 				if (type == null)
 					return;

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
+namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate1
 {
-	public partial class IndicesPutTemplateTests
+	public partial class IndicesPutTemplate1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class PutTemplateTests : YamlTestsBase
+		public class PutTemplate1Tests : YamlTestsBase
 		{
 			[Test]
-			public void PutTemplateTest()
+			public void PutTemplate1Test()
 			{	
 
 				//do indices.put_template 
@@ -30,21 +30,18 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplatePost("test", _body));
-
-				//is_true _response.ok; 
-				this.IsTrue(_response.ok);
+				this.Do(()=> this._client.IndicesPutTemplateForAll("test", _body));
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplate("test"));
+				this.Do(()=> this._client.IndicesGetTemplateForAll("test"));
 
 				//match _response.test.template: 
 				this.IsMatch(_response.test.template, @"test-*");
 
 				//match _response.test.settings: 
 				this.IsMatch(_response.test.settings, new Dictionary<string, object> {
-					 { "index.number_of_shards",  "1" },
-					 { "index.number_of_replicas",  "0" }
+					{ @"index.number_of_shards", @"1" },
+					{ @"index.number_of_replicas", @"0" }
 				});
 
 			}

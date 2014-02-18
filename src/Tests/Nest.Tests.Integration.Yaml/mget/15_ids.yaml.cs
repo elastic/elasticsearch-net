@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Mget
+namespace Nest.Tests.Integration.Yaml.Mget5
 {
-	public partial class MgetTests
+	public partial class Mget5YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class IdsTests : YamlTestsBase
+		public class Ids1Tests : YamlTestsBase
 		{
 			[Test]
-			public void IdsTest()
+			public void Ids1Test()
 			{	
 
 				//do index 
@@ -48,8 +48,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost("test_1", "test", _body));
 
-				//is_true _response.docs[0].exists; 
-				this.IsTrue(_response.docs[0].exists);
+				//is_true _response.docs[0].found; 
+				this.IsTrue(_response.docs[0].found);
 
 				//match _response.docs[0]._index: 
 				this.IsMatch(_response.docs[0]._index, @"test_1");
@@ -68,8 +68,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					foo= "bar"
 				});
 
-				//is_false _response.docs[1].exists; 
-				this.IsFalse(_response.docs[1].exists);
+				//is_false _response.docs[1].found; 
+				this.IsFalse(_response.docs[1].found);
 
 				//match _response.docs[1]._index: 
 				this.IsMatch(_response.docs[1]._index, @"test_1");
@@ -89,8 +89,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 				};
 				this.Do(()=> this._client.MgetPost("test_1", _body));
 
-				//is_true _response.docs[0].exists; 
-				this.IsTrue(_response.docs[0].exists);
+				//is_true _response.docs[0].found; 
+				this.IsTrue(_response.docs[0].found);
 
 				//match _response.docs[0]._index: 
 				this.IsMatch(_response.docs[0]._index, @"test_1");
@@ -109,8 +109,8 @@ namespace Nest.Tests.Integration.Yaml.Mget
 					foo= "bar"
 				});
 
-				//is_true _response.docs[1].exists; 
-				this.IsTrue(_response.docs[1].exists);
+				//is_true _response.docs[1].found; 
+				this.IsTrue(_response.docs[1].found);
 
 				//match _response.docs[1]._index: 
 				this.IsMatch(_response.docs[1]._index, @"test_1");

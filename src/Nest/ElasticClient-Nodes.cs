@@ -8,21 +8,21 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public INodeInfoResponse ClusterNodeInfo(Func<ClusterNodeInfoDescriptor, ClusterNodeInfoDescriptor> selector=null)
+		public INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector=null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<ClusterNodeInfoDescriptor, ClusterNodeInfoQueryString, NodeInfoResponse>(
+			return this.Dispatch<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.ClusterNodeInfoDispatch(p)
+				(p, d)=> this.RawDispatch.NodesInfoDispatch(p)
 			);
 		}
 
-		public Task<INodeInfoResponse> ClusterNodeInfoAsync(Func<ClusterNodeInfoDescriptor, ClusterNodeInfoDescriptor> selector = null)
+		public Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<ClusterNodeInfoDescriptor, ClusterNodeInfoQueryString, NodeInfoResponse, INodeInfoResponse>(
+			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse, INodeInfoResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.ClusterNodeInfoDispatchAsync(p)
+				(p, d)=> this.RawDispatch.NodesInfoDispatchAsync(p)
 			);
 		}
 
@@ -31,12 +31,12 @@ namespace Nest
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
 		/// </summary>
 		/// <param name="selector">limit the results on stats type or indices/nodes, defaults to all types and all indices/nodes</param>
-		public INodeStatsResponse ClusterNodeStats(Func<ClusterNodeStatsDescriptor, ClusterNodeStatsDescriptor> selector = null)
+		public INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
-			selector = selector ?? (s => s.All());
-			return this.Dispatch<ClusterNodeStatsDescriptor, ClusterNodeStatsQueryString, NodeStatsResponse>(
+			selector = selector ?? (s => s);
+			return this.Dispatch<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.ClusterNodeStatsDispatch(p)
+				(p, d) => this.RawDispatch.NodesStatsDispatch(p)
 			);
 		}
 		
@@ -45,12 +45,12 @@ namespace Nest
 		///<pre>http://elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/</pre>	
 		/// </summary>
 		/// <param name="selector">limit the results on stats type or indices/nodes, defaults to all types and all indices/nodes</param>
-		public Task<INodeStatsResponse> ClusterNodeStatsAsync(Func<ClusterNodeStatsDescriptor, ClusterNodeStatsDescriptor> selector = null)
+		public Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
-			selector = selector ?? (s => s.All());
-			return this.DispatchAsync<ClusterNodeStatsDescriptor, ClusterNodeStatsQueryString, NodeStatsResponse, INodeStatsResponse>(
+			selector = selector ?? (s => s);
+			return this.DispatchAsync<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse, INodeStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.ClusterNodeStatsDispatchAsync(p)
+				(p, d) => this.RawDispatch.NodesStatsDispatchAsync(p)
 			);
 		}
 	}

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Msearch
+namespace Nest.Tests.Integration.Yaml.Msearch1
 {
-	public partial class MsearchTests
+	public partial class Msearch1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicMultiSearchTests : YamlTestsBase
+		public class BasicMultiSearch1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicMultiSearchTest()
+			public void BasicMultiSearch1Test()
 			{	
 
 				//do index 
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.Msearch
 				this.Do(()=> this._client.IndexPost("test_1", "test", "3", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshGet());
+				this.Do(()=> this._client.IndicesRefreshPostForAll());
 
 				//do msearch 
 				_body = new dynamic[] {

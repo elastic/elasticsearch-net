@@ -1,5 +1,7 @@
-﻿using System.Net;
+﻿using System.Collections;
+using System.Net;
 using System.Text.RegularExpressions;
+using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -21,7 +23,6 @@ namespace Nest.Tests.Integration.Yaml
 		protected object _body;
 		protected ConnectionStatus _status;
 		protected dynamic _response;
-		protected Dictionary<string, dynamic> _responseDictionary;
 
 		public YamlTestsBase()
 		{
@@ -29,19 +30,29 @@ namespace Nest.Tests.Integration.Yaml
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
-			var settings = new ConnectionSettings(uri, "nest-default-index");
+			var settings = new ConnectionSettings(uri, "nest-default-index")
+				.UsePrettyResponses();
 			_client = new RawElasticClient(settings);
-
-			_client.IndicesDelete(d => d.MasterTimeout("1m").Timeout("1m"));
-			_client.IndicesDeleteTemplate("*");
-			var info = _client.InfoGet().Deserialize<dynamic>();
+			
+			_client.IndicesDelete("_all", d => d.MasterTimeout("1m").Timeout("1m"));
+			_client.IndicesDeleteTemplateForAll("*");
+			dynamic info = _client.InfoGet().Response;
 			string version = info.version.number;
 			this._versionNumber = new Version(version);
 		}
 
 		protected void Do(Func<ConnectionStatus> action, string shouldCatch = null)
 		{
-			this._status = action();
+			try
+			{
+				this._status = action();
+			}
+			catch (ArgumentException e)
+			{
+				if (shouldCatch == "param" && e.Message.Contains("can't be null or empty"))
+					return;
+				throw;
+			}
 			if (shouldCatch == "missing")
 			{
 				Assert.NotNull(this._status.Error, "call specified missing is expected");
@@ -65,8 +76,7 @@ namespace Nest.Tests.Integration.Yaml
 				Assert.IsTrue(Regex.IsMatch(this._status.Result, re),
 					"response does not match regex: " + shouldCatch);
 			}
-			this._response = this._status.Deserialize<dynamic>();
-			this._responseDictionary = this._status.Deserialize<Dictionary<string, object>>();
+			this._response = this._status.Response;
 		}
 
 		protected void Skip(string version, string reason)
@@ -82,13 +92,12 @@ namespace Nest.Tests.Integration.Yaml
 		//.net Version class needs atleast 2 significant numbers
 		private string PatchVersion(string version)
 		{
-			return (version == "999" || version == "0") ? version + ".0" : version;
+			return (!version.Contains(".")) ? version + ".0" : version;
 		}
 
 		protected void IsTrue(object o)
 		{
-			if (o == null)
-				Assert.Fail("null is not true value");
+			if (o == null) Assert.Fail("null is not true value");
 			if (o is ConnectionStatus)
 			{
 				var c = o as ConnectionStatus;
@@ -101,6 +110,7 @@ namespace Nest.Tests.Integration.Yaml
 			}
 
 			o = Unbox(o);
+			if (o == null) Assert.Fail("null is not true value");
 			string message = "Unknown type:" + o.GetType().FullName;
 			
 			//The specified key exists and has a true value (ie not 0, false, undefined, null or the empty string)
@@ -148,7 +158,8 @@ namespace Nest.Tests.Integration.Yaml
 				else if (c.RequestMethod == "HEAD") return;
 			}
 			o = Unbox(o);
-			
+			if (o == null)
+				return;
 			//The specified key exists and has a true value (ie not 0, false, undefined, null or the empty string)
 			string message = "Unknown type:" + o.GetType().FullName;
 			if (o is int)
@@ -196,7 +207,9 @@ namespace Nest.Tests.Integration.Yaml
 
 		private static object Unbox(object o)
 		{
-			if (o is JValue) o = ((JValue) o).Value;
+			if (o is ElasticsearchResponseValue) o = ((ElasticsearchResponseValue) o).Value;
+			if (o is JValue) o = ((JValue)o).Value;
+			if (o is JArray) o = ((JArray) o).ToObject<object[]>();
 			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
 			if (o is ConnectionStatus) o = ((ConnectionStatus)o).Result;
 			return o;
@@ -221,9 +234,12 @@ namespace Nest.Tests.Integration.Yaml
 		protected void IsLength(object o, int value)
 		{
 			int l = -1;
+			if (o is ElasticsearchResponseValue) o = ((ElasticsearchResponseValue) o).Value;
 			if (o is JArray) l = ((JArray) o).Count;
 			if (o is string) l =  ((string) o).Length;
-			Assert.AreEqual(l, value);
+			if (o is IDictionary) l = ((IDictionary) o).Count;
+			if (o is JObject) l = ((JObject) o).Children().Count();
+			Assert.AreEqual(value, l);
 		}
 
 		protected void IsMatch(object o, object value)
@@ -267,7 +283,21 @@ namespace Nest.Tests.Integration.Yaml
 					var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
 					Assert.AreEqual(nJson, nOtherJson);
 				}
+				else if (v.StartsWith("/"))
+				{
+					var re = Regex.Replace(v, @"(^[\s\r\n]*?\/|\/[\s\r\n]*?$)", "");
+					Assert.IsTrue(Regex.IsMatch(this._status.Result, re, RegexOptions.IgnorePatternWhitespace));
+				}
 				else Assert.AreEqual(s, v);
+			}
+			else if (o is object[])
+			{
+				var oo = o as object[];
+				var json = _client.Serializer.Serialize(value);
+				var otherJson = _client.Serializer.Serialize(oo);
+				var nJson = JArray.Parse(Encoding.UTF8.GetString(json)).ToString();
+				var nOtherJson = JArray.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
+				Assert.AreEqual(nJson, nOtherJson);
 			}
 			else if (o is Dictionary<string, object>)
 			{
@@ -278,7 +308,11 @@ namespace Nest.Tests.Integration.Yaml
 						.ToDictionary(
 							x => x.Name, 
 							x => (x.GetGetMethod().Invoke(value, null) ?? ""));
-				CollectionAssert.AreEquivalent(d.ToList(), dd.ToList());
+				var json = _client.Serializer.Serialize(new SortedDictionary<string, object>(d));
+				var otherJson = _client.Serializer.Serialize(new SortedDictionary<string, object>(dd));
+				var nJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
+				var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
+				Assert.AreEqual(nJson, nOtherJson);
 			}
 			else Assert.Fail(message);
 		}

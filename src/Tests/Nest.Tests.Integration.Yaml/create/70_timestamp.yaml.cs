@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Create
+namespace Nest.Tests.Integration.Yaml.Create9
 {
-	public partial class CreateTests
+	public partial class Create9YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TimestampTests : YamlTestsBase
+		public class Timestamp1Tests : YamlTestsBase
 		{
 			[Test]
-			public void TimestampTest()
+			public void Timestamp1Test()
 			{	
 
 				//do indices.create 
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

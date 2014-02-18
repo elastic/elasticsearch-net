@@ -9,18 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
+namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate2
 {
-	public partial class IndicesGetTemplateTests
+	public partial class IndicesGetTemplate2YamlTests
 	{	
 	
-		public class IndicesGetTemplate20GetMissingYamlBase : YamlTestsBase
+		public class IndicesGetTemplate220GetMissingYamlBase : YamlTestsBase
 		{
-			public IndicesGetTemplate20GetMissingYamlBase() : base()
+			public IndicesGetTemplate220GetMissingYamlBase() : base()
 			{	
 
 				//do indices.delete_template 
-				this.Do(()=> this._client.IndicesDeleteTemplate("*", nv=>nv
+				this.Do(()=> this._client.IndicesDeleteTemplateForAll("*", nv=>nv
 					.Add("ignore", 404)
 				));
 
@@ -29,41 +29,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetMissingTemplatePost0903Tests : IndicesGetTemplate20GetMissingYamlBase
+		public class GetMissingTemplate2Tests : IndicesGetTemplate220GetMissingYamlBase
 		{
 			[Test]
-			public void GetMissingTemplatePost0903Test()
+			public void GetMissingTemplate2Test()
 			{	
 
-				//skip 0 - 0.90.2; 
-				this.Skip("0 - 0.90.2", "Missing templates throw 404 from 0.90.3");
-
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplate("test"), shouldCatch: @"missing");
-
-			}
-		}
-
-		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class GetMissingTemplatePre0903Tests : IndicesGetTemplate20GetMissingYamlBase
-		{
-			[Test]
-			public void GetMissingTemplatePre0903Test()
-			{	
-
-				//skip 0.90.3 - 999; 
-				this.Skip("0.90.3 - 999", "Missing templates didn't throw 404 before 0.90.3");
-
-				//do indices.delete_template 
-				this.Do(()=> this._client.IndicesDeleteTemplate("test", nv=>nv
-					.Add("ignore", 404)
-				));
-
-				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplate("test"));
-
-				//match this._status: 
-				this.IsMatch(this._status, new {});
+				this.Do(()=> this._client.IndicesGetTemplateForAll("test"), shouldCatch: @"missing");
 
 			}
 		}

@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update11
 {
-	public partial class UpdateTests
+	public partial class Update11YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class RefreshTests : YamlTestsBase
+		public class Refresh1Tests : YamlTestsBase
 		{
 			[Test]
-			public void RefreshTest()
+			public void Refresh1Test()
 			{	
 
 				//do indices.create 
@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.Update
 						 { "index.refresh_interval",  "-1" }
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

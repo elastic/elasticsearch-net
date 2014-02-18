@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update16
 {
-	public partial class UpdateTests
+	public partial class Update16YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentPartialDocTests : YamlTestsBase
+		public class MissingDocumentPartialDoc1Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentPartialDocTest()
+			public void MissingDocumentPartialDoc1Test()
 			{	
 
 				//do update 
@@ -44,10 +44,10 @@ namespace Nest.Tests.Integration.Yaml.Update
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentScriptTests : YamlTestsBase
+		public class MissingDocumentScript2Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentScriptTest()
+			public void MissingDocumentScript2Test()
 			{	
 
 				//do update 

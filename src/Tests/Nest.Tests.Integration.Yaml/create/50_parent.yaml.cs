@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Create
+namespace Nest.Tests.Integration.Yaml.Create6
 {
-	public partial class CreateTests
+	public partial class Create6YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentTests : YamlTestsBase
+		public class Parent1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ParentTest()
+			public void Parent1Test()
 			{	
 
 				//do indices.create 
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml.Create
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
@@ -73,9 +73,6 @@ namespace Nest.Tests.Integration.Yaml.Create
 
 				//match _response.fields._routing: 
 				this.IsMatch(_response.fields._routing, 5);
-
-				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1"), shouldCatch: @"missing");
 
 			}
 		}

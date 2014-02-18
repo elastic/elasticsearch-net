@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Exists
+namespace Nest.Tests.Integration.Yaml.Exists1
 {
-	public partial class ExistsTests
+	public partial class Exists1YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTests : YamlTestsBase
+		public class Basic1Tests : YamlTestsBase
 		{
 			[Test]
-			public void BasicTest()
+			public void Basic1Test()
 			{	
 
 				//do exists 

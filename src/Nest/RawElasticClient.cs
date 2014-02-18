@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -117,6 +118,7 @@ namespace Nest
 			throw new DslException("Unknown HTTP method " + method);
 		}
 
+		private static byte[] _enter = Encoding.UTF8.GetBytes("\n");
 		private byte[] PostData(object data)
 		{
 			var s = data as string;
@@ -126,10 +128,13 @@ namespace Nest
 			var ss = data as IEnumerable<string>;
 			if (ss != null)
 				return (string.Join("\n", ss) + "\n").Utf8Bytes();
+			var sb = data as IEnumerable<byte[]>;
+			
 			var so = data as IEnumerable<object>;
 			if (so == null)
 				return this.Serializer.Serialize(data);
-			var joined = string.Join("\n", so.Select(soo => this.Serializer.Serialize(soo, SerializationFormatting.None))) + "\n";
+			var joined = string.Join("\n", so
+				.Select(soo => this.Serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
 			return joined.Utf8Bytes();
 		}
 

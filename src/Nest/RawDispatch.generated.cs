@@ -83,6 +83,354 @@ namespace Nest
 		}
 		
 		
+		internal ConnectionStatus CatAliasesDispatch(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/aliases/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.CatAliasesGet(pathInfo.Name,u => pathInfo.QueryString);
+					//GET /_cat/aliases
+					return this.Raw.CatAliasesGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatAliases() into any of the following paths: \r\n - /_cat/aliases\r\n - /_cat/aliases/{name}");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatAliasesDispatchAsync(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/aliases/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.CatAliasesGetAsync(pathInfo.Name,u => pathInfo.QueryString);
+					//GET /_cat/aliases
+					return this.Raw.CatAliasesGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatAliases() into any of the following paths: \r\n - /_cat/aliases\r\n - /_cat/aliases/{name}");
+		}
+		
+		
+		internal ConnectionStatus CatAllocationDispatch(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/allocation/{node_id}
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.CatAllocationGet(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_cat/allocation
+					return this.Raw.CatAllocationGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatAllocation() into any of the following paths: \r\n - /_cat/allocation\r\n - /_cat/allocation/{node_id}");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatAllocationDispatchAsync(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/allocation/{node_id}
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.CatAllocationGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_cat/allocation
+					return this.Raw.CatAllocationGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatAllocation() into any of the following paths: \r\n - /_cat/allocation\r\n - /_cat/allocation/{node_id}");
+		}
+		
+		
+		internal ConnectionStatus CatCountDispatch(ElasticsearchPathInfo<CatCountQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/count/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatCountGet(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/count
+					return this.Raw.CatCountGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatCount() into any of the following paths: \r\n - /_cat/count\r\n - /_cat/count/{index}");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatCountDispatchAsync(ElasticsearchPathInfo<CatCountQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/count/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatCountGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/count
+					return this.Raw.CatCountGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatCount() into any of the following paths: \r\n - /_cat/count\r\n - /_cat/count/{index}");
+		}
+		
+		
+		internal ConnectionStatus CatHealthDispatch(ElasticsearchPathInfo<CatHealthQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/health
+					return this.Raw.CatHealthGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatHealth() into any of the following paths: \r\n - /_cat/health");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatHealthDispatchAsync(ElasticsearchPathInfo<CatHealthQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/health
+					return this.Raw.CatHealthGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatHealth() into any of the following paths: \r\n - /_cat/health");
+		}
+		
+		
+		internal ConnectionStatus CatHelpDispatch(ElasticsearchPathInfo<CatHelpQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat
+					return this.Raw.CatHelpGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatHelp() into any of the following paths: \r\n - /_cat");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatHelpDispatchAsync(ElasticsearchPathInfo<CatHelpQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat
+					return this.Raw.CatHelpGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatHelp() into any of the following paths: \r\n - /_cat");
+		}
+		
+		
+		internal ConnectionStatus CatIndicesDispatch(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/indices/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatIndicesGet(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/indices
+					return this.Raw.CatIndicesGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatIndices() into any of the following paths: \r\n - /_cat/indices\r\n - /_cat/indices/{index}");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatIndicesDispatchAsync(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/indices/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatIndicesGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/indices
+					return this.Raw.CatIndicesGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatIndices() into any of the following paths: \r\n - /_cat/indices\r\n - /_cat/indices/{index}");
+		}
+		
+		
+		internal ConnectionStatus CatMasterDispatch(ElasticsearchPathInfo<CatMasterQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/master
+					return this.Raw.CatMasterGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatMaster() into any of the following paths: \r\n - /_cat/master");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatMasterDispatchAsync(ElasticsearchPathInfo<CatMasterQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/master
+					return this.Raw.CatMasterGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatMaster() into any of the following paths: \r\n - /_cat/master");
+		}
+		
+		
+		internal ConnectionStatus CatNodesDispatch(ElasticsearchPathInfo<CatNodesQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/nodes
+					return this.Raw.CatNodesGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatNodes() into any of the following paths: \r\n - /_cat/nodes");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatNodesDispatchAsync(ElasticsearchPathInfo<CatNodesQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/nodes
+					return this.Raw.CatNodesGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatNodes() into any of the following paths: \r\n - /_cat/nodes");
+		}
+		
+		
+		internal ConnectionStatus CatPendingTasksDispatch(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/pending_tasks
+					return this.Raw.CatPendingTasksGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatPendingTasks() into any of the following paths: \r\n - /_cat/pending_tasks");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatPendingTasksDispatchAsync(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/pending_tasks
+					return this.Raw.CatPendingTasksGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatPendingTasks() into any of the following paths: \r\n - /_cat/pending_tasks");
+		}
+		
+		
+		internal ConnectionStatus CatRecoveryDispatch(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/recovery/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatRecoveryGet(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/recovery
+					return this.Raw.CatRecoveryGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatRecovery() into any of the following paths: \r\n - /_cat/recovery\r\n - /_cat/recovery/{index}");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatRecoveryDispatchAsync(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/recovery/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatRecoveryGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/recovery
+					return this.Raw.CatRecoveryGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatRecovery() into any of the following paths: \r\n - /_cat/recovery\r\n - /_cat/recovery/{index}");
+		}
+		
+		
+		internal ConnectionStatus CatShardsDispatch(ElasticsearchPathInfo<CatShardsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/shards/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatShardsGet(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/shards
+					return this.Raw.CatShardsGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatShards() into any of the following paths: \r\n - /_cat/shards\r\n - /_cat/shards/{index}");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatShardsDispatchAsync(ElasticsearchPathInfo<CatShardsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/shards/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatShardsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cat/shards
+					return this.Raw.CatShardsGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatShards() into any of the following paths: \r\n - /_cat/shards\r\n - /_cat/shards/{index}");
+		}
+		
+		
+		internal ConnectionStatus CatThreadPoolDispatch(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/thread_pool
+					return this.Raw.CatThreadPoolGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatThreadPool() into any of the following paths: \r\n - /_cat/thread_pool");
+		}
+		
+		
+		internal Task<ConnectionStatus> CatThreadPoolDispatchAsync(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/thread_pool
+					return this.Raw.CatThreadPoolGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatThreadPool() into any of the following paths: \r\n - /_cat/thread_pool");
+		}
+		
+		
 		internal ConnectionStatus ClearScrollDispatch(ElasticsearchPathInfo<ClearScrollQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -171,131 +519,29 @@ namespace Nest
 		}
 		
 		
-		internal ConnectionStatus ClusterNodeHotThreadsDispatch(ElasticsearchPathInfo<ClusterNodeHotThreadsQueryString> pathInfo )
+		internal ConnectionStatus ClusterPendingTasksDispatch(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /_cluster/nodes/{node_id}/hotthreads
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeHotThreadsGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_cluster/nodes/hotthreads
-					return this.Raw.ClusterNodeHotThreadsGet(u => pathInfo.QueryString);
+					//GET /_cluster/pending_tasks
+					return this.Raw.ClusterPendingTasksGet(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterPendingTasks() into any of the following paths: \r\n - /_cluster/pending_tasks");
 		}
 		
 		
-		internal Task<ConnectionStatus> ClusterNodeHotThreadsDispatchAsync(ElasticsearchPathInfo<ClusterNodeHotThreadsQueryString> pathInfo )
+		internal Task<ConnectionStatus> ClusterPendingTasksDispatchAsync(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /_cluster/nodes/{node_id}/hotthreads
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeHotThreadsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_cluster/nodes/hotthreads
-					return this.Raw.ClusterNodeHotThreadsGetAsync(u => pathInfo.QueryString);
+					//GET /_cluster/pending_tasks
+					return this.Raw.ClusterPendingTasksGetAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
-		}
-		
-		
-		internal ConnectionStatus ClusterNodeInfoDispatch(ElasticsearchPathInfo<ClusterNodeInfoQueryString> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.GET:
-					//GET /_cluster/nodes/{node_id}
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_cluster/nodes
-					return this.Raw.ClusterNodeInfoGet(u => pathInfo.QueryString);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeInfo() into any of the following paths: \r\n - /_cluster/nodes\r\n - /_cluster/nodes/{node_id}\r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/settings\r\n - /_nodes/{node_id}/settings\r\n - /_nodes/os\r\n - /_nodes/{node_id}/os\r\n - /_nodes/process\r\n - /_nodes/{node_id}/process\r\n - /_nodes/jvm\r\n - /_nodes/{node_id}/jvm\r\n - /_nodes/thread_pool\r\n - /_nodes/{node_id}/thread_pool\r\n - /_nodes/network\r\n - /_nodes/{node_id}/network\r\n - /_nodes/transport\r\n - /_nodes/{node_id}/transport\r\n - /_nodes/http\r\n - /_nodes/{node_id}/http\r\n - /_nodes/plugin\r\n - /_nodes/{node_id}/plugin");
-		}
-		
-		
-		internal Task<ConnectionStatus> ClusterNodeInfoDispatchAsync(ElasticsearchPathInfo<ClusterNodeInfoQueryString> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.GET:
-					//GET /_cluster/nodes/{node_id}
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_cluster/nodes
-					return this.Raw.ClusterNodeInfoGetAsync(u => pathInfo.QueryString);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeInfo() into any of the following paths: \r\n - /_cluster/nodes\r\n - /_cluster/nodes/{node_id}\r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/settings\r\n - /_nodes/{node_id}/settings\r\n - /_nodes/os\r\n - /_nodes/{node_id}/os\r\n - /_nodes/process\r\n - /_nodes/{node_id}/process\r\n - /_nodes/jvm\r\n - /_nodes/{node_id}/jvm\r\n - /_nodes/thread_pool\r\n - /_nodes/{node_id}/thread_pool\r\n - /_nodes/network\r\n - /_nodes/{node_id}/network\r\n - /_nodes/transport\r\n - /_nodes/{node_id}/transport\r\n - /_nodes/http\r\n - /_nodes/{node_id}/http\r\n - /_nodes/plugin\r\n - /_nodes/{node_id}/plugin");
-		}
-		
-		
-		internal ConnectionStatus ClusterNodeShutdownDispatch(ElasticsearchPathInfo<ClusterNodeShutdownQueryString> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.POST:
-					//POST /_cluster/nodes/{node_id}/_shutdown
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeShutdownPost(pathInfo.NodeId,u => pathInfo.QueryString);
-					//POST /_shutdown
-					return this.Raw.ClusterNodeShutdownPost(u => pathInfo.QueryString);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
-		}
-		
-		
-		internal Task<ConnectionStatus> ClusterNodeShutdownDispatchAsync(ElasticsearchPathInfo<ClusterNodeShutdownQueryString> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.POST:
-					//POST /_cluster/nodes/{node_id}/_shutdown
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeShutdownPostAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//POST /_shutdown
-					return this.Raw.ClusterNodeShutdownPostAsync(u => pathInfo.QueryString);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
-		}
-		
-		
-		internal ConnectionStatus ClusterNodeStatsDispatch(ElasticsearchPathInfo<ClusterNodeStatsQueryString> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.GET:
-					//GET /_cluster/nodes/{node_id}/stats
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGet(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_cluster/nodes/stats
-					return this.Raw.ClusterNodeStatsGet(u => pathInfo.QueryString);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeStats() into any of the following paths: \r\n - /_cluster/nodes/stats\r\n - /_cluster/nodes/{node_id}/stats\r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats");
-		}
-		
-		
-		internal Task<ConnectionStatus> ClusterNodeStatsDispatchAsync(ElasticsearchPathInfo<ClusterNodeStatsQueryString> pathInfo )
-		{
-			switch(pathInfo.HttpMethod)
-			{
-				case PathInfoHttpMethod.GET:
-					//GET /_cluster/nodes/{node_id}/stats
-					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterNodeStatsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
-					//GET /_cluster/nodes/stats
-					return this.Raw.ClusterNodeStatsGetAsync(u => pathInfo.QueryString);
-
-			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterNodeStats() into any of the following paths: \r\n - /_cluster/nodes/stats\r\n - /_cluster/nodes/{node_id}/stats\r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats");
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterPendingTasks() into any of the following paths: \r\n - /_cluster/pending_tasks");
 		}
 		
 		
@@ -364,11 +610,17 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /_cluster/state/{metric}/{index}
+					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.ClusterStateGet(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cluster/state/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.ClusterStateGet(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_cluster/state
 					return this.Raw.ClusterStateGet(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state");
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state\r\n - /_cluster/state/{metric}\r\n - /_cluster/state/{metric}/{index}");
 		}
 		
 		
@@ -377,11 +629,49 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /_cluster/state/{metric}/{index}
+					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.ClusterStateGetAsync(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_cluster/state/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.ClusterStateGetAsync(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_cluster/state
 					return this.Raw.ClusterStateGetAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state");
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state\r\n - /_cluster/state/{metric}\r\n - /_cluster/state/{metric}/{index}");
+		}
+		
+		
+		internal ConnectionStatus ClusterStatsDispatch(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cluster/stats/nodes/{node_id}
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.ClusterStatsGet(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_cluster/stats
+					return this.Raw.ClusterStatsGet(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterStats() into any of the following paths: \r\n - /_cluster/stats\r\n - /_cluster/stats/nodes/{node_id}");
+		}
+		
+		
+		internal Task<ConnectionStatus> ClusterStatsDispatchAsync(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cluster/stats/nodes/{node_id}
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.ClusterStatsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_cluster/stats
+					return this.Raw.ClusterStatsGetAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.ClusterStats() into any of the following paths: \r\n - /_cluster/stats\r\n - /_cluster/stats/nodes/{node_id}");
 		}
 		
 		
@@ -444,6 +734,60 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Count() into any of the following paths: \r\n - /_count\r\n - /{index}/_count\r\n - /{index}/{type}/_count");
+		}
+		
+		
+		internal ConnectionStatus CountPercolateDispatch(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/{id}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.CountPercolateGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+					//GET /{index}/{type}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.CountPercolateGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/{id}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.CountPercolatePost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+					//POST /{index}/{type}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.CountPercolatePost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CountPercolate() into any of the following paths: \r\n - /{index}/{type}/_percolate/count\r\n - /{index}/{type}/{id}/_percolate/count");
+		}
+		
+		
+		internal Task<ConnectionStatus> CountPercolateDispatchAsync(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/{id}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.CountPercolateGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+					//GET /{index}/{type}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.CountPercolateGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/{id}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.CountPercolatePostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+					//POST /{index}/{type}/_percolate/count
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.CountPercolatePostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CountPercolate() into any of the following paths: \r\n - /{index}/{type}/_percolate/count\r\n - /{index}/{type}/{id}/_percolate/count");
 		}
 		
 		
@@ -708,7 +1052,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesAnalyzeGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_analyze
-					return this.Raw.IndicesAnalyzeGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesAnalyzeGetForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_analyze
@@ -716,7 +1060,7 @@ namespace Nest
 						return this.Raw.IndicesAnalyzePost(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_analyze
 					if (body != null)
-						return this.Raw.IndicesAnalyzePost(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzePostForAll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -733,7 +1077,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesAnalyzeGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_analyze
-					return this.Raw.IndicesAnalyzeGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesAnalyzeGetForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_analyze
@@ -741,7 +1085,7 @@ namespace Nest
 						return this.Raw.IndicesAnalyzePostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_analyze
 					if (body != null)
-						return this.Raw.IndicesAnalyzePostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzePostForAllAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -758,14 +1102,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesClearCachePost(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_cache/clear
-					return this.Raw.IndicesClearCachePost(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCachePostForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesClearCacheGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cache/clear
-					return this.Raw.IndicesClearCacheGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheGetForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesClearCache() into any of the following paths: \r\n - /_cache/clear\r\n - /{index}/_cache/clear");
@@ -781,14 +1125,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesClearCachePostAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_cache/clear
-					return this.Raw.IndicesClearCachePostAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCachePostForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesClearCacheGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cache/clear
-					return this.Raw.IndicesClearCacheGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheGetForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesClearCache() into any of the following paths: \r\n - /_cache/clear\r\n - /{index}/_cache/clear");
@@ -875,11 +1219,10 @@ namespace Nest
 					//DELETE /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesDelete(pathInfo.Index,u => pathInfo.QueryString);
-					//DELETE /
-					return this.Raw.IndicesDelete(u => pathInfo.QueryString);
+					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDelete() into any of the following paths: \r\n - /\r\n - /{index}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDelete() into any of the following paths: \r\n - /{index}");
 		}
 		
 		
@@ -891,11 +1234,10 @@ namespace Nest
 					//DELETE /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesDeleteAsync(pathInfo.Index,u => pathInfo.QueryString);
-					//DELETE /
-					return this.Raw.IndicesDeleteAsync(u => pathInfo.QueryString);
+					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDelete() into any of the following paths: \r\n - /\r\n - /{index}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDelete() into any of the following paths: \r\n - /{index}");
 		}
 		
 		
@@ -910,7 +1252,7 @@ namespace Nest
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteAlias() into any of the following paths: \r\n - /{index}/_alias/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /{index}/_aliases/{name}");
 		}
 		
 		
@@ -925,7 +1267,7 @@ namespace Nest
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteAlias() into any of the following paths: \r\n - /{index}/_alias/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /{index}/_aliases/{name}");
 		}
 		
 		
@@ -940,7 +1282,7 @@ namespace Nest
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping\r\n - /{index}/{type}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping\r\n - /{index}/{type}\r\n - /{index}/_mapping/{type}\r\n - /{index}/{type}/_mappings\r\n - /{index}/_mappings/{type}");
 		}
 		
 		
@@ -955,7 +1297,7 @@ namespace Nest
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping\r\n - /{index}/{type}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping\r\n - /{index}/{type}\r\n - /{index}/_mapping/{type}\r\n - /{index}/{type}/_mappings\r\n - /{index}/_mappings/{type}");
 		}
 		
 		
@@ -966,7 +1308,7 @@ namespace Nest
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteTemplate(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteTemplateForAll(pathInfo.Name,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -981,7 +1323,7 @@ namespace Nest
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteTemplateAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteTemplateForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -994,19 +1336,13 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
-					//DELETE /{index}/{type}/_warmer/{name}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteWarmer(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.QueryString);
 					//DELETE /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
 						return this.Raw.IndicesDeleteWarmer(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
-					//DELETE /{index}/_warmer
-					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteWarmer(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteWarmer() into any of the following paths: \r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteWarmer() into any of the following paths: \r\n - /{index}/_warmer/{name}\r\n - /{index}/_warmers/{name}");
 		}
 		
 		
@@ -1015,19 +1351,13 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
-					//DELETE /{index}/{type}/_warmer/{name}
-					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteWarmerAsync(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.QueryString);
 					//DELETE /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
 						return this.Raw.IndicesDeleteWarmerAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
-					//DELETE /{index}/_warmer
-					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteWarmerAsync(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteWarmer() into any of the following paths: \r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesDeleteWarmer() into any of the following paths: \r\n - /{index}/_warmer/{name}\r\n - /{index}/_warmers/{name}");
 		}
 		
 		
@@ -1071,11 +1401,14 @@ namespace Nest
 						return this.Raw.IndicesExistsAliasHead(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//HEAD /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHead(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasHeadForAll(pathInfo.Name,u => pathInfo.QueryString);
+					//HEAD /{index}/_alias
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesExistsAliasHead(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesExistsAlias() into any of the following paths: \r\n - /_alias/{name}\r\n - /{index}/_alias/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesExistsAlias() into any of the following paths: \r\n - /_alias/{name}\r\n - /{index}/_alias/{name}\r\n - /{index}/_alias");
 		}
 		
 		
@@ -1089,11 +1422,44 @@ namespace Nest
 						return this.Raw.IndicesExistsAliasHeadAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//HEAD /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHeadAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasHeadForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+					//HEAD /{index}/_alias
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesExistsAliasHeadAsync(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesExistsAlias() into any of the following paths: \r\n - /_alias/{name}\r\n - /{index}/_alias/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesExistsAlias() into any of the following paths: \r\n - /_alias/{name}\r\n - /{index}/_alias/{name}\r\n - /{index}/_alias");
+		}
+		
+		
+		internal ConnectionStatus IndicesExistsTemplateDispatch(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.HEAD:
+					//HEAD /_template/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesExistsTemplateHeadForAll(pathInfo.Name,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesExistsTemplate() into any of the following paths: \r\n - /_template/{name}");
+		}
+		
+		
+		internal Task<ConnectionStatus> IndicesExistsTemplateDispatchAsync(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.HEAD:
+					//HEAD /_template/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesExistsTemplateHeadForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesExistsTemplate() into any of the following paths: \r\n - /_template/{name}");
 		}
 		
 		
@@ -1136,14 +1502,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesFlushPost(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_flush
-					return this.Raw.IndicesFlushPost(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushPostForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesFlushGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_flush
-					return this.Raw.IndicesFlushGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushGetForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesFlush() into any of the following paths: \r\n - /_flush\r\n - /{index}/_flush");
@@ -1159,14 +1525,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesFlushPostAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_flush
-					return this.Raw.IndicesFlushPostAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushPostForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesFlushGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_flush
-					return this.Raw.IndicesFlushGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushGetForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesFlush() into any of the following paths: \r\n - /_flush\r\n - /{index}/_flush");
@@ -1183,11 +1549,15 @@ namespace Nest
 						return this.Raw.IndicesGetAlias(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAlias(pathInfo.Name,u => pathInfo.QueryString);
-					break;
+						return this.Raw.IndicesGetAliasForAll(pathInfo.Name,u => pathInfo.QueryString);
+					//GET /{index}/_alias
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesGetAlias(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_alias
+					return this.Raw.IndicesGetAliasForAll(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAlias() into any of the following paths: \r\n - /_alias/{name}\r\n - /{index}/_alias/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAlias() into any of the following paths: \r\n - /_alias\r\n - /_alias/{name}\r\n - /{index}/_alias/{name}\r\n - /{index}/_alias");
 		}
 		
 		
@@ -1201,11 +1571,15 @@ namespace Nest
 						return this.Raw.IndicesGetAliasAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasAsync(pathInfo.Name,u => pathInfo.QueryString);
-					break;
+						return this.Raw.IndicesGetAliasForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+					//GET /{index}/_alias
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesGetAliasAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_alias
+					return this.Raw.IndicesGetAliasForAllAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAlias() into any of the following paths: \r\n - /_alias/{name}\r\n - /{index}/_alias/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAlias() into any of the following paths: \r\n - /_alias\r\n - /_alias/{name}\r\n - /{index}/_alias/{name}\r\n - /{index}/_alias");
 		}
 		
 		
@@ -1214,14 +1588,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/_aliases/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetAliases(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//GET /{index}/_aliases
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetAliases(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_aliases/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetAliasesForAll(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_aliases
-					return this.Raw.IndicesGetAliases(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetAliasesForAll(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAliases() into any of the following paths: \r\n - /_aliases\r\n - /{index}/_aliases");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAliases() into any of the following paths: \r\n - /_aliases\r\n - /{index}/_aliases\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
 		}
 		
 		
@@ -1230,14 +1610,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/_aliases/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetAliasesAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//GET /{index}/_aliases
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetAliasesAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_aliases/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetAliasesForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_aliases
-					return this.Raw.IndicesGetAliasesAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetAliasesForAllAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAliases() into any of the following paths: \r\n - /_aliases\r\n - /{index}/_aliases");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAliases() into any of the following paths: \r\n - /_aliases\r\n - /{index}/_aliases\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
 		}
 		
 		
@@ -1246,19 +1632,22 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /{index}/{type}/_mapping/field/{field}
+					//GET /{index}/_mapping/{type}/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
 						return this.Raw.IndicesGetFieldMapping(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
 					//GET /{index}/_mapping/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
 						return this.Raw.IndicesGetFieldMapping(pathInfo.Index,pathInfo.Field,u => pathInfo.QueryString);
+					//GET /_mapping/{type}/field/{field}
+					if (!pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
+						return this.Raw.IndicesGetFieldMappingForAll(pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
 					//GET /_mapping/field/{field}
 					if (!pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMapping(pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingForAll(pathInfo.Field,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetFieldMapping() into any of the following paths: \r\n - /_mapping/field/{field}\r\n - /{index}/_mapping/field/{field}\r\n - /{index}/{type}/_mapping/field/{field}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetFieldMapping() into any of the following paths: \r\n - /_mapping/field/{field}\r\n - /{index}/_mapping/field/{field}\r\n - /_mapping/{type}/field/{field}\r\n - /{index}/_mapping/{type}/field/{field}");
 		}
 		
 		
@@ -1267,19 +1656,22 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /{index}/{type}/_mapping/field/{field}
+					//GET /{index}/_mapping/{type}/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
 						return this.Raw.IndicesGetFieldMappingAsync(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
 					//GET /{index}/_mapping/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
 						return this.Raw.IndicesGetFieldMappingAsync(pathInfo.Index,pathInfo.Field,u => pathInfo.QueryString);
+					//GET /_mapping/{type}/field/{field}
+					if (!pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
+						return this.Raw.IndicesGetFieldMappingForAllAsync(pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
 					//GET /_mapping/field/{field}
 					if (!pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMappingAsync(pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingForAllAsync(pathInfo.Field,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetFieldMapping() into any of the following paths: \r\n - /_mapping/field/{field}\r\n - /{index}/_mapping/field/{field}\r\n - /{index}/{type}/_mapping/field/{field}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetFieldMapping() into any of the following paths: \r\n - /_mapping/field/{field}\r\n - /{index}/_mapping/field/{field}\r\n - /_mapping/{type}/field/{field}\r\n - /{index}/_mapping/{type}/field/{field}");
 		}
 		
 		
@@ -1288,17 +1680,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /{index}/{type}/_mapping
+					//GET /{index}/_mapping/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
 						return this.Raw.IndicesGetMapping(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					//GET /{index}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetMapping(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_mapping/{type}
+					if (!pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.IndicesGetMappingForAll(pathInfo.Type,u => pathInfo.QueryString);
 					//GET /_mapping
-					return this.Raw.IndicesGetMapping(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetMappingForAll(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetMapping() into any of the following paths: \r\n - /_mapping\r\n - /{index}/_mapping\r\n - /{index}/{type}/_mapping");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetMapping() into any of the following paths: \r\n - /_mapping\r\n - /{index}/_mapping\r\n - /_mapping/{type}\r\n - /{index}/_mapping/{type}");
 		}
 		
 		
@@ -1307,17 +1702,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
-					//GET /{index}/{type}/_mapping
+					//GET /{index}/_mapping/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
 						return this.Raw.IndicesGetMappingAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					//GET /{index}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetMappingAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_mapping/{type}
+					if (!pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.IndicesGetMappingForAllAsync(pathInfo.Type,u => pathInfo.QueryString);
 					//GET /_mapping
-					return this.Raw.IndicesGetMappingAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetMappingForAllAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetMapping() into any of the following paths: \r\n - /_mapping\r\n - /{index}/_mapping\r\n - /{index}/{type}/_mapping");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetMapping() into any of the following paths: \r\n - /_mapping\r\n - /{index}/_mapping\r\n - /_mapping/{type}\r\n - /{index}/_mapping/{type}");
 		}
 		
 		
@@ -1326,14 +1724,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/_settings/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetSettings(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//GET /{index}/_settings
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetSettings(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_settings/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetSettingsForAll(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_settings
-					return this.Raw.IndicesGetSettings(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetSettingsForAll(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetSettings() into any of the following paths: \r\n - /_settings\r\n - /{index}/_settings");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetSettings() into any of the following paths: \r\n - /_settings\r\n - /{index}/_settings\r\n - /{index}/_settings/{name}\r\n - /_settings/{name}");
 		}
 		
 		
@@ -1342,14 +1746,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/_settings/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetSettingsAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//GET /{index}/_settings
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetSettingsAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_settings/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetSettingsForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_settings
-					return this.Raw.IndicesGetSettingsAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetSettingsForAllAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetSettings() into any of the following paths: \r\n - /_settings\r\n - /{index}/_settings");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetSettings() into any of the following paths: \r\n - /_settings\r\n - /{index}/_settings\r\n - /{index}/_settings/{name}\r\n - /_settings/{name}");
 		}
 		
 		
@@ -1360,9 +1770,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetTemplate(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetTemplateForAll(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_template
-					return this.Raw.IndicesGetTemplate(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetTemplateForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetTemplate() into any of the following paths: \r\n - /_template\r\n - /_template/{name}");
@@ -1376,9 +1786,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetTemplateAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetTemplateForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_template
-					return this.Raw.IndicesGetTemplateAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetTemplateForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetTemplate() into any of the following paths: \r\n - /_template\r\n - /_template/{name}");
@@ -1399,10 +1809,14 @@ namespace Nest
 					//GET /{index}/_warmer
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetWarmer(pathInfo.Index,u => pathInfo.QueryString);
-					break;
+					//GET /_warmer/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetWarmerForAll(pathInfo.Name,u => pathInfo.QueryString);
+					//GET /_warmer
+					return this.Raw.IndicesGetWarmerForAll(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetWarmer() into any of the following paths: \r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetWarmer() into any of the following paths: \r\n - /_warmer\r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
 		}
 		
 		
@@ -1420,10 +1834,14 @@ namespace Nest
 					//GET /{index}/_warmer
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesGetWarmerAsync(pathInfo.Index,u => pathInfo.QueryString);
-					break;
+					//GET /_warmer/{name}
+					if (!pathInfo.Name.IsNullOrEmpty())
+						return this.Raw.IndicesGetWarmerForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+					//GET /_warmer
+					return this.Raw.IndicesGetWarmerForAllAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetWarmer() into any of the following paths: \r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetWarmer() into any of the following paths: \r\n - /_warmer\r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
 		}
 		
 		
@@ -1466,14 +1884,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesOptimizePost(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_optimize
-					return this.Raw.IndicesOptimizePost(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizePostForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesOptimizeGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_optimize
-					return this.Raw.IndicesOptimizeGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeGetForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesOptimize() into any of the following paths: \r\n - /_optimize\r\n - /{index}/_optimize");
@@ -1489,14 +1907,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesOptimizePostAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_optimize
-					return this.Raw.IndicesOptimizePostAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizePostForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesOptimizeGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_optimize
-					return this.Raw.IndicesOptimizeGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeGetForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesOptimize() into any of the following paths: \r\n - /_optimize\r\n - /{index}/_optimize");
@@ -1510,20 +1928,23 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPutAlias(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAlias(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
 					//PUT /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAlias(pathInfo.Name,body,u => pathInfo.QueryString);
-					//PUT /{index}/_alias
-					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPutAlias(pathInfo.Index,body,u => pathInfo.QueryString);
-					//PUT /_alias
-					if (body != null)
-						return this.Raw.IndicesPutAlias(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_alias/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutAliasPost(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+					//POST /_alias/{name}
+					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutAliasPostForAll(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /_alias/{name}\r\n - /{index}/_alias\r\n - /_alias");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /_alias/{name}\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
 		}
 		
 		
@@ -1534,20 +1955,23 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPutAliasAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
 					//PUT /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasAsync(pathInfo.Name,body,u => pathInfo.QueryString);
-					//PUT /{index}/_alias
-					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPutAliasAsync(pathInfo.Index,body,u => pathInfo.QueryString);
-					//PUT /_alias
-					if (body != null)
-						return this.Raw.IndicesPutAliasAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_alias/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutAliasPostAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+					//POST /_alias/{name}
+					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutAliasPostForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /_alias/{name}\r\n - /{index}/_alias\r\n - /_alias");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /_alias/{name}\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
 		}
 		
 		
@@ -1559,16 +1983,22 @@ namespace Nest
 					//PUT /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutMapping(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//PUT /_mapping/{type}
+					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutMappingForAll(pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutMappingPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//POST /_mapping/{type}
+					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutMappingPostForAll(pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping\r\n - /{index}/_mapping/{type}\r\n - /_mapping/{type}\r\n - /{index}/{type}/_mappings\r\n - /{index}/_mappings/{type}\r\n - /_mappings/{type}");
 		}
 		
 		
@@ -1580,16 +2010,22 @@ namespace Nest
 					//PUT /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutMappingAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//PUT /_mapping/{type}
+					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutMappingForAllAsync(pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutMappingPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//POST /_mapping/{type}
+					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutMappingPostForAllAsync(pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutMapping() into any of the following paths: \r\n - /{index}/{type}/_mapping\r\n - /{index}/_mapping/{type}\r\n - /_mapping/{type}\r\n - /{index}/{type}/_mappings\r\n - /{index}/_mappings/{type}\r\n - /_mappings/{type}");
 		}
 		
 		
@@ -1603,7 +2039,7 @@ namespace Nest
 						return this.Raw.IndicesPutSettings(pathInfo.Index,body,u => pathInfo.QueryString);
 					//PUT /_settings
 					if (body != null)
-						return this.Raw.IndicesPutSettings(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutSettingsForAll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1621,7 +2057,7 @@ namespace Nest
 						return this.Raw.IndicesPutSettingsAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//PUT /_settings
 					if (body != null)
-						return this.Raw.IndicesPutSettingsAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutSettingsForAllAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1636,13 +2072,13 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplate(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplateForAll(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplatePost(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplatePostForAll(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1657,13 +2093,13 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplateAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplateForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplatePostAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplatePostForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1682,10 +2118,25 @@ namespace Nest
 					//PUT /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutWarmer(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+					//PUT /_warmer/{name}
+					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_warmer/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerPost(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString);
+					//POST /{index}/_warmer/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerPost(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+					//POST /_warmer/{name}
+					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerPostForAll(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutWarmer() into any of the following paths: \r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutWarmer() into any of the following paths: \r\n - /_warmer/{name}\r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}\r\n - /_warmers/{name}\r\n - /{index}/_warmers/{name}\r\n - /{index}/{type}/_warmers/{name}");
 		}
 		
 		
@@ -1700,10 +2151,25 @@ namespace Nest
 					//PUT /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutWarmerAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+					//PUT /_warmer/{name}
+					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_warmer/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerPostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString);
+					//POST /{index}/_warmer/{name}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerPostAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+					//POST /_warmer/{name}
+					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
+						return this.Raw.IndicesPutWarmerPostForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutWarmer() into any of the following paths: \r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutWarmer() into any of the following paths: \r\n - /_warmer/{name}\r\n - /{index}/_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}\r\n - /_warmers/{name}\r\n - /{index}/_warmers/{name}\r\n - /{index}/{type}/_warmers/{name}");
 		}
 		
 		
@@ -1716,14 +2182,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesRefreshPost(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_refresh
-					return this.Raw.IndicesRefreshPost(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshPostForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesRefreshGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_refresh
-					return this.Raw.IndicesRefreshGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshGetForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesRefresh() into any of the following paths: \r\n - /_refresh\r\n - /{index}/_refresh");
@@ -1739,14 +2205,14 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesRefreshPostAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_refresh
-					return this.Raw.IndicesRefreshPostAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshPostForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesRefreshGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_refresh
-					return this.Raw.IndicesRefreshGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshGetForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesRefresh() into any of the following paths: \r\n - /_refresh\r\n - /{index}/_refresh");
@@ -1762,7 +2228,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesSegmentsGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_segments
-					return this.Raw.IndicesSegmentsGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesSegmentsGetForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSegments() into any of the following paths: \r\n - /_segments\r\n - /{index}/_segments");
@@ -1778,7 +2244,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesSegmentsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_segments
-					return this.Raw.IndicesSegmentsGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesSegmentsGetForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSegments() into any of the following paths: \r\n - /_segments\r\n - /{index}/_segments");
@@ -1794,7 +2260,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesSnapshotIndexPost(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexPost(u => pathInfo.QueryString);
+					return this.Raw.IndicesSnapshotIndexPostForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
@@ -1810,7 +2276,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesSnapshotIndexPostAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexPostAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesSnapshotIndexPostForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
@@ -1822,14 +2288,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/_stats/{metric}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.IndicesStatsGet(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_stats/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.IndicesStatsGetForAll(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndexStatsGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_stats
-					return this.Raw.IndicesStatsGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatsGetForAll(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /{index}/_stats\r\n - /_stats/indexing\r\n - /{index}/_stats/indexing");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /_stats/{metric}\r\n - /{index}/_stats\r\n - /{index}/_stats/{metric}");
 		}
 		
 		
@@ -1838,14 +2310,20 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/_stats/{metric}
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.IndicesStatsGetAsync(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_stats/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.IndicesStatsGetForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndexStatsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_stats
-					return this.Raw.IndicesStatsGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatsGetForAllAsync(u => pathInfo.QueryString);
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /{index}/_stats\r\n - /_stats/indexing\r\n - /{index}/_stats/indexing");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /_stats/{metric}\r\n - /{index}/_stats\r\n - /{index}/_stats/{metric}");
 		}
 		
 		
@@ -1858,7 +2336,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesStatusGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_status
-					return this.Raw.IndicesStatusGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatusGetForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStatus() into any of the following paths: \r\n - /_status\r\n - /{index}/_status");
@@ -1874,7 +2352,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesStatusGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_status
-					return this.Raw.IndicesStatusGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatusGetForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStatus() into any of the following paths: \r\n - /_status\r\n - /{index}/_status");
@@ -1888,7 +2366,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_aliases
 					if (body != null)
-						return this.Raw.IndicesUpdateAliasesPost(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesUpdateAliasesPostForAll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1903,7 +2381,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_aliases
 					if (body != null)
-						return this.Raw.IndicesUpdateAliasesPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesUpdateAliasesPostForAllAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1923,7 +2401,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesValidateQueryGet(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_validate/query
-					return this.Raw.IndicesValidateQueryGet(u => pathInfo.QueryString);
+					return this.Raw.IndicesValidateQueryGetForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_validate/query
@@ -1934,7 +2412,7 @@ namespace Nest
 						return this.Raw.IndicesValidateQueryPost(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_validate/query
 					if (body != null)
-						return this.Raw.IndicesValidateQueryPost(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryPostForAll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1954,7 +2432,7 @@ namespace Nest
 					if (!pathInfo.Index.IsNullOrEmpty())
 						return this.Raw.IndicesValidateQueryGetAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_validate/query
-					return this.Raw.IndicesValidateQueryGetAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesValidateQueryGetForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_validate/query
@@ -1965,7 +2443,7 @@ namespace Nest
 						return this.Raw.IndicesValidateQueryPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_validate/query
 					if (body != null)
-						return this.Raw.IndicesValidateQueryPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryPostForAllAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2103,6 +2581,68 @@ namespace Nest
 		}
 		
 		
+		internal ConnectionStatus MpercolateDispatch(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.MpercolateGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+					//GET /{index}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.MpercolateGet(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_mpercolate
+					return this.Raw.MpercolateGet(u => pathInfo.QueryString);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.MpercolatePost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//POST /{index}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.MpercolatePost(pathInfo.Index,body,u => pathInfo.QueryString);
+					//POST /_mpercolate
+					if (body != null)
+						return this.Raw.MpercolatePost(body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Mpercolate() into any of the following paths: \r\n - /_mpercolate\r\n - /{index}/_mpercolate\r\n - /{index}/{type}/_mpercolate");
+		}
+		
+		
+		internal Task<ConnectionStatus> MpercolateDispatchAsync(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.MpercolateGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+					//GET /{index}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.MpercolateGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_mpercolate
+					return this.Raw.MpercolateGetAsync(u => pathInfo.QueryString);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.MpercolatePostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//POST /{index}/_mpercolate
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.MpercolatePostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+					//POST /_mpercolate
+					if (body != null)
+						return this.Raw.MpercolatePostAsync(body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Mpercolate() into any of the following paths: \r\n - /_mpercolate\r\n - /{index}/_mpercolate\r\n - /{index}/{type}/_mpercolate");
+		}
+		
+		
 		internal ConnectionStatus MsearchDispatch(ElasticsearchPathInfo<MultiSearchQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
@@ -2165,24 +2705,256 @@ namespace Nest
 		}
 		
 		
+		internal ConnectionStatus MtermvectorsDispatch(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.MtermvectorsGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+					//GET /{index}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.MtermvectorsGet(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_mtermvectors
+					return this.Raw.MtermvectorsGet(u => pathInfo.QueryString);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.MtermvectorsPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//POST /{index}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.MtermvectorsPost(pathInfo.Index,body,u => pathInfo.QueryString);
+					//POST /_mtermvectors
+					if (body != null)
+						return this.Raw.MtermvectorsPost(body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Mtermvectors() into any of the following paths: \r\n - /_mtermvectors\r\n - /{index}/_mtermvectors\r\n - /{index}/{type}/_mtermvectors");
+		}
+		
+		
+		internal Task<ConnectionStatus> MtermvectorsDispatchAsync(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
+						return this.Raw.MtermvectorsGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+					//GET /{index}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.MtermvectorsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+					//GET /_mtermvectors
+					return this.Raw.MtermvectorsGetAsync(u => pathInfo.QueryString);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
+						return this.Raw.MtermvectorsPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+					//POST /{index}/_mtermvectors
+					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
+						return this.Raw.MtermvectorsPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+					//POST /_mtermvectors
+					if (body != null)
+						return this.Raw.MtermvectorsPostAsync(body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Mtermvectors() into any of the following paths: \r\n - /_mtermvectors\r\n - /{index}/_mtermvectors\r\n - /{index}/{type}/_mtermvectors");
+		}
+		
+		
+		internal ConnectionStatus NodesHotThreadsDispatch(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cluster/nodes/{node_id}/hotthreads
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesHotThreadsGet(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_cluster/nodes/hotthreads
+					return this.Raw.NodesHotThreadsGetForAll(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
+		}
+		
+		
+		internal Task<ConnectionStatus> NodesHotThreadsDispatchAsync(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cluster/nodes/{node_id}/hotthreads
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesHotThreadsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_cluster/nodes/hotthreads
+					return this.Raw.NodesHotThreadsGetForAllAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
+		}
+		
+		
+		internal ConnectionStatus NodesInfoDispatch(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_nodes/{node_id}/{metric}
+					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesInfoGet(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes/{node_id}
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_nodes/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesInfoGetForAll(pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes
+					return this.Raw.NodesInfoGetForAll(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesInfo() into any of the following paths: \r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/{metric}\r\n - /_nodes/{node_id}/{metric}");
+		}
+		
+		
+		internal Task<ConnectionStatus> NodesInfoDispatchAsync(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_nodes/{node_id}/{metric}
+					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesInfoGetAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes/{node_id}
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_nodes/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesInfoGetForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes
+					return this.Raw.NodesInfoGetForAllAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesInfo() into any of the following paths: \r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/{metric}\r\n - /_nodes/{node_id}/{metric}");
+		}
+		
+		
+		internal ConnectionStatus NodesShutdownDispatch(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_cluster/nodes/{node_id}/_shutdown
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesShutdownPost(pathInfo.NodeId,u => pathInfo.QueryString);
+					//POST /_shutdown
+					return this.Raw.NodesShutdownPostForAll(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
+		}
+		
+		
+		internal Task<ConnectionStatus> NodesShutdownDispatchAsync(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_cluster/nodes/{node_id}/_shutdown
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesShutdownPostAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+					//POST /_shutdown
+					return this.Raw.NodesShutdownPostForAllAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
+		}
+		
+		
+		internal ConnectionStatus NodesStatsDispatch(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_nodes/{node_id}/stats/{metric}/{index_metric}
+					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGet(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+					//GET /_nodes/{node_id}/stats/{metric}
+					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGet(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes/stats/{metric}/{index_metric}
+					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGetForAll(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+					//GET /_nodes/{node_id}/stats
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesStatsGet(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_nodes/stats/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGetForAll(pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes/stats
+					return this.Raw.NodesStatsGetForAll(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesStats() into any of the following paths: \r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric}\r\n - /_nodes/{node_id}/stats/{metric}\r\n - /_nodes/stats/{metric}/{index_metric}\r\n - /_nodes/{node_id}/stats/{metric}/{index_metric}");
+		}
+		
+		
+		internal Task<ConnectionStatus> NodesStatsDispatchAsync(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_nodes/{node_id}/stats/{metric}/{index_metric}
+					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGetAsync(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+					//GET /_nodes/{node_id}/stats/{metric}
+					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGetAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes/stats/{metric}/{index_metric}
+					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGetForAllAsync(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+					//GET /_nodes/{node_id}/stats
+					if (!pathInfo.NodeId.IsNullOrEmpty())
+						return this.Raw.NodesStatsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+					//GET /_nodes/stats/{metric}
+					if (!pathInfo.Metric.IsNullOrEmpty())
+						return this.Raw.NodesStatsGetForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+					//GET /_nodes/stats
+					return this.Raw.NodesStatsGetForAllAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.NodesStats() into any of the following paths: \r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric}\r\n - /_nodes/{node_id}/stats/{metric}\r\n - /_nodes/stats/{metric}/{index_metric}\r\n - /_nodes/{node_id}/stats/{metric}/{index_metric}");
+		}
+		
+		
 		internal ConnectionStatus PercolateDispatch(ElasticsearchPathInfo<PercolateQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/{id}/_percolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.PercolateGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
 					//GET /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
 						return this.Raw.PercolateGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/{id}/_percolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PercolatePost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
 						return this.Raw.PercolatePost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.Percolate() into any of the following paths: \r\n - /{index}/{type}/_percolate");
+			throw new DispatchException("Could not dispatch IElasticClient.Percolate() into any of the following paths: \r\n - /{index}/{type}/_percolate\r\n - /{index}/{type}/{id}/_percolate");
 		}
 		
 		
@@ -2191,19 +2963,25 @@ namespace Nest
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/{id}/_percolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.PercolateGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
 					//GET /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
 						return this.Raw.PercolateGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/{id}/_percolate
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.PercolatePostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
 						return this.Raw.PercolatePostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.Percolate() into any of the following paths: \r\n - /{index}/{type}/_percolate");
+			throw new DispatchException("Could not dispatch IElasticClient.Percolate() into any of the following paths: \r\n - /{index}/{type}/_percolate\r\n - /{index}/{type}/{id}/_percolate");
 		}
 		
 		
@@ -2345,6 +3123,242 @@ namespace Nest
 		}
 		
 		
+		internal ConnectionStatus SnapshotCreateDispatch(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreatePut(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreatePost(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotCreate() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}\r\n - /_snapshot/{repository}/{snapshot}/_create");
+		}
+		
+		
+		internal Task<ConnectionStatus> SnapshotCreateDispatchAsync(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreatePutAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreatePostAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotCreate() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}\r\n - /_snapshot/{repository}/{snapshot}/_create");
+		}
+		
+		
+		internal ConnectionStatus SnapshotCreateRepositoryDispatch(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreateRepositoryPut(pathInfo.Repository,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreateRepositoryPost(pathInfo.Repository,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotCreateRepository() into any of the following paths: \r\n - /_snapshot/{repository}");
+		}
+		
+		
+		internal Task<ConnectionStatus> SnapshotCreateRepositoryDispatchAsync(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.PUT:
+					//PUT /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreateRepositoryPutAsync(pathInfo.Repository,body,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotCreateRepositoryPostAsync(pathInfo.Repository,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotCreateRepository() into any of the following paths: \r\n - /_snapshot/{repository}");
+		}
+		
+		
+		internal ConnectionStatus SnapshotDeleteDispatch(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
+						return this.Raw.SnapshotDelete(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotDelete() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}");
+		}
+		
+		
+		internal Task<ConnectionStatus> SnapshotDeleteDispatchAsync(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
+						return this.Raw.SnapshotDeleteAsync(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotDelete() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}");
+		}
+		
+		
+		internal ConnectionStatus SnapshotDeleteRepositoryDispatch(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotDeleteRepository(pathInfo.Repository,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotDeleteRepository() into any of the following paths: \r\n - /_snapshot/{repository}");
+		}
+		
+		
+		internal Task<ConnectionStatus> SnapshotDeleteRepositoryDispatchAsync(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.DELETE:
+					//DELETE /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotDeleteRepositoryAsync(pathInfo.Repository,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotDeleteRepository() into any of the following paths: \r\n - /_snapshot/{repository}");
+		}
+		
+		
+		internal ConnectionStatus SnapshotGetDispatch(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
+						return this.Raw.SnapshotGet(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotGet() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}");
+		}
+		
+		
+		internal Task<ConnectionStatus> SnapshotGetDispatchAsync(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_snapshot/{repository}/{snapshot}
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
+						return this.Raw.SnapshotGetAsync(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotGet() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}");
+		}
+		
+		
+		internal ConnectionStatus SnapshotGetRepositoryDispatch(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotGetRepository(pathInfo.Repository,u => pathInfo.QueryString);
+					//GET /_snapshot
+					return this.Raw.SnapshotGetRepository(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotGetRepository() into any of the following paths: \r\n - /_snapshot\r\n - /_snapshot/{repository}");
+		}
+		
+		
+		internal Task<ConnectionStatus> SnapshotGetRepositoryDispatchAsync(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_snapshot/{repository}
+					if (!pathInfo.Repository.IsNullOrEmpty())
+						return this.Raw.SnapshotGetRepositoryAsync(pathInfo.Repository,u => pathInfo.QueryString);
+					//GET /_snapshot
+					return this.Raw.SnapshotGetRepositoryAsync(u => pathInfo.QueryString);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotGetRepository() into any of the following paths: \r\n - /_snapshot\r\n - /_snapshot/{repository}");
+		}
+		
+		
+		internal ConnectionStatus SnapshotRestoreDispatch(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}/{snapshot}/_restore
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotRestorePost(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotRestore() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}/_restore");
+		}
+		
+		
+		internal Task<ConnectionStatus> SnapshotRestoreDispatchAsync(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /_snapshot/{repository}/{snapshot}/_restore
+					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
+						return this.Raw.SnapshotRestorePostAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.SnapshotRestore() into any of the following paths: \r\n - /_snapshot/{repository}/{snapshot}/_restore");
+		}
+		
+		
 		internal ConnectionStatus SuggestDispatch(ElasticsearchPathInfo<SuggestQueryString> pathInfo , object body)
 		{
 			switch(pathInfo.HttpMethod)
@@ -2392,6 +3406,48 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Suggest() into any of the following paths: \r\n - /_suggest\r\n - /{index}/_suggest");
+		}
+		
+		
+		internal ConnectionStatus TermvectorDispatch(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/{id}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.TermvectorGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/{id}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.TermvectorPost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Termvector() into any of the following paths: \r\n - /{index}/{type}/{id}/_termvector");
+		}
+		
+		
+		internal Task<ConnectionStatus> TermvectorDispatchAsync(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body)
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/{type}/{id}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
+						return this.Raw.TermvectorGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+					break;
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/{type}/{id}/_termvector
+					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
+						return this.Raw.TermvectorPostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+					break;
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.Termvector() into any of the following paths: \r\n - /{index}/{type}/{id}/_termvector");
 		}
 		
 		

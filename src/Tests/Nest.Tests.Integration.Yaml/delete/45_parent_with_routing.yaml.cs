@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Delete
+namespace Nest.Tests.Integration.Yaml.Delete6
 {
-	public partial class DeleteTests
+	public partial class Delete6YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class ParentWithRoutingTests : YamlTestsBase
+		public class ParentWithRouting1Tests : YamlTestsBase
 		{
 			[Test]
-			public void ParentWithRoutingTest()
+			public void ParentWithRouting1Test()
 			{	
 
 				//do indices.create 
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.Delete
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test_1", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

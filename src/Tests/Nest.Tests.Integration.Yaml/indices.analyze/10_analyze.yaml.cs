@@ -9,14 +9,14 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
+namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 {
-	public partial class IndicesAnalyzeTests
+	public partial class IndicesAnalyze1YamlTests
 	{	
 	
-		public class IndicesAnalyze10AnalyzeYamlBase : YamlTestsBase
+		public class IndicesAnalyze110AnalyzeYamlBase : YamlTestsBase
 		{
-			public IndicesAnalyze10AnalyzeYamlBase() : base()
+			public IndicesAnalyze110AnalyzeYamlBase() : base()
 			{	
 
 				//do ping 
@@ -27,14 +27,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class BasicTestTests : IndicesAnalyze10AnalyzeYamlBase
+		public class BasicTest2Tests : IndicesAnalyze110AnalyzeYamlBase
 		{
 			[Test]
-			public void BasicTestTest()
+			public void BasicTest2Test()
 			{	
 
 				//do indices.analyze 
-				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
+				this.Do(()=> this._client.IndicesAnalyzeGetForAll(nv=>nv
 					.Add("text", @"Foo Bar")
 				));
 
@@ -51,14 +51,14 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class TokenizerAndFilterTests : IndicesAnalyze10AnalyzeYamlBase
+		public class TokenizerAndFilter3Tests : IndicesAnalyze110AnalyzeYamlBase
 		{
 			[Test]
-			public void TokenizerAndFilterTest()
+			public void TokenizerAndFilter3Test()
 			{	
 
 				//do indices.analyze 
-				this.Do(()=> this._client.IndicesAnalyzeGet(nv=>nv
+				this.Do(()=> this._client.IndicesAnalyzeGetForAll(nv=>nv
 					.Add("filters", @"lowercase")
 					.Add("text", @"Foo Bar")
 					.Add("tokenizer", @"keyword")
@@ -74,10 +74,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class IndexAndFieldTests : IndicesAnalyze10AnalyzeYamlBase
+		public class IndexAndField4Tests : IndicesAnalyze110AnalyzeYamlBase
 		{
 			[Test]
-			public void IndexAndFieldTest()
+			public void IndexAndField4Test()
 			{	
 
 				//do indices.create 
@@ -93,7 +93,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePost("test", _body));
+				this.Do(()=> this._client.IndicesCreatePut("test", _body));
 
 				//do cluster.health 
 				this.Do(()=> this._client.ClusterHealthGet(nv=>nv

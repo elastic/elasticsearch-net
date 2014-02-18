@@ -9,17 +9,17 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Get
+namespace Nest.Tests.Integration.Yaml.Get9
 {
-	public partial class GetTests
+	public partial class Get9YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentWithCatchTests : YamlTestsBase
+		public class MissingDocumentWithCatch1Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentWithCatchTest()
+			public void MissingDocumentWithCatch1Test()
 			{	
 
 				//do get 
@@ -29,10 +29,10 @@ namespace Nest.Tests.Integration.Yaml.Get
 		}
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class MissingDocumentWithIgnoreTests : YamlTestsBase
+		public class MissingDocumentWithIgnore2Tests : YamlTestsBase
 		{
 			[Test]
-			public void MissingDocumentWithIgnoreTest()
+			public void MissingDocumentWithIgnore2Test()
 			{	
 
 				//do get 

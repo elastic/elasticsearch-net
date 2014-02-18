@@ -50,10 +50,10 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/_cache/clear", c => c.ClearCache());
 			Do("POST", "/mydefaultindex/_cache/clear", c => c.ClearCache(cc => cc.Index<Doc>()));
 			Do("POST", "/mydefaultindex/_close", c => c.CloseIndex(ci => ci.Index<Doc>()));
-			Do("GET", "/_cluster/nodes", c => c.ClusterNodeInfo());
-			Do("GET", "/_cluster/nodes/insert-marvel-character", c => c.ClusterNodeInfo(cn => cn.NodeId("insert-marvel-character")));
-			Do("GET", "/_cluster/nodes/stats?all=true", c => c.ClusterNodeStats());
-			Do("GET", "/_cluster/nodes/insert-marvel-character/stats?jvm=true", c => c.ClusterNodeStats(cn => cn.NodeId("insert-marvel-character").Jvm()));
+			Do("GET", "/_nodes", c => c.NodesInfo());
+			Do("GET", "/_nodes/insert-marvel-character", c => c.NodesInfo(cn => cn.NodeId("insert-marvel-character")));
+			Do("GET", "/_nodes/stats", c => c.NodesStats());
+			Do("GET", "/_nodes/insert-marvel-character/stats?jvm=true", c => c.NodesStats(cn => cn.NodeId("insert-marvel-character")));
 			Do("GET", "/_cluster/state", c => c.ClusterState());
 			Do("GET", "/_cluster/state?local=true", c => c.ClusterState(cs => cs.Local()));
 			Do("POST", "/_count", c => c.Count());

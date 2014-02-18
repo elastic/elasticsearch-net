@@ -9,21 +9,18 @@ using NUnit.Framework;
 using Nest.Tests.Integration.Yaml;
 
 
-namespace Nest.Tests.Integration.Yaml.Update
+namespace Nest.Tests.Integration.Yaml.Update4
 {
-	public partial class UpdateTests
+	public partial class Update4YamlTests
 	{	
 
 
 		[NCrunch.Framework.ExclusivelyUses("ElasticsearchYamlTests")]
-		public class DocAsUpsertTests : YamlTestsBase
+		public class DocAsUpsert1Tests : YamlTestsBase
 		{
 			[Test]
-			public void DocAsUpsertTest()
+			public void DocAsUpsert1Test()
 			{	
-
-				//skip 0-0.90.1; 
-				this.Skip("0-0.90.1", "doc_as_upsert added in 0.90.2");
 
 				//do update 
 				_body = new {
