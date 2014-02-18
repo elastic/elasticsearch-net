@@ -206,34 +206,7 @@ namespace Nest.Tests.Integration.Search
 			);
 			this.TestDefaultAssertions(queryResults);
 		}
-		[Test]
-		public void FieldQuery()
-		{
-			var queryResults = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						 ""field"" : { 
-							""followers.firstName"" : ""+" + this._LookFor.ToLower() + @" -something else""
-						}
-					} }"
-			);
-			this.TestDefaultAssertions(queryResults);
-		}
-		[Test]
-		public void ExtendedFieldQuery()
-		{
-			var queryResults = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						""field"" : { 
-							""followers.firstName"" : {
-								""query"" : ""+" + this._LookFor.ToLower() + @" -something else"",
-								""boost"" : 2.0,
-								""enable_position_increments"": false
-							}
-						}
-					} }"
-			);
-			this.TestDefaultAssertions(queryResults);
-		}
+	
 		[Test]
 		public void FilteredQuery()
 		{

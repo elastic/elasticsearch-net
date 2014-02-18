@@ -121,6 +121,10 @@ namespace Nest
 		private static byte[] _enter = Encoding.UTF8.GetBytes("\n");
 		private byte[] PostData(object data)
 		{
+			var bytes = data as byte[];
+			if (bytes != null)
+				return bytes;
+
 			var s = data as string;
 			if (s != null)
 				return s.Utf8Bytes();

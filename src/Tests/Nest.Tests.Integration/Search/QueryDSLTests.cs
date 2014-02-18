@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Search
 			var results = this._client.Search<ElasticsearchProject>(s => s
 				.From(0)
 				.Size(10)
-				.Fields(f => f.Id, f => f.Country)
+				.Source(source=>source.Include(f => f.Id, f => f.Country))
 				.SortAscending(f => f.LOC)
 				.SortDescending(f => f.Country)
 				.MatchAll()
