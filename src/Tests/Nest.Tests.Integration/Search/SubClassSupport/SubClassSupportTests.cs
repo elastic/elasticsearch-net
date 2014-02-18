@@ -135,5 +135,103 @@ namespace Nest.Tests.Integration.Search.SearchType
 			secondResult.Documents.OfType<ClassA>().Any().Should().BeTrue();
 			secondResult.Documents.OfType<ClassB>().Any().Should().BeTrue();
 		}
+		[Test]
+		public void MultipleTypesUsingBaseClassMultiSearchHits()
+		{
+			var data = Enumerable.Range(0, 100)
+				.Select(i =>
+				{
+					MyBaseClass o = null;
+					if (i % 2 == 0)
+						o = new ClassA() { ClassAProperty = Guid.NewGuid().ToString() };
+					else
+						o = new ClassB() { ClassBProperty = Guid.NewGuid().ToString() };
+					o.Title = Guid.NewGuid().ToString();
+					return o;
+				});
+
+			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
+
+			var queryResults = this._client.MultiSearch(ms => ms
+				.Search<MyBaseClass>("using_types", s => s.AllIndices()
+					.Types(typeof(ClassA), typeof(ClassB))
+					.From(0)
+					.Size(100)
+					.Fields(p=>p.Title)
+					.MatchAll()
+				)
+				.Search<MyBaseClass>("using_selector", s => s.AllIndices()
+					.Types("classa", "classb")
+					.ConcreteTypeSelector((o, h) => o.classBProperty != null ? typeof(ClassB) : typeof(ClassA))
+					.From(0)
+					.Size(100)
+					.Fields(f=>f.Add(p=>p.Title).Add("classBProperty"))
+					.MatchAll()
+				)
+			);
+			Assert.True(queryResults.IsValid);
+			var firstResult = queryResults.GetResponse<MyBaseClass>("using_types");
+
+			Assert.True(firstResult.Documents.Any());
+			firstResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
+			firstResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
+
+			var secondResult = queryResults.GetResponse<MyBaseClass>("using_selector");
+
+			Assert.True(secondResult.Documents.Any());
+			secondResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
+			secondResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
+		}
+		
+		[Test]
+		public void MultipleTypesUsingBaseClassMultiSearchSourceInclude()
+		{
+			var data = Enumerable.Range(0, 100)
+				.Select(i =>
+				{
+					MyBaseClass o = null;
+					if (i % 2 == 0)
+						o = new ClassA() { ClassAProperty = Guid.NewGuid().ToString() };
+					else
+						o = new ClassB() { ClassBProperty = Guid.NewGuid().ToString() };
+					o.Title = Guid.NewGuid().ToString();
+					return o;
+				});
+
+			var resulta = this._client.Bulk(b => b.IndexMany(data.OfType<ClassA>()).Refresh());
+			var resultb = this._client.Bulk(b => b.IndexMany(data.OfType<ClassB>()).Refresh());
+
+			var queryResults = this._client.MultiSearch(ms => ms
+				.Search<MyBaseClass>("using_types", s => s.AllIndices()
+					.Types(typeof(ClassA), typeof(ClassB))
+					.From(0)
+					.Size(100)
+					//.SourceExclude()
+					.Fields(p=>p.Title)
+					.MatchAll()
+				)
+				.Search<MyBaseClass>("using_selector", s => s.AllIndices()
+					.Types("classa", "classb")
+					.ConcreteTypeSelector((o, h) => o.classBProperty != null ? typeof(ClassB) : typeof(ClassA))
+					.From(0)
+					.Size(100)
+					.Fields(f=>f.Add(p=>p.Title).Add("classBProperty"))
+					.MatchAll()
+				)
+			);
+			Assert.True(queryResults.IsValid);
+			var firstResult = queryResults.GetResponse<MyBaseClass>("using_types");
+
+			Assert.True(firstResult.Documents.Any());
+			firstResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
+			firstResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
+
+			var secondResult = queryResults.GetResponse<MyBaseClass>("using_selector");
+
+			Assert.True(secondResult.Documents.Any());
+			secondResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
+			secondResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
+		}
 	}
 }

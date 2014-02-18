@@ -280,9 +280,7 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal FluentDictionary<string, ScriptFilterDescriptor> _ScriptFields { get; set; }
 
-		[JsonProperty(PropertyName = "partial_fields")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal Dictionary<string, PartialFieldDescriptor<T>> _PartialFields { get; set; }
+
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
@@ -449,6 +447,16 @@ namespace Nest
 			this._Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
+		
+		/// <summary>
+		/// Allows to selectively load specific fields for each document 
+		/// represented by a search hit. Defaults to load the internal _source field.
+		/// </summary>
+		public SearchDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> properties)
+		{
+			this._Fields = properties(new FluentFieldList<T>()).ToList();
+			return this;
+		}
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
@@ -480,30 +488,6 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> PartialFields(params Action<PartialFieldDescriptor<T>>[] partialFieldDescriptor)
-		{
-			if (this._PartialFields == null)
-				this._PartialFields = new Dictionary<string, PartialFieldDescriptor<T>>();
-
-			var descriptors = new List<PartialFieldDescriptor<T>>();
-
-			foreach (var selector in partialFieldDescriptor)
-			{
-				var filter = new PartialFieldDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
-			}
-
-			foreach (var d in descriptors)
-			{
-				var key = d._Field;
-				if (string.IsNullOrEmpty(key))
-					throw new DslException("Could not infer key for highlight field descriptor");
-
-				this._PartialFields.Add(key, d);
-			}
-			return this;
-		}
 
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.

@@ -4456,30 +4456,6 @@ namespace Nest
 		}
 		
 
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SearchDescriptor<T> Source(params string[] _source)
-		{
-			this._QueryString.Source(_source);
-			return this;
-		}
-		
-
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SearchDescriptor<T> SourceExclude(params string[] _source_exclude)
-		{
-			this._QueryString.SourceExclude(_source_exclude);
-			return this;
-		}
-		
-
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SearchDescriptor<T> SourceInclude(params string[] _source_include)
-		{
-			this._QueryString.SourceInclude(_source_include);
-			return this;
-		}
-		
-
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public SearchDescriptor<T> Stats(params string[] stats)
 		{

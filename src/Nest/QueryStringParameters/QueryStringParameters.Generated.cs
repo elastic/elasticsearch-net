@@ -5032,36 +5032,6 @@ namespace Nest
 		}
 		
 		
-		internal  string[] __source { get; set; }
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SearchQueryString Source(params string[] _source)
-		{
-			this.__source = _source;
-			this.Add("_source", this.__source);
-			return this;
-		}
-		
-		
-		internal  string[] __source_exclude { get; set; }
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SearchQueryString SourceExclude(params string[] _source_exclude)
-		{
-			this.__source_exclude = _source_exclude;
-			this.Add("_source_exclude", this.__source_exclude);
-			return this;
-		}
-		
-		
-		internal  string[] __source_include { get; set; }
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SearchQueryString SourceInclude(params string[] _source_include)
-		{
-			this.__source_include = _source_include;
-			this.Add("_source_include", this.__source_include);
-			return this;
-		}
-		
-		
 		internal  string[] _stats { get; set; }
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
 		public SearchQueryString Stats(params string[] stats)

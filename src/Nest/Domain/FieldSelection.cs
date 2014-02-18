@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Nest.Domain
 {
-	public interface IFieldSelection<out T>
+	public interface IFieldSelection<T>
 	{
 		
 	}

@@ -125,10 +125,7 @@ namespace Nest
 		{
 			var types = (originalSearchDescriptor._Types ?? Enumerable.Empty<TypeNameMarker>())
 				.Where(t => t.Type != null);
-			var partialFields = originalSearchDescriptor._PartialFields.EmptyIfNull().Select(x => x.Key);
-			if (originalSearchDescriptor._ConcreteTypeSelector == null && (
-				types.Any(t => t.Type != typeof(TResult)))
-				|| partialFields.Any())
+			if (originalSearchDescriptor._ConcreteTypeSelector == null && types.Any(t => t.Type != typeof(TResult)))
 			{
 				var inferrer = new ElasticInferrer(this._settings);
 				var typeDictionary = types
@@ -148,7 +145,7 @@ namespace Nest
 
 			return this.DeserializeInternal<QueryResponse<TResult>>(
 				status,
-				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector, partialFields)
+				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector)
 			);
 		}
 

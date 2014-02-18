@@ -93,6 +93,7 @@ namespace Nest
 				}
 			}
 		}
+		
 		[JsonIgnore]
 		public IEnumerable<IHit<T>> Hits
 		{
@@ -106,7 +107,6 @@ namespace Nest
 				return new List<Hit<T>>();
 			}
 		}
-
 
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{
