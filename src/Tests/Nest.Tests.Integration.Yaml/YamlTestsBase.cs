@@ -283,7 +283,7 @@ namespace Nest.Tests.Integration.Yaml
 					var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
 					Assert.AreEqual(nJson, nOtherJson);
 				}
-				if (v.StartsWith("/"))
+				else if (v.StartsWith("/"))
 				{
 					var re = Regex.Replace(v, @"(^[\s\r\n]*?\/|\/[\s\r\n]*?$)", "");
 					Assert.IsTrue(Regex.IsMatch(this._status.Result, re, RegexOptions.IgnorePatternWhitespace));
