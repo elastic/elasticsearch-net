@@ -21,10 +21,14 @@ namespace Nest.Resolvers.Converters
 		private IElasticType GetTypeFromJObject(JObject po, JsonSerializer serializer)
 		{
 			JToken typeToken;
+			JToken fieldsToken;
 			serializer.TypeNameHandling = TypeNameHandling.None;
 			if (po.TryGetValue("type", out typeToken))
 			{
 				var type = typeToken.Value<string>().ToLowerInvariant();
+				var hasFields = po.TryGetValue("fields", out fieldsToken);
+				if (hasFields)
+					type = "multi_field";
 				switch (type)
 				{
 					case "string":

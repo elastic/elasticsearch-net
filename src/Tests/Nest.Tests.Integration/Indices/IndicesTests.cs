@@ -232,7 +232,7 @@ namespace Nest.Tests.Integration.Indices
 			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
 
 			Assert.IsTrue(deleteResponse.IsValid);
-			Assert.IsTrue(deleteResponse.OK);
+			Assert.IsTrue(deleteResponse.Acknowledged);
 
 		}
 
@@ -298,7 +298,7 @@ namespace Nest.Tests.Integration.Indices
 			var response = this._client.Map<ElasticsearchProject>(m=>m.InitializeUsing(mapping));
 
 			Assert.IsTrue(response.IsValid, response.ConnectionStatus.ToString());
-			Assert.IsTrue(response.OK, response.ConnectionStatus.ToString());
+			Assert.IsTrue(response.Acknowledged, response.ConnectionStatus.ToString());
 
 			mapping = this._client.GetMapping(gm => gm.Index<ElasticsearchProject>().Type<ElasticsearchProject>()).Mapping;
 			Assert.IsNotNull(mapping.Properties.ContainsKey(fieldName));
@@ -348,7 +348,7 @@ namespace Nest.Tests.Integration.Indices
 			var deleteResponse = client.DeleteIndex(i=>i.Index(indexName));
 
 			Assert.IsTrue(deleteResponse.IsValid);
-			Assert.IsTrue(deleteResponse.OK);
+			Assert.IsTrue(deleteResponse.Acknowledged);
 
 		}
 	}

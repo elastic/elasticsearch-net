@@ -34,15 +34,15 @@ namespace Nest.Domain
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> FieldValues { get; set; }
 
-		public K FieldValue<K>(Expression<Func<T, K>> objectPath)
+		public K[] FieldValue<K>(Expression<Func<T, K>> objectPath)
 		{
 			var path = this.Infer.PropertyPath(objectPath);
-			return this.FieldValue<K>(path);
+			return this.FieldValue<K[]>(path);
 		}
-		public K FieldValue<K>(Expression<Func<T, object>> objectPath)
+		public K[] FieldValue<K>(Expression<Func<T, object>> objectPath)
 		{
 			var path = this.Infer.PropertyPath(objectPath);
-			return this.FieldValue<K>(path);
+			return this.FieldValue<K[]>(path);
 		}
 
 		public K FieldValue<K>(string path)

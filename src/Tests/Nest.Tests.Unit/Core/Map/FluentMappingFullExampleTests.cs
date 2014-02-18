@@ -127,7 +127,6 @@ namespace Nest.Tests.Unit.Core.Map
 						.IndexOptions(IndexOptions.positions)
 						.NullValue("my_special_null_value")
 						.OmitNorms()
-						.OmitTermFrequencyAndPositions()
 						.PositionOffsetGap(1)
 						.SearchAnalyzer("standard")
 						.Store()

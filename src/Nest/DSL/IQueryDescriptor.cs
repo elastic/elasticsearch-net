@@ -41,9 +41,6 @@ namespace Nest
 		BaseQuery Terms(string field, params string[] terms);
 		BaseQuery TermsDescriptor(Action<TermsQueryDescriptor<T, object>> selector);
 		BaseQuery TermsDescriptor<K>(Action<TermsQueryDescriptor<T, K>> selector);
-		BaseQuery Text(Action<TextQueryDescriptor<T>> selector);
-		BaseQuery TextPhrase(Action<TextPhraseQueryDescriptor<T>> selector);
-		BaseQuery TextPhrasePrefix(Action<TextPhrasePrefixQueryDescriptor<T>> selector);
 		BaseQuery Match(Action<MatchQueryDescriptor<T>> selector);
 		BaseQuery MatchPhrase(Action<MatchPhraseQueryDescriptor<T>> selector);
 		BaseQuery MatchPhrasePrefix(Action<MatchPhrasePrefixQueryDescriptor<T>> selector);

@@ -7,19 +7,19 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		
-		public IIndicesShardResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
+		public IShardsOperationResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
 		{
 			refreshSelector = refreshSelector ?? (s => s);
-			return this.Dispatch<RefreshDescriptor, RefreshQueryString, IndicesShardResponse>(
+			return this.Dispatch<RefreshDescriptor, RefreshQueryString, ShardsOperationResponse>(
 				refreshSelector,
 				(p,d) => this.RawDispatch.IndicesRefreshDispatch(p)
 			);
 		}
 		
-		public Task<IIndicesShardResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
+		public Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null)
 		{
 			refreshSelector = refreshSelector ?? (s => s);
-			return this.DispatchAsync<RefreshDescriptor, RefreshQueryString, IndicesShardResponse, IIndicesShardResponse>(
+			return this.DispatchAsync<RefreshDescriptor, RefreshQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				refreshSelector,
 				(p,d)=> this.RawDispatch.IndicesRefreshDispatchAsync(p)
 			);

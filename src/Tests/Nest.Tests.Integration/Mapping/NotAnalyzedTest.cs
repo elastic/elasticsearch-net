@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -66,8 +67,8 @@ namespace Nest.Tests.Integration.Mapping
 				.MatchAll()
 			);
 			var facets = result.FacetItems<TermItem>(f => f.Country);
-			Assert.AreEqual(3, facets.Count());
-			Assert.AreEqual("royal", facets.FirstOrDefault().Term);
+			Assert.AreEqual(5, facets.Count());
+			facets.Select(f=>f.Term).Should().Contain("royal");
 		}
 
 

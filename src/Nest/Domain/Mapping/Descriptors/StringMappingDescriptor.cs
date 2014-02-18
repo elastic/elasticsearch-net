@@ -55,11 +55,7 @@ namespace Nest
 			this._Mapping.OmitNorms = omitNorms;
 			return this;
 		}
-		public StringMappingDescriptor<T> OmitTermFrequencyAndPositions(bool omitTermFrequencyAndPositions = true)
-		{
-			this._Mapping.OmitTermFrequencyAndPositions = omitTermFrequencyAndPositions;
-			return this;
-		}
+	
 		public StringMappingDescriptor<T> IndexOptions(IndexOptions indexOptions)
 		{
 			this._Mapping.IndexOptions = indexOptions;

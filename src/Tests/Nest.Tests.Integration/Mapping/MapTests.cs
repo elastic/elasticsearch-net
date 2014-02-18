@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Mapping
 			);
 			Assert.IsTrue(x.Acknowledged, x.ConnectionStatus.ToString());
 			var xx = this._client.Map<object>(m=>m.Type(typeof(ElasticsearchProject)).Index(index));
-			Assert.IsTrue(xx.OK);
+			Assert.IsTrue(xx.Acknowledged);
 
 			var typeMapping = this._client.GetMapping(i => i.Index(index).Type("elasticsearchprojects"));
 			typeMapping.Should().NotBeNull();

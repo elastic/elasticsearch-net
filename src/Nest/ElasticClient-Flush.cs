@@ -6,17 +6,17 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IIndicesOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector)
+		public IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector)
 		{
-			return this.Dispatch<FlushDescriptor, FlushQueryString, IndicesOperationResponse>(
+			return this.Dispatch<FlushDescriptor, FlushQueryString, ShardsOperationResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesFlushDispatch(p)
 			);
 		}
 		
-		public Task<IIndicesOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector)
+		public Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector)
 		{
-			return this.DispatchAsync<FlushDescriptor, FlushQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.DispatchAsync<FlushDescriptor, FlushQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesFlushDispatchAsync(p)
 			);

@@ -294,10 +294,11 @@ namespace Nest
 			};
 		}
 		
+
 		public GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c)
 		{
 			var dict = c.Success
-				? c.Deserialize<Dictionary<string, RootObjectMapping>>()
+				? c.Deserialize<GetRootObjectMappingWrapping>()
 				: null;
 			return new GetMappingResponse(c, dict);
 

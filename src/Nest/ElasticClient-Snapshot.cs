@@ -6,19 +6,19 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		public IIndicesShardResponse Snapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
+		public IShardsOperationResponse Snapshot(Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
 		{
 			snapshotSelector = snapshotSelector ?? (s => s);
-			return this.Dispatch<SnapshotDescriptor, SnapshotQueryString, IndicesShardResponse>(
+			return this.Dispatch<SnapshotDescriptor, SnapshotQueryString, ShardsOperationResponse>(
 				snapshotSelector,
 				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatch(p)
 			);
 		}
 
-		public Task<IIndicesShardResponse> SnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
+		public Task<IShardsOperationResponse> SnapshotAsync(Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
 		{
 			snapshotSelector = snapshotSelector ?? (s => s);
-			return this.DispatchAsync<SnapshotDescriptor, SnapshotQueryString, IndicesShardResponse, IIndicesShardResponse>(
+			return this.DispatchAsync<SnapshotDescriptor, SnapshotQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				snapshotSelector,
 				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatchAsync(p)
 			);

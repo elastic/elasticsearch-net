@@ -281,52 +281,6 @@ namespace Nest
 			return this.New(query, q => q.FuzzyQueryDescriptor = fuzzy);
 		}
 
-		/// <summary>
-		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis 
-		/// process constructs a boolean query from the provided text.
-		/// </summary>
-		public BaseQuery Text(Action<TextQueryDescriptor<T>> selector)
-		{
-			var query = new TextQueryDescriptor<T>();
-			selector(query);
-
-			var text = new Dictionary<PropertyPathMarker, object>() 
-			{
-				{ query._Field, query}
-			};
-			return this.New(query, q => q.TextQueryDescriptor = text);
-		}
-
-		/// <summary>
-		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text. 
-		/// </summary>
-		public BaseQuery TextPhrase(Action<TextPhraseQueryDescriptor<T>> selector)
-		{
-			var query = new TextPhraseQueryDescriptor<T>();
-			selector(query);
-
-			var text = new Dictionary<PropertyPathMarker, object>() 
-			{
-				{ query._Field, query}
-			};
-			return this.New(query, q => q.TextQueryDescriptor = text);
-		}
-
-		/// <summary>
-		/// The text_phrase_prefix is the same as text_phrase, expect it allows for prefix matches on the last term 
-		/// in the text
-		/// </summary>
-		public BaseQuery TextPhrasePrefix(Action<TextPhrasePrefixQueryDescriptor<T>> selector)
-		{
-			var query = new TextPhrasePrefixQueryDescriptor<T>();
-			selector(query);
-
-			var text = new Dictionary<PropertyPathMarker, object>() 
-			{
-				{ query._Field, query}
-			};
-			return this.New(query, q => q.TextQueryDescriptor = text);
-		}
 
 		/// <summary>
 		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis 
