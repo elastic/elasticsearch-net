@@ -4,7 +4,6 @@ namespace Nest
 {
     public interface IUnregisterPercolateResponse : IResponse
     {
-        bool OK { get; }
         bool Found { get; }
         string Index { get; }
         string Type { get; }
@@ -19,9 +18,6 @@ namespace Nest
 		{
 			this.IsValid = true;
 		}
-		[JsonProperty(PropertyName = "ok")]
-		public bool OK { get; internal set; }
-		
 		[JsonProperty(PropertyName = "found")]
 		public bool Found { get; internal set; }
 

@@ -15,7 +15,7 @@ namespace Nest
 		IEnumerable<string>, 
 		IDictionary<string, object>
 	{
-		private readonly IDictionary<string, dynamic> dictionary =
+		protected readonly IDictionary<string, dynamic> dictionary =
 			new Dictionary<string, dynamic>(StringComparer.InvariantCultureIgnoreCase);
 
 		/// <summary>

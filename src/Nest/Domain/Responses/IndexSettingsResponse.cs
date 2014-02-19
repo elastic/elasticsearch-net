@@ -1,16 +1,28 @@
-﻿using Nest.Resolvers.Converters;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-    public interface IIndexSettingsResponse : IResponse
-    {
-        IndexSettings Settings { get; }
-    }
+	public interface IIndexSettingsResponse : IResponse
+	{
+		IndexSettings Settings { get; }
+	}
 
-    [JsonObject]
+	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(IndexSettingsResponseConverter))]
 	public class IndexSettingsResponse : BaseResponse, IIndexSettingsResponse
-    {
-		public IndexSettings Settings { get; internal set; }
+	{
+		[JsonIgnore]
+		public IndexSettings Settings
+		{
+			get { return Nodes.HasAny() ? Nodes.First().Value : null; }
+		}
+
+		[JsonIgnore]
+		public Dictionary<string, IndexSettings> Nodes { get; set; }
+
 	}
 }

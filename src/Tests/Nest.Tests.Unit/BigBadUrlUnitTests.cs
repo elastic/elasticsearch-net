@@ -53,7 +53,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/_nodes", c => c.NodesInfo());
 			Do("GET", "/_nodes/insert-marvel-character", c => c.NodesInfo(cn => cn.NodeId("insert-marvel-character")));
 			Do("GET", "/_nodes/stats", c => c.NodesStats());
-			Do("GET", "/_nodes/insert-marvel-character/stats?jvm=true", c => c.NodesStats(cn => cn.NodeId("insert-marvel-character")));
+			Do("GET", "/_nodes/insert-marvel-character/stats/jvm", c => c
+				.NodesStats(cn => cn.NodeId("insert-marvel-character").Metrics(NodesStatsMetric.Jvm)));
 			Do("GET", "/_cluster/state", c => c.ClusterState());
 			Do("GET", "/_cluster/state?local=true", c => c.ClusterState(cs => cs.Local()));
 			Do("POST", "/_count", c => c.Count());
@@ -88,9 +89,9 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/_alias/*", c => c.GetAliases(a => a.Index<Doc>()));
 			Do("GET", "/_alias/prefix-*", c => c.GetAliases(a => a.Alias("prefix-*")));
 			Do("GET", "/mydefaultindex/_settings", c => c.GetIndexSettings(i => i.Index<Doc>()));
-			Do("GET", "/mydefaultindex/doc/_mapping", c => c.GetMapping<Doc>());
-			Do("GET", "/mycustomindex/doc/_mapping", c => c.GetMapping<Doc>(m => m.Index("mycustomindex")));
-			Do("GET", "/mycustomindex/sometype/_mapping", c => c.GetMapping(m => m.Index("mycustomindex").Type("sometype")));
+			Do("GET", "/mydefaultindex/_mapping/doc", c => c.GetMapping<Doc>());
+			Do("GET", "/mycustomindex/_mapping/doc", c => c.GetMapping<Doc>(m => m.Index("mycustomindex")));
+			Do("GET", "/mycustomindex/_mapping/sometype", c => c.GetMapping(m => m.Index("mycustomindex").Type("sometype")));
 			Do("GET", "/_template/mytemplate", c => c.GetTemplate("mytemplate"));
 			Do("GET", "/_all/_warmer/mywarmer", c => c.GetWarmer("mywarmer"));
 			Do("GET", "/mycustomindex/_warmer/mywarmer", c => c.GetWarmer("mywarmer", g => g.Index("mycustomindex")));
@@ -125,7 +126,7 @@ namespace Nest.Tests.Unit.Cluster
 			Do("PUT", "/mycustomindex/_warmer/my-warmer", c => c.PutWarmer("my-warmer", p => p.Index("mycustomindex").Search<Doc>(s => s.MatchAll())));
 			Do("POST", "/_refresh", c => c.Refresh());
 			Do("POST", "/mycustomindex/_refresh", c => c.Refresh(r => r.Index("mycustomindex")));
-			Do("POST", "/_percolator/mydefaultindex/mypercolator", c => c.RegisterPercolator<Doc>("mypercolator", p => p.Query(q => q.MatchAll())));
+			Do("POST", "/mydefaultindex/.percolator/mypercolator", c => c.RegisterPercolator<Doc>("mypercolator", p => p.Query(q => q.MatchAll())));
 			Do("GET", "/", c => c.RootNodeInfo());
 			Do("POST", "/_search/scroll?scroll=2m", c => c.Scroll<Doc>(s => s.ScrollId("difficulthash").Scroll("2m")));
 			Do("POST", "/_search/scroll?scroll=2m", c => c.Scroll<Doc>(scrollId: "difficulthash", scrollTime: "2m"));
@@ -145,8 +146,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/doc/1?fields=id", c => c.SourceFields<Doc>(g => g.Id(1).Fields(f => f.Id)));
 			Do("GET", "/_status", c => c.Status());
 			Do("GET", "/mydefaultindex/_status", c => c.Status(s => s.Index<Doc>()));
-			Do("DELETE", "/_percolator/mydefaultindex/mypercolator", c => c.UnregisterPercolator("mypercolator"));
-			Do("DELETE", "/_percolator/mycustomindex/mypercolator", c => c.UnregisterPercolator("mypercolator", r => r.Index("mycustomindex")));
+			Do("DELETE", "/mydefaultindex/.percolator/mypercolator", c => c.UnregisterPercolator("mypercolator"));
+			Do("DELETE", "/mycustomindex/.percolator/mypercolator", c => c.UnregisterPercolator("mypercolator", r => r.Index("mycustomindex")));
 			Do("POST", "/mydefaultindex/doc/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Document(new OtherDoc { Name = "asd" })));
 			Do("POST", "/mydefaultindex/customtype/1/_update", c => c.Update<Doc, OtherDoc>(u => u.Id(1).Type("customtype").Document(new OtherDoc { Name = "asd" })));
 			Do("PUT", "/mydefaultindex/_settings", c => c.UpdateSettings(u => u.AutoExpandReplicas(false)));

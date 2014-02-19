@@ -375,19 +375,20 @@ namespace Nest
 
 		public IndexSettingsResponse DeserializeIndexSettingsResponse(ConnectionStatus status)
 		{
-			var response = new IndexSettingsResponse { IsValid = false };
-			try
-			{
-				var settingsContainer = SettingsContainer(status);
-				response.Settings = settingsContainer.ToObject<IndexSettings>();
-				response.IsValid = true;
-			}
-			// ReSharper disable once EmptyGeneralCatchClause
-			catch
-			{
-			}
-			response.ConnectionStatus = status;
-			return response;
+			return null;
+			//var response = new IndexSettingsResponse { IsValid = false };
+			//try
+			//{
+			//	var settingsContainer = SettingsContainer(status);
+			//	response.Settings = settingsContainer.ToObject<IndexSettings>();
+			//	response.IsValid = true;
+			//}
+			//// ReSharper disable once EmptyGeneralCatchClause
+			//catch
+			//{
+			//}
+			//response.ConnectionStatus = status;
+			//return response;
 		}
 
 		//TODO although this gets the job done this looks a bit iffy, refactor

@@ -1,20 +1,22 @@
-  {
-  "filtered": {
-    "filter": {
-      "bool": {
-        "should": [
-          {
-            "term": {
-              "name": "foo"
-            }
-          },
-          {
-            "term": {
-              "name": "bar"
-            }
-          }
-        ]
-      }
-    }
-  }
+{
+	"query": {
+	  "filtered": {
+		"filter": {
+		  "bool": {
+			"should": [
+			  {
+				"term": {
+				  "name": "foo"
+				}
+			  },
+			  {
+				"term": {
+				  "name": "bar"
+				}
+			  }
+			]
+		  }
+		}
+	  }
+	}
 }

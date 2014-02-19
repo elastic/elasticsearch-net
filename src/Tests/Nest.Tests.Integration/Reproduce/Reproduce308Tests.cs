@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Reproduce
 			settings.Similarity = new SimilaritySettings();
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
-			settings.Add("index.blocks.read_only", "true");
+			settings.Settings.Add("index.blocks.read_only", "true");
 
 			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var idxRsp = this._client.CreateIndex(indexName, i=>i.InitializeUsing(settings));
@@ -35,8 +35,8 @@ namespace Nest.Tests.Integration.Reproduce
 			var getSettingsResponse = this._client.GetIndexSettings(i=>i.Index(indexName));
 			Assert.IsTrue(getSettingsResponse.IsValid, getSettingsResponse.ConnectionStatus.ToString());
 
-			getSettingsResponse.Settings.Should().ContainKey("index.blocks.read_only");
-			getSettingsResponse.Settings["index.blocks.read_only"].Should().Be("true");
+			bool readOnly = getSettingsResponse.Settings._.index.blocks.read_only;
+			readOnly.Should().BeTrue();
 
 
 

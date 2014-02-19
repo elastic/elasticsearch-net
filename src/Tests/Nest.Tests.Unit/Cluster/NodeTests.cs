@@ -14,31 +14,27 @@ namespace Nest.Tests.Unit.Cluster
 			var r = this._client.NodesInfo();
 			var status = r.ConnectionStatus;
 			var url = new Uri(status.RequestUrl);
-			url.Query.Should().Contain("all=true");
-			url.AbsolutePath.Should().StartWith("/_cluster/nodes");
+			url.AbsolutePath.Should().StartWith("/_nodes");
 		}
 
 		[Test]
 		public void NodeInfoFlags()
 		{
-			//TODO metrics
-			//var r = this._client.NodesInfo(c=>c.Process().Os()));
-			//var status = r.ConnectionStatus;
-			//var url = new Uri(status.RequestUrl);
-			//url.Query.Should().Contain("os=true");
-			//url.Query.Should().Contain("process=true");
-			//url.AbsolutePath.Should().StartWith("/_cluster/nodes");
+			var r = this._client.NodesInfo(c=>c.Metrics(NodesInfoMetric.Process, NodesInfoMetric.Os));
+			var status = r.ConnectionStatus;
+			var url = new Uri(status.RequestUrl);
+			url.AbsolutePath.Should().StartWith("/_nodes/process%2Cos");
 		}
 		[Test]
 		public void NodeInfoFlagsAndNodes()
-		{
-			//var r = this._client.ClusterNodeInfo(c=>c.Process().Os().NodeId("127.0.0.1"));
-			//var status = r.ConnectionStatus;
-			//var url = new Uri(status.RequestUrl);
-			//url.Query.Should().Contain("os=true");
-			//url.Query.Should().Contain("process=true");
-			//url.AbsolutePath.Should().StartWith("/_cluster/nodes");
-			//url.AbsolutePath.Should().Contain("127.0.0.1");
+		{	
+			var r = this._client.NodesInfo(c=>c
+				.NodeId("127.0.0.1") //Node id's don't look like this
+				.Metrics(NodesInfoMetric.Process, NodesInfoMetric.Os)
+			);
+			var status = r.ConnectionStatus;
+			var url = new Uri(status.RequestUrl);
+			url.AbsolutePath.Should().StartWith("/_nodes/127.0.0.1/process%2Cos");
 		}
 
 		[Test]
@@ -47,20 +43,19 @@ namespace Nest.Tests.Unit.Cluster
 			var r = this._client.NodesStats();
 			var status = r.ConnectionStatus;
 			var url = new Uri(status.RequestUrl);
-			url.AbsolutePath.Should().StartWith("/_cluster/nodes/stats");
-			url.Query.Should().Contain("all=true");
+			url.AbsolutePath.Should().StartWith("/_nodes/stats");
 			
 		}
 		[Test]
 		public void NodeStatsSpecificNodeWithFlags()
 		{
-			//todo metrics
-			//var r = this._client.ClusterNodeStats(c=>c.NodeId("127.0.0.1").Network().Http());
-			//var status = r.ConnectionStatus;
-			//var url = new Uri(status.RequestUrl);
-			//url.AbsolutePath.Should().StartWith("/_cluster/nodes/127.0.0.1/stats");
-			//url.Query.Should().Contain("network=true");
-			//url.Query.Should().Contain("http=true");
+			var r = this._client.NodesStats(c=>c
+				.NodeId("127.0.0.1")
+				.Metrics(NodesStatsMetric.Network, NodesStatsMetric.Http)
+			);
+			var status = r.ConnectionStatus;
+			var url = new Uri(status.RequestUrl);
+			url.AbsolutePath.Should().StartWith("/_nodes/127.0.0.1/stats/network%2Chttp");
 		}
 
 	}

@@ -22,9 +22,9 @@ namespace Nest
 			//the name is actually the id, we rectify that here
 
 			var pathInfo = base.ToPathInfo<DeleteQueryString>(settings, new DeleteQueryString());
-			pathInfo.Type = pathInfo.Index;
+			pathInfo.Index = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;
-			pathInfo.Index = "_percolator";
+			pathInfo.Type = ".percolator";
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 
 			return pathInfo;

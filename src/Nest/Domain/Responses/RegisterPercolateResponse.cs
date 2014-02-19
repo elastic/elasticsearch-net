@@ -2,24 +2,24 @@
 
 namespace Nest
 {
-    public interface IRegisterPercolateResponse : IResponse
-    {
-        bool OK { get; }
-        string Index { get; }
-        string Type { get; }
-        string Id { get; }
-        int Version { get; }
-    }
+	public interface IRegisterPercolateResponse : IResponse
+	{
+		bool Created { get; }
+		string Index { get; }
+		string Type { get; }
+		string Id { get; }
+		int Version { get; }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class RegisterPercolateResponse : BaseResponse, IRegisterPercolateResponse
-    {
+	{
 		public RegisterPercolateResponse()
 		{
 			this.IsValid = true;
 		}
-		[JsonProperty(PropertyName = "ok")]
-		public bool OK { get; internal set; }
+		[JsonProperty(PropertyName = "created")]
+		public bool Created { get; internal set; }
 
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }

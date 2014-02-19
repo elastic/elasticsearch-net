@@ -10,7 +10,6 @@
         "boost": 1.1,
         "null_value": "my_special_null_value",
         "omit_norms": true,
-        "omit_term_freq_and_positions": true,
         "index_options": "positions",
         "index_analyzer": "standard",
         "search_analyzer": "standard",

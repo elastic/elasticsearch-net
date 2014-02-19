@@ -4,18 +4,13 @@ namespace Nest
 {
 	public interface ISettingsOperationResponse : IResponse
 	{
-		bool OK { get; }
+		bool Acknowledged { get; }
 	}
 
 	[JsonObject]
 	public class SettingsOperationResponse : BaseResponse, ISettingsOperationResponse
 	{
-		public SettingsOperationResponse()
-		{
-			this.IsValid = true;
-		}
-
-		[JsonProperty(PropertyName = "ok")]
-		public bool OK { get; internal set; }
+		[JsonProperty(PropertyName = "acknowledged")]
+		public bool Acknowledged { get; internal set; }
 	}
 }

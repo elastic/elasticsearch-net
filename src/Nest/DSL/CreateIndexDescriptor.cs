@@ -62,7 +62,7 @@ namespace Nest
 			settingsSelector(dict);
 			foreach (var kv in dict)
 			{
-				this._IndexSettings.TryAdd(kv.Key, kv.Value);
+				this._IndexSettings.Settings.Add(kv.Key, kv.Value);
 			}
 			return this;
 		}

@@ -617,6 +617,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />

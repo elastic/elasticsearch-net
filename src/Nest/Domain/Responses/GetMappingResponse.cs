@@ -26,6 +26,8 @@ namespace Nest
 			this.IsValid = status.Success && dict != null && dict.Count > 0;
 			if (!this.IsValid) return;
 			var firstNode = dict.First();
+			if (!firstNode.Value.HasAny())
+				return;
 			var mappingNode = firstNode.Value["mappings"];
 			if (mappingNode == null)
 			{

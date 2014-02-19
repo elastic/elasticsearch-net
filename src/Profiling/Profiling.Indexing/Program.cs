@@ -100,7 +100,7 @@ namespace Profiling.Indexing
 			var indexSettings = new IndexSettings();
 			indexSettings.NumberOfReplicas = 1;
 			indexSettings.NumberOfShards = 5;
-			indexSettings.Add("index.refresh_interval", "-1");
+			indexSettings.Settings.Add("index.refresh_interval", "-1");
 
 			var createResponse = client.CreateIndex(indexName, i=>i.InitializeUsing(indexSettings));
 			client.Map<Message>(m=>m.MapFromAttributes());

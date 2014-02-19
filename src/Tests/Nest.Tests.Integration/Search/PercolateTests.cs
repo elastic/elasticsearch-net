@@ -22,8 +22,9 @@ namespace Nest.Tests.Integration.Search
 				)
 			);
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
-			Assert.AreEqual(r.Type, ElasticsearchConfiguration.DefaultIndex);
+			Assert.True(r.Created);
+			Assert.AreEqual(r.Index, ElasticsearchConfiguration.DefaultIndex);
+			Assert.AreEqual(r.Type, ".percolator");
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
 			r.ConnectionStatus.Request.Should().NotBeNullOrEmpty().And.NotBe("{}");
@@ -41,21 +42,20 @@ namespace Nest.Tests.Integration.Search
 				)
 			);
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
-			Assert.AreEqual(r.Type, ElasticsearchConfiguration.DefaultIndex);
+			Assert.True(r.Created);
+			Assert.AreEqual(r.Index, ElasticsearchConfiguration.DefaultIndex);
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
 
 			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
 			Assert.True(re.IsValid);
-			Assert.True(re.OK);
 			Assert.True(re.Found);
-			Assert.AreEqual(re.Type, ElasticsearchConfiguration.DefaultIndex);
+			Assert.AreEqual(re.Index, ElasticsearchConfiguration.DefaultIndex);
+			Assert.AreEqual(re.Type, ".percolator");
 			Assert.AreEqual(re.Id, name);
 			Assert.Greater(re.Version, 0);
 			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
 			Assert.True(re.IsValid);
-			Assert.True(re.OK);
 			Assert.False(re.Found);
 		}
 
@@ -72,9 +72,8 @@ namespace Nest.Tests.Integration.Search
 				LOC = 100000, //Too many :(
 			}, p=>p.Index<ElasticsearchProject>());
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
 			Assert.NotNull(r.Matches);
-			Assert.True(r.Matches.Contains(name));
+			Assert.True(r.Matches.Select(m=>m.Id).Contains(name));
 			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
 		}
 		[Test]
@@ -89,7 +88,7 @@ namespace Nest.Tests.Integration.Search
 				 )
 			 );
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
+			Assert.True(r.Created);
 			var obj = new ElasticsearchProject()
 			{
 				Name = "NEST",
@@ -98,9 +97,8 @@ namespace Nest.Tests.Integration.Search
 			};
 			var percolateResponse = this._client.Percolate(obj);
 			Assert.True(percolateResponse.IsValid);
-			Assert.True(percolateResponse.OK);
 			Assert.NotNull(percolateResponse.Matches);
-			Assert.True(percolateResponse.Matches.Contains(name));
+			Assert.True(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
 			var re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
 		}
@@ -117,7 +115,7 @@ namespace Nest.Tests.Integration.Search
 				 )
 			 );
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
+			Assert.True(r.Created);
 			c.Refresh();
 			var obj = new ElasticsearchProject()
 			{
@@ -127,16 +125,14 @@ namespace Nest.Tests.Integration.Search
 			};
 			var percolateResponse = this._client.Percolate(obj,p => p.Query(q=>q.Match(m=>m.OnField("color").Query("blue"))));
 			Assert.True(percolateResponse.IsValid);
-			Assert.True(percolateResponse.OK);
 			Assert.NotNull(percolateResponse.Matches);
-			Assert.True(percolateResponse.Matches.Contains(name), percolateResponse.Matches.Count().ToString());
+			Assert.True(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
 			//should not match since we registered with the color blue
 			percolateResponse = this._client.Percolate(obj, p => p.Query(q => q.Term("color", "green")));
 			Assert.True(percolateResponse.IsValid);
-			Assert.True(percolateResponse.OK);
 			Assert.NotNull(percolateResponse.Matches);
-			Assert.False(percolateResponse.Matches.Contains(name));
+			Assert.False(percolateResponse.Matches.Select(m=>m.Id).Contains(name));
 
 			re = c.UnregisterPercolator(name, ur=>ur.Index<ElasticsearchProject>());
 

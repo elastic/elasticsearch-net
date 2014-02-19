@@ -59,9 +59,9 @@ namespace Nest
 
 			var pathInfo = base.ToPathInfo<IndexQueryString>(settings, new IndexQueryString());
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
-			pathInfo.Type = pathInfo.Index;
+			pathInfo.Index = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;
-			pathInfo.Index = "_percolator";
+			pathInfo.Type = ".percolator";
 
 			return pathInfo;
 		}

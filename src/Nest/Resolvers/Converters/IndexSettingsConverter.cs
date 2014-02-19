@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nest.Domain.Settings;
 using Newtonsoft.Json;
@@ -10,7 +11,20 @@ namespace Nest.Resolvers.Converters
 
 	public class IndexSettingsConverter : JsonConverter
 	{
+		private void WriteSettingObject(JsonWriter writer, JObject obj)
+		{
+			writer.WriteStartObject();
+			foreach (var property in obj.Children<JProperty>())
+			{
+				writer.WritePropertyName(property.Name);
+				if (property.Value is JObject)
+					this.WriteSettingObject(writer, property.Value as JObject);
+				else
+					writer.WriteValue(property.Value);
+			}
+			writer.WriteEndObject();
 
+		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var indexSettings = (IndexSettings)value;
@@ -22,13 +36,15 @@ namespace Nest.Resolvers.Converters
 
 			writer.WritePropertyName("index");
 			writer.WriteStartObject();
-
 			if (indexSettings.Settings.HasAny())
 			{
 				foreach (var kv in indexSettings.Settings)
 				{
 					writer.WritePropertyName(kv.Key);
-					writer.WriteValue(kv.Value);
+					if (kv.Value is JObject)
+						this.WriteSettingObject(writer, kv.Value as JObject);
+					else
+						writer.WriteValue(kv.Value);
 				}
 			}
 
@@ -114,11 +130,16 @@ namespace Nest.Resolvers.Converters
 		{
 			JObject o = JObject.Load(reader);
 			var result = new IndexSettings();
+			var dictionary = new Dictionary<string, object>();
+			serializer.Populate(o.CreateReader(), dictionary);
+			result.Settings = dictionary;
+			result._ = ElasticsearchResponse.Create(dictionary);
 			foreach (var rootProperty in o.Children<JProperty>())
 			{
 				if (rootProperty.Name.Equals("analysis", StringComparison.InvariantCultureIgnoreCase))
 				{
 					result.Analysis = serializer.Deserialize<AnalysisSettings>(rootProperty.Value.CreateReader());
+					result.Settings.Remove(rootProperty.Name);
 				}
 				else if (rootProperty.Name.Equals("warmers", StringComparison.InvariantCultureIgnoreCase))
 				{
@@ -126,6 +147,7 @@ namespace Nest.Resolvers.Converters
 					{
 						result.Warmers[jWarmer.Name] = serializer.Deserialize<WarmerMapping>(jWarmer.Value.CreateReader());
 					}
+					result.Settings.Remove(rootProperty.Name);
 				}
 				else if (rootProperty.Name.Equals("similarity", StringComparison.InvariantCultureIgnoreCase))
 				{
@@ -153,10 +175,7 @@ namespace Nest.Resolvers.Converters
 						result.Similarity.CustomSimilarities.RemoveAll(x => x.Name == customSimilarity.Name);
 						result.Similarity.CustomSimilarities.Add(customSimilarity);
 					}
-				}
-				else
-				{
-					result.Settings[rootProperty.Name] = rootProperty.Value.ToString();
+					result.Settings.Remove(rootProperty.Name);
 				}
 			}
 			return result;

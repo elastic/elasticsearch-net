@@ -59,7 +59,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 			StringAssert.Contains("max_query_terms=25", status.RequestUrl);
 			StringAssert.Contains("min_doc_freq=5", status.RequestUrl);
 			StringAssert.Contains("max_doc_freq=200", status.RequestUrl);
-			StringAssert.Contains("min_word_len=2", status.RequestUrl);
+			StringAssert.Contains("min_word_length=2", status.RequestUrl);
 			StringAssert.Contains("boost_terms=1.4", status.RequestUrl);
 
 		}

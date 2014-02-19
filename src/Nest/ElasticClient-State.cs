@@ -10,7 +10,7 @@ namespace Nest
 		{
 			clusterStateSelector = clusterStateSelector ?? (s => s);
 			return this.Dispatch<ClusterStateDescriptor, ClusterStateQueryString, ClusterStateResponse>(
-				s=> clusterStateSelector(s.FlatSettings()),
+				clusterStateSelector,
 				(p, d) => this.RawDispatch.ClusterStateDispatch(p)
 			);
 		}
@@ -20,7 +20,7 @@ namespace Nest
 			clusterStateSelector = clusterStateSelector ?? (s => s);
 			return this
 				.DispatchAsync<ClusterStateDescriptor, ClusterStateQueryString, ClusterStateResponse, IClusterStateResponse>(
-					s=> clusterStateSelector(s.FlatSettings()),
+					clusterStateSelector,
 					(p, d) => this.RawDispatch.ClusterStateDispatchAsync(p)
 				);
 		}

@@ -18,12 +18,12 @@ namespace Nest.Tests.Integration.Mapping
 			Assert.AreEqual("boolean", typeMapping.Properties["boolValue"].Type.Name);
 			Assert.AreEqual("integer", typeMapping.Properties["intValues"].Type.Name);
 			Assert.AreEqual("float", typeMapping.Properties["floatValues"].Type.Name);
-			Assert.AreEqual("multi_field", typeMapping.Properties["name"].Type.Name);
+			Assert.AreEqual("string", typeMapping.Properties["name"].Type.Name);
 			Assert.AreEqual("date", typeMapping.Properties["startedOn"].Type.Name);
 			Assert.AreEqual("long", typeMapping.Properties["stupidIntIWantAsLong"].Type.Name);
 			Assert.AreEqual("float", typeMapping.Properties["floatValue"].Type.Name);
 			Assert.AreEqual("integer", typeMapping.Properties["id"].Type.Name);
-			Assert.AreEqual("multi_field", typeMapping.Properties["loc"].Type.Name);
+			Assert.AreEqual("integer", typeMapping.Properties["loc"].Type.Name);
 			var mapping = typeMapping.Properties["country"] as StringMapping;
 			Assert.NotNull(mapping);
 			Assert.AreEqual(FieldIndexOption.not_analyzed, mapping.Index);

@@ -12,7 +12,7 @@ namespace Nest
 		{
 			selector = selector ?? (s => s);
 			return this.Dispatch<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse>(
-				s=>selector(s.FlatSettings()),
+				selector,
 				(p, d)=> this.RawDispatch.NodesInfoDispatch(p)
 			);
 		}
@@ -21,7 +21,7 @@ namespace Nest
 		{
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse, INodeInfoResponse>(
-				s=>selector(s.FlatSettings()),
+				selector,
 				(p, d)=> this.RawDispatch.NodesInfoDispatchAsync(p)
 			);
 		}

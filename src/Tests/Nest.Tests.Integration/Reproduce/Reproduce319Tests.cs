@@ -27,9 +27,9 @@ namespace Nest.Tests.Integration.Reproduce
 			settings.Similarity = new SimilaritySettings();
 			settings.NumberOfReplicas = 1;
 			settings.NumberOfShards = 5;
-			settings.Add("index.refresh_interval", "10s");
-			settings.Add("merge.policy.merge_factor", "10");
-			settings.Add("search.slowlog.threshold.fetch.warn", "1s");
+			settings.Settings.Add("index.refresh_interval", "10s");
+			settings.Settings.Add("merge.policy.merge_factor", "10");
+			settings.Settings.Add("search.slowlog.threshold.fetch.warn", "1s");
 			settings.Analysis.Analyzers.Add(new KeyValuePair<string, AnalyzerBase>("keyword", new KeywordAnalyzer()));
 			settings.Analysis.Analyzers.Add(new KeyValuePair<string, AnalyzerBase>("simple", new SimpleAnalyzer()));
 			settings.Mappings.Add(new RootObjectMapping
