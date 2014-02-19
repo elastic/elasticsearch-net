@@ -10,7 +10,6 @@ namespace Nest.Tests.Integration.Indices
 		public void SimpleStats()
 		{
 			var r = this._client.IndicesStats();
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
 			Assert.NotNull(r.Stats.Primaries);
@@ -29,7 +28,6 @@ namespace Nest.Tests.Integration.Indices
 		public void SimpleIndexStats()
 		{
 			var r = this._client.IndicesStats(i=>i.Index(ElasticsearchConfiguration.DefaultIndex));
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
 			Assert.NotNull(r.Stats.Primaries);
@@ -45,27 +43,23 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var r = this._client.IndicesStats(i => i
 				.Types("elasticsearchprojects")
+				.Metrics(IndicesStatsMetric.Completion, IndicesStatsMetric.Indexing)
 			);
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Stats);
 			Assert.NotNull(r.Stats.Primaries);
-			Assert.NotNull(r.Stats.Primaries.Documents);
-			Assert.NotNull(r.Stats.Primaries.Get);
+			Assert.Null(r.Stats.Primaries.Documents);
+			Assert.Null(r.Stats.Primaries.Get);
 			Assert.NotNull(r.Stats.Primaries.Indexing);
 			//possible ES bug https://github.com/elasticsearch/elasticsearch/issues/1516
 			//Assert.NotNull(r.Stats.Primaries.Search);
-			Assert.NotNull(r.Stats.Primaries.Store);
-			Assert.NotNull(r.Stats.Primaries.Flush);
-			Assert.NotNull(r.Stats.Primaries.Refresh);
-			Assert.NotNull(r.Stats.Primaries.Merges);
+			Assert.Null(r.Stats.Primaries.Store);
+			Assert.Null(r.Stats.Primaries.Flush);
+			Assert.Null(r.Stats.Primaries.Refresh);
+			Assert.Null(r.Stats.Primaries.Merges);
 			Assert.NotNull(r.Stats.Total);
 			Assert.NotNull(r.Indices);
 			Assert.True(r.Indices.Count > 0);
-			Assert.NotNull(r.Stats.Primaries.Indexing.Types);
-			Assert.True(r.Stats.Primaries.Indexing.Types.Count > 0);
-			var deletedOnPrimaries = r.Stats.Primaries.Documents.Deleted;
-			var x = r.Stats.Primaries.Indexing.Types["elasticsearchprojects"].Current;
 
 		}
 	}

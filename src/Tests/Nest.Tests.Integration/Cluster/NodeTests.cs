@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.Remoting.Channels;
 using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Cluster
@@ -9,8 +10,19 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void NodeInfo()
 		{
-
-			var r = this._client.NodesInfo();
+			var r = this._client.NodesInfo(c=>c
+				.Metrics(
+					NodesInfoMetric.Transport, 
+					NodesInfoMetric.Jvm,
+					NodesInfoMetric.ThreadPool,
+					NodesInfoMetric.Http,
+					NodesInfoMetric.Network,
+					NodesInfoMetric.Os,
+					NodesInfoMetric.Process,
+					NodesInfoMetric.Settings,
+					NodesInfoMetric.Plugin
+				)
+			);
 
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
@@ -18,8 +30,8 @@ namespace Nest.Tests.Integration.Cluster
 			Assert.IsNotNull(node.Name);
 			Assert.IsNotNull(node.TransportAddress);
 			Assert.IsNotNull(node.Hostname);
-			Assert.IsNull(node.JVM);
-			Assert.IsNull(node.ThreadPool);
+			Assert.IsNotNull(node.JVM);
+			Assert.IsNotNull(node.ThreadPool);
 		}
 
 		[Test]

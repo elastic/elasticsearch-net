@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -217,11 +218,13 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticsearchProject>(d => d
+			var deleteResult = this._client.DeleteByQuery<ElasticsearchProject>(d => d
 				.Query(q=>q
 					.Term(f => f.Name, "elasticsearch.pm")
 				)
 			);
+
+			deleteResult.IsValid.Should().BeTrue();
 
 			result = this._client.Search<ElasticsearchProject>(s => s
 				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
@@ -252,11 +255,13 @@ namespace Nest.Tests.Integration.Core
 			var totalSet = result.Documents.Count();
 			Assert.Greater(totalSet, 0);
 			var totalResults = result.Total;
-			this._client.DeleteByQuery<ElasticsearchProject>(d => d
+			var deleteResult = this._client.DeleteByQuery<ElasticsearchProject>(d => d
 				.Query(q=>q
 					.Term(f => f.Name, "elasticsearch.pm")
 				)
 			);
+
+			deleteResult.IsValid.Should().BeTrue();
 
 			result = this._client.Search<ElasticsearchProject>(s => s
 				.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))

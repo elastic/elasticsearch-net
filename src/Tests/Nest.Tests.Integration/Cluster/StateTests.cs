@@ -33,27 +33,26 @@ namespace Nest.Tests.Integration.Cluster
 		[Test]
 		public void StateWithoutMetadata()
 		{
-			//TODO incorporate metrics
-			//var r = this._client.ClusterState(cs=>cs.());
-			//Assert.IsNull(r.Metadata);
+			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Blocks));
+			Assert.IsNull(r.Metadata);
 		}
 		[Test]
 		public void StateWithoutNodes()
 		{
-			//var r = this._client.ClusterState(cs=>cs.FilterNodes());
-			//Assert.IsNull(r.Nodes);
+			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Metadata));
+			Assert.IsNull(r.Nodes);
 		}
 		[Test]
 		public void StateWithoutRoutingTable()
 		{
-			//var r = this._client.ClusterState(cs=>cs.FilterRoutingTable());
-			//Assert.IsNull(r.RoutingTable);
+			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Nodes));
+			Assert.IsNull(r.RoutingTable);
 		}
 		[Test]
 		public void StateWithoutBlocks()
 		{
-			////var r = this._client.ClusterState(ClusterStateInfo.ExcludeRoutingTable);
-			//Assert.IsNull(r.Blocks);
+			var r = this._client.ClusterState(cs=>cs.Metrics(ClusterStateMetric.Nodes));
+			Assert.IsNull(r.Blocks);
 		}
 	}
 }

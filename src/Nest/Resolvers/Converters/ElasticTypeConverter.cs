@@ -26,6 +26,7 @@ namespace Nest.Resolvers.Converters
 			if (po.TryGetValue("type", out typeToken))
 			{
 				var type = typeToken.Value<string>().ToLowerInvariant();
+				var originalType = type;
 				var hasFields = po.TryGetValue("fields", out fieldsToken);
 				if (hasFields)
 					type = "multi_field";
@@ -51,7 +52,9 @@ namespace Nest.Resolvers.Converters
 					case "nested":
 						return serializer.Deserialize(po.CreateReader(), typeof(NestedObjectMapping)) as NestedObjectMapping;
 					case "multi_field":
-						return serializer.Deserialize(po.CreateReader(), typeof(MultiFieldMapping)) as MultiFieldMapping;
+						var m =serializer.Deserialize(po.CreateReader(), typeof(MultiFieldMapping)) as MultiFieldMapping;
+						m.Type = originalType;
+						return m;
 					case "ip":
 						return serializer.Deserialize(po.CreateReader(), typeof(IPMapping)) as IPMapping;
 					case "geo_point":

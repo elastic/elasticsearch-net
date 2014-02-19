@@ -5,19 +5,17 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[DescriptorFor("IndicesValidateQuery")]
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public partial class ValidateQueryDescriptor<T> 
 		:	QueryPathDescriptorBase<ValidateQueryDescriptor<T>, T, ValidateQueryQueryString>
-		, IActAsQuery
 		, IPathInfo<ValidateQueryQueryString> 
-		, ICustomJson
 		where T : class
 	{
-		BaseQuery IActAsQuery._Query { get; set; }
+		[JsonProperty("query")]
+		public BaseQuery _Query { get; set; }
 
 		public ValidateQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
-			((IActAsQuery)this)._Query = querySelector(new QueryDescriptor<T>());
+			this._Query = querySelector(new QueryDescriptor<T>());
 			return this;
 		}
 
@@ -31,10 +29,6 @@ namespace Nest
 				: PathInfoHttpMethod.POST;
 				
 			return pathInfo;
-		}
-		object ICustomJson.GetCustomJson()
-		{
-			return ((IActAsQuery) this)._Query;
 		}
 	}
 }

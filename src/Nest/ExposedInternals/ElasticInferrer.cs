@@ -59,7 +59,7 @@ namespace Nest
 					? this.PropertyNameResolver.ResolveToLastToken(marker.Expression)
 					: this.TypeName(marker.Type);
 		}
-		
+
 		public string PropertyName(MemberInfo member)
 		{
 			return member == null ? null : this.PropertyNameResolver.ResolveToLastToken(member);

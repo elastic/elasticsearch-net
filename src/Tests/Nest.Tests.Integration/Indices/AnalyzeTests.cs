@@ -26,7 +26,6 @@ namespace Nest.Tests.Integration.Indices
 			var text = "this is a string with some spaces and stuff";
 			var r = this._client.Analyze(a=>a.Text(text));
 			this._defaultAnalyzeAssertations(r);
-			Assert.False(r.Tokens.Count() == text.Split(new[] { ' ' }).Count());
 		}
 		[Test]
 		public void FieldAnalyze()
@@ -35,7 +34,6 @@ namespace Nest.Tests.Integration.Indices
 			var text = "this is a string with some spaces and stuff";
 			var r = this._client.Analyze(a=>a.Index<ElasticsearchProject>().Field<ElasticsearchProject>(p => p.Content).Text(text));
 			this._defaultAnalyzeAssertations(r);
-			Assert.False(r.Tokens.Count() == text.Split(new[] { ' ' }).Count());
 		}
 		[Test]
 		public void SimplAnalyzeDifferentIndex()
@@ -44,7 +42,6 @@ namespace Nest.Tests.Integration.Indices
 			var text = "this is a string with some spaces and stuff";
 			var r = this._client.Analyze(a=>a.Analyzer("whitespace").Text(text).Index(ElasticsearchConfiguration.DefaultIndex));
 			this._defaultAnalyzeAssertations(r);
-			Assert.True(r.Tokens.Count() == text.Split(new[] { ' ' }).Count());
 		}
 		[Test]
 		public void AnalyzeDifferentIndex()
@@ -54,7 +51,6 @@ namespace Nest.Tests.Integration.Indices
 			var index = ElasticsearchConfiguration.DefaultIndex;
 			var r = this._client.Analyze(a=>a.Field<ElasticsearchProject>(p => p.Content).Index(index).Text(text));
 			this._defaultAnalyzeAssertations(r);
-			Assert.False(r.Tokens.Count() == text.Split(new []{' '}).Count());
 		}
 		[Test]
 		public void SimplAnalyzeDifferentIndexAndField()
@@ -63,7 +59,6 @@ namespace Nest.Tests.Integration.Indices
 			var text = "this is a string with some spaces and stuff";
 			var r = this._client.Analyze(a=>a.Field("content").Index(ElasticsearchConfiguration.DefaultIndex).Text(text));
 			this._defaultAnalyzeAssertations(r);
-			Assert.False(r.Tokens.Count() == text.Split(new[] { ' ' }).Count());
 		}
 	}
 }

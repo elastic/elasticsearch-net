@@ -167,7 +167,7 @@ namespace Nest
 	
 	
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum MetricOptions 
+	public enum ClusterStateMetric 
 	{
 		  [EnumMember(Value = "_all")]
 		All,
@@ -183,7 +183,97 @@ namespace Nest
 	
 	
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum IndexMetricOptions 
+	public enum IndicesStatsMetric 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "completion")]
+		Completion,
+		[EnumMember(Value = "docs")]
+		Docs,
+		[EnumMember(Value = "fielddata")]
+		Fielddata,
+		[EnumMember(Value = "filter_cache")]
+		FilterCache,
+		[EnumMember(Value = "flush")]
+		Flush,
+		[EnumMember(Value = "get")]
+		Get,
+		[EnumMember(Value = "id_cache")]
+		IdCache,
+		[EnumMember(Value = "indexing")]
+		Indexing,
+		[EnumMember(Value = "merge")]
+		Merge,
+		[EnumMember(Value = "percolate")]
+		Percolate,
+		[EnumMember(Value = "refresh")]
+		Refresh,
+		[EnumMember(Value = "search")]
+		Search,
+		[EnumMember(Value = "segments")]
+		Segments,
+		[EnumMember(Value = "store")]
+		Store,
+		[EnumMember(Value = "warmer")]
+		Warmer
+	}
+	
+	
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum NodesInfoMetric 
+	{
+		  [EnumMember(Value = "settings")]
+		Settings,
+		[EnumMember(Value = "os")]
+		Os,
+		[EnumMember(Value = "process")]
+		Process,
+		[EnumMember(Value = "jvm")]
+		Jvm,
+		[EnumMember(Value = "thread_pool")]
+		ThreadPool,
+		[EnumMember(Value = "network")]
+		Network,
+		[EnumMember(Value = "transport")]
+		Transport,
+		[EnumMember(Value = "http")]
+		Http,
+		[EnumMember(Value = "plugin")]
+		Plugin
+	}
+	
+	
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum NodesStatsMetric 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "breaker")]
+		Breaker,
+		[EnumMember(Value = "fs")]
+		Fs,
+		[EnumMember(Value = "http")]
+		Http,
+		[EnumMember(Value = "indices")]
+		Indices,
+		[EnumMember(Value = "jvm")]
+		Jvm,
+		[EnumMember(Value = "network")]
+		Network,
+		[EnumMember(Value = "os")]
+		Os,
+		[EnumMember(Value = "process")]
+		Process,
+		[EnumMember(Value = "thread_pool")]
+		ThreadPool,
+		[EnumMember(Value = "transport")]
+		Transport
+	}
+	
+	
+	[JsonConverter(typeof(StringEnumConverter))]
+	public enum NodesStatsIndexMetric 
 	{
 		  [EnumMember(Value = "_all")]
 		All,

@@ -17,7 +17,7 @@ namespace Nest
 		public IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
 		{
 			return this.Dispatch<GetIndexSettingsDescriptor, GetIndexSettingsQueryString, IndexSettingsResponse>(
-				s=> selector(s.FlatSettings()),
+				s=> selector(s),
 				(p, d) => this.RawDispatch.IndicesGetSettingsDispatch(p),
 				(c, d) => this.Serializer.DeserializeIndexSettingsResponse(c)
 			);
@@ -46,8 +46,6 @@ namespace Nest
 				(p, d)=> this.RawDispatch.IndicesDeleteDispatchAsync(p)
 			);
 		}
-		
-		
 
 	}
 }

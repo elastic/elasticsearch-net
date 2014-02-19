@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Domain
@@ -31,12 +32,16 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 					};
 
-				var urlParamEnums = from p in this.Endpoints.Values.SelectMany(v => v.CsharpMethods)
-					.SelectMany(m => m.Parts)
+				var urlParamEnums = from data in this.Endpoints.Values
+					.SelectMany(v =>  v.CsharpMethods.Select(m=>new { m, n = v.CsharpMethodName}))
+					.SelectMany(m => m.m.Parts.Select(part=> new { m = m.n, p = part}))
+					let p = data.p
+					let m = data.m
 					where p.Options != null && p.Options.Any()
+					let name = p.Name.Contains("metric") ?  m + p.Name.ToPascalCase() : p.Name.ToPascalCase()
 					select new EnumDescription
 					{
-						Name = p.Name.ToPascalCase() + "Options",
+						Name = name,
 						Options = p.Options
 					};
 

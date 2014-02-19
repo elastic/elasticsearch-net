@@ -3,24 +3,16 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-    public interface IGlobalStatsResponse : IResponse
-    {
-        bool OK { get; }
-        ShardsMetaData Shards { get; }
-        Stats Stats { get; set; }
+	public interface IGlobalStatsResponse : IResponse
+	{
+		ShardsMetaData Shards { get; }
+		Stats Stats { get; set; }
 		Dictionary<string, Stats> Indices { get; set; }
-    }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class GlobalStatsResponse : BaseResponse, IGlobalStatsResponse
-    {
-		public GlobalStatsResponse()
-		{
-			this.IsValid = true;
-		}
-
-		[JsonProperty(PropertyName = "ok")]
-		public bool OK { get; internal set; }
+	{
 
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }

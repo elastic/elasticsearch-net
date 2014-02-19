@@ -10,25 +10,23 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CustomJsonConverter))]
 	public partial class DeleteByQueryDescriptor<T> 
 		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, T, DeleteByQueryQueryString>
-		, IActAsQuery
 		, IPathInfo<DeleteByQueryQueryString> 
-		, ICustomJson
 		where T : class
 	{
-		BaseQuery IActAsQuery._Query { get; set; }
+		[JsonProperty("query")]
+		internal BaseQuery _Query { get; set; }
 
 		public DeleteByQueryDescriptor<T> MatchAll()
 		{
-			((IActAsQuery)this)._Query = new QueryDescriptor<T>().MatchAll();
+			this._Query = new QueryDescriptor<T>().MatchAll();
 			return this;
 		}
 
 		public DeleteByQueryDescriptor<T> Query(Func<QueryDescriptor<T>, BaseQuery> querySelector)
 		{
-			((IActAsQuery)this)._Query = querySelector(new QueryDescriptor<T>());
+			this._Query = querySelector(new QueryDescriptor<T>());
 			return this;
 		}
 
@@ -37,10 +35,6 @@ namespace Nest
 			var pathInfo = this.ToPathInfo<DeleteByQueryQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
 			return pathInfo;
-		}
-		object ICustomJson.GetCustomJson()
-		{
-			return ((IActAsQuery) this)._Query;
 		}
 	}
 }

@@ -11,6 +11,7 @@ namespace Nest
         MetadataState Metadata { get; }
         RoutingTableState RoutingTable { get; }
         RoutingNodesState RoutingNodes { get; }
+        BlockState Blocks { get; }
     }
 
     [JsonObject]
@@ -37,5 +38,8 @@ namespace Nest
         
         [JsonProperty("routing_nodes")]
         public RoutingNodesState RoutingNodes { get; internal set; }
+
+        [JsonProperty("blocks")]
+        public BlockState Blocks { get; internal set; }
     }
 }

@@ -14,7 +14,6 @@ namespace Nest.Tests.Integration.Indices
 		public void StatusAll()
 		{
 			var r = this._client.Status();
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
@@ -34,7 +33,6 @@ namespace Nest.Tests.Integration.Indices
 		public void StatusAllWithBothParamsTrue()
 		{
 			var r = this._client.Status(s => s.Recovery().Snapshot());
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
@@ -54,7 +52,6 @@ namespace Nest.Tests.Integration.Indices
 		public void StatusAllWithParamsTrueAndFalse()
 		{
 			var r = this._client.Status(s => s.Recovery().Snapshot(false));
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
@@ -74,7 +71,6 @@ namespace Nest.Tests.Integration.Indices
 		public void StatusIndex()
 		{
 			var r = this._client.Status(s => s.Index(ElasticsearchConfiguration.DefaultIndex));
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
@@ -96,7 +92,6 @@ namespace Nest.Tests.Integration.Indices
 			var r = this._client.Status(s => s
 				.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone")
 			);
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
@@ -116,7 +111,6 @@ namespace Nest.Tests.Integration.Indices
 		public void StatusTyped()
 		{
 			var r = this._client.Status(s=>s.Index<ElasticsearchProject>());
-			Assert.True(r.OK);
 			Assert.True(r.IsValid);
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);

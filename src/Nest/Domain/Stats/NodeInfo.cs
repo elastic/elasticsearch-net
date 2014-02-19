@@ -14,7 +14,7 @@ namespace Nest
 
         [JsonProperty(PropertyName = "transport_address")]
         public string TransportAddress { get; internal set; }
-        [JsonProperty(PropertyName = "hostname")]
+        [JsonProperty(PropertyName = "host")]
         public string Hostname { get; internal set; }
         [JsonProperty(PropertyName = "version")]
         public string Version { get; internal set; }

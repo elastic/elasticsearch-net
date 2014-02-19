@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
@@ -11,8 +12,14 @@ namespace Nest
 	{
 		public PropertyNameMarker Name { get; set; }
 
+		private TypeNameMarker _typeOverride;
+
 		[JsonProperty("type")]
-		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "multi_field" }; } }
+		public virtual TypeNameMarker Type
+		{
+			get { return _typeOverride ?? new TypeNameMarker { Name = "multi_field" }; }
+			set { _typeOverride = value; }
+		}
 
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }

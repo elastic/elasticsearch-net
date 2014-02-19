@@ -11,26 +11,6 @@ namespace Nest
 	[JsonConverter(typeof(IndexSettingsConverter))]
 	public class IndexSettings : IDictionary<string, object>
 	{
-		internal static readonly IEnumerable<string> UpdateWhiteList = new List<string>
-		{
-			"number_of_replicas",
-			"auto_expand_replicas",
-			"refresh_interval",
-			"term_index_interval",
-			"term_index_divisor",
-			"translog.flush_threshold_ops",
-			"translog.flush_threshold_size",
-			"translog.flush_threshold_period",
-			"translog.disable_flush",
-			"cache.filter.max_size",
-			"cache.filter.expire",
-			"gateway.snapshot_interval",
-			"routing.allocation.include.",
-			"routing.allocation.exclude.",
-			"gc_deletes",
-			//Merge can only handle updates if the setting was initially set
-			"merge."
-		};
 
 		public IndexSettings()
 		{

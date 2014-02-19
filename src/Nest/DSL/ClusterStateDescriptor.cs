@@ -15,11 +15,19 @@ namespace Nest
 		IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateQueryString>
 		, IPathInfo<ClusterStateQueryString>
 	{
+		
+		private IEnumerable<ClusterStateMetric> _Metrics { get; set; }
+		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics)
+		{
+			this._Metrics = metrics;
+			return this;
+		}
 		ElasticsearchPathInfo<ClusterStateQueryString> IPathInfo<ClusterStateQueryString>.ToPathInfo(IConnectionSettings settings)
 		{
 			var pathInfo = base.ToPathInfo<ClusterStateQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
-			
+			if (this._Metrics != null)
+				pathInfo.Metric = this._Metrics.Cast<Enum>().GetStringValue();
 			return pathInfo;
 		}
 	}
