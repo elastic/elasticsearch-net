@@ -12,16 +12,14 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var r = this._client.Snapshot();
 			r.Shards.Should().NotBeNull();
-			r.Shards.Total.Should().BeGreaterThan(0);
-			r.Shards.Total.Should().Be(r.Shards.Successful);
+			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
 		public void SnapshotIndex()
 		{
 			var r = this._client.Snapshot(s=>s.Index(ElasticsearchConfiguration.DefaultIndex));
 			r.Shards.Should().NotBeNull();
-			r.Shards.Total.Should().BeGreaterThan(0);
-			r.Shards.Total.Should().Be(r.Shards.Successful);
+			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
 		public void SnapshotIndices()
@@ -31,16 +29,14 @@ namespace Nest.Tests.Integration.Indices
 				ElasticsearchConfiguration.DefaultIndex + "_clone")
 			);
 			r.Shards.Should().NotBeNull();
-			r.Shards.Total.Should().BeGreaterThan(0);
-			r.Shards.Total.Should().Be(r.Shards.Successful);
+			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
 		public void SnapshotTyped()
 		{
 			var r = this._client.Snapshot(s=>s.Index<ElasticsearchProject>());
 			r.Shards.Should().NotBeNull();
-			r.Shards.Total.Should().BeGreaterThan(0);
-			r.Shards.Total.Should().Be(r.Shards.Successful);
+			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 	}
 }

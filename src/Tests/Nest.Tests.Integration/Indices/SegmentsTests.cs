@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Indices
@@ -11,7 +12,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var r = this._client.Segments();
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
+			r.Shards.Successful.Should().BeGreaterThan(0);
 
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
@@ -33,7 +34,7 @@ namespace Nest.Tests.Integration.Indices
 		{
 			var r = this._client.Segments(s=>s.Index(ElasticsearchConfiguration.DefaultIndex));
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
+			r.Shards.Successful.Should().BeGreaterThan(0);
 
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
@@ -56,7 +57,7 @@ namespace Nest.Tests.Integration.Indices
 			var indices = new [] {ElasticsearchConfiguration.DefaultIndex , ElasticsearchConfiguration.DefaultIndex + "_clone"};
 			var r = this._client.Segments(s=>s.Indices(indices));
 			Assert.True(r.IsValid);
-			Assert.True(r.OK);
+			r.Shards.Successful.Should().BeGreaterThan(0);
 
 			Assert.NotNull(r.Shards);
 			Assert.NotNull(r.Indices);
