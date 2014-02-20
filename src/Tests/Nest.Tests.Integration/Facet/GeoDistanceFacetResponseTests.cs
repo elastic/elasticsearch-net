@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -38,12 +39,12 @@ namespace Nest.Tests.Integration.Facet
 			var facets = queryResults.FacetItems<GeoDistanceRange>(p => p.Origin);
 			this.TestDefaultAssertions(queryResults);
 			//this.TestDefaultFacetCollectionAssertation(facets);
-			var facet = facets.First();
-			Assert.Greater(facets.Count(),0);
-			Assert.Greater(facet.Total, 0);
-			Assert.Greater(facet.Min, 0);
-			Assert.Greater(facet.Max, 0);
-			Assert.Greater(facet.Mean, 0);
+			var facet = facets.Last();
+			facets.Count().Should().BeGreaterThan(0);
+			Assert.Greater(facet.Total, 0.0);
+			Assert.Greater(facet.Min, 0.0);
+			Assert.Greater(facet.Max, 0.0);
+			Assert.Greater(facet.Mean, 0.0);
 		
 		}
 	}

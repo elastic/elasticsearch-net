@@ -23,7 +23,6 @@ namespace Nest.Tests.Integration.Cluster
 					NodesInfoMetric.Plugin
 				)
 			);
-
 			Assert.True(r.IsValid);
 			Assert.IsNotNull(r.Nodes);
 			var node = r.Nodes.Values.First();

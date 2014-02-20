@@ -11,7 +11,7 @@ namespace Nest
 	using System.Linq.Expressions;
 	using Microsoft.CSharp.RuntimeBinder;
 
-	public class ElasticsearchResponseValue : DynamicObject, IEquatable<ElasticsearchResponseValue>, IConvertible
+	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>, IConvertible
 	{
 		private readonly object value;
 
@@ -26,52 +26,52 @@ namespace Nest
 		{
 			if (!this.HasValue)
 			{
-				result = new ElasticsearchResponseValue(null);
+				result = new ElasticsearchDynamicValue(null);
 				return true;
 			}
 			var v = this.Value as JObject;
 			if (v == null)
 			{
-				result = new ElasticsearchResponseValue(null);
+				result = new ElasticsearchDynamicValue(null);
 				return true;
 			}
 			JToken r = null;
 			v.TryGetValue(name, StringComparison.InvariantCulture, out r);
-			result = new ElasticsearchResponseValue(r);
+			result = new ElasticsearchDynamicValue(r);
 
 			return true;
 		}
 
-		public ElasticsearchResponseValue this[string name]
+		public ElasticsearchDynamicValue this[string name]
 		{
 			get
 			{
 				object r;
 				Dispatch(out r, name);
-				return (ElasticsearchResponseValue) r;
+				return (ElasticsearchDynamicValue) r;
 			}
 		}
 
-		public ElasticsearchResponseValue this[int i]
+		public ElasticsearchDynamicValue this[int i]
 		{
 			get
 			{
 				if (!this.HasValue)
-					return new ElasticsearchResponseValue(null);
+					return new ElasticsearchDynamicValue(null);
 				var l = this.Value as IList;
 				if (l != null)
 				{
-					return new ElasticsearchResponseValue(l[i]);
+					return new ElasticsearchDynamicValue(l[i]);
 				}
-				return new ElasticsearchResponseValue(null);
+				return new ElasticsearchDynamicValue(null);
 			}
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ElasticsearchResponseValue"/> class.
+		/// Initializes a new instance of the <see cref="ElasticsearchDynamicValue"/> class.
 		/// </summary>
 		/// <param name="value">The value to store in the instance</param>
-		public ElasticsearchResponseValue(object value)
+		public ElasticsearchDynamicValue(object value)
 		{
 			this.value = value;
 		}
@@ -173,7 +173,7 @@ namespace Nest
 			return defaultValue;
 		}
 
-		public static bool operator ==(ElasticsearchResponseValue dynamicValue, object compareValue)
+		public static bool operator ==(ElasticsearchDynamicValue dynamicValue, object compareValue)
 		{
 			if (dynamicValue.value == null && compareValue == null)
 			{
@@ -183,7 +183,7 @@ namespace Nest
 			return dynamicValue.value != null && dynamicValue.value.Equals(compareValue);
 		}
 
-		public static bool operator !=(ElasticsearchResponseValue dynamicValue, object compareValue)
+		public static bool operator !=(ElasticsearchDynamicValue dynamicValue, object compareValue)
 		{
 			return !(dynamicValue == compareValue);
 		}
@@ -194,8 +194,8 @@ namespace Nest
 		/// </summary>
 		/// <returns><c>true</c> if the current object is equal to the <paramref name="compareValue"/> parameter; otherwise, <c>false</c>.
 		/// </returns>
-		/// <param name="compareValue">An <see cref="ElasticsearchResponseValue"/> to compare with this instance.</param>
-		public bool Equals(ElasticsearchResponseValue compareValue)
+		/// <param name="compareValue">An <see cref="ElasticsearchDynamicValue"/> to compare with this instance.</param>
+		public bool Equals(ElasticsearchDynamicValue compareValue)
 		{
 			if (ReferenceEquals(null, compareValue))
 			{
@@ -208,8 +208,8 @@ namespace Nest
 		/// <summary>
 		/// Determines whether the specified <see cref="object"/> is equal to the current <see cref="object"/>.
 		/// </summary>
-		/// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current <see cref="ElasticsearchResponseValue"/>; otherwise, <c>false</c>.</returns>
-		/// <param name="compareValue">The <see cref="object"/> to compare with the current <see cref="ElasticsearchResponseValue"/>.</param>
+		/// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current <see cref="ElasticsearchDynamicValue"/>; otherwise, <c>false</c>.</returns>
+		/// <param name="compareValue">The <see cref="object"/> to compare with the current <see cref="ElasticsearchDynamicValue"/>.</param>
 		public override bool Equals(object compareValue)
 		{
 			if (ReferenceEquals(null, compareValue))
@@ -222,7 +222,7 @@ namespace Nest
 				return true;
 			}
 
-			return compareValue.GetType() == typeof(ElasticsearchResponseValue) && this.Equals((ElasticsearchResponseValue)compareValue);
+			return compareValue.GetType() == typeof(ElasticsearchDynamicValue) && this.Equals((ElasticsearchDynamicValue)compareValue);
 		}
 
 		/// <summary>
@@ -250,7 +250,7 @@ namespace Nest
 			}
 
 			var convert =
-				Binder.Convert(CSharpBinderFlags.None, arg.GetType(), typeof(ElasticsearchResponseValue));
+				Binder.Convert(CSharpBinderFlags.None, arg.GetType(), typeof(ElasticsearchDynamicValue));
 
 			if (!TryConvert((ConvertBinder)convert, out resultOfCast))
 			{
@@ -337,7 +337,7 @@ namespace Nest
 			return this.value == null ? base.ToString() : Convert.ToString(this.value);
 		}
 
-		public static implicit operator bool(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator bool(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (!dynamicValue.HasValue)
 			{
@@ -358,14 +358,14 @@ namespace Nest
 			return true;
 		}
 
-		public static implicit operator string(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator string(ElasticsearchDynamicValue dynamicValue)
 		{
 			return dynamicValue.HasValue
 					   ? Convert.ToString(dynamicValue.value)
 					   : null;
 		}
 
-		public static implicit operator int(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator int(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value.GetType().IsValueType)
 			{
@@ -375,7 +375,7 @@ namespace Nest
 			return int.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator Guid(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator Guid(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value is Guid)
 			{
@@ -385,7 +385,7 @@ namespace Nest
 			return Guid.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator DateTime(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator DateTime(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value is DateTime)
 			{
@@ -395,7 +395,7 @@ namespace Nest
 			return DateTime.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator TimeSpan(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator TimeSpan(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value is TimeSpan)
 			{
@@ -405,7 +405,7 @@ namespace Nest
 			return TimeSpan.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator long(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator long(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value.GetType().IsValueType)
 			{
@@ -415,7 +415,7 @@ namespace Nest
 			return long.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator float(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator float(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value.GetType().IsValueType)
 			{
@@ -425,7 +425,7 @@ namespace Nest
 			return float.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator decimal(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator decimal(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value.GetType().IsValueType)
 			{
@@ -435,7 +435,7 @@ namespace Nest
 			return decimal.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator double(ElasticsearchResponseValue dynamicValue)
+		public static implicit operator double(ElasticsearchDynamicValue dynamicValue)
 		{
 			if (dynamicValue.value.GetType().IsValueType)
 			{

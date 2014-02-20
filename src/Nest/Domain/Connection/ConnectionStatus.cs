@@ -31,8 +31,8 @@ namespace Nest
 		public byte[] ResultBytes { get; internal set; }
 
 		private static readonly byte _startAccolade = (byte)'{';
-		private ElasticsearchResponse _response;
-		public ElasticsearchResponse Response
+		private ElasticsearchDynamic _response;
+		public ElasticsearchDynamic Response
 		{
 			get
 			{
@@ -42,7 +42,7 @@ namespace Nest
 					return null;
 
 				if (_response == null)
-					this._response = this.Deserialize<ElasticsearchResponse>();
+					this._response = this.Deserialize<ElasticsearchDynamic>();
 				return this._response;
 			}
 		}

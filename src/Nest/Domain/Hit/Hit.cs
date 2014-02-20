@@ -10,7 +10,7 @@ namespace Nest
 	//[JsonConverter(typeof(ConcreteTypeConverter))]
 	public interface IHit<out T> where T : class
 	{
-		//IFieldSelection<T> Fields { get; }
+		IFieldSelection<T> Fields { get; }
 		T Source { get; }
 		string Index { get; }
 		double Score { get; }
@@ -31,7 +31,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "fields")]
 		internal IDictionary<string, object> _fields { get; set; }
 		[JsonIgnore]
-		public FieldSelection<T> Fields { get; internal set; }
+		public IFieldSelection<T> Fields { get; internal set; }
 		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; internal set; }
 		[JsonProperty(PropertyName = "_index")]

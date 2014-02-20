@@ -66,7 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
-    <Compile Include="Core\Bulk\BulkPercolateTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
     <Compile Include="Core\MultiSearch\MultiSearchTests.cs" />

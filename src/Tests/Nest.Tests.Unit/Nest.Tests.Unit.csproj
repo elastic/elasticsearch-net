@@ -89,7 +89,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="PUrify">
-      <HintPath>..\..\dep\Purify - Preview\PUrify.dll</HintPath>
+      <HintPath>..\..\..\dep\Purify - Preview\PUrify.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -458,6 +458,7 @@
     <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilterInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\Query\QueriesInQueries\FilteredQueryConditionless.json" />
     <None Include="Search\Query\Singles\MultiMatch\TestMultiMatchJson.json" />
     <None Include="Search\Query\Modes\VerbatimDoesNotThrowOnEmptyTerm.json" />
     <None Include="Search\Query\Singles\Terms\TermsQueryDescriptorUsingExternalField.json" />

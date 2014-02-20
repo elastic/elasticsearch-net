@@ -207,7 +207,7 @@ namespace Nest.Tests.Integration.Yaml
 
 		private static object Unbox(object o)
 		{
-			if (o is ElasticsearchResponseValue) o = ((ElasticsearchResponseValue) o).Value;
+			if (o is ElasticsearchDynamicValue) o = ((ElasticsearchDynamicValue) o).Value;
 			if (o is JValue) o = ((JValue)o).Value;
 			if (o is JArray) o = ((JArray) o).ToObject<object[]>();
 			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
@@ -234,7 +234,7 @@ namespace Nest.Tests.Integration.Yaml
 		protected void IsLength(object o, int value)
 		{
 			int l = -1;
-			if (o is ElasticsearchResponseValue) o = ((ElasticsearchResponseValue) o).Value;
+			if (o is ElasticsearchDynamicValue) o = ((ElasticsearchDynamicValue) o).Value;
 			if (o is JArray) l = ((JArray) o).Count;
 			if (o is string) l =  ((string) o).Length;
 			if (o is IDictionary) l = ((IDictionary) o).Count;

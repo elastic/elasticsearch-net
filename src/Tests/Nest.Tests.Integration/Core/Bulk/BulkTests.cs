@@ -10,8 +10,6 @@ namespace Nest.Tests.Integration.Core.Bulk
 	[TestFixture]
 	public class BulkTests : IntegrationTests
 	{
-		private readonly BulkPercolateTests _bulkPercolateTests;
-
 
 		[Test]
 		public void Bulk()

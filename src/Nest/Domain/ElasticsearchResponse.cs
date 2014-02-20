@@ -9,9 +9,9 @@ namespace Nest
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
-	public class ElasticsearchResponse : 
+	public class ElasticsearchDynamic : 
 		DynamicObject, 
-		IEquatable<ElasticsearchResponse>, 
+		IEquatable<ElasticsearchDynamic>, 
 		IEnumerable<string>, 
 		IDictionary<string, object>
 	{
@@ -21,12 +21,12 @@ namespace Nest
 		/// <summary>
 		/// Returns an empty dynamic dictionary.
 		/// </summary>
-		/// <value>A <see cref="ElasticsearchResponse"/> instance.</value>
-		public static ElasticsearchResponse Empty
+		/// <value>A <see cref="ElasticsearchDynamic"/> instance.</value>
+		public static ElasticsearchDynamic Empty
 		{
 			get
 			{
-				return new ElasticsearchResponse();
+				return new ElasticsearchDynamic();
 			}
 		}
 
@@ -34,10 +34,10 @@ namespace Nest
 		/// Creates a dynamic dictionary from an <see cref="IDictionary{TKey,TValue}"/> instance.
 		/// </summary>
 		/// <param name="values">An <see cref="IDictionary{TKey,TValue}"/> instance, that the dynamic dictionary should be created from.</param>
-		/// <returns>An <see cref="ElasticsearchResponse"/> instance.</returns>
-		public static ElasticsearchResponse Create(IDictionary<string, object> values)
+		/// <returns>An <see cref="ElasticsearchDynamic"/> instance.</returns>
+		public static ElasticsearchDynamic Create(IDictionary<string, object> values)
 		{
-			var instance = new ElasticsearchResponse();
+			var instance = new ElasticsearchDynamic();
 
 			foreach (var key in values.Keys)
 			{
@@ -67,7 +67,7 @@ namespace Nest
 		{
 			if (!dictionary.TryGetValue(binder.Name, out result))
 			{
-				result = new ElasticsearchResponseValue(null);
+				result = new ElasticsearchDynamicValue(null);
 			}
 
 			return true;
@@ -101,9 +101,9 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Gets or sets the <see cref="ElasticsearchResponseValue"/> with the specified name.
+		/// Gets or sets the <see cref="ElasticsearchDynamicValue"/> with the specified name.
 		/// </summary>
-		/// <value>A <see cref="ElasticsearchResponseValue"/> instance containing a value.</value>
+		/// <value>A <see cref="ElasticsearchDynamicValue"/> instance containing a value.</value>
 		public dynamic this[string name]
 		{
 			get
@@ -113,7 +113,7 @@ namespace Nest
 				dynamic member;
 				if (!dictionary.TryGetValue(name, out member))
 				{
-					member = new ElasticsearchResponseValue(null);
+					member = new ElasticsearchDynamicValue(null);
 				}
 
 				return member;
@@ -122,16 +122,16 @@ namespace Nest
 			{
 				name = GetNeutralKey(name);
 
-				dictionary[name] = value is ElasticsearchResponseValue ? value : new ElasticsearchResponseValue(value);
+				dictionary[name] = value is ElasticsearchDynamicValue ? value : new ElasticsearchDynamicValue(value);
 			}
 		}
 
 		/// <summary>
-		/// Indicates whether the current <see cref="ElasticsearchResponse"/> is equal to another object of the same type.
+		/// Indicates whether the current <see cref="ElasticsearchDynamic"/> is equal to another object of the same type.
 		/// </summary>
 		/// <returns><see langword="true"/> if the current instance is equal to the <paramref name="other"/> parameter; otherwise, <see langword="false"/>.</returns>
-		/// <param name="other">An <see cref="ElasticsearchResponse"/> instance to compare with this instance.</param>
-		public bool Equals(ElasticsearchResponse other)
+		/// <param name="other">An <see cref="ElasticsearchDynamic"/> instance to compare with this instance.</param>
+		public bool Equals(ElasticsearchDynamic other)
 		{
 			if (ReferenceEquals(null, other))
 			{
@@ -158,7 +158,7 @@ namespace Nest
 				return true;
 			}
 
-			return obj.GetType() == typeof(ElasticsearchResponse) && this.Equals((ElasticsearchResponse)obj);
+			return obj.GetType() == typeof(ElasticsearchDynamic) && this.Equals((ElasticsearchDynamic)obj);
 		}
 
 		/// <summary>
@@ -171,16 +171,16 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Returns a hash code for this <see cref="ElasticsearchResponse"/>.
+		/// Returns a hash code for this <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
-		/// <returns> A hash code for this <see cref="ElasticsearchResponse"/>, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+		/// <returns> A hash code for this <see cref="ElasticsearchDynamic"/>, suitable for use in hashing algorithms and data structures like a hash table.</returns>
 		public override int GetHashCode()
 		{
 			return (dictionary != null ? dictionary.GetHashCode() : 0);
 		}
 
 		/// <summary>
-		/// Adds an element with the provided key and value to the <see cref="ElasticsearchResponse"/>.
+		/// Adds an element with the provided key and value to the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
 		/// <param name="key">The object to use as the key of the element to add.</param>
 		/// <param name="value">The object to use as the value of the element to add.</param>
@@ -190,29 +190,29 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Adds an item to the <see cref="ElasticsearchResponse"/>.
+		/// Adds an item to the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
-		/// <param name="item">The object to add to the <see cref="ElasticsearchResponse"/>.</param>
+		/// <param name="item">The object to add to the <see cref="ElasticsearchDynamic"/>.</param>
 		public void Add(KeyValuePair<string, dynamic> item)
 		{
 			this[item.Key] = item.Value;
 		}
 
 		/// <summary>
-		/// Determines whether the <see cref="ElasticsearchResponse"/> contains an element with the specified key.
+		/// Determines whether the <see cref="ElasticsearchDynamic"/> contains an element with the specified key.
 		/// </summary>
-		/// <returns><see langword="true" /> if the <see cref="ElasticsearchResponse"/> contains an element with the key; otherwise, <see langword="false" />.
+		/// <returns><see langword="true" /> if the <see cref="ElasticsearchDynamic"/> contains an element with the key; otherwise, <see langword="false" />.
 		/// </returns>
-		/// <param name="key">The key to locate in the <see cref="ElasticsearchResponse"/>.</param>
+		/// <param name="key">The key to locate in the <see cref="ElasticsearchDynamic"/>.</param>
 		public bool ContainsKey(string key)
 		{
 			return this.dictionary.ContainsKey(key);
 		}
 
 		/// <summary>
-		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="ElasticsearchResponse"/>.
+		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
-		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="ElasticsearchResponse"/>.</returns>
+		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="ElasticsearchDynamic"/>.</returns>
 		public ICollection<string> Keys
 		{
 			get { return this.dictionary.Keys; }
@@ -221,7 +221,7 @@ namespace Nest
 		/// <summary>
 		/// Gets the value associated with the specified key.
 		/// </summary>
-		/// <returns><see langword="true" /> if the <see cref="ElasticsearchResponse"/> contains an element with the specified key; otherwise, <see langword="false" />.</returns>
+		/// <returns><see langword="true" /> if the <see cref="ElasticsearchDynamic"/> contains an element with the specified key; otherwise, <see langword="false" />.</returns>
 		/// <param name="key">The key whose value to get.</param>
 		/// <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
 		public bool TryGetValue(string key, out dynamic value)
@@ -230,7 +230,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Removes all items from the <see cref="ElasticsearchResponse"/>.
+		/// Removes all items from the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
 		public void Clear()
 		{
@@ -238,20 +238,20 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Gets the number of elements contained in the <see cref="ElasticsearchResponse"/>.
+		/// Gets the number of elements contained in the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
-		/// <returns>The number of elements contained in the <see cref="ElasticsearchResponse"/>.</returns>
+		/// <returns>The number of elements contained in the <see cref="ElasticsearchDynamic"/>.</returns>
 		public int Count
 		{
 			get { return this.dictionary.Count; }
 		}
 
 		/// <summary>
-		/// Determines whether the <see cref="ElasticsearchResponse"/> contains a specific value.
+		/// Determines whether the <see cref="ElasticsearchDynamic"/> contains a specific value.
 		/// </summary>
-		/// <returns><see langword="true" /> if <paramref name="item"/> is found in the <see cref="ElasticsearchResponse"/>; otherwise, <see langword="false" />.
+		/// <returns><see langword="true" /> if <paramref name="item"/> is found in the <see cref="ElasticsearchDynamic"/>; otherwise, <see langword="false" />.
 		/// </returns>
-		/// <param name="item">The object to locate in the <see cref="ElasticsearchResponse"/>.</param>
+		/// <param name="item">The object to locate in the <see cref="ElasticsearchDynamic"/>.</param>
 		public bool Contains(KeyValuePair<string, dynamic> item)
 		{
 			var dynamicValueKeyValuePair =
@@ -261,9 +261,9 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Copies the elements of the <see cref="ElasticsearchResponse"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+		/// Copies the elements of the <see cref="ElasticsearchDynamic"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
 		/// </summary>
-		/// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from the <see cref="ElasticsearchResponse"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+		/// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from the <see cref="ElasticsearchDynamic"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
 		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
 		public void CopyTo(KeyValuePair<string, dynamic>[] array, int arrayIndex)
 		{
@@ -271,7 +271,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Gets a value indicating whether the <see cref="ElasticsearchResponse"/> is read-only.
+		/// Gets a value indicating whether the <see cref="ElasticsearchDynamic"/> is read-only.
 		/// </summary>
 		/// <returns>Always returns <see langword="false" />.</returns>
 		public bool IsReadOnly
@@ -280,7 +280,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Removes the element with the specified key from the <see cref="ElasticsearchResponse"/>.
+		/// Removes the element with the specified key from the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
 		/// <returns><see langword="true" /> if the element is successfully removed; otherwise, <see langword="false" />.</returns>
 		/// <param name="key">The key of the element to remove.</param>
@@ -291,10 +291,10 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Removes the first occurrence of a specific object from the <see cref="ElasticsearchResponse"/>.
+		/// Removes the first occurrence of a specific object from the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
-		/// <returns><see langword="true" /> if <paramref name="item"/> was successfully removed from the <see cref="ElasticsearchResponse"/>; otherwise, <see langword="false" />.</returns>
-		/// <param name="item">The object to remove from the <see cref="ElasticsearchResponse"/>.</param>
+		/// <returns><see langword="true" /> if <paramref name="item"/> was successfully removed from the <see cref="ElasticsearchDynamic"/>; otherwise, <see langword="false" />.</returns>
+		/// <param name="item">The object to remove from the <see cref="ElasticsearchDynamic"/>.</param>
 		public bool Remove(KeyValuePair<string, dynamic> item)
 		{
 			var dynamicValueKeyValuePair =
@@ -304,9 +304,9 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="ElasticsearchResponse"/>.
+		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="ElasticsearchDynamic"/>.
 		/// </summary>
-		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="ElasticsearchResponse"/>.</returns>
+		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="ElasticsearchDynamic"/>.</returns>
 		public ICollection<dynamic> Values
 		{
 			get { return this.dictionary.Values; }
@@ -315,7 +315,7 @@ namespace Nest
 		private static KeyValuePair<string, dynamic> GetDynamicKeyValuePair(KeyValuePair<string, dynamic> item)
 		{
 			var dynamicValueKeyValuePair =
-				new KeyValuePair<string, dynamic>(item.Key, new ElasticsearchResponseValue(item.Value));
+				new KeyValuePair<string, dynamic>(item.Key, new ElasticsearchDynamicValue(item.Value));
 			return dynamicValueKeyValuePair;
 		}
 
