@@ -31,10 +31,10 @@ namespace Nest.Tests.Integration.Yaml.Exists5
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"green")
 				));
 
@@ -42,10 +42,10 @@ namespace Nest.Tests.Integration.Yaml.Exists5
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do exists 
-				this.Do(()=> this._client.ExistsHead("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
 					.Add("realtime", 1)
 				));
 
@@ -53,7 +53,7 @@ namespace Nest.Tests.Integration.Yaml.Exists5
 				this.IsTrue(this._status);
 
 				//do exists 
-				this.Do(()=> this._client.ExistsHead("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
 					.Add("realtime", 0)
 				));
 
@@ -61,7 +61,7 @@ namespace Nest.Tests.Integration.Yaml.Exists5
 				this.IsFalse(this._status);
 
 				//do exists 
-				this.Do(()=> this._client.ExistsHead("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
 					.Add("realtime", 0)
 					.Add("refresh", 1)
 				));

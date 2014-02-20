@@ -29,22 +29,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsType1
 						type_2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_2", "type_1"));
+				this.Do(()=> _client.IndicesExistsType("test_2", "type_1"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_1", "type_3"));
+				this.Do(()=> _client.IndicesExistsType("test_1", "type_3"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_1", "type_1"));
+				this.Do(()=> _client.IndicesExistsType("test_1", "type_1"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -60,7 +60,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsType1
 			{	
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_1", "type_1", nv=>nv
+				this.Do(()=> _client.IndicesExistsType("test_1", "type_1", nv=>nv
 					.Add("local", @"true")
 				));
 

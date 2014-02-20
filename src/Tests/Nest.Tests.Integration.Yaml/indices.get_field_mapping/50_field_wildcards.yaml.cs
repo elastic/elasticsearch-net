@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
+				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
 				//do indices.create 
 				_body = new {
@@ -83,10 +83,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index_2", _body));
+				this.Do(()=> _client.IndicesCreate("test_index_2", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -102,7 +102,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMappingForAll("*"));
+				this.Do(()=> _client.IndicesGetFieldMappingForAll("*"));
 
 				//match _response.test_index.mappings.test_type.t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.t1.full_name, @"t1");
@@ -130,7 +130,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "t*"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "t*"));
 
 				//match _response.test_index.mappings.test_type.t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.t1.full_name, @"t1");
@@ -155,7 +155,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "*t1"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "*t1"));
 
 				//match _response.test_index.mappings.test_type.t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.t1.full_name, @"t1");
@@ -180,7 +180,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "i_*"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "i_*"));
 
 				//match _response.test_index.mappings.test_type.i_t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.i_t1.full_name, @"obj.i_t1");
@@ -202,7 +202,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("_all", "_all", "i_*"));
+				this.Do(()=> _client.IndicesGetFieldMapping("_all", "_all", "i_*"));
 
 				//match _response.test_index.mappings.test_type.i_t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.i_t1.full_name, @"obj.i_t1");
@@ -233,7 +233,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("*", "*", "i_*"));
+				this.Do(()=> _client.IndicesGetFieldMapping("*", "*", "i_*"));
 
 				//match _response.test_index.mappings.test_type.i_t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.i_t1.full_name, @"obj.i_t1");
@@ -264,7 +264,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping5
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index,test_index_2", "test_type,test_type_2", "i_*"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index,test_index_2", "test_type,test_type_2", "i_*"));
 
 				//match _response.test_index.mappings.test_type.i_t1.full_name: 
 				this.IsMatch(_response.test_index.mappings.test_type.i_t1.full_name, @"obj.i_t1");

@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
+				this.Do(()=> _client.IndicesCreate("test_index", null));
 
 				//do indices.put_mapping 
 				_body = new {
@@ -40,10 +40,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMapping("test_index", "test_type", _body));
+				this.Do(()=> _client.IndicesPutMapping("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_index"));
+				this.Do(()=> _client.IndicesGetMapping("test_index"));
 
 				//match _response.test_index.mappings.test_type.properties.text1.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.properties.text1.type, @"string");
@@ -87,10 +87,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutMapping1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutMapping("test_index", "test_type", _body));
+				this.Do(()=> _client.IndicesPutMapping("test_index", "test_type", _body));
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_index"));
+				this.Do(()=> _client.IndicesGetMapping("test_index"));
 
 				//match _response.test_index.mappings.test_type.properties.text1.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.properties.text1.type, @"string");

@@ -20,13 +20,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
+				this.Do(()=> _client.IndicesCreate("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
+				this.Do(()=> _client.IndicesCreate("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("foo", null));
+				this.Do(()=> _client.IndicesCreate("foo", null));
 
 			}
 		}
@@ -43,16 +43,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 				_body = new {
 					refresh_interval= "1s"
 				};
-				this.Do(()=> this._client.IndicesPutSettings("test_index1", _body));
+				this.Do(()=> _client.IndicesPutSettings("test_index1", _body));
 
 				//do indices.put_settings 
 				_body = new {
 					refresh_interval= "1s"
 				};
-				this.Do(()=> this._client.IndicesPutSettings("test_index2", _body));
+				this.Do(()=> _client.IndicesPutSettings("test_index2", _body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll());
+				this.Do(()=> _client.IndicesGetSettingsForAll());
 
 				//match _response.test_index1.settings.index.refresh_interval: 
 				this.IsMatch(_response.test_index1.settings.index.refresh_interval, @"1s");
@@ -77,10 +77,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 				_body = new {
 					refresh_interval= "1s"
 				};
-				this.Do(()=> this._client.IndicesPutSettings("_all", _body));
+				this.Do(()=> _client.IndicesPutSettings("_all", _body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll());
+				this.Do(()=> _client.IndicesGetSettingsForAll());
 
 				//match _response.test_index1.settings.index.refresh_interval: 
 				this.IsMatch(_response.test_index1.settings.index.refresh_interval, @"1s");
@@ -105,10 +105,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 				_body = new {
 					refresh_interval= "1s"
 				};
-				this.Do(()=> this._client.IndicesPutSettings("*", _body));
+				this.Do(()=> _client.IndicesPutSettings("*", _body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll());
+				this.Do(()=> _client.IndicesGetSettingsForAll());
 
 				//match _response.test_index1.settings.index.refresh_interval: 
 				this.IsMatch(_response.test_index1.settings.index.refresh_interval, @"1s");
@@ -133,10 +133,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 				_body = new {
 					refresh_interval= "1s"
 				};
-				this.Do(()=> this._client.IndicesPutSettings("test*", _body));
+				this.Do(()=> _client.IndicesPutSettings("test*", _body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll());
+				this.Do(()=> _client.IndicesGetSettingsForAll());
 
 				//match _response.test_index1.settings.index.refresh_interval: 
 				this.IsMatch(_response.test_index1.settings.index.refresh_interval, @"1s");
@@ -164,10 +164,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 				_body = new {
 					refresh_interval= "1s"
 				};
-				this.Do(()=> this._client.IndicesPutSettings("test_index1, test_index2", _body));
+				this.Do(()=> _client.IndicesPutSettings("test_index1, test_index2", _body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll());
+				this.Do(()=> _client.IndicesGetSettingsForAll());
 
 				//match _response.test_index1.settings.index.refresh_interval: 
 				this.IsMatch(_response.test_index1.settings.index.refresh_interval, @"1s");
@@ -192,10 +192,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings2
 				_body = new {
 					refresh_interval= "1s"
 				};
-				this.Do(()=> this._client.IndicesPutSettingsForAll(_body));
+				this.Do(()=> _client.IndicesPutSettingsForAll(_body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll());
+				this.Do(()=> _client.IndicesGetSettingsForAll());
 
 				//match _response.test_index1.settings.index.refresh_interval: 
 				this.IsMatch(_response.test_index1.settings.index.refresh_interval, @"1s");

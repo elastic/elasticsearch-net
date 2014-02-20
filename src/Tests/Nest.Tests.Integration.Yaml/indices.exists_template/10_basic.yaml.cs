@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsTemplate1
 			{	
 
 				//do indices.delete_template 
-				this.Do(()=> this._client.IndicesDeleteTemplateForAll("test", nv=>nv
+				this.Do(()=> _client.IndicesDeleteTemplateForAll("test", nv=>nv
 					.Add("ignore", new [] {
 						@"404"
 					})
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsTemplate1
 			{	
 
 				//do indices.exists_template 
-				this.Do(()=> this._client.IndicesExistsTemplateHeadForAll("test"));
+				this.Do(()=> _client.IndicesExistsTemplateForAll("test"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
@@ -51,10 +51,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsTemplate1
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplateForAll("test", _body));
+				this.Do(()=> _client.IndicesPutTemplateForAll("test", _body));
 
 				//do indices.exists_template 
-				this.Do(()=> this._client.IndicesExistsTemplateHeadForAll("test"));
+				this.Do(()=> _client.IndicesExistsTemplateForAll("test"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -70,7 +70,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesExistsTemplate1
 			{	
 
 				//do indices.exists_template 
-				this.Do(()=> this._client.IndicesExistsTemplateHeadForAll("test", nv=>nv
+				this.Do(()=> _client.IndicesExistsTemplateForAll("test", nv=>nv
 					.Add("local", @"true")
 				));
 

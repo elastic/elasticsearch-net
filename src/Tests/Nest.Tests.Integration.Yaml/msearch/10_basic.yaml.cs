@@ -26,22 +26,22 @@ namespace Nest.Tests.Integration.Yaml.Msearch1
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do index 
 				_body = new {
 					foo= "baz"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "2", _body));
+				this.Do(()=> _client.Index("test_1", "test", "2", _body));
 
 				//do index 
 				_body = new {
 					foo= "foo"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "3", _body));
+				this.Do(()=> _client.Index("test_1", "test", "3", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 				//do msearch 
 				_body = new dynamic[] {
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.Msearch1
 					new {search_type="count",index="test_1"},
 					new {query=new {match=new {foo="bar"}}}
 				};
-				this.Do(()=> this._client.MsearchPost(_body));
+				this.Do(()=> _client.Msearch(_body));
 
 				//match _response.responses[0].hits.total: 
 				this.IsMatch(_response.responses[0].hits.total, 3);

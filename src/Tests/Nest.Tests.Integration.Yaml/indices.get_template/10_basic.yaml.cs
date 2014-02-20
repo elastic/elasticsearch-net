@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplateForAll("test", _body));
+				this.Do(()=> _client.IndicesPutTemplateForAll("test", _body));
 
 			}
 		}
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 			{	
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplateForAll("test"));
+				this.Do(()=> _client.IndicesGetTemplateForAll("test"));
 
 				//match _response.test.template: 
 				this.IsMatch(_response.test.template, @"test-*");
@@ -69,10 +69,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 						number_of_shards= "1"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplateForAll("test2", _body));
+				this.Do(()=> _client.IndicesPutTemplateForAll("test2", _body));
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplateForAll());
+				this.Do(()=> _client.IndicesGetTemplateForAll());
 
 				//match _response.test.template: 
 				this.IsMatch(_response.test.template, @"test-*");
@@ -91,7 +91,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate1
 			{	
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplateForAll("test", nv=>nv
+				this.Do(()=> _client.IndicesGetTemplateForAll("test", nv=>nv
 					.Add("local", @"true")
 				));
 

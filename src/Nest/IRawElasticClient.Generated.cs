@@ -23,27 +23,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
-		ConnectionStatus BulkPost(object body, Func<BulkQueryString, BulkQueryString> queryString = null);
+		ConnectionStatus Bulk(object body, Func<BulkQueryString, BulkQueryString> queryString = null);
 		
 		///<summary>POST /_bulk
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
-		Task<ConnectionStatus> BulkPostAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null);
+		Task<ConnectionStatus> BulkAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_bulk
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
-		ConnectionStatus BulkPost(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
+		ConnectionStatus Bulk(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_bulk
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
-		Task<ConnectionStatus> BulkPostAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
+		Task<ConnectionStatus> BulkAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_bulk
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
@@ -51,7 +51,7 @@ namespace Nest
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
-		ConnectionStatus BulkPost(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
+		ConnectionStatus Bulk(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_bulk
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
@@ -59,7 +59,7 @@ namespace Nest
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
-		Task<ConnectionStatus> BulkPostAsync(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
+		Task<ConnectionStatus> BulkAsync(string index, string type, object body, Func<BulkQueryString, BulkQueryString> queryString = null);
 		
 		///<summary>PUT /_bulk
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
@@ -106,206 +106,206 @@ namespace Nest
 		///<summary>GET /_cat/aliases
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html</pre>	
 		///</summary>
-		ConnectionStatus CatAliasesGet(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
+		ConnectionStatus CatAliases(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/aliases
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatAliasesGetAsync(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
+		Task<ConnectionStatus> CatAliasesAsync(Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/aliases/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html</pre>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		ConnectionStatus CatAliasesGet(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
+		ConnectionStatus CatAliases(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/aliases/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html</pre>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		Task<ConnectionStatus> CatAliasesGetAsync(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
+		Task<ConnectionStatus> CatAliasesAsync(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/allocation
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html</pre>	
 		///</summary>
-		ConnectionStatus CatAllocationGet(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
+		ConnectionStatus CatAllocation(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
 		
 		///<summary>GET /_cat/allocation
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatAllocationGetAsync(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
+		Task<ConnectionStatus> CatAllocationAsync(Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
 		
 		///<summary>GET /_cat/allocation/{node_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
-		ConnectionStatus CatAllocationGet(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
+		ConnectionStatus CatAllocation(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
 		
 		///<summary>GET /_cat/allocation/{node_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
-		Task<ConnectionStatus> CatAllocationGetAsync(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
+		Task<ConnectionStatus> CatAllocationAsync(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null);
 		
 		///<summary>GET /_cat/count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html</pre>	
 		///</summary>
-		ConnectionStatus CatCountGet(Func<CatCountQueryString, CatCountQueryString> queryString = null);
+		ConnectionStatus CatCount(Func<CatCountQueryString, CatCountQueryString> queryString = null);
 		
 		///<summary>GET /_cat/count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatCountGetAsync(Func<CatCountQueryString, CatCountQueryString> queryString = null);
+		Task<ConnectionStatus> CatCountAsync(Func<CatCountQueryString, CatCountQueryString> queryString = null);
 		
 		///<summary>GET /_cat/count/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		ConnectionStatus CatCountGet(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null);
+		ConnectionStatus CatCount(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null);
 		
 		///<summary>GET /_cat/count/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		Task<ConnectionStatus> CatCountGetAsync(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null);
+		Task<ConnectionStatus> CatCountAsync(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null);
 		
 		///<summary>GET /_cat/health
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html</pre>	
 		///</summary>
-		ConnectionStatus CatHealthGet(Func<CatHealthQueryString, CatHealthQueryString> queryString = null);
+		ConnectionStatus CatHealth(Func<CatHealthQueryString, CatHealthQueryString> queryString = null);
 		
 		///<summary>GET /_cat/health
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatHealthGetAsync(Func<CatHealthQueryString, CatHealthQueryString> queryString = null);
+		Task<ConnectionStatus> CatHealthAsync(Func<CatHealthQueryString, CatHealthQueryString> queryString = null);
 		
 		///<summary>GET /_cat
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html</pre>	
 		///</summary>
-		ConnectionStatus CatHelpGet(Func<CatHelpQueryString, CatHelpQueryString> queryString = null);
+		ConnectionStatus CatHelp(Func<CatHelpQueryString, CatHelpQueryString> queryString = null);
 		
 		///<summary>GET /_cat
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatHelpGetAsync(Func<CatHelpQueryString, CatHelpQueryString> queryString = null);
+		Task<ConnectionStatus> CatHelpAsync(Func<CatHelpQueryString, CatHelpQueryString> queryString = null);
 		
 		///<summary>GET /_cat/indices
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html</pre>	
 		///</summary>
-		ConnectionStatus CatIndicesGet(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
+		ConnectionStatus CatIndices(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/indices
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatIndicesGetAsync(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
+		Task<ConnectionStatus> CatIndicesAsync(Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/indices/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		ConnectionStatus CatIndicesGet(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
+		ConnectionStatus CatIndices(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/indices/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		Task<ConnectionStatus> CatIndicesGetAsync(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
+		Task<ConnectionStatus> CatIndicesAsync(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/master
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html</pre>	
 		///</summary>
-		ConnectionStatus CatMasterGet(Func<CatMasterQueryString, CatMasterQueryString> queryString = null);
+		ConnectionStatus CatMaster(Func<CatMasterQueryString, CatMasterQueryString> queryString = null);
 		
 		///<summary>GET /_cat/master
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatMasterGetAsync(Func<CatMasterQueryString, CatMasterQueryString> queryString = null);
+		Task<ConnectionStatus> CatMasterAsync(Func<CatMasterQueryString, CatMasterQueryString> queryString = null);
 		
 		///<summary>GET /_cat/nodes
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html</pre>	
 		///</summary>
-		ConnectionStatus CatNodesGet(Func<CatNodesQueryString, CatNodesQueryString> queryString = null);
+		ConnectionStatus CatNodes(Func<CatNodesQueryString, CatNodesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/nodes
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatNodesGetAsync(Func<CatNodesQueryString, CatNodesQueryString> queryString = null);
+		Task<ConnectionStatus> CatNodesAsync(Func<CatNodesQueryString, CatNodesQueryString> queryString = null);
 		
 		///<summary>GET /_cat/pending_tasks
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html</pre>	
 		///</summary>
-		ConnectionStatus CatPendingTasksGet(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null);
+		ConnectionStatus CatPendingTasks(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null);
 		
 		///<summary>GET /_cat/pending_tasks
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatPendingTasksGetAsync(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null);
+		Task<ConnectionStatus> CatPendingTasksAsync(Func<CatPendingTasksQueryString, CatPendingTasksQueryString> queryString = null);
 		
 		///<summary>GET /_cat/recovery
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html</pre>	
 		///</summary>
-		ConnectionStatus CatRecoveryGet(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
+		ConnectionStatus CatRecovery(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
 		
 		///<summary>GET /_cat/recovery
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatRecoveryGetAsync(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
+		Task<ConnectionStatus> CatRecoveryAsync(Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
 		
 		///<summary>GET /_cat/recovery/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		ConnectionStatus CatRecoveryGet(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
+		ConnectionStatus CatRecovery(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
 		
 		///<summary>GET /_cat/recovery/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		Task<ConnectionStatus> CatRecoveryGetAsync(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
+		Task<ConnectionStatus> CatRecoveryAsync(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null);
 		
 		///<summary>GET /_cat/shards
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html</pre>	
 		///</summary>
-		ConnectionStatus CatShardsGet(Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
+		ConnectionStatus CatShards(Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
 		
 		///<summary>GET /_cat/shards
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatShardsGetAsync(Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
+		Task<ConnectionStatus> CatShardsAsync(Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
 		
 		///<summary>GET /_cat/shards/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		ConnectionStatus CatShardsGet(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
+		ConnectionStatus CatShards(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
 		
 		///<summary>GET /_cat/shards/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
-		Task<ConnectionStatus> CatShardsGetAsync(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
+		Task<ConnectionStatus> CatShardsAsync(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null);
 		
 		///<summary>GET /_cat/thread_pool
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre>	
 		///</summary>
-		ConnectionStatus CatThreadPoolGet(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null);
+		ConnectionStatus CatThreadPool(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null);
 		
 		///<summary>GET /_cat/thread_pool
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> CatThreadPoolGetAsync(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null);
+		Task<ConnectionStatus> CatThreadPoolAsync(Func<CatThreadPoolQueryString, CatThreadPoolQueryString> queryString = null);
 		
 		///<summary>DELETE /_search/scroll/{scroll_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html</pre>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
-		ConnectionStatus ClearScrollDelete(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null);
+		ConnectionStatus ClearScroll(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null);
 		
 		///<summary>DELETE /_search/scroll/{scroll_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html</pre>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
-		Task<ConnectionStatus> ClearScrollDeleteAsync(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null);
+		Task<ConnectionStatus> ClearScrollAsync(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/settings
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html</pre>	
@@ -320,34 +320,34 @@ namespace Nest
 		///<summary>GET /_cluster/health
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html</pre>	
 		///</summary>
-		ConnectionStatus ClusterHealthGet(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
+		ConnectionStatus ClusterHealth(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/health
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> ClusterHealthGetAsync(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterHealthAsync(Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/health/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html</pre>	
 		///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
-		ConnectionStatus ClusterHealthGet(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
+		ConnectionStatus ClusterHealth(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/health/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html</pre>	
 		///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
-		Task<ConnectionStatus> ClusterHealthGetAsync(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterHealthAsync(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/pending_tasks
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html</pre>	
 		///</summary>
-		ConnectionStatus ClusterPendingTasksGet(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null);
+		ConnectionStatus ClusterPendingTasks(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/pending_tasks
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> ClusterPendingTasksGetAsync(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterPendingTasksAsync(Func<ClusterPendingTasksQueryString, ClusterPendingTasksQueryString> queryString = null);
 		
 		///<summary>PUT /_cluster/settings
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html</pre>	
@@ -365,97 +365,97 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html</pre>	
 		///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
-		ConnectionStatus ClusterReroutePost(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null);
+		ConnectionStatus ClusterReroute(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null);
 		
 		///<summary>POST /_cluster/reroute
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html</pre>	
 		///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
-		Task<ConnectionStatus> ClusterReroutePostAsync(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterRerouteAsync(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/state
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html</pre>	
 		///</summary>
-		ConnectionStatus ClusterStateGet(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
+		ConnectionStatus ClusterState(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/state
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> ClusterStateGetAsync(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterStateAsync(Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/state/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		ConnectionStatus ClusterStateGet(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
+		ConnectionStatus ClusterState(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/state/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		Task<ConnectionStatus> ClusterStateGetAsync(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterStateAsync(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/state/{metric}/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus ClusterStateGet(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
+		ConnectionStatus ClusterState(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/state/{metric}/{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> ClusterStateGetAsync(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterStateAsync(string metric, string index, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html</pre>	
 		///</summary>
-		ConnectionStatus ClusterStatsGet(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
+		ConnectionStatus ClusterStats(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> ClusterStatsGetAsync(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterStatsAsync(Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/stats/nodes/{node_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		ConnectionStatus ClusterStatsGet(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
+		ConnectionStatus ClusterStats(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/stats/nodes/{node_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		Task<ConnectionStatus> ClusterStatsGetAsync(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
+		Task<ConnectionStatus> ClusterStatsAsync(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null);
 		
 		///<summary>POST /_count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html</pre>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		ConnectionStatus CountPost(object body, Func<CountQueryString, CountQueryString> queryString = null);
+		ConnectionStatus Count(object body, Func<CountQueryString, CountQueryString> queryString = null);
 		
 		///<summary>POST /_count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html</pre>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		Task<ConnectionStatus> CountPostAsync(object body, Func<CountQueryString, CountQueryString> queryString = null);
+		Task<ConnectionStatus> CountAsync(object body, Func<CountQueryString, CountQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		ConnectionStatus CountPost(string index, object body, Func<CountQueryString, CountQueryString> queryString = null);
+		ConnectionStatus Count(string index, object body, Func<CountQueryString, CountQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		Task<ConnectionStatus> CountPostAsync(string index, object body, Func<CountQueryString, CountQueryString> queryString = null);
+		Task<ConnectionStatus> CountAsync(string index, object body, Func<CountQueryString, CountQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html</pre>	
@@ -463,7 +463,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		ConnectionStatus CountPost(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null);
+		ConnectionStatus Count(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html</pre>	
@@ -471,7 +471,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		Task<ConnectionStatus> CountPostAsync(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null);
+		Task<ConnectionStatus> CountAsync(string index, string type, object body, Func<CountQueryString, CountQueryString> queryString = null);
 		
 		///<summary>GET /_count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html</pre>	
@@ -545,7 +545,7 @@ namespace Nest
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		ConnectionStatus CountPercolatePost(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
+		ConnectionStatus CountPercolate(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_percolate/count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -553,7 +553,7 @@ namespace Nest
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		Task<ConnectionStatus> CountPercolatePostAsync(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
+		Task<ConnectionStatus> CountPercolateAsync(string index, string type, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_percolate/count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -562,7 +562,7 @@ namespace Nest
 		///<param name="type">The type of the document being count percolated.</param>
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		ConnectionStatus CountPercolatePost(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
+		ConnectionStatus CountPercolate(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_percolate/count
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -571,7 +571,7 @@ namespace Nest
 		///<param name="type">The type of the document being count percolated.</param>
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
-		Task<ConnectionStatus> CountPercolatePostAsync(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
+		Task<ConnectionStatus> CountPercolateAsync(string index, string type, string id, object body, Func<CountPercolateQueryString, CountPercolateQueryString> queryString = null);
 		
 		///<summary>DELETE /{index}/{type}/{id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html</pre>	
@@ -625,7 +625,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
-		ConnectionStatus ExistsHead(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null);
+		ConnectionStatus Exists(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}/{type}/{id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html</pre>	
@@ -633,7 +633,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
-		Task<ConnectionStatus> ExistsHeadAsync(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null);
+		Task<ConnectionStatus> ExistsAsync(string index, string type, string id, Func<ExistsQueryString, ExistsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/{id}/_explain
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html</pre>	
@@ -658,7 +658,7 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		///<param name="id">The document ID</param>
 		///<param name="body">The query definition using the Query DSL</param>
-		ConnectionStatus ExplainPost(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null);
+		ConnectionStatus Explain(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_explain
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html</pre>	
@@ -667,7 +667,7 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		///<param name="id">The document ID</param>
 		///<param name="body">The query definition using the Query DSL</param>
-		Task<ConnectionStatus> ExplainPostAsync(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null);
+		Task<ConnectionStatus> ExplainAsync(string index, string type, string id, object body, Func<ExplainQueryString, ExplainQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/{id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html</pre>	
@@ -707,7 +707,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">The document</param>
-		ConnectionStatus IndexPost(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
+		ConnectionStatus Index(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html</pre>	
@@ -715,7 +715,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">The document</param>
-		Task<ConnectionStatus> IndexPostAsync(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
+		Task<ConnectionStatus> IndexAsync(string index, string type, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html</pre>	
@@ -724,7 +724,7 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
-		ConnectionStatus IndexPost(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
+		ConnectionStatus Index(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html</pre>	
@@ -733,7 +733,7 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
 		///<param name="body">The document</param>
-		Task<ConnectionStatus> IndexPostAsync(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
+		Task<ConnectionStatus> IndexAsync(string index, string type, string id, object body, Func<IndexQueryString, IndexQueryString> queryString = null);
 		
 		///<summary>PUT /{index}/{type}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html</pre>	
@@ -795,49 +795,49 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html</pre>	
 		///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
-		ConnectionStatus IndicesAnalyzePostForAll(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
+		ConnectionStatus IndicesAnalyzeForAll(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
 		
 		///<summary>POST /_analyze
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html</pre>	
 		///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
-		Task<ConnectionStatus> IndicesAnalyzePostForAllAsync(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesAnalyzeForAllAsync(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_analyze
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
-		ConnectionStatus IndicesAnalyzePost(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
+		ConnectionStatus IndicesAnalyze(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_analyze
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
-		Task<ConnectionStatus> IndicesAnalyzePostAsync(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesAnalyzeAsync(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null);
 		
 		///<summary>POST /_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesClearCachePostForAll(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
+		ConnectionStatus IndicesClearCacheForAll(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>POST /_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesClearCachePostForAllAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesClearCacheForAllAsync(Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
-		ConnectionStatus IndicesClearCachePost(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
+		ConnectionStatus IndicesClearCache(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
-		Task<ConnectionStatus> IndicesClearCachePostAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesClearCacheAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null);
 		
 		///<summary>GET /_cache/clear
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html</pre>	
@@ -865,27 +865,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		ConnectionStatus IndicesClosePost(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null);
+		ConnectionStatus IndicesClose(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_close
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		Task<ConnectionStatus> IndicesClosePostAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesCloseAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null);
 		
 		///<summary>PUT /{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
-		ConnectionStatus IndicesCreatePut(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null);
+		ConnectionStatus IndicesCreate(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null);
 		
 		///<summary>PUT /{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
-		Task<ConnectionStatus> IndicesCreatePutAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesCreateAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html</pre>	
@@ -971,99 +971,99 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
-		ConnectionStatus IndicesExistsHead(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null);
+		ConnectionStatus IndicesExists(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
-		Task<ConnectionStatus> IndicesExistsHeadAsync(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesExistsAsync(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null);
 		
 		///<summary>HEAD /_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		ConnectionStatus IndicesExistsAliasHeadForAll(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
+		ConnectionStatus IndicesExistsAliasForAll(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
 		
 		///<summary>HEAD /_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		Task<ConnectionStatus> IndicesExistsAliasHeadForAllAsync(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesExistsAliasForAllAsync(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}/_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		ConnectionStatus IndicesExistsAliasHead(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
+		ConnectionStatus IndicesExistsAlias(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}/_alias/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
-		Task<ConnectionStatus> IndicesExistsAliasHeadAsync(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesExistsAliasAsync(string index, string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}/_alias
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		ConnectionStatus IndicesExistsAliasHead(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
+		ConnectionStatus IndicesExistsAlias(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}/_alias
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		Task<ConnectionStatus> IndicesExistsAliasHeadAsync(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesExistsAliasAsync(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null);
 		
 		///<summary>HEAD /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
-		ConnectionStatus IndicesExistsTemplateHeadForAll(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null);
+		ConnectionStatus IndicesExistsTemplateForAll(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null);
 		
 		///<summary>HEAD /_template/{name}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html</pre>	
 		///</summary>
 		///<param name="name">The name of the template</param>
-		Task<ConnectionStatus> IndicesExistsTemplateHeadForAllAsync(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesExistsTemplateForAllAsync(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}/{type}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
-		ConnectionStatus IndicesExistsTypeHead(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null);
+		ConnectionStatus IndicesExistsType(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null);
 		
 		///<summary>HEAD /{index}/{type}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
-		Task<ConnectionStatus> IndicesExistsTypeHeadAsync(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesExistsTypeAsync(string index, string type, Func<IndicesExistsTypeQueryString, IndicesExistsTypeQueryString> queryString = null);
 		
 		///<summary>POST /_flush
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesFlushPostForAll(Func<FlushQueryString, FlushQueryString> queryString = null);
+		ConnectionStatus IndicesFlushForAll(Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>POST /_flush
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesFlushPostForAllAsync(Func<FlushQueryString, FlushQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesFlushForAllAsync(Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_flush
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		ConnectionStatus IndicesFlushPost(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
+		ConnectionStatus IndicesFlush(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_flush
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		Task<ConnectionStatus> IndicesFlushPostAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesFlushAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null);
 		
 		///<summary>GET /_flush
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html</pre>	
@@ -1425,35 +1425,35 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		ConnectionStatus IndicesOpenPost(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null);
+		ConnectionStatus IndicesOpen(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_open
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
-		Task<ConnectionStatus> IndicesOpenPostAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOpenAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null);
 		
 		///<summary>POST /_optimize
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesOptimizePostForAll(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
+		ConnectionStatus IndicesOptimizeForAll(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>POST /_optimize
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesOptimizePostForAllAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOptimizeForAllAsync(Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_optimize
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesOptimizePost(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
+		ConnectionStatus IndicesOptimize(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_optimize
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesOptimizePostAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesOptimizeAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null);
 		
 		///<summary>GET /_optimize
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html</pre>	
@@ -1750,24 +1750,24 @@ namespace Nest
 		///<summary>POST /_refresh
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesRefreshPostForAll(Func<RefreshQueryString, RefreshQueryString> queryString = null);
+		ConnectionStatus IndicesRefreshForAll(Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>POST /_refresh
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesRefreshPostForAllAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesRefreshForAllAsync(Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_refresh
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesRefreshPost(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
+		ConnectionStatus IndicesRefresh(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_refresh
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesRefreshPostAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesRefreshAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null);
 		
 		///<summary>GET /_refresh
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html</pre>	
@@ -1794,128 +1794,128 @@ namespace Nest
 		///<summary>GET /_segments
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesSegmentsGetForAll(Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
+		ConnectionStatus IndicesSegmentsForAll(Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>GET /_segments
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesSegmentsGetForAllAsync(Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSegmentsForAllAsync(Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_segments
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesSegmentsGet(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
+		ConnectionStatus IndicesSegments(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_segments
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesSegmentsGetAsync(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSegmentsAsync(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null);
 		
 		///<summary>POST /_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesSnapshotIndexPostForAll(Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
+		ConnectionStatus IndicesSnapshotIndexForAll(Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>POST /_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesSnapshotIndexPostForAllAsync(Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSnapshotIndexForAllAsync(Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		ConnectionStatus IndicesSnapshotIndexPost(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
+		ConnectionStatus IndicesSnapshotIndex(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_gateway/snapshot
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
-		Task<ConnectionStatus> IndicesSnapshotIndexPostAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesSnapshotIndexAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null);
 		
 		///<summary>GET /_stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesStatsGetForAll(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		ConnectionStatus IndicesStatsForAll(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesStatsGetForAllAsync(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesStatsForAllAsync(Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
-		ConnectionStatus IndicesStatsGetForAll(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		ConnectionStatus IndicesStatsForAll(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
-		Task<ConnectionStatus> IndicesStatsGetForAllAsync(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesStatsForAllAsync(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesStatsGet(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		ConnectionStatus IndicesStats(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesStatsGetAsync(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesStatsAsync(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
-		ConnectionStatus IndicesStatsGet(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		ConnectionStatus IndicesStats(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
-		Task<ConnectionStatus> IndicesStatsGetAsync(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesStatsAsync(string index, string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_status
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html</pre>	
 		///</summary>
-		ConnectionStatus IndicesStatusGetForAll(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
+		ConnectionStatus IndicesStatusForAll(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
 		
 		///<summary>GET /_status
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> IndicesStatusGetForAllAsync(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesStatusForAllAsync(Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_status
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		ConnectionStatus IndicesStatusGet(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
+		ConnectionStatus IndicesStatus(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
 		
 		///<summary>GET /{index}/_status
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		Task<ConnectionStatus> IndicesStatusGetAsync(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesStatusAsync(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null);
 		
 		///<summary>POST /_aliases
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
-		ConnectionStatus IndicesUpdateAliasesPostForAll(object body, Func<AliasQueryString, AliasQueryString> queryString = null);
+		ConnectionStatus IndicesUpdateAliasesForAll(object body, Func<AliasQueryString, AliasQueryString> queryString = null);
 		
 		///<summary>POST /_aliases
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html</pre>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
-		Task<ConnectionStatus> IndicesUpdateAliasesPostForAllAsync(object body, Func<AliasQueryString, AliasQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesUpdateAliasesForAllAsync(object body, Func<AliasQueryString, AliasQueryString> queryString = null);
 		
 		///<summary>GET /_validate/query
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html</pre>	
@@ -1957,27 +1957,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html</pre>	
 		///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
-		ConnectionStatus IndicesValidateQueryPostForAll(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQueryForAll(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /_validate/query
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html</pre>	
 		///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
-		Task<ConnectionStatus> IndicesValidateQueryPostForAllAsync(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryForAllAsync(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
-		ConnectionStatus IndicesValidateQueryPost(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQuery(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
-		Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryAsync(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html</pre>	
@@ -1985,7 +1985,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
-		ConnectionStatus IndicesValidateQueryPost(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
+		ConnectionStatus IndicesValidateQuery(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_validate/query
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html</pre>	
@@ -1993,17 +1993,17 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
-		Task<ConnectionStatus> IndicesValidateQueryPostAsync(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
+		Task<ConnectionStatus> IndicesValidateQueryAsync(string index, string type, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null);
 		
 		///<summary>GET /
 		///<pre>http://www.elasticsearch.org/guide/</pre>	
 		///</summary>
-		ConnectionStatus InfoGet(Func<InfoQueryString, InfoQueryString> queryString = null);
+		ConnectionStatus Info(Func<InfoQueryString, InfoQueryString> queryString = null);
 		
 		///<summary>GET /
 		///<pre>http://www.elasticsearch.org/guide/</pre>	
 		///</summary>
-		Task<ConnectionStatus> InfoGetAsync(Func<InfoQueryString, InfoQueryString> queryString = null);
+		Task<ConnectionStatus> InfoAsync(Func<InfoQueryString, InfoQueryString> queryString = null);
 		
 		///<summary>GET /_mget
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html</pre>	
@@ -2045,27 +2045,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html</pre>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		ConnectionStatus MgetPost(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
+		ConnectionStatus Mget(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /_mget
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html</pre>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		Task<ConnectionStatus> MgetPostAsync(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetAsync(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mget
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		ConnectionStatus MgetPost(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
+		ConnectionStatus Mget(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mget
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html</pre>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		Task<ConnectionStatus> MgetPostAsync(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetAsync(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mget
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html</pre>	
@@ -2073,7 +2073,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		ConnectionStatus MgetPost(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
+		ConnectionStatus Mget(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mget
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html</pre>	
@@ -2081,7 +2081,7 @@ namespace Nest
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
-		Task<ConnectionStatus> MgetPostAsync(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
+		Task<ConnectionStatus> MgetAsync(string index, string type, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/{id}/_mlt
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html</pre>	
@@ -2106,7 +2106,7 @@ namespace Nest
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
 		///<param name="body">A specific search request definition</param>
-		ConnectionStatus MltPost(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null);
+		ConnectionStatus Mlt(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_mlt
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html</pre>	
@@ -2115,7 +2115,7 @@ namespace Nest
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
 		///<param name="id">The document ID</param>
 		///<param name="body">A specific search request definition</param>
-		Task<ConnectionStatus> MltPostAsync(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null);
+		Task<ConnectionStatus> MltAsync(string index, string type, string id, object body, Func<MoreLikeThisQueryString, MoreLikeThisQueryString> queryString = null);
 		
 		///<summary>GET /_mpercolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -2157,27 +2157,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
 		///</summary>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		ConnectionStatus MpercolatePost(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
+		ConnectionStatus Mpercolate(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
 		
 		///<summary>POST /_mpercolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
 		///</summary>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		Task<ConnectionStatus> MpercolatePostAsync(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
+		Task<ConnectionStatus> MpercolateAsync(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mpercolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		ConnectionStatus MpercolatePost(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
+		ConnectionStatus Mpercolate(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mpercolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		Task<ConnectionStatus> MpercolatePostAsync(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
+		Task<ConnectionStatus> MpercolateAsync(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mpercolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -2185,7 +2185,7 @@ namespace Nest
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		ConnectionStatus MpercolatePost(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
+		ConnectionStatus Mpercolate(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mpercolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -2193,7 +2193,7 @@ namespace Nest
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
-		Task<ConnectionStatus> MpercolatePostAsync(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
+		Task<ConnectionStatus> MpercolateAsync(string index, string type, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null);
 		
 		///<summary>GET /_msearch
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html</pre>	
@@ -2235,27 +2235,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html</pre>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		ConnectionStatus MsearchPost(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
+		ConnectionStatus Msearch(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /_msearch
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html</pre>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		Task<ConnectionStatus> MsearchPostAsync(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchAsync(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		ConnectionStatus MsearchPost(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
+		ConnectionStatus Msearch(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		Task<ConnectionStatus> MsearchPostAsync(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchAsync(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html</pre>	
@@ -2263,7 +2263,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		ConnectionStatus MsearchPost(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
+		ConnectionStatus Msearch(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_msearch
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html</pre>	
@@ -2271,7 +2271,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
-		Task<ConnectionStatus> MsearchPostAsync(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
+		Task<ConnectionStatus> MsearchAsync(string index, string type, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null);
 		
 		///<summary>GET /_mtermvectors
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</pre>	
@@ -2313,27 +2313,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</pre>	
 		///</summary>
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
-		ConnectionStatus MtermvectorsPost(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
+		ConnectionStatus Mtermvectors(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
 		
 		///<summary>POST /_mtermvectors
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</pre>	
 		///</summary>
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
-		Task<ConnectionStatus> MtermvectorsPostAsync(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
+		Task<ConnectionStatus> MtermvectorsAsync(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mtermvectors
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</pre>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
-		ConnectionStatus MtermvectorsPost(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
+		ConnectionStatus Mtermvectors(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_mtermvectors
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</pre>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
-		Task<ConnectionStatus> MtermvectorsPostAsync(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
+		Task<ConnectionStatus> MtermvectorsAsync(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mtermvectors
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</pre>	
@@ -2341,7 +2341,7 @@ namespace Nest
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
-		ConnectionStatus MtermvectorsPost(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
+		ConnectionStatus Mtermvectors(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_mtermvectors
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</pre>	
@@ -2349,161 +2349,161 @@ namespace Nest
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
-		Task<ConnectionStatus> MtermvectorsPostAsync(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
+		Task<ConnectionStatus> MtermvectorsAsync(string index, string type, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/nodes/hotthreads
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html</pre>	
 		///</summary>
-		ConnectionStatus NodesHotThreadsGetForAll(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
+		ConnectionStatus NodesHotThreadsForAll(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/nodes/hotthreads
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> NodesHotThreadsGetForAllAsync(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesHotThreadsForAllAsync(Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/nodes/{node_id}/hotthreads
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		ConnectionStatus NodesHotThreadsGet(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
+		ConnectionStatus NodesHotThreads(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
 		
 		///<summary>GET /_cluster/nodes/{node_id}/hotthreads
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		Task<ConnectionStatus> NodesHotThreadsGetAsync(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesHotThreadsAsync(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
-		ConnectionStatus NodesInfoGetForAll(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		ConnectionStatus NodesInfoForAll(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>GET /_nodes
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> NodesInfoGetForAllAsync(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		Task<ConnectionStatus> NodesInfoForAllAsync(Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		ConnectionStatus NodesInfoGet(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		ConnectionStatus NodesInfo(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		Task<ConnectionStatus> NodesInfoGetAsync(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		Task<ConnectionStatus> NodesInfoAsync(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
-		ConnectionStatus NodesInfoGetForAll(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		ConnectionStatus NodesInfoForAll(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
-		Task<ConnectionStatus> NodesInfoGetForAllAsync(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		Task<ConnectionStatus> NodesInfoForAllAsync(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
-		ConnectionStatus NodesInfoGet(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		ConnectionStatus NodesInfo(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
-		Task<ConnectionStatus> NodesInfoGetAsync(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
+		Task<ConnectionStatus> NodesInfoAsync(string node_id, string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null);
 		
 		///<summary>POST /_shutdown
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html</pre>	
 		///</summary>
-		ConnectionStatus NodesShutdownPostForAll(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
+		ConnectionStatus NodesShutdownForAll(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
 		
 		///<summary>POST /_shutdown
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> NodesShutdownPostForAllAsync(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
+		Task<ConnectionStatus> NodesShutdownForAllAsync(Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
 		
 		///<summary>POST /_cluster/nodes/{node_id}/_shutdown
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
-		ConnectionStatus NodesShutdownPost(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
+		ConnectionStatus NodesShutdown(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
 		
 		///<summary>POST /_cluster/nodes/{node_id}/_shutdown
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
-		Task<ConnectionStatus> NodesShutdownPostAsync(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
+		Task<ConnectionStatus> NodesShutdownAsync(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
-		ConnectionStatus NodesStatsGetForAll(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		ConnectionStatus NodesStatsForAll(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
-		Task<ConnectionStatus> NodesStatsGetForAllAsync(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesStatsForAllAsync(Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		ConnectionStatus NodesStatsGet(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		ConnectionStatus NodesStats(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/stats
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
-		Task<ConnectionStatus> NodesStatsGetAsync(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesStatsAsync(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		ConnectionStatus NodesStatsGetForAll(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		ConnectionStatus NodesStatsForAll(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		Task<ConnectionStatus> NodesStatsGetForAllAsync(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesStatsForAllAsync(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		ConnectionStatus NodesStatsGet(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		ConnectionStatus NodesStats(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/stats/{metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
-		Task<ConnectionStatus> NodesStatsGetAsync(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesStatsAsync(string node_id, string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/stats/{metric}/{index_metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
-		ConnectionStatus NodesStatsGetForAll(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		ConnectionStatus NodesStatsForAll(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/stats/{metric}/{index_metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
-		Task<ConnectionStatus> NodesStatsGetForAllAsync(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesStatsForAllAsync(string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/stats/{metric}/{index_metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
@@ -2511,7 +2511,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
-		ConnectionStatus NodesStatsGet(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		ConnectionStatus NodesStats(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /_nodes/{node_id}/stats/{metric}/{index_metric}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html</pre>	
@@ -2519,7 +2519,7 @@ namespace Nest
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
-		Task<ConnectionStatus> NodesStatsGetAsync(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
+		Task<ConnectionStatus> NodesStatsAsync(string node_id, string metric, string index_metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null);
 		
 		///<summary>GET /{index}/{type}/_percolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -2557,7 +2557,7 @@ namespace Nest
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
 		///<param name="body">The percolator request definition using the percolate DSL</param>
-		ConnectionStatus PercolatePost(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
+		ConnectionStatus Percolate(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_percolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -2565,7 +2565,7 @@ namespace Nest
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
 		///<param name="body">The percolator request definition using the percolate DSL</param>
-		Task<ConnectionStatus> PercolatePostAsync(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
+		Task<ConnectionStatus> PercolateAsync(string index, string type, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_percolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -2574,7 +2574,7 @@ namespace Nest
 		///<param name="type">The type of the document being percolated.</param>
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="body">The percolator request definition using the percolate DSL</param>
-		ConnectionStatus PercolatePost(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
+		ConnectionStatus Percolate(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_percolate
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html</pre>	
@@ -2583,17 +2583,17 @@ namespace Nest
 		///<param name="type">The type of the document being percolated.</param>
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="body">The percolator request definition using the percolate DSL</param>
-		Task<ConnectionStatus> PercolatePostAsync(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
+		Task<ConnectionStatus> PercolateAsync(string index, string type, string id, object body, Func<PercolateQueryString, PercolateQueryString> queryString = null);
 		
 		///<summary>HEAD /
 		///<pre>http://www.elasticsearch.org/guide/</pre>	
 		///</summary>
-		ConnectionStatus PingHead(Func<PingQueryString, PingQueryString> queryString = null);
+		ConnectionStatus Ping(Func<PingQueryString, PingQueryString> queryString = null);
 		
 		///<summary>HEAD /
 		///<pre>http://www.elasticsearch.org/guide/</pre>	
 		///</summary>
-		Task<ConnectionStatus> PingHeadAsync(Func<PingQueryString, PingQueryString> queryString = null);
+		Task<ConnectionStatus> PingAsync(Func<PingQueryString, PingQueryString> queryString = null);
 		
 		///<summary>GET /_search/scroll
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html</pre>	
@@ -2621,27 +2621,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html</pre>	
 		///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
-		ConnectionStatus ScrollPost(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
+		ConnectionStatus Scroll(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
 		
 		///<summary>POST /_search/scroll
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html</pre>	
 		///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
-		Task<ConnectionStatus> ScrollPostAsync(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
+		Task<ConnectionStatus> ScrollAsync(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
 		
 		///<summary>POST /_search/scroll/{scroll_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html</pre>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
-		ConnectionStatus ScrollPost(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
+		ConnectionStatus Scroll(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
 		
 		///<summary>POST /_search/scroll/{scroll_id}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html</pre>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
-		Task<ConnectionStatus> ScrollPostAsync(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
+		Task<ConnectionStatus> ScrollAsync(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null);
 		
 		///<summary>GET /_search
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
@@ -2683,27 +2683,27 @@ namespace Nest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
-		ConnectionStatus SearchPost(object body, Func<SearchQueryString, SearchQueryString> queryString = null);
+		ConnectionStatus Search(object body, Func<SearchQueryString, SearchQueryString> queryString = null);
 		
 		///<summary>POST /_search
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
-		Task<ConnectionStatus> SearchPostAsync(object body, Func<SearchQueryString, SearchQueryString> queryString = null);
+		Task<ConnectionStatus> SearchAsync(object body, Func<SearchQueryString, SearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_search
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
-		ConnectionStatus SearchPost(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
+		ConnectionStatus Search(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_search
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
-		Task<ConnectionStatus> SearchPostAsync(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
+		Task<ConnectionStatus> SearchAsync(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_search
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
@@ -2711,7 +2711,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
-		ConnectionStatus SearchPost(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
+		ConnectionStatus Search(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/_search
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
@@ -2719,7 +2719,7 @@ namespace Nest
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
-		Task<ConnectionStatus> SearchPostAsync(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
+		Task<ConnectionStatus> SearchAsync(string index, string type, object body, Func<SearchQueryString, SearchQueryString> queryString = null);
 		
 		///<summary>PUT /_snapshot/{repository}/{snapshot}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html</pre>	
@@ -2727,7 +2727,7 @@ namespace Nest
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">The snapshot definition</param>
-		ConnectionStatus SnapshotCreatePut(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null);
+		ConnectionStatus SnapshotCreate(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null);
 		
 		///<summary>PUT /_snapshot/{repository}/{snapshot}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html</pre>	
@@ -2735,7 +2735,7 @@ namespace Nest
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">The snapshot definition</param>
-		Task<ConnectionStatus> SnapshotCreatePutAsync(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null);
+		Task<ConnectionStatus> SnapshotCreateAsync(string repository, string snapshot, object body, Func<SnapshotCreateQueryString, SnapshotCreateQueryString> queryString = null);
 		
 		///<summary>POST /_snapshot/{repository}/{snapshot}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html</pre>	
@@ -2758,14 +2758,14 @@ namespace Nest
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
-		ConnectionStatus SnapshotCreateRepositoryPut(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null);
+		ConnectionStatus SnapshotCreateRepository(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null);
 		
 		///<summary>PUT /_snapshot/{repository}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html</pre>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
-		Task<ConnectionStatus> SnapshotCreateRepositoryPutAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null);
+		Task<ConnectionStatus> SnapshotCreateRepositoryAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null);
 		
 		///<summary>POST /_snapshot/{repository}
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html</pre>	
@@ -2849,7 +2849,7 @@ namespace Nest
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">Details of what to restore</param>
-		ConnectionStatus SnapshotRestorePost(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null);
+		ConnectionStatus SnapshotRestore(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null);
 		
 		///<summary>POST /_snapshot/{repository}/{snapshot}/_restore
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html</pre>	
@@ -2857,33 +2857,33 @@ namespace Nest
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="body">Details of what to restore</param>
-		Task<ConnectionStatus> SnapshotRestorePostAsync(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null);
+		Task<ConnectionStatus> SnapshotRestoreAsync(string repository, string snapshot, object body, Func<SnapshotRestoreQueryString, SnapshotRestoreQueryString> queryString = null);
 		
 		///<summary>POST /_suggest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="body">The request definition</param>
-		ConnectionStatus SuggestPost(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
+		ConnectionStatus Suggest(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
 		
 		///<summary>POST /_suggest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="body">The request definition</param>
-		Task<ConnectionStatus> SuggestPostAsync(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
+		Task<ConnectionStatus> SuggestAsync(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_suggest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
-		ConnectionStatus SuggestPost(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
+		ConnectionStatus Suggest(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
 		
 		///<summary>POST /{index}/_suggest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
-		Task<ConnectionStatus> SuggestPostAsync(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
+		Task<ConnectionStatus> SuggestAsync(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null);
 		
 		///<summary>GET /_suggest
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html</pre>	
@@ -2930,7 +2930,7 @@ namespace Nest
 		///<param name="type">The type of the document.</param>
 		///<param name="id">The id of the document.</param>
 		///<param name="body">Define parameters. See documentation.</param>
-		ConnectionStatus TermvectorPost(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null);
+		ConnectionStatus Termvector(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_termvector
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</pre>	
@@ -2939,7 +2939,7 @@ namespace Nest
 		///<param name="type">The type of the document.</param>
 		///<param name="id">The id of the document.</param>
 		///<param name="body">Define parameters. See documentation.</param>
-		Task<ConnectionStatus> TermvectorPostAsync(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null);
+		Task<ConnectionStatus> TermvectorAsync(string index, string type, string id, object body, Func<TermvectorQueryString, TermvectorQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_update
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html</pre>	
@@ -2948,7 +2948,7 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
-		ConnectionStatus UpdatePost(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null);
+		ConnectionStatus Update(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null);
 		
 		///<summary>POST /{index}/{type}/{id}/_update
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html</pre>	
@@ -2957,7 +2957,7 @@ namespace Nest
 		///<param name="type">The type of the document</param>
 		///<param name="id">Document ID</param>
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
-		Task<ConnectionStatus> UpdatePostAsync(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null);
+		Task<ConnectionStatus> UpdateAsync(string index, string type, string id, object body, Func<UpdateQueryString, UpdateQueryString> queryString = null);
 		
 	}
 }

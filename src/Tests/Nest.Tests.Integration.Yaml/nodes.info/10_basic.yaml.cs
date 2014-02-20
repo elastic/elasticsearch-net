@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.NodesInfo1
 			{	
 
 				//do nodes.info 
-				this.Do(()=> this._client.NodesInfoGetForAll());
+				this.Do(()=> _client.NodesInfoForAll());
 
 				//is_true _response.nodes; 
 				this.IsTrue(_response.nodes);

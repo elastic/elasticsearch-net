@@ -20,16 +20,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
+				this.Do(()=> _client.IndicesCreate("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
+				this.Do(()=> _client.IndicesCreate("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index3", null));
+				this.Do(()=> _client.IndicesCreate("test_index3", null));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -45,21 +45,21 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 			{	
 
 				//do indices.close 
-				this.Do(()=> this._client.IndicesClosePost("_all"));
+				this.Do(()=> _client.IndicesClose("_all"));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index2"), shouldCatch: @"forbidden");
+				this.Do(()=> _client.SearchGet("test_index2"), shouldCatch: @"forbidden");
 
 				//do indices.open 
-				this.Do(()=> this._client.IndicesOpenPost("_all"));
+				this.Do(()=> _client.IndicesOpen("_all"));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index2"));
+				this.Do(()=> _client.SearchGet("test_index2"));
 
 			}
 		}
@@ -72,21 +72,21 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 			{	
 
 				//do indices.close 
-				this.Do(()=> this._client.IndicesClosePost("test_*"));
+				this.Do(()=> _client.IndicesClose("test_*"));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index2"), shouldCatch: @"forbidden");
+				this.Do(()=> _client.SearchGet("test_index2"), shouldCatch: @"forbidden");
 
 				//do indices.open 
-				this.Do(()=> this._client.IndicesOpenPost("test_*"));
+				this.Do(()=> _client.IndicesOpen("test_*"));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index2"));
+				this.Do(()=> _client.SearchGet("test_index2"));
 
 			}
 		}
@@ -99,21 +99,21 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen2
 			{	
 
 				//do indices.close 
-				this.Do(()=> this._client.IndicesClosePost("*"));
+				this.Do(()=> _client.IndicesClose("*"));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index3"), shouldCatch: @"forbidden");
+				this.Do(()=> _client.SearchGet("test_index3"), shouldCatch: @"forbidden");
 
 				//do indices.open 
-				this.Do(()=> this._client.IndicesOpenPost("*"));
+				this.Do(()=> _client.IndicesOpen("*"));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index3"));
+				this.Do(()=> _client.SearchGet("test_index3"));
 
 			}
 		}

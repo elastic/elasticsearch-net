@@ -20,37 +20,36 @@ namespace Profiling.Indexing
 		static void Main(string[] args)
 		{
 			var process = Process.GetCurrentProcess();
-			
+			//warmer
+			RunTest<HttpTester>(HTTP_PORT, 10);
+
 			double httpRate = RunTest<HttpTester>(HTTP_PORT);
 			var threadCountHttp = process.Threads.Count;
 			var memorySizeHttp = process.VirtualMemorySize64;
 			
-			double httpSsRate = RunTest<HttpSSTextTester>(HTTP_PORT);
-			var threadCountSsHttp = process.Threads.Count;
-			var memorySizeSsHttp = process.VirtualMemorySize64;
 			Console.WriteLine();
 			Console.WriteLine("HTTP (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
 				, httpRate, threadCountHttp, memorySizeHttp);
-			
-			Console.WriteLine("HTTP SS TEXT (IndexManyAsync): {0:0,0}/s {1} Threads {2} Virual memory"
-				, httpSsRate, threadCountSsHttp, memorySizeSsHttp);
+
 			Console.ReadLine();
+
+			var client = new ElasticClient(new ConnectionSettings(new Uri("http://localhost:9200"), "nest-default-index"));
+			client.DeleteIndex(d => d.Index(INDEX_PREFIX + "*"));
+
 		}
 
-		private static double RunTest<T>(int port) where T : ITester
+		private static double RunTest<T>(int port, int? messages = null) where T : ITester
 		{
 			string type = typeof(T).Name.ToLower();
 			Console.WriteLine("Starting {0} test", type);
 
 			// Recreate index up-front, so this process doesn't interfere with perf figures
-			RecreateIndex(type);
-
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 
 			var tester = Activator.CreateInstance<T>();
 
-			tester.Run(INDEX_PREFIX + type, port, NUM_MESSAGES, BUFFER_SIZE);
+			tester.Run(INDEX_PREFIX + type + "-" + Guid.NewGuid().ToString(), port, messages ?? NUM_MESSAGES, BUFFER_SIZE);
 
 			sw.Stop();
 			double rate = NUM_MESSAGES / ((double)sw.ElapsedMilliseconds / 1000);
@@ -75,59 +74,6 @@ namespace Profiling.Indexing
 			return rate;
 		}
 
-		private static void RecreateIndex(string suffix)
-		{
-			var host = "localhost";
-			if (Process.GetProcessesByName("fiddler").Any())
-				host = "ipv4.fiddler";
-			string indexName = INDEX_PREFIX + suffix;
-
-			var connSettings = new ConnectionSettings(new Uri("http://"+host+":9200"), indexName);
-
-			var client = new ElasticClient(connSettings);
-
-			var result = client.RootNodeInfo();
-			if (!result.IsValid)
-			{
-				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",
-					connSettings.Host, result.ConnectionStatus.Error.OriginalException.Message);
-				Console.Read();
-				return;
-			}
-
-			client.DeleteIndex(i=>i.Index(indexName));
-
-			var indexSettings = new IndexSettings();
-			indexSettings.NumberOfReplicas = 1;
-			indexSettings.NumberOfShards = 5;
-			indexSettings.Settings.Add("index.refresh_interval", "-1");
-
-			var createResponse = client.CreateIndex(indexName, i=>i.InitializeUsing(indexSettings));
-			client.Map<Message>(m=>m.MapFromAttributes());
-		}
-
-		private static void CloseIndex(string suffix)
-		{
-			string indexName = INDEX_PREFIX + suffix;
-
-			var host = "localhost";
-			if (Process.GetProcessesByName("fiddler").Any())
-				host = "ipv4.fiddler";
-
-			var connSettings = new ConnectionSettings(new Uri("http://" + host + ":9200"), indexName);
-
-			var client = new ElasticClient(connSettings);
-
-			var result = client.RootNodeInfo();
-			if (!result.IsValid)
-			{
-				Console.Error.WriteLine("Could not connect to {0}:\r\n{1}",
-					connSettings.Host, result.ConnectionStatus.Error.OriginalException.Message);
-				Console.Read();
-				return;
-			}
-
-			client.CloseIndex(ci=>ci.Index(indexName));
-		}
+		
 	}
 }

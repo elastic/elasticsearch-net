@@ -102,12 +102,12 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void ConnectUsingRawClient()
 		{
-			var result = this._client.Raw.InfoGet();
+			var result = this._client.Raw.Info();
 			Assert.IsTrue(result.Success);
 			StringAssert.EndsWith(":9200/?pretty=true", result.RequestUrl);
 
 
-			var resultWithQueryString = this._client.Raw.InfoGet(qs => qs.Add("hello", "world"));
+			var resultWithQueryString = this._client.Raw.Info(qs => qs.Add("hello", "world"));
 			Assert.IsTrue(resultWithQueryString.Success);
 
 			StringAssert.EndsWith(":9200/?hello=world&pretty=true", resultWithQueryString.RequestUrl);
@@ -116,7 +116,7 @@ namespace Nest.Tests.Integration
 		[Test]
 		public void ConnectUsingRawClientComplexCall()
 		{
-			var result = this._client.Raw.ClusterHealthGet(s => s
+			var result = this._client.Raw.ClusterHealth(s => s
 				.Level(LevelOptions.Indices)
 				.Local(true)
 				.WaitForActiveShards(1)

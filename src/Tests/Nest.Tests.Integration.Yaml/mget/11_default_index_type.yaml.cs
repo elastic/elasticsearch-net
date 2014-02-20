@@ -23,16 +23,16 @@ namespace Nest.Tests.Integration.Yaml.Mget2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_2", null));
+				this.Do(()=> _client.IndicesCreate("test_2", null));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -55,7 +55,7 @@ namespace Nest.Tests.Integration.Yaml.Mget2
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", "test", _body));
+				this.Do(()=> _client.Mget("test_1", "test", _body));
 
 				//is_false _response.docs[0].found; 
 				this.IsFalse(_response.docs[0].found);

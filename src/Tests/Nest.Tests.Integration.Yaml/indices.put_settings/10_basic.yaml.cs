@@ -30,10 +30,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test-index", _body));
+				this.Do(()=> _client.IndicesCreate("test-index", _body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test-index", nv=>nv
+				this.Do(()=> _client.IndicesGetSettings("test-index", nv=>nv
 					.Add("flat_settings", @"true")
 				));
 
@@ -44,10 +44,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutSettings1
 				_body = new {
 					number_of_replicas= "1"
 				};
-				this.Do(()=> this._client.IndicesPutSettingsForAll(_body));
+				this.Do(()=> _client.IndicesPutSettingsForAll(_body));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll(nv=>nv
+				this.Do(()=> _client.IndicesGetSettingsForAll(nv=>nv
 					.Add("flat_settings", @"false")
 				));
 

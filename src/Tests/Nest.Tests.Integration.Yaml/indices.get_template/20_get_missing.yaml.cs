@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate2
 			{	
 
 				//do indices.delete_template 
-				this.Do(()=> this._client.IndicesDeleteTemplateForAll("*", nv=>nv
+				this.Do(()=> _client.IndicesDeleteTemplateForAll("*", nv=>nv
 					.Add("ignore", 404)
 				));
 
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetTemplate2
 			{	
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplateForAll("test"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesGetTemplateForAll("test"), shouldCatch: @"missing");
 
 			}
 		}

@@ -30,10 +30,10 @@ namespace Nest.Tests.Integration.Yaml.Get8
 					},
 					count= "1"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("_source", @"false")
 				));
 
@@ -50,7 +50,7 @@ namespace Nest.Tests.Integration.Yaml.Get8
 				this.IsFalse(_response._source);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("_source", @"true")
 				));
 
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Yaml.Get8
 				this.IsMatch(_response._source.include.field1, @"v1");
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("_source", @"include.field1")
 				));
 
@@ -69,7 +69,7 @@ namespace Nest.Tests.Integration.Yaml.Get8
 				this.IsFalse(_response._source.include.field2);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("_source_include", @"include.field1")
 				));
 
@@ -80,7 +80,7 @@ namespace Nest.Tests.Integration.Yaml.Get8
 				this.IsFalse(_response._source.include.field2);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("_source_include", @"include.field1,include.field2")
 				));
 
@@ -94,7 +94,7 @@ namespace Nest.Tests.Integration.Yaml.Get8
 				this.IsFalse(_response._source.count);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("_source_include", @"include")
 					.Add("_source_exclude", @"*.field2")
 				));
@@ -109,7 +109,7 @@ namespace Nest.Tests.Integration.Yaml.Get8
 				this.IsFalse(_response._source.count);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", @"count")
 					.Add("_source", @"true")
 				));

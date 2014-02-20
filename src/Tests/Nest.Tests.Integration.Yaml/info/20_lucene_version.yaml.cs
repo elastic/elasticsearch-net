@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Info2
 			{	
 
 				//do info 
-				this.Do(()=> this._client.InfoGet());
+				this.Do(()=> _client.Info());
 
 				//match _response.status: 
 				this.IsMatch(_response.status, 200);

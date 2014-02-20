@@ -27,7 +27,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 					},
 					count= "1"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do index 
 				_body = new {
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 					},
 					count= "1"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "2", _body));
+				this.Do(()=> _client.Index("test_1", "test", "2", _body));
 
 			}
 		}
@@ -67,7 +67,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> _client.Mget(_body));
 
 				//match _response.docs[0]._id: 
 				this.IsMatch(_response.docs[0]._id, 1);
@@ -110,7 +110,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> _client.Mget(_body));
 
 				//match _response.docs[0]._source: 
 				this.IsMatch(_response.docs[0]._source, new {
@@ -159,7 +159,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> _client.Mget(_body));
 
 				//match _response.docs[0]._source: 
 				this.IsMatch(_response.docs[0]._source, new {
@@ -203,7 +203,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost(_body));
+				this.Do(()=> _client.Mget(_body));
 
 				//match _response.docs[0]._source: 
 				this.IsMatch(_response.docs[0]._source, new {
@@ -229,7 +229,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						"2"
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
 					.Add("_source", @"false")
 				));
 
@@ -246,7 +246,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						"2"
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
 					.Add("_source", @"true")
 				));
 
@@ -273,7 +273,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						"2"
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
 					.Add("_source", @"include.field1")
 				));
 
@@ -308,7 +308,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						"2"
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
 					.Add("_source_include", @"include.field1,count")
 				));
 
@@ -345,7 +345,7 @@ namespace Nest.Tests.Integration.Yaml.Mget11
 						"2"
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", _body, nv=>nv
 					.Add("_source_include", @"include")
 					.Add("_source_exclude", @"*.field2")
 				));

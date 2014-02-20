@@ -28,10 +28,10 @@ namespace Nest.Tests.Integration.Yaml.Update11
 						 { "index.refresh_interval",  "-1" }
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml.Update11
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Update("test_1", "test", "1", _body));
 
 				//do search 
 				_body = new {
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Yaml.Update11
 						}
 					}
 				};
-				this.Do(()=> this._client.SearchPost("test_1", "test", _body));
+				this.Do(()=> _client.Search("test_1", "test", _body));
 
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 0);
@@ -68,7 +68,7 @@ namespace Nest.Tests.Integration.Yaml.Update11
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "2", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "2", _body, nv=>nv
 					.Add("refresh", 1)
 				));
 
@@ -80,7 +80,7 @@ namespace Nest.Tests.Integration.Yaml.Update11
 						}
 					}
 				};
-				this.Do(()=> this._client.SearchPost("test_1", "test", _body));
+				this.Do(()=> _client.Search("test_1", "test", _body));
 
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 1);

@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping4
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "type", "field"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "type", "field"), shouldCatch: @"missing");
 
 			}
 		}

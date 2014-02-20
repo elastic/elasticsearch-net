@@ -20,13 +20,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
+				this.Do(()=> _client.IndicesCreate("test_index", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_idx", null));
+				this.Do(()=> _client.IndicesCreate("test_idx", null));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutWarmer("test_idx", "test_warmer2", _body));
+				this.Do(()=> _client.IndicesPutWarmer("test_idx", "test_warmer2", _body));
 
 				//do indices.put_warmer 
 				_body = new {
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutWarmer("test_index", "test_warmer", _body));
+				this.Do(()=> _client.IndicesPutWarmer("test_index", "test_warmer", _body));
 
 			}
 		}
@@ -58,16 +58,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"));
+				this.Do(()=> _client.IndicesGetWarmer("test_index", "test_warmer"));
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index", "test_warmer"));
+				this.Do(()=> _client.IndicesDeleteWarmer("test_index", "test_warmer"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer"));
+				this.Do(()=> _client.IndicesGetWarmer("test_index", "test_warmer"));
 
 				//match this._status: 
 				this.IsMatch(this._status, new {});
@@ -83,7 +83,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmerForAll());
+				this.Do(()=> _client.IndicesGetWarmerForAll());
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
@@ -102,7 +102,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("*", "*"));
+				this.Do(()=> _client.IndicesGetWarmer("*", "*"));
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
@@ -121,7 +121,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "_all"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "_all"));
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
@@ -140,7 +140,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmerForAll("_all"));
+				this.Do(()=> _client.IndicesGetWarmerForAll("_all"));
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
@@ -159,7 +159,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_i*", "test_w*"));
+				this.Do(()=> _client.IndicesGetWarmer("test_i*", "test_w*"));
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
@@ -178,7 +178,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index,test_idx", "test_warmer,test_warmer2"));
+				this.Do(()=> _client.IndicesGetWarmer("test_index,test_idx", "test_warmer,test_warmer2"));
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
@@ -197,7 +197,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "non-existent"));
+				this.Do(()=> _client.IndicesGetWarmer("test_index", "non-existent"));
 
 				//match this._status: 
 				this.IsMatch(this._status, new {});
@@ -213,7 +213,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("test_index", "test_warmer,non-existent"));
+				this.Do(()=> _client.IndicesGetWarmer("test_index", "test_warmer,non-existent"));
 
 				//match _response.test_index.warmers.test_warmer.source.query.match_all: 
 				this.IsMatch(_response.test_index.warmers.test_warmer.source.query.match_all, new {});
@@ -232,7 +232,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutWarmer1
 			{	
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("non-existent", "foo"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesGetWarmer("non-existent", "foo"), shouldCatch: @"missing");
 
 			}
 		}

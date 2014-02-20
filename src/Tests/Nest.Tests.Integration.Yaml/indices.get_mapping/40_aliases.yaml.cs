@@ -35,13 +35,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping4
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
+				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index", "test_alias", null));
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_alias"));
+				this.Do(()=> _client.IndicesGetMapping("test_alias"));
 
 				//match _response.test_index.mappings.test_type.properties.text.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.properties.text.type, @"string");

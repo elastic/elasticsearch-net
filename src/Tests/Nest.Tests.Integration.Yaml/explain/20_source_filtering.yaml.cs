@@ -30,10 +30,10 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 					},
 					count= "1"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPost("test_1"));
+				this.Do(()=> _client.IndicesRefresh("test_1"));
 
 				//do explain 
 				_body = new {
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
 					.Add("_source", @"false")
 				));
 
@@ -63,7 +63,7 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
 					.Add("_source", @"true")
 				));
 
@@ -76,7 +76,7 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
 					.Add("_source", @"include.field1")
 				));
 
@@ -92,7 +92,7 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
 					.Add("_source_include", @"include.field1")
 				));
 
@@ -108,7 +108,7 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
 					.Add("_source_include", @"include.field1,include.field2")
 				));
 
@@ -127,7 +127,7 @@ namespace Nest.Tests.Integration.Yaml.Explain2
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.ExplainPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Explain("test_1", "test", "1", _body, nv=>nv
 					.Add("_source_include", @"include")
 					.Add("_source_exclude", @"*.field2")
 				));

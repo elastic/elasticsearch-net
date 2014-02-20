@@ -11,7 +11,7 @@ using Nest.Resolvers;
 namespace Nest
 {
 	
-	///<summary>descriptor for BulkPost
+	///<summary>descriptor for Bulk
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
 	///</pre>
@@ -72,7 +72,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatAliasesGet
+	///<summary>descriptor for CatAliases
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
 	///</pre>
@@ -125,7 +125,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatAllocationGet
+	///<summary>descriptor for CatAllocation
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
@@ -186,7 +186,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatCountGet
+	///<summary>descriptor for CatCount
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
@@ -239,7 +239,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatHealthGet
+	///<summary>descriptor for CatHealth
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
@@ -300,7 +300,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatHelpGet
+	///<summary>descriptor for CatHelp
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
 	///</pre>
@@ -321,7 +321,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatIndicesGet
+	///<summary>descriptor for CatIndices
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
@@ -390,7 +390,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatMasterGet
+	///<summary>descriptor for CatMaster
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
@@ -443,7 +443,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatNodesGet
+	///<summary>descriptor for CatNodes
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
@@ -496,7 +496,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatPendingTasksGet
+	///<summary>descriptor for CatPendingTasks
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
@@ -549,7 +549,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatRecoveryGet
+	///<summary>descriptor for CatRecovery
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
@@ -610,7 +610,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatShardsGet
+	///<summary>descriptor for CatShards
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
@@ -663,7 +663,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CatThreadPoolGet
+	///<summary>descriptor for CatThreadPool
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
@@ -724,7 +724,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ClearScrollDelete
+	///<summary>descriptor for ClearScroll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
@@ -774,7 +774,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ClusterHealthGet
+	///<summary>descriptor for ClusterHealth
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
 	///</pre>
@@ -851,7 +851,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ClusterPendingTasksGet
+	///<summary>descriptor for ClusterPendingTasks
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
@@ -901,7 +901,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ClusterReroutePost
+	///<summary>descriptor for ClusterReroute
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
 	///</pre>
@@ -946,7 +946,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ClusterStateGet
+	///<summary>descriptor for ClusterState
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
 	///</pre>
@@ -991,7 +991,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ClusterStatsGet
+	///<summary>descriptor for ClusterStats
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
 	///</pre>
@@ -1020,7 +1020,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for CountPost
+	///<summary>descriptor for Count
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
@@ -1360,7 +1360,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for ExistsHead
+	///<summary>descriptor for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
@@ -1762,7 +1762,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndexPost
+	///<summary>descriptor for Index
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
 	///</pre>
@@ -1949,7 +1949,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesClearCachePostForAll
+	///<summary>descriptor for IndicesClearCacheForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
 	///</pre>
@@ -2077,7 +2077,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesClosePost
+	///<summary>descriptor for IndicesClose
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
@@ -2130,7 +2130,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesCreatePut
+	///<summary>descriptor for IndicesCreate
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
 	///</pre>
@@ -2288,7 +2288,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesExistsHead
+	///<summary>descriptor for IndicesExists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
 	///</pre>
@@ -2333,7 +2333,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesExistsAliasHeadForAll
+	///<summary>descriptor for IndicesExistsAliasForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
@@ -2378,7 +2378,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesExistsTemplateHeadForAll
+	///<summary>descriptor for IndicesExistsTemplateForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
@@ -2399,7 +2399,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesExistsTypeHead
+	///<summary>descriptor for IndicesExistsType
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
@@ -2444,7 +2444,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesFlushPostForAll
+	///<summary>descriptor for IndicesFlushForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
 	///</pre>
@@ -2796,7 +2796,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesOpenPost
+	///<summary>descriptor for IndicesOpen
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
@@ -2849,7 +2849,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesOptimizePostForAll
+	///<summary>descriptor for IndicesOptimizeForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
 	///</pre>
@@ -3151,7 +3151,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesRefreshPostForAll
+	///<summary>descriptor for IndicesRefreshForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
 	///</pre>
@@ -3204,7 +3204,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesSegmentsGetForAll
+	///<summary>descriptor for IndicesSegmentsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
 	///</pre>
@@ -3257,7 +3257,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesSnapshotIndexPostForAll
+	///<summary>descriptor for IndicesSnapshotIndexForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html
 	///</pre>
@@ -3294,7 +3294,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesStatsGetForAll
+	///<summary>descriptor for IndicesStatsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
 	///</pre>
@@ -3396,7 +3396,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesStatusGetForAll
+	///<summary>descriptor for IndicesStatusForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
 	///</pre>
@@ -3465,7 +3465,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for IndicesUpdateAliasesPostForAll
+	///<summary>descriptor for IndicesUpdateAliasesForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
@@ -3563,7 +3563,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for InfoGet
+	///<summary>descriptor for Info
 	///<pre>
 	///http://www.elasticsearch.org/guide/
 	///</pre>
@@ -3994,7 +3994,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for NodesHotThreadsGetForAll
+	///<summary>descriptor for NodesHotThreadsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
 	///</pre>
@@ -4039,7 +4039,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for NodesInfoGetForAll
+	///<summary>descriptor for NodesInfoForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
 	///</pre>
@@ -4068,7 +4068,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for NodesShutdownPostForAll
+	///<summary>descriptor for NodesShutdownForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
 	///</pre>
@@ -4097,7 +4097,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for NodesStatsGetForAll
+	///<summary>descriptor for NodesStatsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
 	///</pre>
@@ -4284,7 +4284,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for PingHead
+	///<summary>descriptor for Ping
 	///<pre>
 	///http://www.elasticsearch.org/guide/
 	///</pre>
@@ -4508,7 +4508,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for SnapshotCreatePut
+	///<summary>descriptor for SnapshotCreate
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
@@ -4537,7 +4537,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for SnapshotCreateRepositoryPut
+	///<summary>descriptor for SnapshotCreateRepository
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
@@ -4666,7 +4666,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for SnapshotRestorePost
+	///<summary>descriptor for SnapshotRestore
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
@@ -4695,7 +4695,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for SuggestPost
+	///<summary>descriptor for Suggest
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
@@ -4852,7 +4852,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>descriptor for UpdatePost
+	///<summary>descriptor for Update
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>

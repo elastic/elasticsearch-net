@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("percolator_index", null));
+				this.Do(()=> _client.IndicesCreate("percolator_index", null));
 
 				//do index 
 				_body = new {
@@ -31,28 +31,28 @@ namespace Nest.Tests.Integration.Yaml.Percolate2
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndexPost("percolator_index", ".percolator", "test_percolator", _body));
+				this.Do(()=> _client.Index("percolator_index", ".percolator", "test_percolator", _body));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("percolator_index", "test_type", "1", _body));
+				this.Do(()=> _client.Index("percolator_index", "test_type", "1", _body));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("my_index", null));
+				this.Do(()=> _client.IndicesCreate("my_index", null));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("my_index", "my_type", "1", _body));
+				this.Do(()=> _client.Index("my_index", "my_type", "1", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 				//do percolate 
-				this.Do(()=> this._client.PercolateGet("percolator_index", "test_type", "1"));
+				this.Do(()=> _client.PercolateGet("percolator_index", "test_type", "1"));
 
 				//match _response.matches: 
 				this.IsMatch(_response.matches, new dynamic[] {
@@ -60,7 +60,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate2
 				});
 
 				//do percolate 
-				this.Do(()=> this._client.PercolateGet("my_index", "my_type", "1", nv=>nv
+				this.Do(()=> _client.PercolateGet("my_index", "my_type", "1", nv=>nv
 					.Add("percolate_index", @"percolator_index")
 					.Add("percolate_type", @"test_type")
 				));
@@ -74,10 +74,10 @@ namespace Nest.Tests.Integration.Yaml.Percolate2
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("my_index", "my_type", "1", _body));
+				this.Do(()=> _client.Index("my_index", "my_type", "1", _body));
 
 				//do percolate 
-				this.Do(()=> this._client.PercolateGet("my_index", "my_type", "1", nv=>nv
+				this.Do(()=> _client.PercolateGet("my_index", "my_type", "1", nv=>nv
 					.Add("version", 2)
 					.Add("percolate_index", @"percolator_index")
 					.Add("percolate_type", @"test_type")
@@ -89,7 +89,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate2
 				});
 
 				//do percolate 
-				this.Do(()=> this._client.PercolateGet("my_index", "my_type", "1", nv=>nv
+				this.Do(()=> _client.PercolateGet("my_index", "my_type", "1", nv=>nv
 					.Add("version", 1)
 					.Add("percolate_index", @"percolator_index")
 					.Add("percolate_type", @"test_type")

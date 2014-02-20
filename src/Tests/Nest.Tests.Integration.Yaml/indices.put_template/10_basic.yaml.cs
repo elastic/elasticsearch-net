@@ -30,10 +30,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutTemplate1
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplateForAll("test", _body));
+				this.Do(()=> _client.IndicesPutTemplateForAll("test", _body));
 
 				//do indices.get_template 
-				this.Do(()=> this._client.IndicesGetTemplateForAll("test"));
+				this.Do(()=> _client.IndicesGetTemplateForAll("test"));
 
 				//match _response.test.template: 
 				this.IsMatch(_response.test.template, @"test-*");

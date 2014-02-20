@@ -32,13 +32,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test-index", _body));
+				this.Do(()=> _client.IndicesCreate("test-index", _body));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test-index", "test-alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test-index", "test-alias", null));
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test-alias"));
+				this.Do(()=> _client.IndicesGetSettings("test-alias"));
 
 				//match _response[@"test-index"][@"settings"][@"index"][@"number_of_replicas"]: 
 				this.IsMatch(_response[@"test-index"][@"settings"][@"index"][@"number_of_replicas"], 3);

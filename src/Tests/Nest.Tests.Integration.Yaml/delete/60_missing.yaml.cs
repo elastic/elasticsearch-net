@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Delete8
 			{	
 
 				//do delete 
-				this.Do(()=> this._client.Delete("test_1", "test", "1"), shouldCatch: @"missing");
+				this.Do(()=> _client.Delete("test_1", "test", "1"), shouldCatch: @"missing");
 
 			}
 		}
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.Delete8
 			{	
 
 				//do delete 
-				this.Do(()=> this._client.Delete("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Delete("test_1", "test", "1", nv=>nv
 					.Add("ignore", 404)
 				));
 

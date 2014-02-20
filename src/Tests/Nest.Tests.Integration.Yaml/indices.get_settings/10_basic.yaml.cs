@@ -20,10 +20,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_1", null));
+				this.Do(()=> _client.IndicesCreate("test_1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_2", null));
+				this.Do(()=> _client.IndicesCreate("test_2", null));
 
 			}
 		}
@@ -37,7 +37,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll());
+				this.Do(()=> _client.IndicesGetSettingsForAll());
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test_1"));
+				this.Do(()=> _client.IndicesGetSettings("test_1"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test_1", "_all"));
+				this.Do(()=> _client.IndicesGetSettings("test_1", "_all"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -106,7 +106,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test_1", "*"));
+				this.Do(()=> _client.IndicesGetSettings("test_1", "*"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -128,7 +128,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test_1", "index.number_of_shards"));
+				this.Do(()=> _client.IndicesGetSettings("test_1", "index.number_of_shards"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -150,7 +150,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test_1", "index.number_of_shards,index.number_of_replicas"));
+				this.Do(()=> _client.IndicesGetSettings("test_1", "index.number_of_shards,index.number_of_replicas"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -172,7 +172,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test_1", "index.number_of_s*"));
+				this.Do(()=> _client.IndicesGetSettings("test_1", "index.number_of_s*"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -194,7 +194,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll("index.number_of_shards"));
+				this.Do(()=> _client.IndicesGetSettingsForAll("index.number_of_shards"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -219,7 +219,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("_all", "index.number_of_shards"));
+				this.Do(()=> _client.IndicesGetSettings("_all", "index.number_of_shards"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -244,7 +244,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("*", "index.number_of_shards"));
+				this.Do(()=> _client.IndicesGetSettings("*", "index.number_of_shards"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -269,7 +269,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("test_1,test_2", "index.number_of_shards"));
+				this.Do(()=> _client.IndicesGetSettings("test_1,test_2", "index.number_of_shards"));
 
 				//match _response.test_1.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_1.settings.index.number_of_shards, 5);
@@ -294,7 +294,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettings("*2", "index.number_of_shards"));
+				this.Do(()=> _client.IndicesGetSettings("*2", "index.number_of_shards"));
 
 				//match _response.test_2.settings.index.number_of_shards: 
 				this.IsMatch(_response.test_2.settings.index.number_of_shards, 5);
@@ -316,7 +316,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetSettings1
 			{	
 
 				//do indices.get_settings 
-				this.Do(()=> this._client.IndicesGetSettingsForAll(nv=>nv
+				this.Do(()=> _client.IndicesGetSettingsForAll(nv=>nv
 					.Add("local", @"true")
 				));
 

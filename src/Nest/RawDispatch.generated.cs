@@ -24,13 +24,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Bulk(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Bulk(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_bulk
 					if (body != null)
-						return this.Raw.BulkPost(body,u => pathInfo.QueryString);
+						return this.Raw.Bulk(body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.PUT:
@@ -57,13 +57,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.BulkAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.BulkAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_bulk
 					if (body != null)
-						return this.Raw.BulkPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.BulkAsync(body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.PUT:
@@ -90,9 +90,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/aliases/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.CatAliasesGet(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.CatAliases(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_cat/aliases
-					return this.Raw.CatAliasesGet(u => pathInfo.QueryString);
+					return this.Raw.CatAliases(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAliases() into any of the following paths: \r\n - /_cat/aliases\r\n - /_cat/aliases/{name}");
@@ -106,9 +106,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/aliases/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.CatAliasesGetAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.CatAliasesAsync(pathInfo.Name,u => pathInfo.QueryString);
 					//GET /_cat/aliases
-					return this.Raw.CatAliasesGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatAliasesAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAliases() into any of the following paths: \r\n - /_cat/aliases\r\n - /_cat/aliases/{name}");
@@ -122,9 +122,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/allocation/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.CatAllocationGet(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.CatAllocation(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cat/allocation
-					return this.Raw.CatAllocationGet(u => pathInfo.QueryString);
+					return this.Raw.CatAllocation(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAllocation() into any of the following paths: \r\n - /_cat/allocation\r\n - /_cat/allocation/{node_id}");
@@ -138,9 +138,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/allocation/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.CatAllocationGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.CatAllocationAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cat/allocation
-					return this.Raw.CatAllocationGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatAllocationAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAllocation() into any of the following paths: \r\n - /_cat/allocation\r\n - /_cat/allocation/{node_id}");
@@ -154,9 +154,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/count/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatCountGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatCount(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/count
-					return this.Raw.CatCountGet(u => pathInfo.QueryString);
+					return this.Raw.CatCount(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatCount() into any of the following paths: \r\n - /_cat/count\r\n - /_cat/count/{index}");
@@ -170,9 +170,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/count/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatCountGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatCountAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/count
-					return this.Raw.CatCountGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatCountAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatCount() into any of the following paths: \r\n - /_cat/count\r\n - /_cat/count/{index}");
@@ -185,7 +185,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/health
-					return this.Raw.CatHealthGet(u => pathInfo.QueryString);
+					return this.Raw.CatHealth(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHealth() into any of the following paths: \r\n - /_cat/health");
@@ -198,7 +198,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/health
-					return this.Raw.CatHealthGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatHealthAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHealth() into any of the following paths: \r\n - /_cat/health");
@@ -211,7 +211,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat
-					return this.Raw.CatHelpGet(u => pathInfo.QueryString);
+					return this.Raw.CatHelp(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHelp() into any of the following paths: \r\n - /_cat");
@@ -224,7 +224,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat
-					return this.Raw.CatHelpGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatHelpAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHelp() into any of the following paths: \r\n - /_cat");
@@ -238,9 +238,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/indices/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatIndicesGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatIndices(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/indices
-					return this.Raw.CatIndicesGet(u => pathInfo.QueryString);
+					return this.Raw.CatIndices(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatIndices() into any of the following paths: \r\n - /_cat/indices\r\n - /_cat/indices/{index}");
@@ -254,9 +254,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/indices/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatIndicesGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatIndicesAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/indices
-					return this.Raw.CatIndicesGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatIndicesAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatIndices() into any of the following paths: \r\n - /_cat/indices\r\n - /_cat/indices/{index}");
@@ -269,7 +269,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/master
-					return this.Raw.CatMasterGet(u => pathInfo.QueryString);
+					return this.Raw.CatMaster(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatMaster() into any of the following paths: \r\n - /_cat/master");
@@ -282,7 +282,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/master
-					return this.Raw.CatMasterGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatMasterAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatMaster() into any of the following paths: \r\n - /_cat/master");
@@ -295,7 +295,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/nodes
-					return this.Raw.CatNodesGet(u => pathInfo.QueryString);
+					return this.Raw.CatNodes(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatNodes() into any of the following paths: \r\n - /_cat/nodes");
@@ -308,7 +308,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/nodes
-					return this.Raw.CatNodesGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatNodesAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatNodes() into any of the following paths: \r\n - /_cat/nodes");
@@ -321,7 +321,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/pending_tasks
-					return this.Raw.CatPendingTasksGet(u => pathInfo.QueryString);
+					return this.Raw.CatPendingTasks(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatPendingTasks() into any of the following paths: \r\n - /_cat/pending_tasks");
@@ -334,7 +334,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/pending_tasks
-					return this.Raw.CatPendingTasksGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatPendingTasksAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatPendingTasks() into any of the following paths: \r\n - /_cat/pending_tasks");
@@ -348,9 +348,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/recovery/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatRecoveryGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatRecovery(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/recovery
-					return this.Raw.CatRecoveryGet(u => pathInfo.QueryString);
+					return this.Raw.CatRecovery(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatRecovery() into any of the following paths: \r\n - /_cat/recovery\r\n - /_cat/recovery/{index}");
@@ -364,9 +364,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/recovery/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatRecoveryGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatRecoveryAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/recovery
-					return this.Raw.CatRecoveryGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatRecoveryAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatRecovery() into any of the following paths: \r\n - /_cat/recovery\r\n - /_cat/recovery/{index}");
@@ -380,9 +380,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/shards/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatShardsGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatShards(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/shards
-					return this.Raw.CatShardsGet(u => pathInfo.QueryString);
+					return this.Raw.CatShards(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatShards() into any of the following paths: \r\n - /_cat/shards\r\n - /_cat/shards/{index}");
@@ -396,9 +396,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/shards/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatShardsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatShardsAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cat/shards
-					return this.Raw.CatShardsGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatShardsAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatShards() into any of the following paths: \r\n - /_cat/shards\r\n - /_cat/shards/{index}");
@@ -411,7 +411,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/thread_pool
-					return this.Raw.CatThreadPoolGet(u => pathInfo.QueryString);
+					return this.Raw.CatThreadPool(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatThreadPool() into any of the following paths: \r\n - /_cat/thread_pool");
@@ -424,7 +424,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/thread_pool
-					return this.Raw.CatThreadPoolGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CatThreadPoolAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatThreadPool() into any of the following paths: \r\n - /_cat/thread_pool");
@@ -438,7 +438,7 @@ namespace Nest
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ClearScrollDelete(pathInfo.ScrollId,u => pathInfo.QueryString);
+						return this.Raw.ClearScroll(pathInfo.ScrollId,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -453,7 +453,7 @@ namespace Nest
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ClearScrollDeleteAsync(pathInfo.ScrollId,u => pathInfo.QueryString);
+						return this.Raw.ClearScrollAsync(pathInfo.ScrollId,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -494,9 +494,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/health/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterHealthGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterHealth(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cluster/health
-					return this.Raw.ClusterHealthGet(u => pathInfo.QueryString);
+					return this.Raw.ClusterHealth(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterHealth() into any of the following paths: \r\n - /_cluster/health\r\n - /_cluster/health/{index}");
@@ -510,9 +510,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/health/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterHealthGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterHealthAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cluster/health
-					return this.Raw.ClusterHealthGetAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterHealthAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterHealth() into any of the following paths: \r\n - /_cluster/health\r\n - /_cluster/health/{index}");
@@ -525,7 +525,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/pending_tasks
-					return this.Raw.ClusterPendingTasksGet(u => pathInfo.QueryString);
+					return this.Raw.ClusterPendingTasks(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterPendingTasks() into any of the following paths: \r\n - /_cluster/pending_tasks");
@@ -538,7 +538,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/pending_tasks
-					return this.Raw.ClusterPendingTasksGetAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterPendingTasksAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterPendingTasks() into any of the following paths: \r\n - /_cluster/pending_tasks");
@@ -582,7 +582,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/reroute
 					if (body != null)
-						return this.Raw.ClusterReroutePost(body,u => pathInfo.QueryString);
+						return this.Raw.ClusterReroute(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -597,7 +597,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/reroute
 					if (body != null)
-						return this.Raw.ClusterReroutePostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.ClusterRerouteAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -612,12 +612,12 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/state/{metric}/{index}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterStateGet(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterState(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cluster/state/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.ClusterStateGet(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.ClusterState(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_cluster/state
-					return this.Raw.ClusterStateGet(u => pathInfo.QueryString);
+					return this.Raw.ClusterState(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state\r\n - /_cluster/state/{metric}\r\n - /_cluster/state/{metric}/{index}");
@@ -631,12 +631,12 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/state/{metric}/{index}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterStateGetAsync(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterStateAsync(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_cluster/state/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.ClusterStateGetAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.ClusterStateAsync(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_cluster/state
-					return this.Raw.ClusterStateGetAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterStateAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state\r\n - /_cluster/state/{metric}\r\n - /_cluster/state/{metric}/{index}");
@@ -650,9 +650,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/stats/nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterStatsGet(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.ClusterStats(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/stats
-					return this.Raw.ClusterStatsGet(u => pathInfo.QueryString);
+					return this.Raw.ClusterStats(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterStats() into any of the following paths: \r\n - /_cluster/stats\r\n - /_cluster/stats/nodes/{node_id}");
@@ -666,9 +666,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/stats/nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterStatsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.ClusterStatsAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/stats
-					return this.Raw.ClusterStatsGetAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterStatsAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterStats() into any of the following paths: \r\n - /_cluster/stats\r\n - /_cluster/stats/nodes/{node_id}");
@@ -682,13 +682,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Count(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Count(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_count
 					if (body != null)
-						return this.Raw.CountPost(body,u => pathInfo.QueryString);
+						return this.Raw.Count(body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.GET:
@@ -713,13 +713,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.CountAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.CountAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_count
 					if (body != null)
-						return this.Raw.CountPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.CountAsync(body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.GET:
@@ -753,10 +753,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolatePost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolate(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolatePost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolate(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -780,10 +780,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolatePostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolatePostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -864,7 +864,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.ExistsHead(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.Exists(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -879,7 +879,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.ExistsHeadAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.ExistsAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -900,7 +900,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_explain
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.ExplainPost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Explain(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -921,7 +921,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_explain
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.ExplainPostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.ExplainAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -996,10 +996,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Index(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Index(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.PUT:
@@ -1023,10 +1023,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.IndexAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndexAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.PUT:
@@ -1057,10 +1057,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_analyze
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesAnalyzePost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyze(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_analyze
 					if (body != null)
-						return this.Raw.IndicesAnalyzePostForAll(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeForAll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1082,10 +1082,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_analyze
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesAnalyzePostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_analyze
 					if (body != null)
-						return this.Raw.IndicesAnalyzePostForAllAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeForAllAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1100,9 +1100,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClearCachePost(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClearCache(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_cache/clear
-					return this.Raw.IndicesClearCachePostForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_cache/clear
@@ -1123,9 +1123,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClearCachePostAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClearCacheAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_cache/clear
-					return this.Raw.IndicesClearCachePostForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_cache/clear
@@ -1146,7 +1146,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_close
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClosePost(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClose(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1161,7 +1161,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_close
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClosePostAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesCloseAsync(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1176,7 +1176,7 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesCreatePut(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesCreate(pathInfo.Index,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
@@ -1197,7 +1197,7 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesCreatePutAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesCreateAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
@@ -1368,7 +1368,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExistsHead(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExists(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1383,7 +1383,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExistsHeadAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAsync(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1398,13 +1398,13 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHead(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAlias(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//HEAD /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHeadForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasForAll(pathInfo.Name,u => pathInfo.QueryString);
 					//HEAD /{index}/_alias
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHead(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAlias(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1419,13 +1419,13 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHeadAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
 					//HEAD /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHeadForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
 					//HEAD /{index}/_alias
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasHeadAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasAsync(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1440,7 +1440,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsTemplateHeadForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsTemplateForAll(pathInfo.Name,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1455,7 +1455,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsTemplateHeadForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsTemplateForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1470,7 +1470,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesExistsTypeHead(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsType(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1485,7 +1485,7 @@ namespace Nest
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesExistsTypeHeadAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsTypeAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1500,9 +1500,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesFlushPost(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesFlush(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_flush
-					return this.Raw.IndicesFlushPostForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_flush
@@ -1523,9 +1523,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesFlushPostAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesFlushAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_flush
-					return this.Raw.IndicesFlushPostForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_flush
@@ -1852,7 +1852,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_open
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOpenPost(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOpen(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1867,7 +1867,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_open
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOpenPostAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOpenAsync(pathInfo.Index,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -1882,9 +1882,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOptimizePost(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOptimize(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_optimize
-					return this.Raw.IndicesOptimizePostForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_optimize
@@ -1905,9 +1905,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOptimizePostAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOptimizeAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_optimize
-					return this.Raw.IndicesOptimizePostForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_optimize
@@ -2180,9 +2180,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesRefreshPost(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesRefresh(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_refresh
-					return this.Raw.IndicesRefreshPostForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshForAll(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_refresh
@@ -2203,9 +2203,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesRefreshPostAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesRefreshAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_refresh
-					return this.Raw.IndicesRefreshPostForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshForAllAsync(u => pathInfo.QueryString);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_refresh
@@ -2226,9 +2226,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_segments
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSegmentsGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSegments(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_segments
-					return this.Raw.IndicesSegmentsGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesSegmentsForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSegments() into any of the following paths: \r\n - /_segments\r\n - /{index}/_segments");
@@ -2242,9 +2242,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_segments
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSegmentsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSegmentsAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_segments
-					return this.Raw.IndicesSegmentsGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesSegmentsForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSegments() into any of the following paths: \r\n - /_segments\r\n - /{index}/_segments");
@@ -2258,9 +2258,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_gateway/snapshot
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSnapshotIndexPost(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSnapshotIndex(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexPostForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesSnapshotIndexForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
@@ -2274,9 +2274,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_gateway/snapshot
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSnapshotIndexPostAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSnapshotIndexAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexPostForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesSnapshotIndexForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
@@ -2290,15 +2290,15 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_stats/{metric}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStatsGet(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStats(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStatsGetForAll(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsForAll(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStatsGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStats(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_stats
-					return this.Raw.IndicesStatsGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatsForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /_stats/{metric}\r\n - /{index}/_stats\r\n - /{index}/_stats/{metric}");
@@ -2312,15 +2312,15 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_stats/{metric}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStatsGetAsync(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsAsync(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStatsGetForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStatsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_stats
-					return this.Raw.IndicesStatsGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatsForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /_stats/{metric}\r\n - /{index}/_stats\r\n - /{index}/_stats/{metric}");
@@ -2334,9 +2334,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_status
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStatusGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatus(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_status
-					return this.Raw.IndicesStatusGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatusForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStatus() into any of the following paths: \r\n - /_status\r\n - /{index}/_status");
@@ -2350,9 +2350,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_status
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStatusGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatusAsync(pathInfo.Index,u => pathInfo.QueryString);
 					//GET /_status
-					return this.Raw.IndicesStatusGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatusForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStatus() into any of the following paths: \r\n - /_status\r\n - /{index}/_status");
@@ -2366,7 +2366,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_aliases
 					if (body != null)
-						return this.Raw.IndicesUpdateAliasesPostForAll(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesUpdateAliasesForAll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2381,7 +2381,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_aliases
 					if (body != null)
-						return this.Raw.IndicesUpdateAliasesPostForAllAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesUpdateAliasesForAllAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2406,13 +2406,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQueryPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQuery(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQueryPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQuery(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_validate/query
 					if (body != null)
-						return this.Raw.IndicesValidateQueryPostForAll(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryForAll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2437,13 +2437,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQueryPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQueryPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_validate/query
 					if (body != null)
-						return this.Raw.IndicesValidateQueryPostForAllAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryForAllAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2457,7 +2457,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /
-					return this.Raw.InfoGet(u => pathInfo.QueryString);
+					return this.Raw.Info(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Info() into any of the following paths: \r\n - /");
@@ -2470,7 +2470,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /
-					return this.Raw.InfoGetAsync(u => pathInfo.QueryString);
+					return this.Raw.InfoAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Info() into any of the following paths: \r\n - /");
@@ -2494,13 +2494,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MgetPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Mget(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MgetPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Mget(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_mget
 					if (body != null)
-						return this.Raw.MgetPost(body,u => pathInfo.QueryString);
+						return this.Raw.Mget(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2525,13 +2525,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MgetPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MgetAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MgetPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MgetAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_mget
 					if (body != null)
-						return this.Raw.MgetPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MgetAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2552,7 +2552,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_mlt
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.MltPost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Mlt(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2573,7 +2573,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_mlt
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.MltPostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.MltAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2598,13 +2598,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MpercolatePost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Mpercolate(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MpercolatePost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Mpercolate(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_mpercolate
 					if (body != null)
-						return this.Raw.MpercolatePost(body,u => pathInfo.QueryString);
+						return this.Raw.Mpercolate(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2629,13 +2629,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MpercolatePostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MpercolateAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MpercolatePostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MpercolateAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_mpercolate
 					if (body != null)
-						return this.Raw.MpercolatePostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MpercolateAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2660,13 +2660,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MsearchPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Msearch(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MsearchPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Msearch(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_msearch
 					if (body != null)
-						return this.Raw.MsearchPost(body,u => pathInfo.QueryString);
+						return this.Raw.Msearch(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2691,13 +2691,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MsearchPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MsearchAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MsearchPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MsearchAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_msearch
 					if (body != null)
-						return this.Raw.MsearchPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MsearchAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2722,13 +2722,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MtermvectorsPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Mtermvectors(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MtermvectorsPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Mtermvectors(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_mtermvectors
 					if (body != null)
-						return this.Raw.MtermvectorsPost(body,u => pathInfo.QueryString);
+						return this.Raw.Mtermvectors(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2753,13 +2753,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MtermvectorsPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MtermvectorsPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_mtermvectors
 					if (body != null)
-						return this.Raw.MtermvectorsPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2774,9 +2774,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/nodes/{node_id}/hotthreads
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesHotThreadsGet(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesHotThreads(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/hotthreads
-					return this.Raw.NodesHotThreadsGetForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesHotThreadsForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
@@ -2790,9 +2790,9 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/nodes/{node_id}/hotthreads
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesHotThreadsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesHotThreadsAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_cluster/nodes/hotthreads
-					return this.Raw.NodesHotThreadsGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesHotThreadsForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
@@ -2806,15 +2806,15 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfoGet(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfo(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesInfoGet(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesInfo(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_nodes/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfoGetForAll(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoForAll(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes
-					return this.Raw.NodesInfoGetForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesInfoForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesInfo() into any of the following paths: \r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/{metric}\r\n - /_nodes/{node_id}/{metric}");
@@ -2828,15 +2828,15 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfoGetAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesInfoGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_nodes/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfoGetForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes
-					return this.Raw.NodesInfoGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesInfoForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesInfo() into any of the following paths: \r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/{metric}\r\n - /_nodes/{node_id}/{metric}");
@@ -2850,9 +2850,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/nodes/{node_id}/_shutdown
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesShutdownPost(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesShutdown(pathInfo.NodeId,u => pathInfo.QueryString);
 					//POST /_shutdown
-					return this.Raw.NodesShutdownPostForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesShutdownForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
@@ -2866,9 +2866,9 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/nodes/{node_id}/_shutdown
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesShutdownPostAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesShutdownAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//POST /_shutdown
-					return this.Raw.NodesShutdownPostForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesShutdownForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
@@ -2882,21 +2882,21 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/stats/{metric}/{index_metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGet(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStats(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
 					//GET /_nodes/{node_id}/stats/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGet(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStats(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes/stats/{metric}/{index_metric}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGetForAll(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAll(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
 					//GET /_nodes/{node_id}/stats
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesStatsGet(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesStats(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_nodes/stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGetForAll(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAll(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes/stats
-					return this.Raw.NodesStatsGetForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesStatsForAll(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesStats() into any of the following paths: \r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric}\r\n - /_nodes/{node_id}/stats/{metric}\r\n - /_nodes/stats/{metric}/{index_metric}\r\n - /_nodes/{node_id}/stats/{metric}/{index_metric}");
@@ -2910,21 +2910,21 @@ namespace Nest
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/stats/{metric}/{index_metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGetAsync(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsAsync(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
 					//GET /_nodes/{node_id}/stats/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGetAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes/stats/{metric}/{index_metric}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGetForAllAsync(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAllAsync(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
 					//GET /_nodes/{node_id}/stats
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesStatsGetAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsAsync(pathInfo.NodeId,u => pathInfo.QueryString);
 					//GET /_nodes/stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStatsGetForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
 					//GET /_nodes/stats
-					return this.Raw.NodesStatsGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesStatsForAllAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesStats() into any of the following paths: \r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric}\r\n - /_nodes/{node_id}/stats/{metric}\r\n - /_nodes/stats/{metric}/{index_metric}\r\n - /_nodes/{node_id}/stats/{metric}/{index_metric}");
@@ -2947,10 +2947,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.PercolatePost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Percolate(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.PercolatePost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Percolate(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2974,10 +2974,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.PercolatePostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.PercolateAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					//POST /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.PercolatePostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.PercolateAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -2991,7 +2991,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /
-					return this.Raw.PingHead(u => pathInfo.QueryString);
+					return this.Raw.Ping(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Ping() into any of the following paths: \r\n - /");
@@ -3004,7 +3004,7 @@ namespace Nest
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /
-					return this.Raw.PingHeadAsync(u => pathInfo.QueryString);
+					return this.Raw.PingAsync(u => pathInfo.QueryString);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Ping() into any of the following paths: \r\n - /");
@@ -3025,10 +3025,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty() && body != null)
-						return this.Raw.ScrollPost(pathInfo.ScrollId,body,u => pathInfo.QueryString);
+						return this.Raw.Scroll(pathInfo.ScrollId,body,u => pathInfo.QueryString);
 					//POST /_search/scroll
 					if (body != null)
-						return this.Raw.ScrollPost(body,u => pathInfo.QueryString);
+						return this.Raw.Scroll(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3050,10 +3050,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty() && body != null)
-						return this.Raw.ScrollPostAsync(pathInfo.ScrollId,body,u => pathInfo.QueryString);
+						return this.Raw.ScrollAsync(pathInfo.ScrollId,body,u => pathInfo.QueryString);
 					//POST /_search/scroll
 					if (body != null)
-						return this.Raw.ScrollPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.ScrollAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3078,13 +3078,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Search(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Search(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_search
 					if (body != null)
-						return this.Raw.SearchPost(body,u => pathInfo.QueryString);
+						return this.Raw.Search(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3109,13 +3109,13 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.SearchAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
 					//POST /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.SearchAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_search
 					if (body != null)
-						return this.Raw.SearchPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.SearchAsync(body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3130,7 +3130,7 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreatePut(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreate(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
@@ -3151,7 +3151,7 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreatePutAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
@@ -3172,7 +3172,7 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreateRepositoryPut(pathInfo.Repository,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateRepository(pathInfo.Repository,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
@@ -3193,7 +3193,7 @@ namespace Nest
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreateRepositoryPutAsync(pathInfo.Repository,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateRepositoryAsync(pathInfo.Repository,body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.POST:
@@ -3336,7 +3336,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}/{snapshot}/_restore
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotRestorePost(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotRestore(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3351,7 +3351,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}/{snapshot}/_restore
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotRestorePostAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotRestoreAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3366,10 +3366,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_suggest
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.SuggestPost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Suggest(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_suggest
 					if (body != null)
-						return this.Raw.SuggestPost(body,u => pathInfo.QueryString);
+						return this.Raw.Suggest(body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.GET:
@@ -3391,10 +3391,10 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_suggest
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.SuggestPostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.SuggestAsync(pathInfo.Index,body,u => pathInfo.QueryString);
 					//POST /_suggest
 					if (body != null)
-						return this.Raw.SuggestPostAsync(body,u => pathInfo.QueryString);
+						return this.Raw.SuggestAsync(body,u => pathInfo.QueryString);
 					break;
 
 				case PathInfoHttpMethod.GET:
@@ -3422,7 +3422,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.TermvectorPost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Termvector(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3443,7 +3443,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.TermvectorPostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.TermvectorAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3458,7 +3458,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_update
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.UpdatePost(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Update(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}
@@ -3473,7 +3473,7 @@ namespace Nest
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_update
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.UpdatePostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.UpdateAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
 					break;
 
 			}

@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
+				this.Do(()=> _client.IndicesCreate("test_index", null));
 
 				//do index 
 				_body = new {
@@ -31,10 +31,10 @@ namespace Nest.Tests.Integration.Yaml.Percolate1
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndexPost("test_index", ".percolator", "test_percolator", _body));
+				this.Do(()=> _client.Index("test_index", ".percolator", "test_percolator", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 				//do percolate 
 				_body = new {
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate1
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.PercolatePost("test_index", "test_type", _body));
+				this.Do(()=> _client.Percolate("test_index", "test_type", _body));
 
 				//match _response.total: 
 				this.IsMatch(_response.total, 1);
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Yaml.Percolate1
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.CountPercolatePost("test_index", "test_type", _body));
+				this.Do(()=> _client.CountPercolate("test_index", "test_type", _body));
 
 				//is_false _response.matches; 
 				this.IsFalse(_response.matches);

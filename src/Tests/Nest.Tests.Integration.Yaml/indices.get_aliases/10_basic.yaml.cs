@@ -20,22 +20,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
+				this.Do(()=> _client.IndicesCreate("test_index", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index_2", null));
+				this.Do(()=> _client.IndicesCreate("test_index_2", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index", "test_alias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index", "test_blias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index", "test_blias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index_2", "test_alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index_2", "test_alias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index_2", "test_blias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index_2", "test_blias", null));
 
 			}
 		}
@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliasesForAll());
+				this.Do(()=> _client.IndicesGetAliasesForAll());
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index"));
+				this.Do(()=> _client.IndicesGetAliases("test_index"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -96,7 +96,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index", "test_alias"));
+				this.Do(()=> _client.IndicesGetAliases("test_index", "test_alias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -118,7 +118,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index", "_all"));
+				this.Do(()=> _client.IndicesGetAliases("test_index", "_all"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -140,7 +140,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index", "*"));
+				this.Do(()=> _client.IndicesGetAliases("test_index", "*"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -162,7 +162,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index", "test_a*"));
+				this.Do(()=> _client.IndicesGetAliases("test_index", "test_a*"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -184,7 +184,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index", "test_alias,test_blias"));
+				this.Do(()=> _client.IndicesGetAliases("test_index", "test_alias,test_blias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -206,7 +206,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliasesForAll("test_alias"));
+				this.Do(()=> _client.IndicesGetAliasesForAll("test_alias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -231,7 +231,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("_all", "test_alias"));
+				this.Do(()=> _client.IndicesGetAliases("_all", "test_alias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -256,7 +256,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("*", "test_alias"));
+				this.Do(()=> _client.IndicesGetAliases("*", "test_alias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -281,7 +281,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("*2", "test_alias"));
+				this.Do(()=> _client.IndicesGetAliases("*2", "test_alias"));
 
 				//match _response.test_index_2.aliases.test_alias: 
 				this.IsMatch(_response.test_index_2.aliases.test_alias, new {});
@@ -306,7 +306,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index,test_index_2", "test_alias"));
+				this.Do(()=> _client.IndicesGetAliases("test_index,test_index_2", "test_alias"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -331,7 +331,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index", "non-existent"));
+				this.Do(()=> _client.IndicesGetAliases("test_index", "non-existent"));
 
 				//match _response.test_index.aliases: 
 				this.IsMatch(_response.test_index.aliases, new {});
@@ -347,7 +347,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("test_index", "test_alias,non-existent"));
+				this.Do(()=> _client.IndicesGetAliases("test_index", "test_alias,non-existent"));
 
 				//match _response.test_index.aliases.test_alias: 
 				this.IsMatch(_response.test_index.aliases.test_alias, new {});
@@ -369,7 +369,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 				this.Skip("1 - 999", "not implemented yet");
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliases("non-existent", "foo"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesGetAliases("non-existent", "foo"), shouldCatch: @"missing");
 
 			}
 		}
@@ -382,7 +382,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetAliases1
 			{	
 
 				//do indices.get_aliases 
-				this.Do(()=> this._client.IndicesGetAliasesForAll(nv=>nv
+				this.Do(()=> _client.IndicesGetAliasesForAll(nv=>nv
 					.Add("local", @"true")
 				));
 

@@ -23,10 +23,10 @@ namespace Nest.Tests.Integration.Yaml.Suggest1
 				_body = new {
 					body= "Amsterdam meetup"
 				};
-				this.Do(()=> this._client.IndexPost("test", "test", "testing_document", _body));
+				this.Do(()=> _client.Index("test", "test", "testing_document", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 			}
 		}
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Yaml.Suggest1
 						}
 					}
 				};
-				this.Do(()=> this._client.SuggestPost(_body));
+				this.Do(()=> _client.Suggest(_body));
 
 				//match _response.test_suggestion[1].options[0].text: 
 				this.IsMatch(_response.test_suggestion[1].options[0].text, @"amsterdam");

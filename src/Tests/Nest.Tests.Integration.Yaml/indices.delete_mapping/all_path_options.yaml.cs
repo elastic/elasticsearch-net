@@ -25,7 +25,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 						test_type1= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index1", _body));
+				this.Do(()=> _client.IndicesCreate("test_index1", _body));
 
 				//do indices.create 
 				_body = new {
@@ -33,7 +33,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 						test_type2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index2", _body));
+				this.Do(()=> _client.IndicesCreate("test_index2", _body));
 
 				//do indices.create 
 				_body = new {
@@ -41,7 +41,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 						test_type2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("foo", _body));
+				this.Do(()=> _client.IndicesCreate("foo", _body));
 
 			}
 		}
@@ -55,22 +55,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("_all", "test_type2"));
+				this.Do(()=> _client.IndicesDeleteMapping("_all", "test_type2"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
@@ -86,22 +86,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("*", "test_type2"));
+				this.Do(()=> _client.IndicesDeleteMapping("*", "test_type2"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
@@ -117,22 +117,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test*", "test_type2"));
+				this.Do(()=> _client.IndicesDeleteMapping("test*", "test_type2"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -148,22 +148,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test_index1,test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesDeleteMapping("test_index1,test_index2", "test_type2"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -179,22 +179,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test_index1,test_index2", "_all"));
+				this.Do(()=> _client.IndicesDeleteMapping("test_index1,test_index2", "_all"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -210,22 +210,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test_index1,test_index2", "*"));
+				this.Do(()=> _client.IndicesDeleteMapping("test_index1,test_index2", "*"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -241,22 +241,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test_index1,test_index2", "*2"));
+				this.Do(()=> _client.IndicesDeleteMapping("test_index1,test_index2", "*2"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -272,22 +272,22 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test_index1,test_index2", "test_type1,test_type2"));
+				this.Do(()=> _client.IndicesDeleteMapping("test_index1,test_index2", "test_type1,test_type2"));
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index1", "test_type1"));
+				this.Do(()=> _client.IndicesExistsType("test_index1", "test_type1"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("test_index2", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("test_index2", "test_type2"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);
 
 				//do indices.exists_type 
-				this.Do(()=> this._client.IndicesExistsTypeHead("foo", "test_type2"));
+				this.Do(()=> _client.IndicesExistsType("foo", "test_type2"));
 
 				//is_true this._status; 
 				this.IsTrue(this._status);
@@ -303,10 +303,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("*", "non_existent"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesDeleteMapping("*", "non_existent"), shouldCatch: @"missing");
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("non_existent", "test_type1"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesDeleteMapping("non_existent", "test_type1"), shouldCatch: @"missing");
 
 			}
 		}
@@ -319,12 +319,12 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteMapping2
 			{	
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("", "", nv=>nv
+				this.Do(()=> _client.IndicesDeleteMapping("", "", nv=>nv
 					.Add("name", @"test_type1")
 				), shouldCatch: @"param");
 
 				//do indices.delete_mapping 
-				this.Do(()=> this._client.IndicesDeleteMapping("test_index1", ""), shouldCatch: @"param");
+				this.Do(()=> _client.IndicesDeleteMapping("test_index1", ""), shouldCatch: @"param");
 
 			}
 		}

@@ -20,25 +20,25 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
+				this.Do(()=> _client.IndicesCreate("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
+				this.Do(()=> _client.IndicesCreate("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("foo", null));
+				this.Do(()=> _client.IndicesCreate("foo", null));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this.Do(()=> this._client.IndicesPutAliasForAll("alias1", _body));
+				this.Do(()=> _client.IndicesPutAliasForAll("alias1", _body));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this.Do(()=> this._client.IndicesPutAliasForAll("alias2", _body));
+				this.Do(()=> _client.IndicesPutAliasForAll("alias2", _body));
 
 			}
 		}
@@ -52,13 +52,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("_all", "alias1"));
+				this.Do(()=> _client.IndicesDeleteAlias("_all", "alias1"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesGetAliasForAll("alias1"), shouldCatch: @"missing");
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias2"));
 
 				//match _response.test_index1.aliases.alias2.search_routing: 
 				this.IsMatch(_response.test_index1.aliases.alias2.search_routing, @"routing value");
@@ -80,13 +80,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("*", "alias1"));
+				this.Do(()=> _client.IndicesDeleteAlias("*", "alias1"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesGetAliasForAll("alias1"), shouldCatch: @"missing");
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias2"));
 
 				//match _response.test_index1.aliases.alias2.search_routing: 
 				this.IsMatch(_response.test_index1.aliases.alias2.search_routing, @"routing value");
@@ -108,10 +108,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("test_index1,test_index2", "alias1"));
+				this.Do(()=> _client.IndicesDeleteAlias("test_index1,test_index2", "alias1"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias1"));
 
 				//match _response.foo.aliases.alias1.search_routing: 
 				this.IsMatch(_response.foo.aliases.alias1.search_routing, @"routing value");
@@ -123,7 +123,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias2"));
 
 				//match _response.test_index1.aliases.alias2.search_routing: 
 				this.IsMatch(_response.test_index1.aliases.alias2.search_routing, @"routing value");
@@ -145,10 +145,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("test_*", "alias1"));
+				this.Do(()=> _client.IndicesDeleteAlias("test_*", "alias1"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias1"));
 
 				//match _response.foo.aliases.alias1.search_routing: 
 				this.IsMatch(_response.foo.aliases.alias1.search_routing, @"routing value");
@@ -160,7 +160,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias2"));
 
 				//match _response.test_index1.aliases.alias2.search_routing: 
 				this.IsMatch(_response.test_index1.aliases.alias2.search_routing, @"routing value");
@@ -182,10 +182,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("test_index1,test_index2", "*"));
+				this.Do(()=> _client.IndicesDeleteAlias("test_index1,test_index2", "*"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias1"));
 
 				//match _response.foo.aliases.alias1.search_routing: 
 				this.IsMatch(_response.foo.aliases.alias1.search_routing, @"routing value");
@@ -197,7 +197,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias2"));
 
 				//match _response.foo.aliases.alias2.search_routing: 
 				this.IsMatch(_response.foo.aliases.alias2.search_routing, @"routing value");
@@ -219,10 +219,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("test_index1,test_index2", "_all"));
+				this.Do(()=> _client.IndicesDeleteAlias("test_index1,test_index2", "_all"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias1"));
 
 				//match _response.foo.aliases.alias1.search_routing: 
 				this.IsMatch(_response.foo.aliases.alias1.search_routing, @"routing value");
@@ -234,7 +234,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias2"));
 
 				//match _response.foo.aliases.alias2.search_routing: 
 				this.IsMatch(_response.foo.aliases.alias2.search_routing, @"routing value");
@@ -256,10 +256,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("test_index1,test_index2", "*1"));
+				this.Do(()=> _client.IndicesDeleteAlias("test_index1,test_index2", "*1"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias1"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias1"));
 
 				//match _response.foo.aliases.alias1.search_routing: 
 				this.IsMatch(_response.foo.aliases.alias1.search_routing, @"routing value");
@@ -271,7 +271,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias2"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias2"));
 
 				//match _response.test_index1.aliases.alias2.search_routing: 
 				this.IsMatch(_response.test_index1.aliases.alias2.search_routing, @"routing value");
@@ -293,10 +293,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("*", "non_existent"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesDeleteAlias("*", "non_existent"), shouldCatch: @"missing");
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("non_existent", "alias1"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesDeleteAlias("non_existent", "alias1"), shouldCatch: @"missing");
 
 			}
 		}
@@ -309,10 +309,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias2
 			{	
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("", "alias1"), shouldCatch: @"param");
+				this.Do(()=> _client.IndicesDeleteAlias("", "alias1"), shouldCatch: @"param");
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("test_index1", ""), shouldCatch: @"param");
+				this.Do(()=> _client.IndicesDeleteAlias("test_index1", ""), shouldCatch: @"param");
 
 			}
 		}

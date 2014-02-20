@@ -29,10 +29,10 @@ namespace Nest.Tests.Integration.Yaml.Delete7
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"green")
 				));
 
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Yaml.Delete7
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("refresh", 1)
 				));
 
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Yaml.Delete7
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "2", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "2", _body, nv=>nv
 					.Add("refresh", 1)
 				));
 
@@ -63,13 +63,13 @@ namespace Nest.Tests.Integration.Yaml.Delete7
 						}
 					}
 				};
-				this.Do(()=> this._client.SearchPost("test_1", "test", _body));
+				this.Do(()=> _client.Search("test_1", "test", _body));
 
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 2);
 
 				//do delete 
-				this.Do(()=> this._client.Delete("test_1", "test", "1"));
+				this.Do(()=> _client.Delete("test_1", "test", "1"));
 
 				//do search 
 				_body = new {
@@ -82,13 +82,13 @@ namespace Nest.Tests.Integration.Yaml.Delete7
 						}
 					}
 				};
-				this.Do(()=> this._client.SearchPost("test_1", "test", _body));
+				this.Do(()=> _client.Search("test_1", "test", _body));
 
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 2);
 
 				//do delete 
-				this.Do(()=> this._client.Delete("test_1", "test", "2", nv=>nv
+				this.Do(()=> _client.Delete("test_1", "test", "2", nv=>nv
 					.Add("refresh", 1)
 				));
 
@@ -103,7 +103,7 @@ namespace Nest.Tests.Integration.Yaml.Delete7
 						}
 					}
 				};
-				this.Do(()=> this._client.SearchPost("test_1", "test", _body));
+				this.Do(()=> _client.Search("test_1", "test", _body));
 
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 1);

@@ -79,6 +79,18 @@ namespace CodeGeneration.LowLevelClient.Domain
 			}
 		}
 
+		public string OptionallyAppendHttpMethod(IEnumerable<string> availableMethods, string currentHttpMethod)
+		{
+			if (availableMethods.Count() == 1)
+				return string.Empty;
+			if (availableMethods.Count() == 2  && availableMethods.Contains("GET"))
+			{
+				//if on operation has two endpoints and one of them is GET always favor the other as default
+				return currentHttpMethod == "GET" ? "Get" : string.Empty;
+			}
+			
+			return availableMethods.First() == currentHttpMethod ? string.Empty : this.PascalCase(currentHttpMethod);
+		}
 
 		public IEnumerable<CsharpMethod> CsharpMethods
 		{
@@ -87,7 +99,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				foreach (var method in this.Methods)
 				{
 
-					var methodName = this.CsharpMethodName + this.PascalCase(method);
+					var methodName = this.CsharpMethodName + this.OptionallyAppendHttpMethod(this.Methods, method);
 					//the distinctby here catches aliases routes i.e
 					//  /_cluster/nodes/{node_id}/hotthreads vs  /_cluster/nodes/{node_id}/hot_threads
 					foreach (var path in Extensions.DistinctBy(this.Url.Paths, p => p.Replace("_", "")))

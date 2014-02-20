@@ -28,12 +28,12 @@ namespace Nest.Tests.Integration.Yaml.Bulk3
 {""index"": {""_index"": ""test_index"", ""_type"": ""test_type"", ""_id"": ""test_id2""}}
 {""f1"": ""v2"", ""f2"": 47}
 ";
-				this.Do(()=> this._client.BulkPost(_body, nv=>nv
+				this.Do(()=> _client.Bulk(_body, nv=>nv
 					.Add("refresh", @"true")
 				));
 
 				//do count 
-				this.Do(()=> this._client.CountGet("test_index"));
+				this.Do(()=> _client.CountGet("test_index"));
 
 				//match _response.count: 
 				this.IsMatch(_response.count, 2);

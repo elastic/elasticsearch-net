@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 						url= "http://snapshot.test1"
 					}
 				};
-				this.Do(()=> this._client.SnapshotCreateRepositoryPut("test_repo1", _body));
+				this.Do(()=> _client.SnapshotCreateRepository("test_repo1", _body));
 
 				//do snapshot.create_repository 
 				_body = new {
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 						url= "http://snapshot.test2"
 					}
 				};
-				this.Do(()=> this._client.SnapshotCreateRepositoryPut("test_repo2", _body));
+				this.Do(()=> _client.SnapshotCreateRepository("test_repo2", _body));
 
 			}
 		}
@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 			{	
 
 				//do snapshot.get_repository 
-				this.Do(()=> this._client.SnapshotGetRepository());
+				this.Do(()=> _client.SnapshotGetRepository());
 
 				//is_true _response.test_repo1; 
 				this.IsTrue(_response.test_repo1);
@@ -68,7 +68,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 			{	
 
 				//do snapshot.get_repository 
-				this.Do(()=> this._client.SnapshotGetRepository("test_repo1"));
+				this.Do(()=> _client.SnapshotGetRepository("test_repo1"));
 
 				//is_true _response.test_repo1; 
 				this.IsTrue(_response.test_repo1);
@@ -87,7 +87,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 			{	
 
 				//do snapshot.get_repository 
-				this.Do(()=> this._client.SnapshotGetRepository("test_repo2"));
+				this.Do(()=> _client.SnapshotGetRepository("test_repo2"));
 
 			}
 		}
@@ -100,7 +100,7 @@ namespace Nest.Tests.Integration.Yaml.SnapshotGetRepository1
 			{	
 
 				//do snapshot.get_repository 
-				this.Do(()=> this._client.SnapshotGetRepository(nv=>nv
+				this.Do(()=> _client.SnapshotGetRepository(nv=>nv
 					.Add("local", @"true")
 				));
 

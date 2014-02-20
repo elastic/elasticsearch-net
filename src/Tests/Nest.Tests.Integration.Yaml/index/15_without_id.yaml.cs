@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.Index2
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", _body));
+				this.Do(()=> _client.Index("test_1", "test", _body));
 
 				//is_true _response._id; 
 				this.IsTrue(_response._id);
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml.Index2
 				var id = _response._id;
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", (string)id));
+				this.Do(()=> _client.Get("test_1", "test", (string)id));
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test_1");

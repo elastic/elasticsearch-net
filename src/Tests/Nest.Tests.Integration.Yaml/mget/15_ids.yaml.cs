@@ -26,16 +26,16 @@ namespace Nest.Tests.Integration.Yaml.Mget5
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do index 
 				_body = new {
 					foo= "baz"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test_2", "2", _body));
+				this.Do(()=> _client.Index("test_1", "test_2", "2", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Mget5
 						"2"
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", "test", _body));
+				this.Do(()=> _client.Mget("test_1", "test", _body));
 
 				//is_true _response.docs[0].found; 
 				this.IsTrue(_response.docs[0].found);
@@ -87,7 +87,7 @@ namespace Nest.Tests.Integration.Yaml.Mget5
 						"2"
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body));
+				this.Do(()=> _client.Mget("test_1", _body));
 
 				//is_true _response.docs[0].found; 
 				this.IsTrue(_response.docs[0].found);
@@ -133,11 +133,11 @@ namespace Nest.Tests.Integration.Yaml.Mget5
 				_body = new {
 					ids= new string[] {}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", _body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
+				this.Do(()=> _client.Mget("test_1", _body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
 
 				//do mget 
 				_body = new {};
-				this.Do(()=> this._client.MgetPost("test_1", _body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
+				this.Do(()=> _client.Mget("test_1", _body), shouldCatch: @"/ActionRequestValidationException.+ no documents to get/");
 
 			}
 		}

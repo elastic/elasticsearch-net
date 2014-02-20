@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesSegments1
 			{	
 
 				//do indices.segments 
-				this.Do(()=> this._client.IndicesSegmentsGetForAll(nv=>nv
+				this.Do(()=> _client.IndicesSegmentsForAll(nv=>nv
 					.Add("allow_no_indices", @"true")
 				));
 

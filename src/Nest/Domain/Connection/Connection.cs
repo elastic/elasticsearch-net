@@ -20,10 +20,11 @@ namespace Nest
 		private Semaphore _ResourceLock;
 		private readonly bool _enableTrace;
 
-		 static Connection()
+		static Connection()
 		{
 			ServicePointManager.UseNagleAlgorithm = false;
 			ServicePointManager.Expect100Continue = false;
+			ServicePointManager.DefaultConnectionLimit = 10000;
 		}
 		public Connection(IConnectionSettings settings)
 		{
@@ -306,7 +307,7 @@ namespace Nest
 					var cs = new ConnectionStatus(this._ConnectionSettings, memoryStream.ToArray())
 					{
 						Request = data.Utf8String(),
-						RequestUrl = request.RequestUri.ToString(), 
+						RequestUrl = request.RequestUri.ToString(),
 						RequestMethod = request.Method
 					};
 					tcs.TrySetResult(cs);
@@ -333,7 +334,7 @@ namespace Nest
 						tcs.SetResult(new ConnectionStatus(this._ConnectionSettings, exception));
 					else
 						tcs.TrySetException(exception);
-//					enumerator.Dispose();
+					//					enumerator.Dispose();
 				}
 				else if (enumerator.MoveNext())
 				{

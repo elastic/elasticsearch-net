@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.Index5
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("version_type", @"external")
 					.Add("version", 5)
 				));
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.Index5
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("version_type", @"external")
 					.Add("version", 5)
 				), shouldCatch: @"conflict");
@@ -47,7 +47,7 @@ namespace Nest.Tests.Integration.Yaml.Index5
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("version_type", @"external")
 					.Add("version", 6)
 				));

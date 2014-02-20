@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index1", _body));
+				this.Do(()=> _client.IndicesCreate("test_index1", _body));
 
 				//do indices.create 
 				_body = new {
@@ -59,7 +59,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index2", _body));
+				this.Do(()=> _client.IndicesCreate("test_index2", _body));
 
 				//do indices.create 
 				_body = new {
@@ -80,7 +80,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("foo", _body));
+				this.Do(()=> _client.IndicesCreate("foo", _body));
 
 			}
 		}
@@ -94,10 +94,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("_all", "test_warmer1"));
+				this.Do(()=> _client.IndicesDeleteWarmer("_all", "test_warmer1"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmerForAll());
+				this.Do(()=> _client.IndicesGetWarmerForAll());
 
 				//match _response.test_index1.warmers.test_warmer2.source.query.match_all: 
 				this.IsMatch(_response.test_index1.warmers.test_warmer2.source.query.match_all, new {});
@@ -119,10 +119,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("*", "test_warmer1"));
+				this.Do(()=> _client.IndicesDeleteWarmer("*", "test_warmer1"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmerForAll());
+				this.Do(()=> _client.IndicesGetWarmerForAll());
 
 				//match _response.test_index1.warmers.test_warmer2.source.query.match_all: 
 				this.IsMatch(_response.test_index1.warmers.test_warmer2.source.query.match_all, new {});
@@ -144,10 +144,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index1,test_index2", "test_warmer1"));
+				this.Do(()=> _client.IndicesDeleteWarmer("test_index1,test_index2", "test_warmer1"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer1"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer1"));
 
 				//match _response.foo.warmers.test_warmer1.source.query.match_all: 
 				this.IsMatch(_response.foo.warmers.test_warmer1.source.query.match_all, new {});
@@ -159,7 +159,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer2"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer2"));
 
 				//match _response.test_index1.warmers.test_warmer2.source.query.match_all: 
 				this.IsMatch(_response.test_index1.warmers.test_warmer2.source.query.match_all, new {});
@@ -181,10 +181,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_*", "test_warmer1"));
+				this.Do(()=> _client.IndicesDeleteWarmer("test_*", "test_warmer1"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer1"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer1"));
 
 				//match _response.foo.warmers.test_warmer1.source.query.match_all: 
 				this.IsMatch(_response.foo.warmers.test_warmer1.source.query.match_all, new {});
@@ -196,7 +196,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer2"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer2"));
 
 				//match _response.test_index1.warmers.test_warmer2.source.query.match_all: 
 				this.IsMatch(_response.test_index1.warmers.test_warmer2.source.query.match_all, new {});
@@ -218,10 +218,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index1,test_index2", "*"));
+				this.Do(()=> _client.IndicesDeleteWarmer("test_index1,test_index2", "*"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer1"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer1"));
 
 				//match _response.foo.warmers.test_warmer1.source.query.match_all: 
 				this.IsMatch(_response.foo.warmers.test_warmer1.source.query.match_all, new {});
@@ -233,7 +233,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer2"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer2"));
 
 				//match _response.foo.warmers.test_warmer2.source.query.match_all: 
 				this.IsMatch(_response.foo.warmers.test_warmer2.source.query.match_all, new {});
@@ -255,10 +255,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index1,test_index2", "_all"));
+				this.Do(()=> _client.IndicesDeleteWarmer("test_index1,test_index2", "_all"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer1"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer1"));
 
 				//match _response.foo.warmers.test_warmer1.source.query.match_all: 
 				this.IsMatch(_response.foo.warmers.test_warmer1.source.query.match_all, new {});
@@ -270,7 +270,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer2"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer2"));
 
 				//match _response.foo.warmers.test_warmer2.source.query.match_all: 
 				this.IsMatch(_response.foo.warmers.test_warmer2.source.query.match_all, new {});
@@ -292,10 +292,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index1,test_index2", "*1"));
+				this.Do(()=> _client.IndicesDeleteWarmer("test_index1,test_index2", "*1"));
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer1"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer1"));
 
 				//match _response.foo.warmers.test_warmer1.source.query.match_all: 
 				this.IsMatch(_response.foo.warmers.test_warmer1.source.query.match_all, new {});
@@ -307,7 +307,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 				this.IsFalse(_response.test_index2);
 
 				//do indices.get_warmer 
-				this.Do(()=> this._client.IndicesGetWarmer("_all", "test_warmer2"));
+				this.Do(()=> _client.IndicesGetWarmer("_all", "test_warmer2"));
 
 				//match _response.test_index1.warmers.test_warmer2.source.query.match_all: 
 				this.IsMatch(_response.test_index1.warmers.test_warmer2.source.query.match_all, new {});
@@ -329,10 +329,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("*", "non_existent"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesDeleteWarmer("*", "non_existent"), shouldCatch: @"missing");
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("non_existent", "test_warmer1"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesDeleteWarmer("non_existent", "test_warmer1"), shouldCatch: @"missing");
 
 			}
 		}
@@ -345,10 +345,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteWarmer1
 			{	
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("", "test_warmer1"), shouldCatch: @"param");
+				this.Do(()=> _client.IndicesDeleteWarmer("", "test_warmer1"), shouldCatch: @"param");
 
 				//do indices.delete_warmer 
-				this.Do(()=> this._client.IndicesDeleteWarmer("test_index1", ""), shouldCatch: @"param");
+				this.Do(()=> _client.IndicesDeleteWarmer("test_index1", ""), shouldCatch: @"param");
 
 			}
 		}

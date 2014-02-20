@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.Ping1
 			{	
 
 				//do ping 
-				this.Do(()=> this._client.PingHead());
+				this.Do(()=> _client.Ping());
 
 				//is_true this._status; 
 				this.IsTrue(this._status);

@@ -23,16 +23,16 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("testind", null));
+				this.Do(()=> _client.IndicesCreate("testind", null));
 
 				//do indices.put_alias 
 				_body = new {
 					routing= "routing value"
 				};
-				this.Do(()=> this._client.IndicesPutAlias("testind", "testali", _body));
+				this.Do(()=> _client.IndicesPutAlias("testind", "testali", _body));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("testali"));
+				this.Do(()=> _client.IndicesGetAliasForAll("testali"));
 
 				//match _response.testind.aliases.testali.search_routing: 
 				this.IsMatch(_response.testind.aliases.testali.search_routing, @"routing value");
@@ -41,10 +41,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesDeleteAlias1
 				this.IsMatch(_response.testind.aliases.testali.index_routing, @"routing value");
 
 				//do indices.delete_alias 
-				this.Do(()=> this._client.IndicesDeleteAlias("testind", "testali"));
+				this.Do(()=> _client.IndicesDeleteAlias("testind", "testali"));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAlias("testind", "testali"));
+				this.Do(()=> _client.IndicesGetAlias("testind", "testali"));
 
 				//match this._status: 
 				this.IsMatch(this._status, new {});

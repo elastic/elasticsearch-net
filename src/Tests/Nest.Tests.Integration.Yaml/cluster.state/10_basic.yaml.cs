@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState1
 			{	
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet());
+				this.Do(()=> _client.ClusterState());
 
 				//is_true _response.master_node; 
 				this.IsTrue(_response.master_node);

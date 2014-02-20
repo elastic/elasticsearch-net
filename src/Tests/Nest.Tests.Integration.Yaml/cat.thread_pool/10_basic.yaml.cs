@@ -31,14 +31,14 @@ namespace Nest.Tests.Integration.Yaml.CatThreadPool1
 			{	
 
 				//do cat.thread_pool 
-				this.Do(()=> this._client.CatThreadPoolGet());
+				this.Do(()=> _client.CatThreadPool());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/  #host       ip                          bulk.active       bulk.queue       bulk.rejected       index.active       index.queue       index.rejected       search.active       search.queue       search.rejected ^  (\S+   \s+  (\d{1,3}\.){3}\d{1,3}  \s+  \d+          \s+  \d+         \s+  \d+            \s+  \d+           \s+  \d+          \s+  \d+             \s+  \d+            \s+  \d+           \s+  \d+              \s+  \n)+  $/
 ");
 
 				//do cat.thread_pool 
-				this.Do(()=> this._client.CatThreadPoolGet(nv=>nv
+				this.Do(()=> _client.CatThreadPool(nv=>nv
 					.Add("v", @"true")
 				));
 
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Yaml.CatThreadPool1
 ");
 
 				//do cat.thread_pool 
-				this.Do(()=> this._client.CatThreadPoolGet(nv=>nv
+				this.Do(()=> _client.CatThreadPool(nv=>nv
 					.Add("h", @"pid,id,h,i,po")
 				));
 
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Yaml.CatThreadPool1
 ");
 
 				//do cat.thread_pool 
-				this.Do(()=> this._client.CatThreadPoolGet(nv=>nv
+				this.Do(()=> _client.CatThreadPool(nv=>nv
 					.Add("h", @"id,ba,fa,gea,ga,ia,maa,ma,oa,pa")
 					.Add("v", @"true")
 					.Add("full_id", @"true")

@@ -38,6 +38,12 @@ namespace Profiling.Indexing
 			var msgGenerator = new MessageGenerator();
 			var tasks = new List<Task>();
 			var partitionedMessages = msgGenerator.Generate(numMessages).Partition(bufferSize);
+			client.CreateIndex(indexName, c => c
+				.NumberOfReplicas(0)
+				.NumberOfShards(1)
+				.Settings(s => s.Add("refresh_interval", "-1"))
+				.AddMapping<Message>(p=>p.MapFromAttributes())
+			);
 			Interlocked.Exchange(ref NumSent, 0);
 			foreach (var messages in partitionedMessages)
 			{
@@ -51,6 +57,10 @@ namespace Profiling.Indexing
 				tasks.Add(t);
 			}
 			Task.WaitAll(tasks.ToArray());
+			client.UpdateSettings(u => u
+				.Index(indexName)
+				.RefreshInterval("1s")
+			);
 		}
 	}
 }

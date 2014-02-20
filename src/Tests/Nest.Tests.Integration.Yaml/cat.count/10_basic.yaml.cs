@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.CatCount1
 			{	
 
 				//do cat.count 
-				this.Do(()=> this._client.CatCountGet(nv=>nv
+				this.Do(()=> _client.CatCount(nv=>nv
 					.Add("help", @"true")
 				));
 
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.CatCount1
 			{	
 
 				//do cat.count 
-				this.Do(()=> this._client.CatCountGet());
+				this.Do(()=> _client.CatCount());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/# epoch     timestamp              count ^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  0     \s  $/
@@ -62,12 +62,12 @@ namespace Nest.Tests.Integration.Yaml.CatCount1
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("index1", "type1", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("index1", "type1", "1", _body, nv=>nv
 					.Add("refresh", @"true")
 				));
 
 				//do cat.count 
-				this.Do(()=> this._client.CatCountGet());
+				this.Do(()=> _client.CatCount());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/# epoch     timestamp              count ^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1     \s  $/
@@ -77,12 +77,12 @@ namespace Nest.Tests.Integration.Yaml.CatCount1
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("index2", "type2", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("index2", "type2", "1", _body, nv=>nv
 					.Add("refresh", @"true")
 				));
 
 				//do cat.count 
-				this.Do(()=> this._client.CatCountGet(nv=>nv
+				this.Do(()=> _client.CatCount(nv=>nv
 					.Add("h", @"count")
 				));
 
@@ -91,14 +91,14 @@ namespace Nest.Tests.Integration.Yaml.CatCount1
 ");
 
 				//do cat.count 
-				this.Do(()=> this._client.CatCountGet("index1"));
+				this.Do(()=> _client.CatCount("index1"));
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/# epoch     timestamp              count ^  \d+   \s  \d{2}:\d{2}:\d{2}  \s  1  \s  $/
 ");
 
 				//do cat.count 
-				this.Do(()=> this._client.CatCountGet("index2", nv=>nv
+				this.Do(()=> _client.CatCount("index2", nv=>nv
 					.Add("v", @"true")
 				));
 

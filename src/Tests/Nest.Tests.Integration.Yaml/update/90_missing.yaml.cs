@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.Update16
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body), shouldCatch: @"missing");
+				this.Do(()=> _client.Update("test_1", "test", "1", _body), shouldCatch: @"missing");
 
 				//do update 
 				_body = new {
@@ -36,7 +36,7 @@ namespace Nest.Tests.Integration.Yaml.Update16
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("ignore", 404)
 				));
 
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Yaml.Update16
 						bar= "xxx"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body), shouldCatch: @"missing");
+				this.Do(()=> _client.Update("test_1", "test", "1", _body), shouldCatch: @"missing");
 
 				//do update 
 				_body = new {
@@ -66,7 +66,7 @@ namespace Nest.Tests.Integration.Yaml.Update16
 						bar= "xxx"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("ignore", 404)
 				));
 

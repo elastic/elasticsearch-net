@@ -100,7 +100,7 @@ namespace CodeGeneration.YamlTestsRunner.Domain
 
 		private string GenerateCall(string call)
 		{
-			var s = "this.Do(()=> this._client.";
+			var s = "this.Do(()=> _client.";
 			var csharpMethod = call.Split('(').First();
 			s += csharpMethod + "(";
 			var csharpArguments = CsharpArguments(call);

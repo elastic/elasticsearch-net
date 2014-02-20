@@ -33,10 +33,10 @@ namespace Nest.Tests.Integration.Yaml.Create9
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -44,12 +44,12 @@ namespace Nest.Tests.Integration.Yaml.Create9
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("op_type", @"create")
 				));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", @"_timestamp")
 				));
 
@@ -57,19 +57,19 @@ namespace Nest.Tests.Integration.Yaml.Create9
 				this.IsTrue(_response.fields._timestamp);
 
 				//do delete 
-				this.Do(()=> this._client.Delete("test_1", "test", "1"));
+				this.Do(()=> _client.Delete("test_1", "test", "1"));
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("timestamp", @"1372011280000")
 					.Add("op_type", @"create")
 				));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", @"_timestamp")
 				));
 
@@ -77,19 +77,19 @@ namespace Nest.Tests.Integration.Yaml.Create9
 				this.IsMatch(_response.fields._timestamp, @"1372011280000");
 
 				//do delete 
-				this.Do(()=> this._client.Delete("test_1", "test", "1"));
+				this.Do(()=> _client.Delete("test_1", "test", "1"));
 
 				//do create 
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("timestamp", @"2013-06-23T18:14:40")
 					.Add("op_type", @"create")
 				));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", @"_timestamp")
 				));
 

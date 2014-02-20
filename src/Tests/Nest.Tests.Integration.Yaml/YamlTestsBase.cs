@@ -17,14 +17,14 @@ namespace Nest.Tests.Integration.Yaml
 {
 	public class YamlTestsBase
 	{
-		protected readonly RawElasticClient _client;
-		protected readonly Version _versionNumber;
+		protected static readonly RawElasticClient _client;
+		protected static readonly Version _versionNumber;
 		
 		protected object _body;
 		protected ConnectionStatus _status;
 		protected dynamic _response;
 
-		public YamlTestsBase()
+		static YamlTestsBase()
 		{
 			var host = "localhost";
 			if (Process.GetProcessesByName("fiddler").Any())
@@ -33,12 +33,15 @@ namespace Nest.Tests.Integration.Yaml
 			var settings = new ConnectionSettings(uri, "nest-default-index")
 				.UsePrettyResponses();
 			_client = new RawElasticClient(settings);
-			
-			_client.IndicesDelete("_all", d => d.MasterTimeout("1m").Timeout("1m"));
-			_client.IndicesDeleteTemplateForAll("*");
-			dynamic info = _client.InfoGet().Response;
+			dynamic info = _client.Info().Response;
 			string version = info.version.number;
-			this._versionNumber = new Version(version);
+			_versionNumber = new Version(version);
+		}
+
+
+		public YamlTestsBase()
+		{
+			_client.IndicesDelete("*");
 		}
 
 		protected void Do(Func<ConnectionStatus> action, string shouldCatch = null)
@@ -84,9 +87,9 @@ namespace Nest.Tests.Integration.Yaml
 			var versions = version.Split('-').Select(v => v.Trim(' ')).ToList();
 			var first = new Version(this.PatchVersion(versions.First()));
 			var second = new Version(this.PatchVersion(versions.Last()));
-			if (this._versionNumber.CompareTo(first) <= 0
-				|| this._versionNumber.CompareTo(second) <= 0)
-				Assert.Pass("Skipped as test ran against "+ this._versionNumber +" : " + reason);
+			if (_versionNumber.CompareTo(first) <= 0
+				|| _versionNumber.CompareTo(second) <= 0)
+				Assert.Pass("Skipped as test ran against "+ _versionNumber +" : " + reason);
 		} 
 	
 		//.net Version class needs atleast 2 significant numbers

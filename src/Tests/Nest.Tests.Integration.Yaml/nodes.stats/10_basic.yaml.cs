@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.NodesStats1
 			{	
 
 				//do nodes.stats 
-				this.Do(()=> this._client.NodesStatsGetForAll("indices,transport"));
+				this.Do(()=> _client.NodesStatsForAll("indices,transport"));
 
 				//is_true _response.cluster_name; 
 				this.IsTrue(_response.cluster_name);

@@ -27,19 +27,19 @@ namespace Nest.Tests.Integration.Yaml.Mlt1
 					foo= "bar",
 					title= "howdy"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"green")
 					.Add("timeout", @"1s")
 				));
 
 				//do mlt 
-				this.Do(()=> this._client.MltGet("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.MltGet("test_1", "test", "1", nv=>nv
 					.Add("mlt_fields", @"title")
 				));
 

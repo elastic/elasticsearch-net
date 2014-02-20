@@ -30,10 +30,10 @@ namespace Nest.Tests.Integration.Yaml.Exists3
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"green")
 				));
 
@@ -41,12 +41,12 @@ namespace Nest.Tests.Integration.Yaml.Exists3
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("routing", 5)
 				));
 
 				//do exists 
-				this.Do(()=> this._client.ExistsHead("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Exists("test_1", "test", "1", nv=>nv
 					.Add("routing", 5)
 				));
 
@@ -54,7 +54,7 @@ namespace Nest.Tests.Integration.Yaml.Exists3
 				this.IsTrue(this._status);
 
 				//do exists 
-				this.Do(()=> this._client.ExistsHead("test_1", "test", "1"));
+				this.Do(()=> _client.Exists("test_1", "test", "1"));
 
 				//is_false this._status; 
 				this.IsFalse(this._status);

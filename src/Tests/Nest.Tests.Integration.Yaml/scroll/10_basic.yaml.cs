@@ -23,16 +23,16 @@ namespace Nest.Tests.Integration.Yaml.Scroll1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_scroll", null));
+				this.Do(()=> _client.IndicesCreate("test_scroll", null));
 
 				//do index 
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_scroll", "test", "42", _body));
+				this.Do(()=> _client.Index("test_scroll", "test", "42", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 				//do search 
 				_body = new {
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Yaml.Scroll1
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.SearchPost("test_scroll", _body, nv=>nv
+				this.Do(()=> _client.Search("test_scroll", _body, nv=>nv
 					.Add("search_type", @"scan")
 					.Add("scroll", @"1m")
 				));
@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.Scroll1
 				var scroll_id = _response._scroll_id;
 
 				//do scroll 
-				this.Do(()=> this._client.ScrollGet((string)scroll_id));
+				this.Do(()=> _client.ScrollGet((string)scroll_id));
 
 				//match _response.hits.total: 
 				this.IsMatch(_response.hits.total, 1);

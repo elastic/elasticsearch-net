@@ -23,15 +23,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("testing", null));
+				this.Do(()=> _client.IndicesCreate("testing", null));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
 				//do indices.validate_query 
-				this.Do(()=> this._client.IndicesValidateQueryGetForAll(nv=>nv
+				this.Do(()=> _client.IndicesValidateQueryGetForAll(nv=>nv
 					.Add("q", @"query string")
 				));
 
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesValidateQuery1
 						invalid_query= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesValidateQueryPostForAll(_body));
+				this.Do(()=> _client.IndicesValidateQueryForAll(_body));
 
 				//is_false _response.valid; 
 				this.IsFalse(_response.valid);

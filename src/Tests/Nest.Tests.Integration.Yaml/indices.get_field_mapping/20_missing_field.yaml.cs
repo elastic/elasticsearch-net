@@ -35,10 +35,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping2
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
+				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "not_existent"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "test_type", "not_existent"));
 
 				//match this._status: 
 				this.IsMatch(this._status, new {});

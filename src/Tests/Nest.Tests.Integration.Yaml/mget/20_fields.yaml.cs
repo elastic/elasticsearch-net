@@ -26,10 +26,10 @@ namespace Nest.Tests.Integration.Yaml.Mget6
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Yaml.Mget6
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", "test", _body));
+				this.Do(()=> _client.Mget("test_1", "test", _body));
 
 				//is_false _response.docs[0].fields; 
 				this.IsFalse(_response.docs[0].fields);
@@ -119,7 +119,7 @@ namespace Nest.Tests.Integration.Yaml.Mget6
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
 					.Add("fields", @"foo")
 				));
 
@@ -182,7 +182,7 @@ namespace Nest.Tests.Integration.Yaml.Mget6
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
 					.Add("fields", new [] {
 						@"foo"
 					})
@@ -247,7 +247,7 @@ namespace Nest.Tests.Integration.Yaml.Mget6
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", "test", _body, nv=>nv
+				this.Do(()=> _client.Mget("test_1", "test", _body, nv=>nv
 					.Add("fields", new [] {
 						@"foo",
 						@"_source"

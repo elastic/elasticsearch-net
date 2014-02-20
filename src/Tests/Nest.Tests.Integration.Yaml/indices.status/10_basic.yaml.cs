@@ -23,10 +23,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesStatus1
 			{	
 
 				//do indices.status 
-				this.Do(()=> this._client.IndicesStatusGetForAll());
+				this.Do(()=> _client.IndicesStatusForAll());
 
 				//do indices.status 
-				this.Do(()=> this._client.IndicesStatusGet("not_here"), shouldCatch: @"missing");
+				this.Do(()=> _client.IndicesStatus("not_here"), shouldCatch: @"missing");
 
 			}
 		}

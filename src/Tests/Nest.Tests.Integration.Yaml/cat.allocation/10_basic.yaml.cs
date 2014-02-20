@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.CatAllocation1
 			{	
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet(nv=>nv
+				this.Do(()=> _client.CatAllocation(nv=>nv
 					.Add("help", @"true")
 				));
 
@@ -58,7 +58,7 @@ $/
 			{	
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet());
+				this.Do(()=> _client.CatAllocation());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
@@ -86,16 +86,16 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test", null));
+				this.Do(()=> _client.IndicesCreate("test", null));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"green")
 					.Add("timeout", @"1s")
 				));
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet());
+				this.Do(()=> _client.CatAllocation());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
@@ -128,7 +128,7 @@ $/
 			{	
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet("_master"));
+				this.Do(()=> _client.CatAllocation("_master"));
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
@@ -146,7 +146,7 @@ $/
 ");
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet("non_existent"));
+				this.Do(()=> _client.CatAllocation("non_existent"));
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^ $/
@@ -163,7 +163,7 @@ $/
 			{	
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet(nv=>nv
+				this.Do(()=> _client.CatAllocation(nv=>nv
 					.Add("v", @"true")
 				));
 
@@ -202,7 +202,7 @@ $/
 			{	
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet(nv=>nv
+				this.Do(()=> _client.CatAllocation(nv=>nv
 					.Add("h", new [] {
 						@"disk.percent",
 						@"node"
@@ -219,7 +219,7 @@ $/
 ");
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet(nv=>nv
+				this.Do(()=> _client.CatAllocation(nv=>nv
 					.Add("h", new [] {
 						@"disk.percent",
 						@"node"
@@ -251,7 +251,7 @@ $/
 			{	
 
 				//do cat.allocation 
-				this.Do(()=> this._client.CatAllocationGet(nv=>nv
+				this.Do(()=> _client.CatAllocation(nv=>nv
 					.Add("bytes", @"g")
 				));
 

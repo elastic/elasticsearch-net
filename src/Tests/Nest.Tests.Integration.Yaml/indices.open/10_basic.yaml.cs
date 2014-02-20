@@ -23,29 +23,29 @@ namespace Nest.Tests.Integration.Yaml.IndicesOpen1
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index", null));
+				this.Do(()=> _client.IndicesCreate("test_index", null));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
 				//do indices.close 
-				this.Do(()=> this._client.IndicesClosePost("test_index"));
+				this.Do(()=> _client.IndicesClose("test_index"));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index"), shouldCatch: @"forbidden");
+				this.Do(()=> _client.SearchGet("test_index"), shouldCatch: @"forbidden");
 
 				//do indices.open 
-				this.Do(()=> this._client.IndicesOpenPost("test_index"));
+				this.Do(()=> _client.IndicesOpen("test_index"));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
 				//do search 
-				this.Do(()=> this._client.SearchGet("test_index"));
+				this.Do(()=> _client.SearchGet("test_index"));
 
 			}
 		}

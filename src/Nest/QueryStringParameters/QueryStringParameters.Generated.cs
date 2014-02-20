@@ -14,7 +14,7 @@ namespace Nest
 {
 	
 	
-	///<summary>Query string descriptor for BulkPost
+	///<summary>Query string descriptor for Bulk
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
 	///</pre>
@@ -84,7 +84,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatAliasesGet
+	///<summary>Query string descriptor for CatAliases
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-aliases.html
 	///</pre>
@@ -144,7 +144,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatAllocationGet
+	///<summary>Query string descriptor for CatAllocation
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
@@ -214,7 +214,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatCountGet
+	///<summary>Query string descriptor for CatCount
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
@@ -274,7 +274,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatHealthGet
+	///<summary>Query string descriptor for CatHealth
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
@@ -344,7 +344,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatHelpGet
+	///<summary>Query string descriptor for CatHelp
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
 	///</pre>
@@ -364,7 +364,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatIndicesGet
+	///<summary>Query string descriptor for CatIndices
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
@@ -444,7 +444,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatMasterGet
+	///<summary>Query string descriptor for CatMaster
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
@@ -504,7 +504,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatNodesGet
+	///<summary>Query string descriptor for CatNodes
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
@@ -564,7 +564,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatPendingTasksGet
+	///<summary>Query string descriptor for CatPendingTasks
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
@@ -624,7 +624,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatRecoveryGet
+	///<summary>Query string descriptor for CatRecovery
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
@@ -694,7 +694,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatShardsGet
+	///<summary>Query string descriptor for CatShards
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
@@ -754,7 +754,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CatThreadPoolGet
+	///<summary>Query string descriptor for CatThreadPool
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
@@ -824,7 +824,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for ClearScrollDelete
+	///<summary>Query string descriptor for ClearScroll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
@@ -874,7 +874,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for ClusterHealthGet
+	///<summary>Query string descriptor for ClusterHealth
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
 	///</pre>
@@ -964,7 +964,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for ClusterPendingTasksGet
+	///<summary>Query string descriptor for ClusterPendingTasks
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
@@ -1014,7 +1014,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for ClusterReroutePost
+	///<summary>Query string descriptor for ClusterReroute
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
 	///</pre>
@@ -1064,7 +1064,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for ClusterStateGet
+	///<summary>Query string descriptor for ClusterState
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
 	///</pre>
@@ -1114,7 +1114,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for ClusterStatsGet
+	///<summary>Query string descriptor for ClusterStats
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
 	///</pre>
@@ -1144,7 +1144,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for CountPost
+	///<summary>Query string descriptor for Count
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
@@ -1544,7 +1544,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for ExistsHead
+	///<summary>Query string descriptor for Exists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
@@ -2014,7 +2014,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndexPost
+	///<summary>Query string descriptor for Index
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
 	///</pre>
@@ -2234,7 +2234,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesClearCachePostForAll
+	///<summary>Query string descriptor for IndicesClearCacheForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
 	///</pre>
@@ -2384,7 +2384,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesClosePost
+	///<summary>Query string descriptor for IndicesClose
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
@@ -2444,7 +2444,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesCreatePut
+	///<summary>Query string descriptor for IndicesCreate
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
 	///</pre>
@@ -2604,7 +2604,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesExistsHead
+	///<summary>Query string descriptor for IndicesExists
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
 	///</pre>
@@ -2654,7 +2654,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesExistsAliasHeadForAll
+	///<summary>Query string descriptor for IndicesExistsAliasForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
@@ -2704,7 +2704,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesExistsTemplateHeadForAll
+	///<summary>Query string descriptor for IndicesExistsTemplateForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
@@ -2724,7 +2724,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesExistsTypeHead
+	///<summary>Query string descriptor for IndicesExistsType
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
@@ -2774,7 +2774,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesFlushPostForAll
+	///<summary>Query string descriptor for IndicesFlushForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
 	///</pre>
@@ -3164,7 +3164,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesOpenPost
+	///<summary>Query string descriptor for IndicesOpen
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
@@ -3224,7 +3224,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesOptimizePostForAll
+	///<summary>Query string descriptor for IndicesOptimizeForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
 	///</pre>
@@ -3564,7 +3564,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesRefreshPostForAll
+	///<summary>Query string descriptor for IndicesRefreshForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
 	///</pre>
@@ -3624,7 +3624,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesSegmentsGetForAll
+	///<summary>Query string descriptor for IndicesSegmentsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
 	///</pre>
@@ -3684,7 +3684,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesSnapshotIndexPostForAll
+	///<summary>Query string descriptor for IndicesSnapshotIndexForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-gateway-snapshot.html
 	///</pre>
@@ -3724,7 +3724,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesStatsGetForAll
+	///<summary>Query string descriptor for IndicesStatsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
 	///</pre>
@@ -3834,7 +3834,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesStatusGetForAll
+	///<summary>Query string descriptor for IndicesStatusForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
 	///</pre>
@@ -3914,7 +3914,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for IndicesUpdateAliasesPostForAll
+	///<summary>Query string descriptor for IndicesUpdateAliasesForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
@@ -4024,7 +4024,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for InfoGet
+	///<summary>Query string descriptor for Info
 	///<pre>
 	///http://www.elasticsearch.org/guide/
 	///</pre>
@@ -4514,7 +4514,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for NodesHotThreadsGetForAll
+	///<summary>Query string descriptor for NodesHotThreadsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
 	///</pre>
@@ -4564,7 +4564,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for NodesInfoGetForAll
+	///<summary>Query string descriptor for NodesInfoForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
 	///</pre>
@@ -4594,7 +4594,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for NodesShutdownPostForAll
+	///<summary>Query string descriptor for NodesShutdownForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
 	///</pre>
@@ -4624,7 +4624,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for NodesStatsGetForAll
+	///<summary>Query string descriptor for NodesStatsForAll
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
 	///</pre>
@@ -4834,7 +4834,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for PingHead
+	///<summary>Query string descriptor for Ping
 	///<pre>
 	///http://www.elasticsearch.org/guide/
 	///</pre>
@@ -5094,7 +5094,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for SnapshotCreatePut
+	///<summary>Query string descriptor for SnapshotCreate
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
@@ -5124,7 +5124,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for SnapshotCreateRepositoryPut
+	///<summary>Query string descriptor for SnapshotCreateRepository
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
@@ -5254,7 +5254,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for SnapshotRestorePost
+	///<summary>Query string descriptor for SnapshotRestore
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
@@ -5284,7 +5284,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for SuggestPost
+	///<summary>Query string descriptor for Suggest
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
@@ -5464,7 +5464,7 @@ namespace Nest
 	}
 	
 	
-	///<summary>Query string descriptor for UpdatePost
+	///<summary>Query string descriptor for Update
 	///<pre>
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>

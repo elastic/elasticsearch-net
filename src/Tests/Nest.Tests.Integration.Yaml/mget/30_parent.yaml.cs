@@ -32,10 +32,10 @@ namespace Nest.Tests.Integration.Yaml.Mget7
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
@@ -43,7 +43,7 @@ namespace Nest.Tests.Integration.Yaml.Mget7
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "1", _body, nv=>nv
 					.Add("parent", 4)
 				));
 
@@ -51,7 +51,7 @@ namespace Nest.Tests.Integration.Yaml.Mget7
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "2", _body, nv=>nv
+				this.Do(()=> _client.Index("test_1", "test", "2", _body, nv=>nv
 					.Add("parent", 5)
 				));
 
@@ -87,7 +87,7 @@ namespace Nest.Tests.Integration.Yaml.Mget7
 						}
 					}
 				};
-				this.Do(()=> this._client.MgetPost("test_1", "test", _body));
+				this.Do(()=> _client.Mget("test_1", "test", _body));
 
 				//is_false _response.docs[0].found; 
 				this.IsFalse(_response.docs[0].found);

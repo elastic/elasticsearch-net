@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 						type_2= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do indices.create 
 				_body = new {
@@ -35,7 +35,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 						type_3= new {}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_2", _body));
+				this.Do(()=> _client.IndicesCreate("test_2", _body));
 
 			}
 		}
@@ -49,7 +49,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMappingForAll());
+				this.Do(()=> _client.IndicesGetMappingForAll());
 
 				//match _response.test_1.mappings.type_1.properties: 
 				this.IsMatch(_response.test_1.mappings.type_1.properties, new {});
@@ -74,7 +74,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_1"));
+				this.Do(()=> _client.IndicesGetMapping("test_1"));
 
 				//match _response.test_1.mappings.type_1.properties: 
 				this.IsMatch(_response.test_1.mappings.type_1.properties, new {});
@@ -96,7 +96,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_1", "_all"));
+				this.Do(()=> _client.IndicesGetMapping("test_1", "_all"));
 
 				//match _response.test_1.mappings.type_1.properties: 
 				this.IsMatch(_response.test_1.mappings.type_1.properties, new {});
@@ -118,7 +118,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_1", "*"));
+				this.Do(()=> _client.IndicesGetMapping("test_1", "*"));
 
 				//match _response.test_1.mappings.type_1.properties: 
 				this.IsMatch(_response.test_1.mappings.type_1.properties, new {});
@@ -140,7 +140,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_1", "type_1"));
+				this.Do(()=> _client.IndicesGetMapping("test_1", "type_1"));
 
 				//match _response.test_1.mappings.type_1.properties: 
 				this.IsMatch(_response.test_1.mappings.type_1.properties, new {});
@@ -162,7 +162,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_1", "type_1,type_2"));
+				this.Do(()=> _client.IndicesGetMapping("test_1", "type_1,type_2"));
 
 				//match _response.test_1.mappings.type_1.properties: 
 				this.IsMatch(_response.test_1.mappings.type_1.properties, new {});
@@ -184,7 +184,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_1", "*2"));
+				this.Do(()=> _client.IndicesGetMapping("test_1", "*2"));
 
 				//match _response.test_1.mappings.type_2.properties: 
 				this.IsMatch(_response.test_1.mappings.type_2.properties, new {});
@@ -206,7 +206,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMappingForAll("type_2"));
+				this.Do(()=> _client.IndicesGetMappingForAll("type_2"));
 
 				//match _response.test_1.mappings.type_2.properties: 
 				this.IsMatch(_response.test_1.mappings.type_2.properties, new {});
@@ -231,7 +231,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("_all", "type_2"));
+				this.Do(()=> _client.IndicesGetMapping("_all", "type_2"));
 
 				//match _response.test_1.mappings.type_2.properties: 
 				this.IsMatch(_response.test_1.mappings.type_2.properties, new {});
@@ -256,7 +256,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("*", "type_2"));
+				this.Do(()=> _client.IndicesGetMapping("*", "type_2"));
 
 				//match _response.test_1.mappings.type_2.properties: 
 				this.IsMatch(_response.test_1.mappings.type_2.properties, new {});
@@ -281,7 +281,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("test_1,test_2", "type_2"));
+				this.Do(()=> _client.IndicesGetMapping("test_1,test_2", "type_2"));
 
 				//match _response.test_1.mappings.type_2.properties: 
 				this.IsMatch(_response.test_1.mappings.type_2.properties, new {});
@@ -303,7 +303,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetMapping1
 			{	
 
 				//do indices.get_mapping 
-				this.Do(()=> this._client.IndicesGetMapping("*2", "type_2"));
+				this.Do(()=> _client.IndicesGetMapping("*2", "type_2"));
 
 				//match _response.test_2.mappings.type_2.properties: 
 				this.IsMatch(_response.test_2.mappings.type_2.properties, new {});

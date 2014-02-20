@@ -119,33 +119,12 @@ namespace CodeGeneration.LowLevelClient
 			Func<string, bool> mc = (s) => method.FullName.Contains(s);
 			Func<string, bool> pc = (s) => method.Path.Contains(s);
 
-			//if (ms("IndicesStats") && pc("{index}"))
-				//method.FullName = method.FullName.Replace("IndicesStats", "IndexStats");
-			//IndicesPutAliasPutAsync
-			//if (ms("IndicesPutAlias") && pc("{index}"))
-				//method.FullName = method.FullName.Replace("IndicesPutAlias", "IndexPutAlias");
-
-			if (ms("IndicesStats") || ms("IndexStats"))
-			{
-				if (pc("/indexing/"))
-					method.FullName = method.FullName.Replace("Stats", "IndexingStats");
-				if (pc("/search/"))
-					method.FullName = method.FullName.Replace("Stats", "SearchStats");
-				if (pc("/fielddata/"))
-					method.FullName = method.FullName.Replace("Stats", "FieldDataStats");
-			}
 
 			if (ms("Indices") && !pc("{index}"))
 				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
 			
 			if (ms("Nodes") && !pc("{node_id}"))
 				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
-			
-			//if (ms("IndicesGetSettings") && !pc("{index}") && pc("{"))
-			//	method.FullName = method.FullName.Replace("IndicesGetSettings", "IndicesSettings");
-			
-			//if (ms("IndicesGetMapping") && !pc("{index}") && pc("{"))
-			//	method.FullName = method.FullName.Replace("IndicesGetMapping", "IndicesGetGlobalSettings");
 			
 			//remove duplicate occurance of the HTTP method name
 			var m = method.HttpMethod.ToPascalCase();

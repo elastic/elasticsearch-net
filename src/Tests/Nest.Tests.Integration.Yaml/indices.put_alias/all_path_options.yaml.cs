@@ -20,13 +20,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index1", null));
+				this.Do(()=> _client.IndicesCreate("test_index1", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test_index2", null));
+				this.Do(()=> _client.IndicesCreate("test_index2", null));
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("foo", null));
+				this.Do(()=> _client.IndicesCreate("foo", null));
 
 			}
 		}
@@ -40,13 +40,13 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index1", "alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index1", "alias", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index2", "alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index2", "alias", null));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias"));
 
 				//match _response.test_index1.aliases.alias: 
 				this.IsMatch(_response.test_index1.aliases.alias, new {});
@@ -68,10 +68,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("_all", "alias", null));
+				this.Do(()=> _client.IndicesPutAlias("_all", "alias", null));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias"));
 
 				//match _response.test_index1.aliases.alias: 
 				this.IsMatch(_response.test_index1.aliases.alias, new {});
@@ -93,10 +93,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("*", "alias", null));
+				this.Do(()=> _client.IndicesPutAlias("*", "alias", null));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias"));
 
 				//match _response.test_index1.aliases.alias: 
 				this.IsMatch(_response.test_index1.aliases.alias, new {});
@@ -118,10 +118,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_*", "alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_*", "alias", null));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias"));
 
 				//match _response.test_index1.aliases.alias: 
 				this.IsMatch(_response.test_index1.aliases.alias, new {});
@@ -143,10 +143,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test_index1,test_index2", "alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test_index1,test_index2", "alias", null));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias"));
 
 				//match _response.test_index1.aliases.alias: 
 				this.IsMatch(_response.test_index1.aliases.alias, new {});
@@ -168,10 +168,10 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasForAll("alias", null));
+				this.Do(()=> _client.IndicesPutAliasForAll("alias", null));
 
 				//do indices.get_alias 
-				this.Do(()=> this._client.IndicesGetAliasForAll("alias"));
+				this.Do(()=> _client.IndicesGetAliasForAll("alias"));
 
 				//match _response.test_index1.aliases.alias: 
 				this.IsMatch(_response.test_index1.aliases.alias, new {});
@@ -193,7 +193,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesPutAlias2
 			{	
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAliasForAll("", null), shouldCatch: @"param");
+				this.Do(()=> _client.IndicesPutAliasForAll("", null), shouldCatch: @"param");
 
 			}
 		}

@@ -23,10 +23,10 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 				_body = new {
 					text= "The quick brown fox is brown."
 				};
-				this.Do(()=> this._client.IndexPost("testidx", "testtype", "testing_document", _body));
+				this.Do(()=> _client.Index("testidx", "testtype", "testing_document", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 			}
 		}
@@ -40,7 +40,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 			{	
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("blocks"));
+				this.Do(()=> _client.ClusterState("blocks"));
 
 				//is_true _response.blocks; 
 				this.IsTrue(_response.blocks);
@@ -77,10 +77,10 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 				_body = new Dictionary<string, object> {
 					{ @"index.blocks.read_only", @"true" }
 				};
-				this.Do(()=> this._client.IndicesPutSettings("testidx", _body));
+				this.Do(()=> _client.IndicesPutSettings("testidx", _body));
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("blocks"));
+				this.Do(()=> _client.ClusterState("blocks"));
 
 				//is_true _response.blocks; 
 				this.IsTrue(_response.blocks);
@@ -114,7 +114,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 			{	
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("nodes"));
+				this.Do(()=> _client.ClusterState("nodes"));
 
 				//is_false _response.blocks; 
 				this.IsFalse(_response.blocks);
@@ -145,7 +145,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 			{	
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("metadata"));
+				this.Do(()=> _client.ClusterState("metadata"));
 
 				//is_false _response.blocks; 
 				this.IsFalse(_response.blocks);
@@ -176,7 +176,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 			{	
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("routing_table"));
+				this.Do(()=> _client.ClusterState("routing_table"));
 
 				//is_false _response.blocks; 
 				this.IsFalse(_response.blocks);
@@ -213,7 +213,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 						number_of_shards= "1"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplateForAll("test1", _body));
+				this.Do(()=> _client.IndicesPutTemplateForAll("test1", _body));
 
 				//do indices.put_template 
 				_body = new {
@@ -222,7 +222,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 						number_of_shards= "2"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplateForAll("test2", _body));
+				this.Do(()=> _client.IndicesPutTemplateForAll("test2", _body));
 
 				//do indices.put_template 
 				_body = new {
@@ -231,10 +231,10 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 						number_of_shards= "3"
 					}
 				};
-				this.Do(()=> this._client.IndicesPutTemplateForAll("foo", _body));
+				this.Do(()=> _client.IndicesPutTemplateForAll("foo", _body));
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("metadata", nv=>nv
+				this.Do(()=> _client.ClusterState("metadata", nv=>nv
 					.Add("index_templates", new [] {
 						@"test1",
 						@"test2"
@@ -282,13 +282,13 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 				_body = new {
 					text= "The quick brown fox is brown."
 				};
-				this.Do(()=> this._client.IndexPost("another", "type", "testing_document", _body));
+				this.Do(()=> _client.Index("another", "type", "testing_document", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("routing_table,metadata", "testidx"));
+				this.Do(()=> _client.ClusterState("routing_table,metadata", "testidx"));
 
 				//is_false _response.metadata.indices.another; 
 				this.IsFalse(_response.metadata.indices.another);
@@ -313,7 +313,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterState2
 			{	
 
 				//do cluster.state 
-				this.Do(()=> this._client.ClusterStateGet("_all", "_all"));
+				this.Do(()=> _client.ClusterState("_all", "_all"));
 
 				//is_true _response.blocks; 
 				this.IsTrue(_response.blocks);

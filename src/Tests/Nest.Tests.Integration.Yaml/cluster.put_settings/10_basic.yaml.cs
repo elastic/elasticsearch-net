@@ -28,7 +28,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings1
 						 { "discovery.zen.minimum_master_nodes",  "1" }
 					}
 				};
-				this.Do(()=> this._client.ClusterPutSettings(_body, nv=>nv
+				this.Do(()=> _client.ClusterPutSettings(_body, nv=>nv
 					.Add("flat_settings", @"true")
 				));
 
@@ -38,7 +38,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPutSettings1
 				});
 
 				//do cluster.get_settings 
-				this.Do(()=> this._client.ClusterGetSettings(nv=>nv
+				this.Do(()=> _client.ClusterGetSettings(nv=>nv
 					.Add("flat_settings", @"true")
 				));
 

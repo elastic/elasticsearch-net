@@ -503,7 +503,7 @@ namespace Nest.Tests.Integration.Search
 			var queryResults = this.SearchRaw<ElasticsearchProject>(query);
 
 			//assert
-			Assert.IsTrue(queryResults.Hits.First().Highlights["content"].Highlights.Count() > 0);
+			Assert.IsTrue(queryResults.Hits.First().Highlights["content"].Highlights.Any());
 		}
 
 		[Test]
@@ -513,7 +513,7 @@ namespace Nest.Tests.Integration.Search
 			var searchDescriptor = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q=>q.MatchAll());
 			var request = this._client.Serializer.Serialize(searchDescriptor);
-			var result = this._client.Raw.SearchPost(request);
+			var result = this._client.Raw.Search(request);
 			Assert.NotNull(result);
 			Assert.True(result.Success);
 			Assert.IsNotEmpty(result.Result);

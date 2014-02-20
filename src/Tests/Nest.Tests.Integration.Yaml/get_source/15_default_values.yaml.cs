@@ -26,10 +26,10 @@ namespace Nest.Tests.Integration.Yaml.GetSource2
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do get_source 
-				this.Do(()=> this._client.GetSource("test_1", "_all", "1"));
+				this.Do(()=> _client.GetSource("test_1", "_all", "1"));
 
 				//match this._status: 
 				this.IsMatch(this._status, new {

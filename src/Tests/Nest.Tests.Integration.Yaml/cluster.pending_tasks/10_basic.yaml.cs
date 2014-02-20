@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPendingTasks1
 			{	
 
 				//do cluster.pending_tasks 
-				this.Do(()=> this._client.ClusterPendingTasksGet());
+				this.Do(()=> _client.ClusterPendingTasks());
 
 				//is_true _response.tasks; 
 				this.IsTrue(_response.tasks);
@@ -39,7 +39,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterPendingTasks1
 			{	
 
 				//do cluster.pending_tasks 
-				this.Do(()=> this._client.ClusterPendingTasksGet(nv=>nv
+				this.Do(()=> _client.ClusterPendingTasks(nv=>nv
 					.Add("local", @"true")
 				));
 

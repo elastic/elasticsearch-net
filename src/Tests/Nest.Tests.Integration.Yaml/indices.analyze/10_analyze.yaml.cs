@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 			{	
 
 				//do ping 
-				this.Do(()=> this._client.PingHead());
+				this.Do(()=> _client.Ping());
 
 			}
 		}
@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 			{	
 
 				//do indices.analyze 
-				this.Do(()=> this._client.IndicesAnalyzeGetForAll(nv=>nv
+				this.Do(()=> _client.IndicesAnalyzeGetForAll(nv=>nv
 					.Add("text", @"Foo Bar")
 				));
 
@@ -58,7 +58,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 			{	
 
 				//do indices.analyze 
-				this.Do(()=> this._client.IndicesAnalyzeGetForAll(nv=>nv
+				this.Do(()=> _client.IndicesAnalyzeGetForAll(nv=>nv
 					.Add("filters", @"lowercase")
 					.Add("text", @"Foo Bar")
 					.Add("tokenizer", @"keyword")
@@ -93,15 +93,15 @@ namespace Nest.Tests.Integration.Yaml.IndicesAnalyze1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test", _body));
+				this.Do(()=> _client.IndicesCreate("test", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"yellow")
 				));
 
 				//do indices.analyze 
-				this.Do(()=> this._client.IndicesAnalyzeGet("test", nv=>nv
+				this.Do(()=> _client.IndicesAnalyzeGet("test", nv=>nv
 					.Add("field", @"text")
 					.Add("text", @"Foo Bar!")
 				));

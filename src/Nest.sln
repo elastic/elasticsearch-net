@@ -43,6 +43,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration.Yaml
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.YamlTestsRunner", "CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj", "{04F53AA5-6346-4139-94CF-81BD8663875F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B2E73B9B-3672-4FD4-955A-4C093BF9D37F}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeGeneration|Any CPU = CodeGeneration|Any CPU
@@ -211,6 +216,9 @@ Global
 		{733A7657-69E9-444A-8AC0-BC123127A59A} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
 		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj

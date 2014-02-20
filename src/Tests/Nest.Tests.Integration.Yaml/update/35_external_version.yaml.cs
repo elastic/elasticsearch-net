@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.Update7
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("version", 2)
 					.Add("version_type", @"external")
 				));
@@ -48,7 +48,7 @@ namespace Nest.Tests.Integration.Yaml.Update7
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("version", 2)
 					.Add("version_type", @"external")
 				), shouldCatch: @"conflict");
@@ -62,7 +62,7 @@ namespace Nest.Tests.Integration.Yaml.Update7
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("version", 3)
 					.Add("version_type", @"external")
 				));

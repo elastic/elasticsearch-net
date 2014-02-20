@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_index", _body));
+				this.Do(()=> _client.IndicesCreate("test_index", _body));
 
 			}
 		}
@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMappingForAll("text"));
+				this.Do(()=> _client.IndicesGetFieldMappingForAll("text"));
 
 				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
@@ -61,7 +61,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "text"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "text"));
 
 				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
@@ -77,7 +77,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "test_type", "text"));
 
 				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
@@ -93,7 +93,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text,text1"));
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "test_type", "text,text1"));
 
 				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");
@@ -112,7 +112,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
+				this.Do(()=> _client.IndicesGetFieldMapping("test_index", "test_type", "text", nv=>nv
 					.Add("include_defaults", @"true")
 				));
 
@@ -133,7 +133,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesGetFieldMapping1
 			{	
 
 				//do indices.get_field_mapping 
-				this.Do(()=> this._client.IndicesGetFieldMappingForAll("test_type", "text"));
+				this.Do(()=> _client.IndicesGetFieldMappingForAll("test_type", "text"));
 
 				//match _response.test_index.mappings.test_type.text.mapping.text.type: 
 				this.IsMatch(_response.test_index.mappings.test_type.text.mapping.text.type, @"string");

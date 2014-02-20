@@ -26,13 +26,13 @@ namespace Nest.Tests.Integration.Yaml.Delete1
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//match _response._version: 
 				this.IsMatch(_response._version, 1);
 
 				//do delete 
-				this.Do(()=> this._client.Delete("test_1", "test", "1"));
+				this.Do(()=> _client.Delete("test_1", "test", "1"));
 
 				//match _response._version: 
 				this.IsMatch(_response._version, 2);

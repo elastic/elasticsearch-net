@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesClearCache1
 			{	
 
 				//do indices.clear_cache 
-				this.Do(()=> this._client.IndicesClearCachePostForAll());
+				this.Do(()=> _client.IndicesClearCacheForAll());
 
 			}
 		}

@@ -32,16 +32,16 @@ namespace Nest.Tests.Integration.Yaml.Mtermvectors1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("testidx", _body));
+				this.Do(()=> _client.IndicesCreate("testidx", _body));
 
 				//do index 
 				_body = new {
 					text= "The quick brown fox is brown."
 				};
-				this.Do(()=> this._client.IndexPost("testidx", "testtype", "testing_document", _body));
+				this.Do(()=> _client.Index("testidx", "testtype", "testing_document", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 			}
 		}
@@ -64,7 +64,7 @@ namespace Nest.Tests.Integration.Yaml.Mtermvectors1
 						}
 					}
 				};
-				this.Do(()=> this._client.MtermvectorsPost(_body, nv=>nv
+				this.Do(()=> _client.Mtermvectors(_body, nv=>nv
 					.Add("term_statistics", @"true")
 				));
 
@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Yaml.Mtermvectors1
 						}
 					}
 				};
-				this.Do(()=> this._client.MtermvectorsPost(_body, nv=>nv
+				this.Do(()=> _client.Mtermvectors(_body, nv=>nv
 					.Add("term_statistics", @"true")
 				));
 
@@ -103,7 +103,7 @@ namespace Nest.Tests.Integration.Yaml.Mtermvectors1
 						}
 					}
 				};
-				this.Do(()=> this._client.MtermvectorsPost("testidx", _body, nv=>nv
+				this.Do(()=> _client.Mtermvectors("testidx", _body, nv=>nv
 					.Add("term_statistics", @"true")
 				));
 
@@ -121,7 +121,7 @@ namespace Nest.Tests.Integration.Yaml.Mtermvectors1
 						}
 					}
 				};
-				this.Do(()=> this._client.MtermvectorsPost("testidx", "testtype", _body, nv=>nv
+				this.Do(()=> _client.Mtermvectors("testidx", "testtype", _body, nv=>nv
 					.Add("term_statistics", @"true")
 				));
 
@@ -132,7 +132,7 @@ namespace Nest.Tests.Integration.Yaml.Mtermvectors1
 				this.IsMatch(_response.docs[0].term_vectors.text.terms.brown.ttf, 2);
 
 				//do mtermvectors 
-				this.Do(()=> this._client.MtermvectorsGet("testidx", "testtype", nv=>nv
+				this.Do(()=> _client.MtermvectorsGet("testidx", "testtype", nv=>nv
 					.Add("term_statistics", @"true")
 					.Add("ids", new [] {
 						@"testing_document"

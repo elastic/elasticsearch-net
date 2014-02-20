@@ -26,10 +26,10 @@ namespace Nest.Tests.Integration.Yaml.Get1
 				_body = new {
 					foo= "Hello= Ã¤Â¸Â­Ã¦â€“â€¡"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "ä¸­æ–‡", _body));
+				this.Do(()=> _client.Index("test_1", "test", "ä¸­æ–‡", _body));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "ä¸­æ–‡"));
+				this.Do(()=> _client.Get("test_1", "test", "ä¸­æ–‡"));
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test_1");
@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Yaml.Get1
 				});
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "_all", "ä¸­æ–‡"));
+				this.Do(()=> _client.Get("test_1", "_all", "ä¸­æ–‡"));
 
 				//match _response._index: 
 				this.IsMatch(_response._index, @"test_1");

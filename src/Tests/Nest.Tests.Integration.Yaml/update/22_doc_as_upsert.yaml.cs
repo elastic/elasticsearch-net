@@ -30,10 +30,10 @@ namespace Nest.Tests.Integration.Yaml.Update4
 					},
 					doc_as_upsert= "1"
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Update("test_1", "test", "1", _body));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1"));
+				this.Do(()=> _client.Get("test_1", "test", "1"));
 
 				//match _response._source.foo: 
 				this.IsMatch(_response._source.foo, @"bar");
@@ -48,10 +48,10 @@ namespace Nest.Tests.Integration.Yaml.Update4
 					},
 					doc_as_upsert= "1"
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Update("test_1", "test", "1", _body));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1"));
+				this.Do(()=> _client.Get("test_1", "test", "1"));
 
 				//match _response._source.foo: 
 				this.IsMatch(_response._source.foo, @"bar");

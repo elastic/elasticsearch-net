@@ -27,10 +27,10 @@ namespace Nest.Tests.Integration.Yaml.Get3
 					foo= "bar",
 					count= "1"
 				};
-				this.Do(()=> this._client.IndexPost("test_1", "test", "1", _body));
+				this.Do(()=> _client.Index("test_1", "test", "1", _body));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", @"foo")
 				));
 
@@ -52,7 +52,7 @@ namespace Nest.Tests.Integration.Yaml.Get3
 				this.IsFalse(_response._source);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", new [] {
 						@"foo",
 						@"count"
@@ -73,7 +73,7 @@ namespace Nest.Tests.Integration.Yaml.Get3
 				this.IsFalse(_response._source);
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("fields", new [] {
 						@"foo",
 						@"count",

@@ -26,7 +26,7 @@ namespace Nest.Tests.Integration.Yaml.Mpercolate1
 				_body = new {
 					foo= "bar"
 				};
-				this.Do(()=> this._client.IndexPost("percolator_index", "my_type", "1", _body));
+				this.Do(()=> _client.Index("percolator_index", "my_type", "1", _body));
 
 				//do index 
 				_body = new {
@@ -34,7 +34,7 @@ namespace Nest.Tests.Integration.Yaml.Mpercolate1
 						match_all= new {}
 					}
 				};
-				this.Do(()=> this._client.IndexPost("percolator_index", ".percolator", "test_percolator", _body));
+				this.Do(()=> _client.Index("percolator_index", ".percolator", "test_percolator", _body));
 
 				//do mpercolate 
 				_body = new dynamic[] {
@@ -45,7 +45,7 @@ namespace Nest.Tests.Integration.Yaml.Mpercolate1
 					new {percolate=new {index="percolator_index",type="my_type",id="1"}},
 					new {doc=new {foo="bar"}}
 				};
-				this.Do(()=> this._client.MpercolatePost(_body));
+				this.Do(()=> _client.Mpercolate(_body));
 
 				//match _response.responses[0].total: 
 				this.IsMatch(_response.responses[0].total, 1);

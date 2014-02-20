@@ -31,7 +31,7 @@ namespace Nest.Tests.Integration.Yaml.CatAliases1
 			{	
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet(nv=>nv
+				this.Do(()=> _client.CatAliases(nv=>nv
 					.Add("help", @"true")
 				));
 
@@ -55,7 +55,7 @@ $/
 			{	
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet());
+				this.Do(()=> _client.CatAliases());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^ $/
@@ -72,13 +72,13 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test", null));
+				this.Do(()=> _client.IndicesCreate("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test", "test_alias", null));
+				this.Do(()=> _client.IndicesPutAlias("test", "test_alias", null));
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet());
+				this.Do(()=> _client.CatAliases());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
@@ -101,7 +101,7 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test", null));
+				this.Do(()=> _client.IndicesCreate("test", null));
 
 				//do indices.put_alias 
 				_body = new {
@@ -113,10 +113,10 @@ $/
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesPutAlias("test", "test_alias", _body));
+				this.Do(()=> _client.IndicesPutAlias("test", "test_alias", _body));
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet());
+				this.Do(()=> _client.CatAliases());
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^
@@ -139,28 +139,28 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test", null));
+				this.Do(()=> _client.IndicesCreate("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test", "test_1", null));
+				this.Do(()=> _client.IndicesPutAlias("test", "test_1", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test", "test_2", null));
+				this.Do(()=> _client.IndicesPutAlias("test", "test_2", null));
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet("test_1"));
+				this.Do(()=> _client.CatAliases("test_1"));
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^test_1 .+ \n$/");
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet("test_2"));
+				this.Do(()=> _client.CatAliases("test_2"));
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/^test_2 .+ \n$/");
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet("test_*"));
+				this.Do(()=> _client.CatAliases("test_*"));
 
 				//match this._status: 
 				this.IsMatch(this._status, @"/ (^|\n)test_1 .+ \n/");
@@ -179,19 +179,18 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test", null));
+				this.Do(()=> _client.IndicesCreate("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test", "test_1", null));
+				this.Do(()=> _client.IndicesPutAlias("test", "test_1", null));
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet(nv=>nv
+				this.Do(()=> _client.CatAliases(nv=>nv
 					.Add("v", @"true")
 				));
 
 				//match this._status: 
-				this.IsMatch(this._status, @"/^  
-	alias           \s+
+				this.IsMatch(this._status, @"/^  alias           \s+
     index           \s+
     filter          \s+
     routing.index   \s+
@@ -216,13 +215,13 @@ $/
 			{	
 
 				//do indices.create 
-				this.Do(()=> this._client.IndicesCreatePut("test", null));
+				this.Do(()=> _client.IndicesCreate("test", null));
 
 				//do indices.put_alias 
-				this.Do(()=> this._client.IndicesPutAlias("test", "test_1", null));
+				this.Do(()=> _client.IndicesPutAlias("test", "test_1", null));
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet(nv=>nv
+				this.Do(()=> _client.CatAliases(nv=>nv
 					.Add("h", new [] {
 						@"index",
 						@"alias"
@@ -233,7 +232,7 @@ $/
 				this.IsMatch(this._status, @"/^ test \s+ test_1 \s+ $/");
 
 				//do cat.aliases 
-				this.Do(()=> this._client.CatAliasesGet(nv=>nv
+				this.Do(()=> _client.CatAliases(nv=>nv
 					.Add("h", new [] {
 						@"index",
 						@"alias"

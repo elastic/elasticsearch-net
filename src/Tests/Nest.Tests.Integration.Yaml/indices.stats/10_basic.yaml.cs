@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesStats1
 			{	
 
 				//do indices.stats 
-				this.Do(()=> this._client.IndicesStatsGetForAll());
+				this.Do(()=> _client.IndicesStatsForAll());
 
 			}
 		}

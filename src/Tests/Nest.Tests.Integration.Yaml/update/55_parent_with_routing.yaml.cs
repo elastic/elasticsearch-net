@@ -35,10 +35,10 @@ namespace Nest.Tests.Integration.Yaml.Update10
 						number_of_replicas= "0"
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("test_1", _body));
+				this.Do(()=> _client.IndicesCreate("test_1", _body));
 
 				//do cluster.health 
-				this.Do(()=> this._client.ClusterHealthGet(nv=>nv
+				this.Do(()=> _client.ClusterHealth(nv=>nv
 					.Add("wait_for_status", @"green")
 				));
 
@@ -51,13 +51,13 @@ namespace Nest.Tests.Integration.Yaml.Update10
 						foo= "bar"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("parent", 5)
 					.Add("routing", 4)
 				));
 
 				//do get 
-				this.Do(()=> this._client.Get("test_1", "test", "1", nv=>nv
+				this.Do(()=> _client.Get("test_1", "test", "1", nv=>nv
 					.Add("routing", 4)
 					.Add("parent", 5)
 					.Add("fields", new [] {
@@ -78,7 +78,7 @@ namespace Nest.Tests.Integration.Yaml.Update10
 						foo= "baz"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("parent", 5)
 				), shouldCatch: @"missing");
 
@@ -88,7 +88,7 @@ namespace Nest.Tests.Integration.Yaml.Update10
 						foo= "baz"
 					}
 				};
-				this.Do(()=> this._client.UpdatePost("test_1", "test", "1", _body, nv=>nv
+				this.Do(()=> _client.Update("test_1", "test", "1", _body, nv=>nv
 					.Add("parent", 5)
 					.Add("routing", 4)
 					.Add("fields", @"foo")

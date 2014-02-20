@@ -32,16 +32,16 @@ namespace Nest.Tests.Integration.Yaml.Termvector1
 						}
 					}
 				};
-				this.Do(()=> this._client.IndicesCreatePut("testidx", _body));
+				this.Do(()=> _client.IndicesCreate("testidx", _body));
 
 				//do index 
 				_body = new {
 					text= "The quick brown fox is brown."
 				};
-				this.Do(()=> this._client.IndexPost("testidx", "testtype", "testing_document", _body));
+				this.Do(()=> _client.Index("testidx", "testtype", "testing_document", _body));
 
 				//do indices.refresh 
-				this.Do(()=> this._client.IndicesRefreshPostForAll());
+				this.Do(()=> _client.IndicesRefreshForAll());
 
 			}
 		}
@@ -55,7 +55,7 @@ namespace Nest.Tests.Integration.Yaml.Termvector1
 			{	
 
 				//do termvector 
-				this.Do(()=> this._client.TermvectorGet("testidx", "testtype", "testing_document", nv=>nv
+				this.Do(()=> _client.TermvectorGet("testidx", "testtype", "testing_document", nv=>nv
 					.Add("term_statistics", @"true")
 				));
 

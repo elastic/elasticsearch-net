@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.ClusterReroute1
 			{	
 
 				//do cluster.reroute 
-				this.Do(()=> this._client.ClusterReroutePost(null));
+				this.Do(()=> _client.ClusterReroute(null));
 
 			}
 		}

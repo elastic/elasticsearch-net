@@ -57,7 +57,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 		public void SendStringAsJsonBody()
 		{
 			var jsonAsString = "{ \"json_as_a_string\" : true}";
-			var result = this._client.Raw.BulkPost(jsonAsString, qs => qs
+			var result = this._client.Raw.Bulk(jsonAsString, qs => qs
 				.Replication(ReplicationOptions.Async)
 				.Refresh(true)
 			);
@@ -69,7 +69,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 		public void SendAnonymousObjectAsJsonBody()
 		{
             var jsonAsString = string.Format("{{{0}  \"json_as_a_string\": true{0}}}", System.Environment.NewLine);
-			var result = this._client.Raw.BulkPost(
+			var result = this._client.Raw.Bulk(
 				new { json_as_a_string = true }
 				, qs => qs
 					.Replication(ReplicationOptions.Async)

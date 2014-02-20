@@ -23,7 +23,7 @@ namespace Nest.Tests.Integration.Yaml.IndicesSnapshotIndex1
 			{	
 
 				//do indices.snapshot_index 
-				this.Do(()=> this._client.IndicesSnapshotIndexPostForAll());
+				this.Do(()=> _client.IndicesSnapshotIndexForAll());
 
 			}
 		}
