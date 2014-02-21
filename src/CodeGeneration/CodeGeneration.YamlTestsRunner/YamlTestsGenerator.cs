@@ -26,8 +26,8 @@ namespace CodeGeneration.YamlTestsRunner
 	{
 		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.0.0/rest-api-spec/test";
 		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.0.0/rest-api-spec/test/";
-		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Nest.Tests.Integration.Yaml\";
-		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Nest\IElasticsearch.generated.cs";
+		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Elasticsearch.Net.Integration.Yaml\";
+		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Elasticsearch.Net\IElasticsearchClient.generated.cs";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _cacheFolder = @"..\..\YamlCache\";
 		
@@ -51,8 +51,8 @@ namespace CodeGeneration.YamlTestsRunner
 			RegisterView("DispatchSteps");
 			RegisterView("SetupClass");
 			var rawCalls = from l in File.ReadAllLines(_rawClientInterface)
-				where Regex.IsMatch(l, @"\tConnectionStatus ")
-				select l.Replace("\t\tConnectionStatus", "").Trim();
+				where Regex.IsMatch(l, @"\tElasticsearchResponse ")
+				select l.Replace("\t\tElasticsearchResponse", "").Trim();
 			RawElasticCalls = rawCalls.ToList();
 		}
 
@@ -196,7 +196,7 @@ namespace CodeGeneration.YamlTestsRunner
 
 		public static void GenerateProject(YamlSpecification specification)
 		{
-			var project = CsProjFile.LoadFrom(_testProjectFolder + @"Nest.Tests.Integration.Yaml.csproj");
+			var project = CsProjFile.LoadFrom(_testProjectFolder + @"Elasticsearch.Net.Integration.Yaml.csproj");
 			var existingYamlTests = project.All<CodeFile>().Where(c=>c.Link != null && c.Link.EndsWith(".yaml.cs"));
 			foreach (var c in existingYamlTests)
 				project.Remove(c);

@@ -7,14 +7,12 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Nest;
 using NUnit.Framework;
-using Nest.Tests.Integration.Yaml;
 @{
 	YamlDefinition m = Model;
 }
 
-namespace Nest.Tests.Integration.Yaml.@(m.Folder.ToPascalCase())
+namespace Elasticsearch.Net.Integration.Yaml.@(m.Folder.ToPascalCase())
 {
 	public partial class @(m.Folder.ToPascalCase())YamlTests
 	{	@RenderPage("SetupClass.cshtml", m)
