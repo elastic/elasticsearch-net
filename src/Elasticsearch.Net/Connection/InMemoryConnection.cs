@@ -13,27 +13,27 @@ namespace Nest
 	/// </summary>
 	public class InMemoryConnection : Connection
 	{
-		private ConnectionStatus _fixedResult;
+		private ElasticsearchResponse _fixedResult;
 
-		public InMemoryConnection(IConnectionSettings settings)
+		public InMemoryConnection(IConnectionSettings2 settings)
 			: base(settings)
 		{
 
 		}
-		public InMemoryConnection(IConnectionSettings settings, ConnectionStatus fixedResult)
+		public InMemoryConnection(IConnectionSettings2 settings, ElasticsearchResponse fixedResult)
 			: base(settings)
 		{
 			this._fixedResult = fixedResult;
 		}
 
-		protected override ConnectionStatus DoSynchronousRequest(HttpWebRequest request, byte[] data = null)
+		protected override ElasticsearchResponse DoSynchronousRequest(HttpWebRequest request, byte[] data = null)
 		{
 			return this.ReturnConnectionStatus(request, data);
 		}
 
-		private ConnectionStatus ReturnConnectionStatus(HttpWebRequest request, byte[] data)
+		private ElasticsearchResponse ReturnConnectionStatus(HttpWebRequest request, byte[] data)
 		{
-			var cs = this._fixedResult ?? new ConnectionStatus(this._ConnectionSettings, "{ \"USING NEST IN MEMORY CONNECTION\"  : null }")
+			var cs = this._fixedResult ?? new ElasticsearchResponse(this._ConnectionSettings, "{ \"USING NEST IN MEMORY CONNECTION\"  : null }")
 			{
 				Request = data.Utf8String(),
 				RequestUrl = request.RequestUri.ToString(),
@@ -43,9 +43,9 @@ namespace Nest
 			return cs;
 		}
 
-		protected override Task<ConnectionStatus> DoAsyncRequest(HttpWebRequest request, byte[] data = null)
+		protected override Task<ElasticsearchResponse> DoAsyncRequest(HttpWebRequest request, byte[] data = null)
 		{
-			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
 			{
 				var cs = this.ReturnConnectionStatus(request, data);
 				_ConnectionSettings.ConnectionStatusHandler(cs);

@@ -11,7 +11,7 @@ namespace Nest
 {
 	public class ElasticInferrer
 	{
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 				return (this._connectionSettings == null) ? string.Empty : this._connectionSettings.DefaultIndex;
 			}
 		}
-		public ElasticInferrer(IConnectionSettings connectionSettings)
+		public ElasticInferrer(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 			this.IdResolver = new IdResolver();

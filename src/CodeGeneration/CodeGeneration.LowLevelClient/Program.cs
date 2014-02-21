@@ -16,6 +16,7 @@ namespace CodeGeneration.LowLevelClient
 			ApiGenerator.GenerateClientInterface(spec);
 
 			ApiGenerator.GenerateQueryStringParameters(spec);
+			ApiGenerator.GenerateQueryStringParametersExtensions(spec);
 			
 			ApiGenerator.GenerateDescriptors(spec);
 

@@ -14,9 +14,9 @@ namespace Nest
 	{
 		internal string _Index { get; set; }
 		internal IndexSettings _IndexSettings = new IndexSettings();
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
-		public CreateIndexDescriptor(IConnectionSettings connectionSettings)
+		public CreateIndexDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 		}
@@ -149,8 +149,7 @@ namespace Nest
 		}
 
 
-		ElasticsearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(
-			IConnectionSettings settings)
+		ElasticsearchPathInfo<CreateIndexQueryString> IPathInfo<CreateIndexQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = new ElasticsearchPathInfo<CreateIndexQueryString>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

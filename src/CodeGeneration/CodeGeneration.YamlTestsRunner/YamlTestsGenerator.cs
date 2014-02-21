@@ -27,7 +27,7 @@ namespace CodeGeneration.YamlTestsRunner
 		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.0.0/rest-api-spec/test";
 		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.0.0/rest-api-spec/test/";
 		private readonly static string _testProjectFolder = @"..\..\..\..\..\src\Tests\Nest.Tests.Integration.Yaml\";
-		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Nest\IRawElasticClient.generated.cs";
+		private readonly static string _rawClientInterface = @"..\..\..\..\..\src\Nest\IElasticsearch.generated.cs";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _cacheFolder = @"..\..\YamlCache\";
 		

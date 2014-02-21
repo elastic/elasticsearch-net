@@ -15,7 +15,7 @@ namespace Nest
 		IndicesOptionalExplicitAllPathDescriptor<FlushDescriptor, FlushQueryString>
 		, IPathInfo<FlushQueryString>
 	{
-		ElasticsearchPathInfo<FlushQueryString> IPathInfo<FlushQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<FlushQueryString> IPathInfo<FlushQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<FlushQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

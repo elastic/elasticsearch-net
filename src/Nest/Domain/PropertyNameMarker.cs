@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 
 	
-	//[JsonConverter(typeof(TypeNameMarkerConverter))]
 	/// <summary>
 	/// Represents a typed container for property names i.e "property" in "field.nested.property";
 	/// </summary>

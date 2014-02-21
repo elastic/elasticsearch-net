@@ -40,7 +40,7 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<AliasQueryString> IPathInfo<AliasQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<AliasQueryString> IPathInfo<AliasQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = new ElasticsearchPathInfo<AliasQueryString>();
 			pathInfo.QueryString = this._QueryString;

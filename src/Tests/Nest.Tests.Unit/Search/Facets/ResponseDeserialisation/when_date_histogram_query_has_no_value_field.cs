@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Search.Facets.ResponseDeserialisation
 
 			connectionMockery
 				.Setup(status => status.PostSync("index/_search", It.IsAny<byte[]>()))
-				.Returns(new ConnectionStatus(connectionSettings, mockJsonResponse));
+				.Returns(new ElasticsearchResponse(connectionSettings, mockJsonResponse));
 
 			var client = new ElasticClient(connectionSettings, connectionMockery.Object);
 

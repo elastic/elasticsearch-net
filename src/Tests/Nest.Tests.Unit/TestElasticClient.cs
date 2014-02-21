@@ -12,6 +12,7 @@ namespace Nest.Tests.Unit
 		static TestElasticClient()
 		{
 			Settings = new ConnectionSettings(Test.Default.Uri,"nest_test_data");
+
 			Client = new ElasticClient(Settings);
 		}
 		public static string Serialize<T>(T obj) where T : class

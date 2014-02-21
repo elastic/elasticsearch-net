@@ -12,11 +12,11 @@ namespace Nest
 		, IPathInfo<PutMappingQueryString> 
 		where T : class
 	{
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 		internal RootObjectMapping _Mapping { get; set; }
 		public ElasticInferrer Infer { get; set; }
 
-		public PutMappingDescriptor(IConnectionSettings connectionSettings)
+		public PutMappingDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 			this._Mapping = new RootObjectMapping() {  };
@@ -230,7 +230,7 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<PutMappingQueryString> IPathInfo<PutMappingQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<PutMappingQueryString> IPathInfo<PutMappingQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<PutMappingQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;

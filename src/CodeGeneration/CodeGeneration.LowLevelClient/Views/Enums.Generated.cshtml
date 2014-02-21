@@ -8,14 +8,18 @@
    (string o)
 	{
 		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}", o, o.ToPascalCase());
+	}	
+	private string CreateCase
+		
+   (string e, string o)
+	{
+		return string.Format("case {0}.{1}: return \"{2}\";", e, o.ToPascalCase(), o);
 	}
 }
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
 
 ///This file contains all the typed enums that the client rest api spec exposes.
@@ -27,12 +31,31 @@ namespace Nest
 	@foreach (EnumDescription e in Model.EnumsInTheSpec)
 	{
 	<text>
-	[JsonConverter(typeof(StringEnumConverter))]
 	public enum @e.Name 
 	{
 		  @Raw(string.Join(",\r\n\t\t", e.Options.Select(CreateEnum)))
 	}
 	</text>
+	}
+
+	internal static class KnownEnums
+	{
+		public static string Resolve(Enum e)
+		{
+			@foreach (EnumDescription e in Model.EnumsInTheSpec)
+			{
+			<text>
+			if (e is @e.Name)
+			{
+				switch((@e.Name)e)
+				{
+					@Raw(string.Join("\r\n\t\t\t\t\t", e.Options.Select(o =>CreateCase(e.Name,o))))
+				}
+			}
+			</text>
+			}
+			return "UNKNOWNENUM";
+		}
 	}
 }
  

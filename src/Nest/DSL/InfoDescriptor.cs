@@ -14,7 +14,7 @@ namespace Nest
 	public partial class InfoDescriptor : 
 		 IPathInfo<InfoQueryString>
 	{
-		ElasticsearchPathInfo<InfoQueryString> IPathInfo<InfoQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<InfoQueryString> IPathInfo<InfoQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = new ElasticsearchPathInfo<InfoQueryString>();
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

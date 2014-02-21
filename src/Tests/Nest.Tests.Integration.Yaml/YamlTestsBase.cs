@@ -17,7 +17,7 @@ namespace Nest.Tests.Integration.Yaml
 {
 	public class YamlTestsBase
 	{
-		protected static readonly RawElasticClient _client;
+		protected static readonly Elasticsearch _client;
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Yaml
 			var uri = new Uri("http://"+host+":9200/");
 			var settings = new ConnectionSettings(uri, "nest-default-index")
 				.UsePrettyResponses();
-			_client = new RawElasticClient(settings);
+			_client = new Elasticsearch(settings);
 			dynamic info = _client.Info().Response;
 			string version = info.version.number;
 			_versionNumber = new Version(version);

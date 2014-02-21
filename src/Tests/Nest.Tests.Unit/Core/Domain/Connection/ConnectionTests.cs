@@ -8,7 +8,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 
     public class TestConnection : Nest.Connection
     {
-        public TestConnection(IConnectionSettings settings)
+        public TestConnection(IConnectionSettingsValues settings)
             : base(settings) { }
 
         public HttpWebRequest GetConnection(string path, string method)

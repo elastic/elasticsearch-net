@@ -11,16 +11,16 @@ namespace Nest
 {
 	public partial class ElasticClient : Nest.IElasticClient
 	{
-		protected readonly IConnectionSettings _connectionSettings;
+		protected readonly IConnectionSettingsValues _connectionSettings;
 
 		internal RawDispatch RawDispatch { get; set; }
 
 		public IConnection Connection { get; protected set; }
 		public INestSerializer Serializer { get; protected set; }
-		public IRawElasticClient Raw { get; protected set; }
+		public IElasticsearch Raw { get; protected set; }
 		public ElasticInferrer Infer { get; protected set; }
 
-		public ElasticClient(IConnectionSettings settings, IConnection connection = null, INestSerializer serializer = null)
+		public ElasticClient(IConnectionSettingsValues settings, IConnection connection = null, INestSerializer serializer = null)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
@@ -29,7 +29,7 @@ namespace Nest
 			this.Connection = connection ?? new Connection(settings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			this.Raw = new RawElasticClient(this._connectionSettings, this.Connection, this.Serializer);
+			this.Raw = new Elasticsearch(this._connectionSettings, this.Connection, this.Serializer);
 			this.RawDispatch = new RawDispatch(this.Raw);
 			this.Infer = new ElasticInferrer(this._connectionSettings);
 
@@ -38,8 +38,8 @@ namespace Nest
 
 		private R Dispatch<D, Q, R>(
 			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, ConnectionStatus> dispatch
-			, Func<ConnectionStatus, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse> dispatch
+			, Func<NestElasticsearchResponse, D, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -53,8 +53,8 @@ namespace Nest
 
 		private R Dispatch<D, Q, R>(
 			D descriptor
-			, Func<ElasticsearchPathInfo<Q>, D, ConnectionStatus> dispatch
-			, Func<ConnectionStatus, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse> dispatch
+			, Func<NestElasticsearchResponse, D, R> resultSelector = null
 			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
@@ -63,13 +63,15 @@ namespace Nest
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			resultSelector = resultSelector ?? ((c, d) => c.Deserialize<R>(allow404: allow404));
-			return resultSelector(dispatch(pathInfo, descriptor), descriptor);
+			var response = dispatch(pathInfo, descriptor);
+			var nestResponse = NestElasticsearchResponse.CreateFrom(response, this._connectionSettings);
+			return resultSelector(nestResponse, descriptor);
 		}
 
 		internal Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
-			, Func<ConnectionStatus, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse>> dispatch
+			, Func<NestElasticsearchResponse, D, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -84,8 +86,8 @@ namespace Nest
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor 
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ConnectionStatus>> dispatch
-			, Func<ConnectionStatus, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse>> dispatch
+			, Func<NestElasticsearchResponse, D, R> resultSelector = null
 			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
@@ -96,7 +98,11 @@ namespace Nest
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			resultSelector = resultSelector ?? ((c, d) => c.Deserialize<R>(allow404: allow404));
 			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r => resultSelector(r.Result, descriptor));
+				.ContinueWith<I>(r =>
+				{
+					var response = NestElasticsearchResponse.CreateFrom(r.Result, this._connectionSettings);
+					return resultSelector(response, descriptor);
+				});
 		}
 
 

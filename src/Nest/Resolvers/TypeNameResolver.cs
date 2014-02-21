@@ -7,10 +7,10 @@ namespace Nest.Resolvers
 {
 	public class TypeNameResolver
 	{
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 		private PropertyNameResolver _propertyNameResolver;
 
-		public TypeNameResolver(IConnectionSettings connectionSettings)
+		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull("hasDefaultIndices");
 			this._connectionSettings = connectionSettings;

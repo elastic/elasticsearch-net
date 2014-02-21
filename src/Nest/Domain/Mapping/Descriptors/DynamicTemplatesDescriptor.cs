@@ -9,9 +9,9 @@ namespace Nest
 	{
 		internal IDictionary<string, DynamicTemplate>  Templates = new Dictionary<string, DynamicTemplate>();
 		internal IList<string> _Deletes = new List<string>();
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
-		public DynamicTemplatesDescriptor(IConnectionSettings connectionSettings)
+		public DynamicTemplatesDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 		}
@@ -35,12 +35,12 @@ namespace Nest
 	}
 	public class DynamicTemplateDescriptor<T> where T : class
 	{
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal string _Name { get; private set; }
 		internal DynamicTemplate _Template { get; private set; }
 
-		public DynamicTemplateDescriptor(IConnectionSettings connectionSettings)
+		public DynamicTemplateDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._Template = new DynamicTemplate();
 			this._connectionSettings = connectionSettings;

@@ -4,9 +4,9 @@ namespace Nest
 {
 	public class ReindexException: Exception
 	{
-		public ConnectionStatus Status { get; private set; }
+		public ElasticsearchResponse Status { get; private set; }
 
-		public ReindexException(ConnectionStatus status, string message = null) : base(message)
+		public ReindexException(ElasticsearchResponse status, string message = null) : base(message)
 		{
 			this.Status = status;
 		}

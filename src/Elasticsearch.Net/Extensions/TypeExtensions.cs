@@ -41,7 +41,7 @@ namespace Nest
 
 				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c=>c.GetParameters().Count() == argLength);
 				if (ctor == null)
-					throw new DslException("Cannot create an instance of " + t.FullName 
+					throw new ConnectionException("Cannot create an instance of " + t.FullName 
 						+ "because it has no constructor taking " + argLength + " arguments");
 				activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
 				_cachedActivators.TryAdd(key, activator);

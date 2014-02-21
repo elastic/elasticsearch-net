@@ -6,33 +6,31 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Nest.Resolvers.Converters;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using Nest.Resolvers;
 
 namespace Nest
 {
-	public partial class RawElasticClient : IRawElasticClient
+	public partial class Elasticsearch : IElasticsearch
 	{
 		public IConnection Connection { get; protected set; }
-		public IConnectionSettings Settings { get; protected set; }
+		public IConnectionSettings2 Settings { get; protected set; }
 		public IElasticsearchSerializer Serializer { get; protected set; }
-		public ElasticInferrer Infer { get; protected set; }
+		protected IStringifier Stringifier { get; set; }
 
-
-
-		public RawElasticClient(IConnectionSettings settings, IConnection connection = null, IElasticsearchSerializer serializer = null)
+		public Elasticsearch(
+			IConnectionSettings2 settings, 
+			IConnection connection = null, 
+			IElasticsearchSerializer serializer = null,
+			IStringifier stringifier = null
+			)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
 			this.Settings = settings;
 			this.Connection = connection ?? new Connection(settings);
-			this.Serializer = serializer ?? new NestSerializer(settings);
-			this.Serializer = new NestSerializer(this.Settings);
-			this.Infer = new ElasticInferrer(this.Settings);
+			this.Serializer = serializer;// ?? new Elasticsear(settings);
+			((IConnectionSettings2) this.Settings).Serializer = this.Serializer;
+			this.Stringifier = stringifier ?? new Stringifier();
 		}
 
 		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)
@@ -47,54 +45,18 @@ namespace Nest
 			var nv = new NameValueCollection();
 			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
 			{
-				nv.Add(kv.Key, Stringify(kv.Value));
+				nv.Add(kv.Key, this.Stringifier.Stringify(kv.Value));
 			}
 			return nv;
 		}
 
 		public string Encoded(object o)
 		{
-			return Uri.EscapeDataString(Stringify(o));
+			return Uri.EscapeDataString(this.Stringifier.Stringify(o));
 		}
 
-		public string Stringify(object o)
-		{
-			var s = o as string;
-			if (s != null)
-				return s;
-			var ss = o as string[];
-			if (ss != null)
-				return string.Join(",", ss);
 
-			var pn = o as PropertyPathMarker;
-			if (pn != null)
-				return this.Infer.PropertyPath(pn);
-
-			var pns = o as IEnumerable<PropertyPathMarker>;
-			if (pns != null)
-				return string.Join(",", pns.Select(p => this.Infer.PropertyPath(p)));
-
-			//TODO: is this neccessarys
-			var e = o as Enum;
-			if (e != null) return GetEnumMemberValue(e);
-			if (o is bool)
-				return ((bool) o) ? "true" : "false";
-			//var serialized = this.Serializer.Serialize(o);
-			return o.ToString();
-		}
-
-		public static string GetEnumMemberValue(Enum enumValue)
-		{
-			var type = enumValue.GetType();
-			var info = type.GetField(enumValue.ToString());
-			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
-
-			if (da.Length > 0)
-				return da[0].Value;
-			else
-				return string.Empty;
-		}
-		protected ConnectionStatus DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
+		protected ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
 			if (queryString != null)
 				path += queryString.ToQueryString();
@@ -113,9 +75,7 @@ namespace Nest
 				case "get": return this.Connection.GetSync(path);
 			}
 
-
-
-			throw new DslException("Unknown HTTP method " + method);
+			throw new ConnectionException("Unknown HTTP method " + method);
 		}
 
 		private static byte[] _enter = Encoding.UTF8.GetBytes("\n");
@@ -142,7 +102,7 @@ namespace Nest
 			return joined.Utf8Bytes();
 		}
 
-		protected Task<ConnectionStatus> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
+		protected Task<ElasticsearchResponse> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
 			if (queryString != null)
 				path += queryString.ToQueryString();
@@ -160,7 +120,7 @@ namespace Nest
 				case "head": return this.Connection.Head(path);
 				case "get": return this.Connection.Get(path);
 			}
-			throw new DslException("Unknown HTTP method " + method);
+			throw new ConnectionException("Unknown HTTP method " + method);
 		}
 	}
 }

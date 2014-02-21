@@ -2,6 +2,6 @@
 {
 	interface IPathInfo<K> where K : FluentQueryString<K>, new()
 	{
-		ElasticsearchPathInfo<K> ToPathInfo(IConnectionSettings settings);
+		ElasticsearchPathInfo<K> ToPathInfo(IConnectionSettingsValues settings);
 	}
 }

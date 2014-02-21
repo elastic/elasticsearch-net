@@ -15,7 +15,7 @@ namespace Nest
 		IndexTypePathDescriptor<DeleteMappingDescriptor, DeleteMappingQueryString>
 		, IPathInfo<DeleteMappingQueryString>
 	{
-		ElasticsearchPathInfo<DeleteMappingQueryString> IPathInfo<DeleteMappingQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<DeleteMappingQueryString> IPathInfo<DeleteMappingQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<DeleteMappingQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;

@@ -24,7 +24,7 @@ namespace Nest.Domain
 	public class FieldSelection<T> : IFieldSelection<T>
 	{
 		private ElasticInferrer Infer { get; set; }
-		public FieldSelection(IConnectionSettings settings)
+		public FieldSelection(IConnectionSettingsValues settings)
 		{
 			this.Infer = new ElasticInferrer(settings);
 		}

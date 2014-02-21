@@ -13,7 +13,7 @@ namespace Nest.Resolvers.Writers
 	internal class TypeMappingWriter
 	{
 		private readonly Type _type;
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly NestSerializer _elasticSerializer;
 		private ElasticInferrer Infer { get; set; }
 
@@ -21,7 +21,7 @@ namespace Nest.Resolvers.Writers
 		private TypeNameMarker TypeName { get; set; }
 		private ConcurrentDictionary<Type, int> SeenTypes { get; set; }
 
-		public TypeMappingWriter(Type t, TypeNameMarker typeName, IConnectionSettings connectionSettings, int maxRecursion)
+		public TypeMappingWriter(Type t, TypeNameMarker typeName, IConnectionSettingsValues connectionSettings, int maxRecursion)
 		{
 			this._type = t;
 			this._connectionSettings = connectionSettings;
@@ -39,7 +39,7 @@ namespace Nest.Resolvers.Writers
 		/// <summary>
 		/// internal constructor by TypeMappingWriter itself when it recurses, passes seenTypes as safeguard agains maxRecursion
 		/// </summary>
-		internal TypeMappingWriter(Type t, string typeName, IConnectionSettings connectionSettings, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
+		internal TypeMappingWriter(Type t, string typeName, IConnectionSettingsValues connectionSettings, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
 			this._type = GetUnderlyingType(t);
 			this._connectionSettings = connectionSettings;

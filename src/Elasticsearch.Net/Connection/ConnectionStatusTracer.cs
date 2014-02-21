@@ -11,7 +11,7 @@ namespace Nest.Domain.Connection
 		private readonly bool _enabled;
 		private Stopwatch _stopwatch;
 
-		public ConnectionStatus _result { get; set; }
+		public ElasticsearchResponse _result { get; set; }
 
 		public ConnectionStatusTracer(bool enabled)
 		{
@@ -22,7 +22,7 @@ namespace Nest.Domain.Connection
 			}
 		}
 
-		public void SetResult(ConnectionStatus status)
+		public void SetResult(ElasticsearchResponse status)
 		{
 			if (!_enabled)
 				return;

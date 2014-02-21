@@ -21,8 +21,9 @@ namespace Nest
 			this.IsValid = true;
 		}
 
-		internal GetMappingResponse(ConnectionStatus status, GetRootObjectMappingWrapping dict)
+		internal GetMappingResponse(NestElasticsearchResponse status, GetRootObjectMappingWrapping dict)
 		{
+			this.ConnectionStatus = status;
 			this.IsValid = status.Success && dict != null && dict.Count > 0;
 			if (!this.IsValid) return;
 			var firstNode = dict.First();

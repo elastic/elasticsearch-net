@@ -15,7 +15,7 @@ namespace Nest
 	public partial class OptimizeDescriptor : IndicesOptionalPathDescriptor<OptimizeDescriptor, OptimizeQueryString>
 		, IPathInfo<OptimizeQueryString>
 	{
-		ElasticsearchPathInfo<OptimizeQueryString> IPathInfo<OptimizeQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<OptimizeQueryString> IPathInfo<OptimizeQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<OptimizeQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

@@ -10,7 +10,7 @@ namespace Nest.Resolvers.Converters
 	public class PropertyPathMarkerConverter : JsonConverter
 	{
 		private readonly ElasticInferrer _infer;
-		public PropertyPathMarkerConverter(IConnectionSettings connectionSettings)
+		public PropertyPathMarkerConverter(IConnectionSettingsValues connectionSettings)
 		{
 			_infer = new ElasticInferrer(connectionSettings);
 		}
@@ -42,7 +42,7 @@ namespace Nest.Resolvers.Converters
 	public class PropertyNameMarkerConverter : JsonConverter
 	{
 		private readonly ElasticInferrer _infer;
-		public PropertyNameMarkerConverter(IConnectionSettings connectionSettings)
+		public PropertyNameMarkerConverter(IConnectionSettingsValues connectionSettings)
 		{
 			_infer = new ElasticInferrer(connectionSettings);
 		}

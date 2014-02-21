@@ -7,9 +7,9 @@ namespace Nest
 {
 	public class SingleMappingDescriptor<T> where T : class
 	{
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
-		public SingleMappingDescriptor(IConnectionSettings connectionSettings)
+		public SingleMappingDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 		}

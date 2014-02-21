@@ -16,7 +16,7 @@ namespace Nest
 		, IPathInfo<MultiGetQueryString>
 	{
 		internal readonly IList<ISimpleGetDescriptor> _GetOperations = new List<ISimpleGetDescriptor>();
-		private readonly IConnectionSettings _settings;
+		private readonly IConnectionSettingsValues _settings;
 
 		[JsonProperty("docs")]
 		internal IEnumerable<MultiGetDoc> Docs
@@ -36,7 +36,7 @@ namespace Nest
 			}
 		} 
 
-		public MultiGetDescriptor(IConnectionSettings settings)
+		public MultiGetDescriptor(IConnectionSettingsValues settings)
 		{
 			_settings = settings;
 		}
@@ -68,7 +68,7 @@ namespace Nest
 			return this;
 
 		}
-		ElasticsearchPathInfo<MultiGetQueryString> IPathInfo<MultiGetQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<MultiGetQueryString> IPathInfo<MultiGetQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = this.ToPathInfo<MultiGetQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST; // no data in GETS in the .net world

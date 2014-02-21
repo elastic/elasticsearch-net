@@ -18,7 +18,7 @@ namespace Nest.Resolvers
 		/// <summary>
 		/// ConnectionSettings can be requested by JsonConverter's.
 		/// </summary>
-		public IConnectionSettings ConnectionSettings { get; private set; }
+		public IConnectionSettingsValues ConnectionSettings { get; private set; }
 
 		public ElasticInferrer Infer { get; private set; }
 
@@ -28,7 +28,7 @@ namespace Nest.Resolvers
 		/// </summary>
 		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
 
-		public ElasticContractResolver(IConnectionSettings connectionSettings)
+		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;

@@ -19,7 +19,7 @@ namespace Nest
 			this._Metrics = metrics;
 			return this;
 		}
-		ElasticsearchPathInfo<NodesInfoQueryString> IPathInfo<NodesInfoQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<NodesInfoQueryString> IPathInfo<NodesInfoQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<NodesInfoQueryString>(settings, this._QueryString);
 			if (this._Metrics != null)

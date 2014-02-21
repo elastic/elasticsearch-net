@@ -19,6 +19,7 @@ namespace CodeGeneration.LowLevelClient
 		private readonly static string _listingUrl = "https://github.com/elasticsearch/elasticsearch/tree/v1.0.0/rest-api-spec/api";
 		private readonly static string _rawUrlPrefix = "https://raw.github.com/elasticsearch/elasticsearch/v1.0.0/rest-api-spec/api/";
 		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
+		private readonly static string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _cacheFolder = @"..\..\Cache\";
 		private static readonly RazorMachine _razorMachine;
@@ -168,8 +169,8 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateClientInterface(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"IRawElasticClient.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"IRawElasticClient.Generated.cshtml"), model).ToString();
+			var targetFile = _esNetFolder + @"IElasticsearch.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"IElasticsearch.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
@@ -182,8 +183,8 @@ namespace CodeGeneration.LowLevelClient
 		}
 		public static void GenerateRawClient(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"RawElasticClient.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawElasticClient.Generated.cshtml"), model).ToString();
+			var targetFile = _esNetFolder + @"Elasticsearch.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"Elasticsearch.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
@@ -196,14 +197,20 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateQueryStringParameters(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"QueryStringParameters\QueryStringParameters.Generated.cs";
+			var targetFile = _esNetFolder + @"Domain\QueryStringParameters.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"QueryStringParameters.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
+		public static void GenerateQueryStringParametersExtensions(RestApiSpec model)
+		{
+			var targetFile = _nestFolder + @"Domain\QueryStringParametersExtensions.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"QueryStringParametersExtensions.Generated.cshtml"), model).ToString();
+			File.WriteAllText(targetFile, source);
+		}
 		public static void GenerateEnums(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"Enums\Enums.Generated.cs";
+			var targetFile = _esNetFolder + @"Domain\Enums.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"Enums.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}

@@ -8,7 +8,7 @@ namespace Nest
 	public interface IResponse
 	{
 		bool IsValid { get; }
-		ConnectionStatus ConnectionStatus { get; }
+		NestElasticsearchResponse ConnectionStatus { get; }
 	}
 
 	public class BaseResponse : IResponse
@@ -18,6 +18,6 @@ namespace Nest
 			this.IsValid = true;
 		}
 		public virtual bool IsValid { get; internal set; }
-		public ConnectionStatus ConnectionStatus { get; internal set; }
+		public NestElasticsearchResponse ConnectionStatus { get; internal set; }
 	}
 }

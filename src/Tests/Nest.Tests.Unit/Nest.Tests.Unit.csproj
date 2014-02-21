@@ -736,6 +736,10 @@
     <None Include="Search\Query\Singles\Terms\TermsOfTypeInt.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
+      <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
+      <Name>Elasticsearch.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nest.Tests.MockData\Nest.Tests.MockData.csproj">
       <Project>{27143A05-5655-447C-ADAF-405E1CF43741}</Project>
       <Name>Nest.Tests.MockData</Name>

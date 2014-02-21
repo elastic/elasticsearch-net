@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
 
 namespace Nest.Resolvers
 {
-
-	
-	//[JsonConverter(typeof(TypeNameMarkerConverter))]
 	/// <summary>
 	/// Represents a typed container for object paths "field.nested.property";
 	/// </summary>

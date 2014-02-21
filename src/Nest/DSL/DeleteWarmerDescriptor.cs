@@ -15,7 +15,7 @@ namespace Nest
 		IndicesOptionalTypesNamePathDecriptor<DeleteWarmerDescriptor, DeleteWarmerQueryString>
 		, IPathInfo<DeleteWarmerQueryString>
 	{
-		ElasticsearchPathInfo<DeleteWarmerQueryString> IPathInfo<DeleteWarmerQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<DeleteWarmerQueryString> IPathInfo<DeleteWarmerQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<DeleteWarmerQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;

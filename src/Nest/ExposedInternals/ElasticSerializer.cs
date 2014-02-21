@@ -15,20 +15,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public enum SerializationFormatting
-	{
-		None,
-		Indented
-	}
-
-	public interface IElasticsearchSerializer
-	{
-		T Deserialize<T>(byte[] bytes) where T : class;
-		byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented);
-
-	}
-
-
 	public interface INestSerializer : IElasticsearchSerializer
 	{
 		/// <summary>
@@ -37,8 +23,8 @@ namespace Nest
 		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse type this controls whether a 404 is a valid response</param>
 		T Deserialize<T>(string value, bool notFoundIsValidResponse = false) where T : class;
 
-		T Deserialize<T>(ConnectionStatus value, bool notFoundIsValidResponse = false) where T : class;
-		IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> originalSearchDescriptor)
+		T Deserialize<T>(ElasticsearchResponse value, bool notFoundIsValidResponse = false) where T : class;
+		IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
 			where TResult : class
 			where T : class;
 
@@ -49,21 +35,20 @@ namespace Nest
 		/// </summary>
 		string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor);
 
-		TemplateResponse DeserializeTemplateResponse(ConnectionStatus c, GetTemplateDescriptor d);
-		GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c);
-		MultiGetResponse DeserializeMultiGetResponse(ConnectionStatus c, MultiGetDescriptor d);
-		MultiSearchResponse DeserializeMultiSearchResponse(ConnectionStatus c, MultiSearchDescriptor d);
-		WarmerResponse DeserializeWarmerResponse(ConnectionStatus connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
-		IndexSettingsResponse DeserializeIndexSettingsResponse(ConnectionStatus status);
+		TemplateResponse DeserializeTemplateResponse(NestElasticsearchResponse c, GetTemplateDescriptor d);
+		GetMappingResponse DeserializeGetMappingResponse(NestElasticsearchResponse c);
+		MultiGetResponse DeserializeMultiGetResponse(NestElasticsearchResponse c, MultiGetDescriptor d);
+		MultiSearchResponse DeserializeMultiSearchResponse(NestElasticsearchResponse c, MultiSearchDescriptor d);
+		WarmerResponse DeserializeWarmerResponse(NestElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
 	}
 
 	public class NestSerializer : INestSerializer
 	{
 		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(() => new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
-		private readonly IConnectionSettings _settings;
+		private readonly IConnectionSettingsValues _settings;
 		private readonly JsonSerializerSettings _serializationSettings;
 
-		public NestSerializer(IConnectionSettings settings)
+		public NestSerializer(IConnectionSettingsValues settings)
 		{
 			this._settings = settings;
 			this._serializationSettings = this.CreateSettings();
@@ -73,7 +58,7 @@ namespace Nest
 		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		protected virtual R ToParsedResponse<R>(ConnectionStatus status, JsonSerializerSettings jsonSettings, bool allow404 = false) where R : class
+		protected virtual R ToParsedResponse<R>(NestElasticsearchResponse status, JsonSerializerSettings jsonSettings, bool allow404 = false) where R : class
 		{
 			var isValid =
 				(allow404)
@@ -115,11 +100,11 @@ namespace Nest
 		{
 			return this.DeserializeInternal<T>(value, null, null, notFoundIsValidResponse);
 		}
-		public T Deserialize<T>(ConnectionStatus value, bool notFoundIsValidResponse = false) where T : class
+		public T Deserialize<T>(ElasticsearchResponse value, bool notFoundIsValidResponse = false) where T : class
 		{
 			return this.DeserializeInternal<T>(value, null, null, notFoundIsValidResponse);
 		}
-		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ConnectionStatus status, SearchDescriptor<T> originalSearchDescriptor)
+		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
 			where TResult : class
 			where T : class
 		{
@@ -164,7 +149,7 @@ namespace Nest
 			if (jTokenValue != null)
 				return JsonSerializer.Create(jsonSettings).Deserialize<T>(jTokenValue.CreateReader());
 
-			var status = value as ConnectionStatus;
+			var status = value as NestElasticsearchResponse;
 			if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
 				return JsonConvert.DeserializeObject<T>(value.ToString(), jsonSettings);
 
@@ -277,7 +262,7 @@ namespace Nest
 			return json;
 		}
 
-		public TemplateResponse DeserializeTemplateResponse(ConnectionStatus c, GetTemplateDescriptor d)
+		public TemplateResponse DeserializeTemplateResponse(NestElasticsearchResponse c, GetTemplateDescriptor d)
 		{
 			if (!c.Success) return new TemplateResponse { ConnectionStatus = c, IsValid = false };
 
@@ -295,7 +280,7 @@ namespace Nest
 		}
 		
 
-		public GetMappingResponse DeserializeGetMappingResponse(ConnectionStatus c)
+		public GetMappingResponse DeserializeGetMappingResponse(NestElasticsearchResponse c)
 		{
 			var dict = c.Success
 				? c.Deserialize<GetRootObjectMappingWrapping>()
@@ -304,7 +289,7 @@ namespace Nest
 
 		}
 
-		public MultiGetResponse DeserializeMultiGetResponse(ConnectionStatus c, MultiGetDescriptor d)
+		public MultiGetResponse DeserializeMultiGetResponse(NestElasticsearchResponse c, MultiGetDescriptor d)
 		{
 			var multiGetHitConverter = new MultiGetHitConverter(d);
 			var multiGetResponse = this.DeserializeInternal<MultiGetResponse>(c, piggyBackJsonConverter: multiGetHitConverter);
@@ -312,7 +297,7 @@ namespace Nest
 
 		}
 
-		public MultiSearchResponse DeserializeMultiSearchResponse(ConnectionStatus c, MultiSearchDescriptor d)
+		public MultiSearchResponse DeserializeMultiSearchResponse(NestElasticsearchResponse c, MultiSearchDescriptor d)
 		{
 			var multiSearchConverter = new MultiSearchConverter(this._settings, d);
 			var multiSearchResponse = this.DeserializeInternal<MultiSearchResponse>(c, piggyBackJsonConverter: multiSearchConverter);
@@ -320,7 +305,7 @@ namespace Nest
 
 		}
 
-		public WarmerResponse DeserializeWarmerResponse(ConnectionStatus connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
+		public WarmerResponse DeserializeWarmerResponse(NestElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
 		{
 			if (!connectionStatus.Success)
 				return new WarmerResponse() { ConnectionStatus = connectionStatus, IsValid = false };
@@ -373,26 +358,8 @@ namespace Nest
 				: null;
 		}
 
-		public IndexSettingsResponse DeserializeIndexSettingsResponse(ConnectionStatus status)
-		{
-			return null;
-			//var response = new IndexSettingsResponse { IsValid = false };
-			//try
-			//{
-			//	var settingsContainer = SettingsContainer(status);
-			//	response.Settings = settingsContainer.ToObject<IndexSettings>();
-			//	response.IsValid = true;
-			//}
-			//// ReSharper disable once EmptyGeneralCatchClause
-			//catch
-			//{
-			//}
-			//response.ConnectionStatus = status;
-			//return response;
-		}
-
 		//TODO although this gets the job done this looks a bit iffy, refactor
-		private JObject SettingsContainer(ConnectionStatus status)
+		private JObject SettingsContainer(ElasticsearchResponse status)
 		{
 			var o = JObject.Parse(status.Result);
 			var settingsObject = o.First.First.First.First;

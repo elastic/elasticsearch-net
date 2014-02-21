@@ -16,7 +16,7 @@ namespace Nest
 		, IPathInfo<IndicesStatusQueryString>
 	{
 		
-		ElasticsearchPathInfo<IndicesStatusQueryString> IPathInfo<IndicesStatusQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<IndicesStatusQueryString> IPathInfo<IndicesStatusQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<IndicesStatusQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

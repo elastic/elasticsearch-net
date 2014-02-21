@@ -43,10 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration.Yaml
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.YamlTestsRunner", "CodeGeneration\CodeGeneration.YamlTestsRunner\CodeGeneration.YamlTestsRunner.csproj", "{04F53AA5-6346-4139-94CF-81BD8663875F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B2E73B9B-3672-4FD4-955A-4C093BF9D37F}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net", "Elasticsearch.Net\Elasticsearch.Net.csproj", "{E97CCF40-0BA6-43FE-9F2D-58D454134088}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -203,6 +200,21 @@ Global
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Release|x86.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -216,9 +228,6 @@ Global
 		{733A7657-69E9-444A-8AC0-BC123127A59A} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
 		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj

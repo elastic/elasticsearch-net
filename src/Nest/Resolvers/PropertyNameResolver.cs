@@ -64,8 +64,8 @@ namespace Nest.Resolvers
 	public class PropertyNameResolver : ExpressionVisitor
 	{
 
-		private readonly IConnectionSettings _settings;
-		public PropertyNameResolver(IConnectionSettings settings)
+		private readonly IConnectionSettingsValues _settings;
+		public PropertyNameResolver(IConnectionSettingsValues settings)
 		{
 			//TODO remove settings for leave it in to find places its used where it shouldnt
 			_settings = settings;

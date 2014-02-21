@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -22,6 +21,8 @@ namespace Nest
 			return Dispatch(out result, name);
 		}
 
+
+
 		private bool Dispatch(out object result, string name)
 		{
 			if (!this.HasValue)
@@ -29,15 +30,16 @@ namespace Nest
 				result = new ElasticsearchDynamicValue(null);
 				return true;
 			}
-			var v = this.Value as JObject;
-			if (v == null)
-			{
-				result = new ElasticsearchDynamicValue(null);
-				return true;
-			}
-			JToken r = null;
-			v.TryGetValue(name, StringComparison.InvariantCulture, out r);
-			result = new ElasticsearchDynamicValue(r);
+			result = new ElasticsearchDynamicValue(this.Value);
+			//var v = this.Value as JObject;
+			//if (v == null)
+			//{
+			//	result = new ElasticsearchDynamicValue(null);
+			//	return true;
+			//}
+			//JToken r = null;
+			//v.TryGetValue(name, StringComparison.InvariantCulture, out r);
+			//result = new ElasticsearchDynamicValue(r);
 
 			return true;
 		}

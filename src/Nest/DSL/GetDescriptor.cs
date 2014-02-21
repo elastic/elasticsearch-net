@@ -24,7 +24,7 @@ namespace Nest
 			return this.Preference("_local");
 		}
 
-		ElasticsearchPathInfo<GetQueryString> IPathInfo<GetQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<GetQueryString> IPathInfo<GetQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = this.ToPathInfo<GetQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

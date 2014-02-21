@@ -20,14 +20,14 @@ namespace Nest.Resolvers.Converters
 		private readonly MultiSearchDescriptor _descriptor;
 
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
-		private readonly IConnectionSettings _settings;
+		private readonly IConnectionSettingsValues _settings;
 
 		internal MultiSearchConverter()
 		{
 			
 		}
 
-		public MultiSearchConverter(IConnectionSettings settings, MultiSearchDescriptor descriptor)
+		public MultiSearchConverter(IConnectionSettingsValues settings, MultiSearchDescriptor descriptor)
 		{
 			this._settings = settings;
 			_descriptor = descriptor;
@@ -42,7 +42,7 @@ namespace Nest.Resolvers.Converters
 			MultiHitTuple tuple, 
 			JsonSerializer serializer, 
 			IDictionary<string, object> collection, 
-			IConnectionSettings settings
+			IConnectionSettingsValues settings
 		)
 			where T : class
 		{
@@ -57,7 +57,7 @@ namespace Nest.Resolvers.Converters
 			if (errorProperty != null)
 			{
 				hit.IsValid = false;
-				hit.ConnectionStatus = new ConnectionStatus(settings, new ConnectionException(
+				hit.ConnectionStatus = new NestElasticsearchResponse(settings, new ConnectionException(
 					msg: errorProperty.Value.ToString(),
 					response: errorProperty.Value.ToString()
 				));

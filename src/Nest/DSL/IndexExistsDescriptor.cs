@@ -15,7 +15,7 @@ namespace Nest
 	public partial class IndexExistsDescriptor : IndexPathDescriptorBase<IndexExistsDescriptor, IndexExistsQueryString>
 		, IPathInfo<IndexExistsQueryString>
 	{
-		ElasticsearchPathInfo<IndexExistsQueryString> IPathInfo<IndexExistsQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<IndexExistsQueryString> IPathInfo<IndexExistsQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<IndexExistsQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;

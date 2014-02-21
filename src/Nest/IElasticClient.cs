@@ -10,7 +10,7 @@ namespace Nest
 	{
 		IConnection Connection { get; }
 		INestSerializer Serializer { get;  }
-		IRawElasticClient Raw { get; }
+		IElasticsearch Raw { get; }
 		ElasticInferrer Infer { get; }
 
 

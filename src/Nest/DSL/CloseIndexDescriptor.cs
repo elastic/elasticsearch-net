@@ -15,7 +15,7 @@ namespace Nest
 	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexQueryString>
 		, IPathInfo<CloseIndexQueryString>
 	{
-		ElasticsearchPathInfo<CloseIndexQueryString> IPathInfo<CloseIndexQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<CloseIndexQueryString> IPathInfo<CloseIndexQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<CloseIndexQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

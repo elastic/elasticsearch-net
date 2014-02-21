@@ -1,4 +1,6 @@
-﻿//This is nancyfx's dynamicdictionary renamed to ElasticsearchResponse
+﻿//This is nancyfx's dynamicdictionary renamed to ElasticsearchDynamic
+//it adds the ability to chain dynamic property access without binding on null ref errors.
+
 namespace Nest
 {
 	using System;

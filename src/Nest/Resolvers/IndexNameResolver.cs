@@ -9,9 +9,9 @@ namespace Nest.Resolvers
 {
 	public class IndexNameResolver
 	{
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
-		public IndexNameResolver(IConnectionSettings connectionSettings)
+		public IndexNameResolver(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull("hasDefaultIndices");
 			this._connectionSettings = connectionSettings;

@@ -15,7 +15,7 @@ namespace Nest
 		IndicesOptionalTypesNamePathDecriptor<GetWarmerDescriptor, GetWarmerQueryString>
 		, IPathInfo<GetWarmerQueryString>
 	{
-		ElasticsearchPathInfo<GetWarmerQueryString> IPathInfo<GetWarmerQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<GetWarmerQueryString> IPathInfo<GetWarmerQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<GetWarmerQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.GET;

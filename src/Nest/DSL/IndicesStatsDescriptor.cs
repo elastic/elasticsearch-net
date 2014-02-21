@@ -31,7 +31,7 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<IndicesStatsQueryString> IPathInfo<IndicesStatsQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<IndicesStatsQueryString>(settings, this._QueryString);
 			if (this._Types.HasAny())

@@ -29,8 +29,8 @@ namespace Nest
 			continue;
 		}
 		var generate = new [] {
-			new { Name = endpoint.CsharpMethodName + "Dispatch", Returns = "ConnectionStatus" , Async = false},
-			new { Name = endpoint.CsharpMethodName + "DispatchAsync", Returns = "Task<ConnectionStatus>", Async = true },
+			new { Name = endpoint.CsharpMethodName + "Dispatch", Returns = "ElasticsearchResponse" , Async = false},
+			new { Name = endpoint.CsharpMethodName + "DispatchAsync", Returns = "Task<ElasticsearchResponse>", Async = true },
 		};
 		foreach(var gen in generate)
 		{

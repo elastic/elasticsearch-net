@@ -35,7 +35,7 @@ namespace Nest
 			return this.Search(Guid.NewGuid().ToString(), searchSelector);
 		}
 
-		ElasticsearchPathInfo<MultiSearchQueryString> IPathInfo<MultiSearchQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<MultiSearchQueryString> IPathInfo<MultiSearchQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = base.ToPathInfo<MultiSearchQueryString>(settings, this._QueryString);
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;

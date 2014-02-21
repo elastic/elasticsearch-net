@@ -152,7 +152,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 						var apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = "ConnectionStatus",
+							ReturnType = "ElasticsearchResponse",
 							FullName = methodName,
 							HttpMethod = method,
 							Documentation = this.Documentation,
@@ -172,7 +172,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = "Task<ConnectionStatus>",
+							ReturnType = "Task<ElasticsearchResponse>",
 							FullName = methodName + "Async",
 							HttpMethod = method,
 							Documentation = this.Documentation,

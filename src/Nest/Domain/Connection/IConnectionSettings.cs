@@ -1,81 +1,99 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	
+
+	public class ConnectionSettings : ConnectionSettings<ConnectionSettings>
+	{
+
+		public ConnectionSettings(Uri uri, string defaultIndex) : base(uri, defaultIndex)
+		{
+
+		}
+	}
+
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
-	public interface IConnectionSettings
+	public class ConnectionSettings<T> : ElasticsearchConnectionSettings<T> , IConnectionSettingsValues 
+		where T : ConnectionSettings<T> 
 	{
-		FluentDictionary<Type, string> DefaultIndices { get; }
-		FluentDictionary<Type, string> DefaultTypeNames { get; }
-		string DefaultIndex { get; }
+		private string _defaultIndex;
+		public string DefaultIndex
+		{
+			get
+			{
+				if (this._defaultIndex.IsNullOrEmpty())
+					throw new NullReferenceException("No default index set on connection!");
+				return this._defaultIndex;
+			}
+			private set { this._defaultIndex = value; }
+		}
 
-		Uri Uri { get; }
-		int MaximumAsyncConnections { get; }
-		string Host { get; }
-		int Port { get; }
-		int Timeout { get; }
-		string ProxyAddress { get; }
-		string ProxyUsername { get; }
-		string ProxyPassword { get; }
+		public Func<Type, string> DefaultTypeNameInferrer { get; private set; }
+		public FluentDictionary<Type, string> DefaultIndices { get; private set; }
+		public FluentDictionary<Type, string> DefaultTypeNames { get; private set; }
+		public Func<string, string> DefaultPropertyNameInferrer { get; private set; }
 
-		bool TraceEnabled { get; }
-		bool UriSpecifiedBasicAuth { get; }
-		NameValueCollection QueryStringParameters { get; }
-		Action<ConnectionStatus> ConnectionStatusHandler { get; }
+		//these are set once to make sure we don't query the Uri too often
 
-		Func<string, string> DefaultPropertyNameInferrer { get; }
+		//Serializer settings
+		public Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; private set; }
 
-		Func<Type, string> DefaultTypeNameInferrer { get; }
+		public ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; private set; }
 
-		Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; }
+		public ConnectionSettings(Uri uri, string defaultIndex) : base(uri)
+		{
+			uri.ThrowIfNull("uri");
+			defaultIndex.ThrowIfNullOrEmpty("defaultIndex");
 
-		ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; }
-		bool UsesPrettyResponses { get; }
+			this.SetDefaultIndex(defaultIndex);
+			
+			this.DefaultTypeNameInferrer = (t => t.Name.ToLower()); 
+			this.DefaultPropertyNameInferrer = (p => p.ToCamelCase()); 
+			this.DefaultIndices = new FluentDictionary<Type, string>();
+			this.DefaultTypeNames = new FluentDictionary<Type, string>();
 
-		/// <summary>
-		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
-		/// </summary>
-		ConnectionSettings EnableTrace(bool enabled = true);
+			this.ModifyJsonSerializerSettings = (j) => { };
+			this.ContractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
+
+		}
 
 		/// <summary>
 		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90
 		/// </summary>
-		/// <returns></returns>
-		ConnectionSettings PluralizeTypeNames();
+		public T PluralizeTypeNames()
+		{
+			this.DefaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
+			return (T)this;
+		}
 
 		/// <summary>
 		/// Allows you to update internal the json.net serializer settings to your liking
 		/// </summary>
-		/// <param name="modifier"></param>
-		/// <returns></returns>
-		ConnectionSettings SetJsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier);
+		public T SetJsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
+		{
+			if (modifier == null)
+				return (T)this;
+			this.ModifyJsonSerializerSettings = modifier;
+			return (T)this;
 
+		}
 		/// <summary>
 		/// Add a custom JsonConverter to the build in json serialization by passing in a predicate for a type.
 		/// This is faster then adding them using AddJsonConverters() because this way they will be part of the cached 
 		/// Json.net contract for a type.
 		/// </summary>
-		ConnectionSettings AddContractJsonConverters(params Func<Type, JsonConverter>[] contractSelectors);
-
-		/// <summary>
-		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
-		/// </summary>
-		/// <param name="queryStringParameters"></param>
-		/// <returns></returns>
-		ConnectionSettings SetGlobalQueryStringParameters(NameValueCollection queryStringParameters);
-
-		/// <summary>
-		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
-		/// and specify the timeout in various calls on Elasticsearch's side.
-		/// </summary>
-		/// <param name="timeout">time out in milliseconds</param>
-		ConnectionSettings SetTimeout(int timeout);
+		public T AddContractJsonConverters(params Func<Type, JsonConverter>[] contractSelectors)
+		{
+			this.ContractConverters = contractSelectors.ToList().AsReadOnly();
+			return (T)this;
+		}
 
 		/// <summary>
 		/// Index to default to when no index is specified.
@@ -83,29 +101,17 @@ namespace Nest
 		/// <param name="defaultIndex">When null/empty/not set might throw NRE later on
 		/// when not specifying index explicitly while indexing.
 		/// </param>
-		/// <returns></returns>
-		ConnectionSettings SetDefaultIndex(string defaultIndex);
+		public T SetDefaultIndex(string defaultIndex)
+		{
+			this.DefaultIndex = defaultIndex;
+			return (T)this;
+		}
 
-		/// <summary>
-		/// Semaphore asynchronous connections automatically by giving
-		/// it a maximum concurrent connections. Great to prevent 
-		/// out of memory exceptions
-		/// </summary>
-		/// <param name="maximum">defaults to 20</param>
-		/// <returns></returns>
-		ConnectionSettings SetMaximumAsyncConnections(int maximum);
-
-		/// <summary>
-		/// If your connection has to go through proxy use this method to specify the proxy url
-		/// </summary>
-		/// <returns></returns>
-		ConnectionSettings SetProxy(Uri proxyAdress, string username, string password);
-
-		/// <summary>
-		/// Append ?pretty=true to requests, this helps to debug send and received json.
-		/// </summary>
-		/// <returns></returns>
-		ConnectionSettings UsePrettyResponses(bool b = true);
+		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
+		{
+			type.ThrowIfNull("type");
+			return Inflector.MakePlural(type.Name).ToLower();
+		}
 
 		/// <summary>
 		/// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit propertyname 
@@ -114,26 +120,119 @@ namespace Nest
 		/// Here you can register a function that transforms propertynames (default casing, pre- or suffixing)
 		/// </pre>
 		/// </summary>
-		ConnectionSettings SetDefaultPropertyNameInferrer(Func<string, string> propertyNameSelector);
+		public T SetDefaultPropertyNameInferrer(Func<string, string> propertyNameSelector)
+		{
+			this.DefaultPropertyNameInferrer = propertyNameSelector;
+			return (T)this;
+		}
 
 		/// <summary>
 		/// Allows you to override how type names should be reprented, the default will call .ToLowerInvariant() on the type's name.
 		/// </summary>
-		ConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer);
-
-		/// <summary>
-		/// Global callback for every response that NEST receives, useful for custom logging.
-		/// </summary>
-		ConnectionSettings SetConnectionStatusHandler(Action<ConnectionStatus> handler);
+		public T SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
+		{
+			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
+			this.DefaultTypeNameInferrer = defaultTypeNameInferrer;
+			return (T)this;
+		}
 
 		/// <summary>
 		/// Map types to a index names. Takes precedence over SetDefaultIndex().
 		/// </summary>
-		ConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector);
+		public T MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
+		{
+			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector(this.DefaultIndices);
+			return (T)this;
+		}
+		/// <summary>
+		/// Allows you to override typenames, takes priority over the global SetDefaultTypeNameInferrer()
+		/// </summary>
+		public T MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
+		{
+			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector(this.DefaultTypeNames);
+			return (T)this;
+		}
+	}
+
+	public interface IConnectionSettingsValues : IConnectionSettings2
+	{
+		FluentDictionary<Type, string> DefaultIndices { get; }
+		FluentDictionary<Type, string> DefaultTypeNames { get; }
+		string DefaultIndex { get; }
+		Func<string, string> DefaultPropertyNameInferrer { get; }
+		Func<Type, string> DefaultTypeNameInferrer { get; }
+		Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; }
+		ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; }
+	}
+
+
+	/// <summary>
+	/// Control how NEST's behaviour.
+	/// </summary>
+	public interface IConnectionSettings : IConnectionSettings<IConnectionSettings>, IConnectionSettings2
+	{
+		
+	}
+	public interface IConnectionSettings<out T> : IElasticsearchConnectionSettings<T> where T : IConnectionSettings<T>
+	{
+
+		/// <summary>
+		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names.
+		/// This used to be the default prior to Nest 1.0
+		/// </summary>
+		/// <returns></returns>
+		T PluralizeTypeNames();
+
+		/// <summary>
+		/// Allows you to update internal the json.net serializer settings to your liking
+		/// </summary>
+		/// <param name="modifier"></param>
+		/// <returns></returns>
+		T SetJsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier);
+
+		/// <summary>
+		/// Add a custom JsonConverter to the build in json serialization by passing in a predicate for a type.
+		/// This is faster then adding them using AddJsonConverters() because this way they will be part of the cached 
+		/// Json.net contract for a type.
+		/// </summary>
+		T AddContractJsonConverters(params Func<Type, JsonConverter>[] contractSelectors);
+
+
+		/// <summary>
+		/// Index to default to when no index is specified.
+		/// </summary>
+		/// <param name="defaultIndex">When null/empty/not set might throw NRE later on
+		/// when not specifying index explicitly while indexing.
+		/// </param>
+		/// <returns></returns>
+		T SetDefaultIndex(string defaultIndex);
+
+
+		/// <summary>
+		/// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit propertyname 
+		/// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
+		/// <pre>
+		/// Here you can register a function that transforms propertynames (default casing, pre- or suffixing)
+		/// </pre>
+		/// </summary>
+		T SetDefaultPropertyNameInferrer(Func<string, string> propertyNameSelector);
+
+		/// <summary>
+		/// Allows you to override how type names should be reprented, the default will call .ToLowerInvariant() on the type's name.
+		/// </summary>
+		T SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer);
+
+
+		/// <summary>
+		/// Map types to a index names. Takes precedence over SetDefaultIndex().
+		/// </summary>
+		T MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector);
 
 		/// <summary>
 		/// Allows you to override typenames, takes priority over the global SetDefaultTypeNameInferrer()
 		/// </summary>
-		ConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector);
+		T MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector);
 	}
 }

@@ -12,13 +12,13 @@ namespace Nest
 		where TChild : class
 
     {
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal NestedObjectMapping _Mapping { get; set; }
 		internal TypeNameMarker _TypeName { get; set; }
 		public ElasticInferrer Infer { get; set; }
 
-		public NestedObjectMappingDescriptor(IConnectionSettings connectionSettings)
+		public NestedObjectMappingDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 			this._TypeName = TypeNameMarker.Create<TChild>();

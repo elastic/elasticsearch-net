@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit
 {
 	public class BaseJsonTests
 	{
-		protected readonly IConnectionSettings _settings;
+		protected readonly IConnectionSettingsValues _settings;
 		/// <summary>
 		/// In memory client that never hits elasticsearch
 		/// </summary>

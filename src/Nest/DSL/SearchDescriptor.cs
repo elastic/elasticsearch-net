@@ -1042,7 +1042,7 @@ namespace Nest
 			return this;
 		}
 
-		ElasticsearchPathInfo<SearchQueryString> IPathInfo<SearchQueryString>.ToPathInfo(IConnectionSettings settings)
+		ElasticsearchPathInfo<SearchQueryString> IPathInfo<SearchQueryString>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			var pathInfo = new ElasticsearchPathInfo<SearchQueryString>();
 			pathInfo.HttpMethod = this._QueryString.ContainsKey("source")
