@@ -1,5 +1,6 @@
 ﻿using System;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Moq;
 using NUnit.Framework;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace Nest
 
 		public IConnection Connection { get; protected set; }
 		public INestSerializer Serializer { get; protected set; }
-		public IElasticsearch Raw { get; protected set; }
+		public IElasticsearchClient Raw { get; protected set; }
 		public ElasticInferrer Infer { get; protected set; }
 
 		public ElasticClient(IConnectionSettingsValues settings, IConnection connection = null, INestSerializer serializer = null)
@@ -27,10 +28,10 @@ namespace Nest
 				throw new ArgumentNullException("settings");
 
 			this._connectionSettings = settings;
-			this.Connection = connection ?? new Connection(settings);
+			this.Connection = connection ?? new HttpConnection(settings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			this.Raw = new Elasticsearch.Net.Elasticsearch(this._connectionSettings, this.Connection, this.Serializer);
+			this.Raw = new Elasticsearch.Net.ElasticsearchClient(this._connectionSettings, this.Connection, this.Serializer);
 			this.RawDispatch = new RawDispatch(this.Raw);
 			this.Infer = new ElasticInferrer(this._connectionSettings);
 

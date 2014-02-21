@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Text;
-using System.Net;
-using System.Threading;
-using System.IO;
-using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Connection
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public class InMemoryConnection : Connection
+	public class InMemoryConnection : HttpConnection
 	{
 		private ElasticsearchResponse _fixedResult;
 

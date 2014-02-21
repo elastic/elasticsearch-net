@@ -4,17 +4,18 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net
 {
-	public partial class Elasticsearch : IElasticsearch
+	public partial class ElasticsearchClient : IElasticsearchClient
 	{
 		public IConnection Connection { get; protected set; }
 		public IConnectionSettings2 Settings { get; protected set; }
 		public IElasticsearchSerializer Serializer { get; protected set; }
 		protected IStringifier Stringifier { get; set; }
 
-		public Elasticsearch(
+		public ElasticsearchClient(
 			IConnectionSettings2 settings, 
 			IConnection connection = null, 
 			IElasticsearchSerializer serializer = null,
@@ -25,7 +26,7 @@ namespace Elasticsearch.Net
 				throw new ArgumentNullException("settings");
 
 			this.Settings = settings;
-			this.Connection = connection ?? new Connection(settings);
+			this.Connection = connection ?? new HttpConnection(settings);
 			this.Serializer = serializer;// ?? new Elasticsear(settings);
 			((IConnectionSettings2) this.Settings).Serializer = this.Serializer;
 			this.Stringifier = stringifier ?? new Stringifier();

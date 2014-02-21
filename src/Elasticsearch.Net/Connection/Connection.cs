@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using PUrify;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Connection
 {
-	public class Connection : IConnection
+	public class HttpConnection : IConnection
 	{
 		const int BUFFER_SIZE = 1024;
 
@@ -19,13 +17,13 @@ namespace Elasticsearch.Net
 		private Semaphore _ResourceLock;
 		private readonly bool _enableTrace;
 
-		static Connection()
+		static HttpConnection()
 		{
 			ServicePointManager.UseNagleAlgorithm = false;
 			ServicePointManager.Expect100Continue = false;
 			ServicePointManager.DefaultConnectionLimit = 10000;
 		}
-		public Connection(IConnectionSettings2 settings)
+		public HttpConnection(IConnectionSettings2 settings)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");

@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Connection;
 
 ///Generated File Please Do Not Edit Manually
 namespace Elasticsearch.Net
@@ -17,7 +18,7 @@ namespace Elasticsearch.Net
 	///Generated of commit 
 	///</pre>
 	///</summary>
-	public interface IElasticsearch
+	public interface IElasticsearchClient
 	{	
 		IConnection Connection { get; }
 		IConnectionSettings2 Settings { get; }

@@ -1,4 +1,4 @@
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Connection
 {
 	public class ConnectionException : System.Exception
 	{

@@ -12,7 +12,7 @@ namespace Elasticsearch.Net
 	///<summary>
 	///Raw operations with elasticsearch
 	///</summary>
-	public partial class Elasticsearch : IElasticsearch
+	public partial class ElasticsearchClient : IElasticsearchClient
 	{
 	
 		

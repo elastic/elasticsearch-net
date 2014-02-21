@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Nest.Thrift;
 using Thrift.Protocol;
 using Thrift.Transport;
@@ -229,7 +230,7 @@ namespace Nest.Thrift
 
 		/// <summary>
 		/// Releases unmanaged resources and performs other cleanup operations before the
-		/// <see cref="Connection"/> is reclaimed by garbage collection.
+		/// <see cref="HttpConnection"/> is reclaimed by garbage collection.
 		/// </summary>
 		~ThriftConnection()
 		{

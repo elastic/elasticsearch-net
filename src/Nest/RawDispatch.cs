@@ -14,9 +14,9 @@ namespace Nest
 {
 	internal partial class RawDispatch 
 	{
-		protected IElasticsearch Raw { get; set; }
+		protected IElasticsearchClient Raw { get; set; }
 
-		public RawDispatch(IElasticsearch rawElasticClient)
+		public RawDispatch(IElasticsearchClient rawElasticClient)
 		{
 			this.Raw = rawElasticClient;
 		}

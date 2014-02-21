@@ -184,6 +184,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 			Assert.True(secondResult.Documents.Any());
 			secondResult.Hits.OfType<Hit<ClassA>>().Any().Should().BeTrue();
 			secondResult.Hits.OfType<Hit<ClassB>>().Any().Should().BeTrue();
+
 		}
 		
 		[Test]

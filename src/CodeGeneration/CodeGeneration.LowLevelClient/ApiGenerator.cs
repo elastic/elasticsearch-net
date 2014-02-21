@@ -169,8 +169,8 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateClientInterface(RestApiSpec model)
 		{
-			var targetFile = _esNetFolder + @"IElasticsearch.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"IElasticsearch.Generated.cshtml"), model).ToString();
+			var targetFile = _esNetFolder + @"IElasticsearchClient.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"IElasticsearchClient.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
@@ -183,8 +183,8 @@ namespace CodeGeneration.LowLevelClient
 		}
 		public static void GenerateRawClient(RestApiSpec model)
 		{
-			var targetFile = _esNetFolder + @"Elasticsearch.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"Elasticsearch.Generated.cshtml"), model).ToString();
+			var targetFile = _esNetFolder + @"ElasticsearchClient.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"ElasticsearchClient.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 

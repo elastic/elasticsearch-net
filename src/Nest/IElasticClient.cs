@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Nest.Domain;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -11,7 +12,7 @@ namespace Nest
 	{
 		IConnection Connection { get; }
 		INestSerializer Serializer { get;  }
-		IElasticsearch Raw { get; }
+		IElasticsearchClient Raw { get; }
 		ElasticInferrer Infer { get; }
 
 

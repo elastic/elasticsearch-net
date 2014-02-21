@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Connection
 {
 	public class ConnectionStatusTracer : IDisposable
 	{
