@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 using NUnit.Framework;
 
 namespace Nest.Tests.Integration.Indices

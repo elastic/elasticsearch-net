@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Extensions
 {

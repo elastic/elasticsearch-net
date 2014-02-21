@@ -1,4 +1,4 @@
-namespace Nest
+namespace Elasticsearch.Net
 {
 	public class ConnectionException : System.Exception
 	{

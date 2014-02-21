@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	public interface IConnectionSettings2
 	{

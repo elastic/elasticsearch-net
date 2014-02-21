@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using Elasticsearch.Net;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 

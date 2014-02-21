@@ -7,10 +7,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Nest.Domain.Connection;
 using PUrify;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	public class Connection : IConnection
 	{

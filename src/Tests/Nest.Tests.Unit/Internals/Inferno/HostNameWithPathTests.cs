@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Elasticsearch.Net;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using Nest.Resolvers;
 using System;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 ///Generated File Please Do Not Edit Manually
 	
-namespace Nest
+namespace Elasticsearch.Net
 {
 	///<summary>
 	///Raw operations with elasticsearch
@@ -22,8 +22,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ElasticsearchResponse Bulk(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			//var url = "_bulk".Inject(new {  });
-			var url = "_bulk".F();
+					var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -40,8 +39,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ElasticsearchResponse> BulkAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			//var url = "_bulk".Inject(new {  });
-			var url = "_bulk".F();
+					var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -60,8 +58,7 @@ namespace Nest
 		public ElasticsearchResponse Bulk(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Encoded(index));
+					var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -80,8 +77,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> BulkAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Encoded(index));
+					var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -102,8 +98,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -124,8 +119,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -142,8 +136,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public ElasticsearchResponse BulkPut(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			//var url = "_bulk".Inject(new {  });
-			var url = "_bulk".F();
+					var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -160,8 +153,7 @@ namespace Nest
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		public Task<ElasticsearchResponse> BulkPutAsync(object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
-			//var url = "_bulk".Inject(new {  });
-			var url = "_bulk".F();
+					var url = "_bulk".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -180,8 +172,7 @@ namespace Nest
 		public ElasticsearchResponse BulkPut(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Encoded(index));
+					var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -200,8 +191,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> BulkPutAsync(string index, object body, Func<BulkQueryString, BulkQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_bulk".Inject(new { index = Stringify(index) });
-			var url = "{0}/_bulk".F(Encoded(index));
+					var url = "{0}/_bulk".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -222,8 +212,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -244,8 +233,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_bulk".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_bulk".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -295,8 +283,7 @@ namespace Nest
 		public ElasticsearchResponse CatAliases(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_cat/aliases/{name}".Inject(new { name = Stringify(name) });
-			var url = "_cat/aliases/{0}".F(Encoded(name));
+					var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -314,8 +301,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CatAliasesAsync(string name, Func<CatAliasesQueryString, CatAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_cat/aliases/{name}".Inject(new { name = Stringify(name) });
-			var url = "_cat/aliases/{0}".F(Encoded(name));
+					var url = "_cat/aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -365,8 +351,7 @@ namespace Nest
 		public ElasticsearchResponse CatAllocation(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cat/allocation/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cat/allocation/{0}".F(Encoded(node_id));
+					var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -384,8 +369,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CatAllocationAsync(string node_id, Func<CatAllocationQueryString, CatAllocationQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cat/allocation/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cat/allocation/{0}".F(Encoded(node_id));
+					var url = "_cat/allocation/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -435,8 +419,7 @@ namespace Nest
 		public ElasticsearchResponse CatCount(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/count/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/count/{0}".F(Encoded(index));
+					var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -454,8 +437,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CatCountAsync(string index, Func<CatCountQueryString, CatCountQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/count/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/count/{0}".F(Encoded(index));
+					var url = "_cat/count/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -569,8 +551,7 @@ namespace Nest
 		public ElasticsearchResponse CatIndices(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/indices/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/indices/{0}".F(Encoded(index));
+					var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -588,8 +569,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CatIndicesAsync(string index, Func<CatIndicesQueryString, CatIndicesQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/indices/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/indices/{0}".F(Encoded(index));
+					var url = "_cat/indices/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -735,8 +715,7 @@ namespace Nest
 		public ElasticsearchResponse CatRecovery(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/recovery/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/recovery/{0}".F(Encoded(index));
+					var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -754,8 +733,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CatRecoveryAsync(string index, Func<CatRecoveryQueryString, CatRecoveryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/recovery/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/recovery/{0}".F(Encoded(index));
+					var url = "_cat/recovery/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -805,8 +783,7 @@ namespace Nest
 		public ElasticsearchResponse CatShards(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/shards/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/shards/{0}".F(Encoded(index));
+					var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -824,8 +801,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CatShardsAsync(string index, Func<CatShardsQueryString, CatShardsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cat/shards/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cat/shards/{0}".F(Encoded(index));
+					var url = "_cat/shards/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -875,8 +851,7 @@ namespace Nest
 		public ElasticsearchResponse ClearScroll(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
-			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
+					var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -894,8 +869,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> ClearScrollAsync(string scroll_id, Func<ClearScrollQueryString, ClearScrollQueryString> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
-			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
+					var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -977,8 +951,7 @@ namespace Nest
 		public ElasticsearchResponse ClusterHealth(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cluster/health/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cluster/health/{0}".F(Encoded(index));
+					var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -996,8 +969,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> ClusterHealthAsync(string index, Func<ClusterHealthQueryString, ClusterHealthQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cluster/health/{index}".Inject(new { index = Stringify(index) });
-			var url = "_cluster/health/{0}".F(Encoded(index));
+					var url = "_cluster/health/{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1046,8 +1018,7 @@ namespace Nest
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		public ElasticsearchResponse ClusterPutSettings(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null)
 		{
-			//var url = "_cluster/settings".Inject(new {  });
-			var url = "_cluster/settings".F();
+					var url = "_cluster/settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1064,8 +1035,7 @@ namespace Nest
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		public Task<ElasticsearchResponse> ClusterPutSettingsAsync(object body, Func<ClusterPutSettingsQueryString, ClusterPutSettingsQueryString> queryString = null)
 		{
-			//var url = "_cluster/settings".Inject(new {  });
-			var url = "_cluster/settings".F();
+					var url = "_cluster/settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1082,8 +1052,7 @@ namespace Nest
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		public ElasticsearchResponse ClusterReroute(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null)
 		{
-			//var url = "_cluster/reroute".Inject(new {  });
-			var url = "_cluster/reroute".F();
+					var url = "_cluster/reroute".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1100,8 +1069,7 @@ namespace Nest
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		public Task<ElasticsearchResponse> ClusterRerouteAsync(object body, Func<ClusterRerouteQueryString, ClusterRerouteQueryString> queryString = null)
 		{
-			//var url = "_cluster/reroute".Inject(new {  });
-			var url = "_cluster/reroute".F();
+					var url = "_cluster/reroute".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1151,8 +1119,7 @@ namespace Nest
 		public ElasticsearchResponse ClusterState(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_cluster/state/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_cluster/state/{0}".F(Encoded(metric));
+					var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1170,8 +1137,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> ClusterStateAsync(string metric, Func<ClusterStateQueryString, ClusterStateQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_cluster/state/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_cluster/state/{0}".F(Encoded(metric));
+					var url = "_cluster/state/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1191,8 +1157,7 @@ namespace Nest
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cluster/state/{metric}/{index}".Inject(new { metric = Stringify(metric), index = Stringify(index) });
-			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
+					var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1212,8 +1177,7 @@ namespace Nest
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "_cluster/state/{metric}/{index}".Inject(new { metric = Stringify(metric), index = Stringify(index) });
-			var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
+					var url = "_cluster/state/{0}/{1}".F(Encoded(metric), Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1263,8 +1227,7 @@ namespace Nest
 		public ElasticsearchResponse ClusterStats(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cluster/stats/nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
+					var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1282,8 +1245,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> ClusterStatsAsync(string node_id, Func<ClusterStatsQueryString, ClusterStatsQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cluster/stats/nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
+					var url = "_cluster/stats/nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1300,8 +1262,7 @@ namespace Nest
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		public ElasticsearchResponse Count(object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			//var url = "_count".Inject(new {  });
-			var url = "_count".F();
+					var url = "_count".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1318,8 +1279,7 @@ namespace Nest
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		public Task<ElasticsearchResponse> CountAsync(object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
-			//var url = "_count".Inject(new {  });
-			var url = "_count".F();
+					var url = "_count".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1338,8 +1298,7 @@ namespace Nest
 		public ElasticsearchResponse Count(string index, object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Encoded(index));
+					var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1358,8 +1317,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CountAsync(string index, object body, Func<CountQueryString, CountQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Encoded(index));
+					var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1380,8 +1338,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1402,8 +1359,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1453,8 +1409,7 @@ namespace Nest
 		public ElasticsearchResponse CountGet(string index, Func<CountQueryString, CountQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Encoded(index));
+					var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1472,8 +1427,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> CountGetAsync(string index, Func<CountQueryString, CountQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_count".Inject(new { index = Stringify(index) });
-			var url = "{0}/_count".F(Encoded(index));
+					var url = "{0}/_count".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1493,8 +1447,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1514,8 +1467,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1535,8 +1487,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1556,8 +1507,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1579,8 +1529,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1602,8 +1551,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1624,8 +1572,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1646,8 +1593,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate/count".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1670,8 +1616,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1694,8 +1639,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate/count".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate/count".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1717,8 +1661,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1740,8 +1683,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1760,8 +1702,7 @@ namespace Nest
 		public ElasticsearchResponse DeleteByQuery(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_query".F(Encoded(index));
+					var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1780,8 +1721,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> DeleteByQueryAsync(string index, object body, Func<DeleteByQueryQueryString, DeleteByQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_query".F(Encoded(index));
+					var url = "{0}/_query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1802,8 +1742,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1824,8 +1763,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1847,8 +1785,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1870,8 +1807,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1893,8 +1829,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1916,8 +1851,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1940,8 +1874,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1964,8 +1897,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_explain".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_explain".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -1987,8 +1919,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2010,8 +1941,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2033,8 +1963,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_source".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2056,8 +1985,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_source".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_source".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2078,8 +2006,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2100,8 +2027,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2124,8 +2050,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2148,8 +2073,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2170,8 +2094,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2192,8 +2115,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2216,8 +2138,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2240,8 +2161,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2291,8 +2211,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesAnalyzeGet(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Encoded(index));
+					var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2310,8 +2229,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesAnalyzeGetAsync(string index, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Encoded(index));
+					var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2328,8 +2246,7 @@ namespace Nest
 		///<param name="body">The text on which the analysis should be performed</param>
 		public ElasticsearchResponse IndicesAnalyzeForAll(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
-			//var url = "_analyze".Inject(new {  });
-			var url = "_analyze".F();
+					var url = "_analyze".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2346,8 +2263,7 @@ namespace Nest
 		///<param name="body">The text on which the analysis should be performed</param>
 		public Task<ElasticsearchResponse> IndicesAnalyzeForAllAsync(object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
-			//var url = "_analyze".Inject(new {  });
-			var url = "_analyze".F();
+					var url = "_analyze".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2366,8 +2282,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesAnalyze(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Encoded(index));
+					var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2386,8 +2301,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesAnalyzeAsync(string index, object body, Func<AnalyzeQueryString, AnalyzeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_analyze".Inject(new { index = Stringify(index) });
-			var url = "{0}/_analyze".F(Encoded(index));
+					var url = "{0}/_analyze".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2437,8 +2351,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesClearCache(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Encoded(index));
+					var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2456,8 +2369,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesClearCacheAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Encoded(index));
+					var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2507,8 +2419,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesClearCacheGet(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Encoded(index));
+					var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2526,8 +2437,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesClearCacheGetAsync(string index, Func<ClearCacheQueryString, ClearCacheQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_cache/clear".Inject(new { index = Stringify(index) });
-			var url = "{0}/_cache/clear".F(Encoded(index));
+					var url = "{0}/_cache/clear".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2545,8 +2455,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesClose(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_close".Inject(new { index = Stringify(index) });
-			var url = "{0}/_close".F(Encoded(index));
+					var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2564,8 +2473,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesCloseAsync(string index, Func<CloseIndexQueryString, CloseIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_close".Inject(new { index = Stringify(index) });
-			var url = "{0}/_close".F(Encoded(index));
+					var url = "{0}/_close".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2584,8 +2492,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesCreate(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2604,8 +2511,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesCreateAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2624,8 +2530,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesCreatePost(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2644,8 +2549,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesCreatePostAsync(string index, object body, Func<CreateIndexQueryString, CreateIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2663,8 +2567,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesDelete(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2682,8 +2585,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesDeleteAsync(string index, Func<DeleteIndexQueryString, DeleteIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2703,8 +2605,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2724,8 +2625,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2745,8 +2645,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2766,8 +2665,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2785,8 +2683,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesDeleteTemplateForAll(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2804,8 +2701,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesDeleteTemplateForAllAsync(string name, Func<DeleteTemplateQueryString, DeleteTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2825,8 +2721,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2846,8 +2741,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2865,8 +2759,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesExists(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2884,8 +2777,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesExistsAsync(string index, Func<IndexExistsQueryString, IndexExistsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}".Inject(new { index = Stringify(index) });
-			var url = "{0}".F(Encoded(index));
+					var url = "{0}".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2903,8 +2795,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesExistsAliasForAll(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2922,8 +2813,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesExistsAliasForAllAsync(string name, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2943,8 +2833,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2964,8 +2853,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -2983,8 +2871,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesExistsAlias(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
-			var url = "{0}/_alias".F(Encoded(index));
+					var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3002,8 +2889,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesExistsAliasAsync(string index, Func<IndicesExistsAliasQueryString, IndicesExistsAliasQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
-			var url = "{0}/_alias".F(Encoded(index));
+					var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3021,8 +2907,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesExistsTemplateForAll(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3040,8 +2925,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesExistsTemplateForAllAsync(string name, Func<IndicesExistsTemplateQueryString, IndicesExistsTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3061,8 +2945,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3082,8 +2965,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3133,8 +3015,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesFlush(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Encoded(index));
+					var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3152,8 +3033,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesFlushAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Encoded(index));
+					var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3203,8 +3083,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesFlushGet(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Encoded(index));
+					var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3222,8 +3101,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesFlushGetAsync(string index, Func<FlushQueryString, FlushQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_flush".Inject(new { index = Stringify(index) });
-			var url = "{0}/_flush".F(Encoded(index));
+					var url = "{0}/_flush".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3273,8 +3151,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetAliasForAll(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3292,8 +3169,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetAliasForAllAsync(string name, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3313,8 +3189,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3334,8 +3209,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3353,8 +3227,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetAlias(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
-			var url = "{0}/_alias".F(Encoded(index));
+					var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3372,8 +3245,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetAliasAsync(string index, Func<GetAliasesQueryString, GetAliasesQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_alias".Inject(new { index = Stringify(index) });
-			var url = "{0}/_alias".F(Encoded(index));
+					var url = "{0}/_alias".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3423,8 +3295,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetAliases(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_aliases".Inject(new { index = Stringify(index) });
-			var url = "{0}/_aliases".F(Encoded(index));
+					var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3442,8 +3313,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetAliasesAsync(string index, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_aliases".Inject(new { index = Stringify(index) });
-			var url = "{0}/_aliases".F(Encoded(index));
+					var url = "{0}/_aliases".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3463,8 +3333,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_aliases/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3484,8 +3353,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_aliases/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_aliases/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3503,8 +3371,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetAliasesForAll(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_aliases/{name}".Inject(new { name = Stringify(name) });
-			var url = "_aliases/{0}".F(Encoded(name));
+					var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3522,8 +3389,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetAliasesForAllAsync(string name, Func<IndicesGetAliasesQueryString, IndicesGetAliasesQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_aliases/{name}".Inject(new { name = Stringify(name) });
-			var url = "_aliases/{0}".F(Encoded(name));
+					var url = "_aliases/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3541,8 +3407,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetFieldMappingForAll(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "_mapping/field/{field}".Inject(new { field = Stringify(field) });
-			var url = "_mapping/field/{0}".F(Encoded(field));
+					var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3560,8 +3425,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetFieldMappingForAllAsync(string field, Func<IndicesGetFieldMappingQueryString, IndicesGetFieldMappingQueryString> queryString = null)
 		{
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "_mapping/field/{field}".Inject(new { field = Stringify(field) });
-			var url = "_mapping/field/{0}".F(Encoded(field));
+					var url = "_mapping/field/{0}".F(Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3581,8 +3445,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "{index}/_mapping/field/{field}".Inject(new { index = Stringify(index), field = Stringify(field) });
-			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
+					var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3602,8 +3465,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "{index}/_mapping/field/{field}".Inject(new { index = Stringify(index), field = Stringify(field) });
-			var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
+					var url = "{0}/_mapping/field/{1}".F(Encoded(index), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3623,8 +3485,7 @@ namespace Nest
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "_mapping/{type}/field/{field}".Inject(new { type = Stringify(type), field = Stringify(field) });
-			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
+					var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3644,8 +3505,7 @@ namespace Nest
 		{
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "_mapping/{type}/field/{field}".Inject(new { type = Stringify(type), field = Stringify(field) });
-			var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
+					var url = "_mapping/{0}/field/{1}".F(Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3667,8 +3527,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "{index}/_mapping/{type}/field/{field}".Inject(new { index = Stringify(index), type = Stringify(type), field = Stringify(field) });
-			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
+					var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3690,8 +3549,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			field.ThrowIfNullOrEmpty("field");
-			//var url = "{index}/_mapping/{type}/field/{field}".Inject(new { index = Stringify(index), type = Stringify(type), field = Stringify(field) });
-			var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
+					var url = "{0}/_mapping/{1}/field/{2}".F(Encoded(index), Encoded(type), Encoded(field));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3741,8 +3599,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetMapping(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mapping".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mapping".F(Encoded(index));
+					var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3760,8 +3617,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetMappingAsync(string index, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mapping".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mapping".F(Encoded(index));
+					var url = "{0}/_mapping".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3779,8 +3635,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetMappingForAll(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
-			var url = "_mapping/{0}".F(Encoded(type));
+					var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3798,8 +3653,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetMappingForAllAsync(string type, Func<GetMappingQueryString, GetMappingQueryString> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
-			var url = "_mapping/{0}".F(Encoded(type));
+					var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3819,8 +3673,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/_mapping/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3840,8 +3693,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/_mapping/{type}".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
+					var url = "{0}/_mapping/{1}".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3891,8 +3743,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetSettings(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Encoded(index));
+					var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3910,8 +3761,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetSettingsAsync(string index, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Encoded(index));
+					var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3931,8 +3781,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_settings/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3952,8 +3801,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_settings/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_settings/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3971,8 +3819,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetSettingsForAll(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_settings/{name}".Inject(new { name = Stringify(name) });
-			var url = "_settings/{0}".F(Encoded(name));
+					var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -3990,8 +3837,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetSettingsForAllAsync(string name, Func<GetIndexSettingsQueryString, GetIndexSettingsQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_settings/{name}".Inject(new { name = Stringify(name) });
-			var url = "_settings/{0}".F(Encoded(name));
+					var url = "_settings/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4041,8 +3887,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetTemplateForAll(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4060,8 +3905,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetTemplateForAllAsync(string name, Func<GetTemplateQueryString, GetTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4111,8 +3955,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetWarmer(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
-			var url = "{0}/_warmer".F(Encoded(index));
+					var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4130,8 +3973,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetWarmerAsync(string index, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_warmer".Inject(new { index = Stringify(index) });
-			var url = "{0}/_warmer".F(Encoded(index));
+					var url = "{0}/_warmer".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4151,8 +3993,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4172,8 +4013,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4191,8 +4031,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesGetWarmerForAll(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
-			var url = "_warmer/{0}".F(Encoded(name));
+					var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4210,8 +4049,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesGetWarmerForAllAsync(string name, Func<GetWarmerQueryString, GetWarmerQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
-			var url = "_warmer/{0}".F(Encoded(name));
+					var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4233,8 +4071,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
+					var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4256,8 +4093,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
+					var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4275,8 +4111,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesOpen(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_open".Inject(new { index = Stringify(index) });
-			var url = "{0}/_open".F(Encoded(index));
+					var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4294,8 +4129,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesOpenAsync(string index, Func<OpenIndexQueryString, OpenIndexQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_open".Inject(new { index = Stringify(index) });
-			var url = "{0}/_open".F(Encoded(index));
+					var url = "{0}/_open".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4345,8 +4179,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesOptimize(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Encoded(index));
+					var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4364,8 +4197,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesOptimizeAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Encoded(index));
+					var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4415,8 +4247,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesOptimizeGet(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Encoded(index));
+					var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4434,8 +4265,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesOptimizeGetAsync(string index, Func<OptimizeQueryString, OptimizeQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_optimize".Inject(new { index = Stringify(index) });
-			var url = "{0}/_optimize".F(Encoded(index));
+					var url = "{0}/_optimize".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4456,8 +4286,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4478,8 +4307,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4498,8 +4326,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutAliasForAll(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4518,8 +4345,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutAliasForAllAsync(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4540,8 +4366,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4562,8 +4387,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_alias/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_alias/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4582,8 +4406,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutAliasPostForAll(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4602,8 +4425,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutAliasPostForAllAsync(string name, object body, Func<IndicesPutAliasQueryString, IndicesPutAliasQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_alias/{name}".Inject(new { name = Stringify(name) });
-			var url = "_alias/{0}".F(Encoded(name));
+					var url = "_alias/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4624,8 +4446,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4646,8 +4467,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4666,8 +4486,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutMappingForAll(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
-			var url = "_mapping/{0}".F(Encoded(type));
+					var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4686,8 +4505,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutMappingForAllAsync(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
-			var url = "_mapping/{0}".F(Encoded(type));
+					var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4708,8 +4526,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4730,8 +4547,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mapping".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mapping".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4750,8 +4566,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutMappingPostForAll(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
-			var url = "_mapping/{0}".F(Encoded(type));
+					var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4770,8 +4585,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutMappingPostForAllAsync(string type, object body, Func<PutMappingQueryString, PutMappingQueryString> queryString = null)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "_mapping/{type}".Inject(new { type = Stringify(type) });
-			var url = "_mapping/{0}".F(Encoded(type));
+					var url = "_mapping/{0}".F(Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4788,8 +4602,7 @@ namespace Nest
 		///<param name="body">The index settings to be updated</param>
 		public ElasticsearchResponse IndicesPutSettingsForAll(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
-			//var url = "_settings".Inject(new {  });
-			var url = "_settings".F();
+					var url = "_settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4806,8 +4619,7 @@ namespace Nest
 		///<param name="body">The index settings to be updated</param>
 		public Task<ElasticsearchResponse> IndicesPutSettingsForAllAsync(object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
-			//var url = "_settings".Inject(new {  });
-			var url = "_settings".F();
+					var url = "_settings".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4826,8 +4638,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutSettings(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Encoded(index));
+					var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4846,8 +4657,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutSettingsAsync(string index, object body, Func<UpdateSettingsQueryString, UpdateSettingsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_settings".Inject(new { index = Stringify(index) });
-			var url = "{0}/_settings".F(Encoded(index));
+					var url = "{0}/_settings".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4866,8 +4676,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutTemplateForAll(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4886,8 +4695,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutTemplateForAllAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4906,8 +4714,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutTemplatePostForAll(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4926,8 +4733,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutTemplatePostForAllAsync(string name, object body, Func<PutTemplateQueryString, PutTemplateQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_template/{name}".Inject(new { name = Stringify(name) });
-			var url = "_template/{0}".F(Encoded(name));
+					var url = "_template/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4946,8 +4752,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutWarmerForAll(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
-			var url = "_warmer/{0}".F(Encoded(name));
+					var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4966,8 +4771,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutWarmerForAllAsync(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
-			var url = "_warmer/{0}".F(Encoded(name));
+					var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -4988,8 +4792,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5010,8 +4813,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5034,8 +4836,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
+					var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5058,8 +4859,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
+					var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5078,8 +4878,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesPutWarmerPostForAll(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
-			var url = "_warmer/{0}".F(Encoded(name));
+					var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5098,8 +4897,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesPutWarmerPostForAllAsync(string name, object body, Func<PutWarmerQueryString, PutWarmerQueryString> queryString = null)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "_warmer/{name}".Inject(new { name = Stringify(name) });
-			var url = "_warmer/{0}".F(Encoded(name));
+					var url = "_warmer/{0}".F(Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5120,8 +4918,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5142,8 +4939,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/_warmer/{name}".Inject(new { index = Stringify(index), name = Stringify(name) });
-			var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
+					var url = "{0}/_warmer/{1}".F(Encoded(index), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5166,8 +4962,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
+					var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5190,8 +4985,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			name.ThrowIfNullOrEmpty("name");
-			//var url = "{index}/{type}/_warmer/{name}".Inject(new { index = Stringify(index), type = Stringify(type), name = Stringify(name) });
-			var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
+					var url = "{0}/{1}/_warmer/{2}".F(Encoded(index), Encoded(type), Encoded(name));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5241,8 +5035,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesRefresh(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Encoded(index));
+					var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5260,8 +5053,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesRefreshAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Encoded(index));
+					var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5311,8 +5103,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesRefreshGet(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Encoded(index));
+					var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5330,8 +5121,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesRefreshGetAsync(string index, Func<RefreshQueryString, RefreshQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_refresh".Inject(new { index = Stringify(index) });
-			var url = "{0}/_refresh".F(Encoded(index));
+					var url = "{0}/_refresh".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5381,8 +5171,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesSegments(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_segments".Inject(new { index = Stringify(index) });
-			var url = "{0}/_segments".F(Encoded(index));
+					var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5400,8 +5189,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesSegmentsAsync(string index, Func<SegmentsQueryString, SegmentsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_segments".Inject(new { index = Stringify(index) });
-			var url = "{0}/_segments".F(Encoded(index));
+					var url = "{0}/_segments".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5451,8 +5239,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesSnapshotIndex(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
-			var url = "{0}/_gateway/snapshot".F(Encoded(index));
+					var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5470,8 +5257,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesSnapshotIndexAsync(string index, Func<SnapshotQueryString, SnapshotQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_gateway/snapshot".Inject(new { index = Stringify(index) });
-			var url = "{0}/_gateway/snapshot".F(Encoded(index));
+					var url = "{0}/_gateway/snapshot".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5521,8 +5307,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesStatsForAll(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_stats/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_stats/{0}".F(Encoded(metric));
+					var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5540,8 +5325,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesStatsForAllAsync(string metric, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_stats/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_stats/{0}".F(Encoded(metric));
+					var url = "_stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5559,8 +5343,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesStats(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_stats".Inject(new { index = Stringify(index) });
-			var url = "{0}/_stats".F(Encoded(index));
+					var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5578,8 +5361,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesStatsAsync(string index, Func<IndicesStatsQueryString, IndicesStatsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_stats".Inject(new { index = Stringify(index) });
-			var url = "{0}/_stats".F(Encoded(index));
+					var url = "{0}/_stats".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5599,8 +5381,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "{index}/_stats/{metric}".Inject(new { index = Stringify(index), metric = Stringify(metric) });
-			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
+					var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5620,8 +5401,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "{index}/_stats/{metric}".Inject(new { index = Stringify(index), metric = Stringify(metric) });
-			var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
+					var url = "{0}/_stats/{1}".F(Encoded(index), Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5671,8 +5451,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesStatus(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_status".Inject(new { index = Stringify(index) });
-			var url = "{0}/_status".F(Encoded(index));
+					var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5690,8 +5469,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesStatusAsync(string index, Func<IndicesStatusQueryString, IndicesStatusQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_status".Inject(new { index = Stringify(index) });
-			var url = "{0}/_status".F(Encoded(index));
+					var url = "{0}/_status".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5708,8 +5486,7 @@ namespace Nest
 		///<param name="body">The definition of `actions` to perform</param>
 		public ElasticsearchResponse IndicesUpdateAliasesForAll(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
 		{
-			//var url = "_aliases".Inject(new {  });
-			var url = "_aliases".F();
+					var url = "_aliases".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5726,8 +5503,7 @@ namespace Nest
 		///<param name="body">The definition of `actions` to perform</param>
 		public Task<ElasticsearchResponse> IndicesUpdateAliasesForAllAsync(object body, Func<AliasQueryString, AliasQueryString> queryString = null)
 		{
-			//var url = "_aliases".Inject(new {  });
-			var url = "_aliases".F();
+					var url = "_aliases".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5777,8 +5553,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesValidateQueryGet(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Encoded(index));
+					var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5796,8 +5571,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesValidateQueryGetAsync(string index, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Encoded(index));
+					var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5817,8 +5591,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5838,8 +5611,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5856,8 +5628,7 @@ namespace Nest
 		///<param name="body">The query definition specified with the Query DSL</param>
 		public ElasticsearchResponse IndicesValidateQueryForAll(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			//var url = "_validate/query".Inject(new {  });
-			var url = "_validate/query".F();
+					var url = "_validate/query".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5874,8 +5645,7 @@ namespace Nest
 		///<param name="body">The query definition specified with the Query DSL</param>
 		public Task<ElasticsearchResponse> IndicesValidateQueryForAllAsync(object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
-			//var url = "_validate/query".Inject(new {  });
-			var url = "_validate/query".F();
+					var url = "_validate/query".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5894,8 +5664,7 @@ namespace Nest
 		public ElasticsearchResponse IndicesValidateQuery(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Encoded(index));
+					var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5914,8 +5683,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> IndicesValidateQueryAsync(string index, object body, Func<ValidateQueryQueryString, ValidateQueryQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_validate/query".Inject(new { index = Stringify(index) });
-			var url = "{0}/_validate/query".F(Encoded(index));
+					var url = "{0}/_validate/query".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5936,8 +5704,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -5958,8 +5725,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_validate/query".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_validate/query".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6041,8 +5807,7 @@ namespace Nest
 		public ElasticsearchResponse MgetGet(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Encoded(index));
+					var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6060,8 +5825,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MgetGetAsync(string index, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Encoded(index));
+					var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6081,8 +5845,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6102,8 +5865,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6120,8 +5882,7 @@ namespace Nest
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public ElasticsearchResponse Mget(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			//var url = "_mget".Inject(new {  });
-			var url = "_mget".F();
+					var url = "_mget".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6138,8 +5899,7 @@ namespace Nest
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		public Task<ElasticsearchResponse> MgetAsync(object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
-			//var url = "_mget".Inject(new {  });
-			var url = "_mget".F();
+					var url = "_mget".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6158,8 +5918,7 @@ namespace Nest
 		public ElasticsearchResponse Mget(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Encoded(index));
+					var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6178,8 +5937,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MgetAsync(string index, object body, Func<MultiGetQueryString, MultiGetQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mget".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mget".F(Encoded(index));
+					var url = "{0}/_mget".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6200,8 +5958,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6222,8 +5979,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mget".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mget".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6245,8 +6001,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6268,8 +6023,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6292,8 +6046,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6316,8 +6069,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_mlt".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_mlt".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6367,8 +6119,7 @@ namespace Nest
 		public ElasticsearchResponse MpercolateGet(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mpercolate".F(Encoded(index));
+					var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6386,8 +6137,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MpercolateGetAsync(string index, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mpercolate".F(Encoded(index));
+					var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6407,8 +6157,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6428,8 +6177,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6446,8 +6194,7 @@ namespace Nest
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		public ElasticsearchResponse Mpercolate(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			//var url = "_mpercolate".Inject(new {  });
-			var url = "_mpercolate".F();
+					var url = "_mpercolate".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6464,8 +6211,7 @@ namespace Nest
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		public Task<ElasticsearchResponse> MpercolateAsync(object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
-			//var url = "_mpercolate".Inject(new {  });
-			var url = "_mpercolate".F();
+					var url = "_mpercolate".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6484,8 +6230,7 @@ namespace Nest
 		public ElasticsearchResponse Mpercolate(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mpercolate".F(Encoded(index));
+					var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6504,8 +6249,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MpercolateAsync(string index, object body, Func<MpercolateQueryString, MpercolateQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mpercolate".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mpercolate".F(Encoded(index));
+					var url = "{0}/_mpercolate".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6526,8 +6270,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6548,8 +6291,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mpercolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mpercolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6599,8 +6341,7 @@ namespace Nest
 		public ElasticsearchResponse MsearchGet(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Encoded(index));
+					var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6618,8 +6359,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MsearchGetAsync(string index, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Encoded(index));
+					var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6639,8 +6379,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6660,8 +6399,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6678,8 +6416,7 @@ namespace Nest
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public ElasticsearchResponse Msearch(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			//var url = "_msearch".Inject(new {  });
-			var url = "_msearch".F();
+					var url = "_msearch".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6696,8 +6433,7 @@ namespace Nest
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		public Task<ElasticsearchResponse> MsearchAsync(object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
-			//var url = "_msearch".Inject(new {  });
-			var url = "_msearch".F();
+					var url = "_msearch".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6716,8 +6452,7 @@ namespace Nest
 		public ElasticsearchResponse Msearch(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Encoded(index));
+					var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6736,8 +6471,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MsearchAsync(string index, object body, Func<MultiSearchQueryString, MultiSearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_msearch".Inject(new { index = Stringify(index) });
-			var url = "{0}/_msearch".F(Encoded(index));
+					var url = "{0}/_msearch".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6758,8 +6492,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6780,8 +6513,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_msearch".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_msearch".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6831,8 +6563,7 @@ namespace Nest
 		public ElasticsearchResponse MtermvectorsGet(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mtermvectors".F(Encoded(index));
+					var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6850,8 +6581,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MtermvectorsGetAsync(string index, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mtermvectors".F(Encoded(index));
+					var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6871,8 +6601,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6892,8 +6621,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6910,8 +6638,7 @@ namespace Nest
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		public ElasticsearchResponse Mtermvectors(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			//var url = "_mtermvectors".Inject(new {  });
-			var url = "_mtermvectors".F();
+					var url = "_mtermvectors".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6928,8 +6655,7 @@ namespace Nest
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		public Task<ElasticsearchResponse> MtermvectorsAsync(object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
-			//var url = "_mtermvectors".Inject(new {  });
-			var url = "_mtermvectors".F();
+					var url = "_mtermvectors".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6948,8 +6674,7 @@ namespace Nest
 		public ElasticsearchResponse Mtermvectors(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mtermvectors".F(Encoded(index));
+					var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6968,8 +6693,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> MtermvectorsAsync(string index, object body, Func<MtermvectorsQueryString, MtermvectorsQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_mtermvectors".Inject(new { index = Stringify(index) });
-			var url = "{0}/_mtermvectors".F(Encoded(index));
+					var url = "{0}/_mtermvectors".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -6990,8 +6714,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7012,8 +6735,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_mtermvectors".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_mtermvectors".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7063,8 +6785,7 @@ namespace Nest
 		public ElasticsearchResponse NodesHotThreads(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cluster/nodes/{node_id}/hotthreads".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
+					var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7082,8 +6803,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> NodesHotThreadsAsync(string node_id, Func<NodesHotThreadsQueryString, NodesHotThreadsQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cluster/nodes/{node_id}/hotthreads".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
+					var url = "_cluster/nodes/{0}/hotthreads".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7133,8 +6853,7 @@ namespace Nest
 		public ElasticsearchResponse NodesInfo(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_nodes/{0}".F(Encoded(node_id));
+					var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7152,8 +6871,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> NodesInfoAsync(string node_id, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_nodes/{node_id}".Inject(new { node_id = Stringify(node_id) });
-			var url = "_nodes/{0}".F(Encoded(node_id));
+					var url = "_nodes/{0}".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7171,8 +6889,7 @@ namespace Nest
 		public ElasticsearchResponse NodesInfoForAll(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_nodes/{0}".F(Encoded(metric));
+					var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7190,8 +6907,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> NodesInfoForAllAsync(string metric, Func<NodesInfoQueryString, NodesInfoQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_nodes/{0}".F(Encoded(metric));
+					var url = "_nodes/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7211,8 +6927,7 @@ namespace Nest
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/{node_id}/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
-			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
+					var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7232,8 +6947,7 @@ namespace Nest
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/{node_id}/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
-			var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
+					var url = "_nodes/{0}/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7283,8 +6997,7 @@ namespace Nest
 		public ElasticsearchResponse NodesShutdown(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cluster/nodes/{node_id}/_shutdown".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
+					var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7302,8 +7015,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> NodesShutdownAsync(string node_id, Func<NodesShutdownQueryString, NodesShutdownQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_cluster/nodes/{node_id}/_shutdown".Inject(new { node_id = Stringify(node_id) });
-			var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
+					var url = "_cluster/nodes/{0}/_shutdown".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7353,8 +7065,7 @@ namespace Nest
 		public ElasticsearchResponse NodesStats(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_nodes/{node_id}/stats".Inject(new { node_id = Stringify(node_id) });
-			var url = "_nodes/{0}/stats".F(Encoded(node_id));
+					var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7372,8 +7083,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> NodesStatsAsync(string node_id, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
-			//var url = "_nodes/{node_id}/stats".Inject(new { node_id = Stringify(node_id) });
-			var url = "_nodes/{0}/stats".F(Encoded(node_id));
+					var url = "_nodes/{0}/stats".F(Encoded(node_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7391,8 +7101,7 @@ namespace Nest
 		public ElasticsearchResponse NodesStatsForAll(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/stats/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_nodes/stats/{0}".F(Encoded(metric));
+					var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7410,8 +7119,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> NodesStatsForAllAsync(string metric, Func<NodesStatsQueryString, NodesStatsQueryString> queryString = null)
 		{
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/stats/{metric}".Inject(new { metric = Stringify(metric) });
-			var url = "_nodes/stats/{0}".F(Encoded(metric));
+					var url = "_nodes/stats/{0}".F(Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7431,8 +7139,7 @@ namespace Nest
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/{node_id}/stats/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
-			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
+					var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7452,8 +7159,7 @@ namespace Nest
 		{
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
-			//var url = "_nodes/{node_id}/stats/{metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric) });
-			var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
+					var url = "_nodes/{0}/stats/{1}".F(Encoded(node_id), Encoded(metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7473,8 +7179,7 @@ namespace Nest
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
-			//var url = "_nodes/stats/{metric}/{index_metric}".Inject(new { metric = Stringify(metric), index_metric = Stringify(index_metric) });
-			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
+					var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7494,8 +7199,7 @@ namespace Nest
 		{
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
-			//var url = "_nodes/stats/{metric}/{index_metric}".Inject(new { metric = Stringify(metric), index_metric = Stringify(index_metric) });
-			var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
+					var url = "_nodes/stats/{0}/{1}".F(Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7517,8 +7221,7 @@ namespace Nest
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
-			//var url = "_nodes/{node_id}/stats/{metric}/{index_metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric), index_metric = Stringify(index_metric) });
-			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
+					var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7540,8 +7243,7 @@ namespace Nest
 			node_id.ThrowIfNullOrEmpty("node_id");
 			metric.ThrowIfNullOrEmpty("metric");
 			index_metric.ThrowIfNullOrEmpty("index_metric");
-			//var url = "_nodes/{node_id}/stats/{metric}/{index_metric}".Inject(new { node_id = Stringify(node_id), metric = Stringify(metric), index_metric = Stringify(index_metric) });
-			var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
+					var url = "_nodes/{0}/stats/{1}/{2}".F(Encoded(node_id), Encoded(metric), Encoded(index_metric));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7561,8 +7263,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7582,8 +7283,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7605,8 +7305,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7628,8 +7327,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7650,8 +7348,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7672,8 +7369,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_percolate".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7696,8 +7392,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7720,8 +7415,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_percolate".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_percolate".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7803,8 +7497,7 @@ namespace Nest
 		public ElasticsearchResponse ScrollGet(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
-			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
+					var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7822,8 +7515,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> ScrollGetAsync(string scroll_id, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
-			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
+					var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7840,8 +7532,7 @@ namespace Nest
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		public ElasticsearchResponse Scroll(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
-			//var url = "_search/scroll".Inject(new {  });
-			var url = "_search/scroll".F();
+					var url = "_search/scroll".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7858,8 +7549,7 @@ namespace Nest
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		public Task<ElasticsearchResponse> ScrollAsync(object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
-			//var url = "_search/scroll".Inject(new {  });
-			var url = "_search/scroll".F();
+					var url = "_search/scroll".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7878,8 +7568,7 @@ namespace Nest
 		public ElasticsearchResponse Scroll(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
-			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
+					var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7898,8 +7587,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> ScrollAsync(string scroll_id, object body, Func<ScrollQueryString, ScrollQueryString> queryString = null)
 		{
 			scroll_id.ThrowIfNullOrEmpty("scroll_id");
-			//var url = "_search/scroll/{scroll_id}".Inject(new { scroll_id = Stringify(scroll_id) });
-			var url = "_search/scroll/{0}".F(Encoded(scroll_id));
+					var url = "_search/scroll/{0}".F(Encoded(scroll_id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7949,8 +7637,7 @@ namespace Nest
 		public ElasticsearchResponse SearchGet(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Encoded(index));
+					var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7968,8 +7655,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SearchGetAsync(string index, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Encoded(index));
+					var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -7989,8 +7675,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8010,8 +7695,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8028,8 +7712,7 @@ namespace Nest
 		///<param name="body">The search definition using the Query DSL</param>
 		public ElasticsearchResponse Search(object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			//var url = "_search".Inject(new {  });
-			var url = "_search".F();
+					var url = "_search".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8046,8 +7729,7 @@ namespace Nest
 		///<param name="body">The search definition using the Query DSL</param>
 		public Task<ElasticsearchResponse> SearchAsync(object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
-			//var url = "_search".Inject(new {  });
-			var url = "_search".F();
+					var url = "_search".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8066,8 +7748,7 @@ namespace Nest
 		public ElasticsearchResponse Search(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Encoded(index));
+					var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8086,8 +7767,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SearchAsync(string index, object body, Func<SearchQueryString, SearchQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_search".Inject(new { index = Stringify(index) });
-			var url = "{0}/_search".F(Encoded(index));
+					var url = "{0}/_search".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8108,8 +7788,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8130,8 +7809,7 @@ namespace Nest
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
-			//var url = "{index}/{type}/_search".Inject(new { index = Stringify(index), type = Stringify(type) });
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+					var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8152,8 +7830,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8174,8 +7851,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8196,8 +7872,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8218,8 +7893,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8238,8 +7912,7 @@ namespace Nest
 		public ElasticsearchResponse SnapshotCreateRepository(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8258,8 +7931,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SnapshotCreateRepositoryAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8278,8 +7950,7 @@ namespace Nest
 		public ElasticsearchResponse SnapshotCreateRepositoryPost(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8298,8 +7969,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SnapshotCreateRepositoryPostAsync(string repository, object body, Func<SnapshotCreateRepositoryQueryString, SnapshotCreateRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8319,8 +7989,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8340,8 +8009,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8359,8 +8027,7 @@ namespace Nest
 		public ElasticsearchResponse SnapshotDeleteRepository(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8378,8 +8045,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SnapshotDeleteRepositoryAsync(string repository, Func<SnapshotDeleteRepositoryQueryString, SnapshotDeleteRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8399,8 +8065,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8420,8 +8085,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8471,8 +8135,7 @@ namespace Nest
 		public ElasticsearchResponse SnapshotGetRepository(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8490,8 +8153,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SnapshotGetRepositoryAsync(string repository, Func<SnapshotGetRepositoryQueryString, SnapshotGetRepositoryQueryString> queryString = null)
 		{
 			repository.ThrowIfNullOrEmpty("repository");
-			//var url = "_snapshot/{repository}".Inject(new { repository = Stringify(repository) });
-			var url = "_snapshot/{0}".F(Encoded(repository));
+					var url = "_snapshot/{0}".F(Encoded(repository));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8512,8 +8174,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}/_restore".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8534,8 +8195,7 @@ namespace Nest
 		{
 			repository.ThrowIfNullOrEmpty("repository");
 			snapshot.ThrowIfNullOrEmpty("snapshot");
-			//var url = "_snapshot/{repository}/{snapshot}/_restore".Inject(new { repository = Stringify(repository), snapshot = Stringify(snapshot) });
-			var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
+					var url = "_snapshot/{0}/{1}/_restore".F(Encoded(repository), Encoded(snapshot));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8552,8 +8212,7 @@ namespace Nest
 		///<param name="body">The request definition</param>
 		public ElasticsearchResponse Suggest(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
-			//var url = "_suggest".Inject(new {  });
-			var url = "_suggest".F();
+					var url = "_suggest".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8570,8 +8229,7 @@ namespace Nest
 		///<param name="body">The request definition</param>
 		public Task<ElasticsearchResponse> SuggestAsync(object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
-			//var url = "_suggest".Inject(new {  });
-			var url = "_suggest".F();
+					var url = "_suggest".F();
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8590,8 +8248,7 @@ namespace Nest
 		public ElasticsearchResponse Suggest(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Encoded(index));
+					var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8610,8 +8267,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SuggestAsync(string index, object body, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Encoded(index));
+					var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8661,8 +8317,7 @@ namespace Nest
 		public ElasticsearchResponse SuggestGet(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Encoded(index));
+					var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8680,8 +8335,7 @@ namespace Nest
 		public Task<ElasticsearchResponse> SuggestGetAsync(string index, Func<SuggestQueryString, SuggestQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
-			//var url = "{index}/_suggest".Inject(new { index = Stringify(index) });
-			var url = "{0}/_suggest".F(Encoded(index));
+					var url = "{0}/_suggest".F(Encoded(index));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8703,8 +8357,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8726,8 +8379,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8750,8 +8402,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8774,8 +8425,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_termvector".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_termvector".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8798,8 +8448,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_update".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
@@ -8822,8 +8471,7 @@ namespace Nest
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
 			id.ThrowIfNullOrEmpty("id");
-			//var url = "{index}/{type}/{id}/_update".Inject(new { index = Stringify(index), type = Stringify(type), id = Stringify(id) });
-			var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
+					var url = "{0}/{1}/{2}/_update".F(Encoded(index), Encoded(type), Encoded(id));
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{

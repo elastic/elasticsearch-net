@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using Nest.Resolvers;
+using Elasticsearch.Net;
 
 namespace Nest
 {

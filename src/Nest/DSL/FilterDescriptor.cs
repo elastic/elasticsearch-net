@@ -8,6 +8,7 @@ using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
 using System.Linq.Expressions;
 using System.Globalization;
+using Elasticsearch.Net;
 using Nest.Resolvers;
 using System.Collections;
 

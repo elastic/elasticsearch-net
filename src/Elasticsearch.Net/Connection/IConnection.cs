@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	public interface IConnection
 	{

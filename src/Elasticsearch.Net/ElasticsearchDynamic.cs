@@ -1,13 +1,13 @@
 ﻿//This is nancyfx's dynamicdictionary renamed to ElasticsearchDynamic
 //it adds the ability to chain dynamic property access without binding on null ref errors.
 
-namespace Nest
-{
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Dynamic;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Dynamic;
 
+namespace Elasticsearch.Net
+{
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>

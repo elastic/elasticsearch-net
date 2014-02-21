@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Nest.Thrift;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration
 {

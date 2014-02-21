@@ -1,15 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
+using System.Globalization;
+using System.Linq.Expressions;
+using Microsoft.CSharp.RuntimeBinder;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
-	using System;
-	using System.ComponentModel;
-	using System.Dynamic;
-	using System.Globalization;
-	using System.Linq.Expressions;
-	using Microsoft.CSharp.RuntimeBinder;
-
 	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>, IConvertible
 	{
 		private readonly object value;

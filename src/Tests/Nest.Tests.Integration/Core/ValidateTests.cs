@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using System.Linq;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.Core
 {

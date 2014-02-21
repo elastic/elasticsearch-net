@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Globalization;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
+using Elasticsearch.Net;
 
 namespace Nest.DSL.Descriptors
 {

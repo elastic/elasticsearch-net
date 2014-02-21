@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
 using Nest.Domain;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;

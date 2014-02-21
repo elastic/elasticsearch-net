@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 using Nest.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

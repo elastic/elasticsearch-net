@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.Concurrent;
 using System.Reflection;
+using Elasticsearch.Net;
 
 namespace Nest.Resolvers
 {

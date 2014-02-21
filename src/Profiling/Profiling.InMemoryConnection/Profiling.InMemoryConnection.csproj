@@ -52,6 +52,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
+      <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
+      <Name>Elasticsearch.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Nest\Nest.csproj">
       <Project>{072ba7da-7b60-407d-8b6e-95e3186be70c}</Project>
       <Name>Nest</Name>

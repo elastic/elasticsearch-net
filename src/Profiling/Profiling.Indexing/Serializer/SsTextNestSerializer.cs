@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 using Nest;
 using ServiceStack.Text;
 
@@ -9,7 +10,7 @@ namespace Profiling.Indexing.Serializer
 {
 	public class SsTextNestSerializer : NestSerializer
 	{
-		public SsTextNestSerializer(IConnectionSettings settings)
+		public SsTextNestSerializer(IConnectionSettingsValues settings)
 			: base(settings)
 		{
 		}

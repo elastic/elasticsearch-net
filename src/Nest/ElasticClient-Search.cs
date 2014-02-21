@@ -7,6 +7,7 @@ using Microsoft.CSharp.RuntimeBinder;
 using System.Reflection;
 using System.Linq;
 using Nest.Resolvers;
+using Elasticsearch.Net;
 
 namespace Nest
 {

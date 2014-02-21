@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 @{
 	RestApiSpec model = Model;
 	<text>
-namespace Nest
+namespace Elasticsearch.Net
 {
 	///<summary>
 	///Raw operations with elasticsearch
@@ -49,7 +49,6 @@ namespace Nest
 		}
 		@if (method.Parts.Any())
 		{
-	<text>//var url = "@(url)".Inject(new { @string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> p.Name + " = Stringify(" + p.Name +")" )) });</text>
 	<text>		var url = "@(patchedUrl)".F(@string.Join(", ", method.Parts.Where(p=>p.Name != "body").Select(p=> "Encoded(" + p.Name +")" )));</text>
 		}
 		else

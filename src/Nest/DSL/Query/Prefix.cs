@@ -6,6 +6,7 @@ using Nest.Resolvers;
 using Newtonsoft.Json;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Converters;
+using Elasticsearch.Net;
 
 namespace Nest
 {

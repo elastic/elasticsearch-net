@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using Elasticsearch.Net;
+
+namespace Nest
 {
 	interface IPathInfo<K> where K : FluentQueryString<K>, new()
 	{

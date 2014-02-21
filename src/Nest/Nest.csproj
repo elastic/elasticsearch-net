@@ -172,6 +172,7 @@
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
+    <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />
     <Compile Include="Domain\DSL\GeoIndexedShapeVector.cs" />

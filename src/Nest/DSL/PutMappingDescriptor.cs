@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Elasticsearch.Net;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;

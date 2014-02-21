@@ -115,6 +115,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
+      <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
+      <Name>Elasticsearch.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 ///Generated File Please Do Not Edit Manually
-namespace Nest
+namespace Elasticsearch.Net
 {
 	///<summary>
 	///Raw operations with elasticsearch
@@ -18,7 +18,11 @@ namespace Nest
 	///</pre>
 	///</summary>
 	public interface IElasticsearch
-	{
+	{	
+		IConnection Connection { get; }
+		IConnectionSettings2 Settings { get; }
+		IElasticsearchSerializer Serializer { get; }
+
 		///<summary>POST /_bulk
 		///<pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html</pre>	
 		///</summary>

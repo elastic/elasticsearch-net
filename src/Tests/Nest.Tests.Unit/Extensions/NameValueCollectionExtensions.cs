@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Specialized;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Unit.Extensions
 {

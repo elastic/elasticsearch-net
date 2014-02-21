@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -29,7 +30,7 @@ namespace Nest
 			this.Connection = connection ?? new Connection(settings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			this.Raw = new Elasticsearch(this._connectionSettings, this.Connection, this.Serializer);
+			this.Raw = new Elasticsearch.Net.Elasticsearch(this._connectionSettings, this.Connection, this.Serializer);
 			this.RawDispatch = new RawDispatch(this.Raw);
 			this.Infer = new ElasticInferrer(this._connectionSettings);
 

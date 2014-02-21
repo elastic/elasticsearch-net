@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// Used by the raw client to compose querystring parameters in a matter that still exposes some xmldocs

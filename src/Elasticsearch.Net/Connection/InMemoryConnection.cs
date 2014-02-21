@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// 

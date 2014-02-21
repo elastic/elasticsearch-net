@@ -177,6 +177,10 @@
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
+      <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
+      <Name>Elasticsearch.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Nest.Connection.Thrift\Nest.Connection.Thrift.csproj">
       <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
       <Name>Nest.Connection.Thrift</Name>

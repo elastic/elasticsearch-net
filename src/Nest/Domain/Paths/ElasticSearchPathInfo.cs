@@ -1,4 +1,6 @@
-﻿namespace Nest
+﻿using Elasticsearch.Net;
+
+namespace Nest
 {
 	internal class ElasticsearchPathInfo<T> where T : FluentQueryString<T>, new()
 	{

@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
 using System.Globalization;
 using Nest.Resolvers;
 using System.Runtime.Serialization;

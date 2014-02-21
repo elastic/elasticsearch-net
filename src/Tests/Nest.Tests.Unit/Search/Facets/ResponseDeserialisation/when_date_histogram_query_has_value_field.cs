@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 using Moq;
 using NUnit.Framework;
 

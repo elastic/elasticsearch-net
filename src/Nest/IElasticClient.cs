@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Nest.Domain;
 using System.Collections.Generic;
 using Newtonsoft.Json;

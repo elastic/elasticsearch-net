@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Remoting;
 using System.Security;
+using Elasticsearch.Net;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Domain.Connection
+namespace Elasticsearch.Net
 {
 	public class ConnectionStatusTracer : IDisposable
 	{

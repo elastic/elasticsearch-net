@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Nest.Resolvers;

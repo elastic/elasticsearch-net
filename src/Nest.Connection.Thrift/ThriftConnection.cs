@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Elasticsearch.Net;
 using Nest.Thrift;
 using Thrift.Protocol;
 using Thrift.Transport;
@@ -18,9 +19,9 @@ namespace Nest.Thrift
 		private readonly int _timeout;
 		private readonly int _poolSize;
 		private bool _disposed;
-		private readonly IConnectionSettings _connectionSettings;
+		private readonly IConnectionSettings2 _connectionSettings;
 
-		public ThriftConnection(IConnectionSettings connectionSettings)
+		public ThriftConnection(IConnectionSettings2 connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 			this._timeout = connectionSettings.Timeout;
@@ -40,7 +41,7 @@ namespace Nest.Thrift
 
 		#region IConnection Members
 
-		public Task<ConnectionStatus> Get(string path)
+		public Task<ElasticsearchResponse> Get(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
@@ -48,13 +49,13 @@ namespace Nest.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
 			{
 				return this.Execute(restRequest);
 			});
 		}
 	
-		public Task<ConnectionStatus> Head(string path)
+		public Task<ElasticsearchResponse> Head(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -62,13 +63,13 @@ namespace Nest.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ConnectionStatus>(()=> 
+			return Task.Factory.StartNew<ElasticsearchResponse>(()=> 
 			{
 				return this.Execute(restRequest);
 			});
 		}
 
-		public ConnectionStatus GetSync(string path)
+		public ElasticsearchResponse GetSync(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
@@ -79,7 +80,7 @@ namespace Nest.Thrift
 			return this.Execute(restRequest);
 		}
 
-		public ConnectionStatus HeadSync(string path)
+		public ElasticsearchResponse HeadSync(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -90,7 +91,7 @@ namespace Nest.Thrift
 			return this.Execute(restRequest);
 		}
 
-		public Task<ConnectionStatus> Post(string path, byte[] data)
+		public Task<ElasticsearchResponse> Post(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
@@ -99,12 +100,12 @@ namespace Nest.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
 			{
 				return this.Execute(restRequest);
 			});
 		}
-		public Task<ConnectionStatus> Put(string path, byte[] data)
+		public Task<ElasticsearchResponse> Put(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
@@ -113,12 +114,12 @@ namespace Nest.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
 			{
 				return this.Execute(restRequest);
 			});
 		}
-		public Task<ConnectionStatus> Delete(string path, byte[] data)
+		public Task<ElasticsearchResponse> Delete(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -127,13 +128,13 @@ namespace Nest.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
 			{
 				return this.Execute(restRequest);
 			});
 		}
 
-		public ConnectionStatus PostSync(string path, byte[] data)
+		public ElasticsearchResponse PostSync(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
@@ -144,7 +145,7 @@ namespace Nest.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public ConnectionStatus PutSync(string path, byte[] data)
+		public ElasticsearchResponse PutSync(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
@@ -155,7 +156,7 @@ namespace Nest.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public Task<ConnectionStatus> Delete(string path)
+		public Task<ElasticsearchResponse> Delete(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -163,13 +164,13 @@ namespace Nest.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ConnectionStatus>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
 			{
 				return this.Execute(restRequest);
 			});
 		}
 
-		public ConnectionStatus DeleteSync(string path)
+		public ElasticsearchResponse DeleteSync(string path)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -179,7 +180,7 @@ namespace Nest.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public ConnectionStatus DeleteSync(string path, byte[] data)
+		public ElasticsearchResponse DeleteSync(string path, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -237,7 +238,7 @@ namespace Nest.Thrift
 
 
 
-		private ConnectionStatus Execute(RestRequest restRequest)
+		private ElasticsearchResponse Execute(RestRequest restRequest)
 		{
 			//RestResponse result = GetClient().execute(restRequest);
 			//
@@ -245,7 +246,7 @@ namespace Nest.Thrift
 			if (!this._resourceLock.WaitOne(this._timeout))
 			{
 				var m = "Could not start the thrift operation before the timeout of " + this._timeout + "ms completed while waiting for the semaphore";
-				return new ConnectionStatus(this._connectionSettings, new TimeoutException(m));
+				return new ElasticsearchResponse(this._connectionSettings, new TimeoutException(m));
 			}
 			try
 			{
@@ -253,7 +254,7 @@ namespace Nest.Thrift
 				if (!this._clients.TryDequeue(out client))
 				{
 					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
-					var status = new ConnectionStatus(this._connectionSettings, new Exception(m));
+					var status = new ElasticsearchResponse(this._connectionSettings, new Exception(m));
 					return status;
 				}
 				try
@@ -263,7 +264,7 @@ namespace Nest.Thrift
 
 					var result = client.execute(restRequest);
 					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
-						return new ConnectionStatus(this._connectionSettings, result.Body);
+						return new ElasticsearchResponse(this._connectionSettings, result.Body);
 					else
 					{
 						var connectionException = new ConnectionException(
@@ -271,7 +272,7 @@ namespace Nest.Thrift
 							statusCode: (int)result.Status, 
 							response: DecodeStr(result.Body)
 						);
-						return new ConnectionStatus(this._connectionSettings, connectionException);
+						return new ElasticsearchResponse(this._connectionSettings, connectionException);
 					}
 				}
 				catch
@@ -287,7 +288,7 @@ namespace Nest.Thrift
 			}
 			catch (Exception e)
 			{
-				return new ConnectionStatus(this._connectionSettings, e);
+				return new ElasticsearchResponse(this._connectionSettings, e);
 			}
 			finally
 			{

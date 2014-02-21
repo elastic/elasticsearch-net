@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Globalization;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	internal static class Extensions
 	{
@@ -31,6 +31,7 @@ namespace Nest
 		{
 			return bytes == null ? null : Encoding.UTF8.GetString(bytes);
 		}
+	
 		internal static byte[] Utf8Bytes(this string s)
 		{
 			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);

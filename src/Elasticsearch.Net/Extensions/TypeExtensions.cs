@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
-	public static class TypeExtensions
+	internal static class TypeExtensions
 	{
 		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
 
@@ -18,7 +18,7 @@ namespace Nest
 		public delegate T ObjectActivator<out T>(params object[] args);
 		
 
-		public static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
+		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
 		{
 			var key = t.FullName + "--" + closeOver.FullName;
 			Type closedType;
@@ -30,7 +30,7 @@ namespace Nest
 			return closedType.CreateInstance(args);
 		}
 
-		public static object CreateInstance(this Type t, params object[] args)
+		internal static object CreateInstance(this Type t, params object[] args)
 		{
 			ObjectActivator<object> activator;
 			var argLength = args.Count();

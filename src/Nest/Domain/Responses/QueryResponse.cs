@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
+using Elasticsearch.Net;
 
 namespace Nest
 {

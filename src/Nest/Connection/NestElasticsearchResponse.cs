@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Net;
-
+using Elasticsearch.Net; 
 
 namespace Nest
 {

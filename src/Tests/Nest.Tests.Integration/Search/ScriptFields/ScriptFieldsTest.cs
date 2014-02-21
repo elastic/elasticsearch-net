@@ -2,6 +2,7 @@
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.Search.ScriptFields
 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Nest.Resolvers.Writers;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using Nest;
+using Elasticsearch.Net;
 
 namespace Profiling.InMemoryConnection
 {
@@ -14,7 +15,7 @@ namespace Profiling.InMemoryConnection
 		static void Main(string[] args)
 		{
 			var settings = new ConnectionSettings(new Uri("http://localhost:9200"),"test-index");
-			var client = new ElasticClient(settings, new Nest.InMemoryConnection(settings));
+			var client = new ElasticClient(settings, new Elasticsearch.Net.InMemoryConnection(settings));
 			int calls = 100000;
 			var steps = calls/10;
 			var ticks = calls / steps;

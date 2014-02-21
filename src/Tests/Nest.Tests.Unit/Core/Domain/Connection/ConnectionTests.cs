@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Elasticsearch.Net;
+using NUnit.Framework;
 using System;
 using System.Collections.Specialized;
 
@@ -6,7 +7,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 {
     using System.Net;
 
-    public class TestConnection : Nest.Connection
+    public class TestConnection : Elasticsearch.Net.Connection
     {
         public TestConnection(IConnectionSettingsValues settings)
             : base(settings) { }

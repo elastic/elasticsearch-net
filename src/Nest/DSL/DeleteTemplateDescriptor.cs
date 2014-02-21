@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;

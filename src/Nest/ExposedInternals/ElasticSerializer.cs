@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Elasticsearch.Net;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;

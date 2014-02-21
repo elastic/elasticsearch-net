@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 using System.Collections.Specialized;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
 	public class ElasticsearchConnectionSettings : 
 		ElasticsearchConnectionSettings<ElasticsearchConnectionSettings>, 

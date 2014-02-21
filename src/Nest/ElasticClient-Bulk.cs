@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Nest.Resolvers;
 using System.Reflection;

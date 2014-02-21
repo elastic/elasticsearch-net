@@ -1,10 +1,10 @@
 ﻿using System.Collections.Specialized;
 
-namespace Nest
+namespace Elasticsearch.Net
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
-        public static NameValueCollection ToNameValueCollection(this string queryString)
+        internal static NameValueCollection ToNameValueCollection(this string queryString)
         {
             if (string.IsNullOrWhiteSpace(queryString)) return new NameValueCollection();
 

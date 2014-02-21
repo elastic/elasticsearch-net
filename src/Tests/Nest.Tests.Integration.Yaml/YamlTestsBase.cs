@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Net;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,11 +18,11 @@ namespace Nest.Tests.Integration.Yaml
 {
 	public class YamlTestsBase
 	{
-		protected static readonly Elasticsearch _client;
+		protected static readonly IElasticsearch _client;
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
-		protected ConnectionStatus _status;
+		protected ElasticsearchResponse _status;
 		protected dynamic _response;
 
 		static YamlTestsBase()
@@ -30,9 +31,8 @@ namespace Nest.Tests.Integration.Yaml
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
-			var settings = new ConnectionSettings(uri, "nest-default-index")
-				.UsePrettyResponses();
-			_client = new Elasticsearch(settings);
+			var settings = new ElasticsearchConnectionSettings(uri).UsePrettyResponses();
+			_client = new Elasticsearch.Net.Elasticsearch(settings);
 			dynamic info = _client.Info().Response;
 			string version = info.version.number;
 			_versionNumber = new Version(version);
@@ -44,7 +44,7 @@ namespace Nest.Tests.Integration.Yaml
 			_client.IndicesDelete("*");
 		}
 
-		protected void Do(Func<ConnectionStatus> action, string shouldCatch = null)
+		protected void Do(Func<ElasticsearchResponse> action, string shouldCatch = null)
 		{
 			try
 			{
@@ -101,9 +101,9 @@ namespace Nest.Tests.Integration.Yaml
 		protected void IsTrue(object o)
 		{
 			if (o == null) Assert.Fail("null is not true value");
-			if (o is ConnectionStatus)
+			if (o is ElasticsearchResponse)
 			{
-				var c = o as ConnectionStatus;
+				var c = o as ElasticsearchResponse;
 				if (c.RequestMethod == "HEAD" && c.Error != null)
 				{
 					Assert.Fail("HEAD request returned status:" + c.Error.HttpStatusCode);
@@ -150,9 +150,9 @@ namespace Nest.Tests.Integration.Yaml
 		{
 			if (o == null)
 				return;
-			if (o is ConnectionStatus)
+			if (o is ElasticsearchResponse)
 			{
-				var c = o as ConnectionStatus;
+				var c = o as ElasticsearchResponse;
 				if (c.RequestMethod == "HEAD" && c.Error == null)
 				{
 					Assert.Fail("HEAD request did not return error status but:" 
@@ -214,7 +214,7 @@ namespace Nest.Tests.Integration.Yaml
 			if (o is JValue) o = ((JValue)o).Value;
 			if (o is JArray) o = ((JArray) o).ToObject<object[]>();
 			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
-			if (o is ConnectionStatus) o = ((ConnectionStatus)o).Result;
+			if (o is ElasticsearchResponse) o = ((ElasticsearchResponse)o).Result;
 			return o;
 		}
 

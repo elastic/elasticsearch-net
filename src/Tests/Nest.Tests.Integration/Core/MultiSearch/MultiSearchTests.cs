@@ -3,6 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using Nest.Resolvers;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.Core.MultiSearch
 {

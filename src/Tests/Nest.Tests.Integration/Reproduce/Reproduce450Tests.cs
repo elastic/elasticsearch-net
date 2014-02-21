@@ -7,6 +7,7 @@ using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 using System.Diagnostics;
 using FluentAssertions;
+using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration.Reproduce
 {

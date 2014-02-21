@@ -7,6 +7,8 @@ using System.Linq.Expressions;
 using System.Globalization;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers;
+using Elasticsearch.Net;
+
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
