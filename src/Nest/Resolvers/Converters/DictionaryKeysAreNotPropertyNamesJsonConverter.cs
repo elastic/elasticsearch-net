@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Globalization;
+using Elasticsearch.Net;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
@@ -29,8 +30,9 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			IDictionary dictionary = (IDictionary) value;
 			var contract = serializer.ContractResolver as ElasticContractResolver;
+
+			IDictionary dictionary = (IDictionary) value;
 			writer.WriteStartObject();
 
 			foreach (DictionaryEntry entry in dictionary)

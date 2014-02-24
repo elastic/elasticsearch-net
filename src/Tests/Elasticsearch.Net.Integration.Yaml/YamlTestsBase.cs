@@ -233,10 +233,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 		{
 			int l = -1;
 			if (o is ElasticsearchDynamicValue) o = ((ElasticsearchDynamicValue) o).Value;
-			if (o is JArray) l = ((JArray) o).Count;
+			if (o is IList) l = ((IList) o).Count;
 			if (o is string) l =  ((string) o).Length;
 			if (o is IDictionary) l = ((IDictionary) o).Count;
-			if (o is JObject) l = ((JObject) o).Children().Count();
+			if (o is IDictionary<string, object>) l = ((IDictionary<string, object>) o).Count;
 			Assert.AreEqual(value, l);
 		}
 
@@ -288,19 +288,19 @@ namespace Elasticsearch.Net.Integration.Yaml
 				}
 				else Assert.AreEqual(s, v);
 			}
-			else if (o is object[])
+			else if (o is object[] || o is IList<object>)
 			{
-				var oo = o as object[];
+				var oo = (o as object[]) ?? (o as IList<object>);
 				var json = _client.Serializer.Serialize(value);
 				var otherJson = _client.Serializer.Serialize(oo);
 				var nJson = JArray.Parse(Encoding.UTF8.GetString(json)).ToString();
 				var nOtherJson = JArray.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
 				Assert.AreEqual(nJson, nOtherJson);
 			}
-			else if (o is Dictionary<string, object>)
+			else if (o is IDictionary<string, object>)
 			{
-				var d = value as Dictionary<string, object>;
-				var dd = o as Dictionary<string, object>;
+				var d = value as IDictionary<string, object>;
+				var dd = o as IDictionary<string, object>;
 				if (d == null)
 					d = (from x in value.GetType().GetProperties() select x)
 						.ToDictionary(

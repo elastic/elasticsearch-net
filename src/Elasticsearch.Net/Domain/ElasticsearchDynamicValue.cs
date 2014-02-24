@@ -29,16 +29,16 @@ namespace Elasticsearch.Net
 				result = new ElasticsearchDynamicValue(null);
 				return true;
 			}
+
 			result = new ElasticsearchDynamicValue(this.Value);
-			//var v = this.Value as JObject;
-			//if (v == null)
-			//{
-			//	result = new ElasticsearchDynamicValue(null);
-			//	return true;
-			//}
-			//JToken r = null;
-			//v.TryGetValue(name, StringComparison.InvariantCulture, out r);
-			//result = new ElasticsearchDynamicValue(r);
+			var d = this.Value as IDictionary<string, object>;
+			object r;
+			if (d == null || !d.TryGetValue(name, out r))
+			{
+				result = new ElasticsearchDynamicValue(this.Value);
+				return true;
+			}
+			result = new ElasticsearchDynamicValue(r);
 
 			return true;
 		}
@@ -60,7 +60,7 @@ namespace Elasticsearch.Net
 				if (!this.HasValue)
 					return new ElasticsearchDynamicValue(null);
 				var l = this.Value as IList;
-				if (l != null)
+				if (l != null && l.Count -1 >= i)
 				{
 					return new ElasticsearchDynamicValue(l[i]);
 				}

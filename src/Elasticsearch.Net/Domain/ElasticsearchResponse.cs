@@ -42,7 +42,7 @@ namespace Elasticsearch.Net
 					return null;
 
 				if (_response == null)
-					this._response = this.Deserialize<ElasticsearchDynamic>();
+					this._response = ElasticsearchDynamic.Create(this.Deserialize<IDictionary<string, object>>());
 				return this._response;
 			}
 		}

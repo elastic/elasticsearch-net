@@ -27,7 +27,7 @@ namespace Elasticsearch.Net
 
 			this.Settings = settings;
 			this.Connection = connection ?? new HttpConnection(settings);
-			this.Serializer = serializer;// ?? new Elasticsear(settings);
+			this.Serializer = serializer ?? new ElasticsearchDefaultSerializer();
 			((IConnectionSettings2) this.Settings).Serializer = this.Serializer;
 			this.Stringifier = stringifier ?? new Stringifier();
 		}

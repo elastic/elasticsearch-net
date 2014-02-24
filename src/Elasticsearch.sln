@@ -45,11 +45,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.YamlTestsRun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net", "Elasticsearch.Net\Elasticsearch.Net.csproj", "{E97CCF40-0BA6-43FE-9F2D-58D454134088}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections", "{ADFAB127-0767-44F2-A6CC-6E233C39EA92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeGeneration|Any CPU = CodeGeneration|Any CPU
 		CodeGeneration|Mixed Platforms = CodeGeneration|Mixed Platforms
 		CodeGeneration|x86 = CodeGeneration|x86
+		Debug - Generator|Any CPU = Debug - Generator|Any CPU
+		Debug - Generator|Mixed Platforms = Debug - Generator|Mixed Platforms
+		Debug - Generator|x86 = Debug - Generator|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
@@ -62,6 +67,11 @@ Global
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.CodeGeneration|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug - Generator|Any CPU.ActiveCfg = Debug - Generator|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug - Generator|Any CPU.Build.0 = Debug - Generator|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug - Generator|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug - Generator|Mixed Platforms.Build.0 = Debug - Generator|Any CPU
+		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug - Generator|x86.ActiveCfg = Debug - Generator|Any CPU
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{072BA7DA-7B60-407D-8B6E-95E3186BE70C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -76,6 +86,11 @@ Global
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug - Generator|Any CPU.ActiveCfg = Debug - Generator|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug - Generator|Any CPU.Build.0 = Debug - Generator|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug - Generator|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug - Generator|Mixed Platforms.Build.0 = Debug - Generator|Any CPU
+		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug - Generator|x86.ActiveCfg = Debug - Generator|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E38CD2C-EEFD-4C82-B0CD-D0608C27D64F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -90,6 +105,11 @@ Global
 		{27143A05-5655-447C-ADAF-405E1CF43741}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{27143A05-5655-447C-ADAF-405E1CF43741}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{27143A05-5655-447C-ADAF-405E1CF43741}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug - Generator|Any CPU.ActiveCfg = Debug - Generator|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug - Generator|Any CPU.Build.0 = Debug - Generator|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug - Generator|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug - Generator|Mixed Platforms.Build.0 = Debug - Generator|Any CPU
+		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug - Generator|x86.ActiveCfg = Debug - Generator|Any CPU
 		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27143A05-5655-447C-ADAF-405E1CF43741}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -104,6 +124,11 @@ Global
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug - Generator|Any CPU.ActiveCfg = Debug - Generator|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug - Generator|Any CPU.Build.0 = Debug - Generator|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug - Generator|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug - Generator|Mixed Platforms.Build.0 = Debug - Generator|Any CPU
+		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug - Generator|x86.ActiveCfg = Debug - Generator|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{704EF910-C4E7-413E-B21F-296EFE732FCF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -118,6 +143,11 @@ Global
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug - Generator|Any CPU.ActiveCfg = Debug - Generator|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug - Generator|Any CPU.Build.0 = Debug - Generator|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug - Generator|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug - Generator|Mixed Platforms.Build.0 = Debug - Generator|Any CPU
+		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug - Generator|x86.ActiveCfg = Debug - Generator|Any CPU
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97408393-78AC-45DF-BE6E-4C219A2E456D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -132,6 +162,11 @@ Global
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug - Generator|Any CPU.ActiveCfg = Debug - Generator|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug - Generator|Any CPU.Build.0 = Debug - Generator|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug - Generator|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug - Generator|Mixed Platforms.Build.0 = Debug - Generator|Any CPU
+		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug - Generator|x86.ActiveCfg = Debug - Generator|Any CPU
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9FE4875-0171-40F7-A357-064A93BE09C6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -147,6 +182,11 @@ Global
 		{56A87048-9065-459B-826D-3DF68B409845}.CodeGeneration|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{56A87048-9065-459B-826D-3DF68B409845}.CodeGeneration|Mixed Platforms.Build.0 = Debug|Any CPU
 		{56A87048-9065-459B-826D-3DF68B409845}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug - Generator|Any CPU.ActiveCfg = Debug - Generator|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug - Generator|Any CPU.Build.0 = Debug - Generator|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug - Generator|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug - Generator|Mixed Platforms.Build.0 = Debug - Generator|Any CPU
+		{56A87048-9065-459B-826D-3DF68B409845}.Debug - Generator|x86.ActiveCfg = Debug - Generator|Any CPU
 		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56A87048-9065-459B-826D-3DF68B409845}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -161,6 +201,11 @@ Global
 		{733A7657-69E9-444A-8AC0-BC123127A59A}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{733A7657-69E9-444A-8AC0-BC123127A59A}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{733A7657-69E9-444A-8AC0-BC123127A59A}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
+		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
+		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug - Generator|Mixed Platforms.Build.0 = Debug|Any CPU
+		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug - Generator|x86.ActiveCfg = Debug|Any CPU
 		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{733A7657-69E9-444A-8AC0-BC123127A59A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -175,6 +220,11 @@ Global
 		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
+		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug - Generator|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug - Generator|x86.ActiveCfg = Debug|Any CPU
 		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E97EEFA7-BDAB-4417-97C0-14F971044C57}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -190,6 +240,11 @@ Global
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.CodeGeneration|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.CodeGeneration|Mixed Platforms.Build.0 = Debug|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
+		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug - Generator|Mixed Platforms.Build.0 = Debug|Any CPU
+		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug - Generator|x86.ActiveCfg = Debug|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F53AA5-6346-4139-94CF-81BD8663875F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -205,6 +260,11 @@ Global
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug - Generator|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug - Generator|x86.ActiveCfg = Debug|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -228,6 +288,7 @@ Global
 		{733A7657-69E9-444A-8AC0-BC123127A59A} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
 		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
+		{704EF910-C4E7-413E-B21F-296EFE732FCF} = {ADFAB127-0767-44F2-A6CC-6E233C39EA92}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj
