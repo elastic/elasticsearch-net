@@ -47,6 +47,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net", "Elasti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections", "{ADFAB127-0767-44F2-A6CC-6E233C39EA92}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{90F48CF5-BB0B-484D-85E7-18FE3ECA3825}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeGeneration|Any CPU = CodeGeneration|Any CPU
@@ -275,6 +279,26 @@ Global
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|x86.ActiveCfg = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug - Generator|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug - Generator|x86.ActiveCfg = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -289,6 +313,7 @@ Global
 		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{704EF910-C4E7-413E-B21F-296EFE732FCF} = {ADFAB127-0767-44F2-A6CC-6E233C39EA92}
+		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8} = {90F48CF5-BB0B-484D-85E7-18FE3ECA3825}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj
