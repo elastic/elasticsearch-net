@@ -70,6 +70,7 @@
     <Compile Include="Domain\QueryStringParameters.Generated.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Serialization\ElasticInferrer.cs" />
+    <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
     <Compile Include="Serialization\SerializationFormatting.cs" />
     <Compile Include="Serialization\SimpleJson.cs" />

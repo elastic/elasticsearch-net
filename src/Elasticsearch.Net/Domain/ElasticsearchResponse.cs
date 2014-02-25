@@ -63,6 +63,12 @@ namespace Elasticsearch.Net
 			this.Error = new ConnectionError(e);
 			this.ResultBytes = this.Error.Response.Utf8Bytes();
 		}
+		public ElasticsearchResponse(IConnectionSettings2 settings, ConnectionError e,byte[] result = null) : this(settings)
+		{
+			this.Success = false;
+			this.Error = e;
+			this.ResultBytes = result;
+		}
 		public ElasticsearchResponse(IConnectionSettings2 settings, string result) : this(settings)
 		{
 			this.Success = true;

@@ -9,7 +9,7 @@ namespace Elasticsearch.Net.JsonNet
 	{
 		private readonly JsonSerializerSettings _settings;
 
-		public ElasticsearchJsonNetSerializer(JsonSerializerSettings settings)
+		public ElasticsearchJsonNetSerializer(JsonSerializerSettings settings = null)
 		{
 			_settings = settings;
 		}

@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net.Connection.HttpClient;
+using Elasticsearch.Net.JsonNet;
+using Elasticsearch.Net.ServiceStackText;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -15,6 +19,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 	{
 		protected static readonly IElasticsearchClient _client;
 		protected static readonly Version _versionNumber;
+		protected static readonly Version _versionNumber2;
 		
 		protected object _body;
 		protected ElasticsearchResponse _status;
@@ -27,10 +32,16 @@ namespace Elasticsearch.Net.Integration.Yaml
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
 			var settings = new ElasticsearchConnectionSettings(uri).UsePrettyResponses();
-			_client = new Elasticsearch.Net.ElasticsearchClient(settings);
-			dynamic info = _client.Info().Response;
+			var serializer = new ElasticsearchJsonNetSerializer();
+			var connection = new ElasticsearchHttpClient(settings);
+			_client = new ElasticsearchClient(settings, connection: connection);
+			var infoResponse = _client.Info();
+			var infoResponse2 = _client.Info();
+			dynamic info = infoResponse.Response;
+			dynamic info2 = infoResponse2.Response;
 			string version = info.version.number;
 			_versionNumber = new Version(version);
+			_versionNumber2 = new Version(info2.version.number);
 		}
 
 
@@ -200,6 +211,11 @@ namespace Elasticsearch.Net.Integration.Yaml
 				var i = (long) o;
 				Assert.Less(i, value);
 			}
+			else if (o is decimal)
+			{
+				var i = (decimal) o;
+				Assert.Less(i, value);
+			}
 			else Assert.Fail("unknown type for lt: " + o.GetType().FullName);
 		}
 
@@ -226,6 +242,11 @@ namespace Elasticsearch.Net.Integration.Yaml
 				var i = (long) o;
 				Assert.Greater(i, value);
 			}
+			else if (o is decimal)
+			{
+				var i = (decimal) o;
+				Assert.Greater(i, value);
+			}
 			else Assert.Fail("unknown type for gt: " + o.GetType().FullName);
 		}
 		
@@ -248,6 +269,12 @@ namespace Elasticsearch.Net.Integration.Yaml
 			{
 				var i = (int)o;
 				var v = (int)value;
+				Assert.AreEqual(v,i);
+			}
+			else if (o is decimal)
+			{
+				var i = (decimal)o;
+				var v = Convert.ToDecimal(value);
 				Assert.AreEqual(v,i);
 			}
 			else if (o is double)

@@ -5,13 +5,16 @@ using System.ComponentModel;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Microsoft.CSharp.RuntimeBinder;
+using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 namespace Elasticsearch.Net
 {
 	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>, IConvertible
 	{
-		private readonly object value;
+		internal readonly object value;
 
 		public override bool TryGetMember(GetMemberBinder binder, out object result)
 		{
@@ -30,17 +33,36 @@ namespace Elasticsearch.Net
 				return true;
 			}
 
-			result = new ElasticsearchDynamicValue(this.Value);
 			var d = this.Value as IDictionary<string, object>;
 			object r;
-			if (d == null || !d.TryGetValue(name, out r))
+			if (d != null && d.TryGetValue(name, out r))
 			{
-				result = new ElasticsearchDynamicValue(this.Value);
+				result = new ElasticsearchDynamicValue(r);
 				return true;
 			}
-			result = new ElasticsearchDynamicValue(r);
-
+			var x = this.Value as IDynamicMetaObjectProvider;
+			if (x != null)
+			{
+				var dm = GetDynamicMember(this.Value, name);
+				result = new ElasticsearchDynamicValue(dm);
+				return true;
+			}
+			var ds = this.Value as IDictionary;
+			if (ds != null && ds.Contains(name))
+			{
+				result = new ElasticsearchDynamicValue(ds[name]);
+				return true;
+			}
+			
+			result = new ElasticsearchDynamicValue(this.Value);
 			return true;
+		}
+
+		static object GetDynamicMember(object obj, string memberName)
+		{
+			var binder = Binder.GetMember(CSharpBinderFlags.None, memberName, null, new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) });
+			var callsite = CallSite<Func<CallSite, object, object>>.Create(binder);
+			return callsite.Target(callsite, obj);
 		}
 
 		public ElasticsearchDynamicValue this[string name]

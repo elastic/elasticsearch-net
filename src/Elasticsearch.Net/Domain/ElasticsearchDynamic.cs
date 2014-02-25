@@ -17,8 +17,7 @@ namespace Elasticsearch.Net
 		IEnumerable<string>, 
 		IDictionary<string, object>
 	{
-		protected readonly IDictionary<string, dynamic> dictionary =
-			new Dictionary<string, dynamic>(StringComparer.InvariantCultureIgnoreCase);
+		protected readonly IDictionary<string, dynamic> dictionary = new Dictionary<string, dynamic>(StringComparer.InvariantCultureIgnoreCase);
 
 		/// <summary>
 		/// Returns an empty dynamic dictionary.

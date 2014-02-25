@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\..\..\dep\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -219,6 +222,18 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj">
+      <Project>{a69322fd-b874-44ef-abe0-63f4a7b5593e}</Project>
+      <Name>Elasticsearch.Net.Connection.HttpClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj">
+      <Project>{dd71352d-0eb2-4a02-8ac4-82a17e2a71a8}</Project>
+      <Name>Elasticsearch.Net.JsonNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Elasticsearch.Net.ServiceStackText\Elasticsearch.Net.ServiceStackText.csproj">
+      <Project>{8052dc47-3281-4209-b0d2-45555ae30a46}</Project>
+      <Name>Elasticsearch.Net.ServiceStackText</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
