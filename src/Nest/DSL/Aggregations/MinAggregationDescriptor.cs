@@ -6,7 +6,7 @@ using System.Text;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Aggregations
+namespace Nest
 {
 	public class MinAggregationDescriptor<T> : MetricAggregationBaseDescriptor<MinAggregationDescriptor<T>, T>
 		where T : class

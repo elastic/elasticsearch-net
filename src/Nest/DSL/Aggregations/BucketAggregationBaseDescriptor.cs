@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Aggregations
+namespace Nest
 {
 	public abstract class BucketAggregationBaseDescriptor<TBucketAggregation, T>: IAggregationDescriptor
 		where TBucketAggregation : BucketAggregationBaseDescriptor<TBucketAggregation, T>

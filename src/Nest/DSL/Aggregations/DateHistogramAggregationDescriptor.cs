@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Aggregations
+namespace Nest
 {
 	public class DateHistogramAggregationDescriptor<T> : MetricAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>
 		where T : class

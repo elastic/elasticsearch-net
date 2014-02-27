@@ -1,4 +1,4 @@
-namespace Nest.DSL.Aggregations
+namespace Nest
 {
 	public interface IAggregationDescriptor
 	{

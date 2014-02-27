@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Aggregations
+namespace Nest
 {
 	public class GlobalAggregationDescriptor<T> : BucketAggregationBaseDescriptor<GlobalAggregationDescriptor<T>, T>
 		where T : class

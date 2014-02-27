@@ -5,9 +5,10 @@ using System.Linq.Expressions;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Aggregations
+namespace Nest
 {
 	public class RangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<RangeAggregationDescriptor<T>, T>
+		where T : class 
 	{
 		[JsonProperty("field")]
 		internal PropertyPathMarker _Field { get; set; }

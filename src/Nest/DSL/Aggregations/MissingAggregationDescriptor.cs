@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
-namespace Nest.DSL.Aggregations
+namespace Nest
 {
 	public class MissingAggregationDescriptor<T> : BucketAggregationBaseDescriptor<MissingAggregationDescriptor<T>, T>
 		where T : class

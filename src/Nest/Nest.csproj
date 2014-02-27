@@ -114,6 +114,9 @@
     <Compile Include="DSL\Aggregations\AggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\BucketAggregationBaseDescriptor.cs" />
     <Compile Include="DSL\Aggregations\DateHistogramAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\FilterAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\GeoHashAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\GlobalAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\Ip4RangeAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ExtendedStatsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\IAggregationDescriptor.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="DSL\Aggregations\MaxAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\MinAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\HistogramAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\MissingAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\TermsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ValueCountAggregationDescriptor.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
@@ -190,6 +194,8 @@
     <Compile Include="DSL\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Enums\ExecutionHint.cs" />
+    <Compile Include="Enums\GeoDistanceType.cs" />
+    <Compile Include="Enums\GeoHashPrecision.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
