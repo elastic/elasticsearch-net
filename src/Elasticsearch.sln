@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Notes", "_Notes", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
 	ProjectSection(SolutionItems) = preProject
-		license.txt = license.txt
+		..\license.txt = ..\license.txt
 		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject
@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.MockData", "Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profiler", "Profiler", "{DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Connection.Thrift", "Nest.Connection.Thrift\Nest.Connection.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.Thrift", "Connections\Nest.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D5575-2347-4D3C-BF8C-3E38410C46CA}"
 	ProjectSection(SolutionItems) = preProject
@@ -49,11 +49,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serialization", "{90F48CF5-BB0B-484D-85E7-18FE3ECA3825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.ServiceStackText", "Elasticsearch.Net.ServiceStackText\Elasticsearch.Net.ServiceStackText.csproj", "{8052DC47-3281-4209-B0D2-45555AE30A46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.ServiceStackText", "Serialization\Elasticsearch.Net.ServiceStackText\Elasticsearch.Net.ServiceStackText.csproj", "{8052DC47-3281-4209-B0D2-45555AE30A46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.HttpClient", "Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj", "{A69322FD-B874-44EF-ABE0-63F4A7B5593E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.HttpClient", "Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj", "{A69322FD-B874-44EF-ABE0-63F4A7B5593E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -354,14 +354,11 @@ Global
 		{E97EEFA7-BDAB-4417-97C0-14F971044C57} = {C7EA82B9-4C4A-4F68-ACD1-0D1A765BA98C}
 		{B9FE4875-0171-40F7-A357-064A93BE09C6} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
 		{733A7657-69E9-444A-8AC0-BC123127A59A} = {DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}
-		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
-		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{704EF910-C4E7-413E-B21F-296EFE732FCF} = {ADFAB127-0767-44F2-A6CC-6E233C39EA92}
 		{A69322FD-B874-44EF-ABE0-63F4A7B5593E} = {ADFAB127-0767-44F2-A6CC-6E233C39EA92}
+		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
+		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8} = {90F48CF5-BB0B-484D-85E7-18FE3ECA3825}
 		{8052DC47-3281-4209-B0D2-45555AE30A46} = {90F48CF5-BB0B-484D-85E7-18FE3ECA3825}
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ElasticSearch.ConsolePlayground\ElasticSearch.ConsolePlayground.csproj
 	EndGlobalSection
 EndGlobal

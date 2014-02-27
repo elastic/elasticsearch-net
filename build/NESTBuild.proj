@@ -14,7 +14,7 @@
 		<Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
 		<BuildDir>$(MSBuildProjectDirectory)\tmp</BuildDir>
 		<BuildDirSigned>$(MSBuildProjectDirectory)\tmp-signed</BuildDirSigned>
-		<SolutionFile>$(SrcDir)\Nest.sln</SolutionFile>
+		<SolutionFile>$(SrcDir)\Elasticsearch.sln</SolutionFile>
 	</PropertyGroup>
 
 	<Target Name="Compile">
@@ -51,7 +51,7 @@
 	<Target Name="NuGetPackage" DependsOnTargets="Compile">
 		<ItemGroup>
 			<MainBinaries Include="$(SrcDir)\**\Nest\bin\$(Configuration)\**\*.*" />
-			<ThriftBinaries Include="$(SrcDir)\**\Nest.Connection.Thrift\bin\$(Configuration)\**\*.*" />
+			<ThriftBinaries Include="$(SrcDir)\**\Connections\Nest.Connection.Thrift\bin\$(Configuration)\**\*.*" />
 		</ItemGroup>
 
 		<!-- First copy the nuspec template files to the build dir -->
