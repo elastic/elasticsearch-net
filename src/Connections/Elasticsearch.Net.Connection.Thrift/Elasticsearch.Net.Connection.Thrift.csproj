@@ -66,7 +66,7 @@
   <ItemGroup>
     <Reference Include="NetReflector, Version=1.1.2009.1214, Culture=neutral, PublicKeyToken=2f4dd8b32acbcd8e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\NetReflector.1.1.2009\lib\net20\NetReflector.dll</HintPath>
+      <HintPath>..\..\..\dep\NetReflector.1.1.2009\lib\net20\NetReflector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
