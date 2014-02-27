@@ -170,6 +170,7 @@
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
+    <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="ExposedInternals\Stringifier.cs" />
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="RawDispatch.generated.cs" />
@@ -199,7 +200,7 @@
     <Compile Include="DSL\Suggest\CompletionSuggestDescriptor.cs" />
     <Compile Include="DSL\Query\FunctionScoreQueryDescriptor.cs" />
     <Compile Include="ExposedInternals\ElasticInferrer.cs" />
-    <Compile Include="ExposedInternals\ElasticSerializer.cs" />
+    <Compile Include="ExposedInternals\INestSerializer.cs" />
     <Compile Include="Domain\Responses\IReindexResponse.cs" />
     <Compile Include="Domain\Suggest\Suggest.cs" />
     <Compile Include="Domain\Suggest\SuggestOption.cs" />

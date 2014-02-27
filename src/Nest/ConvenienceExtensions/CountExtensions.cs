@@ -3,12 +3,15 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	/// <summary></summary>
 	public static class CountExtensions
 	{
 		/// <summary>
-		/// Untyped count, defaults to all indices and types
+		/// Counts the specified client.
 		/// </summary>
-		/// <param name="countSelector">filter on indices and types or pass pararameters</param>
+		/// <param name="client">The client.</param>
+		/// <param name="countSelector">The count selector.</param>
+		/// <returns>ICountResponse.</returns>
 		public static ICountResponse Count(this IElasticClient client,
 			Func<CountDescriptor<dynamic>, CountDescriptor<dynamic>> countSelector = null)
 		{
@@ -17,9 +20,11 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Untyped count, defaults to all indices and types
+		/// Counts the asynchronous.
 		/// </summary>
-		/// <param name="countSelector">filter on indices and types or pass pararameters</param>
+		/// <param name="client">The client.</param>
+		/// <param name="countSelector">The count selector.</param>
+		/// <returns>Task{ICountResponse}.</returns>
 		public static Task<ICountResponse> CountAsync(this IElasticClient client,
 			Func<CountDescriptor<dynamic>, CountDescriptor<dynamic>> countSelector = null)
 		{

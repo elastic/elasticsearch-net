@@ -1,50 +1,14 @@
-﻿using System;
-using System.Collections.Concurrent;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
 using Elasticsearch.Net;
 using Nest.Resolvers;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public interface INestSerializer : IElasticsearchSerializer
-	{
-		IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
-			where TResult : class
-			where T : class;
-
-		string SerializeBulkDescriptor(BulkDescriptor bulkDescriptor);
-
-		/// <summary>
-		/// _msearch needs a specialized json format in the body
-		/// </summary>
-		string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor);
-
-		TemplateResponse DeserializeTemplateResponse(ElasticsearchResponse c, GetTemplateDescriptor d);
-		GetMappingResponse DeserializeGetMappingResponse(ElasticsearchResponse c);
-		MultiGetResponse DeserializeMultiGetResponse(ElasticsearchResponse c, MultiGetDescriptor d);
-		MultiSearchResponse DeserializeMultiSearchResponse(ElasticsearchResponse c, MultiSearchDescriptor d);
-		WarmerResponse DeserializeWarmerResponse(ElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
-
-		/// <summary>
-		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
-		/// </summary>
-		R ToParsedResponse<R>(
-			ElasticsearchResponse status, 
-			bool notFoundIsAValidResponse = false,
-			JsonConverter piggyBackJsonConverter = null
-			) where R : BaseResponse;
-	}
-
 	public class NestSerializer : INestSerializer
 	{
 		private readonly IConnectionSettingsValues _settings;
@@ -72,9 +36,9 @@ namespace Nest
 			
 			var isValid =
 				(notFoundIsAValidResponse)
-				? (status.Error == null
-					|| status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
-				: (status.Error == null);
+					? (status.Error == null
+					   || status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
+					: (status.Error == null);
 
 			R r;
 			if (!isValid)
@@ -162,11 +126,11 @@ namespace Nest
 			{
 				var command = operation._Operation;
 				var index = operation._Index
-					?? inferrer.IndexName(bulkDescriptor._Index)
-					?? inferrer.IndexName(operation._ClrType);
+				            ?? inferrer.IndexName(bulkDescriptor._Index)
+				            ?? inferrer.IndexName(operation._ClrType);
 				var typeName = operation._Type
-					?? inferrer.TypeName(bulkDescriptor._Type)
-					?? inferrer.TypeName(operation._ClrType);
+				               ?? inferrer.TypeName(bulkDescriptor._Type)
+				               ?? inferrer.TypeName(operation._ClrType);
 
 				var id = operation.GetIdForObject(inferrer);
 				operation._Index = index;
@@ -207,13 +171,13 @@ namespace Nest
 					indices = "_all";
 
 				var index = indices 
-					?? inferrer.IndexName(multiSearchDescriptor._Index)
-					?? inferrer.IndexName(operation._ClrType);
+				            ?? inferrer.IndexName(multiSearchDescriptor._Index)
+				            ?? inferrer.IndexName(operation._ClrType);
 
 				var types = inferrer.TypeNames(operation._Types);
 				var typeName = types
-					?? inferrer.TypeName(multiSearchDescriptor._Type)
-					?? inferrer.TypeName(operation._ClrType);
+				               ?? inferrer.TypeName(multiSearchDescriptor._Type)
+				               ?? inferrer.TypeName(operation._ClrType);
 				if (operation._AllTypes.GetValueOrDefault(false))
 					typeName = null; //force empty typename so we'll query all types.
 
