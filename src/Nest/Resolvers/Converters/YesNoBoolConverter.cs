@@ -18,7 +18,8 @@ namespace Nest.Resolvers.Converters
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			return reader.Value != null && reader.Value.ToString() == "yes";
+			var v = reader.Value.ToString();
+			return reader.Value != null && (v == "yes" || v == "True");
 		}
 
 		public override bool CanConvert(Type objectType)

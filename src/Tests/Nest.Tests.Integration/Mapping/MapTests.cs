@@ -63,8 +63,6 @@ namespace Nest.Tests.Integration.Mapping
 		}
 
 
-
-
 		[Test]
 		public void SimpleMapByAttributesUsingType()
 		{

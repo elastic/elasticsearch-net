@@ -28,7 +28,6 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		public string Analyzer { get; set; }
 
-		[JsonProperty("store"), JsonConverter(typeof(YesNoBoolConverter))]
 		public bool? Store { get; set; }
 
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
