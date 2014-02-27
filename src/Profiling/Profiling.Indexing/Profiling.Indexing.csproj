@@ -120,7 +120,7 @@
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
       <Name>Nest</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Connections\Nest.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj">
+    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj">
       <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
       <Name>Elasticsearch.Net.Connection.Thrift</Name>
     </ProjectReference>

@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.MockData", "Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profiler", "Profiler", "{DDC38E1C-13BF-4C96-A3BF-60F14DFC5069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.Thrift", "Connections\Nest.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.Thrift", "Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj", "{704EF910-C4E7-413E-B21F-296EFE732FCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D5575-2347-4D3C-BF8C-3E38410C46CA}"
 	ProjectSection(SolutionItems) = preProject

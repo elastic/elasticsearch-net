@@ -24,7 +24,6 @@ namespace Elasticsearch.Net
 		}
 
 
-
 		private bool Dispatch(out object result, string name)
 		{
 			if (!this.HasValue)

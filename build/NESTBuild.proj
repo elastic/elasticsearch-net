@@ -1,8 +1,7 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Compile">
 	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
 	<PropertyGroup>
 		<SrcDir>$(MSBuildProjectDirectory)\..\src</SrcDir>
-		<SlnDir>$(MSBuildProjectDirectory)\..</SlnDir>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -32,7 +31,7 @@
 		  AssemblyVersion="$(Version)"
 		  AssemblyFileVersion="$(Version)"/>
 		<AssemblyInfo CodeLanguage="CS"
-	      OutputFile="$(SrcDir)\Nest.Connection.Thrift\Properties\AssemblyInfo.cs"
+	      OutputFile="$(SrcDir)\Connections\Elasticsearch.Net.Connection.Thrift\Properties\AssemblyInfo.cs"
 	      AssemblyTitle="Nest.Connection.Thrift"
 	      AssemblyDescription="Thrift connection support for NEST Elasticsearch client"
 	      AssemblyCompany=""
@@ -41,7 +40,6 @@
 	      ComVisible="false"
 	      CLSCompliant="true"
 	      Guid="4d165338-2060-4641-8be6-b7aacbdee52d"
-	                
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)"/>
 
