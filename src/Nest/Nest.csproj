@@ -111,6 +111,12 @@
     <Compile Include="Domain\Bulk\BulkUpdateBody.cs" />
     <Compile Include="Domain\Alias\IndexAliases.cs" />
     <Compile Include="Domain\Responses\IShardsOperationResponse.cs" />
+    <Compile Include="DSL\Aggregations\AggregationBaseDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\StatsAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\AverageAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\SumAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\MaxAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\MinAggregationDescriptor.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
@@ -168,6 +174,7 @@
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
     <Compile Include="DSL\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
+    <Compile Include="Enums\ExecutionHint.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
@@ -694,6 +701,7 @@
       <Name>Elasticsearch.Net</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -10,10 +10,10 @@ namespace Nest
   public class Range<T> where T : struct
   {
     [JsonProperty(PropertyName = "from")]
-    internal Nullable<T> _From { get; set; }
+    internal T? _From { get; set; }
 
     [JsonProperty(PropertyName = "to")]
-    internal Nullable<T> _To { get; set; }
+    internal T? _To { get; set; }
 
     public Range<T> From(T value)
     {
