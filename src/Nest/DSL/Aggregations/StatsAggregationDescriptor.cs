@@ -13,16 +13,4 @@ namespace Nest.DSL.Aggregations
 	{
 		
 	}
-	
-	public class ExtendedStatsAggregationDescriptor<T> : MetricAggregationBaseDescriptor<ExtendedStatsAggregationDescriptor<T>, T>
-		where T : class
-	{
-		
-	}
-	
-	public class ValueCountAggregationDescriptor<T> : MetricAggregationBaseDescriptor<ValueCountAggregationDescriptor<T>, T>
-		where T : class
-	{
-		
-	}
 }

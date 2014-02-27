@@ -1,12 +1,47 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Elasticsearch.Net;
+using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest.DSL.Aggregations
 {
-	public class TermsAggregationDescriptor<T> : MetricAggregationBaseDescriptor<TermsAggregationDescriptor<T>, T>
+	public class TermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<TermsAggregationDescriptor<T>, T>
 		where T : class
 	{
+		[JsonProperty("field")]
+		internal PropertyPathMarker _Field { get; set; }
+		
+		public TermsAggregationDescriptor<T> Field(string field)
+		{
+			this._Field = field;
+			return this;
+		}
+
+		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
+		{
+			this._Field = field;
+			return this;
+		}
+
+		[JsonProperty("script")]
+		internal string _Script { get; set; }
+
+		public TermsAggregationDescriptor<T> Script(string script)
+		{
+			this._Script = script;
+			return this;
+		}
+
+		[JsonProperty("params")]
+		internal FluentDictionary<string, object> _Params { get; set; }
+
+		public TermsAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
+		{
+			this._Params = paramSelector(new FluentDictionary<string, object>());
+			return this;
+		}
 		[JsonProperty("size")]
 		internal int? _Size { get; set; }
 
