@@ -63,8 +63,8 @@ namespace Nest.Tests.Unit.Core.MultiSearch
 			const string first = @"{""index"":""myindex"",""type"":""mytype"",""search_type"":""dfs_query_and_fetch"",""preference"":""_primary"",""routing"":""customvalue1""}";
 			const string second = @"{""index"":""myindex"",""type"":""mytype"",""search_type"":""count"",""preference"":""_primary_first"",""routing"":""customvalue2""}";
 
-			StringAssert.Contains(first, status.Request);
-			StringAssert.Contains(second, status.Request);
+			StringAssert.Contains(first, status.Request.Utf8String());
+			StringAssert.Contains(second, status.Request.Utf8String());
 
 
 		}

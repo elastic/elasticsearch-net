@@ -17,10 +17,11 @@ namespace Elasticsearch.Net
 		private static readonly string _printFormat;
 		private static readonly string _errorFormat;
 		
-		public bool Success { get; private set; }
-		public ConnectionError Error { get; private set; }
-		public string RequestMethod { get; internal set; }
-		public string RequestUrl { get; internal set; }
+		public bool Success { get; protected internal set; }
+		public ConnectionError Error { get; protected internal set; }
+		public string RequestMethod { get; protected internal set; }
+		public string RequestUrl { get; protected internal set; }
+		public IConnectionSettings2 Settings { get; protected internal set; }
 
 		private string _result;
 		public string Result
@@ -28,10 +29,13 @@ namespace Elasticsearch.Net
 			get { return _result ?? (_result = this.ResultBytes.Utf8String()); }
 		}
 
-		public byte[] ResultBytes { get; internal set; }
+		public byte[] ResultBytes { get; protected internal set; }
+		public byte[] Request { get; protected internal set; }
+		public IElasticsearchSerializer Serializer { get; protected internal set; }
 
 		private static readonly byte _startAccolade = (byte)'{';
 		private ElasticsearchDynamic _response;
+
 		public ElasticsearchDynamic Response
 		{
 			get
@@ -47,39 +51,53 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public string Request { get; internal set; }
-		public IElasticsearchSerializer Serializer { get; private set; }
+
 
 		//TODO probably nicer if we make this factory ConnectionStatus.Error() and ConnectionStatus.Valid()
 		//and make these constructors private.
 		protected ElasticsearchResponse(IConnectionSettings2 settings)
 		{
+			this.Settings = settings;
 			this.Serializer = settings.Serializer; //TODO or default
 		}
 
-		public ElasticsearchResponse(IConnectionSettings2 settings, Exception e) : this(settings)
+		public static ElasticsearchResponse CreateError(IConnectionSettings2 settings, Exception e, string method, string path, byte[] request)
+		{
+			var cs = new ElasticsearchResponse(settings, e);
+			cs.Request = request;
+			cs.RequestUrl = path;
+			cs.RequestMethod = method;
+			return cs;
+		}
+		public static ElasticsearchResponse Create(IConnectionSettings2 settings, int statusCode, string method, string path, byte[] request, byte[] response)
+		{
+			var cs = new ElasticsearchResponse(settings, statusCode, response);
+			cs.Request = request;
+			cs.RequestUrl = path;
+			cs.RequestMethod = method;
+			return cs;
+		}
+
+
+		private ElasticsearchResponse(IConnectionSettings2 settings, Exception e) : this(settings)
 		{
 			this.Success = false;
 			this.Error = new ConnectionError(e);
-			this.ResultBytes = this.Error.Response.Utf8Bytes();
+			if (this.Error.ResponseReadFromWebException != null)
+				this.ResultBytes = this.Error.ResponseReadFromWebException;
 		}
-		public ElasticsearchResponse(IConnectionSettings2 settings, ConnectionError e,byte[] result = null) : this(settings)
+		private ElasticsearchResponse(IConnectionSettings2 settings, int statusCode, byte[] response = null) : this(settings)
 		{
-			this.Success = false;
-			this.Error = e;
-			this.ResultBytes = result;
+			this.Success = statusCode >= 200 && statusCode < 300;
+			if (!this.Success)
+			{
+				var exception = new ConnectionException(statusCode);
+				this.Error = new ConnectionError(exception);
+			}
+			this.ResultBytes = response;
 		}
-		public ElasticsearchResponse(IConnectionSettings2 settings, string result) : this(settings)
-		{
-			this.Success = true;
-			this._result = result;
-			this.ResultBytes = Encoding.UTF8.GetBytes(result);
-		}
-		public ElasticsearchResponse(IConnectionSettings2 settings, byte[] result) : this(settings)
-		{
-			this.Success = true;
-			this.ResultBytes = result;
-		}
+	
+
 		static ElasticsearchResponse()
 		{
 			_printFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";

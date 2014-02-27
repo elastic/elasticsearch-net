@@ -22,7 +22,7 @@ namespace Nest.Tests.Integration.Search.SearchType
 				.SearchType(SearchTypeOptions.Scan)
 			);
 			Assert.False(queryResults.IsValid);
-			StringAssert.Contains("Scroll must be provided when scanning", queryResults.ConnectionStatus.Error.ExceptionMessage);
+			StringAssert.Contains("Scroll must be provided when scanning", queryResults.ConnectionStatus.Result);
 		}
 		[Test]
 		public void SearchTypeScan()

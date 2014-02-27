@@ -45,6 +45,12 @@ namespace Nest.Tests.Unit
 	
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
+			if (o is byte[])
+			{
+				string s = ((byte[]) o).Utf8String();
+				this.JsonEquals(s, method, fileName);
+				return;
+			}
 			var json = TestElasticClient.Serialize(o);
 			this.JsonEquals(json, method, fileName);
 		}

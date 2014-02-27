@@ -74,10 +74,9 @@ namespace Elasticsearch.Net
 				case "get": return this.Connection.GetSync(path);
 			}
 
-			throw new ConnectionException("Unknown HTTP method " + method);
+			throw new Exception("Unknown HTTP method " + method);
 		}
 
-		private static byte[] _enter = Encoding.UTF8.GetBytes("\n");
 		private byte[] PostData(object data)
 		{
 			var bytes = data as byte[];
@@ -91,7 +90,6 @@ namespace Elasticsearch.Net
 			var ss = data as IEnumerable<string>;
 			if (ss != null)
 				return (string.Join("\n", ss) + "\n").Utf8Bytes();
-			var sb = data as IEnumerable<byte[]>;
 			
 			var so = data as IEnumerable<object>;
 			if (so == null)
@@ -119,7 +117,7 @@ namespace Elasticsearch.Net
 				case "head": return this.Connection.Head(path);
 				case "get": return this.Connection.Get(path);
 			}
-			throw new ConnectionException("Unknown HTTP method " + method);
+			throw new Exception("Unknown HTTP method " + method);
 		}
 	}
 }

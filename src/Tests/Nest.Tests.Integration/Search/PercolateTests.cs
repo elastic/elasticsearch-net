@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -27,7 +28,8 @@ namespace Nest.Tests.Integration.Search
 			Assert.AreEqual(r.Type, ".percolator");
 			Assert.AreEqual(r.Id, name);
 			Assert.Greater(r.Version, 0);
-			r.ConnectionStatus.Request.Should().NotBeNullOrEmpty().And.NotBe("{}");
+			var request = r.ConnectionStatus.Request.Utf8String();
+			request.Should().NotBeNullOrEmpty().And.NotBe("{}");
 
 		}
 		[Test]

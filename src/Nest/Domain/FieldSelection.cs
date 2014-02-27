@@ -24,18 +24,12 @@ namespace Nest.Domain
 	public class FieldSelection<T> : IFieldSelection<T>
 	{
 		private ElasticInferrer Infer { get; set; }
-		public FieldSelection(IConnectionSettingsValues settings)
+		public FieldSelection(IConnectionSettingsValues settings, IDictionary<string, object> values = null)
 		{
 			this.Infer = new ElasticInferrer(settings);
-		}
-
-
-		internal FieldSelection(ElasticInferrer inferrer, IDictionary<string, object> values)
-		{
-			this.Infer = inferrer;
 			this.FieldValues = values;
 		}
-		
+
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<string, object> FieldValues { get; set; }
 

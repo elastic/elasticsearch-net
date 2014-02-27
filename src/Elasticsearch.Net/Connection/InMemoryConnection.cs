@@ -12,6 +12,7 @@ namespace Elasticsearch.Net.Connection
 	public class InMemoryConnection : HttpConnection
 	{
 		private ElasticsearchResponse _fixedResult;
+		private readonly byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
 
 		public InMemoryConnection(IConnectionSettings2 settings)
 			: base(settings)
@@ -31,12 +32,10 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse ReturnConnectionStatus(HttpWebRequest request, byte[] data)
 		{
-			var cs = this._fixedResult ?? new ElasticsearchResponse(this._ConnectionSettings, "{ \"USING NEST IN MEMORY CONNECTION\"  : null }")
-			{
-				Request = data.Utf8String(),
-				RequestUrl = request.RequestUri.ToString(),
-				RequestMethod = request.Method
-			};
+			var method = request.Method;
+			var path = request.RequestUri.ToString();
+
+			var cs = ElasticsearchResponse.Create(this._ConnectionSettings, 200, method, path, data, _fixedResultBytes);
 			_ConnectionSettings.ConnectionStatusHandler(cs);
 			return cs;
 		}

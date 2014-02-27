@@ -64,7 +64,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 				.Refresh(true)
 			);
 			StringAssert.EndsWith(":9200/_bulk?replication=async&refresh=true", result.RequestUrl);
-			Assert.AreEqual(jsonAsString, result.Request);
+			Assert.AreEqual(jsonAsString, result.Request.Utf8String());
 		}
 
 		[Test]
@@ -78,7 +78,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 					.Refresh(true)
 			);
 			StringAssert.EndsWith(":9200/_bulk?replication=async&refresh=true", result.RequestUrl);
-			Assert.AreEqual(jsonAsString, result.Request);
+			Assert.AreEqual(jsonAsString, result.Request.Utf8String());
 		}
     }
 }

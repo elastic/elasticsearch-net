@@ -76,7 +76,7 @@ namespace Nest
 
 			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
 			serializer.Populate(reader, instance);
-			instance.Fields = new FieldSelection<T>(elasticContractResolver.Infer, instance._fields);
+			instance.Fields = new FieldSelection<T>(elasticContractResolver.ConnectionSettings, instance._fields);
 			return instance;
 		}
 
@@ -122,7 +122,7 @@ namespace Nest
 			var fieldSelection = fields != null ? fields.ToObject<IDictionary<string, object>>() : null;
 			//favor manual mapping over doing Populate twice.
 			hitDynamic._fields = fieldSelection;
-			hitDynamic.Fields = new FieldSelection<dynamic>(elasticContractResolver.Infer, fieldSelection);
+			hitDynamic.Fields = new FieldSelection<dynamic>(elasticContractResolver.ConnectionSettings, fieldSelection);
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
 			hitDynamic.Score = (d._score is double) ? d._score : default(double);

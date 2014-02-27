@@ -107,12 +107,18 @@ namespace Nest.Tests.Integration.Indices.Analysis.Analyzers
 		[Test]
 		public void StopAnalysis()
 		{
-			var analyzerName = "stop";
+			var analyzerName = "stop_custom";
 			var result = this.MapAndAnalyze(
-				a => a
-					.Analyzers(an => an.Add(analyzerName, new StopAnalyzer() { StopWords = new [] { "yummy", "is"} }))
-				, m => m
-					.Properties(p => p.String(sm => sm.Name(f => f.Txt).IndexAnalyzer(analyzerName).SearchAnalyzer(analyzerName)))
+				a => a.Analyzers(an => an
+					.Add(analyzerName, new StopAnalyzer() { StopWords = new [] { "yummy", "is"} })
+				)
+				, m => m.Properties(p => p
+					.String(sm => sm
+						.Name(f => f.Txt)
+						.IndexAnalyzer(analyzerName)
+						.SearchAnalyzer(analyzerName)
+					)
+				)
 			);
 
 			result.AnalyzeResponse.Tokens.Should().HaveCount(1);

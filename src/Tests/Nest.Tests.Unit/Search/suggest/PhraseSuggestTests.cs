@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Elasticsearch.Net;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Search.Suggest
@@ -82,7 +83,7 @@ namespace Nest.Tests.Unit.Search.Suggest
 					}
 				}
 			}";
-			var json = search.ConnectionStatus.Request;
+			var json = search.ConnectionStatus.Request.Utf8String();
 			Assert.True(json.JsonEquals(expected), json);
 		}
 	} 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.IO;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Concurrent;
@@ -78,21 +79,21 @@ namespace Nest.Resolvers.Writers
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
-			return this._elasticSerializer.Deserialize<RootObjectMapping>(nestedJson);
+			return this._elasticSerializer.Deserialize<RootObjectMapping>(nestedJson.Utf8Bytes());
 		}
 		internal ObjectMapping ObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
-			return this._elasticSerializer.Deserialize<ObjectMapping>(nestedJson);
+			return this._elasticSerializer.Deserialize<ObjectMapping>(nestedJson.Utf8Bytes());
 		}
 		internal NestedObjectMapping NestedObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
-			return this._elasticSerializer.Deserialize<NestedObjectMapping>(nestedJson);
+			return this._elasticSerializer.Deserialize<NestedObjectMapping>(nestedJson.Utf8Bytes());
 		}
 		internal string MapFromAttributes()
 		{

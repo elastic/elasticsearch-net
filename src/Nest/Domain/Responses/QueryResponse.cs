@@ -108,7 +108,7 @@ namespace Nest
 
 		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
 		{
-			var fieldName = this.ConnectionStatus.Infer.PropertyPath(expression);
+			var fieldName = this.Infer.PropertyPath(expression);
 			return this.Facet<F>(fieldName);
 		}
 		public F Facet<F>(string fieldName) where F : class, IFacet
@@ -125,7 +125,7 @@ namespace Nest
 
 		public IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem
 		{
-			var fieldName = this.ConnectionStatus.Infer.PropertyPath(expression);
+			var fieldName = this.Infer.PropertyPath(expression);
 			return this.FacetItems<F>(fieldName);
 		}
 

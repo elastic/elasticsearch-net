@@ -49,10 +49,7 @@ namespace Elasticsearch.Net.Connection.HttpClient
 					result = response.Content.ReadAsByteArrayAsync().Result;
 				    break;
 		    }
-			if (response.IsSuccessStatusCode)
-				return new ElasticsearchResponse(this._settings, result) { };
-		    var connectionError = new ConnectionError(null, (int) response.StatusCode);
-			return new ElasticsearchResponse(this._settings, connectionError, result);
+			return ElasticsearchResponse.Create(this._settings, (int)response.StatusCode, method, uri.ToString(), data, result);
 	    }
 
 

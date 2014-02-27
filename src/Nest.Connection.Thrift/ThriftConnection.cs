@@ -243,11 +243,13 @@ namespace Nest.Thrift
 		{
 			//RestResponse result = GetClient().execute(restRequest);
 			//
-
+			var method = Enum.GetName(typeof (Method), restRequest.Method);
+			var path = restRequest.Uri.ToString();
+			var requestData = restRequest.Body;
 			if (!this._resourceLock.WaitOne(this._timeout))
 			{
 				var m = "Could not start the thrift operation before the timeout of " + this._timeout + "ms completed while waiting for the semaphore";
-				return new ElasticsearchResponse(this._connectionSettings, new TimeoutException(m));
+				return ElasticsearchResponse.CreateError(this._connectionSettings, new TimeoutException(m), method, path, requestData);
 			}
 			try
 			{
@@ -255,7 +257,7 @@ namespace Nest.Thrift
 				if (!this._clients.TryDequeue(out client))
 				{
 					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
-					var status = new ElasticsearchResponse(this._connectionSettings, new Exception(m));
+					var status = ElasticsearchResponse.CreateError(this._connectionSettings, new Exception(m), method, path, requestData);
 					return status;
 				}
 				try
@@ -265,15 +267,11 @@ namespace Nest.Thrift
 
 					var result = client.execute(restRequest);
 					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
-						return new ElasticsearchResponse(this._connectionSettings, result.Body);
+						return ElasticsearchResponse.Create(this._connectionSettings, (int)result.Status, method, path, requestData, result.Body);
 					else
 					{
-						var connectionException = new ConnectionException(
-							msg: Enum.GetName(typeof (Status), result.Status), 
-							statusCode: (int)result.Status, 
-							response: DecodeStr(result.Body)
-						);
-						return new ElasticsearchResponse(this._connectionSettings, connectionException);
+						var connectionException = new ConnectionException((int)result.Status);
+						return ElasticsearchResponse.CreateError(this._connectionSettings, connectionException, method, path, requestData);
 					}
 				}
 				catch
@@ -289,7 +287,7 @@ namespace Nest.Thrift
 			}
 			catch (Exception e)
 			{
-				return new ElasticsearchResponse(this._connectionSettings, e);
+				return ElasticsearchResponse.CreateError(this._connectionSettings, e, method, path, requestData);
 			}
 			finally
 			{

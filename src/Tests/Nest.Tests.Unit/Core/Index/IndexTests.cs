@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 using NUnit.Framework;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -39,7 +40,7 @@ namespace Nest.Tests.Unit.Core.Index
       };
       var result = this._client.Index(x);
 
-      var request = result.ConnectionStatus.Request;
+      var request = result.ConnectionStatus.Request.Utf8String();
       StringAssert.Contains("ALLCAPS", request);
       StringAssert.Contains("PascalCase", request);
       StringAssert.Contains("camelCase", request);

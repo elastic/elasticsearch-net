@@ -24,7 +24,8 @@ namespace Elasticsearch.Net
 		IElasticsearchSerializer Serializer { get; set; }
 	}
 
-	public interface IElasticsearchConnectionSettings : IElasticsearchConnectionSettings<IElasticsearchConnectionSettings>
+	public interface IElasticsearchConnectionSettings : 
+		IElasticsearchConnectionSettings<IElasticsearchConnectionSettings>
 	{
 		
 	}

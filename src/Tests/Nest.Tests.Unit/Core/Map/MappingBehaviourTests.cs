@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest;
@@ -29,9 +30,11 @@ namespace Nest.Tests.Unit.Core.Map
 					.String(s => s.Name(p => p.Name).Index(FieldIndexOption.not_analyzed))
 				)
 			);
-			result.ConnectionStatus.Request.Should().Contain(@"""index"": ""not_analyzed""");
-			result.ConnectionStatus.Request.Should().Contain(@"""namez"": {");
-			result.ConnectionStatus.Request.Should().NotContain(@"""name"": {");
+			var request = result.ConnectionStatus.Request.Utf8String();
+			request.Should().Contain(@"""index"": ""not_analyzed""");
+			request.Should().Contain(@"""namez"": {");
+			request.Should().NotContain(@"""name"": {");
+			
 		}
 	}
 }

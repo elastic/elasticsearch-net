@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Elasticsearch.Net;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using System.Reflection;
 
@@ -18,7 +19,8 @@ namespace Nest.Tests.Integration.Core.Map.MetaField
 				)
 			);
 			//make sure Attr4 is not serialized as attr4
-			StringAssert.DoesNotContain("attr4", result.ConnectionStatus.Request, result.ConnectionStatus.Request);
+			var request = result.ConnectionStatus.Request.Utf8String();
+			StringAssert.DoesNotContain("attr4", request, request);
 			this.DefaultResponseAssertations(result);
 		}
 	}

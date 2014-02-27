@@ -40,16 +40,16 @@ namespace Elasticsearch.Net
 		public ElasticsearchConnectionSettings(Uri uri = null)
 		{
 			this.Timeout = 60*1000;
-			this.Uri = uri ?? new Uri("http://localhost:9200");
+			uri = uri ?? new Uri("http://localhost:9200");
 
 			//this makes sure that paths stay relative i.e if the root uri is:
 			//http://my-saas-provider.com/instance
-			if (!this.Uri.OriginalString.EndsWith("/"))
-				this.Uri = new Uri(uri.OriginalString + "/");
+			if (!uri.OriginalString.EndsWith("/"))
+				uri = new Uri(uri.OriginalString + "/");
 			this.Host = uri.Host;
 			this.Port = uri.Port;
 			this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
-
+			this.Uri = uri;
 			this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
 			this.MaximumAsyncConnections = 0;
 		}

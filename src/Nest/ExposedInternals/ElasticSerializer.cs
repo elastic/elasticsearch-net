@@ -18,13 +18,6 @@ namespace Nest
 {
 	public interface INestSerializer : IElasticsearchSerializer
 	{
-		/// <summary>
-		/// Deserialize an object 
-		/// </summary>
-		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse type this controls whether a 404 is a valid response</param>
-		T Deserialize<T>(string value, bool notFoundIsValidResponse = false) where T : class;
-
-		T Deserialize<T>(ElasticsearchResponse value, bool notFoundIsValidResponse = false) where T : class;
 		IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
 			where TResult : class
 			where T : class;
@@ -36,16 +29,24 @@ namespace Nest
 		/// </summary>
 		string SerializeMultiSearch(MultiSearchDescriptor multiSearchDescriptor);
 
-		TemplateResponse DeserializeTemplateResponse(NestElasticsearchResponse c, GetTemplateDescriptor d);
-		GetMappingResponse DeserializeGetMappingResponse(NestElasticsearchResponse c);
-		MultiGetResponse DeserializeMultiGetResponse(NestElasticsearchResponse c, MultiGetDescriptor d);
-		MultiSearchResponse DeserializeMultiSearchResponse(NestElasticsearchResponse c, MultiSearchDescriptor d);
-		WarmerResponse DeserializeWarmerResponse(NestElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
+		TemplateResponse DeserializeTemplateResponse(ElasticsearchResponse c, GetTemplateDescriptor d);
+		GetMappingResponse DeserializeGetMappingResponse(ElasticsearchResponse c);
+		MultiGetResponse DeserializeMultiGetResponse(ElasticsearchResponse c, MultiGetDescriptor d);
+		MultiSearchResponse DeserializeMultiSearchResponse(ElasticsearchResponse c, MultiSearchDescriptor d);
+		WarmerResponse DeserializeWarmerResponse(ElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor);
+
+		/// <summary>
+		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
+		/// </summary>
+		R ToParsedResponse<R>(
+			ElasticsearchResponse status, 
+			bool notFoundIsAValidResponse = false,
+			JsonConverter piggyBackJsonConverter = null
+			) where R : BaseResponse;
 	}
 
 	public class NestSerializer : INestSerializer
 	{
-		private static readonly Lazy<Regex> StripIndex = new Lazy<Regex>(() => new Regex(@"^index\."), LazyThreadSafetyMode.PublicationOnly);
 		private readonly IConnectionSettingsValues _settings;
 		private readonly JsonSerializerSettings _serializationSettings;
 
@@ -59,10 +60,18 @@ namespace Nest
 		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
 		/// </summary>
 		/// <returns></returns>
-		protected virtual R ToParsedResponse<R>(NestElasticsearchResponse status, JsonSerializerSettings jsonSettings, bool allow404 = false) where R : class
+		public virtual R ToParsedResponse<R>(
+			ElasticsearchResponse status, 
+			bool notFoundIsAValidResponse = false,
+			JsonConverter piggyBackJsonConverter = null
+			) where R : BaseResponse
 		{
+			var jsonSettings =piggyBackJsonConverter != null
+				? this.CreateSettings(piggyBackJsonConverter)
+				: this._serializationSettings;
+			
 			var isValid =
-				(allow404)
+				(notFoundIsAValidResponse)
 				? (status.Error == null
 					|| status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
 				: (status.Error == null);
@@ -80,12 +89,7 @@ namespace Nest
 			baseResponse.ConnectionStatus = status;
 			return r;
 		}
-
-		public virtual T Deserialize<T>(byte[] bytes) where T : class
-		{
-			return this.Deserialize<T>(bytes.Utf8String());
-		}
-
+	
 		public virtual byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			var format = formatting == SerializationFormatting.None ? Formatting.None : Formatting.Indented;
@@ -97,14 +101,12 @@ namespace Nest
 		/// Deserialize an object 
 		/// </summary>
 		/// <param name="notFoundIsValid">When deserializing a ConnectionStatus to a BaseResponse type this controls whether a 404 is a valid response</param>
-		public T Deserialize<T>(string value, bool notFoundIsValidResponse = false) where T : class
+		public virtual T Deserialize<T>(byte[] bytes) where T : class
 		{
-			return this.DeserializeInternal<T>(value, null, null, notFoundIsValidResponse);
+			if (bytes == null) return null;
+			return JsonConvert.DeserializeObject<T>(bytes.Utf8String(), this._serializationSettings);
 		}
-		public T Deserialize<T>(ElasticsearchResponse value, bool notFoundIsValidResponse = false) where T : class
-		{
-			return this.DeserializeInternal<T>(value, null, null, notFoundIsValidResponse);
-		}
+		
 		public IQueryResponse<TResult> DeserializeSearchResponse<T, TResult>(ElasticsearchResponse status, SearchDescriptor<T> originalSearchDescriptor)
 			where TResult : class
 			where T : class
@@ -127,48 +129,20 @@ namespace Nest
 			}
 
 			if (originalSearchDescriptor._ConcreteTypeSelector == null)
-				return this.Deserialize<QueryResponse<TResult>>(status);
+				return this.ToParsedResponse<QueryResponse<TResult>>(status, piggyBackJsonConverter: null, notFoundIsAValidResponse: true);
 
-			return this.DeserializeInternal<QueryResponse<TResult>>(
-				status,
-				piggyBackJsonConverter: new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector)
-			);
+			var concreteTypeConverter = new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector);
+			return this.ToParsedResponse<QueryResponse<TResult>>(status, piggyBackJsonConverter: concreteTypeConverter, notFoundIsAValidResponse: true);
 		}
 
-		internal T DeserializeInternal<T>(
-			object value,
-			JsonConverter piggyBackJsonConverter,
-			IList<JsonConverter> extraConverters = null,
-
-			bool notFoundIsValidResponse = false) where T : class
+		internal JsonSerializerSettings CreateSettings(JsonConverter piggyBackJsonConverter = null)
 		{
-			var jsonSettings = extraConverters.HasAny() || piggyBackJsonConverter != null
-				? this.CreateSettings(extraConverters, piggyBackJsonConverter)
-				: this._serializationSettings;
-
-			var jTokenValue = value as JToken;
-			if (jTokenValue != null)
-				return JsonSerializer.Create(jsonSettings).Deserialize<T>(jTokenValue.CreateReader());
-
-			var status = value as NestElasticsearchResponse;
-			if (status == null || !typeof(BaseResponse).IsAssignableFrom(typeof(T)))
-				return JsonConvert.DeserializeObject<T>(value.ToString(), jsonSettings);
-
-			return this.ToParsedResponse<T>(status, jsonSettings, notFoundIsValidResponse);
-		}
-
-		internal JsonSerializerSettings CreateSettings(IList<JsonConverter> extraConverters = null, JsonConverter piggyBackJsonConverter = null)
-		{
-			var converters = extraConverters.HasAny()
-				? extraConverters.ToList()
-				: null;
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			var settings = new JsonSerializerSettings()
 			{
 				ContractResolver = new ElasticContractResolver(this._settings) { PiggyBackState = piggyBackState },
 				DefaultValueHandling = DefaultValueHandling.Include,
-				NullValueHandling = NullValueHandling.Ignore,
-				Converters = converters,
+				NullValueHandling = NullValueHandling.Ignore
 			};
 
 			if (_settings.ModifyJsonSerializerSettings != null)
@@ -263,7 +237,7 @@ namespace Nest
 			return json;
 		}
 
-		public TemplateResponse DeserializeTemplateResponse(NestElasticsearchResponse c, GetTemplateDescriptor d)
+		public TemplateResponse DeserializeTemplateResponse(ElasticsearchResponse c, GetTemplateDescriptor d)
 		{
 			if (!c.Success) return new TemplateResponse { ConnectionStatus = c, IsValid = false };
 
@@ -279,9 +253,8 @@ namespace Nest
 				TemplateMapping = dict.First().Value
 			};
 		}
-		
 
-		public GetMappingResponse DeserializeGetMappingResponse(NestElasticsearchResponse c)
+		public GetMappingResponse DeserializeGetMappingResponse(ElasticsearchResponse c)
 		{
 			var dict = c.Success
 				? c.Deserialize<GetRootObjectMappingWrapping>()
@@ -290,23 +263,21 @@ namespace Nest
 
 		}
 
-		public MultiGetResponse DeserializeMultiGetResponse(NestElasticsearchResponse c, MultiGetDescriptor d)
+		public MultiGetResponse DeserializeMultiGetResponse(ElasticsearchResponse c, MultiGetDescriptor d)
 		{
 			var multiGetHitConverter = new MultiGetHitConverter(d);
-			var multiGetResponse = this.DeserializeInternal<MultiGetResponse>(c, piggyBackJsonConverter: multiGetHitConverter);
+			var multiGetResponse = this.ToParsedResponse<MultiGetResponse>(c, piggyBackJsonConverter: multiGetHitConverter);
 			return multiGetResponse;
-
 		}
 
-		public MultiSearchResponse DeserializeMultiSearchResponse(NestElasticsearchResponse c, MultiSearchDescriptor d)
+		public MultiSearchResponse DeserializeMultiSearchResponse(ElasticsearchResponse c, MultiSearchDescriptor d)
 		{
 			var multiSearchConverter = new MultiSearchConverter(this._settings, d);
-			var multiSearchResponse = this.DeserializeInternal<MultiSearchResponse>(c, piggyBackJsonConverter: multiSearchConverter);
+			var multiSearchResponse = this.ToParsedResponse<MultiSearchResponse>(c, piggyBackJsonConverter: multiSearchConverter);
 			return multiSearchResponse;
-
 		}
 
-		public WarmerResponse DeserializeWarmerResponse(NestElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
+		public WarmerResponse DeserializeWarmerResponse(ElasticsearchResponse connectionStatus, GetWarmerDescriptor getWarmerDescriptor)
 		{
 			if (!connectionStatus.Success)
 				return new WarmerResponse() { ConnectionStatus = connectionStatus, IsValid = false };
@@ -357,75 +328,6 @@ namespace Nest
 			return multiSearchDescriptor._QueryString.ContainsKey("search_type")
 				? multiSearchDescriptor._QueryString._QueryStringDictionary["search_type"] as string
 				: null;
-		}
-
-		//TODO although this gets the job done this looks a bit iffy, refactor
-		private JObject SettingsContainer(ElasticsearchResponse status)
-		{
-			var o = JObject.Parse(status.Result);
-			var settingsObject = o.First.First.First.First;
-
-			var settingsContainer = new JObject();
-			// In indexsettings response all analyzers etc are delivered as settings so need to split up the settings key and make proper json
-			foreach (JProperty s in settingsObject.Children<JProperty>())
-			{
-				var name = StripIndex.Value.Replace(s.Name, "");
-				if (name.StartsWith("analysis."))
-				{
-					var keys = name.Split('.');
-					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, keys, s.Value);
-				}
-				else if (name.StartsWith("similarity."))
-				{
-					var keys = name.Split('.');
-					var similaryKeys = new[] { keys[0], keys[1], string.Join(".", keys.Skip(2).ToArray()) };
-					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, similaryKeys, s.Value);
-				}
-				else
-				{
-					RewriteIndexSettingsResponseToIndexSettingsJSon(settingsContainer, new[] { name }, s.Value);
-				}
-			}
-			return settingsContainer;
-		}
-
-		/// <summary>
-		/// Rewrites the index settings response to index settings json.
-		/// </summary>
-		/// <param name="container">The container.</param>
-		/// <param name="key">The key.</param>
-		/// <param name="value">The value.</param>
-		private void RewriteIndexSettingsResponseToIndexSettingsJSon(JContainer container, string[] key, JToken value)
-		{
-			var thisKey = key.First();
-			int indexer;
-
-			if (key.Length > 2 || (key.Length == 2 && !int.TryParse(key.Last(), out indexer)))
-			{
-				var property = (JContainer)((JObject)container).GetValue(thisKey);
-				if (property == null)
-				{
-					property = new JObject();
-					((JObject)container).Add(thisKey, property);
-				}
-				RewriteIndexSettingsResponseToIndexSettingsJSon(property, key.Skip(1).ToArray(), value);
-			}
-			else if (key.Length == 2 && int.TryParse(key.Last(), out indexer))
-			{
-				var property = ((JObject)container).Property(thisKey);
-				if (property == null)
-				{
-					property = new JProperty(thisKey, new JArray());
-					container.Add(property);
-				}
-				var jArray = (JArray)property.Value;
-				jArray.Add(value);
-			}
-			else
-			{
-				var property = new JProperty(thisKey, value);
-				container.Add(property);
-			}
 		}
 
 	}

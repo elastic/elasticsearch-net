@@ -63,7 +63,9 @@ namespace Nest
 
 				if (this.ConnectionStatus == null)
 					return null;
-				_fields = new FieldSelection<T>(this.ConnectionStatus.Infer, FieldValues);
+				var realSettings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
+
+				_fields = new FieldSelection<T>(realSettings, FieldValues);
 				return _fields;
 			}
 		}

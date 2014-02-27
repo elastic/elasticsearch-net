@@ -63,7 +63,8 @@ namespace Nest
 				@Raw("Expression<Func<T, object>>") @mm)
 			where T : class
 		{
-			qs._@(mm) = @mm;
+			var p = (PropertyPathMarker)@mm;
+			qs._@(mm) = p;
 			qs.Add("@mm", qs._@mm);
 			return qs;
 		}

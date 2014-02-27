@@ -19,7 +19,6 @@ namespace Elasticsearch.Net.Integration.Yaml
 	{
 		protected static readonly IElasticsearchClient _client;
 		protected static readonly Version _versionNumber;
-		protected static readonly Version _versionNumber2;
 		
 		protected object _body;
 		protected ElasticsearchResponse _status;
@@ -32,16 +31,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
 			var settings = new ElasticsearchConnectionSettings(uri).UsePrettyResponses();
-			var serializer = new ElasticsearchJsonNetSerializer();
-			var connection = new ElasticsearchHttpClient(settings);
-			_client = new ElasticsearchClient(settings, connection: connection);
+			_client = new ElasticsearchClient(settings);
 			var infoResponse = _client.Info();
-			var infoResponse2 = _client.Info();
 			dynamic info = infoResponse.Response;
-			dynamic info2 = infoResponse2.Response;
-			string version = info.version.number;
-			_versionNumber = new Version(version);
-			_versionNumber2 = new Version(info2.version.number);
+			_versionNumber = new Version(info.version.number);
 		}
 
 

@@ -83,7 +83,6 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\NestElasticsearchResponse.cs" />
     <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteMappingExtensions.cs" />
@@ -171,6 +170,7 @@
     <Compile Include="DSL\_Descriptors.generated.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
+    <Compile Include="ExposedInternals\Stringifier.cs" />
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="RawDispatch.generated.cs" />
     <Compile Include="RawDispatch.cs" />

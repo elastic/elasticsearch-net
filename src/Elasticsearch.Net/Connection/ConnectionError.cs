@@ -25,14 +25,13 @@ namespace Elasticsearch.Net.Connection
 		public HttpStatusCode HttpStatusCode { get; set; }
 		public string ExceptionMessage { get; set; }
 		public Exception OriginalException { get; set; }
-		internal string Response { get; set; }
+		public byte[] ResponseReadFromWebException { get; set; }
 
 		public ConnectionError(Exception e)
 		{
 			this.OriginalException = e;
 			this.ExceptionMessage = e.Message;
 			this.Type = ConnectionErrorType.Uncaught;
-
 			var webException = e as WebException;
 			if (webException == null)
 			{
@@ -40,26 +39,11 @@ namespace Elasticsearch.Net.Connection
 				if (connectionException == null)
 					return;
 				this.HttpStatusCode = (HttpStatusCode)connectionException.HttpStatusCode;
-				this.Response = connectionException.Response;
 				return;
 			}
 			this.Type = ConnectionErrorType.Server;
 			var response = (HttpWebResponse)webException.Response;
 			this.SetWebResponseData(response);
-		}
-
-		public ConnectionError(string response, int httpStatusCode)
-		{
-			this.Type = ConnectionErrorType.Server;
-			this.Response = response;
-			try
-			{
-				this.HttpStatusCode = (HttpStatusCode) httpStatusCode;
-			}
-			catch (Exception)
-			{
-				this.HttpStatusCode = HttpStatusCode.InternalServerError;
-			}
 		}
 
 		private void SetWebResponseData(HttpWebResponse response)
@@ -71,21 +55,17 @@ namespace Elasticsearch.Net.Connection
 			try
 			{
 				using (var responseStream = response.GetResponseStream())
-				using (var reader = new StreamReader(responseStream, true))
+				using (var memoryStream = new MemoryStream())
 				{
-					this.Response = reader.ReadToEnd();
-					this.TryReadElasticsearchException();
+					responseStream.CopyTo(memoryStream);
+					this.ResponseReadFromWebException = memoryStream.ToArray();
 				}
 			}
 			finally 
 			{ 
 			}
 		}
-
-		private void TryReadElasticsearchException()
-		{
-			this.ExceptionMessage =  this.Response;
-		}
+		
 	}
 
 }

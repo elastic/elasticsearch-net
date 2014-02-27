@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
@@ -22,7 +23,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 				)
 			);
 			var status = result.ConnectionStatus;
-			this.BulkJsonEquals(status.Request, MethodInfo.GetCurrentMethod());
+			this.BulkJsonEquals(status.Request.Utf8String(), MethodInfo.GetCurrentMethod());
 		}
 		[Test]
 		public void BulkUpdateDetails()
@@ -39,7 +40,7 @@ namespace Nest.Tests.Unit.Core.Bulk
 				)
 			);
 			var status = result.ConnectionStatus;
-			this.BulkJsonEquals(status.Request, MethodInfo.GetCurrentMethod());
+			this.BulkJsonEquals(status.Request.Utf8String(), MethodInfo.GetCurrentMethod());
 		}
 	}
 }

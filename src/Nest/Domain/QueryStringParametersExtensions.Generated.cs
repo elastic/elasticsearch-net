@@ -46,7 +46,8 @@ namespace Nest
 				Expression<Func<T, object>> field)
 			where T : class
 		{
-			qs._field = field;
+			var p = (PropertyPathMarker)field;
+			qs._field = p;
 			qs.Add("field", qs._field);
 			return qs;
 		}
@@ -178,7 +179,8 @@ namespace Nest
 				Expression<Func<T, object>> suggest_field)
 			where T : class
 		{
-			qs._suggest_field = suggest_field;
+			var p = (PropertyPathMarker)suggest_field;
+			qs._suggest_field = p;
 			qs.Add("suggest_field", qs._suggest_field);
 			return qs;
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Channels;
+using Elasticsearch.Net;
 using NUnit.Framework;
 using System.Linq.Expressions;
 using Nest.Resolvers;
@@ -186,9 +187,10 @@ namespace Nest.Tests.Unit.Internals.Inferno
 				&& query.Term(f=>f.CreateDate, "x")
 			  )
 			);
-			StringAssert.Contains("custom.MID", result.ConnectionStatus.Request);
-			StringAssert.Contains("myCustomOtherClass.MID", result.ConnectionStatus.Request);
-			StringAssert.Contains("CreateDate", result.ConnectionStatus.Request);
+			var request = result.ConnectionStatus.Request.Utf8String();
+			StringAssert.Contains("custom.MID", request);
+			StringAssert.Contains("myCustomOtherClass.MID", request);
+			StringAssert.Contains("CreateDate", request);
 		}
 
 		[Test] 
@@ -199,7 +201,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			  .FacetDateHistogram("CreateDate2", fd => fd.OnField("CreateDate2").Interval(DateInterval.Hour))
 			  .MatchAll()
 			);
-			StringAssert.DoesNotContain("createDate2", result.ConnectionStatus.Request);
+			var request = result.ConnectionStatus.Request.Utf8String();
+			StringAssert.DoesNotContain("createDate2", request);
 		}
 		[Test]
 		public void SearchDoesntLowercaseStringFieldOverloadInSearch()
@@ -214,7 +217,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 				)
 			  )
 			);
-			StringAssert.DoesNotContain("createDate2", result.ConnectionStatus.Request);
+			StringAssert.DoesNotContain("createDate2", result.ConnectionStatus.Request.Utf8String());
 		}
 	}
 }

@@ -173,6 +173,8 @@ namespace Elasticsearch.Net.Connection
 
 		protected virtual ElasticsearchResponse DoSynchronousRequest(HttpWebRequest request, byte[] data = null)
 		{
+			var path = request.RequestUri.ToString();
+			var method = request.Method;
 			using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
 			{
 				ElasticsearchResponse cs = null;
@@ -183,7 +185,6 @@ namespace Elasticsearch.Net.Connection
 						r.Write(data, 0, data.Length);
 					}
 				}
-				var requestData = data.Utf8String();
 				try
 				{
 					using (var response = (HttpWebResponse)request.GetResponse())
@@ -191,24 +192,15 @@ namespace Elasticsearch.Net.Connection
 					using (var memoryStream = new MemoryStream())
 					{
 						responseStream.CopyTo(memoryStream);
-						cs = new ElasticsearchResponse(this._ConnectionSettings, memoryStream.ToArray())
-						{
-							Request = requestData,
-							RequestUrl = request.RequestUri.ToString(),
-							RequestMethod = request.Method
-						};
+						cs = ElasticsearchResponse.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data,
+							memoryStream.ToArray());
 						tracer.SetResult(cs);
 						return cs;
 					}
 				}
 				catch (WebException webException)
 				{
-					cs = new ElasticsearchResponse(this._ConnectionSettings, webException)
-					{
-						Request = requestData,
-						RequestUrl = request.RequestUri.ToString(),
-						RequestMethod = request.Method
-					};
+					cs = ElasticsearchResponse.CreateError(this._ConnectionSettings, webException, method, path, data);
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);
 					return cs;
@@ -225,13 +217,15 @@ namespace Elasticsearch.Net.Connection
 				return this.CreateIterateTask(request, data, tcs);
 
 			var timeout = this._ConnectionSettings.Timeout;
+			var path = request.RequestUri.ToString();
+			var method = request.Method;
 			if (!this._ResourceLock.WaitOne(timeout))
 			{
 				using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
 				{
 					var m = "Could not start the operation before the timeout of " + timeout +
 					  "ms completed while waiting for the semaphore";
-					var cs = new ElasticsearchResponse(this._ConnectionSettings, new TimeoutException(m));
+					var cs = ElasticsearchResponse.CreateError(this._ConnectionSettings, new TimeoutException(m), method, path, data); 
 					tcs.SetResult(cs);
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);
@@ -250,7 +244,7 @@ namespace Elasticsearch.Net.Connection
 
 		private Task<ElasticsearchResponse> CreateIterateTask(HttpWebRequest request, byte[] data, TaskCompletionSource<ElasticsearchResponse> tcs)
 		{
-			this.Iterate(this._AsyncSteps(request, tcs, data), tcs);
+			this.Iterate(request, data, this._AsyncSteps(request, tcs, data), tcs);
 			return tcs.Task;
 		}
 
@@ -285,6 +279,9 @@ namespace Elasticsearch.Net.Connection
 				//ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
 				yield return getResponse;
 
+				var path = request.RequestUri.ToString();
+				var method = request.Method;
+
 				// Get the response stream
 				using (var response = (HttpWebResponse)getResponse.Result)
 				using (var responseStream = response.GetResponseStream())
@@ -299,14 +296,7 @@ namespace Elasticsearch.Net.Connection
 						if (read.Result == 0) break;
 						memoryStream.Write(buffer, 0, read.Result);
 					}
-
-					// Decode the data and store the result
-					var cs = new ElasticsearchResponse(this._ConnectionSettings, memoryStream.ToArray())
-					{
-						Request = data.Utf8String(),
-						RequestUrl = request.RequestUri.ToString(),
-						RequestMethod = request.Method
-					};
+					var cs = ElasticsearchResponse.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data, memoryStream.ToArray());
 					tcs.TrySetResult(cs);
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);
@@ -314,7 +304,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public void Iterate(IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse> tcs)
+		public void Iterate(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse> tcs)
 		{
 			var enumerator = asyncIterator.GetEnumerator();
 			Action<Task> recursiveBody = null;
@@ -328,7 +318,12 @@ namespace Elasticsearch.Net.Connection
 
 					//cleanly exit from exceptions in stages if the exception is a webexception
 					if (exception is WebException)
-						tcs.SetResult(new ElasticsearchResponse(this._ConnectionSettings, exception));
+					{
+						var path = request.RequestUri.ToString();
+						var method = request.Method;
+						var response = ElasticsearchResponse.CreateError(this._ConnectionSettings, exception, method, path, data);
+						tcs.SetResult(response);
+					}
 					else
 						tcs.TrySetException(exception);
 					//					enumerator.Dispose();

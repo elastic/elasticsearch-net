@@ -26,7 +26,8 @@ namespace Nest.Tests.Integration
 			var index = this._client.Infer.IndexName<T>();
 			var typeName = this._client.Infer.TypeName<T>();
 			var connectionStatus = this._client.Raw.Search(index, typeName, query);
-			return connectionStatus.Deserialize<QueryResponse<T>>();
+			var serializer = connectionStatus.Serializer as INestSerializer; 
+			return serializer.ToParsedResponse<QueryResponse<T>>(connectionStatus);
 		} 
 
 		public void DoFilterTest(Func<FilterDescriptor<ElasticsearchProject>, Nest.BaseFilter> filter, ElasticsearchProject project, bool queryMustHaveResults)

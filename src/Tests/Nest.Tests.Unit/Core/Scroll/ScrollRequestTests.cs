@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
@@ -19,7 +20,7 @@ namespace Nest.Tests.Unit.Core.Scroll
 			Assert.AreEqual("/_search/scroll", uri.AbsolutePath);
 			Assert.AreEqual("?scroll=4m", uri.Query);
 			StringAssert.AreEqualIgnoringCase("POST", status.RequestMethod);
-			Assert.AreEqual("INBODY", status.Request);
+			Assert.AreEqual("INBODY", status.Request.Utf8String());
 		}
 
 	}
