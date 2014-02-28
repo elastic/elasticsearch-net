@@ -14,6 +14,12 @@ namespace Nest
 		[JsonProperty(PropertyName = "fuzzy")]
 		internal FuzzySuggestDescriptor<T> _Fuzzy { get; set; }
 
+		public CompletionSuggestDescriptor<T> Size(int size)
+		{
+			this._Size = size;
+			return this;
+		} 
+
 		public CompletionSuggestDescriptor<T> Text(string text)
 		{
 			this._Text = text;
