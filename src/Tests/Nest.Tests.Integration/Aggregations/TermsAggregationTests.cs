@@ -65,7 +65,7 @@ namespace Nest.Tests.Integration.Aggregations
 					)
 				)
 			);
-	        results.IsValid.Should().BeTrue();
+			results.IsValid.Should().BeTrue();
 			var termBucket = results.Aggs.Terms("countries");
 			termBucket.Should().NotBeNull();
 			termBucket.Items.Should().NotBeEmpty()
