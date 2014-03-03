@@ -66,8 +66,8 @@ namespace Nest.Tests.Integration.Aggregations
 				)
 			);
 	        results.IsValid.Should().BeTrue();
-	        var termBucket = results.Aggs.Terms("countries");
-	        termBucket.Should().NotBeNull();
+			var termBucket = results.Aggs.Terms("countries");
+			termBucket.Should().NotBeNull();
 			termBucket.Items.Should().NotBeEmpty()
 				.And.OnlyContain(i => !i.Key.IsNullOrEmpty())
 				.And.OnlyContain(i => i.DocCount > 0);
