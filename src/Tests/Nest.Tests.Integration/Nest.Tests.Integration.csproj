@@ -68,7 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregations\TermAggregationTests.cs" />
+    <Compile Include="Aggregations\SingleBucketAggregationTests - Copy.cs" />
+    <Compile Include="Aggregations\BucketAggregationTests.cs" />
+    <Compile Include="Aggregations\StatsAggregationTests.cs" />
+    <Compile Include="Aggregations\MetricAggregationTests.cs" />
+    <Compile Include="Aggregations\TermsAggregationTests.cs" />
     <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />

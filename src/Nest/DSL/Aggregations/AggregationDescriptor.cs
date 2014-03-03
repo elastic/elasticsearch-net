@@ -64,7 +64,7 @@ namespace Nest
 			return _SetInnerAggregation(name, selector, (a, d) => a._GeoDistance = d);
 		}
 
-		[JsonProperty("geo_hash")]
+		[JsonProperty("geohash_grid")]
 		internal GeoHashAggregationDescriptor<T> _GeoHash { get; set; }
 		public AggregationDescriptor<T> GeoHash(string name,
 			Func<GeoHashAggregationDescriptor<T>, GeoHashAggregationDescriptor<T>> selector)
@@ -89,9 +89,9 @@ namespace Nest
 		}
 
 		[JsonProperty("ip_range")]
-		internal IpRangeAggregationDescriptor<T> _IpRange { get; set; }
+		internal Ip4RangeAggregationDescriptor<T> _IpRange { get; set; }
 		public AggregationDescriptor<T> IpRange(string name,
-			Func<IpRangeAggregationDescriptor<T>, IpRangeAggregationDescriptor<T>> selector)
+			Func<Ip4RangeAggregationDescriptor<T>, Ip4RangeAggregationDescriptor<T>> selector)
 		{
 			return _SetInnerAggregation(name, selector, (a, d) => a._IpRange = d);
 		}

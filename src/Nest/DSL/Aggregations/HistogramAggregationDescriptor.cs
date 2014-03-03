@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class HistogramAggregationDescriptor<T> : MetricAggregationBaseDescriptor<HistogramAggregationDescriptor<T>, T>
+	public class HistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<HistogramAggregationDescriptor<T>, T>
 		where T : class
 	{
 		[JsonProperty("field")]

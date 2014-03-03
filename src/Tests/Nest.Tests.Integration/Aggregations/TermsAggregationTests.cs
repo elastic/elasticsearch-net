@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Aggregations
         }
 		
 		[Test]
-        public void NestedEmptyAggregation()
+        public void NestedEmptyAggregationThreeLevelDeeps()
         {
 			var results = this._client.Search<ElasticsearchProject>(s => s
 				.Size(0)
@@ -55,7 +55,12 @@ namespace Nest.Tests.Integration.Aggregations
 						.Field(p=>p.Country)
 						.Aggregations(aa=>aa
 							.Terms("noop", tt => tt.Field("noop"))
-							.Terms("names", tt => tt.Field(p=>p.Name))
+							.Terms("names", tt => tt
+								.Field(p=>p.Name)
+								.Aggregations(aaa=>aaa
+									.Average("avg_loc", avg=>avg .Field(p=>p.LOC))
+								)
+							)
 						)
 					)
 				)
@@ -79,6 +84,14 @@ namespace Nest.Tests.Integration.Aggregations
 				var names = term.Terms("names");
 				names.Should().NotBeNull();
 				names.Items.Should().NotBeEmpty();
+
+				foreach (var nameTerm in names.Items)
+				{
+					var name = nameTerm.Key;
+					var average = nameTerm.Average("avg_loc");
+					average.Should().NotBeNull();
+					average.Value.Should().HaveValue();
+				}
 			}
         }
     }
