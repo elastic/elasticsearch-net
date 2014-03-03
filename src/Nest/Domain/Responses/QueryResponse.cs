@@ -13,6 +13,8 @@ namespace Nest
 		ShardsMetaData Shards { get; }
 		HitsMetaData<T> HitsMetaData { get; }
 		IDictionary<string, Facet> Facets { get; }
+		IDictionary<string, IAggregation> Aggregations { get; }
+		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int ElapsedMilliseconds { get; }
 		string ScrollId { get; }
@@ -44,7 +46,18 @@ namespace Nest
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public IDictionary<string, Facet> Facets { get; internal set; }
+		
+		[JsonProperty(PropertyName = "aggregations")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		public IDictionary<string, IAggregation> Aggregations { get; internal set; }
+		
+		private AggregationsHelper _agg = null;
 
+		public AggregationsHelper Aggs
+		{
+			get { return _agg ?? (_agg = new AggregationsHelper(this.Aggregations)); }
+		}
+		
 		[JsonProperty(PropertyName = "suggest")]
 		public IDictionary<string, Suggest[]> Suggest { get; internal set; }
 

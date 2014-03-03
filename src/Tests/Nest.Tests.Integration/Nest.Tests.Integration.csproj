@@ -68,6 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\TermAggregationTests.cs" />
+    <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />

@@ -28,6 +28,7 @@ namespace Nest.Tests.MockData.Domain
 		public GeoLocation Origin { get; set; }
 		public DateTime StartedOn { get; set; }
 
+		[ElasticProperty(Type=FieldType.ip)]
 		public string PingIP { get; set; }
 
 		public GeoShape MyGeoShape { get; set; }

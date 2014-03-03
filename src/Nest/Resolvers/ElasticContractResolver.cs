@@ -52,6 +52,9 @@ namespace Nest.Resolvers
 			if (objectType == typeof(Facet))
 				contract.Converter = new FacetConverter();
 			
+			if (objectType == typeof(IAggregation))
+				contract.Converter = new AggregationConverter();
+			
 			if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
 

@@ -14,7 +14,15 @@ namespace Nest
 
     [JsonProperty(PropertyName = "to")]
     internal T? _To { get; set; }
+	  
+	[JsonProperty(PropertyName = "key")]
+    internal string _Key { get; set; }
 
+    public Range<T> Key(string key)
+    {
+      this._Key = key;
+      return this;
+    }
     public Range<T> From(T value)
     {
       this._From = value;

@@ -93,6 +93,8 @@
     <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceManyExtensions.cs" />
+    <Compile Include="Domain\Aggregations\AggregationsHelper.cs" />
+    <Compile Include="Domain\Aggregations\IAggration.cs" />
     <Compile Include="Domain\Alias\AliasAddDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasAddOperation.cs" />
     <Compile Include="Domain\Alias\AliasRemoveDescriptor.cs" />
@@ -630,6 +632,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\AggregationConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />

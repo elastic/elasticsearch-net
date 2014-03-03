@@ -81,6 +81,7 @@
     <Compile Include="DataSources\ElasticsearchProjectsDataSource.cs" />
     <Compile Include="DataSources\GeoLocationSource.cs" />
     <Compile Include="DataSources\IntListSource.cs" />
+    <Compile Include="DataSources\IpSource.cs" />
     <Compile Include="DataSources\LOCSource.cs" />
     <Compile Include="DataSources\DoubleSource.cs" />
     <Compile Include="DataSources\LongSource.cs" />

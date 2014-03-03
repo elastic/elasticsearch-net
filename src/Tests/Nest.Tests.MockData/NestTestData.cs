@@ -54,6 +54,7 @@ namespace Nest.Tests.MockData
 						.Setup(c => c.IntValues).Use<IntListSource>()
 						.Setup(c => c.FloatValues).Use<FloatArraySource>()
 						.Setup(c => c.LOC).Use<LOCSource>()
+						.Setup(c => c.PingIP).Use<IpSource>()
 						.Setup(c => c.Country).Use<CountrySource>()
 						.Setup(c => c.Origin).Use<GeoLocationSource>()
 						.Setup(c => c.Name).Use<ElasticsearchProjectsDataSource>()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,169 +9,178 @@ namespace Nest
 	public class AggregationDescriptor<T>
 		where T : class
 	{
-		private readonly IDictionary<string, IAggregationDescriptor> _aggregations =
-			new Dictionary<string, IAggregationDescriptor>();
+		internal readonly IDictionary<string, AggregationDescriptor<T>> _Aggregations =
+			new Dictionary<string, AggregationDescriptor<T>>();
 
-		public AverageAggregationDescriptor<T> _Average { get; set; }
-		public AggregationDescriptor<T> Average(Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
+		[JsonProperty("aggs", Order = 100)] 
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal IDictionary<string, AggregationDescriptor<T>> _NestedAggregations;
+
+
+		[JsonProperty("avg")]
+		internal AverageAggregationDescriptor<T> _Average { get; set; }
+		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
 		{
-			this._Average = selector(new AverageAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Average = d);
 		}
 
 		[JsonProperty("date_histogram")]
-		public DateHistogramAggregationDescriptor<T> _DateHistogram { get; set; }
-		public AggregationDescriptor<T> DateHistogram(
+		internal DateHistogramAggregationDescriptor<T> _DateHistogram { get; set; }
+		public AggregationDescriptor<T> DateHistogram(string name,
 			Func<DateHistogramAggregationDescriptor<T>, DateHistogramAggregationDescriptor<T>> selector)
 		{
-			this._DateHistogram = selector(new DateHistogramAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._DateHistogram = d);
 		}
 
 		[JsonProperty("date_range")]
-		public DateRangeAggregationDescriptor<T> _DateRange { get; set; }
-		public AggregationDescriptor<T> DateRange(
+		internal DateRangeAggregationDescriptor<T> _DateRange { get; set; }
+		public AggregationDescriptor<T> DateRange(string name,
 			Func<DateRangeAggregationDescriptor<T>, DateRangeAggregationDescriptor<T>> selector)
 		{
-			this._DateRange = selector(new DateRangeAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._DateRange = d);
 		}
 
 		[JsonProperty("extended_stats")]
-		public ExtendedStatsAggregationDescriptor<T> _ExtendedStats { get; set; }
-		public AggregationDescriptor<T> ExtendedStats(
+		internal ExtendedStatsAggregationDescriptor<T> _ExtendedStats { get; set; }
+		public AggregationDescriptor<T> ExtendedStats(string name,
 			Func<ExtendedStatsAggregationDescriptor<T>, ExtendedStatsAggregationDescriptor<T>> selector)
 		{
-			this._ExtendedStats = selector(new ExtendedStatsAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._ExtendedStats = d);
 		}
 	
 		[JsonProperty("filter")]
-		public FilterAggregationDescriptor<T> _Filter { get; set; }
-		public AggregationDescriptor<T> Filter(
+		internal FilterAggregationDescriptor<T> _Filter { get; set; }
+		public AggregationDescriptor<T> Filter(string name,
 			Func<FilterAggregationDescriptor<T>, FilterAggregationDescriptor<T>> selector)
 		{
-			this._Filter = selector(new FilterAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Filter = d);
 		}
 		
 		[JsonProperty("geo_distance")]
-		public GeoDistanceAggregationDescriptor<T> _GeoDistance { get; set; }
-		public AggregationDescriptor<T> GeoDistance(
+		internal GeoDistanceAggregationDescriptor<T> _GeoDistance { get; set; }
+		public AggregationDescriptor<T> GeoDistance(string name,
 			Func<GeoDistanceAggregationDescriptor<T>, GeoDistanceAggregationDescriptor<T>> selector)
 		{
-			this._GeoDistance = selector(new GeoDistanceAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._GeoDistance = d);
 		}
 
 		[JsonProperty("geo_hash")]
-		public GeoHashAggregationDescriptor<T> _GeoHash { get; set; }
-		public AggregationDescriptor<T> GeoHash(
+		internal GeoHashAggregationDescriptor<T> _GeoHash { get; set; }
+		public AggregationDescriptor<T> GeoHash(string name,
 			Func<GeoHashAggregationDescriptor<T>, GeoHashAggregationDescriptor<T>> selector)
 		{
-			this._GeoHash = selector(new GeoHashAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._GeoHash = d);
 		}
 
 		[JsonProperty("histogram")]
-		public HistogramAggregationDescriptor<T> _Histogram { get; set; }
-		public AggregationDescriptor<T> Histogram(
+		internal HistogramAggregationDescriptor<T> _Histogram { get; set; }
+		public AggregationDescriptor<T> Histogram(string name,
 			Func<HistogramAggregationDescriptor<T>, HistogramAggregationDescriptor<T>> selector)
 		{
-			this._Histogram = selector(new HistogramAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Histogram = d);
 		}
 		
 		[JsonProperty("global")]
-		public GlobalAggregationDescriptor<T> _Global { get; set; }
-		public AggregationDescriptor<T> Global(
+		internal GlobalAggregationDescriptor<T> _Global { get; set; }
+		public AggregationDescriptor<T> Global(string name,
 			Func<GlobalAggregationDescriptor<T>, GlobalAggregationDescriptor<T>> selector)
 		{
-			this._Global = selector(new GlobalAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Global = d);
 		}
 
-		[JsonProperty("ip4_range")]
-		public Ip4RangeAggregationDescriptor<T> _Ip4Range { get; set; }
-		public AggregationDescriptor<T> Ip4Range(
-			Func<Ip4RangeAggregationDescriptor<T>, Ip4RangeAggregationDescriptor<T>> selector)
+		[JsonProperty("ip_range")]
+		internal IpRangeAggregationDescriptor<T> _IpRange { get; set; }
+		public AggregationDescriptor<T> IpRange(string name,
+			Func<IpRangeAggregationDescriptor<T>, IpRangeAggregationDescriptor<T>> selector)
 		{
-			this._Ip4Range = selector(new Ip4RangeAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._IpRange = d);
 		}
 
 		[JsonProperty("max")]
-		public MaxAggregationDescriptor<T> _Max { get; set; }
-		public AggregationDescriptor<T> Max(Func<MaxAggregationDescriptor<T>, MaxAggregationDescriptor<T>> selector)
+		internal MaxAggregationDescriptor<T> _Max { get; set; }
+		public AggregationDescriptor<T> Max(string name, Func<MaxAggregationDescriptor<T>, MaxAggregationDescriptor<T>> selector)
 		{
-			this._Max = selector(new MaxAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Max = d);
 		}
 
 		[JsonProperty("min")]
-		public MinAggregationDescriptor<T> _Min { get; set; }
-		public AggregationDescriptor<T> Min(Func<MinAggregationDescriptor<T>, MinAggregationDescriptor<T>> selector)
+		internal MinAggregationDescriptor<T> _Min { get; set; }
+		public AggregationDescriptor<T> Min(string name, Func<MinAggregationDescriptor<T>, MinAggregationDescriptor<T>> selector)
 		{
-			this._Min = selector(new MinAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Min = d);
 		}
 	
 		[JsonProperty("missing")]
-		public MissingAggregationDescriptor<T> _Missing { get; set; }
-		public AggregationDescriptor<T> Missing(Func<MissingAggregationDescriptor<T>, MissingAggregationDescriptor<T>> selector)
+		internal MissingAggregationDescriptor<T> _Missing { get; set; }
+		public AggregationDescriptor<T> Missing(string name, Func<MissingAggregationDescriptor<T>, MissingAggregationDescriptor<T>> selector)
 		{
-			this._Missing = selector(new MissingAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Missing = d);
 		}
 
 		[JsonProperty("nested")]
-		public NestedAggregationDescriptor<T> _Nested { get; set; }
-		public AggregationDescriptor<T> Nested(Func<NestedAggregationDescriptor<T>, NestedAggregationDescriptor<T>> selector)
+		internal NestedAggregationDescriptor<T> _Nested { get; set; }
+		public AggregationDescriptor<T> Nested(string name, Func<NestedAggregationDescriptor<T>, NestedAggregationDescriptor<T>> selector)
 		{
-			this._Nested = selector(new NestedAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Nested = d);
 		}
 
 		[JsonProperty("range")]
-		public RangeAggregationDescriptor<T> _Range { get; set; }
-		public AggregationDescriptor<T> Range(Func<RangeAggregationDescriptor<T>, RangeAggregationDescriptor<T>> selector)
+		internal RangeAggregationDescriptor<T> _Range { get; set; }
+		public AggregationDescriptor<T> Range(string name, Func<RangeAggregationDescriptor<T>, RangeAggregationDescriptor<T>> selector)
 		{
-			this._Range = selector(new RangeAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Range = d);
 		}
 
 		[JsonProperty("stats")]
-		public StatsAggregationDescriptor<T> _Stats { get; set; }
-		public AggregationDescriptor<T> Stats(Func<StatsAggregationDescriptor<T>, StatsAggregationDescriptor<T>> selector)
+		internal StatsAggregationDescriptor<T> _Stats { get; set; }
+		public AggregationDescriptor<T> Stats(string name, Func<StatsAggregationDescriptor<T>, StatsAggregationDescriptor<T>> selector)
 		{
-			this._Stats = selector(new StatsAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Stats = d);
 		}
 
 		[JsonProperty("sum")]
-		public SumAggregationDescriptor<T> _Sum { get; set; }
-		public AggregationDescriptor<T> Sum(Func<SumAggregationDescriptor<T>, SumAggregationDescriptor<T>> selector)
+		internal SumAggregationDescriptor<T> _Sum { get; set; }
+		public AggregationDescriptor<T> Sum(string name, Func<SumAggregationDescriptor<T>, SumAggregationDescriptor<T>> selector)
 		{
-			this._Sum = selector(new SumAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Sum = d);
 		}
 
 		[JsonProperty("terms")]
-		public TermsAggregationDescriptor<T> _Terms { get; set; }
-		public AggregationDescriptor<T> Terms(Func<TermsAggregationDescriptor<T>, TermsAggregationDescriptor<T>> selector)
+		internal TermsAggregationDescriptor<T> _Terms { get; set; }
+		public AggregationDescriptor<T> Terms(string name, Func<TermsAggregationDescriptor<T>, TermsAggregationDescriptor<T>> selector)
 		{
-			this._Terms = selector(new TermsAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._Terms = d);
 		}
 
 		[JsonProperty("value_count")]
-		public ValueCountAggregationDescriptor<T> _ValueCount { get; set; }
-		public AggregationDescriptor<T> ValueCount(
+		internal ValueCountAggregationDescriptor<T> _ValueCount { get; set; }
+		public AggregationDescriptor<T> ValueCount(string name,
 			Func<ValueCountAggregationDescriptor<T>, ValueCountAggregationDescriptor<T>> selector)
 		{
-			this._ValueCount = selector(new ValueCountAggregationDescriptor<T>());
-			return this;
+			return _SetInnerAggregation(name, selector, (a, d) => a._ValueCount = d);
 		}
+
+		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
+			string key,
+			Func<TAggregation, TAggregation> selector
+			, Action<AggregationDescriptor<T>, TAggregation> setter 
+			)
+			where TAggregation : IAggregationDescriptor, new()
+
+		{
+			var innerDescriptor = selector(new TAggregation());
+			var descriptor = new AggregationDescriptor<T>();
+			setter(descriptor, innerDescriptor);
+			var bucket = innerDescriptor as IBucketAggregationDescriptor<T>;
+			if (bucket != null && bucket.NestedAggregations.HasAny())
+			{
+				descriptor._NestedAggregations = bucket.NestedAggregations;
+			}
+			this._Aggregations[key] = descriptor;
+			return this;
+
+		}
+
 
 	}
 }

@@ -285,6 +285,20 @@ namespace Nest
 		[JsonProperty(PropertyName = "_source")]
 		internal object _Source { get; set; }
 
+
+		[JsonProperty(PropertyName = "aggs")]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		internal IDictionary<string, AggregationDescriptor<T>> _Aggregations { get; set; }
+
+		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
+		{
+			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
+			if (aggs == null) return this;
+			this._Aggregations = aggs._Aggregations;
+			return this;
+		}
+
+
 		public SearchDescriptor<T> Source(bool include = true)
 		{
 			this._Source = include;

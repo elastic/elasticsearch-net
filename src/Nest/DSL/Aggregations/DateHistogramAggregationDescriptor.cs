@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class DateHistogramAggregationDescriptor<T> : MetricAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>
+	public class DateHistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>
 		where T : class
 	{
 		[JsonProperty("field")]
 		internal PropertyPathMarker _Field { get; set; }
-		
+
+		public DateHistogramAggregationDescriptor()
+		{
+			this.Format("yyyy-MM-dd");
+		}
+
+
 		public DateHistogramAggregationDescriptor<T> Field(string field)
 		{
 			this._Field = field;
@@ -51,7 +58,18 @@ namespace Nest
 			this._Interval = interval;
 			return this;
 		}
-		
+	
+		[JsonProperty("format")]
+		internal string _Format { get; set; }
+
+		public DateHistogramAggregationDescriptor<T> Format(string format)
+		{
+			if (format.IsNullOrEmpty())
+				return this;
+			this._Format = format;
+			return this;
+		}
+			
 		[JsonProperty("min_doc_count")]
 		internal int? _MinimumDocumentCount { get; set; }
 
