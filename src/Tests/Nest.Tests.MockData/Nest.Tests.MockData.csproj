@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\AgeSource.cs" />
     <Compile Include="DataSources\BoolSource.cs" />
     <Compile Include="DataSources\IncrementalNameSource.cs" />
     <Compile Include="DataSources\FloatArraySource.cs" />

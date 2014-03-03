@@ -112,7 +112,6 @@ namespace Nest.Tests.Integration.Aggregations
 				.Aggregations(a=>a
 					.GeoDistance("my_geod", dh=>dh
 						.Field(p=>p.Origin)
-						//.DistanceType(GeoDistanceType.sloppy_arc)
 						.Origin(28.0, 28.0)
 						.Unit(GeoUnit.km)
 						.Ranges(

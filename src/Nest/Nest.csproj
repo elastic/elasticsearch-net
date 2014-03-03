@@ -105,7 +105,6 @@
     <Compile Include="Domain\Aggregations\KeyItem.cs" />
     <Compile Include="Domain\Aggregations\NestedBucket.cs" />
     <Compile Include="Domain\Aggregations\RangeItem.cs" />
-    <Compile Include="Domain\Aggregations\SingleBucket.cs" />
     <Compile Include="Domain\Aggregations\StatsMetric.cs" />
     <Compile Include="Domain\Aggregations\ValueMetric.cs" />
     <Compile Include="Domain\Alias\AliasAddDescriptor.cs" />

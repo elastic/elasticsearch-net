@@ -44,6 +44,7 @@ namespace Nest.Tests.MockData
 						.Setup(c => c.FirstName).Use<FirstNameSource>()
 						.Setup(c => c.LastName).Use<LastNameSource>()
 						.Setup(c => c.DateOfBirth).Use<DateOfBirthSource>()
+						.Setup(c => c.Age).Use<AgeSource>()
 						.Setup(c => c.PlaceOfBirth).Use<GeoLocationSource>();
 					x.Include<ElasticsearchProject>()
 						.Setup(c => c.Id).Use<IntegerIdSource>()
@@ -59,6 +60,7 @@ namespace Nest.Tests.MockData
 						.Setup(c => c.Origin).Use<GeoLocationSource>()
 						.Setup(c => c.Name).Use<ElasticsearchProjectsDataSource>()
 						.Setup(c => c.Followers).Value(new List<Person>())
+						.Setup(c => c.Contributors).Value(new List<Person>())
 						.Setup(c => c.StartedOn).Use<DateOfBirthSource>()
 						.Setup(c => c.Content).Use<ElasticsearchProjectDescriptionSource>();
 				});
@@ -100,6 +102,7 @@ namespace Nest.Tests.MockData
 					// Get a single user
 					var count = ElasticsearchProjectsDataSource.Count();
 					var users = Session.List<Person>(100).Get();
+					var contributors = Session.List<Person>(100).Get();
 					_Data = Session.List<ElasticsearchProject>(count).Get();
 					var i = 0;
 					foreach (var p in _Data)
@@ -107,6 +110,8 @@ namespace Nest.Tests.MockData
 						var take = (int)100 / count;
 						var skip = i * take;
 						var followers = users.Skip(i * take).Take(take).ToList();
+						var cont = contributors.Skip(i * take).Take(take).ToList();
+						p.Contributors = cont;
 						p.Followers = followers;
 						i++;
 					}

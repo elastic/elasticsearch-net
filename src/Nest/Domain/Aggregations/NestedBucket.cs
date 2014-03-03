@@ -1,6 +1,10 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+
+namespace Nest
 {
-	public class NestedBucket : BucketAggregationBase
+	public class SingleBucket : BucketAggregationBase
 	{
+		[JsonProperty("doc_count")]
+		public long DocCount { get; set; }
 	}
 }

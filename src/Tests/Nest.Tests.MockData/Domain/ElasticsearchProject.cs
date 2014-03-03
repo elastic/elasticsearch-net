@@ -22,6 +22,9 @@ namespace Nest.Tests.MockData.Domain
 		public int LOC { get; set; }
 		public List<Person> Followers { get; set; }
 
+		[ElasticProperty(Type=FieldType.nested)]
+		public List<Person> Contributors { get; set; }
+		
 		public List<Person> NestedFollowers { get; set; }
 
 		[ElasticProperty(Type=FieldType.geo_point)]

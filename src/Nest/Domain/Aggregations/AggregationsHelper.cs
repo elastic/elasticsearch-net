@@ -77,9 +77,9 @@ namespace Nest
 			return this.TryGet<SingleBucket>(key);
 		}
 
-		public NestedBucket Nested(string key)
+		public SingleBucket Nested(string key)
 		{
-			return this.TryGet<NestedBucket>(key);
+			return this.TryGet<SingleBucket>(key);
 		}
 
 		public Bucket<KeyItem> Terms(string key)

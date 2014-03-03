@@ -1,11 +1,14 @@
 using System;
 using System.Linq.Expressions;
 using Nest.Resolvers;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(CustomJsonConverter))]
 	public class NestedAggregationDescriptor<T> : BucketAggregationBaseDescriptor<NestedAggregationDescriptor<T>, T>
+		, ICustomJson
 		where T : class
 	{
 		internal class NestedAgg
@@ -14,7 +17,6 @@ namespace Nest
 			internal PropertyPathMarker _Path;
 		}
 
-		[JsonProperty("nested")]
 		internal NestedAgg _Nested;
 
 
@@ -30,6 +32,11 @@ namespace Nest
 			this._Nested = new NestedAgg();
 			this._Nested._Path = path;
 			return this;
+		}
+
+		object ICustomJson.GetCustomJson()
+		{
+			return this._Nested;
 		}
 	}
 }

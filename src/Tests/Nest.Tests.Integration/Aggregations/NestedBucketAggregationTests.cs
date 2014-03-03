@@ -15,16 +15,24 @@ namespace Nest.Tests.Integration.Aggregations
 		    var results = this._client.Search<ElasticsearchProject>(s=>s
 				.Size(0)
 				.Aggregations(a=>a
-					.Nested("followers", n=>n
+					.Nested("contributors", n=>n
+						.Path(p=>p.Contributors)
 						.Aggregations(t=>t
-							.Terms("bucket_agg", m=>m.Field(p=>p.Country))
+							.Average("avg_age", m=>m
+								.Field(p=>p.Contributors.First().Age)
+							)
 						)
 					)
 				)
 			);
 		    results.IsValid.Should().BeTrue();
-		    var bucket = results.Aggs.Terms("bucket_agg");
-		    bucket.Items.Should().NotBeEmpty();
+		    var bucket = results.Aggs.Nested("contributors");
+		    bucket.DocCount.Should().BeGreaterThan(1);
+
+		    var averageAge = bucket.Average("avg_age");
+		    averageAge.Should().NotBeNull();
+		    averageAge.Value.Should().HaveValue()
+			    .And.BeGreaterOrEqualTo(18);
 	    }
 	
     }

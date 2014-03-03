@@ -33,6 +33,7 @@ namespace Nest.Tests.Integration.Aggregations
 						.Field(p=>p.IntValues)
 						.Interval(10)
 					)
+
 				)
 			);
 		    results.IsValid.Should().BeTrue();
