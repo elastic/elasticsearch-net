@@ -68,6 +68,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\NestedBucketAggregationTests.cs" />
+    <Compile Include="Aggregations\BucketAggregationTests.cs" />
+    <Compile Include="Aggregations\SingleBucketAggregationTests.cs" />
+    <Compile Include="Aggregations\StatsAggregationTests.cs" />
+    <Compile Include="Aggregations\MetricAggregationTests.cs" />
+    <Compile Include="Aggregations\TermsAggregationTests.cs" />
+    <Compile Include="Aggregations\ParseResponseItemsTests.cs" />
     <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
@@ -125,6 +132,7 @@
     <Compile Include="Integration\HighlightTests.cs" />
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
+    <Compile Include="Reproduce\Reproduce487Tests.cs" />
     <Compile Include="Reproduce\Reproduce437.cs" />
     <Compile Include="Reproduce\Reproduce450Tests.cs" />
     <Compile Include="Reproduce\Reproduce389Tests.cs" />

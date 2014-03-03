@@ -93,6 +93,20 @@
     <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceManyExtensions.cs" />
+    <Compile Include="Domain\Aggregations\AggregationsHelper.cs" />
+    <Compile Include="Domain\Aggregations\Bucket.cs" />
+    <Compile Include="Domain\Aggregations\BucketAggregationBase.cs" />
+    <Compile Include="Domain\Aggregations\DateHistogramItem.cs" />
+    <Compile Include="Domain\Aggregations\ExtendedStatsMetric.cs" />
+    <Compile Include="Domain\Aggregations\IAggration.cs" />
+    <Compile Include="Domain\Aggregations\IBucketAggregation.cs" />
+    <Compile Include="Domain\Aggregations\IBucketItem.cs" />
+    <Compile Include="Domain\Aggregations\IMetricAggregation.cs" />
+    <Compile Include="Domain\Aggregations\KeyItem.cs" />
+    <Compile Include="Domain\Aggregations\NestedBucket.cs" />
+    <Compile Include="Domain\Aggregations\RangeItem.cs" />
+    <Compile Include="Domain\Aggregations\StatsMetric.cs" />
+    <Compile Include="Domain\Aggregations\ValueMetric.cs" />
     <Compile Include="Domain\Alias\AliasAddDescriptor.cs" />
     <Compile Include="Domain\Alias\AliasAddOperation.cs" />
     <Compile Include="Domain\Alias\AliasRemoveDescriptor.cs" />
@@ -111,9 +125,34 @@
     <Compile Include="Domain\Bulk\BulkUpdateBody.cs" />
     <Compile Include="Domain\Alias\IndexAliases.cs" />
     <Compile Include="Domain\Responses\IShardsOperationResponse.cs" />
+    <Compile Include="DSL\Aggregations\AggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\BucketAggregationBaseDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\DateHistogramAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\FilterAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\GeoHashAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\GlobalAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\Ip4RangeAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\ExtendedStatsAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\IAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\MetricAggregationBaseDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\NestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\DateRangeAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\GeoDistanceAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\RangeAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\StatsAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\AverageAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\SumAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\MaxAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\MinAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\HistogramAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\MissingAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\TermsAggregationDescriptor.cs" />
+    <Compile Include="DSL\Aggregations\ValueCountAggregationDescriptor.cs" />
     <Compile Include="DSL\CloseIndexDescriptor.cs" />
     <Compile Include="DSL\ClusterStateDescriptor.cs" />
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
+    <Compile Include="DSL\Facets\Ip4Range.cs" />
+    <Compile Include="DSL\Facets\DateExpressionRange.cs" />
     <Compile Include="DSL\NodesStatsDescriptor.cs" />
     <Compile Include="DSL\NodesInfoDescriptor.cs" />
     <Compile Include="DSL\ClusterHealthDescriptor.cs" />
@@ -168,6 +207,9 @@
     <Compile Include="DSL\Paths\DocumentPathDescriptor.cs" />
     <Compile Include="DSL\SimpleGetDescriptor.cs" />
     <Compile Include="DSL\_Descriptors.generated.cs" />
+    <Compile Include="Enums\ExecutionHint.cs" />
+    <Compile Include="Enums\GeoDistanceType.cs" />
+    <Compile Include="Enums\GeoHashPrecision.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="ExposedInternals\JsonConverterPiggyBackState.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
@@ -602,6 +644,7 @@
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
+    <Compile Include="Resolvers\Converters\AggregationConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexSettingsResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
@@ -694,6 +737,7 @@
       <Name>Elasticsearch.Net</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

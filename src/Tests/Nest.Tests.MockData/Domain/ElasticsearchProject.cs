@@ -22,12 +22,16 @@ namespace Nest.Tests.MockData.Domain
 		public int LOC { get; set; }
 		public List<Person> Followers { get; set; }
 
+		[ElasticProperty(Type=FieldType.nested)]
+		public List<Person> Contributors { get; set; }
+		
 		public List<Person> NestedFollowers { get; set; }
 
 		[ElasticProperty(Type=FieldType.geo_point)]
 		public GeoLocation Origin { get; set; }
 		public DateTime StartedOn { get; set; }
 
+		[ElasticProperty(Type=FieldType.ip)]
 		public string PingIP { get; set; }
 
 		public GeoShape MyGeoShape { get; set; }
