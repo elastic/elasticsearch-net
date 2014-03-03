@@ -149,7 +149,7 @@ namespace Nest.Resolvers.Writers
 					}
 					if (att != null)
 						this.WritePropertiesFromAttribute(jsonWriter, att, propertyName, type);
-					if (type == "object")
+					if (type == "object" || type == "nested")
 					{
 
 						var deepType = p.PropertyType;
@@ -228,9 +228,10 @@ namespace Nest.Resolvers.Writers
 					return "date";
 				case FieldType.boolean_type:
 					return "boolean";
-				
 				case FieldType.completion:
 					return "completion";
+        case FieldType.nested:
+          return "nested";
 				case FieldType.@object:
 					return "object";
 				default:
