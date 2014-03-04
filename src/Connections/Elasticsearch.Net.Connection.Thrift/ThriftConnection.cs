@@ -16,9 +16,9 @@ namespace Elasticsearch.Net.Connection.Thrift
 		private readonly int _timeout;
 		private readonly int _poolSize;
 		private bool _disposed;
-		private readonly IConnectionSettings2 _connectionSettings;
+		private readonly IConnectionConfigurationValues _connectionSettings;
 
-		public ThriftConnection(IConnectionSettings2 connectionSettings)
+		public ThriftConnection(IConnectionConfigurationValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
 			this._timeout = connectionSettings.Timeout;
@@ -28,7 +28,10 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			for (var i = 0; i <= connectionSettings.MaximumAsyncConnections; i++)
 			{
-				var tsocket = new TSocket(connectionSettings.Host, connectionSettings.Port);
+				var uri = this._connectionSettings.ConnectionPool.GetNext();
+				var host = uri.Host;
+				var port = uri.Port;
+				var tsocket = new TSocket(host, port);
 				var transport = new TBufferedTransport(tsocket, 1024);
 				var protocol = new TBinaryProtocol(transport);
 				var client = new Rest.Client(protocol);

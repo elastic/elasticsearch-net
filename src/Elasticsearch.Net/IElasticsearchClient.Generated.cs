@@ -21,7 +21,7 @@ namespace Elasticsearch.Net
 	public interface IElasticsearchClient
 	{	
 		IConnection Connection { get; }
-		IConnectionSettings2 Settings { get; }
+		IConnectionConfigurationValues Settings { get; }
 		IElasticsearchSerializer Serializer { get; }
 
 		///<summary>POST /_bulk

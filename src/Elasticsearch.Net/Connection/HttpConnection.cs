@@ -13,7 +13,7 @@ namespace Elasticsearch.Net.Connection
 	{
 		const int BUFFER_SIZE = 1024;
 
-		protected IConnectionSettings2 _ConnectionSettings { get; set; }
+		protected IConnectionConfigurationValues _ConnectionSettings { get; set; }
 		private Semaphore _ResourceLock;
 		private readonly bool _enableTrace;
 
@@ -23,7 +23,7 @@ namespace Elasticsearch.Net.Connection
 			ServicePointManager.Expect100Continue = false;
 			ServicePointManager.DefaultConnectionLimit = 10000;
 		}
-		public HttpConnection(IConnectionSettings2 settings)
+		public HttpConnection(IConnectionConfigurationValues settings)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
@@ -147,11 +147,13 @@ namespace Elasticsearch.Net.Connection
 
 		private void SetBasicAuthorizationIfNeeded(HttpWebRequest myReq)
 		{
-			if (this._ConnectionSettings.UriSpecifiedBasicAuth)
-			{
+			//TODO figure out a way to cache this;
+
+			//if (this._ConnectionSettings.UriSpecifiedBasicAuth)
+			//{
 				myReq.Headers["Authorization"] =
-				  "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(this._ConnectionSettings.Uri.UserInfo));
-			}
+					"Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
+			//}
 		}
 
 		protected virtual HttpWebRequest CreateWebRequest(string path, string method)
@@ -341,15 +343,15 @@ namespace Elasticsearch.Net.Connection
 		private Uri _CreateUriString(string path)
 		{
 			var s = this._ConnectionSettings;
-
+			var uri = s.ConnectionPool.GetNext();
 
 			if (s.QueryStringParameters != null)
 			{
-				var tempUri = new Uri(s.Uri, path);
+				var tempUri = new Uri(uri, path);
 				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
 				path += qs;
 			}
-			Uri uri = path.IsNullOrEmpty() ? s.Uri : new Uri(s.Uri, path);
+			uri = path.IsNullOrEmpty() ? uri : new Uri(uri, path);
 			return uri.Purify();
 		}
 

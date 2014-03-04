@@ -21,7 +21,7 @@ namespace Nest
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
-	public class ConnectionSettings<T> : ElasticsearchConnectionSettings<T> , IConnectionSettingsValues 
+	public class ConnectionSettings<T> : ConnectionConfiguration<T> , IConnectionSettingsValues 
 		where T : ConnectionSettings<T> 
 	{
 		private string _defaultIndex;
@@ -157,7 +157,7 @@ namespace Nest
 		}
 	}
 
-	public interface IConnectionSettingsValues : IConnectionSettings2
+	public interface IConnectionSettingsValues : IConnectionConfigurationValues
 	{
 		FluentDictionary<Type, string> DefaultIndices { get; }
 		FluentDictionary<Type, string> DefaultTypeNames { get; }
@@ -172,11 +172,11 @@ namespace Nest
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
-	public interface IConnectionSettings : IConnectionSettings<IConnectionSettings>, IConnectionSettings2
+	public interface IConnectionSettings : IConnectionSettings<IConnectionSettings>, IConnectionConfigurationValues
 	{
 		
 	}
-	public interface IConnectionSettings<out T> : IElasticsearchConnectionSettings<T> where T : IConnectionSettings<T>
+	public interface IConnectionSettings<out T> : IConnectionConfiguration<T> where T : IConnectionSettings<T>
 	{
 
 		/// <summary>

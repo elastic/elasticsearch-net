@@ -3,34 +3,13 @@ using System.Collections.Specialized;
 
 namespace Elasticsearch.Net
 {
-	public interface IConnectionSettings2
-	{
-		Uri Uri { get; }
-		int MaximumAsyncConnections { get; }
-		string Host { get; }
-		int Port { get; }
-		int Timeout { get; }
-		string ProxyAddress { get; }
-		string ProxyUsername { get; }
-		string ProxyPassword { get; }
-
-		bool TraceEnabled { get; }
-		bool UriSpecifiedBasicAuth { get; }
-		bool UsesPrettyResponses { get; }
-	
-		NameValueCollection QueryStringParameters { get; }
-		Action<ElasticsearchResponse> ConnectionStatusHandler { get; }
-
-		IElasticsearchSerializer Serializer { get; set; }
-	}
-
-	public interface IElasticsearchConnectionSettings : 
-		IElasticsearchConnectionSettings<IElasticsearchConnectionSettings>
+	public interface IConnectionConfiguration : 
+		IConnectionConfiguration<IConnectionConfiguration>
 	{
 		
 	}
 
-	public interface IElasticsearchConnectionSettings<out T> where T : IElasticsearchConnectionSettings<T>
+	public interface IConnectionConfiguration<out T> where T : IConnectionConfiguration<T>
 	{
 
 	

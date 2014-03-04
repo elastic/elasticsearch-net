@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
-			var settings = new ElasticsearchConnectionSettings(uri).UsePrettyResponses();
+			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
 			_client = new ElasticsearchClient(settings);
 			var infoResponse = _client.Info();
 			dynamic info = infoResponse.Response;

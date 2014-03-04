@@ -3,56 +3,71 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System;
 using System.Collections.Specialized;
+using System.Net;
+using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net
 {
-	public class ElasticsearchConnectionSettings : 
-		ElasticsearchConnectionSettings<ElasticsearchConnectionSettings>, 
-		IElasticsearchConnectionSettings<ElasticsearchConnectionSettings>
+	public class ConnectionConfiguration : 
+		ConnectionConfiguration<ConnectionConfiguration>, 
+		IConnectionConfiguration<ConnectionConfiguration>
 	{
-		public ElasticsearchConnectionSettings(Uri uri = null)
+		public ConnectionConfiguration(Uri uri = null)
 			: base(uri)
+		{
+
+		}
+		public ConnectionConfiguration(IConnectionPool connectionPool)
+			: base(connectionPool)
 		{
 
 		}
 	}
 
 
-	public class ElasticsearchConnectionSettings<T> : IConnectionSettings2
-		where T : ElasticsearchConnectionSettings<T>
+	public class ConnectionConfiguration<T> : IConnectionConfigurationValues
+		where T : ConnectionConfiguration<T>
 	{
-
-		public Uri Uri { get; private set; }
-		public string Host { get; private set; }
-		public int Port { get; private set; }
+		public IConnectionPool ConnectionPool { get; private set; }
+		//public Uri Uri { get; private set; }
+		//public string Host { get; private set; }
+		//public int Port { get; private set; }
 		public int Timeout { get; private set; }
 		public string ProxyUsername { get; private set; }
 		public string ProxyPassword { get; private set; }
 		public string ProxyAddress { get; private set; }
 		public int MaximumAsyncConnections { get; private set; }
+		public int? MaxRetries { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
 		public bool TraceEnabled { get; private set; }
 		public Action<ElasticsearchResponse> ConnectionStatusHandler { get; private set; }
 		public NameValueCollection QueryStringParameters { get; private set; }
 		public bool UriSpecifiedBasicAuth { get; private set; }
-		IElasticsearchSerializer IConnectionSettings2.Serializer { get; set; }
+		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
-		public ElasticsearchConnectionSettings(Uri uri = null)
+		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
 			this.Timeout = 60*1000;
-			uri = uri ?? new Uri("http://localhost:9200");
-
-			//this makes sure that paths stay relative i.e if the root uri is:
-			//http://my-saas-provider.com/instance
-			if (!uri.OriginalString.EndsWith("/"))
-				uri = new Uri(uri.OriginalString + "/");
-			this.Host = uri.Host;
-			this.Port = uri.Port;
-			this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
-			this.Uri = uri;
+			//this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
+			//this.Uri = uri;
 			this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
 			this.MaximumAsyncConnections = 0;
+			this.ConnectionPool = connectionPool;
 		}
+
+		public ConnectionConfiguration(Uri uri = null) 
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
+		{
+			//this.Host = uri.Host;
+			//this.Port = uri.Port;
+		}
+
+		public T SetMaxRetries(int maxRetries)
+		{
+			this.MaxRetries = maxRetries;
+			return (T) this;
+		}
+
 
 		/// <summary>
 		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.

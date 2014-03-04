@@ -10,9 +10,9 @@ namespace Elasticsearch.Net.Connection.HttpClient
 {
     public class ElasticsearchHttpClient : IConnection
     {
-	    private IConnectionSettings2 _settings;
+	    private IConnectionConfigurationValues _settings;
 
-	    public ElasticsearchHttpClient(IConnectionSettings2 settings)
+	    public ElasticsearchHttpClient(IConnectionConfigurationValues settings)
 	    {
 		    _settings = settings;
 	    }
@@ -20,7 +20,7 @@ namespace Elasticsearch.Net.Connection.HttpClient
 	    public ElasticsearchResponse DoSyncRequest(string method, string path, byte[] data = null)
 	    {
 		    var client = new System.Net.Http.HttpClient();
-		    var uri = new Uri(this._settings.Uri, path);
+		    var uri = new Uri(this._settings.ConnectionPool.GetNext(), path);
 		    HttpResponseMessage response = null;
 		    byte[] result = null;
 		    HttpContent content = null;

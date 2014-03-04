@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Connection
 	public class ConnectionError
 	{
 		public ConnectionErrorType Type { get; set; }
-		public HttpStatusCode HttpStatusCode { get; set; }
+		public HttpStatusCode? HttpStatusCode { get; set; }
 		public string ExceptionMessage { get; set; }
 		public Exception OriginalException { get; set; }
 		public byte[] ResponseReadFromWebException { get; set; }

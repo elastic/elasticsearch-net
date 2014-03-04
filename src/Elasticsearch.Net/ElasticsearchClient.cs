@@ -5,18 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Exceptions;
 
 namespace Elasticsearch.Net
 {
 	public partial class ElasticsearchClient : IElasticsearchClient
 	{
 		public IConnection Connection { get; protected set; }
-		public IConnectionSettings2 Settings { get; protected set; }
+		public IConnectionConfigurationValues Settings { get; protected set; }
 		public IElasticsearchSerializer Serializer { get; protected set; }
 		protected IStringifier Stringifier { get; set; }
 
 		public ElasticsearchClient(
-			IConnectionSettings2 settings, 
+			IConnectionConfigurationValues settings, 
 			IConnection connection = null, 
 			IElasticsearchSerializer serializer = null,
 			IStringifier stringifier = null
@@ -28,7 +29,7 @@ namespace Elasticsearch.Net
 			this.Settings = settings;
 			this.Connection = connection ?? new HttpConnection(settings);
 			this.Serializer = serializer ?? new ElasticsearchDefaultSerializer();
-			((IConnectionSettings2) this.Settings).Serializer = this.Serializer;
+			((IConnectionConfigurationValues) this.Settings).Serializer = this.Serializer;
 			this.Stringifier = stringifier ?? new Stringifier();
 		}
 
@@ -55,7 +56,65 @@ namespace Elasticsearch.Net
 		}
 
 
-		protected ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
+		protected ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0)
+		{
+			if (queryString != null)
+				path += queryString.ToQueryString();
+
+			var maxRetries = this.GetMaximumRetries();
+			var postData = PostData(data);
+			ElasticsearchResponse response = null;
+			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.".F(
+				method, path, retried);
+			try
+			{
+				response = DoSyncRequest(method, path, postData);
+				if (response != null && response.SuccessOrKnownError)
+					return response;
+			}
+			catch (Exception e)
+			{
+				if (retried < maxRetries)
+					return this.DoRequest(method, path, data, queryString, ++retried);
+				else
+					throw new OutOfNodesException(exceptionMessage, e);
+			}
+			if (retried < maxRetries)
+				return this.DoRequest(method, path, data, queryString, ++retried);
+			
+			throw new OutOfNodesException(exceptionMessage);
+		}
+
+		/// <summary>
+		/// Returns either the fixed maximum set on the connection configuration settings or the number of nodes
+		/// </summary>
+		private int GetMaximumRetries()
+		{
+			return this.Settings.MaxRetries.GetValueOrDefault(this.Settings.ConnectionPool.MaxRetries);
+		}
+
+
+		private ElasticsearchResponse DoSyncRequest(string method, string path, byte[] postData)
+		{
+			switch (method.ToLowerInvariant())
+			{
+				case "post":
+					return this.Connection.PostSync(path, postData);
+				case "put":
+					return this.Connection.PutSync(path, postData);
+				case "delete":
+					return postData == null || postData.Length == 0
+						? this.Connection.DeleteSync(path)
+						: this.Connection.DeleteSync(path, postData);
+				case "head":
+					return this.Connection.HeadSync(path);
+				case "get":
+					return this.Connection.GetSync(path);
+			}
+			return null;
+		}
+
+		protected Task<ElasticsearchResponse> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
 			if (queryString != null)
 				path += queryString.ToQueryString();
@@ -64,16 +123,15 @@ namespace Elasticsearch.Net
 
 			switch (method.ToLowerInvariant())
 			{
-				case "post": return this.Connection.PostSync(path, postData);
-				case "put": return this.Connection.PutSync(path, postData);
+				case "post": return this.Connection.Post(path, postData);
+				case "put": return this.Connection.Put(path, postData);
 				case "delete":
 					return postData == null || postData.Length == 0
-						? this.Connection.DeleteSync(path)
-						: this.Connection.DeleteSync(path, postData);
-				case "head": return this.Connection.HeadSync(path);
-				case "get": return this.Connection.GetSync(path);
+						? this.Connection.Delete(path)
+						: this.Connection.Delete(path, postData);
+				case "head": return this.Connection.Head(path);
+				case "get": return this.Connection.Get(path);
 			}
-
 			throw new Exception("Unknown HTTP method " + method);
 		}
 
@@ -97,27 +155,6 @@ namespace Elasticsearch.Net
 			var joined = string.Join("\n", so
 				.Select(soo => this.Serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
 			return joined.Utf8Bytes();
-		}
-
-		protected Task<ElasticsearchResponse> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
-		{
-			if (queryString != null)
-				path += queryString.ToQueryString();
-
-			var postData = PostData(data);
-
-			switch (method.ToLowerInvariant())
-			{
-				case "post": return this.Connection.Post(path, postData);
-				case "put": return this.Connection.Put(path, postData);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this.Connection.Delete(path)
-						: this.Connection.Delete(path, postData);
-				case "head": return this.Connection.Head(path);
-				case "get": return this.Connection.Get(path);
-			}
-			throw new Exception("Unknown HTTP method " + method);
 		}
 	}
 }
