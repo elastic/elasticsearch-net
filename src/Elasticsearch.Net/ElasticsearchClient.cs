@@ -15,10 +15,12 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues Settings { get; protected set; }
 		public IElasticsearchSerializer Serializer { get; protected set; }
 		protected IStringifier Stringifier { get; set; }
+		protected IHttpTransport Transport { get; set; }
 
 		public ElasticsearchClient(
 			IConnectionConfigurationValues settings, 
 			IConnection connection = null, 
+			IHttpTransport transport = null,
 			IElasticsearchSerializer serializer = null,
 			IStringifier stringifier = null
 			)
@@ -30,6 +32,7 @@ namespace Elasticsearch.Net
 			this.Connection = connection ?? new HttpConnection(settings);
 			this.Serializer = serializer ?? new ElasticsearchDefaultSerializer();
 			((IConnectionConfigurationValues) this.Settings).Serializer = this.Serializer;
+			this.Transport = transport ?? new HttpTransport(settings, this.Connection, this.Serializer);
 			this.Stringifier = stringifier ?? new Stringifier();
 		}
 
@@ -56,105 +59,15 @@ namespace Elasticsearch.Net
 		}
 
 
-		protected ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0)
+		protected ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
-			if (queryString != null)
-				path += queryString.ToQueryString();
-
-			var maxRetries = this.GetMaximumRetries();
-			var postData = PostData(data);
-			ElasticsearchResponse response = null;
-			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.".F(
-				method, path, retried);
-			try
-			{
-				response = DoSyncRequest(method, path, postData);
-				if (response != null && response.SuccessOrKnownError)
-					return response;
-			}
-			catch (Exception e)
-			{
-				if (retried < maxRetries)
-					return this.DoRequest(method, path, data, queryString, ++retried);
-				else
-					throw new OutOfNodesException(exceptionMessage, e);
-			}
-			if (retried < maxRetries)
-				return this.DoRequest(method, path, data, queryString, ++retried);
-			
-			throw new OutOfNodesException(exceptionMessage);
+			return this.Transport.DoRequest(method, path, data, queryString);
 		}
 
-		/// <summary>
-		/// Returns either the fixed maximum set on the connection configuration settings or the number of nodes
-		/// </summary>
-		private int GetMaximumRetries()
-		{
-			return this.Settings.MaxRetries.GetValueOrDefault(this.Settings.ConnectionPool.MaxRetries);
-		}
-
-
-		private ElasticsearchResponse DoSyncRequest(string method, string path, byte[] postData)
-		{
-			switch (method.ToLowerInvariant())
-			{
-				case "post":
-					return this.Connection.PostSync(path, postData);
-				case "put":
-					return this.Connection.PutSync(path, postData);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this.Connection.DeleteSync(path)
-						: this.Connection.DeleteSync(path, postData);
-				case "head":
-					return this.Connection.HeadSync(path);
-				case "get":
-					return this.Connection.GetSync(path);
-			}
-			return null;
-		}
 
 		protected Task<ElasticsearchResponse> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
-			if (queryString != null)
-				path += queryString.ToQueryString();
-
-			var postData = PostData(data);
-
-			switch (method.ToLowerInvariant())
-			{
-				case "post": return this.Connection.Post(path, postData);
-				case "put": return this.Connection.Put(path, postData);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this.Connection.Delete(path)
-						: this.Connection.Delete(path, postData);
-				case "head": return this.Connection.Head(path);
-				case "get": return this.Connection.Get(path);
-			}
-			throw new Exception("Unknown HTTP method " + method);
-		}
-
-		private byte[] PostData(object data)
-		{
-			var bytes = data as byte[];
-			if (bytes != null)
-				return bytes;
-
-			var s = data as string;
-			if (s != null)
-				return s.Utf8Bytes();
-			if (data == null) return null;
-			var ss = data as IEnumerable<string>;
-			if (ss != null)
-				return (string.Join("\n", ss) + "\n").Utf8Bytes();
-			
-			var so = data as IEnumerable<object>;
-			if (so == null)
-				return this.Serializer.Serialize(data);
-			var joined = string.Join("\n", so
-				.Select(soo => this.Serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
-			return joined.Utf8Bytes();
+			return this.Transport.DoRequestAsync(method, path, data, queryString);
 		}
 	}
 }

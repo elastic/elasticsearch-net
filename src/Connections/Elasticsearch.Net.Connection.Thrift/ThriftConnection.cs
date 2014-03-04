@@ -41,11 +41,11 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 		#region IConnection Members
 
-		public Task<ElasticsearchResponse> Get(string path)
+		public Task<ElasticsearchResponse> Get(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
@@ -55,11 +55,11 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 	
-		public Task<ElasticsearchResponse> Head(string path)
+		public Task<ElasticsearchResponse> Head(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
@@ -69,33 +69,33 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 
-		public ElasticsearchResponse GetSync(string path)
+		public ElasticsearchResponse GetSync(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
 
-		public ElasticsearchResponse HeadSync(string path)
+		public ElasticsearchResponse HeadSync(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
 
-		public Task<ElasticsearchResponse> Post(string path, byte[] data)
+		public Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
@@ -105,11 +105,11 @@ namespace Elasticsearch.Net.Connection.Thrift
 				return this.Execute(restRequest);
 			});
 		}
-		public Task<ElasticsearchResponse> Put(string path, byte[] data)
+		public Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
@@ -119,11 +119,11 @@ namespace Elasticsearch.Net.Connection.Thrift
 				return this.Execute(restRequest);
 			});
 		}
-		public Task<ElasticsearchResponse> Delete(string path, byte[] data)
+		public Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
@@ -134,33 +134,33 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 
-		public ElasticsearchResponse PostSync(string path, byte[] data)
+		public ElasticsearchResponse PostSync(Uri uri, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public ElasticsearchResponse PutSync(string path, byte[] data)
+		public ElasticsearchResponse PutSync(Uri uri, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public Task<ElasticsearchResponse> Delete(string path)
+		public Task<ElasticsearchResponse> Delete(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
@@ -170,21 +170,21 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 
-		public ElasticsearchResponse DeleteSync(string path)
+		public ElasticsearchResponse DeleteSync(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
-		public ElasticsearchResponse DeleteSync(string path, byte[] data)
+		public ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
-			restRequest.Uri = path;
+			restRequest.Uri = uri;
 
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();

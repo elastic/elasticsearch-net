@@ -27,9 +27,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 		private static readonly int _retries = _uris.Count() - 1;
 
-		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()
-			.SetMaxRetries(_retries);
-
 		[Test]
 		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes()
 		{
@@ -39,7 +36,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				fake.Provide<IConnectionConfigurationValues>(new ConnectionConfiguration(connectionPool));
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<string>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Throws<Exception>();
 				
 				var client = fake.Resolve<ElasticsearchClient>();
@@ -73,6 +70,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				foreach (var c in calls)
 					c.Throws<Exception>();
 
+				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				Assert.Throws<OutOfNodesException>(()=> client.Info());

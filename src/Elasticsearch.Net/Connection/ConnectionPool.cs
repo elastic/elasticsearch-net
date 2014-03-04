@@ -63,10 +63,13 @@ namespace Elasticsearch.Net.Connection
 		
 		private int _current = -1;
 
-		public StaticConnectionPool(IEnumerable<Uri> uris)
+		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomizeOnStartup = true)
 		{
+			var rnd = new Random();
 			uris.ThrowIfEmpty("uris");
 			_uris = uris.ToList();
+			if (randomizeOnStartup)
+				_uris = _uris.OrderBy((item) => rnd.Next()).ToList();
 			_uriLookup = _uris.ToDictionary(k=>k, v=> new EndpointState());
 		}
 

@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<string>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Throws<Exception>();
 				
 				var client = fake.Resolve<ElasticsearchClient>();
@@ -50,7 +50,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<string>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Returns(ElasticsearchResponse.Create(settings, 400, "GET", "/", null, null));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
@@ -68,7 +68,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<string>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Returns(ElasticsearchResponse.Create(settings, 500, "GET", "/", null, null));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
@@ -86,7 +86,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<string>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Returns(ElasticsearchResponse.Create(settings, 201, "GET", "/", null, null));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
@@ -104,7 +104,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<string>._));
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Returns(ElasticsearchResponse.Create(settings, 503, "GET", "/", null, null));
 				
 				var client = fake.Resolve<ElasticsearchClient>();

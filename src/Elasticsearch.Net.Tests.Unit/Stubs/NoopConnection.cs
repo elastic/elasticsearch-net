@@ -47,88 +47,93 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		}
 
 
-		public virtual Task<ElasticsearchResponse> Get(string path)
+		public virtual Task<ElasticsearchResponse> Get(Uri uri)
 		{
-			var uri = _configValues.ConnectionPool.GetNext();
-			_uriObserver.Observe(uri);
-			return Task.FromResult(_responseGenerator.Create());
+			return DoAsyncRequest();
 		}
 
-		public virtual ElasticsearchResponse GetSync(string path)
+		public virtual ElasticsearchResponse GetSync(Uri uri1)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse> Head(string path)
+		public virtual Task<ElasticsearchResponse> Head(Uri uri1)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse HeadSync(string path)
+		public virtual ElasticsearchResponse HeadSync(Uri uri1)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse> Post(string path, byte[] data)
+		public virtual Task<ElasticsearchResponse> Post(Uri uri1, byte[] data)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse PostSync(string path, byte[] data)
+		public virtual ElasticsearchResponse PostSync(Uri uri1, byte[] data)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse> Put(string path, byte[] data)
+		public virtual Task<ElasticsearchResponse> Put(Uri uri1, byte[] data)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse PutSync(string path, byte[] data)
+		public virtual ElasticsearchResponse PutSync(Uri uri1, byte[] data)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse> Delete(string path)
+		public virtual Task<ElasticsearchResponse> Delete(Uri uri1)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse DeleteSync(string path)
+		public virtual ElasticsearchResponse DeleteSync(Uri uri1)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
 		}
 
-		public virtual Task<ElasticsearchResponse> Delete(string path, byte[] data)
+		public virtual Task<ElasticsearchResponse> Delete(Uri uri1, byte[] data)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create());
 		}
 
-		public virtual ElasticsearchResponse DeleteSync(string path, byte[] data)
+		public virtual ElasticsearchResponse DeleteSync(Uri uri1, byte[] data)
 		{
 			var uri = _configValues.ConnectionPool.GetNext();
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create();
+		}
+		
+		private Task<ElasticsearchResponse> DoAsyncRequest()
+		{
+			var uri = _configValues.ConnectionPool.GetNext();
+			_uriObserver.Observe(uri);
+			return Task.FromResult(_responseGenerator.Create());
 		}
 	}
 }
