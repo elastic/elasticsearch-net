@@ -51,23 +51,36 @@ namespace Elasticsearch.Net.Connection
 			ElasticsearchResponse response = null;
 			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.".F( method, path, retried);
 			var baseUri = this._configurationValues.ConnectionPool.GetNext();
-			var uri = new Uri(baseUri, path);
+			bool seenError = false;
 			try
 			{
+				var uri = new Uri(baseUri, path);
 				response = DoSyncRequest(method, uri, postData);
 				if (response != null && response.SuccessOrKnownError)
 					return response;
 			}
 			catch (Exception e)
 			{
+				seenError = true;
+				this._configurationValues.ConnectionPool.MarkDead(baseUri);
 				if (retried < maxRetries)
+				{
 					return this.DoRequest(method, path, data, null, ++retried);
+				}
 				else
 					throw new OutOfNodesException(exceptionMessage, e);
 			}
+			finally
+			{
+				//make sure we always call markalive on the uri if the connection was succesful
+				if (!seenError && response != null && response.SuccessOrKnownError)
+					this._configurationValues.ConnectionPool.MarkAlive(baseUri);
+			}
+			this._configurationValues.ConnectionPool.MarkDead(baseUri);
 			if (retried < maxRetries)
+			{
 				return this.DoRequest(method, path, data, null, ++retried);
-			
+			}	
 			throw new OutOfNodesException(exceptionMessage);
 		}
 		

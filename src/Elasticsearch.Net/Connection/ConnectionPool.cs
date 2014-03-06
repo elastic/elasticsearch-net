@@ -51,26 +51,54 @@ namespace Elasticsearch.Net.Connection
 	public class EndpointState
 	{
 		public int _attempts = 0;
-		public DateTime date = DateTime.UtcNow.AddYears(-1);
+		public DateTime date = new DateTime();
+	}
+
+
+	public interface IDateTimeProvider
+	{
+		DateTime Now();
+		DateTime DeadTime(Uri uri, int attempts);
+		DateTime AliveTime(Uri uri, int attempts);
+	}
+
+	public class DateTimeProvider : IDateTimeProvider
+	{
+		public DateTime Now()
+		{
+			return DateTime.UtcNow;
+		}
+
+		public DateTime DeadTime(Uri uri, int attempts)
+		{
+			return DateTime.UtcNow.AddSeconds(60);
+		}
+		
+		public DateTime AliveTime(Uri uri, int attempts)
+		{
+			return new DateTime();
+		}
 	}
 
 	public class StaticConnectionPool : IConnectionPool
 	{
 		private readonly IDictionary<Uri, EndpointState> _uriLookup;
-		private readonly IList<Uri> _uris;
+		private readonly IList<Uri> _nodeUris;
 
-		public int MaxRetries { get { return _uris.Count - 1;  } }
+		public int MaxRetries { get { return _nodeUris.Count - 1;  } }
 		
 		private int _current = -1;
+		private readonly IDateTimeProvider _dateTimeProvider;
 
-		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomizeOnStartup = true)
+		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomizeOnStartup = true, IDateTimeProvider dateTimeProvider = null)
 		{
+			_dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 			var rnd = new Random();
 			uris.ThrowIfEmpty("uris");
-			_uris = uris.ToList();
+			_nodeUris = uris.ToList();
 			if (randomizeOnStartup)
-				_uris = _uris.OrderBy((item) => rnd.Next()).ToList();
-			_uriLookup = _uris.ToDictionary(k=>k, v=> new EndpointState());
+				_nodeUris = _nodeUris.OrderBy((item) => rnd.Next()).ToList();
+			_uriLookup = _nodeUris.ToDictionary(k=>k, v=> new EndpointState());
 		}
 
 		public Uri GetNext()
@@ -80,51 +108,37 @@ namespace Elasticsearch.Net.Connection
 			do
 			{
 				var c = Interlocked.Increment(ref _current);
-				var i = c%_uris.Count;
-				uri = this._uris[i];
+				var i = c%_nodeUris.Count;
+				uri = this._nodeUris[i];
 				var state = this._uriLookup[uri];
-				if (state.date <= Now())
+				if (state.date <= _dateTimeProvider.Now())
+				{
+					state._attempts = 0;
 					return uri;
-
+				}
+				Interlocked.Increment(ref state._attempts);
 				++attempts;
-			} while (attempts < _uris.Count);
-			throw new OutOfNodesException("Tried {0} different nodes".F(attempts));
-		}
+			} while (attempts < _nodeUris.Count);
 
-		public virtual DateTime Now()
-		{
-			return DateTime.UtcNow;
+			//could not find a suitable node retrying on node that has been dead longest.
+			return this._nodeUris[0]; //todo random;
 		}
 
 		public void MarkDead(Uri uri)
-		{
-			//DateTime dateTime = DateTime.UtcNow;
-			//if (!this._uriLookup.TryGetValue(uri, out dateTime))
-			//	return;
+		{	
+			EndpointState state = null;
+			if (!this._uriLookup.TryGetValue(uri, out state))
+				return;
+			state.date = this._dateTimeProvider.DeadTime(uri, state._attempts);
 		}
 
 		public void MarkAlive(Uri uri)
 		{
-			throw new NotImplementedException();
+			EndpointState state = null;
+			if (!this._uriLookup.TryGetValue(uri, out state))
+				return;
+			state.date = this._dateTimeProvider.AliveTime(uri, state._attempts);
+			state._attempts = 0;
 		}
 	}
-
-
-	//public class ConnectionPool
-	//{
-	//	public Dictionary<Uri, > 
-
-
-	//	public ConnectionPool(IConnection connection)
-	//	{
-	//		connection.ThrowIfNull("connection");
-	//		_connection = connection;
-	//	}
-
-	//	public Uri GetNextEndpoint()
-	//	{
-			
-	//	}
-
-	//}
 }

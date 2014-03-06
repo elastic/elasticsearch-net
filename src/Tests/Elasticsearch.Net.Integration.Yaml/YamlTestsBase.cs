@@ -17,7 +17,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 {
 	public class YamlTestsBase
 	{
-		protected static readonly IElasticsearchClient _client;
+		protected static readonly ElasticsearchClient _client;
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
@@ -35,6 +35,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			var infoResponse = _client.Info();
 			dynamic info = infoResponse.Response;
 			_versionNumber = new Version(info.version.number);
+
 		}
 
 
