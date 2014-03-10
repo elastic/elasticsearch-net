@@ -59,7 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\StaticConnectionPoolTests.cs" />
+    <Compile Include="Connection\SniffingConnectionPoolTests.cs" />
+    <Compile Include="Connection\StaticConnectionPoolRetryTests.cs" />
     <Compile Include="Connection\RetryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stubs\NoopConnection.cs" />

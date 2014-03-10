@@ -15,12 +15,12 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues Settings { get; protected set; }
 		public IElasticsearchSerializer Serializer { get; protected set; }
 		protected IStringifier Stringifier { get; set; }
-		protected IHttpTransport Transport { get; set; }
+		protected ITransport Transport { get; set; }
 
 		public ElasticsearchClient(
 			IConnectionConfigurationValues settings, 
 			IConnection connection = null, 
-			IHttpTransport transport = null,
+			ITransport transport = null,
 			IElasticsearchSerializer serializer = null,
 			IStringifier stringifier = null
 			)
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net
 			this.Connection = connection ?? new HttpConnection(settings);
 			this.Serializer = serializer ?? new ElasticsearchDefaultSerializer();
 			((IConnectionConfigurationValues) this.Settings).Serializer = this.Serializer;
-			this.Transport = transport ?? new HttpTransport(settings, this.Connection, this.Serializer);
+			this.Transport = transport ?? new Transport(settings, this.Connection, this.Serializer);
 			this.Stringifier = stringifier ?? new Stringifier();
 		}
 

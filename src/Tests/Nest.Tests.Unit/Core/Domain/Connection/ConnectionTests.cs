@@ -15,7 +15,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 
 		public HttpWebRequest GetConnection(string path, string method)
 		{
-			return base.CreateConnection(new Uri(new Uri("http://localhost"), path), method);
+			return base.CreateHttpWebRequest(new Uri(new Uri("http://localhost"), path), method);
 		}
 	}
 

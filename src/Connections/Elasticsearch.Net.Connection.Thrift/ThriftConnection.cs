@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -191,6 +193,34 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return this.Execute(restRequest);
 		}
+
+		public bool Ping(Uri uri, int connectTimeout)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.HEAD;
+			restRequest.Uri = uri;
+			
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			var r  = this.Execute(restRequest);
+			return r.Success;
+		}
+
+		public IList<Uri> Sniff(Uri uri, int connectTimeout)
+		{
+			var restRequest = new RestRequest();
+			restRequest.Method = Method.GET;
+			restRequest.Uri = new Uri(uri,"/_nodes/_all/clear?timeout=" + connectTimeout);
+
+			restRequest.Headers = new Dictionary<string, string>();
+			restRequest.Headers.Add("Content-Type", "application/json");
+			var r  = this.Execute(restRequest);
+			using (var memoryStream = new MemoryStream(r.ResultBytes))
+			{
+				return Sniffer.FromStream(memoryStream, this._connectionSettings.Serializer);
+			}
+		}
+
 		#endregion
 
 		#region IDisposable Members

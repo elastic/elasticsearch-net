@@ -50,6 +50,10 @@
     <Compile Include="Connection\ConnectionConfiguration.cs" />
     <Compile Include="Connection\ConnectionPool.cs" />
     <Compile Include="Connection\ConnectionState.cs" />
+    <Compile Include="Connection\IConnectionPool.cs" />
+    <Compile Include="Connection\SingleNodeConnectionPool.cs" />
+    <Compile Include="Connection\Transport.cs" />
+    <Compile Include="Connection\ITransport.cs" />
     <Compile Include="Domain\ElasticsearchResponse.cs" />
     <Compile Include="Connection\ConnectionStatusTracer.cs" />
     <Compile Include="Connection\IConnection.cs" />

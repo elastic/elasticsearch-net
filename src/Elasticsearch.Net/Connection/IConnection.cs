@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connection
@@ -22,5 +25,9 @@ namespace Elasticsearch.Net.Connection
 
 		Task<ElasticsearchResponse> Delete(Uri uri, byte[] data);
 		ElasticsearchResponse DeleteSync(Uri uri, byte[] data);
+
+		bool Ping(Uri uri, int connectTimeout);
+		IList<Uri> Sniff(Uri uri, int connectTimeout);
+
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
@@ -15,6 +16,11 @@ namespace Nest
 		public ConnectionSettings(Uri uri, string defaultIndex) : base(uri, defaultIndex)
 		{
 			uri.ThrowIfNull("uri");
+		}
+
+		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex) : base(connectionPool, defaultIndex)
+		{
+			
 		}
 	}
 
@@ -48,9 +54,8 @@ namespace Nest
 
 		public ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; private set; }
 
-		public ConnectionSettings(Uri uri, string defaultIndex) : base(uri)
+		public ConnectionSettings(IConnectionPool uri, string defaultIndex) : base(uri)
 		{
-			uri.ThrowIfNull("uri");
 			defaultIndex.ThrowIfNullOrEmpty("defaultIndex");
 
 			this.SetDefaultIndex(defaultIndex);
@@ -62,7 +67,11 @@ namespace Nest
 
 			this.ModifyJsonSerializerSettings = (j) => { };
 			this.ContractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
-
+		}
+		public ConnectionSettings(Uri uri, string defaultIndex) 
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")), defaultIndex)
+		{
+			
 		}
 
 		/// <summary>

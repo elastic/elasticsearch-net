@@ -1,159 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Exceptions;
 using PUrify;
 
 namespace Elasticsearch.Net.Connection
 {
-	public interface IHttpTransport
-	{
-		ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0);
-
-		Task<ElasticsearchResponse> DoRequestAsync(
-			string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0);
-	}
-
-	public class HttpTransport : IHttpTransport
-	{
-		private readonly IConnectionConfigurationValues _configurationValues;
-		private readonly IConnection _connection;
-		private IElasticsearchSerializer _serializer;
-
-		public HttpTransport(IConnectionConfigurationValues configurationValues, IConnection connection, IElasticsearchSerializer serializer)
-		{
-			_connection = connection;
-			_configurationValues = configurationValues;
-			this._serializer = serializer ?? new ElasticsearchDefaultSerializer();
-		}
-
-		/// <summary>
-		/// Returns either the fixed maximum set on the connection configuration settings or the number of nodes
-		/// </summary>
-		private int GetMaximumRetries()
-		{
-			return this._configurationValues.MaxRetries.GetValueOrDefault(this._configurationValues.ConnectionPool.MaxRetries);
-		}
-
-		public ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0)
-		{
-			if (queryString != null)
-				path += queryString.ToQueryString();
-
-			var maxRetries = this.GetMaximumRetries();
-			var postData = PostData(data);
-			ElasticsearchResponse response = null;
-			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times.".F( method, path, retried);
-			var baseUri = this._configurationValues.ConnectionPool.GetNext();
-			bool seenError = false;
-			try
-			{
-				var uri = new Uri(baseUri, path);
-				response = DoSyncRequest(method, uri, postData);
-				if (response != null && response.SuccessOrKnownError)
-					return response;
-			}
-			catch (Exception e)
-			{
-				seenError = true;
-				this._configurationValues.ConnectionPool.MarkDead(baseUri);
-				if (retried < maxRetries)
-				{
-					return this.DoRequest(method, path, data, null, ++retried);
-				}
-				else
-					throw new OutOfNodesException(exceptionMessage, e);
-			}
-			finally
-			{
-				//make sure we always call markalive on the uri if the connection was succesful
-				if (!seenError && response != null && response.SuccessOrKnownError)
-					this._configurationValues.ConnectionPool.MarkAlive(baseUri);
-			}
-			this._configurationValues.ConnectionPool.MarkDead(baseUri);
-			if (retried < maxRetries)
-			{
-				return this.DoRequest(method, path, data, null, ++retried);
-			}	
-			throw new OutOfNodesException(exceptionMessage);
-		}
-		
-		public Task<ElasticsearchResponse> DoRequestAsync(
-			string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0)
-		{
-			if (queryString != null)
-				path += queryString.ToQueryString();
-
-			var postData = PostData(data);
-			var baseUri = this._configurationValues.ConnectionPool.GetNext();
-			var uri = new Uri(baseUri, path);
-			
-			switch (method.ToLowerInvariant())
-			{
-				case "post": return this._connection.Post(uri, postData);
-				case "put": return this._connection.Put(uri, postData);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this._connection.Delete(uri)
-						: this._connection.Delete(uri, postData);
-				case "head": return this._connection.Head(uri);
-				case "get": return this._connection.Get(uri);
-			}
-			throw new Exception("Unknown HTTP method " + method);
-		}
-	
-		private ElasticsearchResponse DoSyncRequest(string method, Uri uri, byte[] postData)
-		{
-			switch (method.ToLowerInvariant())
-			{
-				case "post":
-					return this._connection.PostSync(uri, postData);
-				case "put":
-					return this._connection.PutSync(uri, postData);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this._connection.DeleteSync(uri)
-						: this._connection.DeleteSync(uri, postData);
-				case "head":
-					return this._connection.HeadSync(uri);
-				case "get":
-					return this._connection.GetSync(uri);
-			}
-			return null;
-		}
-		
-		private byte[] PostData(object data)
-		{
-			var bytes = data as byte[];
-			if (bytes != null)
-				return bytes;
-
-			var s = data as string;
-			if (s != null)
-				return s.Utf8Bytes();
-			if (data == null) return null;
-			var ss = data as IEnumerable<string>;
-			if (ss != null)
-				return (string.Join("\n", ss) + "\n").Utf8Bytes();
-			
-			var so = data as IEnumerable<object>;
-			if (so == null)
-				return this._serializer.Serialize(data);
-			var joined = string.Join("\n", so
-				.Select(soo => this._serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
-			return joined.Utf8Bytes();
-		}
-	}
-
-
-
-
 	public class HttpConnection : IConnection
 	{
 		const int BUFFER_SIZE = 1024;
@@ -201,45 +57,71 @@ namespace Elasticsearch.Net.Connection
 		}
 		public ElasticsearchResponse DeleteSync(Uri uri)
 		{
-			var connection = this.CreateConnection(uri, "DELETE");
+			var connection = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoSynchronousRequest(connection);
 		}
 		public ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
 		{
-			var connection = this.CreateConnection(uri, "DELETE");
+			var connection = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoSynchronousRequest(connection, data);
+		}
+
+		public bool Ping(Uri uri, int connectTimeout)
+		{
+			var request = this.CreateHttpWebRequest(uri, "HEAD");
+			request.Timeout = connectTimeout;
+			request.ReadWriteTimeout = connectTimeout;
+			using (var response = (HttpWebResponse)request.GetResponse())
+			{
+				return response.StatusCode == HttpStatusCode.OK;
+			}
+		}
+
+		public IList<Uri> Sniff(Uri uri, int connectTimeout)
+		{
+			uri = new Uri(uri, "_nodes/_all/clear?timeout=" + connectTimeout);
+			var request = this.CreateHttpWebRequest(uri, "GET");
+			request.Timeout = connectTimeout;
+			request.ReadWriteTimeout = connectTimeout;
+			using (var response = (HttpWebResponse)request.GetResponse())
+			using (var responseStream = response.GetResponseStream())
+			{
+				if (response.StatusCode != HttpStatusCode.OK)
+					return new List<Uri>();
+				return Sniffer.FromStream(responseStream, this._ConnectionSettings.Serializer);
+			}
 		}
 
 		public Task<ElasticsearchResponse> Get(Uri uri)
 		{
-			var r = this.CreateConnection(uri, "GET");
+			var r = this.CreateHttpWebRequest(uri, "GET");
 			return this.DoAsyncRequest(r);
 		}
 		public Task<ElasticsearchResponse> Head(Uri uri)
 		{
-			var r = this.CreateConnection(uri, "HEAD");
+			var r = this.CreateHttpWebRequest(uri, "HEAD");
 			return this.DoAsyncRequest(r);
 		}
 		public Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
 		{
-			var r = this.CreateConnection(uri, "POST");
+			var r = this.CreateHttpWebRequest(uri, "POST");
 			return this.DoAsyncRequest(r, data);
 		}
 
 		public Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
 		{
-			var r = this.CreateConnection(uri, "PUT");
+			var r = this.CreateHttpWebRequest(uri, "PUT");
 			return this.DoAsyncRequest(r, data);
 		}
 
 		public Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
 		{
-			var r = this.CreateConnection(uri, "DELETE");
+			var r = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoAsyncRequest(r, data);
 		}
 		public Task<ElasticsearchResponse> Delete(Uri uri)
 		{
-			var r = this.CreateConnection(uri, "DELETE");
+			var r = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoAsyncRequest(r);
 		}
 
@@ -257,19 +139,18 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse HeaderOnlyRequest(Uri uri, string method)
 		{
-			var connection = this.CreateConnection(uri, method);
-			return this.DoSynchronousRequest(connection);
+			var r = this.CreateHttpWebRequest(uri, method);
+			return this.DoSynchronousRequest(r);
 		}
 
 		private ElasticsearchResponse BodyRequest(Uri uri, byte[] data, string method)
 		{
-			var connection = this.CreateConnection(uri, method);
-			return this.DoSynchronousRequest(connection, data);
+			var r = this.CreateHttpWebRequest(uri, method);
+			return this.DoSynchronousRequest(r, data);
 		}
 
-		protected virtual HttpWebRequest CreateConnection(Uri uri, string method)
+		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method)
 		{
-
 			var myReq = this.CreateWebRequest(uri, method);
 			this.SetBasicAuthorizationIfNeeded(myReq);
 			this.SetProxyIfNeeded(myReq);

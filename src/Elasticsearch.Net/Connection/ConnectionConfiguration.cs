@@ -39,6 +39,9 @@ namespace Elasticsearch.Net
 		public int MaximumAsyncConnections { get; private set; }
 		public int? MaxRetries { get; private set; }
 		public bool UsesPrettyResponses { get; private set; }
+		public bool SniffsOnStartup { get; private set; }
+		public bool SniffsOnConnectionFault { get; private set; }
+		public TimeSpan? SniffInformationLifeSpan { get; private set; }
 		public bool TraceEnabled { get; private set; }
 		public Action<ElasticsearchResponse> ConnectionStatusHandler { get; private set; }
 		public NameValueCollection QueryStringParameters { get; private set; }
@@ -67,6 +70,24 @@ namespace Elasticsearch.Net
 			this.MaxRetries = maxRetries;
 			return (T) this;
 		}
+
+		public T SnifsOnConnectionFault(bool sniffsOnConnectionFault = true)
+		{
+			this.SniffsOnConnectionFault = sniffsOnConnectionFault;
+			return (T)this;
+		}
+		public T SniffOnStartup(bool sniffsOnStartup = true)
+		{
+			this.SniffsOnStartup = sniffsOnStartup;
+			return (T)this;
+		}
+		public T SniffLifeSpan(TimeSpan sniffTimeSpan)
+		{
+			this.SniffInformationLifeSpan = sniffTimeSpan;
+			return (T)this;
+		}
+
+
 
 
 		/// <summary>

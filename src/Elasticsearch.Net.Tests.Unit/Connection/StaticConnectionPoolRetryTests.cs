@@ -18,7 +18,7 @@ using NUnit.Framework;
 namespace Elasticsearch.Net.Tests.Unit.Connection
 {
 	[TestFixture]
-	public class StaticConnectionPoolTests
+	public class StaticConnectionPoolRetryTests
 	{
 		private static Uri[] _uris = new[]
 		{
@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		private readonly StaticConnectionPool _connectionPool;
 		private readonly ConnectionConfiguration _config;
 
-		public StaticConnectionPoolTests()
+		public StaticConnectionPoolRetryTests()
 		{
 			_connectionPool = new StaticConnectionPool(_uris);
 			_config = new ConnectionConfiguration(_connectionPool);
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(_config);
 				//prove a real HttpTransport with its unspecified dependencies
 				//as fakes
-				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
 
 				//set up fake for a call on IConnection.GetSync so that it always throws 
 				//an exception
@@ -82,7 +82,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(_config);
 				var connection = fake.Resolve<NoopConnection>();
 				fake.Provide<IConnection>(connection);
-				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
 
 				//provide a unique fake for each node.
 				var calls = _uris.Select(u =>
@@ -118,7 +118,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Throws<Exception>();
 
-				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -154,7 +154,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				//setup client
-				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var client = fake.Resolve<ElasticsearchClient>();
 				
 				//Do not throw because by miracle the 4th retry manages to give back a 200
@@ -203,7 +203,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null)
 				);
 
-				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var client = fake.Resolve<ElasticsearchClient>();
 				
 				//Since we always get a 503 we should see an out of nodes exception
@@ -254,7 +254,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 
 				//provide a transport with all the dependencies resolved
-				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				//instantiate connection with faked dependencies
 				var client = fake.Resolve<ElasticsearchClient>();
 				
@@ -321,7 +321,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				
 				//provide a transport with all the dependencies resolved
-				fake.Provide<IHttpTransport>(fake.Resolve<HttpTransport>());
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				//instantiate connection with faked dependencies
 				var client = fake.Resolve<ElasticsearchClient>();
 				

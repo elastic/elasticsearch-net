@@ -117,5 +117,15 @@ namespace Elasticsearch.Net.Connection.HttpClient
 		    return this.DoSyncRequest("delete", uri, data);
 		    throw new NotImplementedException();
 	    }
+
+	    public bool Ping(Uri uri, int connectTimeout)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public IList<Uri> Sniff(Uri uri, int connectTimeout)
+	    {
+		    throw new NotImplementedException();
+	    }
     }
 }
