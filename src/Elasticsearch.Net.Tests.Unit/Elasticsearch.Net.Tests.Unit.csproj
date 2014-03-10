@@ -33,12 +33,13 @@
     <Reference Include="Autofac">
       <HintPath>..\..\dep\Autofac.3.2.0\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Extras.FakeItEasy">
-      <HintPath>..\..\dep\Autofac.Extras.FakeItEasy.3.0.0\lib\net40\Autofac.Extras.FakeItEasy.dll</HintPath>
-    </Reference>
-    <Reference Include="FakeItEasy, Version=1.15.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+    <Reference Include="Autofac.Extras.FakeItEasy, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dep\FakeItEasy.1.15.0\lib\net40\FakeItEasy.dll</HintPath>
+      <HintPath>..\..\dep\Autofac.Extras.FakeItEasy.3.0.1\lib\net40\Autofac.Extras.FakeItEasy.dll</HintPath>
+    </Reference>
+    <Reference Include="FakeItEasy, Version=1.18.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dep\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\..\dep\FluentAssertions.2.0.0.1\lib\net45\FluentAssertions.dll</HintPath>

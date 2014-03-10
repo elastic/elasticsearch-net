@@ -87,9 +87,6 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 
-
-
-
 		/// <summary>
 		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
 		/// </summary>

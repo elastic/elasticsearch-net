@@ -13,27 +13,33 @@ namespace Elasticsearch.Net.Connection
 		private readonly IConnection _connection;
 		private readonly IElasticsearchSerializer _serializer;
 		private readonly IConnectionPool _connectionPool;
-		private DateTime? _lastSniff { get; set; }
+		private IDateTimeProvider _dateTimeProvider;
+		private DateTime? _lastSniff = null;
 
 		public Transport(
 			IConnectionConfigurationValues configurationValues,
 			IConnection connection, 
-			IElasticsearchSerializer serializer
+			IElasticsearchSerializer serializer,
+			IDateTimeProvider dateTimeProvider = null
 			)
 		{
+			_dateTimeProvider = dateTimeProvider;
 			this._connection = connection;
 			this._configurationValues = configurationValues;
 			this._serializer = serializer ?? new ElasticsearchDefaultSerializer();
 			this._connectionPool = this._configurationValues.ConnectionPool;
+			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
 			if (this._configurationValues.SniffsOnStartup)
 				this.Sniff(fromStartup: true);
+			else
+				this._lastSniff = this._dateTimeProvider.Now();
 		}
 
 		private void Sniff(bool fromStartup = false)
 		{
 			this._connectionPool.Sniff(this._connection, fromStartup);
-			this._lastSniff = DateTime.UtcNow;
+			this._lastSniff = this._dateTimeProvider.Now();
 		}
 
 		/// <summary>
@@ -98,8 +104,9 @@ namespace Elasticsearch.Net.Connection
 		private void SniffIfInformationIsTooOld(int retried)
 		{
 			var sniffLifeSpan = this._configurationValues.SniffInformationLifeSpan;
+			var now = this._dateTimeProvider.Now();
 			if (retried == 0 && this._lastSniff.HasValue &&
-			    sniffLifeSpan.HasValue && sniffLifeSpan.Value > (DateTime.UtcNow - this._lastSniff.Value))
+			    sniffLifeSpan.HasValue && sniffLifeSpan.Value > (now - this._lastSniff.Value))
 				this.Sniff();
 		}
 

@@ -101,6 +101,8 @@ namespace Elasticsearch.Net.Connection
 		{
 		}
 
+
+
 		public override void Sniff(IConnection connection, bool fromStartupHint = false)
 		{
 			if (fromStartupHint && _seenStartup)
@@ -112,6 +114,8 @@ namespace Elasticsearch.Net.Connection
 				
 				this._readerWriter.EnterWriteLock();
 				var nodes = connection.Sniff(uri, 50);
+				if (!nodes.HasAny())
+					return;
 
 				this._nodeUris = nodes;
 				this._uriLookup = nodes.ToDictionary(k => k, v => new EndpointState());
