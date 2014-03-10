@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Thrift.Protocol;
 using Elasticsearch.Net.Connection.Thrift.Transport;
+using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection.Thrift
 {

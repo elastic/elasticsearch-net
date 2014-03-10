@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.ConnectionPool;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;

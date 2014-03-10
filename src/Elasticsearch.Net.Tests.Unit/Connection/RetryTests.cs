@@ -7,6 +7,7 @@ using Autofac;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Exceptions;
+using Elasticsearch.Net.Providers;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
+using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
+using Elasticsearch.Net.Providers;
+using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -106,7 +109,7 @@ namespace Elasticsearch.Net.Connection
 			var sniffLifeSpan = this._configurationValues.SniffInformationLifeSpan;
 			var now = this._dateTimeProvider.Now();
 			if (retried == 0 && this._lastSniff.HasValue &&
-			    sniffLifeSpan.HasValue && sniffLifeSpan.Value > (now - this._lastSniff.Value))
+			    sniffLifeSpan.HasValue && sniffLifeSpan.Value < (now - this._lastSniff.Value))
 				this.Sniff();
 		}
 

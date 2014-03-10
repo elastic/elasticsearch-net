@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.ConnectionPool;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 

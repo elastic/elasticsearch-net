@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.ConnectionPool;
+using Elasticsearch.Net.Serialization;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Connection
 {
 	public interface IConnectionConfigurationValues
 	{

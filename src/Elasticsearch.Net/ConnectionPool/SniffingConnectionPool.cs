@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Providers;
+
+namespace Elasticsearch.Net.ConnectionPool
+{
+	public class SniffingConnectionPool : StaticConnectionPool
+	{
+		private readonly ReaderWriterLockSlim _readerWriter = new ReaderWriterLockSlim();
+
+		private bool _seenStartup = false;
+
+		public SniffingConnectionPool(
+			IEnumerable<Uri> uris, 
+			bool randomizeOnStartup = true, 
+			IDateTimeProvider dateTimeProvider = null)
+			: base(uris, randomizeOnStartup, dateTimeProvider)
+		{
+		}
+
+		public override void Sniff(IConnection connection, bool fromStartupHint = false)
+		{
+			if (fromStartupHint && _seenStartup)
+				return;
+
+			try
+			{
+				var uri = this.GetNext();
+				
+				this._readerWriter.EnterWriteLock();
+				var nodes = connection.Sniff(uri, 50);
+				if (!nodes.HasAny())
+					return;
+
+				this._nodeUris = nodes;
+				this._uriLookup = nodes.ToDictionary(k => k, v => new EndpointState());
+				if (fromStartupHint)
+					this._seenStartup = true;
+
+			}
+			finally
+			{
+				this._readerWriter.ExitWriteLock();
+			}
+		}
+
+		public override Uri GetNext()
+		{
+			try
+			{
+				this._readerWriter.EnterReadLock();
+				return base.GetNext();
+			}
+			finally
+			{
+				this._readerWriter.ExitReadLock();
+			}
+		}
+
+		public override void MarkAlive(Uri uri)
+		{
+			try
+			{
+				this._readerWriter.EnterReadLock();
+				base.MarkAlive(uri);
+			}
+			finally
+			{
+				this._readerWriter.ExitReadLock();
+				
+			}
+		}
+
+		public override void MarkDead(Uri uri)
+		{
+			try
+			{
+				this._readerWriter.EnterReadLock();
+				base.MarkDead(uri);
+			}
+			finally
+			{
+				this._readerWriter.ExitReadLock();
+				
+			}
+		}
+
+	}
+}

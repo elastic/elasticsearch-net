@@ -1,6 +1,7 @@
 using System;
+using Elasticsearch.Net.Connection;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net.ConnectionPool
 {
 	public interface IConnectionPool
 	{

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Exceptions;
+using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {

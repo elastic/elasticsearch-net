@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Serialization
 {
 	public interface IElasticsearchSerializer
 	{

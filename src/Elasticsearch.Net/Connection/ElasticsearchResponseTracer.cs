@@ -6,14 +6,14 @@ using System.Text;
 
 namespace Elasticsearch.Net.Connection
 {
-	public class ConnectionStatusTracer : IDisposable
+	public class ElasticsearchResponseTracer : IDisposable
 	{
 		private readonly bool _enabled;
 		private Stopwatch _stopwatch;
 
 		public ElasticsearchResponse _result { get; set; }
 
-		public ConnectionStatusTracer(bool enabled)
+		public ElasticsearchResponseTracer(bool enabled)
 		{
 			this._enabled = enabled;
 			if (enabled)

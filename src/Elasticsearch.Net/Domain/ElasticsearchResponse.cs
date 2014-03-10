@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Serialization;
 
 
 namespace Elasticsearch.Net

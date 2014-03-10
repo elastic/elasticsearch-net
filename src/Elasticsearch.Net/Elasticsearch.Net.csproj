@@ -44,18 +44,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Connection\ConnectionError.cs" />
-    <Compile Include="Connection\ConnectionException.cs" />
+    <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Connection\ConnectionConfiguration.cs" />
-    <Compile Include="Connection\ConnectionPool.cs" />
+    <Compile Include="ConnectionPool\EndpointState.cs" />
     <Compile Include="Connection\ConnectionState.cs" />
-    <Compile Include="Connection\IConnectionPool.cs" />
-    <Compile Include="Connection\SingleNodeConnectionPool.cs" />
+    <Compile Include="ConnectionPool\IConnectionPool.cs" />
+    <Compile Include="Providers\IDateTimeProvider.cs" />
+    <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
+    <Compile Include="Providers\Sniffer.cs" />
+    <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
+    <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
     <Compile Include="Connection\Transport.cs" />
     <Compile Include="Connection\ITransport.cs" />
     <Compile Include="Domain\ElasticsearchResponse.cs" />
-    <Compile Include="Connection\ConnectionStatusTracer.cs" />
+    <Compile Include="Connection\ElasticsearchResponseTracer.cs" />
     <Compile Include="Connection\IConnection.cs" />
     <Compile Include="Connection\IConnectionConfigurationValues.cs" />
     <Compile Include="Connection\IConnectionConfiguration.cs" />

@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Net;
-using Elasticsearch.Net.Connection;
+using System.Linq;
+using Elasticsearch.Net.ConnectionPool;
+using Elasticsearch.Net.Serialization;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Connection
 {
 	public class ConnectionConfiguration : 
 		ConnectionConfiguration<ConnectionConfiguration>, 

@@ -6,6 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Providers;
 using PUrify;
 
 namespace Elasticsearch.Net.Connection
@@ -205,7 +206,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			var path = request.RequestUri.ToString();
 			var method = request.Method;
-			using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
+			using (var tracer = new ElasticsearchResponseTracer(this._ConnectionSettings.TraceEnabled))
 			{
 				ElasticsearchResponse cs = null;
 				if (data != null)
@@ -251,7 +252,7 @@ namespace Elasticsearch.Net.Connection
 			var method = request.Method;
 			if (!this._ResourceLock.WaitOne(timeout))
 			{
-				using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
+				using (var tracer = new ElasticsearchResponseTracer(this._ConnectionSettings.TraceEnabled))
 				{
 					var m = "Could not start the operation before the timeout of " + timeout +
 					  "ms completed while waiting for the semaphore";
@@ -280,7 +281,7 @@ namespace Elasticsearch.Net.Connection
 
 		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse> tcs, byte[] data = null)
 		{
-			using (var tracer = new ConnectionStatusTracer(this._ConnectionSettings.TraceEnabled))
+			using (var tracer = new ElasticsearchResponseTracer(this._ConnectionSettings.TraceEnabled))
 			{
 				var timeout = this._ConnectionSettings.Timeout;
 
