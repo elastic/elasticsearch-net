@@ -50,7 +50,7 @@ namespace Nest.Resolvers.Converters
 				case "doc_count":
 					return GetSingleBucketAggregation(reader, serializer);
 				default:
-					return null; //TODO assume nested
+					return null; 
 
 			}
 		}

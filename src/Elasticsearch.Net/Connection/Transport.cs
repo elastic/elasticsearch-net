@@ -7,6 +7,7 @@ using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Serialization;
+using PUrify;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -89,7 +90,7 @@ namespace Elasticsearch.Net.Connection
 
 			try
 			{
-				var uri = new Uri(baseUri, path);
+				var uri = CreateUriToPath(baseUri, path);
 				response = _doRequest(method, uri, postData);
 				if (response != null && response.SuccessOrKnownError)
 					return response;
@@ -160,7 +161,7 @@ namespace Elasticsearch.Net.Connection
 			var postData = PostData(data);
 			int initialSeed;
 			var baseUri = this._connectionPool.GetNext(seed, out initialSeed);
-			var uri = new Uri(baseUri, path);
+			var uri = CreateUriToPath(baseUri, path);
 			return _doRequestAsync(method, uri, postData).ContinueWith(t=>
 			{
 				if (t.IsCanceled)
@@ -208,7 +209,19 @@ namespace Elasticsearch.Net.Connection
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}
-
+		
+		private Uri CreateUriToPath(Uri baseUri, string path)
+		{
+			var s = this.Settings;
+			if (s.QueryStringParameters != null)
+			{
+				var tempUri = new Uri(baseUri, path);
+				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
+				path += qs;
+			}
+			var uri = path.IsNullOrEmpty() ? baseUri : new Uri(baseUri, path);
+			return uri.Purify();
+		}
 		
 		private byte[] PostData(object data)
 		{

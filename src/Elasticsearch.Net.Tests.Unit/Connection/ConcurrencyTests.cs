@@ -117,7 +117,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				new Uri("http://localhost:9206"),
 			};
 			private readonly Random _rnd = new Random();
-			public ConcurrencyTestConnection(IConnectionConfigurationValues settings) : base(settings)
+			public ConcurrencyTestConnection(IConnectionConfigurationValues settings) 
+				: base(settings)
 			{
 			}
 

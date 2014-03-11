@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using System.Runtime.Remoting.Channels;
+using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using NUnit.Framework;
 using System;
@@ -8,7 +9,7 @@ namespace Nest.Tests.Unit.Domain.Connection
 {
 	using System.Net;
 
-	public class TestConnection : HttpConnection
+	public class TestConnection : InMemoryConnection
 	{
 		public TestConnection(IConnectionSettingsValues settings)
 			: base(settings) { }
@@ -29,13 +30,11 @@ namespace Nest.Tests.Unit.Domain.Connection
 			var uri = new Uri("http://localhost");
 			var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
 			var connectionSettings = new ConnectionSettings(uri, "index").SetGlobalQueryStringParameters(query);
-			var connection = new TestConnection(connectionSettings);
-
-			// Act
-			var req = connection.GetConnection("", "GET");
+			var client = new ElasticClient(connectionSettings, new TestConnection(connectionSettings));
+			var result = client.RootNodeInfo();
 
 			// Assert
-			Assert.AreEqual(req.Address.ToString(), "http://localhost/?authToken=ABCDEFGHIJK");
+			Assert.AreEqual(result.ConnectionStatus.RequestUrl, "http://localhost/?authToken=ABCDEFGHIJK");
 		}
 
 		[Test]
@@ -45,13 +44,11 @@ namespace Nest.Tests.Unit.Domain.Connection
 			var uri = new Uri("http://localhost:9000");
 			var query = new NameValueCollection { { "authToken", "ABCDEFGHIJK" } };
 			var connectionSettings = new ConnectionSettings(uri, "index").SetGlobalQueryStringParameters(query);
-			var connection = new TestConnection(connectionSettings);
-
-			// Act
-			var req = connection.GetConnection("index/", "GET");
+			var client = new ElasticClient(connectionSettings, new TestConnection(connectionSettings));
+			var result = client.IndexExists(ie=>ie.Index("index"));
 
 			// Assert
-			Assert.AreEqual(req.Address.ToString(), "http://localhost:9000/index/?authToken=ABCDEFGHIJK");
+			Assert.AreEqual(result.ConnectionStatus.RequestUrl, "http://localhost:9000/index?authToken=ABCDEFGHIJK");
 		}
 
 

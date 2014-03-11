@@ -38,7 +38,6 @@ namespace Elasticsearch.Net.Providers
 				var l = new List<Uri>();
 				foreach(var kv in response.nodes.Values)
 				{
-					//TODO parse address since its in inet[] form
 					if (!kv.http_address.IsNullOrEmpty())
 						l.Add(Parse("http", kv.http_address));
 					else if (!kv.https_address.IsNullOrEmpty())

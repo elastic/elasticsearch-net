@@ -72,12 +72,10 @@ namespace Elasticsearch.Net
 
 
 
-		//TODO probably nicer if we make this factory ConnectionStatus.Error() and ConnectionStatus.Valid()
-		//and make these constructors private.
 		protected ElasticsearchResponse(IConnectionConfigurationValues settings)
 		{
 			this.Settings = settings;
-			this.Serializer = settings.Serializer; //TODO or default
+			this.Serializer = settings.Serializer; 
 		}
 
 		public static ElasticsearchResponse CreateError(IConnectionConfigurationValues settings, Exception e, string method, string path, byte[] request)

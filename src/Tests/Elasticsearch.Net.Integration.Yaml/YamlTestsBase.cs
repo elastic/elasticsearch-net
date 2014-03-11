@@ -39,7 +39,6 @@ namespace Elasticsearch.Net.Integration.Yaml
 
 		}
 
-
 		public YamlTestsBase()
 		{
 			_client.IndicesDelete("*");

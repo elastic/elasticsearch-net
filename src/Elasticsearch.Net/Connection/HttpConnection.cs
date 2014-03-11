@@ -369,23 +369,7 @@ namespace Elasticsearch.Net.Connection
 			recursiveBody(null);
 		}
 
-		private Uri _CreateUriString(string path)
-		{
-			//TODO reapply this
-			return null;
-
-			//var s = this._ConnectionSettings;
-			////var uri = s.ConnectionPool.GetNext();
-
-			//if (s.QueryStringParameters != null)
-			//{
-			//	var tempUri = new Uri(uri, path);
-			//	var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
-			//	path += qs;
-			//}
-			//uri = path.IsNullOrEmpty() ? uri : new Uri(uri, path);
-			//return uri.Purify();
-		}
+		
 
 	}
 }

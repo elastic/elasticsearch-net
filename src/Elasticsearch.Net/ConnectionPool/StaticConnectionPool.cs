@@ -64,7 +64,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			} while (attempts < count);
 
 			//could not find a suitable node retrying on node that has been dead longest.
-			return this._nodeUris[i]; //todo random;
+			return this._nodeUris[i]; 
 		}
 
 		public virtual void MarkDead(Uri uri)
