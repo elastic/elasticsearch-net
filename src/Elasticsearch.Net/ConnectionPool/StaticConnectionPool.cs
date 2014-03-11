@@ -55,6 +55,7 @@ namespace Elasticsearch.Net.ConnectionPool
 						state._attempts = 0;
 						return uri;
 					}
+					Interlocked.Increment(ref _current);
 				}
 				Interlocked.Increment(ref state._attempts);
 				++attempts;
