@@ -40,7 +40,6 @@ namespace Elasticsearch.Net.ConnectionPool
 				this._uriLookup = nodes.ToDictionary(k => k, v => new EndpointState());
 				if (fromStartupHint)
 					this._seenStartup = true;
-				this._current = -1;
 
 			}
 			finally

@@ -33,20 +33,15 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public virtual Uri GetNext(int? initialSeed, out int seed)
 		{
-			//if _current has been reset make sure we ignore any seed
-			//that was given out before the reset
-			if (_current == -1 && initialSeed.HasValue)
-				initialSeed = 0;
-			//always increment the initialSeed so we advance further
-			else if (initialSeed.HasValue)
+			var count = _nodeUris.Count;
+			if (initialSeed.HasValue)
 				initialSeed += 1;
 
 			//always increment our round robin counter
 			int increment = Interlocked.Increment(ref _current);
 			var initialOffset = initialSeed ?? increment;
-			seed = initialOffset;
-			var count = _nodeUris.Count;
 			int i = initialOffset % count, attempts = 0;
+			seed = i;
 			Uri uri = null;
 			do
 			{
@@ -94,7 +89,6 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public virtual void Sniff(IConnection connection, bool fromStartupHint = false)
 		{
-			this._current = -1;
 			//NOOP on static connection class
 		}
 	}

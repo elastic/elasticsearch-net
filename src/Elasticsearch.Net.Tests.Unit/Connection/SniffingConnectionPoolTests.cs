@@ -205,7 +205,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 2 retry
 					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 3
 					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 4
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null) //info 5
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 5
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 6
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 7
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 8
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null) //info 9
 				);
 				getCall.Invokes((Uri u) => seenNodes.Add(u));
 
@@ -215,16 +219,21 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				client1.Info(); //info call 3
 				client1.Info(); //info call 4
 				client1.Info(); //info call 5
+				client1.Info(); //info call 6
+				client1.Info(); //info call 7
+				client1.Info(); //info call 8
+				client1.Info(); //info call 9
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
-				seenNodes.Should().NotBeEmpty().And.HaveCount(6);
+				seenNodes.Should().NotBeEmpty().And.HaveCount(10);
 				seenNodes[0].Port.Should().Be(9200);
 				seenNodes[1].Port.Should().Be(9201);
 				//after sniff
-				seenNodes[2].Port.Should().Be(9204);
-				seenNodes[3].Port.Should().Be(9203);
-				seenNodes[4].Port.Should().Be(9202);
-				seenNodes[5].Port.Should().Be(9201);
+				seenNodes[2].Port.Should().Be(9202);
+				seenNodes[3].Port.Should().Be(9204, string.Join(",", seenNodes.Select(n=>n.Port)));
+				seenNodes[4].Port.Should().Be(9203);
+				seenNodes[5].Port.Should().Be(9202);
+				seenNodes[6].Port.Should().Be(9201);
 
 				//var nowCall = A.CallTo(() => fake.Resolve<IDateTimeProvider>().Sniff(A<Uri>._, A<int>._));
 			}

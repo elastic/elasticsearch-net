@@ -39,7 +39,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			_connectionPool = new SniffingConnectionPool(_uris);
 			_config = new ConnectionConfiguration(_connectionPool)
 				.SnifsOnConnectionFault()
-				.SniffOnStartup();
+				.SniffOnStartup()
+				.SetMaxRetries(5);
 		}
 
 		private void ProvideTransport(AutoFake fake)
@@ -58,12 +59,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//prove a real HttpTransport with its unspecified dependencies
 				//as fakes
 
-				//set up fake for a call on IConnection.GetSync so that it always throws 
-				//an exception
 				var connection = fake.Provide<IConnection>(new ConcurrencyTestConnection(this._config));
 				this.ProvideTransport(fake);
-				//create a real ElasticsearchClient with it unspecified dependencies
-				//as fakes
+				//create a real ElasticsearchClient with it unspecified dependencies as fakes
 				var client = fake.Resolve<ElasticsearchClient>();
 				int seen = 0;
 				Assert.DoesNotThrow(()=>
@@ -93,7 +91,14 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				seen.Should().Be(40000);
 			}
 		}
-
+		/// <summary>
+		/// This simulates a super flakey elasticsearch cluster.
+		/// - if random 1-9 is a muliple of 3 throw a 503
+		/// - never throws on node 9202 though so that all calls can be expected to always succeed. 
+		/// - Sniff can either get back the full cluster or a sufficient subset of it. 
+		/// - Our cluster have 5 nodes the recommendation is to have N/2+1 masters so we should atleast see 3 nodes
+		/// - anything less would cause a node to be unavailable which is covered in other tests 
+		/// </summary>
 		public class ConcurrencyTestConnection : InMemoryConnection
 		{
 			private static Uri[] _uris = new[]
@@ -102,6 +107,14 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				new Uri("http://localhost:9201"),
 				new Uri("http://localhost:9202"),
 				new Uri("http://localhost:9203"),
+				new Uri("http://localhost:9206"),
+			};
+			
+			private static Uri[] _uris2 = new[]
+			{
+				new Uri("http://localhost:9202"),
+				new Uri("http://localhost:9201"),
+				new Uri("http://localhost:9206"),
 			};
 			private readonly Random _rnd = new Random();
 			public ConcurrencyTestConnection(IConnectionConfigurationValues settings) : base(settings)
@@ -110,12 +123,12 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			public override IList<Uri> Sniff(Uri uri, int connectTimeout)
 			{
-				return _uris;
+				return  _rnd.Next(1, 11) % 3 == 0 ? _uris : _uris2;
 			}
 
 			public override ElasticsearchResponse GetSync(Uri uri)
 			{
-				var statusCode = _rnd.Next(1, 11) % 7 == 0 ? 503 : 200;
+				var statusCode = _rnd.Next(1, 9) % 3 == 0 ? 503 : 200;
 				if (uri.Port == 9202)
 					statusCode = 200;
 
