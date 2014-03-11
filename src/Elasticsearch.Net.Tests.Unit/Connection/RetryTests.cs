@@ -52,6 +52,35 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 		
 		[Test]
+		public async void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				this.ProvideTransport(fake);
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._));
+				Func<ElasticsearchResponse> badTask = () => { throw new Exception(); };
+				var t = new Task<ElasticsearchResponse>(badTask);
+				t.Start();
+				getCall.Returns(t);
+				
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				client.Settings.MaxRetries.Should().Be(_retries);
+				try
+				{
+					var result = await client.InfoAsync();
+				}
+				catch (Exception e)
+				{
+					Assert.AreEqual(e.GetType(), typeof(OutOfNodesException));
+				}
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
+
+			}
+		}
+
+		[Test]
 		public void ShouldNotRetryOn400()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
@@ -69,7 +98,24 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 			}
 		}
-		
+		[Test]
+		public async void ShouldNotRetryOn400_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				this.ProvideTransport(fake);
+				
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._));
+				getCall.Returns(Task.FromResult(ElasticsearchResponse.Create(settings, 400, "GET", "/", null, null)));
+				
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				var result = await client.InfoAsync();
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+
+			}
+		}
 		[Test]
 		public void ShouldNotRetryOn500()
 		{
@@ -122,6 +168,31 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var client = fake.Resolve<ElasticsearchClient>();
 
 				Assert.Throws<OutOfNodesException>(()=> client.Info());
+				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
+
+			}
+		}
+		
+		[Test]
+		public async void ShouldRetryOn503_Async()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{
+				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				this.ProvideTransport(fake);
+				
+				var getCall = A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._));
+				getCall.Returns(Task.FromResult(ElasticsearchResponse.Create(settings, 503, "GET", "/", null, null)));
+				
+				var client = fake.Resolve<ElasticsearchClient>();
+				try
+				{
+					var result = await client.InfoAsync();
+				}
+				catch (Exception e)
+				{
+					Assert.AreEqual(e.GetType(), typeof(OutOfNodesException));
+				}
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
 			}

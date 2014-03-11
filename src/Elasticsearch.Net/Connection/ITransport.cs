@@ -10,6 +10,6 @@ namespace Elasticsearch.Net.Connection
 		Task<ElasticsearchResponse> DoRequestAsync(
 			string method, 
 			string path, 
-			object data = null, NameValueCollection queryString = null, int retried = 0);
+			object data = null, NameValueCollection queryString = null, int retried = 0, int? seed = null);
 	}
 }
