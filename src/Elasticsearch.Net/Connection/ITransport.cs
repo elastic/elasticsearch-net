@@ -5,7 +5,7 @@ namespace Elasticsearch.Net.Connection
 {
 	public interface ITransport
 	{
-		ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0);
+		ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0, int? seed = null);
 
 		Task<ElasticsearchResponse> DoRequestAsync(
 			string method, 

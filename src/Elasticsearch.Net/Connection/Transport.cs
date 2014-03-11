@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.Connection
 			return this._configurationValues.MaxRetries.GetValueOrDefault(this._connectionPool.MaxRetries);
 		}
 
-		public ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0)
+		public ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0, int? seed = null)
 		{
 			SniffIfInformationIsTooOld(retried);
 
@@ -65,7 +65,8 @@ namespace Elasticsearch.Net.Connection
 			ElasticsearchResponse response = null;
 			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times."
 				.F( method, path, retried);
-			var baseUri = this._connectionPool.GetNext();
+			int initialSeed;
+			var baseUri = this._connectionPool.GetNext(seed, out initialSeed);
 			bool seenError = false;
 			try
 			{
@@ -82,7 +83,7 @@ namespace Elasticsearch.Net.Connection
 					this.Sniff();
 				if (retried < maxRetries)
 				{
-					return this.DoRequest(method, path, data, null, ++retried);
+					return this.DoRequest(method, path, data, null, ++retried, initialSeed);
 				}
 				else
 					throw new OutOfNodesException(exceptionMessage, e);
@@ -99,7 +100,7 @@ namespace Elasticsearch.Net.Connection
 
 			if (retried < maxRetries)
 			{
-				return this.DoRequest(method, path, data, null, ++retried);
+				return this.DoRequest(method, path, data, null, ++retried, initialSeed);
 			}	
 			throw new OutOfNodesException(exceptionMessage);
 		}
@@ -120,7 +121,8 @@ namespace Elasticsearch.Net.Connection
 				path += queryString.ToQueryString();
 
 			var postData = PostData(data);
-			var baseUri = this._connectionPool.GetNext();
+			int seed;
+			var baseUri = this._connectionPool.GetNext(null, out seed);
 			var uri = new Uri(baseUri, path);
 			
 			switch (method.ToLowerInvariant())

@@ -39,35 +39,35 @@ namespace Elasticsearch.Net.Connection
 			this._enableTrace = settings.TraceEnabled;
 		}
 
-		public ElasticsearchResponse GetSync(Uri uri)
+		public virtual ElasticsearchResponse GetSync(Uri uri)
 		{
 			return this.HeaderOnlyRequest(uri, "GET");
 		}
-		public ElasticsearchResponse HeadSync(Uri uri)
+		public virtual ElasticsearchResponse HeadSync(Uri uri)
 		{
 			return this.HeaderOnlyRequest(uri, "HEAD");
 		}
 
-		public ElasticsearchResponse PostSync(Uri uri, byte[] data)
+		public virtual ElasticsearchResponse PostSync(Uri uri, byte[] data)
 		{
 			return this.BodyRequest(uri, data, "POST");
 		}
-		public ElasticsearchResponse PutSync(Uri uri, byte[] data)
+		public virtual ElasticsearchResponse PutSync(Uri uri, byte[] data)
 		{
 			return this.BodyRequest(uri, data, "PUT");
 		}
-		public ElasticsearchResponse DeleteSync(Uri uri)
+		public virtual ElasticsearchResponse DeleteSync(Uri uri)
 		{
 			var connection = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoSynchronousRequest(connection);
 		}
-		public ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
+		public virtual ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
 		{
 			var connection = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoSynchronousRequest(connection, data);
 		}
 
-		public bool Ping(Uri uri, int connectTimeout)
+		public virtual bool Ping(Uri uri, int connectTimeout)
 		{
 			var request = this.CreateHttpWebRequest(uri, "HEAD");
 			request.Timeout = connectTimeout;
@@ -78,7 +78,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public IList<Uri> Sniff(Uri uri, int connectTimeout)
+		public virtual IList<Uri> Sniff(Uri uri, int connectTimeout)
 		{
 			uri = new Uri(uri, "_nodes/_all/clear?timeout=" + connectTimeout);
 			var request = this.CreateHttpWebRequest(uri, "GET");
@@ -93,34 +93,34 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public Task<ElasticsearchResponse> Get(Uri uri)
+		public virtual Task<ElasticsearchResponse> Get(Uri uri)
 		{
 			var r = this.CreateHttpWebRequest(uri, "GET");
 			return this.DoAsyncRequest(r);
 		}
-		public Task<ElasticsearchResponse> Head(Uri uri)
+		public virtual Task<ElasticsearchResponse> Head(Uri uri)
 		{
 			var r = this.CreateHttpWebRequest(uri, "HEAD");
 			return this.DoAsyncRequest(r);
 		}
-		public Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
+		public virtual Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
 		{
 			var r = this.CreateHttpWebRequest(uri, "POST");
 			return this.DoAsyncRequest(r, data);
 		}
 
-		public Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
+		public virtual Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
 		{
 			var r = this.CreateHttpWebRequest(uri, "PUT");
 			return this.DoAsyncRequest(r, data);
 		}
 
-		public Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
+		public virtual Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoAsyncRequest(r, data);
 		}
-		public Task<ElasticsearchResponse> Delete(Uri uri)
+		public virtual Task<ElasticsearchResponse> Delete(Uri uri)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE");
 			return this.DoAsyncRequest(r);
@@ -371,17 +371,20 @@ namespace Elasticsearch.Net.Connection
 
 		private Uri _CreateUriString(string path)
 		{
-			var s = this._ConnectionSettings;
-			var uri = s.ConnectionPool.GetNext();
+			//TODO reapply this
+			return null;
 
-			if (s.QueryStringParameters != null)
-			{
-				var tempUri = new Uri(uri, path);
-				var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
-				path += qs;
-			}
-			uri = path.IsNullOrEmpty() ? uri : new Uri(uri, path);
-			return uri.Purify();
+			//var s = this._ConnectionSettings;
+			////var uri = s.ConnectionPool.GetNext();
+
+			//if (s.QueryStringParameters != null)
+			//{
+			//	var tempUri = new Uri(uri, path);
+			//	var qs = s.QueryStringParameters.ToQueryString(tempUri.Query.IsNullOrEmpty() ? "?" : "&");
+			//	path += qs;
+			//}
+			//uri = path.IsNullOrEmpty() ? uri : new Uri(uri, path);
+			//return uri.Purify();
 		}
 
 	}

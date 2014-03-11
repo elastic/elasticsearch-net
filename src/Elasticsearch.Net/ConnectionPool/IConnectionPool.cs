@@ -15,7 +15,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// <summary>
 		/// Get the next available Uri for a live node
 		/// </summary>
-		Uri GetNext();
+		Uri GetNext(int? initialSeed, out int seed);
 
 		/// <summary>
 		/// Mark the specified Uri as dead

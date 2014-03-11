@@ -17,7 +17,7 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.Connection
+namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 {
 	[TestFixture]
 	public class StaticConnectionPoolRetryTests

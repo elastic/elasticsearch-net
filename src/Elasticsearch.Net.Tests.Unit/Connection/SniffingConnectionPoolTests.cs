@@ -169,5 +169,65 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//var nowCall = A.CallTo(() => fake.Resolve<IDateTimeProvider>().Sniff(A<Uri>._, A<int>._));
 			}
 		}
+		[Test]
+		public void HostsReturnedBySniffAreVisited()
+		{
+			using (var fake = new AutoFake())
+			{
+				var dateTimeProvider = fake.Resolve<IDateTimeProvider>();
+				var nowCall = A.CallTo(()=>dateTimeProvider.Now());
+				nowCall.Returns(DateTime.UtcNow);
+
+				var connectionPool = new SniffingConnectionPool(new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201")
+				}, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SnifsOnConnectionFault();
+				fake.Provide<IConnectionConfigurationValues>(config);
+				fake.Provide<ITransport>(fake.Resolve<Transport>());
+				var connection = fake.Resolve<IConnection>();
+				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._, A<int>._));
+				sniffCall.Returns(new List<Uri>()
+				{
+					new Uri("http://localhost:9204"),
+					new Uri("http://localhost:9203"),
+					new Uri("http://localhost:9202"),
+					new Uri("http://localhost:9201")
+				});
+
+				var seenNodes = new List<Uri>();
+				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
+				getCall.ReturnsNextFromSequence(
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 1
+					ElasticsearchResponse.Create(config, 503, "GET", "/", null, null), //info 2
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 2 retry
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 3
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 4
+					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null) //info 5
+				);
+				getCall.Invokes((Uri u) => seenNodes.Add(u));
+
+				var client1 = fake.Resolve<ElasticsearchClient>();
+				client1.Info(); //info call 1
+				client1.Info(); //info call 2
+				client1.Info(); //info call 3
+				client1.Info(); //info call 4
+				client1.Info(); //info call 5
+
+				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
+				seenNodes.Should().NotBeEmpty().And.HaveCount(6);
+				seenNodes[0].Port.Should().Be(9200);
+				seenNodes[1].Port.Should().Be(9201);
+				//after sniff
+				seenNodes[2].Port.Should().Be(9204);
+				seenNodes[3].Port.Should().Be(9203);
+				seenNodes[4].Port.Should().Be(9202);
+				seenNodes[5].Port.Should().Be(9201);
+
+				//var nowCall = A.CallTo(() => fake.Resolve<IDateTimeProvider>().Sniff(A<Uri>._, A<int>._));
+			}
+		}
 	}
 }

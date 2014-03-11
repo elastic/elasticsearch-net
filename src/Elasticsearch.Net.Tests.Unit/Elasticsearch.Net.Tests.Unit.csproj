@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection\SniffingConnectionPoolTests.cs" />
+    <Compile Include="Connection\ConcurrencyTests.cs" />
     <Compile Include="Connection\StaticConnectionPoolRetryTests.cs" />
     <Compile Include="Connection\RetryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

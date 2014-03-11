@@ -28,10 +28,10 @@ namespace Elasticsearch.Net.Connection.Thrift
 			this._poolSize = Math.Max(1, connectionSettings.MaximumAsyncConnections);
 
 			this._resourceLock = new Semaphore(_poolSize, _poolSize);
-
+			int seed;
 			for (var i = 0; i <= connectionSettings.MaximumAsyncConnections; i++)
 			{
-				var uri = this._connectionSettings.ConnectionPool.GetNext();
+				var uri = this._connectionSettings.ConnectionPool.GetNext(null, out seed);
 				var host = uri.Host;
 				var port = uri.Port;
 				var tsocket = new TSocket(host, port);

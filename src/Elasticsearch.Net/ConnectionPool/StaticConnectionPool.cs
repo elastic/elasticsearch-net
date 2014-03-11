@@ -14,7 +14,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public int MaxRetries { get { return _nodeUris.Count - 1;  } }
 		
-		private int _current = -1;
+		protected int _current = -1;
 		private readonly IDateTimeProvider _dateTimeProvider;
 
 		public StaticConnectionPool(
@@ -31,9 +31,20 @@ namespace Elasticsearch.Net.ConnectionPool
 			_uriLookup = _nodeUris.ToDictionary(k=>k, v=> new EndpointState());
 		}
 
-		public virtual Uri GetNext()
+		public virtual Uri GetNext(int? initialSeed, out int seed)
 		{
-			var initialOffset = Interlocked.Increment(ref _current);
+			//if _current has been reset make sure we ignore any seed
+			//that was given out before the reset
+			if (_current == -1 && initialSeed.HasValue)
+				initialSeed = 0;
+			//always increment the initialSeed so we advance further
+			else if (initialSeed.HasValue)
+				initialSeed += 1;
+
+			//always increment our round robin counter
+			int increment = Interlocked.Increment(ref _current);
+			var initialOffset = initialSeed ?? increment;
+			seed = initialOffset;
 			var count = _nodeUris.Count;
 			int i = initialOffset % count, attempts = 0;
 			Uri uri = null;
@@ -83,6 +94,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public virtual void Sniff(IConnection connection, bool fromStartupHint = false)
 		{
+			this._current = -1;
 			//NOOP on static connection class
 		}
 	}

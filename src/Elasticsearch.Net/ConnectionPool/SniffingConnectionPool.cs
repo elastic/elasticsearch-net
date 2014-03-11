@@ -28,7 +28,8 @@ namespace Elasticsearch.Net.ConnectionPool
 
 			try
 			{
-				var uri = this.GetNext();
+				int seed;
+				var uri = this.GetNext(null, out seed);
 				
 				this._readerWriter.EnterWriteLock();
 				var nodes = connection.Sniff(uri, 50);
@@ -39,6 +40,7 @@ namespace Elasticsearch.Net.ConnectionPool
 				this._uriLookup = nodes.ToDictionary(k => k, v => new EndpointState());
 				if (fromStartupHint)
 					this._seenStartup = true;
+				this._current = -1;
 
 			}
 			finally
@@ -47,12 +49,12 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public override Uri GetNext()
+		public override Uri GetNext(int? initialSeed, out int seed)
 		{
 			try
 			{
 				this._readerWriter.EnterReadLock();
-				return base.GetNext();
+				return base.GetNext(initialSeed, out seed);
 			}
 			finally
 			{
