@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection\SkipDeadNodesTests.cs" />
     <Compile Include="Connection\SniffingConnectionPoolTests.cs" />
     <Compile Include="Connection\ConcurrencyTests.cs" />
     <Compile Include="Connection\StaticConnectionPoolRetryTests.cs" />

@@ -49,7 +49,8 @@ namespace Elasticsearch.Net.ConnectionPool
 				var state = this._uriLookup[uri];
 				lock (state)
 				{
-					if (state.date <= _dateTimeProvider.Now())
+					var now = _dateTimeProvider.Now();
+					if (state.date <= now)
 					{
 						state._attempts = 0;
 						return uri;
@@ -58,10 +59,11 @@ namespace Elasticsearch.Net.ConnectionPool
 				Interlocked.Increment(ref state._attempts);
 				++attempts;
 				i = (++initialOffset) % count;
+				seed = i;
 			} while (attempts < count);
 
 			//could not find a suitable node retrying on node that has been dead longest.
-			return this._nodeUris[0]; //todo random;
+			return this._nodeUris[i]; //todo random;
 		}
 
 		public virtual void MarkDead(Uri uri)
@@ -82,7 +84,8 @@ namespace Elasticsearch.Net.ConnectionPool
 				return;
 			lock (state)
 			{
-				state.date = this._dateTimeProvider.AliveTime(uri, state._attempts);
+				var aliveTime =this._dateTimeProvider.AliveTime(uri, state._attempts); 
+				state.date = aliveTime;
 				state._attempts = 0;
 			}
 		}
