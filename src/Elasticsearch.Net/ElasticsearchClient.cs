@@ -12,9 +12,9 @@ namespace Elasticsearch.Net
 {
 	public partial class ElasticsearchClient : IElasticsearchClient
 	{
-		public IConnection Connection { get; protected set; }
-		public IConnectionConfigurationValues Settings { get; protected set; }
-		public IElasticsearchSerializer Serializer { get; protected set; }
+		public IConnectionConfigurationValues Settings { get { return this.Transport.Settings; } }
+		public IElasticsearchSerializer Serializer { get { return this.Transport.Serializer; } }
+		
 		protected IStringifier Stringifier { get; set; }
 		protected ITransport Transport { get; set; }
 
@@ -29,12 +29,11 @@ namespace Elasticsearch.Net
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
-			this.Settings = settings;
-			this.Connection = connection ?? new HttpConnection(settings);
-			this.Serializer = serializer ?? new ElasticsearchDefaultSerializer();
-			((IConnectionConfigurationValues) this.Settings).Serializer = this.Serializer;
-			this.Transport = transport ?? new Transport(settings, this.Connection, this.Serializer);
+			this.Transport = transport ?? new Transport(settings, connection, serializer);
 			this.Stringifier = stringifier ?? new Stringifier();
+			
+			//neccessary to pass the serializer to ElasticsearchResponse
+			this.Settings.Serializer = this.Transport.Serializer;
 		}
 
 		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)

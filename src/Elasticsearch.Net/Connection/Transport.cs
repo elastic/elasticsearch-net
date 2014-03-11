@@ -12,12 +12,16 @@ namespace Elasticsearch.Net.Connection
 {
 	public class Transport : ITransport
 	{
-		private readonly IConnectionConfigurationValues _configurationValues;
-		private readonly IConnection _connection;
-		private readonly IElasticsearchSerializer _serializer;
+		protected internal readonly IConnectionConfigurationValues _configurationValues;
+		protected internal readonly IConnection _connection;
+		protected internal readonly IElasticsearchSerializer _serializer;
+
 		private readonly IConnectionPool _connectionPool;
 		private IDateTimeProvider _dateTimeProvider;
 		private DateTime? _lastSniff = null;
+
+		public IConnectionConfigurationValues Settings { get { return _configurationValues; } }
+		public IElasticsearchSerializer Serializer { get { return _serializer; } }
 
 		public Transport(
 			IConnectionConfigurationValues configurationValues,
@@ -26,11 +30,12 @@ namespace Elasticsearch.Net.Connection
 			IDateTimeProvider dateTimeProvider = null
 			)
 		{
-			_dateTimeProvider = dateTimeProvider;
-			this._connection = connection;
 			this._configurationValues = configurationValues;
+			this._connection = connection?? new HttpConnection(configurationValues);
 			this._serializer = serializer ?? new ElasticsearchDefaultSerializer();
 			this._connectionPool = this._configurationValues.ConnectionPool;
+
+			//TODO: take the datetimeprovider from the connection pool?
 			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
 			if (this._configurationValues.SniffsOnStartup)
@@ -61,6 +66,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			return this._configurationValues.MaxRetries.GetValueOrDefault(this._connectionPool.MaxRetries);
 		}
+
 
 		public ElasticsearchResponse DoRequest(
 			string method,
