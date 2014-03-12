@@ -200,6 +200,22 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
+
+	    public class Foo
+	    {
+	        public int Id { get; set; }
+            [ElasticProperty(AddSortField = true, SortAnalyzer = "simple")]
+	        public string Name { get; set; }
+	    }
+
+	    [Test]
+	    public void SortAnalyzeryReadFromAttribute()
+	    {
+            var result = _client.Map<Foo>(m => m.MapFromAttributes());
+            this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+	        
+	    }
+
 		[Test]
 		public void GeoPointProperty()
 		{
@@ -215,6 +231,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
+
 		[Test]
 		public void GeoShapeProperty()
 		{
