@@ -13,6 +13,9 @@ namespace Elasticsearch.Net.Connection
 		//string Host { get; }
 		//int Port { get; }
 		int Timeout { get; }
+		int? PingTimeout { get; }
+		int? DeadTimeout { get; }
+		int? MaxDeadTimeout { get; }
 		int? MaxRetries { get; }
 		string ProxyAddress { get; }
 		string ProxyUsername { get; }
@@ -38,6 +41,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		TimeSpan? SniffInformationLifeSpan { get; }
 		
+
 		/// <summary>
 		/// Append these query string parameters automatically to every request
 		/// </summary>

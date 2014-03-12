@@ -20,7 +20,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// <summary>
 		/// Mark the specified Uri as dead
 		/// </summary>
-		void MarkDead(Uri uri);
+		void MarkDead(Uri uri, int? deadTimeout = null, int? maxDeadtimeout = null);
 
 		/// <summary>
 		/// Bring the specified uri back to life.

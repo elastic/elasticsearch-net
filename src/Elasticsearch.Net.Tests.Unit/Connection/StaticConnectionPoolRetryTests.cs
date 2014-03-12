@@ -197,7 +197,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				var calls = _uris.Select(u =>
 					A.CallTo(()=> dateTimeProvider.DeadTime(
 						A<Uri>.That.Matches(uu=>uu.Port == u.Port),
-						A<int>._
+						A<int>._, A<int?>._, A<int?>._
 					))).ToList();
 		
 				//all the fake mark dead calls return 60 seconds into the future
@@ -234,7 +234,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				//Setting up a datetime provider so that can track dead/alive marks
 				var dateTimeProvider = fake.Resolve<IDateTimeProvider>();
 				A.CallTo(() => dateTimeProvider.Now()).Returns(DateTime.UtcNow);
-				var markDeadCall = A.CallTo(() => dateTimeProvider.DeadTime(A<Uri>._, A<int>._));
+				var markDeadCall = A.CallTo(() => dateTimeProvider.DeadTime(A<Uri>._, A<int>._, A<int?>._, A<int?>._));
 				var markAliveCall = A.CallTo(() => dateTimeProvider.AliveTime(A<Uri>._, A<int>._));
 				markDeadCall.Returns(DateTime.UtcNow.AddSeconds(60));
 				markAliveCall.Returns(new DateTime());
@@ -292,9 +292,9 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				var dateTimeProvider = fake.Resolve<IDateTimeProvider>();
 				A.CallTo(() => dateTimeProvider.Now()).Returns(DateTime.UtcNow);
 				var markOthersDeadCall = A.CallTo(() => dateTimeProvider
-					.DeadTime(A<Uri>.That.Not.Matches(u=>u.Port == 9203), A<int>._));
+					.DeadTime(A<Uri>.That.Not.Matches(u=>u.Port == 9203), A<int>._, A<int?>._, A<int?>._));
 				var markLastDead = A.CallTo(() => dateTimeProvider
-					.DeadTime(A<Uri>.That.Matches(u=>u.Port == 9203), A<int>._));
+					.DeadTime(A<Uri>.That.Matches(u=>u.Port == 9203), A<int>._, A<int?>._, A<int?>._));
 				var markOthersAliveCall = A.CallTo(() => dateTimeProvider
 					.AliveTime(A<Uri>.That.Not.Matches(u=>u.Port == 9203), A<int>._));
 				var markLastAlive = A.CallTo(() => dateTimeProvider

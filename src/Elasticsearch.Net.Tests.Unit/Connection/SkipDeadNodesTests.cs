@@ -46,7 +46,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				A.CallTo(()=>dateTimeProvider.AliveTime(A<Uri>._, A<int>._))
 					.Returns(new DateTime());
-				A.CallTo(() => dateTimeProvider.DeadTime(A<Uri>._, A<int>._))
+				A.CallTo(() => dateTimeProvider.DeadTime(A<Uri>._, A<int>._, A<int?>._, A<int?>._))
 					.Returns(DateTime.UtcNow.AddMinutes(1));
 				//make sure the transport layer uses a different datetimeprovider
 				fake.Provide<IDateTimeProvider>(new DateTimeProvider());
@@ -106,7 +106,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 		
 		[Test]
-		public  async void DeadNodesAreNotVisited_Async()
+		public async void DeadNodesAreNotVisited_Async()
 		{
 			using (var fake = new AutoFake())
 			{
@@ -128,7 +128,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				);
 				A.CallTo(()=>dateTimeProvider.AliveTime(A<Uri>._, A<int>._))
 					.Returns(new DateTime());
-				A.CallTo(() => dateTimeProvider.DeadTime(A<Uri>._, A<int>._))
+				A.CallTo(() => dateTimeProvider.DeadTime(A<Uri>._, A<int>._, A<int?>._, A<int?>._))
 					.Returns(DateTime.UtcNow.AddMinutes(1));
 				//make sure the transport layer uses a different datetimeprovider
 				fake.Provide<IDateTimeProvider>(new DateTimeProvider());

@@ -32,6 +32,9 @@ namespace Elasticsearch.Net.Connection
 		//public string Host { get; private set; }
 		//public int Port { get; private set; }
 		public int Timeout { get; private set; }
+		public int? PingTimeout { get; private set; }
+		public int? DeadTimeout { get; private set; }
+		public int? MaxDeadTimeout { get; private set; }
 		public string ProxyUsername { get; private set; }
 		public string ProxyPassword { get; private set; }
 		public string ProxyAddress { get; private set; }
@@ -119,6 +122,37 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
+		/// <summary>
+		/// This is a separate timeout for Ping() requests. A ping should fail as fast as possible.
+		/// </summary>
+		/// <param name="timeout">The ping timeout in milliseconds defaults to 50</param>
+		public T SetPingTimeout(int timeout)
+		{
+			this.PingTimeout = timeout;
+			return (T) this;
+		}
+
+		/// <summary>
+		/// Sets the default dead timeout factor when a node has been marked dead.
+		/// </summary>
+		/// <remarks>Some connection pools may use a flat timeout whilst others take this factor and increase it exponentially</remarks>
+		/// <param name="timeout"></param>
+		public T SetDeadTimeout(int timeout)
+		{
+			this.DeadTimeout = timeout;
+			return (T) this;
+		}
+
+		/// <summary>
+		/// Sets the maximum time a node can be marked dead. 
+		/// Different implementations of IConnectionPool may choose a different default.
+		/// </summary>
+		/// <param name="timeout">The timeout in milliseconds</param>
+		public T SetMaxDeadTimeout(int timeout)
+		{
+			this.MaxDeadTimeout = timeout;
+			return (T) this;
+		}
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. 

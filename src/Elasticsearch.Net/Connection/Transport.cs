@@ -116,9 +116,10 @@ namespace Elasticsearch.Net.Connection
 			var maxRetries = this.GetMaximumRetries();
 			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times."
 				.F( method, path, retried);
-			this._connectionPool.MarkDead(baseUri);
+			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
 			if (this._configurationValues.SniffsOnConnectionFault && retried == 0)
 				this.Sniff();
+
 			if (retried < maxRetries)
 			{
 				return this.DoRequest(method, path, data, null, ++retried, initialSeed);
@@ -181,7 +182,7 @@ namespace Elasticsearch.Net.Connection
 			var maxRetries = this.GetMaximumRetries();
 			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times."
 				.F( method, path, retried);
-			this._connectionPool.MarkDead(baseUri);
+			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
 			if (this._configurationValues.SniffsOnConnectionFault && retried == 0)
 				this.Sniff();
 			if (retried < maxRetries)

@@ -75,12 +75,12 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public override void MarkDead(Uri uri)
+		public override void MarkDead(Uri uri, int? deadTimeout, int? maxDeadTimeout)
 		{
 			try
 			{
 				this._readerWriter.EnterReadLock();
-				base.MarkDead(uri);
+				base.MarkDead(uri, deadTimeout, maxDeadTimeout);
 			}
 			finally
 			{

@@ -67,14 +67,14 @@ namespace Elasticsearch.Net.ConnectionPool
 			return this._nodeUris[i]; 
 		}
 
-		public virtual void MarkDead(Uri uri)
+		public virtual void MarkDead(Uri uri, int? deadTimeout, int? maxDeadTimeout)
 		{	
 			EndpointState state = null;
 			if (!this._uriLookup.TryGetValue(uri, out state))
 				return;
 			lock(state)
 			{
-				state.date = this._dateTimeProvider.DeadTime(uri, state._attempts);
+				state.date = this._dateTimeProvider.DeadTime(uri, state._attempts, deadTimeout, maxDeadTimeout);
 			}
 		}
 
