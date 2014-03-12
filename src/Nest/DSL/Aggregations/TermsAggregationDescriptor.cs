@@ -89,7 +89,7 @@ namespace Nest
 	
 		public TermsAggregationDescriptor<T> OrderDescending(string key)
 		{
-			this._Order = new Dictionary<string, string> { {key, "asc"}};
+			this._Order = new Dictionary<string, string> { {key, "desc"}};
 			return this;
 		}
 
