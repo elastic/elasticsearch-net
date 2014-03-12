@@ -7,6 +7,7 @@ using System.Net;
 using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Text.RegularExpressions;
+using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.HttpClient;
 using Elasticsearch.Net.JsonNet;
 using Elasticsearch.Net.ServiceStackText;
@@ -17,7 +18,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 {
 	public class YamlTestsBase
 	{
-		protected static readonly IElasticsearchClient _client;
+		protected static readonly ElasticsearchClient _client;
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
@@ -30,13 +31,13 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
-			var settings = new ElasticsearchConnectionSettings(uri).UsePrettyResponses();
+			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
 			_client = new ElasticsearchClient(settings);
 			var infoResponse = _client.Info();
 			dynamic info = infoResponse.Response;
 			_versionNumber = new Version(info.version.number);
-		}
 
+		}
 
 		public YamlTestsBase()
 		{

@@ -10,17 +10,16 @@ namespace Elasticsearch.Net.Connection.HttpClient
 {
     public class ElasticsearchHttpClient : IConnection
     {
-	    private IConnectionSettings2 _settings;
+	    private IConnectionConfigurationValues _settings;
 
-	    public ElasticsearchHttpClient(IConnectionSettings2 settings)
+	    public ElasticsearchHttpClient(IConnectionConfigurationValues settings)
 	    {
 		    _settings = settings;
 	    }
 
-	    public ElasticsearchResponse DoSyncRequest(string method, string path, byte[] data = null)
+	    public ElasticsearchResponse DoSyncRequest(string method, Uri uri, byte[] data = null)
 	    {
 		    var client = new System.Net.Http.HttpClient();
-		    var uri = new Uri(this._settings.Uri, path);
 		    HttpResponseMessage response = null;
 		    byte[] result = null;
 		    HttpContent content = null;
@@ -54,68 +53,78 @@ namespace Elasticsearch.Net.Connection.HttpClient
 
 
 
-	    public Task<ElasticsearchResponse> Get(string path)
+	    public Task<ElasticsearchResponse> Get(Uri uri)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse GetSync(string path)
+	    public ElasticsearchResponse GetSync(Uri uri)
 	    {
-		    return this.DoSyncRequest("get", path);
+		    return this.DoSyncRequest("get", uri);
 	    }
 
-	    public Task<ElasticsearchResponse> Head(string path)
+	    public Task<ElasticsearchResponse> Head(Uri uri)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse HeadSync(string path)
+	    public ElasticsearchResponse HeadSync(Uri uri)
 	    {
-		    return this.DoSyncRequest("head", path);
+		    return this.DoSyncRequest("head", uri);
 		    throw new NotImplementedException();
 	    }
 
-	    public Task<ElasticsearchResponse> Post(string path, byte[] data)
-	    {
-		    throw new NotImplementedException();
-	    }
-
-	    public ElasticsearchResponse PostSync(string path, byte[] data)
-	    {
-		    return this.DoSyncRequest("post", path, data);
-		    throw new NotImplementedException();
-	    }
-
-	    public Task<ElasticsearchResponse> Put(string path, byte[] data)
+	    public Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse PutSync(string path, byte[] data)
+	    public ElasticsearchResponse PostSync(Uri uri, byte[] data)
 	    {
-		    return this.DoSyncRequest("put", path, data);
+		    return this.DoSyncRequest("post", uri, data);
 		    throw new NotImplementedException();
 	    }
 
-	    public Task<ElasticsearchResponse> Delete(string path)
-	    {
-		    throw new NotImplementedException();
-	    }
-
-	    public ElasticsearchResponse DeleteSync(string path)
-	    {
-		    return this.DoSyncRequest("delete", path);
-		    throw new NotImplementedException();
-	    }
-
-	    public Task<ElasticsearchResponse> Delete(string path, byte[] data)
+	    public Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse DeleteSync(string path, byte[] data)
+	    public ElasticsearchResponse PutSync(Uri uri, byte[] data)
 	    {
-		    return this.DoSyncRequest("delete", path, data);
+		    return this.DoSyncRequest("put", uri, data);
+		    throw new NotImplementedException();
+	    }
+
+	    public Task<ElasticsearchResponse> Delete(Uri uri)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public ElasticsearchResponse DeleteSync(Uri uri)
+	    {
+		    return this.DoSyncRequest("delete", uri);
+		    throw new NotImplementedException();
+	    }
+
+	    public Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
+	    {
+		    return this.DoSyncRequest("delete", uri, data);
+		    throw new NotImplementedException();
+	    }
+
+	    public bool Ping(Uri uri)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public IList<Uri> Sniff(Uri uri)
+	    {
 		    throw new NotImplementedException();
 	    }
     }

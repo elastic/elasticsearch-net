@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.ConnectionPool;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 
@@ -16,12 +18,17 @@ namespace Nest
 		{
 			uri.ThrowIfNull("uri");
 		}
+
+		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex) : base(connectionPool, defaultIndex)
+		{
+			
+		}
 	}
 
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
-	public class ConnectionSettings<T> : ElasticsearchConnectionSettings<T> , IConnectionSettingsValues 
+	public class ConnectionSettings<T> : ConnectionConfiguration<T> , IConnectionSettingsValues 
 		where T : ConnectionSettings<T> 
 	{
 		private string _defaultIndex;
@@ -48,9 +55,8 @@ namespace Nest
 
 		public ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; private set; }
 
-		public ConnectionSettings(Uri uri, string defaultIndex) : base(uri)
+		public ConnectionSettings(IConnectionPool uri, string defaultIndex) : base(uri)
 		{
-			uri.ThrowIfNull("uri");
 			defaultIndex.ThrowIfNullOrEmpty("defaultIndex");
 
 			this.SetDefaultIndex(defaultIndex);
@@ -62,7 +68,11 @@ namespace Nest
 
 			this.ModifyJsonSerializerSettings = (j) => { };
 			this.ContractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
-
+		}
+		public ConnectionSettings(Uri uri, string defaultIndex) 
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")), defaultIndex)
+		{
+			
 		}
 
 		/// <summary>
@@ -157,7 +167,7 @@ namespace Nest
 		}
 	}
 
-	public interface IConnectionSettingsValues : IConnectionSettings2
+	public interface IConnectionSettingsValues : IConnectionConfigurationValues
 	{
 		FluentDictionary<Type, string> DefaultIndices { get; }
 		FluentDictionary<Type, string> DefaultTypeNames { get; }
@@ -172,11 +182,11 @@ namespace Nest
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
-	public interface IConnectionSettings : IConnectionSettings<IConnectionSettings>, IConnectionSettings2
+	public interface IConnectionSettings : IConnectionSettings<IConnectionSettings>, IConnectionConfigurationValues
 	{
 		
 	}
-	public interface IConnectionSettings<out T> : IElasticsearchConnectionSettings<T> where T : IConnectionSettings<T>
+	public interface IConnectionSettings<out T> : IConnectionConfiguration<T> where T : IConnectionSettings<T>
 	{
 
 		/// <summary>

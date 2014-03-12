@@ -35,6 +35,7 @@ namespace Nest
 			this.Raw = new ElasticsearchClient(
 				this._connectionSettings, 
 				this.Connection, 
+				null, //default transport
 				this.Serializer, 
 				stringifier
 			);

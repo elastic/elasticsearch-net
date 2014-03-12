@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Serialization
 {
 	public class Stringifier : IStringifier
 	{

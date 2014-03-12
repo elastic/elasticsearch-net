@@ -19,7 +19,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 		private Dictionary<string, string> headers;
 		private Method method;
 		private Dictionary<string, string> parameters;
-		private string uri;
+		private Uri uri;
 
 		public Method Method
 		{
@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			}
 		}
 
-		public string Uri
+		public Uri Uri
 		{
 			get { return uri; }
 			set
@@ -100,7 +100,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 					case 2:
 						if (field.Type == TType.String)
 						{
-							uri = iprot.ReadString();
+							uri = new Uri(iprot.ReadString());
 							__isset.uri = true;
 						}
 						else
@@ -194,7 +194,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 				field.Type = TType.String;
 				field.ID = 2;
 				oprot.WriteFieldBegin(field);
-				oprot.WriteString(uri);
+				oprot.WriteString(uri.PathAndQuery);
 				oprot.WriteFieldEnd();
 			}
 			if (parameters != null && __isset.parameters)

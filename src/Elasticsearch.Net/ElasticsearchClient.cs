@@ -5,19 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Exceptions;
+using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
 	public partial class ElasticsearchClient : IElasticsearchClient
 	{
-		public IConnection Connection { get; protected set; }
-		public IConnectionSettings2 Settings { get; protected set; }
-		public IElasticsearchSerializer Serializer { get; protected set; }
+		public IConnectionConfigurationValues Settings { get { return this.Transport.Settings; } }
+		public IElasticsearchSerializer Serializer { get { return this.Transport.Serializer; } }
+		
 		protected IStringifier Stringifier { get; set; }
+		protected ITransport Transport { get; set; }
 
 		public ElasticsearchClient(
-			IConnectionSettings2 settings, 
+			IConnectionConfigurationValues settings, 
 			IConnection connection = null, 
+			ITransport transport = null,
 			IElasticsearchSerializer serializer = null,
 			IStringifier stringifier = null
 			)
@@ -25,11 +29,11 @@ namespace Elasticsearch.Net
 			if (settings == null)
 				throw new ArgumentNullException("settings");
 
-			this.Settings = settings;
-			this.Connection = connection ?? new HttpConnection(settings);
-			this.Serializer = serializer ?? new ElasticsearchDefaultSerializer();
-			((IConnectionSettings2) this.Settings).Serializer = this.Serializer;
+			this.Transport = transport ?? new Transport(settings, connection, serializer);
 			this.Stringifier = stringifier ?? new Stringifier();
+			
+			//neccessary to pass the serializer to ElasticsearchResponse
+			this.Settings.Serializer = this.Transport.Serializer;
 		}
 
 		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)
@@ -57,67 +61,13 @@ namespace Elasticsearch.Net
 
 		protected ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
-			if (queryString != null)
-				path += queryString.ToQueryString();
-
-			var postData = PostData(data);
-
-			switch (method.ToLowerInvariant())
-			{
-				case "post": return this.Connection.PostSync(path, postData);
-				case "put": return this.Connection.PutSync(path, postData);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this.Connection.DeleteSync(path)
-						: this.Connection.DeleteSync(path, postData);
-				case "head": return this.Connection.HeadSync(path);
-				case "get": return this.Connection.GetSync(path);
-			}
-
-			throw new Exception("Unknown HTTP method " + method);
+			return this.Transport.DoRequest(method, path, data, queryString);
 		}
 
-		private byte[] PostData(object data)
-		{
-			var bytes = data as byte[];
-			if (bytes != null)
-				return bytes;
-
-			var s = data as string;
-			if (s != null)
-				return s.Utf8Bytes();
-			if (data == null) return null;
-			var ss = data as IEnumerable<string>;
-			if (ss != null)
-				return (string.Join("\n", ss) + "\n").Utf8Bytes();
-			
-			var so = data as IEnumerable<object>;
-			if (so == null)
-				return this.Serializer.Serialize(data);
-			var joined = string.Join("\n", so
-				.Select(soo => this.Serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
-			return joined.Utf8Bytes();
-		}
 
 		protected Task<ElasticsearchResponse> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
 		{
-			if (queryString != null)
-				path += queryString.ToQueryString();
-
-			var postData = PostData(data);
-
-			switch (method.ToLowerInvariant())
-			{
-				case "post": return this.Connection.Post(path, postData);
-				case "put": return this.Connection.Put(path, postData);
-				case "delete":
-					return postData == null || postData.Length == 0
-						? this.Connection.Delete(path)
-						: this.Connection.Delete(path, postData);
-				case "head": return this.Connection.Head(path);
-				case "get": return this.Connection.Get(path);
-			}
-			throw new Exception("Unknown HTTP method " + method);
+			return this.Transport.DoRequestAsync(method, path, data, queryString);
 		}
 	}
 }

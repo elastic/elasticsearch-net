@@ -14,12 +14,12 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse _fixedResult;
 		private readonly byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
 
-		public InMemoryConnection(IConnectionSettings2 settings)
+		public InMemoryConnection(IConnectionConfigurationValues settings)
 			: base(settings)
 		{
 
 		}
-		public InMemoryConnection(IConnectionSettings2 settings, ElasticsearchResponse fixedResult)
+		public InMemoryConnection(IConnectionConfigurationValues settings, ElasticsearchResponse fixedResult)
 			: base(settings)
 		{
 			this._fixedResult = fixedResult;

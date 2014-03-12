@@ -1,26 +1,33 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connection
 {
 	public interface IConnection
 	{
-		Task<ElasticsearchResponse> Get(string path);
-		ElasticsearchResponse GetSync(string path);
+		Task<ElasticsearchResponse> Get(Uri uri);
+		ElasticsearchResponse GetSync(Uri uri);
 
-		Task<ElasticsearchResponse> Head(string path);
-		ElasticsearchResponse HeadSync(string path);
+		Task<ElasticsearchResponse> Head(Uri uri);
+		ElasticsearchResponse HeadSync(Uri uri);
 
-		Task<ElasticsearchResponse> Post(string path, byte[] data);
-		ElasticsearchResponse PostSync(string path, byte[] data);
+		Task<ElasticsearchResponse> Post(Uri uri, byte[] data);
+		ElasticsearchResponse PostSync(Uri uri, byte[] data);
 
-		Task<ElasticsearchResponse> Put(string path, byte[] data);
-		ElasticsearchResponse PutSync(string path, byte[] data);
+		Task<ElasticsearchResponse> Put(Uri uri, byte[] data);
+		ElasticsearchResponse PutSync(Uri uri, byte[] data);
 
-		Task<ElasticsearchResponse> Delete(string path);
-		ElasticsearchResponse DeleteSync(string path);
+		Task<ElasticsearchResponse> Delete(Uri uri);
+		ElasticsearchResponse DeleteSync(Uri uri);
 
-		Task<ElasticsearchResponse> Delete(string path, byte[] data);
-		ElasticsearchResponse DeleteSync(string path, byte[] data);
+		Task<ElasticsearchResponse> Delete(Uri uri, byte[] data);
+		ElasticsearchResponse DeleteSync(Uri uri, byte[] data);
+
+		bool Ping(Uri uri);
+		IList<Uri> Sniff(Uri uri);
+
 	}
 }

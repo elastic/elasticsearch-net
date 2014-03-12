@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net.Serialization;
 using Newtonsoft.Json;
 
 namespace Elasticsearch.Net.JsonNet

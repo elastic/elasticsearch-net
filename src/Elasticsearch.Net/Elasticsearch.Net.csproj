@@ -44,19 +44,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\Connection.cs" />
+    <Compile Include="Providers\DateTimeProvider.cs" />
+    <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Connection\ConnectionError.cs" />
-    <Compile Include="Connection\ConnectionException.cs" />
-    <Compile Include="Domain\ElasticsearchConnectionSettings.cs" />
+    <Compile Include="Exceptions\ConnectionException.cs" />
+    <Compile Include="Connection\ConnectionConfiguration.cs" />
+    <Compile Include="ConnectionPool\EndpointState.cs" />
     <Compile Include="Connection\ConnectionState.cs" />
+    <Compile Include="ConnectionPool\IConnectionPool.cs" />
+    <Compile Include="Providers\IDateTimeProvider.cs" />
+    <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
+    <Compile Include="Providers\Sniffer.cs" />
+    <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
+    <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
+    <Compile Include="Connection\Transport.cs" />
+    <Compile Include="Connection\ITransport.cs" />
     <Compile Include="Domain\ElasticsearchResponse.cs" />
-    <Compile Include="Connection\ConnectionStatusTracer.cs" />
+    <Compile Include="Connection\ElasticsearchResponseTracer.cs" />
     <Compile Include="Connection\IConnection.cs" />
-    <Compile Include="Domain\IElasticsearchConnectionSettings.cs" />
+    <Compile Include="Connection\IConnectionConfigurationValues.cs" />
+    <Compile Include="Connection\IConnectionConfiguration.cs" />
     <Compile Include="Connection\InMemoryConnection.cs" />
     <Compile Include="ElasticsearchClient.Generated.cs" />
     <Compile Include="Domain\ElasticsearchDynamic.cs" />
     <Compile Include="Domain\ElasticsearchDynamicValue.cs" />
+    <Compile Include="Exceptions\OutOfNodesException.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />

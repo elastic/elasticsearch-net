@@ -27,6 +27,14 @@ namespace CodeGeneration.LowLevelClient
 			ApiGenerator.GenerateRawDispatch(spec);
 
 			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count());
+
+			var x  = GetT<string>();
+		}
+
+
+		static T GetT<T>()
+		{
+			return default(T);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,6 +9,7 @@ using System.IO;
 using System.Net;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Serialization;
 
 
 namespace Elasticsearch.Net
@@ -21,7 +23,7 @@ namespace Elasticsearch.Net
 		public ConnectionError Error { get; protected internal set; }
 		public string RequestMethod { get; protected internal set; }
 		public string RequestUrl { get; protected internal set; }
-		public IConnectionSettings2 Settings { get; protected internal set; }
+		public IConnectionConfigurationValues Settings { get; protected internal set; }
 
 		private string _result;
 		public string Result
@@ -31,10 +33,27 @@ namespace Elasticsearch.Net
 
 		public byte[] ResultBytes { get; protected internal set; }
 		public byte[] Request { get; protected internal set; }
+
+		public int? HttpStatusCode { get; protected internal set; }
+
 		public IElasticsearchSerializer Serializer { get; protected internal set; }
 
 		private static readonly byte _startAccolade = (byte)'{';
 		private ElasticsearchDynamic _response;
+
+		/// <summary>
+		/// If the response is succesful or has a known error (400-500 range)
+		/// The client should not retry this call
+		/// </summary>
+		internal bool SuccessOrKnownError
+		{
+			get
+			{
+				return this.Success ||
+					(this.HttpStatusCode.HasValue 
+					&& this.HttpStatusCode.Value != 503 && (this.HttpStatusCode.Value >= 400 && this.HttpStatusCode.Value < 599));
+			}
+		}
 
 		public ElasticsearchDynamic Response
 		{
@@ -53,15 +72,13 @@ namespace Elasticsearch.Net
 
 
 
-		//TODO probably nicer if we make this factory ConnectionStatus.Error() and ConnectionStatus.Valid()
-		//and make these constructors private.
-		protected ElasticsearchResponse(IConnectionSettings2 settings)
+		protected ElasticsearchResponse(IConnectionConfigurationValues settings)
 		{
 			this.Settings = settings;
-			this.Serializer = settings.Serializer; //TODO or default
+			this.Serializer = settings.Serializer; 
 		}
 
-		public static ElasticsearchResponse CreateError(IConnectionSettings2 settings, Exception e, string method, string path, byte[] request)
+		public static ElasticsearchResponse CreateError(IConnectionConfigurationValues settings, Exception e, string method, string path, byte[] request)
 		{
 			var cs = new ElasticsearchResponse(settings, e);
 			cs.Request = request;
@@ -69,7 +86,7 @@ namespace Elasticsearch.Net
 			cs.RequestMethod = method;
 			return cs;
 		}
-		public static ElasticsearchResponse Create(IConnectionSettings2 settings, int statusCode, string method, string path, byte[] request, byte[] response)
+		public static ElasticsearchResponse Create(IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, byte[] response)
 		{
 			var cs = new ElasticsearchResponse(settings, statusCode, response);
 			cs.Request = request;
@@ -79,14 +96,16 @@ namespace Elasticsearch.Net
 		}
 
 
-		private ElasticsearchResponse(IConnectionSettings2 settings, Exception e) : this(settings)
+		private ElasticsearchResponse(IConnectionConfigurationValues settings, Exception e) : this(settings)
 		{
 			this.Success = false;
 			this.Error = new ConnectionError(e);
 			if (this.Error.ResponseReadFromWebException != null)
 				this.ResultBytes = this.Error.ResponseReadFromWebException;
+			if (this.Error.HttpStatusCode != null)
+				this.HttpStatusCode = (int) this.Error.HttpStatusCode;
 		}
-		private ElasticsearchResponse(IConnectionSettings2 settings, int statusCode, byte[] response = null) : this(settings)
+		private ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode, byte[] response = null) : this(settings)
 		{
 			this.Success = statusCode >= 200 && statusCode < 300;
 			if (!this.Success)
@@ -95,6 +114,7 @@ namespace Elasticsearch.Net
 				this.Error = new ConnectionError(exception);
 			}
 			this.ResultBytes = response;
+			this.HttpStatusCode = statusCode;
 		}
 	
 
@@ -119,7 +139,7 @@ namespace Elasticsearch.Net
 			var e = r.Error;
 			var print = _printFormat.F(
 			  Environment.NewLine,
-			  e != null ? e.HttpStatusCode : HttpStatusCode.OK,
+			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
 			  r.RequestMethod,
 			  r.RequestUrl,
 			  r.Request,
