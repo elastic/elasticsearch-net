@@ -1,4 +1,3 @@
-
 Repository for both the offical low level client `Elasticsearch.Net` as the high level opiniated `NEST` client.
 
 #[Elasticsearch.Net](src/Elasticsearch.Net)
@@ -12,11 +11,11 @@ Repository for both the offical low level client `Elasticsearch.Net` as the high
 * 
 [Read more here](src/Elasticsearch.Net)
 
-#[NEST](src/NEST)
+#[NEST](tree/master/src/Nest#nest-)
 * High level client that internally uses the low level client.
 * Maps requests and response to strongly typed objects with a fluent interface to build them.
 * Comes with a very powerful query dsl thats maps one-to-one with Elasticsearch.
 * Takes advantage of .NET features where they make sense (i.e: covariant `IEnumerable<T>` result types, inferring typenames and indexnames automatically)
 * All calls have async variants
 
-[Read more here](src/NEST)
+[Read more here](tree/master/src/Nest#nest-)
