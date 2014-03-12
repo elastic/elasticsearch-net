@@ -55,7 +55,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.ServiceSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.HttpClient", "Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj", "{A69322FD-B874-44EF-ABE0-63F4A7B5593E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Tests.Unit", "Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj", "{C54FFD67-C452-4DC4-A47A-663ECA98A38F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Tests.Unit", "Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj", "{C54FFD67-C452-4DC4-A47A-663ECA98A38F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

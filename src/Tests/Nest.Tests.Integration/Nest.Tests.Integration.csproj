@@ -134,7 +134,7 @@
     <Compile Include="Integration\Query\TermQueryDynamic.cs" />
     <Compile Include="Mapping\NotAnalyzedTest.cs" />
     <Compile Include="Reproduce\Reproduce487Tests.cs" />
-    <Compile Include="Reproduce\Reproduce437.cs" />
+    <Compile Include="Reproduce\Reproduce437Tests.cs" />
     <Compile Include="Reproduce\Reproduce450Tests.cs" />
     <Compile Include="Reproduce\Reproduce389Tests.cs" />
     <Compile Include="Reproduce\Reproduce346Tests.cs" />

@@ -25,6 +25,7 @@ namespace Elasticsearch.Net.Connection
 			ServicePointManager.Expect100Continue = false;
 			ServicePointManager.DefaultConnectionLimit = 10000;
 		}
+
 		public HttpConnection(IConnectionConfigurationValues settings)
 		{
 			if (settings == null)
