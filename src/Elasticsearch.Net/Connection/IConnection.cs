@@ -26,8 +26,8 @@ namespace Elasticsearch.Net.Connection
 		Task<ElasticsearchResponse> Delete(Uri uri, byte[] data);
 		ElasticsearchResponse DeleteSync(Uri uri, byte[] data);
 
-		bool Ping(Uri uri, int connectTimeout);
-		IList<Uri> Sniff(Uri uri, int connectTimeout);
+		bool Ping(Uri uri);
+		IList<Uri> Sniff(Uri uri);
 
 	}
 }

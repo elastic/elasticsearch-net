@@ -18,9 +18,10 @@ namespace Elasticsearch.Net.ConnectionPool
 			_uri = uri;
 		}
 
-		public Uri GetNext(int? initialSeed, out int seed)
+		public Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
 		{
 			seed = 0;
+			shouldPingHint = false;
 			return _uri;
 		}
 

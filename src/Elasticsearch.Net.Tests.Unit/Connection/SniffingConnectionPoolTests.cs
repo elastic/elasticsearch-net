@@ -33,7 +33,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var param = new TypedParameter(typeof(IDateTimeProvider), null);
 				fake.Provide<ITransport, Transport>(param);
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._, A<int>._));
+				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
 				var client1 = fake.Resolve<ElasticsearchClient>(); 
 				var client2 = fake.Resolve<ElasticsearchClient>(); 
 				var client3 = fake.Resolve<ElasticsearchClient>(); 
@@ -66,7 +66,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(config);
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._, A<int>._));
+				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
 				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
 				getCall.Returns(ElasticsearchResponse.Create(config, 200, "GET", "/", null, null));
 
@@ -106,7 +106,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(config);
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._, A<int>._));
+				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
 				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
 				getCall.ReturnsNextFromSequence(
 					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 1
@@ -146,7 +146,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(config);
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._, A<int>._));
+				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
 				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
 				getCall.ReturnsNextFromSequence(
 					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 1
@@ -188,7 +188,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<IConnectionConfigurationValues>(config);
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
-				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._, A<int>._));
+				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
 				sniffCall.Returns(new List<Uri>()
 				{
 					new Uri("http://localhost:9204"),

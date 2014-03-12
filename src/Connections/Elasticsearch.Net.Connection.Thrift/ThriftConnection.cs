@@ -28,10 +28,10 @@ namespace Elasticsearch.Net.Connection.Thrift
 			this._poolSize = Math.Max(1, connectionSettings.MaximumAsyncConnections);
 
 			this._resourceLock = new Semaphore(_poolSize, _poolSize);
-			int seed;
+			int seed; bool shouldPingHint;
 			for (var i = 0; i <= connectionSettings.MaximumAsyncConnections; i++)
 			{
-				var uri = this._connectionSettings.ConnectionPool.GetNext(null, out seed);
+				var uri = this._connectionSettings.ConnectionPool.GetNext(null, out seed, out shouldPingHint);
 				var host = uri.Host;
 				var port = uri.Port;
 				var tsocket = new TSocket(host, port);
@@ -195,7 +195,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			return this.Execute(restRequest);
 		}
 
-		public bool Ping(Uri uri, int connectTimeout)
+		public bool Ping(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -207,11 +207,11 @@ namespace Elasticsearch.Net.Connection.Thrift
 			return r.Success;
 		}
 
-		public IList<Uri> Sniff(Uri uri, int connectTimeout)
+		public IList<Uri> Sniff(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
-			restRequest.Uri = new Uri(uri,"/_nodes/_all/clear?timeout=" + connectTimeout);
+			restRequest.Uri = new Uri(uri,"/_nodes/_all/clear?timeout=" + this._connectionSettings.PingTimeout.GetValueOrDefault(50));
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");

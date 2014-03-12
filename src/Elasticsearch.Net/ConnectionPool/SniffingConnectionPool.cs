@@ -28,11 +28,11 @@ namespace Elasticsearch.Net.ConnectionPool
 
 			try
 			{
-				int seed;
-				var uri = this.GetNext(null, out seed);
+				int seed; bool shouldPingHint;
+				var uri = this.GetNext(null, out seed, out shouldPingHint);
 				
 				this._readerWriter.EnterWriteLock();
-				var nodes = connection.Sniff(uri, 50);
+				var nodes = connection.Sniff(uri);
 				if (!nodes.HasAny())
 					return;
 
@@ -48,12 +48,12 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public override Uri GetNext(int? initialSeed, out int seed)
+		public override Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
 		{
 			try
 			{
 				this._readerWriter.EnterReadLock();
-				return base.GetNext(initialSeed, out seed);
+				return base.GetNext(initialSeed, out seed, out shouldPingHint);
 			}
 			finally
 			{

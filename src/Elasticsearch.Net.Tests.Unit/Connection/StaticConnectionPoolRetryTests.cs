@@ -60,6 +60,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				//an exception
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Throws<Exception>();
+				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				pingCall.Returns(true);
 				
 				//create a real ElasticsearchClient with it unspecified dependencies
 				//as fakes
@@ -124,6 +126,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				);
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Throws<Exception>();
+				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				pingCall.Returns(true);
 
 				this.ProvideTransport(fake);
 
@@ -159,7 +163,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
 					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
 				);
-				
+				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				pingCall.Returns(true);
 				//setup client
 				this.ProvideTransport(fake);
 				var client = fake.Resolve<ElasticsearchClient>();
@@ -170,6 +175,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 				//original call + 4 retries == 5
 				getCall.MustHaveHappened(Repeated.Exactly.Times(5));
+				//ping must have been send out 4 times to the 4 nodes being used for the first time
+				pingCall.MustHaveHappened(Repeated.Exactly.Times(4));
 
 			}
 		}
@@ -209,8 +216,9 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				getCall.Returns(
 					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null)
 				);
-
 				
+				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				pingCall.Returns(true);
 				this.ProvideTransport(fake);
 				var client = fake.Resolve<ElasticsearchClient>();
 				
@@ -259,6 +267,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
 					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
 				);
+				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				pingCall.Returns(true);
 
 
 				//provide a transport with all the dependencies resolved
@@ -327,6 +337,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null),
 					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
 				);
+				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				pingCall.Returns(true);
 				
 				//provide a transport with all the dependencies resolved
 				this.ProvideTransport(fake);

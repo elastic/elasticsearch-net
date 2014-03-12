@@ -31,7 +31,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			_uriLookup = _nodeUris.ToDictionary(k=>k, v=> new EndpointState());
 		}
 
-		public virtual Uri GetNext(int? initialSeed, out int seed)
+		public virtual Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
 		{
 			var count = _nodeUris.Count;
 			if (initialSeed.HasValue)
@@ -42,6 +42,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			var initialOffset = initialSeed ?? increment;
 			int i = initialOffset % count, attempts = 0;
 			seed = i;
+			shouldPingHint = false;
 			Uri uri = null;
 			do
 			{
@@ -52,6 +53,9 @@ namespace Elasticsearch.Net.ConnectionPool
 					var now = _dateTimeProvider.Now();
 					if (state.date <= now)
 					{
+						if (state._attempts != 0)
+							shouldPingHint = true;
+
 						state._attempts = 0;
 						return uri;
 					}

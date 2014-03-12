@@ -67,23 +67,23 @@ namespace Elasticsearch.Net.Connection
 			return this.DoSynchronousRequest(connection, data);
 		}
 
-		public virtual bool Ping(Uri uri, int connectTimeout)
+		public virtual bool Ping(Uri uri)
 		{
 			var request = this.CreateHttpWebRequest(uri, "HEAD");
-			request.Timeout = connectTimeout;
-			request.ReadWriteTimeout = connectTimeout;
+			request.Timeout = this._ConnectionSettings.PingTimeout.GetValueOrDefault(50);
+			request.ReadWriteTimeout = this._ConnectionSettings.PingTimeout.GetValueOrDefault(50);
 			using (var response = (HttpWebResponse)request.GetResponse())
 			{
 				return response.StatusCode == HttpStatusCode.OK;
 			}
 		}
 
-		public virtual IList<Uri> Sniff(Uri uri, int connectTimeout)
+		public virtual IList<Uri> Sniff(Uri uri)
 		{
-			uri = new Uri(uri, "_nodes/_all/clear?timeout=" + connectTimeout);
+			uri = new Uri(uri, "_nodes/_all/clear?timeout=" + this._ConnectionSettings.PingTimeout.GetValueOrDefault(50));
 			var request = this.CreateHttpWebRequest(uri, "GET");
-			request.Timeout = connectTimeout;
-			request.ReadWriteTimeout = connectTimeout;
+			request.Timeout = this._ConnectionSettings.Timeout;
+			request.ReadWriteTimeout = this._ConnectionSettings.Timeout;
 			using (var response = (HttpWebResponse)request.GetResponse())
 			using (var responseStream = response.GetResponseStream())
 			{

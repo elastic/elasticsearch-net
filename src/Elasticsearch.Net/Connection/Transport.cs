@@ -83,13 +83,16 @@ namespace Elasticsearch.Net.Connection
 
 			var postData = PostData(data);
 			ElasticsearchResponse response = null;
-			
-			int initialSeed;
-			var baseUri = this._connectionPool.GetNext(seed, out initialSeed);
+
+			int initialSeed; bool shouldPingHint;
+			var baseUri = this._connectionPool.GetNext(seed, out initialSeed, out shouldPingHint);
 			bool seenError = false;
 
 			try
 			{
+				if (shouldPingHint && !this._configurationValues.DisablePings)
+					this._connection.Ping(CreateUriToPath(baseUri, ""));
+
 				var uri = CreateUriToPath(baseUri, path);
 				response = _doRequest(method, uri, postData);
 				if (response != null && response.SuccessOrKnownError)
@@ -160,8 +163,19 @@ namespace Elasticsearch.Net.Connection
 			if (queryString != null) path += queryString.ToQueryString();
 
 			var postData = PostData(data);
-			int initialSeed;
-			var baseUri = this._connectionPool.GetNext(seed, out initialSeed);
+			int initialSeed; bool shouldPingHint;
+			var baseUri = this._connectionPool.GetNext(seed, out initialSeed, out shouldPingHint);
+			if (shouldPingHint && !this._configurationValues.DisablePings)
+			{
+				try
+				{
+					this._connection.Ping(CreateUriToPath(baseUri, ""));
+				}
+				catch (Exception e)
+				{
+					return this.RetryRequestAsync(method, path, data, retried, baseUri, initialSeed, e);
+				}
+			}
 			var uri = CreateUriToPath(baseUri, path);
 			return _doRequestAsync(method, uri, postData).ContinueWith(t=>
 			{

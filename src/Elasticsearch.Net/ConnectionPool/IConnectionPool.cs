@@ -13,9 +13,12 @@ namespace Elasticsearch.Net.ConnectionPool
 		int MaxRetries { get; }
 
 		/// <summary>
-		/// Get the next available Uri for a live node
+		/// Gets the next live Uri to perform the request on
 		/// </summary>
-		Uri GetNext(int? initialSeed, out int seed);
+		/// <param name="initialSeed">pass the original seed when retrying, this guarantees that the nodes are walked in a predictable manner when multithreading</param>
+		/// <param name="seed">The seed this call started on</param>
+		/// <returns></returns>
+		Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint);
 
 		/// <summary>
 		/// Mark the specified Uri as dead

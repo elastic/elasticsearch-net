@@ -118,12 +118,12 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 			return _responseGenerator.Create();
 		}
 
-		public bool Ping(Uri uri, int connectTimeout)
+		public bool Ping(Uri uri)
 		{
-			throw new NotImplementedException();
+			return true;
 		}
 
-		public IList<Uri> Sniff(Uri uri, int connectTimeout)
+		public IList<Uri> Sniff(Uri uri)
 		{
 			throw new NotImplementedException();
 		}

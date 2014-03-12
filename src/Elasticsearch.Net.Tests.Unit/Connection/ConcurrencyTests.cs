@@ -122,7 +122,12 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			{
 			}
 
-			public override IList<Uri> Sniff(Uri uri, int connectTimeout)
+			public override bool Ping(Uri uri)
+			{
+				return true;
+			}
+
+			public override IList<Uri> Sniff(Uri uri)
 			{
 				return  _rnd.Next(1, 11) % 3 == 0 ? _uris : _uris2;
 			}

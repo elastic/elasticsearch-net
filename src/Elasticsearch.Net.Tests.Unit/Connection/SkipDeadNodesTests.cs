@@ -77,6 +77,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null) //info 9 - 9202
 				);
 				getCall.Invokes((Uri u) => seenNodes.Add(u));
+				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				pingCall.Returns(true);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				client1.Info(); //info call 1
@@ -100,6 +102,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				seenNodes[6].Port.Should().Be(9201);
 				seenNodes[7].Port.Should().Be(9204);
 				seenNodes[8].Port.Should().Be(9203);
+
+				//4 nodes first time usage + 1 time after the first time 9203 came back to live
+				pingCall.MustHaveHappened(Repeated.Exactly.Times(5));
 
 				//var nowCall = A.CallTo(() => fake.Resolve<IDateTimeProvider>().Sniff(A<Uri>._, A<int>._));
 			}

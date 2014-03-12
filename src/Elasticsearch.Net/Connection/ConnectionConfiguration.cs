@@ -37,6 +37,7 @@ namespace Elasticsearch.Net.Connection
 		public int? MaxDeadTimeout { get; private set; }
 		public string ProxyUsername { get; private set; }
 		public string ProxyPassword { get; private set; }
+		public bool DisablePings { get; private set; }
 		public string ProxyAddress { get; private set; }
 		public int MaximumAsyncConnections { get; private set; }
 		public int? MaxRetries { get; private set; }
@@ -98,6 +99,16 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
+		/// <summary>
+		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
+		/// a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible.
+		/// You can disable these pings globally here if you rather have it fail on the possible slower original request
+		/// </summary>
+		public T DisablePing(bool disable = true)
+		{
+			this.DisablePings = disable;
+			return (T) this;
+		}
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
 		/// </summary>
