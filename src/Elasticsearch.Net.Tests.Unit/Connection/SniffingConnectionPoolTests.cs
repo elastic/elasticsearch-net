@@ -142,7 +142,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				var connectionPool = new SniffingConnectionPool(new[] { new Uri("http://localhost:9200") });
 				var config = new ConnectionConfiguration(connectionPool)
-					.SnifsOnConnectionFault();
+					.SniffOnConnectionFault();
 				fake.Provide<IConnectionConfigurationValues>(config);
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
@@ -184,7 +184,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					new Uri("http://localhost:9201")
 				}, randomizeOnStartup: false);
 				var config = new ConnectionConfiguration(connectionPool)
-					.SnifsOnConnectionFault();
+					.SniffOnConnectionFault();
 				fake.Provide<IConnectionConfigurationValues>(config);
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();

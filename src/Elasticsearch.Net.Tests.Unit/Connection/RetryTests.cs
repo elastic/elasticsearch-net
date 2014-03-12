@@ -23,7 +23,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		//we do not pass a Uri or IConnectionPool so this config
 		//defaults to SingleNodeConnectionPool()
 		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()
-			.SetMaxRetries(_retries);
+			.MaximumRetries(_retries);
 
 		private void ProvideTransport(AutoFake fake)
 		{

@@ -122,7 +122,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				//setup config values with a hight retry count
 				fake.Provide<IConnectionConfigurationValues>(
 					new ConnectionConfiguration(_connectionPool)
-						.SetMaxRetries(7)
+						.MaximumRetries(7)
 				);
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
 				getCall.Throws<Exception>();
@@ -152,7 +152,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				//original call + 4 retries == 5
 				fake.Provide<IConnectionConfigurationValues>(
 					new ConnectionConfiguration(_connectionPool)
-						.SetMaxRetries(4)
+						.MaximumRetries(4)
 				);
 				//set up our GET to / to return 4 503's followed by a 200
 				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
@@ -254,7 +254,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				//set retries to 4 
 				fake.Provide<IConnectionConfigurationValues>(
 					new ConnectionConfiguration(connectionPool)
-						.SetMaxRetries(4) 
+						.MaximumRetries(4) 
 				);
 
 				//fake getsync handler that return a 503 4 times and then a 200

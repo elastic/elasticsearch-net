@@ -38,9 +38,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		{
 			_connectionPool = new SniffingConnectionPool(_uris);
 			_config = new ConnectionConfiguration(_connectionPool)
-				.SnifsOnConnectionFault()
+				.SniffOnConnectionFault()
 				.SniffOnStartup()
-				.SetMaxRetries(5);
+				.MaximumRetries(5);
 		}
 
 		private void ProvideTransport(AutoFake fake)

@@ -27,38 +27,57 @@ namespace Elasticsearch.Net.Connection
 	public class ConnectionConfiguration<T> : IConnectionConfigurationValues
 		where T : ConnectionConfiguration<T>
 	{
-		public IConnectionPool ConnectionPool { get; private set; }
-		//public Uri Uri { get; private set; }
-		//public string Host { get; private set; }
-		//public int Port { get; private set; }
-		public int Timeout { get; private set; }
-		public int? PingTimeout { get; private set; }
-		public int? DeadTimeout { get; private set; }
-		public int? MaxDeadTimeout { get; private set; }
-		public string ProxyUsername { get; private set; }
-		public string ProxyPassword { get; private set; }
-		public bool DisablePings { get; private set; }
-		public string ProxyAddress { get; private set; }
-		public int MaximumAsyncConnections { get; private set; }
-		public int? MaxRetries { get; private set; }
-		public bool UsesPrettyResponses { get; private set; }
-		public bool SniffsOnStartup { get; private set; }
-		public bool SniffsOnConnectionFault { get; private set; }
-		public TimeSpan? SniffInformationLifeSpan { get; private set; }
-		public bool TraceEnabled { get; private set; }
-		public Action<ElasticsearchResponse> ConnectionStatusHandler { get; private set; }
-		public NameValueCollection QueryStringParameters { get; private set; }
-		public bool UriSpecifiedBasicAuth { get; private set; }
+		private IConnectionPool _connectionPool;
+		IConnectionPool IConnectionConfigurationValues.ConnectionPool { get { return _connectionPool; } }
+
+		private int _timeout;
+		int IConnectionConfigurationValues.Timeout { get { return _timeout; }}
+		private int? _pingTimeout;
+		int? IConnectionConfigurationValues.PingTimeout { get{ return _pingTimeout; } }
+
+		private int? _deadTimeout;
+		int? IConnectionConfigurationValues.DeadTimeout { get{ return _deadTimeout; } }
+		private int? _maxDeadTimeout;
+		int? IConnectionConfigurationValues.MaxDeadTimeout { get{ return _maxDeadTimeout; } }
+		private string _proxyUsername;
+		string IConnectionConfigurationValues.ProxyUsername { get{ return _proxyUsername; } }
+		private string _proxyPassword;
+		string IConnectionConfigurationValues.ProxyPassword { get{ return _proxyPassword; } }
+		private bool _disablePings;
+		bool IConnectionConfigurationValues.DisablePings { get{ return _disablePings; } }
+		private string _proxyAddress;
+		string IConnectionConfigurationValues.ProxyAddress { get{ return _proxyAddress; } }
+
+		private int _maximumAsyncConnections;
+		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
+		private int? _maxRetries;
+		int? IConnectionConfigurationValues.MaxRetries { get{ return _maxRetries; } }
+		private bool _usePrettyResponses;
+		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
+		private bool _sniffOnStartup;
+		bool IConnectionConfigurationValues.SniffsOnStartup { get{ return _sniffOnStartup; } }
+		private bool _sniffOnConectionFault;
+		bool IConnectionConfigurationValues.SniffsOnConnectionFault { get{ return _sniffOnConectionFault; } }
+		private TimeSpan? _sniffLifeSpan;
+		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
+		private bool _traceEnabled;
+		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
+		private Action<ElasticsearchResponse> _connectionStatusHandler;
+		Action<ElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
+		private NameValueCollection _queryString;
+		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get{ return _queryString; } }
+
+
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
-			this.Timeout = 60*1000;
+			this._timeout = 60*1000;
 			//this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
 			//this.Uri = uri;
-			this.ConnectionStatusHandler = this.ConnectionStatusDefaultHandler;
-			this.MaximumAsyncConnections = 0;
-			this.ConnectionPool = connectionPool;
+			this._connectionStatusHandler = this.ConnectionStatusDefaultHandler;
+			this._maximumAsyncConnections = 0;
+			this._connectionPool = connectionPool;
 		}
 
 		public ConnectionConfiguration(Uri uri = null) 
@@ -68,25 +87,25 @@ namespace Elasticsearch.Net.Connection
 			//this.Port = uri.Port;
 		}
 
-		public T SetMaxRetries(int maxRetries)
+		public T MaximumRetries(int maxRetries)
 		{
-			this.MaxRetries = maxRetries;
+			this._maxRetries = maxRetries;
 			return (T) this;
 		}
 
-		public T SnifsOnConnectionFault(bool sniffsOnConnectionFault = true)
+		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true)
 		{
-			this.SniffsOnConnectionFault = sniffsOnConnectionFault;
+			this._sniffOnConectionFault = sniffsOnConnectionFault;
 			return (T)this;
 		}
 		public T SniffOnStartup(bool sniffsOnStartup = true)
 		{
-			this.SniffsOnStartup = sniffsOnStartup;
+			this._sniffOnStartup = sniffsOnStartup;
 			return (T)this;
 		}
 		public T SniffLifeSpan(TimeSpan sniffTimeSpan)
 		{
-			this.SniffInformationLifeSpan = sniffTimeSpan;
+			this._sniffLifeSpan = sniffTimeSpan;
 			return (T)this;
 		}
 
@@ -95,7 +114,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T EnableTrace(bool enabled = true)
 		{
-			this.TraceEnabled = enabled;
+			this._traceEnabled = enabled;
 			return (T) this;
 		}
 
@@ -106,7 +125,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T DisablePing(bool disable = true)
 		{
-			this.DisablePings = disable;
+			this._disablePings = disable;
 			return (T) this;
 		}
 		/// <summary>
@@ -114,11 +133,11 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T SetGlobalQueryStringParameters(NameValueCollection queryStringParameters)
 		{
-			if (this.QueryStringParameters != null)
+			if (this._queryString != null)
 			{
-				this.QueryStringParameters.Add(queryStringParameters);
+				this._queryString.Add(queryStringParameters);
 			}
-			this.QueryStringParameters = queryStringParameters;
+			this._queryString = queryStringParameters;
 			return (T) this;
 		}
 
@@ -129,7 +148,7 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="timeout">time out in milliseconds</param>
 		public T SetTimeout(int timeout)
 		{
-			this.Timeout = timeout;
+			this._timeout = timeout;
 			return (T) this;
 		}
 
@@ -139,7 +158,7 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="timeout">The ping timeout in milliseconds defaults to 50</param>
 		public T SetPingTimeout(int timeout)
 		{
-			this.PingTimeout = timeout;
+			this._pingTimeout = timeout;
 			return (T) this;
 		}
 
@@ -150,7 +169,7 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="timeout"></param>
 		public T SetDeadTimeout(int timeout)
 		{
-			this.DeadTimeout = timeout;
+			this._deadTimeout = timeout;
 			return (T) this;
 		}
 
@@ -161,7 +180,7 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="timeout">The timeout in milliseconds</param>
 		public T SetMaxDeadTimeout(int timeout)
 		{
-			this.MaxDeadTimeout = timeout;
+			this._maxDeadTimeout = timeout;
 			return (T) this;
 		}
 		/// <summary>
@@ -171,7 +190,7 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="maximum">defaults to 0 (unbounded)</param>
 		public T SetMaximumAsyncConnections(int maximum)
 		{
-			this.MaximumAsyncConnections = maximum;
+			this._maximumAsyncConnections = maximum;
 			return (T) this;
 		}
 
@@ -181,9 +200,9 @@ namespace Elasticsearch.Net.Connection
 		public T SetProxy(Uri proxyAdress, string username, string password)
 		{
 			proxyAdress.ThrowIfNull("proxyAdress");
-			this.ProxyAddress = proxyAdress.ToString();
-			this.ProxyUsername = username;
-			this.ProxyPassword = password;
+			this._proxyAddress = proxyAdress.ToString();
+			this._proxyUsername = username;
+			this._proxyPassword = password;
 			return (T) this;
 		}
 
@@ -192,7 +211,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T UsePrettyResponses(bool b = true)
 		{
-			this.UsesPrettyResponses = b;
+			this._usePrettyResponses = b;
 			this.SetGlobalQueryStringParameters(new NameValueCollection {{"pretty", b.ToString().ToLowerInvariant()}});
 			return (T) this;
 		}
@@ -208,7 +227,7 @@ namespace Elasticsearch.Net.Connection
 		public T SetConnectionStatusHandler(Action<ElasticsearchResponse> handler)
 		{
 			handler.ThrowIfNull("handler");
-			this.ConnectionStatusHandler = handler;
+			this._connectionStatusHandler = handler;
 			return (T) this;
 		}
 	}
