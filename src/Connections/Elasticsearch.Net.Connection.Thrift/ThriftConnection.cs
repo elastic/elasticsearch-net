@@ -216,7 +216,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
 			var r  = this.Execute(restRequest);
-			using (var memoryStream = new MemoryStream(r.ResultBytes))
+			using (var memoryStream = new MemoryStream(r.Response))
 			{
 				return Sniffer.FromStream(memoryStream, this._connectionSettings.Serializer);
 			}

@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
 			_client = new ElasticsearchClient(settings);
 			var infoResponse = _client.Info();
-			dynamic info = infoResponse.Response;
+			dynamic info = infoResponse.DynamicResult;
 			_versionNumber = new Version(info.version.number);
 
 		}
@@ -79,7 +79,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 				Assert.IsTrue(Regex.IsMatch(this._status.Result, re),
 					"response does not match regex: " + shouldCatch);
 			}
-			this._response = this._status.Response;
+			this._response = this._status.DynamicResult;
 		}
 
 		protected void Skip(string version, string reason)
