@@ -18,7 +18,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatch<ClearCacheDescriptor, ClearCacheQueryString, ShardsOperationResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.IndicesClearCacheDispatch(p)
+				(p, d)=> this.RawDispatch.IndicesClearCacheDispatch<ShardsOperationResponse>(p)
 			);
 		}
 		
@@ -31,7 +31,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<ClearCacheDescriptor, ClearCacheQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.IndicesClearCacheDispatchAsync(p)
+				(p, d)=> this.RawDispatch.IndicesClearCacheDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
 		

@@ -44,7 +44,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 		#region IConnection Members
 
-		public Task<ElasticsearchResponse> Get(Uri uri)
+		public Task<ElasticsearchResponse> Get<T>(Uri uri)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;

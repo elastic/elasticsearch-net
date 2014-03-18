@@ -11,7 +11,7 @@ namespace Nest
 		{
 			return this.Dispatch<DeleteDescriptor<T>, DeleteQueryString, DeleteResponse>(
 				deleteSelector,
-				(p, d) => this.RawDispatch.DeleteDispatch(p)
+				(p, d) => this.RawDispatch.DeleteDispatch<DeleteResponse>(p)
 			);
 		}
 
@@ -19,7 +19,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<DeleteDescriptor<T>, DeleteQueryString, DeleteResponse, IDeleteResponse>(
 				deleteSelector,
-				(p, d) => this.RawDispatch.DeleteDispatchAsync(p)
+				(p, d) => this.RawDispatch.DeleteDispatchAsync<DeleteResponse>(p)
 			);
 		}
 	

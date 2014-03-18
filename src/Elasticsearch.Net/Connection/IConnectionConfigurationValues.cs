@@ -50,7 +50,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Connection status handler that will be called everytime the connection receives anything.
 		/// </summary>
-		Action<ElasticsearchResponse> ConnectionStatusHandler { get; }
+		Action<IElasticsearchResponse> ConnectionStatusHandler { get; }
 
 		/// <summary>
 		/// 

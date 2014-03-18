@@ -8,23 +8,24 @@ namespace Elasticsearch.Net.Connection
 {
 	public interface IConnection
 	{
-		Task<ElasticsearchResponse> Get(Uri uri);
-		ElasticsearchResponse GetSync(Uri uri);
 
-		Task<ElasticsearchResponse> Head(Uri uri);
-		ElasticsearchResponse HeadSync(Uri uri);
+		Task<ElasticsearchResponse<T>> Get<T>(Uri uri, object deserializationState = null);
+		ElasticsearchResponse<T> GetSync<T>(Uri uri, object deserializationState = null);
 
-		Task<ElasticsearchResponse> Post(Uri uri, byte[] data);
-		ElasticsearchResponse PostSync(Uri uri, byte[] data);
+		Task<ElasticsearchResponse<T>> Head<T>(Uri uri);
+		ElasticsearchResponse<T> HeadSync<T>(Uri uri);
 
-		Task<ElasticsearchResponse> Put(Uri uri, byte[] data);
-		ElasticsearchResponse PutSync(Uri uri, byte[] data);
+		Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializationState = null);
+		ElasticsearchResponse<T> PostSync<T>(Uri uri, byte[] data, object deserializationState = null);
 
-		Task<ElasticsearchResponse> Delete(Uri uri);
-		ElasticsearchResponse DeleteSync(Uri uri);
+		Task<ElasticsearchResponse<T>> Put<T>(Uri uri, byte[] data, object deserializationState = null);
+		ElasticsearchResponse<T> PutSync<T>(Uri uri, byte[] data, object deserializationState = null);
 
-		Task<ElasticsearchResponse> Delete(Uri uri, byte[] data);
-		ElasticsearchResponse DeleteSync(Uri uri, byte[] data);
+		Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, object deserializationState = null);
+		ElasticsearchResponse<T> DeleteSync<T>(Uri uri, object deserializationState = null);
+
+		Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, byte[] data, object deserializationState = null);
+		ElasticsearchResponse<T> DeleteSync<T>(Uri uri, byte[] data, object deserializationState = null);
 
 		bool Ping(Uri uri);
 		IList<Uri> Sniff(Uri uri);

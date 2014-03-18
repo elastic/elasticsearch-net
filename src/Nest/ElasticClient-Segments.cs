@@ -12,7 +12,7 @@ namespace Nest
 			segmentsSelector = segmentsSelector ?? (s => s);
 			return this.Dispatch<SegmentsDescriptor, SegmentsQueryString, SegmentsResponse>(
 				segmentsSelector,
-				(p, d) => this.RawDispatch.IndicesSegmentsDispatch(p)
+				(p, d) => this.RawDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
 			);
 		}
 	
@@ -21,7 +21,7 @@ namespace Nest
 			segmentsSelector = segmentsSelector ?? (s => s);
 			return this.DispatchAsync<SegmentsDescriptor, SegmentsQueryString, SegmentsResponse, ISegmentsResponse>(
 				segmentsSelector,
-				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
 			);
 		}
 	}

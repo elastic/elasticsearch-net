@@ -15,7 +15,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatch<IndicesStatusDescriptor, IndicesStatusQueryString, StatusResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatusDispatch(p)
+				(p, d) => this.RawDispatch.IndicesStatusDispatch<StatusResponse>(p)
 			);
 		}
 		public Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null)
@@ -23,7 +23,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<IndicesStatusDescriptor, IndicesStatusQueryString, StatusResponse, IStatusResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatusDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
 			);
 		}
 	}

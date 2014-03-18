@@ -18,32 +18,32 @@ namespace Nest
 	{
 	
 		
-		internal ElasticsearchResponse BulkDispatch(ElasticsearchPathInfo<BulkQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Bulk(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Bulk<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Bulk(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Bulk<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_bulk
 					if (body != null)
-						return this.Raw.Bulk(body,u => pathInfo.QueryString);
+						return this.Raw.Bulk<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPut(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.BulkPut<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /{index}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPut(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.BulkPut<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_bulk
 					if (body != null)
-						return this.Raw.BulkPut(body,u => pathInfo.QueryString);
+						return this.Raw.BulkPut<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -51,32 +51,32 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> BulkDispatchAsync(ElasticsearchPathInfo<BulkQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> BulkDispatchAsync<T>(ElasticsearchPathInfo<BulkQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.BulkAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.BulkAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_bulk
 					if (body != null)
-						return this.Raw.BulkAsync(body,u => pathInfo.QueryString);
+						return this.Raw.BulkAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPutAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.BulkPutAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /{index}/_bulk
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.BulkPutAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.BulkPutAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_bulk
 					if (body != null)
-						return this.Raw.BulkPutAsync(body,u => pathInfo.QueryString);
+						return this.Raw.BulkPutAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -84,362 +84,362 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse CatAliasesDispatch(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatAliasesDispatch<T>(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/aliases/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.CatAliases(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.CatAliases<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/aliases
-					return this.Raw.CatAliases(u => pathInfo.QueryString);
+					return this.Raw.CatAliases<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAliases() into any of the following paths: \r\n - /_cat/aliases\r\n - /_cat/aliases/{name}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatAliasesDispatchAsync(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatAliasesDispatchAsync<T>(ElasticsearchPathInfo<CatAliasesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/aliases/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.CatAliasesAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.CatAliasesAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/aliases
-					return this.Raw.CatAliasesAsync(u => pathInfo.QueryString);
+					return this.Raw.CatAliasesAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAliases() into any of the following paths: \r\n - /_cat/aliases\r\n - /_cat/aliases/{name}");
 		}
 		
 		
-		internal ElasticsearchResponse CatAllocationDispatch(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatAllocationDispatch<T>(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/allocation/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.CatAllocation(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.CatAllocation<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/allocation
-					return this.Raw.CatAllocation(u => pathInfo.QueryString);
+					return this.Raw.CatAllocation<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAllocation() into any of the following paths: \r\n - /_cat/allocation\r\n - /_cat/allocation/{node_id}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatAllocationDispatchAsync(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatAllocationDispatchAsync<T>(ElasticsearchPathInfo<CatAllocationQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/allocation/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.CatAllocationAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.CatAllocationAsync<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/allocation
-					return this.Raw.CatAllocationAsync(u => pathInfo.QueryString);
+					return this.Raw.CatAllocationAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatAllocation() into any of the following paths: \r\n - /_cat/allocation\r\n - /_cat/allocation/{node_id}");
 		}
 		
 		
-		internal ElasticsearchResponse CatCountDispatch(ElasticsearchPathInfo<CatCountQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatCountDispatch<T>(ElasticsearchPathInfo<CatCountQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/count/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatCount(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatCount<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/count
-					return this.Raw.CatCount(u => pathInfo.QueryString);
+					return this.Raw.CatCount<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatCount() into any of the following paths: \r\n - /_cat/count\r\n - /_cat/count/{index}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatCountDispatchAsync(ElasticsearchPathInfo<CatCountQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatCountDispatchAsync<T>(ElasticsearchPathInfo<CatCountQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/count/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatCountAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatCountAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/count
-					return this.Raw.CatCountAsync(u => pathInfo.QueryString);
+					return this.Raw.CatCountAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatCount() into any of the following paths: \r\n - /_cat/count\r\n - /_cat/count/{index}");
 		}
 		
 		
-		internal ElasticsearchResponse CatHealthDispatch(ElasticsearchPathInfo<CatHealthQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatHealthDispatch<T>(ElasticsearchPathInfo<CatHealthQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/health
-					return this.Raw.CatHealth(u => pathInfo.QueryString);
+					return this.Raw.CatHealth<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHealth() into any of the following paths: \r\n - /_cat/health");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatHealthDispatchAsync(ElasticsearchPathInfo<CatHealthQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatHealthDispatchAsync<T>(ElasticsearchPathInfo<CatHealthQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/health
-					return this.Raw.CatHealthAsync(u => pathInfo.QueryString);
+					return this.Raw.CatHealthAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHealth() into any of the following paths: \r\n - /_cat/health");
 		}
 		
 		
-		internal ElasticsearchResponse CatHelpDispatch(ElasticsearchPathInfo<CatHelpQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatHelpDispatch<T>(ElasticsearchPathInfo<CatHelpQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat
-					return this.Raw.CatHelp(u => pathInfo.QueryString);
+					return this.Raw.CatHelp<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHelp() into any of the following paths: \r\n - /_cat");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatHelpDispatchAsync(ElasticsearchPathInfo<CatHelpQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatHelpDispatchAsync<T>(ElasticsearchPathInfo<CatHelpQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat
-					return this.Raw.CatHelpAsync(u => pathInfo.QueryString);
+					return this.Raw.CatHelpAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatHelp() into any of the following paths: \r\n - /_cat");
 		}
 		
 		
-		internal ElasticsearchResponse CatIndicesDispatch(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatIndicesDispatch<T>(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/indices/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatIndices(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatIndices<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/indices
-					return this.Raw.CatIndices(u => pathInfo.QueryString);
+					return this.Raw.CatIndices<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatIndices() into any of the following paths: \r\n - /_cat/indices\r\n - /_cat/indices/{index}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatIndicesDispatchAsync(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatIndicesDispatchAsync<T>(ElasticsearchPathInfo<CatIndicesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/indices/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatIndicesAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatIndicesAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/indices
-					return this.Raw.CatIndicesAsync(u => pathInfo.QueryString);
+					return this.Raw.CatIndicesAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatIndices() into any of the following paths: \r\n - /_cat/indices\r\n - /_cat/indices/{index}");
 		}
 		
 		
-		internal ElasticsearchResponse CatMasterDispatch(ElasticsearchPathInfo<CatMasterQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatMasterDispatch<T>(ElasticsearchPathInfo<CatMasterQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/master
-					return this.Raw.CatMaster(u => pathInfo.QueryString);
+					return this.Raw.CatMaster<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatMaster() into any of the following paths: \r\n - /_cat/master");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatMasterDispatchAsync(ElasticsearchPathInfo<CatMasterQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatMasterDispatchAsync<T>(ElasticsearchPathInfo<CatMasterQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/master
-					return this.Raw.CatMasterAsync(u => pathInfo.QueryString);
+					return this.Raw.CatMasterAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatMaster() into any of the following paths: \r\n - /_cat/master");
 		}
 		
 		
-		internal ElasticsearchResponse CatNodesDispatch(ElasticsearchPathInfo<CatNodesQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/nodes
-					return this.Raw.CatNodes(u => pathInfo.QueryString);
+					return this.Raw.CatNodes<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatNodes() into any of the following paths: \r\n - /_cat/nodes");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatNodesDispatchAsync(ElasticsearchPathInfo<CatNodesQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatNodesDispatchAsync<T>(ElasticsearchPathInfo<CatNodesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/nodes
-					return this.Raw.CatNodesAsync(u => pathInfo.QueryString);
+					return this.Raw.CatNodesAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatNodes() into any of the following paths: \r\n - /_cat/nodes");
 		}
 		
 		
-		internal ElasticsearchResponse CatPendingTasksDispatch(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatPendingTasksDispatch<T>(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/pending_tasks
-					return this.Raw.CatPendingTasks(u => pathInfo.QueryString);
+					return this.Raw.CatPendingTasks<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatPendingTasks() into any of the following paths: \r\n - /_cat/pending_tasks");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatPendingTasksDispatchAsync(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<CatPendingTasksQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/pending_tasks
-					return this.Raw.CatPendingTasksAsync(u => pathInfo.QueryString);
+					return this.Raw.CatPendingTasksAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatPendingTasks() into any of the following paths: \r\n - /_cat/pending_tasks");
 		}
 		
 		
-		internal ElasticsearchResponse CatRecoveryDispatch(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/recovery/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatRecovery(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatRecovery<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/recovery
-					return this.Raw.CatRecovery(u => pathInfo.QueryString);
+					return this.Raw.CatRecovery<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatRecovery() into any of the following paths: \r\n - /_cat/recovery\r\n - /_cat/recovery/{index}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatRecoveryDispatchAsync(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatRecoveryDispatchAsync<T>(ElasticsearchPathInfo<CatRecoveryQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/recovery/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatRecoveryAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatRecoveryAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/recovery
-					return this.Raw.CatRecoveryAsync(u => pathInfo.QueryString);
+					return this.Raw.CatRecoveryAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatRecovery() into any of the following paths: \r\n - /_cat/recovery\r\n - /_cat/recovery/{index}");
 		}
 		
 		
-		internal ElasticsearchResponse CatShardsDispatch(ElasticsearchPathInfo<CatShardsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/shards/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatShards(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatShards<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/shards
-					return this.Raw.CatShards(u => pathInfo.QueryString);
+					return this.Raw.CatShards<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatShards() into any of the following paths: \r\n - /_cat/shards\r\n - /_cat/shards/{index}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatShardsDispatchAsync(ElasticsearchPathInfo<CatShardsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatShardsDispatchAsync<T>(ElasticsearchPathInfo<CatShardsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/shards/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CatShardsAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CatShardsAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cat/shards
-					return this.Raw.CatShardsAsync(u => pathInfo.QueryString);
+					return this.Raw.CatShardsAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatShards() into any of the following paths: \r\n - /_cat/shards\r\n - /_cat/shards/{index}");
 		}
 		
 		
-		internal ElasticsearchResponse CatThreadPoolDispatch(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo )
+		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/thread_pool
-					return this.Raw.CatThreadPool(u => pathInfo.QueryString);
+					return this.Raw.CatThreadPool<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatThreadPool() into any of the following paths: \r\n - /_cat/thread_pool");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CatThreadPoolDispatchAsync(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatThreadPoolDispatchAsync<T>(ElasticsearchPathInfo<CatThreadPoolQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cat/thread_pool
-					return this.Raw.CatThreadPoolAsync(u => pathInfo.QueryString);
+					return this.Raw.CatThreadPoolAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.CatThreadPool() into any of the following paths: \r\n - /_cat/thread_pool");
 		}
 		
 		
-		internal ElasticsearchResponse ClearScrollDispatch(ElasticsearchPathInfo<ClearScrollQueryString> pathInfo )
+		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ClearScroll(pathInfo.ScrollId,u => pathInfo.QueryString);
+						return this.Raw.ClearScroll<T>(pathInfo.ScrollId,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -447,14 +447,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClearScrollDispatchAsync(ElasticsearchPathInfo<ClearScrollQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ClearScrollAsync(pathInfo.ScrollId,u => pathInfo.QueryString);
+						return this.Raw.ClearScrollAsync<T>(pathInfo.ScrollId,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -462,98 +462,98 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse ClusterGetSettingsDispatch(ElasticsearchPathInfo<ClusterGetSettingsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(ElasticsearchPathInfo<ClusterGetSettingsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/settings
-					return this.Raw.ClusterGetSettings(u => pathInfo.QueryString);
+					return this.Raw.ClusterGetSettings<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterGetSettings() into any of the following paths: \r\n - /_cluster/settings");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClusterGetSettingsDispatchAsync(ElasticsearchPathInfo<ClusterGetSettingsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterGetSettingsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/settings
-					return this.Raw.ClusterGetSettingsAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterGetSettingsAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterGetSettings() into any of the following paths: \r\n - /_cluster/settings");
 		}
 		
 		
-		internal ElasticsearchResponse ClusterHealthDispatch(ElasticsearchPathInfo<ClusterHealthQueryString> pathInfo )
+		internal ElasticsearchResponse<T> ClusterHealthDispatch<T>(ElasticsearchPathInfo<ClusterHealthQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/health/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterHealth(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterHealth<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/health
-					return this.Raw.ClusterHealth(u => pathInfo.QueryString);
+					return this.Raw.ClusterHealth<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterHealth() into any of the following paths: \r\n - /_cluster/health\r\n - /_cluster/health/{index}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClusterHealthDispatchAsync(ElasticsearchPathInfo<ClusterHealthQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterHealthDispatchAsync<T>(ElasticsearchPathInfo<ClusterHealthQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/health/{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterHealthAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterHealthAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/health
-					return this.Raw.ClusterHealthAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterHealthAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterHealth() into any of the following paths: \r\n - /_cluster/health\r\n - /_cluster/health/{index}");
 		}
 		
 		
-		internal ElasticsearchResponse ClusterPendingTasksDispatch(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo )
+		internal ElasticsearchResponse<T> ClusterPendingTasksDispatch<T>(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/pending_tasks
-					return this.Raw.ClusterPendingTasks(u => pathInfo.QueryString);
+					return this.Raw.ClusterPendingTasks<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterPendingTasks() into any of the following paths: \r\n - /_cluster/pending_tasks");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClusterPendingTasksDispatchAsync(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<ClusterPendingTasksQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/pending_tasks
-					return this.Raw.ClusterPendingTasksAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterPendingTasksAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterPendingTasks() into any of the following paths: \r\n - /_cluster/pending_tasks");
 		}
 		
 		
-		internal ElasticsearchResponse ClusterPutSettingsDispatch(ElasticsearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_cluster/settings
 					if (body != null)
-						return this.Raw.ClusterPutSettings(body,u => pathInfo.QueryString);
+						return this.Raw.ClusterPutSettings<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -561,14 +561,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClusterPutSettingsDispatchAsync(ElasticsearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterPutSettingsQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_cluster/settings
 					if (body != null)
-						return this.Raw.ClusterPutSettingsAsync(body,u => pathInfo.QueryString);
+						return this.Raw.ClusterPutSettingsAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -576,14 +576,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse ClusterRerouteDispatch(ElasticsearchPathInfo<ClusterRerouteQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(ElasticsearchPathInfo<ClusterRerouteQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/reroute
 					if (body != null)
-						return this.Raw.ClusterReroute(body,u => pathInfo.QueryString);
+						return this.Raw.ClusterReroute<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -591,14 +591,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClusterRerouteDispatchAsync(ElasticsearchPathInfo<ClusterRerouteQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ClusterRerouteDispatchAsync<T>(ElasticsearchPathInfo<ClusterRerouteQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/reroute
 					if (body != null)
-						return this.Raw.ClusterRerouteAsync(body,u => pathInfo.QueryString);
+						return this.Raw.ClusterRerouteAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -606,158 +606,158 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse ClusterStateDispatch(ElasticsearchPathInfo<ClusterStateQueryString> pathInfo )
+		internal ElasticsearchResponse<T> ClusterStateDispatch<T>(ElasticsearchPathInfo<ClusterStateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/state/{metric}/{index}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterState(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterState<T>(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/state/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.ClusterState(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.ClusterState<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/state
-					return this.Raw.ClusterState(u => pathInfo.QueryString);
+					return this.Raw.ClusterState<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state\r\n - /_cluster/state/{metric}\r\n - /_cluster/state/{metric}/{index}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClusterStateDispatchAsync(ElasticsearchPathInfo<ClusterStateQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterStateDispatchAsync<T>(ElasticsearchPathInfo<ClusterStateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/state/{metric}/{index}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.ClusterStateAsync(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.ClusterStateAsync<T>(pathInfo.Metric,pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/state/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.ClusterStateAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.ClusterStateAsync<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/state
-					return this.Raw.ClusterStateAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterStateAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterState() into any of the following paths: \r\n - /_cluster/state\r\n - /_cluster/state/{metric}\r\n - /_cluster/state/{metric}/{index}");
 		}
 		
 		
-		internal ElasticsearchResponse ClusterStatsDispatch(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> ClusterStatsDispatch<T>(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/stats/nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterStats(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.ClusterStats<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/stats
-					return this.Raw.ClusterStats(u => pathInfo.QueryString);
+					return this.Raw.ClusterStats<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterStats() into any of the following paths: \r\n - /_cluster/stats\r\n - /_cluster/stats/nodes/{node_id}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ClusterStatsDispatchAsync(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterStatsDispatchAsync<T>(ElasticsearchPathInfo<ClusterStatsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/stats/nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.ClusterStatsAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.ClusterStatsAsync<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/stats
-					return this.Raw.ClusterStatsAsync(u => pathInfo.QueryString);
+					return this.Raw.ClusterStatsAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.ClusterStats() into any of the following paths: \r\n - /_cluster/stats\r\n - /_cluster/stats/nodes/{node_id}");
 		}
 		
 		
-		internal ElasticsearchResponse CountDispatch(ElasticsearchPathInfo<CountQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> CountDispatch<T>(ElasticsearchPathInfo<CountQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Count(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Count<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Count(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Count<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_count
 					if (body != null)
-						return this.Raw.Count(body,u => pathInfo.QueryString);
+						return this.Raw.Count<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.CountGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.CountGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_count
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CountGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CountGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_count
-					return this.Raw.CountGet(u => pathInfo.QueryString);
+					return this.Raw.CountGet<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Count() into any of the following paths: \r\n - /_count\r\n - /{index}/_count\r\n - /{index}/{type}/_count");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CountDispatchAsync(ElasticsearchPathInfo<CountQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> CountDispatchAsync<T>(ElasticsearchPathInfo<CountQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CountAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.CountAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.CountAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.CountAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_count
 					if (body != null)
-						return this.Raw.CountAsync(body,u => pathInfo.QueryString);
+						return this.Raw.CountAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.CountGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.CountGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_count
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.CountGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.CountGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_count
-					return this.Raw.CountGetAsync(u => pathInfo.QueryString);
+					return this.Raw.CountGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Count() into any of the following paths: \r\n - /_count\r\n - /{index}/_count\r\n - /{index}/{type}/_count");
 		}
 		
 		
-		internal ElasticsearchResponse CountPercolateDispatch(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.CountPercolateGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/{type}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.CountPercolateGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolate(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolate<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/{type}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolate(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -765,26 +765,26 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> CountPercolateDispatchAsync(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<CountPercolateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.CountPercolateGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/{type}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.CountPercolateGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolateAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/{type}/_percolate/count
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.CountPercolateAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.CountPercolateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -792,14 +792,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse DeleteDispatch(ElasticsearchPathInfo<DeleteQueryString> pathInfo )
+		internal ElasticsearchResponse<T> DeleteDispatch<T>(ElasticsearchPathInfo<DeleteQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.Delete(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.Delete<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -807,14 +807,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> DeleteDispatchAsync(ElasticsearchPathInfo<DeleteQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> DeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.DeleteAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.DeleteAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -822,17 +822,17 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse DeleteByQueryDispatch(ElasticsearchPathInfo<DeleteByQueryQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(ElasticsearchPathInfo<DeleteByQueryQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/{type}/_query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.DeleteByQuery(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.DeleteByQuery<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//DELETE /{index}/_query
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.DeleteByQuery(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.DeleteByQuery<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -840,17 +840,17 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> DeleteByQueryDispatchAsync(ElasticsearchPathInfo<DeleteByQueryQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(ElasticsearchPathInfo<DeleteByQueryQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/{type}/_query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.DeleteByQueryAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.DeleteByQueryAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//DELETE /{index}/_query
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.DeleteByQueryAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.DeleteByQueryAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -858,14 +858,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse ExistsDispatch(ElasticsearchPathInfo<ExistsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<ExistsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.Exists(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.Exists<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -873,14 +873,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ExistsDispatchAsync(ElasticsearchPathInfo<ExistsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<ExistsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.ExistsAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.ExistsAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -888,20 +888,20 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse ExplainDispatch(ElasticsearchPathInfo<ExplainQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> ExplainDispatch<T>(ElasticsearchPathInfo<ExplainQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_explain
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.ExplainGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.ExplainGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_explain
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.Explain(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Explain<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -909,20 +909,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ExplainDispatchAsync(ElasticsearchPathInfo<ExplainQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ExplainDispatchAsync<T>(ElasticsearchPathInfo<ExplainQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_explain
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.ExplainGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.ExplainGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_explain
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.ExplainAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.ExplainAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -930,14 +930,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse GetDispatch(ElasticsearchPathInfo<GetQueryString> pathInfo )
+		internal ElasticsearchResponse<T> GetDispatch<T>(ElasticsearchPathInfo<GetQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.Get(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.Get<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -945,14 +945,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> GetDispatchAsync(ElasticsearchPathInfo<GetQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> GetDispatchAsync<T>(ElasticsearchPathInfo<GetQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.GetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.GetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -960,14 +960,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse GetSourceDispatch(ElasticsearchPathInfo<GetSourceQueryString> pathInfo )
+		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<GetSourceQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_source
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.GetSource(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.GetSource<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -975,14 +975,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> GetSourceDispatchAsync(ElasticsearchPathInfo<GetSourceQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<GetSourceQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_source
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.GetSourceAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.GetSourceAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -990,26 +990,26 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndexDispatch(ElasticsearchPathInfo<IndexQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndexDispatch<T>(ElasticsearchPathInfo<IndexQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.Index(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Index<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Index(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Index<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPut(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.IndexPut<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPut(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndexPut<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1017,26 +1017,26 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndexDispatchAsync(ElasticsearchPathInfo<IndexQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndexDispatchAsync<T>(ElasticsearchPathInfo<IndexQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.IndexAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndexAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/{id}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPutAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.IndexPutAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndexPutAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndexPutAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1044,24 +1044,24 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesAnalyzeDispatch(ElasticsearchPathInfo<AnalyzeQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesAnalyzeDispatch<T>(ElasticsearchPathInfo<AnalyzeQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_analyze
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesAnalyzeGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_analyze
-					return this.Raw.IndicesAnalyzeGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesAnalyzeGetForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_analyze
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesAnalyze(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyze<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_analyze
 					if (body != null)
-						return this.Raw.IndicesAnalyzeForAll(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeForAll<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1069,24 +1069,24 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesAnalyzeDispatchAsync(ElasticsearchPathInfo<AnalyzeQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesAnalyzeDispatchAsync<T>(ElasticsearchPathInfo<AnalyzeQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_analyze
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesAnalyzeGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_analyze
-					return this.Raw.IndicesAnalyzeGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesAnalyzeGetForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_analyze
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesAnalyzeAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_analyze
 					if (body != null)
-						return this.Raw.IndicesAnalyzeForAllAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesAnalyzeForAllAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1094,60 +1094,60 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesClearCacheDispatch(ElasticsearchPathInfo<ClearCacheQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesClearCacheDispatch<T>(ElasticsearchPathInfo<ClearCacheQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClearCache(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClearCache<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_cache/clear
-					return this.Raw.IndicesClearCacheForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClearCacheGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClearCacheGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cache/clear
-					return this.Raw.IndicesClearCacheGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheGetForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesClearCache() into any of the following paths: \r\n - /_cache/clear\r\n - /{index}/_cache/clear");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesClearCacheDispatchAsync(ElasticsearchPathInfo<ClearCacheQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesClearCacheDispatchAsync<T>(ElasticsearchPathInfo<ClearCacheQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClearCacheAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClearCacheAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_cache/clear
-					return this.Raw.IndicesClearCacheForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_cache/clear
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClearCacheGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClearCacheGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_cache/clear
-					return this.Raw.IndicesClearCacheGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesClearCacheGetForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesClearCache() into any of the following paths: \r\n - /_cache/clear\r\n - /{index}/_cache/clear");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesCloseDispatch(ElasticsearchPathInfo<CloseIndexQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesCloseDispatch<T>(ElasticsearchPathInfo<CloseIndexQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_close
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesClose(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesClose<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1155,14 +1155,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesCloseDispatchAsync(ElasticsearchPathInfo<CloseIndexQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesCloseDispatchAsync<T>(ElasticsearchPathInfo<CloseIndexQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_close
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesCloseAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesCloseAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1170,20 +1170,20 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesCreateDispatch(ElasticsearchPathInfo<CreateIndexQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesCreateDispatch<T>(ElasticsearchPathInfo<CreateIndexQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesCreate(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesCreate<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesCreatePost(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesCreatePost<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1191,20 +1191,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesCreateDispatchAsync(ElasticsearchPathInfo<CreateIndexQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesCreateDispatchAsync<T>(ElasticsearchPathInfo<CreateIndexQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesCreateAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesCreateAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesCreatePostAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesCreatePostAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1212,14 +1212,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesDeleteDispatch(ElasticsearchPathInfo<DeleteIndexQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteDispatch<T>(ElasticsearchPathInfo<DeleteIndexQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesDelete(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesDelete<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1227,14 +1227,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesDeleteDispatchAsync(ElasticsearchPathInfo<DeleteIndexQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteIndexQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1242,14 +1242,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesDeleteAliasDispatch(ElasticsearchPathInfo<IndicesDeleteAliasQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<IndicesDeleteAliasQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteAlias(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteAlias<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1257,14 +1257,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesDeleteAliasDispatchAsync(ElasticsearchPathInfo<IndicesDeleteAliasQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesDeleteAliasQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteAliasAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteAliasAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1272,14 +1272,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesDeleteMappingDispatch(ElasticsearchPathInfo<DeleteMappingQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteMapping(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteMapping<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1287,14 +1287,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesDeleteMappingDispatchAsync(ElasticsearchPathInfo<DeleteMappingQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteMappingAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteMappingAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1302,14 +1302,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesDeleteTemplateDispatch(ElasticsearchPathInfo<DeleteTemplateQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteTemplateForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteTemplateForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1317,14 +1317,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesDeleteTemplateDispatchAsync(ElasticsearchPathInfo<DeleteTemplateQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteTemplateForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteTemplateForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1332,14 +1332,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesDeleteWarmerDispatch(ElasticsearchPathInfo<DeleteWarmerQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(ElasticsearchPathInfo<DeleteWarmerQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteWarmer(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteWarmer<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1347,14 +1347,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesDeleteWarmerDispatchAsync(ElasticsearchPathInfo<DeleteWarmerQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(ElasticsearchPathInfo<DeleteWarmerQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesDeleteWarmerAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesDeleteWarmerAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1362,14 +1362,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesExistsDispatch(ElasticsearchPathInfo<IndexExistsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(ElasticsearchPathInfo<IndexExistsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExists(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExists<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1377,14 +1377,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesExistsDispatchAsync(ElasticsearchPathInfo<IndexExistsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsDispatchAsync<T>(ElasticsearchPathInfo<IndexExistsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1392,20 +1392,20 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesExistsAliasDispatch(ElasticsearchPathInfo<IndicesExistsAliasQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<IndicesExistsAliasQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAlias(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAlias<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//HEAD /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//HEAD /{index}/_alias
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAlias(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAlias<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1413,20 +1413,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesExistsAliasDispatchAsync(ElasticsearchPathInfo<IndicesExistsAliasQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsAliasQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//HEAD /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//HEAD /{index}/_alias
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesExistsAliasAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsAliasAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1434,14 +1434,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesExistsTemplateDispatch(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsTemplateForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsTemplateForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1449,14 +1449,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesExistsTemplateDispatchAsync(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTemplateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesExistsTemplateForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsTemplateForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1464,14 +1464,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesExistsTypeDispatch(ElasticsearchPathInfo<IndicesExistsTypeQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<IndicesExistsTypeQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesExistsType(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsType<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1479,14 +1479,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesExistsTypeDispatchAsync(ElasticsearchPathInfo<IndicesExistsTypeQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<IndicesExistsTypeQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /{index}/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesExistsTypeAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesExistsTypeAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1494,157 +1494,157 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesFlushDispatch(ElasticsearchPathInfo<FlushQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesFlushDispatch<T>(ElasticsearchPathInfo<FlushQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesFlush(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesFlush<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_flush
-					return this.Raw.IndicesFlushForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesFlushGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesFlushGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_flush
-					return this.Raw.IndicesFlushGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushGetForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesFlush() into any of the following paths: \r\n - /_flush\r\n - /{index}/_flush");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesFlushDispatchAsync(ElasticsearchPathInfo<FlushQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesFlushDispatchAsync<T>(ElasticsearchPathInfo<FlushQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesFlushAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesFlushAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_flush
-					return this.Raw.IndicesFlushForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_flush
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesFlushGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesFlushGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_flush
-					return this.Raw.IndicesFlushGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesFlushGetForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesFlush() into any of the following paths: \r\n - /_flush\r\n - /{index}/_flush");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesGetAliasDispatch(ElasticsearchPathInfo<GetAliasesQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAlias(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAlias<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_alias
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetAlias(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAlias<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_alias
-					return this.Raw.IndicesGetAliasForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetAliasForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAlias() into any of the following paths: \r\n - /_alias\r\n - /_alias/{name}\r\n - /{index}/_alias/{name}\r\n - /{index}/_alias");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesGetAliasDispatchAsync(ElasticsearchPathInfo<GetAliasesQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasDispatchAsync<T>(ElasticsearchPathInfo<GetAliasesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_alias
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_alias
-					return this.Raw.IndicesGetAliasForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetAliasForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAlias() into any of the following paths: \r\n - /_alias\r\n - /_alias/{name}\r\n - /{index}/_alias/{name}\r\n - /{index}/_alias");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesGetAliasesDispatch(ElasticsearchPathInfo<IndicesGetAliasesQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(ElasticsearchPathInfo<IndicesGetAliasesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_aliases/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliases(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliases<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_aliases
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliases(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliases<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_aliases/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasesForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasesForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_aliases
-					return this.Raw.IndicesGetAliasesForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetAliasesForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAliases() into any of the following paths: \r\n - /_aliases\r\n - /{index}/_aliases\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesGetAliasesDispatchAsync(ElasticsearchPathInfo<IndicesGetAliasesQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetAliasesQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_aliases/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasesAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasesAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_aliases
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasesAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasesAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_aliases/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetAliasesForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetAliasesForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_aliases
-					return this.Raw.IndicesGetAliasesForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetAliasesForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetAliases() into any of the following paths: \r\n - /_aliases\r\n - /{index}/_aliases\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesGetFieldMappingDispatch(ElasticsearchPathInfo<IndicesGetFieldMappingQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<IndicesGetFieldMappingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_mapping/{type}/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMapping(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMapping<T>(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mapping/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMapping(pathInfo.Index,pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMapping<T>(pathInfo.Index,pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping/{type}/field/{field}
 					if (!pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMappingForAll(pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingForAll<T>(pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping/field/{field}
 					if (!pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMappingForAll(pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingForAll<T>(pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1652,23 +1652,23 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesGetFieldMappingDispatchAsync(ElasticsearchPathInfo<IndicesGetFieldMappingQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<IndicesGetFieldMappingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_mapping/{type}/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMappingAsync(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mapping/field/{field}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMappingAsync(pathInfo.Index,pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingAsync<T>(pathInfo.Index,pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping/{type}/field/{field}
 					if (!pathInfo.Type.IsNullOrEmpty() && !pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMappingForAllAsync(pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingForAllAsync<T>(pathInfo.Type,pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping/field/{field}
 					if (!pathInfo.Field.IsNullOrEmpty())
-						return this.Raw.IndicesGetFieldMappingForAllAsync(pathInfo.Field,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetFieldMappingForAllAsync<T>(pathInfo.Field,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1676,184 +1676,184 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesGetMappingDispatch(ElasticsearchPathInfo<GetMappingQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(ElasticsearchPathInfo<GetMappingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_mapping/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesGetMapping(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetMapping<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetMapping(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetMapping<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping/{type}
 					if (!pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesGetMappingForAll(pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetMappingForAll<T>(pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping
-					return this.Raw.IndicesGetMappingForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetMappingForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetMapping() into any of the following paths: \r\n - /_mapping\r\n - /{index}/_mapping\r\n - /_mapping/{type}\r\n - /{index}/_mapping/{type}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesGetMappingDispatchAsync(ElasticsearchPathInfo<GetMappingQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetMappingDispatchAsync<T>(ElasticsearchPathInfo<GetMappingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_mapping/{type}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesGetMappingAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetMappingAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetMappingAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetMappingAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping/{type}
 					if (!pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesGetMappingForAllAsync(pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetMappingForAllAsync<T>(pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /_mapping
-					return this.Raw.IndicesGetMappingForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetMappingForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetMapping() into any of the following paths: \r\n - /_mapping\r\n - /{index}/_mapping\r\n - /_mapping/{type}\r\n - /{index}/_mapping/{type}");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesGetSettingsDispatch(ElasticsearchPathInfo<GetIndexSettingsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetSettingsDispatch<T>(ElasticsearchPathInfo<GetIndexSettingsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_settings/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetSettings(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetSettings<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_settings
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetSettings(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetSettings<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_settings/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetSettingsForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetSettingsForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_settings
-					return this.Raw.IndicesGetSettingsForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetSettingsForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetSettings() into any of the following paths: \r\n - /_settings\r\n - /{index}/_settings\r\n - /{index}/_settings/{name}\r\n - /_settings/{name}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesGetSettingsDispatchAsync(ElasticsearchPathInfo<GetIndexSettingsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<GetIndexSettingsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_settings/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetSettingsAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetSettingsAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_settings
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetSettingsAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetSettingsAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_settings/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetSettingsForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetSettingsForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_settings
-					return this.Raw.IndicesGetSettingsForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetSettingsForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetSettings() into any of the following paths: \r\n - /_settings\r\n - /{index}/_settings\r\n - /{index}/_settings/{name}\r\n - /_settings/{name}");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesGetTemplateDispatch(ElasticsearchPathInfo<GetTemplateQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetTemplateForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetTemplateForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_template
-					return this.Raw.IndicesGetTemplateForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetTemplateForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetTemplate() into any of the following paths: \r\n - /_template\r\n - /_template/{name}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesGetTemplateDispatchAsync(ElasticsearchPathInfo<GetTemplateQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetTemplateForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetTemplateForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_template
-					return this.Raw.IndicesGetTemplateForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetTemplateForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetTemplate() into any of the following paths: \r\n - /_template\r\n - /_template/{name}");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesGetWarmerDispatch(ElasticsearchPathInfo<GetWarmerQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(ElasticsearchPathInfo<GetWarmerQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmer(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmer<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmer(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmer<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_warmer
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmer(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmer<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_warmer/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmerForAll(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmerForAll<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_warmer
-					return this.Raw.IndicesGetWarmerForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetWarmerForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetWarmer() into any of the following paths: \r\n - /_warmer\r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesGetWarmerDispatchAsync(ElasticsearchPathInfo<GetWarmerQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(ElasticsearchPathInfo<GetWarmerQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmerAsync(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmerAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmerAsync(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmerAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_warmer
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmerAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmerAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_warmer/{name}
 					if (!pathInfo.Name.IsNullOrEmpty())
-						return this.Raw.IndicesGetWarmerForAllAsync(pathInfo.Name,u => pathInfo.QueryString);
+						return this.Raw.IndicesGetWarmerForAllAsync<T>(pathInfo.Name,u => pathInfo.QueryString, deserializationState);
 					//GET /_warmer
-					return this.Raw.IndicesGetWarmerForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesGetWarmerForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesGetWarmer() into any of the following paths: \r\n - /_warmer\r\n - /{index}/_warmer\r\n - /{index}/_warmer/{name}\r\n - /_warmer/{name}\r\n - /{index}/{type}/_warmer/{name}");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesOpenDispatch(ElasticsearchPathInfo<OpenIndexQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(ElasticsearchPathInfo<OpenIndexQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_open
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOpen(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOpen<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1861,14 +1861,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesOpenDispatchAsync(ElasticsearchPathInfo<OpenIndexQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesOpenDispatchAsync<T>(ElasticsearchPathInfo<OpenIndexQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_open
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOpenAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOpenAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1876,72 +1876,72 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesOptimizeDispatch(ElasticsearchPathInfo<OptimizeQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(ElasticsearchPathInfo<OptimizeQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOptimize(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOptimize<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_optimize
-					return this.Raw.IndicesOptimizeForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOptimizeGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOptimizeGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_optimize
-					return this.Raw.IndicesOptimizeGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeGetForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesOptimize() into any of the following paths: \r\n - /_optimize\r\n - /{index}/_optimize");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesOptimizeDispatchAsync(ElasticsearchPathInfo<OptimizeQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(ElasticsearchPathInfo<OptimizeQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOptimizeAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOptimizeAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_optimize
-					return this.Raw.IndicesOptimizeForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_optimize
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesOptimizeGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesOptimizeGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_optimize
-					return this.Raw.IndicesOptimizeGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesOptimizeGetForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesOptimize() into any of the following paths: \r\n - /_optimize\r\n - /{index}/_optimize");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesPutAliasDispatch(ElasticsearchPathInfo<IndicesPutAliasQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<IndicesPutAliasQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAlias(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAlias<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasForAll<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasPost(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasPost<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasPostForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasPostForAll<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1949,26 +1949,26 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesPutAliasDispatchAsync(ElasticsearchPathInfo<IndicesPutAliasQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<IndicesPutAliasQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasForAllAsync<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasPostAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasPostAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_alias/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasPostForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutAliasPostForAllAsync<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -1976,26 +1976,26 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesPutMappingDispatch(ElasticsearchPathInfo<PutMappingQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutMappingDispatch<T>(ElasticsearchPathInfo<PutMappingQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMapping(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMapping<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_mapping/{type}
 					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMappingForAll(pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMappingForAll<T>(pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMappingPost(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMappingPost<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mapping/{type}
 					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMappingPostForAll(pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMappingPostForAll<T>(pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2003,26 +2003,26 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesPutMappingDispatchAsync(ElasticsearchPathInfo<PutMappingQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutMappingDispatchAsync<T>(ElasticsearchPathInfo<PutMappingQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMappingAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMappingAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_mapping/{type}
 					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMappingForAllAsync(pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMappingForAllAsync<T>(pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mapping
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMappingPostAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMappingPostAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mapping/{type}
 					if (!pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutMappingPostForAllAsync(pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutMappingPostForAllAsync<T>(pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2030,17 +2030,17 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesPutSettingsDispatch(ElasticsearchPathInfo<UpdateSettingsQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(ElasticsearchPathInfo<UpdateSettingsQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/_settings
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutSettings(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutSettings<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_settings
 					if (body != null)
-						return this.Raw.IndicesPutSettingsForAll(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutSettingsForAll<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2048,17 +2048,17 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesPutSettingsDispatchAsync(ElasticsearchPathInfo<UpdateSettingsQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<UpdateSettingsQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/_settings
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutSettingsAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutSettingsAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_settings
 					if (body != null)
-						return this.Raw.IndicesPutSettingsForAllAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutSettingsForAllAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2066,20 +2066,20 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesPutTemplateDispatch(ElasticsearchPathInfo<PutTemplateQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplateForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplateForAll<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplatePostForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplatePostForAll<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2087,20 +2087,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesPutTemplateDispatchAsync(ElasticsearchPathInfo<PutTemplateQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplateForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplateForAllAsync<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_template/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutTemplatePostForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutTemplatePostForAllAsync<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2108,32 +2108,32 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesPutWarmerDispatch(ElasticsearchPathInfo<PutWarmerQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(ElasticsearchPathInfo<PutWarmerQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmer(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmer<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmer(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmer<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_warmer/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerForAll<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerPost(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerPost<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerPost(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerPost<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_warmer/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerPostForAll(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerPostForAll<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2141,32 +2141,32 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesPutWarmerDispatchAsync(ElasticsearchPathInfo<PutWarmerQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(ElasticsearchPathInfo<PutWarmerQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /{index}/{type}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerAsync(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//PUT /_warmer/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerForAllAsync<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerPostAsync(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerPostAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_warmer/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerPostAsync(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerPostAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_warmer/{name}
 					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutWarmerPostForAllAsync(pathInfo.Name,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesPutWarmerPostForAllAsync<T>(pathInfo.Name,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2174,200 +2174,200 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesRefreshDispatch(ElasticsearchPathInfo<RefreshQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesRefresh(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesRefresh<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_refresh
-					return this.Raw.IndicesRefreshForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesRefreshGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesRefreshGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_refresh
-					return this.Raw.IndicesRefreshGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshGetForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesRefresh() into any of the following paths: \r\n - /_refresh\r\n - /{index}/_refresh");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesRefreshDispatchAsync(ElasticsearchPathInfo<RefreshQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesRefreshDispatchAsync<T>(ElasticsearchPathInfo<RefreshQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesRefreshAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesRefreshAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_refresh
-					return this.Raw.IndicesRefreshForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_refresh
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesRefreshGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesRefreshGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_refresh
-					return this.Raw.IndicesRefreshGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesRefreshGetForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesRefresh() into any of the following paths: \r\n - /_refresh\r\n - /{index}/_refresh");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesSegmentsDispatch(ElasticsearchPathInfo<SegmentsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesSegmentsDispatch<T>(ElasticsearchPathInfo<SegmentsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_segments
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSegments(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSegments<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_segments
-					return this.Raw.IndicesSegmentsForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesSegmentsForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSegments() into any of the following paths: \r\n - /_segments\r\n - /{index}/_segments");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesSegmentsDispatchAsync(ElasticsearchPathInfo<SegmentsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesSegmentsDispatchAsync<T>(ElasticsearchPathInfo<SegmentsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_segments
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSegmentsAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSegmentsAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_segments
-					return this.Raw.IndicesSegmentsForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesSegmentsForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSegments() into any of the following paths: \r\n - /_segments\r\n - /{index}/_segments");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesSnapshotIndexDispatch(ElasticsearchPathInfo<SnapshotQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesSnapshotIndexDispatch<T>(ElasticsearchPathInfo<SnapshotQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_gateway/snapshot
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSnapshotIndex(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSnapshotIndex<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesSnapshotIndexForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesSnapshotIndexDispatchAsync(ElasticsearchPathInfo<SnapshotQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesSnapshotIndexDispatchAsync<T>(ElasticsearchPathInfo<SnapshotQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_gateway/snapshot
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesSnapshotIndexAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesSnapshotIndexAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//POST /_gateway/snapshot
-					return this.Raw.IndicesSnapshotIndexForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesSnapshotIndexForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesSnapshotIndex() into any of the following paths: \r\n - /_gateway/snapshot\r\n - /{index}/_gateway/snapshot");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesStatsDispatch(ElasticsearchPathInfo<IndicesStatsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_stats/{metric}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStats(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStats<T>(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStatsForAll(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsForAll<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStats(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStats<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_stats
-					return this.Raw.IndicesStatsForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatsForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /_stats/{metric}\r\n - /{index}/_stats\r\n - /{index}/_stats/{metric}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesStatsDispatchAsync(ElasticsearchPathInfo<IndicesStatsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesStatsDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_stats/{metric}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStatsAsync(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsAsync<T>(pathInfo.Index,pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.IndicesStatsForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsForAllAsync<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_stats
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStatsAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatsAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_stats
-					return this.Raw.IndicesStatsForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatsForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStats() into any of the following paths: \r\n - /_stats\r\n - /_stats/{metric}\r\n - /{index}/_stats\r\n - /{index}/_stats/{metric}");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesStatusDispatch(ElasticsearchPathInfo<IndicesStatusQueryString> pathInfo )
+		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_status
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStatus(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatus<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_status
-					return this.Raw.IndicesStatusForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatusForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStatus() into any of the following paths: \r\n - /_status\r\n - /{index}/_status");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesStatusDispatchAsync(ElasticsearchPathInfo<IndicesStatusQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_status
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesStatusAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesStatusAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_status
-					return this.Raw.IndicesStatusForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesStatusForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.IndicesStatus() into any of the following paths: \r\n - /_status\r\n - /{index}/_status");
 		}
 		
 		
-		internal ElasticsearchResponse IndicesUpdateAliasesDispatch(ElasticsearchPathInfo<AliasQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_aliases
 					if (body != null)
-						return this.Raw.IndicesUpdateAliasesForAll(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesUpdateAliasesForAll<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2375,14 +2375,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesUpdateAliasesDispatchAsync(ElasticsearchPathInfo<AliasQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_aliases
 					if (body != null)
-						return this.Raw.IndicesUpdateAliasesForAllAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesUpdateAliasesForAllAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2390,30 +2390,30 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse IndicesValidateQueryDispatch(ElasticsearchPathInfo<ValidateQueryQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesValidateQueryDispatch<T>(ElasticsearchPathInfo<ValidateQueryQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesValidateQueryGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesValidateQueryGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_validate/query
-					return this.Raw.IndicesValidateQueryGetForAll(u => pathInfo.QueryString);
+					return this.Raw.IndicesValidateQueryGetForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQuery(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQuery<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQuery(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQuery<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_validate/query
 					if (body != null)
-						return this.Raw.IndicesValidateQueryForAll(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryForAll<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2421,30 +2421,30 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> IndicesValidateQueryDispatchAsync(ElasticsearchPathInfo<ValidateQueryQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesValidateQueryDispatchAsync<T>(ElasticsearchPathInfo<ValidateQueryQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.IndicesValidateQueryGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.IndicesValidateQueryGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_validate/query
-					return this.Raw.IndicesValidateQueryGetForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.IndicesValidateQueryGetForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQueryAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_validate/query
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesValidateQueryAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_validate/query
 					if (body != null)
-						return this.Raw.IndicesValidateQueryForAllAsync(body,u => pathInfo.QueryString);
+						return this.Raw.IndicesValidateQueryForAllAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2452,56 +2452,56 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse InfoDispatch(ElasticsearchPathInfo<InfoQueryString> pathInfo )
+		internal ElasticsearchResponse<T> InfoDispatch<T>(ElasticsearchPathInfo<InfoQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /
-					return this.Raw.Info(u => pathInfo.QueryString);
+					return this.Raw.Info<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Info() into any of the following paths: \r\n - /");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> InfoDispatchAsync(ElasticsearchPathInfo<InfoQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(ElasticsearchPathInfo<InfoQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /
-					return this.Raw.InfoAsync(u => pathInfo.QueryString);
+					return this.Raw.InfoAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Info() into any of the following paths: \r\n - /");
 		}
 		
 		
-		internal ElasticsearchResponse MgetDispatch(ElasticsearchPathInfo<MultiGetQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MgetGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MgetGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MgetGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MgetGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mget
-					return this.Raw.MgetGet(u => pathInfo.QueryString);
+					return this.Raw.MgetGet<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Mget(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Mget<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Mget(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Mget<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mget
 					if (body != null)
-						return this.Raw.Mget(body,u => pathInfo.QueryString);
+						return this.Raw.Mget<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2509,30 +2509,30 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> MgetDispatchAsync(ElasticsearchPathInfo<MultiGetQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MgetDispatchAsync<T>(ElasticsearchPathInfo<MultiGetQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MgetGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MgetGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MgetGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MgetGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mget
-					return this.Raw.MgetGetAsync(u => pathInfo.QueryString);
+					return this.Raw.MgetGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MgetAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MgetAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_mget
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MgetAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MgetAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mget
 					if (body != null)
-						return this.Raw.MgetAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MgetAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2540,20 +2540,20 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse MltDispatch(ElasticsearchPathInfo<MoreLikeThisQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_mlt
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.MltGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.MltGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_mlt
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.Mlt(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Mlt<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2561,20 +2561,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> MltDispatchAsync(ElasticsearchPathInfo<MoreLikeThisQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_mlt
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.MltGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.MltGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_mlt
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.MltAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.MltAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2582,30 +2582,30 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse MpercolateDispatch(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MpercolateGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MpercolateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MpercolateGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MpercolateGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mpercolate
-					return this.Raw.MpercolateGet(u => pathInfo.QueryString);
+					return this.Raw.MpercolateGet<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Mpercolate(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Mpercolate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Mpercolate(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Mpercolate<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mpercolate
 					if (body != null)
-						return this.Raw.Mpercolate(body,u => pathInfo.QueryString);
+						return this.Raw.Mpercolate<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2613,30 +2613,30 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> MpercolateDispatchAsync(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MpercolateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MpercolateGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MpercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MpercolateGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MpercolateGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mpercolate
-					return this.Raw.MpercolateGetAsync(u => pathInfo.QueryString);
+					return this.Raw.MpercolateGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MpercolateAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MpercolateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_mpercolate
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MpercolateAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MpercolateAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mpercolate
 					if (body != null)
-						return this.Raw.MpercolateAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MpercolateAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2644,30 +2644,30 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse MsearchDispatch(ElasticsearchPathInfo<MultiSearchQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> MsearchDispatch<T>(ElasticsearchPathInfo<MultiSearchQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MsearchGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MsearchGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MsearchGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MsearchGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_msearch
-					return this.Raw.MsearchGet(u => pathInfo.QueryString);
+					return this.Raw.MsearchGet<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Msearch(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Msearch<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Msearch(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Msearch<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_msearch
 					if (body != null)
-						return this.Raw.Msearch(body,u => pathInfo.QueryString);
+						return this.Raw.Msearch<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2675,30 +2675,30 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> MsearchDispatchAsync(ElasticsearchPathInfo<MultiSearchQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MsearchDispatchAsync<T>(ElasticsearchPathInfo<MultiSearchQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MsearchGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MsearchGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MsearchGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MsearchGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_msearch
-					return this.Raw.MsearchGetAsync(u => pathInfo.QueryString);
+					return this.Raw.MsearchGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MsearchAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MsearchAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_msearch
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MsearchAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MsearchAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_msearch
 					if (body != null)
-						return this.Raw.MsearchAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MsearchAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2706,30 +2706,30 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse MtermvectorsDispatch(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MtermvectorsGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MtermvectorsGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mtermvectors
-					return this.Raw.MtermvectorsGet(u => pathInfo.QueryString);
+					return this.Raw.MtermvectorsGet<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Mtermvectors(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Mtermvectors<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Mtermvectors(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Mtermvectors<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mtermvectors
 					if (body != null)
-						return this.Raw.Mtermvectors(body,u => pathInfo.QueryString);
+						return this.Raw.Mtermvectors<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2737,30 +2737,30 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> MtermvectorsDispatchAsync(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MtermvectorsQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.MtermvectorsGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.MtermvectorsGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_mtermvectors
-					return this.Raw.MtermvectorsGetAsync(u => pathInfo.QueryString);
+					return this.Raw.MtermvectorsGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.MtermvectorsAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_mtermvectors
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.MtermvectorsAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_mtermvectors
 					if (body != null)
-						return this.Raw.MtermvectorsAsync(body,u => pathInfo.QueryString);
+						return this.Raw.MtermvectorsAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2768,190 +2768,190 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse NodesHotThreadsDispatch(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> NodesHotThreadsDispatch<T>(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/nodes/{node_id}/hotthreads
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesHotThreads(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesHotThreads<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/nodes/hotthreads
-					return this.Raw.NodesHotThreadsForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesHotThreadsForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> NodesHotThreadsDispatchAsync(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesHotThreadsDispatchAsync<T>(ElasticsearchPathInfo<NodesHotThreadsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_cluster/nodes/{node_id}/hotthreads
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesHotThreadsAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesHotThreadsAsync<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_cluster/nodes/hotthreads
-					return this.Raw.NodesHotThreadsForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesHotThreadsForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesHotThreads() into any of the following paths: \r\n - /_cluster/nodes/hotthreads\r\n - /_cluster/nodes/hot_threads\r\n - /_cluster/nodes/{node_id}/hotthreads\r\n - /_cluster/nodes/{node_id}/hot_threads\r\n - /_nodes/hotthreads\r\n - /_nodes/hot_threads\r\n - /_nodes/{node_id}/hotthreads\r\n - /_nodes/{node_id}/hot_threads");
 		}
 		
 		
-		internal ElasticsearchResponse NodesInfoDispatch(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo )
+		internal ElasticsearchResponse<T> NodesInfoDispatch<T>(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfo(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfo<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesInfo(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesInfo<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfoForAll(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoForAll<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes
-					return this.Raw.NodesInfoForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesInfoForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesInfo() into any of the following paths: \r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/{metric}\r\n - /_nodes/{node_id}/{metric}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> NodesInfoDispatchAsync(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesInfoDispatchAsync<T>(ElasticsearchPathInfo<NodesInfoQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfoAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoAsync<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{node_id}
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesInfoAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoAsync<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesInfoForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesInfoForAllAsync<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes
-					return this.Raw.NodesInfoForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesInfoForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesInfo() into any of the following paths: \r\n - /_nodes\r\n - /_nodes/{node_id}\r\n - /_nodes/{metric}\r\n - /_nodes/{node_id}/{metric}");
 		}
 		
 		
-		internal ElasticsearchResponse NodesShutdownDispatch(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo )
+		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/nodes/{node_id}/_shutdown
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesShutdown(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesShutdown<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//POST /_shutdown
-					return this.Raw.NodesShutdownForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesShutdownForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> NodesShutdownDispatchAsync(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_cluster/nodes/{node_id}/_shutdown
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesShutdownAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesShutdownAsync<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//POST /_shutdown
-					return this.Raw.NodesShutdownForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesShutdownForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesShutdown() into any of the following paths: \r\n - /_shutdown\r\n - /_cluster/nodes/_shutdown\r\n - /_cluster/nodes/{node_id}/_shutdown");
 		}
 		
 		
-		internal ElasticsearchResponse NodesStatsDispatch(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo )
+		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/stats/{metric}/{index_metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStats(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStats<T>(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{node_id}/stats/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStats(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStats<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/stats/{metric}/{index_metric}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStatsForAll(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAll<T>(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{node_id}/stats
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesStats(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesStats<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStatsForAll(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAll<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/stats
-					return this.Raw.NodesStatsForAll(u => pathInfo.QueryString);
+					return this.Raw.NodesStatsForAll<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesStats() into any of the following paths: \r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric}\r\n - /_nodes/{node_id}/stats/{metric}\r\n - /_nodes/stats/{metric}/{index_metric}\r\n - /_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> NodesStatsDispatchAsync(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesStatsDispatchAsync<T>(ElasticsearchPathInfo<NodesStatsQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_nodes/{node_id}/stats/{metric}/{index_metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStatsAsync(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsAsync<T>(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{node_id}/stats/{metric}
 					if (!pathInfo.NodeId.IsNullOrEmpty() && !pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStatsAsync(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsAsync<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/stats/{metric}/{index_metric}
 					if (!pathInfo.Metric.IsNullOrEmpty() && !pathInfo.IndexMetric.IsNullOrEmpty())
-						return this.Raw.NodesStatsForAllAsync(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAllAsync<T>(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/{node_id}/stats
 					if (!pathInfo.NodeId.IsNullOrEmpty())
-						return this.Raw.NodesStatsAsync(pathInfo.NodeId,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsAsync<T>(pathInfo.NodeId,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/stats/{metric}
 					if (!pathInfo.Metric.IsNullOrEmpty())
-						return this.Raw.NodesStatsForAllAsync(pathInfo.Metric,u => pathInfo.QueryString);
+						return this.Raw.NodesStatsForAllAsync<T>(pathInfo.Metric,u => pathInfo.QueryString, deserializationState);
 					//GET /_nodes/stats
-					return this.Raw.NodesStatsForAllAsync(u => pathInfo.QueryString);
+					return this.Raw.NodesStatsForAllAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.NodesStats() into any of the following paths: \r\n - /_nodes/stats\r\n - /_nodes/{node_id}/stats\r\n - /_nodes/stats/{metric}\r\n - /_nodes/{node_id}/stats/{metric}\r\n - /_nodes/stats/{metric}/{index_metric}\r\n - /_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
 		
-		internal ElasticsearchResponse PercolateDispatch(ElasticsearchPathInfo<PercolateQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> PercolateDispatch<T>(ElasticsearchPathInfo<PercolateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.PercolateGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.PercolateGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.PercolateGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.PercolateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.Percolate(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Percolate<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Percolate(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Percolate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2959,26 +2959,26 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> PercolateDispatchAsync(ElasticsearchPathInfo<PercolateQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.PercolateGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.PercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.PercolateGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.PercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.PercolateAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.PercolateAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/{type}/_percolate
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.PercolateAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.PercolateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -2986,50 +2986,50 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse PingDispatch(ElasticsearchPathInfo<PingQueryString> pathInfo )
+		internal ElasticsearchResponse<T> PingDispatch<T>(ElasticsearchPathInfo<PingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /
-					return this.Raw.Ping(u => pathInfo.QueryString);
+					return this.Raw.Ping<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Ping() into any of the following paths: \r\n - /");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> PingDispatchAsync(ElasticsearchPathInfo<PingQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> PingDispatchAsync<T>(ElasticsearchPathInfo<PingQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.HEAD:
 					//HEAD /
-					return this.Raw.PingAsync(u => pathInfo.QueryString);
+					return this.Raw.PingAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Ping() into any of the following paths: \r\n - /");
 		}
 		
 		
-		internal ElasticsearchResponse ScrollDispatch(ElasticsearchPathInfo<ScrollQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ScrollGet(pathInfo.ScrollId,u => pathInfo.QueryString);
+						return this.Raw.ScrollGet<T>(pathInfo.ScrollId,u => pathInfo.QueryString, deserializationState);
 					//GET /_search/scroll
-					return this.Raw.ScrollGet(u => pathInfo.QueryString);
+					return this.Raw.ScrollGet<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty() && body != null)
-						return this.Raw.Scroll(pathInfo.ScrollId,body,u => pathInfo.QueryString);
+						return this.Raw.Scroll<T>(pathInfo.ScrollId,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_search/scroll
 					if (body != null)
-						return this.Raw.Scroll(body,u => pathInfo.QueryString);
+						return this.Raw.Scroll<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3037,24 +3037,24 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> ScrollDispatchAsync(ElasticsearchPathInfo<ScrollQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(ElasticsearchPathInfo<ScrollQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty())
-						return this.Raw.ScrollGetAsync(pathInfo.ScrollId,u => pathInfo.QueryString);
+						return this.Raw.ScrollGetAsync<T>(pathInfo.ScrollId,u => pathInfo.QueryString, deserializationState);
 					//GET /_search/scroll
-					return this.Raw.ScrollGetAsync(u => pathInfo.QueryString);
+					return this.Raw.ScrollGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /_search/scroll/{scroll_id}
 					if (!pathInfo.ScrollId.IsNullOrEmpty() && body != null)
-						return this.Raw.ScrollAsync(pathInfo.ScrollId,body,u => pathInfo.QueryString);
+						return this.Raw.ScrollAsync<T>(pathInfo.ScrollId,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_search/scroll
 					if (body != null)
-						return this.Raw.ScrollAsync(body,u => pathInfo.QueryString);
+						return this.Raw.ScrollAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3062,30 +3062,30 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SearchDispatch(ElasticsearchPathInfo<SearchQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.SearchGet(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.SearchGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.SearchGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.SearchGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_search
-					return this.Raw.SearchGet(u => pathInfo.QueryString);
+					return this.Raw.SearchGet<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Search(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.Search<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Search(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Search<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_search
 					if (body != null)
-						return this.Raw.Search(body,u => pathInfo.QueryString);
+						return this.Raw.Search<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3093,30 +3093,30 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SearchDispatchAsync(ElasticsearchPathInfo<SearchQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.SearchGetAsync(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString);
+						return this.Raw.SearchGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.QueryString, deserializationState);
 					//GET /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.SearchGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.SearchGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_search
-					return this.Raw.SearchGetAsync(u => pathInfo.QueryString);
+					return this.Raw.SearchGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchAsync(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString);
+						return this.Raw.SearchAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.QueryString, deserializationState);
 					//POST /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.SearchAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_search
 					if (body != null)
-						return this.Raw.SearchAsync(body,u => pathInfo.QueryString);
+						return this.Raw.SearchAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3124,20 +3124,20 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SnapshotCreateDispatch(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreate(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreate<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreatePost(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreatePost<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3145,20 +3145,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SnapshotCreateDispatchAsync(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreateAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateAsync<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreatePostAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreatePostAsync<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3166,20 +3166,20 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SnapshotCreateRepositoryDispatch(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreateRepository(pathInfo.Repository,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateRepository<T>(pathInfo.Repository,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreateRepositoryPost(pathInfo.Repository,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateRepositoryPost<T>(pathInfo.Repository,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3187,20 +3187,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SnapshotCreateRepositoryDispatchAsync(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotCreateRepositoryQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.PUT:
 					//PUT /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreateRepositoryAsync(pathInfo.Repository,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateRepositoryAsync<T>(pathInfo.Repository,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotCreateRepositoryPostAsync(pathInfo.Repository,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotCreateRepositoryPostAsync<T>(pathInfo.Repository,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3208,14 +3208,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SnapshotDeleteDispatch(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
-						return this.Raw.SnapshotDelete(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+						return this.Raw.SnapshotDelete<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3223,14 +3223,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SnapshotDeleteDispatchAsync(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
-						return this.Raw.SnapshotDeleteAsync(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+						return this.Raw.SnapshotDeleteAsync<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3238,14 +3238,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SnapshotDeleteRepositoryDispatch(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty())
-						return this.Raw.SnapshotDeleteRepository(pathInfo.Repository,u => pathInfo.QueryString);
+						return this.Raw.SnapshotDeleteRepository<T>(pathInfo.Repository,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3253,14 +3253,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SnapshotDeleteRepositoryDispatchAsync(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotDeleteRepositoryQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.DELETE:
 					//DELETE /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty())
-						return this.Raw.SnapshotDeleteRepositoryAsync(pathInfo.Repository,u => pathInfo.QueryString);
+						return this.Raw.SnapshotDeleteRepositoryAsync<T>(pathInfo.Repository,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3268,14 +3268,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SnapshotGetDispatch(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
-						return this.Raw.SnapshotGet(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+						return this.Raw.SnapshotGet<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3283,14 +3283,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SnapshotGetDispatchAsync(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_snapshot/{repository}/{snapshot}
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty())
-						return this.Raw.SnapshotGetAsync(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString);
+						return this.Raw.SnapshotGetAsync<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3298,46 +3298,46 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SnapshotGetRepositoryDispatch(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty())
-						return this.Raw.SnapshotGetRepository(pathInfo.Repository,u => pathInfo.QueryString);
+						return this.Raw.SnapshotGetRepository<T>(pathInfo.Repository,u => pathInfo.QueryString, deserializationState);
 					//GET /_snapshot
-					return this.Raw.SnapshotGetRepository(u => pathInfo.QueryString);
+					return this.Raw.SnapshotGetRepository<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.SnapshotGetRepository() into any of the following paths: \r\n - /_snapshot\r\n - /_snapshot/{repository}");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SnapshotGetRepositoryDispatchAsync(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<SnapshotGetRepositoryQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /_snapshot/{repository}
 					if (!pathInfo.Repository.IsNullOrEmpty())
-						return this.Raw.SnapshotGetRepositoryAsync(pathInfo.Repository,u => pathInfo.QueryString);
+						return this.Raw.SnapshotGetRepositoryAsync<T>(pathInfo.Repository,u => pathInfo.QueryString, deserializationState);
 					//GET /_snapshot
-					return this.Raw.SnapshotGetRepositoryAsync(u => pathInfo.QueryString);
+					return this.Raw.SnapshotGetRepositoryAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.SnapshotGetRepository() into any of the following paths: \r\n - /_snapshot\r\n - /_snapshot/{repository}");
 		}
 		
 		
-		internal ElasticsearchResponse SnapshotRestoreDispatch(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}/{snapshot}/_restore
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotRestore(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotRestore<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3345,14 +3345,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SnapshotRestoreDispatchAsync(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRestoreQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /_snapshot/{repository}/{snapshot}/_restore
 					if (!pathInfo.Repository.IsNullOrEmpty() && !pathInfo.Snapshot.IsNullOrEmpty() && body != null)
-						return this.Raw.SnapshotRestoreAsync(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString);
+						return this.Raw.SnapshotRestoreAsync<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3360,70 +3360,70 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse SuggestDispatch(ElasticsearchPathInfo<SuggestQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_suggest
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Suggest(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.Suggest<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_suggest
 					if (body != null)
-						return this.Raw.Suggest(body,u => pathInfo.QueryString);
+						return this.Raw.Suggest<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_suggest
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.SuggestGet(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.SuggestGet<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_suggest
-					return this.Raw.SuggestGet(u => pathInfo.QueryString);
+					return this.Raw.SuggestGet<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Suggest() into any of the following paths: \r\n - /_suggest\r\n - /{index}/_suggest");
 		}
 		
 		
-		internal Task<ElasticsearchResponse> SuggestDispatchAsync(ElasticsearchPathInfo<SuggestQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(ElasticsearchPathInfo<SuggestQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_suggest
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.SuggestAsync(pathInfo.Index,body,u => pathInfo.QueryString);
+						return this.Raw.SuggestAsync<T>(pathInfo.Index,body,u => pathInfo.QueryString, deserializationState);
 					//POST /_suggest
 					if (body != null)
-						return this.Raw.SuggestAsync(body,u => pathInfo.QueryString);
+						return this.Raw.SuggestAsync<T>(body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/_suggest
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.SuggestGetAsync(pathInfo.Index,u => pathInfo.QueryString);
+						return this.Raw.SuggestGetAsync<T>(pathInfo.Index,u => pathInfo.QueryString, deserializationState);
 					//GET /_suggest
-					return this.Raw.SuggestGetAsync(u => pathInfo.QueryString);
+					return this.Raw.SuggestGetAsync<T>(u => pathInfo.QueryString, deserializationState);
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Suggest() into any of the following paths: \r\n - /_suggest\r\n - /{index}/_suggest");
 		}
 		
 		
-		internal ElasticsearchResponse TermvectorDispatch(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.TermvectorGet(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.TermvectorGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.Termvector(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Termvector<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3431,20 +3431,20 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> TermvectorDispatchAsync(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty())
-						return this.Raw.TermvectorGetAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString);
+						return this.Raw.TermvectorGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.QueryString, deserializationState);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_termvector
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.TermvectorAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.TermvectorAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3452,14 +3452,14 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse UpdateDispatch(ElasticsearchPathInfo<UpdateQueryString> pathInfo , object body)
+		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_update
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.Update(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.Update<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}
@@ -3467,14 +3467,14 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse> UpdateDispatchAsync(ElasticsearchPathInfo<UpdateQueryString> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> UpdateDispatchAsync<T>(ElasticsearchPathInfo<UpdateQueryString> pathInfo , object body, object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/{id}/_update
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && !pathInfo.Id.IsNullOrEmpty() && body != null)
-						return this.Raw.UpdateAsync(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString);
+						return this.Raw.UpdateAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.QueryString, deserializationState);
 					break;
 
 			}

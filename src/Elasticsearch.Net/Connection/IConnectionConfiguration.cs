@@ -55,6 +55,6 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		T SetConnectionStatusHandler(Action<ElasticsearchResponse> handler);
+		T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler);
 	}
 }

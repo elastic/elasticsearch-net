@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net.Serialization;
@@ -21,6 +22,11 @@ namespace Elasticsearch.Net.JsonNet
 
 			var s = Encoding.UTF8.GetString(bytes);
 			return JsonConvert.DeserializeObject<T>(s, this._settings);
+
+		//var serializer = new JsonSerializer();
+		//var jsonTextReader = new JsonTextReader(new StreamReader(stream));
+		//return serializer.Deserialize(jsonTextReader);
+		//	JsonConvert.DeserializeObject()
 		}
 
 		public byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)

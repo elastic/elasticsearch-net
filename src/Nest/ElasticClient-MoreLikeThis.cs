@@ -16,7 +16,7 @@ namespace Nest
 				(p, d) =>
 				{
 					CopySearchQueryString(d);
-					return this.RawDispatch.MltDispatch(p, d._Search);
+					return this.RawDispatch.MltDispatch<QueryResponse<T>>(p, d._Search);
 				}
 
 			);
@@ -28,7 +28,7 @@ namespace Nest
 				(p, d) =>
 				{
 					CopySearchQueryString(d);
-					return this.RawDispatch.MltDispatchAsync(p, d._Search);
+					return this.RawDispatch.MltDispatchAsync<QueryResponse<T>>(p, d._Search);
 				});
 		}
 

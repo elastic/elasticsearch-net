@@ -47,8 +47,8 @@ namespace Nest
 
 		private R Dispatch<D, Q, R>(
 			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
+			, Func<ElasticsearchResponse<R>, D, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -63,8 +63,8 @@ namespace Nest
 
 		private R Dispatch<D, Q, R>(
 			D descriptor
-			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
+			, Func<ElasticsearchResponse<R>, D, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -72,15 +72,15 @@ namespace Nest
 			where R : BaseResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			resultSelector = resultSelector ?? ((c, d) => this.Serializer.ToParsedResponse<R>(c, allow404));
+			resultSelector = resultSelector ?? ((c, d) => c.Response);
 			var response = dispatch(pathInfo, descriptor);
 			return resultSelector(response, descriptor);
 		}
 
 		internal Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse>> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
+			, Func<ElasticsearchResponse<R>, D, R> resultSelector = null
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -95,8 +95,8 @@ namespace Nest
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor 
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse>> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
+			, Func<ElasticsearchResponse<R>, D, R> resultSelector = null
 			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
@@ -105,7 +105,7 @@ namespace Nest
 			where I : IResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			resultSelector = resultSelector ?? ((c, d) => this.Serializer.ToParsedResponse<R>(c, allow404));
+			resultSelector = resultSelector ?? ((c, d) => c.Response);
 			return dispatch(pathInfo, descriptor)
 				.ContinueWith<I>(r => resultSelector(r.Result, descriptor));
 		}

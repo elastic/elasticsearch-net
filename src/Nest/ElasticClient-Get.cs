@@ -18,7 +18,7 @@ namespace Nest
 		{
 			return this.Dispatch<GetDescriptor<T>, GetQueryString, GetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatch(p)
+				(p, d) => this.RawDispatch.GetDispatch<GetResponse<T>>(p)
 			);
 		}
 		
@@ -26,7 +26,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<GetDescriptor<T>, GetQueryString, GetResponse<T>, IGetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatchAsync(p)
+				(p, d) => this.RawDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			);
 		}
 	

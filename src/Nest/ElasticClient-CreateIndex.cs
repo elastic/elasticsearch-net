@@ -22,7 +22,7 @@ namespace Nest
 			descriptor._Index = index;
 			return this.Dispatch<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndicesCreateDispatch(p, d._IndexSettings)
+				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d._IndexSettings)
 			);
 		}
 		public Task<IIndicesOperationResponse> CreateIndexAsync(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
@@ -33,7 +33,7 @@ namespace Nest
 			descriptor._Index = index;
 			return this.DispatchAsync<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndicesCreateDispatchAsync(p, d._IndexSettings)
+				(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d._IndexSettings)
 			);
 		}
 

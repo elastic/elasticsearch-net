@@ -34,9 +34,8 @@ namespace Elasticsearch.Net.Integration.Yaml
 			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
 			_client = new ElasticsearchClient(settings);
 			var infoResponse = _client.Info();
-			dynamic info = infoResponse.DynamicResult;
+			dynamic info = infoResponse.Response;
 			_versionNumber = new Version(info.version.number);
-
 		}
 
 		public YamlTestsBase()

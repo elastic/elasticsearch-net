@@ -14,7 +14,18 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
-	public class ElasticsearchResponse : ElasticsearchResponse<byte[]>
+	public interface IElasticsearchResponse
+	{
+		bool Success { get; }
+		IConnectionConfigurationValues Settings { get; }
+		ConnectionError Error { get; }
+		string RequestMethod { get; }
+		string RequestUrl { get; }
+		byte[] Request { get; }
+		int? HttpStatusCode { get; }
+	}
+
+	public class ElasticsearchResponse : ElasticsearchResponse<byte[]>, IElasticsearchResponse
 	{
 		private string _result;
 		
@@ -24,8 +35,8 @@ namespace Elasticsearch.Net
 		}
 		
 		private static readonly byte _startAccolade = (byte)'{';
-		private ElasticsearchDynamic _response;
-		public ElasticsearchDynamic DynamicResult
+		private DynamicDictionary _response;
+		public DynamicDictionary DynamicResult
 		{
 			get
 			{
@@ -34,8 +45,8 @@ namespace Elasticsearch.Net
 				if (Response[0] != _startAccolade)
 					return null;
 
-				if (_response == null)
-					this._response = ElasticsearchDynamic.Create(this.Deserialize<IDictionary<string, object>>());
+				//if (_response == null)
+					//this._response = ElasticsearchDynamic.Create(this.Deserialize<IDictionary<string, object>>());
 				return this._response;
 			}
 		}
@@ -83,15 +94,6 @@ namespace Elasticsearch.Net
 			return cs;
 		}
 		
-		/// <summary>
-		/// Returns a response of type R based on the connection status by trying parsing status.Result into R
-		/// </summary>
-		/// <returns></returns>
-		public virtual T Deserialize<T>(bool allow404 = false) where T : class
-		{
-			return this.Serializer.Deserialize<T>(this.Response);
-		}
-
 		public override string ToString()
 		{
 			var r = this;
@@ -112,7 +114,7 @@ namespace Elasticsearch.Net
 		}
 	}
 
-	public class ElasticsearchResponse<T>
+	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{
 		protected static readonly string _printFormat;
 		protected static readonly string _errorFormat;
@@ -127,6 +129,10 @@ namespace Elasticsearch.Net
 		public T Response { get; protected internal set; }
 		
 		public byte[] Request { get; protected internal set; }
+		/// <summary>
+		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
+		/// </summary>
+		public byte[] ResponseRaw { get; protected internal set; }
 
 		public int? HttpStatusCode { get; protected internal set; }
 
@@ -152,7 +158,39 @@ namespace Elasticsearch.Net
 			this.Settings = settings;
 			this.Serializer = settings.Serializer; 
 		}
-
+		private ElasticsearchResponse(IConnectionConfigurationValues settings, Exception e) : this(settings)
+		{
+			this.Success = false;
+			this.Error = new ConnectionError(e);
+			if (this.Error.HttpStatusCode != null)
+				this.HttpStatusCode = (int) this.Error.HttpStatusCode;
+		}
+		private ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode) : this(settings)
+		{
+			this.Success = statusCode >= 200 && statusCode < 300;
+			if (!this.Success)
+			{
+				var exception = new ConnectionException(statusCode);
+				this.Error = new ConnectionError(exception);
+			}
+			this.HttpStatusCode = statusCode;
+		}
+		public static ElasticsearchResponse<T> CreateError<T>(IConnectionConfigurationValues settings, Exception e, string method, string path, byte[] request)
+		{
+			var cs = new ElasticsearchResponse<T>(settings, e);
+			cs.Request = request;
+			cs.RequestUrl = path;
+			cs.RequestMethod = method;
+			return cs;
+		}
+		public static ElasticsearchResponse<T> Create<T>(IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request)
+		{
+			var cs = new ElasticsearchResponse<T>(settings, statusCode);
+			cs.Request = request;
+			cs.RequestUrl = path;
+			cs.RequestMethod = method;
+			return cs;
+		}
 
 		static ElasticsearchResponse()
 		{

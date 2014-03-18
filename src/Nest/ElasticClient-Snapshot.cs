@@ -12,7 +12,7 @@ namespace Nest
 			snapshotSelector = snapshotSelector ?? (s => s);
 			return this.Dispatch<SnapshotDescriptor, SnapshotQueryString, ShardsOperationResponse>(
 				snapshotSelector,
-				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatch(p)
+				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatch<ShardsOperationResponse>(p)
 			);
 		}
 
@@ -21,7 +21,7 @@ namespace Nest
 			snapshotSelector = snapshotSelector ?? (s => s);
 			return this.DispatchAsync<SnapshotDescriptor, SnapshotQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				snapshotSelector,
-				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesSnapshotIndexDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
 

@@ -9,12 +9,24 @@ namespace Elasticsearch.Net.Connection
 		IConnectionConfigurationValues Settings { get; }
 		IElasticsearchSerializer Serializer { get; }
 		
-		ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null, int retried = 0, int? seed = null);
-
-		Task<ElasticsearchResponse> DoRequestAsync(
+		ElasticsearchResponse<T> DoRequest<T>(
 			string method, 
 			string path, 
-			object data = null, NameValueCollection queryString = null, int retried = 0, int? seed = null);
+			object data = null, 
+			NameValueCollection queryString = null, 
+			object serializationState = null,
+			int retried = 0, 
+			int? seed = null
+			);
+
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
+			string method, 
+			string path, 
+			object data = null, 
+			NameValueCollection queryString = null,
+			object serializationState = null,
+			int retried = 0, 
+			int? seed = null);
 	}
 
 	public interface ITransportValues

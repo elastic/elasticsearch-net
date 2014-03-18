@@ -16,7 +16,7 @@ namespace Nest
 				{
 					var scrollId = p.ScrollId;
 					p.ScrollId = null;
-					return this.RawDispatch.ScrollDispatch(p, scrollId);
+					return this.RawDispatch.ScrollDispatch<QueryResponse<T>>(p, scrollId);
 				}
 			);
 		}
@@ -30,7 +30,7 @@ namespace Nest
 				{
 					var scrollId = p.ScrollId;
 					p.ScrollId = null;
-					return this.RawDispatch.ScrollDispatchAsync(p, scrollId);
+					return this.RawDispatch.ScrollDispatchAsync<QueryResponse<T>>(p, scrollId);
 				}
 			);
 		}

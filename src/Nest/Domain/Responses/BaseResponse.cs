@@ -9,7 +9,7 @@ namespace Nest
 	public interface IResponse
 	{
 		bool IsValid { get; }
-		ElasticsearchResponse ConnectionStatus { get; }
+		IElasticsearchResponse ConnectionStatus { get; }
 		ElasticInferrer Infer { get; }
 	}
 
@@ -20,7 +20,7 @@ namespace Nest
 			this.IsValid = true;
 		}
 		public virtual bool IsValid { get; internal set; }
-		public ElasticsearchResponse ConnectionStatus { get; internal set; }
+		public IElasticsearchResponse ConnectionStatus { get; internal set; }
 		public ElasticInferrer _infer;
 
 		public ElasticInferrer Infer
@@ -31,11 +31,13 @@ namespace Nest
 					return this._infer;
 				if (this.ConnectionStatus == null)
 					return null;
-				var settings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
-				if (settings == null)
-					return null;
-				this._infer = new ElasticInferrer(settings);
-				return this._infer;
+
+				return null; //TODO REVISIT
+				//var settings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
+				//if (settings == null)
+				//	return null;
+				//this._infer = new ElasticInferrer(settings);
+				//return this._infer;
 			}
 		}
 	}

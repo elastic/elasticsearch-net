@@ -66,7 +66,7 @@
     <Compile Include="Connection\IConnectionConfiguration.cs" />
     <Compile Include="Connection\InMemoryConnection.cs" />
     <Compile Include="ElasticsearchClient.Generated.cs" />
-    <Compile Include="Domain\ElasticsearchDynamic.cs" />
+    <Compile Include="Domain\DynamicDictionary.cs" />
     <Compile Include="Domain\ElasticsearchDynamicValue.cs" />
     <Compile Include="Exceptions\OutOfNodesException.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />

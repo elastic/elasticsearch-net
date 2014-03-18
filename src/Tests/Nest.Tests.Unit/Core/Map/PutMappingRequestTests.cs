@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Core.Map
 				
 			);
 			var status = result.ConnectionStatus;
-			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
+			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus);
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/_mapping", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("PUT", status.RequestMethod);
 		}

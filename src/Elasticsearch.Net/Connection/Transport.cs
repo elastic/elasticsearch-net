@@ -69,11 +69,12 @@ namespace Elasticsearch.Net.Connection
 		}
 
 
-		public ElasticsearchResponse DoRequest(
+		public ElasticsearchResponse<T> DoRequest<T>(
 			string method,
 			string path,
 			object data = null,
 			NameValueCollection queryString = null,
+			object deserializationState= null,
 			int retried = 0,
 			int? seed = null)
 		{
@@ -82,7 +83,7 @@ namespace Elasticsearch.Net.Connection
 			if (queryString != null) path += queryString.ToQueryString();
 
 			var postData = PostData(data);
-			ElasticsearchResponse response = null;
+			ElasticsearchResponse<T> response = null;
 
 			int initialSeed; bool shouldPingHint;
 			var baseUri = this._connectionPool.GetNext(seed, out initialSeed, out shouldPingHint);
@@ -94,14 +95,14 @@ namespace Elasticsearch.Net.Connection
 					this._connection.Ping(CreateUriToPath(baseUri, ""));
 
 				var uri = CreateUriToPath(baseUri, path);
-				response = _doRequest(method, uri, postData);
+				response = _doRequest<T>(method, uri, postData, deserializationState);
 				if (response != null && response.SuccessOrKnownError)
 					return response;
 			}
 			catch (Exception e)
 			{
 				seenError = true;
-				return RetryRequest(method, path, data, retried, baseUri, initialSeed, e);
+				return RetryRequest<T>(method, path, data, deserializationState, retried, baseUri, initialSeed, e);
 			}
 			finally
 			{
@@ -109,11 +110,11 @@ namespace Elasticsearch.Net.Connection
 				if (!seenError && response != null && response.SuccessOrKnownError)
 					this._connectionPool.MarkAlive(baseUri);
 			}
-			return RetryRequest(method, path, data, retried, baseUri, initialSeed, null);
+			return RetryRequest<T>(method, path, data, deserializationState, retried, baseUri, initialSeed, null);
 		}
 
-		private ElasticsearchResponse RetryRequest(
-			string method, string path, object data, int retried, Uri baseUri,
+		private ElasticsearchResponse<T> RetryRequest<T>(
+			string method, string path, object data, object deserializationState, int retried, Uri baseUri,
 			int initialSeed, Exception e)
 		{
 			var maxRetries = this.GetMaximumRetries();
@@ -125,36 +126,37 @@ namespace Elasticsearch.Net.Connection
 
 			if (retried < maxRetries)
 			{
-				return this.DoRequest(method, path, data, null, ++retried, initialSeed);
+				return this.DoRequest<T>(method, path, data, null, deserializationState, ++retried, initialSeed);
 			}
 			throw new OutOfNodesException(exceptionMessage, e);
 		}
 
-		private ElasticsearchResponse _doRequest(string method, Uri uri, byte[] postData)
+		private ElasticsearchResponse<T> _doRequest<T>(string method, Uri uri, byte[] postData, object deserializationState)
 		{
 			switch (method.ToLowerInvariant())
 			{
 				case "post":
-					return this._connection.PostSync(uri, postData);
+					return this._connection.PostSync<T>(uri, postData, deserializationState);
 				case "put":
-					return this._connection.PutSync(uri, postData);
+					return this._connection.PutSync<T>(uri, postData, deserializationState);
 				case "delete":
 					return postData == null || postData.Length == 0
-						? this._connection.DeleteSync(uri)
-						: this._connection.DeleteSync(uri, postData);
+						? this._connection.DeleteSync<T>(uri, deserializationState)
+						: this._connection.DeleteSync<T>(uri, postData, deserializationState);
 				case "head":
-					return this._connection.HeadSync(uri);
+					return this._connection.HeadSync<T>(uri);
 				case "get":
-					return this._connection.GetSync(uri);
+					return this._connection.GetSync<T>(uri, deserializationState);
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}
 
-		public Task<ElasticsearchResponse> DoRequestAsync(
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
 			string method,
 			string path,
 			object data = null,
 			NameValueCollection queryString = null,
+			object deserializationState = null,
 			int retried = 0,
 			int? seed = null)
 		{
@@ -173,24 +175,24 @@ namespace Elasticsearch.Net.Connection
 				}
 				catch (Exception e)
 				{
-					return this.RetryRequestAsync(method, path, data, retried, baseUri, initialSeed, e);
+					return this.RetryRequestAsync<T>(method, path, data, deserializationState, retried, baseUri, initialSeed, e);
 				}
 			}
 			var uri = CreateUriToPath(baseUri, path);
-			return _doRequestAsync(method, uri, postData).ContinueWith(t=>
+			return _doRequestAsync<T>(method, uri, postData, deserializationState).ContinueWith(t=>
 			{
 				if (t.IsCanceled)
 					return null;
 				if (t.IsFaulted)
-					return this.RetryRequestAsync(method, path, data, retried, baseUri, initialSeed, t.Exception);
+					return this.RetryRequestAsync<T>(method, path, data, deserializationState, retried, baseUri, initialSeed, t.Exception);
 				if (t.Result.SuccessOrKnownError)
 					return t;
-				return this.RetryRequestAsync(method, path, data, retried, baseUri, initialSeed, null);
+				return this.RetryRequestAsync<T>(method, path, data, deserializationState, retried, baseUri, initialSeed, null);
 					
-			}).Unwrap<ElasticsearchResponse>();
+			}).Unwrap<ElasticsearchResponse<T>>();
 		}
-		private Task<ElasticsearchResponse> RetryRequestAsync(
-			string method, string path, object data, int retried, Uri baseUri,
+		private Task<ElasticsearchResponse<T>> RetryRequestAsync<T>(
+			string method, string path, object data, object deserializationState, int retried, Uri baseUri,
 			int initialSeed, Exception e)
 		{
 			var maxRetries = this.GetMaximumRetries();
@@ -201,26 +203,26 @@ namespace Elasticsearch.Net.Connection
 				this.Sniff();
 			if (retried < maxRetries)
 			{
-				return this.DoRequestAsync(method, path, data, null, ++retried, initialSeed);
+				return this.DoRequestAsync<T>(method, path, data, null, deserializationState, ++retried, initialSeed);
 			}
 			throw new OutOfNodesException(exceptionMessage, e);
 		}
-		private Task<ElasticsearchResponse> _doRequestAsync(string method, Uri uri, byte[] postData)
+		private Task<ElasticsearchResponse<T>> _doRequestAsync<T>(string method, Uri uri, byte[] postData, object deserializationState)
 		{
 			switch (method.ToLowerInvariant())
 			{
 				case "post":
-					return this._connection.Post(uri, postData);
+					return this._connection.Post<T>(uri, postData, deserializationState);
 				case "put":
-					return this._connection.Put(uri, postData);
+					return this._connection.Put<T>(uri, postData, deserializationState);
 				case "delete":
 					return postData == null || postData.Length == 0
-						? this._connection.Delete(uri)
-						: this._connection.Delete(uri, postData);
+						? this._connection.Delete<T>(uri, deserializationState)
+						: this._connection.Delete<T>(uri, postData, deserializationState);
 				case "head":
-					return this._connection.Head(uri);
+					return this._connection.Head<T>(uri);
 				case "get":
-					return this._connection.Get(uri);
+					return this._connection.Get<T>(uri, deserializationState);
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}

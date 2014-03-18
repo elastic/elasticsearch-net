@@ -14,18 +14,14 @@ namespace Nest
 		{
 			return this.Dispatch<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsDispatch(p),
-				(c, d) => new IndexExistsResponse(c),
-				allow404:true
+				(p, d) => this.RawDispatch.IndicesExistsDispatch<IndexExistsResponse>(p)
 			);
 		}
 		public Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
 			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse, IIndexExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync(p),
-				(c, d) => new IndexExistsResponse(c),
-				allow404:true
+				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<IndexExistsResponse>(p)
 			);
 		}
 	}

@@ -62,8 +62,8 @@ namespace Elasticsearch.Net.Connection
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
-		private Action<ElasticsearchResponse> _connectionStatusHandler;
-		Action<ElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
+		private Action<IElasticsearchResponse> _connectionStatusHandler;
+		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
 		private NameValueCollection _queryString;
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get{ return _queryString; } }
 
@@ -216,7 +216,7 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
-		protected void ConnectionStatusDefaultHandler(ElasticsearchResponse status)
+		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status)
 		{
 			return;
 		}
@@ -224,7 +224,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		public T SetConnectionStatusHandler(Action<ElasticsearchResponse> handler)
+		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
 		{
 			handler.ThrowIfNull("handler");
 			this._connectionStatusHandler = handler;

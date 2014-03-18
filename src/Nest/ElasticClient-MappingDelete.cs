@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return this.Dispatch<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch(p)
+				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse, IIndicesResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
 			);
 		}
 	}

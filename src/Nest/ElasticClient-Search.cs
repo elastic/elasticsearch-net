@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Linq;
 using Nest.Resolvers;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -32,8 +33,9 @@ namespace Nest
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
 			var pathInfo = ((IPathInfo<SearchQueryString>)descriptor).ToPathInfo(this._connectionSettings);
-			var status = this.RawDispatch.SearchDispatch(pathInfo, descriptor);
-			return this.Serializer.DeserializeSearchResponse<T, TResult>(status, descriptor);
+			var deserializationState = CreateCovariantSearchSelector<T, TResult>(descriptor);
+			var status = this.RawDispatch.SearchDispatch<QueryResponse<TResult>>(pathInfo, descriptor, deserializationState);
+			return status.Response;
 		}
 
 
@@ -55,8 +57,30 @@ namespace Nest
 			searchSelector.ThrowIfNull("searchSelector");
 			var descriptor = searchSelector(new SearchDescriptor<T>());
 			var pathInfo = ((IPathInfo<SearchQueryString>)descriptor).ToPathInfo(this._connectionSettings);
-			return this.RawDispatch.SearchDispatchAsync(pathInfo, descriptor)
-				.ContinueWith(t=> this.Serializer.DeserializeSearchResponse<T, TResult>(t.Result, descriptor));
+			var deserializationState = CreateCovariantSearchSelector<T, TResult>(descriptor);
+			return this.RawDispatch.SearchDispatchAsync<QueryResponse<TResult>>(pathInfo, descriptor, deserializationState)
+				.ContinueWith<IQueryResponse<TResult>>(t=> t.Result.Response);
+		}
+
+		private JsonConverter CreateCovariantSearchSelector<T, TResult>(SearchDescriptor<T> originalSearchDescriptor)
+			where T : class
+			where TResult : class
+		{
+			var types = (originalSearchDescriptor._Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null);
+			if (originalSearchDescriptor._ConcreteTypeSelector == null && types.Any(t => t.Type != typeof(TResult)))
+			{
+				var typeDictionary = types.ToDictionary(this.Infer.TypeName, t => t.Type); 
+				originalSearchDescriptor._ConcreteTypeSelector = (o, h) =>
+				{
+					Type t;
+					if (!typeDictionary.TryGetValue(h.Type, out t))
+						return typeof(TResult);
+					return t;
+				};
+			}
+			if (originalSearchDescriptor._ConcreteTypeSelector == null)
+				return null;
+			return new ConcreteTypeConverter<TResult>(originalSearchDescriptor._ConcreteTypeSelector);
 		}
 	}
 }
