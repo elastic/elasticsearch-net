@@ -9,6 +9,7 @@ using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
+using Elasticsearch.Net.Tests.Unit.ConnectionA;
 using FakeItEasy;
 using FakeItEasy.Configuration;
 using FluentAssertions;
@@ -67,8 +68,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
 				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
-				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
-				getCall.Returns(ElasticsearchResponse.Create(config, 200, "GET", "/", null, null));
+				
+				var getCall = FakeResponse.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Ok(config));
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
 				client1.Info(); //info call 1
@@ -107,14 +109,14 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
 				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
-				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
+				var getCall = FakeResponse.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 1
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 2
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 3
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //sniff
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 4
-					ElasticsearchResponse.Create(config, 503, "GET", "/", null, null) //info 5
+					FakeResponse.Ok(config), //info 1
+					FakeResponse.Ok(config), //info 2
+					FakeResponse.Ok(config), //info 3
+					FakeResponse.Ok(config), //sniff
+					FakeResponse.Ok(config), //info 4
+					FakeResponse.Bad(config) //info 5
 				);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
@@ -147,13 +149,14 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
 				var sniffCall = A.CallTo(() => connection.Sniff(A<Uri>._));
-				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
+				var getCall = FakeResponse.GetSyncCall(fake);
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 1
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 2
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 3
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 4
-					ElasticsearchResponse.Create(config, 503, "GET", "/", null, null) //info 5
+					
+					FakeResponse.Ok(config), //info 1
+					FakeResponse.Ok(config), //info 2
+					FakeResponse.Ok(config), //info 3
+					FakeResponse.Ok(config), //info 4
+					FakeResponse.Bad(config) //info 5
 				);
 
 				var client1 = fake.Resolve<ElasticsearchClient>();
@@ -198,18 +201,18 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				});
 
 				var seenNodes = new List<Uri>();
-				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => connection.GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 1
-					ElasticsearchResponse.Create(config, 503, "GET", "/", null, null), //info 2
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 2 retry
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 3
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 4
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 5
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 6
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 7
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 8
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null) //info 9
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 1
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 503, "GET", "/", null), //info 2
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 2 retry
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 3
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 4
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 5
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 6
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 7
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 8
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null) //info 9
 				);
 				getCall.Invokes((Uri u) => seenNodes.Add(u));
 

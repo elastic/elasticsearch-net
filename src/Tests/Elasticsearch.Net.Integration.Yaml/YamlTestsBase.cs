@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
-		protected ElasticsearchResponse _status;
+		protected ElasticsearchResponse<DynamicDictionary> _status;
 		protected dynamic _response;
 
 		static YamlTestsBase()
@@ -43,7 +43,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			_client.IndicesDelete("*");
 		}
 
-		protected void Do(Func<ElasticsearchResponse> action, string shouldCatch = null)
+		protected void Do(Func<ElasticsearchResponse<DynamicDictionary>> action, string shouldCatch = null)
 		{
 			try
 			{
@@ -75,10 +75,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 			else if (shouldCatch != null && shouldCatch.StartsWith("/"))
 			{
 				var re = shouldCatch.Trim('/');
-				Assert.IsTrue(Regex.IsMatch(this._status.Result, re),
+				Assert.IsTrue(Regex.IsMatch(Encoding.UTF8.GetString(this._status.ResponseRaw), re),
 					"response does not match regex: " + shouldCatch);
 			}
-			this._response = this._status.DynamicResult;
+			this._response = this._status.Response;
 		}
 
 		protected void Skip(string version, string reason)
@@ -100,15 +100,15 @@ namespace Elasticsearch.Net.Integration.Yaml
 		protected void IsTrue(object o)
 		{
 			if (o == null) Assert.Fail("null is not true value");
-			if (o is ElasticsearchResponse)
+			if (o is IElasticsearchResponse)
 			{
-				var c = o as ElasticsearchResponse;
+				var c = o as IElasticsearchResponse;
 				if (c.RequestMethod == "HEAD" && c.Error != null)
 				{
 					Assert.Fail("HEAD request returned status:" + c.Error.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
-				o = c.Result;
+				o = Encoding.UTF8.GetString(c.ResponseRaw);
 			}
 
 			o = Unbox(o);
@@ -149,9 +149,9 @@ namespace Elasticsearch.Net.Integration.Yaml
 		{
 			if (o == null)
 				return;
-			if (o is ElasticsearchResponse)
+			if (o is IElasticsearchResponse)
 			{
-				var c = o as ElasticsearchResponse;
+				var c = o as IElasticsearchResponse;
 				if (c.RequestMethod == "HEAD" && c.Error == null)
 				{
 					Assert.Fail("HEAD request did not return error status but:" 
@@ -218,7 +218,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is JValue) o = ((JValue)o).Value;
 			if (o is JArray) o = ((JArray) o).ToObject<object[]>();
 			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
-			if (o is ElasticsearchResponse) o = ((ElasticsearchResponse)o).Result;
+			if (o is ElasticsearchResponse<DynamicDictionary>) o = ((ElasticsearchResponse<DynamicDictionary>)o).Response;
 			return o;
 		}
 
@@ -304,7 +304,8 @@ namespace Elasticsearch.Net.Integration.Yaml
 				else if (v.StartsWith("/"))
 				{
 					var re = Regex.Replace(v, @"(^[\s\r\n]*?\/|\/[\s\r\n]*?$)", "");
-					Assert.IsTrue(Regex.IsMatch(this._status.Result, re, RegexOptions.IgnorePatternWhitespace));
+					var r = Encoding.UTF8.GetString(this._status.ResponseRaw);
+					Assert.IsTrue(Regex.IsMatch(r, re, RegexOptions.IgnorePatternWhitespace));
 				}
 				else Assert.AreEqual(s, v);
 			}

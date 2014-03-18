@@ -29,7 +29,7 @@ namespace Elasticsearch.Net.Connection
 			var method = request.Method;
 			var path = request.RequestUri.ToString();
 
-			var cs = ElasticsearchResponse.Create<T>(this._ConnectionSettings, 200, method, path, data);
+			var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, 200, method, path, data);
 			_ConnectionSettings.ConnectionStatusHandler(cs);
 			return cs;
 		}

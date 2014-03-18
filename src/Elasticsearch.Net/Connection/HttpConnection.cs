@@ -90,7 +90,7 @@ namespace Elasticsearch.Net.Connection
 			{
 				if (response.StatusCode != HttpStatusCode.OK)
 					return new List<Uri>();
-				var cs = ElasticsearchResponse.Create<object>(this._ConnectionSettings, (int)response.StatusCode, "GET", uri.AbsolutePath, null);
+				var cs = ElasticsearchResponse<object>.Create(this._ConnectionSettings, (int)response.StatusCode, "GET", uri.AbsolutePath, null);
 				return Sniffer.FromStream(cs, responseStream, this._ConnectionSettings.Serializer);
 			}
 		}
@@ -234,7 +234,7 @@ namespace Elasticsearch.Net.Connection
 							s = memoryStream;
 						}
 
-						cs = ElasticsearchResponse.Create<T>(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
+						cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
 						var result = this._ConnectionSettings.Serializer.Deserialize<T>(cs, s, deserializationState);
 						cs.Response = result;
 						cs.ResponseRaw = memoryStream.ToArray();
@@ -244,7 +244,7 @@ namespace Elasticsearch.Net.Connection
 				}
 				catch (WebException webException)
 				{
-					cs = ElasticsearchResponse.CreateError<T>(this._ConnectionSettings, webException, method, path, data);
+					cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, webException, method, path, data);
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);
 					return cs;
@@ -269,7 +269,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					var m = "Could not start the operation before the timeout of " + timeout +
 					  "ms completed while waiting for the semaphore";
-					var cs = ElasticsearchResponse.CreateError<T>(this._ConnectionSettings, new TimeoutException(m), method, path, data); 
+					var cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, new TimeoutException(m), method, path, data); 
 					tcs.SetResult(cs);
 					tracer.SetResult(cs);
 					_ConnectionSettings.ConnectionStatusHandler(cs);
@@ -345,7 +345,7 @@ namespace Elasticsearch.Net.Connection
 						}
 						s = memoryStream;
 					}
-					var cs = ElasticsearchResponse.Create<T>(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
+					var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
 					var t = this._ConnectionSettings.Serializer.DeserializeAsync<T>(cs, s, deserializationState);
 					yield return t;
 					cs.Response = t.Result;
@@ -374,7 +374,7 @@ namespace Elasticsearch.Net.Connection
 					{
 						var path = request.RequestUri.ToString();
 						var method = request.Method;
-						var response = ElasticsearchResponse.CreateError<T>(this._ConnectionSettings, exception, method, path, data);
+						var response = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, exception, method, path, data);
 						tcs.SetResult(response);
 					}
 					else

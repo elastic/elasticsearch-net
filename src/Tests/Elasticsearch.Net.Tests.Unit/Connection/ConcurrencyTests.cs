@@ -132,13 +132,13 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				return  _rnd.Next(1, 11) % 3 == 0 ? _uris : _uris2;
 			}
 
-			public override ElasticsearchResponse GetSync(Uri uri)
+			public override ElasticsearchResponse<T> GetSync<T>(Uri uri, object deserializationState = null)
 			{
 				var statusCode = _rnd.Next(1, 9) % 3 == 0 ? 503 : 200;
 				if (uri.Port == 9202)
 					statusCode = 200;
 
-				return ElasticsearchResponse.Create(this._ConnectionSettings, statusCode, "GET", "/", null, null);
+				return ElasticsearchResponse<T>.Create(this._ConnectionSettings, statusCode, "GET", "/", null);
 			
 			}
 		}

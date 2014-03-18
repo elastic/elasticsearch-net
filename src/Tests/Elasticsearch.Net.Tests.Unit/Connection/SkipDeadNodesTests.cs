@@ -63,18 +63,18 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var connection = fake.Resolve<IConnection>();
 
 				var seenNodes = new List<Uri>();
-				var getCall = A.CallTo(() => connection.GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => connection.GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 1 - 9204
-					ElasticsearchResponse.Create(config, 503, "GET", "/", null, null), //info 2 - 9203 DEAD
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 2 retry - 9202
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 3 - 9201
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 4 - 9204
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 5 - 9202
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 6 - 9201
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 7 - 9204
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null), //info 8 - 9203 (Now > Timeout)
-					ElasticsearchResponse.Create(config, 200, "GET", "/", null, null) //info 9 - 9202
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 1 - 9204
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 503, "GET", "/", null), //info 2 - 9203 DEAD
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 2 retry - 9202
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 3 - 9201
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 4 - 9204
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 5 - 9202
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 6 - 9201
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 7 - 9204
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null), //info 8 - 9203 (Now > Timeout)
+					ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null) //info 9 - 9202
 				);
 				getCall.Invokes((Uri u) => seenNodes.Add(u));
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
@@ -149,11 +149,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				fake.Provide<ITransport>(fake.Resolve<Transport>());
 				var connection = fake.Resolve<IConnection>();
 
-				var ok = Task.FromResult(ElasticsearchResponse.Create(config, 200, "GET", "/", null, null));
-				var bad = Task.FromResult(ElasticsearchResponse.Create(config, 503, "GET", "/", null, null));
+				var ok = Task.FromResult(ElasticsearchResponse<DynamicDictionary>.Create(config, 200, "GET", "/", null));
+				var bad = Task.FromResult(ElasticsearchResponse<DynamicDictionary>.Create(config, 503, "GET", "/", null));
 
 				var seenNodes = new List<Uri>();
-				var getCall = A.CallTo(() => connection.Get(A<Uri>._));
+				var getCall = A.CallTo(() => connection.Get<DynamicDictionary>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
 					ok, //info 1 - 9204
 					bad, //info 2 - 9203 DEAD

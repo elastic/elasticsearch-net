@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -174,8 +175,8 @@ namespace Nest.Tests.Integration.Core
 			Assert.Greater(totalSet, 0);
 
 			var deleteResult = this._client.Bulk(b => b.DeleteMany(result.Documents).Refresh());
-			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
-			Assert.False(deleteResult.Errors, deleteResult.ConnectionStatus.Result);
+			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.ResponseRaw.Utf8String());
+			Assert.False(deleteResult.Errors, deleteResult.ConnectionStatus.ResponseRaw.Utf8String());
 
 			Assert.IsNotEmpty(deleteResult.Items);
 
@@ -196,8 +197,8 @@ namespace Nest.Tests.Integration.Core
 			var totalResults = result.Total;
 
 			var deleteResult = this._client.Bulk(b=>b.DeleteMany(result.Documents, (p, o) => p.VersionType(VersionType.Internal)).Refresh());
-			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.Result);
-			Assert.False(deleteResult.Errors, deleteResult.ConnectionStatus.Result);
+			Assert.True(deleteResult.IsValid, deleteResult.ConnectionStatus.ResponseRaw.Utf8String());
+			Assert.False(deleteResult.Errors, deleteResult.ConnectionStatus.ResponseRaw.Utf8String());
 
 			Assert.IsNotEmpty(deleteResult.Items);
 

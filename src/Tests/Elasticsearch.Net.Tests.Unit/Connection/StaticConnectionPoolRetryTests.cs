@@ -14,11 +14,44 @@ using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
+using FakeItEasy.Configuration;
 using FluentAssertions;
 using NUnit.Framework;
 
 namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 {
+	public static class FakeResponse
+	{
+		public static ElasticsearchResponse<DynamicDictionary> Ok(
+			IConnectionConfigurationValues config, 
+			string method = "GET",
+			string path = "/")
+		{
+			return ElasticsearchResponse<DynamicDictionary>.Create(config, 200, method, path, null);
+		}
+		
+		public static ElasticsearchResponse<DynamicDictionary> Bad(
+			IConnectionConfigurationValues config, 
+			string method = "GET",
+			string path = "/")
+		{
+			return ElasticsearchResponse<DynamicDictionary>.Create(config, 503, method, path, null);
+		}
+		
+		public static IReturnValueArgumentValidationConfiguration<ElasticsearchResponse<DynamicDictionary>> GetSyncCall(AutoFake fake)
+		{
+			return A.CallTo(() => 
+				fake.Resolve<IConnection>().GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
+		}
+		public static IReturnValueArgumentValidationConfiguration<Task<ElasticsearchResponse<DynamicDictionary>>> GetCall(AutoFake fake)
+		{
+			return A.CallTo(() => 
+				fake.Resolve<IConnection>().Get<DynamicDictionary>(A<Uri>._, A<object>._));
+		}
+
+	}
+
+
 	[TestFixture]
 	public class StaticConnectionPoolRetryTests
 	{
@@ -58,7 +91,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 				//set up fake for a call on IConnection.GetSync so that it always throws 
 				//an exception
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = GetSync(fake);
 				getCall.Throws<Exception>();
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
@@ -81,6 +114,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 			}
 		}
+
+		
 
 		[Test]
 		public void AllNodesMustBeTriedOnce()
@@ -124,7 +159,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 					new ConnectionConfiguration(_connectionPool)
 						.MaximumRetries(7)
 				);
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
 				getCall.Throws<Exception>();
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
@@ -155,13 +191,14 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 						.MaximumRetries(4)
 				);
 				//set up our GET to / to return 4 503's followed by a 200
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 200, "GET", "/", null)
 				);
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
@@ -212,9 +249,10 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 					call.Returns(DateTime.UtcNow.AddSeconds(60));
 				
 				//When we do a GET on / we always recieve a 503
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
 				getCall.Returns(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null)
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null)
 				);
 				
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
@@ -259,13 +297,14 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 				//fake getsync handler that return a 503 4 times and then a 200
 				//this will cause all 4 nodes to be marked dead on the first client call
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<DynamicDictionary>.Create(_config, 200, "GET", "/", null)
 				);
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);

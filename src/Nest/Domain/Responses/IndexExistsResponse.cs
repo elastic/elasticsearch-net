@@ -12,7 +12,7 @@ namespace Nest
 	[JsonObject]
 	public class IndexExistsResponse : BaseResponse, IIndexExistsResponse
 	{
-		internal IndexExistsResponse(ElasticsearchResponse connectionStatus)
+		internal IndexExistsResponse(IElasticsearchResponse connectionStatus)
 		{
 			this.ConnectionStatus = connectionStatus;
 			this.IsValid = connectionStatus.Error == null || connectionStatus.Error.HttpStatusCode == HttpStatusCode.NotFound;

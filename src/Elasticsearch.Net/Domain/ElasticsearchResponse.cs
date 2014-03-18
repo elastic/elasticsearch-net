@@ -23,95 +23,11 @@ namespace Elasticsearch.Net
 		string RequestUrl { get; }
 		byte[] Request { get; }
 		int? HttpStatusCode { get; }
-	}
-
-	public class ElasticsearchResponse : ElasticsearchResponse<byte[]>, IElasticsearchResponse
-	{
-		private string _result;
 		
-		public string Result
-		{
-			get { return _result ?? (_result = this.Response.Utf8String()); }
-		}
-		
-		private static readonly byte _startAccolade = (byte)'{';
-		private DynamicDictionary _response;
-		public DynamicDictionary DynamicResult
-		{
-			get
-			{
-				if (Response == null || Response.Length == 0)
-					return null;
-				if (Response[0] != _startAccolade)
-					return null;
-
-				//if (_response == null)
-					//this._response = ElasticsearchDynamic.Create(this.Deserialize<IDictionary<string, object>>());
-				return this._response;
-			}
-		}
-		protected ElasticsearchResponse(IConnectionConfigurationValues settings) : base(settings)
-		{
-			this.Settings = settings;
-			this.Serializer = settings.Serializer; 
-		}
-
-		private ElasticsearchResponse(IConnectionConfigurationValues settings, Exception e) : this(settings)
-		{
-			this.Success = false;
-			this.Error = new ConnectionError(e);
-			if (this.Error.ResponseReadFromWebException != null)
-				this.Response = this.Error.ResponseReadFromWebException;
-			if (this.Error.HttpStatusCode != null)
-				this.HttpStatusCode = (int) this.Error.HttpStatusCode;
-		}
-		private ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode, byte[] response = null) : this(settings)
-		{
-			this.Success = statusCode >= 200 && statusCode < 300;
-			if (!this.Success)
-			{
-				var exception = new ConnectionException(statusCode);
-				this.Error = new ConnectionError(exception);
-			}
-			this.Response = response;
-			this.HttpStatusCode = statusCode;
-		}
-	
-		public static ElasticsearchResponse CreateError(IConnectionConfigurationValues settings, Exception e, string method, string path, byte[] request)
-		{
-			var cs = new ElasticsearchResponse(settings, e);
-			cs.Request = request;
-			cs.RequestUrl = path;
-			cs.RequestMethod = method;
-			return cs;
-		}
-		public static ElasticsearchResponse Create(IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, byte[] response)
-		{
-			var cs = new ElasticsearchResponse(settings, statusCode, response);
-			cs.Request = request;
-			cs.RequestUrl = path;
-			cs.RequestMethod = method;
-			return cs;
-		}
-		
-		public override string ToString()
-		{
-			var r = this;
-			var e = r.Error;
-			var print = _printFormat.F(
-			  Environment.NewLine,
-			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
-			  r.RequestMethod,
-			  r.RequestUrl,
-			  r.Request,
-			  r.Result
-			);
-			if (!this.Success)
-			{
-				print += _errorFormat.F(Environment.NewLine, e.ExceptionMessage, e.OriginalException.StackTrace);
-			}
-			return print;
-		}
+		/// <summary>
+		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
+		/// </summary>
+		byte[] ResponseRaw { get; }
 	}
 
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
@@ -129,6 +45,7 @@ namespace Elasticsearch.Net
 		public T Response { get; protected internal set; }
 		
 		public byte[] Request { get; protected internal set; }
+		
 		/// <summary>
 		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
 		/// </summary>
@@ -175,7 +92,7 @@ namespace Elasticsearch.Net
 			}
 			this.HttpStatusCode = statusCode;
 		}
-		public static ElasticsearchResponse<T> CreateError<T>(IConnectionConfigurationValues settings, Exception e, string method, string path, byte[] request)
+		public static ElasticsearchResponse<T> CreateError(IConnectionConfigurationValues settings, Exception e, string method, string path, byte[] request)
 		{
 			var cs = new ElasticsearchResponse<T>(settings, e);
 			cs.Request = request;
@@ -183,7 +100,7 @@ namespace Elasticsearch.Net
 			cs.RequestMethod = method;
 			return cs;
 		}
-		public static ElasticsearchResponse<T> Create<T>(IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request)
+		public static ElasticsearchResponse<T> Create(IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request)
 		{
 			var cs = new ElasticsearchResponse<T>(settings, statusCode);
 			cs.Request = request;

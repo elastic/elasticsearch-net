@@ -19,12 +19,12 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 
 	public interface IResponseGenerator
 	{
-		ElasticsearchResponse Create();
+		ElasticsearchResponse<T> Create<T>();
 	}
 
 	public class ResponseGenerator : IResponseGenerator
 	{
-		public virtual ElasticsearchResponse Create()
+		public virtual ElasticsearchResponse<T> Create<T>()
 		{
 			return null;
 		}
@@ -47,75 +47,75 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 		}
 
 
-		public virtual Task<ElasticsearchResponse> Get(Uri uri)
+		public virtual Task<ElasticsearchResponse<T>> Get<T>(Uri uri, object deserializationState = null)
 		{
-			return DoAsyncRequest(uri);
+			return DoAsyncRequest<T>(uri);
 		}
 
-		public virtual ElasticsearchResponse GetSync(Uri uri)
+		public virtual ElasticsearchResponse<T> GetSync<T>(Uri uri, object deserializationState = null) 
 		{
 			_uriObserver.Observe(uri);
-			return _responseGenerator.Create();
+			return _responseGenerator.Create<T>();
 		}
 
-		public virtual Task<ElasticsearchResponse> Head(Uri uri)
+		public virtual Task<ElasticsearchResponse<T>> Head<T>(Uri uri)
 		{
 			_uriObserver.Observe(uri);
-			return Task.FromResult(_responseGenerator.Create());
+			return Task.FromResult(_responseGenerator.Create<T>());
 		}
 
-		public virtual ElasticsearchResponse HeadSync(Uri uri)
+		public virtual ElasticsearchResponse<T> HeadSync<T>(Uri uri)
 		{
 			_uriObserver.Observe(uri);
-			return _responseGenerator.Create();
+			return _responseGenerator.Create<T>();
 		}
 
-		public virtual Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
+		public virtual Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return Task.FromResult(_responseGenerator.Create());
+			return Task.FromResult(_responseGenerator.Create<T>());
 		}
 
-		public virtual ElasticsearchResponse PostSync(Uri uri, byte[] data)
+		public virtual ElasticsearchResponse<T> PostSync<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return _responseGenerator.Create();
+			return _responseGenerator.Create<T>();
 		}
 
-		public virtual Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
+		public virtual Task<ElasticsearchResponse<T>> Put<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return Task.FromResult(_responseGenerator.Create());
+			return Task.FromResult(_responseGenerator.Create<T>());
 		}
 
-		public virtual ElasticsearchResponse PutSync(Uri uri, byte[] data)
+		public virtual ElasticsearchResponse<T> PutSync<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return _responseGenerator.Create();
+			return _responseGenerator.Create<T>();
 		}
 
-		public virtual Task<ElasticsearchResponse> Delete(Uri uri)
+		public virtual Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return Task.FromResult(_responseGenerator.Create());
+			return Task.FromResult(_responseGenerator.Create<T>());
 		}
 
-		public virtual ElasticsearchResponse DeleteSync(Uri uri)
+		public virtual ElasticsearchResponse<T> DeleteSync<T>(Uri uri, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return _responseGenerator.Create();
+			return _responseGenerator.Create<T>();
 		}
 
-		public virtual Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
+		public virtual Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return Task.FromResult(_responseGenerator.Create());
+			return Task.FromResult(_responseGenerator.Create<T>());
 		}
 
-		public virtual ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
+		public virtual ElasticsearchResponse<T> DeleteSync<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
-			return _responseGenerator.Create();
+			return _responseGenerator.Create<T>();
 		}
 
 		public bool Ping(Uri uri)
@@ -128,10 +128,10 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 			throw new NotImplementedException();
 		}
 
-		private Task<ElasticsearchResponse> DoAsyncRequest(Uri uri)
+		private Task<ElasticsearchResponse<T>> DoAsyncRequest<T>(Uri uri)
 		{
 			_uriObserver.Observe(uri);
-			return Task.FromResult(_responseGenerator.Create());
+			return Task.FromResult(_responseGenerator.Create<T>());
 		}
 	}
 }
