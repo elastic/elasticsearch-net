@@ -66,7 +66,8 @@ namespace Elasticsearch.Net
 			{
 				return this.Success ||
 					(this.HttpStatusCode.HasValue 
-					&& this.HttpStatusCode.Value != 503 && (this.HttpStatusCode.Value >= 400 && this.HttpStatusCode.Value < 599));
+					&& this.HttpStatusCode.Value != 503 
+					&& ((this.HttpStatusCode.Value >= 400 && this.HttpStatusCode.Value < 599)));
 			}
 		}
 
@@ -82,6 +83,7 @@ namespace Elasticsearch.Net
 			this.Error = new ConnectionError(e);
 			if (this.Error.HttpStatusCode != null)
 				this.HttpStatusCode = (int) this.Error.HttpStatusCode;
+			this.ResponseRaw = this.Error.ResponseReadFromWebException;
 		}
 		private ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode) : this(settings)
 		{

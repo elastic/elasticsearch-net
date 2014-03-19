@@ -39,13 +39,10 @@ namespace Elasticsearch.Net.Connection
 			//TODO: take the datetimeprovider from the connection pool?
 			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
-			if (this._configurationValues.SniffsOnStartup)
-				this.Sniff(fromStartup: true);
-			else
 				this._lastSniff = this._dateTimeProvider.Now();
 		}
 
-		private void Sniff(bool fromStartup = false)
+		public void Sniff(bool fromStartup = false)
 		{
 			this._connectionPool.Sniff(this._connection, fromStartup);
 			this._lastSniff = this._dateTimeProvider.Now();
@@ -122,7 +119,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			var maxRetries = this.GetMaximumRetries();
 			var exceptionMessage = "Unable to perform request: '{0} {1}' on any of the nodes after retrying {2} times."
-				.F( method, path, retried);
+				.F( method, path.IsNullOrEmpty() ? "/" : "", retried);
 			this._connectionPool.MarkDead(baseUri, this._configurationValues.DeadTimeout, this._configurationValues.MaxDeadTimeout);
 			if (this._configurationValues.SniffsOnConnectionFault && retried == 0)
 				this.Sniff();

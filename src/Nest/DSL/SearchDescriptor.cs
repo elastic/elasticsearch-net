@@ -305,9 +305,9 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> Source(Func<SourceDescriptor<T>, SourceDescriptor<T>> sourceSelector)
+		public SearchDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
 		{
-			this._Source = sourceSelector(new SourceDescriptor<T>());
+			this._Source = sourceSelector(new SearchSourceDescriptor<T>());
 			return this;
 		}
 		/// <summary>

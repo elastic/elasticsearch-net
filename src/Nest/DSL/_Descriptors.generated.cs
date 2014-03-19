@@ -1545,6 +1545,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public ExplainDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor SourceInclude(params string[] _source_include)
@@ -1553,6 +1564,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public ExplainDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 		
 	}
 	
@@ -1641,6 +1663,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params string[] _source_include)
@@ -1649,6 +1682,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(int version)
@@ -1674,13 +1718,13 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public partial class GetSourceDescriptor
+	public partial class SourceDescriptor<T>
 	{
-		internal GetSourceQueryString _QueryString = new GetSourceQueryString(); 
+		internal SourceQueryString _QueryString = new SourceQueryString(); 
 
 
 		///<summary>The ID of the parent document</summary>
-		public GetSourceDescriptor Parent(string parent)
+		public SourceDescriptor<T> Parent(string parent)
 		{
 			this._QueryString.Parent(parent);
 			return this;
@@ -1688,7 +1732,7 @@ namespace Nest
 		
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public GetSourceDescriptor Preference(string preference)
+		public SourceDescriptor<T> Preference(string preference)
 		{
 			this._QueryString.Preference(preference);
 			return this;
@@ -1696,7 +1740,7 @@ namespace Nest
 		
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public GetSourceDescriptor Realtime(bool realtime = true)
+		public SourceDescriptor<T> Realtime(bool realtime = true)
 		{
 			this._QueryString.Realtime(realtime);
 			return this;
@@ -1704,7 +1748,7 @@ namespace Nest
 		
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public GetSourceDescriptor Refresh(bool refresh = true)
+		public SourceDescriptor<T> Refresh(bool refresh = true)
 		{
 			this._QueryString.Refresh(refresh);
 			return this;
@@ -1712,7 +1756,7 @@ namespace Nest
 		
 
 		///<summary>Specific routing value</summary>
-		public GetSourceDescriptor Routing(string routing)
+		public SourceDescriptor<T> Routing(string routing)
 		{
 			this._QueryString.Routing(routing);
 			return this;
@@ -1720,7 +1764,7 @@ namespace Nest
 		
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetSourceDescriptor Source(params string[] _source)
+		public SourceDescriptor<T> Source(params string[] _source)
 		{
 			this._QueryString.Source(_source);
 			return this;
@@ -1728,23 +1772,45 @@ namespace Nest
 		
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetSourceDescriptor SourceExclude(params string[] _source_exclude)
+		public SourceDescriptor<T> SourceExclude(params string[] _source_exclude)
 		{
 			this._QueryString.SourceExclude(_source_exclude);
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetSourceDescriptor SourceInclude(params string[] _source_include)
+		public SourceDescriptor<T> SourceInclude(params string[] _source_include)
 		{
 			this._QueryString.SourceInclude(_source_include);
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetSourceDescriptor Version(int version)
+		public SourceDescriptor<T> Version(int version)
 		{
 			this._QueryString.Version(version);
 			return this;
@@ -1752,7 +1818,7 @@ namespace Nest
 		
 
 		///<summary>Specific version type</summary>
-		public GetSourceDescriptor VersionType(VersionTypeOptions version_type)
+		public SourceDescriptor<T> VersionType(VersionTypeOptions version_type)
 		{
 			this._QueryString.VersionType(version_type);
 			return this;
@@ -3644,6 +3710,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceExclude(typedPathLookups);
+			return this;
+		}
+			
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude(params string[] _source_include)
@@ -3652,6 +3729,17 @@ namespace Nest
 			return this;
 		}
 		
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
+		{
+			if (!typedPathLookups.HasAny())
+				return this;
+
+			this._QueryString._SourceInclude(typedPathLookups);
+			return this;
+		}
+			
 		
 	}
 	

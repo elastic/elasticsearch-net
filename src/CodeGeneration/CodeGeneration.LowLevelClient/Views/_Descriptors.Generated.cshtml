@@ -36,6 +36,8 @@ namespace Nest
 			var m = kv.Key.ToPascalCase();
 			var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
 			var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
+			var mml = mm.ToLowerInvariant();
+			var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @(mm)(@t @kv.Key@tSuffix)
@@ -44,8 +46,8 @@ namespace Nest
 			return this;
 		}
 		</text>
-		if (mm.ToLowerInvariant().Contains("fields") && t.Contains("string"))
-		 {
+		if (fieldMethod)
+		{
 			<text>
 		///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") typedPathLookups) @Raw(typed ? "" : "where T : class")

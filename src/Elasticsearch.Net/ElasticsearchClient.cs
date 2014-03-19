@@ -34,6 +34,8 @@ namespace Elasticsearch.Net
 			
 			//neccessary to pass the serializer to ElasticsearchResponse
 			this.Settings.Serializer = this.Transport.Serializer;
+			if (this.Settings.SniffsOnStartup)
+				this.Transport.Sniff(fromStartup: true);
 		}
 
 		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)

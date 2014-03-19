@@ -960,7 +960,7 @@ namespace Nest
 		}
 		
 		
-		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<GetSourceQueryString> pathInfo , object deserializationState = null)
+		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -975,7 +975,7 @@ namespace Nest
 		}
 		
 		
-		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<GetSourceQueryString> pathInfo , object deserializationState = null)
+		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<SourceQueryString> pathInfo , object deserializationState = null)
 		{
 			switch(pathInfo.HttpMethod)
 			{

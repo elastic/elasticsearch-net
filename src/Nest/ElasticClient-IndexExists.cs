@@ -19,7 +19,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesExistsDispatch<IndexExistsResponse>(
 					p,
 					new IndexExistConverter(this.DeserializeExistsResponse)
-				)
+				), allow404: true
 			);
 		}
 		public Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
@@ -29,7 +29,7 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<IndexExistsResponse>(
 					p,
 					new IndexExistConverter(this.DeserializeExistsResponse)
-				)
+				), allow404:true
 			);
 		}
 		

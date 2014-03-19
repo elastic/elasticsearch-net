@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -222,35 +223,51 @@ namespace Elasticsearch.Net.Connection
 				{
 					using (var response = (HttpWebResponse)request.GetResponse())
 					using (var responseStream = response.GetResponseStream())
-					using (var memoryStream = new MemoryStream())
-					{
-						Stream s = responseStream;
-						if(_ConnectionSettings.KeepRawResponse) 
-						{
-							responseStream.CopyTo(memoryStream);
-							//use memory stream for serialization instead
-							//our own serializers have special handling for memorystream
-							//that will prevent double reads
-							s = memoryStream;
-						}
-
-						cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
-						var result = this._ConnectionSettings.Serializer.Deserialize<T>(cs, s, deserializationState);
-						cs.Response = result;
-						cs.ResponseRaw = memoryStream.ToArray();
-						tracer.SetResult(cs);
-						return cs;
-					}
+					return WebToElasticsearchResponse<T>(data, deserializationState, responseStream, response, method, path, tracer);
 				}
 				catch (WebException webException)
 				{
-					cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, webException, method, path, data);
-					tracer.SetResult(cs);
-					_ConnectionSettings.ConnectionStatusHandler(cs);
-					return cs;
+					var httpEx = webException.Response as HttpWebResponse;
+					if (httpEx != null && httpEx.StatusCode == HttpStatusCode.NotFound)
+					{
+						cs = WebToElasticsearchResponse(data, deserializationState, httpEx.GetResponseStream(), httpEx, method, path, tracer);
+						cs.Error = new ConnectionError(webException);
+						return cs;
+
+					}
+						cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, webException, method, path, data);
+						tracer.SetResult(cs);
+						_ConnectionSettings.ConnectionStatusHandler(cs);
+						return cs;
 				}
 			}
 
+		}
+
+		private ElasticsearchResponse<T> WebToElasticsearchResponse<T>(byte[] data, object deserializationState,
+			Stream responseStream, HttpWebResponse response, string method, string path, ElasticsearchResponseTracer<T> tracer)
+		{
+			ElasticsearchResponse<T> cs;
+			using (var memoryStream = new MemoryStream())
+			{
+				Stream s = responseStream;
+				if (_ConnectionSettings.KeepRawResponse)
+				{
+					responseStream.CopyTo(memoryStream);
+					//use memory stream for serialization instead
+					//our own serializers have special handling for memorystream
+					//that will prevent double reads
+					memoryStream.Position = 0;
+					s = memoryStream;
+				}
+
+				cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
+				var result = this._ConnectionSettings.Serializer.Deserialize<T>(cs, s, deserializationState);
+				cs.Response = result;
+				cs.ResponseRaw = memoryStream.ToArray();
+				tracer.SetResult(cs);
+				return cs;
+			}
 		}
 
 		protected virtual Task<ElasticsearchResponse<T>> DoAsyncRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)
@@ -343,6 +360,7 @@ namespace Elasticsearch.Net.Connection
 							if (read.Result == 0) break;
 							memoryStream.Write(buffer, 0, read.Result);
 						}
+						memoryStream.Position = 0;
 						s = memoryStream;
 					}
 					var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);

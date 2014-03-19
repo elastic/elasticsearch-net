@@ -133,8 +133,8 @@ namespace Nest
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 		FieldSelection<T> SourceFields<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
 		Task<FieldSelection<T>> SourceFieldsAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
-		T Source<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
-		Task<T> SourceAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
+		T Source<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class;
+		Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class;
 		IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
 		Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class;
 		IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector);

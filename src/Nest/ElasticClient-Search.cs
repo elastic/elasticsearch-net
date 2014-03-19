@@ -35,7 +35,7 @@ namespace Nest
 			var pathInfo = ((IPathInfo<SearchQueryString>)descriptor).ToPathInfo(this._connectionSettings);
 			var deserializationState = CreateCovariantSearchSelector<T, TResult>(descriptor);
 			var status = this.RawDispatch.SearchDispatch<QueryResponse<TResult>>(pathInfo, descriptor, deserializationState);
-			return status.Response;
+			return status.Success ? status.Response : CreateInvalidInstance<QueryResponse<TResult>>(status);
 		}
 
 
@@ -59,7 +59,8 @@ namespace Nest
 			var pathInfo = ((IPathInfo<SearchQueryString>)descriptor).ToPathInfo(this._connectionSettings);
 			var deserializationState = CreateCovariantSearchSelector<T, TResult>(descriptor);
 			return this.RawDispatch.SearchDispatchAsync<QueryResponse<TResult>>(pathInfo, descriptor, deserializationState)
-				.ContinueWith<IQueryResponse<TResult>>(t=> t.Result.Response);
+				.ContinueWith<IQueryResponse<TResult>>(t=> t.Result.Success ? 
+					t.Result.Response : CreateInvalidInstance<QueryResponse<TResult>>(t.Result));
 		}
 
 		private JsonConverter CreateCovariantSearchSelector<T, TResult>(SearchDescriptor<T> originalSearchDescriptor)

@@ -6447,7 +6447,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null, object deserializationState = null)
+		public ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6456,7 +6456,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetSourceQueryString());
+				var qs = queryString(new SourceQueryString());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6481,7 +6481,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null, object deserializationState = null)
+		public Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null, object deserializationState = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6490,7 +6490,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetSourceQueryString());
+				var qs = queryString(new SourceQueryString());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6516,7 +6516,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> GetSource(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null)
+		public ElasticsearchResponse<DynamicDictionary> GetSource(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6525,7 +6525,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetSourceQueryString());
+				var qs = queryString(new SourceQueryString());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 
@@ -6550,7 +6550,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> GetSourceAsync(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> GetSourceAsync(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			type.ThrowIfNullOrEmpty("type");
@@ -6559,7 +6559,7 @@ namespace Elasticsearch.Net
 			NameValueCollection nv = null;
 			if (queryString != null)
 			{
-				var qs = queryString(new GetSourceQueryString());
+				var qs = queryString(new SourceQueryString());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
 

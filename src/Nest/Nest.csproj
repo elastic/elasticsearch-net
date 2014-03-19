@@ -155,6 +155,7 @@
     <Compile Include="DSL\ClearCacheDescriptor.cs" />
     <Compile Include="DSL\Facets\Ip4Range.cs" />
     <Compile Include="DSL\Facets\DateExpressionRange.cs" />
+    <Compile Include="DSL\SourceDescriptor.cs" />
     <Compile Include="DSL\NodesStatsDescriptor.cs" />
     <Compile Include="DSL\NodesInfoDescriptor.cs" />
     <Compile Include="DSL\ClusterHealthDescriptor.cs" />

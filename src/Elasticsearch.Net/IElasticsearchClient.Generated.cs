@@ -3491,7 +3491,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null, object deserializationState = null);
+		ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null, object deserializationState = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -3508,7 +3508,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null, object deserializationState = null);
+		Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null, object deserializationState = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -3527,7 +3527,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> GetSource(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null);
+		ElasticsearchResponse<DynamicDictionary> GetSource(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null);
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -3546,7 +3546,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> GetSourceAsync(string index, string type, string id, Func<GetSourceQueryString, GetSourceQueryString> queryString = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> GetSourceAsync(string index, string type, string id, Func<SourceQueryString, SourceQueryString> queryString = null);
 		
 		///<summary>Represents a POST on /{index}/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

@@ -1741,21 +1741,21 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal  string[] __source_exclude { get; set; }
+		internal IEnumerable<object> __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public ExplainQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.__source_exclude = _source_exclude;
+			this.__source_exclude = _source_exclude.Select(f=>(object)f);
 			this.Add("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
 		
-		internal  string[] __source_include { get; set; }
+		internal IEnumerable<object> __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainQueryString SourceInclude(params string[] _source_include)
 		{
-			this.__source_include = _source_include;
+			this.__source_include = _source_include.Select(f=>(object)f);
 			this.Add("_source_include", this.__source_include);
 			return this;
 		}
@@ -1841,21 +1841,21 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal  string[] __source_exclude { get; set; }
+		internal IEnumerable<object> __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public GetQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.__source_exclude = _source_exclude;
+			this.__source_exclude = _source_exclude.Select(f=>(object)f);
 			this.Add("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
 		
-		internal  string[] __source_include { get; set; }
+		internal IEnumerable<object> __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetQueryString SourceInclude(params string[] _source_include)
 		{
-			this.__source_include = _source_include;
+			this.__source_include = _source_include.Select(f=>(object)f);
 			this.Add("_source_include", this.__source_include);
 			return this;
 		}
@@ -1888,12 +1888,12 @@ namespace Elasticsearch.Net
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
-	public class GetSourceQueryString : FluentQueryString<GetSourceQueryString> 
+	public class SourceQueryString : FluentQueryString<SourceQueryString> 
 	{
 		
 		internal string _parent { get; set; }
 		///<summary>The ID of the parent document</summary>
-		public GetSourceQueryString Parent(string parent)
+		public SourceQueryString Parent(string parent)
 		{
 			this._parent = parent;
 			this.Add("parent", this._parent);
@@ -1903,7 +1903,7 @@ namespace Elasticsearch.Net
 		
 		internal string _preference { get; set; }
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public GetSourceQueryString Preference(string preference)
+		public SourceQueryString Preference(string preference)
 		{
 			this._preference = preference;
 			this.Add("preference", this._preference);
@@ -1913,7 +1913,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _realtime { get; set; }
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public GetSourceQueryString Realtime(bool realtime)
+		public SourceQueryString Realtime(bool realtime)
 		{
 			this._realtime = realtime;
 			this.Add("realtime", this._realtime);
@@ -1923,7 +1923,7 @@ namespace Elasticsearch.Net
 		
 		internal bool _refresh { get; set; }
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public GetSourceQueryString Refresh(bool refresh)
+		public SourceQueryString Refresh(bool refresh)
 		{
 			this._refresh = refresh;
 			this.Add("refresh", this._refresh);
@@ -1933,7 +1933,7 @@ namespace Elasticsearch.Net
 		
 		internal string _routing { get; set; }
 		///<summary>Specific routing value</summary>
-		public GetSourceQueryString Routing(string routing)
+		public SourceQueryString Routing(string routing)
 		{
 			this._routing = routing;
 			this.Add("routing", this._routing);
@@ -1943,7 +1943,7 @@ namespace Elasticsearch.Net
 		
 		internal  string[] __source { get; set; }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetSourceQueryString Source(params string[] _source)
+		public SourceQueryString Source(params string[] _source)
 		{
 			this.__source = _source;
 			this.Add("_source", this.__source);
@@ -1951,21 +1951,21 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal  string[] __source_exclude { get; set; }
+		internal IEnumerable<object> __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetSourceQueryString SourceExclude(params string[] _source_exclude)
+		public SourceQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.__source_exclude = _source_exclude;
+			this.__source_exclude = _source_exclude.Select(f=>(object)f);
 			this.Add("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
 		
-		internal  string[] __source_include { get; set; }
+		internal IEnumerable<object> __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetSourceQueryString SourceInclude(params string[] _source_include)
+		public SourceQueryString SourceInclude(params string[] _source_include)
 		{
-			this.__source_include = _source_include;
+			this.__source_include = _source_include.Select(f=>(object)f);
 			this.Add("_source_include", this.__source_include);
 			return this;
 		}
@@ -1973,7 +1973,7 @@ namespace Elasticsearch.Net
 		
 		internal int _version { get; set; }
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetSourceQueryString Version(int version)
+		public SourceQueryString Version(int version)
 		{
 			this._version = version;
 			this.Add("version", this._version);
@@ -1983,7 +1983,7 @@ namespace Elasticsearch.Net
 		
 		internal VersionTypeOptions _version_type { get; set; }
 		///<summary>Specific version type</summary>
-		public GetSourceQueryString VersionType(VersionTypeOptions version_type)
+		public SourceQueryString VersionType(VersionTypeOptions version_type)
 		{
 			this._version_type = version_type;
 			this.Add("version_type", this._version_type);
@@ -4021,21 +4021,21 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal  string[] __source_exclude { get; set; }
+		internal IEnumerable<object> __source_exclude { get; set; }
 		///<summary>A list of fields to exclude from the returned _source field</summary>
 		public MultiGetQueryString SourceExclude(params string[] _source_exclude)
 		{
-			this.__source_exclude = _source_exclude;
+			this.__source_exclude = _source_exclude.Select(f=>(object)f);
 			this.Add("_source_exclude", this.__source_exclude);
 			return this;
 		}
 		
 		
-		internal  string[] __source_include { get; set; }
+		internal IEnumerable<object> __source_include { get; set; }
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetQueryString SourceInclude(params string[] _source_include)
 		{
-			this.__source_include = _source_include;
+			this.__source_include = _source_include.Select(f=>(object)f);
 			this.Add("_source_include", this.__source_include);
 			return this;
 		}

@@ -19,7 +19,8 @@ namespace Nest.Tests.Integration
 
 			return new ConnectionSettings(uri, ElasticsearchConfiguration.DefaultIndex)
 				.SetMaximumAsyncConnections(Test.Default.MaximumAsyncConnections)
-				.UsePrettyResponses();
+				.UsePrettyResponses()
+				.ExposeRawResponse();
 		}
 
 		public static readonly ElasticClient Client = new ElasticClient(Settings());

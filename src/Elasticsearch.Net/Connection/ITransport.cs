@@ -18,6 +18,7 @@ namespace Elasticsearch.Net.Connection
 			int retried = 0, 
 			int? seed = null
 			);
+		void Sniff(bool fromStartup = false);
 
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
 			string method, 

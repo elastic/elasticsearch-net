@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration
 
 			Assert.True(results.IsValid, rawResponse);
 			Assert.True(results.ConnectionStatus.Success, rawResponse);
-			Assert.AreEqual(queryMustHaveResults ? 1 : 0, rawResponse);
+			Assert.AreEqual(queryMustHaveResults ? 1 : 0, results.Total);
 		}
 	
 	}

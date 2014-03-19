@@ -33,11 +33,10 @@ namespace Nest.Tests.Integration.Indices
 			var r = this._client.CloseIndex(ElasticsearchConfiguration.DefaultIndex);
 			Assert.True(r.Acknowledged);
 			Assert.True(r.IsValid);
-			var results = this.SearchRaw<ElasticsearchProject>(
-				@" { ""query"" : {
-						    ""match_all"" : { }
-				} }"
+			var results = this._client.Search<ElasticsearchProject>(s => s
+				.MatchAll()
 			);
+
 			Assert.False(results.IsValid);
 			Assert.IsNotNull(results.ConnectionStatus.Error);
 			Assert.True(results.ConnectionStatus.Error.HttpStatusCode == System.Net.HttpStatusCode.Forbidden, results.ConnectionStatus.Error.HttpStatusCode.ToString());

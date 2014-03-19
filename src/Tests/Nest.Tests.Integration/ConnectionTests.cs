@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Exceptions;
 using NUnit.Framework;
 using Nest;
 
@@ -60,14 +61,15 @@ namespace Nest.Tests.Integration
 		{
 			IRootInfoResponse result = null;
 
-			Assert.DoesNotThrow(() =>
+			Assert.Throws<OutOfNodesException>(() =>
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");
 				var client = new ElasticClient(settings);
 				result = client.RootNodeInfo();
+				Assert.False(result.IsValid);
+				Assert.NotNull(result.ConnectionStatus);
 			});
-			Assert.False(result.IsValid);
-			Assert.NotNull(result.ConnectionStatus);
+		
 		}
 		[Test]
 		public void TestConnectSuccessWithUri()
