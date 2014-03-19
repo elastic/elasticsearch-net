@@ -43,11 +43,6 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				.MaximumRetries(5);
 		}
 
-		private void ProvideTransport(AutoFake fake)
-		{
-			var param = new TypedParameter(typeof(IDateTimeProvider), null);
-			fake.Provide<ITransport, Transport>(param);
-		}
 		[Test]
 		public void CallInfo40000TimesOnMultipleThreads()
 		{
@@ -56,14 +51,21 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				//set up connection configuration that holds a connection pool
 				//with '_uris' (see the constructor)
 				fake.Provide<IConnectionConfigurationValues>(_config);
-				//prove a real HttpTransport with its unspecified dependencies
+				//we want to use our special concurrencytestconnection
+				//this randonly throws on any node but 9200 and sniffing will represent a different 
+				//view of the cluster each time but always holding node 9200
+				fake.Provide<IConnection>(new ConcurrencyTestConnection(this._config));
+				//prove a real Transport with its unspecified dependencies
 				//as fakes
-
-				var connection = fake.Provide<IConnection>(new ConcurrencyTestConnection(this._config));
-				this.ProvideTransport(fake);
+				FakeCalls.ProvideDefaultTransport(fake);
+				
 				//create a real ElasticsearchClient with it unspecified dependencies as fakes
 				var client = fake.Resolve<ElasticsearchClient>();
 				int seen = 0;
+
+				//We'll call Info() 10.000 times on 4 threads
+				//This should not throw any exceptions even if connections sometime fail at a node level
+				//because node 9200 is always up and running
 				Assert.DoesNotThrow(()=>
 				{
 					Action a = () =>
@@ -88,6 +90,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 					thread4.Join();
 
 				});
+
+				//we should have seen 40.000 increments
+				//Sadly we can't use FakeItEasy's to ensure get is called 40.000 times
+				//because it internally uses fixed arrays that will overflow :)
 				seen.Should().Be(40000);
 			}
 		}

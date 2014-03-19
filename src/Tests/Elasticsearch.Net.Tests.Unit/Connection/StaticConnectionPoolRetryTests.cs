@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.FakeItEasy;
@@ -14,44 +13,11 @@ using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
-using FakeItEasy.Configuration;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.ConnectionA
+namespace Elasticsearch.Net.Tests.Unit.Connection
 {
-	public static class FakeResponse
-	{
-		public static ElasticsearchResponse<DynamicDictionary> Ok(
-			IConnectionConfigurationValues config, 
-			string method = "GET",
-			string path = "/")
-		{
-			return ElasticsearchResponse<DynamicDictionary>.Create(config, 200, method, path, null);
-		}
-		
-		public static ElasticsearchResponse<DynamicDictionary> Bad(
-			IConnectionConfigurationValues config, 
-			string method = "GET",
-			string path = "/")
-		{
-			return ElasticsearchResponse<DynamicDictionary>.Create(config, 503, method, path, null);
-		}
-		
-		public static IReturnValueArgumentValidationConfiguration<ElasticsearchResponse<DynamicDictionary>> GetSyncCall(AutoFake fake)
-		{
-			return A.CallTo(() => 
-				fake.Resolve<IConnection>().GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
-		}
-		public static IReturnValueArgumentValidationConfiguration<Task<ElasticsearchResponse<DynamicDictionary>>> GetCall(AutoFake fake)
-		{
-			return A.CallTo(() => 
-				fake.Resolve<IConnection>().Get<DynamicDictionary>(A<Uri>._, A<object>._));
-		}
-
-	}
-
-
 	[TestFixture]
 	public class StaticConnectionPoolRetryTests
 	{
@@ -91,9 +57,9 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 				//set up fake for a call on IConnection.GetSync so that it always throws 
 				//an exception
-				var getCall = GetSync(fake);
+				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Throws<Exception>();
-				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				var pingCall = FakeCalls.Ping(fake);
 				pingCall.Returns(true);
 				
 				//create a real ElasticsearchClient with it unspecified dependencies
@@ -363,18 +329,18 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				fake.Provide<IConnectionConfigurationValues>(config);
 
 				// provide a simple fake for synchronous get
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = FakeCalls.GetSyncCall(fake); 
 
 				//The first three tries get a 503 causing the first 3 nodes to be marked dead
 				//all the subsequent requests should be handled by 9203 which gives a 200 4 times
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
+					FakeResponse.Bad(config),
+					FakeResponse.Bad(config),
+					FakeResponse.Bad(config),
+					FakeResponse.Ok(config),
+					FakeResponse.Ok(config),
+					FakeResponse.Ok(config),
+					FakeResponse.Ok(config)
 				);
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);

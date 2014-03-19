@@ -146,7 +146,7 @@ namespace Elasticsearch.Net.Connection
 				case "head":
 					return this._connection.HeadSync<T>(uri);
 				case "get":
-					return this._connection.GetSync<T>(uri, deserializationState);
+					return this._connection.GetSync<T>(uri, null);
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}

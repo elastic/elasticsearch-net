@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Stubs\FakeCalls.cs" />
+    <Compile Include="Stubs\FakeResponse.cs" />
     <Compile Include="Connection\SkipDeadNodesTests.cs" />
     <Compile Include="Connection\SniffingConnectionPoolTests.cs" />
     <Compile Include="Connection\ConcurrencyTests.cs" />
