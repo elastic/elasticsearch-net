@@ -147,9 +147,9 @@ namespace Elasticsearch.Net.Connection
 						? this._connection.DeleteSync<T>(uri, deserializationState)
 						: this._connection.DeleteSync<T>(uri, postData, deserializationState);
 				case "head":
-					return this._connection.HeadSync<T>(uri);
+					return this._connection.HeadSync<T>(uri, deserializationState);
 				case "get":
-					return this._connection.GetSync<T>(uri, null);
+					return this._connection.GetSync<T>(uri, deserializationState);
 			}
 			throw new Exception("Unknown HTTP method " + method);
 		}
@@ -223,7 +223,7 @@ namespace Elasticsearch.Net.Connection
 						? this._connection.Delete<T>(uri, deserializationState)
 						: this._connection.Delete<T>(uri, postData, deserializationState);
 				case "head":
-					return this._connection.Head<T>(uri);
+					return this._connection.Head<T>(uri, deserializationState);
 				case "get":
 					return this._connection.Get<T>(uri, deserializationState);
 			}

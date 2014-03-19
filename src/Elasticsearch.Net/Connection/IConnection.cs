@@ -12,8 +12,8 @@ namespace Elasticsearch.Net.Connection
 		Task<ElasticsearchResponse<T>> Get<T>(Uri uri, object deserializationState = null);
 		ElasticsearchResponse<T> GetSync<T>(Uri uri, object deserializationState = null);
 
-		Task<ElasticsearchResponse<T>> Head<T>(Uri uri);
-		ElasticsearchResponse<T> HeadSync<T>(Uri uri);
+		Task<ElasticsearchResponse<T>> Head<T>(Uri uri, object deserializationState = null);
+		ElasticsearchResponse<T> HeadSync<T>(Uri uri, object deserializationState = null);
 
 		Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializationState = null);
 		ElasticsearchResponse<T> PostSync<T>(Uri uri, byte[] data, object deserializationState = null);

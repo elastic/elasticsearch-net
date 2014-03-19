@@ -58,13 +58,13 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 			return _responseGenerator.Create<T>();
 		}
 
-		public virtual Task<ElasticsearchResponse<T>> Head<T>(Uri uri)
+		public virtual Task<ElasticsearchResponse<T>> Head<T>(Uri uri, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
 			return Task.FromResult(_responseGenerator.Create<T>());
 		}
 
-		public virtual ElasticsearchResponse<T> HeadSync<T>(Uri uri)
+		public virtual ElasticsearchResponse<T> HeadSync<T>(Uri uri, object deserializationState = null)
 		{
 			_uriObserver.Observe(uri);
 			return _responseGenerator.Create<T>();

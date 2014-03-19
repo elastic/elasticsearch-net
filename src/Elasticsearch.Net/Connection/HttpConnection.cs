@@ -45,9 +45,9 @@ namespace Elasticsearch.Net.Connection
 		{
 			return this.HeaderOnlyRequest<T>(uri, "GET", deserializationState);
 		}
-		public virtual ElasticsearchResponse<T> HeadSync<T>(Uri uri)
+		public virtual ElasticsearchResponse<T> HeadSync<T>(Uri uri, object deserializationState = null)
 		{
-			return this.HeaderOnlyRequest<T>(uri, "HEAD", null);
+			return this.HeaderOnlyRequest<T>(uri, "HEAD", deserializationState);
 		}
 
 		public virtual ElasticsearchResponse<T> PostSync<T>(Uri uri, byte[] data, object deserializationState = null)
@@ -98,34 +98,34 @@ namespace Elasticsearch.Net.Connection
 		public virtual Task<ElasticsearchResponse<T>> Get<T>(Uri uri, object deserializationState = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "GET");
-			return this.DoAsyncRequest<T>(r);
+			return this.DoAsyncRequest<T>(r, deserializationState: deserializationState);
 		}
-		public virtual Task<ElasticsearchResponse<T>> Head<T>(Uri uri)
+		public virtual Task<ElasticsearchResponse<T>> Head<T>(Uri uri, object deserializationState = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "HEAD");
-			return this.DoAsyncRequest<T>(r);
+			return this.DoAsyncRequest<T>(r, deserializationState: deserializationState);
 		}
 		public virtual Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "POST");
-			return this.DoAsyncRequest<T>(r, data);
+			return this.DoAsyncRequest<T>(r, data, deserializationState: deserializationState);
 		}
 
 		public virtual Task<ElasticsearchResponse<T>> Put<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "PUT");
-			return this.DoAsyncRequest<T>(r, data);
+			return this.DoAsyncRequest<T>(r, data, deserializationState: deserializationState);
 		}
 
 		public virtual Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE");
-			return this.DoAsyncRequest<T>(r, data);
+			return this.DoAsyncRequest<T>(r, data, deserializationState: deserializationState);
 		}
 		public virtual Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, object deserializationState = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE");
-			return this.DoAsyncRequest<T>(r);
+			return this.DoAsyncRequest<T>(r, deserializationState: deserializationState);
 		}
 
 		private static void ThreadTimeoutCallback(object state, bool timedOut)

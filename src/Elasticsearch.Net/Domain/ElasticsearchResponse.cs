@@ -118,27 +118,25 @@ namespace Elasticsearch.Net
 			cs.RequestUrl = path;
 			cs.RequestMethod = method;
 			var s = stream;
-			if (settings.KeepRawResponse) 
+			using (var ms = new MemoryStream())
 			{
-				using (var ms = new MemoryStream())
+				if (settings.KeepRawResponse)
 				{
 					stream.CopyTo(ms);
 					cs.ResponseRaw = ms.ToArray();
+					ms.Position = 0;
 					s = ms;
 				}
+				var customConverter = deserializeState as Func<IElasticsearchResponse, Stream, T>;
+				if (customConverter != null)
+				{
+					var t = customConverter(cs, s);
+					cs.Response = t;
+				}
+				else cs.Response = settings.Serializer.Deserialize<T>(cs, s, deserializeState);
+
+				return cs;
 			}
-			var customConverter = deserializeState as Func<IElasticsearchResponse, Stream, T>;
-			if (customConverter != null)
-			{
-				var t = customConverter(cs, stream);
-				cs.Response = t;
-			}
-			else cs.Response = settings.Serializer.Deserialize<T>(cs, s, deserializeState);
-
-
-			
-
-			return cs;
 		}
 
 		static ElasticsearchResponse()

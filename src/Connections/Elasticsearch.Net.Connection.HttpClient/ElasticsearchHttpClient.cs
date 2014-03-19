@@ -22,7 +22,6 @@ namespace Elasticsearch.Net.Connection.HttpClient
 	    {
 		    var client = new System.Net.Http.HttpClient();
 		    HttpResponseMessage response = null;
-		    Stream result = null;
 		    HttpContent content = null;
 			if (data != null)
 				content = new ByteArrayContent(data);
@@ -46,8 +45,8 @@ namespace Elasticsearch.Net.Connection.HttpClient
 		    }
 			if (response == null)
 				return ElasticsearchResponse<T>.CreateError(_settings, null, method, uri.ToString(), data);
-			result = response.Content.ReadAsStreamAsync().Result;
-			return ElasticsearchResponse<T>.Create(this._settings, (int)response.StatusCode, method, uri.ToString(), data, result);
+			using (var result = response.Content.ReadAsStreamAsync().Result)
+				return ElasticsearchResponse<T>.Create(this._settings, (int)response.StatusCode, method, uri.ToString(), data, result);
 	    }
 
 
@@ -62,12 +61,12 @@ namespace Elasticsearch.Net.Connection.HttpClient
 		    return this.DoSyncRequest<T>("get", uri);
 	    }
 
-	    public Task<ElasticsearchResponse<T>> Head<T>(Uri uri)
+	    public Task<ElasticsearchResponse<T>> Head<T>(Uri uri, object deserializeState = null)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse<T> HeadSync<T>(Uri uri)
+	    public ElasticsearchResponse<T> HeadSync<T>(Uri uri, object deserializeState = null)
 	    {
 		    return this.DoSyncRequest<T>("head", uri);
 		    throw new NotImplementedException();

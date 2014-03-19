@@ -59,7 +59,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			});
 		}
 	
-		public Task<ElasticsearchResponse<T>> Head<T>(Uri uri)
+		public Task<ElasticsearchResponse<T>> Head<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -69,7 +69,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Headers.Add("Content-Type", "application/json");
 			return Task.Factory.StartNew<ElasticsearchResponse<T>>(()=> 
 			{
-				return this.Execute<T>(restRequest, null);
+				return this.Execute<T>(restRequest, deserializationState);
 			});
 		}
 
@@ -84,7 +84,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			return this.Execute<T>(restRequest, deserializationState);
 		}
 
-		public ElasticsearchResponse<T> HeadSync<T>(Uri uri)
+		public ElasticsearchResponse<T> HeadSync<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -92,7 +92,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return this.Execute<T>(restRequest, null);
+			return this.Execute<T>(restRequest, deserializationState);
 		}
 
 		public Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializationState = null)
