@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -106,6 +107,37 @@ namespace Elasticsearch.Net
 			cs.Request = request;
 			cs.RequestUrl = path;
 			cs.RequestMethod = method;
+			return cs;
+		}
+
+		public static ElasticsearchResponse<T> Create(
+			IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, Stream stream, object deserializeState = null)
+		{
+			var cs = new ElasticsearchResponse<T>(settings, statusCode);
+			cs.Request = request;
+			cs.RequestUrl = path;
+			cs.RequestMethod = method;
+			var s = stream;
+			if (settings.KeepRawResponse) 
+			{
+				using (var ms = new MemoryStream())
+				{
+					stream.CopyTo(ms);
+					cs.ResponseRaw = ms.ToArray();
+					s = ms;
+				}
+			}
+			var customConverter = deserializeState as Func<IElasticsearchResponse, Stream, T>;
+			if (customConverter != null)
+			{
+				var t = customConverter(cs, stream);
+				cs.Response = t;
+			}
+			else cs.Response = settings.Serializer.Deserialize<T>(cs, s, deserializeState);
+
+
+			
+
 			return cs;
 		}
 

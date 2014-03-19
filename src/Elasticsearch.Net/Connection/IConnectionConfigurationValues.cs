@@ -24,6 +24,7 @@ namespace Elasticsearch.Net.Connection
 
 		bool TraceEnabled { get; }
 		bool UsesPrettyResponses { get; }
+		bool KeepRawResponse { get; }
 
 		/// <summary>
 		/// Sniff the cluster state immediatly on startup

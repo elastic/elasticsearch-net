@@ -225,7 +225,7 @@ namespace Elasticsearch.Net.Connection
 					using (var memoryStream = new MemoryStream())
 					{
 						Stream s = responseStream;
-						if(_ConnectionSettings.UsesPrettyResponses) //TODO different setting
+						if(_ConnectionSettings.KeepRawResponse) 
 						{
 							responseStream.CopyTo(memoryStream);
 							//use memory stream for serialization instead

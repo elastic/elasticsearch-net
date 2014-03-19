@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Elasticsearch.Net.Serialization;
 using Newtonsoft.Json;
 
@@ -13,20 +14,51 @@ namespace Elasticsearch.Net.JsonNet
 
 		public ElasticsearchJsonNetSerializer(JsonSerializerSettings settings = null)
 		{
-			_settings = settings;
+			_settings = settings ?? CreateSettings();
 		}
 
-		public T Deserialize<T>(byte[] bytes) where T : class
+		/// <summary>
+		/// Deserialize an object 
+		/// </summary>
+		public virtual T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null) 
 		{
-			if (bytes == null) return null;
+			var settings = this._settings;
+			var customConverter = deserializationState as Func<IElasticsearchResponse, Stream, T>;
+			if (customConverter != null)
+			{
+				var t = customConverter(response, stream);
+				return t;
+			}
 
-			var s = Encoding.UTF8.GetString(bytes);
-			return JsonConvert.DeserializeObject<T>(s, this._settings);
+			return _Deserialize<T>(response, stream, settings);
+		}
+		public virtual Task<T> DeserializeAsync<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null)
+		{
+			//TODO sadly json .net async does not read the stream async so 
+			//figure out wheter reading the stream async on our own might be beneficial 
+			//over memory possible memory usage
+			var tcs = new TaskCompletionSource<T>();
+			var r = this.Deserialize<T>(response, stream, deserializationState);
+			tcs.SetResult(r);
+			return tcs.Task;
+		}
+		private JsonSerializerSettings CreateSettings()
+		{
+			var settings = new JsonSerializerSettings()
+			{
+				DefaultValueHandling = DefaultValueHandling.Include,
+				NullValueHandling = NullValueHandling.Ignore
+			};
+			return settings;
+		}
 
-		//var serializer = new JsonSerializer();
-		//var jsonTextReader = new JsonTextReader(new StreamReader(stream));
-		//return serializer.Deserialize(jsonTextReader);
-		//	JsonConvert.DeserializeObject()
+		protected internal  T _Deserialize<T>(IElasticsearchResponse response, Stream stream, JsonSerializerSettings settings = null)
+		{
+			settings = settings ?? this._settings;
+			var serializer = JsonSerializer.Create(settings);
+			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
+			var t = (T) serializer.Deserialize(jsonTextReader, typeof (T));
+			return t;	
 		}
 
 		public byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)

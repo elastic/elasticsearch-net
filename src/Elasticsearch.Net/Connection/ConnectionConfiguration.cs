@@ -48,12 +48,15 @@ namespace Elasticsearch.Net.Connection
 		private string _proxyAddress;
 		string IConnectionConfigurationValues.ProxyAddress { get{ return _proxyAddress; } }
 
+		private bool _usePrettyResponses;
+		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
+		private bool _keepRawResponse;
+		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
+
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
 		private int? _maxRetries;
 		int? IConnectionConfigurationValues.MaxRetries { get{ return _maxRetries; } }
-		private bool _usePrettyResponses;
-		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
 		private bool _sniffOnStartup;
 		bool IConnectionConfigurationValues.SniffsOnStartup { get{ return _sniffOnStartup; } }
 		private bool _sniffOnConectionFault;
@@ -216,6 +219,15 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
+		/// <summary>
+		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
+		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
+		/// </summary>
+		public T ExposeRawResponse(bool b = true)
+		{
+			this._keepRawResponse = b;
+			return (T) this;
+		}
 		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status)
 		{
 			return;

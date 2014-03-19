@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connection
 {
-	/// <summary>
-	/// 
-	/// </summary>
 	public class InMemoryConnection : HttpConnection
 	{
 		private readonly byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
@@ -21,25 +19,27 @@ namespace Elasticsearch.Net.Connection
 
 		protected override ElasticsearchResponse<T> DoSynchronousRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)
 		{
-			return this.ReturnConnectionStatus<T>(request, data);
+			return this.ReturnConnectionStatus<T>(request, data, deserializationState);
 		}
 
-		private ElasticsearchResponse<T> ReturnConnectionStatus<T>(HttpWebRequest request, byte[] data)
+		private ElasticsearchResponse<T> ReturnConnectionStatus<T>(HttpWebRequest request, byte[] data, object deserializationState = null)
 		{
 			var method = request.Method;
 			var path = request.RequestUri.ToString();
 
-			var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, 200, method, path, data);
-			_ConnectionSettings.ConnectionStatusHandler(cs);
-			return cs;
+			using (var ms = new MemoryStream(_fixedResultBytes))
+			{
+				var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, 200, method, path, data, ms, deserializationState);
+				_ConnectionSettings.ConnectionStatusHandler(cs);
+				return cs;
+			}
 		}
 
 		protected override Task<ElasticsearchResponse<T>> DoAsyncRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)
 		{
 			return Task.Factory.StartNew<ElasticsearchResponse<T>>(() =>
 			{
-				var cs = this.ReturnConnectionStatus<T>(request, data);
-				_ConnectionSettings.ConnectionStatusHandler(cs);
+				var cs = this.ReturnConnectionStatus<T>(request, data, deserializationState);
 				return cs;
 			});
 		}

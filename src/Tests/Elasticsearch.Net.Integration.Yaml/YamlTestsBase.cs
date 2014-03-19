@@ -10,7 +10,6 @@ using System.Text.RegularExpressions;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.HttpClient;
 using Elasticsearch.Net.JsonNet;
-using Elasticsearch.Net.ServiceStackText;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 

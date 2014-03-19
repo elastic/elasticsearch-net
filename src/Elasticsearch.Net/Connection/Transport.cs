@@ -101,6 +101,9 @@ namespace Elasticsearch.Net.Connection
 			}
 			catch (Exception e)
 			{
+				var maxRetries = this.GetMaximumRetries();
+				if (maxRetries == 0 && retried == 0)
+					throw;
 				seenError = true;
 				return RetryRequest<T>(method, path, data, deserializationState, retried, baseUri, initialSeed, e);
 			}

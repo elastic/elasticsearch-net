@@ -44,6 +44,13 @@ namespace Elasticsearch.Net.Connection
 		T UsePrettyResponses(bool b = true);
 		
 		/// <summary>
+		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
+		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
+		/// </summary>
+		/// <returns></returns>
+		T ExposeRawResponse(bool b = true);
+		
+		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. Great to prevent 
 		/// out of memory exceptions

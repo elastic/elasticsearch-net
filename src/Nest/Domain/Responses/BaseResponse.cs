@@ -32,12 +32,11 @@ namespace Nest
 				if (this.ConnectionStatus == null)
 					return null;
 
-				return null; //TODO REVISIT
-				//var settings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
-				//if (settings == null)
-				//	return null;
-				//this._infer = new ElasticInferrer(settings);
-				//return this._infer;
+				var settings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
+				if (settings == null)
+					return null;
+				this._infer = new ElasticInferrer(settings);
+				return this._infer;
 			}
 		}
 	}

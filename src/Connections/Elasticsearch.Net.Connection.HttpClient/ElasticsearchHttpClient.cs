@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,11 +18,11 @@ namespace Elasticsearch.Net.Connection.HttpClient
 		    _settings = settings;
 	    }
 
-	    public ElasticsearchResponse DoSyncRequest(string method, Uri uri, byte[] data = null)
+	    public ElasticsearchResponse<T> DoSyncRequest<T>(string method, Uri uri, byte[] data = null)
 	    {
 		    var client = new System.Net.Http.HttpClient();
 		    HttpResponseMessage response = null;
-		    byte[] result = null;
+		    Stream result = null;
 		    HttpContent content = null;
 			if (data != null)
 				content = new ByteArrayContent(data);
@@ -29,92 +30,90 @@ namespace Elasticsearch.Net.Connection.HttpClient
 		    {
 			    case "head":
 					response = client.SendAsync(new HttpRequestMessage(HttpMethod.Head, uri) ).Result;
-					result = response.Content.ReadAsByteArrayAsync().Result;
 				    break;
 			    case "delete":
 					response = client.SendAsync(new HttpRequestMessage(HttpMethod.Delete, uri) { Content = content }).Result;
-					result = response.Content.ReadAsByteArrayAsync().Result;
 				    break;
 			    case "put":
 					response = client.PutAsync(uri, content).Result;
-					result = response.Content.ReadAsByteArrayAsync().Result;
 				    break;
 			    case "post":
 					response = client.PostAsync(uri, content).Result;
-					result = response.Content.ReadAsByteArrayAsync().Result;
 				    break;
 			    case "get":
 					response = client.GetAsync(uri).Result;
-					result = response.Content.ReadAsByteArrayAsync().Result;
 				    break;
 		    }
-			return ElasticsearchResponse.Create(this._settings, (int)response.StatusCode, method, uri.ToString(), data, result);
+			if (response == null)
+				return ElasticsearchResponse<T>.CreateError(_settings, null, method, uri.ToString(), data);
+			result = response.Content.ReadAsStreamAsync().Result;
+			return ElasticsearchResponse<T>.Create(this._settings, (int)response.StatusCode, method, uri.ToString(), data, result);
 	    }
 
 
 
-	    public Task<ElasticsearchResponse> Get(Uri uri)
+	    public Task<ElasticsearchResponse<T>> Get<T>(Uri uri, object deserializeState = null)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse GetSync(Uri uri)
+	    public ElasticsearchResponse<T> GetSync<T>(Uri uri, object deserializeState = null)
 	    {
-		    return this.DoSyncRequest("get", uri);
+		    return this.DoSyncRequest<T>("get", uri);
 	    }
 
-	    public Task<ElasticsearchResponse> Head(Uri uri)
+	    public Task<ElasticsearchResponse<T>> Head<T>(Uri uri)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse HeadSync(Uri uri)
+	    public ElasticsearchResponse<T> HeadSync<T>(Uri uri)
 	    {
-		    return this.DoSyncRequest("head", uri);
+		    return this.DoSyncRequest<T>("head", uri);
 		    throw new NotImplementedException();
 	    }
 
-	    public Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
-	    {
-		    throw new NotImplementedException();
-	    }
-
-	    public ElasticsearchResponse PostSync(Uri uri, byte[] data)
-	    {
-		    return this.DoSyncRequest("post", uri, data);
-		    throw new NotImplementedException();
-	    }
-
-	    public Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
+	    public Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializeState = null)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse PutSync(Uri uri, byte[] data)
+	    public ElasticsearchResponse<T> PostSync<T>(Uri uri, byte[] data, object deserializeState = null)
 	    {
-		    return this.DoSyncRequest("put", uri, data);
+		    return this.DoSyncRequest<T>("post", uri, data);
 		    throw new NotImplementedException();
 	    }
 
-	    public Task<ElasticsearchResponse> Delete(Uri uri)
-	    {
-		    throw new NotImplementedException();
-	    }
-
-	    public ElasticsearchResponse DeleteSync(Uri uri)
-	    {
-		    return this.DoSyncRequest("delete", uri);
-		    throw new NotImplementedException();
-	    }
-
-	    public Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
+	    public Task<ElasticsearchResponse<T>> Put<T>(Uri uri, byte[] data, object deserializeState = null)
 	    {
 		    throw new NotImplementedException();
 	    }
 
-	    public ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
+	    public ElasticsearchResponse<T> PutSync<T>(Uri uri, byte[] data, object deserializeState = null)
 	    {
-		    return this.DoSyncRequest("delete", uri, data);
+		    return this.DoSyncRequest<T>("put", uri, data);
+		    throw new NotImplementedException();
+	    }
+
+	    public Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, object deserializeState = null)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public ElasticsearchResponse<T> DeleteSync<T>(Uri uri, object deserializeState = null)
+	    {
+		    return this.DoSyncRequest<T>("delete", uri);
+		    throw new NotImplementedException();
+	    }
+
+	    public Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, byte[] data, object deserializeState = null)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public ElasticsearchResponse<T> DeleteSync<T>(Uri uri, byte[] data, object deserializeState = null)
+	    {
+		    return this.DoSyncRequest<T>("delete", uri, data);
 		    throw new NotImplementedException();
 	    }
 
