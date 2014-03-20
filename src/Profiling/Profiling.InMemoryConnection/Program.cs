@@ -11,7 +11,10 @@ namespace Profiling.InMemoryConnection
 			public string Id { get; set; }
 			public string Name { get; set; }
 		}
-
+		/// <summary>
+		/// Mainly used to profile the serialization performance and memory usage
+		/// </summary>
+		/// <param name="args"></param>
 		static void Main(string[] args)
 		{
 			var settings = new ConnectionSettings(new Uri("http://localhost:9200"),"test-index");

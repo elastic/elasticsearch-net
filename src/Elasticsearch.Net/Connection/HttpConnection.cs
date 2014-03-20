@@ -235,10 +235,10 @@ namespace Elasticsearch.Net.Connection
 						return cs;
 
 					}
-						cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, webException, method, path, data);
-						tracer.SetResult(cs);
-						_ConnectionSettings.ConnectionStatusHandler(cs);
-						return cs;
+					cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, webException, method, path, data);
+					tracer.SetResult(cs);
+					_ConnectionSettings.ConnectionStatusHandler(cs);
+					return cs;
 				}
 			}
 

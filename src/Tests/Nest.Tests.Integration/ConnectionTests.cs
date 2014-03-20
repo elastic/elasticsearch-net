@@ -61,6 +61,8 @@ namespace Nest.Tests.Integration
 		{
 			IRootInfoResponse result = null;
 
+			//this test will fail if fiddler is enabled since the proxy 
+			//will report a statuscode of 502 instead of -1
 			Assert.Throws<OutOfNodesException>(() =>
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");

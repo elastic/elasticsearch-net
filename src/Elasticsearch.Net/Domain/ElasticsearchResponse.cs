@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Serialization;
@@ -30,6 +31,39 @@ namespace Elasticsearch.Net
 		/// </summary>
 		byte[] ResponseRaw { get; }
 	}
+
+	internal static class ElasticsearchResponse
+	{
+
+		public static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
+		{
+			return responseTask
+				.ContinueWith(t=>ToDynamicResponse(t.Result));
+		}
+
+		public static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)
+		{
+			return ToDynamicResponse(response);
+		}
+
+		private static ElasticsearchResponse<DynamicDictionary> ToDynamicResponse(ElasticsearchResponse<Dictionary<string, object>> response)
+		{
+			return new ElasticsearchResponse<DynamicDictionary>(response.Settings)
+			{
+				Error = response.Error,
+				HttpStatusCode = response.HttpStatusCode,
+				Request = response.Request,
+				RequestMethod = response.RequestMethod,
+				RequestUrl = response.RequestUrl,
+				Response = response.Response != null ? DynamicDictionary.Create(response.Response) : null,
+				ResponseRaw = response.ResponseRaw,
+				Serializer = response.Serializer,
+				Settings = response.Settings,
+				Success = response.Success
+			};
+		}
+	}
+
 
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{
@@ -72,7 +106,7 @@ namespace Elasticsearch.Net
 		}
 
 
-		protected ElasticsearchResponse(IConnectionConfigurationValues settings)
+		protected internal ElasticsearchResponse(IConnectionConfigurationValues settings)
 		{
 			this.Settings = settings;
 			this.Serializer = settings.Serializer; 

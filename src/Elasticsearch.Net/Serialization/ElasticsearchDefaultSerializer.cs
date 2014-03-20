@@ -16,13 +16,16 @@ namespace Elasticsearch.Net.Serialization
 		public T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializeState)
 		{
 			var ms = stream as MemoryStream;
-			if (ms != null)
-				return SimpleJson.DeserializeObject<T>(ms.GetBuffer().Utf8String());
+			//if (ms != null)
+			// return SimpleJson.DeserializeObject<T>(ms.GetBuffer().Utf8String());
 
 			using (ms = new MemoryStream())
 			{
 				stream.CopyTo(ms);
-				return SimpleJson.DeserializeObject<T>(ms.ToArray().Utf8String());
+				byte[] buffer = ms.ToArray();
+				if (buffer.Length == 0)
+					return default(T);
+				return SimpleJson.DeserializeObject<T>(buffer.Utf8String());
 			}
 		}
 		public Task<T> DeserializeAsync<T>(IElasticsearchResponse response, Stream stream, object deserializeState)

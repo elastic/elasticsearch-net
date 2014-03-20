@@ -69,15 +69,17 @@ namespace Elasticsearch.Net
 				var qs = queryString(new @(method.QueryStringParamName)());
 				if (qs != null) nv = this.ToNameValueCollection(qs);
 			}
-		@{
-			string requestMethod = method.ReturnType.StartsWith("Task<") ? "DoRequestAsync" : "DoRequest";
+			@{
+			bool isAsync = method.ReturnType.StartsWith("Task<");
+			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
+			bool wrap = method.ReturnTypeGeneric == null;
 		}
-			return this.@(requestMethod)@(Raw(method.ReturnTypeGeneric ?? "<DynamicDictionary>"))("@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), 
+			return @(wrap ? "ElasticsearchResponse.Wrap"+ (isAsync ? "Async" : "") +"("  : "")this.@(requestMethod)@(Raw(method.ReturnTypeGeneric ?? "<Dictionary<string, object>>"))("@method.HttpMethod", url@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : ", data: null"), 
 				queryString: nv
 			@if(!string.IsNullOrWhiteSpace(method.ReturnTypeGeneric))
 			{
 				<text>, deserializationState: deserializationState</text>
-			}			);
+			}			)@(wrap ? ")" : "");
 		}</text>
 
 		}

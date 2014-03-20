@@ -40,7 +40,7 @@ namespace Elasticsearch.Net
 		public static DynamicDictionary Create(IDictionary<string, object> values)
 		{
 			var instance = new DynamicDictionary();
-
+			
 			foreach (var key in values.Keys)
 			{
 				instance[key] = values[key];

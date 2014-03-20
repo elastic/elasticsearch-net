@@ -31,7 +31,11 @@ namespace Elasticsearch.Net.Integration.Yaml
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
 			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
-			_client = new ElasticsearchClient(settings);
+
+			var jsonNetSerializer = new ElasticsearchJsonNetSerializer();
+
+			//_client = new ElasticsearchClient(settings);
+			_client = new ElasticsearchClient(settings, serializer: jsonNetSerializer);
 			var infoResponse = _client.Info();
 			dynamic info = infoResponse.Response;
 			_versionNumber = new Version(info.version.number);
@@ -107,7 +111,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 					Assert.Fail("HEAD request returned status:" + c.Error.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
-				o = Encoding.UTF8.GetString(c.ResponseRaw);
+				//o = Encoding.UTF8.GetString(c.ResponseRaw);
 			}
 
 			o = Unbox(o);
@@ -134,6 +138,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 			{
 				var s = (string) o;
 				if (string.IsNullOrWhiteSpace(s)) Assert.Fail("Expected string to not be null or whitespace");
+			}
+			else if (o is DynamicDictionary)
+			{
+				Assert.Greater(((DynamicDictionary)o).Count, 0);
 			}
 			else
 			{
@@ -293,6 +301,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			{
 				var s = (string)o;
 				var v = value.ToString();
+				//string is json parse it and compare it
 				if (s.StartsWith("{") && !(value is string))
 				{
 					var json = _client.Serializer.Serialize(value);
@@ -300,6 +309,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 					var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
 					Assert.AreEqual(nJson, nOtherJson);
 				}
+				//string represents a regex on the response body
 				else if (v.StartsWith("/"))
 				{
 					var re = Regex.Replace(v, @"(^[\s\r\n]*?\/|\/[\s\r\n]*?$)", "");
@@ -321,16 +331,16 @@ namespace Elasticsearch.Net.Integration.Yaml
 			{
 				var d = value as IDictionary<string, object>;
 				var dd = o as IDictionary<string, object>;
-				if (d == null)
+				if (d == null) //d is an anonymous object turn it into a dict
 					d = (from x in value.GetType().GetProperties() select x)
 						.ToDictionary(
 							x => x.Name, 
 							x => (x.GetGetMethod().Invoke(value, null) ?? ""));
-				var json = _client.Serializer.Serialize(new SortedDictionary<string, object>(d));
-				var otherJson = _client.Serializer.Serialize(new SortedDictionary<string, object>(dd));
-				var nJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
-				var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
-				Assert.AreEqual(nJson, nOtherJson);
+
+				var equals = DynamicDictionary.Create(d)
+					.SequenceEqual(dd);
+				Assert.True(equals, "response did not match expected return");
+
 			}
 			else Assert.Fail(message);
 		}

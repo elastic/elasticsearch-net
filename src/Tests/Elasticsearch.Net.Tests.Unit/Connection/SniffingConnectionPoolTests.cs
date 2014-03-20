@@ -201,7 +201,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				var seenNodes = new List<Uri>();
 				//var getCall =  FakeResponse.GetSyncCall(fake);
-				var getCall = A.CallTo(() => connection.GetSync<DynamicDictionary>(A<Uri>._, A<object>._));
+				var getCall = A.CallTo(() => connection.GetSync<Dictionary<string, object>>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
 					FakeResponse.Ok(config), //info 1
 					FakeResponse.Bad(config), //info 2

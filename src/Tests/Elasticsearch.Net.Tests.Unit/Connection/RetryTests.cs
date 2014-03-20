@@ -56,8 +56,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var getCall = FakeCalls.GetCall(fake); 
 
 				//return a started task that throws
-				Func<ElasticsearchResponse<DynamicDictionary>> badTask = () => { throw new Exception(); };
-				var t = new Task<ElasticsearchResponse<DynamicDictionary>>(badTask);
+				Func<ElasticsearchResponse<Dictionary<string, object>>> badTask = () => { throw new Exception(); };
+				var t = new Task<ElasticsearchResponse<Dictionary<string, object>>>(badTask);
 				t.Start();
 				getCall.Returns(t);
 				
