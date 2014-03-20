@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\VoidResponse.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Connection\ConnectionError.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Connection\IConnectionConfiguration.cs" />
     <Compile Include="Connection\InMemoryConnection.cs" />
     <Compile Include="ElasticsearchClient.Generated.cs" />
-    <Compile Include="Domain\ElasticsearchDynamic.cs" />
+    <Compile Include="Domain\DynamicDictionary.cs" />
     <Compile Include="Domain\ElasticsearchDynamicValue.cs" />
     <Compile Include="Exceptions\OutOfNodesException.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />

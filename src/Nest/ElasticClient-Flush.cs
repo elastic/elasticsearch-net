@@ -11,7 +11,7 @@ namespace Nest
 		{
 			return this.Dispatch<FlushDescriptor, FlushQueryString, ShardsOperationResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesFlushDispatch(p)
+				(p, d) => this.RawDispatch.IndicesFlushDispatch<ShardsOperationResponse>(p)
 			);
 		}
 		
@@ -19,7 +19,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<FlushDescriptor, FlushQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesFlushDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesFlushDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
 

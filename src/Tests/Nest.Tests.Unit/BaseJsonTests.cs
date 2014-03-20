@@ -30,7 +30,8 @@ namespace Nest.Tests.Unit
 
 		public BaseJsonTests()
 		{
-			this._settings = new ConnectionSettings(Test.Default.Uri, Test.Default.DefaultIndex);
+			this._settings = new ConnectionSettings(Test.Default.Uri, Test.Default.DefaultIndex)
+				.ExposeRawResponse();
 			this._connection = new InMemoryConnection(this._settings);
 			this._client = new ElasticClient(this._settings, this._connection);
 		}

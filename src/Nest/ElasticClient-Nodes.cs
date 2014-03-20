@@ -14,7 +14,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatch<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.NodesInfoDispatch(p)
+				(p, d)=> this.RawDispatch.NodesInfoDispatch<NodeInfoResponse>(p)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoQueryString, NodeInfoResponse, INodeInfoResponse>(
 				selector,
-				(p, d)=> this.RawDispatch.NodesInfoDispatchAsync(p)
+				(p, d)=> this.RawDispatch.NodesInfoDispatchAsync<NodeInfoResponse>(p)
 			);
 		}
 
@@ -37,7 +37,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatch<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.NodesStatsDispatch(p)
+				(p, d) => this.RawDispatch.NodesStatsDispatch<NodeStatsResponse>(p)
 			);
 		}
 		
@@ -51,7 +51,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<NodesStatsDescriptor, NodesStatsQueryString, NodeStatsResponse, INodeStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.NodesStatsDispatchAsync(p)
+				(p, d) => this.RawDispatch.NodesStatsDispatchAsync<NodeStatsResponse>(p)
 			);
 		}
 	}

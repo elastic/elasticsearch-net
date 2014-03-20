@@ -51,11 +51,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serialization", "Serializat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.ServiceStackText", "Serialization\Elasticsearch.Net.ServiceStackText\Elasticsearch.Net.ServiceStackText.csproj", "{8052DC47-3281-4209-B0D2-45555AE30A46}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Connection.HttpClient", "Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj", "{A69322FD-B874-44EF-ABE0-63F4A7B5593E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Tests.Unit", "Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj", "{C54FFD67-C452-4DC4-A47A-663ECA98A38F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.Tests.Unit", "Tests\Elasticsearch.Net.Tests.Unit\Elasticsearch.Net.Tests.Unit.csproj", "{C54FFD67-C452-4DC4-A47A-663ECA98A38F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -268,7 +266,6 @@ Global
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
@@ -288,7 +285,6 @@ Global
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
@@ -305,30 +301,9 @@ Global
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}.Release|x86.ActiveCfg = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug - Generator|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug - Generator|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug - Generator|x86.ActiveCfg = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{8052DC47-3281-4209-B0D2-45555AE30A46}.Release|x86.ActiveCfg = Release|Any CPU
 		{A69322FD-B874-44EF-ABE0-63F4A7B5593E}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
 		{A69322FD-B874-44EF-ABE0-63F4A7B5593E}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{A69322FD-B874-44EF-ABE0-63F4A7B5593E}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A69322FD-B874-44EF-ABE0-63F4A7B5593E}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
 		{A69322FD-B874-44EF-ABE0-63F4A7B5593E}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
 		{A69322FD-B874-44EF-ABE0-63F4A7B5593E}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
 		{A69322FD-B874-44EF-ABE0-63F4A7B5593E}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
@@ -348,7 +323,6 @@ Global
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{C54FFD67-C452-4DC4-A47A-663ECA98A38F}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F}.Debug - Generator|Any CPU.ActiveCfg = Debug|Any CPU
 		{C54FFD67-C452-4DC4-A47A-663ECA98A38F}.Debug - Generator|Any CPU.Build.0 = Debug|Any CPU
@@ -382,6 +356,5 @@ Global
 		{56A87048-9065-459B-826D-3DF68B409845} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{04F53AA5-6346-4139-94CF-81BD8663875F} = {93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}
 		{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8} = {90F48CF5-BB0B-484D-85E7-18FE3ECA3825}
-		{8052DC47-3281-4209-B0D2-45555AE30A46} = {90F48CF5-BB0B-484D-85E7-18FE3ECA3825}
 	EndGlobalSection
 EndGlobal

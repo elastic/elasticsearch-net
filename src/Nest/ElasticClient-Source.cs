@@ -17,7 +17,7 @@ namespace Nest
 		{
 			return this.Dispatch<GetDescriptor<T>, GetQueryString, GetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatch(p)
+				(p, d) => this.RawDispatch.GetDispatch<GetResponse<T>>(p)
 			).Fields;
 		}
 		
@@ -25,25 +25,25 @@ namespace Nest
 		{
 			return this.DispatchAsync<GetDescriptor<T>, GetQueryString, GetResponse<T>, IGetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatchAsync(p)
+				(p, d) => this.RawDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			).ContinueWith(t=>t.Result.Fields);
 		}
 		
-		//TODO replace with actual call to _source in es 1.0 and NEST 1.0
-		public T Source<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
+		public T Source<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class
 		{
-			return this.Dispatch<GetDescriptor<T>, GetQueryString, GetResponse<T>>(
-				getSelector,
-				(p, d) => this.RawDispatch.GetDispatch(p)
-			).Source;
+			var descriptor = getSelector(new SourceDescriptor<T>());
+			var pathInfo = ((IPathInfo<SourceQueryString>)descriptor).ToPathInfo(_connectionSettings);
+			var response = this.RawDispatch.GetSourceDispatch<T>(pathInfo);
+			return response.Response;
 		}
 		
-		public Task<T> SourceAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
+		public Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class
 		{
-			return this.DispatchAsync<GetDescriptor<T>, GetQueryString, GetResponse<T>, IGetResponse<T>>(
-				getSelector,
-				(p, d) => this.RawDispatch.GetDispatchAsync(p)
-			).ContinueWith(t=>t.Result.Source);
+			var descriptor = getSelector(new SourceDescriptor<T>());
+			var pathInfo = ((IPathInfo<SourceQueryString>)descriptor).ToPathInfo(_connectionSettings);
+			var response = this.RawDispatch.GetSourceDispatchAsync<T>(pathInfo)
+				.ContinueWith(t=>t.Result.Response);
+			return response;
 		}
 	
 		

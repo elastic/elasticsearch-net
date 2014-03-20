@@ -13,7 +13,7 @@ namespace Nest
 			optimizeSelector = optimizeSelector ?? (s => s);
 			return this.Dispatch<OptimizeDescriptor, OptimizeQueryString, ShardsOperationResponse>(
 				optimizeSelector,
-				(p,d) => this.RawDispatch.IndicesOptimizeDispatch(p)
+				(p,d) => this.RawDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 			optimizeSelector = optimizeSelector ?? (s => s);
 			return this.DispatchAsync<OptimizeDescriptor, OptimizeQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				optimizeSelector,
-				(p,d) => this.RawDispatch.IndicesOptimizeDispatchAsync(p)
+				(p,d) => this.RawDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
 			);
 
 		}

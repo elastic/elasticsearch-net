@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -44,7 +45,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 		#region IConnection Members
 
-		public Task<ElasticsearchResponse> Get(Uri uri)
+		public Task<ElasticsearchResponse<T>> Get<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
@@ -52,13 +53,13 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse<T>>(() =>
 			{
-				return this.Execute(restRequest);
+				return this.Execute<T>(restRequest, deserializationState);
 			});
 		}
 	
-		public Task<ElasticsearchResponse> Head(Uri uri)
+		public Task<ElasticsearchResponse<T>> Head<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -66,13 +67,13 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ElasticsearchResponse>(()=> 
+			return Task.Factory.StartNew<ElasticsearchResponse<T>>(()=> 
 			{
-				return this.Execute(restRequest);
+				return this.Execute<T>(restRequest, deserializationState);
 			});
 		}
 
-		public ElasticsearchResponse GetSync(Uri uri)
+		public ElasticsearchResponse<T> GetSync<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.GET;
@@ -80,10 +81,10 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return this.Execute(restRequest);
+			return this.Execute<T>(restRequest, deserializationState);
 		}
 
-		public ElasticsearchResponse HeadSync(Uri uri)
+		public ElasticsearchResponse<T> HeadSync<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.HEAD;
@@ -91,10 +92,10 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return this.Execute(restRequest);
+			return this.Execute<T>(restRequest, deserializationState);
 		}
 
-		public Task<ElasticsearchResponse> Post(Uri uri, byte[] data)
+		public Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
@@ -103,12 +104,12 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse<T>>(() =>
 			{
-				return this.Execute(restRequest);
+				return this.Execute<T>(restRequest, deserializationState);
 			});
 		}
-		public Task<ElasticsearchResponse> Put(Uri uri, byte[] data)
+		public Task<ElasticsearchResponse<T>> Put<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
@@ -117,12 +118,12 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse<T>>(() =>
 			{
-				return this.Execute(restRequest);
+				return this.Execute<T>(restRequest, deserializationState);
 			});
 		}
-		public Task<ElasticsearchResponse> Delete(Uri uri, byte[] data)
+		public Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -131,13 +132,13 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse<T>>(() =>
 			{
-				return this.Execute(restRequest);
+				return this.Execute<T>(restRequest, deserializationState);
 			});
 		}
 
-		public ElasticsearchResponse PostSync(Uri uri, byte[] data)
+		public ElasticsearchResponse<T> PostSync<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.POST;
@@ -146,9 +147,9 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return this.Execute(restRequest);
+			return this.Execute<T>(restRequest, deserializationState);
 		}
-		public ElasticsearchResponse PutSync(Uri uri, byte[] data)
+		public ElasticsearchResponse<T> PutSync<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.PUT;
@@ -157,9 +158,9 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return this.Execute(restRequest);
+			return this.Execute<T>(restRequest, deserializationState);
 		}
-		public Task<ElasticsearchResponse> Delete(Uri uri)
+		public Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -167,13 +168,13 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return Task.Factory.StartNew<ElasticsearchResponse>(() =>
+			return Task.Factory.StartNew<ElasticsearchResponse<T>>(() =>
 			{
-				return this.Execute(restRequest);
+				return this.Execute<T>(restRequest, deserializationState);
 			});
 		}
 
-		public ElasticsearchResponse DeleteSync(Uri uri)
+		public ElasticsearchResponse<T> DeleteSync<T>(Uri uri, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -181,9 +182,9 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return this.Execute(restRequest);
+			return this.Execute<T>(restRequest, deserializationState);
 		}
-		public ElasticsearchResponse DeleteSync(Uri uri, byte[] data)
+		public ElasticsearchResponse<T> DeleteSync<T>(Uri uri, byte[] data, object deserializationState = null)
 		{
 			var restRequest = new RestRequest();
 			restRequest.Method = Method.DELETE;
@@ -192,7 +193,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			restRequest.Body = data;
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			return this.Execute(restRequest);
+			return this.Execute<T>(restRequest, deserializationState);
 		}
 
 		public bool Ping(Uri uri)
@@ -203,7 +204,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			var r  = this.Execute(restRequest);
+			var r  = this.Execute<object>(restRequest, null); //TODO VoidResponse
 			return r.Success;
 		}
 
@@ -215,10 +216,10 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 			restRequest.Headers = new Dictionary<string, string>();
 			restRequest.Headers.Add("Content-Type", "application/json");
-			var r  = this.Execute(restRequest);
-			using (var memoryStream = new MemoryStream(r.ResultBytes))
+			var r  = this.Execute<byte[]>(restRequest, null);
+			using (var memoryStream = new MemoryStream(r.Response))
 			{
-				return Sniffer.FromStream(memoryStream, this._connectionSettings.Serializer);
+				return Sniffer.FromStream(r, memoryStream, this._connectionSettings.Serializer);
 			}
 		}
 
@@ -269,7 +270,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 
 
-		private ElasticsearchResponse Execute(RestRequest restRequest)
+		private ElasticsearchResponse<T> Execute<T>(RestRequest restRequest, object deserializationState)
 		{
 			//RestResponse result = GetClient().execute(restRequest);
 			//
@@ -279,7 +280,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 			if (!this._resourceLock.WaitOne(this._timeout))
 			{
 				var m = "Could not start the thrift operation before the timeout of " + this._timeout + "ms completed while waiting for the semaphore";
-				return ElasticsearchResponse.CreateError(this._connectionSettings, new TimeoutException(m), method, path, requestData);
+				return ElasticsearchResponse<T>.CreateError(this._connectionSettings, new TimeoutException(m), method, path, requestData);
 			}
 			try
 			{
@@ -287,7 +288,7 @@ namespace Elasticsearch.Net.Connection.Thrift
 				if (!this._clients.TryDequeue(out client))
 				{
 					var m = string.Format("Could dequeue a thrift client from internal socket pool of size {0}", this._poolSize);
-					var status = ElasticsearchResponse.CreateError(this._connectionSettings, new Exception(m), method, path, requestData);
+					var status = ElasticsearchResponse<T>.CreateError(this._connectionSettings, new Exception(m), method, path, requestData);
 					return status;
 				}
 				try
@@ -297,11 +298,29 @@ namespace Elasticsearch.Net.Connection.Thrift
 
 					var result = client.execute(restRequest);
 					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
-						return ElasticsearchResponse.Create(this._connectionSettings, (int)result.Status, method, path, requestData, result.Body);
+					{
+						var response = ElasticsearchResponse<T>.Create(this._connectionSettings, (int)result.Status, method, path, requestData);
+						if (typeof(T) == typeof(VoidResponse))
+							return response;
+						using (var ms = new MemoryStream(result.Body))
+						{
+							if (this._connectionSettings.KeepRawResponse) 
+							{
+								response.ResponseRaw = result.Body;
+							}
+							if (typeof(T) == typeof(string))
+								this.SetStringResult(response as ElasticsearchResponse<string>, result.Body);
+							else if (typeof(T) == typeof(byte[]))
+								this.SetByteResult(response as ElasticsearchResponse<byte[]>, result.Body);
+							else 
+								response.Response = this._connectionSettings.Serializer.Deserialize<T>(response, ms, deserializationState);
+							return response;
+						};
+					}
 					else
 					{
 						var connectionException = new ConnectionException((int)result.Status);
-						return ElasticsearchResponse.CreateError(this._connectionSettings, connectionException, method, path, requestData);
+						return ElasticsearchResponse<T>.CreateError(this._connectionSettings, connectionException, method, path, requestData);
 					}
 				}
 				catch
@@ -317,12 +336,22 @@ namespace Elasticsearch.Net.Connection.Thrift
 			}
 			catch (Exception e)
 			{
-				return ElasticsearchResponse.CreateError(this._connectionSettings, e, method, path, requestData);
+				return ElasticsearchResponse<T>.CreateError(this._connectionSettings, e, method, path, requestData);
 			}
 			finally
 			{
 				this._resourceLock.Release();
 			}
+		}
+
+		private void SetByteResult(ElasticsearchResponse<byte[]> elasticsearchResponse, byte[] body)
+		{
+			elasticsearchResponse.Response = body;
+		}
+
+		private void SetStringResult(ElasticsearchResponse<string> elasticsearchResponse, byte[] body)
+		{
+			elasticsearchResponse.Response = body.Utf8String();
 		}
 
 		public string DecodeStr(byte[] bytes)

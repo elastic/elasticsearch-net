@@ -22,7 +22,7 @@ namespace Nest
 			this.IsValid = true;
 		}
 
-		internal GetMappingResponse(ElasticsearchResponse status, GetRootObjectMappingWrapping dict)
+		internal GetMappingResponse(IElasticsearchResponse status, GetRootObjectMappingWrapping dict)
 		{
 			this.ConnectionStatus = status;
 			this.IsValid = status.Success && dict != null && dict.Count > 0;

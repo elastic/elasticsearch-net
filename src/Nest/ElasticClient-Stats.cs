@@ -14,7 +14,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatch<IndicesStatsDescriptor, IndicesStatsQueryString, GlobalStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatsDispatch(p)
+				(p, d) => this.RawDispatch.IndicesStatsDispatch<GlobalStatsResponse>(p)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<IndicesStatsDescriptor, IndicesStatsQueryString, GlobalStatsResponse, IGlobalStatsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatsDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesStatsDispatchAsync<GlobalStatsResponse>(p)
 			);
 		}
 	}

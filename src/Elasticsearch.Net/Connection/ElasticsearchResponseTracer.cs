@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Elasticsearch.Net.Connection
 {
-	public class ElasticsearchResponseTracer : IDisposable
+	public class ElasticsearchResponseTracer<T> : IDisposable
 	{
 		private readonly bool _enabled;
 		private Stopwatch _stopwatch;
 
-		public ElasticsearchResponse _result { get; set; }
+		public ElasticsearchResponse<T> _result { get; set; }
 
 		public ElasticsearchResponseTracer(bool enabled)
 		{
@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public void SetResult(ElasticsearchResponse status)
+		public void SetResult(ElasticsearchResponse<T> status)
 		{
 			if (!_enabled)
 				return;

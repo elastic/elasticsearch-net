@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Nest.DSL.Search
 {
-	public class SourceDescriptor<T> where T : class 
+	public class SearchSourceDescriptor<T> where T : class 
  	{
 		[JsonProperty("include")]
 		internal IEnumerable<PropertyPathMarker> _Include { get; set; } 
@@ -16,32 +16,32 @@ namespace Nest.DSL.Search
 		[JsonProperty("exclude")]
 		internal IEnumerable<PropertyPathMarker> _Exclude { get; set; } 
 
-		public SourceDescriptor<T> Include(params string[] fields)
+		public SearchSourceDescriptor<T> Include(params string[] fields)
 		{
 			this._Include = fields.Select(f => (PropertyPathMarker) f).ToList();
 			return this;
 		} 
-		public SourceDescriptor<T> Include(params Expression<Func<T, object>>[] fields)
+		public SearchSourceDescriptor<T> Include(params Expression<Func<T, object>>[] fields)
 		{
 			this._Include = fields.Select(f => (PropertyPathMarker) f).ToList();
 			return this;
 		} 
-		public SourceDescriptor<T> Include(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)
+		public SearchSourceDescriptor<T> Include(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)
 		{
 			this._Include = fields(new FluentFieldList<T>()).ToList();
 			return this;
 		}
-		public SourceDescriptor<T> Exclude(params string[] fields)
+		public SearchSourceDescriptor<T> Exclude(params string[] fields)
 		{
 			this._Exclude = fields.Select(f => (PropertyPathMarker) f).ToList();
 			return this;
 		} 
-		public SourceDescriptor<T> Exclude(params Expression<Func<T, object>>[] fields)
+		public SearchSourceDescriptor<T> Exclude(params Expression<Func<T, object>>[] fields)
 		{
 			this._Exclude = fields.Select(f => (PropertyPathMarker) f).ToList();
 			return this;
 		} 
-		public SourceDescriptor<T> Exclude(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)
+		public SearchSourceDescriptor<T> Exclude(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)
 		{
 			this._Exclude = fields(new FluentFieldList<T>()).ToList();
 			return this;

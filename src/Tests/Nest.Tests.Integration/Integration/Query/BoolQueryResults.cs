@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.Integration;
@@ -23,7 +24,7 @@ namespace Nest.Tests.Integration.Integration.Query
 			_LookFor = NestTestData.Session.Single<ElasticsearchProject>().Get();
 			_LookFor.Name = "one two three four";
 			var status = this._client.Index(_LookFor, i=>i.Refresh()).ConnectionStatus;
-			Assert.True(status.Success, status.Result);
+			Assert.True(status.Success, status.ResponseRaw.Utf8String());
 		}
 
 		[Test]
@@ -95,8 +96,8 @@ namespace Nest.Tests.Integration.Integration.Query
 
 		private void AssertBoolQueryResults(IQueryResponse<BoolTerm> results, int expectedCount)
 		{
-			Assert.True(results.IsValid, results.ConnectionStatus.Result);
-			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.Result);
+			Assert.True(results.IsValid, results.ConnectionStatus.ResponseRaw.Utf8String());
+			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.ResponseRaw.Utf8String());
 			Assert.GreaterOrEqual(results.Total, expectedCount);
 		}
 	}

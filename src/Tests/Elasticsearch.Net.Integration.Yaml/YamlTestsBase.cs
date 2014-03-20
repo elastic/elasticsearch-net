@@ -10,7 +10,6 @@ using System.Text.RegularExpressions;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.HttpClient;
 using Elasticsearch.Net.JsonNet;
-using Elasticsearch.Net.ServiceStackText;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -22,8 +21,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 		protected static readonly Version _versionNumber;
 		
 		protected object _body;
-		protected ElasticsearchResponse _status;
+		protected ElasticsearchResponse<DynamicDictionary> _status;
 		protected dynamic _response;
+
+		protected static ElasticsearchResponse<string> _x; 
 
 		static YamlTestsBase()
 		{
@@ -32,11 +33,14 @@ namespace Elasticsearch.Net.Integration.Yaml
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
 			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
+
+			var jsonNetSerializer = new ElasticsearchJsonNetSerializer();
+
 			_client = new ElasticsearchClient(settings);
+			//_client = new ElasticsearchClient(settings, serializer: jsonNetSerializer);
 			var infoResponse = _client.Info();
 			dynamic info = infoResponse.Response;
 			_versionNumber = new Version(info.version.number);
-
 		}
 
 		public YamlTestsBase()
@@ -44,7 +48,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			_client.IndicesDelete("*");
 		}
 
-		protected void Do(Func<ElasticsearchResponse> action, string shouldCatch = null)
+		protected void Do(Func<ElasticsearchResponse<DynamicDictionary>> action, string shouldCatch = null)
 		{
 			try
 			{
@@ -76,7 +80,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			else if (shouldCatch != null && shouldCatch.StartsWith("/"))
 			{
 				var re = shouldCatch.Trim('/');
-				Assert.IsTrue(Regex.IsMatch(this._status.Result, re),
+				Assert.IsTrue(Regex.IsMatch(Encoding.UTF8.GetString(this._status.ResponseRaw), re),
 					"response does not match regex: " + shouldCatch);
 			}
 			this._response = this._status.Response;
@@ -101,15 +105,14 @@ namespace Elasticsearch.Net.Integration.Yaml
 		protected void IsTrue(object o)
 		{
 			if (o == null) Assert.Fail("null is not true value");
-			if (o is ElasticsearchResponse)
+			if (o is IElasticsearchResponse)
 			{
-				var c = o as ElasticsearchResponse;
+				var c = o as IElasticsearchResponse;
 				if (c.RequestMethod == "HEAD" && c.Error != null)
 				{
 					Assert.Fail("HEAD request returned status:" + c.Error.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
-				o = c.Result;
 			}
 
 			o = Unbox(o);
@@ -137,6 +140,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 				var s = (string) o;
 				if (string.IsNullOrWhiteSpace(s)) Assert.Fail("Expected string to not be null or whitespace");
 			}
+			else if (o is DynamicDictionary)
+			{
+				Assert.Greater(((DynamicDictionary)o).Count, 0);
+			}
 			else
 			{
 				var s = _client.Serializer.Serialize(o);
@@ -150,9 +157,9 @@ namespace Elasticsearch.Net.Integration.Yaml
 		{
 			if (o == null)
 				return;
-			if (o is ElasticsearchResponse)
+			if (o is IElasticsearchResponse)
 			{
-				var c = o as ElasticsearchResponse;
+				var c = o as IElasticsearchResponse;
 				if (c.RequestMethod == "HEAD" && c.Error == null)
 				{
 					Assert.Fail("HEAD request did not return error status but:" 
@@ -219,7 +226,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is JValue) o = ((JValue)o).Value;
 			if (o is JArray) o = ((JArray) o).ToObject<object[]>();
 			if (o is JObject) o = ((JToken) o).ToObject<Dictionary<string, object>>();
-			if (o is ElasticsearchResponse) o = ((ElasticsearchResponse)o).Result;
+			if (o is ElasticsearchResponse<DynamicDictionary>) o = ((ElasticsearchResponse<DynamicDictionary>)o).Response;
 			return o;
 		}
 
@@ -295,6 +302,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			{
 				var s = (string)o;
 				var v = value.ToString();
+				//string is json parse it and compare it
 				if (s.StartsWith("{") && !(value is string))
 				{
 					var json = _client.Serializer.Serialize(value);
@@ -302,10 +310,12 @@ namespace Elasticsearch.Net.Integration.Yaml
 					var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
 					Assert.AreEqual(nJson, nOtherJson);
 				}
+				//string represents a regex on the response body
 				else if (v.StartsWith("/"))
 				{
 					var re = Regex.Replace(v, @"(^[\s\r\n]*?\/|\/[\s\r\n]*?$)", "");
-					Assert.IsTrue(Regex.IsMatch(this._status.Result, re, RegexOptions.IgnorePatternWhitespace));
+					var r = Encoding.UTF8.GetString(this._status.ResponseRaw);
+					Assert.IsTrue(Regex.IsMatch(r, re, RegexOptions.IgnorePatternWhitespace));
 				}
 				else Assert.AreEqual(s, v);
 			}
@@ -322,16 +332,16 @@ namespace Elasticsearch.Net.Integration.Yaml
 			{
 				var d = value as IDictionary<string, object>;
 				var dd = o as IDictionary<string, object>;
-				if (d == null)
+				if (d == null) //d is an anonymous object turn it into a dict
 					d = (from x in value.GetType().GetProperties() select x)
 						.ToDictionary(
 							x => x.Name, 
 							x => (x.GetGetMethod().Invoke(value, null) ?? ""));
-				var json = _client.Serializer.Serialize(new SortedDictionary<string, object>(d));
-				var otherJson = _client.Serializer.Serialize(new SortedDictionary<string, object>(dd));
-				var nJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
-				var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
-				Assert.AreEqual(nJson, nOtherJson);
+
+				var equals = DynamicDictionary.Create(d)
+					.SequenceEqual(dd);
+				Assert.True(equals, "response did not match expected return");
+
 			}
 			else Assert.Fail(message);
 		}

@@ -16,7 +16,7 @@ namespace Nest
 			var descriptor = indexSelector(new IndexDescriptor<T>().Object(@object));
 			return this.Dispatch<IndexDescriptor<T>, IndexQueryString, IndexResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndexDispatch(p, @object));
+				(p, d) => this.RawDispatch.IndexDispatch<IndexResponse>(p, @object));
 		}
 		public Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
 			where T : class
@@ -26,7 +26,7 @@ namespace Nest
 			var descriptor = indexSelector(new IndexDescriptor<T>().Object(@object));
 			return this.DispatchAsync<IndexDescriptor<T>, IndexQueryString, IndexResponse, IIndexResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndexDispatchAsync(p, @object));
+				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, @object));
 		}
 
 

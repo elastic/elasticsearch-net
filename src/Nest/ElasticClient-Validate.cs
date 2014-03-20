@@ -17,7 +17,7 @@ namespace Nest
 		{
 			return this.Dispatch<ValidateQueryDescriptor<T>, ValidateQueryQueryString, ValidateResponse>(
 				querySelector,
-				(p, d) => this.RawDispatch.IndicesValidateQueryDispatch(p, d)
+				(p, d) => this.RawDispatch.IndicesValidateQueryDispatch<ValidateResponse>(p, d)
 			);
 		}
 
@@ -29,7 +29,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<ValidateQueryDescriptor<T>, ValidateQueryQueryString, ValidateResponse, IValidateResponse>(
 				querySelector,
-				(p, d) => this.RawDispatch.IndicesValidateQueryDispatchAsync(p, d)
+				(p, d) => this.RawDispatch.IndicesValidateQueryDispatchAsync<ValidateResponse>(p, d)
 			);
 		}
 

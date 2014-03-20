@@ -47,8 +47,7 @@ namespace Nest
 
 		private R Dispatch<D, Q, R>(
 			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -57,14 +56,13 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return Dispatch<D, Q, R>(descriptor, dispatch, resultSelector, allow404);
+			return Dispatch<D, Q, R>(descriptor, dispatch, allow404);
 		}
 
 
 		private R Dispatch<D, Q, R>(
 			D descriptor
-			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -72,15 +70,25 @@ namespace Nest
 			where R : BaseResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			resultSelector = resultSelector ?? ((c, d) => this.Serializer.ToParsedResponse<R>(c, allow404));
+			Func<ElasticsearchResponse<R>, D, R> resultSelector = 
+				((c, d) => c.Success || allow404 && c.HttpStatusCode == 404  ? c.Response : CreateInvalidInstance<R>(c));
 			var response = dispatch(pathInfo, descriptor);
 			return resultSelector(response, descriptor);
 		}
 
+
+
+		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
+		{
+			var r = (R)typeof(R).CreateInstance();
+			r.ConnectionStatus = response;
+			r.IsValid = false;
+			return r;
+		}
+
 		internal Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse>> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			, bool allow404 = false
 			)
 			where Q : FluentQueryString<Q>, new()
@@ -90,13 +98,12 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return DispatchAsync<D, Q, R, I>(descriptor, dispatch, resultSelector, allow404);
+			return DispatchAsync<D, Q, R, I>(descriptor, dispatch,  allow404);
 		}
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor 
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse>> dispatch
-			, Func<ElasticsearchResponse, D, R> resultSelector = null
+			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			, bool allow404 = false
 			) 
 			where Q : FluentQueryString<Q>, new()
@@ -105,7 +112,8 @@ namespace Nest
 			where I : IResponse
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			resultSelector = resultSelector ?? ((c, d) => this.Serializer.ToParsedResponse<R>(c, allow404));
+			Func<ElasticsearchResponse<R>, D, R> resultSelector =
+				((c, d) => c.Success || allow404 && c.HttpStatusCode == 404  ? c.Response : CreateInvalidInstance<R>(c));
 			return dispatch(pathInfo, descriptor)
 				.ContinueWith<I>(r => resultSelector(r.Result, descriptor));
 		}
