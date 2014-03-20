@@ -247,11 +247,15 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<T> WebToElasticsearchResponse<T>(byte[] data, object deserializationState,
 			Stream responseStream, HttpWebResponse response, string method, string path, ElasticsearchResponseTracer<T> tracer)
 		{
-			ElasticsearchResponse<T> cs;
+			ElasticsearchResponse<T> cs = 
+				ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
+			if (typeof(T) == typeof(VoidResponse))
+				return cs;
 			using (var memoryStream = new MemoryStream())
 			{
 				Stream s = responseStream;
-				if (_ConnectionSettings.KeepRawResponse)
+				Type type = typeof(T);
+				if (_ConnectionSettings.KeepRawResponse || type == typeof(string) || type == typeof(byte[]))
 				{
 					responseStream.CopyTo(memoryStream);
 					//use memory stream for serialization instead
@@ -259,9 +263,20 @@ namespace Elasticsearch.Net.Connection
 					//that will prevent double reads
 					memoryStream.Position = 0;
 					s = memoryStream;
+					var bytes = memoryStream.ToArray();
+					if (typeof(T) == typeof(string))
+					{
+						this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
+						return cs;
+					}
+					if (typeof(T) == typeof(byte[]))
+					{
+						this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
+						return cs;
+					}
+					cs.ResponseRaw = bytes;
 				}
 
-				cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
 				var result = this._ConnectionSettings.Serializer.Deserialize<T>(cs, s, deserializationState);
 				cs.Response = result;
 				cs.ResponseRaw = memoryStream.ToArray();
@@ -349,7 +364,14 @@ namespace Elasticsearch.Net.Connection
 				using (var memoryStream = new MemoryStream())
 				{
 					Stream s = responseStream;
-					if (_ConnectionSettings.UsesPrettyResponses)
+					var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);	
+					if (typeof(T) == typeof(VoidResponse))
+					{
+						SetReturnOnAsycActors(tcs, cs, tracer);
+						yield break;
+					}
+					Type type = typeof(T);
+					if (_ConnectionSettings.KeepRawResponse || type == typeof(string) || type == typeof(byte[]))
 					{
 						// Copy all data from the response stream
 						var buffer = new byte[BUFFER_SIZE];
@@ -362,18 +384,47 @@ namespace Elasticsearch.Net.Connection
 						}
 						memoryStream.Position = 0;
 						s = memoryStream;
+						cs.ResponseRaw = memoryStream.ToArray();
+						if (typeof(T) == typeof(string))
+						{
+							this.SetStringResult(cs as ElasticsearchResponse<string>, cs.ResponseRaw);
+							SetReturnOnAsycActors(tcs, cs, tracer);
+							yield break;
+						}
+						if (typeof(T) == typeof(byte[]))
+						{
+							this.SetByteResult(cs as ElasticsearchResponse<byte[]>, cs.ResponseRaw);
+							SetReturnOnAsycActors(tcs, cs, tracer);
+							yield break;
+						}
+
 					}
-					var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
 					var t = this._ConnectionSettings.Serializer.DeserializeAsync<T>(cs, s, deserializationState);
 					yield return t;
 					cs.Response = t.Result;
-					cs.ResponseRaw = memoryStream.ToArray();
-					tcs.TrySetResult(cs);
-					tracer.SetResult(cs);
-					_ConnectionSettings.ConnectionStatusHandler(cs);
+					SetReturnOnAsycActors(tcs, cs, tracer);
 				}
 			}
 		}
+
+		private void SetReturnOnAsycActors<T>(TaskCompletionSource<ElasticsearchResponse<T>> tcs, ElasticsearchResponse<T> cs,
+			ElasticsearchResponseTracer<T> tracer)
+		{
+			tcs.TrySetResult(cs);
+			tracer.SetResult(cs);
+			_ConnectionSettings.ConnectionStatusHandler(cs);
+		}
+
+		public void SetStringResult(ElasticsearchResponse<string> response, byte[] rawResponse)
+		{
+			response.Response = rawResponse.Utf8String();
+		}
+	
+		public void SetByteResult(ElasticsearchResponse<byte[]> response, byte[] rawResponse)
+		{
+			response.Response = rawResponse;
+		}
+
 
 		public void Iterate<T>(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<T>> tcs)
 		{

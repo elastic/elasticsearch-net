@@ -24,6 +24,8 @@ namespace Elasticsearch.Net.Integration.Yaml
 		protected ElasticsearchResponse<DynamicDictionary> _status;
 		protected dynamic _response;
 
+		protected static ElasticsearchResponse<string> _x; 
+
 		static YamlTestsBase()
 		{
 			var host = "localhost";
@@ -34,8 +36,8 @@ namespace Elasticsearch.Net.Integration.Yaml
 
 			var jsonNetSerializer = new ElasticsearchJsonNetSerializer();
 
-			//_client = new ElasticsearchClient(settings);
-			_client = new ElasticsearchClient(settings, serializer: jsonNetSerializer);
+			_client = new ElasticsearchClient(settings);
+			//_client = new ElasticsearchClient(settings, serializer: jsonNetSerializer);
 			var infoResponse = _client.Info();
 			dynamic info = infoResponse.Response;
 			_versionNumber = new Version(info.version.number);
@@ -111,7 +113,6 @@ namespace Elasticsearch.Net.Integration.Yaml
 					Assert.Fail("HEAD request returned status:" + c.Error.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
-				//o = Encoding.UTF8.GetString(c.ResponseRaw);
 			}
 
 			o = Unbox(o);

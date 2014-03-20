@@ -300,13 +300,20 @@ namespace Elasticsearch.Net.Connection.Thrift
 					if (result.Status == Status.OK || result.Status == Status.CREATED || result.Status == Status.ACCEPTED)
 					{
 						var response = ElasticsearchResponse<T>.Create(this._connectionSettings, (int)result.Status, method, path, requestData);
+						if (typeof(T) == typeof(VoidResponse))
+							return response;
 						using (var ms = new MemoryStream(result.Body))
 						{
-							response.Response = this._connectionSettings.Serializer.Deserialize<T>(response, ms, deserializationState);
 							if (this._connectionSettings.KeepRawResponse) 
 							{
 								response.ResponseRaw = result.Body;
 							}
+							if (typeof(T) == typeof(string))
+								this.SetStringResult(response as ElasticsearchResponse<string>, result.Body);
+							else if (typeof(T) == typeof(byte[]))
+								this.SetByteResult(response as ElasticsearchResponse<byte[]>, result.Body);
+							else 
+								response.Response = this._connectionSettings.Serializer.Deserialize<T>(response, ms, deserializationState);
 							return response;
 						};
 					}
@@ -335,6 +342,16 @@ namespace Elasticsearch.Net.Connection.Thrift
 			{
 				this._resourceLock.Release();
 			}
+		}
+
+		private void SetByteResult(ElasticsearchResponse<byte[]> elasticsearchResponse, byte[] body)
+		{
+			elasticsearchResponse.Response = body;
+		}
+
+		private void SetStringResult(ElasticsearchResponse<string> elasticsearchResponse, byte[] body)
+		{
+			elasticsearchResponse.Response = body.Utf8String();
 		}
 
 		public string DecodeStr(byte[] bytes)
