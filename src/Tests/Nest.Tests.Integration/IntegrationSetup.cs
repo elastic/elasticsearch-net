@@ -49,9 +49,6 @@ namespace Nest.Tests.Integration
 				.IndexMany(boolTerms)
 				.Refresh()
 			);
-
-			//client.Refresh(r=>r.Indices(ElasticsearchConfiguration.DefaultIndex, ElasticsearchConfiguration.DefaultIndex + "_clone"));
-
 		}
 
 		[TearDown]

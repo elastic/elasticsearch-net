@@ -68,9 +68,13 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				{
 					var result = await client.InfoAsync();
 				}
+				catch (AggregateException ae)
+				{
+					Assert.AreEqual(typeof(OutOfNodesException), ae.InnerException.GetType());
+				}
 				catch (Exception e)
 				{
-					Assert.AreEqual(e.GetType(), typeof(OutOfNodesException));
+					Assert.AreEqual(typeof(OutOfNodesException), e.GetType());
 				}
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
@@ -185,6 +189,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				try
 				{
 					var result = await client.InfoAsync();
+				}
+				catch (AggregateException e)
+				{
+					Assert.AreEqual(e.InnerException.GetType(), typeof(OutOfNodesException));
 				}
 				catch (Exception e)
 				{

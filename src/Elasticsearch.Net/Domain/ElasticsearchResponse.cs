@@ -186,7 +186,7 @@ namespace Elasticsearch.Net
 		{
 			var r = this;
 			var e = r.Error;
-			string response = "<Response not captured or already read to completion by serializer>";
+			string response = "<Response stream not captured or already read to completion by serializer>";
 			if (typeof(T) == typeof(string))
 				response = this.Response as string;
 			else if (this.Settings.KeepRawResponse)

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
@@ -22,6 +23,37 @@ namespace Nest.Tests.Integration.RawCalls
 		{
 			var r = await this._client.Raw.InfoAsync<string>();
 			r.Response.Should().NotBeNullOrEmpty();
+			r.ResponseRaw.Should().BeNull();
+		}
+		
+		[Test]
+		public void ByteArrayReturn()
+		{
+			var r = this._client.Raw.Info<byte[]>();
+			r.Response.Should().NotBeNull();
+			r.ResponseRaw.Should().BeNull();
+		}
+		
+		[Test]
+		public async void ByteArrayReturn_Async()
+		{
+			var r = await this._client.Raw.InfoAsync<byte[]>();
+			r.Response.Should().NotBeNull();
+			r.ResponseRaw.Should().BeNull();
+		}
+		[Test]
+		public void VoidResponseReturn()
+		{
+			var r = this._client.Raw.Info<VoidResponse>();
+			r.Response.Should().BeNull();
+			r.ResponseRaw.Should().BeNull();
+		}
+		
+		[Test]
+		public async void VoidResponseReturn_Async()
+		{
+			var r = await this._client.Raw.InfoAsync<VoidResponse>();
+			r.Response.Should().BeNull();
 			r.ResponseRaw.Should().BeNull();
 		}
 	}

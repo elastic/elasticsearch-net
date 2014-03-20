@@ -68,7 +68,6 @@ namespace Nest.Resolvers
 		private readonly IConnectionSettingsValues _settings;
 		public PropertyNameResolver(IConnectionSettingsValues settings)
 		{
-			//TODO remove settings for leave it in to find places its used where it shouldnt
 			_settings = settings;
 		}
 
