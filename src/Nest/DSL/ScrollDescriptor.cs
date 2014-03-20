@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Nest.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -13,7 +14,8 @@ using Nest.Resolvers;
 namespace Nest
 {
 	public partial class ScrollDescriptor<T> :
-		IPathInfo<ScrollQueryString>
+		IPathInfo<ScrollQueryString>,
+		IHideObjectMembers
 		where T : class
 	{
 		ElasticsearchPathInfo<ScrollQueryString> IPathInfo<ScrollQueryString>.ToPathInfo(IConnectionSettingsValues settings)

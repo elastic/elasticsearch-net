@@ -139,8 +139,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("POST", "/prefix-*/a%2Cb/_search", c => c.Search<Doc>(s => s.Index("prefix-*").Types("a", "b").MatchAll()));
 			Do("GET", "/_segments", c => c.Segments());
 			Do("GET", "/mycustomindex/_segments", c => c.Segments(s => s.Index("mycustomindex")));
-			Do("POST", "/_gateway/snapshot", c => c.Snapshot());
-			Do("POST", "/mydefaultindex/_gateway/snapshot", c => c.Snapshot(s => s.Index<Doc>()));
+			Do("POST", "/_gateway/snapshot", c => c.GatewaySnapshot());
+			Do("POST", "/mydefaultindex/_gateway/snapshot", c => c.GatewaySnapshot(s => s.Index<Doc>()));
 			Do("GET", "/mydefaultindex/doc/1/_source", c => c.Source<Doc>(1));
 			Do("GET", "/mycustomindex/mytype/1/_source", c => c.Source<Doc>(1, index: "mycustomindex", type: "mytype"));
 			Do("GET", "/mycustomindex/doc/1/_source", c => c.Source<Doc>(s => s.Id(1).Index("mycustomindex")));

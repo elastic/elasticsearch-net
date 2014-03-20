@@ -118,6 +118,7 @@
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\ICustomJson.cs" />
+    <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\PropertyNameMarker.cs" />
     <Compile Include="Domain\PropertyPathMarker.cs" />
     <Compile Include="Domain\QueryStringParametersExtensions.Generated.cs" />
@@ -613,7 +614,7 @@
     <Compile Include="ElasticClient-Analyze.cs" />
     <Compile Include="ElasticClient-Aliases.cs" />
     <Compile Include="ElasticClient-Optimize.cs" />
-    <Compile Include="ElasticClient-Snapshot.cs" />
+    <Compile Include="ElasticClient-GatewaySnapshot.cs" />
     <Compile Include="ElasticClient-Flush.cs" />
     <Compile Include="ElasticClient-OpenClose.cs" />
     <Compile Include="ElasticClient-Refresh.cs" />

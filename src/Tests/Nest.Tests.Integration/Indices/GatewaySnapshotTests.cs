@@ -5,26 +5,26 @@ using NUnit.Framework;
 namespace Nest.Tests.Integration.Indices
 {
 	[TestFixture]
-	public class SnapshotTests : IntegrationTests
+	public class GatewaySnapshotTests : IntegrationTests
 	{
 		[Test]
-		public void SnapshotAll()
+		public void GatewaySnapshotAll()
 		{
-			var r = this._client.Snapshot();
+			var r = this._client.GatewaySnapshot();
 			r.Shards.Should().NotBeNull();
 			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
-		public void SnapshotIndex()
+		public void GatewaySnapshotIndex()
 		{
-			var r = this._client.Snapshot(s=>s.Index(ElasticsearchConfiguration.DefaultIndex));
+			var r = this._client.GatewaySnapshot(s=>s.Index(ElasticsearchConfiguration.DefaultIndex));
 			r.Shards.Should().NotBeNull();
 			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
-		public void SnapshotIndices()
+		public void GatewaySnapshotIndices()
 		{
-			var r = this._client.Snapshot(s=>s.Indices(
+			var r = this._client.GatewaySnapshot(s=>s.Indices(
 				ElasticsearchConfiguration.DefaultIndex, 
 				ElasticsearchConfiguration.DefaultIndex + "_clone")
 			);
@@ -32,9 +32,9 @@ namespace Nest.Tests.Integration.Indices
 			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
 		[Test]
-		public void SnapshotTyped()
+		public void GatewaySnapshotTyped()
 		{
-			var r = this._client.Snapshot(s=>s.Index<ElasticsearchProject>());
+			var r = this._client.GatewaySnapshot(s=>s.Index<ElasticsearchProject>());
 			r.Shards.Should().NotBeNull();
 			r.Shards.Successful.Should().BeGreaterThan(0);
 		}
