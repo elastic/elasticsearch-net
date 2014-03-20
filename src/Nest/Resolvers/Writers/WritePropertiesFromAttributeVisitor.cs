@@ -131,8 +131,17 @@ namespace Nest.Resolvers.Writers {
                     this._jsonWriter.WritePropertyName("type");
                     this._jsonWriter.WriteValue(this._type);
                 }
-                this._jsonWriter.WritePropertyName("index");
-                this._jsonWriter.WriteValue(Enum.GetName(typeof (FieldIndexOption), FieldIndexOption.not_analyzed));
+                if (att.SortAnalyzer.IsNullOrEmpty())
+                {
+                    this._jsonWriter.WritePropertyName("index");
+                    this._jsonWriter.WriteValue(Enum.GetName(typeof(FieldIndexOption), FieldIndexOption.not_analyzed));
+                }
+                else
+                {
+                    this._jsonWriter.WritePropertyName("index_analyzer");
+                    this._jsonWriter.WriteValue(att.SortAnalyzer);
+                }
+
                 this._jsonWriter.WriteEnd();
                 this._jsonWriter.WriteEnd();
             }
