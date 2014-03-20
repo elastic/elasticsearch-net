@@ -30,17 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\FluentAssertions.2.0.0.1\lib\net45\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\..\dep\FluentAssertions.2.2.0.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\dep\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\dep\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.1.12217, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\dep\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\..\dep\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\..\..\dep\ServiceStack.Text.3.9.71\lib\net35\ServiceStack.Text.dll</HintPath>
@@ -229,10 +227,6 @@
     <ProjectReference Include="..\..\Serialization\Elasticsearch.Net.JsonNET\Elasticsearch.Net.JsonNet.csproj">
       <Project>{dd71352d-0eb2-4a02-8ac4-82a17e2a71a8}</Project>
       <Name>Elasticsearch.Net.JsonNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Serialization\Elasticsearch.Net.ServiceStackText\Elasticsearch.Net.ServiceStackText.csproj">
-      <Project>{8052dc47-3281-4209-b0d2-45555ae30a46}</Project>
-      <Name>Elasticsearch.Net.ServiceStackText</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>

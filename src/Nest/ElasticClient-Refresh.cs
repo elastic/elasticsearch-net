@@ -13,7 +13,7 @@ namespace Nest
 			refreshSelector = refreshSelector ?? (s => s);
 			return this.Dispatch<RefreshDescriptor, RefreshQueryString, ShardsOperationResponse>(
 				refreshSelector,
-				(p,d) => this.RawDispatch.IndicesRefreshDispatch(p)
+				(p,d) => this.RawDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
 			);
 		}
 		
@@ -22,7 +22,7 @@ namespace Nest
 			refreshSelector = refreshSelector ?? (s => s);
 			return this.DispatchAsync<RefreshDescriptor, RefreshQueryString, ShardsOperationResponse, IShardsOperationResponse>(
 				refreshSelector,
-				(p,d)=> this.RawDispatch.IndicesRefreshDispatchAsync(p)
+				(p,d)=> this.RawDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
 		

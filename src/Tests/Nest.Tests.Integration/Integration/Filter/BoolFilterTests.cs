@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Elasticsearch.Net;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Integration.Integration.Filter
@@ -29,7 +30,7 @@ namespace Nest.Tests.Integration.Integration.Filter
 					)
 				)
 			);
-			Assert.True(results.IsValid, results.ConnectionStatus.Result);
+			Assert.True(results.IsValid, results.ConnectionStatus.ResponseRaw.Utf8String());
 			Assert.Greater(results.Total, 0);
 			Assert.Greater(results.Total, 10);
 			

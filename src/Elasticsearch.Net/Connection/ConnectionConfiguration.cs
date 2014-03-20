@@ -48,12 +48,15 @@ namespace Elasticsearch.Net.Connection
 		private string _proxyAddress;
 		string IConnectionConfigurationValues.ProxyAddress { get{ return _proxyAddress; } }
 
+		private bool _usePrettyResponses;
+		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
+		private bool _keepRawResponse;
+		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
+
 		private int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
 		private int? _maxRetries;
 		int? IConnectionConfigurationValues.MaxRetries { get{ return _maxRetries; } }
-		private bool _usePrettyResponses;
-		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
 		private bool _sniffOnStartup;
 		bool IConnectionConfigurationValues.SniffsOnStartup { get{ return _sniffOnStartup; } }
 		private bool _sniffOnConectionFault;
@@ -62,8 +65,8 @@ namespace Elasticsearch.Net.Connection
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
-		private Action<ElasticsearchResponse> _connectionStatusHandler;
-		Action<ElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
+		private Action<IElasticsearchResponse> _connectionStatusHandler;
+		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
 		private NameValueCollection _queryString;
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get{ return _queryString; } }
 
@@ -216,7 +219,16 @@ namespace Elasticsearch.Net.Connection
 			return (T) this;
 		}
 
-		protected void ConnectionStatusDefaultHandler(ElasticsearchResponse status)
+		/// <summary>
+		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
+		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
+		/// </summary>
+		public T ExposeRawResponse(bool b = true)
+		{
+			this._keepRawResponse = b;
+			return (T) this;
+		}
+		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status)
 		{
 			return;
 		}
@@ -224,7 +236,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		public T SetConnectionStatusHandler(Action<ElasticsearchResponse> handler)
+		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
 		{
 			handler.ThrowIfNull("handler");
 			this._connectionStatusHandler = handler;

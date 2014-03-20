@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Exceptions;
 using NUnit.Framework;
 using Nest;
 
@@ -60,14 +61,17 @@ namespace Nest.Tests.Integration
 		{
 			IRootInfoResponse result = null;
 
-			Assert.DoesNotThrow(() =>
+			//this test will fail if fiddler is enabled since the proxy 
+			//will report a statuscode of 502 instead of -1
+			Assert.Throws<OutOfNodesException>(() =>
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");
 				var client = new ElasticClient(settings);
 				result = client.RootNodeInfo();
+				Assert.False(result.IsValid);
+				Assert.NotNull(result.ConnectionStatus);
 			});
-			Assert.False(result.IsValid);
-			Assert.NotNull(result.ConnectionStatus);
+		
 		}
 		[Test]
 		public void TestConnectSuccessWithUri()

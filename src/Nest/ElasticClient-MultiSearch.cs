@@ -22,9 +22,9 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = this.Serializer.SerializeMultiSearch(d);
-					return this.RawDispatch.MsearchDispatch(p, json);
-				},
-				this.Serializer.DeserializeMultiSearchResponse
+					var converter = this.CreateMultiSearchConverter(d);
+					return this.RawDispatch.MsearchDispatch<MultiSearchResponse>(p, json, converter);
+				}
 			);
 		}
 
@@ -35,10 +35,16 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = this.Serializer.SerializeMultiSearch(d);
-					return this.RawDispatch.MsearchDispatchAsync(p, json);
-				},
-				this.Serializer.DeserializeMultiSearchResponse
+					var converter = this.CreateMultiSearchConverter(d);
+					return this.RawDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json, converter);
+				}
 			);
+		}
+
+		private JsonConverter CreateMultiSearchConverter(MultiSearchDescriptor descriptor)
+		{
+			var multiSearchConverter = new MultiSearchConverter(this._connectionSettings, descriptor);
+			return multiSearchConverter;
 		}
 	}
 }

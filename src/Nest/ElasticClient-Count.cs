@@ -12,7 +12,7 @@ namespace Nest
 		    countSelector = countSelector ?? (s => s);
 			return this.Dispatch<CountDescriptor<T>, CountQueryString, CountResponse>(
 				countSelector,
-				(p,d) => this.RawDispatch.CountDispatch(p, d)
+				(p,d) => this.RawDispatch.CountDispatch<CountResponse>(p, d)
 			);
 		}
 
@@ -21,7 +21,7 @@ namespace Nest
 		    countSelector = countSelector ?? (s => s);
 			return this.DispatchAsync<CountDescriptor<T>, CountQueryString, CountResponse, ICountResponse>(
 				countSelector,
-				(p,d) => this.RawDispatch.CountDispatchAsync(p, d)
+				(p,d) => this.RawDispatch.CountDispatchAsync<CountResponse>(p, d)
 			);
 		}
 	}

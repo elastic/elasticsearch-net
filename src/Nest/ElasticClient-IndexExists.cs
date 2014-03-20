@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
 {
+	using IndexExistConverter = Func<IElasticsearchResponse, Stream, IndexExistsResponse>;
 	public partial class ElasticClient
 	{
 		/// <summary>
@@ -14,19 +16,26 @@ namespace Nest
 		{
 			return this.Dispatch<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsDispatch(p),
-				(c, d) => new IndexExistsResponse(c),
-				allow404:true
+				(p, d) => this.RawDispatch.IndicesExistsDispatch<IndexExistsResponse>(
+					p,
+					new IndexExistConverter(this.DeserializeExistsResponse)
+				), allow404: true
 			);
 		}
 		public Task<IIndexExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector)
 		{
 			return this.DispatchAsync<IndexExistsDescriptor, IndexExistsQueryString, IndexExistsResponse, IIndexExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync(p),
-				(c, d) => new IndexExistsResponse(c),
-				allow404:true
+				(p, d) => this.RawDispatch.IndicesExistsDispatchAsync<IndexExistsResponse>(
+					p,
+					new IndexExistConverter(this.DeserializeExistsResponse)
+				), allow404:true
 			);
+		}
+		
+		private IndexExistsResponse DeserializeExistsResponse(IElasticsearchResponse response, Stream stream)
+		{
+			return new IndexExistsResponse(response);
 		}
 	}
 }

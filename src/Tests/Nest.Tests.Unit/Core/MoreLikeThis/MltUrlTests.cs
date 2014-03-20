@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 		{
 			var result = this._client.MoreLikeThis<ElasticsearchProject>(mlt => mlt.Id(1));
 			var status = result.ConnectionStatus;
-			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.Result);
+			StringAssert.Contains("USING NEST IN MEMORY CONNECTION", result.ConnectionStatus.ResponseRaw.Utf8String());
 			StringAssert.EndsWith("/nest_test_data/elasticsearchprojects/1/_mlt", status.RequestUrl);
 			StringAssert.AreEqualIgnoringCase("GET", status.RequestMethod);
 		}

@@ -30,7 +30,8 @@ namespace Elasticsearch.Net
 		  var mm = kv.Key;
 		  var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
 		  var setter = mm;
-		  if (mm.Contains("fields") && fieldType.Contains("string"))
+		  var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
+		  if (isFields && fieldType.Contains("string"))
 		  {
 			  fieldType = "IEnumerable<object>";
 			  setter = mm + ".Select(f=>(object)f)";

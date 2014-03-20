@@ -10,7 +10,7 @@ namespace Nest
 		{
 			return this.Dispatch<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse>(
 				openIndexSelector,
-				(p, d) => this.RawDispatch.IndicesOpenDispatch(p)
+				(p, d) => this.RawDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -18,7 +18,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<OpenIndexDescriptor, OpenIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
 				openIndexSelector,
-				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -26,7 +26,7 @@ namespace Nest
 		{
 			return this.Dispatch<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse>(
 				closeIndexSelector,
-				(p, d) => this.RawDispatch.IndicesCloseDispatch(p)
+				(p, d) => this.RawDispatch.IndicesCloseDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -34,7 +34,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<CloseIndexDescriptor, CloseIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
 				closeIndexSelector,
-				(p, d) => this.RawDispatch.IndicesCloseDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesCloseDispatchAsync<IndicesOperationResponse>(p)
 			);
 		}
 	}

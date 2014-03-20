@@ -5,6 +5,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 	public class CsharpMethod
 	{
 		public string ReturnType { get; set; }
+		public string ReturnTypeGeneric { get; set; }
+		public string ReturnDescription { get; set; }
 		public string FullName { get; set; }
 		public string QueryStringParamName { get; set; }
 		public string DescriptorType { get; set; }

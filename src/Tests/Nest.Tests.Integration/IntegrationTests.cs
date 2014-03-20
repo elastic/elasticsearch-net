@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 using Nest;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
@@ -25,9 +26,9 @@ namespace Nest.Tests.Integration
 		{
 			var index = this._client.Infer.IndexName<T>();
 			var typeName = this._client.Infer.TypeName<T>();
-			var connectionStatus = this._client.Raw.Search(index, typeName, query);
+			var connectionStatus = this._client.Raw.Search<QueryResponse<T>>(index, typeName, query);
 			var serializer = connectionStatus.Serializer as INestSerializer; 
-			return serializer.ToParsedResponse<QueryResponse<T>>(connectionStatus);
+			return connectionStatus.Response;
 		} 
 
 		public void DoFilterTest(Func<FilterDescriptor<ElasticsearchProject>, Nest.BaseFilter> filter, ElasticsearchProject project, bool queryMustHaveResults)
@@ -41,8 +42,10 @@ namespace Nest.Tests.Integration
 					))
 				);
 
-			Assert.True(results.IsValid, results.ConnectionStatus.Result);
-			Assert.True(results.ConnectionStatus.Success, results.ConnectionStatus.Result);
+			var rawResponse = results.ConnectionStatus.ResponseRaw.Utf8String();
+
+			Assert.True(results.IsValid, rawResponse);
+			Assert.True(results.ConnectionStatus.Success, rawResponse);
 			Assert.AreEqual(queryMustHaveResults ? 1 : 0, results.Total);
 		}
 	

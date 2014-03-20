@@ -146,13 +146,19 @@ namespace CodeGeneration.LowLevelClient.Domain
 							this.Url.Params = new Dictionary<string, ApiQueryParameters>();
 						}
 						queryStringParamName = this.CsharpMethodName + "QueryString";
-
-						
-
+						var paraIndent = "\r\n\t\t///";
+						var explanationOfT =
+							paraIndent + "<para> - If T is of type byte[] deserialization will be shortcircuited</para>"
+							+ paraIndent + 
+								"<para> - If T is of type VoidResponse the response stream will be ignored completely</para>";
 						var apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = "ElasticsearchResponse",
+							ReturnType = "ElasticsearchResponse<T>",
+							ReturnTypeGeneric = "<T>",
+							ReturnDescription = 
+								"ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T."
+								+ explanationOfT,
 							FullName = methodName,
 							HttpMethod = method,
 							Documentation = this.Documentation,
@@ -164,15 +170,69 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 						args = args.Concat(new[] 
 						{ 
-							"Func<"+apiMethod.QueryStringParamName+", " + apiMethod.QueryStringParamName + "> queryString = null" 
-						});
+							"Func<"+apiMethod.QueryStringParamName+", " + apiMethod.QueryStringParamName + "> queryString = null",
+							"object deserializationState = null"
+						}).ToList();
 						apiMethod.Arguments = string.Join(", ", args);
-
 						yield return apiMethod;
+
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = "Task<ElasticsearchResponse>",
+							ReturnType = "Task<ElasticsearchResponse<T>>",
+							ReturnTypeGeneric = "<T>",
+							ReturnDescription = 
+								"A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T."
+								+ explanationOfT,
+							FullName = methodName + "Async",
+							HttpMethod = method,
+							Documentation = this.Documentation,
+							Arguments = string.Join(", ", args),
+							Path = path,
+							Parts = parts,
+							Url = this.Url
+						};
+						ApiGenerator.PatchMethod(apiMethod);
+						yield return apiMethod;
+						
+						//No need for deserialization state when returning dynamicdictionary
+						args = args.Take(args.Count() - 1).ToList();
+
+						var explanationOfDynamic =
+							paraIndent + 
+								"<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>"
+							+ paraIndent + 
+								"<para> - i.e result.Response.hits.hits[0].property.nested[\"nested_deeper\"]</para>"
+							+ paraIndent + 
+								"<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>";
+
+						apiMethod = new CsharpMethod
+						{
+							QueryStringParamName = queryStringParamName,
+							ReturnType = "ElasticsearchResponse<DynamicDictionary>",
+							ReturnTypeGeneric = null,
+							ReturnDescription = 
+								"ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary"
+								+ explanationOfDynamic,
+							FullName = methodName,
+							HttpMethod = method,
+							Documentation = this.Documentation,
+							Arguments = string.Join(", ", args),
+							Path = path,
+							Parts = parts,
+							Url = this.Url
+						};
+						ApiGenerator.PatchMethod(apiMethod);
+						yield return apiMethod;
+						
+						apiMethod = new CsharpMethod
+						{
+							QueryStringParamName = queryStringParamName,
+							ReturnType = "Task<ElasticsearchResponse<DynamicDictionary>>",
+							ReturnTypeGeneric = null,
+							ReturnDescription = 
+								"Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary"
+								+ explanationOfDynamic,
 							FullName = methodName + "Async",
 							HttpMethod = method,
 							Documentation = this.Documentation,

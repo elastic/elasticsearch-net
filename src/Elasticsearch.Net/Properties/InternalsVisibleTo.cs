@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("Nest")]
 [assembly: InternalsVisibleTo("Nest.Tests.Unit")]
 [assembly: InternalsVisibleTo("Nest.Tests.Integration")]
-[assembly: InternalsVisibleTo("Nest.Connection.Thrift")]
+[assembly: InternalsVisibleTo("Elasticsearch.Net.Connection.Thrift")]
 [assembly: InternalsVisibleTo("ProtocolLoadTest")]
 
 

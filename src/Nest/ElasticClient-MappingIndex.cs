@@ -19,7 +19,7 @@ namespace Nest
 		{
 			return this.Dispatch<GetIndexSettingsDescriptor, GetIndexSettingsQueryString, IndexSettingsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesGetSettingsDispatch(p)
+				(p, d) => this.RawDispatch.IndicesGetSettingsDispatch<IndexSettingsResponse>(p)
 			);
 		}
 
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<GetIndexSettingsDescriptor, GetIndexSettingsQueryString, IndexSettingsResponse, IIndexSettingsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesGetSettingsDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesGetSettingsDispatchAsync<IndexSettingsResponse>(p)
 			);
 		}
 	
@@ -35,14 +35,14 @@ namespace Nest
 		{
 			return this.Dispatch<DeleteIndexDescriptor, DeleteIndexQueryString, IndicesResponse>(
 				selector, 
-				(p, d)=> this.RawDispatch.IndicesDeleteDispatch(p)
+				(p, d)=> this.RawDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
 			);
 		}
 		public Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector)
 		{
 			return this.DispatchAsync<DeleteIndexDescriptor, DeleteIndexQueryString, IndicesResponse, IIndicesResponse>(
 				selector, 
-				(p, d)=> this.RawDispatch.IndicesDeleteDispatchAsync(p)
+				(p, d)=> this.RawDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
 			);
 		}
 

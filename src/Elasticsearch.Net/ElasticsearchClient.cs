@@ -34,6 +34,8 @@ namespace Elasticsearch.Net
 			
 			//neccessary to pass the serializer to ElasticsearchResponse
 			this.Settings.Serializer = this.Transport.Serializer;
+			if (this.Settings.SniffsOnStartup)
+				this.Transport.Sniff(fromStartup: true);
 		}
 
 		protected NameValueCollection ToNameValueCollection<TQueryString>(FluentQueryString<TQueryString> qs)
@@ -59,15 +61,15 @@ namespace Elasticsearch.Net
 		}
 
 
-		protected ElasticsearchResponse DoRequest(string method, string path, object data = null, NameValueCollection queryString = null)
+		protected ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, NameValueCollection queryString = null, object deserializationState = null)
 		{
-			return this.Transport.DoRequest(method, path, data, queryString);
+			return this.Transport.DoRequest<T>(method, path, data, queryString, deserializationState);
 		}
 
 
-		protected Task<ElasticsearchResponse> DoRequestAsync(string method, string path, object data = null, NameValueCollection queryString = null)
+		protected Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, NameValueCollection queryString = null, object deserializationState = null)
 		{
-			return this.Transport.DoRequestAsync(method, path, data, queryString);
+			return this.Transport.DoRequestAsync<T>(method, path, data, queryString, deserializationState);
 		}
 	}
 }

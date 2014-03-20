@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Elasticsearch.Net;
 using Nest.Tests.MockData;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -516,7 +517,7 @@ namespace Nest.Tests.Integration.Search
 			var result = this._client.Raw.Search(request);
 			Assert.NotNull(result);
 			Assert.True(result.Success);
-			Assert.IsNotEmpty(result.Result);
+			Assert.IsNotEmpty(result.ResponseRaw.Utf8String());
 		}
 
 		

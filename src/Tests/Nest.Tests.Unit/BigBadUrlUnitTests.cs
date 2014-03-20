@@ -141,10 +141,9 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mycustomindex/_segments", c => c.Segments(s => s.Index("mycustomindex")));
 			Do("POST", "/_gateway/snapshot", c => c.Snapshot());
 			Do("POST", "/mydefaultindex/_gateway/snapshot", c => c.Snapshot(s => s.Index<Doc>()));
-			//no _source here just yet, _source = 0.90.1 and up.
-			Do("GET", "/mydefaultindex/doc/1", c => c.Source<Doc>(1));
-			Do("GET", "/mycustomindex/mytype/1", c => c.Source<Doc>(1, index: "mycustomindex", type: "mytype"));
-			Do("GET", "/mycustomindex/doc/1", c => c.Source<Doc>(s => s.Id(1).Index("mycustomindex")));
+			Do("GET", "/mydefaultindex/doc/1/_source", c => c.Source<Doc>(1));
+			Do("GET", "/mycustomindex/mytype/1/_source", c => c.Source<Doc>(1, index: "mycustomindex", type: "mytype"));
+			Do("GET", "/mycustomindex/doc/1/_source", c => c.Source<Doc>(s => s.Id(1).Index("mycustomindex")));
 			Do("GET", "/mydefaultindex/doc/1?fields=id", c => c.SourceFields<Doc>(g => g.Id(1).Fields(f => f.Id)));
 			Do("GET", "/_status", c => c.Status());
 			Do("GET", "/mydefaultindex/_status", c => c.Status(s => s.Index<Doc>()));

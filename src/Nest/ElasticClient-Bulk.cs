@@ -24,7 +24,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = this.Serializer.SerializeBulkDescriptor(d);
-					return this.RawDispatch.BulkDispatch(p, json);
+					return this.RawDispatch.BulkDispatch<BulkResponse>(p, json);
 				}
 			);
 		}
@@ -36,7 +36,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = this.Serializer.SerializeBulkDescriptor(d);
-					return this.RawDispatch.BulkDispatchAsync(p, json);
+					return this.RawDispatch.BulkDispatchAsync<BulkResponse>(p, json);
 				}
 			);
 		}

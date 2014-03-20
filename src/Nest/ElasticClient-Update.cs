@@ -18,7 +18,7 @@ namespace Nest
 		{
 			return this.Dispatch<UpdateDescriptor<T, K>, UpdateQueryString, UpdateResponse>(
 				updateSelector,
-				(p, d) => this.RawDispatch.UpdateDispatch(p, d)
+				(p, d) => this.RawDispatch.UpdateDispatch<UpdateResponse>(p, d)
 			);
 		}
 		
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<UpdateDescriptor<T, K>, UpdateQueryString, UpdateResponse, IUpdateResponse>(
 				updateSelector,
-				(p, d) => this.RawDispatch.UpdateDispatchAsync(p, d)
+				(p, d) => this.RawDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
 			);
 		}
 	}

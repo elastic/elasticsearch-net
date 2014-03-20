@@ -8,6 +8,7 @@ using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
+using Elasticsearch.Net.Tests.Unit.Stubs;
 using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
@@ -19,17 +20,10 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 	{
 		private static readonly int _retries = 4;
 
-
 		//we do not pass a Uri or IConnectionPool so this config
 		//defaults to SingleNodeConnectionPool()
 		private readonly ConnectionConfiguration _connectionConfig = new ConnectionConfiguration()
 			.MaximumRetries(_retries);
-
-		private void ProvideTransport(AutoFake fake)
-		{
-			var param = new TypedParameter(typeof(IDateTimeProvider), null);
-			fake.Provide<ITransport, Transport>(param);
-		}
 
 		[Test]
 		public void ThrowsOutOfNodesException_AndRetriesTheSpecifiedTimes()
@@ -37,8 +31,9 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Throws<Exception>();
 				
 				var client = fake.Resolve<ElasticsearchClient>();
@@ -57,10 +52,12 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
 				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._));
-				Func<ElasticsearchResponse> badTask = () => { throw new Exception(); };
-				var t = new Task<ElasticsearchResponse>(badTask);
+				FakeCalls.ProvideDefaultTransport(fake);
+				var getCall = FakeCalls.GetCall(fake); 
+
+				//return a started task that throws
+				Func<ElasticsearchResponse<Dictionary<string, object>>> badTask = () => { throw new Exception(); };
+				var t = new Task<ElasticsearchResponse<Dictionary<string, object>>>(badTask);
 				t.Start();
 				getCall.Returns(t);
 				
@@ -71,9 +68,13 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				{
 					var result = await client.InfoAsync();
 				}
+				catch (AggregateException ae)
+				{
+					Assert.AreEqual(typeof(OutOfNodesException), ae.InnerException.GetType());
+				}
 				catch (Exception e)
 				{
-					Assert.AreEqual(e.GetType(), typeof(OutOfNodesException));
+					Assert.AreEqual(typeof(OutOfNodesException), e.GetType());
 				}
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
@@ -85,11 +86,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
-				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
-				getCall.Returns(ElasticsearchResponse.Create(settings, 400, "GET", "/", null, null));
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var getCall = FakeCalls.GetSyncCall(fake); 
+				getCall.Returns(FakeResponse.Any(_connectionConfig, 400));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -103,11 +104,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				FakeCalls.ProvideDefaultTransport(fake);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._));
-				getCall.Returns(Task.FromResult(ElasticsearchResponse.Create(settings, 400, "GET", "/", null, null)));
+				var getCall = FakeCalls.GetCall(fake); 
+				getCall.Returns(Task.FromResult(FakeResponse.Any(_connectionConfig, 400)));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -121,11 +122,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
-				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
-				getCall.Returns(ElasticsearchResponse.Create(settings, 500, "GET", "/", null, null));
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				FakeCalls.ProvideDefaultTransport(fake);
+
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Any(_connectionConfig, 400));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -140,11 +141,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				FakeCalls.ProvideDefaultTransport(fake);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
-				getCall.Returns(ElasticsearchResponse.Create(settings, 201, "GET", "/", null, null));
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Any(_connectionConfig, 201));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -159,11 +160,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				FakeCalls.ProvideDefaultTransport(fake);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
-				getCall.Returns(ElasticsearchResponse.Create(settings, 503, "GET", "/", null, null));
+				var getCall = FakeCalls.GetSyncCall(fake);
+				getCall.Returns(FakeResponse.Bad(_connectionConfig));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
@@ -178,16 +179,20 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
 			{
-				var settings = fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
-				this.ProvideTransport(fake);
+				fake.Provide<IConnectionConfigurationValues>(_connectionConfig);
+				FakeCalls.ProvideDefaultTransport(fake);
 				
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._));
-				getCall.Returns(Task.FromResult(ElasticsearchResponse.Create(settings, 503, "GET", "/", null, null)));
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(Task.FromResult(FakeResponse.Bad(_connectionConfig)));
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 				try
 				{
 					var result = await client.InfoAsync();
+				}
+				catch (AggregateException e)
+				{
+					Assert.AreEqual(e.InnerException.GetType(), typeof(OutOfNodesException));
 				}
 				catch (Exception e)
 				{

@@ -85,7 +85,7 @@ namespace Nest
 
 		[JsonProperty("settings")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public ElasticsearchDynamic Settings { get; internal set; }
+		public DynamicDictionary Settings { get; internal set; }
 
 		[JsonProperty("mappings")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]

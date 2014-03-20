@@ -19,7 +19,7 @@ namespace Nest
 		{
 			return this.Dispatch<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse>(
 				updateSettingsSelector,
-				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch(p, d)
+				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch<SettingsOperationResponse>(p, d)
 			);
 		}
 
@@ -29,7 +29,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<UpdateSettingsDescriptor, UpdateSettingsQueryString, SettingsOperationResponse, ISettingsOperationResponse>(
 				updateSettingsSelector,
-				(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync(p, d)
+				(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync<SettingsOperationResponse>(p, d)
 			);
 		}
 

@@ -13,7 +13,7 @@ namespace Nest
 		{
 			return this.Dispatch<AliasDescriptor, AliasQueryString, IndicesOperationResponse>(
 				aliasSelector,
-				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatch(p, d)
+				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>(p, d)
 			);
 		}
 		
@@ -21,7 +21,7 @@ namespace Nest
 		{
 			return this.DispatchAsync<AliasDescriptor, AliasQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
 				aliasSelector,
-				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatchAsync(p, d)
+				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>(p, d)
 			);
 		}
 
@@ -29,14 +29,14 @@ namespace Nest
 		{
 			return this.Dispatch<GetAliasesDescriptor, GetAliasesQueryString, GetAliasesResponse>(
 				getAliasesDescriptor,
-				(p, d) => this.RawDispatch.IndicesGetAliasDispatch(p)
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(p)
 			);
 		}
 		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
 		{
 			return this.DispatchAsync<GetAliasesDescriptor, GetAliasesQueryString, GetAliasesResponse, IGetAliasesResponse>(
 				getAliasesDescriptor,
-				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync(p)
+				(p, d) => this.RawDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(p)
 			);
 		}
 	}

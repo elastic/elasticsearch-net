@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 using FluentAssertions;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
@@ -18,7 +19,7 @@ namespace Nest.Tests.Integration.Core.Map
 		{
 			result.Should().NotBeNull();
 			if (!result.IsValid)
-				throw new Exception(result.ConnectionStatus.Result);
+				throw new Exception(result.ConnectionStatus.ResponseRaw.Utf8String());
 			result.IsValid.Should().BeTrue();
 		}
 	}

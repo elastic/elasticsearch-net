@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Extras.FakeItEasy;
@@ -17,7 +16,7 @@ using FakeItEasy;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Elasticsearch.Net.Tests.Unit.ConnectionA
+namespace Elasticsearch.Net.Tests.Unit.Connection
 {
 	[TestFixture]
 	public class StaticConnectionPoolRetryTests
@@ -58,9 +57,9 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 				//set up fake for a call on IConnection.GetSync so that it always throws 
 				//an exception
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = FakeCalls.GetSyncCall(fake);
 				getCall.Throws<Exception>();
-				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
+				var pingCall = FakeCalls.Ping(fake);
 				pingCall.Returns(true);
 				
 				//create a real ElasticsearchClient with it unspecified dependencies
@@ -81,6 +80,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 			}
 		}
+
+		
 
 		[Test]
 		public void AllNodesMustBeTriedOnce()
@@ -124,7 +125,8 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 					new ConnectionConfiguration(_connectionPool)
 						.MaximumRetries(7)
 				);
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<Dictionary<string, object>>(A<Uri>._, A<object>._));
 				getCall.Throws<Exception>();
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
@@ -155,13 +157,14 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 						.MaximumRetries(4)
 				);
 				//set up our GET to / to return 4 503's followed by a 200
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<Dictionary<string, object>>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 200, "GET", "/", null)
 				);
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
@@ -212,9 +215,10 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 					call.Returns(DateTime.UtcNow.AddSeconds(60));
 				
 				//When we do a GET on / we always recieve a 503
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<Dictionary<string, object>>(A<Uri>._, A<object>._));
 				getCall.Returns(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null)
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null)
 				);
 				
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
@@ -259,13 +263,14 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 
 				//fake getsync handler that return a 503 4 times and then a 200
 				//this will cause all 4 nodes to be marked dead on the first client call
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = A.CallTo(() => 
+					fake.Resolve<IConnection>().GetSync<Dictionary<string, object>>(A<Uri>._, A<object>._));
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 503, "GET", "/", null),
+					ElasticsearchResponse<Dictionary<string, object>>.Create(_config, 200, "GET", "/", null)
 				);
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
@@ -324,18 +329,18 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionA
 				fake.Provide<IConnectionConfigurationValues>(config);
 
 				// provide a simple fake for synchronous get
-				var getCall = A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._));
+				var getCall = FakeCalls.GetSyncCall(fake); 
 
 				//The first three tries get a 503 causing the first 3 nodes to be marked dead
 				//all the subsequent requests should be handled by 9203 which gives a 200 4 times
 				getCall.ReturnsNextFromSequence(
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 503, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null),
-					ElasticsearchResponse.Create(_config, 200, "GET", "/", null, null)
+					FakeResponse.Bad(config),
+					FakeResponse.Bad(config),
+					FakeResponse.Bad(config),
+					FakeResponse.Ok(config),
+					FakeResponse.Ok(config),
+					FakeResponse.Ok(config),
+					FakeResponse.Ok(config)
 				);
 				var pingCall = A.CallTo(() => fake.Resolve<IConnection>().Ping(A<Uri>._));
 				pingCall.Returns(true);
