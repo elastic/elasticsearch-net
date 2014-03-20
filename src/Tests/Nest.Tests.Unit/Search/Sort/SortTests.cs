@@ -61,6 +61,32 @@ namespace Nest.Tests.Unit.Search.Sort
 			Assert.True(json.JsonEquals(expected), json);
 		}
 
+        [Test]
+        public void TestSortOnNestedField()
+        {
+            var s = new SearchDescriptor<ElasticsearchProject>()
+                .From(0)
+                .Size(10)
+                .Sort(sort => sort
+                    .OnField(e => e.Contributors.Suffix("age")) // Sort projects by oldest contributor
+                    .NestedMax()
+                    .Descending()
+                );
+            var json = TestElasticClient.Serialize(s);
+            var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: {
+                    ""contributors.age"": {
+                        ""order"": ""desc"",
+                        ""mode"": ""max""
+                    }
+                  }
+                }";
+            Assert.True(json.JsonEquals(expected), json);
+        }
+
 		[Test]
 		public void TestSortAscending()
 		{

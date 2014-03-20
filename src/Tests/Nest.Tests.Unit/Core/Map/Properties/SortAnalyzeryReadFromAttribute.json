@@ -1,0 +1,21 @@
+{
+  "foo": {
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "name": {
+        "type": "multi_field",
+        "fields": {
+          "name": {
+            "type": "string"
+          },
+          "sort": {
+            "type": "string",
+            "index_analyzer": "simple"
+          }
+        }
+      }
+    }
+  }
+}
