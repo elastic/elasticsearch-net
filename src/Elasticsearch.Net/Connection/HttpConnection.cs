@@ -274,12 +274,11 @@ namespace Elasticsearch.Net.Connection
 						this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
 						return cs;
 					}
-					cs.ResponseRaw = bytes;
+					cs.ResponseRaw = _ConnectionSettings.KeepRawResponse ? bytes: null;
 				}
 
 				var result = this._ConnectionSettings.Serializer.Deserialize<T>(cs, s, deserializationState);
 				cs.Response = result;
-				cs.ResponseRaw = memoryStream.ToArray();
 				tracer.SetResult(cs);
 				return cs;
 			}
@@ -384,20 +383,20 @@ namespace Elasticsearch.Net.Connection
 						}
 						memoryStream.Position = 0;
 						s = memoryStream;
-						cs.ResponseRaw = memoryStream.ToArray();
+						var bytes = memoryStream.ToArray();
 						if (typeof(T) == typeof(string))
 						{
-							this.SetStringResult(cs as ElasticsearchResponse<string>, cs.ResponseRaw);
+							this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
 							SetReturnOnAsycActors(tcs, cs, tracer);
 							yield break;
 						}
 						if (typeof(T) == typeof(byte[]))
 						{
-							this.SetByteResult(cs as ElasticsearchResponse<byte[]>, cs.ResponseRaw);
+							this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
 							SetReturnOnAsycActors(tcs, cs, tracer);
 							yield break;
 						}
-
+						cs.ResponseRaw = _ConnectionSettings.KeepRawResponse ? bytes : null;
 					}
 					var t = this._ConnectionSettings.Serializer.DeserializeAsync<T>(cs, s, deserializationState);
 					yield return t;

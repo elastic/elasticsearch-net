@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -185,13 +186,21 @@ namespace Elasticsearch.Net
 		{
 			var r = this;
 			var e = r.Error;
+			string response = "<Response not captured or already read to completion by serializer>";
+			if (typeof(T) == typeof(string))
+				response = this.Response as string;
+			else if (this.Settings.KeepRawResponse)
+				response = this.ResponseRaw.Utf8String();
+			else if (typeof(T) == typeof(byte[]))
+				response = (this.Response as byte[]).Utf8String();
+
 			var print = _printFormat.F(
 			  Environment.NewLine,
 			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
 			  r.RequestMethod,
 			  r.RequestUrl,
 			  r.Request,
-			  "RESPONSE STREAM ALREADY READ BY SERIALIZER"
+			  response
 			);
 			if (!this.Success)
 			{
