@@ -13,22 +13,6 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		public FieldSelection<T> SourceFields<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
-		{
-			return this.Dispatch<GetDescriptor<T>, GetQueryString, GetResponse<T>>(
-				getSelector,
-				(p, d) => this.RawDispatch.GetDispatch<GetResponse<T>>(p)
-			).Fields;
-		}
-		
-		public Task<FieldSelection<T>> SourceFieldsAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
-		{
-			return this.DispatchAsync<GetDescriptor<T>, GetQueryString, GetResponse<T>, IGetResponse<T>>(
-				getSelector,
-				(p, d) => this.RawDispatch.GetDispatchAsync<GetResponse<T>>(p)
-			).ContinueWith(t=>t.Result.Fields);
-		}
-		
 		public T Source<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class
 		{
 			var descriptor = getSelector(new SourceDescriptor<T>());

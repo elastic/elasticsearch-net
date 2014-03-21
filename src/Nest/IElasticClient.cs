@@ -804,61 +804,191 @@ namespace Nest
 		/// <param name="type">Override the inferred typename for T</param>
 		Task<IBulkResponse> DeleteManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
 			where T : class;
-
+		
+		/// <summary>
+		/// The index API adds or updates a typed JSON document in a specific index, making it searchable. 
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="object">The object to be indexed, Id will be inferred (Id property or IdProperty attribute on type)</param>
+		/// <param name="indexSelector">Optionally furter describe the index operation i.e override type/index/id</param>
 		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
 			where T : class;
 
+		/// <summary>
+		/// The index API adds or updates a typed JSON document in a specific index, making it searchable. 
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="object">The object to be indexed, Id will be inferred (Id property or IdProperty attribute on type)</param>
+		/// <param name="indexSelector">Optionally furter describe the index operation i.e override type/index/id</param>
 		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
 			where T : class;
 
+		/// <summary>
+		///The delete API allows to delete a typed JSON document from a specific index based on its id. 
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="deleteSelector">Describe the delete operation, i.e type/index/id</param>
 		IDeleteResponse Delete<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) 
 			where T : class;
 		
+		/// <summary>
+		///The delete API allows to delete a typed JSON document from a specific index based on its id. 
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="deleteSelector">Describe the delete operation, i.e type/index/id</param>
 		Task<IDeleteResponse> DeleteAsync<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) 
 			where T : class;
 		
+		/// <summary>
+		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). 
+		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document 
+		/// provided by the get API.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// </summary>
+		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
 		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 		
+		/// <summary>
+		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). 
+		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document 
+		/// provided by the get API.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// </summary>
+		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 		
-		FieldSelection<T> SourceFields<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) 
-			where T : class;
-		
-		Task<FieldSelection<T>> SourceFieldsAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) 
-			where T : class;
-		
+		/// <summary>
+		/// Use the /{index}/{type}/{id}/_source endpoint to get just the _source field of the document, 
+		/// without any additional content around it. 
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
 		T Source<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) 
 			where T : class;
 		
+		/// <summary>
+		/// Use the /{index}/{type}/{id}/_source endpoint to get just the _source field of the document, 
+		/// without any additional content around it. 
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
 		Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) 
 			where T : class;
 		
+		/// <summary>
+		/// The get API allows to get a typed JSON document from the index based on its id.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="getSelector">A descriptor that describes which document to fetch and how</param>
 		IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) 
 			where T : class;
 		
+		/// <summary>
+		/// The get API allows to get a typed JSON document from the index based on its id.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="getSelector">A descriptor that describes which document to fetch and how</param>
 		Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) 
 			where T : class;
 		
+		/// <summary>
+		/// APIs in elasticsearch accept an index name when working against a specific index, and several indices when applicable. 
+		/// <para>The index aliases API allow to alias an index with a name, with all APIs automatically converting the alias name to the 
+		/// actual index name.</para><para> An alias can also be mapped to more than one index, and when specifying it, the alias 
+		/// will automatically expand to the aliases indices.i</para><para> An alias can also be associated with a filter that will 
+		/// automatically be applied when searching, and routing values.</para>
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		/// </summary>
+		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
 		
+		/// <summary>
+		/// APIs in elasticsearch accept an index name when working against a specific index, and several indices when applicable. 
+		/// <para>The index aliases API allow to alias an index with a name, with all APIs automatically converting the alias name to the 
+		/// actual index name.</para><para> An alias can also be mapped to more than one index, and when specifying it, the alias 
+		/// will automatically expand to the aliases indices.i</para><para> An alias can also be associated with a filter that will 
+		/// automatically be applied when searching, and routing values.</para>
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		/// </summary>
+		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
 		
+		/// <summary>
+		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
+		/// the requested index aliases, if available. This api only serialises the found index aliases.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
+		/// </summary>
+		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
 		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 		
+		/// <summary>
+		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
+		/// the requested index aliases, if available. This api only serialises the found index aliases.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
+		/// </summary>
+		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
 		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 		
+		/// <summary>
+		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
+		/// <param name="index">Override the inferred indexname for T</param>
+		/// <param name="type">Override the inferred typename for T</param>
 		IBulkResponse IndexMany<T>(IEnumerable<T> @objects, string index = null, string type = null) 
 			where T : class;
-
+		
+		/// <summary>
+		/// Shortcut into the <see cref="Bulk"/> call that indexes the specified objects
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
+		/// <param name="index">Override the inferred indexname for T</param>
+		/// <param name="type">Override the inferred typename for T</param>
 		Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
 			where T : class;
-
+		
+		/// <summary>
+		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
+		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).
+		///  The optimize operation allows to reduce the number of segments by merging them.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
+		/// </summary>
+		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
 		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 		
+		/// <summary>
+		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
+		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).
+		///  The optimize operation allows to reduce the number of segments by merging them.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
+		/// </summary>
+		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
 		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 		
+		/// <summary>
+		/// The indices status API allows to get a comprehensive status information of one or more indices.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// </summary>
+		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 		
+		/// <summary>
+		/// The indices status API allows to get a comprehensive status information of one or more indices.
+		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		/// </summary>
+		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 	}
 }
