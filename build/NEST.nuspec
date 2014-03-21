@@ -13,13 +13,13 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Elasticsearch client, strongly typed interface to Elasticsearch but also comes with great low level support.</description>
     <dependencies>
-      <dependency id="Newtonsoft.Json" />
+      <dependency id="Newtonsoft.Json" version="6.0.1" />
     </dependencies>
     <tags>elasticsearch elastic search lucene nest</tags>
   </metadata>
   <files>
-  <file src="lib\**\Nest.dll" target="lib"/> 
-  <file src="lib\**\Nest.pdb" target="lib"/> 
-  <file src="lib\**\Nest.XML" target="lib"/> 
+    <file src="output\Nest\Nest.dll" target="lib"/> 
+    <file src="output\Nest\Nest.pdb" target="lib"/> 
+    <file src="output\Nest\Nest.XML" target="lib"/> 
   </files>
 </package>

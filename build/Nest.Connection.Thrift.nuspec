@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Nest.Connection.Thrift</id>
-    <version>0.9.0.0</version>
+    <version>@version@</version>
     <title>Nest.Connection.Thrift - Thrift support for NEST</title>
     <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
@@ -13,7 +13,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Thrift connection support for NEST Elasticsearch client</description>
     <dependencies>
-			<dependency id="NEST" />
+      <dependency id="NEST" />
       <dependency id="Newtonsoft.Json" />
       <dependency id="NetReflector" />
     </dependencies>

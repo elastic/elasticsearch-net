@@ -37,7 +37,7 @@ build/tmp/*
 build/_out/*
 build/keys/private.snk
 build/keys/keypair.snk
-buid/output/*
+build
 !build/tools/*
 !build/tools/scriptcs/*
 /dep/Newtonsoft.Json.4.0.2
