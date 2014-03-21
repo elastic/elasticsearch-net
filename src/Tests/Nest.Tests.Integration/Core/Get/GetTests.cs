@@ -30,17 +30,7 @@ namespace Nest.Tests.Integration.Core.Get
 				Assert.IsNotNullOrEmpty(e.Name);
 			}
 		}
-		[Test]
-		public void GetWithFields()
-		{
-			var elasticSearchProject = this._client.SourceFields<ElasticsearchProject>(g=>g
-				.Id(4)
-				.Fields(f=>f.Name)
-			);
-
-			Assert.NotNull(elasticSearchProject);
-			Assert.IsNotEmpty(elasticSearchProject.FieldValue(p=>p.Name));
-		}
+		
 		[Test]
 		public void GetWithFieldsDeep()
 		{

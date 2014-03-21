@@ -11,7 +11,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void ClusterHealth()
 		{
-			var r = this._client.Health(h=>h.Level(LevelOptions.Cluster));
+			var r = this._client.ClusterHealth(h=>h.Level(LevelOptions.Cluster));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=cluster");
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void ClusterHealthPerIndex()
 		{
-			var r = this._client.Health(h=>h.Index(Test.Default.DefaultIndex).Level(LevelOptions.Cluster));
+			var r = this._client.ClusterHealth(h=>h.Index(Test.Default.DefaultIndex).Level(LevelOptions.Cluster));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health/nest_test_data");
 			u.Query.Should().Contain("level=cluster");
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void IndexHealth()
 		{
-			var r = this._client.Health(h=>h.Level(LevelOptions.Indices));
+			var r = this._client.ClusterHealth(h=>h.Level(LevelOptions.Indices));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=indices");
@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void ShardHealth()
 		{
-			var r = this._client.Health(h=>h.Level(LevelOptions.Shards));
+			var r = this._client.ClusterHealth(h=>h.Level(LevelOptions.Shards));
 			var u = new Uri(r.ConnectionStatus.RequestUrl);
 			u.AbsolutePath.Should().StartWith("/_cluster/health");
 			u.Query.Should().Contain("level=shards");
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void DetailedHealth()
 		{
-			var r = this._client.Health(h=>h
+			var r = this._client.ClusterHealth(h=>h
 				.Level(LevelOptions.Shards)
 				.Timeout("30s")
 				.WaitForNodes("1")

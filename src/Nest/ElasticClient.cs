@@ -114,7 +114,7 @@ namespace Nest
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			Func<ElasticsearchResponse<R>, D, R> resultSelector =
 				((c, d) => c.Success || allow404 && c.HttpStatusCode == 404  ? c.Response : CreateInvalidInstance<R>(c));
-			return this.Dispatch(pathInfo, descriptor)
+			return dispatch(pathInfo, descriptor)
 				.ContinueWith<I>(r => resultSelector(r.Result, descriptor));
 		}
 

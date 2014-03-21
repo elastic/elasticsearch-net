@@ -12,6 +12,10 @@ indent_size = 4
 indent_style = spaces
 indent_size = 2
 
+[*.fsx]
+indent_style = spaces
+indent_size = 4
+
 [*.markdown]
 indent_style = spaces
 indent_size = 2

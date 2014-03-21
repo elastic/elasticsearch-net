@@ -97,8 +97,8 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/_template/mytemplate", c => c.GetTemplate("mytemplate"));
 			Do("GET", "/_all/_warmer/mywarmer", c => c.GetWarmer("mywarmer"));
 			Do("GET", "/mycustomindex/_warmer/mywarmer", c => c.GetWarmer("mywarmer", g => g.Index("mycustomindex")));
-			Do("GET", "/_cluster/health?level=indices", c => c.Health(h => h.Level(LevelOptions.Indices)));
-			Do("GET", "/_cluster/health", c => c.Health());
+			Do("GET", "/_cluster/health?level=indices", c => c.ClusterHealth(h => h.Level(LevelOptions.Indices)));
+			Do("GET", "/_cluster/health", c => c.ClusterHealth());
 			Do("POST", "/mydefaultindex/doc/2", c => c.Index(new Doc { Id = "2" }));
 			Do("POST", "/customindex/customtype/2?refresh=true", c => c.Index(new Doc { Id = "2" }, i => i.Index("customindex").Type("customtype").Refresh()));
 			Do("HEAD", "/mydefaultindex", c => c.IndexExists(h => h.Index<Doc>()));
@@ -144,7 +144,6 @@ namespace Nest.Tests.Unit.Cluster
 			Do("GET", "/mydefaultindex/doc/1/_source", c => c.Source<Doc>(1));
 			Do("GET", "/mycustomindex/mytype/1/_source", c => c.Source<Doc>(1, index: "mycustomindex", type: "mytype"));
 			Do("GET", "/mycustomindex/doc/1/_source", c => c.Source<Doc>(s => s.Id(1).Index("mycustomindex")));
-			Do("GET", "/mydefaultindex/doc/1?fields=id", c => c.SourceFields<Doc>(g => g.Id(1).Fields(f => f.Id)));
 			Do("GET", "/_status", c => c.Status());
 			Do("GET", "/mydefaultindex/_status", c => c.Status(s => s.Index<Doc>()));
 			Do("DELETE", "/mydefaultindex/.percolator/mypercolator", c => c.UnregisterPercolator("mypercolator"));
