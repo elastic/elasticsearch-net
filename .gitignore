@@ -32,14 +32,11 @@ obj/
 _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
-build/tmp
-build/tmp/*
-build/_out/*
+
 build/keys/private.snk
 build/keys/keypair.snk
 build
-!build/tools/*
-!build/tools/scriptcs/*
+!build/tools/ilmerge
 /dep/Newtonsoft.Json.4.0.2
 
 /src/Nest.Tests.Unit/*.ncrunchproject
