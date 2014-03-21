@@ -127,6 +127,11 @@ namespace Nest
 			this._MinimumNumberShouldMatches = minimumShouldMatches;
 			return this;
 		}
+
+		/// <summary>
+		/// Boost this results matching this query.
+		/// </summary>
+		/// <param name="boost"></param>
 		public BoolQueryDescriptor<T> Boost(double boost)
 		{
 			this._Boost = boost;
@@ -191,7 +196,6 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		
 		public BoolQueryDescriptor<T> MustNot(params BaseQuery[] queries)
 		{
 			var descriptors = new List<BaseQuery>();

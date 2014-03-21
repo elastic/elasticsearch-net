@@ -16,7 +16,6 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		public RewriteMultiTerm? Rewrite { get; set; }
 
-
 		object ICustomJson.GetCustomJson()
 		{	
 			return new Dictionary<object, object>
