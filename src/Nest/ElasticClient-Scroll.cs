@@ -6,29 +6,32 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <inheritdoc />
 		public IQueryResponse<T> Scroll<T>(
-			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class
 		{
 			return this.Dispatch<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>>(
 				scrollSelector,
 				(p, d) =>
 				{
-					var scrollId = p.ScrollId;
+					string scrollId = p.ScrollId;
 					p.ScrollId = null;
 					return this.RawDispatch.ScrollDispatch<QueryResponse<T>>(p, scrollId);
 				}
 			);
 		}
+
+		/// <inheritdoc />
 		public Task<IQueryResponse<T>> ScrollAsync<T>(
-			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) 
+			Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class
 		{
 			return this.DispatchAsync<ScrollDescriptor<T>, ScrollQueryString, QueryResponse<T>, IQueryResponse<T>>(
 				scrollSelector,
 				(p, d) =>
 				{
-					var scrollId = p.ScrollId;
+					string scrollId = p.ScrollId;
 					p.ScrollId = null;
 					return this.RawDispatch.ScrollDispatchAsync<QueryResponse<T>>(p, scrollId);
 				}

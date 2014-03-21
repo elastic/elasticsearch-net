@@ -1,41 +1,40 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.Text;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
-
-		public IIndicesOperationResponse CreateIndex(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
+		/// <inheritdoc />
+		public IIndicesOperationResponse CreateIndex(string index,
+			Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
 		{
 			index.ThrowIfEmpty("index");
 			createIndexSelector = createIndexSelector ?? (c => c);
-			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
+			var descriptor = createIndexSelector(new CreateIndexDescriptor(_connectionSettings));
 			descriptor._Index = index;
 			return this.Dispatch<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d._IndexSettings)
 			);
 		}
-		public Task<IIndicesOperationResponse> CreateIndexAsync(string index, Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
+
+		/// <inheritdoc />
+		public Task<IIndicesOperationResponse> CreateIndexAsync(string index,
+			Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector = null)
 		{
 			index.ThrowIfEmpty("index");
 			createIndexSelector = createIndexSelector ?? (c => c);
-			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings));
+			var descriptor = createIndexSelector(new CreateIndexDescriptor(_connectionSettings));
 			descriptor._Index = index;
-			return this.DispatchAsync<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
-				descriptor,
-				(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d._IndexSettings)
-			);
+			return this.DispatchAsync
+				<CreateIndexDescriptor, CreateIndexQueryString, IndicesOperationResponse, IIndicesOperationResponse>(
+					descriptor,
+					(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d._IndexSettings)
+				);
 		}
-
 	}
 }

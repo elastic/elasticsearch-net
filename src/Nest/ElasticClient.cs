@@ -56,7 +56,7 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return Dispatch<D, Q, R>(descriptor, dispatch, allow404);
+			return this.Dispatch<D, Q, R>(descriptor, dispatch, allow404);
 		}
 
 
@@ -98,7 +98,7 @@ namespace Nest
 		{
 			selector.ThrowIfNull("selector");
 			var descriptor = selector(new D());
-			return DispatchAsync<D, Q, R, I>(descriptor, dispatch,  allow404);
+			return this.DispatchAsync<D, Q, R, I>(descriptor, dispatch,  allow404);
 		}
 
 		private Task<I> DispatchAsync<D, Q, R, I>(
@@ -114,7 +114,7 @@ namespace Nest
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			Func<ElasticsearchResponse<R>, D, R> resultSelector =
 				((c, d) => c.Success || allow404 && c.HttpStatusCode == 404  ? c.Response : CreateInvalidInstance<R>(c));
-			return dispatch(pathInfo, descriptor)
+			return this.Dispatch(pathInfo, descriptor)
 				.ContinueWith<I>(r => resultSelector(r.Result, descriptor));
 		}
 

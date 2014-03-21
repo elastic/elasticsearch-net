@@ -7,6 +7,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <inheritdoc />
 		public ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null)
 		{
 			segmentsSelector = segmentsSelector ?? (s => s);
@@ -15,7 +16,8 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
 			);
 		}
-	
+
+		/// <inheritdoc />
 		public Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null)
 		{
 			segmentsSelector = segmentsSelector ?? (s => s);

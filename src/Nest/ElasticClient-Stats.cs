@@ -6,9 +6,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-
 	public partial class ElasticClient
 	{
+		/// <inheritdoc />
 		public IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -18,7 +18,9 @@ namespace Nest
 			);
 		}
 
-		public Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
+		/// <inheritdoc />
+		public Task<IGlobalStatsResponse> IndicesStatsAsync(
+			Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
 			return this.DispatchAsync<IndicesStatsDescriptor, IndicesStatsQueryString, GlobalStatsResponse, IGlobalStatsResponse>(

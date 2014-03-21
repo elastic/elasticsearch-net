@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <inheritdoc />
 		public IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
 			where T : class
 		{
@@ -18,6 +18,8 @@ namespace Nest
 				descriptor,
 				(p, d) => this.RawDispatch.IndexDispatch<IndexResponse>(p, @object));
 		}
+
+		/// <inheritdoc />
 		public Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
 			where T : class
 		{
@@ -29,19 +31,20 @@ namespace Nest
 				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, @object));
 		}
 
-
+		/// <inheritdoc />
 		public IBulkResponse IndexMany<T>(IEnumerable<T> @objects, string index = null, string type = null) where T : class
 		{
 			@objects.ThrowIfEmpty("objects");
 			var bulk = new BulkDescriptor().FixedPath(index, type);
 			foreach (var o in @objects)
 			{
-				T o1 = o;
+				var o1 = o;
 				bulk.Index<T>(b => b.Object(o1));
 			}
-			return this.Bulk(b => bulk);
+			return Bulk(b => bulk);
 		}
 
+		/// <inheritdoc />
 		public Task<IBulkResponse> IndexManyAsync<T>(IEnumerable<T> objects, string index = null, string type = null)
 			where T : class
 		{
@@ -49,11 +52,10 @@ namespace Nest
 			var bulk = new BulkDescriptor().FixedPath(index, type);
 			foreach (var o in @objects)
 			{
-				T o1 = o;
+				var o1 = o;
 				bulk.Index<T>(b => b.Object(o1));
 			}
-			return this.BulkAsync(b => bulk);
+			return BulkAsync(b => bulk);
 		}
-
 	}
 }

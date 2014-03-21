@@ -377,7 +377,7 @@
     <Compile Include="Domain\Stats\NodeStats.cs" />
     <Compile Include="Domain\Stats\ShardHealthStats.cs" />
     <Compile Include="DSL\MoreLikeThisDescriptor.cs" />
-    <Compile Include="ElasticClient-Health.cs" />
+    <Compile Include="ElasticClient-ClusterHealth.cs" />
     <Compile Include="ElasticClient-MoreLikeThis.cs" />
     <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />

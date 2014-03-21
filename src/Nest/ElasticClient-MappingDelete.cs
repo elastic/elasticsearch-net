@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Newtonsoft.Json;
-using Nest.Resolvers.Writers;
 
 namespace Nest
 {
 	public partial class ElasticClient
 	{
+		/// <inheritdoc />
 		public IIndicesResponse DeleteMapping(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
 		{
 			return this.Dispatch<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse>(
@@ -18,6 +17,7 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
 		public Task<IIndicesResponse> DeleteMappingAsync(Func<DeleteMappingDescriptor, DeleteMappingDescriptor> selector)
 		{
 			return this.DispatchAsync<DeleteMappingDescriptor, DeleteMappingQueryString, IndicesResponse, IIndicesResponse>(
