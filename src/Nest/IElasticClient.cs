@@ -450,14 +450,14 @@ namespace Nest
 		/// The get mapping API allows to retrieve mapping definitions for an index or index/type.
 		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
-		/// <param name="selector">A descriptor that describes the paramters for the get mapping operation</param>
+		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
 		IGetMappingResponse GetMapping(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
 		
 		/// <summary>
 		/// The get mapping API allows to retrieve mapping definitions for an index or index/type.
 		/// <para> </para>>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
-		/// <param name="selector">A descriptor that describes the paramters for the get mapping operation</param>
+		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
 		Task<IGetMappingResponse> GetMappingAsync(Func<GetMappingDescriptor, GetMappingDescriptor> selector);
 		
 		/// <summary>
