@@ -35,10 +35,12 @@ _NCrunch*/
 
 build/keys/private.snk
 build/keys/keypair.snk
-!build/tools/ilmerge
+build/*
+!build/tools
+build/tools/*
 !build/tools/sn
-build
 /dep/Newtonsoft.Json.4.0.2
+new_docs/build
 
 /src/Nest.Tests.Unit/*.ncrunchproject
 *.ncrunchproject
