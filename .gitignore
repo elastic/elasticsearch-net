@@ -39,8 +39,9 @@ build/*
 !build/tools
 build/tools/*
 !build/tools/sn
+!build/tools/ilmerge
 /dep/Newtonsoft.Json.4.0.2
-new_docs/build
+!new_docs/build
 
 /src/Nest.Tests.Unit/*.ncrunchproject
 *.ncrunchproject
