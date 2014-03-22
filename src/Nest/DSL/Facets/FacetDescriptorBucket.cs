@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Facets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
@@ -49,5 +50,8 @@ namespace Nest
 
     [JsonProperty(PropertyName = "facet_filter")]
     public BaseFilter FacetFilter { get; set; }
+
+    [JsonProperty(PropertyName = "geo_cluster")]
+    public GeoClusterDescriptor<T> Cluster { get; set; }
   }
 }

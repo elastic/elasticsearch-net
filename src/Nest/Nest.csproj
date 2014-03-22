@@ -72,6 +72,7 @@
     <Compile Include="Domain\Connection\AsyncRequestOperation.cs" />
     <Compile Include="Domain\DSL\GeoIndexedShapeVector.cs" />
     <Compile Include="Domain\DSL\GeoShapeVector.cs" />
+    <Compile Include="Domain\Facets\GeoClusterFacet.cs" />
     <Compile Include="Domain\Mapping\Descriptors\CompletionMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Types\CompletionMapping.cs" />
     <Compile Include="Domain\Parameters\StatusParams.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Domain\Stats\IndexDocStats.cs" />
     <Compile Include="Domain\Status\IndexStatus.cs" />
     <Compile Include="Domain\Stats\TranslogStats.cs" />
+    <Compile Include="DSL\Facets\GeoClusterDescriptor.cs" />
     <Compile Include="DSL\Filter\ConditionlessFilterDescriptor.cs" />
     <Compile Include="DSL\Filter\Term.cs" />
     <Compile Include="DSL\Filter\TermsLookupFilterDescriptor.cs" />

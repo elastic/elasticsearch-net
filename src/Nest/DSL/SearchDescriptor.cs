@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nest.DSL.Facets;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Nest.Resolvers.Converters;
@@ -840,6 +841,22 @@ namespace Nest
 				);
 		}
 
+        /// <summary>
+        /// The geo_cluster facet is a facert providing information for geo points clusters
+        /// </summary>
+        public SearchDescriptor<T> GeoClusterFacet(string name, Func<GeoClusterDescriptor<T>, GeoClusterDescriptor<T>> facet)
+        {
+            return this.GeoClusterFacet(facet, Name: name);
+        }
+
+        /// <summary>
+        /// The geo_cluster facet is a facert providing information for geo points clusters
+        /// </summary>
+        public SearchDescriptor<T> GeoClusterFacet(Func<GeoClusterDescriptor<T>, GeoClusterDescriptor<T>> facet, string Name = null)
+        {
+            return this._Facet(Name, facet, (d) => d._Field, (b, d) => b.Cluster = d);
+        }
+
 		/// <summary>
 		/// A facet query allows to return a count of the hits matching 
 		/// the facet query. The query itself can be expressed using the Query DSL.
@@ -1075,6 +1092,9 @@ namespace Nest
 			this._ConcreteTypeSelector = typeSelector;
 			return this;
 		}
+
+
+
 	}
 
 	public class FluentDictionary<K, V> : Dictionary<K, V>
