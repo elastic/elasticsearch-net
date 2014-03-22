@@ -43,6 +43,7 @@ build/tools/*
 /dep/Newtonsoft.Json.4.0.2
 !new_docs/build
 
+
 /src/Nest.Tests.Unit/*.ncrunchproject
 *.ncrunchproject
 Cache
