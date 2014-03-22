@@ -1,21 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Connection
 {
+	/// <summary>
+	/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+	/// to elasticsearch
+	/// </summary>
 	public class ConnectionConfiguration : 
 		ConnectionConfiguration<ConnectionConfiguration>, 
-		IConnectionConfiguration<ConnectionConfiguration>
+		IConnectionConfiguration<ConnectionConfiguration>, 
+		IHideObjectMembers
 	{
+		/// <summary>
+		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+		/// to elasticsearch
+		/// </summary>
+		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
 		public ConnectionConfiguration(Uri uri = null)
 			: base(uri)
 		{
 
 		}
+
+		/// <summary>
+		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+		/// to elasticsearch
+		/// </summary>
+		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 			: base(connectionPool)
 		{
@@ -24,7 +41,9 @@ namespace Elasticsearch.Net.Connection
 	}
 
 
-	public class ConnectionConfiguration<T> : IConnectionConfigurationValues
+	[Browsable(false)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
 		private IConnectionPool _connectionPool;

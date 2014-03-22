@@ -30,8 +30,6 @@ Target "Test" (fun _ ->
          )
 )
 
-
-
 let keyFile = "build/keys/keypair.snk"
 let validateSignedAssembly = fun (name) ->
     let sn = "build/tools/sn/sn.exe"
@@ -66,6 +64,22 @@ let signAssembly = fun (name) ->
       | _ ->
         failwithf "Failed to sign {0}" name
 
+let nugetPack = fun (name) ->
+    
+    CreateDir nugetOutDir
+    
+    let dir = sprintf "%s/%s/" buildDir name
+    let version = "1.0.0-alpha1"
+    NuGetPack (fun p ->
+      {p with 
+        Version = version
+        WorkingDir = dir 
+        OutputPath = dir
+      })
+      (sprintf @"build\%s.nuspec" name)
+
+    MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name version)) 
+
 Target "Release" (fun _ -> 
     if not <| fileExists keyFile 
       then failwithf "{0} does not exist to sign the assemblies" keyFile 
@@ -74,17 +88,10 @@ Target "Release" (fun _ ->
     signAssembly("Elasticsearch.Net.Connection.Thrift")
     signAssembly("Nest")
     
-    CreateDir nugetOutDir
-
-    NuGetPack (fun p ->
-      {p with 
-        Version = "1.0.0.0"
-        WorkingDir = buildDir + "/Nest/"
-        OutputPath = buildDir + "/Nest/"
-      })
-      "build\NEST.nuspec"
-
-    MoveFile nugetOutDir (buildDir + (sprintf "Nest/NEST.%s.nupkg" "1.0.0.0")) 
+    nugetPack("Elasticsearch.Net")
+    nugetPack("Elasticsearch.Net.Connection.Thrift")
+    nugetPack("Nest")
+   
 )
 
 // Dependencies
@@ -93,8 +100,8 @@ Target "Release" (fun _ ->
   ==> "Test"
   ==> "Build"
 
-//"Build"
-//  ==> "Release"
+"Build"
+  ==> "Release"
 
 // start build
 RunTargetOrDefault "Build"

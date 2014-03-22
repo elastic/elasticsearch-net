@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
@@ -9,15 +10,38 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Provides NEST's ElasticClient with configurationsettings
+	/// </summary>
 	public class ConnectionSettings : ConnectionSettings<ConnectionSettings>
 	{
-
-		public ConnectionSettings(Uri uri, string defaultIndex) : base(uri, defaultIndex)
+		/// <summary>
+		/// Instantiate a new connectionsettings object that proves ElasticClient with configuration values
+		/// </summary>
+		/// <param name="uri">A single uri representing the root of the node you want to connect to
+		/// <para>defaults to http://localhost:9200</para>
+		/// </param>
+		/// <param name="defaultIndex">The default index/alias name used for operations that expect an index/alias name, 
+		/// By specifying it once alot of magic string can be avoided.
+		/// <para>You can also specify specific default index/alias names for types using .SetDefaultTypeIndices(</para>
+		/// <para>If you do not specify this, NEST might throw a runtime exception if an explicit indexname was not provided for a call</para>
+		/// </param>
+		public ConnectionSettings(Uri uri = null, string defaultIndex = null) 
+			: base(uri, defaultIndex)
 		{
 			uri.ThrowIfNull("uri");
 		}
 
-		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex) : base(connectionPool, defaultIndex)
+		/// <summary>
+		/// Instantiate a new connectionsettings object that proves ElasticClient with configuration values
+		/// </summary>
+		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
+		/// <param name="defaultIndex">The default index/alias name used for operations that expect an index/alias name, 
+		/// By specifying it once alot of magic string can be avoided.
+		/// <para>You can also specify specific default index/alias names for types using .SetDefaultTypeIndices(</para>
+		/// <para>If you do not specify this, NEST might throw a runtime exception if an explicit indexname was not provided for a call</para>
+		/// </param>
+		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex = null) : base(connectionPool, defaultIndex)
 		{
 			
 		}
@@ -25,6 +49,8 @@ namespace Nest
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
+	[Browsable(false)]
+	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class ConnectionSettings<T> : ConnectionConfiguration<T> , IConnectionSettingsValues 
 		where T : ConnectionSettings<T> 
 	{

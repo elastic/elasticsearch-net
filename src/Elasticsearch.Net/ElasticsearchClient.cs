@@ -10,6 +10,9 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
+	/// <summary>
+	/// Low level client that exposes all of elasticsearch API endpoints but leaves you in charge of building request and handling the response
+	/// </summary>
 	public partial class ElasticsearchClient : IElasticsearchClient
 	{
 		public IConnectionConfigurationValues Settings { get { return this.Transport.Settings; } }
@@ -17,18 +20,26 @@ namespace Elasticsearch.Net
 		
 		protected IStringifier Stringifier { get; set; }
 		protected ITransport Transport { get; set; }
-
+		
+		/// <summary>
+		/// Instantiate a new low level elasticsearch client
+		/// </summary>
+		/// <param name="settings">Specify how and where the client connects to elasticsearch, defaults to a static single node connectionpool 
+		/// to http://localhost:9200
+		/// </param>
+		/// <param name="connection">Provide an alternative connection handler</param>
+		/// <param name="transport">Provide a custom transport implementation that coordinates between IConnectionPool, IConnection and ISerializer</param>
+		/// <param name="serializer">Provide a custom serializer</param>
+		/// <param name="stringifier">This interface is responsible for translating non string objects in the querystring to strings</param>
 		public ElasticsearchClient(
-			IConnectionConfigurationValues settings, 
+			IConnectionConfigurationValues settings = null, 
 			IConnection connection = null, 
 			ITransport transport = null,
 			IElasticsearchSerializer serializer = null,
 			IStringifier stringifier = null
 			)
 		{
-			if (settings == null)
-				throw new ArgumentNullException("settings");
-
+			settings = settings ?? new ConnectionConfiguration();
 			this.Transport = transport ?? new Transport(settings, connection, serializer);
 			this.Stringifier = stringifier ?? new Stringifier();
 			

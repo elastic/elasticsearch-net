@@ -118,7 +118,6 @@
     <Compile Include="Domain\Connection\IConnectionSettingsValues.cs" />
     <Compile Include="Domain\DSL\DescriptorForAttribute.cs" />
     <Compile Include="Domain\ICustomJson.cs" />
-    <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\PropertyNameMarker.cs" />
     <Compile Include="Domain\PropertyPathMarker.cs" />
     <Compile Include="Domain\QueryStringParametersExtensions.Generated.cs" />

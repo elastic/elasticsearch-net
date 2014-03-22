@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Elasticsearch.Net.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PUrify">
@@ -44,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\VoidResponse.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />

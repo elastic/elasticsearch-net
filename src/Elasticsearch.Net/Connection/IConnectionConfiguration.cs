@@ -4,12 +4,14 @@ using System.Collections.Specialized;
 namespace Elasticsearch.Net.Connection
 {
 	public interface IConnectionConfiguration : 
-		IConnectionConfiguration<IConnectionConfiguration>
+		IConnectionConfiguration<IConnectionConfiguration>,
+		IHideObjectMembers
 	{
 		
 	}
 
-	public interface IConnectionConfiguration<out T> where T : IConnectionConfiguration<T>
+	public interface IConnectionConfiguration<out T> : IHideObjectMembers
+		where T : IConnectionConfiguration<T>
 	{
 
 	

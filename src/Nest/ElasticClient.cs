@@ -11,6 +11,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
+	/// <summary>
+	/// ElasticClient is NEST's strongly typed client which exposes fully mapped elasticsearch endpoints
+	/// </summary>
 	public partial class ElasticClient : Nest.IElasticClient
 	{
 		protected readonly IConnectionSettingsValues _connectionSettings;
@@ -22,12 +25,23 @@ namespace Nest
 		public IElasticsearchClient Raw { get; protected set; }
 		public ElasticInferrer Infer { get; protected set; }
 
-		public ElasticClient(IConnectionSettingsValues settings, IConnection connection = null, INestSerializer serializer = null)
-		{
-			if (settings == null)
-				throw new ArgumentNullException("settings");
 
-			this._connectionSettings = settings;
+		/// <summary>
+		/// Instantiate a new strongly typed connection to elasticsearch
+		/// </summary>
+		/// <param name="settings">An optional settings object telling the client how and where to connect to.
+		/// <para>Defaults to a static single node connection pool to http://localhost:9200</para>
+		/// <para>It's recommended to pass an explicit 'new ConnectionSettings()' instance</para>
+		/// </param>
+		/// <param name="connection">Optionally provide a different connection handler, defaults to http using HttpWebRequest</param>
+		/// <param name="serializer">Optionally provide a custom serializer responsible for taking a stream and turning into T</param>
+		public ElasticClient(
+			IConnectionSettingsValues settings = null, 
+			IConnection connection = null, 
+			INestSerializer serializer = null)
+		{
+
+			this._connectionSettings = settings ?? new ConnectionSettings();
 			this.Connection = connection ?? new HttpConnection(settings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);

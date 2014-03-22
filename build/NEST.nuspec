@@ -2,17 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NEST</id>
-    <version>0.9.0.0</version>
+    <version>0.0.0.1</version>
     <title>NEST - Elasticsearch Client</title>
     <authors>Martijn Laarman and contributors</authors>
     <owners>Martijn Laarman</owners>
-    <iconUrl>http://nest.azurewebsites.net/images/nuget-icon.png</iconUrl>
+    <iconUrl>http://nest.azurewebsites.net/images/nest-nuget-icon.png</iconUrl>
     <licenseUrl>http://mpdreamz.mit-license.org/</licenseUrl>
     <projectUrl>https://github.com/Mpdreamz/NEST</projectUrl>
-    <summary>Elasticsearch client, strongly typed interface to Elasticsearch but also comes with great low level support.</summary>
+    <summary>Strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</summary>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Elasticsearch client, strongly typed interface to Elasticsearch but also comes with great low level support.</description>
+    <description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
     <dependencies>
+      <dependency id="Elasticsearch.Net" />
       <dependency id="Newtonsoft.Json" version="6.0.1" />
     </dependencies>
     <tags>elasticsearch elastic search lucene nest</tags>
