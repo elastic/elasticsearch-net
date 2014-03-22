@@ -66,7 +66,6 @@ let signAssembly = fun (name) ->
       | _ ->
         failwithf "Failed to sign {0}" name
 
-
 Target "Release" (fun _ -> 
     if not <| fileExists keyFile 
       then failwithf "{0} does not exist to sign the assemblies" keyFile 
