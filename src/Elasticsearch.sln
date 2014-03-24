@@ -8,7 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.Integration", "T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{E30CA256-C9A8-487A-94B7-D6B79D70F774}"
 	ProjectSection(SolutionItems) = preProject
+		..\new_docs\config.json = ..\new_docs\config.json
 		..\license.txt = ..\license.txt
+		..\new_docs\package.json = ..\new_docs\package.json
 		..\README.markdown = ..\README.markdown
 	EndProjectSection
 EndProject
