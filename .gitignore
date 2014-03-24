@@ -1,4 +1,4 @@
-*.userprefs
+	*.userprefs
 *.local.xml
 *.sln.docstates
 *.obj
@@ -20,8 +20,9 @@
 *.ilk
 *.log
 *.nupkg
+*.ncrunchsolution
 [Bb]in
-[Dd]ebug*/
+[Dd]ebug/
 test-results
 test-results/*
 *.lib
