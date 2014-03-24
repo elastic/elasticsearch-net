@@ -6,20 +6,21 @@ aside#menu
 	ul#elasticsearch-net
 		h4.title Elasticsearch.Net
 		ul
-			li: a(class=(page.metadata.menuitem == 'esnet_introduction')? "selected" : "", href="/") Quick Start
-			li: a(class=(page.metadata.menuitem == 'esnet_introduction')? "selected" : "", href="/") Connecting
-			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Cluster failover
-			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Serializers
-			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Building requests
-			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Errors
+			li: a(class=(page.metadata.menuitem == 'esnet_quickstart')? "selected" : "", href="/elasticsearch.net/quick-start.html") Quick Start
+			li: a(class=(page.metadata.menuitem == 'esnet_connecting')? "selected" : "", href="/elasticsearch.net/connecting.html") Connecting
+			li: a(class=(page.metadata.menuitem == 'esnet_cluster_failover')? "selected" : "", href="/elasticsearch.net/cluster-failover.html") Cluster failover
+			li: a(class=(page.metadata.menuitem == 'esnet_serializers')? "selected" : "", href="/elasticsearch.net/serializers.html") Serializers
+			li: a(class=(page.metadata.menuitem == 'esnet_building_requests')? "selected" : "", href="/elasticsearch.net/building-requests.html") Building requests
+			li: a(class=(page.metadata.menuitem == 'esnet_response_handling')? "selected" : "", href="/elasticsearch.net/response-handling") Response handling
+			li: a(class=(page.metadata.menuitem == 'esnet_errors')? "selected" : "", href="/elasticsearch.net/errors.html") Errors
 	ul#nest
 		h4.title NEST
 		ul
-			li: a(class=(page.metadata.menuitem == 'introduction')? "selected" : "", href="/") Quick Start
-			li: a(class=(page.metadata.menuitem == 'connecting')? "selected" : "", href="/concepts/connecting.html") Connecting
-			li: a(class=(page.metadata.menuitem == 'index-type-inference')? "selected" : "", href="/concepts/index-type-inference.html") Type/Index Inference
-			li: a(class=(page.metadata.menuitem == 'handling-responses')? "selected" : "", href="/concepts/handling-responces.html") Response handling
-			li: a(class=(page.metadata.menuitem == 'writing-queries')? "selected" : "", href="/concepts/writing-queries.html") Writing queries
+			li: a(class=(page.metadata.menuitem == 'introduction')? "selected" : "", href="/nest/quick-start.html") Quick Start
+			li: a(class=(page.metadata.menuitem == 'connecting')? "selected" : "", href="/nest/connecting.html") Connecting
+			li: a(class=(page.metadata.menuitem == 'index-type-inference')? "selected" : "", href="/nest/index-type-inference.html") Type/Index Inference
+			li: a(class=(page.metadata.menuitem == 'handling-responses')? "selected" : "", href="/nest/handling-responces.html") Response handling
+			li: a(class=(page.metadata.menuitem == 'writing-queries')? "selected" : "", href="/nest/writing-queries.html") Writing queries
 		- if (page.metadata.menusection == 'core' )
 			h4
 				i.fa.fa-chevron-down
