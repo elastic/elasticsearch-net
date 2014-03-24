@@ -25,6 +25,10 @@ namespace Nest
         [JsonConverter(typeof(StringEnumConverter))]
         FunctionScoreMode? _ScoreMode { get; set; }
 
+        [JsonProperty(PropertyName = "boost_mode")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        FunctionBoostMode? _BoostMode { get; set; }
+
         [JsonProperty(PropertyName = "random_score")]
         RandomScoreFunction _RandomScore { get; set; }
 
@@ -69,6 +73,12 @@ namespace Nest
             return this;
         }
 
+        public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode mode)
+        {
+            this._BoostMode = mode;
+            return this;
+        }
+
         public FunctionScoreQueryDescriptor<T> RandomScore(int? seed=null)
         {
             this._RandomScore = new RandomScoreFunction();
@@ -97,6 +107,16 @@ namespace Nest
         sum,
         avg,
         first,
+        max,
+        min
+    }
+
+    public enum FunctionBoostMode
+    {
+        multiply,
+        replace,
+        sum,
+        avg,
         max,
         min
     }
