@@ -31,14 +31,14 @@ Target "Test" (fun _ ->
 )
 
 let keyFile = "build/keys/keypair.snk"
-let validateSignedAssembly = fun (name) ->
+let validateSignedAssembly = fun name ->
     let sn = "build/tools/sn/sn.exe"
     ExecProcess(fun p ->
       p.FileName <- sn
       p.Arguments <- sprintf @"-v build\output\%s.dll" name
     ) (TimeSpan.FromMinutes 5.0)
 
-let signAssembly = fun (name) ->
+let signAssembly = fun name ->
     let ilmerge = "build/tools/ilmerge/ILMerge.exe"
     let platform =  @"/targetplatform:v4,C:\Windows\Microsoft.NET\Framework64\v4.0.30319"
     let i = sprintf "build\\output\\%s\\%s" name name
@@ -64,7 +64,7 @@ let signAssembly = fun (name) ->
       | _ ->
         failwithf "Failed to sign {0}" name
 
-let nugetPack = fun (name) ->
+let nugetPack = fun name ->
     
     CreateDir nugetOutDir
     
@@ -80,6 +80,16 @@ let nugetPack = fun (name) ->
 
     MoveFile nugetOutDir (buildDir + (sprintf "%s/%s.%s.nupkg" name name version)) 
 
+let buildDocs = fun action ->
+    let node = @"build\tools\Node.js\node.exe"
+    let wintersmith = @"..\build\tools\node_modules\wintersmith\bin\wintersmith"
+    ExecProcess (fun p ->
+      p.WorkingDirectory <- "new_docs"  
+      p.FileName <- node
+      p.Arguments <- sprintf "\"%s\" %s" wintersmith action
+    ) (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
+
+
 Target "Release" (fun _ -> 
     if not <| fileExists keyFile 
       then failwithf "{0} does not exist to sign the assemblies" keyFile 
@@ -94,6 +104,13 @@ Target "Release" (fun _ ->
    
 )
 
+Target "Docs" (fun _ -> buildDocs "build" |> ignore)
+Target "DocsPreview" (fun _ -> 
+  buildDocs "plugin install livereload" |> ignore
+  buildDocs "preview" |> ignore
+)
+
+
 // Dependencies
 "Clean" 
   ==> "BuildApp"
@@ -102,6 +119,8 @@ Target "Release" (fun _ ->
 
 "Build"
   ==> "Release"
+
+"DocsPreview"
 
 // start build
 RunTargetOrDefault "Build"

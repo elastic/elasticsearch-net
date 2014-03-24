@@ -5,5 +5,8 @@
     "owner": "Martijn Laarman",
     "description": "",
     "index_articles": 3
-  }
+  },
+  "plugins": [
+    "wintersmith-livereload"
+  ]
 }

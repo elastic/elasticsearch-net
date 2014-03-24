@@ -1,17 +1,29 @@
 aside#menu
-	ul#top_left_menu
-		- if (page.metadata.menusection == 'concepts' )
-			h4 - Concepts
-			ul
-				li: a(class=(page.metadata.menuitem == 'introduction')? "selected" : "", href="/") Introduction
-				li: a(class=(page.metadata.menuitem == 'connecting')? "selected" : "", href="/concepts/connecting.html") Connecting
-				li: a(class=(page.metadata.menuitem == 'index-type-inference')? "selected" : "", href="/concepts/index-type-inference.html") Type/Index Inference
-				li: a(class=(page.metadata.menuitem == 'handling-responces')? "selected" : "", href="/concepts/handling-responces.html") Response handling
-				li: a(class=(page.metadata.menuitem == 'writing-queries')? "selected" : "", href="/concepts/writing-queries.html") Writing queries
-		- else 
-			li: a(href="/") + Concepts
+	ul
+		li
+			a(href='/') Home
+
+	ul#elasticsearch-net
+		h4.title Elasticsearch.Net
+		ul
+			li: a(class=(page.metadata.menuitem == 'esnet_introduction')? "selected" : "", href="/") Quick Start
+			li: a(class=(page.metadata.menuitem == 'esnet_introduction')? "selected" : "", href="/") Connecting
+			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Cluster failover
+			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Serializers
+			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Building requests
+			li: a(class=(page.metadata.menuitem == 'esnet_')? "selected" : "", href="/") Errors
+	ul#nest
+		h4.title NEST
+		ul
+			li: a(class=(page.metadata.menuitem == 'introduction')? "selected" : "", href="/") Quick Start
+			li: a(class=(page.metadata.menuitem == 'connecting')? "selected" : "", href="/concepts/connecting.html") Connecting
+			li: a(class=(page.metadata.menuitem == 'index-type-inference')? "selected" : "", href="/concepts/index-type-inference.html") Type/Index Inference
+			li: a(class=(page.metadata.menuitem == 'handling-responses')? "selected" : "", href="/concepts/handling-responces.html") Response handling
+			li: a(class=(page.metadata.menuitem == 'writing-queries')? "selected" : "", href="/concepts/writing-queries.html") Writing queries
 		- if (page.metadata.menusection == 'core' )
-			h4 - Core
+			h4
+				i.fa.fa-chevron-down
+				| Core
 			ul
 				li: a(class=(page.metadata.menuitem == 'index')? "selected" : "", href="/core/") Index
 				li: a(class=(page.metadata.menuitem == 'delete')? "selected" : "", href="/core/delete.html") Delete
@@ -26,9 +38,14 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'delete-by-query')? "selected" : "", href="/core/delete-by-query.html") Delete By Query
 				li: a(class=(page.metadata.menuitem == 'more-like-this')? "selected" : "", href="/core/more-like-this.html") More Like This
 		- else 
-			li: a(class=(page.metadata.menuitem == 'index')? "selected" : "", href="/core/") + Core
+			li
+				h4: a(class=(page.metadata.menuitem == 'index')? "selected" : "", href="/core/")
+					i.fa.fa-chevron-right
+					| Core
 		- if (page.metadata.menusection == 'indices' )
-			h4 - Indices
+			h4
+				i.fa.fa-chevron-down
+				| Indices
 			ul
 				li: a(class=(page.metadata.menuitem == 'aliases')? "selected" : "", href="/indices/aliases.html") Aliases
 				li: a(class=(page.metadata.menuitem == 'analyze')? "selected" : "", href="/indices/analyze.html") Analyze
@@ -51,9 +68,14 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'clear-cache')? "selected" : "", href="/indices/clear-cache.html") Clear Cache
 				li: a(class=(page.metadata.menuitem == 'indices-exists')? "selected" : "", href="/indices/indices-exists.html") Indices Exists
 		- else 
-			li: a(class=(page.metadata.menuitem == 'aliases')? "selected" : "", href="/indices/aliases.html") + Indices
+			li
+				h4: a(class=(page.metadata.menuitem == 'aliases')? "selected" : "", href="/indices/aliases.html") 
+					i.fa.fa-chevron-right
+					| Indices
 		- if (page.metadata.menusection == 'cluster' )
-			h4 - Cluster
+			h4 
+				i.fa.fa-chevron-down
+				| Cluster
 			ul
 				li: a(class=(page.metadata.menuitem == 'health')? "selected" : "", href="/cluster/health.html") Health
 				li: a(class=(page.metadata.menuitem == 'state')? "selected" : "", href="/cluster/state.html") State
@@ -62,9 +84,14 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'nodes-stats')? "selected" : "", href="/cluster/nodes-stats.html") Nodes Stats
 				li: a(class=(page.metadata.menuitem == 'nodes-shutdown')? "selected" : "", href="/cluster/nodes-shutdown.html") Nodes Shutdown
 		- else 
-			li: a(class=(page.metadata.menuitem == 'health')? "selected" : "", href="/cluster/health.html") + Cluster
+			li
+				h4: a(class=(page.metadata.menuitem == 'health')? "selected" : "", href="/cluster/health.html") 
+					i.fa.fa-chevron-right
+					| Cluster
 		- if (page.metadata.menusection == 'search' )
-			h4 - Search
+			h4 
+				i.fa.fa-chevron-down
+				| Search
 			ul
 				li: a(class=(page.metadata.menuitem == 'basics')? "selected" : "", href="/search/basics.html") Basic parameters
 				li: a(class=(page.metadata.menuitem == 'sort')? "selected" : "", href="/search/sort.html") Sort
@@ -79,9 +106,14 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'explain')? "selected" : "", href="/search/explain.html") Explain
 				li: a(class=(page.metadata.menuitem == 'version')? "selected" : "", href="/search/version.html") Version
 		- else 
-			li: a(class=(page.metadata.menuitem == 'basics')? "selected" : "", href="/search/basics.html") + Search
+			li
+				h4: a(class=(page.metadata.menuitem == 'basics')? "selected" : "", href="/search/basics.html")
+					i.fa.fa-chevron-right
+					| Search
 		- if (page.metadata.menusection == 'facets' )
-			h4 - Facets
+			h4 
+				i.fa.fa-chevron-down
+				| Facets
 			ul
 				li: a(class=(page.metadata.menuitem == 'handling')? "selected" : "", href="/facets/handling.html") Facet handling
 				li: a(class=(page.metadata.menuitem == 'terms')? "selected" : "", href="/facets/terms.html") Terms
@@ -94,9 +126,14 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'term-stats')? "selected" : "", href="/facets/term-stats.html") Terms Stats
 				li: a(class=(page.metadata.menuitem == 'geo-distance')? "selected" : "", href="/facets/geo-distance.html") Geo Distance
 		- else 
-			li: a(class=(page.metadata.menuitem == 'handling')? "selected" : "", href="/facets/handling.html") + Facets
+			li 
+				h4: a(class=(page.metadata.menuitem == 'handling')? "selected" : "", href="/facets/handling.html")
+					i.fa.fa-chevron-right
+					| Facets
 		- if (page.metadata.menusection == 'query' )
-			h4 - Query DSL
+			h4 
+				i.fa.fa-chevron-down
+				| Query DSL
 			ul
 				li: a(class=(page.metadata.menuitem == 'text')? "selected" : "", href="/query/text.html") text
 				li: a(class=(page.metadata.menuitem == 'bool')? "selected" : "", href="/query/bool.html") bool
@@ -131,9 +168,14 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'custom-filters-score')? "selected" : "", href="/query/custom-filters-score.html") custom_filters_score
 				li: a(class=(page.metadata.menuitem == 'indices')? "selected" : "", href="/query/indices.html") indices
 		- else 
-			li: a(class=(page.metadata.menuitem == 'text')? "selected" : "", href="/query/text.html") + Query DSL
+			li 
+				h4: a(class=(page.metadata.menuitem == 'text')? "selected" : "", href="/query/text.html") 
+					i.fa.fa-chevron-right
+					| Query DSL
 		- if (page.metadata.menusection == 'filter' )
-			h4 - Filter DSL
+			h4 
+				i.fa.fa-chevron-down
+				| Filter DSL
 			ul
 				li: a(class=(page.metadata.menuitem == 'and')? "selected" : "", href="/filter/and.html") and
 				li: a(class=(page.metadata.menuitem == 'bool')? "selected" : "", href="/filter/bool.html") bool
@@ -159,4 +201,7 @@ aside#menu
 				li: a(class=(page.metadata.menuitem == 'terms')? "selected" : "", href="/filter/terms.html") terms
 				li: a(class=(page.metadata.menuitem == 'nested')? "selected" : "", href="/filter/nested.html") nested
 		- else 
-			li: a(class=(page.metadata.menuitem == 'and')? "selected" : "", href="/filter/and.html") + Filter DSL
+			li
+				h4: a(class=(page.metadata.menuitem == 'and')? "selected" : "", href="/filter/and.html") 
+					i.fa.fa-chevron-right
+					| Filter DSL
