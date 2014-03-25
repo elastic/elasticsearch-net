@@ -164,7 +164,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				client1.Info(); //info call 2
 				client1.Info(); //info call 3
 				client1.Info(); //info call 4
-				Assert.Throws<OutOfNodesException>(()=>client1.Info()); //info call 5
+				Assert.Throws<MaxRetryException>(()=>client1.Info()); //info call 5
 
 				sniffCall.MustHaveHappened(Repeated.Exactly.Once);
 				nowCall.MustHaveHappened(Repeated.Exactly.Times(7));
