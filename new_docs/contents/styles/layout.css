@@ -106,6 +106,18 @@ header p {
 .actions iframe {
 	float:right;
 }
+
+code {
+	color:white;
+	background:black;
+	display:inline-block;
+	padding:4px;
+}
+pre code {
+	padding:0px;
+	display:block;
+}
+
 /* Menu 
 -----------------------------------------------------------------------------*/
 
