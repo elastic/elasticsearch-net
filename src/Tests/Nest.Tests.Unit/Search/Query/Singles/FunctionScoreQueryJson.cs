@@ -21,6 +21,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.BoostFactor(2)
 						)
 						.ScoreMode(FunctionScoreMode.sum)
+                        .BoostMode(FunctionBoostMode.replace)
 					)
 				).Fields(x => x.Content);
 
@@ -36,7 +37,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                             {boost_factor: 2.0 }
                         ],				
 						query : { match_all : {} },
-                        score_mode: 'sum'
+                        score_mode: 'sum',
+                        boost_mode: 'replace',
 					}
 				},
                 fields: [""content""]
