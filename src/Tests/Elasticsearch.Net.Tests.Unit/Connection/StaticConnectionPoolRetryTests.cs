@@ -74,7 +74,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				//calling GET / should throw an OutOfNodesException because our fake
 				//will always throw an exception
-				Assert.Throws<OutOfNodesException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(()=> client.Info());
 				//the GetSync method must in total have been called the number of nodes times.
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
@@ -106,7 +106,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.Throws<OutOfNodesException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(()=> client.Info());
 				
 				//make sure we've observed an attempt on all the nodes
 				foreach (var call in calls)
@@ -135,7 +135,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.Throws<OutOfNodesException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(()=> client.Info());
 				
 				//We want to see 8 attempt to do a GET on /
 				//(original call + retry of 7 == 8)
@@ -227,7 +227,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var client = fake.Resolve<ElasticsearchClient>();
 				
 				//Since we always get a 503 we should see an out of nodes exception
-				Assert.Throws<OutOfNodesException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(()=> client.Info());
 
 				//The call should be tried on all the nodes
 				getCall.MustHaveHappened(Repeated.Exactly.Times(4));

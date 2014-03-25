@@ -106,7 +106,7 @@ namespace Elasticsearch.Net.Connection
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
 		{
 			//this.Host = uri.Host;
-			//this.Port = uri.Port;
+			//this.Port = uri.Port
 		}
 
 		public T MaximumRetries(int maxRetries)

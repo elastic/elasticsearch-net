@@ -128,7 +128,7 @@ namespace Elasticsearch.Net.Connection
 			{
 				return this.DoRequest<T>(method, path, data, null, deserializationState, ++retried, initialSeed);
 			}
-			throw new OutOfNodesException(exceptionMessage, e);
+			throw new MaxRetryException(exceptionMessage, e);
 		}
 
 		private ElasticsearchResponse<T> _doRequest<T>(string method, Uri uri, byte[] postData, object deserializationState)
@@ -205,7 +205,7 @@ namespace Elasticsearch.Net.Connection
 			{
 				return this.DoRequestAsync<T>(method, path, data, null, deserializationState, ++retried, initialSeed);
 			}
-			throw new OutOfNodesException(exceptionMessage, e);
+			throw new MaxRetryException(exceptionMessage, e);
 		}
 		private Task<ElasticsearchResponse<T>> _doRequestAsync<T>(string method, Uri uri, byte[] postData, object deserializationState)
 		{

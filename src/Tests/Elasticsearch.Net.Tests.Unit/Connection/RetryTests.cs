@@ -40,7 +40,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 
 				client.Settings.MaxRetries.Should().Be(_retries);
 
-				Assert.Throws<OutOfNodesException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(()=> client.Info());
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
 			}
@@ -70,11 +70,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				}
 				catch (AggregateException ae)
 				{
-					Assert.AreEqual(typeof(OutOfNodesException), ae.InnerException.GetType());
+					Assert.AreEqual(typeof(MaxRetryException), ae.InnerException.GetType());
 				}
 				catch (Exception e)
 				{
-					Assert.AreEqual(typeof(OutOfNodesException), e.GetType());
+					Assert.AreEqual(typeof(MaxRetryException), e.GetType());
 				}
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
@@ -168,7 +168,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				
 				var client = fake.Resolve<ElasticsearchClient>();
 
-				Assert.Throws<OutOfNodesException>(()=> client.Info());
+				Assert.Throws<MaxRetryException>(()=> client.Info());
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
 			}
@@ -192,11 +192,11 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				}
 				catch (AggregateException e)
 				{
-					Assert.AreEqual(e.InnerException.GetType(), typeof(OutOfNodesException));
+					Assert.AreEqual(e.InnerException.GetType(), typeof(MaxRetryException));
 				}
 				catch (Exception e)
 				{
-					Assert.AreEqual(e.GetType(), typeof(OutOfNodesException));
+					Assert.AreEqual(e.GetType(), typeof(MaxRetryException));
 				}
 				getCall.MustHaveHappened(Repeated.Exactly.Times(_retries + 1));
 
