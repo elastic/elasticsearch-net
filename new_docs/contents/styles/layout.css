@@ -31,6 +31,9 @@ header h1 {
 	margin:0;
 	margin-left:68px;
 }
+header h1.nest {
+	color:#3e6899;
+}
 header p {
 	color:grey;
 	margin: 0;
@@ -76,9 +79,15 @@ header p {
 .content h2 {
 	border-bottom: 1px solid #eeeeee;
 	margin-top: 40px;
-	color: gray;
 }
-
+.content a {
+	font-weight:bold;
+	color:#3e6899;
+}
+.content a:hover {
+	color:#71b13f;
+	text-decoration:none;
+}
 /* Left Sidebar
 -----------------------------------------------------------------------------*/
 .left-sidebar {
@@ -93,9 +102,11 @@ header p {
 /* Footer
 -----------------------------------------------------------------------------*/
 .footer {
+	margin-top:20px;
+	border-top: 1px solid #eeeeee;
 	height: 100px;
-	background: #BFF08E;
 }
+
 
 .actions {
 	position: absolute;

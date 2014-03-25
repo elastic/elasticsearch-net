@@ -7,42 +7,25 @@ menuitem: introduction
 
 # Introduction
 
-NEST aims to be a .net client with a very concise API. Its main goal is to provide a solid strongly typed Elasticsearch client. It also has string/dynamic overloads for more dynamic usecases. 
+You've reached the documentation page for `Elasticsearch.Net` and `NEST`. Two .net clients to talk with elasticsearch. So why two clients I hear you say?
 
-Indexing is as simple as:
+`Elasticsearch.Net` is a very low level, dependency free, client that has no opinions how you build and represent your requests and responses. It has abstracted 
+enough so that **all** the elasticsearch API endpoints are represented as methods but not too much to get in the way of how you want to build your json/request/response objects. It also comes with builtin, configurable/overridable, cluster failover retry mechanisms. Elasticsearch is elastic so why not your client?
 
-	var post = new Post() { Id = 12, ... }
-	client.Index(post);
+`NEST` is a high level client that has the advantage of having mapped all the request and response objects, comes with a strongly typed query DSL that maps 1 to 1 with the elasitcsearch query dsl and takes advantage of specific .net features such as covariant results. NEST internally uses, and still exposes, the low level `Elasticsearch.Net` client
 
-Indexing asynchronously is as easy as:
+Please read the getting started guide for both.
 
-	//IndexAsync returns a Task<ConnectionStatus>
-	var task = client.IndexAsync(post);
-
-Searching is fluent:
-
-	var results = this.ConnectedClient.Search<ElasticSearchProject>(s => s
-			.From(0)
-			.Size(10)
-			.Fields(f => f.Id, f => f.Name)
-			.SortAscending(f => f.LOC)
-			.SortDescending(f => f.Name)
-			.Query(q=>q.Term(f=>f.Name, "NEST", Boost: 2.0))
-	);
-
-## Installing 
-
-Nest can be installed through NuGet:
-
-	PM> Install-Package NEST
-
-Or searching for "elasticsearch" will get you to nest as well. 
 
 ## Who's using Nest
+* [stackoverflow.com](http://www.stackoverflow.com) (and the rest of the stackexchange family).
+* [7digital.com](http://www.7digital.com) (run NEST on mono).
+* [rijksmuseum.nl](https://www.rijksmuseum.nl/en) (elasticsearch is the only datastorage hit for each page).
+* [Kiln](http://www.fogcreek.com/kiln/) FogCreek's version control & code review tooling. 
+  They are so pleased with elasticsearch that [they made a video about how pleased they are!](http://blog.fogcreek.com/kiln-powered-by-elasticsearch/)
 
-Some notable examples are the stackexchange sites ([stackoverflow.com](http://stackoverflow.com/search?q=elasticsearch), [serverfault.com](http://serverfault.com/search?q=elasticsearch), ..) and [rijksmuseum.nl](https://www.rijksmuseum.nl/en/search?q=elastiek). If you are using Nest let me know! I love to boast about it right here :)
 
-## Read more elsewhere
+## Other resources
 
 [@joelabrahamsson](http://twitter.com/joelabrahamsson) wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
 using NEST. 
@@ -54,21 +37,26 @@ with their [demo project](https://github.com/searchbox-io/.net-sample)
 
 All of these are more then welcome on the github issues pages! I try to to at least reply within the same day.
 
-I also monitor question tagged with ['nest' on stackoverflow](http://stackoverflow.com/questions/tagged/nest)
+I also monitor question tagged with ['nest' on stackoverflow](http://stackoverflow.com/questions/tagged/nest) or 
+['elasticsearch-net' on stackoverflow](http://stackoverflow.com/questions/tagged/elasticsearch-net)
 
-## Copyright
-
-Copyright (c) 2010 Martijn Laarman and everyone wonderful enough to contribute to [NEST](https://github.com/Mpdreamz/NEST)
 
 ## License
 
-NEST is licensed under [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form"). Refer to [license.txt](https://github.com/Mpdreamz/NEST/blob/master/src/license.txt) for more information.
+This software is licensed under the Apache 2 license, quoted below.
 
-## Contributors
+    Copyright (c) 2014 Elasticsearch <http://www.elasticsearch.org>
 
-A special shoutout to [@stephenpope](http://github.com/stephenpope) for allowing his port 
-of the java factory based dsl [Rubber](http://github.com/stephenpope/Rubber) to be merged into NEST. 
-NEST now has **two types of query dsl's** (lambda and factory based)!
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-Some of the other wonderful features in NEST were pushed by these wonderful folks:
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 

@@ -9,27 +9,24 @@ menuitem: connecting
 # Connecting
 This section describes how to instantiate a client and have it connect to the server.
 
-## Basic plumbing:
+## Choosing the right connection strategy
 
-	var uri = new Uri("http://localhost:9200");
-	var settings = new ConnectionSettings(uri)
-		.SetDefaultIndex("mydefaultindex");
-	var client = new ElasticClient(settings);
+`NEST` follows pretty much the same design as `Elasticsearch.Net` when it comes to choosing 
+the right [connection strategy](/elasticsearch-net/connecting.html)
 
-`ConnectionSettings`'s constructor has many overloads, including support for connecting through proxies.
+    new ElasticClient();
 
-## Connecting
+will create a non failover client that talks to `http://localhost:9200`.
 
-Connecting can be done several ways:
+    var uri = new Uri("http://mynode.somewhere.com/");
+    var settings = new ConnectionSettings(uri, defaultIndex: "my-application");
 
-	ConnectionStatus connectionStatus;
-	if (client.TryConnect(out connectionStatus))
+This will create a non failover client that talks with `http://mynode.somewhere.com` and uses the default index name `my-application`
+ for calls which do not explicitly state an index name. Specifying a default index is optional but [very handy](/nest/type-index-inference).
 
-Or if you don't care about error reasons
+If you want a failover client instead of passing a `Uri` pass an `IConnectionPool` see the [Elasticsearch.Net documentation on cluster failover](/elasticsearch-net/cluster-failover.html) all of its implementations can also be used with NEST.
 
-	if (client.IsValid)
 
-both will perform a one time lookup to see if ElasticSearch is available and ready by doing a request to `/` on the elasticsearch server. 
 
 ## Changing the underlying connection 
 
@@ -37,35 +34,55 @@ By default NEST will use HTTP to chat with elasticsearch, alternative implementa
 
 	var client = new ElasticClient(settings, new ThriftConnection(settings));
 
-Nest comes with a Htpp connection `Connection`, Thrift Connection `ThriftConnection` and an in memory connection that nevers hits elasticsearch `InMemoryConnection`.
+Nest comes with a Htpp connection `HttpConnection`, Thrift Connection `ThriftConnection` 
+and an in memory connection that nevers hits elasticsearch `InMemoryConnection`.
 
-## Settings:
-Settings can be set in a fluent fashion: `new ConnectionSettings().SetDefaultIndex().SetMaximumConnections()`
+## Settings
 
-### DefaultIndex
-Calling `SetDefaultIndex()` on `ConnectionSettings` will set the default index for the client. Whenever a method is called that doesn't explicitly passes an index this default will be used.
+The `NEST` client can be configured by passing in an `IConnectionSettingsValues` object, this interface is a subclass of 
+`Elasticsearch.Net`'s `IConnectionConfigurationValues` so all the settings that can be used to 
+[configure Elasticsearch.Net](/elasticsearch-net/connection.html) also apply here including the 
+[cluster failover settings](/elasticsearch-net/cluster-failover.html)
 
-### MaximumAsyncConnections
-Calling `SetMaximumAsyncConnections()` on `ConnectionSettings` will set the maximum async connections the client will send to ElasticSearch at the same time. If the maximum is hit the calls will be queued untill a slot becomes available.
+The easiest way to pass `IConnectionSettingsValues` is to instantiate `ConnectionSettings`
 
-### TypeNameInferrer
-You can pass a `Func<string,string>` to `SetTypeNameInferrer()` on `ConnectionSettings` to overide NEST's default behavior of lowercasing and pluralizing typenames.
+    var settings = new ConnectionSettings(myConnectionPool, defaultIndex: "my-application")
+        .PluralizeTypeNames();
 
-### UsePrettyResponses
-Setting `UsePrettyResponses()` on `ConnectionSettings` will append `pretty=true` to all the requests to inform ElasticSearch we want nicely formatted responses, setting this does **not** prettify requests themselves because bulk requests in ElasticSearch follow a very exact line delimited format. 
+####AddContractJsonConverters
+Add a custom JsonConverter to the build in json serialization by passing
+in a predicate for a type.  This way they will be part of the cached Json.net contract for a type.
 
-### MapDefaultTypeIndices
-Allows you to globally set the default index a type will be index to/searched in. This will take precedence over `SetDefaultIndex()`.
+    settings.AddContractJsonConverters(t => 
+        typeof (Enum).IsAssignableFrom(t) 
+            ? new StringEnumConverter() 
+            : null);
 
-    .MapDefaultTypeIndices(s=>s
-        .Add(typeof(MyType), "mytype_does_not_live_under_the_default_index")
-        .Add(typeof(YoutubeMovie), "webcontent")
-    );
+####MapDefaultTypeIndices
+Map types to a index names. Takes precedence over SetDefaultIndex().
 
-### MapDefaultTypeNames
-Allows you to globally set the default type name for a type. This will take precedence over `TypeNameInferrer`.
+####MapDefaultTypeNames
+Allows you to override typenames, takes priority over the global SetDefaultTypeNameInferrer()
 
-    .MapDefaultTypeNames(s=>s
-        .Add(typeof(MyType), "mytupo")
-        .Add(typeof(YoutubeMovie), "mov")
-    );
+####PluralizeTypeNames
+This calls SetDefaultTypenameInferrer with an implementation that will pluralize
+type names. This used to be the default prior to Nest 1.0
+
+####SetDefaultIndex
+Index to default to when no index is specified.
+
+####SetDefaultPropertyNameInferrer
+By default NEST camelCases property names (EmailAddress => emailAddress)
+that do not have an explicit propertyname either via an ElasticProperty attribute
+or because they are part of Dictionary where the keys should be treated verbatim.
+Here you can register a function that transforms propertynames (default
+casing, pre- or suffixing)
+
+####SetDefaultTypeNameInferrer
+Allows you to override how type names should be reprented, the default will
+call .ToLowerInvariant() on the type's name.
+
+####SetJsonSerializerSettingsModifier
+Allows you to update internal the json.net serializer settings to your liking.
+Do not use this to add custom json converters use `AddContractJsonConverters` instead.
+
