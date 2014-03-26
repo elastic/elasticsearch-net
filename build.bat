@@ -39,7 +39,13 @@ if not exist build\tools\node_modules\wintersmith\bin\wintersmith (
 
 
 SET TARGET="Build"
+SET VERSION="0.1.0"
 
 IF NOT [%1]==[] (set TARGET="%1")
 
-"build\tools\FAKE\tools\Fake.exe" "build\build.fsx" "target=%TARGET%"
+IF NOT [%2]==[] (set VERSION="%2")
+
+shift
+shift
+
+"build\tools\FAKE\tools\Fake.exe" "build\build.fsx" "target=%TARGET%" "version=%VERSION%"

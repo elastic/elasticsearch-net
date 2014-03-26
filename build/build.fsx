@@ -89,14 +89,22 @@ let buildDocs = fun action ->
       p.Arguments <- sprintf "\"%s\" %s" wintersmith action
     ) (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0))
 
+Target "Version" (fun _ ->
+  let v = (getBuildParamOrDefault "version" "0.1.0")
+  let version = SemVerHelper.parse v
+  let assemblyVersion = sprintf "%i.%i.0.0" version.Major version.Minor 
+
+  trace (sprintf "%s %s" v assemblyVersion)
+
+)
 
 Target "Release" (fun _ -> 
     if not <| fileExists keyFile 
       then failwithf "{0} does not exist to sign the assemblies" keyFile 
     
-    signAssembly("Elasticsearch.Net")
-    signAssembly("Elasticsearch.Net.Connection.Thrift")
-    signAssembly("Nest")
+    //signAssembly("Elasticsearch.Net")
+    //signAssembly("Elasticsearch.Net.Connection.Thrift")
+    //signAssembly("Nest")
     
     nugetPack("Elasticsearch.Net")
     nugetPack("Elasticsearch.Net.Connection.Thrift")
@@ -110,7 +118,6 @@ Target "DocsPreview" (fun _ ->
   buildDocs "preview" |> ignore
 )
 
-
 // Dependencies
 "Clean" 
   ==> "BuildApp"
@@ -121,6 +128,6 @@ Target "DocsPreview" (fun _ ->
   ==> "Release"
 
 "DocsPreview"
-
+"Version"
 // start build
 RunTargetOrDefault "Build"
