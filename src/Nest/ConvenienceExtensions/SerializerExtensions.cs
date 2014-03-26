@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net.Serialization;
 
-namespace Nest
+namespace Nest.SerializationExtensions
 {
 	public static class SerializerExtensions
 	{
@@ -16,10 +17,11 @@ namespace Nest
 		/// <typeparam name="T">The type to deserialize to</typeparam>
 		/// <param name="serializer"></param>
 		/// <param name="data">The string representation of the data to be deserialized</param>
-		public static T Deserialize<T>(this INestSerializer serializer, string data)
+		public static T Deserialize<T>(this IElasticClient client, string data)
 		{
 			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(data)))
-				return serializer.Deserialize<T>(null, ms, null);
+				return client.Serializer.Deserialize<T>(null, ms, null);
 		}
+		
 	}
 }

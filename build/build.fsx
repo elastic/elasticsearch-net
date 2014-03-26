@@ -69,7 +69,7 @@ let nugetPack = fun name ->
     CreateDir nugetOutDir
     
     let dir = sprintf "%s/%s/" buildDir name
-    let version = "1.0.0-alpha1"
+    let version = "1.0.0-alpha4"
     NuGetPack (fun p ->
       {p with 
         Version = version

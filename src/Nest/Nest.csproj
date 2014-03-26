@@ -98,6 +98,7 @@
     <Compile Include="ConvenienceExtensions\GetMappingExtensions.cs" />
     <Compile Include="ConvenienceExtensions\OpenCloseIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
+    <Compile Include="ConvenienceExtensions\SerializerExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceExtensions.cs" />
     <Compile Include="ConvenienceExtensions\SourceManyExtensions.cs" />
     <Compile Include="Domain\Aggregations\AggregationsHelper.cs" />

@@ -40,7 +40,6 @@ namespace Nest
 			IConnection connection = null, 
 			INestSerializer serializer = null)
 		{
-
 			this._connectionSettings = settings ?? new ConnectionSettings();
 			this.Connection = connection ?? new HttpConnection(settings);
 
