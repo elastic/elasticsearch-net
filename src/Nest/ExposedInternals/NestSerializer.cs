@@ -24,40 +24,6 @@ namespace Nest
 			this._serializationSettings = this.CreateSettings();
 		}
 
-		///// <summary>
-		///// Returns a response of type R based on the connection status by trying parsing status.Result into R
-		///// </summary>
-		///// <returns></returns>
-		//public virtual R ToParsedResponse<R>(
-		//	ElasticsearchResponse<R> status, 
-		//	bool notFoundIsAValidResponse = false,
-		//	JsonConverter piggyBackJsonConverter = null
-		//	) where R : BaseResponse
-		//{
-		//	var jsonSettings =piggyBackJsonConverter != null
-		//		? this.CreateSettings(piggyBackJsonConverter)
-		//		: this._serializationSettings;
-			
-		//	var isValid =
-		//		(notFoundIsAValidResponse)
-		//			? (status.Error == null
-		//			   || status.Error.HttpStatusCode == System.Net.HttpStatusCode.NotFound)
-		//			: (status.Error == null);
-
-		//	R r;
-		//	if (!isValid)
-		//		r = (R)typeof (R).CreateInstance();
-		//	else
-		//		r = JsonConvert.DeserializeObject<R>(status.Result, jsonSettings);
-
-		//	var baseResponse = r as BaseResponse;
-		//	if (baseResponse == null)
-		//		return null;
-		//	baseResponse.IsValid = isValid;
-		//	baseResponse.ConnectionStatus = status;
-		//	return r;
-		//}
-	
 		public virtual byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			var format = formatting == SerializationFormatting.None ? Formatting.None : Formatting.Indented;
@@ -68,6 +34,10 @@ namespace Nest
 		/// <summary>
 		/// Deserialize an object 
 		/// </summary>
+		/// <typeparam name="T">The type you want to deserialize too</typeparam>
+		/// <param name="response">If the type you want is a Nest Response you have to pass a response object</param>
+		/// <param name="stream">The stream to deserialize off</param>
+		/// <param name="deserializationState">Optional deserialization state</param>
 		public virtual T Deserialize<T>(IElasticsearchResponse response, Stream stream, object deserializationState = null) 
 		{
 			var settings = this._serializationSettings;
