@@ -2,19 +2,25 @@
 template: layout.jade
 title: Connecting
 menusection: concepts
-menuitem: handling-responces
+menuitem: handling-responses
 ---
 
 
-# Handling responces
+# Handling responses
 
-All responses have the following properties
 
-a boolean `IsValid` and a `ConnectionStatus` object that holds any information needed to recreate the request to elasticsearch.
+All the return objects from API calls in NEST client implement:
+	
+	public interface IResponse
+	{
+		bool IsValid { get; }
+		IElasticsearchResponse ConnectionStatus { get; }
+		ElasticInferrer Infer { get; }
+	}
 
-These properties pertain to NEST and whether NEST thinks the response is valid or not. In some cases though elasticsearch responds back with with an `ok` or `acknowledged` properties. NEST will **always** map these fields but they will not influence the `IsValid` property. If NEST was successful in connecting and getting back a 200 status `IsValid` will always be **true** by design. If you need to check for elasticsearch validity check the `OK` or `Acknowledged` properties where these apply.
+`IsValid` will return whether a response is valid or not. A response is usually only valid when a HTTP return result in the 200 range was returned. Some calls allow for 404 to be a valid response too however.
 
-`ConnectionStatus` holds the HttpStatusCode and various other interesting information in case a transport error occurred.
+If a response returns 200 in Elasticsearch sometimes it will contain more information on the validity of the call inside its response. It's highly recommended to read the documentation for a call and check for these properties on the responses as well. 
 
-**NOTE** in most cases elasticsearch will throw a 500 and in that case `IsValid` will be false too. `ConnectionStatus.Result` will hold the error message as recieved from elasticsearch.
-
+`ConnectionStatus` is the response as it was returned by `Elasticsearch.net` it's section on 
+[handling responses](/elasticsearch-net/handling-responses.html) applies here as well.

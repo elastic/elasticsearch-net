@@ -27,9 +27,18 @@ html
 				.actions
 					iframe(src='//ghbtns.com/github-btn.html?user=elasticsearch&repo=elasticsearch-net&type=fork&count=true', allowtransparency='true', frameborder='0', scrolling='0', width='95', height='20')
 					iframe(src='//ghbtns.com/github-btn.html?user=elasticsearch&repo=elasticsearch-net&type=watch&count=true', allowtransparency='true', frameborder='0', scrolling='0', width='110', height='20')
-				img(src='/images/elasticsearch-net-nuget-icon.png' width='48' height='48')
-				h1 Elasticsearch.Net & NEST
-				p Documentation
+				-if (page.getUrl().indexOf('elasticsearch-net') > -1)
+					img(src='/images/elasticsearch-net-nuget-icon.png' width='48' height='48')
+					h1 Elasticsearch.Net 
+					p Documentation
+				-else if (page.getUrl().indexOf('nest/') > -1)
+					img(src='/images/nest-nuget-icon.png' width='48' height='48')
+					h1.nest NEST
+					p Documentation
+				-else
+					img(src='/images/elasticsearch-net-nuget-icon.png' width='48' height='48')
+					h1 Elasticsearch.Net & NEST
+					p Documentation
 
 			.divide
 			div.middle
