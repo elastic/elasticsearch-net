@@ -101,7 +101,8 @@ namespace Elasticsearch.Net
 			{
 				return this.Success ||
 					(this.HttpStatusCode.HasValue 
-					&& this.HttpStatusCode.Value != 503 
+					&& this.HttpStatusCode.Value != 503 //service unavailable needs to be retried
+					&& this.HttpStatusCode.Value != 502 //bad gateway needs to be retried 
 					&& ((this.HttpStatusCode.Value >= 400 && this.HttpStatusCode.Value < 599)));
 			}
 		}
