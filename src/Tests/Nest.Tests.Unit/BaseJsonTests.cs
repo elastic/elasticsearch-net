@@ -43,12 +43,12 @@ namespace Nest.Tests.Unit
 			//Lazy programmers for the win!
 			throw new Exception(s);
 		}
-	
+
 		protected void JsonEquals(object o, MethodBase method, string fileName = null)
 		{
 			if (o is byte[])
 			{
-				string s = ((byte[]) o).Utf8String();
+				string s = ((byte[])o).Utf8String();
 				this.JsonEquals(s, method, fileName);
 				return;
 			}
@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit
 
 		protected void JsonNotEquals(string json, MethodBase method, string fileName = null)
 		{
-            var file = this.GetFileFromMethod(method, fileName);
+			var file = this.GetFileFromMethod(method, fileName);
 
 			var expected = File.ReadAllText(file);
 			Assert.False(json.JsonEquals(expected), this.PrettyPrint(json));
@@ -81,12 +81,12 @@ namespace Nest.Tests.Unit
 		{
 			var file = this.GetFileFromMethod(method, fileName);
 			var expected = File.ReadAllText(file);
-			var expectedJsonLines = Regex.Split(expected, @"\r?\n", RegexOptions.None).Where(s=>!s.IsNullOrEmpty());
+			var expectedJsonLines = Regex.Split(expected, @"\r?\n", RegexOptions.None).Where(s => !s.IsNullOrEmpty());
 			var jsonLines = Regex.Split(json, @"\r?\n", RegexOptions.None).Where(s => !s.IsNullOrEmpty());
 			Assert.IsNotEmpty(expectedJsonLines, json);
 			Assert.IsNotEmpty(jsonLines, json);
 			Assert.AreEqual(jsonLines.Count(), expectedJsonLines.Count(), json);
-			foreach (var line in expectedJsonLines.Zip(jsonLines, (e,j) => new { Expected = e, Json = j}))
+			foreach (var line in expectedJsonLines.Zip(jsonLines, (e, j) => new { Expected = e, Json = j }))
 			{
 				Assert.True(line.Json.JsonEquals(line.Expected), line.Json);
 			}
@@ -98,15 +98,15 @@ namespace Nest.Tests.Unit
 			return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
 		}
 
-        private string GetFileFromMethod(MethodBase method, string fileName)
-        {
-            var type = method.DeclaringType;
-            var @namespace = method.DeclaringType.Namespace;
-            var folderSep = Path.DirectorySeparatorChar.ToString();
-            var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", folderSep);
-            var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
-            file = Path.Combine(Environment.CurrentDirectory.Replace("bin" + folderSep + "Debug", "").Replace("bin" + folderSep + "Release", ""), file);
-            return file;
-        }
+		protected string GetFileFromMethod(MethodBase method, string fileName)
+		{
+			var type = method.DeclaringType;
+			var @namespace = method.DeclaringType.Namespace;
+			var folderSep = Path.DirectorySeparatorChar.ToString();
+			var folder = @namespace.Replace("Nest.Tests.Unit.", "").Replace(".", folderSep);
+			var file = Path.Combine(folder, (fileName ?? method.Name) + ".json");
+			file = Path.Combine(Environment.CurrentDirectory.Replace("bin" + folderSep + "Debug", "").Replace("bin" + folderSep + "Release", ""), file);
+			return file;
+		}
 	}
 }

@@ -35,6 +35,8 @@ namespace Nest
 		public QueryResponse()
 		{
 			this.IsValid = true;
+			this.Aggregations = new Dictionary<string, IAggregation>();
+			this.Facets = new Dictionary<string, Facet>();
 		}
 
 		[JsonProperty(PropertyName = "_shards")]
@@ -101,7 +103,7 @@ namespace Nest
 			{
 				if (this.HitsMetaData != null && this._documents == null)
 					this._documents = this.HitsMetaData.Hits.Select(h => h.Source).ToList();
-				return this._documents;
+				return this._documents ?? Enumerable.Empty<T>();
 			}
 		}
 		

@@ -40,9 +40,9 @@ namespace Nest.Tests.Integration.Core.Get
 			).Fields;
 
 			Assert.NotNull(fieldSelection);
-			var name = fieldSelection.FieldValue(f => f.Name);
+			var name = fieldSelection.FieldValue<ElasticsearchProject, string>(f => f.Name);
 			Assert.IsNotEmpty(name);
-			var list = fieldSelection.FieldValue(f=>f.Followers.First().FirstName);
+			var list = fieldSelection.FieldValue<ElasticsearchProject, string>(f=>f.Followers.First().FirstName);
 			Assert.NotNull(list);
 			Assert.IsNotEmpty(list);
 			

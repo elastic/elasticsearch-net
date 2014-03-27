@@ -13,8 +13,8 @@ namespace Nest
 		MultiGetHit<T> Get<T>(int id) where T : class;
 		T Source<T>(string id) where T : class;
 		T Source<T>(int id) where T : class;
-		FieldSelection<T> GetFieldSelection<T>(string id) where T : class;
-		FieldSelection<T> GetFieldSelection<T>(int id) where T : class;
+		IFieldSelection<T> GetFieldSelection<T>(string id) where T : class;
+		IFieldSelection<T> GetFieldSelection<T>(int id) where T : class;
 		IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class;
 		IEnumerable<T> SourceMany<T>(IEnumerable<int> ids) where T : class;
 		IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class;
@@ -58,6 +58,7 @@ namespace Nest
 			var docs = this.Documents.OfType<IMultiGetHit<T>>();
 			return from d in docs
 				join id in ids on d.Id equals id
+				where d.Found
 				select d.Source;
 		}
 		public IEnumerable<T> SourceMany<T>(IEnumerable<int> ids) where T : class
@@ -76,14 +77,14 @@ namespace Nest
 		{
 			return this.GetMany<T>(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)));
 		}
-		public FieldSelection<T> GetFieldSelection<T>(string id) where T : class
+		public IFieldSelection<T> GetFieldSelection<T>(string id) where T : class
 		{
 			var multiHit = this.Get<T>(id);
 			if (multiHit == null)
 				return null;
 			return multiHit.FieldSelection;
 		}
-		public FieldSelection<T> GetFieldSelection<T>(int id) where T : class
+		public IFieldSelection<T> GetFieldSelection<T>(int id) where T : class
 		{
 			return this.GetFieldSelection<T>(id.ToString(CultureInfo.InvariantCulture));
 		}

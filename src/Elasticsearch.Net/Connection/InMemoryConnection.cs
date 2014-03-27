@@ -9,12 +9,18 @@ namespace Elasticsearch.Net.Connection
 {
 	public class InMemoryConnection : HttpConnection
 	{
-		private readonly byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
+		private byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
 
 		public InMemoryConnection(IConnectionConfigurationValues settings)
 			: base(settings)
 		{
 
+		}
+
+		public InMemoryConnection(IConnectionConfigurationValues settings, string fixedResult)
+			: this (settings)
+		{
+			_fixedResultBytes = Encoding.UTF8.GetBytes(fixedResult);
 		}
 
 		protected override ElasticsearchResponse<T> DoSynchronousRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)

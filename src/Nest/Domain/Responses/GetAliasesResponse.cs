@@ -5,7 +5,7 @@ namespace Nest
 {
 	public interface IGetAliasesResponse : IResponse
 	{
-		IDictionary<string, IndexAliases> Indices { get; }
+		IDictionary<string, IList<string>> Indices { get; }
 	}
 
 	public class GetAliasesResponse : BaseResponse, IGetAliasesResponse
@@ -13,8 +13,9 @@ namespace Nest
 		public GetAliasesResponse()
 		{
 			this.IsValid = true;
+			this.Indices = new Dictionary<string, IList<string>>();
 		}
 
-		public IDictionary<string, IndexAliases> Indices { get; internal set; }
+		public IDictionary<string, IList<string>> Indices { get; internal set; }
 	}
 }

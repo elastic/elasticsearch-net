@@ -88,9 +88,8 @@ namespace Nest
 
 		public ConnectionSettings(IConnectionPool uri, string defaultIndex) : base(uri)
 		{
-			defaultIndex.ThrowIfNullOrEmpty("defaultIndex");
-
-			this.SetDefaultIndex(defaultIndex);
+			if (!defaultIndex.IsNullOrEmpty())
+				this.SetDefaultIndex(defaultIndex);
 			
 			this._defaultTypeNameInferrer = (t => t.Name.ToLower()); 
 			this._defaultPropertyNameInferrer = (p => p.ToCamelCase()); 

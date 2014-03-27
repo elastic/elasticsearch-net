@@ -70,10 +70,11 @@ namespace Nest
 			}
 		}
 
-		public K[] FieldValue<K>(Expression<Func<T, object>> objectPath)
+		public K[] FieldValue<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
+			where TBindTo : class
 		{
 			if (this.Fields == null) return default(K[]);
-			return this.Fields.FieldValue<K>(objectPath);
+			return this.Fields.FieldValue<TBindTo,K>(objectPath);
 		}
 
 		public K FieldValue<K>(string path)

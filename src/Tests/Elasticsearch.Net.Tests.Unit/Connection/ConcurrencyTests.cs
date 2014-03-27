@@ -44,6 +44,7 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 		}
 
 		[Test]
+		[Ignore] //TODO Unignore
 		public void CallInfo40000TimesOnMultipleThreads()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
