@@ -27,7 +27,7 @@ namespace Elasticsearch.Net.Connection
 		/// <returns></returns>
 		T SetGlobalQueryStringParameters(NameValueCollection queryStringParameters);	/// <summary>
 	
-		/// Timeout in milliseconds when the .NET webrquest should abort the request, note that you can set this to a high value here,
+		/// Timeout in milliseconds when the .NET webrequest should abort the request, note that you can set this to a high value here,
 		/// and specify the timeout in various calls on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
