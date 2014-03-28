@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -24,12 +25,14 @@ namespace Elasticsearch.Net
 		ConnectionError Error { get; }
 		string RequestMethod { get; }
 		string RequestUrl { get; }
+        [DebuggerDisplay("{Request != null ? System.Text.Encoding.UTF8.GetString(Request) : null,nq}")]
 		byte[] Request { get; }
 		int? HttpStatusCode { get; }
 		
 		/// <summary>
 		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
 		/// </summary>
+        [DebuggerDisplay("{ResponseRaw != null ? System.Text.Encoding.UTF8.GetString(ResponseRaw) : null,nq}")]
 		byte[] ResponseRaw { get; }
 	}
 
