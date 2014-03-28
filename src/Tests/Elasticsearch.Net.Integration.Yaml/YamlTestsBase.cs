@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -32,7 +33,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 			var uri = new Uri("http://"+host+":9200/");
-			var settings = new ConnectionConfiguration(uri).UsePrettyResponses();
+			var settings = new ConnectionConfiguration(uri).ExposeRawResponse();
 
 			var jsonNetSerializer = new ElasticsearchJsonNetSerializer();
 
@@ -319,11 +320,7 @@ namespace Elasticsearch.Net.Integration.Yaml
 			else if (o is object[] || o is IList<object>)
 			{
 				var oo = (o as object[]) ?? (o as IList<object>);
-				var json = _client.Serializer.Serialize(value);
-				var otherJson = _client.Serializer.Serialize(oo);
-				var nJson = JArray.Parse(Encoding.UTF8.GetString(json)).ToString();
-				var nOtherJson = JArray.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
-				Assert.AreEqual(nJson, nOtherJson);
+				SerializedArrayJsonEquals(value, oo);
 			}
 			else if (o is IDictionary<string, object>)
 			{
@@ -335,12 +332,33 @@ namespace Elasticsearch.Net.Integration.Yaml
 							x => x.Name, 
 							x => (x.GetGetMethod().Invoke(value, null) ?? ""));
 
-				var equals = DynamicDictionary.Create(d)
-					.SequenceEqual(dd);
+				var ds = new SortedDictionary<string, object>(d);
+				var dds = new SortedDictionary<string, object>(dd);
+
+				var equals = DynamicDictionary.Create(ds).SequenceEqual(dds)
+					|| SerializedJsonEquals(dd,dds);
 				Assert.True(equals, "response did not match expected return");
 
 			}
 			else Assert.Fail(message);
+		}
+
+		private static void SerializedArrayJsonEquals(object value, object oo)
+		{
+			var json = _client.Serializer.Serialize(value);
+			var otherJson = _client.Serializer.Serialize(oo);
+			var nJson = JArray.Parse(Encoding.UTF8.GetString(json)).ToString();
+			var nOtherJson = JArray.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
+			Assert.AreEqual(nJson, nOtherJson);
+		}
+		private static bool SerializedJsonEquals(object value, object oo)
+		{
+			var json = _client.Serializer.Serialize(value);
+			var otherJson = _client.Serializer.Serialize(oo);
+			var nJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
+			var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
+			Assert.AreEqual(nJson, nOtherJson);
+			return true;
 		}
 	}
 

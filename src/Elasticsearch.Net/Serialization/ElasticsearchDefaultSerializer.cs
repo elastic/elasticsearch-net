@@ -23,7 +23,7 @@ namespace Elasticsearch.Net.Serialization
 			{
 				stream.CopyTo(ms);
 				byte[] buffer = ms.ToArray();
-				if (buffer.Length == 0)
+				if (buffer.Length <= 1)
 					return default(T);
 				return SimpleJson.DeserializeObject<T>(buffer.Utf8String());
 			}
