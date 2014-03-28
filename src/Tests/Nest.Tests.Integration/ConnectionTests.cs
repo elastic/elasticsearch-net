@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration
 		{
 			var rootNodeInfo = _client.RootNodeInfo();
 			Assert.True(rootNodeInfo.IsValid);
-			Assert.Null(rootNodeInfo.ConnectionStatus.Error);
+			Assert.True(rootNodeInfo.ConnectionStatus.Success);
 		}
 		[Test]
 		public void construct_client_with_null()
@@ -81,7 +81,7 @@ namespace Nest.Tests.Integration
 			var result = client.RootNodeInfo();
 
 			Assert.True(result.IsValid);
-			Assert.Null(result.ConnectionStatus.Error);
+			Assert.NotNull(result.ConnectionStatus.HttpStatusCode);
 		}
 		[Test]
 		public void construct_client_with_null_uri()

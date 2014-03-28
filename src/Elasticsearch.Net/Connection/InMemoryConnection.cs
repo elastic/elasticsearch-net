@@ -18,34 +18,31 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		public InMemoryConnection(IConnectionConfigurationValues settings, string fixedResult)
-			: this (settings)
+			: this(settings)
 		{
 			_fixedResultBytes = Encoding.UTF8.GetBytes(fixedResult);
 		}
 
-		protected override ElasticsearchResponse<T> DoSynchronousRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)
+		protected override ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
-			return this.ReturnConnectionStatus<T>(request, data, deserializationState);
+			return this.ReturnConnectionStatus(request, data, requestSpecificConfig);
 		}
 
-		private ElasticsearchResponse<T> ReturnConnectionStatus<T>(HttpWebRequest request, byte[] data, object deserializationState = null)
+		private ElasticsearchResponse<Stream> ReturnConnectionStatus(HttpWebRequest request, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var method = request.Method;
 			var path = request.RequestUri.ToString();
 
-			using (var ms = new MemoryStream(_fixedResultBytes))
-			{
-				var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, 200, method, path, data, ms, deserializationState);
-				_ConnectionSettings.ConnectionStatusHandler(cs);
-				return cs;
-			}
+			var cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, 200, method, path, data);
+			cs.Response = new MemoryStream(_fixedResultBytes);
+			return cs;
 		}
 
-		protected override Task<ElasticsearchResponse<T>> DoAsyncRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)
+		protected override Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
-			return Task.Factory.StartNew<ElasticsearchResponse<T>>(() =>
+			return Task.Factory.StartNew(() =>
 			{
-				var cs = this.ReturnConnectionStatus<T>(request, data, deserializationState);
+				var cs = this.ReturnConnectionStatus(request, data, requestSpecificConfig);
 				return cs;
 			});
 		}

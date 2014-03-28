@@ -100,7 +100,7 @@ namespace Nest.Tests.Unit.Core.Validate
 			var status = result.ConnectionStatus;
 			var uri = new Uri(status.RequestUrl);
 			Assert.AreEqual("/nest_test_data/elasticsearchprojects/_validate/query", uri.AbsolutePath);
-			Assert.AreEqual("?source=%7B%20match_all%20%3A%20%7B%7D%20%7D", uri.Query);
+			Assert.AreEqual("?source=%7B%20match_all%20:%20%7B%7D%20%7D", uri.Query);
 			StringAssert.AreEqualIgnoringCase("GET", status.RequestMethod);
 		}
 	}

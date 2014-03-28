@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extras.FakeItEasy;
@@ -13,15 +14,13 @@ namespace Elasticsearch.Net.Tests.Unit.Stubs
 {
 	public static class FakeCalls 
 	{
-		public static IReturnValueConfiguration<ElasticsearchResponse<Dictionary<string, object>>> GetSyncCall(AutoFake fake)
+		public static IReturnValueConfiguration<ElasticsearchResponse<Stream>> GetSyncCall(AutoFake fake)
 		{
-			return A.CallTo(() =>
-				fake.Resolve<IConnection>().GetSync<Dictionary<string, object>>(A<Uri>._, null));
+			return A.CallTo(() => fake.Resolve<IConnection>().GetSync(A<Uri>._, null));
 		}
-		public static IReturnValueArgumentValidationConfiguration<Task<ElasticsearchResponse<Dictionary<string, object>>>> GetCall(AutoFake fake)
+		public static IReturnValueArgumentValidationConfiguration<Task<ElasticsearchResponse<Stream>>> GetCall(AutoFake fake)
 		{
-			return A.CallTo(() => 
-				fake.Resolve<IConnection>().Get<Dictionary<string, object>>(A<Uri>._, A<object>._));
+			return A.CallTo(() => fake.Resolve<IConnection>().Get(A<Uri>._, A<IConnectionConfigurationOverrides>._));
 		}
 
 		public static IReturnValueArgumentValidationConfiguration<bool> Ping(AutoFake fake)

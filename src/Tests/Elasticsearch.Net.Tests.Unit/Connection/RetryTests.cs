@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,8 +57,8 @@ namespace Elasticsearch.Net.Tests.Unit.Connection
 				var getCall = FakeCalls.GetCall(fake); 
 
 				//return a started task that throws
-				Func<ElasticsearchResponse<Dictionary<string, object>>> badTask = () => { throw new Exception(); };
-				var t = new Task<ElasticsearchResponse<Dictionary<string, object>>>(badTask);
+				Func<ElasticsearchResponse<Stream>> badTask = () => { throw new Exception(); };
+				var t = new Task<ElasticsearchResponse<Stream>>(badTask);
 				t.Start();
 				getCall.Returns(t);
 				

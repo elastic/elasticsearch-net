@@ -92,7 +92,7 @@ namespace Nest.Tests.Integration.Core.Get
 
 			var fieldSelection = personHit.FieldSelection;
 			fieldSelection.Should().NotBeNull();
-			fieldSelection.FieldValue<Person, string>(p=>p.Id).Should().BeEquivalentTo(new []{authorId});
+			fieldSelection.FieldValue<Person, int>(p=>p.Id).Should().BeEquivalentTo(new []{authorId});
 			fieldSelection.FieldValue<Person, string>(p => p.FirstName)
 				.Should().NotBeEmpty();
 

@@ -23,8 +23,7 @@ namespace Nest.Tests.Integration.Core.Bulk
 
 			unknownIndexResult.Exists.Should().BeFalse();
 
-			unknownIndexResult.ConnectionStatus.Error.Should().NotBeNull();
-			unknownIndexResult.ConnectionStatus.Error.HttpStatusCode.Should().Be(HttpStatusCode.NotFound);
+			unknownIndexResult.ConnectionStatus.HttpStatusCode.Should().Be(404);
 
 		}
 	}

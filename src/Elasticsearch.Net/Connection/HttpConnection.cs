@@ -42,33 +42,44 @@ namespace Elasticsearch.Net.Connection
 			this._enableTrace = settings.TraceEnabled;
 		}
 
-		public virtual ElasticsearchResponse<T> GetSync<T>(Uri uri, object deserializationState = null)
+		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
-			return this.HeaderOnlyRequest<T>(uri, "GET", deserializationState);
+			return this.HeaderOnlyRequest(uri, "GET", requestSpecificConfig);
 		}
-		public virtual ElasticsearchResponse<T> HeadSync<T>(Uri uri, object deserializationState = null)
+		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
-			return this.HeaderOnlyRequest<T>(uri, "HEAD", deserializationState);
-		}
-
-		public virtual ElasticsearchResponse<T> PostSync<T>(Uri uri, byte[] data, object deserializationState = null)
-		{
-			return this.BodyRequest<T>(uri, data, "POST", deserializationState);
-		}
-		public virtual ElasticsearchResponse<T> PutSync<T>(Uri uri, byte[] data, object deserializationState = null)
-		{
-			return this.BodyRequest<T>(uri, data, "PUT", deserializationState);
-		}
-		public virtual ElasticsearchResponse<T> DeleteSync<T>(Uri uri, object deserializationState = null)
-		{
-			return this.HeaderOnlyRequest<T>(uri, "DELETE", deserializationState);
-		}
-		public virtual ElasticsearchResponse<T> DeleteSync<T>(Uri uri, byte[] data, object deserializationState = null)
-		{
-			return this.BodyRequest<T>(uri, data, "DELETE", deserializationState);
+			return this.HeaderOnlyRequest(uri, "HEAD", requestSpecificConfig);
 		}
 
-		
+		public virtual ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		{
+			return this.BodyRequest(uri, data, "POST", requestSpecificConfig);
+		}
+		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		{
+			return this.BodyRequest(uri, data, "PUT", requestSpecificConfig);
+		}
+		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		{
+			return this.HeaderOnlyRequest(uri, "DELETE", requestSpecificConfig);
+		}
+		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		{
+			return this.BodyRequest(uri, data, "DELETE", requestSpecificConfig);
+		}
+
+		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IConnectionConfigurationOverrides requestSpecificConfig)
+		{
+			var r = this.CreateHttpWebRequest(uri, method);
+			return this.DoSynchronousRequest(r, requestSpecificConfig: requestSpecificConfig);
+		}
+
+		private ElasticsearchResponse<Stream> BodyRequest(Uri uri, byte[] data, string method, IConnectionConfigurationOverrides requestSpecificConfig)
+		{
+			var r = this.CreateHttpWebRequest(uri, method);
+			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
+		}
+
 		public virtual bool Ping(Uri uri)
 		{
 			var request = this.CreateHttpWebRequest(uri, "HEAD");
@@ -96,37 +107,37 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public virtual Task<ElasticsearchResponse<T>> Get<T>(Uri uri, object deserializationState = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "GET");
-			return this.DoAsyncRequest<T>(r, deserializationState: deserializationState);
+			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
-		public virtual Task<ElasticsearchResponse<T>> Head<T>(Uri uri, object deserializationState = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "HEAD");
-			return this.DoAsyncRequest<T>(r, deserializationState: deserializationState);
+			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
-		public virtual Task<ElasticsearchResponse<T>> Post<T>(Uri uri, byte[] data, object deserializationState = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "POST");
-			return this.DoAsyncRequest<T>(r, data, deserializationState: deserializationState);
+			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
 
-		public virtual Task<ElasticsearchResponse<T>> Put<T>(Uri uri, byte[] data, object deserializationState = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "PUT");
-			return this.DoAsyncRequest<T>(r, data, deserializationState: deserializationState);
+			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
 
-		public virtual Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, byte[] data, object deserializationState = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE");
-			return this.DoAsyncRequest<T>(r, data, deserializationState: deserializationState);
+			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
 		}
-		public virtual Task<ElasticsearchResponse<T>> Delete<T>(Uri uri, object deserializationState = null)
+		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var r = this.CreateHttpWebRequest(uri, "DELETE");
-			return this.DoAsyncRequest<T>(r, deserializationState: deserializationState);
+			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
 		}
 
 		private static void ThreadTimeoutCallback(object state, bool timedOut)
@@ -141,17 +152,6 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private ElasticsearchResponse<T> HeaderOnlyRequest<T>(Uri uri, string method, object deserializationState)
-		{
-			var r = this.CreateHttpWebRequest(uri, method);
-			return this.DoSynchronousRequest<T>(r, deserializationState: deserializationState);
-		}
-
-		private ElasticsearchResponse<T> BodyRequest<T>(Uri uri, byte[] data, string method, object deserializationState)
-		{
-			var r = this.CreateHttpWebRequest(uri, method);
-			return this.DoSynchronousRequest<T>(r, data, deserializationState);
-		}
 
 		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method)
 		{
@@ -181,8 +181,8 @@ namespace Elasticsearch.Net.Connection
 
 			//if (this._ConnectionSettings.UriSpecifiedBasicAuth)
 			//{
-				myReq.Headers["Authorization"] =
-					"Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
+			myReq.Headers["Authorization"] =
+				"Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
 			//}
 		}
 
@@ -205,111 +205,75 @@ namespace Elasticsearch.Net.Connection
 			return myReq;
 		}
 
-		protected virtual ElasticsearchResponse<T> DoSynchronousRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)
+		protected virtual ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IConnectionConfigurationOverrides requestSpecificConfig = null)
 		{
 			var path = request.RequestUri.ToString();
 			var method = request.Method;
-			using (var tracer = new ElasticsearchResponseTracer<T>(this._ConnectionSettings.TraceEnabled))
-			{
-				ElasticsearchResponse<T> cs = null;
-				if (data != null)
-				{
-					using (var r = request.GetRequestStream())
-					{
-						r.Write(data, 0, data.Length);
-					}
-				}
-				try
-				{
-					using (var response = (HttpWebResponse)request.GetResponse())
-					using (var responseStream = response.GetResponseStream())
-					return WebToElasticsearchResponse<T>(data, deserializationState, responseStream, response, method, path, tracer);
-				}
-				catch (WebException webException)
-				{
-					var httpEx = webException.Response as HttpWebResponse;
-					if (httpEx != null && httpEx.StatusCode == HttpStatusCode.NotFound)
-					{
-						cs = WebToElasticsearchResponse(data, deserializationState, httpEx.GetResponseStream(), httpEx, method, path, tracer);
-						cs.Error = new ConnectionError(webException);
-						return cs;
 
-					}
-					cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, webException, method, path, data);
-					tracer.SetResult(cs);
-					_ConnectionSettings.ConnectionStatusHandler(cs);
-					return cs;
+			if (data != null)
+			{
+				using (var r = request.GetRequestStream())
+				{
+					r.Write(data, 0, data.Length);
 				}
 			}
-
-		}
-
-		private ElasticsearchResponse<T> WebToElasticsearchResponse<T>(byte[] data, object deserializationState,
-			Stream responseStream, HttpWebResponse response, string method, string path, ElasticsearchResponseTracer<T> tracer)
-		{
-			ElasticsearchResponse<T> cs = 
-				ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);
-			if (typeof(T) == typeof(VoidResponse))
-				return cs;
-			using (var memoryStream = new MemoryStream())
+			try
 			{
-				Stream s = responseStream;
-				Type type = typeof(T);
-				if (_ConnectionSettings.KeepRawResponse || type == typeof(string) || type == typeof(byte[]))
-				{
-					responseStream.CopyTo(memoryStream);
-					//use memory stream for serialization instead
-					//our own serializers have special handling for memorystream
-					//that will prevent double reads
-					memoryStream.Position = 0;
-					s = memoryStream;
-					var bytes = memoryStream.ToArray();
-					if (typeof(T) == typeof(string))
-					{
-						this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
-						return cs;
-					}
-					if (typeof(T) == typeof(byte[]))
-					{
-						this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
-						return cs;
-					}
-					cs.ResponseRaw = _ConnectionSettings.KeepRawResponse ? bytes: null;
-				}
-
-				var result = this._ConnectionSettings.Serializer.Deserialize<T>(cs, s, deserializationState);
-				cs.Response = result;
-				tracer.SetResult(cs);
-				return cs;
+				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
+				//Either the stream or the response object needs to be closed but not both although it won't
+				//throw any errors if both are closed atleast one of them has to be Closed.
+				//Since we expose the stream we let closing the stream determining when to close the connection
+				var response = (HttpWebResponse)request.GetResponse();
+				var responseStream = response.GetResponseStream();
+				return WebToElasticsearchResponse(data, responseStream, response, method, path);
+			}
+			catch (WebException webException)
+			{
+				return HandleWebException(data, webException, method, path);
 			}
 		}
 
-		protected virtual Task<ElasticsearchResponse<T>> DoAsyncRequest<T>(HttpWebRequest request, byte[] data = null, object deserializationState = null)
+		private ElasticsearchResponse<Stream> HandleWebException(byte[] data, WebException webException, string method, string path)
 		{
-			var tcs = new TaskCompletionSource<ElasticsearchResponse<T>>();
+			ElasticsearchResponse<Stream> cs = null;
+			var httpEx = webException.Response as HttpWebResponse;
+			if (httpEx != null)
+			{
+				cs = WebToElasticsearchResponse(data, httpEx.GetResponseStream(), httpEx, method, path);
+				return cs;
+			}
+			cs = ElasticsearchResponse<Stream>.CreateError(this._ConnectionSettings, webException, method, path, data);
+			return cs;
+		}
+
+		private ElasticsearchResponse<Stream> WebToElasticsearchResponse(byte[] data, Stream responseStream, HttpWebResponse response, string method, string path)
+		{
+			ElasticsearchResponse<Stream> cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, (int)response.StatusCode, method, path, data);
+			cs.Response = responseStream;
+			return cs;
+		}
+
+		protected virtual Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IConnectionConfigurationOverrides requestSpecificConfig = null)
+		{
+			var tcs = new TaskCompletionSource<ElasticsearchResponse<Stream>>();
 			if (this._ConnectionSettings.MaximumAsyncConnections <= 0
 			  || this._ResourceLock == null)
-				return this.CreateIterateTask<T>(request, data, deserializationState, tcs);
+				return this.CreateIterateTask(request, data, requestSpecificConfig, tcs);
 
 			var timeout = this._ConnectionSettings.Timeout;
 			var path = request.RequestUri.ToString();
 			var method = request.Method;
 			if (!this._ResourceLock.WaitOne(timeout))
 			{
-				using (var tracer = new ElasticsearchResponseTracer<T>(this._ConnectionSettings.TraceEnabled))
-				{
-					var m = "Could not start the operation before the timeout of " + timeout +
-					  "ms completed while waiting for the semaphore";
-					var cs = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, new TimeoutException(m), method, path, data); 
-					tcs.SetResult(cs);
-					tracer.SetResult(cs);
-					_ConnectionSettings.ConnectionStatusHandler(cs);
-					return tcs.Task;
-				}
+				var m = "Could not start the operation before the timeout of " + timeout +
+				  "ms completed while waiting for the semaphore";
+				var cs = ElasticsearchResponse<Stream>.CreateError(this._ConnectionSettings, new TimeoutException(m), method, path, data);
+				tcs.SetResult(cs);
+				return tcs.Task;
 			}
 			try
 			{
-				return this.CreateIterateTask<T>(request, data, deserializationState, tcs);
+				return this.CreateIterateTask(request, data, requestSpecificConfig, tcs);
 			}
 			finally
 			{
@@ -317,113 +281,54 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private Task<ElasticsearchResponse<T>> CreateIterateTask<T>(HttpWebRequest request, byte[] data, object deserializationState, TaskCompletionSource<ElasticsearchResponse<T>> tcs)
+		private Task<ElasticsearchResponse<Stream>> CreateIterateTask(HttpWebRequest request, byte[] data, object requestSpecificConfig, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
 		{
-			this.Iterate<T>(request, data, this._AsyncSteps<T>(request, tcs, data, deserializationState), tcs);
+			this.Iterate(request, data, this._AsyncSteps(request, tcs, data, requestSpecificConfig), tcs);
 			return tcs.Task;
 		}
 
-		private IEnumerable<Task> _AsyncSteps<T>(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<T>> tcs, byte[] data, object deserializationState)
+		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, object requestSpecificConfig)
 		{
-			using (var tracer = new ElasticsearchResponseTracer<T>(this._ConnectionSettings.TraceEnabled))
+			var timeout = this._ConnectionSettings.Timeout;
+
+			var state = new ConnectionState { Connection = request };
+
+			if (data != null)
 			{
-				var timeout = this._ConnectionSettings.Timeout;
+				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
+				//ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+				yield return getRequestStream;
 
-				var state = new ConnectionState { Connection = request };
-
-				if (data != null)
+				var requestStream = getRequestStream.Result;
+				try
 				{
-					var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-					//ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-					yield return getRequestStream;
-
-					var requestStream = getRequestStream.Result;
-					try
-					{
-						var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, state);
-						yield return writeToRequestStream;
-					}
-					finally
-					{
-						requestStream.Close();
-					}
+					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, state);
+					yield return writeToRequestStream;
 				}
-
-				// Get the response
-				var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
-				//ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-				yield return getResponse;
-
-				var path = request.RequestUri.ToString();
-				var method = request.Method;
-
-				// Get the response stream
-				using (var response = (HttpWebResponse)getResponse.Result)
-				using (var responseStream = response.GetResponseStream())
-				using (var memoryStream = new MemoryStream())
+				finally
 				{
-					Stream s = responseStream;
-					var cs = ElasticsearchResponse<T>.Create(this._ConnectionSettings, (int) response.StatusCode, method, path, data);	
-					if (typeof(T) == typeof(VoidResponse))
-					{
-						SetReturnOnAsycActors(tcs, cs, tracer);
-						yield break;
-					}
-					Type type = typeof(T);
-					if (_ConnectionSettings.KeepRawResponse || type == typeof(string) || type == typeof(byte[]))
-					{
-						// Copy all data from the response stream
-						var buffer = new byte[BUFFER_SIZE];
-						while (responseStream != null)
-						{
-							var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BUFFER_SIZE, null);
-							yield return read;
-							if (read.Result == 0) break;
-							memoryStream.Write(buffer, 0, read.Result);
-						}
-						memoryStream.Position = 0;
-						s = memoryStream;
-						var bytes = memoryStream.ToArray();
-						if (typeof(T) == typeof(string))
-						{
-							this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
-							SetReturnOnAsycActors(tcs, cs, tracer);
-							yield break;
-						}
-						if (typeof(T) == typeof(byte[]))
-						{
-							this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
-							SetReturnOnAsycActors(tcs, cs, tracer);
-							yield break;
-						}
-						cs.ResponseRaw = _ConnectionSettings.KeepRawResponse ? bytes : null;
-					}
-					var t = this._ConnectionSettings.Serializer.DeserializeAsync<T>(cs, s, deserializationState);
-					yield return t;
-					cs.Response = t.Result;
-					SetReturnOnAsycActors(tcs, cs, tracer);
+					requestStream.Close();
 				}
 			}
-		}
 
-		private void SetReturnOnAsycActors<T>(TaskCompletionSource<ElasticsearchResponse<T>> tcs, ElasticsearchResponse<T> cs,
-			ElasticsearchResponseTracer<T> tracer)
-		{
+			// Get the response
+			var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
+			//ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
+			yield return getResponse;
+
+			var path = request.RequestUri.ToString();
+			var method = request.Method;
+
+			//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
+			//Either the stream or the response object needs to be closed but not both (although it won't)
+			//throw any errors if both are closed atleast one of them has to be Closed.
+			//Since we expose the stream we let closing the stream determining when to close the connection
+			var response = (HttpWebResponse)getResponse.Result;
+			var responseStream = response.GetResponseStream();
+			var cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, (int)response.StatusCode, method, path, data);
+			cs.Response = responseStream;
 			tcs.TrySetResult(cs);
-			tracer.SetResult(cs);
-			_ConnectionSettings.ConnectionStatusHandler(cs);
 		}
-
-		public void SetStringResult(ElasticsearchResponse<string> response, byte[] rawResponse)
-		{
-			response.Response = rawResponse.Utf8String();
-		}
-	
-		public void SetByteResult(ElasticsearchResponse<byte[]> response, byte[] rawResponse)
-		{
-			response.Response = rawResponse;
-		}
-
 
 		public void Iterate<T>(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<T>> tcs)
 		{
@@ -442,6 +347,7 @@ namespace Elasticsearch.Net.Connection
 					{
 						var path = request.RequestUri.ToString();
 						var method = request.Method;
+
 						var response = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, exception, method, path, data);
 						tcs.SetResult(response);
 					}
@@ -458,7 +364,7 @@ namespace Elasticsearch.Net.Connection
 			recursiveBody(null);
 		}
 
-		
+
 
 	}
 }

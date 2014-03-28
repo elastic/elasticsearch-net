@@ -62,19 +62,16 @@ namespace Elasticsearch.Net.Integration.Yaml
 			}
 			if (shouldCatch == "missing")
 			{
-				Assert.NotNull(this._status.Error, "call specified missing is expected");
-				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.NotFound, "call specified missing (404) is expected");
+				Assert.AreEqual(this._status.HttpStatusCode, 404, "call specified missing (404) is expected");
 			}
 			else if (shouldCatch == "conflict")
 			{
-				Assert.NotNull(this._status.Error, "call specified conflict is expected");
-				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.Conflict, "call specified conflict (409) is expected");
+				Assert.AreEqual(this._status.HttpStatusCode, 409, "call specified conflict (409) is expected");
 				
 			}
 			else if (shouldCatch == "forbidden")
 			{
-				Assert.NotNull(this._status.Error, "call specified forbidden is expected");
-				Assert.AreEqual(this._status.Error.HttpStatusCode,HttpStatusCode.Forbidden, "call specified conflict (403) is expected");
+				Assert.AreEqual(this._status.HttpStatusCode, 403, "call specified conflict (403) is expected");
 				
 			}
 			else if (shouldCatch != null && shouldCatch.StartsWith("/"))
@@ -108,9 +105,9 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is IElasticsearchResponse)
 			{
 				var c = o as IElasticsearchResponse;
-				if (c.RequestMethod == "HEAD" && c.Error != null)
+				if (c.RequestMethod == "HEAD" && !c.Success)
 				{
-					Assert.Fail("HEAD request returned status:" + c.Error.HttpStatusCode);
+					Assert.Fail("HEAD request returned status:" + c.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
 			}
@@ -160,10 +157,10 @@ namespace Elasticsearch.Net.Integration.Yaml
 			if (o is IElasticsearchResponse)
 			{
 				var c = o as IElasticsearchResponse;
-				if (c.RequestMethod == "HEAD" && c.Error == null)
+				if (c.RequestMethod == "HEAD" && c.Success)
 				{
 					Assert.Fail("HEAD request did not return error status but:" 
-						+ c.Error.HttpStatusCode);
+						+ c.HttpStatusCode);
 				}
 				else if (c.RequestMethod == "HEAD") return;
 			}

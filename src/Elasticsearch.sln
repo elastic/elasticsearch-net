@@ -260,6 +260,7 @@ Global
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Any CPU.ActiveCfg = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Any CPU.Build.0 = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|Mixed Platforms.Build.0 = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.CodeGeneration|x86.ActiveCfg = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Debug|Any CPU.Build.0 = Debug|Any CPU
