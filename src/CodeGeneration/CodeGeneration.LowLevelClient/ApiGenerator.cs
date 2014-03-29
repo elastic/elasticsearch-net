@@ -45,8 +45,8 @@ namespace CodeGeneration.LowLevelClient
 				html = client.DownloadString(useCache ? LocalUri("root.html") : _listingUrl);
 			
 			var dom = CQ.Create(html);
-			if (!useCache)
-				File.WriteAllText(_cacheFolder + "root.html", html);
+            if (!useCache)
+                WriteToCache("root.html", html);
 			
 			var endpoints = dom[".js-directory-link"]
 				.Select(s => s.InnerText)
@@ -80,8 +80,8 @@ namespace CodeGeneration.LowLevelClient
 				var fileName = rawFile.Split(new[] {'/'}).Last();
 				Console.WriteLine("Downloading {0}", rawFile);
 				var json = client.DownloadString(useCache ? LocalUri(fileName) : rawFile);
-				if (!useCache)
-					File.WriteAllText(_cacheFolder + fileName, json);
+                if (!useCache)
+                    WriteToCache(fileName, json);
 
 				var apiDocumentation = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
 				apiDocumentation.Value.CsharpMethodName = CreateMethodName(
@@ -214,5 +214,13 @@ namespace CodeGeneration.LowLevelClient
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"Enums.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
+
+        private static void WriteToCache(string filename, string contents)
+        {
+            if (!Directory.Exists(_cacheFolder))
+                Directory.CreateDirectory(_cacheFolder);
+
+            File.WriteAllText(_cacheFolder + filename, contents);
+        }
 	}
 }
