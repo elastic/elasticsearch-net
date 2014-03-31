@@ -8,7 +8,7 @@ menuitem: range
 
 # Range Facet
 
-range facet allow to specify a set of ranges and get both the number of docs (count) that fall within each range, and aggregated data either based on the field, or using another field. Here is a simple example:
+Range faceting allows you to specify a set of ranges and get both the number of docs (count) that fall within each range, and aggregated data either based on the field, or using another field. Here is a simple example:
 
 
 	this.ConnectedClient.Search<ElasticSearchProject>(s=>s
@@ -76,5 +76,5 @@ or alternative key/value fields
 	);
 	//SNIP
 
-See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-range-facet.html) for more information
+See [original docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets-range-facet.html) for more information.
 

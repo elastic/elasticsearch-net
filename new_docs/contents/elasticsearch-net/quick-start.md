@@ -7,7 +7,7 @@ menuitem: esnet-quick-start
 
 # Quick Start
 
-`Elasticsearch.Net` is a low level client to talk to elasticsearch.
+`Elasticsearch.Net` is a low level client to talk to Elasticsearch.
 
 ## Installing
 

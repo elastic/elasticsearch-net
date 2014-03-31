@@ -15,7 +15,7 @@ Get multiple documents in a single request.
 	var ids = new [] { hit1.Id, hit2.Id };
 	var foundDocuments = this.ConnectedClient.MultiGet<ElasticSearchProject>(ids);
 
-index and type are infered but overloads exists for full control
+Index and type are infered but overloads exists for full control.
 
 	var foundDocuments = this.ConnectedClient.MultiGet<ElasticSearchProject>("myalternateindex", "elasticprojs", ids);
 
@@ -38,7 +38,7 @@ These could then be pulled out of the result:
 
 `Get` returns `T` and `GetWithMetaData` returns a `MultiGetHit<T>` which also exposes the document's metadata such as `_index` and `_version`. 
 
-Incase the document was not found then `Get` would return a `null` but `GetWithMetaData` still returns the a `MultiGetHit<T>` but with an `.Exists` of `false` this maps to the way elasticsearch returns not found objects in a `multi_get` call.
+In case the document was not found then `Get` would return a `null` but `GetWithMetaData` still returns the a `MultiGetHit<T>` but with an `.Exists` of `false` this maps to the way elasticsearch returns not found objects in a `multi_get` call.
 
 You can even get field selections for some of the documents:
 
@@ -62,4 +62,4 @@ You can then get the returned fields like so:
 	var id = fields.FieldValue<int>(p => p.Id);
 	var firstNames = fields.FieldValue<string[]>(p => p.Followers.First().FirstName);
 
-Remember `p => p.Followers.First().FirstName` can be interchanged with `"followers.firstName"` if you prefer or need to reference a non mapped field.
+Remember `p => p.Followers.First().FirstName` can be interchanged with `"followers.firstName"` if you prefer or need to reference a non-mapped field.

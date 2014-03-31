@@ -8,7 +8,7 @@ menuitem: update-settings
 
 #Update Settings
 This call allows you to update the index settings. 
-NEST whitelists which settings can be updated based on the allowed values mentioned [here in the elasticsearch documentation]( http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html) this allows you to reuse an `IndexSettings` object.
+NEST whitelists which settings can be updated based on the allowed values mentioned [here in the Elasticsearch documentation]( http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings.html) this allows you to reuse an `IndexSettings` object.
 
 ##Example
 this example first creates an index and then uses the same IndexSettings to update the index.

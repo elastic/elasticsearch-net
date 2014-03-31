@@ -12,7 +12,7 @@ The put mapping API allows to register specific mapping definition for a specifi
 
 ## Attribute based mapping
 
-You can decorate your classes with `ElasticProperty` and `ElasticType` attributes to describe how they should be mapped in ES.
+You can decorate your classes with `ElasticProperty` and `ElasticType` attributes to describe how they should be mapped in Elasticsearch.
 
 	[ElasticType(
 		Name = "elasticsearchprojects2",

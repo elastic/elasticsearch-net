@@ -13,7 +13,7 @@ The count API allows to easily execute a query and get the number of matches for
 	var countResults = this._client.CountAll(q=>q.MatchAll());
 	Assert.True(countResults.Count > 0);
 
-The above will do a count query across all indices. (The result type here is not)
+The above will do a count query across all indices. (The result type here is not limited)
 
 If you want to limit the scope to just the default index for the type:
 

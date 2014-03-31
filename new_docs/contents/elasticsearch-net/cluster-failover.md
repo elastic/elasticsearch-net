@@ -7,7 +7,7 @@ menuitem: esnet-cluster-failover
 
 # Connection pooling & Cluster failover
 
-One of the major benefits of `elasticsearch` is that it can handle dying and respawning  nodes. 
+One of the major benefits of `Elasticsearch` is that it can handle dying and respawning  nodes. 
 As long as enough nodes agree that the cluster is healthy, the cluster will continue to operate.
 `Elasticsearch.net` comes with builtin support to handle falling over to a different node when the requested node failed.
 
@@ -38,7 +38,7 @@ Sets the timeout before a node is retried. The default `DateTimeProvider` will i
 Sets the maximum time a node may be marked dead.
 
 #### DisablePings()
-By default before a previously dead node is retried a short ping will be send to the node to make sure the node will respond. 
+By default before a previously dead node is retried a short ping will be sent to the node to make sure the node will respond. 
 The reason for a separate call is that a ping will call an elasticsearch endpoint that won't stress the JVM. If a node is having issues retrying a possible heavy search operation on it might cause the request to fail later rather then asap. This setting allows you to disable these pings before retries.
 
 #### SetMaxRetries(int retries)

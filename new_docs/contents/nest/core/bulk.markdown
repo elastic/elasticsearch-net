@@ -8,7 +8,7 @@ menuitem: bulk
 
 # Bulk
 
-Nest long supported bulk index and deletes (through `IndexMany()` and `DeleteMany()`) but this shielded you from all that the elasticsearch `_bulk` api enpoint has to offer. Now you can use `Bulk()` to create any bulk request you'd like. E.g if you want to do index/create/delete's in a certain order.
+NEST long supported bulk index and deletes (through `IndexMany()` and `DeleteMany()`) but this shielded you from all that the Elasticsearch `_bulk` api enpoint has to offer. Now you can use `Bulk()` to create any bulk request you'd like. E.g if you want to do index/create/delete's in a certain order.
 
 # Examples
 
@@ -18,7 +18,7 @@ Nest long supported bulk index and deletes (through `IndexMany()` and `DeleteMan
 		.Delete<ElasticSearchProject>(i => i.Object(new ElasticSearchProject { Id = 4 }))
 	);
 
-Each bulk operation can also be anotated with the right behaviours:
+Each bulk operation can also be annotated with the right behaviours:
 
 	.Index<ElasticSearchProject>(i => i
 		.Routing(...)

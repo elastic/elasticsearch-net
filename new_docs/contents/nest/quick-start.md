@@ -7,7 +7,7 @@ menuitem: quick-start
 
 # Quick Start
 
-`NEST` is a high level `elasticsearch` client that still maps very close to the original `elasticsearch` API. 
+`NEST` is a high level `elasticsearch` client that still maps very closely to the original `elasticsearch` API. 
 Requests and Responses have been mapped to CLR objects and `NEST` also comes with a powerful strongly typed query dsl.
 
 ## Installing
@@ -44,10 +44,10 @@ To connect to your local node from C# simply:
     );
     var client = new ElasticClient(settings);
 
-Here we create new connection to our `node` and specify a `default index` to use when we don't explictly specify one. 
+Here we create new a connection to our `node` and specify a `default index` to use when we don't explictly specify one. 
 This can greatly reduce the places a magic string or constant has to be used.
 
-**NOTE:** specifying defaultIndex is optional but NEST might throw later on if no index is specified. In fact a simple `new ElasticClient()` is sufficient to chat with
+**NOTE:** specifying defaultIndex is optional but NEST might throw an exception later on if no index is specified. In fact a simple `new ElasticClient()` is sufficient to chat with
 `http://localhost:9200` but explicitly specifying connection settings is recommended.
 
 `node` here is a `Uri` but can also be an `IConnectionPool` see the 
@@ -64,7 +64,7 @@ Now imagine we have a Person [POCO](http://en.wikipedia.org/wiki/Plain_Old_CLR_O
         public string Lastname { get; set; }
     }
 
-That we would like to index in elasticsearch indexing is now as simple as calling.
+That we would like to index in elasticsearch. Indexing is now as simple as calling.
 
     var person = new Person
     {
@@ -74,7 +74,7 @@ That we would like to index in elasticsearch indexing is now as simple as callin
     };
     var index = client.Index(person);
 
-This will index the object to `/my-application/person/1`. `NEST` is smart enough to infer the index and typename for the `Person` CLR type. It was also able to get the id of `1` by convention of looking for `Id` property on the specified object. Where it will look for the Id can be specified using the `ElasticType` attribute.
+This will index the object to `/my-application/person/1`. `NEST` is smart enough to infer the index and typename for the `Person` CLR type. It was also able to get the id of `1` through convention,  by looking for an `Id` property on the specified object. Which property it will use for the Id can also be specified using the `ElasticType` attribute.
 
 The default index and type names are configurable per type see the [nest section on connecting](/nest/connecting.html)
 
@@ -102,11 +102,11 @@ Now that we have indexed some documents we can begin to search for them.
         )
     );
 
-`searchResults.Documents`now holds the first 10 people it knows who's first name is `Martijn`
+`searchResults.Documents` now holds the first 10 people it knows who's first name is `Martijn`
 
-Please see [the section on writing queries](http://localhost:8080/nest/writing-queries.html) how NEST helps you write terse elasticsearch queries.
+Please see [the section on writing queries](http://localhost:8080/nest/writing-queries.html) for details on how NEST helps you write terse elasticsearch queries.
 
-Again the same inferring rules apply as this will hit `/my-application/person/_search` and the same rule that inferring can be overruled also applies.
+Again the same inferring rules apply as this will hit `/my-application/person/_search` and the same rule that inferring can be overridden also applies.
 
     // uses /other-index/other-type/_search
     var searchResults = client.Search<Person>(s=>s

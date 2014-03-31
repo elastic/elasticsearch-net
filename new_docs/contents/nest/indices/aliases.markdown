@@ -10,7 +10,6 @@ menuitem: aliases
 
 ## Adding
 
-
 	var response = this.ConnectedClient.Alias("nest_test_data", "nest_test_data2");
 
 

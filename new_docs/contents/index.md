@@ -7,7 +7,7 @@ menuitem: introduction
 
 # Introduction
 
-You've reached the documentation page for `Elasticsearch.Net` and `NEST`. Two .net clients to talk with elasticsearch. So why two clients I hear you say?
+You've reached the documentation page for `Elasticsearch.Net` and `NEST`. Two .net clients to talk with Elasticsearch. So why two clients I hear you say?
 
 `Elasticsearch.Net` is a very low level, dependency free, client that has no opinions how you build and represent your requests and responses. It has abstracted 
 enough so that **all** the elasticsearch API endpoints are represented as methods but not too much to get in the way of how you want to build your json/request/response objects. It also comes with builtin, configurable/overridable, cluster failover retry mechanisms. Elasticsearch is elastic so why not your client?
@@ -20,9 +20,9 @@ Please read the getting started guide for both.
 ## Who's using Nest
 * [stackoverflow.com](http://www.stackoverflow.com) (and the rest of the stackexchange family).
 * [7digital.com](http://www.7digital.com) (run NEST on mono).
-* [rijksmuseum.nl](https://www.rijksmuseum.nl/en) (elasticsearch is the only datastorage hit for each page).
+* [rijksmuseum.nl](https://www.rijksmuseum.nl/en) (Elasticsearch is the only datastorage hit for each page).
 * [Kiln](http://www.fogcreek.com/kiln/) FogCreek's version control & code review tooling. 
-  They are so pleased with elasticsearch that [they made a video about how pleased they are!](http://blog.fogcreek.com/kiln-powered-by-elasticsearch/)
+  They are so pleased with Elasticsearch that [they made a video about how pleased they are!](http://blog.fogcreek.com/kiln-powered-by-elasticsearch/)
 
 
 ## Other resources

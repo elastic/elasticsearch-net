@@ -7,7 +7,7 @@ menuitem: scroll
 
 # Scroll
 
-The scroll api allows you to efficiently page through a large dataset as it keeps the query alive in the cluster. 
+The scroll API allows you to efficiently page through a large dataset as it keeps the query alive in the cluster. 
 
 	var scanResults = this._client.Search<ElasticSearchProject>(s => s
 		.From(0)
